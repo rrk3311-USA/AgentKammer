@@ -9,6 +9,8 @@ import { LiveTicker } from "@/components/LiveTicker";
 import { FloatingChatAssistant } from "@/components/FloatingChatAssistant";
 import Home from "@/pages/Home";
 import SavedSearches from "@/pages/SavedSearches";
+import GetPreapproved from "@/pages/GetPreapproved";
+import GetHomeValue from "@/pages/GetHomeValue";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -16,6 +18,8 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/saved" component={SavedSearches} />
+      <Route path="/services/get-preapproved" component={GetPreapproved} />
+      <Route path="/services/get-home-value" component={GetHomeValue} />
       <Route component={NotFound} />
     </Switch>
   );

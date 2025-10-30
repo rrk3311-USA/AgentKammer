@@ -57,7 +57,7 @@ export function HorizontalPropertyScroll({
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
             {Icon && (
-              <div className="w-14 h-14 rounded-full bg-card border border-border flex items-center justify-center shadow-lg">
+              <div className="w-14 h-14 rounded-lg bg-card border border-border flex items-center justify-center shadow-lg">
                 <Icon className="h-6 w-6 text-primary" />
               </div>
             )}

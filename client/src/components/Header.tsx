@@ -14,6 +14,19 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex h-24 items-center justify-center gap-4">
+          <nav className="hidden md:flex items-center gap-6 mr-auto">
+            <Link href="/services/get-preapproved" data-testid="link-desktop-preapproved">
+              <span className="text-sm font-medium hover:text-primary cursor-pointer transition-colors">
+                Get Pre-Approved
+              </span>
+            </Link>
+            <Link href="/services/get-home-value" data-testid="link-desktop-home-value">
+              <span className="text-sm font-medium hover:text-primary cursor-pointer transition-colors">
+                Get Home Value
+              </span>
+            </Link>
+          </nav>
+
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
             <div className="flex items-center justify-center hover-elevate active-elevate-2 rounded-xl px-2 py-1 cursor-pointer transition-transform bg-card/50 backdrop-blur-sm border border-border/30 shadow-md">
               <img src={logoImage} alt="Agent Kammer" className="h-20 drop-shadow-lg" />
@@ -84,6 +97,25 @@ export function Header() {
                 Saved Searches
               </span>
             </Link>
+            <div className="border-t pt-4">
+              <p className="text-xs font-semibold text-muted-foreground mb-2 uppercase">Services</p>
+              <Link href="/services/get-preapproved" data-testid="link-mobile-preapproved">
+                <span
+                  className="text-base font-medium hover:text-primary cursor-pointer block mb-3"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Get Pre-Approved
+                </span>
+              </Link>
+              <Link href="/services/get-home-value" data-testid="link-mobile-home-value">
+                <span
+                  className="text-base font-medium hover:text-primary cursor-pointer block"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Get Your Home Value
+                </span>
+              </Link>
+            </div>
             <Button
               variant="default"
               className="w-full rounded-full"

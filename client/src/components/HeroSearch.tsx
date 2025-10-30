@@ -149,7 +149,7 @@ export function HeroSearch() {
 
           <Button
             size="lg"
-            className="w-full rounded-full text-base font-semibold uppercase tracking-wide"
+            className="w-full rounded-full text-base font-semibold uppercase tracking-wide text-black"
             onClick={handleSearch}
             data-testid="button-search-properties"
           >

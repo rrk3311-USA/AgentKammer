@@ -4,7 +4,9 @@ import { EmailDigestPreview } from "@/components/EmailDigestPreview";
 import { AppDownload } from "@/components/AppDownload";
 import { LuxuryBackground } from "@/components/LuxuryBackground";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { TrendingDown, Clock, Sparkles } from "lucide-react";
+import { useState } from "react";
 import property1 from "@assets/generated_images/Modern_Manhattan_condo_exterior_bdf30aa9.png";
 import property2 from "@assets/generated_images/Brooklyn_brownstone_townhouse_exterior_43d55d05.png";
 import property3 from "@assets/generated_images/NYC_apartment_living_space_interior_ba500d46.png";
@@ -12,6 +14,8 @@ import property4 from "@assets/generated_images/Manhattan_penthouse_rooftop_terr
 import property5 from "@assets/generated_images/Upper_West_Side_co-op_building_1e75d246.png";
 
 export default function Home() {
+  const [midtownFilter, setMidtownFilter] = useState<"all" | "above" | "below">("all");
+
   // TODO: Replace with real API data from real estate services (Zillow, Realtor.com, StreetEasy)
   // Current data is mock/staged for prototype demonstration
   const featuredProperties = [
@@ -117,7 +121,7 @@ export default function Home() {
   ];
 
   // TODO: Replace with real API data - properties with longest days on market
-  const longestOnMarket = [
+  const allLongestOnMarket = [
     {
       id: "lom1",
       image: property5,
@@ -129,6 +133,7 @@ export default function Home() {
       sqft: 2100,
       propertyType: "Co-op",
       daysOnMarket: 145,
+      location: "above",
     },
     {
       id: "lom2",
@@ -141,6 +146,7 @@ export default function Home() {
       sqft: 3400,
       propertyType: "Townhouse",
       daysOnMarket: 128,
+      location: "below",
     },
     {
       id: "lom3",
@@ -153,8 +159,26 @@ export default function Home() {
       sqft: 1700,
       propertyType: "Condo",
       daysOnMarket: 112,
+      location: "below",
+    },
+    {
+      id: "lom4",
+      image: property4,
+      price: 3400000,
+      title: "Midtown West Luxury",
+      address: "625 West 57th Street, Manhattan, NY 10019",
+      beds: 3,
+      baths: 2.5,
+      sqft: 1950,
+      propertyType: "Condo",
+      daysOnMarket: 98,
+      location: "above",
     },
   ];
+
+  const longestOnMarket = midtownFilter === "all" 
+    ? allLongestOnMarket 
+    : allLongestOnMarket.filter(prop => prop.location === midtownFilter);
 
   // TODO: Replace with real API data - properties with recent price reductions
   const mostDiscounted = [
@@ -221,13 +245,54 @@ export default function Home() {
         icon={TrendingDown}
       />
 
-      <HorizontalPropertyScroll
-        title="Longest on Market"
-        subtitle="Prime opportunities - properties with extended market presence"
-        properties={longestOnMarket}
-        badge="Negotiable"
-        icon={Clock}
-      />
+      <section className="py-12 lg:py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-lg bg-card border border-border flex items-center justify-center shadow-lg">
+                <Clock className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h2 className="font-serif text-3xl lg:text-4xl font-semibold mb-1">
+                  Longest on Market
+                </h2>
+                <p className="text-muted-foreground text-sm">Prime opportunities - properties with extended market presence</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <Badge 
+                variant={midtownFilter === "all" ? "default" : "outline"}
+                className="cursor-pointer px-4 py-2"
+                onClick={() => setMidtownFilter("all")}
+                data-testid="badge-filter-all"
+              >
+                All
+              </Badge>
+              <Badge 
+                variant={midtownFilter === "above" ? "default" : "outline"}
+                className="cursor-pointer px-4 py-2"
+                onClick={() => setMidtownFilter("above")}
+                data-testid="badge-filter-above-midtown"
+              >
+                Above Midtown
+              </Badge>
+              <Badge 
+                variant={midtownFilter === "below" ? "default" : "outline"}
+                className="cursor-pointer px-4 py-2"
+                onClick={() => setMidtownFilter("below")}
+                data-testid="badge-filter-below-midtown"
+              >
+                Below Midtown
+              </Badge>
+            </div>
+          </div>
+        </div>
+        <HorizontalPropertyScroll
+          title=""
+          properties={longestOnMarket}
+          badge="Negotiable"
+        />
+      </section>
 
       <AppDownload />
 
