@@ -49,24 +49,14 @@ export function LiveTicker() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-neutral-800 border-t border-neutral-700 scale-[0.65] origin-bottom-left">
       <div className="flex w-full">
-        <div className="flex flex-col bg-black">
-          <div
-            className="px-4 py-2.5 flex items-center justify-center gap-1.5 text-sm font-medium border-b border-neutral-700 text-neutral-400"
-            data-testid="badge-residential"
-          >
-            <span className="whitespace-nowrap">Residential</span>
-          </div>
-          <div className="px-4 py-2.5 bg-neutral-400 border-b border-neutral-700 flex items-center justify-center gap-1.5">
-            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-xs font-medium text-black uppercase tracking-wide whitespace-nowrap">
-              Live Activity
-            </span>
-          </div>
-          <div
-            className="px-4 py-2.5 flex items-center justify-center gap-1.5 text-sm font-medium text-neutral-400"
-            data-testid="badge-commercial"
-          >
-            <span className="whitespace-nowrap">Commercial</span>
+        <div className="flex bg-black h-full">
+          <div className="bg-neutral-400 border-r border-neutral-700 flex items-center justify-center px-2 py-3">
+            <div className="flex items-center gap-1.5" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+              <span className="text-xs font-medium text-black uppercase tracking-wide whitespace-nowrap">
+                Live Activity
+              </span>
+              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+            </div>
           </div>
         </div>
 
