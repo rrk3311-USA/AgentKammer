@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Moon, Sun, Heart, Menu, X } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
-import logoImage from "@assets/ChatGPT Image Oct 30, 2025, 12_21_32 PM_1761855952032.png";
+import logoImage from "@assets/generated_images/Agent_Kammer_transparent_logo_bf36d566.png";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -11,12 +11,12 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex h-24 items-center justify-center gap-4">
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
-            <div className="flex items-center justify-center hover-elevate active-elevate-2 rounded-lg px-6 py-3 cursor-pointer transition-transform">
-              <img src={logoImage} alt="Agent Kammer" className="h-32" />
+            <div className="flex items-center justify-center hover-elevate active-elevate-2 rounded-xl px-6 py-3 cursor-pointer transition-transform bg-card/50 backdrop-blur-sm border border-border/30 shadow-md">
+              <img src={logoImage} alt="Agent Kammer" className="h-20 drop-shadow-lg" />
             </div>
           </Link>
 
