@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { X, Send, Minimize2, Maximize2, Sparkles } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import agentAvatar from "@assets/generated_images/Friendly_illustrated_concierge_avatar_4a0c6c3b.png";
+import agentAvatar from "@assets/generated_images/Friendly_illustrated_concierge_avatar_3d77f3f9.png";
 
 interface Message {
   id: string;
