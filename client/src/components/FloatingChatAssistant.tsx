@@ -68,7 +68,7 @@ export function FloatingChatAssistant() {
 
   if (!isOpen) {
     return (
-      <div className="fixed right-8 top-[80%] z-50">
+      <div className="fixed right-8 bottom-28 z-50 scale-[0.8] origin-bottom-right">
         <button
           onClick={() => setIsOpen(true)}
           className="relative group"
@@ -91,7 +91,7 @@ export function FloatingChatAssistant() {
             </div>
             
             <div className="text-center animate-wiggle">
-              <div className="text-6xl filter drop-shadow-2xl">🎩</div>
+              <div className="text-5xl filter drop-shadow-2xl">🎩</div>
             </div>
 
             <div className="mt-2 text-center space-y-1">
@@ -116,7 +116,7 @@ export function FloatingChatAssistant() {
   }
 
   return (
-    <div className="fixed right-8 top-[80%] z-50">
+    <div className="fixed right-8 bottom-28 z-50 scale-[0.8] origin-bottom-right">
       <Card className={`w-96 shadow-2xl border-2 border-primary/50 overflow-hidden transition-all duration-300 ${
         isMinimized ? "h-16" : "h-[600px]"
       }`}>
