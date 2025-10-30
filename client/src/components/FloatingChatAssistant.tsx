@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { X, Send, Minimize2, Maximize2, Sparkles } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import agentAvatar from "@assets/generated_images/Friendly_illustrated_concierge_avatar_3d77f3f9.png";
+import agentAvatar from "@assets/generated_images/Professional_NYC_concierge_portrait_c8ac1382.png";
+import whiteGlove from "@assets/generated_images/Elegant_white_glove_gesture_edf59561.png";
 
 interface Message {
   id: string;
@@ -93,17 +94,18 @@ export function FloatingChatAssistant() {
             <div className="w-4 h-4 rounded-full bg-green-500 border-2 border-background shadow-lg animate-pulse" />
           </div>
 
-          <div className="absolute -left-12 top-1/2 -translate-y-1/2 animate-bounce">
-            <div className="relative">
-              <div className="text-4xl transform rotate-12 filter drop-shadow-lg">
-                👋
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-xl" />
+          <div className="absolute -left-16 top-1/2 -translate-y-1/2 animate-bounce">
+            <div className="relative w-12 h-12">
+              <img 
+                src={whiteGlove} 
+                alt="White glove" 
+                className="w-full h-full object-contain filter drop-shadow-lg"
+              />
             </div>
           </div>
           
           <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap">
-            <Badge className="bg-gradient-to-r from-primary via-primary/90 to-primary text-primary-foreground border-none shadow-xl text-sm font-semibold px-4 py-1.5 animate-pulse">
+            <Badge className="bg-gradient-to-r from-primary via-primary/90 to-primary text-foreground border-none shadow-xl text-sm font-semibold px-4 py-1.5 animate-pulse">
               💬 Chat with Agent K
             </Badge>
           </div>
@@ -117,10 +119,10 @@ export function FloatingChatAssistant() {
       <Card className={`w-96 shadow-2xl border-2 border-primary/50 overflow-hidden transition-all duration-300 ${
         isMinimized ? "h-16" : "h-[600px]"
       }`}>
-        <div className="bg-gradient-to-br from-primary via-primary/95 to-primary text-primary-foreground p-4 flex items-center justify-between border-b border-primary-foreground/20">
+        <div className="bg-gradient-to-br from-primary via-primary/95 to-primary text-foreground p-4 flex items-center justify-between border-b border-foreground/20">
           <div className="flex items-center gap-3">
             <div className="relative">
-              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-foreground/30 shadow-lg bg-white">
+              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-foreground/30 shadow-lg bg-white">
                 <img 
                   src={agentAvatar} 
                   alt="Agent Kammer" 
@@ -134,7 +136,7 @@ export function FloatingChatAssistant() {
                 <h3 className="font-serif font-semibold">Agent Kammer</h3>
                 <Sparkles className="w-3 h-3" />
               </div>
-              <p className="text-xs text-primary-foreground/90">Your Luxury Concierge</p>
+              <p className="text-xs text-foreground/90">Your Luxury Concierge</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -142,7 +144,7 @@ export function FloatingChatAssistant() {
               variant="ghost"
               size="icon"
               onClick={() => setIsMinimized(!isMinimized)}
-              className="h-8 w-8 text-primary-foreground hover:bg-primary-foreground/10"
+              className="h-8 w-8 text-foreground hover:bg-foreground/10"
               data-testid="button-minimize-chat"
             >
               {isMinimized ? <Maximize2 className="h-4 w-4" /> : <Minimize2 className="h-4 w-4" />}
@@ -151,7 +153,7 @@ export function FloatingChatAssistant() {
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(false)}
-              className="h-8 w-8 text-primary-foreground hover:bg-primary-foreground/10"
+              className="h-8 w-8 text-foreground hover:bg-foreground/10"
               data-testid="button-close-chat"
             >
               <X className="h-4 w-4" />
