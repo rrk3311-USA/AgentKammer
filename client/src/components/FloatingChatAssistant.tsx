@@ -5,8 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { X, Send, Minimize2, Maximize2, Sparkles } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import agentAvatar from "@assets/generated_images/Professional_NYC_concierge_portrait_c8ac1382.png";
-import whiteGlove from "@assets/generated_images/Elegant_white_glove_gesture_edf59561.png";
+import agentAvatar from "@assets/generated_images/Executive_NYC_skyline_3/4_view_f791ca56.png";
 
 interface Message {
   id: string;
@@ -75,37 +74,42 @@ export function FloatingChatAssistant() {
           className="relative group"
           data-testid="button-open-chat"
         >
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 via-primary/20 to-primary/10 blur-2xl group-hover:blur-3xl transition-all animate-pulse" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/20 to-primary/10 blur-2xl group-hover:blur-3xl transition-all" />
           
-          <div className="relative w-28 h-28 rounded-full bg-gradient-to-br from-primary via-primary/90 to-primary/80 shadow-2xl border-3 border-primary/50 overflow-hidden group-hover:scale-110 transition-all duration-300">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_rgba(255,255,255,0.3)_0%,_transparent_50%)]" />
+          <div className="relative w-32 h-40 group-hover:scale-105 transition-all duration-300">
+            <div className="absolute inset-0 bg-foreground rounded-[50%] shadow-2xl" style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
             
-            <img 
-              src={agentAvatar} 
-              alt="Agent Kammer" 
-              className="w-full h-full object-cover"
-            />
-            
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
+            <div className="absolute inset-1 bg-background rounded-[50%] overflow-hidden" style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }}>
+              <img 
+                src={agentAvatar} 
+                alt="Agent Kammer" 
+                className="w-full h-full object-cover scale-110"
+              />
+            </div>
+
+            <svg className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-12" viewBox="0 0 100 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 20 45 Q 25 35, 30 40 Q 35 45, 40 38 Q 45 30, 50 25 Q 55 30, 60 38 Q 65 45, 70 40 Q 75 35, 80 45" 
+                    stroke="currentColor" 
+                    strokeWidth="1.5" 
+                    fill="none"
+                    className="text-primary"
+              />
+              <path d="M 25 48 Q 30 42, 35 45 Q 40 48, 45 43 Q 50 38, 55 43 Q 60 48, 65 45 Q 70 42, 75 48" 
+                    stroke="currentColor" 
+                    strokeWidth="1.5" 
+                    fill="none"
+                    className="text-primary opacity-60"
+              />
+            </svg>
           </div>
 
           <div className="absolute -top-2 -right-2 flex items-center gap-1">
             <Sparkles className="w-4 h-4 text-primary animate-pulse" />
             <div className="w-4 h-4 rounded-full bg-green-500 border-2 border-background shadow-lg animate-pulse" />
           </div>
-
-          <div className="absolute -left-16 top-1/2 -translate-y-1/2 animate-bounce">
-            <div className="relative w-12 h-12">
-              <img 
-                src={whiteGlove} 
-                alt="White glove" 
-                className="w-full h-full object-contain filter drop-shadow-lg"
-              />
-            </div>
-          </div>
           
-          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap">
-            <Badge className="bg-gradient-to-r from-primary via-primary/90 to-primary text-foreground border-none shadow-xl text-sm font-semibold px-4 py-1.5 animate-pulse">
+          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap">
+            <Badge className="bg-gradient-to-r from-primary via-primary/90 to-primary text-foreground border-none shadow-xl text-sm font-semibold px-4 py-1.5">
               💬 Chat with Agent K
             </Badge>
           </div>
@@ -121,12 +125,13 @@ export function FloatingChatAssistant() {
       }`}>
         <div className="bg-gradient-to-br from-primary via-primary/95 to-primary text-foreground p-4 flex items-center justify-between border-b border-foreground/20">
           <div className="flex items-center gap-3">
-            <div className="relative">
-              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-foreground/30 shadow-lg bg-white">
+            <div className="relative w-12 h-14">
+              <div className="absolute inset-0 bg-foreground rounded-[50%]" style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
+              <div className="absolute inset-0.5 bg-white rounded-[50%] overflow-hidden" style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }}>
                 <img 
                   src={agentAvatar} 
                   alt="Agent Kammer" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover scale-110"
                 />
               </div>
               <div className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-primary animate-pulse" />
