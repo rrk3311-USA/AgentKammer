@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { X, Send, Minimize2, Maximize2 } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import agentAvatar from "@assets/generated_images/Elegant_tuxedo_gentleman_3/4_back_4c5b7274.png";
 
 interface Message {
   id: string;
@@ -75,16 +76,14 @@ export function FloatingChatAssistant() {
         >
           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 blur-xl group-hover:blur-2xl transition-all" />
           
-          <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-foreground via-foreground/95 to-foreground shadow-2xl border-2 border-primary/30 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform">
+          <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-foreground via-foreground/95 to-foreground shadow-2xl border-2 border-primary/30 overflow-hidden group-hover:scale-105 transition-transform">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_rgba(184,134,11,0.2)_0%,_transparent_50%)]" />
             
-            <div className="relative text-center">
-              <div className="w-12 h-12 mx-auto mb-1 rounded-full bg-background/20 backdrop-blur flex items-center justify-center border border-primary/30">
-                <span className="text-2xl">🎩</span>
-              </div>
-              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-6 h-2 bg-primary/80 rounded-full" 
-                   style={{ clipPath: "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)" }} />
-            </div>
+            <img 
+              src={agentAvatar} 
+              alt="Agent Kammer" 
+              className="w-full h-full object-cover"
+            />
           </div>
 
           <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-green-500 border-2 border-foreground animate-pulse" />
@@ -107,11 +106,13 @@ export function FloatingChatAssistant() {
         <div className="bg-gradient-to-br from-foreground via-foreground/95 to-foreground text-background p-4 flex items-center justify-between border-b border-primary/30">
           <div className="flex items-center gap-3">
             <div className="relative">
-              <div className="w-10 h-10 rounded-full bg-background/20 backdrop-blur flex items-center justify-center border border-primary/30">
-                <span className="text-xl">🎩</span>
+              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-primary/30 shadow-lg">
+                <img 
+                  src={agentAvatar} 
+                  alt="Agent Kammer" 
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-4 h-1.5 bg-primary/90 rounded-full" 
-                   style={{ clipPath: "polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)" }} />
               <div className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-foreground" />
             </div>
             <div>

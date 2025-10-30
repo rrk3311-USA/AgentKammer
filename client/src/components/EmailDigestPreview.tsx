@@ -74,7 +74,7 @@ export function EmailDigestPreview({ properties }: EmailDigestPreviewProps) {
                       <h4 className="font-serif text-lg font-medium">
                         {property.title}
                       </h4>
-                      <span className="font-serif text-lg font-semibold text-primary">
+                      <span className="font-serif text-lg font-semibold text-green-600 dark:text-green-500">
                         {formatPrice(property.price)}
                       </span>
                     </div>

@@ -56,7 +56,7 @@ export function PropertyCard({
           className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300"
         />
         <div className="absolute top-4 left-4 backdrop-blur-md bg-background/80 rounded-full px-3 py-1">
-          <span className="font-serif text-lg font-semibold text-primary">
+          <span className="font-serif text-lg font-semibold text-green-600 dark:text-green-500">
             {formatPrice(price)}
           </span>
         </div>

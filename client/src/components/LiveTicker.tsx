@@ -90,7 +90,7 @@ export function LiveTicker() {
               className="flex items-center gap-2 text-sm"
             >
               <span className="text-primary/60 font-medium">{item.address}</span>
-              <span className="text-primary font-serif font-semibold">
+              <span className="text-green-500 font-serif font-semibold">
                 {formatPrice(item.price)}
               </span>
               <Badge
