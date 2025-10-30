@@ -68,7 +68,7 @@ export function AppDownload() {
         <div className="flex items-center justify-center gap-4 flex-wrap">
           <Button
             size="lg"
-            className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground px-8 gap-3"
+            className="rounded-full bg-primary hover:bg-primary/90 text-black px-8 gap-3"
             data-testid="button-app-store"
           >
             <SiApple className="h-6 w-6" />
@@ -80,7 +80,7 @@ export function AppDownload() {
 
           <Button
             size="lg"
-            className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground px-8 gap-3"
+            className="rounded-full bg-primary hover:bg-primary/90 text-black px-8 gap-3"
             data-testid="button-google-play"
           >
             <SiGoogleplay className="h-6 w-6" />

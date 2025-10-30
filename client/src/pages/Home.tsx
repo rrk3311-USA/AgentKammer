@@ -233,7 +233,7 @@ export default function Home() {
 
         <EmailDigestPreview properties={digestProperties} />
 
-        <section className="py-16 lg:py-24 bg-primary text-primary-foreground">
+        <section className="py-16 lg:py-24 bg-[#0a1628] text-white">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4">
               Ready to Find Your Dream Home?
