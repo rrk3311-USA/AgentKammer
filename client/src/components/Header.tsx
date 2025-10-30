@@ -15,7 +15,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex h-24 items-center justify-center gap-4">
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
-            <div className="flex items-center justify-center hover-elevate active-elevate-2 rounded-xl px-6 py-3 cursor-pointer transition-transform bg-card/50 backdrop-blur-sm border border-border/30 shadow-md">
+            <div className="flex items-center justify-center hover-elevate active-elevate-2 rounded-xl cursor-pointer transition-transform">
               <img src={logoImage} alt="Agent Kammer" className="h-20 drop-shadow-lg" />
             </div>
           </Link>

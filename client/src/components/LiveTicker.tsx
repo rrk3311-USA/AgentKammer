@@ -48,24 +48,23 @@ export function LiveTicker() {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-neutral-800 border-t border-neutral-700">
-      <div className="flex items-center gap-2 px-4 py-1.5 border-b border-neutral-700 bg-neutral-400">
-        <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-        <span className="text-xs font-medium text-black uppercase tracking-wide">
-          Live Manhattan Activity
-        </span>
-      </div>
-      
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-neutral-800 border-t border-neutral-700 scale-50 origin-bottom">
       <div className="flex w-full">
         <div className="flex flex-col bg-black">
           <div
-            className="px-4 py-3 flex items-center justify-center gap-2 text-sm font-medium border-b border-neutral-700 text-neutral-400"
+            className="px-3 py-2 flex items-center justify-center gap-1.5 text-xs font-medium border-b border-neutral-700 text-neutral-400"
             data-testid="badge-residential"
           >
             <span className="whitespace-nowrap">Residential</span>
           </div>
+          <div className="px-3 py-2 bg-neutral-400 border-b border-neutral-700 flex items-center justify-center gap-1.5">
+            <div className="w-1 h-1 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-[10px] font-medium text-black uppercase tracking-wide whitespace-nowrap">
+              Live Activity
+            </span>
+          </div>
           <div
-            className="px-4 py-3 flex items-center justify-center gap-2 text-sm font-medium text-neutral-400"
+            className="px-3 py-2 flex items-center justify-center gap-1.5 text-xs font-medium text-neutral-400"
             data-testid="badge-commercial"
           >
             <span className="whitespace-nowrap">Commercial</span>
