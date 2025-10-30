@@ -91,17 +91,20 @@ export function FloatingChatAssistant() {
               <div className="text-6xl filter drop-shadow-2xl">🎩</div>
             </div>
 
-            <div className="mt-2 text-center">
+            <div className="mt-2 text-center space-y-1">
+              <Badge className="bg-foreground text-background border-none shadow-md text-xs px-2 py-0.5 flex items-center gap-1.5 mx-auto w-fit">
+                <Sparkles className="w-3 h-3 text-green-500" />
+                <div className="relative w-2 h-2">
+                  <div className="absolute inset-0 rounded-full bg-green-500 animate-ping-fast" />
+                  <div className="absolute inset-0 rounded-full bg-red-500 animate-ping-fast-red" />
+                </div>
+                <span className="font-semibold">Live</span>
+              </Badge>
+              
               <Badge className="bg-foreground text-background border-none shadow-md text-xs px-2 py-0.5">
                 Chat with Agent K
               </Badge>
             </div>
-          </div>
-          
-          <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-foreground px-2 py-1 rounded-full shadow-lg animate-pulse">
-            <Sparkles className="w-3 h-3 text-green-500" />
-            <div className="w-2 h-2 rounded-full bg-green-500" />
-            <span className="text-xs font-semibold text-background">Live</span>
           </div>
         </button>
       </div>

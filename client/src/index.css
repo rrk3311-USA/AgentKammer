@@ -268,6 +268,24 @@
   .animate-sparkle-delayed-2 {
     animation: sparkle 2s ease-in-out 0.6s infinite;
   }
+
+  @keyframes ping-fast {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0; transform: scale(1.5); }
+  }
+
+  @keyframes ping-fast-red {
+    0%, 100% { opacity: 0; transform: scale(1.5); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+
+  .animate-ping-fast {
+    animation: ping-fast 0.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  .animate-ping-fast-red {
+    animation: ping-fast-red 0.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
 }
 
 /**
