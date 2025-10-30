@@ -47,108 +47,72 @@ export function LiveTicker() {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-r from-gray-900 via-black to-gray-900 border-t-2 border-primary/40 shadow-2xl scale-125 origin-bottom" style={{ transformOrigin: 'bottom' }}>
-      <div className="flex items-center gap-4 px-6 py-3 border-b border-primary/30 bg-black/40">
-        <div className="flex items-center gap-3">
-          <div className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse shadow-lg shadow-primary/50" />
-          <span className="text-sm font-bold text-primary uppercase tracking-wider">
-            Live Manhattan Activity
-          </span>
-        </div>
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-neutral-800 border-t border-neutral-700 scale-[0.7] origin-bottom">
+      <div className="flex items-center gap-3 px-6 py-2 border-b border-neutral-700">
+        <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+        <span className="text-xs font-medium text-neutral-300 uppercase tracking-wide">
+          Live Manhattan Activity
+        </span>
       </div>
       
       <div className="flex">
-        <div className="flex flex-col bg-black/60 border-r border-primary/30">
-          <button
-            onClick={() => setActiveTab("residential")}
-            className={`px-4 py-3 flex items-center gap-2 text-xs font-semibold border-b border-primary/20 transition-all ${
-              activeTab === "residential" 
-                ? "bg-primary text-foreground" 
-                : "text-primary/70 hover:bg-primary/10 hover:text-primary"
-            }`}
+        <div className="flex flex-col bg-black w-32">
+          <div
+            className="px-3 py-2.5 flex items-center justify-center gap-2 text-xs font-medium border-b border-neutral-700 text-neutral-400"
             data-testid="badge-residential"
           >
-            <Home className="h-3.5 w-3.5" />
-            <span>Residential</span>
-          </button>
-          <button
-            onClick={() => setActiveTab("commercial")}
-            className={`px-4 py-3 flex items-center gap-2 text-xs font-semibold transition-all ${
-              activeTab === "commercial" 
-                ? "bg-primary text-foreground" 
-                : "text-primary/70 hover:bg-primary/10 hover:text-primary"
-            }`}
+            <span className="whitespace-nowrap">Residential</span>
+          </div>
+          <div
+            className="px-3 py-2.5 flex items-center justify-center gap-2 text-xs font-medium text-neutral-400"
             data-testid="badge-commercial"
           >
-            <Building className="h-3.5 w-3.5" />
-            <span>Commercial</span>
-          </button>
+            <span className="whitespace-nowrap">Commercial</span>
+          </div>
         </div>
 
         <div className="flex-1">
-          <div className="relative overflow-hidden h-14 bg-gradient-to-r from-black/20 to-black/40">
+          <div className="relative overflow-hidden h-10 bg-neutral-900">
             <div
-              className="flex items-center gap-10 animate-scroll whitespace-nowrap py-3"
+              className="flex items-center gap-8 animate-scroll whitespace-nowrap py-2"
               style={{
-                animation: activeTab === "residential" ? "scroll 30s linear infinite" : "scroll 35s linear infinite",
+                animation: "scroll 30s linear infinite",
               }}
             >
-              {(activeTab === "residential" ? residentialDuplicated : commercialDuplicated).map((item, index) => (
+              {residentialDuplicated.map((item, index) => (
                 <div
                   key={`${item.id}-${index}`}
                   className="flex items-center gap-3 text-sm"
                 >
-                  <span className="text-white/90 font-semibold">{item.address}</span>
-                  <span className="text-green-400 font-serif font-bold text-base">
+                  <span className="text-neutral-300 font-medium">{item.address}</span>
+                  <span className="text-green-500 font-semibold">
                     {formatPrice(item.price)}
                   </span>
-                  <Badge
-                    variant={item.type === "sale" ? "default" : "outline"}
-                    className="text-xs rounded-full bg-primary/20 text-primary border-primary/40"
-                  >
-                    {item.type === "sale" ? "SOLD" : "NEW"}
-                  </Badge>
-                  <span className="text-white/50 text-xs font-medium">{item.daysOnMarket}d</span>
-                  {item.trend === "up" ? (
-                    <TrendingUp className="h-3.5 w-3.5 text-green-400" />
-                  ) : (
-                    <TrendingDown className="h-3.5 w-3.5 text-red-400" />
-                  )}
-                  <span className="text-primary/30">•</span>
+                  <span className="text-neutral-500 text-xs">{item.daysOnMarket}d</span>
+                  <span className="text-neutral-700">•</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="relative overflow-hidden h-14 bg-gradient-to-r from-black/40 to-black/20 border-t border-primary/20">
+          <div className="relative overflow-hidden h-10 bg-neutral-900 border-t border-neutral-800">
             <div
-              className="flex items-center gap-10 animate-scroll whitespace-nowrap py-3"
+              className="flex items-center gap-8 animate-scroll whitespace-nowrap py-2"
               style={{
-                animation: activeTab === "residential" ? "scroll-reverse 35s linear infinite" : "scroll-reverse 30s linear infinite",
+                animation: "scroll 35s linear infinite",
               }}
             >
-              {(activeTab === "residential" ? commercialDuplicated : residentialDuplicated).map((item, index) => (
+              {commercialDuplicated.map((item, index) => (
                 <div
                   key={`${item.id}-${index}-alt`}
                   className="flex items-center gap-3 text-sm"
                 >
-                  <span className="text-white/80 font-medium">{item.address}</span>
-                  <span className="text-green-400 font-serif font-bold text-base">
+                  <span className="text-neutral-300 font-medium">{item.address}</span>
+                  <span className="text-green-500 font-semibold">
                     {formatPrice(item.price)}
                   </span>
-                  <Badge
-                    variant={item.type === "sale" ? "default" : "outline"}
-                    className="text-xs rounded-full bg-primary/20 text-primary border-primary/40"
-                  >
-                    {item.type === "sale" ? "SOLD" : "NEW"}
-                  </Badge>
-                  <span className="text-white/50 text-xs font-medium">{item.daysOnMarket}d</span>
-                  {item.trend === "up" ? (
-                    <TrendingUp className="h-3.5 w-3.5 text-green-400" />
-                  ) : (
-                    <TrendingDown className="h-3.5 w-3.5 text-red-400" />
-                  )}
-                  <span className="text-primary/30">•</span>
+                  <span className="text-neutral-500 text-xs">{item.daysOnMarket}d</span>
+                  <span className="text-neutral-700">•</span>
                 </div>
               ))}
             </div>
@@ -163,14 +127,6 @@ export function LiveTicker() {
           }
           100% {
             transform: translateX(-33.333%);
-          }
-        }
-        @keyframes scroll-reverse {
-          0% {
-            transform: translateX(-33.333%);
-          }
-          100% {
-            transform: translateX(0);
           }
         }
       `}</style>
