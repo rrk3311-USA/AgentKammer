@@ -1,11 +1,11 @@
 import { HeroSearch } from "@/components/HeroSearch";
-import { PropertyGrid } from "@/components/PropertyGrid";
+import { HorizontalPropertyScroll } from "@/components/HorizontalPropertyScroll";
 import { EmailDigestPreview } from "@/components/EmailDigestPreview";
-import { MarketBanner } from "@/components/MarketBanner";
+import { AppDownload } from "@/components/AppDownload";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, Mail, Heart, TrendingUp } from "lucide-react";
+import { TrendingDown, Clock, Sparkles } from "lucide-react";
 import property1 from "@assets/generated_images/Modern_Manhattan_condo_exterior_bdf30aa9.png";
 import property2 from "@assets/generated_images/Brooklyn_brownstone_townhouse_exterior_43d55d05.png";
 import property3 from "@assets/generated_images/NYC_apartment_living_space_interior_ba500d46.png";
@@ -200,88 +200,35 @@ export default function Home() {
     },
   ];
 
-  const benefits = [
-    {
-      icon: Search,
-      title: "Personalized Search",
-      description: "Set your preferences and let us find properties that match your exact criteria",
-    },
-    {
-      icon: Mail,
-      title: "Daily Digest",
-      description: "Receive curated property matches delivered to your inbox every morning",
-    },
-    {
-      icon: Heart,
-      title: "Save Favorites",
-      description: "Keep track of properties you love and get notified of price changes",
-    },
-    {
-      icon: TrendingUp,
-      title: "Market Insights",
-      description: "Access real-time data and trends from NYC's most dynamic neighborhoods",
-    },
-  ];
-
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-32">
       <HeroSearch />
 
-      <section className="py-16 lg:py-24 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <Badge variant="secondary" className="mb-4">
-              Featured Listings
-            </Badge>
-            <h2 className="font-serif text-4xl font-semibold mb-4">
-              Latest Luxury Properties
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Handpicked exceptional homes in New York's most sought-after neighborhoods
-            </p>
-          </div>
-          <PropertyGrid properties={featuredProperties} />
-          <div className="text-center mt-12">
-            <Button size="lg" variant="outline" className="rounded-full" data-testid="button-view-all-properties">
-              View All Properties
-            </Button>
-          </div>
-        </div>
-      </section>
+      <HorizontalPropertyScroll
+        title="Featured Listings"
+        subtitle="Handpicked exceptional homes in Manhattan's most sought-after neighborhoods"
+        properties={featuredProperties}
+        badge="Curated Selection"
+        icon={Sparkles}
+      />
 
-      <section className="py-16 lg:py-24">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <Badge variant="secondary" className="mb-4">
-              Why Choose Agent Kammer
-            </Badge>
-            <h2 className="font-serif text-4xl font-semibold mb-4">
-              Your NYC Real Estate Partner
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {benefits.map((benefit, index) => (
-              <Card key={index} className="text-center" data-testid={`card-benefit-${index}`}>
-                <CardContent className="p-6 space-y-4">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary">
-                    <benefit.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="font-serif text-xl font-semibold">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {benefit.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HorizontalPropertyScroll
+        title="Most Discounted"
+        subtitle="Exceptional value - recent price reductions on premium properties"
+        properties={mostDiscounted}
+        badge="Price Reduced"
+        icon={TrendingDown}
+      />
 
-      <MarketBanner type="discounted" properties={mostDiscounted} />
+      <HorizontalPropertyScroll
+        title="Longest on Market"
+        subtitle="Prime opportunities - properties with extended market presence"
+        properties={longestOnMarket}
+        badge="Negotiable"
+        icon={Clock}
+      />
 
-      <MarketBanner type="longest" properties={longestOnMarket} />
+      <AppDownload />
 
       <EmailDigestPreview properties={digestProperties} />
 

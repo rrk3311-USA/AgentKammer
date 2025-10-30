@@ -13,35 +13,14 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between gap-4">
-          <Link href="/" data-testid="link-home">
-            <div className="flex items-center justify-center hover-elevate active-elevate-2 rounded-lg px-4 py-2 -ml-4 cursor-pointer transition-transform">
-              <img src={logoImage} alt="Agent Kammer" className="h-16" />
+        <div className="flex h-24 items-center justify-center gap-4">
+          <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
+            <div className="flex items-center justify-center hover-elevate active-elevate-2 rounded-lg px-6 py-3 cursor-pointer transition-transform">
+              <img src={logoImage} alt="Agent Kammer" className="h-32" />
             </div>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8">
-            <Link href="/" data-testid="link-nav-search">
-              <span
-                className={`text-sm font-medium transition-colors hover:text-primary cursor-pointer ${
-                  location === "/" ? "text-foreground" : "text-muted-foreground"
-                }`}
-              >
-                Search
-              </span>
-            </Link>
-            <Link href="/saved" data-testid="link-nav-saved">
-              <span
-                className={`text-sm font-medium transition-colors hover:text-primary cursor-pointer ${
-                  location === "/saved" ? "text-foreground" : "text-muted-foreground"
-                }`}
-              >
-                Saved Searches
-              </span>
-            </Link>
-          </nav>
-
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 ml-auto">
             <Button
               variant="ghost"
               size="icon"
