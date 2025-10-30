@@ -52,11 +52,11 @@ export function LiveTicker() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 w-full z-40 bg-neutral-800 border-t border-neutral-700">
-      <div className="relative overflow-hidden h-12 bg-neutral-900">
+      <div className="relative overflow-hidden h-14 bg-neutral-900">
         <div
-          className="flex items-center gap-10 animate-scroll whitespace-nowrap py-3"
+          className="flex items-center gap-10 animate-scroll whitespace-nowrap py-3.5"
           style={{
-            animation: "scroll 25s linear infinite",
+            animation: "scroll 12.5s linear infinite",
           }}
         >
           {allDuplicated.map((item, index) => {
@@ -64,12 +64,12 @@ export function LiveTicker() {
             return (
               <div
                 key={`${item.id}-${index}`}
-                className={`flex items-center gap-3 px-4 py-2 rounded text-sm ${
+                className={`flex items-center gap-3 px-4 py-2 rounded text-base ${
                   isEven ? "bg-neutral-800" : "bg-neutral-700"
                 }`}
               >
                 <span className="text-green-500 font-semibold">{item.address}</span>
-                <span className="text-green-500 font-bold text-base">
+                <span className="text-green-500 font-bold text-lg">
                   {formatPrice(item.price)}
                 </span>
                 <span className="text-neutral-300">{item.type}</span>
