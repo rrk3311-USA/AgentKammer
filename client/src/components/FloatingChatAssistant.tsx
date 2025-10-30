@@ -76,10 +76,13 @@ export function FloatingChatAssistant() {
         >
           <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/20 to-primary/10 blur-2xl group-hover:blur-3xl transition-all" />
           
-          <div className="relative w-32 h-40 group-hover:scale-105 transition-all duration-300">
-            <div className="absolute inset-0 bg-foreground rounded-[50%] shadow-2xl" style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
+          <div className="relative w-28 h-36 group-hover:scale-105 transition-all duration-300">
+            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="50" cy="65" rx="48" ry="63" fill="currentColor" className="text-foreground" />
+              <ellipse cx="50" cy="65" rx="45" ry="60" fill="currentColor" className="text-background" />
+            </svg>
             
-            <div className="absolute inset-1 bg-background rounded-[50%] overflow-hidden" style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }}>
+            <div className="absolute inset-0 overflow-hidden" style={{ clipPath: "ellipse(45% 46% at 50% 50%)" }}>
               <img 
                 src={agentAvatar} 
                 alt="Agent Kammer" 
@@ -87,20 +90,32 @@ export function FloatingChatAssistant() {
               />
             </div>
 
-            <svg className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-12" viewBox="0 0 100 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M 20 45 Q 25 35, 30 40 Q 35 45, 40 38 Q 45 30, 50 25 Q 55 30, 60 38 Q 65 45, 70 40 Q 75 35, 80 45" 
+            <svg className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-8" viewBox="0 0 80 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M 15 28 C 15 28, 18 20, 22 22 C 26 24, 28 28, 32 24 C 36 20, 38 16, 40 14 C 42 16, 44 20, 48 24 C 52 28, 54 24, 58 22 C 62 20, 65 28, 65 28" 
                     stroke="currentColor" 
-                    strokeWidth="1.5" 
+                    strokeWidth="1.2" 
                     fill="none"
                     className="text-primary"
+                    strokeLinecap="round"
               />
-              <path d="M 25 48 Q 30 42, 35 45 Q 40 48, 45 43 Q 50 38, 55 43 Q 60 48, 65 45 Q 70 42, 75 48" 
+              <path d="M 18 30 C 18 30, 20 24, 24 25 C 28 26, 30 30, 34 27 C 38 24, 40 20, 40 18 C 40 20, 42 24, 46 27 C 50 30, 52 26, 56 25 C 60 24, 62 30, 62 30" 
                     stroke="currentColor" 
-                    strokeWidth="1.5" 
+                    strokeWidth="1.2" 
                     fill="none"
                     className="text-primary opacity-60"
+                    strokeLinecap="round"
               />
+              <circle cx="40" cy="26" r="2" fill="currentColor" className="text-primary" />
             </svg>
+
+            <div className="absolute -top-8 left-1/2 -translate-x-1/2">
+              <div className="relative">
+                <div className="text-3xl">🎩</div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-4 h-5 bg-foreground/30 rounded-full" style={{ marginTop: '8px' }} />
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="absolute -top-2 -right-2 flex items-center gap-1">
@@ -125,9 +140,12 @@ export function FloatingChatAssistant() {
       }`}>
         <div className="bg-gradient-to-br from-primary via-primary/95 to-primary text-foreground p-4 flex items-center justify-between border-b border-foreground/20">
           <div className="flex items-center gap-3">
-            <div className="relative w-12 h-14">
-              <div className="absolute inset-0 bg-foreground rounded-[50%]" style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }} />
-              <div className="absolute inset-0.5 bg-white rounded-[50%] overflow-hidden" style={{ borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%" }}>
+            <div className="relative w-11 h-14">
+              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="50" cy="65" rx="48" ry="63" fill="currentColor" className="text-foreground" />
+                <ellipse cx="50" cy="65" rx="45" ry="60" fill="white" />
+              </svg>
+              <div className="absolute inset-0 overflow-hidden" style={{ clipPath: "ellipse(43% 45% at 50% 50%)" }}>
                 <img 
                   src={agentAvatar} 
                   alt="Agent Kammer" 
