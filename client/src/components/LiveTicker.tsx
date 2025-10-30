@@ -51,12 +51,12 @@ export function LiveTicker() {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 w-full z-40 bg-neutral-800 border-t border-neutral-700">
+    <div className="fixed bottom-0 left-0 right-0 w-full z-40 bg-neutral-900 border-t border-t-[0.5px] border-b border-b-[0.5px] border-black">
       <div className="relative overflow-hidden h-14 bg-neutral-900">
         <div
           className="flex items-center gap-10 animate-scroll whitespace-nowrap py-3.5"
           style={{
-            animation: "scroll 12.5s linear infinite",
+            animation: "scroll 10s linear infinite",
           }}
         >
           {allDuplicated.map((item, index) => {
@@ -65,37 +65,37 @@ export function LiveTicker() {
               <div
                 key={`${item.id}-${index}`}
                 className={`flex items-center gap-3 px-4 py-2 rounded text-base ${
-                  isEven ? "bg-neutral-400" : "bg-neutral-800"
+                  isEven ? "bg-white text-black" : "bg-black text-white"
                 }`}
               >
-                <span className={`font-semibold ${isEven ? "text-black" : "text-green-500"}`}>{item.address}</span>
-                <span className="text-green-500 font-bold text-lg">
+                <span className="font-semibold">{item.address}</span>
+                <span className="font-bold text-lg">
                   {formatPrice(item.price)}
                 </span>
-                <span className={isEven ? "text-black" : "text-neutral-300"}>{item.type}</span>
+                <span>{item.type}</span>
                 {item.beds > 0 && (
-                  <span className={isEven ? "text-black" : "text-neutral-400"}>
+                  <span>
                     {item.beds}bd
                   </span>
                 )}
                 {item.baths > 0 && (
-                  <span className={isEven ? "text-black" : "text-neutral-400"}>
+                  <span>
                     {item.baths}ba
                   </span>
                 )}
-                <span className={isEven ? "text-black" : "text-neutral-400"}>
+                <span>
                   {item.sqft.toLocaleString()}sf
                 </span>
-                <span className={isEven ? "text-black" : "text-neutral-400"}>
+                <span>
                   {item.daysOnMarket}d
                 </span>
-                <span className={isEven ? "text-black" : "text-neutral-400"}>
+                <span>
                   {item.agent}
                 </span>
-                <span className={isEven ? "text-black" : "text-neutral-400"}>
+                <span>
                   {item.brokerage}
                 </span>
-                <span className={isEven ? "text-neutral-600" : "text-neutral-600"}>•</span>
+                <span className={isEven ? "text-gray-400" : "text-gray-600"}>•</span>
               </div>
             );
           })}
