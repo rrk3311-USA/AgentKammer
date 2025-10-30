@@ -61,15 +61,16 @@ export function LiveTicker() {
         >
           {allDuplicated.map((item, index) => {
             const isEven = index % 2 === 0;
+            const fontWeight = isEven ? "font-bold" : "font-normal";
             return (
               <div
                 key={`${item.id}-${index}`}
                 className={`flex items-center gap-3 px-4 py-2 rounded text-base ${
                   isEven ? "bg-white text-black" : "bg-black text-white"
-                }`}
+                } ${fontWeight}`}
               >
-                <span className="font-semibold">{item.address}</span>
-                <span className="font-bold text-lg">
+                <span>{item.address}</span>
+                <span className="text-lg">
                   {formatPrice(item.price)}
                 </span>
                 <span>{item.type}</span>
