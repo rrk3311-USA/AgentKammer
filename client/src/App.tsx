@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Header } from "@/components/Header";
 import { LiveTicker } from "@/components/LiveTicker";
+import { FloatingChatAssistant } from "@/components/FloatingChatAssistant";
 import Home from "@/pages/Home";
 import SavedSearches from "@/pages/SavedSearches";
 import NotFound from "@/pages/not-found";
@@ -28,6 +29,7 @@ function App() {
           <div className="min-h-screen bg-background text-foreground">
             <Header />
             <Router />
+            <FloatingChatAssistant />
             <LiveTicker />
           </div>
           <Toaster />

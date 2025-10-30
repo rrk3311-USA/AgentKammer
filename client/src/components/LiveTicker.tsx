@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, TrendingDown, Building, Home } from "lucide-react";
-import { FloatingChatAssistant } from "./FloatingChatAssistant";
 
 interface TickerItem {
   id: string;
@@ -119,11 +118,6 @@ export function LiveTicker() {
           </div>
         </div>
 
-        <div className="flex items-center justify-center px-8 border-l border-neutral-700 bg-black/40">
-          <div className="scale-125">
-            <FloatingChatAssistant />
-          </div>
-        </div>
       </div>
 
       <style>{`
