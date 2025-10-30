@@ -48,23 +48,23 @@ export function LiveTicker() {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-neutral-800 border-t border-neutral-700 scale-50 origin-bottom">
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-neutral-800 border-t border-neutral-700 scale-[0.65] origin-bottom-left">
       <div className="flex w-full">
         <div className="flex flex-col bg-black">
           <div
-            className="px-3 py-2 flex items-center justify-center gap-1.5 text-xs font-medium border-b border-neutral-700 text-neutral-400"
+            className="px-4 py-2.5 flex items-center justify-center gap-1.5 text-sm font-medium border-b border-neutral-700 text-neutral-400"
             data-testid="badge-residential"
           >
             <span className="whitespace-nowrap">Residential</span>
           </div>
-          <div className="px-3 py-2 bg-neutral-400 border-b border-neutral-700 flex items-center justify-center gap-1.5">
-            <div className="w-1 h-1 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-[10px] font-medium text-black uppercase tracking-wide whitespace-nowrap">
+          <div className="px-4 py-2.5 bg-neutral-400 border-b border-neutral-700 flex items-center justify-center gap-1.5">
+            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-xs font-medium text-black uppercase tracking-wide whitespace-nowrap">
               Live Activity
             </span>
           </div>
           <div
-            className="px-3 py-2 flex items-center justify-center gap-1.5 text-xs font-medium text-neutral-400"
+            className="px-4 py-2.5 flex items-center justify-center gap-1.5 text-sm font-medium text-neutral-400"
             data-testid="badge-commercial"
           >
             <span className="whitespace-nowrap">Commercial</span>
@@ -119,8 +119,10 @@ export function LiveTicker() {
           </div>
         </div>
 
-        <div className="flex items-center justify-center px-6 border-l border-neutral-700 bg-black/40 relative">
-          <FloatingChatAssistant />
+        <div className="flex items-center justify-center px-8 border-l border-neutral-700 bg-black/40">
+          <div className="scale-125">
+            <FloatingChatAssistant />
+          </div>
         </div>
       </div>
 
