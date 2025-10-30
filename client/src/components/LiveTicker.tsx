@@ -47,7 +47,7 @@ export function LiveTicker() {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-neutral-800 border-t border-neutral-700 scale-[0.85] origin-bottom">
+    <div className="fixed bottom-0 left-0 right-0 w-full z-40 bg-neutral-800 border-t border-neutral-700">
       <div className="relative overflow-hidden h-12 bg-neutral-900">
         <div
           className="flex items-center gap-10 animate-scroll whitespace-nowrap py-3"
