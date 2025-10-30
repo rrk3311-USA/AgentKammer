@@ -48,7 +48,7 @@ export function PropertyCard({
   };
 
   return (
-    <Card className="overflow-hidden hover-elevate active-elevate-2 transition-all cursor-pointer group" data-testid={`card-property-${id}`}>
+    <Card className="overflow-hidden hover-elevate active-elevate-2 transition-all cursor-pointer group shadow-lg hover:shadow-xl" data-testid={`card-property-${id}`}>
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={image}
