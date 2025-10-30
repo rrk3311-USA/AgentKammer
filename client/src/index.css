@@ -290,6 +290,14 @@
   .animate-ping-fast-red {
     animation: ping-fast-red 0.8s cubic-bezier(0, 0, 0.2, 1) infinite;
   }
+
+  .animate-ping-slow {
+    animation: ping-fast 1.36s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  .animate-ping-slow-red {
+    animation: ping-fast-red 1.36s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
 }
 
 /**
