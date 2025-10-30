@@ -68,7 +68,7 @@ export function FloatingChatAssistant() {
 
   if (!isOpen) {
     return (
-      <div className="fixed right-8 bottom-20 z-50 scale-[0.8]">
+      <div className="fixed right-2 bottom-16 z-50 scale-[0.8]">
         <button
           onClick={() => setIsOpen(true)}
           className="relative group"
@@ -95,16 +95,16 @@ export function FloatingChatAssistant() {
             </div>
 
             <div className="mt-2 flex flex-col items-end space-y-1">
-              <Badge className="bg-foreground text-background border-none shadow-md text-xs px-2 py-0.5">
-                Chat with Agent K
-              </Badge>
-              
               <Badge className="bg-gray-700 text-background border-none shadow-md text-[0.65rem] px-1.5 py-0.5 flex items-center gap-1">
                 <div className="relative w-1.5 h-1.5">
                   <div className="absolute inset-0 rounded-full bg-green-500 animate-ping-slow" />
                   <div className="absolute inset-0 rounded-full bg-red-500 animate-ping-slow-red" />
                 </div>
                 <span className="font-semibold">Live</span>
+              </Badge>
+              
+              <Badge className="bg-foreground text-background border-none shadow-md text-xs px-2 py-0.5">
+                Chat with Agent K
               </Badge>
             </div>
           </div>
@@ -114,7 +114,7 @@ export function FloatingChatAssistant() {
   }
 
   return (
-    <div className="fixed right-8 bottom-20 z-50 scale-[0.8]">
+    <div className="fixed right-2 bottom-16 z-50 scale-[0.8]">
       <Card className={`w-96 shadow-2xl border-2 border-primary/50 overflow-hidden transition-all duration-300 ${
         isMinimized ? "h-16" : "h-[600px]"
       }`}>
