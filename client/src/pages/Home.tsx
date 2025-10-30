@@ -1,6 +1,7 @@
 import { HeroSearch } from "@/components/HeroSearch";
 import { PropertyGrid } from "@/components/PropertyGrid";
 import { EmailDigestPreview } from "@/components/EmailDigestPreview";
+import { MarketBanner } from "@/components/MarketBanner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +13,8 @@ import property4 from "@assets/generated_images/Manhattan_penthouse_rooftop_terr
 import property5 from "@assets/generated_images/Upper_West_Side_co-op_building_1e75d246.png";
 
 export default function Home() {
+  // TODO: Replace with real API data from real estate services (Zillow, Realtor.com, StreetEasy)
+  // Current data is mock/staged for prototype demonstration
   const featuredProperties = [
     {
       id: "1",
@@ -114,6 +117,89 @@ export default function Home() {
     },
   ];
 
+  // TODO: Replace with real API data - properties with longest days on market
+  const longestOnMarket = [
+    {
+      id: "lom1",
+      image: property5,
+      price: 2900000,
+      title: "Upper East Side Classic Six",
+      address: "520 Park Avenue, Manhattan, NY 10065",
+      beds: 3,
+      baths: 2,
+      sqft: 2100,
+      propertyType: "Co-op",
+      daysOnMarket: 145,
+    },
+    {
+      id: "lom2",
+      image: property2,
+      price: 5200000,
+      title: "Cobble Hill Townhouse",
+      address: "234 Congress Street, Brooklyn, NY 11201",
+      beds: 5,
+      baths: 3.5,
+      sqft: 3400,
+      propertyType: "Townhouse",
+      daysOnMarket: 128,
+    },
+    {
+      id: "lom3",
+      image: property3,
+      price: 2100000,
+      title: "Financial District Loft",
+      address: "90 William Street, Manhattan, NY 10038",
+      beds: 2,
+      baths: 2,
+      sqft: 1700,
+      propertyType: "Condo",
+      daysOnMarket: 112,
+    },
+  ];
+
+  // TODO: Replace with real API data - properties with recent price reductions
+  const mostDiscounted = [
+    {
+      id: "md1",
+      image: property2,
+      price: 3800000,
+      originalPrice: 4500000,
+      discountPercent: 15,
+      title: "Brooklyn Heights Townhouse",
+      address: "125 Montague Street, Brooklyn, NY 11201",
+      beds: 4,
+      baths: 3,
+      sqft: 2900,
+      propertyType: "Townhouse",
+    },
+    {
+      id: "md2",
+      image: property5,
+      price: 2550000,
+      originalPrice: 3000000,
+      discountPercent: 15,
+      title: "Upper West Side Classic",
+      address: "88 Central Park West, Manhattan, NY 10023",
+      beds: 3,
+      baths: 2,
+      sqft: 1900,
+      propertyType: "Co-op",
+    },
+    {
+      id: "md3",
+      image: property3,
+      price: 1700000,
+      originalPrice: 2100000,
+      discountPercent: 19,
+      title: "Chelsea Modern Loft",
+      address: "245 West 19th Street, Manhattan, NY 10011",
+      beds: 2,
+      baths: 2,
+      sqft: 1500,
+      propertyType: "Condo",
+    },
+  ];
+
   const benefits = [
     {
       icon: Search,
@@ -192,6 +278,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <MarketBanner type="discounted" properties={mostDiscounted} />
+
+      <MarketBanner type="longest" properties={longestOnMarket} />
 
       <EmailDigestPreview properties={digestProperties} />
 
