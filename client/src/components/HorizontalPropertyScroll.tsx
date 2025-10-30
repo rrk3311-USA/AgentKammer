@@ -49,8 +49,8 @@ export function HorizontalPropertyScroll({
   return (
     <section className="py-12 lg:py-16 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-primary/6 to-transparent blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-gradient-to-tl from-primary/4 to-transparent blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-gradient-to-br from-primary/8 via-primary/4 to-transparent blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-gradient-to-tl from-primary/6 via-primary/3 to-transparent blur-3xl" />
       </div>
       
       <div className="max-w-7xl mx-auto px-6 relative">
