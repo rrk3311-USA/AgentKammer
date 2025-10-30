@@ -65,37 +65,37 @@ export function LiveTicker() {
               <div
                 key={`${item.id}-${index}`}
                 className={`flex items-center gap-3 px-4 py-2 rounded text-base ${
-                  isEven ? "bg-neutral-800" : "bg-neutral-700"
+                  isEven ? "bg-neutral-400" : "bg-neutral-800"
                 }`}
               >
-                <span className="text-green-500 font-semibold">{item.address}</span>
+                <span className={`font-semibold ${isEven ? "text-black" : "text-green-500"}`}>{item.address}</span>
                 <span className="text-green-500 font-bold text-lg">
                   {formatPrice(item.price)}
                 </span>
-                <span className="text-neutral-300">{item.type}</span>
+                <span className={isEven ? "text-black" : "text-neutral-300"}>{item.type}</span>
                 {item.beds > 0 && (
-                  <span className="text-neutral-400">
+                  <span className={isEven ? "text-black" : "text-neutral-400"}>
                     {item.beds}bd
                   </span>
                 )}
                 {item.baths > 0 && (
-                  <span className="text-neutral-400">
+                  <span className={isEven ? "text-black" : "text-neutral-400"}>
                     {item.baths}ba
                   </span>
                 )}
-                <span className="text-neutral-400">
+                <span className={isEven ? "text-black" : "text-neutral-400"}>
                   {item.sqft.toLocaleString()}sf
                 </span>
-                <span className="text-neutral-400">
+                <span className={isEven ? "text-black" : "text-neutral-400"}>
                   {item.daysOnMarket}d
                 </span>
-                <span className="text-neutral-400">
+                <span className={isEven ? "text-black" : "text-neutral-400"}>
                   {item.agent}
                 </span>
-                <span className="text-neutral-400">
+                <span className={isEven ? "text-black" : "text-neutral-400"}>
                   {item.brokerage}
                 </span>
-                <span className="text-neutral-600">•</span>
+                <span className={isEven ? "text-neutral-600" : "text-neutral-600"}>•</span>
               </div>
             );
           })}
