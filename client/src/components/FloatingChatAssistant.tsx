@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { X, Send, Minimize2, Maximize2, Sparkles } from "lucide-react";
+import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import agentAvatar from "@assets/generated_images/Happy_concierge_sunrise_party_portrait_7bbb9fd2.png";
 
@@ -77,33 +77,37 @@ export function FloatingChatAssistant() {
           <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/20 to-primary/10 blur-2xl group-hover:blur-3xl transition-all" />
           
           <div className="relative group-hover:scale-105 transition-transform">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 animate-sparkle opacity-0">
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 animate-sparkle opacity-0">
               <Sparkles className="w-4 h-4 text-primary" />
             </div>
-            <div className="absolute -top-4 left-1/3 -translate-x-1/2 animate-sparkle-delayed opacity-0">
+            <div className="absolute top-0 left-1/3 -translate-x-1/2 animate-sparkle-delayed opacity-0">
               <Sparkles className="w-3 h-3 text-primary" />
             </div>
-            <div className="absolute -top-5 right-1/3 translate-x-1/2 animate-sparkle-delayed-2 opacity-0">
-              <Sparkles className="w-3 h-3 text-primary" />
+            <div className="absolute top-1 right-1/3 translate-x-1/2 animate-sparkle-delayed-2 opacity-0">
+              <MousePointer className="w-3 h-3 text-primary" />
+            </div>
+            <div className="absolute top-3 left-1/4 animate-sparkle-delayed-3 opacity-0">
+              <MousePointer className="w-3 h-3 text-primary" />
             </div>
             
             <div className="text-center animate-wiggle">
               <div className="text-6xl filter drop-shadow-2xl">🎩</div>
             </div>
 
-            <div className="mt-2 text-center space-y-1">
-              <Badge className="bg-foreground text-background border-none shadow-md text-xs px-2 py-0.5 flex items-center gap-1.5 mx-auto w-fit">
-                <Sparkles className="w-3 h-3 text-green-500" />
-                <div className="relative w-2 h-2">
-                  <div className="absolute inset-0 rounded-full bg-green-500 animate-ping-fast" />
-                  <div className="absolute inset-0 rounded-full bg-red-500 animate-ping-fast-red" />
-                </div>
-                <span className="font-semibold">Live</span>
-              </Badge>
-              
-              <Badge className="bg-foreground text-background border-none shadow-md text-xs px-2 py-0.5">
-                Chat with Agent K
-              </Badge>
+            <div className="mt-2 text-center">
+              <div className="flex items-center justify-center gap-2">
+                <Badge className="bg-foreground text-background border-none shadow-md text-xs px-2 py-0.5">
+                  Chat with Agent K
+                </Badge>
+                
+                <Badge className="bg-gray-700 text-background border-none shadow-md text-xs px-2 py-0.5 flex items-center gap-1.5">
+                  <div className="relative w-2 h-2">
+                    <div className="absolute inset-0 rounded-full bg-green-500 animate-ping-fast" />
+                    <div className="absolute inset-0 rounded-full bg-red-500 animate-ping-fast-red" />
+                  </div>
+                  <span className="font-semibold">Live</span>
+                </Badge>
+              </div>
             </div>
           </div>
         </button>
