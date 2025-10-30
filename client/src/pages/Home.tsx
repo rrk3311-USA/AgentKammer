@@ -2,9 +2,8 @@ import { HeroSearch } from "@/components/HeroSearch";
 import { HorizontalPropertyScroll } from "@/components/HorizontalPropertyScroll";
 import { EmailDigestPreview } from "@/components/EmailDigestPreview";
 import { AppDownload } from "@/components/AppDownload";
+import { LuxuryBackground } from "@/components/LuxuryBackground";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { TrendingDown, Clock, Sparkles } from "lucide-react";
 import property1 from "@assets/generated_images/Modern_Manhattan_condo_exterior_bdf30aa9.png";
 import property2 from "@assets/generated_images/Brooklyn_brownstone_townhouse_exterior_43d55d05.png";
@@ -201,8 +200,10 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen pb-32">
-      <HeroSearch />
+    <div className="min-h-screen pb-32 relative">
+      <LuxuryBackground />
+      <div className="relative z-10">
+        <HeroSearch />
 
       <HorizontalPropertyScroll
         title="Featured Listings"
@@ -230,26 +231,27 @@ export default function Home() {
 
       <AppDownload />
 
-      <EmailDigestPreview properties={digestProperties} />
+        <EmailDigestPreview properties={digestProperties} />
 
-      <section className="py-16 lg:py-24 bg-primary text-primary-foreground">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4">
-            Ready to Find Your Dream Home?
-          </h2>
-          <p className="text-lg mb-8 opacity-90">
-            Join thousands of New Yorkers who trust Agent Kammer to find their perfect property
-          </p>
-          <Button
-            size="lg"
-            variant="secondary"
-            className="rounded-full px-8"
-            data-testid="button-get-started"
-          >
-            Get Started Today
-          </Button>
-        </div>
-      </section>
+        <section className="py-16 lg:py-24 bg-primary text-primary-foreground">
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4">
+              Ready to Find Your Dream Home?
+            </h2>
+            <p className="text-lg mb-8 opacity-90">
+              Join thousands of New Yorkers who trust Agent Kammer to find their perfect property
+            </p>
+            <Button
+              size="lg"
+              variant="secondary"
+              className="rounded-full px-8"
+              data-testid="button-get-started"
+            >
+              Get Started Today
+            </Button>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

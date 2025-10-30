@@ -47,9 +47,16 @@ export function HorizontalPropertyScroll({
   };
 
   return (
-    <section className="py-12 lg:py-16 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,_rgba(42,88,145,0.08)_0%,_transparent_50%)] pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,_rgba(42,88,145,0.05)_0%,_transparent_50%)] pointer-events-none" />
+    <section className="py-12 lg:py-16 relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-primary/3 blur-3xl" />
+      </div>
+      <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10%" cy="50%" r="100" fill="none" stroke="rgba(42,88,145,0.1)" strokeWidth="0.5" />
+        <circle cx="90%" cy="50%" r="120" fill="none" stroke="rgba(42,88,145,0.08)" strokeWidth="0.5" />
+        <circle cx="50%" cy="30%" r="80" fill="none" stroke="rgba(184,134,11,0.06)" strokeWidth="0.5" />
+      </svg>
       
       <div className="max-w-7xl mx-auto px-6 relative">
         <div className="flex items-center justify-between mb-8">
