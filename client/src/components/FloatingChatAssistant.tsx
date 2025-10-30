@@ -76,55 +76,22 @@ export function FloatingChatAssistant() {
         >
           <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/20 to-primary/10 blur-2xl group-hover:blur-3xl transition-all" />
           
-          <div className="relative w-28 h-36 group-hover:scale-105 transition-all duration-300">
-            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="50" cy="65" rx="48" ry="63" fill="currentColor" className="text-foreground" />
-              <ellipse cx="50" cy="65" rx="45" ry="60" fill="currentColor" className="text-background" />
-            </svg>
+          <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-foreground via-foreground/95 to-foreground shadow-2xl border-2 border-primary/30 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_rgba(184,134,11,0.2)_0%,_transparent_50%)]" />
             
-            <div className="absolute inset-0 overflow-hidden" style={{ clipPath: "ellipse(45% 46% at 50% 50%)" }}>
-              <img 
-                src={agentAvatar} 
-                alt="Agent Kammer" 
-                className="w-full h-full object-cover scale-110"
-              />
-            </div>
-
-            <svg className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-8" viewBox="0 0 80 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M 15 28 C 15 28, 18 20, 22 22 C 26 24, 28 28, 32 24 C 36 20, 38 16, 40 14 C 42 16, 44 20, 48 24 C 52 28, 54 24, 58 22 C 62 20, 65 28, 65 28" 
-                    stroke="currentColor" 
-                    strokeWidth="1.2" 
-                    fill="none"
-                    className="text-primary"
-                    strokeLinecap="round"
-              />
-              <path d="M 18 30 C 18 30, 20 24, 24 25 C 28 26, 30 30, 34 27 C 38 24, 40 20, 40 18 C 40 20, 42 24, 46 27 C 50 30, 52 26, 56 25 C 60 24, 62 30, 62 30" 
-                    stroke="currentColor" 
-                    strokeWidth="1.2" 
-                    fill="none"
-                    className="text-primary opacity-60"
-                    strokeLinecap="round"
-              />
-              <circle cx="40" cy="26" r="2" fill="currentColor" className="text-primary" />
-            </svg>
-
-            <div className="absolute -top-8 left-1/2 -translate-x-1/2">
-              <div className="relative">
-                <div className="text-3xl">🎩</div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-4 h-5 bg-foreground/30 rounded-full" style={{ marginTop: '8px' }} />
-                </div>
-              </div>
+            <div className="relative text-center">
+              <div className="text-5xl">🎩</div>
             </div>
           </div>
 
-          <div className="absolute -top-2 -right-2 flex items-center gap-1">
-            <Sparkles className="w-4 h-4 text-primary animate-pulse" />
-            <div className="w-4 h-4 rounded-full bg-green-500 border-2 border-background shadow-lg animate-pulse" />
+          <div className="absolute -top-2 -right-2 flex items-center gap-1.5 bg-foreground px-2 py-1 rounded-full shadow-lg animate-pulse">
+            <Sparkles className="w-3 h-3 text-green-500" />
+            <div className="w-2 h-2 rounded-full bg-green-500" />
+            <span className="text-xs font-semibold text-background">Live</span>
           </div>
           
-          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap">
-            <Badge className="bg-gradient-to-r from-primary via-primary/90 to-primary text-foreground border-none shadow-xl text-sm font-semibold px-4 py-1.5">
+          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap">
+            <Badge className="bg-foreground text-background border-none shadow-xl text-sm font-semibold px-4 py-1.5">
               💬 Chat with Agent K
             </Badge>
           </div>
