@@ -76,24 +76,34 @@ export function FloatingChatAssistant() {
         >
           <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/20 to-primary/10 blur-2xl group-hover:blur-3xl transition-all" />
           
-          <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-foreground via-foreground/95 to-foreground shadow-2xl border-2 border-primary/30 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform">
+          <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-foreground via-foreground/95 to-foreground shadow-2xl border-2 border-primary/30 flex items-center justify-center overflow-visible group-hover:scale-105 transition-transform">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,_rgba(184,134,11,0.2)_0%,_transparent_50%)]" />
             
-            <div className="relative text-center">
+            <div className="absolute -top-6 left-1/2 -translate-x-1/2 animate-sparkle opacity-0">
+              <Sparkles className="w-4 h-4 text-primary" />
+            </div>
+            <div className="absolute -top-8 left-1/3 -translate-x-1/2 animate-sparkle-delayed opacity-0">
+              <Sparkles className="w-3 h-3 text-primary" />
+            </div>
+            <div className="absolute -top-7 right-1/3 translate-x-1/2 animate-sparkle-delayed-2 opacity-0">
+              <Sparkles className="w-3 h-3 text-primary" />
+            </div>
+            
+            <div className="relative text-center animate-wiggle">
               <div className="text-5xl">🎩</div>
             </div>
           </div>
 
-          <div className="absolute -top-2 -right-2 flex items-center gap-1.5 bg-foreground px-2 py-1 rounded-full shadow-lg animate-pulse">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 whitespace-nowrap">
+            <Badge className="bg-foreground text-background border-none shadow-md text-xs px-2 py-0.5">
+              💬 Chat with Agent K
+            </Badge>
+          </div>
+          
+          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-foreground px-2 py-1 rounded-full shadow-lg animate-pulse">
             <Sparkles className="w-3 h-3 text-green-500" />
             <div className="w-2 h-2 rounded-full bg-green-500" />
             <span className="text-xs font-semibold text-background">Live</span>
-          </div>
-          
-          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap">
-            <Badge className="bg-foreground text-background border-none shadow-xl text-sm font-semibold px-4 py-1.5">
-              💬 Chat with Agent K
-            </Badge>
           </div>
         </button>
       </div>
