@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { FileText, TrendingUp, MapPin, DollarSign, Home as HomeIcon } from "lucide-react";
+import { FileText, TrendingUp, MapPin, DollarSign, Home as HomeIcon, Search } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import reportImage from "@assets/stock_images/professional_market__a4ee88f4.jpg";
@@ -35,8 +35,11 @@ export function ListingReportSection() {
             />
             <div className="absolute bottom-6 left-6 right-6 bg-background/95 backdrop-blur-md rounded-xl p-4 shadow-xl border border-border">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <FileText className="h-5 w-5 text-primary" />
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center relative">
+                  <div className="relative">
+                    <FileText className="h-5 w-5 text-primary" />
+                    <Search className="h-2 w-2 text-primary absolute -bottom-0.5 -right-0.5" />
+                  </div>
                 </div>
                 <div>
                   <p className="font-serif font-semibold">Market Analysis Report</p>
@@ -67,8 +70,11 @@ export function ListingReportSection() {
           <div>
             <div className="mb-8">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <FileText className="h-6 w-6 text-primary" />
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center relative">
+                  <div className="relative">
+                    <FileText className="h-6 w-6 text-primary" />
+                    <Search className="h-2.5 w-2.5 text-primary absolute -bottom-0.5 -right-0.5" />
+                  </div>
                 </div>
                 <h2 className="font-serif text-4xl lg:text-5xl font-semibold">
                   Comprehensive Research Report

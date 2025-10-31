@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Heart, Bed, Bath, Maximize, MapPin, ArrowRight, FileText } from "lucide-react";
+import { Heart, Bed, Bath, Maximize, MapPin, ArrowRight, FileText, Search } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -142,11 +142,14 @@ export function PropertyCard({
         </Button>
         <Button
           variant="default"
-          className="rounded-full text-black"
+          className="rounded-full text-black relative"
           onClick={handleGetReport}
           data-testid={`button-get-report-${id}`}
         >
-          <FileText className="h-4 w-4" />
+          <div className="relative">
+            <FileText className="h-4 w-4" />
+            <Search className="h-2 w-2 absolute -bottom-0.5 -right-0.5" />
+          </div>
         </Button>
       </CardFooter>
 
