@@ -61,24 +61,24 @@ export function HeroSearch() {
     <section className="relative min-h-screen flex items-center justify-center bg-background">
       <div
         className="absolute inset-0 bg-no-repeat bg-center"
-        style={{ backgroundImage: `url(${heroImage})`, backgroundSize: 'contain', backgroundPosition: 'center' }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/30 to-white/40" />
-      </div>
+        style={{ backgroundImage: `url(${heroImage})`, backgroundSize: '130%', backgroundPosition: 'center' }}
+      />
 
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-6 py-16">
-        <div className="text-center mb-8">
-          <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-foreground mb-4">
+      <div className="relative z-10 w-full max-w-3xl mx-auto px-6 py-12">
+        <div className="text-center mb-6">
+          <h1 className="font-serif text-4xl lg:text-5xl font-semibold text-foreground mb-3">
             Discover Your Perfect Home
           </h1>
-          <p className="text-xl text-foreground/90 font-light mb-4">
+          <p className="text-lg text-foreground/90 font-light mb-4">
             Live where you belong
           </p>
-          <div className="max-w-2xl mx-auto">
-            <p className="text-sm text-foreground/85 font-light leading-relaxed mb-2">
-              Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
-            </p>
-            <div className="flex items-center justify-center gap-1 text-primary/60">
+          <div className="max-w-xl mx-auto">
+            <div className="bg-[#0a1628] px-4 py-3 rounded-lg">
+              <p className="text-sm text-white font-light leading-relaxed">
+                Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
+              </p>
+            </div>
+            <div className="flex items-center justify-center gap-1 text-primary/60 mt-2">
               <Sparkles className="w-2 h-2 animate-pulse opacity-60" />
               <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '0.2s' }} />
               <Sparkles className="w-2 h-2 animate-pulse opacity-40" style={{ animationDelay: '0.4s' }} />
@@ -90,14 +90,14 @@ export function HeroSearch() {
               <Sparkles className="w-2 h-2 animate-pulse opacity-60" style={{ animationDelay: '1.6s' }} />
             </div>
           </div>
-          <p className="text-xs text-foreground/60 font-light mt-3">
+          <p className="text-xs text-foreground/60 font-light mt-2">
             Download the app
           </p>
         </div>
 
-        <Card className="p-6 lg:p-8 space-y-6 shadow-2xl">
+        <Card className="p-4 lg:p-6 space-y-4 shadow-2xl">
           <div className="space-y-2">
-            <Label htmlFor="location" className="text-base font-medium">
+            <Label htmlFor="location" className="text-sm font-medium">
               Location
             </Label>
             <div className="relative">
@@ -113,9 +113,9 @@ export function HeroSearch() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <Label className="text-base font-medium">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-3">
+              <Label className="text-sm font-medium">
                 Price Range: {formatPrice(priceRange[0])} - {formatPrice(priceRange[1])}
               </Label>
               <Slider
@@ -129,8 +129,8 @@ export function HeroSearch() {
               />
             </div>
 
-            <div className="space-y-4">
-              <Label className="text-base font-medium">
+            <div className="space-y-3">
+              <Label className="text-sm font-medium">
                 Square Footage: {formatSqft(sqftRange[0])} - {formatSqft(sqftRange[1])}
               </Label>
               <Slider
@@ -146,7 +146,7 @@ export function HeroSearch() {
           </div>
 
           <div className="space-y-2">
-            <Label className="text-base font-medium">Popular Categories</Label>
+            <Label className="text-sm font-medium">Popular Categories</Label>
             <div className="flex flex-wrap gap-2">
               {popularCategories.map((category) => (
                 <Badge
@@ -163,7 +163,7 @@ export function HeroSearch() {
           </div>
 
           <div className="space-y-2">
-            <Label className="text-base font-medium">Property Type</Label>
+            <Label className="text-sm font-medium">Property Type</Label>
             <div className="flex flex-wrap gap-2">
               {propertyTypes.map((type) => (
                 <Badge
@@ -179,9 +179,9 @@ export function HeroSearch() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label className="text-base font-medium">Bedrooms</Label>
+              <Label className="text-sm font-medium">Bedrooms</Label>
               <div className="flex flex-wrap gap-2">
                 {bedrooms.map((bed) => (
                   <Badge
@@ -198,7 +198,7 @@ export function HeroSearch() {
             </div>
 
             <div className="space-y-2">
-              <Label className="text-base font-medium">Bathrooms</Label>
+              <Label className="text-sm font-medium">Bathrooms</Label>
               <div className="flex flex-wrap gap-2">
                 {bathrooms.map((bath) => (
                   <Badge
@@ -216,12 +216,11 @@ export function HeroSearch() {
           </div>
 
           <Button
-            size="lg"
-            className="w-full rounded-full text-base font-semibold uppercase tracking-wide text-black"
+            className="w-full rounded-full text-sm font-semibold uppercase tracking-wide text-black"
             onClick={handleSearch}
             data-testid="button-search-properties"
           >
-            <Search className="mr-2 h-5 w-5" />
+            <Search className="mr-2 h-4 w-4" />
             Search Properties
           </Button>
         </Card>
