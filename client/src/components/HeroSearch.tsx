@@ -11,17 +11,26 @@ import heroImage from "@assets/generated_images/NYC_luxury_penthouse_interior_he
 const propertyTypes = ["Condo", "Co-op", "Townhouse", "Penthouse"];
 const bedrooms = ["Studio", "1", "2", "3", "4+"];
 const bathrooms = ["1", "1.5", "2", "2.5", "3+"];
+const popularCategories = ["With Balcony", "No HOA", "1500+ sqft", "2000+ sqft", "Pet Friendly", "Doorman"];
 
 export function HeroSearch() {
   const [priceRange, setPriceRange] = useState([500000, 5000000]);
+  const [sqftRange, setSqftRange] = useState([500, 3000]);
   const [selectedPropertyTypes, setSelectedPropertyTypes] = useState<string[]>([]);
   const [selectedBeds, setSelectedBeds] = useState<string>("");
   const [selectedBaths, setSelectedBaths] = useState<string>("");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [location, setLocation] = useState("");
 
   const togglePropertyType = (type: string) => {
     setSelectedPropertyTypes((prev) =>
       prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+    );
+  };
+
+  const toggleCategory = (category: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
     );
   };
 
@@ -32,12 +41,18 @@ export function HeroSearch() {
     return `$${(value / 1000).toFixed(0)}K`;
   };
 
+  const formatSqft = (value: number) => {
+    return `${value.toLocaleString()} sqft`;
+  };
+
   const handleSearch = () => {
     console.log("Search triggered with:", {
       priceRange,
+      sqftRange,
       selectedPropertyTypes,
       selectedBeds,
       selectedBaths,
+      selectedCategories,
       location,
     });
   };
@@ -79,19 +94,53 @@ export function HeroSearch() {
             </div>
           </div>
 
-          <div className="space-y-4">
-            <Label className="text-base font-medium">
-              Price Range: {formatPrice(priceRange[0])} - {formatPrice(priceRange[1])}
-            </Label>
-            <Slider
-              value={priceRange}
-              onValueChange={setPriceRange}
-              min={100000}
-              max={10000000}
-              step={100000}
-              className="w-full"
-              data-testid="slider-price-range"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <Label className="text-base font-medium">
+                Price Range: {formatPrice(priceRange[0])} - {formatPrice(priceRange[1])}
+              </Label>
+              <Slider
+                value={priceRange}
+                onValueChange={setPriceRange}
+                min={100000}
+                max={10000000}
+                step={100000}
+                className="w-full"
+                data-testid="slider-price-range"
+              />
+            </div>
+
+            <div className="space-y-4">
+              <Label className="text-base font-medium">
+                Square Footage: {formatSqft(sqftRange[0])} - {formatSqft(sqftRange[1])}
+              </Label>
+              <Slider
+                value={sqftRange}
+                onValueChange={setSqftRange}
+                min={500}
+                max={5000}
+                step={100}
+                className="w-full"
+                data-testid="slider-sqft-range"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-base font-medium">Popular Categories</Label>
+            <div className="flex flex-wrap gap-2">
+              {popularCategories.map((category) => (
+                <Badge
+                  key={category}
+                  variant={selectedCategories.includes(category) ? "default" : "outline"}
+                  className="cursor-pointer px-4 py-2"
+                  onClick={() => toggleCategory(category)}
+                  data-testid={`badge-category-${category.toLowerCase().replace(/\s+/g, '-')}`}
+                >
+                  {category}
+                </Badge>
+              ))}
+            </div>
           </div>
 
           <div className="space-y-2">
