@@ -10,31 +10,48 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes (October 31, 2025)
 
-### Service Pages
+### Email Digest Conversion
+- Converted daily digest preview to email capture form titled "Get Your Email Every Morning"
+- Simple form with email input and "Start Receiving Daily Emails" button
+- Features gold gradient background (from-primary/5 via-background to-primary/5)
+- Includes benefits checklist with checkmarks for personalization, cancellation ease, and no spam promise
+- Toast notification confirms successful signup
+
+### Custom Happy Document Icon
+- Created HappyDocIcon component - custom document icon with smiley face for friendly market analysis branding
+- Icon features document shape with folded corner, two dot eyes, and curved smile line
+- Replaces FileText icon throughout application for market reports and property analysis
+- Used on property cards' "Get Report" buttons, listing report sections, and all market analysis CTAs
+
+### Header Redesign
+- Removed all borders and containers from logo - now placed directly on header
+- Logo uses original image (ChatGPT Image from Oct 30) for cleaner appearance
+- Added three Manhattan location category icons on left side of header:
+  - Uptown (Above Midtown) - building icon at top with positioning dots below
+  - Midtown - building icon in middle with dots above and below
+  - Downtown (Below Midtown) - building icon at bottom with dots above
+- Icons use Building2 from lucide-react with visual indicators showing vertical Manhattan position
+- Icons are clickable buttons for future category filtering functionality
+
+### Previous Updates
+
+#### Service Pages
 - Created comprehensive "Get Pre-Approved" page at `/services/get-preapproved` with multi-step mortgage application form including fields for personal information, financial details, credit score ranges, and employment status
 - Created "Get Your Home Value" page at `/services/get-home-value` with detailed property information form for requesting home valuations
 - Both service pages feature hero images with gradient overlays, comprehensive side panel content explaining benefits, and toast notifications on form submission
 - Service pages accessible via desktop navigation links in header and mobile menu
 
-### Market Analysis Report Feature
+#### Market Analysis Report Feature
 - Added comprehensive "Get Your Listing Report" section with split layout (image left, form right)
 - Section includes market analysis preview card showing report features (Market Trends, Neighborhood Data, Price Analysis, Comparable Sales)
 - Form allows users to request reports by entering property address OR selecting a category (Luxury Condos, Penthouses, Townhouses, Co-ops, Waterfront, New Development)
-- Added "Get Report" button (FileText icon) to every property card
+- Added "Get Report" button to every property card using HappyDocIcon
 - Clicking Get Report button opens email collection modal for instant market analysis PDF delivery
 - Modal includes property-specific context and toast notification on submission
 
-### Interactive Filters
-- Upgraded Midtown location filter to polished 3-part toggle design (All/Above Midtown/Below Midtown)
-- Toggle features rounded background container (bg-muted with shadow-inner) for unified appearance
-- Active state shows primary background with black text and shadow
-- Inactive states use muted foreground with hover elevation effects
-- Filter only applies to "Longest on Market" section, preserving other property sections
-
-### Design Updates
+#### Design Updates
 - Changed featured listing section icons from circular (`rounded-full`) to rounded rectangles (`rounded-lg`) for a more modern, structured appearance
 - Updated all primary CTA buttons (Sign In, Search Properties) to use black text for improved contrast against gold background
-- Updated Agent Kammer logo to new version with white background and gold accent on top hat detail
 - Added Footer component with subtle gold gradient line above it (from-transparent via-primary to-transparent)
 - Footer includes four-column layout with company info, services, company links, and social connections
 

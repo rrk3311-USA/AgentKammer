@@ -1,9 +1,9 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Heart, Menu, X } from "lucide-react";
+import { Moon, Sun, Heart, Menu, X, Building2 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
-import logoImage from "@assets/generated_images/Agent_Kammer_transparent_logo_bf36d566.png";
+import logoImage from "@assets/ChatGPT Image Oct 30, 2025, 12_21_32 PM_1761855952032.png";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -13,24 +13,48 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex h-24 items-center justify-center gap-4">
-          <nav className="hidden md:flex items-center gap-6 mr-auto">
-            <Link href="/services/get-preapproved" data-testid="link-desktop-preapproved">
-              <span className="text-sm font-medium hover:text-primary cursor-pointer transition-colors">
-                Get Pre-Approved
-              </span>
-            </Link>
-            <Link href="/services/get-home-value" data-testid="link-desktop-home-value">
-              <span className="text-sm font-medium hover:text-primary cursor-pointer transition-colors">
-                Get Home Value
-              </span>
-            </Link>
-          </nav>
+        <div className="flex h-24 items-center justify-between gap-4">
+          <div className="hidden md:flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hover-elevate active-elevate-2"
+              data-testid="button-uptown"
+            >
+              <div className="flex flex-col items-center gap-0.5">
+                <Building2 className="h-5 w-5" />
+                <div className="h-0.5 w-0.5 rounded-full bg-current" />
+                <div className="h-0.5 w-0.5 rounded-full bg-current opacity-50" />
+              </div>
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hover-elevate active-elevate-2"
+              data-testid="button-midtown"
+            >
+              <div className="flex flex-col items-center gap-0.5">
+                <div className="h-0.5 w-0.5 rounded-full bg-current opacity-50" />
+                <Building2 className="h-5 w-5" />
+                <div className="h-0.5 w-0.5 rounded-full bg-current opacity-50" />
+              </div>
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hover-elevate active-elevate-2"
+              data-testid="button-downtown"
+            >
+              <div className="flex flex-col items-center gap-0.5">
+                <div className="h-0.5 w-0.5 rounded-full bg-current opacity-50" />
+                <div className="h-0.5 w-0.5 rounded-full bg-current" />
+                <Building2 className="h-5 w-5" />
+              </div>
+            </Button>
+          </div>
 
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
-            <div className="flex items-center justify-center hover-elevate active-elevate-2 rounded-2xl p-1 cursor-pointer transition-transform bg-white border-2 border-border/40 shadow-md" style={{ backgroundColor: '#ffffff' }}>
-              <img src={logoImage} alt="Agent Kammer" className="h-24 drop-shadow-lg" />
-            </div>
+            <img src={logoImage} alt="Agent Kammer" className="h-16" />
           </Link>
 
           <div className="flex items-center gap-4 ml-auto">
