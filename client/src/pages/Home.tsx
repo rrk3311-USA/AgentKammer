@@ -2,6 +2,7 @@ import { HeroSearch } from "@/components/HeroSearch";
 import { HorizontalPropertyScroll } from "@/components/HorizontalPropertyScroll";
 import { EmailDigestPreview } from "@/components/EmailDigestPreview";
 import { AppDownload } from "@/components/AppDownload";
+import { AgenticActionsInfographic } from "@/components/AgenticActionsInfographic";
 import { LuxuryBackground } from "@/components/LuxuryBackground";
 import { ListingReportSection } from "@/components/ListingReportSection";
 import { Footer } from "@/components/Footer";
@@ -314,6 +315,8 @@ export default function Home() {
       </section>
 
       <AppDownload />
+
+      <AgenticActionsInfographic />
 
         <EmailDigestPreview properties={digestProperties} />
 
