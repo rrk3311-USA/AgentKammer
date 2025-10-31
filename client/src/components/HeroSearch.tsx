@@ -58,12 +58,12 @@ export function HeroSearch() {
   };
 
   return (
-    <section className="relative min-h-[600px] lg:min-h-[700px] flex items-center justify-center">
+    <section className="relative min-h-screen flex items-center justify-center bg-background">
       <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+        className="absolute inset-0 bg-no-repeat bg-center"
+        style={{ backgroundImage: `url(${heroImage})`, backgroundSize: 'contain', backgroundPosition: 'center' }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-white/75 via-white/70 to-white/75" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/30 to-white/40" />
       </div>
 
       <div className="relative z-10 w-full max-w-4xl mx-auto px-6 py-16">
