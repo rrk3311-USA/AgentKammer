@@ -58,14 +58,10 @@ export function HeroSearch() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-background">
-      <div
-        className="absolute inset-0 bg-no-repeat bg-center"
-        style={{ backgroundImage: `url(${heroImage})`, backgroundSize: '130%', backgroundPosition: 'center' }}
-      />
-
-      <div className="relative z-10 w-full max-w-3xl mx-auto px-6 py-12">
-        <div className="text-center mb-6">
+    <>
+      {/* Top Section - White Background */}
+      <section className="bg-white dark:bg-background py-12 lg:py-16">
+        <div className="max-w-3xl mx-auto px-6 text-center">
           <h1 className="font-serif text-4xl lg:text-5xl font-semibold text-foreground mb-3">
             Discover Your Perfect Home
           </h1>
@@ -94,8 +90,17 @@ export function HeroSearch() {
             Download the app
           </p>
         </div>
+      </section>
 
-        <Card className="p-4 lg:p-6 space-y-4 bg-gradient-to-br from-sky-100/40 via-blue-50/30 to-slate-100/40 backdrop-blur-xl border border-white/60 shadow-2xl">
+      {/* Bottom Section - Search Widget with Background Image */}
+      <section className="relative min-h-[600px] flex items-center justify-center bg-background">
+        <div
+          className="absolute inset-0 bg-no-repeat bg-center"
+          style={{ backgroundImage: `url(${heroImage})`, backgroundSize: '130%', backgroundPosition: 'center' }}
+        />
+
+        <div className="relative z-10 w-full max-w-3xl mx-auto px-6 py-12">
+          <Card className="p-4 lg:p-6 space-y-4 bg-gradient-to-br from-sky-100/40 via-blue-50/30 to-slate-100/40 backdrop-blur-xl border border-white/60 shadow-2xl">
           <div className="space-y-2">
             <Label htmlFor="location" className="text-sm font-medium">
               Location
@@ -223,8 +228,9 @@ export function HeroSearch() {
             <Search className="mr-2 h-4 w-4" />
             Search Properties
           </Button>
-        </Card>
-      </div>
-    </section>
+          </Card>
+        </div>
+      </section>
+    </>
   );
 }

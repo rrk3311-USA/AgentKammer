@@ -49,6 +49,9 @@ Preferred communication style: Simple, everyday language.
 - **Effect**: Creates better visual separation from page background while maintaining elegance
 
 ### Hero Section Enhancement (October 31, 2025)
+- **Two-Section Layout**: Split into separate white background header and image-backed search widget
+  - **Top Section** (white background): Contains title, subtitle, AI description, sparkles, "Download the app"
+  - **Bottom Section** (image background): Search card positioned over luxury property photo
 - **Background Image**: Custom luxury NYC property image (enlarged 130% to show more detail)
 - **Image**: `IMG_9579_1761939754000.jpeg` - user-provided premium property photo
 - **AI Description**: Deep navy background (`#0a1628`) with white text for "Leverage agentic AI..." paragraph
