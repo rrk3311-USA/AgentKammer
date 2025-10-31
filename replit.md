@@ -49,9 +49,15 @@ Preferred communication style: Simple, everyday language.
 - **Effect**: Creates better visual separation from page background while maintaining elegance
 
 ### Hero Section Enhancement (October 31, 2025)
-- **Background Image**: Custom luxury NYC property image
+- **Background Image**: Custom luxury NYC property image (enlarged 130% to show more detail)
 - **Image**: `IMG_9579_1761939754000.jpeg` - user-provided premium property photo
-- **Visual Impact**: Sophisticated, polished aesthetic for premium branding
+- **AI Description**: Deep navy background (`#0a1628`) with white text for "Leverage agentic AI..." paragraph
+- **Search Card**: Glassmorphism design with light blue/sky blue gradient and backdrop blur
+  - Gradient: `from-sky-100/40 via-blue-50/30 to-slate-100/40`
+  - Semi-transparent with `backdrop-blur-xl` for elegant Apple-style glassy effect
+  - White border for definition
+- **Layout**: Module sized and positioned to fit within dark center area of photo (natural framing)
+- **Visual Impact**: Sophisticated, modern glassmorphism aesthetic with airy blue tones
 
 ### Page Title Update (October 31, 2025)
 - **New Title**: "AGENTIC - NYC Real Estate Discovery"

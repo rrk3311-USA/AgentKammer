@@ -95,7 +95,7 @@ export function HeroSearch() {
           </p>
         </div>
 
-        <Card className="p-4 lg:p-6 space-y-4 shadow-2xl">
+        <Card className="p-4 lg:p-6 space-y-4 bg-gradient-to-br from-sky-100/40 via-blue-50/30 to-slate-100/40 backdrop-blur-xl border border-white/60 shadow-2xl">
           <div className="space-y-2">
             <Label htmlFor="location" className="text-sm font-medium">
               Location
