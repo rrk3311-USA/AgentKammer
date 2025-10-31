@@ -16,6 +16,8 @@ Preferred communication style: Simple, everyday language.
 - Features gold gradient background (from-primary/5 via-background to-primary/5)
 - Includes benefits checklist with checkmarks for personalization, cancellation ease, and no spam promise
 - Toast notification confirms successful signup
+- Animated icon cycles through three states: envelope → coffee cup (morning) → smile → back to envelope
+- 6-second smooth fade animation loop using CSS keyframes
 
 ### Custom Happy Document Icon
 - Created HappyDocIcon component - custom document icon with smiley face for friendly market analysis branding

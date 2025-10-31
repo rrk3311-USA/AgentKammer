@@ -433,4 +433,53 @@
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after {
     inset: -1px;
   }
+
+  /* Morning Email Icon Animation - 3 states cycling */
+  @keyframes morningIcon1 {
+    0%, 27% {
+      opacity: 1;
+    }
+    30%, 97% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes morningIcon2 {
+    0%, 30% {
+      opacity: 0;
+    }
+    33%, 60% {
+      opacity: 1;
+    }
+    63%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes morningIcon3 {
+    0%, 63% {
+      opacity: 0;
+    }
+    66%, 94% {
+      opacity: 1;
+    }
+    97%, 100% {
+      opacity: 0;
+    }
+  }
+
+  .morning-icon-1 {
+    animation: morningIcon1 6s ease-in-out infinite;
+  }
+
+  .morning-icon-2 {
+    animation: morningIcon2 6s ease-in-out infinite;
+  }
+
+  .morning-icon-3 {
+    animation: morningIcon3 6s ease-in-out infinite;
+  }
 }

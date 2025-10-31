@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Mail } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { MorningEmailIcon } from "./MorningEmailIcon";
 
 interface DigestProperty {
   id: string;
@@ -51,7 +52,7 @@ export function EmailDigestPreview({ properties }: EmailDigestPreviewProps) {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="flex items-center justify-center mb-6">
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                <Mail className="h-8 w-8 text-primary" />
+                <MorningEmailIcon className="h-8 w-8" />
               </div>
             </div>
 
