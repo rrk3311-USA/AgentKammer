@@ -75,11 +75,7 @@ export function HeroSearch() {
               <p className="text-lg text-white font-bold">
                 Live where you belong
               </p>
-              <div className="relative">
-                <Wand2 className="w-5 h-5 text-primary animate-pulse" />
-                <Sparkles className="w-3 h-3 text-primary/80 absolute -top-1 -right-1 animate-ping" style={{ animationDuration: '1.5s' }} />
-                <Sparkles className="w-2 h-2 text-primary/60 absolute -bottom-1 -left-1 animate-pulse" style={{ animationDelay: '0.3s' }} />
-              </div>
+              <Wand2 className="w-5 h-5 text-primary" />
             </div>
             
             <div className="flex items-center justify-center gap-1 text-primary mb-2">
