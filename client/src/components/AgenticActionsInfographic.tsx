@@ -17,6 +17,46 @@ export function AgenticActionsInfographic() {
     <section className="py-16 lg:py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
       
+      {/* Animated flowing particles */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes flowData {
+          0% { offset-distance: 0%; opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { offset-distance: 100%; opacity: 0; }
+        }
+        @keyframes pulse-glow {
+          0%, 100% { box-shadow: 0 0 20px rgba(234, 179, 8, 0.3); }
+          50% { box-shadow: 0 0 40px rgba(234, 179, 8, 0.6), 0 0 60px rgba(234, 179, 8, 0.3); }
+        }
+        @keyframes dash-flow {
+          to { stroke-dashoffset: -20; }
+        }
+        @keyframes float-up {
+          0% { transform: translateY(0px); opacity: 0.6; }
+          100% { transform: translateY(-100px); opacity: 0; }
+        }
+        .compute-engine-glow {
+          animation: pulse-glow 3s ease-in-out infinite;
+        }
+        .branch-line {
+          stroke-dasharray: 4 4;
+          animation: dash-flow 1s linear infinite;
+        }
+        .data-particle {
+          offset-path: path('M 50% 0 L 50% 100');
+          animation: flowData 2s ease-in-out infinite;
+        }
+        .data-particle-1 { animation-delay: 0s; }
+        .data-particle-2 { animation-delay: 0.4s; }
+        .data-particle-3 { animation-delay: 0.8s; }
+        .data-particle-4 { animation-delay: 1.2s; }
+        .data-particle-5 { animation-delay: 1.6s; }
+        .float-particle {
+          animation: float-up 4s ease-out infinite;
+        }
+      `}} />
+      
       <div className="max-w-6xl mx-auto px-6 relative">
         <div className="text-center mb-12">
           <Badge variant="secondary" className="mb-4">
@@ -31,11 +71,23 @@ export function AgenticActionsInfographic() {
           </p>
         </div>
 
-        {/* Top Hat Icon at Center */}
-        <div className="flex justify-center mb-8">
-          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 border-2 border-primary/30 flex items-center justify-center shadow-xl">
+        {/* Top Hat Icon at Center with floating particles */}
+        <div className="flex justify-center mb-8 relative">
+          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 border-2 border-primary/30 flex items-center justify-center shadow-xl compute-engine-glow">
             <div className="text-4xl">🎩</div>
           </div>
+          {/* Floating data particles around top hat */}
+          {[...Array(6)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 rounded-full bg-primary/60 float-particle"
+              style={{
+                left: `${50 + Math.cos((i * Math.PI * 2) / 6) * 50}%`,
+                top: `${50 + Math.sin((i * Math.PI * 2) / 6) * 50}%`,
+                animationDelay: `${i * 0.7}s`
+              }}
+            />
+          ))}
         </div>
 
         {/* Connecting Line */}
@@ -47,10 +99,22 @@ export function AgenticActionsInfographic() {
         <div className="relative mb-16">
           {/* Center Node */}
           <div className="flex justify-center mb-8">
-            <div className="bg-card border border-border rounded-xl px-6 py-3 shadow-lg">
+            <div className="bg-card border border-primary/30 rounded-xl px-6 py-3 shadow-lg compute-engine-glow relative overflow-hidden">
               <p className="font-semibold text-sm">Massive Compute Engine</p>
+              {/* Processing indicator */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent"
+                   style={{
+                     animation: 'shimmer 2s linear infinite',
+                     backgroundSize: '200% 100%'
+                   }} />
             </div>
           </div>
+          <style dangerouslySetInnerHTML={{__html: `
+            @keyframes shimmer {
+              0% { background-position: -200% 0; }
+              100% { background-position: 200% 0; }
+            }
+          `}} />
 
           {/* Data Sources Detail */}
           <div className="flex justify-center mb-8">
@@ -129,7 +193,7 @@ export function AgenticActionsInfographic() {
             </Card>
           </div>
 
-          {/* Branch Lines */}
+          {/* Branch Lines with animated flow */}
           <div className="absolute top-12 left-1/2 -translate-x-1/2 w-full h-24">
             <svg className="w-full h-full" style={{ overflow: 'visible' }}>
               {/* Left branches */}
@@ -138,16 +202,17 @@ export function AgenticActionsInfographic() {
                 fill="none"
                 stroke="hsl(var(--primary))"
                 strokeWidth="2"
-                opacity="0.3"
-                strokeDasharray="4 4"
+                opacity="0.4"
+                className="branch-line"
               />
               <path
                 d="M 50% 0 Q 40% 50, 35% 100"
                 fill="none"
                 stroke="hsl(var(--primary))"
                 strokeWidth="2"
-                opacity="0.3"
-                strokeDasharray="4 4"
+                opacity="0.4"
+                className="branch-line"
+                style={{ animationDelay: '0.2s' }}
               />
               {/* Center branch */}
               <path
@@ -155,8 +220,9 @@ export function AgenticActionsInfographic() {
                 fill="none"
                 stroke="hsl(var(--primary))"
                 strokeWidth="2"
-                opacity="0.3"
-                strokeDasharray="4 4"
+                opacity="0.4"
+                className="branch-line"
+                style={{ animationDelay: '0.4s' }}
               />
               {/* Right branches */}
               <path
@@ -164,35 +230,93 @@ export function AgenticActionsInfographic() {
                 fill="none"
                 stroke="hsl(var(--primary))"
                 strokeWidth="2"
-                opacity="0.3"
-                strokeDasharray="4 4"
+                opacity="0.4"
+                className="branch-line"
+                style={{ animationDelay: '0.6s' }}
               />
               <path
                 d="M 50% 0 Q 70% 50, 85% 100"
                 fill="none"
                 stroke="hsl(var(--primary))"
                 strokeWidth="2"
-                opacity="0.3"
-                strokeDasharray="4 4"
+                opacity="0.4"
+                className="branch-line"
+                style={{ animationDelay: '0.8s' }}
               />
+              
+              {/* Flowing data particles along paths */}
+              <circle r="3" fill="hsl(var(--primary))" className="data-particle data-particle-1">
+                <animateMotion dur="2s" repeatCount="indefinite">
+                  <mpath href="#path1" />
+                </animateMotion>
+              </circle>
+              <circle r="3" fill="hsl(var(--primary))" className="data-particle data-particle-2">
+                <animateMotion dur="2s" repeatCount="indefinite">
+                  <mpath href="#path2" />
+                </animateMotion>
+              </circle>
+              <circle r="3" fill="hsl(var(--primary))" className="data-particle data-particle-3">
+                <animateMotion dur="2s" repeatCount="indefinite">
+                  <mpath href="#path3" />
+                </animateMotion>
+              </circle>
+              <circle r="3" fill="hsl(var(--primary))" className="data-particle data-particle-4">
+                <animateMotion dur="2s" repeatCount="indefinite">
+                  <mpath href="#path4" />
+                </animateMotion>
+              </circle>
+              <circle r="3" fill="hsl(var(--primary))" className="data-particle data-particle-5">
+                <animateMotion dur="2s" repeatCount="indefinite">
+                  <mpath href="#path5" />
+                </animateMotion>
+              </circle>
+              
+              {/* Hidden paths for particle animation */}
+              <path id="path1" d="M 50% 0 Q 30% 50, 15% 100" fill="none" />
+              <path id="path2" d="M 50% 0 Q 40% 50, 35% 100" fill="none" />
+              <path id="path3" d="M 50% 0 L 50% 100" fill="none" />
+              <path id="path4" d="M 50% 0 Q 60% 50, 65% 100" fill="none" />
+              <path id="path5" d="M 50% 0 Q 70% 50, 85% 100" fill="none" />
             </svg>
           </div>
 
-          {/* Action Cards */}
+          {/* Action Cards with staggered animations */}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 pt-24">
             {actions.map((action, index) => (
               <div
                 key={index}
                 className="bg-card border border-border rounded-xl p-4 text-center hover-elevate transition-all shadow-md"
                 data-testid={`card-action-${index}`}
+                style={{
+                  animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`
+                }}
               >
-                <div className={`w-10 h-10 rounded-full bg-muted flex items-center justify-center mx-auto mb-3`}>
+                <div className={`w-10 h-10 rounded-full bg-muted flex items-center justify-center mx-auto mb-3`}
+                     style={{
+                       animation: `iconPulse 2s ease-in-out ${index * 0.3}s infinite`
+                     }}>
                   <action.icon className={`h-5 w-5 ${action.color}`} />
                 </div>
                 <p className="text-xs font-medium leading-tight">{action.label}</p>
               </div>
             ))}
           </div>
+          <style dangerouslySetInnerHTML={{__html: `
+            @keyframes fadeInUp {
+              from {
+                opacity: 0;
+                transform: translateY(20px);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+            @keyframes iconPulse {
+              0%, 100% { transform: scale(1); }
+              50% { transform: scale(1.1); }
+            }
+          `}} />
         </div>
 
         {/* Statistics Banner */}

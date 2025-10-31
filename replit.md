@@ -1,127 +1,10 @@
 # Agent Kammer - NYC Real Estate Platform
 
 ## Overview
-Agent Kammer is a premium NYC real estate platform focused on luxury Manhattan properties, providing a sophisticated, visual-first search and discovery experience. Key capabilities include advanced search and filtering, saved searches with email notifications, curated property browsing, and integrated services for mortgage pre-approval and home valuation. The platform aims to build trust through professional aesthetics, drawing inspiration from high-end real estate brands and search-focused UX patterns. It leverages agentic AI to provide users with a competitive advantage in finding their dream home by continuously scanning the city for new listings and updates.
+Agent Kammer is a premium NYC real estate platform focused on luxury Manhattan properties, providing a sophisticated, visual-first search and discovery experience. Key capabilities include advanced search and filtering, saved searches with email notifications, curated property browsing, and integrated services for mortgage pre-approval and home valuation. The platform aims to build trust through professional aesthetics, drawing inspiration from high-end real estate brands and search-focused UX patterns. It leverages agentic AI to provide users with a competitive advantage in finding their dream home by continuously scanning the city for new listings and updates. The business vision is to provide a competitive advantage to users in finding luxury homes in NYC.
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
-
-## User Identity
-- **Owner**: Raphael Kammer
-- **Photo**: `IMG_1044_1761929739320.jpeg` - Professional headshot used as chat assistant avatar
-
-## Recent Changes (October 31, 2025)
-
-### NYC Command Center Redesign
-- **Compact Layout**: Reduced section size by consolidating three features into single card
-- **Horizontal Layout**: All three features (Instant Alerts, Smart Search, Market Analytics) displayed side-by-side in one container
-- **Reduced Padding**: Smaller py-12 lg:py-16 (down from py-20 lg:py-32) for less vertical space
-- **Unified Description**: Combined text under one card instead of three separate cards
-
-### Property Listing UI Updates (October 31, 2025)
-- **Price Display**: White text on solid black background, positioned at bottom-left of property image (overlaying photo)
-- **Category Backgrounds**: Enhanced blue-gray gradient (`from-slate-50 via-blue-50/60 to-slate-100/60`) for better visual separation
-- **Longest on Market Filter**: Location filter buttons (Above/Midtown/Below Midtown) moved below headline for cleaner layout
-- **Bowtie Navigation**: Triangular arrow buttons positioned below listing scroll
-  - Left arrow: pointing left triangle
-  - Right arrow: pointing right triangle
-  - Gold color with hover effects, forms visual "bowtie" shape when viewed together
-  - Replaced sidebar circular arrows for more elegant, centered design
-
-### Live Interest Rate Ticker (October 31, 2025)
-- **Location**: Top-left of header (left side, before Manhattan location category buttons)
-- **Display**: Current mortgage rate with "RATE:" label (uppercase)
-- **Design**: Small, elegant rectangular ticker with black/white minimal aesthetic
-- **Shape**: Rectangle (no rounded corners)
-- **Colors**: Black background with white text (light mode), white background with black text (dark mode)
-- **Animations**: 
-  - Subtle pulsing effect on percentage number (3s cycle)
-  - Smooth number transitions (0.5s)
-  - No icon (removed for minimalism)
-- **Updates**: Rate changes every 3 seconds (simulated live updates ranging 6.5% - 7.2%)
-- **Typography**: Very small text (10px label, 12px percentage), monospace font with tabular numbers
-- **Integration**: Appears in Header component at top-left corner (desktop only)
-
-### Property Card Styling Updates (October 31, 2025)
-- **Background Color**: Pure white for clean, classic look
-  - Light mode: 100% white (reverted from 85% lightness experiment)
-  - Dark mode: Maintained at 12% for consistency
-- **Drop Shadow**: Enhanced shadow-xl with hover:shadow-2xl for elevated, classy UX feeling
-- **Effect**: Premium cards with pronounced depth and sophistication
-
-### Hero Section Enhancement (October 31, 2025)
-- **Two-Section Layout**: Split into separate white background header and image-backed search widget
-  - **Top Section** (white background): Contains title, subtitle, AI description, sparkles, "Download the app"
-  - **Bottom Section** (image background): Search card positioned over luxury background
-- **Background Image**: Clean luxury marble stone texture (AI-generated)
-- **Image**: `Luxury_marble_stone_background_83a62bcc.png` - Premium white Carrara marble with subtle gray veining
-- **Design Choice**: Minimal, distraction-free background without windows or plaques for clean aesthetic
-- **AI Description**: Deep navy background (`#0a1628`) with white text for "Leverage agentic AI..." paragraph
-- **Search Card**: Glassmorphism design with light blue/sky blue gradient and backdrop blur
-  - Gradient: `from-sky-100/40 via-blue-50/30 to-slate-100/40`
-  - Semi-transparent with `backdrop-blur-xl` for elegant Apple-style glassy effect
-  - White border for definition
-- **Visual Impact**: Sophisticated, modern glassmorphism aesthetic with airy blue tones over timeless stone texture
-
-### Page Title Update (October 31, 2025)
-- **New Title**: "AGENTIC - NYC Real Estate Discovery"
-- **Purpose**: Emphasizes AI-powered agentic approach to property search
-
-### Market Analysis Report Luxury Redesign
-- **Premium Background**: Generated luxury white Carrara marble desk image with Manhattan skyline visible through window
-- **Sophisticated Aesthetic**: High-end real estate office setting with natural lighting and elegant shadows
-- **Enhanced Visual Card**: Larger, more prominent overlay card with gold accents and improved spacing
-- **Professional Photography**: Commercial-quality image (`Luxury_marble_desk_Manhattan_view_647cbb4e.png`) replacing generic stock photo
-- **Note**: Video asset `DB6A97E2-CB97-429E-AB9E-8D9DA8946139_1761929696844.mp4` available as potential pamphlet cover content
-
-### Voice Chat & Avatar Updates
-- **Voice Input Feature**: Added voice-to-text capability in chat assistant using Web Speech API
-  - Microphone button toggles voice recording (works in Chrome, Edge, Safari)
-  - Visual feedback: button pulses when listening, input shows "Listening..." placeholder
-  - Automatic transcription fills text input, ready to send
-  - Status message shows "🎤 Listening... Speak now" while active
-- **Personal Avatar**: Chat assistant now uses actual photo of owner Raphael Kammer
-  - Avatar image: `IMG_1044_1761929739320.jpeg` (professional headshot of Raphael Kammer)
-  - Personalizes the concierge experience with the real owner's identity
-  - Maintains sophisticated luxury branding with authentic personal touch
-- **Hero Section Divider**: Replaced code-themed elements with decorative sparkles and mouse pointer icons
-  - Tiny animated sparkles and mouse clicks in staggered pulse animation
-  - Creates subtle divider effect below agentic AI tagline
-
-### Floating Chat Assistant Enhancement
-- **Tabbed Interface**: Two-tab system (Popular Prompts | Chat)
-- **6 Quick Prompt Buttons**: Pre-configured searches in 2-column grid (Best Deal, Longest on Market, Safest Locations, Best School Zones, Recently Reduced, New Listings)
-- Clicking any prompt button automatically sends message and switches to chat tab
-
-### Agentic Actions Infographic
-- **Visual Mind Map**: Top hat emoji (🎩) at center with branching lines showing AI compute flow
-- **Massive Compute Engine Details**: Comprehensive card showing all NYC real estate data sources:
-  - Primary Sources: MLS (OneKey, NY State), Zillow Bridge API, PropertyShark, RealtyHop, Trulia, Redfin
-  - Government Data: NYC Dept of Finance ACRIS (deeds/sales since 1966), Rolling Sales, Property Valuation, NYC Open Data
-  - Access Methods: Active/for sale (MLS APIs/IDX), Sold/pending (MLS status, public records), Pre-sale/unlisted (agent networks)
-  - Manhattan APIs: OneKey MLS (RESO/RETS), Zillow, Realtor.com, Redfin, PropertyShark, Onboard Informatics, RentCast, NYC Open Data (Socrata)
-- **5 Agentic Actions**: Continuous Market Scanning, Instant Alert Processing, Price Trend Analysis, Smart Notifications, Competitive Bidding Intelligence
-- **Time-Saving Statistics**: 240hrs average buyer search time vs "Saves 240+ hours" with Agent Kammer automation (black text)
-- **Quote Banner**: "When lenders compete, you win" with classy dotted divider above
-- **Power Position Message**: "Your first step to be in a position of power is getting prequalified" in highlighted card
-- **CTA Button**: "Get Prequalified Now" linking to prequalification page
-- **Design**: Gradient background, dotted branch lines, hover effects on action cards
-
-### Prequalification Page Updates
-- **Timeline Question Added**: "How soon are you looking to move?" with three options:
-  - Moving Soon (within 3 months)
-  - Looking to Move (3-6 months)
-  - Just Browsing (6+ months)
-- Helps qualify leads and personalize the experience based on buyer urgency
-
-### Broker Registration Page
-- **New Page**: `/broker-registration` for brokers to join the network
-- **Video Pitch Upload**: Brokers upload 60-90 second "about me" videos to pitch themselves
-- **Comprehensive Profile**: Fields include personal info, license number, years of experience, brokerage firm, specialization, neighborhoods covered
-- **Professional Bio**: Text area for brokers to describe their approach and expertise
-- **Social Links**: Optional LinkedIn and personal website fields
-- **Client Choice Model**: Users choose brokers based on watching their pitch videos
-- **Premium Network**: Info cards highlighting benefits (Premium Network, Qualified Leads, Client Choice)
 
 ## System Architecture
 
@@ -135,23 +18,35 @@ The backend uses **Express.js with Node.js and TypeScript**, handling API routes
 The application uses **Drizzle ORM** with a **PostgreSQL dialect** for type-safe schema definition and database operations. The current schema includes a basic `users` table. **Drizzle Kit** is configured for schema migrations.
 
 ### Authentication and Authorization
-While basic user schema and session infrastructure are in place (Express session middleware with PostgreSQL store), full authentication and authorization are not yet implemented. The architecture supports session-based authentication.
+Basic user schema and session infrastructure are in place (Express session middleware with PostgreSQL store), supporting session-based authentication.
 
 ### Theme System
 A custom theme provider manages light/dark mode with `localStorage` persistence. An HSL-based color system with semantic tokens allows for comprehensive and dynamic styling, including elevation effects for UI elements.
 
 ### UI/UX Decisions
-The platform features a visual-first approach with large images and sophisticated layouts. Specific UI elements include a tabbed floating chat assistant with quick prompt buttons, a hero section with an AI-centric tagline, a customizable "Happy Document Icon" for market reports, and a redesigned header with Manhattan location category icons. Decorative sparkles and mouse pointer icons are used for visual dividers. Email capture forms incorporate gold gradients and animated icons.
+The platform features a visual-first approach with large images and sophisticated layouts. Key UI elements include:
+- A tabbed floating chat assistant with quick prompt buttons and voice input.
+- A hero section with an AI-centric tagline, luxury marble background, and glassmorphism search card.
+- A redesign of the "NYC Command Center" with a compact, horizontal layout for Instant Alerts, Smart Search, and Market Analytics.
+- Property listing UI updates, including price display overlay, enhanced category backgrounds, and "Bowtie Navigation" for scrolling.
+- A Live Interest Rate Ticker in the header with a minimal, animated design.
+- Enhanced property card styling with pure white backgrounds (light mode) and pronounced drop shadows.
+- Decorative sparkles and mouse pointer icons for visual dividers.
+- Animated HTML5 infographic for "Agentic Actions" illustrating AI compute flow, data sources, and actions with dynamic visual effects.
+- Market Analysis Report with a premium background image of a luxury marble desk with a Manhattan view.
+- A personalized chat assistant avatar using the owner's professional headshot.
+- Email capture forms with gold gradients and animated icons.
 
 ### Feature Specifications
-*   **Property Search & Discovery**: Advanced search, filtering, and curated listing sections (e.g., Featured, Most Discounted, Longest on Market).
-*   **Saved Searches**: Users can save search criteria and receive email notifications.
-*   **Service Pages**: Dedicated pages for mortgage pre-approval (`/services/get-preapproved`) and home valuation (`/services/get-home-value`) with comprehensive forms.
-*   **Market Analysis Reports**: Users can request property-specific listing reports, accessible via property cards and a dedicated section.
-*   **AI Chat Assistant**: A floating chat assistant provides concierge support with voice input and pre-configured search prompts.
-*   **Email Digests**: Daily digest preview converted to an email capture form for personalized property alerts.
-*   **Dynamic UI**: Real-time property data displayed via a `LiveTicker`.
-*   **Branding**: Professional NYC concierge avatar, gold accents, and a luxury aesthetic inspired by high-end real estate.
+- **Property Search & Discovery**: Advanced search, filtering, and curated listing sections (e.g., Featured, Most Discounted, Longest on Market).
+- **Saved Searches**: Users can save search criteria and receive email notifications.
+- **Service Pages**: Dedicated pages for mortgage pre-approval (`/services/get-preapproved`) and home valuation (`/services/get-home-value`) with comprehensive forms and a new timeline question for pre-qualification.
+- **Market Analysis Reports**: Users can request property-specific listing reports.
+- **AI Chat Assistant**: A floating chat assistant provides concierge support with voice input and pre-configured search prompts.
+- **Email Digests**: Personalized property alerts via email capture forms.
+- **Dynamic UI**: Real-time property data displayed via a `LiveTicker`.
+- **Broker Registration Page**: A new page (`/broker-registration`) allowing brokers to create profiles with video pitches, professional bios, and specializations, supporting a client choice model.
+- **Branding**: Professional NYC concierge avatar, gold accents, and a luxury aesthetic inspired by high-end real estate.
 
 ## External Dependencies
 
@@ -169,12 +64,6 @@ The platform features a visual-first approach with large images and sophisticate
 *   **Vite**: Build tool and dev server.
 *   **TypeScript**: For strict type checking.
 *   **PostCSS & Autoprefixer**: CSS processing.
-
-### Planned External Services (Future Integrations)
-*   **Real Estate Data APIs**: Integration with providers like Zillow, Realtor.com, StreetEasy for live listings and market data.
-*   **AI Chat Assistant Services**: Connection to external AI services for "real agentic AI response."
-*   **Email Delivery Services**: For saved search alerts and daily property digests.
-*   **Mobile App Platforms**: Planned iOS/Android native applications.
 
 ### Asset Management
 *   **Static Assets**: Images stored in `attached_assets` (AI-generated, stock).
