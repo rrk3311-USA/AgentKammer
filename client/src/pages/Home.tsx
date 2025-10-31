@@ -301,7 +301,6 @@ export default function Home() {
         <HorizontalPropertyScroll
           title=""
           properties={longestOnMarket}
-          badge="Negotiable"
         />
       </section>
 

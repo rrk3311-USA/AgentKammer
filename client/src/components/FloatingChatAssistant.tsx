@@ -91,22 +91,7 @@ export function FloatingChatAssistant() {
             </div>
             
             <div className="text-center animate-wiggle">
-              <svg width="60" height="60" viewBox="0 0 60 60" className="filter drop-shadow-2xl">
-                <ellipse cx="30" cy="45" rx="26" ry="8" fill="#1a1a1a" />
-                <rect x="15" y="15" width="30" height="30" rx="2" fill="#1a1a1a" />
-                <rect x="12" y="38" width="36" height="7" rx="1" fill="#D4AF37" />
-                <text 
-                  x="30" 
-                  y="44" 
-                  fontSize="8" 
-                  fontWeight="bold" 
-                  fill="#1a1a1a" 
-                  textAnchor="middle" 
-                  fontFamily="serif"
-                >
-                  k
-                </text>
-              </svg>
+              <div className="text-5xl filter drop-shadow-2xl">🎩</div>
             </div>
 
             <div className="mt-2 flex flex-col items-end space-y-1">
