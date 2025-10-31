@@ -67,29 +67,29 @@ export function HeroSearch() {
           </h1>
           
           {/* Navy Section - Full Width Horizontal Bar */}
-          <div className="bg-[#0a1628] py-6 -mx-6 px-6 mb-4">
+          <div className="bg-[#0a1628] py-6 -mx-6 px-6">
             <p className="text-sm text-white font-light leading-relaxed mb-3 max-w-2xl mx-auto">
               Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
             </p>
-            <p className="text-lg text-white/90 font-light">
+            <p className="text-lg text-white/90 font-light mb-3">
               Live where you belong
             </p>
+            
+            <div className="flex items-center justify-center gap-1 text-primary mb-2">
+              <Sparkles className="w-2 h-2 animate-pulse opacity-60" />
+              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '0.2s' }} />
+              <Sparkles className="w-2 h-2 animate-pulse opacity-40" style={{ animationDelay: '0.4s' }} />
+              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '0.6s' }} />
+              <Sparkles className="w-2 h-2 animate-pulse opacity-60" style={{ animationDelay: '0.8s' }} />
+              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '1s' }} />
+              <Sparkles className="w-2 h-2 animate-pulse opacity-40" style={{ animationDelay: '1.2s' }} />
+              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '1.4s' }} />
+              <Sparkles className="w-2 h-2 animate-pulse opacity-60" style={{ animationDelay: '1.6s' }} />
+            </div>
+            <p className="text-xs text-white/60 font-light">
+              Download the app
+            </p>
           </div>
-          
-          <div className="flex items-center justify-center gap-1 text-primary/60 mb-2">
-            <Sparkles className="w-2 h-2 animate-pulse opacity-60" />
-            <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '0.2s' }} />
-            <Sparkles className="w-2 h-2 animate-pulse opacity-40" style={{ animationDelay: '0.4s' }} />
-            <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '0.6s' }} />
-            <Sparkles className="w-2 h-2 animate-pulse opacity-60" style={{ animationDelay: '0.8s' }} />
-            <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '1s' }} />
-            <Sparkles className="w-2 h-2 animate-pulse opacity-40" style={{ animationDelay: '1.2s' }} />
-            <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '1.4s' }} />
-            <Sparkles className="w-2 h-2 animate-pulse opacity-60" style={{ animationDelay: '1.6s' }} />
-          </div>
-          <p className="text-xs text-foreground/60 font-light">
-            Download the app
-          </p>
         </div>
       </section>
 
