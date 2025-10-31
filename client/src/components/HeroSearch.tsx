@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
-import { Search, MapPin, Sparkles, MousePointer, Wand2 } from "lucide-react";
+import { Search, MapPin, Sparkles, MousePointer } from "lucide-react";
 import heroImage from "@assets/IMG_9579_1761939754000.jpeg";
 
 const propertyTypes = ["Condo", "Co-op", "Townhouse", "Penthouse"];
@@ -75,7 +75,7 @@ export function HeroSearch() {
               <p className="text-lg text-white font-bold">
                 Live where you belong
               </p>
-              <Wand2 className="w-5 h-5 text-primary" />
+              <span className="text-2xl">👈</span>
             </div>
             
             <div className="flex items-center justify-center gap-1 text-primary mb-2">
