@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Smartphone, Bell, Search, TrendingUp } from "lucide-react";
+import { Smartphone, Bell, Search } from "lucide-react";
 import { SiApple, SiGoogleplay } from "react-icons/si";
+import { HappyDocIcon } from "./HappyDocIcon";
 
 export function AppDownload() {
   return (
@@ -54,7 +55,7 @@ export function AppDownload() {
 
           <Card className="bg-background/10 border-background/20 backdrop-blur p-6 text-center shadow-lg">
             <div className="w-12 h-12 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center mx-auto mb-4">
-              <TrendingUp className="h-6 w-6 text-primary" />
+              <HappyDocIcon className="h-6 w-6 text-primary" />
             </div>
             <h3 className="font-serif text-lg font-semibold mb-2 text-background">
               Market Analytics

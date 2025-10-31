@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Moon, Sun, Heart, Menu, X, Building2 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
-import logoImage from "@assets/ChatGPT Image Oct 30, 2025, 12_21_32 PM_1761855952032.png";
+import logoImage from "@assets/generated_images/Agent_Kammer_cropped_logo_c83c3c3e.png";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
