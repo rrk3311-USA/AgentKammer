@@ -16,6 +16,7 @@ export default function GetPreapproved() {
     lastName: "",
     email: "",
     phone: "",
+    timeline: "",
     income: "",
     downPayment: "",
     creditScore: "",
@@ -116,6 +117,23 @@ export default function GetPreapproved() {
                     required
                     data-testid="input-phone"
                   />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="timeline">How soon are you looking to move?</Label>
+                  <Select
+                    value={formData.timeline}
+                    onValueChange={(value) => handleChange("timeline", value)}
+                  >
+                    <SelectTrigger id="timeline" data-testid="select-timeline">
+                      <SelectValue placeholder="Select your timeline" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="moving-soon">Moving Soon (within 3 months)</SelectItem>
+                      <SelectItem value="looking-to-move">Looking to Move (3-6 months)</SelectItem>
+                      <SelectItem value="just-browsing">Just Browsing (6+ months)</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div className="space-y-2">

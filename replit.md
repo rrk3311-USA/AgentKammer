@@ -44,6 +44,20 @@ Preferred communication style: Simple, everyday language.
 - **6 Quick Prompt Buttons**: Pre-configured searches in 2-column grid (Best Deal, Longest on Market, Safest Locations, Best School Zones, Recently Reduced, New Listings)
 - Clicking any prompt button automatically sends message and switches to chat tab
 
+### Agentic Actions Infographic
+- **Visual Mind Map**: Top hat emoji (🎩) at center with branching lines showing AI compute flow
+- **5 Agentic Actions**: Continuous Market Scanning, Instant Alert Processing, Price Trend Analysis, Smart Notifications, Competitive Bidding Intelligence
+- **Time-Saving Statistics**: 240hrs average buyer search time vs 24/7 Agent Kammer automation
+- **Quote Banner**: "When brokers compete, you win" with CTA button to prequalification
+- **Design**: Gradient background, dotted branch lines, hover effects on action cards
+
+### Prequalification Page Updates
+- **Timeline Question Added**: "How soon are you looking to move?" with three options:
+  - Moving Soon (within 3 months)
+  - Looking to Move (3-6 months)
+  - Just Browsing (6+ months)
+- Helps qualify leads and personalize the experience based on buyer urgency
+
 ## System Architecture
 
 ### Frontend Architecture

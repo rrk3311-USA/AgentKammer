@@ -1,5 +1,7 @@
-import { Clock, Zap, TrendingUp, Search, Bell, Shield } from "lucide-react";
+import { Clock, Zap, TrendingUp, Search, Bell, Shield, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 
 export function AgenticActionsInfographic() {
   const actions = [
@@ -144,9 +146,15 @@ export function AgenticActionsInfographic() {
               <p className="text-2xl lg:text-3xl font-serif font-semibold text-foreground mb-2">
                 "When brokers compete, you win"
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground mb-6">
                 Our AI negotiates on your behalf, finding the best deals across all listings
               </p>
+              <Link href="/services/get-preapproved">
+                <Button size="lg" className="rounded-full text-black" data-testid="button-get-prequalified">
+                  Get Prequalified Now
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
