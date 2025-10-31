@@ -53,17 +53,13 @@ export function Header() {
           </div>
 
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
-            <div className="flex flex-col items-center bg-white rounded-lg px-3 py-2 relative">
-              <div className="absolute -top-1 -right-1">
-                <Sparkles className="w-3 h-3 text-primary" />
+            <div className="flex flex-col items-center bg-white rounded-lg px-3 py-2">
+              <div className="flex items-center gap-0.5 mb-0.5">
+                <span className="font-serif text-base font-semibold tracking-wide text-foreground">AGENT</span>
+                <span className="text-xl" style={{ transform: 'rotate(15deg)' }}>🎩</span>
+                <span className="font-serif text-base font-semibold tracking-wide text-foreground">AMMER</span>
               </div>
-              <div className="text-2xl mb-1" style={{ transform: 'rotate(15deg)' }}>
-                🎩
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="font-serif text-base font-semibold tracking-wide text-foreground">AGENT KAMMER</span>
-                <span className="text-[0.5rem] font-medium tracking-widest text-muted-foreground">NYC REAL ESTATE</span>
-              </div>
+              <span className="text-[0.5rem] font-medium tracking-widest text-muted-foreground">NYC REAL ESTATE</span>
             </div>
           </Link>
 
