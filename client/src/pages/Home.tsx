@@ -16,7 +16,7 @@ import property4 from "@assets/generated_images/Manhattan_penthouse_rooftop_terr
 import property5 from "@assets/generated_images/Upper_West_Side_co-op_building_1e75d246.png";
 
 export default function Home() {
-  const [midtownFilter, setMidtownFilter] = useState<"all" | "above" | "below">("all");
+  const [midtownFilter, setMidtownFilter] = useState<"midtown" | "above" | "below">("midtown");
 
   // TODO: Replace with real API data from real estate services (Zillow, Realtor.com, StreetEasy)
   // Current data is mock/staged for prototype demonstration
@@ -174,13 +174,24 @@ export default function Home() {
       sqft: 1950,
       propertyType: "Condo",
       daysOnMarket: 98,
-      location: "above",
+      location: "midtown",
+    },
+    {
+      id: "lom5",
+      image: property1,
+      price: 4200000,
+      title: "Midtown East Penthouse",
+      address: "301 East 50th Street, Manhattan, NY 10022",
+      beds: 4,
+      baths: 3,
+      sqft: 2400,
+      propertyType: "Condo",
+      daysOnMarket: 105,
+      location: "midtown",
     },
   ];
 
-  const longestOnMarket = midtownFilter === "all" 
-    ? allLongestOnMarket 
-    : allLongestOnMarket.filter(prop => prop.location === midtownFilter);
+  const longestOnMarket = allLongestOnMarket.filter(prop => prop.location === midtownFilter);
 
   // TODO: Replace with real API data - properties with recent price reductions
   const mostDiscounted = [
@@ -249,7 +260,7 @@ export default function Home() {
 
       <section className="py-12 lg:py-16" data-testid="section-longest-on-market">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-start justify-between mb-8">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 rounded-lg bg-card border border-border flex items-center justify-center shadow-lg">
                 <Clock className="h-6 w-6 text-primary" />
@@ -261,20 +272,20 @@ export default function Home() {
                 <p className="text-muted-foreground text-sm">Prime opportunities - properties with extended market presence</p>
               </div>
             </div>
-            <div className="flex items-center bg-muted rounded-full p-1 shadow-inner">
+            <div className="flex flex-col bg-muted rounded-2xl p-1 shadow-inner gap-1">
               <button
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
-                  midtownFilter === "all" 
+                className={`px-6 py-2 rounded-xl text-sm font-medium transition-all ${
+                  midtownFilter === "midtown" 
                     ? "bg-primary text-black shadow-md" 
                     : "text-muted-foreground hover-elevate"
                 }`}
-                onClick={() => setMidtownFilter("all")}
-                data-testid="badge-filter-all"
+                onClick={() => setMidtownFilter("midtown")}
+                data-testid="badge-filter-midtown"
               >
-                All
+                Midtown
               </button>
               <button
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-6 py-2 rounded-xl text-sm font-medium transition-all ${
                   midtownFilter === "above" 
                     ? "bg-primary text-black shadow-md" 
                     : "text-muted-foreground hover-elevate"
@@ -285,7 +296,7 @@ export default function Home() {
                 Above Midtown
               </button>
               <button
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-6 py-2 rounded-xl text-sm font-medium transition-all ${
                   midtownFilter === "below" 
                     ? "bg-primary text-black shadow-md" 
                     : "text-muted-foreground hover-elevate"
