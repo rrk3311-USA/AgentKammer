@@ -63,7 +63,7 @@ export function HeroSearch() {
       <section className="bg-white dark:bg-background py-12 lg:py-16">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h1 className="font-serif text-4xl lg:text-5xl font-semibold text-foreground mb-3">
-            Discover Your Perfect Home
+            your perfect home<br />Discovered
           </h1>
           <p className="text-lg text-foreground/90 font-light mb-4">
             Live where you belong
