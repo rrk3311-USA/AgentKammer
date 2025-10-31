@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Moon, Sun, Heart, Menu, X, Building2 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
-import logoImage from "@assets/transparet_ChatGPT-Image-Oct-28,-2025,-11_10_57-PM_1761877367333.png";
+import logoImage from "@assets/generated_images/Agent_Kammer_logo_with_top_hat_99832bd4.png";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -54,7 +54,7 @@ export function Header() {
           </div>
 
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
-            <img src={logoImage} alt="Agent Kammer" className="h-16" />
+            <img src={logoImage} alt="Agent Kammer" className="h-20 w-auto max-w-md object-contain" />
           </Link>
 
           <div className="flex items-center gap-4 ml-auto">
