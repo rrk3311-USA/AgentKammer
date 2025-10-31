@@ -43,10 +43,11 @@ Preferred communication style: Simple, everyday language.
 - **Integration**: Appears in HorizontalPropertyScroll component at bottom-left while bowtie arrows remain centered
 
 ### Property Card Styling Updates (October 31, 2025)
-- **Background Color**: Subtle gray tint added for sophistication
-  - Light mode: Changed from pure white (100%) to 85% lightness (15% gray added)
+- **Background Color**: Pure white for clean, classic look
+  - Light mode: 100% white (reverted from 85% lightness experiment)
   - Dark mode: Maintained at 12% for consistency
-- **Effect**: Creates better visual separation from page background while maintaining elegance
+- **Drop Shadow**: Enhanced shadow-xl with hover:shadow-2xl for elevated, classy UX feeling
+- **Effect**: Premium cards with pronounced depth and sophistication
 
 ### Hero Section Enhancement (October 31, 2025)
 - **Two-Section Layout**: Split into separate white background header and image-backed search widget
