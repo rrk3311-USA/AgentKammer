@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
-import { Search, MapPin } from "lucide-react";
+import { Search, MapPin, Sparkles } from "lucide-react";
 import heroImage from "@assets/generated_images/NYC_luxury_penthouse_interior_hero_88d3b5ec.png";
 
 const propertyTypes = ["Condo", "Co-op", "Townhouse", "Penthouse"];
@@ -71,8 +71,18 @@ export function HeroSearch() {
           <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-white mb-4">
             Discover Your Perfect Home
           </h1>
-          <p className="text-xl text-white/90 font-light">
+          <p className="text-xl text-white/90 font-light mb-3">
             Live where you belong
+          </p>
+          <div className="flex items-center justify-center gap-2 mb-1">
+            <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+            <p className="text-sm text-white/80 font-light">
+              Let AI agent scan thousands of criteria for you and update you as needed
+            </p>
+            <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+          </div>
+          <p className="text-xs text-white/60 font-light">
+            Download the app
           </p>
         </div>
 

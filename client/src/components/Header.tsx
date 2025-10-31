@@ -60,13 +60,6 @@ export function Header() {
               <div className="flex flex-col items-center">
                 <span className="font-serif text-base font-semibold tracking-wide text-foreground">AGENT KAMMER</span>
                 <span className="text-[0.5rem] font-medium tracking-widest text-muted-foreground">NYC REAL ESTATE</span>
-                <div className="flex items-center gap-1 mt-0.5">
-                  <Sparkles className="w-2.5 h-2.5 text-primary animate-pulse" />
-                  <span className="text-[0.45rem] font-medium tracking-wide bg-gradient-to-r from-primary via-yellow-500 to-primary bg-clip-text text-transparent">
-                    YOUR AI AGENTIC MARKET SCANNER
-                  </span>
-                  <Sparkles className="w-2.5 h-2.5 text-primary animate-pulse" />
-                </div>
               </div>
             </div>
           </Link>
