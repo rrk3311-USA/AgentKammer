@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
 import { Search, MapPin, Sparkles, MousePointer } from "lucide-react";
-import heroImage from "@assets/stock_images/luxury_elegant_upsca_4eddd40c.jpg";
+import heroImage from "@assets/IMG_9579_1761939754000.jpeg";
 
 const propertyTypes = ["Condo", "Co-op", "Townhouse", "Penthouse"];
 const bedrooms = ["Studio", "1", "2", "3", "4+"];

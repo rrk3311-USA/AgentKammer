@@ -49,9 +49,9 @@ Preferred communication style: Simple, everyday language.
 - **Effect**: Creates better visual separation from page background while maintaining elegance
 
 ### Hero Section Enhancement (October 31, 2025)
-- **Background Image**: Replaced with professional luxury NYC penthouse stock photo
-- **Image**: `luxury_elegant_upsca_4eddd40c.jpg` - elegant upscale interior
-- **Visual Impact**: More sophisticated, polished aesthetic for premium branding
+- **Background Image**: Custom luxury NYC property image
+- **Image**: `IMG_9579_1761939754000.jpeg` - user-provided premium property photo
+- **Visual Impact**: Sophisticated, polished aesthetic for premium branding
 
 ### Page Title Update (October 31, 2025)
 - **New Title**: "AGENTIC - NYC Real Estate Discovery"
