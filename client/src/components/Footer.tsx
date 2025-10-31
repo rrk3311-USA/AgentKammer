@@ -39,9 +39,13 @@ export function Footer() {
               </ul>
             </div>
           </div>
-          <div className="mt-8 pt-8 border-t border-border/50 text-center text-sm text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} Agent Kammer. All rights reserved.</p>
-          </div>
+        </div>
+      </div>
+      <div className="bg-[#0a1628] py-3">
+        <div className="max-w-7xl mx-auto px-6">
+          <p className="text-center text-sm text-white">
+            🗽Copyright 2025 - Agent Kammer ® | Powered by Replit
+          </p>
         </div>
       </div>
     </footer>
