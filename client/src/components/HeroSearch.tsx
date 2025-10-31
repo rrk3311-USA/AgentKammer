@@ -61,24 +61,24 @@ export function HeroSearch() {
     <section className="relative min-h-[600px] lg:min-h-[700px] flex items-center justify-center">
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        style={{ backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/75 via-white/70 to-white/75" />
       </div>
 
       <div className="relative z-10 w-full max-w-4xl mx-auto px-6 py-16">
         <div className="text-center mb-8">
-          <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-white mb-4">
+          <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-foreground mb-4">
             Discover Your Perfect Home
           </h1>
-          <p className="text-xl text-white/90 font-light mb-4">
+          <p className="text-xl text-foreground/90 font-light mb-4">
             Live where you belong
           </p>
           <div className="max-w-2xl mx-auto">
-            <p className="text-sm text-white/85 font-light leading-relaxed mb-2">
+            <p className="text-sm text-foreground/85 font-light leading-relaxed mb-2">
               Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
             </p>
-            <div className="flex items-center justify-center gap-1 text-primary/50">
+            <div className="flex items-center justify-center gap-1 text-primary/60">
               <Sparkles className="w-2 h-2 animate-pulse opacity-60" />
               <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '0.2s' }} />
               <Sparkles className="w-2 h-2 animate-pulse opacity-40" style={{ animationDelay: '0.4s' }} />
@@ -90,7 +90,7 @@ export function HeroSearch() {
               <Sparkles className="w-2 h-2 animate-pulse opacity-60" style={{ animationDelay: '1.6s' }} />
             </div>
           </div>
-          <p className="text-xs text-white/60 font-light mt-3">
+          <p className="text-xs text-foreground/60 font-light mt-3">
             Download the app
           </p>
         </div>
