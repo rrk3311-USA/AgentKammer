@@ -1,4 +1,3 @@
-import { TrendingUp } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export function LiveInterestRate() {
@@ -18,20 +17,17 @@ export function LiveInterestRate() {
 
   return (
     <div 
-      className="flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-full backdrop-blur-sm animate-pulse-subtle"
+      className="inline-flex items-baseline gap-1.5 px-2 py-1 bg-black dark:bg-white border border-black dark:border-white"
       data-testid="live-interest-rate-ticker"
     >
-      <TrendingUp className="h-3.5 w-3.5 text-primary animate-bounce-slow" data-testid="icon-trending-rate" />
-      <div className="flex items-baseline gap-1">
-        <span className="text-xs font-medium text-muted-foreground">Rate:</span>
-        <span 
-          className="font-mono text-sm font-bold text-primary tabular-nums ticker-number"
-          data-testid="text-current-rate"
-          aria-live="polite"
-        >
-          {rate.toFixed(2)}%
-        </span>
-      </div>
+      <span className="text-[10px] font-medium text-white dark:text-black uppercase tracking-wide">Rate:</span>
+      <span 
+        className="font-mono text-xs font-semibold text-white dark:text-black tabular-nums ticker-number animate-pulse-subtle"
+        data-testid="text-current-rate"
+        aria-live="polite"
+      >
+        {rate.toFixed(2)}%
+      </span>
     </div>
   );
 }

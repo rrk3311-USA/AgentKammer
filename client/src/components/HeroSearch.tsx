@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
 import { Search, MapPin, Sparkles, MousePointer } from "lucide-react";
-import heroImage from "@assets/generated_images/NYC_luxury_penthouse_interior_hero_88d3b5ec.png";
+import heroImage from "@assets/stock_images/luxury_elegant_upsca_4eddd40c.jpg";
 
 const propertyTypes = ["Condo", "Co-op", "Townhouse", "Penthouse"];
 const bedrooms = ["Studio", "1", "2", "3", "4+"];

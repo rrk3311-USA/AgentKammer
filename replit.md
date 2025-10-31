@@ -29,14 +29,33 @@ Preferred communication style: Simple, everyday language.
   - Replaced sidebar circular arrows for more elegant, centered design
 
 ### Live Interest Rate Ticker (October 31, 2025)
-- **Location**: Top-left corner of header, always visible
-- **Display**: Current mortgage rate with "Rate:" label
+- **Location**: Centered below bowtie navigation arrows in property listing sections
+- **Display**: Current mortgage rate with "RATE:" label (uppercase)
+- **Design**: Small, elegant rectangular ticker with black/white minimal aesthetic
+- **Shape**: Rectangle (no rounded corners)
+- **Colors**: Black background with white text (light mode), white background with black text (dark mode)
 - **Animations**: 
-  - Subtle pulsing effect on container (3s cycle)
-  - Bouncing TrendingUp icon (2s cycle)
+  - Subtle pulsing effect on percentage number (3s cycle)
   - Smooth number transitions (0.5s)
+  - No icon (removed for minimalism)
 - **Updates**: Rate changes every 3 seconds (simulated live updates ranging 6.5% - 7.2%)
-- **Styling**: Gold gradient background, rounded pill shape, tabular numbers for consistent spacing
+- **Typography**: Very small text (10px label, 12px percentage), monospace font with tabular numbers
+- **Integration**: Appears in HorizontalPropertyScroll component below scroll controls
+
+### Property Card Styling Updates (October 31, 2025)
+- **Background Color**: Subtle gray tint added for sophistication
+  - Light mode: Changed from pure white (100%) to 85% lightness (15% gray added)
+  - Dark mode: Maintained at 12% for consistency
+- **Effect**: Creates better visual separation from page background while maintaining elegance
+
+### Hero Section Enhancement (October 31, 2025)
+- **Background Image**: Replaced with professional luxury NYC penthouse stock photo
+- **Image**: `luxury_elegant_upsca_4eddd40c.jpg` - elegant upscale interior
+- **Visual Impact**: More sophisticated, polished aesthetic for premium branding
+
+### Page Title Update (October 31, 2025)
+- **New Title**: "AGENTIC - NYC Real Estate Discovery"
+- **Purpose**: Emphasizes AI-powered agentic approach to property search
 
 ### Market Analysis Report Luxury Redesign
 - **Premium Background**: Generated luxury white Carrara marble desk image with Manhattan skyline visible through window
