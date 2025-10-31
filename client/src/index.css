@@ -273,6 +273,33 @@
     animation: sparkle 2s ease-in-out 0.9s infinite;
   }
 
+  @keyframes clock-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes sparkle-glow {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+
+  @keyframes bounce-down {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+  }
+
+  .animate-clock {
+    animation: clock-rotate 60s linear infinite;
+  }
+
+  .animate-sparkle-glow {
+    animation: sparkle-glow 2s ease-in-out infinite;
+  }
+
+  .animate-bounce-down {
+    animation: bounce-down 1.5s ease-in-out infinite;
+  }
+
   @keyframes ping-fast {
     0%, 100% { opacity: 1; transform: scale(1); }
     50% { opacity: 0; transform: scale(1.5); }

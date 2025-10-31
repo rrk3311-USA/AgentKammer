@@ -46,6 +46,15 @@ export function HorizontalPropertyScroll({
     }
   };
 
+  const getIconAnimation = () => {
+    if (!Icon) return "";
+    const iconName = Icon.displayName || Icon.name || "";
+    if (iconName.includes("Clock")) return "animate-clock";
+    if (iconName.includes("Sparkles")) return "animate-sparkle-glow";
+    if (iconName.includes("TrendingDown")) return "animate-bounce-down";
+    return "";
+  };
+
   return (
     <section className="py-12 lg:py-16 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -58,7 +67,7 @@ export function HorizontalPropertyScroll({
           <div className="flex items-center gap-4">
             {Icon && (
               <div className="w-14 h-14 rounded-lg bg-card border border-border flex items-center justify-center shadow-lg">
-                <Icon className="h-6 w-6 text-primary" />
+                <Icon className={`h-6 w-6 text-primary ${getIconAnimation()}`} />
               </div>
             )}
             <div>

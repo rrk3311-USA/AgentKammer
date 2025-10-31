@@ -261,7 +261,7 @@ export default function Home() {
           <div className="flex items-start justify-between mb-8">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 rounded-lg bg-card border border-border flex items-center justify-center shadow-lg">
-                <Clock className="h-6 w-6 text-primary" />
+                <Clock className="h-6 w-6 text-primary animate-clock" />
               </div>
               <div>
                 <h2 className="font-serif text-3xl lg:text-4xl font-semibold mb-1">
