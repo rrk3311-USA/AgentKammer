@@ -6,6 +6,10 @@ Agent Kammer is a premium NYC real estate platform focused on luxury Manhattan p
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
+## User Identity
+- **Owner**: Raphael Kammer
+- **Photo**: `IMG_1044_1761929739320.jpeg` - Professional headshot used as chat assistant avatar
+
 ## Recent Changes (October 31, 2025)
 
 ### NYC Command Center Redesign
@@ -27,9 +31,10 @@ Preferred communication style: Simple, everyday language.
   - Visual feedback: button pulses when listening, input shows "Listening..." placeholder
   - Automatic transcription fills text input, ready to send
   - Status message shows "🎤 Listening... Speak now" while active
-- **New Avatar**: Generated professional NYC concierge portrait with tilted top hat and gold monocle
-  - Avatar image: `NYC_concierge_with_hat_monocle_d3f71fab.png`
-  - Maintains sophisticated luxury branding with Agent K theme (top hat matches logo)
+- **Personal Avatar**: Chat assistant now uses actual photo of owner Raphael Kammer
+  - Avatar image: `IMG_1044_1761929739320.jpeg` (professional headshot of Raphael Kammer)
+  - Personalizes the concierge experience with the real owner's identity
+  - Maintains sophisticated luxury branding with authentic personal touch
 - **Hero Section Divider**: Replaced code-themed elements with decorative sparkles and mouse pointer icons
   - Tiny animated sparkles and mouse clicks in staggered pulse animation
   - Creates subtle divider effect below agentic AI tagline

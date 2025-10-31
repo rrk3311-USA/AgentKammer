@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home, Mic, MicOff } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import agentAvatar from "@assets/generated_images/NYC_concierge_with_hat_monocle_d3f71fab.png";
+import agentAvatar from "@assets/IMG_1044_1761929739320.jpeg";
 
 interface Message {
   id: string;
