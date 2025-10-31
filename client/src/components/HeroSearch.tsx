@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
 import { Search, MapPin, Sparkles, MousePointer } from "lucide-react";
-import heroImage from "@assets/generated_images/Luxury_marble_stone_background_83a62bcc.png";
+import heroImage from "@assets/IMG_9579_1761939754000.jpeg";
 
 const propertyTypes = ["Condo", "Co-op", "Townhouse", "Penthouse"];
 const bedrooms = ["Studio", "1", "2", "3", "4+"];
@@ -62,31 +62,32 @@ export function HeroSearch() {
       {/* Top Section - White Background */}
       <section className="bg-white dark:bg-background py-12 lg:py-16">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <h1 className="font-serif text-4xl lg:text-5xl font-semibold text-foreground mb-3">
+          <h1 className="font-serif text-4xl lg:text-5xl font-semibold text-foreground mb-6">
             your perfect home<br />Discovered
           </h1>
-          <p className="text-lg text-foreground/90 font-light mb-4">
-            Live where you belong
-          </p>
-          <div className="max-w-xl mx-auto">
-            <div className="bg-[#0a1628] px-4 py-3 rounded-lg">
-              <p className="text-sm text-white font-light leading-relaxed">
-                Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
-              </p>
-            </div>
-            <div className="flex items-center justify-center gap-1 text-primary/60 mt-2">
-              <Sparkles className="w-2 h-2 animate-pulse opacity-60" />
-              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '0.2s' }} />
-              <Sparkles className="w-2 h-2 animate-pulse opacity-40" style={{ animationDelay: '0.4s' }} />
-              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '0.6s' }} />
-              <Sparkles className="w-2 h-2 animate-pulse opacity-60" style={{ animationDelay: '0.8s' }} />
-              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '1s' }} />
-              <Sparkles className="w-2 h-2 animate-pulse opacity-40" style={{ animationDelay: '1.2s' }} />
-              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '1.4s' }} />
-              <Sparkles className="w-2 h-2 animate-pulse opacity-60" style={{ animationDelay: '1.6s' }} />
-            </div>
+          
+          {/* Navy Section - Full Width Horizontal Bar */}
+          <div className="bg-[#0a1628] py-6 -mx-6 px-6 mb-4">
+            <p className="text-sm text-white font-light leading-relaxed mb-3 max-w-2xl mx-auto">
+              Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
+            </p>
+            <p className="text-lg text-white/90 font-light">
+              Live where you belong
+            </p>
           </div>
-          <p className="text-xs text-foreground/60 font-light mt-2">
+          
+          <div className="flex items-center justify-center gap-1 text-primary/60 mb-2">
+            <Sparkles className="w-2 h-2 animate-pulse opacity-60" />
+            <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '0.2s' }} />
+            <Sparkles className="w-2 h-2 animate-pulse opacity-40" style={{ animationDelay: '0.4s' }} />
+            <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '0.6s' }} />
+            <Sparkles className="w-2 h-2 animate-pulse opacity-60" style={{ animationDelay: '0.8s' }} />
+            <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '1s' }} />
+            <Sparkles className="w-2 h-2 animate-pulse opacity-40" style={{ animationDelay: '1.2s' }} />
+            <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '1.4s' }} />
+            <Sparkles className="w-2 h-2 animate-pulse opacity-60" style={{ animationDelay: '1.6s' }} />
+          </div>
+          <p className="text-xs text-foreground/60 font-light">
             Download the app
           </p>
         </div>

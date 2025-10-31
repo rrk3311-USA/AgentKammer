@@ -26,7 +26,7 @@ A custom theme provider manages light/dark mode with `localStorage` persistence.
 ### UI/UX Decisions
 The platform features a visual-first approach with large images and sophisticated layouts. Key UI elements include:
 - A tabbed floating chat assistant with quick prompt buttons and voice input.
-- A hero section with an AI-centric tagline, luxury marble background, and glassmorphism search card.
+- A hero section with two-line heading ("your perfect home / Discovered"), full-width navy horizontal bar containing AI description and subtitle, glassmorphism search card over luxury property photo background (IMG_9579, 130% zoom).
 - A redesign of the "NYC Command Center" with a compact, horizontal layout for Instant Alerts, Smart Search, and Market Analytics.
 - Property listing UI updates, including price display overlay, enhanced category backgrounds, and "Bowtie Navigation" for scrolling.
 - A Live Interest Rate Ticker in the header with a minimal, animated design.
