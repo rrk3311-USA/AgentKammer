@@ -28,7 +28,7 @@ export function Header() {
           </nav>
 
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
-            <div className="flex items-center justify-center hover-elevate active-elevate-2 rounded-2xl px-1.5 py-0.5 cursor-pointer transition-transform bg-white dark:bg-white border-2 border-border/40 shadow-md">
+            <div className="flex items-center justify-center hover-elevate active-elevate-2 rounded-2xl p-1 cursor-pointer transition-transform bg-white border-2 border-border/40 shadow-md" style={{ backgroundColor: '#ffffff' }}>
               <img src={logoImage} alt="Agent Kammer" className="h-24 drop-shadow-lg" />
             </div>
           </Link>
