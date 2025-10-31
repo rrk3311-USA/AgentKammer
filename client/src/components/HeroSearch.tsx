@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
-import { Search, MapPin, Sparkles } from "lucide-react";
+import { Search, MapPin, Code2 } from "lucide-react";
 import heroImage from "@assets/generated_images/NYC_luxury_penthouse_interior_hero_88d3b5ec.png";
 
 const propertyTypes = ["Condo", "Co-op", "Townhouse", "Penthouse"];
@@ -71,17 +71,24 @@ export function HeroSearch() {
           <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-white mb-4">
             Discover Your Perfect Home
           </h1>
-          <p className="text-xl text-white/90 font-light mb-3">
+          <p className="text-xl text-white/90 font-light mb-4">
             Live where you belong
           </p>
-          <div className="flex items-center justify-center gap-2 mb-1">
-            <Sparkles className="w-4 h-4 text-primary animate-pulse" />
-            <p className="text-sm text-white/80 font-light">
-              Let AI agent scan thousands of criteria for you and update you as needed
+          <div className="max-w-2xl mx-auto">
+            <p className="text-sm text-white/85 font-light leading-relaxed mb-1">
+              Leverage agentic AI to do the easy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
             </p>
-            <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+            <div className="flex items-center justify-center gap-1 text-primary/60 text-xs font-mono">
+              <Code2 className="w-3 h-3" />
+              <span className="animate-pulse">&lt;/&gt;</span>
+              <span className="animate-pulse" style={{ animationDelay: '0.3s' }}>01010</span>
+              <span className="animate-pulse" style={{ animationDelay: '0.6s' }}>|</span>
+              <span className="animate-pulse" style={{ animationDelay: '0.9s' }}>executing</span>
+              <span className="animate-pulse" style={{ animationDelay: '0.3s' }}>...</span>
+              <Code2 className="w-3 h-3" />
+            </div>
           </div>
-          <p className="text-xs text-white/60 font-light">
+          <p className="text-xs text-white/60 font-light mt-3">
             Download the app
           </p>
         </div>
