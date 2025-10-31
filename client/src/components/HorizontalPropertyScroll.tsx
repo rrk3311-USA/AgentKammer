@@ -56,7 +56,7 @@ export function HorizontalPropertyScroll({
   };
 
   return (
-    <section className="py-10 lg:py-12 my-8 bg-gradient-to-br from-white via-slate-50/50 to-slate-100/40 dark:from-slate-900 dark:via-slate-900/50 dark:to-slate-800/40 relative overflow-hidden">
+    <section className="py-10 lg:py-12 my-8 bg-gradient-to-br from-slate-50 via-blue-50/60 to-slate-100/60 dark:from-slate-900 dark:via-slate-900/50 dark:to-slate-800/40 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4">
@@ -81,17 +81,7 @@ export function HorizontalPropertyScroll({
           )}
         </div>
 
-        <div className="relative group">
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 opacity-0 group-hover:opacity-100 transition-opacity rounded-full bg-background/95 backdrop-blur"
-            onClick={() => scroll("left")}
-            data-testid="button-scroll-left"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </Button>
-
+        <div className="relative">
           <div
             ref={scrollRef}
             className="flex gap-6 overflow-x-auto scrollbar-hide pb-4"
@@ -104,15 +94,37 @@ export function HorizontalPropertyScroll({
             ))}
           </div>
 
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 opacity-0 group-hover:opacity-100 transition-opacity rounded-full bg-background/95 backdrop-blur"
-            onClick={() => scroll("right")}
-            data-testid="button-scroll-right"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </Button>
+          {/* Bowtie Navigation */}
+          <div className="flex items-center justify-center gap-3 mt-4">
+            <button
+              onClick={() => scroll("left")}
+              className="group relative hover-elevate active-elevate-2 transition-all"
+              data-testid="button-scroll-left"
+              aria-label="Scroll left"
+            >
+              <svg width="40" height="40" viewBox="0 0 40 40" className="transition-transform group-hover:scale-110">
+                <path
+                  d="M 30 10 L 10 20 L 30 30 Z"
+                  fill="currentColor"
+                  className="text-primary/80 group-hover:text-primary"
+                />
+              </svg>
+            </button>
+            <button
+              onClick={() => scroll("right")}
+              className="group relative hover-elevate active-elevate-2 transition-all"
+              data-testid="button-scroll-right"
+              aria-label="Scroll right"
+            >
+              <svg width="40" height="40" viewBox="0 0 40 40" className="transition-transform group-hover:scale-110">
+                <path
+                  d="M 10 10 L 30 20 L 10 30 Z"
+                  fill="currentColor"
+                  className="text-primary/80 group-hover:text-primary"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </section>

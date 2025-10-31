@@ -18,6 +18,16 @@ Preferred communication style: Simple, everyday language.
 - **Reduced Padding**: Smaller py-12 lg:py-16 (down from py-20 lg:py-32) for less vertical space
 - **Unified Description**: Combined text under one card instead of three separate cards
 
+### Property Listing UI Updates (October 31, 2025)
+- **Price Display**: White text on solid black background, positioned at bottom-left of property image (overlaying photo)
+- **Category Backgrounds**: Enhanced blue-gray gradient (`from-slate-50 via-blue-50/60 to-slate-100/60`) for better visual separation
+- **Longest on Market Filter**: Location filter buttons (Above/Midtown/Below Midtown) moved below headline for cleaner layout
+- **Bowtie Navigation**: Triangular arrow buttons positioned below listing scroll
+  - Left arrow: pointing left triangle
+  - Right arrow: pointing right triangle
+  - Gold color with hover effects, forms visual "bowtie" shape when viewed together
+  - Replaced sidebar circular arrows for more elegant, centered design
+
 ### Market Analysis Report Luxury Redesign
 - **Premium Background**: Generated luxury white Carrara marble desk image with Manhattan skyline visible through window
 - **Sophisticated Aesthetic**: High-end real estate office setting with natural lighting and elegant shadows

@@ -82,11 +82,6 @@ export function PropertyCard({
           alt={title}
           className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300"
         />
-        <div className="absolute top-4 left-4 backdrop-blur-md bg-background/80 rounded-full px-3 py-1">
-          <span className="font-serif text-lg font-semibold text-green-600 dark:text-green-500">
-            {formatPrice(price)}
-          </span>
-        </div>
         <div className="absolute top-4 right-4 backdrop-blur-md bg-background/80 rounded-full">
           <Button
             variant="ghost"
@@ -99,12 +94,17 @@ export function PropertyCard({
             />
           </Button>
         </div>
-        <div className="absolute bottom-4 left-4 flex gap-2">
-          <Badge variant="secondary" className="backdrop-blur-md bg-background/90">
+        <div className="absolute bottom-4 left-4 flex flex-col gap-2">
+          <div className="bg-black px-3 py-1.5 rounded">
+            <span className="font-serif text-lg font-semibold text-white">
+              {formatPrice(price)}
+            </span>
+          </div>
+          <Badge variant="secondary" className="backdrop-blur-md bg-background/90 w-fit">
             {propertyType}
           </Badge>
           {daysOnMarket && (
-            <Badge variant="secondary" className="backdrop-blur-md bg-background/90 flex items-center gap-1">
+            <Badge variant="secondary" className="backdrop-blur-md bg-background/90 flex items-center gap-1 w-fit">
               <Clock className="h-3 w-3" />
               {daysOnMarket}d
             </Badge>

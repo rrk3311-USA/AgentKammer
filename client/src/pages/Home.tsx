@@ -257,10 +257,10 @@ export default function Home() {
         icon={TrendingDown}
       />
 
-      <section className="py-10 lg:py-12 my-8 bg-gradient-to-br from-white via-slate-50/50 to-slate-100/40 dark:from-slate-900 dark:via-slate-900/50 dark:to-slate-800/40" data-testid="section-longest-on-market">
+      <section className="py-10 lg:py-12 my-8 bg-gradient-to-br from-slate-50 via-blue-50/60 to-slate-100/60 dark:from-slate-900 dark:via-slate-900/50 dark:to-slate-800/40" data-testid="section-longest-on-market">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-4">
+          <div className="mb-6">
+            <div className="flex items-center gap-4 mb-4">
               <div className="w-14 h-14 rounded-lg bg-card border border-border flex items-center justify-center shadow-lg">
                 <Clock className="h-6 w-6 text-primary animate-clock" />
               </div>
@@ -271,7 +271,7 @@ export default function Home() {
                 <p className="text-muted-foreground text-sm">Prime opportunities - properties with extended market presence</p>
               </div>
             </div>
-            <div className="flex items-center bg-muted rounded-2xl p-1 shadow-inner gap-1">
+            <div className="flex items-center bg-muted rounded-2xl p-1 shadow-inner gap-1 w-fit">
               <button
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                   midtownFilter === "above" 
