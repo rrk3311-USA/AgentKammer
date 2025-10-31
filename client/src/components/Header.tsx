@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Moon, Sun, Heart, Menu, X } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
-import logoImage from "@assets/generated_images/Agent_Kammer_luxury_logo_9b6279d8.png";
+import logoImage from "@assets/generated_images/Agent_Kammer_transparent_logo_bf36d566.png";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
