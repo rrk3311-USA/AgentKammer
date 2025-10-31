@@ -76,7 +76,7 @@ export function HeroSearch() {
           </p>
           <div className="max-w-2xl mx-auto">
             <p className="text-sm text-white/85 font-light leading-relaxed mb-1">
-              Leverage agentic AI to do the easy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
+              Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
             </p>
             <div className="flex items-center justify-center gap-1 text-primary/60 text-xs font-mono">
               <Code2 className="w-3 h-3" />
