@@ -3,7 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { LiveInterestRate } from "./LiveInterestRate";
 
 interface Property {
   id: string;
@@ -97,11 +96,6 @@ export function HorizontalPropertyScroll({
 
           {/* Bottom Controls Container */}
           <div className="relative mt-4">
-            {/* Current Interest Rate Ticker - Bottom Left */}
-            <div className="absolute left-0 bottom-0">
-              <LiveInterestRate />
-            </div>
-
             {/* Bowtie Navigation - Centered */}
             <div className="flex items-center justify-center gap-3">
               <button
