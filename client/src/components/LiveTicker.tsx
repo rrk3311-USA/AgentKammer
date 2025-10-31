@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, TrendingDown, Building, Home } from "lucide-react";
+import { TrendingUp, TrendingDown, Building, Home, Shirt } from "lucide-react";
 
 interface TickerItem {
   id: string;
@@ -41,8 +41,7 @@ export function LiveTicker() {
   ];
 
   const allData = [...residentialData, ...commercialData];
-  const allDuplicated = [...allData, ...allData, ...allData];
-
+  
   const formatPrice = (value: number) => {
     if (value >= 1000000) {
       return `$${(value / 1000000).toFixed(1)}M`;
@@ -50,53 +49,61 @@ export function LiveTicker() {
     return `$${(value / 1000).toFixed(0)}K`;
   };
 
+  const createTickerItems = () => {
+    const items = [];
+    for (let cycle = 0; cycle < 3; cycle++) {
+      allData.forEach((item, index) => {
+        items.push({ ...item, key: `${item.id}-${cycle}-${index}`, isDivider: false });
+      });
+      if (cycle < 2) {
+        items.push({ key: `divider-${cycle}`, isDivider: true, id: `divider-${cycle}` } as any);
+      }
+    }
+    return items;
+  };
+
+  const tickerItems = createTickerItems();
+
   return (
     <div className="fixed bottom-0 left-0 right-0 w-full z-40 bg-neutral-900 border-t border-t-[0.5px] border-b border-b-[0.5px] border-black">
       <div className="relative overflow-hidden h-14 bg-neutral-900">
         <div
-          className="flex items-center gap-10 animate-scroll whitespace-nowrap py-3.5"
+          className="flex items-center gap-6 animate-scroll whitespace-nowrap py-3.5"
           style={{
-            animation: "scroll 10s linear infinite",
+            animation: "scroll 120s linear infinite",
           }}
         >
-          {allDuplicated.map((item, index) => {
-            const isEven = index % 2 === 0;
-            const fontWeight = isEven ? "font-bold" : "font-normal";
+          {tickerItems.map((item, index) => {
+            if ((item as any).isDivider) {
+              return (
+                <div
+                  key={item.key}
+                  className="flex items-center justify-center px-8"
+                >
+                  <Shirt className="w-6 h-6 text-primary" />
+                </div>
+              );
+            }
+            
             return (
               <div
-                key={`${item.id}-${index}`}
-                className={`flex items-center gap-3 px-4 py-2 rounded text-base ${
-                  isEven ? "bg-white text-black" : "bg-black text-white"
-                } ${fontWeight}`}
+                key={item.key}
+                className="flex items-center gap-2.5 px-3 py-1.5 bg-white text-black rounded-md"
+                data-testid={`ticker-item-${item.id}`}
               >
-                <span>{item.address}</span>
-                <span className="text-lg">
+                <span className="font-medium">{item.address}</span>
+                <span className="text-primary font-semibold">
                   {formatPrice(item.price)}
                 </span>
-                <span>{item.type}</span>
+                <span className="text-muted-foreground">{item.type}</span>
                 {item.beds > 0 && (
-                  <span>
-                    {item.beds}bd
+                  <span className="text-sm">
+                    {item.beds}bd/{item.baths}ba
                   </span>
                 )}
-                {item.baths > 0 && (
-                  <span>
-                    {item.baths}ba
-                  </span>
-                )}
-                <span>
-                  {item.sqft.toLocaleString()}sf
+                <span className="text-sm text-muted-foreground">
+                  {item.sqft.toLocaleString()} sf
                 </span>
-                <span>
-                  {item.daysOnMarket}d
-                </span>
-                <span>
-                  {item.agent}
-                </span>
-                <span>
-                  {item.brokerage}
-                </span>
-                <span className={isEven ? "text-gray-400" : "text-gray-600"}>•</span>
               </div>
             );
           })}
