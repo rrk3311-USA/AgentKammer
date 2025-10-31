@@ -54,7 +54,13 @@ export function Header() {
           </div>
 
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
-            <img src={logoImage} alt="Agent Kammer" className="h-20 w-auto max-w-md object-contain" />
+            <div className="flex flex-col items-center">
+              <div className="text-3xl mb-1">🎩</div>
+              <div className="flex flex-col items-center">
+                <span className="font-serif text-2xl font-semibold tracking-wide text-foreground">AGENT KAMMER</span>
+                <span className="text-xs font-medium tracking-widest text-muted-foreground">NYC REAL ESTATE</span>
+              </div>
+            </div>
           </Link>
 
           <div className="flex items-center gap-4 ml-auto">
