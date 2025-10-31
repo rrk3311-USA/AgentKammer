@@ -54,13 +54,11 @@ export function Header() {
           </div>
 
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
-            <div className="flex flex-col items-center">
-              <div className="relative w-16 h-16 mb-1 flex items-center justify-center">
-                <img src={laurelImage} alt="Laurel Wreath" className="w-full h-full object-contain" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl" style={{ transform: 'translate(-50%, -50%) rotate(15deg)' }}>
-                  🎩
-                </div>
+            <div className="flex flex-col items-center bg-white rounded-lg px-3 py-2">
+              <div className="text-2xl mb-0.5" style={{ transform: 'rotate(15deg)' }}>
+                🎩
               </div>
+              <img src={laurelImage} alt="Laurel Wreath" className="w-12 h-8 object-contain mb-1" />
               <div className="flex flex-col items-center">
                 <span className="font-serif text-base font-semibold tracking-wide text-foreground">AGENT KAMMER</span>
                 <span className="text-[0.5rem] font-medium tracking-widest text-muted-foreground">NYC REAL ESTATE</span>
