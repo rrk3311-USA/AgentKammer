@@ -245,7 +245,7 @@ export default function Home() {
         icon={TrendingDown}
       />
 
-      <section className="py-12 lg:py-16">
+      <section className="py-12 lg:py-16" data-testid="section-longest-on-market">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-4">
