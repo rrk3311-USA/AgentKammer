@@ -29,7 +29,7 @@ Preferred communication style: Simple, everyday language.
   - Replaced sidebar circular arrows for more elegant, centered design
 
 ### Live Interest Rate Ticker (October 31, 2025)
-- **Location**: Centered below bowtie navigation arrows in property listing sections
+- **Location**: Bottom-left of property listing sections (positioned at left edge of scroll controls)
 - **Display**: Current mortgage rate with "RATE:" label (uppercase)
 - **Design**: Small, elegant rectangular ticker with black/white minimal aesthetic
 - **Shape**: Rectangle (no rounded corners)
@@ -40,7 +40,7 @@ Preferred communication style: Simple, everyday language.
   - No icon (removed for minimalism)
 - **Updates**: Rate changes every 3 seconds (simulated live updates ranging 6.5% - 7.2%)
 - **Typography**: Very small text (10px label, 12px percentage), monospace font with tabular numbers
-- **Integration**: Appears in HorizontalPropertyScroll component below scroll controls
+- **Integration**: Appears in HorizontalPropertyScroll component at bottom-left while bowtie arrows remain centered
 
 ### Property Card Styling Updates (October 31, 2025)
 - **Background Color**: Subtle gray tint added for sophistication

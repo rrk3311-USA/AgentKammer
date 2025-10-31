@@ -95,41 +95,44 @@ export function HorizontalPropertyScroll({
             ))}
           </div>
 
-          {/* Bowtie Navigation */}
-          <div className="flex items-center justify-center gap-3 mt-4">
-            <button
-              onClick={() => scroll("left")}
-              className="group relative hover-elevate active-elevate-2 transition-all"
-              data-testid="button-scroll-left"
-              aria-label="Scroll left"
-            >
-              <svg width="40" height="40" viewBox="0 0 40 40" className="transition-transform group-hover:scale-110">
-                <path
-                  d="M 30 10 L 10 20 L 30 30 Z"
-                  fill="currentColor"
-                  className="text-primary/80 group-hover:text-primary"
-                />
-              </svg>
-            </button>
-            <button
-              onClick={() => scroll("right")}
-              className="group relative hover-elevate active-elevate-2 transition-all"
-              data-testid="button-scroll-right"
-              aria-label="Scroll right"
-            >
-              <svg width="40" height="40" viewBox="0 0 40 40" className="transition-transform group-hover:scale-110">
-                <path
-                  d="M 10 10 L 30 20 L 10 30 Z"
-                  fill="currentColor"
-                  className="text-primary/80 group-hover:text-primary"
-                />
-              </svg>
-            </button>
-          </div>
+          {/* Bottom Controls Container */}
+          <div className="relative mt-4">
+            {/* Current Interest Rate Ticker - Bottom Left */}
+            <div className="absolute left-0 bottom-0">
+              <LiveInterestRate />
+            </div>
 
-          {/* Current Interest Rate Ticker */}
-          <div className="flex items-center justify-center mt-3">
-            <LiveInterestRate />
+            {/* Bowtie Navigation - Centered */}
+            <div className="flex items-center justify-center gap-3">
+              <button
+                onClick={() => scroll("left")}
+                className="group relative hover-elevate active-elevate-2 transition-all"
+                data-testid="button-scroll-left"
+                aria-label="Scroll left"
+              >
+                <svg width="40" height="40" viewBox="0 0 40 40" className="transition-transform group-hover:scale-110">
+                  <path
+                    d="M 30 10 L 10 20 L 30 30 Z"
+                    fill="currentColor"
+                    className="text-primary/80 group-hover:text-primary"
+                  />
+                </svg>
+              </button>
+              <button
+                onClick={() => scroll("right")}
+                className="group relative hover-elevate active-elevate-2 transition-all"
+                data-testid="button-scroll-right"
+                aria-label="Scroll right"
+              >
+                <svg width="40" height="40" viewBox="0 0 40 40" className="transition-transform group-hover:scale-110">
+                  <path
+                    d="M 10 10 L 30 20 L 10 30 Z"
+                    fill="currentColor"
+                    className="text-primary/80 group-hover:text-primary"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
