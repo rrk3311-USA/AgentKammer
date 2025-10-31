@@ -16,14 +16,27 @@ Preferred communication style: Simple, everyday language.
 - Both service pages feature hero images with gradient overlays, comprehensive side panel content explaining benefits, and toast notifications on form submission
 - Service pages accessible via desktop navigation links in header and mobile menu
 
+### Market Analysis Report Feature
+- Added comprehensive "Get Your Listing Report" section with split layout (image left, form right)
+- Section includes market analysis preview card showing report features (Market Trends, Neighborhood Data, Price Analysis, Comparable Sales)
+- Form allows users to request reports by entering property address OR selecting a category (Luxury Condos, Penthouses, Townhouses, Co-ops, Waterfront, New Development)
+- Added "Get Report" button (FileText icon) to every property card
+- Clicking Get Report button opens email collection modal for instant market analysis PDF delivery
+- Modal includes property-specific context and toast notification on submission
+
 ### Interactive Filters
-- Added Midtown location filter to "Longest on Market" property section with three options: All, Above Midtown, Below Midtown
-- Filter implemented using clickable Badge components with real-time property list updates based on location data
-- Visual feedback shows selected state with primary color styling
+- Upgraded Midtown location filter to polished 3-part toggle design (All/Above Midtown/Below Midtown)
+- Toggle features rounded background container (bg-muted with shadow-inner) for unified appearance
+- Active state shows primary background with black text and shadow
+- Inactive states use muted foreground with hover elevation effects
+- Filter only applies to "Longest on Market" section, preserving other property sections
 
 ### Design Updates
 - Changed featured listing section icons from circular (`rounded-full`) to rounded rectangles (`rounded-lg`) for a more modern, structured appearance
-- Updated "Search Properties" primary CTA button to use black text for improved contrast and visual hierarchy
+- Updated all primary CTA buttons (Sign In, Search Properties) to use black text for improved contrast against gold background
+- Updated Agent Kammer logo to new version with white background and gold accent on top hat detail
+- Added Footer component with subtle gold gradient line above it (from-transparent via-primary to-transparent)
+- Footer includes four-column layout with company info, services, company links, and social connections
 
 ## System Architecture
 
@@ -131,11 +144,14 @@ Preferred communication style: Simple, everyday language.
 
 ### Homepage (`/`)
 - Hero search interface with location and property type filters
-- Featured Properties section with curated luxury listings
+- Featured Properties section with curated luxury listings (each card has View Details + Get Report buttons)
 - Most Discounted section showing price-reduced properties
-- Longest on Market section with Midtown location filter (All/Above/Below)
+- Longest on Market section with 3-part toggle filter (All/Above Midtown/Below Midtown)
 - Email digest preview component
 - App download section with iOS/Android badges
+- Get Your Listing Report section with market analysis preview and request form
+- Final CTA section encouraging users to get started
+- Footer with gold gradient line and four-column layout
 - LiveTicker displaying real-time property data across full width
 - FloatingChatAssistant positioned bottom-right for AI concierge support
 
