@@ -11,6 +11,7 @@ import Home from "@/pages/Home";
 import SavedSearches from "@/pages/SavedSearches";
 import GetPreapproved from "@/pages/GetPreapproved";
 import GetHomeValue from "@/pages/GetHomeValue";
+import BrokerRegistration from "@/pages/BrokerRegistration";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/saved" component={SavedSearches} />
       <Route path="/services/get-preapproved" component={GetPreapproved} />
       <Route path="/services/get-home-value" component={GetHomeValue} />
+      <Route path="/broker-registration" component={BrokerRegistration} />
       <Route component={NotFound} />
     </Switch>
   );

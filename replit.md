@@ -58,6 +58,15 @@ Preferred communication style: Simple, everyday language.
   - Just Browsing (6+ months)
 - Helps qualify leads and personalize the experience based on buyer urgency
 
+### Broker Registration Page
+- **New Page**: `/broker-registration` for brokers to join the network
+- **Video Pitch Upload**: Brokers upload 60-90 second "about me" videos to pitch themselves
+- **Comprehensive Profile**: Fields include personal info, license number, years of experience, brokerage firm, specialization, neighborhoods covered
+- **Professional Bio**: Text area for brokers to describe their approach and expertise
+- **Social Links**: Optional LinkedIn and personal website fields
+- **Client Choice Model**: Users choose brokers based on watching their pitch videos
+- **Premium Network**: Info cards highlighting benefits (Premium Network, Qualified Leads, Client Choice)
+
 ## System Architecture
 
 ### Frontend Architecture
