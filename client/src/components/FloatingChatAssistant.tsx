@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer } from "lucide-react";
+import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import agentAvatar from "@assets/generated_images/Happy_concierge_sunrise_party_portrait_7bbb9fd2.png";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import agentAvatar from "@assets/generated_images/Professional_NYC_concierge_portrait_c8ac1382.png";
 
 interface Message {
   id: string;
@@ -26,6 +27,7 @@ export function FloatingChatAssistant() {
       timestamp: new Date(),
     },
   ]);
+  const [activeTab, setActiveTab] = useState("chat");
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,18 +36,20 @@ export function FloatingChatAssistant() {
     }
   }, [messages]);
 
-  const handleSend = () => {
-    if (!message.trim()) return;
+  const handleSend = (text?: string) => {
+    const messageText = text || message;
+    if (!messageText.trim()) return;
 
     const newMessage: Message = {
       id: Date.now().toString(),
-      text: message,
+      text: messageText,
       sender: "user",
       timestamp: new Date(),
     };
 
     setMessages((prev) => [...prev, newMessage]);
     setMessage("");
+    setActiveTab("chat");
 
     // TODO: Replace with real agentic AI response
     setTimeout(() => {
@@ -58,6 +62,15 @@ export function FloatingChatAssistant() {
       setMessages((prev) => [...prev, agentResponse]);
     }, 1000);
   };
+
+  const popularPrompts = [
+    { id: "best-deal", icon: DollarSign, label: "Best Deal Right Now", prompt: "Show me the best deal on the market right now" },
+    { id: "longest-market", icon: Clock, label: "Longest on Market", prompt: "Which properties have been on the market the longest?" },
+    { id: "safest-location", icon: Shield, label: "Safest Locations", prompt: "What are the safest neighborhoods in Manhattan?" },
+    { id: "school-zone", icon: GraduationCap, label: "Best School Zones", prompt: "Show me properties in the best school zones" },
+    { id: "price-reduced", icon: TrendingDown, label: "Recently Reduced", prompt: "Show me properties with recent price reductions" },
+    { id: "new-listings", icon: Home, label: "New Listings", prompt: "What are the newest listings in Manhattan?" },
+  ];
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -166,29 +179,60 @@ export function FloatingChatAssistant() {
 
         {!isMinimized && (
           <>
-            <ScrollArea className="h-[460px] p-4 bg-background" ref={scrollRef as any}>
-              <div className="space-y-4">
-                {messages.map((msg) => (
-                  <div
-                    key={msg.id}
-                    className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
-                  >
-                    <div
-                      className={`max-w-[80%] rounded-2xl px-4 py-2 ${
-                        msg.sender === "user"
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-muted text-foreground border border-border"
-                      }`}
-                    >
-                      <p className="text-sm">{msg.text}</p>
-                      <p className="text-xs opacity-60 mt-1">
-                        {msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                      </p>
-                    </div>
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="flex flex-col h-[536px]">
+              <TabsList className="w-full grid grid-cols-2 rounded-none bg-muted/50">
+                <TabsTrigger value="prompts" data-testid="tab-prompts">Popular Prompts</TabsTrigger>
+                <TabsTrigger value="chat" data-testid="tab-chat">Chat</TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="prompts" className="flex-1 overflow-hidden m-0">
+                <ScrollArea className="h-[436px] p-4 bg-background">
+                  <div className="grid grid-cols-2 gap-2">
+                    {popularPrompts.map((prompt) => (
+                      <Button
+                        key={prompt.id}
+                        variant="outline"
+                        className="h-auto p-3 flex flex-col items-center gap-2 text-center hover-elevate active-elevate-2"
+                        onClick={() => handleSend(prompt.prompt)}
+                        data-testid={`button-prompt-${prompt.id}`}
+                      >
+                        <prompt.icon className="h-5 w-5 text-primary" />
+                        <span className="text-xs leading-tight">{prompt.label}</span>
+                      </Button>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </ScrollArea>
+                  <p className="text-xs text-muted-foreground mt-4 text-center">
+                    Click any prompt to start a conversation
+                  </p>
+                </ScrollArea>
+              </TabsContent>
+
+              <TabsContent value="chat" className="flex-1 overflow-hidden m-0">
+                <ScrollArea className="h-[436px] p-4 bg-background" ref={scrollRef as any}>
+                  <div className="space-y-4">
+                    {messages.map((msg) => (
+                      <div
+                        key={msg.id}
+                        className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
+                      >
+                        <div
+                          className={`max-w-[80%] rounded-2xl px-4 py-2 ${
+                            msg.sender === "user"
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-muted text-foreground border border-border"
+                          }`}
+                        >
+                          <p className="text-sm">{msg.text}</p>
+                          <p className="text-xs opacity-60 mt-1">
+                            {msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </ScrollArea>
+              </TabsContent>
+            </Tabs>
 
             <div className="p-4 border-t bg-background">
               <div className="flex gap-2">
@@ -202,7 +246,7 @@ export function FloatingChatAssistant() {
                 />
                 <Button
                   size="icon"
-                  onClick={handleSend}
+                  onClick={() => handleSend()}
                   disabled={!message.trim()}
                   data-testid="button-send-message"
                 >
