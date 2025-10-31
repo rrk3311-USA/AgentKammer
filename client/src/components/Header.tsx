@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Moon, Sun, Heart, Menu, X, Building2 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
-import logoImage from "@assets/generated_images/Gradient_gold_laurel_with_tilted_hat_9fdfcf18.png";
+import laurelImage from "@assets/Screenshot 2025-10-28 at 11.12.20 PM_1761890632479.png";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -55,7 +55,12 @@ export function Header() {
 
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
             <div className="flex flex-col items-center">
-              <img src={logoImage} alt="Agent Kammer Logo" className="w-16 h-16 mb-1" />
+              <div className="relative w-16 h-16 mb-1 flex items-center justify-center">
+                <img src={laurelImage} alt="Laurel Wreath" className="w-full h-full object-contain" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl" style={{ transform: 'translate(-50%, -50%) rotate(15deg)' }}>
+                  🎩
+                </div>
+              </div>
               <div className="flex flex-col items-center">
                 <span className="font-serif text-base font-semibold tracking-wide text-foreground">AGENT KAMMER</span>
                 <span className="text-[0.5rem] font-medium tracking-widest text-muted-foreground">NYC REAL ESTATE</span>
