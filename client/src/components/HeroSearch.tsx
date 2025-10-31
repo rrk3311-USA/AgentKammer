@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
-import { Search, MapPin, Sparkles, MousePointer } from "lucide-react";
+import { Search, MapPin, Sparkles, MousePointer, Wand2 } from "lucide-react";
 import heroImage from "@assets/IMG_9579_1761939754000.jpeg";
 
 const propertyTypes = ["Condo", "Co-op", "Townhouse", "Penthouse"];
@@ -71,9 +71,16 @@ export function HeroSearch() {
             <p className="text-sm text-white font-light leading-relaxed mb-3 max-w-2xl mx-auto">
               Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
             </p>
-            <p className="text-lg text-white/90 font-light mb-3">
-              Live where you belong
-            </p>
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <p className="text-lg text-white font-bold">
+                Live where you belong
+              </p>
+              <div className="relative">
+                <Wand2 className="w-5 h-5 text-primary animate-pulse" />
+                <Sparkles className="w-3 h-3 text-primary/80 absolute -top-1 -right-1 animate-ping" style={{ animationDuration: '1.5s' }} />
+                <Sparkles className="w-2 h-2 text-primary/60 absolute -bottom-1 -left-1 animate-pulse" style={{ animationDelay: '0.3s' }} />
+              </div>
+            </div>
             
             <div className="flex items-center justify-center gap-1 text-primary mb-2">
               <Sparkles className="w-2 h-2 animate-pulse opacity-60" />
