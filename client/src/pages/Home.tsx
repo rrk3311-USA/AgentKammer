@@ -256,7 +256,7 @@ export default function Home() {
         icon={TrendingDown}
       />
 
-      <section className="py-10 lg:py-12 my-8 bg-muted/30" data-testid="section-longest-on-market">
+      <section className="py-10 lg:py-12 my-8 bg-gradient-to-br from-white via-slate-50/50 to-slate-100/40 dark:from-slate-900 dark:via-slate-900/50 dark:to-slate-800/40" data-testid="section-longest-on-market">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-4">

@@ -56,7 +56,7 @@ export function HorizontalPropertyScroll({
   };
 
   return (
-    <section className="py-10 lg:py-12 my-8 bg-muted/30 relative overflow-hidden">
+    <section className="py-10 lg:py-12 my-8 bg-gradient-to-br from-white via-slate-50/50 to-slate-100/40 dark:from-slate-900 dark:via-slate-900/50 dark:to-slate-800/40 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4">

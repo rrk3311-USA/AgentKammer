@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Heart, Bed, Bath, Maximize, MapPin, ArrowRight } from "lucide-react";
+import { Heart, Bed, Bath, Maximize, MapPin, ArrowRight, Clock } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { HappyDocIcon } from "./HappyDocIcon";
@@ -19,6 +19,7 @@ interface PropertyCardProps {
   baths: number;
   sqft: number;
   propertyType: string;
+  daysOnMarket?: number;
 }
 
 export function PropertyCard({
@@ -31,6 +32,7 @@ export function PropertyCard({
   baths,
   sqft,
   propertyType,
+  daysOnMarket,
 }: PropertyCardProps) {
   const { toast } = useToast();
   const [isFavorite, setIsFavorite] = useState(false);
@@ -97,10 +99,16 @@ export function PropertyCard({
             />
           </Button>
         </div>
-        <div className="absolute bottom-4 left-4">
+        <div className="absolute bottom-4 left-4 flex gap-2">
           <Badge variant="secondary" className="backdrop-blur-md bg-background/90">
             {propertyType}
           </Badge>
+          {daysOnMarket && (
+            <Badge variant="secondary" className="backdrop-blur-md bg-background/90 flex items-center gap-1">
+              <Clock className="h-3 w-3" />
+              {daysOnMarket}d
+            </Badge>
+          )}
         </div>
       </div>
 
