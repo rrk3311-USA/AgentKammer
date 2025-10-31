@@ -6,6 +6,39 @@ Agent Kammer is a premium NYC real estate platform focused on luxury Manhattan p
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes (October 31, 2025)
+
+### NYC Command Center Redesign
+- **Compact Layout**: Reduced section size by consolidating three features into single card
+- **Horizontal Layout**: All three features (Instant Alerts, Smart Search, Market Analytics) displayed side-by-side in one container
+- **Reduced Padding**: Smaller py-12 lg:py-16 (down from py-20 lg:py-32) for less vertical space
+- **Unified Description**: Combined text under one card instead of three separate cards
+
+### Market Analysis Report Luxury Redesign
+- **Premium Background**: Generated luxury white Carrara marble desk image with Manhattan skyline visible through window
+- **Sophisticated Aesthetic**: High-end real estate office setting with natural lighting and elegant shadows
+- **Enhanced Visual Card**: Larger, more prominent overlay card with gold accents and improved spacing
+- **Professional Photography**: Commercial-quality image (`Luxury_marble_desk_Manhattan_view_647cbb4e.png`) replacing generic stock photo
+- **Note**: Video asset `DB6A97E2-CB97-429E-AB9E-8D9DA8946139_1761929696844.mp4` available as potential pamphlet cover content
+
+### Voice Chat & Avatar Updates
+- **Voice Input Feature**: Added voice-to-text capability in chat assistant using Web Speech API
+  - Microphone button toggles voice recording (works in Chrome, Edge, Safari)
+  - Visual feedback: button pulses when listening, input shows "Listening..." placeholder
+  - Automatic transcription fills text input, ready to send
+  - Status message shows "🎤 Listening... Speak now" while active
+- **New Avatar**: Generated professional NYC concierge portrait with tilted top hat and gold monocle
+  - Avatar image: `NYC_concierge_with_hat_monocle_d3f71fab.png`
+  - Maintains sophisticated luxury branding with Agent K theme (top hat matches logo)
+- **Hero Section Divider**: Replaced code-themed elements with decorative sparkles and mouse pointer icons
+  - Tiny animated sparkles and mouse clicks in staggered pulse animation
+  - Creates subtle divider effect below agentic AI tagline
+
+### Floating Chat Assistant Enhancement
+- **Tabbed Interface**: Two-tab system (Popular Prompts | Chat)
+- **6 Quick Prompt Buttons**: Pre-configured searches in 2-column grid (Best Deal, Longest on Market, Safest Locations, Best School Zones, Recently Reduced, New Listings)
+- Clicking any prompt button automatically sends message and switches to chat tab
+
 ## System Architecture
 
 ### Frontend Architecture

@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { TrendingUp, MapPin, DollarSign, Home as HomeIcon } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import reportImage from "@assets/stock_images/professional_market__a4ee88f4.jpg";
+import reportImage from "@assets/generated_images/Luxury_marble_desk_Manhattan_view_647cbb4e.png";
 import { HappyDocIcon } from "./HappyDocIcon";
 
 export function ListingReportSection() {
@@ -28,37 +28,36 @@ export function ListingReportSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-2xl blur-3xl" />
             <img
               src={reportImage}
-              alt="Market Analysis Report Preview"
-              className="relative rounded-2xl shadow-2xl w-full h-[400px] object-cover"
+              alt="Luxury Marble Desk with Market Reports"
+              className="relative rounded-2xl shadow-2xl w-full h-[500px] object-cover"
             />
-            <div className="absolute bottom-6 left-6 right-6 bg-background/95 backdrop-blur-md rounded-xl p-4 shadow-xl border border-border">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <HappyDocIcon className="h-5 w-5 text-primary" />
+            <div className="absolute bottom-8 left-8 right-8 bg-background/95 backdrop-blur-lg rounded-xl p-5 shadow-2xl border-2 border-primary/20">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center">
+                  <HappyDocIcon className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="font-serif font-semibold">Market Analysis Report</p>
-                  <p className="text-xs text-muted-foreground">Comprehensive Property Insights</p>
+                  <p className="font-serif font-semibold text-lg">Market Analysis Report</p>
+                  <p className="text-sm text-muted-foreground">Comprehensive Property Insights</p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2 text-xs">
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <TrendingUp className="h-3 w-3" />
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <TrendingUp className="h-4 w-4 text-primary" />
                   <span>Market Trends</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <MapPin className="h-3 w-3" />
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <MapPin className="h-4 w-4 text-primary" />
                   <span>Neighborhood Data</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <DollarSign className="h-3 w-3" />
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <DollarSign className="h-4 w-4 text-primary" />
                   <span>Price Analysis</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-muted-foreground">
-                  <HomeIcon className="h-3 w-3" />
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <HomeIcon className="h-4 w-4 text-primary" />
                   <span>Comparable Sales</span>
                 </div>
               </div>
