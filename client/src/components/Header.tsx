@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Moon, Sun, Heart, Menu, X, Building2 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
-import logoImage from "@assets/generated_images/Agent_Kammer_logo_with_top_hat_99832bd4.png";
+import logoImage from "@assets/generated_images/Gold_laurel_wreath_with_tilted_top_hat_0561e3ed.png";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -55,7 +55,7 @@ export function Header() {
 
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
             <div className="flex flex-col items-center">
-              <div className="text-3xl mb-1">🎩</div>
+              <img src={logoImage} alt="Agent Kammer Logo" className="w-16 h-16 mb-1" />
               <div className="flex flex-col items-center">
                 <span className="font-serif text-2xl font-semibold tracking-wide text-foreground">AGENT KAMMER</span>
                 <span className="text-xs font-medium tracking-widest text-muted-foreground">NYC REAL ESTATE</span>
