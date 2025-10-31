@@ -1,9 +1,8 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Heart, Menu, X, Building2 } from "lucide-react";
+import { Moon, Sun, Heart, Menu, X, Building2, Sparkles } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
-import laurelImage from "@assets/generated_images/Black_laurel_wreath_logo_5c3d5366.png";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -54,11 +53,13 @@ export function Header() {
           </div>
 
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
-            <div className="flex flex-col items-center bg-white rounded-lg px-3 py-2">
-              <div className="text-2xl mb-0.5" style={{ transform: 'rotate(15deg)' }}>
+            <div className="flex flex-col items-center bg-white rounded-lg px-3 py-2 relative">
+              <div className="absolute -top-1 -right-1">
+                <Sparkles className="w-3 h-3 text-primary" />
+              </div>
+              <div className="text-2xl mb-1" style={{ transform: 'rotate(15deg)' }}>
                 🎩
               </div>
-              <img src={laurelImage} alt="Laurel Wreath" className="w-12 h-8 object-contain mb-1" />
               <div className="flex flex-col items-center">
                 <span className="font-serif text-base font-semibold tracking-wide text-foreground">AGENT KAMMER</span>
                 <span className="text-[0.5rem] font-medium tracking-widest text-muted-foreground">NYC REAL ESTATE</span>
