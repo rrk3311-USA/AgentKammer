@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
 import { Search, MapPin, Sparkles, MousePointer } from "lucide-react";
-import heroImage from "@assets/IMG_9579_1761939754000.jpeg";
+import heroImage from "@assets/generated_images/Luxury_marble_stone_background_83a62bcc.png";
 
 const propertyTypes = ["Condo", "Co-op", "Townhouse", "Penthouse"];
 const bedrooms = ["Studio", "1", "2", "3", "4+"];
