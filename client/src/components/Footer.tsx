@@ -1,3 +1,6 @@
+import { SiReplit, SiOpenai, SiGoogle, SiMeta } from "react-icons/si";
+import { Brain } from "lucide-react";
+
 export function Footer() {
   return (
     <footer className="relative">
@@ -41,11 +44,38 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <div className="bg-[#0a1628] py-3">
+      <div className="bg-[#0a1628] py-6">
         <div className="max-w-7xl mx-auto px-6">
-          <p className="text-center text-sm text-white">
-            🗽Copyright 2025 - Agent Kammer ® | Powered by Replit
-          </p>
+          <div className="flex flex-col items-center gap-4">
+            <p className="text-center text-sm text-white/80">
+              Powered by AI
+            </p>
+            <div className="flex items-center gap-6 flex-wrap justify-center">
+              <div className="flex items-center gap-2 text-white/60 hover:text-white transition-colors">
+                <SiReplit className="h-5 w-5" />
+                <span className="text-xs">Replit</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/60 hover:text-white transition-colors">
+                <Brain className="h-5 w-5" />
+                <span className="text-xs">Anthropic</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/60 hover:text-white transition-colors">
+                <SiOpenai className="h-5 w-5" />
+                <span className="text-xs">OpenAI</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/60 hover:text-white transition-colors">
+                <SiGoogle className="h-5 w-5" />
+                <span className="text-xs">Google AI</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/60 hover:text-white transition-colors">
+                <SiMeta className="h-5 w-5" />
+                <span className="text-xs">Meta AI</span>
+              </div>
+            </div>
+            <p className="text-center text-xs text-white/60 mt-2">
+              Copyright 2025 - Agent Kammer ®
+            </p>
+          </div>
         </div>
       </div>
     </footer>
