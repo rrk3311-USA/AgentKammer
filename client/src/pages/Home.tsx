@@ -256,9 +256,9 @@ export default function Home() {
         icon={TrendingDown}
       />
 
-      <section className="py-12 lg:py-16" data-testid="section-longest-on-market">
+      <section className="py-10 lg:py-12 my-8 bg-muted/30" data-testid="section-longest-on-market">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-start justify-between mb-8">
+          <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 rounded-lg bg-card border border-border flex items-center justify-center shadow-lg">
                 <Clock className="h-6 w-6 text-primary animate-clock" />
@@ -270,9 +270,9 @@ export default function Home() {
                 <p className="text-muted-foreground text-sm">Prime opportunities - properties with extended market presence</p>
               </div>
             </div>
-            <div className="flex flex-col bg-muted rounded-2xl p-1 shadow-inner gap-1">
+            <div className="flex items-center bg-muted rounded-2xl p-1 shadow-inner gap-1">
               <button
-                className={`px-6 py-2 rounded-xl text-sm font-medium transition-all ${
+                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                   midtownFilter === "above" 
                     ? "bg-primary text-black shadow-md" 
                     : "text-muted-foreground hover-elevate"
@@ -283,7 +283,7 @@ export default function Home() {
                 Above Midtown
               </button>
               <button
-                className={`px-6 py-2 rounded-xl text-sm font-medium transition-all ${
+                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                   midtownFilter === "midtown" 
                     ? "bg-primary text-black shadow-md" 
                     : "text-muted-foreground hover-elevate"
@@ -294,7 +294,7 @@ export default function Home() {
                 Midtown
               </button>
               <button
-                className={`px-6 py-2 rounded-xl text-sm font-medium transition-all ${
+                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                   midtownFilter === "below" 
                     ? "bg-primary text-black shadow-md" 
                     : "text-muted-foreground hover-elevate"
