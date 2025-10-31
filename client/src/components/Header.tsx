@@ -2,6 +2,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Moon, Sun, Heart, Menu, X, Building2, Sparkles } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
+import { LiveInterestRate } from "./LiveInterestRate";
 import { useState } from "react";
 
 export function Header() {
@@ -13,6 +14,9 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex h-24 items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <LiveInterestRate />
+          </div>
           <div className="hidden md:flex items-center gap-3">
             <Button
               variant="ghost"
