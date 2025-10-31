@@ -109,7 +109,7 @@ export function HorizontalPropertyScroll({
                   <path
                     d="M 30 10 L 10 20 L 30 30 Z"
                     fill="currentColor"
-                    className="text-primary/80 group-hover:text-primary"
+                    className="text-[#0a1628] dark:text-white/80 group-hover:text-[#0a1628] dark:group-hover:text-white"
                   />
                 </svg>
               </button>
@@ -123,7 +123,7 @@ export function HorizontalPropertyScroll({
                   <path
                     d="M 10 10 L 30 20 L 10 30 Z"
                     fill="currentColor"
-                    className="text-primary/80 group-hover:text-primary"
+                    className="text-[#0a1628] dark:text-white/80 group-hover:text-[#0a1628] dark:group-hover:text-white"
                   />
                 </svg>
               </button>

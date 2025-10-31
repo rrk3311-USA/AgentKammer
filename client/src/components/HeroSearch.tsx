@@ -71,12 +71,9 @@ export function HeroSearch() {
             <p className="text-sm text-white font-light leading-relaxed mb-3 max-w-2xl mx-auto">
               Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
             </p>
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <p className="text-lg text-white font-bold">
-                Live where you belong
-              </p>
-              <span className="text-2xl">👈</span>
-            </div>
+            <p className="font-serif text-2xl text-white font-semibold mb-3">
+              Live where you belong
+            </p>
             
             <div className="flex items-center justify-center gap-1 text-primary mb-2">
               <Sparkles className="w-2 h-2 animate-pulse opacity-60" />

@@ -28,7 +28,7 @@ The platform features a visual-first approach with large images and sophisticate
 - A tabbed floating chat assistant with quick prompt buttons and voice input.
 - A hero section with two-line heading ("your perfect home / Discovered"), full-width navy horizontal bar containing AI description and bold "Live where you belong" subtitle with animated magic wand icon and glittering sparkles, glassmorphism search card over luxury property photo background (IMG_9579, 130% zoom).
 - A redesign of the "NYC Command Center" with a compact, horizontal layout for Instant Alerts, Smart Search, and Market Analytics.
-- Property listing UI updates, including price display overlay with time on market badge next to price, deal score badge next to property type, enhanced category backgrounds, and "Bowtie Navigation" for scrolling.
+- Property listing UI updates, including price display overlay with time on market badge next to price, deal score badge next to property type, enhanced category backgrounds, and "Bowtie Navigation" with dark navy arrows for scrolling.
 - A Live Interest Rate Ticker in the header with a minimal, animated design.
 - Enhanced property card styling with pure white backgrounds (light mode) and pronounced drop shadows.
 - Decorative sparkles and mouse pointer icons for visual dividers.

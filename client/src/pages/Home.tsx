@@ -1,5 +1,6 @@
 import { HeroSearch } from "@/components/HeroSearch";
 import { HorizontalPropertyScroll } from "@/components/HorizontalPropertyScroll";
+import { PropertyCard } from "@/components/PropertyCard";
 import { EmailDigestPreview } from "@/components/EmailDigestPreview";
 import { AppDownload } from "@/components/AppDownload";
 import { AgenticActionsInfographic } from "@/components/AgenticActionsInfographic";
@@ -268,61 +269,104 @@ export default function Home() {
         icon={TrendingDown}
       />
 
-      <section className="py-10 lg:py-12 my-8 bg-gradient-to-br from-slate-50 via-blue-50/60 to-slate-100/60 dark:from-slate-900 dark:via-slate-900/50 dark:to-slate-800/40" data-testid="section-longest-on-market">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-6">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-14 h-14 rounded-lg bg-card border border-border flex items-center justify-center shadow-lg">
-                <Clock className="h-6 w-6 text-primary animate-clock" />
-              </div>
-              <div>
-                <h2 className="font-serif text-3xl lg:text-4xl font-semibold mb-1">
-                  Longest on Market
-                </h2>
-                <p className="text-muted-foreground text-sm">Prime opportunities - properties with extended market presence</p>
-              </div>
+      <section className="my-8 bg-gradient-to-br from-slate-50 via-blue-50/60 to-slate-100/60 dark:from-slate-900 dark:via-slate-900/50 dark:to-slate-800/40" data-testid="section-longest-on-market">
+        <div className="max-w-7xl mx-auto px-6 pt-10 lg:pt-12 pb-4">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-14 h-14 rounded-lg bg-card border border-border flex items-center justify-center shadow-lg">
+              <Clock className="h-6 w-6 text-primary animate-clock" />
             </div>
-            <div className="flex items-center bg-muted rounded-2xl p-1 shadow-inner gap-1 w-fit">
-              <button
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                  midtownFilter === "above" 
-                    ? "bg-primary text-black shadow-md" 
-                    : "text-muted-foreground hover-elevate"
-                }`}
-                onClick={() => setMidtownFilter("above")}
-                data-testid="badge-filter-above-midtown"
-              >
-                Above Midtown
-              </button>
-              <button
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                  midtownFilter === "midtown" 
-                    ? "bg-primary text-black shadow-md" 
-                    : "text-muted-foreground hover-elevate"
-                }`}
-                onClick={() => setMidtownFilter("midtown")}
-                data-testid="badge-filter-midtown"
-              >
-                Midtown
-              </button>
-              <button
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                  midtownFilter === "below" 
-                    ? "bg-primary text-black shadow-md" 
-                    : "text-muted-foreground hover-elevate"
-                }`}
-                onClick={() => setMidtownFilter("below")}
-                data-testid="badge-filter-below-midtown"
-              >
-                Below Midtown
-              </button>
+            <div>
+              <h2 className="font-serif text-3xl lg:text-4xl font-semibold mb-1">
+                Longest on Market
+              </h2>
+              <p className="text-muted-foreground text-sm">Prime opportunities - properties with extended market presence</p>
             </div>
           </div>
+          <div className="flex items-center bg-muted rounded-2xl p-1 shadow-inner gap-1 w-fit">
+            <button
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                midtownFilter === "above" 
+                  ? "bg-primary text-black shadow-md" 
+                  : "text-muted-foreground hover-elevate"
+              }`}
+              onClick={() => setMidtownFilter("above")}
+              data-testid="badge-filter-above-midtown"
+            >
+              Above Midtown
+            </button>
+            <button
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                midtownFilter === "midtown" 
+                  ? "bg-primary text-black shadow-md" 
+                  : "text-muted-foreground hover-elevate"
+              }`}
+              onClick={() => setMidtownFilter("midtown")}
+              data-testid="badge-filter-midtown"
+            >
+              Midtown
+            </button>
+            <button
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                midtownFilter === "below" 
+                  ? "bg-primary text-black shadow-md" 
+                  : "text-muted-foreground hover-elevate"
+              }`}
+              onClick={() => setMidtownFilter("below")}
+              data-testid="badge-filter-below-midtown"
+            >
+              Below Midtown
+            </button>
+          </div>
         </div>
-        <HorizontalPropertyScroll
-          title=""
-          properties={longestOnMarket}
-        />
+        <div className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 max-w-7xl mx-auto px-6" style={{ scrollbarWidth: "none" }}>
+          {longestOnMarket.map((property) => (
+            <div key={property.id} className="flex-none w-[350px]">
+              <PropertyCard {...property} />
+            </div>
+          ))}
+        </div>
+        <div className="max-w-7xl mx-auto px-6 pb-10 lg:pb-12">
+          <div className="flex items-center justify-center gap-3 mt-4">
+            <button
+              onClick={() => {
+                const container = document.querySelector('[data-testid="section-longest-on-market"] .overflow-x-auto');
+                if (container) {
+                  container.scrollBy({ left: -400, behavior: 'smooth' });
+                }
+              }}
+              className="group relative hover-elevate active-elevate-2 transition-all"
+              data-testid="button-scroll-left"
+              aria-label="Scroll left"
+            >
+              <svg width="40" height="40" viewBox="0 0 40 40" className="transition-transform group-hover:scale-110">
+                <path
+                  d="M 30 10 L 10 20 L 30 30 Z"
+                  fill="currentColor"
+                  className="text-[#0a1628] dark:text-white/80 group-hover:text-[#0a1628] dark:group-hover:text-white"
+                />
+              </svg>
+            </button>
+            <button
+              onClick={() => {
+                const container = document.querySelector('[data-testid="section-longest-on-market"] .overflow-x-auto');
+                if (container) {
+                  container.scrollBy({ left: 400, behavior: 'smooth' });
+                }
+              }}
+              className="group relative hover-elevate active-elevate-2 transition-all"
+              data-testid="button-scroll-right"
+              aria-label="Scroll right"
+            >
+              <svg width="40" height="40" viewBox="0 0 40 40" className="transition-transform group-hover:scale-110">
+                <path
+                  d="M 10 10 L 30 20 L 10 30 Z"
+                  fill="currentColor"
+                  className="text-[#0a1628] dark:text-white/80 group-hover:text-[#0a1628] dark:group-hover:text-white"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
       </section>
 
       <AppDownload />
