@@ -3,6 +3,8 @@ import { HorizontalPropertyScroll } from "@/components/HorizontalPropertyScroll"
 import { EmailDigestPreview } from "@/components/EmailDigestPreview";
 import { AppDownload } from "@/components/AppDownload";
 import { LuxuryBackground } from "@/components/LuxuryBackground";
+import { ListingReportSection } from "@/components/ListingReportSection";
+import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TrendingDown, Clock, Sparkles } from "lucide-react";
@@ -259,31 +261,40 @@ export default function Home() {
                 <p className="text-muted-foreground text-sm">Prime opportunities - properties with extended market presence</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Badge 
-                variant={midtownFilter === "all" ? "default" : "outline"}
-                className="cursor-pointer px-4 py-2"
+            <div className="flex items-center bg-muted rounded-full p-1 shadow-inner">
+              <button
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                  midtownFilter === "all" 
+                    ? "bg-primary text-black shadow-md" 
+                    : "text-muted-foreground hover-elevate"
+                }`}
                 onClick={() => setMidtownFilter("all")}
                 data-testid="badge-filter-all"
               >
                 All
-              </Badge>
-              <Badge 
-                variant={midtownFilter === "above" ? "default" : "outline"}
-                className="cursor-pointer px-4 py-2"
+              </button>
+              <button
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                  midtownFilter === "above" 
+                    ? "bg-primary text-black shadow-md" 
+                    : "text-muted-foreground hover-elevate"
+                }`}
                 onClick={() => setMidtownFilter("above")}
                 data-testid="badge-filter-above-midtown"
               >
                 Above Midtown
-              </Badge>
-              <Badge 
-                variant={midtownFilter === "below" ? "default" : "outline"}
-                className="cursor-pointer px-4 py-2"
+              </button>
+              <button
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                  midtownFilter === "below" 
+                    ? "bg-primary text-black shadow-md" 
+                    : "text-muted-foreground hover-elevate"
+                }`}
                 onClick={() => setMidtownFilter("below")}
                 data-testid="badge-filter-below-midtown"
               >
                 Below Midtown
-              </Badge>
+              </button>
             </div>
           </div>
         </div>
@@ -297,6 +308,8 @@ export default function Home() {
       <AppDownload />
 
         <EmailDigestPreview properties={digestProperties} />
+
+        <ListingReportSection />
 
         <section className="py-16 lg:py-24 bg-[#0a1628] text-white">
           <div className="max-w-4xl mx-auto px-6 text-center">
@@ -316,6 +329,8 @@ export default function Home() {
             </Button>
           </div>
         </section>
+
+        <Footer />
       </div>
     </div>
   );

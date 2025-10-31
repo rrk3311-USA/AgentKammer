@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Moon, Sun, Heart, Menu, X } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
-import logoImage from "@assets/generated_images/Agent_Kammer_transparent_logo_bf36d566.png";
+import logoImage from "@assets/generated_images/Agent_Kammer_luxury_logo_9b6279d8.png";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -56,7 +56,7 @@ export function Header() {
             </Button>
             <Button
               variant="default"
-              className="hidden md:flex rounded-full"
+              className="hidden md:flex rounded-full text-black"
               data-testid="button-sign-in"
             >
               Sign In
@@ -118,7 +118,7 @@ export function Header() {
             </div>
             <Button
               variant="default"
-              className="w-full rounded-full"
+              className="w-full rounded-full text-black"
               data-testid="button-mobile-sign-in"
             >
               Sign In

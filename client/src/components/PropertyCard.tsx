@@ -1,8 +1,12 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Heart, Bed, Bath, Maximize, MapPin, ArrowRight } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Heart, Bed, Bath, Maximize, MapPin, ArrowRight, FileText } from "lucide-react";
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 interface PropertyCardProps {
   id: string;
@@ -27,7 +31,10 @@ export function PropertyCard({
   sqft,
   propertyType,
 }: PropertyCardProps) {
+  const { toast } = useToast();
   const [isFavorite, setIsFavorite] = useState(false);
+  const [showReportDialog, setShowReportDialog] = useState(false);
+  const [email, setEmail] = useState("");
 
   const formatPrice = (value: number) => {
     if (value >= 1000000) {
@@ -45,6 +52,23 @@ export function PropertyCard({
 
   const handleViewDetails = () => {
     console.log(`View details for property ${id}`);
+  };
+
+  const handleGetReport = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowReportDialog(true);
+  };
+
+  const handleSubmitReport = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(`Report requested for property ${id} to email: ${email}`);
+    toast({
+      title: "Report Requested!",
+      description: "Your comprehensive market analysis PDF will be sent to your email shortly.",
+    });
+    setShowReportDialog(false);
+    setEmail("");
   };
 
   return (
@@ -106,17 +130,59 @@ export function PropertyCard({
         </div>
       </CardContent>
 
-      <CardFooter className="p-6 pt-0">
+      <CardFooter className="p-6 pt-0 flex gap-2">
         <Button
           variant="outline"
-          className="w-full rounded-full"
+          className="flex-1 rounded-full"
           onClick={handleViewDetails}
           data-testid={`button-view-details-${id}`}
         >
           View Details
           <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
+        <Button
+          variant="default"
+          className="rounded-full text-black"
+          onClick={handleGetReport}
+          data-testid={`button-get-report-${id}`}
+        >
+          <FileText className="h-4 w-4" />
+        </Button>
       </CardFooter>
+
+      <Dialog open={showReportDialog} onOpenChange={setShowReportDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="font-serif text-2xl">Get Market Analysis Report</DialogTitle>
+            <DialogDescription>
+              Receive a comprehensive PDF with pricing trends, comparable sales, and expert insights for {title}.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleSubmitReport} className="space-y-4 mt-4">
+            <div className="space-y-2">
+              <Label htmlFor="email-report">Email Address</Label>
+              <Input
+                id="email-report"
+                type="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                data-testid="input-email-report"
+              />
+            </div>
+            <Button
+              type="submit"
+              size="lg"
+              className="w-full rounded-full text-black"
+              data-testid="button-submit-report"
+            >
+              <FileText className="mr-2 h-4 w-4" />
+              Send Me the Report
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
     </Card>
   );
 }
