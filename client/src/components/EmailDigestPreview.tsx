@@ -41,7 +41,7 @@ export function EmailDigestPreview({ properties }: EmailDigestPreviewProps) {
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-8">
           <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4">
-            Get Your Email Every Morning
+            Your Must Have Email Every Morning
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Wake up to personalized property matches delivered to your inbox daily
