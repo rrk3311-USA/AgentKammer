@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Moon, Sun, Heart, Menu, X, Building2 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
-import laurelImage from "@assets/Screenshot 2025-10-28 at 11.12.20 PM_1761890632479.png";
+import laurelImage from "@assets/generated_images/Black_laurel_wreath_logo_5c3d5366.png";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
