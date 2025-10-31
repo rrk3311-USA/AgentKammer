@@ -46,6 +46,11 @@ Preferred communication style: Simple, everyday language.
 
 ### Agentic Actions Infographic
 - **Visual Mind Map**: Top hat emoji (🎩) at center with branching lines showing AI compute flow
+- **Massive Compute Engine Details**: Comprehensive card showing all NYC real estate data sources:
+  - Primary Sources: MLS (OneKey, NY State), Zillow Bridge API, PropertyShark, RealtyHop, Trulia, Redfin
+  - Government Data: NYC Dept of Finance ACRIS (deeds/sales since 1966), Rolling Sales, Property Valuation, NYC Open Data
+  - Access Methods: Active/for sale (MLS APIs/IDX), Sold/pending (MLS status, public records), Pre-sale/unlisted (agent networks)
+  - Manhattan APIs: OneKey MLS (RESO/RETS), Zillow, Realtor.com, Redfin, PropertyShark, Onboard Informatics, RentCast, NYC Open Data (Socrata)
 - **5 Agentic Actions**: Continuous Market Scanning, Instant Alert Processing, Price Trend Analysis, Smart Notifications, Competitive Bidding Intelligence
 - **Time-Saving Statistics**: 240hrs average buyer search time vs "Saves 240+ hours" with Agent Kammer automation (black text)
 - **Quote Banner**: "When lenders compete, you win" with classy dotted divider above

@@ -1,6 +1,7 @@
-import { Clock, Zap, TrendingUp, Search, Bell, Shield, ArrowRight } from "lucide-react";
+import { Clock, Zap, TrendingUp, Search, Bell, Shield, ArrowRight, Database, FileText, Building2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
 
 export function AgenticActionsInfographic() {
@@ -49,6 +50,83 @@ export function AgenticActionsInfographic() {
             <div className="bg-card border border-border rounded-xl px-6 py-3 shadow-lg">
               <p className="font-semibold text-sm">Massive Compute Engine</p>
             </div>
+          </div>
+
+          {/* Data Sources Detail */}
+          <div className="flex justify-center mb-8">
+            <Card className="max-w-4xl bg-gradient-to-br from-card to-card/50 border-primary/20 shadow-xl">
+              <CardContent className="p-6">
+                <div className="space-y-6">
+                  {/* Primary Sources */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <Database className="h-5 w-5 text-primary" />
+                      <h4 className="font-semibold text-sm">Primary Sources for NYC/Manhattan Real Estate Listings</h4>
+                    </div>
+                    <div className="space-y-3 text-xs text-muted-foreground">
+                      <div>
+                        <span className="font-medium text-foreground">MLS:</span> Core source for active, pending, sold, under contract, escrow statuses. NYC uses OneKey MLS (NY Metro) and NY State MLS. Zillow, Redfin, Realtor.com aggregate from MLS feeds.
+                      </div>
+                      <div>
+                        <span className="font-medium text-foreground">Zillow:</span> Gets data from MLS via Bridge API; provides APIs for listings, sales, metrics (restricted access).
+                      </div>
+                      <div>
+                        <span className="font-medium text-foreground">Other sites:</span> PropertyShark (NYC public records), RealtyHop, Trulia, Redfin – aggregate MLS/public data.
+                      </div>
+                      <div>
+                        <span className="font-medium text-foreground">Government:</span> NYC Dept of Finance – ACRIS (deeds/sales since 1966), Rolling Sales Data (last 12 months), Property Valuation/Assessment Data via NYC Open Data portal. DCAS IPIS for City properties. No live listings; historical sales/tax only.
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Access Methods */}
+                  <div className="border-t border-border pt-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <FileText className="h-5 w-5 text-primary" />
+                      <h4 className="font-semibold text-sm">All Access Methods</h4>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-3 text-xs text-muted-foreground">
+                      <div>
+                        <span className="font-medium text-foreground">Active/for sale:</span> MLS APIs/IDX feeds.
+                      </div>
+                      <div>
+                        <span className="font-medium text-foreground">Sold/pending/escrow:</span> MLS status, post-closing public records.
+                      </div>
+                      <div>
+                        <span className="font-medium text-foreground">Pre-sale/unlisted:</span> Agent networks/pocket listings (non-public); ownership via public records.
+                      </div>
+                      <div>
+                        <span className="font-medium text-foreground">Comprehensive:</span> Combine MLS + government datasets.
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Manhattan APIs */}
+                  <div className="border-t border-border pt-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Building2 className="h-5 w-5 text-primary" />
+                      <h4 className="font-semibold text-sm">Manhattan APIs to Pull From</h4>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {[
+                        "OneKey MLS (RESO/RETS)",
+                        "Zillow Bridge/Property APIs",
+                        "Realtor.com API",
+                        "Redfin API",
+                        "PropertyShark",
+                        "Onboard Informatics Property API",
+                        "RentCast API",
+                        "NYC Open Data APIs (Socrata)"
+                      ].map((api, index) => (
+                        <Badge key={index} variant="secondary" className="text-xs">
+                          {api}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Branch Lines */}
