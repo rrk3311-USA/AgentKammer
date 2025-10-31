@@ -47,8 +47,10 @@ Preferred communication style: Simple, everyday language.
 ### Agentic Actions Infographic
 - **Visual Mind Map**: Top hat emoji (🎩) at center with branching lines showing AI compute flow
 - **5 Agentic Actions**: Continuous Market Scanning, Instant Alert Processing, Price Trend Analysis, Smart Notifications, Competitive Bidding Intelligence
-- **Time-Saving Statistics**: 240hrs average buyer search time vs 24/7 Agent Kammer automation
-- **Quote Banner**: "When brokers compete, you win" with CTA button to prequalification
+- **Time-Saving Statistics**: 240hrs average buyer search time vs "Saves 240+ hours" with Agent Kammer automation (black text)
+- **Quote Banner**: "When lenders compete, you win" with classy dotted divider above
+- **Power Position Message**: "Your first step to be in a position of power is getting prequalified" in highlighted card
+- **CTA Button**: "Get Prequalified Now" linking to prequalification page
 - **Design**: Gradient background, dotted branch lines, hover effects on action cards
 
 ### Prequalification Page Updates

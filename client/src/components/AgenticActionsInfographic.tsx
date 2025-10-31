@@ -124,8 +124,8 @@ export function AgenticActionsInfographic() {
               <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
                 <Clock className="h-8 w-8 text-primary" />
                 <div>
-                  <p className="text-4xl lg:text-5xl font-serif font-bold text-primary">240hrs</p>
-                  <p className="text-sm text-muted-foreground">Average time buyers spend searching</p>
+                  <p className="text-4xl lg:text-5xl font-serif font-bold text-black dark:text-white">240hrs</p>
+                  <p className="text-sm text-black dark:text-white">Average time buyers spend searching</p>
                 </div>
               </div>
             </div>
@@ -134,23 +134,33 @@ export function AgenticActionsInfographic() {
               <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
                 <Zap className="h-8 w-8 text-primary" />
                 <div>
-                  <p className="text-4xl lg:text-5xl font-serif font-bold text-primary">24/7</p>
-                  <p className="text-sm text-muted-foreground">Agent Kammer works for you</p>
+                  <p className="text-4xl lg:text-5xl font-serif font-bold text-black dark:text-white">Saves 240+ hours</p>
+                  <p className="text-sm text-black dark:text-white">Agent Kammer's automated search</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="mt-8 pt-8 border-t border-primary/20">
-            <div className="text-center">
-              <p className="text-2xl lg:text-3xl font-serif font-semibold text-foreground mb-2">
-                "When brokers compete, you win"
-              </p>
-              <p className="text-sm text-muted-foreground mb-6">
-                Our AI negotiates on your behalf, finding the best deals across all listings
+          {/* Dotted Divider */}
+          <div className="mt-10 mb-8 flex justify-center">
+            <div className="w-32 border-t-2 border-dotted border-primary/40" />
+          </div>
+
+          <div className="text-center">
+            <p className="text-2xl lg:text-3xl font-serif font-semibold text-foreground mb-2">
+              "When lenders compete, you win"
+            </p>
+            <p className="text-sm text-muted-foreground mb-8">
+              Get the best rates by having multiple lenders compete for your business
+            </p>
+
+            {/* Power Position Message */}
+            <div className="bg-background/50 backdrop-blur-sm border border-primary/20 rounded-xl p-6 mb-6">
+              <p className="text-lg font-medium text-foreground mb-4">
+                Your first step to be in a position of power is getting prequalified
               </p>
               <Link href="/services/get-preapproved">
-                <Button size="lg" className="rounded-full text-black" data-testid="button-get-prequalified">
+                <Button size="lg" className="rounded-full" data-testid="button-get-prequalified">
                   Get Prequalified Now
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>

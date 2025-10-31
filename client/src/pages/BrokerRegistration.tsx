@@ -91,7 +91,7 @@ export default function BrokerRegistration() {
                   <h3 className="font-serif text-xl font-semibold">Personal Information</h3>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name</Label>
                     <Input
@@ -114,7 +114,7 @@ export default function BrokerRegistration() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address</Label>
                     <Input
@@ -147,7 +147,7 @@ export default function BrokerRegistration() {
                   <h3 className="font-serif text-xl font-semibold">Professional Credentials</h3>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="licenseNumber">Real Estate License Number</Label>
                     <Input
@@ -178,7 +178,7 @@ export default function BrokerRegistration() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="brokerage">Brokerage Firm</Label>
                     <Input
@@ -246,7 +246,7 @@ export default function BrokerRegistration() {
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="linkedIn">LinkedIn Profile (optional)</Label>
                     <Input
@@ -361,7 +361,7 @@ export default function BrokerRegistration() {
               <Button
                 type="submit"
                 size="lg"
-                className="w-full rounded-full text-black"
+                className="w-full rounded-full"
                 data-testid="button-submit-registration"
               >
                 Submit Registration
