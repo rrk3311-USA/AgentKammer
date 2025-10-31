@@ -69,10 +69,10 @@ export function HeroSearch() {
       <div className="relative z-10 w-full max-w-4xl mx-auto px-6 py-16">
         <div className="text-center mb-8">
           <h1 className="font-serif text-5xl lg:text-6xl font-semibold text-white mb-4">
-            Discover Your Perfect NYC Home
+            Discover Your Perfect Home
           </h1>
-          <p className="text-lg text-white/90">
-            Personalized property matching tailored to your preferences
+          <p className="text-xl text-white/90 font-light">
+            Live where you belong
           </p>
         </div>
 
