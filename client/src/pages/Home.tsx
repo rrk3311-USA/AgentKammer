@@ -246,7 +246,6 @@ export default function Home() {
         title="Featured Listings"
         subtitle="Handpicked exceptional homes in Manhattan's most sought-after neighborhoods"
         properties={featuredProperties}
-        badge="Curated Selection"
         icon={Sparkles}
       />
 
@@ -254,7 +253,6 @@ export default function Home() {
         title="Most Discounted"
         subtitle="Exceptional value - recent price reductions on premium properties"
         properties={mostDiscounted}
-        badge="Price Reduced"
         icon={TrendingDown}
       />
 
@@ -275,17 +273,6 @@ export default function Home() {
             <div className="flex flex-col bg-muted rounded-2xl p-1 shadow-inner gap-1">
               <button
                 className={`px-6 py-2 rounded-xl text-sm font-medium transition-all ${
-                  midtownFilter === "midtown" 
-                    ? "bg-primary text-black shadow-md" 
-                    : "text-muted-foreground hover-elevate"
-                }`}
-                onClick={() => setMidtownFilter("midtown")}
-                data-testid="badge-filter-midtown"
-              >
-                Midtown
-              </button>
-              <button
-                className={`px-6 py-2 rounded-xl text-sm font-medium transition-all ${
                   midtownFilter === "above" 
                     ? "bg-primary text-black shadow-md" 
                     : "text-muted-foreground hover-elevate"
@@ -294,6 +281,17 @@ export default function Home() {
                 data-testid="badge-filter-above-midtown"
               >
                 Above Midtown
+              </button>
+              <button
+                className={`px-6 py-2 rounded-xl text-sm font-medium transition-all ${
+                  midtownFilter === "midtown" 
+                    ? "bg-primary text-black shadow-md" 
+                    : "text-muted-foreground hover-elevate"
+                }`}
+                onClick={() => setMidtownFilter("midtown")}
+                data-testid="badge-filter-midtown"
+              >
+                Midtown
               </button>
               <button
                 className={`px-6 py-2 rounded-xl text-sm font-medium transition-all ${
