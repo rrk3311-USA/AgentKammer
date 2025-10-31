@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
-import { Search, MapPin, Code2 } from "lucide-react";
+import { Search, MapPin, Sparkles, MousePointer } from "lucide-react";
 import heroImage from "@assets/generated_images/NYC_luxury_penthouse_interior_hero_88d3b5ec.png";
 
 const propertyTypes = ["Condo", "Co-op", "Townhouse", "Penthouse"];
@@ -75,17 +75,19 @@ export function HeroSearch() {
             Live where you belong
           </p>
           <div className="max-w-2xl mx-auto">
-            <p className="text-sm text-white/85 font-light leading-relaxed mb-1">
+            <p className="text-sm text-white/85 font-light leading-relaxed mb-2">
               Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
             </p>
-            <div className="flex items-center justify-center gap-1 text-primary/60 text-xs font-mono">
-              <Code2 className="w-3 h-3" />
-              <span className="animate-pulse">&lt;/&gt;</span>
-              <span className="animate-pulse" style={{ animationDelay: '0.3s' }}>01010</span>
-              <span className="animate-pulse" style={{ animationDelay: '0.6s' }}>|</span>
-              <span className="animate-pulse" style={{ animationDelay: '0.9s' }}>executing</span>
-              <span className="animate-pulse" style={{ animationDelay: '0.3s' }}>...</span>
-              <Code2 className="w-3 h-3" />
+            <div className="flex items-center justify-center gap-1 text-primary/50">
+              <Sparkles className="w-2 h-2 animate-pulse opacity-60" />
+              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '0.2s' }} />
+              <Sparkles className="w-2 h-2 animate-pulse opacity-40" style={{ animationDelay: '0.4s' }} />
+              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '0.6s' }} />
+              <Sparkles className="w-2 h-2 animate-pulse opacity-60" style={{ animationDelay: '0.8s' }} />
+              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '1s' }} />
+              <Sparkles className="w-2 h-2 animate-pulse opacity-40" style={{ animationDelay: '1.2s' }} />
+              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '1.4s' }} />
+              <Sparkles className="w-2 h-2 animate-pulse opacity-60" style={{ animationDelay: '1.6s' }} />
             </div>
           </div>
           <p className="text-xs text-white/60 font-light mt-3">

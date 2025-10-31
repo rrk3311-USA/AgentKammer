@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home } from "lucide-react";
+import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home, Mic, MicOff } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import agentAvatar from "@assets/generated_images/Professional_NYC_concierge_portrait_c8ac1382.png";
+import agentAvatar from "@assets/generated_images/NYC_concierge_with_hat_monocle_d3f71fab.png";
 
 interface Message {
   id: string;
@@ -28,13 +28,39 @@ export function FloatingChatAssistant() {
     },
   ]);
   const [activeTab, setActiveTab] = useState("chat");
+  const [isListening, setIsListening] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages]);
+
+  useEffect(() => {
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = false;
+      recognitionRef.current.lang = 'en-US';
+
+      recognitionRef.current.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        setMessage(transcript);
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onerror = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsListening(false);
+      };
+    }
+  }, []);
 
   const handleSend = (text?: string) => {
     const messageText = text || message;
@@ -71,6 +97,21 @@ export function FloatingChatAssistant() {
     { id: "price-reduced", icon: TrendingDown, label: "Recently Reduced", prompt: "Show me properties with recent price reductions" },
     { id: "new-listings", icon: Home, label: "New Listings", prompt: "What are the newest listings in Manhattan?" },
   ];
+
+  const toggleVoiceInput = () => {
+    if (!recognitionRef.current) {
+      alert("Voice input is not supported in your browser. Please use Chrome, Edge, or Safari.");
+      return;
+    }
+
+    if (isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    } else {
+      recognitionRef.current.start();
+      setIsListening(true);
+    }
+  };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -236,25 +277,35 @@ export function FloatingChatAssistant() {
 
             <div className="p-4 border-t bg-background">
               <div className="flex gap-2">
+                <Button
+                  size="icon"
+                  variant={isListening ? "default" : "outline"}
+                  onClick={toggleVoiceInput}
+                  data-testid="button-voice-input"
+                  className={isListening ? "animate-pulse" : ""}
+                >
+                  {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+                </Button>
                 <Input
-                  placeholder="Ask about properties..."
+                  placeholder={isListening ? "Listening..." : "Ask about properties..."}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   onKeyPress={handleKeyPress}
                   className="flex-1"
                   data-testid="input-chat-message"
+                  disabled={isListening}
                 />
                 <Button
                   size="icon"
                   onClick={() => handleSend()}
-                  disabled={!message.trim()}
+                  disabled={!message.trim() || isListening}
                   data-testid="button-send-message"
                 >
                   <Send className="h-4 w-4" />
                 </Button>
               </div>
               <p className="text-xs text-muted-foreground mt-2 text-center">
-                AI-powered real estate assistance
+                {isListening ? "🎤 Listening... Speak now" : "AI-powered real estate assistance"}
               </p>
             </div>
           </>
