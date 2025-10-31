@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Heart, Bed, Bath, Maximize, MapPin, ArrowRight, Clock } from "lucide-react";
+import { Heart, Bed, Bath, Maximize, MapPin, ArrowRight, Clock, TrendingUp } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { HappyDocIcon } from "./HappyDocIcon";
@@ -20,6 +20,7 @@ interface PropertyCardProps {
   sqft: number;
   propertyType: string;
   daysOnMarket?: number;
+  dealScore?: number;
 }
 
 export function PropertyCard({
@@ -33,6 +34,7 @@ export function PropertyCard({
   sqft,
   propertyType,
   daysOnMarket,
+  dealScore,
 }: PropertyCardProps) {
   const { toast } = useToast();
   const [isFavorite, setIsFavorite] = useState(false);
@@ -95,20 +97,30 @@ export function PropertyCard({
           </Button>
         </div>
         <div className="absolute bottom-4 left-4 flex flex-col gap-2">
-          <div className="bg-black px-3 py-1.5 rounded">
-            <span className="font-serif text-lg font-semibold text-white">
-              {formatPrice(price)}
-            </span>
+          <div className="flex items-center gap-2">
+            <div className="bg-black px-3 py-1.5 rounded">
+              <span className="font-serif text-lg font-semibold text-white">
+                {formatPrice(price)}
+              </span>
+            </div>
+            {daysOnMarket && (
+              <Badge variant="secondary" className="backdrop-blur-md bg-background/90 flex items-center gap-1">
+                <Clock className="h-3 w-3" />
+                {daysOnMarket}d
+              </Badge>
+            )}
           </div>
-          <Badge variant="secondary" className="backdrop-blur-md bg-background/90 w-fit">
-            {propertyType}
-          </Badge>
-          {daysOnMarket && (
-            <Badge variant="secondary" className="backdrop-blur-md bg-background/90 flex items-center gap-1 w-fit">
-              <Clock className="h-3 w-3" />
-              {daysOnMarket}d
+          <div className="flex items-center gap-2">
+            <Badge variant="secondary" className="backdrop-blur-md bg-background/90 w-fit">
+              {propertyType}
             </Badge>
-          )}
+            {dealScore && (
+              <Badge variant="default" className="backdrop-blur-md bg-primary/90 text-primary-foreground flex items-center gap-1">
+                <TrendingUp className="h-3 w-3" />
+                {dealScore}/10
+              </Badge>
+            )}
+          </div>
         </div>
       </div>
 

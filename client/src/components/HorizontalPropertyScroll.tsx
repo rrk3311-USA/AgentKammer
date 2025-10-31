@@ -15,6 +15,7 @@ interface Property {
   sqft: number;
   propertyType: string;
   daysOnMarket?: number;
+  dealScore?: number;
   originalPrice?: number;
   discountPercent?: number;
 }

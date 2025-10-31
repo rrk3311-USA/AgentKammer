@@ -136,6 +136,7 @@ export default function Home() {
       sqft: 2100,
       propertyType: "Co-op",
       daysOnMarket: 145,
+      dealScore: 8.5,
       location: "above",
     },
     {
@@ -149,6 +150,7 @@ export default function Home() {
       sqft: 3400,
       propertyType: "Townhouse",
       daysOnMarket: 128,
+      dealScore: 7.8,
       location: "below",
     },
     {
@@ -162,6 +164,7 @@ export default function Home() {
       sqft: 1700,
       propertyType: "Condo",
       daysOnMarket: 112,
+      dealScore: 8.2,
       location: "below",
     },
     {
@@ -175,6 +178,7 @@ export default function Home() {
       sqft: 1950,
       propertyType: "Condo",
       daysOnMarket: 98,
+      dealScore: 7.5,
       location: "midtown",
     },
     {
@@ -188,6 +192,7 @@ export default function Home() {
       sqft: 2400,
       propertyType: "Condo",
       daysOnMarket: 105,
+      dealScore: 9.1,
       location: "midtown",
     },
   ];
@@ -208,6 +213,8 @@ export default function Home() {
       baths: 3,
       sqft: 2900,
       propertyType: "Townhouse",
+      daysOnMarket: 87,
+      dealScore: 9.3,
     },
     {
       id: "md2",
@@ -221,6 +228,8 @@ export default function Home() {
       baths: 2,
       sqft: 1900,
       propertyType: "Co-op",
+      daysOnMarket: 62,
+      dealScore: 8.9,
     },
     {
       id: "md3",
@@ -234,6 +243,8 @@ export default function Home() {
       baths: 2,
       sqft: 1500,
       propertyType: "Condo",
+      daysOnMarket: 45,
+      dealScore: 9.5,
     },
   ];
 
