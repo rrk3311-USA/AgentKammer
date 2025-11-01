@@ -109,10 +109,16 @@ export function PropertyCard({
           </div>
         </div>
         
-        {/* Badges Row - Separate Below with Tighter Space (50% closer) */}
+        {/* Badges Row - Deal Score First */}
         <div className="absolute bottom-2.5 left-2.5">
           <div className="backdrop-blur-xl bg-black/85 dark:bg-black/90 rounded-lg px-2.5 py-1.5 border border-white/10 shadow-2xl">
             <div className="flex items-center gap-1 flex-wrap">
+              {dealScore && (
+                <Badge variant="default" className="text-xs px-1.5 py-0 h-auto flex items-center gap-0.5 bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] text-black border-0">
+                  <TrendingUp className="h-2.5 w-2.5" />
+                  {dealScore}/10
+                </Badge>
+              )}
               <Badge variant="secondary" className="text-xs px-1.5 py-0 h-auto bg-white/20 text-white border-white/10">
                 {propertyType}
               </Badge>
@@ -120,12 +126,6 @@ export function PropertyCard({
                 <Badge variant="secondary" className="text-xs px-1.5 py-0 h-auto bg-white/20 text-white border-white/10 flex items-center gap-0.5">
                   <Clock className="h-2.5 w-2.5" />
                   {daysOnMarket}d
-                </Badge>
-              )}
-              {dealScore && (
-                <Badge variant="default" className="text-xs px-1.5 py-0 h-auto flex items-center gap-0.5 bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] text-black border-0">
-                  <TrendingUp className="h-2.5 w-2.5" />
-                  {dealScore}/10
                 </Badge>
               )}
             </div>
