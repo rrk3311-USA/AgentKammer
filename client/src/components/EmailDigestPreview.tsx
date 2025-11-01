@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { MessageSquare, TrendingDown, Home, Bell } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import agentKammerImg from "@assets/generated_images/Dapper_Agent_Kammer_video_game_character_146acfe5.png";
+import agentKammerImg from "@assets/generated_images/Agent_Kammer_character_with_gold_ribbon_47b17bb9.png";
 
 interface DigestProperty {
   id: string;
