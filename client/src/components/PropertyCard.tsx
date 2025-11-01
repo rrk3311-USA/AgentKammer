@@ -97,32 +97,50 @@ export function PropertyCard({
           </Button>
         </div>
         
-        {/* Compact Glassmorphism Info Module - Black with Gold Price */}
-        <div className="absolute bottom-3 left-3">
-          <div className="backdrop-blur-xl bg-black/80 dark:bg-black/90 rounded-xl px-3 py-2 border border-white/10 shadow-2xl">
+        {/* Compact Black Glass Module with All Info */}
+        <div className="absolute bottom-2.5 left-2.5">
+          <div className="backdrop-blur-xl bg-black/85 dark:bg-black/90 rounded-lg px-2.5 py-2 border border-white/10 shadow-2xl">
             {/* Price with Gold Gradient - 75% Larger */}
-            <div className="mb-1.5">
+            <div className="mb-1">
               <span 
-                className="font-serif text-2xl font-bold bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] bg-clip-text text-transparent" 
+                className="font-serif text-xl font-bold bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] bg-clip-text text-transparent" 
                 data-testid={`text-price-${id}`}
               >
                 {formatPrice(price)}
               </span>
             </div>
             
+            {/* Property Details - Compact */}
+            <div className="flex items-center gap-1.5 mb-1 text-white/90 text-xs">
+              <div className="flex items-center gap-0.5">
+                <Bed className="h-3 w-3" />
+                <span>{beds}</span>
+              </div>
+              <div className="h-2.5 w-px bg-white/20" />
+              <div className="flex items-center gap-0.5">
+                <Bath className="h-3 w-3" />
+                <span>{baths}</span>
+              </div>
+              <div className="h-2.5 w-px bg-white/20" />
+              <div className="flex items-center gap-0.5">
+                <Maximize className="h-3 w-3" />
+                <span>{sqft.toLocaleString()}</span>
+              </div>
+            </div>
+            
             {/* Badges Row - Compact */}
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <Badge variant="secondary" className="text-xs px-1.5 py-0.5 h-auto bg-white/20 text-white border-white/10">
+            <div className="flex items-center gap-1 flex-wrap">
+              <Badge variant="secondary" className="text-xs px-1.5 py-0 h-auto bg-white/20 text-white border-white/10">
                 {propertyType}
               </Badge>
               {daysOnMarket && (
-                <Badge variant="secondary" className="text-xs px-1.5 py-0.5 h-auto bg-white/20 text-white border-white/10 flex items-center gap-0.5">
+                <Badge variant="secondary" className="text-xs px-1.5 py-0 h-auto bg-white/20 text-white border-white/10 flex items-center gap-0.5">
                   <Clock className="h-2.5 w-2.5" />
                   {daysOnMarket}d
                 </Badge>
               )}
               {dealScore && (
-                <Badge variant="default" className="text-xs px-1.5 py-0.5 h-auto flex items-center gap-0.5 bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] text-black border-0">
+                <Badge variant="default" className="text-xs px-1.5 py-0 h-auto flex items-center gap-0.5 bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] text-black border-0">
                   <TrendingUp className="h-2.5 w-2.5" />
                   {dealScore}/10
                 </Badge>
