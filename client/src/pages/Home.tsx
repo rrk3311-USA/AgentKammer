@@ -1,7 +1,6 @@
 import { HeroSearch } from "@/components/HeroSearch";
 import { HorizontalPropertyScroll } from "@/components/HorizontalPropertyScroll";
 import { PropertyCard } from "@/components/PropertyCard";
-import { EmailDigestPreview } from "@/components/EmailDigestPreview";
 import { AppDownload } from "@/components/AppDownload";
 import { AgenticActionsInfographic } from "@/components/AgenticActionsInfographic";
 import { LuxuryBackground } from "@/components/LuxuryBackground";
@@ -9,6 +8,7 @@ import { ListingReportSection } from "@/components/ListingReportSection";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { TrendingDown, Clock, Sparkles } from "lucide-react";
 import { useState } from "react";
 import property1 from "@assets/generated_images/Modern_Manhattan_condo_exterior_bdf30aa9.png";
@@ -16,6 +16,7 @@ import property2 from "@assets/generated_images/Brooklyn_brownstone_townhouse_ex
 import property3 from "@assets/generated_images/NYC_apartment_living_space_interior_ba500d46.png";
 import property4 from "@assets/generated_images/Manhattan_penthouse_rooftop_terrace_25c2682e.png";
 import property5 from "@assets/generated_images/Upper_West_Side_co-op_building_1e75d246.png";
+import agentKammerBackImg from "@assets/generated_images/James_Bond_back_view_character_8da6cf38.png";
 
 export default function Home() {
   const [midtownFilter, setMidtownFilter] = useState<"midtown" | "above" | "below">("midtown");
@@ -385,26 +386,64 @@ export default function Home() {
 
       <AgenticActionsInfographic />
 
-        <EmailDigestPreview properties={digestProperties} />
-
         <ListingReportSection />
 
-        <section className="py-16 lg:py-24 bg-[#0a1628] text-white">
-          <div className="max-w-4xl mx-auto px-6 text-center">
-            <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4">
-              Ready to Find Your Dream Home?
-            </h2>
-            <p className="text-lg mb-8 opacity-90">
-              Join thousands of New Yorkers who trust Agent Kammer to find their perfect property
-            </p>
-            <Button
-              size="lg"
-              variant="secondary"
-              className="rounded-full px-8"
-              data-testid="button-get-started"
-            >
-              Get Started Today
-            </Button>
+        <section className="py-16 lg:py-24 bg-[#0a1628] text-white relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 relative">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left side: Text and CTA */}
+              <div className="text-center lg:text-left">
+                <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4">
+                  Ready to Find Your Dream Home?
+                </h2>
+                <p className="text-lg mb-8 opacity-90">
+                  Join thousands of New Yorkers who trust Agent Kammer to find their perfect property
+                </p>
+                
+                {/* Cell Number CTA Form */}
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  const formData = new FormData(e.currentTarget);
+                  const phone = formData.get('phone');
+                  console.log('Phone submitted:', phone);
+                  // Show success message
+                  const toast = document.createElement('div');
+                  toast.textContent = 'Thank you! We\'ll be in touch soon.';
+                  toast.className = 'fixed top-4 right-4 bg-white text-gray-800 px-6 py-3 rounded-lg shadow-lg z-50';
+                  document.body.appendChild(toast);
+                  setTimeout(() => toast.remove(), 3000);
+                  e.currentTarget.reset();
+                }} className="max-w-md mx-auto lg:mx-0">
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Input
+                      name="phone"
+                      type="tel"
+                      placeholder="Your cell number"
+                      required
+                      className="flex-1 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                      data-testid="input-dream-home-phone"
+                    />
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="h-12 px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-black font-semibold hover:opacity-90"
+                      data-testid="button-dream-home-submit"
+                    >
+                      Get Started
+                    </Button>
+                  </div>
+                </form>
+              </div>
+
+              {/* Right side: Character from behind */}
+              <div className="relative h-[400px] lg:h-[500px] flex items-end justify-center">
+                <img 
+                  src={agentKammerBackImg} 
+                  alt="Agent Kammer" 
+                  className="h-[350px] lg:h-[450px] w-auto object-contain opacity-80"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
