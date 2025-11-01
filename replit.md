@@ -36,7 +36,7 @@ The platform features a visual-first approach with large images and sophisticate
 - Market Analysis Report with a premium background image of a luxury marble desk with a Manhattan view.
 - A personalized chat assistant avatar using the owner's professional headshot.
 - Email capture forms with gold gradients and animated icons.
-- Footer "Powered by AI" section on navy background featuring tech infrastructure logos: Replit, Anthropic, OpenAI, NVIDIA, Cloudflare, and Google Cloud.
+- Footer "Powered by AI" section on navy background featuring tech infrastructure logos: Replit, Anthropic, Claude, NVIDIA, and Cloudflare.
 
 ### Feature Specifications
 - **Property Search & Discovery**: Advanced search, filtering, and curated listing sections (e.g., Featured, Most Discounted, Longest on Market).
