@@ -97,20 +97,21 @@ export function PropertyCard({
           </Button>
         </div>
         
-        {/* Compact Black Glass Module - Price and Badges Only */}
+        {/* Price - Floating Separately */}
+        <div className="absolute bottom-14 left-2.5">
+          <div className="backdrop-blur-xl bg-black/85 dark:bg-black/90 rounded-lg px-2.5 py-1.5 border border-white/10 shadow-2xl">
+            <span 
+              className="font-serif text-xl font-bold bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] bg-clip-text text-transparent" 
+              data-testid={`text-price-${id}`}
+            >
+              {formatPrice(price)}
+            </span>
+          </div>
+        </div>
+        
+        {/* Badges Row - Separate Below with Space */}
         <div className="absolute bottom-2.5 left-2.5">
-          <div className="backdrop-blur-xl bg-black/85 dark:bg-black/90 rounded-lg px-2.5 py-2 border border-white/10 shadow-2xl">
-            {/* Price with Gold Gradient */}
-            <div className="mb-1.5">
-              <span 
-                className="font-serif text-xl font-bold bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] bg-clip-text text-transparent" 
-                data-testid={`text-price-${id}`}
-              >
-                {formatPrice(price)}
-              </span>
-            </div>
-            
-            {/* Badges Row - All Connected */}
+          <div className="backdrop-blur-xl bg-black/85 dark:bg-black/90 rounded-lg px-2.5 py-1.5 border border-white/10 shadow-2xl">
             <div className="flex items-center gap-1 flex-wrap">
               <Badge variant="secondary" className="text-xs px-1.5 py-0 h-auto bg-white/20 text-white border-white/10">
                 {propertyType}
