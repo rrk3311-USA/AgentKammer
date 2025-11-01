@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { MessageSquare, TrendingDown, Home, Bell } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import agentKammerImg from "@assets/generated_images/Raphael_professional_character_with_glow_e301eca7.png";
+import agentKammerImg from "@assets/generated_images/James_Bond_European_character_182c1b76.png";
 
 interface DigestProperty {
   id: string;
@@ -37,9 +37,9 @@ export function EmailDigestPreview({ properties }: EmailDigestPreviewProps) {
   };
 
   return (
-    <section className="relative py-16 lg:py-24 bg-gradient-to-br from-cyan-400 via-blue-500 to-blue-600 overflow-hidden">
+    <section className="relative py-16 lg:py-24 bg-blue-500 overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent_50%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.05),transparent_50%)]"></div>
       
       <div className="max-w-7xl mx-auto px-6 relative">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
