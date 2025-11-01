@@ -63,7 +63,7 @@ export function HeroSearch() {
       <section className="bg-white dark:bg-background py-12 lg:py-16">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h1 className="font-serif text-4xl lg:text-5xl font-semibold text-foreground mb-6">
-            your perfect home<br />Discovered
+            Your Perfect Home<br />Discovered
           </h1>
           
           {/* Navy Section - Full Width Horizontal Bar */}
