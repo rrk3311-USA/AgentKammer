@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { MessageSquare, TrendingDown, Home, Bell } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import agentKammerImg from "@assets/generated_images/Christian_Bale_luxury_character_plain_ribbon_57089733.png";
+import agentKammerImg from "@assets/generated_images/Transparent_background_luxury_character_6779407b.png";
 
 interface DigestProperty {
   id: string;
@@ -55,22 +55,22 @@ export function EmailDigestPreview({ properties }: EmailDigestPreviewProps) {
             </div>
 
             {/* Floating Module - Top Left */}
-            <Card className="absolute top-8 left-4 lg:left-12 bg-white/90 backdrop-blur-lg border-white/40 shadow-2xl p-4 max-w-[180px] hover:scale-105 transition-transform">
+            <Card className="absolute top-8 left-4 lg:left-12 bg-white/95 backdrop-blur-xl border-white/60 shadow-2xl p-5 max-w-[200px] hover:scale-105 transition-transform">
               <div className="flex items-center gap-2 mb-2">
-                <Bell className="w-4 h-4 text-primary" />
-                <span className="text-xs font-semibold">Instant Alerts</span>
+                <Bell className="w-5 h-5 text-blue-600" />
+                <span className="text-sm font-bold text-gray-800">Instant Alerts</span>
               </div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-gray-600 leading-relaxed">
                 Get notified the second a new listing matches your criteria
               </p>
             </Card>
 
             {/* Floating Module - Right side (where hand points) - LIFTED STYLE */}
-            <Card className="absolute top-32 right-8 lg:right-16 bg-white/95 backdrop-blur-xl border-white/50 shadow-[0_20px_60px_rgba(0,0,0,0.3)] p-5 max-w-[200px] hover:scale-105 transition-all transform hover:-translate-y-2">
+            <Card className="absolute top-32 right-8 lg:right-16 bg-white/95 backdrop-blur-xl border-white/60 shadow-[0_20px_60px_rgba(0,0,0,0.3)] p-5 max-w-[220px] hover:scale-105 transition-all transform hover:-translate-y-2">
               <form onSubmit={handleSubmit} className="space-y-3">
-                <div className="flex items-center gap-2 mb-1">
-                  <MessageSquare className="w-5 h-5 text-primary" />
-                  <span className="text-sm font-bold">Text Alerts</span>
+                <div className="flex items-center gap-2 mb-2">
+                  <MessageSquare className="w-5 h-5 text-blue-600" />
+                  <span className="text-sm font-bold text-gray-800">Text Alerts</span>
                 </div>
                 <Input
                   id="phone-number-float"
@@ -79,13 +79,13 @@ export function EmailDigestPreview({ properties }: EmailDigestPreviewProps) {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   required
-                  className="h-9 text-xs"
+                  className="h-10 text-sm bg-white border-gray-200"
                   data-testid="input-phone-number"
                 />
                 <Button
                   type="submit"
                   size="sm"
-                  className="w-full text-xs h-8"
+                  className="w-full text-sm h-9 bg-blue-600 hover:bg-blue-700 text-white"
                   data-testid="button-subscribe-sms"
                 >
                   Subscribe
@@ -94,24 +94,24 @@ export function EmailDigestPreview({ properties }: EmailDigestPreviewProps) {
             </Card>
 
             {/* Floating Module - Bottom Left */}
-            <Card className="absolute bottom-12 left-8 bg-white/90 backdrop-blur-lg border-white/40 shadow-2xl p-4 max-w-[160px] hover:scale-105 transition-transform">
+            <Card className="absolute bottom-12 left-8 bg-white/95 backdrop-blur-xl border-white/60 shadow-2xl p-5 max-w-[180px] hover:scale-105 transition-transform">
               <div className="flex items-center gap-2 mb-2">
-                <TrendingDown className="w-4 h-4 text-green-600" />
-                <span className="text-xs font-semibold">Price Drops</span>
+                <TrendingDown className="w-5 h-5 text-green-600" />
+                <span className="text-sm font-bold text-gray-800">Price Drops</span>
               </div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-gray-600 leading-relaxed">
                 Track price changes on your favorites
               </p>
             </Card>
 
             {/* Floating Module - Bottom Right */}
-            <Card className="absolute bottom-20 right-4 lg:right-8 bg-white/90 backdrop-blur-lg border-white/40 shadow-2xl p-3 max-w-[140px] hover:scale-105 transition-transform">
-              <div className="flex items-center gap-2 mb-1">
-                <Home className="w-4 h-4 text-primary" />
-                <span className="text-xs font-semibold">New Listings</span>
+            <Card className="absolute bottom-20 right-4 lg:right-8 bg-white/95 backdrop-blur-xl border-white/60 shadow-2xl p-4 max-w-[160px] hover:scale-105 transition-transform">
+              <div className="flex items-center gap-2 mb-2">
+                <Home className="w-5 h-5 text-blue-600" />
+                <span className="text-sm font-bold text-gray-800">New Listings</span>
               </div>
-              <div className="text-2xl font-bold text-primary">47</div>
-              <p className="text-[10px] text-muted-foreground">this week</p>
+              <div className="text-3xl font-bold text-blue-600">47</div>
+              <p className="text-xs text-gray-600">this week</p>
             </Card>
           </div>
 
