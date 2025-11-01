@@ -97,54 +97,33 @@ export function PropertyCard({
           </Button>
         </div>
         
-        {/* Unified Glassmorphism Info Module - On Photo */}
+        {/* Unified Glassmorphism Info Module - Bottom Left on Photo */}
         <div className="absolute bottom-4 left-4 right-4">
           <div className="backdrop-blur-xl bg-white/80 dark:bg-black/70 rounded-2xl p-4 border border-white/20 dark:border-white/10 shadow-2xl">
             {/* Price - 75% Larger */}
-            <div className="mb-2">
-              <span className="font-serif text-3xl font-bold text-foreground" data-testid={`text-price-${id}`}>
+            <div className="mb-3">
+              <span className="font-serif text-4xl font-bold text-foreground" data-testid={`text-price-${id}`}>
                 {formatPrice(price)}
               </span>
             </div>
             
-            {/* Property Details & Badges in One Row */}
-            <div className="flex items-center justify-between gap-3 flex-wrap">
-              {/* Beds/Baths/SqFt */}
-              <div className="flex items-center gap-2 text-sm text-foreground/90">
-                <div className="flex items-center gap-1">
-                  <Bed className="h-4 w-4 text-muted-foreground" />
-                  <span>{beds}</span>
-                </div>
-                <div className="h-4 w-px bg-border/50" />
-                <div className="flex items-center gap-1">
-                  <Bath className="h-4 w-4 text-muted-foreground" />
-                  <span>{baths}</span>
-                </div>
-                <div className="h-4 w-px bg-border/50" />
-                <div className="flex items-center gap-1">
-                  <Maximize className="h-4 w-4 text-muted-foreground" />
-                  <span>{sqft.toLocaleString()}</span>
-                </div>
-              </div>
-
-              {/* Badges */}
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <Badge variant="secondary" className="text-xs backdrop-blur-sm bg-background/90">
-                  {propertyType}
+            {/* Badges Row - Smaller */}
+            <div className="flex items-center gap-2 flex-wrap">
+              <Badge variant="secondary" className="text-sm backdrop-blur-sm bg-background/90">
+                {propertyType}
+              </Badge>
+              {daysOnMarket && (
+                <Badge variant="secondary" className="text-sm backdrop-blur-sm bg-background/90 flex items-center gap-1">
+                  <Clock className="h-3.5 w-3.5" />
+                  {daysOnMarket}d
                 </Badge>
-                {daysOnMarket && (
-                  <Badge variant="secondary" className="text-xs backdrop-blur-sm bg-background/90 flex items-center gap-1">
-                    <Clock className="h-3 w-3" />
-                    {daysOnMarket}d
-                  </Badge>
-                )}
-                {dealScore && (
-                  <Badge variant="default" className="text-xs flex items-center gap-1 bg-primary/90">
-                    <TrendingUp className="h-3 w-3" />
-                    {dealScore}/10
-                  </Badge>
-                )}
-              </div>
+              )}
+              {dealScore && (
+                <Badge variant="default" className="text-sm flex items-center gap-1 bg-primary/90">
+                  <TrendingUp className="h-3.5 w-3.5" />
+                  {dealScore}/10
+                </Badge>
+              )}
             </div>
           </div>
         </div>
@@ -157,6 +136,23 @@ export function PropertyCard({
         <div className="flex items-start gap-2 text-muted-foreground mb-4">
           <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
           <span className="text-sm line-clamp-1">{address}</span>
+        </div>
+
+        <div className="flex items-center gap-4 text-sm">
+          <div className="flex items-center gap-1.5">
+            <Bed className="h-4 w-4 text-muted-foreground" />
+            <span>{beds} bd</span>
+          </div>
+          <div className="h-4 w-px bg-border" />
+          <div className="flex items-center gap-1.5">
+            <Bath className="h-4 w-4 text-muted-foreground" />
+            <span>{baths} ba</span>
+          </div>
+          <div className="h-4 w-px bg-border" />
+          <div className="flex items-center gap-1.5">
+            <Maximize className="h-4 w-4 text-muted-foreground" />
+            <span>{sqft.toLocaleString()} sqft</span>
+          </div>
         </div>
       </CardContent>
 
