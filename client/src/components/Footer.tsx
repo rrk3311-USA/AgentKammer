@@ -1,4 +1,4 @@
-import { SiReplit, SiCloudflare, SiNvidia, SiClaude } from "react-icons/si";
+import { SiReplit, SiNvidia, SiClaude } from "react-icons/si";
 import { Brain } from "lucide-react";
 
 export function Footer() {
@@ -66,10 +66,6 @@ export function Footer() {
               <div className="flex items-center gap-2 text-white/60 hover:text-white transition-colors">
                 <SiNvidia className="h-5 w-5" />
                 <span className="text-xs">NVIDIA</span>
-              </div>
-              <div className="flex items-center gap-2 text-white/60 hover:text-white transition-colors">
-                <SiCloudflare className="h-5 w-5" />
-                <span className="text-xs">Cloudflare</span>
               </div>
             </div>
             <p className="text-center text-xs text-white/60 mt-2">
