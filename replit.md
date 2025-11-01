@@ -43,7 +43,7 @@ The platform features a visual-first approach with large images and sophisticate
 - **Service Pages**: Dedicated pages for mortgage pre-approval (`/services/get-preapproved`) and home valuation (`/services/get-home-value`) with comprehensive forms and a new timeline question for pre-qualification.
 - **Market Analysis Reports**: Users can request property-specific listing reports.
 - **AI Chat Assistant**: A floating chat assistant provides concierge support with voice input and pre-configured search prompts.
-- **Email Digests**: Personalized property alerts via email capture forms.
+- **SMS Text Alerts**: Personalized property alerts via phone number capture with compact dark navy section stating "Get the texts that matter to you" featuring new listings, price drops, and market updates.
 - **Dynamic UI**: Real-time property data displayed via a `LiveTicker`.
 - **Broker Registration Page**: A new page (`/broker-registration`) allowing brokers to create profiles with video pitches, professional bios, and specializations, supporting a client choice model.
 - **Branding**: Professional NYC concierge avatar, gold accents, and a luxury aesthetic inspired by high-end real estate.

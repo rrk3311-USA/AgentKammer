@@ -2,10 +2,9 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Mail } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { MorningEmailIcon } from "./MorningEmailIcon";
 
 interface DigestProperty {
   id: string;
@@ -24,74 +23,68 @@ interface EmailDigestPreviewProps {
 
 export function EmailDigestPreview({ properties }: EmailDigestPreviewProps) {
   const { toast } = useToast();
-  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Email digest signup:", email);
+    console.log("SMS signup:", phone);
     toast({
       title: "Success!",
-      description: "You'll receive your first property digest tomorrow morning.",
+      description: "You'll start receiving property alerts via text.",
     });
-    setEmail("");
+    setPhone("");
   };
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-background to-primary/5">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="text-center mb-8">
-          <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4">
-            Your Must Have Email Every Morning
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Wake up to personalized property matches delivered to your inbox daily
-          </p>
-        </div>
-
-        <Card className="max-w-2xl mx-auto shadow-2xl p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="flex items-center justify-center mb-6">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                <MorningEmailIcon className="h-8 w-8" />
-              </div>
+    <section className="py-10 lg:py-12 bg-[#0a1628]">
+      <div className="max-w-3xl mx-auto px-6">
+        <Card className="bg-white/5 border-white/10 backdrop-blur shadow-2xl p-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="text-center mb-3">
+              <h2 className="font-serif text-2xl font-semibold mb-2 text-white">
+                Get the Texts That Matter to You
+              </h2>
+              <p className="text-sm text-white/70">
+                Instant property alerts delivered right to your phone
+              </p>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="digest-email" className="text-base font-medium">
-                Email Address
+              <Label htmlFor="phone-number" className="text-sm font-medium text-white">
+                Phone Number
               </Label>
               <Input
-                id="digest-email"
-                type="email"
-                placeholder="your@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="phone-number"
+                type="tel"
+                placeholder="(555) 123-4567"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 required
-                className="h-12"
-                data-testid="input-digest-email"
+                className="h-11 bg-white/10 border-white/20 text-white placeholder:text-white/40"
+                data-testid="input-phone-number"
               />
             </div>
 
             <Button
               type="submit"
               size="lg"
-              className="w-full rounded-full text-black"
-              data-testid="button-subscribe-digest"
+              className="w-full rounded-full text-black h-11"
+              data-testid="button-subscribe-sms"
             >
-              <Mail className="mr-2 h-5 w-5" />
-              Start Receiving Daily Emails
+              <MessageSquare className="mr-2 h-4 w-4" />
+              Start Receiving Text Alerts
             </Button>
 
-            <div className="text-center space-y-2 pt-4">
-              <p className="text-sm text-muted-foreground">
-                ✓ Personalized property matches every morning
-              </p>
-              <p className="text-sm text-muted-foreground">
-                ✓ Cancel anytime with one click
-              </p>
-              <p className="text-sm text-muted-foreground">
-                ✓ No spam, just properties you'll love
-              </p>
+            <div className="grid grid-cols-3 gap-3 pt-3 text-center">
+              <div className="text-xs text-white/70">
+                New listings
+              </div>
+              <div className="text-xs text-white/70">
+                Price drops
+              </div>
+              <div className="text-xs text-white/70">
+                Market updates
+              </div>
             </div>
           </form>
         </Card>
