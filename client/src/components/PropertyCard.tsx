@@ -115,7 +115,7 @@ export function PropertyCard({
           <div className="backdrop-blur-xl bg-black/85 dark:bg-black/90 rounded-lg px-2.5 py-1.5 border border-white/10 shadow-2xl">
             <div className="flex items-center gap-1 flex-wrap">
               {dealScore && (
-                <Badge variant="default" className="text-xs px-1.5 py-0 h-auto flex items-center gap-0.5 bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] text-black border-0">
+                <Badge variant="default" className="text-xs px-1.5 py-0 h-auto flex items-center gap-0.5 bg-black text-white border border-[#D4AF37]">
                   <TopHatIcon className="h-2.5 w-2.5" />
                   {dealScore} IQ
                 </Badge>
