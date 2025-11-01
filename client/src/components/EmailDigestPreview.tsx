@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { MessageSquare, TrendingDown, Home, Bell } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import agentKammerImg from "@assets/generated_images/Left_positioned_transparent_character_f61ca962.png";
+import agentKammerImg from "@assets/generated_images/Raphael_professional_character_with_glow_e301eca7.png";
 
 interface DigestProperty {
   id: string;
@@ -44,18 +44,18 @@ export function EmailDigestPreview({ properties }: EmailDigestPreviewProps) {
       <div className="max-w-7xl mx-auto px-6 relative">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Left side: Agent Kammer with floating modules */}
-          <div className="relative h-[500px] lg:h-[600px] flex items-center justify-center">
-            {/* Agent Kammer Image */}
-            <div className="relative z-10">
+          <div className="relative h-[500px] lg:h-[600px] flex items-center justify-start">
+            {/* Agent Kammer Image - positioned to left */}
+            <div className="relative z-10 -ml-8">
               <img 
                 src={agentKammerImg} 
                 alt="Agent Kammer" 
-                className="h-[400px] lg:h-[500px] w-auto object-contain"
+                className="h-[400px] lg:h-[500px] w-auto object-contain drop-shadow-2xl"
               />
             </div>
 
             {/* Floating Module - Top Left */}
-            <Card className="absolute top-8 left-4 lg:left-12 bg-white/95 backdrop-blur-xl border-white/60 shadow-2xl p-5 max-w-[200px] hover:scale-105 transition-transform">
+            <Card className="absolute top-8 left-24 lg:left-32 bg-white backdrop-blur-xl border-white/80 shadow-2xl p-5 max-w-[200px] hover:scale-105 transition-transform z-20">
               <div className="flex items-center gap-2 mb-2">
                 <Bell className="w-5 h-5 text-blue-600" />
                 <span className="text-sm font-bold text-gray-800">Instant Alerts</span>
@@ -66,7 +66,7 @@ export function EmailDigestPreview({ properties }: EmailDigestPreviewProps) {
             </Card>
 
             {/* Floating Module - Right side (where hand points) - LIFTED STYLE */}
-            <Card className="absolute top-32 right-8 lg:right-16 bg-white/95 backdrop-blur-xl border-white/60 shadow-[0_20px_60px_rgba(0,0,0,0.3)] p-5 max-w-[220px] hover:scale-105 transition-all transform hover:-translate-y-2">
+            <Card className="absolute top-32 right-8 lg:right-16 bg-white backdrop-blur-xl border-white/80 shadow-[0_20px_60px_rgba(0,0,0,0.3)] p-5 max-w-[220px] hover:scale-105 transition-all transform hover:-translate-y-2 z-20">
               <form onSubmit={handleSubmit} className="space-y-3">
                 <div className="flex items-center gap-2 mb-2">
                   <MessageSquare className="w-5 h-5 text-blue-600" />
@@ -94,7 +94,7 @@ export function EmailDigestPreview({ properties }: EmailDigestPreviewProps) {
             </Card>
 
             {/* Floating Module - Bottom Left */}
-            <Card className="absolute bottom-12 left-8 bg-white/95 backdrop-blur-xl border-white/60 shadow-2xl p-5 max-w-[180px] hover:scale-105 transition-transform">
+            <Card className="absolute bottom-12 left-20 lg:left-28 bg-white backdrop-blur-xl border-white/80 shadow-2xl p-5 max-w-[180px] hover:scale-105 transition-transform z-20">
               <div className="flex items-center gap-2 mb-2">
                 <TrendingDown className="w-5 h-5 text-green-600" />
                 <span className="text-sm font-bold text-gray-800">Price Drops</span>
@@ -105,7 +105,7 @@ export function EmailDigestPreview({ properties }: EmailDigestPreviewProps) {
             </Card>
 
             {/* Floating Module - Bottom Right */}
-            <Card className="absolute bottom-20 right-4 lg:right-8 bg-white/95 backdrop-blur-xl border-white/60 shadow-2xl p-4 max-w-[160px] hover:scale-105 transition-transform">
+            <Card className="absolute bottom-20 right-4 lg:right-8 bg-white backdrop-blur-xl border-white/80 shadow-2xl p-4 max-w-[160px] hover:scale-105 transition-transform z-20">
               <div className="flex items-center gap-2 mb-2">
                 <Home className="w-5 h-5 text-blue-600" />
                 <span className="text-sm font-bold text-gray-800">New Listings</span>
