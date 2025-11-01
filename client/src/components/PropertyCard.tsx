@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Heart, Bed, Bath, Maximize, MapPin, ArrowRight, Clock, TrendingUp } from "lucide-react";
+import { Heart, Bed, Bath, Maximize, MapPin, ArrowRight, Clock } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { HappyDocIcon } from "./HappyDocIcon";
+import { TopHatIcon } from "./TopHatIcon";
 
 interface PropertyCardProps {
   id: string;
@@ -115,8 +116,8 @@ export function PropertyCard({
             <div className="flex items-center gap-1 flex-wrap">
               {dealScore && (
                 <Badge variant="default" className="text-xs px-1.5 py-0 h-auto flex items-center gap-0.5 bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] text-black border-0">
-                  <TrendingUp className="h-2.5 w-2.5" />
-                  {dealScore}/10
+                  <TopHatIcon className="h-2.5 w-2.5" />
+                  {dealScore} IQ
                 </Badge>
               )}
               <Badge variant="secondary" className="text-xs px-1.5 py-0 h-auto bg-white/20 text-white border-white/10">
