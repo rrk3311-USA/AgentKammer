@@ -97,30 +97,33 @@ export function PropertyCard({
           </Button>
         </div>
         
-        {/* Unified Glassmorphism Info Module - Bottom Left on Photo */}
-        <div className="absolute bottom-4 left-4 right-4">
-          <div className="backdrop-blur-xl bg-white/80 dark:bg-black/70 rounded-2xl p-4 border border-white/20 dark:border-white/10 shadow-2xl">
-            {/* Price - 75% Larger */}
-            <div className="mb-3">
-              <span className="font-serif text-4xl font-bold text-foreground" data-testid={`text-price-${id}`}>
+        {/* Compact Glassmorphism Info Module - Black with Gold Price */}
+        <div className="absolute bottom-3 left-3">
+          <div className="backdrop-blur-xl bg-black/80 dark:bg-black/90 rounded-xl px-3 py-2 border border-white/10 shadow-2xl">
+            {/* Price with Gold Gradient - 75% Larger */}
+            <div className="mb-1.5">
+              <span 
+                className="font-serif text-2xl font-bold bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] bg-clip-text text-transparent" 
+                data-testid={`text-price-${id}`}
+              >
                 {formatPrice(price)}
               </span>
             </div>
             
-            {/* Badges Row - Smaller */}
-            <div className="flex items-center gap-2 flex-wrap">
-              <Badge variant="secondary" className="text-sm backdrop-blur-sm bg-background/90">
+            {/* Badges Row - Compact */}
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <Badge variant="secondary" className="text-xs px-1.5 py-0.5 h-auto bg-white/20 text-white border-white/10">
                 {propertyType}
               </Badge>
               {daysOnMarket && (
-                <Badge variant="secondary" className="text-sm backdrop-blur-sm bg-background/90 flex items-center gap-1">
-                  <Clock className="h-3.5 w-3.5" />
+                <Badge variant="secondary" className="text-xs px-1.5 py-0.5 h-auto bg-white/20 text-white border-white/10 flex items-center gap-0.5">
+                  <Clock className="h-2.5 w-2.5" />
                   {daysOnMarket}d
                 </Badge>
               )}
               {dealScore && (
-                <Badge variant="default" className="text-sm flex items-center gap-1 bg-primary/90">
-                  <TrendingUp className="h-3.5 w-3.5" />
+                <Badge variant="default" className="text-xs px-1.5 py-0.5 h-auto flex items-center gap-0.5 bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] text-black border-0">
+                  <TrendingUp className="h-2.5 w-2.5" />
                   {dealScore}/10
                 </Badge>
               )}
