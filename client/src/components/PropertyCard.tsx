@@ -1,10 +1,10 @@
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Heart, Bed, Bath, Maximize, MapPin, ArrowRight, Clock, TrendingUp } from "lucide-react";
+import { Heart, Bed, Bath, Maximize, MapPin, Clock, TrendingUp } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { HappyDocIcon } from "./HappyDocIcon";
@@ -84,6 +84,8 @@ export function PropertyCard({
           alt={title}
           className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300"
         />
+        
+        {/* Favorite Button - Top Right */}
         <div className="absolute top-4 right-4 backdrop-blur-md bg-background/80 rounded-full">
           <Button
             variant="ghost"
@@ -96,80 +98,92 @@ export function PropertyCard({
             />
           </Button>
         </div>
-        <div className="absolute bottom-4 left-4 flex flex-col gap-2">
-          <div className="flex items-center gap-2">
-            <div className="bg-black px-3 py-1.5 rounded">
-              <span className="font-serif text-lg font-semibold text-white">
+
+        {/* Unified Glassmorphism Info Module - Bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-4">
+          <div className="backdrop-blur-xl bg-white/85 dark:bg-black/75 rounded-2xl p-4 border border-white/20 shadow-2xl">
+            {/* Price - 75% Larger */}
+            <div className="mb-3">
+              <span className="font-serif text-3xl font-bold text-foreground">
                 {formatPrice(price)}
               </span>
             </div>
-            {daysOnMarket && (
-              <Badge variant="secondary" className="backdrop-blur-md bg-background/90 flex items-center gap-1">
-                <Clock className="h-3 w-3" />
-                {daysOnMarket}d
-              </Badge>
-            )}
-          </div>
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary" className="backdrop-blur-md bg-background/90 w-fit">
-              {propertyType}
-            </Badge>
-            {dealScore && (
-              <Badge variant="default" className="backdrop-blur-md bg-primary/90 text-primary-foreground flex items-center gap-1">
-                <TrendingUp className="h-3 w-3" />
-                {dealScore}/10
-              </Badge>
-            )}
+
+            {/* Title & Address */}
+            <div className="mb-3">
+              <h3 className="font-serif text-base font-semibold mb-1 line-clamp-1 text-foreground">
+                {title}
+              </h3>
+              <div className="flex items-start gap-1.5 text-muted-foreground">
+                <MapPin className="h-3.5 w-3.5 mt-0.5 flex-shrink-0" />
+                <span className="text-xs line-clamp-1">{address}</span>
+              </div>
+            </div>
+
+            {/* Property Details & Badges Row */}
+            <div className="flex items-center justify-between gap-3">
+              {/* Beds/Baths/SqFt */}
+              <div className="flex items-center gap-2 text-xs text-foreground/90">
+                <div className="flex items-center gap-1">
+                  <Bed className="h-3.5 w-3.5 text-muted-foreground" />
+                  <span>{beds}</span>
+                </div>
+                <div className="h-3 w-px bg-border" />
+                <div className="flex items-center gap-1">
+                  <Bath className="h-3.5 w-3.5 text-muted-foreground" />
+                  <span>{baths}</span>
+                </div>
+                <div className="h-3 w-px bg-border" />
+                <div className="flex items-center gap-1">
+                  <Maximize className="h-3.5 w-3.5 text-muted-foreground" />
+                  <span className="text-xs">{sqft.toLocaleString()}</span>
+                </div>
+              </div>
+
+              {/* Badges */}
+              <div className="flex items-center gap-1.5 flex-shrink-0">
+                <Badge variant="secondary" className="text-xs px-2 py-0.5 h-auto">
+                  {propertyType}
+                </Badge>
+                {daysOnMarket && (
+                  <Badge variant="secondary" className="text-xs px-2 py-0.5 h-auto flex items-center gap-1">
+                    <Clock className="h-3 w-3" />
+                    {daysOnMarket}d
+                  </Badge>
+                )}
+                {dealScore && (
+                  <Badge variant="default" className="text-xs px-2 py-0.5 h-auto flex items-center gap-1 bg-primary/90">
+                    <TrendingUp className="h-3 w-3" />
+                    {dealScore}/10
+                  </Badge>
+                )}
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex gap-2 mt-3 pt-3 border-t border-foreground/10">
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex-1 rounded-full text-xs h-8"
+                onClick={handleViewDetails}
+                data-testid={`button-view-details-${id}`}
+              >
+                View Details
+              </Button>
+              <Button
+                variant="default"
+                size="sm"
+                className="rounded-full text-black h-8 px-3"
+                onClick={handleGetReport}
+                data-testid={`button-get-report-${id}`}
+              >
+                <HappyDocIcon className="h-3.5 w-3.5" />
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-
-      <CardContent className="p-6">
-        <h3 className="font-serif text-xl font-medium mb-2 line-clamp-1">
-          {title}
-        </h3>
-        <div className="flex items-start gap-2 text-muted-foreground mb-4">
-          <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
-          <span className="text-sm line-clamp-1">{address}</span>
-        </div>
-
-        <div className="flex items-center gap-4 text-sm">
-          <div className="flex items-center gap-1.5">
-            <Bed className="h-4 w-4 text-muted-foreground" />
-            <span>{beds} bd</span>
-          </div>
-          <div className="h-4 w-px bg-border" />
-          <div className="flex items-center gap-1.5">
-            <Bath className="h-4 w-4 text-muted-foreground" />
-            <span>{baths} ba</span>
-          </div>
-          <div className="h-4 w-px bg-border" />
-          <div className="flex items-center gap-1.5">
-            <Maximize className="h-4 w-4 text-muted-foreground" />
-            <span>{sqft.toLocaleString()} sqft</span>
-          </div>
-        </div>
-      </CardContent>
-
-      <CardFooter className="p-6 pt-0 flex gap-2">
-        <Button
-          variant="outline"
-          className="flex-1 rounded-full"
-          onClick={handleViewDetails}
-          data-testid={`button-view-details-${id}`}
-        >
-          View Details
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
-        <Button
-          variant="default"
-          className="rounded-full text-black"
-          onClick={handleGetReport}
-          data-testid={`button-get-report-${id}`}
-        >
-          <HappyDocIcon className="h-4 w-4" />
-        </Button>
-      </CardFooter>
 
       <Dialog open={showReportDialog} onOpenChange={setShowReportDialog}>
         <DialogContent className="sm:max-w-md">
