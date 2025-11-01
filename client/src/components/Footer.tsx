@@ -1,4 +1,4 @@
-import { SiReplit, SiOpenai, SiGoogle, SiMeta } from "react-icons/si";
+import { SiReplit, SiOpenai, SiCloudflare, SiNvidia, SiGooglecloud } from "react-icons/si";
 import { Brain } from "lucide-react";
 
 export function Footer() {
@@ -64,12 +64,16 @@ export function Footer() {
                 <span className="text-xs">OpenAI</span>
               </div>
               <div className="flex items-center gap-2 text-white/60 hover:text-white transition-colors">
-                <SiGoogle className="h-5 w-5" />
-                <span className="text-xs">Google AI</span>
+                <SiNvidia className="h-5 w-5" />
+                <span className="text-xs">NVIDIA</span>
               </div>
               <div className="flex items-center gap-2 text-white/60 hover:text-white transition-colors">
-                <SiMeta className="h-5 w-5" />
-                <span className="text-xs">Meta AI</span>
+                <SiCloudflare className="h-5 w-5" />
+                <span className="text-xs">Cloudflare</span>
+              </div>
+              <div className="flex items-center gap-2 text-white/60 hover:text-white transition-colors">
+                <SiGooglecloud className="h-5 w-5" />
+                <span className="text-xs">Google Cloud</span>
               </div>
             </div>
             <p className="text-center text-xs text-white/60 mt-2">
