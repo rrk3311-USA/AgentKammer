@@ -97,11 +97,11 @@ export function PropertyCard({
           </Button>
         </div>
         
-        {/* Price - Floating Separately */}
-        <div className="absolute bottom-14 left-2.5">
+        {/* Price - Floating Separately (20% smaller, tighter spacing) */}
+        <div className="absolute bottom-8 left-2.5">
           <div className="backdrop-blur-xl bg-black/85 dark:bg-black/90 rounded-lg px-2.5 py-1.5 border border-white/10 shadow-2xl">
             <span 
-              className="font-serif text-xl font-bold bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] bg-clip-text text-transparent" 
+              className="font-serif text-base font-bold bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] bg-clip-text text-transparent" 
               data-testid={`text-price-${id}`}
             >
               {formatPrice(price)}
@@ -109,7 +109,7 @@ export function PropertyCard({
           </div>
         </div>
         
-        {/* Badges Row - Separate Below with Space */}
+        {/* Badges Row - Separate Below with Tighter Space (50% closer) */}
         <div className="absolute bottom-2.5 left-2.5">
           <div className="backdrop-blur-xl bg-black/85 dark:bg-black/90 rounded-lg px-2.5 py-1.5 border border-white/10 shadow-2xl">
             <div className="flex items-center gap-1 flex-wrap">

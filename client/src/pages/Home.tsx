@@ -33,6 +33,8 @@ export default function Home() {
       baths: 2,
       sqft: 1450,
       propertyType: "Condo",
+      daysOnMarket: 12,
+      dealScore: 8.5,
     },
     {
       id: "2",
@@ -44,6 +46,8 @@ export default function Home() {
       baths: 3,
       sqft: 2800,
       propertyType: "Townhouse",
+      daysOnMarket: 8,
+      dealScore: 9.2,
     },
     {
       id: "3",
@@ -55,6 +59,8 @@ export default function Home() {
       baths: 2,
       sqft: 1600,
       propertyType: "Co-op",
+      daysOnMarket: 15,
+      dealScore: 8.8,
     },
     {
       id: "4",
@@ -66,6 +72,8 @@ export default function Home() {
       baths: 3,
       sqft: 2400,
       propertyType: "Penthouse",
+      daysOnMarket: 5,
+      dealScore: 9.5,
     },
     {
       id: "5",
@@ -77,6 +85,8 @@ export default function Home() {
       baths: 2,
       sqft: 1800,
       propertyType: "Co-op",
+      daysOnMarket: 18,
+      dealScore: 8.3,
     },
     {
       id: "6",
@@ -88,6 +98,8 @@ export default function Home() {
       baths: 1.5,
       sqft: 1350,
       propertyType: "Condo",
+      daysOnMarket: 22,
+      dealScore: 7.9,
     },
   ];
 
