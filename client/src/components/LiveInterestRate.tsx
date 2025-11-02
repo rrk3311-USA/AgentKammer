@@ -60,20 +60,20 @@ export function LiveInterestRate() {
 
   return (
     <div 
-      className="inline-flex items-baseline gap-2 px-3 py-1.5 bg-black border border-[#d4af37] rounded-sm"
+      className="inline-flex items-baseline gap-1 px-1.5 py-0.5 bg-black border border-[#d4af37] rounded-sm"
       data-testid="live-interest-rate-ticker"
     >
-      <span className="text-[10px] font-medium text-[#d4af37] uppercase tracking-wide">
-        {isLive ? '● Live' : 'Est.'}
+      <span className="text-[8px] font-medium text-[#d4af37] uppercase tracking-wide">
+        {isLive ? '●' : ''}
       </span>
       <span 
-        className="font-mono text-sm font-bold text-white tabular-nums ticker-number"
+        className="font-mono text-[10px] font-bold text-white tabular-nums ticker-number"
         data-testid="text-current-rate"
         aria-live="polite"
       >
         {rate.toFixed(2)}%
       </span>
-      <span className="text-[9px] font-medium text-[#d4af37] uppercase tracking-wide opacity-80">
+      <span className="text-[7px] font-medium text-[#d4af37] uppercase tracking-wide opacity-70">
         30yr
       </span>
     </div>

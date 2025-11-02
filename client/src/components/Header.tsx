@@ -109,7 +109,7 @@ export function Header() {
           </div>
           
           {/* Live Interest Rate Ticker - Bottom Left */}
-          <div className="absolute bottom-2 left-6">
+          <div className="absolute bottom-1 left-6 hidden md:block">
             <LiveInterestRate />
           </div>
         </div>
