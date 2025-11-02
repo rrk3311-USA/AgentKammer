@@ -13,9 +13,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex h-24 items-center justify-between gap-4">
+        <div className="flex h-24 items-center justify-between gap-4 relative">
           <div className="hidden md:flex items-center gap-4">
-            <LiveInterestRate />
             <Button
               variant="ghost"
               size="icon"
@@ -107,6 +106,11 @@ export function Header() {
                 <Menu className="h-5 w-5" />
               )}
             </Button>
+          </div>
+          
+          {/* Live Interest Rate Ticker - Bottom Left */}
+          <div className="absolute bottom-2 left-6">
+            <LiveInterestRate />
           </div>
         </div>
       </div>
