@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Moon, Sun, Heart, Menu, X, Building2, Sparkles } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
-import { LiveInterestRate } from "./LiveInterestRate";
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -106,11 +105,6 @@ export function Header() {
                 <Menu className="h-5 w-5" />
               )}
             </Button>
-          </div>
-          
-          {/* Live Interest Rate Ticker - Bottom Left */}
-          <div className="absolute bottom-1 left-6 hidden md:block">
-            <LiveInterestRate />
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { SiReplit, SiNvidia, SiClaude } from "react-icons/si";
 import { Brain } from "lucide-react";
+import { LiveInterestRate } from "./LiveInterestRate";
 
 export function Footer() {
   return (
@@ -47,6 +48,9 @@ export function Footer() {
       <div className="bg-[#0a1628] py-6">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col items-center gap-4">
+            <div className="mb-2">
+              <LiveInterestRate />
+            </div>
             <p className="text-center text-sm text-white/80">
               Powered by AI
             </p>
