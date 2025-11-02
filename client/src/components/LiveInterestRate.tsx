@@ -4,6 +4,7 @@ export function LiveInterestRate() {
   const FALLBACK_RATE = 6.82;
   const [rate, setRate] = useState(FALLBACK_RATE);
   const [isLive, setIsLive] = useState(false);
+  const [displayRate, setDisplayRate] = useState(FALLBACK_RATE);
 
   useEffect(() => {
     const fetchMortgageRates = async () => {
@@ -58,24 +59,48 @@ export function LiveInterestRate() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (isLive) {
+      const animationInterval = setInterval(() => {
+        const variation = (Math.random() - 0.5) * 0.02;
+        setDisplayRate(rate + variation);
+      }, 800);
+
+      return () => clearInterval(animationInterval);
+    } else {
+      setDisplayRate(rate);
+    }
+  }, [rate, isLive]);
+
+  const integerPart = Math.floor(displayRate);
+  const decimalPart = (displayRate - integerPart).toFixed(3).substring(2);
+
   return (
     <div 
-      className="inline-flex items-baseline gap-1 px-1.5 py-0.5 bg-black border border-[#d4af37] rounded-sm"
+      className="inline-flex items-center gap-1.5 px-2 py-1 bg-black border border-[#d4af37] rounded-sm"
       data-testid="live-interest-rate-ticker"
     >
-      <span className="text-[8px] font-medium text-[#d4af37] uppercase tracking-wide">
-        {isLive ? '●' : ''}
-      </span>
-      <span 
-        className="font-mono text-[10px] font-bold text-white tabular-nums ticker-number"
-        data-testid="text-current-rate"
-        aria-live="polite"
-      >
-        {rate.toFixed(2)}%
-      </span>
-      <span className="text-[7px] font-medium text-[#d4af37] uppercase tracking-wide opacity-70">
-        30yr
-      </span>
+      <div className="flex flex-col">
+        <span className="text-[7px] font-medium text-[#d4af37] uppercase tracking-wide leading-none">
+          Current Rate
+        </span>
+        <div className="flex items-baseline gap-0.5 mt-0.5">
+          <span 
+            className="font-mono text-[11px] font-bold text-white tabular-nums"
+            data-testid="text-current-rate"
+            aria-live="polite"
+          >
+            {integerPart}.
+            <span className={isLive ? "inline-block animate-pulse" : ""}>
+              {decimalPart.substring(0, 2)}
+            </span>
+          </span>
+          <span className="text-[10px] font-bold text-white">%</span>
+        </div>
+      </div>
+      {isLive && (
+        <span className="w-1 h-1 rounded-full bg-green-500 animate-pulse" title="Live data" />
+      )}
     </div>
   );
 }
