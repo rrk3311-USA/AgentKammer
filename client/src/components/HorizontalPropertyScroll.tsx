@@ -97,11 +97,11 @@ export function HorizontalPropertyScroll({
 
           {/* Bottom Controls Container */}
           <div className="relative mt-4">
-            {/* Bowtie Navigation - Centered */}
-            <div className="flex items-center justify-center gap-3">
+            {/* Bowtie Navigation - Centered with Gold Bar */}
+            <div className="flex items-center justify-center gap-1">
               <button
                 onClick={() => scroll("left")}
-                className="group relative hover-elevate active-elevate-2 transition-all"
+                className="group relative hover-elevate active-elevate-2 transition-all z-10"
                 data-testid="button-scroll-left"
                 aria-label="Scroll left"
               >
@@ -113,9 +113,11 @@ export function HorizontalPropertyScroll({
                   />
                 </svg>
               </button>
+              {/* Gold Connector Bar */}
+              <div className="h-1 w-16 bg-gradient-to-r from-[#d4af37] via-[#f4d03f] to-[#d4af37] rounded-full shadow-sm" />
               <button
                 onClick={() => scroll("right")}
-                className="group relative hover-elevate active-elevate-2 transition-all"
+                className="group relative hover-elevate active-elevate-2 transition-all z-10"
                 data-testid="button-scroll-right"
                 aria-label="Scroll right"
               >
