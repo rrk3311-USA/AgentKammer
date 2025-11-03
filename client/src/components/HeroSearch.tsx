@@ -75,7 +75,7 @@ export function HeroSearch() {
               Live where you belong
             </p>
             
-            <div className="flex items-center justify-center gap-1 text-primary mb-2">
+            <div className="flex items-center justify-center gap-1 text-primary">
               <Sparkles className="w-2 h-2 animate-pulse opacity-60" />
               <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '0.2s' }} />
               <Sparkles className="w-2 h-2 animate-pulse opacity-40" style={{ animationDelay: '0.4s' }} />
@@ -86,9 +86,6 @@ export function HeroSearch() {
               <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '1.4s' }} />
               <Sparkles className="w-2 h-2 animate-pulse opacity-60" style={{ animationDelay: '1.6s' }} />
             </div>
-            <p className="text-xs text-white/60 font-light">
-              Download the app
-            </p>
           </div>
         </div>
       </section>
