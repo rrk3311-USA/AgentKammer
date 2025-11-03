@@ -71,13 +71,57 @@ export function HeroSearch() {
             <p className="text-sm text-white font-light leading-relaxed mb-3 max-w-2xl mx-auto">
               Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
             </p>
-            <p className="font-serif text-2xl text-white font-semibold mb-4">
+            <p className="font-serif text-2xl text-white font-semibold mb-2">
               Live where you belong
             </p>
+            
+            {/* Animated Script Divider */}
+            <div className="w-full flex justify-center mb-2">
+              <svg width="200" height="40" viewBox="0 0 200 40" className="overflow-visible">
+                <defs>
+                  <style>{`
+                    @keyframes draw {
+                      to {
+                        stroke-dashoffset: 0;
+                      }
+                    }
+                    .script-line {
+                      stroke-dasharray: 400;
+                      stroke-dashoffset: 400;
+                      animation: draw 3s ease-in-out forwards;
+                      animation-iteration-count: infinite;
+                    }
+                  `}</style>
+                </defs>
+                <path
+                  className="script-line"
+                  d="M 10 20 Q 30 15, 50 20 T 90 20 Q 110 18, 130 20 T 170 20 L 175 20 L 175 25 L 175 20"
+                  stroke="white"
+                  strokeWidth="1.5"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  opacity="0.7"
+                />
+                <circle cx="175" cy="20" r="2" fill="white" opacity="0.7">
+                  <animate attributeName="opacity" values="0;0.7" dur="3s" fill="freeze" />
+                </circle>
+                <path
+                  d="M 183 15 Q 188 10, 193 15 Q 188 20, 183 15"
+                  stroke="#FFD700"
+                  strokeWidth="1.5"
+                  fill="none"
+                  strokeLinecap="round"
+                  opacity="0.8"
+                >
+                  <animate attributeName="opacity" values="0;0.8" dur="3s" fill="freeze" />
+                </path>
+              </svg>
+            </div>
           </div>
           
           {/* Full Width Animated Divider */}
-          <div className="w-full px-12 py-4">
+          <div className="w-full px-12 py-2">
             <div className="flex items-center justify-center gap-2 text-primary">
               <Heart className="w-3 h-3 animate-pulse opacity-60" />
               <MousePointer className="w-3 h-3 animate-pulse" style={{ animationDelay: '0.1s' }} />
