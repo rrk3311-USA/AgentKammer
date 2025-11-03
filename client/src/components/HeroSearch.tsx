@@ -71,30 +71,40 @@ export function HeroSearch() {
             <p className="text-sm text-white font-light leading-relaxed mb-3 max-w-2xl mx-auto">
               Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
             </p>
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center justify-center gap-1.5">
+              {/* Left Heart Bubbles */}
+              <div className="flex gap-0.5 items-center">
+                <Heart 
+                  className="w-1.5 h-1.5 text-[#d4af37] animate-pulse -translate-y-0.5" 
+                  strokeWidth={2}
+                  fill="none"
+                  style={{ animationDuration: '2.3s', animationDelay: '0.2s' }}
+                />
+                <Heart 
+                  className="w-2 h-2 text-[#d4af37] animate-pulse translate-y-0.5" 
+                  strokeWidth={2}
+                  fill="none"
+                  style={{ animationDuration: '1.8s' }}
+                />
+              </div>
+              
               <p className="font-serif text-2xl text-white font-semibold">
                 Live where you belong
               </p>
               
-              {/* Tiny Gold Heart Bubbles */}
-              <div className="flex gap-1">
+              {/* Right Heart Bubbles */}
+              <div className="flex gap-0.5 items-center">
                 <Heart 
-                  className="w-2.5 h-2.5 text-[#d4af37] animate-pulse" 
+                  className="w-1.5 h-1.5 text-[#d4af37] animate-pulse translate-y-0.5" 
                   strokeWidth={2}
                   fill="none"
-                  style={{ animationDuration: '2s' }}
+                  style={{ animationDuration: '2.1s', animationDelay: '0.4s' }}
                 />
                 <Heart 
-                  className="w-2 h-2 text-[#d4af37] animate-pulse" 
+                  className="w-2 h-2 text-[#d4af37] animate-pulse -translate-y-0.5" 
                   strokeWidth={2}
                   fill="none"
-                  style={{ animationDuration: '2.5s', animationDelay: '0.3s' }}
-                />
-                <Heart 
-                  className="w-2.5 h-2.5 text-[#d4af37] animate-pulse" 
-                  strokeWidth={2}
-                  fill="none"
-                  style={{ animationDuration: '2.2s', animationDelay: '0.6s' }}
+                  style={{ animationDuration: '2.5s', animationDelay: '0.1s' }}
                 />
               </div>
             </div>
