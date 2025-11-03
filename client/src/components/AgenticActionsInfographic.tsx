@@ -97,22 +97,113 @@ export function AgenticActionsInfographic() {
 
         {/* Branching Actions */}
         <div className="relative mb-16">
-          {/* Center Node */}
+          {/* Center Node - TWICE AS BIG with AI Brain Visualization */}
           <div className="flex justify-center mb-8">
-            <div className="bg-card border border-primary/30 rounded-xl px-6 py-3 shadow-lg compute-engine-glow relative overflow-hidden">
-              <p className="font-semibold text-sm">Massive Compute Engine</p>
-              {/* Processing indicator */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent"
-                   style={{
-                     animation: 'shimmer 2s linear infinite',
-                     backgroundSize: '200% 100%'
-                   }} />
+            <div className="w-full max-w-4xl bg-gradient-to-br from-card to-card/50 border-2 border-primary/30 rounded-2xl shadow-2xl compute-engine-glow relative overflow-hidden"
+                 style={{ minHeight: '240px' }}>
+              {/* Two Column Layout */}
+              <div className="flex h-full">
+                {/* LEFT HALF - AI Brain/Wiring Unveiled */}
+                <div className="w-1/2 p-8 relative bg-gradient-to-br from-primary/5 to-primary/10 border-r border-primary/20">
+                  {/* Circuit Board Pattern Background */}
+                  <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
+                    {/* Horizontal lines */}
+                    <line x1="0" y1="20%" x2="100%" y2="20%" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
+                    <line x1="0" y1="40%" x2="100%" y2="40%" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
+                    <line x1="0" y1="60%" x2="100%" y2="60%" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
+                    <line x1="0" y1="80%" x2="100%" y2="80%" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
+                    {/* Vertical lines */}
+                    <line x1="20%" y1="0" x2="20%" y2="100%" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
+                    <line x1="50%" y1="0" x2="50%" y2="100%" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
+                    <line x1="80%" y1="0" x2="80%" y2="100%" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
+                    {/* Circuit nodes */}
+                    <circle cx="20%" cy="20%" r="4" fill="hsl(var(--primary))" opacity="0.7">
+                      <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="50%" cy="40%" r="5" fill="hsl(var(--primary))" opacity="0.8">
+                      <animate attributeName="r" values="5;7;5" dur="1.5s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="80%" cy="60%" r="4" fill="hsl(var(--primary))" opacity="0.7">
+                      <animate attributeName="r" values="4;6;4" dur="2.5s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="30%" cy="80%" r="3" fill="hsl(var(--primary))" opacity="0.6">
+                      <animate attributeName="r" values="3;5;3" dur="1.8s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="70%" cy="30%" r="4" fill="hsl(var(--primary))" opacity="0.7">
+                      <animate attributeName="r" values="4;6;4" dur="2.2s" repeatCount="indefinite" />
+                    </circle>
+                  </svg>
+                  
+                  {/* AI Brain Icon */}
+                  <div className="relative z-10 flex flex-col items-center justify-center h-full">
+                    <div className="text-6xl mb-4" style={{ animation: 'float-brain 3s ease-in-out infinite' }}>🧠</div>
+                    <div className="space-y-2 w-full">
+                      {/* Output wires with flowing data */}
+                      {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="flex items-center gap-2" style={{ animationDelay: `${i * 0.2}s` }}>
+                          <div className="w-3 h-3 rounded-full bg-primary animate-pulse" />
+                          <div className="h-0.5 flex-1 bg-gradient-to-r from-primary/80 to-transparent relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary to-transparent"
+                                 style={{
+                                   animation: `data-flow ${1.5 + i * 0.3}s linear infinite`,
+                                   width: '30%'
+                                 }} />
+                          </div>
+                          <ArrowRight className="h-3 w-3 text-primary/60" />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                
+                {/* RIGHT HALF - Label & Status */}
+                <div className="w-1/2 p-8 flex flex-col items-center justify-center relative">
+                  <div className="text-center">
+                    <p className="font-serif text-3xl font-bold mb-2">Massive Compute Engine</p>
+                    <p className="text-sm text-muted-foreground mb-4">AI-Powered Property Intelligence</p>
+                    
+                    {/* Processing indicators */}
+                    <div className="flex gap-2 justify-center mb-4">
+                      <div className="w-2 h-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: '0s' }} />
+                      <div className="w-2 h-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: '0.3s' }} />
+                      <div className="w-2 h-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: '0.6s' }} />
+                    </div>
+                    
+                    {/* Stats */}
+                    <div className="grid grid-cols-2 gap-4 mt-6">
+                      <div className="bg-background/50 rounded-lg p-3 border border-primary/20">
+                        <p className="text-2xl font-bold text-primary">24/7</p>
+                        <p className="text-xs text-muted-foreground">Active</p>
+                      </div>
+                      <div className="bg-background/50 rounded-lg p-3 border border-primary/20">
+                        <p className="text-2xl font-bold text-primary">10K+</p>
+                        <p className="text-xs text-muted-foreground">Daily Scans</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Shimmer effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent"
+                       style={{
+                         animation: 'shimmer 3s linear infinite',
+                         backgroundSize: '200% 100%'
+                       }} />
+                </div>
+              </div>
             </div>
           </div>
           <style dangerouslySetInnerHTML={{__html: `
             @keyframes shimmer {
               0% { background-position: -200% 0; }
               100% { background-position: 200% 0; }
+            }
+            @keyframes data-flow {
+              0% { transform: translateX(-100%); }
+              100% { transform: translateX(400%); }
+            }
+            @keyframes float-brain {
+              0%, 100% { transform: translateY(0px); }
+              50% { transform: translateY(-10px); }
             }
           `}} />
 

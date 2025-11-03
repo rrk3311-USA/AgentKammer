@@ -33,6 +33,7 @@ The platform features a visual-first approach with large images and sophisticate
 - Enhanced property card styling with pure white backgrounds (light mode) and pronounced drop shadows.
 - Decorative sparkles and mouse pointer icons for visual dividers.
 - Animated HTML5 infographic for "Agentic Actions" illustrating AI compute flow, data sources, and actions with dynamic visual effects.
+- Enhanced "Massive Compute Engine" section: Twice as large with two-column layout. Left half features AI brain visualization with circuit board patterns, animated nodes, and flowing data wires showing high-tech AI technology "unveiled". Right half displays engine stats (24/7 Active, 10K+ Daily Scans) with processing indicators.
 - Market Analysis Report with a premium background image of a luxury marble desk with a Manhattan view.
 - A personalized chat assistant avatar using the owner's professional headshot.
 - Email capture forms with gold gradients and animated icons.
