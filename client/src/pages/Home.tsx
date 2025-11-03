@@ -340,7 +340,7 @@ export default function Home() {
           ))}
         </div>
         <div className="max-w-7xl mx-auto px-6 pb-10 lg:pb-12">
-          <div className="flex items-center justify-center gap-1 mt-4">
+          <div className="flex items-center justify-center gap-0 mt-4">
             <button
               onClick={() => {
                 const container = document.querySelector('[data-testid="section-longest-on-market"] .overflow-x-auto');
@@ -360,8 +360,8 @@ export default function Home() {
                 />
               </svg>
             </button>
-            {/* Gold Connector Bar */}
-            <div className="h-1 w-16 bg-gradient-to-r from-[#d4af37] via-[#f4d03f] to-[#d4af37] rounded-full shadow-sm" />
+            {/* Gold Connector Bar - Bowtie Style */}
+            <div className="h-1.5 w-10 bg-gradient-to-r from-[#d4af37] via-[#f4d03f] to-[#d4af37] shadow-sm" />
             <button
               onClick={() => {
                 const container = document.querySelector('[data-testid="section-longest-on-market"] .overflow-x-auto');
