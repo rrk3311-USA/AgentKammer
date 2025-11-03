@@ -9,8 +9,9 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { TrendingDown, Clock, Sparkles } from "lucide-react";
+import { TrendingDown, Clock, Sparkles, MapPin } from "lucide-react";
 import { useState } from "react";
+import { Link } from "wouter";
 import property1 from "@assets/generated_images/Modern_Manhattan_condo_exterior_bdf30aa9.png";
 import property2 from "@assets/generated_images/Brooklyn_brownstone_townhouse_exterior_43d55d05.png";
 import property3 from "@assets/generated_images/NYC_apartment_living_space_interior_ba500d46.png";
@@ -379,6 +380,41 @@ export default function Home() {
                 />
               </svg>
             </button>
+          </div>
+          
+          {/* Bubbly Map Button */}
+          <div className="flex justify-center mt-8">
+            <Link href="/live-deal-map">
+              <button
+                className="group relative hover:scale-105 active:scale-95 transition-all duration-300"
+                data-testid="button-live-deal-map"
+              >
+                <div className="relative">
+                  {/* Orb glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#d4af37] to-[#c49b2a] rounded-2xl blur-xl opacity-60 group-hover:opacity-80 transition-opacity"></div>
+                  
+                  {/* Main button */}
+                  <div className="relative bg-gradient-to-br from-[#d4af37] to-[#c49b2a] rounded-2xl px-8 py-4 shadow-2xl border-2 border-white/30 backdrop-blur-sm">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <MapPin className="h-5 w-5 text-white" />
+                      </div>
+                      <div className="text-left">
+                        <div className="font-serif text-xl font-bold text-white mb-0.5">
+                          Live Deal Map
+                        </div>
+                        <div className="text-xs text-white/90 font-medium">
+                          Explore NYC Luxury Deals
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+              </button>
+            </Link>
           </div>
         </div>
       </section>
