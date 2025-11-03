@@ -59,15 +59,15 @@ export function HeroSearch() {
 
   return (
     <>
-      {/* Top Section - White Background */}
-      <section className="bg-white dark:bg-background py-8 lg:py-12">
+      {/* Top Section - Gradient Blend into Image */}
+      <section className="bg-gradient-to-b from-white via-white/95 to-transparent dark:from-background dark:via-background/95 dark:to-transparent pt-8 lg:pt-12">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h1 className="font-serif text-4xl lg:text-5xl font-semibold text-foreground mb-6">
             Your Perfect Home<br />Discovered
           </h1>
           
           {/* Navy Section - Full Width Horizontal Bar */}
-          <div className="bg-[#0a1628] py-6 -mx-6 px-6">
+          <div className="bg-[#0a1628] py-6 -mx-6 px-6 mb-0">
             <p className="text-sm text-white font-light leading-relaxed mb-3 max-w-2xl mx-auto">
               Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
             </p>
@@ -94,11 +94,13 @@ export function HeroSearch() {
       </section>
 
       {/* Bottom Section - Search Widget with Background Image */}
-      <section className="relative min-h-[600px] flex items-center justify-center bg-background">
+      <section className="relative min-h-[600px] flex items-center justify-center bg-background -mt-8">
         <div
           className="absolute inset-0 bg-no-repeat bg-center"
           style={{ backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
         />
+        {/* Gradient overlay from top */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-transparent to-transparent dark:from-background/60" style={{ height: '150px' }} />
 
         <div className="relative z-10 w-full max-w-3xl mx-auto px-6 py-12">
           <Card className="p-4 lg:p-6 space-y-4 bg-gradient-to-br from-sky-100/40 via-blue-50/30 to-slate-100/40 backdrop-blur-xl border border-white/60 shadow-2xl">

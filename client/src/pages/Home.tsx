@@ -17,6 +17,7 @@ import property3 from "@assets/generated_images/NYC_apartment_living_space_inter
 import property4 from "@assets/generated_images/Manhattan_penthouse_rooftop_terrace_25c2682e.png";
 import property5 from "@assets/generated_images/Upper_West_Side_co-op_building_1e75d246.png";
 import storefrontImg from "@assets/BBD593A1-EF8F-40A7-BD11-A6F13773084E_1_105_c_1762128066935.jpg";
+import storefrontWithPeopleImg from "@assets/generated_images/Storefront_with_family_entering_480935ce.png";
 
 export default function Home() {
   const [midtownFilter, setMidtownFilter] = useState<"midtown" | "above" | "below">("midtown");
@@ -435,10 +436,10 @@ export default function Home() {
                 </form>
               </div>
 
-              {/* Right side: Storefront image */}
+              {/* Right side: Storefront with people entering */}
               <div className="relative h-[400px] lg:h-[500px] flex items-center justify-center">
                 <img 
-                  src={storefrontImg} 
+                  src={storefrontWithPeopleImg} 
                   alt="Agent Kammer Storefront" 
                   className="w-full h-full object-cover rounded-lg shadow-2xl"
                 />
