@@ -283,17 +283,17 @@ export default function Home() {
         icon={TrendingDown}
       />
 
-      <section className="bg-gradient-to-br from-slate-50 via-blue-50/60 to-slate-100/60 dark:from-slate-900 dark:via-slate-900/50 dark:to-slate-800/40" data-testid="section-longest-on-market">
+      <section className="bg-[#0a1628]" data-testid="section-longest-on-market">
         <div className="max-w-7xl mx-auto px-6 pt-10 lg:pt-12 pb-4">
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-14 h-14 rounded-lg bg-card border border-border flex items-center justify-center shadow-lg">
-              <Clock className="h-6 w-6 text-primary animate-clock" />
+            <div className="w-14 h-14 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center shadow-lg">
+              <Clock className="h-6 w-6 text-[#d4af37] animate-clock" />
             </div>
             <div>
-              <h2 className="font-serif text-3xl lg:text-4xl font-semibold mb-1">
+              <h2 className="font-serif text-3xl lg:text-4xl font-semibold mb-1 text-white">
                 Longest on Market
               </h2>
-              <p className="text-muted-foreground text-sm">Prime opportunities - properties with extended market presence</p>
+              <p className="text-white/70 text-sm">Prime opportunities - properties with extended market presence</p>
             </div>
           </div>
           <div className="flex items-center bg-muted rounded-2xl p-1 shadow-inner gap-1 w-fit">

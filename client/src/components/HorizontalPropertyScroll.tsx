@@ -57,21 +57,21 @@ export function HorizontalPropertyScroll({
   };
 
   return (
-    <section className="py-10 lg:py-12 my-8 bg-gradient-to-br from-slate-50 via-blue-50/60 to-slate-100/60 dark:from-slate-900 dark:via-slate-900/50 dark:to-slate-800/40 relative overflow-hidden">
+    <section className="py-10 lg:py-12 my-8 bg-[#0a1628] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 relative">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4">
             {Icon && (
-              <div className="w-14 h-14 rounded-lg bg-card border border-border flex items-center justify-center shadow-lg">
-                <Icon className={`h-6 w-6 text-primary ${getIconAnimation()}`} />
+              <div className="w-14 h-14 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center shadow-lg">
+                <Icon className={`h-6 w-6 text-[#d4af37] ${getIconAnimation()}`} />
               </div>
             )}
             <div>
-              <h2 className="font-serif text-3xl lg:text-4xl font-semibold mb-1">
+              <h2 className="font-serif text-3xl lg:text-4xl font-semibold mb-1 text-white">
                 {title}
               </h2>
               {subtitle && (
-                <p className="text-muted-foreground text-sm">{subtitle}</p>
+                <p className="text-white/70 text-sm">{subtitle}</p>
               )}
             </div>
           </div>
