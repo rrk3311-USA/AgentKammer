@@ -261,8 +261,33 @@ export function AgenticActionsInfographic() {
             }
           `}} />
 
+          {/* Statistics Banner */}
+          <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 rounded-2xl p-8 lg:p-10 shadow-xl mt-12 mb-8">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="text-center md:text-left">
+                <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
+                  <Clock className="h-8 w-8 text-primary" />
+                  <div>
+                    <p className="text-4xl lg:text-5xl font-serif font-bold text-black dark:text-white">240hrs</p>
+                    <p className="text-sm text-black dark:text-white">Average time buyers spend searching</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center md:text-left border-l-0 md:border-l-2 border-primary/20 md:pl-8">
+                <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
+                  <Zap className="h-8 w-8 text-primary" />
+                  <div>
+                    <p className="text-4xl lg:text-5xl font-serif font-bold text-black dark:text-white">Saves 240+ hours</p>
+                    <p className="text-sm text-black dark:text-white">Agent Kammer's automated search</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Data Sources Detail */}
-          <div className="flex justify-center mt-12 mb-8">
+          <div className="flex justify-center mb-8">
             <Card className="max-w-4xl bg-gradient-to-br from-card to-card/50 border-primary/20 shadow-xl">
               <CardContent className="p-6">
                 <div className="space-y-6">
@@ -339,35 +364,8 @@ export function AgenticActionsInfographic() {
           </div>
         </div>
 
-        {/* Statistics Banner */}
+        {/* Lenders Competition Section */}
         <div className="bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 rounded-2xl p-8 lg:p-10 shadow-xl">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="text-center md:text-left">
-              <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
-                <Clock className="h-8 w-8 text-primary" />
-                <div>
-                  <p className="text-4xl lg:text-5xl font-serif font-bold text-black dark:text-white">240hrs</p>
-                  <p className="text-sm text-black dark:text-white">Average time buyers spend searching</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center md:text-left border-l-0 md:border-l-2 border-primary/20 md:pl-8">
-              <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
-                <Zap className="h-8 w-8 text-primary" />
-                <div>
-                  <p className="text-4xl lg:text-5xl font-serif font-bold text-black dark:text-white">Saves 240+ hours</p>
-                  <p className="text-sm text-black dark:text-white">Agent Kammer's automated search</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Dotted Divider */}
-          <div className="mt-10 mb-8 flex justify-center">
-            <div className="w-32 border-t-2 border-dotted border-primary/40" />
-          </div>
-
           <div className="text-center">
             <p className="text-2xl lg:text-3xl font-serif font-semibold text-foreground mb-2">
               "When lenders compete, you win"
