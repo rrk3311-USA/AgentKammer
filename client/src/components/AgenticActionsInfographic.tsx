@@ -97,193 +97,156 @@ export function AgenticActionsInfographic() {
 
         {/* Branching Actions */}
         <div className="relative mb-16">
-          {/* Center Node - TWICE AS BIG with AI Brain Visualization */}
+          {/* Center Node - NYC Skyline with Massive Compute */}
           <div className="flex justify-center mb-8">
             <div className="w-full max-w-4xl bg-gradient-to-br from-card to-card/50 border-2 border-primary/30 rounded-2xl shadow-2xl compute-engine-glow relative overflow-hidden"
-                 style={{ minHeight: '240px' }}>
-              {/* Two Column Layout */}
-              <div className="flex h-full">
-                {/* LEFT HALF - AI Brain/Wiring Unveiled */}
-                <div className="w-1/2 p-8 relative bg-gradient-to-br from-primary/5 to-primary/10 border-r border-primary/20">
-                  {/* Circuit Board Pattern Background */}
-                  <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
-                    {/* Horizontal lines */}
-                    <line x1="0" y1="20%" x2="100%" y2="20%" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
-                    <line x1="0" y1="40%" x2="100%" y2="40%" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
-                    <line x1="0" y1="60%" x2="100%" y2="60%" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
-                    <line x1="0" y1="80%" x2="100%" y2="80%" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
-                    {/* Vertical lines */}
-                    <line x1="20%" y1="0" x2="20%" y2="100%" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
-                    <line x1="50%" y1="0" x2="50%" y2="100%" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
-                    <line x1="80%" y1="0" x2="80%" y2="100%" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5" />
-                    {/* Circuit nodes */}
-                    <circle cx="20%" cy="20%" r="4" fill="hsl(var(--primary))" opacity="0.7">
-                      <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite" />
-                    </circle>
-                    <circle cx="50%" cy="40%" r="5" fill="hsl(var(--primary))" opacity="0.8">
-                      <animate attributeName="r" values="5;7;5" dur="1.5s" repeatCount="indefinite" />
-                    </circle>
-                    <circle cx="80%" cy="60%" r="4" fill="hsl(var(--primary))" opacity="0.7">
-                      <animate attributeName="r" values="4;6;4" dur="2.5s" repeatCount="indefinite" />
-                    </circle>
-                    <circle cx="30%" cy="80%" r="3" fill="hsl(var(--primary))" opacity="0.6">
-                      <animate attributeName="r" values="3;5;3" dur="1.8s" repeatCount="indefinite" />
-                    </circle>
-                    <circle cx="70%" cy="30%" r="4" fill="hsl(var(--primary))" opacity="0.7">
-                      <animate attributeName="r" values="4;6;4" dur="2.2s" repeatCount="indefinite" />
-                    </circle>
-                  </svg>
-                  
-                  {/* AI Brain Icon - Tech Style */}
-                  <div className="relative z-10 flex flex-col items-center justify-center h-full">
-                    {/* Tech Brain SVG with flowing code */}
-                    <div className="mb-4 relative" style={{ animation: 'float-brain 3s ease-in-out infinite' }}>
-                      <svg width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                          {/* Clip path for brain shape */}
-                          <clipPath id="brainClip">
-                            {/* Brain outline with crevices */}
-                            <path d="M 25,30 Q 20,20 30,15 Q 40,10 50,15 Q 60,10 70,15 Q 80,20 75,30 Q 78,40 75,50 Q 80,60 70,65 Q 60,70 50,65 Q 40,70 30,65 Q 20,60 25,50 Q 22,40 25,30 Z" />
-                          </clipPath>
-                        </defs>
-                        
-                        {/* Brain base - black */}
-                        <path 
-                          d="M 25,30 Q 20,20 30,15 Q 40,10 50,15 Q 60,10 70,15 Q 80,20 75,30 Q 78,40 75,50 Q 80,60 70,65 Q 60,70 50,65 Q 40,70 30,65 Q 20,60 25,50 Q 22,40 25,30 Z" 
-                          fill="#1a1a1a"
-                          stroke="#ffffff"
-                          strokeWidth="1.5"
-                        />
-                        
-                        {/* Brain crevices - darker gray paths */}
-                        <path d="M 30,20 Q 35,25 40,28 Q 45,30 50,28 Q 55,26 60,23" 
-                              stroke="#0a0a0a" strokeWidth="2" fill="none" opacity="0.8" />
-                        <path d="M 28,35 Q 32,38 38,40 Q 44,42 50,40 Q 56,38 62,35" 
-                              stroke="#0a0a0a" strokeWidth="2" fill="none" opacity="0.8" />
-                        <path d="M 32,50 Q 38,52 44,53 Q 50,54 56,53 Q 62,52 68,50" 
-                              stroke="#0a0a0a" strokeWidth="2" fill="none" opacity="0.8" />
-                        <path d="M 35,60 Q 40,62 45,63 Q 50,64 55,63 Q 60,62 65,60" 
-                              stroke="#0a0a0a" strokeWidth="2" fill="none" opacity="0.8" />
-                        
-                        {/* Left hemisphere detail */}
-                        <path d="M 30,25 Q 28,35 30,45 Q 32,55 35,62" 
-                              stroke="#2a2a2a" strokeWidth="1.5" fill="none" opacity="0.6" />
-                        
-                        {/* Right hemisphere detail */}
-                        <path d="M 70,25 Q 72,35 70,45 Q 68,55 65,62" 
-                              stroke="#2a2a2a" strokeWidth="1.5" fill="none" opacity="0.6" />
-                        
-                        {/* Flowing code lines - animated from right to left through crevices */}
-                        <g clipPath="url(#brainClip)">
-                          {/* Top crevice flow */}
-                          <text fontSize="6" fill="hsl(var(--primary))" opacity="0.9" fontFamily="monospace">
-                            <textPath href="#crevice1" startOffset="0%">
-                              01101010
-                              <animate attributeName="startOffset" from="100%" to="-20%" dur="3s" repeatCount="indefinite" />
-                            </textPath>
-                          </text>
-                          
-                          {/* Second crevice flow */}
-                          <text fontSize="6" fill="hsl(var(--primary))" opacity="0.9" fontFamily="monospace">
-                            <textPath href="#crevice2" startOffset="0%">
-                              AI.exe
-                              <animate attributeName="startOffset" from="100%" to="-20%" dur="2.5s" repeatCount="indefinite" />
-                            </textPath>
-                          </text>
-                          
-                          {/* Third crevice flow */}
-                          <text fontSize="6" fill="hsl(var(--primary))" opacity="0.9" fontFamily="monospace">
-                            <textPath href="#crevice3" startOffset="0%">
-                              11010110
-                              <animate attributeName="startOffset" from="100%" to="-20%" dur="3.5s" repeatCount="indefinite" />
-                            </textPath>
-                          </text>
-                          
-                          {/* Fourth crevice flow */}
-                          <text fontSize="6" fill="hsl(var(--primary))" opacity="0.9" fontFamily="monospace">
-                            <textPath href="#crevice4" startOffset="0%">
-                              ML.py
-                              <animate attributeName="startOffset" from="100%" to="-20%" dur="2.8s" repeatCount="indefinite" />
-                            </textPath>
-                          </text>
-                          
-                          {/* Additional flowing numbers scattered */}
-                          <text x="75" y="30" fontSize="5" fill="hsl(var(--primary))" opacity="0.7" fontFamily="monospace">
-                            101
-                            <animate attributeName="x" from="80" to="15" dur="4s" repeatCount="indefinite" />
-                            <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.2;0.8;1" dur="4s" repeatCount="indefinite" />
-                          </text>
-                          <text x="78" y="45" fontSize="5" fill="hsl(var(--primary))" opacity="0.7" fontFamily="monospace">
-                            001
-                            <animate attributeName="x" from="82" to="18" dur="3.5s" repeatCount="indefinite" />
-                            <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.2;0.8;1" dur="3.5s" repeatCount="indefinite" />
-                          </text>
-                          <text x="76" y="58" fontSize="5" fill="hsl(var(--primary))" opacity="0.7" fontFamily="monospace">
-                            110
-                            <animate attributeName="x" from="80" to="16" dur="4.2s" repeatCount="indefinite" />
-                            <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.2;0.8;1" dur="4.2s" repeatCount="indefinite" />
-                          </text>
-                        </g>
-                        
-                        {/* Hidden paths for text animation */}
-                        <path id="crevice1" d="M 60,23 Q 55,26 50,28 Q 45,30 40,28 Q 35,25 30,20" fill="none" />
-                        <path id="crevice2" d="M 62,35 Q 56,38 50,40 Q 44,42 38,40 Q 32,38 28,35" fill="none" />
-                        <path id="crevice3" d="M 68,50 Q 62,52 56,53 Q 50,54 44,53 Q 38,52 32,50" fill="none" />
-                        <path id="crevice4" d="M 65,60 Q 60,62 55,63 Q 50,64 45,63 Q 40,62 35,60" fill="none" />
-                      </svg>
-                    </div>
-                    <div className="space-y-2 w-full">
-                      {/* Output wires with flowing data */}
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="flex items-center gap-2" style={{ animationDelay: `${i * 0.2}s` }}>
-                          <div className="w-3 h-3 rounded-full bg-primary animate-pulse" />
-                          <div className="h-0.5 flex-1 bg-gradient-to-r from-primary/80 to-transparent relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary to-transparent"
-                                 style={{
-                                   animation: `data-flow ${1.5 + i * 0.3}s linear infinite`,
-                                   width: '30%'
-                                 }} />
-                          </div>
-                          <ArrowRight className="h-3 w-3 text-primary/60" />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                 style={{ minHeight: '288px' }}>
+              {/* NYC Skyline Silhouette with Flowing Code */}
+              <div className="relative h-full flex items-end justify-center p-8">
+                {/* Title above skyline */}
+                <div className="absolute top-8 left-1/2 transform -translate-x-1/2 text-center z-20">
+                  <p className="font-serif text-3xl font-bold mb-1">Massive Compute Engine</p>
+                  <p className="text-sm text-muted-foreground">AI-Powered NYC Property Intelligence</p>
                 </div>
                 
-                {/* RIGHT HALF - Label & Status */}
-                <div className="w-1/2 p-8 flex flex-col items-center justify-center relative">
-                  <div className="text-center">
-                    <p className="font-serif text-3xl font-bold mb-2">Massive Compute Engine</p>
-                    <p className="text-sm text-muted-foreground mb-4">AI-Powered Property Intelligence</p>
-                    
-                    {/* Processing indicators */}
-                    <div className="flex gap-2 justify-center mb-4">
-                      <div className="w-2 h-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: '0s' }} />
-                      <div className="w-2 h-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: '0.3s' }} />
-                      <div className="w-2 h-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: '0.6s' }} />
-                    </div>
-                    
-                    {/* Stats */}
-                    <div className="grid grid-cols-2 gap-4 mt-6">
-                      <div className="bg-background/50 rounded-lg p-3 border border-primary/20">
-                        <p className="text-2xl font-bold text-primary">24/7</p>
-                        <p className="text-xs text-muted-foreground">Active</p>
-                      </div>
-                      <div className="bg-background/50 rounded-lg p-3 border border-primary/20">
-                        <p className="text-2xl font-bold text-primary">10K+</p>
-                        <p className="text-xs text-muted-foreground">Daily Scans</p>
-                      </div>
-                    </div>
-                  </div>
+                {/* NYC Skyline SVG with flowing code */}
+                <svg viewBox="0 0 800 200" className="w-full h-48" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    {/* Clip path for each building to contain code */}
+                    <clipPath id="building1"><rect x="50" y="120" width="40" height="80" /></clipPath>
+                    <clipPath id="building2"><rect x="100" y="80" width="50" height="120" /></clipPath>
+                    <clipPath id="building3"><rect x="160" y="100" width="35" height="100" /></clipPath>
+                    <clipPath id="building4"><rect x="205" y="60" width="55" height="140" /></clipPath>
+                    <clipPath id="building5"><rect x="270" y="90" width="45" height="110" /></clipPath>
+                    <clipPath id="building6"><rect x="325" y="40" width="45" height="160" /></clipPath>
+                    <clipPath id="building7"><rect x="380" y="70" width="50" height="130" /></clipPath>
+                    <clipPath id="building8"><rect x="440" y="50" width="60" height="150" /></clipPath>
+                    <clipPath id="building9"><rect x="510" y="85" width="40" height="115" /></clipPath>
+                    <clipPath id="building10"><rect x="560" y="105" width="45" height="95" /></clipPath>
+                    <clipPath id="building11"><rect x="615" y="95" width="38" height="105" /></clipPath>
+                    <clipPath id="building12"><rect x="663" y="110" width="42" height="90" /></clipPath>
+                    <clipPath id="building13"><rect x="715" y="125" width="35" height="75" /></clipPath>
+                  </defs>
                   
-                  {/* Shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent"
-                       style={{
-                         animation: 'shimmer 3s linear infinite',
-                         backgroundSize: '200% 100%'
-                       }} />
-                </div>
+                  {/* Buildings - Black/Gray silhouettes */}
+                  <rect x="50" y="120" width="40" height="80" fill="#1a1a1a" stroke="#3a3a3a" strokeWidth="1" />
+                  <rect x="100" y="80" width="50" height="120" fill="#0d0d0d" stroke="#3a3a3a" strokeWidth="1" />
+                  <rect x="160" y="100" width="35" height="100" fill="#1a1a1a" stroke="#3a3a3a" strokeWidth="1" />
+                  <rect x="205" y="60" width="55" height="140" fill="#0a0a0a" stroke="#3a3a3a" strokeWidth="1" />
+                  <polygon points="232.5,60 205,40 260,40" fill="#0a0a0a" stroke="#3a3a3a" strokeWidth="1" />
+                  <rect x="270" y="90" width="45" height="110" fill="#151515" stroke="#3a3a3a" strokeWidth="1" />
+                  <rect x="325" y="40" width="45" height="160" fill="#0d0d0d" stroke="#3a3a3a" strokeWidth="1" />
+                  <polygon points="347.5,40 325,25 370,25" fill="#0d0d0d" stroke="#3a3a3a" strokeWidth="1" />
+                  <rect x="380" y="70" width="50" height="130" fill="#1a1a1a" stroke="#3a3a3a" strokeWidth="1" />
+                  <rect x="440" y="50" width="60" height="150" fill="#0a0a0a" stroke="#3a3a3a" strokeWidth="1" />
+                  <polygon points="470,50 440,30 500,30" fill="#0a0a0a" stroke="#3a3a3a" strokeWidth="1" />
+                  <rect x="510" y="85" width="40" height="115" fill="#151515" stroke="#3a3a3a" strokeWidth="1" />
+                  <rect x="560" y="105" width="45" height="95" fill="#1a1a1a" stroke="#3a3a3a" strokeWidth="1" />
+                  <rect x="615" y="95" width="38" height="105" fill="#0d0d0d" stroke="#3a3a3a" strokeWidth="1" />
+                  <rect x="663" y="110" width="42" height="90" fill="#1a1a1a" stroke="#3a3a3a" strokeWidth="1" />
+                  <rect x="715" y="125" width="35" height="75" fill="#151515" stroke="#3a3a3a" strokeWidth="1" />
+                  
+                  {/* Flowing code through buildings - vertical streams */}
+                  <g opacity="0.8">
+                    {/* Building 1 code streams */}
+                    <text x="62" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building1)">
+                      01<animate attributeName="y" from="205" to="115" dur="3s" repeatCount="indefinite" />
+                    </text>
+                    <text x="75" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building1)">
+                      10<animate attributeName="y" from="205" to="115" dur="3.5s" repeatCount="indefinite" />
+                    </text>
+                    
+                    {/* Building 2 code streams */}
+                    <text x="115" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building2)">
+                      AI<animate attributeName="y" from="205" to="75" dur="4s" repeatCount="indefinite" />
+                    </text>
+                    <text x="130" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building2)">
+                      ML<animate attributeName="y" from="205" to="75" dur="3.2s" repeatCount="indefinite" />
+                    </text>
+                    
+                    {/* Building 3 code streams */}
+                    <text x="172" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building3)">
+                      11<animate attributeName="y" from="205" to="95" dur="3.8s" repeatCount="indefinite" />
+                    </text>
+                    
+                    {/* Building 4 code streams (tallest - One World Trade) */}
+                    <text x="220" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building4)">
+                      01<animate attributeName="y" from="205" to="55" dur="4.5s" repeatCount="indefinite" />
+                    </text>
+                    <text x="235" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building4)">
+                      10<animate attributeName="y" from="205" to="55" dur="3.7s" repeatCount="indefinite" />
+                    </text>
+                    <text x="248" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building4)">
+                      11<animate attributeName="y" from="205" to="55" dur="4.2s" repeatCount="indefinite" />
+                    </text>
+                    
+                    {/* Building 5 code streams */}
+                    <text x="285" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building5)">
+                      01<animate attributeName="y" from="205" to="85" dur="3.3s" repeatCount="indefinite" />
+                    </text>
+                    <text x="300" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building5)">
+                      10<animate attributeName="y" from="205" to="85" dur="3.9s" repeatCount="indefinite" />
+                    </text>
+                    
+                    {/* Building 6 code streams (Empire State) */}
+                    <text x="340" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building6)">
+                      AI<animate attributeName="y" from="205" to="35" dur="4.8s" repeatCount="indefinite" />
+                    </text>
+                    <text x="355" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building6)">
+                      01<animate attributeName="y" from="205" to="35" dur="4.1s" repeatCount="indefinite" />
+                    </text>
+                    
+                    {/* Building 7 code streams */}
+                    <text x="395" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building7)">
+                      11<animate attributeName="y" from="205" to="65" dur="3.6s" repeatCount="indefinite" />
+                    </text>
+                    <text x="410" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building7)">
+                      ML<animate attributeName="y" from="205" to="65" dur="4.3s" repeatCount="indefinite" />
+                    </text>
+                    
+                    {/* Building 8 code streams (Chrysler) */}
+                    <text x="458" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building8)">
+                      01<animate attributeName="y" from="205" to="45" dur="4.4s" repeatCount="indefinite" />
+                    </text>
+                    <text x="473" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building8)">
+                      10<animate attributeName="y" from="205" to="45" dur="3.9s" repeatCount="indefinite" />
+                    </text>
+                    <text x="485" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building8)">
+                      AI<animate attributeName="y" from="205" to="45" dur="4.6s" repeatCount="indefinite" />
+                    </text>
+                    
+                    {/* Building 9 code streams */}
+                    <text x="525" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building9)">
+                      11<animate attributeName="y" from="205" to="80" dur="3.4s" repeatCount="indefinite" />
+                    </text>
+                    
+                    {/* Building 10 code streams */}
+                    <text x="575" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building10)">
+                      01<animate attributeName="y" from="205" to="100" dur="3.1s" repeatCount="indefinite" />
+                    </text>
+                    <text x="590" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building10)">
+                      10<animate attributeName="y" from="205" to="100" dur="3.7s" repeatCount="indefinite" />
+                    </text>
+                    
+                    {/* Building 11 code streams */}
+                    <text x="628" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building11)">
+                      ML<animate attributeName="y" from="205" to="90" dur="3.5s" repeatCount="indefinite" />
+                    </text>
+                    
+                    {/* Building 12 code streams */}
+                    <text x="678" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building12)">
+                      01<animate attributeName="y" from="205" to="105" dur="3.2s" repeatCount="indefinite" />
+                    </text>
+                    <text x="690" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building12)">
+                      AI<animate attributeName="y" from="205" to="105" dur="3.8s" repeatCount="indefinite" />
+                    </text>
+                    
+                    {/* Building 13 code streams */}
+                    <text x="728" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building13)">
+                      10<animate attributeName="y" from="205" to="120" dur="2.9s" repeatCount="indefinite" />
+                    </text>
+                  </g>
+                </svg>
               </div>
             </div>
           </div>
