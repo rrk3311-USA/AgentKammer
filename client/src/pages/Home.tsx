@@ -360,8 +360,6 @@ export default function Home() {
                 />
               </svg>
             </button>
-            {/* Connector Bar */}
-            <div className="h-3 w-10 bg-[#0a1628] dark:bg-white/80 shadow-sm" />
             <button
               onClick={() => {
                 const container = document.querySelector('[data-testid="section-longest-on-market"] .overflow-x-auto');

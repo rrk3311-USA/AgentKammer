@@ -113,8 +113,6 @@ export function HorizontalPropertyScroll({
                   />
                 </svg>
               </button>
-              {/* Connector Bar */}
-              <div className="h-3 w-10 bg-[#0a1628] dark:bg-white/80 shadow-sm" />
               <button
                 onClick={() => scroll("right")}
                 className="group relative hover-elevate active-elevate-2 transition-all z-10"

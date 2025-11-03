@@ -43,9 +43,9 @@ export function PropertyCard({
 
   const formatPrice = (value: number) => {
     if (value >= 1000000) {
-      return `$${(value / 1000000).toFixed(2)}M`;
+      return (value / 1000000).toFixed(2);
     }
-    return `$${(value / 1000).toFixed(0)}K`;
+    return (value / 1000).toFixed(0);
   };
 
   const handleFavorite = (e: React.MouseEvent) => {
@@ -100,11 +100,8 @@ export function PropertyCard({
         {/* Price - Floating Separately */}
         <div className="absolute bottom-8 left-2.5">
           <div className="backdrop-blur-xl bg-black/85 dark:bg-black/90 rounded-lg px-1.5 py-1 border border-white/10 shadow-2xl">
-            <span 
-              className="font-serif text-2xl font-bold bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] bg-clip-text text-transparent" 
-              data-testid={`text-price-${id}`}
-            >
-              {formatPrice(price)}
+            <span className="text-white font-sans text-2xl font-medium" data-testid={`text-price-${id}`}>
+              <span className="text-base align-top">$</span>{formatPrice(price)}
             </span>
           </div>
         </div>
