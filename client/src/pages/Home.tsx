@@ -360,8 +360,10 @@ export default function Home() {
                 />
               </svg>
             </button>
-            {/* Gold Connector Bar - Bowtie Style */}
-            <div className="h-3 w-10 bg-gradient-to-r from-[#d4af37] via-[#f4d03f] to-[#d4af37] shadow-sm" />
+            {/* Connector Bar - Bowtie Style */}
+            <div className="h-3 w-10 bg-[#0a1628] dark:bg-white/80 flex items-center justify-center shadow-sm">
+              <div className="h-1 w-3.5 bg-gradient-to-r from-[#d4af37] via-[#f4d03f] to-[#d4af37]" />
+            </div>
             <button
               onClick={() => {
                 const container = document.querySelector('[data-testid="section-longest-on-market"] .overflow-x-auto');
