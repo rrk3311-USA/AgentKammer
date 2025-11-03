@@ -6,7 +6,8 @@ import { Link } from "wouter";
 
 export function AgenticActionsInfographic() {
   const actions = [
-    { icon: Search, label: "Continuous Market Scanning", color: "text-blue-600" },
+    { icon: Clock, label: "24/7 Day & Night Scanning", color: "text-blue-600" },
+    { icon: Search, label: "Continuous Market Scanning", color: "text-cyan-600" },
     { icon: Zap, label: "Instant Alert Processing", color: "text-yellow-600" },
     { icon: TrendingUp, label: "Price Trend Analysis", color: "text-green-600" },
     { icon: Bell, label: "Smart Notifications", color: "text-purple-600" },
@@ -97,19 +98,18 @@ export function AgenticActionsInfographic() {
 
         {/* Branching Actions */}
         <div className="relative mb-16">
-          {/* Center Node - 3D Manhattan Map with Massive Compute */}
+          {/* Center Node - 3D Manhattan Map with Massive Compute - Merged Module */}
           <div className="flex justify-center mb-8">
-            <div className="w-full max-w-4xl bg-gradient-to-br from-card to-card/50 border-2 border-primary/30 rounded-2xl shadow-2xl compute-engine-glow relative overflow-hidden"
-                 style={{ minHeight: '288px' }}>
-              <div className="relative h-full flex flex-col items-center justify-center p-8">
+            <Card className="w-full max-w-4xl bg-gradient-to-br from-card to-card/50 border-2 border-primary/30 shadow-2xl compute-engine-glow">
+              <CardContent className="p-6">
                 {/* Title */}
-                <div className="text-center z-20 mb-6">
+                <div className="text-center mb-6">
                   <p className="font-serif text-3xl font-bold mb-1">Massive Compute Engine</p>
                   <p className="text-sm text-muted-foreground">AI-Powered NYC Property Intelligence</p>
                 </div>
                 
                 {/* 3D Manhattan Map Icon */}
-                <div className="relative" style={{ animation: 'float-brain 3s ease-in-out infinite' }}>
+                <div className="relative flex justify-center mb-6" style={{ animation: 'float-brain 3s ease-in-out infinite' }}>
                   <svg width="280" height="180" viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                       {/* Gold glow filter */}
@@ -228,8 +228,97 @@ export function AgenticActionsInfographic() {
                     </line>
                   </svg>
                 </div>
-              </div>
-            </div>
+
+                {/* Action Tags - Half Size, On Bottom */}
+                <div className="grid grid-cols-3 md:grid-cols-6 gap-2 mt-4">
+                  {actions.map((action, index) => (
+                    <div
+                      key={index}
+                      className="bg-muted/50 border border-border rounded-lg p-2 text-center hover-elevate transition-all"
+                      data-testid={`tag-action-${index}`}
+                    >
+                      <div className="w-5 h-5 rounded-full bg-background flex items-center justify-center mx-auto mb-1">
+                        <action.icon className={`h-3 w-3 ${action.color}`} />
+                      </div>
+                      <p className="text-[9px] font-medium leading-tight">{action.label}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Primary Sources Section - Merged */}
+                <div className="mt-6 pt-6 border-t border-border">
+                  <div className="space-y-6">
+                    {/* Primary Sources */}
+                    <div>
+                      <div className="flex items-center gap-2 mb-3">
+                        <Database className="h-5 w-5 text-primary" />
+                        <h4 className="font-semibold text-sm">Primary Sources for NYC/Manhattan Real Estate Listings</h4>
+                      </div>
+                      <div className="space-y-3 text-xs text-muted-foreground">
+                        <div>
+                          <span className="font-medium text-foreground">MLS:</span> Core source for active, pending, sold, under contract, escrow statuses. NYC uses OneKey MLS (NY Metro) and NY State MLS. Zillow, Redfin, Realtor.com aggregate from MLS feeds.
+                        </div>
+                        <div>
+                          <span className="font-medium text-foreground">Zillow:</span> Gets data from MLS via Bridge API; provides APIs for listings, sales, metrics (restricted access).
+                        </div>
+                        <div>
+                          <span className="font-medium text-foreground">Other sites:</span> PropertyShark (NYC public records), RealtyHop, Trulia, Redfin – aggregate MLS/public data.
+                        </div>
+                        <div>
+                          <span className="font-medium text-foreground">Government:</span> NYC Dept of Finance – ACRIS (deeds/sales since 1966), Rolling Sales Data (last 12 months), Property Valuation/Assessment Data via NYC Open Data portal. DCAS IPIS for City properties. No live listings; historical sales/tax only.
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Access Methods */}
+                    <div className="border-t border-border pt-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <FileText className="h-5 w-5 text-primary" />
+                        <h4 className="font-semibold text-sm">All Access Methods</h4>
+                      </div>
+                      <div className="grid md:grid-cols-2 gap-3 text-xs text-muted-foreground">
+                        <div>
+                          <span className="font-medium text-foreground">Active/for sale:</span> MLS APIs/IDX feeds.
+                        </div>
+                        <div>
+                          <span className="font-medium text-foreground">Sold/pending/escrow:</span> MLS status, post-closing public records.
+                        </div>
+                        <div>
+                          <span className="font-medium text-foreground">Pre-sale/unlisted:</span> Agent networks/pocket listings (non-public); ownership via public records.
+                        </div>
+                        <div>
+                          <span className="font-medium text-foreground">Comprehensive:</span> Combine MLS + government datasets.
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Manhattan APIs */}
+                    <div className="border-t border-border pt-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Building2 className="h-5 w-5 text-primary" />
+                        <h4 className="font-semibold text-sm">Manhattan APIs to Pull From</h4>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {[
+                          "OneKey MLS (RESO/RETS)",
+                          "Zillow Bridge/Property APIs",
+                          "Realtor.com API",
+                          "Redfin API",
+                          "PropertyShark",
+                          "Onboard Informatics Property API",
+                          "RentCast API",
+                          "NYC Open Data APIs (Socrata)"
+                        ].map((api, index) => (
+                          <Badge key={index} variant="secondary" className="text-xs">
+                            {api}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
           <style dangerouslySetInnerHTML={{__html: `
             @keyframes shimmer {
@@ -245,208 +334,6 @@ export function AgenticActionsInfographic() {
               50% { transform: translateY(-10px); }
             }
           `}} />
-
-          {/* Branch Lines with animated flow */}
-          <div className="absolute top-12 left-1/2 -translate-x-1/2 w-full h-24">
-            <svg className="w-full h-full" style={{ overflow: 'visible' }}>
-              {/* Left branches */}
-              <path
-                d="M 50% 0 Q 30% 50, 15% 100"
-                fill="none"
-                stroke="hsl(var(--primary))"
-                strokeWidth="2"
-                opacity="0.4"
-                className="branch-line"
-              />
-              <path
-                d="M 50% 0 Q 40% 50, 35% 100"
-                fill="none"
-                stroke="hsl(var(--primary))"
-                strokeWidth="2"
-                opacity="0.4"
-                className="branch-line"
-                style={{ animationDelay: '0.2s' }}
-              />
-              {/* Center branch */}
-              <path
-                d="M 50% 0 L 50% 100"
-                fill="none"
-                stroke="hsl(var(--primary))"
-                strokeWidth="2"
-                opacity="0.4"
-                className="branch-line"
-                style={{ animationDelay: '0.4s' }}
-              />
-              {/* Right branches */}
-              <path
-                d="M 50% 0 Q 60% 50, 65% 100"
-                fill="none"
-                stroke="hsl(var(--primary))"
-                strokeWidth="2"
-                opacity="0.4"
-                className="branch-line"
-                style={{ animationDelay: '0.6s' }}
-              />
-              <path
-                d="M 50% 0 Q 70% 50, 85% 100"
-                fill="none"
-                stroke="hsl(var(--primary))"
-                strokeWidth="2"
-                opacity="0.4"
-                className="branch-line"
-                style={{ animationDelay: '0.8s' }}
-              />
-              
-              {/* Flowing data particles along paths */}
-              <circle r="3" fill="hsl(var(--primary))" className="data-particle data-particle-1">
-                <animateMotion dur="2s" repeatCount="indefinite">
-                  <mpath href="#path1" />
-                </animateMotion>
-              </circle>
-              <circle r="3" fill="hsl(var(--primary))" className="data-particle data-particle-2">
-                <animateMotion dur="2s" repeatCount="indefinite">
-                  <mpath href="#path2" />
-                </animateMotion>
-              </circle>
-              <circle r="3" fill="hsl(var(--primary))" className="data-particle data-particle-3">
-                <animateMotion dur="2s" repeatCount="indefinite">
-                  <mpath href="#path3" />
-                </animateMotion>
-              </circle>
-              <circle r="3" fill="hsl(var(--primary))" className="data-particle data-particle-4">
-                <animateMotion dur="2s" repeatCount="indefinite">
-                  <mpath href="#path4" />
-                </animateMotion>
-              </circle>
-              <circle r="3" fill="hsl(var(--primary))" className="data-particle data-particle-5">
-                <animateMotion dur="2s" repeatCount="indefinite">
-                  <mpath href="#path5" />
-                </animateMotion>
-              </circle>
-              
-              {/* Hidden paths for particle animation */}
-              <path id="path1" d="M 50% 0 Q 30% 50, 15% 100" fill="none" />
-              <path id="path2" d="M 50% 0 Q 40% 50, 35% 100" fill="none" />
-              <path id="path3" d="M 50% 0 L 50% 100" fill="none" />
-              <path id="path4" d="M 50% 0 Q 60% 50, 65% 100" fill="none" />
-              <path id="path5" d="M 50% 0 Q 70% 50, 85% 100" fill="none" />
-            </svg>
-          </div>
-
-          {/* Action Cards with staggered animations */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 pt-24">
-            {actions.map((action, index) => (
-              <div
-                key={index}
-                className="bg-card border border-border rounded-xl p-4 text-center hover-elevate transition-all shadow-md"
-                data-testid={`card-action-${index}`}
-                style={{
-                  animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`
-                }}
-              >
-                <div className={`w-10 h-10 rounded-full bg-muted flex items-center justify-center mx-auto mb-3`}
-                     style={{
-                       animation: `iconPulse 2s ease-in-out ${index * 0.3}s infinite`
-                     }}>
-                  <action.icon className={`h-5 w-5 ${action.color}`} />
-                </div>
-                <p className="text-xs font-medium leading-tight">{action.label}</p>
-              </div>
-            ))}
-          </div>
-          <style dangerouslySetInnerHTML={{__html: `
-            @keyframes fadeInUp {
-              from {
-                opacity: 0;
-                transform: translateY(20px);
-              }
-              to {
-                opacity: 1;
-                transform: translateY(0);
-              }
-            }
-            @keyframes iconPulse {
-              0%, 100% { transform: scale(1); }
-              50% { transform: scale(1.1); }
-            }
-          `}} />
-
-          {/* Data Sources Detail */}
-          <div className="flex justify-center mt-12 mb-8">
-            <Card className="max-w-4xl bg-gradient-to-br from-card to-card/50 border-primary/20 shadow-xl">
-              <CardContent className="p-6">
-                <div className="space-y-6">
-                  {/* Primary Sources */}
-                  <div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <Database className="h-5 w-5 text-primary" />
-                      <h4 className="font-semibold text-sm">Primary Sources for NYC/Manhattan Real Estate Listings</h4>
-                    </div>
-                    <div className="space-y-3 text-xs text-muted-foreground">
-                      <div>
-                        <span className="font-medium text-foreground">MLS:</span> Core source for active, pending, sold, under contract, escrow statuses. NYC uses OneKey MLS (NY Metro) and NY State MLS. Zillow, Redfin, Realtor.com aggregate from MLS feeds.
-                      </div>
-                      <div>
-                        <span className="font-medium text-foreground">Zillow:</span> Gets data from MLS via Bridge API; provides APIs for listings, sales, metrics (restricted access).
-                      </div>
-                      <div>
-                        <span className="font-medium text-foreground">Other sites:</span> PropertyShark (NYC public records), RealtyHop, Trulia, Redfin – aggregate MLS/public data.
-                      </div>
-                      <div>
-                        <span className="font-medium text-foreground">Government:</span> NYC Dept of Finance – ACRIS (deeds/sales since 1966), Rolling Sales Data (last 12 months), Property Valuation/Assessment Data via NYC Open Data portal. DCAS IPIS for City properties. No live listings; historical sales/tax only.
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Access Methods */}
-                  <div className="border-t border-border pt-4">
-                    <div className="flex items-center gap-2 mb-3">
-                      <FileText className="h-5 w-5 text-primary" />
-                      <h4 className="font-semibold text-sm">All Access Methods</h4>
-                    </div>
-                    <div className="grid md:grid-cols-2 gap-3 text-xs text-muted-foreground">
-                      <div>
-                        <span className="font-medium text-foreground">Active/for sale:</span> MLS APIs/IDX feeds.
-                      </div>
-                      <div>
-                        <span className="font-medium text-foreground">Sold/pending/escrow:</span> MLS status, post-closing public records.
-                      </div>
-                      <div>
-                        <span className="font-medium text-foreground">Pre-sale/unlisted:</span> Agent networks/pocket listings (non-public); ownership via public records.
-                      </div>
-                      <div>
-                        <span className="font-medium text-foreground">Comprehensive:</span> Combine MLS + government datasets.
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Manhattan APIs */}
-                  <div className="border-t border-border pt-4">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Building2 className="h-5 w-5 text-primary" />
-                      <h4 className="font-semibold text-sm">Manhattan APIs to Pull From</h4>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        "OneKey MLS (RESO/RETS)",
-                        "Zillow Bridge/Property APIs",
-                        "Realtor.com API",
-                        "Redfin API",
-                        "PropertyShark",
-                        "Onboard Informatics Property API",
-                        "RentCast API",
-                        "NYC Open Data APIs (Socrata)"
-                      ].map((api, index) => (
-                        <Badge key={index} variant="secondary" className="text-xs">
-                          {api}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
         </div>
 
         {/* Statistics Banner */}
