@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home, Mic, MicOff } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import agentAvatar from "@assets/generated_images/Agent_Kammer_leading_family_into_storefront_8110138d.png";
+import agentAvatar from "@assets/IMG_1044_1761929739320.jpeg";
 
 interface Message {
   id: string;
@@ -183,8 +183,7 @@ export function FloatingChatAssistant() {
                 <img 
                   src={agentAvatar} 
                   alt="Agent Kammer" 
-                  className="w-[200%] h-[200%] object-cover"
-                  style={{ objectPosition: '25% 15%' }}
+                  className="w-full h-full object-cover scale-110"
                 />
               </div>
               <div className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-primary animate-pulse" />
