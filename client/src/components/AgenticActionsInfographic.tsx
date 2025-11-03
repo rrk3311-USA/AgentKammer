@@ -136,62 +136,100 @@ export function AgenticActionsInfographic() {
                   
                   {/* AI Brain Icon - Tech Style */}
                   <div className="relative z-10 flex flex-col items-center justify-center h-full">
-                    {/* Tech Brain SVG */}
-                    <div className="mb-4" style={{ animation: 'float-brain 3s ease-in-out infinite' }}>
-                      <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-                        {/* Outer hexagon structure */}
-                        <polygon 
-                          points="40,5 65,20 65,50 40,65 15,50 15,20" 
-                          fill="#1a1a1a" 
-                          stroke="#ffffff" 
-                          strokeWidth="2"
-                        />
+                    {/* Tech Brain SVG with flowing code */}
+                    <div className="mb-4 relative" style={{ animation: 'float-brain 3s ease-in-out infinite' }}>
+                      <svg width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                          {/* Clip path for brain shape */}
+                          <clipPath id="brainClip">
+                            {/* Brain outline with crevices */}
+                            <path d="M 25,30 Q 20,20 30,15 Q 40,10 50,15 Q 60,10 70,15 Q 80,20 75,30 Q 78,40 75,50 Q 80,60 70,65 Q 60,70 50,65 Q 40,70 30,65 Q 20,60 25,50 Q 22,40 25,30 Z" />
+                          </clipPath>
+                        </defs>
                         
-                        {/* Inner hexagons - creating layers */}
-                        <polygon 
-                          points="40,15 55,23 55,43 40,51 25,43 25,23" 
-                          fill="#2a2a2a" 
-                          stroke="hsl(var(--primary))" 
+                        {/* Brain base - black */}
+                        <path 
+                          d="M 25,30 Q 20,20 30,15 Q 40,10 50,15 Q 60,10 70,15 Q 80,20 75,30 Q 78,40 75,50 Q 80,60 70,65 Q 60,70 50,65 Q 40,70 30,65 Q 20,60 25,50 Q 22,40 25,30 Z" 
+                          fill="#1a1a1a"
+                          stroke="#ffffff"
                           strokeWidth="1.5"
-                          opacity="0.8"
                         />
                         
-                        {/* Center core */}
-                        <circle cx="40" cy="33" r="8" fill="#0a0a0a" stroke="hsl(var(--primary))" strokeWidth="2">
-                          <animate attributeName="r" values="8;10;8" dur="2s" repeatCount="indefinite" />
-                        </circle>
+                        {/* Brain crevices - darker gray paths */}
+                        <path d="M 30,20 Q 35,25 40,28 Q 45,30 50,28 Q 55,26 60,23" 
+                              stroke="#0a0a0a" strokeWidth="2" fill="none" opacity="0.8" />
+                        <path d="M 28,35 Q 32,38 38,40 Q 44,42 50,40 Q 56,38 62,35" 
+                              stroke="#0a0a0a" strokeWidth="2" fill="none" opacity="0.8" />
+                        <path d="M 32,50 Q 38,52 44,53 Q 50,54 56,53 Q 62,52 68,50" 
+                              stroke="#0a0a0a" strokeWidth="2" fill="none" opacity="0.8" />
+                        <path d="M 35,60 Q 40,62 45,63 Q 50,64 55,63 Q 60,62 65,60" 
+                              stroke="#0a0a0a" strokeWidth="2" fill="none" opacity="0.8" />
                         
-                        {/* Gold connection lines radiating from center */}
-                        <line x1="40" y1="33" x2="40" y2="15" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.7" />
-                        <line x1="40" y1="33" x2="55" y2="23" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.7" />
-                        <line x1="40" y1="33" x2="55" y2="43" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.7" />
-                        <line x1="40" y1="33" x2="40" y2="51" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.7" />
-                        <line x1="40" y1="33" x2="25" y2="43" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.7" />
-                        <line x1="40" y1="33" x2="25" y2="23" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.7" />
+                        {/* Left hemisphere detail */}
+                        <path d="M 30,25 Q 28,35 30,45 Q 32,55 35,62" 
+                              stroke="#2a2a2a" strokeWidth="1.5" fill="none" opacity="0.6" />
                         
-                        {/* Corner nodes */}
-                        <circle cx="40" cy="15" r="3" fill="hsl(var(--primary))" opacity="0.9">
-                          <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite" />
-                        </circle>
-                        <circle cx="55" cy="23" r="3" fill="hsl(var(--primary))" opacity="0.9">
-                          <animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" repeatCount="indefinite" />
-                        </circle>
-                        <circle cx="55" cy="43" r="3" fill="hsl(var(--primary))" opacity="0.9">
-                          <animate attributeName="opacity" values="0.5;1;0.5" dur="2.1s" repeatCount="indefinite" />
-                        </circle>
-                        <circle cx="40" cy="51" r="3" fill="hsl(var(--primary))" opacity="0.9">
-                          <animate attributeName="opacity" values="0.5;1;0.5" dur="1.6s" repeatCount="indefinite" />
-                        </circle>
-                        <circle cx="25" cy="43" r="3" fill="hsl(var(--primary))" opacity="0.9">
-                          <animate attributeName="opacity" values="0.5;1;0.5" dur="1.9s" repeatCount="indefinite" />
-                        </circle>
-                        <circle cx="25" cy="23" r="3" fill="hsl(var(--primary))" opacity="0.9">
-                          <animate attributeName="opacity" values="0.5;1;0.5" dur="2.2s" repeatCount="indefinite" />
-                        </circle>
+                        {/* Right hemisphere detail */}
+                        <path d="M 70,25 Q 72,35 70,45 Q 68,55 65,62" 
+                              stroke="#2a2a2a" strokeWidth="1.5" fill="none" opacity="0.6" />
                         
-                        {/* Additional circuit elements */}
-                        <rect x="36" y="60" width="8" height="3" fill="#ffffff" opacity="0.8" />
-                        <line x1="40" y1="60" x2="40" y2="65" stroke="hsl(var(--primary))" strokeWidth="1" />
+                        {/* Flowing code lines - animated from right to left through crevices */}
+                        <g clipPath="url(#brainClip)">
+                          {/* Top crevice flow */}
+                          <text fontSize="6" fill="hsl(var(--primary))" opacity="0.9" fontFamily="monospace">
+                            <textPath href="#crevice1" startOffset="0%">
+                              01101010
+                              <animate attributeName="startOffset" from="100%" to="-20%" dur="3s" repeatCount="indefinite" />
+                            </textPath>
+                          </text>
+                          
+                          {/* Second crevice flow */}
+                          <text fontSize="6" fill="hsl(var(--primary))" opacity="0.9" fontFamily="monospace">
+                            <textPath href="#crevice2" startOffset="0%">
+                              AI.exe
+                              <animate attributeName="startOffset" from="100%" to="-20%" dur="2.5s" repeatCount="indefinite" />
+                            </textPath>
+                          </text>
+                          
+                          {/* Third crevice flow */}
+                          <text fontSize="6" fill="hsl(var(--primary))" opacity="0.9" fontFamily="monospace">
+                            <textPath href="#crevice3" startOffset="0%">
+                              11010110
+                              <animate attributeName="startOffset" from="100%" to="-20%" dur="3.5s" repeatCount="indefinite" />
+                            </textPath>
+                          </text>
+                          
+                          {/* Fourth crevice flow */}
+                          <text fontSize="6" fill="hsl(var(--primary))" opacity="0.9" fontFamily="monospace">
+                            <textPath href="#crevice4" startOffset="0%">
+                              ML.py
+                              <animate attributeName="startOffset" from="100%" to="-20%" dur="2.8s" repeatCount="indefinite" />
+                            </textPath>
+                          </text>
+                          
+                          {/* Additional flowing numbers scattered */}
+                          <text x="75" y="30" fontSize="5" fill="hsl(var(--primary))" opacity="0.7" fontFamily="monospace">
+                            101
+                            <animate attributeName="x" from="80" to="15" dur="4s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.2;0.8;1" dur="4s" repeatCount="indefinite" />
+                          </text>
+                          <text x="78" y="45" fontSize="5" fill="hsl(var(--primary))" opacity="0.7" fontFamily="monospace">
+                            001
+                            <animate attributeName="x" from="82" to="18" dur="3.5s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.2;0.8;1" dur="3.5s" repeatCount="indefinite" />
+                          </text>
+                          <text x="76" y="58" fontSize="5" fill="hsl(var(--primary))" opacity="0.7" fontFamily="monospace">
+                            110
+                            <animate attributeName="x" from="80" to="16" dur="4.2s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" values="0;0.7;0.7;0" keyTimes="0;0.2;0.8;1" dur="4.2s" repeatCount="indefinite" />
+                          </text>
+                        </g>
+                        
+                        {/* Hidden paths for text animation */}
+                        <path id="crevice1" d="M 60,23 Q 55,26 50,28 Q 45,30 40,28 Q 35,25 30,20" fill="none" />
+                        <path id="crevice2" d="M 62,35 Q 56,38 50,40 Q 44,42 38,40 Q 32,38 28,35" fill="none" />
+                        <path id="crevice3" d="M 68,50 Q 62,52 56,53 Q 50,54 44,53 Q 38,52 32,50" fill="none" />
+                        <path id="crevice4" d="M 65,60 Q 60,62 55,63 Q 50,64 45,63 Q 40,62 35,60" fill="none" />
                       </svg>
                     </div>
                     <div className="space-y-2 w-full">
