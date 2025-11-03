@@ -114,7 +114,7 @@ export function HorizontalPropertyScroll({
                 </svg>
               </button>
               {/* Gold Connector Bar - Bowtie Style */}
-              <div className="h-1.5 w-10 bg-gradient-to-r from-[#d4af37] via-[#f4d03f] to-[#d4af37] shadow-sm" />
+              <div className="h-3 w-10 bg-gradient-to-r from-[#d4af37] via-[#f4d03f] to-[#d4af37] shadow-sm" />
               <button
                 onClick={() => scroll("right")}
                 className="group relative hover-elevate active-elevate-2 transition-all z-10"
