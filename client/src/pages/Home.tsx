@@ -473,11 +473,12 @@ export default function Home() {
               </div>
 
               {/* Right side: Agent Kammer leading family into storefront */}
-              <div className="relative h-[400px] lg:h-[500px] flex items-center justify-center">
+              <div className="relative h-[400px] lg:h-[500px] flex items-center justify-center bg-[#0a1628] rounded-lg overflow-hidden">
                 <img 
                   src={agentKammerLeadingImg} 
                   alt="Agent Kammer leading clients into storefront" 
-                  className="w-full h-full object-cover rounded-lg shadow-2xl"
+                  className="w-[120%] h-full object-cover shadow-2xl"
+                  style={{ objectPosition: 'center' }}
                 />
               </div>
             </div>
