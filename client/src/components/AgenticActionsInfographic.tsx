@@ -134,9 +134,66 @@ export function AgenticActionsInfographic() {
                     </circle>
                   </svg>
                   
-                  {/* AI Brain Icon */}
+                  {/* AI Brain Icon - Tech Style */}
                   <div className="relative z-10 flex flex-col items-center justify-center h-full">
-                    <div className="text-6xl mb-4" style={{ animation: 'float-brain 3s ease-in-out infinite' }}>🧠</div>
+                    {/* Tech Brain SVG */}
+                    <div className="mb-4" style={{ animation: 'float-brain 3s ease-in-out infinite' }}>
+                      <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                        {/* Outer hexagon structure */}
+                        <polygon 
+                          points="40,5 65,20 65,50 40,65 15,50 15,20" 
+                          fill="#1a1a1a" 
+                          stroke="#ffffff" 
+                          strokeWidth="2"
+                        />
+                        
+                        {/* Inner hexagons - creating layers */}
+                        <polygon 
+                          points="40,15 55,23 55,43 40,51 25,43 25,23" 
+                          fill="#2a2a2a" 
+                          stroke="hsl(var(--primary))" 
+                          strokeWidth="1.5"
+                          opacity="0.8"
+                        />
+                        
+                        {/* Center core */}
+                        <circle cx="40" cy="33" r="8" fill="#0a0a0a" stroke="hsl(var(--primary))" strokeWidth="2">
+                          <animate attributeName="r" values="8;10;8" dur="2s" repeatCount="indefinite" />
+                        </circle>
+                        
+                        {/* Gold connection lines radiating from center */}
+                        <line x1="40" y1="33" x2="40" y2="15" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.7" />
+                        <line x1="40" y1="33" x2="55" y2="23" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.7" />
+                        <line x1="40" y1="33" x2="55" y2="43" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.7" />
+                        <line x1="40" y1="33" x2="40" y2="51" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.7" />
+                        <line x1="40" y1="33" x2="25" y2="43" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.7" />
+                        <line x1="40" y1="33" x2="25" y2="23" stroke="hsl(var(--primary))" strokeWidth="1.5" opacity="0.7" />
+                        
+                        {/* Corner nodes */}
+                        <circle cx="40" cy="15" r="3" fill="hsl(var(--primary))" opacity="0.9">
+                          <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="55" cy="23" r="3" fill="hsl(var(--primary))" opacity="0.9">
+                          <animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="55" cy="43" r="3" fill="hsl(var(--primary))" opacity="0.9">
+                          <animate attributeName="opacity" values="0.5;1;0.5" dur="2.1s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="40" cy="51" r="3" fill="hsl(var(--primary))" opacity="0.9">
+                          <animate attributeName="opacity" values="0.5;1;0.5" dur="1.6s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="25" cy="43" r="3" fill="hsl(var(--primary))" opacity="0.9">
+                          <animate attributeName="opacity" values="0.5;1;0.5" dur="1.9s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="25" cy="23" r="3" fill="hsl(var(--primary))" opacity="0.9">
+                          <animate attributeName="opacity" values="0.5;1;0.5" dur="2.2s" repeatCount="indefinite" />
+                        </circle>
+                        
+                        {/* Additional circuit elements */}
+                        <rect x="36" y="60" width="8" height="3" fill="#ffffff" opacity="0.8" />
+                        <line x1="40" y1="60" x2="40" y2="65" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      </svg>
+                    </div>
                     <div className="space-y-2 w-full">
                       {/* Output wires with flowing data */}
                       {[1, 2, 3, 4].map((i) => (
