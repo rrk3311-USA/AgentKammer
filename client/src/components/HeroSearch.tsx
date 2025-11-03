@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
-import { Search, MapPin, Sparkles, MousePointer } from "lucide-react";
+import { Search, MapPin, Sparkles, MousePointer, Heart } from "lucide-react";
 import heroImage from "@assets/BBD593A1-EF8F-40A7-BD11-A6F13773084E_1_105_c_1762128066935.jpg";
 
 const propertyTypes = ["Condo", "Co-op", "Townhouse", "Penthouse"];
@@ -71,20 +71,32 @@ export function HeroSearch() {
             <p className="text-sm text-white font-light leading-relaxed mb-3 max-w-2xl mx-auto">
               Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
             </p>
-            <p className="font-serif text-2xl text-white font-semibold mb-3">
+            <p className="font-serif text-2xl text-white font-semibold mb-4">
               Live where you belong
             </p>
-            
-            <div className="flex items-center justify-center gap-1 text-primary">
-              <Sparkles className="w-2 h-2 animate-pulse opacity-60" />
-              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '0.2s' }} />
-              <Sparkles className="w-2 h-2 animate-pulse opacity-40" style={{ animationDelay: '0.4s' }} />
-              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '0.6s' }} />
-              <Sparkles className="w-2 h-2 animate-pulse opacity-60" style={{ animationDelay: '0.8s' }} />
-              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '1s' }} />
-              <Sparkles className="w-2 h-2 animate-pulse opacity-40" style={{ animationDelay: '1.2s' }} />
-              <MousePointer className="w-2 h-2 animate-pulse" style={{ animationDelay: '1.4s' }} />
-              <Sparkles className="w-2 h-2 animate-pulse opacity-60" style={{ animationDelay: '1.6s' }} />
+          </div>
+          
+          {/* Full Width Animated Divider */}
+          <div className="w-full px-12 py-4">
+            <div className="flex items-center justify-center gap-2 text-primary">
+              <Heart className="w-3 h-3 animate-pulse opacity-60" />
+              <MousePointer className="w-3 h-3 animate-pulse" style={{ animationDelay: '0.1s' }} />
+              <Sparkles className="w-3 h-3 animate-pulse opacity-50" style={{ animationDelay: '0.2s' }} />
+              <Heart className="w-3 h-3 animate-pulse opacity-40" style={{ animationDelay: '0.3s' }} />
+              <MousePointer className="w-3 h-3 animate-pulse" style={{ animationDelay: '0.4s' }} />
+              <Sparkles className="w-3 h-3 animate-pulse opacity-70" style={{ animationDelay: '0.5s' }} />
+              <Heart className="w-3 h-3 animate-pulse opacity-60" style={{ animationDelay: '0.6s' }} />
+              <MousePointer className="w-3 h-3 animate-pulse" style={{ animationDelay: '0.7s' }} />
+              <Sparkles className="w-3 h-3 animate-pulse opacity-40" style={{ animationDelay: '0.8s' }} />
+              <Heart className="w-3 h-3 animate-pulse opacity-70" style={{ animationDelay: '0.9s' }} />
+              <MousePointer className="w-3 h-3 animate-pulse" style={{ animationDelay: '1s' }} />
+              <Sparkles className="w-3 h-3 animate-pulse opacity-60" style={{ animationDelay: '1.1s' }} />
+              <Heart className="w-3 h-3 animate-pulse opacity-50" style={{ animationDelay: '1.2s' }} />
+              <MousePointer className="w-3 h-3 animate-pulse" style={{ animationDelay: '1.3s' }} />
+              <Sparkles className="w-3 h-3 animate-pulse opacity-40" style={{ animationDelay: '1.4s' }} />
+              <Heart className="w-3 h-3 animate-pulse opacity-60" style={{ animationDelay: '1.5s' }} />
+              <MousePointer className="w-3 h-3 animate-pulse" style={{ animationDelay: '1.6s' }} />
+              <Sparkles className="w-3 h-3 animate-pulse opacity-70" style={{ animationDelay: '1.7s' }} />
             </div>
           </div>
         </div>
