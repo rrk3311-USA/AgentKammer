@@ -1,7 +1,8 @@
-import { useEffect } from "react";
-import { ArrowLeft, MapPin } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowLeft, MapPin, Clock as ClockIcon } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 declare global {
   interface Window {
@@ -11,6 +12,16 @@ declare global {
 }
 
 export default function LiveDealMap() {
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   useEffect(() => {
     // Load Google Maps script
     const script = document.createElement('script');
@@ -36,123 +47,155 @@ export default function LiveDealMap() {
 
     const google = window.google;
 
-    // Elegant gray, black, white, gold styling
-    const elegantStyles = [
+    // Gray and white only - minimal styling
+    const grayWhiteStyles = [
       {
         "elementType": "geometry",
-        "stylers": [{ "color": "#1a1a1a" }]
+        "stylers": [{ "color": "#e8e8e8" }]
+      },
+      {
+        "elementType": "labels.text.fill",
+        "stylers": [{ "color": "#333333" }]
       },
       {
         "elementType": "labels.text.stroke",
-        "stylers": [{ "color": "#0a0a0a" }]
+        "stylers": [{ "color": "#ffffff" }]
       },
       {
-        "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#d4af37" }]
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [{ "color": "#ffffff" }]
       },
       {
-        "featureType": "administrative.locality",
+        "featureType": "road",
         "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#d4af37" }]
+        "stylers": [{ "color": "#666666" }]
+      },
+      {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [{ "color": "#d0d0d0" }]
       },
       {
         "featureType": "poi",
-        "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#888888" }]
+        "stylers": [{ "visibility": "off" }]
       },
       {
-        "featureType": "poi.park",
-        "elementType": "geometry",
-        "stylers": [{ "color": "#2a2a2a" }]
-      },
-      {
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [{ "color": "#2d2d2d" }]
-      },
-      {
-        "featureType": "road",
-        "elementType": "geometry.stroke",
-        "stylers": [{ "color": "#1a1a1a" }]
-      },
-      {
-        "featureType": "road",
-        "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#999999" }]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "geometry",
-        "stylers": [{ "color": "#3a3a3a" }]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [{ "color": "#1f1f1f" }]
-      },
-      {
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [{ "color": "#0a1628" }]
-      },
-      {
-        "featureType": "water",
-        "elementType": "labels.text.fill",
-        "stylers": [{ "color": "#666666" }]
+        "featureType": "transit",
+        "stylers": [{ "visibility": "off" }]
       }
     ];
 
     const map = new google.maps.Map(mapElement, {
       center: { lat: 40.7589, lng: -73.9851 }, // Times Square, NYC
-      zoom: 13,
-      styles: elegantStyles,
+      zoom: 12,
+      styles: grayWhiteStyles,
       disableDefaultUI: true,
-      zoomControl: true,
+      zoomControl: false,
       mapTypeControl: false,
       streetViewControl: false,
-      fullscreenControl: true,
+      fullscreenControl: false,
+      draggable: false,
+      scrollwheel: false,
+      disableDoubleClickZoom: true,
+      gestureHandling: 'none',
     });
 
-    // Add some sample property markers with gold pins
+    // Add simple gray markers
     const properties = [
-      { lat: 40.7589, lng: -73.9851, title: "Luxury Penthouse - $4.2M", score: 9.2 },
-      { lat: 40.7614, lng: -73.9776, title: "Modern Condo - $3.8M", score: 8.7 },
-      { lat: 40.7549, lng: -73.9840, title: "Classic Townhouse - $5.5M", score: 9.5 },
-      { lat: 40.7580, lng: -73.9855, title: "Contemporary Loft - $2.9M", score: 8.3 },
+      { lat: 40.7589, lng: -73.9851 },
+      { lat: 40.7614, lng: -73.9776 },
+      { lat: 40.7549, lng: -73.9840 },
+      { lat: 40.7580, lng: -73.9855 },
+      { lat: 40.7620, lng: -73.9800 },
     ];
 
     properties.forEach((prop) => {
-      const marker = new google.maps.Marker({
+      new google.maps.Marker({
         position: { lat: prop.lat, lng: prop.lng },
         map: map,
-        title: prop.title,
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
-          fillColor: "#d4af37",
-          fillOpacity: 0.9,
-          strokeColor: "#ffffff",
-          strokeWeight: 2,
-          scale: 10,
+          fillColor: "#666666",
+          fillOpacity: 0.8,
+          strokeColor: "#333333",
+          strokeWeight: 1,
+          scale: 6,
         },
-      });
-
-      const infoWindow = new google.maps.InfoWindow({
-        content: `
-          <div style="padding: 8px; font-family: sans-serif;">
-            <h3 style="margin: 0 0 4px 0; color: #0a1628; font-size: 14px; font-weight: 600;">${prop.title}</h3>
-            <p style="margin: 0; color: #666; font-size: 12px;">Deal IQ Score: ${prop.score}</p>
-          </div>
-        `,
-      });
-
-      marker.addListener("click", () => {
-        infoWindow.open(map, marker);
       });
     });
   };
 
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString('en-US', {
+      timeZone: 'America/New_York',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    });
+  };
+
+  const propertyDetails = [
+    {
+      id: 1,
+      address: "450 West 42nd Street, Manhattan",
+      price: "$2.5M",
+      dealIQ: 8.5,
+      beds: 2,
+      baths: 2,
+      sqft: "1,450",
+      type: "Condo",
+      daysOnMarket: 12
+    },
+    {
+      id: 2,
+      address: "88 Central Park West, Manhattan",
+      price: "$4.2M",
+      dealIQ: 9.2,
+      beds: 3,
+      baths: 2.5,
+      sqft: "2,100",
+      type: "Co-op",
+      daysOnMarket: 8
+    },
+    {
+      id: 3,
+      address: "245 West 19th Street, Chelsea",
+      price: "$3.8M",
+      dealIQ: 8.7,
+      beds: 2,
+      baths: 2,
+      sqft: "1,800",
+      type: "Condo",
+      daysOnMarket: 15
+    },
+    {
+      id: 4,
+      address: "301 East 50th Street, Midtown",
+      price: "$5.5M",
+      dealIQ: 9.5,
+      beds: 4,
+      baths: 3,
+      sqft: "2,800",
+      type: "Penthouse",
+      daysOnMarket: 6
+    },
+    {
+      id: 5,
+      address: "625 West 57th Street, Manhattan",
+      price: "$2.9M",
+      dealIQ: 8.3,
+      beds: 2,
+      baths: 2,
+      sqft: "1,600",
+      type: "Condo",
+      daysOnMarket: 18
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="bg-[#0a1628] text-white py-8 px-6">
         <div className="max-w-7xl mx-auto">
@@ -175,35 +218,57 @@ export default function LiveDealMap() {
                 Live Deal Map
               </h1>
               <p className="text-white/70">
-                Explore luxury properties across Manhattan in real-time
+                Explore luxury properties across Manhattan
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Map Container */}
-      <div className="relative h-[calc(100vh-200px)]">
-        <div id="map" className="w-full h-full" data-testid="map-container"></div>
-        
-        {/* Elegant overlay info */}
-        <div className="absolute top-4 left-4 right-4 md:left-auto md:right-4 md:w-80">
-          <div className="backdrop-blur-xl bg-black/80 border border-white/20 rounded-lg p-4 shadow-2xl">
-            <h3 className="font-serif text-lg font-semibold text-white mb-2">
-              Market Overview
-            </h3>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between text-white/80">
-                <span>Active Listings:</span>
-                <span className="text-[#d4af37] font-medium">247</span>
+      {/* Two Column Layout */}
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="flex gap-6">
+          {/* Map Container - 70% */}
+          <div className="w-[70%]">
+            <div className="bg-gray-100 rounded-lg overflow-hidden shadow-lg border border-gray-300" style={{ height: '600px' }}>
+              <div id="map" className="w-full h-full" data-testid="map-container"></div>
+            </div>
+          </div>
+
+          {/* Info Panel - 30% */}
+          <div className="w-[30%] space-y-4">
+            {/* Live Clock */}
+            <div className="bg-gray-100 border border-gray-300 rounded-lg p-4 shadow-lg">
+              <div className="flex items-center gap-2 mb-2">
+                <ClockIcon className="h-5 w-5 text-gray-600" />
+                <h3 className="font-serif text-lg font-semibold text-gray-900">Eastern Time</h3>
               </div>
-              <div className="flex justify-between text-white/80">
-                <span>Avg Deal IQ:</span>
-                <span className="text-[#d4af37] font-medium">8.4</span>
+              <div className="font-mono text-2xl font-bold text-gray-900" data-testid="live-clock">
+                {formatTime(currentTime)}
               </div>
-              <div className="flex justify-between text-white/80">
-                <span>New This Week:</span>
-                <span className="text-[#d4af37] font-medium">12</span>
+            </div>
+
+            {/* Scrollable Property Details */}
+            <div className="bg-gray-100 border border-gray-300 rounded-lg p-4 shadow-lg" style={{ height: '520px', overflowY: 'auto' }}>
+              <h3 className="font-serif text-lg font-semibold text-gray-900 mb-4 sticky top-0 bg-gray-100 pb-2">
+                Active Listings
+              </h3>
+              <div className="space-y-4">
+                {propertyDetails.map((property) => (
+                  <div key={property.id} className="bg-white border border-gray-300 rounded-lg p-3 hover:shadow-md transition-shadow">
+                    <div className="flex justify-between items-start mb-2">
+                      <div className="font-medium text-gray-900 text-sm">{property.address}</div>
+                      <Badge className="bg-gray-900 text-white text-xs ml-2">{property.dealIQ} IQ</Badge>
+                    </div>
+                    <div className="text-xl font-bold text-gray-900 mb-2">{property.price}</div>
+                    <div className="grid grid-cols-2 gap-2 text-xs text-gray-600">
+                      <div>{property.beds} bd • {property.baths} ba</div>
+                      <div>{property.sqft} sqft</div>
+                      <div>{property.type}</div>
+                      <div>{property.daysOnMarket} days</div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
