@@ -4,11 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Heart, Bed, Bath, Maximize, MapPin, ArrowRight, Clock } from "lucide-react";
+import { Heart, Bed, Bath, Maximize, MapPin, ArrowRight, Clock, Lightbulb } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { HappyDocIcon } from "./HappyDocIcon";
-import { TopHatIcon } from "./TopHatIcon";
 
 interface PropertyCardProps {
   id: string;
@@ -98,11 +97,11 @@ export function PropertyCard({
           </Button>
         </div>
         
-        {/* Price - Floating Separately (20% smaller, tighter spacing) */}
+        {/* Price - Floating Separately (twice as large) */}
         <div className="absolute bottom-8 left-2.5">
-          <div className="backdrop-blur-xl bg-black/85 dark:bg-black/90 rounded-lg px-2.5 py-1.5 border border-white/10 shadow-2xl">
+          <div className="backdrop-blur-xl bg-black/85 dark:bg-black/90 rounded-lg px-3 py-2 border border-white/10 shadow-2xl">
             <span 
-              className="font-serif text-base font-bold bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] bg-clip-text text-transparent" 
+              className="font-serif text-3xl font-bold bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] bg-clip-text text-transparent" 
               data-testid={`text-price-${id}`}
             >
               {formatPrice(price)}
@@ -116,7 +115,7 @@ export function PropertyCard({
             <div className="flex items-center gap-1 flex-wrap">
               {dealScore && (
                 <Badge variant="default" className="text-xs px-1.5 py-0 h-auto flex items-center gap-0.5 bg-black text-white border border-[#D4AF37]">
-                  <TopHatIcon className="h-2.5 w-2.5" />
+                  <Lightbulb className="h-2.5 w-2.5 fill-[#D4AF37] text-[#D4AF37]" />
                   {dealScore} IQ
                 </Badge>
               )}
