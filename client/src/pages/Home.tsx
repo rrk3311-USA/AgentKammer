@@ -16,7 +16,7 @@ import property2 from "@assets/generated_images/Brooklyn_brownstone_townhouse_ex
 import property3 from "@assets/generated_images/NYC_apartment_living_space_interior_ba500d46.png";
 import property4 from "@assets/generated_images/Manhattan_penthouse_rooftop_terrace_25c2682e.png";
 import property5 from "@assets/generated_images/Upper_West_Side_co-op_building_1e75d246.png";
-import agentKammerBackImg from "@assets/generated_images/James_Bond_back_view_character_8da6cf38.png";
+import storefrontImg from "@assets/BBD593A1-EF8F-40A7-BD11-A6F13773084E_1_105_c_1762128066935.jpg";
 
 export default function Home() {
   const [midtownFilter, setMidtownFilter] = useState<"midtown" | "above" | "below">("midtown");
@@ -282,7 +282,7 @@ export default function Home() {
         icon={TrendingDown}
       />
 
-      <section className="my-8 bg-gradient-to-br from-slate-50 via-blue-50/60 to-slate-100/60 dark:from-slate-900 dark:via-slate-900/50 dark:to-slate-800/40" data-testid="section-longest-on-market">
+      <section className="bg-gradient-to-br from-slate-50 via-blue-50/60 to-slate-100/60 dark:from-slate-900 dark:via-slate-900/50 dark:to-slate-800/40" data-testid="section-longest-on-market">
         <div className="max-w-7xl mx-auto px-6 pt-10 lg:pt-12 pb-4">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-14 h-14 rounded-lg bg-card border border-border flex items-center justify-center shadow-lg">
@@ -435,12 +435,12 @@ export default function Home() {
                 </form>
               </div>
 
-              {/* Right side: Character from behind */}
-              <div className="relative h-[400px] lg:h-[500px] flex items-end justify-center">
+              {/* Right side: Storefront image */}
+              <div className="relative h-[400px] lg:h-[500px] flex items-center justify-center">
                 <img 
-                  src={agentKammerBackImg} 
-                  alt="Agent Kammer" 
-                  className="h-[350px] lg:h-[450px] w-auto object-contain opacity-80"
+                  src={storefrontImg} 
+                  alt="Agent Kammer Storefront" 
+                  className="w-full h-full object-cover rounded-lg shadow-2xl"
                 />
               </div>
             </div>
