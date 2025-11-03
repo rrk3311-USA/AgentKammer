@@ -6,11 +6,10 @@ import { Link } from "wouter";
 
 export function AgenticActionsInfographic() {
   const actions = [
-    { icon: Search, label: "Continuous Market Scanning", color: "text-blue-600" },
-    { icon: Zap, label: "Instant Alert Processing", color: "text-yellow-600" },
-    { icon: TrendingUp, label: "Price Trend Analysis", color: "text-green-600" },
-    { icon: Bell, label: "Smart Notifications", color: "text-purple-600" },
-    { icon: Shield, label: "Competitive Bidding Intelligence", color: "text-red-600" },
+    { icon: Search, label: "Continuous Market Scanning", color: "text-primary" },
+    { icon: Zap, label: "Instant Alert Processing", color: "text-primary" },
+    { icon: TrendingUp, label: "Price Trend Analysis", color: "text-primary" },
+    { icon: Bell, label: "Smart Notifications", color: "text-primary" },
   ];
 
   return (
@@ -228,6 +227,22 @@ export function AgenticActionsInfographic() {
                     </line>
                   </svg>
                 </div>
+
+                {/* Small Action Cards - Black & Gold */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-6 px-4">
+                  {actions.map((action, index) => (
+                    <div
+                      key={index}
+                      className="bg-black/80 border border-primary/40 rounded-lg p-2 text-center"
+                      data-testid={`card-action-${index}`}
+                    >
+                      <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-1">
+                        <action.icon className={`h-3 w-3 ${action.color}`} />
+                      </div>
+                      <p className="text-[9px] font-medium leading-tight text-primary">{action.label}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -243,131 +258,6 @@ export function AgenticActionsInfographic() {
             @keyframes float-brain {
               0%, 100% { transform: translateY(0px); }
               50% { transform: translateY(-10px); }
-            }
-          `}} />
-
-          {/* Branch Lines with animated flow */}
-          <div className="absolute top-12 left-1/2 -translate-x-1/2 w-full h-24">
-            <svg className="w-full h-full" style={{ overflow: 'visible' }}>
-              {/* Left branches */}
-              <path
-                d="M 50% 0 Q 30% 50, 15% 100"
-                fill="none"
-                stroke="hsl(var(--primary))"
-                strokeWidth="2"
-                opacity="0.4"
-                className="branch-line"
-              />
-              <path
-                d="M 50% 0 Q 40% 50, 35% 100"
-                fill="none"
-                stroke="hsl(var(--primary))"
-                strokeWidth="2"
-                opacity="0.4"
-                className="branch-line"
-                style={{ animationDelay: '0.2s' }}
-              />
-              {/* Center branch */}
-              <path
-                d="M 50% 0 L 50% 100"
-                fill="none"
-                stroke="hsl(var(--primary))"
-                strokeWidth="2"
-                opacity="0.4"
-                className="branch-line"
-                style={{ animationDelay: '0.4s' }}
-              />
-              {/* Right branches */}
-              <path
-                d="M 50% 0 Q 60% 50, 65% 100"
-                fill="none"
-                stroke="hsl(var(--primary))"
-                strokeWidth="2"
-                opacity="0.4"
-                className="branch-line"
-                style={{ animationDelay: '0.6s' }}
-              />
-              <path
-                d="M 50% 0 Q 70% 50, 85% 100"
-                fill="none"
-                stroke="hsl(var(--primary))"
-                strokeWidth="2"
-                opacity="0.4"
-                className="branch-line"
-                style={{ animationDelay: '0.8s' }}
-              />
-              
-              {/* Flowing data particles along paths */}
-              <circle r="3" fill="hsl(var(--primary))" className="data-particle data-particle-1">
-                <animateMotion dur="2s" repeatCount="indefinite">
-                  <mpath href="#path1" />
-                </animateMotion>
-              </circle>
-              <circle r="3" fill="hsl(var(--primary))" className="data-particle data-particle-2">
-                <animateMotion dur="2s" repeatCount="indefinite">
-                  <mpath href="#path2" />
-                </animateMotion>
-              </circle>
-              <circle r="3" fill="hsl(var(--primary))" className="data-particle data-particle-3">
-                <animateMotion dur="2s" repeatCount="indefinite">
-                  <mpath href="#path3" />
-                </animateMotion>
-              </circle>
-              <circle r="3" fill="hsl(var(--primary))" className="data-particle data-particle-4">
-                <animateMotion dur="2s" repeatCount="indefinite">
-                  <mpath href="#path4" />
-                </animateMotion>
-              </circle>
-              <circle r="3" fill="hsl(var(--primary))" className="data-particle data-particle-5">
-                <animateMotion dur="2s" repeatCount="indefinite">
-                  <mpath href="#path5" />
-                </animateMotion>
-              </circle>
-              
-              {/* Hidden paths for particle animation */}
-              <path id="path1" d="M 50% 0 Q 30% 50, 15% 100" fill="none" />
-              <path id="path2" d="M 50% 0 Q 40% 50, 35% 100" fill="none" />
-              <path id="path3" d="M 50% 0 L 50% 100" fill="none" />
-              <path id="path4" d="M 50% 0 Q 60% 50, 65% 100" fill="none" />
-              <path id="path5" d="M 50% 0 Q 70% 50, 85% 100" fill="none" />
-            </svg>
-          </div>
-
-          {/* Action Cards with staggered animations */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 pt-24">
-            {actions.map((action, index) => (
-              <div
-                key={index}
-                className="bg-card border border-border rounded-xl p-4 text-center hover-elevate transition-all shadow-md"
-                data-testid={`card-action-${index}`}
-                style={{
-                  animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`
-                }}
-              >
-                <div className={`w-10 h-10 rounded-full bg-muted flex items-center justify-center mx-auto mb-3`}
-                     style={{
-                       animation: `iconPulse 2s ease-in-out ${index * 0.3}s infinite`
-                     }}>
-                  <action.icon className={`h-5 w-5 ${action.color}`} />
-                </div>
-                <p className="text-xs font-medium leading-tight">{action.label}</p>
-              </div>
-            ))}
-          </div>
-          <style dangerouslySetInnerHTML={{__html: `
-            @keyframes fadeInUp {
-              from {
-                opacity: 0;
-                transform: translateY(20px);
-              }
-              to {
-                opacity: 1;
-                transform: translateY(0);
-              }
-            }
-            @keyframes iconPulse {
-              0%, 100% { transform: scale(1); }
-              50% { transform: scale(1.1); }
             }
           `}} />
 
