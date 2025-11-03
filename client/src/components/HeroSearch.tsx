@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
 import { Search, MapPin, Sparkles, MousePointer } from "lucide-react";
-import heroImage from "@assets/IMG_9579_1761939754000.jpeg";
+import heroImage from "@assets/BBD593A1-EF8F-40A7-BD11-A6F13773084E_1_105_c_1762128066935.jpg";
 
 const propertyTypes = ["Condo", "Co-op", "Townhouse", "Penthouse"];
 const bedrooms = ["Studio", "1", "2", "3", "4+"];
@@ -60,7 +60,7 @@ export function HeroSearch() {
   return (
     <>
       {/* Top Section - White Background */}
-      <section className="bg-white dark:bg-background py-12 lg:py-16">
+      <section className="bg-white dark:bg-background py-8 lg:py-12">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h1 className="font-serif text-4xl lg:text-5xl font-semibold text-foreground mb-6">
             Your Perfect Home<br />Discovered
@@ -97,7 +97,7 @@ export function HeroSearch() {
       <section className="relative min-h-[600px] flex items-center justify-center bg-background">
         <div
           className="absolute inset-0 bg-no-repeat bg-center"
-          style={{ backgroundImage: `url(${heroImage})`, backgroundSize: '130%', backgroundPosition: 'center' }}
+          style={{ backgroundImage: `url(${heroImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
         />
 
         <div className="relative z-10 w-full max-w-3xl mx-auto px-6 py-12">
