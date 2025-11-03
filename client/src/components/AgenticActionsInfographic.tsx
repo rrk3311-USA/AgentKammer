@@ -97,156 +97,137 @@ export function AgenticActionsInfographic() {
 
         {/* Branching Actions */}
         <div className="relative mb-16">
-          {/* Center Node - NYC Skyline with Massive Compute */}
+          {/* Center Node - 3D Manhattan Map with Massive Compute */}
           <div className="flex justify-center mb-8">
             <div className="w-full max-w-4xl bg-gradient-to-br from-card to-card/50 border-2 border-primary/30 rounded-2xl shadow-2xl compute-engine-glow relative overflow-hidden"
                  style={{ minHeight: '288px' }}>
-              {/* NYC Skyline Silhouette with Flowing Code */}
-              <div className="relative h-full flex items-end justify-center p-8">
-                {/* Title above skyline */}
-                <div className="absolute top-8 left-1/2 transform -translate-x-1/2 text-center z-20">
+              <div className="relative h-full flex flex-col items-center justify-center p-8">
+                {/* Title */}
+                <div className="text-center z-20 mb-6">
                   <p className="font-serif text-3xl font-bold mb-1">Massive Compute Engine</p>
                   <p className="text-sm text-muted-foreground">AI-Powered NYC Property Intelligence</p>
                 </div>
                 
-                {/* NYC Skyline SVG with flowing code */}
-                <svg viewBox="0 0 800 200" className="w-full h-48" xmlns="http://www.w3.org/2000/svg">
-                  <defs>
-                    {/* Clip path for each building to contain code */}
-                    <clipPath id="building1"><rect x="50" y="120" width="40" height="80" /></clipPath>
-                    <clipPath id="building2"><rect x="100" y="80" width="50" height="120" /></clipPath>
-                    <clipPath id="building3"><rect x="160" y="100" width="35" height="100" /></clipPath>
-                    <clipPath id="building4"><rect x="205" y="60" width="55" height="140" /></clipPath>
-                    <clipPath id="building5"><rect x="270" y="90" width="45" height="110" /></clipPath>
-                    <clipPath id="building6"><rect x="325" y="40" width="45" height="160" /></clipPath>
-                    <clipPath id="building7"><rect x="380" y="70" width="50" height="130" /></clipPath>
-                    <clipPath id="building8"><rect x="440" y="50" width="60" height="150" /></clipPath>
-                    <clipPath id="building9"><rect x="510" y="85" width="40" height="115" /></clipPath>
-                    <clipPath id="building10"><rect x="560" y="105" width="45" height="95" /></clipPath>
-                    <clipPath id="building11"><rect x="615" y="95" width="38" height="105" /></clipPath>
-                    <clipPath id="building12"><rect x="663" y="110" width="42" height="90" /></clipPath>
-                    <clipPath id="building13"><rect x="715" y="125" width="35" height="75" /></clipPath>
-                  </defs>
-                  
-                  {/* Buildings - Black/Gray silhouettes */}
-                  <rect x="50" y="120" width="40" height="80" fill="#1a1a1a" stroke="#3a3a3a" strokeWidth="1" />
-                  <rect x="100" y="80" width="50" height="120" fill="#0d0d0d" stroke="#3a3a3a" strokeWidth="1" />
-                  <rect x="160" y="100" width="35" height="100" fill="#1a1a1a" stroke="#3a3a3a" strokeWidth="1" />
-                  <rect x="205" y="60" width="55" height="140" fill="#0a0a0a" stroke="#3a3a3a" strokeWidth="1" />
-                  <polygon points="232.5,60 205,40 260,40" fill="#0a0a0a" stroke="#3a3a3a" strokeWidth="1" />
-                  <rect x="270" y="90" width="45" height="110" fill="#151515" stroke="#3a3a3a" strokeWidth="1" />
-                  <rect x="325" y="40" width="45" height="160" fill="#0d0d0d" stroke="#3a3a3a" strokeWidth="1" />
-                  <polygon points="347.5,40 325,25 370,25" fill="#0d0d0d" stroke="#3a3a3a" strokeWidth="1" />
-                  <rect x="380" y="70" width="50" height="130" fill="#1a1a1a" stroke="#3a3a3a" strokeWidth="1" />
-                  <rect x="440" y="50" width="60" height="150" fill="#0a0a0a" stroke="#3a3a3a" strokeWidth="1" />
-                  <polygon points="470,50 440,30 500,30" fill="#0a0a0a" stroke="#3a3a3a" strokeWidth="1" />
-                  <rect x="510" y="85" width="40" height="115" fill="#151515" stroke="#3a3a3a" strokeWidth="1" />
-                  <rect x="560" y="105" width="45" height="95" fill="#1a1a1a" stroke="#3a3a3a" strokeWidth="1" />
-                  <rect x="615" y="95" width="38" height="105" fill="#0d0d0d" stroke="#3a3a3a" strokeWidth="1" />
-                  <rect x="663" y="110" width="42" height="90" fill="#1a1a1a" stroke="#3a3a3a" strokeWidth="1" />
-                  <rect x="715" y="125" width="35" height="75" fill="#151515" stroke="#3a3a3a" strokeWidth="1" />
-                  
-                  {/* Flowing code through buildings - vertical streams */}
-                  <g opacity="0.8">
-                    {/* Building 1 code streams */}
-                    <text x="62" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building1)">
-                      01<animate attributeName="y" from="205" to="115" dur="3s" repeatCount="indefinite" />
-                    </text>
-                    <text x="75" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building1)">
-                      10<animate attributeName="y" from="205" to="115" dur="3.5s" repeatCount="indefinite" />
-                    </text>
+                {/* 3D Manhattan Map Icon */}
+                <div className="relative" style={{ animation: 'float-brain 3s ease-in-out infinite' }}>
+                  <svg width="280" height="180" viewBox="0 0 280 180" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      {/* Gold glow filter */}
+                      <filter id="glow">
+                        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                        <feMerge>
+                          <feMergeNode in="coloredBlur"/>
+                          <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                      </filter>
+                    </defs>
                     
-                    {/* Building 2 code streams */}
-                    <text x="115" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building2)">
-                      AI<animate attributeName="y" from="205" to="75" dur="4s" repeatCount="indefinite" />
-                    </text>
-                    <text x="130" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building2)">
-                      ML<animate attributeName="y" from="205" to="75" dur="3.2s" repeatCount="indefinite" />
-                    </text>
+                    {/* 3D Isometric Manhattan island shape */}
+                    {/* Base/ground - black */}
+                    <path d="M 140,150 L 80,120 L 100,30 L 160,10 L 220,30 L 200,120 Z" 
+                          fill="#0a0a0a" 
+                          stroke="hsl(var(--primary))" 
+                          strokeWidth="2" 
+                          opacity="0.9" />
                     
-                    {/* Building 3 code streams */}
-                    <text x="172" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building3)">
-                      11<animate attributeName="y" from="205" to="95" dur="3.8s" repeatCount="indefinite" />
-                    </text>
+                    {/* Grid lines on surface - gold */}
+                    <g opacity="0.4" stroke="hsl(var(--primary))" strokeWidth="0.5">
+                      {/* Horizontal grid lines */}
+                      <line x1="90" y1="110" x2="190" y2="110" />
+                      <line x1="95" y1="90" x2="185" y2="90" />
+                      <line x1="100" y1="70" x2="180" y2="70" />
+                      <line x1="105" y1="50" x2="175" y2="50" />
+                      <line x1="110" y1="30" x2="170" y2="30" />
+                      
+                      {/* Vertical grid lines */}
+                      <path d="M 110,115 L 120,25" />
+                      <path d="M 130,118 L 140,20" />
+                      <path d="M 150,118 L 160,20" />
+                      <path d="M 170,115 L 180,25" />
+                    </g>
                     
-                    {/* Building 4 code streams (tallest - One World Trade) */}
-                    <text x="220" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building4)">
-                      01<animate attributeName="y" from="205" to="55" dur="4.5s" repeatCount="indefinite" />
-                    </text>
-                    <text x="235" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building4)">
-                      10<animate attributeName="y" from="205" to="55" dur="3.7s" repeatCount="indefinite" />
-                    </text>
-                    <text x="248" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building4)">
-                      11<animate attributeName="y" from="205" to="55" dur="4.2s" repeatCount="indefinite" />
-                    </text>
+                    {/* 3D blocks representing neighborhoods - varying heights */}
+                    {/* Downtown (tallest) */}
+                    <g>
+                      <polygon points="125,95 115,90 115,50 125,55" fill="#1a1a1a" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      <polygon points="125,55 115,50 135,42 145,47" fill="#0d0d0d" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      <polygon points="145,47 145,87 125,95 125,55" fill="#151515" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      {/* Flowing data particle */}
+                      <circle r="1.5" fill="hsl(var(--primary))" filter="url(#glow)">
+                        <animateMotion dur="3s" repeatCount="indefinite" path="M 135,90 L 135,50" />
+                      </circle>
+                    </g>
                     
-                    {/* Building 5 code streams */}
-                    <text x="285" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building5)">
-                      01<animate attributeName="y" from="205" to="85" dur="3.3s" repeatCount="indefinite" />
-                    </text>
-                    <text x="300" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building5)">
-                      10<animate attributeName="y" from="205" to="85" dur="3.9s" repeatCount="indefinite" />
-                    </text>
+                    {/* Midtown */}
+                    <g>
+                      <polygon points="155,90 145,85 145,60 155,65" fill="#1a1a1a" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      <polygon points="155,65 145,60 165,52 175,57" fill="#0d0d0d" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      <polygon points="175,57 175,82 155,90 155,65" fill="#151515" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      {/* Flowing data particle */}
+                      <circle r="1.5" fill="hsl(var(--primary))" filter="url(#glow)">
+                        <animateMotion dur="2.5s" repeatCount="indefinite" path="M 165,85 L 165,55" />
+                      </circle>
+                    </g>
                     
-                    {/* Building 6 code streams (Empire State) */}
-                    <text x="340" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building6)">
-                      AI<animate attributeName="y" from="205" to="35" dur="4.8s" repeatCount="indefinite" />
-                    </text>
-                    <text x="355" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building6)">
-                      01<animate attributeName="y" from="205" to="35" dur="4.1s" repeatCount="indefinite" />
-                    </text>
+                    {/* Upper Manhattan */}
+                    <g>
+                      <polygon points="140,55 130,50 130,35 140,40" fill="#1a1a1a" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      <polygon points="140,40 130,35 150,27 160,32" fill="#0d0d0d" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      <polygon points="160,32 160,47 140,55 140,40" fill="#151515" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      {/* Flowing data particle */}
+                      <circle r="1.5" fill="hsl(var(--primary))" filter="url(#glow)">
+                        <animateMotion dur="3.5s" repeatCount="indefinite" path="M 150,50 L 150,30" />
+                      </circle>
+                    </g>
                     
-                    {/* Building 7 code streams */}
-                    <text x="395" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building7)">
-                      11<animate attributeName="y" from="205" to="65" dur="3.6s" repeatCount="indefinite" />
-                    </text>
-                    <text x="410" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building7)">
-                      ML<animate attributeName="y" from="205" to="65" dur="4.3s" repeatCount="indefinite" />
-                    </text>
+                    {/* West Side */}
+                    <g>
+                      <polygon points="105,100 95,95 95,70 105,75" fill="#1a1a1a" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      <polygon points="105,75 95,70 115,62 125,67" fill="#0d0d0d" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      <polygon points="125,67 125,92 105,100 105,75" fill="#151515" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      {/* Flowing data particle */}
+                      <circle r="1.5" fill="hsl(var(--primary))" filter="url(#glow)">
+                        <animateMotion dur="2.8s" repeatCount="indefinite" path="M 115,95 L 115,65" />
+                      </circle>
+                    </g>
                     
-                    {/* Building 8 code streams (Chrysler) */}
-                    <text x="458" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building8)">
-                      01<animate attributeName="y" from="205" to="45" dur="4.4s" repeatCount="indefinite" />
-                    </text>
-                    <text x="473" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building8)">
-                      10<animate attributeName="y" from="205" to="45" dur="3.9s" repeatCount="indefinite" />
-                    </text>
-                    <text x="485" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building8)">
-                      AI<animate attributeName="y" from="205" to="45" dur="4.6s" repeatCount="indefinite" />
-                    </text>
+                    {/* East Side */}
+                    <g>
+                      <polygon points="175,95 165,90 165,68 175,73" fill="#1a1a1a" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      <polygon points="175,73 165,68 185,60 195,65" fill="#0d0d0d" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      <polygon points="195,65 195,87 175,95 175,73" fill="#151515" stroke="hsl(var(--primary))" strokeWidth="1" />
+                      {/* Flowing data particle */}
+                      <circle r="1.5" fill="hsl(var(--primary))" filter="url(#glow)">
+                        <animateMotion dur="3.2s" repeatCount="indefinite" path="M 185,90 L 185,63" />
+                      </circle>
+                    </g>
                     
-                    {/* Building 9 code streams */}
-                    <text x="525" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building9)">
-                      11<animate attributeName="y" from="205" to="80" dur="3.4s" repeatCount="indefinite" />
-                    </text>
+                    {/* Pulsing data points across the map */}
+                    <circle cx="120" cy="80" r="2" fill="hsl(var(--primary))" opacity="0.8" filter="url(#glow)">
+                      <animate attributeName="r" values="2;3.5;2" dur="2s" repeatCount="indefinite" />
+                      <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="155" cy="70" r="2" fill="hsl(var(--primary))" opacity="0.8" filter="url(#glow)">
+                      <animate attributeName="r" values="2;3.5;2" dur="1.8s" repeatCount="indefinite" />
+                      <animate attributeName="opacity" values="0.8;1;0.8" dur="1.8s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="140" cy="45" r="2" fill="hsl(var(--primary))" opacity="0.8" filter="url(#glow)">
+                      <animate attributeName="r" values="2;3.5;2" dur="2.3s" repeatCount="indefinite" />
+                      <animate attributeName="opacity" values="0.8;1;0.8" dur="2.3s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="180" cy="75" r="2" fill="hsl(var(--primary))" opacity="0.8" filter="url(#glow)">
+                      <animate attributeName="r" values="2;3.5;2" dur="2.1s" repeatCount="indefinite" />
+                      <animate attributeName="opacity" values="0.8;1;0.8" dur="2.1s" repeatCount="indefinite" />
+                    </circle>
                     
-                    {/* Building 10 code streams */}
-                    <text x="575" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building10)">
-                      01<animate attributeName="y" from="205" to="100" dur="3.1s" repeatCount="indefinite" />
-                    </text>
-                    <text x="590" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building10)">
-                      10<animate attributeName="y" from="205" to="100" dur="3.7s" repeatCount="indefinite" />
-                    </text>
-                    
-                    {/* Building 11 code streams */}
-                    <text x="628" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building11)">
-                      ML<animate attributeName="y" from="205" to="90" dur="3.5s" repeatCount="indefinite" />
-                    </text>
-                    
-                    {/* Building 12 code streams */}
-                    <text x="678" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building12)">
-                      01<animate attributeName="y" from="205" to="105" dur="3.2s" repeatCount="indefinite" />
-                    </text>
-                    <text x="690" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building12)">
-                      AI<animate attributeName="y" from="205" to="105" dur="3.8s" repeatCount="indefinite" />
-                    </text>
-                    
-                    {/* Building 13 code streams */}
-                    <text x="728" y="200" fontSize="4" fill="hsl(var(--primary))" fontFamily="monospace" clipPath="url(#building13)">
-                      10<animate attributeName="y" from="205" to="120" dur="2.9s" repeatCount="indefinite" />
-                    </text>
-                  </g>
-                </svg>
+                    {/* Scanning lines effect */}
+                    <line x1="85" x2="195" stroke="hsl(var(--primary))" strokeWidth="1" opacity="0.5">
+                      <animate attributeName="y1" values="120;30;120" dur="4s" repeatCount="indefinite" />
+                      <animate attributeName="y2" values="120;30;120" dur="4s" repeatCount="indefinite" />
+                      <animate attributeName="opacity" values="0;0.7;0" dur="4s" repeatCount="indefinite" />
+                    </line>
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
