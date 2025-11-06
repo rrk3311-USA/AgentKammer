@@ -183,8 +183,8 @@ export function FloatingChatAssistant() {
                 <img 
                   src={agentAvatar} 
                   alt="Agent Kammer" 
-                  className="w-full h-full object-cover scale-150"
-                  style={{ objectPosition: "25% 35%" }}
+                  className="w-full h-full object-cover scale-[1.8]"
+                  style={{ objectPosition: "20% 30%" }}
                 />
               </div>
               <div className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-primary animate-pulse" />
