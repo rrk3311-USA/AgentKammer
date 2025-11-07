@@ -13,6 +13,7 @@ import GetPreapproved from "@/pages/GetPreapproved";
 import GetHomeValue from "@/pages/GetHomeValue";
 import BrokerRegistration from "@/pages/BrokerRegistration";
 import LiveDealMap from "@/pages/LiveDealMap";
+import DocumentPortal from "@/pages/DocumentPortal";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -24,6 +25,7 @@ function Router() {
       <Route path="/services/get-home-value" component={GetHomeValue} />
       <Route path="/broker-registration" component={BrokerRegistration} />
       <Route path="/live-deal-map" component={LiveDealMap} />
+      <Route path="/document-portal" component={DocumentPortal} />
       <Route component={NotFound} />
     </Switch>
   );

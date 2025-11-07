@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Heart, Menu, X, Building2, Sparkles } from "lucide-react";
+import { Moon, Sun, Heart, Menu, X, Building2, Sparkles, FileText } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
 
@@ -65,6 +65,16 @@ export function Header() {
           </Link>
 
           <div className="flex items-center gap-4 ml-auto">
+            <Link href="/document-portal">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hidden md:flex"
+                data-testid="button-documents"
+              >
+                <FileText className="h-5 w-5" />
+              </Button>
+            </Link>
             <Button
               variant="ghost"
               size="icon"
@@ -128,6 +138,14 @@ export function Header() {
                 Saved Searches
               </span>
             </Link>
+            <Link href="/document-portal" data-testid="link-mobile-document-portal">
+              <span
+                className="text-base font-medium hover:text-primary cursor-pointer block"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Document Portal
+              </span>
+            </Link>
             <div className="border-t pt-4">
               <p className="text-xs font-semibold text-muted-foreground mb-2 uppercase">Services</p>
               <Link href="/services/get-preapproved" data-testid="link-mobile-preapproved">
@@ -140,7 +158,7 @@ export function Header() {
               </Link>
               <Link href="/services/get-home-value" data-testid="link-mobile-home-value">
                 <span
-                  className="text-base font-medium hover:text-primary cursor-pointer block"
+                  className="text-base font-medium hover:text-primary cursor-pointer block mb-3"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Get Your Home Value
