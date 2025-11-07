@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home, Mic, MicOff } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import agentAvatar from "@assets/IMG_1313_1762461325930.jpeg";
+import agentAvatar from "@assets/generated_images/Tuxedo_professional_on_phone_cd981587.png";
 
 interface Message {
   id: string;
