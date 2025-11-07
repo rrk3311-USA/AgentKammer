@@ -12,7 +12,7 @@ export function Footer() {
             <div>
               <h3 className="font-serif text-lg font-semibold mb-4">Agent Kammer</h3>
               <p className="text-sm text-muted-foreground">
-                Luxury NYC real estate at your fingertips
+                Luxury properties across NYC, LA & NV
               </p>
             </div>
             <div>

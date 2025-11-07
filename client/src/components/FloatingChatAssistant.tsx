@@ -22,7 +22,7 @@ export function FloatingChatAssistant() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Good evening. I'm Agent Kammer, your personal real estate concierge. How may I assist you in finding your perfect Manhattan property today?",
+      text: "Good evening. I'm Agent Kammer, your personal real estate concierge. How may I assist you in finding your perfect luxury property today?",
       sender: "agent",
       timestamp: new Date(),
     },
@@ -92,10 +92,10 @@ export function FloatingChatAssistant() {
   const popularPrompts = [
     { id: "best-deal", icon: DollarSign, label: "Best Deal Right Now", prompt: "Show me the best deal on the market right now" },
     { id: "longest-market", icon: Clock, label: "Longest on Market", prompt: "Which properties have been on the market the longest?" },
-    { id: "safest-location", icon: Shield, label: "Safest Locations", prompt: "What are the safest neighborhoods in Manhattan?" },
+    { id: "safest-location", icon: Shield, label: "Safest Locations", prompt: "What are the safest luxury neighborhoods?" },
     { id: "school-zone", icon: GraduationCap, label: "Best School Zones", prompt: "Show me properties in the best school zones" },
     { id: "price-reduced", icon: TrendingDown, label: "Recently Reduced", prompt: "Show me properties with recent price reductions" },
-    { id: "new-listings", icon: Home, label: "New Listings", prompt: "What are the newest listings in Manhattan?" },
+    { id: "new-listings", icon: Home, label: "New Listings", prompt: "What are the newest luxury listings?" },
   ];
 
   const toggleVoiceInput = () => {

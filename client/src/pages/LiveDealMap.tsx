@@ -139,7 +139,7 @@ export default function LiveDealMap() {
   const propertyDetails = [
     {
       id: 1,
-      address: "450 West 42nd Street, Manhattan",
+      address: "450 West 42nd Street, Manhattan, NY",
       price: "$2.5M",
       dealIQ: 8.5,
       beds: 2,
@@ -150,29 +150,29 @@ export default function LiveDealMap() {
     },
     {
       id: 2,
-      address: "88 Central Park West, Manhattan",
+      address: "1200 Club View Drive, Beverly Hills, CA",
       price: "$4.2M",
       dealIQ: 9.2,
       beds: 3,
       baths: 2.5,
       sqft: "2,100",
-      type: "Co-op",
+      type: "Villa",
       daysOnMarket: 8
     },
     {
       id: 3,
-      address: "245 West 19th Street, Chelsea",
+      address: "11 Promontory Ridge Lane, Las Vegas, NV",
       price: "$3.8M",
       dealIQ: 8.7,
       beds: 2,
       baths: 2,
       sqft: "1,800",
-      type: "Condo",
+      type: "Estate",
       daysOnMarket: 15
     },
     {
       id: 4,
-      address: "301 East 50th Street, Midtown",
+      address: "301 East 50th Street, Manhattan, NY",
       price: "$5.5M",
       dealIQ: 9.5,
       beds: 4,
@@ -183,7 +183,7 @@ export default function LiveDealMap() {
     },
     {
       id: 5,
-      address: "625 West 57th Street, Manhattan",
+      address: "9201 Sunset Boulevard, Beverly Hills, CA",
       price: "$2.9M",
       dealIQ: 8.3,
       beds: 2,
@@ -218,7 +218,7 @@ export default function LiveDealMap() {
                 Live Deal Map
               </h1>
               <p className="text-white/70">
-                Explore luxury properties across Manhattan
+                Explore luxury properties across NYC, LA & NV
               </p>
             </div>
           </div>

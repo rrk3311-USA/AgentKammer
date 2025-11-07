@@ -59,7 +59,7 @@ export function Header() {
               </div>
               <div className="flex flex-col items-center">
                 <span className="font-serif text-base font-semibold tracking-wide text-foreground">AGENT KAMMER</span>
-                <span className="text-[0.5rem] font-medium tracking-widest text-muted-foreground">NYC REAL ESTATE</span>
+                <span className="text-[0.5rem] font-semibold tracking-wide" style={{ color: '#d4af37' }}>NYC · LA · NV</span>
               </div>
             </div>
           </Link>

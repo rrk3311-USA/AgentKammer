@@ -1,4 +1,4 @@
-# Agent Kammer - NYC Real Estate Platform Design Guidelines
+# Agent Kammer - Luxury Properties Platform Design Guidelines
 
 ## Design Approach
 

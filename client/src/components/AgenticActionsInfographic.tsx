@@ -133,10 +133,10 @@ export function AgenticActionsInfographic() {
               </div>
             </div>
 
-            {/* NYC Property Intelligence - Gold on Black */}
+            {/* Multi-Market Property Intelligence - Gold on Black */}
             <div className="bg-black border-t border-white/10 py-3">
               <p className="text-center text-sm font-semibold tracking-wide" style={{ color: '#d4af37' }}>
-                AI-Powered NYC Property Intelligence
+                AI-Powered Multi-Market Property Intelligence
               </p>
             </div>
 
@@ -185,24 +185,25 @@ export function AgenticActionsInfographic() {
                     <h4 className="font-semibold text-white">Primary Sources</h4>
                   </div>
                   <p className="text-white/70 leading-relaxed">
-                    <span className="text-white font-medium">MLS:</span> OneKey MLS, NY State MLS, Zillow Bridge API, Realtor.com, Redfin. 
-                    <span className="text-white font-medium"> Government:</span> NYC ACRIS, Rolling Sales, Property Valuation via NYC Open Data.
+                    <span className="text-white font-medium">MLS:</span> OneKey MLS, CRMLS (CA), Zillow Bridge API, Realtor.com, Redfin. 
+                    <span className="text-white font-medium"> Government:</span> Public Records, Tax Assessments, Property Valuations.
                   </p>
                 </div>
 
-                {/* Manhattan APIs */}
+                {/* Luxury Market APIs */}
                 <div className="border-t border-white/10 pt-4">
                   <div className="flex items-center gap-2 mb-2">
                     <Building2 className="h-4 w-4 text-white" />
-                    <h4 className="font-semibold text-white">Manhattan APIs</h4>
+                    <h4 className="font-semibold text-white">Luxury Market APIs</h4>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {[
                       "OneKey MLS",
+                      "CRMLS",
                       "Zillow",
                       "Realtor.com",
                       "PropertyShark",
-                      "NYC Open Data"
+                      "Public Records"
                     ].map((api, index) => (
                       <Badge key={index} variant="outline" className="text-[10px] bg-white/10 text-white border-white/20">
                         {api}

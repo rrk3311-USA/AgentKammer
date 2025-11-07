@@ -66,10 +66,22 @@ export function HeroSearch() {
             Your Perfect Home<br />Discovered
           </h1>
           
+          {/* Luxury Markets */}
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <span className="text-sm font-medium text-muted-foreground tracking-wide">LUXURY PROPERTIES IN</span>
+            <div className="flex items-center gap-2 font-serif text-lg font-semibold" style={{ color: '#d4af37' }}>
+              <span>NYC</span>
+              <span className="text-muted-foreground">·</span>
+              <span>LA</span>
+              <span className="text-muted-foreground">·</span>
+              <span>NV</span>
+            </div>
+          </div>
+          
           {/* Navy Section - Full Width Horizontal Bar */}
           <div className="bg-[#0a1628] py-6 -mx-6 px-6 mb-0">
             <p className="text-sm text-white font-light leading-relaxed mb-3 max-w-2xl mx-auto">
-              Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan the whole city for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
+              Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan multiple luxury markets for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
             </p>
             <div className="flex items-center justify-center gap-1.5">
               {/* Left Heart Bubbles */}
@@ -155,7 +167,7 @@ export function HeroSearch() {
               <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
                 id="location"
-                placeholder="Manhattan, Brooklyn, Queens..."
+                placeholder="Manhattan, Beverly Hills, Las Vegas..."
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 className="pl-10"
