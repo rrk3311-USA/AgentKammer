@@ -241,7 +241,7 @@ export default function WellnessShop() {
                     size="sm"
                     disabled={!product.inStock}
                     onClick={() => addToCart(product.id)}
-                    className="rounded-full text-black font-semibold"
+                    className="rounded-full font-semibold"
                     data-testid={`button-add-to-cart-${product.id}`}
                   >
                     {product.inStock ? (
@@ -272,7 +272,7 @@ export default function WellnessShop() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg"
-              className="rounded-full text-black font-semibold"
+              className="rounded-full font-semibold"
               data-testid="button-contact-expert"
             >
               Contact a Wellness Expert
