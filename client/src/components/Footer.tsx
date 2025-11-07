@@ -42,12 +42,18 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h4 className="font-medium mb-4">Company</h4>
+              <h4 className="font-medium mb-4">Shop</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>About Us</li>
-                <li>Contact</li>
-                <li>Careers</li>
-                <li>Privacy Policy</li>
+                <li>
+                  <Link href="/wellness-shop" className="hover:text-foreground transition-colors">
+                    Wellness Products
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/coaching" className="hover:text-foreground transition-colors">
+                    Coaching Programs
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>

@@ -16,6 +16,7 @@ import LiveDealMap from "@/pages/LiveDealMap";
 import DocumentPortal from "@/pages/DocumentPortal";
 import Coaching from "@/pages/Coaching";
 import LuxuryTravel from "@/pages/LuxuryTravel";
+import WellnessShop from "@/pages/WellnessShop";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -30,6 +31,7 @@ function Router() {
       <Route path="/document-portal" component={DocumentPortal} />
       <Route path="/coaching" component={Coaching} />
       <Route path="/luxury-travel" component={LuxuryTravel} />
+      <Route path="/wellness-shop" component={WellnessShop} />
       <Route component={NotFound} />
     </Switch>
   );
