@@ -14,6 +14,7 @@ import GetHomeValue from "@/pages/GetHomeValue";
 import BrokerRegistration from "@/pages/BrokerRegistration";
 import LiveDealMap from "@/pages/LiveDealMap";
 import DocumentPortal from "@/pages/DocumentPortal";
+import Coaching from "@/pages/Coaching";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -26,6 +27,7 @@ function Router() {
       <Route path="/broker-registration" component={BrokerRegistration} />
       <Route path="/live-deal-map" component={LiveDealMap} />
       <Route path="/document-portal" component={DocumentPortal} />
+      <Route path="/coaching" component={Coaching} />
       <Route component={NotFound} />
     </Switch>
   );
