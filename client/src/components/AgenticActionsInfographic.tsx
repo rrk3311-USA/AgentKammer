@@ -6,41 +6,68 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
 import agiBrainImage from "@assets/generated_images/Grok-5_AGI_Technology_Visualization_7ad79357.png";
 
+interface CodeSnippet {
+  text: string;
+  yPos: number;
+  speed: number;
+  opacity: number;
+}
+
 export function AgenticActionsInfographic() {
-  const [computeNumbers, setComputeNumbers] = useState<string[]>([]);
+  const [codeSnippets, setCodeSnippets] = useState<CodeSnippet[]>([]);
 
   useEffect(() => {
-    // Generate random compute numbers
-    const generateNumbers = () => {
-      const numbers = [];
-      for (let i = 0; i < 25; i++) {
-        numbers.push(Math.floor(Math.random() * 1000000).toString());
+    // Programming languages and code snippets for waterfall
+    const snippets = [
+      "JavaScript", "Python", "Java", "Docker", "React", "TypeScript",
+      "Node.js", "SQL", "MongoDB", "Redis", "GraphQL", "REST",
+      "const data = {}", "function()", "async/await", "import {}", 
+      "class Agent", "API.call()", "db.query()", "fetch()",
+      "map()", "filter()", "reduce()", "Promise.all()",
+      "124567", "892341", "567234", "981234", "345678"
+    ];
+
+    // Initialize waterfall items
+    const initWaterfall = () => {
+      const items: CodeSnippet[] = [];
+      for (let i = 0; i < 20; i++) {
+        items.push({
+          text: snippets[Math.floor(Math.random() * snippets.length)],
+          yPos: Math.random() * -200,
+          speed: Math.random() * 0.5 + 0.3,
+          opacity: Math.random() * 0.5 + 0.3
+        });
       }
-      setComputeNumbers(numbers);
+      setCodeSnippets(items);
     };
 
-    generateNumbers();
-    const interval = setInterval(generateNumbers, 150);
-    return () => clearInterval(interval);
+    initWaterfall();
+
+    // Animate waterfall
+    const animateInterval = setInterval(() => {
+      setCodeSnippets(prev => 
+        prev.map(snippet => {
+          let newYPos = snippet.yPos + snippet.speed;
+          if (newYPos > 100) {
+            newYPos = -20;
+            return {
+              text: snippets[Math.floor(Math.random() * snippets.length)],
+              yPos: newYPos,
+              speed: Math.random() * 0.5 + 0.3,
+              opacity: Math.random() * 0.5 + 0.3
+            };
+          }
+          return { ...snippet, yPos: newYPos };
+        })
+      );
+    }, 50);
+
+    return () => clearInterval(animateInterval);
   }, []);
 
   return (
     <section className="py-12 lg:py-16 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
-      
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes number-pulse {
-          0%, 100% { opacity: 0.3; transform: scale(0.95); }
-          50% { opacity: 1; transform: scale(1.05); }
-        }
-        .compute-number {
-          animation: number-pulse ${Math.random() * 0.5 + 0.3}s ease-in-out infinite;
-        }
-        @keyframes glow-pulse {
-          0%, 100% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.1); }
-          50% { box-shadow: 0 0 50px rgba(255, 255, 255, 0.2); }
-        }
-      `}} />
       
       <div className="max-w-6xl mx-auto px-6 relative">
         {/* Header */}
@@ -60,56 +87,70 @@ export function AgenticActionsInfographic() {
         {/* Compact All-in-One Card */}
         <Card className="bg-black text-white border-white/10 shadow-2xl overflow-hidden mb-8" data-testid="card-compute-engine">
           <CardContent className="p-0">
-            {/* Massive Compute Engine with Brain Background */}
-            <div className="relative h-[300px] overflow-hidden">
-              {/* Background Image - Cropped to show brain center */}
+            {/* Title Above Image */}
+            <div className="bg-black text-center py-6 border-b border-white/10">
+              <h3 className="font-serif text-3xl lg:text-4xl font-bold text-white">
+                Massive Compute Engine
+              </h3>
+            </div>
+
+            {/* Brain Background with Waterfall */}
+            <div className="relative h-[220px] overflow-hidden">
+              {/* Background Image - Only fade bottom half */}
               <div 
-                className="absolute inset-0 bg-cover bg-center opacity-40"
+                className="absolute inset-0 bg-cover bg-center"
                 style={{
                   backgroundImage: `url(${agiBrainImage})`,
                   backgroundPosition: 'center 35%',
-                  backgroundSize: '150%',
-                  filter: 'brightness(0.6) contrast(1.2)'
+                  backgroundSize: '150%'
                 }}
               />
               
-              {/* Animated Numbers Overlay in Brain Center */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="grid grid-cols-5 gap-1 opacity-80" style={{ width: '200px', height: '150px' }}>
-                  {computeNumbers.map((num, idx) => (
-                    <div
-                      key={idx}
-                      className="compute-number text-[10px] font-mono text-white/70 text-center"
-                      style={{
-                        animationDelay: `${idx * 0.1}s`
-                      }}
-                    >
-                      {num.slice(0, 4)}
-                    </div>
-                  ))}
+              {/* Gradient fade on bottom half only */}
+              <div 
+                className="absolute inset-0"
+                style={{
+                  background: 'linear-gradient(to bottom, transparent 0%, transparent 50%, rgba(0,0,0,0.6) 100%)'
+                }}
+              />
+              
+              {/* Waterfall Code Animation */}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                {codeSnippets.map((snippet, idx) => (
+                  <div
+                    key={idx}
+                    className="absolute left-0 right-0 text-center font-mono text-xs"
+                    style={{
+                      top: `${snippet.yPos}%`,
+                      opacity: snippet.opacity,
+                      color: '#ffffff',
+                      textShadow: '0 0 10px rgba(212, 175, 55, 0.5)'
+                    }}
+                  >
+                    {snippet.text}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* NYC Property Intelligence - Gold on Black */}
+            <div className="bg-black border-t border-white/10 py-3">
+              <p className="text-center text-sm font-semibold tracking-wide" style={{ color: '#d4af37' }}>
+                AI-Powered NYC Property Intelligence
+              </p>
+            </div>
+
+            {/* Bottom Actions Strip - Black & White */}
+            <div className="bg-black/90 border-t border-white/20 py-3">
+              <div className="flex items-center justify-center gap-6 text-xs">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                  <span className="text-white font-medium">Continuous Market Scanning</span>
                 </div>
-              </div>
-
-              {/* Title Overlay */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-                <h3 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-2 drop-shadow-lg">
-                  Massive Compute Engine
-                </h3>
-                <p className="text-sm text-white/90 drop-shadow-md">AI-Powered NYC Property Intelligence</p>
-              </div>
-
-              {/* Bottom Actions Strip - Black & White */}
-              <div className="absolute bottom-0 left-0 right-0 bg-black/90 backdrop-blur-sm border-t border-white/20 p-4">
-                <div className="flex items-center justify-center gap-6 text-xs">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                    <span className="text-white font-medium">Continuous Market Scanning</span>
-                  </div>
-                  <div className="h-4 w-px bg-white/30" />
-                  <div className="flex items-center gap-2">
-                    <Zap className="h-3 w-3 text-white" />
-                    <span className="text-white font-medium">Instant Alert Processing</span>
-                  </div>
+                <div className="h-4 w-px bg-white/30" />
+                <div className="flex items-center gap-2">
+                  <Zap className="h-3 w-3 text-white" />
+                  <span className="text-white font-medium">Instant Alert Processing</span>
                 </div>
               </div>
             </div>
