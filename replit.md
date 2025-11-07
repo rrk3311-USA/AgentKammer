@@ -32,8 +32,7 @@ The platform features a visual-first approach with large images and sophisticate
 - A Live Interest Rate Ticker in the header with a minimal, animated design.
 - Enhanced property card styling with pure white backgrounds (light mode) and pronounced drop shadows.
 - Decorative sparkles and mouse pointer icons for visual dividers.
-- Animated HTML5 infographic for "Agentic Actions" illustrating AI compute flow, data sources, and actions with dynamic visual effects.
-- Enhanced "Massive Compute Engine" section: Twice as large with two-column layout. Left half features AI brain visualization with circuit board patterns, animated nodes, and flowing data wires showing high-tech AI technology "unveiled". Right half displays engine stats (24/7 Active, 10K+ Daily Scans) with processing indicators.
+- Compact "Agentic Actions" section featuring the Massive Compute Engine with Grok-5 AGI brain visualization as background. The section uses a single black card design with white text combining: (1) Hero section (300px) with AI brain background image cropped to center, 25 animated pulsating numbers in the brain's center simulating real-time computation updating every 150ms, and bottom action strip showing "Continuous Market Scanning" and "Instant Alert Processing" in monochrome design; (2) Statistics showing 240hrs average buyer search time vs 240+ hrs saved; (3) Ultra-compact data sources listing primary MLS/government sources and Manhattan APIs. Entire section significantly reduced in vertical space for improved scrolling experience.
 - Market Analysis Report with a premium background image of a luxury marble desk with a Manhattan view.
 - A personalized chat assistant avatar using the owner's professional headshot.
 - Email capture forms with gold gradients and animated icons.
