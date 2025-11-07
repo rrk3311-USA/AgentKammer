@@ -1,6 +1,7 @@
 import { SiReplit, SiNvidia, SiClaude } from "react-icons/si";
 import { Brain } from "lucide-react";
 import { LiveInterestRate } from "./LiveInterestRate";
+import { Link } from "wouter";
 
 export function Footer() {
   return (
@@ -18,10 +19,26 @@ export function Footer() {
             <div>
               <h4 className="font-medium mb-4">Services</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>Property Search</li>
-                <li>Pre-Approval</li>
-                <li>Home Valuation</li>
-                <li>Market Analysis</li>
+                <li>
+                  <Link href="/" className="hover:text-foreground transition-colors">
+                    Property Search
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/get-preapproved" className="hover:text-foreground transition-colors">
+                    Pre-Approval
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/get-home-value" className="hover:text-foreground transition-colors">
+                    Home Valuation
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/luxury-travel" className="hover:text-foreground transition-colors">
+                    Luxury Travel
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>

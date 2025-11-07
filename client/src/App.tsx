@@ -15,6 +15,7 @@ import BrokerRegistration from "@/pages/BrokerRegistration";
 import LiveDealMap from "@/pages/LiveDealMap";
 import DocumentPortal from "@/pages/DocumentPortal";
 import Coaching from "@/pages/Coaching";
+import LuxuryTravel from "@/pages/LuxuryTravel";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -28,6 +29,7 @@ function Router() {
       <Route path="/live-deal-map" component={LiveDealMap} />
       <Route path="/document-portal" component={DocumentPortal} />
       <Route path="/coaching" component={Coaching} />
+      <Route path="/luxury-travel" component={LuxuryTravel} />
       <Route component={NotFound} />
     </Switch>
   );
