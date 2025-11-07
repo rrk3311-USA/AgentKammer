@@ -119,8 +119,7 @@ export default function LuxuryTravel() {
         style={{
           backgroundImage: 'linear-gradient(rgba(10, 22, 40, 0.85), rgba(10, 22, 40, 0.75)), url(https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1600&q=80)',
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
+          backgroundPosition: 'center'
         }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/90" />
@@ -281,8 +280,7 @@ export default function LuxuryTravel() {
         style={{
           backgroundImage: 'linear-gradient(rgba(10, 22, 40, 0.9), rgba(10, 22, 40, 0.9)), url(https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1600&q=80)',
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
+          backgroundPosition: 'center'
         }}
       >
         <div className="max-w-4xl mx-auto px-6 text-center">
