@@ -13,7 +13,7 @@ export function Footer() {
             <div>
               <h3 className="font-serif text-lg font-semibold mb-4">Agent Kammer</h3>
               <p className="text-sm text-muted-foreground">
-                Luxury properties across NYC, LA & NV
+                Your Luxury Agentic Real Estate & Travel Concierge
               </p>
             </div>
             <div>
@@ -73,10 +73,10 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <div className="bg-[#0a1628] py-6">
+      <div className="bg-[#0a1628] py-4">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col items-center gap-4">
-            <div className="mb-2">
+          <div className="flex flex-col items-center gap-3">
+            <div className="mb-1">
               <LiveInterestRate />
             </div>
             <p className="text-center text-sm text-white/80">
@@ -100,10 +100,14 @@ export function Footer() {
                 <span className="text-xs">NVIDIA</span>
               </div>
             </div>
-            <p className="text-center text-xs text-white/60 mt-2">
-              Copyright 2025 - Agent Kammer ®
-            </p>
           </div>
+        </div>
+      </div>
+      <div className="bg-[#f5f1e8] py-3">
+        <div className="max-w-7xl mx-auto px-6">
+          <p className="text-center text-xs text-foreground/60">
+            Copyright 2025 - Agent Kammer ®
+          </p>
         </div>
       </div>
     </footer>

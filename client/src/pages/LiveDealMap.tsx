@@ -161,13 +161,13 @@ export default function LiveDealMap() {
     },
     {
       id: 3,
-      address: "11 Promontory Ridge Lane, Las Vegas, NV",
+      address: "2500 Steiner Street, San Francisco, CA",
       price: "$3.8M",
       dealIQ: 8.7,
-      beds: 2,
-      baths: 2,
+      beds: 3,
+      baths: 2.5,
       sqft: "1,800",
-      type: "Estate",
+      type: "Victorian",
       daysOnMarket: 15
     },
     {
@@ -218,7 +218,7 @@ export default function LiveDealMap() {
                 Live Deal Map
               </h1>
               <p className="text-white/70">
-                Explore luxury properties across NYC, LA & NV
+                Explore luxury properties across NYC · CA
               </p>
             </div>
           </div>

@@ -72,9 +72,7 @@ export function HeroSearch() {
             <div className="flex items-center gap-2 font-serif text-lg font-semibold" style={{ color: '#d4af37' }}>
               <span>NYC</span>
               <span className="text-muted-foreground">·</span>
-              <span>LA</span>
-              <span className="text-muted-foreground">·</span>
-              <span>NV</span>
+              <span>CA</span>
             </div>
           </div>
           
@@ -167,7 +165,7 @@ export function HeroSearch() {
               <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
                 id="location"
-                placeholder="Manhattan, Beverly Hills, Las Vegas..."
+                placeholder="Manhattan, Beverly Hills, San Francisco..."
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 className="pl-10"
