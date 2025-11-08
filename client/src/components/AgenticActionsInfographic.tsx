@@ -11,6 +11,7 @@ interface CodeSnippet {
   yPos: number;
   speed: number;
   opacity: number;
+  isGolden: boolean;
 }
 
 export function AgenticActionsInfographic() {
@@ -27,15 +28,16 @@ export function AgenticActionsInfographic() {
       "124567", "892341", "567234", "981234", "345678"
     ];
 
-    // Initialize waterfall items
+    // Initialize waterfall items (doubled to 40)
     const initWaterfall = () => {
       const items: CodeSnippet[] = [];
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 40; i++) {
         items.push({
           text: snippets[Math.floor(Math.random() * snippets.length)],
           yPos: Math.random() * -200,
           speed: Math.random() * 0.5 + 0.3,
-          opacity: Math.random() * 0.5 + 0.3
+          opacity: Math.random() * 0.5 + 0.3,
+          isGolden: Math.random() < 0.15 // 15% chance of golden glow
         });
       }
       setCodeSnippets(items);
@@ -54,7 +56,8 @@ export function AgenticActionsInfographic() {
               text: snippets[Math.floor(Math.random() * snippets.length)],
               yPos: newYPos,
               speed: Math.random() * 0.5 + 0.3,
-              opacity: Math.random() * 0.5 + 0.3
+              opacity: Math.random() * 0.5 + 0.3,
+              isGolden: Math.random() < 0.15 // 15% chance of golden glow
             };
           }
           return { ...snippet, yPos: newYPos };
@@ -122,9 +125,12 @@ export function AgenticActionsInfographic() {
                     className="absolute left-0 right-0 text-center font-mono text-xs"
                     style={{
                       top: `${snippet.yPos}%`,
-                      opacity: snippet.opacity,
-                      color: '#ffffff',
-                      textShadow: '0 0 10px rgba(212, 175, 55, 0.5)'
+                      opacity: snippet.isGolden ? Math.min(snippet.opacity + 0.3, 1) : snippet.opacity,
+                      color: snippet.isGolden ? '#d4af37' : '#ffffff',
+                      textShadow: snippet.isGolden 
+                        ? '0 0 20px rgba(212, 175, 55, 1), 0 0 30px rgba(212, 175, 55, 0.8)' 
+                        : '0 0 10px rgba(212, 175, 55, 0.5)',
+                      fontWeight: snippet.isGolden ? '600' : '400'
                     }}
                   >
                     {snippet.text}
