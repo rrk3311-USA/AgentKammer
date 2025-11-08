@@ -62,7 +62,7 @@ export function HeroSearch() {
       {/* Top Section - Gradient Blend into Image */}
       <section className="bg-gradient-to-b from-white via-white/95 to-transparent dark:from-background dark:via-background/95 dark:to-transparent pt-8 lg:pt-12">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <h1 className="font-serif text-4xl lg:text-5xl font-semibold text-foreground mb-6">
+          <h1 style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.05em' }} className="text-4xl lg:text-5xl font-semibold text-foreground mb-6">
             Your Perfect Home<br />Discovered
           </h1>
           
