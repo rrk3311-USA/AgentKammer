@@ -17,6 +17,7 @@ import DocumentPortal from "@/pages/DocumentPortal";
 import Coaching from "@/pages/Coaching";
 import LuxuryTravel from "@/pages/LuxuryTravel";
 import WellnessShop from "@/pages/WellnessShop";
+import CommercialInvestment from "@/pages/CommercialInvestment";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -32,6 +33,7 @@ function Router() {
       <Route path="/coaching" component={Coaching} />
       <Route path="/luxury-travel" component={LuxuryTravel} />
       <Route path="/wellness-shop" component={WellnessShop} />
+      <Route path="/commercial-investment" component={CommercialInvestment} />
       <Route component={NotFound} />
     </Switch>
   );
