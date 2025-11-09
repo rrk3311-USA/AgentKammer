@@ -59,7 +59,7 @@ export function Header() {
               </div>
               <div className="flex flex-col items-center">
                 <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700 }} className="text-base tracking-wide text-foreground">AGENT KAMMER</span>
-                <span className="text-[0.5rem] font-semibold tracking-wide" style={{ color: '#d4af37' }}>NYC · CA</span>
+                <span className="text-[0.5rem] font-semibold tracking-wide text-muted-foreground">NYC · CA · NV</span>
               </div>
             </div>
           </Link>
