@@ -16,12 +16,12 @@
 
 ## Typography System
 
-**Display Font:** Cormorant (high-contrast serif) - for logo and hero moments
-- Logo: text-base, font-semibold, tracking-wide
-- Hero H1: 4xl to 5xl, font-semibold, letter-spacing: 0.05em
-- **Purpose:** Premium brand touchpoints requiring maximum sophistication and luxury appeal
+**Display Font:** Cormorant (high-contrast serif) - for logo only
+- Logo: text-base, font-weight: 700 (bold), tracking-wide
+- **Purpose:** Maximum sophistication and luxury appeal, balanced with brand icon (hat)
 
-**Primary Font:** Playfair Display (serif) - for headlines, property titles, and secondary brand moments
+**Primary Font:** Playfair Display (serif) - for headlines, property titles, and brand moments
+- H1: 4xl to 5xl, font-semibold (hero headlines, page titles)
 - H2: 3xl to 4xl, font-semibold (section headers)
 - H3: 2xl, font-medium (property titles, card headers)
 - Property prices: text-2xl to 3xl, font-semibold
@@ -35,8 +35,8 @@
 - Navigation: text-sm, font-medium
 
 **Typography Hierarchy:**
-- Cormorant elevates the most important brand moments (logo, hero)
-- Playfair Display handles secondary headings and property content
+- Cormorant (bold) elevates the logo with elegant sophistication
+- Playfair Display handles headings and property content
 - Inter provides clean, readable UI and body text
 
 ---
