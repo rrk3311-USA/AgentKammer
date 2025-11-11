@@ -29,6 +29,7 @@ export function FloatingChatAssistant() {
   ]);
   const [activeTab, setActiveTab] = useState("chat");
   const [isListening, setIsListening] = useState(false);
+  const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
   const scrollRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
 
@@ -62,7 +63,7 @@ export function FloatingChatAssistant() {
     }
   }, []);
 
-  const handleSend = (text?: string) => {
+  const handleSend = async (text?: string) => {
     const messageText = text || message;
     if (!messageText.trim()) return;
 
@@ -77,16 +78,39 @@ export function FloatingChatAssistant() {
     setMessage("");
     setActiveTab("chat");
 
-    // TODO: Replace with real agentic AI response
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: [...messages, newMessage],
+          sessionId,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to get response");
+      }
+
+      const data = await response.json();
+
       const agentResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: "I understand you're interested in that property. Let me pull up the latest details and schedule a private showing for you. What day works best?",
+        text: data.response,
         sender: "agent",
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, agentResponse]);
-    }, 1000);
+    } catch (error) {
+      console.error("Chat error:", error);
+      const errorResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "I apologize, but I'm experiencing a technical difficulty. Please try again in a moment.",
+        sender: "agent",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorResponse]);
+    }
   };
 
   const popularPrompts = [
