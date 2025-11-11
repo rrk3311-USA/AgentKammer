@@ -40,22 +40,52 @@ Example natural questions:
 
 Always be helpful, never pushy. Your luxury clients expect sophisticated service.
 
-RESPONSE FORMAT:
-After each response, if you've learned any of the following information, include it in a JSON block at the end of your message wrapped in triple backticks with "LEAD_DATA" label:
+RESPONSE FORMAT - CRITICAL:
+ALWAYS include a LEAD_DATA block at the end of EVERY response. Even if you don't have new information, include an empty object. This is REQUIRED.
+
+After each response, include a JSON block wrapped in triple backticks with "LEAD_DATA" label:
 
 \`\`\`LEAD_DATA
 {
   "name": "their name if mentioned",
   "email": "their email if provided",
   "phone": "their phone if provided",
-  "timeline": "timeline category if discussed",
-  "financing": "financing status if discussed",
-  "commitment": "commitment level if discussed",
-  "motivation": "motivation if discussed"
+  "timeline": "timeline category if discussed (e.g., '2 months', 'urgent', '3-6 months')",
+  "financing": "financing status if discussed (e.g., 'pre-approved', 'cash buyer', 'needs lender')",
+  "commitment": "commitment level if discussed (e.g., 'browsing', 'interested', 'ready to commit')",
+  "motivation": "motivation if discussed (e.g., 'relocation', 'investment', 'upgrade')"
 }
 \`\`\`
 
-Only include fields you've actually learned. The user won't see this JSON block - it's for internal tracking only.`;
+IMPORTANT: 
+- Include ALL fields you've learned so far in the conversation, not just new ones
+- If no new info, use empty object: \`\`\`LEAD_DATA\n{}\n\`\`\`
+- The user won't see this JSON block - it's for internal tracking only
+- This MUST appear at the end of EVERY response`;
+
+
+const LEAD_DATA_REMINDER = `\n\nRemember to ALWAYS include the LEAD_DATA JSON block at the end of your response, even if empty: \`\`\`LEAD_DATA\n{}\n\`\`\``;
+
+function extractLeadData(text: string): LeadData | null {
+  const match = text.match(/```LEAD_DATA\s*\n([\s\S]*?)\n```/);
+  if (!match) {
+    console.log("[EXTRACTION] No LEAD_DATA block found in response");
+    return null;
+  }
+  
+  try {
+    const data = JSON.parse(match[1]);
+    console.log("[EXTRACTION] Successfully parsed LEAD_DATA:", data);
+    return data;
+  } catch (e) {
+    console.log("[EXTRACTION] Failed to parse LEAD_DATA:", e);
+    return null;
+  }
+}
+
+function removeLeadDataBlock(text: string): string {
+  return text.replace(/```LEAD_DATA\s*\n[\s\S]*?\n```/g, '').trim();
+}
 
 interface LeadData {
   name?: string;
@@ -65,21 +95,6 @@ interface LeadData {
   financing?: string;
   commitment?: string;
   motivation?: string;
-}
-
-function extractLeadData(text: string): LeadData | null {
-  const match = text.match(/```LEAD_DATA\n([\s\S]*?)\n```/);
-  if (!match) return null;
-  
-  try {
-    return JSON.parse(match[1]);
-  } catch {
-    return null;
-  }
-}
-
-function removeLeadDataBlock(text: string): string {
-  return text.replace(/```LEAD_DATA\n[\s\S]*?\n```/g, '').trim();
 }
 
 function calculateLeadScore(leadData: LeadData): number {
@@ -147,11 +162,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
 
       const rawResponse = completion.choices[0]?.message?.content || "I apologize, but I'm having trouble responding right now. Please try again.";
+      
+      console.log("[CHAT] Raw AI Response:", rawResponse);
 
       const extractedData = extractLeadData(rawResponse);
+      console.log("[CHAT] Extracted Lead Data:", extractedData);
+      
       const cleanResponse = removeLeadDataBlock(rawResponse);
 
       if (extractedData && Object.keys(extractedData).length > 0) {
+        console.log("[CHAT] Attempting to save lead data...");
         const sid = sessionId || 'default';
         const sessionLead = sessionLeads.get(sid) || { data: {} };
         
@@ -172,12 +192,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         };
 
         if (sessionLead.leadId) {
-          await storage.updateLead(sessionLead.leadId, leadPayload);
+          const updated = await storage.updateLead(sessionLead.leadId, leadPayload);
+          console.log("[CHAT] Updated lead:", sessionLead.leadId, updated);
           sessionLeads.set(sid, { leadId: sessionLead.leadId, data: updatedData });
         } else {
           const newLead = await storage.createLead(leadPayload);
+          console.log("[CHAT] Created new lead:", newLead.id, newLead);
           sessionLeads.set(sid, { leadId: newLead.id, data: updatedData });
         }
+      } else {
+        console.log("[CHAT] No lead data extracted from this response");
       }
 
       res.json({ 
