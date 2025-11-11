@@ -54,12 +54,12 @@ export function Header() {
 
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
             <div className="flex flex-col items-center px-3 py-2">
-              <div className="text-2xl mb-0.5" style={{ transform: 'rotate(15deg)' }}>
+              <div className="text-2xl md:text-3xl mb-0.5" style={{ transform: 'rotate(15deg)' }}>
                 🎩
               </div>
               <div className="flex flex-col items-center">
-                <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700 }} className="text-base tracking-wide text-foreground">AGENT KAMMER</span>
-                <span className="text-[0.5rem] font-semibold tracking-wide text-muted-foreground">NYC · CA · NV</span>
+                <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700 }} className="text-base md:text-xl tracking-wide text-foreground">AGENT KAMMER</span>
+                <span className="text-[0.5rem] md:text-[0.625rem] font-semibold tracking-wide text-muted-foreground">NYC · CA · NV</span>
               </div>
             </div>
           </Link>
