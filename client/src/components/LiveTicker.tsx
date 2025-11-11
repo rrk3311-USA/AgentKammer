@@ -70,7 +70,7 @@ export function LiveTicker() {
         <div
           className="flex items-center gap-8 animate-scroll whitespace-nowrap py-3.5"
           style={{
-            animation: "scroll 70s linear infinite",
+            animation: "scroll 35s linear infinite",
           }}
         >
           {tickerItems.map((item, index) => {
@@ -88,7 +88,7 @@ export function LiveTicker() {
             return (
               <div
                 key={item.key}
-                className="flex items-center gap-2.5 px-4 py-2"
+                className="flex items-center gap-2.5 px-4 py-2 border border-[#d4af37] rounded-sm"
                 data-testid={`ticker-item-${item.id}`}
               >
                 <span className="font-semibold text-[#d4af37]">
