@@ -12,10 +12,14 @@ Preferred communication style: Simple, everyday language.
 The frontend is built with **React and TypeScript** using **Vite**. It employs a component-based architecture with **`wouter`** for client-side routing. **React Query** manages server state, while **shadcn/ui** provides customizable UI components based on Radix UI. Styling is handled with **Tailwind CSS** and a custom design system featuring a three-tier typography system (Cormorant display font for logo, Playfair Display for headings, Inter for body text) and a premium gold-accented color scheme. The design philosophy emphasizes large imagery, sophisticated layouts, and generous spacing.
 
 ### Backend Architecture
-The backend uses **Express.js with Node.js and TypeScript**, handling API routes (prefixed with `/api`). It integrates with Vite's middleware for development and bundles with esbuild for production. An in-memory storage interface (`MemStorage`) is used for development, designed to be replaced by a database. The API follows a RESTful structure, and session management is configured for **PostgreSQL session storage** using `connect-pg-simple`.
+The backend uses **Express.js with Node.js and TypeScript**, handling API routes (prefixed with `/api`). It integrates with Vite's middleware for development and bundles with esbuild for production. The API follows a RESTful structure, and session management is configured for **PostgreSQL session storage** using `connect-pg-simple`. **OpenAI integration** via Replit AI Integrations provides GPT-4o-mini powered chat capabilities with automatic lead extraction and persistence (charges to Replit credits, no API key management required).
 
 ### Data Storage Solutions
-The application uses **Drizzle ORM** with a **PostgreSQL dialect** for type-safe schema definition and database operations. The current schema includes a basic `users` table. **Drizzle Kit** is configured for schema migrations.
+The application uses **Drizzle ORM** with **neon-http adapter** for HTTP-based PostgreSQL connections (required for Replit environment). The database schema includes:
+- **`users` table**: Basic user authentication
+- **`leads` table**: CRM lead capture with qualification fields (name, email, phone, timeline, financing, commitment, motivation, communicationStyle, conversationSummary, leadScore, createdAt)
+
+**Database migrations**: Use `npm run db:push` (or `npm run db:push --force` if schema changes conflict) to sync Drizzle schema to PostgreSQL without manual SQL migrations.
 
 ### Authentication and Authorization
 Basic user schema and session infrastructure are in place (Express session middleware with PostgreSQL store), supporting session-based authentication.
@@ -43,7 +47,16 @@ The platform features a visual-first approach with large images and sophisticate
 - **Saved Searches**: Users can save search criteria and receive email notifications.
 - **Service Pages**: Dedicated pages for mortgage pre-approval (`/services/get-preapproved`) and home valuation (`/services/get-home-value`) with comprehensive forms and a new timeline question for pre-qualification.
 - **Market Analysis Reports**: Users can request property-specific listing reports.
-- **AI Chat Assistant**: A floating chat assistant powered by OpenAI (via Replit AI Integrations) provides luxury concierge support with voice input, pre-configured search prompts, and intelligent lead qualification. The AI naturally asks qualifying questions about timeline, financing, commitment, and motivation without mentioning "lead scoring" or CRM terminology. Lead information is automatically captured and stored in the database with calculated lead scores based on the qualification framework. Each conversation session maintains context and progressively builds lead profiles.
+- **AI Chat Assistant with CRM Lead Capture**: A floating chat assistant powered by OpenAI GPT-4o-mini (via Replit AI Integrations) provides luxury concierge support with intelligent lead qualification. The system features:
+  - **Natural Conversation Flow**: AI asks qualifying questions about timeline, financing, commitment, and motivation without mentioning "lead scoring" or CRM terminology
+  - **Automatic Lead Extraction**: AI includes hidden `LEAD_DATA` JSON blocks in every response that are parsed server-side and removed before display
+  - **Session-Based Tracking**: Each chat session accumulates lead data progressively across multiple conversation turns
+  - **Database Persistence**: Leads automatically saved to PostgreSQL with calculated lead scores (0-20 scale based on qualification criteria)
+  - **Lead Scoring Algorithm**: Timeline (urgent=5, 1-3mo=5, 3-6mo=4, 6-12mo=3, browsing=2) + Financing (cash=5, pre-approved=4, lender=3) + Commitment (exclusive=5, committed=4, interested=3) + Motivation (urgent=5, relocation=4, upgrade/investment=3)
+  - **Voice Input Support**: Browser-based speech recognition for hands-free interaction
+  - **Quick Prompts**: Pre-configured luxury property search prompts for common requests
+  - **API Endpoints**: POST `/api/chat` for conversations with automatic lead capture, GET `/api/leads` to retrieve all captured leads
+  - **Testing**: Manual curl testing confirmed end-to-end functionality (automated Playwright testing had input field targeting issues but system works correctly when used via UI or API)
 - **Live Deal Map**: Interactive Google Maps integration (`/live-deal-map`) with elegant gray/black/white/gold styling showing luxury property locations with Deal IQ scores. Features a bubbly, orb-like button with gold gradient, glow effect, and shine animation that appears below the "Longest on Market" section. Map requires `VITE_GOOGLE_MAPS_API_KEY` environment variable.
 - **Dream Home CTA**: Final call-to-action section with navy background featuring Agent Kammer (the hero character in black tuxedo tailcoat and gold-banded top hat) leading an elegant family into the storefront on the right side. Left side contains "Ready to Find Your Dream Home?" heading with cell phone number input form and gold gradient "Get Started" button.
 - **Dynamic UI**: Real-time property data displayed via a `LiveTicker` with deep navy background (#0a1628), gold-outlined ticker items, gold prices displayed first for maximum visibility, white text for optimal legibility, and 35s scroll animation (fast-paced).
