@@ -8,7 +8,7 @@ export function Footer() {
     <footer className="relative">
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       <div className="bg-background border-t border-border/50">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <h3 className="font-serif text-lg font-semibold mb-4">Agent Kammer</h3>
@@ -73,6 +73,7 @@ export function Footer() {
           </div>
         </div>
       </div>
+      <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       <div className="bg-[#0a1628] py-4">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col items-center gap-3">
@@ -103,9 +104,10 @@ export function Footer() {
           </div>
         </div>
       </div>
+      <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       <div className="bg-[#f5f1e8] py-3">
         <div className="max-w-7xl mx-auto px-6">
-          <p className="text-center text-xs text-foreground/60">
+          <p className="text-center text-xs font-medium" style={{ color: '#050505' }}>
             Copyright 2025 - Agent Kammer ®
           </p>
         </div>
