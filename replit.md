@@ -1,79 +1,61 @@
 # Agent Kammer - Luxury Properties Platform
 
 ## Overview
-Agent Kammer is your luxury agentic real estate and travel concierge platform covering New York City and California markets, providing a sophisticated, visual-first search and discovery experience. Key capabilities include advanced search and filtering, saved searches with email notifications, curated property browsing, and integrated services for mortgage pre-approval and home valuation. The platform aims to build trust through professional aesthetics, drawing inspiration from high-end real estate brands and search-focused UX patterns. It leverages agentic AI to provide users with a competitive advantage in finding their dream home by continuously scanning multiple luxury markets for new listings and updates. The business vision is to provide a competitive advantage to users in finding luxury homes across premier markets.
+Agent Kammer is a luxury agentic real estate and travel concierge platform serving New York City and California markets. It provides a visual-first search and discovery experience for luxury properties, offering advanced search, saved listings with notifications, and integrated services like mortgage pre-approval and home valuation. The platform leverages agentic AI to provide a competitive advantage to users by continuously scanning multiple luxury markets for new listings and updates, aiming to build trust through professional aesthetics inspired by high-end real estate brands. Its business vision is to empower users in finding luxury homes across premier markets.
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
 
 ## System Architecture
 
-### Frontend Architecture
-The frontend is built with **React and TypeScript** using **Vite**. It employs a component-based architecture with **`wouter`** for client-side routing. **React Query** manages server state, while **shadcn/ui** provides customizable UI components based on Radix UI. Styling is handled with **Tailwind CSS** and a custom design system featuring a three-tier typography system (Cormorant display font for logo, Playfair Display for headings, Inter for body text) and a premium gold-accented color scheme. The design philosophy emphasizes large imagery, sophisticated layouts, and generous spacing.
+### Frontend
+The frontend uses React and TypeScript with Vite, employing a component-based architecture and `wouter` for routing. React Query manages server state, while shadcn/ui provides customizable components styled with Tailwind CSS. The design system features a gold-accented color scheme and a three-tier typography system (Cormorant, Playfair Display, Inter), emphasizing large imagery and sophisticated layouts. It includes a custom theme provider for light/dark mode.
 
-### Backend Architecture
-The backend uses **Express.js with Node.js and TypeScript**, handling API routes (prefixed with `/api`). It integrates with Vite's middleware for development and bundles with esbuild for production. The API follows a RESTful structure, and session management is configured for **PostgreSQL session storage** using `connect-pg-simple`. **OpenAI integration** via Replit AI Integrations provides GPT-4o-mini powered chat capabilities with automatic lead extraction and persistence (charges to Replit credits, no API key management required).
+### Backend
+The backend is built with Express.js, Node.js, and TypeScript, handling RESTful API routes. It integrates with Vite's middleware for development and uses esbuild for production bundling. Session management uses PostgreSQL session storage via `connect-pg-simple`. OpenAI integration via Replit AI provides GPT-4o-mini powered chat with automatic lead extraction and persistence.
 
-### Data Storage Solutions
-The application uses **Drizzle ORM** with **neon-http adapter** for HTTP-based PostgreSQL connections (required for Replit environment). The database schema includes:
-- **`users` table**: Basic user authentication
-- **`leads` table**: CRM lead capture with qualification fields (name, email, phone, timeline, financing, commitment, motivation, communicationStyle, conversationSummary, leadScore, createdAt)
+### Data Storage
+Drizzle ORM with the neon-http adapter is used for PostgreSQL connections. The database schema includes `users` for authentication and `leads` for CRM, capturing detailed qualification fields. Database migrations are managed with `npm run db:push`.
 
-**Database migrations**: Use `npm run db:push` (or `npm run db:push --force` if schema changes conflict) to sync Drizzle schema to PostgreSQL without manual SQL migrations.
+### Authentication
+Basic session-based authentication is implemented using Express session middleware with a PostgreSQL store.
 
-### Authentication and Authorization
-Basic user schema and session infrastructure are in place (Express session middleware with PostgreSQL store), supporting session-based authentication.
-
-### Theme System
-A custom theme provider manages light/dark mode with `localStorage` persistence. An HSL-based color system with semantic tokens allows for comprehensive and dynamic styling, including elevation effects for UI elements.
-
-### UI/UX Decisions
-The platform features a visual-first approach with large images and sophisticated layouts. Key UI elements include:
-- A tabbed floating chat assistant with quick prompt buttons and voice input.
-- A hero section with two-line heading ("Your Perfect Home / Discovered"), smooth gradient blend from top of page into navy horizontal bar containing AI description and bold "Live where you belong" subtitle with tiny animated gold heart bubbles on both left and right sides, glassmorphism search card over Agent Kammer storefront photo background with gradient overlay for seamless transition.
-- A redesign of the "Property Command Center" with a compact, horizontal layout for Instant Alerts, Smart Search, and Market Analytics.
-- Property listing UI updates with unified glassmorphism info module featuring Apple-style glass UX design. All property information (price, title, address, beds/baths/sqft, property type, days on market, deal score) consolidated into single glass card overlay. Price displayed in clean white font (text-2xl) with smaller dollar sign, showing numeric value only (e.g., "2.50" instead of "$2.50M") to maximize photo visibility. Deal score badge features lightbulb icon (gold fill) with "X.X IQ" format. Enhanced category backgrounds use deep navy (#0a1628) with white text and gold icons for a sophisticated, premium appearance. Dark navy arrow navigation.
-- A Live Interest Rate Ticker in the header with a minimal, animated design.
-- Enhanced property card styling with pure white backgrounds (light mode) and pronounced drop shadows.
-- Decorative sparkles and mouse pointer icons for visual dividers.
-- Compact "Agentic Actions" section featuring the Massive Compute Engine with Grok-5 AGI brain visualization as background. The section uses a single black card design with white text combining: (1) Hero section (220px) with AI brain background image cropped to center, enhanced waterfall animation with 40 programming language code snippets (doubled flow density) including random golden glowing elements (15% chance) with enhanced glow effects, and bottom action strip showing "Continuous Market Scanning" and "Instant Alert Processing" in monochrome design; (2) Statistics showing 240hrs average buyer search time vs 240+ hrs saved; (3) Ultra-compact data sources listing primary MLS/government sources and luxury market APIs. Entire section significantly reduced in vertical space for improved scrolling experience.
-- Market Analysis Report with a premium background image of a luxury marble desk with a city skyline view.
-- A personalized chat assistant avatar using the owner's professional headshot.
-- Email capture forms with gold gradients and animated icons.
-- Footer "Powered by AI" section on navy background featuring tech infrastructure logos: Replit, Anthropic, Claude, and NVIDIA.
+### UI/UX Design
+The platform adopts a visual-first approach with large imagery and sophisticated layouts. Key UI/UX elements include:
+- A tabbed floating chat assistant with quick prompts and voice input.
+- A hero section with a two-line heading, AI description, and a glassmorphism search card.
+- A compact "Property Command Center" with a horizontal layout.
+- Property listing UI with a unified glassmorphism info module.
+- A Live Interest Rate Ticker in the header.
+- Enhanced property card styling with pure white backgrounds and pronounced shadows.
+- An "Agentic Actions" section featuring a Massive Compute Engine visualization.
+- Market Analysis Report with a premium background image.
+- A personalized chat assistant avatar and gold-gradient email capture forms.
+- Footer with "Powered by AI" section and tech infrastructure logos.
 
 ### Feature Specifications
-- **Property Search & Discovery**: Advanced search, filtering, and curated listing sections (e.g., Featured, Most Discounted, Longest on Market).
-- **Saved Searches**: Users can save search criteria and receive email notifications.
-- **Service Pages**: Dedicated pages for mortgage pre-approval (`/services/get-preapproved`) and home valuation (`/services/get-home-value`) with comprehensive forms and a new timeline question for pre-qualification.
-- **Market Analysis Reports**: Users can request property-specific listing reports.
-- **AI Chat Assistant with CRM Lead Capture**: A floating chat assistant powered by OpenAI GPT-4o-mini (via Replit AI Integrations) provides luxury concierge support with intelligent lead qualification. The system features:
-  - **Natural Conversation Flow**: AI asks qualifying questions about timeline, financing, commitment, and motivation without mentioning "lead scoring" or CRM terminology
-  - **Automatic Lead Extraction**: AI includes hidden `LEAD_DATA` JSON blocks in every response that are parsed server-side and removed before display
-  - **Session-Based Tracking**: Each chat session accumulates lead data progressively across multiple conversation turns
-  - **Database Persistence**: Leads automatically saved to PostgreSQL with calculated lead scores (0-20 scale based on qualification criteria)
-  - **Lead Scoring Algorithm**: Timeline (urgent=5, 1-3mo=5, 3-6mo=4, 6-12mo=3, browsing=2) + Financing (cash=5, pre-approved=4, lender=3) + Commitment (exclusive=5, committed=4, interested=3) + Motivation (urgent=5, relocation=4, upgrade/investment=3)
-  - **Voice Input Support**: Browser-based speech recognition for hands-free interaction
-  - **Quick Prompts**: Pre-configured luxury property search prompts for common requests
-  - **API Endpoints**: POST `/api/chat` for conversations with automatic lead capture, GET `/api/leads` to retrieve all captured leads
-  - **Testing**: Manual curl testing confirmed end-to-end functionality (automated Playwright testing had input field targeting issues but system works correctly when used via UI or API)
-- **Live Deal Map**: Interactive Google Maps integration (`/live-deal-map`) with elegant gray/black/white/gold styling showing luxury property locations with Deal IQ scores. Features a bubbly, orb-like button with gold gradient, glow effect, and shine animation that appears below the "Longest on Market" section. Map requires `VITE_GOOGLE_MAPS_API_KEY` environment variable.
-- **Dream Home CTA**: Final call-to-action section with navy background featuring Agent Kammer (the hero character in black tuxedo tailcoat and gold-banded top hat) leading an elegant family into the storefront on the right side. Left side contains "Ready to Find Your Dream Home?" heading with cell phone number input form and gold gradient "Get Started" button.
-- **Dynamic UI**: Real-time property data displayed via a `LiveTicker` with deep navy background (#0a1628), gold-outlined ticker items, gold prices displayed first for maximum visibility, white text for optimal legibility, and 35s scroll animation (fast-paced).
-- **Live Interest Rate Ticker**: Displays current 30-year fixed mortgage rates in elegant black and gold styling in the footer above "Powered by AI". Shows "Current Rate" with a fallback rate (6.82%) by default. When configured with an API key from API Ninjas (free tier available), it fetches real NY-specific mortgage rates every 5 minutes and displays live rates with animated decimal places that fluctuate slightly (simulating real-time market movement) and a green pulsing indicator. Visible on both mobile and desktop. To enable live rates: sign up at https://api-ninjas.com, get a free API key, and set the environment variable `VITE_MORTGAGE_API_KEY`.
-- **Broker Registration Page**: A new page (`/broker-registration`) allowing brokers to create profiles with video pitches, professional bios, and specializations, supporting a client choice model.
-- **Strategic Document Portal**: A comprehensive document management system (`/document-portal`) designed to help buyers win competitive bidding wars. Features 5 color-coded categories: Getting Started (blue), Competitive Advantage (gold), Strategic Bidding (green), Due Diligence (purple), and Closing Documents (orange). Includes expandable fillable forms, file upload capability, required document indicators, and California-specific CAR forms. Positioned as a strategic competitive advantage tool rather than simple document storage.
-- **Transformational Alignment Coaching**: A dedicated coaching services page (`/coaching`) showcasing transformational alignment coaching offerings with a live list of 4 programs: Clarity & Vision Session ($497), Alignment Accelerator ($2,997, marked as "Most Popular"), Mastery & Integration ($5,997), and VIP Transformation Day ($7,500). Features educational sections on coaching pillars, client criteria, and email waitlist signup. Designed to complement the luxury real estate services with personal transformation offerings.
-- **Luxury Travel Experiences**: A dedicated travel page (`/luxury-travel`) featuring 4 bespoke adventure journey packages: NYC Private Collection, California Coastal Adventure, Thailand Expedition, and Berlin Architecture & Culture. Each package includes detailed itineraries, pricing, and unique novelty experiences. Emphasizes "Novelties is our specialty" with one-of-a-kind adventurous experiences across premium destinations.
-- **Wellness Shop**: E-commerce page (`/wellness-shop`) featuring 12 premium supplement products ranging from $34.99 to $94.99. Includes nootropics, adaptogens, omega-3, sleep support, cellular energy, probiotics, immune support, collagen, mushroom extracts, electrolytes, NAD+ boosters, and creatine. Features shopping cart functionality, star ratings, benefit tags, stock status indicators, and responsive grid layout (1-4 columns).
-- **Commercial Real Estate Investment**: Live-updating feed page (`/commercial-investment`) showcasing 8 California commercial properties for sale. Features API-style presentation with auto-updating timestamps (every 10 seconds), manual refresh capability, and comprehensive investment metrics including cap rates, NOI, occupancy, and zoning. Property types include office buildings, retail centers, mixed-use, industrial warehouses, hotels, and medical offices. Prices range from $4.2M to $22.5M across Oakland, Los Angeles, San Francisco, Sacramento, Long Beach, San Jose, San Diego, and Irvine markets.
-- **Branding**: Professional luxury concierge avatar, gold accents, and a luxury aesthetic inspired by high-end real estate. Multi-market focus on New York City and California displayed prominently with stylish "NYC · CA" formatting. Tagline: "Your Luxury Agentic Real Estate & Travel Concierge".
+- **Property Search & Discovery**: Advanced search, filtering, and curated listings.
+- **Saved Searches**: Users can save criteria and receive email notifications.
+- **Service Pages**: Dedicated pages for mortgage pre-approval and home valuation with comprehensive forms.
+- **Market Analysis Reports**: On-demand property-specific reports.
+- **AI Chat Assistant with CRM Lead Capture**: GPT-4o-mini powered assistant with a progressive conversation strategy for lead qualification (collecting timeline, financing, commitment, motivation data). It features automatic, hidden `LEAD_DATA` JSON block extraction, session-based tracking, database persistence to the `leads` table with calculated lead scores, and voice input support.
+- **Live Deal Map**: Interactive Google Maps integration with custom styling and Deal IQ scores.
+- **Dream Home CTA**: Call-to-action section with a phone number input form.
+- **Dynamic UI**: Real-time property data displayed via a `LiveTicker`.
+- **Live Interest Rate Ticker**: Displays current 30-year fixed mortgage rates, optionally fetching live data from API Ninjas.
+- **Broker Registration Page**: Allows brokers to create profiles with bios and specializations.
+- **Strategic Document Portal**: A document management system for competitive bidding, categorized by strategic stages, with fillable forms and file uploads.
+- **Transformational Alignment Coaching**: Dedicated page for coaching services with program listings and educational content.
+- **Luxury Travel Experiences**: Page showcasing bespoke adventure journey packages.
+- **Wellness Shop**: E-commerce page for premium supplement products with cart functionality.
+- **Commercial Real Estate Investment**: Live-updating feed page for California commercial properties with investment metrics.
+- **Branding**: Professional luxury concierge avatar, gold accents, and multi-market focus on NYC and California.
 
 ## External Dependencies
 
 ### Third-Party UI Libraries
-*   **Radix UI**: Unstyled, accessible UI primitives.
-*   **Embla Carousel**: For horizontal scrolling galleries.
+*   **Radix UI**: Accessible UI primitives.
+*   **Embla Carousel**: For horizontal galleries.
 *   **React Hook Form**: Form state management with Zod validation.
 *   **Lucide React & React Icons**: Icon libraries.
 
@@ -87,5 +69,9 @@ The platform features a visual-first approach with large images and sophisticate
 *   **PostCSS & Autoprefixer**: CSS processing.
 
 ### Asset Management
-*   **Static Assets**: Images stored in `attached_assets` (AI-generated, stock).
-*   **Asset Resolution**: Vite configured with `@assets` alias.
+*   **Static Assets**: Images stored in `attached_assets`.
+
+### APIs & Integrations
+*   **OpenAI**: For AI chat capabilities (via Replit AI Integrations).
+*   **API Ninjas**: (Optional) For live mortgage rate data.
+*   **Google Maps**: For the Live Deal Map.
