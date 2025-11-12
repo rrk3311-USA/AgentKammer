@@ -13,7 +13,7 @@ export function Footer() {
             <div>
               <h3 className="font-serif text-base md:text-lg font-semibold mb-3">Agent Kammer</h3>
               <p className="text-xs md:text-sm text-muted-foreground mb-3">
-                Your Luxury Agentic Real Estate & Travel Concierge
+                Your Luxury Agentic Real Estate Concierge
               </p>
               <Link href="/document-portal" className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors">
                 <FileText className="h-4 w-4" />
@@ -107,7 +107,7 @@ export function Footer() {
       <div className="bg-[#f5f1e8] py-3">
         <div className="max-w-7xl mx-auto px-6">
           <p className="text-center text-xs font-medium" style={{ color: '#050505' }}>
-            Copyright 2025 - Agent Kammer ®
+            Copyright 2025 - Agent Kammer
           </p>
         </div>
       </div>
