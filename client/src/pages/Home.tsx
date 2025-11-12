@@ -482,6 +482,33 @@ export default function Home() {
                   className="w-full h-full object-cover shadow-2xl"
                   style={{ objectPosition: 'center' }}
                 />
+                {/* Gold metallic top hat overlay */}
+                <div 
+                  className="absolute top-0 left-0 right-0 h-[35%] pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(135deg, #f4d03f 0%, #d4af37 25%, #c5a028 50%, #d4af37 75%, #f4d03f 100%)',
+                    mixBlendMode: 'hard-light',
+                    opacity: 0.85,
+                    maskImage: 'linear-gradient(to bottom, black 0%, black 60%, transparent 100%)',
+                    WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 60%, transparent 100%)',
+                    filter: 'brightness(1.2) contrast(1.1)',
+                  }}
+                >
+                  {/* Metallic shine effect */}
+                  <div 
+                    className="absolute inset-0"
+                    style={{
+                      background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 45%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.4) 55%, transparent 100%)',
+                      animation: 'shine 3s ease-in-out infinite',
+                    }}
+                  />
+                </div>
+                <style>{`
+                  @keyframes shine {
+                    0%, 100% { transform: translateX(-100%); }
+                    50% { transform: translateX(100%); }
+                  }
+                `}</style>
               </div>
             </div>
           </div>
