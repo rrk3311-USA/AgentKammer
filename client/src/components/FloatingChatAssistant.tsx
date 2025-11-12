@@ -192,8 +192,8 @@ export function FloatingChatAssistant() {
   }
 
   return (
-    <div className="fixed right-2 bottom-16 z-50 scale-[0.8]">
-      <Card className={`w-96 shadow-2xl border-2 border-primary/50 overflow-hidden transition-all duration-300 ${
+    <div className="fixed right-2 bottom-16 z-50 md:scale-[0.8] w-[calc(100vw-1rem)] md:w-auto">
+      <Card className={`w-full md:w-96 shadow-2xl border-2 border-primary/50 overflow-hidden transition-all duration-300 ${
         isMinimized ? "h-16" : "h-[600px]"
       }`}>
         <div className="bg-gradient-to-br from-primary via-primary/95 to-primary text-foreground p-4 flex items-center justify-between border-b border-foreground/20">
