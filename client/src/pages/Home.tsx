@@ -300,7 +300,7 @@ export default function Home() {
             <button
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                 midtownFilter === "above" 
-                  ? "bg-primary text-black shadow-md" 
+                  ? "bg-primary shadow-md" 
                   : "text-muted-foreground hover-elevate"
               }`}
               onClick={() => setMidtownFilter("above")}
@@ -311,7 +311,7 @@ export default function Home() {
             <button
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                 midtownFilter === "midtown" 
-                  ? "bg-primary text-black shadow-md" 
+                  ? "bg-primary shadow-md" 
                   : "text-muted-foreground hover-elevate"
               }`}
               onClick={() => setMidtownFilter("midtown")}
@@ -322,7 +322,7 @@ export default function Home() {
             <button
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                 midtownFilter === "below" 
-                  ? "bg-primary text-black shadow-md" 
+                  ? "bg-primary shadow-md" 
                   : "text-muted-foreground hover-elevate"
               }`}
               onClick={() => setMidtownFilter("below")}

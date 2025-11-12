@@ -227,7 +227,7 @@ export default function GetHomeValue() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full rounded-full text-black"
+                  className="w-full rounded-full"
                   data-testid="button-submit-valuation"
                 >
                   Get Free Home Valuation

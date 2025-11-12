@@ -1,5 +1,5 @@
 import { SiReplit, SiNvidia, SiClaude } from "react-icons/si";
-import { Brain } from "lucide-react";
+import { Brain, FileText } from "lucide-react";
 import { LiveInterestRate } from "./LiveInterestRate";
 import { Link } from "wouter";
 
@@ -12,9 +12,13 @@ export function Footer() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             <div>
               <h3 className="font-serif text-base md:text-lg font-semibold mb-3">Agent Kammer</h3>
-              <p className="text-xs md:text-sm text-muted-foreground">
+              <p className="text-xs md:text-sm text-muted-foreground mb-3">
                 Your Luxury Agentic Real Estate & Travel Concierge
               </p>
+              <Link href="/document-portal" className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors">
+                <FileText className="h-4 w-4" />
+                <span>Strategic Document Portal</span>
+              </Link>
             </div>
             <div>
               <h4 className="font-medium mb-3 text-sm">Services</h4>

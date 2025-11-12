@@ -263,7 +263,7 @@ export default function LuxuryTravel() {
 
                 {/* CTA */}
                 <Button 
-                  className="w-full rounded-full text-black font-semibold"
+                  className="w-full rounded-full font-semibold"
                   data-testid={`button-inquire-${journey.id}`}
                 >
                   Inquire About This Journey
