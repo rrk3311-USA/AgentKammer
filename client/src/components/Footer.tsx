@@ -9,7 +9,7 @@ export function Footer() {
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       <div className="bg-background border-t border-border/50">
         <div className="max-w-7xl mx-auto px-6 py-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             <div>
               <h3 className="font-serif text-base md:text-lg font-semibold mb-3">Agent Kammer</h3>
               <p className="text-xs md:text-sm text-muted-foreground mb-3">
@@ -51,18 +51,24 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h4 className="font-medium mb-3 text-sm">Shop</h4>
-              <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground">
-                <li>
-                  <Link href="/coaching" className="hover:text-foreground transition-colors">
-                    Coaching Programs
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
               <h4 className="font-medium mb-3 text-sm">Connect</h4>
               <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground">
+                <li>
+                  <span
+                    className="hover:text-foreground cursor-pointer transition-colors"
+                    onClick={() => {
+                      const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLButtonElement;
+                      if (chatButton) chatButton.click();
+                    }}
+                  >
+                    Contact
+                  </span>
+                </li>
+                <li>
+                  <Link href="/coaching" className="hover:text-foreground transition-colors">
+                    Consulting
+                  </Link>
+                </li>
                 <li>Instagram</li>
                 <li>Facebook</li>
                 <li>LinkedIn</li>
