@@ -14,8 +14,8 @@ const bathrooms = ["1", "1.5", "2", "2.5", "3+"];
 const popularCategories = ["With Balcony", "No HOA", "1500+ sqft", "2000+ sqft", "Pet Friendly", "Doorman"];
 
 export function HeroSearch() {
-  const [priceRange, setPriceRange] = useState([500000, 5000000]);
-  const [sqftRange, setSqftRange] = useState([500, 3000]);
+  const [priceRange, setPriceRange] = useState([2000000, 6000000]);
+  const [sqftRange, setSqftRange] = useState([1500, 3000]);
   const [selectedPropertyTypes, setSelectedPropertyTypes] = useState<string[]>([]);
   const [selectedBeds, setSelectedBeds] = useState<string>("");
   const [selectedBaths, setSelectedBaths] = useState<string>("");

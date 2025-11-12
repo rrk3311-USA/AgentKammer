@@ -503,6 +503,17 @@
     }
   }
 
+  @keyframes colorPulse {
+    0%, 100% {
+      background-color: #d4af37;
+      box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+    }
+    50% {
+      background-color: #ffffff;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+    }
+  }
+
   .animate-pulse-subtle {
     animation: pulse-subtle 3s ease-in-out infinite;
   }
