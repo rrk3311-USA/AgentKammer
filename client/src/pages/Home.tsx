@@ -3,6 +3,7 @@ import { HorizontalPropertyScroll } from "@/components/HorizontalPropertyScroll"
 import { PropertyCard } from "@/components/PropertyCard";
 import { AppDownload } from "@/components/AppDownload";
 import { AgenticComputeSection } from "@/components/AgenticCompute/AgenticComputeSection";
+import { LuxuryMoodBoard } from "@/components/LuxuryMoodBoard";
 import { LuxuryBackground } from "@/components/LuxuryBackground";
 import { ListingReportSection } from "@/components/ListingReportSection";
 import { Button } from "@/components/ui/button";
@@ -423,6 +424,8 @@ export default function Home() {
       <AgenticComputeSection />
 
         <ListingReportSection />
+
+        <LuxuryMoodBoard />
 
         <section className="py-16 lg:py-24 bg-[#0a1628] text-white relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative">
