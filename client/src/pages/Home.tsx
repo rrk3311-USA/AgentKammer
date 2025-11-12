@@ -17,7 +17,7 @@ import property3 from "@assets/generated_images/NYC_apartment_living_space_inter
 import property4 from "@assets/generated_images/Manhattan_penthouse_rooftop_terrace_25c2682e.png";
 import property5 from "@assets/generated_images/Upper_West_Side_co-op_building_1e75d246.png";
 import storefrontImg from "@assets/BBD593A1-EF8F-40A7-BD11-A6F13773084E_1_105_c_1762128066935.jpg";
-import agentKammerLeadingImg from "@assets/generated_images/Agent_Kammer_leading_family_into_storefront_8110138d.png";
+import luxuryApartmentInterior from "@assets/IMG_1355_1762906057368.jpeg";
 
 export default function Home() {
   const [midtownFilter, setMidtownFilter] = useState<"midtown" | "above" | "below">("midtown");
@@ -471,12 +471,12 @@ export default function Home() {
                 </form>
               </div>
 
-              {/* Right side: Agent Kammer leading family into storefront */}
+              {/* Right side: Luxury apartment interior */}
               <div className="relative h-[400px] lg:h-[500px] flex items-center justify-center bg-[#0a1628] rounded-lg overflow-hidden">
                 <img 
-                  src={agentKammerLeadingImg} 
-                  alt="Agent Kammer leading clients into storefront" 
-                  className="w-[120%] h-full object-cover shadow-2xl"
+                  src={luxuryApartmentInterior} 
+                  alt="Luxury apartment interior with Agent Kammer welcoming clients" 
+                  className="w-full h-full object-cover shadow-2xl"
                   style={{ objectPosition: 'center' }}
                 />
               </div>
