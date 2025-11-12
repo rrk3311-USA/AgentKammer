@@ -65,10 +65,10 @@ export function LiveTicker() {
   const tickerItems = createTickerItems();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 w-full z-40 bg-[#0a1628] border-t border-t-[0.5px] border-b border-b-[0.5px] border-black">
-      <div className="relative overflow-hidden h-14 bg-[#0a1628]">
+    <div className="fixed bottom-0 left-0 right-0 w-full z-40 bg-[#0a1628] border-t border-t-[0.5px] border-b border-b-[0.5px] border-black py-2.5">
+      <div className="relative overflow-hidden h-11 bg-[#0a1628]">
         <div
-          className="flex items-center gap-8 animate-scroll whitespace-nowrap py-3.5"
+          className="flex items-center gap-6 animate-scroll whitespace-nowrap py-2.5"
           style={{
             animation: "scroll 17.5s linear infinite",
           }}
@@ -78,9 +78,9 @@ export function LiveTicker() {
               return (
                 <div
                   key={item.key}
-                  className="flex items-center justify-center px-8"
+                  className="flex items-center justify-center px-6"
                 >
-                  <Shirt className="w-6 h-6 text-[#d4af37]" />
+                  <Shirt className="w-5 h-5 text-[#d4af37]" />
                 </div>
               );
             }
@@ -88,20 +88,20 @@ export function LiveTicker() {
             return (
               <div
                 key={item.key}
-                className="flex items-center gap-2.5 px-4 py-2 border border-[#d4af37] rounded-sm"
+                className="flex items-center gap-2 px-3 py-1.5 border border-[#d4af37] rounded-sm"
                 data-testid={`ticker-item-${item.id}`}
               >
-                <span className="font-semibold text-[#d4af37]">
+                <span className="font-semibold text-sm text-[#d4af37]">
                   {formatPrice(item.price)}
                 </span>
-                <span className="font-medium text-white">{item.address}</span>
-                <span className="text-white/80">{item.type}</span>
+                <span className="font-medium text-sm text-white">{item.address}</span>
+                <span className="text-sm text-white/80">{item.type}</span>
                 {item.beds > 0 && (
-                  <span className="text-sm text-white/70">
+                  <span className="text-xs text-white/70">
                     {item.beds}bd/{item.baths}ba
                   </span>
                 )}
-                <span className="text-sm text-white/70">
+                <span className="text-xs text-white/70">
                   {item.sqft.toLocaleString()} sf
                 </span>
               </div>
