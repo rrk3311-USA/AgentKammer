@@ -147,15 +147,15 @@ export function AgenticActionsInfographic() {
             </div>
 
             {/* Bottom Actions Strip - Black & White */}
-            <div className="bg-black/90 border-t border-white/20 py-3">
-              <div className="flex items-center justify-center gap-6 text-xs">
-                <div className="flex items-center gap-1.5">
+            <div className="bg-black/90 border-t border-white/20 py-3 px-4">
+              <div className="flex items-center justify-center gap-4 md:gap-6 text-xs flex-wrap">
+                <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-[#d4af37] animate-pulse" style={{ 
                     animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite, colorPulse 2s ease-in-out infinite' 
                   }} />
                   <span className="text-white font-medium">Continuous Market Scanning</span>
                 </div>
-                <div className="h-4 w-px bg-white/30" />
+                <div className="h-4 w-px bg-white/30 hidden md:block" />
                 <div className="flex items-center gap-2">
                   <Zap className="h-3 w-3 text-white" />
                   <span className="text-white font-medium">Instant Alert Processing</span>
