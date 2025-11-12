@@ -192,9 +192,9 @@ export function FloatingChatAssistant() {
   }
 
   return (
-    <div className="fixed right-2 bottom-16 z-50 md:scale-[0.8] w-[calc(100vw-1rem)] md:w-auto">
-      <Card className={`w-full md:w-96 shadow-2xl border-2 border-primary/50 overflow-hidden transition-all duration-300 ${
-        isMinimized ? "h-16" : "h-[600px]"
+    <div className="fixed right-2 bottom-16 z-50 scale-[0.8]">
+      <Card className={`w-96 shadow-2xl border-2 border-primary/50 overflow-hidden transition-all duration-300 flex flex-col ${
+        isMinimized ? "h-16" : "min-h-[420px] max-h-[calc(100vh-6rem)] h-[600px]"
       }`}>
         <div className="bg-gradient-to-br from-primary via-primary/95 to-primary text-foreground p-4 flex items-center justify-between border-b border-foreground/20">
           <div className="flex items-center gap-3">
@@ -245,14 +245,14 @@ export function FloatingChatAssistant() {
 
         {!isMinimized && (
           <>
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="flex flex-col h-[536px]">
-              <TabsList className="w-full grid grid-cols-2 rounded-none bg-muted/50">
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="flex flex-col flex-1 overflow-hidden">
+              <TabsList className="w-full grid grid-cols-2 rounded-none bg-muted/50 shrink-0">
                 <TabsTrigger value="prompts" data-testid="tab-prompts">Popular Prompts</TabsTrigger>
                 <TabsTrigger value="chat" data-testid="tab-chat">Chat</TabsTrigger>
               </TabsList>
 
               <TabsContent value="prompts" className="flex-1 overflow-hidden m-0">
-                <ScrollArea className="h-[436px] p-4 bg-background">
+                <ScrollArea className="h-full p-4 bg-background">
                   <div className="grid grid-cols-2 gap-2">
                     {popularPrompts.map((prompt) => (
                       <Button
@@ -274,7 +274,7 @@ export function FloatingChatAssistant() {
               </TabsContent>
 
               <TabsContent value="chat" className="flex-1 overflow-hidden m-0">
-                <ScrollArea className="h-[436px] p-4 bg-background" ref={scrollRef as any}>
+                <ScrollArea className="h-full p-4 bg-background" ref={scrollRef as any}>
                   <div className="space-y-4">
                     {messages.map((msg) => (
                       <div
@@ -300,7 +300,7 @@ export function FloatingChatAssistant() {
               </TabsContent>
             </Tabs>
 
-            <div className="p-4 border-t bg-background">
+            <div className="p-4 border-t bg-background shrink-0">
               <div className="flex gap-2">
                 <Button
                   size="icon"
