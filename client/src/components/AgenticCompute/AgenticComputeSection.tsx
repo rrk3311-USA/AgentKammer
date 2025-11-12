@@ -16,7 +16,7 @@ const pills = [
 
 export function AgenticComputeSection() {
   return (
-    <section className="relative bg-[#0B0B0C] py-12 overflow-hidden">
+    <section className="relative bg-[#1a1f2e] py-12 overflow-hidden">
       <AnimatedBackdrop />
       
       <div className="relative max-w-7xl mx-auto px-6">
