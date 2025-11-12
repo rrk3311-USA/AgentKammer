@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { LiveTicker } from "@/components/LiveTicker";
 import { FloatingChatAssistant } from "@/components/FloatingChatAssistant";
 import Home from "@/pages/Home";
@@ -16,7 +17,6 @@ import LiveDealMap from "@/pages/LiveDealMap";
 import DocumentPortal from "@/pages/DocumentPortal";
 import Coaching from "@/pages/Coaching";
 import LuxuryTravel from "@/pages/LuxuryTravel";
-import WellnessShop from "@/pages/WellnessShop";
 import CommercialInvestment from "@/pages/CommercialInvestment";
 import NotFound from "@/pages/not-found";
 
@@ -32,7 +32,6 @@ function Router() {
       <Route path="/document-portal" component={DocumentPortal} />
       <Route path="/coaching" component={Coaching} />
       <Route path="/luxury-travel" component={LuxuryTravel} />
-      <Route path="/wellness-shop" component={WellnessShop} />
       <Route path="/commercial-investment" component={CommercialInvestment} />
       <Route component={NotFound} />
     </Switch>
@@ -47,6 +46,7 @@ function App() {
           <div className="min-h-screen bg-background text-foreground pb-20 md:pb-14">
             <Header />
             <Router />
+            <Footer />
             <FloatingChatAssistant />
             <LiveTicker />
           </div>

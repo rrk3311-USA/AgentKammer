@@ -5,7 +5,6 @@ import { AppDownload } from "@/components/AppDownload";
 import { AgenticActionsInfographic } from "@/components/AgenticActionsInfographic";
 import { LuxuryBackground } from "@/components/LuxuryBackground";
 import { ListingReportSection } from "@/components/ListingReportSection";
-import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -484,8 +483,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        <Footer />
       </div>
     </div>
   );

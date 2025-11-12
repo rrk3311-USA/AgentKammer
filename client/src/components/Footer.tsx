@@ -50,11 +50,6 @@ export function Footer() {
               <h4 className="font-medium mb-4">Shop</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="/wellness-shop" className="hover:text-foreground transition-colors">
-                    Wellness Products
-                  </Link>
-                </li>
-                <li>
                   <Link href="/coaching" className="hover:text-foreground transition-colors">
                     Coaching Programs
                   </Link>
