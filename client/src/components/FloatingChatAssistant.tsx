@@ -260,12 +260,12 @@ export function FloatingChatAssistant() {
                         key={prompt.id}
                         variant={(prompt as any).featured ? "default" : "outline"}
                         className={`h-auto p-3 flex flex-col items-center gap-2 text-center hover-elevate active-elevate-2 ${
-                          (prompt as any).featured ? "col-span-2 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-black border-none font-semibold py-4" : ""
+                          (prompt as any).featured ? "col-span-2 bg-[#0a1628] text-[#d4af37] border border-[#d4af37]/30 font-semibold py-4" : ""
                         }`}
                         onClick={() => handleSend(prompt.prompt)}
                         data-testid={`button-prompt-${prompt.id}`}
                       >
-                        <prompt.icon className={`h-6 w-6 ${(prompt as any).featured ? "text-black" : "text-primary"}`} />
+                        <prompt.icon className={`h-6 w-6 ${(prompt as any).featured ? "text-[#d4af37]" : "text-primary"}`} />
                         <span className={`leading-tight ${(prompt as any).featured ? "text-sm font-bold" : "text-xs"}`}>{prompt.label}</span>
                       </Button>
                     ))}
