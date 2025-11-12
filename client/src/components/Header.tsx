@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Heart, Menu, X, Building2, Sparkles, FileText } from "lucide-react";
+import { Moon, Sun, Heart, Menu, X, Building2, Sparkles, FileText, MessageCircle } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
 
@@ -13,42 +13,28 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex h-24 items-center justify-between gap-4 relative">
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
+            <Link href="/document-portal">
+              <Button
+                variant="ghost"
+                className="hover-elevate active-elevate-2 h-12 px-4 gap-2"
+                data-testid="button-header-documents"
+              >
+                <FileText className="h-6 w-6" />
+                <span className="text-sm font-medium">Documents</span>
+              </Button>
+            </Link>
             <Button
               variant="ghost"
-              size="icon"
-              className="hover-elevate active-elevate-2"
-              data-testid="button-uptown"
+              className="hover-elevate active-elevate-2 h-12 px-4 gap-2"
+              onClick={() => {
+                const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLButtonElement;
+                if (chatButton) chatButton.click();
+              }}
+              data-testid="button-header-contact"
             >
-              <div className="flex flex-col items-center gap-0.5">
-                <Building2 className="h-5 w-5" />
-                <div className="h-0.5 w-0.5 rounded-full bg-current" />
-                <div className="h-0.5 w-0.5 rounded-full bg-current opacity-50" />
-              </div>
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="hover-elevate active-elevate-2"
-              data-testid="button-midtown"
-            >
-              <div className="flex flex-col items-center gap-0.5">
-                <div className="h-0.5 w-0.5 rounded-full bg-current opacity-50" />
-                <Building2 className="h-5 w-5" />
-                <div className="h-0.5 w-0.5 rounded-full bg-current opacity-50" />
-              </div>
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="hover-elevate active-elevate-2"
-              data-testid="button-downtown"
-            >
-              <div className="flex flex-col items-center gap-0.5">
-                <div className="h-0.5 w-0.5 rounded-full bg-current opacity-50" />
-                <div className="h-0.5 w-0.5 rounded-full bg-current" />
-                <Building2 className="h-5 w-5" />
-              </div>
+              <MessageCircle className="h-6 w-6" />
+              <span className="text-sm font-medium">Contact</span>
             </Button>
           </div>
 
@@ -65,16 +51,6 @@ export function Header() {
           </Link>
 
           <div className="flex items-center gap-4 ml-auto">
-            <Link href="/document-portal">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="hidden md:flex"
-                data-testid="button-documents"
-              >
-                <FileText className="h-5 w-5" />
-              </Button>
-            </Link>
             <Button
               variant="ghost"
               size="icon"
@@ -97,7 +73,7 @@ export function Header() {
             </Button>
             <Button
               variant="default"
-              className="hidden md:flex rounded-full text-black"
+              className="hidden md:flex rounded-full"
               data-testid="button-sign-in"
             >
               Sign In
@@ -146,6 +122,19 @@ export function Header() {
                 Document Portal
               </span>
             </Link>
+            <span
+              className="text-base font-medium hover:text-primary cursor-pointer block"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setTimeout(() => {
+                  const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLButtonElement;
+                  if (chatButton) chatButton.click();
+                }, 100);
+              }}
+              data-testid="link-mobile-contact"
+            >
+              Contact Agent K
+            </span>
             <div className="border-t pt-4">
               <p className="text-xs font-semibold text-muted-foreground mb-2 uppercase">Services</p>
               <Link href="/services/get-preapproved" data-testid="link-mobile-preapproved">
@@ -167,7 +156,7 @@ export function Header() {
             </div>
             <Button
               variant="default"
-              className="w-full rounded-full text-black"
+              className="w-full rounded-full"
               data-testid="button-mobile-sign-in"
             >
               Sign In

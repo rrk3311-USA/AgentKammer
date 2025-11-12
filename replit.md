@@ -31,7 +31,8 @@ The platform adopts a visual-first approach with large imagery and sophisticated
 - An "Agentic Actions" section featuring a Massive Compute Engine visualization.
 - Market Analysis Report with a premium background image.
 - A personalized chat assistant avatar and gold-gradient email capture forms.
-- Footer with "Powered by AI" section and tech infrastructure logos.
+- Footer with "Powered by AI" section, tech infrastructure logos, and Strategic Document Portal link.
+- Header with Documents and Contact buttons (Contact opens the chat assistant).
 
 ### Feature Specifications
 - **Property Search & Discovery**: Advanced search, filtering, and curated listings.
