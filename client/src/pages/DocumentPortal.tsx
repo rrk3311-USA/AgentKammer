@@ -253,7 +253,7 @@ export default function DocumentPortal() {
                   <TabsTrigger
                     key={category.id}
                     value={category.id}
-                    className="flex flex-col items-center gap-1 py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                    className="flex flex-col items-center gap-1 py-3 data-[state=active]:bg-[#d4af37] data-[state=active]:text-black"
                     data-testid={`tab-${category.id}`}
                   >
                     <Icon className={`h-5 w-5 ${category.color}`} />

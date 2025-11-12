@@ -24,7 +24,7 @@ export function TechStack() {
           <Badge
             key={idx}
             variant="secondary"
-            className="bg-[#d4af37]/10 border border-[#d4af37]/30 text-[#d4af37] text-xs px-3 py-1"
+            className="bg-[#d4af37] border border-[#d4af37] text-black text-xs px-3 py-1 font-medium"
             data-testid={`tech-${idx}`}
           >
             {tech}
