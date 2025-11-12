@@ -426,9 +426,9 @@ export default function Home() {
 
         <section className="py-16 lg:py-24 bg-[#0a1628] text-white relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Left side: Text and CTA */}
-              <div className="text-center lg:text-left">
+              <div className="text-center lg:text-left order-2 lg:order-1">
                 <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4">
                   Ready to Find Your Dream Home?
                 </h2>
@@ -472,7 +472,7 @@ export default function Home() {
               </div>
 
               {/* Right side: Agent Kammer welcoming clients into luxury apartment */}
-              <div className="relative h-[400px] lg:h-[500px] flex items-center justify-center bg-[#0a1628] rounded-lg overflow-hidden">
+              <div className="relative h-[400px] lg:h-[500px] flex items-center justify-center bg-[#0a1628] rounded-lg overflow-hidden order-1 lg:order-2">
                 <img 
                   src={agentKammerWelcoming} 
                   alt="Agent Kammer in top hat welcoming clients into luxury apartment" 
