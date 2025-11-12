@@ -1,4 +1,4 @@
-import { SiReplit, SiNvidia, SiClaude } from "react-icons/si";
+import { SiReplit, SiNvidia, SiClaude, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
 import { Brain, FileText } from "lucide-react";
 import { LiveInterestRate } from "./LiveInterestRate";
 import { Link } from "wouter";
@@ -38,16 +38,6 @@ export function Footer() {
                     Home Valuation
                   </Link>
                 </li>
-                <li>
-                  <Link href="/commercial-investment" className="hover:text-foreground transition-colors" data-testid="link-commercial-investment">
-                    Commercial Investment
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/luxury-travel" className="hover:text-foreground transition-colors">
-                    Luxury Travel
-                  </Link>
-                </li>
               </ul>
             </div>
             <div>
@@ -69,11 +59,26 @@ export function Footer() {
                     Consulting
                   </Link>
                 </li>
-                <li>Instagram</li>
-                <li>Facebook</li>
-                <li>LinkedIn</li>
-                <li>Twitter</li>
+                <li>
+                  <Link href="/commercial-investment" className="hover:text-foreground transition-colors" data-testid="link-commercial-investment">
+                    Commercial
+                  </Link>
+                </li>
               </ul>
+              <div className="flex items-center gap-3 mt-3">
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                  <SiInstagram className="h-4 w-4" />
+                </a>
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                  <SiFacebook className="h-4 w-4" />
+                </a>
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                  <SiLinkedin className="h-4 w-4" />
+                </a>
+                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+                  <SiX className="h-4 w-4" />
+                </a>
+              </div>
             </div>
           </div>
         </div>

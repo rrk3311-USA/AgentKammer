@@ -2,7 +2,7 @@ import { HeroSearch } from "@/components/HeroSearch";
 import { HorizontalPropertyScroll } from "@/components/HorizontalPropertyScroll";
 import { PropertyCard } from "@/components/PropertyCard";
 import { AppDownload } from "@/components/AppDownload";
-import { AgenticActionsInfographic } from "@/components/AgenticActionsInfographic";
+import { AgenticComputeSection } from "@/components/AgenticCompute/AgenticComputeSection";
 import { LuxuryBackground } from "@/components/LuxuryBackground";
 import { ListingReportSection } from "@/components/ListingReportSection";
 import { Button } from "@/components/ui/button";
@@ -420,7 +420,7 @@ export default function Home() {
 
       <AppDownload />
 
-      <AgenticActionsInfographic />
+      <AgenticComputeSection />
 
         <ListingReportSection />
 
