@@ -4,6 +4,7 @@ import { CapabilitiesGrid } from "./CapabilitiesGrid";
 import { DataSources } from "./DataSources";
 import { TechStack } from "./TechStack";
 import { AnimatedBackdrop } from "./AnimatedBackdrop";
+import { BrainVisualization } from "./BrainVisualization";
 import { Clock, Zap } from "lucide-react";
 
 const pills = [
@@ -15,30 +16,32 @@ const pills = [
 
 export function AgenticComputeSection() {
   return (
-    <section className="relative bg-[#0B0B0C] py-16 overflow-hidden">
+    <section className="relative bg-[#0B0B0C] py-12 overflow-hidden">
       <AnimatedBackdrop />
       
       <div className="relative max-w-7xl mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="font-serif text-4xl lg:text-5xl font-bold text-white mb-4">
+        <div className="text-center mb-8">
+          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-3">
             Massive Compute Engine
           </h2>
-          <p className="text-lg text-white/70 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-base text-white/70 max-w-3xl mx-auto leading-relaxed">
             Agent Kammer's distributed AI continuously scans every market, cross-verifies public records, and predicts shifts—while you sleep.
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
           {pills.map((pill, idx) => (
             <Badge
               key={idx}
-              className="bg-black/50 border border-[#d4af37]/30 text-white px-4 py-2 text-sm"
+              className="bg-black/50 border border-[#d4af37]/30 text-white px-3 py-1.5 text-xs"
               data-testid={`pill-${idx}`}
             >
               {pill}
             </Badge>
           ))}
         </div>
+
+        <BrainVisualization />
 
         <TelemetryStrip />
         
