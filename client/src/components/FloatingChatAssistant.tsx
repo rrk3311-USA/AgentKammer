@@ -114,6 +114,7 @@ export function FloatingChatAssistant() {
   };
 
   const popularPrompts = [
+    { id: "free-estimate", icon: Home, label: "Free Home Estimate", prompt: "I'd like a free home valuation estimate", featured: true },
     { id: "best-deal", icon: DollarSign, label: "Best Deal Right Now", prompt: "Show me the best deal on the market right now" },
     { id: "longest-market", icon: Clock, label: "Longest on Market", prompt: "Which properties have been on the market the longest?" },
     { id: "safest-location", icon: Shield, label: "Safest Locations", prompt: "What are the safest luxury neighborhoods?" },
@@ -257,13 +258,15 @@ export function FloatingChatAssistant() {
                     {popularPrompts.map((prompt) => (
                       <Button
                         key={prompt.id}
-                        variant="outline"
-                        className="h-auto p-3 flex flex-col items-center gap-2 text-center hover-elevate active-elevate-2"
+                        variant={(prompt as any).featured ? "default" : "outline"}
+                        className={`h-auto p-3 flex flex-col items-center gap-2 text-center hover-elevate active-elevate-2 ${
+                          (prompt as any).featured ? "col-span-2 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-black border-none font-semibold py-4" : ""
+                        }`}
                         onClick={() => handleSend(prompt.prompt)}
                         data-testid={`button-prompt-${prompt.id}`}
                       >
-                        <prompt.icon className="h-5 w-5 text-primary" />
-                        <span className="text-xs leading-tight">{prompt.label}</span>
+                        <prompt.icon className={`h-6 w-6 ${(prompt as any).featured ? "text-black" : "text-primary"}`} />
+                        <span className={`leading-tight ${(prompt as any).featured ? "text-sm font-bold" : "text-xs"}`}>{prompt.label}</span>
                       </Button>
                     ))}
                   </div>
