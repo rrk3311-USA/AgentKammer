@@ -73,6 +73,8 @@ export function HeroSearch() {
               <span>NYC</span>
               <span className="text-muted-foreground">·</span>
               <span>CA</span>
+              <span className="text-muted-foreground">·</span>
+              <span>NV</span>
             </div>
           </div>
           
