@@ -44,7 +44,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <TooltipProvider>
-          <div className="min-h-screen bg-background text-foreground pb-14">
+          <div className="min-h-screen bg-background text-foreground pb-20 md:pb-14">
             <Header />
             <Router />
             <FloatingChatAssistant />

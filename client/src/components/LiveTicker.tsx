@@ -70,7 +70,7 @@ export function LiveTicker() {
         <div
           className="flex items-center gap-8 animate-scroll whitespace-nowrap py-3.5"
           style={{
-            animation: "scroll 35s linear infinite",
+            animation: "scroll 17.5s linear infinite",
           }}
         >
           {tickerItems.map((item, index) => {
