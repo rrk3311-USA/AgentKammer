@@ -39,7 +39,7 @@ The platform adopts a visual-first approach with large imagery and sophisticated
 - **Saved Searches**: Users can save criteria and receive email notifications.
 - **Service Pages**: Dedicated pages for mortgage pre-approval and home valuation with comprehensive forms.
 - **Market Analysis Reports**: On-demand property-specific reports.
-- **AI Chat Assistant with CRM Lead Capture**: GPT-4o-mini powered assistant with a progressive conversation strategy for lead qualification (collecting timeline, financing, commitment, motivation data). It features automatic, hidden `LEAD_DATA` JSON block extraction, session-based tracking, database persistence to the `leads` table with calculated lead scores, and voice input support.
+- **AI Chat Assistant with CRM Lead Capture**: GPT-4o-mini powered assistant with a bold, charismatic "Jordan Belfort" personality - confident, fun, and classy. Features aggressive lead qualification strategy that quickly captures name, timeline, budget/financing, and contact info within first 3-4 messages using button-style options. Includes automatic, hidden `LEAD_DATA` JSON block extraction, session-based tracking, database persistence to the `leads` table with calculated lead scores, and voice input support. Dark navy header with white text, medium blue user bubbles, and gold agent bubbles with black text.
 - **Live Deal Map**: Interactive Google Maps integration with custom styling and Deal IQ scores.
 - **Dream Home CTA**: Call-to-action section with a phone number input form.
 - **Dynamic UI**: Real-time property data displayed via a `LiveTicker`.

@@ -22,7 +22,7 @@ export function FloatingChatAssistant() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Good evening. I'm Agent Kammer, your personal real estate concierge. How may I assist you in finding your perfect luxury property today?",
+      text: "Hey there! 🎩 I'm Agent Kammer - THE luxury real estate closer for NYC, CA, and Nevada. Let's find you something incredible. What's your name?",
       sender: "agent",
       timestamp: new Date(),
     },
