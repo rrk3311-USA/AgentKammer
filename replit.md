@@ -1,7 +1,7 @@
 # Agent Kammer - Luxury Properties Platform
 
 ## Overview
-Agent Kammer is a luxury agentic real estate and travel concierge platform serving New York City and California markets. It provides a visual-first search and discovery experience for luxury properties, offering advanced search, saved listings with notifications, and integrated services like mortgage pre-approval and home valuation. The platform leverages agentic AI to provide a competitive advantage to users by continuously scanning multiple luxury markets for new listings and updates, aiming to build trust through professional aesthetics inspired by high-end real estate brands. Its business vision is to empower users in finding luxury homes across premier markets.
+Agent Kammer is a luxury agentic real estate and travel concierge platform serving NYC, California, and Nevada markets. It provides a visual-first search and discovery experience for luxury properties, offering advanced search, saved listings with notifications, and integrated services like mortgage pre-approval and home valuation. The platform leverages agentic AI to provide a competitive advantage to users by continuously scanning multiple luxury markets for new listings and updates, aiming to build trust through professional aesthetics inspired by high-end real estate brands. Its business vision is to empower users in finding luxury homes across premier markets. Tagline: "Your Luxury Agentic Real Estate Concierge."
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
