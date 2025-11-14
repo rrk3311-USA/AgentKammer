@@ -1,7 +1,6 @@
 import { HeroSearch } from "@/components/HeroSearch";
 import { HorizontalPropertyScroll } from "@/components/HorizontalPropertyScroll";
 import { PropertyCard } from "@/components/PropertyCard";
-import { AppDownload } from "@/components/AppDownload";
 import { AgenticComputeSection } from "@/components/AgenticCompute/AgenticComputeSection";
 import { LuxuryMoodBoard } from "@/components/LuxuryMoodBoard";
 import { LuxuryBackground } from "@/components/LuxuryBackground";
@@ -418,8 +417,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <AppDownload />
 
       <AgenticComputeSection />
 
