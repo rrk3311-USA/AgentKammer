@@ -1,18 +1,14 @@
 import { Badge } from "@/components/ui/badge";
 
 const dataSources = [
-  "OneKey MLS",
-  "CRMLS (CA)",
-  "Zillow Bridge",
-  "Realtor.com",
-  "Redfin",
-  "PropertyShark",
-  "Public Records",
-  "Tax Assessments",
-  "Valuations",
-  "Google Maps",
-  "School & Crime DBs",
-  "Walkscore"
+  "Christie's International",
+  "Sotheby's Intl Realty",
+  "Engel & Völkers",
+  "Corcoran",
+  "Compass",
+  "The Agency",
+  "Coldwell Banker Luxury",
+  "Douglas Elliman"
 ];
 
 export function DataSources() {
