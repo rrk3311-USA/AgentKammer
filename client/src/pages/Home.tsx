@@ -432,21 +432,88 @@ export default function Home() {
                 <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4 relative inline-block">
                   <span className="relative">
                     Ready to Find Your Dream Home?
-                    {/* Gold scanning effect */}
+                    {/* Sonar pulse effect */}
+                    <div 
+                      className="absolute inset-0 overflow-visible pointer-events-none"
+                      style={{
+                        background: 'radial-gradient(circle, rgba(212,175,55,0.6) 0%, rgba(244,208,63,0.3) 30%, transparent 70%)',
+                        animation: 'sonarPulse 8s ease-in-out infinite',
+                        mixBlendMode: 'screen',
+                        filter: 'blur(1px)',
+                      }}
+                    />
+                    {/* Scanning beam */}
                     <div 
                       className="absolute inset-0 overflow-hidden pointer-events-none"
                       style={{
-                        background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.4) 45%, rgba(244,208,63,0.8) 50%, rgba(212,175,55,0.4) 55%, transparent 100%)',
-                        animation: 'goldScan 3s ease-in-out infinite',
+                        background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.2) 45%, rgba(244,208,63,0.5) 50%, rgba(212,175,55,0.2) 55%, transparent 100%)',
+                        animation: 'slowScan 10s ease-in-out infinite',
                         mixBlendMode: 'screen',
                       }}
                     />
+                    {/* Magical sparks */}
+                    <div 
+                      className="absolute inset-0 overflow-visible pointer-events-none"
+                      style={{
+                        animation: 'sparkle 3s linear infinite',
+                      }}
+                    >
+                      <div className="absolute" style={{ left: '10%', top: '-20%', animation: 'twinkle 2s ease-in-out infinite' }}>
+                        <div className="w-1 h-1 bg-[#d4af37] rounded-full" style={{ boxShadow: '0 0 4px 2px rgba(212,175,55,0.8)' }} />
+                      </div>
+                      <div className="absolute" style={{ left: '30%', top: '120%', animation: 'twinkle 2.5s ease-in-out infinite 0.5s' }}>
+                        <div className="w-1.5 h-1.5 bg-[#f4d03f] rounded-full" style={{ boxShadow: '0 0 6px 3px rgba(244,208,63,0.8)' }} />
+                      </div>
+                      <div className="absolute" style={{ left: '60%', top: '-10%', animation: 'twinkle 2.2s ease-in-out infinite 1s' }}>
+                        <div className="w-1 h-1 bg-[#d4af37] rounded-full" style={{ boxShadow: '0 0 4px 2px rgba(212,175,55,0.8)' }} />
+                      </div>
+                      <div className="absolute" style={{ left: '80%', top: '110%', animation: 'twinkle 3s ease-in-out infinite 1.5s' }}>
+                        <div className="w-1.5 h-1.5 bg-[#f4d03f] rounded-full" style={{ boxShadow: '0 0 6px 3px rgba(244,208,63,0.8)' }} />
+                      </div>
+                      <div className="absolute" style={{ left: '90%', top: '50%', animation: 'twinkle 2.8s ease-in-out infinite 0.8s' }}>
+                        <div className="w-1 h-1 bg-[#d4af37] rounded-full" style={{ boxShadow: '0 0 4px 2px rgba(212,175,55,0.8)' }} />
+                      </div>
+                    </div>
                   </span>
                 </h2>
                 <style>{`
-                  @keyframes goldScan {
-                    0%, 100% { transform: translateX(-100%); }
-                    50% { transform: translateX(100%); }
+                  @keyframes slowScan {
+                    0%, 100% { transform: translateX(-120%); opacity: 0; }
+                    10% { opacity: 1; }
+                    50% { transform: translateX(120%); opacity: 1; }
+                    60% { opacity: 0; }
+                  }
+                  @keyframes sonarPulse {
+                    0%, 100% { 
+                      transform: scale(0.5); 
+                      opacity: 0; 
+                    }
+                    25% { 
+                      transform: scale(1.5); 
+                      opacity: 0.6; 
+                    }
+                    50% { 
+                      transform: scale(2.5); 
+                      opacity: 0; 
+                    }
+                    75% { 
+                      transform: scale(1.2); 
+                      opacity: 0.4; 
+                    }
+                  }
+                  @keyframes twinkle {
+                    0%, 100% { 
+                      opacity: 0; 
+                      transform: scale(0.5) translateY(0); 
+                    }
+                    50% { 
+                      opacity: 1; 
+                      transform: scale(1.5) translateY(-5px); 
+                    }
+                  }
+                  @keyframes sparkle {
+                    0%, 100% { filter: brightness(1); }
+                    50% { filter: brightness(1.3); }
                   }
                 `}</style>
                 <p className="text-lg mb-8 opacity-90">
