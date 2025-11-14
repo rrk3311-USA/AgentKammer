@@ -7,6 +7,7 @@ import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Cl
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import agentAvatar from "@assets/generated_images/Tuxedo_professional_on_phone_cd981587.png";
+import { playCrunchyChime, playButtonClick } from "@/lib/soundEffects";
 
 interface Message {
   id: string;
@@ -66,6 +67,8 @@ export function FloatingChatAssistant() {
   const handleSend = async (text?: string) => {
     const messageText = text || message;
     if (!messageText.trim()) return;
+
+    playCrunchyChime();
 
     const newMessage: Message = {
       id: Date.now().toString(),
@@ -129,6 +132,8 @@ export function FloatingChatAssistant() {
       return;
     }
 
+    playButtonClick();
+
     if (isListening) {
       recognitionRef.current.stop();
       setIsListening(false);
@@ -149,7 +154,10 @@ export function FloatingChatAssistant() {
     return (
       <div className="fixed right-2 bottom-16 z-50 scale-[0.8]">
         <button
-          onClick={() => setIsOpen(true)}
+          onClick={() => {
+            playButtonClick();
+            setIsOpen(true);
+          }}
           className="relative group"
           data-testid="button-open-chat"
         >
@@ -226,7 +234,10 @@ export function FloatingChatAssistant() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setIsMinimized(!isMinimized)}
+              onClick={() => {
+                playButtonClick();
+                setIsMinimized(!isMinimized);
+              }}
               className="h-8 w-8 text-white hover:bg-white/10"
               data-testid="button-minimize-chat"
             >
@@ -235,7 +246,10 @@ export function FloatingChatAssistant() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                playButtonClick();
+                setIsOpen(false);
+              }}
               className="h-8 w-8 text-white hover:bg-white/10"
               data-testid="button-close-chat"
             >
@@ -262,7 +276,10 @@ export function FloatingChatAssistant() {
                         className={`h-auto p-3 flex flex-col items-center gap-2 text-center hover-elevate active-elevate-2 ${
                           (prompt as any).featured ? "col-span-2 bg-[#0a1628] text-[#d4af37] border border-[#d4af37]/30 font-semibold py-4" : ""
                         }`}
-                        onClick={() => handleSend(prompt.prompt)}
+                        onClick={() => {
+                          playCrunchyChime();
+                          handleSend(prompt.prompt);
+                        }}
                         data-testid={`button-prompt-${prompt.id}`}
                       >
                         <prompt.icon className={`h-6 w-6 ${(prompt as any).featured ? "text-[#d4af37]" : "text-primary"}`} />
