@@ -44,15 +44,9 @@ export function Footer() {
               <h4 className="font-medium mb-3 text-sm">Connect</h4>
               <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground">
                 <li>
-                  <span
-                    className="hover:text-foreground cursor-pointer transition-colors"
-                    onClick={() => {
-                      const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLButtonElement;
-                      if (chatButton) chatButton.click();
-                    }}
-                  >
+                  <Link href="/contact" className="hover:text-foreground transition-colors">
                     Contact
-                  </span>
+                  </Link>
                 </li>
                 <li>
                   <Link href="/coaching" className="hover:text-foreground transition-colors">

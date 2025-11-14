@@ -50,7 +50,8 @@ The platform adopts a visual-first approach with large imagery and sophisticated
 - **Luxury Travel Experiences**: Page showcasing bespoke adventure journey packages.
 - **Wellness Shop**: E-commerce page for premium supplement products with cart functionality.
 - **Commercial Real Estate Investment**: Live-updating feed page for California commercial properties with investment metrics.
-- **Branding**: Professional luxury concierge avatar, gold accents, and multi-market focus on NYC and California.
+- **Contact Page**: Beautiful landing page with photo collage of luxury bar/interior images, contact information cards, comprehensive contact form, and CTA section.
+- **Branding**: Professional luxury concierge avatar, gold accents, and multi-market focus on NYC, California, and Nevada.
 
 ## External Dependencies
 
