@@ -5,7 +5,7 @@ import { DataSources } from "./DataSources";
 import { TechStack } from "./TechStack";
 import { AnimatedBackdrop } from "./AnimatedBackdrop";
 import { BrainVisualization } from "./BrainVisualization";
-import { Clock, Zap } from "lucide-react";
+import { Clock, Zap, TrendingUp, Shield } from "lucide-react";
 
 const pills = [
   "Continuous Market Scanning",
@@ -51,19 +51,33 @@ export function AgenticComputeSection() {
         
         <TechStack />
 
-        <div className="grid md:grid-cols-2 gap-6 mt-8">
-          <div className="flex items-center justify-center gap-3 bg-black/40 border border-[#d4af37]/20 rounded-lg p-6">
-            <Clock className="h-8 w-8 text-white flex-shrink-0" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+          <div className="flex items-center justify-center gap-2 bg-black/40 border border-[#d4af37]/20 rounded-lg p-4">
+            <Clock className="h-6 w-6 text-white flex-shrink-0" />
             <div>
-              <p className="text-3xl font-serif font-bold text-white">240hrs</p>
+              <p className="text-xl font-serif font-bold text-white">240hrs</p>
               <p className="text-xs text-white/60">Average buyer search time</p>
             </div>
           </div>
-          <div className="flex items-center justify-center gap-3 bg-black/40 border border-[#d4af37]/20 rounded-lg p-6">
-            <Zap className="h-8 w-8 text-white flex-shrink-0" />
+          <div className="flex items-center justify-center gap-2 bg-black/40 border border-[#d4af37]/20 rounded-lg p-4">
+            <Zap className="h-6 w-6 text-white flex-shrink-0" />
             <div>
-              <p className="text-3xl font-serif font-bold text-white">240+ hrs saved</p>
+              <p className="text-xl font-serif font-bold text-white">240+ hrs saved</p>
               <p className="text-xs text-white/60">With Agent Kammer</p>
+            </div>
+          </div>
+          <div className="flex items-center justify-center gap-2 bg-black/40 border border-[#d4af37]/20 rounded-lg p-4">
+            <TrendingUp className="h-6 w-6 text-white flex-shrink-0" />
+            <div>
+              <p className="text-xl font-serif font-bold text-white">15K+</p>
+              <p className="text-xs text-white/60">Properties scanned daily</p>
+            </div>
+          </div>
+          <div className="flex items-center justify-center gap-2 bg-black/40 border border-[#d4af37]/20 rounded-lg p-4">
+            <Shield className="h-6 w-6 text-white flex-shrink-0" />
+            <div>
+              <p className="text-xl font-serif font-bold text-white">100%</p>
+              <p className="text-xs text-white/60">Verified listings</p>
             </div>
           </div>
         </div>

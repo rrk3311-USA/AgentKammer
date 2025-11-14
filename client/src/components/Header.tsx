@@ -73,7 +73,7 @@ export function Header() {
             </Button>
             <Button
               variant="default"
-              className="hidden md:flex rounded-full"
+              className="hidden md:flex rounded-full text-[#0a1628]"
               data-testid="button-sign-in"
             >
               Sign In
@@ -156,7 +156,7 @@ export function Header() {
             </div>
             <Button
               variant="default"
-              className="w-full rounded-full"
+              className="w-full rounded-full text-[#0a1628]"
               data-testid="button-mobile-sign-in"
             >
               Sign In
