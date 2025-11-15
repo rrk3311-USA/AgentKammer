@@ -296,25 +296,73 @@ export function FloatingChatAssistant() {
               <TabsContent value="chat" className="flex-1 overflow-hidden m-0">
                 <ScrollArea className="h-full p-4 bg-background" ref={scrollRef as any}>
                   <div className="space-y-4">
-                    {messages.map((msg) => (
-                      <div
-                        key={msg.id}
-                        className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
-                      >
+                    {messages.map((msg) => {
+                      const renderMessage = () => {
+                        if (msg.sender === "user") {
+                          return <p className="text-sm text-white">{msg.text}</p>;
+                        }
+
+                        const lines = msg.text.split('\n');
+                        const questionLines: string[] = [];
+                        const options: { letter: string; text: string }[] = [];
+                        
+                        lines.forEach((line) => {
+                          const trimmed = line.trim();
+                          const match = trimmed.match(/^([A-D])\.\s*(.+)$/);
+                          if (match) {
+                            options.push({ letter: match[1], text: match[2] });
+                          } else if (trimmed) {
+                            questionLines.push(trimmed);
+                          }
+                        });
+
+                        return (
+                          <div className="space-y-3">
+                            <p className="text-sm text-black font-medium whitespace-pre-line">
+                              {questionLines.join('\n')}
+                            </p>
+                            {options.length > 0 && (
+                              <div className="flex flex-col gap-2 mt-3">
+                                {options.map((opt) => (
+                                  <Button
+                                    key={opt.letter}
+                                    onClick={() => {
+                                      playCrunchyChime();
+                                      handleSend(`${opt.letter}. ${opt.text}`);
+                                    }}
+                                    className="bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-black font-semibold hover:opacity-90 justify-start text-left h-auto py-2.5 px-4"
+                                    data-testid={`button-option-${opt.letter.toLowerCase()}`}
+                                  >
+                                    <span className="font-bold mr-2">{opt.letter}.</span>
+                                    {opt.text}
+                                  </Button>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      };
+
+                      return (
                         <div
-                          className={`max-w-[80%] rounded-2xl px-4 py-2 ${
-                            msg.sender === "user"
-                              ? "bg-[#4A90E2] text-white border border-[#4A90E2]"
-                              : "bg-[#d4af37] border border-[#d4af37]"
-                          }`}
+                          key={msg.id}
+                          className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
                         >
-                          <p className={`text-sm ${msg.sender === "agent" ? "text-black font-medium" : "text-white"}`}>{msg.text}</p>
-                          <p className={`text-xs mt-1 ${msg.sender === "agent" ? "text-black/60" : "text-white/70"}`}>
-                            {msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                          </p>
+                          <div
+                            className={`max-w-[80%] rounded-2xl px-4 py-2 ${
+                              msg.sender === "user"
+                                ? "bg-[#4A90E2] text-white border border-[#4A90E2]"
+                                : "bg-[#d4af37] border border-[#d4af37]"
+                            }`}
+                          >
+                            {renderMessage()}
+                            <p className={`text-xs mt-1 ${msg.sender === "agent" ? "text-black/60" : "text-white/70"}`}>
+                              {msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </ScrollArea>
               </TabsContent>
