@@ -24,18 +24,16 @@ export function Header() {
                 <span className="text-sm font-medium">Documents</span>
               </Button>
             </Link>
-            <Button
-              variant="ghost"
-              className="hover-elevate active-elevate-2 h-12 px-4 gap-2"
-              onClick={() => {
-                const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLButtonElement;
-                if (chatButton) chatButton.click();
-              }}
-              data-testid="button-header-contact"
-            >
-              <MessageCircle className="h-6 w-6" />
-              <span className="text-sm font-medium">Contact</span>
-            </Button>
+            <Link href="/contact">
+              <Button
+                variant="ghost"
+                className="hover-elevate active-elevate-2 h-12 px-4 gap-2"
+                data-testid="button-header-contact"
+              >
+                <MessageCircle className="h-6 w-6" />
+                <span className="text-sm font-medium">Contact</span>
+              </Button>
+            </Link>
           </div>
 
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
