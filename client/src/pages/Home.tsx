@@ -424,7 +424,7 @@ export default function Home() {
 
         <LuxuryMoodBoard />
 
-        <section className="py-16 lg:py-24 bg-[#0a1628] text-white relative overflow-hidden">
+        <section className="py-8 lg:py-12 bg-[#0a1628] text-white relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Left side: Text and CTA */}
