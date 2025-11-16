@@ -17,7 +17,7 @@ import property3 from "@assets/generated_images/NYC_apartment_living_space_inter
 import property4 from "@assets/generated_images/Manhattan_penthouse_rooftop_terrace_25c2682e.png";
 import property5 from "@assets/generated_images/Upper_West_Side_co-op_building_1e75d246.png";
 import storefrontImg from "@assets/BBD593A1-EF8F-40A7-BD11-A6F13773084E_1_105_c_1762128066935.jpg";
-import agentKammerWelcoming from "@assets/generated_images/Luxury_concierge_gold-ribbon_tophat_welcoming_20df1356.png";
+import agentKammerWelcoming from "@assets/generated_images/Concierge_opening_doors_gold-band_tophat_5ba45241.png";
 
 export default function Home() {
   const [midtownFilter, setMidtownFilter] = useState<"midtown" | "above" | "below">("midtown");
