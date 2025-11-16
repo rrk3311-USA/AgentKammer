@@ -395,13 +395,13 @@ export function FloatingChatAssistant() {
                   }}
                   disabled={!message.trim() || isListening}
                   data-testid="button-send-message"
-                  className="relative w-12 h-12 rounded-full bg-gradient-to-br from-[#d4af37] via-[#f4d03f] to-[#d4af37] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed group transition-all hover:scale-105 active:scale-95"
+                  className="relative w-12 h-12 rounded-full bg-black border-2 border-[#d4af37] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed group transition-all hover:scale-105 active:scale-95"
                   style={{
-                    boxShadow: '0 4px 14px 0 rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.2)'
+                    boxShadow: '0 4px 14px 0 rgba(212, 175, 55, 0.5), 0 0 0 1px rgba(212, 175, 55, 0.2)'
                   }}
                 >
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-t from-transparent to-white/20" />
-                  <PlaneTakeoff className="h-5 w-5 text-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:rotate-12 transition-transform" />
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-t from-transparent to-white/10" />
+                  <PlaneTakeoff className="h-5 w-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:rotate-12 transition-transform" />
                 </button>
               </div>
               <p className="text-xs text-muted-foreground mt-2 text-center">
