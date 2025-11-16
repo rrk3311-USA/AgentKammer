@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home, Mic, MicOff } from "lucide-react";
+import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home, Mic, MicOff, PlaneTakeoff } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import agentAvatar from "@assets/generated_images/Tuxedo_professional_on_phone_cd981587.png";
@@ -388,14 +388,21 @@ export function FloatingChatAssistant() {
                   data-testid="input-chat-message"
                   disabled={isListening}
                 />
-                <Button
-                  size="icon"
-                  onClick={() => handleSend()}
+                <button
+                  onClick={() => {
+                    playCrunchyChime();
+                    handleSend();
+                  }}
                   disabled={!message.trim() || isListening}
                   data-testid="button-send-message"
+                  className="relative w-12 h-12 rounded-full bg-gradient-to-br from-[#d4af37] via-[#f4d03f] to-[#d4af37] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed group transition-all hover:scale-105 active:scale-95"
+                  style={{
+                    boxShadow: '0 4px 14px 0 rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.2)'
+                  }}
                 >
-                  <Send className="h-4 w-4" />
-                </Button>
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-t from-transparent to-white/20" />
+                  <PlaneTakeoff className="h-5 w-5 text-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:rotate-12 transition-transform" />
+                </button>
               </div>
               <p className="text-xs text-muted-foreground mt-2 text-center">
                 {isListening ? "🎤 Listening... Speak now" : "AI-powered real estate assistance"}
