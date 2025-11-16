@@ -330,7 +330,7 @@ export function FloatingChatAssistant() {
                                       playCrunchyChime();
                                       handleSend(`${opt.letter}. ${opt.text}`);
                                     }}
-                                    className="bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-black font-semibold hover:opacity-90 justify-start text-left h-auto py-2.5 px-4"
+                                    className="bg-[#0a1628] text-[#f4d03f] border border-[#d4af37]/30 font-semibold hover:bg-[#0a1628]/90 justify-start text-left h-auto py-2.5 px-4"
                                     data-testid={`button-option-${opt.letter.toLowerCase()}`}
                                   >
                                     <span className="font-bold mr-2">{opt.letter}.</span>
