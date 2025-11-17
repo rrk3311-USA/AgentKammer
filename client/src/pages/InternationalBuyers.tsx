@@ -50,29 +50,29 @@ export default function InternationalBuyers() {
       <div className="max-w-6xl mx-auto px-6 py-12">
         <Tabs defaultValue="1" className="w-full">
           <TabsList className="grid w-full grid-cols-3 md:grid-cols-6 gap-2 mb-8 h-auto bg-muted/50 p-2" data-testid="tabs-international-buyers">
-            <TabsTrigger value="1" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-black" data-testid="tab-overview">
-              <span className="hidden md:inline">1️⃣ Overview</span>
-              <span className="md:hidden">1️⃣</span>
+            <TabsTrigger value="1" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-black text-xs sm:text-sm" data-testid="tab-overview">
+              <span className="hidden sm:inline">1. Overview</span>
+              <span className="sm:hidden">1. Info</span>
             </TabsTrigger>
-            <TabsTrigger value="2" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-black" data-testid="tab-process">
-              <span className="hidden md:inline">2️⃣ Process</span>
-              <span className="md:hidden">2️⃣</span>
+            <TabsTrigger value="2" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-black text-xs sm:text-sm" data-testid="tab-process">
+              <span className="hidden sm:inline">2. Process</span>
+              <span className="sm:hidden">2. Steps</span>
             </TabsTrigger>
-            <TabsTrigger value="3" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-black" data-testid="tab-financing">
-              <span className="hidden md:inline">3️⃣ Financing</span>
-              <span className="md:hidden">3️⃣</span>
+            <TabsTrigger value="3" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-black text-xs sm:text-sm" data-testid="tab-financing">
+              <span className="hidden sm:inline">3. Financing</span>
+              <span className="sm:hidden">3. Money</span>
             </TabsTrigger>
-            <TabsTrigger value="4" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-black" data-testid="tab-legal">
-              <span className="hidden md:inline">4️⃣ Legal/Tax</span>
-              <span className="md:hidden">4️⃣</span>
+            <TabsTrigger value="4" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-black text-xs sm:text-sm" data-testid="tab-legal">
+              <span className="hidden sm:inline">4. Legal/Tax</span>
+              <span className="sm:hidden">4. Legal</span>
             </TabsTrigger>
-            <TabsTrigger value="5" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-black" data-testid="tab-faq">
-              <span className="hidden md:inline">5️⃣ FAQ</span>
-              <span className="md:hidden">5️⃣</span>
+            <TabsTrigger value="5" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-black text-xs sm:text-sm" data-testid="tab-faq">
+              <span className="hidden sm:inline">5. FAQ</span>
+              <span className="sm:hidden">5. Q&A</span>
             </TabsTrigger>
-            <TabsTrigger value="6" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-black" data-testid="tab-cta">
-              <span className="hidden md:inline">6️⃣ Work With Us</span>
-              <span className="md:hidden">6️⃣</span>
+            <TabsTrigger value="6" className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-black text-xs sm:text-sm" data-testid="tab-cta">
+              <span className="hidden sm:inline">6. Work With Us</span>
+              <span className="sm:hidden">6. Contact</span>
             </TabsTrigger>
           </TabsList>
 
@@ -87,12 +87,17 @@ export default function InternationalBuyers() {
                 </p>
 
                 <div className="bg-[#d4af37]/10 border border-[#d4af37]/30 rounded-lg p-6">
-                  <p className="text-lg font-semibold text-foreground mb-2">
-                    ✅ You do NOT need to be a US citizen or US resident to buy property in California.
-                  </p>
-                  <p>
-                    Foreign nationals can freely purchase real estate throughout California, with the same rights as US citizens.
-                  </p>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="h-6 w-6 text-[#d4af37] shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-lg font-semibold text-foreground mb-2">
+                        You do NOT need to be a US citizen or US resident to buy property in California.
+                      </p>
+                      <p>
+                        Foreign nationals can freely purchase real estate throughout California, with the same rights as US citizens.
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
                 <div>
@@ -118,14 +123,17 @@ export default function InternationalBuyers() {
                   <h3 className="font-semibold text-xl mb-4 text-foreground">What Makes California Special?</h3>
                   <ul className="space-y-2">
                     {[
-                      "🏆 World-class universities (Stanford, UC Berkeley, UCLA, USC)",
-                      "💼 Global job centers (Silicon Valley, Los Angeles, San Diego)",
-                      "🌴 Exceptional lifestyle, climate, and cultural diversity",
-                      "📈 Strong long-term property appreciation history",
-                      "🏖️ Coastal living and outdoor recreation year-round",
-                      "🌉 Gateway to Asia-Pacific business and travel"
+                      "World-class universities (Stanford, UC Berkeley, UCLA, USC)",
+                      "Global job centers (Silicon Valley, Los Angeles, San Diego)",
+                      "Exceptional lifestyle, climate, and cultural diversity",
+                      "Strong long-term property appreciation history",
+                      "Coastal living and outdoor recreation year-round",
+                      "Gateway to Asia-Pacific business and travel"
                     ].map((item, i) => (
-                      <li key={i} className="pl-2">{item}</li>
+                      <li key={i} className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-[#d4af37] shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -149,7 +157,7 @@ export default function InternationalBuyers() {
 
                 <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-lg p-6 mt-8">
                   <p className="text-sm font-semibold text-amber-900 dark:text-amber-200">
-                    ⚠️ Important Disclaimer
+                    Important Disclaimer
                   </p>
                   <p className="text-sm text-amber-800 dark:text-amber-300 mt-2">
                     Nothing on this page constitutes legal, tax, or immigration advice. Always consult your own attorney, CPA, and immigration advisor before making any decisions regarding property purchases or residency.
@@ -218,10 +226,10 @@ export default function InternationalBuyers() {
                 <Card className="bg-[#d4af37]/10 border-[#d4af37]/30 p-6 mt-8">
                   <h3 className="font-semibold text-lg mb-4 text-foreground">Process Snapshot</h3>
                   <ul className="space-y-2 text-muted-foreground">
-                    <li>📅 <strong>Typical escrow length:</strong> ~30 days (can be shorter or longer)</li>
-                    <li>💰 <strong>Typical deposit:</strong> 3% of purchase price (varies by market)</li>
-                    <li>⏱️ <strong>Timing note:</strong> International documentation may require additional time</li>
-                    <li>🌍 <strong>Remote closing:</strong> Yes, most steps can be completed from overseas</li>
+                    <li><strong>Typical escrow length:</strong> ~30 days (can be shorter or longer)</li>
+                    <li><strong>Typical deposit:</strong> 3% of purchase price (varies by market)</li>
+                    <li><strong>Timing note:</strong> International documentation may require additional time</li>
+                    <li><strong>Remote closing:</strong> Yes, most steps can be completed from overseas</li>
                   </ul>
                 </Card>
               </div>
@@ -241,11 +249,11 @@ export default function InternationalBuyers() {
                   <h3 className="font-semibold text-xl mb-4 text-foreground">A) Payment Options</h3>
                   <div className="space-y-4 text-muted-foreground">
                     <div className="bg-muted/50 rounded-lg p-6">
-                      <h4 className="font-semibold text-foreground mb-2">💵 Cash Buyers (Proof of Funds)</h4>
+                      <h4 className="font-semibold text-foreground mb-2">Cash Buyers (Proof of Funds)</h4>
                       <p>Many international buyers purchase in cash. You'll need bank statements or a letter from your bank/private banker confirming available funds. Cash offers are highly competitive in California's market.</p>
                     </div>
                     <div className="bg-muted/50 rounded-lg p-6">
-                      <h4 className="font-semibold text-foreground mb-2">🏦 Foreign National Financing</h4>
+                      <h4 className="font-semibold text-foreground mb-2">Foreign National Financing</h4>
                       <p>Some US and international banks offer "foreign national" mortgage programs. Expect:</p>
                       <ul className="list-disc list-inside mt-2 space-y-1 ml-4">
                         <li>Larger down payments (typically 30-40% or more)</li>
@@ -282,10 +290,10 @@ export default function InternationalBuyers() {
                     Large international wire transfers are standard for real estate purchases but must comply with US banking and anti-money-laundering (AML) regulations:
                   </p>
                   <ul className="space-y-2 text-muted-foreground">
-                    <li>🔐 <strong>Source of funds:</strong> Must be clearly documented and traceable</li>
-                    <li>⏳ <strong>Seasoned funds:</strong> Money should be in your account for a certain period (requirements vary by lender)</li>
-                    <li>🏛️ <strong>Bank compliance:</strong> Both sending and receiving banks will verify the transfer</li>
-                    <li>📋 <strong>Documentation:</strong> Keep all wire transfer receipts and confirmations</li>
+                    <li><strong>Source of funds:</strong> Must be clearly documented and traceable</li>
+                    <li><strong>Seasoned funds:</strong> Money should be in your account for a certain period (requirements vary by lender)</li>
+                    <li><strong>Bank compliance:</strong> Both sending and receiving banks will verify the transfer</li>
+                    <li><strong>Documentation:</strong> Keep all wire transfer receipts and confirmations</li>
                   </ul>
                 </div>
 
@@ -293,18 +301,25 @@ export default function InternationalBuyers() {
                   <h3 className="font-semibold text-xl mb-4 text-foreground">D) Practical Tips</h3>
                   <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-lg p-6">
                     <ul className="space-y-2 text-blue-900 dark:text-blue-200">
-                      <li>✓ Start conversations with lenders or private bankers early (3-6 months before purchase)</li>
-                      <li>✓ Ensure your name is consistent across all documents (passports, bank accounts, contracts)</li>
-                      <li>✓ Prepare backup documents: translations, apostilles, certifications as needed</li>
-                      <li>✓ Budget for currency exchange fees and timing (exchange rates fluctuate)</li>
-                      <li>✓ Work with your agent to understand California's typical timelines and requirements</li>
+                      {[
+                        "Start conversations with lenders or private bankers early (3-6 months before purchase)",
+                        "Ensure your name is consistent across all documents (passports, bank accounts, contracts)",
+                        "Prepare backup documents: translations, apostilles, certifications as needed",
+                        "Budget for currency exchange fees and timing (exchange rates fluctuate)",
+                        "Work with your agent to understand California's typical timelines and requirements"
+                      ].map((item, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
 
                 <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-lg p-6 mt-8">
                   <p className="text-sm font-semibold text-amber-900 dark:text-amber-200">
-                    💡 Always Remember
+                    Always Remember
                   </p>
                   <p className="text-sm text-amber-800 dark:text-amber-300 mt-2">
                     Discuss financing specifics with your lender, CPA, and legal advisor. This section provides general information only and does not constitute financial advice.
@@ -333,15 +348,15 @@ export default function InternationalBuyers() {
                   
                   <div className="space-y-4">
                     <div className="bg-muted/50 rounded-lg p-6">
-                      <h4 className="font-semibold text-foreground mb-2">👤 Personal Name</h4>
+                      <h4 className="font-semibold text-foreground mb-2">Personal Name</h4>
                       <p>Simplest approach. Property is in your individual name. May have estate and tax implications to discuss with advisors.</p>
                     </div>
                     <div className="bg-muted/50 rounded-lg p-6">
-                      <h4 className="font-semibold text-foreground mb-2">🏢 Entity (LLC, Corporation)</h4>
+                      <h4 className="font-semibold text-foreground mb-2">Entity (LLC, Corporation)</h4>
                       <p>Can offer privacy, liability protection, and potential tax benefits. Requires proper formation and ongoing compliance. Consult an attorney and CPA.</p>
                     </div>
                     <div className="bg-muted/50 rounded-lg p-6">
-                      <h4 className="font-semibold text-foreground mb-2">📜 Trust or Other Structures</h4>
+                      <h4 className="font-semibold text-foreground mb-2">Trust or Other Structures</h4>
                       <p>Used for estate planning, asset protection, and tax optimization. Requires professional guidance from legal and tax experts.</p>
                     </div>
                   </div>
@@ -394,7 +409,7 @@ export default function InternationalBuyers() {
                   <h3 className="font-semibold text-xl mb-4 text-foreground">E) Immigration Status</h3>
                   <div className="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-900 rounded-lg p-6">
                     <p className="font-semibold text-purple-900 dark:text-purple-200 mb-2">
-                      ⚠️ Important Clarification
+                      Important Clarification
                     </p>
                     <p className="text-purple-800 dark:text-purple-300">
                       <strong>Owning property in California does NOT automatically grant you a visa, green card, or right to work in the United States.</strong> Real estate ownership and immigration status are separate matters. If you're considering US residency, business investments (EB-5), or long-term stays, consult an immigration attorney.
@@ -404,7 +419,7 @@ export default function InternationalBuyers() {
 
                 <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-lg p-6 mt-8">
                   <p className="text-sm font-semibold text-amber-900 dark:text-amber-200">
-                    🔒 Legal & Tax Disclaimer
+                    Legal & Tax Disclaimer
                   </p>
                   <p className="text-sm text-amber-800 dark:text-amber-300 mt-2">
                     This section is for educational purposes only. <strong>Always consult a California real estate attorney, cross-border tax advisor (CPA), and immigration attorney before making any decisions.</strong> Laws change frequently and your situation is unique.
@@ -636,7 +651,7 @@ export default function InternationalBuyers() {
                     Even if you're just exploring, we welcome your questions. California real estate can feel complex from overseas, but with the right guidance, it's a smooth and rewarding journey. Let's start the conversation today.
                   </p>
                   <p className="mt-4 font-semibold text-[#d4af37]">
-                    🌏 Agent Kammer – Your California Concierge, Worldwide
+                    Agent Kammer – Your California Concierge, Worldwide
                   </p>
                 </div>
               </div>
