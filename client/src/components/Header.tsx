@@ -130,6 +130,22 @@ export function Header() {
                 California Market
               </span>
             </Link>
+            <Link href="/new-york-market" data-testid="link-mobile-new-york-market">
+              <span
+                className="text-base font-medium hover:text-primary cursor-pointer block"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                NYC Market
+              </span>
+            </Link>
+            <Link href="/nevada-market" data-testid="link-mobile-nevada-market">
+              <span
+                className="text-base font-medium hover:text-primary cursor-pointer block"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Nevada Market
+              </span>
+            </Link>
             <span
               className="text-base font-medium hover:text-primary cursor-pointer block"
               onClick={() => {
