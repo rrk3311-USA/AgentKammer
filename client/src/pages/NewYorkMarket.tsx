@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, TrendingDown, Home, DollarSign, Clock, MapPin, ArrowUpRight, Activity } from "lucide-react";
+import { MarketReportDownload } from "@/components/MarketReportDownload";
 
 export default function NewYorkMarket() {
   return (
@@ -519,6 +520,9 @@ export default function NewYorkMarket() {
             </Card>
           </div>
         </section>
+
+        {/* Download Market Report */}
+        <MarketReportDownload market="nyc" marketName="New York City" />
 
         {/* Footer Note */}
         <Card className="p-6 mt-8 bg-muted/30">

@@ -10,7 +10,11 @@ import { z } from "zod";
 import { writeFileSync, mkdirSync, existsSync } from "fs";
 import { join } from "path";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Resend client only if API key is available
+let resend: Resend | null = null;
+if (process.env.RESEND_API_KEY) {
+  resend = new Resend(process.env.RESEND_API_KEY);
+}
 
 const openai = new OpenAI({
   apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
@@ -386,6 +390,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/market-report", async (req, res) => {
     try {
+      if (!resend) {
+        return res.status(500).json({ error: "Email service not configured. Please contact support." });
+      }
+
       const { email, market } = marketReportSchema.parse(req.body);
 
       // Select market data
@@ -498,7 +506,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         attachments: [
           {
             filename: fileName,
-            content: pdfBuffer
+            content: Buffer.from(pdfBuffer)
           }
         ]
       });
