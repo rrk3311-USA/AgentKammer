@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home, Mic, MicOff, PlaneTakeoff } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import agentAvatar from "@assets/generated_images/Tuxedo_professional_on_phone_cd981587.png";
+import agentAvatar from "@assets/generated_images/Rear_view_tuxedo_concierge_character_77d0d156.png";
 import { playCrunchyChime, playButtonClick } from "@/lib/soundEffects";
 
 interface Message {
@@ -30,6 +30,7 @@ export function FloatingChatAssistant() {
   ]);
   const [activeTab, setActiveTab] = useState("chat");
   const [isListening, setIsListening] = useState(false);
+  const [isAgentSpeaking, setIsAgentSpeaking] = useState(false);
   const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
   const scrollRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
@@ -37,6 +38,18 @@ export function FloatingChatAssistant() {
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  useEffect(() => {
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage && lastMessage.sender === "agent") {
+      setIsAgentSpeaking(true);
+      const duration = Math.min(lastMessage.text.length * 50, 3000);
+      const timer = setTimeout(() => {
+        setIsAgentSpeaking(false);
+      }, duration);
+      return () => clearTimeout(timer);
     }
   }, [messages]);
 
@@ -216,8 +229,10 @@ export function FloatingChatAssistant() {
                 <img 
                   src={agentAvatar} 
                   alt="Agent Kammer" 
-                  className="w-full h-full object-cover scale-125"
-                  style={{ objectPosition: "center 30%" }}
+                  className={`w-full h-full object-cover scale-110 transition-transform duration-300 ${
+                    isAgentSpeaking ? 'animate-subtle-nod' : ''
+                  }`}
+                  style={{ objectPosition: "center 35%" }}
                 />
               </div>
               <div className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-[#0a1628] animate-pulse" />
