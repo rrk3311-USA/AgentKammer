@@ -411,7 +411,7 @@ export function FloatingChatAssistant() {
                   }}
                   disabled={!message.trim() || isListening}
                   data-testid="button-send-message"
-                  className="send-button-black relative w-12 h-12 rounded-full disabled:opacity-50 disabled:cursor-not-allowed group transition-all hover:scale-105 active:scale-95 border-0"
+                  className="!bg-[#000000] relative w-12 h-12 rounded-full disabled:opacity-50 disabled:cursor-not-allowed group transition-all hover:scale-105 active:scale-95 !border-0"
                   style={{
                     boxShadow: '0 0 0 1px #d4af37, 0 0 0 2px rgba(212, 175, 55, 0.3), 0 4px 12px rgba(212, 175, 55, 0.2)'
                   }}
