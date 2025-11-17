@@ -29,6 +29,8 @@ export const leads = pgTable("leads", {
   communicationStyle: text("communication_style"),
   conversationSummary: text("conversation_summary"),
   leadScore: integer("lead_score"),
+  marketInterest: text("market_interest"),
+  reportUrl: text("report_url"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

@@ -3,6 +3,14 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertLeadSchema } from "@shared/schema";
 import OpenAI from "openai";
+import puppeteer from "puppeteer";
+import { Resend } from "resend";
+import { generateMarketReportHTML, californiaMarketData, nycMarketData, nevadaMarketData } from "./pdf-template";
+import { z } from "zod";
+import { writeFileSync, mkdirSync, existsSync } from "fs";
+import { join } from "path";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const openai = new OpenAI({
   apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
@@ -367,6 +375,162 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Leads fetch error:", error);
       res.status(500).json({ error: "Failed to fetch leads" });
+    }
+  });
+
+  // Market Report PDF Generation and Email Delivery
+  const marketReportSchema = z.object({
+    email: z.string().email(),
+    market: z.enum(['california', 'nyc', 'nevada'])
+  });
+
+  app.post("/api/market-report", async (req, res) => {
+    try {
+      const { email, market } = marketReportSchema.parse(req.body);
+
+      // Select market data
+      let marketData;
+      switch (market) {
+        case 'california':
+          marketData = californiaMarketData;
+          break;
+        case 'nyc':
+          marketData = nycMarketData;
+          break;
+        case 'nevada':
+          marketData = nevadaMarketData;
+          break;
+      }
+
+      // Generate HTML
+      const html = generateMarketReportHTML(marketData);
+
+      // Create PDFs directory if it doesn't exist
+      const pdfDir = join(process.cwd(), 'pdfs');
+      if (!existsSync(pdfDir)) {
+        mkdirSync(pdfDir, { recursive: true });
+      }
+
+      // Generate PDF with Puppeteer
+      const browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+      });
+
+      const page = await browser.newPage();
+      await page.setContent(html, { waitUntil: 'networkidle0' });
+
+      const pdfBuffer = await page.pdf({
+        format: 'A4',
+        printBackground: true,
+        margin: { top: 0, bottom: 0, left: 0, right: 0 }
+      });
+
+      await browser.close();
+
+      // Save PDF temporarily
+      const fileName = `${market}-market-report-${Date.now()}.pdf`;
+      const filePath = join(pdfDir, fileName);
+      writeFileSync(filePath, pdfBuffer);
+
+      // Send email with Resend
+      const emailResult = await resend.emails.send({
+        from: 'Agent Kammer <onboarding@resend.dev>',
+        to: email,
+        subject: `${marketData.title} Luxury Market Report - Agent Kammer`,
+        html: `
+          <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto;">
+            <div style="background: linear-gradient(135deg, #0a1628 0%, #1a2638 100%); padding: 40px; text-align: center;">
+              <h1 style="color: #d4af37; font-size: 32px; margin: 0;">AGENT KAMMER</h1>
+              <p style="color: white; font-size: 18px; margin-top: 10px;">Your Luxury Agentic Real Estate Concierge</p>
+            </div>
+            
+            <div style="padding: 40px; background: white;">
+              <h2 style="color: #0a1628; font-size: 24px; margin-bottom: 20px;">Your ${marketData.title} Market Report is Ready</h2>
+              
+              <p style="color: #334155; font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
+                Thank you for your interest in the ${marketData.title} luxury real estate market. Your comprehensive market report is attached to this email.
+              </p>
+              
+              <p style="color: #334155; font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+                This report includes:
+              </p>
+              
+              <ul style="color: #334155; font-size: 15px; line-height: 1.8; margin-bottom: 30px;">
+                <li>Current market overview and key metrics</li>
+                <li>Highest yielding neighborhoods and counties</li>
+                <li>Top luxury markets with median prices</li>
+                <li>Growth projections through 2030</li>
+                <li>Expert market insights and analysis</li>
+              </ul>
+              
+              <div style="background: #f8fafc; border-left: 4px solid #d4af37; padding: 20px; margin-bottom: 30px;">
+                <p style="color: #0a1628; font-size: 15px; line-height: 1.6; margin: 0;">
+                  <strong>Ready to explore luxury properties?</strong><br>
+                  Our AI-powered platform continuously scans the market to find your perfect home. Visit our website to start your search.
+                </p>
+              </div>
+              
+              <div style="text-align: center; margin-bottom: 30px;">
+                <a href="${process.env.REPLIT_DOMAINS?.split(',')[0] || 'https://agentkammer.com'}" 
+                   style="display: inline-block; background: #d4af37; color: #0a1628; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 16px;">
+                  Explore Properties
+                </a>
+              </div>
+            </div>
+            
+            <div style="background: #0a1628; padding: 30px; text-align: center;">
+              <p style="color: #94a3b8; font-size: 14px; margin-bottom: 15px;">
+                Contact Us
+              </p>
+              <p style="color: white; font-size: 14px; margin: 5px 0;">
+                📧 contact@agentkammer.com
+              </p>
+              <p style="color: white; font-size: 14px; margin: 5px 0;">
+                📞 (929) 642-7553
+              </p>
+              <p style="color: #d4af37; font-size: 12px; margin-top: 20px;">
+                Your Luxury Agentic Real Estate Concierge
+              </p>
+            </div>
+          </div>
+        `,
+        attachments: [
+          {
+            filename: fileName,
+            content: pdfBuffer
+          }
+        ]
+      });
+
+      // Save lead to database
+      await storage.createLead({
+        email,
+        marketInterest: market,
+        reportUrl: filePath,
+        name: null,
+        phone: null,
+        timeline: null,
+        financing: null,
+        commitment: null,
+        motivation: null,
+        communicationStyle: null,
+        conversationSummary: null,
+        leadScore: null
+      });
+
+      res.json({
+        success: true,
+        message: `Market report sent to ${email}`,
+        emailId: emailResult.data?.id
+      });
+
+    } catch (error) {
+      console.error("Market report error:", error);
+      res.status(500).json({ 
+        error: "Failed to generate and send market report",
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
     }
   });
 
