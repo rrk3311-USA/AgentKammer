@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "wouter";
-import agiBrainImage from "@assets/generated_images/Grok-5_AGI_Technology_Visualization_7ad79357.png";
+import agiBrainImage from "@assets/4E047CC5-53C1-494D-A254-70438C8E913E_1763370002674.png";
 
 interface CodeSnippet {
   text: string;
