@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home, Mic, MicOff, Volume2, VolumeX } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import agentAvatar from "@assets/generated_images/Rear_view_tuxedo_concierge_character_77d0d156.png";
+import agentAvatar from "@assets/generated_images/Tuxedo_professional_on_phone_cd981587.png";
 import { playCrunchyChime, playButtonClick } from "@/lib/soundEffects";
 
 interface Message {
@@ -31,12 +31,9 @@ export function FloatingChatAssistant() {
   const [activeTab, setActiveTab] = useState("chat");
   const [isListening, setIsListening] = useState(false);
   const [isAgentSpeaking, setIsAgentSpeaking] = useState(false);
-  const [audioEnabled, setAudioEnabled] = useState(true);
-  const [isSpeaking, setIsSpeaking] = useState(false);
   const [sessionId] = useState(() => `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
   const scrollRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
-  const speechRef = useRef<SpeechSynthesisUtterance | null>(null);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -53,51 +50,9 @@ export function FloatingChatAssistant() {
         setIsAgentSpeaking(false);
       }, duration);
       
-      if (audioEnabled && 'speechSynthesis' in window) {
-        speakText(lastMessage.text);
-      }
-      
       return () => clearTimeout(timer);
     }
-  }, [messages, audioEnabled]);
-
-  const speakText = (text: string) => {
-    window.speechSynthesis.cancel();
-    
-    const cleanText = text.replace(/```LEAD_DATA[\s\S]*?```/g, '').trim();
-    
-    const utterance = new SpeechSynthesisUtterance(cleanText);
-    utterance.rate = 0.95;
-    utterance.pitch = 1.0;
-    utterance.volume = 1.0;
-    
-    const voices = window.speechSynthesis.getVoices();
-    const preferredVoice = voices.find(voice => 
-      voice.name.includes('Google US English') || 
-      voice.name.includes('Microsoft David') ||
-      voice.name.includes('Alex') ||
-      voice.lang.startsWith('en-')
-    );
-    if (preferredVoice) {
-      utterance.voice = preferredVoice;
-    }
-    
-    utterance.onstart = () => setIsSpeaking(true);
-    utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = () => setIsSpeaking(false);
-    
-    speechRef.current = utterance;
-    window.speechSynthesis.speak(utterance);
-  };
-
-  const toggleAudio = () => {
-    playButtonClick();
-    if (audioEnabled && isSpeaking) {
-      window.speechSynthesis.cancel();
-      setIsSpeaking(false);
-    }
-    setAudioEnabled(!audioEnabled);
-  };
+  }, [messages]);
 
   useEffect(() => {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
@@ -282,21 +237,6 @@ export function FloatingChatAssistant() {
                 />
               </div>
               <div className="absolute -top-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-[#0a1628] animate-pulse" />
-              
-              {isSpeaking && (
-                <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 flex items-end gap-0.5 h-4">
-                  {[0.3, 0.5, 0.8, 1, 0.8, 0.5, 0.3].map((height, i) => (
-                    <div
-                      key={i}
-                      className="w-0.5 bg-gradient-to-t from-[#d4af37] to-[#f4d03f] rounded-full animate-waveform"
-                      style={{
-                        height: `${height * 100}%`,
-                        animationDelay: `${i * 0.1}s`
-                      }}
-                    />
-                  ))}
-                </div>
-              )}
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -307,16 +247,6 @@ export function FloatingChatAssistant() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleAudio}
-              className="h-8 w-8 text-white hover:bg-white/10"
-              data-testid="button-toggle-audio"
-              title={audioEnabled ? "Disable voice" : "Enable voice"}
-            >
-              {audioEnabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
-            </Button>
             <Button
               variant="ghost"
               size="icon"
@@ -481,7 +411,11 @@ export function FloatingChatAssistant() {
                   }}
                   disabled={!message.trim() || isListening}
                   data-testid="button-send-message"
-                  className="relative w-12 h-12 rounded-full border-2 border-[#d4af37] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed group transition-all hover:scale-105 active:scale-95 !bg-black"
+                  className="relative w-12 h-12 rounded-full disabled:opacity-50 disabled:cursor-not-allowed group transition-all hover:scale-105 active:scale-95"
+                  style={{
+                    background: '#000000',
+                    boxShadow: '0 0 0 1px #d4af37, 0 0 0 2px rgba(212, 175, 55, 0.3), 0 4px 12px rgba(212, 175, 55, 0.2)'
+                  }}
                 >
                   <Send className="h-5 w-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:translate-x-[2px] group-hover:-translate-y-[2px] transition-transform" />
                 </button>
