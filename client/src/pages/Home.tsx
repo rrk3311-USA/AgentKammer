@@ -4,7 +4,7 @@ import { PropertyCard } from "@/components/PropertyCard";
 import { AgenticComputeSection } from "@/components/AgenticCompute/AgenticComputeSection";
 import { LuxuryMoodBoard } from "@/components/LuxuryMoodBoard";
 import { LuxuryBackground } from "@/components/LuxuryBackground";
-import { ListingReportSection } from "@/components/ListingReportSection";
+import { ProcessFlowSection } from "@/components/ProcessFlowSection";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -420,7 +420,7 @@ export default function Home() {
 
       <AgenticComputeSection />
 
-        <ListingReportSection />
+        <ProcessFlowSection />
 
         <LuxuryMoodBoard />
 
