@@ -1,5 +1,5 @@
 import { SiReplit, SiNvidia, SiClaude, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
-import { Brain, FileText } from "lucide-react";
+import { Brain, FileText, Globe } from "lucide-react";
 import { LiveInterestRate } from "./LiveInterestRate";
 import { Link } from "wouter";
 
@@ -15,10 +15,16 @@ export function Footer() {
               <p className="text-xs md:text-sm text-muted-foreground mb-3">
                 Your Luxury Agentic Real Estate Concierge
               </p>
-              <Link href="/document-portal" className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors">
-                <FileText className="h-4 w-4" />
-                <span>Strategic Document Portal</span>
-              </Link>
+              <div className="space-y-2">
+                <Link href="/document-portal" className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <FileText className="h-4 w-4" />
+                  <span>Strategic Document Portal</span>
+                </Link>
+                <Link href="/international-buyers" className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-international-buyers">
+                  <Globe className="h-4 w-4" />
+                  <span>International Buyers</span>
+                </Link>
+              </div>
             </div>
             <div>
               <h4 className="font-medium mb-3 text-sm">Services</h4>

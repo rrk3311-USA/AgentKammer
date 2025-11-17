@@ -404,25 +404,22 @@ export function FloatingChatAssistant() {
                   data-testid="input-chat-message"
                   disabled={isListening}
                 />
-                <div
+                <Button
+                  variant="luxury"
+                  size="icon"
                   onClick={() => {
-                    if (message.trim() && !isListening) {
-                      playCrunchyChime();
-                      handleSend();
-                    }
+                    playCrunchyChime();
+                    handleSend();
                   }}
+                  disabled={!message.trim() || isListening}
                   data-testid="button-send-message"
-                  className={`relative w-12 h-12 rounded-full flex items-center justify-center transition-all hover:scale-105 active:scale-95 ${
-                    !message.trim() || isListening ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
-                  }`}
+                  className="rounded-full"
                   style={{
-                    backgroundColor: '#000000',
-                    border: '2px solid #d4af37',
                     boxShadow: '0 0 15px rgba(212, 175, 55, 0.4)'
                   }}
                 >
-                  <Send className="h-5 w-5 text-white" strokeWidth={2.5} />
-                </div>
+                  <Send className="h-5 w-5" strokeWidth={2.5} />
+                </Button>
               </div>
               <p className="text-xs text-muted-foreground mt-2 text-center">
                 {isListening ? "🎤 Listening... Speak now" : "AI-powered real estate assistance"}
