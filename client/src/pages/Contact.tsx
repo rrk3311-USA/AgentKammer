@@ -160,6 +160,31 @@ export default function Contact() {
 
             {/* Right: Contact Form */}
             <div>
+              {/* AI Chat Reference */}
+              <Card className="p-6 bg-gradient-to-br from-[#d4af37]/5 to-[#d4af37]/10 border border-[#d4af37]/30 mb-6">
+                <div className="flex items-start gap-4">
+                  <div className="text-4xl">🎩</div>
+                  <div className="flex-1">
+                    <h4 className="font-semibold mb-2 text-[#d4af37]">Quick Questions?</h4>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Most questions can be answered instantly with our AI concierge chatbot! Get immediate assistance 24/7.
+                    </p>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black"
+                      onClick={() => {
+                        const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLElement;
+                        if (chatButton) chatButton.click();
+                      }}
+                      data-testid="button-open-chat-from-contact"
+                    >
+                      Chat with Agent K
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+
               <Card className="p-8 bg-gradient-to-br from-background to-muted/20 border-2 border-[#d4af37]/20">
                 <h3 className="font-serif text-2xl font-bold mb-2">Send Us a Message</h3>
                 <p className="text-muted-foreground mb-6">

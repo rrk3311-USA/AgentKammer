@@ -564,4 +564,9 @@
   .ticker-number {
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  .send-button-black {
+    background-color: #000000 !important;
+    background: #000000 !important;
+  }
 }
