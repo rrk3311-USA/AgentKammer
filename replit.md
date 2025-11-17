@@ -51,6 +51,8 @@ The platform adopts a visual-first approach with large imagery and sophisticated
 - **Wellness Shop**: E-commerce page for premium supplement products with cart functionality.
 - **Commercial Real Estate Investment**: Live-updating feed page for California commercial properties with investment metrics.
 - **Contact Page**: Beautiful landing page with photo collage of luxury bar/interior images, contact information cards, comprehensive contact form, and CTA section.
+- **California Market Dashboard**: Comprehensive data dashboard with Q1 2025 real market data including highest yielding counties (Riverside 9%, Santa Clara 9%, San Diego 5.2%), top luxury ZIP codes (Atherton $8.33M, Newport Beach $5.72M), 5-10 year growth projections ($338B US luxury market by 2030), appreciation rates by county, buyer/seller market indicators, and investment strategies. Features real-time metrics, regional performance comparisons, and hidden opportunity markets.
+- **Process Flow Section**: Visual representation of the platform's unique approach showing the 4-step journey: Client → Encrypted Trust Layer (Anonymous LLC structure for privacy) → Bidding Profile (leverage display with cash and buying power) → Brokers Compete (reverse auction model). Emphasizes how the platform flips traditional real estate power dynamics.
 - **Branding**: Professional luxury concierge avatar, gold accents, and multi-market focus on NYC, California, and Nevada.
 
 ## External Dependencies

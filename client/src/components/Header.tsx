@@ -122,6 +122,14 @@ export function Header() {
                 Document Portal
               </span>
             </Link>
+            <Link href="/california-market" data-testid="link-mobile-california-market">
+              <span
+                className="text-base font-medium hover:text-primary cursor-pointer block"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                California Market
+              </span>
+            </Link>
             <span
               className="text-base font-medium hover:text-primary cursor-pointer block"
               onClick={() => {

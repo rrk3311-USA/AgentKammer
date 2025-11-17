@@ -20,6 +20,7 @@ import LuxuryTravel from "@/pages/LuxuryTravel";
 import CommercialInvestment from "@/pages/CommercialInvestment";
 import Contact from "@/pages/Contact";
 import InternationalBuyers from "@/pages/InternationalBuyers";
+import CaliforniaMarket from "@/pages/CaliforniaMarket";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -37,6 +38,7 @@ function Router() {
       <Route path="/commercial-investment" component={CommercialInvestment} />
       <Route path="/contact" component={Contact} />
       <Route path="/international-buyers" component={InternationalBuyers} />
+      <Route path="/california-market" component={CaliforniaMarket} />
       <Route component={NotFound} />
     </Switch>
   );
