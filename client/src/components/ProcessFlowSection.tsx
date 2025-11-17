@@ -1,7 +1,113 @@
+import { useCallback, useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
-import { Shield, User, TrendingUp, Users, ArrowRight, Lock, DollarSign, Briefcase } from "lucide-react";
+import { Shield, User, TrendingUp, Users, Lock, DollarSign, Briefcase, ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import useEmblaCarousel from "embla-carousel-react";
 
 export function ProcessFlowSection() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: false, 
+    align: "center",
+    containScroll: "trimSnaps"
+  });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const scrollTo = useCallback((index: number) => {
+    if (emblaApi) emblaApi.scrollTo(index);
+  }, [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    setScrollSnaps(emblaApi.scrollSnapList());
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+  }, [emblaApi, onSelect]);
+
+  const cards = [
+    {
+      number: 1,
+      icon: User,
+      iconBg: "from-[#d4af37] to-[#f4d03f]",
+      iconColor: "text-black",
+      numberColor: "text-[#d4af37]",
+      title: "You",
+      description: "Start your luxury property search with complete privacy and control",
+      badge: null
+    },
+    {
+      number: 2,
+      icon: Shield,
+      iconBg: "from-purple-500 to-indigo-600",
+      iconColor: "text-white",
+      numberColor: "text-purple-300",
+      title: "Encrypted Trust Layer",
+      description: "Your identity protected through Anonymous LLC structure",
+      badge: {
+        icon: Lock,
+        text: "Blockchain Privacy",
+        color: "text-purple-200 bg-purple-500/30 border-purple-400/30"
+      }
+    },
+    {
+      number: 3,
+      icon: TrendingUp,
+      iconBg: "from-emerald-500 to-teal-600",
+      iconColor: "text-white",
+      numberColor: "text-emerald-300",
+      title: "Bidding Profile",
+      description: "We create your leverage profile with all buying power",
+      badge: null,
+      stats: [
+        { label: "Cash Available", value: "$2.5M", color: "text-emerald-200 bg-emerald-500/30" },
+        { label: "Buying Power", value: "$8.5M", color: "text-emerald-200 bg-emerald-500/30" }
+      ]
+    },
+    {
+      number: 4,
+      icon: Users,
+      iconBg: "from-[#d4af37] to-[#f4d03f]",
+      iconColor: "text-black",
+      numberColor: "text-[#d4af37]",
+      title: "Brokers Compete",
+      description: "Agents submit their best funding options and compete for you",
+      badge: {
+        icon: Briefcase,
+        text: "Reverse Auction",
+        color: "text-[#d4af37] bg-[#d4af37]/30 border-[#d4af37]/30"
+      }
+    },
+    {
+      number: 5,
+      icon: TrendingUp,
+      iconBg: "from-[#d4af37] to-[#f4d03f]",
+      iconColor: "text-black",
+      numberColor: "text-[#d4af37]",
+      title: "The Power is Yours",
+      description: "Stop chasing brokers. Let them compete for the privilege of representing you. Your privacy protected, your leverage maximized, your options unlimited.",
+      badge: null,
+      features: [
+        { icon: Shield, text: "Complete Privacy" },
+        { icon: DollarSign, text: "Maximum Leverage" },
+        { icon: TrendingUp, text: "Best Funding" }
+      ]
+    }
+  ];
+
   return (
     <section className="py-16 lg:py-20 bg-gradient-to-br from-[#0a1628] via-[#0f1f3d] to-[#0a1628] text-white relative overflow-hidden">
       {/* Background effects */}
@@ -12,7 +118,7 @@ export function ProcessFlowSection() {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4">
             How Our Process is <span className="text-[#d4af37]">Different</span>
           </h2>
@@ -21,224 +127,122 @@ export function ProcessFlowSection() {
           </p>
         </div>
 
-        {/* Process Flow - Desktop */}
-        <div className="hidden lg:flex items-center justify-between gap-6 mb-12">
-          {/* Step 1: Client */}
-          <div className="flex-1">
-            <Card className="bg-white/5 backdrop-blur-lg border-white/10 p-8 h-full hover-elevate">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#d4af37] to-[#f4d03f] flex items-center justify-center mb-6 shadow-xl">
-                  <User className="h-10 w-10 text-black" />
+        {/* Swipeable Carousel */}
+        <div className="relative">
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex gap-6 touch-pan-y">
+              {cards.map((card, index) => (
+                <div 
+                  key={index} 
+                  className="flex-[0_0_100%] min-w-0 md:flex-[0_0_80%] lg:flex-[0_0_60%]"
+                  data-testid={`card-process-step-${card.number}`}
+                >
+                  <Card 
+                    className="border-white/20 p-6 shadow-2xl backdrop-blur-lg"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
+                      color: 'white'
+                    }}
+                  >
+                    <div className="flex items-center gap-4">
+                      {/* Icon + Number */}
+                      <div className="flex flex-col items-center gap-2 shrink-0">
+                        <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${card.iconBg} flex items-center justify-center shadow-xl`}>
+                          <card.icon className={`h-8 w-8 ${card.iconColor}`} />
+                        </div>
+                        <div className={`text-3xl font-bold ${card.numberColor}`}>{card.number}</div>
+                      </div>
+
+                      {/* Title + Description + Extras */}
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-serif text-xl font-semibold mb-2 text-white">{card.title}</h3>
+                        <p className="text-white/90 text-sm leading-relaxed mb-3">
+                          {card.description}
+                        </p>
+
+                        {/* Badges, Stats, Features - All in horizontal row */}
+                        {card.badge && (
+                          <div className={`inline-flex items-center gap-1.5 text-xs ${card.badge.color} px-3 py-1.5 rounded-full border`}>
+                            <card.badge.icon className="h-3.5 w-3.5" />
+                            <span className="font-medium">{card.badge.text}</span>
+                          </div>
+                        )}
+
+                        {card.stats && (
+                          <div className="flex gap-3">
+                            {card.stats.map((stat, idx) => (
+                              <div key={idx} className={`flex items-center gap-2 text-xs ${stat.color} px-3 py-1.5 rounded-lg`}>
+                                <span className="font-medium">{stat.label}:</span>
+                                <span className="text-sm font-bold">{stat.value}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {card.features && (
+                          <div className="flex flex-wrap gap-2">
+                            {card.features.map((feature, idx) => (
+                              <div key={idx} className="inline-flex items-center gap-1.5 text-xs bg-white/20 text-white px-3 py-1.5 rounded-full border border-white/30">
+                                <feature.icon className="h-3.5 w-3.5 text-[#d4af37]" />
+                                <span className="font-medium">{feature.text}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </Card>
                 </div>
-                <div className="text-6xl font-bold text-[#d4af37] mb-2">1</div>
-                <h3 className="font-serif text-2xl font-semibold mb-3">You</h3>
-                <p className="text-white/70 text-sm">
-                  Start your luxury property search with complete privacy and control
-                </p>
-              </div>
-            </Card>
+              ))}
+            </div>
           </div>
 
-          {/* Arrow */}
-          <ArrowRight className="h-8 w-8 text-[#d4af37] shrink-0" />
+          {/* Navigation Arrows */}
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={scrollPrev}
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 border-white/20 text-white hover:bg-black/70 hover:text-white backdrop-blur-sm z-10"
+            disabled={selectedIndex === 0}
+            data-testid="button-carousel-prev"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </Button>
 
-          {/* Step 2: Encrypted Trust Layer */}
-          <div className="flex-1">
-            <Card className="bg-white/5 backdrop-blur-lg border-white/10 p-8 h-full hover-elevate">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center mb-6 shadow-xl">
-                  <Shield className="h-10 w-10 text-white" />
-                </div>
-                <div className="text-6xl font-bold text-purple-400 mb-2">2</div>
-                <h3 className="font-serif text-2xl font-semibold mb-3">Encrypted Trust Layer</h3>
-                <p className="text-white/70 text-sm mb-4">
-                  Your identity protected through NFT entity structure
-                </p>
-                <div className="flex items-center gap-2 text-xs text-purple-300 bg-purple-500/20 px-3 py-1.5 rounded-full">
-                  <Lock className="h-3 w-3" />
-                  <span>Blockchain Privacy</span>
-                </div>
-              </div>
-            </Card>
-          </div>
-
-          {/* Arrow */}
-          <ArrowRight className="h-8 w-8 text-[#d4af37] shrink-0" />
-
-          {/* Step 3: Bidding Profile */}
-          <div className="flex-1">
-            <Card className="bg-white/5 backdrop-blur-lg border-white/10 p-8 h-full hover-elevate">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mb-6 shadow-xl">
-                  <TrendingUp className="h-10 w-10 text-white" />
-                </div>
-                <div className="text-6xl font-bold text-emerald-400 mb-2">3</div>
-                <h3 className="font-serif text-2xl font-semibold mb-3">Bidding Profile</h3>
-                <p className="text-white/70 text-sm mb-4">
-                  We create your leverage profile with all buying power
-                </p>
-                <div className="space-y-2 w-full">
-                  <div className="flex items-center justify-between text-xs bg-emerald-500/20 px-3 py-1.5 rounded">
-                    <span className="text-white/60">Cash Available</span>
-                    <span className="text-emerald-300 font-semibold">$2.5M</span>
-                  </div>
-                  <div className="flex items-center justify-between text-xs bg-emerald-500/20 px-3 py-1.5 rounded">
-                    <span className="text-white/60">Buying Power</span>
-                    <span className="text-emerald-300 font-semibold">$8.5M</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div>
-
-          {/* Arrow */}
-          <ArrowRight className="h-8 w-8 text-[#d4af37] shrink-0" />
-
-          {/* Step 4: Brokers Compete */}
-          <div className="flex-1">
-            <Card className="bg-white/5 backdrop-blur-lg border-white/10 p-8 h-full hover-elevate">
-              <div className="flex flex-col items-center text-center">
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#d4af37] to-[#f4d03f] flex items-center justify-center mb-6 shadow-xl">
-                  <Users className="h-10 w-10 text-black" />
-                </div>
-                <div className="text-6xl font-bold text-[#d4af37] mb-2">4</div>
-                <h3 className="font-serif text-2xl font-semibold mb-3">Brokers Compete</h3>
-                <p className="text-white/70 text-sm mb-4">
-                  Agents submit their best funding options and compete for you
-                </p>
-                <div className="flex items-center gap-2 text-xs text-[#d4af37] bg-[#d4af37]/20 px-3 py-1.5 rounded-full">
-                  <Briefcase className="h-3 w-3" />
-                  <span>Reverse Auction</span>
-                </div>
-              </div>
-            </Card>
-          </div>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={scrollNext}
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 border-white/20 text-white hover:bg-black/70 hover:text-white backdrop-blur-sm z-10"
+            disabled={selectedIndex === scrollSnaps.length - 1}
+            data-testid="button-carousel-next"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </Button>
         </div>
 
-        {/* Process Flow - Mobile */}
-        <div className="lg:hidden space-y-6 mb-12">
-          {/* Step 1 */}
-          <div className="relative">
-            <Card className="bg-white/5 backdrop-blur-lg border-white/10 p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#d4af37] to-[#f4d03f] flex items-center justify-center shrink-0 shadow-xl">
-                  <User className="h-8 w-8 text-black" />
-                </div>
-                <div className="flex-1">
-                  <div className="text-4xl font-bold text-[#d4af37] mb-1">1</div>
-                  <h3 className="font-serif text-xl font-semibold mb-2">You</h3>
-                  <p className="text-white/70 text-sm">
-                    Start your luxury property search with complete privacy and control
-                  </p>
-                </div>
-              </div>
-            </Card>
-            <div className="flex justify-center my-3">
-              <ArrowRight className="h-6 w-6 text-[#d4af37] rotate-90" />
-            </div>
-          </div>
-
-          {/* Step 2 */}
-          <div className="relative">
-            <Card className="bg-white/5 backdrop-blur-lg border-white/10 p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shrink-0 shadow-xl">
-                  <Shield className="h-8 w-8 text-white" />
-                </div>
-                <div className="flex-1">
-                  <div className="text-4xl font-bold text-purple-400 mb-1">2</div>
-                  <h3 className="font-serif text-xl font-semibold mb-2">Encrypted Trust Layer</h3>
-                  <p className="text-white/70 text-sm mb-3">
-                    Your identity protected through NFT entity structure
-                  </p>
-                  <div className="flex items-center gap-2 text-xs text-purple-300 bg-purple-500/20 px-3 py-1.5 rounded-full w-fit">
-                    <Lock className="h-3 w-3" />
-                    <span>Blockchain Privacy</span>
-                  </div>
-                </div>
-              </div>
-            </Card>
-            <div className="flex justify-center my-3">
-              <ArrowRight className="h-6 w-6 text-[#d4af37] rotate-90" />
-            </div>
-          </div>
-
-          {/* Step 3 */}
-          <div className="relative">
-            <Card className="bg-white/5 backdrop-blur-lg border-white/10 p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shrink-0 shadow-xl">
-                  <TrendingUp className="h-8 w-8 text-white" />
-                </div>
-                <div className="flex-1">
-                  <div className="text-4xl font-bold text-emerald-400 mb-1">3</div>
-                  <h3 className="font-serif text-xl font-semibold mb-2">Bidding Profile</h3>
-                  <p className="text-white/70 text-sm mb-3">
-                    We create your leverage profile with all buying power
-                  </p>
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs bg-emerald-500/20 px-3 py-1.5 rounded">
-                      <span className="text-white/60">Cash Available</span>
-                      <span className="text-emerald-300 font-semibold">$2.5M</span>
-                    </div>
-                    <div className="flex items-center justify-between text-xs bg-emerald-500/20 px-3 py-1.5 rounded">
-                      <span className="text-white/60">Buying Power</span>
-                      <span className="text-emerald-300 font-semibold">$8.5M</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Card>
-            <div className="flex justify-center my-3">
-              <ArrowRight className="h-6 w-6 text-[#d4af37] rotate-90" />
-            </div>
-          </div>
-
-          {/* Step 4 */}
-          <Card className="bg-white/5 backdrop-blur-lg border-white/10 p-6">
-            <div className="flex items-start gap-4">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#d4af37] to-[#f4d03f] flex items-center justify-center shrink-0 shadow-xl">
-                <Users className="h-8 w-8 text-black" />
-              </div>
-              <div className="flex-1">
-                <div className="text-4xl font-bold text-[#d4af37] mb-1">4</div>
-                <h3 className="font-serif text-xl font-semibold mb-2">Brokers Compete</h3>
-                <p className="text-white/70 text-sm mb-3">
-                  Agents submit their best funding options and compete for you
-                </p>
-                <div className="flex items-center gap-2 text-xs text-[#d4af37] bg-[#d4af37]/20 px-3 py-1.5 rounded-full w-fit">
-                  <Briefcase className="h-3 w-3" />
-                  <span>Reverse Auction</span>
-                </div>
-              </div>
-            </div>
-          </Card>
+        {/* Dot Indicators */}
+        <div className="flex justify-center gap-2 mt-8">
+          {scrollSnaps.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => scrollTo(index)}
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                index === selectedIndex 
+                  ? 'bg-[#d4af37] w-8' 
+                  : 'bg-white/30 hover:bg-white/50'
+              }`}
+              data-testid={`button-dot-${index}`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="text-center">
-          <Card className="bg-gradient-to-br from-[#d4af37]/20 to-[#f4d03f]/20 backdrop-blur-lg border-[#d4af37]/30 p-8 max-w-3xl mx-auto">
-            <h3 className="font-serif text-2xl font-semibold mb-3">
-              The Power is Yours
-            </h3>
-            <p className="text-white/80 mb-6">
-              Stop chasing brokers. Let them compete for the privilege of representing you. Your privacy protected, your leverage maximized, your options unlimited.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <div className="flex items-center gap-2 text-sm bg-white/10 px-4 py-2 rounded-full">
-                <Shield className="h-4 w-4 text-[#d4af37]" />
-                <span>Complete Privacy</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm bg-white/10 px-4 py-2 rounded-full">
-                <DollarSign className="h-4 w-4 text-[#d4af37]" />
-                <span>Maximum Leverage</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm bg-white/10 px-4 py-2 rounded-full">
-                <TrendingUp className="h-4 w-4 text-[#d4af37]" />
-                <span>Best Funding</span>
-              </div>
-            </div>
-          </Card>
+        {/* Swipe Hint */}
+        <div className="text-center mt-6">
+          <p className="text-white/50 text-sm">
+            Swipe or use arrows to navigate
+          </p>
         </div>
       </div>
     </section>
