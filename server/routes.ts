@@ -382,6 +382,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Audiobook Sample Request Schema
+  const audiobookSampleSchema = z.object({
+    phone: z.string().min(10, "Please enter a valid WhatsApp number"),
+    audiobookTitle: z.string(),
+    name: z.string().optional(),
+  });
+
+  app.post("/api/audiobook-sample", async (req, res) => {
+    try {
+      const { phone, audiobookTitle, name } = audiobookSampleSchema.parse(req.body);
+      
+      const lead = await storage.createLead({
+        phone,
+        audiobookTitle,
+        name: name || null,
+        leadSource: "audiobook_sample",
+        conversationSummary: `Requested 15-minute sample for "${audiobookTitle}"`,
+        leadScore: 3,
+        communicationStyle: "Sample Request",
+      });
+      
+      console.log("[AUDIOBOOK] Created lead for sample request:", lead.id, audiobookTitle);
+      res.json({ success: true, leadId: lead.id });
+    } catch (error) {
+      console.error("Audiobook sample request error:", error);
+      res.status(400).json({ error: "Invalid request data" });
+    }
+  });
+
   // Market Report PDF Generation and Email Delivery
   const marketReportSchema = z.object({
     email: z.string().email(),

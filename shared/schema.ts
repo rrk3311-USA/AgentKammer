@@ -31,6 +31,8 @@ export const leads = pgTable("leads", {
   leadScore: integer("lead_score"),
   marketInterest: text("market_interest"),
   reportUrl: text("report_url"),
+  leadSource: text("lead_source"),
+  audiobookTitle: text("audiobook_title"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

@@ -68,6 +68,8 @@ export class MemStorage implements IStorage {
       leadScore: insertLead.leadScore ?? null,
       marketInterest: insertLead.marketInterest ?? null,
       reportUrl: insertLead.reportUrl ?? null,
+      leadSource: insertLead.leadSource ?? null,
+      audiobookTitle: insertLead.audiobookTitle ?? null,
       id,
       createdAt: new Date(),
     };
@@ -107,6 +109,7 @@ export class MemStorage implements IStorage {
       stage: insertItem.stage ?? "ideation",
       category: insertItem.category ?? null,
       tags: insertItem.tags ?? null,
+      publishingDestinations: insertItem.publishingDestinations ?? null,
       fileUrl: insertItem.fileUrl ?? null,
       notes: insertItem.notes ?? null,
       legalStatus: insertItem.legalStatus ?? null,
