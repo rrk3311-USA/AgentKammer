@@ -1,7 +1,14 @@
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Headphones, Play, Clock, Star, DollarSign } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+import { Headphones, Play, Clock, Star, DollarSign, MessageCircle } from "lucide-react";
 
 import bookCoverImage from "@assets/generated_images/3D_audiobook_cover_mockup_42c57384.png";
 import authorPhoto from "@assets/generated_images/Professional_avatar_headshot_fdbd53e6.png";
@@ -129,6 +136,54 @@ const featuredAudiobook = {
 };
 
 export default function Audiobooks() {
+  const [sampleDialogOpen, setSampleDialogOpen] = useState(false);
+  const [selectedAudiobook, setSelectedAudiobook] = useState<string>("");
+  const [whatsappNumber, setWhatsappNumber] = useState("");
+  const { toast } = useToast();
+
+  const sampleRequestMutation = useMutation({
+    mutationFn: async (data: { phone: string; audiobookTitle: string }) => {
+      const result = await apiRequest("POST", "/api/audiobook-sample", data);
+      return result;
+    },
+    onSuccess: () => {
+      toast({
+        title: "Sample Request Received!",
+        description: "We'll send your 15-minute sample to WhatsApp shortly. Check your messages!",
+      });
+      setSampleDialogOpen(false);
+      setWhatsappNumber("");
+      setSelectedAudiobook("");
+    },
+    onError: () => {
+      toast({
+        title: "Request Failed",
+        description: "Please check your WhatsApp number and try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleSampleRequest = (audiobookTitle: string) => {
+    setSelectedAudiobook(audiobookTitle);
+    setSampleDialogOpen(true);
+  };
+
+  const handleSubmitSampleRequest = () => {
+    if (!whatsappNumber.trim()) {
+      toast({
+        title: "WhatsApp Number Required",
+        description: "Please enter your WhatsApp number to receive the sample.",
+        variant: "destructive",
+      });
+      return;
+    }
+    sampleRequestMutation.mutate({
+      phone: whatsappNumber,
+      audiobookTitle: selectedAudiobook,
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -236,8 +291,22 @@ export default function Audiobooks() {
                   {featuredAudiobook.description}
                 </p>
 
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                  <div className="flex items-center gap-6">
+                <div className="space-y-4">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Button
+                      variant="outline"
+                      className="gap-2"
+                      style={{
+                        borderColor: '#d4af37',
+                        color: '#d4af37',
+                        background: 'rgba(212,175,55,0.1)',
+                      }}
+                      onClick={() => handleSampleRequest(featuredAudiobook.title)}
+                      data-testid="button-sample-featured"
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                      Get 15 Min Sample
+                    </Button>
                     <div className="flex items-center gap-2" style={{ color: 'rgba(212,175,55,0.9)' }}>
                       <Clock className="h-5 w-5" />
                       <span className="text-base font-medium">{featuredAudiobook.duration}</span>
@@ -249,7 +318,7 @@ export default function Audiobooks() {
                   </div>
                   <Button 
                     size="lg"
-                    className="gap-2 border-0"
+                    className="gap-2 border-0 w-full sm:w-auto"
                     style={{
                       background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
                       color: '#000',
@@ -359,8 +428,23 @@ export default function Audiobooks() {
                         {book.description}
                       </p>
 
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4">
+                      <div className="space-y-3">
+                        <div className="flex flex-wrap items-center gap-3">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="gap-2"
+                            style={{
+                              borderColor: '#d4af37',
+                              color: '#d4af37',
+                              background: 'rgba(212,175,55,0.1)',
+                            }}
+                            onClick={() => handleSampleRequest(book.title)}
+                            data-testid={`button-sample-${book.id}`}
+                          >
+                            <MessageCircle className="h-3 w-3" />
+                            Get 15 Min Sample
+                          </Button>
                           <div className="flex items-center gap-2 text-sm" style={{ color: 'rgba(212,175,55,0.8)' }}>
                             <Clock className="h-4 w-4" />
                             {book.duration}
@@ -371,7 +455,7 @@ export default function Audiobooks() {
                           </div>
                         </div>
                         <Button 
-                          className="gap-2 border-0"
+                          className="gap-2 border-0 w-full"
                           style={{
                             background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
                             color: '#000',
@@ -479,8 +563,23 @@ export default function Audiobooks() {
                         {book.description}
                       </p>
 
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4">
+                      <div className="space-y-3">
+                        <div className="flex flex-wrap items-center gap-3">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="gap-2"
+                            style={{
+                              borderColor: '#d4af37',
+                              color: '#d4af37',
+                              background: 'rgba(212,175,55,0.1)',
+                            }}
+                            onClick={() => handleSampleRequest(book.title)}
+                            data-testid={`button-sample-${book.id}`}
+                          >
+                            <MessageCircle className="h-3 w-3" />
+                            Get 15 Min Sample
+                          </Button>
                           <div className="flex items-center gap-2 text-sm" style={{ color: 'rgba(212,175,55,0.8)' }}>
                             <Clock className="h-4 w-4" />
                             {book.duration}
@@ -491,7 +590,7 @@ export default function Audiobooks() {
                           </div>
                         </div>
                         <Button 
-                          className="gap-2 border-0"
+                          className="gap-2 border-0 w-full"
                           style={{
                             background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
                             color: '#000',
@@ -528,6 +627,51 @@ export default function Audiobooks() {
           </Button>
         </div>
       </section>
+
+      {/* WhatsApp Sample Request Dialog */}
+      <Dialog open={sampleDialogOpen} onOpenChange={setSampleDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="font-serif text-2xl">Get Your Free 15-Minute Sample</DialogTitle>
+            <DialogDescription>
+              Enter your WhatsApp number to receive a free sample of "{selectedAudiobook}". We'll send it right to your phone!
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="whatsapp-number">WhatsApp Number</Label>
+              <Input
+                id="whatsapp-number"
+                type="tel"
+                placeholder="+1 (555) 123-4567"
+                value={whatsappNumber}
+                onChange={(e) => setWhatsappNumber(e.target.value)}
+                data-testid="input-whatsapp-number"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => setSampleDialogOpen(false)}
+              data-testid="button-cancel-sample"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSubmitSampleRequest}
+              disabled={sampleRequestMutation.isPending}
+              style={{
+                background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
+                color: '#000',
+              }}
+              data-testid="button-submit-sample"
+            >
+              {sampleRequestMutation.isPending ? "Sending..." : "Send Sample"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
