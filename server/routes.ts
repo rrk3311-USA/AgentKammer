@@ -566,6 +566,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/content", async (req, res) => {
     try {
       const validatedData = insertContentItemSchema.parse(req.body);
+      // Validate stage is one of the allowed values
+      const allowedStages = ["ideation", "legal", "ready", "completed"];
+      if (validatedData.stage && !allowedStages.includes(validatedData.stage)) {
+        res.status(400).json({ error: "Invalid stage value" });
+        return;
+      }
       const item = await storage.createContentItem(validatedData);
       res.json(item);
     } catch (error) {
@@ -580,14 +586,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.patch("/api/content/:id", async (req, res) => {
     try {
       const { id } = req.params;
-      const item = await storage.updateContentItem(id, req.body);
+      // Validate partial update data
+      const partialSchema = insertContentItemSchema.partial();
+      const validatedData = partialSchema.parse(req.body);
+      
+      // Validate stage if provided
+      const allowedStages = ["ideation", "legal", "ready", "completed"];
+      if (validatedData.stage && !allowedStages.includes(validatedData.stage)) {
+        res.status(400).json({ error: "Invalid stage value" });
+        return;
+      }
+      
+      const item = await storage.updateContentItem(id, validatedData);
       if (!item) {
         res.status(404).json({ error: "Content item not found" });
         return;
       }
       res.json(item);
     } catch (error) {
-      res.status(500).json({ error: "Failed to update content item" });
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid update data", details: error.errors });
+      } else {
+        res.status(500).json({ error: "Failed to update content item" });
+      }
     }
   });
 

@@ -135,7 +135,13 @@ export class MemStorage implements IStorage {
     const item = this.contentItems.get(id);
     if (!item) return undefined;
     
-    const updatedItem = { ...item, ...updates, updatedAt: new Date() };
+    // Safely merge updates, ensuring arrays don't become undefined
+    const updatedItem: ContentItem = {
+      ...item,
+      ...updates,
+      tags: updates.tags !== undefined ? updates.tags : item.tags,
+      updatedAt: new Date()
+    };
     this.contentItems.set(id, updatedItem);
     return updatedItem;
   }
@@ -201,8 +207,11 @@ export class DbStorage implements IStorage {
   }
 
   async updateContentItem(id: string, updates: Partial<InsertContentItem>): Promise<ContentItem | undefined> {
+    // Ensure tags array is preserved if not explicitly updated
+    const updateData: any = { ...updates, updatedAt: new Date() };
+    
     const result = await db.update(contentItems)
-      .set({ ...updates, updatedAt: new Date() })
+      .set(updateData)
       .where(eq(contentItems.id, id))
       .returning();
     return result[0];

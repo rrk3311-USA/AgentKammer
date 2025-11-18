@@ -1,0 +1,467 @@
+import { useState } from "react";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { queryClient, apiRequest } from "@/lib/queryClient";
+import type { ContentItem, InsertContentItem } from "@shared/schema";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { insertContentItemSchema } from "@shared/schema";
+import { z } from "zod";
+import { Film, Lightbulb, Scale, Clapperboard, Archive, Plus, Trash2, Edit, MoveRight } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+
+const stages = [
+  { id: "ideation", label: "Ideation", icon: Lightbulb, color: "bg-purple-500/20 text-purple-400 border-purple-500/30" },
+  { id: "legal", label: "Legal Review", icon: Scale, color: "bg-blue-500/20 text-blue-400 border-blue-500/30" },
+  { id: "ready", label: "Ready to Shoot", icon: Clapperboard, color: "bg-amber-500/20 text-amber-400 border-amber-500/30" },
+  { id: "completed", label: "Completed", icon: Archive, color: "bg-green-500/20 text-green-400 border-green-500/30" },
+];
+
+export default function ContentStudio() {
+  const [selectedStage, setSelectedStage] = useState("ideation");
+  const [editingItem, setEditingItem] = useState<ContentItem | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { toast } = useToast();
+
+  const { data: allItems = [], isLoading } = useQuery<ContentItem[]>({
+    queryKey: ["/api/content"],
+  });
+
+  const filteredItems = allItems.filter(item => item.stage === selectedStage);
+
+  const form = useForm<z.infer<typeof insertContentItemSchema>>({
+    resolver: zodResolver(insertContentItemSchema),
+    defaultValues: {
+      title: "",
+      description: "",
+      scriptContent: "",
+      stage: selectedStage,
+      category: "",
+      notes: "",
+      legalStatus: "",
+      fileUrl: "",
+      tags: [],
+    },
+  });
+
+  const createMutation = useMutation({
+    mutationFn: async (data: InsertContentItem) => {
+      return await apiRequest("POST", "/api/content", data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/content"] });
+      setIsDialogOpen(false);
+      form.reset();
+      toast({ title: "Content item created" });
+    },
+    onError: (error) => {
+      console.error("Create mutation error:", error);
+      toast({ 
+        title: "Error creating content item", 
+        description: error instanceof Error ? error.message : "Unknown error",
+        variant: "destructive"
+      });
+    },
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: async ({ id, data }: { id: string; data: Partial<InsertContentItem> }) => {
+      return await apiRequest("PATCH", `/api/content/${id}`, data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/content"] });
+      setEditingItem(null);
+      setIsDialogOpen(false);
+      toast({ title: "Content item updated" });
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      return await apiRequest("DELETE", `/api/content/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/content"] });
+      toast({ title: "Content item deleted" });
+    },
+  });
+
+  const moveToStage = (item: ContentItem, newStage: string) => {
+    updateMutation.mutate({ id: item.id, data: { stage: newStage } });
+  };
+
+  const onSubmit = (data: z.infer<typeof insertContentItemSchema>) => {
+    console.log("Form submitted with data:", data);
+    console.log("Form errors:", form.formState.errors);
+    if (editingItem) {
+      updateMutation.mutate({ id: editingItem.id, data });
+    } else {
+      createMutation.mutate(data);
+    }
+  };
+
+  const openEditDialog = (item: ContentItem) => {
+    setEditingItem(item);
+    form.reset({
+      title: item.title,
+      description: item.description || "",
+      scriptContent: item.scriptContent || "",
+      stage: item.stage,
+      category: item.category || "",
+      notes: item.notes || "",
+      legalStatus: item.legalStatus || "",
+      fileUrl: item.fileUrl || "",
+      tags: item.tags || [],
+    });
+    setIsDialogOpen(true);
+  };
+
+  const openNewDialog = () => {
+    setEditingItem(null);
+    form.reset({
+      title: "",
+      description: "",
+      scriptContent: "",
+      stage: selectedStage,
+      category: "",
+      notes: "",
+      legalStatus: "",
+      fileUrl: "",
+      tags: [],
+    });
+    setIsDialogOpen(true);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-30"></div>
+      
+      <div className="relative z-10 container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-2">
+            <Film className="w-8 h-8 text-[#d4af37]" />
+            <h1 className="text-4xl font-bold text-white">Content Studio</h1>
+          </div>
+          <p className="text-slate-400">Your creative command center for social media strategy</p>
+        </div>
+
+        <Tabs value={selectedStage} onValueChange={setSelectedStage} className="space-y-6">
+          <div className="flex items-center justify-between gap-4 flex-wrap">
+            <TabsList className="bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm p-1.5">
+              {stages.map((stage) => {
+                const Icon = stage.icon;
+                const count = allItems.filter(item => item.stage === stage.id).length;
+                return (
+                  <TabsTrigger
+                    key={stage.id}
+                    value={stage.id}
+                    className="data-[state=active]:bg-slate-700/50 gap-2"
+                    data-testid={`tab-stage-${stage.id}`}
+                  >
+                    <Icon className="w-4 h-4" />
+                    {stage.label}
+                    <Badge variant="secondary" className="ml-1 text-xs">
+                      {count}
+                    </Badge>
+                  </TabsTrigger>
+                );
+              })}
+            </TabsList>
+
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <Button 
+                  onClick={openNewDialog}
+                  className="bg-[#d4af37] hover:bg-[#c19b2f] text-black"
+                  data-testid="button-add-content"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  New Content
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-slate-900 border-slate-700">
+                <DialogHeader>
+                  <DialogTitle className="text-white">
+                    {editingItem ? "Edit Content Item" : "Create New Content Item"}
+                  </DialogTitle>
+                </DialogHeader>
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    <FormField
+                      control={form.control}
+                      name="title"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-slate-200">Title</FormLabel>
+                          <FormControl>
+                            <Input {...field} className="bg-slate-800 border-slate-700 text-white" data-testid="input-title" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="description"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-slate-200">Description</FormLabel>
+                          <FormControl>
+                            <Textarea {...field} value={field.value || ""} className="bg-slate-800 border-slate-700 text-white" data-testid="input-description" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="scriptContent"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-slate-200">Script Content</FormLabel>
+                          <FormControl>
+                            <Textarea {...field} value={field.value || ""} rows={6} className="bg-slate-800 border-slate-700 text-white font-mono" data-testid="input-script" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="stage"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-slate-200">Stage</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger className="bg-slate-800 border-slate-700 text-white" data-testid="select-stage">
+                                <SelectValue />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent className="bg-slate-800 border-slate-700">
+                              {stages.map(stage => (
+                                <SelectItem key={stage.id} value={stage.id} className="text-white">
+                                  {stage.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="category"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-slate-200">Category</FormLabel>
+                          <FormControl>
+                            <Input {...field} value={field.value || ""} className="bg-slate-800 border-slate-700 text-white" placeholder="e.g., Property Tour, Market Update" data-testid="input-category" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="notes"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-slate-200">Notes</FormLabel>
+                          <FormControl>
+                            <Textarea {...field} value={field.value || ""} className="bg-slate-800 border-slate-700 text-white" data-testid="input-notes" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="fileUrl"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-slate-200">File URL</FormLabel>
+                          <FormControl>
+                            <Input {...field} value={field.value || ""} className="bg-slate-800 border-slate-700 text-white" placeholder="Paste link to uploaded script/asset" data-testid="input-file-url" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {selectedStage === "legal" && (
+                      <FormField
+                        control={form.control}
+                        name="legalStatus"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-slate-200">Legal Status</FormLabel>
+                            <FormControl>
+                              <Textarea {...field} value={field.value || ""} className="bg-slate-800 border-slate-700 text-white" placeholder="Legal compliance notes..." data-testid="input-legal-status" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    )}
+
+                    <div className="flex justify-end gap-2">
+                      <Button 
+                        type="button" 
+                        variant="outline" 
+                        onClick={() => setIsDialogOpen(false)}
+                        className="border-slate-700 text-slate-300"
+                        data-testid="button-cancel"
+                      >
+                        Cancel
+                      </Button>
+                      <Button 
+                        type="submit" 
+                        className="bg-[#d4af37] hover:bg-[#c19b2f] text-black"
+                        disabled={createMutation.isPending || updateMutation.isPending}
+                        data-testid="button-submit"
+                      >
+                        {createMutation.isPending || updateMutation.isPending ? "Saving..." : "Save"}
+                      </Button>
+                    </div>
+                  </form>
+                </Form>
+              </DialogContent>
+            </Dialog>
+          </div>
+
+          {stages.map((stage) => (
+            <TabsContent key={stage.id} value={stage.id} className="space-y-4">
+              {isLoading ? (
+                <div className="text-center py-12 text-slate-400">Loading...</div>
+              ) : filteredItems.length === 0 ? (
+                <Card className="bg-slate-800/30 border-slate-700/50 backdrop-blur-sm">
+                  <CardContent className="py-12 text-center">
+                    <div className="text-slate-400">
+                      No content items in {stage.label} stage yet.
+                    </div>
+                  </CardContent>
+                </Card>
+              ) : (
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {filteredItems.map((item) => (
+                    <Card 
+                      key={item.id} 
+                      className="bg-slate-800/50 border-slate-700/50 backdrop-blur-sm hover-elevate group"
+                      data-testid={`card-content-${item.id}`}
+                    >
+                      <CardHeader className="flex flex-row items-start justify-between gap-2 space-y-0 pb-3">
+                        <div className="flex-1 min-w-0">
+                          <CardTitle className="text-lg text-white truncate">{item.title}</CardTitle>
+                          {item.category && (
+                            <Badge variant="secondary" className="mt-2">
+                              {item.category}
+                            </Badge>
+                          )}
+                        </div>
+                        <div className="flex gap-1">
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            onClick={() => openEditDialog(item)}
+                            className="h-8 w-8 text-slate-400 hover:text-white"
+                            data-testid={`button-edit-${item.id}`}
+                          >
+                            <Edit className="w-4 h-4" />
+                          </Button>
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            onClick={() => deleteMutation.mutate(item.id)}
+                            className="h-8 w-8 text-slate-400 hover:text-red-400"
+                            data-testid={`button-delete-${item.id}`}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </CardHeader>
+                      <CardContent className="space-y-3">
+                        {item.description && (
+                          <p className="text-sm text-slate-400 line-clamp-2">{item.description}</p>
+                        )}
+                        
+                        {item.scriptContent && (
+                          <div className="bg-slate-900/50 rounded p-2 border border-slate-700/30">
+                            <p className="text-xs text-slate-500 mb-1">Script</p>
+                            <p className="text-xs text-slate-300 font-mono line-clamp-3">{item.scriptContent}</p>
+                          </div>
+                        )}
+
+                        {item.notes && (
+                          <div className="bg-slate-900/50 rounded p-2 border border-slate-700/30">
+                            <p className="text-xs text-slate-500 mb-1">Notes</p>
+                            <p className="text-xs text-slate-300 line-clamp-2">{item.notes}</p>
+                          </div>
+                        )}
+
+                        {item.fileUrl && (
+                          <div className="bg-slate-900/50 rounded p-2 border border-slate-700/30">
+                            <p className="text-xs text-slate-500 mb-1">File</p>
+                            <a 
+                              href={item.fileUrl} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="text-xs text-[#d4af37] hover:underline truncate block"
+                            >
+                              View File
+                            </a>
+                          </div>
+                        )}
+
+                        {stage.id === "legal" && item.legalStatus && (
+                          <div className="bg-blue-900/20 rounded p-2 border border-blue-700/30">
+                            <p className="text-xs text-blue-400 mb-1">Legal Status</p>
+                            <p className="text-xs text-slate-300 line-clamp-2">{item.legalStatus}</p>
+                          </div>
+                        )}
+
+                        <div className="flex gap-2 pt-2 border-t border-slate-700/30">
+                          {stages
+                            .filter(s => s.id !== stage.id)
+                            .map(nextStage => (
+                              <Button
+                                key={nextStage.id}
+                                size="sm"
+                                variant="outline"
+                                onClick={() => moveToStage(item, nextStage.id)}
+                                className="flex-1 text-xs border-slate-700 text-slate-300"
+                                data-testid={`button-move-${nextStage.id}-${item.id}`}
+                              >
+                                <MoveRight className="w-3 h-3 mr-1" />
+                                {nextStage.label}
+                              </Button>
+                            ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </TabsContent>
+          ))}
+        </Tabs>
+      </div>
+    </div>
+  );
+}
