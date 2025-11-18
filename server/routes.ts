@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertLeadSchema } from "@shared/schema";
+import { insertLeadSchema, insertContentItemSchema } from "@shared/schema";
 import OpenAI from "openai";
 import puppeteer from "puppeteer";
 import { Resend } from "resend";
@@ -540,6 +540,68 @@ export async function registerRoutes(app: Express): Promise<Server> {
         error: "Failed to generate and send market report",
         details: error instanceof Error ? error.message : 'Unknown error'
       });
+    }
+  });
+
+  // Content Studio API Routes
+  app.get("/api/content", async (req, res) => {
+    try {
+      const items = await storage.getAllContentItems();
+      res.json(items);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch content items" });
+    }
+  });
+
+  app.get("/api/content/stage/:stage", async (req, res) => {
+    try {
+      const { stage } = req.params;
+      const items = await storage.getContentItemsByStage(stage);
+      res.json(items);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch content items by stage" });
+    }
+  });
+
+  app.post("/api/content", async (req, res) => {
+    try {
+      const validatedData = insertContentItemSchema.parse(req.body);
+      const item = await storage.createContentItem(validatedData);
+      res.json(item);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid content data", details: error.errors });
+      } else {
+        res.status(500).json({ error: "Failed to create content item" });
+      }
+    }
+  });
+
+  app.patch("/api/content/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const item = await storage.updateContentItem(id, req.body);
+      if (!item) {
+        res.status(404).json({ error: "Content item not found" });
+        return;
+      }
+      res.json(item);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to update content item" });
+    }
+  });
+
+  app.delete("/api/content/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const success = await storage.deleteContentItem(id);
+      if (!success) {
+        res.status(404).json({ error: "Content item not found" });
+        return;
+      }
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to delete content item" });
     }
   });
 
