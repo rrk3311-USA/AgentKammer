@@ -16,7 +16,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { insertContentItemSchema } from "@shared/schema";
 import { z } from "zod";
-import { Film, Lightbulb, Scale, Clapperboard, Archive, Plus, Trash2, Edit, MoveRight } from "lucide-react";
+import { Film, Lightbulb, Scale, Clapperboard, Archive, Plus, Trash2, Edit, MoveRight, Youtube, Instagram, Linkedin } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 
 const stages = [
@@ -24,6 +25,12 @@ const stages = [
   { id: "legal", label: "Legal Review", icon: Scale, color: "bg-blue-500/20 text-blue-400 border-blue-500/30" },
   { id: "ready", label: "Ready to Shoot", icon: Clapperboard, color: "bg-amber-500/20 text-amber-400 border-amber-500/30" },
   { id: "completed", label: "Completed", icon: Archive, color: "bg-green-500/20 text-green-400 border-green-500/30" },
+];
+
+const publishingPlatforms = [
+  { id: "youtube", label: "YouTube", icon: Youtube, color: "bg-red-500/20 text-red-400" },
+  { id: "instagram", label: "Instagram Reels", icon: Instagram, color: "bg-pink-500/20 text-pink-400" },
+  { id: "linkedin", label: "LinkedIn", icon: Linkedin, color: "bg-blue-500/20 text-blue-400" },
 ];
 
 export default function ContentStudio() {
@@ -50,6 +57,7 @@ export default function ContentStudio() {
       legalStatus: "",
       fileUrl: "",
       tags: [],
+      publishingDestinations: [],
     },
   });
 
@@ -121,6 +129,7 @@ export default function ContentStudio() {
       legalStatus: item.legalStatus || "",
       fileUrl: item.fileUrl || "",
       tags: item.tags || [],
+      publishingDestinations: item.publishingDestinations || [],
     });
     setIsDialogOpen(true);
   };
@@ -137,6 +146,7 @@ export default function ContentStudio() {
       legalStatus: "",
       fileUrl: "",
       tags: [],
+      publishingDestinations: [],
     });
     setIsDialogOpen(true);
   };
@@ -303,6 +313,43 @@ export default function ContentStudio() {
                           <FormControl>
                             <Input {...field} value={field.value || ""} className="bg-slate-500/50 border-slate-400 text-white" placeholder="Paste link to uploaded script/asset" data-testid="input-file-url" />
                           </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="publishingDestinations"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-slate-100">Publishing Destinations</FormLabel>
+                          <div className="space-y-3 mt-2">
+                            {publishingPlatforms.map((platform) => {
+                              const Icon = platform.icon;
+                              const isChecked = field.value?.includes(platform.id) || false;
+                              return (
+                                <div key={platform.id} className="flex items-center gap-3">
+                                  <Checkbox
+                                    checked={isChecked}
+                                    onCheckedChange={(checked) => {
+                                      const currentValue = field.value || [];
+                                      if (checked) {
+                                        field.onChange([...currentValue, platform.id]);
+                                      } else {
+                                        field.onChange(currentValue.filter((v: string) => v !== platform.id));
+                                      }
+                                    }}
+                                    data-testid={`checkbox-${platform.id}`}
+                                  />
+                                  <div className="flex items-center gap-2">
+                                    <Icon className="w-4 h-4 text-slate-300" />
+                                    <span className="text-sm text-slate-200">{platform.label}</span>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
                           <FormMessage />
                         </FormItem>
                       )}
