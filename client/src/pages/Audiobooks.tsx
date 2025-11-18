@@ -1,48 +1,98 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Headphones, Play, Clock, Star } from "lucide-react";
+import { Headphones, Play, Clock, Star, Sparkles, Heart, TrendingUp, Zap } from "lucide-react";
 
 const audiobooks = [
+  // Personal Development & Transformation
   {
     id: 1,
+    title: "The Wealth Magnet",
+    author: "Dr. Sophia Abundance",
+    duration: "10h 15m",
+    rating: 4.9,
+    description: "Unlock the universal principles of wealth attraction. Transform your money mindset and magnetize prosperity through proven spiritual and practical strategies.",
+    category: "Personal Development",
+    icon: Sparkles,
+    accentColor: "#d4af37"
+  },
+  {
+    id: 2,
+    title: "Sacred Partnership",
+    author: "Dr. Michael Zukova",
+    duration: "9h 30m",
+    rating: 4.8,
+    description: "Create the perfect relationship through spiritual alignment and authentic connection. Inspired by timeless wisdom on conscious partnerships and soul-centered love.",
+    category: "Personal Development",
+    icon: Heart,
+    accentColor: "#d4af37"
+  },
+  {
+    id: 3,
+    title: "Quantum Manifestation",
+    author: "Elena Consciousness",
+    duration: "8h 20m",
+    rating: 4.9,
+    description: "Harness quantum principles to manifest your deepest desires. Bridge science and spirituality to create your ideal reality.",
+    category: "Personal Development",
+    icon: Zap,
+    accentColor: "#d4af37"
+  },
+  {
+    id: 4,
+    title: "The Power Within",
+    author: "James Transformational",
+    duration: "11h 45m",
+    rating: 4.7,
+    description: "Discover your infinite potential and break through limiting beliefs. A comprehensive guide to personal transformation and self-mastery.",
+    category: "Personal Development",
+    icon: TrendingUp,
+    accentColor: "#d4af37"
+  },
+  // Real Estate & Wealth Building
+  {
+    id: 5,
     title: "The Art of Luxury Living",
     author: "Victoria Sterling",
     duration: "8h 45m",
     rating: 4.8,
     description: "Master the principles of elevated living and refined taste in modern luxury real estate.",
-    gradient: "from-amber-600 via-yellow-500 to-amber-400",
-    textColor: "text-white"
+    category: "Real Estate",
+    icon: Sparkles,
+    accentColor: "#d4af37"
   },
   {
-    id: 2,
+    id: 6,
     title: "Wealth Architecture",
     author: "Marcus Chen",
     duration: "6h 30m",
     rating: 4.9,
     description: "Strategic insights into building generational wealth through premium property investments.",
-    gradient: "from-blue-900 via-blue-700 to-blue-500",
-    textColor: "text-white"
+    category: "Real Estate",
+    icon: TrendingUp,
+    accentColor: "#d4af37"
   },
   {
-    id: 3,
+    id: 7,
     title: "Negotiation Mastery",
     author: "Diana Rothschild",
     duration: "7h 15m",
     rating: 4.7,
     description: "Elite strategies for winning in high-stakes real estate negotiations and closing power deals.",
-    gradient: "from-purple-900 via-purple-600 to-pink-500",
-    textColor: "text-white"
+    category: "Real Estate",
+    icon: Zap,
+    accentColor: "#d4af37"
   },
   {
-    id: 4,
+    id: 8,
     title: "Global Property Intelligence",
     author: "Alexander Kensington",
     duration: "9h 20m",
     rating: 4.9,
     description: "Navigate international luxury markets from NYC to California to Nevada and beyond.",
-    gradient: "from-emerald-800 via-teal-600 to-cyan-500",
-    textColor: "text-white"
+    category: "Real Estate",
+    icon: Sparkles,
+    accentColor: "#d4af37"
   }
 ];
 
@@ -69,72 +119,222 @@ export default function Audiobooks() {
       {/* Audiobooks Grid */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {audiobooks.map((book) => (
-              <Card 
-                key={book.id}
-                className="overflow-hidden hover-elevate transition-all duration-300"
-                data-testid={`card-audiobook-${book.id}`}
-              >
-                <div className="flex flex-col md:flex-row gap-0">
-                  {/* Book Cover */}
-                  <div 
-                    className={`w-full md:w-48 h-64 md:h-auto bg-gradient-to-br ${book.gradient} flex flex-col items-center justify-center p-8 relative overflow-hidden`}
-                  >
-                    <div className="absolute inset-0 bg-black/10" />
-                    <div className="relative z-10 text-center">
-                      <Headphones className="h-16 w-16 text-white/30 mb-4 mx-auto" />
-                      <div className={`font-serif text-2xl font-bold ${book.textColor} mb-2 leading-tight`}>
-                        {book.title}
-                      </div>
-                      <div className={`text-sm ${book.textColor} opacity-80 font-medium`}>
-                        {book.author}
-                      </div>
-                    </div>
-                    
-                    {/* Decorative Elements */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16" />
-                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full -ml-12 -mb-12" />
-                  </div>
-
-                  {/* Book Details */}
-                  <div className="flex-1 p-6 flex flex-col">
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="font-serif text-2xl font-semibold mb-1">
+          {/* Personal Development Section */}
+          <div className="mb-16">
+            <h2 className="font-serif text-3xl font-bold mb-2 text-center">Personal Transformation</h2>
+            <p className="text-muted-foreground text-center mb-8">Unlock your infinite potential and manifest your desires</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {audiobooks.filter(book => book.category === "Personal Development").map((book) => (
+                <Card 
+                  key={book.id}
+                  className="overflow-hidden hover-elevate transition-all duration-300 border-0"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(0,0,0,0.98) 100%)',
+                    backdropFilter: 'blur(20px)',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)'
+                  }}
+                  data-testid={`card-audiobook-${book.id}`}
+                >
+                  <div className="flex flex-col md:flex-row gap-0">
+                    {/* Book Cover - Frosted Glass Effect */}
+                    <div 
+                      className="w-full md:w-56 h-72 md:h-auto flex flex-col items-center justify-center p-8 relative overflow-hidden"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(212,175,55,0.15) 50%, rgba(255,255,255,0.05) 100%)',
+                        backdropFilter: 'blur(10px)',
+                        borderRight: '1px solid rgba(212,175,55,0.2)'
+                      }}
+                    >
+                      {/* Glossy overlay */}
+                      <div 
+                        className="absolute inset-0"
+                        style={{
+                          background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%)',
+                          pointerEvents: 'none'
+                        }}
+                      />
+                      
+                      {/* Gold accent lines */}
+                      <div className="absolute top-0 left-0 w-full h-0.5" style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }} />
+                      <div className="absolute bottom-0 left-0 w-full h-0.5" style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }} />
+                      
+                      <div className="relative z-10 text-center">
+                        <div className="mb-4 mx-auto w-20 h-20 rounded-full flex items-center justify-center" style={{ background: 'rgba(212,175,55,0.2)', border: '2px solid rgba(212,175,55,0.5)' }}>
+                          <book.icon className="h-10 w-10" style={{ color: book.accentColor }} />
+                        </div>
+                        <div className="font-serif text-2xl font-bold mb-2 leading-tight" style={{ color: '#d4af37' }}>
                           {book.title}
-                        </h3>
-                        <p className="text-muted-foreground text-sm">
-                          by {book.author}
-                        </p>
+                        </div>
+                        <div className="text-sm font-medium" style={{ color: 'rgba(212,175,55,0.8)' }}>
+                          {book.author}
+                        </div>
                       </div>
-                      <Badge variant="secondary" className="shrink-0">
-                        <Star className="h-3 w-3 mr-1 fill-[#d4af37] text-[#d4af37]" />
-                        {book.rating}
-                      </Badge>
+                      
+                      {/* Decorative Elements */}
+                      <div className="absolute top-0 right-0 w-24 h-24 rounded-full -mr-12 -mt-12" style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.15), transparent)' }} />
+                      <div className="absolute bottom-0 left-0 w-32 h-32 rounded-full -ml-16 -mb-16" style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.1), transparent)' }} />
                     </div>
 
-                    <p className="text-muted-foreground leading-relaxed mb-6 flex-1">
-                      {book.description}
-                    </p>
-
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Clock className="h-4 w-4" />
-                        {book.duration}
+                    {/* Book Details */}
+                    <div className="flex-1 p-6 flex flex-col">
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <h3 className="font-serif text-2xl font-semibold mb-1 text-white">
+                            {book.title}
+                          </h3>
+                          <p className="text-sm" style={{ color: 'rgba(212,175,55,0.9)' }}>
+                            by {book.author}
+                          </p>
+                        </div>
+                        <Badge 
+                          className="shrink-0 border-0" 
+                          style={{ 
+                            background: 'rgba(212,175,55,0.2)', 
+                            color: '#d4af37',
+                            backdropFilter: 'blur(10px)'
+                          }}
+                        >
+                          <Star className="h-3 w-3 mr-1 fill-[#d4af37] text-[#d4af37]" />
+                          {book.rating}
+                        </Badge>
                       </div>
-                      <Button 
-                        className="gap-2"
-                        data-testid={`button-play-${book.id}`}
-                      >
-                        <Play className="h-4 w-4" />
-                        Listen Now
-                      </Button>
+
+                      <p className="leading-relaxed mb-6 flex-1" style={{ color: 'rgba(255,255,255,0.8)' }}>
+                        {book.description}
+                      </p>
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-sm" style={{ color: 'rgba(212,175,55,0.8)' }}>
+                          <Clock className="h-4 w-4" />
+                          {book.duration}
+                        </div>
+                        <Button 
+                          className="gap-2 border-0"
+                          style={{
+                            background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
+                            color: '#000',
+                            fontWeight: 600
+                          }}
+                          data-testid={`button-play-${book.id}`}
+                        >
+                          <Play className="h-4 w-4" />
+                          Listen Now
+                        </Button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Card>
-            ))}
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Real Estate Section */}
+          <div>
+            <h2 className="font-serif text-3xl font-bold mb-2 text-center">Luxury Real Estate Mastery</h2>
+            <p className="text-muted-foreground text-center mb-8">Elite strategies for luxury property success</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {audiobooks.filter(book => book.category === "Real Estate").map((book) => (
+                <Card 
+                  key={book.id}
+                  className="overflow-hidden hover-elevate transition-all duration-300 border-0"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(0,0,0,0.98) 100%)',
+                    backdropFilter: 'blur(20px)',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)'
+                  }}
+                  data-testid={`card-audiobook-${book.id}`}
+                >
+                  <div className="flex flex-col md:flex-row gap-0">
+                    {/* Book Cover - Frosted Glass Effect */}
+                    <div 
+                      className="w-full md:w-56 h-72 md:h-auto flex flex-col items-center justify-center p-8 relative overflow-hidden"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(212,175,55,0.15) 50%, rgba(255,255,255,0.05) 100%)',
+                        backdropFilter: 'blur(10px)',
+                        borderRight: '1px solid rgba(212,175,55,0.2)'
+                      }}
+                    >
+                      {/* Glossy overlay */}
+                      <div 
+                        className="absolute inset-0"
+                        style={{
+                          background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%)',
+                          pointerEvents: 'none'
+                        }}
+                      />
+                      
+                      {/* Gold accent lines */}
+                      <div className="absolute top-0 left-0 w-full h-0.5" style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }} />
+                      <div className="absolute bottom-0 left-0 w-full h-0.5" style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }} />
+                      
+                      <div className="relative z-10 text-center">
+                        <div className="mb-4 mx-auto w-20 h-20 rounded-full flex items-center justify-center" style={{ background: 'rgba(212,175,55,0.2)', border: '2px solid rgba(212,175,55,0.5)' }}>
+                          <book.icon className="h-10 w-10" style={{ color: book.accentColor }} />
+                        </div>
+                        <div className="font-serif text-2xl font-bold mb-2 leading-tight" style={{ color: '#d4af37' }}>
+                          {book.title}
+                        </div>
+                        <div className="text-sm font-medium" style={{ color: 'rgba(212,175,55,0.8)' }}>
+                          {book.author}
+                        </div>
+                      </div>
+                      
+                      {/* Decorative Elements */}
+                      <div className="absolute top-0 right-0 w-24 h-24 rounded-full -mr-12 -mt-12" style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.15), transparent)' }} />
+                      <div className="absolute bottom-0 left-0 w-32 h-32 rounded-full -ml-16 -mb-16" style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.1), transparent)' }} />
+                    </div>
+
+                    {/* Book Details */}
+                    <div className="flex-1 p-6 flex flex-col">
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <h3 className="font-serif text-2xl font-semibold mb-1 text-white">
+                            {book.title}
+                          </h3>
+                          <p className="text-sm" style={{ color: 'rgba(212,175,55,0.9)' }}>
+                            by {book.author}
+                          </p>
+                        </div>
+                        <Badge 
+                          className="shrink-0 border-0" 
+                          style={{ 
+                            background: 'rgba(212,175,55,0.2)', 
+                            color: '#d4af37',
+                            backdropFilter: 'blur(10px)'
+                          }}
+                        >
+                          <Star className="h-3 w-3 mr-1 fill-[#d4af37] text-[#d4af37]" />
+                          {book.rating}
+                        </Badge>
+                      </div>
+
+                      <p className="leading-relaxed mb-6 flex-1" style={{ color: 'rgba(255,255,255,0.8)' }}>
+                        {book.description}
+                      </p>
+
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-sm" style={{ color: 'rgba(212,175,55,0.8)' }}>
+                          <Clock className="h-4 w-4" />
+                          {book.duration}
+                        </div>
+                        <Button 
+                          className="gap-2 border-0"
+                          style={{
+                            background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
+                            color: '#000',
+                            fontWeight: 600
+                          }}
+                          data-testid={`button-play-${book.id}`}
+                        >
+                          <Play className="h-4 w-4" />
+                          Listen Now
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
