@@ -25,6 +25,7 @@ import NewYorkMarket from "@/pages/NewYorkMarket";
 import NevadaMarket from "@/pages/NevadaMarket";
 import Audiobooks from "@/pages/Audiobooks";
 import Ecourses from "@/pages/Ecourses";
+import Downloads from "@/pages/Downloads";
 import ContentStudio from "@/pages/ContentStudio";
 import NotFound from "@/pages/not-found";
 
@@ -48,6 +49,7 @@ function Router() {
       <Route path="/nevada-market" component={NevadaMarket} />
       <Route path="/audiobooks" component={Audiobooks} />
       <Route path="/ecourses" component={Ecourses} />
+      <Route path="/downloads" component={Downloads} />
       <Route path="/studio" component={ContentStudio} />
       <Route component={NotFound} />
     </Switch>

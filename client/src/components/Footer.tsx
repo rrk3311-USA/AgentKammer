@@ -1,5 +1,5 @@
 import { SiReplit, SiNvidia, SiClaude, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
-import { Brain, FileText, Globe, Headphones, GraduationCap } from "lucide-react";
+import { Brain, FileText, Globe, Headphones, GraduationCap, Download } from "lucide-react";
 import { LiveInterestRate } from "./LiveInterestRate";
 import { Link } from "wouter";
 
@@ -31,6 +31,10 @@ export function Footer() {
                 <Link href="/ecourses" className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-ecourses">
                   <GraduationCap className="h-4 w-4" />
                   <span>Ecourses</span>
+                </Link>
+                <Link href="/downloads" className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-downloads">
+                  <Download className="h-4 w-4" />
+                  <span>Downloads</span>
                 </Link>
               </div>
             </div>
