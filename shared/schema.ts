@@ -41,3 +41,27 @@ export const insertLeadSchema = createInsertSchema(leads).omit({
 
 export type InsertLead = z.infer<typeof insertLeadSchema>;
 export type Lead = typeof leads.$inferSelect;
+
+export const contentItems = pgTable("content_items", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  title: text("title").notNull(),
+  description: text("description"),
+  scriptContent: text("script_content"),
+  stage: text("stage").notNull().default("ideation"),
+  category: text("category"),
+  tags: text("tags").array(),
+  fileUrl: text("file_url"),
+  notes: text("notes"),
+  legalStatus: text("legal_status"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const insertContentItemSchema = createInsertSchema(contentItems).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type InsertContentItem = z.infer<typeof insertContentItemSchema>;
+export type ContentItem = typeof contentItems.$inferSelect;
