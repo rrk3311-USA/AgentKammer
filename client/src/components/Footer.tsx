@@ -1,5 +1,5 @@
 import { SiReplit, SiNvidia, SiClaude, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
-import { Brain, FileText, Globe } from "lucide-react";
+import { Brain, FileText, Globe, Headphones } from "lucide-react";
 import { LiveInterestRate } from "./LiveInterestRate";
 import { Link } from "wouter";
 
@@ -23,6 +23,10 @@ export function Footer() {
                 <Link href="/international-buyers" className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-international-buyers">
                   <Globe className="h-4 w-4" />
                   <span>International Buyers</span>
+                </Link>
+                <Link href="/audiobooks" className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-audiobooks">
+                  <Headphones className="h-4 w-4" />
+                  <span>Audiobooks</span>
                 </Link>
               </div>
             </div>
