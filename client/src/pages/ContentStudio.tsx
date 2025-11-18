@@ -486,6 +486,29 @@ export default function ContentStudio() {
                           </div>
                         )}
 
+                        {item.publishingDestinations && item.publishingDestinations.length > 0 && (
+                          <div className="space-y-2">
+                            <p className="text-xs text-slate-300">Publishing To:</p>
+                            <div className="flex flex-wrap gap-2">
+                              {item.publishingDestinations.map((dest) => {
+                                const platform = publishingPlatforms.find(p => p.id === dest);
+                                if (!platform) return null;
+                                const Icon = platform.icon;
+                                return (
+                                  <Badge 
+                                    key={dest} 
+                                    className={`${platform.color} border-0 flex items-center gap-1`}
+                                    data-testid={`badge-${dest}-${item.id}`}
+                                  >
+                                    <Icon className="w-3 h-3" />
+                                    <span>{platform.label}</span>
+                                  </Badge>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
+
                         <div className="flex gap-2 pt-2 border-t border-slate-400/30">
                           {stages
                             .filter(s => s.id !== stage.id)
