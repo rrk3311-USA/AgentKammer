@@ -1,7 +1,18 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Headphones, Play, Clock, Star, Sparkles, Heart, TrendingUp, Zap } from "lucide-react";
+import { Headphones, Play, Clock, Star, DollarSign } from "lucide-react";
+
+import bookCoverImage from "@assets/generated_images/3D_audiobook_cover_mockup_42c57384.png";
+import authorPhoto from "@assets/generated_images/Professional_avatar_headshot_fdbd53e6.png";
+import wealthMagnetIcon from "@assets/generated_images/Wealth_magnet_icon_illustration_8bedebf3.png";
+import sacredPartnershipIcon from "@assets/generated_images/Sacred_partnership_icon_illustration_e5f9a5b0.png";
+import quantumManifestationIcon from "@assets/generated_images/Quantum_manifestation_icon_illustration_84751384.png";
+import powerWithinIcon from "@assets/generated_images/Power_within_icon_illustration_914acd9d.png";
+import luxuryLivingIcon from "@assets/generated_images/Luxury_living_icon_illustration_95cf6c77.png";
+import wealthArchitectureIcon from "@assets/generated_images/Wealth_architecture_icon_illustration_6c9baca7.png";
+import negotiationMasteryIcon from "@assets/generated_images/Negotiation_mastery_icon_illustration_7a7582a2.png";
+import globalPropertyIcon from "@assets/generated_images/Global_property_icon_illustration_208421f1.png";
 
 const audiobooks = [
   // Personal Development & Transformation
@@ -9,44 +20,48 @@ const audiobooks = [
     id: 1,
     title: "The Wealth Magnet",
     author: "Dr. Sophia Abundance",
-    duration: "10h 15m",
+    duration: "2h 00m",
+    price: "$10",
     rating: 4.9,
     description: "Unlock the universal principles of wealth attraction. Transform your money mindset and magnetize prosperity through proven spiritual and practical strategies.",
     category: "Personal Development",
-    icon: Sparkles,
+    iconImage: wealthMagnetIcon,
     accentColor: "#d4af37"
   },
   {
     id: 2,
     title: "Sacred Partnership",
     author: "Dr. Michael Zukova",
-    duration: "9h 30m",
+    duration: "2h 00m",
+    price: "$10",
     rating: 4.8,
     description: "Create the perfect relationship through spiritual alignment and authentic connection. Inspired by timeless wisdom on conscious partnerships and soul-centered love.",
     category: "Personal Development",
-    icon: Heart,
+    iconImage: sacredPartnershipIcon,
     accentColor: "#d4af37"
   },
   {
     id: 3,
     title: "Quantum Manifestation",
     author: "Elena Consciousness",
-    duration: "8h 20m",
+    duration: "2h 00m",
+    price: "$10",
     rating: 4.9,
     description: "Harness quantum principles to manifest your deepest desires. Bridge science and spirituality to create your ideal reality.",
     category: "Personal Development",
-    icon: Zap,
+    iconImage: quantumManifestationIcon,
     accentColor: "#d4af37"
   },
   {
     id: 4,
     title: "The Power Within",
     author: "James Transformational",
-    duration: "11h 45m",
+    duration: "2h 00m",
+    price: "$10",
     rating: 4.7,
     description: "Discover your infinite potential and break through limiting beliefs. A comprehensive guide to personal transformation and self-mastery.",
     category: "Personal Development",
-    icon: TrendingUp,
+    iconImage: powerWithinIcon,
     accentColor: "#d4af37"
   },
   // Real Estate & Wealth Building
@@ -54,47 +69,64 @@ const audiobooks = [
     id: 5,
     title: "The Art of Luxury Living",
     author: "Victoria Sterling",
-    duration: "8h 45m",
+    duration: "2h 00m",
+    price: "$10",
     rating: 4.8,
     description: "Master the principles of elevated living and refined taste in modern luxury real estate.",
     category: "Real Estate",
-    icon: Sparkles,
+    iconImage: luxuryLivingIcon,
     accentColor: "#d4af37"
   },
   {
     id: 6,
     title: "Wealth Architecture",
     author: "Marcus Chen",
-    duration: "6h 30m",
+    duration: "2h 00m",
+    price: "$10",
     rating: 4.9,
     description: "Strategic insights into building generational wealth through premium property investments.",
     category: "Real Estate",
-    icon: TrendingUp,
+    iconImage: wealthArchitectureIcon,
     accentColor: "#d4af37"
   },
   {
     id: 7,
     title: "Negotiation Mastery",
     author: "Diana Rothschild",
-    duration: "7h 15m",
+    duration: "2h 00m",
+    price: "$10",
     rating: 4.7,
     description: "Elite strategies for winning in high-stakes real estate negotiations and closing power deals.",
     category: "Real Estate",
-    icon: Zap,
+    iconImage: negotiationMasteryIcon,
     accentColor: "#d4af37"
   },
   {
     id: 8,
     title: "Global Property Intelligence",
     author: "Alexander Kensington",
-    duration: "9h 20m",
+    duration: "2h 00m",
+    price: "$10",
     rating: 4.9,
     description: "Navigate international luxury markets from NYC to California to Nevada and beyond.",
     category: "Real Estate",
-    icon: Sparkles,
+    iconImage: globalPropertyIcon,
     accentColor: "#d4af37"
   }
 ];
+
+const featuredAudiobook = {
+  id: 0,
+  title: "Awaken the Straight Guy Within",
+  author: "Agent Kammer",
+  duration: "2h 00m",
+  price: "$10",
+  rating: 5.0,
+  description: "A transformative journey into authentic masculine presence and power. Discover the path to genuine confidence, purpose-driven success, and unshakeable self-mastery in all areas of life.",
+  category: "Featured",
+  coverImage: bookCoverImage,
+  accentColor: "#d4af37"
+};
 
 export default function Audiobooks() {
   return (
@@ -113,6 +145,125 @@ export default function Audiobooks() {
             Elevate your knowledge with our curated collection of premium audiobooks. 
             Learn from the world's leading experts in luxury real estate, wealth management, and strategic investments.
           </p>
+        </div>
+      </section>
+
+      {/* Featured Audiobook */}
+      <section className="py-20 px-4 bg-muted/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-8 text-center">
+            <Badge className="mb-4" style={{ background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)', color: '#000', fontWeight: 600 }}>
+              Featured Release
+            </Badge>
+            <h2 className="font-serif text-4xl font-bold mb-2">Personal Development Breakthrough</h2>
+            <p className="text-muted-foreground">Transform your life with this exclusive premium audiobook</p>
+          </div>
+          
+          <Card 
+            className="overflow-hidden hover-elevate transition-all duration-300 border-0"
+            style={{
+              background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(0,0,0,0.98) 100%)',
+              backdropFilter: 'blur(20px)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)'
+            }}
+            data-testid="card-audiobook-featured"
+          >
+            <div className="flex flex-col lg:flex-row gap-0">
+              {/* Book Cover with Background */}
+              <div 
+                className="w-full lg:w-[500px] h-[400px] lg:h-auto flex items-center justify-center p-8 relative overflow-hidden"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(10,22,40,0.9) 0%, rgba(26,41,66,0.95) 50%, rgba(10,22,40,0.9) 100%)',
+                  borderRight: '1px solid rgba(212,175,55,0.3)'
+                }}
+              >
+                {/* Background glow effects */}
+                <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 30% 50%, rgba(212,175,55,0.2), transparent 60%)' }} />
+                <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at 70% 50%, rgba(212,175,55,0.15), transparent 60%)' }} />
+                
+                {/* 3D Book Cover */}
+                <div className="relative z-10">
+                  <img 
+                    src={featuredAudiobook.coverImage} 
+                    alt={featuredAudiobook.title}
+                    className="w-64 h-auto object-contain drop-shadow-2xl"
+                    style={{ filter: 'drop-shadow(0 20px 40px rgba(212,175,55,0.3))' }}
+                  />
+                </div>
+                
+                {/* Decorative gold lines */}
+                <div className="absolute top-0 left-0 w-full h-1" style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }} />
+                <div className="absolute bottom-0 left-0 w-full h-1" style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }} />
+              </div>
+
+              {/* Book Details */}
+              <div className="flex-1 p-8 lg:p-10 flex flex-col">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-start gap-4">
+                    {/* Author Photo */}
+                    <div className="shrink-0">
+                      <img 
+                        src={authorPhoto} 
+                        alt={featuredAudiobook.author}
+                        className="w-16 h-16 rounded-full object-cover ring-2 ring-[#d4af37]/50"
+                        style={{ boxShadow: '0 4px 12px rgba(212,175,55,0.3)' }}
+                        data-testid="img-author-photo"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="font-serif text-3xl lg:text-4xl font-bold mb-2 text-white">
+                        {featuredAudiobook.title}
+                      </h3>
+                      <p className="text-lg" style={{ color: 'rgba(212,175,55,0.9)' }}>
+                        by {featuredAudiobook.author}
+                      </p>
+                    </div>
+                  </div>
+                  <Badge 
+                    className="shrink-0 border-0" 
+                    style={{ 
+                      background: 'rgba(212,175,55,0.2)', 
+                      color: '#d4af37',
+                      backdropFilter: 'blur(10px)'
+                    }}
+                  >
+                    <Star className="h-3 w-3 mr-1 fill-[#d4af37] text-[#d4af37]" />
+                    {featuredAudiobook.rating}
+                  </Badge>
+                </div>
+
+                <p className="text-lg leading-relaxed mb-8 flex-1" style={{ color: 'rgba(255,255,255,0.85)' }}>
+                  {featuredAudiobook.description}
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-2" style={{ color: 'rgba(212,175,55,0.9)' }}>
+                      <Clock className="h-5 w-5" />
+                      <span className="text-base font-medium">{featuredAudiobook.duration}</span>
+                    </div>
+                    <div className="flex items-center gap-2" style={{ color: 'rgba(212,175,55,0.9)' }}>
+                      <DollarSign className="h-5 w-5" />
+                      <span className="text-base font-medium">{featuredAudiobook.price}</span>
+                    </div>
+                  </div>
+                  <Button 
+                    size="lg"
+                    className="gap-2 border-0"
+                    style={{
+                      background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
+                      color: '#000',
+                      fontWeight: 600
+                    }}
+                    data-testid="button-play-featured"
+                  >
+                    <Play className="h-5 w-5" />
+                    Listen Now
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </Card>
         </div>
       </section>
 
@@ -159,8 +310,13 @@ export default function Audiobooks() {
                       <div className="absolute bottom-0 left-0 w-full h-0.5" style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }} />
                       
                       <div className="relative z-10 text-center">
-                        <div className="mb-4 mx-auto w-20 h-20 rounded-full flex items-center justify-center" style={{ background: 'rgba(212,175,55,0.2)', border: '2px solid rgba(212,175,55,0.5)' }}>
-                          <book.icon className="h-10 w-10" style={{ color: book.accentColor }} />
+                        <div className="mb-4 mx-auto w-24 h-24 flex items-center justify-center">
+                          <img 
+                            src={book.iconImage} 
+                            alt={book.title}
+                            className="w-20 h-20 object-contain"
+                            style={{ filter: 'drop-shadow(0 4px 12px rgba(212,175,55,0.3))' }}
+                          />
                         </div>
                         <div className="font-serif text-2xl font-bold mb-2 leading-tight" style={{ color: '#d4af37' }}>
                           {book.title}
@@ -204,9 +360,15 @@ export default function Audiobooks() {
                       </p>
 
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-sm" style={{ color: 'rgba(212,175,55,0.8)' }}>
-                          <Clock className="h-4 w-4" />
-                          {book.duration}
+                        <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-2 text-sm" style={{ color: 'rgba(212,175,55,0.8)' }}>
+                            <Clock className="h-4 w-4" />
+                            {book.duration}
+                          </div>
+                          <div className="flex items-center gap-1 text-sm font-semibold" style={{ color: 'rgba(212,175,55,0.9)' }}>
+                            <DollarSign className="h-4 w-4" />
+                            {book.price}
+                          </div>
                         </div>
                         <Button 
                           className="gap-2 border-0"
@@ -268,8 +430,13 @@ export default function Audiobooks() {
                       <div className="absolute bottom-0 left-0 w-full h-0.5" style={{ background: 'linear-gradient(90deg, transparent, #d4af37, transparent)' }} />
                       
                       <div className="relative z-10 text-center">
-                        <div className="mb-4 mx-auto w-20 h-20 rounded-full flex items-center justify-center" style={{ background: 'rgba(212,175,55,0.2)', border: '2px solid rgba(212,175,55,0.5)' }}>
-                          <book.icon className="h-10 w-10" style={{ color: book.accentColor }} />
+                        <div className="mb-4 mx-auto w-24 h-24 flex items-center justify-center">
+                          <img 
+                            src={book.iconImage} 
+                            alt={book.title}
+                            className="w-20 h-20 object-contain"
+                            style={{ filter: 'drop-shadow(0 4px 12px rgba(212,175,55,0.3))' }}
+                          />
                         </div>
                         <div className="font-serif text-2xl font-bold mb-2 leading-tight" style={{ color: '#d4af37' }}>
                           {book.title}
@@ -313,9 +480,15 @@ export default function Audiobooks() {
                       </p>
 
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-sm" style={{ color: 'rgba(212,175,55,0.8)' }}>
-                          <Clock className="h-4 w-4" />
-                          {book.duration}
+                        <div className="flex items-center gap-4">
+                          <div className="flex items-center gap-2 text-sm" style={{ color: 'rgba(212,175,55,0.8)' }}>
+                            <Clock className="h-4 w-4" />
+                            {book.duration}
+                          </div>
+                          <div className="flex items-center gap-1 text-sm font-semibold" style={{ color: 'rgba(212,175,55,0.9)' }}>
+                            <DollarSign className="h-4 w-4" />
+                            {book.price}
+                          </div>
                         </div>
                         <Button 
                           className="gap-2 border-0"
