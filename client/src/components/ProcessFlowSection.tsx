@@ -200,24 +200,22 @@ export function ProcessFlowSection() {
           {/* Navigation Arrows */}
           <Button
             variant="outline"
-            size="icon"
             onClick={scrollPrev}
-            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 border-white/20 text-white hover:bg-black/70 hover:text-white backdrop-blur-sm z-10"
+            className="absolute left-4 md:left-2 top-1/2 -translate-y-1/2 bg-black/50 border-white/20 text-white hover:bg-black/70 hover:text-white backdrop-blur-sm z-10 h-12 w-16 md:h-9 md:w-9"
             disabled={selectedIndex === 0}
             data-testid="button-carousel-prev"
           >
-            <ChevronLeft className="h-5 w-5" />
+            <ChevronLeft className="h-6 w-6 md:h-5 md:w-5" />
           </Button>
 
           <Button
             variant="outline"
-            size="icon"
             onClick={scrollNext}
-            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 border-white/20 text-white hover:bg-black/70 hover:text-white backdrop-blur-sm z-10"
+            className="absolute right-4 md:right-2 top-1/2 -translate-y-1/2 bg-black/50 border-white/20 text-white hover:bg-black/70 hover:text-white backdrop-blur-sm z-10 h-12 w-16 md:h-9 md:w-9"
             disabled={selectedIndex === scrollSnaps.length - 1}
             data-testid="button-carousel-next"
           >
-            <ChevronRight className="h-5 w-5" />
+            <ChevronRight className="h-6 w-6 md:h-5 md:w-5" />
           </Button>
         </div>
 
