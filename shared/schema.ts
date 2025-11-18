@@ -50,6 +50,7 @@ export const contentItems = pgTable("content_items", {
   stage: text("stage").notNull().default("ideation"),
   category: text("category"),
   tags: text("tags").array(),
+  publishingDestinations: text("publishing_destinations").array(),
   fileUrl: text("file_url"),
   notes: text("notes"),
   legalStatus: text("legal_status"),
