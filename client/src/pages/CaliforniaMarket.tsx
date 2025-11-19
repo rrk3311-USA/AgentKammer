@@ -114,7 +114,7 @@ export default function CaliforniaMarket() {
                   <h3 className="text-2xl font-serif font-semibold mb-1">Riverside County</h3>
                   <p className="text-muted-foreground">Inland Empire • Logistics Hub</p>
                 </div>
-                <Badge className="bg-[#d4af37] text-black text-lg px-4 py-2">9% Yield</Badge>
+                <Badge className="bg-[#d4af37] text-[#0a1628] text-lg px-4 py-2">9% Yield</Badge>
               </div>
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div>
@@ -137,7 +137,7 @@ export default function CaliforniaMarket() {
                   <h3 className="text-2xl font-serif font-semibold mb-1">Santa Clara County</h3>
                   <p className="text-muted-foreground">Silicon Valley • Tech Hub</p>
                 </div>
-                <Badge className="bg-[#d4af37] text-black text-lg px-4 py-2">9% Yield</Badge>
+                <Badge className="bg-[#d4af37] text-[#0a1628] text-lg px-4 py-2">9% Yield</Badge>
               </div>
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div>
@@ -220,7 +220,7 @@ export default function CaliforniaMarket() {
                 <tbody>
                   <tr className="border-b hover-elevate" data-testid="row-zip-94027">
                     <td className="p-4">
-                      <Badge className="bg-[#d4af37] text-black">#2</Badge>
+                      <Badge className="bg-[#d4af37] text-[#0a1628]">#2</Badge>
                     </td>
                     <td className="p-4 font-mono font-semibold">94027</td>
                     <td className="p-4">Atherton</td>

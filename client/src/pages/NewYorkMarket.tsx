@@ -114,7 +114,7 @@ export default function NewYorkMarket() {
                   <h3 className="text-2xl font-serif font-semibold mb-1">TriBeCa</h3>
                   <p className="text-muted-foreground">Luxury Lofts • Waterfront</p>
                 </div>
-                <Badge className="bg-[#d4af37] text-black text-lg px-4 py-2">4.5% Yield</Badge>
+                <Badge className="bg-[#d4af37] text-[#0a1628] text-lg px-4 py-2">4.5% Yield</Badge>
               </div>
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div>
@@ -137,7 +137,7 @@ export default function NewYorkMarket() {
                   <h3 className="text-2xl font-serif font-semibold mb-1">East Village</h3>
                   <p className="text-muted-foreground">Bohemian • Diverse</p>
                 </div>
-                <Badge className="bg-[#d4af37] text-black text-lg px-4 py-2">4.5% Yield</Badge>
+                <Badge className="bg-[#d4af37] text-[#0a1628] text-lg px-4 py-2">4.5% Yield</Badge>
               </div>
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div>
@@ -220,7 +220,7 @@ export default function NewYorkMarket() {
                 <tbody>
                   <tr className="border-b hover-elevate" data-testid="row-hudson-yards">
                     <td className="p-4">
-                      <Badge className="bg-[#d4af37] text-black">#1</Badge>
+                      <Badge className="bg-[#d4af37] text-[#0a1628]">#1</Badge>
                     </td>
                     <td className="p-4 font-semibold">Hudson Yards</td>
                     <td className="p-4">Manhattan</td>

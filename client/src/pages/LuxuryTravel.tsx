@@ -199,7 +199,7 @@ export default function LuxuryTravel() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                 
                 {/* Adventure Level Badge */}
-                <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold bg-[#d4af37] text-black">
+                <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold bg-[#d4af37] text-[#0a1628]">
                   {journey.adventureLevel}
                 </div>
 

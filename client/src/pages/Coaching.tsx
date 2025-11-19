@@ -165,7 +165,7 @@ export default function Coaching() {
                 {offer.highlight && (
                   <div className="flex items-center gap-2 mb-2">
                     <Star className="h-4 w-4 fill-[#d4af37] text-[#d4af37]" />
-                    <Badge className="bg-[#d4af37] text-black">Most Popular</Badge>
+                    <Badge className="bg-[#d4af37] text-[#0a1628]">Most Popular</Badge>
                   </div>
                 )}
                 
