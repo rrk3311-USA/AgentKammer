@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Card } from "@/components/ui/card";
-import { Shield, User, TrendingUp, Users, Lock, DollarSign, Briefcase, ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Shield, User, TrendingUp, Users, Lock, DollarSign, Briefcase } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 
 export function ProcessFlowSection() {
@@ -190,27 +189,6 @@ export function ProcessFlowSection() {
               ))}
             </div>
           </div>
-
-          {/* Navigation Arrows */}
-          <Button
-            variant="outline"
-            onClick={scrollPrev}
-            className="absolute left-0 md:left-2 top-1/2 -translate-y-1/2 bg-black/70 border-white/30 text-white hover:bg-black/90 hover:text-white backdrop-blur-sm z-20 h-9 w-9 shadow-lg"
-            disabled={selectedIndex === 0}
-            data-testid="button-carousel-prev"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </Button>
-
-          <Button
-            variant="outline"
-            onClick={scrollNext}
-            className="absolute right-0 md:right-2 top-1/2 -translate-y-1/2 bg-black/70 border-white/30 text-white hover:bg-black/90 hover:text-white backdrop-blur-sm z-20 h-9 w-9 shadow-lg"
-            disabled={selectedIndex === scrollSnaps.length - 1}
-            data-testid="button-carousel-next"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </Button>
         </div>
 
         {/* Dot Indicators */}
