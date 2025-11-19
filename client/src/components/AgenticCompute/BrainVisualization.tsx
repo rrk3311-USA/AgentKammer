@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import agiBrainImage from "@assets/generated_images/Grok-5_AGI_Technology_Visualization_7ad79357.png";
+import circuitBrainImage from "@assets/IMG_1561_1763511583557.jpeg";
 
 interface CodeSnippet {
   text: string;
@@ -65,9 +65,9 @@ export function BrainVisualization() {
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url(${agiBrainImage})`,
-          backgroundPosition: 'center 35%',
-          backgroundSize: '150%'
+          backgroundImage: `url(${circuitBrainImage})`,
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover'
         }}
       />
       
