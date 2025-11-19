@@ -1,5 +1,5 @@
 import { SiReplit, SiNvidia, SiClaude, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
-import { Brain, FileText, Globe, Headphones, GraduationCap, Download } from "lucide-react";
+import { Brain, FileText, Globe, Headphones, GraduationCap, Download, Shield } from "lucide-react";
 import { LiveInterestRate } from "./LiveInterestRate";
 import { Link } from "wouter";
 
@@ -13,7 +13,7 @@ export function Footer() {
             <div>
               <h3 className="font-serif text-base md:text-lg font-semibold mb-3">Agent Kammer</h3>
               <p className="text-xs md:text-sm text-muted-foreground mb-3">
-                Your Luxury Agentic Real Estate Concierge
+                Zero-Knowledge Encrypted Real Estate Concierge
               </p>
               <div className="space-y-2">
                 <Link href="/document-portal" className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors">
@@ -99,8 +99,12 @@ export function Footer() {
       <div className="bg-[#0a1628] py-3">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col items-center gap-2">
-            <div className="mb-1">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 mb-1 flex-wrap text-center">
               <LiveInterestRate />
+              <div className="flex items-center gap-1.5 text-white/90">
+                <Shield className="h-4 w-4 text-[#d4af37]" />
+                <span className="text-xs md:text-sm font-medium whitespace-nowrap">Swiss-Level Privacy • Zero-Access</span>
+              </div>
             </div>
             <p className="text-center text-sm text-white/80">
               Powered by AI

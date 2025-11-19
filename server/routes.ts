@@ -480,7 +480,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto;">
             <div style="background: linear-gradient(135deg, #0a1628 0%, #1a2638 100%); padding: 40px; text-align: center;">
               <h1 style="color: #d4af37; font-size: 32px; margin: 0;">AGENT KAMMER</h1>
-              <p style="color: white; font-size: 18px; margin-top: 10px;">Your Luxury Agentic Real Estate Concierge</p>
+              <p style="color: white; font-size: 18px; margin-top: 10px;">Zero-Knowledge Encrypted Real Estate Concierge</p>
             </div>
             
             <div style="padding: 40px; background: white;">
@@ -528,7 +528,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 📞 (929) 642-7553
               </p>
               <p style="color: #d4af37; font-size: 12px; margin-top: 20px;">
-                Your Luxury Agentic Real Estate Concierge
+                Zero-Knowledge Encrypted Real Estate Concierge
               </p>
             </div>
           </div>

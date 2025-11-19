@@ -1,7 +1,7 @@
 # Agent Kammer - Luxury Properties Platform
 
 ## Overview
-Agent Kammer is a luxury agentic real estate and travel concierge platform focused on NYC, California, and Nevada markets. It offers a visual-first search experience, advanced search, saved listings with notifications, and integrated services like mortgage pre-approval and home valuation. The platform leverages agentic AI for continuous market scanning, aiming to build trust through professional aesthetics. Its business vision is to empower users in finding luxury homes across premier markets.
+Agent Kammer is a zero-knowledge encrypted real estate and travel concierge platform focused on NYC, California, and Nevada markets. Emphasizing Swiss-level privacy and zero-access architecture, it offers a visual-first search experience, advanced search, saved listings with notifications, and integrated services like mortgage pre-approval and home valuation. The platform leverages agentic AI for continuous market scanning while maintaining military-grade encryption for all client data and documents. Its business vision is to empower users in finding luxury homes across premier markets while protecting their privacy with the highest level of encryption available.
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
@@ -23,7 +23,7 @@ The frontend uses React, TypeScript, and Vite, with `wouter` for routing and Rea
 - **Live Deal Map**: Interactive Google Maps integration with custom styling and Deal IQ scores.
 - **Live Interest Rate Ticker**: Displays current 30-year fixed mortgage rates.
 - **Broker Registration Page**: Allows brokers to create profiles.
-- **Strategic Document Portal**: Document management for competitive bidding.
+- **Strategic Document Portal**: Zero-knowledge encrypted document management for competitive bidding with AES-256 client-side encryption.
 - **Transformational Alignment Coaching**: Dedicated page for coaching services.
 - **Luxury Travel Experiences**: Showcasing bespoke adventure packages.
 - **Wellness Shop**: E-commerce for premium supplements.

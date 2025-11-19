@@ -80,7 +80,7 @@ export default function Contact() {
               Get in Touch
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              Let's discuss your luxury real estate needs
+              Secure, private, zero-knowledge encrypted communication
             </p>
           </div>
         </div>
@@ -97,7 +97,7 @@ export default function Contact() {
                   Agent Kammer
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  Your Luxury Agentic Real Estate Concierge serving NYC, California, and Nevada
+                  Zero-Knowledge Encrypted Real Estate Concierge serving NYC, California, and Nevada
                 </p>
               </div>
 
