@@ -201,7 +201,7 @@ export function ProcessFlowSection() {
           <Button
             variant="outline"
             onClick={scrollPrev}
-            className="absolute left-4 md:left-2 top-1/2 -translate-y-1/2 bg-black/50 border-white/20 text-white hover:bg-black/70 hover:text-white backdrop-blur-sm z-10 h-12 w-16 md:h-9 md:w-9"
+            className="absolute left-0 md:left-2 top-1/2 -translate-y-1/2 bg-black/70 border-white/30 text-white hover:bg-black/90 hover:text-white backdrop-blur-sm z-20 h-12 w-16 md:h-9 md:w-9 shadow-lg"
             disabled={selectedIndex === 0}
             data-testid="button-carousel-prev"
           >
@@ -211,7 +211,7 @@ export function ProcessFlowSection() {
           <Button
             variant="outline"
             onClick={scrollNext}
-            className="absolute right-4 md:right-2 top-1/2 -translate-y-1/2 bg-black/50 border-white/20 text-white hover:bg-black/70 hover:text-white backdrop-blur-sm z-10 h-12 w-16 md:h-9 md:w-9"
+            className="absolute right-0 md:right-2 top-1/2 -translate-y-1/2 bg-black/70 border-white/30 text-white hover:bg-black/90 hover:text-white backdrop-blur-sm z-20 h-12 w-16 md:h-9 md:w-9 shadow-lg"
             disabled={selectedIndex === scrollSnaps.length - 1}
             data-testid="button-carousel-next"
           >

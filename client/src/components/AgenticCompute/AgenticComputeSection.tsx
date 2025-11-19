@@ -33,7 +33,7 @@ export function AgenticComputeSection() {
           {pills.map((pill, idx) => (
             <Badge
               key={idx}
-              className="bg-[#d4af37] border border-[#d4af37] text-black px-3 py-1.5 text-xs font-medium"
+              className="bg-[#d4af37] border border-[#d4af37] text-[#0a1628] px-3 py-1.5 text-xs font-medium"
               data-testid={`pill-${idx}`}
             >
               {pill}

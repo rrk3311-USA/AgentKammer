@@ -20,7 +20,7 @@ export function DataSources() {
           <Badge
             key={idx}
             variant="outline"
-            className="bg-[#d4af37] border-[#d4af37] text-black text-xs px-3 py-1 font-medium"
+            className="bg-[#d4af37] border-[#d4af37] text-[#0a1628] text-xs px-3 py-1 font-medium"
             data-testid={`source-${idx}`}
           >
             {source}
