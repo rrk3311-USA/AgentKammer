@@ -109,20 +109,20 @@ export function ProcessFlowSection() {
   ];
 
   return (
-    <section className="py-16 lg:py-20 bg-gradient-to-br from-[#0a1628] via-[#0f1f3d] to-[#0a1628] text-white relative overflow-hidden">
+    <section className="py-8 lg:py-10 bg-gradient-to-br from-[#0a1628] via-[#0f1f3d] to-[#0a1628] text-white relative overflow-hidden">
       {/* Background effects */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-20 w-96 h-96 bg-[#d4af37] rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-[#f4d03f] rounded-full blur-3xl" />
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-10 left-10 w-64 h-64 bg-[#d4af37] rounded-full blur-3xl" />
+        <div className="absolute bottom-10 right-10 w-64 h-64 bg-[#f4d03f] rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4">
+        <div className="text-center mb-6">
+          <h2 className="font-serif text-3xl lg:text-4xl font-semibold mb-2">
             How Our Process is <span className="text-[#d4af37]">Different</span>
           </h2>
-          <p className="text-xl text-white/80 max-w-3xl mx-auto">
+          <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
             Traditional real estate puts you at a disadvantage. Our encrypted platform flips the power dynamic—brokers compete for your business.
           </p>
         </div>
@@ -130,65 +130,59 @@ export function ProcessFlowSection() {
         {/* Swipeable Carousel */}
         <div className="relative">
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-6 touch-pan-y">
+            <div className="flex gap-3 touch-pan-y">
               {cards.map((card, index) => (
                 <div 
                   key={index} 
-                  className="flex-[0_0_100%] min-w-0 md:flex-[0_0_80%] lg:flex-[0_0_60%]"
+                  className="flex-[0_0_100%] min-w-0 md:flex-[0_0_75%] lg:flex-[0_0_50%]"
                   data-testid={`card-process-step-${card.number}`}
                 >
                   <Card 
-                    className="border-white/20 p-6 shadow-2xl backdrop-blur-lg"
+                    className="border-white/20 p-3 shadow-xl backdrop-blur-lg"
                     style={{
                       background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%)',
                       color: 'white'
                     }}
                   >
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-start gap-2.5">
                       {/* Icon + Number */}
-                      <div className="flex flex-col items-center gap-2 shrink-0">
-                        <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${card.iconBg} flex items-center justify-center shadow-xl`}>
-                          <card.icon className={`h-8 w-8 ${card.iconColor}`} />
+                      <div className="flex flex-col items-center gap-0.5 shrink-0">
+                        <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${card.iconBg} flex items-center justify-center shadow-lg`}>
+                          <card.icon className={`h-5 w-5 ${card.iconColor}`} />
                         </div>
-                        <div className={`text-3xl font-bold ${card.numberColor}`}>{card.number}</div>
+                        <div className={`text-xl font-bold ${card.numberColor}`}>{card.number}</div>
                       </div>
 
                       {/* Title + Description + Extras */}
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-serif text-xl font-semibold mb-2 text-white">{card.title}</h3>
-                        <p className="text-white/90 text-sm leading-relaxed mb-3">
+                        <h3 className="font-serif text-base font-semibold mb-0.5 text-white">{card.title}</h3>
+                        <p className="text-white/90 text-xs leading-tight mb-1.5 line-clamp-2">
                           {card.description}
                         </p>
 
                         {/* Badges, Stats, Features - All in horizontal row */}
-                        {card.badge && (
-                          <div className={`inline-flex items-center gap-1.5 text-xs ${card.badge.color} px-3 py-1.5 rounded-full border`}>
-                            <card.badge.icon className="h-3.5 w-3.5" />
-                            <span className="font-medium">{card.badge.text}</span>
-                          </div>
-                        )}
+                        <div className="flex flex-wrap items-center gap-1.5">
+                          {card.badge && (
+                            <div className={`inline-flex items-center gap-0.5 text-[10px] ${card.badge.color} px-1.5 py-0.5 rounded-full border`}>
+                              <card.badge.icon className="h-2.5 w-2.5" />
+                              <span className="font-medium whitespace-nowrap">{card.badge.text}</span>
+                            </div>
+                          )}
 
-                        {card.stats && (
-                          <div className="flex gap-3">
-                            {card.stats.map((stat, idx) => (
-                              <div key={idx} className={`flex items-center gap-2 text-xs ${stat.color} px-3 py-1.5 rounded-lg`}>
-                                <span className="font-medium">{stat.label}:</span>
-                                <span className="text-sm font-bold">{stat.value}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
+                          {card.stats && card.stats.map((stat, idx) => (
+                            <div key={idx} className={`inline-flex items-center gap-1 text-[10px] ${stat.color} px-1.5 py-0.5 rounded-lg`}>
+                              <span className="font-medium whitespace-nowrap">{stat.label}:</span>
+                              <span className="text-xs font-bold">{stat.value}</span>
+                            </div>
+                          ))}
 
-                        {card.features && (
-                          <div className="flex flex-wrap gap-2">
-                            {card.features.map((feature, idx) => (
-                              <div key={idx} className="inline-flex items-center gap-1.5 text-xs bg-white/20 text-white px-3 py-1.5 rounded-full border border-white/30">
-                                <feature.icon className="h-3.5 w-3.5 text-[#d4af37]" />
-                                <span className="font-medium">{feature.text}</span>
-                              </div>
-                            ))}
-                          </div>
-                        )}
+                          {card.features && card.features.map((feature, idx) => (
+                            <div key={idx} className="inline-flex items-center gap-0.5 text-[10px] bg-white/20 text-white px-1.5 py-0.5 rounded-full border border-white/30">
+                              <feature.icon className="h-2.5 w-2.5 text-[#d4af37]" />
+                              <span className="font-medium whitespace-nowrap">{feature.text}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </Card>
@@ -201,33 +195,33 @@ export function ProcessFlowSection() {
           <Button
             variant="outline"
             onClick={scrollPrev}
-            className="absolute left-0 md:left-2 top-1/2 -translate-y-1/2 bg-black/70 border-white/30 text-white hover:bg-black/90 hover:text-white backdrop-blur-sm z-20 h-12 w-16 md:h-9 md:w-9 shadow-lg"
+            className="absolute left-0 md:left-2 top-1/2 -translate-y-1/2 bg-black/70 border-white/30 text-white hover:bg-black/90 hover:text-white backdrop-blur-sm z-20 h-9 w-9 shadow-lg"
             disabled={selectedIndex === 0}
             data-testid="button-carousel-prev"
           >
-            <ChevronLeft className="h-6 w-6 md:h-5 md:w-5" />
+            <ChevronLeft className="h-5 w-5" />
           </Button>
 
           <Button
             variant="outline"
             onClick={scrollNext}
-            className="absolute right-0 md:right-2 top-1/2 -translate-y-1/2 bg-black/70 border-white/30 text-white hover:bg-black/90 hover:text-white backdrop-blur-sm z-20 h-12 w-16 md:h-9 md:w-9 shadow-lg"
+            className="absolute right-0 md:right-2 top-1/2 -translate-y-1/2 bg-black/70 border-white/30 text-white hover:bg-black/90 hover:text-white backdrop-blur-sm z-20 h-9 w-9 shadow-lg"
             disabled={selectedIndex === scrollSnaps.length - 1}
             data-testid="button-carousel-next"
           >
-            <ChevronRight className="h-6 w-6 md:h-5 md:w-5" />
+            <ChevronRight className="h-5 w-5" />
           </Button>
         </div>
 
         {/* Dot Indicators */}
-        <div className="flex justify-center gap-2 mt-8">
+        <div className="flex justify-center gap-2 mt-4">
           {scrollSnaps.map((_, index) => (
             <button
               key={index}
               onClick={() => scrollTo(index)}
-              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 index === selectedIndex 
-                  ? 'bg-[#d4af37] w-8' 
+                  ? 'bg-[#d4af37] w-6' 
                   : 'bg-white/30 hover:bg-white/50'
               }`}
               data-testid={`button-dot-${index}`}
@@ -237,8 +231,8 @@ export function ProcessFlowSection() {
         </div>
 
         {/* Swipe Hint */}
-        <div className="text-center mt-6">
-          <p className="text-white/50 text-sm">
+        <div className="text-center mt-3">
+          <p className="text-white/50 text-xs">
             Swipe or use arrows to navigate
           </p>
         </div>
