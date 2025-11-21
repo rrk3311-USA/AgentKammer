@@ -24,16 +24,6 @@ export function Header() {
                 <span className="text-sm font-medium">Reverse Buyer™</span>
               </Button>
             </Link>
-            <Link href="/document-portal">
-              <Button
-                variant="ghost"
-                className="hover-elevate active-elevate-2 h-12 px-4 gap-2"
-                data-testid="button-header-documents"
-              >
-                <FileText className="h-6 w-6" />
-                <span className="text-sm font-medium">Documents</span>
-              </Button>
-            </Link>
             <Button
               variant="ghost"
               className="hover-elevate active-elevate-2 h-12 px-4 gap-2"

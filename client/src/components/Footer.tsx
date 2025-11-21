@@ -1,5 +1,5 @@
 import { SiReplit, SiNvidia, SiClaude, SiAnthropic, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
-import { Brain, FileText, Globe, Headphones, GraduationCap, Download, Shield } from "lucide-react";
+import { Brain, FileText, Globe, Headphones, GraduationCap, Download, Shield, Sparkles } from "lucide-react";
 import { LiveInterestRate } from "./LiveInterestRate";
 import { Link } from "wouter";
 
@@ -18,7 +18,7 @@ export function Footer() {
               <div className="space-y-2">
                 <Link href="/document-portal" className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors">
                   <FileText className="h-4 w-4" />
-                  <span>Strategic Document Portal</span>
+                  <span>Document Portal</span>
                 </Link>
                 <Link href="/international-buyers" className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors" data-testid="link-international-buyers">
                   <Globe className="h-4 w-4" />
@@ -41,6 +41,12 @@ export function Footer() {
             <div>
               <h4 className="font-medium mb-3 text-sm">Services</h4>
               <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground">
+                <li>
+                  <Link href="/reverse-buyer-origination" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    <span>Reverse Buyer Origination™</span>
+                  </Link>
+                </li>
                 <li>
                   <Link href="/" className="hover:text-foreground transition-colors">
                     Property Search
