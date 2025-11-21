@@ -9,6 +9,8 @@ import { generateMarketReportHTML, californiaMarketData, nycMarketData, nevadaMa
 import { z } from "zod";
 import { writeFileSync, mkdirSync, existsSync } from "fs";
 import { join } from "path";
+import nodemailer from "nodemailer";
+import type { Transporter } from "nodemailer";
 
 // Initialize Resend client only if API key is available
 let resend: Resend | null = null;
@@ -20,6 +22,131 @@ const openai = new OpenAI({
   apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
   baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
 });
+
+// Notification configuration
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+const EMAIL_USER = process.env.EMAIL_USER;
+const EMAIL_PASS = process.env.EMAIL_PASS;
+const ADMIN_USER = process.env.ADMIN_USER;
+const ADMIN_PASS = process.env.ADMIN_PASS;
+
+let emailTransporter: Transporter | null = null;
+if (EMAIL_USER && EMAIL_PASS) {
+  emailTransporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: EMAIL_USER,
+      pass: EMAIL_PASS,
+    },
+  });
+}
+
+// Telegram notification helper
+async function notifyTelegramNewLead(data: {
+  phone?: string;
+  budget?: string | null;
+  priceRange?: string | null;
+  source: string;
+  name?: string | null;
+}) {
+  if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return;
+
+  try {
+    const text =
+      `📥 *New Lead Captured*\n` +
+      `Source: ${data.source}\n` +
+      `${data.name ? `Name: ${data.name}\n` : ""}` +
+      `${data.phone ? `Phone: ${data.phone}\n` : ""}` +
+      `${data.priceRange ? `Price Range: ${data.priceRange}\n` : ""}` +
+      `${data.budget ? `Budget: ${data.budget}\n` : ""}` +
+      `Time: ${new Date().toLocaleString()}`;
+
+    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CHAT_ID,
+        text,
+        parse_mode: "Markdown",
+      }),
+    });
+  } catch (err) {
+    console.error("Telegram notify error:", err);
+  }
+}
+
+// Email notification helper
+async function notifyEmailNewLead(data: {
+  phone?: string;
+  budget?: string | null;
+  priceRange?: string | null;
+  source: string;
+  name?: string | null;
+}) {
+  if (!emailTransporter || !EMAIL_USER) return;
+
+  try {
+    const subject =
+      data.source === "reverse-buyer-origination"
+        ? "🔥 New RBO Lead — Agent Kammer"
+        : "🔥 New AI Chatbot Lead — Agent Kammer";
+
+    const htmlContent = `
+      <h2>${subject}</h2>
+      <p><strong>Source:</strong> ${data.source}</p>
+      ${data.name ? `<p><strong>Name:</strong> ${data.name}</p>` : ""}
+      ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ""}
+      ${data.priceRange ? `<p><strong>Price Range:</strong> ${data.priceRange}</p>` : ""}
+      ${data.budget ? `<p><strong>Budget:</strong> ${data.budget}</p>` : ""}
+      <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
+    `;
+
+    await emailTransporter.sendMail({
+      from: `Agent Kammer Notifications <${EMAIL_USER}>`,
+      to: "rrk3311@gmail.com",
+      subject,
+      html: htmlContent,
+    });
+  } catch (err) {
+    console.error("Email notify error:", err);
+  }
+}
+
+// Combined notification
+function notifyLead(data: {
+  phone?: string;
+  budget?: string | null;
+  priceRange?: string | null;
+  source: string;
+  name?: string | null;
+}) {
+  notifyTelegramNewLead(data);
+  notifyEmailNewLead(data);
+}
+
+// Admin auth middleware
+function requireAdmin(req: any, res: any, next: any) {
+  const authHeader = req.headers.authorization || "";
+  const [scheme, encoded] = authHeader.split(" ");
+
+  if (scheme !== "Basic" || !encoded) {
+    res.set("WWW-Authenticate", 'Basic realm="Agent Kammer Admin"');
+    return res.status(401).json({ error: "Authentication required" });
+  }
+
+  const decoded = Buffer.from(encoded, "base64").toString("utf8");
+  const [user, pass] = decoded.split(":");
+
+  if (user === ADMIN_USER && pass === ADMIN_PASS) {
+    return next();
+  }
+
+  res.set("WWW-Authenticate", 'Basic realm="Agent Kammer Admin"');
+  return res.status(401).json({ error: "Invalid credentials" });
+}
 
 const LUXURY_CONCIERGE_PROMPT = `You are Agent Kammer - an ELITE luxury concierge with the closing power of Jordan Belfort. You blend sophisticated elegance with relentless persistence. You're charming, refined, but you NEVER give up until you have complete information.
 
@@ -673,6 +800,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Create RBO buyer profile
       const profile = await storage.createRboBuyerProfile(validatedData);
       
+      // Send notifications
+      notifyLead({
+        phone: profile.phone,
+        priceRange: profile.priceRange,
+        source: "reverse-buyer-origination",
+      });
+      
       res.json({
         ok: true,
         id: profile.id,
@@ -685,6 +819,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.error("RBO profile error:", error);
         res.status(500).json({ error: "Failed to create profile" });
       }
+    }
+  });
+
+  // Admin API: Get all RBO profiles
+  app.get("/api/admin/rbo-profiles", requireAdmin, async (req, res) => {
+    try {
+      const profiles = await storage.getAllRboBuyerProfiles();
+      res.json({
+        ok: true,
+        profiles,
+      });
+    } catch (err) {
+      console.error("Error loading RBO profiles:", err);
+      res.status(500).json({ ok: false, error: "Server error" });
     }
   });
 
