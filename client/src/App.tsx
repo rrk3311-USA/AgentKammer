@@ -28,6 +28,7 @@ import Ecourses from "@/pages/Ecourses";
 import Downloads from "@/pages/Downloads";
 import ContentStudio from "@/pages/ContentStudio";
 import ReverseBuyerOrigination from "@/pages/ReverseBuyerOrigination";
+import ReverseByerOriginationGuide from "@/pages/ReverseByerOriginationGuide";
 import AdminRBO from "@/pages/AdminRBO";
 import NotFound from "@/pages/not-found";
 
@@ -54,6 +55,7 @@ function Router() {
       <Route path="/downloads" component={Downloads} />
       <Route path="/studio" component={ContentStudio} />
       <Route path="/reverse-buyer-origination" component={ReverseBuyerOrigination} />
+      <Route path="/rbo-guide" component={ReverseByerOriginationGuide} />
       <Route path="/admin/rbo" component={AdminRBO} />
       <Route component={NotFound} />
     </Switch>

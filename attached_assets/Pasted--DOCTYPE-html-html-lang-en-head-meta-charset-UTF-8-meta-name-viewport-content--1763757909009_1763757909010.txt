@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agent Kammer – Reverse Buyer Origination™</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #050814;
+      color: #f5f7ff;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: 20px;
+      margin-top: 32px;
+      margin-bottom: 8px;
+    }
+    p {
+      margin-bottom: 16px;
+    }
+    ol {
+      margin-left: 20px;
+    }
+    ol li {
+      margin-bottom: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 16px;
+      background: #070b1b;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      text-align: left;
+      white-space: nowrap;
+    }
+    thead {
+      background: #101632;
+    }
+    th {
+      font-weight: 600;
+      color: #c7d1ff;
+    }
+    tr:nth-child(even) td {
+      background: rgba(255,255,255,0.02);
+    }
+    .disclaimer {
+      font-size: 12px;
+      color: #a3b0d6;
+      margin-top: 8px;
+    }
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(121,211,255,0.18);
+      color: #79d3ff;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Reverse Buyer Origination™</h1>
+    <p>
+      <strong>A private‑banking approach to luxury real estate.</strong>  
+      Traditional home‑buying often means choosing one agent and one lender and hoping for the best. Reverse Buyer Origination™ flips the script: you build your buyer profile once, and trusted lenders and brokers compete to serve you. This concierge‑style model brings the competitive energy of private banking into the real‑estate world.
+    </p>
+
+    <h2>How it works</h2>
+    <ol>
+      <li>
+        <strong>Luxury buyer profile.</strong>  
+        Share your ideal price range, down payment, self‑reported credit band, monthly comfort and target cities. No hard credit pulls; no pressure.
+      </li>
+      <li>
+        <strong>Lenders quietly compete.</strong>  
+        With your permission, we invite multiple trusted lenders to provide ranges for annual percentage rate (APR), estimated payments, potential credits and closing‑cost bands.
+      </li>
+      <li>
+        <strong>Brokerages quietly compete.</strong>  
+        We compare traditional brands, 100 %‑commission models and boutique luxury shops to find lean fee structures that best fit your numbers.
+      </li>
+      <li>
+        <strong>One clear summary.</strong>  
+        You receive a simple RBO report with APR ranges, estimated payments, available credits and a comparison against the traditional path. (Actual terms will depend on your qualifications and market conditions.)
+      </li>
+    </ol>
+
+    <h2>Sample savings scenarios*</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Scenario</th>
+          <th>APR range</th>
+          <th>Commission</th>
+          <th>Credits</th>
+          <th>Approx. monthly</th>
+          <th>Cost comparison</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Traditional route</td>
+          <td>~7.25 %</td>
+          <td>2.5 %</td>
+          <td>None</td>
+          <td>≈ $6,814</td>
+          <td>Highest cost</td>
+        </tr>
+        <tr>
+          <td>Some rate shopping</td>
+          <td>6.9–7.1 %</td>
+          <td>2.5 %</td>
+          <td>Minimal</td>
+          <td>≈ $6,650</td>
+          <td>$20k+ extra (5 yr)</td>
+        </tr>
+        <tr>
+          <td>Discount broker + one lender</td>
+          <td>6.75–6.9 %</td>
+          <td>~2 %</td>
+          <td>Small</td>
+          <td>≈ $6,575</td>
+          <td>$12k–$18k extra</td>
+        </tr>
+        <tr>
+          <td>2–3 lenders + lean broker</td>
+          <td>6.50–6.70 %</td>
+          <td>1.5–2 %</td>
+          <td>$5k–$10k</td>
+          <td>≈ $6,450</td>
+          <td>$20k–$30k saved</td>
+        </tr>
+        <tr>
+          <td><span class="pill">RBO™ concierge</span></td>
+          <td>6.10–6.40 %</td>
+          <td>1–1.5 %</td>
+          <td>$5k–$20k+</td>
+          <td>≈ $6,200</td>
+          <td>$35k–$55k saved</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="disclaimer">
+      *Illustrative example for a $1 million purchase. Figures do not constitute a commitment to lend. Actual rates, payments and savings will vary based on qualifications and prevailing market conditions. APRs are expressed as annual percentage rates and are subject to change:contentReference[oaicite:0]{index=0}.
+    </p>
+
+    <h2>Why it’s different</h2>
+    <ul>
+      <li><strong>Agent & brokerage neutral.</strong> We’re not tied to a single lender or broker. We collaborate with traditional brands, lean 100 %‑commission models and boutique firms to find the right fit for you.</li>
+      <li><strong>Multiple lenders, one view.</strong> We consolidate APR ranges, payments, credits and cash‑to‑close bands into clear summaries, making comparison straightforward.</li>
+      <li><strong>White‑glove concierge.</strong> Our team coordinates lenders, negotiates broker fees and handles compliance so you can focus on finding your ideal home.</li>
+    </ul>
+  </div>
+</body>
+</html>
