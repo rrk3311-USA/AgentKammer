@@ -11,7 +11,20 @@ import { useToast } from "@/hooks/use-toast";
 export default function ReverseBuyerOrigination() {
   const [phone, setPhone] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [selectedYear, setSelectedYear] = useState(5);
   const { toast } = useToast();
+
+  // Calculate savings based on selected year
+  const calculateSavings = (years: number) => {
+    const baseSavings = 42800; // 5-year baseline
+    const multipliers: { [key: number]: number } = {
+      5: 1,
+      10: 2,
+      15: 3,
+      30: 6,
+    };
+    return Math.round(baseSavings * (multipliers[years] || 1));
+  };
 
   const createProfileMutation = useMutation({
     mutationFn: async (phoneNumber: string) => {
@@ -196,9 +209,27 @@ export default function ReverseBuyerOrigination() {
               </div>
 
               <div className="mb-6 p-5 bg-gradient-to-r from-teal-600/40 to-emerald-600/40 rounded-lg border border-emerald-400/50">
-                <p className="text-emerald-200 text-xs mb-2 font-medium">Estimated 5-year advantage</p>
-                <p className="text-6xl font-bold text-[#d4af37] mb-3 leading-tight">$42,800</p>
+                <p className="text-emerald-200 text-xs mb-2 font-medium">Estimated {selectedYear}-year advantage</p>
+                <p className="text-6xl font-bold text-[#d4af37] mb-3 leading-tight">${calculateSavings(selectedYear).toLocaleString()}</p>
                 <p className="text-sm text-emerald-200/90 font-medium">From lower APR, credits & smarter broker fees.</p>
+                
+                <div className="mt-4 flex gap-2 flex-wrap">
+                  {[5, 10, 15, 30].map((year) => (
+                    <Button
+                      key={year}
+                      onClick={() => setSelectedYear(year)}
+                      size="sm"
+                      className={`text-xs font-semibold px-3 py-1 h-auto ${
+                        selectedYear === year
+                          ? "bg-[#d4af37] text-[#0a1628]"
+                          : "bg-emerald-500/30 text-emerald-200 hover:bg-emerald-500/50"
+                      }`}
+                      data-testid={`button-savings-${year}year`}
+                    >
+                      {year}yr
+                    </Button>
+                  ))}
+                </div>
               </div>
 
               <div className="mt-6">
