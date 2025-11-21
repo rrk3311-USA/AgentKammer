@@ -201,22 +201,16 @@ export default function ReverseBuyerOrigination() {
                 <p className="text-xs text-white/60">From lower APR, credits & smarter broker fees.</p>
               </div>
 
-              <div className="mt-6 flex items-start justify-between gap-4">
-                <div className="flex-1 space-y-3">
-                  <div className="p-3 bg-slate-900/40 rounded-lg border border-white/10">
-                    <p className="text-xs text-slate-400 mb-1">Traditional path</p>
-                    <p className="text-sm text-white font-semibold">7.25% APR · 2.5% buyer commission</p>
-                    <p className="text-xs text-slate-500 mt-1">Single lender • Single brokerage</p>
-                  </div>
-                  <div className="p-3 bg-[#d4af37]/15 rounded-lg border border-[#d4af37]/30">
-                    <p className="text-xs text-[#e5bd4a] mb-1">With Agent Kammer</p>
-                    <p className="text-sm text-white font-semibold">6.25–6.40% APR band</p>
-                    <p className="text-xs text-slate-400 mt-1">Credits + lean broker structure</p>
-                  </div>
+              <div className="mt-6 space-y-3">
+                <div className="p-3 bg-slate-900/40 rounded-lg border border-white/10">
+                  <p className="text-xs text-slate-400 mb-1">Traditional path</p>
+                  <p className="text-sm text-white font-semibold">7.25% APR · 2.5% buyer commission</p>
+                  <p className="text-xs text-slate-500 mt-1">Single lender • Single brokerage</p>
                 </div>
-                <div className="flex flex-col items-center justify-center shrink-0 h-24">
-                  <p className="text-xs text-white/60 text-center">Powered by</p>
-                  <p className="text-xs font-semibold text-[#79d3ff]">AI</p>
+                <div className="p-3 bg-[#d4af37]/15 rounded-lg border border-[#d4af37]/30">
+                  <p className="text-xs text-[#e5bd4a] mb-1">With Agent Kammer</p>
+                  <p className="text-sm text-white font-semibold">6.25–6.40% APR band</p>
+                  <p className="text-xs text-slate-400 mt-1">Credits + lean broker structure</p>
                 </div>
               </div>
 
