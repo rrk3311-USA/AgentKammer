@@ -282,36 +282,36 @@ export default function ReverseBuyerOrigination() {
                 key={idx}
                 className={`p-5 ${
                   scenario.highlight
-                    ? "border-[#d4af37]/50 bg-gradient-to-br from-[#d4af37]/10 to-[#d4af37]/5 shadow-lg"
+                    ? "border-[#d4af37] bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 shadow-lg"
                     : "hover-elevate"
                 }`}
                 data-testid={`card-scenario-${idx + 1}`}
               >
-                <Badge variant="outline" className="mb-3 bg-background/50">
+                <Badge className={`mb-3 ${scenario.highlight ? "bg-[#d4af37] text-[#0a1628] font-semibold" : "bg-background/50"}`}>
                   {scenario.tag}
                 </Badge>
-                <h3 className={`font-semibold mb-3 ${scenario.highlight ? "text-[#d4af37]" : ""}`}>
+                <h3 className={`font-semibold mb-3 ${scenario.highlight ? "text-[#d4af37] text-base" : ""}`}>
                   {scenario.title}
                 </h3>
                 <div className="space-y-2 mb-3 text-sm">
                   <div>
-                    <span className="text-muted-foreground">APR: </span>
-                    <span className="font-semibold">{scenario.apr}</span>
+                    <span className={scenario.highlight ? "text-white/70" : "text-muted-foreground"}>APR: </span>
+                    <span className={`font-semibold ${scenario.highlight ? "text-white" : ""}`}>{scenario.apr}</span>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">Commission: </span>
-                    <span className="font-semibold">{scenario.commission}</span>
+                    <span className={scenario.highlight ? "text-white/70" : "text-muted-foreground"}>Commission: </span>
+                    <span className={`font-semibold ${scenario.highlight ? "text-white" : ""}`}>{scenario.commission}</span>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">Credits: </span>
-                    <span className="font-semibold">{scenario.credits}</span>
+                    <span className={scenario.highlight ? "text-white/70" : "text-muted-foreground"}>Credits: </span>
+                    <span className={`font-semibold ${scenario.highlight ? "text-white" : ""}`}>{scenario.credits}</span>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">Monthly: </span>
-                    <span className="font-semibold">{scenario.monthly}</span>
+                    <span className={scenario.highlight ? "text-white/70" : "text-muted-foreground"}>Monthly: </span>
+                    <span className={`font-semibold ${scenario.highlight ? "text-white" : ""}`}>{scenario.monthly}</span>
                   </div>
                 </div>
-                <p className={`text-xs ${scenario.highlight ? "text-[#d4af37]/90" : "text-muted-foreground"}`}>
+                <p className={`text-xs ${scenario.highlight ? "text-white/80" : "text-muted-foreground"}`}>
                   {scenario.note}
                 </p>
               </Card>

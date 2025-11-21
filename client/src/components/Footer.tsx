@@ -103,25 +103,25 @@ export function Footer() {
               <LiveInterestRate />
             </div>
             <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center">
-              <div className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors">
+              <div className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors">
                 <Brain className="h-4 w-4 text-[#79d3ff]" />
-                <span className="text-[0.625rem]">Powered by AI</span>
+                <span className="text-[0.625rem] font-medium">Powered by AI</span>
               </div>
-              <div className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors">
+              <div className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors">
                 <SiReplit className="h-4 w-4" />
-                <span className="text-[0.625rem]">Replit</span>
+                <span className="text-[0.625rem] font-medium">Replit</span>
               </div>
-              <div className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors">
+              <div className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors">
                 <SiAnthropic className="h-4 w-4" />
-                <span className="text-[0.625rem]">Anthropic</span>
+                <span className="text-[0.625rem] font-medium">Anthropic</span>
               </div>
-              <div className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors">
+              <div className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors">
                 <SiClaude className="h-4 w-4" />
-                <span className="text-[0.625rem]">Claude</span>
+                <span className="text-[0.625rem] font-medium">Claude</span>
               </div>
-              <div className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors">
+              <div className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors">
                 <SiNvidia className="h-4 w-4" />
-                <span className="text-[0.625rem]">NVIDIA</span>
+                <span className="text-[0.625rem] font-medium">NVIDIA</span>
               </div>
             </div>
           </div>
