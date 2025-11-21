@@ -278,36 +278,43 @@ export default function ReverseBuyerOrigination() {
                 key={idx}
                 className={`p-5 ${
                   scenario.highlight
-                    ? "border-[#d4af37] bg-gradient-to-br from-[#d4af37]/20 to-[#d4af37]/10 shadow-lg"
-                    : "hover-elevate"
+                    ? "bg-gradient-to-br from-slate-900/95 to-slate-800/95 border-2 border-transparent hover-elevate"
+                    : "bg-slate-900/70 border border-slate-700/50 hover-elevate"
                 }`}
+                style={scenario.highlight ? {
+                  backgroundImage: "linear-gradient(to bottom right, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95)), linear-gradient(135deg, #d4af37, #f4d76d)",
+                  backgroundClip: "padding-box, border-box",
+                  backgroundOrigin: "padding-box, border-box",
+                  border: "2px solid transparent",
+                  boxShadow: "0 0 20px rgba(212, 175, 55, 0.4), 0 0 40px rgba(212, 175, 55, 0.15)"
+                } : undefined}
                 data-testid={`card-scenario-${idx + 1}`}
               >
-                <Badge className={`mb-3 ${scenario.highlight ? "bg-[#d4af37] text-[#0a1628] font-semibold" : "bg-background/50"}`}>
+                <Badge className={`mb-3 ${scenario.highlight ? "bg-[#d4af37] text-[#0a1628] font-semibold" : "bg-slate-800 text-slate-100"}`}>
                   {scenario.tag}
                 </Badge>
-                <h3 className={`font-semibold mb-3 ${scenario.highlight ? "text-[#d4af37] text-base" : ""}`}>
+                <h3 className={`font-semibold mb-3 text-base ${scenario.highlight ? "text-[#d4af37]" : "text-white"}`}>
                   {scenario.title}
                 </h3>
                 <div className="space-y-2 mb-3 text-sm">
                   <div>
-                    <span className={scenario.highlight ? "text-white/70" : "text-muted-foreground"}>APR: </span>
-                    <span className={`font-semibold ${scenario.highlight ? "text-white" : ""}`}>{scenario.apr}</span>
+                    <span className={scenario.highlight ? "text-slate-300" : "text-slate-400"}>APR: </span>
+                    <span className="font-semibold text-white">{scenario.apr}</span>
                   </div>
                   <div>
-                    <span className={scenario.highlight ? "text-white/70" : "text-muted-foreground"}>Commission: </span>
-                    <span className={`font-semibold ${scenario.highlight ? "text-white" : ""}`}>{scenario.commission}</span>
+                    <span className={scenario.highlight ? "text-slate-300" : "text-slate-400"}>Commission: </span>
+                    <span className="font-semibold text-white">{scenario.commission}</span>
                   </div>
                   <div>
-                    <span className={scenario.highlight ? "text-white/70" : "text-muted-foreground"}>Credits: </span>
-                    <span className={`font-semibold ${scenario.highlight ? "text-white" : ""}`}>{scenario.credits}</span>
+                    <span className={scenario.highlight ? "text-slate-300" : "text-slate-400"}>Credits: </span>
+                    <span className="font-semibold text-white">{scenario.credits}</span>
                   </div>
                   <div>
-                    <span className={scenario.highlight ? "text-white/70" : "text-muted-foreground"}>Monthly: </span>
-                    <span className={`font-semibold ${scenario.highlight ? "text-white" : ""}`}>{scenario.monthly}</span>
+                    <span className={scenario.highlight ? "text-slate-300" : "text-slate-400"}>Monthly: </span>
+                    <span className="font-semibold text-white">{scenario.monthly}</span>
                   </div>
                 </div>
-                <p className={`text-xs ${scenario.highlight ? "text-white/80" : "text-muted-foreground"}`}>
+                <p className={`text-xs ${scenario.highlight ? "text-slate-200" : "text-slate-300"}`}>
                   {scenario.note}
                 </p>
               </Card>
