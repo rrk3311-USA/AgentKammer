@@ -332,33 +332,33 @@ export default function ReverseBuyerOrigination() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="p-6 hover-elevate" data-testid="card-why-neutral">
+            <Card className="p-6 hover-elevate" data-testid="card-why-profile">
               <div className="w-12 h-12 rounded-lg bg-[#d4af37]/20 flex items-center justify-center mb-4">
                 <Lock className="h-6 w-6 text-[#d4af37]" />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Agent & Brokerage Neutral</h3>
+              <h3 className="font-semibold text-lg mb-2">Luxury Buyer Profile</h3>
               <p className="text-sm text-muted-foreground">
-                We're not forcing you into one lender or broker. We work with traditional brands, lean 100% models, or boutique luxury—whatever serves your numbers.
+                Share your ideal price range, down payment, self‑reported credit band, monthly comfort and target cities. No hard credit pulls; no pressure.
               </p>
             </Card>
 
-            <Card className="p-6 hover-elevate" data-testid="card-why-multiple">
+            <Card className="p-6 hover-elevate" data-testid="card-why-lenders">
               <div className="w-12 h-12 rounded-lg bg-[#d4af37]/20 flex items-center justify-center mb-4">
                 <TrendingUp className="h-6 w-6 text-[#d4af37]" />
               </div>
-              <h3 className="font-semibold text-lg mb-2">Multiple Lenders, One View</h3>
+              <h3 className="font-semibold text-lg mb-2">Lenders Quietly Compete</h3>
               <p className="text-sm text-muted-foreground">
-                See intelligent comparison: APR ranges, payments, credits, and cash-to-close bands — all in normal language.
+                With your permission, we invite multiple trusted lenders to provide ranges for APR, estimated payments, potential credits and closing‑cost bands.
               </p>
             </Card>
 
-            <Card className="p-6 hover-elevate" data-testid="card-why-concierge">
+            <Card className="p-6 hover-elevate" data-testid="card-why-brokerages">
               <div className="w-12 h-12 rounded-lg bg-[#d4af37]/20 flex items-center justify-center mb-4">
                 <Zap className="h-6 w-6 text-[#d4af37]" />
               </div>
-              <h3 className="font-semibold text-lg mb-2">White-Glove Concierge</h3>
+              <h3 className="font-semibold text-lg mb-2">Brokerages Quietly Compete</h3>
               <p className="text-sm text-muted-foreground">
-                We handle lender coordination, broker negotiations, and compliance so you stay focused on finding the perfect home.
+                We compare traditional brands, 100%‑commission models and boutique luxury shops to find lean fee structures that best fit your numbers.
               </p>
             </Card>
           </div>
