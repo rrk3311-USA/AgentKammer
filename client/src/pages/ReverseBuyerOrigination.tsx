@@ -278,7 +278,7 @@ export default function ReverseBuyerOrigination() {
                 key={idx}
                 className={`p-5 ${
                   scenario.highlight
-                    ? "bg-gradient-to-br from-slate-900/95 to-slate-800/95 border-2 border-transparent hover-elevate"
+                    ? "bg-gradient-to-br from-slate-900/95 to-slate-800/95 border-2 border-transparent hover-elevate md:col-span-2 lg:col-span-2 mx-auto w-full"
                     : "bg-slate-900/70 border border-slate-700/50 hover-elevate"
                 }`}
                 style={scenario.highlight ? {
