@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertLeadSchema, insertContentItemSchema } from "@shared/schema";
+import { insertLeadSchema, insertContentItemSchema, insertRboBuyerProfileSchema } from "@shared/schema";
 import OpenAI from "openai";
 import puppeteer from "puppeteer";
 import { Resend } from "resend";
@@ -652,6 +652,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ success: true });
     } catch (error) {
       res.status(500).json({ error: "Failed to delete content item" });
+    }
+  });
+
+  // Reverse Buyer Origination™ Profile Endpoint
+  app.post("/api/rbo/profile", async (req, res) => {
+    try {
+      const { phone } = req.body;
+
+      if (!phone || typeof phone !== "string" || phone.trim().length === 0) {
+        res.status(400).json({ error: "Phone number is required" });
+        return;
+      }
+
+      // Validate using schema
+      const validatedData = insertRboBuyerProfileSchema.parse({
+        phone: phone.trim(),
+      });
+
+      // Create RBO buyer profile
+      const profile = await storage.createRboBuyerProfile(validatedData);
+      
+      res.json({
+        ok: true,
+        id: profile.id,
+        message: "Profile created successfully. We'll analyze your options and send results within 24 hours.",
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid form data", details: error.errors });
+      } else {
+        console.error("RBO profile error:", error);
+        res.status(500).json({ error: "Failed to create profile" });
+      }
     }
   });
 

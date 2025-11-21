@@ -15,10 +15,13 @@ export default function ReverseBuyerOrigination() {
 
   const createProfileMutation = useMutation({
     mutationFn: async (phoneNumber: string) => {
-      return apiRequest("/api/rbo/profile", {
+      const response = await fetch("/api/rbo/profile", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: phoneNumber }),
       });
+      if (!response.ok) throw new Error("Failed to create profile");
+      return response.json();
     },
     onSuccess: () => {
       setSubmitted(true);

@@ -162,7 +162,16 @@ export class MemStorage implements IStorage {
   async createRboBuyerProfile(insertProfile: InsertRboBuyerProfile): Promise<RboBuyerProfile> {
     const id = randomUUID();
     const profile: RboBuyerProfile = {
-      ...insertProfile,
+      phone: insertProfile.phone,
+      priceRange: insertProfile.priceRange ?? null,
+      downPayment: insertProfile.downPayment ?? null,
+      creditBand: insertProfile.creditBand ?? null,
+      targetCities: insertProfile.targetCities ?? null,
+      monthlyComfort: insertProfile.monthlyComfort ?? null,
+      lenderData: insertProfile.lenderData ?? null,
+      brokerageData: insertProfile.brokerageData ?? null,
+      estimatedSavings: insertProfile.estimatedSavings ?? null,
+      leadScore: insertProfile.leadScore ?? null,
       id,
       createdAt: new Date(),
     };
@@ -250,6 +259,20 @@ export class DbStorage implements IStorage {
   async deleteContentItem(id: string): Promise<boolean> {
     const result = await db.delete(contentItems).where(eq(contentItems.id, id)).returning();
     return result.length > 0;
+  }
+
+  async createRboBuyerProfile(insertProfile: InsertRboBuyerProfile): Promise<RboBuyerProfile> {
+    const result = await db.insert(rboBuyerProfiles).values(insertProfile).returning();
+    return result[0];
+  }
+
+  async getRboBuyerProfileByPhone(phone: string): Promise<RboBuyerProfile | undefined> {
+    const result = await db.select().from(rboBuyerProfiles).where(eq(rboBuyerProfiles.phone, phone));
+    return result[0];
+  }
+
+  async getAllRboBuyerProfiles(): Promise<RboBuyerProfile[]> {
+    return await db.select().from(rboBuyerProfiles).orderBy(desc(rboBuyerProfiles.createdAt));
   }
 }
 
