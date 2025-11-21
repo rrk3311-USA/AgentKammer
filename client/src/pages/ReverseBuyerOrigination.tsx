@@ -328,7 +328,7 @@ export default function ReverseBuyerOrigination() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <p className="text-sm font-semibold text-[#d4af37] tracking-wide mb-2 uppercase">Why it's different</p>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">Private banking energy. Real estate domain.</h2>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">Innovative private‑banking approach applied to the real‑estate domain</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
