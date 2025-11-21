@@ -23,7 +23,7 @@ export function FloatingChatAssistant() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Welcome, and blessings to you! ✨ May I have the pleasure of knowing your name?",
+      text: "Welcome, and blessings to you! May I have the pleasure of knowing your name?",
       sender: "agent",
       timestamp: new Date(),
     },
@@ -192,7 +192,9 @@ export function FloatingChatAssistant() {
             </div>
             
             <div className="text-center animate-wiggle">
-              <div className="text-5xl filter drop-shadow-2xl">🎩</div>
+              <div className="filter drop-shadow-2xl">
+                <Sparkles className="w-12 h-12 text-[#d4af37]" style={{ transform: 'rotate(15deg)' }} />
+              </div>
             </div>
 
             <div className="mt-2 flex flex-col items-end space-y-1">

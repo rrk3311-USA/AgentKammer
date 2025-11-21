@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Sparkles } from "lucide-react";
 import { useState } from "react";
 
 // Import luxury property images
@@ -163,7 +163,9 @@ export default function Contact() {
               {/* AI Chat Reference */}
               <Card className="p-6 bg-gradient-to-br from-[#d4af37]/5 to-[#d4af37]/10 border border-[#d4af37]/30 mb-6">
                 <div className="flex items-start gap-4">
-                  <div className="text-4xl">🎩</div>
+                  <div className="flex items-center justify-center">
+                    <Sparkles className="w-10 h-10 text-[#d4af37]" style={{ transform: 'rotate(15deg)' }} />
+                  </div>
                   <div className="flex-1">
                     <h4 className="font-semibold mb-2 text-[#d4af37]">Quick Questions?</h4>
                     <p className="text-sm text-muted-foreground mb-3">
