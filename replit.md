@@ -9,7 +9,13 @@ Preferred communication style: Simple, everyday language.
 ## System Architecture
 
 ### UI/UX Decisions
-The platform features a visual-first approach with large imagery, a gold-accented color scheme, and a three-tier typography system (Cormorant, Playfair Display, Inter). It includes a custom theme provider for light/dark mode, glassmorphism elements, and enhanced property card styling. Key UI components include a tabbed floating chat assistant, a "Property Command Center," and an "Agentic Actions" section with modular Agentic Compute visualization. Specific design elements extend to personalized chat avatars, gold-gradient email forms, and a footer with "Powered by AI" branding.
+The platform features a visual-first approach with large imagery, a gold-accented color scheme (#d4af37), and a three-tier typography system (Cormorant, Playfair Display, Inter). It includes a custom theme provider for light/dark mode, glassmorphism elements, and enhanced property card styling. Key UI components include a tabbed floating chat assistant, a "Property Command Center," and an "Agentic Actions" section with modular Agentic Compute visualization. Specific design elements extend to personalized chat avatars, gold-gradient email forms, and a footer with "Powered by AI" branding.
+
+**Design Standards (November 2025):**
+- **Zero Emoji Policy**: All visual indicators use Lucide React SVG icons exclusively. No emojis permitted in UI, forms, chat prompts, or notifications.
+- **Header Branding**: Features "AGENT KAMMER" with tagline "When Brokers Compete You Win" in gold (#d4af37), accompanied by a rotated Sparkles icon.
+- **Icon System**: Professional SVG icons (Phone, Sparkles, MessageCircle, etc.) from lucide-react library throughout the application.
+- **Text Legibility**: Dark navy/slate backgrounds ensure optimal contrast for gold and white text.
 
 ### Technical Implementations
 The frontend uses React, TypeScript, and Vite, with `wouter` for routing and React Query for server state management. `shadcn/ui` provides customizable components styled with Tailwind CSS. The backend is built with Express.js, Node.js, and TypeScript, providing RESTful API routes. Session management is handled via `connect-pg-simple` with PostgreSQL. OpenAI integration powers the chat assistant for lead extraction.

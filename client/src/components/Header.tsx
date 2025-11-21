@@ -33,7 +33,7 @@ export function Header() {
               </div>
               <div className="flex flex-col items-center">
                 <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700 }} className="text-lg md:text-xl tracking-wide text-foreground">AGENT KAMMER</span>
-                <span className="text-[0.6rem] md:text-[0.625rem] font-semibold tracking-wide text-muted-foreground">When Brokers Compete You Win</span>
+                <span className="text-[0.6rem] md:text-[0.625rem] font-semibold tracking-wide text-[#d4af37]">When Brokers Compete You Win</span>
               </div>
             </div>
           </Link>
