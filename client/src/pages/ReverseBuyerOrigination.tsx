@@ -12,18 +12,19 @@ export default function ReverseBuyerOrigination() {
   const [phone, setPhone] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [selectedYear, setSelectedYear] = useState(5);
+  const [purchasePrice, setPurchasePrice] = useState(1);
   const { toast } = useToast();
 
-  // Calculate savings based on selected year
-  const calculateSavings = (years: number) => {
-    const baseSavings = 42800; // 5-year baseline
+  // Calculate savings based on selected year and purchase price
+  const calculateSavings = (years: number, priceInMillions: number) => {
+    const baseSavingsPerMillion = 42800; // 5-year baseline per $1M
     const multipliers: { [key: number]: number } = {
       5: 1,
       10: 2,
       15: 3,
       30: 6,
     };
-    return Math.round(baseSavings * (multipliers[years] || 1));
+    return Math.round(baseSavingsPerMillion * (multipliers[years] || 1) * priceInMillions);
   };
 
   const createProfileMutation = useMutation({
@@ -204,13 +205,31 @@ export default function ReverseBuyerOrigination() {
             {/* Right: Hero Card */}
             <Card className="bg-gradient-to-br from-slate-900/90 to-slate-800/90 border-[#d4af37]/40 p-6 backdrop-blur-lg">
               <div className="mb-6">
-                <Badge className="bg-[#d4af37] text-[#0a1628] border-[#d4af37] mb-2 font-semibold">Example • $1M Buyer</Badge>
+                <Badge className="bg-[#d4af37] text-[#0a1628] border-[#d4af37] mb-2 font-semibold">
+                  Example • ${purchasePrice}M Buyer
+                </Badge>
                 <h3 className="text-white font-semibold text-lg">Traditional vs Reverse Buyer Origination™</h3>
               </div>
 
               <div className="mb-6 p-5 bg-gradient-to-r from-teal-600/40 to-emerald-600/40 rounded-lg border border-emerald-400/50">
-                <p className="text-emerald-200 text-xs mb-2 font-medium">Estimated {selectedYear}-year advantage</p>
-                <p className="text-6xl font-bold text-[#d4af37] mb-3 leading-tight">${calculateSavings(selectedYear).toLocaleString()}</p>
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-emerald-200 text-xs font-medium">Estimated {selectedYear}-year advantage</p>
+                  <div className="flex items-center gap-2">
+                    <span className="text-emerald-200 text-xs">$</span>
+                    <Input
+                      type="number"
+                      min="0.5"
+                      max="50"
+                      step="0.5"
+                      value={purchasePrice}
+                      onChange={(e) => setPurchasePrice(parseFloat(e.target.value) || 1)}
+                      className="w-16 h-7 bg-slate-800/50 border-emerald-400/30 text-white text-xs text-center px-2"
+                      data-testid="input-purchase-price"
+                    />
+                    <span className="text-emerald-200 text-xs">M</span>
+                  </div>
+                </div>
+                <p className="text-6xl font-bold text-[#d4af37] mb-3 leading-tight">${calculateSavings(selectedYear, purchasePrice).toLocaleString()}</p>
                 <p className="text-sm text-emerald-200/90 font-medium">From lower APR, credits & smarter broker fees.</p>
                 
                 <div className="mt-4 flex gap-2 flex-wrap">
