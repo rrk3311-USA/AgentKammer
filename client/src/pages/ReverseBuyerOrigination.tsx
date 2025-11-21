@@ -189,38 +189,38 @@ export default function ReverseBuyerOrigination() {
             </div>
 
             {/* Right: Hero Card */}
-            <Card className="bg-gradient-to-br from-white/10 to-white/5 border-white/20 p-6 backdrop-blur-lg">
+            <Card className="bg-gradient-to-br from-slate-900/90 to-slate-800/90 border-[#d4af37]/40 p-6 backdrop-blur-lg">
               <div className="mb-6">
-                <Badge className="bg-white/20 text-white border-white/30 mb-2">Example • $1M Buyer</Badge>
-                <h3 className="text-white font-semibold">Traditional vs Reverse Buyer Origination™</h3>
+                <Badge className="bg-[#d4af37] text-[#0a1628] border-[#d4af37] mb-2 font-semibold">Example • $1M Buyer</Badge>
+                <h3 className="text-white font-semibold text-lg">Traditional vs Reverse Buyer Origination™</h3>
               </div>
 
-              <div className="mb-6 p-4 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-lg border border-emerald-500/30">
-                <p className="text-white/70 text-xs mb-1">Estimated 5-year advantage</p>
+              <div className="mb-6 p-4 bg-gradient-to-r from-teal-600/40 to-emerald-600/40 rounded-lg border border-emerald-400/50">
+                <p className="text-emerald-200 text-xs mb-1 font-medium">Estimated 5-year advantage</p>
                 <p className="text-4xl font-bold text-[#d4af37] mb-1">$42,800</p>
-                <p className="text-xs text-white/60">From lower APR, credits & smarter broker fees.</p>
+                <p className="text-xs text-emerald-200/80">From lower APR, credits & smarter broker fees.</p>
               </div>
 
               <div className="mt-6 flex items-start justify-between gap-4">
                 <div className="flex-1 space-y-3">
-                  <div className="p-3 bg-slate-900/40 rounded-lg border border-white/10">
-                    <p className="text-xs text-slate-400 mb-1">Traditional path</p>
+                  <div className="p-3 bg-slate-700/50 rounded-lg border border-slate-600">
+                    <p className="text-xs text-slate-300 mb-1 font-medium">Traditional path</p>
                     <p className="text-sm text-white font-semibold">7.25% APR · 2.5% buyer commission</p>
-                    <p className="text-xs text-slate-500 mt-1">Single lender • Single brokerage</p>
+                    <p className="text-xs text-slate-300 mt-1">Single lender • Single brokerage</p>
                   </div>
-                  <div className="p-3 bg-[#d4af37]/15 rounded-lg border border-[#d4af37]/30">
-                    <p className="text-xs text-[#e5bd4a] mb-1">With Agent Kammer</p>
+                  <div className="p-3 bg-[#d4af37]/25 rounded-lg border border-[#d4af37]/50">
+                    <p className="text-xs text-[#ffd977] mb-1 font-medium">With Agent Kammer</p>
                     <p className="text-sm text-white font-semibold">6.25–6.40% APR band</p>
-                    <p className="text-xs text-slate-400 mt-1">Credits + lean broker structure</p>
+                    <p className="text-xs text-slate-200 mt-1">Credits + lean broker structure</p>
                   </div>
                 </div>
                 <div className="flex flex-col items-center justify-center shrink-0 h-24">
-                  <p className="text-xs text-white/60 text-center">Powered by</p>
+                  <p className="text-xs text-slate-300 text-center font-medium">Powered by</p>
                   <p className="text-xs font-semibold text-[#79d3ff]">AI</p>
                 </div>
               </div>
 
-              <div className="mt-4 space-y-2 text-xs text-white/70">
+              <div className="mt-4 space-y-2 text-xs text-slate-200">
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
                   <span>3–7 lenders quietly compared</span>
