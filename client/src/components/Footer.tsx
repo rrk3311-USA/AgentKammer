@@ -101,10 +101,6 @@ export function Footer() {
           <div className="flex flex-col items-center gap-2">
             <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 mb-1 flex-wrap text-center">
               <LiveInterestRate />
-              <div className="flex items-center gap-1.5 text-white/90">
-                <Shield className="h-4 w-4 text-[#d4af37]" />
-                <span className="text-xs md:text-sm font-medium whitespace-nowrap">Swiss-Level Privacy • Zero-Access</span>
-              </div>
             </div>
             <div className="flex items-center justify-center gap-1.5 text-white/90 mb-2">
               <Brain className="h-5 w-5 text-[#79d3ff]" />
