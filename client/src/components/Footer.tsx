@@ -102,10 +102,6 @@ export function Footer() {
             <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 mb-1 flex-wrap text-center">
               <LiveInterestRate />
             </div>
-            <div className="flex items-center justify-center gap-1.5 text-white/90 mb-2">
-              <Brain className="h-5 w-5 text-[#79d3ff]" />
-              <span className="text-sm font-medium">Powered by AI</span>
-            </div>
             <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center">
               <div className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors">
                 <SiReplit className="h-4 w-4" />
