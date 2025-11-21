@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { TrendingUp, DollarSign, Lock, Zap, CheckCircle } from "lucide-react";
+import { TrendingUp, DollarSign, Lock, Zap, CheckCircle, Phone } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
@@ -166,7 +166,7 @@ export default function ReverseBuyerOrigination() {
               {!submitted ? (
                 <form onSubmit={handleHeroSubmit} className="flex gap-3 mb-6" data-testid="form-rbo-hero">
                   <div className="flex-1 flex items-center rounded-lg border border-white/20 px-3 backdrop-blur-sm" style={{ background: 'rgba(15, 32, 55, 0.8)' }}>
-                    <span className="text-white/70 mr-2">📱</span>
+                    <Phone className="h-4 w-4 text-white/70 mr-2" />
                     <Input
                       type="tel"
                       id="rbo-hero-phone"
@@ -425,7 +425,7 @@ export default function ReverseBuyerOrigination() {
           {!submitted ? (
             <form onSubmit={handleHeroSubmit} className="flex flex-col sm:flex-row gap-3 justify-center" data-testid="form-rbo-cta">
               <div className="flex-1 max-w-xs flex items-center rounded-lg border border-white/20 px-3 backdrop-blur-sm" style={{ background: 'rgba(15, 32, 55, 0.8)' }}>
-                <span className="text-white/70 mr-2">📱</span>
+                <Phone className="h-4 w-4 text-white/70 mr-2" />
                 <Input
                   type="tel"
                   placeholder="Enter your mobile number"
