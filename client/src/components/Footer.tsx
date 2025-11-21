@@ -128,13 +128,6 @@ export function Footer() {
         </div>
       </div>
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
-      <div className="bg-[#f5f1e8] py-3">
-        <div className="max-w-7xl mx-auto px-6">
-          <p className="text-center text-xs font-medium" style={{ color: '#050505' }}>
-            Copyright 2025 - Agent Kammer
-          </p>
-        </div>
-      </div>
     </footer>
   );
 }
