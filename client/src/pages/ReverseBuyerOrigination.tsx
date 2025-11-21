@@ -92,7 +92,7 @@ export default function ReverseBuyerOrigination() {
       tag: "Scenario 5",
       title: "Agent Kammer Reverse Buyer Origination™",
       apr: "6.10–6.40%",
-      commission: "~1–1.5%",
+      commission: "~1%",
       credits: "$5k–$20k+",
       monthly: "~$6,200",
       note: "Typical savings: $35k–$55k in 5 years with luxury concierge.",
