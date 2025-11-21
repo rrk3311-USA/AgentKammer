@@ -1,4 +1,4 @@
-import { SiReplit, SiNvidia, SiClaude, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
+import { SiReplit, SiNvidia, SiClaude, SiAnthropic, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
 import { Brain, FileText, Globe, Headphones, GraduationCap, Download, Shield } from "lucide-react";
 import { LiveInterestRate } from "./LiveInterestRate";
 import { Link } from "wouter";
@@ -112,7 +112,7 @@ export function Footer() {
                 <span className="text-[0.625rem]">Replit</span>
               </div>
               <div className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors">
-                <Brain className="h-4 w-4" />
+                <SiAnthropic className="h-4 w-4" />
                 <span className="text-[0.625rem]">Anthropic</span>
               </div>
               <div className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors">
