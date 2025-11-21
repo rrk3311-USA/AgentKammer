@@ -104,6 +104,10 @@ export function Footer() {
             </div>
             <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center">
               <div className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors">
+                <Brain className="h-4 w-4 text-[#79d3ff]" />
+                <span className="text-[0.625rem]">Powered by AI</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors">
                 <SiReplit className="h-4 w-4" />
                 <span className="text-[0.625rem]">Replit</span>
               </div>
