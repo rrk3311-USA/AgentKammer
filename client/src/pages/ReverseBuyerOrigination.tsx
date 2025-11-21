@@ -201,8 +201,8 @@ export default function ReverseBuyerOrigination() {
                 <p className="text-xs text-emerald-200/80">From lower APR, credits & smarter broker fees.</p>
               </div>
 
-              <div className="mt-6 flex items-start justify-between gap-4">
-                <div className="flex-1 space-y-3">
+              <div className="mt-6">
+                <div className="space-y-3">
                   <div className="p-3 bg-slate-700/50 rounded-lg border border-slate-600">
                     <p className="text-xs text-slate-300 mb-1 font-medium">Traditional path</p>
                     <p className="text-sm text-white font-semibold">7.25% APR · 2.5% buyer commission</p>
@@ -213,10 +213,6 @@ export default function ReverseBuyerOrigination() {
                     <p className="text-sm text-white font-semibold">6.25–6.40% APR band</p>
                     <p className="text-xs text-slate-200 mt-1">Credits + lean broker structure</p>
                   </div>
-                </div>
-                <div className="flex flex-col items-center justify-center shrink-0 h-24">
-                  <p className="text-xs text-slate-300 text-center font-medium">Powered by</p>
-                  <p className="text-xs font-semibold text-[#79d3ff]">AI</p>
                 </div>
               </div>
 
