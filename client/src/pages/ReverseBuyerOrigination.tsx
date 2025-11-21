@@ -151,7 +151,7 @@ export default function ReverseBuyerOrigination() {
 
               {!submitted ? (
                 <form onSubmit={handleHeroSubmit} className="flex gap-3 mb-6" data-testid="form-rbo-hero">
-                  <div className="flex-1 flex items-center bg-white/10 rounded-lg border border-white/20 px-3 backdrop-blur-sm">
+                  <div className="flex-1 flex items-center rounded-lg border border-white/20 px-3 backdrop-blur-sm" style={{ background: 'rgba(15, 32, 55, 0.8)' }}>
                     <span className="text-white/70 mr-2">📱</span>
                     <Input
                       type="tel"
@@ -159,7 +159,7 @@ export default function ReverseBuyerOrigination() {
                       placeholder="Enter your mobile number"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="bg-transparent border-0 text-white placeholder:text-white/50 focus-visible:ring-0 focus:outline-none"
+                      className="bg-transparent border-0 text-white placeholder:text-white/40 focus-visible:ring-0 focus:outline-none"
                       data-testid="input-rbo-phone"
                       required
                     />
@@ -365,14 +365,14 @@ export default function ReverseBuyerOrigination() {
           </p>
           {!submitted ? (
             <form onSubmit={handleHeroSubmit} className="flex flex-col sm:flex-row gap-3 justify-center" data-testid="form-rbo-cta">
-              <div className="flex-1 max-w-xs flex items-center bg-white/10 rounded-lg border border-white/20 px-3 backdrop-blur-sm">
+              <div className="flex-1 max-w-xs flex items-center rounded-lg border border-white/20 px-3 backdrop-blur-sm" style={{ background: 'rgba(15, 32, 55, 0.8)' }}>
                 <span className="text-white/70 mr-2">📱</span>
                 <Input
                   type="tel"
                   placeholder="Enter your mobile number"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="bg-transparent border-0 text-white placeholder:text-white/50 focus-visible:ring-0 focus:outline-none"
+                  className="bg-transparent border-0 text-white placeholder:text-white/40 focus-visible:ring-0 focus:outline-none"
                   data-testid="input-rbo-phone-cta"
                   required
                 />
