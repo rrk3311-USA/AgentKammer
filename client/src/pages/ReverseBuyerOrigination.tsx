@@ -195,10 +195,10 @@ export default function ReverseBuyerOrigination() {
                 <h3 className="text-white font-semibold text-lg">Traditional vs Reverse Buyer Origination™</h3>
               </div>
 
-              <div className="mb-6 p-4 bg-gradient-to-r from-teal-600/40 to-emerald-600/40 rounded-lg border border-emerald-400/50">
-                <p className="text-emerald-200 text-xs mb-1 font-medium">Estimated 5-year advantage</p>
-                <p className="text-4xl font-bold text-[#d4af37] mb-1">$42,800</p>
-                <p className="text-xs text-emerald-200/80">From lower APR, credits & smarter broker fees.</p>
+              <div className="mb-6 p-5 bg-gradient-to-r from-teal-600/40 to-emerald-600/40 rounded-lg border border-emerald-400/50">
+                <p className="text-emerald-200 text-xs mb-2 font-medium">Estimated 5-year advantage</p>
+                <p className="text-6xl font-bold text-[#d4af37] mb-3 leading-tight">$42,800</p>
+                <p className="text-sm text-emerald-200/90 font-medium">From lower APR, credits & smarter broker fees.</p>
               </div>
 
               <div className="mt-6">
@@ -279,7 +279,7 @@ export default function ReverseBuyerOrigination() {
                 className={`p-5 ${
                   scenario.highlight
                     ? "bg-gradient-to-br from-slate-900/95 to-slate-800/95 border-2 border-transparent hover-elevate md:col-span-2 lg:col-span-2 mx-auto w-full"
-                    : "bg-slate-900/70 border border-slate-700/50 hover-elevate"
+                    : "bg-slate-950/90 border border-slate-800 hover-elevate"
                 }`}
                 style={scenario.highlight ? {
                   backgroundImage: "linear-gradient(to bottom right, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95)), linear-gradient(135deg, #d4af37, #f4d76d)",
