@@ -97,7 +97,7 @@ export default function Contact() {
                   Agent Kammer
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  Zero-Knowledge Encrypted Real Estate Concierge serving NYC, California, and Nevada
+                  Encrypted Real Estate Concierge serving NYC, California, and Nevada
                 </p>
               </div>
 

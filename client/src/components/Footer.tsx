@@ -13,7 +13,7 @@ export function Footer() {
             <div>
               <h3 className="font-serif text-base md:text-lg font-semibold mb-3">Agent Kammer</h3>
               <p className="text-xs md:text-sm text-muted-foreground mb-3">
-                Zero-Knowledge Encrypted Real Estate Concierge
+                Encrypted Real Estate Concierge
               </p>
               <div className="space-y-2">
                 <Link href="/document-portal" className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-foreground transition-colors">
