@@ -24,18 +24,6 @@ export function Header() {
                 <span className="text-sm font-medium">Reverse Buyer™</span>
               </Button>
             </Link>
-            <Button
-              variant="ghost"
-              className="hover-elevate active-elevate-2 h-12 px-4 gap-2"
-              data-testid="button-header-contact"
-              onClick={() => {
-                const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLElement;
-                if (chatButton) chatButton.click();
-              }}
-            >
-              <MessageCircle className="h-6 w-6" />
-              <span className="text-sm font-medium">Contact</span>
-            </Button>
           </div>
 
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
@@ -71,13 +59,27 @@ export function Header() {
             >
               <Heart className="h-5 w-5" />
             </Button>
-            <Button
-              variant="default"
-              className="hidden md:flex rounded-full text-[#0a1628]"
-              data-testid="button-sign-in"
-            >
-              Sign In
-            </Button>
+            <div className="hidden md:flex flex-col gap-2">
+              <Button
+                variant="default"
+                className="rounded-full text-[#0a1628]"
+                data-testid="button-sign-in"
+              >
+                Sign In
+              </Button>
+              <Button
+                variant="ghost"
+                className="hover-elevate active-elevate-2 h-9 px-4 gap-2 text-xs"
+                data-testid="button-header-contact"
+                onClick={() => {
+                  const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLElement;
+                  if (chatButton) chatButton.click();
+                }}
+              >
+                <MessageCircle className="h-4 w-4" />
+                <span>Contact</span>
+              </Button>
+            </div>
             <Button
               variant="ghost"
               size="icon"
