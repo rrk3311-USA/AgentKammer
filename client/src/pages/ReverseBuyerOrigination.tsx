@@ -202,15 +202,15 @@ export default function ReverseBuyerOrigination() {
               </div>
 
               <div className="space-y-3">
-                <div className="p-3 bg-white/10 rounded-lg border border-white/10">
-                  <p className="text-xs text-white/60 mb-1">Traditional path</p>
+                <div className="p-3 bg-slate-900/40 rounded-lg border border-white/10">
+                  <p className="text-xs text-slate-400 mb-1">Traditional path</p>
                   <p className="text-sm text-white font-semibold">7.25% APR · 2.5% buyer commission</p>
-                  <p className="text-xs text-white/50 mt-1">Single lender • Single brokerage</p>
+                  <p className="text-xs text-slate-500 mt-1">Single lender • Single brokerage</p>
                 </div>
-                <div className="p-3 bg-[#d4af37]/20 rounded-lg border border-[#d4af37]/30">
-                  <p className="text-xs text-[#d4af37] mb-1">With Agent Kammer</p>
+                <div className="p-3 bg-[#d4af37]/15 rounded-lg border border-[#d4af37]/30">
+                  <p className="text-xs text-[#e5bd4a] mb-1">With Agent Kammer</p>
                   <p className="text-sm text-white font-semibold">6.25–6.40% APR band</p>
-                  <p className="text-xs text-white/50 mt-1">Credits + lean broker structure</p>
+                  <p className="text-xs text-slate-400 mt-1">Credits + lean broker structure</p>
                 </div>
               </div>
 
