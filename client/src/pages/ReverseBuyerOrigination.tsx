@@ -140,7 +140,7 @@ export default function ReverseBuyerOrigination() {
                 <span className="text-sm font-semibold text-[#d4af37] tracking-wide">REVERSE BUYER ORIGINATION™</span>
               </div>
               <h1 className="font-serif text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-                A modern, luxury way to buy a home.
+                Reverse Buyer Origination™
               </h1>
               <p className="text-lg text-white/90 mb-2 font-semibold">
                 When lenders & brokers compete, you win.
