@@ -68,3 +68,26 @@ export const insertContentItemSchema = createInsertSchema(contentItems).omit({
 
 export type InsertContentItem = z.infer<typeof insertContentItemSchema>;
 export type ContentItem = typeof contentItems.$inferSelect;
+
+export const rboBuyerProfiles = pgTable("rbo_buyer_profiles", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  phone: text("phone").notNull(),
+  priceRange: text("price_range"),
+  downPayment: text("down_payment"),
+  creditBand: text("credit_band"),
+  targetCities: text("target_cities").array(),
+  monthlyComfort: text("monthly_comfort"),
+  lenderData: text("lender_data"),
+  brokerageData: text("brokerage_data"),
+  estimatedSavings: integer("estimated_savings"),
+  leadScore: integer("lead_score"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertRboBuyerProfileSchema = createInsertSchema(rboBuyerProfiles).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertRboBuyerProfile = z.infer<typeof insertRboBuyerProfileSchema>;
+export type RboBuyerProfile = typeof rboBuyerProfiles.$inferSelect;

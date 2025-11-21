@@ -1,4 +1,4 @@
-import { type User, type InsertUser, type Lead, type InsertLead, type ContentItem, type InsertContentItem, users, leads, contentItems } from "@shared/schema";
+import { type User, type InsertUser, type Lead, type InsertLead, type ContentItem, type InsertContentItem, type RboBuyerProfile, type InsertRboBuyerProfile, users, leads, contentItems, rboBuyerProfiles } from "@shared/schema";
 import { randomUUID } from "crypto";
 import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
@@ -23,6 +23,10 @@ export interface IStorage {
   getContentItemById(id: string): Promise<ContentItem | undefined>;
   updateContentItem(id: string, item: Partial<InsertContentItem>): Promise<ContentItem | undefined>;
   deleteContentItem(id: string): Promise<boolean>;
+
+  createRboBuyerProfile(profile: InsertRboBuyerProfile): Promise<RboBuyerProfile>;
+  getRboBuyerProfileByPhone(phone: string): Promise<RboBuyerProfile | undefined>;
+  getAllRboBuyerProfiles(): Promise<RboBuyerProfile[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -151,6 +155,29 @@ export class MemStorage implements IStorage {
 
   async deleteContentItem(id: string): Promise<boolean> {
     return this.contentItems.delete(id);
+  }
+
+  private rboProfiles: Map<string, RboBuyerProfile> = new Map();
+
+  async createRboBuyerProfile(insertProfile: InsertRboBuyerProfile): Promise<RboBuyerProfile> {
+    const id = randomUUID();
+    const profile: RboBuyerProfile = {
+      ...insertProfile,
+      id,
+      createdAt: new Date(),
+    };
+    this.rboProfiles.set(id, profile);
+    return profile;
+  }
+
+  async getRboBuyerProfileByPhone(phone: string): Promise<RboBuyerProfile | undefined> {
+    return Array.from(this.rboProfiles.values()).find((p) => p.phone === phone);
+  }
+
+  async getAllRboBuyerProfiles(): Promise<RboBuyerProfile[]> {
+    return Array.from(this.rboProfiles.values()).sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    );
   }
 }
 

@@ -14,6 +14,16 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex h-24 items-center justify-between gap-4 relative">
           <div className="hidden md:flex items-center gap-3">
+            <Link href="/reverse-buyer-origination">
+              <Button
+                variant="ghost"
+                className="hover-elevate active-elevate-2 h-12 px-4 gap-2"
+                data-testid="button-header-rbo"
+              >
+                <Sparkles className="h-6 w-6" />
+                <span className="text-sm font-medium">Reverse Buyer™</span>
+              </Button>
+            </Link>
             <Link href="/document-portal">
               <Button
                 variant="ghost"
@@ -112,6 +122,14 @@ export function Header() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Saved Searches
+              </span>
+            </Link>
+            <Link href="/reverse-buyer-origination" data-testid="link-mobile-rbo">
+              <span
+                className="text-base font-medium hover:text-primary cursor-pointer block"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Reverse Buyer Origination™
               </span>
             </Link>
             <Link href="/document-portal" data-testid="link-mobile-document-portal">
