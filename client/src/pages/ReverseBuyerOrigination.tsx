@@ -159,7 +159,7 @@ export default function ReverseBuyerOrigination() {
                 Reverse Buyer Origination™
               </h1>
               <p className="text-lg text-white/90 mb-2 font-semibold">
-                Luxury real estate concierge
+                Putting the power back into the buyers hands
               </p>
               <p className="text-base text-white/70 mb-6 leading-relaxed">
                 Agent Kammer Reverse Buyer Origination™ builds your buyer profile once, then quietly shops multiple lenders and brokerages to find the smartest combination of APR, credits, and fees — before you ever write an offer.
