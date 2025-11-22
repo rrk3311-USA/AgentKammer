@@ -21,6 +21,9 @@ export function AgenticComputeSection() {
       
       <div className="relative max-w-7xl mx-auto px-6">
         <div className="text-center mb-8">
+          <p className="text-sm font-semibold text-white/90 mb-3 tracking-wide">
+            Broker-agnostic. Lender-agnostic. Buyer-first.
+          </p>
           <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-3">
             Massive Compute Engine
           </h2>
