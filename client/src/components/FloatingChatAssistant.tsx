@@ -192,8 +192,8 @@ export function FloatingChatAssistant() {
             </div>
             
             <div className="text-center animate-wiggle">
-              <div className="filter drop-shadow-2xl">
-                <Sparkles className="w-12 h-12 text-[#d4af37]" style={{ transform: 'rotate(15deg)' }} />
+              <div className="filter drop-shadow-2xl text-5xl">
+                🎩
               </div>
             </div>
 
@@ -243,7 +243,7 @@ export function FloatingChatAssistant() {
             <div>
               <div className="flex items-center gap-2">
                 <h3 className="font-serif font-semibold">Agent Kammer</h3>
-                <Sparkles className="w-3 h-3" />
+                <span className="text-sm">🎩</span>
               </div>
               <p className="text-xs text-white/90">Your Luxury Concierge</p>
             </div>

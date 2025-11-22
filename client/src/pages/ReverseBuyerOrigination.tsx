@@ -17,14 +17,16 @@ export default function ReverseBuyerOrigination() {
 
   // Calculate savings based on selected year and purchase price
   const calculateSavings = (years: number, priceInMillions: number) => {
-    const baseSavingsPerMillion = 42800; // 5-year baseline per $1M
-    const multipliers: { [key: number]: number } = {
-      5: 1,
-      10: 2,
-      15: 3,
-      30: 6,
-    };
-    return Math.round(baseSavingsPerMillion * (multipliers[years] || 1) * priceInMillions);
+    // ONE-TIME commission savings: 1.5% difference (2.5% traditional - 1% Agent Kammer)
+    const commissionSavings = priceInMillions * 1000000 * 0.015;
+    
+    // ONGOING monthly APR savings: ~1% APR difference on 80% LTV loan
+    // At 7.25% vs 6.25% on $800k loan = ~$533/month savings per $1M purchase
+    const monthlySavingsPerMillion = 533;
+    const totalMonthlyPayments = years * 12;
+    const aprSavings = monthlySavingsPerMillion * priceInMillions * totalMonthlyPayments;
+    
+    return Math.round(commissionSavings + aprSavings);
   };
 
   const createProfileMutation = useMutation({

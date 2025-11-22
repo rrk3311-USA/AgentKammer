@@ -28,8 +28,8 @@ export function Header() {
 
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
             <div className="flex flex-col items-center px-3 py-2">
-              <div className="mb-0.5">
-                <Sparkles className="h-6 w-6 text-[#d4af37]" style={{ transform: 'rotate(15deg)' }} />
+              <div className="mb-0.5 text-2xl">
+                🎩
               </div>
               <div className="flex flex-col items-center">
                 <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700 }} className="text-lg md:text-xl tracking-wide text-foreground">AGENT KAMMER</span>
