@@ -153,7 +153,7 @@ export default function ReverseBuyerOrigination() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-2 h-2 rounded-full bg-[#d4af37]"></div>
-                <span className="text-sm font-semibold text-[#d4af37] tracking-wide">REVERSE BUYER ORIGINATION™</span>
+                <span className="text-sm font-semibold text-[#d4af37] tracking-wide">LUXURY CONCIERGE SERVICE</span>
               </div>
               <h1 className="font-serif text-4xl lg:text-5xl font-bold mb-4 leading-tight">
                 Reverse Buyer Origination™
