@@ -2,9 +2,7 @@ import { HeroSearch } from "@/components/HeroSearch";
 import { HorizontalPropertyScroll } from "@/components/HorizontalPropertyScroll";
 import { PropertyCard } from "@/components/PropertyCard";
 import { AgenticComputeSection } from "@/components/AgenticCompute/AgenticComputeSection";
-import { LuxuryMoodBoard } from "@/components/LuxuryMoodBoard";
 import { LuxuryBackground } from "@/components/LuxuryBackground";
-import { ProcessFlowSection } from "@/components/ProcessFlowSection";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -420,10 +418,6 @@ export default function Home() {
       </section>
 
       <AgenticComputeSection />
-
-        <ProcessFlowSection />
-
-        <LuxuryMoodBoard />
 
         <section className="py-8 lg:py-12 bg-[#0a1628] text-white relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative">
