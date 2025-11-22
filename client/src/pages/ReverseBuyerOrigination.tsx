@@ -271,7 +271,7 @@ export default function ReverseBuyerOrigination() {
               <div className="mt-4 space-y-2 text-xs text-slate-200">
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
-                  <span>3–7 lenders quietly compared</span>
+                  <span>Vast lender comparison</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
