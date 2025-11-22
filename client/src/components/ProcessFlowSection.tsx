@@ -119,7 +119,7 @@ export function ProcessFlowSection() {
         {/* Header */}
         <div className="text-center mb-6">
           <h2 className="font-serif text-3xl lg:text-4xl font-semibold mb-2">
-            How Our Process is <span className="text-[#d4af37]">Different</span>
+            How Our Process <span className="text-[#d4af37]">Differs</span>
           </h2>
           <p className="text-base lg:text-lg text-white/80 max-w-3xl mx-auto">
             Traditional real estate puts you at a disadvantage. Our encrypted platform flips the power dynamic—brokers compete for your business.
@@ -211,7 +211,7 @@ export function ProcessFlowSection() {
         {/* Swipe Hint */}
         <div className="text-center mt-3">
           <p className="text-white/50 text-xs">
-            Swipe or use arrows to navigate
+            Swipe to navigate
           </p>
         </div>
       </div>
