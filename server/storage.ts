@@ -1,4 +1,15 @@
-import { type User, type InsertUser, type Lead, type InsertLead, type ContentItem, type InsertContentItem, type RboBuyerProfile, type InsertRboBuyerProfile, users, leads, contentItems, rboBuyerProfiles } from "@shared/schema";
+import { 
+  type User, type InsertUser, 
+  type Lead, type InsertLead, 
+  type ContentItem, type InsertContentItem, 
+  type RboBuyerProfile, type InsertRboBuyerProfile,
+  type RsoSellerProfile, type InsertRsoSellerProfile,
+  type ContactSubmission, type InsertContactSubmission,
+  type HomeValueRequest, type InsertHomeValueRequest,
+  type BrokerRegistration, type InsertBrokerRegistration,
+  users, leads, contentItems, rboBuyerProfiles,
+  rsoSellerProfiles, contactSubmissions, homeValueRequests, brokerRegistrations
+} from "@shared/schema";
 import { randomUUID } from "crypto";
 import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
@@ -27,12 +38,29 @@ export interface IStorage {
   createRboBuyerProfile(profile: InsertRboBuyerProfile): Promise<RboBuyerProfile>;
   getRboBuyerProfileByPhone(phone: string): Promise<RboBuyerProfile | undefined>;
   getAllRboBuyerProfiles(): Promise<RboBuyerProfile[]>;
+
+  createRsoSellerProfile(profile: InsertRsoSellerProfile): Promise<RsoSellerProfile>;
+  getAllRsoSellerProfiles(): Promise<RsoSellerProfile[]>;
+
+  createContactSubmission(submission: InsertContactSubmission): Promise<ContactSubmission>;
+  getAllContactSubmissions(): Promise<ContactSubmission[]>;
+
+  createHomeValueRequest(request: InsertHomeValueRequest): Promise<HomeValueRequest>;
+  getAllHomeValueRequests(): Promise<HomeValueRequest[]>;
+
+  createBrokerRegistration(registration: InsertBrokerRegistration): Promise<BrokerRegistration>;
+  getAllBrokerRegistrations(): Promise<BrokerRegistration[]>;
 }
 
 export class MemStorage implements IStorage {
   private users: Map<string, User>;
   private leads: Map<string, Lead>;
   private contentItems: Map<string, ContentItem>;
+  private rboProfiles: Map<string, RboBuyerProfile> = new Map();
+  private rsoProfiles: Map<string, RsoSellerProfile> = new Map();
+  private contactSubmissions: Map<string, ContactSubmission> = new Map();
+  private homeValueRequests: Map<string, HomeValueRequest> = new Map();
+  private brokerRegistrations: Map<string, BrokerRegistration> = new Map();
 
   constructor() {
     this.users = new Map();
@@ -157,8 +185,6 @@ export class MemStorage implements IStorage {
     return this.contentItems.delete(id);
   }
 
-  private rboProfiles: Map<string, RboBuyerProfile> = new Map();
-
   async createRboBuyerProfile(insertProfile: InsertRboBuyerProfile): Promise<RboBuyerProfile> {
     const id = randomUUID();
     const profile: RboBuyerProfile = {
@@ -185,6 +211,103 @@ export class MemStorage implements IStorage {
 
   async getAllRboBuyerProfiles(): Promise<RboBuyerProfile[]> {
     return Array.from(this.rboProfiles.values()).sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    );
+  }
+
+  async createRsoSellerProfile(insertProfile: InsertRsoSellerProfile): Promise<RsoSellerProfile> {
+    const id = randomUUID();
+    const profile: RsoSellerProfile = {
+      phone: insertProfile.phone,
+      address: insertProfile.address ?? null,
+      propertyType: insertProfile.propertyType ?? null,
+      estimatedValue: insertProfile.estimatedValue ?? null,
+      timeframe: insertProfile.timeframe ?? null,
+      motivation: insertProfile.motivation ?? null,
+      id,
+      createdAt: new Date(),
+    };
+    this.rsoProfiles.set(id, profile);
+    return profile;
+  }
+
+  async getAllRsoSellerProfiles(): Promise<RsoSellerProfile[]> {
+    return Array.from(this.rsoProfiles.values()).sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    );
+  }
+
+  async createContactSubmission(insertSubmission: InsertContactSubmission): Promise<ContactSubmission> {
+    const id = randomUUID();
+    const submission: ContactSubmission = {
+      name: insertSubmission.name,
+      email: insertSubmission.email,
+      phone: insertSubmission.phone ?? null,
+      message: insertSubmission.message,
+      id,
+      createdAt: new Date(),
+    };
+    this.contactSubmissions.set(id, submission);
+    return submission;
+  }
+
+  async getAllContactSubmissions(): Promise<ContactSubmission[]> {
+    return Array.from(this.contactSubmissions.values()).sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    );
+  }
+
+  async createHomeValueRequest(insertRequest: InsertHomeValueRequest): Promise<HomeValueRequest> {
+    const id = randomUUID();
+    const request: HomeValueRequest = {
+      address: insertRequest.address,
+      city: insertRequest.city,
+      zipCode: insertRequest.zipCode,
+      propertyType: insertRequest.propertyType ?? null,
+      bedrooms: insertRequest.bedrooms ?? null,
+      bathrooms: insertRequest.bathrooms ?? null,
+      squareFeet: insertRequest.squareFeet ?? null,
+      yearBuilt: insertRequest.yearBuilt ?? null,
+      email: insertRequest.email,
+      phone: insertRequest.phone ?? null,
+      id,
+      createdAt: new Date(),
+    };
+    this.homeValueRequests.set(id, request);
+    return request;
+  }
+
+  async getAllHomeValueRequests(): Promise<HomeValueRequest[]> {
+    return Array.from(this.homeValueRequests.values()).sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    );
+  }
+
+  async createBrokerRegistration(insertRegistration: InsertBrokerRegistration): Promise<BrokerRegistration> {
+    const id = randomUUID();
+    const registration: BrokerRegistration = {
+      firstName: insertRegistration.firstName,
+      lastName: insertRegistration.lastName,
+      email: insertRegistration.email,
+      phone: insertRegistration.phone,
+      licenseNumber: insertRegistration.licenseNumber,
+      yearsExperience: insertRegistration.yearsExperience ?? null,
+      specialization: insertRegistration.specialization ?? null,
+      brokerage: insertRegistration.brokerage ?? null,
+      neighborhoods: insertRegistration.neighborhoods ?? null,
+      bio: insertRegistration.bio ?? null,
+      linkedIn: insertRegistration.linkedIn ?? null,
+      website: insertRegistration.website ?? null,
+      videoUrl: insertRegistration.videoUrl ?? null,
+      id,
+      createdAt: new Date(),
+    };
+    this.brokerRegistrations.set(id, registration);
+    return registration;
+  }
+
+  async getAllBrokerRegistrations(): Promise<BrokerRegistration[]> {
+    return Array.from(this.brokerRegistrations.values()).sort(
       (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
     );
   }
@@ -273,6 +396,42 @@ export class DbStorage implements IStorage {
 
   async getAllRboBuyerProfiles(): Promise<RboBuyerProfile[]> {
     return await db.select().from(rboBuyerProfiles).orderBy(desc(rboBuyerProfiles.createdAt));
+  }
+
+  async createRsoSellerProfile(insertProfile: InsertRsoSellerProfile): Promise<RsoSellerProfile> {
+    const result = await db.insert(rsoSellerProfiles).values(insertProfile).returning();
+    return result[0];
+  }
+
+  async getAllRsoSellerProfiles(): Promise<RsoSellerProfile[]> {
+    return await db.select().from(rsoSellerProfiles).orderBy(desc(rsoSellerProfiles.createdAt));
+  }
+
+  async createContactSubmission(insertSubmission: InsertContactSubmission): Promise<ContactSubmission> {
+    const result = await db.insert(contactSubmissions).values(insertSubmission).returning();
+    return result[0];
+  }
+
+  async getAllContactSubmissions(): Promise<ContactSubmission[]> {
+    return await db.select().from(contactSubmissions).orderBy(desc(contactSubmissions.createdAt));
+  }
+
+  async createHomeValueRequest(insertRequest: InsertHomeValueRequest): Promise<HomeValueRequest> {
+    const result = await db.insert(homeValueRequests).values(insertRequest).returning();
+    return result[0];
+  }
+
+  async getAllHomeValueRequests(): Promise<HomeValueRequest[]> {
+    return await db.select().from(homeValueRequests).orderBy(desc(homeValueRequests.createdAt));
+  }
+
+  async createBrokerRegistration(insertRegistration: InsertBrokerRegistration): Promise<BrokerRegistration> {
+    const result = await db.insert(brokerRegistrations).values(insertRegistration).returning();
+    return result[0];
+  }
+
+  async getAllBrokerRegistrations(): Promise<BrokerRegistration[]> {
+    return await db.select().from(brokerRegistrations).orderBy(desc(brokerRegistrations.createdAt));
   }
 }
 
