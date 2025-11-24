@@ -19,6 +19,7 @@ import { writeFileSync, mkdirSync, existsSync } from "fs";
 import { join } from "path";
 import nodemailer from "nodemailer";
 import type { Transporter } from "nodemailer";
+import { getMarketStatistics, getActiveListings, getRentalListings } from "./lib/rentcast";
 
 // Initialize Resend client only if API key is available
 let resend: Resend | null = null;
@@ -702,6 +703,81 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.error("Market report error:", error);
       res.status(500).json({ 
         error: "Failed to generate and send market report",
+        details: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  });
+
+  // RentCast Live Market Data API
+  app.get("/api/market-data/:region", async (req, res) => {
+    try {
+      const { region } = req.params;
+      
+      // Map regions to cities and states for RentCast API
+      const regionMapping: Record<string, { cities: Array<{ city: string; state: string }> }> = {
+        california: {
+          cities: [
+            { city: "San Francisco", state: "CA" },
+            { city: "Los Angeles", state: "CA" },
+            { city: "San Diego", state: "CA" }
+          ]
+        },
+        nyc: {
+          cities: [
+            { city: "New York", state: "NY" }
+          ]
+        },
+        nevada: {
+          cities: [
+            { city: "Las Vegas", state: "NV" },
+            { city: "Reno", state: "NV" }
+          ]
+        }
+      };
+
+      const regionData = regionMapping[region];
+      if (!regionData) {
+        return res.status(400).json({ error: "Invalid region. Use: california, nyc, or nevada" });
+      }
+
+      // Fetch market data for all cities in the region
+      const marketDataPromises = regionData.cities.map(async ({ city, state }) => {
+        try {
+          const [statistics, listings] = await Promise.all([
+            getMarketStatistics(city, state),
+            getActiveListings(city, state, 10)
+          ]);
+
+          return {
+            city,
+            state,
+            statistics,
+            recentListings: listings.slice(0, 5) // Return top 5 listings
+          };
+        } catch (error) {
+          console.error(`[Market Data] Error fetching data for ${city}, ${state}:`, error);
+          return {
+            city,
+            state,
+            statistics: null,
+            recentListings: [],
+            error: error instanceof Error ? error.message : 'Failed to fetch data'
+          };
+        }
+      });
+
+      const marketData = await Promise.all(marketDataPromises);
+
+      res.json({
+        region,
+        timestamp: new Date().toISOString(),
+        data: marketData
+      });
+
+    } catch (error) {
+      console.error("[Market Data] API Error:", error);
+      res.status(500).json({ 
+        error: "Failed to fetch market data",
         details: error instanceof Error ? error.message : 'Unknown error'
       });
     }
