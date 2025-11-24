@@ -6,22 +6,23 @@ import { Input } from "@/components/ui/input";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 import agentKammerWelcoming from "@assets/image_1763360901241.png";
 
 export default function Home() {
   const { toast } = useToast();
+  const [phone, setPhone] = useState("");
 
   const rboMutation = useMutation({
-    mutationFn: async (data: { phone: string; formElement: HTMLFormElement }) => {
-      await apiRequest("POST", "/api/rbo/profile", { phone: data.phone });
-      return data.formElement;
+    mutationFn: async (phoneNumber: string) => {
+      return await apiRequest("POST", "/api/rbo/profile", { phone: phoneNumber });
     },
-    onSuccess: (formElement) => {
+    onSuccess: () => {
       toast({
         title: "Thank you!",
         description: "We'll be in touch soon to help you find your dream home.",
       });
-      formElement.reset();
+      setPhone("");
     },
     onError: () => {
       toast({
@@ -139,10 +140,8 @@ export default function Home() {
                 {/* Cell Number CTA Form */}
                 <form onSubmit={(e) => {
                   e.preventDefault();
-                  const formData = new FormData(e.currentTarget);
-                  const phone = formData.get('phone') as string;
                   if (phone) {
-                    rboMutation.mutate({ phone, formElement: e.currentTarget });
+                    rboMutation.mutate(phone);
                   }
                 }} className="max-w-md mx-auto lg:mx-0">
                   <div className="flex flex-col sm:flex-row gap-3">
@@ -151,6 +150,8 @@ export default function Home() {
                       type="tel"
                       placeholder="Your cell number"
                       required
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
                       className="flex-1 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/60"
                       data-testid="input-dream-home-phone"
                     />
