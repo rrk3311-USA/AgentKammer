@@ -1,7 +1,15 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertLeadSchema, insertContentItemSchema, insertRboBuyerProfileSchema } from "@shared/schema";
+import { 
+  insertLeadSchema, 
+  insertContentItemSchema, 
+  insertRboBuyerProfileSchema,
+  insertRsoSellerProfileSchema,
+  insertContactSubmissionSchema,
+  insertHomeValueRequestSchema,
+  insertBrokerRegistrationSchema
+} from "@shared/schema";
 import OpenAI from "openai";
 import puppeteer from "puppeteer";
 import { Resend } from "resend";
@@ -833,6 +841,174 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (err) {
       console.error("Error loading RBO profiles:", err);
       res.status(500).json({ ok: false, error: "Server error" });
+    }
+  });
+
+  // RSO (Reverse Seller Origination) endpoint
+  app.post("/api/rso/profile", async (req, res) => {
+    try {
+      const { phone } = req.body;
+
+      if (!phone || typeof phone !== "string" || phone.trim().length === 0) {
+        res.status(400).json({ error: "Phone number is required" });
+        return;
+      }
+
+      // Validate using schema
+      const validatedData = insertRsoSellerProfileSchema.parse({
+        phone: phone.trim(),
+      });
+
+      // Create RSO seller profile
+      const profile = await storage.createRsoSellerProfile(validatedData);
+      
+      // Send notifications
+      notifyLead({
+        phone: profile.phone,
+        source: "reverse-seller-origination",
+        name: null,
+      });
+      
+      res.json({
+        ok: true,
+        id: profile.id,
+        message: "Seller profile created successfully. We'll analyze listing strategies and send your diagnostic within 24 hours.",
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid form data", details: error.errors });
+      } else {
+        console.error("RSO profile error:", error);
+        res.status(500).json({ error: "Failed to create seller profile" });
+      }
+    }
+  });
+
+  // Contact form endpoint
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const { name, email, phone, message } = req.body;
+
+      // Validate using schema
+      const validatedData = insertContactSubmissionSchema.parse({
+        name: name?.trim(),
+        email: email?.trim(),
+        phone: phone?.trim() || undefined,
+        message: message?.trim(),
+      });
+
+      // Create contact submission
+      const submission = await storage.createContactSubmission(validatedData);
+      
+      // Send notifications
+      notifyLead({
+        phone: submission.phone ?? undefined,
+        source: "contact-form",
+        name: submission.name,
+      });
+      
+      res.json({
+        ok: true,
+        id: submission.id,
+        message: "Thank you! We'll be in touch within 24 hours.",
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid form data", details: error.errors });
+      } else {
+        console.error("Contact submission error:", error);
+        res.status(500).json({ error: "Failed to submit contact form" });
+      }
+    }
+  });
+
+  // Home value request endpoint
+  app.post("/api/home-value", async (req, res) => {
+    try {
+      const { address, city, zipCode, propertyType, bedrooms, bathrooms, squareFeet, yearBuilt, email, phone } = req.body;
+
+      // Validate using schema
+      const validatedData = insertHomeValueRequestSchema.parse({
+        address: address?.trim(),
+        city: city?.trim(),
+        zipCode: zipCode?.trim(),
+        propertyType: propertyType?.trim() || undefined,
+        bedrooms: bedrooms?.trim() || undefined,
+        bathrooms: bathrooms?.trim() || undefined,
+        squareFeet: squareFeet?.trim() || undefined,
+        yearBuilt: yearBuilt?.trim() || undefined,
+        email: email?.trim(),
+        phone: phone?.trim() || undefined,
+      });
+
+      // Create home value request
+      const request = await storage.createHomeValueRequest(validatedData);
+      
+      // Send notifications
+      notifyLead({
+        phone: request.phone ?? undefined,
+        source: "home-value-request",
+        name: null,
+      });
+      
+      res.json({
+        ok: true,
+        id: request.id,
+        message: "Valuation request received! We'll send you a detailed home value report within 24 hours.",
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid form data", details: error.errors });
+      } else {
+        console.error("Home value request error:", error);
+        res.status(500).json({ error: "Failed to submit home value request" });
+      }
+    }
+  });
+
+  // Broker registration endpoint
+  app.post("/api/broker-registration", async (req, res) => {
+    try {
+      const { firstName, lastName, email, phone, licenseNumber, yearsExperience, specialization, brokerage, neighborhoods, bio, linkedIn, website } = req.body;
+
+      // Validate using schema
+      const validatedData = insertBrokerRegistrationSchema.parse({
+        firstName: firstName?.trim(),
+        lastName: lastName?.trim(),
+        email: email?.trim(),
+        phone: phone?.trim(),
+        licenseNumber: licenseNumber?.trim(),
+        yearsExperience: yearsExperience?.trim() || undefined,
+        specialization: specialization?.trim() || undefined,
+        brokerage: brokerage?.trim() || undefined,
+        neighborhoods: neighborhoods?.trim() || undefined,
+        bio: bio?.trim() || undefined,
+        linkedIn: linkedIn?.trim() || undefined,
+        website: website?.trim() || undefined,
+      });
+
+      // Create broker registration
+      const registration = await storage.createBrokerRegistration(validatedData);
+      
+      // Send notifications
+      notifyLead({
+        phone: registration.phone,
+        source: "broker-registration",
+        name: `${registration.firstName} ${registration.lastName}`,
+      });
+      
+      res.json({
+        ok: true,
+        id: registration.id,
+        message: "Registration submitted! We'll review your profile and video. You'll hear from us within 48 hours.",
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid form data", details: error.errors });
+      } else {
+        console.error("Broker registration error:", error);
+        res.status(500).json({ error: "Failed to submit broker registration" });
+      }
     }
   });
 
