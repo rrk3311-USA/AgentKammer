@@ -3,9 +3,35 @@ import { AgenticComputeSection } from "@/components/AgenticCompute/AgenticComput
 import { LuxuryBackground } from "@/components/LuxuryBackground";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 import agentKammerWelcoming from "@assets/image_1763360901241.png";
 
 export default function Home() {
+  const { toast } = useToast();
+
+  const rboMutation = useMutation({
+    mutationFn: async (data: { phone: string; formElement: HTMLFormElement }) => {
+      await apiRequest("POST", "/api/rbo/profile", { phone: data.phone });
+      return data.formElement;
+    },
+    onSuccess: (formElement) => {
+      toast({
+        title: "Thank you!",
+        description: "We'll be in touch soon to help you find your dream home.",
+      });
+      formElement.reset();
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to submit. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
   return (
     <div className="min-h-screen pb-32 relative">
       <LuxuryBackground />
@@ -114,15 +140,10 @@ export default function Home() {
                 <form onSubmit={(e) => {
                   e.preventDefault();
                   const formData = new FormData(e.currentTarget);
-                  const phone = formData.get('phone');
-                  console.log('Phone submitted:', phone);
-                  // Show success message
-                  const toast = document.createElement('div');
-                  toast.textContent = 'Thank you! We\'ll be in touch soon.';
-                  toast.className = 'fixed top-4 right-4 bg-white text-gray-800 px-6 py-3 rounded-lg shadow-lg z-50';
-                  document.body.appendChild(toast);
-                  setTimeout(() => toast.remove(), 3000);
-                  e.currentTarget.reset();
+                  const phone = formData.get('phone') as string;
+                  if (phone) {
+                    rboMutation.mutate({ phone, formElement: e.currentTarget });
+                  }
                 }} className="max-w-md mx-auto lg:mx-0">
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Input
@@ -138,8 +159,9 @@ export default function Home() {
                       size="lg"
                       className="h-12 px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-black font-semibold hover:opacity-90"
                       data-testid="button-dream-home-submit"
+                      disabled={rboMutation.isPending}
                     >
-                      Get Started
+                      {rboMutation.isPending ? "Submitting..." : "Get Started"}
                     </Button>
                   </div>
                 </form>
