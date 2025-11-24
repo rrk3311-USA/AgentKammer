@@ -91,3 +91,88 @@ export const insertRboBuyerProfileSchema = createInsertSchema(rboBuyerProfiles).
 
 export type InsertRboBuyerProfile = z.infer<typeof insertRboBuyerProfileSchema>;
 export type RboBuyerProfile = typeof rboBuyerProfiles.$inferSelect;
+
+export const rsoSellerProfiles = pgTable("rso_seller_profiles", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  phone: text("phone").notNull(),
+  address: text("address"),
+  propertyType: text("property_type"),
+  estimatedValue: text("estimated_value"),
+  timeframe: text("timeframe"),
+  motivation: text("motivation"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertRsoSellerProfileSchema = createInsertSchema(rsoSellerProfiles).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertRsoSellerProfile = z.infer<typeof insertRsoSellerProfileSchema>;
+export type RsoSellerProfile = typeof rsoSellerProfiles.$inferSelect;
+
+export const contactSubmissions = pgTable("contact_submissions", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone"),
+  message: text("message").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertContactSubmissionSchema = createInsertSchema(contactSubmissions).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertContactSubmission = z.infer<typeof insertContactSubmissionSchema>;
+export type ContactSubmission = typeof contactSubmissions.$inferSelect;
+
+export const homeValueRequests = pgTable("home_value_requests", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  address: text("address").notNull(),
+  city: text("city").notNull(),
+  zipCode: text("zip_code").notNull(),
+  propertyType: text("property_type"),
+  bedrooms: text("bedrooms"),
+  bathrooms: text("bathrooms"),
+  squareFeet: text("square_feet"),
+  yearBuilt: text("year_built"),
+  email: text("email").notNull(),
+  phone: text("phone"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertHomeValueRequestSchema = createInsertSchema(homeValueRequests).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertHomeValueRequest = z.infer<typeof insertHomeValueRequestSchema>;
+export type HomeValueRequest = typeof homeValueRequests.$inferSelect;
+
+export const brokerRegistrations = pgTable("broker_registrations", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  licenseNumber: text("license_number").notNull(),
+  yearsExperience: text("years_experience"),
+  specialization: text("specialization"),
+  brokerage: text("brokerage"),
+  neighborhoods: text("neighborhoods"),
+  bio: text("bio"),
+  linkedIn: text("linked_in"),
+  website: text("website"),
+  videoUrl: text("video_url"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertBrokerRegistrationSchema = createInsertSchema(brokerRegistrations).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertBrokerRegistration = z.infer<typeof insertBrokerRegistrationSchema>;
+export type BrokerRegistration = typeof brokerRegistrations.$inferSelect;
