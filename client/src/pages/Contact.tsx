@@ -4,6 +4,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, MapPin, Clock, Sparkles } from "lucide-react";
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 
 // Import luxury property images
 import barImage1 from "@assets/IMG_1357_1762925446647.jpeg";
@@ -18,20 +21,31 @@ export default function Contact() {
     phone: "",
     message: "",
   });
+  const { toast } = useToast();
+
+  const contactMutation = useMutation({
+    mutationFn: async (data: typeof formData) => {
+      return await apiRequest("POST", "/api/contact", data);
+    },
+    onSuccess: () => {
+      toast({
+        title: "Message Sent!",
+        description: "Thank you! We'll be in touch within 24 hours.",
+      });
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Contact form submitted:", formData);
-    
-    // Show success message
-    const toast = document.createElement("div");
-    toast.textContent = "Thank you! We'll be in touch within 24 hours.";
-    toast.className = "fixed top-4 right-4 bg-[#d4af37] text-black px-6 py-3 rounded-lg shadow-lg z-50 font-semibold";
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 4000);
-    
-    // Reset form
-    setFormData({ name: "", email: "", phone: "", message: "" });
+    contactMutation.mutate(formData);
   };
 
   return (
@@ -262,8 +276,9 @@ export default function Contact() {
                     size="lg"
                     className="w-full h-12 bg-[#d4af37] text-black font-semibold hover:bg-[#c5a028]"
                     data-testid="button-contact-submit"
+                    disabled={contactMutation.isPending}
                   >
-                    Send Message
+                    {contactMutation.isPending ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               </Card>

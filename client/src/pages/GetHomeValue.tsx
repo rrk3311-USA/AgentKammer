@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { Home, TrendingUp, DollarSign } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
 import homeValueImage from "@assets/stock_images/modern_luxury_home_e_c1ef1708.jpg";
 
 export default function GetHomeValue() {
@@ -24,13 +26,40 @@ export default function GetHomeValue() {
     phone: "",
   });
 
+  const homeValueMutation = useMutation({
+    mutationFn: async (data: typeof formData) => {
+      return await apiRequest("POST", "/api/home-value", data);
+    },
+    onSuccess: () => {
+      toast({
+        title: "Valuation Request Received!",
+        description: "We'll send you a detailed home value report within 24 hours.",
+      });
+      setFormData({
+        address: "",
+        city: "",
+        zipCode: "",
+        propertyType: "",
+        bedrooms: "",
+        bathrooms: "",
+        squareFeet: "",
+        yearBuilt: "",
+        email: "",
+        phone: "",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to submit request. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Home valuation request:", formData);
-    toast({
-      title: "Valuation Request Received!",
-      description: "We'll send you a detailed home value report within 24 hours.",
-    });
+    homeValueMutation.mutate(formData);
   };
 
   const handleChange = (field: string, value: string) => {
@@ -229,8 +258,9 @@ export default function GetHomeValue() {
                   size="lg"
                   className="w-full rounded-full"
                   data-testid="button-submit-valuation"
+                  disabled={homeValueMutation.isPending}
                 >
-                  Get Free Home Valuation
+                  {homeValueMutation.isPending ? "Submitting..." : "Get Free Home Valuation"}
                 </Button>
               </form>
             </CardContent>

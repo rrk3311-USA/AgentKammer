@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Upload, Video, UserCheck, Building2, Award } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
 
 export default function BrokerRegistration() {
   const { toast } = useToast();
@@ -27,13 +29,43 @@ export default function BrokerRegistration() {
     website: "",
   });
 
+  const brokerMutation = useMutation({
+    mutationFn: async (data: typeof formData) => {
+      return await apiRequest("POST", "/api/broker-registration", data);
+    },
+    onSuccess: () => {
+      toast({
+        title: "Registration Submitted!",
+        description: "We'll review your profile and video. You'll hear from us within 48 hours.",
+      });
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        licenseNumber: "",
+        yearsExperience: "",
+        specialization: "",
+        brokerage: "",
+        neighborhoods: "",
+        bio: "",
+        linkedIn: "",
+        website: "",
+      });
+      setVideoFile(null);
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to submit registration. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Broker registration:", formData, videoFile);
-    toast({
-      title: "Registration Submitted!",
-      description: "We'll review your profile and video. You'll hear from us within 48 hours.",
-    });
+    brokerMutation.mutate(formData);
   };
 
   const handleChange = (field: string, value: string) => {
@@ -363,8 +395,9 @@ export default function BrokerRegistration() {
                 size="lg"
                 className="w-full rounded-full"
                 data-testid="button-submit-registration"
+                disabled={brokerMutation.isPending}
               >
-                Submit Registration
+                {brokerMutation.isPending ? "Submitting..." : "Submit Registration"}
               </Button>
             </form>
           </CardContent>
