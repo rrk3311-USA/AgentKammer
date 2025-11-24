@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Heart, Menu, X, Building2, Sparkles, FileText, MessageCircle } from "lucide-react";
+import { Moon, Sun, Heart, Menu, X, Building2, Sparkles, FileText, MessageCircle, TrendingUp } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
 
@@ -22,6 +22,16 @@ export function Header() {
               >
                 <Sparkles className="h-6 w-6" />
                 <span className="text-sm font-medium">Reverse Buyer™</span>
+              </Button>
+            </Link>
+            <Link href="/reverse-seller-origination">
+              <Button
+                variant="ghost"
+                className="hover-elevate active-elevate-2 h-12 px-4 gap-2"
+                data-testid="button-header-rso"
+              >
+                <TrendingUp className="h-6 w-6" />
+                <span className="text-sm font-medium">Reverse Seller™</span>
               </Button>
             </Link>
           </div>
@@ -122,6 +132,14 @@ export function Header() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Reverse Buyer Origination™
+              </span>
+            </Link>
+            <Link href="/reverse-seller-origination" data-testid="link-mobile-rso">
+              <span
+                className="text-base font-medium hover:text-primary cursor-pointer block"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Reverse Seller Origination™
               </span>
             </Link>
             <Link href="/document-portal" data-testid="link-mobile-document-portal">
