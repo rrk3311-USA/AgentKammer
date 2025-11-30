@@ -559,42 +559,49 @@ export async function registerRoutes(app: Express): Promise<Server> {
           console.log("[CHAT] Updated lead:", sessionLead.leadId, updated);
           sessionLeads.set(sid, { leadId: sessionLead.leadId, data: updatedData });
           
-          // Send notification when key contact info is captured (phone or email)
-          if ((extractedData.phone || extractedData.email) && !sessionLead.notified) {
-            const category = updatedData.category || 'general-inquiry';
-            const isRealEstate = category.toLowerCase().includes('real estate') || 
-                                 category.toLowerCase().includes('home') ||
-                                 category.toLowerCase().includes('property');
-            
+          // Only send notification for REAL ESTATE leads (they need personal outreach)
+          // Other financial categories just get routed to pages - no alert needed
+          const category = (updatedData.category || '').toLowerCase();
+          const isRealEstate = category.includes('real estate') || 
+                               category.includes('home') ||
+                               category.includes('property') ||
+                               category.includes('buy') ||
+                               category.includes('sell') ||
+                               category.includes('mortgage');
+          
+          if (isRealEstate && (extractedData.phone || extractedData.email) && !sessionLead.notified) {
             notifyLead({
               phone: updatedData.phone,
-              source: `chatbot-${isRealEstate ? 'real-estate' : category.replace(/\s+/g, '-').toLowerCase()}`,
+              source: 'chatbot-real-estate',
               name: updatedData.name || null,
               budget: updatedData.financing || updatedData.goals || null,
             });
             sessionLeads.set(sid, { ...sessionLeads.get(sid)!, notified: true });
-            console.log("[CHAT] Sent lead notification for category:", category);
+            console.log("[CHAT] Real estate lead alert sent:", updatedData.name);
           }
         } else {
           const newLead = await storage.createLead(leadPayload);
           console.log("[CHAT] Created new lead:", newLead.id, newLead);
           sessionLeads.set(sid, { leadId: newLead.id, data: updatedData, notified: false });
           
-          // Send notification for new leads with contact info
-          if (extractedData.phone || extractedData.email) {
-            const category = updatedData.category || 'general-inquiry';
-            const isRealEstate = category.toLowerCase().includes('real estate') || 
-                                 category.toLowerCase().includes('home') ||
-                                 category.toLowerCase().includes('property');
-            
+          // Only send notification for REAL ESTATE leads
+          const category = (updatedData.category || '').toLowerCase();
+          const isRealEstate = category.includes('real estate') || 
+                               category.includes('home') ||
+                               category.includes('property') ||
+                               category.includes('buy') ||
+                               category.includes('sell') ||
+                               category.includes('mortgage');
+          
+          if (isRealEstate && (extractedData.phone || extractedData.email)) {
             notifyLead({
               phone: updatedData.phone,
-              source: `chatbot-${isRealEstate ? 'real-estate' : category.replace(/\s+/g, '-').toLowerCase()}`,
+              source: 'chatbot-real-estate',
               name: updatedData.name || null,
               budget: updatedData.financing || updatedData.goals || null,
             });
             sessionLeads.set(sid, { leadId: newLead.id, data: updatedData, notified: true });
-            console.log("[CHAT] Sent lead notification for new lead, category:", category);
+            console.log("[CHAT] Real estate lead alert sent for new lead:", updatedData.name);
           }
         }
       } else {
