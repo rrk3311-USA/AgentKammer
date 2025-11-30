@@ -60,7 +60,7 @@ export function LiveTicker() {
         <div
           className="flex items-center gap-6 whitespace-nowrap"
           style={{
-            animation: "marketScroll 45s linear infinite",
+            animation: "marketScroll 22s linear infinite",
           }}
         >
           {tickerItems.map((rate, index) => {
