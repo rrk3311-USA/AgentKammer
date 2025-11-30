@@ -15,6 +15,7 @@ import {
   Menu, 
   X, 
   ChevronDown, 
+  ChevronUp,
   MessageCircle, 
   CreditCard,
   Wallet,
@@ -23,7 +24,9 @@ import {
   Shield,
   TrendingUp,
   Home,
-  Brain
+  Brain,
+  Triangle,
+  Calculator
 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
@@ -42,10 +45,38 @@ export function Header() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const scrollToBottom = () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between gap-4 relative">
+          {/* Mobile Scroll Arrows */}
+          <div className="flex md:hidden flex-col gap-0.5">
+            <button
+              onClick={scrollToTop}
+              className="p-1 text-muted-foreground/60 hover:text-foreground transition-colors"
+              data-testid="button-scroll-top"
+              aria-label="Scroll to top"
+            >
+              <Triangle className="h-3 w-3 fill-current" />
+            </button>
+            <button
+              onClick={scrollToBottom}
+              className="p-1 text-muted-foreground/60 hover:text-foreground transition-colors"
+              data-testid="button-scroll-bottom"
+              aria-label="Scroll to bottom"
+            >
+              <Triangle className="h-3 w-3 fill-current rotate-180" />
+            </button>
+          </div>
+
           {/* Left Navigation */}
           <div className="hidden md:flex items-center gap-2">
             <DropdownMenu>
@@ -79,6 +110,12 @@ export function Header() {
                   <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-real-estate">
                     <Home className="h-4 w-4 mr-2 text-[#d4af37]" />
                     Real Estate Concierge
+                  </DropdownMenuItem>
+                </Link>
+                <Link href="/free-tools">
+                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-free-tools">
+                    <Calculator className="h-4 w-4 mr-2 text-[#d4af37]" />
+                    Free Tools
                   </DropdownMenuItem>
                 </Link>
               </DropdownMenuContent>
