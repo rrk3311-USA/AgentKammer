@@ -1,7 +1,6 @@
 import { SiReplit, SiNvidia, SiClaude, SiAnthropic, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
-import { Brain, Sparkles, TrendingUp, Users, Calculator } from "lucide-react";
+import { Brain, Sparkles, TrendingUp, Users } from "lucide-react";
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
 
 export function Footer() {
   return (
@@ -12,9 +11,9 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-6 md:gap-8">
             <div>
               <h3 className="font-serif text-base md:text-lg font-semibold mb-3">Agent Kammer</h3>
-              <p className="text-xs md:text-sm text-foreground font-medium mb-3">
-                AI-Powered Financial Comparison
-              </p>
+              <Link href="/free-tools" className="text-xs md:text-sm text-foreground font-medium mb-3 block hover:text-[#d4af37] transition-colors">
+                Free Tools
+              </Link>
               <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground mb-4">
                 <li>
                   <Link href="/contact" className="font-semibold text-foreground hover:text-foreground transition-colors">
@@ -47,12 +46,6 @@ export function Footer() {
                   </Link>
                 </li>
               </ul>
-              <Link href="/free-tools">
-                <Button size="sm" className="bg-[#d4af37] hover:bg-[#c19b2f] text-black" data-testid="button-free-tools-footer">
-                  <Calculator className="h-4 w-4 mr-2" />
-                  Free Tools
-                </Button>
-              </Link>
             </div>
             <div>
               <Link href="/real-estate">
