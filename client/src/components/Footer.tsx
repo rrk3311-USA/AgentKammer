@@ -74,13 +74,6 @@ export function Footer() {
                     Home Valuation
                   </Link>
                 </li>
-              </ul>
-            </div>
-            <div>
-              <Link href="/contact">
-                <h4 className="font-medium mb-3 text-sm hover:text-foreground transition-colors cursor-pointer">Contact</h4>
-              </Link>
-              <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground">
                 <li>
                   <Link href="/affiliates" className="flex items-center gap-2 hover:text-foreground transition-colors" data-testid="link-affiliates">
                     <Users className="h-3.5 w-3.5 text-[#d4af37]" />
@@ -88,6 +81,11 @@ export function Footer() {
                   </Link>
                 </li>
               </ul>
+            </div>
+            <div>
+              <Link href="/contact">
+                <h4 className="font-medium mb-3 text-sm hover:text-foreground transition-colors cursor-pointer">Contact</h4>
+              </Link>
               <div className="flex items-center gap-3 mt-3">
                 <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                   <SiInstagram className="h-4 w-4" />
