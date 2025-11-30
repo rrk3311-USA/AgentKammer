@@ -43,7 +43,9 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h4 className="font-medium mb-3 text-sm">Services</h4>
+              <Link href="/real-estate">
+                <h4 className="font-medium mb-3 text-sm hover:text-foreground transition-colors cursor-pointer">Services</h4>
+              </Link>
               <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground">
                 <li>
                   <Link href="/reverse-buyer-origination" className="flex items-center gap-2 hover:text-foreground transition-colors">
