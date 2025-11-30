@@ -201,17 +201,17 @@ export default function Home() {
               return (
                 <Link key={category.id} href={`/${category.id}`}>
                   <Card 
-                    className={`p-6 bg-gradient-to-br ${category.color} border-white/10 hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group`}
+                    className="p-6 bg-[#0f1d32] border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group"
                     data-testid={`card-category-${category.id}`}
                   >
                     <div className="flex items-start justify-between mb-4">
-                      <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center">
-                        <IconComponent className="h-7 w-7 text-white" />
+                      <div className="w-14 h-14 rounded-xl bg-[#d4af37]/15 flex items-center justify-center">
+                        <IconComponent className="h-7 w-7 text-[#d4af37]" />
                       </div>
-                      <ArrowRight className="h-5 w-5 text-white/50 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
+                      <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
                     </div>
                     <h3 className="font-serif text-xl font-semibold text-white mb-2">{category.name}</h3>
-                    <p className="text-white/70 text-sm">{category.description}</p>
+                    <p className="text-white/60 text-sm">{category.description}</p>
                   </Card>
                 </Link>
               );
