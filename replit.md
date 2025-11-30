@@ -86,9 +86,13 @@ The system uses Drizzle ORM with neon-http for PostgreSQL connections. Authentic
 
 ## Recent Changes (November 2025)
 - Transformed from luxury real estate platform to comprehensive financial comparison engine
-- Added 13 financial product categories with complete subcategory coverage
+- Expanded to 16 financial product categories (6 Primary + 4 Secondary + 5 Supporting + 1 Flagship)
+- Added new categories: Estate Planning, Renters Insurance, Cashback Apps, Credit Builder Apps, Micro-Investing, Budgeting/Subscription Trackers
+- Created User Dashboard (/dashboard) with Quick Wins section and organized category navigation
+- Updated chatbot to understand all 16 categories with category-specific conversation starters
+- Added mobile navigation: up/down arrow buttons for quick page scrolling
+- Reorganized navigation: Free Tools moved to header Compare dropdown, Dashboard link added
 - Implemented deterministic scoring algorithm for consistent product recommendations
 - Built complete affiliate program infrastructure with tracking and dashboard
 - Incorporated AI engine visual (futuristic brain/circuit design) into homepage hero
-- Updated chatbot to understand all 13 categories for conversational recommendations
 - Added Global Market Ticker and Affiliates link to footer
