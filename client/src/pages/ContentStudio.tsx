@@ -16,7 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { insertContentItemSchema } from "@shared/schema";
 import { z } from "zod";
-import { Film, Lightbulb, Scale, Clapperboard, Archive, Plus, Trash2, Edit, MoveRight, Youtube, Instagram, Linkedin, FolderArchive, FileText, Globe, Headphones, GraduationCap, Download, ExternalLink } from "lucide-react";
+import { Film, Lightbulb, Scale, Clapperboard, Archive, Plus, Trash2, Edit, MoveRight, Youtube, Instagram, Linkedin, FolderArchive, FileText, Globe, Headphones, GraduationCap, Download, ExternalLink, Building2, Users } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
@@ -35,6 +35,8 @@ const offerArchiveItems = [
   { id: "audiobooks", label: "Audiobooks", href: "/audiobooks", icon: Headphones, description: "Premium audio library" },
   { id: "ecourses", label: "Ecourses", href: "/ecourses", icon: GraduationCap, description: "Professional development courses" },
   { id: "downloads", label: "Downloads", href: "/downloads", icon: Download, description: "Free resources and templates" },
+  { id: "commercial-investment", label: "Commercial Investment", href: "/commercial-investment", icon: Building2, description: "Commercial real estate opportunities" },
+  { id: "coaching", label: "Consulting", href: "/coaching", icon: Users, description: "Transformational alignment coaching" },
 ];
 
 const publishingPlatforms = [

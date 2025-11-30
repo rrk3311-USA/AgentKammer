@@ -11,7 +11,7 @@ export function Footer() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             <div>
               <h3 className="font-serif text-base md:text-lg font-semibold mb-3">Agent Kammer</h3>
-              <p className="text-xs md:text-sm text-muted-foreground mb-3">
+              <p className="text-xs md:text-sm text-foreground mb-3">
                 AI-Powered Financial Comparison
               </p>
               <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground">
@@ -83,19 +83,9 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/coaching" className="hover:text-foreground transition-colors">
-                    Consulting
-                  </Link>
-                </li>
-                <li>
                   <Link href="/affiliates" className="flex items-center gap-2 hover:text-foreground transition-colors" data-testid="link-affiliates">
                     <Users className="h-3.5 w-3.5 text-[#d4af37]" />
                     <span>Affiliate Program</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/commercial-investment" className="hover:text-foreground transition-colors" data-testid="link-commercial-investment">
-                    Commercial
                   </Link>
                 </li>
               </ul>
