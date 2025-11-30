@@ -1,6 +1,7 @@
 import { SiReplit, SiNvidia, SiClaude, SiAnthropic, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
-import { Brain, Sparkles, TrendingUp, Users } from "lucide-react";
+import { Brain, Sparkles, TrendingUp, Users, Mail } from "lucide-react";
 import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
 
 export function Footer() {
   return (
@@ -8,13 +9,13 @@ export function Footer() {
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       <div className="bg-background border-t border-border/50">
         <div className="max-w-7xl mx-auto px-6 py-6">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 gap-6 md:gap-8">
             <div>
               <h3 className="font-serif text-base md:text-lg font-semibold mb-3">Agent Kammer</h3>
               <p className="text-xs md:text-sm text-foreground font-medium mb-3">
                 AI-Powered Financial Comparison
               </p>
-              <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground">
+              <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground mb-4">
                 <li>
                   <Link href="/credit-cards" className="hover:text-foreground transition-colors">
                     Credit Cards
@@ -41,12 +42,18 @@ export function Footer() {
                   </Link>
                 </li>
               </ul>
+              <Link href="/contact">
+                <Button size="sm" className="bg-[#d4af37] hover:bg-[#c19b2f] text-black" data-testid="button-contact">
+                  <Mail className="h-4 w-4 mr-2" />
+                  Contact
+                </Button>
+              </Link>
             </div>
             <div>
               <Link href="/real-estate">
                 <h4 className="font-medium mb-3 text-sm hover:text-foreground transition-colors cursor-pointer">Services</h4>
               </Link>
-              <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground">
+              <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground mb-4">
                 <li>
                   <Link href="/reverse-buyer-origination" className="flex items-center gap-2 hover:text-foreground transition-colors">
                     <Sparkles className="h-3.5 w-3.5" />
@@ -81,12 +88,7 @@ export function Footer() {
                   </Link>
                 </li>
               </ul>
-            </div>
-            <div>
-              <Link href="/contact">
-                <h4 className="font-medium mb-3 text-sm hover:text-foreground transition-colors cursor-pointer">Contact</h4>
-              </Link>
-              <div className="flex items-center gap-3 mt-3">
+              <div className="flex items-center gap-3">
                 <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                   <SiInstagram className="h-4 w-4" />
                 </a>
