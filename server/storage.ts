@@ -7,8 +7,9 @@ import {
   type ContactSubmission, type InsertContactSubmission,
   type HomeValueRequest, type InsertHomeValueRequest,
   type BrokerRegistration, type InsertBrokerRegistration,
+  type Affiliate, type InsertAffiliate,
   users, leads, contentItems, rboBuyerProfiles,
-  rsoSellerProfiles, contactSubmissions, homeValueRequests, brokerRegistrations
+  rsoSellerProfiles, contactSubmissions, homeValueRequests, brokerRegistrations, affiliates
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 import { drizzle } from "drizzle-orm/neon-http";
@@ -50,6 +51,11 @@ export interface IStorage {
 
   createBrokerRegistration(registration: InsertBrokerRegistration): Promise<BrokerRegistration>;
   getAllBrokerRegistrations(): Promise<BrokerRegistration[]>;
+
+  createAffiliate(affiliate: InsertAffiliate): Promise<Affiliate>;
+  getAffiliateByEmail(email: string): Promise<Affiliate | undefined>;
+  getAffiliateByReferralCode(code: string): Promise<Affiliate | undefined>;
+  getAllAffiliates(): Promise<Affiliate[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -311,6 +317,48 @@ export class MemStorage implements IStorage {
       (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
     );
   }
+
+  private affiliatesMap: Map<string, Affiliate> = new Map();
+
+  async createAffiliate(insertAffiliate: InsertAffiliate): Promise<Affiliate> {
+    const id = randomUUID();
+    const referralCode = `AK${randomUUID().substring(0, 8).toUpperCase()}`;
+    const affiliate: Affiliate = {
+      firstName: insertAffiliate.firstName,
+      lastName: insertAffiliate.lastName,
+      email: insertAffiliate.email,
+      phone: insertAffiliate.phone ?? null,
+      website: insertAffiliate.website ?? null,
+      socialHandle: insertAffiliate.socialHandle ?? null,
+      platform: insertAffiliate.platform ?? null,
+      audienceSize: insertAffiliate.audienceSize ?? null,
+      niche: insertAffiliate.niche ?? null,
+      paypalEmail: insertAffiliate.paypalEmail ?? null,
+      referralCode,
+      tier: "starter",
+      totalReferrals: 0,
+      totalEarnings: 0,
+      status: "active",
+      id,
+      createdAt: new Date(),
+    };
+    this.affiliatesMap.set(id, affiliate);
+    return affiliate;
+  }
+
+  async getAffiliateByEmail(email: string): Promise<Affiliate | undefined> {
+    return Array.from(this.affiliatesMap.values()).find((a) => a.email === email);
+  }
+
+  async getAffiliateByReferralCode(code: string): Promise<Affiliate | undefined> {
+    return Array.from(this.affiliatesMap.values()).find((a) => a.referralCode === code);
+  }
+
+  async getAllAffiliates(): Promise<Affiliate[]> {
+    return Array.from(this.affiliatesMap.values()).sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    );
+  }
 }
 
 export class DbStorage implements IStorage {
@@ -432,6 +480,29 @@ export class DbStorage implements IStorage {
 
   async getAllBrokerRegistrations(): Promise<BrokerRegistration[]> {
     return await db.select().from(brokerRegistrations).orderBy(desc(brokerRegistrations.createdAt));
+  }
+
+  async createAffiliate(insertAffiliate: InsertAffiliate): Promise<Affiliate> {
+    const referralCode = `AK${Date.now().toString(36).toUpperCase()}${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
+    const result = await db.insert(affiliates).values({
+      ...insertAffiliate,
+      referralCode,
+    }).returning();
+    return result[0];
+  }
+
+  async getAffiliateByEmail(email: string): Promise<Affiliate | undefined> {
+    const result = await db.select().from(affiliates).where(eq(affiliates.email, email));
+    return result[0];
+  }
+
+  async getAffiliateByReferralCode(code: string): Promise<Affiliate | undefined> {
+    const result = await db.select().from(affiliates).where(eq(affiliates.referralCode, code));
+    return result[0];
+  }
+
+  async getAllAffiliates(): Promise<Affiliate[]> {
+    return await db.select().from(affiliates).orderBy(desc(affiliates.createdAt));
   }
 }
 

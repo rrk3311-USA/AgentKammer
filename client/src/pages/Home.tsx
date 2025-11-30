@@ -26,6 +26,7 @@ import {
   Users,
   BarChart3
 } from "lucide-react";
+import aiEngineImage from "@assets/image_1764482688098.png";
 
 const categoryIcons: Record<string, any> = {
   'CreditCard': CreditCard,
@@ -122,41 +123,24 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right: Dashboard Mockup */}
+            {/* Right: AI Engine Visual */}
             <div className="relative">
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 shadow-2xl">
-                <div className="flex items-center gap-2 mb-6">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
-                  <span className="ml-4 text-white/50 text-sm font-mono">agentkammer.com/dashboard</span>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-3">
-                  {['Mortgage', 'Credit Cards', 'Banking', 'Personal Loans', 'Business Funding', 'Insurance', 'Investing'].map((module, idx) => (
-                    <div 
-                      key={module}
-                      className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors"
-                      style={{ animationDelay: `${idx * 100}ms` }}
-                    >
-                      <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-[#d4af37]/20 flex items-center justify-center">
-                          <Zap className="h-4 w-4 text-[#d4af37]" />
-                        </div>
-                        <span className="text-white text-sm font-medium">{module}</span>
-                      </div>
+              <div className="relative rounded-2xl overflow-hidden border border-[#d4af37]/30 shadow-2xl shadow-[#d4af37]/10">
+                <img 
+                  src={aiEngineImage} 
+                  alt="AI-Powered Multi-Market Intelligence Engine" 
+                  className="w-full h-auto"
+                  data-testid="img-ai-engine"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Brain className="h-5 w-5 text-[#d4af37]" />
+                      <span className="text-[#d4af37] font-medium">Agentic Compute Engine</span>
                     </div>
-                  ))}
-                  <div className="col-span-2 bg-gradient-to-r from-[#d4af37]/20 to-[#d4af37]/10 border border-[#d4af37]/30 rounded-lg p-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Brain className="h-5 w-5 text-[#d4af37]" />
-                        <span className="text-[#d4af37] font-medium">Agentic Engine Active</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                        <span className="text-green-400 text-xs">Live</span>
-                      </div>
+                    <div className="flex items-center gap-1">
+                      <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                      <span className="text-green-400 text-xs">Processing</span>
                     </div>
                   </div>
                 </div>

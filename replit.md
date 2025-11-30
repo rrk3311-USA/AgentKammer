@@ -1,7 +1,22 @@
-# Agent Kammer - Luxury Properties Platform
+# Agent Kammer - Financial Comparison Platform
 
 ## Overview
-Agent Kammer is a zero-knowledge encrypted real estate and travel concierge platform focused on NYC, California, and Nevada markets. Emphasizing Swiss-level privacy and zero-access architecture, it offers a visual-first search experience, advanced search, saved listings with notifications, and integrated services like mortgage pre-approval and home valuation. The platform leverages agentic AI for continuous market scanning while maintaining military-grade encryption for all client data and documents. Its business vision is to empower users in finding luxury homes across premier markets while protecting their privacy with the highest level of encryption available.
+Agent Kammer is an AI-powered financial services comparison engine that helps users find the best products across 13 financial categories. The platform uses an agentic AI comparison engine that ranks products based on user profiles, featuring deterministic scoring for consistent recommendations. It emphasizes zero-knowledge encrypted document management for competitive bidding while maintaining the sophisticated gold/navy branding from its luxury real estate origins.
+
+## The 13 Financial Categories
+1. **Credit Cards** - Travel rewards, cashback, business cards, 0% APR, balance transfer, secured cards
+2. **Personal Loans** - Debt consolidation, home improvement, medical, emergency funds
+3. **Business Funding** - Business credit cards, lines of credit, SBA loans, startup capital
+4. **Banking** - High-yield savings, checking, CDs, money market, cash management
+5. **Insurance** - Auto, home, renters, life, health, umbrella, pet insurance
+6. **Investing** - Brokerages, robo-advisors, retirement accounts, crypto platforms
+7. **Credit Builder** - Credit-builder cards, secured cards, credit monitoring
+8. **Student Finance** - Student loans, refinancing, student banking
+9. **Tax Tools** - Tax filing software, professional prep, tax planning
+10. **Identity & Security** - Identity protection, credit monitoring, dark web scanning
+11. **Budgeting Apps** - Expense tracking, financial planning, debt payoff apps
+12. **Rewards & Cashback** - Shopping cashback, receipt scanning, browser extensions
+13. **Real Estate Concierge** - Luxury homes, mortgage pre-approval, home valuations (NYC, California, Nevada markets)
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
@@ -9,39 +24,47 @@ Preferred communication style: Simple, everyday language.
 ## System Architecture
 
 ### UI/UX Decisions
-The platform features a visual-first approach with large imagery, a gold-accented color scheme (#d4af37), and a three-tier typography system (Cormorant, Playfair Display, Inter). It includes a custom theme provider for light/dark mode, glassmorphism elements, and enhanced property card styling. Key UI components include a tabbed floating chat assistant, a "Property Command Center," and an "Agentic Actions" section with modular Agentic Compute visualization. Specific design elements extend to personalized chat avatars, gold-gradient email forms, and a footer with "Powered by AI" branding.
+The platform features a visual-first approach with large imagery (AI Engine visualization), a gold-accented color scheme (#d4af37), and a three-tier typography system. It includes a custom theme provider for light/dark mode, glassmorphism elements, and enhanced product card styling. Key UI components include a multi-category AI chat assistant, category pages with product comparison grids, and a Global Market Ticker in the footer.
 
 **Design Standards (November 2025):**
-- **Zero Emoji Policy**: All visual indicators use Lucide React SVG icons exclusively. No emojis permitted in UI, forms, chat prompts, or notifications.
-- **Header Branding**: Features "AGENT KAMMER" with tagline "When Brokers Compete You Win" in gold (#d4af37), accompanied by a rotated Sparkles icon.
-- **Icon System**: Professional SVG icons (Phone, Sparkles, MessageCircle, etc.) from lucide-react library throughout the application.
+- **Zero Emoji Policy**: All visual indicators use Lucide React SVG icons exclusively. No emojis permitted in UI, forms, chat prompts, or notifications. Exception: Top hat in logo/branding only.
+- **Header Branding**: Features "AGENT KAMMER" with tagline "When Brokers Compete You Win" in gold (#d4af37).
+- **Icon System**: Professional SVG icons from lucide-react library throughout the application.
 - **Text Legibility**: Dark navy/slate backgrounds ensure optimal contrast for gold and white text.
+- **AI Engine Visual**: Prominent futuristic brain/circuit image in hero section representing the AI comparison engine.
 
 ### Technical Implementations
-The frontend uses React, TypeScript, and Vite, with `wouter` for routing and React Query for server state management. `shadcn/ui` provides customizable components styled with Tailwind CSS. The backend is built with Express.js, Node.js, and TypeScript, providing RESTful API routes. Session management is handled via `connect-pg-simple` with PostgreSQL. OpenAI integration powers the chat assistant for lead extraction.
+The frontend uses React, TypeScript, and Vite, with `wouter` for routing and React Query for server state management. `shadcn/ui` provides customizable components styled with Tailwind CSS. The backend is built with Express.js, Node.js, and TypeScript, providing RESTful API routes. Session management is handled via `connect-pg-simple` with PostgreSQL. OpenAI integration powers the multi-category chat assistant for lead extraction.
 
 ### Feature Specifications
-- **Property Search & Discovery**: Advanced search, filtering, and curated listings.
-- **Saved Searches**: Users can save criteria and receive email notifications.
-- **Service Pages**: Mortgage pre-approval and home valuation forms.
+- **Category Pages**: Dedicated pages for each of the 13 financial categories with AI-ranked product comparisons.
+- **Product Comparison Engine**: Deterministic scoring algorithm in `shared/productOffers.ts` that calculates match scores based on user profiles.
+- **AI Chat Assistant**: GPT-4o-mini powered, "Sophisticated Closer" personality, understands all 13 categories, persistent lead capture (Name, Category Interest, Timeline, Goals/Budget, Email, Phone), automatic `LEAD_DATA` JSON extraction, session tracking, database persistence with lead scores.
+- **Affiliate Program**: Full affiliate tracking system with signup, referral codes, tier-based commissions, and dashboard at `/affiliates`.
+- **Global Market Ticker**: Real-time ticker in footer showing S&P 500, Bitcoin, Gold, and mortgage rate data.
 - **Market Analysis Reports**: On-demand property-specific reports for California, NYC, and Nevada, with downloadable PDF versions.
-- **AI Chat Assistant with CRM Lead Capture**: GPT-4o-mini powered, "Sophisticated Closer" personality, persistent lead capture (Name, Timeline, Budget, Email, Phone), automatic `LEAD_DATA` JSON extraction, session tracking, database persistence to `leads` table with lead scores, and voice input. Features engaging sound effects.
-- **Live Deal Map**: Interactive Google Maps integration with custom styling and Deal IQ scores.
-- **Live Interest Rate Ticker**: Displays current 30-year fixed mortgage rates.
-- **Broker Registration Page**: Allows brokers to create profiles.
-- **Strategic Document Portal**: Zero-knowledge encrypted document management for competitive bidding with AES-256 client-side encryption.
+- **Strategic Document Portal**: Zero-knowledge encrypted document management with AES-256 client-side encryption.
 - **Transformational Alignment Coaching**: Dedicated page for coaching services.
 - **Luxury Travel Experiences**: Showcasing bespoke adventure packages.
 - **Wellness Shop**: E-commerce for premium supplements.
 - **Commercial Real Estate Investment**: Live-updating feed page for California properties.
-- **Audiobooks Page**: Premium library of 9 audiobooks with unique AI-generated artwork, detailed descriptions, and lead capture for samples.
-- **Ecourses Page**: Premium online courses for luxury real estate professionals, including a featured course on "Perfect Decision-Making."
-- **Downloads Page**: Library of free downloadable resources and templates for real estate professionals.
-- **Process Flow Section**: Visual representation of the platform's 4-step unique approach (Client → Encrypted Trust Layer → Bidding Profile → Brokers Compete) via a horizontal carousel.
-- **Content Studio (Internal)**: Private management system for social media video content workflow (Ideation → Legal Review → Ready to Shoot → Completed) with CRUD operations and publishing destination tracking.
+- **Audiobooks Page**: Premium library of 9 audiobooks with unique AI-generated artwork.
+- **Ecourses Page**: Premium online courses for professionals.
+- **Downloads Page**: Library of free downloadable resources and templates.
+- **Content Studio (Internal)**: Private management system for social media video content workflow.
+
+### Key Files
+- `client/src/pages/Home.tsx` - Homepage with AI engine image and category grid
+- `client/src/pages/CategoryPage.tsx` - Unified category page template for all 13 categories
+- `client/src/pages/AffiliateProgram.tsx` - Affiliate signup, tracking, and dashboard
+- `shared/productOffers.ts` - Product offers database and deterministic scoring algorithm
+- `shared/schema.ts` - Database schema including affiliates table
+- `server/routes.ts` - API routes including affiliate endpoints and multi-category chatbot prompt
+- `client/src/components/Footer.tsx` - Footer with Global Market Ticker and Affiliates link
+- `client/src/components/GlobalMarketTicker.tsx` - Real-time market data ticker
 
 ### System Design Choices
-The system uses Drizzle ORM with neon-http for PostgreSQL connections. Authentication is session-based. The database schema includes `users`, `leads`, and `contentItems`. The platform is designed for scalability and emphasizes secure, type-safe development practices.
+The system uses Drizzle ORM with neon-http for PostgreSQL connections. Authentication is session-based. The database schema includes `users`, `leads`, `contentItems`, and `affiliates`. Product scoring uses a deterministic algorithm from the shared module for consistent UX. The platform is designed for scalability with affiliate tracking ready for Impact, FlexOffers, RevOffers, CJ, and Rakuten integration.
 
 ## External Dependencies
 
@@ -53,9 +76,19 @@ The system uses Drizzle ORM with neon-http for PostgreSQL connections. Authentic
 *   **OpenAI**: For AI chat capabilities (via Replit AI Integrations).
 *   **API Ninjas**: (Optional) For live mortgage rate data.
 *   **Google Maps**: For the Live Deal Map.
+*   **RentCast API**: For property valuations (requires activation).
 
 ### Third-Party UI Libraries
 *   **Radix UI**: Accessible UI primitives.
 *   **Embla Carousel**: For horizontal galleries.
 *   **React Hook Form**: Form state management with Zod validation.
 *   **Lucide React & React Icons**: Icon libraries.
+
+## Recent Changes (November 2025)
+- Transformed from luxury real estate platform to comprehensive financial comparison engine
+- Added 13 financial product categories with complete subcategory coverage
+- Implemented deterministic scoring algorithm for consistent product recommendations
+- Built complete affiliate program infrastructure with tracking and dashboard
+- Incorporated AI engine visual (futuristic brain/circuit design) into homepage hero
+- Updated chatbot to understand all 13 categories for conversational recommendations
+- Added Global Market Ticker and Affiliates link to footer
