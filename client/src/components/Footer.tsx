@@ -145,12 +145,12 @@ export function Footer() {
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       <div className="bg-[#0a1628] py-3">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col items-center gap-2">
+          <div className="flex flex-col items-center gap-1.5">
+            <div className="flex items-center gap-1.5 text-white/90">
+              <Brain className="h-4 w-4 text-[#79d3ff]" />
+              <span className="text-[0.625rem] font-medium">Powered by AI</span>
+            </div>
             <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center">
-              <div className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors">
-                <Brain className="h-4 w-4 text-[#79d3ff]" />
-                <span className="text-[0.625rem] font-medium">Powered by AI</span>
-              </div>
               <div className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors">
                 <SiReplit className="h-4 w-4" />
                 <span className="text-[0.625rem] font-medium">Replit</span>
