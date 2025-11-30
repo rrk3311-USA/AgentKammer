@@ -34,6 +34,7 @@ import ReverseByerOriginationGuide from "@/pages/ReverseByerOriginationGuide";
 import ReverseSellerOrigination from "@/pages/ReverseSellerOrigination";
 import AdminRBO from "@/pages/AdminRBO";
 import AffiliateProgram from "@/pages/AffiliateProgram";
+import FreeTools from "@/pages/FreeTools";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -80,6 +81,7 @@ function Router() {
       <Route path="/reverse-seller-origination" component={ReverseSellerOrigination} />
       <Route path="/admin/rbo" component={AdminRBO} />
       <Route path="/affiliates" component={AffiliateProgram} />
+      <Route path="/free-tools" component={FreeTools} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -1,4 +1,5 @@
-import { TrendingUp, TrendingDown, Minus, DollarSign, Percent, CreditCard, Building2, PiggyBank, Shield, Briefcase, Landmark, LineChart, Home, Wallet } from "lucide-react";
+import { TrendingUp, TrendingDown, Minus, DollarSign, Percent, CreditCard, Building2, PiggyBank, Shield, Briefcase, Landmark, LineChart, Home, Wallet, Calculator } from "lucide-react";
+import { Link } from "wouter";
 
 interface MarketRate {
   label: string;
@@ -56,38 +57,49 @@ export function LiveTicker() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 w-full z-40 bg-[#0a1628] border-t border-t-[0.5px] border-[#d4af37]/30 py-2">
-      <div className="relative overflow-hidden h-8">
-        <div
-          className="flex items-center gap-6 whitespace-nowrap"
-          style={{
-            animation: "marketScroll 11s linear infinite",
-          }}
-        >
-          {tickerItems.map((rate, index) => {
-            const IconComponent = rate.icon;
-            const inverse = isInverseRate(rate.label);
-            return (
-              <div
-                key={`${rate.label}-${index}`}
-                className="flex items-center gap-2 px-3 py-1 border border-[#d4af37]/40 rounded-sm bg-black/30"
-                data-testid={`ticker-rate-${rate.label.toLowerCase().replace(/\s+/g, '-')}-${index}`}
-              >
-                <IconComponent className="h-3.5 w-3.5 text-[#d4af37]" />
-                <span className="text-[10px] font-medium text-[#d4af37] uppercase tracking-wide">
-                  {rate.label}
-                </span>
-                <span className="font-mono text-xs font-bold text-white tabular-nums">
-                  {rate.value}
-                </span>
-                <div className="flex items-center gap-0.5">
-                  {getTrendIcon(rate.change, inverse)}
-                  <span className={`text-[10px] font-medium ${getTrendColor(rate.change, inverse)}`}>
-                    {formatChange(rate.change)}
+      <div className="flex items-center h-8">
+        <Link href="/free-tools">
+          <div 
+            className="flex items-center gap-2 px-4 py-1.5 bg-[#d4af37] text-black font-semibold text-xs uppercase tracking-wide cursor-pointer hover:bg-[#c19b2f] transition-colors flex-shrink-0 h-8"
+            data-testid="button-free-tools"
+          >
+            <Calculator className="h-4 w-4" />
+            <span>Free Tools</span>
+          </div>
+        </Link>
+        <div className="relative overflow-hidden flex-1 h-8">
+          <div
+            className="flex items-center gap-6 whitespace-nowrap"
+            style={{
+              animation: "marketScroll 11s linear infinite",
+            }}
+          >
+            {tickerItems.map((rate, index) => {
+              const IconComponent = rate.icon;
+              const inverse = isInverseRate(rate.label);
+              return (
+                <div
+                  key={`${rate.label}-${index}`}
+                  className="flex items-center gap-2 px-3 py-1 border border-[#d4af37]/40 rounded-sm bg-black/30"
+                  data-testid={`ticker-rate-${rate.label.toLowerCase().replace(/\s+/g, '-')}-${index}`}
+                >
+                  <IconComponent className="h-3.5 w-3.5 text-[#d4af37]" />
+                  <span className="text-[10px] font-medium text-[#d4af37] uppercase tracking-wide">
+                    {rate.label}
                   </span>
+                  <span className="font-mono text-xs font-bold text-white tabular-nums">
+                    {rate.value}
+                  </span>
+                  <div className="flex items-center gap-0.5">
+                    {getTrendIcon(rate.change, inverse)}
+                    <span className={`text-[10px] font-medium ${getTrendColor(rate.change, inverse)}`}>
+                      {formatChange(rate.change)}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
 
