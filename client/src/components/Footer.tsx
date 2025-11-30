@@ -1,6 +1,5 @@
 import { SiReplit, SiNvidia, SiClaude, SiAnthropic, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
 import { Brain, FileText, Globe, Headphones, GraduationCap, Download, Shield, Sparkles, TrendingUp, Users } from "lucide-react";
-import { GlobalMarketTicker } from "./GlobalMarketTicker";
 import { Link } from "wouter";
 
 export function Footer() {
@@ -147,9 +146,6 @@ export function Footer() {
       <div className="bg-[#0a1628] py-3">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col items-center gap-2">
-            <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 mb-1 flex-wrap text-center">
-              <GlobalMarketTicker />
-            </div>
             <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center">
               <div className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors">
                 <Brain className="h-4 w-4 text-[#79d3ff]" />

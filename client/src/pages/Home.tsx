@@ -284,7 +284,7 @@ export default function Home() {
             </h3>
             <Link href="/real-estate">
               <Card 
-                className="p-6 bg-gradient-to-r from-[#d4af37]/20 via-[#d4af37]/10 to-transparent border-[#d4af37]/30 hover:border-[#d4af37]/60 transition-all cursor-pointer group"
+                className="p-6 bg-[#0f1d32] border-[#d4af37]/40 hover:border-[#d4af37] transition-all cursor-pointer group"
                 data-testid="card-category-real-estate"
               >
                 <div className="flex flex-col md:flex-row md:items-center gap-6">
@@ -293,7 +293,7 @@ export default function Home() {
                   </div>
                   <div className="flex-1">
                     <h4 className="font-serif text-2xl font-semibold text-white mb-2">AgentKammer Real Estate Concierge</h4>
-                    <p className="text-white/70">
+                    <p className="text-white/80">
                       Our flagship luxury real estate + Reverse Buyer Origination system. Make brokers compete for your business in NYC, California, and Nevada.
                     </p>
                   </div>

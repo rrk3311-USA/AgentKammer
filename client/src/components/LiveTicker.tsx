@@ -1,109 +1,90 @@
-import { useState, useEffect, useRef } from "react";
-import { Badge } from "@/components/ui/badge";
-import { TrendingUp, TrendingDown, Building, Home, Shirt } from "lucide-react";
+import { TrendingUp, TrendingDown, Minus, DollarSign, Percent, CreditCard, Building2, PiggyBank, Shield, Briefcase, Landmark, LineChart, Home, Wallet } from "lucide-react";
 
-interface TickerItem {
-  id: string;
-  address: string;
-  price: number;
-  type: string;
-  beds: number;
-  baths: number;
-  sqft: number;
-  daysOnMarket: number;
-  agent: string;
-  brokerage: string;
+interface MarketRate {
+  label: string;
+  value: string;
+  change: number;
+  icon: typeof DollarSign;
 }
 
+const MARKET_RATES: MarketRate[] = [
+  { label: "30Y Fixed", value: "6.82%", change: -0.03, icon: Home },
+  { label: "15Y Fixed", value: "6.09%", change: -0.05, icon: Building2 },
+  { label: "Prime Rate", value: "8.50%", change: 0, icon: Landmark },
+  { label: "Fed Rate", value: "5.50%", change: 0, icon: DollarSign },
+  { label: "Avg CC APR", value: "24.6%", change: 0.2, icon: CreditCard },
+  { label: "S&P 500", value: "6,032.38", change: 33.64, icon: LineChart },
+  { label: "DJIA", value: "44,910.65", change: -138.25, icon: TrendingDown },
+  { label: "10Y Treasury", value: "4.19%", change: -0.02, icon: Percent },
+  { label: "Bitcoin", value: "$97,284", change: 1205.40, icon: Wallet },
+  { label: "Gold", value: "$2,684.20", change: 12.30, icon: PiggyBank },
+  { label: "Savings APY", value: "5.05%", change: 0, icon: PiggyBank },
+  { label: "CD Rate (1Y)", value: "4.85%", change: -0.10, icon: Shield },
+];
+
 export function LiveTicker() {
-  const [activeTab, setActiveTab] = useState<"residential" | "commercial">("residential");
-  const tickerRef = useRef<HTMLDivElement>(null);
-
-  // TODO: Replace with real API data from Manhattan real estate feeds
-  const residentialData: TickerItem[] = [
-    { id: "1", address: "432 Park Ave", price: 8500000, type: "Condo", beds: 4, baths: 5, sqft: 4500, daysOnMarket: 12, agent: "Sarah Chen", brokerage: "Douglas Elliman" },
-    { id: "2", address: "220 Central Park S", price: 12000000, type: "Co-op", beds: 5, baths: 6, sqft: 6200, daysOnMarket: 3, agent: "Michael Torres", brokerage: "Sotheby's Intl" },
-    { id: "3", address: "15 Central Park W", price: 15500000, type: "Condo", beds: 3, baths: 4, sqft: 3800, daysOnMarket: 45, agent: "Lisa Anderson", brokerage: "Corcoran Group" },
-    { id: "4", address: "One57", price: 9800000, type: "Penthouse", beds: 6, baths: 7, sqft: 7500, daysOnMarket: 8, agent: "David Kim", brokerage: "Compass" },
-    { id: "5", address: "56 Leonard St", price: 7200000, type: "Condo", beds: 4, baths: 5, sqft: 5100, daysOnMarket: 22, agent: "Jennifer Walsh", brokerage: "Brown Harris" },
-    { id: "6", address: "111 W 57th St", price: 18000000, type: "Co-op", beds: 5, baths: 5, sqft: 4900, daysOnMarket: 5, agent: "Robert Martinez", brokerage: "Stribling" },
-    { id: "7", address: "520 Park Ave", price: 6500000, type: "Condo", beds: 3, baths: 3, sqft: 3200, daysOnMarket: 67, agent: "Amanda Clarke", brokerage: "Halstead" },
-    { id: "8", address: "The Plaza", price: 25000000, type: "Penthouse", beds: 7, baths: 8, sqft: 9500, daysOnMarket: 15, agent: "James Sullivan", brokerage: "Christie's" },
-  ];
-
-  const commercialData: TickerItem[] = [
-    { id: "c1", address: "1 Wall St", price: 45000000, type: "Office", beds: 0, baths: 0, sqft: 25000, daysOnMarket: 28, agent: "Patricia Lee", brokerage: "CBRE" },
-    { id: "c2", address: "350 Park Ave", price: 85000000, type: "Retail", beds: 0, baths: 0, sqft: 45000, daysOnMarket: 11, agent: "Thomas Wright", brokerage: "JLL" },
-    { id: "c3", address: "660 Madison Ave", price: 52000000, type: "Mixed Use", beds: 0, baths: 0, sqft: 35000, daysOnMarket: 33, agent: "Emily Foster", brokerage: "Cushman" },
-    { id: "c4", address: "Times Square Tower", price: 120000000, type: "Office", beds: 0, baths: 0, sqft: 280000, daysOnMarket: 7, agent: "Mark Stevens", brokerage: "Newmark" },
-    { id: "c5", address: "Chrysler Building", price: 95000000, type: "Landmark", beds: 0, baths: 0, sqft: 38000, daysOnMarket: 52, agent: "Rachel Green", brokerage: "Savills" },
-    { id: "c6", address: "Trump Tower", price: 78000000, type: "Retail", beds: 0, baths: 0, sqft: 22000, daysOnMarket: 19, agent: "Daniel Park", brokerage: "Colliers" },
-  ];
-
-  const allData = [...residentialData, ...commercialData];
-  
-  const formatPrice = (value: number) => {
-    if (value >= 1000000) {
-      return `$${(value / 1000000).toFixed(1)}M`;
-    }
-    return `$${(value / 1000).toFixed(0)}K`;
+  const getTrendIcon = (change: number, isInverse: boolean = false) => {
+    // For rates like APR where lower is better, inverse the color logic
+    if (change > 0) return <TrendingUp className={`h-3 w-3 ${isInverse ? 'text-red-400' : 'text-green-400'}`} />;
+    if (change < 0) return <TrendingDown className={`h-3 w-3 ${isInverse ? 'text-green-400' : 'text-red-400'}`} />;
+    return <Minus className="h-3 w-3 text-gray-400" />;
   };
 
-  const createTickerItems = () => {
-    const items = [];
-    for (let cycle = 0; cycle < 3; cycle++) {
-      allData.forEach((item, index) => {
-        items.push({ ...item, key: `${item.id}-${cycle}-${index}`, isDivider: false });
-      });
-      if (cycle < 2) {
-        items.push({ key: `divider-${cycle}`, isDivider: true, id: `divider-${cycle}` } as any);
-      }
-    }
-    return items;
+  const getTrendColor = (change: number, isInverse: boolean = false) => {
+    if (change > 0) return isInverse ? "text-red-400" : "text-green-400";
+    if (change < 0) return isInverse ? "text-green-400" : "text-red-400";
+    return "text-gray-400";
   };
 
-  const tickerItems = createTickerItems();
+  const formatChange = (change: number) => {
+    if (change === 0) return "—";
+    const prefix = change > 0 ? "+" : "";
+    // For larger numbers, show actual value
+    if (Math.abs(change) >= 1) {
+      return `${prefix}${change.toFixed(2)}`;
+    }
+    return `${prefix}${change.toFixed(2)}`;
+  };
+
+  // Determine if this is a rate where increase is bad (like APR, interest rates)
+  const isInverseRate = (label: string) => {
+    return label.includes("APR") || label.includes("Fixed") || label.includes("Prime") || label.includes("Fed");
+  };
+
+  // Create multiple copies for seamless scrolling
+  const tickerItems = [...MARKET_RATES, ...MARKET_RATES, ...MARKET_RATES];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 w-full z-40 bg-[#0a1628] border-t border-t-[0.5px] border-b border-b-[0.5px] border-black py-2.5">
-      <div className="relative overflow-hidden h-11 bg-[#0a1628]">
+    <div className="fixed bottom-0 left-0 right-0 w-full z-40 bg-[#0a1628] border-t border-t-[0.5px] border-[#d4af37]/30 py-2">
+      <div className="relative overflow-hidden h-8">
         <div
-          className="flex items-center gap-6 animate-scroll whitespace-nowrap py-2.5"
+          className="flex items-center gap-6 whitespace-nowrap"
           style={{
-            animation: "scroll 17.5s linear infinite",
+            animation: "marketScroll 45s linear infinite",
           }}
         >
-          {tickerItems.map((item, index) => {
-            if ((item as any).isDivider) {
-              return (
-                <div
-                  key={item.key}
-                  className="flex items-center justify-center px-6"
-                >
-                  <Shirt className="w-5 h-5 text-[#d4af37]" />
-                </div>
-              );
-            }
-            
+          {tickerItems.map((rate, index) => {
+            const IconComponent = rate.icon;
+            const inverse = isInverseRate(rate.label);
             return (
               <div
-                key={item.key}
-                className="flex items-center gap-2 px-3 py-1.5 border border-[#d4af37] rounded-sm"
-                data-testid={`ticker-item-${item.id}`}
+                key={`${rate.label}-${index}`}
+                className="flex items-center gap-2 px-3 py-1 border border-[#d4af37]/40 rounded-sm bg-black/30"
+                data-testid={`ticker-rate-${rate.label.toLowerCase().replace(/\s+/g, '-')}-${index}`}
               >
-                <span className="font-semibold text-sm text-[#d4af37]">
-                  {formatPrice(item.price)}
+                <IconComponent className="h-3.5 w-3.5 text-[#d4af37]" />
+                <span className="text-[10px] font-medium text-[#d4af37] uppercase tracking-wide">
+                  {rate.label}
                 </span>
-                <span className="font-medium text-sm text-white">{item.address}</span>
-                <span className="text-sm text-white/80">{item.type}</span>
-                {item.beds > 0 && (
-                  <span className="text-xs text-white/70">
-                    {item.beds}bd/{item.baths}ba
+                <span className="font-mono text-xs font-bold text-white tabular-nums">
+                  {rate.value}
+                </span>
+                <div className="flex items-center gap-0.5">
+                  {getTrendIcon(rate.change, inverse)}
+                  <span className={`text-[10px] font-medium ${getTrendColor(rate.change, inverse)}`}>
+                    {formatChange(rate.change)}
                   </span>
-                )}
-                <span className="text-xs text-white/70">
-                  {item.sqft.toLocaleString()} sf
-                </span>
+                </div>
               </div>
             );
           })}
@@ -111,7 +92,7 @@ export function LiveTicker() {
       </div>
 
       <style>{`
-        @keyframes scroll {
+        @keyframes marketScroll {
           0% {
             transform: translateX(0);
           }
