@@ -11,7 +11,7 @@ export function Footer() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             <div>
               <h3 className="font-serif text-base md:text-lg font-semibold mb-3">Agent Kammer</h3>
-              <p className="text-xs md:text-sm text-foreground mb-3">
+              <p className="text-xs md:text-sm text-foreground font-medium mb-3">
                 AI-Powered Financial Comparison
               </p>
               <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground">
