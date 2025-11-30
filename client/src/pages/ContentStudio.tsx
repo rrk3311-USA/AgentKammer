@@ -16,15 +16,25 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { insertContentItemSchema } from "@shared/schema";
 import { z } from "zod";
-import { Film, Lightbulb, Scale, Clapperboard, Archive, Plus, Trash2, Edit, MoveRight, Youtube, Instagram, Linkedin } from "lucide-react";
+import { Film, Lightbulb, Scale, Clapperboard, Archive, Plus, Trash2, Edit, MoveRight, Youtube, Instagram, Linkedin, FolderArchive, FileText, Globe, Headphones, GraduationCap, Download, ExternalLink } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
+import { Link } from "wouter";
 
 const stages = [
   { id: "ideation", label: "Ideation", icon: Lightbulb, color: "bg-purple-500/20 text-purple-400 border-purple-500/30" },
   { id: "legal", label: "Legal Review", icon: Scale, color: "bg-blue-500/20 text-blue-400 border-blue-500/30" },
   { id: "ready", label: "Ready to Shoot", icon: Clapperboard, color: "bg-amber-500/20 text-amber-400 border-amber-500/30" },
   { id: "completed", label: "Completed", icon: Archive, color: "bg-green-500/20 text-green-400 border-green-500/30" },
+  { id: "offer-archive", label: "Offer Archive", icon: FolderArchive, color: "bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30" },
+];
+
+const offerArchiveItems = [
+  { id: "document-portal", label: "Document Portal", href: "/document-portal", icon: FileText, description: "Zero-knowledge encrypted document management" },
+  { id: "international-buyers", label: "International Buyers", href: "/international-buyers", icon: Globe, description: "Resources for global clients" },
+  { id: "audiobooks", label: "Audiobooks", href: "/audiobooks", icon: Headphones, description: "Premium audio library" },
+  { id: "ecourses", label: "Ecourses", href: "/ecourses", icon: GraduationCap, description: "Professional development courses" },
+  { id: "downloads", label: "Downloads", href: "/downloads", icon: Download, description: "Free resources and templates" },
 ];
 
 const publishingPlatforms = [
@@ -398,7 +408,34 @@ export default function ContentStudio() {
 
           {stages.map((stage) => (
             <TabsContent key={stage.id} value={stage.id} className="space-y-4">
-              {isLoading ? (
+              {stage.id === "offer-archive" ? (
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {offerArchiveItems.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <Link key={item.id} href={item.href}>
+                        <Card 
+                          className="bg-[#d4af37]/10 border-[#d4af37]/30 backdrop-blur-sm hover:border-[#d4af37]/60 transition-all cursor-pointer group h-full"
+                          data-testid={`card-archive-${item.id}`}
+                        >
+                          <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-3">
+                            <div className="w-12 h-12 rounded-lg bg-[#d4af37]/20 flex items-center justify-center flex-shrink-0">
+                              <Icon className="w-6 h-6 text-[#d4af37]" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <CardTitle className="text-lg text-white flex items-center gap-2">
+                                {item.label}
+                                <ExternalLink className="w-4 h-4 text-[#d4af37] opacity-0 group-hover:opacity-100 transition-opacity" />
+                              </CardTitle>
+                              <p className="text-sm text-slate-300 mt-1">{item.description}</p>
+                            </div>
+                          </CardHeader>
+                        </Card>
+                      </Link>
+                    );
+                  })}
+                </div>
+              ) : isLoading ? (
                 <div className="text-center py-12 text-slate-300">Loading...</div>
               ) : filteredItems.length === 0 ? (
                 <Card className="bg-slate-500/20 border-slate-400/40 backdrop-blur-sm">
