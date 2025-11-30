@@ -498,7 +498,7 @@ function calculateLeadScore(leadData: LeadData): number {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  const sessionLeads = new Map<string, { leadId?: string; data: LeadData }>();
+  const sessionLeads = new Map<string, { leadId?: string; data: LeadData; notified?: boolean }>();
 
   app.post("/api/chat", async (req, res) => {
     try {
@@ -558,10 +558,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const updated = await storage.updateLead(sessionLead.leadId, leadPayload);
           console.log("[CHAT] Updated lead:", sessionLead.leadId, updated);
           sessionLeads.set(sid, { leadId: sessionLead.leadId, data: updatedData });
+          
+          // Send notification when key contact info is captured (phone or email)
+          if ((extractedData.phone || extractedData.email) && !sessionLead.notified) {
+            const category = updatedData.category || 'general-inquiry';
+            const isRealEstate = category.toLowerCase().includes('real estate') || 
+                                 category.toLowerCase().includes('home') ||
+                                 category.toLowerCase().includes('property');
+            
+            notifyLead({
+              phone: updatedData.phone,
+              source: `chatbot-${isRealEstate ? 'real-estate' : category.replace(/\s+/g, '-').toLowerCase()}`,
+              name: updatedData.name || null,
+              budget: updatedData.financing || updatedData.goals || null,
+            });
+            sessionLeads.set(sid, { ...sessionLeads.get(sid)!, notified: true });
+            console.log("[CHAT] Sent lead notification for category:", category);
+          }
         } else {
           const newLead = await storage.createLead(leadPayload);
           console.log("[CHAT] Created new lead:", newLead.id, newLead);
-          sessionLeads.set(sid, { leadId: newLead.id, data: updatedData });
+          sessionLeads.set(sid, { leadId: newLead.id, data: updatedData, notified: false });
+          
+          // Send notification for new leads with contact info
+          if (extractedData.phone || extractedData.email) {
+            const category = updatedData.category || 'general-inquiry';
+            const isRealEstate = category.toLowerCase().includes('real estate') || 
+                                 category.toLowerCase().includes('home') ||
+                                 category.toLowerCase().includes('property');
+            
+            notifyLead({
+              phone: updatedData.phone,
+              source: `chatbot-${isRealEstate ? 'real-estate' : category.replace(/\s+/g, '-').toLowerCase()}`,
+              name: updatedData.name || null,
+              budget: updatedData.financing || updatedData.goals || null,
+            });
+            sessionLeads.set(sid, { leadId: newLead.id, data: updatedData, notified: true });
+            console.log("[CHAT] Sent lead notification for new lead, category:", category);
+          }
         }
       } else {
         console.log("[CHAT] No lead data extracted from this response");
