@@ -26,7 +26,7 @@ import {
   Users,
   BarChart3
 } from "lucide-react";
-import aiEngineImage from "@assets/image_1764482688098.png";
+import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
 
 const categoryIcons: Record<string, any> = {
   'CreditCard': CreditCard,
@@ -123,28 +123,9 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right: AI Engine Visual */}
+            {/* Right: Animated AI Engine Visual */}
             <div className="relative">
-              <div className="relative rounded-2xl overflow-hidden border border-[#d4af37]/30 shadow-2xl shadow-[#d4af37]/10">
-                <img 
-                  src={aiEngineImage} 
-                  alt="AI-Powered Multi-Market Intelligence Engine" 
-                  className="w-full h-auto"
-                  data-testid="img-ai-engine"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Brain className="h-5 w-5 text-[#d4af37]" />
-                      <span className="text-[#d4af37] font-medium">Agentic Compute Engine</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                      <span className="text-green-400 text-xs">Processing</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <AgenticEngineVisual />
             </div>
           </div>
         </div>
