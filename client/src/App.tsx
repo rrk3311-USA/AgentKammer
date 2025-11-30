@@ -35,6 +35,7 @@ import ReverseSellerOrigination from "@/pages/ReverseSellerOrigination";
 import AdminRBO from "@/pages/AdminRBO";
 import AffiliateProgram from "@/pages/AffiliateProgram";
 import FreeTools from "@/pages/FreeTools";
+import Dashboard from "@/pages/Dashboard";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -56,6 +57,12 @@ function Router() {
       <Route path="/identity-security" component={() => <CategoryPage categoryId="identity-security" />} />
       <Route path="/budgeting-apps" component={() => <CategoryPage categoryId="budgeting-apps" />} />
       <Route path="/rewards-cashback" component={() => <CategoryPage categoryId="rewards-cashback" />} />
+      <Route path="/renters-insurance" component={() => <CategoryPage categoryId="renters-insurance" />} />
+      <Route path="/estate-planning" component={() => <CategoryPage categoryId="estate-planning" />} />
+      <Route path="/micro-investing" component={() => <CategoryPage categoryId="micro-investing" />} />
+      
+      {/* Dashboard */}
+      <Route path="/dashboard" component={Dashboard} />
       
       {/* Existing Routes */}
       <Route path="/saved" component={SavedSearches} />

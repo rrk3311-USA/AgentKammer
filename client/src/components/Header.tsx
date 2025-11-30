@@ -118,6 +118,13 @@ export function Header() {
                     Free Tools
                   </DropdownMenuItem>
                 </Link>
+                <DropdownMenuSeparator />
+                <Link href="/dashboard">
+                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-dashboard">
+                    <Brain className="h-4 w-4 mr-2 text-[#d4af37]" />
+                    All Categories Dashboard
+                  </DropdownMenuItem>
+                </Link>
               </DropdownMenuContent>
             </DropdownMenu>
 
