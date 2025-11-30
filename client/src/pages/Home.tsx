@@ -1,187 +1,458 @@
-import { HeroSearch } from "@/components/HeroSearch";
-import { AgenticComputeSection } from "@/components/AgenticCompute/AgenticComputeSection";
-import { LuxuryBackground } from "@/components/LuxuryBackground";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
-import agentKammerWelcoming from "@assets/image_1763360901241.png";
+import { Link } from "wouter";
+import { 
+  CreditCard, 
+  Wallet, 
+  Building2, 
+  Landmark, 
+  Shield, 
+  TrendingUp,
+  Target,
+  GraduationCap,
+  Calculator,
+  Lock,
+  PieChart,
+  Gift,
+  Home as HomeIcon,
+  Sparkles,
+  ArrowRight,
+  Brain,
+  Zap,
+  CheckCircle2,
+  Users,
+  BarChart3
+} from "lucide-react";
+
+const categoryIcons: Record<string, any> = {
+  'CreditCard': CreditCard,
+  'Wallet': Wallet,
+  'Building2': Building2,
+  'Landmark': Landmark,
+  'Shield': Shield,
+  'TrendingUp': TrendingUp,
+  'Target': Target,
+  'GraduationCap': GraduationCap,
+  'Calculator': Calculator,
+  'Lock': Lock,
+  'PieChart': PieChart,
+  'Gift': Gift,
+  'Home': HomeIcon,
+};
+
+const PRIMARY_CATEGORIES = [
+  { id: 'credit-cards', name: 'Credit Cards', icon: 'CreditCard', description: 'AI-matched cards based on your profile and goals', color: 'from-blue-500/20 to-indigo-500/20' },
+  { id: 'personal-loans', name: 'Personal Loans', icon: 'Wallet', description: 'Compare lenders for consolidation and lower APRs', color: 'from-green-500/20 to-emerald-500/20' },
+  { id: 'business-funding', name: 'Business Funding', icon: 'Building2', description: 'Business cards, lines of credit, and startup capital', color: 'from-purple-500/20 to-violet-500/20' },
+  { id: 'banking', name: 'Banking', icon: 'Landmark', description: 'High-yield savings, checking, and cash tools', color: 'from-cyan-500/20 to-teal-500/20' },
+  { id: 'insurance', name: 'Insurance', icon: 'Shield', description: 'Auto, home, and life insurance quotes', color: 'from-orange-500/20 to-amber-500/20' },
+  { id: 'investing', name: 'Investing', icon: 'TrendingUp', description: 'Brokerages, robo-advisors, and long-term tools', color: 'from-rose-500/20 to-pink-500/20' },
+];
+
+const SECONDARY_CATEGORIES = [
+  { id: 'credit-builder', name: 'Credit Builder', icon: 'Target', description: 'Build or rebuild your credit score' },
+  { id: 'student-finance', name: 'Student Finance', icon: 'GraduationCap', description: 'Student loans, refinancing, and banking' },
+];
+
+const SUPPORTING_CATEGORIES = [
+  { id: 'tax-tools', name: 'Tax Tools', icon: 'Calculator', description: 'Free and paid tax filing solutions' },
+  { id: 'identity-security', name: 'Identity & Security', icon: 'Lock', description: 'Identity protection and credit monitoring' },
+  { id: 'budgeting-apps', name: 'Budgeting Apps', icon: 'PieChart', description: 'Budgeting and money management' },
+  { id: 'rewards-cashback', name: 'Rewards & Cashback', icon: 'Gift', description: 'Cashback apps and rewards platforms' },
+];
 
 export default function Home() {
-  const { toast } = useToast();
-  const [phone, setPhone] = useState("");
-
-  const rboMutation = useMutation({
-    mutationFn: async (phoneNumber: string) => {
-      return await apiRequest("POST", "/api/rbo/profile", { phone: phoneNumber });
-    },
-    onSuccess: () => {
-      toast({
-        title: "Thank you!",
-        description: "We'll be in touch soon to help you find your dream home.",
-      });
-      setPhone("");
-    },
-    onError: () => {
-      toast({
-        title: "Error",
-        description: "Failed to submit. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
+  const [email, setEmail] = useState("");
 
   return (
-    <div className="min-h-screen pb-32 relative">
-      <LuxuryBackground />
-      <div className="relative z-10">
-        <HeroSearch />
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-b from-[#0a1628] via-[#0f1d32] to-[#0a1628] py-16 lg:py-24 overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-[#d4af37]/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#d4af37]/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-[#d4af37]/5 to-transparent rounded-full" />
+        </div>
 
-        <AgenticComputeSection />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Text Content */}
+            <div className="text-center lg:text-left">
+              <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-6" data-testid="badge-hero">
+                <Sparkles className="h-3 w-3 mr-1" />
+                Powered by Agentic AI
+              </Badge>
+              
+              <h1 className="font-serif text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight">
+                Your AI Agent for Better{" "}
+                <span className="text-[#d4af37]">Financial Outcomes</span>
+              </h1>
+              
+              <p className="text-lg lg:text-xl text-white/80 mb-8 leading-relaxed">
+                One profile. Our Agentic Comparison Engine uses LLMs + compute to analyze offers and force banks, lenders, credit cards, and financial products to{" "}
+                <span className="text-[#d4af37] font-semibold">compete for you</span>.
+              </p>
 
-        <section className="py-8 lg:py-12 bg-[#0a1628] text-white relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6 relative">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Left side: Text and CTA */}
-              <div className="text-center lg:text-left order-2 lg:order-1">
-                <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4 relative inline-block">
-                  <span className="relative">
-                    Ready to Find Your Dream Home?
-                    {/* Sonar pulse effect */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Link href="/profile">
+                  <Button 
+                    size="lg" 
+                    className="h-14 px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold text-lg hover:opacity-90"
+                    data-testid="button-start-profile"
+                  >
+                    <Brain className="h-5 w-5 mr-2" />
+                    Start Your Agentic Profile
+                  </Button>
+                </Link>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="h-14 px-8 border-white/30 text-white hover:bg-white/10 font-semibold text-lg"
+                  data-testid="button-browse-categories"
+                  onClick={() => {
+                    document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Browse Categories
+                </Button>
+              </div>
+            </div>
+
+            {/* Right: Dashboard Mockup */}
+            <div className="relative">
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 shadow-2xl">
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="w-3 h-3 rounded-full bg-red-500" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                  <div className="w-3 h-3 rounded-full bg-green-500" />
+                  <span className="ml-4 text-white/50 text-sm font-mono">agentkammer.com/dashboard</span>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-3">
+                  {['Mortgage', 'Credit Cards', 'Banking', 'Personal Loans', 'Business Funding', 'Insurance', 'Investing'].map((module, idx) => (
                     <div 
-                      className="absolute inset-0 overflow-visible pointer-events-none"
-                      style={{
-                        background: 'radial-gradient(circle, rgba(212,175,55,0.6) 0%, rgba(244,208,63,0.3) 30%, transparent 70%)',
-                        animation: 'sonarPulse 8s ease-in-out infinite',
-                        mixBlendMode: 'screen',
-                        filter: 'blur(1px)',
-                      }}
-                    />
-                    {/* Scanning beam */}
-                    <div 
-                      className="absolute inset-0 overflow-hidden pointer-events-none"
-                      style={{
-                        background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.2) 45%, rgba(244,208,63,0.5) 50%, rgba(212,175,55,0.2) 55%, transparent 100%)',
-                        animation: 'slowScan 10s ease-in-out infinite',
-                        mixBlendMode: 'screen',
-                      }}
-                    />
-                    {/* Magical sparks */}
-                    <div 
-                      className="absolute inset-0 overflow-visible pointer-events-none"
-                      style={{
-                        animation: 'sparkle 3s linear infinite',
-                      }}
+                      key={module}
+                      className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors"
+                      style={{ animationDelay: `${idx * 100}ms` }}
                     >
-                      <div className="absolute" style={{ left: '10%', top: '-20%', animation: 'twinkle 2s ease-in-out infinite' }}>
-                        <div className="w-1 h-1 bg-[#d4af37] rounded-full" style={{ boxShadow: '0 0 4px 2px rgba(212,175,55,0.8)' }} />
-                      </div>
-                      <div className="absolute" style={{ left: '30%', top: '120%', animation: 'twinkle 2.5s ease-in-out infinite 0.5s' }}>
-                        <div className="w-1.5 h-1.5 bg-[#f4d03f] rounded-full" style={{ boxShadow: '0 0 6px 3px rgba(244,208,63,0.8)' }} />
-                      </div>
-                      <div className="absolute" style={{ left: '60%', top: '-10%', animation: 'twinkle 2.2s ease-in-out infinite 1s' }}>
-                        <div className="w-1 h-1 bg-[#d4af37] rounded-full" style={{ boxShadow: '0 0 4px 2px rgba(212,175,55,0.8)' }} />
-                      </div>
-                      <div className="absolute" style={{ left: '80%', top: '110%', animation: 'twinkle 3s ease-in-out infinite 1.5s' }}>
-                        <div className="w-1.5 h-1.5 bg-[#f4d03f] rounded-full" style={{ boxShadow: '0 0 6px 3px rgba(244,208,63,0.8)' }} />
-                      </div>
-                      <div className="absolute" style={{ left: '90%', top: '50%', animation: 'twinkle 2.8s ease-in-out infinite 0.8s' }}>
-                        <div className="w-1 h-1 bg-[#d4af37] rounded-full" style={{ boxShadow: '0 0 4px 2px rgba(212,175,55,0.8)' }} />
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg bg-[#d4af37]/20 flex items-center justify-center">
+                          <Zap className="h-4 w-4 text-[#d4af37]" />
+                        </div>
+                        <span className="text-white text-sm font-medium">{module}</span>
                       </div>
                     </div>
-                  </span>
-                </h2>
-                <style>{`
-                  @keyframes slowScan {
-                    0%, 100% { transform: translateX(-120%); opacity: 0; }
-                    10% { opacity: 1; }
-                    50% { transform: translateX(120%); opacity: 1; }
-                    60% { opacity: 0; }
-                  }
-                  @keyframes sonarPulse {
-                    0%, 100% { 
-                      transform: scale(0.5); 
-                      opacity: 0; 
-                    }
-                    25% { 
-                      transform: scale(1.5); 
-                      opacity: 0.6; 
-                    }
-                    50% { 
-                      transform: scale(2.5); 
-                      opacity: 0; 
-                    }
-                    75% { 
-                      transform: scale(1.2); 
-                      opacity: 0.4; 
-                    }
-                  }
-                  @keyframes twinkle {
-                    0%, 100% { 
-                      opacity: 0; 
-                      transform: scale(0.5) translateY(0); 
-                    }
-                    50% { 
-                      opacity: 1; 
-                      transform: scale(1.5) translateY(-5px); 
-                    }
-                  }
-                  @keyframes sparkle {
-                    0%, 100% { filter: brightness(1); }
-                    50% { filter: brightness(1.3); }
-                  }
-                `}</style>
-                <p className="text-lg mb-8 opacity-90">
-                  Join thousands of New Yorkers who trust Agent Kammer to find their perfect property
-                </p>
-                
-                {/* Cell Number CTA Form */}
-                <form onSubmit={(e) => {
-                  e.preventDefault();
-                  if (phone) {
-                    rboMutation.mutate(phone);
-                  }
-                }} className="max-w-md mx-auto lg:mx-0">
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <Input
-                      name="phone"
-                      type="tel"
-                      placeholder="Your cell number"
-                      required
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className="flex-1 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/60"
-                      data-testid="input-dream-home-phone"
-                    />
-                    <Button
-                      type="submit"
-                      size="lg"
-                      className="h-12 px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-black font-semibold hover:opacity-90"
-                      data-testid="button-dream-home-submit"
-                      disabled={rboMutation.isPending}
-                    >
-                      {rboMutation.isPending ? "Submitting..." : "Get Started"}
-                    </Button>
+                  ))}
+                  <div className="col-span-2 bg-gradient-to-r from-[#d4af37]/20 to-[#d4af37]/10 border border-[#d4af37]/30 rounded-lg p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Brain className="h-5 w-5 text-[#d4af37]" />
+                        <span className="text-[#d4af37] font-medium">Agentic Engine Active</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                        <span className="text-green-400 text-xs">Live</span>
+                      </div>
+                    </div>
                   </div>
-                </form>
-              </div>
-
-              {/* Right side: Agent Kammer welcoming clients into luxury apartment */}
-              <div className="relative h-[400px] lg:h-[500px] flex items-center justify-center bg-[#0a1628] rounded-lg overflow-hidden order-1 lg:order-2">
-                <img 
-                  src={agentKammerWelcoming} 
-                  alt="Agent Kammer in top hat welcoming clients into luxury apartment" 
-                  className="w-full h-full object-cover shadow-2xl"
-                  style={{ objectPosition: 'center' }}
-                />
+                </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-      </div>
+      {/* How the Agentic Engine Works */}
+      <section className="py-16 lg:py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <Badge className="bg-[#d4af37]/10 text-[#d4af37] border-[#d4af37]/20 mb-4">How It Works</Badge>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">
+              The Agentic Advantage
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Three simple steps to unlock personalized financial recommendations
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="p-8 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-1">
+              <div className="absolute top-4 right-4 text-6xl font-bold text-muted/10">1</div>
+              <div className="w-16 h-16 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-6">
+                <Users className="h-8 w-8 text-[#d4af37]" />
+              </div>
+              <h3 className="font-serif text-xl font-semibold mb-3">Build Your Agentic Profile</h3>
+              <p className="text-muted-foreground">
+                Income, credit band, location, goals - one time. Your profile powers recommendations across all categories.
+              </p>
+            </Card>
+
+            <Card className="p-8 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-2">
+              <div className="absolute top-4 right-4 text-6xl font-bold text-muted/10">2</div>
+              <div className="w-16 h-16 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-6">
+                <Brain className="h-8 w-8 text-[#d4af37]" />
+              </div>
+              <h3 className="font-serif text-xl font-semibold mb-3">AI + Compute Analyze the Field</h3>
+              <p className="text-muted-foreground">
+                We use LLM agents to screen hundreds of partner offers across categories, ranking them by your fit.
+              </p>
+            </Card>
+
+            <Card className="p-8 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-3">
+              <div className="absolute top-4 right-4 text-6xl font-bold text-muted/10">3</div>
+              <div className="w-16 h-16 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-6">
+                <Zap className="h-8 w-8 text-[#d4af37]" />
+              </div>
+              <h3 className="font-serif text-xl font-semibold mb-3">You Choose - We Route You</h3>
+              <p className="text-muted-foreground">
+                Launch a module and go straight to the best matched lender, card, or tool. No guesswork.
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Primary Categories Grid */}
+      <section id="categories" className="py-16 lg:py-20 bg-[#0a1628]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-4">Apply Your Agentic Advantage</Badge>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-4">
+              Financial Categories
+            </h2>
+            <p className="text-white/70 max-w-2xl mx-auto">
+              Choose a category to see AI-ranked products matched to your profile
+            </p>
+          </div>
+
+          {/* Primary Categories - Large Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {PRIMARY_CATEGORIES.map((category) => {
+              const IconComponent = categoryIcons[category.icon];
+              return (
+                <Link key={category.id} href={`/${category.id}`}>
+                  <Card 
+                    className={`p-6 bg-gradient-to-br ${category.color} border-white/10 hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group`}
+                    data-testid={`card-category-${category.id}`}
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center">
+                        <IconComponent className="h-7 w-7 text-white" />
+                      </div>
+                      <ArrowRight className="h-5 w-5 text-white/50 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
+                    </div>
+                    <h3 className="font-serif text-xl font-semibold text-white mb-2">{category.name}</h3>
+                    <p className="text-white/70 text-sm">{category.description}</p>
+                  </Card>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Secondary Categories */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-white/80 mb-4 flex items-center gap-2">
+              <Target className="h-5 w-5 text-[#d4af37]" />
+              Build Your Foundation
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {SECONDARY_CATEGORIES.map((category) => {
+                const IconComponent = categoryIcons[category.icon];
+                return (
+                  <Link key={category.id} href={`/${category.id}`}>
+                    <Card 
+                      className="p-5 bg-white/5 border-white/10 hover:border-[#d4af37]/50 transition-all cursor-pointer group"
+                      data-testid={`card-category-${category.id}`}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-lg bg-[#d4af37]/10 flex items-center justify-center">
+                          <IconComponent className="h-6 w-6 text-[#d4af37]" />
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-white">{category.name}</h4>
+                          <p className="text-white/60 text-sm">{category.description}</p>
+                        </div>
+                        <ArrowRight className="h-5 w-5 text-white/30 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
+                      </div>
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Supporting Categories */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-white/80 mb-4 flex items-center gap-2">
+              <Zap className="h-5 w-5 text-[#d4af37]" />
+              Quick Tools
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {SUPPORTING_CATEGORIES.map((category) => {
+                const IconComponent = categoryIcons[category.icon];
+                return (
+                  <Link key={category.id} href={`/${category.id}`}>
+                    <Card 
+                      className="p-4 bg-white/5 border-white/10 hover:border-[#d4af37]/50 transition-all cursor-pointer group text-center"
+                      data-testid={`card-category-${category.id}`}
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-3">
+                        <IconComponent className="h-5 w-5 text-[#d4af37]" />
+                      </div>
+                      <h4 className="font-medium text-white text-sm">{category.name}</h4>
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Real Estate Flagship Card */}
+          <div>
+            <h3 className="text-lg font-semibold text-white/80 mb-4 flex items-center gap-2">
+              <HomeIcon className="h-5 w-5 text-[#d4af37]" />
+              Our Flagship Service
+            </h3>
+            <Link href="/real-estate">
+              <Card 
+                className="p-6 bg-gradient-to-r from-[#d4af37]/20 via-[#d4af37]/10 to-transparent border-[#d4af37]/30 hover:border-[#d4af37]/60 transition-all cursor-pointer group"
+                data-testid="card-category-real-estate"
+              >
+                <div className="flex flex-col md:flex-row md:items-center gap-6">
+                  <div className="w-16 h-16 rounded-xl bg-[#d4af37]/20 flex items-center justify-center flex-shrink-0">
+                    <HomeIcon className="h-8 w-8 text-[#d4af37]" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-serif text-2xl font-semibold text-white mb-2">AgentKammer Real Estate Concierge</h4>
+                    <p className="text-white/70">
+                      Our flagship luxury real estate + Reverse Buyer Origination system. Make brokers compete for your business in NYC, California, and Nevada.
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 text-[#d4af37] font-medium group-hover:translate-x-2 transition-transform">
+                    Visit Real Estate Division <ArrowRight className="h-5 w-5" />
+                  </div>
+                </div>
+              </Card>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Why This Is Different */}
+      <section className="py-16 lg:py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">
+              Why This Is Different
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Old Model */}
+            <Card className="p-6 bg-muted/30 border-muted" data-testid="card-old-model">
+              <h3 className="font-semibold text-lg mb-4 text-muted-foreground">Old Model (NerdWallet-style)</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3 text-muted-foreground">
+                  <div className="w-5 h-5 rounded-full bg-muted flex items-center justify-center mt-0.5 flex-shrink-0">
+                    <span className="text-xs">-</span>
+                  </div>
+                  <span>Product-first approach</span>
+                </li>
+                <li className="flex items-start gap-3 text-muted-foreground">
+                  <div className="w-5 h-5 rounded-full bg-muted flex items-center justify-center mt-0.5 flex-shrink-0">
+                    <span className="text-xs">-</span>
+                  </div>
+                  <span>You search manually</span>
+                </li>
+                <li className="flex items-start gap-3 text-muted-foreground">
+                  <div className="w-5 h-5 rounded-full bg-muted flex items-center justify-center mt-0.5 flex-shrink-0">
+                    <span className="text-xs">-</span>
+                  </div>
+                  <span>One-size-fits-all recommendations</span>
+                </li>
+                <li className="flex items-start gap-3 text-muted-foreground">
+                  <div className="w-5 h-5 rounded-full bg-muted flex items-center justify-center mt-0.5 flex-shrink-0">
+                    <span className="text-xs">-</span>
+                  </div>
+                  <span>No personalization</span>
+                </li>
+              </ul>
+            </Card>
+
+            {/* Agentic Model */}
+            <Card className="p-6 bg-[#d4af37]/5 border-[#d4af37]/20" data-testid="card-agentic-model">
+              <h3 className="font-semibold text-lg mb-4 text-[#d4af37]">Agentic Model</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-[#d4af37]/20 flex items-center justify-center mt-0.5 flex-shrink-0">
+                    <CheckCircle2 className="h-3 w-3 text-[#d4af37]" />
+                  </div>
+                  <span>User-first approach</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-[#d4af37]/20 flex items-center justify-center mt-0.5 flex-shrink-0">
+                    <CheckCircle2 className="h-3 w-3 text-[#d4af37]" />
+                  </div>
+                  <span>One profile powers all categories</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-[#d4af37]/20 flex items-center justify-center mt-0.5 flex-shrink-0">
+                    <CheckCircle2 className="h-3 w-3 text-[#d4af37]" />
+                  </div>
+                  <span>AI compares across the field</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-[#d4af37]/20 flex items-center justify-center mt-0.5 flex-shrink-0">
+                    <CheckCircle2 className="h-3 w-3 text-[#d4af37]" />
+                  </div>
+                  <span>You get personalized outcomes</span>
+                </li>
+              </ul>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Coming Soon Dashboard */}
+      <section className="py-16 lg:py-20 bg-[#0a1628]">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-6">Coming Soon</Badge>
+          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-4">
+            Your Personal Dashboard
+          </h2>
+          <p className="text-white/70 mb-8">
+            Soon you'll be able to log in and access your Agentic Profile, personalized recommendations, saved offers, and click directly into finance modules.
+          </p>
+          
+          <form 
+            onSubmit={(e) => {
+              e.preventDefault();
+              setEmail("");
+            }}
+            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+          >
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50"
+              data-testid="input-early-access-email"
+            />
+            <Button 
+              type="submit"
+              className="h-12 px-6 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
+              data-testid="button-early-access"
+            >
+              Get Early Access
+            </Button>
+          </form>
+        </div>
+      </section>
     </div>
   );
 }

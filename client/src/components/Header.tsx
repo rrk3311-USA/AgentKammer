@@ -1,8 +1,41 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun, Heart, Menu, X, Building2, Sparkles, FileText, MessageCircle, TrendingUp } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { 
+  Moon, 
+  Sun, 
+  Heart, 
+  Menu, 
+  X, 
+  ChevronDown, 
+  MessageCircle, 
+  CreditCard,
+  Wallet,
+  Building2,
+  Landmark,
+  Shield,
+  TrendingUp,
+  Home,
+  Brain
+} from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
+
+const financialCategories = [
+  { id: 'credit-cards', name: 'Credit Cards', icon: CreditCard },
+  { id: 'personal-loans', name: 'Personal Loans', icon: Wallet },
+  { id: 'business-funding', name: 'Business Funding', icon: Building2 },
+  { id: 'banking', name: 'Banking', icon: Landmark },
+  { id: 'insurance', name: 'Insurance', icon: Shield },
+  { id: 'investing', name: 'Investing', icon: TrendingUp },
+];
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -12,30 +45,58 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex h-24 items-center justify-between gap-4 relative">
-          <div className="hidden md:flex items-center gap-3">
-            <Link href="/reverse-buyer-origination">
+        <div className="flex h-20 items-center justify-between gap-4 relative">
+          {/* Left Navigation */}
+          <div className="hidden md:flex items-center gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="hover-elevate active-elevate-2 h-10 px-3 gap-1"
+                  data-testid="button-header-categories"
+                >
+                  <Brain className="h-4 w-4 text-[#d4af37]" />
+                  <span className="text-sm font-medium">Compare</span>
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-56">
+                <DropdownMenuLabel className="flex items-center gap-2">
+                  <Brain className="h-4 w-4 text-[#d4af37]" />
+                  Financial Categories
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {financialCategories.map((category) => (
+                  <Link key={category.id} href={`/${category.id}`}>
+                    <DropdownMenuItem className="cursor-pointer" data-testid={`menu-item-${category.id}`}>
+                      <category.icon className="h-4 w-4 mr-2" />
+                      {category.name}
+                    </DropdownMenuItem>
+                  </Link>
+                ))}
+                <DropdownMenuSeparator />
+                <Link href="/real-estate">
+                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-real-estate">
+                    <Home className="h-4 w-4 mr-2 text-[#d4af37]" />
+                    Real Estate Concierge
+                  </DropdownMenuItem>
+                </Link>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <Link href="/real-estate">
               <Button
                 variant="ghost"
-                className="hover-elevate active-elevate-2 h-12 px-4 gap-2"
-                data-testid="button-header-rbo"
+                className="hover-elevate active-elevate-2 h-10 px-3 gap-1"
+                data-testid="button-header-real-estate"
               >
-                <Sparkles className="h-6 w-6" />
-                <span className="text-sm font-medium">Reverse Buyer™</span>
-              </Button>
-            </Link>
-            <Link href="/reverse-seller-origination">
-              <Button
-                variant="ghost"
-                className="hover-elevate active-elevate-2 h-12 px-4 gap-2"
-                data-testid="button-header-rso"
-              >
-                <TrendingUp className="h-6 w-6" />
-                <span className="text-sm font-medium">Reverse Seller™</span>
+                <Home className="h-4 w-4" />
+                <span className="text-sm font-medium">Real Estate</span>
               </Button>
             </Link>
           </div>
 
+          {/* Center Logo */}
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
             <div className="flex flex-col items-center px-3 py-2">
               <div className="mb-0.5 text-2xl">
@@ -43,12 +104,13 @@ export function Header() {
               </div>
               <div className="flex flex-col items-center">
                 <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700 }} className="text-lg md:text-xl tracking-wide text-foreground">AGENT KAMMER</span>
-                <span className="text-[0.6rem] md:text-[0.625rem] font-semibold tracking-wide text-[#d4af37]">When Brokers Compete You Win</span>
+                <span className="text-[0.55rem] md:text-[0.6rem] font-semibold tracking-wide text-[#d4af37]">AI-Powered Financial Comparison</span>
               </div>
             </div>
           </Link>
 
-          <div className="flex items-center gap-4 ml-auto">
+          {/* Right Navigation */}
+          <div className="flex items-center gap-3 ml-auto">
             <Button
               variant="ghost"
               size="icon"
@@ -69,17 +131,10 @@ export function Header() {
             >
               <Heart className="h-5 w-5" />
             </Button>
-            <div className="hidden md:flex flex-col gap-2">
-              <Button
-                variant="default"
-                className="rounded-full text-[#0a1628]"
-                data-testid="button-sign-in"
-              >
-                Sign In
-              </Button>
+            <div className="hidden md:flex items-center gap-2">
               <Button
                 variant="ghost"
-                className="hover-elevate active-elevate-2 h-9 px-4 gap-2 text-xs"
+                className="hover-elevate active-elevate-2 h-9 px-3 gap-1 text-sm"
                 data-testid="button-header-contact"
                 onClick={() => {
                   const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLElement;
@@ -88,6 +143,13 @@ export function Header() {
               >
                 <MessageCircle className="h-4 w-4" />
                 <span>Contact</span>
+              </Button>
+              <Button
+                variant="default"
+                className="rounded-full text-[#0a1628] h-9 px-4"
+                data-testid="button-sign-in"
+              >
+                Sign In
               </Button>
             </div>
             <Button
@@ -107,75 +169,89 @@ export function Header() {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t bg-background">
+        <div className="md:hidden border-t bg-background max-h-[80vh] overflow-y-auto">
           <nav className="flex flex-col p-6 gap-4">
-            <Link href="/" data-testid="link-mobile-search">
-              <span
-                className="text-base font-medium hover:text-primary cursor-pointer block"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Search
-              </span>
-            </Link>
-            <Link href="/saved" data-testid="link-mobile-saved">
-              <span
-                className="text-base font-medium hover:text-primary cursor-pointer block"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Saved Searches
-              </span>
-            </Link>
-            <Link href="/reverse-buyer-origination" data-testid="link-mobile-rbo">
-              <span
-                className="text-base font-medium hover:text-primary cursor-pointer block"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Reverse Buyer Origination™
-              </span>
-            </Link>
-            <Link href="/reverse-seller-origination" data-testid="link-mobile-rso">
-              <span
-                className="text-base font-medium hover:text-primary cursor-pointer block"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Reverse Seller Origination™
-              </span>
-            </Link>
-            <Link href="/document-portal" data-testid="link-mobile-document-portal">
-              <span
-                className="text-base font-medium hover:text-primary cursor-pointer block"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Document Portal
-              </span>
-            </Link>
-            <Link href="/california-market" data-testid="link-mobile-california-market">
-              <span
-                className="text-base font-medium hover:text-primary cursor-pointer block"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                California Market
-              </span>
-            </Link>
-            <Link href="/new-york-market" data-testid="link-mobile-new-york-market">
-              <span
-                className="text-base font-medium hover:text-primary cursor-pointer block"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                NYC Market
-              </span>
-            </Link>
-            <Link href="/nevada-market" data-testid="link-mobile-nevada-market">
-              <span
-                className="text-base font-medium hover:text-primary cursor-pointer block"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Nevada Market
-              </span>
-            </Link>
+            {/* Financial Categories */}
+            <div>
+              <p className="text-xs font-semibold text-muted-foreground mb-3 uppercase flex items-center gap-2">
+                <Brain className="h-3 w-3 text-[#d4af37]" />
+                Compare Products
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                {financialCategories.map((category) => (
+                  <Link key={category.id} href={`/${category.id}`} data-testid={`link-mobile-${category.id}`}>
+                    <span
+                      className="text-sm font-medium hover:text-[#d4af37] cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-muted/50"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <category.icon className="h-4 w-4" />
+                      {category.name}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t pt-4">
+              <p className="text-xs font-semibold text-muted-foreground mb-3 uppercase">Real Estate</p>
+              <Link href="/real-estate" data-testid="link-mobile-real-estate">
+                <span
+                  className="text-base font-medium hover:text-[#d4af37] cursor-pointer block mb-3"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Real Estate Concierge
+                </span>
+              </Link>
+              <Link href="/reverse-buyer-origination" data-testid="link-mobile-rbo">
+                <span
+                  className="text-base font-medium hover:text-primary cursor-pointer block mb-3"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Reverse Buyer Origination
+                </span>
+              </Link>
+              <Link href="/reverse-seller-origination" data-testid="link-mobile-rso">
+                <span
+                  className="text-base font-medium hover:text-primary cursor-pointer block"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Reverse Seller Origination
+                </span>
+              </Link>
+            </div>
+
+            <div className="border-t pt-4">
+              <p className="text-xs font-semibold text-muted-foreground mb-3 uppercase">Market Data</p>
+              <Link href="/california-market" data-testid="link-mobile-california-market">
+                <span
+                  className="text-base font-medium hover:text-primary cursor-pointer block mb-3"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  California Market
+                </span>
+              </Link>
+              <Link href="/new-york-market" data-testid="link-mobile-new-york-market">
+                <span
+                  className="text-base font-medium hover:text-primary cursor-pointer block mb-3"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  NYC Market
+                </span>
+              </Link>
+              <Link href="/nevada-market" data-testid="link-mobile-nevada-market">
+                <span
+                  className="text-base font-medium hover:text-primary cursor-pointer block"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Nevada Market
+                </span>
+              </Link>
+            </div>
+
             <span
-              className="text-base font-medium hover:text-primary cursor-pointer block"
+              className="text-base font-medium hover:text-primary cursor-pointer block border-t pt-4"
               onClick={() => {
                 setMobileMenuOpen(false);
                 setTimeout(() => {
@@ -187,28 +263,10 @@ export function Header() {
             >
               Contact Agent K
             </span>
-            <div className="border-t pt-4">
-              <p className="text-xs font-semibold text-muted-foreground mb-2 uppercase">Services</p>
-              <Link href="/services/get-preapproved" data-testid="link-mobile-preapproved">
-                <span
-                  className="text-base font-medium hover:text-primary cursor-pointer block mb-3"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Get Pre-Approved
-                </span>
-              </Link>
-              <Link href="/services/get-home-value" data-testid="link-mobile-home-value">
-                <span
-                  className="text-base font-medium hover:text-primary cursor-pointer block mb-3"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Get Your Home Value
-                </span>
-              </Link>
-            </div>
+
             <Button
               variant="default"
-              className="w-full rounded-full text-[#0a1628]"
+              className="w-full rounded-full text-[#0a1628] mt-2"
               data-testid="button-mobile-sign-in"
             >
               Sign In

@@ -176,3 +176,54 @@ export const insertBrokerRegistrationSchema = createInsertSchema(brokerRegistrat
 
 export type InsertBrokerRegistration = z.infer<typeof insertBrokerRegistrationSchema>;
 export type BrokerRegistration = typeof brokerRegistrations.$inferSelect;
+
+export const affiliates = pgTable("affiliates", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  email: text("email").notNull().unique(),
+  phone: text("phone"),
+  website: text("website"),
+  socialHandle: text("social_handle"),
+  platform: text("platform"),
+  audienceSize: text("audience_size"),
+  niche: text("niche"),
+  referralCode: text("referral_code").notNull().unique(),
+  tier: text("tier").notNull().default("starter"),
+  totalReferrals: integer("total_referrals").default(0),
+  totalEarnings: integer("total_earnings").default(0),
+  paypalEmail: text("paypal_email"),
+  status: text("status").notNull().default("pending"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertAffiliateSchema = createInsertSchema(affiliates).omit({
+  id: true,
+  referralCode: true,
+  tier: true,
+  totalReferrals: true,
+  totalEarnings: true,
+  status: true,
+  createdAt: true,
+});
+
+export type InsertAffiliate = z.infer<typeof insertAffiliateSchema>;
+export type Affiliate = typeof affiliates.$inferSelect;
+
+export const affiliateReferrals = pgTable("affiliate_referrals", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  affiliateId: varchar("affiliate_id").notNull(),
+  productCategory: text("product_category").notNull(),
+  productName: text("product_name"),
+  status: text("status").notNull().default("pending"),
+  commission: integer("commission").default(0),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertAffiliateReferralSchema = createInsertSchema(affiliateReferrals).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertAffiliateReferral = z.infer<typeof insertAffiliateReferralSchema>;
+export type AffiliateReferral = typeof affiliateReferrals.$inferSelect;

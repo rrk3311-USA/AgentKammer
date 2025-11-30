@@ -1,0 +1,348 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Link } from "wouter";
+import {
+  CreditCard,
+  Wallet,
+  Building2,
+  Landmark,
+  Shield,
+  TrendingUp,
+  Target,
+  GraduationCap,
+  Calculator,
+  Lock,
+  PieChart,
+  Gift,
+  Home,
+  ArrowRight,
+  Sparkles,
+  Star,
+  CheckCircle2,
+  ExternalLink,
+  Brain,
+  Zap
+} from "lucide-react";
+import { SUBCATEGORIES, SAMPLE_OFFERS, type ProductOffer, calculateMatchScore, getMatchExplanation } from "@shared/productOffers";
+
+interface CategoryPageProps {
+  categoryId: string;
+}
+
+const CATEGORY_CONFIG: Record<string, {
+  name: string;
+  icon: any;
+  description: string;
+  heroGradient: string;
+}> = {
+  'credit-cards': {
+    name: 'Credit Cards',
+    icon: CreditCard,
+    description: 'AI-matched credit cards based on your profile, spending habits, and financial goals',
+    heroGradient: 'from-blue-600 to-indigo-700',
+  },
+  'personal-loans': {
+    name: 'Personal Loans',
+    icon: Wallet,
+    description: 'Compare lenders for debt consolidation, emergency funds, and lower APRs',
+    heroGradient: 'from-green-600 to-emerald-700',
+  },
+  'business-funding': {
+    name: 'Business Funding',
+    icon: Building2,
+    description: 'Business loans, lines of credit, merchant funding, and startup capital',
+    heroGradient: 'from-purple-600 to-violet-700',
+  },
+  'banking': {
+    name: 'Banking',
+    icon: Landmark,
+    description: 'High-yield savings, checking accounts, and cash management tools',
+    heroGradient: 'from-cyan-600 to-teal-700',
+  },
+  'insurance': {
+    name: 'Insurance',
+    icon: Shield,
+    description: 'Compare auto, home, life, and other insurance quotes',
+    heroGradient: 'from-orange-600 to-amber-700',
+  },
+  'investing': {
+    name: 'Investing',
+    icon: TrendingUp,
+    description: 'Brokerages, robo-advisors, and long-term wealth building tools',
+    heroGradient: 'from-rose-600 to-pink-700',
+  },
+  'credit-builder': {
+    name: 'Credit Builder',
+    icon: Target,
+    description: 'Build or rebuild your credit score with specialized products',
+    heroGradient: 'from-yellow-600 to-orange-700',
+  },
+  'student-finance': {
+    name: 'Student Finance',
+    icon: GraduationCap,
+    description: 'Student loans, refinancing, and banking for students',
+    heroGradient: 'from-indigo-600 to-purple-700',
+  },
+  'tax-tools': {
+    name: 'Tax Tools',
+    icon: Calculator,
+    description: 'Free and paid tax filing solutions',
+    heroGradient: 'from-slate-600 to-gray-700',
+  },
+  'identity-security': {
+    name: 'Identity & Security',
+    icon: Lock,
+    description: 'Identity protection and credit monitoring services',
+    heroGradient: 'from-red-600 to-rose-700',
+  },
+  'budgeting-apps': {
+    name: 'Budgeting Apps',
+    icon: PieChart,
+    description: 'Budgeting, bill negotiation, and money management tools',
+    heroGradient: 'from-teal-600 to-cyan-700',
+  },
+  'rewards-cashback': {
+    name: 'Rewards & Cashback',
+    icon: Gift,
+    description: 'Cashback apps, rewards programs, and survey earnings',
+    heroGradient: 'from-pink-600 to-fuchsia-700',
+  },
+};
+
+function ProductCard({ offer }: { offer: ProductOffer }) {
+  const matchScore = calculateMatchScore(offer);
+  const explanation = getMatchExplanation(offer, matchScore);
+  
+  return (
+    <Card className="p-6 hover-elevate" data-testid={`card-offer-${offer.id}`}>
+      <div className="flex flex-col md:flex-row gap-6">
+        {/* Left: Product Info */}
+        <div className="flex-1">
+          <div className="flex items-start justify-between mb-4">
+            <div>
+              <h3 className="font-serif text-xl font-semibold mb-1">{offer.name}</h3>
+              <Badge variant="outline" className="text-xs">{offer.subcategory}</Badge>
+            </div>
+            <div className="text-right">
+              <div className={`text-2xl font-bold ${matchScore >= 90 ? 'text-green-600 dark:text-green-400' : matchScore >= 80 ? 'text-[#d4af37]' : 'text-muted-foreground'}`}>
+                {matchScore}%
+              </div>
+              <span className="text-xs text-muted-foreground">Match</span>
+            </div>
+          </div>
+          
+          <p className="text-muted-foreground text-sm mb-4">{offer.description}</p>
+          
+          {/* Key Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+            {offer.apr && (
+              <div>
+                <p className="text-xs text-muted-foreground">APR</p>
+                <p className="font-semibold text-sm">{offer.apr}</p>
+              </div>
+            )}
+            {offer.annualFee && (
+              <div>
+                <p className="text-xs text-muted-foreground">Annual Fee</p>
+                <p className="font-semibold text-sm">{offer.annualFee}</p>
+              </div>
+            )}
+            {offer.signupBonus && (
+              <div>
+                <p className="text-xs text-muted-foreground">Bonus</p>
+                <p className="font-semibold text-sm text-[#d4af37]">{offer.signupBonus}</p>
+              </div>
+            )}
+            <div>
+              <p className="text-xs text-muted-foreground">Rating</p>
+              <div className="flex items-center gap-1">
+                <Star className="h-4 w-4 fill-[#d4af37] text-[#d4af37]" />
+                <span className="font-semibold text-sm">{offer.rating}</span>
+              </div>
+            </div>
+          </div>
+          
+          {/* Features */}
+          <div className="space-y-2">
+            {offer.features.slice(0, 3).map((feature, idx) => (
+              <div key={idx} className="flex items-start gap-2 text-sm">
+                <CheckCircle2 className="h-4 w-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                <span>{feature}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Right: AI Match Explanation */}
+        <div className="md:w-64 flex flex-col">
+          <div className="bg-[#d4af37]/5 border border-[#d4af37]/20 rounded-lg p-4 mb-4 flex-1">
+            <div className="flex items-center gap-2 mb-2">
+              <Brain className="h-4 w-4 text-[#d4af37]" />
+              <span className="text-sm font-semibold text-[#d4af37]">AI Analysis</span>
+            </div>
+            <p className="text-sm text-muted-foreground">{explanation}</p>
+          </div>
+          
+          <Button 
+            className="w-full bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
+            data-testid={`button-apply-${offer.id}`}
+          >
+            Apply Now <ExternalLink className="h-4 w-4 ml-2" />
+          </Button>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+export default function CategoryPage({ categoryId }: CategoryPageProps) {
+  const config = CATEGORY_CONFIG[categoryId];
+  const subcategories = SUBCATEGORIES[categoryId] || [];
+  const [activeTab, setActiveTab] = useState(subcategories[0] || 'All');
+  
+  if (!config) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Category Not Found</h1>
+          <Link href="/">
+            <Button>Return Home</Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+  
+  const IconComponent = config.icon;
+  
+  const offers = SAMPLE_OFFERS.filter(offer => offer.category === categoryId);
+  const filteredOffers = activeTab === 'All' 
+    ? offers 
+    : offers.filter(offer => offer.subcategory === activeTab);
+
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className={`relative bg-gradient-to-br ${config.heroGradient} py-12 lg:py-16`}>
+        <div className="absolute inset-0 bg-black/20" />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center">
+              <IconComponent className="h-8 w-8 text-white" />
+            </div>
+            <div>
+              <h1 className="font-serif text-3xl lg:text-4xl font-bold text-white">{config.name}</h1>
+              <p className="text-white/80">{config.description}</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-4 mt-6">
+            <Badge className="bg-white/20 text-white border-white/30">
+              <Sparkles className="h-3 w-3 mr-1" />
+              AI-Powered Comparison
+            </Badge>
+            <Badge className="bg-white/20 text-white border-white/30">
+              <Zap className="h-3 w-3 mr-1" />
+              {offers.length} Offers Available
+            </Badge>
+          </div>
+        </div>
+      </section>
+
+      {/* Agentic Profile CTA */}
+      <section className="bg-[#0a1628] py-6">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <Brain className="h-8 w-8 text-[#d4af37]" />
+              <div>
+                <h3 className="text-white font-semibold">Get Personalized Matches</h3>
+                <p className="text-white/70 text-sm">Build your Agentic Profile for AI-powered recommendations</p>
+              </div>
+            </div>
+            <Button 
+              className="bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
+              data-testid="button-build-profile"
+            >
+              Build Your Profile <ArrowRight className="h-4 w-4 ml-2" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <section className="py-8 lg:py-12 bg-background">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Subcategory Tabs */}
+          {subcategories.length > 0 && (
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
+              <TabsList className="flex flex-wrap h-auto gap-2 bg-transparent p-0">
+                <TabsTrigger 
+                  value="All"
+                  className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-[#0a1628] rounded-full px-4 py-2"
+                  data-testid="tab-all"
+                >
+                  All
+                </TabsTrigger>
+                {subcategories.map((sub) => (
+                  <TabsTrigger 
+                    key={sub}
+                    value={sub}
+                    className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-[#0a1628] rounded-full px-4 py-2"
+                    data-testid={`tab-${sub.toLowerCase().replace(/\s+/g, '-')}`}
+                  >
+                    {sub}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </Tabs>
+          )}
+          
+          {/* Products Grid */}
+          <div className="space-y-6">
+            {filteredOffers.length > 0 ? (
+              filteredOffers.map((offer) => (
+                <ProductCard key={offer.id} offer={offer} />
+              ))
+            ) : (
+              <Card className="p-12 text-center">
+                <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
+                  <IconComponent className="h-8 w-8 text-muted-foreground" />
+                </div>
+                <h3 className="font-serif text-xl font-semibold mb-2">No Offers Found</h3>
+                <p className="text-muted-foreground mb-6">
+                  We're adding more {config.name.toLowerCase()} offers soon. Check back later or explore other categories.
+                </p>
+                <Link href="/">
+                  <Button variant="outline">Browse All Categories</Button>
+                </Link>
+              </Card>
+            )}
+          </div>
+          
+          {/* Bottom CTA */}
+          {filteredOffers.length > 0 && (
+            <div className="mt-12 text-center">
+              <Card className="inline-block p-8 bg-[#d4af37]/5 border-[#d4af37]/20">
+                <h3 className="font-serif text-xl font-semibold mb-2">Need Help Choosing?</h3>
+                <p className="text-muted-foreground mb-4">
+                  Our AI can analyze your profile and recommend the best option for you
+                </p>
+                <Button 
+                  className="bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
+                  data-testid="button-get-recommendation"
+                >
+                  <Brain className="h-4 w-4 mr-2" />
+                  Get AI Recommendation
+                </Button>
+              </Card>
+            </div>
+          )}
+        </div>
+      </section>
+    </div>
+  );
+}

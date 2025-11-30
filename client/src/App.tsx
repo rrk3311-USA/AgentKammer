@@ -9,6 +9,8 @@ import { Footer } from "@/components/Footer";
 import { LiveTicker } from "@/components/LiveTicker";
 import { FloatingChatAssistant } from "@/components/FloatingChatAssistant";
 import Home from "@/pages/Home";
+import RealEstate from "@/pages/RealEstate";
+import CategoryPage from "@/pages/CategoryPage";
 import SavedSearches from "@/pages/SavedSearches";
 import GetPreapproved from "@/pages/GetPreapproved";
 import GetHomeValue from "@/pages/GetHomeValue";
@@ -37,6 +39,23 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/real-estate" component={RealEstate} />
+      
+      {/* Financial Category Routes */}
+      <Route path="/credit-cards" component={() => <CategoryPage categoryId="credit-cards" />} />
+      <Route path="/personal-loans" component={() => <CategoryPage categoryId="personal-loans" />} />
+      <Route path="/business-funding" component={() => <CategoryPage categoryId="business-funding" />} />
+      <Route path="/banking" component={() => <CategoryPage categoryId="banking" />} />
+      <Route path="/insurance" component={() => <CategoryPage categoryId="insurance" />} />
+      <Route path="/investing" component={() => <CategoryPage categoryId="investing" />} />
+      <Route path="/credit-builder" component={() => <CategoryPage categoryId="credit-builder" />} />
+      <Route path="/student-finance" component={() => <CategoryPage categoryId="student-finance" />} />
+      <Route path="/tax-tools" component={() => <CategoryPage categoryId="tax-tools" />} />
+      <Route path="/identity-security" component={() => <CategoryPage categoryId="identity-security" />} />
+      <Route path="/budgeting-apps" component={() => <CategoryPage categoryId="budgeting-apps" />} />
+      <Route path="/rewards-cashback" component={() => <CategoryPage categoryId="rewards-cashback" />} />
+      
+      {/* Existing Routes */}
       <Route path="/saved" component={SavedSearches} />
       <Route path="/services/get-preapproved" component={GetPreapproved} />
       <Route path="/services/get-home-value" component={GetHomeValue} />
