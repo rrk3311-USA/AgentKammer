@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home, Mic, MicOff, Volume2, VolumeX } from "lucide-react";
+import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home, Mic, MicOff, Volume2, VolumeX, CreditCard, Plane, Percent, PiggyBank, Briefcase, Calculator, ShieldCheck, Gift, TrendingUp, Wallet, Building, FileText } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import agentAvatar from "@assets/generated_images/Tuxedo_professional_on_phone_cd981587.png";
@@ -130,14 +130,27 @@ export function FloatingChatAssistant() {
     }
   };
 
-  const popularPrompts = [
-    { id: "free-estimate", icon: Home, label: "Free Home Estimate", prompt: "I'd like a free home valuation estimate", featured: true },
-    { id: "best-deal", icon: DollarSign, label: "Best Deal Right Now", prompt: "Show me the best deal on the market right now" },
-    { id: "longest-market", icon: Clock, label: "Longest on Market", prompt: "Which properties have been on the market the longest?" },
-    { id: "safest-location", icon: Shield, label: "Safest Locations", prompt: "What are the safest luxury neighborhoods?" },
-    { id: "school-zone", icon: GraduationCap, label: "Best School Zones", prompt: "Show me properties in the best school zones" },
-    { id: "price-reduced", icon: TrendingDown, label: "Recently Reduced", prompt: "Show me properties with recent price reductions" },
-    { id: "new-listings", icon: Home, label: "New Listings", prompt: "What are the newest luxury listings?" },
+  // Real Estate Module - 3-part container
+  const realEstateModule = [
+    { id: "home-value", icon: Home, label: "Home Value", prompt: "I'd like a free home valuation estimate" },
+    { id: "buy-home", icon: Building, label: "Buy", prompt: "I'm looking to buy a home - what's the best strategy?" },
+    { id: "sell-home", icon: DollarSign, label: "Sell", prompt: "I want to sell my home - how do I get top dollar?" },
+  ];
+
+  // Benefit-driven affiliate category prompts
+  const benefitPrompts = [
+    { id: "best-travel-cards", icon: Plane, label: "Best Travel Rewards", prompt: "What credit card gives the best travel rewards right now?" },
+    { id: "highest-cashback", icon: Gift, label: "Highest Cashback", prompt: "Show me the apps with the highest cashback rates" },
+    { id: "cheapest-insurance", icon: Shield, label: "Cheapest Insurance", prompt: "What's the cheapest home or renters insurance?" },
+    { id: "fastest-credit-fix", icon: TrendingUp, label: "Fix Credit Fast", prompt: "How can I build my credit score quickly?" },
+    { id: "highest-savings", icon: PiggyBank, label: "Best Savings Rate", prompt: "Which bank has the highest savings interest rate?" },
+    { id: "business-funding", icon: Briefcase, label: "Fast Business Loans", prompt: "I need business funding - what's the fastest option?" },
+    { id: "student-savings", icon: GraduationCap, label: "Student Loan Help", prompt: "How can I lower my student loan payments?" },
+    { id: "micro-invest", icon: TrendingUp, label: "Start Investing $5", prompt: "How can I start investing with just a few dollars?" },
+    { id: "tax-savings", icon: Calculator, label: "Max Tax Refund", prompt: "What's the best way to maximize my tax refund?" },
+    { id: "identity-protect", icon: ShieldCheck, label: "Protect My Identity", prompt: "How do I protect myself from identity theft?" },
+    { id: "cancel-subscriptions", icon: Wallet, label: "Find Hidden Fees", prompt: "Can you help me find subscriptions I'm overpaying for?" },
+    { id: "estate-planning", icon: FileText, label: "Protect My Family", prompt: "How do I set up a will or trust to protect my family?" },
   ];
 
   const toggleVoiceInput = () => {
@@ -285,28 +298,50 @@ export function FloatingChatAssistant() {
               </TabsList>
 
               <TabsContent value="prompts" className="flex-1 overflow-hidden m-0">
-                <ScrollArea className="h-full p-4 bg-background">
-                  <div className="grid grid-cols-2 gap-2">
-                    {popularPrompts.map((prompt) => (
+                <ScrollArea className="h-full p-3 bg-background">
+                  {/* Real Estate Module - 3-part container */}
+                  <div className="grid grid-cols-[2fr_1fr_1fr] gap-1 mb-3">
+                    {realEstateModule.map((item, idx) => (
+                      <Button
+                        key={item.id}
+                        variant="outline"
+                        className={`h-auto py-2 px-2 flex flex-col items-center gap-1 text-center hover-elevate active-elevate-2 ${
+                          idx === 0 
+                            ? "bg-slate-100 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700" 
+                            : "bg-muted/30 border-muted"
+                        }`}
+                        onClick={() => {
+                          playCrunchyChime();
+                          handleSend(item.prompt);
+                        }}
+                        data-testid={`button-prompt-${item.id}`}
+                      >
+                        <item.icon className={`h-4 w-4 ${idx === 0 ? "text-primary" : "text-muted-foreground"}`} />
+                        <span className={`text-[10px] leading-tight ${idx === 0 ? "font-medium" : "text-muted-foreground"}`}>{item.label}</span>
+                      </Button>
+                    ))}
+                  </div>
+
+                  {/* Benefit-driven affiliate prompts */}
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {benefitPrompts.map((prompt) => (
                       <Button
                         key={prompt.id}
-                        variant={(prompt as any).featured ? "default" : "outline"}
-                        className={`h-auto p-3 flex flex-col items-center gap-2 text-center hover-elevate active-elevate-2 ${
-                          (prompt as any).featured ? "col-span-2 bg-[#0a1628] text-[#d4af37] border border-[#d4af37]/30 font-semibold py-4" : ""
-                        }`}
+                        variant="outline"
+                        className="h-auto p-2 flex flex-col items-center gap-1 text-center hover-elevate active-elevate-2 border-primary/20 bg-primary/5"
                         onClick={() => {
                           playCrunchyChime();
                           handleSend(prompt.prompt);
                         }}
                         data-testid={`button-prompt-${prompt.id}`}
                       >
-                        <prompt.icon className={`h-6 w-6 ${(prompt as any).featured ? "text-[#d4af37]" : "text-primary"}`} />
-                        <span className={`leading-tight ${(prompt as any).featured ? "text-sm font-bold" : "text-xs"}`}>{prompt.label}</span>
+                        <prompt.icon className="h-4 w-4 text-[#d4af37]" />
+                        <span className="text-[10px] leading-tight font-medium">{prompt.label}</span>
                       </Button>
                     ))}
                   </div>
-                  <p className="text-xs text-muted-foreground mt-4 text-center">
-                    Click any prompt to start a conversation
+                  <p className="text-[10px] text-muted-foreground mt-3 text-center">
+                    Tap any topic to get personalized recommendations
                   </p>
                 </ScrollArea>
               </TabsContent>
