@@ -8,8 +8,9 @@ import {
   type HomeValueRequest, type InsertHomeValueRequest,
   type BrokerRegistration, type InsertBrokerRegistration,
   type Affiliate, type InsertAffiliate,
+  type ChatConversation, type InsertChatConversation,
   users, leads, contentItems, rboBuyerProfiles,
-  rsoSellerProfiles, contactSubmissions, homeValueRequests, brokerRegistrations, affiliates
+  rsoSellerProfiles, contactSubmissions, homeValueRequests, brokerRegistrations, affiliates, chatConversations
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 import { drizzle } from "drizzle-orm/neon-http";
@@ -56,6 +57,12 @@ export interface IStorage {
   getAffiliateByEmail(email: string): Promise<Affiliate | undefined>;
   getAffiliateByReferralCode(code: string): Promise<Affiliate | undefined>;
   getAllAffiliates(): Promise<Affiliate[]>;
+
+  createChatConversation(conversation: InsertChatConversation): Promise<ChatConversation>;
+  updateChatConversation(id: string, updates: Partial<InsertChatConversation>): Promise<ChatConversation | undefined>;
+  getChatConversationBySessionId(sessionId: string): Promise<ChatConversation | undefined>;
+  getAllChatConversations(): Promise<ChatConversation[]>;
+  deleteChatConversation(id: string): Promise<boolean>;
 }
 
 export class MemStorage implements IStorage {
@@ -359,6 +366,49 @@ export class MemStorage implements IStorage {
       (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
     );
   }
+
+  private chatConversationsMap: Map<string, ChatConversation> = new Map();
+
+  async createChatConversation(insertConversation: InsertChatConversation): Promise<ChatConversation> {
+    const id = randomUUID();
+    const conversation: ChatConversation = {
+      sessionId: insertConversation.sessionId,
+      messages: insertConversation.messages,
+      leadName: insertConversation.leadName ?? null,
+      leadEmail: insertConversation.leadEmail ?? null,
+      leadPhone: insertConversation.leadPhone ?? null,
+      categoryInterest: insertConversation.categoryInterest ?? null,
+      leadScore: insertConversation.leadScore ?? null,
+      summary: insertConversation.summary ?? null,
+      id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    this.chatConversationsMap.set(id, conversation);
+    return conversation;
+  }
+
+  async updateChatConversation(id: string, updates: Partial<InsertChatConversation>): Promise<ChatConversation | undefined> {
+    const conversation = this.chatConversationsMap.get(id);
+    if (!conversation) return undefined;
+    const updated = { ...conversation, ...updates, updatedAt: new Date() };
+    this.chatConversationsMap.set(id, updated);
+    return updated;
+  }
+
+  async getChatConversationBySessionId(sessionId: string): Promise<ChatConversation | undefined> {
+    return Array.from(this.chatConversationsMap.values()).find((c) => c.sessionId === sessionId);
+  }
+
+  async getAllChatConversations(): Promise<ChatConversation[]> {
+    return Array.from(this.chatConversationsMap.values()).sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    );
+  }
+
+  async deleteChatConversation(id: string): Promise<boolean> {
+    return this.chatConversationsMap.delete(id);
+  }
 }
 
 export class DbStorage implements IStorage {
@@ -503,6 +553,33 @@ export class DbStorage implements IStorage {
 
   async getAllAffiliates(): Promise<Affiliate[]> {
     return await db.select().from(affiliates).orderBy(desc(affiliates.createdAt));
+  }
+
+  async createChatConversation(insertConversation: InsertChatConversation): Promise<ChatConversation> {
+    const result = await db.insert(chatConversations).values(insertConversation).returning();
+    return result[0];
+  }
+
+  async updateChatConversation(id: string, updates: Partial<InsertChatConversation>): Promise<ChatConversation | undefined> {
+    const result = await db.update(chatConversations)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(chatConversations.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async getChatConversationBySessionId(sessionId: string): Promise<ChatConversation | undefined> {
+    const result = await db.select().from(chatConversations).where(eq(chatConversations.sessionId, sessionId));
+    return result[0];
+  }
+
+  async getAllChatConversations(): Promise<ChatConversation[]> {
+    return await db.select().from(chatConversations).orderBy(desc(chatConversations.updatedAt));
+  }
+
+  async deleteChatConversation(id: string): Promise<boolean> {
+    const result = await db.delete(chatConversations).where(eq(chatConversations.id, id)).returning();
+    return result.length > 0;
   }
 }
 

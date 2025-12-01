@@ -52,6 +52,7 @@ The frontend uses React, TypeScript, and Vite, with `wouter` for routing and Rea
 - **Ecourses Page**: Premium online courses for professionals.
 - **Downloads Page**: Library of free downloadable resources and templates.
 - **Content Studio (Internal)**: Private management system for social media video content workflow.
+- **Chat Archive (Internal)**: Admin-only archive of all AI chatbot conversations with visitor details, lead scores, and full message history.
 
 ### Key Files
 - `client/src/pages/Home.tsx` - Homepage with AI engine image and category grid

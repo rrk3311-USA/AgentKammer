@@ -661,6 +661,40 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.log("[CHAT] No lead data extracted from this response");
       }
 
+      // Save conversation to database for admin review
+      try {
+        const sid = sessionId || 'default';
+        const sessionLead = sessionLeads.get(sid);
+        const allMessages = [
+          ...messages.map((m: any) => ({ role: m.sender, text: m.text })),
+          { role: 'assistant', text: cleanResponse }
+        ];
+        
+        const existingConvo = await storage.getChatConversationBySessionId(sid);
+        const currentScore = sessionLead?.data ? calculateLeadScore(sessionLead.data) : undefined;
+        if (existingConvo) {
+          await storage.updateChatConversation(existingConvo.id, {
+            messages: JSON.stringify(allMessages),
+            leadName: sessionLead?.data?.name || existingConvo.leadName,
+            leadEmail: sessionLead?.data?.email || existingConvo.leadEmail,
+            leadPhone: sessionLead?.data?.phone || existingConvo.leadPhone,
+            categoryInterest: sessionLead?.data?.category || existingConvo.categoryInterest,
+            leadScore: currentScore || existingConvo.leadScore,
+          });
+        } else {
+          await storage.createChatConversation({
+            sessionId: sid,
+            messages: JSON.stringify(allMessages),
+            leadName: sessionLead?.data?.name,
+            leadEmail: sessionLead?.data?.email,
+            leadPhone: sessionLead?.data?.phone,
+            categoryInterest: sessionLead?.data?.category,
+          });
+        }
+      } catch (convoError) {
+        console.error("[CHAT] Error saving conversation:", convoError);
+      }
+
       res.json({ 
         response: cleanResponse,
         conversationContext: {
@@ -1308,6 +1342,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Affiliates fetch error:", error);
       res.status(500).json({ error: "Failed to fetch affiliates" });
+    }
+  });
+
+  // Chat Conversations Archive (Admin only)
+  app.get("/api/chat-conversations", requireAdmin, async (req, res) => {
+    try {
+      const conversations = await storage.getAllChatConversations();
+      res.json(conversations);
+    } catch (error) {
+      console.error("Chat conversations fetch error:", error);
+      res.status(500).json({ error: "Failed to fetch chat conversations" });
+    }
+  });
+
+  app.delete("/api/chat-conversations/:id", requireAdmin, async (req, res) => {
+    try {
+      const deleted = await storage.deleteChatConversation(req.params.id);
+      if (deleted) {
+        res.json({ ok: true });
+      } else {
+        res.status(404).json({ error: "Conversation not found" });
+      }
+    } catch (error) {
+      console.error("Chat conversation delete error:", error);
+      res.status(500).json({ error: "Failed to delete conversation" });
     }
   });
 

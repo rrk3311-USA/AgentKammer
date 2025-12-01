@@ -227,3 +227,26 @@ export const insertAffiliateReferralSchema = createInsertSchema(affiliateReferra
 
 export type InsertAffiliateReferral = z.infer<typeof insertAffiliateReferralSchema>;
 export type AffiliateReferral = typeof affiliateReferrals.$inferSelect;
+
+export const chatConversations = pgTable("chat_conversations", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  sessionId: text("session_id").notNull(),
+  messages: text("messages").notNull(),
+  leadName: text("lead_name"),
+  leadEmail: text("lead_email"),
+  leadPhone: text("lead_phone"),
+  categoryInterest: text("category_interest"),
+  leadScore: integer("lead_score"),
+  summary: text("summary"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const insertChatConversationSchema = createInsertSchema(chatConversations).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type InsertChatConversation = z.infer<typeof insertChatConversationSchema>;
+export type ChatConversation = typeof chatConversations.$inferSelect;

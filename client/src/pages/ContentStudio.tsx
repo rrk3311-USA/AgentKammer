@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient, apiRequest } from "@/lib/queryClient";
-import type { ContentItem, InsertContentItem } from "@shared/schema";
+import type { ContentItem, InsertContentItem, ChatConversation } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -16,16 +16,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { insertContentItemSchema } from "@shared/schema";
 import { z } from "zod";
-import { Film, Lightbulb, Scale, Clapperboard, Archive, Plus, Trash2, Edit, MoveRight, Youtube, Instagram, Linkedin, FolderArchive, FileText, Globe, Headphones, GraduationCap, Download, ExternalLink, Building2, Users } from "lucide-react";
+import { Film, Lightbulb, Scale, Clapperboard, Archive, Plus, Trash2, Edit, MoveRight, Youtube, Instagram, Linkedin, FolderArchive, FileText, Globe, Headphones, GraduationCap, Download, ExternalLink, Building2, Users, MessageSquare, User, Mail, Phone, Star } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const stages = [
   { id: "ideation", label: "Ideation", icon: Lightbulb, color: "bg-purple-500/20 text-purple-400 border-purple-500/30" },
   { id: "legal", label: "Legal Review", icon: Scale, color: "bg-blue-500/20 text-blue-400 border-blue-500/30" },
   { id: "ready", label: "Ready to Shoot", icon: Clapperboard, color: "bg-amber-500/20 text-amber-400 border-amber-500/30" },
   { id: "completed", label: "Completed", icon: Archive, color: "bg-green-500/20 text-green-400 border-green-500/30" },
+  { id: "chat-archive", label: "Chat Archive", icon: MessageSquare, color: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30" },
   { id: "offer-archive", label: "Offer Archive", icon: FolderArchive, color: "bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30" },
 ];
 
@@ -53,6 +55,10 @@ export default function ContentStudio() {
 
   const { data: allItems = [], isLoading } = useQuery<ContentItem[]>({
     queryKey: ["/api/content"],
+  });
+
+  const { data: chatConversations = [], isLoading: isLoadingChats } = useQuery<ChatConversation[]>({
+    queryKey: ["/api/chat-conversations"],
   });
 
   const filteredItems = allItems.filter(item => item.stage === selectedStage);
@@ -114,6 +120,18 @@ export default function ContentStudio() {
       toast({ title: "Content item deleted" });
     },
   });
+
+  const deleteChatMutation = useMutation({
+    mutationFn: async (id: string) => {
+      return await apiRequest("DELETE", `/api/chat-conversations/${id}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/chat-conversations"] });
+      toast({ title: "Conversation deleted" });
+    },
+  });
+
+  const [selectedConversation, setSelectedConversation] = useState<ChatConversation | null>(null);
 
   const moveToStage = (item: ContentItem, newStage: string) => {
     updateMutation.mutate({ id: item.id, data: { stage: newStage } });
@@ -410,7 +428,142 @@ export default function ContentStudio() {
 
           {stages.map((stage) => (
             <TabsContent key={stage.id} value={stage.id} className="space-y-4">
-              {stage.id === "offer-archive" ? (
+              {stage.id === "chat-archive" ? (
+                <div className="grid gap-4 lg:grid-cols-3">
+                  <div className="lg:col-span-1 space-y-3">
+                    <h3 className="text-lg font-semibold text-white mb-4">Conversations ({chatConversations.length})</h3>
+                    {isLoadingChats ? (
+                      <div className="text-slate-300">Loading conversations...</div>
+                    ) : chatConversations.length === 0 ? (
+                      <Card className="bg-slate-500/20 border-slate-400/40">
+                        <CardContent className="py-6 text-center text-slate-300">
+                          No chat conversations yet. Conversations will appear here when visitors chat with the AI assistant.
+                        </CardContent>
+                      </Card>
+                    ) : (
+                      <ScrollArea className="h-[600px]">
+                        <div className="space-y-2 pr-4">
+                          {chatConversations.map((convo) => (
+                            <Card 
+                              key={convo.id}
+                              className={`cursor-pointer transition-all ${
+                                selectedConversation?.id === convo.id 
+                                  ? 'bg-cyan-500/20 border-cyan-400/50' 
+                                  : 'bg-slate-500/20 border-slate-400/40 hover:border-slate-300/50'
+                              }`}
+                              onClick={() => setSelectedConversation(convo)}
+                              data-testid={`card-chat-${convo.id}`}
+                            >
+                              <CardContent className="p-3">
+                                <div className="flex items-center justify-between gap-2 mb-2">
+                                  <div className="flex items-center gap-2 text-white font-medium truncate">
+                                    <User className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                                    <span className="truncate">{convo.leadName || 'Anonymous'}</span>
+                                  </div>
+                                  {convo.leadScore && (
+                                    <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 flex-shrink-0">
+                                      <Star className="w-3 h-3 mr-1" />
+                                      {convo.leadScore}
+                                    </Badge>
+                                  )}
+                                </div>
+                                <div className="text-xs text-slate-300 space-y-1">
+                                  {convo.categoryInterest && (
+                                    <div className="truncate">Category: {convo.categoryInterest}</div>
+                                  )}
+                                  <div>{new Date(convo.updatedAt).toLocaleDateString()} {new Date(convo.updatedAt).toLocaleTimeString()}</div>
+                                </div>
+                              </CardContent>
+                            </Card>
+                          ))}
+                        </div>
+                      </ScrollArea>
+                    )}
+                  </div>
+                  
+                  <div className="lg:col-span-2">
+                    {selectedConversation ? (
+                      <Card className="bg-slate-500/20 border-slate-400/40">
+                        <CardHeader className="flex flex-row items-start justify-between gap-2 space-y-0 border-b border-slate-500/40 pb-4">
+                          <div>
+                            <CardTitle className="text-white flex items-center gap-2">
+                              <MessageSquare className="w-5 h-5 text-cyan-400" />
+                              Conversation Details
+                            </CardTitle>
+                            <div className="flex flex-wrap gap-4 mt-3 text-sm text-slate-300">
+                              {selectedConversation.leadName && (
+                                <div className="flex items-center gap-1">
+                                  <User className="w-4 h-4" />
+                                  {selectedConversation.leadName}
+                                </div>
+                              )}
+                              {selectedConversation.leadEmail && (
+                                <div className="flex items-center gap-1">
+                                  <Mail className="w-4 h-4" />
+                                  {selectedConversation.leadEmail}
+                                </div>
+                              )}
+                              {selectedConversation.leadPhone && (
+                                <div className="flex items-center gap-1">
+                                  <Phone className="w-4 h-4" />
+                                  {selectedConversation.leadPhone}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            onClick={() => {
+                              deleteChatMutation.mutate(selectedConversation.id);
+                              setSelectedConversation(null);
+                            }}
+                            className="text-slate-300 hover:text-red-400"
+                            data-testid="button-delete-conversation"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </CardHeader>
+                        <CardContent className="pt-4">
+                          <ScrollArea className="h-[450px]">
+                            <div className="space-y-3 pr-4">
+                              {(() => {
+                                try {
+                                  const messages = JSON.parse(selectedConversation.messages);
+                                  return messages.map((msg: { role: string; text: string }, idx: number) => (
+                                    <div
+                                      key={idx}
+                                      className={`p-3 rounded-lg ${
+                                        msg.role === 'user' || msg.role === 'User'
+                                          ? 'bg-slate-600/40 ml-8'
+                                          : 'bg-cyan-500/10 border border-cyan-500/20 mr-8'
+                                      }`}
+                                    >
+                                      <div className="text-xs text-slate-400 mb-1 uppercase">
+                                        {msg.role === 'user' || msg.role === 'User' ? 'Visitor' : 'AI Assistant'}
+                                      </div>
+                                      <div className="text-sm text-slate-100 whitespace-pre-wrap">{msg.text}</div>
+                                    </div>
+                                  ));
+                                } catch {
+                                  return <div className="text-slate-400">Unable to parse messages</div>;
+                                }
+                              })()}
+                            </div>
+                          </ScrollArea>
+                        </CardContent>
+                      </Card>
+                    ) : (
+                      <Card className="bg-slate-500/20 border-slate-400/40">
+                        <CardContent className="py-24 text-center">
+                          <MessageSquare className="w-12 h-12 text-slate-500 mx-auto mb-4" />
+                          <div className="text-slate-300">Select a conversation to view details</div>
+                        </CardContent>
+                      </Card>
+                    )}
+                  </div>
+                </div>
+              ) : stage.id === "offer-archive" ? (
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                   {offerArchiveItems.map((item) => {
                     const Icon = item.icon;
