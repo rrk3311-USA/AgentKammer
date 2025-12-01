@@ -245,7 +245,7 @@ export function FloatingChatAssistant() {
                 <h3 className="font-serif font-semibold">Agent Kammer</h3>
                 <span className="text-sm">🎩</span>
               </div>
-              <p className="text-xs text-white/90">Your Luxury Concierge</p>
+              <p className="text-xs text-white/90">at your service</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
