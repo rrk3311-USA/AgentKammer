@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home, Mic, MicOff, Volume2, VolumeX, CreditCard, Plane, Percent, PiggyBank, Briefcase, Calculator, ShieldCheck, Gift, TrendingUp, Wallet, Building, FileText } from "lucide-react";
+import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home, Mic, MicOff, Volume2, VolumeX, CreditCard, Plane, Percent, PiggyBank, Briefcase, Calculator, ShieldCheck, Gift, TrendingUp, Wallet, Building, FileText, RefreshCw } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import agentAvatar from "@assets/generated_images/Tuxedo_professional_on_phone_cd981587.png";
@@ -130,11 +130,12 @@ export function FloatingChatAssistant() {
     }
   };
 
-  // Real Estate Module - 3-part container
-  const realEstateModule = [
-    { id: "home-value", icon: Home, label: "Home Value", prompt: "I'd like a free home valuation estimate" },
+  // Real Estate Module - Home Value on top, Buy/Sell/Refinance below
+  const realEstateTop = { id: "home-value", icon: Home, label: "Free Home Value", prompt: "I'd like a free home valuation estimate" };
+  const realEstateRow = [
     { id: "buy-home", icon: Building, label: "Buy", prompt: "I'm looking to buy a home - what's the best strategy?" },
     { id: "sell-home", icon: DollarSign, label: "Sell", prompt: "I want to sell my home - how do I get top dollar?" },
+    { id: "refinance", icon: RefreshCw, label: "Refinance", prompt: "Should I refinance my mortgage? What are my options?" },
   ];
 
   // Benefit-driven affiliate category prompts
@@ -299,27 +300,39 @@ export function FloatingChatAssistant() {
 
               <TabsContent value="prompts" className="flex-1 overflow-hidden m-0">
                 <ScrollArea className="h-full p-3 bg-background">
-                  {/* Real Estate Module - 3-part container */}
-                  <div className="grid grid-cols-[2fr_1fr_1fr] gap-1 mb-3">
-                    {realEstateModule.map((item, idx) => (
-                      <Button
-                        key={item.id}
-                        variant="outline"
-                        className={`h-auto py-2 px-2 flex flex-col items-center gap-1 text-center hover-elevate active-elevate-2 ${
-                          idx === 0 
-                            ? "bg-slate-100 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700" 
-                            : "bg-muted/30 border-muted"
-                        }`}
-                        onClick={() => {
-                          playCrunchyChime();
-                          handleSend(item.prompt);
-                        }}
-                        data-testid={`button-prompt-${item.id}`}
-                      >
-                        <item.icon className={`h-4 w-4 ${idx === 0 ? "text-primary" : "text-muted-foreground"}`} />
-                        <span className={`text-[10px] leading-tight ${idx === 0 ? "font-medium" : "text-muted-foreground"}`}>{item.label}</span>
-                      </Button>
-                    ))}
+                  {/* Real Estate Module - distinctive home-themed styling */}
+                  <div className="mb-3 rounded-lg border border-[#1e3a5f] bg-gradient-to-b from-[#0a1628] to-[#0f2240] p-2">
+                    {/* Home Value - full width on top */}
+                    <Button
+                      variant="ghost"
+                      className="w-full h-auto py-2.5 px-3 flex items-center justify-center gap-2 text-center mb-1.5 bg-[#d4af37]/10 hover:bg-[#d4af37]/20 border border-[#d4af37]/30 rounded-md"
+                      onClick={() => {
+                        playCrunchyChime();
+                        handleSend(realEstateTop.prompt);
+                      }}
+                      data-testid={`button-prompt-${realEstateTop.id}`}
+                    >
+                      <realEstateTop.icon className="h-5 w-5 text-[#d4af37]" />
+                      <span className="text-sm font-semibold text-[#d4af37]">{realEstateTop.label}</span>
+                    </Button>
+                    {/* Buy / Sell / Refinance - row below */}
+                    <div className="grid grid-cols-3 gap-1">
+                      {realEstateRow.map((item) => (
+                        <Button
+                          key={item.id}
+                          variant="ghost"
+                          className="h-auto py-2 px-1 flex flex-col items-center gap-1 text-center hover:bg-white/5 border border-white/10 rounded-md"
+                          onClick={() => {
+                            playCrunchyChime();
+                            handleSend(item.prompt);
+                          }}
+                          data-testid={`button-prompt-${item.id}`}
+                        >
+                          <item.icon className="h-4 w-4 text-slate-300" />
+                          <span className="text-[10px] leading-tight text-slate-300 font-medium">{item.label}</span>
+                        </Button>
+                      ))}
+                    </div>
                   </div>
 
                   {/* Benefit-driven affiliate prompts */}
