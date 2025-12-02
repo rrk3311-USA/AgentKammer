@@ -1,5 +1,5 @@
 import { SiReplit, SiNvidia, SiClaude, SiAnthropic, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
-import { Brain, Sparkles, TrendingUp, Users } from "lucide-react";
+import { Brain, Sparkles, TrendingUp, Users, Mail } from "lucide-react";
 import { Link } from "wouter";
 
 export function Footer() {
@@ -16,8 +16,9 @@ export function Footer() {
               </Link>
               <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground mb-4">
                 <li>
-                  <Link href="/contact" className="font-semibold text-foreground hover:text-foreground transition-colors">
-                    Contact
+                  <Link href="/contact" className="font-semibold text-foreground hover:text-foreground transition-colors flex items-center gap-2">
+                    <Mail className="h-3.5 w-3.5" />
+                    <span>Contact</span>
                   </Link>
                 </li>
                 <li>

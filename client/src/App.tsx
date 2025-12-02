@@ -1,4 +1,5 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
+import { useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -37,6 +38,20 @@ import AffiliateProgram from "@/pages/AffiliateProgram";
 import FreeTools from "@/pages/FreeTools";
 import Dashboard from "@/pages/Dashboard";
 import NotFound from "@/pages/not-found";
+
+function ScrollToTop() {
+  const [location] = useLocation();
+  
+  useEffect(() => {
+    // Use setTimeout to ensure it happens after render and DOM updates
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      document.documentElement.scrollTop = 0;
+    }, 0);
+  }, [location]);
+  
+  return null;
+}
 
 function Router() {
   return (
@@ -100,6 +115,7 @@ function App() {
       <ThemeProvider>
         <TooltipProvider>
           <div className="min-h-screen bg-background text-foreground pb-20 md:pb-14">
+            <ScrollToTop />
             <Header />
             <Router />
             <Footer />
