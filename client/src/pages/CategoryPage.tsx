@@ -60,6 +60,40 @@ function CreditCardVisual({ offer }: { offer: ProductOffer }) {
   );
 }
 
+function BankAccountVisual({ offer }: { offer: ProductOffer }) {
+  const IconComponent = offer.issuerIcon ? (LucideIcons as any)[offer.issuerIcon] : Landmark;
+  const gradientClasses = offer.cardColor || 'from-emerald-600 via-emerald-500 to-teal-600';
+  
+  return (
+    <div className={`relative w-full aspect-[1.586/1] rounded-xl bg-gradient-to-br ${gradientClasses} p-4 shadow-xl overflow-hidden`}>
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-2 left-2 right-2 h-px bg-white/30" />
+        <div className="absolute top-4 left-2 right-2 h-px bg-white/20" />
+        <div className="absolute top-6 left-2 right-2 h-px bg-white/10" />
+      </div>
+      
+      <div className="relative h-full flex flex-col justify-between">
+        <div className="flex justify-between items-start">
+          {IconComponent && (
+            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+              <IconComponent className="h-5 w-5 text-white" />
+            </div>
+          )}
+          <div className="text-right">
+            <p className="text-white/60 text-[10px] uppercase tracking-wider">APY</p>
+            <p className="text-white text-sm font-bold">{offer.apr || 'High Yield'}</p>
+          </div>
+        </div>
+        
+        <div>
+          <p className="text-white/60 text-[10px] uppercase tracking-wider mb-0.5">Account</p>
+          <p className="text-white text-xs font-medium truncate">{offer.name.split(' ').slice(0, 2).join(' ')}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 interface CategoryPageProps {
   categoryId: string;
 }
@@ -148,14 +182,17 @@ function ProductCard({ offer }: { offer: ProductOffer }) {
   const matchScore = calculateMatchScore(offer);
   const explanation = getMatchExplanation(offer, matchScore);
   const isCreditCard = offer.category === 'credit-cards';
+  const isBanking = offer.category === 'banking';
+  const hasVisual = isCreditCard || isBanking;
   
   return (
     <Card className="p-6 hover-elevate" data-testid={`card-offer-${offer.id}`}>
       <div className="flex flex-col lg:flex-row gap-6">
-        {/* Credit Card Visual (for credit cards only) */}
-        {isCreditCard && (
+        {/* Product Visual */}
+        {hasVisual && (
           <div className="lg:w-48 flex-shrink-0">
-            <CreditCardVisual offer={offer} />
+            {isCreditCard && <CreditCardVisual offer={offer} />}
+            {isBanking && <BankAccountVisual offer={offer} />}
           </div>
         )}
         
