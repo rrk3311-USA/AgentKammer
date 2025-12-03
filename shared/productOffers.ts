@@ -17,6 +17,9 @@ export interface ProductOffer {
   tags: string[];
   affiliateUrl: string;
   logoUrl?: string;
+  cardImage?: string;
+  issuerIcon?: string; // Lucide icon name for card issuer
+  cardColor?: string; // Gradient or solid color for card display
   rating: number;
 }
 
@@ -192,6 +195,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: '60,000 points ($750 value)',
     tags: ['travel', 'points', 'premium'],
     affiliateUrl: '#',
+    issuerIcon: 'Landmark',
+    cardColor: 'from-blue-900 via-blue-800 to-blue-950',
     rating: 4.8,
   },
   {
@@ -212,6 +217,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: 'None',
     tags: ['cashback', 'no-fee', 'simple'],
     affiliateUrl: '#',
+    issuerIcon: 'Building2',
+    cardColor: 'from-sky-600 via-sky-500 to-sky-700',
     rating: 4.6,
   },
   {
@@ -232,6 +239,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: 'Cashback Match',
     tags: ['secured', 'credit-builder', 'no-fee'],
     affiliateUrl: '#',
+    issuerIcon: 'CircleDot',
+    cardColor: 'from-orange-500 via-orange-400 to-orange-600',
     rating: 4.5,
   },
   {
@@ -252,6 +261,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: 'None',
     tags: ['balance-transfer', '0-apr', 'no-fee'],
     affiliateUrl: '#',
+    issuerIcon: 'Banknote',
+    cardColor: 'from-red-700 via-red-600 to-red-800',
     rating: 4.5,
   },
   {
@@ -272,6 +283,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: '$200 cash bonus',
     tags: ['cashback', 'no-fee', 'flexible'],
     affiliateUrl: '#',
+    issuerIcon: 'Landmark',
+    cardColor: 'from-slate-700 via-slate-600 to-slate-800',
     rating: 5.0,
   },
   {
@@ -292,6 +305,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: 'Cashback Match (doubles first year)',
     tags: ['cashback', 'rotating-categories', 'no-fee'],
     affiliateUrl: '#',
+    issuerIcon: 'CircleDot',
+    cardColor: 'from-orange-600 via-orange-500 to-amber-600',
     rating: 4.9,
   },
   {
@@ -312,6 +327,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: 'None',
     tags: ['balance-transfer', '0-apr', 'no-late-fees'],
     affiliateUrl: '#',
+    issuerIcon: 'Building2',
+    cardColor: 'from-blue-600 via-blue-500 to-cyan-600',
     rating: 4.5,
   },
   {
@@ -332,6 +349,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: '$200 statement credit',
     tags: ['cashback', 'groceries', 'no-fee'],
     affiliateUrl: '#',
+    issuerIcon: 'CreditCard',
+    cardColor: 'from-blue-500 via-blue-400 to-sky-500',
     rating: 4.9,
   },
   {
@@ -352,6 +371,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: '$200 cash bonus',
     tags: ['cashback', 'simple', 'no-fee'],
     affiliateUrl: '#',
+    issuerIcon: 'Zap',
+    cardColor: 'from-slate-800 via-slate-700 to-zinc-800',
     rating: 4.7,
   },
   {
@@ -372,6 +393,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: '75,000 miles ($750+ value)',
     tags: ['travel', 'premium', 'lounge-access'],
     affiliateUrl: '#',
+    issuerIcon: 'Zap',
+    cardColor: 'from-slate-900 via-slate-800 to-black',
     rating: 4.9,
   },
   {
@@ -392,6 +415,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: '60,000 points ($600+ value)',
     tags: ['travel', 'dining', 'points'],
     affiliateUrl: '#',
+    issuerIcon: 'CreditCard',
+    cardColor: 'from-amber-500 via-yellow-500 to-amber-600',
     rating: 4.8,
   },
   {
@@ -412,6 +437,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: '100,000 points ($1,250 value)',
     tags: ['business', 'travel', 'points'],
     affiliateUrl: '#',
+    issuerIcon: 'Landmark',
+    cardColor: 'from-indigo-900 via-indigo-800 to-blue-900',
     rating: 4.9,
   },
   {
@@ -432,6 +459,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: '$200 cash bonus',
     tags: ['cashback', 'dining', 'entertainment'],
     affiliateUrl: '#',
+    issuerIcon: 'Zap',
+    cardColor: 'from-violet-700 via-purple-600 to-violet-800',
     rating: 4.7,
   },
   {
@@ -452,6 +481,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: '60,000 points ($900 value)',
     tags: ['travel', 'premium', 'lounge-access'],
     affiliateUrl: '#',
+    issuerIcon: 'Landmark',
+    cardColor: 'from-slate-900 via-blue-900 to-slate-950',
     rating: 4.8,
   },
   {
@@ -472,6 +503,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: 'Good Grade Rewards + Cashback Match',
     tags: ['student', 'cashback', 'credit-builder'],
     affiliateUrl: '#',
+    issuerIcon: 'CircleDot',
+    cardColor: 'from-teal-600 via-teal-500 to-emerald-600',
     rating: 4.6,
   },
   {
@@ -492,6 +525,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: '$200 cash bonus',
     tags: ['cashback', 'customizable', 'no-fee'],
     affiliateUrl: '#',
+    issuerIcon: 'Building',
+    cardColor: 'from-red-600 via-red-500 to-rose-600',
     rating: 4.6,
   },
   {
@@ -512,6 +547,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     signupBonus: '$200 cash bonus',
     tags: ['cashback', 'simple', 'no-fee'],
     affiliateUrl: '#',
+    issuerIcon: 'Banknote',
+    cardColor: 'from-red-800 via-red-700 to-rose-800',
     rating: 4.8,
   },
   {

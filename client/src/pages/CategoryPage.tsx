@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "wouter";
+import * as LucideIcons from "lucide-react";
 import {
   CreditCard,
   Wallet,
@@ -24,9 +25,40 @@ import {
   CheckCircle2,
   ExternalLink,
   Brain,
-  Zap
+  Zap,
+  Wifi
 } from "lucide-react";
 import { SUBCATEGORIES, SAMPLE_OFFERS, type ProductOffer, calculateMatchScore, getMatchExplanation } from "@shared/productOffers";
+
+function CreditCardVisual({ offer }: { offer: ProductOffer }) {
+  const IconComponent = offer.issuerIcon ? (LucideIcons as any)[offer.issuerIcon] : CreditCard;
+  const gradientClasses = offer.cardColor || 'from-slate-700 via-slate-600 to-slate-800';
+  
+  return (
+    <div className={`relative w-full aspect-[1.586/1] rounded-xl bg-gradient-to-br ${gradientClasses} p-4 shadow-xl overflow-hidden`}>
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L2c+PC9zdmc+')] opacity-50" />
+      
+      <div className="relative h-full flex flex-col justify-between">
+        <div className="flex justify-between items-start">
+          <div className="w-10 h-7 bg-gradient-to-br from-yellow-300 to-yellow-500 rounded" />
+          <Wifi className="h-5 w-5 text-white/60 rotate-90" />
+        </div>
+        
+        <div className="flex justify-between items-end">
+          <div>
+            <p className="text-white/60 text-[10px] uppercase tracking-wider mb-0.5">Cardholder</p>
+            <p className="text-white text-xs font-medium truncate max-w-[120px]">{offer.name.split(' ')[0]}</p>
+          </div>
+          {IconComponent && (
+            <div className="flex items-center gap-1">
+              <IconComponent className="h-6 w-6 text-white/80" />
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 interface CategoryPageProps {
   categoryId: string;
@@ -115,18 +147,26 @@ const CATEGORY_CONFIG: Record<string, {
 function ProductCard({ offer }: { offer: ProductOffer }) {
   const matchScore = calculateMatchScore(offer);
   const explanation = getMatchExplanation(offer, matchScore);
+  const isCreditCard = offer.category === 'credit-cards';
   
   return (
     <Card className="p-6 hover-elevate" data-testid={`card-offer-${offer.id}`}>
-      <div className="flex flex-col md:flex-row gap-6">
-        {/* Left: Product Info */}
+      <div className="flex flex-col lg:flex-row gap-6">
+        {/* Credit Card Visual (for credit cards only) */}
+        {isCreditCard && (
+          <div className="lg:w-48 flex-shrink-0">
+            <CreditCardVisual offer={offer} />
+          </div>
+        )}
+        
+        {/* Center: Product Info */}
         <div className="flex-1">
-          <div className="flex items-start justify-between mb-4">
+          <div className="flex items-start justify-between mb-4 gap-4">
             <div>
               <h3 className="font-serif text-xl font-semibold mb-1">{offer.name}</h3>
               <Badge variant="outline" className="text-xs">{offer.subcategory}</Badge>
             </div>
-            <div className="text-right">
+            <div className="text-right flex-shrink-0">
               <div className={`text-2xl font-bold ${matchScore >= 90 ? 'text-green-600 dark:text-green-400' : matchScore >= 80 ? 'text-[#d4af37]' : 'text-muted-foreground'}`}>
                 {matchScore}%
               </div>
@@ -177,7 +217,7 @@ function ProductCard({ offer }: { offer: ProductOffer }) {
         </div>
         
         {/* Right: AI Match Explanation */}
-        <div className="md:w-64 flex flex-col">
+        <div className="lg:w-56 flex flex-col">
           <div className="bg-[#d4af37]/5 border border-[#d4af37]/20 rounded-lg p-4 mb-4 flex-1">
             <div className="flex items-center gap-2 mb-2">
               <Brain className="h-4 w-4 text-[#d4af37]" />
@@ -201,7 +241,7 @@ function ProductCard({ offer }: { offer: ProductOffer }) {
 export default function CategoryPage({ categoryId }: CategoryPageProps) {
   const config = CATEGORY_CONFIG[categoryId];
   const subcategories = SUBCATEGORIES[categoryId] || [];
-  const [activeTab, setActiveTab] = useState(subcategories[0] || 'All');
+  const [activeTab, setActiveTab] = useState('All');
   
   if (!config) {
     return (
