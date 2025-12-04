@@ -2,15 +2,15 @@ import { Brain, Cpu, CreditCard, Landmark, Shield, TrendingUp, Wallet } from "lu
 
 export function AgenticEngineVisual() {
   const categories = [
-    { icon: CreditCard, label: "Credit Cards", y: 60 },
-    { icon: TrendingUp, label: "Investing", y: 120 },
-    { icon: Landmark, label: "Banking", y: 180 },
-    { icon: Shield, label: "Insurance", y: 240 },
-    { icon: Wallet, label: "Loans", y: 300 },
+    { icon: CreditCard, label: "Credit Cards", y: 55 },
+    { icon: TrendingUp, label: "Investing", y: 115 },
+    { icon: Landmark, label: "Banking", y: 175 },
+    { icon: Shield, label: "Insurance", y: 235 },
+    { icon: Wallet, label: "Loans", y: 295 },
   ];
 
   return (
-    <div className="relative w-full h-[400px] bg-gradient-to-br from-[#0a1628] via-[#0d1a2d] to-[#0a1628] rounded-2xl border border-[#d4af37]/30 overflow-hidden" data-testid="agentic-engine-visual">
+    <div className="relative w-full h-[380px] bg-gradient-to-br from-[#0a1628] via-[#0d1a2d] to-[#0a1628] rounded-2xl border border-[#d4af37]/30 overflow-hidden" data-testid="agentic-engine-visual">
       {/* Subtle grid background */}
       <div 
         className="absolute inset-0 opacity-10"
@@ -21,30 +21,30 @@ export function AgenticEngineVisual() {
       />
 
       {/* Glow behind brain */}
-      <div className="absolute left-[80px] top-1/2 -translate-y-1/2 w-32 h-32 bg-[#d4af37]/20 rounded-full blur-3xl" />
+      <div className="absolute left-[50px] top-1/2 -translate-y-1/2 w-28 h-28 bg-[#d4af37]/20 rounded-full blur-3xl" />
 
-      {/* Central Brain */}
-      <div className="absolute left-[60px] top-1/2 -translate-y-1/2 z-20">
+      {/* Central Brain - positioned to align with middle category */}
+      <div className="absolute left-6 top-1/2 -translate-y-1/2 z-20">
         <div className="relative">
-          <div className="absolute -inset-5 border border-[#d4af37]/30 rounded-full animate-spin" style={{ animationDuration: '20s' }} />
-          <div className="absolute -inset-9 border border-[#d4af37]/15 rounded-full animate-spin" style={{ animationDuration: '30s', animationDirection: 'reverse' }} />
+          <div className="absolute -inset-4 border border-[#d4af37]/30 rounded-full animate-spin" style={{ animationDuration: '20s' }} />
+          <div className="absolute -inset-7 border border-[#d4af37]/15 rounded-full animate-spin" style={{ animationDuration: '30s', animationDirection: 'reverse' }} />
           
-          <div className="w-16 h-16 bg-gradient-to-br from-[#d4af37] to-[#c9a227] rounded-full flex items-center justify-center shadow-lg shadow-[#d4af37]/30">
-            <Brain className="w-8 h-8 text-[#0a1628]" />
+          <div className="w-14 h-14 bg-gradient-to-br from-[#d4af37] to-[#c9a227] rounded-full flex items-center justify-center shadow-lg shadow-[#d4af37]/30">
+            <Brain className="w-7 h-7 text-[#0a1628]" />
           </div>
           
           <div className="absolute -inset-2 border-2 border-[#d4af37]/50 rounded-full animate-ping" style={{ animationDuration: '2.5s' }} />
         </div>
-        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap">
+        <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap">
           <span className="text-[#d4af37] font-medium text-xs">AI Engine</span>
         </div>
       </div>
 
-      {/* Clean SVG Circuit Lines - Straight horizontal paths */}
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet">
+      {/* SVG Circuit Lines - Full width connections */}
+      <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
         <defs>
           <filter id="lineGlow">
-            <feGaussianBlur stdDeviation="2" result="blur"/>
+            <feGaussianBlur stdDeviation="1.5" result="blur"/>
             <feMerge>
               <feMergeNode in="blur"/>
               <feMergeNode in="SourceGraphic"/>
@@ -52,65 +52,68 @@ export function AgenticEngineVisual() {
           </filter>
         </defs>
 
-        {/* Clean straight lines from brain center to each category */}
+        {/* Lines connecting brain to categories */}
         {categories.map((cat, i) => {
-          const startX = 95;
-          const startY = 200;
-          const endX = 320;
-          const endY = cat.y;
-          const midX = 140 + (i * 8);
+          const brainCenterY = 50;
+          const catY = (cat.y / 380) * 100;
+          const brainEdgeX = 15;
+          const junctionX = 18 + (i * 2);
+          const catEdgeX = 67;
           
           return (
             <g key={i}>
-              {/* Main path - horizontal out, vertical adjust, horizontal to node */}
               <path
-                d={`M ${startX} ${startY} L ${midX} ${startY} L ${midX} ${endY} L ${endX} ${endY}`}
+                d={`M ${brainEdgeX}% ${brainCenterY}% L ${junctionX}% ${brainCenterY}% L ${junctionX}% ${catY}% L ${catEdgeX}% ${catY}%`}
                 fill="none"
                 stroke="#d4af37"
                 strokeWidth="2"
-                strokeOpacity="0.5"
+                strokeOpacity="0.6"
                 filter="url(#lineGlow)"
               />
               
-              {/* Animated traveling dot */}
               <circle r="4" fill="#d4af37" opacity="0.9" filter="url(#lineGlow)">
                 <animateMotion 
-                  dur={`${1.5 + i * 0.2}s`} 
+                  dur={`${1.8 + i * 0.15}s`} 
                   repeatCount="indefinite"
-                  begin={`${i * 0.3}s`}
+                  begin={`${i * 0.25}s`}
                 >
                   <mpath href={`#path${i}`} />
                 </animateMotion>
               </circle>
               
-              {/* Hidden path for animation reference */}
               <path
                 id={`path${i}`}
-                d={`M ${startX} ${startY} L ${midX} ${startY} L ${midX} ${endY} L ${endX} ${endY}`}
+                d={`M ${brainEdgeX}% ${brainCenterY}% L ${junctionX}% ${brainCenterY}% L ${junctionX}% ${catY}% L ${catEdgeX}% ${catY}%`}
                 fill="none"
               />
               
-              {/* Small dot at junction */}
-              <circle cx={midX} cy={startY} r="3" fill="#d4af37" opacity="0.6" />
-              <circle cx={midX} cy={endY} r="3" fill="#d4af37" opacity="0.6" />
+              <circle cx={`${junctionX}%`} cy={`${brainCenterY}%`} r="3" fill="#d4af37" opacity="0.5" />
+              <circle cx={`${junctionX}%`} cy={`${catY}%`} r="3" fill="#d4af37" opacity="0.5" />
+              <circle cx={`${catEdgeX}%`} cy={`${catY}%`} r="4" fill="#d4af37" opacity="0.7" />
             </g>
           );
         })}
+        
+        <circle cx="15%" cy="50%" r="5" fill="#d4af37" opacity="0.8" filter="url(#lineGlow)" />
       </svg>
 
-      {/* Category Nodes - Clean vertical stack on right */}
+      {/* Category Nodes - positioned to align with line endpoints */}
       {categories.map((cat, i) => {
         const Icon = cat.icon;
         return (
           <div
             key={i}
-            className="absolute right-8 flex items-center gap-3"
-            style={{ top: `${cat.y - 18}px` }}
+            className="absolute flex items-center gap-2"
+            style={{ 
+              top: `${cat.y}px`,
+              right: '24px',
+              transform: 'translateY(-50%)'
+            }}
           >
-            <div className="w-10 h-10 bg-[#0f1d32] border border-[#d4af37]/50 rounded-lg flex items-center justify-center">
-              <Icon className="w-5 h-5 text-[#d4af37]" />
+            <div className="w-9 h-9 bg-[#0f1d32] border border-[#d4af37]/50 rounded-lg flex items-center justify-center">
+              <Icon className="w-4 h-4 text-[#d4af37]" />
             </div>
-            <span className="text-white/80 text-sm">{cat.label}</span>
+            <span className="text-white/80 text-sm font-medium">{cat.label}</span>
           </div>
         );
       })}
