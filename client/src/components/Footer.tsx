@@ -66,20 +66,6 @@ export function Footer() {
                   </Link>
                 </li>
               </ul>
-              <div className="flex items-center gap-3">
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  <SiInstagram className="h-4 w-4" />
-                </a>
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  <SiFacebook className="h-4 w-4" />
-                </a>
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  <SiLinkedin className="h-4 w-4" />
-                </a>
-                <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  <SiX className="h-4 w-4" />
-                </a>
-              </div>
             </div>
           </div>
         </div>

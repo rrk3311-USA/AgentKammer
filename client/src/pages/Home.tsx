@@ -362,12 +362,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why This Is Different */}
+      {/* Our Differentiator */}
       <section className="py-16 lg:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">
-              Why This Is Different
+              Our Differentiator
             </h2>
           </div>
 
