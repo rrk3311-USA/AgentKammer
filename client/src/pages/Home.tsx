@@ -46,7 +46,6 @@ const categoryIcons: Record<string, any> = {
 
 const PRIMARY_CATEGORIES = [
   { id: 'credit-cards', name: 'Credit Cards', icon: 'CreditCard', description: 'AI-matched cards based on your profile and goals', color: 'from-blue-500/20 to-indigo-500/20' },
-  { id: 'investing', name: 'Investing', icon: 'TrendingUp', description: 'Brokerages, robo-advisors, and long-term tools', color: 'from-rose-500/20 to-pink-500/20' },
 ];
 
 const SECONDARY_CATEGORIES = [
@@ -183,15 +182,15 @@ export default function Home() {
           <div className="text-center mb-12">
             <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-4">Apply Your Agentic Advantage</Badge>
             <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-4">
-              Financial Categories
+              Flagship Services
             </h2>
             <p className="text-white/70 max-w-2xl mx-auto">
-              Choose a category to see AI-ranked products matched to your profile
+              Choose a service to see AI-ranked products matched to your profile
             </p>
           </div>
 
-          {/* Primary Categories - Large Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {/* Flagship Services - Large Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {PRIMARY_CATEGORIES.map((category) => {
               const IconComponent = categoryIcons[category.icon];
               return (
@@ -212,6 +211,23 @@ export default function Home() {
                 </Link>
               );
             })}
+            
+            {/* Real Estate Concierge Card */}
+            <Link href="/real-estate">
+              <Card 
+                className="p-6 bg-[#0f1d32] border-[#d4af37]/40 hover:border-[#d4af37] transition-all cursor-pointer h-full group"
+                data-testid="card-category-real-estate"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-[#d4af37]/20 flex items-center justify-center">
+                    <HomeIcon className="h-7 w-7 text-[#d4af37]" />
+                  </div>
+                  <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
+                </div>
+                <h3 className="font-serif text-xl font-semibold text-white mb-2">Real Estate Concierge</h3>
+                <p className="text-white/60 text-sm">Luxury homes, reverse buyer origination, and home valuations in NYC, California, and Nevada</p>
+              </Card>
+            </Link>
           </div>
 
           {/* Credit Card Comparison Module */}
@@ -342,34 +358,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Real Estate Flagship Card */}
-          <div>
-            <h3 className="text-lg font-semibold text-white/80 mb-4 flex items-center gap-2">
-              <HomeIcon className="h-5 w-5 text-[#d4af37]" />
-              Our Flagship Service
-            </h3>
-            <Link href="/real-estate">
-              <Card 
-                className="p-6 bg-[#0f1d32] border-[#d4af37]/40 hover:border-[#d4af37] transition-all cursor-pointer group"
-                data-testid="card-category-real-estate"
-              >
-                <div className="flex flex-col md:flex-row md:items-center gap-6">
-                  <div className="w-16 h-16 rounded-xl bg-[#d4af37]/20 flex items-center justify-center flex-shrink-0">
-                    <HomeIcon className="h-8 w-8 text-[#d4af37]" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-serif text-2xl font-semibold text-white mb-2">AgentKammer Real Estate Concierge</h4>
-                    <p className="text-white/80">
-                      Our flagship luxury real estate + Reverse Buyer Origination system. Make brokers compete for your business in NYC, California, and Nevada.
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 text-[#d4af37] font-medium group-hover:translate-x-2 transition-transform">
-                    Visit Real Estate Division <ArrowRight className="h-5 w-5" />
-                  </div>
-                </div>
-              </Card>
-            </Link>
-          </div>
         </div>
       </section>
 
