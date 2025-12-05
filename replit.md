@@ -1,22 +1,23 @@
 # Agent Kammer - Financial Comparison Platform
 
 ## Overview
-Agent Kammer is an AI-powered financial services comparison engine that helps users find the best products across 13 financial categories. The platform uses an agentic AI comparison engine that ranks products based on user profiles, featuring deterministic scoring for consistent recommendations. It emphasizes zero-knowledge encrypted document management for competitive bidding while maintaining the sophisticated gold/navy branding from its luxury real estate origins.
+Agent Kammer is an AI-powered financial services comparison engine that helps users find the best products across 14 financial categories. The platform uses an agentic AI comparison engine that ranks products based on user profiles, featuring deterministic scoring for consistent recommendations. It emphasizes zero-knowledge encrypted document management for competitive bidding while maintaining the sophisticated gold/navy branding from its luxury real estate origins.
 
-## The 13 Financial Categories
+## The 14 Financial Categories
 1. **Credit Cards** - Travel rewards, cashback, business cards, 0% APR, balance transfer, secured cards
 2. **Personal Loans** - Debt consolidation, home improvement, medical, emergency funds
 3. **Business Funding** - Business credit cards, lines of credit, SBA loans, startup capital
 4. **Banking** - High-yield savings, checking, CDs, money market, cash management
 5. **Insurance** - Auto, home, renters, life, health, umbrella, pet insurance
 6. **Investing** - Brokerages, robo-advisors, retirement accounts, crypto platforms
-7. **Credit Builder** - Credit-builder cards, secured cards, credit monitoring
-8. **Student Finance** - Student loans, refinancing, student banking
-9. **Tax Tools** - Tax filing software, professional prep, tax planning
-10. **Identity & Security** - Identity protection, credit monitoring, dark web scanning
-11. **Budgeting Apps** - Expense tracking, financial planning, debt payoff apps
-12. **Rewards & Cashback** - Shopping cashback, receipt scanning, browser extensions
-13. **Real Estate Concierge** - Luxury homes, mortgage pre-approval, home valuations (NYC, California, Nevada markets)
+7. **Refinancing** - Rate Watch technology for mortgage, auto, student, personal loan, and cash-out refinancing
+8. **Credit Builder** - Credit-builder cards, secured cards, credit monitoring
+9. **Student Finance** - Student loans, refinancing, student banking
+10. **Tax Tools** - Tax filing software, professional prep, tax planning
+11. **Identity & Security** - Identity protection, credit monitoring, dark web scanning
+12. **Budgeting Apps** - Expense tracking, financial planning, debt payoff apps
+13. **Rewards & Cashback** - Shopping cashback, receipt scanning, browser extensions
+14. **Real Estate Concierge** - Luxury homes, mortgage pre-approval, home valuations (NYC, California, Nevada markets)
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
@@ -37,9 +38,10 @@ The platform features a visual-first approach with large imagery (AI Engine visu
 The frontend uses React, TypeScript, and Vite, with `wouter` for routing and React Query for server state management. `shadcn/ui` provides customizable components styled with Tailwind CSS. The backend is built with Express.js, Node.js, and TypeScript, providing RESTful API routes. Session management is handled via `connect-pg-simple` with PostgreSQL. OpenAI integration powers the multi-category chat assistant for lead extraction.
 
 ### Feature Specifications
-- **Category Pages**: Dedicated pages for each of the 13 financial categories with AI-ranked product comparisons.
+- **Category Pages**: Dedicated pages for each of the 14 financial categories with AI-ranked product comparisons.
 - **Product Comparison Engine**: Deterministic scoring algorithm in `shared/productOffers.ts` that calculates match scores based on user profiles.
-- **AI Chat Assistant**: GPT-4o-mini powered, "Sophisticated Closer" personality, understands all 13 categories, persistent lead capture (Name, Category Interest, Timeline, Goals/Budget, Email, Phone), automatic `LEAD_DATA` JSON extraction, session tracking, database persistence with lead scores.
+- **Refinancing Rate Watch**: Dedicated page at `/refinancing` with Quick Rate Check calculator showing live savings computation (current/new payments, monthly savings, break-even timeline, closing costs). Supports mortgage, auto, student, personal loan refinancing. Edge case handling for rates already at/below market.
+- **AI Chat Assistant**: GPT-4o-mini powered, "Sophisticated Closer" personality, understands all 14 categories, persistent lead capture (Name, Category Interest, Timeline, Goals/Budget, Email, Phone), automatic `LEAD_DATA` JSON extraction, session tracking, database persistence with lead scores.
 - **Affiliate Program**: Full affiliate tracking system with signup, referral codes, tier-based commissions, and dashboard at `/affiliates`.
 - **Global Market Ticker**: Real-time ticker in footer showing S&P 500, Bitcoin, Gold, and mortgage rate data.
 - **Market Analysis Reports**: On-demand property-specific reports for California, NYC, and Nevada, with downloadable PDF versions.
@@ -56,12 +58,13 @@ The frontend uses React, TypeScript, and Vite, with `wouter` for routing and Rea
 
 ### Key Files
 - `client/src/pages/Home.tsx` - Homepage with AI engine image and category grid
-- `client/src/pages/CategoryPage.tsx` - Unified category page template for all 13 categories
+- `client/src/pages/CategoryPage.tsx` - Unified category page template for all 14 categories
+- `client/src/pages/Refinancing.tsx` - Rate Watch page with Quick Rate Check calculator
 - `client/src/pages/AffiliateProgram.tsx` - Affiliate signup, tracking, and dashboard
-- `shared/productOffers.ts` - Product offers database and deterministic scoring algorithm
+- `shared/productOffers.ts` - Product offers database (includes 12 refinancing offers) and deterministic scoring algorithm
 - `shared/schema.ts` - Database schema including affiliates table
 - `server/routes.ts` - API routes including affiliate endpoints and multi-category chatbot prompt
-- `client/src/components/Footer.tsx` - Footer with Global Market Ticker and Affiliates link
+- `client/src/components/Footer.tsx` - Footer with Global Market Ticker, Affiliates link, and Rate Watch badge
 - `client/src/components/GlobalMarketTicker.tsx` - Real-time market data ticker
 
 ### System Design Choices
@@ -85,7 +88,14 @@ The system uses Drizzle ORM with neon-http for PostgreSQL connections. Authentic
 *   **React Hook Form**: Form state management with Zod validation.
 *   **Lucide React & React Icons**: Icon libraries.
 
-## Recent Changes (November 2025)
+## Recent Changes (December 2025)
+- Added Refinancing category with Rate Watch technology as 7th product category
+- Created Quick Rate Check calculator showing live savings computations (current/new payments, monthly savings, break-even timeline, closing costs)
+- Added 12 refinancing offers across 5 subcategories (Mortgage, Auto, Student, Personal, Cash-Out)
+- Integrated Refinancing into header Compare dropdown and footer navigation with "RATE WATCH" badge
+- Implemented edge case handling for scenarios where current rate is already competitive
+
+## Changes (November 2025)
 - Transformed from luxury real estate platform to comprehensive financial comparison engine
 - Expanded to 16 financial product categories (6 Primary + 4 Secondary + 5 Supporting + 1 Flagship)
 - Added new categories: Estate Planning, Renters Insurance, Cashback Apps, Credit Builder Apps, Micro-Investing, Budgeting/Subscription Trackers
