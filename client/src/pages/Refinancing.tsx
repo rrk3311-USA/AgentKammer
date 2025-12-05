@@ -28,6 +28,62 @@ export default function Refinancing() {
   const [currentRate, setCurrentRate] = useState("");
   const [loanBalance, setLoanBalance] = useState("");
   const [loanType, setLoanType] = useState("mortgage");
+  const [showResults, setShowResults] = useState(false);
+
+  const loanTypeData: Record<string, { avgNewRate: number; closingCostPct: number; termMonths: number }> = {
+    mortgage: { avgNewRate: 6.25, closingCostPct: 2.5, termMonths: 360 },
+    auto: { avgNewRate: 6.50, closingCostPct: 0, termMonths: 60 },
+    student: { avgNewRate: 5.00, closingCostPct: 0, termMonths: 120 },
+    personal: { avgNewRate: 9.50, closingCostPct: 1, termMonths: 60 },
+  };
+
+  const calculateSavings = () => {
+    const rate = parseFloat(currentRate);
+    const balance = parseFloat(loanBalance.replace(/,/g, ''));
+    
+    if (isNaN(rate) || isNaN(balance) || rate <= 0 || balance <= 0) {
+      return null;
+    }
+
+    const data = loanTypeData[loanType];
+    
+    if (rate <= data.avgNewRate) {
+      return {
+        currentPayment: 0,
+        newPayment: 0,
+        monthlySavings: 0,
+        closingCosts: 0,
+        breakEvenMonths: 0,
+        newRate: data.avgNewRate,
+        worthIt: false,
+        alreadyLower: true,
+      };
+    }
+
+    const currentMonthlyRate = rate / 100 / 12;
+    const newMonthlyRate = data.avgNewRate / 100 / 12;
+    const n = data.termMonths;
+
+    const currentPayment = balance * (currentMonthlyRate * Math.pow(1 + currentMonthlyRate, n)) / (Math.pow(1 + currentMonthlyRate, n) - 1);
+    const newPayment = balance * (newMonthlyRate * Math.pow(1 + newMonthlyRate, n)) / (Math.pow(1 + newMonthlyRate, n) - 1);
+    
+    const monthlySavings = currentPayment - newPayment;
+    const closingCosts = balance * (data.closingCostPct / 100);
+    const breakEvenMonths = closingCosts > 0 && monthlySavings > 0 ? Math.ceil(closingCosts / monthlySavings) : 0;
+    
+    return {
+      currentPayment: Math.round(currentPayment),
+      newPayment: Math.round(newPayment),
+      monthlySavings: Math.round(monthlySavings),
+      closingCosts: Math.round(closingCosts),
+      breakEvenMonths,
+      newRate: data.avgNewRate,
+      worthIt: monthlySavings > 50 && (breakEvenMonths < 24 || closingCosts === 0),
+      alreadyLower: false,
+    };
+  };
+
+  const savings = showResults ? calculateSavings() : null;
 
   const features = [
     {
@@ -186,10 +242,72 @@ export default function Refinancing() {
                     </div>
                   </div>
                   
-                  <Button className="w-full bg-[#d4af37] hover:bg-[#c9a227] text-[#0a1628] font-semibold" data-testid="button-check-savings">
+                  <Button 
+                    className="w-full bg-[#d4af37] hover:bg-[#c9a227] text-[#0a1628] font-semibold" 
+                    data-testid="button-check-savings"
+                    onClick={() => setShowResults(true)}
+                  >
                     <Calculator className="h-4 w-4 mr-2" />
                     Check My Savings Potential
                   </Button>
+
+                  {showResults && savings && (
+                    <div className="mt-4 p-4 rounded-lg bg-white/10 border border-[#d4af37]/30 space-y-3">
+                      {savings.alreadyLower ? (
+                        <div className="p-3 rounded bg-blue-500/20 text-blue-300 text-sm text-center">
+                          <p className="font-medium">Your rate is already at or below current market rates!</p>
+                          <p className="text-blue-300/70 text-xs mt-1">We'll monitor and alert you if rates drop further</p>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="flex justify-between text-sm">
+                            <span className="text-white/70">Current Payment</span>
+                            <span className="text-white font-medium">${savings.currentPayment.toLocaleString()}/mo</span>
+                          </div>
+                          <div className="flex justify-between text-sm">
+                            <span className="text-white/70">New Payment ({savings.newRate}%)</span>
+                            <span className="text-[#d4af37] font-medium">${savings.newPayment.toLocaleString()}/mo</span>
+                          </div>
+                          <div className="h-px bg-white/20" />
+                          <div className="flex justify-between text-sm">
+                            <span className="text-white/70">Monthly Savings</span>
+                            <span className="text-green-400 font-bold">${savings.monthlySavings.toLocaleString()}/mo</span>
+                          </div>
+                          {savings.closingCosts > 0 && (
+                            <>
+                              <div className="flex justify-between text-sm">
+                                <span className="text-white/70">Est. Closing Costs</span>
+                                <span className="text-white/80">${savings.closingCosts.toLocaleString()}</span>
+                              </div>
+                              <div className="flex justify-between text-sm">
+                                <span className="text-white/70">Break-Even</span>
+                                <span className="text-[#d4af37] font-medium">{savings.breakEvenMonths} months</span>
+                              </div>
+                            </>
+                          )}
+                          <div className={`mt-2 p-2 rounded text-center text-sm font-medium ${
+                            savings.worthIt 
+                              ? 'bg-green-500/20 text-green-400' 
+                              : 'bg-yellow-500/20 text-yellow-400'
+                          }`}>
+                            {savings.worthIt 
+                              ? 'Refinancing likely makes sense for you!' 
+                              : 'May not be worth it yet - we\'ll alert you when it is'}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  )}
+
+                  {showResults && !savings && (
+                    <div className="mt-4 p-3 rounded-lg bg-red-500/20 border border-red-500/30 text-red-300 text-sm text-center">
+                      Please enter valid rate and balance values
+                    </div>
+                  )}
+
+                  <p className="text-white/40 text-[10px] text-center mt-2">
+                    Estimates based on current market averages. Actual rates may vary.
+                  </p>
                 </CardContent>
               </Card>
             </div>
