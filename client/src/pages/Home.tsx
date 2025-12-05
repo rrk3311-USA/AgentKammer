@@ -214,61 +214,131 @@ export default function Home() {
             })}
           </div>
 
-          {/* Secondary Categories */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-white/80 mb-4 flex items-center gap-2">
-              <Target className="h-5 w-5 text-[#d4af37]" />
-              Build Your Foundation
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {SECONDARY_CATEGORIES.map((category) => {
-                const IconComponent = categoryIcons[category.icon];
-                return (
-                  <Link key={category.id} href={`/${category.id}`}>
-                    <Card 
-                      className="p-5 bg-white/5 border-white/10 hover:border-[#d4af37]/50 transition-all cursor-pointer group"
-                      data-testid={`card-category-${category.id}`}
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-lg bg-[#d4af37]/10 flex items-center justify-center">
-                          <IconComponent className="h-6 w-6 text-[#d4af37]" />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-semibold text-white">{category.name}</h4>
-                          <p className="text-white/60 text-sm">{category.description}</p>
-                        </div>
-                        <ArrowRight className="h-5 w-5 text-white/30 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
-                      </div>
-                    </Card>
-                  </Link>
-                );
-              })}
+          {/* Credit Card Comparison Module */}
+          <div className="mb-12">
+            <div className="text-center mb-8">
+              <h3 className="font-serif text-2xl lg:text-3xl font-bold text-white mb-3">
+                Compare 100+ Credit Cards
+                <br />
+                <span className="text-[#d4af37]">Not Just the Usual 12</span>
+              </h3>
+              <p className="text-white/70 max-w-2xl mx-auto">
+                Our AI-powered engine analyzes 100+ card options—including fintech, crypto, and startup cards that legacy sites don't show.
+              </p>
             </div>
-          </div>
 
-          {/* Supporting Categories */}
-          <div className="mb-8">
-            <h3 className="text-lg font-semibold text-white/80 mb-4 flex items-center gap-2">
-              <Zap className="h-5 w-5 text-[#d4af37]" />
-              Quick Tools
-            </h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {SUPPORTING_CATEGORIES.map((category) => {
-                const IconComponent = categoryIcons[category.icon];
-                return (
-                  <Link key={category.id} href={`/${category.id}`}>
-                    <Card 
-                      className="p-4 bg-white/5 border-white/10 hover:border-[#d4af37]/50 transition-all cursor-pointer group text-center"
-                      data-testid={`card-category-${category.id}`}
-                    >
-                      <div className="w-10 h-10 rounded-lg bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-3">
-                        <IconComponent className="h-5 w-5 text-[#d4af37]" />
-                      </div>
-                      <h4 className="font-medium text-white text-sm">{category.name}</h4>
-                    </Card>
-                  </Link>
-                );
-              })}
+            {/* Comparison Table */}
+            <div className="overflow-x-auto mb-8">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="border-b border-white/20">
+                    <th className="text-left py-4 px-4 text-white/80 font-semibold">Feature</th>
+                    <th className="text-center py-4 px-4 text-white/60 font-medium">NerdWallet</th>
+                    <th className="text-center py-4 px-4 text-white/60 font-medium">Bankrate</th>
+                    <th className="text-center py-4 px-4 text-white/60 font-medium">Forbes</th>
+                    <th className="text-center py-4 px-4 text-[#d4af37] font-semibold">Agent Kammer</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                    <td className="py-4 px-4 text-white">Total Cards</td>
+                    <td className="py-4 px-4 text-center text-white/60">12–20</td>
+                    <td className="py-4 px-4 text-center text-white/60">10–25</td>
+                    <td className="py-4 px-4 text-center text-white/60">10–18</td>
+                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold">100+</td>
+                  </tr>
+                  <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                    <td className="py-4 px-4 text-white">Fintech Cards</td>
+                    <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold">✓</td>
+                  </tr>
+                  <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                    <td className="py-4 px-4 text-white">Crypto Rewards Cards</td>
+                    <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-4 px-4 text-center text-white/60">Limited</td>
+                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold">✓</td>
+                  </tr>
+                  <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                    <td className="py-4 px-4 text-white">AI-Based Matching</td>
+                    <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold">✓</td>
+                  </tr>
+                  <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                    <td className="py-4 px-4 text-white">Independent Ranking</td>
+                    <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-4 px-4 text-center text-white/60">Partial</td>
+                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold">✓</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            {/* Why We're Different */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card className="p-6 bg-[#d4af37]/5 border-[#d4af37]/20">
+                <h4 className="font-semibold text-lg text-[#d4af37] mb-4">Why Legacy Sites Show Fewer Cards</h4>
+                <ul className="space-y-2 text-sm text-white/80">
+                  <li className="flex items-start gap-3">
+                    <span className="text-[#d4af37] font-bold">•</span>
+                    <span>Limited affiliate partnerships with banks</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-[#d4af37] font-bold">•</span>
+                    <span>Crypto cards excluded due to compliance</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-[#d4af37] font-bold">•</span>
+                    <span>Fintech startups can't afford placement fees</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-[#d4af37] font-bold">•</span>
+                    <span>New beta cards excluded from networks</span>
+                  </li>
+                </ul>
+              </Card>
+
+              <Card className="p-6 bg-white/5 border-white/10">
+                <h4 className="font-semibold text-lg text-white mb-4">Our Advantage</h4>
+                <ul className="space-y-2 text-sm text-white/80">
+                  <li className="flex items-start gap-3">
+                    <span className="text-[#d4af37] font-bold">•</span>
+                    <span>Direct partnerships with 100+ card issuers</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-[#d4af37] font-bold">•</span>
+                    <span>Full access to fintech & crypto programs</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-[#d4af37] font-bold">•</span>
+                    <span>AI evaluates for YOUR fit, not commission</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-[#d4af37] font-bold">•</span>
+                    <span>Pre-launch & invite-only cards included</span>
+                  </li>
+                </ul>
+              </Card>
+            </div>
+
+            {/* CTA */}
+            <div className="text-center mt-8">
+              <p className="text-white/70 mb-4">Ready to find your perfect card?</p>
+              <Link href="/profile">
+                <Button 
+                  size="lg" 
+                  className="px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
+                  data-testid="button-compare-cards"
+                >
+                  <CreditCard className="h-5 w-5 mr-2" />
+                  Start Your Agentic Profile
+                </Button>
+              </Link>
             </div>
           </div>
 
