@@ -18,10 +18,6 @@ import {
   ChevronUp,
   MessageCircle, 
   CreditCard,
-  Wallet,
-  Building2,
-  Landmark,
-  Shield,
   TrendingUp,
   Home,
   Brain,
@@ -34,10 +30,6 @@ import { useState } from "react";
 
 const financialCategories = [
   { id: 'credit-cards', name: 'Credit Cards', icon: CreditCard },
-  { id: 'personal-loans', name: 'Personal Loans', icon: Wallet },
-  { id: 'business-funding', name: 'Business Funding', icon: Building2 },
-  { id: 'banking', name: 'Banking', icon: Landmark },
-  { id: 'insurance', name: 'Insurance', icon: Shield },
   { id: 'investing', name: 'Investing', icon: TrendingUp },
   { id: 'refinancing', name: 'Refinancing', icon: RefreshCw },
 ];

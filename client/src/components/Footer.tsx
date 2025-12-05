@@ -27,23 +27,8 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/personal-loans" className="hover:text-foreground transition-colors">
-                    Personal Loans
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/business-funding" className="hover:text-foreground transition-colors">
-                    Business Funding
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/banking" className="hover:text-foreground transition-colors">
-                    Banking
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/insurance" className="hover:text-foreground transition-colors">
-                    Insurance
+                  <Link href="/investing" className="hover:text-foreground transition-colors">
+                    Investing
                   </Link>
                 </li>
                 <li>
