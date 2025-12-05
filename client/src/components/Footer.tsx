@@ -1,5 +1,5 @@
 import { SiReplit, SiNvidia, SiClaude, SiAnthropic, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
-import { Brain, Sparkles, TrendingUp, Mail } from "lucide-react";
+import { Brain, Sparkles, TrendingUp, Mail, RefreshCw } from "lucide-react";
 import { Link } from "wouter";
 
 export function Footer() {
@@ -54,6 +54,12 @@ export function Footer() {
                   <Link href="/reverse-seller-architecture" className="flex items-center gap-2 hover:text-foreground transition-colors">
                     <TrendingUp className="h-3.5 w-3.5" />
                     <span>Reverse Seller Architecture</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/refinancing" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                    <RefreshCw className="h-3.5 w-3.5" />
+                    <span>Refinancing Rate Watch</span>
                   </Link>
                 </li>
                 <li>

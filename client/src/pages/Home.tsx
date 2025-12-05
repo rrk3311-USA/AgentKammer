@@ -24,7 +24,8 @@ import {
   Zap,
   CheckCircle2,
   Users,
-  BarChart3
+  BarChart3,
+  RefreshCw
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
 
@@ -212,20 +213,20 @@ export default function Home() {
               );
             })}
             
-            {/* Real Estate Concierge Card */}
-            <Link href="/real-estate">
+            {/* Refinancing Rate Watch Card */}
+            <Link href="/refinancing">
               <Card 
                 className="p-6 bg-[#0f1d32] border-[#d4af37]/40 hover:border-[#d4af37] transition-all cursor-pointer h-full group"
-                data-testid="card-category-real-estate"
+                data-testid="card-category-refinancing"
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="w-14 h-14 rounded-xl bg-[#d4af37]/20 flex items-center justify-center">
-                    <HomeIcon className="h-7 w-7 text-[#d4af37]" />
+                    <RefreshCw className="h-7 w-7 text-[#d4af37]" />
                   </div>
                   <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
                 </div>
-                <h3 className="font-serif text-xl font-semibold text-white mb-2">Real Estate Concierge</h3>
-                <p className="text-white/60 text-sm">Luxury homes, reverse buyer origination, and home valuations in NYC, California, and Nevada</p>
+                <h3 className="font-serif text-xl font-semibold text-white mb-2">Refinancing Rate Watch</h3>
+                <p className="text-white/60 text-sm">Monitor mortgage, auto, student, personal, and cash-out refinancing rates 24/7</p>
               </Card>
             </Link>
           </div>

@@ -122,14 +122,14 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link href="/real-estate">
+            <Link href="/refinancing">
               <Button
                 variant="ghost"
                 className="hover-elevate active-elevate-2 h-10 px-3 gap-1"
-                data-testid="button-header-real-estate"
+                data-testid="button-header-refinancing"
               >
-                <Home className="h-4 w-4" />
-                <span className="text-sm font-medium">Real Estate</span>
+                <RefreshCw className="h-4 w-4" />
+                <span className="text-sm font-medium">Rate Watch</span>
               </Button>
             </Link>
           </div>
