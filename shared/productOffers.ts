@@ -26,10 +26,6 @@ export interface ProductOffer {
 export const CATEGORIES = {
   PRIMARY: [
     { id: 'credit-cards', name: 'Credit Cards', icon: 'CreditCard', description: 'AI-matched cards based on your profile and goals' },
-    { id: 'personal-loans', name: 'Personal Loans', icon: 'Wallet', description: 'Compare lenders for consolidation and lower APRs' },
-    { id: 'business-funding', name: 'Business Funding', icon: 'Building2', description: 'Business cards, lines of credit, and startup capital' },
-    { id: 'banking', name: 'Banking', icon: 'Landmark', description: 'High-yield savings, checking, and cash tools' },
-    { id: 'insurance', name: 'Insurance', icon: 'Shield', description: 'Auto, home, and life insurance quotes' },
     { id: 'investing', name: 'Investing', icon: 'TrendingUp', description: 'Brokerages, robo-advisors, and long-term tools' },
   ],
   SECONDARY: [

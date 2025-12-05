@@ -46,10 +46,6 @@ const categoryIcons: Record<string, any> = {
 
 const PRIMARY_CATEGORIES = [
   { id: 'credit-cards', name: 'Credit Cards', icon: 'CreditCard', description: 'AI-matched cards based on your profile and goals', color: 'from-blue-500/20 to-indigo-500/20' },
-  { id: 'personal-loans', name: 'Personal Loans', icon: 'Wallet', description: 'Compare lenders for consolidation and lower APRs', color: 'from-green-500/20 to-emerald-500/20' },
-  { id: 'business-funding', name: 'Business Funding', icon: 'Building2', description: 'Business cards, lines of credit, and startup capital', color: 'from-purple-500/20 to-violet-500/20' },
-  { id: 'banking', name: 'Banking', icon: 'Landmark', description: 'High-yield savings, checking, and cash tools', color: 'from-cyan-500/20 to-teal-500/20' },
-  { id: 'insurance', name: 'Insurance', icon: 'Shield', description: 'Auto, home, and life insurance quotes', color: 'from-orange-500/20 to-amber-500/20' },
   { id: 'investing', name: 'Investing', icon: 'TrendingUp', description: 'Brokerages, robo-advisors, and long-term tools', color: 'from-rose-500/20 to-pink-500/20' },
 ];
 
