@@ -12,6 +12,17 @@ export function AgenticEngineVisual() {
     { label: "Investing", shortLabel: "Investing" },
   ];
 
+  const codeThoughts = [
+    "{ analyze }",
+    "< compare >",
+    "[ rank ]",
+    "{ score }",
+    "< match >",
+    "[ optimize ]",
+    "{ evaluate }",
+    "< recommend >",
+  ];
+
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % categories.length);
@@ -34,6 +45,91 @@ export function AgenticEngineVisual() {
         
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/50" />
+        
+        {/* Animated code waterfall - twinkling thoughts */}
+        <div className="absolute inset-0 overflow-hidden">
+          {codeThoughts.map((thought, i) => {
+            const delay = i * 0.3;
+            const startPos = (i % 3) * 33; // Distribute across left/center/right
+            const duration = 8 + (i % 3) * 2; // Vary durations for natural flow
+            
+            return (
+              <div
+                key={i}
+                className="absolute text-[#d4af37]/30 font-mono text-xs md:text-sm whitespace-nowrap"
+                style={{
+                  left: `${startPos}%`,
+                  animation: `thoughtFlow${i % 3} ${duration}s linear ${delay}s infinite`,
+                }}
+              >
+                {thought}
+              </div>
+            );
+          })}
+        </div>
+        
+        {/* Animation styles for code waterfall */}
+        <style>{`
+          @keyframes thoughtFlow0 {
+            0% {
+              top: -20px;
+              opacity: 0;
+            }
+            20% {
+              opacity: 0.3;
+            }
+            50% {
+              opacity: 0.15;
+            }
+            80% {
+              opacity: 0.25;
+            }
+            100% {
+              top: 100%;
+              opacity: 0;
+            }
+          }
+          
+          @keyframes thoughtFlow1 {
+            0% {
+              top: -40px;
+              opacity: 0;
+            }
+            15% {
+              opacity: 0.25;
+            }
+            45% {
+              opacity: 0.2;
+            }
+            75% {
+              opacity: 0.3;
+            }
+            100% {
+              top: 100%;
+              opacity: 0;
+            }
+          }
+          
+          @keyframes thoughtFlow2 {
+            0% {
+              top: -60px;
+              opacity: 0;
+            }
+            10% {
+              opacity: 0.35;
+            }
+            40% {
+              opacity: 0.15;
+            }
+            70% {
+              opacity: 0.25;
+            }
+            100% {
+              top: 100%;
+              opacity: 0;
+            }
+          }
+        `}</style>
         
         {/* Floating category labels - Desktop */}
         <div className="hidden md:block absolute inset-0">
