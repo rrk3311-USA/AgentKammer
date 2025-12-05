@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Brain, Cpu, CreditCard, TrendingUp, Wallet } from "lucide-react";
+import { Brain, Cpu, CreditCard, TrendingUp, Users, Home, RefreshCw } from "lucide-react";
 
 interface Pulse {
   id: number;
@@ -16,9 +16,11 @@ export function AgenticEngineVisual() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const categories = [
-    { icon: CreditCard, label: "Credit Cards", y: 90 },
-    { icon: TrendingUp, label: "Investing", y: 180 },
-    { icon: Wallet, label: "Loans", y: 270 },
+    { icon: CreditCard, label: "Credit Cards", y: 50 },
+    { icon: Users, label: "Reverse Buyer Origination", y: 115 },
+    { icon: Home, label: "Reverse Seller Architecture", y: 180 },
+    { icon: RefreshCw, label: "Refinancing Rate Watch", y: 245 },
+    { icon: TrendingUp, label: "Investing", y: 310 },
   ];
 
   useEffect(() => {
@@ -65,8 +67,8 @@ export function AgenticEngineVisual() {
 
   const getPathPoints = (index: number) => {
     const brainX = 88;
-    const brainY = 175;
-    const junctionX = 110 + (index * 12);
+    const brainY = 180;
+    const junctionX = 110 + (index * 8);
     const catY = categories[index].y;
     const catX = 320;
     
@@ -98,7 +100,7 @@ export function AgenticEngineVisual() {
   return (
     <div 
       ref={containerRef}
-      className="relative w-full h-[360px] bg-gradient-to-br from-[#0a1628] via-[#0d1a2d] to-[#0a1628] rounded-2xl border border-[#d4af37]/30 overflow-hidden" 
+      className="relative w-full h-[380px] bg-gradient-to-br from-[#0a1628] via-[#0d1a2d] to-[#0a1628] rounded-2xl border border-[#d4af37]/30 overflow-hidden" 
       data-testid="agentic-engine-visual"
     >
       <div 
@@ -127,7 +129,7 @@ export function AgenticEngineVisual() {
         </div>
       </div>
 
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 360" preserveAspectRatio="xMidYMid meet">
+      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 380" preserveAspectRatio="xMidYMid meet">
         <defs>
           <filter id="pulseGlow">
             <feGaussianBlur stdDeviation="3" result="blur"/>
@@ -192,7 +194,7 @@ export function AgenticEngineVisual() {
           );
         })}
 
-        <circle cx="88" cy="175" r="6" fill="#d4af37" opacity="0.9" filter="url(#lineGlow)" />
+        <circle cx="88" cy="180" r="6" fill="#d4af37" opacity="0.9" filter="url(#lineGlow)" />
 
         {pulses.map(pulse => {
           const point = getPointOnPath(pulse.pathIndex, pulse.progress);

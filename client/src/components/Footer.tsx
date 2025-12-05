@@ -1,5 +1,5 @@
 import { SiReplit, SiNvidia, SiClaude, SiAnthropic, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
-import { Brain, Sparkles, TrendingUp, Users, Mail } from "lucide-react";
+import { Brain, Sparkles, TrendingUp, Mail } from "lucide-react";
 import { Link } from "wouter";
 
 export function Footer() {
@@ -66,9 +66,9 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/reverse-seller-origination" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                  <Link href="/reverse-seller-architecture" className="flex items-center gap-2 hover:text-foreground transition-colors">
                     <TrendingUp className="h-3.5 w-3.5" />
-                    <span>Reverse Seller Origination</span>
+                    <span>Reverse Seller Architecture</span>
                   </Link>
                 </li>
                 <li>
@@ -84,12 +84,6 @@ export function Footer() {
                 <li>
                   <Link href="/services/get-home-value" className="hover:text-foreground transition-colors">
                     Home Valuation
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/affiliates" className="flex items-center gap-2 hover:text-foreground transition-colors" data-testid="link-affiliates">
-                    <Users className="h-3.5 w-3.5 text-[#d4af37]" />
-                    <span>Affiliate Program</span>
                   </Link>
                 </li>
               </ul>

@@ -258,12 +258,12 @@ export function Header() {
                   Reverse Buyer Origination
                 </span>
               </Link>
-              <Link href="/reverse-seller-origination" data-testid="link-mobile-rso">
+              <Link href="/reverse-seller-architecture" data-testid="link-mobile-rsa">
                 <span
                   className="text-base font-medium hover:text-primary cursor-pointer block"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Reverse Seller Origination
+                  Reverse Seller Architecture
                 </span>
               </Link>
             </div>
