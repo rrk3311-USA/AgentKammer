@@ -26,7 +26,8 @@ import {
   Home,
   Brain,
   Triangle,
-  Calculator
+  Calculator,
+  RefreshCw
 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState } from "react";
@@ -38,6 +39,7 @@ const financialCategories = [
   { id: 'banking', name: 'Banking', icon: Landmark },
   { id: 'insurance', name: 'Insurance', icon: Shield },
   { id: 'investing', name: 'Investing', icon: TrendingUp },
+  { id: 'refinancing', name: 'Refinancing', icon: RefreshCw },
 ];
 
 export function Header() {

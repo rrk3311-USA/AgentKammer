@@ -37,6 +37,7 @@ import AdminRBO from "@/pages/AdminRBO";
 import AffiliateProgram from "@/pages/AffiliateProgram";
 import FreeTools from "@/pages/FreeTools";
 import Dashboard from "@/pages/Dashboard";
+import Refinancing from "@/pages/Refinancing";
 import NotFound from "@/pages/not-found";
 
 function ScrollToTop() {
@@ -75,6 +76,7 @@ function Router() {
       <Route path="/renters-insurance" component={() => <CategoryPage categoryId="renters-insurance" />} />
       <Route path="/estate-planning" component={() => <CategoryPage categoryId="estate-planning" />} />
       <Route path="/micro-investing" component={() => <CategoryPage categoryId="micro-investing" />} />
+      <Route path="/refinancing" component={Refinancing} />
       
       {/* Dashboard */}
       <Route path="/dashboard" component={Dashboard} />
