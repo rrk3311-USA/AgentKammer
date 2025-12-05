@@ -1,5 +1,5 @@
 import { SiReplit, SiNvidia, SiClaude, SiAnthropic, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
-import { Brain, Sparkles, TrendingUp, Mail, RefreshCw } from "lucide-react";
+import { Brain, Sparkles, TrendingUp, RefreshCw } from "lucide-react";
 import { Link } from "wouter";
 
 export function Footer() {
@@ -16,12 +16,6 @@ export function Footer() {
               </Link>
               <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground mb-4">
                 <li>
-                  <Link href="/contact" className="font-semibold text-foreground hover:text-foreground transition-colors flex items-center gap-2">
-                    <Mail className="h-3.5 w-3.5" />
-                    <span>Contact</span>
-                  </Link>
-                </li>
-                <li>
                   <Link href="/credit-cards" className="hover:text-foreground transition-colors">
                     Credit Cards
                   </Link>
@@ -29,6 +23,16 @@ export function Footer() {
                 <li>
                   <Link href="/investing" className="hover:text-foreground transition-colors">
                     Investing
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/get-preapproved" className="hover:text-foreground transition-colors">
+                    Pre-Approval
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/services/get-home-value" className="hover:text-foreground transition-colors">
+                    Home Valuation
                   </Link>
                 </li>
               </ul>
@@ -57,18 +61,8 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/real-estate" className="hover:text-foreground transition-colors">
-                    Real Estate Concierge
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services/get-preapproved" className="hover:text-foreground transition-colors">
-                    Pre-Approval
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services/get-home-value" className="hover:text-foreground transition-colors">
-                    Home Valuation
+                  <Link href="/contact" className="hover:text-foreground transition-colors">
+                    Contact
                   </Link>
                 </li>
               </ul>
