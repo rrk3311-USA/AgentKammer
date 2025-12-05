@@ -102,7 +102,7 @@ function Router() {
       <Route path="/studio" component={ContentStudio} />
       <Route path="/reverse-buyer-origination" component={ReverseBuyerOrigination} />
       <Route path="/rbo-guide" component={ReverseByerOriginationGuide} />
-      <Route path="/reverse-seller-origination" component={ReverseSellerOrigination} />
+      <Route path="/reverse-seller-architecture" component={ReverseSellerOrigination} />
       <Route path="/admin/rbo" component={AdminRBO} />
       <Route path="/affiliates" component={AffiliateProgram} />
       <Route path="/free-tools" component={FreeTools} />
