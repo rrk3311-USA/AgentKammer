@@ -31,12 +31,6 @@ export function Footer() {
                     Investing
                   </Link>
                 </li>
-                <li>
-                  <Link href="/refinancing" className="hover:text-foreground transition-colors flex items-center gap-1">
-                    Refinancing
-                    <span className="text-[0.6rem] text-[#d4af37] font-semibold">RATE WATCH</span>
-                  </Link>
-                </li>
               </ul>
             </div>
             <div>

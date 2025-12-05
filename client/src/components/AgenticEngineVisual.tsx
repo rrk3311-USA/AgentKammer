@@ -68,7 +68,52 @@ export function AgenticEngineVisual() {
           })}
         </div>
         
-        {/* Animation styles for code waterfall */}
+        {/* Floating category labels - Desktop */}
+        <div className="hidden md:block absolute inset-0">
+          {categories.map((cat, i) => {
+            const isActive = activeIndex === i;
+            const positions = [
+              { top: '12%', left: '50%', transform: 'translateX(-50%)' },
+              { top: '32%', right: '6%' },
+              { top: '52%', right: '8%' },
+              { bottom: '32%', left: '6%' },
+              { bottom: '18%', left: '50%', transform: 'translateX(-50%)' },
+            ];
+            
+            return (
+              <div
+                key={i}
+                className={`absolute transition-all duration-700 ${
+                  isActive ? 'opacity-100 scale-110' : 'opacity-50 scale-100'
+                }`}
+                style={positions[i]}
+              >
+                <div className={`relative ${isActive ? 'pb-1' : ''}`}>
+                  <span 
+                    className={`text-base font-semibold tracking-wide transition-all duration-500 whitespace-nowrap inline-block ${
+                      isActive 
+                        ? 'text-[#d4af37] drop-shadow-[0_0_12px_rgba(212,175,55,0.9)]' 
+                        : 'text-white/80'
+                    }`}
+                  >
+                    {cat.label}
+                  </span>
+                  {/* Underline glow when beam hits */}
+                  {isActive && (
+                    <div 
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#d4af37] to-transparent"
+                      style={{
+                        animation: `underlineGlow 0.6s ease-out`,
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Animation styles for code waterfall and beams */}
         <style>{`
           @keyframes thoughtFlow0 {
             0% {
@@ -129,41 +174,134 @@ export function AgenticEngineVisual() {
               opacity: 0;
             }
           }
+
+          @keyframes beamShoot {
+            0% {
+              opacity: 0;
+              stroke-dasharray: 100;
+              stroke-dashoffset: 100;
+            }
+            30% {
+              opacity: 0.8;
+              stroke-dasharray: 100;
+              stroke-dashoffset: 0;
+            }
+            70% {
+              opacity: 0.3;
+              stroke-dasharray: 100;
+              stroke-dashoffset: 0;
+            }
+            100% {
+              opacity: 0;
+              stroke-dasharray: 100;
+              stroke-dashoffset: 0;
+            }
+          }
+
+          @keyframes beamShootGlow {
+            0% {
+              opacity: 0;
+              stroke-dasharray: 100;
+              stroke-dashoffset: 100;
+            }
+            25% {
+              opacity: 0.4;
+              stroke-dasharray: 100;
+              stroke-dashoffset: 0;
+            }
+            60% {
+              opacity: 0.1;
+              stroke-dasharray: 100;
+              stroke-dashoffset: 0;
+            }
+            100% {
+              opacity: 0;
+              stroke-dasharray: 100;
+              stroke-dashoffset: 0;
+            }
+          }
+
+          @keyframes underlineGlow {
+            0% {
+              opacity: 0;
+              transform: scaleX(0);
+            }
+            50% {
+              opacity: 1;
+              transform: scaleX(1);
+            }
+            100% {
+              opacity: 0;
+              transform: scaleX(1);
+            }
+          }
         `}</style>
         
-        {/* Floating category labels - Desktop */}
-        <div className="hidden md:block absolute inset-0">
-          {categories.map((cat, i) => {
-            const isActive = activeIndex === i;
-            const positions = [
-              { top: '12%', left: '50%', transform: 'translateX(-50%)' },
-              { top: '32%', right: '6%' },
-              { top: '52%', right: '8%' },
-              { bottom: '32%', left: '6%' },
-              { bottom: '18%', left: '50%', transform: 'translateX(-50%)' },
+        {/* Shooting energy beams from brain to categories */}
+        <svg 
+          className="hidden md:block absolute inset-0 w-full h-full"
+          style={{ pointerEvents: 'none' }}
+          data-testid="brain-beams-svg"
+        >
+          <defs>
+            <filter id="beamGlow">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+              <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          
+          {categories.map((_, i) => {
+            const startX = '50%';
+            const startY = '50%';
+            
+            // Calculate end points for each category
+            const endPoints = [
+              { x: '50%', y: '12%' },   // top center
+              { x: '94%', y: '32%' },   // right upper
+              { x: '92%', y: '52%' },   // right lower
+              { x: '6%', y: '68%' },    // left lower
+              { x: '50%', y: '82%' },   // bottom center
             ];
             
+            const end = endPoints[i];
+            const delay = i * 0.4;
+            
             return (
-              <div
-                key={i}
-                className={`absolute transition-all duration-700 ${
-                  isActive ? 'opacity-100 scale-110' : 'opacity-50 scale-100'
-                }`}
-                style={positions[i]}
-              >
-                <span 
-                  className={`text-base font-semibold tracking-wide transition-all duration-500 whitespace-nowrap ${
-                    isActive 
-                      ? 'text-[#d4af37] drop-shadow-[0_0_12px_rgba(212,175,55,0.9)]' 
-                      : 'text-white/80'
-                  }`}
-                >
-                  {cat.label}
-                </span>
-              </div>
+              <g key={i}>
+                <line
+                  x1={startX}
+                  y1={startY}
+                  x2={end.x}
+                  y2={end.y}
+                  stroke="#d4af37"
+                  strokeWidth="1.5"
+                  opacity="0"
+                  filter="url(#beamGlow)"
+                  style={{
+                    animation: `beamShoot ${3.5}s ease-out ${delay}s infinite`,
+                  }}
+                />
+                {/* Glow line for extra effect */}
+                <line
+                  x1={startX}
+                  y1={startY}
+                  x2={end.x}
+                  y2={end.y}
+                  stroke="#d4af37"
+                  strokeWidth="3"
+                  opacity="0"
+                  filter="url(#beamGlow)"
+                  style={{
+                    animation: `beamShootGlow ${3.5}s ease-out ${delay}s infinite`,
+                  }}
+                />
+              </g>
             );
           })}
-        </div>
+        </svg>
 
         {/* Floating category labels - Mobile (simplified layout) */}
         <div className="md:hidden absolute inset-x-4 top-4 bottom-16">
