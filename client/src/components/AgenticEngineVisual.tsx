@@ -66,9 +66,10 @@ export function AgenticEngineVisual() {
 
   return (
     <div 
-      className="relative w-full bg-gradient-to-br from-[#0a1628] via-[#0d1a2d] to-[#0a1628] rounded-2xl border border-[#d4af37]/30 overflow-hidden p-6" 
+      className="relative w-full bg-gradient-to-br from-[#0a1628] via-[#0d1a2d] to-[#0a1628] rounded-2xl border border-[#d4af37]/30 overflow-hidden p-8 md:p-10" 
       data-testid="agentic-engine-visual"
     >
+      {/* Dot pattern background */}
       <div 
         className="absolute inset-0 opacity-10"
         style={{
@@ -77,41 +78,46 @@ export function AgenticEngineVisual() {
         }}
       />
 
-      <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
-        {/* AI Engine Brain */}
-        <div className="flex flex-col items-center shrink-0">
+      <div className="relative z-10 flex flex-col md:flex-row items-center gap-10 md:gap-12">
+        {/* AI Engine Brain - with extra padding wrapper */}
+        <div className="flex flex-col items-center shrink-0 p-4">
           <div className="relative">
+            {/* Outer spinning ring */}
             <div className="absolute -inset-4 border border-[#d4af37]/30 rounded-full animate-spin" style={{ animationDuration: '15s' }} />
-            <div className="absolute -inset-8 border border-[#d4af37]/15 rounded-full animate-spin" style={{ animationDuration: '25s', animationDirection: 'reverse' }} />
+            {/* Outermost spinning ring */}
+            <div className="absolute -inset-7 border border-[#d4af37]/15 rounded-full animate-spin" style={{ animationDuration: '25s', animationDirection: 'reverse' }} />
             
-            <div className="w-16 h-16 bg-gradient-to-br from-[#d4af37] to-[#c9a227] rounded-full flex items-center justify-center shadow-lg shadow-[#d4af37]/40">
-              <Brain className="w-8 h-8 text-[#0a1628]" />
+            {/* Main brain circle */}
+            <div className="w-14 h-14 bg-gradient-to-br from-[#d4af37] to-[#c9a227] rounded-full flex items-center justify-center shadow-lg shadow-[#d4af37]/40">
+              <Brain className="w-7 h-7 text-[#0a1628]" />
             </div>
             
+            {/* Ping effect */}
             <div className="absolute -inset-1 border-2 border-[#d4af37]/60 rounded-full animate-ping" style={{ animationDuration: '2s' }} />
           </div>
-          <span className="text-[#d4af37] font-semibold text-xs mt-4">AI Engine</span>
+          <span className="text-[#d4af37] font-semibold text-xs mt-5">AI Engine</span>
         </div>
 
         {/* Categories Grid */}
         <div className="flex-1 w-full">
-          <div className="space-y-3">
+          <div className="space-y-2">
             {categories.map((cat, i) => {
               const Icon = cat.icon;
               const isActive = activeCategory === i;
-              const pulseProgress = pulses.find(p => p.pathIndex === i)?.progress || 0;
+              const activePulse = pulses.find(p => p.pathIndex === i);
+              const pulseProgress = activePulse?.progress || 0;
               
               return (
                 <div key={i} className="relative">
-                  {/* Connection line with pulse */}
-                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[2px] pointer-events-none">
+                  {/* Connection line - positioned UNDER the card with z-0 */}
+                  <div className="absolute z-0 left-0 bottom-0 w-full h-[2px] pointer-events-none">
                     <div 
-                      className={`h-full transition-all duration-300 ${isActive ? 'bg-[#d4af37]/50' : 'bg-[#d4af37]/20'}`}
+                      className={`h-full transition-all duration-300 ${isActive ? 'bg-[#d4af37]/40' : 'bg-[#d4af37]/15'}`}
                     />
                     {/* Animated pulse dot on line */}
-                    {pulseProgress > 0 && pulseProgress < 100 && (
+                    {activePulse && pulseProgress > 0 && pulseProgress < 100 && (
                       <div 
-                        className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-[#ffd700] rounded-full shadow-lg shadow-[#d4af37]/60"
+                        className="absolute top-1/2 w-2.5 h-2.5 bg-[#ffd700] rounded-full shadow-lg shadow-[#d4af37]/60"
                         style={{ 
                           left: `${pulseProgress}%`,
                           transform: 'translate(-50%, -50%)',
@@ -122,20 +128,20 @@ export function AgenticEngineVisual() {
                     )}
                   </div>
                   
-                  {/* Category card */}
+                  {/* Category card - positioned ABOVE the line with z-10 */}
                   <div 
-                    className={`relative flex items-center gap-3 p-3 rounded-lg transition-all duration-300 ${
+                    className={`relative z-10 flex items-center gap-3 py-2.5 px-3 rounded-lg transition-all duration-300 ${
                       isActive 
-                        ? 'bg-[#d4af37]/10 border border-[#d4af37]/40' 
-                        : 'bg-white/5 border border-transparent'
+                        ? 'bg-[#0d1a2d] border border-[#d4af37]/40' 
+                        : 'bg-[#0d1a2d]'
                     }`}
                   >
                     <div 
-                      className={`w-10 h-10 shrink-0 bg-[#0f1d32] border rounded-lg flex items-center justify-center transition-all duration-300 ${
-                        isActive ? 'border-[#d4af37] shadow-lg shadow-[#d4af37]/30' : 'border-[#d4af37]/40'
+                      className={`w-9 h-9 shrink-0 bg-[#0a1628] border rounded-lg flex items-center justify-center transition-all duration-300 ${
+                        isActive ? 'border-[#d4af37] shadow-md shadow-[#d4af37]/20' : 'border-[#d4af37]/30'
                       }`}
                     >
-                      <Icon className={`w-5 h-5 transition-colors duration-300 ${isActive ? 'text-[#ffd700]' : 'text-[#d4af37]'}`} />
+                      <Icon className={`w-4 h-4 transition-colors duration-300 ${isActive ? 'text-[#ffd700]' : 'text-[#d4af37]'}`} />
                     </div>
                     <span className={`text-sm font-medium transition-colors duration-300 ${isActive ? 'text-white' : 'text-white/70'}`}>
                       {cat.label}
@@ -154,7 +160,7 @@ export function AgenticEngineVisual() {
       </div>
 
       {/* Status indicators */}
-      <div className="relative z-10 flex justify-between items-center mt-6 pt-4 border-t border-[#d4af37]/20">
+      <div className="relative z-10 flex justify-between items-center mt-8 pt-4 border-t border-[#d4af37]/20">
         <div className="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full">
           <Cpu className="w-3.5 h-3.5 text-[#d4af37] animate-pulse" />
           <span className="text-[#d4af37]/90 text-xs font-mono">Analyzing...</span>
