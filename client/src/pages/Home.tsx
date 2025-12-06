@@ -104,33 +104,15 @@ export default function Home() {
                     <ActivateAgentMode />
                   </Link>
                 </div>
-                <div className="flex-1 flex flex-col">
-                  <button 
-                    className="h-12 rounded-lg bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-bold text-sm tracking-widest uppercase hover:opacity-90 transition-opacity"
-                    data-testid="button-browse-categories"
-                    onClick={() => {
-                      document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                  >
-                    Browse Categories
-                  </button>
-                  {/* Breathing pixel bar - ON state (green) */}
-                  <div className="h-2 w-full bg-[#0a1628] rounded-b-lg mt-0 overflow-hidden">
-                    <div 
-                      className="h-full w-full"
-                      style={{
-                        backgroundColor: '#22c55e',
-                        animation: 'breathing 2s ease-in-out infinite'
-                      }}
-                    />
-                  </div>
-                  <style>{`
-                    @keyframes breathing {
-                      0%, 100% { opacity: 0.3; }
-                      50% { opacity: 1; }
-                    }
-                  `}</style>
-                </div>
+                <button 
+                  className="h-12 rounded-lg bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-bold text-sm tracking-widest uppercase hover:opacity-90 transition-opacity"
+                  data-testid="button-browse-categories"
+                  onClick={() => {
+                    document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Browse Categories
+                </button>
               </div>
             </div>
 

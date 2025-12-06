@@ -2,10 +2,16 @@ export function ActivateAgentMode() {
   return (
     <div className="w-full">
       <button
-        className="w-full h-12 rounded-lg bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-bold text-sm tracking-widest uppercase hover:opacity-90 transition-opacity"
+        className="w-full h-12 rounded-lg bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-bold text-sm tracking-widest uppercase hover:opacity-90 transition-opacity flex items-center justify-center"
         data-testid="button-activate-agent-mode"
       >
-        Activate Agent Mode
+        <span
+          style={{
+            animation: 'breathing 2s ease-in-out infinite'
+          }}
+        >
+          Activate Agent Mode
+        </span>
       </button>
       {/* Breathing pixel bar - OFF state (red) */}
       <div className="h-2 w-full bg-[#0a1628] rounded-b-lg mt-0 overflow-hidden">
