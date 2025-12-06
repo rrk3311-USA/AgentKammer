@@ -15,24 +15,12 @@ export function HeroSearch() {
       
       {/* Content */}
       <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
-        <h1 className="font-serif text-4xl lg:text-5xl font-bold text-white mb-4">
+        <h1 className="font-serif text-4xl lg:text-5xl font-bold text-white mb-6">
           Your Perfect Home<br />Discovered
         </h1>
         
-        {/* Luxury Markets */}
-        <div className="flex items-center justify-center gap-3 mb-6">
-          <span className="text-sm font-medium text-white/80 tracking-wide">LUXURY PROPERTIES IN</span>
-          <div className="flex items-center gap-2 font-serif text-lg font-semibold" style={{ color: '#d4af37' }}>
-            <span>NYC</span>
-            <span className="text-white/60">·</span>
-            <span>CA</span>
-            <span className="text-white/60">·</span>
-            <span>NV</span>
-          </div>
-        </div>
-        
         {/* Description */}
-        <p className="text-white/90 text-base lg:text-lg leading-relaxed mb-6 max-w-2xl mx-auto font-light">
+        <p className="text-white/90 text-base lg:text-lg leading-relaxed mb-12 max-w-2xl mx-auto font-light">
           Leverage agentic AI to do the heavy lifting for you. Agent Kammer will automatically scan multiple luxury markets for you every second of the day. Set your alert, set your preferences and beat your competition to your dream house.
         </p>
         
