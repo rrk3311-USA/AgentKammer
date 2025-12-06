@@ -112,55 +112,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How the Agentic Engine Works */}
-      <section className="py-6 lg:py-8 bg-background">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-4">
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-1">
-              The Agentic Advantage
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
-              Three simple steps to unlock personalized financial recommendations
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card className="p-4 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-1">
-              <div className="absolute top-2 right-2 text-5xl font-bold text-muted/10">1</div>
-              <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-4">
-                <Users className="h-7 w-7 text-[#d4af37]" />
-              </div>
-              <h3 className="font-serif text-lg font-semibold mb-2">Build Your Agentic Profile</h3>
-              <p className="text-muted-foreground text-sm">
-                Income, credit band, location, goals - one time. Your profile powers recommendations across all categories.
-              </p>
-            </Card>
-
-            <Card className="p-4 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-2">
-              <div className="absolute top-2 right-2 text-5xl font-bold text-muted/10">2</div>
-              <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-4">
-                <Brain className="h-7 w-7 text-[#d4af37]" />
-              </div>
-              <h3 className="font-serif text-lg font-semibold mb-2">AI + Compute Analyze the Field</h3>
-              <p className="text-muted-foreground text-sm">
-                We use LLM agents to screen hundreds of partner offers across categories, ranking them by your fit.
-              </p>
-            </Card>
-
-            <Card className="p-4 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-3">
-              <div className="absolute top-2 right-2 text-5xl font-bold text-muted/10">3</div>
-              <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-4">
-                <Zap className="h-7 w-7 text-[#d4af37]" />
-              </div>
-              <h3 className="font-serif text-lg font-semibold mb-2">You Choose - We Route You</h3>
-              <p className="text-muted-foreground text-sm">
-                Launch a module and go straight to the best matched lender, card, or tool. No guesswork.
-              </p>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* Flagship Services Hero - PS5 Style */}
       <section id="categories" className="relative py-10 lg:py-16 overflow-hidden">
         <div 
@@ -258,6 +209,55 @@ export default function Home() {
 
             {/* Right Column - Hero Image (shown via background) */}
             <div className="hidden lg:block" />
+          </div>
+        </div>
+      </section>
+
+      {/* How the Agentic Engine Works */}
+      <section className="py-6 lg:py-8 bg-background">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-4">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-1">
+              The Agentic Advantage
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
+              Three simple steps to unlock personalized financial recommendations
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Card className="p-4 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-1">
+              <div className="absolute top-2 right-2 text-5xl font-bold text-muted/10">1</div>
+              <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-4">
+                <Users className="h-7 w-7 text-[#d4af37]" />
+              </div>
+              <h3 className="font-serif text-lg font-semibold mb-2">Build Your Agentic Profile</h3>
+              <p className="text-muted-foreground text-sm">
+                Income, credit band, location, goals - one time. Your profile powers recommendations across all categories.
+              </p>
+            </Card>
+
+            <Card className="p-4 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-2">
+              <div className="absolute top-2 right-2 text-5xl font-bold text-muted/10">2</div>
+              <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-4">
+                <Brain className="h-7 w-7 text-[#d4af37]" />
+              </div>
+              <h3 className="font-serif text-lg font-semibold mb-2">AI + Compute Analyze the Field</h3>
+              <p className="text-muted-foreground text-sm">
+                We use LLM agents to screen hundreds of partner offers across categories, ranking them by your fit.
+              </p>
+            </Card>
+
+            <Card className="p-4 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-3">
+              <div className="absolute top-2 right-2 text-5xl font-bold text-muted/10">3</div>
+              <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-4">
+                <Zap className="h-7 w-7 text-[#d4af37]" />
+              </div>
+              <h3 className="font-serif text-lg font-semibold mb-2">You Choose - We Route You</h3>
+              <p className="text-muted-foreground text-sm">
+                Launch a module and go straight to the best matched lender, card, or tool. No guesswork.
+              </p>
+            </Card>
           </div>
         </div>
       </section>
