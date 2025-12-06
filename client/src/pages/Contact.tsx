@@ -93,13 +93,10 @@ export default function Contact() {
             <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
               Get in Touch
             </h1>
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              Agentic Deal Procurement
-            </p>
+            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">Questions About Our Ai  Deal Procurement?</p>
           </div>
         </div>
       </section>
-
       {/* Contact Information & Form Section */}
       <section className="py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-6">
@@ -246,7 +243,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }
