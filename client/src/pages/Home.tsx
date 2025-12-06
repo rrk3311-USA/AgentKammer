@@ -28,7 +28,7 @@ import {
   RefreshCw
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
-import { AgentModeToggle } from "@/components/AgentModeToggle";
+import { ActivateAgentMode } from "@/components/ActivateAgentMode";
 import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
 import conciergeImage from '@assets/generated_images/concierge_agent_top_hat_luxury_interior.png';
 
@@ -101,7 +101,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start max-w-2xl">
                 <div className="flex-1">
                   <Link href="/profile">
-                    <AgentModeToggle />
+                    <ActivateAgentMode />
                   </Link>
                 </div>
                 <Button 
