@@ -214,89 +214,71 @@ export default function Home() {
       </section>
 
       {/* How the Agentic Engine Works */}
-      <section className="py-6 lg:py-8 bg-background">
+      <section className="py-12 lg:py-16 bg-background">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-4">
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-1">
+          <div className="text-center mb-12">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3">
               The Agentic Advantage
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
+            <p className="text-muted-foreground max-w-2xl mx-auto">
               Three simple steps to unlock personalized financial recommendations
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card className="p-4 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-1">
-              <div className="absolute top-2 right-2 text-5xl font-bold text-muted/10">1</div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            {/* Connecting Lines - Desktop Only */}
+            <div className="hidden md:block absolute top-8 left-1/4 right-1/4 h-1 bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent" style={{ width: 'calc(66.66% - 80px)', left: '50%', transform: 'translateX(-50%)' }} />
+
+            {/* Step 1 */}
+            <div className="flex flex-col items-center relative z-10" data-testid="card-step-1">
               <div 
-                className="w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4 relative overflow-hidden"
+                className="w-20 h-20 rounded-full flex items-center justify-center mb-6 text-3xl font-bold text-[#0a1628] font-serif"
                 style={{
-                  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
-                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
+                  background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)',
+                  boxShadow: '0 8px 24px rgba(212, 175, 55, 0.3)'
                 }}
               >
-                <Users 
-                  className="h-7 w-7 relative z-10" 
-                  style={{
-                    color: '#d4af37',
-                    filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
-                    textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
-                  }}
-                />
+                1
               </div>
-              <h3 className="font-serif text-lg font-semibold mb-2">Build Your Agentic Profile</h3>
-              <p className="text-muted-foreground text-sm">
+              <h3 className="font-serif text-xl font-semibold mb-3 text-foreground">Build Your Agentic Profile</h3>
+              <p className="text-muted-foreground text-sm text-center">
                 Income, credit band, location, goals - one time. Your profile powers recommendations across all categories.
               </p>
-            </Card>
+            </div>
 
-            <Card className="p-4 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-2">
-              <div className="absolute top-2 right-2 text-5xl font-bold text-muted/10">2</div>
+            {/* Step 2 */}
+            <div className="flex flex-col items-center relative z-10" data-testid="card-step-2">
               <div 
-                className="w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4 relative overflow-hidden"
+                className="w-20 h-20 rounded-full flex items-center justify-center mb-6 text-3xl font-bold text-[#0a1628] font-serif"
                 style={{
-                  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
-                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
+                  background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)',
+                  boxShadow: '0 8px 24px rgba(212, 175, 55, 0.3)'
                 }}
               >
-                <Brain 
-                  className="h-7 w-7 relative z-10" 
-                  style={{
-                    color: '#d4af37',
-                    filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
-                    textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
-                  }}
-                />
+                2
               </div>
-              <h3 className="font-serif text-lg font-semibold mb-2">AI + Compute Analyze the Field</h3>
-              <p className="text-muted-foreground text-sm">
+              <h3 className="font-serif text-xl font-semibold mb-3 text-foreground">AI + Compute Analyze the Field</h3>
+              <p className="text-muted-foreground text-sm text-center">
                 We use LLM agents to screen hundreds of partner offers across categories, ranking them by your fit.
               </p>
-            </Card>
+            </div>
 
-            <Card className="p-4 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-3">
-              <div className="absolute top-2 right-2 text-5xl font-bold text-muted/10">3</div>
+            {/* Step 3 */}
+            <div className="flex flex-col items-center relative z-10" data-testid="card-step-3">
               <div 
-                className="w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4 relative overflow-hidden"
+                className="w-20 h-20 rounded-full flex items-center justify-center mb-6 text-3xl font-bold text-[#0a1628] font-serif"
                 style={{
-                  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
-                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
+                  background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)',
+                  boxShadow: '0 8px 24px rgba(212, 175, 55, 0.3)'
                 }}
               >
-                <Zap 
-                  className="h-7 w-7 relative z-10" 
-                  style={{
-                    color: '#d4af37',
-                    filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
-                    textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
-                  }}
-                />
+                3
               </div>
-              <h3 className="font-serif text-lg font-semibold mb-2">You Choose - We Route You</h3>
-              <p className="text-muted-foreground text-sm">
+              <h3 className="font-serif text-xl font-semibold mb-3 text-foreground">You Choose - We Route You</h3>
+              <p className="text-muted-foreground text-sm text-center">
                 Launch a module and go straight to the best matched lender, card, or tool. No guesswork.
               </p>
-            </Card>
+            </div>
           </div>
         </div>
       </section>
