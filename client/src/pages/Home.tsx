@@ -191,50 +191,54 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Mascot Welcome */}
-          <div className="mb-12 flex justify-center">
-            <MascotWelcome />
-          </div>
+          {/* Two-Column Flagship Services Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start mb-12">
+            {/* Left Column - Character (30% width / 2 cols out of 5) */}
+            <div className="lg:col-span-2 flex justify-center lg:justify-start">
+              <MascotWelcome />
+            </div>
 
-          {/* Flagship Services - Large Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            {PRIMARY_CATEGORIES.map((category) => {
-              const IconComponent = categoryIcons[category.icon];
-              return (
-                <Link key={category.id} href={`/${category.id}`}>
-                  <Card 
-                    className="p-6 bg-[#0f1d32] border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group"
-                    data-testid={`card-category-${category.id}`}
-                  >
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="w-14 h-14 rounded-xl bg-[#d4af37]/15 flex items-center justify-center">
-                        <IconComponent className="h-7 w-7 text-[#d4af37]" />
+            {/* Right Column - Offers (70% width / 3 cols out of 5) */}
+            <div className="lg:col-span-3 space-y-6">
+              {/* Credit Cards Offer */}
+              {PRIMARY_CATEGORIES.map((category) => {
+                const IconComponent = categoryIcons[category.icon];
+                return (
+                  <Link key={category.id} href={`/${category.id}`}>
+                    <Card 
+                      className="p-6 bg-[#0f1d32] border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group"
+                      data-testid={`card-category-${category.id}`}
+                    >
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="w-14 h-14 rounded-xl bg-[#d4af37]/15 flex items-center justify-center">
+                          <IconComponent className="h-7 w-7 text-[#d4af37]" />
+                        </div>
+                        <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
                       </div>
-                      <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
+                      <h3 className="font-serif text-xl font-semibold text-white mb-2">{category.name}</h3>
+                      <p className="text-white/60 text-sm">{category.description}</p>
+                    </Card>
+                  </Link>
+                );
+              })}
+
+              {/* Refinancing Rate Watch Card */}
+              <Link href="/refinancing">
+                <Card 
+                  className="p-6 bg-[#0f1d32] border-[#d4af37]/40 hover:border-[#d4af37] transition-all cursor-pointer h-full group"
+                  data-testid="card-category-refinancing"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="w-14 h-14 rounded-xl bg-[#d4af37]/20 flex items-center justify-center">
+                      <RefreshCw className="h-7 w-7 text-[#d4af37]" />
                     </div>
-                    <h3 className="font-serif text-xl font-semibold text-white mb-2">{category.name}</h3>
-                    <p className="text-white/60 text-sm">{category.description}</p>
-                  </Card>
-                </Link>
-              );
-            })}
-            
-            {/* Refinancing Rate Watch Card */}
-            <Link href="/refinancing">
-              <Card 
-                className="p-6 bg-[#0f1d32] border-[#d4af37]/40 hover:border-[#d4af37] transition-all cursor-pointer h-full group"
-                data-testid="card-category-refinancing"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-14 h-14 rounded-xl bg-[#d4af37]/20 flex items-center justify-center">
-                    <RefreshCw className="h-7 w-7 text-[#d4af37]" />
+                    <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
                   </div>
-                  <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
-                </div>
-                <h3 className="font-serif text-xl font-semibold text-white mb-2">Refinancing Rate Watch</h3>
-                <p className="text-white/60 text-sm">Monitor mortgage, auto, student, personal, and cash-out refinancing rates 24/7</p>
-              </Card>
-            </Link>
+                  <h3 className="font-serif text-xl font-semibold text-white mb-2">Refinancing Rate Watch</h3>
+                  <p className="text-white/60 text-sm">Monitor mortgage, auto, student, personal, and cash-out refinancing rates 24/7</p>
+                </Card>
+              </Link>
+            </div>
           </div>
 
           {/* Credit Card Comparison Module */}
