@@ -340,7 +340,7 @@ export function AgenticEngineVisual() {
               <span className="hidden sm:inline">AI-Powered Multi-Category Financial Intelligence</span>
               <span className="sm:hidden">AI-Powered Financial Intelligence</span>
             </span>
-            <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-[#d4af37] rounded-full animate-pulse shrink-0" />
+            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full animate-pulse shrink-0 bg-[#0b9c26]" />
           </div>
         </div>
       </div>
