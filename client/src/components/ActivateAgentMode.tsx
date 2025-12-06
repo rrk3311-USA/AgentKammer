@@ -7,10 +7,22 @@ export function ActivateAgentMode() {
       >
         Activate Agent Mode
       </button>
-      {/* Progress bar */}
-      <div className="h-1 w-full bg-[#0a1628]/20 rounded-b-lg mt-0.5 overflow-hidden">
-        <div className="h-full bg-gradient-to-r from-[#d4af37] to-[#f4d03f] animate-pulse" style={{ width: '100%' }} />
+      {/* Breathing pixel bar - OFF state (red) */}
+      <div className="h-2 w-full bg-[#0a1628] rounded-b-lg mt-0 overflow-hidden">
+        <div 
+          className="h-full w-full"
+          style={{
+            backgroundColor: '#ef4444',
+            animation: 'breathing 2s ease-in-out infinite'
+          }}
+        />
       </div>
+      <style>{`
+        @keyframes breathing {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }
