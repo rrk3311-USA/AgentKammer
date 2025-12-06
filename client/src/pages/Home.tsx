@@ -1,92 +1,56 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
 import { Link } from "wouter";
 import { 
   CreditCard, 
-  Wallet, 
   Building2, 
-  Landmark, 
-  Shield, 
   TrendingUp,
-  Target,
-  GraduationCap,
-  Calculator,
-  Lock,
-  PieChart,
-  Gift,
-  Home as HomeIcon,
   Sparkles,
   ArrowRight,
   Brain,
-  Zap,
-  CheckCircle2,
   Users,
+  RefreshCw,
   BarChart3,
-  RefreshCw
+  Briefcase,
+  LineChart
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
-import { ActivateAgentMode } from "@/components/ActivateAgentMode";
 import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
 import conciergeImage from '@assets/generated_images/concierge_agent_top_hat_luxury_interior.png';
-import agentCameraImage from '@assets/generated_images/financial_agent_with_camera.png';
-import dataVizImage from '@assets/generated_images/financial_data_visualization.png';
 import airportLoungeImage from '@assets/generated_images/luxury_airport_lounge.png';
 import dinningImage from '@assets/generated_images/fine_dining_experience.png';
 import travelImage from '@assets/generated_images/luxury_travel_destination.png';
 
-const categoryIcons: Record<string, any> = {
-  'CreditCard': CreditCard,
-  'Wallet': Wallet,
-  'Building2': Building2,
-  'Landmark': Landmark,
-  'Shield': Shield,
-  'TrendingUp': TrendingUp,
-  'Target': Target,
-  'GraduationCap': GraduationCap,
-  'Calculator': Calculator,
-  'Lock': Lock,
-  'PieChart': PieChart,
-  'Gift': Gift,
-  'Home': HomeIcon,
+const ICON_WRAPPER_STYLE = {
+  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
+  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
 };
 
-const PRIMARY_CATEGORIES = [
-  { id: 'credit-cards', name: 'Credit Cards', icon: 'CreditCard', description: 'AI-matched cards based on your profile and goals', color: 'from-blue-500/20 to-indigo-500/20' },
-  { id: 'investing', name: 'Investment Accounts', icon: 'TrendingUp', description: 'Brokerages, robo-advisors, and investment platforms', color: 'from-green-500/20 to-emerald-500/20' },
-];
+const GOLD_ICON_STYLE = {
+  color: '#d4af37',
+  filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))'
+};
 
-const SECONDARY_CATEGORIES = [
-  { id: 'credit-builder', name: 'Credit Builder', icon: 'Target', description: 'Build or rebuild your credit score' },
-  { id: 'student-finance', name: 'Student Finance', icon: 'GraduationCap', description: 'Student loans, refinancing, and banking' },
-];
+const GOLD_NUMBER_STYLE = {
+  background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)',
+  boxShadow: '0 8px 24px rgba(212, 175, 55, 0.3)'
+};
 
-const SUPPORTING_CATEGORIES = [
-  { id: 'tax-tools', name: 'Tax Tools', icon: 'Calculator', description: 'Free and paid tax filing solutions' },
-  { id: 'identity-security', name: 'Identity & Security', icon: 'Lock', description: 'Identity protection and credit monitoring' },
-  { id: 'budgeting-apps', name: 'Budgeting Apps', icon: 'PieChart', description: 'Budgeting and money management' },
-  { id: 'rewards-cashback', name: 'Rewards & Cashback', icon: 'Gift', description: 'Cashback apps and rewards platforms' },
-];
+const CTA_BUTTON_CLASS = "px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90";
 
 export default function Home() {
-  const [email, setEmail] = useState("");
-
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-[#0a1628] via-[#0f1d32] to-[#0a1628] py-10 lg:py-16 overflow-hidden">
-        {/* Animated background elements */}
+      {/* SECTION 1: Hero - Dark Navy */}
+      <section className="relative bg-gradient-to-b from-[#0a1628] via-[#0f1d32] to-[#0a1628] py-12 lg:py-16 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-[#d4af37]/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#d4af37]/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-[#d4af37]/5 to-transparent rounded-full" />
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            {/* Left: Text Content */}
             <div className="text-center lg:text-left">
               <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-6" data-testid="badge-hero">
                 <Sparkles className="h-3 w-3 mr-1" />
@@ -98,13 +62,19 @@ export default function Home() {
                 <span className="text-[#d4af37]">Financial Outcomes</span>
               </h1>
               
-              <p className="text-lg lg:text-xl text-white/80 mb-4 leading-relaxed">
-                One profile. Our Agentic Comparison Engine uses LLMs + compute to analyze offers and force banks, lenders, credit cards, and financial products to{" "}
+              <p className="text-lg text-white/80 mb-6 leading-relaxed max-w-xl">
+                One profile. Our Agentic Comparison Engine uses LLMs + compute to analyze offers and force banks, lenders, and financial products to{" "}
                 <span className="text-[#d4af37] font-semibold">compete for you</span>.
               </p>
+
+              <Link href="/profile">
+                <Button size="lg" className={CTA_BUTTON_CLASS} data-testid="button-hero-cta">
+                  <Brain className="h-5 w-5 mr-2" />
+                  Build Your Profile
+                </Button>
+              </Link>
             </div>
 
-            {/* Right: Animated AI Engine Visual */}
             <div className="relative">
               <AgenticEngineVisual />
             </div>
@@ -112,574 +82,248 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Flagship Services Hero - PS5 Style */}
-      <section id="categories" className="relative py-10 lg:py-16 overflow-hidden">
+      {/* SECTION 2: Flagship Services - Image Background */}
+      <section id="categories" className="relative py-12 lg:py-16 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url(${heroImage})`,
-            backgroundPosition: 'right center'
-          }}
+          style={{ backgroundImage: `url(${heroImage})`, backgroundPosition: 'right center' }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/85 to-transparent" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            {/* Left Column - Content & Offers */}
-            <div className="space-y-4">
-              <div className="space-y-3">
-                <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Apply Your Agentic Advantage</Badge>
-                <h2 className="font-serif text-4xl lg:text-5xl font-bold text-white leading-tight">
-                  Flagship Services
-                </h2>
-                <p className="text-white/70 text-lg">
-                  Choose a service to see AI-ranked products matched to your profile
-                </p>
-              </div>
+          <div className="max-w-2xl">
+            <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-4">Flagship Services</Badge>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-3">
+              Choose Your Category
+            </h2>
+            <p className="text-white/70 text-lg mb-8">
+              AI-ranked products matched to your profile
+            </p>
 
-              {/* Offers Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
-                {/* Credit Cards Offer */}
-                {PRIMARY_CATEGORIES.map((category) => {
-                  const IconComponent = categoryIcons[category.icon];
-                  return (
-                    <Link key={category.id} href={`/${category.id}`}>
-                      <Card 
-                        className="p-6 bg-[#0f1d32]/95 border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group backdrop-blur-sm"
-                        data-testid={`card-category-${category.id}`}
-                      >
-                        <div className="flex items-start justify-between mb-4">
-                          <div 
-                            className="w-12 h-12 rounded-lg flex items-center justify-center relative overflow-hidden"
-                            style={{
-                              background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
-                              boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
-                            }}
-                          >
-                            <IconComponent 
-                              className="h-6 w-6 relative z-10" 
-                              style={{
-                                color: '#d4af37',
-                                filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
-                                textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
-                              }}
-                            />
-                          </div>
-                          <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
-                        </div>
-                        <h3 className="font-serif text-lg font-semibold text-white mb-1">{category.name}</h3>
-                        <p className="text-white/60 text-sm">{category.description}</p>
-                      </Card>
-                    </Link>
-                  );
-                })}
-
-                {/* Real Estate Concierge Card */}
-                <Link href="/reverse-buyer-origination">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                { id: 'credit-cards', name: 'Credit Cards', icon: CreditCard, desc: 'AI-matched cards for your goals' },
+                { id: 'investing', name: 'Investing', icon: TrendingUp, desc: 'Brokerages & robo-advisors' },
+                { id: 'reverse-buyer-origination', name: 'Real Estate', icon: Building2, desc: 'Premium concierge services' }
+              ].map((cat) => (
+                <Link key={cat.id} href={`/${cat.id}`}>
                   <Card 
-                    className="p-6 bg-[#0f1d32]/95 border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group backdrop-blur-sm"
-                    data-testid="card-category-real-estate"
+                    className="p-5 bg-[#0f1d32]/95 border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group backdrop-blur-sm"
+                    data-testid={`card-category-${cat.id}`}
                   >
-                    <div className="flex items-start justify-between mb-4">
-                      <div 
-                        className="w-12 h-12 rounded-lg flex items-center justify-center relative overflow-hidden"
-                        style={{
-                          background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
-                          boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
-                        }}
-                      >
-                        <Building2 
-                          className="h-6 w-6 relative z-10" 
-                          style={{
-                            color: '#d4af37',
-                            filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
-                            textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
-                          }}
-                        />
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                        <cat.icon className="h-6 w-6" style={GOLD_ICON_STYLE} />
                       </div>
                       <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
                     </div>
-                    <h3 className="font-serif text-lg font-semibold text-white mb-1">Real Estate Concierge</h3>
-                    <p className="text-white/60 text-sm">Premium home buying, selling, and mortgage intelligence services</p>
+                    <h3 className="font-serif text-lg font-semibold text-white mb-1">{cat.name}</h3>
+                    <p className="text-white/60 text-sm">{cat.desc}</p>
                   </Card>
                 </Link>
-              </div>
+              ))}
             </div>
-
-            {/* Right Column - Hero Image (shown via background) */}
-            <div className="hidden lg:block" />
           </div>
         </div>
       </section>
 
-      {/* How the Agentic Engine Works */}
+      {/* SECTION 3: How It Works - Light Background */}
       <section className="py-12 lg:py-16 bg-background">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3">
+          <div className="text-center mb-10">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-foreground">
               The Agentic Advantage
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Three simple steps to unlock personalized financial recommendations
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            {/* Connecting Lines - Desktop Only */}
-            <div className="hidden md:block absolute top-8 left-1/4 right-1/4 h-1 bg-gradient-to-r from-transparent via-[#d4af37]/30 to-transparent" style={{ width: 'calc(66.66% - 80px)', left: '50%', transform: 'translateX(-50%)' }} />
-
-            {/* Step 1 */}
-            <div className="flex flex-col items-center relative z-10" data-testid="card-step-1">
-              <div 
-                className="w-20 h-20 rounded-full flex items-center justify-center mb-6 text-3xl font-bold text-[#0a1628] font-serif"
-                style={{
-                  background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)',
-                  boxShadow: '0 8px 24px rgba(212, 175, 55, 0.3)'
-                }}
-              >
-                1
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { num: '1', title: 'Build Your Profile', desc: 'Income, credit band, location, goals - one time. Your profile powers all recommendations.' },
+              { num: '2', title: 'AI Analyzes the Field', desc: 'We screen hundreds of partner offers across categories, ranking them by your fit.' },
+              { num: '3', title: 'You Choose - We Route', desc: 'Go straight to the best matched lender, card, or tool. No guesswork.' }
+            ].map((step) => (
+              <div key={step.num} className="flex flex-col items-center text-center" data-testid={`card-step-${step.num}`}>
+                <div 
+                  className="w-16 h-16 rounded-full flex items-center justify-center mb-5 text-2xl font-bold text-[#0a1628] font-serif"
+                  style={GOLD_NUMBER_STYLE}
+                >
+                  {step.num}
+                </div>
+                <h3 className="font-serif text-xl font-semibold mb-2 text-foreground">{step.title}</h3>
+                <p className="text-muted-foreground text-sm max-w-xs">{step.desc}</p>
               </div>
-              <h3 className="font-serif text-xl font-semibold mb-3 text-foreground">Build Your Agentic Profile</h3>
-              <p className="text-muted-foreground text-sm text-center">
-                Income, credit band, location, goals - one time. Your profile powers recommendations across all categories.
-              </p>
-            </div>
-
-            {/* Step 2 */}
-            <div className="flex flex-col items-center relative z-10" data-testid="card-step-2">
-              <div 
-                className="w-20 h-20 rounded-full flex items-center justify-center mb-6 text-3xl font-bold text-[#0a1628] font-serif"
-                style={{
-                  background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)',
-                  boxShadow: '0 8px 24px rgba(212, 175, 55, 0.3)'
-                }}
-              >
-                2
-              </div>
-              <h3 className="font-serif text-xl font-semibold mb-3 text-foreground">AI + Compute Analyze the Field</h3>
-              <p className="text-muted-foreground text-sm text-center">
-                We use LLM agents to screen hundreds of partner offers across categories, ranking them by your fit.
-              </p>
-            </div>
-
-            {/* Step 3 */}
-            <div className="flex flex-col items-center relative z-10" data-testid="card-step-3">
-              <div 
-                className="w-20 h-20 rounded-full flex items-center justify-center mb-6 text-3xl font-bold text-[#0a1628] font-serif"
-                style={{
-                  background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)',
-                  boxShadow: '0 8px 24px rgba(212, 175, 55, 0.3)'
-                }}
-              >
-                3
-              </div>
-              <h3 className="font-serif text-xl font-semibold mb-3 text-foreground">You Choose - We Route You</h3>
-              <p className="text-muted-foreground text-sm text-center">
-                Launch a module and go straight to the best matched lender, card, or tool. No guesswork.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Real Estate Concierge */}
-      <section className="relative py-10 lg:py-16 overflow-hidden">
-        {/* Background Image */}
+      {/* SECTION 4: Real Estate Concierge - Image Background */}
+      <section className="relative py-12 lg:py-16 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url(${conciergeImage})`,
-            backgroundPosition: 'center'
-          }}
+          style={{ backgroundImage: `url(${conciergeImage})` }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/80 to-black/85" />
+          <div className="absolute inset-0 bg-black/80" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 z-10">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div 
-                className="w-16 h-16 rounded-lg flex items-center justify-center relative overflow-hidden"
-                style={{
-                  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
-                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
-                }}
-              >
-                <Building2 
-                  className="h-8 w-8 relative z-10" 
-                  style={{
-                    color: '#d4af37',
-                    filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
-                    textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
-                  }}
-                />
+          <div className="text-center mb-10">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                <Building2 className="h-7 w-7" style={GOLD_ICON_STYLE} />
               </div>
             </div>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4 text-white">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-white">
               Real Estate Concierge
             </h2>
-            <p className="text-white/80 text-lg max-w-2xl mx-auto">
-              Premium home buying, selling, and mortgage intelligence for high-net-worth clients across the world
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {/* RBO - Reverse Buyer Origination */}
-            <div className="space-y-3">
-              <h3 className="font-serif text-xl font-semibold text-white flex items-center gap-2">
-                <Building2 className="h-5 w-5 text-[#d4af37]" />
-                Reverse Buyer Origination
-              </h3>
-              <p className="text-white/70">
-                Put the power in your hands. Sellers and their agents compete to win your business with better terms, faster closing, and more favorable conditions.
-              </p>
-              <Link href="/reverse-buyer-origination">
-                <Button size="sm" className="bg-[#d3af37] text-[#000000]" data-testid="button-rbo">
-                  Learn More <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              </Link>
-            </div>
-
-            {/* RSA - Reverse Seller Architecture */}
-            <div className="space-y-3">
-              <h3 className="font-serif text-xl font-semibold text-white flex items-center gap-2">
-                <Users className="h-5 w-5 text-[#d4af37]" />
-                Reverse Seller Architecture
-              </h3>
-              <p className="text-white/70">
-                Selling your home? Multiple qualified buyer agents compete to represent you, driving up demand and getting you the best possible sale price and terms.
-              </p>
-              <Link href="/reverse-seller-architecture">
-                <Button size="sm" className="bg-[#d2b038] text-[#000000]" data-testid="button-rsa">
-                  Learn More <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              </Link>
-            </div>
-
-            {/* RRW - Refinancing Rate Watch */}
-            <div className="space-y-3">
-              <h3 className="font-serif text-xl font-semibold text-white flex items-center gap-2">
-                <RefreshCw className="h-5 w-5 text-[#d4af37]" />
-                Refinancing Rate Watch
-              </h3>
-              <p className="text-white/70">
-                Never miss a refinancing opportunity. AI-powered rate monitoring alerts you instantly when rates drop, showing exact savings and break-even timelines.
-              </p>
-              <Link href="/refinancing">
-                <Button size="sm" className="bg-[#d2b038] text-[#000000]" data-testid="button-rrw">
-                  Learn More <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Credit Card Comparison Module */}
-      <section className="py-8 lg:py-12 bg-[#0a1628]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-8">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <div className="relative w-20 h-16">
-                  {/* First Card - Back */}
-                  <div 
-                    className="absolute w-12 h-16 rounded-lg flex items-center justify-center"
-                    style={{
-                      background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
-                      boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)',
-                      left: '2px',
-                      top: '2px',
-                      transform: 'rotate(-8deg)',
-                      opacity: 0.7
-                    }}
-                  >
-                    <CreditCard 
-                      className="h-6 w-6" 
-                      style={{
-                        color: '#d4af37',
-                        filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
-                        textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
-                      }}
-                    />
-                  </div>
-                  
-                  {/* Second Card - Middle */}
-                  <div 
-                    className="absolute w-12 h-16 rounded-lg flex items-center justify-center"
-                    style={{
-                      background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
-                      boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)',
-                      left: '4px',
-                      top: '0px',
-                      transform: 'rotate(-3deg)',
-                      opacity: 0.85
-                    }}
-                  >
-                    <CreditCard 
-                      className="h-6 w-6" 
-                      style={{
-                        color: '#d4af37',
-                        filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
-                        textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
-                      }}
-                    />
-                  </div>
-                  
-                  {/* Third Card - Front */}
-                  <div 
-                    className="absolute w-12 h-16 rounded-lg flex items-center justify-center"
-                    style={{
-                      background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
-                      boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)',
-                      left: '6px',
-                      top: '-2px',
-                      transform: 'rotate(3deg)',
-                      zIndex: 10
-                    }}
-                  >
-                    <CreditCard 
-                      className="h-6 w-6" 
-                      style={{
-                        color: '#d4af37',
-                        filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
-                        textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-              <h3 className="font-serif text-2xl lg:text-3xl font-bold text-white mb-3">
-                Compare 100+ Credit Cards
-                <br />
-                <span className="text-[#d4af37]">Not Just the Usual 12</span>
-              </h3>
-              <p className="text-white/70 max-w-2xl mx-auto">
-                Our AI-powered engine analyzes 100+ card options—including fintech, crypto, and startup cards that legacy sites don't show.
-              </p>
-            </div>
-
-            {/* Lifestyle Benefits Collage */}
-            <div className="mb-8 max-w-5xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                <img 
-                  src={airportLoungeImage} 
-                  alt="Luxury airport lounge"
-                  className="w-full h-40 object-cover rounded-lg border border-[#d4af37]/30 hover:border-[#d4af37] transition-colors"
-                  data-testid="img-airport-lounge"
-                />
-                <img 
-                  src={dinningImage} 
-                  alt="Fine dining experience"
-                  className="w-full h-40 object-cover rounded-lg border border-[#d4af37]/30 hover:border-[#d4af37] transition-colors"
-                  data-testid="img-dining"
-                />
-                <img 
-                  src={travelImage} 
-                  alt="Luxury travel destination"
-                  className="w-full h-40 object-cover rounded-lg border border-[#d4af37]/30 hover:border-[#d4af37] transition-colors"
-                  data-testid="img-travel"
-                />
-              </div>
-              <p className="text-center text-white/60 text-sm">Premium lifestyle benefits: Airport lounges • Fine dining • Luxury travel experiences</p>
-            </div>
-
-            {/* Comparison Table */}
-            <div className="overflow-x-auto mb-6">
-              <table className="w-full text-sm border-collapse">
-                <thead>
-                  <tr className="border-b border-white/20">
-                    <th className="text-left py-3 px-3 text-white/80 font-semibold text-sm">Feature</th>
-                    <th className="text-center py-3 px-3 text-white/60 font-medium text-sm">NerdWallet</th>
-                    <th className="text-center py-3 px-3 text-white/60 font-medium text-sm">Bankrate</th>
-                    <th className="text-center py-3 px-3 text-white/60 font-medium text-sm">Credit Karma</th>
-                    <th 
-                      className="text-center py-3 px-3 text-[#d4af37] font-semibold relative text-sm"
-                      style={{
-                        backgroundColor: 'rgba(212, 175, 55, 0.05)',
-                        boxShadow: 'inset 0 0 20px rgba(212, 175, 55, 0.15), 0 0 20px rgba(212, 175, 55, 0.1)'
-                      }}
-                    >
-                      Agent Kammer
-                    </th>
-                    <th className="text-center py-3 px-3 text-white/60 font-medium text-sm">Chase</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                    <td className="py-3 px-3 text-white text-sm">Total Cards</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">12–20</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">10–25</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">8–15</td>
-                    <td className="py-3 px-3 text-center text-[#d4af37] font-semibold text-sm" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>100+</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">25–40</td>
-                  </tr>
-                  <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                    <td className="py-3 px-3 text-white text-sm">Fintech Cards</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">Limited</td>
-                    <td className="py-3 px-3 text-center text-[#d4af37] font-semibold text-sm" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
-                  </tr>
-                  <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                    <td className="py-3 px-3 text-white text-sm">Crypto Rewards Cards</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
-                    <td className="py-3 px-3 text-center text-[#d4af37] font-semibold text-sm" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">Limited</td>
-                  </tr>
-                  <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                    <td className="py-3 px-3 text-white text-sm">AI-Based Matching</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
-                    <td className="py-3 px-3 text-center text-[#d4af37] font-semibold text-sm" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
-                  </tr>
-                  <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                    <td className="py-3 px-3 text-white text-sm">Independent Ranking</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">Partial</td>
-                    <td className="py-3 px-3 text-center text-[#d4af37] font-semibold text-sm" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
-                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            {/* Why We're Different */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="p-6 bg-[#d4af37]/5 border-[#d4af37]/20">
-                <h4 className="font-semibold text-lg text-[#d4af37] mb-4">Why Legacy Sites Show Fewer Cards</h4>
-                <ul className="space-y-2 text-sm text-white/80">
-                  <li className="flex items-start gap-3">
-                    <span className="text-[#d4af37] font-bold">•</span>
-                    <span>Limited affiliate partnerships with banks</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-[#d4af37] font-bold">•</span>
-                    <span>Crypto cards excluded due to compliance</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-[#d4af37] font-bold">•</span>
-                    <span>Fintech startups can't afford placement fees</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-[#d4af37] font-bold">•</span>
-                    <span>New beta cards excluded from networks</span>
-                  </li>
-                </ul>
-              </Card>
-
-              <Card className="p-6 bg-white/5 border-white/10">
-                <h4 className="font-semibold text-lg text-white mb-4">Our Advantage</h4>
-                <ul className="space-y-2 text-sm text-white/80">
-                  <li className="flex items-start gap-3">
-                    <span className="text-[#d4af37] font-bold">•</span>
-                    <span>Direct partnerships with 100+ card issuers</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-[#d4af37] font-bold">•</span>
-                    <span>Full access to fintech & crypto programs</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-[#d4af37] font-bold">•</span>
-                    <span>AI evaluates for YOUR fit, not commission</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-[#d4af37] font-bold">•</span>
-                    <span>Pre-launch & invite-only cards included</span>
-                  </li>
-                </ul>
-              </Card>
-            </div>
-
-            {/* CTA */}
-            <div className="text-center mt-6">
-              <p className="text-white/70 mb-4">Ready to find your perfect card?</p>
-              <Link href="/profile">
-                <Button 
-                  size="lg" 
-                  className="px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
-                  data-testid="button-compare-cards"
-                >
-                  <Brain className="h-5 w-5 mr-2 animate-brain-breathe" />
-                  Start Your Agentic Profile
-                </Button>
-              </Link>
-            </div>
-        </div>
-      </section>
-
-      {/* Real Estate Concierge - MOVED, OLD LOCATION REMOVED */}
-
-      {/* Investment Accounts Section */}
-      <section className="py-10 lg:py-16 bg-background">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div 
-                className="w-16 h-16 rounded-lg flex items-center justify-center relative overflow-hidden"
-                style={{
-                  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
-                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
-                }}
-              >
-                <TrendingUp 
-                  className="h-8 w-8 relative z-10" 
-                  style={{
-                    color: '#d4af37',
-                    filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
-                    textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
-                  }}
-                />
-              </div>
-            </div>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4 text-foreground">
-              Investment Accounts
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Access the best brokerages, robo-advisors, and investment platforms tailored to your financial goals
+            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+              Premium home buying, selling, and mortgage intelligence worldwide
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <Card className="p-6 hover-elevate">
-              <div className="flex items-center gap-3 mb-4">
-                <Landmark className="h-6 w-6 text-[#d4af37]" />
-                <h3 className="font-semibold text-lg text-foreground">Traditional Brokers</h3>
-              </div>
-              <p className="text-muted-foreground text-sm">Full-service brokerages with professional advisors and comprehensive tools</p>
-            </Card>
+            {[
+              { icon: Building2, title: 'Reverse Buyer Origination', desc: 'Sellers compete to win your business with better terms and faster closing.', link: '/reverse-buyer-origination', testId: 'button-rbo' },
+              { icon: Users, title: 'Reverse Seller Architecture', desc: 'Multiple qualified buyer agents compete, driving up demand for your home.', link: '/reverse-seller-architecture', testId: 'button-rsa' },
+              { icon: RefreshCw, title: 'Refinancing Rate Watch', desc: 'AI-powered monitoring alerts you when rates drop with exact savings.', link: '/refinancing', testId: 'button-rrw' }
+            ].map((service) => (
+              <Card key={service.title} className="p-5 bg-white/5 border-white/10 backdrop-blur-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <service.icon className="h-5 w-5 text-[#d4af37]" />
+                  <h3 className="font-serif text-lg font-semibold text-white">{service.title}</h3>
+                </div>
+                <p className="text-white/70 text-sm mb-4">{service.desc}</p>
+                <Link href={service.link}>
+                  <Button size="sm" className="bg-[#d4af37] text-[#0a1628] hover:bg-[#d4af37]/90" data-testid={service.testId}>
+                    Learn More <ArrowRight className="h-4 w-4 ml-2" />
+                  </Button>
+                </Link>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <Card className="p-6 hover-elevate">
-              <div className="flex items-center gap-3 mb-4">
-                <TrendingUp className="h-6 w-6 text-[#d4af37]" />
-                <h3 className="font-semibold text-lg text-foreground">Robo-Advisors</h3>
+      {/* SECTION 5: Credit Cards - Dark Navy */}
+      <section className="py-12 lg:py-16 bg-[#0a1628]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                <CreditCard className="h-7 w-7" style={GOLD_ICON_STYLE} />
               </div>
-              <p className="text-muted-foreground text-sm">Automated portfolio management with low fees and algorithmic investing</p>
-            </Card>
-
-            <Card className="p-6 hover-elevate">
-              <div className="flex items-center gap-3 mb-4">
-                <Sparkles className="h-6 w-6 text-[#d4af37]" />
-                <h3 className="font-semibold text-lg text-foreground">Crypto Platforms</h3>
-              </div>
-              <p className="text-muted-foreground text-sm">Digital asset trading and decentralized finance opportunities</p>
-            </Card>
+            </div>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-3">
+              Compare 100+ Credit Cards
+            </h2>
+            <p className="text-[#d4af37] text-xl font-semibold mb-2">Not Just the Usual 12</p>
+            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+              Our AI analyzes 100+ options including fintech, crypto, and startup cards that legacy sites don't show.
+            </p>
           </div>
 
-          <div className="text-center mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto">
+            <img 
+              src={airportLoungeImage} 
+              alt="Luxury airport lounge"
+              className="w-full h-36 object-cover rounded-lg border border-[#d4af37]/30"
+              data-testid="img-airport-lounge"
+            />
+            <img 
+              src={dinningImage} 
+              alt="Fine dining experience"
+              className="w-full h-36 object-cover rounded-lg border border-[#d4af37]/30"
+              data-testid="img-dining"
+            />
+            <img 
+              src={travelImage} 
+              alt="Luxury travel destination"
+              className="w-full h-36 object-cover rounded-lg border border-[#d4af37]/30"
+              data-testid="img-travel"
+            />
+          </div>
+          <p className="text-center text-white/50 text-sm mb-8">Airport lounges • Fine dining • Luxury travel</p>
+
+          <div className="overflow-x-auto mb-8">
+            <table className="w-full max-w-4xl mx-auto text-sm">
+              <thead>
+                <tr className="border-b border-white/20">
+                  <th className="text-left py-3 px-4 text-white/80 font-semibold">Feature</th>
+                  <th className="text-center py-3 px-4 text-white/60">NerdWallet</th>
+                  <th className="text-center py-3 px-4 text-white/60">Credit Karma</th>
+                  <th className="text-center py-3 px-4 text-[#d4af37] font-semibold bg-[#d4af37]/5">Agent Kammer</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { feature: 'Total Cards', nw: '12–20', ck: '8–15', ak: '100+' },
+                  { feature: 'Fintech Cards', nw: 'No', ck: 'Limited', ak: 'Yes' },
+                  { feature: 'AI Matching', nw: 'No', ck: 'No', ak: 'Yes' },
+                  { feature: 'Crypto Cards', nw: 'No', ck: 'No', ak: 'Yes' }
+                ].map((row) => (
+                  <tr key={row.feature} className="border-b border-white/10">
+                    <td className="py-3 px-4 text-white">{row.feature}</td>
+                    <td className="py-3 px-4 text-center text-white/60">{row.nw}</td>
+                    <td className="py-3 px-4 text-center text-white/60">{row.ck}</td>
+                    <td className="py-3 px-4 text-center text-[#d4af37] font-semibold bg-[#d4af37]/5">{row.ak}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="text-center">
+            <Link href="/credit-cards">
+              <Button size="lg" className={CTA_BUTTON_CLASS} data-testid="button-compare-cards">
+                <CreditCard className="h-5 w-5 mr-2" />
+                Compare Credit Cards
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 6: Investment Accounts - Light Background */}
+      <section className="py-12 lg:py-16 bg-background">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                <TrendingUp className="h-7 w-7" style={GOLD_ICON_STYLE} />
+              </div>
+            </div>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-foreground">
+              Investment Accounts
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Compare brokerages, robo-advisors, and investment platforms matched to your goals
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
+            {[
+              { icon: BarChart3, title: 'Brokerages', desc: 'Full-service and discount brokers for active traders' },
+              { icon: Briefcase, title: 'Robo-Advisors', desc: 'Automated investing with low fees and smart rebalancing' },
+              { icon: LineChart, title: 'Crypto Platforms', desc: 'Digital asset trading and DeFi opportunities' }
+            ].map((item) => (
+              <Card key={item.title} className="p-5 border-border">
+                <div className="flex items-center gap-2 mb-3">
+                  <item.icon className="h-5 w-5 text-[#d4af37]" />
+                  <h3 className="font-semibold text-foreground">{item.title}</h3>
+                </div>
+                <p className="text-muted-foreground text-sm">{item.desc}</p>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center">
             <Link href="/investing">
-              <Button 
-                size="lg" 
-                className="px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
-                data-testid="button-investment-accounts"
-              >
-                <Brain className="h-5 w-5 mr-2" />
+              <Button size="lg" className={CTA_BUTTON_CLASS} data-testid="button-investment-accounts">
+                <TrendingUp className="h-5 w-5 mr-2" />
                 Explore Investment Accounts
               </Button>
             </Link>
@@ -687,28 +331,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Financial Dashboard CTA */}
-      <section className="py-10 lg:py-14 bg-[#0a1628]">
+      {/* SECTION 7: Final CTA - Dark Navy */}
+      <section className="py-12 lg:py-16 bg-[#0a1628]">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-4">
-            Your Financial Dashboard
+            Ready to Get Started?
           </h2>
-          <p className="text-white/70 text-lg mb-6">
-            Explore all categories and find the perfect products matched to your profile
+          <p className="text-white/70 text-lg mb-8">
+            Build your Agentic Profile and unlock personalized recommendations across all categories
           </p>
           
-          <div className="space-y-4">
-            <Link href="/profile">
-              <Button 
-                size="lg"
-                className="px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90 animate-button-pulse-glow"
-                data-testid="button-dashboard"
-              >
-                <Brain className="h-5 w-5 mr-2 animate-brain-breathe" />
-                Start Your Agentic Profile
-              </Button>
-            </Link>
-          </div>
+          <Link href="/profile">
+            <Button 
+              size="lg"
+              className={`${CTA_BUTTON_CLASS} animate-button-pulse-glow`}
+              data-testid="button-dashboard"
+            >
+              <Brain className="h-5 w-5 mr-2 animate-brain-breathe" />
+              Start Your Agentic Profile
+            </Button>
+          </Link>
         </div>
       </section>
     </div>
