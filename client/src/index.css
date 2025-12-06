@@ -582,4 +582,20 @@
   .animate-brain-breathe {
     animation: brainBreathe 2s ease-in-out infinite;
   }
+
+  @keyframes buttonPulseGlow {
+    0% {
+      box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.8), inset 0 0 0 0 rgba(212, 175, 55, 0);
+    }
+    50% {
+      box-shadow: 0 0 0 8px rgba(212, 175, 55, 0), inset 0 0 0 1px rgba(212, 175, 55, 0.6);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(212, 175, 55, 0), inset 0 0 0 0 rgba(212, 175, 55, 0);
+    }
+  }
+
+  .animate-button-pulse-glow {
+    animation: buttonPulseGlow 2.5s ease-in-out infinite;
+  }
 }

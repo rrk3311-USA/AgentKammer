@@ -559,7 +559,7 @@ export default function Home() {
             <Link href="/profile">
               <Button 
                 size="lg"
-                className="px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
+                className="px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90 animate-button-pulse-glow"
                 data-testid="button-dashboard"
               >
                 <Brain className="h-5 w-5 mr-2 animate-brain-breathe" />
