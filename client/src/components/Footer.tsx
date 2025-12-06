@@ -10,7 +10,6 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-6 py-6 pt-[0px] pb-[0px] pl-[40px] pr-[40px] ml-[45px] mr-[45px] mt-[3px] mb-[3px] text-left">
           <div className="grid grid-cols-2 gap-6 md:gap-8">
             <div>
-              <h3 className="font-serif text-base md:text-lg font-semibold mb-3">Agent Kammer</h3>
               <Link href="/free-tools" className="text-xs md:text-sm text-foreground font-medium mb-3 block hover:text-[#d4af37] transition-colors">
                 Free Tools
               </Link>
