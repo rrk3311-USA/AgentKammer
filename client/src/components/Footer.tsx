@@ -33,7 +33,7 @@ export function Footer() {
             </div>
             <div>
               <Link href="/real-estate">
-                <h4 className="font-medium mb-3 text-sm hover:text-foreground transition-colors cursor-pointer">Real Estate Services</h4>
+                <h4 className="font-medium mb-3 text-sm hover:text-foreground transition-colors cursor-pointer">Real Estate Concierge</h4>
               </Link>
               <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground mb-4">
                 <li>
