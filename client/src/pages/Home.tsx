@@ -18,6 +18,7 @@ import {
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
 import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
 import conciergeImage from '@assets/generated_images/concierge_agent_top_hat_luxury_interior.png';
+import conciergeGestureImage from '@assets/image_1763360901241.png';
 import airportLoungeImage from '@assets/generated_images/luxury_airport_lounge.png';
 import dinningImage from '@assets/generated_images/fine_dining_experience.png';
 import travelImage from '@assets/generated_images/luxury_travel_destination.png';
@@ -82,47 +83,59 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 2: Flagship Services - Image Background */}
-      <section id="categories" className="relative py-12 lg:py-16 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroImage})`, backgroundPosition: 'right center' }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/85 to-transparent" />
-        </div>
+      {/* SECTION 2: Flagship Services - With Concierge Character */}
+      <section id="categories" className="relative py-12 lg:py-16 overflow-hidden bg-[#0a1628]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            {/* Left: Content */}
+            <div className="relative z-10">
+              <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-4">Flagship Services</Badge>
+              <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-3">
+                Choose Your Category
+              </h2>
+              <p className="text-white/70 text-lg mb-8">
+                AI-ranked products matched to your profile
+              </p>
 
-        <div className="relative max-w-7xl mx-auto px-6 z-10">
-          <div className="max-w-2xl">
-            <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-4">Flagship Services</Badge>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-3">
-              Choose Your Category
-            </h2>
-            <p className="text-white/70 text-lg mb-8">
-              AI-ranked products matched to your profile
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {[
-                { id: 'credit-cards', name: 'Credit Cards', icon: CreditCard, desc: 'AI-matched cards for your goals' },
-                { id: 'investing', name: 'Investing', icon: TrendingUp, desc: 'Brokerages & robo-advisors' },
-                { id: 'reverse-buyer-origination', name: 'Real Estate', icon: Building2, desc: 'Premium concierge services' }
-              ].map((cat) => (
-                <Link key={cat.id} href={`/${cat.id}`}>
-                  <Card 
-                    className="p-5 bg-[#0f1d32]/95 border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group backdrop-blur-sm"
-                    data-testid={`card-category-${cat.id}`}
-                  >
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
-                        <cat.icon className="h-6 w-6" style={GOLD_ICON_STYLE} />
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {[
+                  { id: 'credit-cards', name: 'Credit Cards', icon: CreditCard, desc: 'AI-matched cards for your goals' },
+                  { id: 'investing', name: 'Investing', icon: TrendingUp, desc: 'Brokerages & robo-advisors' },
+                  { id: 'reverse-buyer-origination', name: 'Real Estate', icon: Building2, desc: 'Premium concierge services' }
+                ].map((cat) => (
+                  <Link key={cat.id} href={`/${cat.id}`}>
+                    <Card 
+                      className="p-5 bg-[#0f1d32]/95 border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group backdrop-blur-sm"
+                      data-testid={`card-category-${cat.id}`}
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                          <cat.icon className="h-6 w-6" style={GOLD_ICON_STYLE} />
+                        </div>
+                        <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
                       </div>
-                      <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
-                    </div>
-                    <h3 className="font-serif text-lg font-semibold text-white mb-1">{cat.name}</h3>
-                    <p className="text-white/60 text-sm">{cat.desc}</p>
-                  </Card>
-                </Link>
-              ))}
+                      <h3 className="font-serif text-lg font-semibold text-white mb-1">{cat.name}</h3>
+                      <p className="text-white/60 text-sm">{cat.desc}</p>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: Concierge Character - Cropped to show from chest up with gesturing arm */}
+            <div className="hidden lg:flex justify-end items-end relative">
+              <div className="relative w-full h-[400px] overflow-hidden">
+                <img 
+                  src={conciergeGestureImage} 
+                  alt="Agent Kammer concierge presenting services"
+                  className="absolute bottom-0 right-0 w-auto h-[500px] object-cover object-top"
+                  style={{ 
+                    transform: 'scaleX(-1)',
+                    maskImage: 'linear-gradient(to top, black 70%, transparent 100%)',
+                    WebkitMaskImage: 'linear-gradient(to top, black 70%, transparent 100%)'
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -249,27 +262,40 @@ export default function Home() {
           <p className="text-center text-white/50 text-sm mb-8">Airport lounges • Fine dining • Luxury travel</p>
 
           <div className="overflow-x-auto mb-8">
-            <table className="w-full max-w-4xl mx-auto text-sm">
+            <table className="w-full max-w-5xl mx-auto text-sm">
               <thead>
                 <tr className="border-b border-white/20">
-                  <th className="text-left py-3 px-4 text-white/80 font-semibold">Feature</th>
-                  <th className="text-center py-3 px-4 text-white/60">NerdWallet</th>
-                  <th className="text-center py-3 px-4 text-white/60">Credit Karma</th>
-                  <th className="text-center py-3 px-4 text-[#d4af37] font-semibold bg-[#d4af37]/5">Agent Kammer</th>
+                  <th className="text-left py-3 px-3 text-white/80 font-semibold">Feature</th>
+                  <th className="text-center py-3 px-3 text-white/60">NerdWallet</th>
+                  <th className="text-center py-3 px-3 text-white/60">Bankrate</th>
+                  <th 
+                    className="text-center py-3 px-3 text-[#d4af37] font-semibold"
+                    style={{
+                      backgroundColor: 'rgba(212, 175, 55, 0.08)',
+                      boxShadow: 'inset 0 0 20px rgba(212, 175, 55, 0.15)'
+                    }}
+                  >
+                    Agent Kammer
+                  </th>
+                  <th className="text-center py-3 px-3 text-white/60">Credit Karma</th>
+                  <th className="text-center py-3 px-3 text-white/60">Chase</th>
                 </tr>
               </thead>
               <tbody>
                 {[
-                  { feature: 'Total Cards', nw: '12–20', ck: '8–15', ak: '100+' },
-                  { feature: 'Fintech Cards', nw: 'No', ck: 'Limited', ak: 'Yes' },
-                  { feature: 'AI Matching', nw: 'No', ck: 'No', ak: 'Yes' },
-                  { feature: 'Crypto Cards', nw: 'No', ck: 'No', ak: 'Yes' }
+                  { feature: 'Total Cards', nw: '12–20', br: '10–25', ak: '100+', ck: '8–15', ch: '25–40' },
+                  { feature: 'Fintech Cards', nw: 'No', br: 'No', ak: 'Yes', ck: 'Limited', ch: 'No' },
+                  { feature: 'Crypto Cards', nw: 'No', br: 'No', ak: 'Yes', ck: 'No', ch: 'Limited' },
+                  { feature: 'AI Matching', nw: 'No', br: 'No', ak: 'Yes', ck: 'No', ch: 'No' },
+                  { feature: 'Independent Ranking', nw: 'No', br: 'No', ak: 'Yes', ck: 'Partial', ch: 'No' }
                 ].map((row) => (
-                  <tr key={row.feature} className="border-b border-white/10">
-                    <td className="py-3 px-4 text-white">{row.feature}</td>
-                    <td className="py-3 px-4 text-center text-white/60">{row.nw}</td>
-                    <td className="py-3 px-4 text-center text-white/60">{row.ck}</td>
-                    <td className="py-3 px-4 text-center text-[#d4af37] font-semibold bg-[#d4af37]/5">{row.ak}</td>
+                  <tr key={row.feature} className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                    <td className="py-3 px-3 text-white">{row.feature}</td>
+                    <td className="py-3 px-3 text-center text-white/60">{row.nw}</td>
+                    <td className="py-3 px-3 text-center text-white/60">{row.br}</td>
+                    <td className="py-3 px-3 text-center text-[#d4af37] font-semibold" style={{ backgroundColor: 'rgba(212, 175, 55, 0.08)' }}>{row.ak}</td>
+                    <td className="py-3 px-3 text-center text-white/60">{row.ck}</td>
+                    <td className="py-3 px-3 text-center text-white/60">{row.ch}</td>
                   </tr>
                 ))}
               </tbody>
