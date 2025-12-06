@@ -55,7 +55,7 @@ const categoryIcons: Record<string, any> = {
 
 const PRIMARY_CATEGORIES = [
   { id: 'credit-cards', name: 'Credit Cards', icon: 'CreditCard', description: 'AI-matched cards based on your profile and goals', color: 'from-blue-500/20 to-indigo-500/20' },
-  { id: 'investing', name: 'Investing', icon: 'TrendingUp', description: 'Brokerages, robo-advisors, and investment platforms', color: 'from-green-500/20 to-emerald-500/20' },
+  { id: 'investing', name: 'Investment Accounts', icon: 'TrendingUp', description: 'Brokerages, robo-advisors, and investment platforms', color: 'from-green-500/20 to-emerald-500/20' },
 ];
 
 const SECONDARY_CATEGORIES = [
