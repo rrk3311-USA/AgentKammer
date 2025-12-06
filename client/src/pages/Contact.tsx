@@ -50,6 +50,32 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* CTA Section */}
+      <section className="py-16 bg-gradient-to-br from-[#0a1628] to-[#1a2640] text-white">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">
+            Ready to Find Your Dream Home?
+          </h2>
+          <p className="text-lg text-white/90 mb-8">
+            Let Agent Kammer guide you through the luxury real estate market with AI-powered insights and personalized service
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              size="lg"
+              variant="outline"
+              className="h-12 px-8 border-white text-white hover:bg-white/10"
+              onClick={() => {
+                const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLButtonElement;
+                if (chatButton) chatButton.click();
+              }}
+              data-testid="button-contact-chat"
+            >
+              Chat with Agent
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Hero Section with Photo Collage */}
       <section className="relative h-[60vh] overflow-hidden">
         {/* Photo Grid Collage */}
@@ -247,39 +273,6 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-[#0a1628] to-[#1a2640] text-white">
-        <div className="max-w-4xl mx-auto text-center px-6">
-          <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">
-            Ready to Find Your Dream Home?
-          </h2>
-          <p className="text-lg text-white/90 mb-8">
-            Let Agent Kammer guide you through the luxury real estate market with AI-powered insights and personalized service
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="h-12 px-8 bg-[#d4af37] text-black font-semibold hover:bg-[#c5a028]"
-              onClick={() => window.location.href = '/'}
-              data-testid="button-contact-browse"
-            >
-              Browse Properties
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="h-12 px-8 border-white text-white hover:bg-white/10"
-              onClick={() => {
-                const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLButtonElement;
-                if (chatButton) chatButton.click();
-              }}
-              data-testid="button-contact-chat"
-            >
-              Chat with Agent
-            </Button>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
