@@ -350,54 +350,80 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
       </section>
 
       {/* Main Content */}
-      <section className="py-8 lg:py-12 bg-background">
-        <div className="max-w-7xl mx-auto px-6">
-          {/* Subcategory Tabs */}
-          {subcategories.length > 0 && (
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
-              <TabsList className="flex flex-wrap h-auto gap-2 bg-transparent p-0">
-                <TabsTrigger 
-                  value="All"
-                  className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-[#0a1628] rounded-full px-4 py-2"
-                  data-testid="tab-all"
-                >
-                  All
-                </TabsTrigger>
-                {subcategories.map((sub) => (
-                  <TabsTrigger 
-                    key={sub}
-                    value={sub}
-                    className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-[#0a1628] rounded-full px-4 py-2"
-                    data-testid={`tab-${sub.toLowerCase().replace(/\s+/g, '-')}`}
-                  >
-                    {sub}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
+      <section className="py-12 lg:py-16 bg-background">
+        <div className="max-w-4xl mx-auto px-6">
+          {/* Subcategory Sections */}
+          {categoryId === 'credit-cards' && subcategories.length > 0 ? (
+            <div className="space-y-12">
+              {subcategories.map((subcategory) => {
+                const subcategoryOffers = offers.filter(o => o.subcategory === subcategory);
+                return (
+                  <div key={subcategory} className="space-y-4">
+                    <h2 className="font-serif text-2xl font-bold text-foreground">{subcategory}</h2>
+                    <div className="space-y-2 pl-4 border-l-2 border-[#d4af37]">
+                      {subcategoryOffers.map((offer) => (
+                        <div key={offer.id} className="group cursor-pointer py-2 hover-elevate pl-4 -ml-4">
+                          <p className="font-medium text-foreground group-hover:text-[#d4af37] transition-colors">
+                            {offer.name}
+                          </p>
+                          <p className="text-sm text-muted-foreground">{offer.description}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <>
+              {/* Tabs for other categories */}
+              {subcategories.length > 0 && (
+                <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
+                  <TabsList className="flex flex-wrap h-auto gap-2 bg-transparent p-0">
+                    <TabsTrigger 
+                      value="All"
+                      className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-[#0a1628] rounded-full px-4 py-2"
+                      data-testid="tab-all"
+                    >
+                      All
+                    </TabsTrigger>
+                    {subcategories.map((sub) => (
+                      <TabsTrigger 
+                        key={sub}
+                        value={sub}
+                        className="data-[state=active]:bg-[#d4af37] data-[state=active]:text-[#0a1628] rounded-full px-4 py-2"
+                        data-testid={`tab-${sub.toLowerCase().replace(/\s+/g, '-')}`}
+                      >
+                        {sub}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+                </Tabs>
+              )}
+              
+              {/* Products Grid */}
+              <div className="space-y-6">
+                {filteredOffers.length > 0 ? (
+                  filteredOffers.map((offer) => (
+                    <ProductCard key={offer.id} offer={offer} />
+                  ))
+                ) : (
+                  <Card className="p-12 text-center">
+                    <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
+                      <IconComponent className="h-8 w-8 text-muted-foreground" />
+                    </div>
+                    <h3 className="font-serif text-xl font-semibold mb-2">No Offers Found</h3>
+                    <p className="text-muted-foreground mb-6">
+                      We're adding more {config.name.toLowerCase()} offers soon. Check back later or explore other categories.
+                    </p>
+                    <Link href="/">
+                      <Button variant="outline">Browse All Categories</Button>
+                    </Link>
+                  </Card>
+                )}
+              </div>
+            </>
           )}
-          
-          {/* Products Grid */}
-          <div className="space-y-6">
-            {filteredOffers.length > 0 ? (
-              filteredOffers.map((offer) => (
-                <ProductCard key={offer.id} offer={offer} />
-              ))
-            ) : (
-              <Card className="p-12 text-center">
-                <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
-                  <IconComponent className="h-8 w-8 text-muted-foreground" />
-                </div>
-                <h3 className="font-serif text-xl font-semibold mb-2">No Offers Found</h3>
-                <p className="text-muted-foreground mb-6">
-                  We're adding more {config.name.toLowerCase()} offers soon. Check back later or explore other categories.
-                </p>
-                <Link href="/">
-                  <Button variant="outline">Browse All Categories</Button>
-                </Link>
-              </Card>
-            )}
-          </div>
           
           {/* Bottom CTA */}
           {filteredOffers.length > 0 && (
