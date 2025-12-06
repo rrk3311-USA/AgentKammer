@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Sparkles, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import preapprovedImage from "@assets/stock_images/happy_couple_receivi_7d520a7b.jpg";
+import preapprovedImage from "@assets/generated_images/luxury_home_interior_with_navy_and_gold.png";
 
 export default function GetPreapproved() {
   const { toast } = useToast();
