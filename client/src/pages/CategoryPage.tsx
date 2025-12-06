@@ -312,9 +312,9 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
         className={`relative pt-16 pb-32 lg:pt-20 lg:pb-40 flex items-start justify-center`}
         style={config.heroImage ? {
           backgroundImage: `url(${config.heroImage})`,
-          backgroundSize: '60%',
+          backgroundSize: categoryId === 'credit-cards' ? '60%' : 'cover',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundRepeat: categoryId === 'credit-cards' ? 'no-repeat' : 'repeat',
           minHeight: '320px'
         } : { minHeight: '320px' }}
       >
