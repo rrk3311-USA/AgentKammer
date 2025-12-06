@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
 import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
+import conciergeImage from '@assets/generated_images/concierge_agent_top_hat_luxury_interior.png';
 
 const categoryIcons: Record<string, any> = {
   'CreditCard': CreditCard,
@@ -385,14 +386,25 @@ export default function Home() {
       </section>
 
       {/* Real Estate Concierge */}
-      <section className="py-16 lg:py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="relative py-16 lg:py-24 overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${conciergeImage})`,
+            backgroundPosition: 'center'
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/80 to-black/85" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-6 z-10">
           <div className="text-center mb-12">
             <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-4">Luxury Real Estate</Badge>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4 text-white">
               Real Estate Concierge
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-white/80 text-lg max-w-2xl mx-auto">
               Premium home buying, selling, and mortgage intelligence for high-net-worth clients across California, Nevada, and New York
             </p>
           </div>
