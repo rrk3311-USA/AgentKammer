@@ -15,6 +15,11 @@ export function Footer() {
               </Link>
               <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground mb-4">
                 <li>
+                  <Link href="/services/get-preapproved" className="hover:text-foreground transition-colors">
+                    Pre-Approval
+                  </Link>
+                </li>
+                <li>
                   <Link href="/credit-cards" className="hover:text-foreground transition-colors">
                     Credit Cards
                   </Link>
@@ -22,11 +27,6 @@ export function Footer() {
                 <li>
                   <Link href="/investing" className="hover:text-foreground transition-colors">
                     Investing
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services/get-preapproved" className="hover:text-foreground transition-colors">
-                    Pre-Approval
                   </Link>
                 </li>
                 <li>
