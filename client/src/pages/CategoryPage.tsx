@@ -325,7 +325,7 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
         )}
         <div className="max-w-sm mx-auto px-6 relative z-10 text-center">
           <h1 className="font-serif text-xl lg:text-2xl font-bold text-white mb-1">{config.name}</h1>
-          <p className="text-white/80 text-xs lg:text-sm">{config.description}</p>
+          <p className="text-white/80 text-xs lg:text-sm text-left">{config.description}</p>
         </div>
       </section>
       {/* Agentic Profile CTA */}
