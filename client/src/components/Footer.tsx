@@ -8,13 +8,6 @@ export function Footer() {
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       <div className="bg-background border-t border-border/50">
         <div className="max-w-7xl mx-auto px-6 py-6 pt-[0px] pb-[0px] pl-[40px] pr-[40px] ml-[45px] mr-[45px] mt-[3px] mb-[3px] text-left">
-          <div className="mb-6">
-            <Link href="/profile">
-              <p className="text-xs md:text-sm text-[#d4af37] font-medium hover:text-white transition-colors cursor-pointer">
-                Sign Up
-              </p>
-            </Link>
-          </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             <div>
               <p className="text-xs md:text-sm text-foreground font-medium mb-3 block">
@@ -66,6 +59,11 @@ export function Footer() {
             <div>
               <h4 className="font-medium mb-3 text-sm text-foreground">Flagship Services</h4>
               <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground mb-4">
+                <li>
+                  <Link href="/profile" className="hover:text-foreground transition-colors">
+                    Register
+                  </Link>
+                </li>
                 <li>
                   <Link href="/credit-cards" className="hover:text-foreground transition-colors">
                     Credit Cards
