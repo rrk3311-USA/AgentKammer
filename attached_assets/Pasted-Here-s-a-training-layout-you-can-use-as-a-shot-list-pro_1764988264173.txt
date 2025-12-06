@@ -1,0 +1,105 @@
+Here’s a “training layout” you can use as a shot list / prompt sheet for a custom model, based on that last hero image but in PS5 / fighting-game style.
+
+You can literally copy this into Notion / a doc and generate 10–20 images that follow it, then upload all of those to your trainer.
+
+⸻
+
+1. Global Character Spec (keep this constant in every image)
+
+Use this as your base prompt or as a prefix to all prompts:
+
+“Highly detailed PS5-style 3D character, male concierge / luxury butler named Agent Kammer. Sleek black tailcoat with subtle gold piping at cuffs and collar, crisp white dress shirt, slim gold waistcoat, black trousers, polished black oxford shoes. Tall black top hat with thin gold band. Gold ball-handled cane. Athletic but lean build, confident posture, Bruce Wayne energy, realistic lighting and textures, 4K, ray-traced reflections.”
+
+Negative prompt (if your trainer supports it):
+
+“cartoon, anime, low poly, 2D illustration, blurry, distorted hands, extra limbs, logo, text, watermark.”
+
+⸻
+
+2. Hero Section Layout (what the final “video game version” should resemble)
+
+Aspect ratio: 21:9 or 16:9, landscape
+Use case: website hero / flagship services section
+
+Composition
+	•	Right 35–40%:
+	•	Full-body concierge character, mostly back view, slightly 3/4 turned to the camera.
+	•	Right arm extended, palm open, cane in left hand or resting lightly.
+	•	Fighting-game “idle” stance: subtle weight shift, knees slightly bent, ready but elegant.
+	•	Left 60–65%:
+	•	Dark navy gradient background (keep it close to your current hero: #0a1424–ish).
+	•	Soft gold particle lights / vertical light streaks (like bokeh + sci-fi elevator glow).
+	•	Reserve clean space for text and buttons (your H1, subcopy, CTA).
+	•	Background environment:
+	•	Ultra-lux NYC / Beverly Hills interior, similar to the last image:
+	•	Marble kitchen island / reception desk with gold details
+	•	Warm white walls, black accents, ceiling spotlights
+	•	Modern gold pendant lights, soft depth-of-field
+	•	Character stands at the threshold, gesturing “into” this space.
+
+You can phrase the full hero prompt like:
+
+“Landscape hero image, 21:9, website banner. On the right side, a PS5-quality 3D concierge action-figure character (see character spec), seen from behind in 3/4 view, one arm extended forward invitingly, holding a gold ball-handled cane, subtle fighting-game idle stance. On the left side, empty dark navy gradient background with soft gold particle lights for text overlay. In the background, a bright luxury NYC apartment interior with white walls, marble island, gold pendant lights, modern black steel doors, warm glow. Cinematic lighting, sharp focus, 4K.”
+
+⸻
+
+3. Training Shot Layout (so the model really understands him)
+
+Try to produce at least 12–16 images using variations below, always keeping the global character spec identical.
+
+A. Neutral turn-around (4 shots)
+	1.	Front, neutral
+	•	Character facing camera, arms relaxed, full body, simple dark navy background.
+	2.	Back, neutral
+	•	Same but back view (like your hero, no gesture).
+	3.	Left 3/4
+	4.	Right 3/4
+
+(These teach the model the outfit & proportions.)
+
+⸻
+
+B. Hero-pose variants in similar environments (6–8 shots)
+	5.	Back view – inviting gesture (daytime interior)
+	•	Very close to your current hero; arm extended into bright apartment.
+	6.	Back view – idle fighting stance
+	•	Slight crouch, cane in front like a staff, same room.
+	7.	Side view – pointing with cane
+	•	Profile angle, cane pointing to imaginary UI to the right.
+	8.	Front 3/4 – arms open
+	•	Welcoming / “choose your offer” vibe, background blurred.
+	9.	Leaning on marble island
+	•	One elbow on marble counter, cane resting, casual confidence.
+	10.	Walking toward camera
+	•	Mid-step, coat tails in motion, apartment in deep background.
+	11.	Silhouette / backlit
+	•	Strong backlight from the apartment, character in stylish silhouette with rim light around hat, shoulders.
+	12.	Close-up waist-up
+	•	Focus on face, top hat, gold trim, intense but welcoming eyes.
+
+⸻
+
+C. UI-friendly hero crops (2–4 shots)
+	13.	Right-aligned, empty left
+	•	Same as final hero layout: character on right, left empty for text.
+	14.	Left-aligned, empty right
+	•	Mirror for flexibility (still consistent character).
+	15.	Centered, big bokeh background
+	•	For modals / splash screens.
+
+⸻
+
+4. How to Label / Upload
+
+When you upload to your trainer:
+	•	Use a consistent name like “agent_kammer_concierge” in all prompts/captions.
+	•	Optionally tag style: “PS5-style, hyperreal 3D, luxury fintech concierge mascot”.
+	•	Avoid mixing radically different styles (no cartoons or 2D line art in the same set).
+
+Example caption format per image:
+
+agent_kammer_concierge, PS5-style 3D character, sleek black and gold tailcoat, top hat with gold band, gold ball cane, fighting game idle pose, back view, luxury apartment interior
+
+⸻
+
+If you tell me which generator you’re using (Leonardo, Flux, SD, Midjourney “character reference,” etc.), I can rewrite this as an exact upload schema / prompt template for that platform.

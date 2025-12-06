@@ -28,7 +28,7 @@ import {
   RefreshCw
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
-import { MascotWelcome } from "@/components/MascotWelcome";
+import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
 
 const categoryIcons: Record<string, any> = {
   'CreditCard': CreditCard,
@@ -178,72 +178,85 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Primary Categories Grid */}
-      <section id="categories" className="py-16 lg:py-20 bg-[#0a1628]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-4">Apply Your Agentic Advantage</Badge>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-4">
-              Flagship Services
-            </h2>
-            <p className="text-white/70 max-w-2xl mx-auto">
-              Choose a service to see AI-ranked products matched to your profile
-            </p>
-          </div>
+      {/* Flagship Services Hero - PS5 Style */}
+      <section id="categories" className="relative py-16 lg:py-24 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${heroImage})`,
+            backgroundPosition: 'right center'
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/80 to-transparent" />
+        </div>
 
-          {/* Two-Column Flagship Services Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start mb-12">
-            {/* Left Column - Character (30% width / 2 cols out of 5) */}
-            <div className="lg:col-span-2 flex justify-center lg:justify-start">
-              <MascotWelcome />
-            </div>
+        <div className="relative max-w-7xl mx-auto px-6 z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column - Content & Offers */}
+            <div className="space-y-6">
+              <div className="space-y-4">
+                <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Apply Your Agentic Advantage</Badge>
+                <h2 className="font-serif text-4xl lg:text-5xl font-bold text-white leading-tight">
+                  Flagship Services
+                </h2>
+                <p className="text-white/70 text-lg">
+                  Choose a service to see AI-ranked products matched to your profile
+                </p>
+              </div>
 
-            {/* Right Column - Offers (70% width / 3 cols out of 5) */}
-            <div className="lg:col-span-3 space-y-6">
-              {/* Credit Cards Offer */}
-              {PRIMARY_CATEGORIES.map((category) => {
-                const IconComponent = categoryIcons[category.icon];
-                return (
-                  <Link key={category.id} href={`/${category.id}`}>
-                    <Card 
-                      className="p-6 bg-[#0f1d32] border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group"
-                      data-testid={`card-category-${category.id}`}
-                    >
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="w-14 h-14 rounded-xl bg-[#d4af37]/15 flex items-center justify-center">
-                          <IconComponent className="h-7 w-7 text-[#d4af37]" />
+              {/* Offers Stack */}
+              <div className="space-y-4 pt-4">
+                {/* Credit Cards Offer */}
+                {PRIMARY_CATEGORIES.map((category) => {
+                  const IconComponent = categoryIcons[category.icon];
+                  return (
+                    <Link key={category.id} href={`/${category.id}`}>
+                      <Card 
+                        className="p-6 bg-[#0f1d32]/95 border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group backdrop-blur-sm"
+                        data-testid={`card-category-${category.id}`}
+                      >
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="w-12 h-12 rounded-lg bg-[#d4af37]/15 flex items-center justify-center">
+                            <IconComponent className="h-6 w-6 text-[#d4af37]" />
+                          </div>
+                          <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
                         </div>
-                        <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
+                        <h3 className="font-serif text-lg font-semibold text-white mb-1">{category.name}</h3>
+                        <p className="text-white/60 text-sm">{category.description}</p>
+                      </Card>
+                    </Link>
+                  );
+                })}
+
+                {/* Refinancing Rate Watch Card */}
+                <Link href="/refinancing">
+                  <Card 
+                    className="p-6 bg-[#0f1d32]/95 border-[#d4af37]/40 hover:border-[#d4af37] transition-all cursor-pointer h-full group backdrop-blur-sm"
+                    data-testid="card-category-refinancing"
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-12 h-12 rounded-lg bg-[#d4af37]/20 flex items-center justify-center">
+                        <RefreshCw className="h-6 w-6 text-[#d4af37]" />
                       </div>
-                      <h3 className="font-serif text-xl font-semibold text-white mb-2">{category.name}</h3>
-                      <p className="text-white/60 text-sm">{category.description}</p>
-                    </Card>
-                  </Link>
-                );
-              })}
-
-              {/* Refinancing Rate Watch Card */}
-              <Link href="/refinancing">
-                <Card 
-                  className="p-6 bg-[#0f1d32] border-[#d4af37]/40 hover:border-[#d4af37] transition-all cursor-pointer h-full group"
-                  data-testid="card-category-refinancing"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="w-14 h-14 rounded-xl bg-[#d4af37]/20 flex items-center justify-center">
-                      <RefreshCw className="h-7 w-7 text-[#d4af37]" />
+                      <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
                     </div>
-                    <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
-                  </div>
-                  <h3 className="font-serif text-xl font-semibold text-white mb-2">Refinancing Rate Watch</h3>
-                  <p className="text-white/60 text-sm">Monitor mortgage, auto, student, personal, and cash-out refinancing rates 24/7</p>
-                </Card>
-              </Link>
+                    <h3 className="font-serif text-lg font-semibold text-white mb-1">Refinancing Rate Watch</h3>
+                    <p className="text-white/60 text-sm">Monitor mortgage, auto, student, personal, and cash-out refinancing rates 24/7</p>
+                  </Card>
+                </Link>
+              </div>
             </div>
-          </div>
 
-          {/* Credit Card Comparison Module */}
-          <div className="mb-12">
-            <div className="text-center mb-8">
+            {/* Right Column - Hero Image (shown via background) */}
+            <div className="hidden lg:block" />
+          </div>
+        </div>
+      </section>
+
+      {/* Credit Card Comparison Module */}
+      <section className="py-12 lg:py-16 bg-[#0a1628]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-8">
               <h3 className="font-serif text-2xl lg:text-3xl font-bold text-white mb-3">
                 Compare 100+ Credit Cards
                 <br />
@@ -367,8 +380,6 @@ export default function Home() {
                 </Button>
               </Link>
             </div>
-          </div>
-
         </div>
       </section>
 
