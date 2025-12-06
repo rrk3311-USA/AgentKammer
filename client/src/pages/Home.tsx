@@ -230,8 +230,21 @@ export default function Home() {
                         data-testid={`card-category-${category.id}`}
                       >
                         <div className="flex items-start justify-between mb-4">
-                          <div className="w-12 h-12 rounded-lg bg-[#d4af37]/15 flex items-center justify-center">
-                            <IconComponent className="h-6 w-6 text-[#d4af37]" />
+                          <div 
+                            className="w-12 h-12 rounded-lg flex items-center justify-center relative overflow-hidden"
+                            style={{
+                              background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
+                              boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
+                            }}
+                          >
+                            <IconComponent 
+                              className="h-6 w-6 relative z-10" 
+                              style={{
+                                color: '#d4af37',
+                                filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
+                                textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
+                              }}
+                            />
                           </div>
                           <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
                         </div>
@@ -249,8 +262,21 @@ export default function Home() {
                     data-testid="card-category-refinancing"
                   >
                     <div className="flex items-start justify-between mb-4">
-                      <div className="w-12 h-12 rounded-lg bg-[#d4af37]/20 flex items-center justify-center">
-                        <RefreshCw className="h-6 w-6 text-[#d4af37]" />
+                      <div 
+                        className="w-12 h-12 rounded-lg flex items-center justify-center relative overflow-hidden"
+                        style={{
+                          background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
+                          boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
+                        }}
+                      >
+                        <RefreshCw 
+                          className="h-6 w-6 relative z-10" 
+                          style={{
+                            color: '#d4af37',
+                            filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
+                            textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
+                          }}
+                        />
                       </div>
                       <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
                     </div>
