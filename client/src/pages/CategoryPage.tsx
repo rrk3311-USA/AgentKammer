@@ -30,7 +30,7 @@ import {
 } from "lucide-react";
 import { SUBCATEGORIES, SAMPLE_OFFERS, type ProductOffer, calculateMatchScore, getMatchExplanation } from "@shared/productOffers";
 import investingHeroImage from "@assets/generated_images/golden_sunrise_over_financial_district_skyline.png";
-import creditCardsHeroImage from "@assets/generated_images/rooftop_lounge_at_sunset_with_city_views.png";
+import creditCardsHeroImage from "@assets/generated_images/exclusive_private_club_lounge_with_gold_accents.png";
 
 function CreditCardVisual({ offer }: { offer: ProductOffer }) {
   const IconComponent = offer.issuerIcon ? (LucideIcons as any)[offer.issuerIcon] : CreditCard;
