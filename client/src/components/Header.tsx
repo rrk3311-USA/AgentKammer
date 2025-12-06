@@ -213,7 +213,7 @@ export function Header() {
                 <Brain className="h-3 w-3 text-[#d4af37]" />
                 Compare Products
               </p>
-              <div className="grid grid-cols-2 gap-2 mb-4">
+              <div className="grid grid-cols-2 gap-2">
                 {financialCategories.map((category) => (
                   <Link key={category.id} href={`/${category.id}`} data-testid={`link-mobile-${category.id}`}>
                     <span
@@ -225,16 +225,16 @@ export function Header() {
                     </span>
                   </Link>
                 ))}
+                <Link href="/real-estate" data-testid="link-mobile-real-estate-concierge">
+                  <span
+                    className="text-sm font-medium hover:text-[#d4af37] cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-muted/50"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Home className="h-4 w-4" />
+                    Real Estate Concierge
+                  </span>
+                </Link>
               </div>
-              <Link href="/real-estate" data-testid="link-mobile-real-estate-concierge">
-                <span
-                  className="text-sm font-medium hover:text-[#d4af37] cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-muted/50"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <Home className="h-4 w-4" />
-                  Real Estate Concierge
-                </span>
-              </Link>
             </div>
 
             <div className="border-t pt-4">
