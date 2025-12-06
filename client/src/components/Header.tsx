@@ -239,14 +239,6 @@ export function Header() {
 
             <div className="border-t pt-4">
               <p className="text-xs font-semibold text-muted-foreground mb-3 uppercase">Real Estate</p>
-              <Link href="/real-estate" data-testid="link-mobile-real-estate">
-                <span
-                  className="text-base font-medium hover:text-[#d4af37] cursor-pointer block mb-3"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Real Estate Concierge
-                </span>
-              </Link>
               <Link href="/reverse-buyer-origination" data-testid="link-mobile-rbo">
                 <span
                   className="text-base font-medium hover:text-primary cursor-pointer block mb-3"
