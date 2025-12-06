@@ -49,7 +49,7 @@ export default function ReverseSellerOrigination() {
   const steps = [
     {
       number: 1,
-      title: "Pre-Listing Financial Diagnostic™",
+      title: "Pre-Listing Financial Diagnostic",
       description: "Complete financial mapping of your sale before listing. Three net proceeds scenarios, closing cost forecasts, and price sensitivity analysis—all designed to maximize your outcome.",
       features: [
         "Three Net Proceeds Scenarios (Fast, Hybrid, Maximum Net)",
@@ -73,7 +73,7 @@ export default function ReverseSellerOrigination() {
     },
     {
       number: 3,
-      title: "Off-Market Intelligence Layer™",
+      title: "Off-Market Intelligence Layer",
       description: "Your home surfaces quietly to financially verified buyers and agent networks before going public. Early feedback and optionality without exposure or risk.",
       features: [
         "Private 'Whisper List' Access",
@@ -84,7 +84,7 @@ export default function ReverseSellerOrigination() {
     },
     {
       number: 4,
-      title: "Multi-Scenario Listing Strategy™",
+      title: "Multi-Scenario Listing Strategy",
       description: "Three engineered, institutional-style pathways based on your timeline and risk tolerance. Not one rigid marketing plan—your choice.",
       features: [
         "Scenario A: Fastest Exit (minimal prep, lean fee, broad exposure)",
@@ -94,7 +94,7 @@ export default function ReverseSellerOrigination() {
     },
     {
       number: 5,
-      title: "Market Intelligence Report™",
+      title: "Market Intelligence Report",
       description: "Your pricing and positioning crafted using real data—not hype. A private-banking style market brief just for you.",
       features: [
         "Supply/Demand Ratio Analysis",
@@ -106,7 +106,7 @@ export default function ReverseSellerOrigination() {
     },
     {
       number: 6,
-      title: "Strategic Exit Architecture™",
+      title: "Strategic Exit Architecture",
       description: "Your sale integrates into your overall financial trajectory. We map your next move as part of the planning process.",
       features: [
         "Move-Up Strategy Design",
@@ -133,7 +133,7 @@ export default function ReverseSellerOrigination() {
           </Badge>
           
           <h1 className="font-serif text-4xl lg:text-5xl font-bold text-white mb-4">
-            Reverse Seller Architecture™
+            Reverse Seller Architecture
           </h1>
           
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">

@@ -86,7 +86,7 @@ export default function AdminRBO() {
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold text-white mb-2">RBO Admin Dashboard</h1>
         <p className="text-purple-200 mb-6">
-          Reverse Buyer Origination™ Leads - Sorted newest first
+          Reverse Buyer Origination Leads - Sorted newest first
         </p>
 
         {error && (

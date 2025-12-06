@@ -5,12 +5,12 @@ export default function ReverseByerOriginationGuide() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-3xl mx-auto px-6 py-16">
-        <h1 className="text-4xl font-serif font-bold mb-4">Reverse Buyer Origination™</h1>
+        <h1 className="text-4xl font-serif font-bold mb-4">Reverse Buyer Origination</h1>
         <p className="text-base text-muted-foreground mb-6">
           <strong>A private‑banking approach to luxury real estate.</strong>
         </p>
         <p className="text-base text-muted-foreground mb-8">
-          Traditional home‑buying often means choosing one agent and one lender and hoping for the best. Reverse Buyer Origination™ flips the script: you build your buyer profile once, and trusted lenders and brokers compete to serve you. This concierge‑style model brings the competitive energy of private banking into the real‑estate world.
+          Traditional home‑buying often means choosing one agent and one lender and hoping for the best. Reverse Buyer Origination flips the script: you build your buyer profile once, and trusted lenders and brokers compete to serve you. This concierge‑style model brings the competitive energy of private banking into the real‑estate world.
         </p>
 
         <h2 className="text-2xl font-serif font-bold mt-12 mb-6">How it works</h2>
@@ -80,7 +80,7 @@ export default function ReverseByerOriginationGuide() {
                 <td className="px-4 py-3 text-muted-foreground">$20k–$30k saved</td>
               </tr>
               <tr>
-                <td className="px-4 py-3"><Badge className="bg-[#d4af37] text-[#0a1628]">RBO™ concierge</Badge></td>
+                <td className="px-4 py-3"><Badge className="bg-[#d4af37] text-[#0a1628]">RBO concierge</Badge></td>
                 <td className="px-4 py-3 font-semibold text-[#d4af37]">6.10–6.40%</td>
                 <td className="px-4 py-3 font-semibold text-[#d4af37]">1–1.5%</td>
                 <td className="px-4 py-3 font-semibold text-[#d4af37]">$5k–$20k+</td>

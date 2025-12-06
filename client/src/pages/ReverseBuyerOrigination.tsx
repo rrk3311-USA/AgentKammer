@@ -106,7 +106,7 @@ export default function ReverseBuyerOrigination() {
     },
     {
       tag: "Scenario 5",
-      title: "Agent Kammer Reverse Buyer Origination™",
+      title: "Agent Kammer Reverse Buyer Origination",
       apr: "6.10–6.40%",
       commission: "~1%",
       credits: "$5k–$20k+",
@@ -156,13 +156,13 @@ export default function ReverseBuyerOrigination() {
                 <span className="text-sm font-semibold text-[#d4af37] tracking-wide">A Private Banking Model for Homebuyers</span>
               </div>
               <h1 className="font-serif text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-                Reverse Buyer Origination™
+                Reverse Buyer Origination
               </h1>
               <p className="text-lg text-white/90 mb-2 font-semibold">
                 Putting the power back into the buyers hands
               </p>
               <p className="text-base text-white/70 mb-6 leading-relaxed">
-                Agent Kammer Reverse Buyer Origination™ builds your buyer profile once, then quietly shops multiple lenders and brokerages to find the smartest combination of APR, credits, and fees — before you ever write an offer.
+                Agent Kammer Reverse Buyer Origination builds your buyer profile once, then quietly shops multiple lenders and brokerages to find the smartest combination of APR, credits, and fees — before you ever write an offer.
               </p>
 
               {!submitted ? (
@@ -210,7 +210,7 @@ export default function ReverseBuyerOrigination() {
                 <Badge className="bg-[#d4af37] text-[#0a1628] border-[#d4af37] mb-2 font-semibold">
                   Example • ${purchasePrice}M Buyer
                 </Badge>
-                <h3 className="text-white font-semibold text-lg">Traditional vs Reverse Buyer Origination™</h3>
+                <h3 className="text-white font-semibold text-lg">Traditional vs Reverse Buyer Origination</h3>
               </div>
 
               <div className="mb-6 p-5 bg-gradient-to-r from-teal-600/40 to-emerald-600/40 rounded-lg border border-emerald-400/50">
