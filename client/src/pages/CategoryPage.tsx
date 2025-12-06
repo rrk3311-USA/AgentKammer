@@ -351,23 +351,26 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
 
       {/* Main Content */}
       <section className="py-12 lg:py-16 bg-background">
-        <div className="max-w-4xl mx-auto px-6">
-          {/* Subcategory Sections */}
-          {categoryId === 'credit-cards' && subcategories.length > 0 ? (
-            <div className="space-y-12">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Credit Cards Button Style */}
+          {categoryId === 'credit-cards' && offers.length > 0 ? (
+            <div className="space-y-8">
               {subcategories.map((subcategory) => {
                 const subcategoryOffers = offers.filter(o => o.subcategory === subcategory);
+                if (subcategoryOffers.length === 0) return null;
+                
                 return (
-                  <div key={subcategory} className="space-y-4">
-                    <h2 className="font-serif text-2xl font-bold text-foreground">{subcategory}</h2>
-                    <div className="space-y-2 pl-4 border-l-2 border-[#d4af37]">
+                  <div key={subcategory}>
+                    <h2 className="text-sm font-bold tracking-wide uppercase text-muted-foreground mb-4">{subcategory}</h2>
+                    <div className="flex flex-wrap gap-3">
                       {subcategoryOffers.map((offer) => (
-                        <div key={offer.id} className="group cursor-pointer py-2 hover-elevate pl-4 -ml-4">
-                          <p className="font-medium text-foreground group-hover:text-[#d4af37] transition-colors">
-                            {offer.name}
-                          </p>
-                          <p className="text-sm text-muted-foreground">{offer.description}</p>
-                        </div>
+                        <button 
+                          key={offer.id}
+                          className="px-4 py-2 rounded-full bg-[#d4af37] text-[#0a1628] font-medium text-sm hover-elevate active-elevate-2 transition-all"
+                          data-testid={`button-card-${offer.id}`}
+                        >
+                          {offer.name}
+                        </button>
                       ))}
                     </div>
                   </div>
