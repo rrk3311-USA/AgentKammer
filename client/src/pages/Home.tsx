@@ -104,17 +104,21 @@ export default function Home() {
                     <ActivateAgentMode />
                   </Link>
                 </div>
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  className="h-16 px-8 border-white/30 text-white hover:bg-white/10 font-semibold text-lg"
-                  data-testid="button-browse-categories"
-                  onClick={() => {
-                    document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  Browse Categories
-                </Button>
+                <div className="flex-1 flex flex-col">
+                  <button 
+                    className="h-12 rounded-lg bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-bold text-sm tracking-widest uppercase hover:opacity-90 transition-opacity"
+                    data-testid="button-browse-categories"
+                    onClick={() => {
+                      document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
+                    Browse Categories
+                  </button>
+                  {/* Progress bar */}
+                  <div className="h-1 w-full bg-[#0a1628]/20 rounded-b-lg mt-0.5 overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-[#d4af37] to-[#f4d03f] animate-pulse" style={{ width: '100%' }} />
+                  </div>
+                </div>
               </div>
             </div>
 
