@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
 import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
-import conciergeImage from '@assets/generated_images/concierge_agent_top_hat_luxury_interior.png';
+import conciergeImage from '@assets/generated_images/luxury_living_room_concierge.jpeg';
 
 const categoryIcons: Record<string, any> = {
   'CreditCard': CreditCard,
