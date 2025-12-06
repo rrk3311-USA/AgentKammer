@@ -335,7 +335,7 @@ export function AgenticEngineVisual() {
         {/* Bottom caption bar */}
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/95 to-[#0a1628] py-2.5 md:py-3 px-4 md:px-6">
           <div className="flex items-center justify-center gap-2 md:gap-3">
-            <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-[#d4af37] rounded-full animate-pulse shrink-0" />
+            <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full animate-pulse shrink-0 bg-[#0b9c26]" />
             <span className="text-[#d4af37] font-semibold text-xs md:text-base tracking-wide text-center">
               <span className="hidden sm:inline">AI-Powered Multi-Category Financial Intelligence</span>
               <span className="sm:hidden">AI-Powered Financial Intelligence</span>
