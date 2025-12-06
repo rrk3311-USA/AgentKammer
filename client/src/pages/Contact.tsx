@@ -94,7 +94,7 @@ export default function Contact() {
               Get in Touch
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              Secure, private encrypted communication
+              Real Estate Concierge Contact
             </p>
           </div>
         </div>
@@ -119,46 +119,6 @@ export default function Contact() {
                 <Card className="p-6 hover-elevate">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-full bg-[#d4af37]/10 flex items-center justify-center flex-shrink-0">
-                      <Phone className="h-5 w-5 text-[#d4af37]" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Phone</h3>
-                      <p className="text-muted-foreground">+1 (212) 555-LUXE</p>
-                      <p className="text-sm text-muted-foreground">Mon-Sun: 8am - 10pm EST</p>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card className="p-6 hover-elevate">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[#d4af37]/10 flex items-center justify-center flex-shrink-0">
-                      <Mail className="h-5 w-5 text-[#d4af37]" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Email</h3>
-                      <p className="text-muted-foreground">agent@agentkammer.com</p>
-                      <p className="text-sm text-muted-foreground">We respond within 24 hours</p>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card className="p-6 hover-elevate">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[#d4af37]/10 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="h-5 w-5 text-[#d4af37]" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Markets</h3>
-                      <p className="text-muted-foreground">New York City</p>
-                      <p className="text-muted-foreground">California (SF, LA, SD)</p>
-                      <p className="text-muted-foreground">Nevada (Las Vegas)</p>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card className="p-6 hover-elevate">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[#d4af37]/10 flex items-center justify-center flex-shrink-0">
                       <Clock className="h-5 w-5 text-[#d4af37]" />
                     </div>
                     <div>
@@ -174,34 +134,7 @@ export default function Contact() {
 
             {/* Right: Contact Form */}
             <div>
-              {/* AI Chat Reference */}
-              <Card className="p-6 bg-gradient-to-br from-[#d4af37]/5 to-[#d4af37]/10 border border-[#d4af37]/30 mb-6">
-                <div className="flex items-start gap-4">
-                  <div className="flex items-center justify-center">
-                    <Sparkles className="w-10 h-10 text-[#d4af37]" style={{ transform: 'rotate(15deg)' }} />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-semibold mb-2 text-[#d4af37]">Quick Questions?</h4>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Most questions can be answered instantly with our AI concierge chatbot! Get immediate assistance 24/7.
-                    </p>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black"
-                      onClick={() => {
-                        const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLElement;
-                        if (chatButton) chatButton.click();
-                      }}
-                      data-testid="button-open-chat-from-contact"
-                    >
-                      Chat with Agent K
-                    </Button>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-8 bg-gradient-to-br from-background to-muted/20 border-2 border-[#d4af37]/20">
+              <Card className="p-8 bg-gradient-to-br from-background to-muted/20 border-2 border-[#d4af37]/20 mb-6">
                 <h3 className="font-serif text-2xl font-bold mb-2">Send Us a Message</h3>
                 <p className="text-muted-foreground mb-6">
                   Fill out the form below and we'll get back to you within 24 hours
@@ -281,6 +214,33 @@ export default function Contact() {
                     {contactMutation.isPending ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
+              </Card>
+
+              {/* AI Chat Reference */}
+              <Card className="p-6 bg-gradient-to-br from-[#d4af37]/5 to-[#d4af37]/10 border border-[#d4af37]/30">
+                <div className="flex items-start gap-4">
+                  <div className="flex items-center justify-center">
+                    <Sparkles className="w-10 h-10 text-[#d4af37]" style={{ transform: 'rotate(15deg)' }} />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-semibold mb-2 text-[#d4af37]">Quick Questions?</h4>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Most questions can be answered instantly with our AI concierge chatbot! Get immediate assistance 24/7.
+                    </p>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black"
+                      onClick={() => {
+                        const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLElement;
+                        if (chatButton) chatButton.click();
+                      }}
+                      data-testid="button-open-chat-from-contact"
+                    >
+                      Chat with Agent K
+                    </Button>
+                  </div>
+                </div>
               </Card>
             </div>
           </div>
