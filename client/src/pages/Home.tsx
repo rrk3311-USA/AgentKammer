@@ -175,11 +175,11 @@ export default function Home() {
                   );
                 })}
 
-                {/* Refinancing Rate Watch Card */}
-                <Link href="/refinancing">
+                {/* Real Estate Concierge Card */}
+                <Link href="/reverse-buyer-origination">
                   <Card 
-                    className="p-6 bg-[#0f1d32]/95 border-[#d4af37]/40 hover:border-[#d4af37] transition-all cursor-pointer h-full group backdrop-blur-sm"
-                    data-testid="card-category-refinancing"
+                    className="p-6 bg-[#0f1d32]/95 border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group backdrop-blur-sm"
+                    data-testid="card-category-real-estate"
                   >
                     <div className="flex items-start justify-between mb-4">
                       <div 
@@ -189,7 +189,7 @@ export default function Home() {
                           boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
                         }}
                       >
-                        <RefreshCw 
+                        <Building2 
                           className="h-6 w-6 relative z-10" 
                           style={{
                             color: '#d4af37',
@@ -200,8 +200,8 @@ export default function Home() {
                       </div>
                       <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
                     </div>
-                    <h3 className="font-serif text-lg font-semibold text-white mb-1">Refinancing Rate Watch</h3>
-                    <p className="text-white/60 text-sm">Monitor mortgage, auto, student, personal, and cash-out refinancing rates 24/7</p>
+                    <h3 className="font-serif text-lg font-semibold text-white mb-1">Real Estate Concierge</h3>
+                    <p className="text-white/60 text-sm">Premium home buying, selling, and mortgage intelligence services</p>
                   </Card>
                 </Link>
               </div>
