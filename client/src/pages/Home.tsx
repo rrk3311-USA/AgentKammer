@@ -97,23 +97,6 @@ export default function Home() {
                 One profile. Our Agentic Comparison Engine uses LLMs + compute to analyze offers and force banks, lenders, credit cards, and financial products to{" "}
                 <span className="text-[#d4af37] font-semibold">compete for you</span>.
               </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start max-w-2xl">
-                <div className="flex-1">
-                  <Link href="/profile">
-                    <ActivateAgentMode />
-                  </Link>
-                </div>
-                <button 
-                  className="h-12 rounded-lg bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-bold text-sm tracking-widest uppercase hover:opacity-90 transition-opacity"
-                  data-testid="button-browse-categories"
-                  onClick={() => {
-                    document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  Browse Categories
-                </button>
-              </div>
             </div>
 
             {/* Right: Animated AI Engine Visual */}
@@ -125,20 +108,19 @@ export default function Home() {
       </section>
 
       {/* How the Agentic Engine Works */}
-      <section className="py-16 lg:py-20 bg-background">
+      <section className="py-8 lg:py-12 bg-background">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <Badge className="bg-[#d4af37]/10 text-[#d4af37] border-[#d4af37]/20 mb-4">How It Works</Badge>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">
+          <div className="text-center mb-6">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-2">
               The Agentic Advantage
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
               Three simple steps to unlock personalized financial recommendations
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="p-8 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-1">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="p-6 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-1">
               <div className="absolute top-4 right-4 text-6xl font-bold text-muted/10">1</div>
               <div className="w-16 h-16 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-6">
                 <Users className="h-8 w-8 text-[#d4af37]" />
@@ -149,7 +131,7 @@ export default function Home() {
               </p>
             </Card>
 
-            <Card className="p-8 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-2">
+            <Card className="p-6 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-2">
               <div className="absolute top-4 right-4 text-6xl font-bold text-muted/10">2</div>
               <div className="w-16 h-16 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-6">
                 <Brain className="h-8 w-8 text-[#d4af37]" />
@@ -160,7 +142,7 @@ export default function Home() {
               </p>
             </Card>
 
-            <Card className="p-8 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-3">
+            <Card className="p-6 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-3">
               <div className="absolute top-4 right-4 text-6xl font-bold text-muted/10">3</div>
               <div className="w-16 h-16 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-6">
                 <Zap className="h-8 w-8 text-[#d4af37]" />
