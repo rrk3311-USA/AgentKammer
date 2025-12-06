@@ -278,7 +278,7 @@ export default function ReverseSellerOrigination() {
               type="submit"
               size="lg"
               disabled={createProfileMutation.isPending || submitted}
-              className="h-12 px-8"
+              className="h-12 px-8 text-[#000000]"
               data-testid="button-rso-submit-cta"
             >
               {createProfileMutation.isPending ? "Sending..." : "Request Diagnostic"}
