@@ -116,11 +116,6 @@ export function Header() {
                   </DropdownMenuItem>
                 </Link>
                 <DropdownMenuSeparator />
-                <DropdownMenuLabel className="flex items-center gap-2">
-                  <Brain className="h-4 w-4 text-[#d4af37]" />
-                  Financial Categories
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
                 {financialCategories.map((category) => (
                   <Link key={category.id} href={`/${category.id}`}>
                     <DropdownMenuItem className="cursor-pointer" data-testid={`menu-item-${category.id}`}>
