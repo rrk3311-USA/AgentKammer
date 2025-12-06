@@ -228,8 +228,21 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Card className="p-4 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-1">
               <div className="absolute top-2 right-2 text-5xl font-bold text-muted/10">1</div>
-              <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-4">
-                <Users className="h-7 w-7 text-[#d4af37]" />
+              <div 
+                className="w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4 relative overflow-hidden"
+                style={{
+                  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
+                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
+                }}
+              >
+                <Users 
+                  className="h-7 w-7 relative z-10" 
+                  style={{
+                    color: '#d4af37',
+                    filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
+                    textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
+                  }}
+                />
               </div>
               <h3 className="font-serif text-lg font-semibold mb-2">Build Your Agentic Profile</h3>
               <p className="text-muted-foreground text-sm">
@@ -239,8 +252,21 @@ export default function Home() {
 
             <Card className="p-4 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-2">
               <div className="absolute top-2 right-2 text-5xl font-bold text-muted/10">2</div>
-              <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-4">
-                <Brain className="h-7 w-7 text-[#d4af37]" />
+              <div 
+                className="w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4 relative overflow-hidden"
+                style={{
+                  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
+                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
+                }}
+              >
+                <Brain 
+                  className="h-7 w-7 relative z-10" 
+                  style={{
+                    color: '#d4af37',
+                    filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
+                    textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
+                  }}
+                />
               </div>
               <h3 className="font-serif text-lg font-semibold mb-2">AI + Compute Analyze the Field</h3>
               <p className="text-muted-foreground text-sm">
@@ -250,8 +276,21 @@ export default function Home() {
 
             <Card className="p-4 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-3">
               <div className="absolute top-2 right-2 text-5xl font-bold text-muted/10">3</div>
-              <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-4">
-                <Zap className="h-7 w-7 text-[#d4af37]" />
+              <div 
+                className="w-14 h-14 rounded-lg flex items-center justify-center mx-auto mb-4 relative overflow-hidden"
+                style={{
+                  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
+                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
+                }}
+              >
+                <Zap 
+                  className="h-7 w-7 relative z-10" 
+                  style={{
+                    color: '#d4af37',
+                    filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
+                    textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
+                  }}
+                />
               </div>
               <h3 className="font-serif text-lg font-semibold mb-2">You Choose - We Route You</h3>
               <p className="text-muted-foreground text-sm">
