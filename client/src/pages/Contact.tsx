@@ -94,7 +94,7 @@ export default function Contact() {
               Get in Touch
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              Real Estate Concierge Contact
+              Agentic Deal Procurement
             </p>
           </div>
         </div>
