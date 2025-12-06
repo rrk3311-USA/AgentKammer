@@ -256,7 +256,7 @@ export default function GetHomeValue() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full rounded-full"
+                  className="w-full rounded-full text-[#000000]"
                   data-testid="button-submit-valuation"
                   disabled={homeValueMutation.isPending}
                 >
