@@ -521,6 +521,77 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Investment Accounts Section */}
+      <section className="py-10 lg:py-16 bg-background">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div 
+                className="w-16 h-16 rounded-lg flex items-center justify-center relative overflow-hidden"
+                style={{
+                  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
+                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
+                }}
+              >
+                <TrendingUp 
+                  className="h-8 w-8 relative z-10" 
+                  style={{
+                    color: '#d4af37',
+                    filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
+                    textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
+                  }}
+                />
+              </div>
+            </div>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4 text-foreground">
+              Investment Accounts
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Access the best brokerages, robo-advisors, and investment platforms tailored to your financial goals
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <Card className="p-6 hover-elevate">
+              <div className="flex items-center gap-3 mb-4">
+                <Landmark className="h-6 w-6 text-[#d4af37]" />
+                <h3 className="font-semibold text-lg text-foreground">Traditional Brokers</h3>
+              </div>
+              <p className="text-muted-foreground text-sm">Full-service brokerages with professional advisors and comprehensive tools</p>
+            </Card>
+
+            <Card className="p-6 hover-elevate">
+              <div className="flex items-center gap-3 mb-4">
+                <TrendingUp className="h-6 w-6 text-[#d4af37]" />
+                <h3 className="font-semibold text-lg text-foreground">Robo-Advisors</h3>
+              </div>
+              <p className="text-muted-foreground text-sm">Automated portfolio management with low fees and algorithmic investing</p>
+            </Card>
+
+            <Card className="p-6 hover-elevate">
+              <div className="flex items-center gap-3 mb-4">
+                <Sparkles className="h-6 w-6 text-[#d4af37]" />
+                <h3 className="font-semibold text-lg text-foreground">Crypto Platforms</h3>
+              </div>
+              <p className="text-muted-foreground text-sm">Digital asset trading and decentralized finance opportunities</p>
+            </Card>
+          </div>
+
+          <div className="text-center mt-8">
+            <Link href="/investing">
+              <Button 
+                size="lg" 
+                className="px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
+                data-testid="button-investment-accounts"
+              >
+                <Brain className="h-5 w-5 mr-2" />
+                Explore Investment Accounts
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Real Estate Concierge */}
       <section className="relative py-10 lg:py-16 overflow-hidden">
         {/* Background Image */}
@@ -610,77 +681,6 @@ export default function Home() {
                 </Button>
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Investment Accounts Section */}
-      <section className="py-10 lg:py-16 bg-background">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div 
-                className="w-16 h-16 rounded-lg flex items-center justify-center relative overflow-hidden"
-                style={{
-                  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
-                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
-                }}
-              >
-                <TrendingUp 
-                  className="h-8 w-8 relative z-10" 
-                  style={{
-                    color: '#d4af37',
-                    filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
-                    textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
-                  }}
-                />
-              </div>
-            </div>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4 text-foreground">
-              Investment Accounts
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Access the best brokerages, robo-advisors, and investment platforms tailored to your financial goals
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <Card className="p-6 hover-elevate">
-              <div className="flex items-center gap-3 mb-4">
-                <Landmark className="h-6 w-6 text-[#d4af37]" />
-                <h3 className="font-semibold text-lg text-foreground">Traditional Brokers</h3>
-              </div>
-              <p className="text-muted-foreground text-sm">Full-service brokerages with professional advisors and comprehensive tools</p>
-            </Card>
-
-            <Card className="p-6 hover-elevate">
-              <div className="flex items-center gap-3 mb-4">
-                <TrendingUp className="h-6 w-6 text-[#d4af37]" />
-                <h3 className="font-semibold text-lg text-foreground">Robo-Advisors</h3>
-              </div>
-              <p className="text-muted-foreground text-sm">Automated portfolio management with low fees and algorithmic investing</p>
-            </Card>
-
-            <Card className="p-6 hover-elevate">
-              <div className="flex items-center gap-3 mb-4">
-                <Sparkles className="h-6 w-6 text-[#d4af37]" />
-                <h3 className="font-semibold text-lg text-foreground">Crypto Platforms</h3>
-              </div>
-              <p className="text-muted-foreground text-sm">Digital asset trading and decentralized finance opportunities</p>
-            </Card>
-          </div>
-
-          <div className="text-center mt-8">
-            <Link href="/investing">
-              <Button 
-                size="lg" 
-                className="px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
-                data-testid="button-investment-accounts"
-              >
-                <Brain className="h-5 w-5 mr-2" />
-                Explore Investment Accounts
-              </Button>
-            </Link>
           </div>
         </div>
       </section>
