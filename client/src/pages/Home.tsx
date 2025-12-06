@@ -413,8 +413,21 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* RBO - Reverse Buyer Origination */}
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-lg bg-[#d4af37]/15 flex items-center justify-center">
-                <Building2 className="h-6 w-6 text-[#d4af37]" />
+              <div 
+                className="w-12 h-12 rounded-lg flex items-center justify-center relative overflow-hidden"
+                style={{
+                  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
+                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
+                }}
+              >
+                <Building2 
+                  className="h-6 w-6 relative z-10" 
+                  style={{
+                    color: '#d4af37',
+                    filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
+                    textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
+                  }}
+                />
               </div>
               <h3 className="font-serif text-xl font-semibold text-white">Reverse Buyer Origination</h3>
               <p className="text-white/70">
@@ -429,8 +442,21 @@ export default function Home() {
 
             {/* RSA - Reverse Seller Architecture */}
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-lg bg-[#d4af37]/15 flex items-center justify-center">
-                <Users className="h-6 w-6 text-[#d4af37]" />
+              <div 
+                className="w-12 h-12 rounded-lg flex items-center justify-center relative overflow-hidden"
+                style={{
+                  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
+                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
+                }}
+              >
+                <Users 
+                  className="h-6 w-6 relative z-10" 
+                  style={{
+                    color: '#d4af37',
+                    filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
+                    textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
+                  }}
+                />
               </div>
               <h3 className="font-serif text-xl font-semibold text-white">Reverse Seller Architecture</h3>
               <p className="text-white/70">
@@ -445,8 +471,21 @@ export default function Home() {
 
             {/* RRW - Refinancing Rate Watch */}
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-lg bg-[#d4af37]/15 flex items-center justify-center">
-                <RefreshCw className="h-6 w-6 text-[#d4af37]" />
+              <div 
+                className="w-12 h-12 rounded-lg flex items-center justify-center relative overflow-hidden"
+                style={{
+                  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
+                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
+                }}
+              >
+                <RefreshCw 
+                  className="h-6 w-6 relative z-10" 
+                  style={{
+                    color: '#d4af37',
+                    filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
+                    textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
+                  }}
+                />
               </div>
               <h3 className="font-serif text-xl font-semibold text-white">Refinancing Rate Watch</h3>
               <p className="text-white/70">
