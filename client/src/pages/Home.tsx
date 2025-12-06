@@ -33,6 +33,9 @@ import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierg
 import conciergeImage from '@assets/generated_images/concierge_agent_top_hat_luxury_interior.png';
 import agentCameraImage from '@assets/generated_images/financial_agent_with_camera.png';
 import dataVizImage from '@assets/generated_images/financial_data_visualization.png';
+import airportLoungeImage from '@assets/generated_images/luxury_airport_lounge.png';
+import dinningImage from '@assets/generated_images/fine_dining_experience.png';
+import travelImage from '@assets/generated_images/luxury_travel_destination.png';
 
 const categoryIcons: Record<string, any> = {
   'CreditCard': CreditCard,
@@ -273,40 +276,29 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Image Gallery with Center Highlight */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
-              {/* Left Image */}
-              <div className="flex justify-center items-center">
+            {/* Lifestyle Benefits Collage */}
+            <div className="mb-12 max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 <img 
-                  src={dataVizImage} 
-                  alt="Financial data visualization"
-                  className="w-full h-64 object-cover rounded-lg border border-[#d4af37]/30 hover:border-[#d4af37] transition-colors"
-                  data-testid="img-data-viz"
+                  src={airportLoungeImage} 
+                  alt="Luxury airport lounge"
+                  className="w-full h-40 object-cover rounded-lg border border-[#d4af37]/30 hover:border-[#d4af37] transition-colors"
+                  data-testid="img-airport-lounge"
+                />
+                <img 
+                  src={dinningImage} 
+                  alt="Fine dining experience"
+                  className="w-full h-40 object-cover rounded-lg border border-[#d4af37]/30 hover:border-[#d4af37] transition-colors"
+                  data-testid="img-dining"
+                />
+                <img 
+                  src={travelImage} 
+                  alt="Luxury travel destination"
+                  className="w-full h-40 object-cover rounded-lg border border-[#d4af37]/30 hover:border-[#d4af37] transition-colors"
+                  data-testid="img-travel"
                 />
               </div>
-
-              {/* Center Image - Highlighted */}
-              <div className="flex justify-center items-center">
-                <div className="relative">
-                  <div className="absolute -inset-2 bg-gradient-to-r from-[#d4af37]/40 via-[#d4af37]/20 to-[#d4af37]/40 rounded-lg blur-md opacity-75" />
-                  <img 
-                    src={agentCameraImage} 
-                    alt="Agent camera analyzing cards"
-                    className="relative w-full h-64 object-cover rounded-lg border-2 border-[#d4af37] shadow-2xl"
-                    data-testid="img-agent-camera"
-                  />
-                </div>
-              </div>
-
-              {/* Right Image */}
-              <div className="flex justify-center items-center">
-                <img 
-                  src={dataVizImage} 
-                  alt="Financial data visualization"
-                  className="w-full h-64 object-cover rounded-lg border border-[#d4af37]/30 hover:border-[#d4af37] transition-colors"
-                  data-testid="img-data-viz-2"
-                />
-              </div>
+              <p className="text-center text-white/60 text-sm">Premium lifestyle benefits: Airport lounges • Fine dining • Luxury travel experiences</p>
             </div>
 
             {/* Comparison Table */}
@@ -317,8 +309,17 @@ export default function Home() {
                     <th className="text-left py-4 px-4 text-white/80 font-semibold">Feature</th>
                     <th className="text-center py-4 px-4 text-white/60 font-medium">NerdWallet</th>
                     <th className="text-center py-4 px-4 text-white/60 font-medium">Bankrate</th>
-                    <th className="text-center py-4 px-4 text-white/60 font-medium">Forbes</th>
-                    <th className="text-center py-4 px-4 text-[#d4af37] font-semibold">Agent Kammer</th>
+                    <th className="text-center py-4 px-4 text-white/60 font-medium">Credit Karma</th>
+                    <th 
+                      className="text-center py-4 px-4 text-[#d4af37] font-semibold relative"
+                      style={{
+                        backgroundColor: 'rgba(212, 175, 55, 0.05)',
+                        boxShadow: 'inset 0 0 20px rgba(212, 175, 55, 0.15), 0 0 20px rgba(212, 175, 55, 0.1)'
+                      }}
+                    >
+                      Agent Kammer
+                    </th>
+                    <th className="text-center py-4 px-4 text-white/60 font-medium">Chase</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -326,36 +327,41 @@ export default function Home() {
                     <td className="py-4 px-4 text-white">Total Cards</td>
                     <td className="py-4 px-4 text-center text-white/60">12–20</td>
                     <td className="py-4 px-4 text-center text-white/60">10–25</td>
-                    <td className="py-4 px-4 text-center text-white/60">10–18</td>
-                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold">100+</td>
+                    <td className="py-4 px-4 text-center text-white/60">8–15</td>
+                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>100+</td>
+                    <td className="py-4 px-4 text-center text-white/60">25–40</td>
                   </tr>
                   <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
                     <td className="py-4 px-4 text-white">Fintech Cards</td>
                     <td className="py-4 px-4 text-center text-white/60">❌</td>
                     <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-4 px-4 text-center text-white/60">Limited</td>
+                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
                     <td className="py-4 px-4 text-center text-white/60">❌</td>
-                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold">✓</td>
                   </tr>
                   <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
                     <td className="py-4 px-4 text-white">Crypto Rewards Cards</td>
                     <td className="py-4 px-4 text-center text-white/60">❌</td>
                     <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
                     <td className="py-4 px-4 text-center text-white/60">Limited</td>
-                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold">✓</td>
                   </tr>
                   <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
                     <td className="py-4 px-4 text-white">AI-Based Matching</td>
                     <td className="py-4 px-4 text-center text-white/60">❌</td>
                     <td className="py-4 px-4 text-center text-white/60">❌</td>
                     <td className="py-4 px-4 text-center text-white/60">❌</td>
-                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold">✓</td>
+                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
+                    <td className="py-4 px-4 text-center text-white/60">❌</td>
                   </tr>
                   <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
                     <td className="py-4 px-4 text-white">Independent Ranking</td>
                     <td className="py-4 px-4 text-center text-white/60">❌</td>
                     <td className="py-4 px-4 text-center text-white/60">❌</td>
                     <td className="py-4 px-4 text-center text-white/60">Partial</td>
-                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold">✓</td>
+                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
+                    <td className="py-4 px-4 text-center text-white/60">❌</td>
                   </tr>
                 </tbody>
               </table>
@@ -539,40 +545,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Coming Soon Dashboard */}
+      {/* Financial Dashboard CTA */}
       <section className="py-16 lg:py-20 bg-[#0a1628]">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-6">Coming Soon</Badge>
-          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-4">
-            Your Personal Dashboard
+          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-6">
+            Your Financial Dashboard
           </h2>
-          <p className="text-white/70 mb-8">
-            Soon you'll be able to log in and access your Agentic Profile, personalized recommendations, saved offers, and click directly into finance modules.
+          <p className="text-white/70 text-lg mb-8">
+            Explore all categories and find the perfect products matched to your profile
           </p>
           
-          <form 
-            onSubmit={(e) => {
-              e.preventDefault();
-              setEmail("");
-            }}
-            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-          >
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/50"
-              data-testid="input-early-access-email"
-            />
-            <Button 
-              type="submit"
-              className="h-12 px-6 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
-              data-testid="button-early-access"
-            >
-              Get Early Access
-            </Button>
-          </form>
+          <div className="space-y-4">
+            <Link href="/dashboard">
+              <Button 
+                className="w-full sm:w-auto px-8 h-12 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
+                data-testid="button-dashboard"
+              >
+                Quick Wins - Start Here <ArrowRight className="h-5 w-5 ml-2" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
     </div>
