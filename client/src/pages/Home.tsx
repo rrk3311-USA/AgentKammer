@@ -31,6 +31,8 @@ import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
 import { ActivateAgentMode } from "@/components/ActivateAgentMode";
 import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
 import conciergeImage from '@assets/generated_images/concierge_agent_top_hat_luxury_interior.png';
+import agentCameraImage from '@assets/generated_images/financial_agent_with_camera.png';
+import dataVizImage from '@assets/generated_images/financial_data_visualization.png';
 
 const categoryIcons: Record<string, any> = {
   'CreditCard': CreditCard,
@@ -260,7 +262,7 @@ export default function Home() {
       {/* Credit Card Comparison Module */}
       <section className="py-12 lg:py-16 bg-[#0a1628]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-8">
+          <div className="text-center mb-12">
               <h3 className="font-serif text-2xl lg:text-3xl font-bold text-white mb-3">
                 Compare 100+ Credit Cards
                 <br />
@@ -269,6 +271,42 @@ export default function Home() {
               <p className="text-white/70 max-w-2xl mx-auto">
                 Our AI-powered engine analyzes 100+ card options—including fintech, crypto, and startup cards that legacy sites don't show.
               </p>
+            </div>
+
+            {/* Image Gallery with Center Highlight */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
+              {/* Left Image */}
+              <div className="flex justify-center items-center">
+                <img 
+                  src={dataVizImage} 
+                  alt="Financial data visualization"
+                  className="w-full h-64 object-cover rounded-lg border border-[#d4af37]/30 hover:border-[#d4af37] transition-colors"
+                  data-testid="img-data-viz"
+                />
+              </div>
+
+              {/* Center Image - Highlighted */}
+              <div className="flex justify-center items-center">
+                <div className="relative">
+                  <div className="absolute -inset-2 bg-gradient-to-r from-[#d4af37]/40 via-[#d4af37]/20 to-[#d4af37]/40 rounded-lg blur-md opacity-75" />
+                  <img 
+                    src={agentCameraImage} 
+                    alt="Agent camera analyzing cards"
+                    className="relative w-full h-64 object-cover rounded-lg border-2 border-[#d4af37] shadow-2xl"
+                    data-testid="img-agent-camera"
+                  />
+                </div>
+              </div>
+
+              {/* Right Image */}
+              <div className="flex justify-center items-center">
+                <img 
+                  src={dataVizImage} 
+                  alt="Financial data visualization"
+                  className="w-full h-64 object-cover rounded-lg border border-[#d4af37]/30 hover:border-[#d4af37] transition-colors"
+                  data-testid="img-data-viz-2"
+                />
+              </div>
             </div>
 
             {/* Comparison Table */}
