@@ -129,6 +129,33 @@ export default function Contact() {
                     </div>
                   </div>
                 </Card>
+
+                {/* AI Chat Reference */}
+                <Card className="p-6 bg-gradient-to-br from-[#d4af37]/5 to-[#d4af37]/10 border border-[#d4af37]/30">
+                  <div className="flex items-start gap-4">
+                    <div className="flex items-center justify-center">
+                      <Sparkles className="w-10 h-10 text-[#d4af37]" style={{ transform: 'rotate(15deg)' }} />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold mb-2 text-[#d4af37]">Quick Questions?</h4>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Most questions can be answered instantly with our AI concierge chatbot! Get immediate assistance 24/7.
+                      </p>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black"
+                        onClick={() => {
+                          const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLElement;
+                          if (chatButton) chatButton.click();
+                        }}
+                        data-testid="button-open-chat-from-contact"
+                      >
+                        Chat with Agent K
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
               </div>
             </div>
 
@@ -214,33 +241,6 @@ export default function Contact() {
                     {contactMutation.isPending ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
-              </Card>
-
-              {/* AI Chat Reference */}
-              <Card className="p-6 bg-gradient-to-br from-[#d4af37]/5 to-[#d4af37]/10 border border-[#d4af37]/30">
-                <div className="flex items-start gap-4">
-                  <div className="flex items-center justify-center">
-                    <Sparkles className="w-10 h-10 text-[#d4af37]" style={{ transform: 'rotate(15deg)' }} />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-semibold mb-2 text-[#d4af37]">Quick Questions?</h4>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Most questions can be answered instantly with our AI concierge chatbot! Get immediate assistance 24/7.
-                    </p>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black"
-                      onClick={() => {
-                        const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLElement;
-                        if (chatButton) chatButton.click();
-                      }}
-                      data-testid="button-open-chat-from-contact"
-                    >
-                      Chat with Agent K
-                    </Button>
-                  </div>
-                </div>
               </Card>
             </div>
           </div>
