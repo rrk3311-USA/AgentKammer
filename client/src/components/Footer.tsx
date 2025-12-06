@@ -8,7 +8,7 @@ export function Footer() {
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       <div className="bg-background border-t border-border/50">
         <div className="max-w-7xl mx-auto px-6 py-6 pt-[0px] pb-[0px] pl-[40px] pr-[40px] ml-[45px] mr-[45px] mt-[3px] mb-[3px] text-left">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             <div>
               <p className="text-xs md:text-sm text-foreground font-medium mb-3 block">
                 Free Financial Tools
@@ -27,24 +27,16 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground mb-4">
-                <li>
-                  <Link href="/credit-cards" className="hover:text-foreground transition-colors">
-                    Credit Cards
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/investing" className="hover:text-foreground transition-colors">
-                    Investing
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
               <Link href="/real-estate">
-                <h4 className="font-medium mb-3 text-sm hover:text-foreground transition-colors cursor-pointer">Services</h4>
+                <h4 className="font-medium mb-3 text-sm hover:text-foreground transition-colors cursor-pointer">Real Estate Services</h4>
               </Link>
               <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground mb-4">
+                <li>
+                  <Link href="/refinancing" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                    <RefreshCw className="h-3.5 w-3.5" />
+                    <span>Refinancing Rate Watch</span>
+                  </Link>
+                </li>
                 <li>
                   <Link href="/reverse-buyer-origination" className="flex items-center gap-2 hover:text-foreground transition-colors">
                     <Sparkles className="h-3.5 w-3.5" />
@@ -57,19 +49,24 @@ export function Footer() {
                     <span>Reverse Seller Architecture</span>
                   </Link>
                 </li>
-              </ul>
-            </div>
-            <div>
-              <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground mb-4">
-                <li>
-                  <Link href="/refinancing" className="flex items-center gap-2 hover:text-foreground transition-colors">
-                    <RefreshCw className="h-3.5 w-3.5" />
-                    <span>Refinancing Rate Watch</span>
-                  </Link>
-                </li>
                 <li>
                   <Link href="/contact" className="hover:text-foreground transition-colors">
                     Contact
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-medium mb-3 text-sm text-foreground">Flagship Services</h4>
+              <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground mb-4">
+                <li>
+                  <Link href="/credit-cards" className="hover:text-foreground transition-colors">
+                    Credit Cards
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/investing" className="hover:text-foreground transition-colors">
+                    Investing
                   </Link>
                 </li>
               </ul>
