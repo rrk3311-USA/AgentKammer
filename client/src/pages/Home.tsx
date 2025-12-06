@@ -556,12 +556,14 @@ export default function Home() {
           </p>
           
           <div className="space-y-4">
-            <Link href="/dashboard">
+            <Link href="/profile">
               <Button 
-                className="w-full sm:w-auto px-8 h-12 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
+                size="lg"
+                className="px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
                 data-testid="button-dashboard"
               >
-                Quick Wins - Start Here <ArrowRight className="h-5 w-5 ml-2" />
+                <Brain className="h-5 w-5 mr-2" />
+                Start Your Agentic Profile
               </Button>
             </Link>
           </div>
