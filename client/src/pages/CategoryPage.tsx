@@ -350,23 +350,23 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
       </section>
 
       {/* Main Content */}
-      <section className="py-12 lg:py-16 bg-background">
+      <section className="py-12 lg:py-16 bg-[#0a1628]">
         <div className="max-w-7xl mx-auto px-6">
           {/* Credit Cards Button Style */}
           {categoryId === 'credit-cards' && offers.length > 0 ? (
-            <div className="space-y-8">
+            <div className="space-y-6">
               {subcategories.map((subcategory) => {
                 const subcategoryOffers = offers.filter(o => o.subcategory === subcategory);
                 if (subcategoryOffers.length === 0) return null;
                 
                 return (
                   <div key={subcategory}>
-                    <h2 className="text-sm font-bold tracking-wide uppercase text-muted-foreground mb-4">{subcategory}</h2>
-                    <div className="flex flex-wrap gap-3">
+                    <h2 className="text-xs font-bold tracking-wider uppercase text-white/70 mb-3">{subcategory}</h2>
+                    <div className="flex flex-wrap gap-2">
                       {subcategoryOffers.map((offer) => (
                         <button 
                           key={offer.id}
-                          className="px-4 py-2 rounded-full bg-[#d4af37] text-[#0a1628] font-medium text-sm hover-elevate active-elevate-2 transition-all"
+                          className="px-3 py-1.5 rounded-md bg-[#d4af37] text-[#0a1628] font-semibold text-xs hover-elevate active-elevate-2 transition-all"
                           data-testid={`button-card-${offer.id}`}
                         >
                           {offer.name}
