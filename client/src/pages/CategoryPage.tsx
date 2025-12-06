@@ -312,8 +312,9 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
         className={`relative pt-16 pb-32 lg:pt-20 lg:pb-40 flex items-start justify-center`}
         style={config.heroImage ? {
           backgroundImage: `url(${config.heroImage})`,
-          backgroundSize: 'cover',
+          backgroundSize: '60%',
           backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
           minHeight: '320px'
         } : { minHeight: '320px' }}
       >
@@ -329,21 +330,23 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
       </section>
 
       {/* Agentic Profile CTA */}
-      <section className="bg-[#0a1628] py-6">
+      <section className="bg-[#0a1628] py-8 lg:py-10">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <Brain className="h-8 w-8 text-[#d4af37]" />
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
+            <div className="flex items-start gap-6">
+              <div className="w-16 h-16 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center flex-shrink-0">
+                <Brain className="h-8 w-8 text-[#d4af37]" />
+              </div>
               <div>
-                <h3 className="text-white font-semibold">Get Personalized Matches</h3>
-                <p className="text-white/70 text-sm">Build your Agentic Profile for AI-powered recommendations</p>
+                <h3 className="text-white font-serif text-2xl font-bold mb-2">Ready to find your perfect card?</h3>
+                <p className="text-white/70">Start Your Agentic Profile</p>
               </div>
             </div>
             <Button 
-              className="bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
+              className="bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90 h-12 px-8 text-base"
               data-testid="button-build-profile"
             >
-              Build Your Profile <ArrowRight className="h-4 w-4 ml-2" />
+              Build Your Profile <ArrowRight className="h-5 w-5 ml-2" />
             </Button>
           </div>
         </div>
