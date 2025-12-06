@@ -478,7 +478,7 @@ export default function Home() {
                 Put the power in your hands. Sellers and their agents compete to win your business with better terms, faster closing, and more favorable conditions.
               </p>
               <Link href="/reverse-buyer-origination">
-                <Button variant="outline" size="sm" className="border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/10" data-testid="button-rbo">
+                <Button size="sm" className="bg-[#d3af37] text-[#000000]" data-testid="button-rbo">
                   Learn More <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
               </Link>
@@ -507,7 +507,7 @@ export default function Home() {
                 Selling your home? Multiple qualified buyer agents compete to represent you, driving up demand and getting you the best possible sale price and terms.
               </p>
               <Link href="/reverse-seller-architecture">
-                <Button variant="outline" size="sm" className="border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/10" data-testid="button-rsa">
+                <Button size="sm" className="bg-[#d2b038] text-[#000000]" data-testid="button-rsa">
                   Learn More <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
               </Link>
@@ -536,7 +536,7 @@ export default function Home() {
                 Never miss a refinancing opportunity. AI-powered rate monitoring alerts you instantly when rates drop, showing exact savings and break-even timelines.
               </p>
               <Link href="/refinancing">
-                <Button variant="outline" size="sm" className="border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/10" data-testid="button-rrw">
+                <Button size="sm" className="bg-[#d2b038] text-[#000000]" data-testid="button-rrw">
                   Learn More <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
               </Link>
