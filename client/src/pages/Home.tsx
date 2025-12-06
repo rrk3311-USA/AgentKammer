@@ -28,6 +28,7 @@ import {
   RefreshCw
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
+import { AgentModeToggle } from "@/components/AgentModeToggle";
 import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
 import conciergeImage from '@assets/generated_images/concierge_agent_top_hat_luxury_interior.png';
 
@@ -97,28 +98,33 @@ export default function Home() {
                 <span className="text-[#d4af37] font-semibold">compete for you</span>.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link href="/profile">
+              <div className="flex flex-col items-center lg:items-start">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <Link href="/profile">
+                    <div className="flex flex-col items-center">
+                      <Button 
+                        size="lg" 
+                        className="h-14 px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold text-lg hover:opacity-90"
+                        data-testid="button-start-profile"
+                      >
+                        <Brain className="h-5 w-5 mr-2" />
+                        Start Your Agentic Profile
+                      </Button>
+                      <AgentModeToggle />
+                    </div>
+                  </Link>
                   <Button 
                     size="lg" 
-                    className="h-14 px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold text-lg hover:opacity-90"
-                    data-testid="button-start-profile"
+                    variant="outline"
+                    className="h-14 px-8 border-white/30 text-white hover:bg-white/10 font-semibold text-lg"
+                    data-testid="button-browse-categories"
+                    onClick={() => {
+                      document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
                   >
-                    <Brain className="h-5 w-5 mr-2" />
-                    Start Your Agentic Profile
+                    Browse Categories
                   </Button>
-                </Link>
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  className="h-14 px-8 border-white/30 text-white hover:bg-white/10 font-semibold text-lg"
-                  data-testid="button-browse-categories"
-                  onClick={() => {
-                    document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  Browse Categories
-                </Button>
+                </div>
               </div>
             </div>
 
