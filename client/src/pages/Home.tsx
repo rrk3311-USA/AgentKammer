@@ -400,7 +400,6 @@ export default function Home() {
 
         <div className="relative max-w-7xl mx-auto px-6 z-10">
           <div className="text-center mb-12">
-            <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-4">Luxury Real Estate</Badge>
             <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4 text-white">
               Real Estate Concierge
             </h2>
