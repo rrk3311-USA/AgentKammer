@@ -76,7 +76,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-[#0a1628] via-[#0f1d32] to-[#0a1628] py-16 lg:py-24 overflow-hidden">
+      <section className="relative bg-gradient-to-b from-[#0a1628] via-[#0f1d32] to-[#0a1628] py-10 lg:py-16 overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-[#d4af37]/10 rounded-full blur-3xl animate-pulse" />
@@ -85,7 +85,7 @@ export default function Home() {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             {/* Left: Text Content */}
             <div className="text-center lg:text-left">
               <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-6" data-testid="badge-hero">
@@ -93,12 +93,12 @@ export default function Home() {
                 Powered by Agentic AI
               </Badge>
               
-              <h1 className="font-serif text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight">
+              <h1 className="font-serif text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 leading-tight">
                 Your AI Agent for Better{" "}
                 <span className="text-[#d4af37]">Financial Outcomes</span>
               </h1>
               
-              <p className="text-lg lg:text-xl text-white/80 mb-8 leading-relaxed">
+              <p className="text-lg lg:text-xl text-white/80 mb-4 leading-relaxed">
                 One profile. Our Agentic Comparison Engine uses LLMs + compute to analyze offers and force banks, lenders, credit cards, and financial products to{" "}
                 <span className="text-[#d4af37] font-semibold">compete for you</span>.
               </p>
@@ -113,10 +113,10 @@ export default function Home() {
       </section>
 
       {/* How the Agentic Engine Works */}
-      <section className="py-8 lg:py-12 bg-background">
+      <section className="py-6 lg:py-8 bg-background">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-6">
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-2">
+          <div className="text-center mb-4">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-1">
               The Agentic Advantage
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
@@ -124,36 +124,36 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="p-6 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-1">
-              <div className="absolute top-4 right-4 text-6xl font-bold text-muted/10">1</div>
-              <div className="w-16 h-16 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-6">
-                <Users className="h-8 w-8 text-[#d4af37]" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Card className="p-4 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-1">
+              <div className="absolute top-2 right-2 text-5xl font-bold text-muted/10">1</div>
+              <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-4">
+                <Users className="h-7 w-7 text-[#d4af37]" />
               </div>
-              <h3 className="font-serif text-xl font-semibold mb-3">Build Your Agentic Profile</h3>
-              <p className="text-muted-foreground">
+              <h3 className="font-serif text-lg font-semibold mb-2">Build Your Agentic Profile</h3>
+              <p className="text-muted-foreground text-sm">
                 Income, credit band, location, goals - one time. Your profile powers recommendations across all categories.
               </p>
             </Card>
 
-            <Card className="p-6 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-2">
-              <div className="absolute top-4 right-4 text-6xl font-bold text-muted/10">2</div>
-              <div className="w-16 h-16 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-6">
-                <Brain className="h-8 w-8 text-[#d4af37]" />
+            <Card className="p-4 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-2">
+              <div className="absolute top-2 right-2 text-5xl font-bold text-muted/10">2</div>
+              <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-4">
+                <Brain className="h-7 w-7 text-[#d4af37]" />
               </div>
-              <h3 className="font-serif text-xl font-semibold mb-3">AI + Compute Analyze the Field</h3>
-              <p className="text-muted-foreground">
+              <h3 className="font-serif text-lg font-semibold mb-2">AI + Compute Analyze the Field</h3>
+              <p className="text-muted-foreground text-sm">
                 We use LLM agents to screen hundreds of partner offers across categories, ranking them by your fit.
               </p>
             </Card>
 
-            <Card className="p-6 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-3">
-              <div className="absolute top-4 right-4 text-6xl font-bold text-muted/10">3</div>
-              <div className="w-16 h-16 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-6">
-                <Zap className="h-8 w-8 text-[#d4af37]" />
+            <Card className="p-4 text-center relative overflow-hidden group hover-elevate" data-testid="card-step-3">
+              <div className="absolute top-2 right-2 text-5xl font-bold text-muted/10">3</div>
+              <div className="w-14 h-14 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-4">
+                <Zap className="h-7 w-7 text-[#d4af37]" />
               </div>
-              <h3 className="font-serif text-xl font-semibold mb-3">You Choose - We Route You</h3>
-              <p className="text-muted-foreground">
+              <h3 className="font-serif text-lg font-semibold mb-2">You Choose - We Route You</h3>
+              <p className="text-muted-foreground text-sm">
                 Launch a module and go straight to the best matched lender, card, or tool. No guesswork.
               </p>
             </Card>
@@ -162,7 +162,7 @@ export default function Home() {
       </section>
 
       {/* Flagship Services Hero - PS5 Style */}
-      <section id="categories" className="relative py-16 lg:py-24 overflow-hidden">
+      <section id="categories" className="relative py-10 lg:py-16 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
@@ -174,10 +174,10 @@ export default function Home() {
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             {/* Left Column - Content & Offers */}
-            <div className="space-y-6">
-              <div className="space-y-4">
+            <div className="space-y-4">
+              <div className="space-y-3">
                 <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Apply Your Agentic Advantage</Badge>
                 <h2 className="font-serif text-4xl lg:text-5xl font-bold text-white leading-tight">
                   Flagship Services
@@ -188,7 +188,7 @@ export default function Home() {
               </div>
 
               {/* Offers Stack */}
-              <div className="space-y-4 pt-4">
+              <div className="space-y-3 pt-2">
                 {/* Credit Cards Offer */}
                 {PRIMARY_CATEGORIES.map((category) => {
                   const IconComponent = categoryIcons[category.icon];
@@ -263,9 +263,9 @@ export default function Home() {
       </section>
 
       {/* Credit Card Comparison Module */}
-      <section className="py-12 lg:py-16 bg-[#0a1628]">
+      <section className="py-8 lg:py-12 bg-[#0a1628]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
               <h3 className="font-serif text-2xl lg:text-3xl font-bold text-white mb-3">
                 Compare 100+ Credit Cards
                 <br />
@@ -277,7 +277,7 @@ export default function Home() {
             </div>
 
             {/* Lifestyle Benefits Collage */}
-            <div className="mb-12 max-w-5xl mx-auto">
+            <div className="mb-8 max-w-5xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 <img 
                   src={airportLoungeImage} 
@@ -302,16 +302,16 @@ export default function Home() {
             </div>
 
             {/* Comparison Table */}
-            <div className="overflow-x-auto mb-8">
+            <div className="overflow-x-auto mb-6">
               <table className="w-full text-sm border-collapse">
                 <thead>
                   <tr className="border-b border-white/20">
-                    <th className="text-left py-4 px-4 text-white/80 font-semibold">Feature</th>
-                    <th className="text-center py-4 px-4 text-white/60 font-medium">NerdWallet</th>
-                    <th className="text-center py-4 px-4 text-white/60 font-medium">Bankrate</th>
-                    <th className="text-center py-4 px-4 text-white/60 font-medium">Credit Karma</th>
+                    <th className="text-left py-3 px-3 text-white/80 font-semibold text-sm">Feature</th>
+                    <th className="text-center py-3 px-3 text-white/60 font-medium text-sm">NerdWallet</th>
+                    <th className="text-center py-3 px-3 text-white/60 font-medium text-sm">Bankrate</th>
+                    <th className="text-center py-3 px-3 text-white/60 font-medium text-sm">Credit Karma</th>
                     <th 
-                      className="text-center py-4 px-4 text-[#d4af37] font-semibold relative"
+                      className="text-center py-3 px-3 text-[#d4af37] font-semibold relative text-sm"
                       style={{
                         backgroundColor: 'rgba(212, 175, 55, 0.05)',
                         boxShadow: 'inset 0 0 20px rgba(212, 175, 55, 0.15), 0 0 20px rgba(212, 175, 55, 0.1)'
@@ -319,56 +319,56 @@ export default function Home() {
                     >
                       Agent Kammer
                     </th>
-                    <th className="text-center py-4 px-4 text-white/60 font-medium">Chase</th>
+                    <th className="text-center py-3 px-3 text-white/60 font-medium text-sm">Chase</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                    <td className="py-4 px-4 text-white">Total Cards</td>
-                    <td className="py-4 px-4 text-center text-white/60">12–20</td>
-                    <td className="py-4 px-4 text-center text-white/60">10–25</td>
-                    <td className="py-4 px-4 text-center text-white/60">8–15</td>
-                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>100+</td>
-                    <td className="py-4 px-4 text-center text-white/60">25–40</td>
+                    <td className="py-3 px-3 text-white text-sm">Total Cards</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">12–20</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">10–25</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">8–15</td>
+                    <td className="py-3 px-3 text-center text-[#d4af37] font-semibold text-sm" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>100+</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">25–40</td>
                   </tr>
                   <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                    <td className="py-4 px-4 text-white">Fintech Cards</td>
-                    <td className="py-4 px-4 text-center text-white/60">❌</td>
-                    <td className="py-4 px-4 text-center text-white/60">❌</td>
-                    <td className="py-4 px-4 text-center text-white/60">Limited</td>
-                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
-                    <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-3 px-3 text-white text-sm">Fintech Cards</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">Limited</td>
+                    <td className="py-3 px-3 text-center text-[#d4af37] font-semibold text-sm" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
                   </tr>
                   <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                    <td className="py-4 px-4 text-white">Crypto Rewards Cards</td>
-                    <td className="py-4 px-4 text-center text-white/60">❌</td>
-                    <td className="py-4 px-4 text-center text-white/60">❌</td>
-                    <td className="py-4 px-4 text-center text-white/60">❌</td>
-                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
-                    <td className="py-4 px-4 text-center text-white/60">Limited</td>
+                    <td className="py-3 px-3 text-white text-sm">Crypto Rewards Cards</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
+                    <td className="py-3 px-3 text-center text-[#d4af37] font-semibold text-sm" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">Limited</td>
                   </tr>
                   <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                    <td className="py-4 px-4 text-white">AI-Based Matching</td>
-                    <td className="py-4 px-4 text-center text-white/60">❌</td>
-                    <td className="py-4 px-4 text-center text-white/60">❌</td>
-                    <td className="py-4 px-4 text-center text-white/60">❌</td>
-                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
-                    <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-3 px-3 text-white text-sm">AI-Based Matching</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
+                    <td className="py-3 px-3 text-center text-[#d4af37] font-semibold text-sm" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
                   </tr>
                   <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                    <td className="py-4 px-4 text-white">Independent Ranking</td>
-                    <td className="py-4 px-4 text-center text-white/60">❌</td>
-                    <td className="py-4 px-4 text-center text-white/60">❌</td>
-                    <td className="py-4 px-4 text-center text-white/60">Partial</td>
-                    <td className="py-4 px-4 text-center text-[#d4af37] font-semibold" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
-                    <td className="py-4 px-4 text-center text-white/60">❌</td>
+                    <td className="py-3 px-3 text-white text-sm">Independent Ranking</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">Partial</td>
+                    <td className="py-3 px-3 text-center text-[#d4af37] font-semibold text-sm" style={{backgroundColor: 'rgba(212, 175, 55, 0.05)'}}>✓</td>
+                    <td className="py-3 px-3 text-center text-white/60 text-sm">❌</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
             {/* Why We're Different */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Card className="p-6 bg-[#d4af37]/5 border-[#d4af37]/20">
                 <h4 className="font-semibold text-lg text-[#d4af37] mb-4">Why Legacy Sites Show Fewer Cards</h4>
                 <ul className="space-y-2 text-sm text-white/80">
@@ -415,7 +415,7 @@ export default function Home() {
             </div>
 
             {/* CTA */}
-            <div className="text-center mt-8">
+            <div className="text-center mt-6">
               <p className="text-white/70 mb-4">Ready to find your perfect card?</p>
               <Link href="/profile">
                 <Button 
@@ -432,7 +432,7 @@ export default function Home() {
       </section>
 
       {/* Real Estate Concierge */}
-      <section className="relative py-16 lg:py-24 overflow-hidden">
+      <section className="relative py-10 lg:py-16 overflow-hidden">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -445,7 +445,7 @@ export default function Home() {
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 z-10">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4 text-white">
               Real Estate Concierge
             </h2>
@@ -454,9 +454,9 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* RBO - Reverse Buyer Origination */}
-            <div className="space-y-4">
+            <div className="space-y-3">
               <div 
                 className="w-12 h-12 rounded-lg flex items-center justify-center relative overflow-hidden"
                 style={{
@@ -485,7 +485,7 @@ export default function Home() {
             </div>
 
             {/* RSA - Reverse Seller Architecture */}
-            <div className="space-y-4">
+            <div className="space-y-3">
               <div 
                 className="w-12 h-12 rounded-lg flex items-center justify-center relative overflow-hidden"
                 style={{
@@ -514,7 +514,7 @@ export default function Home() {
             </div>
 
             {/* RRW - Refinancing Rate Watch */}
-            <div className="space-y-4">
+            <div className="space-y-3">
               <div 
                 className="w-12 h-12 rounded-lg flex items-center justify-center relative overflow-hidden"
                 style={{
@@ -546,12 +546,12 @@ export default function Home() {
       </section>
 
       {/* Financial Dashboard CTA */}
-      <section className="py-16 lg:py-20 bg-[#0a1628]">
+      <section className="py-10 lg:py-14 bg-[#0a1628]">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-6">
+          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-4">
             Your Financial Dashboard
           </h2>
-          <p className="text-white/70 text-lg mb-8">
+          <p className="text-white/70 text-lg mb-6">
             Explore all categories and find the perfect products matched to your profile
           </p>
           
