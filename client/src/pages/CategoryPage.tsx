@@ -28,6 +28,7 @@ import {
   Zap,
   Wifi
 } from "lucide-react";
+import { ClayAnimationArm } from "@/components/ClayAnimationArm";
 import { SUBCATEGORIES, SAMPLE_OFFERS, type ProductOffer, calculateMatchScore, getMatchExplanation } from "@shared/productOffers";
 
 function CreditCardVisual({ offer }: { offer: ProductOffer }) {
@@ -353,6 +354,11 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
       {/* Main Content */}
       <section className="py-8 lg:py-12 bg-background">
         <div className="max-w-7xl mx-auto px-6">
+          {/* Claymation Arm Visual */}
+          {filteredOffers && filteredOffers.length > 0 && (
+            <ClayAnimationArm />
+          )}
+
           {/* Subcategory Tabs */}
           {subcategories.length > 0 && (
             <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
