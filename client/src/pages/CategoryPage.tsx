@@ -439,7 +439,7 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
           {filteredOffers.length > 0 && (
             <div className="mt-12 text-center">
               <Card className="inline-block p-8 bg-[#d4af37]/5 border-[#d4af37]/20">
-                <h3 className="font-serif text-xl font-semibold mb-2">Need Help Choosing?</h3>
+                <h3 className="font-serif text-xl font-semibold mb-2 text-[#ffffff]">Need Help Choosing?</h3>
                 <p className="mb-4 text-[#ffffff]">
                   Our AI can analyze your profile and recommend the best option for you
                 </p>
