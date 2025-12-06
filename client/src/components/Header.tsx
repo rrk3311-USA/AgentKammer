@@ -100,10 +100,16 @@ export function Header() {
                   </Link>
                 ))}
                 <DropdownMenuSeparator />
-                <Link href="/real-estate">
-                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-real-estate">
+                <Link href="/reverse-seller-architecture">
+                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-reverse-seller">
                     <Home className="h-4 w-4 mr-2 text-[#d4af37]" />
-                    Real Estate Concierge
+                    Reverse Seller Architecture
+                  </DropdownMenuItem>
+                </Link>
+                <Link href="/refinancing">
+                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-rate-watch">
+                    <RefreshCw className="h-4 w-4 mr-2" />
+                    APR Watch
                   </DropdownMenuItem>
                 </Link>
                 <Link href="/free-tools">
@@ -122,16 +128,6 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link href="/refinancing">
-              <Button
-                variant="ghost"
-                className="hover-elevate active-elevate-2 h-10 px-3 gap-1"
-                data-testid="button-header-refinancing"
-              >
-                <RefreshCw className="h-4 w-4" />
-                <span className="text-sm font-medium">Rate Watch</span>
-              </Button>
-            </Link>
           </div>
 
           {/* Center Logo */}
@@ -217,7 +213,7 @@ export function Header() {
                 <Brain className="h-3 w-3 text-[#d4af37]" />
                 Compare Products
               </p>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-2 mb-4">
                 {financialCategories.map((category) => (
                   <Link key={category.id} href={`/${category.id}`} data-testid={`link-mobile-${category.id}`}>
                     <span
@@ -230,6 +226,15 @@ export function Header() {
                   </Link>
                 ))}
               </div>
+              <Link href="/real-estate" data-testid="link-mobile-real-estate-concierge">
+                <span
+                  className="text-sm font-medium hover:text-[#d4af37] cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-muted/50"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Home className="h-4 w-4" />
+                  Real Estate Concierge
+                </span>
+              </Link>
             </div>
 
             <div className="border-t pt-4">
