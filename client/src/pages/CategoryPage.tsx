@@ -309,31 +309,31 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section 
-        className={`relative py-8 lg:py-10 flex items-center justify-center`}
+        className={`relative pt-24 pb-8 lg:pt-32 lg:pb-10 flex items-end justify-center`}
         style={config.heroImage ? {
           backgroundImage: `url(${config.heroImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          minHeight: '280px'
-        } : { minHeight: '280px' }}
+          minHeight: '320px'
+        } : { minHeight: '320px' }}
       >
         {config.heroImage ? (
-          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/70 to-black/75" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/35 to-black/40" />
         ) : (
           <div className={`absolute inset-0 bg-gradient-to-br ${config.heroGradient}`} />
         )}
         <div className="max-w-3xl mx-auto px-6 relative z-10 text-center">
-          <h1 className="font-serif text-2xl lg:text-3xl font-bold text-white mb-2">{config.name}</h1>
-          <p className="text-white/80 text-sm lg:text-base mb-4">{config.description}</p>
+          <h1 className="font-serif text-xl lg:text-2xl font-bold text-white mb-1">{config.name}</h1>
+          <p className="text-white/80 text-xs lg:text-sm mb-2">{config.description}</p>
           
-          <div className="flex items-center justify-center gap-2 flex-wrap">
-            <Badge className="bg-white/20 text-white border-white/30">
-              <Sparkles className="h-3 w-3 mr-1" />
-              AI-Powered Comparison
+          <div className="flex items-center justify-center gap-1.5 flex-wrap">
+            <Badge className="bg-white/20 text-white border-white/30 text-xs">
+              <Sparkles className="h-2.5 w-2.5 mr-0.5" />
+              AI-Powered
             </Badge>
-            <Badge className="bg-white/20 text-white border-white/30">
-              <Zap className="h-3 w-3 mr-1" />
-              {offers.length} Offers Available
+            <Badge className="bg-white/20 text-white border-white/30 text-xs">
+              <Zap className="h-2.5 w-2.5 mr-0.5" />
+              {offers.length} Offers
             </Badge>
           </div>
         </div>
