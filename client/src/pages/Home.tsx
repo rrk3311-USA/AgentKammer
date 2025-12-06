@@ -138,8 +138,8 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Offers Stack */}
-              <div className="space-y-3 pt-2">
+              {/* Offers Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
                 {/* Credit Cards Offer */}
                 {PRIMARY_CATEGORIES.map((category) => {
                   const IconComponent = categoryIcons[category.icon];
