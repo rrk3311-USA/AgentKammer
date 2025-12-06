@@ -30,6 +30,7 @@ import Audiobooks from "@/pages/Audiobooks";
 import Ecourses from "@/pages/Ecourses";
 import Downloads from "@/pages/Downloads";
 import ContentStudio from "@/pages/ContentStudio";
+import Profile from "@/pages/Profile";
 import ReverseBuyerOrigination from "@/pages/ReverseBuyerOrigination";
 import ReverseByerOriginationGuide from "@/pages/ReverseByerOriginationGuide";
 import ReverseSellerOrigination from "@/pages/ReverseSellerOrigination";
@@ -78,8 +79,9 @@ function Router() {
       <Route path="/micro-investing" component={() => <CategoryPage categoryId="micro-investing" />} />
       <Route path="/refinancing" component={Refinancing} />
       
-      {/* Dashboard */}
+      {/* Dashboard & Profile */}
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/profile" component={Profile} />
       
       {/* Existing Routes */}
       <Route path="/saved" component={SavedSearches} />
