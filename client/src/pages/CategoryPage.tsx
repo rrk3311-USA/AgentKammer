@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import { SUBCATEGORIES, SAMPLE_OFFERS, type ProductOffer, calculateMatchScore, getMatchExplanation } from "@shared/productOffers";
 import investingHeroImage from "@assets/generated_images/golden_sunrise_over_financial_district_skyline.png";
+import creditCardsHeroImage from "@assets/generated_images/luxury_shopping_district_with_gold_lighting.png";
 
 function CreditCardVisual({ offer }: { offer: ProductOffer }) {
   const IconComponent = offer.issuerIcon ? (LucideIcons as any)[offer.issuerIcon] : CreditCard;
@@ -111,6 +112,7 @@ const CATEGORY_CONFIG: Record<string, {
     icon: CreditCard,
     description: 'AI-matched credit cards based on your profile, spending habits, and financial goals',
     heroGradient: 'from-blue-600 to-indigo-700',
+    heroImage: creditCardsHeroImage,
   },
   'personal-loans': {
     name: 'Personal Loans',
