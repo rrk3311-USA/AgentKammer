@@ -406,7 +406,7 @@ export default function Home() {
               Real Estate Concierge
             </h2>
             <p className="text-white/80 text-lg max-w-2xl mx-auto">
-              Premium home buying, selling, and mortgage intelligence for high-net-worth clients across California, Nevada, and New York
+              Premium home buying, selling, and mortgage intelligence for high-net-worth clients across the world
             </p>
           </div>
 
