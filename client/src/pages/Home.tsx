@@ -397,66 +397,54 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Reverse Seller Architecture */}
-            <Link href="/reverse-seller-architecture">
-              <Card className="p-6 bg-[#0f1d32] border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer group h-full" data-testid="card-reverse-seller">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 rounded-lg bg-[#d4af37]/15 flex items-center justify-center">
-                    <Building2 className="h-6 w-6 text-[#d4af37]" />
-                  </div>
-                  <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] transition-all" />
-                </div>
-                <h3 className="font-serif text-xl font-semibold text-white mb-3">Reverse by Your Seller</h3>
-                <p className="text-white/70 mb-4">
-                  Turn the tables in your favor. Our Reverse Seller Architecture lets buyer agents compete on behalf of sellers to get you better terms.
-                </p>
-                <ul className="space-y-2 text-sm text-white/60">
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#d4af37]">•</span>
-                    <span>Multiple agent bidding</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#d4af37]">•</span>
-                    <span>Competitive advantage</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#d4af37]">•</span>
-                    <span>Better deal outcomes</span>
-                  </li>
-                </ul>
-              </Card>
-            </Link>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {/* RBO - Reverse Buyer Opportunity */}
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-lg bg-[#d4af37]/15 flex items-center justify-center">
+                <Building2 className="h-6 w-6 text-[#d4af37]" />
+              </div>
+              <h3 className="font-serif text-xl font-semibold text-white">Reverse Buyer Opportunity</h3>
+              <p className="text-white/70">
+                Put the power in your hands. Sellers and their agents compete to win your business with better terms, faster closing, and more favorable conditions.
+              </p>
+              <Link href="/reverse-buyer-opportunity">
+                <Button variant="outline" size="sm" className="border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/10" data-testid="button-rbo">
+                  Learn More <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
 
-            {/* APR Watch */}
-            <Link href="/refinancing">
-              <Card className="p-6 bg-[#0f1d32] border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer group h-full" data-testid="card-apr-watch">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 rounded-lg bg-[#d4af37]/15 flex items-center justify-center">
-                    <RefreshCw className="h-6 w-6 text-[#d4af37]" />
-                  </div>
-                  <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] transition-all" />
-                </div>
-                <h3 className="font-serif text-xl font-semibold text-white mb-3">APR Watch</h3>
-                <p className="text-white/70 mb-4">
-                  Real-time mortgage rate monitoring with instant refinancing alerts. Know when it's time to act on rate drops.
-                </p>
-                <ul className="space-y-2 text-sm text-white/60">
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#d4af37]">•</span>
-                    <span>24/7 rate tracking</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#d4af37]">•</span>
-                    <span>Break-even analysis</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#d4af37]">•</span>
-                    <span>Instant notifications</span>
-                  </li>
-                </ul>
-              </Card>
-            </Link>
+            {/* RSA - Reverse Seller Architecture */}
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-lg bg-[#d4af37]/15 flex items-center justify-center">
+                <Users className="h-6 w-6 text-[#d4af37]" />
+              </div>
+              <h3 className="font-serif text-xl font-semibold text-white">Reverse Seller Architecture</h3>
+              <p className="text-white/70">
+                Selling your home? Multiple qualified buyer agents compete to represent you, driving up demand and getting you the best possible sale price and terms.
+              </p>
+              <Link href="/reverse-seller-architecture">
+                <Button variant="outline" size="sm" className="border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/10" data-testid="button-rsa">
+                  Learn More <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
+
+            {/* RRW - Refinancing Rate Watch */}
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-lg bg-[#d4af37]/15 flex items-center justify-center">
+                <RefreshCw className="h-6 w-6 text-[#d4af37]" />
+              </div>
+              <h3 className="font-serif text-xl font-semibold text-white">Refinancing Rate Watch</h3>
+              <p className="text-white/70">
+                Never miss a refinancing opportunity. AI-powered rate monitoring alerts you instantly when rates drop, showing exact savings and break-even timelines.
+              </p>
+              <Link href="/refinancing">
+                <Button variant="outline" size="sm" className="border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/10" data-testid="button-rrw">
+                  Learn More <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
