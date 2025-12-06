@@ -26,7 +26,7 @@ import {
   RefreshCw
 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const financialCategories = [
   { id: 'credit-cards', name: 'Credit Cards', icon: CreditCard },
@@ -38,6 +38,15 @@ export function Header() {
   const { theme, setTheme } = useTheme();
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [bookmarks, setBookmarks] = useState<string[]>([]);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('pageBookmarks');
+    const bookmarkList = stored ? JSON.parse(stored) : [];
+    setBookmarks(bookmarkList);
+    setIsBookmarked(bookmarkList.includes(location));
+  }, [location]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -45,6 +54,21 @@ export function Header() {
 
   const scrollToBottom = () => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  };
+
+  const toggleBookmark = () => {
+    const stored = localStorage.getItem('pageBookmarks');
+    let bookmarkList = stored ? JSON.parse(stored) : [];
+    
+    if (bookmarkList.includes(location)) {
+      bookmarkList = bookmarkList.filter((page: string) => page !== location);
+    } else {
+      bookmarkList.push(location);
+    }
+    
+    localStorage.setItem('pageBookmarks', JSON.stringify(bookmarkList));
+    setBookmarks(bookmarkList);
+    setIsBookmarked(!isBookmarked);
   };
 
   return (
@@ -161,9 +185,15 @@ export function Header() {
               variant="ghost"
               size="icon"
               className="hidden md:flex"
+              onClick={toggleBookmark}
               data-testid="button-favorites"
             >
-              <Heart className="h-5 w-5" />
+              <Heart 
+                className="h-5 w-5 transition-all" 
+                fill={isBookmarked ? "currentColor" : "none"}
+                stroke={isBookmarked ? "currentColor" : "currentColor"}
+                style={{ color: isBookmarked ? '#d4af37' : 'currentColor' }}
+              />
             </Button>
             <div className="hidden md:flex items-center gap-2">
               <Button
