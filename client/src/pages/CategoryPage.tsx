@@ -349,6 +349,13 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="bg-[#0a1628] px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent" />
+        </div>
+      </div>
+
       {/* Main Content */}
       <section className="py-12 lg:py-16 bg-[#0a1628]">
         <div className="max-w-7xl mx-auto px-6">
