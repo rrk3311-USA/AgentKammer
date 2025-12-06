@@ -31,7 +31,6 @@ import { useState, useEffect } from "react";
 const financialCategories = [
   { id: 'credit-cards', name: 'Credit Cards', icon: CreditCard },
   { id: 'investing', name: 'Investing', icon: TrendingUp },
-  { id: 'refinancing', name: 'Refinancing', icon: RefreshCw },
 ];
 
 export function Header() {
@@ -110,6 +109,13 @@ export function Header() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start" className="w-56">
+                <Link href="/dashboard">
+                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-dashboard">
+                    <Brain className="h-4 w-4 mr-2 text-[#d4af37]" />
+                    All Categories Dashboard
+                  </DropdownMenuItem>
+                </Link>
+                <DropdownMenuSeparator />
                 <DropdownMenuLabel className="flex items-center gap-2">
                   <Brain className="h-4 w-4 text-[#d4af37]" />
                   Financial Categories
@@ -124,29 +130,10 @@ export function Header() {
                   </Link>
                 ))}
                 <DropdownMenuSeparator />
-                <Link href="/reverse-seller-architecture">
-                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-reverse-seller">
-                    <Home className="h-4 w-4 mr-2 text-[#d4af37]" />
-                    Reverse Seller Architecture
-                  </DropdownMenuItem>
-                </Link>
                 <Link href="/refinancing">
                   <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-rate-watch">
                     <RefreshCw className="h-4 w-4 mr-2" />
                     APR Watch
-                  </DropdownMenuItem>
-                </Link>
-                <Link href="/free-tools">
-                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-free-tools">
-                    <Calculator className="h-4 w-4 mr-2 text-[#d4af37]" />
-                    Free Tools
-                  </DropdownMenuItem>
-                </Link>
-                <DropdownMenuSeparator />
-                <Link href="/dashboard">
-                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-dashboard">
-                    <Brain className="h-4 w-4 mr-2 text-[#d4af37]" />
-                    All Categories Dashboard
                   </DropdownMenuItem>
                 </Link>
               </DropdownMenuContent>
