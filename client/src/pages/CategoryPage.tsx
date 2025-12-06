@@ -328,7 +328,6 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
           <p className="text-white/80 text-xs lg:text-sm">{config.description}</p>
         </div>
       </section>
-
       {/* Agentic Profile CTA */}
       <section className="bg-[#0a1628] py-8 lg:py-10">
         <div className="max-w-7xl mx-auto px-6">
@@ -351,14 +350,12 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
           </div>
         </div>
       </section>
-
       {/* Divider */}
       <div className="bg-[#0a1628] px-6">
         <div className="max-w-7xl mx-auto">
           <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent" />
         </div>
       </div>
-
       {/* Main Content */}
       <section className="py-12 lg:py-16 bg-[#0a1628]">
         <div className="max-w-7xl mx-auto px-6">
@@ -443,7 +440,7 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
             <div className="mt-12 text-center">
               <Card className="inline-block p-8 bg-[#d4af37]/5 border-[#d4af37]/20">
                 <h3 className="font-serif text-xl font-semibold mb-2">Need Help Choosing?</h3>
-                <p className="text-muted-foreground mb-4">
+                <p className="mb-4 text-[#ffffff]">
                   Our AI can analyze your profile and recommend the best option for you
                 </p>
                 <Button 
