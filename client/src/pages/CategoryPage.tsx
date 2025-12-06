@@ -322,7 +322,7 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
         ) : (
           <div className={`absolute inset-0 bg-gradient-to-br ${config.heroGradient}`} />
         )}
-        <div className="max-w-3xl mx-auto px-6 relative z-10 text-center">
+        <div className="max-w-lg mx-auto px-6 relative z-10 text-center">
           <h1 className="font-serif text-xl lg:text-2xl font-bold text-white mb-1">{config.name}</h1>
           <p className="text-white/80 text-xs lg:text-sm">{config.description}</p>
         </div>
