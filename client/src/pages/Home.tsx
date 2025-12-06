@@ -423,7 +423,7 @@ export default function Home() {
                   className="px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
                   data-testid="button-compare-cards"
                 >
-                  <Brain className="h-5 w-5 mr-2" />
+                  <Brain className="h-5 w-5 mr-2 animate-brain-pulse" />
                   Start Your Agentic Profile
                 </Button>
               </Link>
@@ -562,7 +562,7 @@ export default function Home() {
                 className="px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
                 data-testid="button-dashboard"
               >
-                <Brain className="h-5 w-5 mr-2" />
+                <Brain className="h-5 w-5 mr-2 animate-brain-pulse" />
                 Start Your Agentic Profile
               </Button>
             </Link>
