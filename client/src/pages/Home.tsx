@@ -409,16 +409,16 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* RBO - Reverse Buyer Opportunity */}
+            {/* RBO - Reverse Buyer Origination */}
             <div className="space-y-4">
               <div className="w-12 h-12 rounded-lg bg-[#d4af37]/15 flex items-center justify-center">
                 <Building2 className="h-6 w-6 text-[#d4af37]" />
               </div>
-              <h3 className="font-serif text-xl font-semibold text-white">Reverse Buyer Opportunity</h3>
+              <h3 className="font-serif text-xl font-semibold text-white">Reverse Buyer Origination</h3>
               <p className="text-white/70">
                 Put the power in your hands. Sellers and their agents compete to win your business with better terms, faster closing, and more favorable conditions.
               </p>
-              <Link href="/reverse-buyer-opportunity">
+              <Link href="/reverse-buyer-origination">
                 <Button variant="outline" size="sm" className="border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/10" data-testid="button-rbo">
                   Learn More <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
