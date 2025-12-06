@@ -306,21 +306,72 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-8">
               <div className="flex items-center justify-center gap-3 mb-4">
-                <div 
-                  className="w-16 h-16 rounded-lg flex items-center justify-center relative overflow-hidden"
-                  style={{
-                    background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
-                    boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
-                  }}
-                >
-                  <CreditCard 
-                    className="h-8 w-8 relative z-10" 
+                <div className="relative w-20 h-16">
+                  {/* First Card - Back */}
+                  <div 
+                    className="absolute w-12 h-16 rounded-lg flex items-center justify-center"
                     style={{
-                      color: '#d4af37',
-                      filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
-                      textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
+                      background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
+                      boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)',
+                      left: '2px',
+                      top: '2px',
+                      transform: 'rotate(-8deg)',
+                      opacity: 0.7
                     }}
-                  />
+                  >
+                    <CreditCard 
+                      className="h-6 w-6" 
+                      style={{
+                        color: '#d4af37',
+                        filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
+                        textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
+                      }}
+                    />
+                  </div>
+                  
+                  {/* Second Card - Middle */}
+                  <div 
+                    className="absolute w-12 h-16 rounded-lg flex items-center justify-center"
+                    style={{
+                      background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
+                      boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)',
+                      left: '4px',
+                      top: '0px',
+                      transform: 'rotate(-3deg)',
+                      opacity: 0.85
+                    }}
+                  >
+                    <CreditCard 
+                      className="h-6 w-6" 
+                      style={{
+                        color: '#d4af37',
+                        filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
+                        textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
+                      }}
+                    />
+                  </div>
+                  
+                  {/* Third Card - Front */}
+                  <div 
+                    className="absolute w-12 h-16 rounded-lg flex items-center justify-center"
+                    style={{
+                      background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
+                      boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)',
+                      left: '6px',
+                      top: '-2px',
+                      transform: 'rotate(3deg)',
+                      zIndex: 10
+                    }}
+                  >
+                    <CreditCard 
+                      className="h-6 w-6" 
+                      style={{
+                        color: '#d4af37',
+                        filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
+                        textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
               <h3 className="font-serif text-2xl lg:text-3xl font-bold text-white mb-3">
