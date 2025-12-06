@@ -29,6 +29,7 @@ import {
   Wifi
 } from "lucide-react";
 import { SUBCATEGORIES, SAMPLE_OFFERS, type ProductOffer, calculateMatchScore, getMatchExplanation } from "@shared/productOffers";
+import investingHeroImage from "@assets/generated_images/golden_sunrise_over_financial_district_skyline.png";
 
 function CreditCardVisual({ offer }: { offer: ProductOffer }) {
   const IconComponent = offer.issuerIcon ? (LucideIcons as any)[offer.issuerIcon] : CreditCard;
@@ -103,6 +104,7 @@ const CATEGORY_CONFIG: Record<string, {
   icon: any;
   description: string;
   heroGradient: string;
+  heroImage?: string;
 }> = {
   'credit-cards': {
     name: 'Credit Cards',
@@ -139,6 +141,7 @@ const CATEGORY_CONFIG: Record<string, {
     icon: TrendingUp,
     description: 'Brokerages, robo-advisors, and long-term wealth building tools',
     heroGradient: 'from-rose-600 to-pink-700',
+    heroImage: investingHeroImage,
   },
   'credit-builder': {
     name: 'Credit Builder',
@@ -303,8 +306,19 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className={`relative bg-gradient-to-br ${config.heroGradient} py-12 lg:py-16`}>
-        <div className="absolute inset-0 bg-black/20" />
+      <section 
+        className={`relative py-12 lg:py-16`}
+        style={config.heroImage ? {
+          backgroundImage: `url(${config.heroImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        } : {}}
+      >
+        {config.heroImage ? (
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/70 to-black/75" />
+        ) : (
+          <div className={`absolute inset-0 bg-gradient-to-br ${config.heroGradient}`} />
+        )}
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center">
