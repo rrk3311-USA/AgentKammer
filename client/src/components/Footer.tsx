@@ -1,5 +1,5 @@
 import { SiReplit, SiNvidia, SiClaude, SiAnthropic, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
-import { Brain, Sparkles, TrendingUp, RefreshCw } from "lucide-react";
+import { Brain, Building2, Users, RefreshCw } from "lucide-react";
 import { Link } from "wouter";
 
 export function Footer() {
@@ -44,13 +44,13 @@ export function Footer() {
                 </li>
                 <li>
                   <Link href="/reverse-buyer-origination" className="flex items-center gap-2 hover:text-foreground transition-colors">
-                    <Sparkles className="h-3.5 w-3.5" />
+                    <Building2 className="h-3.5 w-3.5" />
                     <span>Reverse Buyer Origination</span>
                   </Link>
                 </li>
                 <li>
                   <Link href="/reverse-seller-architecture" className="flex items-center gap-2 hover:text-foreground transition-colors">
-                    <TrendingUp className="h-3.5 w-3.5" />
+                    <Users className="h-3.5 w-3.5" />
                     <span>Reverse Seller Architecture</span>
                   </Link>
                 </li>
