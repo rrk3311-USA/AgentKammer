@@ -283,6 +283,99 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Real Estate Concierge */}
+      <section className="relative py-10 lg:py-16 overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${conciergeImage})`,
+            backgroundPosition: 'center'
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/80 to-black/85" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-6 z-10">
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div 
+                className="w-16 h-16 rounded-lg flex items-center justify-center relative overflow-hidden"
+                style={{
+                  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
+                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
+                }}
+              >
+                <Building2 
+                  className="h-8 w-8 relative z-10" 
+                  style={{
+                    color: '#d4af37',
+                    filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
+                    textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
+                  }}
+                />
+              </div>
+            </div>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4 text-white">
+              Real Estate Concierge
+            </h2>
+            <p className="text-white/80 text-lg max-w-2xl mx-auto">
+              Premium home buying, selling, and mortgage intelligence for high-net-worth clients across the world
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {/* RBO - Reverse Buyer Origination */}
+            <div className="space-y-3">
+              <h3 className="font-serif text-xl font-semibold text-white flex items-center gap-2">
+                <Building2 className="h-5 w-5 text-[#d4af37]" />
+                Reverse Buyer Origination
+              </h3>
+              <p className="text-white/70">
+                Put the power in your hands. Sellers and their agents compete to win your business with better terms, faster closing, and more favorable conditions.
+              </p>
+              <Link href="/reverse-buyer-origination">
+                <Button size="sm" className="bg-[#d3af37] text-[#000000]" data-testid="button-rbo">
+                  Learn More <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
+
+            {/* RSA - Reverse Seller Architecture */}
+            <div className="space-y-3">
+              <h3 className="font-serif text-xl font-semibold text-white flex items-center gap-2">
+                <Users className="h-5 w-5 text-[#d4af37]" />
+                Reverse Seller Architecture
+              </h3>
+              <p className="text-white/70">
+                Selling your home? Multiple qualified buyer agents compete to represent you, driving up demand and getting you the best possible sale price and terms.
+              </p>
+              <Link href="/reverse-seller-architecture">
+                <Button size="sm" className="bg-[#d2b038] text-[#000000]" data-testid="button-rsa">
+                  Learn More <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
+
+            {/* RRW - Refinancing Rate Watch */}
+            <div className="space-y-3">
+              <h3 className="font-serif text-xl font-semibold text-white flex items-center gap-2">
+                <RefreshCw className="h-5 w-5 text-[#d4af37]" />
+                Refinancing Rate Watch
+              </h3>
+              <p className="text-white/70">
+                Never miss a refinancing opportunity. AI-powered rate monitoring alerts you instantly when rates drop, showing exact savings and break-even timelines.
+              </p>
+              <Link href="/refinancing">
+                <Button size="sm" className="bg-[#d2b038] text-[#000000]" data-testid="button-rrw">
+                  Learn More <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Credit Card Comparison Module */}
       <section className="py-8 lg:py-12 bg-[#0a1628]">
         <div className="max-w-7xl mx-auto px-6">
@@ -521,6 +614,8 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Real Estate Concierge - MOVED, OLD LOCATION REMOVED */}
+
       {/* Investment Accounts Section */}
       <section className="py-10 lg:py-16 bg-background">
         <div className="max-w-7xl mx-auto px-6">
@@ -588,99 +683,6 @@ export default function Home() {
                 Explore Investment Accounts
               </Button>
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Real Estate Concierge */}
-      <section className="relative py-10 lg:py-16 overflow-hidden">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url(${conciergeImage})`,
-            backgroundPosition: 'center'
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/80 to-black/85" />
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-6 z-10">
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div 
-                className="w-16 h-16 rounded-lg flex items-center justify-center relative overflow-hidden"
-                style={{
-                  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
-                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
-                }}
-              >
-                <Building2 
-                  className="h-8 w-8 relative z-10" 
-                  style={{
-                    color: '#d4af37',
-                    filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))',
-                    textShadow: '0 0 2px rgba(212, 175, 55, 0.4)'
-                  }}
-                />
-              </div>
-            </div>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4 text-white">
-              Real Estate Concierge
-            </h2>
-            <p className="text-white/80 text-lg max-w-2xl mx-auto">
-              Premium home buying, selling, and mortgage intelligence for high-net-worth clients across the world
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {/* RBO - Reverse Buyer Origination */}
-            <div className="space-y-3">
-              <h3 className="font-serif text-xl font-semibold text-white flex items-center gap-2">
-                <Building2 className="h-5 w-5 text-[#d4af37]" />
-                Reverse Buyer Origination
-              </h3>
-              <p className="text-white/70">
-                Put the power in your hands. Sellers and their agents compete to win your business with better terms, faster closing, and more favorable conditions.
-              </p>
-              <Link href="/reverse-buyer-origination">
-                <Button size="sm" className="bg-[#d3af37] text-[#000000]" data-testid="button-rbo">
-                  Learn More <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              </Link>
-            </div>
-
-            {/* RSA - Reverse Seller Architecture */}
-            <div className="space-y-3">
-              <h3 className="font-serif text-xl font-semibold text-white flex items-center gap-2">
-                <Users className="h-5 w-5 text-[#d4af37]" />
-                Reverse Seller Architecture
-              </h3>
-              <p className="text-white/70">
-                Selling your home? Multiple qualified buyer agents compete to represent you, driving up demand and getting you the best possible sale price and terms.
-              </p>
-              <Link href="/reverse-seller-architecture">
-                <Button size="sm" className="bg-[#d2b038] text-[#000000]" data-testid="button-rsa">
-                  Learn More <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              </Link>
-            </div>
-
-            {/* RRW - Refinancing Rate Watch */}
-            <div className="space-y-3">
-              <h3 className="font-serif text-xl font-semibold text-white flex items-center gap-2">
-                <RefreshCw className="h-5 w-5 text-[#d4af37]" />
-                Refinancing Rate Watch
-              </h3>
-              <p className="text-white/70">
-                Never miss a refinancing opportunity. AI-powered rate monitoring alerts you instantly when rates drop, showing exact savings and break-even timelines.
-              </p>
-              <Link href="/refinancing">
-                <Button size="sm" className="bg-[#d2b038] text-[#000000]" data-testid="button-rrw">
-                  Learn More <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              </Link>
-            </div>
           </div>
         </div>
       </section>
