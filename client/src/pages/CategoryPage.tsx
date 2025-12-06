@@ -309,7 +309,7 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section 
-        className={`relative pt-24 pb-8 lg:pt-32 lg:pb-10 flex items-end justify-center`}
+        className={`relative py-12 lg:py-16 flex items-center justify-center`}
         style={config.heroImage ? {
           backgroundImage: `url(${config.heroImage})`,
           backgroundSize: 'cover',
@@ -324,18 +324,7 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
         )}
         <div className="max-w-3xl mx-auto px-6 relative z-10 text-center">
           <h1 className="font-serif text-xl lg:text-2xl font-bold text-white mb-1">{config.name}</h1>
-          <p className="text-white/80 text-xs lg:text-sm mb-2">{config.description}</p>
-          
-          <div className="flex items-center justify-center gap-1.5 flex-wrap">
-            <Badge className="bg-white/20 text-white border-white/30 text-xs">
-              <Sparkles className="h-2.5 w-2.5 mr-0.5" />
-              AI-Powered
-            </Badge>
-            <Badge className="bg-white/20 text-white border-white/30 text-xs">
-              <Zap className="h-2.5 w-2.5 mr-0.5" />
-              {offers.length} Offers
-            </Badge>
-          </div>
+          <p className="text-white/80 text-xs lg:text-sm">{config.description}</p>
         </div>
       </section>
 
