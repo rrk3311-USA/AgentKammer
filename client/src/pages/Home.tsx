@@ -28,6 +28,7 @@ import {
   RefreshCw
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
+import { MascotWelcome } from "@/components/MascotWelcome";
 
 const categoryIcons: Record<string, any> = {
   'CreditCard': CreditCard,
@@ -188,6 +189,11 @@ export default function Home() {
             <p className="text-white/70 max-w-2xl mx-auto">
               Choose a service to see AI-ranked products matched to your profile
             </p>
+          </div>
+
+          {/* Mascot Welcome */}
+          <div className="mb-12 flex justify-center">
+            <MascotWelcome />
           </div>
 
           {/* Flagship Services - Large Cards */}
