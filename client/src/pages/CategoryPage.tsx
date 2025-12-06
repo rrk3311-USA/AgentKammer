@@ -110,7 +110,7 @@ const CATEGORY_CONFIG: Record<string, {
   'credit-cards': {
     name: 'Credit Cards',
     icon: CreditCard,
-    description: 'AI-matched credit cards based on your profile, spending habits, and financial goals',
+    description: 'AI-matched credit cards based on your profile,\n spending habits, and financial goals',
     heroGradient: 'from-blue-600 to-indigo-700',
     heroImage: creditCardsHeroImage,
   },
