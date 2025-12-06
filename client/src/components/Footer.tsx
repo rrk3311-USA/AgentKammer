@@ -8,7 +8,7 @@ export function Footer() {
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       <div className="bg-background border-t border-border/50">
         <div className="max-w-7xl mx-auto px-6 py-6 pt-[0px] pb-[0px] pl-[40px] pr-[40px] ml-[45px] mr-[45px] mt-[3px] mb-[3px] text-left">
-          <div className="grid grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             <div>
               <p className="text-xs md:text-sm text-foreground font-medium mb-3 block">
                 Free Financial Tools
@@ -24,6 +24,10 @@ export function Footer() {
                     Pre-Approval
                   </Link>
                 </li>
+              </ul>
+            </div>
+            <div>
+              <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground mb-4">
                 <li>
                   <Link href="/credit-cards" className="hover:text-foreground transition-colors">
                     Credit Cards
@@ -53,6 +57,10 @@ export function Footer() {
                     <span>Reverse Seller Architecture</span>
                   </Link>
                 </li>
+              </ul>
+            </div>
+            <div>
+              <ul className="space-y-1.5 text-xs md:text-sm text-muted-foreground mb-4">
                 <li>
                   <Link href="/refinancing" className="flex items-center gap-2 hover:text-foreground transition-colors">
                     <RefreshCw className="h-3.5 w-3.5" />
