@@ -1,25 +1,34 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useLocation } from "wouter";
+import { ChevronRight } from "lucide-react";
 
 export function ActivateAgentMode() {
-  const [isOn, setIsOn] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [dragX, setDragX] = useState(0);
   const [showSparkles, setShowSparkles] = useState(false);
   const [, setLocation] = useLocation();
+  const trackRef = useRef<HTMLDivElement>(null);
+  const startXRef = useRef(0);
 
-  const handleMouseDown = () => {
+  const handleStart = (clientX: number) => {
     setIsDragging(true);
+    startXRef.current = clientX;
   };
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    setDragX(x);
+  const handleMove = (clientX: number) => {
+    if (!isDragging || !trackRef.current) return;
 
-    // If dragged more than 80% across, trigger activation
-    if (x > rect.width * 0.8) {
+    const rect = trackRef.current.getBoundingClientRect();
+    const currentX = clientX - rect.left;
+    const delta = currentX - startXRef.current;
+
+    // Calculate new position (keep within bounds)
+    const maxDrag = rect.width - 24;
+    const newX = Math.max(0, Math.min(delta, maxDrag));
+    setDragX(newX);
+
+    // If dragged more than 85% across, trigger activation
+    if (newX > maxDrag * 0.85) {
       setShowSparkles(true);
       setIsDragging(false);
       setTimeout(() => {
@@ -28,71 +37,81 @@ export function ActivateAgentMode() {
     }
   };
 
-  const handleMouseUp = () => {
+  const handleEnd = () => {
     setIsDragging(false);
-    setDragX(0);
+    if (!showSparkles) {
+      setDragX(0);
+    }
   };
 
   return (
     <div
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
+      onMouseMove={(e) => handleMove(e.clientX)}
+      onMouseUp={handleEnd}
+      onMouseLeave={handleEnd}
+      onTouchMove={(e) => handleMove(e.touches[0].clientX)}
+      onTouchEnd={handleEnd}
       className="w-full"
     >
-      <button
-        className="w-full rounded-lg bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-bold hover:opacity-90 transition-all overflow-hidden"
-        data-testid="button-activate-agent-mode"
-      >
+      <div className="w-full rounded-lg bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-bold overflow-hidden">
         {/* Main button text */}
         <div className="px-6 py-3">
           <div className="text-sm tracking-widest uppercase">Activate Agent Mode</div>
         </div>
 
-        {/* Toggle Section */}
+        {/* Slider Section */}
         <div className="px-6 pb-3 pt-2 border-t border-[#0a1628]/20 relative">
-          <div className="flex items-center justify-between gap-3">
-            {/* Left label */}
-            <span className="text-xs font-semibold uppercase opacity-80">Off</span>
+          <div className="flex items-center justify-between gap-2">
+            {/* Left arrow */}
+            <div className="flex items-center gap-1">
+              <ChevronRight className="w-4 h-4 opacity-60" />
+              <span className="text-xs font-bold uppercase opacity-70">Drag</span>
+            </div>
 
-            {/* Toggle switch - draggable */}
+            {/* Slider track */}
             <div
-              className="flex-1 h-6 bg-[#0a1628]/30 rounded-full p-0.5 cursor-grab active:cursor-grabbing flex items-center transition-all relative"
-              onMouseDown={handleMouseDown}
+              ref={trackRef}
+              className="flex-1 h-6 bg-[#0a1628]/30 rounded-full p-1 cursor-grab active:cursor-grabbing flex items-center transition-all relative select-none"
+              onMouseDown={(e) => handleStart(e.clientX)}
+              onTouchStart={(e) => handleStart(e.touches[0].clientX)}
             >
               {/* Sparkle overlay */}
               {showSparkles && (
                 <>
                   <div className="absolute top-1 left-1 w-1 h-1 bg-[#d4af37] rounded-full animate-pulse" />
-                  <div className="absolute top-2 right-2 w-1.5 h-1.5 bg-[#f4d03f] rounded-full animate-pulse" style={{ animationDelay: '0.1s' }} />
-                  <div className="absolute bottom-1 left-2 w-1 h-1 bg-[#d4af37] rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
+                  <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#f4d03f] rounded-full animate-pulse" style={{ animationDelay: '0.1s' }} />
+                  <div className="absolute bottom-1 left-1.5 w-1 h-1 bg-[#d4af37] rounded-full animate-pulse" style={{ animationDelay: '0.2s' }} />
                   <div className="absolute bottom-1 right-1 w-1.5 h-1.5 bg-[#f4d03f] rounded-full animate-pulse" style={{ animationDelay: '0.3s' }} />
                 </>
               )}
 
+              {/* Slider knob */}
               <div
-                className={`w-5 h-5 rounded-full bg-white shadow-md transition-all duration-100 ${
-                  isDragging ? `translate-x-[${dragX}px]` : ""
-                } ${showSparkles ? "scale-110 bg-green-400" : ""}`}
+                className={`w-4 h-4 rounded-full transition-all duration-100 flex items-center justify-center ${
+                  showSparkles ? "scale-110 bg-green-400 shadow-lg" : "bg-white shadow-md"
+                }`}
                 style={{
-                  transform: isDragging
-                    ? `translateX(${Math.max(0, Math.min(dragX - 12, 20))}px)`
-                    : showSparkles
-                    ? "scale(1.1)"
-                    : "translateX(0)",
+                  transform: `translateX(${dragX}px)`,
                 }}
-              />
+              >
+                {isDragging && !showSparkles && (
+                  <ChevronRight className="w-3 h-3 text-[#0a1628]" />
+                )}
+              </div>
             </div>
 
-            {/* Right label */}
-            <span className={`text-xs font-semibold uppercase transition-colors ${
-              showSparkles ? "text-green-600 font-bold" : "opacity-80"
-            }`}>
-              {showSparkles ? "GO" : "Off"}
-            </span>
+            {/* Right arrow and label */}
+            <div className="flex items-center gap-1">
+              <span className={`text-xs font-bold uppercase transition-colors ${
+                showSparkles ? "text-green-700 font-bold" : "opacity-70"
+              }`}>
+                {showSparkles ? "GO!" : "On"}
+              </span>
+              <ChevronRight className="w-4 h-4 opacity-60" />
+            </div>
           </div>
         </div>
-      </button>
+      </div>
     </div>
   );
 }
