@@ -384,77 +384,79 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Our Differentiator */}
+      {/* Real Estate Concierge */}
       <section className="py-16 lg:py-20 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
+            <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-4">Luxury Real Estate</Badge>
             <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">
-              Our Differentiator
+              Real Estate Concierge
             </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Premium home buying, selling, and mortgage intelligence for high-net-worth clients across California, Nevada, and New York
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Old Model */}
-            <Card className="p-6 bg-muted/30 border-muted" data-testid="card-old-model">
-              <h3 className="font-semibold text-lg mb-4 text-muted-foreground">Old Model (NerdWallet-style)</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3 text-muted-foreground">
-                  <div className="w-5 h-5 rounded-full bg-muted flex items-center justify-center mt-0.5 flex-shrink-0">
-                    <span className="text-xs">-</span>
+            {/* Reverse Seller Architecture */}
+            <Link href="/reverse-seller-architecture">
+              <Card className="p-6 bg-[#0f1d32] border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer group h-full" data-testid="card-reverse-seller">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-[#d4af37]/15 flex items-center justify-center">
+                    <Building2 className="h-6 w-6 text-[#d4af37]" />
                   </div>
-                  <span>Product-first approach</span>
-                </li>
-                <li className="flex items-start gap-3 text-muted-foreground">
-                  <div className="w-5 h-5 rounded-full bg-muted flex items-center justify-center mt-0.5 flex-shrink-0">
-                    <span className="text-xs">-</span>
-                  </div>
-                  <span>You search manually</span>
-                </li>
-                <li className="flex items-start gap-3 text-muted-foreground">
-                  <div className="w-5 h-5 rounded-full bg-muted flex items-center justify-center mt-0.5 flex-shrink-0">
-                    <span className="text-xs">-</span>
-                  </div>
-                  <span>One-size-fits-all recommendations</span>
-                </li>
-                <li className="flex items-start gap-3 text-muted-foreground">
-                  <div className="w-5 h-5 rounded-full bg-muted flex items-center justify-center mt-0.5 flex-shrink-0">
-                    <span className="text-xs">-</span>
-                  </div>
-                  <span>No personalization</span>
-                </li>
-              </ul>
-            </Card>
+                  <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] transition-all" />
+                </div>
+                <h3 className="font-serif text-xl font-semibold text-white mb-3">Reverse by Your Seller</h3>
+                <p className="text-white/70 mb-4">
+                  Turn the tables in your favor. Our Reverse Seller Architecture lets buyer agents compete on behalf of sellers to get you better terms.
+                </p>
+                <ul className="space-y-2 text-sm text-white/60">
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#d4af37]">•</span>
+                    <span>Multiple agent bidding</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#d4af37]">•</span>
+                    <span>Competitive advantage</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#d4af37]">•</span>
+                    <span>Better deal outcomes</span>
+                  </li>
+                </ul>
+              </Card>
+            </Link>
 
-            {/* Agentic Model */}
-            <Card className="p-6 bg-[#d4af37]/5 border-[#d4af37]/20" data-testid="card-agentic-model">
-              <h3 className="font-semibold text-lg mb-4 text-[#d4af37]">Agentic Model</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-[#d4af37]/20 flex items-center justify-center mt-0.5 flex-shrink-0">
-                    <CheckCircle2 className="h-3 w-3 text-[#d4af37]" />
+            {/* APR Watch */}
+            <Link href="/refinancing">
+              <Card className="p-6 bg-[#0f1d32] border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer group h-full" data-testid="card-apr-watch">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-[#d4af37]/15 flex items-center justify-center">
+                    <RefreshCw className="h-6 w-6 text-[#d4af37]" />
                   </div>
-                  <span>User-first approach</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-[#d4af37]/20 flex items-center justify-center mt-0.5 flex-shrink-0">
-                    <CheckCircle2 className="h-3 w-3 text-[#d4af37]" />
-                  </div>
-                  <span>One profile powers all categories</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-[#d4af37]/20 flex items-center justify-center mt-0.5 flex-shrink-0">
-                    <CheckCircle2 className="h-3 w-3 text-[#d4af37]" />
-                  </div>
-                  <span>AI compares across the field</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-[#d4af37]/20 flex items-center justify-center mt-0.5 flex-shrink-0">
-                    <CheckCircle2 className="h-3 w-3 text-[#d4af37]" />
-                  </div>
-                  <span>You get personalized outcomes</span>
-                </li>
-              </ul>
-            </Card>
+                  <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] transition-all" />
+                </div>
+                <h3 className="font-serif text-xl font-semibold text-white mb-3">APR Watch</h3>
+                <p className="text-white/70 mb-4">
+                  Real-time mortgage rate monitoring with instant refinancing alerts. Know when it's time to act on rate drops.
+                </p>
+                <ul className="space-y-2 text-sm text-white/60">
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#d4af37]">•</span>
+                    <span>24/7 rate tracking</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#d4af37]">•</span>
+                    <span>Break-even analysis</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-[#d4af37]">•</span>
+                    <span>Instant notifications</span>
+                  </li>
+                </ul>
+              </Card>
+            </Link>
           </div>
         </div>
       </section>
