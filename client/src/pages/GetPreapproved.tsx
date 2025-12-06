@@ -202,7 +202,7 @@ export default function GetPreapproved() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full rounded-full"
+                  className="w-full rounded-full text-[#000000]"
                   data-testid="button-submit-preapproval"
                 >
                   Submit Application
