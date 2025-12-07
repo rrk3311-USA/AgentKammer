@@ -540,24 +540,6 @@ export default function Home() {
       </section>
       {/* SECTION 7: Final CTA - Dark Navy */}
       <section className="py-8 lg:py-12 bg-[#0a1628] text-white relative overflow-hidden">
-        {/* Animated Financial Words Background */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {animatedWords.map((item, idx) => (
-            <div
-              key={`footer-${idx}`}
-              className="financial-word animate-float-word"
-              style={{
-                left: `${item.left}%`,
-                top: `${item.top}%`,
-                animationDelay: `${item.delay}s`,
-                fontSize: '0.875rem'
-              }}
-            >
-              {item.word}
-            </div>
-          ))}
-        </div>
-
         <div className="max-w-7xl mx-auto px-6 relative">
           <div className="text-center">
             <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4 relative inline-block">
