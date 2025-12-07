@@ -103,24 +103,6 @@ export default function Home() {
             }}
             data-testid="card-hero-featured"
           >
-            {/* Animated Financial Words Background */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-              {animatedWords.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="financial-word animate-float-word"
-                  style={{
-                    left: `${item.left}%`,
-                    top: `${item.top}%`,
-                    animationDelay: `${item.delay}s`,
-                    fontSize: '0.875rem'
-                  }}
-                >
-                  {item.word}
-                </div>
-              ))}
-            </div>
-
             <div className="p-8 md:p-12 relative z-10">
               {/* Brain Visual - Full Width */}
               <div className="flex justify-center mb-12">
