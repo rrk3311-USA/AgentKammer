@@ -4,6 +4,8 @@ import robotImage from "@assets/image_1765082751115.png";
 export function AgenticEngineVisual() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [pulseIntensity, setPulseIntensity] = useState(0);
+  const [eyeSymbol, setEyeSymbol] = useState("$");
+  const [eyeFlicker, setEyeFlicker] = useState(false);
 
   const categories = [
     { label: "Credit Cards", shortLabel: "Credit" },
@@ -12,6 +14,8 @@ export function AgenticEngineVisual() {
     { label: "Investing", shortLabel: "Investing" },
     { label: "Insurance", shortLabel: "Insurance" },
   ];
+
+  const eyeSymbols = ["$", "%", "+", "OK", "$$", "01", "10", ">>", "UP", "GO"];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,6 +26,16 @@ export function AgenticEngineVisual() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const flickerInterval = setInterval(() => {
+      setEyeFlicker(true);
+      setEyeSymbol(eyeSymbols[Math.floor(Math.random() * eyeSymbols.length)]);
+      setTimeout(() => setEyeFlicker(false), 150);
+    }, 800 + Math.random() * 400);
+
+    return () => clearInterval(flickerInterval);
+  }, []);
+
   return (
     <div 
       className="relative w-full rounded-2xl overflow-hidden" 
@@ -29,82 +43,26 @@ export function AgenticEngineVisual() {
     >
       <div className="relative w-full aspect-[16/9] min-h-[220px] bg-gradient-to-b from-slate-950 via-[#0a1628] to-slate-900">
         
-        {/* Orbital system container - behind robot */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          {/* Orbiting category circles with labels */}
-          {categories.map((cat, i) => {
-            const isActive = activeIndex === i;
-            const orbitRadius = 130 + i * 25;
-            const duration = 20 + i * 5;
-            const direction = i % 2 === 0 ? 'normal' : 'reverse';
-            
-            return (
-              <div
-                key={i}
-                className="absolute"
-                style={{
-                  width: `${orbitRadius * 2}px`,
-                  height: `${orbitRadius * 2}px`,
-                  animation: `orbit ${duration}s linear infinite ${direction}`,
-                  animationDelay: `${i * -4}s`,
-                }}
-              >
-                {/* The orbiting circle with label */}
-                <div 
-                  className="absolute"
-                  style={{
-                    top: '0',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                  }}
-                >
-                  {/* Circle */}
-                  <div 
-                    className={`relative flex items-center justify-center transition-all duration-500`}
-                    style={{
-                      animation: `counterOrbit ${duration}s linear infinite ${direction === 'normal' ? 'reverse' : 'normal'}`,
-                      animationDelay: `${i * -4}s`,
-                    }}
-                  >
-                    {/* Glowing circle behind text */}
-                    <div 
-                      className={`absolute rounded-full transition-all duration-500 ${
-                        isActive ? 'scale-125' : 'scale-100'
-                      }`}
-                      style={{
-                        width: '90px',
-                        height: '90px',
-                        background: isActive 
-                          ? 'radial-gradient(circle, rgba(212,175,55,0.3) 0%, rgba(212,175,55,0.1) 50%, transparent 70%)'
-                          : 'radial-gradient(circle, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.05) 50%, transparent 70%)',
-                        boxShadow: isActive 
-                          ? `0 0 ${20 + pulseIntensity * 15}px rgba(212,175,55,${0.4 + pulseIntensity * 0.3})`
-                          : 'none',
-                        animation: isActive ? 'pulseGlow 1s ease-in-out infinite' : 'none',
-                      }}
-                    />
-                    
-                    {/* Category label */}
-                    <span 
-                      className={`relative z-10 text-xs md:text-sm font-semibold whitespace-nowrap px-2 py-1 rounded-full transition-all duration-500 ${
-                        isActive 
-                          ? 'text-[#d4af37] bg-[#d4af37]/10 scale-110' 
-                          : 'text-white/50 bg-transparent'
-                      }`}
-                      style={{
-                        textShadow: isActive ? '0 0 10px rgba(212,175,55,0.8)' : 'none',
-                      }}
-                    >
-                      <span className="hidden md:inline">{cat.label}</span>
-                      <span className="md:hidden">{cat.shortLabel}</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+        {/* Robot background image - zoomed and blurred */}
+        <div className="absolute inset-0 overflow-hidden">
+          <img 
+            src={robotImage} 
+            alt="Agent Kammer AI Background" 
+            className="w-full h-full object-cover"
+            style={{
+              transform: 'scale(1.5)',
+              filter: 'blur(25px)',
+              opacity: 0.3,
+            }}
+            loading="eager"
+          />
+          {/* Fade out edges */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-transparent to-[#0a1628]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628] via-transparent to-[#0a1628]" />
+        </div>
 
-          {/* Static orbital ring traces */}
+        {/* Orbital rings background */}
+        <div className="absolute inset-0 flex items-center justify-center z-5">
           <div className="absolute w-[260px] h-[260px] md:w-[310px] md:h-[310px] rounded-full border border-[#d4af37]/10" />
           <div className="absolute w-[310px] h-[310px] md:w-[385px] md:h-[385px] rounded-full border border-[#d4af37]/8" />
           <div className="absolute w-[360px] h-[360px] md:w-[460px] md:h-[460px] rounded-full border border-[#d4af37]/5" />
@@ -112,16 +70,47 @@ export function AgenticEngineVisual() {
           <div className="absolute w-[460px] h-[460px] md:w-[610px] md:h-[610px] rounded-full border border-blue-500/3" />
         </div>
 
+        {/* Cascading category text - waterfall effect */}
+        <div className="absolute inset-0 overflow-hidden flex items-center justify-center z-10">
+          <div className="relative w-full h-full">
+            {categories.map((cat, i) => (
+              <div
+                key={i}
+                className="absolute left-1/2 text-center"
+                style={{
+                  transform: 'translateX(-50%)',
+                  animation: `waterfall ${15 + i * 2}s linear infinite`,
+                  animationDelay: `${i * 1.5}s`,
+                  opacity: 0.8,
+                }}
+              >
+                <span 
+                  className={`font-semibold whitespace-nowrap inline-block transition-all duration-500 ${
+                    activeIndex === i 
+                      ? 'text-[#d4af37] text-lg md:text-xl scale-110' 
+                      : 'text-white/40 text-base md:text-lg scale-100'
+                  }`}
+                  style={{
+                    textShadow: activeIndex === i ? '0 0 12px rgba(212,175,55,0.8)' : 'none',
+                  }}
+                >
+                  {cat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Radial glow behind robot */}
         <div 
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] md:w-[320px] md:h-[320px] rounded-full transition-all duration-500 z-10"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] md:w-[320px] md:h-[320px] rounded-full transition-all duration-500 z-15"
           style={{
             background: `radial-gradient(circle, rgba(10,22,40,0.95) 0%, rgba(10,22,40,0.8) 40%, transparent 70%)`,
           }}
         />
 
-        {/* Robot Agent - Center (in front) */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] z-20">
+        {/* Robot Agent - Front and center */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
           <div className="relative">
             <div 
               className="absolute -inset-4 md:-inset-6 rounded-full opacity-60"
@@ -131,18 +120,60 @@ export function AgenticEngineVisual() {
               }}
             />
             
+            {/* Robot image - larger display */}
             <img 
               src={robotImage} 
               alt="Agent Kammer AI" 
-              className="w-[140px] h-[140px] md:w-[180px] md:h-[180px] object-cover rounded-full"
+              className="w-[160px] h-[160px] md:w-[200px] md:h-[200px] object-cover rounded-full"
               style={{
                 boxShadow: `0 0 ${20 + pulseIntensity * 30}px rgba(59,130,246,${0.4 + pulseIntensity * 0.3}), 0 0 ${40 + pulseIntensity * 20}px rgba(212,175,55,0.2)`,
-                border: '2px solid rgba(212,175,55,0.3)',
+                border: '3px solid rgba(212,175,55,0.4)',
               }}
               loading="eager"
             />
 
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+            {/* Digital eye overlay */}
+            <div 
+              className="absolute pointer-events-none"
+              style={{
+                left: '22%',
+                top: '42%',
+                width: '32px',
+                height: '38px',
+              }}
+            >
+              <div 
+                className={`w-full h-full flex items-center justify-center rounded-md overflow-hidden transition-opacity duration-75 ${
+                  eyeFlicker ? 'opacity-100' : 'opacity-70'
+                }`}
+                style={{
+                  background: 'rgba(0,0,0,0.3)',
+                }}
+              >
+                <span 
+                  className="font-mono font-bold text-[11px] md:text-xs tracking-tight"
+                  style={{
+                    color: eyeFlicker ? '#00ff00' : '#3b82f6',
+                    textShadow: eyeFlicker 
+                      ? '0 0 8px #00ff00, 0 0 12px #00ff00' 
+                      : '0 0 6px #3b82f6, 0 0 10px #3b82f6',
+                    animation: 'pixelFlicker 0.1s steps(2) infinite',
+                  }}
+                >
+                  {eyeSymbol}
+                </span>
+              </div>
+
+              <div 
+                className="absolute inset-0 pointer-events-none opacity-30"
+                style={{
+                  background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)',
+                }}
+              />
+            </div>
+
+            {/* Thinking dots */}
+            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
               {[0, 1, 2].map((i) => (
                 <div 
                   key={i}
@@ -158,14 +189,21 @@ export function AgenticEngineVisual() {
 
         {/* Animation styles */}
         <style>{`
-          @keyframes orbit {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-
-          @keyframes counterOrbit {
-            0% { transform: translateX(-50%) rotate(0deg); }
-            100% { transform: translateX(-50%) rotate(-360deg); }
+          @keyframes waterfall {
+            0% {
+              top: -60px;
+              opacity: 0;
+            }
+            20% {
+              opacity: 0.8;
+            }
+            80% {
+              opacity: 0.8;
+            }
+            100% {
+              top: 100%;
+              opacity: 0;
+            }
           }
 
           @keyframes brainPulse {
@@ -178,9 +216,9 @@ export function AgenticEngineVisual() {
             50% { opacity: 1; transform: translateY(-3px); }
           }
 
-          @keyframes pulseGlow {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.15); opacity: 1; }
+          @keyframes pixelFlicker {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1; }
           }
         `}</style>
 
