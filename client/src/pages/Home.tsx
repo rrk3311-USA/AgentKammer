@@ -17,6 +17,7 @@ import {
   CheckSquare
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
+import { StrategicCardMatching } from "@/components/StrategicCardMatching";
 import { CreditCardShowcase } from "@/components/CreditCardShowcase";
 import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
 import conciergeImage from '@assets/generated_images/concierge_agent_top_hat_luxury_interior.png';
@@ -516,7 +517,9 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* SECTION 7: Credit Card Showcase */}
+      {/* SECTION 7: Strategic Card Matching */}
+      <StrategicCardMatching />
+      {/* SECTION 8: Credit Card Showcase */}
       <CreditCardShowcase />
       {/* SECTION 9: Final CTA - Dark Navy */}
       <section className="py-8 lg:py-12 bg-gradient-to-b from-slate-900 to-slate-950 text-white relative overflow-hidden">
