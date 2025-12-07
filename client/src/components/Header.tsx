@@ -132,6 +132,12 @@ export function Header() {
                     APR Watch
                   </DropdownMenuItem>
                 </Link>
+                <Link href="/e-shop">
+                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-e-shop">
+                    <ShoppingBag className="h-4 w-4 mr-2" />
+                    E-Shop
+                  </DropdownMenuItem>
+                </Link>
               </DropdownMenuContent>
             </DropdownMenu>
 
@@ -179,16 +185,6 @@ export function Header() {
               />
             </Button>
             <div className="hidden md:flex items-center gap-2">
-              <Link href="/e-shop">
-                <Button
-                  variant="ghost"
-                  className="hover-elevate active-elevate-2 h-9 px-3 gap-1 text-sm"
-                  data-testid="button-header-e-shop"
-                >
-                  <ShoppingBag className="h-4 w-4" />
-                  <span>E-Shop</span>
-                </Button>
-              </Link>
               <Button
                 variant="ghost"
                 className="hover-elevate active-elevate-2 h-9 px-3 gap-1 text-sm"

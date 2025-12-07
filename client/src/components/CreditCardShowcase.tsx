@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ChevronLeft, ChevronRight, Plane, UtensilsCrossed, ShoppingBag, Zap, Skull, TrendingUp } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plane, UtensilsCrossed, ShoppingBag, Zap, Lightbulb, TrendingUp } from "lucide-react";
 
 const creditCards = [
   { name: "Platinum Rewards", issuer: "Global Bank", color: "from-slate-600 to-slate-700", accent: "#d4af37" },
@@ -17,7 +17,7 @@ const benefits = [
   { icon: UtensilsCrossed, label: "Fine Dining Credits", color: "from-amber-600/20 to-orange-600/20" },
   { icon: ShoppingBag, label: "Shopping Rewards", color: "from-pink-600/20 to-rose-600/20" },
   { icon: Zap, label: "Instant Cashback", color: "from-yellow-600/20 to-amber-600/20" },
-  { icon: Skull, label: "Travel Insurance", color: "from-purple-600/20 to-indigo-600/20" },
+  { icon: Lightbulb, label: "Travel Insurance", color: "from-purple-600/20 to-indigo-600/20" },
   { icon: TrendingUp, label: "Investment Perks", color: "from-green-600/20 to-emerald-600/20" },
 ];
 
