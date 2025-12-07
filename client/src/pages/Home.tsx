@@ -13,7 +13,8 @@ import {
   RefreshCw,
   BarChart3,
   Briefcase,
-  LineChart
+  LineChart,
+  CheckSquare
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
 import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
@@ -91,63 +92,113 @@ export default function Home() {
       {/* Gradient Divider */}
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
 
-      {/* SECTION 2: Flagship Services - Comparison Card Layout */}
-      <section id="categories" className="relative py-8 lg:py-12 overflow-hidden bg-gradient-to-br from-teal-800/80 to-emerald-700/80">
-        <div className="max-w-4xl mx-auto px-6">
+      {/* SECTION 2: Flagship Services - Digital Downloads Style */}
+      <section id="categories" className="relative py-16 px-4 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800">
+        <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-6">
-            <p className="text-white/90 text-sm font-semibold mb-3">Flagship Services</p>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-2">
+          <div className="text-center mb-12">
+            <Badge 
+              className="mb-4 border-0" 
+              style={{ 
+                background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
+                color: '#000',
+                fontSize: '0.9rem',
+                padding: '0.5rem 1rem'
+              }}
+            >
+              <Sparkles className="h-4 w-4 mr-2" />
+              Flagship Services
+            </Badge>
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-3">
               Choose Your Category
             </h2>
-            <p className="text-white/70 text-base">
-              AI-ranked products matched to your profile
+            <p className="text-xl text-white/70 max-w-3xl mx-auto">
+              AI-ranked products matched to your profile across 100+ financial products
             </p>
           </div>
 
-          {/* Main Comparison Card */}
-          <Card className="bg-gradient-to-br from-yellow-600/40 to-amber-700/40 border-yellow-500/50 p-6 backdrop-blur-lg">
-            {/* Grid Cards for the 3 main categories */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-              {[
-                { id: 'credit-cards', name: 'Credit Cards', icon: CreditCard, desc: 'AI-matched cards for your goals' },
-                { id: 'investing', name: 'Investing', icon: TrendingUp, desc: 'Brokerages & robo-advisors' },
-                { id: 'reverse-buyer-origination', name: 'Real Estate', icon: Building2, desc: 'Premium concierge services' }
-              ].map((cat) => (
-                <Link key={cat.id} href={`/${cat.id}`}>
-                  <Card 
-                    className="p-3 bg-slate-800/50 border-slate-700 hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group"
-                    data-testid={`card-category-${cat.id}`}
-                  >
-                    <div className="flex items-start justify-between mb-1">
-                      <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
-                        <cat.icon className="h-4 w-4" style={GOLD_ICON_STYLE} />
-                      </div>
-                      <ArrowRight className="h-3 w-3 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-0.5 transition-all" />
+          {/* Featured Category Cards - Grid of 3 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { 
+                id: 'credit-cards', 
+                name: 'Credit Cards', 
+                icon: CreditCard, 
+                desc: 'AI-matched cards for your goals',
+                highlights: ['100+ cards analyzed', 'Fintech & crypto included', 'Personalized scoring']
+              },
+              { 
+                id: 'investing', 
+                name: 'Investing', 
+                icon: TrendingUp, 
+                desc: 'Brokerages & robo-advisors',
+                highlights: ['Brokerages vs robo-advisors', 'Fee analysis included', 'Retirement planning']
+              },
+              { 
+                id: 'reverse-buyer-origination', 
+                name: 'Real Estate', 
+                icon: Building2, 
+                desc: 'Premium concierge services',
+                highlights: ['Mortgage optimization', 'Lender comparison', 'Rate watch alerts']
+              }
+            ].map((cat) => (
+              <Link key={cat.id} href={`/${cat.id}`}>
+                <Card 
+                  className="overflow-hidden border-0 h-full hover-elevate transition-all cursor-pointer"
+                  style={{ 
+                    background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
+                    backdropFilter: 'blur(20px)'
+                  }}
+                  data-testid={`card-category-${cat.id}`}
+                >
+                  <div className="p-8 flex flex-col h-full">
+                    {/* Icon */}
+                    <div 
+                      className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
+                      style={{
+                        background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
+                        border: '2px solid rgba(212,175,55,0.3)'
+                      }}
+                    >
+                      <cat.icon className="h-10 w-10" style={{ color: '#d4af37' }} />
                     </div>
-                    <h3 className="font-serif text-xs font-semibold text-white mb-0.5">{cat.name}</h3>
-                    <p className="text-white/60 text-xs">{cat.desc}</p>
-                  </Card>
-                </Link>
-              ))}
-            </div>
 
-            {/* Bottom Benefits */}
-            <div className="space-y-2 border-t border-yellow-500/30 pt-4">
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
-                <span className="text-white/80 text-xs">100+ AI-analyzed products across all categories</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
-                <span className="text-white/80 text-xs">Personalized ranking based on your Agentic Profile</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
-                <span className="text-white/80 text-xs">One-click routing to your best matches</span>
-              </div>
-            </div>
-          </Card>
+                    {/* Title */}
+                    <h3 className="font-serif text-2xl font-bold text-white mb-2">
+                      {cat.name}
+                    </h3>
+                    <p className="text-base text-white/70 mb-6">
+                      {cat.desc}
+                    </p>
+
+                    {/* Features List */}
+                    <div className="space-y-3 mb-6 flex-1">
+                      {cat.highlights.map((highlight, idx) => (
+                        <div key={idx} className="flex items-start gap-3">
+                          <CheckSquare className="h-4 w-4 mt-0.5 shrink-0 flex-shrink-0" style={{ color: '#d4af37' }} />
+                          <span className="text-sm text-white/80">{highlight}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* CTA */}
+                    <Button 
+                      size="sm"
+                      className="gap-2 border-0 w-full"
+                      style={{
+                        background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
+                        color: '#000',
+                        fontWeight: 600
+                      }}
+                    >
+                      <ArrowRight className="h-4 w-4" />
+                      Explore {cat.name}
+                    </Button>
+                  </div>
+                </Card>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
