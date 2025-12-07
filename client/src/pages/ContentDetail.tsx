@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRoute, Link } from "wouter";
+import { useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -20,12 +21,44 @@ import type { ContentItem } from "@shared/schema";
 
 export default function ContentDetail() {
   const [, params] = useRoute("/media-center/:slug");
-  const slug = params?.slug;
+  const slug = params?.slug ?? "";
 
   const { data: content, isLoading, error } = useQuery<ContentItem>({
-    queryKey: ["/api/media-center/content", slug],
-    enabled: !!slug,
+    queryKey: [`/api/media-center/content/${slug}`],
+    enabled: slug.length > 0,
   });
+
+  useEffect(() => {
+    if (content) {
+      document.title = `${content.title} | Agent Kammer Media Center`;
+      
+      const updateOrCreateMeta = (selector: string, attr: string, attrValue: string, contentValue: string): Element => {
+        let tag = document.querySelector(selector);
+        if (!tag) {
+          tag = document.createElement('meta');
+          tag.setAttribute(attr, attrValue);
+          document.head.appendChild(tag);
+        }
+        tag.setAttribute('content', contentValue);
+        return tag;
+      };
+
+      const description = content.description || `Read ${content.title} on Agent Kammer Media Center.`;
+      
+      updateOrCreateMeta('meta[name="description"]', 'name', 'description', description);
+      updateOrCreateMeta('meta[property="og:title"]', 'property', 'og:title', content.title);
+      updateOrCreateMeta('meta[property="og:description"]', 'property', 'og:description', description);
+      updateOrCreateMeta('meta[property="og:type"]', 'property', 'og:type', 'article');
+      
+      if (content.thumbnailUrl) {
+        updateOrCreateMeta('meta[property="og:image"]', 'property', 'og:image', content.thumbnailUrl);
+      }
+    }
+
+    return () => {
+      document.title = 'Agent Kammer';
+    };
+  }, [content]);
 
   const formatDate = (date: Date | null) => {
     if (!date) return "";
