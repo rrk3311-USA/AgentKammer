@@ -81,58 +81,60 @@ export default function Home() {
             }}
             data-testid="card-hero-featured"
           >
-            <div className="grid md:grid-cols-2 gap-8 p-8 md:p-12 items-center">
-              {/* Left: Brain Visual */}
-              <div className="flex justify-center">
-                <div className="w-full max-w-sm">
+            <div className="p-8 md:p-12">
+              {/* Brain Visual - Full Width */}
+              <div className="flex justify-center mb-12">
+                <div className="w-full">
                   <AgenticEngineVisual />
                 </div>
               </div>
 
-              {/* Right: Value Proposition */}
-              <div className="flex flex-col justify-center">
-                <h2 className="font-serif text-3xl font-bold text-white mb-6">
+              {/* Value Proposition */}
+              <div className="max-w-3xl mx-auto">
+                <h2 className="font-serif text-3xl font-bold text-white mb-6 text-center">
                   How It Works
                 </h2>
 
-                <div className="space-y-4 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                   {[
                     { title: 'One Profile', desc: 'Share your financial profile once - it powers all recommendations' },
                     { title: '100+ Products Analyzed', desc: 'AI screens hundreds of offers across 14 financial categories' },
                     { title: 'Personalized Rankings', desc: 'Get AI-matched recommendations ranked specifically for you' }
                   ].map((item, idx) => (
-                    <div key={idx} className="flex gap-4">
+                    <div key={idx} className="flex flex-col items-center text-center">
                       <div 
-                        className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold text-[#0a1628]"
+                        className="w-10 h-10 rounded-full flex items-center justify-center mb-3 text-sm font-bold text-[#0a1628] flex-shrink-0"
                         style={{ background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)' }}
                       >
                         {idx + 1}
                       </div>
-                      <div>
-                        <h3 className="font-semibold text-white mb-1">{item.title}</h3>
-                        <p className="text-white/70 text-sm">{item.desc}</p>
-                      </div>
+                      <h3 className="font-semibold text-white mb-2">{item.title}</h3>
+                      <p className="text-white/70 text-sm">{item.desc}</p>
                     </div>
                   ))}
                 </div>
 
                 {/* CTA */}
-                <Link href="/profile">
-                  <Button 
-                    size="lg"
-                    className="gap-2 border-0 w-full"
-                    style={{
-                      background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
-                      color: '#000',
-                      fontWeight: 600,
-                      fontSize: '1rem'
-                    }}
-                    data-testid="button-hero-cta"
-                  >
-                    <Brain className="h-5 w-5" />
-                    Build Your Profile
-                  </Button>
-                </Link>
+                <div className="flex justify-center">
+                  <Link href="/profile">
+                    <Button 
+                      size="lg"
+                      className="gap-2 border-0"
+                      style={{
+                        background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
+                        color: '#000',
+                        fontWeight: 600,
+                        fontSize: '1rem',
+                        paddingLeft: '2rem',
+                        paddingRight: '2rem'
+                      }}
+                      data-testid="button-hero-cta"
+                    >
+                      <Brain className="h-5 w-5" />
+                      Build Your Profile
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </Card>
