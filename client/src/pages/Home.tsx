@@ -201,40 +201,46 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 4: Investment Accounts - Dark Background */}
-      <section className="py-12 lg:py-16 bg-[#0a1628]">
+      {/* SECTION 4: Investment Accounts - Light Background */}
+      <section className="py-12 lg:py-16 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-10">
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-white">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                <TrendingUp className="h-7 w-7" style={GOLD_ICON_STYLE} />
+              </div>
+            </div>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-foreground">
               Investment Accounts
             </h2>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Compare brokerages, robo-advisors, and investment platforms matched to your goals
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
             {[
               { icon: BarChart3, title: 'Brokerages', desc: 'Full-service and discount brokers for active traders' },
               { icon: Briefcase, title: 'Robo-Advisors', desc: 'Automated investing with low fees and smart rebalancing' },
               { icon: LineChart, title: 'Crypto Platforms', desc: 'Digital asset trading and DeFi opportunities' }
             ].map((item) => (
-              <Link key={item.title} href="/investing">
-                <Card 
-                  className="p-5 bg-[#0f1d32]/95 border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group backdrop-blur-sm"
-                  data-testid={`card-investment-${item.title.toLowerCase()}`}
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
-                      <item.icon className="h-6 w-6" style={GOLD_ICON_STYLE} />
-                    </div>
-                    <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
-                  </div>
-                  <h3 className="font-serif text-lg font-semibold text-white mb-1">{item.title}</h3>
-                  <p className="text-white/60 text-sm">{item.desc}</p>
-                </Card>
-              </Link>
+              <Card key={item.title} className="p-5 border-border">
+                <div className="flex items-center gap-2 mb-3">
+                  <item.icon className="h-5 w-5 text-[#d4af37]" />
+                  <h3 className="font-semibold text-foreground">{item.title}</h3>
+                </div>
+                <p className="text-muted-foreground text-sm">{item.desc}</p>
+              </Card>
             ))}
+          </div>
+
+          <div className="text-center">
+            <Link href="/investing">
+              <Button size="lg" className={CTA_BUTTON_CLASS} data-testid="button-investment-accounts">
+                <TrendingUp className="h-5 w-5 mr-2" />
+                Explore Investment Accounts
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
