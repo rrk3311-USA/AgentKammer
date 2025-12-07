@@ -24,7 +24,7 @@ export function HeroSearch() {
         </p>
         
         {/* Live where you belong */}
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-2 pt-[5px] pb-[5px] mt-[3px] mb-[3px] pl-[1px] pr-[1px]">
           <Heart 
             className="w-5 h-5 text-[#d4af37] animate-pulse" 
             strokeWidth={2}
