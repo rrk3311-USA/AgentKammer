@@ -253,6 +253,15 @@ export function Header() {
                     Real Estate Concierge
                   </span>
                 </Link>
+                <Link href="/e-shop" data-testid="link-mobile-e-shop">
+                  <span
+                    className="text-sm font-medium hover:text-[#d4af37] cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-muted/50"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <ShoppingBag className="h-4 w-4" />
+                    E-Shop
+                  </span>
+                </Link>
               </div>
             </div>
 
@@ -303,16 +312,6 @@ export function Header() {
                 </span>
               </Link>
             </div>
-
-            <Link href="/e-shop" data-testid="link-mobile-e-shop">
-              <span
-                className="text-base font-medium hover:text-primary cursor-pointer block border-t pt-4 flex items-center gap-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <ShoppingBag className="h-4 w-4" />
-                E-Shop
-              </span>
-            </Link>
 
             <span
               className="text-base font-medium hover:text-primary cursor-pointer block pt-4"
