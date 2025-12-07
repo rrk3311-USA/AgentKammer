@@ -4,7 +4,7 @@ import heroImage from "@assets/generated_images/luxury_living_room_concierge.jpe
 export function HeroSearch() {
   return (
     <section 
-      className="relative py-32 lg:py-40 overflow-hidden bg-cover bg-center"
+      className="relative py-32 lg:py-40 overflow-hidden bg-cover bg-center pt-[154px] pb-[154px]"
       style={{
         backgroundImage: `url(${heroImage})`,
         backgroundAttachment: 'fixed'
