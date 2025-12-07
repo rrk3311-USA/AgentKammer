@@ -3,38 +3,39 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Download, Sparkles } from "lucide-react";
 
+import skiCabinImage from "@assets/generated_images/ski_cabin_investment_report_cover.png";
+import creditScoreImage from "@assets/generated_images/credit_score_optimization_guide_cover.png";
+import dueDiligenceImage from "@assets/generated_images/due_diligence_kit_cover_mockup.png";
+import portfolioImage from "@assets/generated_images/portfolio_analysis_report_cover.png";
+
 const products = [
   {
     id: 1,
     price: 25,
     title: "American Ski Cabin Investment Forecast",
     description: "5-10 year projections for top US ski resort markets including Aspen, Vail, Park City, Jackson Hole, Lake Tahoe and more.",
-    gradient: "from-blue-600/20 to-purple-600/20",
-    borderGradient: "from-blue-400 to-purple-400"
+    image: skiCabinImage
   },
   {
     id: 2,
     price: 50,
     title: "Credit Score Optimization Blueprint",
     description: "Step-by-step guide to boost your credit score 100+ points with actionable strategies and templates.",
-    gradient: "from-emerald-600/20 to-cyan-600/20",
-    borderGradient: "from-emerald-400 to-cyan-400"
+    image: creditScoreImage
   },
   {
     id: 3,
     price: 100,
     title: "Investment Property Due Diligence Kit",
     description: "Comprehensive templates, checklists, and spreadsheets for evaluating real estate investment opportunities.",
-    gradient: "from-amber-600/20 to-orange-600/20",
-    borderGradient: "from-amber-400 to-orange-400"
+    image: dueDiligenceImage
   },
   {
     id: 4,
     price: 500,
     title: "Private Portfolio Analysis",
     description: "Personalized wealth assessment and investment strategy report customized to your financial goals.",
-    gradient: "from-rose-600/20 to-pink-600/20",
-    borderGradient: "from-rose-400 to-pink-400"
+    image: portfolioImage
   }
 ];
 
@@ -75,13 +76,15 @@ export function DigitalProducts() {
               }}
               data-testid={`card-product-${product.id}`}
             >
-              {/* Gradient Header */}
-              <div 
-                className={`h-24 bg-gradient-to-br ${product.gradient}`}
-                style={{
-                  background: `linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.05) 100%)`
-                }}
-              />
+              {/* Product Image */}
+              <div className="relative h-40 overflow-hidden">
+                <img 
+                  src={product.image} 
+                  alt={product.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] to-transparent opacity-60" />
+              </div>
 
               {/* Content */}
               <div className="p-6 flex flex-col flex-1">
