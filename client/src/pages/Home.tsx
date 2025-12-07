@@ -328,7 +328,7 @@ export default function Home() {
         </div>
       </section>
       {/* SECTION 4: Investment Accounts - Light Background */}
-      <section className="py-12 lg:py-16 bg-background pt-[4px] pb-[4px] pl-[0px] pr-[0px] mt-[21px] mb-[21px]">
+      <section className="py-12 lg:py-16 bg-background pl-[0px] pr-[0px] pt-[0px] pb-[0px] mt-[13px] mb-[13px]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-10">
             <div className="flex items-center justify-center mb-4">
