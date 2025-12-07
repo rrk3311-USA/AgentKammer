@@ -176,7 +176,7 @@ export default function RealEstate() {
           </div>
         </section>
 
-        <section className="py-12 lg:py-16 bg-background">
+        <section className="py-12 lg:py-16 bg-background pt-[31px] pb-[31px]">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-12">
               <h2 className="font-serif text-3xl lg:text-4xl font-semibold mb-4">
