@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="relative">
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
-      <div className="bg-background border-t border-border/50">
+      <div className="bg-background border-t border-border/50 pt-[0px] pb-[0px] pl-[0px] pr-[0px] mt-[4px] mb-[4px]">
         <div className="max-w-7xl mx-auto px-6 py-6 pt-[0px] pb-[0px] pl-[40px] pr-[40px] ml-[45px] mr-[45px] mt-[3px] mb-[3px] text-left">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             <div>
