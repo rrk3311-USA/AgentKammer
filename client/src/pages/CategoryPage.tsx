@@ -26,7 +26,13 @@ import {
   ExternalLink,
   Brain,
   Zap,
-  Wifi
+  Wifi,
+  Plane,
+  UtensilsCrossed,
+  Briefcase,
+  ShieldCheck,
+  Clock,
+  Award
 } from "lucide-react";
 import { SUBCATEGORIES, SAMPLE_OFFERS, type ProductOffer, calculateMatchScore, getMatchExplanation } from "@shared/productOffers";
 import investingHeroImage from "@assets/generated_images/golden_sunrise_over_financial_district_skyline.png";
@@ -328,6 +334,107 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
           <p className="text-white/80 text-xs lg:text-sm text-left">{config.description}</p>
         </div>
       </section>
+
+      {/* Credit Cards Strategy Recap Section */}
+      {categoryId === 'credit-cards' && (
+        <section className="bg-gradient-to-b from-slate-950 to-[#0a1628] py-12 lg:py-16">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 lg:p-12 backdrop-blur-sm">
+              {/* Header */}
+              <div className="text-center mb-10">
+                <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-4">
+                  The Agent Kammer Advantage
+                </Badge>
+                <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3">
+                  <span className="block">We Did the Research.</span>
+                  <span className="block" style={{ color: "#d4af37" }}>You Get the Rewards.</span>
+                </h2>
+                <p className="text-white/70 max-w-2xl mx-auto">
+                  Stop spending hours comparing fine print. We analyze 100+ cards so you can focus on booking your next adventure.
+                </p>
+              </div>
+
+              {/* Benefits Grid */}
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                  <div className="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center mb-4">
+                    <Plane className="h-6 w-6 text-blue-400" />
+                  </div>
+                  <h3 className="text-white font-semibold text-lg mb-2">Airport Lounge Access</h3>
+                  <p className="text-white/60 text-sm">
+                    Skip the crowds. Priority Pass, Centurion Lounges, Delta Sky Clubs—we match cards with the lounges that matter to YOU.
+                  </p>
+                </div>
+
+                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                  <div className="w-12 h-12 rounded-lg bg-amber-500/20 flex items-center justify-center mb-4">
+                    <UtensilsCrossed className="h-6 w-6 text-amber-400" />
+                  </div>
+                  <h3 className="text-white font-semibold text-lg mb-2">Dining & Hotel Credits</h3>
+                  <p className="text-white/60 text-sm">
+                    $200 airline credits. $300 dining credits. Elite hotel status. Hidden perks that pay for annual fees—automatically surfaced.
+                  </p>
+                </div>
+
+                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                  <div className="w-12 h-12 rounded-lg bg-emerald-500/20 flex items-center justify-center mb-4">
+                    <ShieldCheck className="h-6 w-6 text-emerald-400" />
+                  </div>
+                  <h3 className="text-white font-semibold text-lg mb-2">Travel Protections</h3>
+                  <p className="text-white/60 text-sm">
+                    Trip delay insurance. Lost baggage coverage. Rental car protection. We break down which cards actually protect you.
+                  </p>
+                </div>
+
+                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                  <div className="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mb-4">
+                    <Clock className="h-6 w-6 text-purple-400" />
+                  </div>
+                  <h3 className="text-white font-semibold text-lg mb-2">Perfect Timing Strategy</h3>
+                  <p className="text-white/60 text-sm">
+                    Apply for the right card before your big trip. Hit minimum spend naturally. Maximize bonus categories when they matter.
+                  </p>
+                </div>
+
+                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                  <div className="w-12 h-12 rounded-lg bg-rose-500/20 flex items-center justify-center mb-4">
+                    <Award className="h-6 w-6 text-rose-400" />
+                  </div>
+                  <h3 className="text-white font-semibold text-lg mb-2">Points Maximization</h3>
+                  <p className="text-white/60 text-sm">
+                    Transfer partners. Redemption sweet spots. Turn 85K points into a $7K flight. We show you the playbook.
+                  </p>
+                </div>
+
+                <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+                  <div className="w-12 h-12 rounded-lg bg-cyan-500/20 flex items-center justify-center mb-4">
+                    <Brain className="h-6 w-6 text-cyan-400" />
+                  </div>
+                  <h3 className="text-white font-semibold text-lg mb-2">Research Masked for You</h3>
+                  <p className="text-white/60 text-sm">
+                    No more spreadsheets. No more blogs. Our AI distills thousands of data points into one clear recommendation.
+                  </p>
+                </div>
+              </div>
+
+              {/* Bottom CTA */}
+              <div className="bg-gradient-to-r from-[#d4af37]/10 to-[#d4af37]/5 rounded-xl p-6 border border-[#d4af37]/20 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div>
+                  <p className="text-[#d4af37] font-semibold text-lg">Ready for your personalized card strategy?</p>
+                  <p className="text-white/60 text-sm">Tell us your goals. We'll do the rest.</p>
+                </div>
+                <Button 
+                  className="bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90 h-11 px-6 flex-shrink-0"
+                  data-testid="button-get-card-strategy"
+                >
+                  Get My Card Strategy <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Agentic Profile CTA */}
       <section className="bg-[#0a1628] py-8 lg:py-10">
         <div className="max-w-7xl mx-auto px-6">
