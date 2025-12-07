@@ -11,8 +11,7 @@ export function HeroSearch() {
       }}
     >
       {/* Dark gradient overlay for text legibility */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/70 to-black/75" />
-      
+      <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/70 to-black/75 mt-[151px] mb-[151px] pt-[0px] pb-[0px]" />
       {/* Content */}
       <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
         <h1 className="font-serif text-4xl lg:text-5xl font-bold text-white mb-6">
