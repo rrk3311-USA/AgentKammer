@@ -63,24 +63,27 @@ export default function Home() {
               <span className="text-[#d4af37]">Financial Outcomes</span>
             </h1>
             
-            <p className="text-lg text-white/80 mb-8 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-lg text-white/80 leading-relaxed max-w-2xl mx-auto">
               One profile. Our Agentic Comparison Engine uses LLMs + compute to analyze offers and force banks, lenders, and financial products to{" "}
               <span className="text-[#d4af37] font-semibold">compete for you</span>.
             </p>
+          </div>
 
+          {/* AI Brain Visual - Large and Centered */}
+          <div className="flex justify-center mb-10">
+            <div className="w-full max-w-2xl">
+              <AgenticEngineVisual />
+            </div>
+          </div>
+
+          {/* CTA Button - Below Brain Visual */}
+          <div className="text-center">
             <Link href="/profile">
               <Button size="lg" className={CTA_BUTTON_CLASS} data-testid="button-hero-cta">
                 <Brain className="h-5 w-5 mr-2" />
                 Build Your Profile
               </Button>
             </Link>
-          </div>
-
-          {/* AI Brain Visual - Large and Centered Below */}
-          <div className="flex justify-center">
-            <div className="w-full max-w-2xl">
-              <AgenticEngineVisual />
-            </div>
           </div>
         </div>
       </section>
