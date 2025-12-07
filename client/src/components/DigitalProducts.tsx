@@ -6,7 +6,6 @@ import { Download, Sparkles } from "lucide-react";
 import skiCabinImage from "@assets/generated_images/ski_cabin_investment_report_cover.png";
 import creditScoreImage from "@assets/generated_images/credit_score_optimization_guide_cover.png";
 import dueDiligenceImage from "@assets/generated_images/due_diligence_kit_cover_mockup.png";
-import portfolioImage from "@assets/generated_images/portfolio_analysis_report_cover.png";
 
 const products = [
   {
@@ -29,13 +28,6 @@ const products = [
     title: "Investment Property Due Diligence Kit",
     description: "Comprehensive templates, checklists, and spreadsheets for evaluating real estate investment opportunities.",
     image: dueDiligenceImage
-  },
-  {
-    id: 4,
-    price: 500,
-    title: "Private Portfolio Analysis",
-    description: "Personalized wealth assessment and investment strategy report customized to your financial goals.",
-    image: portfolioImage
   }
 ];
 
