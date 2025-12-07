@@ -51,15 +51,8 @@ export default function Home() {
         </div>
 
         <div className="max-w-5xl mx-auto px-6 relative z-10">
-          {/* AI Brain Visual - Full Width at Top */}
-          <div className="flex justify-center mb-8">
-            <div className="w-full max-w-md">
-              <AgenticEngineVisual />
-            </div>
-          </div>
-
-          {/* Text Content - Centered Below */}
-          <div className="text-center">
+          {/* Text Content - Centered Above */}
+          <div className="text-center mb-10">
             <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-6 inline-flex" data-testid="badge-hero">
               <Sparkles className="h-3 w-3 mr-1" />
               Powered by Agentic AI
@@ -82,8 +75,18 @@ export default function Home() {
               </Button>
             </Link>
           </div>
+
+          {/* AI Brain Visual - Large and Centered Below */}
+          <div className="flex justify-center">
+            <div className="w-full max-w-2xl">
+              <AgenticEngineVisual />
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* Gradient Divider */}
+      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
 
       {/* SECTION 2: Flagship Services - With Concierge Character */}
       <section id="categories" className="relative py-12 lg:py-16 overflow-hidden bg-[#0a1628]">
@@ -144,6 +147,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Gradient Divider */}
+      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
 
       {/* SECTION 3: How It Works - Light Background */}
       <section className="py-12 lg:py-16 bg-background">
