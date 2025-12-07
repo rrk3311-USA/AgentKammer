@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
 import { DigitalProducts } from "@/components/DigitalProducts";
+import { CreditCardShowcase } from "@/components/CreditCardShowcase";
 import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
 import conciergeImage from '@assets/generated_images/concierge_agent_top_hat_luxury_interior.png';
 import conciergeGestureImage from '@assets/image_1763360901241.png';
@@ -518,7 +519,9 @@ export default function Home() {
       </section>
       {/* SECTION 7: Digital Products */}
       <DigitalProducts />
-      {/* SECTION 8: Final CTA - Dark Navy */}
+      {/* SECTION 8: Credit Card Showcase */}
+      <CreditCardShowcase />
+      {/* SECTION 9: Final CTA - Dark Navy */}
       <section className="py-8 lg:py-12 bg-gradient-to-b from-slate-900 to-slate-950 text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative">
           <div className="text-center">
