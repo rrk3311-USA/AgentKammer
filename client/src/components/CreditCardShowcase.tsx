@@ -56,13 +56,54 @@ export function CreditCardShowcase() {
   return (
     <section className="relative py-16 px-4 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-800">
       <div className="max-w-7xl mx-auto">
+        {/* Strategy Pitch Section */}
+        <div className="mb-16 bg-white/5 border border-white/10 rounded-xl p-8 backdrop-blur-sm">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                Strategic Card Matching
+              </h3>
+              <p className="text-white/80 mb-6 leading-relaxed">
+                Forget generic recommendations. We match the perfect card to your perfect moment—when you need it most and where it matters most.
+              </p>
+              <ul className="space-y-3 text-white/70">
+                <li className="flex gap-3">
+                  <span className="text-[#d4af37] font-bold">→</span>
+                  <span><strong>Strategic Timing:</strong> Get recommended cards for upcoming travel, major purchases, or life events</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-[#d4af37] font-bold">→</span>
+                  <span><strong>Reward Maximization:</strong> Book $7k flights for 85k points. Our game plans show you exactly how</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-[#d4af37] font-bold">→</span>
+                  <span><strong>Personalized Playbooks:</strong> Unlock strategies tailored to your spending patterns and goals</span>
+                </li>
+              </ul>
+            </div>
+            <div className="bg-gradient-to-br from-[#d4af37]/10 to-white/5 rounded-lg p-6 border border-[#d4af37]/20">
+              <div className="text-center">
+                <div className="text-[#d4af37] text-sm font-bold mb-2 uppercase tracking-wide">Real Results</div>
+                <div className="text-5xl font-bold text-white mb-2">85K</div>
+                <div className="text-white/70">Points for a $7K Flight</div>
+                <div className="text-xs text-white/50 mt-4">Using our strategic card recommendations and reward points optimization</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-3">
-            Credit Cards That <span style={{ color: "#d4af37" }}>Compete For You</span>
-          </h2>
-          <p className="text-xl text-white/70 max-w-3xl mx-auto">
-            100+ premium cards compared and ranked by your profile - from travel rewards to cashback to business advantages
+          <div className="mb-3">
+            <h2 className="font-serif text-3xl md:text-5xl font-bold text-white">
+              Credit Cards That
+            </h2>
+            <h2 className="font-serif text-3xl md:text-5xl font-bold" style={{ color: "#d4af37" }}>
+              Compete For You
+            </h2>
+          </div>
+          <p className="text-base md:text-xl text-white/70 max-w-3xl mx-auto">
+            100+ premium cards compared and ranked by your profile—from travel rewards to cashback to business advantages
           </p>
         </div>
 
