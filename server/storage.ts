@@ -161,6 +161,14 @@ export class MemStorage implements IStorage {
       fileUrl: insertItem.fileUrl ?? null,
       notes: insertItem.notes ?? null,
       legalStatus: insertItem.legalStatus ?? null,
+      format: insertItem.format ?? "article",
+      isPublished: insertItem.isPublished ?? false,
+      slug: insertItem.slug ?? null,
+      thumbnailUrl: insertItem.thumbnailUrl ?? null,
+      contentBody: insertItem.contentBody ?? null,
+      videoUrl: insertItem.videoUrl ?? null,
+      duration: insertItem.duration ?? null,
+      publishedAt: insertItem.publishedAt ?? null,
     };
     this.contentItems.set(id, item);
     return item;
