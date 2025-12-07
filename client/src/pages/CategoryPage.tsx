@@ -35,6 +35,7 @@ import {
   Award
 } from "lucide-react";
 import { SUBCATEGORIES, SAMPLE_OFFERS, type ProductOffer, calculateMatchScore, getMatchExplanation } from "@shared/productOffers";
+import { StrategicCardMatching } from "@/components/StrategicCardMatching";
 import investingHeroImage from "@assets/generated_images/golden_sunrise_over_financial_district_skyline.png";
 import creditCardsHeroImage from "@assets/generated_images/tropical_resort_infinity_pool_at_golden_hour.png";
 
@@ -457,6 +458,9 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
           </div>
         </div>
       </section>
+      {/* Strategic Card Matching - for credit cards */}
+      {categoryId === 'credit-cards' && <StrategicCardMatching />}
+
       {/* Divider */}
       <div className="bg-[#0a1628] px-6">
         <div className="max-w-7xl mx-auto">
