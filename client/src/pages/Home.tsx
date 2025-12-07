@@ -180,10 +180,8 @@ export default function Home() {
           </Card>
         </div>
       </section>
-
       {/* Gradient Divider */}
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
-
       {/* SECTION 2: Flagship Services - Digital Downloads Style */}
       <section id="categories" className="relative py-16 px-4 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800">
         <div className="max-w-6xl mx-auto">
@@ -281,10 +279,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Gradient Divider */}
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
-
       {/* SECTION 3: Real Estate Concierge - Image Background */}
       <section className="relative py-12 lg:py-16 overflow-hidden">
         <div 
@@ -331,9 +327,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* SECTION 4: Investment Accounts - Light Background */}
-      <section className="py-12 lg:py-16 bg-background">
+      <section className="py-12 lg:py-16 bg-background pt-[4px] pb-[4px] pl-[0px] pr-[0px] mt-[21px] mb-[21px]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-10">
             <div className="flex items-center justify-center mb-4">
@@ -367,7 +362,6 @@ export default function Home() {
 
           </div>
       </section>
-
       {/* SECTION 5: Credit Cards Comparison - Dark Navy */}
       <section className="py-12 lg:py-16 bg-[#0a1628]">
         <div className="max-w-7xl mx-auto px-6">
@@ -459,7 +453,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* SECTION 6: The Agentic Advantage - Dark Slate Background */}
       <section className="relative py-16 px-4 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800">
         <div className="max-w-6xl mx-auto">
@@ -545,7 +538,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* SECTION 7: Final CTA - Dark Navy */}
       <section className="relative py-12 lg:py-16 bg-[#0a1628] overflow-hidden">
         {/* Animated Financial Words Background */}
