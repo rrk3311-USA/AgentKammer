@@ -91,24 +91,24 @@ export default function Home() {
       {/* Gradient Divider */}
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
 
-      {/* SECTION 2: Flagship Services - Comparison Card Layout */}
-      <section id="categories" className="relative py-12 lg:py-16 overflow-hidden bg-[#0a1628]">
+      {/* SECTION 2: Flagship Services & Real Estate - Merged & Condensed */}
+      <section id="categories" className="relative py-8 lg:py-12 overflow-hidden bg-[#0a1628]">
         <div className="max-w-4xl mx-auto px-6">
           {/* Header */}
-          <div className="text-center mb-8">
-            <Badge className="bg-[#d4af37] text-[#0a1628] border-[#d4af37] mb-4 inline-flex font-semibold">Flagship Services</Badge>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-3">
+          <div className="text-center mb-6">
+            <Badge className="bg-[#d4af37] text-[#0a1628] border-[#d4af37] mb-3 inline-flex font-semibold">Flagship Services</Badge>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-2">
               Choose Your Category
             </h2>
-            <p className="text-white/70 text-lg">
+            <p className="text-white/70 text-base">
               AI-ranked products matched to your profile
             </p>
           </div>
 
           {/* Main Comparison Card */}
-          <Card className="bg-gradient-to-br from-teal-800/80 to-emerald-700/80 border-emerald-400/50 p-8 backdrop-blur-lg">
-            {/* Grid Cards for the 3 categories */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <Card className="bg-gradient-to-br from-teal-800/80 to-emerald-700/80 border-emerald-400/50 p-6 backdrop-blur-lg">
+            {/* Grid Cards for the 3 main categories */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
               {[
                 { id: 'credit-cards', name: 'Credit Cards', icon: CreditCard, desc: 'AI-matched cards for your goals' },
                 { id: 'investing', name: 'Investing', icon: TrendingUp, desc: 'Brokerages & robo-advisors' },
@@ -116,88 +116,64 @@ export default function Home() {
               ].map((cat) => (
                 <Link key={cat.id} href={`/${cat.id}`}>
                   <Card 
-                    className="p-4 bg-slate-800/50 border-slate-700 hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group"
+                    className="p-3 bg-slate-800/50 border-slate-700 hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group"
                     data-testid={`card-category-${cat.id}`}
                   >
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                    <div className="flex items-start justify-between mb-1">
+                      <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
                         <cat.icon className="h-5 w-5" style={GOLD_ICON_STYLE} />
                       </div>
                       <ArrowRight className="h-4 w-4 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-0.5 transition-all" />
                     </div>
-                    <h3 className="font-serif text-base font-semibold text-white mb-1">{cat.name}</h3>
+                    <h3 className="font-serif text-sm font-semibold text-white mb-0.5">{cat.name}</h3>
                     <p className="text-white/60 text-xs">{cat.desc}</p>
                   </Card>
                 </Link>
               ))}
             </div>
 
+            {/* Real Estate Services - Nested Sub-section */}
+            <div className="border-t border-emerald-400/30 pt-4 mb-4">
+              <p className="text-emerald-200/80 text-xs font-semibold mb-3 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
+                REAL ESTATE CONCIERGE SERVICES
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {[
+                  { icon: Building2, title: 'Reverse Buyer Origination', link: '/reverse-buyer-origination', testId: 'card-reo-rbo' },
+                  { icon: Users, title: 'Reverse Seller Architecture', link: '/reverse-seller-architecture', testId: 'card-reo-rsa' },
+                  { icon: RefreshCw, title: 'Refinancing Rate Watch', link: '/refinancing', testId: 'card-reo-rrw' }
+                ].map((service) => (
+                  <Link key={service.title} href={service.link}>
+                    <div className="p-3 bg-slate-800/40 border border-emerald-400/20 rounded-lg hover:border-[#d4af37]/50 transition-all cursor-pointer group" data-testid={service.testId}>
+                      <div className="flex items-center gap-2 mb-1">
+                        <div className="w-7 h-7 rounded flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                          <service.icon className="h-4 w-4" style={GOLD_ICON_STYLE} />
+                        </div>
+                        <h4 className="font-serif text-xs font-semibold text-white group-hover:text-[#d4af37] transition-all">{service.title}</h4>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             {/* Bottom Benefits */}
-            <div className="space-y-3 border-t border-slate-700 pt-6">
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-[#d4af37]"></div>
-                <span className="text-white/80 text-sm">100+ AI-analyzed products across all categories</span>
+            <div className="space-y-2 border-t border-emerald-400/30 pt-4">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
+                <span className="text-white/80 text-xs">100+ AI-analyzed products across all categories</span>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-[#d4af37]"></div>
-                <span className="text-white/80 text-sm">Personalized ranking based on your Agentic Profile</span>
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
+                <span className="text-white/80 text-xs">Personalized ranking based on your Agentic Profile</span>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-[#d4af37]"></div>
-                <span className="text-white/80 text-sm">One-click routing to your best matches</span>
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
+                <span className="text-white/80 text-xs">One-click routing to your best matches</span>
               </div>
             </div>
           </Card>
-        </div>
-      </section>
-
-      {/* Gradient Divider */}
-      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
-
-      {/* SECTION 3: Real Estate Concierge - Image Background */}
-      <section className="relative py-12 lg:py-16 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${conciergeImage})` }}
-        >
-          <div className="absolute inset-0 bg-black/80" />
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-6 z-10">
-          <div className="text-center mb-10">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
-                <Building2 className="h-7 w-7" style={GOLD_ICON_STYLE} />
-              </div>
-            </div>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-white">
-              Real Estate Concierge
-            </h2>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
-              Premium home buying, selling, and mortgage intelligence worldwide
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {[
-              { icon: Building2, title: 'Reverse Buyer Origination', desc: 'Sellers compete to win your business with better terms and faster closing.', link: '/reverse-buyer-origination', testId: 'button-rbo' },
-              { icon: Users, title: 'Reverse Seller Architecture', desc: 'Multiple qualified buyer agents compete, driving up demand for your home.', link: '/reverse-seller-architecture', testId: 'button-rsa' },
-              { icon: RefreshCw, title: 'Refinancing Rate Watch', desc: 'AI-powered monitoring alerts you when rates drop with exact savings.', link: '/refinancing', testId: 'button-rrw' }
-            ].map((service) => (
-              <Card key={service.title} className="p-5 bg-white/5 border-white/10 backdrop-blur-sm">
-                <div className="flex items-center gap-2 mb-3">
-                  <service.icon className="h-5 w-5 text-[#d4af37]" />
-                  <h3 className="font-serif text-lg font-semibold text-white">{service.title}</h3>
-                </div>
-                <p className="text-white/70 text-sm mb-4">{service.desc}</p>
-                <Link href={service.link}>
-                  <Button size="sm" className="bg-[#d4af37] text-[#0a1628] hover:bg-[#d4af37]/90" data-testid={service.testId}>
-                    Learn More <ArrowRight className="h-4 w-4 ml-2" />
-                  </Button>
-                </Link>
-              </Card>
-            ))}
-          </div>
         </div>
       </section>
 
