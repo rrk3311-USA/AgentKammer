@@ -92,11 +92,11 @@ export default function Home() {
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
 
       {/* SECTION 2: Flagship Services - Comparison Card Layout */}
-      <section id="categories" className="relative py-8 lg:py-12 overflow-hidden bg-[#0a1628]">
+      <section id="categories" className="relative py-8 lg:py-12 overflow-hidden bg-gradient-to-br from-teal-800/80 to-emerald-700/80">
         <div className="max-w-4xl mx-auto px-6">
           {/* Header */}
           <div className="text-center mb-6">
-            <Badge className="bg-[#d4af37] text-[#0a1628] border-[#d4af37] mb-3 inline-flex font-semibold">Flagship Services</Badge>
+            <p className="text-white/90 text-sm font-semibold mb-3">Flagship Services</p>
             <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-2">
               Choose Your Category
             </h2>
@@ -106,7 +106,7 @@ export default function Home() {
           </div>
 
           {/* Main Comparison Card */}
-          <Card className="bg-gradient-to-br from-teal-800/80 to-emerald-700/80 border-emerald-400/50 p-6 backdrop-blur-lg">
+          <Card className="bg-gradient-to-br from-yellow-600/40 to-amber-700/40 border-yellow-500/50 p-6 backdrop-blur-lg">
             {/* Grid Cards for the 3 main categories */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
               {[
@@ -133,7 +133,7 @@ export default function Home() {
             </div>
 
             {/* Bottom Benefits */}
-            <div className="space-y-2 border-t border-emerald-400/30 pt-4">
+            <div className="space-y-2 border-t border-yellow-500/30 pt-4">
               <div className="flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
                 <span className="text-white/80 text-xs">100+ AI-analyzed products across all categories</span>
