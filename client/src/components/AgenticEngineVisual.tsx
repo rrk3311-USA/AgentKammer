@@ -50,24 +50,24 @@ export function AgenticEngineVisual() {
             alt="Agent Kammer AI Background" 
             className="w-full h-full object-cover"
             style={{
-              transform: 'scale(1.5)',
-              filter: 'blur(25px)',
-              opacity: 0.3,
+              transform: 'scale(1.1)',
+              filter: 'blur(18px)',
+              opacity: 0.45,
             }}
             loading="eager"
           />
-          {/* Fade out edges */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-transparent to-[#0a1628]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628] via-transparent to-[#0a1628]" />
+          {/* Subtle fade out edges */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/40 to-[#0a1628]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a1628]/20 via-transparent to-[#0a1628]/20" />
         </div>
 
         {/* Orbital rings background */}
         <div className="absolute inset-0 flex items-center justify-center z-5">
-          <div className="absolute w-[260px] h-[260px] md:w-[310px] md:h-[310px] rounded-full border border-[#d4af37]/10" />
-          <div className="absolute w-[310px] h-[310px] md:w-[385px] md:h-[385px] rounded-full border border-[#d4af37]/8" />
-          <div className="absolute w-[360px] h-[360px] md:w-[460px] md:h-[460px] rounded-full border border-[#d4af37]/5" />
-          <div className="absolute w-[410px] h-[410px] md:w-[535px] md:h-[535px] rounded-full border border-blue-500/5" />
-          <div className="absolute w-[460px] h-[460px] md:w-[610px] md:h-[610px] rounded-full border border-blue-500/3" />
+          <div className="absolute w-[260px] h-[260px] md:w-[310px] md:h-[310px] rounded-full border border-[#d4af37]/25" />
+          <div className="absolute w-[310px] h-[310px] md:w-[385px] md:h-[385px] rounded-full border border-[#d4af37]/20" />
+          <div className="absolute w-[360px] h-[360px] md:w-[460px] md:h-[460px] rounded-full border border-[#d4af37]/15" />
+          <div className="absolute w-[410px] h-[410px] md:w-[535px] md:h-[535px] rounded-full border border-blue-500/12" />
+          <div className="absolute w-[460px] h-[460px] md:w-[610px] md:h-[610px] rounded-full border border-blue-500/8" />
         </div>
 
         {/* Cascading category text - waterfall effect */}
