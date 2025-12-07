@@ -50,7 +50,7 @@ export default function RealEstate() {
   });
 
   return (
-    <div className="min-h-screen pb-32 relative">
+    <div className="min-h-screen relative pt-[33px] pb-[33px]">
       <LuxuryBackground />
       <div className="relative z-10">
         <HeroSearch />
