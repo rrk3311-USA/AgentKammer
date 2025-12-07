@@ -44,48 +44,98 @@ const CTA_BUTTON_CLASS = "px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* SECTION 1: Hero - Dark Navy - Stacked Layout */}
-      <section className="relative bg-gradient-to-b from-[#0a1628] via-[#0f1d32] to-[#0a1628] py-12 lg:py-16 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#d4af37]/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#d4af37]/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        </div>
-
-        <div className="max-w-5xl mx-auto px-6 relative z-10">
-          {/* Text Content - Centered Above */}
-          <div className="text-center mb-10">
-            <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-6 inline-flex" data-testid="badge-hero">
-              <Sparkles className="h-3 w-3 mr-1" />
+      {/* SECTION 1: Hero - Premium Style with Featured Card */}
+      <section className="relative py-20 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(212,175,55,0.1),transparent_50%)]" />
+        <div className="max-w-6xl mx-auto relative z-10">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <Badge 
+              className="mb-6 border-0" 
+              style={{ 
+                background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
+                color: '#000',
+                fontSize: '0.9rem',
+                padding: '0.5rem 1rem'
+              }}
+            >
+              <Sparkles className="h-4 w-4 mr-2" />
               Powered by Agentic AI
             </Badge>
-            
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+            <h1 className="font-serif text-5xl md:text-6xl font-bold mb-6 text-white">
               Your AI Agent for Better{" "}
-              <span className="text-[#d4af37]">Financial Outcomes</span>
+              <span style={{ color: '#d4af37' }}>Financial Outcomes</span>
             </h1>
-            
-            <p className="text-lg text-white/80 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
               One profile. Our Agentic Comparison Engine uses LLMs + compute to analyze offers and force banks, lenders, and financial products to{" "}
               <span className="text-[#d4af37] font-semibold">compete for you</span>.
             </p>
           </div>
 
-          {/* AI Brain Visual - Large and Centered */}
-          <div className="flex justify-center mb-10">
-            <div className="w-full max-w-2xl">
-              <AgenticEngineVisual />
-            </div>
-          </div>
+          {/* Featured Hero Card with Brain Visual */}
+          <Card 
+            className="overflow-hidden border-0 mb-12" 
+            style={{ 
+              background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
+              backdropFilter: 'blur(20px)'
+            }}
+            data-testid="card-hero-featured"
+          >
+            <div className="grid md:grid-cols-2 gap-8 p-8 md:p-12 items-center">
+              {/* Left: Brain Visual */}
+              <div className="flex justify-center">
+                <div className="w-full max-w-sm">
+                  <AgenticEngineVisual />
+                </div>
+              </div>
 
-          {/* CTA Button - Below Brain Visual */}
-          <div className="text-center">
-            <Link href="/profile">
-              <Button size="lg" className={CTA_BUTTON_CLASS} data-testid="button-hero-cta">
-                <Brain className="h-5 w-5 mr-2" />
-                Build Your Profile
-              </Button>
-            </Link>
-          </div>
+              {/* Right: Value Proposition */}
+              <div className="flex flex-col justify-center">
+                <h2 className="font-serif text-3xl font-bold text-white mb-6">
+                  How It Works
+                </h2>
+
+                <div className="space-y-4 mb-8">
+                  {[
+                    { title: 'One Profile', desc: 'Share your financial profile once - it powers all recommendations' },
+                    { title: '100+ Products Analyzed', desc: 'AI screens hundreds of offers across 14 financial categories' },
+                    { title: 'Personalized Rankings', desc: 'Get AI-matched recommendations ranked specifically for you' }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex gap-4">
+                      <div 
+                        className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold text-[#0a1628]"
+                        style={{ background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)' }}
+                      >
+                        {idx + 1}
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-white mb-1">{item.title}</h3>
+                        <p className="text-white/70 text-sm">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA */}
+                <Link href="/profile">
+                  <Button 
+                    size="lg"
+                    className="gap-2 border-0 w-full"
+                    style={{
+                      background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
+                      color: '#000',
+                      fontWeight: 600,
+                      fontSize: '1rem'
+                    }}
+                    data-testid="button-hero-cta"
+                  >
+                    <Brain className="h-5 w-5" />
+                    Build Your Profile
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </Card>
         </div>
       </section>
 
