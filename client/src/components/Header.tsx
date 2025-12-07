@@ -23,7 +23,8 @@ import {
   Brain,
   Triangle,
   Calculator,
-  RefreshCw
+  RefreshCw,
+  ShoppingBag
 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState, useEffect } from "react";
@@ -178,6 +179,16 @@ export function Header() {
               />
             </Button>
             <div className="hidden md:flex items-center gap-2">
+              <Link href="/e-shop">
+                <Button
+                  variant="ghost"
+                  className="hover-elevate active-elevate-2 h-9 px-3 gap-1 text-sm"
+                  data-testid="button-header-e-shop"
+                >
+                  <ShoppingBag className="h-4 w-4" />
+                  <span>E-Shop</span>
+                </Button>
+              </Link>
               <Button
                 variant="ghost"
                 className="hover-elevate active-elevate-2 h-9 px-3 gap-1 text-sm"
@@ -297,8 +308,18 @@ export function Header() {
               </Link>
             </div>
 
+            <Link href="/e-shop" data-testid="link-mobile-e-shop">
+              <span
+                className="text-base font-medium hover:text-primary cursor-pointer block border-t pt-4 flex items-center gap-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <ShoppingBag className="h-4 w-4" />
+                E-Shop
+              </span>
+            </Link>
+
             <span
-              className="text-base font-medium hover:text-primary cursor-pointer block border-t pt-4"
+              className="text-base font-medium hover:text-primary cursor-pointer block pt-4"
               onClick={() => {
                 setMobileMenuOpen(false);
                 setTimeout(() => {

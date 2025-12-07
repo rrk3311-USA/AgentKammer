@@ -39,6 +39,7 @@ import AffiliateProgram from "@/pages/AffiliateProgram";
 import FreeTools from "@/pages/FreeTools";
 import Dashboard from "@/pages/Dashboard";
 import Refinancing from "@/pages/Refinancing";
+import EShop from "@/pages/EShop";
 import NotFound from "@/pages/not-found";
 
 function ScrollToTop() {
@@ -78,6 +79,7 @@ function Router() {
       <Route path="/estate-planning" component={() => <CategoryPage categoryId="estate-planning" />} />
       <Route path="/micro-investing" component={() => <CategoryPage categoryId="micro-investing" />} />
       <Route path="/refinancing" component={Refinancing} />
+      <Route path="/e-shop" component={EShop} />
       
       {/* Dashboard & Profile */}
       <Route path="/dashboard" component={Dashboard} />
