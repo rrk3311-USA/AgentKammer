@@ -58,7 +58,6 @@ export default function RealEstate() {
         <section className="py-12 lg:py-16 bg-background">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-12">
-              <Badge className="bg-[#d4af37] text-[#0a1628] mb-4">Our Signature Programs</Badge>
               <h2 className="font-serif text-3xl lg:text-4xl font-semibold mb-4">
                 Exclusive Real Estate Services
               </h2>
