@@ -28,16 +28,34 @@ export function AgenticEngineVisual() {
       data-testid="agentic-engine-visual"
     >
       <div className="relative w-full aspect-[16/9] min-h-[220px] bg-gradient-to-b from-slate-950 via-[#0a1628] to-slate-900">
-        {/* Neural network grid background */}
-        <div className="absolute inset-0 opacity-20">
-          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <defs>
-              <pattern id="neuralGrid" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-                <circle cx="5" cy="5" r="0.5" fill="#d4af37" opacity="0.5" />
-              </pattern>
-            </defs>
-            <rect width="100" height="100" fill="url(#neuralGrid)" />
-          </svg>
+        {/* Animated orbital rings */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div 
+            className="absolute w-[280px] h-[280px] md:w-[380px] md:h-[380px] rounded-full border border-[#d4af37]/10"
+            style={{ animation: 'orbitRing1 20s linear infinite' }}
+          />
+          <div 
+            className="absolute w-[340px] h-[340px] md:w-[460px] md:h-[460px] rounded-full border border-[#d4af37]/5"
+            style={{ animation: 'orbitRing2 30s linear infinite reverse' }}
+          />
+          <div 
+            className="absolute w-[400px] h-[400px] md:w-[540px] md:h-[540px] rounded-full border border-blue-500/5"
+            style={{ animation: 'orbitRing1 40s linear infinite' }}
+          />
+        </div>
+
+        {/* Floating particles/dots on orbits */}
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+          {[...Array(8)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-[#d4af37]/40"
+              style={{
+                animation: `orbitParticle${i % 3} ${15 + i * 3}s linear infinite`,
+                animationDelay: `${i * -2}s`,
+              }}
+            />
+          ))}
         </div>
 
         {/* Radial glow behind robot */}
@@ -51,7 +69,6 @@ export function AgenticEngineVisual() {
         {/* Robot Agent - Center */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%] z-10">
           <div className="relative">
-            {/* Brain circuit overlay effect */}
             <div 
               className="absolute -inset-4 md:-inset-6 rounded-full opacity-60"
               style={{
@@ -60,7 +77,6 @@ export function AgenticEngineVisual() {
               }}
             />
             
-            {/* Robot image */}
             <img 
               src={robotImage} 
               alt="Agent Kammer AI" 
@@ -72,7 +88,6 @@ export function AgenticEngineVisual() {
               loading="eager"
             />
 
-            {/* Thinking indicator */}
             <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
               {[0, 1, 2].map((i) => (
                 <div 
@@ -87,81 +102,37 @@ export function AgenticEngineVisual() {
           </div>
         </div>
 
-        {/* Orbiting category nodes - Desktop */}
-        <div className="hidden md:block absolute inset-0">
-          <svg 
-            className="absolute inset-0 w-full h-full"
-            style={{ pointerEvents: 'none' }}
-          >
-            <defs>
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="2" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-            
-            {/* Connection lines from robot to categories */}
-            {categories.map((_, i) => {
-              const angle = (i * 72 - 90) * (Math.PI / 180);
-              const radiusX = 42;
-              const radiusY = 38;
-              const endX = 50 + radiusX * Math.cos(angle);
-              const endY = 50 + radiusY * Math.sin(angle);
-              const isActive = activeIndex === i;
-              
-              return (
-                <line
-                  key={i}
-                  x1="50%"
-                  y1="50%"
-                  x2={`${endX}%`}
-                  y2={`${endY}%`}
-                  stroke={isActive ? "#d4af37" : "#d4af37"}
-                  strokeWidth={isActive ? "2" : "1"}
-                  opacity={isActive ? 0.8 : 0.2}
-                  filter={isActive ? "url(#glow)" : ""}
-                  className="transition-all duration-500"
-                />
-              );
-            })}
-          </svg>
-
-          {/* Category labels positioned around robot */}
+        {/* Floating category bubbles - Desktop */}
+        <div className="hidden md:block absolute inset-0 overflow-hidden">
           {categories.map((cat, i) => {
-            const angle = (i * 72 - 90) * (Math.PI / 180);
-            const radiusX = 44;
-            const radiusY = 40;
-            const x = 50 + radiusX * Math.cos(angle);
-            const y = 50 + radiusY * Math.sin(angle);
             const isActive = activeIndex === i;
             
             return (
               <div
                 key={i}
-                className={`absolute transition-all duration-500 ${
-                  isActive ? 'scale-110 z-20' : 'scale-100 z-10'
+                className={`absolute transition-all duration-700 ${
+                  isActive ? 'z-20' : 'z-10'
                 }`}
                 style={{
-                  left: `${x}%`,
-                  top: `${y}%`,
-                  transform: 'translate(-50%, -50%)',
+                  animation: `floatBubble${i} ${18 + i * 2}s ease-in-out infinite`,
+                  animationDelay: `${i * -3}s`,
                 }}
               >
                 <div 
-                  className={`px-3 py-1.5 rounded-full backdrop-blur-sm transition-all duration-500 whitespace-nowrap ${
+                  className={`px-4 py-2 rounded-full backdrop-blur-sm transition-all duration-500 whitespace-nowrap ${
                     isActive 
-                      ? 'bg-[#d4af37]/20 border border-[#d4af37]/60' 
-                      : 'bg-slate-800/50 border border-white/10'
+                      ? 'bg-[#d4af37]/25 border-2 border-[#d4af37]/70 scale-110' 
+                      : 'bg-slate-800/40 border border-white/10 scale-100'
                   }`}
+                  style={{
+                    boxShadow: isActive ? '0 0 20px rgba(212,175,55,0.3)' : 'none',
+                  }}
                 >
                   <span 
                     className={`text-sm font-semibold transition-all duration-500 ${
                       isActive 
                         ? 'text-[#d4af37] drop-shadow-[0_0_8px_rgba(212,175,55,0.8)]' 
-                        : 'text-white/60'
+                        : 'text-white/50'
                     }`}
                   >
                     {cat.label}
@@ -210,6 +181,70 @@ export function AgenticEngineVisual() {
             0%, 100% { opacity: 0.3; transform: translateY(0); }
             50% { opacity: 1; transform: translateY(-3px); }
           }
+
+          @keyframes orbitRing1 {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+
+          @keyframes orbitRing2 {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.02); }
+            100% { transform: rotate(360deg) scale(1); }
+          }
+
+          @keyframes orbitParticle0 {
+            0% { transform: rotate(0deg) translateX(140px) rotate(0deg); opacity: 0.6; }
+            50% { opacity: 0.3; }
+            100% { transform: rotate(360deg) translateX(140px) rotate(-360deg); opacity: 0.6; }
+          }
+
+          @keyframes orbitParticle1 {
+            0% { transform: rotate(0deg) translateX(190px) rotate(0deg); opacity: 0.4; }
+            50% { opacity: 0.7; }
+            100% { transform: rotate(-360deg) translateX(190px) rotate(360deg); opacity: 0.4; }
+          }
+
+          @keyframes orbitParticle2 {
+            0% { transform: rotate(0deg) translateX(230px) rotate(0deg); opacity: 0.5; }
+            50% { opacity: 0.2; }
+            100% { transform: rotate(360deg) translateX(230px) rotate(-360deg); opacity: 0.5; }
+          }
+
+          @keyframes floatBubble0 {
+            0%, 100% { left: 8%; top: 18%; }
+            25% { left: 12%; top: 25%; }
+            50% { left: 6%; top: 30%; }
+            75% { left: 10%; top: 22%; }
+          }
+
+          @keyframes floatBubble1 {
+            0%, 100% { right: 10%; top: 15%; left: auto; }
+            25% { right: 8%; top: 22%; }
+            50% { right: 14%; top: 18%; }
+            75% { right: 6%; top: 25%; }
+          }
+
+          @keyframes floatBubble2 {
+            0%, 100% { right: 6%; top: 55%; left: auto; }
+            25% { right: 10%; top: 50%; }
+            50% { right: 8%; top: 60%; }
+            75% { right: 12%; top: 52%; }
+          }
+
+          @keyframes floatBubble3 {
+            0%, 100% { left: 5%; top: 60%; }
+            25% { left: 10%; top: 55%; }
+            50% { left: 8%; top: 65%; }
+            75% { left: 6%; top: 58%; }
+          }
+
+          @keyframes floatBubble4 {
+            0%, 100% { left: 50%; top: 75%; transform: translateX(-50%); }
+            25% { left: 48%; top: 72%; }
+            50% { left: 52%; top: 78%; }
+            75% { left: 50%; top: 74%; }
+          }
         `}</style>
 
         {/* Bottom caption bar */}
@@ -217,8 +252,8 @@ export function AgenticEngineVisual() {
           <div className="flex items-center justify-center gap-2 md:gap-3">
             <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full animate-pulse shrink-0 bg-[#0b9c26]" />
             <span className="text-[#d4af37] font-semibold text-xs md:text-base tracking-wide text-center">
-              <span className="hidden sm:inline">Agent Kammer - Multi-Category Financial Intelligence</span>
-              <span className="sm:hidden">Your AI Financial Agent</span>
+              <span className="hidden sm:inline">Agentic Deal Procurement</span>
+              <span className="sm:hidden">Agentic Deal Procurement</span>
             </span>
             <div className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full animate-pulse shrink-0 bg-[#0b9c26]" />
           </div>
