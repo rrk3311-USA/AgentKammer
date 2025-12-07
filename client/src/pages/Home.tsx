@@ -555,8 +555,26 @@ export default function Home() {
       </section>
 
       {/* SECTION 7: Final CTA - Dark Navy */}
-      <section className="py-12 lg:py-16 bg-[#0a1628]">
-        <div className="max-w-3xl mx-auto px-6 text-center">
+      <section className="relative py-12 lg:py-16 bg-[#0a1628] overflow-hidden">
+        {/* Animated Financial Words Background */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {animatedWords.map((item, idx) => (
+            <div
+              key={`footer-${idx}`}
+              className="financial-word animate-float-word"
+              style={{
+                left: `${item.left}%`,
+                top: `${item.top}%`,
+                animationDelay: `${item.delay}s`,
+                fontSize: '0.875rem'
+              }}
+            >
+              {item.word}
+            </div>
+          ))}
+        </div>
+
+        <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
           <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-4">
             Ready to Get Started?
           </h2>
