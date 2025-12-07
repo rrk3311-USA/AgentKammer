@@ -187,54 +187,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 4: Real Estate Concierge - Image Background */}
-      <section className="relative py-12 lg:py-16 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${conciergeImage})` }}
-        >
-          <div className="absolute inset-0 bg-black/80" />
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-6 z-10">
-          <div className="text-center mb-10">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
-                <Building2 className="h-7 w-7" style={GOLD_ICON_STYLE} />
-              </div>
-            </div>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-white">
-              Real Estate Concierge
-            </h2>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
-              Premium home buying, selling, and mortgage intelligence worldwide
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {[
-              { icon: Building2, title: 'Reverse Buyer Origination', desc: 'Sellers compete to win your business with better terms and faster closing.', link: '/reverse-buyer-origination', testId: 'button-rbo' },
-              { icon: Users, title: 'Reverse Seller Architecture', desc: 'Multiple qualified buyer agents compete, driving up demand for your home.', link: '/reverse-seller-architecture', testId: 'button-rsa' },
-              { icon: RefreshCw, title: 'Refinancing Rate Watch', desc: 'AI-powered monitoring alerts you when rates drop with exact savings.', link: '/refinancing', testId: 'button-rrw' }
-            ].map((service) => (
-              <Card key={service.title} className="p-5 bg-white/5 border-white/10 backdrop-blur-sm">
-                <div className="flex items-center gap-2 mb-3">
-                  <service.icon className="h-5 w-5 text-[#d4af37]" />
-                  <h3 className="font-serif text-lg font-semibold text-white">{service.title}</h3>
-                </div>
-                <p className="text-white/70 text-sm mb-4">{service.desc}</p>
-                <Link href={service.link}>
-                  <Button size="sm" className="bg-[#d4af37] text-[#0a1628] hover:bg-[#d4af37]/90" data-testid={service.testId}>
-                    Learn More <ArrowRight className="h-4 w-4 ml-2" />
-                  </Button>
-                </Link>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 5: Credit Cards - Dark Navy */}
+      {/* SECTION 4: Credit Cards Comparison - Dark Navy */}
       <section className="py-12 lg:py-16 bg-[#0a1628]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-10">
@@ -322,6 +275,53 @@ export default function Home() {
                 Compare Credit Cards
               </Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 5: Real Estate Concierge - Image Background */}
+      <section className="relative py-12 lg:py-16 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${conciergeImage})` }}
+        >
+          <div className="absolute inset-0 bg-black/80" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-6 z-10">
+          <div className="text-center mb-10">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                <Building2 className="h-7 w-7" style={GOLD_ICON_STYLE} />
+              </div>
+            </div>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-white">
+              Real Estate Concierge
+            </h2>
+            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+              Premium home buying, selling, and mortgage intelligence worldwide
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {[
+              { icon: Building2, title: 'Reverse Buyer Origination', desc: 'Sellers compete to win your business with better terms and faster closing.', link: '/reverse-buyer-origination', testId: 'button-rbo' },
+              { icon: Users, title: 'Reverse Seller Architecture', desc: 'Multiple qualified buyer agents compete, driving up demand for your home.', link: '/reverse-seller-architecture', testId: 'button-rsa' },
+              { icon: RefreshCw, title: 'Refinancing Rate Watch', desc: 'AI-powered monitoring alerts you when rates drop with exact savings.', link: '/refinancing', testId: 'button-rrw' }
+            ].map((service) => (
+              <Card key={service.title} className="p-5 bg-white/5 border-white/10 backdrop-blur-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <service.icon className="h-5 w-5 text-[#d4af37]" />
+                  <h3 className="font-serif text-lg font-semibold text-white">{service.title}</h3>
+                </div>
+                <p className="text-white/70 text-sm mb-4">{service.desc}</p>
+                <Link href={service.link}>
+                  <Button size="sm" className="bg-[#d4af37] text-[#0a1628] hover:bg-[#d4af37]/90" data-testid={service.testId}>
+                    Learn More <ArrowRight className="h-4 w-4 ml-2" />
+                  </Button>
+                </Link>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
