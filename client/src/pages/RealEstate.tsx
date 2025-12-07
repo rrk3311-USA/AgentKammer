@@ -1,5 +1,4 @@
 import { HeroSearch } from "@/components/HeroSearch";
-import { AgenticComputeSection } from "@/components/AgenticCompute/AgenticComputeSection";
 import { LuxuryBackground } from "@/components/LuxuryBackground";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -55,8 +54,6 @@ export default function RealEstate() {
       <LuxuryBackground />
       <div className="relative z-10">
         <HeroSearch />
-
-        <AgenticComputeSection />
 
         <section className="py-12 lg:py-16 bg-background">
           <div className="max-w-7xl mx-auto px-6">
