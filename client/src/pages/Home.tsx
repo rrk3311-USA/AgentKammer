@@ -43,11 +43,13 @@ const CTA_BUTTON_CLASS = "px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* SECTION 1 & 2 MERGED: Hero + Flagship Services - Condensed */}
-      <section id="categories" className="relative bg-gradient-to-b from-[#0a1628] via-[#0f1d32] to-[#0a1628] py-10 lg:py-14 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-[#d4af37]/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#d4af37]/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      {/* SECTION 1 & 2 MERGED: Hero + Flagship Services - With Background Image */}
+      <section id="categories" className="relative py-10 lg:py-14 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${conciergeImage})` }}
+        >
+          <div className="absolute inset-0 bg-black/85" />
         </div>
 
         <div className="max-w-4xl mx-auto px-6 relative z-10">
