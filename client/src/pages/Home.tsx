@@ -17,6 +17,7 @@ import {
   CheckSquare
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
+import { DigitalProducts } from "@/components/DigitalProducts";
 import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
 import conciergeImage from '@assets/generated_images/concierge_agent_top_hat_luxury_interior.png';
 import conciergeGestureImage from '@assets/image_1763360901241.png';
@@ -520,7 +521,13 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* SECTION 7: Final CTA - Dark Navy */}
+      {/* Gradient Divider */}
+      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
+      {/* SECTION 7: Digital Products */}
+      <DigitalProducts />
+      {/* Gradient Divider */}
+      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
+      {/* SECTION 8: Final CTA - Dark Navy */}
       <section className="py-8 lg:py-12 bg-[#0a1628] text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative">
           <div className="text-center">
