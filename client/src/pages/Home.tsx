@@ -539,7 +539,7 @@ export default function Home() {
         </div>
       </section>
       {/* SECTION 7: Final CTA - Dark Navy */}
-      <section className="relative py-16 lg:py-24 bg-[#0a1628] overflow-hidden">
+      <section className="py-8 lg:py-12 bg-[#0a1628] text-white relative overflow-hidden">
         {/* Animated Financial Words Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {animatedWords.map((item, idx) => (
@@ -558,53 +558,59 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Gradient Overlay */}
-        <div 
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 70%)'
-          }}
-        />
-
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <div className="mb-6 flex items-center justify-center gap-2">
-            <Brain className="h-6 w-6 text-[#d4af37]" />
-            <span className="text-[#d4af37] font-semibold text-sm tracking-wider">YOUR AGENTIC ADVANTAGE</span>
-          </div>
-
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Find Your Perfect Financial Match?
-          </h2>
-          <p className="text-white/70 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
-            Build your Agentic Profile once and unlock AI-ranked recommendations across credit cards, investment accounts, real estate opportunities, and 11 other financial categories.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div className="max-w-7xl mx-auto px-6 relative">
+          <div className="text-center">
+            <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4 relative inline-block">
+              <span className="relative">
+                Ready to Get Started?
+                <div 
+                  className="absolute inset-0 overflow-visible pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(circle, rgba(212,175,55,0.6) 0%, rgba(244,208,63,0.3) 30%, transparent 70%)',
+                    animation: 'sonarPulse 8s ease-in-out infinite',
+                    mixBlendMode: 'screen',
+                    filter: 'blur(1px)',
+                  }}
+                />
+                <div 
+                  className="absolute inset-0 overflow-hidden pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.2) 45%, rgba(244,208,63,0.5) 50%, rgba(212,175,55,0.2) 55%, transparent 100%)',
+                    animation: 'slowScan 10s ease-in-out infinite',
+                    mixBlendMode: 'screen',
+                  }}
+                />
+              </span>
+            </h2>
+            <style>{`
+              @keyframes slowScan {
+                0%, 100% { transform: translateX(-120%); opacity: 0; }
+                10% { opacity: 1; }
+                50% { transform: translateX(120%); opacity: 1; }
+                60% { opacity: 0; }
+              }
+              @keyframes sonarPulse {
+                0%, 100% { transform: scale(0.5); opacity: 0; }
+                25% { transform: scale(1.5); opacity: 0.6; }
+                50% { transform: scale(2.5); opacity: 0; }
+                75% { transform: scale(1.2); opacity: 0.4; }
+              }
+            `}</style>
+            <p className="text-lg mb-8 opacity-90">
+              Build your Agentic Profile and unlock personalized recommendations across all financial categories
+            </p>
+            
             <Link href="/profile">
-              <Button 
+              <Button
                 size="lg"
-                className={`${CTA_BUTTON_CLASS} animate-button-pulse-glow h-12 px-8 text-base`}
+                className="h-12 px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-black font-semibold hover:opacity-90"
                 data-testid="button-dashboard"
               >
-                <Brain className="h-5 w-5 mr-2 animate-brain-breathe" />
+                <Brain className="h-5 w-5 mr-2" />
                 Start Your Agentic Profile
               </Button>
             </Link>
-            <Link href="/compare">
-              <Button 
-                size="lg"
-                variant="outline"
-                className="h-12 px-8 text-base border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37]/10"
-                data-testid="button-compare-now"
-              >
-                Compare Now
-              </Button>
-            </Link>
           </div>
-
-          <p className="text-white/50 text-sm mt-8">
-            Join thousands of users finding better financial products with Agent Kammer's agentic intelligence.
-          </p>
         </div>
       </section>
     </div>
