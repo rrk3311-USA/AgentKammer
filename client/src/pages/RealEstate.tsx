@@ -58,92 +58,6 @@ export default function RealEstate() {
 
         <AgenticComputeSection />
 
-        <section className="py-8 lg:py-12 bg-[#0a1628] text-white relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6 relative">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="text-center lg:text-left order-2 lg:order-1">
-                <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4 relative inline-block">
-                  <span className="relative">
-                    Ready to Find Your Dream Home?
-                    <div 
-                      className="absolute inset-0 overflow-visible pointer-events-none"
-                      style={{
-                        background: 'radial-gradient(circle, rgba(212,175,55,0.6) 0%, rgba(244,208,63,0.3) 30%, transparent 70%)',
-                        animation: 'sonarPulse 8s ease-in-out infinite',
-                        mixBlendMode: 'screen',
-                        filter: 'blur(1px)',
-                      }}
-                    />
-                    <div 
-                      className="absolute inset-0 overflow-hidden pointer-events-none"
-                      style={{
-                        background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.2) 45%, rgba(244,208,63,0.5) 50%, rgba(212,175,55,0.2) 55%, transparent 100%)',
-                        animation: 'slowScan 10s ease-in-out infinite',
-                        mixBlendMode: 'screen',
-                      }}
-                    />
-                  </span>
-                </h2>
-                <style>{`
-                  @keyframes slowScan {
-                    0%, 100% { transform: translateX(-120%); opacity: 0; }
-                    10% { opacity: 1; }
-                    50% { transform: translateX(120%); opacity: 1; }
-                    60% { opacity: 0; }
-                  }
-                  @keyframes sonarPulse {
-                    0%, 100% { transform: scale(0.5); opacity: 0; }
-                    25% { transform: scale(1.5); opacity: 0.6; }
-                    50% { transform: scale(2.5); opacity: 0; }
-                    75% { transform: scale(1.2); opacity: 0.4; }
-                  }
-                `}</style>
-                <p className="text-lg mb-8 opacity-90">
-                  Join thousands of buyers who trust Agent Kammer to find their perfect property in NYC, California, and Nevada
-                </p>
-                
-                <form onSubmit={(e) => {
-                  e.preventDefault();
-                  if (phone) {
-                    rboMutation.mutate(phone);
-                  }
-                }} className="max-w-md mx-auto lg:mx-0">
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <Input
-                      name="phone"
-                      type="tel"
-                      placeholder="Your cell number"
-                      required
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className="flex-1 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/60"
-                      data-testid="input-real-estate-phone"
-                    />
-                    <Button
-                      type="submit"
-                      size="lg"
-                      className="h-12 px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-black font-semibold hover:opacity-90"
-                      data-testid="button-real-estate-submit"
-                      disabled={rboMutation.isPending}
-                    >
-                      {rboMutation.isPending ? "Submitting..." : "Get Started"}
-                    </Button>
-                  </div>
-                </form>
-              </div>
-
-              <div className="relative h-[400px] lg:h-[500px] flex items-center justify-center bg-[#0a1628] rounded-lg overflow-hidden order-1 lg:order-2">
-                <img 
-                  src={agentKammerWelcoming} 
-                  alt="Agent Kammer in top hat welcoming clients into luxury apartment" 
-                  className="w-full h-full object-cover shadow-2xl"
-                  style={{ objectPosition: 'center' }}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="py-12 lg:py-16 bg-background">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-12">
@@ -305,6 +219,92 @@ export default function RealEstate() {
                   <p className="text-muted-foreground text-sm">Interactive map with Deal IQ scores</p>
                 </Card>
               </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-8 lg:py-12 bg-[#0a1628] text-white relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 relative">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="text-center lg:text-left order-2 lg:order-1">
+                <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4 relative inline-block">
+                  <span className="relative">
+                    Ready to Find Your Dream Home?
+                    <div 
+                      className="absolute inset-0 overflow-visible pointer-events-none"
+                      style={{
+                        background: 'radial-gradient(circle, rgba(212,175,55,0.6) 0%, rgba(244,208,63,0.3) 30%, transparent 70%)',
+                        animation: 'sonarPulse 8s ease-in-out infinite',
+                        mixBlendMode: 'screen',
+                        filter: 'blur(1px)',
+                      }}
+                    />
+                    <div 
+                      className="absolute inset-0 overflow-hidden pointer-events-none"
+                      style={{
+                        background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.2) 45%, rgba(244,208,63,0.5) 50%, rgba(212,175,55,0.2) 55%, transparent 100%)',
+                        animation: 'slowScan 10s ease-in-out infinite',
+                        mixBlendMode: 'screen',
+                      }}
+                    />
+                  </span>
+                </h2>
+                <style>{`
+                  @keyframes slowScan {
+                    0%, 100% { transform: translateX(-120%); opacity: 0; }
+                    10% { opacity: 1; }
+                    50% { transform: translateX(120%); opacity: 1; }
+                    60% { opacity: 0; }
+                  }
+                  @keyframes sonarPulse {
+                    0%, 100% { transform: scale(0.5); opacity: 0; }
+                    25% { transform: scale(1.5); opacity: 0.6; }
+                    50% { transform: scale(2.5); opacity: 0; }
+                    75% { transform: scale(1.2); opacity: 0.4; }
+                  }
+                `}</style>
+                <p className="text-lg mb-8 opacity-90">
+                  Join thousands of buyers who trust Agent Kammer to find their perfect property in NYC, California, and Nevada
+                </p>
+                
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  if (phone) {
+                    rboMutation.mutate(phone);
+                  }
+                }} className="max-w-md mx-auto lg:mx-0">
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Input
+                      name="phone"
+                      type="tel"
+                      placeholder="Your cell number"
+                      required
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="flex-1 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                      data-testid="input-real-estate-phone"
+                    />
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="h-12 px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-black font-semibold hover:opacity-90"
+                      data-testid="button-real-estate-submit"
+                      disabled={rboMutation.isPending}
+                    >
+                      {rboMutation.isPending ? "Submitting..." : "Get Started"}
+                    </Button>
+                  </div>
+                </form>
+              </div>
+
+              <div className="relative h-[400px] lg:h-[500px] flex items-center justify-center bg-[#0a1628] rounded-lg overflow-hidden order-1 lg:order-2">
+                <img 
+                  src={agentKammerWelcoming} 
+                  alt="Agent Kammer in top hat welcoming clients into luxury apartment" 
+                  className="w-full h-full object-cover shadow-2xl"
+                  style={{ objectPosition: 'center' }}
+                />
+              </div>
             </div>
           </div>
         </section>
