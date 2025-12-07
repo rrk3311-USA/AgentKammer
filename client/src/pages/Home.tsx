@@ -365,15 +365,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="text-center">
-            <Link href="/investing">
-              <Button size="lg" className={CTA_BUTTON_CLASS} data-testid="button-investment-accounts">
-                <TrendingUp className="h-5 w-5 mr-2" />
-                Explore Investment Accounts
-              </Button>
-            </Link>
           </div>
-        </div>
       </section>
 
       {/* SECTION 5: Credit Cards Comparison - Dark Navy */}
