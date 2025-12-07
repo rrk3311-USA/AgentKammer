@@ -41,11 +41,33 @@ const GOLD_NUMBER_STYLE = {
 
 const CTA_BUTTON_CLASS = "px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90";
 
+const financialWords = [
+  'Credit Cards',
+  'Refinancing',
+  'Mortgages',
+  'Investing',
+  'Insurance',
+  'Loans',
+  'Banking',
+  'Wealth',
+  'Savings',
+  'Trading',
+  'Retirement',
+  'Financial Freedom'
+];
+
 export default function Home() {
+  const animatedWords = financialWords.slice(0, 6).map((word, idx) => ({
+    word,
+    delay: 0.3 + idx * 0.2,
+    left: 10 + (idx % 3) * 30 + Math.random() * 10,
+    top: 30 + Math.floor(idx / 3) * 25 + Math.random() * 5
+  }));
+
   return (
     <div className="min-h-screen">
       {/* SECTION 1: Hero - Premium Style with Featured Card */}
-      <section className="relative py-20 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <section className="relative py-20 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(212,175,55,0.1),transparent_50%)]" />
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Header */}
@@ -72,16 +94,34 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Featured Hero Card with Brain Visual */}
+          {/* Featured Hero Card with Brain Visual & Animated Words */}
           <Card 
-            className="overflow-hidden border-0 mb-12" 
+            className="overflow-hidden border-0 mb-12 relative" 
             style={{ 
               background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
               backdropFilter: 'blur(20px)'
             }}
             data-testid="card-hero-featured"
           >
-            <div className="p-8 md:p-12">
+            {/* Animated Financial Words Background */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              {animatedWords.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="financial-word animate-float-word"
+                  style={{
+                    left: `${item.left}%`,
+                    top: `${item.top}%`,
+                    animationDelay: `${item.delay}s`,
+                    fontSize: '0.875rem'
+                  }}
+                >
+                  {item.word}
+                </div>
+              ))}
+            </div>
+
+            <div className="p-8 md:p-12 relative z-10">
               {/* Brain Visual - Full Width */}
               <div className="flex justify-center mb-12">
                 <div className="w-full">
