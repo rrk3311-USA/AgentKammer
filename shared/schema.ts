@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, integer } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, integer, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -56,6 +56,14 @@ export const contentItems = pgTable("content_items", {
   fileUrl: text("file_url"),
   notes: text("notes"),
   legalStatus: text("legal_status"),
+  format: text("format").default("article"),
+  isPublished: boolean("is_published").default(false),
+  slug: text("slug"),
+  thumbnailUrl: text("thumbnail_url"),
+  contentBody: text("content_body"),
+  videoUrl: text("video_url"),
+  duration: text("duration"),
+  publishedAt: timestamp("published_at"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
