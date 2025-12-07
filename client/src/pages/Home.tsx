@@ -43,47 +43,70 @@ const CTA_BUTTON_CLASS = "px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* SECTION 1 & 2 MERGED: Hero + Flagship Services - With Background Image */}
-      <section id="categories" className="relative py-10 lg:py-14 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${conciergeImage})` }}
-        >
-          <div className="absolute inset-0 bg-black/85" />
+      {/* SECTION 1: Hero - Dark Navy - Stacked Layout */}
+      <section className="relative bg-gradient-to-b from-[#0a1628] via-[#0f1d32] to-[#0a1628] py-12 lg:py-16 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-[#d4af37]/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#d4af37]/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         </div>
 
-        <div className="max-w-4xl mx-auto px-6 relative z-10">
-          {/* Hero Text - Compact */}
-          <div className="text-center mb-6">
-            <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-3 inline-flex" data-testid="badge-hero">
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
+          {/* Text Content - Centered Above */}
+          <div className="text-center mb-10">
+            <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-6 inline-flex" data-testid="badge-hero">
               <Sparkles className="h-3 w-3 mr-1" />
               Powered by Agentic AI
             </Badge>
             
-            <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight">
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
               Your AI Agent for Better{" "}
               <span className="text-[#d4af37]">Financial Outcomes</span>
             </h1>
             
-            <p className="text-base text-white/80 max-w-2xl mx-auto mb-6">
-              One profile. Our Agentic Comparison Engine analyzes offers and makes banks and lenders{" "}
+            <p className="text-lg text-white/80 leading-relaxed max-w-2xl mx-auto">
+              One profile. Our Agentic Comparison Engine uses LLMs + compute to analyze offers and force banks, lenders, and financial products to{" "}
               <span className="text-[#d4af37] font-semibold">compete for you</span>.
             </p>
           </div>
 
-          {/* AI Brain Visual - Smaller */}
-          <div className="flex justify-center mb-6">
-            <div className="w-full max-w-xs">
+          {/* AI Brain Visual - Large and Centered */}
+          <div className="flex justify-center mb-10">
+            <div className="w-full max-w-2xl">
               <AgenticEngineVisual />
             </div>
           </div>
 
-          {/* Category Selection Card */}
-          <Card className="bg-gradient-to-br from-teal-800/80 to-emerald-700/80 border-emerald-400/50 p-6 backdrop-blur-lg">
-            <div className="text-center mb-4">
-              <Badge className="bg-[#d4af37] text-[#0a1628] border-[#d4af37] mb-2 inline-flex font-semibold">Choose Your Category</Badge>
-            </div>
+          {/* CTA Button - Below Brain Visual */}
+          <div className="text-center">
+            <Link href="/profile">
+              <Button size="lg" className={CTA_BUTTON_CLASS} data-testid="button-hero-cta">
+                <Brain className="h-5 w-5 mr-2" />
+                Build Your Profile
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
 
+      {/* Gradient Divider */}
+      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
+
+      {/* SECTION 2: Flagship Services - Comparison Card Layout */}
+      <section id="categories" className="relative py-8 lg:py-12 overflow-hidden bg-[#0a1628]">
+        <div className="max-w-4xl mx-auto px-6">
+          {/* Header */}
+          <div className="text-center mb-6">
+            <Badge className="bg-[#d4af37] text-[#0a1628] border-[#d4af37] mb-3 inline-flex font-semibold">Flagship Services</Badge>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-2">
+              Choose Your Category
+            </h2>
+            <p className="text-white/70 text-base">
+              AI-ranked products matched to your profile
+            </p>
+          </div>
+
+          {/* Main Comparison Card */}
+          <Card className="bg-gradient-to-br from-teal-800/80 to-emerald-700/80 border-emerald-400/50 p-6 backdrop-blur-lg">
             {/* Grid Cards for the 3 main categories */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
               {[
@@ -109,42 +132,72 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Real Estate Services - Nested Sub-section */}
-            <div className="border-t border-emerald-400/30 pt-4 mb-4">
-              <p className="text-emerald-200/80 text-xs font-semibold mb-3 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
-                REAL ESTATE CONCIERGE SERVICES
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {[
-                  { icon: Building2, title: 'Reverse Buyer Origination', link: '/reverse-buyer-origination', testId: 'card-reo-rbo' },
-                  { icon: Users, title: 'Reverse Seller Architecture', link: '/reverse-seller-architecture', testId: 'card-reo-rsa' },
-                  { icon: RefreshCw, title: 'Refinancing Rate Watch', link: '/refinancing', testId: 'card-reo-rrw' }
-                ].map((service) => (
-                  <Link key={service.title} href={service.link}>
-                    <div className="p-3 bg-slate-800/40 border border-emerald-400/20 rounded-lg hover:border-[#d4af37]/50 transition-all cursor-pointer group" data-testid={service.testId}>
-                      <div className="flex items-center gap-2 mb-1">
-                        <div className="w-6 h-6 rounded flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
-                          <service.icon className="h-3 w-3" style={GOLD_ICON_STYLE} />
-                        </div>
-                        <h4 className="font-serif text-xs font-semibold text-white group-hover:text-[#d4af37] transition-all">{service.title}</h4>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
+            {/* Bottom Benefits */}
+            <div className="space-y-2 border-t border-emerald-400/30 pt-4">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
+                <span className="text-white/80 text-xs">100+ AI-analyzed products across all categories</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
+                <span className="text-white/80 text-xs">Personalized ranking based on your Agentic Profile</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
+                <span className="text-white/80 text-xs">One-click routing to your best matches</span>
               </div>
             </div>
-
-            {/* Bottom CTA */}
-            <div className="text-center pt-3 border-t border-emerald-400/30">
-              <Link href="/profile">
-                <Button size="sm" className={`${CTA_BUTTON_CLASS} text-sm`} data-testid="button-hero-cta">
-                  <Brain className="h-4 w-4 mr-2" />
-                  Build Your Profile
-                </Button>
-              </Link>
-            </div>
           </Card>
+        </div>
+      </section>
+
+      {/* Gradient Divider */}
+      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
+
+      {/* SECTION 3: Real Estate Concierge - Image Background */}
+      <section className="relative py-12 lg:py-16 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${conciergeImage})` }}
+        >
+          <div className="absolute inset-0 bg-black/80" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-6 z-10">
+          <div className="text-center mb-10">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                <Building2 className="h-7 w-7" style={GOLD_ICON_STYLE} />
+              </div>
+            </div>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-white">
+              Real Estate Concierge
+            </h2>
+            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+              Premium home buying, selling, and mortgage intelligence worldwide
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {[
+              { icon: Building2, title: 'Reverse Buyer Origination', desc: 'Sellers compete to win your business with better terms and faster closing.', link: '/reverse-buyer-origination', testId: 'button-rbo' },
+              { icon: Users, title: 'Reverse Seller Architecture', desc: 'Multiple qualified buyer agents compete, driving up demand for your home.', link: '/reverse-seller-architecture', testId: 'button-rsa' },
+              { icon: RefreshCw, title: 'Refinancing Rate Watch', desc: 'AI-powered monitoring alerts you when rates drop with exact savings.', link: '/refinancing', testId: 'button-rrw' }
+            ].map((service) => (
+              <Card key={service.title} className="p-5 bg-white/5 border-white/10 backdrop-blur-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <service.icon className="h-5 w-5 text-[#d4af37]" />
+                  <h3 className="font-serif text-lg font-semibold text-white">{service.title}</h3>
+                </div>
+                <p className="text-white/70 text-sm mb-4">{service.desc}</p>
+                <Link href={service.link}>
+                  <Button size="sm" className="bg-[#d4af37] text-[#0a1628] hover:bg-[#d4af37]/90" data-testid={service.testId}>
+                    Learn More <ArrowRight className="h-4 w-4 ml-2" />
+                  </Button>
+                </Link>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
