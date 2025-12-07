@@ -539,7 +539,7 @@ export default function Home() {
         </div>
       </section>
       {/* SECTION 7: Final CTA - Dark Navy */}
-      <section className="relative py-12 lg:py-16 bg-[#0a1628] overflow-hidden">
+      <section className="relative py-16 lg:py-24 bg-[#0a1628] overflow-hidden">
         {/* Animated Financial Words Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {animatedWords.map((item, idx) => (
@@ -558,24 +558,53 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
-          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-4">
-            Ready to Get Started?
+        {/* Gradient Overlay */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 70%)'
+          }}
+        />
+
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+          <div className="mb-6 flex items-center justify-center gap-2">
+            <Brain className="h-6 w-6 text-[#d4af37]" />
+            <span className="text-[#d4af37] font-semibold text-sm tracking-wider">YOUR AGENTIC ADVANTAGE</span>
+          </div>
+
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">
+            Ready to Find Your Perfect Financial Match?
           </h2>
-          <p className="text-white/70 text-lg mb-8">
-            Build your Agentic Profile and unlock personalized recommendations across all categories
+          <p className="text-white/70 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
+            Build your Agentic Profile once and unlock AI-ranked recommendations across credit cards, investment accounts, real estate opportunities, and 11 other financial categories.
           </p>
           
-          <Link href="/profile">
-            <Button 
-              size="lg"
-              className={`${CTA_BUTTON_CLASS} animate-button-pulse-glow`}
-              data-testid="button-dashboard"
-            >
-              <Brain className="h-5 w-5 mr-2 animate-brain-breathe" />
-              Start Your Agentic Profile
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link href="/profile">
+              <Button 
+                size="lg"
+                className={`${CTA_BUTTON_CLASS} animate-button-pulse-glow h-12 px-8 text-base`}
+                data-testid="button-dashboard"
+              >
+                <Brain className="h-5 w-5 mr-2 animate-brain-breathe" />
+                Start Your Agentic Profile
+              </Button>
+            </Link>
+            <Link href="/compare">
+              <Button 
+                size="lg"
+                variant="outline"
+                className="h-12 px-8 text-base border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37]/10"
+                data-testid="button-compare-now"
+              >
+                Compare Now
+              </Button>
+            </Link>
+          </div>
+
+          <p className="text-white/50 text-sm mt-8">
+            Join thousands of users finding better financial products with Agent Kammer's agentic intelligence.
+          </p>
         </div>
       </section>
     </div>
