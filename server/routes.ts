@@ -1083,6 +1083,40 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Media Center API Routes (Public - Published Content Only)
+  app.get("/api/media-center", async (req, res) => {
+    try {
+      const items = await storage.getPublishedContent();
+      res.json(items);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch published content" });
+    }
+  });
+
+  app.get("/api/media-center/format/:format", async (req, res) => {
+    try {
+      const { format } = req.params;
+      const items = await storage.getPublishedContentByFormat(format);
+      res.json(items);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch content by format" });
+    }
+  });
+
+  app.get("/api/media-center/content/:slug", async (req, res) => {
+    try {
+      const { slug } = req.params;
+      const item = await storage.getContentBySlug(slug);
+      if (!item || !item.isPublished) {
+        res.status(404).json({ error: "Content not found" });
+        return;
+      }
+      res.json(item);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch content" });
+    }
+  });
+
   // Reverse Buyer Origination™ Profile Endpoint
   app.post("/api/rbo/profile", async (req, res) => {
     try {

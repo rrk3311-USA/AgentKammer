@@ -36,6 +36,9 @@ export interface IStorage {
   getContentItemById(id: string): Promise<ContentItem | undefined>;
   updateContentItem(id: string, item: Partial<InsertContentItem>): Promise<ContentItem | undefined>;
   deleteContentItem(id: string): Promise<boolean>;
+  getPublishedContent(): Promise<ContentItem[]>;
+  getPublishedContentByFormat(format: string): Promise<ContentItem[]>;
+  getContentBySlug(slug: string): Promise<ContentItem | undefined>;
 
   createRboBuyerProfile(profile: InsertRboBuyerProfile): Promise<RboBuyerProfile>;
   getRboBuyerProfileByPhone(phone: string): Promise<RboBuyerProfile | undefined>;
@@ -196,6 +199,30 @@ export class MemStorage implements IStorage {
 
   async deleteContentItem(id: string): Promise<boolean> {
     return this.contentItems.delete(id);
+  }
+
+  async getPublishedContent(): Promise<ContentItem[]> {
+    return Array.from(this.contentItems.values())
+      .filter(item => item.isPublished === true)
+      .sort((a, b) => {
+        const aDate = a.publishedAt || a.createdAt;
+        const bDate = b.publishedAt || b.createdAt;
+        return bDate.getTime() - aDate.getTime();
+      });
+  }
+
+  async getPublishedContentByFormat(format: string): Promise<ContentItem[]> {
+    return Array.from(this.contentItems.values())
+      .filter(item => item.isPublished === true && item.format === format)
+      .sort((a, b) => {
+        const aDate = a.publishedAt || a.createdAt;
+        const bDate = b.publishedAt || b.createdAt;
+        return bDate.getTime() - aDate.getTime();
+      });
+  }
+
+  async getContentBySlug(slug: string): Promise<ContentItem | undefined> {
+    return Array.from(this.contentItems.values()).find(item => item.slug === slug);
   }
 
   async createRboBuyerProfile(insertProfile: InsertRboBuyerProfile): Promise<RboBuyerProfile> {
@@ -480,6 +507,24 @@ export class DbStorage implements IStorage {
   async deleteContentItem(id: string): Promise<boolean> {
     const result = await db.delete(contentItems).where(eq(contentItems.id, id)).returning();
     return result.length > 0;
+  }
+
+  async getPublishedContent(): Promise<ContentItem[]> {
+    return await db.select().from(contentItems)
+      .where(eq(contentItems.isPublished, true))
+      .orderBy(desc(contentItems.publishedAt));
+  }
+
+  async getPublishedContentByFormat(format: string): Promise<ContentItem[]> {
+    const { and } = await import("drizzle-orm");
+    return await db.select().from(contentItems)
+      .where(and(eq(contentItems.isPublished, true), eq(contentItems.format, format)))
+      .orderBy(desc(contentItems.publishedAt));
+  }
+
+  async getContentBySlug(slug: string): Promise<ContentItem | undefined> {
+    const result = await db.select().from(contentItems).where(eq(contentItems.slug, slug));
+    return result[0];
   }
 
   async createRboBuyerProfile(insertProfile: InsertRboBuyerProfile): Promise<RboBuyerProfile> {
