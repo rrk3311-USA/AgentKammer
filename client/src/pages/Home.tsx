@@ -68,7 +68,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* SECTION 1: Hero - Premium Style with Featured Card */}
-      <section className="relative py-20 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+      <section className="relative py-20 px-4 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-700 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(212,175,55,0.1),transparent_50%)]" />
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Header */}
@@ -163,10 +163,8 @@ export default function Home() {
           </Card>
         </div>
       </section>
-      {/* Gradient Divider */}
-      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
       {/* SECTION 2: Flagship Services - Digital Downloads Style */}
-      <section id="categories" className="relative py-16 px-4 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800">
+      <section id="categories" className="relative py-16 px-4 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-10">
@@ -262,15 +260,13 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* Gradient Divider */}
-      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
       {/* SECTION 3: Real Estate Concierge - Image Background */}
-      <section className="relative py-12 lg:py-16 overflow-hidden">
+      <section className="relative py-12 lg:py-16 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${conciergeImage})` }}
         >
-          <div className="absolute inset-0 bg-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/75 to-slate-900/60" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 z-10">
@@ -311,7 +307,7 @@ export default function Home() {
         </div>
       </section>
       {/* SECTION 4: Investment Accounts - Light Background */}
-      <section className="py-12 lg:py-16 bg-background pl-[0px] pr-[0px] pt-[0px] pb-[0px] mt-[13px] mb-[13px]">
+      <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-800 via-slate-750 to-slate-700 pl-[0px] pr-[0px] pt-[0px] pb-[0px]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-10">
             <div className="flex items-center justify-center mb-4">
@@ -346,7 +342,7 @@ export default function Home() {
           </div>
       </section>
       {/* SECTION 5: Credit Cards Comparison - Dark Navy */}
-      <section className="py-12 lg:py-16 bg-[#0a1628]">
+      <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-10">
             <div className="flex items-center justify-center mb-4">
@@ -437,7 +433,7 @@ export default function Home() {
         </div>
       </section>
       {/* SECTION 6: The Agentic Advantage - Dark Slate Background */}
-      <section className="relative py-16 px-4 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800">
+      <section className="relative py-16 px-4 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-700">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
@@ -521,14 +517,10 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* Gradient Divider */}
-      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
       {/* SECTION 7: Digital Products */}
       <DigitalProducts />
-      {/* Gradient Divider */}
-      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
       {/* SECTION 8: Final CTA - Dark Navy */}
-      <section className="py-8 lg:py-12 bg-[#0a1628] text-white relative overflow-hidden">
+      <section className="py-8 lg:py-12 bg-gradient-to-b from-slate-900 to-slate-950 text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative">
           <div className="text-center">
             <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4 relative inline-block">

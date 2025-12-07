@@ -40,7 +40,7 @@ const products = [
 
 export function DigitalProducts() {
   return (
-    <section className="relative py-16 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <section className="relative py-16 px-4 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
