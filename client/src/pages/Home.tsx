@@ -107,6 +107,32 @@ export default function Home() {
               ))}
             </div>
 
+            {/* Real Estate Services - Nested Sub-section */}
+            <div className="border-t border-emerald-400/30 pt-4 mb-4">
+              <p className="text-emerald-200/80 text-xs font-semibold mb-3 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
+                REAL ESTATE CONCIERGE SERVICES
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {[
+                  { icon: Building2, title: 'Reverse Buyer Origination', link: '/reverse-buyer-origination', testId: 'card-reo-rbo' },
+                  { icon: Users, title: 'Reverse Seller Architecture', link: '/reverse-seller-architecture', testId: 'card-reo-rsa' },
+                  { icon: RefreshCw, title: 'Refinancing Rate Watch', link: '/refinancing', testId: 'card-reo-rrw' }
+                ].map((service) => (
+                  <Link key={service.title} href={service.link}>
+                    <div className="p-3 bg-slate-800/40 border border-emerald-400/20 rounded-lg hover:border-[#d4af37]/50 transition-all cursor-pointer group" data-testid={service.testId}>
+                      <div className="flex items-center gap-2 mb-1">
+                        <div className="w-6 h-6 rounded flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                          <service.icon className="h-3 w-3" style={GOLD_ICON_STYLE} />
+                        </div>
+                        <h4 className="font-serif text-xs font-semibold text-white group-hover:text-[#d4af37] transition-all">{service.title}</h4>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             {/* Bottom CTA */}
             <div className="text-center pt-3 border-t border-emerald-400/30">
               <Link href="/profile">
