@@ -148,19 +148,7 @@ export default function Home() {
       <section id="categories" className="relative py-16 px-4 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12">
-            <Badge 
-              className="mb-4 border-0" 
-              style={{ 
-                background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
-                color: '#000',
-                fontSize: '0.9rem',
-                padding: '0.5rem 1rem'
-              }}
-            >
-              <Sparkles className="h-4 w-4 mr-2" />
-              Flagship Services
-            </Badge>
+          <div className="text-center mb-10">
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-3">
               Choose Your Category
             </h2>
