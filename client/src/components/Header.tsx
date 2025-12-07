@@ -24,7 +24,8 @@ import {
   Triangle,
   Calculator,
   RefreshCw,
-  ShoppingBag
+  ShoppingBag,
+  Newspaper
 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState, useEffect } from "react";
@@ -136,6 +137,12 @@ export function Header() {
                   <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-e-shop">
                     <ShoppingBag className="h-4 w-4 mr-2" />
                     E-Shop
+                  </DropdownMenuItem>
+                </Link>
+                <Link href="/media-center">
+                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-media-center">
+                    <Newspaper className="h-4 w-4 mr-2" />
+                    Media Center
                   </DropdownMenuItem>
                 </Link>
               </DropdownMenuContent>
@@ -260,6 +267,15 @@ export function Header() {
                   >
                     <ShoppingBag className="h-4 w-4" />
                     E-Shop
+                  </span>
+                </Link>
+                <Link href="/media-center" data-testid="link-mobile-media-center">
+                  <span
+                    className="text-sm font-medium hover:text-[#d4af37] cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-muted/50"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Newspaper className="h-4 w-4" />
+                    Media Center
                   </span>
                 </Link>
               </div>

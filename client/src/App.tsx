@@ -40,6 +40,8 @@ import FreeTools from "@/pages/FreeTools";
 import Dashboard from "@/pages/Dashboard";
 import Refinancing from "@/pages/Refinancing";
 import EShop from "@/pages/EShop";
+import MediaCenter from "@/pages/MediaCenter";
+import ContentDetail from "@/pages/ContentDetail";
 import NotFound from "@/pages/not-found";
 
 function ScrollToTop() {
@@ -80,6 +82,8 @@ function Router() {
       <Route path="/micro-investing" component={() => <CategoryPage categoryId="micro-investing" />} />
       <Route path="/refinancing" component={Refinancing} />
       <Route path="/e-shop" component={EShop} />
+      <Route path="/media-center" component={MediaCenter} />
+      <Route path="/media-center/:slug" component={ContentDetail} />
       
       {/* Dashboard & Profile */}
       <Route path="/dashboard" component={Dashboard} />
