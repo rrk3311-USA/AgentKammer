@@ -154,40 +154,7 @@ export default function Home() {
       {/* Gradient Divider */}
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
 
-      {/* SECTION 3: How It Works - Light Background */}
-      <section className="py-12 lg:py-16 bg-background">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-10">
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-foreground">
-              The Agentic Advantage
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Three simple steps to unlock personalized financial recommendations
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { num: '1', title: 'Build Your Profile', desc: 'Income, credit band, location, goals - one time. Your profile powers all recommendations.' },
-              { num: '2', title: 'AI Analyzes the Field', desc: 'We screen hundreds of partner offers across categories, ranking them by your fit.' },
-              { num: '3', title: 'You Choose - We Route', desc: 'Go straight to the best matched lender, card, or tool. No guesswork.' }
-            ].map((step) => (
-              <div key={step.num} className="flex flex-col items-center text-center" data-testid={`card-step-${step.num}`}>
-                <div 
-                  className="w-16 h-16 rounded-full flex items-center justify-center mb-5 text-2xl font-bold text-[#0a1628] font-serif"
-                  style={GOLD_NUMBER_STYLE}
-                >
-                  {step.num}
-                </div>
-                <h3 className="font-serif text-xl font-semibold mb-2 text-foreground">{step.title}</h3>
-                <p className="text-muted-foreground text-sm max-w-xs">{step.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 4: Credit Cards Comparison - Dark Navy */}
+      {/* SECTION 3: Credit Cards Comparison - Dark Navy */}
       <section className="py-12 lg:py-16 bg-[#0a1628]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-10">
@@ -366,6 +333,39 @@ export default function Home() {
                 Explore Investment Accounts
               </Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 6: The Agentic Advantage - Light Background */}
+      <section className="py-12 lg:py-16 bg-background">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-foreground">
+              The Agentic Advantage
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Three simple steps to unlock personalized financial recommendations
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { num: '1', title: 'Build Your Profile', desc: 'Income, credit band, location, goals - one time. Your profile powers all recommendations.' },
+              { num: '2', title: 'AI Analyzes the Field', desc: 'We screen hundreds of partner offers across categories, ranking them by your fit.' },
+              { num: '3', title: 'You Choose - We Route', desc: 'Go straight to the best matched lender, card, or tool. No guesswork.' }
+            ].map((step) => (
+              <div key={step.num} className="flex flex-col items-center text-center" data-testid={`card-step-${step.num}`}>
+                <div 
+                  className="w-16 h-16 rounded-full flex items-center justify-center mb-5 text-2xl font-bold text-[#0a1628] font-serif"
+                  style={GOLD_NUMBER_STYLE}
+                >
+                  {step.num}
+                </div>
+                <h3 className="font-serif text-xl font-semibold mb-2 text-foreground">{step.title}</h3>
+                <p className="text-muted-foreground text-sm max-w-xs">{step.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
