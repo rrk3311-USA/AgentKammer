@@ -153,8 +153,7 @@ export function AgenticEngineVisual() {
           <div className="flex items-center justify-center gap-3">
             <div className="w-2 h-2 rounded-full animate-pulse bg-cyan-400" />
             <span className="text-cyan-300 font-semibold text-sm md:text-base tracking-wide text-center">
-              <span className="hidden sm:inline">Agentic Deal Procurement</span>
-              <span className="sm:hidden">Agentic AI Engine</span>
+              Agentic Deal Procurement
             </span>
             <div className="w-2 h-2 rounded-full animate-pulse bg-cyan-400" />
           </div>
