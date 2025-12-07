@@ -106,7 +106,7 @@ export default function Home() {
           </div>
 
           {/* Main Comparison Card */}
-          <Card className="bg-gradient-to-br from-slate-900/90 to-slate-800/90 border-[#d4af37]/40 p-8 backdrop-blur-lg">
+          <Card className="bg-gradient-to-br from-teal-800/80 to-emerald-700/80 border-emerald-400/50 p-8 backdrop-blur-lg">
             {/* Grid Cards for the 3 categories */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               {[
