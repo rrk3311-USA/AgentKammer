@@ -43,42 +43,44 @@ const CTA_BUTTON_CLASS = "px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* SECTION 1: Hero - Dark Navy */}
+      {/* SECTION 1: Hero - Dark Navy - Stacked Layout */}
       <section className="relative bg-gradient-to-b from-[#0a1628] via-[#0f1d32] to-[#0a1628] py-12 lg:py-16 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-[#d4af37]/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#d4af37]/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div className="text-center lg:text-left">
-              <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-6" data-testid="badge-hero">
-                <Sparkles className="h-3 w-3 mr-1" />
-                Powered by Agentic AI
-              </Badge>
-              
-              <h1 className="font-serif text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 leading-tight">
-                Your AI Agent for Better{" "}
-                <span className="text-[#d4af37]">Financial Outcomes</span>
-              </h1>
-              
-              <p className="text-lg text-white/80 mb-6 leading-relaxed max-w-xl">
-                One profile. Our Agentic Comparison Engine uses LLMs + compute to analyze offers and force banks, lenders, and financial products to{" "}
-                <span className="text-[#d4af37] font-semibold">compete for you</span>.
-              </p>
-
-              <Link href="/profile">
-                <Button size="lg" className={CTA_BUTTON_CLASS} data-testid="button-hero-cta">
-                  <Brain className="h-5 w-5 mr-2" />
-                  Build Your Profile
-                </Button>
-              </Link>
-            </div>
-
-            <div className="relative">
+        <div className="max-w-5xl mx-auto px-6 relative z-10">
+          {/* AI Brain Visual - Full Width at Top */}
+          <div className="flex justify-center mb-8">
+            <div className="w-full max-w-md">
               <AgenticEngineVisual />
             </div>
+          </div>
+
+          {/* Text Content - Centered Below */}
+          <div className="text-center">
+            <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-6 inline-flex" data-testid="badge-hero">
+              <Sparkles className="h-3 w-3 mr-1" />
+              Powered by Agentic AI
+            </Badge>
+            
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+              Your AI Agent for Better{" "}
+              <span className="text-[#d4af37]">Financial Outcomes</span>
+            </h1>
+            
+            <p className="text-lg text-white/80 mb-8 leading-relaxed max-w-2xl mx-auto">
+              One profile. Our Agentic Comparison Engine uses LLMs + compute to analyze offers and force banks, lenders, and financial products to{" "}
+              <span className="text-[#d4af37] font-semibold">compete for you</span>.
+            </p>
+
+            <Link href="/profile">
+              <Button size="lg" className={CTA_BUTTON_CLASS} data-testid="button-hero-cta">
+                <Brain className="h-5 w-5 mr-2" />
+                Build Your Profile
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -86,53 +88,55 @@ export default function Home() {
       {/* SECTION 2: Flagship Services - With Concierge Character */}
       <section id="categories" className="relative py-12 lg:py-16 overflow-hidden bg-[#0a1628]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            {/* Left: Content */}
-            <div className="relative z-10">
-              <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-4">Flagship Services</Badge>
-              <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-3">
-                Choose Your Category
-              </h2>
-              <p className="text-white/70 text-lg mb-8">
-                AI-ranked products matched to your profile
-              </p>
+          {/* Header - Centered */}
+          <div className="text-center mb-8">
+            <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-4 inline-flex">Flagship Services</Badge>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-3">
+              Choose Your Category
+            </h2>
+            <p className="text-white/70 text-lg">
+              AI-ranked products matched to your profile
+            </p>
+          </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {[
-                  { id: 'credit-cards', name: 'Credit Cards', icon: CreditCard, desc: 'AI-matched cards for your goals' },
-                  { id: 'investing', name: 'Investing', icon: TrendingUp, desc: 'Brokerages & robo-advisors' },
-                  { id: 'reverse-buyer-origination', name: 'Real Estate', icon: Building2, desc: 'Premium concierge services' }
-                ].map((cat) => (
-                  <Link key={cat.id} href={`/${cat.id}`}>
-                    <Card 
-                      className="p-5 bg-[#0f1d32]/95 border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group backdrop-blur-sm"
-                      data-testid={`card-category-${cat.id}`}
-                    >
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
-                          <cat.icon className="h-6 w-6" style={GOLD_ICON_STYLE} />
-                        </div>
-                        <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
+          {/* Cards Grid with Concierge on Right */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+            {/* Category Cards - Takes 2 columns on desktop */}
+            <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                { id: 'credit-cards', name: 'Credit Cards', icon: CreditCard, desc: 'AI-matched cards for your goals' },
+                { id: 'investing', name: 'Investing', icon: TrendingUp, desc: 'Brokerages & robo-advisors' },
+                { id: 'reverse-buyer-origination', name: 'Real Estate', icon: Building2, desc: 'Premium concierge services' }
+              ].map((cat) => (
+                <Link key={cat.id} href={`/${cat.id}`}>
+                  <Card 
+                    className="p-5 bg-[#0f1d32]/95 border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer h-full group backdrop-blur-sm"
+                    data-testid={`card-category-${cat.id}`}
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                        <cat.icon className="h-6 w-6" style={GOLD_ICON_STYLE} />
                       </div>
-                      <h3 className="font-serif text-lg font-semibold text-white mb-1">{cat.name}</h3>
-                      <p className="text-white/60 text-sm">{cat.desc}</p>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
+                      <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-1 transition-all" />
+                    </div>
+                    <h3 className="font-serif text-lg font-semibold text-white mb-1">{cat.name}</h3>
+                    <p className="text-white/60 text-sm">{cat.desc}</p>
+                  </Card>
+                </Link>
+              ))}
             </div>
 
-            {/* Right: Concierge Character - Cropped to show from chest up with gesturing arm */}
-            <div className="hidden lg:flex justify-end items-end relative">
-              <div className="relative w-full h-[400px] overflow-hidden">
+            {/* Concierge Character - Takes 1 column on desktop */}
+            <div className="hidden lg:flex justify-center items-end">
+              <div className="relative h-[320px] w-full overflow-hidden">
                 <img 
                   src={conciergeGestureImage} 
                   alt="Agent Kammer concierge presenting services"
-                  className="absolute bottom-0 right-0 w-auto h-[500px] object-cover object-top"
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-auto h-[400px] object-cover object-top"
                   style={{ 
-                    transform: 'scaleX(-1)',
-                    maskImage: 'linear-gradient(to top, black 70%, transparent 100%)',
-                    WebkitMaskImage: 'linear-gradient(to top, black 70%, transparent 100%)'
+                    transform: 'translateX(-50%) scaleX(-1)',
+                    maskImage: 'linear-gradient(to top, black 60%, transparent 100%)',
+                    WebkitMaskImage: 'linear-gradient(to top, black 60%, transparent 100%)'
                   }}
                 />
               </div>
