@@ -43,72 +43,47 @@ const CTA_BUTTON_CLASS = "px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* SECTION 1: Hero - Dark Navy - Stacked Layout */}
-      <section className="relative bg-gradient-to-b from-[#0a1628] via-[#0f1d32] to-[#0a1628] py-12 lg:py-16 overflow-hidden">
+      {/* SECTION 1 & 2 MERGED: Hero + Flagship Services - Condensed */}
+      <section id="categories" className="relative bg-gradient-to-b from-[#0a1628] via-[#0f1d32] to-[#0a1628] py-10 lg:py-14 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-[#d4af37]/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#d4af37]/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
         </div>
 
-        <div className="max-w-5xl mx-auto px-6 relative z-10">
-          {/* Text Content - Centered Above */}
-          <div className="text-center mb-10">
-            <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-6 inline-flex" data-testid="badge-hero">
+        <div className="max-w-4xl mx-auto px-6 relative z-10">
+          {/* Hero Text - Compact */}
+          <div className="text-center mb-6">
+            <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-3 inline-flex" data-testid="badge-hero">
               <Sparkles className="h-3 w-3 mr-1" />
               Powered by Agentic AI
             </Badge>
             
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+            <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight">
               Your AI Agent for Better{" "}
               <span className="text-[#d4af37]">Financial Outcomes</span>
             </h1>
             
-            <p className="text-lg text-white/80 leading-relaxed max-w-2xl mx-auto">
-              One profile. Our Agentic Comparison Engine uses LLMs + compute to analyze offers and force banks, lenders, and financial products to{" "}
+            <p className="text-base text-white/80 max-w-2xl mx-auto mb-6">
+              One profile. Our Agentic Comparison Engine analyzes offers and makes banks and lenders{" "}
               <span className="text-[#d4af37] font-semibold">compete for you</span>.
             </p>
           </div>
 
-          {/* AI Brain Visual - Large and Centered */}
-          <div className="flex justify-center mb-10">
-            <div className="w-full max-w-2xl">
+          {/* AI Brain Visual - Smaller */}
+          <div className="flex justify-center mb-6">
+            <div className="w-full max-w-xs">
               <AgenticEngineVisual />
             </div>
           </div>
 
-          {/* CTA Button - Below Brain Visual */}
-          <div className="text-center">
-            <Link href="/profile">
-              <Button size="lg" className={CTA_BUTTON_CLASS} data-testid="button-hero-cta">
-                <Brain className="h-5 w-5 mr-2" />
-                Build Your Profile
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Gradient Divider */}
-      <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#d4af37] to-transparent opacity-50" />
-
-      {/* SECTION 2: Flagship Services & Real Estate - Merged & Condensed */}
-      <section id="categories" className="relative py-8 lg:py-12 overflow-hidden bg-[#0a1628]">
-        <div className="max-w-4xl mx-auto px-6">
-          {/* Header */}
-          <div className="text-center mb-6">
-            <Badge className="bg-[#d4af37] text-[#0a1628] border-[#d4af37] mb-3 inline-flex font-semibold">Flagship Services</Badge>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-2">
-              Choose Your Category
-            </h2>
-            <p className="text-white/70 text-base">
-              AI-ranked products matched to your profile
-            </p>
-          </div>
-
-          {/* Main Comparison Card */}
+          {/* Category Selection Card */}
           <Card className="bg-gradient-to-br from-teal-800/80 to-emerald-700/80 border-emerald-400/50 p-6 backdrop-blur-lg">
+            <div className="text-center mb-4">
+              <Badge className="bg-[#d4af37] text-[#0a1628] border-[#d4af37] mb-2 inline-flex font-semibold">Choose Your Category</Badge>
+            </div>
+
             {/* Grid Cards for the 3 main categories */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
               {[
                 { id: 'credit-cards', name: 'Credit Cards', icon: CreditCard, desc: 'AI-matched cards for your goals' },
                 { id: 'investing', name: 'Investing', icon: TrendingUp, desc: 'Brokerages & robo-advisors' },
@@ -120,58 +95,26 @@ export default function Home() {
                     data-testid={`card-category-${cat.id}`}
                   >
                     <div className="flex items-start justify-between mb-1">
-                      <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
-                        <cat.icon className="h-5 w-5" style={GOLD_ICON_STYLE} />
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                        <cat.icon className="h-4 w-4" style={GOLD_ICON_STYLE} />
                       </div>
-                      <ArrowRight className="h-4 w-4 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-0.5 transition-all" />
+                      <ArrowRight className="h-3 w-3 text-white/40 group-hover:text-[#d4af37] group-hover:translate-x-0.5 transition-all" />
                     </div>
-                    <h3 className="font-serif text-sm font-semibold text-white mb-0.5">{cat.name}</h3>
+                    <h3 className="font-serif text-xs font-semibold text-white mb-0.5">{cat.name}</h3>
                     <p className="text-white/60 text-xs">{cat.desc}</p>
                   </Card>
                 </Link>
               ))}
             </div>
 
-            {/* Real Estate Services - Nested Sub-section */}
-            <div className="border-t border-emerald-400/30 pt-4 mb-4">
-              <p className="text-emerald-200/80 text-xs font-semibold mb-3 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-300"></span>
-                REAL ESTATE CONCIERGE SERVICES
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {[
-                  { icon: Building2, title: 'Reverse Buyer Origination', link: '/reverse-buyer-origination', testId: 'card-reo-rbo' },
-                  { icon: Users, title: 'Reverse Seller Architecture', link: '/reverse-seller-architecture', testId: 'card-reo-rsa' },
-                  { icon: RefreshCw, title: 'Refinancing Rate Watch', link: '/refinancing', testId: 'card-reo-rrw' }
-                ].map((service) => (
-                  <Link key={service.title} href={service.link}>
-                    <div className="p-3 bg-slate-800/40 border border-emerald-400/20 rounded-lg hover:border-[#d4af37]/50 transition-all cursor-pointer group" data-testid={service.testId}>
-                      <div className="flex items-center gap-2 mb-1">
-                        <div className="w-7 h-7 rounded flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
-                          <service.icon className="h-4 w-4" style={GOLD_ICON_STYLE} />
-                        </div>
-                        <h4 className="font-serif text-xs font-semibold text-white group-hover:text-[#d4af37] transition-all">{service.title}</h4>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* Bottom Benefits */}
-            <div className="space-y-2 border-t border-emerald-400/30 pt-4">
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
-                <span className="text-white/80 text-xs">100+ AI-analyzed products across all categories</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
-                <span className="text-white/80 text-xs">Personalized ranking based on your Agentic Profile</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
-                <span className="text-white/80 text-xs">One-click routing to your best matches</span>
-              </div>
+            {/* Bottom CTA */}
+            <div className="text-center pt-3 border-t border-emerald-400/30">
+              <Link href="/profile">
+                <Button size="sm" className={`${CTA_BUTTON_CLASS} text-sm`} data-testid="button-hero-cta">
+                  <Brain className="h-4 w-4 mr-2" />
+                  Build Your Profile
+                </Button>
+              </Link>
             </div>
           </Card>
         </div>
