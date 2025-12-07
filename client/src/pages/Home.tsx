@@ -68,7 +68,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* SECTION 1: Hero - Premium Style with Featured Card */}
-      <section className="relative py-20 px-4 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-700 overflow-hidden">
+      <section className="relative py-12 md:py-20 px-4 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-700 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(212,175,55,0.1),transparent_50%)]" />
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Header */}
@@ -306,40 +306,39 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* SECTION 4: Investment Accounts - Light Background */}
-      <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-800 via-slate-750 to-slate-700 pl-[0px] pr-[0px] pt-[0px] pb-[0px]">
-        <div className="max-w-7xl mx-auto px-6">
+      {/* SECTION 4: Investment Accounts */}
+      <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-800 via-slate-750 to-slate-700 px-4">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
             <div className="flex items-center justify-center mb-4">
               <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
                 <TrendingUp className="h-7 w-7" style={GOLD_ICON_STYLE} />
               </div>
             </div>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-foreground">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-white">
               Investment Accounts
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-white/70 text-lg max-w-2xl mx-auto">
               Compare brokerages, robo-advisors, and investment platforms matched to your goals
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
               { icon: BarChart3, title: 'Brokerages', desc: 'Full-service and discount brokers for active traders' },
               { icon: Briefcase, title: 'Robo-Advisors', desc: 'Automated investing with low fees and smart rebalancing' },
               { icon: LineChart, title: 'Crypto Platforms', desc: 'Digital asset trading and DeFi opportunities' }
             ].map((item) => (
-              <Card key={item.title} className="p-5 border-border">
+              <Card key={item.title} className="p-5 bg-white/5 border-white/10 backdrop-blur-sm">
                 <div className="flex items-center gap-2 mb-3">
                   <item.icon className="h-5 w-5 text-[#d4af37]" />
-                  <h3 className="font-semibold text-foreground">{item.title}</h3>
+                  <h3 className="font-semibold text-white">{item.title}</h3>
                 </div>
-                <p className="text-muted-foreground text-sm">{item.desc}</p>
+                <p className="text-white/70 text-sm">{item.desc}</p>
               </Card>
             ))}
           </div>
-
-          </div>
+        </div>
       </section>
       {/* SECTION 5: Credit Cards Comparison - Dark Navy */}
       <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
