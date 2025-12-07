@@ -331,34 +331,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 6: The Agentic Advantage - Dark Background */}
-      <section className="py-12 lg:py-16 bg-[#0a1628]">
+      {/* SECTION 6: The Agentic Advantage - Light Background */}
+      <section className="py-12 lg:py-16 bg-background">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-10">
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-white">
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-foreground">
               The Agentic Advantage
             </h2>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Three simple steps to unlock personalized financial recommendations
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { num: '1', title: 'Build Your Profile', desc: 'Income, credit band, location, goals - one time. Your profile powers all recommendations.' },
               { num: '2', title: 'AI Analyzes the Field', desc: 'We screen hundreds of partner offers across categories, ranking them by your fit.' },
               { num: '3', title: 'You Choose - We Route', desc: 'Go straight to the best matched lender, card, or tool. No guesswork.' }
             ].map((step) => (
-              <Card key={step.num} className="p-6 bg-white/5 border-white/10 backdrop-blur-sm flex flex-col items-center text-center" data-testid={`card-step-${step.num}`}>
+              <div key={step.num} className="flex flex-col items-center text-center" data-testid={`card-step-${step.num}`}>
                 <div 
-                  className="w-14 h-14 rounded-full flex items-center justify-center mb-4 text-2xl font-bold text-[#0a1628] font-serif"
+                  className="w-16 h-16 rounded-full flex items-center justify-center mb-5 text-2xl font-bold text-[#0a1628] font-serif"
                   style={GOLD_NUMBER_STYLE}
                 >
                   {step.num}
                 </div>
-                <h3 className="font-serif text-lg font-semibold mb-3 text-white">{step.title}</h3>
-                <p className="text-white/70 text-sm leading-relaxed">{step.desc}</p>
-              </Card>
+                <h3 className="font-serif text-xl font-semibold mb-2 text-foreground">{step.title}</h3>
+                <p className="text-muted-foreground text-sm max-w-xs">{step.desc}</p>
+              </div>
             ))}
           </div>
         </div>
