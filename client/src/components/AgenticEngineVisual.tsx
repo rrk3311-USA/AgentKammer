@@ -6,6 +6,8 @@ export function AgenticEngineVisual() {
   const [pulseIntensity, setPulseIntensity] = useState(0);
   const [eyeSymbol, setEyeSymbol] = useState("$");
   const [eyeFlicker, setEyeFlicker] = useState(false);
+  const [eyeRightSymbol, setEyeRightSymbol] = useState("✓");
+  const [eyeRightFlicker, setEyeRightFlicker] = useState(false);
 
   const categories = [
     { label: "Credit Cards", shortLabel: "Credit" },
@@ -15,7 +17,8 @@ export function AgenticEngineVisual() {
     { label: "Insurance", shortLabel: "Insurance" },
   ];
 
-  const eyeSymbols = ["$", "%", "+", "OK", "$$", "01", "10", ">>", "UP", "GO"];
+  const eyeSymbols = ["$", "%", "+", "OK", "$$", "01", "10", ">>", "UP", "GO", "☮", "₿"];
+  const eyeRightSymbols = ["✓", "⟿", "≡", "~", "⊙", "◐", "◑", "◒", "⋯", "⟿"];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,8 +32,13 @@ export function AgenticEngineVisual() {
   useEffect(() => {
     const flickerInterval = setInterval(() => {
       setEyeFlicker(true);
+      setEyeRightFlicker(true);
       setEyeSymbol(eyeSymbols[Math.floor(Math.random() * eyeSymbols.length)]);
-      setTimeout(() => setEyeFlicker(false), 150);
+      setEyeRightSymbol(eyeRightSymbols[Math.floor(Math.random() * eyeRightSymbols.length)]);
+      setTimeout(() => {
+        setEyeFlicker(false);
+        setEyeRightFlicker(false);
+      }, 150);
     }, 800 + Math.random() * 400);
 
     return () => clearInterval(flickerInterval);
@@ -132,48 +140,158 @@ export function AgenticEngineVisual() {
               loading="eager"
             />
 
-            {/* Digital eye overlay */}
+            {/* Monocle with chain */}
             <div 
               className="absolute pointer-events-none"
               style={{
-                left: '22%',
-                top: '42%',
-                width: '32px',
-                height: '38px',
+                left: '18%',
+                top: '36%',
               }}
             >
+              {/* Metallic monocle frame */}
               <div 
-                className={`w-full h-full flex items-center justify-center rounded-md overflow-hidden transition-opacity duration-75 ${
-                  eyeFlicker ? 'opacity-100' : 'opacity-70'
+                className="absolute"
+                style={{
+                  left: '-6px',
+                  top: '-6px',
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  background: 'radial-gradient(circle at 30% 30%, #e8d5b7, #b8860b, #8b6914)',
+                  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.4), inset 2px 2px 4px rgba(255,255,255,0.2), 0 4px 8px rgba(0,0,0,0.6)',
+                  border: '2px solid rgba(139, 105, 20, 0.8)',
+                }}
+              />
+
+              {/* Chain connecting to monocle */}
+              <svg 
+                width="60" 
+                height="30" 
+                className="absolute"
+                style={{
+                  left: '-24px',
+                  top: '-20px',
+                  pointerEvents: 'none',
+                }}
+              >
+                <path
+                  d="M 10,15 Q 25,5 45,10"
+                  stroke="url(#chainGradient)"
+                  strokeWidth="2"
+                  fill="none"
+                  strokeLinecap="round"
+                  opacity="0.7"
+                />
+                <defs>
+                  <linearGradient id="chainGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#d4af37" />
+                    <stop offset="50%" stopColor="#8b6914" />
+                    <stop offset="100%" stopColor="#d4af37" />
+                  </linearGradient>
+                </defs>
+                {/* Chain links pattern */}
+                {[0, 8, 16, 24, 32, 40].map((x) => (
+                  <circle key={x} cx={10 + x} cy={12} r="1.5" fill="#d4af37" opacity="0.6" />
+                ))}
+              </svg>
+
+              {/* Left Digital eye - inside monocle */}
+              <div 
+                className={`absolute w-9 h-9 flex items-center justify-center rounded-full overflow-hidden transition-all duration-75 ${
+                  eyeFlicker ? 'opacity-100' : 'opacity-65'
                 }`}
                 style={{
-                  background: 'rgba(0,0,0,0.3)',
+                  left: '-3px',
+                  top: '-3px',
+                  background: 'linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(10,22,40,0.6) 100%)',
+                  border: '1px solid rgba(59,130,246,0.4)',
                 }}
               >
                 <span 
-                  className="font-mono font-bold text-[11px] md:text-xs tracking-tight"
+                  className="font-mono font-bold text-[10px] tracking-tight leading-none"
                   style={{
                     color: eyeFlicker ? '#00ff00' : '#3b82f6',
                     textShadow: eyeFlicker 
                       ? '0 0 8px #00ff00, 0 0 12px #00ff00' 
                       : '0 0 6px #3b82f6, 0 0 10px #3b82f6',
-                    animation: 'pixelFlicker 0.1s steps(2) infinite',
                   }}
                 >
                   {eyeSymbol}
                 </span>
               </div>
-
               <div 
-                className="absolute inset-0 pointer-events-none opacity-30"
+                className="absolute inset-0 pointer-events-none opacity-25 rounded-full"
                 style={{
-                  background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)',
+                  background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.2) 2px, rgba(0,0,0,0.2) 3px)',
                 }}
               />
             </div>
 
+            {/* Right Digital eye overlay - scanning mode */}
+            <div 
+              className="absolute pointer-events-none"
+              style={{
+                right: '20%',
+                top: '40%',
+                width: '36px',
+                height: '36px',
+              }}
+            >
+              <div 
+                className={`w-full h-full flex items-center justify-center rounded-lg overflow-hidden transition-all duration-75 ${
+                  eyeRightFlicker ? 'opacity-100' : 'opacity-65'
+                }`}
+                style={{
+                  background: 'linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(10,22,40,0.6) 100%)',
+                  border: '1px solid rgba(212,175,55,0.4)',
+                }}
+              >
+                <span 
+                  className="font-mono font-bold text-xs tracking-tight leading-none"
+                  style={{
+                    color: eyeRightFlicker ? '#fbbf24' : '#d4af37',
+                    textShadow: eyeRightFlicker 
+                      ? '0 0 8px #fbbf24, 0 0 12px #fbbf24' 
+                      : '0 0 6px #d4af37, 0 0 10px #d4af37',
+                  }}
+                >
+                  {eyeRightSymbol}
+                </span>
+              </div>
+              <div 
+                className="absolute inset-0 pointer-events-none opacity-25 rounded-lg"
+                style={{
+                  background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.2) 2px, rgba(0,0,0,0.2) 3px)',
+                }}
+              />
+            </div>
+
+            {/* Sophisticated Bowtie */}
+            <div 
+              className="absolute pointer-events-none"
+              style={{
+                left: '50%',
+                bottom: '-12px',
+                transform: 'translateX(-50%)',
+              }}
+            >
+              <svg width="48" height="24" viewBox="0 0 48 24">
+                {/* Center knot */}
+                <rect x="22" y="8" width="4" height="8" fill="#d4af37" opacity="0.9" />
+                {/* Left bow */}
+                <ellipse cx="14" cy="12" rx="10" ry="6" fill="#b8860b" opacity="0.85" />
+                <ellipse cx="14" cy="12" rx="8" ry="5" fill="#d4af37" opacity="0.8" />
+                {/* Right bow */}
+                <ellipse cx="34" cy="12" rx="10" ry="6" fill="#b8860b" opacity="0.85" />
+                <ellipse cx="34" cy="12" rx="8" ry="5" fill="#d4af37" opacity="0.8" />
+                {/* Shading */}
+                <ellipse cx="14" cy="10" rx="6" ry="2" fill="#f4d03f" opacity="0.3" />
+                <ellipse cx="34" cy="10" rx="6" ry="2" fill="#f4d03f" opacity="0.3" />
+              </svg>
+            </div>
+
             {/* Thinking dots */}
-            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
+            <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex gap-1">
               {[0, 1, 2].map((i) => (
                 <div 
                   key={i}
