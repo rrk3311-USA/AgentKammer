@@ -104,72 +104,11 @@ export default function Home() {
             }}
             data-testid="card-hero-featured"
           >
-            <div className="p-8 md:p-12 relative z-10">
+            <div className="relative z-10">
               {/* Brain Visual - Full Width */}
-              <div className="flex justify-center mb-12">
+              <div className="flex justify-center">
                 <div className="w-full">
                   <AgenticEngineVisual />
-                </div>
-              </div>
-
-              {/* Value Proposition */}
-              <div className="max-w-5xl mx-auto bg-gradient-to-b from-sky-300 via-blue-300 to-cyan-300 rounded-3xl p-8 md:p-12">
-                <h2 className="font-serif text-3xl font-bold text-slate-900 mb-8 text-center">
-                  How It Works
-                </h2>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                  {[
-                    { title: 'One Profile', desc: 'Share your financial profile once - it powers all recommendations' },
-                    { title: '100+ Products Analyzed', desc: 'AI screens hundreds of offers across 14 financial categories' },
-                    { title: 'Personalized Rankings', desc: 'Get AI-matched recommendations ranked specifically for you' }
-                  ].map((item, idx) => (
-                    <div 
-                      key={idx}
-                      className="rounded-3xl overflow-hidden backdrop-blur-md border-2 transition-all duration-300"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(225,245,254,0.9) 100%)',
-                        borderColor: 'rgba(255, 255, 255, 0.8)',
-                        boxShadow: '0 20px 40px rgba(0, 102, 204, 0.15), inset 0 1px 0 rgba(255,255,255,0.8)'
-                      }}
-                    >
-                      <div className="p-6 flex flex-col items-center text-center h-full">
-                        <div 
-                          className="w-12 h-12 rounded-full flex items-center justify-center mb-4 text-xl font-bold text-white flex-shrink-0"
-                          style={{
-                            background: 'linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)',
-                            boxShadow: '0 8px 16px rgba(14, 165, 233, 0.3)'
-                          }}
-                        >
-                          {idx + 1}
-                        </div>
-                        <h3 className="font-semibold text-slate-900 mb-2 text-lg">{item.title}</h3>
-                        <p className="text-slate-700 text-sm leading-relaxed">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* CTA */}
-                <div className="flex justify-center">
-                  <Link href="/profile">
-                    <Button 
-                      size="lg"
-                      className="gap-2 border-0"
-                      style={{
-                        background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
-                        color: '#000',
-                        fontWeight: 600,
-                        fontSize: '1rem',
-                        paddingLeft: '2rem',
-                        paddingRight: '2rem'
-                      }}
-                      data-testid="button-hero-cta"
-                    >
-                      <Brain className="h-5 w-5" />
-                      Build Your Profile
-                    </Button>
-                  </Link>
                 </div>
               </div>
             </div>
@@ -177,17 +116,85 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Divider */}
-      <div className="bg-gradient-to-b from-cyan-300 to-slate-700 px-6 py-0">
-        <div className="max-w-7xl mx-auto">
-          <div className="h-px bg-gradient-to-r from-transparent via-slate-400/40 to-transparent" />
-        </div>
-      </div>
-
-      {/* SECTION 2: Flagship Services - Digital Downloads Style */}
-      <section id="categories" className="relative py-12 px-4 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
+      {/* SECTION 2: How It Works + Choose Your Category - Combined */}
+      <section id="categories" className="relative py-16 px-4 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
         <div className="max-w-6xl mx-auto">
-          {/* Header */}
+          {/* How It Works Header */}
+          <div className="text-center mb-12">
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-3">
+              How It Works
+            </h2>
+            <p className="text-xl text-white/70 max-w-3xl mx-auto">
+              Three simple steps to unlock personalized recommendations
+            </p>
+          </div>
+
+          {/* How It Works Cards - Grid of 3 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            {[
+              { 
+                num: '1', 
+                title: 'One Profile', 
+                desc: 'Share your financial profile once - it powers all recommendations',
+                highlights: []
+              },
+              { 
+                num: '2', 
+                title: '100+ Products Analyzed', 
+                desc: 'AI screens hundreds of offers across 14 financial categories',
+                highlights: []
+              },
+              { 
+                num: '3', 
+                title: 'Personalized Rankings', 
+                desc: 'Get AI-matched recommendations ranked specifically for you',
+                highlights: []
+              }
+            ].map((item) => (
+              <Card 
+                key={item.num}
+                className="overflow-hidden border-0 h-full hover-elevate transition-all cursor-pointer"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
+                  backdropFilter: 'blur(20px)'
+                }}
+                data-testid={`card-step-${item.num}`}
+              >
+                <div className="p-8 flex flex-col h-full">
+                  {/* Icon */}
+                  <div 
+                    className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
+                    style={{
+                      background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
+                      border: '2px solid rgba(212,175,55,0.3)'
+                    }}
+                  >
+                    <div 
+                      className="w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold text-white"
+                      style={{
+                        background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
+                      }}
+                    >
+                      {item.num}
+                    </div>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="font-serif text-2xl font-bold text-white mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-base text-white/70 mb-6">
+                    {item.desc}
+                  </p>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-16" />
+
+          {/* Choose Your Category Header */}
           <div className="text-center mb-10">
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-3">
               Choose Your Category
@@ -281,13 +288,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Divider */}
-      <div className="bg-slate-900 px-6 py-0">
-        <div className="max-w-7xl mx-auto">
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent" />
-        </div>
-      </div>
 
       {/* SECTION 3: Real Estate Concierge - Image Background */}
       <section className="relative py-12 lg:py-16 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800">
