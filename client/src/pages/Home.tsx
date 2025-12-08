@@ -437,123 +437,114 @@ export default function Home() {
       </section>
       {/* SECTION 7: Credit Card Showcase */}
       <CreditCardShowcase />
-      {/* SECTION 7B: What You'll Unlock - White Background - Category Benefits */}
-      <section className="py-16 px-4 bg-white text-slate-900">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-slate-900">
+      {/* SECTION 7B: What You'll Unlock - Elegant Category Benefits */}
+      <section className="py-20 px-4 bg-gradient-to-b from-slate-50 to-slate-100/50 text-slate-900">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="font-serif text-5xl md:text-6xl font-bold mb-4 text-slate-900">
               What You'll Unlock
             </h2>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              Exclusive benefits tailored to each flagship category—maximize your advantage across credit, wealth, and real estate
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              Premium benefits across your financial journey—credit optimization, wealth growth, and luxury real estate access
             </p>
           </div>
 
-          {/* Three Category Benefit Sections */}
-          <div className="space-y-12">
-            {/* Credit Cards Benefits */}
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 rounded-lg bg-gradient-to-br from-[#00d4ff]/20 to-[#00ff88]/20">
-                  <CreditCard className="h-6 w-6 text-[#00d4ff]" />
+          {/* Three Elegant Category Sections */}
+          <div className="space-y-20">
+            {/* Credit Cards */}
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="md:order-1">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="p-3 rounded-lg bg-gradient-to-br from-blue-100 to-cyan-100">
+                    <CreditCard className="h-8 w-8 text-blue-600" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-slate-900">Credit Cards</h3>
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900">Credit Cards</h3>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[
-                  { icon: Plane, label: 'Airport Lounges', desc: 'VIP access to premium lounges worldwide' },
-                  { icon: UtensilsCrossed, label: 'Fine Dining Credits', desc: 'Exclusive restaurant benefits and reservations' },
-                  { icon: ShoppingBag, label: 'Shopping Rewards', desc: 'Cashback and discounts on premium brands' },
-                  { icon: Zap, label: 'Instant Cashback', desc: 'Real-time rewards on every purchase' }
-                ].map((benefit, idx) => {
-                  const BenefitIcon = benefit.icon;
-                  return (
-                    <div
-                      key={idx}
-                      className="p-4 rounded-lg border border-slate-200 bg-slate-50 hover-elevate transition-all"
-                      data-testid={`benefit-credit-cards-${idx}`}
-                    >
-                      <div className="flex items-start gap-3 mb-2">
-                        <div className="p-2 rounded-lg bg-gradient-to-br from-[#00d4ff]/20 to-[#00ff88]/20 shrink-0">
-                          <BenefitIcon className="h-5 w-5 text-[#00d4ff]" />
+                <div className="space-y-6">
+                  {[
+                    { icon: Plane, label: 'Airport Lounges & Travel', desc: 'VIP access to premium lounges worldwide, exclusive travel benefits and concierge services' },
+                    { icon: UtensilsCrossed, label: 'Fine Dining & Rewards', desc: 'Exclusive restaurant reservations, dining credits, and premium cashback on luxury experiences' }
+                  ].map((benefit, idx) => {
+                    const BenefitIcon = benefit.icon;
+                    return (
+                      <div key={idx} className="flex gap-4" data-testid={`benefit-credit-cards-${idx}`}>
+                        <div className="p-3 rounded-lg bg-gradient-to-br from-blue-50 to-cyan-50 shrink-0">
+                          <BenefitIcon className="h-6 w-6 text-blue-500" />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-slate-900 mb-1">{benefit.label}</h4>
+                          <p className="text-slate-600 text-sm leading-relaxed">{benefit.desc}</p>
                         </div>
                       </div>
-                      <h4 className="font-semibold text-slate-900 text-sm mb-1">{benefit.label}</h4>
-                      <p className="text-xs text-slate-600">{benefit.desc}</p>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
+              <div className="md:order-2 bg-gradient-to-br from-blue-100/30 to-cyan-100/30 rounded-2xl p-8 border border-blue-100/50 backdrop-blur-sm" />
             </div>
 
-            {/* Investment Accounts Benefits */}
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 rounded-lg bg-gradient-to-br from-[#00d4ff]/20 to-[#00ff88]/20">
-                  <TrendingUp className="h-6 w-6 text-[#00d4ff]" />
+            {/* Investment Accounts */}
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="md:order-2">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="p-3 rounded-lg bg-gradient-to-br from-emerald-100 to-teal-100">
+                    <TrendingUp className="h-8 w-8 text-emerald-600" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-slate-900">Investment Accounts</h3>
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900">Investment Accounts</h3>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[
-                  { icon: TrendingUp, label: 'Portfolio Optimization', desc: 'AI-matched investment strategies for your goals' },
-                  { icon: Lightbulb, label: 'Tax-Efficient Growth', desc: 'Smart tax planning to maximize returns' },
-                  { icon: BarChart3, label: 'Real-Time Analytics', desc: 'Monitor performance with advanced insights' },
-                  { icon: Wallet, label: 'Wealth Management', desc: 'Personalized guidance from top-tier advisors' }
-                ].map((benefit, idx) => {
-                  const BenefitIcon = benefit.icon;
-                  return (
-                    <div
-                      key={idx}
-                      className="p-4 rounded-lg border border-slate-200 bg-slate-50 hover-elevate transition-all"
-                      data-testid={`benefit-investing-${idx}`}
-                    >
-                      <div className="flex items-start gap-3 mb-2">
-                        <div className="p-2 rounded-lg bg-gradient-to-br from-[#00d4ff]/20 to-[#00ff88]/20 shrink-0">
-                          <BenefitIcon className="h-5 w-5 text-[#00d4ff]" />
+                <div className="space-y-6">
+                  {[
+                    { icon: TrendingUp, label: 'AI-Matched Strategies', desc: 'Portfolio optimization tailored to your goals, risk profile, and timeline with real-time rebalancing' },
+                    { icon: Lightbulb, label: 'Tax-Efficient Wealth', desc: 'Smart tax planning, strategic asset placement, and wealth management guidance from top advisors' }
+                  ].map((benefit, idx) => {
+                    const BenefitIcon = benefit.icon;
+                    return (
+                      <div key={idx} className="flex gap-4" data-testid={`benefit-investing-${idx}`}>
+                        <div className="p-3 rounded-lg bg-gradient-to-br from-emerald-50 to-teal-50 shrink-0">
+                          <BenefitIcon className="h-6 w-6 text-emerald-500" />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-slate-900 mb-1">{benefit.label}</h4>
+                          <p className="text-slate-600 text-sm leading-relaxed">{benefit.desc}</p>
                         </div>
                       </div>
-                      <h4 className="font-semibold text-slate-900 text-sm mb-1">{benefit.label}</h4>
-                      <p className="text-xs text-slate-600">{benefit.desc}</p>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
+              <div className="md:order-1 bg-gradient-to-br from-emerald-100/30 to-teal-100/30 rounded-2xl p-8 border border-emerald-100/50 backdrop-blur-sm" />
             </div>
 
-            {/* Real Estate Concierge Benefits */}
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 rounded-lg bg-gradient-to-br from-[#00d4ff]/20 to-[#00ff88]/20">
-                  <Building2 className="h-6 w-6 text-[#00d4ff]" />
+            {/* Real Estate Concierge */}
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="md:order-1">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="p-3 rounded-lg bg-gradient-to-br from-amber-100 to-orange-100">
+                    <Building2 className="h-8 w-8 text-amber-600" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-slate-900">Real Estate Concierge</h3>
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900">Real Estate Concierge</h3>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[
-                  { icon: Building2, label: 'Luxury Home Access', desc: 'Exclusive listings in premium markets' },
-                  { icon: Briefcase, label: 'Mortgage Pre-Approval', desc: 'Fast-track lending for qualified buyers' },
-                  { icon: Shield, label: 'Market Analytics', desc: 'Deep insights on California, NYC, Nevada' },
-                  { icon: CheckSquare, label: 'White Glove Service', desc: 'Personal concierge for every transaction' }
-                ].map((benefit, idx) => {
-                  const BenefitIcon = benefit.icon;
-                  return (
-                    <div
-                      key={idx}
-                      className="p-4 rounded-lg border border-slate-200 bg-slate-50 hover-elevate transition-all"
-                      data-testid={`benefit-real-estate-${idx}`}
-                    >
-                      <div className="flex items-start gap-3 mb-2">
-                        <div className="p-2 rounded-lg bg-gradient-to-br from-[#00d4ff]/20 to-[#00ff88]/20 shrink-0">
-                          <BenefitIcon className="h-5 w-5 text-[#00d4ff]" />
+                <div className="space-y-6">
+                  {[
+                    { icon: Building2, label: 'Luxury Property Access', desc: 'Exclusive listings in premium California, NYC, and Nevada markets with personalized property matching' },
+                    { icon: Briefcase, label: 'Concierge Mortgage Services', desc: 'Fast-track pre-approval, white-glove closing support, and dedicated transaction management' }
+                  ].map((benefit, idx) => {
+                    const BenefitIcon = benefit.icon;
+                    return (
+                      <div key={idx} className="flex gap-4" data-testid={`benefit-real-estate-${idx}`}>
+                        <div className="p-3 rounded-lg bg-gradient-to-br from-amber-50 to-orange-50 shrink-0">
+                          <BenefitIcon className="h-6 w-6 text-amber-500" />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-slate-900 mb-1">{benefit.label}</h4>
+                          <p className="text-slate-600 text-sm leading-relaxed">{benefit.desc}</p>
                         </div>
                       </div>
-                      <h4 className="font-semibold text-slate-900 text-sm mb-1">{benefit.label}</h4>
-                      <p className="text-xs text-slate-600">{benefit.desc}</p>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
+              <div className="md:order-2 bg-gradient-to-br from-amber-100/30 to-orange-100/30 rounded-2xl p-8 border border-amber-100/50 backdrop-blur-sm" />
             </div>
           </div>
         </div>
