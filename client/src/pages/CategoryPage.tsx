@@ -457,30 +457,6 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
         </section>
       )}
 
-      {/* Agentic Profile CTA */}
-      <section className="bg-[#0a1628] py-8 lg:py-10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
-            <div className="flex items-start gap-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center flex-shrink-0">
-                <Brain className="h-8 w-8 text-[#d4af37]" />
-              </div>
-              <div>
-                <h3 className="text-white font-serif text-2xl font-bold mb-2">Ready to find your perfect card?</h3>
-                {categoryId !== 'investing' && (
-                  <p className="text-white/70">Start Your Agentic Profile</p>
-                )}
-              </div>
-            </div>
-            <Button 
-              className="bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90 h-12 px-8 text-base"
-              data-testid="button-build-profile"
-            >
-              Build Your Profile <ArrowRight className="h-5 w-5 ml-2" />
-            </Button>
-          </div>
-        </div>
-      </section>
       {/* Strategic Card Matching - for credit cards */}
       {categoryId === 'credit-cards' && <StrategicCardMatching />}
 
