@@ -363,9 +363,7 @@ export default function Home() {
             </div>
             <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-3">Competitive Credit Card Procurement </h2>
             <p className="text-[#d4af37] text-xl font-semibold mb-2">Not Just the Usual 12</p>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
-              Our AI analyzes 100+ options including fintech, crypto, and startup cards that legacy sites don't show.
-            </p>
+            <p className="text-white/70 text-lg max-w-2xl mx-auto">Our AI analyzes 100+ options including fintech, crypto, and startup cards that legacy sites don't show. Your profile is leverages to create competition for your business. </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto">
