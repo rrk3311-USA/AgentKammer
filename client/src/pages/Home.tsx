@@ -209,7 +209,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* SECTION 3: How It Works */}
       <section className="relative py-12 px-4 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800">
         <div className="max-w-6xl mx-auto">
@@ -273,7 +272,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* SECTION 4: Investment Accounts */}
       <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-900 via-slate-850 to-slate-800 px-4">
         <div className="max-w-7xl mx-auto">
@@ -363,9 +361,7 @@ export default function Home() {
                 <CreditCard className="h-7 w-7" style={GOLD_ICON_STYLE} />
               </div>
             </div>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-3">
-              Compare 100+ Credit Cards
-            </h2>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-3">Competitive Credit Card Procurement </h2>
             <p className="text-[#d4af37] text-xl font-semibold mb-2">Not Just the Usual 12</p>
             <p className="text-white/70 text-lg max-w-2xl mx-auto">
               Our AI analyzes 100+ options including fintech, crypto, and startup cards that legacy sites don't show.
