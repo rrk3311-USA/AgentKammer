@@ -363,23 +363,7 @@ export function CreditCardShowcase() {
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="text-center mt-12">
-          <p className="text-white/60 mb-4">
-            Our AI analyzes all 100+ cards and ranks them by YOUR profile
-          </p>
-          <Badge
-            className="border-0 inline-block"
-            style={{
-              background: "linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)",
-              color: "#000",
-              fontSize: "0.85rem",
-              padding: "0.5rem 1rem",
-            }}
-          >
-            See Your Personalized Rankings
-          </Badge>
-        </div>
+        
       </div>
     </section>
   );
