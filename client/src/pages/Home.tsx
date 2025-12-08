@@ -437,115 +437,79 @@ export default function Home() {
       </section>
       {/* SECTION 7: Credit Card Showcase */}
       <CreditCardShowcase />
-      {/* SECTION 7B: What You'll Unlock - Elegant Category Benefits */}
-      <section className="py-20 px-4 bg-gradient-to-b from-slate-50 to-slate-100/50 text-slate-900">
+      {/* SECTION 7B: What You'll Unlock - Category Benefits */}
+      <section className="relative py-6 px-4 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-900">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="font-serif text-5xl md:text-6xl font-bold mb-4 text-slate-900">
+          {/* Choose Your Category Header */}
+          <div className="text-center mb-6">
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-3">
               What You'll Unlock
             </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              Premium benefits across your financial journey—credit optimization, wealth growth, and luxury real estate access
+            <p className="text-xl text-white/70 max-w-3xl mx-auto">
+              Premium benefits across credit, wealth, and real estate—tailored to your financial goals
             </p>
           </div>
 
-          {/* Three Elegant Category Sections */}
-          <div className="space-y-20">
-            {/* Credit Cards */}
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="md:order-1">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="p-3 rounded-lg bg-gradient-to-br from-blue-100 to-cyan-100">
-                    <CreditCard className="h-8 w-8 text-blue-600" />
+          {/* Three Category Cards - Grid of 3 */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { 
+                id: 'credit-benefits', 
+                name: 'Credit Cards', 
+                icon: CreditCard, 
+                highlights: ['Airport lounges & travel', 'Fine dining credits', 'Premium cashback rewards']
+              },
+              { 
+                id: 'investing-benefits', 
+                name: 'Investment Accounts', 
+                icon: TrendingUp, 
+                highlights: ['AI-matched strategies', 'Tax-efficient growth', 'Real-time analytics']
+              },
+              { 
+                id: 'real-estate-benefits', 
+                name: 'Real Estate Concierge', 
+                icon: Building2, 
+                highlights: ['Luxury property access', 'Mortgage pre-approval', 'White-glove service']
+              }
+            ].map((cat) => (
+              <Card 
+                key={cat.id}
+                className="overflow-hidden border-0 h-full hover-elevate transition-all cursor-pointer"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
+                  backdropFilter: 'blur(20px)'
+                }}
+                data-testid={`card-benefits-${cat.id}`}
+              >
+                <div className="p-8 flex flex-col h-full">
+                  {/* Icon */}
+                  <div 
+                    className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
+                    style={{
+                      background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
+                      border: '2px solid rgba(212,175,55,0.3)'
+                    }}
+                  >
+                    <cat.icon className="h-10 w-10" style={{ color: '#d4af37' }} />
                   </div>
-                  <h3 className="text-3xl font-bold text-slate-900">Credit Cards</h3>
-                </div>
-                <div className="space-y-6">
-                  {[
-                    { icon: Plane, label: 'Airport Lounges & Travel', desc: 'VIP access to premium lounges worldwide, exclusive travel benefits and concierge services' },
-                    { icon: UtensilsCrossed, label: 'Fine Dining & Rewards', desc: 'Exclusive restaurant reservations, dining credits, and premium cashback on luxury experiences' }
-                  ].map((benefit, idx) => {
-                    const BenefitIcon = benefit.icon;
-                    return (
-                      <div key={idx} className="flex gap-4" data-testid={`benefit-credit-cards-${idx}`}>
-                        <div className="p-3 rounded-lg bg-gradient-to-br from-blue-50 to-cyan-50 shrink-0">
-                          <BenefitIcon className="h-6 w-6 text-blue-500" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-slate-900 mb-1">{benefit.label}</h4>
-                          <p className="text-slate-600 text-sm leading-relaxed">{benefit.desc}</p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <div className="md:order-2 bg-gradient-to-br from-blue-100/30 to-cyan-100/30 rounded-2xl p-8 border border-blue-100/50 backdrop-blur-sm" />
-            </div>
 
-            {/* Investment Accounts */}
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="md:order-2">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="p-3 rounded-lg bg-gradient-to-br from-emerald-100 to-teal-100">
-                    <TrendingUp className="h-8 w-8 text-emerald-600" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-slate-900">Investment Accounts</h3>
-                </div>
-                <div className="space-y-6">
-                  {[
-                    { icon: TrendingUp, label: 'AI-Matched Strategies', desc: 'Portfolio optimization tailored to your goals, risk profile, and timeline with real-time rebalancing' },
-                    { icon: Lightbulb, label: 'Tax-Efficient Wealth', desc: 'Smart tax planning, strategic asset placement, and wealth management guidance from top advisors' }
-                  ].map((benefit, idx) => {
-                    const BenefitIcon = benefit.icon;
-                    return (
-                      <div key={idx} className="flex gap-4" data-testid={`benefit-investing-${idx}`}>
-                        <div className="p-3 rounded-lg bg-gradient-to-br from-emerald-50 to-teal-50 shrink-0">
-                          <BenefitIcon className="h-6 w-6 text-emerald-500" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-slate-900 mb-1">{benefit.label}</h4>
-                          <p className="text-slate-600 text-sm leading-relaxed">{benefit.desc}</p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <div className="md:order-1 bg-gradient-to-br from-emerald-100/30 to-teal-100/30 rounded-2xl p-8 border border-emerald-100/50 backdrop-blur-sm" />
-            </div>
+                  {/* Title */}
+                  <h3 className="font-serif text-2xl font-bold text-white mb-2">
+                    {cat.name}
+                  </h3>
 
-            {/* Real Estate Concierge */}
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="md:order-1">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="p-3 rounded-lg bg-gradient-to-br from-amber-100 to-orange-100">
-                    <Building2 className="h-8 w-8 text-amber-600" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-slate-900">Real Estate Concierge</h3>
-                </div>
-                <div className="space-y-6">
-                  {[
-                    { icon: Building2, label: 'Luxury Property Access', desc: 'Exclusive listings in premium California, NYC, and Nevada markets with personalized property matching' },
-                    { icon: Briefcase, label: 'Concierge Mortgage Services', desc: 'Fast-track pre-approval, white-glove closing support, and dedicated transaction management' }
-                  ].map((benefit, idx) => {
-                    const BenefitIcon = benefit.icon;
-                    return (
-                      <div key={idx} className="flex gap-4" data-testid={`benefit-real-estate-${idx}`}>
-                        <div className="p-3 rounded-lg bg-gradient-to-br from-amber-50 to-orange-50 shrink-0">
-                          <BenefitIcon className="h-6 w-6 text-amber-500" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-slate-900 mb-1">{benefit.label}</h4>
-                          <p className="text-slate-600 text-sm leading-relaxed">{benefit.desc}</p>
-                        </div>
+                  {/* Features List */}
+                  <div className="space-y-3 flex-1">
+                    {cat.highlights.map((highlight, idx) => (
+                      <div key={idx} className="flex items-start gap-3">
+                        <CheckSquare className="h-4 w-4 mt-0.5 shrink-0 flex-shrink-0" style={{ color: '#d4af37' }} />
+                        <span className="text-sm text-white/80">{highlight}</span>
                       </div>
-                    );
-                  })}
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="md:order-2 bg-gradient-to-br from-amber-100/30 to-orange-100/30 rounded-2xl p-8 border border-amber-100/50 backdrop-blur-sm" />
-            </div>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
