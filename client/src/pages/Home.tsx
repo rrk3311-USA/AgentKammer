@@ -437,46 +437,124 @@ export default function Home() {
       </section>
       {/* SECTION 7: Credit Card Showcase */}
       <CreditCardShowcase />
-      {/* SECTION 7B: What You'll Unlock - White Background */}
-      <section className="py-12 px-4 bg-white text-slate-900">
+      {/* SECTION 7B: What You'll Unlock - White Background - Category Benefits */}
+      <section className="py-16 px-4 bg-white text-slate-900">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-slate-900">
               What You'll Unlock
             </h2>
             <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              Exclusive benefits and premium rewards designed to maximize your financial advantage and quality of life
+              Exclusive benefits tailored to each flagship category—maximize your advantage across credit, wealth, and real estate
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { icon: Plane, label: 'Airport Lounges', desc: 'VIP access to premium lounges worldwide' },
-              { icon: UtensilsCrossed, label: 'Fine Dining Credits', desc: 'Exclusive restaurant benefits and reservations' },
-              { icon: ShoppingBag, label: 'Shopping Rewards', desc: 'Cashback and discounts on premium brands' },
-              { icon: Zap, label: 'Instant Cashback', desc: 'Real-time cash rewards on every purchase' },
-              { icon: Lightbulb, label: 'Travel Insurance', desc: 'Comprehensive coverage for all your trips' },
-              { icon: TrendingUp, label: 'Investment Perks', desc: 'Priority access to exclusive investment opportunities' }
-            ].map((benefit, idx) => {
-              const BenefitIcon = benefit.icon;
-              return (
-                <div
-                  key={idx}
-                  className="p-6 rounded-lg border border-slate-200 bg-slate-50 hover-elevate transition-all"
-                  data-testid={`benefit-unlock-${idx}`}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-lg bg-gradient-to-br from-[#00d4ff]/20 to-[#00ff88]/20 shrink-0">
-                      <BenefitIcon className="h-6 w-6 text-[#00d4ff]" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-slate-900 mb-2">{benefit.label}</h3>
-                      <p className="text-sm text-slate-600">{benefit.desc}</p>
-                    </div>
-                  </div>
+          {/* Three Category Benefit Sections */}
+          <div className="space-y-12">
+            {/* Credit Cards Benefits */}
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-2 rounded-lg bg-gradient-to-br from-[#00d4ff]/20 to-[#00ff88]/20">
+                  <CreditCard className="h-6 w-6 text-[#00d4ff]" />
                 </div>
-              );
-            })}
+                <h3 className="text-2xl font-bold text-slate-900">Credit Cards</h3>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  { icon: Plane, label: 'Airport Lounges', desc: 'VIP access to premium lounges worldwide' },
+                  { icon: UtensilsCrossed, label: 'Fine Dining Credits', desc: 'Exclusive restaurant benefits and reservations' },
+                  { icon: ShoppingBag, label: 'Shopping Rewards', desc: 'Cashback and discounts on premium brands' },
+                  { icon: Zap, label: 'Instant Cashback', desc: 'Real-time rewards on every purchase' }
+                ].map((benefit, idx) => {
+                  const BenefitIcon = benefit.icon;
+                  return (
+                    <div
+                      key={idx}
+                      className="p-4 rounded-lg border border-slate-200 bg-slate-50 hover-elevate transition-all"
+                      data-testid={`benefit-credit-cards-${idx}`}
+                    >
+                      <div className="flex items-start gap-3 mb-2">
+                        <div className="p-2 rounded-lg bg-gradient-to-br from-[#00d4ff]/20 to-[#00ff88]/20 shrink-0">
+                          <BenefitIcon className="h-5 w-5 text-[#00d4ff]" />
+                        </div>
+                      </div>
+                      <h4 className="font-semibold text-slate-900 text-sm mb-1">{benefit.label}</h4>
+                      <p className="text-xs text-slate-600">{benefit.desc}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Investment Accounts Benefits */}
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-2 rounded-lg bg-gradient-to-br from-[#00d4ff]/20 to-[#00ff88]/20">
+                  <TrendingUp className="h-6 w-6 text-[#00d4ff]" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900">Investment Accounts</h3>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  { icon: TrendingUp, label: 'Portfolio Optimization', desc: 'AI-matched investment strategies for your goals' },
+                  { icon: Lightbulb, label: 'Tax-Efficient Growth', desc: 'Smart tax planning to maximize returns' },
+                  { icon: BarChart3, label: 'Real-Time Analytics', desc: 'Monitor performance with advanced insights' },
+                  { icon: Wallet, label: 'Wealth Management', desc: 'Personalized guidance from top-tier advisors' }
+                ].map((benefit, idx) => {
+                  const BenefitIcon = benefit.icon;
+                  return (
+                    <div
+                      key={idx}
+                      className="p-4 rounded-lg border border-slate-200 bg-slate-50 hover-elevate transition-all"
+                      data-testid={`benefit-investing-${idx}`}
+                    >
+                      <div className="flex items-start gap-3 mb-2">
+                        <div className="p-2 rounded-lg bg-gradient-to-br from-[#00d4ff]/20 to-[#00ff88]/20 shrink-0">
+                          <BenefitIcon className="h-5 w-5 text-[#00d4ff]" />
+                        </div>
+                      </div>
+                      <h4 className="font-semibold text-slate-900 text-sm mb-1">{benefit.label}</h4>
+                      <p className="text-xs text-slate-600">{benefit.desc}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Real Estate Concierge Benefits */}
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-2 rounded-lg bg-gradient-to-br from-[#00d4ff]/20 to-[#00ff88]/20">
+                  <Building2 className="h-6 w-6 text-[#00d4ff]" />
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900">Real Estate Concierge</h3>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  { icon: Building2, label: 'Luxury Home Access', desc: 'Exclusive listings in premium markets' },
+                  { icon: Briefcase, label: 'Mortgage Pre-Approval', desc: 'Fast-track lending for qualified buyers' },
+                  { icon: Shield, label: 'Market Analytics', desc: 'Deep insights on California, NYC, Nevada' },
+                  { icon: CheckSquare, label: 'White Glove Service', desc: 'Personal concierge for every transaction' }
+                ].map((benefit, idx) => {
+                  const BenefitIcon = benefit.icon;
+                  return (
+                    <div
+                      key={idx}
+                      className="p-4 rounded-lg border border-slate-200 bg-slate-50 hover-elevate transition-all"
+                      data-testid={`benefit-real-estate-${idx}`}
+                    >
+                      <div className="flex items-start gap-3 mb-2">
+                        <div className="p-2 rounded-lg bg-gradient-to-br from-[#00d4ff]/20 to-[#00ff88]/20 shrink-0">
+                          <BenefitIcon className="h-5 w-5 text-[#00d4ff]" />
+                        </div>
+                      </div>
+                      <h4 className="font-semibold text-slate-900 text-sm mb-1">{benefit.label}</h4>
+                      <p className="text-xs text-slate-600">{benefit.desc}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </section>
