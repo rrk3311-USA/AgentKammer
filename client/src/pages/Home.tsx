@@ -118,7 +118,7 @@ export default function Home() {
           {/* How It Works Section */}
           <div className="mb-16">
             <div className="text-center mb-12">
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-3">
+              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-3 text-[#d0a933]">
                 How It Works
               </h2>
               <p className="text-xl text-white/70 max-w-3xl mx-auto">
@@ -189,36 +189,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* What You'll Unlock Benefits Section */}
-          <div className="mt-16">
-            <h3 className="text-3xl md:text-4xl font-bold mb-8 text-center text-[#00ff88]">What You'll Unlock</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {[
-                { Icon: Plane, label: 'Airport Lounges' },
-                { Icon: UtensilsCrossed, label: 'Fine Dining Credits' },
-                { Icon: ShoppingBag, label: 'Shopping Rewards' },
-                { Icon: Wallet, label: 'Instant Cashback' },
-                { Icon: Shield, label: 'Travel Insurance' },
-                { Icon: InvestIcon, label: 'Investment Perks' }
-              ].map((benefit, idx) => (
-                <Card
-                  key={idx}
-                  className="p-6 bg-white/5 border-white/10 backdrop-blur-sm hover-elevate transition-all flex flex-col items-center text-center"
-                  data-testid={`benefit-card-${idx}`}
-                >
-                  <div
-                    className="rounded-lg p-4 mb-3"
-                    style={{
-                      background: `linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.05) 100%)`,
-                    }}
-                  >
-                    <benefit.Icon className="h-6 w-6 text-white" />
-                  </div>
-                  <p className="text-base md:text-lg font-semibold text-[#00ff88]">{benefit.label}</p>
-                </Card>
-              ))}
-            </div>
-          </div>
+          
         </div>
       </section>
       {/* SECTION 3: Choose Your Category - Combined */}
