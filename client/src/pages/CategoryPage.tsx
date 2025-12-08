@@ -291,6 +291,27 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
   const config = CATEGORY_CONFIG[categoryId];
   const subcategories = SUBCATEGORIES[categoryId] || [];
   const [activeTab, setActiveTab] = useState('All');
+  const [selectedCreditCategory, setSelectedCreditCategory] = useState<string | null>(null);
+  
+  const creditCategories = [
+    { id: 'credit-enhancement', label: 'Credit Enhancement' },
+    { id: 'credit-repair', label: 'Credit Repair' },
+    { id: 'credit-consolidation', label: 'Credit Consolidation' }
+  ];
+
+  const getCreditsCategory = (offerName: string): string | null => {
+    const name = offerName.toLowerCase();
+    if (name.includes('no annual') || name.includes('premium') || name.includes('elite') || name.includes('signature')) {
+      return 'credit-enhancement';
+    }
+    if (name.includes('secured') || name.includes('starter') || name.includes('fresh')) {
+      return 'credit-repair';
+    }
+    if (name.includes('consolidation') || name.includes('balance') || name.includes('transfer')) {
+      return 'credit-consolidation';
+    }
+    return null;
+  };
   
   if (!config) {
     return (
@@ -470,11 +491,44 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
       {/* Main Content */}
       <section className="py-12 lg:py-16 bg-[#0a1628]">
         <div className="max-w-7xl mx-auto px-6">
+          {/* Credit Cards Category Buttons */}
+          {categoryId === 'credit-cards' && offers.length > 0 && (
+            <div className="mb-12">
+              <p className="text-white/70 text-sm font-semibold uppercase tracking-wide mb-4">Select your primary need:</p>
+              <div className="flex flex-wrap gap-3">
+                {creditCategories.map((category) => (
+                  <button
+                    key={category.id}
+                    onClick={() => setSelectedCreditCategory(
+                      selectedCreditCategory === category.id ? null : category.id
+                    )}
+                    className={`px-6 py-3 rounded-lg font-semibold text-sm transition-all ${
+                      selectedCreditCategory === category.id
+                        ? 'bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] shadow-lg'
+                        : 'bg-white/10 text-white border border-white/20 hover-elevate'
+                    }`}
+                    data-testid={`button-credit-category-${category.id}`}
+                  >
+                    {category.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          
           {/* Credit Cards Button Style */}
           {categoryId === 'credit-cards' && offers.length > 0 ? (
             <div className="space-y-6">
               {subcategories.map((subcategory) => {
-                const subcategoryOffers = offers.filter(o => o.subcategory === subcategory);
+                let subcategoryOffers = offers.filter(o => o.subcategory === subcategory);
+                
+                // Filter by selected credit category if one is chosen
+                if (selectedCreditCategory) {
+                  subcategoryOffers = subcategoryOffers.filter(o => 
+                    getCreditsCategory(o.name) === selectedCreditCategory
+                  );
+                }
+                
                 if (subcategoryOffers.length === 0) return null;
                 
                 return (
