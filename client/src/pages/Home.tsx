@@ -79,18 +79,6 @@ export default function Home() {
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Header */}
           <div className="text-center mb-12">
-            <Badge 
-              className="mb-6 border-0" 
-              style={{ 
-                background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
-                color: '#000',
-                fontSize: '0.9rem',
-                padding: '0.5rem 1rem'
-              }}
-            >
-              <Sparkles className="h-4 w-4 mr-2" />
-              Powered by Agentic AI
-            </Badge>
             <h1 className="font-serif text-5xl md:text-6xl font-bold mb-6 text-white">
               Your AI Agent for Better{" "}
               <span style={{ color: '#d4af37' }}>Financial Outcomes</span>
