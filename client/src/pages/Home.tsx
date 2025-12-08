@@ -388,56 +388,60 @@ export default function Home() {
           </div>
           <p className="text-center text-white/50 text-sm mb-12">Airport lounges • Fine dining • Luxury travel</p>
 
-          {/* Why Agent Kammer Comparison Table */}
-          <div className="overflow-x-auto mb-12 max-w-6xl mx-auto">
-            <table className="w-full text-sm border-collapse" data-testid="kammer-comparison-table">
-              <thead>
-                <tr className="border-b border-white/20">
-                  <th className="text-left py-4 px-4 text-white font-semibold">Feature</th>
-                  <th className="text-center py-4 px-4 text-white font-semibold">Agent Kammer</th>
-                  <th className="text-center py-4 px-4 text-white/70">NerdWallet</th>
-                  <th className="text-center py-4 px-4 text-white/70">Bankrate</th>
-                  <th className="text-center py-4 px-4 text-white/70">LendingClub</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                  <td className="py-4 px-4 text-white font-medium">AI Matching</td>
-                  <td className="text-center py-4 px-4"><span className="inline-block px-3 py-1 bg-[#00ff88]/20 text-[#00ff88] rounded-full text-xs font-semibold">Yes</span></td>
-                  <td className="text-center py-4 px-4 text-white/50">Limited</td>
-                  <td className="text-center py-4 px-4 text-white/50">No</td>
-                  <td className="text-center py-4 px-4 text-white/50">No</td>
-                </tr>
-                <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                  <td className="py-4 px-4 text-white font-medium">100+ Cards</td>
-                  <td className="text-center py-4 px-4"><span className="inline-block px-3 py-1 bg-[#00ff88]/20 text-[#00ff88] rounded-full text-xs font-semibold">Yes</span></td>
-                  <td className="text-center py-4 px-4 text-white/50">~50</td>
-                  <td className="text-center py-4 px-4 text-white/50">~40</td>
-                  <td className="text-center py-4 px-4 text-white/50">N/A</td>
-                </tr>
-                <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                  <td className="py-4 px-4 text-white font-medium">14 Categories</td>
-                  <td className="text-center py-4 px-4"><span className="inline-block px-3 py-1 bg-[#00ff88]/20 text-[#00ff88] rounded-full text-xs font-semibold">Yes</span></td>
-                  <td className="text-center py-4 px-4 text-white/50">6-8</td>
-                  <td className="text-center py-4 px-4 text-white/50">8-10</td>
-                  <td className="text-center py-4 px-4 text-white/50">1-2</td>
-                </tr>
-                <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                  <td className="py-4 px-4 text-white font-medium">Rate Watch Tech</td>
-                  <td className="text-center py-4 px-4"><span className="inline-block px-3 py-1 bg-[#00d4ff]/20 text-[#00d4ff] rounded-full text-xs font-semibold">Advanced</span></td>
-                  <td className="text-center py-4 px-4 text-white/50">Basic</td>
-                  <td className="text-center py-4 px-4 text-white/50">Basic</td>
-                  <td className="text-center py-4 px-4 text-white/50">None</td>
-                </tr>
-                <tr className="hover:bg-white/5 transition-colors">
-                  <td className="py-4 px-4 text-white font-medium">Personalized Profile</td>
-                  <td className="text-center py-4 px-4"><span className="inline-block px-3 py-1 bg-[#00ff88]/20 text-[#00ff88] rounded-full text-xs font-semibold">Yes</span></td>
-                  <td className="text-center py-4 px-4 text-white/50">Limited</td>
-                  <td className="text-center py-4 px-4 text-white/50">Limited</td>
-                  <td className="text-center py-4 px-4 text-white/50">Limited</td>
-                </tr>
-              </tbody>
-            </table>
+          {/* Cards Grid - 3 Columns */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-5xl mx-auto">
+            {[
+              { name: 'Platinum Rewards', issuer: 'Global Bank', color: 'from-blue-500 to-cyan-400' },
+              { name: 'Travel Elite', issuer: 'International Airways', color: 'from-sky-400 to-blue-500' },
+              { name: 'Premium Cashback', issuer: 'Finance Corp', color: 'from-emerald-400 to-teal-500' },
+            ].map((card, idx) => (
+              <div key={idx} className="flex flex-col" data-testid={`card-featured-${idx}`}>
+                <div
+                  className={`bg-gradient-to-br ${card.color} rounded-2xl p-6 h-40 relative overflow-hidden shadow-xl hover-elevate transition-all`}
+                >
+                  <div className="absolute top-4 right-4 text-white/30">
+                    <div className="text-2xl font-bold opacity-50">{card.issuer.charAt(0)}</div>
+                  </div>
+                  <div className="relative z-10 h-full flex flex-col justify-between">
+                    <div>
+                      <div className="text-white/70 text-xs mb-1">{card.issuer}</div>
+                      <h3 className="text-lg font-bold text-white">{card.name}</h3>
+                    </div>
+                    <div className="flex gap-2">
+                      {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="flex-1 h-1.5 bg-white/20 rounded opacity-50" />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4 w-8 h-6 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded opacity-80" />
+                </div>
+                <div className="mt-3 flex gap-3">
+                  <div className="px-2 py-1 rounded-full text-xs font-semibold text-white border border-cyan-300/50"
+                    style={{ background: 'linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 255, 136, 0.15) 100%)' }}
+                  >
+                    0% APR
+                  </div>
+                  <div className="px-2 py-1 rounded-full text-xs font-semibold text-white border border-cyan-300/50"
+                    style={{ background: 'linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 255, 136, 0.15) 100%)' }}
+                  >
+                    Rewards
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Scroll Indicator Dots */}
+          <div className="flex justify-center gap-2 mb-12">
+            {[0, 1, 2].map((idx) => (
+              <div
+                key={idx}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  idx === 0 ? 'w-6 bg-[#d4af37]' : 'w-2 bg-white/30'
+                }`}
+                data-testid={`dot-card-${idx}`}
+              />
+            ))}
           </div>
 
           <div className="text-center">
