@@ -360,7 +360,7 @@ export default function Home() {
               </thead>
               <tbody>
                 {[
-                  { feature: 'AI-Powered Matching', kammer: true, nerdwallet: 'Limited', bankrate: false, lending: false },
+                  { feature: 'AI-Powered Matching', kammer: true, nerdwallet: 'Limited', bankrate: 'No', lending: 'No' },
                   { feature: '100+ Card Options', kammer: true, nerdwallet: '~50', bankrate: '~40', lending: 'N/A' },
                   { feature: '14 Financial Categories', kammer: true, nerdwallet: '6-8', bankrate: '8-10', lending: '1-2' },
                   { feature: 'Advanced Rate Watch', kammer: true, nerdwallet: 'Basic', bankrate: 'Basic', lending: 'None' },
