@@ -274,7 +274,41 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 4: Real Estate Concierge - Image Background */}
+      {/* SECTION 4: Investment Accounts */}
+      <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-900 via-slate-850 to-slate-800 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-10">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                <TrendingUp className="h-7 w-7" style={GOLD_ICON_STYLE} />
+              </div>
+            </div>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-white">
+              Investment Accounts
+            </h2>
+            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+              Compare brokerages, robo-advisors, and investment platforms matched to your goals
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {[
+              { icon: BarChart3, title: 'Brokerages', desc: 'Full-service and discount brokers for active traders' },
+              { icon: Briefcase, title: 'Robo-Advisors', desc: 'Automated investing with low fees and smart rebalancing' },
+              { icon: LineChart, title: 'Crypto Platforms', desc: 'Digital asset trading and DeFi opportunities' }
+            ].map((item) => (
+              <Card key={item.title} className="p-5 bg-white/5 border-white/10 backdrop-blur-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <item.icon className="h-5 w-5 text-[#d4af37]" />
+                  <h3 className="font-semibold text-white">{item.title}</h3>
+                </div>
+                <p className="text-white/70 text-sm">{item.desc}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* SECTION 5: Real Estate Concierge - Image Background */}
       <section className="relative py-12 lg:py-16 overflow-hidden bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -315,40 +349,6 @@ export default function Home() {
                     Learn More <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
                 </Link>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-      {/* SECTION 5: Investment Accounts */}
-      <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-900 via-slate-850 to-slate-800 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-10">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
-                <TrendingUp className="h-7 w-7" style={GOLD_ICON_STYLE} />
-              </div>
-            </div>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-white">
-              Investment Accounts
-            </h2>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
-              Compare brokerages, robo-advisors, and investment platforms matched to your goals
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {[
-              { icon: BarChart3, title: 'Brokerages', desc: 'Full-service and discount brokers for active traders' },
-              { icon: Briefcase, title: 'Robo-Advisors', desc: 'Automated investing with low fees and smart rebalancing' },
-              { icon: LineChart, title: 'Crypto Platforms', desc: 'Digital asset trading and DeFi opportunities' }
-            ].map((item) => (
-              <Card key={item.title} className="p-5 bg-white/5 border-white/10 backdrop-blur-sm">
-                <div className="flex items-center gap-2 mb-3">
-                  <item.icon className="h-5 w-5 text-[#d4af37]" />
-                  <h3 className="font-semibold text-white">{item.title}</h3>
-                </div>
-                <p className="text-white/70 text-sm">{item.desc}</p>
               </Card>
             ))}
           </div>

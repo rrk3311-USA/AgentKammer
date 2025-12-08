@@ -105,57 +105,6 @@ export function CreditCardShowcase() {
           </div>
         </div>
 
-        {/* Benefits Section - Bright & Vibrant */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <h3 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-white">
-              What You'll Unlock
-            </h3>
-            <p className="text-lg text-white/70 max-w-2xl mx-auto">
-              Exclusive benefits and rewards designed to maximize your financial advantage
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {benefits.map((benefit, idx) => {
-              const BenefitIcon = benefit.icon;
-              return (
-                <div
-                  key={idx}
-                  className="group relative p-6 rounded-xl backdrop-blur-sm border border-white/20 hover-elevate transition-all cursor-pointer"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 255, 136, 0.08) 100%)',
-                  }}
-                  data-testid={`benefit-card-${idx}`}
-                >
-                  {/* Gradient Border Effect */}
-                  <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-                    style={{
-                      background: 'linear-gradient(135deg, rgba(0, 212, 255, 0.3) 0%, rgba(0, 255, 136, 0.2) 100%)',
-                    }}
-                  />
-
-                  <div className="relative z-10 flex flex-col items-center text-center">
-                    {/* Icon Container - Bright Gradient */}
-                    <div className="mb-3 p-3 rounded-lg"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 255, 136, 0.15) 100%)',
-                      }}
-                    >
-                      <BenefitIcon className="h-6 w-6 text-cyan-300 group-hover:text-[#00ff88] transition-colors" />
-                    </div>
-
-                    {/* Label */}
-                    <p className="text-sm font-semibold text-white group-hover:text-[#00ff88] transition-colors">
-                      {benefit.label}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
         {/* Header */}
         <div className="text-center mb-12">
           <div className="mb-3">
@@ -301,7 +250,56 @@ export function CreditCardShowcase() {
           </div>
         </div>
 
-      
+        {/* Benefits Section - Bright & Vibrant at Bottom */}
+        <div className="mt-20">
+          <div className="text-center mb-12">
+            <h3 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-white">
+              What You'll Unlock
+            </h3>
+            <p className="text-lg text-white/70 max-w-2xl mx-auto">
+              Exclusive benefits and rewards designed to maximize your financial advantage
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {benefits.map((benefit, idx) => {
+              const BenefitIcon = benefit.icon;
+              return (
+                <div
+                  key={idx}
+                  className="group relative p-6 rounded-xl backdrop-blur-sm border border-white/20 hover-elevate transition-all cursor-pointer"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 255, 136, 0.08) 100%)',
+                  }}
+                  data-testid={`benefit-card-${idx}`}
+                >
+                  {/* Gradient Border Effect */}
+                  <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(0, 212, 255, 0.3) 0%, rgba(0, 255, 136, 0.2) 100%)',
+                    }}
+                  />
+
+                  <div className="relative z-10 flex flex-col items-center text-center">
+                    {/* Icon Container - Bright Gradient */}
+                    <div className="mb-3 p-3 rounded-lg"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 255, 136, 0.15) 100%)',
+                      }}
+                    >
+                      <BenefitIcon className="h-6 w-6 text-cyan-300 group-hover:text-[#00ff88] transition-colors" />
+                    </div>
+
+                    {/* Label */}
+                    <p className="text-sm font-semibold text-white group-hover:text-[#00ff88] transition-colors">
+                      {benefit.label}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );
