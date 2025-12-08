@@ -18,27 +18,42 @@ const codeSnippets = [
 ];
 
 export function AgenticEngineVisual() {
-  const [codeDrops, setCodeDrops] = useState<{ id: number; code: string; delay: number; direction: 'up' | 'down' }[]>([]);
+  const [codeDrops, setCodeDrops] = useState<{ id: number; code: string; delay: number; direction: 'up' | 'down'; spreadIndex: number }[]>([]);
   const [floatingCategories, setFloatingCategories] = useState<{ id: number; text: string; x: number; y: number; delay: number }[]>([]);
 
   useEffect(() => {
-    // Generate code drops - cascading up and down from center
-    const drops: Array<{ id: number; code: string; delay: number; direction: 'up' | 'down' }> = Array.from({ length: 12 }, (_, i) => ({
+    // Generate code drops - cascading up and down from center with horizontal spread
+    const drops: Array<{ id: number; code: string; delay: number; direction: 'up' | 'down'; spreadIndex: number }> = Array.from({ length: 12 }, (_, i) => ({
       id: i,
       code: codeSnippets[i % codeSnippets.length],
       delay: (i % 6) * 0.2,
-      direction: (i < 6 ? 'up' : 'down') as const
+      direction: (i < 6 ? 'up' : 'down') as 'up' | 'down',
+      spreadIndex: (i % 6) // 0-5 for spread position
     }));
     setCodeDrops(drops);
 
-    // Generate floating categories randomly
-    const categories = Array.from({ length: 10 }, (_, i) => ({
-      id: i,
-      text: productCategories[Math.floor(Math.random() * productCategories.length)],
-      x: 100 + Math.random() * 800,
-      y: 80 + Math.random() * 440,
-      delay: Math.random() * 3
-    }));
+    // Generate floating categories - more with some closer to core
+    const categories = Array.from({ length: 18 }, (_, i) => {
+      let x, y;
+      if (i < 8) {
+        // Categories closer to the core (center area)
+        const angle = (i / 8) * Math.PI * 2;
+        const radius = 80 + Math.random() * 80;
+        x = 485 + Math.cos(angle) * radius;
+        y = 210 + Math.sin(angle) * radius;
+      } else {
+        // Categories scattered throughout
+        x = 100 + Math.random() * 800;
+        y = 80 + Math.random() * 440;
+      }
+      return {
+        id: i,
+        text: productCategories[Math.floor(Math.random() * productCategories.length)],
+        x: Math.max(50, Math.min(950, x)),
+        y: Math.max(50, Math.min(550, y)),
+        delay: Math.random() * 3
+      };
+    });
     setFloatingCategories(categories);
   }, []);
 
@@ -88,8 +103,8 @@ export function AgenticEngineVisual() {
 
           {/* Breathing Core Glow - Center of Brain */}
           <circle
-            cx="500"
-            cy="240"
+            cx="485"
+            cy="210"
             r="30"
             fill="#00d4ff"
             opacity="0.6"
@@ -101,8 +116,8 @@ export function AgenticEngineVisual() {
           
           {/* Inner bright core */}
           <circle
-            cx="500"
-            cy="240"
+            cx="485"
+            cy="210"
             r="15"
             fill="#ffffff"
             opacity="0.8"
@@ -113,46 +128,52 @@ export function AgenticEngineVisual() {
           />
 
           {/* Cascading code from center - upward */}
-          {codeDrops.filter(d => d.direction === 'up').map((drop, idx) => (
-            <text
-              key={`code-up-${drop.id}`}
-              x="500"
-              y="240"
-              fontSize="12"
-              fill="#00ff88"
-              opacity="0.8"
-              fontFamily="monospace"
-              textAnchor="middle"
-              filter="url(#codeGlow)"
-              style={{
-                animation: `codeCascadeUp 4s ease-in infinite`,
-                animationDelay: `${drop.delay}s`,
-              }}
-            >
-              {drop.code}
-            </text>
-          ))}
+          {codeDrops.filter(d => d.direction === 'up').map((drop, idx) => {
+            const spreadAmount = (drop.spreadIndex - 2.5) * 80;
+            return (
+              <text
+                key={`code-up-${drop.id}`}
+                x="485"
+                y="210"
+                fontSize="12"
+                fill="#00ff88"
+                opacity="0.8"
+                fontFamily="monospace"
+                textAnchor="middle"
+                filter="url(#codeGlow)"
+                style={{
+                  animation: `codeCascadeUp${drop.spreadIndex} 4s ease-in infinite`,
+                  animationDelay: `${drop.delay}s`,
+                }}
+              >
+                {drop.code}
+              </text>
+            );
+          })}
 
           {/* Cascading code from center - downward */}
-          {codeDrops.filter(d => d.direction === 'down').map((drop, idx) => (
-            <text
-              key={`code-down-${drop.id}`}
-              x="500"
-              y="240"
-              fontSize="12"
-              fill="#00d4ff"
-              opacity="0.8"
-              fontFamily="monospace"
-              textAnchor="middle"
-              filter="url(#codeGlow)"
-              style={{
-                animation: `codeCascadeDown 4s ease-in infinite`,
-                animationDelay: `${drop.delay}s`,
-              }}
-            >
-              {drop.code}
-            </text>
-          ))}
+          {codeDrops.filter(d => d.direction === 'down').map((drop, idx) => {
+            const spreadAmount = (drop.spreadIndex - 2.5) * 80;
+            return (
+              <text
+                key={`code-down-${drop.id}`}
+                x="485"
+                y="210"
+                fontSize="12"
+                fill="#00d4ff"
+                opacity="0.8"
+                fontFamily="monospace"
+                textAnchor="middle"
+                filter="url(#codeGlow)"
+                style={{
+                  animation: `codeCascadeDown${drop.spreadIndex} 4s ease-in infinite`,
+                  animationDelay: `${drop.delay}s`,
+                }}
+              >
+                {drop.code}
+              </text>
+            );
+          })}
 
           {/* Floating category labels with glow */}
           {floatingCategories.map((cat) => (
@@ -260,39 +281,19 @@ export function AgenticEngineVisual() {
           }
         }
 
-        @keyframes codeCascadeUp {
-          0% {
-            transform: translateY(0);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(-150px);
-            opacity: 0;
-          }
-        }
+        @keyframes codeCascadeUp0 { 0% { transform: translateY(0) translateX(-80px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-150px) translateX(-80px); opacity: 0; } }
+        @keyframes codeCascadeUp1 { 0% { transform: translateY(0) translateX(-50px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-150px) translateX(-50px); opacity: 0; } }
+        @keyframes codeCascadeUp2 { 0% { transform: translateY(0) translateX(-20px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-150px) translateX(-20px); opacity: 0; } }
+        @keyframes codeCascadeUp3 { 0% { transform: translateY(0) translateX(20px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-150px) translateX(20px); opacity: 0; } }
+        @keyframes codeCascadeUp4 { 0% { transform: translateY(0) translateX(50px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-150px) translateX(50px); opacity: 0; } }
+        @keyframes codeCascadeUp5 { 0% { transform: translateY(0) translateX(80px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-150px) translateX(80px); opacity: 0; } }
 
-        @keyframes codeCascadeDown {
-          0% {
-            transform: translateY(0);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(150px);
-            opacity: 0;
-          }
-        }
+        @keyframes codeCascadeDown0 { 0% { transform: translateY(0) translateX(-80px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(150px) translateX(-80px); opacity: 0; } }
+        @keyframes codeCascadeDown1 { 0% { transform: translateY(0) translateX(-50px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(150px) translateX(-50px); opacity: 0; } }
+        @keyframes codeCascadeDown2 { 0% { transform: translateY(0) translateX(-20px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(150px) translateX(-20px); opacity: 0; } }
+        @keyframes codeCascadeDown3 { 0% { transform: translateY(0) translateX(20px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(150px) translateX(20px); opacity: 0; } }
+        @keyframes codeCascadeDown4 { 0% { transform: translateY(0) translateX(50px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(150px) translateX(50px); opacity: 0; } }
+        @keyframes codeCascadeDown5 { 0% { transform: translateY(0) translateX(80px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(150px) translateX(80px); opacity: 0; } }
 
         @keyframes categoryPulse {
           0%, 100% {
