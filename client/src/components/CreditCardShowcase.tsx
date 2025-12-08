@@ -70,7 +70,7 @@ export function CreditCardShowcase() {
     <section className="relative py-16 px-4 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-800">
       <div className="max-w-7xl mx-auto">
         {/* Strategy Pitch Section */}
-        <div className="mb-16 bg-white/5 border border-white/10 rounded-xl p-8 backdrop-blur-sm">
+        <div className="bg-white/5 border border-white/10 rounded-xl p-8 backdrop-blur-sm">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
@@ -103,21 +103,6 @@ export function CreditCardShowcase() {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="mb-3">
-            <h2 className="font-serif text-3xl md:text-5xl font-bold text-white">
-              Credit Cards That
-            </h2>
-            <h2 className="font-serif text-3xl md:text-5xl font-bold" style={{ background: 'linear-gradient(90deg, #00d4ff 0%, #00ff88 50%, #00d4ff 100%)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              Compete For You
-            </h2>
-          </div>
-          <p className="text-base md:text-xl text-white/70 max-w-3xl mx-auto">
-            100+ premium cards compared and ranked by your profile—from travel rewards to cashback to business advantages
-          </p>
         </div>
       </div>
     </section>
