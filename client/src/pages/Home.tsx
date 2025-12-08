@@ -74,16 +74,16 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* SECTION 1: Hero - Premium Style with Featured Card */}
-      <section className="relative py-12 md:py-20 px-4 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-700 overflow-hidden">
+      <section className="relative py-6 px-4 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-700 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(212,175,55,0.1),transparent_50%)]" />
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="font-serif text-5xl md:text-6xl font-bold mb-6 text-white">
+          <div className="text-center mb-6">
+            <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-white">
               Your AI Agent for Better{" "}
               <span style={{ color: '#d4af37' }}>Financial Outcomes</span>
             </h1>
-            <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
               One profile. Our Agentic Comparison Engine uses LLMs + compute to analyze offers and force banks, lenders, and financial products to{" "}
               <span className="text-[#d4af37] font-semibold">compete for you</span>.
             </p>
@@ -91,7 +91,7 @@ export default function Home() {
 
           {/* Featured Hero Card with Brain Visual & Animated Words */}
           <Card 
-            className="overflow-hidden border-0 mb-12 relative" 
+            className="overflow-hidden border-0 relative" 
             style={{ 
               background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
               backdropFilter: 'blur(20px)'
