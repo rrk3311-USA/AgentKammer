@@ -103,6 +103,39 @@ function BankAccountVisual({ offer }: { offer: ProductOffer }) {
   );
 }
 
+function BonusCardVisual({ offer }: { offer: ProductOffer }) {
+  const IconComponent = offer.issuerIcon ? (LucideIcons as any)[offer.issuerIcon] : Gift;
+  const gradientClasses = offer.cardColor || 'from-blue-700 via-blue-600 to-cyan-600';
+  const bonusAmount = offer.signupBonus?.replace(/[^0-9]/g, '') || '300';
+  
+  return (
+    <div className={`relative w-full aspect-[1.586/1] rounded-xl bg-gradient-to-br ${gradientClasses} p-6 shadow-xl overflow-hidden`}>
+      <div className="absolute inset-0" style={{
+        backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%)',
+        pointerEvents: 'none'
+      }} />
+      
+      <div className="relative h-full flex flex-col justify-between">
+        {/* Top: Icon */}
+        <div className="flex justify-end">
+          {IconComponent && (
+            <IconComponent className="h-8 w-8 text-white/70" />
+          )}
+        </div>
+        
+        {/* Center-Bottom: Large Bonus Amount */}
+        <div className="flex flex-col items-start justify-end">
+          <p className="text-white/60 text-xs uppercase tracking-wider font-semibold mb-1">Get a bonus</p>
+          <div className="flex items-baseline gap-1">
+            <span className="text-5xl font-bold text-white leading-none">${bonusAmount}</span>
+          </div>
+          <p className="text-white/80 text-xs mt-2 max-w-[85%] leading-tight">{offer.name}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 interface CategoryPageProps {
   categoryId: string;
 }
@@ -195,7 +228,8 @@ function ProductCard({ offer }: { offer: ProductOffer }) {
   const explanation = getMatchExplanation(offer, matchScore);
   const isCreditCard = offer.category === 'credit-cards';
   const isBanking = offer.category === 'banking';
-  const hasVisual = isCreditCard || isBanking;
+  const isInstantRewards = offer.category === 'investing' && offer.subcategory === 'Instant Rewards';
+  const hasVisual = isCreditCard || isBanking || isInstantRewards;
   
   return (
     <Card className="p-6 hover-elevate" data-testid={`card-offer-${offer.id}`}>
@@ -205,6 +239,7 @@ function ProductCard({ offer }: { offer: ProductOffer }) {
           <div className="lg:w-48 flex-shrink-0">
             {isCreditCard && <CreditCardVisual offer={offer} />}
             {isBanking && <BankAccountVisual offer={offer} />}
+            {isInstantRewards && <BonusCardVisual offer={offer} />}
           </div>
         )}
         
