@@ -280,34 +280,6 @@ export function Header() {
               </div>
             </div>
 
-            <div className="border-t pt-4">
-              <p className="text-xs font-semibold text-muted-foreground mb-3 uppercase">Market Data</p>
-              <Link href="/california-market" data-testid="link-mobile-california-market">
-                <span
-                  className="text-base font-medium hover:text-primary cursor-pointer block mb-3"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  California Market
-                </span>
-              </Link>
-              <Link href="/new-york-market" data-testid="link-mobile-new-york-market">
-                <span
-                  className="text-base font-medium hover:text-primary cursor-pointer block mb-3"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  NYC Market
-                </span>
-              </Link>
-              <Link href="/nevada-market" data-testid="link-mobile-nevada-market">
-                <span
-                  className="text-base font-medium hover:text-primary cursor-pointer block"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Nevada Market
-                </span>
-              </Link>
-            </div>
-
             <span
               className="text-base font-medium hover:text-primary cursor-pointer block pt-4"
               onClick={() => {
