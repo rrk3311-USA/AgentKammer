@@ -341,7 +341,7 @@ export function CreditCardShowcase() {
 
         {/* Benefits Collage */}
         <div className="mb-6">
-          <h3 className="text-3xl md:text-4xl font-bold mb-8 text-center" style={{ background: 'linear-gradient(90deg, #00d4ff 0%, #00ff88 50%, #00d4ff 100%)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>What You'll Unlock</h3>
+          <h3 className="text-3xl md:text-4xl font-bold mb-8 text-center text-[#00ff88]">What You'll Unlock</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {benefits.map((benefit, idx) => (
               <Card
@@ -355,9 +355,9 @@ export function CreditCardShowcase() {
                     background: `linear-gradient(135deg, rgba(212,175,55,0.1) 0%, rgba(212,175,55,0.05) 100%)`,
                   }}
                 >
-                  <benefit.icon className="h-6 w-6 text-[#d4af37]" />
+                  <benefit.icon className="h-6 w-6 text-white" />
                 </div>
-                <p className="text-base md:text-lg font-semibold" style={{ background: 'linear-gradient(90deg, #00d4ff 0%, #00ff88 50%, #00d4ff 100%)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{benefit.label}</p>
+                <p className="text-base md:text-lg font-semibold text-[#00ff88]">{benefit.label}</p>
               </Card>
             ))}
           </div>
