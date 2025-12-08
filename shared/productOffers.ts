@@ -20,6 +20,7 @@ export interface ProductOffer {
   cardImage?: string;
   issuerIcon?: string; // Lucide icon name for card issuer
   cardColor?: string; // Gradient or solid color for card display
+  finePrint?: string; // Important terms, conditions, or disclaimers
   rating: number;
 }
 
@@ -1414,6 +1415,7 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
     affiliateUrl: 'https://accounts.chase.com/consumer/raf/online/rafoffers?key=3305178565&src=N&jp_cmp=rb%2freferafriend%2fint%2frafcardlink%2fna',
     issuerIcon: 'Users',
     cardColor: 'from-blue-700 via-blue-600 to-cyan-600',
+    finePrint: 'Not available to existing Chase checking customers or those whose accounts have been closed within 90 days or closed with a negative balance within the last 3 years. Only one new checking bonus every two years from last coupon enrollment date, one bonus per account. Account subject to approval. No Monthly Service Fee when you have electronic deposits totaling $500+ each statement period. New accounts not charged Monthly Service Fee for first two statement periods. Actual bonus terms subject to Chase eligibility and current offer details.',
     rating: 4.5,
   },
   // Estate Planning Tools
