@@ -454,12 +454,6 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { 
-                id: 'credit-benefits', 
-                name: 'Credit Cards', 
-                icon: CreditCard, 
-                highlights: ['Airport lounges & travel', 'Fine dining credits', 'Premium cashback rewards']
-              },
-              { 
                 id: 'investing-benefits', 
                 name: 'Investment Accounts', 
                 icon: TrendingUp, 
@@ -470,6 +464,12 @@ export default function Home() {
                 name: 'Real Estate Concierge', 
                 icon: Building2, 
                 highlights: ['Luxury property access', 'Mortgage pre-approval', 'White-glove service']
+              },
+              { 
+                id: 'credit-benefits', 
+                name: 'Credit Cards', 
+                icon: CreditCard, 
+                highlights: ['Airport lounges & travel', 'Fine dining credits', 'Premium cashback rewards']
               }
             ].map((cat) => (
               <Card 
