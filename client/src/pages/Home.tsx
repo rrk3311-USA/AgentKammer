@@ -163,8 +163,16 @@ export default function Home() {
           </Card>
         </div>
       </section>
+
+      {/* Divider */}
+      <div className="bg-gradient-to-b from-cyan-300 to-slate-700 px-6 py-0">
+        <div className="max-w-7xl mx-auto">
+          <div className="h-px bg-gradient-to-r from-transparent via-slate-400/40 to-transparent" />
+        </div>
+      </div>
+
       {/* SECTION 2: Flagship Services - Digital Downloads Style */}
-      <section id="categories" className="relative py-16 px-4 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
+      <section id="categories" className="relative py-12 px-4 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
           <div className="text-center mb-10">
@@ -260,6 +268,14 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Divider */}
+      <div className="bg-slate-900 px-6 py-0">
+        <div className="max-w-7xl mx-auto">
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent" />
+        </div>
+      </div>
+
       {/* SECTION 3: Real Estate Concierge - Image Background */}
       <section className="relative py-12 lg:py-16 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800">
         <div 
