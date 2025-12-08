@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import brainImage from "@assets/image_1765086283557.png";
+import { Zap, Brain, Cpu, Code2 } from "lucide-react";
+import { SiReplit, SiAnthropic } from "react-icons/si";
 
 export function AgenticEngineVisual() {
   const [activeElements, setActiveElements] = useState<number[]>([]);
@@ -148,66 +150,40 @@ export function AgenticEngineVisual() {
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent opacity-70" />
         </div>
 
-        {/* Bottom caption with pixel clusters */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-slate-950 py-3 px-6 z-20 pointer-events-none">
-          <div className="flex items-center justify-center gap-4 md:gap-6">
-            {/* Left pixel cluster */}
-            <div className="flex flex-wrap gap-1 justify-end w-16 md:w-24 h-12">
-              {[...Array(12)].map((_, i) => {
-                const isGreen = Math.random() > 0.85;
-                const cyanShades = ['#22d3ee', '#06b6d4', '#0891b2', '#00d9ff', '#0ff0ff'];
-                const greenShades = ['#10b981', '#34d399', '#6ee7b7', '#a7f3d0'];
-                const color = isGreen 
-                  ? greenShades[Math.floor(Math.random() * greenShades.length)]
-                  : cyanShades[Math.floor(Math.random() * cyanShades.length)];
-                const delay = Math.random() * 3;
-                
-                return (
-                  <div
-                    key={`left-${i}`}
-                    className="w-1.5 h-1.5 md:w-2 md:h-2"
-                    style={{
-                      backgroundColor: color,
-                      opacity: 0.6 + Math.random() * 0.4,
-                      animation: `pixelFloat 3s ease-in-out infinite`,
-                      animationDelay: `${delay}s`,
-                      boxShadow: `0 0 4px ${color}`,
-                    }}
-                  />
-                );
-              })}
+        {/* Bottom caption - Agentic Deal Procurement */}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent py-6 px-6 z-20 pointer-events-none">
+          <div className="max-w-4xl mx-auto">
+            {/* Main heading with icons */}
+            <div className="flex items-center justify-center gap-3 md:gap-4 mb-6">
+              <Zap className="h-6 w-6 md:h-8 md:w-8 text-cyan-400 flex-shrink-0" />
+              <span className="text-lg md:text-2xl font-serif font-bold bg-gradient-to-r from-cyan-300 via-cyan-400 to-green-400 bg-clip-text text-transparent">
+                Agentic Deal Procurement
+              </span>
+              <Zap className="h-6 w-6 md:h-8 md:w-8 text-cyan-400 flex-shrink-0" />
             </div>
 
-            {/* Text */}
-            <span className="text-cyan-300 font-semibold text-sm md:text-base tracking-wide text-center whitespace-nowrap">
-              Agentic Deal Procurement
-            </span>
-
-            {/* Right pixel cluster */}
-            <div className="flex flex-wrap gap-1 justify-start w-16 md:w-24 h-12">
-              {[...Array(12)].map((_, i) => {
-                const isGreen = Math.random() > 0.85;
-                const cyanShades = ['#22d3ee', '#06b6d4', '#0891b2', '#00d9ff', '#0ff0ff'];
-                const greenShades = ['#10b981', '#34d399', '#6ee7b7', '#a7f3d0'];
-                const color = isGreen 
-                  ? greenShades[Math.floor(Math.random() * greenShades.length)]
-                  : cyanShades[Math.floor(Math.random() * cyanShades.length)];
-                const delay = Math.random() * 3;
-                
-                return (
-                  <div
-                    key={`right-${i}`}
-                    className="w-1.5 h-1.5 md:w-2 md:h-2"
-                    style={{
-                      backgroundColor: color,
-                      opacity: 0.6 + Math.random() * 0.4,
-                      animation: `pixelFloat 3s ease-in-out infinite`,
-                      animationDelay: `${delay}s`,
-                      boxShadow: `0 0 4px ${color}`,
-                    }}
-                  />
-                );
-              })}
+            {/* Tech Stack Grid - 4 columns, up to 3 rows */}
+            <div className="text-center mb-4">
+              <p className="text-cyan-300/70 text-xs md:text-sm font-medium tracking-wide uppercase mb-4">Powered By</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {[
+                  { icon: Brain, label: 'AI', color: 'text-cyan-400' },
+                  { icon: SiReplit, label: 'Replit', color: 'text-red-400', isSvg: true },
+                  { icon: SiAnthropic, label: 'Anthropic', color: 'text-purple-400', isSvg: true },
+                  { icon: Code2, label: 'Claude', color: 'text-amber-400' },
+                  { icon: Cpu, label: 'NVIDIA', color: 'text-green-400' },
+                ].map((tech, idx) => {
+                  const IconComponent = tech.icon;
+                  return (
+                    <div key={idx} className="flex flex-col items-center gap-1.5">
+                      <div className={`${tech.color} ${tech.isSvg ? '' : ''}`}>
+                        <IconComponent className="h-5 w-5 md:h-6 md:w-6" />
+                      </div>
+                      <span className="text-white/70 text-xs md:text-sm font-medium">{tech.label}</span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
