@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import brainImage from "@assets/image_1765086283557.png";
-import { Zap, Brain, Cpu, Code2 } from "lucide-react";
-import { SiReplit, SiAnthropic } from "react-icons/si";
+import { Zap, Brain, Cpu, Code2, Database } from "lucide-react";
+import { SiReplit, SiAnthropic, SiOpenai } from "react-icons/si";
 
 export function AgenticEngineVisual() {
   const [activeElements, setActiveElements] = useState<number[]>([]);
@@ -213,22 +213,23 @@ export function AgenticEngineVisual() {
             </div>
           </div>
 
-          {/* Tech Stack Below - Powered By */}
-          <div className="text-center mt-4 pt-3 border-t border-white/10">
-            <p className="text-cyan-300/70 text-xs md:text-sm font-medium tracking-wide uppercase mb-3">Powered By</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-xs mx-auto">
+          {/* Tech Stack Below */}
+          <div className="text-center mt-2 pt-2 border-t border-white/10">
+            <div className="grid grid-cols-4 gap-2 md:gap-3 max-w-md mx-auto">
               {[
                 { icon: Brain, label: 'AI', color: 'text-cyan-400' },
                 { icon: SiReplit, label: 'Replit', color: 'text-red-400', isSvg: true },
                 { icon: SiAnthropic, label: 'Anthropic', color: 'text-purple-400', isSvg: true },
                 { icon: Code2, label: 'Claude', color: 'text-amber-400' },
                 { icon: Cpu, label: 'NVIDIA', color: 'text-green-400' },
+                { icon: SiOpenai, label: 'OpenAI', color: 'text-white', isSvg: true },
+                { icon: Database, label: 'PostgreSQL', color: 'text-blue-400' },
               ].map((tech, idx) => {
                 const IconComponent = tech.icon;
                 return (
-                  <div key={idx} className="flex flex-col items-center gap-1">
+                  <div key={idx} className="flex flex-col items-center gap-0.5">
                     <div className={`${tech.color} ${tech.isSvg ? '' : ''}`}>
-                      <IconComponent className="h-4 w-4 md:h-5 md:w-5" />
+                      <IconComponent className="h-4 w-4" />
                     </div>
                     <span className="text-white/60 text-xs font-medium">{tech.label}</span>
                   </div>
