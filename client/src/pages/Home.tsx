@@ -117,7 +117,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 2: How It Works + Choose Your Category - Combined */}
-      <section id="categories" className="relative py-16 px-4 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
+      <section id="categories" className="relative py-8 px-4 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
         <div className="max-w-6xl mx-auto">
           {/* How It Works Header */}
           <div className="text-center mb-12">
