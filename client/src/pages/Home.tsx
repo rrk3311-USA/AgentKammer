@@ -339,7 +339,7 @@ export default function Home() {
         </div>
       </section>
       {/* SECTION 5: Investment Accounts */}
-      <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-800 via-slate-750 to-slate-700 px-4">
+      <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-900 via-slate-850 to-slate-800 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
             <div className="flex items-center justify-center mb-4">
