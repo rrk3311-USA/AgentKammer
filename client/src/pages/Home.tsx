@@ -129,13 +129,6 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { 
-                id: 'credit-cards', 
-                name: 'Credit Cards', 
-                icon: CreditCard, 
-                desc: 'AI-matched cards for your goals',
-                highlights: ['100+ cards analyzed', 'Fintech & crypto included', 'Personalized scoring']
-              },
-              { 
                 id: 'investing', 
                 name: 'Investing', 
                 icon: TrendingUp, 
@@ -148,6 +141,13 @@ export default function Home() {
                 icon: Building2, 
                 desc: 'Premium concierge services',
                 highlights: ['Mortgage optimization', 'Lender comparison', 'Rate watch alerts']
+              },
+              { 
+                id: 'credit-cards', 
+                name: 'Credit Cards', 
+                icon: CreditCard, 
+                desc: 'AI-matched cards for your goals',
+                highlights: ['100+ cards analyzed', 'Fintech & crypto included', 'Personalized scoring']
               }
             ].map((cat) => (
               <Link key={cat.id} href={`/${cat.id}`}>
