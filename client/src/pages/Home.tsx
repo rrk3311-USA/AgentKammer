@@ -392,8 +392,52 @@ export default function Home() {
               data-testid="img-travel"
             />
           </div>
-          <p className="text-center text-white/50 text-sm mb-8">Airport lounges • Fine dining • Luxury travel</p>
+          <p className="text-center text-white/50 text-sm mb-12">Airport lounges • Fine dining • Luxury travel</p>
 
+          {/* Comparison Table */}
+          <div className="overflow-x-auto mb-12 max-w-5xl mx-auto">
+            <table className="w-full text-sm border-collapse" data-testid="credit-cards-comparison-table">
+              <thead>
+                <tr className="border-b border-white/20">
+                  <th className="text-left py-4 px-4 text-white font-semibold">Card Type</th>
+                  <th className="text-center py-4 px-4 text-white font-semibold">APR Range</th>
+                  <th className="text-center py-4 px-4 text-white font-semibold">Welcome Bonus</th>
+                  <th className="text-center py-4 px-4 text-white font-semibold">Rewards Rate</th>
+                  <th className="text-center py-4 px-4 text-white font-semibold">Annual Fee</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-white/10 hover:bg-white/5 transition-colors" data-testid="card-row-travel">
+                  <td className="py-4 px-4 text-white font-medium">Travel Rewards</td>
+                  <td className="text-center py-4 px-4 text-white/70">17-24%</td>
+                  <td className="text-center py-4 px-4 text-[#00ff88]">50K-150K pts</td>
+                  <td className="text-center py-4 px-4 text-white/70">3-5x</td>
+                  <td className="text-center py-4 px-4 text-white/70">$95-$450</td>
+                </tr>
+                <tr className="border-b border-white/10 hover:bg-white/5 transition-colors" data-testid="card-row-cashback">
+                  <td className="py-4 px-4 text-white font-medium">Cashback</td>
+                  <td className="text-center py-4 px-4 text-white/70">15-22%</td>
+                  <td className="text-center py-4 px-4 text-[#00ff88]">$200-$500</td>
+                  <td className="text-center py-4 px-4 text-white/70">1.5-5%</td>
+                  <td className="text-center py-4 px-4 text-white/70">$0-$95</td>
+                </tr>
+                <tr className="border-b border-white/10 hover:bg-white/5 transition-colors" data-testid="card-row-business">
+                  <td className="py-4 px-4 text-white font-medium">Business</td>
+                  <td className="text-center py-4 px-4 text-white/70">16-25%</td>
+                  <td className="text-center py-4 px-4 text-[#00ff88]">75K-200K pts</td>
+                  <td className="text-center py-4 px-4 text-white/70">2-5x</td>
+                  <td className="text-center py-4 px-4 text-white/70">$95-$595</td>
+                </tr>
+                <tr className="hover:bg-white/5 transition-colors" data-testid="card-row-balance">
+                  <td className="py-4 px-4 text-white font-medium">Balance Transfer</td>
+                  <td className="text-center py-4 px-4 text-[#00d4ff]">0% for 12-21mo</td>
+                  <td className="text-center py-4 px-4 text-white/70">None</td>
+                  <td className="text-center py-4 px-4 text-white/70">1-2%</td>
+                  <td className="text-center py-4 px-4 text-white/70">$0-$99</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <div className="text-center">
             <Link href="/credit-cards">
