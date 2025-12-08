@@ -452,9 +452,13 @@ export default function Home() {
       </section>
       {/* SECTION 7: Credit Card Showcase */}
       <CreditCardShowcase />
-      {/* SECTION 8: Final CTA - Dark Navy */}
-      <section className="py-8 lg:py-12 bg-gradient-to-b from-slate-900 to-slate-950 text-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 relative">
+      {/* SECTION 8: Final CTA - Bright Gradient */}
+      <section className="py-8 lg:py-12 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white relative overflow-hidden">
+        {/* Bright gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/10 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00d4ff]/5 to-transparent pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center">
             <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4 relative inline-block">
               <span className="relative">
@@ -462,7 +466,7 @@ export default function Home() {
                 <div 
                   className="absolute inset-0 overflow-visible pointer-events-none"
                   style={{
-                    background: 'radial-gradient(circle, rgba(212,175,55,0.6) 0%, rgba(244,208,63,0.3) 30%, transparent 70%)',
+                    background: 'radial-gradient(circle, rgba(0,212,255,0.5) 0%, rgba(0,255,136,0.2) 30%, transparent 70%)',
                     animation: 'sonarPulse 8s ease-in-out infinite',
                     mixBlendMode: 'screen',
                     filter: 'blur(1px)',
@@ -471,7 +475,7 @@ export default function Home() {
                 <div 
                   className="absolute inset-0 overflow-hidden pointer-events-none"
                   style={{
-                    background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.2) 45%, rgba(244,208,63,0.5) 50%, rgba(212,175,55,0.2) 55%, transparent 100%)',
+                    background: 'linear-gradient(90deg, transparent 0%, rgba(0,212,255,0.15) 45%, rgba(0,255,136,0.4) 50%, rgba(0,212,255,0.15) 55%, transparent 100%)',
                     animation: 'slowScan 10s ease-in-out infinite',
                     mixBlendMode: 'screen',
                   }}
@@ -492,14 +496,17 @@ export default function Home() {
                 75% { transform: scale(1.2); opacity: 0.4; }
               }
             `}</style>
-            <p className="text-lg mb-8 opacity-90">
+            <p className="text-lg mb-8 text-white/90">
               Build your Agentic Profile and unlock personalized recommendations across all financial categories
             </p>
             
             <Link href="/profile">
               <Button
                 size="lg"
-                className="h-12 px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-black font-semibold hover:opacity-90"
+                className="h-12 px-8 text-black font-semibold hover:opacity-90"
+                style={{
+                  background: 'linear-gradient(135deg, #00d4ff 0%, #00ff88 100%)',
+                }}
                 data-testid="button-dashboard"
               >
                 <Brain className="h-5 w-5 mr-2" />
