@@ -10,6 +10,12 @@ const creditCards = [
   { name: "Executive Black", issuer: "Luxury Banker", color: "from-gray-900 to-black", accent: "#d4af37" },
   { name: "Entrepreneur's Edge", issuer: "Business Finance", color: "from-purple-600 to-purple-700", accent: "#a78bfa" },
   { name: "Premium Visa", issuer: "First Capital", color: "from-indigo-600 to-indigo-700", accent: "#818cf8" },
+  { name: "Business Elite", issuer: "Corporate Finance", color: "from-orange-600 to-amber-600", accent: "#fb923c" },
+  { name: "Student Plus", issuer: "Future Bank", color: "from-cyan-600 to-blue-500", accent: "#06b6d4" },
+  { name: "Rewards Max", issuer: "Premium Partners", color: "from-pink-600 to-rose-600", accent: "#ec4899" },
+  { name: "Luxury Card", issuer: "Wealth Management", color: "from-slate-700 to-slate-900", accent: "#d4af37" },
+  { name: "Flex Rewards", issuer: "Credit Solutions", color: "from-teal-600 to-cyan-600", accent: "#14b8a6" },
+  { name: "Signature Reserve", issuer: "Elite Banking", color: "from-amber-700 to-yellow-600", accent: "#d4af37" },
 ];
 
 const benefits = [
@@ -25,6 +31,7 @@ export function CreditCardShowcase() {
   const scrollContainer = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const checkScroll = () => {
     if (scrollContainer.current) {
@@ -33,6 +40,12 @@ export function CreditCardShowcase() {
         scrollContainer.current.scrollLeft < 
         scrollContainer.current.scrollWidth - scrollContainer.current.clientWidth - 10
       );
+      
+      // Calculate scroll progress for dot navigation
+      const scrollPercentage = 
+        (scrollContainer.current.scrollLeft / 
+        (scrollContainer.current.scrollWidth - scrollContainer.current.clientWidth)) * 100;
+      setScrollProgress(scrollPercentage);
     }
   };
 
@@ -132,8 +145,12 @@ export function CreditCardShowcase() {
           {/* Cards Container */}
           <div
             ref={scrollContainer}
-            className="flex gap-6 overflow-x-auto scroll-smooth px-12 pb-4"
-            style={{ scrollBehavior: "smooth" }}
+            className="flex gap-6 overflow-x-auto scroll-smooth px-12 pb-8"
+            style={{ 
+              scrollBehavior: "smooth",
+              scrollbarWidth: "auto",
+              scrollbarColor: "#d4af37 rgba(15, 23, 42, 0.3)"
+            } as React.CSSProperties}
             onScroll={checkScroll}
             data-testid="carousel-credit-cards"
           >
@@ -185,6 +202,41 @@ export function CreditCardShowcase() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Scroll Indicator Dots */}
+          <style>{`
+            div[data-testid="carousel-credit-cards"]::-webkit-scrollbar {
+              height: 6px;
+            }
+            div[data-testid="carousel-credit-cards"]::-webkit-scrollbar-track {
+              background: rgba(15, 23, 42, 0.3);
+              border-radius: 10px;
+            }
+            div[data-testid="carousel-credit-cards"]::-webkit-scrollbar-thumb {
+              background: linear-gradient(135deg, #d4af37 0%, #c9a02e 100%);
+              border-radius: 10px;
+            }
+            div[data-testid="carousel-credit-cards"]::-webkit-scrollbar-thumb:hover {
+              background: linear-gradient(135deg, #e0c158 0%, #d4af37 100%);
+            }
+          `}</style>
+
+          {/* Dot Navigation */}
+          <div className="flex justify-center gap-2 mt-6" data-testid="scroll-dots-navigation">
+            {Array.from({ length: 12 }).map((_, idx) => {
+              const dotProgress = (idx / 11) * 100;
+              const isActive = scrollProgress >= dotProgress - 10 && scrollProgress <= dotProgress + 10;
+              return (
+                <div
+                  key={idx}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    isActive ? 'w-6 bg-[#d4af37]' : 'w-2 bg-white/30'
+                  }`}
+                  data-testid={`dot-${idx}`}
+                />
+              );
+            })}
           </div>
         </div>
 
