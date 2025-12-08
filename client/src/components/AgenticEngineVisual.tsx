@@ -1,6 +1,6 @@
 import brainImage from "@assets/image_1765086283557.png";
-import { Zap, Brain, Cpu, Code2, Sparkles } from "lucide-react";
-import { SiReplit, SiAnthropic } from "react-icons/si";
+import { Brain } from "lucide-react";
+import { SiReplit, SiAnthropic, SiClaude, SiNvidia } from "react-icons/si";
 
 export function AgenticEngineVisual() {
   return (
@@ -17,53 +17,46 @@ export function AgenticEngineVisual() {
           loading="eager"
         />
 
-        {/* Fade overlays for edges */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-950 to-transparent opacity-70" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-950 to-transparent opacity-70" />
-          <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-slate-950 via-slate-950/30 to-transparent opacity-60" />
-          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent opacity-70" />
-        </div>
+        {/* Bottom 20% overlay with gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-1/5 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent" />
 
-        {/* Bottom footer bar */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
-          {/* Gradient divider */}
-          <div className="h-1 w-full bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-50" />
+        {/* Powered By section - positioned in bottom 20% */}
+        <div className="absolute bottom-0 left-0 right-0 z-20">
+          {/* Top gradient divider */}
+          <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
           
-          {/* Footer content */}
-          <div className="bg-slate-950/90 backdrop-blur-sm py-3 px-6">
-            <div className="flex flex-col items-center gap-2">
-              <span className="text-cyan-300 font-semibold text-sm md:text-base tracking-wide text-center whitespace-nowrap">
-                Agentic Deal Procurement
-              </span>
-
-              {/* Tech Stack Grid - 4 columns, 2 rows */}
-              <div className="text-center">
-                <div className="grid grid-cols-4 gap-2 max-w-sm mx-auto">
-                  {[
-                    { icon: Brain, label: 'AI', color: 'text-cyan-400' },
-                    { icon: SiReplit, label: 'Replit', color: 'text-red-400', isSvg: true },
-                    { icon: SiAnthropic, label: 'Anthropic', color: 'text-purple-400', isSvg: true },
-                    { icon: Code2, label: 'Claude', color: 'text-amber-400' },
-                    { icon: Cpu, label: 'NVIDIA', color: 'text-green-400' },
-                    { icon: Sparkles, label: 'Grok', color: 'text-yellow-400' },
-                    { icon: Zap, label: 'LLM API', color: 'text-blue-400' },
-                    { icon: Code2, label: 'API', color: 'text-lime-400' },
-                  ].map((tech, idx) => {
-                    const IconComponent = tech.icon;
-                    return (
-                      <div key={idx} className="flex flex-col items-center gap-0.5">
-                        <div className={`${tech.color}`}>
-                          <IconComponent className="h-4 w-4" />
-                        </div>
-                        <span className="text-white/70 text-xs font-medium">{tech.label}</span>
-                      </div>
-                    );
-                  })}
+          {/* Content */}
+          <div className="bg-[#0a1628] py-2">
+            <div className="max-w-7xl mx-auto px-4 md:px-6">
+              <div className="flex flex-col items-center gap-1">
+                <div className="flex items-center gap-1.5 text-white/90">
+                  <Brain className="h-4 w-4 text-[#79d3ff]" />
+                  <span className="text-[0.625rem] font-medium">Powered by AI</span>
+                </div>
+                <div className="flex items-center gap-2 md:gap-4 flex-wrap justify-center text-[0.625rem]">
+                  <div className="flex items-center gap-1 text-white/90">
+                    <SiReplit className="h-3.5 w-3.5" />
+                    <span className="font-medium">Replit</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-white/90">
+                    <SiAnthropic className="h-3.5 w-3.5" />
+                    <span className="font-medium">Anthropic</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-white/90">
+                    <SiClaude className="h-3.5 w-3.5" />
+                    <span className="font-medium">Claude</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-white/90">
+                    <SiNvidia className="h-3.5 w-3.5" />
+                    <span className="font-medium">NVIDIA</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+          {/* Bottom gradient divider */}
+          <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
         </div>
       </div>
     </div>
