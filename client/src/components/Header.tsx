@@ -153,12 +153,11 @@ export function Header() {
           {/* Center Logo */}
           <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
             <div className="flex flex-col items-center px-3 py-2">
-              <div className="mb-0.5 text-2xl">
+              <div className="mb-0 text-3xl">
                 🎩
               </div>
-              <div className="flex flex-col items-center">
-                <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700 }} className="text-lg md:text-xl tracking-wide text-foreground">AGENT KAMMER</span>
-                <span className="text-[0.55rem] md:text-[0.6rem] font-semibold tracking-wide text-[#d4af37]">Agentic Deal Procurement</span>
+              <div className="flex flex-col items-center pl-1 -mt-1">
+                <span style={{ fontFamily: 'var(--font-display)', fontWeight: 900 }} className="text-2xl md:text-3xl tracking-wide text-foreground">AGENT KAMMER</span>
               </div>
             </div>
           </Link>
