@@ -388,60 +388,83 @@ export default function Home() {
           </div>
           <p className="text-center text-white/50 text-sm mb-12">Airport lounges • Fine dining • Luxury travel</p>
 
-          {/* Cards Grid - 3 Columns */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-5xl mx-auto">
-            {[
-              { name: 'Platinum Rewards', issuer: 'Global Bank', color: 'from-blue-500 to-cyan-400' },
-              { name: 'Travel Elite', issuer: 'International Airways', color: 'from-sky-400 to-blue-500' },
-              { name: 'Premium Cashback', issuer: 'Finance Corp', color: 'from-emerald-400 to-teal-500' },
-            ].map((card, idx) => (
-              <div key={idx} className="flex flex-col" data-testid={`card-featured-${idx}`}>
-                <div
-                  className={`bg-gradient-to-br ${card.color} rounded-2xl p-6 h-40 relative overflow-hidden shadow-xl hover-elevate transition-all`}
-                >
-                  <div className="absolute top-4 right-4 text-white/30">
-                    <div className="text-2xl font-bold opacity-50">{card.issuer.charAt(0)}</div>
-                  </div>
-                  <div className="relative z-10 h-full flex flex-col justify-between">
-                    <div>
-                      <div className="text-white/70 text-xs mb-1">{card.issuer}</div>
-                      <h3 className="text-lg font-bold text-white">{card.name}</h3>
-                    </div>
-                    <div className="flex gap-2">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div key={i} className="flex-1 h-1.5 bg-white/20 rounded opacity-50" />
-                      ))}
-                    </div>
-                  </div>
-                  <div className="absolute bottom-4 left-4 w-8 h-6 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded opacity-80" />
-                </div>
-                <div className="mt-3 flex gap-3">
-                  <div className="px-2 py-1 rounded-full text-xs font-semibold text-white border border-cyan-300/50"
-                    style={{ background: 'linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 255, 136, 0.15) 100%)' }}
-                  >
-                    0% APR
-                  </div>
-                  <div className="px-2 py-1 rounded-full text-xs font-semibold text-white border border-cyan-300/50"
-                    style={{ background: 'linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 255, 136, 0.15) 100%)' }}
-                  >
-                    Rewards
-                  </div>
-                </div>
-              </div>
-            ))}
+          {/* Competitor Comparison Table */}
+          <div className="mb-12 max-w-6xl mx-auto overflow-x-auto">
+            <table className="w-full text-sm border-collapse" data-testid="competitor-comparison-table">
+              <thead>
+                <tr className="border-b-2 border-white/20">
+                  <th className="text-left py-4 px-4 text-white font-semibold">Feature</th>
+                  <th className="text-center py-4 px-4 font-semibold" style={{ color: '#d4af37' }}>Agent Kammer</th>
+                  <th className="text-center py-4 px-4 text-white/70 font-medium">NerdWallet</th>
+                  <th className="text-center py-4 px-4 text-white/70 font-medium">Bankrate</th>
+                  <th className="text-center py-4 px-4 text-white/70 font-medium">LendingClub</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { feature: 'AI-Powered Matching', kammer: true, nerdwallet: 'Limited', bankrate: false, lending: false },
+                  { feature: '100+ Card Options', kammer: true, nerdwallet: '~50', bankrate: '~40', lending: 'N/A' },
+                  { feature: '14 Financial Categories', kammer: true, nerdwallet: '6-8', bankrate: '8-10', lending: '1-2' },
+                  { feature: 'Advanced Rate Watch', kammer: true, nerdwallet: 'Basic', bankrate: 'Basic', lending: 'None' },
+                  { feature: 'Personalized Profile', kammer: true, nerdwallet: 'Limited', bankrate: 'Limited', lending: 'Limited' },
+                ].map((row, idx) => (
+                  <tr key={idx} className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                    <td className="py-4 px-4 text-white font-medium">{row.feature}</td>
+                    <td className="text-center py-4 px-4">
+                      {row.kammer === true ? (
+                        <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold" style={{ background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)', color: '#0a1628' }}>
+                          Yes
+                        </span>
+                      ) : (
+                        <span className="text-white/50">N/A</span>
+                      )}
+                    </td>
+                    <td className="text-center py-4 px-4 text-white/50">{row.nerdwallet}</td>
+                    <td className="text-center py-4 px-4 text-white/50">{row.bankrate}</td>
+                    <td className="text-center py-4 px-4 text-white/50">{row.lending}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
 
-          {/* Scroll Indicator Dots */}
-          <div className="flex justify-center gap-2 mb-12">
-            {[0, 1, 2].map((idx) => (
-              <div
-                key={idx}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  idx === 0 ? 'w-6 bg-[#d4af37]' : 'w-2 bg-white/30'
-                }`}
-                data-testid={`dot-card-${idx}`}
-              />
-            ))}
+          {/* Competitive Landscape Slider */}
+          <div className="mb-12 max-w-4xl mx-auto">
+            <div className="bg-white/5 border border-white/10 rounded-lg p-8 backdrop-blur-sm">
+              <h3 className="text-center text-white font-semibold mb-6">Why Agent Kammer Wins</h3>
+              
+              {/* Slider bar showing competitive positioning */}
+              <div className="space-y-6">
+                {[
+                  { label: 'Card Coverage', kammer: 95, competitors: 45 },
+                  { label: 'AI Intelligence', kammer: 90, competitors: 35 },
+                  { label: 'Category Range', kammer: 100, competitors: 55 },
+                  { label: 'Personalization', kammer: 92, competitors: 40 },
+                ].map((metric, idx) => (
+                  <div key={idx}>
+                    <div className="flex justify-between mb-2">
+                      <span className="text-white/80 text-sm">{metric.label}</span>
+                      <span className="text-white/60 text-xs">Agent Kammer</span>
+                    </div>
+                    <div className="relative h-2 bg-white/10 rounded-full overflow-hidden">
+                      {/* Competitor baseline */}
+                      <div
+                        className="absolute h-full bg-white/20 rounded-full"
+                        style={{ width: `${metric.competitors}%` }}
+                      />
+                      {/* Agent Kammer bar */}
+                      <div
+                        className="absolute h-full rounded-full transition-all duration-700"
+                        style={{
+                          width: `${metric.kammer}%`,
+                          background: 'linear-gradient(90deg, #d4af37 0%, #f4d03f 100%)',
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="text-center">
