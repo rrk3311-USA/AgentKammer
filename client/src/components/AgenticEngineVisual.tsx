@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import brainImage from "@assets/image_1765086283557.png";
-import { Zap, Brain, Cpu, Code2, Database } from "lucide-react";
-import { SiReplit, SiAnthropic, SiOpenai } from "react-icons/si";
+import { Zap, Brain, Cpu, Code2, Sparkles } from "lucide-react";
+import { SiReplit, SiAnthropic } from "react-icons/si";
 
 export function AgenticEngineVisual() {
   const [activeElements, setActiveElements] = useState<number[]>([]);
+  const [pulsingDots, setPulsingDots] = useState<number[]>([]);
 
   const elements = [
     { id: 1, x: "15%", y: "25%", label: "Networks" },
@@ -30,6 +31,22 @@ export function AgenticEngineVisual() {
     }, 2000);
 
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const dotInterval = setInterval(() => {
+      const numDots = Math.floor(Math.random() * 4) + 2;
+      const newDots: number[] = [];
+      for (let i = 0; i < numDots; i++) {
+        const randomDot = Math.floor(Math.random() * 12);
+        if (!newDots.includes(randomDot)) {
+          newDots.push(randomDot);
+        }
+      }
+      setPulsingDots(newDots);
+    }, 1500);
+
+    return () => clearInterval(dotInterval);
   }, []);
 
   return (
@@ -113,6 +130,13 @@ export function AgenticEngineVisual() {
                   <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
+              <filter id="codeStreakGlow">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
             </defs>
 
             {/* Animated connecting lines */}
@@ -139,6 +163,89 @@ export function AgenticEngineVisual() {
                 />
               );
             })}
+
+            {/* Code streaks coming down from brain */}
+            {[0, 1, 2].map((idx) => (
+              <line
+                key={`streak-${idx}`}
+                x1="500"
+                y1="210"
+                x2={`${450 + idx * 50}`}
+                y2="420"
+                stroke="#00ff88"
+                strokeWidth="2"
+                opacity="0.6"
+                filter="url(#codeStreakGlow)"
+                style={{
+                  animation: `codeStreak 2.5s ease-in-out infinite`,
+                  animationDelay: `${idx * 0.3}s`,
+                }}
+              />
+            ))}
+
+            {/* Horizontal line through right orb */}
+            <line
+              x1="800"
+              y1="240"
+              x2="900"
+              y2="240"
+              stroke="#00d4ff"
+              strokeWidth="2"
+              opacity="0.5"
+              filter="url(#codeStreakGlow)"
+              style={{
+                animation: `orbitPulse 2s ease-in-out infinite`,
+              }}
+            />
+
+            {/* Streaks from right orb */}
+            <line
+              x1="850"
+              y1="240"
+              x2="750"
+              y2="150"
+              stroke="#00d4ff"
+              strokeWidth="1.5"
+              opacity="0.4"
+              style={{
+                animation: `orbStreakLeft 2.5s ease-in-out infinite`,
+              }}
+            />
+            <line
+              x1="850"
+              y1="240"
+              x2="750"
+              y2="330"
+              stroke="#00d4ff"
+              strokeWidth="1.5"
+              opacity="0.4"
+              style={{
+                animation: `orbStreakRight 2.5s ease-in-out infinite`,
+              }}
+            />
+
+            {/* Circuit dots/nodes */}
+            {[...Array(12)].map((_, idx) => {
+              const angle = (idx / 12) * Math.PI * 2;
+              const cx = 500 + Math.cos(angle) * 150;
+              const cy = 300 + Math.sin(angle) * 120;
+              const isPulsing = pulsingDots.includes(idx);
+
+              return (
+                <circle
+                  key={`dot-${idx}`}
+                  cx={cx}
+                  cy={cy}
+                  r="4"
+                  fill="#22d3ee"
+                  opacity={isPulsing ? "0.8" : "0.3"}
+                  style={{
+                    transition: "opacity 0.5s ease",
+                    filter: "url(#elementGlow)",
+                  }}
+                />
+              );
+            })}
           </svg>
         </div>
 
@@ -150,88 +257,34 @@ export function AgenticEngineVisual() {
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent opacity-70" />
         </div>
 
-        {/* Bottom caption with pixel clusters */}
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-slate-950 py-3 px-6 z-20 pointer-events-none">
-          <div className="flex items-center justify-center gap-4 md:gap-6">
-            {/* Left pixel cluster */}
-            <div className="flex flex-wrap gap-1 justify-end w-16 md:w-24 h-12">
-              {[...Array(12)].map((_, i) => {
-                const isGreen = Math.random() > 0.85;
-                const cyanShades = ['#22d3ee', '#06b6d4', '#0891b2', '#00d9ff', '#0ff0ff'];
-                const greenShades = ['#10b981', '#34d399', '#6ee7b7', '#a7f3d0'];
-                const color = isGreen 
-                  ? greenShades[Math.floor(Math.random() * greenShades.length)]
-                  : cyanShades[Math.floor(Math.random() * cyanShades.length)];
-                const delay = Math.random() * 3;
-                
-                return (
-                  <div
-                    key={`left-${i}`}
-                    className="w-1.5 h-1.5 md:w-2 md:h-2"
-                    style={{
-                      backgroundColor: color,
-                      opacity: 0.6 + Math.random() * 0.4,
-                      animation: `pixelFloat 3s ease-in-out infinite`,
-                      animationDelay: `${delay}s`,
-                      boxShadow: `0 0 4px ${color}`,
-                    }}
-                  />
-                );
-              })}
-            </div>
-
-            {/* Text */}
+        {/* Bottom caption - Agentic Deal Procurement Text Only */}
+        <div className="absolute bottom-0 left-0 right-0 bg-transparent py-2 px-6 z-20 pointer-events-none">
+          <div className="flex items-center justify-center gap-2 mb-2">
             <span className="text-cyan-300 font-semibold text-sm md:text-base tracking-wide text-center whitespace-nowrap">
               Agentic Deal Procurement
             </span>
-
-            {/* Right pixel cluster */}
-            <div className="flex flex-wrap gap-1 justify-start w-16 md:w-24 h-12">
-              {[...Array(12)].map((_, i) => {
-                const isGreen = Math.random() > 0.85;
-                const cyanShades = ['#22d3ee', '#06b6d4', '#0891b2', '#00d9ff', '#0ff0ff'];
-                const greenShades = ['#10b981', '#34d399', '#6ee7b7', '#a7f3d0'];
-                const color = isGreen 
-                  ? greenShades[Math.floor(Math.random() * greenShades.length)]
-                  : cyanShades[Math.floor(Math.random() * cyanShades.length)];
-                const delay = Math.random() * 3;
-                
-                return (
-                  <div
-                    key={`right-${i}`}
-                    className="w-1.5 h-1.5 md:w-2 md:h-2"
-                    style={{
-                      backgroundColor: color,
-                      opacity: 0.6 + Math.random() * 0.4,
-                      animation: `pixelFloat 3s ease-in-out infinite`,
-                      animationDelay: `${delay}s`,
-                      boxShadow: `0 0 4px ${color}`,
-                    }}
-                  />
-                );
-              })}
-            </div>
           </div>
 
-          {/* Tech Stack Below */}
-          <div className="text-center mt-2 pt-2 border-t border-white/10">
-            <div className="grid grid-cols-4 gap-2 md:gap-3 max-w-md mx-auto">
+          {/* Tech Stack Grid - 4 columns, 3 rows max */}
+          <div className="text-center">
+            <div className="grid grid-cols-4 gap-2 max-w-sm mx-auto">
               {[
                 { icon: Brain, label: 'AI', color: 'text-cyan-400' },
                 { icon: SiReplit, label: 'Replit', color: 'text-red-400', isSvg: true },
                 { icon: SiAnthropic, label: 'Anthropic', color: 'text-purple-400', isSvg: true },
                 { icon: Code2, label: 'Claude', color: 'text-amber-400' },
                 { icon: Cpu, label: 'NVIDIA', color: 'text-green-400' },
-                { icon: SiOpenai, label: 'OpenAI', color: 'text-white', isSvg: true },
-                { icon: Database, label: 'PostgreSQL', color: 'text-blue-400' },
+                { icon: Sparkles, label: 'Grok', color: 'text-yellow-400' },
+                { icon: Zap, label: 'LLM API', color: 'text-blue-400' },
+                { icon: Code2, label: 'API', color: 'text-lime-400' },
               ].map((tech, idx) => {
                 const IconComponent = tech.icon;
                 return (
                   <div key={idx} className="flex flex-col items-center gap-0.5">
-                    <div className={`${tech.color} ${tech.isSvg ? '' : ''}`}>
+                    <div className={`${tech.color}`}>
                       <IconComponent className="h-4 w-4" />
                     </div>
-                    <span className="text-white/60 text-xs font-medium">{tech.label}</span>
+                    <span className="text-white/70 text-xs font-medium">{tech.label}</span>
                   </div>
                 );
               })}
@@ -242,21 +295,81 @@ export function AgenticEngineVisual() {
         <style>{`
           @keyframes glow-pulse {
             0%, 100% {
-              box-shadow: 0 0 5px rgba(34, 211, 238, 0.2), inset 0 0 10px rgba(34, 211, 238, 0.1);
+              box-shadow: 0 0 10px rgba(34, 211, 238, 0.4), inset 0 0 15px rgba(34, 211, 238, 0.2);
               transform: scale(1);
             }
             50% {
-              box-shadow: 0 0 25px rgba(34, 211, 238, 0.7), inset 0 0 25px rgba(34, 211, 238, 0.4);
-              transform: scale(1.05);
+              box-shadow: 0 0 35px rgba(34, 211, 238, 0.9), inset 0 0 35px rgba(34, 211, 238, 0.6);
+              transform: scale(1.08);
             }
           }
 
           @keyframes core-glow {
             0%, 100% {
-              opacity: 0.3;
+              opacity: 0.4;
             }
             50% {
-              opacity: 0.7;
+              opacity: 0.9;
+            }
+          }
+
+          @keyframes codeStreak {
+            0% {
+              opacity: 0;
+              transform: translateY(-30px);
+            }
+            30% {
+              opacity: 0.8;
+            }
+            70% {
+              opacity: 0.8;
+            }
+            100% {
+              opacity: 0;
+              transform: translateY(100px);
+            }
+          }
+
+          @keyframes orbitPulse {
+            0%, 100% {
+              stroke-width: 2;
+              opacity: 0.4;
+            }
+            50% {
+              stroke-width: 3;
+              opacity: 0.8;
+            }
+          }
+
+          @keyframes orbStreakLeft {
+            0% {
+              opacity: 0;
+              x1: 850;
+              y1: 240;
+            }
+            50% {
+              opacity: 0.6;
+            }
+            100% {
+              opacity: 0;
+              x1: 700;
+              y1: 120;
+            }
+          }
+
+          @keyframes orbStreakRight {
+            0% {
+              opacity: 0;
+              x1: 850;
+              y1: 240;
+            }
+            50% {
+              opacity: 0.6;
+            }
+            100% {
+              opacity: 0;
+              x1: 700;
+              y1: 360;
             }
           }
 
