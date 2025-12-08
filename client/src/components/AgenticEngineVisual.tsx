@@ -53,31 +53,150 @@ export function AgenticEngineVisual() {
             </filter>
           </defs>
 
-          {/* Pulsating brain core - same size as actual brain */}
-          <circle
-            cx="500"
-            cy="240"
-            r="85"
-            fill="none"
+          {/* Circuit paths inside brain */}
+          {/* Horizontal circuits */}
+          <line
+            x1="420"
+            y1="240"
+            x2="580"
+            y2="240"
             stroke="#00ff88"
-            strokeWidth="3"
-            opacity="0.6"
+            strokeWidth="2"
+            opacity="0.4"
             filter="url(#coreGlow)"
             style={{
-              animation: `corePulse 2.5s ease-in-out infinite`,
+              animation: `circuitPulse 3s ease-in-out infinite`,
             }}
           />
-          <circle
-            cx="500"
-            cy="240"
-            r="65"
-            fill="#00ff88"
-            opacity="0.5"
+          <line
+            x1="440"
+            y1="200"
+            x2="560"
+            y2="200"
+            stroke="#00ff88"
+            strokeWidth="2"
+            opacity="0.4"
             filter="url(#coreGlow)"
             style={{
-              animation: `coreBreathe 2.5s ease-in-out infinite`,
+              animation: `circuitPulse 3s ease-in-out infinite`,
+              animationDelay: "0.3s",
             }}
           />
+          <line
+            x1="440"
+            y1="280"
+            x2="560"
+            y2="280"
+            stroke="#00ff88"
+            strokeWidth="2"
+            opacity="0.4"
+            filter="url(#coreGlow)"
+            style={{
+              animation: `circuitPulse 3s ease-in-out infinite`,
+              animationDelay: "0.6s",
+            }}
+          />
+
+          {/* Vertical circuits */}
+          <line
+            x1="500"
+            y1="160"
+            x2="500"
+            y2="320"
+            stroke="#00ff88"
+            strokeWidth="2"
+            opacity="0.4"
+            filter="url(#coreGlow)"
+            style={{
+              animation: `circuitPulse 3s ease-in-out infinite`,
+              animationDelay: "0.9s",
+            }}
+          />
+          <line
+            x1="460"
+            y1="180"
+            x2="460"
+            y2="300"
+            stroke="#00ff88"
+            strokeWidth="2"
+            opacity="0.4"
+            filter="url(#coreGlow)"
+            style={{
+              animation: `circuitPulse 3s ease-in-out infinite`,
+              animationDelay: "1.2s",
+            }}
+          />
+          <line
+            x1="540"
+            y1="180"
+            x2="540"
+            y2="300"
+            stroke="#00ff88"
+            strokeWidth="2"
+            opacity="0.4"
+            filter="url(#coreGlow)"
+            style={{
+              animation: `circuitPulse 3s ease-in-out infinite`,
+              animationDelay: "1.5s",
+            }}
+          />
+
+          {/* Diagonal circuits */}
+          <line
+            x1="440"
+            y1="180"
+            x2="500"
+            y2="240"
+            stroke="#00ff88"
+            strokeWidth="2"
+            opacity="0.4"
+            filter="url(#coreGlow)"
+            style={{
+              animation: `circuitPulse 3s ease-in-out infinite`,
+              animationDelay: "1.8s",
+            }}
+          />
+          <line
+            x1="560"
+            y1="180"
+            x2="500"
+            y2="240"
+            stroke="#00ff88"
+            strokeWidth="2"
+            opacity="0.4"
+            filter="url(#coreGlow)"
+            style={{
+              animation: `circuitPulse 3s ease-in-out infinite`,
+              animationDelay: "2.1s",
+            }}
+          />
+
+          {/* Circuit nodes (connection points) */}
+          {[
+            { cx: 500, cy: 240 },
+            { cx: 420, cy: 240 },
+            { cx: 580, cy: 240 },
+            { cx: 500, cy: 160 },
+            { cx: 500, cy: 320 },
+            { cx: 460, cy: 180 },
+            { cx: 540, cy: 180 },
+            { cx: 460, cy: 300 },
+            { cx: 540, cy: 300 },
+          ].map((node, idx) => (
+            <circle
+              key={`node-${idx}`}
+              cx={node.cx}
+              cy={node.cy}
+              r="4"
+              fill="#00ff88"
+              opacity="0.6"
+              filter="url(#coreGlow)"
+              style={{
+                animation: `nodePulse 3s ease-in-out infinite`,
+                animationDelay: `${(idx * 0.3) % 3}s`,
+              }}
+            />
+          ))}
 
           {/* Falling code/waterfall from brain */}
           {codeDrops.map((drop) => (
@@ -276,6 +395,30 @@ export function AgenticEngineVisual() {
           50% {
             opacity: 0.4;
             r: 26;
+          }
+        }
+
+        @keyframes circuitPulse {
+          0%, 100% {
+            stroke: #00ff88;
+            opacity: 0.2;
+            stroke-width: 2;
+          }
+          50% {
+            stroke: #00ff88;
+            opacity: 0.8;
+            stroke-width: 3;
+          }
+        }
+
+        @keyframes nodePulse {
+          0%, 100% {
+            opacity: 0.3;
+            r: 4;
+          }
+          50% {
+            opacity: 0.9;
+            r: 6;
           }
         }
       `}</style>
