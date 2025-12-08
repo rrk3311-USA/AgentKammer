@@ -124,12 +124,12 @@ function BonusCardVisual({ offer }: { offer: ProductOffer }) {
         </div>
         
         {/* Center-Bottom: Large Bonus Amount */}
-        <div className="flex flex-col items-start justify-end">
+        <div className="flex flex-col items-start">
           <p className="text-white/60 text-xs uppercase tracking-wider font-semibold mb-1">Get a bonus</p>
           <div className="flex items-baseline gap-1">
-            <span className="text-5xl font-bold text-white leading-none">${bonusAmount}</span>
+            <span className="text-4xl font-bold text-white leading-none">${bonusAmount}</span>
           </div>
-          <p className="text-white/80 text-xs mt-2 max-w-[85%] leading-tight">{offer.name}</p>
+          <p className="text-white/80 text-xs mt-2 max-w-[85%] leading-tight pb-1">{offer.name}</p>
         </div>
       </div>
     </div>
