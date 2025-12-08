@@ -4,18 +4,18 @@ import { Badge } from "@/components/ui/badge";
 import { ChevronLeft, ChevronRight, Plane, UtensilsCrossed, ShoppingBag, Zap, Lightbulb, TrendingUp, Brain, BarChart3, ArrowRight } from "lucide-react";
 
 const creditCards = [
-  { name: "Platinum Rewards", issuer: "Global Bank", color: "from-slate-600 to-slate-700", accent: "#d4af37" },
-  { name: "Travel Elite", issuer: "International Airways", color: "from-blue-600 to-blue-700", accent: "#60a5fa" },
-  { name: "Premium Cashback", issuer: "Finance Corp", color: "from-emerald-600 to-emerald-700", accent: "#10b981" },
-  { name: "Executive Black", issuer: "Luxury Banker", color: "from-gray-900 to-black", accent: "#d4af37" },
-  { name: "Entrepreneur's Edge", issuer: "Business Finance", color: "from-purple-600 to-purple-700", accent: "#a78bfa" },
-  { name: "Premium Visa", issuer: "First Capital", color: "from-indigo-600 to-indigo-700", accent: "#818cf8" },
-  { name: "Business Elite", issuer: "Corporate Finance", color: "from-orange-600 to-amber-600", accent: "#fb923c" },
-  { name: "Student Plus", issuer: "Future Bank", color: "from-cyan-600 to-blue-500", accent: "#06b6d4" },
-  { name: "Rewards Max", issuer: "Premium Partners", color: "from-pink-600 to-rose-600", accent: "#ec4899" },
-  { name: "Luxury Card", issuer: "Wealth Management", color: "from-slate-700 to-slate-900", accent: "#d4af37" },
-  { name: "Flex Rewards", issuer: "Credit Solutions", color: "from-teal-600 to-cyan-600", accent: "#14b8a6" },
-  { name: "Signature Reserve", issuer: "Elite Banking", color: "from-amber-700 to-yellow-600", accent: "#d4af37" },
+  { name: "Platinum Rewards", issuer: "Global Bank", color: "from-blue-500 to-cyan-400", accent: "#00d4ff" },
+  { name: "Travel Elite", issuer: "International Airways", color: "from-sky-400 to-blue-500", accent: "#0ea5e9" },
+  { name: "Premium Cashback", issuer: "Finance Corp", color: "from-emerald-400 to-teal-500", accent: "#10b981" },
+  { name: "Executive Black", issuer: "Luxury Banker", color: "from-slate-400 to-blue-600", accent: "#00d4ff" },
+  { name: "Entrepreneur's Edge", issuer: "Business Finance", color: "from-purple-400 to-blue-500", accent: "#c084fc" },
+  { name: "Premium Visa", issuer: "First Capital", color: "from-indigo-400 to-blue-600", accent: "#6366f1" },
+  { name: "Business Elite", issuer: "Corporate Finance", color: "from-amber-400 to-orange-500", accent: "#fbbf24" },
+  { name: "Student Plus", issuer: "Future Bank", color: "from-cyan-400 to-sky-500", accent: "#06b6d4" },
+  { name: "Rewards Max", issuer: "Premium Partners", color: "from-pink-400 to-rose-500", accent: "#f472b6" },
+  { name: "Luxury Card", issuer: "Wealth Management", color: "from-cyan-400 to-teal-500", accent: "#00d4ff" },
+  { name: "Flex Rewards", issuer: "Credit Solutions", color: "from-teal-400 to-cyan-500", accent: "#14b8a6" },
+  { name: "Signature Reserve", issuer: "Elite Banking", color: "from-yellow-400 to-amber-500", accent: "#fbbf24" },
 ];
 
 const benefits = [
@@ -200,7 +200,7 @@ export function CreditCardShowcase() {
             <h2 className="font-serif text-3xl md:text-5xl font-bold text-white">
               Credit Cards That
             </h2>
-            <h2 className="font-serif text-3xl md:text-5xl font-bold" style={{ color: "#d4af37" }}>
+            <h2 className="font-serif text-3xl md:text-5xl font-bold" style={{ background: 'linear-gradient(90deg, #00d4ff 0%, #00ff88 50%, #00d4ff 100%)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               Compete For You
             </h2>
           </div>
@@ -282,12 +282,22 @@ export function CreditCardShowcase() {
 
                 {/* Card Stats */}
                 <div className="mt-4 flex gap-4">
-                  <Badge variant="outline" className="text-white/70 border-white/30">
+                  <div 
+                    className="px-3 py-1.5 rounded-full text-xs font-semibold text-white border border-cyan-300/50 backdrop-blur-sm"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 255, 136, 0.15) 100%)',
+                    }}
+                  >
                     0% APR
-                  </Badge>
-                  <Badge variant="outline" className="text-white/70 border-white/30">
+                  </div>
+                  <div 
+                    className="px-3 py-1.5 rounded-full text-xs font-semibold text-white border border-cyan-300/50 backdrop-blur-sm"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 255, 136, 0.15) 100%)',
+                    }}
+                  >
                     Rewards
-                  </Badge>
+                  </div>
                 </div>
               </div>
             ))}
