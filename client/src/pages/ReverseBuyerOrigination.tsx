@@ -111,7 +111,7 @@ export default function ReverseBuyerOrigination() {
       commission: "~1%",
       credits: "$5k–$20k+",
       monthly: "~$6,200",
-      note: "Typical savings: $35k–$55k in 5 years with luxury concierge.",
+      note: "Typical savings: $35k–$55k in 5 years with expert concierge service.",
       highlight: true,
     },
   ];
@@ -119,7 +119,7 @@ export default function ReverseBuyerOrigination() {
   const steps = [
     {
       number: 1,
-      title: "Luxury Buyer Profile",
+      title: "Real Estate Buyer Profile",
       description:
         "You share your ideal price range, down payment, credit band (self-reported), monthly comfort, and target cities. No hard pulls. No pressure.",
     },
@@ -133,7 +133,7 @@ export default function ReverseBuyerOrigination() {
       number: 3,
       title: "Brokerages quietly compete",
       description:
-        "We compare traditional brands, 100% models, and boutique luxury shops for the leanest fee structure.",
+        "We compare traditional brands, 100% models, and independent brokerages for the leanest fee structure.",
     },
     {
       number: 4,

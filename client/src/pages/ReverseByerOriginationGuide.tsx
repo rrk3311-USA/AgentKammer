@@ -16,7 +16,7 @@ export default function ReverseByerOriginationGuide() {
         <h2 className="text-2xl font-serif font-bold mt-12 mb-6">How it works</h2>
         <ol className="space-y-4 ml-6 list-decimal">
           <li>
-            <strong>Luxury buyer profile.</strong>
+            <strong>Real estate buyer profile.</strong>
             <p className="text-muted-foreground mt-2">Share your ideal price range, down payment, self‑reported credit band, monthly comfort and target cities. No hard credit pulls; no pressure.</p>
           </li>
           <li>
@@ -25,7 +25,7 @@ export default function ReverseByerOriginationGuide() {
           </li>
           <li>
             <strong>Brokerages quietly compete.</strong>
-            <p className="text-muted-foreground mt-2">We compare traditional brands, 100 %‑commission models and boutique luxury shops to find lean fee structures that best fit your numbers.</p>
+            <p className="text-muted-foreground mt-2">We compare traditional brands, 100 %‑commission models and independent brokerages to find lean fee structures that best fit your numbers.</p>
           </li>
           <li>
             <strong>One clear summary.</strong>
