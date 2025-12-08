@@ -113,8 +113,8 @@ export default function Home() {
               </div>
 
               {/* Value Proposition */}
-              <div className="max-w-3xl mx-auto">
-                <h2 className="font-serif text-3xl font-bold text-white mb-6 text-center">
+              <div className="max-w-5xl mx-auto bg-gradient-to-b from-sky-300 via-blue-300 to-cyan-300 rounded-3xl p-8 md:p-12">
+                <h2 className="font-serif text-3xl font-bold text-slate-900 mb-8 text-center">
                   How It Works
                 </h2>
 
@@ -124,15 +124,28 @@ export default function Home() {
                     { title: '100+ Products Analyzed', desc: 'AI screens hundreds of offers across 14 financial categories' },
                     { title: 'Personalized Rankings', desc: 'Get AI-matched recommendations ranked specifically for you' }
                   ].map((item, idx) => (
-                    <div key={idx} className="flex flex-col items-center text-center">
-                      <div 
-                        className="w-10 h-10 rounded-full flex items-center justify-center mb-3 text-sm font-bold text-[#0a1628] flex-shrink-0"
-                        style={{ background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)' }}
-                      >
-                        {idx + 1}
+                    <div 
+                      key={idx}
+                      className="rounded-3xl overflow-hidden backdrop-blur-md border-2 transition-all duration-300"
+                      style={{
+                        background: 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(225,245,254,0.9) 100%)',
+                        borderColor: 'rgba(255, 255, 255, 0.8)',
+                        boxShadow: '0 20px 40px rgba(0, 102, 204, 0.15), inset 0 1px 0 rgba(255,255,255,0.8)'
+                      }}
+                    >
+                      <div className="p-6 flex flex-col items-center text-center h-full">
+                        <div 
+                          className="w-12 h-12 rounded-full flex items-center justify-center mb-4 text-xl font-bold text-white flex-shrink-0"
+                          style={{
+                            background: 'linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)',
+                            boxShadow: '0 8px 16px rgba(14, 165, 233, 0.3)'
+                          }}
+                        >
+                          {idx + 1}
+                        </div>
+                        <h3 className="font-semibold text-slate-900 mb-2 text-lg">{item.title}</h3>
+                        <p className="text-slate-700 text-sm leading-relaxed">{item.desc}</p>
                       </div>
-                      <h3 className="font-semibold text-white mb-2">{item.title}</h3>
-                      <p className="text-white/70 text-sm">{item.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -447,146 +460,88 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* SECTION 6: The Agentic Advantage - Light Blue Background */}
-      <section className="relative py-20 px-4 bg-gradient-to-b from-sky-300 via-blue-300 to-cyan-300 overflow-hidden">
-        {/* Background icon pattern */}
-        <div className="absolute inset-0 opacity-15 pointer-events-none">
-          <div className="absolute top-10 left-10 w-20 h-20 text-slate-400">
-            <Brain className="w-full h-full" strokeWidth={0.5} />
-          </div>
-          <div className="absolute top-1/3 right-1/4 w-16 h-16 text-slate-400">
-            <BarChart3 className="w-full h-full" strokeWidth={0.5} />
-          </div>
-          <div className="absolute bottom-1/4 right-10 w-24 h-24 text-slate-400">
-            <ArrowRight className="w-full h-full" strokeWidth={0.5} />
-          </div>
-          <div className="absolute bottom-10 left-1/4 w-20 h-20 text-slate-400">
-            <Sparkles className="w-full h-full" strokeWidth={0.5} />
-          </div>
-          <div className="absolute top-1/2 left-1/3 w-16 h-16 text-slate-400">
-            <TrendingUp className="w-full h-full" strokeWidth={0.5} />
-          </div>
-        </div>
-
-        <div className="max-w-6xl mx-auto relative z-10">
+      {/* SECTION 6: The Agentic Advantage - Dark Slate Background */}
+      <section className="relative py-16 px-4 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-700">
+        <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <Badge 
               className="mb-4 border-0" 
               style={{ 
-                background: 'rgba(255, 255, 255, 0.95)',
-                color: '#0369a1',
+                background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
+                color: '#000',
                 fontSize: '0.9rem',
-                padding: '0.5rem 1rem',
-                fontWeight: 600
+                padding: '0.5rem 1rem'
               }}
             >
               <Sparkles className="h-4 w-4 mr-2" />
               How It Works
             </Badge>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-slate-900 mb-3">
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-3">
               The Agentic Advantage
             </h2>
-            <p className="text-xl text-slate-700 max-w-3xl mx-auto">
+            <p className="text-xl text-white/70 max-w-3xl mx-auto">
               Three simple steps to unlock personalized financial recommendations
             </p>
           </div>
 
-          {/* Steps Grid - Toggle/Pill Style */}
+          {/* Steps Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { 
                 num: '1', 
                 title: 'Build Your Profile', 
                 desc: 'Income, credit band, location, goals - one time. Your profile powers all recommendations.',
-                icon: Brain,
-                isActive: true
+                icon: Brain
               },
               { 
                 num: '2', 
                 title: 'AI Analyzes the Field', 
                 desc: 'We screen hundreds of partner offers across categories, ranking them by your fit.',
-                icon: BarChart3,
-                isActive: false
+                icon: BarChart3
               },
               { 
                 num: '3', 
                 title: 'You Choose - We Route', 
                 desc: 'Go straight to the best matched lender, card, or tool. No guesswork.',
-                icon: ArrowRight,
-                isActive: true
+                icon: ArrowRight
               }
-            ].map((step) => {
-              const StepIcon = step.icon;
-              return (
-                <div 
-                  key={step.num}
-                  className="relative"
-                  data-testid={`card-step-${step.num}`}
-                >
-                  {/* Pill-shaped container */}
+            ].map((step) => (
+              <Card 
+                key={step.num} 
+                className="overflow-hidden border-0 h-full"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
+                  backdropFilter: 'blur(20px)'
+                }}
+                data-testid={`card-step-${step.num}`}
+              >
+                <div className="p-8 flex flex-col h-full">
+                  {/* Number Badge */}
                   <div 
-                    className="rounded-3xl overflow-hidden backdrop-blur-md border-2 transition-all duration-300 hover:scale-105"
-                    style={{
-                      background: step.isActive 
-                        ? 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(225,245,254,0.9) 100%)'
-                        : 'linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(240,249,255,0.7) 100%)',
-                      borderColor: step.isActive 
-                        ? 'rgba(255, 255, 255, 0.8)'
-                        : 'rgba(255, 255, 255, 0.6)',
-                      boxShadow: step.isActive
-                        ? '0 20px 40px rgba(0, 102, 204, 0.15), inset 0 1px 0 rgba(255,255,255,0.8)'
-                        : '0 10px 20px rgba(0, 102, 204, 0.08), inset 0 1px 0 rgba(255,255,255,0.6)'
-                    }}
+                    className="w-16 h-16 rounded-full flex items-center justify-center mb-6 text-3xl font-bold text-[#0a1628] font-serif flex-shrink-0"
+                    style={GOLD_NUMBER_STYLE}
                   >
-                    <div className="p-8 md:p-10 flex flex-col h-full min-h-[320px]">
-                      {/* Step number circle */}
-                      <div 
-                        className="w-14 h-14 rounded-full flex items-center justify-center mb-6 text-2xl font-bold text-white flex-shrink-0"
-                        style={{
-                          background: step.isActive
-                            ? 'linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)'
-                            : 'linear-gradient(135deg, #94a3b8 0%, #64748b 100%)',
-                          boxShadow: step.isActive
-                            ? '0 8px 16px rgba(14, 165, 233, 0.3)'
-                            : 'none'
-                        }}
-                      >
-                        {step.num}
-                      </div>
+                    {step.num}
+                  </div>
 
-                      {/* Title */}
-                      <h3 className="font-serif text-2xl font-bold text-slate-900 mb-3">
-                        {step.title}
-                      </h3>
+                  {/* Title */}
+                  <h3 className="font-serif text-2xl font-bold text-white mb-3">
+                    {step.title}
+                  </h3>
 
-                      {/* Description */}
-                      <p className="text-base text-slate-700 mb-6 flex-1 leading-relaxed">
-                        {step.desc}
-                      </p>
+                  {/* Description */}
+                  <p className="text-base text-white/70 mb-6 flex-1">
+                    {step.desc}
+                  </p>
 
-                      {/* Icon */}
-                      <div 
-                        className="flex justify-end opacity-50"
-                        style={{ color: step.isActive ? '#0ea5e9' : '#94a3b8' }}
-                      >
-                        <StepIcon className="h-10 w-10" strokeWidth={1.5} />
-                      </div>
-                    </div>
-
-                    {/* Glow effect for active steps */}
-                    {step.isActive && (
-                      <div 
-                        className="absolute -inset-1 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity -z-10"
-                        style={{
-                          background: 'radial-gradient(circle, rgba(14, 165, 233, 0.3) 0%, transparent 70%)',
-                        }}
-                      />
-                    )}
+                  {/* Icon Accent */}
+                  <div className="flex justify-end">
+                    <step.icon className="h-8 w-8 text-[#d4af37]/40" />
                   </div>
                 </div>
-              );
-            })}
+              </Card>
+            ))}
           </div>
         </div>
       </section>
