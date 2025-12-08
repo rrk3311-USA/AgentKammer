@@ -273,7 +273,7 @@ export default function Home() {
         </div>
       </section>
       {/* SECTION 4: Investment Accounts */}
-      <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-900 via-slate-850 to-slate-800 px-4 pt-[0px] pb-[0px]">
+      <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-900 via-slate-850 to-slate-800 px-4 pt-[0px] pb-[0px] pl-[0px] pr-[0px]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
             <div className="flex items-center justify-center mb-4">
