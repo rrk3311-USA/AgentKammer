@@ -388,46 +388,53 @@ export default function Home() {
           </div>
           <p className="text-center text-white/50 text-sm mb-12">Airport lounges • Fine dining • Luxury travel</p>
 
-          {/* Comparison Table */}
-          <div className="overflow-x-auto mb-12 max-w-5xl mx-auto">
-            <table className="w-full text-sm border-collapse" data-testid="credit-cards-comparison-table">
+          {/* Why Agent Kammer Comparison Table */}
+          <div className="overflow-x-auto mb-12 max-w-6xl mx-auto">
+            <table className="w-full text-sm border-collapse" data-testid="kammer-comparison-table">
               <thead>
                 <tr className="border-b border-white/20">
-                  <th className="text-left py-4 px-4 text-white font-semibold">Card Type</th>
-                  <th className="text-center py-4 px-4 text-white font-semibold">APR Range</th>
-                  <th className="text-center py-4 px-4 text-white font-semibold">Welcome Bonus</th>
-                  <th className="text-center py-4 px-4 text-white font-semibold">Rewards Rate</th>
-                  <th className="text-center py-4 px-4 text-white font-semibold">Annual Fee</th>
+                  <th className="text-left py-4 px-4 text-white font-semibold">Feature</th>
+                  <th className="text-center py-4 px-4 text-white font-semibold">Agent Kammer</th>
+                  <th className="text-center py-4 px-4 text-white/70">NerdWallet</th>
+                  <th className="text-center py-4 px-4 text-white/70">Bankrate</th>
+                  <th className="text-center py-4 px-4 text-white/70">LendingClub</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-white/10 hover:bg-white/5 transition-colors" data-testid="card-row-travel">
-                  <td className="py-4 px-4 text-white font-medium">Travel Rewards</td>
-                  <td className="text-center py-4 px-4 text-white/70">17-24%</td>
-                  <td className="text-center py-4 px-4 text-[#00ff88]">50K-150K pts</td>
-                  <td className="text-center py-4 px-4 text-white/70">3-5x</td>
-                  <td className="text-center py-4 px-4 text-white/70">$95-$450</td>
+                <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                  <td className="py-4 px-4 text-white font-medium">AI Matching</td>
+                  <td className="text-center py-4 px-4"><span className="inline-block px-3 py-1 bg-[#00ff88]/20 text-[#00ff88] rounded-full text-xs font-semibold">Yes</span></td>
+                  <td className="text-center py-4 px-4 text-white/50">Limited</td>
+                  <td className="text-center py-4 px-4 text-white/50">No</td>
+                  <td className="text-center py-4 px-4 text-white/50">No</td>
                 </tr>
-                <tr className="border-b border-white/10 hover:bg-white/5 transition-colors" data-testid="card-row-cashback">
-                  <td className="py-4 px-4 text-white font-medium">Cashback</td>
-                  <td className="text-center py-4 px-4 text-white/70">15-22%</td>
-                  <td className="text-center py-4 px-4 text-[#00ff88]">$200-$500</td>
-                  <td className="text-center py-4 px-4 text-white/70">1.5-5%</td>
-                  <td className="text-center py-4 px-4 text-white/70">$0-$95</td>
+                <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                  <td className="py-4 px-4 text-white font-medium">100+ Cards</td>
+                  <td className="text-center py-4 px-4"><span className="inline-block px-3 py-1 bg-[#00ff88]/20 text-[#00ff88] rounded-full text-xs font-semibold">Yes</span></td>
+                  <td className="text-center py-4 px-4 text-white/50">~50</td>
+                  <td className="text-center py-4 px-4 text-white/50">~40</td>
+                  <td className="text-center py-4 px-4 text-white/50">N/A</td>
                 </tr>
-                <tr className="border-b border-white/10 hover:bg-white/5 transition-colors" data-testid="card-row-business">
-                  <td className="py-4 px-4 text-white font-medium">Business</td>
-                  <td className="text-center py-4 px-4 text-white/70">16-25%</td>
-                  <td className="text-center py-4 px-4 text-[#00ff88]">75K-200K pts</td>
-                  <td className="text-center py-4 px-4 text-white/70">2-5x</td>
-                  <td className="text-center py-4 px-4 text-white/70">$95-$595</td>
+                <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                  <td className="py-4 px-4 text-white font-medium">14 Categories</td>
+                  <td className="text-center py-4 px-4"><span className="inline-block px-3 py-1 bg-[#00ff88]/20 text-[#00ff88] rounded-full text-xs font-semibold">Yes</span></td>
+                  <td className="text-center py-4 px-4 text-white/50">6-8</td>
+                  <td className="text-center py-4 px-4 text-white/50">8-10</td>
+                  <td className="text-center py-4 px-4 text-white/50">1-2</td>
                 </tr>
-                <tr className="hover:bg-white/5 transition-colors" data-testid="card-row-balance">
-                  <td className="py-4 px-4 text-white font-medium">Balance Transfer</td>
-                  <td className="text-center py-4 px-4 text-[#00d4ff]">0% for 12-21mo</td>
-                  <td className="text-center py-4 px-4 text-white/70">None</td>
-                  <td className="text-center py-4 px-4 text-white/70">1-2%</td>
-                  <td className="text-center py-4 px-4 text-white/70">$0-$99</td>
+                <tr className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                  <td className="py-4 px-4 text-white font-medium">Rate Watch Tech</td>
+                  <td className="text-center py-4 px-4"><span className="inline-block px-3 py-1 bg-[#00d4ff]/20 text-[#00d4ff] rounded-full text-xs font-semibold">Advanced</span></td>
+                  <td className="text-center py-4 px-4 text-white/50">Basic</td>
+                  <td className="text-center py-4 px-4 text-white/50">Basic</td>
+                  <td className="text-center py-4 px-4 text-white/50">None</td>
+                </tr>
+                <tr className="hover:bg-white/5 transition-colors">
+                  <td className="py-4 px-4 text-white font-medium">Personalized Profile</td>
+                  <td className="text-center py-4 px-4"><span className="inline-block px-3 py-1 bg-[#00ff88]/20 text-[#00ff88] rounded-full text-xs font-semibold">Yes</span></td>
+                  <td className="text-center py-4 px-4 text-white/50">Limited</td>
+                  <td className="text-center py-4 px-4 text-white/50">Limited</td>
+                  <td className="text-center py-4 px-4 text-white/50">Limited</td>
                 </tr>
               </tbody>
             </table>
