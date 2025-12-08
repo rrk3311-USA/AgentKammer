@@ -200,8 +200,16 @@ export function CreditCardShowcase() {
             <h2 className="font-serif text-3xl md:text-5xl font-bold text-white">
               Credit Cards That
             </h2>
-            <h2 className="font-serif text-3xl md:text-5xl font-bold" style={{ background: 'linear-gradient(90deg, #00d4ff 0%, #00ff88 50%, #00d4ff 100%)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              Compete For You
+            <div className="flex items-center justify-center gap-2 flex-wrap">
+              <span style={{ textDecoration: 'line-through', color: 'rgba(255, 255, 255, 0.4)', fontSize: 'inherit' }} className="font-serif text-3xl md:text-5xl font-bold">
+                allowing
+              </span>
+              <h2 className="font-serif text-3xl md:text-5xl font-black" style={{ background: 'linear-gradient(90deg, #00d4ff 0%, #00ff88 50%, #00d4ff 100%)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '0.05em' }}>
+                FORCING
+              </h2>
+            </div>
+            <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mt-1">
+              Credit Cards to Compete For You
             </h2>
           </div>
           <p className="text-base md:text-xl text-white/70 max-w-3xl mx-auto">
