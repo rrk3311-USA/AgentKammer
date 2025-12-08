@@ -1398,8 +1398,8 @@ export const SAMPLE_OFFERS: ProductOffer[] = [
   {
     id: 'chase-referral-checking',
     name: 'Chase Checking Referral',
-    category: 'banking',
-    subcategory: 'Checking Accounts',
+    category: 'investing',
+    subcategory: 'Stock Trading Apps',
     description: 'Earn $50 for each friend who opens a qualifying Chase checking account – up to $500 per calendar year',
     features: ['$50 per referral', 'Up to $500/year', 'No hard credit pull', 'Quick setup'],
     creditMin: 0,
