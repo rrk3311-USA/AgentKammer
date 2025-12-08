@@ -281,26 +281,6 @@ export function Header() {
             </div>
 
             <div className="border-t pt-4">
-              <p className="text-xs font-semibold text-muted-foreground mb-3 uppercase">Real Estate</p>
-              <Link href="/reverse-buyer-origination" data-testid="link-mobile-rbo">
-                <span
-                  className="text-base font-medium hover:text-primary cursor-pointer block mb-3"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Reverse Buyer Origination
-                </span>
-              </Link>
-              <Link href="/reverse-seller-architecture" data-testid="link-mobile-rsa">
-                <span
-                  className="text-base font-medium hover:text-primary cursor-pointer block"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Reverse Seller Architecture
-                </span>
-              </Link>
-            </div>
-
-            <div className="border-t pt-4">
               <p className="text-xs font-semibold text-muted-foreground mb-3 uppercase">Market Data</p>
               <Link href="/california-market" data-testid="link-mobile-california-market">
                 <span
