@@ -7,11 +7,11 @@ export function AgenticEngineVisual() {
   const [codeDrops, setCodeDrops] = useState<{ id: number; x: number; delay: number }[]>([]);
 
   useEffect(() => {
-    // Generate initial code drops
-    const drops = Array.from({ length: 8 }, (_, i) => ({
+    // Generate initial code drops - left and right sides
+    const drops = Array.from({ length: 16 }, (_, i) => ({
       id: i,
-      x: 35 + (i % 6) * 8,
-      delay: i * 0.15,
+      x: i < 8 ? 35 + (i % 6) * 8 : 750 + (i % 6) * 8,
+      delay: (i % 8) * 0.15,
     }));
     setCodeDrops(drops);
   }, []);
@@ -53,14 +53,14 @@ export function AgenticEngineVisual() {
             </filter>
           </defs>
 
-          {/* Pulsating brain core */}
+          {/* Pulsating brain core - same size as actual brain */}
           <circle
             cx="500"
             cy="240"
-            r="35"
+            r="85"
             fill="none"
             stroke="#00ff88"
-            strokeWidth="2"
+            strokeWidth="3"
             opacity="0.6"
             filter="url(#coreGlow)"
             style={{
@@ -70,7 +70,7 @@ export function AgenticEngineVisual() {
           <circle
             cx="500"
             cy="240"
-            r="20"
+            r="65"
             fill="#00ff88"
             opacity="0.5"
             filter="url(#coreGlow)"
