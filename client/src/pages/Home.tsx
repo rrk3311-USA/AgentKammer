@@ -215,59 +215,15 @@ export default function Home() {
           {/* Top Gradient Divider */}
           <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 mb-6" />
 
-          {/* How It Works Section */}
+          {/* How It Works Section - Flowing Narrative */}
           <div className="mb-8">
-            <div className="text-center mb-6">
-              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-3 text-white">
+            <div className="text-center mb-8">
+              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-white">
                 How It Works
               </h2>
-              <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                Three simple steps to unlock personalized recommendations
+              <p className="text-lg text-white/80 max-w-4xl mx-auto leading-relaxed">
+                Start by sharing your financial profile once—it powers all recommendations across every category. Our AI then screens <span className="text-[#d4af37] font-semibold">hundreds of offers</span> in seconds, analyzing 100+ products across 14 financial categories you care about. You receive <span className="text-[#d4af37] font-semibold">personalized rankings</span> matched specifically to your goals, eliminating the guesswork from financial decisions. One profile. Comprehensive analysis. Your perfect matches.
               </p>
-            </div>
-
-            {/* How It Works Cards - Grid of 3 */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                { 
-                  num: '1', 
-                  title: 'One Profile', 
-                  desc: 'Share your financial profile once - it powers all recommendations',
-                  highlights: []
-                },
-                { 
-                  num: '2', 
-                  title: '100+ Products Analyzed', 
-                  desc: 'AI screens hundreds of offers across 14 financial categories',
-                  highlights: []
-                },
-                { 
-                  num: '3', 
-                  title: 'Personalized Rankings', 
-                  desc: 'Get AI-matched recommendations ranked specifically for you',
-                  highlights: []
-                }
-              ].map((item) => (
-                <Card 
-                  key={item.num}
-                  className="overflow-hidden border-0 h-full hover-elevate transition-all cursor-pointer"
-                  style={{ 
-                    background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
-                    backdropFilter: 'blur(20px)'
-                  }}
-                  data-testid={`card-step-${item.num}`}
-                >
-                  <div className="p-8 flex flex-col h-full">
-                    {/* Title */}
-                    <h3 className="font-serif text-2xl font-bold text-white mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-base text-white/70 mb-6">
-                      {item.desc}
-                    </p>
-                  </div>
-                </Card>
-              ))}
             </div>
           </div>
         </div>
