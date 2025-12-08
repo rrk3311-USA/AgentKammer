@@ -386,46 +386,7 @@ export default function Home() {
             </table>
           </div>
 
-          {/* Competitive Landscape Slider */}
-          <div className="mb-12 max-w-4xl mx-auto">
-            <div className="bg-white/5 border border-white/10 rounded-lg p-8 backdrop-blur-sm">
-              <h3 className="text-center text-white font-semibold mb-6">Why Agent Kammer Wins</h3>
-              
-              {/* Slider bar showing competitive positioning */}
-              <div className="space-y-6">
-                {[
-                  { label: 'Card Coverage', kammer: 95, competitors: 45 },
-                  { label: 'AI Intelligence', kammer: 90, competitors: 35 },
-                  { label: 'Category Range', kammer: 100, competitors: 55 },
-                  { label: 'Personalization', kammer: 92, competitors: 40 },
-                ].map((metric, idx) => (
-                  <div key={idx}>
-                    <div className="flex justify-between mb-2">
-                      <span className="text-white/80 text-sm">{metric.label}</span>
-                      <span className="text-white/60 text-xs">Agent Kammer</span>
-                    </div>
-                    <div className="relative h-2 bg-white/10 rounded-full overflow-hidden">
-                      {/* Competitor baseline */}
-                      <div
-                        className="absolute h-full bg-white/20 rounded-full"
-                        style={{ width: `${metric.competitors}%` }}
-                      />
-                      {/* Agent Kammer bar */}
-                      <div
-                        className="absolute h-full rounded-full transition-all duration-700"
-                        style={{
-                          width: `${metric.kammer}%`,
-                          background: 'linear-gradient(90deg, #d4af37 0%, #f4d03f 100%)',
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center">
+          <div className="text-center mb-12">
             <Link href="/credit-cards">
               <Button size="lg" className={CTA_BUTTON_CLASS} data-testid="button-compare-cards">
                 <CreditCard className="h-5 w-5 mr-2" />
