@@ -259,24 +259,6 @@ export default function Home() {
                   data-testid={`card-step-${item.num}`}
                 >
                   <div className="p-8 flex flex-col h-full">
-                    {/* Icon */}
-                    <div 
-                      className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
-                      style={{
-                        background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
-                        border: '2px solid rgba(212,175,55,0.3)'
-                      }}
-                    >
-                      <div 
-                        className="w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold text-white"
-                        style={{
-                          background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
-                        }}
-                      >
-                        {item.num}
-                      </div>
-                    </div>
-
                     {/* Title */}
                     <h3 className="font-serif text-2xl font-bold text-white mb-2">
                       {item.title}
@@ -412,46 +394,6 @@ export default function Home() {
           </div>
           <p className="text-center text-white/50 text-sm mb-8">Airport lounges • Fine dining • Luxury travel</p>
 
-          <div className="overflow-x-auto mb-8">
-            <table className="w-full max-w-5xl mx-auto text-sm">
-              <thead>
-                <tr className="border-b border-white/20">
-                  <th className="text-left py-3 px-3 text-white/80 font-semibold">Feature</th>
-                  <th className="text-center py-3 px-3 text-white/60">NerdWallet</th>
-                  <th className="text-center py-3 px-3 text-white/60">Bankrate</th>
-                  <th 
-                    className="text-center py-3 px-3 text-[#d4af37] font-semibold"
-                    style={{
-                      backgroundColor: 'rgba(212, 175, 55, 0.08)',
-                      boxShadow: 'inset 0 0 20px rgba(212, 175, 55, 0.15)'
-                    }}
-                  >
-                    Agent Kammer
-                  </th>
-                  <th className="text-center py-3 px-3 text-white/60">Credit Karma</th>
-                  <th className="text-center py-3 px-3 text-white/60">Chase</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { feature: 'Total Cards', nw: '12–20', br: '10–25', ak: '100+', ck: '8–15', ch: '25–40' },
-                  { feature: 'Fintech Cards', nw: 'No', br: 'No', ak: 'Yes', ck: 'Limited', ch: 'No' },
-                  { feature: 'Crypto Cards', nw: 'No', br: 'No', ak: 'Yes', ck: 'No', ch: 'Limited' },
-                  { feature: 'AI Matching', nw: 'No', br: 'No', ak: 'Yes', ck: 'No', ch: 'No' },
-                  { feature: 'Independent Ranking', nw: 'No', br: 'No', ak: 'Yes', ck: 'Partial', ch: 'No' }
-                ].map((row) => (
-                  <tr key={row.feature} className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                    <td className="py-3 px-3 text-white">{row.feature}</td>
-                    <td className="py-3 px-3 text-center text-white/60">{row.nw}</td>
-                    <td className="py-3 px-3 text-center text-white/60">{row.br}</td>
-                    <td className="py-3 px-3 text-center text-[#d4af37] font-semibold" style={{ backgroundColor: 'rgba(212, 175, 55, 0.08)' }}>{row.ak}</td>
-                    <td className="py-3 px-3 text-center text-white/60">{row.ck}</td>
-                    <td className="py-3 px-3 text-center text-white/60">{row.ch}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
 
           <div className="text-center">
             <Link href="/credit-cards">
