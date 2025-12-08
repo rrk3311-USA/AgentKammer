@@ -78,7 +78,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(212,175,55,0.1),transparent_50%)]" />
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Header */}
-          <div className="text-center mb-6">
+          <div className="text-center pt-[7px] pb-[7px] mt-[23px] mb-[23px]">
             <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-white">
               Your AI Agent for Better{" "}
               <span style={{ color: '#d4af37' }}>Financial Outcomes</span>
