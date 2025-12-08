@@ -109,90 +109,7 @@ export default function Home() {
           </Card>
         </div>
       </section>
-      {/* SECTION 2: How It Works + What You'll Unlock */}
-      <section className="relative py-12 px-4 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 pt-[0px] pb-[0px]">
-        <div className="max-w-6xl mx-auto">
-          {/* Top Gradient Divider */}
-          <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 mb-12" />
-
-          {/* How It Works Section */}
-          <div className="mb-16">
-            <div className="text-center mb-12">
-              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-3 text-[#d0a933]">
-                How It Works
-              </h2>
-              <p className="text-xl text-white/70 max-w-3xl mx-auto">
-                Three simple steps to unlock personalized recommendations
-              </p>
-            </div>
-
-            {/* How It Works Cards - Grid of 3 */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                { 
-                  num: '1', 
-                  title: 'One Profile', 
-                  desc: 'Share your financial profile once - it powers all recommendations',
-                  highlights: []
-                },
-                { 
-                  num: '2', 
-                  title: '100+ Products Analyzed', 
-                  desc: 'AI screens hundreds of offers across 14 financial categories',
-                  highlights: []
-                },
-                { 
-                  num: '3', 
-                  title: 'Personalized Rankings', 
-                  desc: 'Get AI-matched recommendations ranked specifically for you',
-                  highlights: []
-                }
-              ].map((item) => (
-                <Card 
-                  key={item.num}
-                  className="overflow-hidden border-0 h-full hover-elevate transition-all cursor-pointer"
-                  style={{ 
-                    background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
-                    backdropFilter: 'blur(20px)'
-                  }}
-                  data-testid={`card-step-${item.num}`}
-                >
-                  <div className="p-8 flex flex-col h-full">
-                    {/* Icon */}
-                    <div 
-                      className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
-                      style={{
-                        background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
-                        border: '2px solid rgba(212,175,55,0.3)'
-                      }}
-                    >
-                      <div 
-                        className="w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold text-white"
-                        style={{
-                          background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
-                        }}
-                      >
-                        {item.num}
-                      </div>
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="font-serif text-2xl font-bold text-white mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-base text-white/70 mb-6">
-                      {item.desc}
-                    </p>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          
-        </div>
-      </section>
-      {/* SECTION 3: Choose Your Category - Combined */}
+      {/* SECTION 2: Choose Your Category - Combined */}
       <section id="categories" className="relative py-8 px-4 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-900">
         <div className="max-w-6xl mx-auto">
           {/* Divider */}
@@ -292,8 +209,91 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* SECTION 3: Real Estate Concierge - Image Background */}
-      <section className="relative py-12 lg:py-16 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800">
+
+      {/* SECTION 3: How It Works */}
+      <section className="relative py-12 px-4 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800">
+        <div className="max-w-6xl mx-auto">
+          {/* Top Gradient Divider */}
+          <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 mb-12" />
+
+          {/* How It Works Section */}
+          <div className="mb-16">
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-3 text-white">
+                How It Works
+              </h2>
+              <p className="text-xl text-white/70 max-w-3xl mx-auto">
+                Three simple steps to unlock personalized recommendations
+              </p>
+            </div>
+
+            {/* How It Works Cards - Grid of 3 */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { 
+                  num: '1', 
+                  title: 'One Profile', 
+                  desc: 'Share your financial profile once - it powers all recommendations',
+                  highlights: []
+                },
+                { 
+                  num: '2', 
+                  title: '100+ Products Analyzed', 
+                  desc: 'AI screens hundreds of offers across 14 financial categories',
+                  highlights: []
+                },
+                { 
+                  num: '3', 
+                  title: 'Personalized Rankings', 
+                  desc: 'Get AI-matched recommendations ranked specifically for you',
+                  highlights: []
+                }
+              ].map((item) => (
+                <Card 
+                  key={item.num}
+                  className="overflow-hidden border-0 h-full hover-elevate transition-all cursor-pointer"
+                  style={{ 
+                    background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
+                    backdropFilter: 'blur(20px)'
+                  }}
+                  data-testid={`card-step-${item.num}`}
+                >
+                  <div className="p-8 flex flex-col h-full">
+                    {/* Icon */}
+                    <div 
+                      className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
+                      style={{
+                        background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
+                        border: '2px solid rgba(212,175,55,0.3)'
+                      }}
+                    >
+                      <div 
+                        className="w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold text-white"
+                        style={{
+                          background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
+                        }}
+                      >
+                        {item.num}
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="font-serif text-2xl font-bold text-white mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-base text-white/70 mb-6">
+                      {item.desc}
+                    </p>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4: Real Estate Concierge - Image Background */}
+      <section className="relative py-12 lg:py-16 overflow-hidden bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${conciergeImage})` }}
@@ -338,7 +338,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* SECTION 4: Investment Accounts */}
+      {/* SECTION 5: Investment Accounts */}
       <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-800 via-slate-750 to-slate-700 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10">
@@ -372,7 +372,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* SECTION 5: Credit Cards Comparison - Dark Navy */}
+      {/* SECTION 6: Credit Cards Comparison - Dark Navy */}
       <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-10">
@@ -463,7 +463,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* SECTION 6: Credit Card Showcase */}
+      {/* SECTION 7: Credit Card Showcase */}
       <CreditCardShowcase />
       {/* SECTION 8: Final CTA - Dark Navy */}
       <section className="py-8 lg:py-12 bg-gradient-to-b from-slate-900 to-slate-950 text-white relative overflow-hidden">
