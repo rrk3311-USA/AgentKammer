@@ -148,14 +148,67 @@ export function AgenticEngineVisual() {
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent opacity-70" />
         </div>
 
-        {/* Bottom caption */}
+        {/* Bottom caption with pixel clusters */}
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-slate-950 py-3 px-6 z-20 pointer-events-none">
-          <div className="flex items-center justify-center gap-3">
-            <div className="w-2 h-2 rounded-full animate-pulse bg-cyan-400" />
-            <span className="text-cyan-300 font-semibold text-sm md:text-base tracking-wide text-center">
+          <div className="flex items-center justify-center gap-4 md:gap-6">
+            {/* Left pixel cluster */}
+            <div className="flex flex-wrap gap-1 justify-end w-16 md:w-24 h-12">
+              {[...Array(12)].map((_, i) => {
+                const isGreen = Math.random() > 0.85;
+                const cyanShades = ['#22d3ee', '#06b6d4', '#0891b2', '#00d9ff', '#0ff0ff'];
+                const greenShades = ['#10b981', '#34d399', '#6ee7b7', '#a7f3d0'];
+                const color = isGreen 
+                  ? greenShades[Math.floor(Math.random() * greenShades.length)]
+                  : cyanShades[Math.floor(Math.random() * cyanShades.length)];
+                const delay = Math.random() * 3;
+                
+                return (
+                  <div
+                    key={`left-${i}`}
+                    className="w-1.5 h-1.5 md:w-2 md:h-2"
+                    style={{
+                      backgroundColor: color,
+                      opacity: 0.6 + Math.random() * 0.4,
+                      animation: `pixelFloat 3s ease-in-out infinite`,
+                      animationDelay: `${delay}s`,
+                      boxShadow: `0 0 4px ${color}`,
+                    }}
+                  />
+                );
+              })}
+            </div>
+
+            {/* Text */}
+            <span className="text-cyan-300 font-semibold text-sm md:text-base tracking-wide text-center whitespace-nowrap">
               Agentic Deal Procurement
             </span>
-            <div className="w-2 h-2 rounded-full animate-pulse bg-cyan-400" />
+
+            {/* Right pixel cluster */}
+            <div className="flex flex-wrap gap-1 justify-start w-16 md:w-24 h-12">
+              {[...Array(12)].map((_, i) => {
+                const isGreen = Math.random() > 0.85;
+                const cyanShades = ['#22d3ee', '#06b6d4', '#0891b2', '#00d9ff', '#0ff0ff'];
+                const greenShades = ['#10b981', '#34d399', '#6ee7b7', '#a7f3d0'];
+                const color = isGreen 
+                  ? greenShades[Math.floor(Math.random() * greenShades.length)]
+                  : cyanShades[Math.floor(Math.random() * cyanShades.length)];
+                const delay = Math.random() * 3;
+                
+                return (
+                  <div
+                    key={`right-${i}`}
+                    className="w-1.5 h-1.5 md:w-2 md:h-2"
+                    style={{
+                      backgroundColor: color,
+                      opacity: 0.6 + Math.random() * 0.4,
+                      animation: `pixelFloat 3s ease-in-out infinite`,
+                      animationDelay: `${delay}s`,
+                      boxShadow: `0 0 4px ${color}`,
+                    }}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
 
@@ -176,6 +229,25 @@ export function AgenticEngineVisual() {
               opacity: 0.3;
             }
             50% {
+              opacity: 0.7;
+            }
+          }
+
+          @keyframes pixelFloat {
+            0%, 100% {
+              transform: translateY(0px);
+              opacity: 0.6;
+            }
+            25% {
+              transform: translateY(-2px);
+              opacity: 0.8;
+            }
+            50% {
+              transform: translateY(2px);
+              opacity: 0.5;
+            }
+            75% {
+              transform: translateY(-1px);
               opacity: 0.7;
             }
           }
