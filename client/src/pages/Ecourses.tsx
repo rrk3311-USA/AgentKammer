@@ -48,7 +48,7 @@ export default function Ecourses() {
       price: "$150",
       rating: 4.9,
       students: 612,
-      description: "Decode the mindset of ultra-high-net-worth clients. Learn the psychological triggers, communication patterns, and relationship-building strategies that close $5M+ deals. Understand what luxury buyers really want beyond the property specs.",
+      description: "Decode the mindset of ultra-high-net-worth clients. Learn the psychological triggers, communication patterns, and relationship-building strategies that close $5M+ deals. Understand what real estate buyers really want beyond the property specs.",
       icon: Brain,
       highlights: [
         "UHNW client behavioral patterns",
