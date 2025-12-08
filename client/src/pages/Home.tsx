@@ -20,7 +20,9 @@ import {
   ShoppingBag,
   Wallet,
   Shield,
-  TrendingUp as InvestIcon
+  TrendingUp as InvestIcon,
+  Zap,
+  Lightbulb
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
 import { CreditCardShowcase } from "@/components/CreditCardShowcase";
@@ -435,6 +437,49 @@ export default function Home() {
       </section>
       {/* SECTION 7: Credit Card Showcase */}
       <CreditCardShowcase />
+      {/* SECTION 7B: What You'll Unlock - White Background */}
+      <section className="py-12 px-4 bg-white text-slate-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-slate-900">
+              What You'll Unlock
+            </h2>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+              Exclusive benefits and premium rewards designed to maximize your financial advantage and quality of life
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { icon: Plane, label: 'Airport Lounges', desc: 'VIP access to premium lounges worldwide' },
+              { icon: UtensilsCrossed, label: 'Fine Dining Credits', desc: 'Exclusive restaurant benefits and reservations' },
+              { icon: ShoppingBag, label: 'Shopping Rewards', desc: 'Cashback and discounts on premium brands' },
+              { icon: Zap, label: 'Instant Cashback', desc: 'Real-time cash rewards on every purchase' },
+              { icon: Lightbulb, label: 'Travel Insurance', desc: 'Comprehensive coverage for all your trips' },
+              { icon: TrendingUp, label: 'Investment Perks', desc: 'Priority access to exclusive investment opportunities' }
+            ].map((benefit, idx) => {
+              const BenefitIcon = benefit.icon;
+              return (
+                <div
+                  key={idx}
+                  className="p-6 rounded-lg border border-slate-200 bg-slate-50 hover-elevate transition-all"
+                  data-testid={`benefit-unlock-${idx}`}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-lg bg-gradient-to-br from-[#00d4ff]/20 to-[#00ff88]/20 shrink-0">
+                      <BenefitIcon className="h-6 w-6 text-[#00d4ff]" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-slate-900 mb-2">{benefit.label}</h3>
+                      <p className="text-sm text-slate-600">{benefit.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
       {/* SECTION 8: Final CTA - Bright Gradient */}
       <section className="py-8 lg:py-12 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white relative overflow-hidden">
         {/* Bright gradient overlay */}
