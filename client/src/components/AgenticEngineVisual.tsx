@@ -105,12 +105,12 @@ export function AgenticEngineVisual() {
           <circle
             cx="485"
             cy="210"
-            r="30"
+            r="40"
             fill="#00d4ff"
-            opacity="0.6"
+            opacity="0.15"
             filter="url(#coreGlow)"
             style={{
-              animation: `coreBreathing 3s ease-in-out infinite`,
+              animation: `coreBreathing 6s ease-in-out infinite`,
             }}
           />
           
@@ -120,10 +120,10 @@ export function AgenticEngineVisual() {
             cy="210"
             r="15"
             fill="#ffffff"
-            opacity="0.8"
+            opacity="0.6"
             filter="url(#coreGlow)"
             style={{
-              animation: `innerCorePulse 3s ease-in-out infinite`,
+              animation: `innerCorePulse 6s ease-in-out infinite`,
             }}
           />
 
@@ -261,23 +261,23 @@ export function AgenticEngineVisual() {
       <style>{`
         @keyframes coreBreathing {
           0%, 100% {
-            r: 25;
-            opacity: 0.3;
+            r: 35;
+            opacity: 0.08;
           }
           50% {
-            r: 45;
-            opacity: 0.7;
+            r: 50;
+            opacity: 0.25;
           }
         }
 
         @keyframes innerCorePulse {
           0%, 100% {
-            r: 10;
-            opacity: 0.6;
+            r: 12;
+            opacity: 0.4;
           }
           50% {
-            r: 20;
-            opacity: 1;
+            r: 22;
+            opacity: 0.8;
           }
         }
 
