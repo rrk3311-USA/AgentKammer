@@ -251,8 +251,8 @@ export function CreditCardShowcase() {
         </div>
 
         {/* Benefits Section - Bright & Vibrant at Bottom */}
-        <div className="mt-20">
-          <div className="text-center mb-12">
+        <div className="mt-8">
+          <div className="text-center mb-6">
             <h3 className="font-serif text-3xl md:text-4xl font-bold mb-4 text-white">
               What You'll Unlock
             </h3>

@@ -110,13 +110,13 @@ export default function Home() {
         </div>
       </section>
       {/* SECTION 2: Choose Your Category - Combined */}
-      <section id="categories" className="relative py-8 px-4 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-900">
+      <section id="categories" className="relative py-6 px-4 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-900">
         <div className="max-w-6xl mx-auto">
           {/* Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-16" />
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-8" />
 
           {/* Choose Your Category Header */}
-          <div className="text-center mb-10">
+          <div className="text-center mb-6">
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-3">
               Choose Your Category
             </h2>
@@ -210,14 +210,14 @@ export default function Home() {
         </div>
       </section>
       {/* SECTION 3: How It Works */}
-      <section className="relative py-12 px-4 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 pt-[0px] pb-[0px] pl-[0px] pr-[0px]">
+      <section className="relative py-6 px-4 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800">
         <div className="max-w-6xl mx-auto">
           {/* Top Gradient Divider */}
-          <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 mb-12" />
+          <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 mb-6" />
 
           {/* How It Works Section */}
-          <div className="mb-16">
-            <div className="text-center mb-12">
+          <div className="mb-8">
+            <div className="text-center mb-6">
               <h2 className="font-serif text-4xl md:text-5xl font-bold mb-3 text-white">
                 How It Works
               </h2>
@@ -273,9 +273,9 @@ export default function Home() {
         </div>
       </section>
       {/* SECTION 4: Investment Accounts */}
-      <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-900 via-slate-850 to-slate-800 px-4 pt-[0px] pb-[0px] pl-[0px] pr-[0px]">
+      <section className="py-6 lg:py-8 bg-gradient-to-b from-slate-900 via-slate-850 to-slate-800 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-10">
+          <div className="text-center mb-6">
             <div className="flex items-center justify-center mb-4">
               <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
                 <TrendingUp className="h-7 w-7" style={GOLD_ICON_STYLE} />
@@ -307,7 +307,7 @@ export default function Home() {
         </div>
       </section>
       {/* SECTION 5: Real Estate Concierge - Image Background */}
-      <section className="relative py-12 lg:py-16 overflow-hidden bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
+      <section className="relative py-6 lg:py-8 overflow-hidden bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${conciergeImage})` }}
@@ -316,7 +316,7 @@ export default function Home() {
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 z-10">
-          <div className="text-center mb-10">
+          <div className="text-center mb-6">
             <div className="flex items-center justify-center mb-4">
               <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
                 <Building2 className="h-7 w-7" style={GOLD_ICON_STYLE} />
@@ -353,9 +353,9 @@ export default function Home() {
         </div>
       </section>
       {/* SECTION 6: Credit Cards Comparison - Dark Navy */}
-      <section className="py-12 lg:py-16 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
+      <section className="py-6 lg:py-8 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-10">
+          <div className="text-center mb-6">
             <div className="flex items-center justify-center mb-4">
               <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
                 <CreditCard className="h-7 w-7" style={GOLD_ICON_STYLE} />
