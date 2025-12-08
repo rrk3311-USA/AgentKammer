@@ -200,16 +200,8 @@ export function CreditCardShowcase() {
             <h2 className="font-serif text-3xl md:text-5xl font-bold text-white">
               Credit Cards That
             </h2>
-            <div className="flex items-center justify-center gap-2 flex-wrap">
-              <span style={{ textDecoration: 'line-through', color: 'rgba(255, 255, 255, 0.4)', fontSize: 'inherit' }} className="font-serif text-3xl md:text-5xl font-bold">
-                allowing
-              </span>
-              <h2 className="font-serif text-3xl md:text-5xl font-black" style={{ background: 'linear-gradient(90deg, #00d4ff 0%, #00ff88 50%, #00d4ff 100%)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '0.05em' }}>
-                FORCING
-              </h2>
-            </div>
-            <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mt-1">
-              Credit Cards to Compete For You
+            <h2 className="font-serif text-3xl md:text-5xl font-bold" style={{ background: 'linear-gradient(90deg, #00d4ff 0%, #00ff88 50%, #00d4ff 100%)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              Compete For You
             </h2>
           </div>
           <p className="text-base md:text-xl text-white/70 max-w-3xl mx-auto">
@@ -349,7 +341,7 @@ export function CreditCardShowcase() {
 
         {/* Benefits Collage */}
         <div className="mb-6">
-          <h3 className="text-2xl font-bold text-white mb-8 text-center">What You'll Unlock</h3>
+          <h3 className="text-3xl md:text-4xl font-bold mb-8 text-center" style={{ background: 'linear-gradient(90deg, #00d4ff 0%, #00ff88 50%, #00d4ff 100%)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>What You'll Unlock</h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {benefits.map((benefit, idx) => (
               <Card
@@ -365,7 +357,7 @@ export function CreditCardShowcase() {
                 >
                   <benefit.icon className="h-6 w-6 text-[#d4af37]" />
                 </div>
-                <p className="text-sm font-semibold text-white">{benefit.label}</p>
+                <p className="text-base md:text-lg font-semibold" style={{ background: 'linear-gradient(90deg, #00d4ff 0%, #00ff88 50%, #00d4ff 100%)', backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{benefit.label}</p>
               </Card>
             ))}
           </div>
