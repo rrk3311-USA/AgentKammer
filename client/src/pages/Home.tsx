@@ -210,7 +210,7 @@ export default function Home() {
         </div>
       </section>
       {/* SECTION 3: How It Works */}
-      <section className="relative py-12 px-4 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800">
+      <section className="relative py-12 px-4 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 pt-[0px] pb-[0px]">
         <div className="max-w-6xl mx-auto">
           {/* Top Gradient Divider */}
           <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 mb-12" />
