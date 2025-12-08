@@ -467,7 +467,9 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
               </div>
               <div>
                 <h3 className="text-white font-serif text-2xl font-bold mb-2">Ready to find your perfect card?</h3>
-                <p className="text-white/70">Start Your Agentic Profile</p>
+                {categoryId !== 'investing' && (
+                  <p className="text-white/70">Start Your Agentic Profile</p>
+                )}
               </div>
             </div>
             <Button 
