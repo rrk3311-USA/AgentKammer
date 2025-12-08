@@ -23,12 +23,36 @@ import { Link } from "wouter";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const stages = [
+  { id: "elevator-pitches", label: "Elevator Pitches", icon: Sparkles, color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30" },
   { id: "ideation", label: "Ideation", icon: Lightbulb, color: "bg-purple-500/20 text-purple-400 border-purple-500/30" },
   { id: "legal", label: "Legal Review", icon: Scale, color: "bg-blue-500/20 text-blue-400 border-blue-500/30" },
   { id: "ready", label: "Ready to Shoot", icon: Clapperboard, color: "bg-amber-500/20 text-amber-400 border-amber-500/30" },
   { id: "completed", label: "Completed", icon: Archive, color: "bg-green-500/20 text-green-400 border-green-500/30" },
   { id: "chat-archive", label: "Chat Archive", icon: MessageSquare, color: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30" },
   { id: "offer-archive", label: "Offer Archive", icon: FolderArchive, color: "bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30" },
+];
+
+const elevatorPitches = [
+  {
+    id: "one-liner",
+    title: "One-Liner",
+    description: "Agent Kammer is the AI-powered financial comparison engine that matches users with the best products across 14 financial categories—when brokers compete, you win."
+  },
+  {
+    id: "medium",
+    title: "Medium Pitch",
+    description: "Agent Kammer uses agentic AI to analyze 100+ financial products and match users with the best fit for their profile. We cover everything from elite credit cards and high-yield savings to investment accounts and mortgage refinancing. Our deterministic scoring algorithm delivers consistent, transparent recommendations. We're building the future of financial product discovery—where sophisticated AI research meets human-first design."
+  },
+  {
+    id: "long",
+    title: "Full Description",
+    description: "Agent Kammer is the next-generation financial comparison platform powered by sophisticated AI. We analyze 100+ products across 14 financial categories—credit cards, personal loans, investment accounts, banking, insurance, refinancing, credit building, and more. Our proprietary agentic AI engine uses deterministic scoring to match users with products that actually fit their life, not just their balance sheet. No more endless spreadsheets. No more marketing fluff. Just clear, AI-driven recommendations backed by real analysis. We're trusted by thousands of users seeking genuine financial optionality."
+  },
+  {
+    id: "casual",
+    title: "Casual/Fun Pitch",
+    description: "Agent Kammer: Where AI meets your wallet. We've built a sophisticated comparison engine that analyzes 100+ financial products so you don't have to. From credit cards that actually pay for themselves to investment accounts that make sense—we match users with products they'll actually want. Think of us as the financial equivalent of having a brilliant analyst in your back pocket."
+  }
 ];
 
 const offerArchiveItems = [
@@ -428,7 +452,38 @@ export default function ContentStudio() {
 
           {stages.map((stage) => (
             <TabsContent key={stage.id} value={stage.id} className="space-y-4">
-              {stage.id === "chat-archive" ? (
+              {stage.id === "elevator-pitches" ? (
+                <div className="space-y-4 max-w-4xl">
+                  <div className="grid gap-4">
+                    {elevatorPitches.map((pitch) => (
+                      <Card key={pitch.id} className="bg-slate-500/20 border-slate-400/40 hover:border-slate-300/50 transition-all hover-elevate">
+                        <CardHeader>
+                          <CardTitle className="text-white flex items-center gap-2">
+                            <Sparkles className="w-5 h-5 text-yellow-400" />
+                            {pitch.title}
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-slate-100 leading-relaxed">{pitch.description}</p>
+                          <Button 
+                            variant="outline"
+                            size="sm"
+                            className="mt-4 border-slate-300 text-slate-100 hover:bg-slate-500/50"
+                            onClick={() => {
+                              navigator.clipboard.writeText(pitch.description);
+                              toast({ title: "Copied to clipboard" });
+                            }}
+                            data-testid={`button-copy-pitch-${pitch.id}`}
+                          >
+                            <Mail className="w-4 h-4 mr-2" />
+                            Copy for Affiliate Registration
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              ) : stage.id === "chat-archive" ? (
                 <div className="grid gap-4 lg:grid-cols-3">
                   <div className="lg:col-span-1 space-y-3">
                     <h3 className="text-lg font-semibold text-white mb-4">Conversations ({chatConversations.length})</h3>
