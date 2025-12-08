@@ -109,9 +109,8 @@ export default function Home() {
           </Card>
         </div>
       </section>
-
       {/* SECTION 2: How It Works + What You'll Unlock */}
-      <section className="relative py-12 px-4 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800">
+      <section className="relative py-12 px-4 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 pt-[0px] pb-[0px]">
         <div className="max-w-6xl mx-auto">
           {/* Top Gradient Divider */}
           <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 mb-12" />
@@ -222,7 +221,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* SECTION 3: Choose Your Category - Combined */}
       <section id="categories" className="relative py-8 px-4 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-900">
         <div className="max-w-6xl mx-auto">
@@ -323,7 +321,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* SECTION 3: Real Estate Concierge - Image Background */}
       <section className="relative py-12 lg:py-16 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800">
         <div 
