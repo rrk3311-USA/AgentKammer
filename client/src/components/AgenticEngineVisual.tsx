@@ -3,17 +3,43 @@ import brainImage from "@assets/image_1765086283557.png";
 import { Brain } from "lucide-react";
 import { SiReplit, SiAnthropic, SiClaude, SiNvidia } from "react-icons/si";
 
+const productCategories = [
+  "Credit Cards", "Investing", "Real Estate", "Insurance", "Loans",
+  "Banking", "Tax Tools", "Refinancing", "Student Loans", "Crypto"
+];
+
+const codeSnippets = [
+  "const match = analyze()",
+  "const score = compare()",
+  "const rank = score()",
+  "const winner = optimize()",
+  "const result = match()",
+  "const data = fetch()",
+];
+
 export function AgenticEngineVisual() {
-  const [codeDrops, setCodeDrops] = useState<{ id: number; x: number; delay: number }[]>([]);
+  const [codeDrops, setCodeDrops] = useState<{ id: number; code: string; delay: number; direction: 'up' | 'down' }[]>([]);
+  const [floatingCategories, setFloatingCategories] = useState<{ id: number; text: string; x: number; y: number; delay: number }[]>([]);
 
   useEffect(() => {
-    // Generate initial code drops - left and right sides
-    const drops = Array.from({ length: 16 }, (_, i) => ({
+    // Generate code drops - cascading up and down from center
+    const drops: Array<{ id: number; code: string; delay: number; direction: 'up' | 'down' }> = Array.from({ length: 12 }, (_, i) => ({
       id: i,
-      x: i < 8 ? 35 + (i % 6) * 8 : 750 + (i % 6) * 8,
-      delay: (i % 8) * 0.15,
+      code: codeSnippets[i % codeSnippets.length],
+      delay: (i % 6) * 0.2,
+      direction: (i < 6 ? 'up' : 'down') as const
     }));
     setCodeDrops(drops);
+
+    // Generate floating categories randomly
+    const categories = Array.from({ length: 10 }, (_, i) => ({
+      id: i,
+      text: productCategories[Math.floor(Math.random() * productCategories.length)],
+      x: 100 + Math.random() * 800,
+      y: 80 + Math.random() * 440,
+      delay: Math.random() * 3
+    }));
+    setFloatingCategories(categories);
   }, []);
 
   return (
@@ -38,14 +64,21 @@ export function AgenticEngineVisual() {
         >
           <defs>
             <filter id="coreGlow">
-              <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+              <feGaussianBlur stdDeviation="8" result="coloredBlur" />
               <feMerge>
                 <feMergeNode in="coloredBlur" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-            <filter id="orbGlow">
-              <feGaussianBlur stdDeviation="6" result="coloredBlur" />
+            <filter id="codeGlow">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+              <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <filter id="categoryGlow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur" />
               <feMerge>
                 <feMergeNode in="coloredBlur" />
                 <feMergeNode in="SourceGraphic" />
@@ -53,227 +86,112 @@ export function AgenticEngineVisual() {
             </filter>
           </defs>
 
-          {/* Circuit paths inside brain */}
-          {/* Horizontal circuits */}
-          <line
-            x1="420"
-            y1="240"
-            x2="580"
-            y2="240"
-            stroke="#00ff88"
-            strokeWidth="2"
-            opacity="0.4"
+          {/* Breathing Core Glow - Center of Brain */}
+          <circle
+            cx="500"
+            cy="240"
+            r="30"
+            fill="#00d4ff"
+            opacity="0.6"
             filter="url(#coreGlow)"
             style={{
-              animation: `circuitPulse 3s ease-in-out infinite`,
+              animation: `coreBreathing 3s ease-in-out infinite`,
             }}
           />
-          <line
-            x1="440"
-            y1="200"
-            x2="560"
-            y2="200"
-            stroke="#00ff88"
-            strokeWidth="2"
-            opacity="0.4"
+          
+          {/* Inner bright core */}
+          <circle
+            cx="500"
+            cy="240"
+            r="15"
+            fill="#ffffff"
+            opacity="0.8"
             filter="url(#coreGlow)"
             style={{
-              animation: `circuitPulse 3s ease-in-out infinite`,
-              animationDelay: "0.3s",
-            }}
-          />
-          <line
-            x1="440"
-            y1="280"
-            x2="560"
-            y2="280"
-            stroke="#00ff88"
-            strokeWidth="2"
-            opacity="0.4"
-            filter="url(#coreGlow)"
-            style={{
-              animation: `circuitPulse 3s ease-in-out infinite`,
-              animationDelay: "0.6s",
+              animation: `innerCorePulse 3s ease-in-out infinite`,
             }}
           />
 
-          {/* Vertical circuits */}
-          <line
-            x1="500"
-            y1="160"
-            x2="500"
-            y2="320"
-            stroke="#00ff88"
-            strokeWidth="2"
-            opacity="0.4"
-            filter="url(#coreGlow)"
-            style={{
-              animation: `circuitPulse 3s ease-in-out infinite`,
-              animationDelay: "0.9s",
-            }}
-          />
-          <line
-            x1="460"
-            y1="180"
-            x2="460"
-            y2="300"
-            stroke="#00ff88"
-            strokeWidth="2"
-            opacity="0.4"
-            filter="url(#coreGlow)"
-            style={{
-              animation: `circuitPulse 3s ease-in-out infinite`,
-              animationDelay: "1.2s",
-            }}
-          />
-          <line
-            x1="540"
-            y1="180"
-            x2="540"
-            y2="300"
-            stroke="#00ff88"
-            strokeWidth="2"
-            opacity="0.4"
-            filter="url(#coreGlow)"
-            style={{
-              animation: `circuitPulse 3s ease-in-out infinite`,
-              animationDelay: "1.5s",
-            }}
-          />
-
-          {/* Diagonal circuits */}
-          <line
-            x1="440"
-            y1="180"
-            x2="500"
-            y2="240"
-            stroke="#00ff88"
-            strokeWidth="2"
-            opacity="0.4"
-            filter="url(#coreGlow)"
-            style={{
-              animation: `circuitPulse 3s ease-in-out infinite`,
-              animationDelay: "1.8s",
-            }}
-          />
-          <line
-            x1="560"
-            y1="180"
-            x2="500"
-            y2="240"
-            stroke="#00ff88"
-            strokeWidth="2"
-            opacity="0.4"
-            filter="url(#coreGlow)"
-            style={{
-              animation: `circuitPulse 3s ease-in-out infinite`,
-              animationDelay: "2.1s",
-            }}
-          />
-
-          {/* Circuit nodes (connection points) */}
-          {[
-            { cx: 500, cy: 240 },
-            { cx: 420, cy: 240 },
-            { cx: 580, cy: 240 },
-            { cx: 500, cy: 160 },
-            { cx: 500, cy: 320 },
-            { cx: 460, cy: 180 },
-            { cx: 540, cy: 180 },
-            { cx: 460, cy: 300 },
-            { cx: 540, cy: 300 },
-          ].map((node, idx) => (
-            <circle
-              key={`node-${idx}`}
-              cx={node.cx}
-              cy={node.cy}
-              r="4"
+          {/* Cascading code from center - upward */}
+          {codeDrops.filter(d => d.direction === 'up').map((drop, idx) => (
+            <text
+              key={`code-up-${drop.id}`}
+              x="500"
+              y="240"
+              fontSize="12"
               fill="#00ff88"
-              opacity="0.6"
-              filter="url(#coreGlow)"
+              opacity="0.8"
+              fontFamily="monospace"
+              textAnchor="middle"
+              filter="url(#codeGlow)"
               style={{
-                animation: `nodePulse 3s ease-in-out infinite`,
-                animationDelay: `${(idx * 0.3) % 3}s`,
+                animation: `codeCascadeUp 4s ease-in infinite`,
+                animationDelay: `${drop.delay}s`,
               }}
-            />
+            >
+              {drop.code}
+            </text>
           ))}
 
-          {/* Falling code/waterfall from brain */}
-          {codeDrops.map((drop) => (
-            <g key={`drop-${drop.id}`}>
-              {/* Code character */}
-              <text
-                x={drop.x}
-                y="280"
-                fontSize="14"
-                fill="#00ff88"
-                opacity="0.7"
-                fontFamily="monospace"
+          {/* Cascading code from center - downward */}
+          {codeDrops.filter(d => d.direction === 'down').map((drop, idx) => (
+            <text
+              key={`code-down-${drop.id}`}
+              x="500"
+              y="240"
+              fontSize="12"
+              fill="#00d4ff"
+              opacity="0.8"
+              fontFamily="monospace"
+              textAnchor="middle"
+              filter="url(#codeGlow)"
+              style={{
+                animation: `codeCascadeDown 4s ease-in infinite`,
+                animationDelay: `${drop.delay}s`,
+              }}
+            >
+              {drop.code}
+            </text>
+          ))}
+
+          {/* Floating category labels with glow */}
+          {floatingCategories.map((cat) => (
+            <g key={`cat-${cat.id}`}>
+              {/* Background rounded rect for category */}
+              <rect
+                x={cat.x - 35}
+                y={cat.y - 10}
+                width="70"
+                height="20"
+                rx="10"
+                fill="#00d4ff"
+                opacity="0.1"
+                filter="url(#categoryGlow)"
                 style={{
-                  animation: `codeFall 3s linear infinite`,
-                  animationDelay: `${drop.delay}s`,
-                }}
-              >
-                &lt;/&gt;
-              </text>
-              {/* Secondary streaks */}
-              <line
-                x1={drop.x + 2}
-                y1="290"
-                x2={drop.x + 2}
-                y2="400"
-                stroke="#00d4ff"
-                strokeWidth="1"
-                opacity="0.4"
-                style={{
-                  animation: `codeStream 3s ease-in infinite`,
-                  animationDelay: `${drop.delay + 0.2}s`,
+                  animation: `categoryPulse 4s ease-in-out infinite`,
+                  animationDelay: `${cat.delay}s`,
                 }}
               />
+              {/* Category text */}
+              <text
+                x={cat.x}
+                y={cat.y + 4}
+                fontSize="10"
+                fill="#00ff88"
+                opacity="0.8"
+                fontFamily="sans-serif"
+                fontWeight="600"
+                textAnchor="middle"
+                filter="url(#categoryGlow)"
+                style={{
+                  animation: `categoryFade 4s ease-in-out infinite`,
+                  animationDelay: `${cat.delay}s`,
+                }}
+              >
+                {cat.text}
+              </text>
             </g>
           ))}
-
-          {/* Glowing orbs outside frame */}
-          {/* Top right orb */}
-          <circle
-            cx="950"
-            cy="80"
-            r="25"
-            fill="#00d4ff"
-            opacity="0.3"
-            filter="url(#orbGlow)"
-            style={{
-              animation: `orbGlow 4s ease-in-out infinite`,
-            }}
-          />
-
-          {/* Bottom left orb */}
-          <circle
-            cx="30"
-            cy="550"
-            r="20"
-            fill="#00ff88"
-            opacity="0.25"
-            filter="url(#orbGlow)"
-            style={{
-              animation: `orbGlow2 5s ease-in-out infinite`,
-              animationDelay: "0.5s",
-            }}
-          />
-
-          {/* Top left orb (subtle) */}
-          <circle
-            cx="50"
-            cy="60"
-            r="15"
-            fill="#22d3ee"
-            opacity="0.2"
-            filter="url(#orbGlow)"
-            style={{
-              animation: `orbGlow 6s ease-in-out infinite`,
-              animationDelay: "1s",
-            }}
-          />
         </svg>
 
         {/* Bottom 20% overlay with gradient fade */}
@@ -320,9 +238,9 @@ export function AgenticEngineVisual() {
       </div>
 
       <style>{`
-        @keyframes corePulse {
+        @keyframes coreBreathing {
           0%, 100% {
-            r: 35;
+            r: 25;
             opacity: 0.3;
           }
           50% {
@@ -331,44 +249,44 @@ export function AgenticEngineVisual() {
           }
         }
 
-        @keyframes coreBreathe {
+        @keyframes innerCorePulse {
           0%, 100% {
-            r: 20;
-            opacity: 0.4;
+            r: 10;
+            opacity: 0.6;
           }
           50% {
-            r: 28;
-            opacity: 0.8;
+            r: 20;
+            opacity: 1;
           }
         }
 
-        @keyframes codeFall {
+        @keyframes codeCascadeUp {
           0% {
-            transform: translateY(-100px);
+            transform: translateY(0);
             opacity: 0;
           }
           10% {
-            opacity: 0.8;
+            opacity: 1;
           }
           90% {
-            opacity: 0.8;
+            opacity: 1;
           }
           100% {
-            transform: translateY(200px);
+            transform: translateY(-150px);
             opacity: 0;
           }
         }
 
-        @keyframes codeStream {
+        @keyframes codeCascadeDown {
           0% {
-            transform: translateY(-50px);
+            transform: translateY(0);
             opacity: 0;
           }
-          20% {
-            opacity: 0.6;
+          10% {
+            opacity: 1;
           }
-          80% {
-            opacity: 0.6;
+          90% {
+            opacity: 1;
           }
           100% {
             transform: translateY(150px);
@@ -376,49 +294,33 @@ export function AgenticEngineVisual() {
           }
         }
 
-        @keyframes orbGlow {
+        @keyframes categoryPulse {
           0%, 100% {
+            opacity: 0;
+          }
+          25% {
             opacity: 0.2;
-            r: 25;
           }
           50% {
-            opacity: 0.5;
-            r: 32;
-          }
-        }
-
-        @keyframes orbGlow2 {
-          0%, 100% {
             opacity: 0.15;
-            r: 20;
           }
-          50% {
-            opacity: 0.4;
-            r: 26;
-          }
-        }
-
-        @keyframes circuitPulse {
-          0%, 100% {
-            stroke: #00ff88;
+          75% {
             opacity: 0.2;
-            stroke-width: 2;
-          }
-          50% {
-            stroke: #00ff88;
-            opacity: 0.8;
-            stroke-width: 3;
           }
         }
 
-        @keyframes nodePulse {
+        @keyframes categoryFade {
           0%, 100% {
-            opacity: 0.3;
-            r: 4;
+            opacity: 0;
+          }
+          25% {
+            opacity: 0.9;
           }
           50% {
+            opacity: 0.8;
+          }
+          75% {
             opacity: 0.9;
-            r: 6;
           }
         }
       `}</style>
