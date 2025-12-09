@@ -25,7 +25,6 @@ export function Footer() {
   return (
     <footer className="relative">
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
-      
       {/* Links Section - Now at Top */}
       <div className="bg-background border-t border-border/50">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-8">
@@ -100,10 +99,8 @@ export function Footer() {
           </div>
         </div>
       </div>
-
       {/* Divider */}
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
-      
       {/* Row 1: Clock with Update Time */}
       <div className="bg-[#0a1628] border-b border-border/30">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex items-center justify-center gap-2">
@@ -112,7 +109,6 @@ export function Footer() {
           <span className="text-xs text-white/60">{formatDate(lastUpdate)}</span>
         </div>
       </div>
-
       {/* Rows 2-3: Market Ticker Static */}
       <div className="bg-[#0a1628] border-b border-border/30">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-2">
@@ -154,11 +150,10 @@ export function Footer() {
           </div>
         </div>
       </div>
-
       {/* Powered by AI Section */}
       <div className="bg-[#0a1628] border-b border-border/30">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-2">
-          <div className="flex items-center justify-center gap-1.5">
+          <div className="flex items-center justify-center gap-1.5 mt-[7px] mb-[7px] pt-[7px] pb-[7px]">
             <Brain className="h-3 w-3 text-[#79d3ff]" />
             <span className="text-[0.65rem] font-medium text-white/90">Powered by AI</span>
             <div className="flex items-center gap-1.5 text-[0.65rem]">
