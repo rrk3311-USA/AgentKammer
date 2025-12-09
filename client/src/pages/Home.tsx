@@ -435,32 +435,32 @@ export default function Home() {
             ].map((cat) => (
               <Card 
                 key={cat.id}
-                className="overflow-hidden border-0 h-full hover-elevate transition-all cursor-pointer flex flex-col"
+                className="overflow-hidden border-0 h-full hover-elevate transition-all cursor-pointer"
                 style={{ 
                   background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
                   backdropFilter: 'blur(20px)'
                 }}
                 data-testid={`card-benefits-${cat.id}`}
               >
-                {/* Icon - Match Category Section Style */}
-                <div className="flex items-center justify-center p-6">
+                <div className="p-8 flex flex-col h-full">
+                  {/* Icon */}
                   <div 
-                    className="w-14 h-14 rounded-lg flex items-center justify-center"
-                    style={ICON_WRAPPER_STYLE}
+                    className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
+                    style={{
+                      background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
+                      border: '2px solid rgba(212,175,55,0.3)'
+                    }}
                   >
-                    <cat.icon className="h-7 w-7" style={GOLD_ICON_STYLE} />
+                    <cat.icon className="h-10 w-10" style={{ color: '#d4af37' }} />
                   </div>
-                </div>
 
-                {/* Content - Below Icon */}
-                <div className="p-8 flex flex-col flex-1">
                   {/* Title */}
-                  <h3 className="font-serif text-2xl font-bold text-white mb-4">
+                  <h3 className="font-serif text-2xl font-bold text-white mb-2">
                     {cat.name}
                   </h3>
 
                   {/* Features List */}
-                  <div className="space-y-3 flex-1">
+                  <div className="space-y-3 mb-6 flex-1">
                     {cat.highlights.map((highlight, idx) => (
                       <div key={idx} className="flex items-start gap-3">
                         <CheckSquare className="h-4 w-4 mt-0.5 shrink-0 flex-shrink-0" style={{ color: '#d4af37' }} />
