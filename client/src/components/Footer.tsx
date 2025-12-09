@@ -104,40 +104,52 @@ export function Footer() {
       {/* Divider */}
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       
-      {/* Row 1: Clock with Update Time - Larger */}
+      {/* Row 1: Clock with Update Time */}
       <div className="bg-[#0a1628] border-b border-border/30">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 flex items-center justify-center gap-3">
-          <Clock className="h-5 w-5 text-[#d4af37]" />
-          <span className="text-sm font-mono text-[#d4af37]">{formatTime(lastUpdate)}</span>
-          <span className="text-sm text-white/60">{formatDate(lastUpdate)}</span>
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex items-center justify-center gap-2">
+          <Clock className="h-3.5 w-3.5 text-[#d4af37]" />
+          <span className="text-xs font-mono text-[#d4af37]">{formatTime(lastUpdate)}</span>
+          <span className="text-xs text-white/60">{formatDate(lastUpdate)}</span>
         </div>
       </div>
 
-      {/* Rows 2-3: Market Ticker Static - Larger */}
+      {/* Rows 2-3: Market Ticker Static */}
       <div className="bg-[#0a1628] border-b border-border/30">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-3">
-          <div className="flex items-center justify-center gap-3 flex-wrap text-sm">
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-black/50 border border-[#d4af37]/30 rounded-sm">
-              <span className="text-[#d4af37] font-medium">30Y FIXED</span>
-              <span className="font-mono font-bold text-white text-base">6.82%</span>
-              <TrendingDown className="h-4 w-4 text-green-400" />
-              <span className="text-green-400 font-medium">-0.03</span>
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-2">
+          <div className="flex items-center justify-center gap-2 flex-wrap text-xs">
+            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
+              <span className="text-[#d4af37] font-medium text-[0.7rem]">30Y FIXED</span>
+              <span className="font-mono font-bold text-white text-sm">6.82%</span>
+              <TrendingDown className="h-3 w-3 text-green-400" />
+              <span className="text-green-400 font-medium text-[0.7rem]">-0.03</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-black/50 border border-[#d4af37]/30 rounded-sm">
-              <span className="text-[#d4af37] font-medium">PRIME RATE</span>
-              <span className="font-mono font-bold text-white text-base">8.50%</span>
+            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
+              <span className="text-[#d4af37] font-medium text-[0.7rem]">15Y FIXED</span>
+              <span className="font-mono font-bold text-white text-sm">6.09%</span>
+              <TrendingDown className="h-3 w-3 text-green-400" />
+              <span className="text-green-400 font-medium text-[0.7rem]">-0.05</span>
+            </div>
+            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
+              <span className="text-[#d4af37] font-medium text-[0.7rem]">50Y FIXED</span>
+              <span className="font-mono font-bold text-white text-sm">7.15%</span>
+              <TrendingDown className="h-3 w-3 text-green-400" />
+              <span className="text-green-400 font-medium text-[0.7rem]">-0.02</span>
+            </div>
+            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
+              <span className="text-[#d4af37] font-medium text-[0.7rem]">PRIME RATE</span>
+              <span className="font-mono font-bold text-white text-sm">8.50%</span>
               <span className="text-gray-400">—</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-black/50 border border-[#d4af37]/30 rounded-sm">
-              <span className="text-[#d4af37] font-medium">FED RATE</span>
-              <span className="font-mono font-bold text-white text-base">5.50%</span>
+            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
+              <span className="text-[#d4af37] font-medium text-[0.7rem]">FED RATE</span>
+              <span className="font-mono font-bold text-white text-sm">5.50%</span>
               <span className="text-gray-400">—</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-black/50 border border-[#d4af37]/30 rounded-sm">
-              <span className="text-[#d4af37] font-medium">AVG CC APR</span>
-              <span className="font-mono font-bold text-white text-base">24.6%</span>
-              <TrendingUp className="h-4 w-4 text-red-400" />
-              <span className="text-red-400 font-medium">+0.20</span>
+            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
+              <span className="text-[#d4af37] font-medium text-[0.7rem]">AVG CC APR</span>
+              <span className="font-mono font-bold text-white text-sm">24.6%</span>
+              <TrendingUp className="h-3 w-3 text-red-400" />
+              <span className="text-red-400 font-medium text-[0.7rem]">+0.20</span>
             </div>
           </div>
         </div>
