@@ -32,9 +32,6 @@ import conciergeGestureImage from '@assets/image_1763360901241.png';
 import airportLoungeImage from '@assets/generated_images/luxury_airport_lounge.png';
 import dinningImage from '@assets/generated_images/fine_dining_experience.png';
 import travelImage from '@assets/generated_images/luxury_travel_destination.png';
-import portfolioIcon from '@assets/generated_images/elegant_gold_navy_arrow_coins_luxury.png';
-import buildingIcon from '@assets/generated_images/elegant_gold_navy_building_luxury.png';
-import creditCardIcon from '@assets/generated_images/elegant_gold_navy_credit_card_luxury.png';
 
 const ICON_WRAPPER_STYLE = {
   background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
@@ -445,13 +442,9 @@ export default function Home() {
                 }}
                 data-testid={`card-benefits-${cat.id}`}
               >
-                {/* Icon - Half Size Top with Elegant Light Background */}
-                <div className="relative h-32 overflow-hidden rounded-b-2xl flex items-center justify-center bg-gradient-to-b from-slate-100 to-white">
-                  <img 
-                    src={cat.iconUrl} 
-                    alt={cat.name} 
-                    className="h-24 w-24 object-contain"
-                  />
+                {/* Icon - Half Size Top */}
+                <div className="relative h-32 overflow-hidden rounded-b-2xl flex items-center justify-center" style={{ background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.2), rgba(212,175,55,0.05))' }}>
+                  <cat.icon className="h-20 w-20" style={{ color: '#d4af37' }} />
                 </div>
 
                 {/* Content - Below Icon */}
