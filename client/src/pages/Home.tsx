@@ -32,9 +32,9 @@ import conciergeGestureImage from '@assets/image_1763360901241.png';
 import airportLoungeImage from '@assets/generated_images/luxury_airport_lounge.png';
 import dinningImage from '@assets/generated_images/fine_dining_experience.png';
 import travelImage from '@assets/generated_images/luxury_travel_destination.png';
-import portfolioIcon from '@assets/generated_images/3d_glossy_dark_background_with_gold_arrow.png';
-import buildingIcon from '@assets/generated_images/3d_glossy_dark_building_with_gold_trim.png';
-import creditCardIcon from '@assets/generated_images/3d_glossy_dark_card_with_gold_accent.png';
+import portfolioIcon from '@assets/generated_images/hybrid_portfolio_growth_icon_gold_on_black.png';
+import buildingIcon from '@assets/generated_images/hybrid_building_icon_gold_on_black_glossy.png';
+import creditCardIcon from '@assets/generated_images/hybrid_credit_card_icon_gold_on_black_glossy.png';
 
 const ICON_WRAPPER_STYLE = {
   background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
@@ -438,30 +438,26 @@ export default function Home() {
             ].map((cat) => (
               <Card 
                 key={cat.id}
-                className="overflow-hidden border-0 h-full hover-elevate transition-all cursor-pointer"
+                className="overflow-hidden border-0 h-full hover-elevate transition-all cursor-pointer flex flex-col"
                 style={{ 
                   background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
                   backdropFilter: 'blur(20px)'
                 }}
                 data-testid={`card-benefits-${cat.id}`}
               >
-                <div className="p-8 flex flex-col h-full">
-                  {/* Icon */}
-                  <div className="mb-6 flex-shrink-0">
-                    <img 
-                      src={cat.iconUrl} 
-                      alt={cat.name} 
-                      className="w-full h-auto rounded-2xl"
-                      style={{
-                        border: '2px solid rgba(212,175,55,0.4)',
-                        objectFit: 'cover',
-                        aspectRatio: '1'
-                      }}
-                    />
-                  </div>
+                {/* Icon - Full Height Top */}
+                <div className="relative h-64 overflow-hidden rounded-b-2xl">
+                  <img 
+                    src={cat.iconUrl} 
+                    alt={cat.name} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
+                {/* Content - Below Icon */}
+                <div className="p-8 flex flex-col flex-1">
                   {/* Title */}
-                  <h3 className="font-serif text-2xl font-bold text-white mb-2">
+                  <h3 className="font-serif text-2xl font-bold text-white mb-4">
                     {cat.name}
                   </h3>
 
