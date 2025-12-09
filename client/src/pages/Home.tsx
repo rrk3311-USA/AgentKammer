@@ -447,14 +447,15 @@ export default function Home() {
               >
                 <div className="p-8 flex flex-col h-full">
                   {/* Icon */}
-                  <div className="mb-6">
+                  <div className="mb-6 flex-shrink-0">
                     <img 
                       src={cat.iconUrl} 
                       alt={cat.name} 
-                      className="w-24 h-24 rounded-2xl"
+                      className="w-full h-auto rounded-2xl"
                       style={{
                         border: '2px solid rgba(212,175,55,0.4)',
-                        objectFit: 'cover'
+                        objectFit: 'cover',
+                        aspectRatio: '1'
                       }}
                     />
                   </div>
