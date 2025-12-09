@@ -562,7 +562,7 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
                   <p className="text-white/70 text-sm font-semibold uppercase tracking-wide mb-4">
                     Matching Cards in this Category:
                   </p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-12">
                     {offers.filter(o => getCreditsCategory(o.name) === selectedCreditCategory).map((offer) => (
                       <button 
                         key={offer.id}
@@ -575,15 +575,21 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
                   </div>
                 </div>
               )}
-              <div className="space-y-6">
-                {selectedCreditCategory 
-                  ? offers.filter(o => getCreditsCategory(o.name) === selectedCreditCategory).map(offer => (
-                    <ProductCard key={offer.id} offer={offer} />
-                  ))
-                  : offers.map(offer => (
-                    <ProductCard key={offer.id} offer={offer} />
-                  ))
-                }
+              
+              {/* Sign Up CTA */}
+              <div className="text-center">
+                <Card className="inline-block p-8 bg-[#d4af37]/5 border-[#d4af37]/20">
+                  <h3 className="font-serif text-xl font-semibold mb-2 text-[#ffffff]">Ready to Apply?</h3>
+                  <p className="mb-6 text-[#ffffff] max-w-md">
+                    Get matched with the best credit cards for your needs
+                  </p>
+                  <Button 
+                    className="bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
+                    data-testid="button-signup-credit-cards"
+                  >
+                    Sign Up Now
+                  </Button>
+                </Card>
               </div>
             </div>
           ) : (
@@ -635,25 +641,6 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
                 )}
               </div>
             </>
-          )}
-          
-          {/* Bottom CTA */}
-          {filteredOffers.length > 0 && (
-            <div className="mt-12 text-center">
-              <Card className="inline-block p-8 bg-[#d4af37]/5 border-[#d4af37]/20">
-                <h3 className="font-serif text-xl font-semibold mb-2 text-[#ffffff]">Need Help Choosing?</h3>
-                <p className="mb-4 text-[#ffffff]">
-                  Our AI can analyze your profile and recommend the best option for you
-                </p>
-                <Button 
-                  className="bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
-                  data-testid="button-get-recommendation"
-                >
-                  <Brain className="h-4 w-4 mr-2" />
-                  Get AI Recommendation
-                </Button>
-              </Card>
-            </div>
           )}
         </div>
       </section>
