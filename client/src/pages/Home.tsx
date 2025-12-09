@@ -330,7 +330,7 @@ export default function Home() {
           {/* Competitor Comparison - Scrollable Columns */}
           <div className="mb-12 max-w-6xl mx-auto">
             <div className="relative">
-              <div className="overflow-x-auto scroll-smooth scrollbar-gold" data-testid="competitor-comparison-table">
+              <div className="overflow-x-auto overflow-y-scroll scroll-smooth scrollbar-gold" data-testid="competitor-comparison-table">
                 <div className="flex gap-4 pb-4">
                   {/* Features Column (Sticky) */}
                   <div className="flex-shrink-0 w-40">
@@ -502,7 +502,7 @@ export default function Home() {
         </div>
       </section>
       {/* SECTION 8: Final CTA - Bright Gradient */}
-      <section className="py-8 lg:py-12 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white relative overflow-hidden">
+      <section className="py-8 lg:py-12 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 text-white relative overflow-hidden">
         {/* Bright gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/10 via-transparent to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00d4ff]/5 to-transparent pointer-events-none" />
