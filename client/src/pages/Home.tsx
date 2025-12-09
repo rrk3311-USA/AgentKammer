@@ -32,6 +32,9 @@ import conciergeGestureImage from '@assets/image_1763360901241.png';
 import airportLoungeImage from '@assets/generated_images/luxury_airport_lounge.png';
 import dinningImage from '@assets/generated_images/fine_dining_experience.png';
 import travelImage from '@assets/generated_images/luxury_travel_destination.png';
+import portfolioIcon from '@assets/generated_images/flat_navy_portfolio_growth_icon_with_gold.png';
+import buildingIcon from '@assets/generated_images/flat_navy_building_with_gold_accents.png';
+import creditCardIcon from '@assets/generated_images/flat_navy_credit_card_with_gold_stripe.png';
 
 const ICON_WRAPPER_STYLE = {
   background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
@@ -417,19 +420,19 @@ export default function Home() {
               { 
                 id: 'investing-benefits', 
                 name: 'Investment Accounts', 
-                icon: TrendingUp, 
+                iconUrl: portfolioIcon,
                 highlights: ['AI-matched strategies', 'Tax-efficient growth', 'Instant fund matching']
               },
               { 
                 id: 'real-estate-benefits', 
                 name: 'Real Estate Concierge', 
-                icon: Building2, 
+                iconUrl: buildingIcon,
                 highlights: ['Luxury property access', 'Mortgage pre-approval', 'White-glove service']
               },
               { 
                 id: 'credit-benefits', 
                 name: 'Credit Cards', 
-                icon: CreditCard, 
+                iconUrl: creditCardIcon,
                 highlights: ['Airport lounges & travel', 'Fine dining credits', 'Premium cashback rewards']
               }
             ].map((cat) => (
@@ -451,7 +454,7 @@ export default function Home() {
                       border: '2px solid rgba(212,175,55,0.3)'
                     }}
                   >
-                    <cat.icon className="h-10 w-10" style={{ color: '#d4af37' }} />
+                    <img src={cat.iconUrl} alt={cat.name} className="h-10 w-10" />
                   </div>
 
                   {/* Title */}
