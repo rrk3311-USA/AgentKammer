@@ -101,13 +101,33 @@ export function Footer() {
       </div>
       {/* Divider */}
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
-      {/* Row 1: Clock with Update Time */}
+      {/* Row 1: Vintage Clock with Update Time */}
       <div className="bg-[#0a1628] border-b border-border/30">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex items-center justify-center gap-2 mt-[14px] mb-[14px] pl-[14px] pr-[14px] pt-[11px] pb-[11px]">
-          <Clock className="h-3.5 w-3.5 text-[#d4af37]" />
-          <span className="text-xs font-mono text-[#d4af37]">{formatTime(lastUpdate)}</span>
-          <span className="text-xs text-white/60">{formatDate(lastUpdate)}</span>
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-6 flex items-center justify-center gap-4">
+          <div className="relative">
+            <div className="w-16 h-16 rounded-full border-4 border-[#d4af37] flex items-center justify-center bg-gradient-to-br from-[#d4af37]/10 to-[#d4af37]/5" style={{
+              boxShadow: 'inset 0 0 20px rgba(212,175,55,0.2), 0 0 15px rgba(212,175,55,0.3)'
+            }}>
+              <Clock className="h-8 w-8 text-[#d4af37]" />
+            </div>
+            <div className="absolute inset-0 rounded-full border-2 border-[#d4af37]/20" style={{
+              animation: 'tickPulse 2s ease-in-out infinite'
+            }} />
+          </div>
+          <div>
+            <p className="text-lg font-serif font-bold text-[#d4af37] mb-1">Live Market Rate Updates</p>
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-sm font-bold text-white">{formatTime(lastUpdate)}</span>
+              <span className="text-sm text-white/60">{formatDate(lastUpdate)}</span>
+            </div>
+          </div>
         </div>
+        <style>{`
+          @keyframes tickPulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.6; }
+          }
+        `}</style>
       </div>
       {/* Rows 2-3: Market Ticker Static */}
       <div className="bg-[#0a1628] border-b border-border/30">
