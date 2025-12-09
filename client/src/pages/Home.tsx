@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
 import { CreditCardShowcase } from "@/components/CreditCardShowcase";
+import { MarketTickerStatic } from "@/components/MarketTickerStatic";
 import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
 import conciergeImage from '@assets/generated_images/concierge_agent_top_hat_luxury_interior.png';
 import conciergeGestureImage from '@assets/image_1763360901241.png';
@@ -215,7 +216,15 @@ export default function Home() {
       <section className="relative py-6 px-4 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800">
         <div className="max-w-7xl mx-auto">
           {/* Top Gradient Divider */}
-          <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 mb-6" />
+          <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 mb-8" />
+
+          {/* Market Ticker Static */}
+          <div className="mb-12">
+            <MarketTickerStatic />
+          </div>
+
+          {/* Bottom Gradient Divider */}
+          <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 mb-8" />
 
           {/* How It Works Section - Flowing Narrative */}
           <div className="mb-8">
