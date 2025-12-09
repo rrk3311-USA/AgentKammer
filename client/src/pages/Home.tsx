@@ -430,12 +430,9 @@ export default function Home() {
                   {/* Icon */}
                   <div 
                     className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
-                    style={{
-                      background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
-                      border: '2px solid rgba(212,175,55,0.3)'
-                    }}
+                    style={ICON_WRAPPER_STYLE}
                   >
-                    <cat.icon className="h-10 w-10" style={{ color: '#d4af37' }} />
+                    <cat.icon className="h-10 w-10" style={GOLD_ICON_STYLE} />
                   </div>
 
                   {/* Title */}
