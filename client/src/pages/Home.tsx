@@ -398,7 +398,7 @@ export default function Home() {
               { 
                 id: 'investing-benefits', 
                 name: 'Investment Accounts', 
-                icon: BarChart3,
+                icon: TrendingUp,
                 desc: 'Brokerages & robo-advisors',
                 highlights: ['AI-matched strategies', 'Tax-efficient growth', 'Instant fund matching']
               },
