@@ -167,10 +167,10 @@ export function Footer() {
               <TrendingUp className="h-3 w-3 text-red-400" />
               <span className="text-red-400 font-medium text-[0.7rem]">+0.20</span>
             </div>
-            <button className="flex items-center gap-1.5 px-2 py-1 bg-blue-500/30 border border-blue-400/50 rounded-sm hover:bg-blue-500/40 transition-colors">
+            <Link href="/real-estate" className="flex items-center gap-1.5 px-2 py-1 bg-blue-500/30 border border-blue-400/50 rounded-sm hover:bg-blue-500/40 transition-colors">
               <Home className="h-3 w-3 text-blue-400" />
               <span className="text-[0.7rem] font-medium text-blue-300">Buyers Market</span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>
