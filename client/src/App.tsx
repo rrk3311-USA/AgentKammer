@@ -7,7 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { LiveTicker } from "@/components/LiveTicker";
+
 import { FloatingChatAssistant } from "@/components/FloatingChatAssistant";
 import Home from "@/pages/Home";
 import RealEstate from "@/pages/RealEstate";
@@ -124,13 +124,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <TooltipProvider>
-          <div className="min-h-screen bg-background text-foreground pb-20 md:pb-14">
+          <div className="min-h-screen bg-background text-foreground">
             <ScrollToTop />
             <Header />
             <Router />
             <Footer />
             <FloatingChatAssistant />
-            <LiveTicker />
           </div>
           <Toaster />
         </TooltipProvider>
