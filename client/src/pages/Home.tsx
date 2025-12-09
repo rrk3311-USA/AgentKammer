@@ -32,9 +32,9 @@ import conciergeGestureImage from '@assets/image_1763360901241.png';
 import airportLoungeImage from '@assets/generated_images/luxury_airport_lounge.png';
 import dinningImage from '@assets/generated_images/fine_dining_experience.png';
 import travelImage from '@assets/generated_images/luxury_travel_destination.png';
-import portfolioIcon from '@assets/generated_images/vibrant_gradient_3d_portfolio_arrow_blue_cyan.png';
-import buildingIcon from '@assets/generated_images/vibrant_gradient_3d_building_purple_pink.png';
-import creditCardIcon from '@assets/generated_images/vibrant_gradient_3d_credit_card_cyan_purple.png';
+import portfolioIcon from '@assets/generated_images/minimalist_line_portfolio_arrow_icon_gray.png';
+import buildingIcon from '@assets/generated_images/minimalist_line_building_icon_gray_white.png';
+import creditCardIcon from '@assets/generated_images/minimalist_line_credit_card_icon_gray_white.png';
 
 const ICON_WRAPPER_STYLE = {
   background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
