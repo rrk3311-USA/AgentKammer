@@ -99,8 +99,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-      {/* Divider */}
-      <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       {/* Row 1: Vintage Clock with Update Time */}
       <div className="bg-[#0a1628] border-b border-border/30">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex items-center justify-center gap-3 pt-[23px] pb-[23px] mt-[6px] mb-[6px]">
