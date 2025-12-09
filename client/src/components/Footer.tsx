@@ -27,13 +27,13 @@ export function Footer() {
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       {/* Links Section - Now at Top */}
       <div className="bg-background border-t border-border/50">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 text-left">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-5">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-12 text-left">
             <div>
-              <p className="text-xs md:text-sm text-foreground font-medium mb-2 block">
+              <p className="text-[0.75rem] md:text-xs text-foreground font-semibold mb-2 block uppercase tracking-wide">
                 Free Financial Tools
               </p>
-              <ul className="space-y-1 text-xs md:text-sm text-muted-foreground mb-4">
+              <ul className="space-y-1.5 text-[0.7rem] md:text-xs text-muted-foreground mb-2">
                 <li>
                   <Link href="/services/get-home-value" className="hover:text-foreground transition-colors">
                     Home Valuation
@@ -53,32 +53,32 @@ export function Footer() {
             </div>
             <div>
               <Link href="/real-estate">
-                <h4 className="font-medium mb-2 text-sm hover:text-foreground transition-colors cursor-pointer">Real Estate Concierge</h4>
+                <h4 className="font-semibold mb-2 text-[0.75rem] md:text-xs hover:text-foreground transition-colors cursor-pointer uppercase tracking-wide">Real Estate Concierge</h4>
               </Link>
-              <ul className="space-y-1 text-xs md:text-sm text-muted-foreground mb-4">
+              <ul className="space-y-1.5 text-[0.7rem] md:text-xs text-muted-foreground mb-2">
                 <li>
                   <Link href="/refinancing" className="flex items-center gap-2 hover:text-foreground transition-colors">
-                    <RefreshCw className="h-3.5 w-3.5" />
+                    <RefreshCw className="h-3 w-3" />
                     <span>Refinancing Rate Watch</span>
                   </Link>
                 </li>
                 <li>
                   <Link href="/reverse-buyer-origination" className="flex items-center gap-2 hover:text-foreground transition-colors">
-                    <Building2 className="h-3.5 w-3.5" />
+                    <Building2 className="h-3 w-3" />
                     <span>Reverse Buyer Origination</span>
                   </Link>
                 </li>
                 <li>
                   <Link href="/reverse-seller-architecture" className="flex items-center gap-2 hover:text-foreground transition-colors">
-                    <Users className="h-3.5 w-3.5" />
+                    <Users className="h-3 w-3" />
                     <span>Reverse Seller Architecture</span>
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <h4 className="font-medium mb-2 text-sm text-foreground">Flagship Services</h4>
-              <ul className="space-y-1 text-xs md:text-sm text-muted-foreground mb-4">
+              <h4 className="font-semibold mb-2 text-[0.75rem] md:text-xs text-foreground uppercase tracking-wide">Flagship Services</h4>
+              <ul className="space-y-1.5 text-[0.7rem] md:text-xs text-muted-foreground mb-2">
                 <li>
                   <Link href="/profile" className="hover:text-foreground transition-colors">
                     Register
