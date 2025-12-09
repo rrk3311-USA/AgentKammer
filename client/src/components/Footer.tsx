@@ -1,14 +1,19 @@
 import { SiReplit, SiNvidia, SiClaude, SiAnthropic, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
 import { Brain, Building2, Users, RefreshCw } from "lucide-react";
 import { Link } from "wouter";
+import { MarketTickerStatic } from "@/components/MarketTickerStatic";
 
 export function Footer() {
   return (
     <footer className="relative">
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       <div className="bg-background border-t border-border/50">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-6 text-left">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-8">
+          {/* Market Ticker */}
+          <div className="mb-8 pb-8 border-b border-border/30">
+            <MarketTickerStatic />
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 text-left">
             <div>
               <p className="text-xs md:text-sm text-foreground font-medium mb-2 block">
                 Free Financial Tools

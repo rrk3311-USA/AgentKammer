@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TrendingUp, TrendingDown, Minus, DollarSign, Percent, CreditCard, Building2, Clock } from "lucide-react";
+import { TrendingUp, TrendingDown, Minus, DollarSign, Percent, CreditCard, Building2, Clock, Home } from "lucide-react";
 
 interface MarketRate {
   label: string;
@@ -13,6 +13,8 @@ const FALLBACK_RATES: MarketRate[] = [
   { label: "Prime Rate", value: "8.50%", change: 0, icon: Building2 },
   { label: "Fed Rate", value: "5.50%", change: 0, icon: DollarSign },
   { label: "Avg APR", value: "24.6%", change: 0.2, icon: CreditCard },
+  { label: "Buyers Market", value: "Strong", change: 0, icon: Home },
+  { label: "Sellers Market", value: "Balanced", change: 0, icon: Building2 },
 ];
 
 export function MarketTickerStatic() {
