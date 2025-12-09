@@ -211,26 +211,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* SECTION 3: How It Works */}
-      <section className="relative py-6 px-4 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800">
-        <div className="max-w-7xl mx-auto">
-          {/* Top Gradient Divider */}
-          <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 mb-8" />
-
-          {/* How It Works Section - Flowing Narrative */}
-          <div className="mb-8">
-            <div className="text-center mb-8">
-              <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6 text-white">
-                How It Works
-              </h2>
-              <p className="text-lg text-white/80 max-w-4xl mx-auto leading-relaxed">
-                Start by sharing your financial profile once—it powers all recommendations across every category. Our AI then screens <span className="text-[#d4af37] font-semibold">hundreds of offers</span> in seconds, analyzing 100+ products across 14 financial categories you care about. You receive <span className="text-[#d4af37] font-semibold">personalized rankings</span> matched specifically to your goals, eliminating the guesswork from financial decisions. One profile. Comprehensive analysis. Your perfect matches.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* SECTION 4: Investment Accounts */}
+      {/* SECTION 3: Investment Accounts */}
       <section className="py-6 lg:py-8 bg-gradient-to-b from-slate-900 via-slate-850 to-slate-800 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-6">

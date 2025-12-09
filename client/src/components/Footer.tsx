@@ -7,12 +7,17 @@ export function Footer() {
   return (
     <footer className="relative">
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
+      
+      {/* Market Ticker Section */}
+      <div className="bg-[#0a1628] border-b border-border/30">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
+          <MarketTickerStatic />
+        </div>
+      </div>
+      
+      {/* Links Section */}
       <div className="bg-background border-t border-border/50">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-8">
-          {/* Market Ticker */}
-          <div className="mb-8 pb-8 border-b border-border/30">
-            <MarketTickerStatic />
-          </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 text-left">
             <div>
               <p className="text-xs md:text-sm text-foreground font-medium mb-2 block">
@@ -84,29 +89,29 @@ export function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Powered by AI Section */}
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
-      <div className="bg-[#0a1628] py-2">
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="flex flex-col items-center gap-1">
-            <div className="flex items-center gap-1.5 text-white/90">
-              <Brain className="h-4 w-4 text-[#79d3ff]" />
-              <span className="text-[0.625rem] font-medium">Powered by AI</span>
-            </div>
-            <div className="flex items-center gap-2 md:gap-4 flex-wrap justify-center text-[0.625rem]">
-              <div className="flex items-center gap-1 text-white/90 hover:text-white transition-colors">
-                <SiReplit className="h-3.5 w-3.5" />
+      <div className="bg-[#0a1628]">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4">
+          <div className="flex items-center justify-center gap-1.5">
+            <Brain className="h-4 w-4 text-[#79d3ff]" />
+            <span className="text-[0.625rem] font-medium text-white/90">Powered by AI</span>
+            <div className="flex items-center gap-2 md:gap-3 text-[0.625rem]">
+              <div className="flex items-center gap-1 text-white/90">
+                <SiReplit className="h-3 w-3" />
                 <span className="font-medium">Replit</span>
               </div>
-              <div className="flex items-center gap-1 text-white/90 hover:text-white transition-colors">
-                <SiAnthropic className="h-3.5 w-3.5" />
+              <div className="flex items-center gap-1 text-white/90">
+                <SiAnthropic className="h-3 w-3" />
                 <span className="font-medium">Anthropic</span>
               </div>
-              <div className="flex items-center gap-1 text-white/90 hover:text-white transition-colors">
-                <SiClaude className="h-3.5 w-3.5" />
+              <div className="flex items-center gap-1 text-white/90">
+                <SiClaude className="h-3 w-3" />
                 <span className="font-medium">Claude</span>
               </div>
-              <div className="flex items-center gap-1 text-white/90 hover:text-white transition-colors">
-                <SiNvidia className="h-3.5 w-3.5" />
+              <div className="flex items-center gap-1 text-white/90">
+                <SiNvidia className="h-3 w-3" />
                 <span className="font-medium">NVIDIA</span>
               </div>
             </div>
