@@ -32,9 +32,9 @@ import conciergeGestureImage from '@assets/image_1763360901241.png';
 import airportLoungeImage from '@assets/generated_images/luxury_airport_lounge.png';
 import dinningImage from '@assets/generated_images/fine_dining_experience.png';
 import travelImage from '@assets/generated_images/luxury_travel_destination.png';
-import portfolioIcon from '@assets/generated_images/isometric_3d_growth_arrow_coins_blue_platform.png';
-import buildingIcon from '@assets/generated_images/isometric_3d_building_cyan_blue_platform.png';
-import creditCardIcon from '@assets/generated_images/isometric_3d_credit_card_cyan_blue_platform.png';
+import portfolioIcon from '@assets/generated_images/2d_flat_arrow_coins_icon_cyan_blue.png';
+import buildingIcon from '@assets/generated_images/2d_flat_building_icon_cyan_blue.png';
+import creditCardIcon from '@assets/generated_images/2d_flat_credit_card_icon_cyan_blue.png';
 
 const ICON_WRAPPER_STYLE = {
   background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
@@ -445,12 +445,12 @@ export default function Home() {
                 }}
                 data-testid={`card-benefits-${cat.id}`}
               >
-                {/* Icon - Full Height Top */}
-                <div className="relative h-64 overflow-hidden rounded-b-2xl">
+                {/* Icon - Half Size Top */}
+                <div className="relative h-32 overflow-hidden rounded-b-2xl flex items-center justify-center bg-gradient-to-b from-slate-700 to-slate-800">
                   <img 
                     src={cat.iconUrl} 
                     alt={cat.name} 
-                    className="w-full h-full object-cover"
+                    className="h-24 w-24 object-contain"
                   />
                 </div>
 
