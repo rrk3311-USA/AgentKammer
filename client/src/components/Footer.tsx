@@ -103,7 +103,7 @@ export function Footer() {
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       {/* Row 1: Clock with Update Time */}
       <div className="bg-[#0a1628] border-b border-border/30">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex items-center justify-center gap-2 mt-[7px] mb-[7px]">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex items-center justify-center gap-2 mt-[14px] mb-[14px] pl-[14px] pr-[14px] pt-[11px] pb-[11px]">
           <Clock className="h-3.5 w-3.5 text-[#d4af37]" />
           <span className="text-xs font-mono text-[#d4af37]">{formatTime(lastUpdate)}</span>
           <span className="text-xs text-white/60">{formatDate(lastUpdate)}</span>
