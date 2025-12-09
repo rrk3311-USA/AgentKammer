@@ -625,4 +625,27 @@
     white-space: nowrap;
     pointer-events: none;
   }
+
+  /* Gold Scrollbar Styling */
+  .scrollbar-gold {
+    scrollbar-width: thin;
+    scrollbar-color: #d4af37 rgba(212, 175, 55, 0.1);
+  }
+
+  .scrollbar-gold::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  .scrollbar-gold::-webkit-scrollbar-track {
+    background: rgba(212, 175, 55, 0.05);
+  }
+
+  .scrollbar-gold::-webkit-scrollbar-thumb {
+    background: #d4af37;
+    border-radius: 5px;
+  }
+
+  .scrollbar-gold::-webkit-scrollbar-thumb:hover {
+    background: #e5c158;
+  }
 }
