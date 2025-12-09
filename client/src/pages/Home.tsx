@@ -447,14 +447,16 @@ export default function Home() {
               >
                 <div className="p-8 flex flex-col h-full">
                   {/* Icon */}
-                  <div 
-                    className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
-                    style={{
-                      background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
-                      border: '2px solid rgba(212,175,55,0.3)'
-                    }}
-                  >
-                    <img src={cat.iconUrl} alt={cat.name} className="h-10 w-10" />
+                  <div className="mb-6">
+                    <img 
+                      src={cat.iconUrl} 
+                      alt={cat.name} 
+                      className="w-24 h-24 rounded-2xl"
+                      style={{
+                        border: '2px solid rgba(212,175,55,0.4)',
+                        objectFit: 'cover'
+                      }}
+                    />
                   </div>
 
                   {/* Title */}
