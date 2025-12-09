@@ -443,15 +443,12 @@ export default function Home() {
                 data-testid={`card-benefits-${cat.id}`}
               >
                 <div className="p-8 flex flex-col h-full">
-                  {/* Icon - Glossy Dark Button Style */}
+                  {/* Icon - Premium 3D Glossy Style */}
                   <div 
                     className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
-                    style={{
-                      background: 'linear-gradient(135deg, rgba(20,20,20,0.8) 0%, rgba(10,10,10,0.95) 100%)',
-                      boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.1), 0 8px 16px rgba(0,0,0,0.6)'
-                    }}
+                    style={ICON_WRAPPER_STYLE}
                   >
-                    <cat.icon className="h-10 w-10" style={{ color: '#d4af37' }} />
+                    <cat.icon className="h-10 w-10" style={GOLD_ICON_STYLE} />
                   </div>
 
                   {/* Title */}
