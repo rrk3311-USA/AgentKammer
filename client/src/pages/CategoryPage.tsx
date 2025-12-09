@@ -32,7 +32,8 @@ import {
   Briefcase,
   ShieldCheck,
   Clock,
-  Award
+  Award,
+  Crown
 } from "lucide-react";
 import { SUBCATEGORIES, SAMPLE_OFFERS, type ProductOffer, calculateMatchScore, getMatchExplanation } from "@shared/productOffers";
 import { StrategicCardMatching } from "@/components/StrategicCardMatching";
@@ -329,9 +330,18 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
   const [selectedCreditCategory, setSelectedCreditCategory] = useState<string | null>(null);
   
   const creditCategories = [
-    { id: 'credit-enhancement', label: 'Credit Enhancement' },
-    { id: 'credit-repair', label: 'Credit Repair' },
-    { id: 'credit-consolidation', label: 'Credit Consolidation' }
+    { id: 'credit-enhancement', label: 'Credit Enhancement', icon: Star },
+    { id: 'credit-repair', label: 'Credit Repair', icon: Target },
+    { id: 'credit-consolidation', label: 'Credit Consolidation', icon: TrendingUp },
+    { id: 'cash-back', label: 'Cash Back Cards', icon: Gift },
+    { id: 'travel-rewards', label: 'Travel Rewards', icon: Plane },
+    { id: 'business', label: 'Business Cards', icon: Briefcase },
+    { id: 'secured', label: 'Secured Cards', icon: Lock },
+    { id: 'balance-transfer', label: 'Balance Transfer', icon: ArrowRight },
+    { id: 'no-fee', label: 'No Annual Fee', icon: Zap },
+    { id: 'airline', label: 'Airline Cards', icon: Plane },
+    { id: 'student', label: 'Student Cards', icon: GraduationCap },
+    { id: 'premium', label: 'Premium Cards', icon: Crown }
   ];
 
   const getCreditsCategory = (offerName: string): string | null => {
@@ -504,27 +514,41 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
       {/* Main Content */}
       <section className="py-12 lg:py-16 bg-[#0a1628]">
         <div className="max-w-7xl mx-auto px-6">
-          {/* Credit Cards Category Buttons */}
+          {/* Credit Cards Category Grid */}
           {categoryId === 'credit-cards' && offers.length > 0 && (
-            <div className="mb-12">
-              <p className="text-white/70 text-sm font-semibold uppercase tracking-wide mb-4">Select your primary need:</p>
-              <div className="flex flex-wrap gap-3">
-                {creditCategories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => setSelectedCreditCategory(
-                      selectedCreditCategory === category.id ? null : category.id
-                    )}
-                    className={`px-6 py-3 rounded-lg font-semibold text-sm transition-all ${
-                      selectedCreditCategory === category.id
-                        ? 'bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] shadow-lg'
-                        : 'bg-white/10 text-white border border-white/20 hover-elevate'
-                    }`}
-                    data-testid={`button-credit-category-${category.id}`}
-                  >
-                    {category.label}
-                  </button>
-                ))}
+            <div className="mb-16">
+              <div className="mb-8">
+                <p className="text-white/70 text-xs font-semibold uppercase tracking-widest mb-2">Find your card</p>
+                <h3 className="text-white text-xl lg:text-2xl font-semibold">Filter by your needs</h3>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {creditCategories.map((category) => {
+                  const IconComp = category.icon;
+                  const isSelected = selectedCreditCategory === category.id;
+                  
+                  return (
+                    <button
+                      key={category.id}
+                      onClick={() => setSelectedCreditCategory(
+                        isSelected ? null : category.id
+                      )}
+                      className={`relative group rounded-xl p-4 transition-all overflow-hidden ${
+                        isSelected
+                          ? 'bg-gradient-to-br from-[#d4af37] to-[#f4d03f] text-[#0a1628]'
+                          : 'bg-white/5 border border-white/10 text-white hover-elevate hover:bg-white/8 hover:border-white/20'
+                      }`}
+                      data-testid={`button-credit-category-${category.id}`}
+                    >
+                      <div className="flex flex-col items-center gap-2">
+                        <div className={`p-2 rounded-lg ${isSelected ? 'bg-white/20' : 'bg-white/10'}`}>
+                          <IconComp className="h-5 w-5" />
+                        </div>
+                        <span className="text-xs font-semibold text-center leading-tight">{category.label}</span>
+                      </div>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           )}
