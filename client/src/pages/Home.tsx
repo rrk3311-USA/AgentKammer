@@ -327,44 +327,95 @@ export default function Home() {
           </div>
           <p className="text-center text-white/50 text-sm mb-12">Airport lounges • Fine dining • Luxury travel</p>
 
-          {/* Competitor Comparison Table */}
-          <div className="mb-12 max-w-6xl mx-auto overflow-x-auto">
-            <table className="w-full text-sm border-collapse" data-testid="competitor-comparison-table">
-              <thead>
-                <tr className="border-b-2 border-white/20">
-                  <th className="text-left py-4 px-4 text-white font-semibold">Feature</th>
-                  <th className="text-center py-4 px-4 font-semibold" style={{ color: '#d4af37' }}>Agent Kammer</th>
-                  <th className="text-center py-4 px-4 text-white/70 font-medium">NerdWallet</th>
-                  <th className="text-center py-4 px-4 text-white/70 font-medium">Bankrate</th>
-                  <th className="text-center py-4 px-4 text-white/70 font-medium">LendingClub</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { feature: 'AI-Powered Matching', kammer: true, nerdwallet: 'Limited', bankrate: 'No', lending: 'No' },
-                  { feature: '100+ Card Options', kammer: true, nerdwallet: '~50', bankrate: '~40', lending: 'N/A' },
-                  { feature: '14 Financial Categories', kammer: true, nerdwallet: '6-8', bankrate: '8-10', lending: '1-2' },
-                  { feature: 'Advanced Rate Watch', kammer: true, nerdwallet: 'Basic', bankrate: 'Basic', lending: 'None' },
-                  { feature: 'Personalized Profile', kammer: true, nerdwallet: 'Limited', bankrate: 'Limited', lending: 'Limited' },
-                ].map((row, idx) => (
-                  <tr key={idx} className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                    <td className="py-4 px-4 text-white font-medium">{row.feature}</td>
-                    <td className="text-center py-4 px-4">
-                      {row.kammer === true ? (
-                        <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold" style={{ background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)', color: '#0a1628' }}>
-                          Yes
-                        </span>
-                      ) : (
-                        <span className="text-white/50">N/A</span>
-                      )}
-                    </td>
-                    <td className="text-center py-4 px-4 text-white/50">{row.nerdwallet}</td>
-                    <td className="text-center py-4 px-4 text-white/50">{row.bankrate}</td>
-                    <td className="text-center py-4 px-4 text-white/50">{row.lending}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          {/* Competitor Comparison - Scrollable Columns */}
+          <div className="mb-12 max-w-6xl mx-auto">
+            <div className="relative">
+              <div className="overflow-x-auto scroll-smooth" data-testid="competitor-comparison-table">
+                <div className="flex gap-4 pb-4">
+                  {/* Features Column (Sticky) */}
+                  <div className="flex-shrink-0 w-40">
+                    <div className="h-16 flex items-end pb-4 px-4 border-b-2 border-white/20">
+                      <span className="text-white font-semibold text-sm">Feature</span>
+                    </div>
+                    {[
+                      'AI-Powered Matching',
+                      '100+ Card Options',
+                      '14 Financial Categories',
+                      'Advanced Rate Watch',
+                      'Personalized Profile',
+                    ].map((feature, idx) => (
+                      <div 
+                        key={idx}
+                        className="h-16 flex items-center px-4 border-b border-white/10 text-white font-medium text-sm"
+                      >
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Competitor Columns */}
+                  <div className="flex gap-0">
+                    {[
+                      { name: 'Agent Kammer', isHighlighted: true, data: [true, true, true, true, true] },
+                      { name: 'NerdWallet', data: ['Limited', '~50', '6-8', 'Basic', 'Limited'] },
+                      { name: 'Bankrate', data: ['No', '~40', '8-10', 'Basic', 'Limited'] },
+                      { name: 'LendingClub', data: ['No', 'N/A', '1-2', 'None', 'Limited'] },
+                      { name: 'The Points Guy', data: [true, '~70', '5', 'Premium', true] },
+                      { name: 'Credit Karma', data: ['Limited', '~60', '3', 'Basic', 'Limited'] },
+                      { name: 'WalletHub', data: ['Limited', '~80', '7-9', 'Advanced', true] },
+                      { name: 'Experian', data: ['Limited', '~50', '4-6', 'Basic', 'Limited'] },
+                    ].map((competitor, compIdx) => (
+                      <div 
+                        key={compIdx}
+                        className={`flex-shrink-0 w-44 border-l ${competitor.isHighlighted ? 'border-l-[#d4af37] bg-white/5' : 'border-l-white/10'}`}
+                      >
+                        {/* Header */}
+                        <div 
+                          className={`h-16 flex items-end pb-4 px-4 border-b-2 ${competitor.isHighlighted ? 'border-b-[#d4af37] bg-gradient-to-b from-white/10 to-transparent' : 'border-b-white/20'}`}
+                        >
+                          <span 
+                            className="font-semibold text-sm text-center w-full"
+                            style={{ color: competitor.isHighlighted ? '#d4af37' : 'white' }}
+                          >
+                            {competitor.name}
+                          </span>
+                        </div>
+
+                        {/* Rows */}
+                        {competitor.data.map((value, rowIdx) => (
+                          <div 
+                            key={rowIdx}
+                            className={`h-16 flex items-center justify-center px-4 border-b ${competitor.isHighlighted ? 'border-b-white/10 bg-white/5' : 'border-b-white/10'}`}
+                          >
+                            {typeof value === 'boolean' ? (
+                              value ? (
+                                <span 
+                                  className="inline-block px-3 py-1 rounded-full text-xs font-semibold" 
+                                  style={{ background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)', color: '#0a1628' }}
+                                >
+                                  Yes
+                                </span>
+                              ) : (
+                                <span className="text-white/50 text-xs">No</span>
+                              )
+                            ) : (
+                              <span className={competitor.isHighlighted ? 'text-white/80 text-sm font-medium' : 'text-white/50 text-sm'}>
+                                {value}
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Scroll Indicator */}
+              <div className="flex justify-center mt-4">
+                <div className="text-white/40 text-xs">← Scroll to see all competitors →</div>
+              </div>
+            </div>
           </div>
 
           <div className="text-center mb-12">
