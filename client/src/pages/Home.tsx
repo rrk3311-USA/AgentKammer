@@ -466,7 +466,7 @@ export default function Home() {
                     </p>
 
                     {/* Features List */}
-                    <div className="space-y-3 mb-6 flex-1">
+                    <div className="space-y-3 flex-1">
                       {cat.highlights.map((highlight, idx) => (
                         <div key={idx} className="flex items-start gap-3">
                           <CheckSquare className="h-4 w-4 mt-0.5 shrink-0 flex-shrink-0" style={{ color: '#d4af37' }} />
@@ -474,20 +474,6 @@ export default function Home() {
                         </div>
                       ))}
                     </div>
-
-                    {/* CTA */}
-                    <Button 
-                      size="sm"
-                      className="gap-2 border-0 w-full"
-                      style={{
-                        background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
-                        color: '#000',
-                        fontWeight: 600
-                      }}
-                    >
-                      <ArrowRight className="h-4 w-4" />
-                      Explore {cat.name}
-                    </Button>
                   </div>
                 </Card>
               </Link>
