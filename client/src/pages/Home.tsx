@@ -418,15 +418,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="text-center mb-12">
-            <Link href="/credit-cards">
-              <Button size="lg" className={CTA_BUTTON_CLASS} data-testid="button-compare-cards">
-                <CreditCard className="h-5 w-5 mr-2" />
-                Compare Credit Cards
-              </Button>
-            </Link>
           </div>
-        </div>
       </section>
       {/* SECTION 7: Credit Card Showcase */}
       <CreditCardShowcase />
