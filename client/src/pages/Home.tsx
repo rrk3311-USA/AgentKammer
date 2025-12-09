@@ -417,19 +417,19 @@ export default function Home() {
               { 
                 id: 'investing-benefits', 
                 name: 'Investment Accounts', 
-                icon: TrendingUp,
+                icon: Building2,
                 highlights: ['AI-matched strategies', 'Tax-efficient growth', 'Instant fund matching']
               },
               { 
                 id: 'real-estate-benefits', 
                 name: 'Real Estate Concierge', 
-                icon: Building2,
+                icon: Users,
                 highlights: ['Luxury property access', 'Mortgage pre-approval', 'White-glove service']
               },
               { 
                 id: 'credit-benefits', 
                 name: 'Credit Cards', 
-                icon: CreditCard,
+                icon: RefreshCw,
                 highlights: ['Airport lounges & travel', 'Fine dining credits', 'Premium cashback rewards']
               }
             ].map((cat) => (
