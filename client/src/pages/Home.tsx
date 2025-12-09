@@ -442,9 +442,14 @@ export default function Home() {
                 }}
                 data-testid={`card-benefits-${cat.id}`}
               >
-                {/* Icon - Half Size Top */}
-                <div className="relative h-32 overflow-hidden rounded-b-2xl flex items-center justify-center" style={{ background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.2), rgba(212,175,55,0.05))' }}>
-                  <cat.icon className="h-20 w-20" style={{ color: '#d4af37' }} />
+                {/* Icon - Match Category Section Style */}
+                <div className="flex items-center justify-center p-6">
+                  <div 
+                    className="w-14 h-14 rounded-lg flex items-center justify-center"
+                    style={ICON_WRAPPER_STYLE}
+                  >
+                    <cat.icon className="h-7 w-7" style={GOLD_ICON_STYLE} />
+                  </div>
                 </div>
 
                 {/* Content - Below Icon */}
