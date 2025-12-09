@@ -436,47 +436,46 @@ export default function Home() {
                 highlights: ['Airport lounges & travel', 'Fine dining credits', 'Premium cashback rewards']
               }
             ].map((cat) => (
-              <Link key={cat.id} href={`/${cat.id}`}>
-                <Card 
-                  className="overflow-hidden border-0 h-full hover-elevate transition-all cursor-pointer"
-                  style={{ 
-                    background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
-                    backdropFilter: 'blur(20px)'
-                  }}
-                  data-testid={`card-benefits-${cat.id}`}
-                >
-                  <div className="p-8 flex flex-col h-full">
-                    {/* Icon */}
-                    <div 
-                      className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
-                      style={{
-                        background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
-                        border: '2px solid rgba(212,175,55,0.3)'
-                      }}
-                    >
-                      <cat.icon className="h-10 w-10" style={{ color: '#d4af37' }} />
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="font-serif text-2xl font-bold text-white mb-2">
-                      {cat.name}
-                    </h3>
-                    <p className="text-base text-white/70 mb-6">
-                      {cat.desc}
-                    </p>
-
-                    {/* Features List */}
-                    <div className="space-y-3 flex-1">
-                      {cat.highlights.map((highlight, idx) => (
-                        <div key={idx} className="flex items-start gap-3">
-                          <CheckSquare className="h-4 w-4 mt-0.5 shrink-0 flex-shrink-0" style={{ color: '#d4af37' }} />
-                          <span className="text-sm text-white/80">{highlight}</span>
-                        </div>
-                      ))}
-                    </div>
+              <Card 
+                key={cat.id}
+                className="overflow-hidden border-0 h-full transition-all"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
+                  backdropFilter: 'blur(20px)'
+                }}
+                data-testid={`card-benefits-${cat.id}`}
+              >
+                <div className="p-8 flex flex-col h-full">
+                  {/* Icon */}
+                  <div 
+                    className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
+                    style={{
+                      background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
+                      border: '2px solid rgba(212,175,55,0.3)'
+                    }}
+                  >
+                    <cat.icon className="h-10 w-10" style={{ color: '#d4af37' }} />
                   </div>
-                </Card>
-              </Link>
+
+                  {/* Title */}
+                  <h3 className="font-serif text-2xl font-bold text-white mb-2">
+                    {cat.name}
+                  </h3>
+                  <p className="text-base text-white/70 mb-6">
+                    {cat.desc}
+                  </p>
+
+                  {/* Features List */}
+                  <div className="space-y-3 flex-1">
+                    {cat.highlights.map((highlight, idx) => (
+                      <div key={idx} className="flex items-start gap-3">
+                        <CheckSquare className="h-4 w-4 mt-0.5 shrink-0 flex-shrink-0" style={{ color: '#d4af37' }} />
+                        <span className="text-sm text-white/80">{highlight}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Card>
             ))}
           </div>
         </div>
