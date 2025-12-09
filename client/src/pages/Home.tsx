@@ -34,8 +34,8 @@ import dinningImage from '@assets/generated_images/fine_dining_experience.png';
 import travelImage from '@assets/generated_images/luxury_travel_destination.png';
 
 const ICON_WRAPPER_STYLE = {
-  background: 'radial-gradient(circle at 30% 30%, #1a1a1a, #000000)',
-  boxShadow: 'inset -2px -2px 4px rgba(0,0,0,0.8), inset 2px 2px 4px rgba(255,255,255,0.1)'
+  background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
+  border: '2px solid rgba(212,175,55,0.3)'
 };
 
 const GOLD_ICON_STYLE = {
@@ -216,8 +216,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-6">
             <div className="flex items-center justify-center mb-4">
-              <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
-                <TrendingUp className="h-7 w-7" style={GOLD_ICON_STYLE} />
+              <div className="w-20 h-20 rounded-2xl flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                <TrendingUp className="h-10 w-10" style={GOLD_ICON_STYLE} />
               </div>
             </div>
             <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-white">
@@ -257,8 +257,8 @@ export default function Home() {
         <div className="relative max-w-7xl mx-auto px-6 z-10">
           <div className="text-center mb-6">
             <div className="flex items-center justify-center mb-4">
-              <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
-                <Building2 className="h-7 w-7" style={GOLD_ICON_STYLE} />
+              <div className="w-20 h-20 rounded-2xl flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                <Building2 className="h-10 w-10" style={GOLD_ICON_STYLE} />
               </div>
             </div>
             <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-white">
@@ -296,8 +296,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-6">
             <div className="flex items-center justify-center mb-4">
-              <div className="w-14 h-14 rounded-lg flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
-                <CreditCard className="h-7 w-7" style={GOLD_ICON_STYLE} />
+              <div className="w-20 h-20 rounded-2xl flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
+                <CreditCard className="h-10 w-10" style={GOLD_ICON_STYLE} />
               </div>
             </div>
             <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-3">Competitive Credit Card Procurement </h2>
