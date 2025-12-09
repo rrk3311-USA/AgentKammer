@@ -562,11 +562,11 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
                   <p className="text-white/70 text-sm font-semibold uppercase tracking-wide mb-4">
                     Matching Cards in this Category:
                   </p>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  <div className="flex flex-wrap gap-2">
                     {offers.filter(o => getCreditsCategory(o.name) === selectedCreditCategory).map((offer) => (
                       <button 
                         key={offer.id}
-                        className="px-4 py-3 rounded-lg bg-[#d4af37] text-[#0a1628] font-semibold text-xs hover-elevate active-elevate-2 transition-all text-center"
+                        className="px-3 py-1.5 rounded-md bg-[#d4af37] text-[#0a1628] font-semibold text-xs hover-elevate active-elevate-2 transition-all"
                         data-testid={`button-card-${offer.id}`}
                       >
                         {offer.name}
