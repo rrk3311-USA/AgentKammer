@@ -553,38 +553,37 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
             </div>
           )}
           
-          {/* Credit Cards Button Style */}
+          {/* Credit Cards Consolidated View */}
           {categoryId === 'credit-cards' && offers.length > 0 ? (
-            <div className="space-y-6">
-              {subcategories.map((subcategory) => {
-                let subcategoryOffers = offers.filter(o => o.subcategory === subcategory);
-                
-                // Filter by selected credit category if one is chosen
-                if (selectedCreditCategory) {
-                  subcategoryOffers = subcategoryOffers.filter(o => 
-                    getCreditsCategory(o.name) === selectedCreditCategory
-                  );
-                }
-                
-                if (subcategoryOffers.length === 0) return null;
-                
-                return (
-                  <div key={subcategory}>
-                    <h2 className="text-xs font-bold tracking-wider uppercase text-white/70 mb-3">{subcategory}</h2>
-                    <div className="flex flex-wrap gap-2">
-                      {subcategoryOffers.map((offer) => (
-                        <button 
-                          key={offer.id}
-                          className="px-3 py-1.5 rounded-md bg-[#d4af37] text-[#0a1628] font-semibold text-xs hover-elevate active-elevate-2 transition-all"
-                          data-testid={`button-card-${offer.id}`}
-                        >
-                          {offer.name}
-                        </button>
-                      ))}
-                    </div>
+            <div>
+              {selectedCreditCategory && (
+                <div className="mb-8">
+                  <p className="text-white/70 text-sm font-semibold uppercase tracking-wide mb-4">
+                    Matching Cards in this Category:
+                  </p>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                    {offers.filter(o => getCreditsCategory(o.name) === selectedCreditCategory).map((offer) => (
+                      <button 
+                        key={offer.id}
+                        className="px-4 py-3 rounded-lg bg-[#d4af37] text-[#0a1628] font-semibold text-xs hover-elevate active-elevate-2 transition-all text-center"
+                        data-testid={`button-card-${offer.id}`}
+                      >
+                        {offer.name}
+                      </button>
+                    ))}
                   </div>
-                );
-              })}
+                </div>
+              )}
+              <div className="space-y-6">
+                {selectedCreditCategory 
+                  ? offers.filter(o => getCreditsCategory(o.name) === selectedCreditCategory).map(offer => (
+                    <ProductCard key={offer.id} offer={offer} />
+                  ))
+                  : offers.map(offer => (
+                    <ProductCard key={offer.id} offer={offer} />
+                  ))
+                }
+              </div>
             </div>
           ) : (
             <>
