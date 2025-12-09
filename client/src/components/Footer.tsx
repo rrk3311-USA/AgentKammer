@@ -182,8 +182,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-
-      <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
     </footer>
   );
 }
