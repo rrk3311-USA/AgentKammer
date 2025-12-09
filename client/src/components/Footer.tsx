@@ -132,7 +132,7 @@ export function Footer() {
       {/* Rows 2-3: Market Ticker Static */}
       <div className="bg-[#0a1628] border-b border-border/30">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-3">
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 text-xs place-items-center justify-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 text-xs place-items-center justify-center">
             <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
               <span className="text-[#d4af37] font-medium text-[0.7rem]">30Y FIXED</span>
               <span className="font-mono font-bold text-white text-sm">6.82%</span>
@@ -166,6 +166,18 @@ export function Footer() {
               <span className="font-mono font-bold text-white text-sm">24.6%</span>
               <TrendingUp className="h-3 w-3 text-red-400" />
               <span className="text-red-400 font-medium text-[0.7rem]">+0.20</span>
+            </div>
+            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
+              <span className="text-[#d4af37] font-medium text-[0.7rem]">GOLD</span>
+              <span className="font-mono font-bold text-white text-sm">$2,450</span>
+              <TrendingUp className="h-3 w-3 text-red-400" />
+              <span className="text-red-400 font-medium text-[0.7rem]">+0.85</span>
+            </div>
+            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
+              <span className="text-[#d4af37] font-medium text-[0.7rem]">USD/EUR</span>
+              <span className="font-mono font-bold text-white text-sm">1.0850</span>
+              <TrendingUp className="h-3 w-3 text-red-400" />
+              <span className="text-red-400 font-medium text-[0.7rem]">+0.0035</span>
             </div>
             <Link href="/real-estate" className="flex items-center gap-1.5 px-2 py-1 bg-blue-500/30 border border-blue-400/50 rounded-sm hover:bg-blue-500/40 transition-colors">
               <Home className="h-3 w-3 text-blue-400" />
