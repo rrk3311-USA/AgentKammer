@@ -8,13 +8,6 @@ export function Footer() {
     <footer className="relative">
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       
-      {/* Market Ticker Section */}
-      <div className="bg-[#0a1628] border-b border-border/30">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
-          <MarketTickerStatic />
-        </div>
-      </div>
-      
       {/* Links Section */}
       <div className="bg-background border-t border-border/50">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-8">
