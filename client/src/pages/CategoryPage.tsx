@@ -233,11 +233,11 @@ function ProductCard({ offer }: { offer: ProductOffer }) {
   const hasVisual = isCreditCard || isBanking || isInstantRewards;
   
   return (
-    <Card className="p-6 hover-elevate" data-testid={`card-offer-${offer.id}`}>
-      <div className="flex flex-col lg:flex-row gap-6">
+    <Card className="p-4 hover-elevate" data-testid={`card-offer-${offer.id}`}>
+      <div className="flex flex-col lg:flex-row gap-4">
         {/* Product Visual */}
         {hasVisual && (
-          <div className="lg:w-48 flex-shrink-0">
+          <div className="lg:w-40 flex-shrink-0">
             {isCreditCard && <CreditCardVisual offer={offer} />}
             {isBanking && <BankAccountVisual offer={offer} />}
             {isInstantRewards && <BonusCardVisual offer={offer} />}
@@ -246,55 +246,55 @@ function ProductCard({ offer }: { offer: ProductOffer }) {
         
         {/* Center: Product Info */}
         <div className="flex-1">
-          <div className="flex items-start justify-between mb-4 gap-4">
+          <div className="flex items-start justify-between mb-3 gap-4">
             <div>
-              <h3 className="font-serif text-xl font-semibold mb-1">{offer.name}</h3>
+              <h3 className="font-serif text-lg font-semibold mb-0.5">{offer.name}</h3>
               <Badge variant="outline" className="text-xs">{offer.subcategory}</Badge>
             </div>
             <div className="text-right flex-shrink-0">
-              <div className={`text-2xl font-bold ${matchScore >= 90 ? 'text-green-600 dark:text-green-400' : matchScore >= 80 ? 'text-[#d4af37]' : 'text-muted-foreground'}`}>
+              <div className={`text-xl font-bold ${matchScore >= 90 ? 'text-green-600 dark:text-green-400' : matchScore >= 80 ? 'text-[#d4af37]' : 'text-muted-foreground'}`}>
                 {matchScore}%
               </div>
               <span className="text-xs text-muted-foreground">Match</span>
             </div>
           </div>
           
-          <p className="text-muted-foreground text-sm mb-4">{offer.description}</p>
+          <p className="text-muted-foreground text-xs mb-3 line-clamp-2">{offer.description}</p>
           
           {/* Key Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
             {offer.apr && (
               <div>
                 <p className="text-xs text-muted-foreground">APR</p>
-                <p className="font-semibold text-sm">{offer.apr}</p>
+                <p className="font-semibold text-xs">{offer.apr}</p>
               </div>
             )}
             {offer.annualFee && (
               <div>
                 <p className="text-xs text-muted-foreground">Annual Fee</p>
-                <p className="font-semibold text-sm">{offer.annualFee}</p>
+                <p className="font-semibold text-xs">{offer.annualFee}</p>
               </div>
             )}
             {offer.signupBonus && (
               <div>
                 <p className="text-xs text-muted-foreground">Bonus</p>
-                <p className="font-semibold text-sm text-[#d4af37]">{offer.signupBonus}</p>
+                <p className="font-semibold text-xs text-[#d4af37]">{offer.signupBonus}</p>
               </div>
             )}
             <div>
               <p className="text-xs text-muted-foreground">Rating</p>
               <div className="flex items-center gap-1">
-                <Star className="h-4 w-4 fill-[#d4af37] text-[#d4af37]" />
-                <span className="font-semibold text-sm">{offer.rating}</span>
+                <Star className="h-3 w-3 fill-[#d4af37] text-[#d4af37]" />
+                <span className="font-semibold text-xs">{offer.rating}</span>
               </div>
             </div>
           </div>
           
           {/* Features */}
-          <div className="space-y-2">
-            {offer.features.slice(0, 3).map((feature, idx) => (
-              <div key={idx} className="flex items-start gap-2 text-sm">
-                <CheckCircle2 className="h-4 w-4 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+          <div className="space-y-1">
+            {offer.features.slice(0, 2).map((feature, idx) => (
+              <div key={idx} className="flex items-start gap-2 text-xs">
+                <CheckCircle2 className="h-3 w-3 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
                 <span>{feature}</span>
               </div>
             ))}
@@ -302,20 +302,21 @@ function ProductCard({ offer }: { offer: ProductOffer }) {
         </div>
         
         {/* Right: AI Match Explanation */}
-        <div className="lg:w-56 flex flex-col">
-          <div className="bg-[#d4af37]/5 border border-[#d4af37]/20 rounded-lg p-4 mb-4 flex-1">
-            <div className="flex items-center gap-2 mb-2">
-              <Brain className="h-4 w-4 text-[#d4af37]" />
-              <span className="text-sm font-semibold text-[#d4af37]">AI Analysis</span>
+        <div className="lg:w-48 flex flex-col">
+          <div className="bg-[#d4af37]/5 border border-[#d4af37]/20 rounded-lg p-3 mb-3 flex-1">
+            <div className="flex items-center gap-2 mb-1">
+              <Brain className="h-3 w-3 text-[#d4af37]" />
+              <span className="text-xs font-semibold text-[#d4af37]">AI Analysis</span>
             </div>
-            <p className="text-sm text-muted-foreground">{explanation}</p>
+            <p className="text-xs text-muted-foreground line-clamp-3">{explanation}</p>
           </div>
           
           <Button 
+            size="sm"
             className="w-full bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
             data-testid={`button-apply-${offer.id}`}
           >
-            Apply Now <ExternalLink className="h-4 w-4 ml-2" />
+            Apply Now <ExternalLink className="h-3 w-3 ml-2" />
           </Button>
         </div>
       </div>
