@@ -16,7 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { insertContentItemSchema } from "@shared/schema";
 import { z } from "zod";
-import { Film, Lightbulb, Scale, Clapperboard, Archive, Plus, Trash2, Edit, MoveRight, Youtube, Instagram, Linkedin, FolderArchive, FileText, Globe, Headphones, GraduationCap, Download, ExternalLink, Building2, Users, MessageSquare, User, Mail, Phone, Star } from "lucide-react";
+import { Film, Lightbulb, Scale, Clapperboard, Archive, Plus, Trash2, Edit, MoveRight, Youtube, Instagram, Linkedin, FolderArchive, FileText, Globe, Headphones, GraduationCap, Download, ExternalLink, Building2, Users, MessageSquare, User, Mail, Phone, Star, Sparkles } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
