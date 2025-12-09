@@ -418,7 +418,7 @@ export default function Home() {
                 id: 'investing-benefits', 
                 name: 'Investment Accounts', 
                 icon: TrendingUp, 
-                highlights: ['AI-matched strategies', 'Tax-efficient growth', 'Real-time analytics']
+                highlights: ['AI-matched strategies', 'Tax-efficient growth', 'Instant fund matching']
               },
               { 
                 id: 'real-estate-benefits', 
