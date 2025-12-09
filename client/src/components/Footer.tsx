@@ -131,8 +131,8 @@ export function Footer() {
       </div>
       {/* Rows 2-3: Market Ticker Static */}
       <div className="bg-[#0a1628] border-b border-border/30">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-2">
-          <div className="flex items-center justify-center gap-2 flex-wrap text-xs">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 text-xs place-items-center justify-center">
             <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
               <span className="text-[#d4af37] font-medium text-[0.7rem]">30Y FIXED</span>
               <span className="font-mono font-bold text-white text-sm">6.82%</span>
