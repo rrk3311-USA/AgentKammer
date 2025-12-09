@@ -131,57 +131,79 @@ export function Footer() {
       </div>
       {/* Rows 2-3: Market Ticker Static */}
       <div className="bg-[#0a1628] border-b border-border/30">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-3">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 text-xs place-items-center justify-center">
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
-              <span className="text-[#d4af37] font-medium text-[0.7rem]">30Y FIXED</span>
-              <span className="font-mono font-bold text-white text-sm">6.82%</span>
-              <TrendingDown className="h-3 w-3 text-green-400" />
-              <span className="text-green-400 font-medium text-[0.7rem]">-0.03</span>
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 place-items-center justify-center">
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">30Y Fixed</span>
+              <div className="flex items-center gap-1.5">
+                <span className="font-mono font-bold text-white text-base">6.82%</span>
+                <div className="flex items-center gap-0.5">
+                  <TrendingDown className="h-3 w-3 text-green-400" />
+                  <span className="text-green-400 text-xs font-medium">0.03</span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
-              <span className="text-[#d4af37] font-medium text-[0.7rem]">15Y FIXED</span>
-              <span className="font-mono font-bold text-white text-sm">6.09%</span>
-              <TrendingDown className="h-3 w-3 text-green-400" />
-              <span className="text-green-400 font-medium text-[0.7rem]">-0.05</span>
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">15Y Fixed</span>
+              <div className="flex items-center gap-1.5">
+                <span className="font-mono font-bold text-white text-base">6.09%</span>
+                <div className="flex items-center gap-0.5">
+                  <TrendingDown className="h-3 w-3 text-green-400" />
+                  <span className="text-green-400 text-xs font-medium">0.05</span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
-              <span className="text-[#d4af37] font-medium text-[0.7rem]">50Y FIXED</span>
-              <span className="font-mono font-bold text-white text-sm">7.15%</span>
-              <TrendingDown className="h-3 w-3 text-green-400" />
-              <span className="text-green-400 font-medium text-[0.7rem]">-0.02</span>
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">50Y Fixed</span>
+              <div className="flex items-center gap-1.5">
+                <span className="font-mono font-bold text-white text-base">7.15%</span>
+                <div className="flex items-center gap-0.5">
+                  <TrendingDown className="h-3 w-3 text-green-400" />
+                  <span className="text-green-400 text-xs font-medium">0.02</span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
-              <span className="text-[#d4af37] font-medium text-[0.7rem]">PRIME RATE</span>
-              <span className="font-mono font-bold text-white text-sm">8.50%</span>
-              <span className="text-gray-400">—</span>
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">Prime Rate</span>
+              <span className="font-mono font-bold text-white text-base">8.50%</span>
             </div>
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
-              <span className="text-[#d4af37] font-medium text-[0.7rem]">FED RATE</span>
-              <span className="font-mono font-bold text-white text-sm">5.50%</span>
-              <span className="text-gray-400">—</span>
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">Fed Rate</span>
+              <span className="font-mono font-bold text-white text-base">5.50%</span>
             </div>
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
-              <span className="text-[#d4af37] font-medium text-[0.7rem]">AVG CC APR</span>
-              <span className="font-mono font-bold text-white text-sm">24.6%</span>
-              <TrendingUp className="h-3 w-3 text-red-400" />
-              <span className="text-red-400 font-medium text-[0.7rem]">+0.20</span>
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">Avg CC APR</span>
+              <div className="flex items-center gap-1.5">
+                <span className="font-mono font-bold text-white text-base">24.6%</span>
+                <div className="flex items-center gap-0.5">
+                  <TrendingUp className="h-3 w-3 text-red-400" />
+                  <span className="text-red-400 text-xs font-medium">0.20</span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
-              <span className="text-[#d4af37] font-medium text-[0.7rem]">GOLD</span>
-              <span className="font-mono font-bold text-white text-sm">$2,450</span>
-              <TrendingUp className="h-3 w-3 text-red-400" />
-              <span className="text-red-400 font-medium text-[0.7rem]">+0.85</span>
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">Gold</span>
+              <div className="flex items-center gap-1.5">
+                <span className="font-mono font-bold text-white text-base">$2,450</span>
+                <div className="flex items-center gap-0.5">
+                  <TrendingUp className="h-3 w-3 text-red-400" />
+                  <span className="text-red-400 text-xs font-medium">0.85</span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-1.5 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
-              <span className="text-[#d4af37] font-medium text-[0.7rem]">USD/EUR</span>
-              <span className="font-mono font-bold text-white text-sm">1.0850</span>
-              <TrendingUp className="h-3 w-3 text-red-400" />
-              <span className="text-red-400 font-medium text-[0.7rem]">+0.0035</span>
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">USD/EUR</span>
+              <div className="flex items-center gap-1.5">
+                <span className="font-mono font-bold text-white text-base">1.0850</span>
+                <div className="flex items-center gap-0.5">
+                  <TrendingUp className="h-3 w-3 text-red-400" />
+                  <span className="text-red-400 text-xs font-medium">0.0035</span>
+                </div>
+              </div>
             </div>
-            <Link href="/real-estate" className="flex items-center gap-1.5 px-2 py-1 bg-blue-500/30 border border-blue-400/50 rounded-sm hover:bg-blue-500/40 transition-colors">
-              <Home className="h-3 w-3 text-blue-400" />
-              <span className="text-[0.7rem] font-medium text-blue-300">Buyers Market</span>
+            <Link href="/real-estate" className="flex flex-col items-center gap-1 px-3 py-2 rounded hover:bg-blue-500/20 transition-colors">
+              <Home className="h-4 w-4 text-blue-400" />
+              <span className="text-[0.65rem] font-medium text-blue-300">Buyers Market</span>
             </Link>
           </div>
         </div>
