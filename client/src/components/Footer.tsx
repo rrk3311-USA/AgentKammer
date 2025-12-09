@@ -101,7 +101,7 @@ export function Footer() {
       </div>
       {/* Row 1: Vintage Clock with Update Time */}
       <div className="bg-[#0a1628] border-b border-border/30">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex items-center justify-center gap-3 pt-[23px] pb-[23px] mt-[6px] mb-[6px]">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex items-center justify-center gap-3 pt-[16px] pb-[16px] mt-[0px] mb-[0px]">
           <div className="relative">
             <div className="w-12 h-12 rounded-full border-3 border-[#d4af37] flex items-center justify-center bg-gradient-to-br from-[#d4af37]/10 to-[#d4af37]/5" style={{
               boxShadow: 'inset 0 0 20px rgba(212,175,55,0.2), 0 0 15px rgba(212,175,55,0.3)'
