@@ -115,7 +115,7 @@ export function Footer() {
             }} />
           </div>
           <div>
-            <p className="text-lg font-serif font-bold text-[#d4af37] mb-1">Live Market Rate Updates</p>
+            <p className="text-lg font-bold text-[#d4af37] mb-1" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>Live Market Rate Updates</p>
             <div className="flex items-center gap-2">
               <span className="font-mono text-sm font-bold text-white">{formatTime(lastUpdate)}</span>
               <span className="text-sm text-white/60">{formatDate(lastUpdate)}</span>
