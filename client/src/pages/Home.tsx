@@ -113,7 +113,7 @@ export default function Home() {
       </section>
       {/* SECTION 2: Choose Your Category - Combined */}
       <section id="categories" className="relative py-6 px-4 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-900">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {/* Divider */}
           <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-8" />
 
@@ -213,7 +213,7 @@ export default function Home() {
       </section>
       {/* SECTION 3: How It Works */}
       <section className="relative py-6 px-4 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {/* Top Gradient Divider */}
           <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 mb-6" />
 
@@ -400,7 +400,7 @@ export default function Home() {
       <CreditCardShowcase />
       {/* SECTION 7B: What You'll Unlock - Category Benefits */}
       <section className="relative py-6 px-4 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-900">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           {/* Choose Your Category Header */}
           <div className="text-center mb-6">
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-3">
