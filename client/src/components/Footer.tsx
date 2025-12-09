@@ -1,14 +1,100 @@
 import { SiReplit, SiNvidia, SiClaude, SiAnthropic, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
-import { Brain, Building2, Users, RefreshCw } from "lucide-react";
+import { Brain, Building2, Users, RefreshCw, Clock, TrendingUp, TrendingDown } from "lucide-react";
 import { Link } from "wouter";
-import { MarketTickerStatic } from "@/components/MarketTickerStatic";
 
 export function Footer() {
+  const lastUpdate = new Date();
+
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString('en-US', { 
+      hour: '2-digit', 
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true 
+    });
+  };
+
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString('en-US', { 
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
+  };
+
   return (
     <footer className="relative">
       <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       
+      {/* Row 1: Clock with Update Time */}
+      <div className="bg-[#0a1628] border-b border-border/30">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex items-center justify-center gap-2">
+          <Clock className="h-3 w-3 text-[#d4af37]" />
+          <span className="text-[0.65rem] font-mono text-[#d4af37]">{formatTime(lastUpdate)}</span>
+          <span className="text-[0.65rem] text-white/60">{formatDate(lastUpdate)}</span>
+        </div>
+      </div>
+
+      {/* Rows 2-3: Market Ticker Static */}
+      <div className="bg-[#0a1628] border-b border-border/30">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-2">
+          <div className="flex items-center justify-center gap-2 flex-wrap text-[0.7rem]">
+            <div className="flex items-center gap-1 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
+              <span className="text-[#d4af37] font-medium">30Y FIXED</span>
+              <span className="font-mono font-bold text-white">6.82%</span>
+              <TrendingDown className="h-3 w-3 text-green-400" />
+              <span className="text-green-400 font-medium">-0.03</span>
+            </div>
+            <div className="flex items-center gap-1 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
+              <span className="text-[#d4af37] font-medium">PRIME RATE</span>
+              <span className="font-mono font-bold text-white">8.50%</span>
+              <span className="text-gray-400">—</span>
+            </div>
+            <div className="flex items-center gap-1 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
+              <span className="text-[#d4af37] font-medium">FED RATE</span>
+              <span className="font-mono font-bold text-white">5.50%</span>
+              <span className="text-gray-400">—</span>
+            </div>
+            <div className="flex items-center gap-1 px-2 py-1 bg-black/50 border border-[#d4af37]/30 rounded-sm">
+              <span className="text-[#d4af37] font-medium">AVG CC APR</span>
+              <span className="font-mono font-bold text-white">24.6%</span>
+              <TrendingUp className="h-3 w-3 text-red-400" />
+              <span className="text-red-400 font-medium">+0.20</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Powered by AI Section */}
+      <div className="bg-[#0a1628] border-b border-border/30">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-2">
+          <div className="flex items-center justify-center gap-1">
+            <Brain className="h-3 w-3 text-[#79d3ff]" />
+            <span className="text-[0.6rem] font-medium text-white/90">Powered by AI</span>
+            <div className="flex items-center gap-1 text-[0.6rem]">
+              <div className="flex items-center gap-0.5 text-white/90">
+                <SiReplit className="h-2.5 w-2.5" />
+                <span className="font-medium">Replit</span>
+              </div>
+              <div className="flex items-center gap-0.5 text-white/90">
+                <SiAnthropic className="h-2.5 w-2.5" />
+                <span className="font-medium">Anthropic</span>
+              </div>
+              <div className="flex items-center gap-0.5 text-white/90">
+                <SiClaude className="h-2.5 w-2.5" />
+                <span className="font-medium">Claude</span>
+              </div>
+              <div className="flex items-center gap-0.5 text-white/90">
+                <SiNvidia className="h-2.5 w-2.5" />
+                <span className="font-medium">NVIDIA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Links Section */}
+      <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
       <div className="bg-background border-t border-border/50">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-8">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 text-left">
@@ -78,35 +164,6 @@ export function Footer() {
                   </Link>
                 </li>
               </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Powered by AI Section */}
-      <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
-      <div className="bg-[#0a1628]">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4">
-          <div className="flex items-center justify-center gap-1.5">
-            <Brain className="h-4 w-4 text-[#79d3ff]" />
-            <span className="text-[0.625rem] font-medium text-white/90">Powered by AI</span>
-            <div className="flex items-center gap-2 md:gap-3 text-[0.625rem]">
-              <div className="flex items-center gap-1 text-white/90">
-                <SiReplit className="h-3 w-3" />
-                <span className="font-medium">Replit</span>
-              </div>
-              <div className="flex items-center gap-1 text-white/90">
-                <SiAnthropic className="h-3 w-3" />
-                <span className="font-medium">Anthropic</span>
-              </div>
-              <div className="flex items-center gap-1 text-white/90">
-                <SiClaude className="h-3 w-3" />
-                <span className="font-medium">Claude</span>
-              </div>
-              <div className="flex items-center gap-1 text-white/90">
-                <SiNvidia className="h-3 w-3" />
-                <span className="font-medium">NVIDIA</span>
-              </div>
             </div>
           </div>
         </div>
