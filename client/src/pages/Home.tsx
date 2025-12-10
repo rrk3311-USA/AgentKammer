@@ -33,6 +33,9 @@ import airportLoungeImage from '@assets/generated_images/luxury_airport_lounge.p
 import dinningImage from '@assets/generated_images/fine_dining_experience.png';
 import travelImage from '@assets/generated_images/luxury_travel_destination.png';
 import mascotImage from '@assets/generated_images/sophisticated_gentleman_mascot_with_cane.png';
+import japanRyokanImage from '@assets/generated_images/japanese_ryokan_hot_spring_inn.png';
+import singaporeHotelImage from '@assets/generated_images/singapore_marina_bay_luxury_hotel.png';
+import hawaiiResortImage from '@assets/generated_images/hawaii_beach_resort_paradise.png';
 
 const ICON_WRAPPER_STYLE = {
   background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
@@ -515,69 +518,69 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-3 gap-6">
-            {/* Offer 1 */}
-            <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover-elevate">
-              <div 
-                className="w-14 h-14 rounded-xl flex items-center justify-center mb-4"
-                style={{
-                  background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
-                  border: '2px solid rgba(212,175,55,0.3)'
-                }}
-              >
-                <Building2 
-                  className="h-7 w-7"
-                  style={{ color: '#d4af37', filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))' }}
+            {/* Offer 1 - Japan */}
+            <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden hover-elevate">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img 
+                  src={japanRyokanImage} 
+                  alt="Japan Ryokan Experience" 
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-white font-semibold text-lg mb-2">Japan Ryokan Experience</h3>
-              <p className="text-white/60 text-sm mb-4">Traditional Japanese inns with hot springs and authentic hospitality.</p>
-              <div className="flex items-center justify-between">
-                <span className="text-[#d4af37] font-semibold">Up to 15% off</span>
-                <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Hotels.com</Badge>
+              <div className="p-5">
+                <h3 className="text-white font-semibold text-lg mb-2">Japan Ryokan Experience</h3>
+                <p className="text-white/60 text-sm mb-4">Traditional Japanese inns with hot springs and authentic hospitality.</p>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[#d4af37] font-semibold">Up to 15% off</span>
+                  <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Hotels.com</Badge>
+                </div>
+                <Button variant="outline" size="sm" className="w-full border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/10">
+                  Learn More <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
               </div>
             </div>
             
-            {/* Offer 2 */}
-            <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover-elevate">
-              <div 
-                className="w-14 h-14 rounded-xl flex items-center justify-center mb-4"
-                style={{
-                  background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
-                  border: '2px solid rgba(212,175,55,0.3)'
-                }}
-              >
-                <Building2 
-                  className="h-7 w-7"
-                  style={{ color: '#d4af37', filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))' }}
+            {/* Offer 2 - Singapore */}
+            <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden hover-elevate">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img 
+                  src={singaporeHotelImage} 
+                  alt="Singapore Staycations" 
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-white font-semibold text-lg mb-2">Singapore Staycations</h3>
-              <p className="text-white/60 text-sm mb-4">Luxury hotels in Marina Bay and Sentosa with exclusive member rates.</p>
-              <div className="flex items-center justify-between">
-                <span className="text-[#d4af37] font-semibold">Up to 20% off</span>
-                <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Hotels.com</Badge>
+              <div className="p-5">
+                <h3 className="text-white font-semibold text-lg mb-2">Singapore Staycations</h3>
+                <p className="text-white/60 text-sm mb-4">Luxury hotels in Marina Bay and Sentosa with exclusive member rates.</p>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[#d4af37] font-semibold">Up to 20% off</span>
+                  <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Hotels.com</Badge>
+                </div>
+                <Button variant="outline" size="sm" className="w-full border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/10">
+                  Learn More <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
               </div>
             </div>
             
-            {/* Offer 3 */}
-            <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover-elevate">
-              <div 
-                className="w-14 h-14 rounded-xl flex items-center justify-center mb-4"
-                style={{
-                  background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
-                  border: '2px solid rgba(212,175,55,0.3)'
-                }}
-              >
-                <Building2 
-                  className="h-7 w-7"
-                  style={{ color: '#d4af37', filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))' }}
+            {/* Offer 3 - Hawaii */}
+            <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden hover-elevate">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img 
+                  src={hawaiiResortImage} 
+                  alt="Hawaii Beach Resorts" 
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-white font-semibold text-lg mb-2">Hawaii Beach Resorts</h3>
-              <p className="text-white/60 text-sm mb-4">Oceanfront properties in Maui, Oahu, and the Big Island.</p>
-              <div className="flex items-center justify-between">
-                <span className="text-[#d4af37] font-semibold">Up to 25% off</span>
-                <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Hotels.com</Badge>
+              <div className="p-5">
+                <h3 className="text-white font-semibold text-lg mb-2">Hawaii Beach Resorts</h3>
+                <p className="text-white/60 text-sm mb-4">Oceanfront properties in Maui, Oahu, and the Big Island.</p>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[#d4af37] font-semibold">Up to 25% off</span>
+                  <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Hotels.com</Badge>
+                </div>
+                <Button variant="outline" size="sm" className="w-full border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/10">
+                  Learn More <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
               </div>
             </div>
           </div>
