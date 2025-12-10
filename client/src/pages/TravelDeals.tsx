@@ -30,10 +30,11 @@ const FEATURED_DEALS = [
     tagline: 'Historic Kyoto Ryokan Since 1818',
     description: 'Experience the legendary Hiiragiya Ryokan, a family-run masterpiece of Japanese hospitality operating since 1818. This exquisite property in downtown Kyoto features traditional tatami rooms, private gardens, and authentic kaiseki cuisine prepared by master chefs.',
     fullPitch: 'Hiiragiya represents the pinnacle of ryokan tradition. From the moment you step through the noren curtain, you\'ll be transported to a world where every detail reflects centuries of refined Japanese aesthetics. The ryokan features stunning late Edo to Showa period design, cypress wood baths, and the kind of personalized omotenashi service that has made it a favorite of writers, artists, and discerning travelers for over 200 years.',
-    discount: 'Up to 15% off',
+    discount: 'Preferred Access Rate',
+    discountDetail: 'Member prices up to 25% off',
     partnerName: 'Hotels.com',
     imageUrl: japanRyokanImage,
-    affiliateUrl: 'https://www.hotels.com/Hotel-Search?destination=Hiiragiya%20Ryokan%20Kyoto',
+    affiliateUrl: 'https://www.hotels.com/Hotel-Search?destination=Hiiragiya%20Ryokan%20Kyoto&sort=RECOMMENDED',
     highlights: [
       { icon: Waves, text: 'Private Cypress Wood Baths' },
       { icon: Utensils, text: 'Authentic Kaiseki Cuisine' },
@@ -42,6 +43,7 @@ const FEATURED_DEALS = [
     ],
     bestFor: 'Couples, Solo Travelers, Cultural Enthusiasts',
     avgSavings: '$180-$350 per stay',
+    promoNote: 'One Key Member Prices automatically applied at checkout',
   },
   {
     id: 'singapore-staycations',
@@ -51,10 +53,11 @@ const FEATURED_DEALS = [
     tagline: 'The World\'s Most Iconic Hotel',
     description: 'Stay at the legendary Marina Bay Sands, Singapore\'s most photographed landmark. Home to the famous 57th-floor infinity pool, celebrity chef restaurants, and unrivaled views of the city skyline and Gardens by the Bay.',
     fullPitch: 'Marina Bay Sands isn\'t just a hotel—it\'s an architectural marvel and cultural destination. The 2,561-room property features the world\'s largest rooftop infinity pool at 57 stories high, over 80 dining options including restaurants by Wolfgang Puck and Gordon Ramsay, a world-class casino, the ArtScience Museum, and direct access to luxury shopping. Currently undergoing a $1.75B enhancement, this is Singapore at its most spectacular.',
-    discount: 'Up to 20% off',
+    discount: 'Preferred Access Rate',
+    discountDetail: 'Member prices up to 25% off',
     partnerName: 'Hotels.com',
     imageUrl: singaporeHotelImage,
-    affiliateUrl: 'https://www.hotels.com/Hotel-Search?destination=Marina%20Bay%20Sands%20Singapore',
+    affiliateUrl: 'https://www.hotels.com/Hotel-Search?destination=Marina%20Bay%20Sands%20Singapore&sort=RECOMMENDED',
     highlights: [
       { icon: Building2, text: '57th Floor Infinity Pool' },
       { icon: Star, text: 'Celebrity Chef Restaurants' },
@@ -63,6 +66,7 @@ const FEATURED_DEALS = [
     ],
     bestFor: 'Business Travelers, Luxury Seekers, Food Lovers',
     avgSavings: '$250-$500 per stay',
+    promoNote: 'One Key Member Prices automatically applied at checkout',
   },
   {
     id: 'hawaii-resorts',
@@ -72,10 +76,11 @@ const FEATURED_DEALS = [
     tagline: 'Maui\'s Premier Beach Resort',
     description: 'Discover the Grand Wailea, a legendary 40-acre Waldorf Astoria resort on Wailea Beach. Recently renovated with 9 spectacular pools, the famous Wailea Canyon water playground, and the luxurious Kilolani Spa.',
     fullPitch: 'The Grand Wailea is Maui\'s crown jewel—a 40-acre oceanfront paradise that seamlessly blends Hawaiian culture with world-class luxury. The recently renovated property features the legendary Wailea Canyon Activity Pool with water slides, rope swings, and grottos, plus a serene adults-only infinity pool. The Kilolani Spa offers traditional Hawaiian healing practices, while multiple restaurants serve everything from fresh poke to fine dining. Located on pristine Wailea Beach, you\'ll have access to some of Hawaii\'s best snorkeling and whale watching.',
-    discount: 'Up to 25% off',
+    discount: 'Preferred Access Rate',
+    discountDetail: 'Member prices up to 25% off',
     partnerName: 'Hotels.com',
     imageUrl: hawaiiResortImage,
-    affiliateUrl: 'https://www.hotels.com/Hotel-Search?destination=Grand%20Wailea%20Maui',
+    affiliateUrl: 'https://www.hotels.com/Hotel-Search?destination=Grand%20Wailea%20Maui&sort=RECOMMENDED',
     highlights: [
       { icon: Waves, text: '9 Pools & Water Slides' },
       { icon: Mountain, text: 'Oceanfront Wailea Beach' },
@@ -84,6 +89,7 @@ const FEATURED_DEALS = [
     ],
     bestFor: 'Families, Honeymooners, Adventure Seekers',
     avgSavings: '$300-$600 per stay',
+    promoNote: 'One Key Member Prices automatically applied at checkout',
   }
 ];
 
@@ -213,9 +219,12 @@ export default function TravelDeals() {
                 <h2 className="text-3xl lg:text-4xl font-bold text-white mb-2">
                   {selectedDeal.tagline}
                 </h2>
-                <div className="flex items-center gap-4">
-                  <span className="text-2xl font-bold text-[#00d4ff]">{selectedDeal.discount}</span>
-                  <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">
+                <div className="flex flex-wrap items-center gap-3">
+                  <Badge className="bg-[#d4af37] text-[#0a1628] text-sm px-3 py-1">
+                    {selectedDeal.discount}
+                  </Badge>
+                  <span className="text-[#00d4ff] font-medium">{selectedDeal.discountDetail}</span>
+                  <Badge className="bg-white/10 text-white/70 border-white/20">
                     via {selectedDeal.partnerName}
                   </Badge>
                 </div>
@@ -271,6 +280,9 @@ export default function TravelDeals() {
                       View Deal <ArrowRight className="h-5 w-5 ml-2" />
                     </Button>
                   </a>
+                  <p className="text-xs text-white/50 text-center mt-2">
+                    {selectedDeal.promoNote}
+                  </p>
                 </div>
               </div>
             </div>
