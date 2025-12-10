@@ -9,7 +9,9 @@ import {
   insertContactSubmissionSchema,
   insertHomeValueRequestSchema,
   insertBrokerRegistrationSchema,
-  insertAffiliateSchema
+  insertAffiliateSchema,
+  insertTravelDealSubscriberSchema,
+  insertTravelDealSchema
 } from "@shared/schema";
 import OpenAI from "openai";
 import puppeteer from "puppeteer";
@@ -1407,6 +1409,81 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Chat conversation delete error:", error);
       res.status(500).json({ error: "Failed to delete conversation" });
+    }
+  });
+
+  // Travel Deals Subscription
+  app.post("/api/travel-deals/subscribe", async (req, res) => {
+    try {
+      const data = insertTravelDealSubscriberSchema.parse(req.body);
+      const subscriber = await storage.createTravelDealSubscriber(data);
+      
+      // Notify about new subscriber
+      notifyLead({
+        source: "travel-deals-subscription",
+        name: data.email,
+      });
+      
+      res.json({ ok: true, message: "Subscribed to weekly travel deals!" });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid email", details: error.errors });
+      } else if ((error as any)?.code === '23505') {
+        res.status(400).json({ message: "You're already subscribed!" });
+      } else {
+        console.error("Travel deals subscription error:", error);
+        res.status(500).json({ error: "Failed to subscribe" });
+      }
+    }
+  });
+
+  app.get("/api/travel-deals/subscribers", requireAdmin, async (req, res) => {
+    try {
+      const subscribers = await storage.getAllTravelDealSubscribers();
+      res.json(subscribers);
+    } catch (error) {
+      console.error("Travel deal subscribers fetch error:", error);
+      res.status(500).json({ error: "Failed to fetch subscribers" });
+    }
+  });
+
+  // Travel Deals CRUD
+  app.get("/api/travel-deals", async (req, res) => {
+    try {
+      const deals = await storage.getAllTravelDeals();
+      res.json(deals);
+    } catch (error) {
+      console.error("Travel deals fetch error:", error);
+      res.status(500).json({ error: "Failed to fetch travel deals" });
+    }
+  });
+
+  app.post("/api/travel-deals", requireAdmin, async (req, res) => {
+    try {
+      const data = insertTravelDealSchema.parse(req.body);
+      const deal = await storage.createTravelDeal(data);
+      res.json(deal);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid data", details: error.errors });
+      } else {
+        console.error("Travel deal creation error:", error);
+        res.status(500).json({ error: "Failed to create travel deal" });
+      }
+    }
+  });
+
+  app.get("/api/travel-deals/:id", async (req, res) => {
+    try {
+      const deal = await storage.getTravelDealById(req.params.id);
+      if (deal) {
+        res.json(deal);
+      } else {
+        res.status(404).json({ error: "Travel deal not found" });
+      }
+    } catch (error) {
+      console.error("Travel deal fetch error:", error);
+      res.status(500).json({ error: "Failed to fetch travel deal" });
     }
   });
 

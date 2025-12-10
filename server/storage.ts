@@ -9,8 +9,11 @@ import {
   type BrokerRegistration, type InsertBrokerRegistration,
   type Affiliate, type InsertAffiliate,
   type ChatConversation, type InsertChatConversation,
+  type TravelDealSubscriber, type InsertTravelDealSubscriber,
+  type TravelDeal, type InsertTravelDeal,
   users, leads, contentItems, rboBuyerProfiles,
-  rsoSellerProfiles, contactSubmissions, homeValueRequests, brokerRegistrations, affiliates, chatConversations
+  rsoSellerProfiles, contactSubmissions, homeValueRequests, brokerRegistrations, affiliates, chatConversations,
+  travelDealSubscribers, travelDeals
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 import { drizzle } from "drizzle-orm/neon-http";
@@ -66,6 +69,13 @@ export interface IStorage {
   getChatConversationBySessionId(sessionId: string): Promise<ChatConversation | undefined>;
   getAllChatConversations(): Promise<ChatConversation[]>;
   deleteChatConversation(id: string): Promise<boolean>;
+
+  createTravelDealSubscriber(subscriber: InsertTravelDealSubscriber): Promise<TravelDealSubscriber>;
+  getAllTravelDealSubscribers(): Promise<TravelDealSubscriber[]>;
+
+  createTravelDeal(deal: InsertTravelDeal): Promise<TravelDeal>;
+  getAllTravelDeals(): Promise<TravelDeal[]>;
+  getTravelDealById(id: string): Promise<TravelDeal | undefined>;
 }
 
 export class MemStorage implements IStorage {
@@ -633,6 +643,29 @@ export class DbStorage implements IStorage {
   async deleteChatConversation(id: string): Promise<boolean> {
     const result = await db.delete(chatConversations).where(eq(chatConversations.id, id)).returning();
     return result.length > 0;
+  }
+
+  async createTravelDealSubscriber(insertSubscriber: InsertTravelDealSubscriber): Promise<TravelDealSubscriber> {
+    const result = await db.insert(travelDealSubscribers).values(insertSubscriber).returning();
+    return result[0];
+  }
+
+  async getAllTravelDealSubscribers(): Promise<TravelDealSubscriber[]> {
+    return await db.select().from(travelDealSubscribers).orderBy(desc(travelDealSubscribers.createdAt));
+  }
+
+  async createTravelDeal(insertDeal: InsertTravelDeal): Promise<TravelDeal> {
+    const result = await db.insert(travelDeals).values(insertDeal).returning();
+    return result[0];
+  }
+
+  async getAllTravelDeals(): Promise<TravelDeal[]> {
+    return await db.select().from(travelDeals).orderBy(desc(travelDeals.createdAt));
+  }
+
+  async getTravelDealById(id: string): Promise<TravelDeal | undefined> {
+    const result = await db.select().from(travelDeals).where(eq(travelDeals.id, id));
+    return result[0];
   }
 }
 

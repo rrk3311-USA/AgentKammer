@@ -506,14 +506,14 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* SECTION 8: Explore Now - Travel Offers */}
+      {/* SECTION 8: Weekly Travel Deals */}
       <section className="py-12 lg:py-16 bg-[#0a1628] text-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-10">
             <h2 className="text-3xl lg:text-4xl font-semibold mb-2" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
-              Free Offers — Explore Now
+              Weekly Travel Deals
             </h2>
-            <p className="text-[#00d4ff] text-lg font-medium mb-4">No sign-up required</p>
+            <p className="text-[#00d4ff] text-lg font-medium mb-4">Curated by our travel experts every week</p>
             <p className="text-white/80 max-w-3xl mx-auto text-lg leading-relaxed">
               From the tranquil hot springs of a traditional Japanese ryokan to the dazzling skyline views of Singapore's Marina Bay, 
               and the sun-kissed shores of Hawaii's finest beach resorts—our curated collection brings you exclusive rates 
@@ -522,7 +522,7 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
             {/* Offer 1 - Japan */}
             <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden hover-elevate">
               <div className="aspect-[4/3] overflow-hidden">
@@ -590,6 +590,67 @@ export default function Home() {
             </div>
           </div>
           
+          {/* Email Subscription Box */}
+          <div className="max-w-2xl mx-auto">
+            <Card className="bg-white/5 border-[#d4af37]/30 p-6">
+              <div className="text-center mb-4">
+                <h3 className="text-xl font-semibold text-white mb-2">Receive Weekly Travel Deals</h3>
+                <p className="text-white/60 text-sm">Get 3 handpicked deals delivered to your inbox every week</p>
+              </div>
+              <form 
+                className="flex flex-col sm:flex-row gap-3"
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  const form = e.target as HTMLFormElement;
+                  const emailInput = form.querySelector('input[type="email"]') as HTMLInputElement;
+                  const email = emailInput.value;
+                  if (email) {
+                    try {
+                      const response = await fetch('/api/travel-deals/subscribe', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email })
+                      });
+                      if (response.ok) {
+                        emailInput.value = '';
+                        alert('Subscribed! Check your inbox for weekly travel deals.');
+                      } else {
+                        const data = await response.json();
+                        alert(data.message || 'Failed to subscribe');
+                      }
+                    } catch {
+                      alert('Failed to subscribe. Please try again.');
+                    }
+                  }
+                }}
+              >
+                <input 
+                  type="email" 
+                  placeholder="Enter your email"
+                  required
+                  className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-[#d4af37]"
+                  data-testid="input-travel-deals-email"
+                />
+                <Button 
+                  type="submit"
+                  className="bg-[#d4af37] text-[#0a1628] hover:bg-[#d4af37]/90 px-6"
+                  data-testid="button-subscribe-travel-deals"
+                >
+                  <Plane className="h-4 w-4 mr-2" />
+                  Subscribe
+                </Button>
+              </form>
+            </Card>
+          </div>
+          
+          {/* Link to full Travel Deals page */}
+          <div className="text-center mt-8">
+            <Link href="/travel-deals">
+              <Button variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                View All Travel Deals <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 

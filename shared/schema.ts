@@ -258,3 +258,44 @@ export const insertChatConversationSchema = createInsertSchema(chatConversations
 
 export type InsertChatConversation = z.infer<typeof insertChatConversationSchema>;
 export type ChatConversation = typeof chatConversations.$inferSelect;
+
+export const travelDealSubscribers = pgTable("travel_deal_subscribers", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  email: text("email").notNull().unique(),
+  isActive: boolean("is_active").default(true),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertTravelDealSubscriberSchema = createInsertSchema(travelDealSubscribers).omit({
+  id: true,
+  isActive: true,
+  createdAt: true,
+});
+
+export type InsertTravelDealSubscriber = z.infer<typeof insertTravelDealSubscriberSchema>;
+export type TravelDealSubscriber = typeof travelDealSubscribers.$inferSelect;
+
+export const travelDeals = pgTable("travel_deals", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  title: text("title").notNull(),
+  destination: text("destination").notNull(),
+  description: text("description"),
+  discount: text("discount"),
+  partnerName: text("partner_name"),
+  partnerUrl: text("partner_url"),
+  imageUrl: text("image_url"),
+  articleContent: text("article_content"),
+  weekNumber: integer("week_number"),
+  year: integer("year"),
+  isActive: boolean("is_active").default(true),
+  publishedAt: timestamp("published_at"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertTravelDealSchema = createInsertSchema(travelDeals).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertTravelDeal = z.infer<typeof insertTravelDealSchema>;
+export type TravelDeal = typeof travelDeals.$inferSelect;
