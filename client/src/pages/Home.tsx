@@ -32,6 +32,7 @@ import conciergeGestureImage from '@assets/image_1763360901241.png';
 import airportLoungeImage from '@assets/generated_images/luxury_airport_lounge.png';
 import dinningImage from '@assets/generated_images/fine_dining_experience.png';
 import travelImage from '@assets/generated_images/luxury_travel_destination.png';
+import mascotImage from '@assets/generated_images/sophisticated_gentleman_mascot_with_cane.png';
 
 const ICON_WRAPPER_STYLE = {
   background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
@@ -590,60 +591,73 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00d4ff]/5 to-transparent pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center">
-            <h2 className="text-4xl lg:text-5xl font-semibold mb-4 relative inline-block" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
-              <span className="relative">
-                Ready to Get Started?
-                <div 
-                  className="absolute inset-0 overflow-visible pointer-events-none"
-                  style={{
-                    background: 'radial-gradient(circle, rgba(0,212,255,0.5) 0%, rgba(0,255,136,0.2) 30%, transparent 70%)',
-                    animation: 'sonarPulse 8s ease-in-out infinite',
-                    mixBlendMode: 'screen',
-                    filter: 'blur(1px)',
-                  }}
-                />
-                <div 
-                  className="absolute inset-0 overflow-hidden pointer-events-none"
-                  style={{
-                    background: 'linear-gradient(90deg, transparent 0%, rgba(0,212,255,0.15) 45%, rgba(0,255,136,0.4) 50%, rgba(0,212,255,0.15) 55%, transparent 100%)',
-                    animation: 'slowScan 10s ease-in-out infinite',
-                    mixBlendMode: 'screen',
-                  }}
-                />
-              </span>
-            </h2>
-            <style>{`
-              @keyframes slowScan {
-                0%, 100% { transform: translateX(-120%); opacity: 0; }
-                10% { opacity: 1; }
-                50% { transform: translateX(120%); opacity: 1; }
-                60% { opacity: 0; }
-              }
-              @keyframes sonarPulse {
-                0%, 100% { transform: scale(0.5); opacity: 0; }
-                25% { transform: scale(1.5); opacity: 0.6; }
-                50% { transform: scale(2.5); opacity: 0; }
-                75% { transform: scale(1.2); opacity: 0.4; }
-              }
-            `}</style>
-            <p className="text-lg mb-8 text-white/90">
-              Build your Agentic Profile and unlock personalized recommendations across all financial categories
-            </p>
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
+            {/* Mascot Figure */}
+            <div className="hidden lg:block flex-shrink-0">
+              <img 
+                src={mascotImage} 
+                alt="Agent Kammer Concierge" 
+                className="h-72 w-auto object-contain drop-shadow-2xl"
+                style={{ filter: 'drop-shadow(0 0 20px rgba(212, 175, 55, 0.3))' }}
+              />
+            </div>
             
-            <Link href="/profile">
-              <Button
-                size="lg"
-                className="h-12 px-8 text-black font-semibold hover:opacity-90"
-                style={{
-                  background: 'linear-gradient(135deg, #00d4ff 0%, #00ff88 100%)',
-                }}
-                data-testid="button-dashboard"
-              >
-                <Brain className="h-5 w-5 mr-2" />
-                Start Your Agentic Profile
-              </Button>
-            </Link>
+            {/* CTA Content */}
+            <div className="text-center lg:text-left">
+              <h2 className="text-4xl lg:text-5xl font-semibold mb-4 relative inline-block" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
+                <span className="relative">
+                  Ready to Get Started?
+                  <div 
+                    className="absolute inset-0 overflow-visible pointer-events-none"
+                    style={{
+                      background: 'radial-gradient(circle, rgba(0,212,255,0.5) 0%, rgba(0,255,136,0.2) 30%, transparent 70%)',
+                      animation: 'sonarPulse 8s ease-in-out infinite',
+                      mixBlendMode: 'screen',
+                      filter: 'blur(1px)',
+                    }}
+                  />
+                  <div 
+                    className="absolute inset-0 overflow-hidden pointer-events-none"
+                    style={{
+                      background: 'linear-gradient(90deg, transparent 0%, rgba(0,212,255,0.15) 45%, rgba(0,255,136,0.4) 50%, rgba(0,212,255,0.15) 55%, transparent 100%)',
+                      animation: 'slowScan 10s ease-in-out infinite',
+                      mixBlendMode: 'screen',
+                    }}
+                  />
+                </span>
+              </h2>
+              <style>{`
+                @keyframes slowScan {
+                  0%, 100% { transform: translateX(-120%); opacity: 0; }
+                  10% { opacity: 1; }
+                  50% { transform: translateX(120%); opacity: 1; }
+                  60% { opacity: 0; }
+                }
+                @keyframes sonarPulse {
+                  0%, 100% { transform: scale(0.5); opacity: 0; }
+                  25% { transform: scale(1.5); opacity: 0.6; }
+                  50% { transform: scale(2.5); opacity: 0; }
+                  75% { transform: scale(1.2); opacity: 0.4; }
+                }
+              `}</style>
+              <p className="text-lg mb-8 text-white/90">
+                Build your Agentic Profile and unlock personalized recommendations across all financial categories
+              </p>
+              
+              <Link href="/profile">
+                <Button
+                  size="lg"
+                  className="h-12 px-8 text-black font-semibold hover:opacity-90"
+                  style={{
+                    background: 'linear-gradient(135deg, #00d4ff 0%, #00ff88 100%)',
+                  }}
+                  data-testid="button-dashboard"
+                >
+                  <Brain className="h-5 w-5 mr-2" />
+                  Start Your Agentic Profile
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
