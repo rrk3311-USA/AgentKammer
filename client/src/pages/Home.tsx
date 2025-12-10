@@ -33,7 +33,7 @@ import airportLoungeImage from '@assets/generated_images/luxury_airport_lounge.p
 import dinningImage from '@assets/generated_images/fine_dining_experience.png';
 import travelImage from '@assets/generated_images/luxury_travel_destination.png';
 import mascotImage from '@assets/generated_images/sophisticated_gentleman_mascot_with_cane.png';
-import robotHeroImage from '@assets/generated_images/robot_cutout_black_background.png';
+import robotHeroImage from '@assets/generated_images/robot_butler_presenting_gesture.png';
 import japanRyokanImage from '@assets/generated_images/japanese_ryokan_hot_spring_inn.png';
 import singaporeHotelImage from '@assets/generated_images/singapore_marina_bay_luxury_hotel.png';
 import hawaiiResortImage from '@assets/generated_images/hawaii_beach_resort_paradise.png';
@@ -598,15 +598,15 @@ export default function Home() {
         {/* Background gradient base */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628] via-[#0f1e36] to-[#1a1a2e]" />
         
-        {/* Robot image - positioned right, blended seamlessly */}
+        {/* Robot image - spans across section with arm gesture */}
         <div 
-          className="absolute right-0 top-0 bottom-0 w-full lg:w-1/2 flex items-center justify-end pr-8"
+          className="absolute right-0 top-0 bottom-0 w-full lg:w-3/4 flex items-end justify-end"
         >
           <img 
             src={robotHeroImage} 
             alt="AI Deal Maker" 
-            className="h-full max-h-[550px] w-auto object-contain opacity-90"
-            style={{ mixBlendMode: 'lighten' }}
+            className="w-full h-auto object-contain object-right-bottom opacity-95"
+            style={{ mixBlendMode: 'lighten', maxHeight: '100%' }}
           />
         </div>
         
