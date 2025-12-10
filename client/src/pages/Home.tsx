@@ -33,6 +33,7 @@ import airportLoungeImage from '@assets/generated_images/luxury_airport_lounge.p
 import dinningImage from '@assets/generated_images/fine_dining_experience.png';
 import travelImage from '@assets/generated_images/luxury_travel_destination.png';
 import mascotImage from '@assets/generated_images/sophisticated_gentleman_mascot_with_cane.png';
+import robotHeroImage from '@assets/064B7A08-3CBE-49E9-97D1-9EAFC6D20B56_1_102_o_1765329522506.jpeg';
 import japanRyokanImage from '@assets/generated_images/japanese_ryokan_hot_spring_inn.png';
 import singaporeHotelImage from '@assets/generated_images/singapore_marina_bay_luxury_hotel.png';
 import hawaiiResortImage from '@assets/generated_images/hawaii_beach_resort_paradise.png';
@@ -592,72 +593,98 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 9: Final CTA - Bright Gradient */}
-      <section className="py-8 lg:py-12 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 text-white relative overflow-hidden">
-        {/* Bright gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/10 via-transparent to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00d4ff]/5 to-transparent pointer-events-none" />
+      {/* SECTION 9: Robot Hero CTA */}
+      <section className="py-16 lg:py-24 bg-gradient-to-b from-[#0a1628] via-[#0f1e36] to-[#1a1a2e] text-white relative overflow-hidden">
+        {/* Ambient glow effects */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/20 via-transparent to-orange-900/10 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#1a1a2e] to-transparent pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="flex flex-col items-center justify-center gap-8">
-            {/* CTA Content */}
-            <div className="text-center">
-              <h2 className="text-4xl lg:text-5xl font-semibold mb-4 relative inline-block" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
-                <span className="relative">
-                  Ready to Get Started?
-                  <div 
-                    className="absolute inset-0 overflow-visible pointer-events-none"
-                    style={{
-                      background: 'radial-gradient(circle, rgba(0,212,255,0.5) 0%, rgba(0,255,136,0.2) 30%, transparent 70%)',
-                      animation: 'sonarPulse 8s ease-in-out infinite',
-                      mixBlendMode: 'screen',
-                      filter: 'blur(1px)',
-                    }}
-                  />
-                  <div 
-                    className="absolute inset-0 overflow-hidden pointer-events-none"
-                    style={{
-                      background: 'linear-gradient(90deg, transparent 0%, rgba(0,212,255,0.15) 45%, rgba(0,255,136,0.4) 50%, rgba(0,212,255,0.15) 55%, transparent 100%)',
-                      animation: 'slowScan 10s ease-in-out infinite',
-                      mixBlendMode: 'screen',
-                    }}
-                  />
-                </span>
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+            {/* Left: Text Content */}
+            <div className="lg:w-1/2 text-center lg:text-left">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
+                Meet Your AI Agent
               </h2>
-              <style>{`
-                @keyframes slowScan {
-                  0%, 100% { transform: translateX(-120%); opacity: 0; }
-                  10% { opacity: 1; }
-                  50% { transform: translateX(120%); opacity: 1; }
-                  60% { opacity: 0; }
-                }
-                @keyframes sonarPulse {
-                  0%, 100% { transform: scale(0.5); opacity: 0; }
-                  25% { transform: scale(1.5); opacity: 0.6; }
-                  50% { transform: scale(2.5); opacity: 0; }
-                  75% { transform: scale(1.2); opacity: 0.4; }
-                }
-              `}</style>
-              <p className="text-lg mb-8 text-white/90">
-                Build your Agentic Profile and unlock personalized recommendations across all financial categories
+              <p className="text-xl text-white/80 mb-6">
+                Ready to find your perfect financial match?
               </p>
-              
-              <Link href="/profile">
-                <Button
-                  size="lg"
-                  className="h-12 px-8 text-black font-semibold hover:opacity-90"
+              <div className="space-y-3 mb-8">
+                <div className="flex items-center gap-3 justify-center lg:justify-start">
+                  <div className="w-2 h-2 rounded-full bg-[#00d4ff] animate-pulse" />
+                  <span className="text-white/70">100+ credit cards analyzed</span>
+                </div>
+                <div className="flex items-center gap-3 justify-center lg:justify-start">
+                  <div className="w-2 h-2 rounded-full bg-[#00ff88] animate-pulse" />
+                  <span className="text-white/70">Personalized recommendations</span>
+                </div>
+                <div className="flex items-center gap-3 justify-center lg:justify-start">
+                  <div className="w-2 h-2 rounded-full bg-[#d4af37] animate-pulse" />
+                  <span className="text-white/70">No profile required to explore</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Right: Robot with Integrated Button */}
+            <div className="lg:w-1/2 relative flex justify-center">
+              <div className="relative">
+                {/* Robot Image */}
+                <img 
+                  src={robotHeroImage} 
+                  alt="Agent Kammer AI Assistant" 
+                  className="h-80 lg:h-96 w-auto object-contain relative z-10"
+                  style={{ filter: 'drop-shadow(0 0 40px rgba(0, 212, 255, 0.3))' }}
+                />
+                
+                {/* Glowing eye effect overlay */}
+                <div 
+                  className="absolute top-[22%] left-[32%] w-8 h-4 rounded-full pointer-events-none z-20"
                   style={{
-                    background: 'linear-gradient(135deg, #00d4ff 0%, #00ff88 100%)',
+                    background: 'radial-gradient(circle, rgba(0,150,255,0.8) 0%, rgba(0,100,200,0.4) 50%, transparent 70%)',
+                    animation: 'eyeGlow 3s ease-in-out infinite',
+                    filter: 'blur(2px)',
                   }}
-                  data-testid="button-dashboard"
-                >
-                  <Brain className="h-5 w-5 mr-2" />
-                  Start Your Agentic Profile
-                </Button>
-              </Link>
+                />
+                
+                {/* CTA Button - Positioned on robot's chest panel */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30">
+                  <Link href="/profile">
+                    <Button
+                      size="lg"
+                      className="h-14 px-10 text-black font-bold text-lg hover:scale-105 transition-transform shadow-2xl"
+                      style={{
+                        background: 'linear-gradient(135deg, #00d4ff 0%, #00ff88 100%)',
+                        boxShadow: '0 0 30px rgba(0, 212, 255, 0.5), 0 0 60px rgba(0, 255, 136, 0.3)',
+                      }}
+                      data-testid="button-start-profile"
+                    >
+                      <Zap className="h-5 w-5 mr-2" />
+                      Start Now
+                    </Button>
+                  </Link>
+                </div>
+                
+                {/* HUD frame around robot */}
+                <div 
+                  className="absolute inset-0 pointer-events-none z-0"
+                  style={{
+                    border: '1px solid rgba(0, 212, 255, 0.2)',
+                    borderRadius: '50% 50% 40% 40%',
+                    boxShadow: 'inset 0 0 60px rgba(0, 212, 255, 0.1)',
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
+        
+        {/* Animation keyframes */}
+        <style>{`
+          @keyframes eyeGlow {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+          }
+        `}</style>
       </section>
     </div>
   );
