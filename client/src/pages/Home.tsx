@@ -535,7 +535,7 @@ export default function Home() {
                   <span className="text-[#d4af37] font-semibold">Up to 15% off</span>
                   <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Hotels.com</Badge>
                 </div>
-                <Button variant="outline" size="sm" className="w-full border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/10">
+                <Button size="sm" className="w-full bg-[#d4af37] text-[#0a1628] hover:bg-[#d4af37]/90">
                   Learn More <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
               </div>
@@ -557,7 +557,7 @@ export default function Home() {
                   <span className="text-[#d4af37] font-semibold">Up to 20% off</span>
                   <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Hotels.com</Badge>
                 </div>
-                <Button variant="outline" size="sm" className="w-full border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/10">
+                <Button size="sm" className="w-full bg-[#d4af37] text-[#0a1628] hover:bg-[#d4af37]/90">
                   Learn More <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
               </div>
@@ -579,7 +579,7 @@ export default function Home() {
                   <span className="text-[#d4af37] font-semibold">Up to 25% off</span>
                   <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Hotels.com</Badge>
                 </div>
-                <Button variant="outline" size="sm" className="w-full border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/10">
+                <Button size="sm" className="w-full bg-[#d4af37] text-[#0a1628] hover:bg-[#d4af37]/90">
                   Learn More <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
               </div>
