@@ -26,12 +26,14 @@ const FEATURED_DEALS = [
     id: 'japan-ryokan',
     title: 'Japan Ryokan',
     destination: 'Japan',
+    searchQuery: 'Kyoto ryokan',
     tagline: 'Traditional Hot Spring Experience',
     description: 'Immerse yourself in centuries-old Japanese hospitality at a traditional ryokan. Wake up to the sound of bamboo fountains, soak in natural hot springs (onsen), and savor authentic kaiseki cuisine prepared by master chefs.',
     fullPitch: 'These handpicked ryokans offer the perfect blend of cultural immersion and serene relaxation. From the moment you slip into your yukata and step onto the tatami floors, you\'ll understand why this centuries-old tradition has captivated travelers from around the world. Each property has been carefully vetted for authenticity, service excellence, and that ineffable sense of Japanese harmony that can only be experienced, never explained.',
     discount: 'Up to 15% off',
     partnerName: 'Hotels.com',
     imageUrl: japanRyokanImage,
+    affiliateUrl: 'https://www.hotels.com/Hotel-Search?destination=Kyoto%20ryokan%2C%20Japan',
     highlights: [
       { icon: Waves, text: 'Natural Hot Springs (Onsen)' },
       { icon: Utensils, text: 'Authentic Kaiseki Cuisine' },
@@ -45,12 +47,14 @@ const FEATURED_DEALS = [
     id: 'singapore-staycations',
     title: 'Singapore',
     destination: 'Singapore',
+    searchQuery: 'Marina Bay Singapore',
     tagline: 'Marina Bay Luxury Staycations',
     description: 'Experience the dazzling skyline of Marina Bay from world-class hotels that redefine luxury. From infinity pools overlooking the city to Michelin-starred restaurants at your doorstep.',
     fullPitch: 'These curated properties offer exclusive member rates you won\'t find elsewhere. Perfect for business travelers seeking seamless convenience and leisure seekers craving urban sophistication. Whether you\'re closing deals by day and dining at celebrity chef restaurants by night, or treating yourself to spa retreats with city views, Singapore\'s finest hotels deliver experiences that match the Lion City\'s legendary standards.',
     discount: 'Up to 20% off',
     partnerName: 'Hotels.com',
     imageUrl: singaporeHotelImage,
+    affiliateUrl: 'https://www.hotels.com/Hotel-Search?destination=Marina%20Bay%2C%20Singapore',
     highlights: [
       { icon: Building2, text: 'Iconic Marina Bay Views' },
       { icon: Star, text: 'Michelin-Starred Dining' },
@@ -64,12 +68,14 @@ const FEATURED_DEALS = [
     id: 'hawaii-resorts',
     title: 'Hawaii',
     destination: 'Hawaii',
+    searchQuery: 'Maui beach resort',
     tagline: 'Beach Resort Paradise',
     description: 'Escape to the sun-kissed shores of Hawaii\'s finest beach resorts. Whether you\'re seeking adventure on Maui\'s volcanic landscapes or relaxation on Oahu\'s pristine beaches.',
     fullPitch: 'From the Big Island\'s dramatic lava formations to Kauai\'s emerald valleys, these oceanfront properties deliver unforgettable experiences with significant savings. Each resort has been selected for its exceptional location, authentic Hawaiian hospitality, and commitment to the aloha spirit. Wake to the sound of waves, spend your days exploring tropical gardens, snorkeling crystal waters, or simply unwinding under swaying palms.',
     discount: 'Up to 25% off',
     partnerName: 'Hotels.com',
     imageUrl: hawaiiResortImage,
+    affiliateUrl: 'https://www.hotels.com/Hotel-Search?destination=Maui%20beach%20resort%2C%20Hawaii',
     highlights: [
       { icon: Waves, text: 'Oceanfront Locations' },
       { icon: Mountain, text: 'Volcano Tours Available' },
@@ -253,12 +259,18 @@ export default function TravelDeals() {
                     <p className="text-[#00d4ff] text-xl font-bold">{selectedDeal.avgSavings}</p>
                   </div>
 
-                  <Button 
-                    className="w-full bg-[#d4af37] text-[#0a1628] hover:bg-[#d4af37]/90 h-12 text-base"
-                    data-testid={`button-book-${selectedDeal.id}`}
+                  <a
+                    href={selectedDeal.affiliateUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    View Deal <ArrowRight className="h-5 w-5 ml-2" />
-                  </Button>
+                    <Button 
+                      className="w-full bg-[#d4af37] text-[#0a1628] hover:bg-[#d4af37]/90 h-12 text-base"
+                      data-testid={`button-book-${selectedDeal.id}`}
+                    >
+                      View Deal <ArrowRight className="h-5 w-5 ml-2" />
+                    </Button>
+                  </a>
                 </div>
               </div>
             </div>
