@@ -502,12 +502,12 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* SECTION 8: Free Travel Offers */}
+      {/* SECTION 8: Explore Now - Travel Offers */}
       <section className="py-12 lg:py-16 bg-[#0a1628] text-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-10">
             <h2 className="text-3xl lg:text-4xl font-semibold mb-3" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
-              Free Travel Offers
+              Explore Now
             </h2>
             <p className="text-white/70 max-w-2xl mx-auto">
               Exclusive hotel deals through our trusted partner Hotels.com
@@ -580,6 +580,11 @@ export default function Home() {
                 <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Hotels.com</Badge>
               </div>
             </div>
+          </div>
+          
+          {/* No Profile Required Note */}
+          <div className="text-center mt-8">
+            <p className="text-white/50 text-sm">No profile required</p>
           </div>
         </div>
       </section>
