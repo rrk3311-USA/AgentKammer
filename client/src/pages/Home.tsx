@@ -650,17 +650,27 @@ export default function Home() {
               </p>
               
               <Link href="/profile">
-                <Button
-                  size="lg"
-                  className="h-12 px-8 text-black font-semibold hover:opacity-90"
-                  style={{
-                    background: 'linear-gradient(135deg, #00d4ff 0%, #00ff88 100%)',
-                  }}
-                  data-testid="button-dashboard"
-                >
-                  <Brain className="h-5 w-5 mr-2" />
-                  Start Your Agentic Profile
-                </Button>
+                <div className="relative inline-block">
+                  {/* Bowtie decoration */}
+                  <div className="absolute -top-6 left-1/2 -translate-x-1/2">
+                    <svg width="32" height="16" viewBox="0 0 32 16" fill="none">
+                      <path d="M0 2C0 0.9 0.9 0 2 0H12L16 8L12 16H2C0.9 16 0 15.1 0 14V2Z" fill="#d4af37"/>
+                      <path d="M32 2C32 0.9 31.1 0 30 0H20L16 8L20 16H30C31.1 16 32 15.1 32 14V2Z" fill="#d4af37"/>
+                      <circle cx="16" cy="8" r="3" fill="#0a1628"/>
+                    </svg>
+                  </div>
+                  <Button
+                    size="lg"
+                    className="h-12 px-8 text-black font-semibold hover:opacity-90"
+                    style={{
+                      background: 'linear-gradient(135deg, #00d4ff 0%, #00ff88 100%)',
+                    }}
+                    data-testid="button-dashboard"
+                  >
+                    <Brain className="h-5 w-5 mr-2" />
+                    Start Your Agentic Profile
+                  </Button>
+                </div>
               </Link>
             </div>
           </div>
