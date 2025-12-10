@@ -509,7 +509,7 @@ export default function Home() {
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center">
-            <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4 relative inline-block">
+            <h2 className="text-4xl lg:text-5xl font-semibold mb-4 relative inline-block" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
               <span className="relative">
                 Ready to Get Started?
                 <div 
