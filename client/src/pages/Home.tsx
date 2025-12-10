@@ -33,7 +33,7 @@ import airportLoungeImage from '@assets/generated_images/luxury_airport_lounge.p
 import dinningImage from '@assets/generated_images/fine_dining_experience.png';
 import travelImage from '@assets/generated_images/luxury_travel_destination.png';
 import mascotImage from '@assets/generated_images/sophisticated_gentleman_mascot_with_cane.png';
-import robotHeroImage from '@assets/generated_images/kinder_formal_robot_with_top_hat.png';
+import robotHeroImage from '@assets/generated_images/nordic_paladin_robot_top_hat.png';
 import japanRyokanImage from '@assets/generated_images/japanese_ryokan_hot_spring_inn.png';
 import singaporeHotelImage from '@assets/generated_images/singapore_marina_bay_luxury_hotel.png';
 import hawaiiResortImage from '@assets/generated_images/hawaii_beach_resort_paradise.png';
