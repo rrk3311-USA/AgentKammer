@@ -626,26 +626,36 @@
     pointer-events: none;
   }
 
-  /* Gold Scrollbar Styling */
+  /* Gold Scrollbar Styling - Always Visible */
   .scrollbar-gold {
     scrollbar-width: thin;
     scrollbar-color: #d4af37 rgba(212, 175, 55, 0.1);
   }
 
   .scrollbar-gold::-webkit-scrollbar {
-    height: 10px;
+    -webkit-appearance: none;
+    height: 12px;
+    width: 12px;
+    display: block !important;
   }
 
   .scrollbar-gold::-webkit-scrollbar-track {
-    background: rgba(212, 175, 55, 0.05);
+    background: rgba(212, 175, 55, 0.15);
+    border-radius: 6px;
   }
 
   .scrollbar-gold::-webkit-scrollbar-thumb {
-    background: #d4af37;
-    border-radius: 5px;
+    background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+    border-radius: 6px;
+    min-width: 50px;
+    border: 2px solid rgba(212, 175, 55, 0.3);
   }
 
   .scrollbar-gold::-webkit-scrollbar-thumb:hover {
-    background: #e5c158;
+    background: linear-gradient(135deg, #e5c158 0%, #f9e076 100%);
+  }
+
+  .scrollbar-gold::-webkit-scrollbar-corner {
+    background: transparent;
   }
 }
