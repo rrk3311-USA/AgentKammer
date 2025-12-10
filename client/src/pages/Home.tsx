@@ -501,7 +501,89 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* SECTION 8: Final CTA - Bright Gradient */}
+      {/* SECTION 8: Free Travel Offers */}
+      <section className="py-12 lg:py-16 bg-[#0a1628] text-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl lg:text-4xl font-semibold mb-3" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
+              Free Travel Offers
+            </h2>
+            <p className="text-white/70 max-w-2xl mx-auto">
+              Exclusive hotel deals through our trusted partner Hotels.com
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Offer 1 */}
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover-elevate">
+              <div 
+                className="w-14 h-14 rounded-xl flex items-center justify-center mb-4"
+                style={{
+                  background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
+                  border: '2px solid rgba(212,175,55,0.3)'
+                }}
+              >
+                <Building2 
+                  className="h-7 w-7"
+                  style={{ color: '#d4af37', filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))' }}
+                />
+              </div>
+              <h3 className="text-white font-semibold text-lg mb-2">Japan Ryokan Experience</h3>
+              <p className="text-white/60 text-sm mb-4">Traditional Japanese inns with hot springs and authentic hospitality.</p>
+              <div className="flex items-center justify-between">
+                <span className="text-[#d4af37] font-semibold">Up to 15% off</span>
+                <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Hotels.com</Badge>
+              </div>
+            </div>
+            
+            {/* Offer 2 */}
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover-elevate">
+              <div 
+                className="w-14 h-14 rounded-xl flex items-center justify-center mb-4"
+                style={{
+                  background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
+                  border: '2px solid rgba(212,175,55,0.3)'
+                }}
+              >
+                <Building2 
+                  className="h-7 w-7"
+                  style={{ color: '#d4af37', filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))' }}
+                />
+              </div>
+              <h3 className="text-white font-semibold text-lg mb-2">Singapore Staycations</h3>
+              <p className="text-white/60 text-sm mb-4">Luxury hotels in Marina Bay and Sentosa with exclusive member rates.</p>
+              <div className="flex items-center justify-between">
+                <span className="text-[#d4af37] font-semibold">Up to 20% off</span>
+                <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Hotels.com</Badge>
+              </div>
+            </div>
+            
+            {/* Offer 3 */}
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6 hover-elevate">
+              <div 
+                className="w-14 h-14 rounded-xl flex items-center justify-center mb-4"
+                style={{
+                  background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
+                  border: '2px solid rgba(212,175,55,0.3)'
+                }}
+              >
+                <Building2 
+                  className="h-7 w-7"
+                  style={{ color: '#d4af37', filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))' }}
+                />
+              </div>
+              <h3 className="text-white font-semibold text-lg mb-2">Hawaii Beach Resorts</h3>
+              <p className="text-white/60 text-sm mb-4">Oceanfront properties in Maui, Oahu, and the Big Island.</p>
+              <div className="flex items-center justify-between">
+                <span className="text-[#d4af37] font-semibold">Up to 25% off</span>
+                <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Hotels.com</Badge>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 9: Final CTA - Bright Gradient */}
       <section className="py-8 lg:py-12 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 text-white relative overflow-hidden">
         {/* Bright gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/10 via-transparent to-transparent pointer-events-none" />
