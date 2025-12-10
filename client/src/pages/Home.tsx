@@ -599,19 +599,9 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#00d4ff]/5 to-transparent pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
-            {/* Mascot Figure */}
-            <div className="hidden lg:block flex-shrink-0">
-              <img 
-                src={mascotImage} 
-                alt="Agent Kammer Concierge" 
-                className="h-72 w-auto object-contain drop-shadow-2xl"
-                style={{ filter: 'drop-shadow(0 0 20px rgba(212, 175, 55, 0.3))' }}
-              />
-            </div>
-            
+          <div className="flex flex-col items-center justify-center gap-8">
             {/* CTA Content */}
-            <div className="text-center lg:text-left">
+            <div className="text-center">
               <h2 className="text-4xl lg:text-5xl font-semibold mb-4 relative inline-block" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
                 <span className="relative">
                   Ready to Get Started?
