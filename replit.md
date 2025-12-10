@@ -33,6 +33,7 @@ The platform features a visual-first approach with large imagery (AI Engine visu
 - **Icon System**: Professional SVG icons from lucide-react library throughout the application.
 - **Text Legibility**: Dark navy/slate backgrounds ensure optimal contrast for gold and white text.
 - **AI Engine Visual**: Prominent futuristic brain/circuit image in hero section representing the AI comparison engine.
+- **Official Mascot**: Bicentennial Man-style robot butler in formal black tuxedo with bowtie, short black top hat with gold ribbon band, warm gold-tinted face, presenting pose with arm extended. Robot looks at the button (not the user) as if serving it. Image: `robot_looking_at_button_presenting.png`
 
 ### Technical Implementations
 The frontend uses React, TypeScript, and Vite, with `wouter` for routing and React Query for server state management. `shadcn/ui` provides customizable components styled with Tailwind CSS. The backend is built with Express.js, Node.js, and TypeScript, providing RESTful API routes. Session management is handled via `connect-pg-simple` with PostgreSQL. OpenAI integration powers the multi-category chat assistant for lead extraction.
