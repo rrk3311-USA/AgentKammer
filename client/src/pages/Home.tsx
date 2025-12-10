@@ -33,7 +33,7 @@ import airportLoungeImage from '@assets/generated_images/luxury_airport_lounge.p
 import dinningImage from '@assets/generated_images/fine_dining_experience.png';
 import travelImage from '@assets/generated_images/luxury_travel_destination.png';
 import mascotImage from '@assets/generated_images/sophisticated_gentleman_mascot_with_cane.png';
-import robotHeroImage from '@assets/generated_images/bicentennial_man_style_robot_top_hat.png';
+import robotHeroImage from '@assets/generated_images/robot_cutout_black_background.png';
 import japanRyokanImage from '@assets/generated_images/japanese_ryokan_hot_spring_inn.png';
 import singaporeHotelImage from '@assets/generated_images/singapore_marina_bay_luxury_hotel.png';
 import hawaiiResortImage from '@assets/generated_images/hawaii_beach_resort_paradise.png';
@@ -598,16 +598,17 @@ export default function Home() {
         {/* Background gradient base */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628] via-[#0f1e36] to-[#1a1a2e]" />
         
-        {/* Robot as background image - positioned right */}
+        {/* Robot image - positioned right, blended seamlessly */}
         <div 
-          className="absolute right-0 top-0 bottom-0 w-full lg:w-1/2 opacity-40 lg:opacity-70"
-          style={{
-            backgroundImage: `url(${robotHeroImage})`,
-            backgroundSize: 'contain',
-            backgroundPosition: 'center right',
-            backgroundRepeat: 'no-repeat',
-          }}
-        />
+          className="absolute right-0 top-0 bottom-0 w-full lg:w-1/2 flex items-center justify-end pr-8"
+        >
+          <img 
+            src={robotHeroImage} 
+            alt="AI Deal Maker" 
+            className="h-full max-h-[550px] w-auto object-contain opacity-90"
+            style={{ mixBlendMode: 'lighten' }}
+          />
+        </div>
         
         {/* Gradient overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/90 to-transparent" />
@@ -628,9 +629,7 @@ export default function Home() {
               className="text-5xl lg:text-7xl font-bold mb-6 leading-tight"
               style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
             >
-              Your Agentic Deal Maker
-              <br />
-              <span style={{ color: '#00d4ff' }}>Awaits</span>
+              Your Agentic Deal Maker <span style={{ color: '#00d4ff' }}>Awaits</span>
             </h2>
             
             <p className="text-xl lg:text-2xl text-white/80 mb-10 max-w-lg">
