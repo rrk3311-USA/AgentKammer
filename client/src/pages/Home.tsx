@@ -510,11 +510,15 @@ export default function Home() {
       <section className="py-12 lg:py-16 bg-[#0a1628] text-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-10">
-            <h2 className="text-3xl lg:text-4xl font-semibold mb-3" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
-              Explore Now
+            <h2 className="text-3xl lg:text-4xl font-semibold mb-2" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
+              Free Offers — Explore Now
             </h2>
-            <p className="text-white/70 max-w-2xl mx-auto">
-              Exclusive hotel deals through our trusted partner Hotels.com
+            <p className="text-[#00d4ff] text-lg font-medium mb-4">No sign-up required</p>
+            <p className="text-white/80 max-w-3xl mx-auto text-lg leading-relaxed">
+              From the tranquil hot springs of a traditional Japanese ryokan to the dazzling skyline views of Singapore's Marina Bay, 
+              and the sun-kissed shores of Hawaii's finest beach resorts—our curated collection brings you exclusive rates 
+              on destinations that transform ordinary trips into extraordinary memories. Each property has been handpicked 
+              for exceptional quality, authentic experiences, and savings you won't find anywhere else.
             </p>
           </div>
           
@@ -586,10 +590,6 @@ export default function Home() {
             </div>
           </div>
           
-          {/* No Profile Required Note */}
-          <div className="text-center mt-8">
-            <p className="text-white/50 text-sm">No profile required</p>
-          </div>
         </div>
       </section>
 
