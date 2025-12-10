@@ -330,7 +330,7 @@ export default function Home() {
           {/* Competitor Comparison - Scrollable Columns */}
           <div className="mb-12 max-w-6xl mx-auto">
             <div className="relative">
-              <div className="overflow-x-auto overflow-y-scroll scroll-smooth scrollbar-gold" data-testid="competitor-comparison-table">
+              <div className="overflow-x-scroll scroll-smooth scrollbar-gold" data-testid="competitor-comparison-table">
                 <div className="flex gap-4 pb-4">
                   {/* Features Column (Sticky) */}
                   <div className="flex-shrink-0 w-40">
