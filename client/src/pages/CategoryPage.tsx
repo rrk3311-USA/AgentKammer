@@ -515,7 +515,7 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
       {/* Main Content */}
       <section className="py-12 lg:py-16 bg-[#0a1628]">
         <div className="max-w-7xl mx-auto px-6">
-          {/* Credit Cards Category Grid */}
+          {/* Credit Cards Category Grid with Gold Radial Icons */}
           {categoryId === 'credit-cards' && offers.length > 0 && (
             <div className="mb-16">
               <div className="mb-8">
@@ -523,30 +523,51 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
                 <h3 className="text-white text-xl lg:text-2xl font-semibold">Filter by your needs</h3>
               </div>
               
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {creditCategories.map((category) => {
-                  const IconComp = category.icon;
-                  const isSelected = selectedCreditCategory === category.id;
+              {/* Subcategory Icons with Gold Radial Gradient (Matching Category Design) */}
+              <div className="flex flex-wrap gap-6 justify-center lg:justify-start">
+                {[
+                  { id: 'travel', label: 'Travel Rewards', icon: Plane },
+                  { id: 'cashback', label: 'Cash Back', icon: Wallet },
+                  { id: 'business', label: 'Business', icon: Briefcase }
+                ].map((subcat) => {
+                  const SubIcon = subcat.icon;
+                  const isSelected = selectedCreditCategory === subcat.id;
                   
                   return (
                     <button
-                      key={category.id}
+                      key={subcat.id}
                       onClick={() => setSelectedCreditCategory(
-                        isSelected ? null : category.id
+                        isSelected ? null : subcat.id
                       )}
-                      className={`relative group rounded-xl p-4 transition-all overflow-hidden ${
-                        isSelected
-                          ? 'bg-gradient-to-br from-[#d4af37] to-[#f4d03f] text-[#0a1628]'
-                          : 'bg-white/5 border border-white/10 text-white hover-elevate hover:bg-white/8 hover:border-white/20'
+                      className={`group flex flex-col items-center gap-3 transition-all ${
+                        isSelected ? 'scale-105' : 'hover:scale-105'
                       }`}
-                      data-testid={`button-credit-category-${category.id}`}
+                      data-testid={`button-subcategory-${subcat.id}`}
                     >
-                      <div className="flex flex-col items-center gap-2">
-                        <div className={`p-2 rounded-lg ${isSelected ? 'bg-white/20' : 'bg-white/10'}`}>
-                          <IconComp className="h-5 w-5" />
-                        </div>
-                        <span className="text-xs font-semibold text-center leading-tight">{category.label}</span>
+                      <div 
+                        className={`w-16 h-16 rounded-xl flex items-center justify-center transition-all ${
+                          isSelected 
+                            ? 'ring-2 ring-[#d4af37] ring-offset-2 ring-offset-[#0a1628]' 
+                            : 'group-hover:ring-1 group-hover:ring-[#d4af37]/50'
+                        }`}
+                        style={{
+                          background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
+                          border: '2px solid rgba(212,175,55,0.3)'
+                        }}
+                      >
+                        <SubIcon 
+                          className="h-8 w-8"
+                          style={{
+                            color: '#d4af37',
+                            filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))'
+                          }}
+                        />
                       </div>
+                      <span className={`text-sm font-semibold text-center leading-tight transition-colors ${
+                        isSelected ? 'text-[#d4af37]' : 'text-white/80 group-hover:text-[#d4af37]'
+                      }`}>
+                        {subcat.label}
+                      </span>
                     </button>
                   );
                 })}
