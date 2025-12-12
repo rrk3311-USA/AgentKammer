@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
 import { 
-  CreditCard, 
+  Truck, 
   Building2, 
   TrendingUp,
   Sparkles,
@@ -25,7 +25,6 @@ import {
   Lightbulb
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
-import { CreditCardShowcase } from "@/components/CreditCardShowcase";
 import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
 import conciergeImage from '@assets/generated_images/concierge_agent_top_hat_luxury_interior.png';
 import conciergeGestureImage from '@assets/image_1763360901241.png';
@@ -150,11 +149,11 @@ export default function Home() {
                 highlights: ['Mortgage optimization', 'Lender comparison', 'Rate watch alerts']
               },
               { 
-                id: 'credit-cards', 
-                name: 'Credit Cards', 
-                icon: CreditCard, 
-                desc: 'AI-matched cards for your goals',
-                highlights: ['100+ cards analyzed', 'Fintech & crypto included', 'Personalized scoring']
+                id: 'california-moving', 
+                name: 'California Moving', 
+                icon: Truck, 
+                desc: 'Pre & post-sale relocation resources',
+                highlights: ['Moving companies', 'Home inspectors', 'Utility setup services']
               }
             ].map((cat) => (
               <Link key={cat.id} href={`/${cat.id}`}>
@@ -296,41 +295,41 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* SECTION 6: Credit Cards Comparison - Dark Navy */}
+      {/* SECTION 6: California Moving Resources - Dark Navy */}
       <section className="py-6 lg:py-8 bg-gradient-to-b from-slate-700 via-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-6">
             <div className="flex items-center justify-center mb-4">
               <div className="w-20 h-20 rounded-2xl flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
-                <CreditCard className="h-10 w-10" style={GOLD_ICON_STYLE} />
+                <Truck className="h-10 w-10" style={GOLD_ICON_STYLE} />
               </div>
             </div>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-3">Competitive Credit Card Procurement </h2>
-            <p className="text-[#d4af37] text-xl font-semibold mb-2">Not Just the Usual 12</p>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">Our AI analyzes 100+ options including fintech, crypto, and startup cards that legacy sites don't show. Your profile is leverages to create competition for your business. </p>
+            <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-3">California Moving Resources</h2>
+            <p className="text-[#d4af37] text-xl font-semibold mb-2">Pre-Sale & Post-Sale Support</p>
+            <p className="text-white/70 text-lg max-w-2xl mx-auto">Everything you need before and after working with a real estate agent—moving companies, inspectors, attorneys, utilities, and more.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto">
             <img 
               src={airportLoungeImage} 
-              alt="Luxury airport lounge"
+              alt="Moving truck services"
               className="w-full h-36 object-cover rounded-lg border border-[#d4af37]/30"
-              data-testid="img-airport-lounge"
+              data-testid="img-moving-truck"
             />
             <img 
               src={dinningImage} 
-              alt="Fine dining experience"
+              alt="Home inspection"
               className="w-full h-36 object-cover rounded-lg border border-[#d4af37]/30"
-              data-testid="img-dining"
+              data-testid="img-home-inspection"
             />
             <img 
               src={travelImage} 
-              alt="Luxury travel destination"
+              alt="New home setup"
               className="w-full h-36 object-cover rounded-lg border border-[#d4af37]/30"
-              data-testid="img-travel"
+              data-testid="img-new-home"
             />
           </div>
-          <p className="text-center text-white/50 text-sm mb-12">Airport lounges • Fine dining • Luxury travel</p>
+          <p className="text-center text-white/50 text-sm mb-12">Moving companies • Home inspectors • Utility setup</p>
 
           {/* Competitor Comparison - Scrollable Columns */}
           <div className="mb-12 max-w-6xl mx-auto">
@@ -425,8 +424,6 @@ export default function Home() {
 
           </div>
       </section>
-      {/* SECTION 7: Credit Card Showcase */}
-      <CreditCardShowcase />
       {/* SECTION 7B: What You'll Unlock - Category Benefits */}
       <section className="relative py-6 px-4 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-900">
         <div className="max-w-7xl mx-auto">
@@ -458,11 +455,11 @@ export default function Home() {
                 highlights: ['Luxury property access', 'Mortgage pre-approval', 'White-glove service']
               },
               { 
-                id: 'credit-benefits', 
-                name: 'Credit Cards', 
-                icon: CreditCard,
-                desc: 'AI-matched cards for your goals',
-                highlights: ['Airport lounges & travel', 'Fine dining credits', 'Premium cashback rewards']
+                id: 'moving-benefits', 
+                name: 'California Moving', 
+                icon: Truck,
+                desc: 'Pre & post-sale relocation support',
+                highlights: ['Vetted moving companies', 'Home inspectors & attorneys', 'Utility & security setup']
               }
             ].map((cat) => (
               <Card 

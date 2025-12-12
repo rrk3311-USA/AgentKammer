@@ -85,8 +85,8 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/credit-cards" className="hover:text-foreground transition-colors">
-                    Credit Cards
+                  <Link href="/california-moving" className="hover:text-foreground transition-colors">
+                    California Moving
                   </Link>
                 </li>
                 <li>

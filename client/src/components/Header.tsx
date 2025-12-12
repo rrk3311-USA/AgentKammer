@@ -17,7 +17,7 @@ import {
   ChevronDown, 
   ChevronUp,
   MessageCircle, 
-  CreditCard,
+  Truck,
   TrendingUp,
   Home,
   Brain,
@@ -31,7 +31,7 @@ import { useTheme } from "./ThemeProvider";
 import { useState, useEffect } from "react";
 
 const financialCategories = [
-  { id: 'credit-cards', name: 'Credit Cards', icon: CreditCard },
+  { id: 'california-moving', name: 'California Moving', icon: Truck },
   { id: 'investing', name: 'Investing', icon: TrendingUp },
 ];
 

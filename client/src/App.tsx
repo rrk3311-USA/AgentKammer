@@ -66,7 +66,7 @@ function Router() {
       <Route path="/real-estate" component={RealEstate} />
       
       {/* Financial Category Routes */}
-      <Route path="/credit-cards" component={() => <CategoryPage categoryId="credit-cards" />} />
+      <Route path="/california-moving" component={() => <CategoryPage categoryId="california-moving" />} />
       <Route path="/personal-loans" component={() => <CategoryPage categoryId="personal-loans" />} />
       <Route path="/business-funding" component={() => <CategoryPage categoryId="business-funding" />} />
       <Route path="/banking" component={() => <CategoryPage categoryId="banking" />} />
