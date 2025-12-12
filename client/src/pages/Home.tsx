@@ -22,7 +22,8 @@ import {
   Shield,
   TrendingUp as InvestIcon,
   Zap,
-  Lightbulb
+  Lightbulb,
+  Home as HomeIcon
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
 import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
@@ -433,7 +434,7 @@ export default function Home() {
               What You'll Unlock
             </h2>
             <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Premium benefits across credit, wealth, and real estate—tailored to your financial goals
+              Premium real estate services—buying, selling, and refinancing with AI-powered competition
             </p>
           </div>
 
@@ -441,25 +442,25 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { 
-                id: 'investing-benefits', 
-                name: 'Investment Accounts', 
+                id: 'buying', 
+                name: 'Buying', 
+                icon: HomeIcon,
+                desc: 'Find your dream property',
+                highlights: ['Reverse Buyer Origination', 'Pre-approval guidance', 'Luxury property access']
+              },
+              { 
+                id: 'selling', 
+                name: 'Selling', 
                 icon: TrendingUp,
-                desc: 'Brokerages & robo-advisors',
-                highlights: ['AI-matched strategies', 'Tax-efficient growth', 'Instant fund matching']
+                desc: 'Maximize your home value',
+                highlights: ['Reverse Seller Architecture', 'Market analysis tools', 'Agent competition for your listing']
               },
               { 
-                id: 'real-estate-benefits', 
-                name: 'Real Estate Concierge', 
-                icon: Briefcase,
-                desc: 'Premium concierge services',
-                highlights: ['Luxury property access', 'Mortgage pre-approval', 'White-glove service']
-              },
-              { 
-                id: 'moving-benefits', 
-                name: 'California Moving', 
-                icon: Truck,
-                desc: 'Pre & post-sale relocation support',
-                highlights: ['Vetted moving companies', 'Home inspectors & attorneys', 'Utility & security setup']
+                id: 'refinancing', 
+                name: 'Refinancing', 
+                icon: RefreshCw,
+                desc: 'Lower your rate & save',
+                highlights: ['Rate Watch technology', 'Cash-out options', 'AI-matched lenders']
               }
             ].map((cat) => (
               <Card 

@@ -31,7 +31,7 @@ export function Footer() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-12 text-left">
             <div>
               <p className="text-[0.75rem] md:text-xs text-foreground font-semibold mb-2 block uppercase tracking-wide">
-                Free Financial Tools
+                Free Real Estate Tools
               </p>
               <ul className="space-y-1.5 text-[0.7rem] md:text-xs text-muted-foreground mb-2">
                 <li>
@@ -45,8 +45,8 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/investing" className="hover:text-foreground transition-colors">
-                    Investment Accounts
+                  <Link href="/refinancing" className="hover:text-foreground transition-colors">
+                    Refinancing
                   </Link>
                 </li>
               </ul>
@@ -85,8 +85,13 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/california-moving" className="hover:text-foreground transition-colors">
-                    California Moving
+                  <Link href="/buying" className="hover:text-foreground transition-colors">
+                    Buying
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/selling" className="hover:text-foreground transition-colors">
+                    Selling
                   </Link>
                 </li>
                 <li>

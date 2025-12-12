@@ -65,22 +65,9 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/real-estate" component={RealEstate} />
       
-      {/* Financial Category Routes */}
-      <Route path="/california-moving" component={() => <CategoryPage categoryId="california-moving" />} />
-      <Route path="/personal-loans" component={() => <CategoryPage categoryId="personal-loans" />} />
-      <Route path="/business-funding" component={() => <CategoryPage categoryId="business-funding" />} />
-      <Route path="/banking" component={() => <CategoryPage categoryId="banking" />} />
-      <Route path="/insurance" component={() => <CategoryPage categoryId="insurance" />} />
-      <Route path="/investing" component={() => <CategoryPage categoryId="investing" />} />
-      <Route path="/credit-builder" component={() => <CategoryPage categoryId="credit-builder" />} />
-      <Route path="/student-finance" component={() => <CategoryPage categoryId="student-finance" />} />
-      <Route path="/tax-tools" component={() => <CategoryPage categoryId="tax-tools" />} />
-      <Route path="/identity-security" component={() => <CategoryPage categoryId="identity-security" />} />
-      <Route path="/budgeting-apps" component={() => <CategoryPage categoryId="budgeting-apps" />} />
-      <Route path="/rewards-cashback" component={() => <CategoryPage categoryId="rewards-cashback" />} />
-      <Route path="/renters-insurance" component={() => <CategoryPage categoryId="renters-insurance" />} />
-      <Route path="/estate-planning" component={() => <CategoryPage categoryId="estate-planning" />} />
-      <Route path="/micro-investing" component={() => <CategoryPage categoryId="micro-investing" />} />
+      {/* Real Estate Category Routes */}
+      <Route path="/buying" component={() => <CategoryPage categoryId="buying" />} />
+      <Route path="/selling" component={() => <CategoryPage categoryId="selling" />} />
       <Route path="/refinancing" component={Refinancing} />
       <Route path="/e-shop" component={EShop} />
       <Route path="/media-center" component={MediaCenter} />

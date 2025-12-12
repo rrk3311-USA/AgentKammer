@@ -30,9 +30,10 @@ import {
 import { useTheme } from "./ThemeProvider";
 import { useState, useEffect } from "react";
 
-const financialCategories = [
-  { id: 'california-moving', name: 'California Moving', icon: Truck },
-  { id: 'investing', name: 'Investing', icon: TrendingUp },
+const realEstateCategories = [
+  { id: 'buying', name: 'Buying', icon: Home },
+  { id: 'selling', name: 'Selling', icon: TrendingUp },
+  { id: 'refinancing', name: 'Refinancing', icon: RefreshCw },
 ];
 
 export function Header() {
@@ -118,7 +119,7 @@ export function Header() {
                   </DropdownMenuItem>
                 </Link>
                 <DropdownMenuSeparator />
-                {financialCategories.map((category) => (
+                {realEstateCategories.map((category) => (
                   <Link key={category.id} href={`/${category.id}`}>
                     <DropdownMenuItem className="cursor-pointer" data-testid={`menu-item-${category.id}`}>
                       <category.icon className="h-4 w-4 mr-2" />
@@ -239,7 +240,7 @@ export function Header() {
                 Compare Products
               </p>
               <div className="grid grid-cols-2 gap-2">
-                {financialCategories.map((category) => (
+                {realEstateCategories.map((category) => (
                   <Link key={category.id} href={`/${category.id}`} data-testid={`link-mobile-${category.id}`}>
                     <span
                       className="text-sm font-medium hover:text-[#d4af37] cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-muted/50"
