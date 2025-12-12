@@ -23,7 +23,8 @@ import {
   TrendingUp as InvestIcon,
   Zap,
   Lightbulb,
-  Home as HomeIcon
+  Home as HomeIcon,
+  DollarSign
 } from "lucide-react";
 import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
 import heroImage from '@assets/generated_images/ps5_hero_-_agent_kammer_concierge_gestures_into_luxury_apartment.png';
@@ -128,7 +129,7 @@ export default function Home() {
               Choose Your Category
             </h2>
             <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              AI-ranked products matched to your profile across 100+ financial products
+              AI-powered real estate intelligence across Buying, Selling, and Refinancing
             </p>
           </div>
 
@@ -136,25 +137,25 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { 
-                id: 'investing', 
-                name: 'Investing', 
-                icon: TrendingUp, 
-                desc: 'Brokerages & robo-advisors',
-                highlights: ['Brokerages vs robo-advisors', 'Fee analysis included', 'Retirement planning']
+                id: 'buying', 
+                name: 'Buying', 
+                icon: HomeIcon, 
+                desc: 'Find your perfect home',
+                highlights: ['Mortgage pre-approval', 'Buyer agent matching', 'Neighborhood insights']
               },
               { 
-                id: 'reverse-buyer-origination', 
-                name: 'Real Estate', 
-                icon: Building2, 
-                desc: 'Premium concierge services',
-                highlights: ['Mortgage optimization', 'Lender comparison', 'Rate watch alerts']
+                id: 'selling', 
+                name: 'Selling', 
+                icon: DollarSign, 
+                desc: 'Maximize your sale price',
+                highlights: ['Home valuation', 'Listing optimization', 'Agent competition']
               },
               { 
-                id: 'california-moving', 
-                name: 'California Moving', 
-                icon: Truck, 
-                desc: 'Pre & post-sale relocation resources',
-                highlights: ['Moving companies', 'Home inspectors', 'Utility setup services']
+                id: 'refinancing', 
+                name: 'Refinancing', 
+                icon: RefreshCw, 
+                desc: 'Lower your monthly payments',
+                highlights: ['Rate watch alerts', 'Savings calculator', 'Lender comparison']
               }
             ].map((cat) => (
               <Link key={cat.id} href={`/${cat.id}`}>
