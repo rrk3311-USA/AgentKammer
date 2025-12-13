@@ -555,6 +555,96 @@ export default function ContentStudio() {
                       </div>
                     </CardContent>
                   </Card>
+
+                  {/* Second Audiobook: Proprietary Excellence */}
+                  <Card className="bg-emerald-900/30 border-2 border-emerald-500/50 overflow-hidden">
+                    <CardHeader className="bg-emerald-800/40 border-b border-emerald-500/30">
+                      <CardTitle className="text-white flex items-center gap-3 text-2xl">
+                        <Headphones className="w-7 h-7 text-emerald-400" />
+                        Proprietary Excellence
+                        <Badge className="bg-emerald-500/30 text-emerald-300 border-emerald-400/50 ml-2">
+                          Audiobook
+                        </Badge>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-6">
+                      <div className="grid md:grid-cols-3 gap-6">
+                        {/* Audiobook Cover Mockup */}
+                        <div className="flex flex-col items-center">
+                          <div 
+                            className="w-48 h-64 rounded-lg flex items-center justify-center relative overflow-hidden"
+                            style={{
+                              background: 'linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #3b7ab8 100%)',
+                              boxShadow: '0 10px 40px rgba(59, 122, 184, 0.4)'
+                            }}
+                          >
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
+                            <div className="text-center z-10 px-4">
+                              <div className="text-white/90 text-xs uppercase tracking-wider mb-2">Audiobook</div>
+                              <h3 className="text-white font-serif text-xl font-bold leading-tight mb-3">Proprietary Excellence</h3>
+                              <div className="w-12 h-0.5 bg-blue-300/50 mx-auto mb-3" />
+                              <p className="text-blue-200 text-xs">Mastering Your Competitive Edge</p>
+                            </div>
+                          </div>
+                          <Badge className="mt-4 bg-emerald-500/20 text-emerald-300 border-emerald-400/50">
+                            In Production
+                          </Badge>
+                        </div>
+
+                        {/* Project Details */}
+                        <div className="md:col-span-2 space-y-4">
+                          <div>
+                            <h4 className="text-emerald-300 text-sm font-semibold uppercase tracking-wide mb-2">Description</h4>
+                            <p className="text-slate-200 leading-relaxed">
+                              A comprehensive guide to developing and protecting your unique competitive advantages. 
+                              Learn how to identify, cultivate, and leverage proprietary systems, processes, and 
+                              intellectual assets that set you apart in any industry.
+                            </p>
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <h4 className="text-emerald-300 text-sm font-semibold uppercase tracking-wide mb-2">Format</h4>
+                              <p className="text-slate-200">Digital Audiobook (MP3)</p>
+                            </div>
+                            <div>
+                              <h4 className="text-emerald-300 text-sm font-semibold uppercase tracking-wide mb-2">Target Length</h4>
+                              <p className="text-slate-200">5-7 hours</p>
+                            </div>
+                            <div>
+                              <h4 className="text-emerald-300 text-sm font-semibold uppercase tracking-wide mb-2">Status</h4>
+                              <p className="text-slate-200">Script Development</p>
+                            </div>
+                            <div>
+                              <h4 className="text-emerald-300 text-sm font-semibold uppercase tracking-wide mb-2">Target Release</h4>
+                              <p className="text-slate-200">Q2 2025</p>
+                            </div>
+                          </div>
+
+                          <div>
+                            <h4 className="text-emerald-300 text-sm font-semibold uppercase tracking-wide mb-2">Chapters Outline</h4>
+                            <div className="grid gap-2">
+                              {[
+                                "Introduction: The Excellence Mindset",
+                                "Chapter 1: Identifying Your Unique Value",
+                                "Chapter 2: Building Proprietary Systems",
+                                "Chapter 3: Protecting Your Intellectual Assets",
+                                "Chapter 4: Scaling Excellence",
+                                "Chapter 5: Creating Sustainable Advantage"
+                              ].map((chapter, idx) => (
+                                <div key={idx} className="flex items-center gap-2 text-slate-300 text-sm">
+                                  <div className="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-xs font-semibold">
+                                    {idx + 1}
+                                  </div>
+                                  {chapter}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
               ) : stage.id === "elevator-pitches" ? (
                 <div className="space-y-4 max-w-4xl">
