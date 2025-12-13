@@ -23,6 +23,7 @@ import { Link } from "wouter";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const stages = [
+  { id: "current-project", label: "Current Project", icon: Headphones, color: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30", isWide: true },
   { id: "elevator-pitches", label: "Elevator Pitches", icon: Sparkles, color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30" },
   { id: "ideation", label: "Ideation", icon: Lightbulb, color: "bg-purple-500/20 text-purple-400 border-purple-500/30" },
   { id: "legal", label: "Legal Review", icon: Scale, color: "bg-blue-500/20 text-blue-400 border-blue-500/30" },
@@ -72,7 +73,7 @@ const publishingPlatforms = [
 ];
 
 export default function ContentStudio() {
-  const [selectedStage, setSelectedStage] = useState("ideation");
+  const [selectedStage, setSelectedStage] = useState("current-project");
   const [editingItem, setEditingItem] = useState<ContentItem | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { toast } = useToast();
@@ -219,10 +220,22 @@ export default function ContentStudio() {
         </div>
 
         <Tabs value={selectedStage} onValueChange={setSelectedStage} className="space-y-6">
+          {/* Full-width Current Project Tab */}
+          <TabsList className="w-full bg-emerald-600/30 border-2 border-emerald-500/50 backdrop-blur-sm p-2 mb-4">
+            <TabsTrigger
+              value="current-project"
+              className="w-full data-[state=active]:bg-emerald-500/50 data-[state=active]:text-white gap-3 py-3 text-lg font-semibold"
+              data-testid="tab-stage-current-project"
+            >
+              <Headphones className="w-5 h-5" />
+              <span>Current Project</span>
+            </TabsTrigger>
+          </TabsList>
+
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="w-full sm:w-auto overflow-x-auto pb-2">
               <TabsList className="bg-slate-500/30 border border-slate-400/30 backdrop-blur-sm p-1.5 inline-flex">
-                {stages.map((stage) => {
+                {stages.filter(s => s.id !== "current-project").map((stage) => {
                   const Icon = stage.icon;
                   const count = allItems.filter(item => item.stage === stage.id).length;
                   return (
@@ -452,7 +465,98 @@ export default function ContentStudio() {
 
           {stages.map((stage) => (
             <TabsContent key={stage.id} value={stage.id} className="space-y-4">
-              {stage.id === "elevator-pitches" ? (
+              {stage.id === "current-project" ? (
+                <div className="space-y-6">
+                  <Card className="bg-emerald-900/30 border-2 border-emerald-500/50 overflow-hidden">
+                    <CardHeader className="bg-emerald-800/40 border-b border-emerald-500/30">
+                      <CardTitle className="text-white flex items-center gap-3 text-2xl">
+                        <Headphones className="w-7 h-7 text-emerald-400" />
+                        God's Plan for You
+                        <Badge className="bg-emerald-500/30 text-emerald-300 border-emerald-400/50 ml-2">
+                          Audiobook
+                        </Badge>
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-6">
+                      <div className="grid md:grid-cols-3 gap-6">
+                        {/* Audiobook Cover Mockup */}
+                        <div className="flex flex-col items-center">
+                          <div 
+                            className="w-48 h-64 rounded-lg flex items-center justify-center relative overflow-hidden"
+                            style={{
+                              background: 'linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%)',
+                              boxShadow: '0 10px 40px rgba(5, 150, 105, 0.4)'
+                            }}
+                          >
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
+                            <div className="text-center z-10 px-4">
+                              <div className="text-white/90 text-xs uppercase tracking-wider mb-2">Audiobook</div>
+                              <h3 className="text-white font-serif text-xl font-bold leading-tight mb-3">God's Plan for You</h3>
+                              <div className="w-12 h-0.5 bg-emerald-300/50 mx-auto mb-3" />
+                              <p className="text-emerald-200 text-xs">Discovering Your Divine Purpose</p>
+                            </div>
+                          </div>
+                          <Badge className="mt-4 bg-emerald-500/20 text-emerald-300 border-emerald-400/50">
+                            In Production
+                          </Badge>
+                        </div>
+
+                        {/* Project Details */}
+                        <div className="md:col-span-2 space-y-4">
+                          <div>
+                            <h4 className="text-emerald-300 text-sm font-semibold uppercase tracking-wide mb-2">Description</h4>
+                            <p className="text-slate-200 leading-relaxed">
+                              A transformative audiobook exploring the intersection of faith, purpose, and personal growth. 
+                              This guide helps listeners discover their unique calling and align their daily actions with 
+                              a greater spiritual mission.
+                            </p>
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <h4 className="text-emerald-300 text-sm font-semibold uppercase tracking-wide mb-2">Format</h4>
+                              <p className="text-slate-200">Digital Audiobook (MP3)</p>
+                            </div>
+                            <div>
+                              <h4 className="text-emerald-300 text-sm font-semibold uppercase tracking-wide mb-2">Target Length</h4>
+                              <p className="text-slate-200">4-6 hours</p>
+                            </div>
+                            <div>
+                              <h4 className="text-emerald-300 text-sm font-semibold uppercase tracking-wide mb-2">Status</h4>
+                              <p className="text-slate-200">Script Development</p>
+                            </div>
+                            <div>
+                              <h4 className="text-emerald-300 text-sm font-semibold uppercase tracking-wide mb-2">Target Release</h4>
+                              <p className="text-slate-200">Q1 2025</p>
+                            </div>
+                          </div>
+
+                          <div>
+                            <h4 className="text-emerald-300 text-sm font-semibold uppercase tracking-wide mb-2">Chapters Outline</h4>
+                            <div className="grid gap-2">
+                              {[
+                                "Introduction: The Search for Meaning",
+                                "Chapter 1: Recognizing Divine Signals",
+                                "Chapter 2: Overcoming Doubt and Fear",
+                                "Chapter 3: Aligning Actions with Purpose",
+                                "Chapter 4: Building Spiritual Discipline",
+                                "Chapter 5: Living Your Calling Daily"
+                              ].map((chapter, idx) => (
+                                <div key={idx} className="flex items-center gap-2 text-slate-300 text-sm">
+                                  <div className="w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-xs font-semibold">
+                                    {idx + 1}
+                                  </div>
+                                  {chapter}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              ) : stage.id === "elevator-pitches" ? (
                 <div className="space-y-4 max-w-4xl">
                   <div className="grid gap-4">
                     {elevatorPitches.map((pitch) => (
