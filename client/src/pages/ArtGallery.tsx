@@ -11,6 +11,7 @@ import {
   Box,
   CircleDot,
   Sparkles,
+  Gem,
   ExternalLink,
   Mail,
   Send,
@@ -124,6 +125,62 @@ const CATEGORIES = [
         price: 2200,
         status: 'Available',
         description: 'Elegant flowing sculpture with organic curves and premium glaze finish.'
+      }
+    ]
+  },
+  {
+    id: 'polymer',
+    name: 'Polymer Collection',
+    icon: Gem,
+    description: 'Colorful polymer clay creations - ornaments, magnets, and decorative mini pieces',
+    pieces: [
+      {
+        id: 'christmas-ornament-set',
+        title: 'Artisan Christmas Ornaments',
+        subtitle: 'Set of 6 handmade ornaments',
+        price: 185,
+        status: 'Available',
+        description: 'Festive polymer clay ornaments with intricate details. Each set includes 6 unique designs perfect for holiday decorating.'
+      },
+      {
+        id: 'christmas-ornament-deluxe',
+        title: 'Deluxe Ornament Collection',
+        subtitle: 'Set of 12 premium ornaments',
+        price: 325,
+        status: 'Available',
+        description: 'Premium collection of 12 handcrafted polymer ornaments featuring metallic accents and detailed patterns.'
+      },
+      {
+        id: 'fridge-magnet-set',
+        title: 'Artisan Fridge Magnets',
+        subtitle: 'Set of 8 decorative magnets',
+        price: 95,
+        status: 'Available',
+        description: 'Colorful polymer clay fridge magnets in whimsical designs. Strong magnets with artistic flair.'
+      },
+      {
+        id: 'fridge-magnet-animals',
+        title: 'Animal Magnet Collection',
+        subtitle: 'Set of 6 creature magnets',
+        price: 85,
+        status: 'Available',
+        description: 'Adorable polymer clay animal magnets including cats, dogs, birds, and more. Perfect for gifting.'
+      },
+      {
+        id: 'mini-vase-trio',
+        title: 'Mini Vase Trio',
+        subtitle: 'Set of 3 bud vases',
+        price: 145,
+        status: 'Available',
+        description: 'Charming set of 3 miniature polymer clay bud vases. Perfect for single stems or small dried flower arrangements.'
+      },
+      {
+        id: 'mini-vase-collection',
+        title: 'Mini Vase Collection',
+        subtitle: 'Set of 6 decorative vases',
+        price: 265,
+        status: 'Available',
+        description: 'Full collection of 6 unique mini vases in complementary colors. Display together or throughout the home.'
       }
     ]
   }
