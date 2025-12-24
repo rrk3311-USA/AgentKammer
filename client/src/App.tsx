@@ -42,7 +42,7 @@ import Refinancing from "@/pages/Refinancing";
 import EShop from "@/pages/EShop";
 import MediaCenter from "@/pages/MediaCenter";
 import ContentDetail from "@/pages/ContentDetail";
-import TravelDeals from "@/pages/TravelDeals";
+import ArtGallery from "@/pages/ArtGallery";
 import NotFound from "@/pages/not-found";
 
 function ScrollToTop() {
@@ -102,7 +102,7 @@ function Router() {
       <Route path="/admin/rbo" component={AdminRBO} />
       <Route path="/affiliates" component={AffiliateProgram} />
       <Route path="/free-tools" component={FreeTools} />
-      <Route path="/travel-deals" component={TravelDeals} />
+      <Route path="/art-gallery" component={ArtGallery} />
       <Route component={NotFound} />
     </Switch>
   );

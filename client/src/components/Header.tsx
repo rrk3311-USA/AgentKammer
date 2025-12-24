@@ -25,7 +25,8 @@ import {
   Calculator,
   RefreshCw,
   ShoppingBag,
-  Newspaper
+  Newspaper,
+  Palette
 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useState, useEffect } from "react";
@@ -144,6 +145,12 @@ export function Header() {
                   <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-media-center">
                     <Newspaper className="h-4 w-4 mr-2" />
                     Media Center
+                  </DropdownMenuItem>
+                </Link>
+                <Link href="/art-gallery">
+                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-art-gallery">
+                    <Palette className="h-4 w-4 mr-2" />
+                    Art Gallery
                   </DropdownMenuItem>
                 </Link>
               </DropdownMenuContent>

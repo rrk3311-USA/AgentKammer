@@ -1,5 +1,5 @@
 import { SiReplit, SiNvidia, SiClaude, SiAnthropic, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
-import { Brain, Building2, Users, RefreshCw, Clock, TrendingUp, TrendingDown, Home } from "lucide-react";
+import { Brain, Building2, Users, RefreshCw, Clock, TrendingUp, TrendingDown, Home, Palette } from "lucide-react";
 import { Link } from "wouter";
 
 export function Footer() {
@@ -97,6 +97,12 @@ export function Footer() {
                 <li>
                   <Link href="/contact" className="hover:text-foreground transition-colors">
                     Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/art-gallery" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                    <Palette className="h-3 w-3" />
+                    <span>Art Gallery</span>
                   </Link>
                 </li>
               </ul>
