@@ -20,8 +20,18 @@ import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
 import { eq, desc } from "drizzle-orm";
 
-const sql = neon(process.env.DATABASE_URL!);
-const db = drizzle(sql);
+// Database connection (only needed for DbStorage)
+// Wrapped in try-catch to allow MemStorage to work without database
+let sql: any = null;
+let db: any = null;
+try {
+  if (process.env.DATABASE_URL) {
+    sql = neon(process.env.DATABASE_URL);
+    db = drizzle(sql);
+  }
+} catch (e) {
+  // Database connection not available - using MemStorage instead
+}
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -669,4 +679,6 @@ export class DbStorage implements IStorage {
   }
 }
 
-export const storage = new DbStorage();
+// Temporarily using MemStorage for preview (no database required)
+// To use database: export const storage = new DbStorage();
+export const storage = new MemStorage();
