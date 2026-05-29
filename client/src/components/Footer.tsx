@@ -1,9 +1,17 @@
-import { SiReplit, SiNvidia, SiClaude, SiAnthropic, SiInstagram, SiFacebook, SiLinkedin, SiX } from "react-icons/si";
-import { Brain, Building2, Users, RefreshCw, Clock, TrendingUp, TrendingDown, Home, Palette } from "lucide-react";
+import { SiReplit, SiNvidia, SiClaude, SiAnthropic } from "react-icons/si";
+import { Brain, Clock, TrendingUp, TrendingDown, Home } from "lucide-react";
 import { Link } from "wouter";
 
 export function Footer() {
   const lastUpdate = new Date();
+  const metrics = [
+    { label: "30Y Fixed", value: "6.82%", delta: "0.03", direction: "down" as const },
+    { label: "15Y Fixed", value: "6.09%", delta: "0.05", direction: "down" as const },
+    { label: "5/1 ARM", value: "6.54%", delta: "0.02", direction: "down" as const },
+    { label: "Prime Rate", value: "8.50%" },
+    { label: "Fed Rate", value: "5.50%" },
+    { label: "Jumbo 30Y", value: "7.02%", delta: "0.01", direction: "up" as const },
+  ];
 
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('en-US', { 
@@ -23,96 +31,11 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative">
-      <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
-      {/* Links Section - Now at Top */}
-      <div className="bg-background border-t border-border/50">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-5">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-12 text-left">
-            <div>
-              <p className="text-[0.75rem] md:text-xs text-foreground font-semibold mb-2 block uppercase tracking-wide">
-                Free Real Estate Tools
-              </p>
-              <ul className="space-y-1.5 text-[0.7rem] md:text-xs text-muted-foreground mb-2">
-                <li>
-                  <Link href="/services/get-home-value" className="hover:text-foreground transition-colors">
-                    Home Valuation
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/services/get-preapproved" className="hover:text-foreground transition-colors">
-                    Pre-Approval
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/refinancing" className="hover:text-foreground transition-colors">
-                    Refinancing
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <Link href="/real-estate">
-                <h4 className="font-semibold mb-2 text-[0.75rem] md:text-xs hover:text-foreground transition-colors cursor-pointer uppercase tracking-wide">Real Estate Concierge</h4>
-              </Link>
-              <ul className="space-y-1.5 text-[0.7rem] md:text-xs text-muted-foreground mb-2">
-                <li>
-                  <Link href="/refinancing" className="flex items-center gap-2 hover:text-foreground transition-colors">
-                    <RefreshCw className="h-3 w-3" />
-                    <span>Refinancing Rate Watch</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/reverse-buyer-origination" className="flex items-center gap-2 hover:text-foreground transition-colors">
-                    <Building2 className="h-3 w-3" />
-                    <span>Reverse Buyer Origination</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/reverse-seller-architecture" className="flex items-center gap-2 hover:text-foreground transition-colors">
-                    <Users className="h-3 w-3" />
-                    <span>Reverse Seller Architecture</span>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2 text-[0.75rem] md:text-xs text-foreground uppercase tracking-wide">Flagship Services</h4>
-              <ul className="space-y-1.5 text-[0.7rem] md:text-xs text-muted-foreground mb-2">
-                <li>
-                  <Link href="/profile" className="hover:text-foreground transition-colors">
-                    Register
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/buying" className="hover:text-foreground transition-colors">
-                    Buying
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/selling" className="hover:text-foreground transition-colors">
-                    Selling
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="hover:text-foreground transition-colors">
-                    Contact
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/art-gallery" className="flex items-center gap-2 hover:text-foreground transition-colors">
-                    <Palette className="h-3 w-3" />
-                    <span>Art Gallery</span>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Row 1: Vintage Clock with Update Time */}
-      <div className="bg-[#0a1628] border-b border-border/30">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex items-center justify-center gap-3 pt-[16px] pb-[16px] mt-[0px] mb-[0px]">
+    <footer className="relative overflow-hidden">
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#d4af37]/60 to-transparent" />
+      <div className="bg-[#081a33] border-y border-white/10">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 py-8 md:py-10">
+          <div className="flex items-center justify-center gap-4 mb-7">
           <div className="relative">
             <div className="w-12 h-12 rounded-full border-3 border-[#d4af37] flex items-center justify-center bg-gradient-to-br from-[#d4af37]/10 to-[#d4af37]/5" style={{
               boxShadow: 'inset 0 0 20px rgba(212,175,55,0.2), 0 0 15px rgba(212,175,55,0.3)'
@@ -123,107 +46,46 @@ export function Footer() {
               animation: 'tickPulse 2s ease-in-out infinite'
             }} />
           </div>
-          <div>
-            <p className="text-lg font-bold text-[#d4af37] mb-1" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>Live Market Rate Updates</p>
+          <div className="text-center sm:text-left">
+            <p className="text-lg font-bold text-[#d4af37] mb-1" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>Live Mortgage Rate Snapshot</p>
             <div className="flex items-center gap-2">
               <span className="font-mono text-sm font-bold text-white">{formatTime(lastUpdate)}</span>
               <span className="text-sm text-white/60">{formatDate(lastUpdate)}</span>
             </div>
           </div>
-        </div>
-        <style>{`
-          @keyframes tickPulse {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.1); opacity: 0.6; }
-          }
-        `}</style>
-      </div>
-      {/* Rows 2-3: Market Ticker Static */}
-      <div className="bg-[#0a1628] border-b border-border/30">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 pt-[8px] pb-[8px]">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 place-items-center justify-center">
-            <Link href="/real-estate" className="flex flex-col items-center gap-1 px-3 py-2 rounded hover:bg-blue-500/20 transition-colors">
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
+            <Link href="/real-estate" className="flex flex-col items-center gap-1 px-3 py-3 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-blue-500/15 transition-colors">
               <Home className="h-4 w-4 text-blue-400" />
               <span className="text-[0.65rem] font-medium text-blue-300">Buyers Market</span>
             </Link>
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">30Y Fixed</span>
-              <div className="flex items-center gap-1.5">
-                <span className="font-mono font-bold text-white text-base">6.82%</span>
-                <div className="flex items-center gap-0.5">
-                  <TrendingDown className="h-3 w-3 text-green-400" />
-                  <span className="text-green-400 text-xs font-medium">0.03</span>
+            {metrics.map((metric) => (
+              <div key={metric.label} className="flex flex-col items-center gap-1 px-3 py-3 rounded-xl border border-white/10 bg-white/[0.03]">
+                <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">{metric.label}</span>
+                <div className="flex items-center gap-1.5">
+                  <span className="font-mono font-bold text-white text-base">{metric.value}</span>
+                  {metric.delta && metric.direction === "down" && (
+                    <div className="flex items-center gap-0.5">
+                      <TrendingDown className="h-3 w-3 text-green-400" />
+                      <span className="text-green-400 text-xs font-medium">{metric.delta}</span>
+                    </div>
+                  )}
+                  {metric.delta && metric.direction === "up" && (
+                    <div className="flex items-center gap-0.5">
+                      <TrendingUp className="h-3 w-3 text-red-400" />
+                      <span className="text-red-400 text-xs font-medium">{metric.delta}</span>
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">15Y Fixed</span>
-              <div className="flex items-center gap-1.5">
-                <span className="font-mono font-bold text-white text-base">6.09%</span>
-                <div className="flex items-center gap-0.5">
-                  <TrendingDown className="h-3 w-3 text-green-400" />
-                  <span className="text-green-400 text-xs font-medium">0.05</span>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">50Y Fixed</span>
-              <div className="flex items-center gap-1.5">
-                <span className="font-mono font-bold text-white text-base">7.15%</span>
-                <div className="flex items-center gap-0.5">
-                  <TrendingDown className="h-3 w-3 text-green-400" />
-                  <span className="text-green-400 text-xs font-medium">0.02</span>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">Prime Rate</span>
-              <span className="font-mono font-bold text-white text-base">8.50%</span>
-            </div>
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">Fed Rate</span>
-              <span className="font-mono font-bold text-white text-base">5.50%</span>
-            </div>
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">Avg CC APR</span>
-              <div className="flex items-center gap-1.5">
-                <span className="font-mono font-bold text-white text-base">24.6%</span>
-                <div className="flex items-center gap-0.5">
-                  <TrendingUp className="h-3 w-3 text-red-400" />
-                  <span className="text-red-400 text-xs font-medium">0.20</span>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">Gold</span>
-              <div className="flex items-center gap-1.5">
-                <span className="font-mono font-bold text-white text-base">$2,450</span>
-                <div className="flex items-center gap-0.5">
-                  <TrendingUp className="h-3 w-3 text-red-400" />
-                  <span className="text-red-400 text-xs font-medium">0.85</span>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">USD/EUR</span>
-              <div className="flex items-center gap-1.5">
-                <span className="font-mono font-bold text-white text-base">1.0850</span>
-                <div className="flex items-center gap-0.5">
-                  <TrendingUp className="h-3 w-3 text-red-400" />
-                  <span className="text-red-400 text-xs font-medium">0.0035</span>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
-        </div>
-      </div>
-      {/* Powered by AI Section */}
-      <div className="bg-[#0a1628] border-b border-border/30">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-2">
-          <div className="flex items-center justify-center gap-1.5 mt-[7px] mb-[7px] pt-[7px] pb-[7px]">
+
+          <div className="flex flex-wrap items-center justify-center gap-2">
             <Brain className="h-3 w-3 text-[#79d3ff]" />
-            <span className="text-[0.65rem] font-medium text-white/90">Powered by AI</span>
-            <div className="flex items-center gap-1.5 text-[0.65rem]">
+            <span className="text-xs font-medium text-white/90">Powered by AI</span>
+            <div className="flex flex-wrap items-center gap-2 text-xs">
               <div className="flex items-center gap-0.5 text-white/90">
                 <SiReplit className="h-3 w-3" />
                 <span className="font-medium">Replit</span>
@@ -244,6 +106,12 @@ export function Footer() {
           </div>
         </div>
       </div>
+      <style>{`
+        @keyframes tickPulse {
+          0%, 100% { transform: scale(1); opacity: 0.3; }
+          50% { transform: scale(1.1); opacity: 0.6; }
+        }
+      `}</style>
     </footer>
   );
 }

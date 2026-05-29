@@ -1,5 +1,5 @@
+import { Suspense, lazy, useEffect } from "react";
 import { Switch, Route, useLocation } from "wouter";
-import { useEffect } from "react";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -8,42 +8,43 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
-import { FloatingChatAssistant } from "@/components/FloatingChatAssistant";
-import Home from "@/pages/Home";
-import RealEstate from "@/pages/RealEstate";
-import CategoryPage from "@/pages/CategoryPage";
-import SavedSearches from "@/pages/SavedSearches";
-import GetPreapproved from "@/pages/GetPreapproved";
-import GetHomeValue from "@/pages/GetHomeValue";
-import BrokerRegistration from "@/pages/BrokerRegistration";
-import LiveDealMap from "@/pages/LiveDealMap";
-import DocumentPortal from "@/pages/DocumentPortal";
-import Coaching from "@/pages/Coaching";
-import LuxuryTravel from "@/pages/LuxuryTravel";
-import CommercialInvestment from "@/pages/CommercialInvestment";
-import Contact from "@/pages/Contact";
-import InternationalBuyers from "@/pages/InternationalBuyers";
-import CaliforniaMarket from "@/pages/CaliforniaMarket";
-import NewYorkMarket from "@/pages/NewYorkMarket";
-import NevadaMarket from "@/pages/NevadaMarket";
-import Audiobooks from "@/pages/Audiobooks";
-import Ecourses from "@/pages/Ecourses";
-import Downloads from "@/pages/Downloads";
-import ContentStudio from "@/pages/ContentStudio";
-import Profile from "@/pages/Profile";
-import ReverseBuyerOrigination from "@/pages/ReverseBuyerOrigination";
-import ReverseByerOriginationGuide from "@/pages/ReverseByerOriginationGuide";
-import ReverseSellerOrigination from "@/pages/ReverseSellerOrigination";
-import AdminRBO from "@/pages/AdminRBO";
-import AffiliateProgram from "@/pages/AffiliateProgram";
-import FreeTools from "@/pages/FreeTools";
-import Dashboard from "@/pages/Dashboard";
-import Refinancing from "@/pages/Refinancing";
-import EShop from "@/pages/EShop";
-import MediaCenter from "@/pages/MediaCenter";
-import ContentDetail from "@/pages/ContentDetail";
-import ArtGallery from "@/pages/ArtGallery";
-import NotFound from "@/pages/not-found";
+const FloatingChatAssistant = lazy(() => import("@/components/FloatingChatAssistant").then((module) => ({ default: module.FloatingChatAssistant })));
+
+const Home = lazy(() => import("@/pages/Home"));
+const RealEstate = lazy(() => import("@/pages/RealEstate"));
+const CategoryPage = lazy(() => import("@/pages/CategoryPage"));
+const SavedSearches = lazy(() => import("@/pages/SavedSearches"));
+const GetPreapproved = lazy(() => import("@/pages/GetPreapproved"));
+const GetHomeValue = lazy(() => import("@/pages/GetHomeValue"));
+const BrokerRegistration = lazy(() => import("@/pages/BrokerRegistration"));
+const LiveDealMap = lazy(() => import("@/pages/LiveDealMap"));
+const DocumentPortal = lazy(() => import("@/pages/DocumentPortal"));
+const Coaching = lazy(() => import("@/pages/Coaching"));
+const LuxuryTravel = lazy(() => import("@/pages/LuxuryTravel"));
+const CommercialInvestment = lazy(() => import("@/pages/CommercialInvestment"));
+const Contact = lazy(() => import("@/pages/Contact"));
+const InternationalBuyers = lazy(() => import("@/pages/InternationalBuyers"));
+const CaliforniaMarket = lazy(() => import("@/pages/CaliforniaMarket"));
+const NewYorkMarket = lazy(() => import("@/pages/NewYorkMarket"));
+const NevadaMarket = lazy(() => import("@/pages/NevadaMarket"));
+const Audiobooks = lazy(() => import("@/pages/Audiobooks"));
+const Ecourses = lazy(() => import("@/pages/Ecourses"));
+const Downloads = lazy(() => import("@/pages/Downloads"));
+const ContentStudio = lazy(() => import("@/pages/ContentStudio"));
+const Profile = lazy(() => import("@/pages/Profile"));
+const ReverseBuyerOrigination = lazy(() => import("@/pages/ReverseBuyerOrigination"));
+const ReverseByerOriginationGuide = lazy(() => import("@/pages/ReverseByerOriginationGuide"));
+const ReverseSellerOrigination = lazy(() => import("@/pages/ReverseSellerOrigination"));
+const AdminRBO = lazy(() => import("@/pages/AdminRBO"));
+const AffiliateProgram = lazy(() => import("@/pages/AffiliateProgram"));
+const FreeTools = lazy(() => import("@/pages/FreeTools"));
+const Dashboard = lazy(() => import("@/pages/Dashboard"));
+const Refinancing = lazy(() => import("@/pages/Refinancing"));
+const EShop = lazy(() => import("@/pages/EShop"));
+const MediaCenter = lazy(() => import("@/pages/MediaCenter"));
+const ContentDetail = lazy(() => import("@/pages/ContentDetail"));
+const ArtGallery = lazy(() => import("@/pages/ArtGallery"));
+const NotFound = lazy(() => import("@/pages/not-found"));
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -116,9 +117,13 @@ function App() {
           <div className="min-h-screen bg-background text-foreground">
             <ScrollToTop />
             <Header />
-            <Router />
+            <Suspense fallback={<div className="mx-auto w-full max-w-7xl px-6 py-12 text-white/70">Loading...</div>}>
+              <Router />
+            </Suspense>
             <Footer />
-            <FloatingChatAssistant />
+            <Suspense fallback={null}>
+              <FloatingChatAssistant />
+            </Suspense>
           </div>
           <Toaster />
         </TooltipProvider>
