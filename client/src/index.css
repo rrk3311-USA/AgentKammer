@@ -1,3 +1,10 @@
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/cormorant-garamond/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
@@ -76,9 +83,9 @@
   --chart-4: 28 75% 52%;
   --chart-5: 340 75% 55%;
 
-  --font-sans: Inter, system-ui, -apple-system, sans-serif;
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-display: "Cormorant", serif;
+  --font-sans: Inter, "Neue Haas Grotesk", system-ui, -apple-system, sans-serif;
+  --font-serif: "Noe Display", "Cormorant Garamond", Georgia, serif;
+  --font-display: "Cormorant Garamond", serif;
   --font-mono: Menlo, Monaco, "Courier New", monospace;
   --radius: .5rem;
   --shadow-2xs: 0px 1px 2px 0px hsl(220 13% 11% / 0.02);

@@ -1,181 +1,136 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
-import { 
-  Building2, 
-  TrendingUp,
-  Sparkles,
+import {
   ArrowRight,
-  Brain,
-  Users,
-  RefreshCw,
   BarChart3,
-  Briefcase,
-  LineChart,
-  CheckSquare,
-  UtensilsCrossed,
-  ShoppingBag,
-  Wallet,
-  Shield,
-  TrendingUp as InvestIcon,
-  Zap,
-  Lightbulb,
+  Bell,
+  Building2,
+  CheckCircle2,
+  Compass,
+  DollarSign,
   Home as HomeIcon,
-  DollarSign
+  KeyRound,
+  Landmark,
+  Radar,
+  Search,
+  Shield,
+  TrendingDown,
+  TrendingUp,
 } from "lucide-react";
-import { AgenticEngineVisual } from "@/components/AgenticEngineVisual";
-import conciergeImage from '@assets/generated_images/concierge_agent_top_hat_luxury_interior.png';
-import robotHeroImage from '@assets/generated_images/robot_looking_at_button_presenting.png';
+import skylineImage from "@assets/generated_images/golden_sunrise_over_financial_district_skyline.png";
 
-const ICON_WRAPPER_STYLE = {
-  background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
-  border: '2px solid rgba(212,175,55,0.3)'
-};
+const pillars = [
+  {
+    title: "Reverse Buyer Origination™",
+    text: "Acquisition strategy, offer design, diligence sequencing, and leverage discovery before the market sees you move.",
+    icon: HomeIcon,
+    href: "/reverse-buyer-origination",
+  },
+  {
+    title: "Reverse Seller Architecture™",
+    text: "Positioning, pricing, buyer competition, and net-outcome design for sellers who want control before exposure.",
+    icon: Building2,
+    href: "/reverse-seller-architecture",
+  },
+  {
+    title: "Market Intelligence Lab™",
+    text: "AI-powered comparables, building intelligence, trend projections, and opportunity monitoring across New York City.",
+    icon: BarChart3,
+    href: "/real-estate",
+  },
+];
 
-const GOLD_ICON_STYLE = {
-  color: '#d4af37',
-  filter: 'drop-shadow(0 0 3px rgba(212, 175, 55, 0.6))'
-};
+const marketCards = [
+  { label: "Market Insight", note: "Real-time Manhattan market intelligence", icon: Building2 },
+  { label: "Data-Driven", note: "AI-powered analysis and predictions", icon: TrendingUp },
+  { label: "Private Client", note: "Discreet, strategic representation", icon: Shield },
+  { label: "Full-Service", note: "From acquisition to exit and beyond", icon: KeyRound },
+];
 
-const GOLD_NUMBER_STYLE = {
-  background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)',
-  boxShadow: '0 8px 24px rgba(212, 175, 55, 0.3)'
-};
-
-const CTA_BUTTON_CLASS = "px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90";
+const reports = [
+  "Comparable Analysis",
+  "Neighborhood Intelligence",
+  "Building Intelligence",
+  "Market Reports",
+  "Equity Tracking",
+  "Inventory Monitoring",
+  "Absorption Analysis",
+  "Development Tracking",
+];
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
-      {/* SECTION 1: Hero - Premium Style with Featured Card */}
-      <section className="relative py-6 px-4 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-700 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(212,175,55,0.1),transparent_50%)]" />
-        <div className="max-w-6xl mx-auto relative z-10">
-          {/* Header */}
-          <div className="text-center pt-[7px] pb-[7px] mt-[23px] mb-[23px]">
-            <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-white">
-              Your AI Agent for Better{" "}
-              <span style={{ color: '#d4af37' }}>Financial Outcomes</span>
-            </h1>
-            <p className="text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
-              One profile. Our Agentic Comparison Engine uses LLMs + compute to analyze offers and force banks, lenders, and financial products to{" "}
-              <span className="text-[#d4af37] font-semibold">compete for you</span>.
+    <div className="min-h-screen bg-[#F6F3EB] text-[#222730]">
+      <section className="relative min-h-[620px] overflow-hidden bg-[#0F172A] text-[#F6F3EB]">
+        <img
+          src={skylineImage}
+          alt="Manhattan luxury real estate at dusk"
+          className="absolute inset-0 h-full w-full object-cover opacity-70"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,17,31,0.96)_0%,rgba(7,17,31,0.78)_42%,rgba(7,17,31,0.32)_100%)]" />
+        <div className="relative mx-auto flex min-h-[620px] max-w-7xl flex-col justify-center px-6 py-14 lg:px-10">
+          <div className="max-w-4xl">
+            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.32em] text-[#D6B45F]" style={{ fontFamily: "Canela, var(--font-display)" }}>
+              Manhattan Intelligence
             </p>
+            <h1
+              className="max-w-4xl text-5xl font-semibold leading-[0.98] md:text-7xl"
+              style={{ fontFamily: "Noe Display, var(--font-serif)" }}
+            >
+              Intelligence Before Real Estate
+            </h1>
+            <p className="mt-7 max-w-2xl text-lg leading-8 text-[#F6F3EB]/82">
+              Agent Kammer combines market intelligence, private-client advisory, and AI-powered execution for buyers, sellers, and investors in New York City.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Link href="/profile">
+                <Button className="h-12 rounded-none bg-[#D6B45F] px-7 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-[#0F172A] hover:bg-[#e4c56f]">
+                  Start Your Private Profile
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="/real-estate">
+                <Button variant="outline" className="h-12 rounded-none border-[#F6F3EB]/40 bg-transparent px-7 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-[#F6F3EB] hover:bg-[#F6F3EB] hover:text-[#0F172A]">
+                  View Market Intelligence
+                </Button>
+              </Link>
+            </div>
           </div>
 
-          {/* Featured Hero Card with Brain Visual & Animated Words */}
-          <Card 
-            className="overflow-hidden border-0 relative" 
-            style={{ 
-              background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
-              backdropFilter: 'blur(20px)'
-            }}
-            data-testid="card-hero-featured"
-          >
-            <div className="relative z-10">
-              {/* Brain Visual - Full Width */}
-              <div className="flex justify-center">
-                <div className="w-full">
-                  <AgenticEngineVisual />
-                </div>
+          <div className="mt-12 grid max-w-6xl grid-cols-2 gap-px border-y border-[#F6F3EB]/18 bg-[#F6F3EB]/18 md:grid-cols-4">
+            {marketCards.map((item) => (
+              <div key={item.label} className="bg-[#07111f]/74 p-5 backdrop-blur-sm">
+                <item.icon className="mb-4 h-7 w-7 text-[#D6B45F]" strokeWidth={1.4} />
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#D6B45F]">{item.label}</p>
+                <p className="mt-2 max-w-[12rem] text-sm leading-5 text-[#F6F3EB]/82">{item.note}</p>
               </div>
-            </div>
-          </Card>
+            ))}
+          </div>
         </div>
       </section>
-      {/* SECTION 2: Choose Your Category - Combined */}
-      <section id="categories" className="relative py-6 px-4 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-900">
-        <div className="max-w-7xl mx-auto">
-          {/* Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent mb-8" />
 
-          {/* Choose Your Category Header */}
-          <div className="text-center mb-6">
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-3">
-              Choose Your Category
-            </h2>
-            <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              AI-powered real estate intelligence across Buying, Selling, and Refinancing
-            </p>
+      <section className="border-b border-[#222730]/12 px-6 py-16 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-9 text-center">
+            <div>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#B7832C]">Three paths. One standard.</p>
+              <h2 className="text-4xl font-semibold text-[#0F172A]" style={{ fontFamily: "Noe Display, var(--font-serif)" }}>
+                How We Help
+              </h2>
+            </div>
           </div>
 
-          {/* Featured Category Cards - Grid of 3 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { 
-                id: 'buying', 
-                name: 'Buying', 
-                icon: HomeIcon, 
-                desc: 'Find your perfect home',
-                highlights: ['Mortgage pre-approval', 'Buyer agent matching', 'Neighborhood insights']
-              },
-              { 
-                id: 'selling', 
-                name: 'Selling', 
-                icon: DollarSign, 
-                desc: 'Maximize your sale price',
-                highlights: ['Home valuation', 'Listing optimization', 'Agent competition']
-              },
-              { 
-                id: 'refinancing', 
-                name: 'Refinancing', 
-                icon: RefreshCw, 
-                desc: 'Lower your monthly payments',
-                highlights: ['Rate watch alerts', 'Savings calculator', 'Lender comparison']
-              }
-            ].map((cat) => (
-              <Link key={cat.id} href={`/${cat.id}`}>
-                <Card 
-                  className="overflow-hidden border-0 h-full hover-elevate transition-all cursor-pointer"
-                  style={{ 
-                    background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
-                    backdropFilter: 'blur(20px)'
-                  }}
-                  data-testid={`card-category-${cat.id}`}
-                >
-                  <div className="p-8 flex flex-col h-full">
-                    {/* Icon */}
-                    <div 
-                      className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
-                      style={{
-                        background: 'radial-gradient(circle at 30% 30%, rgba(212,175,55,0.3), rgba(212,175,55,0.05))',
-                        border: '2px solid rgba(212,175,55,0.3)'
-                      }}
-                    >
-                      <cat.icon className="h-10 w-10" style={{ color: '#d4af37' }} />
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="font-serif text-2xl font-bold text-white mb-2">
-                      {cat.name}
-                    </h3>
-                    <p className="text-base text-white/70 mb-6">
-                      {cat.desc}
-                    </p>
-
-                    {/* Features List */}
-                    <div className="space-y-3 mb-6 flex-1">
-                      {cat.highlights.map((highlight, idx) => (
-                        <div key={idx} className="flex items-start gap-3">
-                          <CheckSquare className="h-4 w-4 mt-0.5 shrink-0 flex-shrink-0" style={{ color: '#d4af37' }} />
-                          <span className="text-sm text-white/80">{highlight}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* CTA */}
-                    <Button 
-                      size="sm"
-                      className="gap-2 border-0 w-full"
-                      style={{
-                        background: 'linear-gradient(135deg, #d4af37 0%, #c9a02e 100%)',
-                        color: '#000',
-                        fontWeight: 600
-                      }}
-                    >
-                      <ArrowRight className="h-4 w-4" />
-                      Explore {cat.name}
-                    </Button>
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+            {pillars.map((pillar) => (
+              <Link key={pillar.title} href={pillar.href}>
+                <Card className="h-full rounded-xl border border-[#222730]/10 bg-[#fffdf8] p-7 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+                  <pillar.icon className="mb-6 h-9 w-9 text-[#B7832C]" strokeWidth={1.35} />
+                  <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-[#0F172A]">{pillar.title.replace("™", "")}</h3>
+                  <p className="mt-4 text-sm leading-6 text-[#222730]/70">{pillar.text}</p>
+                  <div className="mt-6 inline-flex items-center text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[#0F172A]">
+                    Explore services <ArrowRight className="ml-2 h-4 w-4" />
                   </div>
                 </Card>
               </Link>
@@ -183,264 +138,105 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* SECTION 5: Real Estate Concierge - Image Background */}
-      <section className="relative py-6 lg:py-8 overflow-hidden bg-gradient-to-b from-slate-800 via-slate-900 to-slate-800">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${conciergeImage})` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/75 to-slate-900/60" />
-        </div>
 
-        <div className="relative max-w-7xl mx-auto px-6 z-10">
-          <div className="text-center mb-6">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-20 h-20 rounded-2xl flex items-center justify-center" style={ICON_WRAPPER_STYLE}>
-                <Building2 className="h-10 w-10" style={GOLD_ICON_STYLE} />
-              </div>
+      <section id="intelligence" className="bg-[#0F172A] px-6 py-16 text-[#F6F3EB] lg:px-10">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[#D6B45F]">Structured intelligence</p>
+            <h2 className="text-4xl font-semibold" style={{ fontFamily: "Noe Display, var(--font-serif)" }}>Agent Kammer Intelligence™</h2>
+            <p className="mt-5 max-w-xl text-sm leading-7 text-[#F6F3EB]/72">
+              Most agents know a neighborhood. Agent Kammer models an entire city: buildings, inventory, pricing movement, absorption, development risk, and buyer leverage.
+            </p>
+            <div className="mt-8 rounded-xl border border-[#F6F3EB]/15 bg-[#18366B]/40 p-5">
+              <Search className="mb-4 h-5 w-5 text-[#D6B45F]" strokeWidth={1.5} />
+              <p className="text-sm leading-7 text-[#F6F3EB]/86">
+                Show every Manhattan condo building where price-per-square-foot is down 10%+ versus the 24-month trend.
+              </p>
             </div>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-3 text-white">
-              Real Estate Concierge
-            </h2>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto">
-              Premium home buying, selling, and mortgage intelligence worldwide
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {[
-              { icon: Building2, title: 'Reverse Buyer Origination', desc: 'Sellers compete to win your business with better terms and faster closing.', link: '/reverse-buyer-origination', testId: 'button-rbo' },
-              { icon: Users, title: 'Reverse Seller Architecture', desc: 'Multiple qualified buyer agents compete, driving up demand for your home.', link: '/reverse-seller-architecture', testId: 'button-rsa' },
-              { icon: RefreshCw, title: 'Refinancing Rate Watch', desc: 'AI-powered monitoring alerts you when rates drop with exact savings.', link: '/refinancing', testId: 'button-rrw' }
-            ].map((service) => (
-              <Card key={service.title} className="p-5 bg-white/5 border-white/10 backdrop-blur-sm">
-                <div className="flex items-center gap-2 mb-3">
-                  <service.icon className="h-5 w-5 text-[#d4af37]" />
-                  <h3 className="font-serif text-lg font-semibold text-white">{service.title}</h3>
-                </div>
-                <p className="text-white/70 text-sm mb-4">{service.desc}</p>
-                <Link href={service.link}>
-                  <Button size="sm" className="bg-[#d4af37] text-[#0a1628] hover:bg-[#d4af37]/90" data-testid={service.testId}>
-                    Learn More <ArrowRight className="h-4 w-4 ml-2" />
-                  </Button>
-                </Link>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-      {/* SECTION 6: What You'll Unlock - Category Benefits */}
-      <section className="relative py-6 px-4 bg-gradient-to-b from-slate-800 via-slate-900 to-slate-900">
-        <div className="max-w-7xl mx-auto">
-          {/* Choose Your Category Header */}
-          <div className="text-center mb-6">
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-3">
-              What You'll Unlock
-            </h2>
-            <p className="text-xl text-white/70 max-w-3xl mx-auto">
-              Premium real estate services—buying, selling, and refinancing with AI-powered competition
-            </p>
-          </div>
-
-          {/* Three Category Cards - Grid of 3 */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { 
-                id: 'buying', 
-                name: 'Buying', 
-                icon: Building2,
-                desc: 'Find your dream property',
-                highlights: ['Reverse Buyer Origination', 'Pre-approval guidance', 'Luxury property access']
-              },
-              { 
-                id: 'selling', 
-                name: 'Selling', 
-                icon: Briefcase,
-                desc: 'Maximize your home value',
-                highlights: ['Reverse Seller Architecture', 'Market analysis tools', 'Agent competition for your listing']
-              },
-              { 
-                id: 'refinancing', 
-                name: 'Refinancing', 
-                icon: LineChart,
-                desc: 'Lower your rate & save',
-                highlights: ['Rate Watch technology', 'Cash-out options', 'AI-matched lenders']
-              }
-            ].map((cat) => (
-              <Card 
-                key={cat.id}
-                className="overflow-hidden border-0 h-full transition-all"
-                style={{ 
-                  background: 'linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(15,32,55,0.95) 100%)',
-                  backdropFilter: 'blur(20px)'
-                }}
-                data-testid={`card-benefits-${cat.id}`}
-              >
-                <div className="p-8 flex flex-col h-full">
-                  {/* Icon */}
-                  <div 
-                    className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
-                    style={ICON_WRAPPER_STYLE}
-                  >
-                    <cat.icon className="h-10 w-10" style={GOLD_ICON_STYLE} />
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="font-serif text-2xl font-bold text-white mb-2">
-                    {cat.name}
-                  </h3>
-                  <p className="text-base text-white/70 mb-6">
-                    {cat.desc}
-                  </p>
-
-                  {/* Features List */}
-                  <div className="space-y-3 flex-1">
-                    {cat.highlights.map((highlight, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        <CheckSquare className="h-4 w-4 mt-0.5 shrink-0 flex-shrink-0" style={{ color: '#d4af37' }} />
-                        <span className="text-sm text-white/80">{highlight}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 7: NYC Price Reduction Alerts */}
-      <section className="py-12 lg:py-16 bg-[#0a1628] text-white">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl lg:text-4xl font-semibold mb-2" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>
-              Lightning Instant Alerts
-            </h2>
-            <p className="text-[#00d4ff] text-lg font-medium mb-4">NYC listing price reductions, delivered as they happen</p>
-            <p className="text-white/80 text-lg leading-relaxed">
-              Track your target neighborhoods and get immediate alerts when qualifying NYC listings cut price.
-            </p>
-          </div>
-
-          <div className="max-w-2xl mx-auto">
-            <Card className="bg-white/5 border-[#d4af37]/30 p-6">
-              <div className="text-center mb-4">
-                <h3 className="text-xl font-semibold text-white mb-2">Get Instant NYC Price Drop Alerts</h3>
-                <p className="text-white/60 text-sm">Enter your email to receive real-time listing reduction notifications.</p>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {reports.map((report) => (
+              <div key={report} className="flex items-center gap-3 rounded-lg border border-[#F6F3EB]/14 bg-[#F6F3EB]/6 p-4">
+                <CheckCircle2 className="h-5 w-5 text-[#D6B45F]" strokeWidth={1.4} />
+                <span className="text-sm text-[#F6F3EB]/86">{report}</span>
               </div>
-              <form
-                className="flex flex-col sm:flex-row gap-3"
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  const form = e.target as HTMLFormElement;
-                  const emailInput = form.querySelector('input[type="email"]') as HTMLInputElement;
-                  const email = emailInput.value;
-                  if (email) {
-                    try {
-                      const response = await fetch('/api/travel-deals/subscribe', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email, segment: 'nyc-price-reductions' })
-                      });
-                      if (response.ok) {
-                        emailInput.value = '';
-                        alert('Subscribed. You will receive instant NYC price reduction alerts.');
-                      } else {
-                        const data = await response.json();
-                        alert(data.message || 'Failed to subscribe');
-                      }
-                    } catch {
-                      alert('Failed to subscribe. Please try again.');
-                    }
-                  }
-                }}
-              >
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  required
-                  className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/50 focus:outline-none focus:border-[#d4af37]"
-                  data-testid="input-nyc-price-alerts-email"
-                />
-                <Button
-                  type="submit"
-                  className="bg-[#d4af37] text-[#0a1628] hover:bg-[#d4af37]/90 px-6"
-                  data-testid="button-subscribe-nyc-price-alerts"
-                >
-                  Subscribe
-                </Button>
-              </form>
-            </Card>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 8: Robot Hero CTA */}
-      <section className="relative min-h-[500px] lg:min-h-[600px] text-white overflow-hidden">
-        {/* Background gradient base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a1628] via-[#0f1e36] to-[#1a1a2e]" />
-        
-        {/* Robot image - spans across section with arm gesture */}
-        <div 
-          className="absolute right-0 top-0 bottom-0 w-full lg:w-3/4 flex items-end justify-end"
-        >
-          <img 
-            src={robotHeroImage} 
-            alt="AI Deal Maker" 
-            loading="lazy"
-            decoding="async"
-            className="w-full h-auto object-contain object-right-bottom opacity-95"
-            style={{ mixBlendMode: 'lighten', maxHeight: '100%' }}
-          />
-        </div>
-        
-        {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a1628] via-[#0a1628]/90 to-transparent" />
-        
-        {/* Decorative overlays */}
-        <div className="absolute top-20 left-10 w-32 h-32 border border-[#d4af37]/15 rounded-full animate-pulse" />
-        <div className="absolute bottom-32 left-1/4 w-24 h-24 border border-[#d4af37]/20 rounded-full" style={{ animation: 'float 8s ease-in-out infinite reverse' }} />
-        
-        {/* Content overlay */}
-        <div className="relative z-10 max-w-6xl mx-auto px-6 py-16 lg:py-24 flex flex-col justify-center min-h-[500px] lg:min-h-[600px]">
-          <div className="max-w-2xl">
-            {/* Big headline */}
-            <h2 
-              className="text-4xl lg:text-6xl font-bold mb-5 leading-tight"
-              style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
-            >
-              Your NYC Deal Intelligence <span style={{ color: '#d4af37' }}>Awaits</span>
-            </h2>
-            
-            <p className="text-lg lg:text-xl text-white/80 mb-8 max-w-lg">
-              Activate instant listing and rate alerts, then move when the numbers work in your favor.
-            </p>
-            
-            {/* CTA Button */}
-            <Link href="/profile">
-              <Button
-                size="lg"
-                className="h-14 rounded-xl px-10 text-[#0a1628] font-semibold text-lg hover:scale-[1.02] transition-transform shadow-2xl border border-[#f4d03f]/60"
-                style={{
-                  background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)',
-                  boxShadow: '0 14px 38px rgba(212, 175, 55, 0.35)',
-                }}
-                data-testid="button-start-profile"
-              >
-                <Zap className="h-6 w-6 mr-3" />
-                Get Instant Alerts
-              </Button>
-            </Link>
+      <section id="reports" className="border-b border-[#222730]/12 px-6 py-16 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-9">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#18366B]">Market reports</p>
+            <h2 className="text-4xl font-semibold text-[#0F172A]" style={{ fontFamily: "Noe Display, var(--font-serif)" }}>Intelligence dashboards for repeat decisions.</h2>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+            {[
+              ["Neighborhood Report", "Median PPSF, inventory, absorption, listing velocity, and price reduction pressure.", Compass],
+              ["Building Report", "Unit mix, sponsor history, resale performance, board risk, and comparable stack.", Building2],
+              ["Opportunity Monitor", "Expired listings, failed deals, motivated sellers, and price movement watchlists.", Radar],
+            ].map(([title, text, Icon]) => (
+              <Card key={title as string} className="rounded-xl border border-[#222730]/14 bg-[#fffdf8] p-7 shadow-sm">
+                <Icon className="mb-6 h-6 w-6 text-[#18366B]" strokeWidth={1.5} />
+                <h3 className="text-xl font-semibold text-[#0F172A]">{title as string}</h3>
+                <p className="mt-4 text-sm leading-6 text-[#222730]/70">{text as string}</p>
+              </Card>
+            ))}
           </div>
         </div>
-        
-        {/* Animation keyframes */}
-        <style>{`
-          @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
-          }
-        `}</style>
+      </section>
+
+      <section id="alerts" className="bg-[#F6F3EB] px-6 py-16 lg:px-10">
+        <div className="mx-auto max-w-5xl rounded-xl border border-[#222730]/14 bg-[#0F172A] p-8 text-[#F6F3EB] shadow-sm md:p-10">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+            <div>
+              <Bell className="mb-5 h-6 w-6 text-[#D6B45F]" strokeWidth={1.5} />
+              <h2 className="text-3xl font-semibold" style={{ fontFamily: "Noe Display, var(--font-serif)" }}>NYC Opportunity Alerts</h2>
+              <p className="mt-4 text-sm leading-6 text-[#F6F3EB]/72">
+                Get notified when price drops, failed deals, expired listings, and motivated sellers create leverage.
+              </p>
+            </div>
+            <form
+              className="flex flex-col gap-3 sm:flex-row"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const form = e.target as HTMLFormElement;
+                const emailInput = form.querySelector('input[type="email"]') as HTMLInputElement;
+                const email = emailInput.value.trim();
+                if (!email) return;
+                try {
+                  const response = await fetch("/api/travel-deals/subscribe", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, segment: "nyc-opportunity-alerts" }),
+                  });
+                  if (response.ok) {
+                    emailInput.value = "";
+                    alert("Subscribed. You will receive NYC opportunity alerts.");
+                  } else {
+                    const data = await response.json();
+                    alert(data.message || "Subscription failed");
+                  }
+                } catch {
+                  alert("Subscription failed. Please try again.");
+                }
+              }}
+            >
+              <input
+                type="email"
+                required
+                placeholder="Enter your email"
+                className="h-12 flex-1 rounded-md border border-[#F6F3EB]/30 bg-[#18366B] px-4 text-[#F6F3EB] outline-none placeholder:text-[#F6F3EB]/58 focus:border-[#D6B45F]"
+              />
+              <Button type="submit" className="h-12 rounded-md bg-[#D6B45F] px-6 text-[#0F172A] hover:bg-[#e2c16d]">
+                Request alerts
+              </Button>
+            </form>
+          </div>
+        </div>
       </section>
     </div>
   );

@@ -1,314 +1,97 @@
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { 
-  Moon, 
-  Sun, 
-  Heart, 
-  Menu, 
-  X, 
-  ChevronDown, 
-  ChevronUp,
-  MessageCircle, 
-  Truck,
-  TrendingUp,
-  Home,
-  Brain,
-  Triangle,
-  Calculator,
-  RefreshCw,
-  ShoppingBag,
-  Newspaper,
-  Palette
-} from "lucide-react";
-import { useTheme } from "./ThemeProvider";
-import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import { AgentKammerHorizontalLogo } from "@/components/AgentKammerHorizontalLogo";
 
-const realEstateCategories = [
-  { id: 'buying', name: 'Buying', icon: Home },
-  { id: 'selling', name: 'Selling', icon: TrendingUp },
-  { id: 'refinancing', name: 'Refinancing', icon: RefreshCw },
+const navLinks = [
+  { label: "Founder", href: "/about" },
+  { label: "Buy", href: "/buying" },
+  { label: "Sell", href: "/selling" },
+  { label: "Capital Strategy", href: "/refinancing" },
+  { label: "Intelligence", href: "/#intelligence" },
+  { label: "Market Reports", href: "/#reports" },
+  { label: "Contact", href: "/contact" },
+];
+
+const rateStrip = [
+  ["5.50%", "FED"],
+  ["8.50%", "PRIME"],
+  ["6.82%", "30Y"],
+  ["6.09%", "15Y"],
+  ["6.54%", "5/1 ARM"],
+  ["7.02%", "JUMBO"],
 ];
 
 export function Header() {
-  const { theme, setTheme } = useTheme();
-  const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [bookmarks, setBookmarks] = useState<string[]>([]);
-  const [isBookmarked, setIsBookmarked] = useState(false);
-
-  useEffect(() => {
-    const stored = localStorage.getItem('pageBookmarks');
-    const bookmarkList = stored ? JSON.parse(stored) : [];
-    setBookmarks(bookmarkList);
-    setIsBookmarked(bookmarkList.includes(location));
-  }, [location]);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const scrollToBottom = () => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-  };
-
-  const toggleBookmark = () => {
-    const stored = localStorage.getItem('pageBookmarks');
-    let bookmarkList = stored ? JSON.parse(stored) : [];
-    
-    if (bookmarkList.includes(location)) {
-      bookmarkList = bookmarkList.filter((page: string) => page !== location);
-    } else {
-      bookmarkList.push(location);
-    }
-    
-    localStorage.setItem('pageBookmarks', JSON.stringify(bookmarkList));
-    setBookmarks(bookmarkList);
-    setIsBookmarked(!isBookmarked);
-  };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/80 shadow-sm">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between gap-4 relative">
-          {/* Mobile Scroll Arrows */}
-          <div className="flex md:hidden flex-col gap-0.5">
-            <button
-              onClick={scrollToTop}
-              className="p-1 text-muted-foreground/60 hover:text-foreground transition-colors"
-              data-testid="button-scroll-top"
-              aria-label="Scroll to top"
-            >
-              <Triangle className="h-3 w-3 fill-current" />
-            </button>
-            <button
-              onClick={scrollToBottom}
-              className="p-1 text-muted-foreground/60 hover:text-foreground transition-colors"
-              data-testid="button-scroll-bottom"
-              aria-label="Scroll to bottom"
-            >
-              <Triangle className="h-3 w-3 fill-current rotate-180" />
-            </button>
-          </div>
+    <header className="sticky top-0 z-50 w-full border-b border-[#D8C9AD]/70 bg-[#FFF9EE]/95 shadow-[0_10px_30px_rgba(15,23,42,0.08)] backdrop-blur-xl">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10">
+        <Link href="/" data-testid="link-home" className="shrink-0">
+          <AgentKammerHorizontalLogo />
+        </Link>
 
-          {/* Left Navigation */}
-          <div className="hidden md:flex items-center gap-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="hover-elevate active-elevate-2 h-10 px-3 gap-1"
-                  data-testid="button-header-categories"
-                >
-                  <Brain className="h-4 w-4 text-[#d4af37]" />
-                  <span className="text-sm font-medium">Compare</span>
-                  <ChevronDown className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-56">
-                <Link href="/dashboard">
-                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-dashboard">
-                    <Brain className="h-4 w-4 mr-2 text-[#d4af37]" />
-                    All Categories Dashboard
-                  </DropdownMenuItem>
-                </Link>
-                <DropdownMenuSeparator />
-                {realEstateCategories.map((category) => (
-                  <Link key={category.id} href={`/${category.id}`}>
-                    <DropdownMenuItem className="cursor-pointer" data-testid={`menu-item-${category.id}`}>
-                      <category.icon className="h-4 w-4 mr-2" />
-                      {category.name}
-                    </DropdownMenuItem>
-                  </Link>
-                ))}
-                <DropdownMenuSeparator />
-                <Link href="/refinancing">
-                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-rate-watch">
-                    <RefreshCw className="h-4 w-4 mr-2" />
-                    APR Watch
-                  </DropdownMenuItem>
-                </Link>
-                <Link href="/e-shop">
-                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-e-shop">
-                    <ShoppingBag className="h-4 w-4 mr-2" />
-                    E-Shop
-                  </DropdownMenuItem>
-                </Link>
-                <Link href="/media-center">
-                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-media-center">
-                    <Newspaper className="h-4 w-4 mr-2" />
-                    Media Center
-                  </DropdownMenuItem>
-                </Link>
-                <Link href="/art-gallery">
-                  <DropdownMenuItem className="cursor-pointer" data-testid="menu-item-art-gallery">
-                    <Palette className="h-4 w-4 mr-2" />
-                    Art Gallery
-                  </DropdownMenuItem>
-                </Link>
-              </DropdownMenuContent>
-            </DropdownMenu>
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
+          {navLinks.map((link) => (
+            <Link key={link.label} href={link.href}>
+              <span
+                className="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[#182537]/72 transition hover:text-[#05080E]"
+                style={{ fontFamily: "Neue Haas Grotesk, Inter, system-ui, sans-serif" }}
+              >
+                {link.label}
+              </span>
+            </Link>
+          ))}
+        </nav>
 
-          </div>
-
-          {/* Center Logo */}
-          <Link href="/" data-testid="link-home" className="absolute left-1/2 -translate-x-1/2">
-            <div className="flex flex-col items-center py-1">
-              <div className="mb-0.5 text-2xl" style={{ transform: 'rotate(-8deg) translateX(2px) translateY(-1px)' }}>
-                🎩
-              </div>
-              <div className="flex flex-col items-center px-2">
-                <span style={{ fontFamily: 'var(--font-display)', fontWeight: 900 }} className="text-lg whitespace-nowrap text-foreground">AGENT KAMMER</span>
-              </div>
-            </div>
+        <div className="hidden xl:block">
+          <Link href="/profile">
+            <Button className="h-10 rounded-none border border-[#B88738] bg-[#07111f] px-5 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-[#F4D681] shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] hover:bg-[#0F1C2C] hover:text-[#FFE7A5]">
+              Start Private Profile
+            </Button>
           </Link>
+        </div>
 
-          {/* Right Navigation */}
-          <div className="flex items-center gap-3 ml-auto">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              data-testid="button-theme-toggle"
-            >
-              {theme === "light" ? (
-                <Moon className="h-5 w-5" />
-              ) : (
-                <Sun className="h-5 w-5" />
-              )}
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="hidden md:flex"
-              onClick={toggleBookmark}
-              data-testid="button-favorites"
-            >
-              <Heart 
-                className="h-5 w-5 transition-all" 
-                fill={isBookmarked ? "currentColor" : "none"}
-                stroke={isBookmarked ? "currentColor" : "currentColor"}
-                style={{ color: isBookmarked ? '#d4af37' : 'currentColor' }}
-              />
-            </Button>
-            <div className="hidden md:flex items-center gap-2">
-              <Button
-                variant="ghost"
-                className="hover-elevate active-elevate-2 h-9 px-3 gap-1 text-sm"
-                data-testid="button-header-contact"
-                onClick={() => {
-                  const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLElement;
-                  if (chatButton) chatButton.click();
-                }}
-              >
-                <MessageCircle className="h-4 w-4" />
-                <span>Contact</span>
-              </Button>
-              <Button
-                variant="default"
-                className="rounded-full text-[#0a1628] h-9 px-4"
-                data-testid="button-sign-in"
-              >
-                Sign In
-              </Button>
+        <button
+          onClick={() => setMobileMenuOpen((open) => !open)}
+          className="text-[#07111f] lg:hidden"
+          aria-label="Toggle menu"
+          data-testid="button-mobile-menu"
+        >
+          {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+      </div>
+
+      <div className="w-full border-t border-[#D8C9AD]/70 bg-[#07111f]">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-3 gap-y-1 px-3 py-1 text-center text-[0.63rem] text-[#FFF9EE] md:grid-cols-6 md:px-6 lg:px-10">
+          {rateStrip.map(([value, label]) => (
+            <div key={label} className="whitespace-nowrap font-medium">
+              <span className="font-mono font-bold text-[#F4D681]">{value}</span> {label}
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              data-testid="button-mobile-menu"
-            >
-              {mobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </Button>
-          </div>
+          ))}
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t bg-background max-h-[80vh] overflow-y-auto">
-          <nav className="flex flex-col p-6 gap-4">
-            {/* Financial Categories */}
-            <div>
-              <p className="text-xs font-semibold text-muted-foreground mb-3 uppercase flex items-center gap-2">
-                <Brain className="h-3 w-3 text-[#d4af37]" />
-                Compare Products
-              </p>
-              <div className="grid grid-cols-2 gap-2">
-                {realEstateCategories.map((category) => (
-                  <Link key={category.id} href={`/${category.id}`} data-testid={`link-mobile-${category.id}`}>
-                    <span
-                      className="text-sm font-medium hover:text-[#d4af37] cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-muted/50"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <category.icon className="h-4 w-4" />
-                      {category.name}
-                    </span>
-                  </Link>
-                ))}
-                <Link href="/real-estate" data-testid="link-mobile-real-estate-concierge">
-                  <span
-                    className="text-sm font-medium hover:text-[#d4af37] cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-muted/50"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <Home className="h-4 w-4" />
-                    Real Estate Concierge
-                  </span>
-                </Link>
-                <Link href="/e-shop" data-testid="link-mobile-e-shop">
-                  <span
-                    className="text-sm font-medium hover:text-[#d4af37] cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-muted/50"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <ShoppingBag className="h-4 w-4" />
-                    E-Shop
-                  </span>
-                </Link>
-                <Link href="/media-center" data-testid="link-mobile-media-center">
-                  <span
-                    className="text-sm font-medium hover:text-[#d4af37] cursor-pointer flex items-center gap-2 p-2 rounded-lg bg-muted/50"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <Newspaper className="h-4 w-4" />
-                    Media Center
-                  </span>
-                </Link>
-              </div>
-            </div>
-
-            <span
-              className="text-base font-medium hover:text-primary cursor-pointer block pt-4"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                setTimeout(() => {
-                  const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLButtonElement;
-                  if (chatButton) chatButton.click();
-                }, 100);
-              }}
-              data-testid="link-mobile-contact"
-            >
-              Contact Agent K
-            </span>
-
-            <Button
-              variant="default"
-              className="w-full rounded-full text-[#0a1628] mt-2"
-              data-testid="button-mobile-sign-in"
-            >
-              Sign In
-            </Button>
+        <div className="border-t border-[#D8C9AD]/70 bg-[#FFF9EE] lg:hidden">
+          <nav className="flex flex-col gap-4 px-6 py-5">
+            {navLinks.map((link) => (
+              <Link key={link.label} href={link.href}>
+                <span
+                  className="block text-sm font-medium text-[#07111f]"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </span>
+              </Link>
+            ))}
+            <Link href="/profile">
+              <Button className="mt-2 h-10 rounded-none border border-[#B88738] bg-[#07111f] text-[#F4D681] hover:bg-[#0F1C2C]">
+                Start Private Profile
+              </Button>
+            </Link>
           </nav>
         </div>
       )}

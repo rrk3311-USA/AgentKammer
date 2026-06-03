@@ -19,20 +19,46 @@ export default function Contact() {
     name: "",
     email: "",
     phone: "",
+    service: "buying",
+    market: "",
+    timeframe: "",
     message: "",
   });
   const { toast } = useToast();
 
   const contactMutation = useMutation({
     mutationFn: async (data: typeof formData) => {
-      return await apiRequest("POST", "/api/contact", data);
+      const composedMessage = [
+        `Service: ${data.service}`,
+        data.market ? `Market: ${data.market}` : null,
+        data.timeframe ? `Timeline: ${data.timeframe}` : null,
+        "",
+        data.message,
+      ]
+        .filter(Boolean)
+        .join("\n");
+
+      return await apiRequest("POST", "/api/contact", {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        message: composedMessage,
+      });
     },
     onSuccess: () => {
       toast({
         title: "Message Sent!",
         description: "Thank you! We'll be in touch within 24 hours.",
       });
-      setFormData({ name: "", email: "", phone: "", message: "" });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        service: "buying",
+        market: "",
+        timeframe: "",
+        message: "",
+      });
     },
     onError: () => {
       toast({
@@ -93,7 +119,9 @@ export default function Contact() {
             <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
               Get in Touch
             </h1>
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">Questions About Our Ai  Deal Procurement?</p>
+            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
+              Serious real estate inquiries. Clear response. Fast next steps.
+            </p>
           </div>
         </div>
       </section>
@@ -113,6 +141,55 @@ export default function Contact() {
               </div>
 
               <div className="space-y-6">
+                <Card className="p-6 hover-elevate">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-[#d4af37]/10 flex items-center justify-center flex-shrink-0">
+                      <Mail className="h-5 w-5 text-[#d4af37]" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1">Email</h3>
+                      <a
+                        href="mailto:concierge@agentkammer.com"
+                        className="text-muted-foreground hover:text-[#d4af37]"
+                      >
+                        concierge@agentkammer.com
+                      </a>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className="p-6 hover-elevate">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-[#d4af37]/10 flex items-center justify-center flex-shrink-0">
+                      <Phone className="h-5 w-5 text-[#d4af37]" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1">Phone</h3>
+                      <a
+                        href="tel:+12125551212"
+                        className="text-muted-foreground hover:text-[#d4af37]"
+                      >
+                        +1 (212) 555-1212
+                      </a>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        For active transactions and urgent deal timelines.
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card className="p-6 hover-elevate">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-[#d4af37]/10 flex items-center justify-center flex-shrink-0">
+                      <MapPin className="h-5 w-5 text-[#d4af37]" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1">Primary Markets</h3>
+                      <p className="text-muted-foreground">NYC • California • Nevada</p>
+                    </div>
+                  </div>
+                </Card>
+
                 <Card className="p-6 hover-elevate">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-full bg-[#d4af37]/10 flex items-center justify-center flex-shrink-0">
@@ -213,14 +290,65 @@ export default function Contact() {
                   </div>
 
                   <div>
+                    <label htmlFor="service" className="block text-sm font-medium mb-2">
+                      Service Needed *
+                    </label>
+                    <select
+                      id="service"
+                      value={formData.service}
+                      onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                      className="h-12 w-full rounded-md border border-input bg-background px-3 text-sm ring-offset-background"
+                      required
+                      data-testid="select-contact-service"
+                    >
+                      <option value="buying">Buying</option>
+                      <option value="selling">Selling</option>
+                      <option value="refinancing">Refinancing</option>
+                      <option value="investment">Investment / Commercial</option>
+                      <option value="general">General Inquiry</option>
+                    </select>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="market" className="block text-sm font-medium mb-2">
+                        Target Market
+                      </label>
+                      <Input
+                        id="market"
+                        type="text"
+                        value={formData.market}
+                        onChange={(e) => setFormData({ ...formData, market: e.target.value })}
+                        placeholder="e.g. Manhattan, Miami, Los Angeles"
+                        className="h-12"
+                        data-testid="input-contact-market"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="timeframe" className="block text-sm font-medium mb-2">
+                        Timeline
+                      </label>
+                      <Input
+                        id="timeframe"
+                        type="text"
+                        value={formData.timeframe}
+                        onChange={(e) => setFormData({ ...formData, timeframe: e.target.value })}
+                        placeholder="e.g. 30-60 days"
+                        className="h-12"
+                        data-testid="input-contact-timeframe"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
                     <label htmlFor="message" className="block text-sm font-medium mb-2">
-                      Message *
+                      Message / Deal Context *
                     </label>
                     <Textarea
                       id="message"
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Tell us about your real estate needs..."
+                      placeholder="Share what you're trying to accomplish, constraints, and decision criteria."
                       required
                       rows={6}
                       className="resize-none"

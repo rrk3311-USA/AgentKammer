@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { X, Send, Minimize2, Maximize2, Sparkles, MousePointer, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home, Mic, MicOff, Volume2, VolumeX, CreditCard, Plane, Percent, PiggyBank, Briefcase, Calculator, ShieldCheck, Gift, TrendingUp, Wallet, Building, FileText, RefreshCw } from "lucide-react";
+import { X, Send, Minimize2, Maximize2, TrendingDown, Clock, Shield, GraduationCap, DollarSign, Home, Mic, MicOff, Volume2, VolumeX, CreditCard, Plane, Percent, PiggyBank, Briefcase, Calculator, ShieldCheck, Gift, TrendingUp, Wallet, Building, FileText, RefreshCw } from "lucide-react";
+import { ChatCircle } from "@phosphor-icons/react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import agentAvatar from "@assets/generated_images/Tuxedo_professional_on_phone_cd981587.png";
@@ -180,58 +181,25 @@ export function FloatingChatAssistant() {
 
   if (!isOpen) {
     return (
-      <div className="fixed right-2 bottom-16 z-50 scale-[0.8]">
+      <div className="fixed right-6 bottom-6 z-50">
         <button
           onClick={() => {
             playButtonClick();
             setIsOpen(true);
           }}
-          className="relative group"
+          className="group flex h-14 w-14 items-center justify-center rounded-full bg-[#0e1624] text-white shadow-xl ring-1 ring-white/15 transition hover:scale-105 hover:bg-[#121f33]"
           data-testid="button-open-chat"
+          aria-label="Open chat"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-primary/20 to-primary/10 blur-2xl group-hover:blur-3xl transition-all" />
-          
-          <div className="relative group-hover:scale-105 transition-transform">
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 animate-sparkle opacity-0">
-              <Sparkles className="w-4 h-4 text-primary" />
-            </div>
-            <div className="absolute top-0 left-1/3 -translate-x-1/2 animate-sparkle-delayed opacity-0">
-              <Sparkles className="w-3 h-3 text-primary" />
-            </div>
-            <div className="absolute top-1 right-1/3 translate-x-1/2 animate-sparkle-delayed-2 opacity-0">
-              <MousePointer className="w-3 h-3 text-primary" />
-            </div>
-            <div className="absolute top-3 left-1/4 animate-sparkle-delayed-3 opacity-0">
-              <MousePointer className="w-3 h-3 text-primary" />
-            </div>
-            
-            <div className="text-center animate-wiggle">
-              <div className="filter drop-shadow-2xl text-5xl">
-                🎩
-              </div>
-            </div>
-
-            <div className="mt-2 flex flex-col items-end space-y-1">
-              <Badge className="bg-gray-700 text-background border-none shadow-md text-[0.65rem] px-1.5 py-0.5 flex items-center gap-1">
-                <div className="relative w-1.5 h-1.5">
-                  <div className="absolute inset-0 rounded-full bg-green-500 animate-ping-slow" />
-                  <div className="absolute inset-0 rounded-full bg-red-500 animate-ping-slow-red" />
-                </div>
-                <span className="font-semibold">Live</span>
-              </Badge>
-              
-              <Badge className="bg-foreground text-background border-none shadow-md text-xs px-2 py-0.5">
-                Chat with Agent K
-              </Badge>
-            </div>
-          </div>
+          <ChatCircle size={24} weight="regular" />
+          <span className="absolute right-2 top-2 h-2.5 w-2.5 rounded-full bg-emerald-500 ring-2 ring-[#0e1624]" />
         </button>
       </div>
     );
   }
 
   return (
-    <div className="fixed right-2 bottom-16 z-50 scale-[0.8]">
+    <div className="fixed right-6 bottom-6 z-50">
       <Card className={`w-96 shadow-2xl border-2 border-primary/50 overflow-hidden transition-all duration-300 flex flex-col ${
         isMinimized ? "h-16" : "min-h-[420px] max-h-[calc(100vh-6rem)] h-[600px]"
       }`}>

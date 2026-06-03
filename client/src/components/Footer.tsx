@@ -1,117 +1,106 @@
-import { SiReplit, SiNvidia, SiClaude, SiAnthropic } from "react-icons/si";
-import { Brain, Clock, TrendingUp, TrendingDown, Home } from "lucide-react";
-import { Link } from "wouter";
+import { ArrowRight } from "lucide-react";
+
+const marketSnapshot = [
+  { label: "Median Price", value: "$2.18M", delta: "+6.2%", note: "vs. last quarter" },
+  { label: "Inventory", value: "4,382", delta: "-8.7%", note: "vs. last quarter" },
+  { label: "Days on Market", value: "47", delta: "-12%", note: "vs. last quarter" },
+  { label: "Price / Sq Ft", value: "$1,850", delta: "+4.1%", note: "vs. last quarter" },
+];
+
+const marketActivity = [
+  ["New Listings", "312"],
+  ["Contracts Signed", "198"],
+  ["Price Reductions", "86"],
+  ["Off Market", "42"],
+];
 
 export function Footer() {
-  const lastUpdate = new Date();
-  const metrics = [
-    { label: "30Y Fixed", value: "6.82%", delta: "0.03", direction: "down" as const },
-    { label: "15Y Fixed", value: "6.09%", delta: "0.05", direction: "down" as const },
-    { label: "5/1 ARM", value: "6.54%", delta: "0.02", direction: "down" as const },
-    { label: "Prime Rate", value: "8.50%" },
-    { label: "Fed Rate", value: "5.50%" },
-    { label: "Jumbo 30Y", value: "7.02%", delta: "0.01", direction: "up" as const },
-  ];
-
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('en-US', { 
-      hour: '2-digit', 
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: true 
-    });
-  };
-
-  const formatDate = (date: Date) => {
-    return date.toLocaleDateString('en-US', { 
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
-    });
-  };
-
   return (
-    <footer className="relative overflow-hidden">
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#d4af37]/60 to-transparent" />
-      <div className="bg-[#081a33] border-y border-white/10">
-        <div className="max-w-7xl mx-auto px-6 md:px-8 py-8 md:py-10">
-          <div className="flex items-center justify-center gap-4 mb-7">
-          <div className="relative">
-            <div className="w-12 h-12 rounded-full border-3 border-[#d4af37] flex items-center justify-center bg-gradient-to-br from-[#d4af37]/10 to-[#d4af37]/5" style={{
-              boxShadow: 'inset 0 0 20px rgba(212,175,55,0.2), 0 0 15px rgba(212,175,55,0.3)'
-            }}>
-              <Clock className="h-4 w-4 text-[#d4af37]" />
-            </div>
-            <div className="absolute inset-0 rounded-full border-2 border-[#d4af37]/20" style={{
-              animation: 'tickPulse 2s ease-in-out infinite'
-            }} />
-          </div>
-          <div className="text-center sm:text-left">
-            <p className="text-lg font-bold text-[#d4af37] mb-1" style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}>Live Mortgage Rate Snapshot</p>
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-sm font-bold text-white">{formatTime(lastUpdate)}</span>
-              <span className="text-sm text-white/60">{formatDate(lastUpdate)}</span>
-            </div>
-          </div>
-          </div>
+    <footer className="border-t border-[#263241] bg-[#07111f] text-[#F6F3EB]">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 py-10 lg:grid-cols-[1fr_0.42fr] lg:px-10">
+        <section>
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-[#D6B45F]">Market Intelligence Snapshot</p>
+          <h2 className="text-3xl font-semibold" style={{ fontFamily: "Noe Display, var(--font-serif)" }}>
+            Manhattan Market Overview
+          </h2>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-6">
-            <Link href="/real-estate" className="flex flex-col items-center gap-1 px-3 py-3 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-blue-500/15 transition-colors">
-              <Home className="h-4 w-4 text-blue-400" />
-              <span className="text-[0.65rem] font-medium text-blue-300">Buyers Market</span>
-            </Link>
-            {metrics.map((metric) => (
-              <div key={metric.label} className="flex flex-col items-center gap-1 px-3 py-3 rounded-xl border border-white/10 bg-white/[0.03]">
-                <span className="text-[0.65rem] uppercase tracking-wide text-white/70 font-medium">{metric.label}</span>
-                <div className="flex items-center gap-1.5">
-                  <span className="font-mono font-bold text-white text-base">{metric.value}</span>
-                  {metric.delta && metric.direction === "down" && (
-                    <div className="flex items-center gap-0.5">
-                      <TrendingDown className="h-3 w-3 text-green-400" />
-                      <span className="text-green-400 text-xs font-medium">{metric.delta}</span>
-                    </div>
-                  )}
-                  {metric.delta && metric.direction === "up" && (
-                    <div className="flex items-center gap-0.5">
-                      <TrendingUp className="h-3 w-3 text-red-400" />
-                      <span className="text-red-400 text-xs font-medium">{metric.delta}</span>
-                    </div>
-                  )}
-                </div>
+          <div className="mt-5 grid grid-cols-2 overflow-hidden rounded-md border border-[#F6F3EB]/16 lg:grid-cols-4">
+            {marketSnapshot.map((metric) => (
+              <div key={metric.label} className="border-b border-r border-[#F6F3EB]/16 p-5 last:border-r-0 lg:border-b-0">
+                <p className="text-[0.66rem] font-bold uppercase tracking-[0.18em] text-[#D6B45F]">{metric.label}</p>
+                <p className="mt-4 font-mono text-3xl leading-none text-[#F6F3EB]">{metric.value}</p>
+                <p className="mt-3 text-sm font-semibold text-[#F6F3EB]">{metric.delta}</p>
+                <p className="mt-1 text-xs text-[#F6F3EB]/62">{metric.note}</p>
               </div>
             ))}
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <Brain className="h-3 w-3 text-[#79d3ff]" />
-            <span className="text-xs font-medium text-white/90">Powered by AI</span>
-            <div className="flex flex-wrap items-center gap-2 text-xs">
-              <div className="flex items-center gap-0.5 text-white/90">
-                <SiReplit className="h-3 w-3" />
-                <span className="font-medium">Replit</span>
+          <a href="/#reports" className="mt-6 inline-flex items-center text-xs font-bold uppercase tracking-[0.16em] text-[#D6B45F]">
+            View Full Market Report
+            <ArrowRight className="ml-3 h-4 w-4" />
+          </a>
+        </section>
+
+        <aside className="border-t border-[#F6F3EB]/14 pt-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-2">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#D6B45F]">Market Activity</p>
+          <p className="mt-1 text-sm font-semibold text-[#F6F3EB]">Last 7 Days</p>
+          <div className="mt-5 divide-y divide-[#F6F3EB]/12 border-y border-[#F6F3EB]/12">
+            {marketActivity.map(([label, value]) => (
+              <div key={label} className="flex items-center justify-between py-3 text-sm">
+                <span className="text-[#F6F3EB]/82">{label}</span>
+                <span className="font-mono text-[#F6F3EB]">{value}</span>
               </div>
-              <div className="flex items-center gap-0.5 text-white/90">
-                <SiAnthropic className="h-3 w-3" />
-                <span className="font-medium">Anthropic</span>
-              </div>
-              <div className="flex items-center gap-0.5 text-white/90">
-                <SiClaude className="h-3 w-3" />
-                <span className="font-medium">Claude</span>
-              </div>
-              <div className="flex items-center gap-0.5 text-white/90">
-                <SiNvidia className="h-3 w-3" />
-                <span className="font-medium">NVIDIA</span>
-              </div>
-            </div>
+            ))}
           </div>
+          <a href="/#intelligence" className="mt-6 inline-flex items-center text-xs font-bold uppercase tracking-[0.16em] text-[#D6B45F]">
+            View All Activity
+            <ArrowRight className="ml-3 h-4 w-4" />
+          </a>
+        </aside>
+      </div>
+
+      <div className="border-t border-[#F6F3EB]/12">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-6 py-7 md:grid-cols-[0.8fr_1fr_0.7fr] lg:px-10">
+          <div className="flex items-center gap-4">
+            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-[#D6B45F]/70 text-[#D6B45F]">
+              <span className="text-3xl font-semibold" style={{ fontFamily: "Canela, var(--font-display)" }}>K</span>
+            </div>
+            <p className="max-w-xs text-sm font-semibold leading-6 text-[#F6F3EB]/86">
+              Discretion. Strategy. Execution. That is the Agent Kammer Standard.
+            </p>
+          </div>
+
+          <form
+            className="border-t border-[#F6F3EB]/14 pt-5 md:border-l md:border-t-0 md:pl-8 md:pt-0"
+            onSubmit={(event) => {
+              event.preventDefault();
+              const form = event.currentTarget;
+              const input = form.querySelector("input") as HTMLInputElement | null;
+              if (input) input.value = "";
+              alert("Subscribed. You will receive weekly Manhattan market intelligence.");
+            }}
+          >
+            <label className="text-sm font-semibold text-[#F6F3EB]">Get weekly Manhattan market intelligence.</label>
+            <div className="mt-4 flex max-w-md">
+              <input
+                type="email"
+                required
+                placeholder="Enter your email"
+                className="h-11 min-w-0 flex-1 border border-[#D6B45F]/50 bg-transparent px-4 text-sm text-[#F6F3EB] outline-none placeholder:text-[#F6F3EB]/42"
+              />
+              <button className="h-11 border border-[#D6B45F] bg-[#D6B45F] px-5 text-xs font-bold uppercase tracking-[0.14em] text-[#07111f]">
+                Subscribe
+              </button>
+            </div>
+          </form>
+
+          <address className="border-t border-[#F6F3EB]/14 pt-5 text-sm not-italic leading-7 text-[#F6F3EB]/86 md:border-l md:border-t-0 md:pl-8 md:pt-0">
+            <a href="mailto:info@agentkammer.com" className="block hover:underline">info@agentkammer.com</a>
+            <a href="tel:+12123456789" className="block hover:underline">(212) 123-4567</a>
+            <span>New York, NY</span>
+          </address>
         </div>
       </div>
-      <style>{`
-        @keyframes tickPulse {
-          0%, 100% { transform: scale(1); opacity: 0.3; }
-          50% { transform: scale(1.1); opacity: 0.6; }
-        }
-      `}</style>
     </footer>
   );
 }

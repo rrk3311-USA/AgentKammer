@@ -11,7 +11,11 @@ import { Footer } from "@/components/Footer";
 const FloatingChatAssistant = lazy(() => import("@/components/FloatingChatAssistant").then((module) => ({ default: module.FloatingChatAssistant })));
 
 const Home = lazy(() => import("@/pages/Home"));
+const About = lazy(() => import("@/pages/About"));
 const RealEstate = lazy(() => import("@/pages/RealEstate"));
+const RealEstateLight = lazy(() => import("@/pages/RealEstateLight"));
+const RealEstateLightV2 = lazy(() => import("@/pages/RealEstateLightV2"));
+const RealEstateLightV3 = lazy(() => import("@/pages/RealEstateLightV3"));
 const CategoryPage = lazy(() => import("@/pages/CategoryPage"));
 const SavedSearches = lazy(() => import("@/pages/SavedSearches"));
 const GetPreapproved = lazy(() => import("@/pages/GetPreapproved"));
@@ -41,8 +45,6 @@ const FreeTools = lazy(() => import("@/pages/FreeTools"));
 const Dashboard = lazy(() => import("@/pages/Dashboard"));
 const Refinancing = lazy(() => import("@/pages/Refinancing"));
 const EShop = lazy(() => import("@/pages/EShop"));
-const MediaCenter = lazy(() => import("@/pages/MediaCenter"));
-const ContentDetail = lazy(() => import("@/pages/ContentDetail"));
 const ArtGallery = lazy(() => import("@/pages/ArtGallery"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
@@ -64,15 +66,19 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/about" component={About} />
       <Route path="/real-estate" component={RealEstate} />
+      <Route path="/real-estate-light" component={RealEstateLight} />
+      <Route path="/real-estate-light-v2" component={RealEstateLightV2} />
+      <Route path="/real-estate-light-v3" component={RealEstateLightV3} />
       
       {/* Real Estate Category Routes */}
       <Route path="/buying" component={() => <CategoryPage categoryId="buying" />} />
       <Route path="/selling" component={() => <CategoryPage categoryId="selling" />} />
       <Route path="/refinancing" component={Refinancing} />
       <Route path="/e-shop" component={EShop} />
-      <Route path="/media-center" component={MediaCenter} />
-      <Route path="/media-center/:slug" component={ContentDetail} />
+      <Route path="/media-center" component={Home} />
+      <Route path="/media-center/:slug" component={Home} />
       
       {/* Dashboard & Profile */}
       <Route path="/dashboard" component={Dashboard} />

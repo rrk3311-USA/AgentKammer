@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Link } from "wouter";
 import * as LucideIcons from "lucide-react";
 import {
@@ -224,6 +225,93 @@ const CATEGORY_CONFIG: Record<string, {
   },
 };
 
+const REAL_ESTATE_ACCORDION_CONTENT: Record<string, Array<{ title: string; points: string[] }>> = {
+  buying: [
+    {
+      title: "1) Buy-Side Strategy Session",
+      points: [
+        "Define budget range, timing, neighborhoods, and property type.",
+        "Build a purchase plan with financing checkpoints and offer rules.",
+        "Set clear non-negotiables so decisions stay fast and objective.",
+      ],
+    },
+    {
+      title: "2) Pre-Approval and Financing Setup",
+      points: [
+        "Compare lender options and rate structures before touring heavily.",
+        "Stress-test monthly payment, reserves, and closing-cost scenarios.",
+        "Align loan type to your hold period and risk profile.",
+      ],
+    },
+    {
+      title: "3) Property Search and Opportunity Filter",
+      points: [
+        "Prioritize listings by upside, downside risk, and resale liquidity.",
+        "Track price changes and time-on-market to spot leverage.",
+        "Focus tours on high-conviction targets only.",
+      ],
+    },
+    {
+      title: "4) Offer Positioning and Negotiation",
+      points: [
+        "Structure offer terms to improve acceptance odds without overpaying.",
+        "Use comps, inspection posture, and timeline to gain leverage.",
+        "Negotiate credits/repairs where they improve long-term economics.",
+      ],
+    },
+    {
+      title: "5) Contract-to-Close Execution",
+      points: [
+        "Coordinate inspections, attorney review, lender conditions, and appraisal.",
+        "Keep all milestones on schedule to protect terms and close date.",
+        "Final walk-through and settlement checks before funding.",
+      ],
+    },
+  ],
+  selling: [
+    {
+      title: "1) Pricing and Positioning Blueprint",
+      points: [
+        "Set list-price strategy from comps, demand pockets, and timing.",
+        "Balance speed vs. premium outcome with scenario planning.",
+        "Define the ideal buyer profile and message upfront.",
+      ],
+    },
+    {
+      title: "2) Pre-List Preparation",
+      points: [
+        "Prioritize repairs, staging, and presentation upgrades by ROI.",
+        "Prepare photography/video package and launch assets.",
+        "Remove friction points that weaken offers later.",
+      ],
+    },
+    {
+      title: "3) Launch and Demand Generation",
+      points: [
+        "Coordinate listing release timing for maximum early momentum.",
+        "Drive qualified traffic through agent network and targeted exposure.",
+        "Monitor showing feedback and adjust quickly.",
+      ],
+    },
+    {
+      title: "4) Offer Management and Negotiation",
+      points: [
+        "Compare offers by certainty, net proceeds, and timeline risk.",
+        "Use counter strategy to improve both price and terms.",
+        "Control contingency risk before accepting.",
+      ],
+    },
+    {
+      title: "5) Contract-to-Close Risk Control",
+      points: [
+        "Manage inspections, appraisal risk, and buyer financing milestones.",
+        "Coordinate attorney/title/closing logistics to avoid slippage.",
+        "Protect net outcome through final settlement review.",
+      ],
+    },
+  ],
+};
+
 function ProductCard({ offer }: { offer: ProductOffer }) {
   const matchScore = calculateMatchScore(offer);
   const explanation = getMatchExplanation(offer, matchScore);
@@ -378,6 +466,7 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
   const filteredOffers = activeTab === 'All' 
     ? offers 
     : offers.filter(offer => offer.subcategory === activeTab);
+  const accordionContent = REAL_ESTATE_ACCORDION_CONTENT[categoryId] || [];
 
   return (
     <div className="min-h-screen">
@@ -640,27 +729,64 @@ export default function CategoryPage({ categoryId }: CategoryPageProps) {
                 </Tabs>
               )}
               
-              {/* Products Grid */}
-              <div className="space-y-6">
-                {filteredOffers.length > 0 ? (
-                  filteredOffers.map((offer) => (
-                    <ProductCard key={offer.id} offer={offer} />
-                  ))
-                ) : (
-                  <Card className="p-12 text-center">
-                    <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
-                      <IconComponent className="h-8 w-8 text-muted-foreground" />
-                    </div>
-                    <h3 className="font-serif text-xl font-semibold mb-2">No Offers Found</h3>
-                    <p className="text-muted-foreground mb-6">
-                      We're adding more {config.name.toLowerCase()} offers soon. Check back later or explore other categories.
+              {/* Buying/Selling detailed accordion content */}
+              {accordionContent.length > 0 ? (
+                <Card className="border-white/10 bg-white/[0.03] p-4 sm:p-6">
+                  <div className="mb-4">
+                    <h3 className="font-serif text-2xl text-white mb-2">
+                      {categoryId === "buying" ? "Buying Process, Simplified" : "Selling Process, Simplified"}
+                    </h3>
+                    <p className="text-white/70 text-sm">
+                      A structured step-by-step framework so you can move with clarity and control.
                     </p>
-                    <Link href="/">
-                      <Button variant="outline">Browse All Categories</Button>
-                    </Link>
-                  </Card>
-                )}
-              </div>
+                  </div>
+                  <Accordion type="single" collapsible className="w-full">
+                    {accordionContent.map((section, idx) => (
+                      <AccordionItem
+                        key={section.title}
+                        value={`section-${idx}`}
+                        className="border-b border-white/10"
+                      >
+                        <AccordionTrigger className="text-left text-white hover:text-[#d4af37]">
+                          {section.title}
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <ul className="space-y-2">
+                            {section.points.map((point) => (
+                              <li key={point} className="flex items-start gap-2 text-sm text-white/80">
+                                <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#d4af37] shrink-0" />
+                                <span>{point}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </Card>
+              ) : (
+                /* Products Grid */
+                <div className="space-y-6">
+                  {filteredOffers.length > 0 ? (
+                    filteredOffers.map((offer) => (
+                      <ProductCard key={offer.id} offer={offer} />
+                    ))
+                  ) : (
+                    <Card className="p-12 text-center">
+                      <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
+                        <IconComponent className="h-8 w-8 text-muted-foreground" />
+                      </div>
+                      <h3 className="font-serif text-xl font-semibold mb-2">No Offers Found</h3>
+                      <p className="text-muted-foreground mb-6">
+                        We're adding more {config.name.toLowerCase()} offers soon. Check back later or explore other categories.
+                      </p>
+                      <Link href="/">
+                        <Button variant="outline">Browse All Categories</Button>
+                      </Link>
+                    </Card>
+                  )}
+                </div>
+              )}
             </>
           )}
         </div>

@@ -4,36 +4,66 @@ import { Brain } from "lucide-react";
 import { SiReplit, SiAnthropic, SiClaude, SiNvidia } from "react-icons/si";
 
 const productCategories = [
-  "Credit Cards", "Investing", "Real Estate", "Insurance", "Loans",
-  "Banking", "Tax Tools", "Refinancing", "Student Loans", "Crypto"
+  "Off-Market Deals",
+  "Price Per SqFt",
+  "Absorption Rate",
+  "Inventory Delta",
+  "Days on Market",
+  "Negotiation Leverage",
+  "Seller Motivation",
+  "Cap Rate",
+  "Building Intelligence",
+  "Comparable Analysis",
 ];
 
 const codeSnippets = [
-  "const match = analyze()",
-  "const score = compare()",
-  "const rank = score()",
-  "const winner = optimize()",
-  "const result = match()",
-  "const data = fetch()",
+  "const comps = analyze()",
+  "const ppsf = benchmark()",
+  "const edge = optimize()",
+  "const deal = score()",
+  "const seller = qualify()",
+  "const leverage = rank()",
 ];
 
 export function AgenticEngineVisual() {
-  const [codeDrops, setCodeDrops] = useState<{ id: number; code: string; delay: number; direction: 'up' | 'down'; spreadIndex: number }[]>([]);
+  const [codeDrops, setCodeDrops] = useState<{ id: number; code: string; delay: number; startX: number; startY: number; duration: number; color: string }[]>([]);
   const [floatingCategories, setFloatingCategories] = useState<{ id: number; text: string; x: number; y: number; delay: number }[]>([]);
 
   useEffect(() => {
-    // Generate code drops - cascading up and down from center with horizontal spread
-    const drops: Array<{ id: number; code: string; delay: number; direction: 'up' | 'down'; spreadIndex: number }> = Array.from({ length: 12 }, (_, i) => ({
-      id: i,
-      code: codeSnippets[i % codeSnippets.length],
-      delay: (i % 6) * 0.2,
-      direction: (i < 6 ? 'up' : 'down') as 'up' | 'down',
-      spreadIndex: (i % 6) // 0-5 for spread position
-    }));
+    // Generate code drops that converge into brain center from random edges.
+    const drops: Array<{ id: number; code: string; delay: number; startX: number; startY: number; duration: number; color: string }> = Array.from({ length: 12 }, (_, i) => {
+      const entrySide = i % 4;
+      let startX = 0;
+      let startY = 0;
+
+      if (entrySide === 0) {
+        startX = -420 + Math.random() * 840;
+        startY = -220 - Math.random() * 120;
+      } else if (entrySide === 1) {
+        startX = -420 - Math.random() * 160;
+        startY = -170 + Math.random() * 360;
+      } else if (entrySide === 2) {
+        startX = 420 + Math.random() * 160;
+        startY = -170 + Math.random() * 360;
+      } else {
+        startX = -420 + Math.random() * 840;
+        startY = 220 + Math.random() * 140;
+      }
+
+      return {
+        id: i,
+        code: codeSnippets[i % codeSnippets.length],
+        delay: Math.random() * 2.4,
+        startX,
+        startY,
+        duration: 2.4 + Math.random() * 1.2,
+        color: Math.random() > 0.5 ? "#00ff88" : "#00d4ff",
+      };
+    });
     setCodeDrops(drops);
 
     // Generate floating categories - more with some closer to core
-    const categories = Array.from({ length: 18 }, (_, i) => {
+    const categories = Array.from({ length: 10 }, (_, i) => {
       let x, y;
       if (i < 8) {
         // Categories closer to the core (center area)
@@ -51,7 +81,7 @@ export function AgenticEngineVisual() {
         text: productCategories[Math.floor(Math.random() * productCategories.length)],
         x: Math.max(50, Math.min(950, x)),
         y: Math.max(50, Math.min(550, y)),
-        delay: Math.random() * 3
+        delay: Math.random() * 2.2
       };
     });
     setFloatingCategories(categories);
@@ -62,7 +92,7 @@ export function AgenticEngineVisual() {
       className="relative w-full rounded-2xl overflow-hidden"
       data-testid="agentic-engine-visual"
     >
-      <div className="relative w-full aspect-[16/9] min-h-[220px]">
+      <div className="relative w-full aspect-[16/6.5] min-h-[160px]">
         {/* Background image */}
         <img
           src={brainImage}
@@ -127,53 +157,30 @@ export function AgenticEngineVisual() {
             }}
           />
 
-          {/* Cascading code from center - upward */}
-          {codeDrops.filter(d => d.direction === 'up').map((drop, idx) => {
-            const spreadAmount = (drop.spreadIndex - 2.5) * 80;
-            return (
-              <text
-                key={`code-up-${drop.id}`}
-                x="485"
-                y="210"
-                fontSize="12"
-                fill="#00ff88"
-                opacity="0.8"
-                fontFamily="monospace"
-                textAnchor="middle"
-                filter="url(#codeGlow)"
-                style={{
-                  animation: `codeCascadeUp${drop.spreadIndex} 4s ease-in infinite`,
-                  animationDelay: `${drop.delay}s`,
-                }}
-              >
-                {drop.code}
-              </text>
-            );
-          })}
-
-          {/* Cascading code from center - downward */}
-          {codeDrops.filter(d => d.direction === 'down').map((drop, idx) => {
-            const spreadAmount = (drop.spreadIndex - 2.5) * 80;
-            return (
-              <text
-                key={`code-down-${drop.id}`}
-                x="485"
-                y="210"
-                fontSize="12"
-                fill="#00d4ff"
-                opacity="0.8"
-                fontFamily="monospace"
-                textAnchor="middle"
-                filter="url(#codeGlow)"
-                style={{
-                  animation: `codeCascadeDown${drop.spreadIndex} 4s ease-in infinite`,
-                  animationDelay: `${drop.delay}s`,
-                }}
-              >
-                {drop.code}
-              </text>
-            );
-          })}
+          {/* Incoming code from random sides into center */}
+          {codeDrops.map((drop) => (
+            <text
+              key={`code-in-${drop.id}`}
+              x="485"
+              y="210"
+              fontSize="12"
+              fill={drop.color}
+              opacity="0.85"
+              fontFamily="monospace"
+              textAnchor="middle"
+              filter="url(#codeGlow)"
+              style={{
+                transform: `translate(${drop.startX}px, ${drop.startY}px)`,
+                animationName: "codeIngest",
+                animationDuration: `${drop.duration}s`,
+                animationTimingFunction: "cubic-bezier(0.16, 0.84, 0.24, 1)",
+                animationIterationCount: "infinite",
+                animationDelay: `${drop.delay}s`,
+              }}
+            >
+              {drop.code}
+            </text>
+          ))}
 
           {/* Floating category labels with glow */}
           {floatingCategories.map((cat) => (
@@ -281,19 +288,22 @@ export function AgenticEngineVisual() {
           }
         }
 
-        @keyframes codeCascadeUp0 { 0% { transform: translateY(0) translateX(-80px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-150px) translateX(-80px); opacity: 0; } }
-        @keyframes codeCascadeUp1 { 0% { transform: translateY(0) translateX(-50px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-150px) translateX(-50px); opacity: 0; } }
-        @keyframes codeCascadeUp2 { 0% { transform: translateY(0) translateX(-20px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-150px) translateX(-20px); opacity: 0; } }
-        @keyframes codeCascadeUp3 { 0% { transform: translateY(0) translateX(20px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-150px) translateX(20px); opacity: 0; } }
-        @keyframes codeCascadeUp4 { 0% { transform: translateY(0) translateX(50px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-150px) translateX(50px); opacity: 0; } }
-        @keyframes codeCascadeUp5 { 0% { transform: translateY(0) translateX(80px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(-150px) translateX(80px); opacity: 0; } }
-
-        @keyframes codeCascadeDown0 { 0% { transform: translateY(0) translateX(-80px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(150px) translateX(-80px); opacity: 0; } }
-        @keyframes codeCascadeDown1 { 0% { transform: translateY(0) translateX(-50px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(150px) translateX(-50px); opacity: 0; } }
-        @keyframes codeCascadeDown2 { 0% { transform: translateY(0) translateX(-20px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(150px) translateX(-20px); opacity: 0; } }
-        @keyframes codeCascadeDown3 { 0% { transform: translateY(0) translateX(20px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(150px) translateX(20px); opacity: 0; } }
-        @keyframes codeCascadeDown4 { 0% { transform: translateY(0) translateX(50px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(150px) translateX(50px); opacity: 0; } }
-        @keyframes codeCascadeDown5 { 0% { transform: translateY(0) translateX(80px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(150px) translateX(80px); opacity: 0; } }
+        @keyframes codeIngest {
+          0% {
+            opacity: 0;
+          }
+          12% {
+            opacity: 0.9;
+          }
+          72% {
+            transform: translate(0px, 0px);
+            opacity: 0.85;
+          }
+          100% {
+            transform: translate(0px, 0px);
+            opacity: 0;
+          }
+        }
 
         @keyframes categoryPulse {
           0%, 100% {
