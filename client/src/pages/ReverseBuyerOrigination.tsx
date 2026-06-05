@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { TrendingUp, DollarSign, Lock, Zap, CheckCircle, Phone } from "lucide-react";
+import { TrendingUp, Lock, CheckCircle, Phone, Calculator } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
 export default function ReverseBuyerOrigination() {
@@ -15,17 +13,11 @@ export default function ReverseBuyerOrigination() {
   const [purchasePrice, setPurchasePrice] = useState(1);
   const { toast } = useToast();
 
-  // Calculate savings based on selected year and purchase price
   const calculateSavings = (years: number, priceInMillions: number) => {
-    // ONE-TIME commission savings: 1.5% difference (2.5% traditional - 1% Agent Kammer)
     const commissionSavings = priceInMillions * 1000000 * 0.015;
-    
-    // ONGOING monthly APR savings: ~1% APR difference on 80% LTV loan
-    // At 7.25% vs 6.25% on $800k loan = ~$533/month savings per $1M purchase
     const monthlySavingsPerMillion = 533;
     const totalMonthlyPayments = years * 12;
     const aprSavings = monthlySavingsPerMillion * priceInMillions * totalMonthlyPayments;
-    
     return Math.round(commissionSavings + aprSavings);
   };
 
@@ -44,7 +36,7 @@ export default function ReverseBuyerOrigination() {
       setPhone("");
       toast({
         title: "Profile Created",
-        description: "We'll analyze lender & broker options and send your savings estimate within 24 hours.",
+        description: "Your savings estimate arrives within 24 hours.",
       });
     },
     onError: () => {
@@ -56,408 +48,201 @@ export default function ReverseBuyerOrigination() {
     },
   });
 
-  const handleHeroSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (phone.trim()) {
-      createProfileMutation.mutate(phone);
-    }
+    if (phone.trim()) createProfileMutation.mutate(phone);
   };
 
   const scenarios = [
-    {
-      tag: "Scenario 1",
-      title: "Highest cost — traditional route",
-      apr: "~7.25%",
-      commission: "2.5%",
-      credits: "none",
-      monthly: "~$6,814",
-      note: "Paying full freight. No competition. No concierge.",
-      highlight: false,
-    },
-    {
-      tag: "Scenario 2",
-      title: "Medium-high cost — some rate shopping",
-      apr: "6.9–7.1%",
-      commission: "2.5%",
-      credits: "minimal",
-      monthly: "~$6,650",
-      note: "Better than nothing, but still $20k+ more over 5 years.",
-      highlight: false,
-    },
-    {
-      tag: "Scenario 3",
-      title: "Moderate cost — discount broker, one lender",
-      apr: "6.75–6.9%",
-      commission: "~2%",
-      credits: "small",
-      monthly: "~$6,575",
-      note: "Good progress, but still $12k–$18k more.",
-      highlight: false,
-    },
-    {
-      tag: "Scenario 4",
-      title: "Low cost — 2–3 lenders + lean broker",
-      apr: "6.50–6.70%",
-      commission: "1.5–2%",
-      credits: "$5k–$10k",
-      monthly: "~$6,450",
-      note: "Now saving $20k–$30k over 5 years.",
-      highlight: false,
-    },
-    {
-      tag: "Scenario 5",
-      title: "Agent Kammer Reverse Buyer Origination",
-      apr: "6.10–6.40%",
-      commission: "~1%",
-      credits: "$5k–$20k+",
-      monthly: "~$6,200",
-      note: "Typical savings: $35k–$55k in 5 years with expert concierge service.",
-      highlight: true,
-    },
+    { tag: "Traditional", apr: "~7.25%", commission: "2.5%", highlight: false },
+    { tag: "Optimized", apr: "6.75–7.0%", commission: "1.5–2.0%", highlight: false },
+    { tag: "Agent Kammer", apr: "6.10–6.40%", commission: "~1%", highlight: true },
   ];
 
   const steps = [
-    {
-      number: 1,
-      title: "Real Estate Buyer Profile",
-      description:
-        "You share your ideal price range, down payment, credit band (self-reported), monthly comfort, and target cities. No hard pulls. No pressure.",
-    },
-    {
-      number: 2,
-      title: "Lenders quietly compete",
-      description:
-        "We send your profile to multiple trusted lenders for APR bands, estimated payments, credits, and closing-cost ranges.",
-    },
-    {
-      number: 3,
-      title: "Brokerages quietly compete",
-      description:
-        "We compare traditional brands, 100% models, and independent brokerages for the leanest fee structure.",
-    },
-    {
-      number: 4,
-      title: "One clean summary",
-      description:
-        "You get a simple RBO report: APR ranges, estimated monthly payment, credits, and savings vs traditional path.",
-    },
+    { number: 1, title: "Buyer Profile", description: "Price range, down payment, credit band, target areas. No hard pulls." },
+    { number: 2, title: "Lenders Compete", description: "APR bands, payments, credits, and closing costs — side by side." },
+    { number: 3, title: "Brokers Compete", description: "Fee structures compared across traditional and lean models." },
+    { number: 4, title: "One Summary", description: "A single RBO report with recommended path and next actions." },
+  ];
+
+  const deliverables = [
+    "APR and closing-cost comparison",
+    "Broker fee structure with net impact",
+    "Five-year cost delta vs traditional route",
+    "Recommended execution path",
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-background">
-      {/* HERO SECTION */}
-      <section className="py-12 lg:py-16 bg-gradient-to-br from-[#0a1628] via-[#0f1f3d] to-[#0a1628] text-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            {/* Left: Copy + CTA */}
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-2 h-2 rounded-full bg-[#d4af37]"></div>
-                <span className="text-sm font-semibold text-[#d4af37] tracking-wide">A Private Banking Model for Homebuyers</span>
-              </div>
-              <h1 className="font-serif text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-                Reverse Buyer Origination
-              </h1>
-              <p className="text-lg text-white/90 mb-2 font-semibold">
-                Putting the power back into the buyers hands
-              </p>
-              <p className="text-base text-white/70 mb-6 leading-relaxed">
-                Agent Kammer Reverse Buyer Origination builds your buyer profile once, then quietly shops multiple lenders and brokerages to find the smartest combination of APR, credits, and fees — before you ever write an offer.
-              </p>
+    <main className="min-h-screen bg-brand-ivory text-brand-graphite">
+      <section className="relative overflow-hidden bg-brand-midnight text-brand-ivory">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.92)_0%,rgba(15,23,42,0.78)_45%,rgba(15,23,42,0.5)_100%)]" />
+        <div className="relative mx-auto grid min-h-[580px] max-w-7xl grid-cols-1 items-center gap-10 px-6 py-16 lg:grid-cols-[1fr_1fr] lg:px-10">
+          <div>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.26em] text-brand-champagne">Buy</p>
+            <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-7xl">Reverse Buyer Origination™</h1>
+            <p className="mt-6 max-w-xl text-lg leading-8 text-brand-ivory/82">
+              Strategy before search. Structure before offers.
+            </p>
 
-              {!submitted ? (
-                <form onSubmit={handleHeroSubmit} className="flex gap-3 mb-6" data-testid="form-rbo-hero">
-                  <div className="flex-1 flex items-center rounded-lg border border-white/20 px-3 backdrop-blur-sm" style={{ background: 'rgba(15, 32, 55, 0.8)' }}>
-                    <Phone className="h-4 w-4 text-white/70 mr-2" />
-                    <Input
-                      type="tel"
-                      id="rbo-hero-phone"
-                      placeholder="Enter your mobile number"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className="bg-transparent border-0 text-white placeholder:text-white/40 focus-visible:ring-0 focus:outline-none"
-                      data-testid="input-rbo-phone"
-                      required
-                    />
-                  </div>
-                  <Button
-                    type="submit"
-                    className="bg-[#d4af37] text-[#0a1628] hover:bg-[#e5bd4a] font-semibold px-6"
-                    disabled={createProfileMutation.isPending}
-                    data-testid="button-rbo-submit"
-                  >
-                    {createProfileMutation.isPending ? "Creating..." : "Get estimate"}
-                    <span className="ml-2">→</span>
-                  </Button>
-                </form>
-              ) : (
-                <div className="mb-6 p-4 bg-emerald-500/20 border border-emerald-500/40 rounded-lg">
-                  <div className="flex items-center gap-2 text-emerald-300">
-                    <CheckCircle className="h-5 w-5" />
-                    <span>Profile created! We'll send your savings estimate within 24 hours.</span>
-                  </div>
+            {!submitted ? (
+              <form onSubmit={handleSubmit} className="mt-8 flex max-w-md gap-2" data-testid="form-rbo-hero">
+                <div className="flex flex-1 items-center rounded-md border border-brand-ivory/25 bg-brand-ivory/8 px-3">
+                  <Phone className="mr-2 h-4 w-4 text-brand-ivory/60" />
+                  <Input
+                    type="tel"
+                    id="rbo-hero-phone"
+                    placeholder="Mobile number"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="border-0 bg-transparent text-brand-ivory placeholder:text-brand-ivory/45 focus-visible:ring-0"
+                    data-testid="input-rbo-phone"
+                    required
+                  />
                 </div>
-              )}
+                <Button
+                  type="submit"
+                  className="rounded-none border border-brand-champagne bg-brand-champagne px-7 text-brand-midnight hover:bg-brand-champagne/90"
+                  disabled={createProfileMutation.isPending}
+                  data-testid="button-rbo-submit"
+                >
+                  {createProfileMutation.isPending ? "Creating..." : "Get estimate"}
+                </Button>
+              </form>
+            ) : (
+              <div className="mt-8 flex items-center gap-2 text-emerald-200">
+                <CheckCircle className="h-4 w-4" />
+                <span className="text-sm">Estimate on its way within 24 hours.</span>
+              </div>
+            )}
+          </div>
 
-              <p className="text-sm text-white/60 italic">
-                Typical clients save <strong className="text-[#d4af37]">$35,000–$55,000</strong> in the first 5 years.*
-              </p>
+          <Card className="border border-brand-ivory/14 bg-brand-midnight/70 p-6">
+            <p className="mb-2 text-sm text-brand-ivory/70">{selectedYear}-year advantage</p>
+            <div className="mb-4 flex items-end gap-3">
+              <p className="font-serif text-5xl text-brand-champagne">${calculateSavings(selectedYear, purchasePrice).toLocaleString()}</p>
+              <span className="pb-2 text-sm text-brand-ivory/70">${purchasePrice}M purchase</span>
             </div>
-
-            {/* Right: Hero Card */}
-            <Card className="bg-gradient-to-br from-slate-900/90 to-slate-800/90 border-[#d4af37]/40 p-6 backdrop-blur-lg">
-              <div className="mb-6">
-                <Badge className="bg-[#d4af37] text-[#0a1628] border-[#d4af37] mb-2 font-semibold">
-                  Example • ${purchasePrice}M Buyer
-                </Badge>
-                <h3 className="text-white font-semibold text-lg">Traditional vs Reverse Buyer Origination</h3>
-              </div>
-
-              <div className="mb-6 p-5 bg-gradient-to-r from-teal-600/40 to-emerald-600/40 rounded-lg border border-emerald-400/50">
-                <div className="flex items-center justify-between mb-2">
-                  <p className="text-emerald-200 text-xs font-medium">Estimated {selectedYear}-year advantage</p>
-                  <div className="flex items-center gap-2">
-                    <span className="text-emerald-200 text-xs">$</span>
-                    <Input
-                      type="number"
-                      min="0.5"
-                      max="50"
-                      step="0.5"
-                      value={purchasePrice}
-                      onChange={(e) => setPurchasePrice(parseFloat(e.target.value) || 1)}
-                      className="w-16 h-7 bg-slate-800/50 border-emerald-400/30 text-white text-xs text-center px-2"
-                      data-testid="input-purchase-price"
-                    />
-                    <span className="text-emerald-200 text-xs">M</span>
-                  </div>
+            <div className="mb-5 flex flex-wrap gap-2">
+              {[5, 10, 15, 30].map((year) => (
+                <Button
+                  key={year}
+                  onClick={() => setSelectedYear(year)}
+                  size="sm"
+                  className={`h-8 rounded-none px-3 text-xs ${
+                    selectedYear === year
+                      ? "border border-brand-champagne bg-brand-champagne text-black"
+                      : "bg-brand-ivory/10 text-brand-ivory/80 hover:bg-brand-ivory/20"
+                  }`}
+                  data-testid={`button-savings-${year}year`}
+                >
+                  {year}yr
+                </Button>
+              ))}
+            </div>
+            <div className="space-y-2">
+              {scenarios.map((scenario) => (
+                <div
+                  key={scenario.tag}
+                  className={`rounded border px-3 py-2 ${
+                    scenario.highlight
+                      ? "border-brand-champagne/60 bg-brand-champagne/12"
+                      : "border-brand-ivory/15 bg-brand-ivory/6"
+                  }`}
+                >
+                  <p className={`text-xs uppercase tracking-wide ${scenario.highlight ? "text-brand-ivory" : "text-brand-ivory/60"}`}>
+                    {scenario.tag}
+                  </p>
+                  <p className="mt-0.5 text-xs text-brand-ivory/72">
+                    APR {scenario.apr} · Fee {scenario.commission}
+                  </p>
                 </div>
-                <p className="text-6xl font-bold text-[#d4af37] mb-3 leading-tight">${calculateSavings(selectedYear, purchasePrice).toLocaleString()}</p>
-                <p className="text-sm text-emerald-200/90 font-medium">From lower APR, credits & smarter broker fees.</p>
-                
-                <div className="mt-4 flex gap-2 flex-wrap">
-                  {[5, 10, 15, 30].map((year) => (
-                    <Button
-                      key={year}
-                      onClick={() => setSelectedYear(year)}
-                      size="sm"
-                      className={`text-xs font-semibold px-3 py-1 h-auto ${
-                        selectedYear === year
-                          ? "bg-[#d4af37] text-[#0a1628]"
-                          : "bg-emerald-500/30 text-emerald-200 hover:bg-emerald-500/50"
-                      }`}
-                      data-testid={`button-savings-${year}year`}
-                    >
-                      {year}yr
-                    </Button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-6">
-                <div className="space-y-3">
-                  <div className="p-3 bg-slate-700/50 rounded-lg border border-slate-600">
-                    <p className="text-xs text-slate-300 mb-1 font-medium">Traditional path</p>
-                    <p className="text-sm text-white font-semibold">7.25% APR · 2.5% buyer commission</p>
-                    <p className="text-xs text-slate-300 mt-1">Single lender • Single brokerage</p>
-                  </div>
-                  <div className="p-3 bg-[#d4af37]/25 rounded-lg border border-[#d4af37]/50">
-                    <p className="text-xs text-[#ffd977] mb-1 font-medium">With Agent Kammer</p>
-                    <p className="text-sm text-white font-semibold">6.25–6.40% APR band</p>
-                    <p className="text-xs text-slate-200 mt-1">Credits + lean broker structure</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-4 space-y-2 text-xs text-slate-200">
-                <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
-                  <span>Vast lender comparison</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
-                  <span>Multiple brokerages evaluated</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></div>
-                  <span>You see it all in one simple view</span>
-                </div>
-              </div>
-            </Card>
-          </div>
+              ))}
+            </div>
+          </Card>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section className="py-12 lg:py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <p className="text-sm font-semibold text-[#d4af37] tracking-wide mb-2 uppercase">How it works</p>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">Reverse the flow. Start with intelligence.</h2>
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-              Instead of picking one agent and one lender at random, we treat your purchase like private banking:
-              build your profile once, then make the ecosystem compete for you.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="px-6 py-14 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-sapphire">How It Works</p>
+          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">Reverse the Flow</h2>
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             {steps.map((step) => (
-              <Card key={step.number} className="p-6 hover-elevate" data-testid={`card-rbo-step-${step.number}`}>
-                <div className="w-12 h-12 rounded-full bg-[#d4af37]/20 flex items-center justify-center mb-4">
-                  <span className="text-xl font-bold text-[#d4af37]">{step.number}</span>
-                </div>
-                <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
-                <p className="text-sm text-muted-foreground">{step.description}</p>
+              <Card key={step.number} className="border border-brand-graphite/12 bg-white p-5" data-testid={`card-rbo-step-${step.number}`}>
+                <p className="font-mono text-xs text-brand-sapphire">{step.number}</p>
+                <h3 className="mt-2 text-lg font-semibold text-brand-midnight">{step.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-brand-graphite/72">{step.description}</p>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SCENARIOS */}
-      <section className="py-12 lg:py-16 bg-muted/40">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <p className="text-sm font-semibold text-[#d4af37] tracking-wide mb-2 uppercase">Savings scenarios</p>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">From "most expensive" to "most intelligent."</h2>
-            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-              Sample scenarios on a $1,000,000 purchase show how total cost shifts when you move into a modern, luxury, data-driven approach.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-            {scenarios.map((scenario, idx) => (
-              <Card
-                key={idx}
-                className={`p-5 ${
-                  scenario.highlight
-                    ? "bg-gradient-to-br from-slate-900/95 to-slate-800/95 border-2 border-transparent hover-elevate md:col-span-2 lg:col-span-2 mx-auto w-full"
-                    : "bg-slate-950/90 border border-slate-800 hover-elevate"
-                }`}
-                style={scenario.highlight ? {
-                  backgroundImage: "linear-gradient(to bottom right, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95)), linear-gradient(135deg, #d4af37, #f4d76d)",
-                  backgroundClip: "padding-box, border-box",
-                  backgroundOrigin: "padding-box, border-box",
-                  border: "2px solid transparent",
-                  boxShadow: "0 0 20px rgba(212, 175, 55, 0.4), 0 0 40px rgba(212, 175, 55, 0.15)"
-                } : undefined}
-                data-testid={`card-scenario-${idx + 1}`}
-              >
-                <Badge className={`mb-3 ${scenario.highlight ? "bg-[#d4af37] text-[#0a1628] font-semibold" : "bg-slate-800 text-slate-100"}`}>
-                  {scenario.tag}
-                </Badge>
-                <h3 className={`font-semibold mb-3 text-base ${scenario.highlight ? "text-[#d4af37]" : "text-white"}`}>
-                  {scenario.title}
-                </h3>
-                <div className="space-y-2 mb-3 text-sm">
-                  <div>
-                    <span className={scenario.highlight ? "text-slate-300" : "text-slate-400"}>APR: </span>
-                    <span className="font-semibold text-white">{scenario.apr}</span>
-                  </div>
-                  <div>
-                    <span className={scenario.highlight ? "text-slate-300" : "text-slate-400"}>Commission: </span>
-                    <span className="font-semibold text-white">{scenario.commission}</span>
-                  </div>
-                  <div>
-                    <span className={scenario.highlight ? "text-slate-300" : "text-slate-400"}>Credits: </span>
-                    <span className="font-semibold text-white">{scenario.credits}</span>
-                  </div>
-                  <div>
-                    <span className={scenario.highlight ? "text-slate-300" : "text-slate-400"}>Monthly: </span>
-                    <span className="font-semibold text-white">{scenario.monthly}</span>
-                  </div>
-                </div>
-                <p className={`text-xs ${scenario.highlight ? "text-slate-200" : "text-slate-300"}`}>
-                  {scenario.note}
-                </p>
+      <section className="bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-2">
+            <div>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Deliverables</p>
+              <h2 className="font-serif text-3xl font-semibold">Your RBO Packet</h2>
+              <ul className="mt-6 space-y-3">
+                {deliverables.map((item) => (
+                  <li key={item} className="text-sm leading-6 text-brand-ivory/80">
+                    • {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="grid gap-4">
+              <Card className="border border-brand-ivory/15 bg-brand-midnight p-5">
+                <Lock className="mb-2 h-5 w-5 text-brand-champagne" />
+                <h3 className="font-semibold text-brand-ivory">Single Profile</h3>
+                <p className="mt-1 text-sm text-brand-ivory/72">Share inputs once. No repeating across parties.</p>
               </Card>
-            ))}
+              <Card className="border border-brand-ivory/15 bg-brand-midnight p-5">
+                <TrendingUp className="mb-2 h-5 w-5 text-brand-champagne" />
+                <h3 className="font-semibold text-brand-ivory">Competing Offers</h3>
+                <p className="mt-1 text-sm text-brand-ivory/72">Lender and broker structures compared with clear math.</p>
+              </Card>
+              <Card className="border border-brand-ivory/15 bg-brand-midnight p-5">
+                <Calculator className="mb-2 h-5 w-5 text-brand-champagne" />
+                <h3 className="font-semibold text-brand-ivory">Net Outcome</h3>
+                <p className="mt-1 text-sm text-brand-ivory/72">Total five-year impact — not just headline APR.</p>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* WHY DIFFERENT */}
-      <section className="py-12 lg:py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <p className="text-sm font-semibold text-[#d4af37] tracking-wide mb-2 uppercase">Why it's different</p>
-            <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">Innovative private‑banking approach applied to the real‑estate domain</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="p-6 hover-elevate" data-testid="card-why-profile">
-              <div className="w-12 h-12 rounded-lg bg-[#d4af37]/20 flex items-center justify-center mb-4">
-                <Lock className="h-6 w-6 text-[#d4af37]" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">Luxury Buyer Profile</h3>
-              <p className="text-sm text-muted-foreground">
-                Share your ideal price range, down payment, self‑reported credit band, monthly comfort and target cities. No hard credit pulls; no pressure.
-              </p>
-            </Card>
-
-            <Card className="p-6 hover-elevate" data-testid="card-why-lenders">
-              <div className="w-12 h-12 rounded-lg bg-[#d4af37]/20 flex items-center justify-center mb-4">
-                <TrendingUp className="h-6 w-6 text-[#d4af37]" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">Lenders Quietly Compete</h3>
-              <p className="text-sm text-muted-foreground">
-                With your permission, we invite multiple trusted lenders to provide ranges for APR, estimated payments, potential credits and closing‑cost bands.
-              </p>
-            </Card>
-
-            <Card className="p-6 hover-elevate" data-testid="card-why-brokerages">
-              <div className="w-12 h-12 rounded-lg bg-[#d4af37]/20 flex items-center justify-center mb-4">
-                <Zap className="h-6 w-6 text-[#d4af37]" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">Brokerages Quietly Compete</h3>
-              <p className="text-sm text-muted-foreground">
-                We compare traditional brands, 100%‑commission models and boutique luxury shops to find lean fee structures that best fit your numbers.
-              </p>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA SECTION */}
-      <section className="py-12 lg:py-16 bg-gradient-to-br from-[#0a1628] via-[#0f1f3d] to-[#0a1628] text-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">Ready to reverse the process?</h2>
-          <p className="text-lg text-white/70 mb-8">
-            Share your mobile number and we'll analyze your options — completely free.
+      <section className="px-6 py-14 lg:px-10">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="font-serif text-3xl font-semibold text-brand-midnight">Start With Your Number</h2>
+          <p className="mx-auto mt-3 max-w-lg text-sm text-brand-graphite/72">
+            Comparative estimate. Outcomes vary by credit, lender, and timing.
           </p>
-          {!submitted ? (
-            <form onSubmit={handleHeroSubmit} className="flex flex-col sm:flex-row gap-3 justify-center" data-testid="form-rbo-cta">
-              <div className="flex-1 max-w-xs flex items-center rounded-lg border border-white/20 px-3 backdrop-blur-sm" style={{ background: 'rgba(15, 32, 55, 0.8)' }}>
-                <Phone className="h-4 w-4 text-white/70 mr-2" />
-                <Input
-                  type="tel"
-                  placeholder="Enter your mobile number"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="bg-transparent border-0 text-white placeholder:text-white/40 focus-visible:ring-0 focus:outline-none"
-                  data-testid="input-rbo-phone-cta"
-                  required
-                />
-              </div>
+          {!submitted && (
+            <form onSubmit={handleSubmit} className="mx-auto mt-6 flex max-w-md gap-2" data-testid="form-rbo-cta">
+              <Input
+                type="tel"
+                placeholder="Mobile number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="h-11"
+                data-testid="input-rbo-phone-cta"
+                required
+              />
               <Button
                 type="submit"
-                className="bg-[#d4af37] text-[#0a1628] hover:bg-[#e5bd4a] font-semibold px-8"
+                className="rounded-none border border-brand-champagne bg-brand-champagne px-7 text-brand-midnight hover:bg-brand-champagne/90"
                 disabled={createProfileMutation.isPending}
                 data-testid="button-rbo-cta-submit"
               >
-                {createProfileMutation.isPending ? "Creating..." : "Get my estimate"}
+                {createProfileMutation.isPending ? "Creating..." : "Get estimate"}
               </Button>
             </form>
-          ) : (
-            <div className="inline-block p-4 bg-emerald-500/20 border border-emerald-500/40 rounded-lg">
-              <div className="flex items-center gap-2 text-emerald-300">
-                <CheckCircle className="h-5 w-5" />
-                <span>Profile created! Check your email for next steps.</span>
-              </div>
-            </div>
           )}
-          <p className="text-xs text-white/50 mt-4">*Based on comparative market analysis. Results vary by market, profile, and timing.</p>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

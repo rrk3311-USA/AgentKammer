@@ -11,6 +11,15 @@ export default {
         sm: ".1875rem", /* 3px */
       },
       colors: {
+        brand: {
+          midnight: "#0F172A",
+          sapphire: "#18366B",
+          ivory: "#F6F3EB",
+          "ivory-logo": "#FBF2E9",
+          graphite: "#222730",
+          champagne: "#D6B45F",
+          steel: "#5E718D",
+        },
         // Flat / base colors (regular buttons)
         background: "hsl(var(--background) / <alpha-value>)",
         foreground: "hsl(var(--foreground) / <alpha-value>)",

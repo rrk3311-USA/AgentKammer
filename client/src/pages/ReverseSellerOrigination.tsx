@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { TrendingUp, DollarSign, Lock, Zap, CheckCircle } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
+import { CheckCircle, DollarSign, Lock, TrendingUp, Zap } from "lucide-react";
 
 export default function ReverseSellerOrigination() {
   const [phone, setPhone] = useState("");
@@ -27,7 +26,7 @@ export default function ReverseSellerOrigination() {
       setPhone("");
       toast({
         title: "Seller Profile Created",
-        description: "We'll analyze listing strategies and send your seller diagnostic within 24 hours.",
+        description: "Your diagnostic arrives within 24 hours.",
       });
     },
     onError: () => {
@@ -39,253 +38,114 @@ export default function ReverseSellerOrigination() {
     },
   });
 
-  const handleHeroSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (phone.trim()) {
-      createProfileMutation.mutate(phone);
-    }
+    if (phone.trim()) createProfileMutation.mutate(phone);
   };
 
   const steps = [
-    {
-      number: 1,
-      title: "Pre-Listing Financial Diagnostic",
-      description: "Complete financial mapping of your sale before listing. Three net proceeds scenarios, closing cost forecasts, and price sensitivity analysis—all designed to maximize your outcome.",
-      features: [
-        "Three Net Proceeds Scenarios (Fast, Hybrid, Maximum Net)",
-        "Closing Cost Forecast & Sale Timeline Analysis",
-        "Price Sensitivity Overview (Buyer Demand Probability Bands)",
-        "Upgrade vs. As-Is Optimization Table",
-        "Holding Cost Considerations"
-      ]
-    },
-    {
-      number: 2,
-      title: "Brokerage-Agnostic Fee Intelligence",
-      description: "We compare listing fee structures on your behalf, from full-service luxury brokerages to lean models to creative commission structures—so you choose what maximizes your net, not what benefits the agent.",
-      features: [
-        "Full-Service Luxury Brokerage Model Analysis",
-        "Lean Brokerage Model Comparison",
-        "Boutique / Creative Commission Structures",
-        "Concierge Model with Staging Credits",
-        "Agent Kammer Flexible Listing Strategy"
-      ]
-    },
-    {
-      number: 3,
-      title: "Off-Market Intelligence Layer",
-      description: "Your home surfaces quietly to financially verified buyers and agent networks before going public. Early feedback and optionality without exposure or risk.",
-      features: [
-        "Private 'Whisper List' Access",
-        "Financially Verified Buyer Groups",
-        "Relocation Networks",
-        "Agent-Side Compatibility Matching (fully compliant)"
-      ]
-    },
-    {
-      number: 4,
-      title: "Multi-Scenario Listing Strategy",
-      description: "Three engineered, institutional-style pathways based on your timeline and risk tolerance. Not one rigid marketing plan—your choice.",
-      features: [
-        "Scenario A: Fastest Exit (minimal prep, lean fee, broad exposure)",
-        "Scenario B: Maximum Net (premium staging, high-detail marketing, premium pricing)",
-        "Scenario C: Hybrid Optimization (selective enhancements, balanced approach)"
-      ]
-    },
-    {
-      number: 5,
-      title: "Market Intelligence Report",
-      description: "Your pricing and positioning crafted using real data—not hype. A private-banking style market brief just for you.",
-      features: [
-        "Supply/Demand Ratio Analysis",
-        "Absorption Rate & Velocity",
-        "Multiple-Offer Probability Bands",
-        "Price-Per-Square-Foot Trend Analysis",
-        "Buyer Funnel Forecast"
-      ]
-    },
-    {
-      number: 6,
-      title: "Strategic Exit Architecture",
-      description: "Your sale integrates into your overall financial trajectory. We map your next move as part of the planning process.",
-      features: [
-        "Move-Up Strategy Design",
-        "Equity Redeployment Pathways",
-        "Next-Home Pre-Qualification (no hard pull)",
-        "Out-of-State Relocation Options",
-        "Portfolio/Investment Mapping (if desired)"
-      ]
-    }
+    { title: "Diagnostic", description: "Net proceeds, timeline, and cost assumptions before listing." },
+    { title: "Fee Comparison", description: "Listing models with clear net impact." },
+    { title: "Quiet Testing", description: "Private buyer feedback before broad exposure." },
+    { title: "Execution", description: "One recommendation matched to your timeline." },
+  ];
+
+  const deliverables = [
+    "Net-sheet with pricing and timing scenarios",
+    "Listing fee options with tradeoffs",
+    "Pre-market demand from private channels",
+    "Go-to-market plan and milestone timeline",
+  ];
+
+  const benefits = [
+    { icon: DollarSign, title: "Maximize Net", description: "Scored by net outcome, not pitch quality." },
+    { icon: Zap, title: "Control Timeline", description: "Fast, balanced, and max-net paths mapped up front." },
+    { icon: Lock, title: "Protect Privacy", description: "Test demand without full public exposure." },
+    { icon: TrendingUp, title: "Market Signals", description: "Pricing tied to demand velocity and comps." },
   ];
 
   return (
-    <div className="min-h-screen pb-32 relative">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-[#0a1628] via-[#0a1628] to-[#0a1628]/80 py-12 lg:py-20 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 right-10 w-72 h-72 bg-[#d4af37] rounded-full blur-3xl" />
-          <div className="absolute bottom-10 left-20 w-96 h-96 bg-[#d4af37]/20 rounded-full blur-3xl" />
-        </div>
-
-        <div className="relative max-w-4xl mx-auto px-6 text-center">
-          <Badge className="mb-4 bg-[#d4af37] border border-[#d4af37] text-[#0a1628]" data-testid="badge-rso">
-            A Private Banking Model for Home Sellers
-          </Badge>
-          
-          <h1 className="font-serif text-4xl lg:text-5xl font-bold text-white mb-4">
-            Reverse Seller Architecture
-          </h1>
-          
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Traditional listing agents market homes. Agent Kammer engineers outcomes. Instead of emotional pitches, generic marketing plans, and one-size-fits-all commission structures, you get institutional-grade intelligence, transparent options, and strategic exit architecture.
+    <main className="min-h-screen bg-brand-ivory text-brand-graphite">
+      <section className="relative overflow-hidden bg-brand-midnight text-brand-ivory">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.92)_0%,rgba(15,23,42,0.78)_45%,rgba(15,23,42,0.5)_100%)]" />
+        <div className="relative mx-auto max-w-5xl px-6 py-16 text-center lg:py-20">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.26em] text-brand-champagne">Sell</p>
+          <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-7xl">Reverse Seller Architecture™</h1>
+          <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-brand-ivory/82">
+            Positioning, pricing, and buyer competition before exposure.
           </p>
-
-          <form onSubmit={handleHeroSubmit} className="flex gap-2 max-w-md mx-auto mb-8">
+          <form onSubmit={handleSubmit} className="mx-auto mt-10 flex max-w-md gap-2">
             <Input
               type="tel"
-              placeholder="Your cell number"
+              placeholder="Mobile number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               disabled={createProfileMutation.isPending || submitted}
-              className="h-12 bg-white/10 border-white/20 text-white placeholder:text-white/60"
+              className="h-12 border-brand-ivory/20 bg-brand-ivory/10 text-brand-ivory placeholder:text-brand-ivory/55"
               data-testid="input-rso-phone"
             />
             <Button
               type="submit"
-              size="lg"
               disabled={createProfileMutation.isPending || submitted}
-              className="h-12 px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-black font-semibold hover:opacity-90"
+              className="h-12 rounded-none border border-brand-champagne bg-brand-champagne px-7 text-brand-midnight hover:bg-brand-champagne/90"
               data-testid="button-rso-submit"
             >
               {createProfileMutation.isPending ? "Sending..." : "Get Diagnostic"}
             </Button>
           </form>
-
           {submitted && (
-            <p className="text-white/80 text-sm">
-              ✓ We'll send your seller diagnostic within 24 hours.
+            <p className="mt-3 flex items-center justify-center gap-2 text-sm text-brand-ivory/80">
+              <CheckCircle className="h-4 w-4" /> Diagnostic request received.
             </p>
           )}
         </div>
       </section>
 
-      {/* Steps Section */}
-      <section className="py-12 lg:py-16 bg-background">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="space-y-6">
+      <section className="px-6 py-14 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-sapphire">How It Works</p>
+          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">Diagnose First</h2>
+          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, idx) => (
-              <Card key={idx} className="p-6 lg:p-8 border-[#d4af37]/20 hover:border-[#d4af37]/40 transition-colors" data-testid={`card-step-${step.number}`}>
-                <div className="flex gap-6">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#d4af37] to-[#f4d03f] flex items-center justify-center">
-                      <span className="font-serif text-lg font-bold text-[#0a1628]">{step.number}</span>
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-serif text-xl lg:text-2xl font-semibold mb-2">
-                      {step.title}
-                    </h3>
-                    <p className="text-muted-foreground mb-4">
-                      {step.description}
-                    </p>
-                    <ul className="space-y-2">
-                      {step.features.map((feature, fidx) => (
-                        <li key={fidx} className="flex items-start gap-2 text-sm">
-                          <CheckCircle className="h-4 w-4 text-[#d4af37] mt-0.5 flex-shrink-0" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+              <Card key={step.title} className="border border-brand-graphite/12 bg-white p-5">
+                <p className="font-mono text-xs text-brand-sapphire">{idx + 1}</p>
+                <h3 className="mt-2 text-lg font-semibold text-brand-midnight">{step.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-brand-graphite/72">{step.description}</p>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-12 lg:py-16 bg-[#0a1628]">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="font-serif text-3xl lg:text-4xl font-bold text-white mb-12 text-center">
-            Why Reverse Seller Architecture™
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className="p-6 bg-white/5 border-white/10">
-              <div className="flex gap-4 items-start">
-                <DollarSign className="h-6 w-6 text-[#d4af37] flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-serif text-lg font-semibold text-white mb-2">Maximize Net Proceeds</h4>
-                  <p className="text-white/70">Transparent, data-driven scenarios show exactly how your decisions impact your bottom line.</p>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-6 bg-white/5 border-white/10">
-              <div className="flex gap-4 items-start">
-                <Zap className="h-6 w-6 text-[#d4af37] flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-serif text-lg font-semibold text-white mb-2">Control Your Timeline</h4>
-                  <p className="text-white/70">Three scenarios give you full optionality—fast exit, maximum net, or balanced approach.</p>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-6 bg-white/5 border-white/10">
-              <div className="flex gap-4 items-start">
-                <Lock className="h-6 w-6 text-[#d4af37] flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-serif text-lg font-semibold text-white mb-2">Institutional-Grade Privacy</h4>
-                  <p className="text-white/70">Off-market intelligence layer with whisper-list access and verified buyer networks.</p>
-                </div>
-              </div>
-            </Card>
-
-            <Card className="p-6 bg-white/5 border-white/10">
-              <div className="flex gap-4 items-start">
-                <TrendingUp className="h-6 w-6 text-[#d4af37] flex-shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-serif text-lg font-semibold text-white mb-2">Leverage Back in Your Hands</h4>
-                  <p className="text-white/70">Strategic exit architecture integrates your next move into the entire planning process.</p>
-                </div>
-              </div>
-            </Card>
+      <section className="bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-2">
+            <div>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Deliverables</p>
+              <h2 className="font-serif text-3xl font-semibold">Your Seller Packet</h2>
+              <ul className="mt-6 space-y-3">
+                {deliverables.map((item) => (
+                  <li key={item} className="text-sm leading-6 text-brand-ivory/80">
+                    • {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {benefits.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Card key={item.title} className="border border-brand-ivory/14 bg-brand-midnight p-5">
+                    <Icon className="mb-2 h-5 w-5 text-brand-champagne" />
+                    <h3 className="font-semibold text-brand-champagne">{item.title}</h3>
+                    <p className="mt-1 text-sm text-brand-ivory/72">{item.description}</p>
+                  </Card>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="py-12 lg:py-16 bg-background">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-6">
-            Ready to Sell with Intelligence?
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Get your personalized seller diagnostic and discover how much more you could net from your home sale.
-          </p>
-          <form onSubmit={handleHeroSubmit} className="flex gap-2 max-w-md mx-auto">
-            <Input
-              type="tel"
-              placeholder="Your cell number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              disabled={createProfileMutation.isPending || submitted}
-              className="h-12"
-              data-testid="input-rso-phone-cta"
-            />
-            <Button
-              type="submit"
-              size="lg"
-              disabled={createProfileMutation.isPending || submitted}
-              className="h-12 px-8 text-[#000000]"
-              data-testid="button-rso-submit-cta"
-            >
-              {createProfileMutation.isPending ? "Sending..." : "Request Diagnostic"}
-            </Button>
-          </form>
-        </div>
-      </section>
-    </div>
+    </main>
   );
 }

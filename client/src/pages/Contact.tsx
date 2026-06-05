@@ -2,17 +2,11 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, Clock, Sparkles } from "lucide-react";
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-
-// Import luxury property images
-import barImage1 from "@assets/IMG_1357_1762925446647.jpeg";
-import barImage2 from "@assets/IMG_1356_1762925446647.jpeg";
-import barImage3 from "@assets/IMG_1358_1762925446647.jpeg";
-import interiorImage from "@assets/IMG_1355_1762925446647.jpeg";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -47,8 +41,8 @@ export default function Contact() {
     },
     onSuccess: () => {
       toast({
-        title: "Message Sent!",
-        description: "Thank you! We'll be in touch within 24 hours.",
+        title: "Message Sent",
+        description: "We'll respond within 24 hours.",
       });
       setFormData({
         name: "",
@@ -75,302 +69,195 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section with Photo Collage */}
-      <section className="relative h-[60vh] overflow-hidden">
-        {/* Photo Grid Collage */}
-        <div className="absolute inset-0 grid grid-cols-4 grid-rows-2 gap-1">
-          <div className="col-span-2 row-span-2 relative overflow-hidden">
-            <img 
-              src={barImage1} 
-              alt="Luxury Bar Interior" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="relative overflow-hidden">
-            <img 
-              src={barImage2} 
-              alt="Elegant Lighting Fixtures" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="relative overflow-hidden">
-            <img 
-              src={barImage3} 
-              alt="Luxury Bar Details" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="col-span-2 relative overflow-hidden">
-            <img 
-              src={interiorImage} 
-              alt="Elegant Interior Design" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
-
-        {/* Content */}
-        <div className="relative h-full flex items-center justify-center">
-          <div className="text-center text-white px-6">
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
-              Get in Touch
-            </h1>
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
-              Serious real estate inquiries. Clear response. Fast next steps.
-            </p>
-          </div>
+    <main className="min-h-screen bg-brand-ivory text-brand-graphite">
+      <section className="bg-brand-midnight px-6 py-16 text-brand-ivory lg:px-10">
+        <div className="mx-auto max-w-7xl text-center">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.26em] text-brand-champagne">Contact</p>
+          <h1 className="font-serif text-5xl font-semibold md:text-6xl">Concierge</h1>
+          <p className="mx-auto mt-5 max-w-lg text-lg text-brand-ivory/82">
+            Serious inquiries. Clear response. Fast next steps.
+          </p>
         </div>
       </section>
-      {/* Contact Information & Form Section */}
-      <section className="py-16 lg:py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Left: Contact Info */}
-            <div className="space-y-8">
+
+      <section className="px-6 py-14 lg:px-10">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2">
+          <div className="space-y-5">
+            <Card className="border border-brand-graphite/12 bg-white p-5">
+              <div className="flex items-start gap-4">
+                <Mail className="mt-0.5 h-5 w-5 shrink-0 text-brand-champagne" />
+                <div>
+                  <h3 className="font-semibold text-brand-midnight">Email</h3>
+                  <a href="mailto:info@AgentKammer.com" className="text-sm text-brand-graphite/78 hover:text-brand-sapphire">
+                    info@AgentKammer.com
+                  </a>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="border border-brand-graphite/12 bg-white p-5">
+              <div className="flex items-start gap-4">
+                <Phone className="mt-0.5 h-5 w-5 shrink-0 text-brand-champagne" />
+                <div>
+                  <h3 className="font-semibold text-brand-midnight">Phone</h3>
+                  <a href="tel:+12121234567" className="text-sm text-brand-graphite/78 hover:text-brand-sapphire">
+                    (212) 123-4567
+                  </a>
+                  <p className="mt-1 text-xs text-brand-graphite/60">Active transactions and urgent timelines.</p>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="border border-brand-graphite/12 bg-white p-5">
+              <div className="flex items-start gap-4">
+                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-brand-champagne" />
+                <div>
+                  <h3 className="font-semibold text-brand-midnight">Markets</h3>
+                  <p className="text-sm text-brand-graphite/78">New York City · California · Nevada</p>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="border border-brand-graphite/12 bg-white p-5">
+              <div className="flex items-start gap-4">
+                <Clock className="mt-0.5 h-5 w-5 shrink-0 text-brand-champagne" />
+                <div>
+                  <h3 className="font-semibold text-brand-midnight">Hours</h3>
+                  <p className="text-sm text-brand-graphite/78">Mon–Fri 8am–8pm · Sat–Sun 9am–6pm</p>
+                  <p className="mt-1 text-xs text-brand-champagne">By appointment 24/7</p>
+                </div>
+              </div>
+            </Card>
+          </div>
+
+          <Card className="border border-brand-graphite/12 bg-white p-8">
+            <h2 className="font-serif text-2xl font-semibold text-brand-midnight">Send a Message</h2>
+            <p className="mt-2 text-sm text-brand-graphite/72">Response within 24 hours.</p>
+
+            <form onSubmit={handleSubmit} className="mt-6 space-y-5">
               <div>
-                <h2 className="font-serif text-3xl lg:text-4xl font-bold mb-4">
-                  Agent Kammer
-                </h2>
-                <p className="text-lg text-muted-foreground mb-8">
-                  Encrypted Real Estate Concierge serving NYC, California, and Nevada
-                </p>
+                <label htmlFor="name" className="mb-2 block text-sm font-medium">
+                  Full Name *
+                </label>
+                <Input
+                  id="name"
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  required
+                  className="h-11"
+                  data-testid="input-contact-name"
+                />
               </div>
 
-              <div className="space-y-6">
-                <Card className="p-6 hover-elevate">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[#d4af37]/10 flex items-center justify-center flex-shrink-0">
-                      <Mail className="h-5 w-5 text-[#d4af37]" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Email</h3>
-                      <a
-                        href="mailto:concierge@agentkammer.com"
-                        className="text-muted-foreground hover:text-[#d4af37]"
-                      >
-                        concierge@agentkammer.com
-                      </a>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card className="p-6 hover-elevate">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[#d4af37]/10 flex items-center justify-center flex-shrink-0">
-                      <Phone className="h-5 w-5 text-[#d4af37]" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Phone</h3>
-                      <a
-                        href="tel:+12125551212"
-                        className="text-muted-foreground hover:text-[#d4af37]"
-                      >
-                        +1 (212) 555-1212
-                      </a>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        For active transactions and urgent deal timelines.
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card className="p-6 hover-elevate">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[#d4af37]/10 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="h-5 w-5 text-[#d4af37]" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Primary Markets</h3>
-                      <p className="text-muted-foreground">NYC • California • Nevada</p>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card className="p-6 hover-elevate">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[#d4af37]/10 flex items-center justify-center flex-shrink-0">
-                      <Clock className="h-5 w-5 text-[#d4af37]" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Office Hours</h3>
-                      <p className="text-muted-foreground">Monday - Friday: 8am - 8pm</p>
-                      <p className="text-muted-foreground">Saturday - Sunday: 9am - 6pm</p>
-                      <p className="text-sm text-[#d4af37] mt-1">Available by appointment 24/7</p>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* AI Chat Reference */}
-                <Card className="p-6 bg-gradient-to-br from-[#d4af37]/5 to-[#d4af37]/10 border border-[#d4af37]/30">
-                  <div className="flex items-start gap-4">
-                    <div className="flex items-center justify-center">
-                      <Sparkles className="w-10 h-10 text-[#d4af37]" style={{ transform: 'rotate(15deg)' }} />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold mb-2 text-[#d4af37]">Quick Questions?</h4>
-                      <p className="text-sm text-muted-foreground mb-3">
-                        Most questions can be answered instantly with our AI concierge chatbot! Get immediate assistance 24/7.
-                      </p>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-[#d4af37] text-[#d4af37] hover:bg-[#d4af37] hover:text-black"
-                        onClick={() => {
-                          const chatButton = document.querySelector('[data-testid="button-open-chat"]') as HTMLElement;
-                          if (chatButton) chatButton.click();
-                        }}
-                        data-testid="button-open-chat-from-contact"
-                      >
-                        Chat with Agent K
-                      </Button>
-                    </div>
-                  </div>
-                </Card>
+              <div>
+                <label htmlFor="email" className="mb-2 block text-sm font-medium">
+                  Email *
+                </label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  required
+                  className="h-11"
+                  data-testid="input-contact-email"
+                />
               </div>
-            </div>
 
-            {/* Right: Contact Form */}
-            <div>
-              <Card className="p-8 bg-gradient-to-br from-background to-muted/20 border-2 border-[#d4af37]/20 mb-6">
-                <h3 className="font-serif text-2xl font-bold mb-2">Send Us a Message</h3>
-                <p className="text-muted-foreground mb-6">
-                  Fill out the form below and we'll get back to you within 24 hours
-                </p>
+              <div>
+                <label htmlFor="phone" className="mb-2 block text-sm font-medium">
+                  Phone
+                </label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="h-11"
+                  data-testid="input-contact-phone"
+                />
+              </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">
-                      Full Name *
-                    </label>
-                    <Input
-                      id="name"
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="John Smith"
-                      required
-                      className="h-12"
-                      data-testid="input-contact-name"
-                    />
-                  </div>
+              <div>
+                <label htmlFor="service" className="mb-2 block text-sm font-medium">
+                  Service *
+                </label>
+                <select
+                  id="service"
+                  value={formData.service}
+                  onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                  className="h-11 w-full rounded-md border border-input bg-background px-3 text-sm"
+                  required
+                  data-testid="select-contact-service"
+                >
+                  <option value="buying">Buying</option>
+                  <option value="selling">Selling</option>
+                  <option value="intelligence">Intelligence / Research</option>
+                  <option value="investment">Investment</option>
+                  <option value="general">General</option>
+                </select>
+              </div>
 
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
-                      Email Address *
-                    </label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="john@example.com"
-                      required
-                      className="h-12"
-                      data-testid="input-contact-email"
-                    />
-                  </div>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div>
+                  <label htmlFor="market" className="mb-2 block text-sm font-medium">
+                    Market
+                  </label>
+                  <Input
+                    id="market"
+                    type="text"
+                    value={formData.market}
+                    onChange={(e) => setFormData({ ...formData, market: e.target.value })}
+                    placeholder="e.g. Manhattan"
+                    className="h-11"
+                    data-testid="input-contact-market"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="timeframe" className="mb-2 block text-sm font-medium">
+                    Timeline
+                  </label>
+                  <Input
+                    id="timeframe"
+                    type="text"
+                    value={formData.timeframe}
+                    onChange={(e) => setFormData({ ...formData, timeframe: e.target.value })}
+                    placeholder="e.g. 60 days"
+                    className="h-11"
+                    data-testid="input-contact-timeframe"
+                  />
+                </div>
+              </div>
 
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium mb-2">
-                      Phone Number
-                    </label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="+1 (555) 123-4567"
-                      className="h-12"
-                      data-testid="input-contact-phone"
-                    />
-                  </div>
+              <div>
+                <label htmlFor="message" className="mb-2 block text-sm font-medium">
+                  Context *
+                </label>
+                <Textarea
+                  id="message"
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  placeholder="What you're trying to accomplish and any constraints."
+                  required
+                  rows={5}
+                  className="resize-none"
+                  data-testid="textarea-contact-message"
+                />
+              </div>
 
-                  <div>
-                    <label htmlFor="service" className="block text-sm font-medium mb-2">
-                      Service Needed *
-                    </label>
-                    <select
-                      id="service"
-                      value={formData.service}
-                      onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                      className="h-12 w-full rounded-md border border-input bg-background px-3 text-sm ring-offset-background"
-                      required
-                      data-testid="select-contact-service"
-                    >
-                      <option value="buying">Buying</option>
-                      <option value="selling">Selling</option>
-                      <option value="refinancing">Refinancing</option>
-                      <option value="investment">Investment / Commercial</option>
-                      <option value="general">General Inquiry</option>
-                    </select>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="market" className="block text-sm font-medium mb-2">
-                        Target Market
-                      </label>
-                      <Input
-                        id="market"
-                        type="text"
-                        value={formData.market}
-                        onChange={(e) => setFormData({ ...formData, market: e.target.value })}
-                        placeholder="e.g. Manhattan, Miami, Los Angeles"
-                        className="h-12"
-                        data-testid="input-contact-market"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="timeframe" className="block text-sm font-medium mb-2">
-                        Timeline
-                      </label>
-                      <Input
-                        id="timeframe"
-                        type="text"
-                        value={formData.timeframe}
-                        onChange={(e) => setFormData({ ...formData, timeframe: e.target.value })}
-                        placeholder="e.g. 30-60 days"
-                        className="h-12"
-                        data-testid="input-contact-timeframe"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">
-                      Message / Deal Context *
-                    </label>
-                    <Textarea
-                      id="message"
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Share what you're trying to accomplish, constraints, and decision criteria."
-                      required
-                      rows={6}
-                      className="resize-none"
-                      data-testid="textarea-contact-message"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full h-12 bg-[#d4af37] text-black font-semibold hover:bg-[#c5a028]"
-                    data-testid="button-contact-submit"
-                    disabled={contactMutation.isPending}
-                  >
-                    {contactMutation.isPending ? "Sending..." : "Send Message"}
-                  </Button>
-                </form>
-              </Card>
-            </div>
-          </div>
+              <Button
+                type="submit"
+                className="h-11 w-full rounded-none border border-brand-champagne bg-brand-champagne font-semibold uppercase tracking-[0.1em] text-brand-midnight hover:bg-brand-champagne/90"
+                data-testid="button-contact-submit"
+                disabled={contactMutation.isPending}
+              >
+                {contactMutation.isPending ? "Sending..." : "Send Message"}
+              </Button>
+            </form>
+          </Card>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

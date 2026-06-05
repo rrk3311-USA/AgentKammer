@@ -1,16 +1,24 @@
 import { cn } from "@/lib/utils";
-import homepageLogo from "@assets/agent-kammer-homepage-logo.png";
+import homepageLogoDark from "@assets/agent-kammer-logo-header-new.png";
+import homepageLogoLight from "@assets/agent-kammer-logo-mark-light.png";
 
 interface AgentKammerHorizontalLogoProps {
   className?: string;
+  /** `light` = cream wordmark for dark backgrounds; `default` = uploaded dark logo */
+  variant?: "default" | "light";
 }
 
-export function AgentKammerHorizontalLogo({ className }: AgentKammerHorizontalLogoProps) {
+export function AgentKammerHorizontalLogo({ className, variant = "default" }: AgentKammerHorizontalLogoProps) {
+  const src = variant === "light" ? homepageLogoLight : homepageLogoDark;
+
   return (
     <img
-      src={homepageLogo}
+      src={src}
       alt="Agent Kammer"
-      className={cn("h-12 w-auto max-w-[17rem] object-contain mix-blend-multiply sm:h-14 sm:max-w-[22rem]", className)}
+      className={cn(
+        "block h-14 w-auto max-w-[min(100vw-6rem,23rem)] object-contain object-left sm:h-16 sm:max-w-[25rem] lg:h-20 lg:max-w-[30rem]",
+        className,
+      )}
       loading="eager"
     />
   );

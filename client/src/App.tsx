@@ -120,7 +120,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <TooltipProvider>
-          <div className="min-h-screen bg-background text-foreground">
+          <div className="min-h-screen bg-brand-ivory text-brand-graphite">
             <ScrollToTop />
             <Header />
             <Suspense fallback={<div className="mx-auto w-full max-w-7xl px-6 py-12 text-white/70">Loading...</div>}>

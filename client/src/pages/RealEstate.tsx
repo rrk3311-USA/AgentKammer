@@ -1,311 +1,146 @@
-import { HeroSearch } from "@/components/HeroSearch";
-import { LuxuryBackground } from "@/components/LuxuryBackground";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
 import { Link } from "wouter";
-import { 
-  Home, 
-  TrendingUp, 
-  Shield, 
-  Sparkles, 
-  MapPin, 
-  FileText, 
-  Users,
+import {
   ArrowRight,
   Building2,
-  DollarSign,
-  Clock,
-  CheckCircle2
+  Compass,
+  Home as HomeIcon,
+  MapPin,
+  Search,
+  TrendingUp,
 } from "lucide-react";
-import agentKammerWelcoming from "@assets/image_1763360901241.png";
+
+const proofCapabilities = [
+  { title: "Building Intelligence", icon: Building2, href: "/new-york-market" },
+  { title: "Comparable Analysis", icon: Search, href: "/new-york-market" },
+  { title: "Neighborhood Reports", icon: MapPin, href: "/new-york-market" },
+];
+
+const reports = [
+  { title: "Building Intelligence Report", text: "Pricing, liquidity, risk, and buyer leverage for one building." },
+  { title: "Neighborhood Report", text: "Demand, supply, and development context by micro-market." },
+  { title: "Opportunity Monitor", text: "Price cuts, stale listings, and negotiation windows." },
+  { title: "Market Research", text: "Quarterly pricing shifts and acquisition timing." },
+  { title: "Market Outlook", text: "Inventory, financing, and Manhattan demand perspective." },
+];
 
 export default function RealEstate() {
-  const { toast } = useToast();
-  const [phone, setPhone] = useState("");
-
-  const rboMutation = useMutation({
-    mutationFn: async (phoneNumber: string) => {
-      return await apiRequest("POST", "/api/rbo/profile", { phone: phoneNumber });
-    },
-    onSuccess: () => {
-      toast({
-        title: "Thank you!",
-        description: "We'll be in touch soon to help you find your dream home.",
-      });
-      setPhone("");
-    },
-    onError: () => {
-      toast({
-        title: "Error",
-        description: "Failed to submit. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
-
   return (
-    <div className="min-h-screen relative pt-[39px] pb-[39px]">
-      <LuxuryBackground />
-      <div className="relative z-10">
-        <HeroSearch />
+    <main className="min-h-screen bg-brand-ivory text-brand-graphite">
+      <section className="bg-brand-midnight px-6 py-16 text-brand-ivory lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.26em] text-brand-champagne">Intelligence</p>
+          <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-7xl">Market Intelligence</h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-brand-ivory/82">
+            Building research, market reports, and proprietary analysis.
+          </p>
+          <Link href="/new-york-market">
+            <Button className="mt-8 h-11 rounded-none border border-brand-champagne bg-brand-champagne px-6 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-midnight hover:bg-brand-champagne/90">
+              NYC Market Hub
+            </Button>
+          </Link>
+        </div>
+      </section>
 
-        <section className="py-12 lg:py-16 bg-background">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="text-center mb-12">
-              <h2 className="font-serif text-3xl lg:text-4xl font-semibold mb-4">
-                Exclusive Real Estate Services
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Proprietary systems designed to give you the ultimate advantage in competitive markets
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Link href="/reverse-buyer-origination">
-                <Card className="p-6 hover-elevate cursor-pointer h-full" data-testid="card-rbo">
-                  <div className="w-12 h-12 rounded-lg bg-[#d4af37]/10 flex items-center justify-center mb-4">
-                    <Sparkles className="h-6 w-6 text-[#d4af37]" />
-                  </div>
-                  <h3 className="font-serif text-xl font-semibold mb-2">Reverse Buyer Origination</h3>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    Make brokers compete for your business. Build your buyer profile once and let qualified agents come to you.
-                  </p>
-                  <div className="flex items-center text-[#d4af37] text-sm font-medium">
-                    Learn More <ArrowRight className="h-4 w-4 ml-1" />
-                  </div>
-                </Card>
-              </Link>
-
-              <Link href="/reverse-seller-origination">
-                <Card className="p-6 hover-elevate cursor-pointer h-full" data-testid="card-rso">
-                  <div className="w-12 h-12 rounded-lg bg-[#d4af37]/10 flex items-center justify-center mb-4">
-                    <TrendingUp className="h-6 w-6 text-[#d4af37]" />
-                  </div>
-                  <h3 className="font-serif text-xl font-semibold mb-2">Reverse Seller Origination</h3>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    List smarter. Let agents compete for your listing with transparent commission structures.
-                  </p>
-                  <div className="flex items-center text-[#d4af37] text-sm font-medium">
-                    Learn More <ArrowRight className="h-4 w-4 ml-1" />
-                  </div>
-                </Card>
-              </Link>
-
-              <Link href="/document-portal">
-                <Card className="p-6 hover-elevate cursor-pointer h-full" data-testid="card-document-portal">
-                  <div className="w-12 h-12 rounded-lg bg-[#d4af37]/10 flex items-center justify-center mb-4">
-                    <Shield className="h-6 w-6 text-[#d4af37]" />
-                  </div>
-                  <h3 className="font-serif text-xl font-semibold mb-2">Strategic Document Portal</h3>
-                  <p className="text-muted-foreground text-sm mb-4">
-                    Zero-knowledge encrypted document management for competitive bidding with military-grade security.
-                  </p>
-                  <div className="flex items-center text-[#d4af37] text-sm font-medium">
-                    Learn More <ArrowRight className="h-4 w-4 ml-1" />
-                  </div>
-                </Card>
-              </Link>
-            </div>
+      <section className="border-b border-brand-graphite/10 bg-white px-6 py-14 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-brand-sapphire">Sample Intelligence Query</p>
+          <div className="rounded-lg border border-brand-graphite/14 bg-brand-ivory p-6 md:p-8">
+            <p className="font-mono text-sm leading-7 text-brand-midnight md:text-base">
+              Show every Manhattan condo building where price-per-square-foot is down 10%+ versus the 24-month trend.
+            </p>
           </div>
-        </section>
-
-        <section className="py-12 lg:py-16 bg-[#0a1628]">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="text-center mb-12">
-              <h2 className="font-serif text-3xl lg:text-4xl font-semibold text-white mb-4">
-                Live Market Intelligence
-              </h2>
-              <p className="text-white/70 max-w-2xl mx-auto">
-                Real-time market data and AI-powered insights for premier luxury markets
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Link href="/california-market">
-                <Card className="p-6 bg-white/5 border-white/10 hover-elevate cursor-pointer" data-testid="card-california-market">
-                  <div className="flex items-center gap-3 mb-4">
-                    <MapPin className="h-6 w-6 text-[#d4af37]" />
-                    <h3 className="font-serif text-xl font-semibold text-white">California</h3>
-                  </div>
-                  <p className="text-white/60 text-sm mb-4">
-                    San Francisco, Los Angeles, San Diego luxury markets with live pricing and trend analysis.
-                  </p>
-                  <div className="flex items-center text-[#d4af37] text-sm font-medium">
-                    View Market Data <ArrowRight className="h-4 w-4 ml-1" />
-                  </div>
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {proofCapabilities.map((item) => (
+              <Link key={item.title} href={item.href}>
+                <Card className="flex items-center gap-3 rounded-lg border border-brand-graphite/12 bg-white p-4 transition hover:border-brand-champagne/50">
+                  <item.icon className="h-5 w-5 shrink-0 text-brand-sapphire" strokeWidth={1.35} />
+                  <p className="text-sm font-semibold text-brand-midnight">{item.title}</p>
                 </Card>
               </Link>
-
-              <Link href="/new-york-market">
-                <Card className="p-6 bg-white/5 border-white/10 hover-elevate cursor-pointer" data-testid="card-nyc-market">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Building2 className="h-6 w-6 text-[#d4af37]" />
-                    <h3 className="font-serif text-xl font-semibold text-white">New York City</h3>
-                  </div>
-                  <p className="text-white/60 text-sm mb-4">
-                    Manhattan, Brooklyn, and premier NYC neighborhoods with co-op and condo insights.
-                  </p>
-                  <div className="flex items-center text-[#d4af37] text-sm font-medium">
-                    View Market Data <ArrowRight className="h-4 w-4 ml-1" />
-                  </div>
-                </Card>
-              </Link>
-
-              <Link href="/nevada-market">
-                <Card className="p-6 bg-white/5 border-white/10 hover-elevate cursor-pointer" data-testid="card-nevada-market">
-                  <div className="flex items-center gap-3 mb-4">
-                    <Home className="h-6 w-6 text-[#d4af37]" />
-                    <h3 className="font-serif text-xl font-semibold text-white">Nevada</h3>
-                  </div>
-                  <p className="text-white/60 text-sm mb-4">
-                    Las Vegas, Reno luxury markets with investment property analytics and rental yields.
-                  </p>
-                  <div className="flex items-center text-[#d4af37] text-sm font-medium">
-                    View Market Data <ArrowRight className="h-4 w-4 ml-1" />
-                  </div>
-                </Card>
-              </Link>
-            </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="py-12 lg:py-16 bg-background pt-[31px] pb-[31px]">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="text-center mb-12">
-              <h2 className="font-serif text-3xl lg:text-4xl font-semibold mb-4">
-                Additional Services
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <Link href="/services/get-preapproved">
-                <Card className="p-6 hover-elevate cursor-pointer h-full" data-testid="card-preapproval">
-                  <DollarSign className="h-8 w-8 text-[#d4af37] mb-4" />
-                  <h3 className="font-semibold mb-2">Mortgage Pre-Approval</h3>
-                  <p className="text-muted-foreground text-sm">Get pre-approved in minutes with competitive rates</p>
-                </Card>
-              </Link>
-
-              <Link href="/services/get-home-value">
-                <Card className="p-6 hover-elevate cursor-pointer h-full" data-testid="card-home-value">
-                  <TrendingUp className="h-8 w-8 text-[#d4af37] mb-4" />
-                  <h3 className="font-semibold mb-2">Home Valuation</h3>
-                  <p className="text-muted-foreground text-sm">AI-powered instant property valuations</p>
-                </Card>
-              </Link>
-
-              <Link href="/broker-registration">
-                <Card className="p-6 hover-elevate cursor-pointer h-full" data-testid="card-broker-reg">
-                  <Users className="h-8 w-8 text-[#d4af37] mb-4" />
-                  <h3 className="font-semibold mb-2">Broker Registration</h3>
-                  <p className="text-muted-foreground text-sm">Join our network of competing brokers</p>
-                </Card>
-              </Link>
-
-              <Link href="/live-deal-map">
-                <Card className="p-6 hover-elevate cursor-pointer h-full" data-testid="card-deal-map">
-                  <MapPin className="h-8 w-8 text-[#d4af37] mb-4" />
-                  <h3 className="font-semibold mb-2">Live Deal Map</h3>
-                  <p className="text-muted-foreground text-sm">Interactive map with Deal IQ scores</p>
-                </Card>
-              </Link>
-            </div>
+      <section id="reports" className="px-6 py-14 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-sapphire">Reports</p>
+          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">Intelligence Reports</h2>
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {reports.map((item) => (
+              <Card key={item.title} className="rounded-lg border border-brand-graphite/12 bg-white p-5">
+                <Compass className="mb-3 h-4 w-4 text-brand-sapphire" />
+                <h3 className="font-serif text-lg font-semibold text-brand-midnight">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-brand-graphite/76">{item.text}</p>
+              </Card>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="py-8 lg:py-12 bg-[#0a1628] text-white relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6 relative">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="text-center lg:text-left order-2 lg:order-1">
-                <h2 className="font-serif text-4xl lg:text-5xl font-semibold mb-4 relative inline-block">
-                  <span className="relative">
-                    Ready to Find Your Dream Home?
-                    <div 
-                      className="absolute inset-0 overflow-visible pointer-events-none"
-                      style={{
-                        background: 'radial-gradient(circle, rgba(212,175,55,0.6) 0%, rgba(244,208,63,0.3) 30%, transparent 70%)',
-                        animation: 'sonarPulse 8s ease-in-out infinite',
-                        mixBlendMode: 'screen',
-                        filter: 'blur(1px)',
-                      }}
-                    />
-                    <div 
-                      className="absolute inset-0 overflow-hidden pointer-events-none"
-                      style={{
-                        background: 'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.2) 45%, rgba(244,208,63,0.5) 50%, rgba(212,175,55,0.2) 55%, transparent 100%)',
-                        animation: 'slowScan 10s ease-in-out infinite',
-                        mixBlendMode: 'screen',
-                      }}
-                    />
-                  </span>
-                </h2>
-                <style>{`
-                  @keyframes slowScan {
-                    0%, 100% { transform: translateX(-120%); opacity: 0; }
-                    10% { opacity: 1; }
-                    50% { transform: translateX(120%); opacity: 1; }
-                    60% { opacity: 0; }
-                  }
-                  @keyframes sonarPulse {
-                    0%, 100% { transform: scale(0.5); opacity: 0; }
-                    25% { transform: scale(1.5); opacity: 0.6; }
-                    50% { transform: scale(2.5); opacity: 0; }
-                    75% { transform: scale(1.2); opacity: 0.4; }
-                  }
-                `}</style>
-                <p className="text-lg mb-8 opacity-90">
-                  Join thousands of buyers who trust Agent Kammer to find their perfect property in NYC, California, and Nevada
-                </p>
-                
-                <form onSubmit={(e) => {
-                  e.preventDefault();
-                  if (phone) {
-                    rboMutation.mutate(phone);
-                  }
-                }} className="max-w-md mx-auto lg:mx-0">
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <Input
-                      name="phone"
-                      type="tel"
-                      placeholder="Your cell number"
-                      required
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className="flex-1 h-12 bg-white/10 border-white/20 text-white placeholder:text-white/60"
-                      data-testid="input-real-estate-phone"
-                    />
-                    <Button
-                      type="submit"
-                      size="lg"
-                      className="h-12 px-8 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-black font-semibold hover:opacity-90"
-                      data-testid="button-real-estate-submit"
-                      disabled={rboMutation.isPending}
-                    >
-                      {rboMutation.isPending ? "Submitting..." : "Get Started"}
-                    </Button>
-                  </div>
-                </form>
-              </div>
-
-              <div className="relative h-[400px] lg:h-[500px] flex items-center justify-center bg-[#0a1628] rounded-lg overflow-hidden order-1 lg:order-2">
-                <img 
-                  src={agentKammerWelcoming} 
-                  alt="Agent Kammer in top hat welcoming clients into luxury apartment" 
-                  className="w-full h-full object-cover shadow-2xl"
-                  style={{ objectPosition: 'center' }}
-                />
-              </div>
-            </div>
+      <section className="border-t border-brand-graphite/10 bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Markets</p>
+          <h2 className="font-serif text-3xl font-semibold">Intelligence Hubs</h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            <Link href="/new-york-market">
+              <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40" data-testid="card-nyc-market">
+                <Building2 className="mb-2 h-5 w-5 text-brand-champagne" />
+                <h3 className="font-serif text-xl text-brand-ivory">New York City</h3>
+                <p className="mt-1 text-sm text-brand-ivory/72">Condo and co-op signals across Manhattan.</p>
+              </Card>
+            </Link>
+            <Link href="/california-market">
+              <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40" data-testid="card-california-market">
+                <MapPin className="mb-2 h-5 w-5 text-brand-champagne" />
+                <h3 className="font-serif text-xl text-brand-ivory">California</h3>
+                <p className="mt-1 text-sm text-brand-ivory/72">Coastal luxury demand and pricing trends.</p>
+              </Card>
+            </Link>
+            <Link href="/nevada-market">
+              <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40" data-testid="card-nevada-market">
+                <HomeIcon className="mb-2 h-5 w-5 text-brand-champagne" />
+                <h3 className="font-serif text-xl text-brand-ivory">Nevada</h3>
+                <p className="mt-1 text-sm text-brand-ivory/72">Growth corridors and investment signals.</p>
+              </Card>
+            </Link>
           </div>
-        </section>
+        </div>
+      </section>
 
-      </div>
-    </div>
+      <section className="px-6 py-14 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-sapphire">Advisory</p>
+          <h2 className="font-serif text-3xl font-semibold text-brand-midnight">Buy or Sell</h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            <Link href="/reverse-buyer-origination">
+              <Card className="flex h-full items-center justify-between border border-brand-graphite/12 bg-white p-6 transition hover:border-brand-champagne/50" data-testid="card-rbo">
+                <div>
+                  <h3 className="font-serif text-xl font-semibold text-brand-midnight">Reverse Buyer Origination™</h3>
+                  <p className="mt-1 text-sm text-brand-graphite/72">Strategy before search. Structure before offers.</p>
+                </div>
+                <ArrowRight className="h-5 w-5 shrink-0 text-brand-sapphire" />
+              </Card>
+            </Link>
+            <Link href="/reverse-seller-architecture">
+              <Card className="flex h-full items-center justify-between border border-brand-graphite/12 bg-white p-6 transition hover:border-brand-champagne/50" data-testid="card-rso">
+                <div>
+                  <h3 className="font-serif text-xl font-semibold text-brand-midnight">Reverse Seller Architecture™</h3>
+                  <p className="mt-1 text-sm text-brand-graphite/72">Positioning and pricing before exposure.</p>
+                </div>
+                <TrendingUp className="h-5 w-5 shrink-0 text-brand-sapphire" />
+              </Card>
+            </Link>
+          </div>
+          <Link href="/profile">
+            <Button className="mt-8 h-11 rounded-none border border-brand-champagne bg-brand-champagne px-6 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-midnight hover:bg-brand-champagne/90">
+              Start Private Profile
+            </Button>
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }

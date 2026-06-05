@@ -4,273 +4,223 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { Link } from "wouter";
-import { Brain, CheckCircle2, ArrowRight } from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
+const profileIncludes = [
+  "Buyer Strategy Review",
+  "Seller Positioning Review",
+  "Building Intelligence",
+  "Market Updates",
+];
+
+const nextSteps = [
+  { title: "Buying", href: "/reverse-buyer-origination", text: "Reverse Buyer Origination™" },
+  { title: "Selling", href: "/reverse-seller-architecture", text: "Reverse Seller Architecture™" },
+  { title: "Intelligence", href: "/real-estate", text: "Market Reports & Research" },
+];
+
 export default function Profile() {
-  const [step, setStep] = useState<'form' | 'results'>('form');
+  const [step, setStep] = useState<"form" | "results">("form");
   const { toast } = useToast();
   const [formData, setFormData] = useState({
-    income: '',
-    creditBand: '',
-    location: '',
-    goals: '',
+    role: "",
+    budget: "",
+    timeline: "",
+    market: "",
+    goals: "",
   });
-
-  const incomeRanges = [
-    '$0 - $25,000',
-    '$25,000 - $50,000',
-    '$50,000 - $75,000',
-    '$75,000 - $100,000',
-    '$100,000 - $150,000',
-    '$150,000+',
-  ];
-
-  const creditRanges = [
-    'Poor (300-579)',
-    'Fair (580-669)',
-    'Good (670-739)',
-    'Very Good (740-799)',
-    'Excellent (800+)',
-    'Not Sure',
-  ];
-
-  const locations = [
-    'New York City',
-    'California - Bay Area',
-    'California - Los Angeles',
-    'California - San Diego',
-    'Nevada - Las Vegas',
-    'Other',
-  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.income || !formData.creditBand || !formData.location || !formData.goals) {
+    if (!formData.role || !formData.budget || !formData.timeline || !formData.market) {
       toast({
-        title: "Please fill all fields",
-        description: "All fields are required to build your Agentic Profile",
+        title: "Please complete required fields",
         variant: "destructive",
       });
       return;
     }
-    setStep('results');
+    setStep("results");
   };
 
-  if (step === 'results') {
+  if (step === "results") {
     return (
-      <div className="min-h-screen bg-background py-16">
-        <div className="max-w-4xl mx-auto px-6">
-          {/* Success Header */}
-          <div className="text-center mb-12">
-            <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 rounded-full bg-[#d4af37]/20 flex items-center justify-center">
-                <CheckCircle2 className="h-8 w-8 text-[#d4af37]" />
-              </div>
-            </div>
-            <h1 className="font-serif text-4xl lg:text-5xl font-bold mb-4">
-              Your Agentic Profile is Ready
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our AI engine is now analyzing 100+ offers across financial categories to find your best matches
+      <main className="min-h-screen bg-brand-ivory py-16 text-brand-graphite">
+        <div className="mx-auto max-w-3xl px-6">
+          <div className="text-center">
+            <CheckCircle2 className="mx-auto mb-4 h-10 w-10 text-brand-champagne" />
+            <h1 className="font-serif text-4xl font-semibold text-brand-midnight">Private Profile Created</h1>
+            <p className="mt-3 text-brand-graphite/78">
+              We'll shape strategy, positioning, and intelligence around your inputs.
             </p>
           </div>
 
-          {/* Profile Summary */}
-          <Card className="p-8 mb-8 bg-[#0f1d32] border-[#1a2a42]">
-            <h2 className="font-serif text-2xl font-semibold mb-6 text-white">Your Profile</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="mt-10 border border-brand-graphite/12 bg-white p-6">
+            <h2 className="font-serif text-xl font-semibold text-brand-midnight">Your Inputs</h2>
+            <dl className="mt-4 grid gap-4 sm:grid-cols-2">
               <div>
-                <p className="text-white/60 text-sm">Annual Income</p>
-                <p className="font-semibold text-white text-lg">{formData.income}</p>
+                <dt className="text-xs uppercase tracking-wide text-brand-graphite/60">Objective</dt>
+                <dd className="font-medium text-brand-midnight">{formData.role}</dd>
               </div>
               <div>
-                <p className="text-white/60 text-sm">Credit Band</p>
-                <p className="font-semibold text-white text-lg">{formData.creditBand}</p>
+                <dt className="text-xs uppercase tracking-wide text-brand-graphite/60">Budget / Price</dt>
+                <dd className="font-medium text-brand-midnight">{formData.budget}</dd>
               </div>
               <div>
-                <p className="text-white/60 text-sm">Location</p>
-                <p className="font-semibold text-white text-lg">{formData.location}</p>
+                <dt className="text-xs uppercase tracking-wide text-brand-graphite/60">Timeline</dt>
+                <dd className="font-medium text-brand-midnight">{formData.timeline}</dd>
               </div>
               <div>
-                <p className="text-white/60 text-sm">Financial Goals</p>
-                <p className="font-semibold text-white text-lg">{formData.goals}</p>
+                <dt className="text-xs uppercase tracking-wide text-brand-graphite/60">Market</dt>
+                <dd className="font-medium text-brand-midnight">{formData.market}</dd>
               </div>
-            </div>
+              {formData.goals && (
+                <div className="sm:col-span-2">
+                  <dt className="text-xs uppercase tracking-wide text-brand-graphite/60">Notes</dt>
+                  <dd className="text-brand-midnight">{formData.goals}</dd>
+                </div>
+              )}
+            </dl>
           </Card>
 
-          {/* Recommended Categories */}
-          <div className="mb-8">
-            <h2 className="font-serif text-2xl font-semibold mb-6 text-white">Recommended for You</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Link href="/credit-cards">
-                <Card className="p-6 bg-[#0f1d32] border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer group h-full" data-testid="card-recommended-credit-cards">
-                  <div className="flex items-start justify-between mb-4">
-                    <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Flagship Service</Badge>
-                    <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] transition-all" />
-                  </div>
-                  <h3 className="font-serif text-lg font-semibold text-white mb-2">Credit Cards</h3>
-                  <p className="text-white/70">Compare 100+ cards matched to your income and credit profile</p>
-                </Card>
-              </Link>
-
-              <Link href="/investing">
-                <Card className="p-6 bg-[#0f1d32] border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer group h-full" data-testid="card-recommended-investing">
-                  <div className="flex items-start justify-between mb-4">
-                    <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Flagship Service</Badge>
-                    <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] transition-all" />
-                  </div>
-                  <h3 className="font-serif text-lg font-semibold text-white mb-2">Investing</h3>
-                  <p className="text-white/70">Discover brokerages and investment platforms suited to your goals</p>
-                </Card>
-              </Link>
-
-              <Link href="/refinancing">
-                <Card className="p-6 bg-[#0f1d32] border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer group h-full" data-testid="card-recommended-refinancing">
-                  <div className="flex items-start justify-between mb-4">
-                    <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Flagship Service</Badge>
-                    <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] transition-all" />
-                  </div>
-                  <h3 className="font-serif text-lg font-semibold text-white mb-2">Refinancing Rate Watch</h3>
-                  <p className="text-white/70">Get alerted to refinancing opportunities that match your situation</p>
-                </Card>
-              </Link>
-
-              <Link href="/">
-                <Card className="p-6 bg-[#0f1d32] border-[#1a2a42] hover:border-[#d4af37]/50 transition-all cursor-pointer group h-full" data-testid="card-recommended-explore">
-                  <div className="flex items-start justify-between mb-4">
-                    <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30">Explore All</Badge>
-                    <ArrowRight className="h-5 w-5 text-white/40 group-hover:text-[#d4af37] transition-all" />
-                  </div>
-                  <h3 className="font-serif text-lg font-semibold text-white mb-2">All Financial Categories</h3>
-                  <p className="text-white/70">Browse our complete library of AI-powered financial solutions</p>
-                </Card>
-              </Link>
+          <div className="mt-8">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-brand-sapphire">Recommended Next</p>
+            <div className="grid gap-3">
+              {nextSteps.map((item) => (
+                <Link key={item.href} href={item.href}>
+                  <Card className="flex items-center justify-between border border-brand-graphite/12 bg-white p-4 transition hover:border-brand-champagne/50">
+                    <div>
+                      <p className="text-xs uppercase tracking-wide text-brand-sapphire">{item.title}</p>
+                      <p className="font-semibold text-brand-midnight">{item.text}</p>
+                    </div>
+                    <ArrowRight className="h-4 w-4 text-brand-sapphire" />
+                  </Card>
+                </Link>
+              ))}
             </div>
           </div>
 
-          {/* CTA */}
-          <div className="text-center pt-8">
+          <div className="mt-8 text-center">
             <Button
-              onClick={() => setStep('form')}
+              onClick={() => setStep("form")}
               variant="outline"
-              size="lg"
-              className="border-[#d4af37]/50 text-[#d4af37] hover:bg-[#d4af37]/10 h-12"
+              className="rounded-none border-brand-midnight text-brand-midnight"
               data-testid="button-edit-profile"
             >
               Edit Profile
             </Button>
           </div>
         </div>
-      </div>
+      </main>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background py-16">
-      <div className="max-w-2xl mx-auto px-6">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <Badge className="bg-[#d4af37]/20 text-[#d4af37] border-[#d4af37]/30 mb-6">Build Your Profile</Badge>
-          <h1 className="font-serif text-4xl lg:text-5xl font-bold mb-4">
-            Your Agentic Profile
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            Tell us about your financial situation. Our AI engine will analyze 100+ offers and find your best matches across all categories.
+    <main className="min-h-screen bg-brand-ivory py-16 text-brand-graphite">
+      <div className="mx-auto max-w-2xl px-6">
+        <div className="text-center">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.26em] text-brand-sapphire">Private Advisory</p>
+          <h1 className="font-serif text-4xl font-semibold text-brand-midnight lg:text-5xl">Start a Private Profile</h1>
+          <p className="mx-auto mt-4 max-w-lg text-brand-graphite/78">
+            Share the essentials once. We handle the rest.
           </p>
         </div>
 
-        {/* Form */}
-        <Card className="p-8 bg-[#0f1d32] border-[#1a2a42]">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Income */}
+        <ul className="mx-auto mt-6 flex max-w-md flex-wrap justify-center gap-x-4 gap-y-1 text-sm text-brand-graphite/76">
+          {profileIncludes.map((item) => (
+            <li key={item}>• {item}</li>
+          ))}
+        </ul>
+
+        <Card className="mt-10 border border-brand-graphite/12 bg-white p-8">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">
-              <Label htmlFor="income" className="text-white">Annual Income</Label>
-              <Select value={formData.income} onValueChange={(value) => setFormData({ ...formData, income: value })}>
-                <SelectTrigger id="income" className="bg-white/5 border-white/10 text-white" data-testid="select-income">
-                  <SelectValue placeholder="Select your income range" />
+              <Label htmlFor="role">Objective *</Label>
+              <Select value={formData.role} onValueChange={(value) => setFormData({ ...formData, role: value })}>
+                <SelectTrigger id="role" data-testid="select-role">
+                  <SelectValue placeholder="Buy, sell, or research" />
                 </SelectTrigger>
                 <SelectContent>
-                  {incomeRanges.map((range) => (
-                    <SelectItem key={range} value={range}>
-                      {range}
-                    </SelectItem>
-                  ))}
+                  <SelectItem value="Buy">Buy</SelectItem>
+                  <SelectItem value="Sell">Sell</SelectItem>
+                  <SelectItem value="Buy & Sell">Buy & Sell</SelectItem>
+                  <SelectItem value="Invest / Research">Invest / Research</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
-            {/* Credit Band */}
             <div className="space-y-2">
-              <Label htmlFor="credit" className="text-white">Credit Score Range</Label>
-              <Select value={formData.creditBand} onValueChange={(value) => setFormData({ ...formData, creditBand: value })}>
-                <SelectTrigger id="credit" className="bg-white/5 border-white/10 text-white" data-testid="select-credit">
-                  <SelectValue placeholder="Select your credit range" />
+              <Label htmlFor="budget">Budget or List Price *</Label>
+              <Select value={formData.budget} onValueChange={(value) => setFormData({ ...formData, budget: value })}>
+                <SelectTrigger id="budget" data-testid="select-budget">
+                  <SelectValue placeholder="Select range" />
                 </SelectTrigger>
                 <SelectContent>
-                  {creditRanges.map((range) => (
-                    <SelectItem key={range} value={range}>
-                      {range}
-                    </SelectItem>
-                  ))}
+                  <SelectItem value="Under $1M">Under $1M</SelectItem>
+                  <SelectItem value="$1M – $2M">$1M – $2M</SelectItem>
+                  <SelectItem value="$2M – $5M">$2M – $5M</SelectItem>
+                  <SelectItem value="$5M – $10M">$5M – $10M</SelectItem>
+                  <SelectItem value="$10M+">$10M+</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
-            {/* Location */}
             <div className="space-y-2">
-              <Label htmlFor="location" className="text-white">Primary Location</Label>
-              <Select value={formData.location} onValueChange={(value) => setFormData({ ...formData, location: value })}>
-                <SelectTrigger id="location" className="bg-white/5 border-white/10 text-white" data-testid="select-location">
-                  <SelectValue placeholder="Select your location" />
+              <Label htmlFor="timeline">Timeline *</Label>
+              <Select value={formData.timeline} onValueChange={(value) => setFormData({ ...formData, timeline: value })}>
+                <SelectTrigger id="timeline" data-testid="select-timeline">
+                  <SelectValue placeholder="When are you deciding?" />
                 </SelectTrigger>
                 <SelectContent>
-                  {locations.map((loc) => (
-                    <SelectItem key={loc} value={loc}>
-                      {loc}
-                    </SelectItem>
-                  ))}
+                  <SelectItem value="0–30 days">0–30 days</SelectItem>
+                  <SelectItem value="1–3 months">1–3 months</SelectItem>
+                  <SelectItem value="3–6 months">3–6 months</SelectItem>
+                  <SelectItem value="6+ months">6+ months</SelectItem>
+                  <SelectItem value="Exploring">Exploring</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
-            {/* Goals */}
             <div className="space-y-2">
-              <Label htmlFor="goals" className="text-white">Financial Goals</Label>
+              <Label htmlFor="market">Target Market *</Label>
+              <Input
+                id="market"
+                placeholder="e.g. Upper East Side, Tribeca"
+                value={formData.market}
+                onChange={(e) => setFormData({ ...formData, market: e.target.value })}
+                data-testid="input-market"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="goals">Additional Context</Label>
               <Textarea
                 id="goals"
-                placeholder="e.g., Build credit, refinance mortgage, invest for retirement, get cashback rewards..."
+                placeholder="Building preferences, financing, or deal constraints."
                 value={formData.goals}
                 onChange={(e) => setFormData({ ...formData, goals: e.target.value })}
-                className="bg-white/5 border-white/10 text-white placeholder:text-white/40 resize-none"
-                rows={4}
+                rows={3}
+                className="resize-none"
                 data-testid="textarea-goals"
               />
             </div>
 
-            {/* Submit */}
             <Button
               type="submit"
-              size="lg"
-              className="w-full h-12 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a1628] font-semibold hover:opacity-90"
+              className="h-12 w-full rounded-none border border-brand-champagne bg-brand-champagne font-semibold uppercase tracking-[0.1em] text-brand-midnight hover:bg-brand-champagne/90"
               data-testid="button-create-profile"
             >
-              <Brain className="h-5 w-5 mr-2" />
-              Create My Agentic Profile
+              Create Private Profile
             </Button>
           </form>
 
-          {/* Info Box */}
-          <div className="mt-8 p-4 bg-white/5 border border-white/10 rounded-lg">
-            <p className="text-sm text-white/70">
-              <span className="font-semibold text-white">How it works:</span> Your profile is used by our AI engine to analyze financial products and rank them based on YOUR fit, not commissions. Your information is secure and never shared.
-            </p>
-          </div>
+          <p className="mt-6 text-center text-xs text-brand-graphite/60">
+            Confidential. Used only to shape your advisory plan.
+          </p>
         </Card>
       </div>
-    </div>
+    </main>
   );
 }
