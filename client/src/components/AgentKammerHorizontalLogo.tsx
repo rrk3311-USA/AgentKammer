@@ -1,25 +1,45 @@
 import { cn } from "@/lib/utils";
-import homepageLogoDark from "@assets/agent-kammer-logo-header-new.png";
-import homepageLogoLight from "@assets/agent-kammer-logo-mark-light.png";
+import logoEmblem from "@assets/agent-kammer-logo-emblem-transparent.png";
 
 interface AgentKammerHorizontalLogoProps {
   className?: string;
-  /** `light` = cream wordmark for dark backgrounds; `default` = uploaded dark logo */
+  /** `light` = ivory wordmark for dark backgrounds; `default` = standard header */
   variant?: "default" | "light";
 }
 
 export function AgentKammerHorizontalLogo({ className, variant = "default" }: AgentKammerHorizontalLogoProps) {
-  const src = variant === "light" ? homepageLogoLight : homepageLogoDark;
+  const isLight = variant === "light";
 
   return (
-    <img
-      src={src}
-      alt="Agent Kammer"
-      className={cn(
-        "block h-14 w-auto max-w-[min(100vw-6rem,23rem)] object-contain object-left sm:h-16 sm:max-w-[25rem] lg:h-20 lg:max-w-[30rem]",
-        className,
-      )}
-      loading="eager"
-    />
+    <div
+      className={cn("flex shrink-0 items-center gap-3.5 sm:gap-4 lg:gap-5", className)}
+      aria-label="Agent Kammer"
+    >
+      <img
+        src={logoEmblem}
+        alt=""
+        aria-hidden
+        className="h-[3.75rem] w-auto shrink-0 object-contain sm:h-[4.25rem] lg:h-[4.75rem]"
+        loading="eager"
+      />
+      <div className="flex flex-col justify-center gap-1.5 lg:gap-2">
+        <p
+          className={cn(
+            "whitespace-nowrap font-serif text-[1.55rem] font-semibold leading-none tracking-[0.06em] sm:text-[1.75rem] lg:text-[2.15rem]",
+            isLight ? "text-brand-ivory" : "text-brand-ivory",
+          )}
+        >
+          AGENT KAMMER
+        </p>
+        <p
+          className={cn(
+            "whitespace-nowrap text-[0.5625rem] font-semibold uppercase leading-none tracking-[0.24em] sm:text-[0.625rem] lg:text-[0.6875rem]",
+            isLight ? "text-brand-champagne" : "text-brand-champagne",
+          )}
+        >
+          Modern Manhattan Luxury
+        </p>
+      </div>
+    </div>
   );
 }

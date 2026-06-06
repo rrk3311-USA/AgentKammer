@@ -5,28 +5,29 @@ import { useState } from "react";
 import { AgentKammerHorizontalLogo } from "@/components/AgentKammerHorizontalLogo";
 
 const navLinks = [
+  { label: "Lease", href: "/profile" },
   { label: "Buy", href: "/reverse-buyer-origination" },
-  { label: "Sell", href: "/reverse-seller-architecture" },
-  { label: "Intelligence", href: "/real-estate" },
-  { label: "Our Strategy", href: "/about" },
+  { label: "Buildings", href: "/#buildings" },
+  { label: "Research", href: "/real-estate" },
+  { label: "About", href: "/about" },
 ];
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full overflow-visible bg-brand-midnight shadow-[0_10px_30px_rgba(0,0,0,0.28)]">
+    <header className="sticky top-0 z-50 w-full overflow-visible bg-brand-midnight">
       <div className="bg-brand-midnight">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-6 py-3.5 lg:gap-8 lg:px-10 lg:py-5">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-2 lg:gap-6 lg:px-10 lg:py-2.5">
           <Link href="/" data-testid="link-home" className="shrink-0 overflow-visible">
             <AgentKammerHorizontalLogo variant="default" />
           </Link>
 
-          <nav className="hidden min-w-0 flex-1 items-center justify-end gap-x-5 lg:flex xl:gap-x-8">
+          <nav className="hidden min-w-0 flex-1 items-center justify-end gap-x-5 lg:flex xl:gap-x-7">
             {navLinks.map((link) => (
               <Link key={link.label} href={link.href} className="group relative shrink-0 px-1 py-2">
                 <span
-                  className="whitespace-nowrap text-[0.74rem] font-semibold uppercase tracking-[0.12em] text-brand-ivory transition group-hover:text-brand-champagne xl:text-[0.8rem] xl:tracking-[0.13em]"
+                  className="whitespace-nowrap text-[0.74rem] font-semibold uppercase tracking-[0.12em] text-brand-ivory transition group-hover:text-brand-champagne xl:text-[0.78rem]"
                   style={{ fontFamily: "Neue Haas Grotesk, Inter, system-ui, sans-serif" }}
                 >
                   {link.label}
@@ -38,15 +39,15 @@ export function Header() {
 
           <div className="hidden shrink-0 lg:block">
             <Link href="/profile">
-              <Button className="h-11 whitespace-nowrap rounded-none border border-brand-champagne bg-brand-champagne px-6 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-[#0F172A] hover:bg-brand-champagne/90">
-                Start Private Profile
+              <Button className="h-10 whitespace-nowrap rounded-none border border-brand-champagne bg-brand-champagne px-5 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-midnight hover:bg-brand-champagne/90">
+                Start Private Search
               </Button>
             </Link>
           </div>
 
           <button
             onClick={() => setMobileMenuOpen((open) => !open)}
-          className="shrink-0 text-brand-ivory lg:hidden"
+            className="shrink-0 text-brand-ivory lg:hidden"
             aria-label="Toggle menu"
             data-testid="button-mobile-menu"
           >
@@ -70,7 +71,7 @@ export function Header() {
             ))}
             <Link href="/profile">
               <Button className="mt-2 h-10 rounded-none border border-brand-champagne bg-brand-champagne text-brand-midnight hover:bg-brand-champagne/90">
-                Start Private Profile
+                Start Private Search
               </Button>
             </Link>
           </nav>
