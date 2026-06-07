@@ -290,29 +290,58 @@ export default function Home() {
       {/* 2. Services */}
       <section className="bg-brand-ivory px-6 py-16 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-[0.8fr_1fr] lg:items-end">
-            <h2 className={`${sectionHeadline} text-brand-midnight`}>
-              Three Ways We Help
-            </h2>
+          <div className="grid gap-8 border-b border-brand-midnight/10 pb-8 lg:grid-cols-[0.78fr_1fr] lg:items-end">
+            <div>
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">
+                Three Ways We Help
+              </p>
+              <h2 className={`${sectionHeadline} text-brand-midnight`}>One Philosophy. Three Applications.</h2>
+            </div>
             <p className="max-w-xl text-base leading-7 text-brand-graphite/70 lg:justify-self-end">
               Leasing, acquisition, and building research shaped around one idea: study the building before choosing
               the residence.
             </p>
           </div>
-          <div className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-3 lg:items-stretch lg:gap-7">
-            {threePaths.map((path) => (
-              <Link key={path.subtitle} href={path.href} className="group block">
-                <div className="h-full border border-brand-champagne/55 bg-white/72 px-6 py-7 text-brand-midnight shadow-[0_18px_42px_rgba(15,23,42,0.08)] transition duration-300 group-hover:-translate-y-1 group-hover:border-brand-champagne lg:px-7 lg:py-9">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-brand border border-brand-champagne/60 bg-brand-ivory text-brand-champagne">
-                    <path.icon className="h-10 w-10" strokeWidth={1.75} />
+          <div className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-[1.1fr_0.9fr] lg:gap-7">
+            <Link href={threePaths[0].href} className="group block">
+              <div className="h-full border border-brand-champagne/55 bg-white/78 p-6 text-brand-midnight shadow-[0_18px_42px_rgba(15,23,42,0.08)] transition duration-300 group-hover:-translate-y-1 group-hover:border-brand-champagne lg:p-8">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-brand border border-brand-champagne/60 bg-brand-ivory text-brand-champagne">
+                    <Building2 className="h-7 w-7" strokeWidth={1.65} />
                   </div>
-                  <p className="mt-7 font-serif text-[1.75rem] leading-tight text-brand-midnight lg:text-[2rem]">
-                    {path.subtitle}
-                  </p>
-                  <p className="mt-4 text-base leading-7 text-brand-graphite/78">{path.text}</p>
+                  <div>
+                    <p className="text-[0.66rem] font-semibold uppercase tracking-[0.2em] text-brand-champagne">
+                      {threePaths[0].role}
+                    </p>
+                    <h3 className="mt-1 font-serif text-[2rem] leading-tight text-brand-midnight lg:text-[2.45rem]">
+                      {threePaths[0].subtitle}
+                    </h3>
+                  </div>
                 </div>
-              </Link>
-            ))}
+                <p className="mt-6 max-w-xl text-base leading-7 text-brand-graphite/78">{threePaths[0].text}</p>
+                <div className="mt-8 h-px w-full bg-gradient-to-r from-brand-champagne/70 via-brand-champagne/20 to-transparent" />
+                <p className="mt-5 max-w-lg text-sm leading-6 text-brand-graphite/62">
+                  Every recommendation starts with the same building-first lens, then resolves into the right path for
+                  the client.
+                </p>
+              </div>
+            </Link>
+            <div className="grid gap-5">
+              {threePaths.slice(1).map((path) => (
+                <Link key={path.subtitle} href={path.href} className="group block">
+                  <div className="h-full border border-brand-midnight/10 bg-[#f8f5ed] px-6 py-5 text-brand-midnight transition duration-300 group-hover:-translate-y-0.5 group-hover:border-brand-champagne/70 group-hover:bg-white/80">
+                    <div className="flex items-baseline justify-between gap-4">
+                      <p className="text-[0.64rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">
+                        {path.role}
+                      </p>
+                      <span className="h-px flex-1 bg-brand-champagne/35" aria-hidden />
+                    </div>
+                    <h3 className="mt-4 font-serif text-[1.75rem] leading-tight text-brand-midnight">{path.subtitle}</h3>
+                    <p className="mt-3 text-base leading-7 text-brand-graphite/74">{path.text}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>

@@ -381,6 +381,8 @@ export class MemStorage implements IStorage {
   }
 
   private affiliatesMap: Map<string, Affiliate> = new Map();
+  private travelDealSubscribersMap: Map<string, TravelDealSubscriber> = new Map();
+  private travelDealsMap: Map<string, TravelDeal> = new Map();
 
   async createAffiliate(insertAffiliate: InsertAffiliate): Promise<Affiliate> {
     const id = randomUUID();
@@ -463,6 +465,55 @@ export class MemStorage implements IStorage {
 
   async deleteChatConversation(id: string): Promise<boolean> {
     return this.chatConversationsMap.delete(id);
+  }
+
+  async createTravelDealSubscriber(insertSubscriber: InsertTravelDealSubscriber): Promise<TravelDealSubscriber> {
+    const id = randomUUID();
+    const subscriber: TravelDealSubscriber = {
+      ...insertSubscriber,
+      id,
+      isActive: true,
+      createdAt: new Date(),
+    };
+    this.travelDealSubscribersMap.set(id, subscriber);
+    return subscriber;
+  }
+
+  async getAllTravelDealSubscribers(): Promise<TravelDealSubscriber[]> {
+    return Array.from(this.travelDealSubscribersMap.values()).sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    );
+  }
+
+  async createTravelDeal(insertDeal: InsertTravelDeal): Promise<TravelDeal> {
+    const id = randomUUID();
+    const deal: TravelDeal = {
+      ...insertDeal,
+      description: insertDeal.description ?? null,
+      discount: insertDeal.discount ?? null,
+      partnerName: insertDeal.partnerName ?? null,
+      partnerUrl: insertDeal.partnerUrl ?? null,
+      imageUrl: insertDeal.imageUrl ?? null,
+      articleContent: insertDeal.articleContent ?? null,
+      weekNumber: insertDeal.weekNumber ?? null,
+      year: insertDeal.year ?? null,
+      isActive: insertDeal.isActive ?? true,
+      publishedAt: insertDeal.publishedAt ?? null,
+      id,
+      createdAt: new Date(),
+    };
+    this.travelDealsMap.set(id, deal);
+    return deal;
+  }
+
+  async getAllTravelDeals(): Promise<TravelDeal[]> {
+    return Array.from(this.travelDealsMap.values()).sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+    );
+  }
+
+  async getTravelDealById(id: string): Promise<TravelDeal | undefined> {
+    return this.travelDealsMap.get(id);
   }
 }
 

@@ -577,6 +577,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: "Messages array is required" });
       }
 
+      if (!openai) {
+        return res.status(503).json({ error: "AI chat is not configured" });
+      }
+
       const chatMessages = [
         { role: "system" as const, content: LUXURY_CONCIERGE_PROMPT },
         ...messages.map((msg: any) => ({
