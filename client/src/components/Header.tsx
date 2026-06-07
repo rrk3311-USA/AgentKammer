@@ -40,7 +40,7 @@ export function Header() {
           <div className="hidden shrink-0 lg:block">
             <Link href="/profile">
               <Button className="h-10 whitespace-nowrap rounded-none border border-brand-champagne bg-brand-champagne px-5 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-midnight hover:bg-brand-champagne/90">
-                Start Private Search
+                Curate Matches
               </Button>
             </Link>
           </div>
@@ -71,7 +71,7 @@ export function Header() {
             ))}
             <Link href="/profile">
               <Button className="mt-2 h-10 rounded-none border border-brand-champagne bg-brand-champagne text-brand-midnight hover:bg-brand-champagne/90">
-                Start Private Search
+                Curate Matches
               </Button>
             </Link>
           </nav>

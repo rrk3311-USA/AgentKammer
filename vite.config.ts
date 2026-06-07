@@ -37,5 +37,20 @@ export default defineConfig({
       allow: [path.resolve(import.meta.dirname)],
       deny: ["**/.*"],
     },
+    watch: {
+      ignored: [
+        "**/attached_assets/Pasted-*",
+        "**/attached_assets/Screenshot*",
+        "**/attached_assets/IMG_*",
+        "**/attached_assets/image_*",
+        "**/attached_assets/*.mp4",
+        "**/attached_assets/*.csv",
+        "**/attached_assets/*.eps",
+        "**/attached_assets/*.md",
+        "**/output/**",
+        "**/tmp/**",
+        "**/pdfs/**",
+      ],
+    },
   },
 });

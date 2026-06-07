@@ -1,6 +1,8 @@
 # Building images (`/buildings/*.jpg`)
 
-Local image library for the **Buildings We Follow** grid on the home page. All `src` values must be `/buildings/{slug}.jpg` — no external URLs in markup.
+Local image library for the **Buildings We Follow** accordion on the home page. Source images stay at
+`/buildings/{slug}.jpg`; compact card thumbnails are served from `/buildings/thumbs/{slug}.webp`.
+Do not hotlink external URLs in markup.
 
 ## Slugs (18)
 

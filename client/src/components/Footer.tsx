@@ -1,3 +1,5 @@
+import { Link } from "wouter";
+
 export function Footer() {
   return (
     <footer className="bg-brand-midnight text-brand-ivory">
@@ -10,9 +12,9 @@ export function Footer() {
         <address className="mt-6 text-sm not-italic leading-7 text-brand-ivory/80">
           <span>New York, NY</span>
           <span className="mx-2 text-brand-steel/40">/</span>
-          <a href="mailto:info@agentkammer.com" className="hover:underline">
-            info@AgentKammer.com
-          </a>
+          <Link href="/contact" className="hover:underline">
+            Contact
+          </Link>
         </address>
         <p className="mt-6 text-xs tracking-[0.06em] text-brand-ivory/55">Copyright 2026</p>
       </div>

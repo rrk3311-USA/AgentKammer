@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import logoEmblem from "@assets/agent-kammer-logo-emblem-transparent.png";
+import logoEmblem from "@assets/agent-kammer-logo-emblem-uploaded-header.png";
 
 interface AgentKammerHorizontalLogoProps {
   className?: string;
