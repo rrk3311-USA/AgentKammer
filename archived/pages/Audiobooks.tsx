@@ -12,14 +12,14 @@ import { Headphones, Play, Clock, Star, DollarSign, MessageCircle } from "lucide
 
 import bookCoverImage from "@assets/generated_images/3D_audiobook_cover_mockup_42c57384.png";
 import authorPhoto from "@assets/generated_images/Professional_avatar_headshot_fdbd53e6.png";
-import wealthMagnetIcon from "@assets/generated_images/Wealth_magnet_icon_illustration_8bedebf3.png";
-import sacredPartnershipIcon from "@assets/generated_images/Sacred_partnership_icon_illustration_e5f9a5b0.png";
-import quantumManifestationIcon from "@assets/generated_images/Quantum_manifestation_icon_illustration_84751384.png";
-import powerWithinIcon from "@assets/generated_images/Power_within_icon_illustration_914acd9d.png";
-import luxuryLivingIcon from "@assets/generated_images/Luxury_living_icon_illustration_95cf6c77.png";
-import wealthArchitectureIcon from "@assets/generated_images/Wealth_architecture_icon_illustration_6c9baca7.png";
-import negotiationMasteryIcon from "@assets/generated_images/Negotiation_mastery_icon_illustration_7a7582a2.png";
-import globalPropertyIcon from "@assets/generated_images/Global_property_icon_illustration_208421f1.png";
+const wealthMagnetIcon = bookCoverImage;
+const sacredPartnershipIcon = authorPhoto;
+const quantumManifestationIcon = bookCoverImage;
+const powerWithinIcon = authorPhoto;
+const luxuryLivingIcon = bookCoverImage;
+const wealthArchitectureIcon = authorPhoto;
+const negotiationMasteryIcon = bookCoverImage;
+const globalPropertyIcon = authorPhoto;
 
 const audiobooks = [
   // Personal Development & Transformation

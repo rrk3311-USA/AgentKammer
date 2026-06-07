@@ -57,37 +57,37 @@ export function MarketReportDownload({ market, marketName }: MarketReportDownloa
   };
 
   return (
-    <Card className="p-8 lg:p-12 my-8 bg-gradient-to-br from-[#0a1628] to-[#1a2638] border-[#d4af37]/30 text-white">
-      <div className="max-w-3xl mx-auto text-center">
-        <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-[#d4af37]/20 flex items-center justify-center">
-          <Download className="h-10 w-10 text-[#d4af37]" />
+    <Card className="my-8 rounded-none border border-brand-champagne/35 bg-brand-midnight p-8 text-brand-ivory shadow-none lg:p-12">
+      <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-brand border border-brand-champagne/45 bg-brand-ivory/5">
+          <Download className="h-8 w-8 text-brand-champagne" strokeWidth={1.5} />
         </div>
         
-        <h2 className="font-serif text-3xl lg:text-4xl font-semibold mb-4">
+        <h2 className="mb-4 font-serif text-3xl font-semibold lg:text-4xl">
           Download {marketName} Market Report
         </h2>
         
-        <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
-          Get a comprehensive PDF market report with all the data on this page — beautifully formatted and branded with our emblem. Perfect for sharing or printing.
+        <p className="mx-auto mb-8 max-w-2xl text-base leading-7 text-brand-ivory/72">
+          Receive a concise PDF brief with the market context, building intelligence, and advisory notes from this page.
         </p>
 
         {isSuccess ? (
           <div className="flex flex-col items-center gap-4 py-6">
-            <CheckCircle className="h-16 w-16 text-emerald-400" />
-            <p className="text-xl text-emerald-400 font-semibold">Report sent successfully!</p>
-            <p className="text-white/70">Check your email inbox</p>
+            <CheckCircle className="h-14 w-14 text-brand-champagne" strokeWidth={1.5} />
+            <p className="text-xl font-semibold text-brand-champagne">Report sent successfully.</p>
+            <p className="text-brand-ivory/70">Check your email inbox.</p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="max-w-xl mx-auto">
+          <form onSubmit={handleSubmit} className="mx-auto max-w-xl">
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="flex-1 relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-white/50" />
+                <Mail className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-brand-ivory/45" />
                 <Input
                   type="email"
                   placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-12 h-14 bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-[#d4af37] focus:ring-[#d4af37]"
+                  className="h-14 rounded-brand border-brand-ivory/20 bg-brand-ivory/[0.08] pl-12 text-brand-ivory placeholder:text-brand-ivory/45 focus:border-brand-champagne focus:ring-brand-champagne"
                   data-testid="input-market-report-email"
                   disabled={isLoading}
                 />
@@ -96,7 +96,7 @@ export function MarketReportDownload({ market, marketName }: MarketReportDownloa
                 type="submit"
                 size="lg"
                 disabled={isLoading}
-                className="h-14 px-8 bg-[#d4af37] hover:bg-[#c49d2f] text-black font-semibold"
+                className="h-14 rounded-brand border border-brand-champagne bg-brand-champagne px-8 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-midnight hover:bg-brand-champagne/90"
                 data-testid="button-download-report"
               >
                 {isLoading ? (
@@ -113,40 +113,40 @@ export function MarketReportDownload({ market, marketName }: MarketReportDownloa
               </Button>
             </div>
             
-            <p className="text-sm text-white/60 mt-4">
-              The report will be emailed to you instantly as a PDF attachment
+            <p className="mt-4 text-sm text-brand-ivory/55">
+              The report will be emailed as a PDF attachment.
             </p>
           </form>
         )}
 
-        <div className="grid md:grid-cols-3 gap-6 mt-12 text-left">
+        <div className="mt-12 grid gap-5 text-left md:grid-cols-3">
           <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[#d4af37]/20 flex items-center justify-center flex-shrink-0">
-              <CheckCircle className="h-5 w-5 text-[#d4af37]" />
+            <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-brand border border-brand-champagne/35 bg-brand-ivory/5">
+              <CheckCircle className="h-4 w-4 text-brand-champagne" />
             </div>
             <div>
               <h3 className="font-semibold mb-1">Professional Format</h3>
-              <p className="text-sm text-white/70">Branded cover page with our emblem and contact info</p>
+              <p className="text-sm leading-6 text-brand-ivory/66">Branded cover page with concise advisory framing.</p>
             </div>
           </div>
           
           <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[#d4af37]/20 flex items-center justify-center flex-shrink-0">
-              <CheckCircle className="h-5 w-5 text-[#d4af37]" />
+            <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-brand border border-brand-champagne/35 bg-brand-ivory/5">
+              <CheckCircle className="h-4 w-4 text-brand-champagne" />
             </div>
             <div>
-              <h3 className="font-semibold mb-1">Complete Data</h3>
-              <p className="text-sm text-white/70">All metrics, projections, and insights in print-ready format</p>
+              <h3 className="font-semibold mb-1">Building Context</h3>
+              <p className="text-sm leading-6 text-brand-ivory/66">Market data translated through the building-first lens.</p>
             </div>
           </div>
           
           <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[#d4af37]/20 flex items-center justify-center flex-shrink-0">
-              <CheckCircle className="h-5 w-5 text-[#d4af37]" />
+            <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-brand border border-brand-champagne/35 bg-brand-ivory/5">
+              <CheckCircle className="h-4 w-4 text-brand-champagne" />
             </div>
             <div>
-              <h3 className="font-semibold mb-1">Instant Delivery</h3>
-              <p className="text-sm text-white/70">Receive your PDF via email within seconds</p>
+              <h3 className="font-semibold mb-1">Private Delivery</h3>
+              <p className="text-sm leading-6 text-brand-ivory/66">Delivered directly to the email you provide.</p>
             </div>
           </div>
         </div>

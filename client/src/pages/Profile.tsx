@@ -12,14 +12,14 @@ import { useToast } from "@/hooks/use-toast";
 const profileIncludes = [
   "Buyer Strategy Review",
   "Seller Positioning Review",
-  "Building Intelligence",
-  "Market Updates",
+  "Building Intelligence Review",
+  "Comparable and Neighborhood Context",
 ];
 
 const nextSteps = [
   { title: "Buying", href: "/reverse-buyer-origination", text: "Reverse Buyer Origination™" },
   { title: "Selling", href: "/reverse-seller-architecture", text: "Reverse Seller Architecture™" },
-  { title: "Intelligence", href: "/real-estate", text: "Market Reports & Research" },
+  { title: "Intelligence", href: "/real-estate", text: "Building Intelligence & Reports" },
 ];
 
 export default function Profile() {

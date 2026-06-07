@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
-import homeValueImage from "@assets/generated_images/modern_luxury_home_hero_background.png";
+const homeValueImage = "/buildings/tribeca-green.jpg";
 
 export default function GetHomeValue() {
   const { toast } = useToast();

@@ -2,18 +2,36 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Building2, ClipboardCheck, Clock, Home, Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+
+const sellerAssessment = [
+  {
+    title: "Private Value Assessment",
+    text: "A free first read on likely range, buyer pool, and timing before you commit to a listing process.",
+    icon: Home,
+  },
+  {
+    title: "Comparable Positioning",
+    text: "Relevant building and neighborhood comps translated into pricing context, not generic estimates.",
+    icon: Building2,
+  },
+  {
+    title: "Preparation Checklist",
+    text: "A concise view of what to fix, stage, disclose, or hold before exposure.",
+    icon: ClipboardCheck,
+  },
+];
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    service: "buying",
+    service: "buy-sell",
     market: "",
     timeframe: "",
     message: "",
@@ -48,7 +66,7 @@ export default function Contact() {
         name: "",
         email: "",
         phone: "",
-        service: "buying",
+        service: "buy-sell",
         market: "",
         timeframe: "",
         message: "",
@@ -70,18 +88,33 @@ export default function Contact() {
 
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
-      <section className="bg-brand-midnight px-6 py-16 text-brand-ivory lg:px-10">
-        <div className="mx-auto max-w-7xl text-center">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.26em] text-brand-champagne">Contact</p>
-          <h1 className="font-serif text-5xl font-semibold md:text-6xl">Concierge</h1>
-          <p className="mx-auto mt-5 max-w-lg text-lg text-brand-ivory/82">
-            Serious inquiries. Clear response. Fast next steps.
-          </p>
+      <section className="relative overflow-hidden bg-brand-midnight px-6 py-20 text-brand-ivory lg:px-10 lg:py-24">
+        <img
+          src="/images/leasing-today-terrace.png"
+          alt="Manhattan terrace overlooking the skyline at sunset"
+          className="absolute inset-0 h-full w-full object-cover opacity-55 saturate-[0.88]"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.98)_0%,rgba(15,23,42,0.9)_42%,rgba(15,23,42,0.68)_100%)]" />
+        <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.95fr_0.75fr] lg:items-end">
+          <div>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Private Advisory</p>
+            <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-6xl lg:text-7xl">Buy / Sell Concierge</h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-brand-ivory/82">
+              Serious inquiries, confidential context, and clear next steps for Manhattan leasing, acquisition, and seller positioning.
+            </p>
+          </div>
+          <div className="border border-brand-ivory/14 bg-brand-midnight/72 p-5 backdrop-blur-sm">
+            <p className="text-[0.66rem] font-semibold uppercase tracking-[0.2em] text-brand-champagne">
+              Complimentary Seller First Read
+            </p>
+            <p className="mt-3 font-serif text-2xl leading-tight text-brand-ivory">Know whether the move is worth exploring before you expose the property.</p>
+          </div>
         </div>
       </section>
 
-      <section className="px-6 py-14 lg:px-10">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2">
+      <section className="px-6 py-14 lg:px-10 lg:py-16">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 lg:grid-cols-[0.92fr_1.08fr]">
           <div className="space-y-5">
             <Card className="border border-brand-graphite/12 bg-white p-5">
               <div className="flex items-start gap-4">
@@ -112,27 +145,42 @@ export default function Contact() {
               <div className="flex items-start gap-4">
                 <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-brand-champagne" />
                 <div>
-                  <h3 className="font-semibold text-brand-midnight">Markets</h3>
-                  <p className="text-sm text-brand-graphite/78">New York City · California · Nevada</p>
+                  <h3 className="font-semibold text-brand-midnight">Market Focus</h3>
+                  <p className="text-sm text-brand-graphite/78">Manhattan luxury buildings, with emphasis on building fit and transaction timing.</p>
                 </div>
               </div>
             </Card>
 
             <Card className="border border-brand-graphite/12 bg-white p-5">
               <div className="flex items-start gap-4">
-                <Clock className="mt-0.5 h-5 w-5 shrink-0 text-brand-champagne" />
+                <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-brand-champagne" />
                 <div>
-                  <h3 className="font-semibold text-brand-midnight">Hours</h3>
-                  <p className="text-sm text-brand-graphite/78">Mon–Fri 8am–8pm · Sat–Sun 9am–6pm</p>
-                  <p className="mt-1 text-xs text-brand-champagne">By appointment 24/7</p>
+                  <h3 className="font-semibold text-brand-midnight">Discretion</h3>
+                  <p className="text-sm text-brand-graphite/78">Seller, buyer, and relocation conversations are handled privately before any public exposure.</p>
                 </div>
               </div>
             </Card>
+
+            <div className="border border-brand-champagne/35 bg-[#f7f3ea] p-5">
+              <p className="text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">For Sellers</p>
+              <h2 className="mt-2 font-serif text-2xl font-semibold text-brand-midnight">Free Value Assessment</h2>
+              <div className="mt-5 grid gap-4">
+                {sellerAssessment.map((item) => (
+                  <div key={item.title} className="flex gap-3 border-t border-brand-midnight/10 pt-4 first:border-t-0 first:pt-0">
+                    <item.icon className="mt-0.5 h-4 w-4 shrink-0 text-brand-champagne" strokeWidth={1.6} />
+                    <div>
+                      <p className="font-semibold text-brand-midnight">{item.title}</p>
+                      <p className="mt-1 text-sm leading-6 text-brand-graphite/70">{item.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <Card className="border border-brand-graphite/12 bg-white p-8">
-            <h2 className="font-serif text-2xl font-semibold text-brand-midnight">Send a Message</h2>
-            <p className="mt-2 text-sm text-brand-graphite/72">Response within 24 hours.</p>
+          <Card className="border border-brand-graphite/12 bg-white p-8 shadow-[0_18px_42px_rgba(15,23,42,0.06)]">
+            <h2 className="font-serif text-2xl font-semibold text-brand-midnight">Request Private Guidance</h2>
+            <p className="mt-2 text-sm leading-6 text-brand-graphite/72">Buy, sell, lease, or simply understand what your building may be worth before making a move.</p>
 
             <form onSubmit={handleSubmit} className="mt-6 space-y-5">
               <div>
@@ -191,8 +239,9 @@ export default function Contact() {
                   required
                   data-testid="select-contact-service"
                 >
+                  <option value="buy-sell">Buy / Sell</option>
+                  <option value="selling">Selling / Free Value Assessment</option>
                   <option value="buying">Buying</option>
-                  <option value="selling">Selling</option>
                   <option value="intelligence">Intelligence / Research</option>
                   <option value="investment">Investment</option>
                   <option value="general">General</option>
@@ -238,7 +287,7 @@ export default function Contact() {
                   id="message"
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="What you're trying to accomplish and any constraints."
+                  placeholder="Tell us what you are considering: buying, selling, leasing, timing, building, target value, or any constraints."
                   required
                   rows={5}
                   className="resize-none"
@@ -253,7 +302,7 @@ export default function Contact() {
                 data-testid="button-contact-submit"
                 disabled={contactMutation.isPending}
               >
-                {contactMutation.isPending ? "Sending..." : "Send Message"}
+                {contactMutation.isPending ? "Sending..." : "Request Private Guidance"}
               </Button>
             </form>
           </Card>

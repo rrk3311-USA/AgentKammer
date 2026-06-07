@@ -388,9 +388,9 @@
   .bespoke-signature {
     font-family: var(--font-script);
     font-weight: 400;
-    letter-spacing: 0.02em;
-    color: var(--brand-champagne);
-    text-shadow: 0 2px 22px rgba(214, 180, 95, 0.28);
+    letter-spacing: 0.015em;
+    color: var(--brand-midnight);
+    text-shadow: 0 2px 18px rgba(15, 23, 42, 0.08);
   }
 
   .bespoke-signature::after {
@@ -402,9 +402,9 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(214, 180, 95, 0.15) 12%,
-      rgba(214, 180, 95, 0.72) 48%,
-      rgba(214, 180, 95, 0.2) 88%,
+      rgba(214, 180, 95, 0.12) 12%,
+      rgba(15, 23, 42, 0.34) 48%,
+      rgba(214, 180, 95, 0.18) 88%,
       transparent 100%
     );
   }

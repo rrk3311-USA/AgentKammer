@@ -2,63 +2,86 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import {
-  ArrowRight,
   Building2,
   Compass,
   Home as HomeIcon,
   MapPin,
   Search,
-  TrendingUp,
 } from "lucide-react";
 
-const proofCapabilities = [
-  { title: "Building Intelligence", icon: Building2, href: "/new-york-market" },
-  { title: "Comparable Analysis", icon: Search, href: "/new-york-market" },
-  { title: "Neighborhood Reports", icon: MapPin, href: "/new-york-market" },
+const intelligenceLenses = [
+  {
+    title: "Building Intelligence",
+    text: "The core view: pricing, liquidity, risk, amenities, resident profile, and building fit.",
+    icon: Building2,
+    emphasis: true,
+  },
+  {
+    title: "Comparable Analysis",
+    text: "A supporting lens that benchmarks active, pending, and recent trades around the building.",
+    icon: Search,
+  },
+  {
+    title: "Neighborhood Reports",
+    text: "A supporting lens for micro-market supply, demand, commute, amenities, and future context.",
+    icon: MapPin,
+  },
 ];
 
 const reports = [
-  { title: "Building Intelligence Report", text: "Pricing, liquidity, risk, and buyer leverage for one building." },
-  { title: "Neighborhood Report", text: "Demand, supply, and development context by micro-market." },
+  { title: "Building Intelligence Report", text: "Pricing, liquidity, risk, buyer leverage, and resident fit for one building." },
+  { title: "Comparable Analysis", text: "Relevant active, pending, and closed comparables translated into decision context." },
+  { title: "Neighborhood Report", text: "Demand, supply, amenities, commute, and development context by micro-market." },
   { title: "Opportunity Monitor", text: "Price cuts, stale listings, and negotiation windows." },
-  { title: "Market Research", text: "Quarterly pricing shifts and acquisition timing." },
   { title: "Market Outlook", text: "Inventory, financing, and Manhattan demand perspective." },
 ];
 
 export default function RealEstate() {
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
-      <section className="bg-brand-midnight px-6 py-16 text-brand-ivory lg:px-10">
-        <div className="mx-auto max-w-7xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.26em] text-brand-champagne">Intelligence</p>
-          <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-7xl">Market Intelligence</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-brand-ivory/82">
-            Building research, market reports, and proprietary analysis.
-          </p>
-          <Link href="/new-york-market">
-            <Button variant="brand" className="mt-8">
-              NYC Market Hub
-            </Button>
-          </Link>
-        </div>
-      </section>
-
-      <section className="border-b border-brand-graphite/10 bg-white px-6 py-14 lg:px-10">
-        <div className="mx-auto max-w-7xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-brand-sapphire">Sample Intelligence Query</p>
-          <div className="rounded-lg border border-brand-graphite/14 bg-brand-ivory p-6 md:p-8">
-            <p className="font-mono text-sm leading-7 text-brand-midnight md:text-base">
+      <section className="bg-brand-midnight px-6 py-16 text-brand-ivory lg:px-10 lg:py-20">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div>
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.26em] text-brand-champagne">Intelligence</p>
+            <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-7xl">Building Intelligence</h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-brand-ivory/82">
+              Comparable analysis and neighborhood reports organized around the building before recommendations are made.
+            </p>
+            <Link href="/new-york-market">
+              <Button variant="brand" className="mt-8">
+                NYC Market Hub
+              </Button>
+            </Link>
+          </div>
+          <div className="border border-brand-ivory/14 bg-brand-ivory/[0.04] p-5 lg:p-6">
+            <p className="text-[0.66rem] font-semibold uppercase tracking-[0.22em] text-brand-champagne">Sample Query</p>
+            <p className="mt-4 font-mono text-sm leading-7 text-brand-ivory/86 md:text-base">
               Show every Manhattan condo building where price-per-square-foot is down 10%+ versus the 24-month trend.
             </p>
           </div>
-          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            {proofCapabilities.map((item) => (
-              <Link key={item.title} href={item.href}>
-                <Card className="flex items-center gap-3 rounded-lg border border-brand-graphite/12 bg-white p-4 transition hover:border-brand-champagne/50">
-                  <item.icon className="h-5 w-5 shrink-0 text-brand-sapphire" strokeWidth={1.35} />
-                  <p className="text-sm font-semibold text-brand-midnight">{item.title}</p>
-                </Card>
-              </Link>
+        </div>
+      </section>
+
+      <section className="border-b border-brand-graphite/10 bg-[#f7f3ea] px-6 py-14 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr_0.9fr]">
+            {intelligenceLenses.map((item) => (
+              <Card
+                key={item.title}
+                className={`rounded-none border p-5 shadow-none ${
+                  item.emphasis
+                    ? "border-brand-champagne/55 bg-white/82 lg:p-6"
+                    : "border-brand-graphite/10 bg-white/62"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-brand border border-brand-champagne/45 bg-brand-ivory text-brand-champagne">
+                    <item.icon className="h-5 w-5" strokeWidth={1.45} />
+                  </span>
+                  <h2 className="font-serif text-2xl font-semibold text-brand-midnight">{item.title}</h2>
+                </div>
+                <p className="mt-4 text-sm leading-6 text-brand-graphite/74">{item.text}</p>
+              </Card>
             ))}
           </div>
         </div>
@@ -66,8 +89,11 @@ export default function RealEstate() {
 
       <section id="reports" className="px-6 py-14 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-sapphire">Reports</p>
-          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">Intelligence Reports</h2>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-sapphire">Outputs</p>
+          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">Research Deliverables</h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-brand-graphite/72">
+            Each deliverable supports the same building-first decision process instead of sending clients into separate research silos.
+          </p>
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {reports.map((item) => (
               <Card key={item.title} className="rounded-lg border border-brand-graphite/12 bg-white p-5">
@@ -83,64 +109,33 @@ export default function RealEstate() {
       <section className="border-t border-brand-graphite/10 bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10">
         <div className="mx-auto max-w-7xl">
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Markets</p>
-          <h2 className="font-serif text-3xl font-semibold">Intelligence Hubs</h2>
+          <h2 className="font-serif text-3xl font-semibold">Manhattan Intelligence Hubs</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             <Link href="/new-york-market">
               <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40" data-testid="card-nyc-market">
                 <Building2 className="mb-2 h-5 w-5 text-brand-champagne" />
-                <h3 className="font-serif text-xl text-brand-ivory">New York City</h3>
-                <p className="mt-1 text-sm text-brand-ivory/72">Condo and co-op signals across Manhattan.</p>
+                <h3 className="font-serif text-xl text-brand-ivory">Uptown</h3>
+                <p className="mt-1 text-sm text-brand-ivory/72">Central Park, Upper East Side, and Upper West Side signals.</p>
               </Card>
             </Link>
-            <Link href="/california-market">
+            <Link href="/new-york-market">
               <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40" data-testid="card-california-market">
                 <MapPin className="mb-2 h-5 w-5 text-brand-champagne" />
-                <h3 className="font-serif text-xl text-brand-ivory">California</h3>
-                <p className="mt-1 text-sm text-brand-ivory/72">Coastal luxury demand and pricing trends.</p>
+                <h3 className="font-serif text-xl text-brand-ivory">Midtown</h3>
+                <p className="mt-1 text-sm text-brand-ivory/72">Hudson Yards, Manhattan West, Billionaires' Row, and core tower inventory.</p>
               </Card>
             </Link>
-            <Link href="/nevada-market">
+            <Link href="/new-york-market">
               <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40" data-testid="card-nevada-market">
                 <HomeIcon className="mb-2 h-5 w-5 text-brand-champagne" />
-                <h3 className="font-serif text-xl text-brand-ivory">Nevada</h3>
-                <p className="mt-1 text-sm text-brand-ivory/72">Growth corridors and investment signals.</p>
+                <h3 className="font-serif text-xl text-brand-ivory">Downtown</h3>
+                <p className="mt-1 text-sm text-brand-ivory/72">Tribeca, SoHo, Chelsea, Flatiron, and waterfront building context.</p>
               </Card>
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="px-6 py-14 lg:px-10">
-        <div className="mx-auto max-w-7xl">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-sapphire">Advisory</p>
-          <h2 className="font-serif text-3xl font-semibold text-brand-midnight">Buy or Sell</h2>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            <Link href="/reverse-buyer-origination">
-              <Card className="flex h-full items-center justify-between border border-brand-graphite/12 bg-white p-6 transition hover:border-brand-champagne/50" data-testid="card-rbo">
-                <div>
-                  <h3 className="font-serif text-xl font-semibold text-brand-midnight">Reverse Buyer Origination™</h3>
-                  <p className="mt-1 text-sm text-brand-graphite/72">Strategy before search. Structure before offers.</p>
-                </div>
-                <ArrowRight className="h-5 w-5 shrink-0 text-brand-sapphire" />
-              </Card>
-            </Link>
-            <Link href="/reverse-seller-architecture">
-              <Card className="flex h-full items-center justify-between border border-brand-graphite/12 bg-white p-6 transition hover:border-brand-champagne/50" data-testid="card-rso">
-                <div>
-                  <h3 className="font-serif text-xl font-semibold text-brand-midnight">Reverse Seller Architecture™</h3>
-                  <p className="mt-1 text-sm text-brand-graphite/72">Positioning and pricing before exposure.</p>
-                </div>
-                <TrendingUp className="h-5 w-5 shrink-0 text-brand-sapphire" />
-              </Card>
-            </Link>
-          </div>
-          <Link href="/profile">
-            <Button variant="brand" className="mt-8">
-              Start Private Profile
-            </Button>
-          </Link>
-        </div>
-      </section>
     </main>
   );
 }

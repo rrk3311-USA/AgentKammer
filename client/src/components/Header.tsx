@@ -6,7 +6,7 @@ import { AgentKammerHorizontalLogo } from "@/components/AgentKammerHorizontalLog
 
 const navLinks = [
   { label: "Lease", href: "/profile" },
-  { label: "Buy", href: "/reverse-buyer-origination" },
+  { label: "Buy / Sell", href: "/buy-sell" },
   { label: "Buildings", href: "/#buildings" },
   { label: "Research", href: "/real-estate" },
   { label: "About", href: "/about" },
@@ -78,7 +78,7 @@ export function Header() {
         </div>
       )}
 
-      <div className="h-px w-full bg-brand-champagne/75" aria-hidden />
+      <div className="h-[2px] w-full bg-gradient-to-r from-brand-champagne/45 via-brand-champagne to-brand-champagne/45" aria-hidden />
     </header>
   );
 }

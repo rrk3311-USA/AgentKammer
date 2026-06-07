@@ -49,17 +49,17 @@ const threePaths = [
 
 const intelligencePillars = [
   {
-    title: "Building Intelligence",
+    title: "Building Fit",
     text: "Building-level pricing, liquidity, and resident profile.",
     icon: Building2,
   },
   {
-    title: "Market Intelligence",
+    title: "Market Timing",
     text: "Neighborhood supply, demand, and timing context.",
     icon: TrendingUp,
   },
   {
-    title: "Deal Intelligence",
+    title: "Deal Leverage",
     text: "Negotiation windows, concessions, and acquisition leverage.",
     icon: Target,
   },
@@ -86,7 +86,7 @@ const buildingsWeFollow = [
   { name: "The Symoné", area: "West Chelsea", slug: "the-symone" },
 ];
 
-const relocationCriteria = ["Building", "Neighborhood", "Commute", "Amenities", "Budget"];
+const relocationCriteria = ["Building", "Neighborhood", "Commute", "Amenities", "Budget", "Timing"];
 
 function StylizedPhoto({
   src,
@@ -270,8 +270,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="relative border-t border-brand-ivory/14 bg-brand-midnight">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 divide-y divide-brand-ivory/10 px-6 lg:grid-cols-3 lg:divide-x lg:divide-y-0 lg:px-10">
+        <div className="relative border-t border-brand-champagne/45 bg-brand-midnight">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 divide-y divide-brand-champagne/25 px-6 lg:grid-cols-3 lg:divide-x lg:divide-y-0 lg:px-10">
             {intelligencePillars.map((pillar) => (
               <div key={pillar.title} className="flex gap-4 py-5 lg:px-8 first:lg:pl-0 last:lg:pr-0">
                 <pillar.icon className="mt-0.5 h-5 w-5 shrink-0 text-brand-champagne" strokeWidth={1.45} />
@@ -376,47 +376,64 @@ export default function Home() {
       {/* 4. Buildings We Follow */}
       <section id="buildings" className="bg-brand-ivory px-6 py-16 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-7xl">
-          <div className="max-w-2xl">
-            <h2 className={`${sectionHeadline} text-brand-midnight`}>Buildings We Follow</h2>
-            <p className="mt-5 text-base leading-7 text-brand-graphite/78">
-              A focused watchlist of Manhattan&apos;s modern residential towers, reviewed by building, neighborhood,
-              amenities, and liquidity.
+          <div className="grid gap-8 border-b border-brand-midnight/10 pb-8 lg:grid-cols-[0.82fr_1fr] lg:items-end">
+            <div>
+              <p className={eyebrow}>Private Watchlist</p>
+              <h2 className={`${sectionHeadline} text-brand-midnight`}>Buildings We Track</h2>
+            </div>
+            <p className="max-w-xl text-base leading-7 text-brand-graphite/78 lg:justify-self-end">
+              Not a directory. A curated set of Manhattan buildings we monitor for fit, pricing context, resident experience,
+              and opportunity windows.
             </p>
           </div>
-          <BuildingsFollowStrip />
+          <div className="mt-10">
+            <BuildingsFollowStrip />
+          </div>
         </div>
       </section>
 
       {/* 5. Leasing Today. Buying Tomorrow. */}
-      <section className="relative overflow-hidden bg-brand-midnight text-brand-ivory">
-        <img
-          src="/images/leasing-today-terrace.png"
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover saturate-[0.92]"
-          style={{ objectPosition: "center center" }}
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.58)_0%,rgba(15,23,42,0.78)_58%,rgba(15,23,42,0.68)_100%)]" />
-        <div className="relative mx-auto flex min-h-[430px] max-w-7xl items-center justify-center px-6 py-20 text-center lg:px-10 lg:py-24">
-          <div className="max-w-3xl">
-            <h2 className={`${sectionHeadline} text-brand-ivory`}>Leasing Today. Buying Tomorrow.</h2>
-            <p className="mt-6 text-base leading-7 text-brand-ivory/84">
-              Many clients enter Manhattan through a luxury lease.
-            </p>
-            <p className="mt-4 text-base leading-7 text-brand-ivory/84">
-              Over time, those same clients become buyers, investors, and repeat clients.
-            </p>
-            <p className="mt-4 text-base leading-7 text-brand-ivory/84">
-              We support both paths through a curated focus on Manhattan&apos;s premier modern residential buildings.
-            </p>
+      <section className="border-y border-brand-midnight/10 bg-[#f7f3ea] px-6 py-14 lg:px-10 lg:py-16">
+        <div className="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:gap-14">
+          <div>
+            <p className={eyebrow}>Long-Term Client Path</p>
+            <h2 className={`${sectionHeadline} text-brand-midnight`}>Leasing Today. Buying Tomorrow.</h2>
+            <div className="mt-5 max-w-xl space-y-3.5 text-base leading-7 text-brand-graphite/76">
+              <p>Many clients enter Manhattan through a luxury lease.</p>
+              <p>Over time, those same clients become buyers, investors, and repeat clients.</p>
+              <p>
+                We support both paths through a curated focus on Manhattan&apos;s premier modern residential buildings.
+              </p>
+            </div>
+          </div>
+          <div className="grid gap-4 border border-brand-champagne/35 bg-brand-ivory/80 p-4 shadow-[0_16px_36px_rgba(15,23,42,0.055)] sm:grid-cols-[1fr_auto_1fr] sm:items-stretch lg:p-5">
+            <div className="border border-brand-midnight/10 bg-white/72 p-5">
+              <p className="text-[0.64rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">Entry Point</p>
+              <p className="mt-3 font-serif text-2xl leading-tight text-brand-midnight">Luxury Lease</p>
+              <p className="mt-3 text-sm leading-6 text-brand-graphite/68">
+                A precise building match for the way a client wants to live now.
+              </p>
+            </div>
+            <div className="hidden items-center justify-center px-1 sm:flex" aria-hidden>
+              <span className="h-px w-10 bg-brand-champagne/55" />
+            </div>
+            <div className="border border-brand-midnight/10 bg-white/72 p-5">
+              <p className="text-[0.64rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">Next Step</p>
+              <p className="mt-3 font-serif text-2xl leading-tight text-brand-midnight">Strategic Ownership</p>
+              <p className="mt-3 text-sm leading-6 text-brand-graphite/68">
+                The same building-first view carries into purchase, investment, and repeat decisions.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* 6. Relocating To Manhattan */}
-      <section className="relative overflow-hidden bg-brand-midnight px-6 py-16 text-brand-ivory lg:px-10 lg:py-20">
-        <div className="relative z-10 mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_0.8fr] lg:gap-20">
+      <section className="relative overflow-hidden bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10 lg:py-[4.5rem]">
+        <div className="absolute inset-x-0 top-0 h-px bg-brand-champagne/35" aria-hidden />
+        <div className="relative z-10 mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.92fr_1fr] lg:items-center lg:gap-16">
           <div className="max-w-2xl">
+            <p className={eyebrow}>Relocation Advisory</p>
             <h2 className={`${sectionHeadline} text-brand-ivory`}>Relocating To Manhattan</h2>
             <p className="mt-6 text-base leading-7 text-brand-ivory/78">
               Most clients do not start with a property.
@@ -424,25 +441,27 @@ export default function Home() {
             <p className="mt-4 text-base leading-7 text-brand-ivory/78">
               They start with a new role, a new city, a growing family, or a lifestyle change.
             </p>
-            <p className="mt-6 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-brand-champagne">
+          </div>
+          <div className="max-w-xl lg:justify-self-start">
+            <p className="mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-brand-champagne">
               We help identify the right:
             </p>
-          </div>
-          <div className="max-w-sm lg:justify-self-start">
-            <ul className="space-y-4 border-l border-brand-champagne/35 pl-6">
+            <ul className="grid gap-2.5 sm:grid-cols-2">
               {relocationCriteria.map((item) => (
-                <li key={item} className="flex items-baseline gap-4 text-base leading-7 text-brand-ivory/85">
-                  <span className="text-brand-champagne" aria-hidden>
-                    •
-                  </span>
+                <li
+                  key={item}
+                  className="border border-brand-ivory/12 bg-brand-ivory/[0.035] px-4 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-brand-ivory/82"
+                >
                   {item}
                 </li>
               ))}
             </ul>
-            <p className="mt-6 max-w-xs text-sm leading-6 text-brand-ivory/62">before residences are selected.</p>
+            <p className="mt-6 max-w-sm border-l border-brand-champagne/45 pl-5 text-sm leading-6 text-brand-ivory/62">
+              before residences are selected.
+            </p>
           </div>
         </div>
-        <div className="pointer-events-none absolute bottom-0 right-0 hidden h-full w-[42%] lg:block" aria-hidden>
+        <div className="pointer-events-none absolute bottom-0 right-0 hidden h-full w-[44%] opacity-85 lg:block" aria-hidden>
           <img
             src={rooftopPoolWtc}
             alt=""

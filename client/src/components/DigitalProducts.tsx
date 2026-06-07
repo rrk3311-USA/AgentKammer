@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Download, Sparkles } from "lucide-react";
 
 import skiCabinImage from "@assets/generated_images/ski_cabin_investment_report_cover.png";
-import creditScoreImage from "@assets/generated_images/credit_score_optimization_guide_cover.png";
-import dueDiligenceImage from "@assets/generated_images/due_diligence_kit_cover_mockup.png";
+import creditScoreImage from "@assets/generated_images/Luxury_marble_desk_Manhattan_view_647cbb4e.png";
+import dueDiligenceImage from "@assets/generated_images/Modern_Manhattan_condo_exterior_bdf30aa9.png";
 
 const products = [
   {

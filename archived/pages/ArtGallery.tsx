@@ -18,8 +18,8 @@ import {
   CheckCircle
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import elephantImage from '@assets/generated_images/geometric_ceramic_elephant_sculpture.png';
-import spaceLizardImage from '@assets/generated_images/space_lizard_fruit_bowl_art.png';
+const elephantImage = "/buildings/432-park-avenue.jpg";
+const spaceLizardImage = "/buildings/565-broome.jpg";
 
 const CATEGORIES = [
   {
