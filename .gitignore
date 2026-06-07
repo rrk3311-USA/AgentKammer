@@ -1,6 +1,12 @@
 node_modules
 dist
 .DS_Store
+.replit
+.config/
+.local/
+Archive.zip
+preview-script.mjs
+PREVIEW_IMAGES.md
 server/public
 vite.config.ts.*
 *.tar.gz

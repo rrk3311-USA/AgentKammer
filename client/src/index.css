@@ -92,6 +92,7 @@
 
   --font-sans: Inter, "Neue Haas Grotesk", system-ui, -apple-system, sans-serif;
   --font-serif: "Noe Display", "Cormorant Garamond", Georgia, serif;
+  --font-script: "Allura", "Pinyon Script", cursive;
   --font-display: "Cormorant Garamond", serif;
   --font-mono: Menlo, Monaco, "Courier New", monospace;
   --radius: .5rem;
@@ -382,6 +383,30 @@
   /* Keep reports heading ivory on navy */
   #reports h2 {
     color: rgb(246 243 235) !important;
+  }
+
+  .bespoke-signature {
+    font-family: var(--font-script);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--brand-champagne);
+    text-shadow: 0 2px 22px rgba(214, 180, 95, 0.28);
+  }
+
+  .bespoke-signature::after {
+    content: "";
+    display: block;
+    width: min(72%, 18rem);
+    height: 1px;
+    margin: 0.65rem auto 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(214, 180, 95, 0.15) 12%,
+      rgba(214, 180, 95, 0.72) 48%,
+      rgba(214, 180, 95, 0.2) 88%,
+      transparent 100%
+    );
   }
 
   /* Hide ugly search cancel button in Chrome until we can style it properly */
@@ -691,5 +716,14 @@
 
   .scrollbar-gold::-webkit-scrollbar-corner {
     background: transparent;
+  }
+
+  .buildings-scroll-strip {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .buildings-scroll-strip::-webkit-scrollbar {
+    display: none;
   }
 }

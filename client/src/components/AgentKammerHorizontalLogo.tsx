@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import logoEmblem from "@assets/agent-kammer-logo-emblem-uploaded-header.png";
+import logoEmblem from "@assets/agent-kammer-logo-emblem-gold-wreath.png";
 
 interface AgentKammerHorizontalLogoProps {
   className?: string;
@@ -12,20 +12,20 @@ export function AgentKammerHorizontalLogo({ className, variant = "default" }: Ag
 
   return (
     <div
-      className={cn("flex shrink-0 items-center gap-3.5 sm:gap-4 lg:gap-5", className)}
+      className={cn("flex shrink-0 items-center gap-3 sm:gap-3.5 lg:gap-4", className)}
       aria-label="Agent Kammer"
     >
       <img
         src={logoEmblem}
         alt=""
         aria-hidden
-        className="h-[3.75rem] w-auto shrink-0 object-contain sm:h-[4.25rem] lg:h-[4.75rem]"
+        className="h-12 w-12 shrink-0 object-contain sm:h-[3.25rem] sm:w-[3.25rem] lg:h-14 lg:w-14"
         loading="eager"
       />
-      <div className="flex flex-col justify-center gap-1.5 lg:gap-2">
+      <div className="flex flex-col justify-center gap-1 lg:gap-1.5">
         <p
           className={cn(
-            "whitespace-nowrap font-serif text-[1.55rem] font-semibold leading-none tracking-[0.06em] sm:text-[1.75rem] lg:text-[2.15rem]",
+            "whitespace-nowrap font-serif text-[1.35rem] font-semibold leading-none tracking-[0.06em] sm:text-[1.55rem] lg:text-[1.85rem]",
             isLight ? "text-brand-ivory" : "text-brand-ivory",
           )}
         >

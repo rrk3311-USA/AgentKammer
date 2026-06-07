@@ -145,15 +145,14 @@ export default function Refinancing() {
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Button
-                className="h-12 rounded-none bg-brand-sapphire px-7 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-ivory hover:bg-brand-sapphire/90"
+                variant="brandSapphire"
                 data-testid="button-activate-rate-watch"
               >
                 <Bell className="mr-2 h-4 w-4" />
                 Activate Rate Watch
               </Button>
               <Button
-                variant="outline"
-                className="h-12 rounded-none border-brand-ivory/35 bg-transparent px-7 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-ivory hover:bg-brand-ivory hover:text-brand-midnight"
+                variant="brandSapphireGhost"
                 data-testid="button-learn-more"
               >
                 Learn How It Works
@@ -221,7 +220,8 @@ export default function Refinancing() {
             </div>
 
             <Button
-              className="mt-5 w-full rounded-none bg-brand-sapphire text-brand-ivory hover:bg-brand-sapphire/90"
+              variant="brandSapphire"
+              className="mt-5 w-full"
               data-testid="button-check-savings"
               onClick={() => setShowResults(true)}
             >
@@ -409,7 +409,7 @@ export default function Refinancing() {
           </p>
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
             <Button
-              className="h-12 rounded-none bg-brand-sapphire px-7 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-ivory hover:bg-brand-sapphire/90"
+              variant="brandSapphire"
               data-testid="button-start-rate-watch"
             >
               <Bell className="mr-2 h-4 w-4" />
@@ -417,8 +417,7 @@ export default function Refinancing() {
             </Button>
             <Link href="/dashboard">
               <Button
-                variant="outline"
-                className="h-12 rounded-none border-brand-ivory/40 bg-transparent px-7 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-ivory hover:bg-brand-ivory hover:text-brand-midnight"
+                variant="brandSapphireGhost"
                 data-testid="button-go-to-dashboard"
               >
                 <CheckCircle2 className="mr-2 h-4 w-4" />

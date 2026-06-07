@@ -1,0 +1,21 @@
+{
+  "git.autorefresh": false,
+  "git.autoRepositoryDetection": "openEditors",
+  "git.untrackedChanges": "hidden",
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/tmp/**": true,
+    "**/output/**": true,
+    "**/Archive.zip": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/tmp": true,
+    "**/output": true,
+    "**/Archive.zip": true
+  }
+}

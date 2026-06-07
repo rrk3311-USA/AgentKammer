@@ -88,15 +88,12 @@ export default function About() {
           </div>
           <div className="flex flex-wrap gap-3">
             <Link href="/reverse-buyer-origination">
-              <Button className="h-11 rounded-none border border-brand-champagne bg-brand-champagne px-6 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-midnight hover:bg-brand-champagne/90">
+              <Button variant="brand">
                 Buyer Flow
               </Button>
             </Link>
             <Link href="/profile">
-              <Button
-                variant="outline"
-                className="h-11 rounded-none border-brand-midnight px-6 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-midnight hover:bg-brand-midnight/5"
-              >
+              <Button variant="brandOutline">
                 Start Profile
               </Button>
             </Link>

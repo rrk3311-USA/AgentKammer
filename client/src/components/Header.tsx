@@ -18,7 +18,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full overflow-visible bg-brand-midnight">
       <div className="bg-brand-midnight">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-2 lg:gap-6 lg:px-10 lg:py-2.5">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-2.5 lg:gap-6 lg:px-10 lg:py-3">
           <Link href="/" data-testid="link-home" className="shrink-0 overflow-visible">
             <AgentKammerHorizontalLogo variant="default" />
           </Link>
@@ -39,7 +39,7 @@ export function Header() {
 
           <div className="hidden shrink-0 lg:block">
             <Link href="/profile">
-              <Button className="h-10 whitespace-nowrap rounded-none border border-brand-champagne bg-brand-champagne px-5 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-midnight hover:bg-brand-champagne/90">
+              <Button variant="brand" className="whitespace-nowrap">
                 Curate Matches
               </Button>
             </Link>
@@ -70,7 +70,7 @@ export function Header() {
               </Link>
             ))}
             <Link href="/profile">
-              <Button className="mt-2 h-10 rounded-none border border-brand-champagne bg-brand-champagne text-brand-midnight hover:bg-brand-champagne/90">
+              <Button variant="brand" className="mt-2 w-full">
                 Curate Matches
               </Button>
             </Link>

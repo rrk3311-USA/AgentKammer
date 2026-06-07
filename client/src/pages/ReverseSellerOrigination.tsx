@@ -87,7 +87,7 @@ export default function ReverseSellerOrigination() {
             <Button
               type="submit"
               disabled={createProfileMutation.isPending || submitted}
-              className="h-12 rounded-none border border-brand-champagne bg-brand-champagne px-7 text-brand-midnight hover:bg-brand-champagne/90"
+              variant="brand"
               data-testid="button-rso-submit"
             >
               {createProfileMutation.isPending ? "Sending..." : "Get Diagnostic"}

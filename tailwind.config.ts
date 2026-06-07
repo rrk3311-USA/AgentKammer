@@ -6,6 +6,7 @@ export default {
   theme: {
     extend: {
       borderRadius: {
+        brand: "6px", /* primary CTA + cards — boutique advisory, not app UI */
         lg: ".5625rem", /* 9px */
         md: ".375rem", /* 6px */
         sm: ".1875rem", /* 3px */
@@ -94,6 +95,7 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)"],
         serif: ["var(--font-serif)"],
+        script: ["var(--font-script)"],
         mono: ["var(--font-mono)"],
       },
       keyframes: {

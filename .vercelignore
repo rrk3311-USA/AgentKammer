@@ -17,5 +17,6 @@ attached_assets/*.jpeg
 attached_assets/*.jpg
 attached_assets/*.webp
 !attached_assets/generated_images/**
+!attached_assets/agent-kammer-logo-emblem-gold-wreath.png
 !attached_assets/agent-kammer-logo-emblem-uploaded-header.png
 !attached_assets/agent-kammer-logo-emblem-transparent.png

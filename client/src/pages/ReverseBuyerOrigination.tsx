@@ -102,7 +102,7 @@ export default function ReverseBuyerOrigination() {
                 </div>
                 <Button
                   type="submit"
-                  className="rounded-none border border-brand-champagne bg-brand-champagne px-7 text-brand-midnight hover:bg-brand-champagne/90"
+                  variant="brand"
                   disabled={createProfileMutation.isPending}
                   data-testid="button-rbo-submit"
                 >
@@ -129,7 +129,7 @@ export default function ReverseBuyerOrigination() {
                   key={year}
                   onClick={() => setSelectedYear(year)}
                   size="sm"
-                  className={`h-8 rounded-none px-3 text-xs ${
+                  className={`h-8 rounded-brand px-3 text-xs ${
                     selectedYear === year
                       ? "border border-brand-champagne bg-brand-champagne text-black"
                       : "bg-brand-ivory/10 text-brand-ivory/80 hover:bg-brand-ivory/20"
@@ -233,7 +233,7 @@ export default function ReverseBuyerOrigination() {
               />
               <Button
                 type="submit"
-                className="rounded-none border border-brand-champagne bg-brand-champagne px-7 text-brand-midnight hover:bg-brand-champagne/90"
+                variant="brand"
                 disabled={createProfileMutation.isPending}
                 data-testid="button-rbo-cta-submit"
               >

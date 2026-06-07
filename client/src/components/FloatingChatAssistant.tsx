@@ -199,7 +199,7 @@ export function FloatingChatAssistant() {
             playButtonClick();
             setIsOpen(true);
           }}
-          className="group relative flex h-14 w-14 items-center justify-center rounded-full border border-brand-champagne/40 bg-brand-midnight text-brand-champagne shadow-xl transition hover:scale-105 hover:border-brand-champagne/60 hover:shadow-[0_8px_24px_rgba(214,180,95,0.18)]"
+          className="group relative flex h-14 w-14 items-center justify-center rounded-full border border-brand-champagne/40 bg-brand-midnight text-brand-champagne shadow-xl transition hover:border-brand-champagne/60 hover:shadow-[0_8px_24px_rgba(214,180,95,0.18)]"
           data-testid="button-open-chat"
           aria-label="Open chat"
         >
@@ -284,7 +284,7 @@ export function FloatingChatAssistant() {
                     type="button"
                     onClick={() => handlePromptSelect(chip.prompt)}
                     data-testid={`button-prompt-${chip.id}`}
-                    className={`flex shrink-0 snap-start items-center gap-1.5 rounded-full border px-3 py-1.5 text-left transition-colors hover:bg-brand-champagne/15 active:bg-brand-champagne/25 ${
+                    className={`flex shrink-0 snap-start items-center gap-1.5 rounded-brand border px-3 py-1.5 text-left transition-colors hover:bg-brand-champagne/15 active:bg-brand-champagne/25 ${
                       chip.featured
                         ? "border-brand-champagne/70 bg-brand-champagne/10 text-brand-midnight"
                         : "border-brand-champagne/40 bg-brand-ivory text-brand-midnight/85"
@@ -333,7 +333,7 @@ export function FloatingChatAssistant() {
                                   playCrunchyChime();
                                   handleSend(`${opt.letter}. ${opt.text}`);
                                 }}
-                                className="h-auto justify-start border border-brand-champagne/35 bg-brand-midnight px-4 py-2.5 text-left font-semibold text-brand-champagne hover:bg-brand-midnight/90"
+                                className="h-auto w-full justify-start rounded-brand border border-brand-champagne/35 bg-brand-midnight px-4 py-2.5 text-left font-semibold normal-case tracking-normal text-brand-champagne hover:bg-brand-midnight/90"
                                 data-testid={`button-option-${opt.letter.toLowerCase()}`}
                               >
                                 <span className="mr-2 font-bold">{opt.letter}.</span>
@@ -352,7 +352,7 @@ export function FloatingChatAssistant() {
                       className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
                     >
                       <div
-                        className={`max-w-[80%] rounded-2xl px-4 py-2 ${
+                        className={`max-w-[80%] rounded-brand px-4 py-2 ${
                           msg.sender === "user"
                             ? "border border-brand-champagne/25 bg-brand-midnight text-brand-ivory"
                             : "border border-brand-champagne/40 bg-brand-champagne/12 text-brand-midnight"
@@ -394,7 +394,7 @@ export function FloatingChatAssistant() {
                   disabled={isListening}
                 />
                 <Button
-                  variant="luxury"
+                  variant="brand"
                   size="icon"
                   onClick={() => {
                     playCrunchyChime();
@@ -402,10 +402,6 @@ export function FloatingChatAssistant() {
                   }}
                   disabled={!message.trim() || isListening}
                   data-testid="button-send-message"
-                  className="rounded-full"
-                  style={{
-                    boxShadow: "0 0 15px rgba(214, 180, 95, 0.4)",
-                  }}
                 >
                   <Send className="h-5 w-5" strokeWidth={2.5} />
                 </Button>

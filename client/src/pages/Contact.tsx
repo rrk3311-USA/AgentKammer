@@ -248,7 +248,8 @@ export default function Contact() {
 
               <Button
                 type="submit"
-                className="h-11 w-full rounded-none border border-brand-champagne bg-brand-champagne font-semibold uppercase tracking-[0.1em] text-brand-midnight hover:bg-brand-champagne/90"
+                variant="brand"
+                className="w-full"
                 data-testid="button-contact-submit"
                 disabled={contactMutation.isPending}
               >

@@ -105,8 +105,7 @@ export default function Profile() {
           <div className="mt-8 text-center">
             <Button
               onClick={() => setStep("form")}
-              variant="outline"
-              className="rounded-none border-brand-midnight text-brand-midnight"
+              variant="brandOutline"
               data-testid="button-edit-profile"
             >
               Edit Profile
@@ -209,7 +208,8 @@ export default function Profile() {
 
             <Button
               type="submit"
-              className="h-12 w-full rounded-none border border-brand-champagne bg-brand-champagne font-semibold uppercase tracking-[0.1em] text-brand-midnight hover:bg-brand-champagne/90"
+              variant="brand"
+              className="w-full"
               data-testid="button-create-profile"
             >
               Create Private Profile

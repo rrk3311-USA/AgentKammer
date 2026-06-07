@@ -36,7 +36,7 @@ export default function RealEstate() {
             Building research, market reports, and proprietary analysis.
           </p>
           <Link href="/new-york-market">
-            <Button className="mt-8 h-11 rounded-none border border-brand-champagne bg-brand-champagne px-6 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-midnight hover:bg-brand-champagne/90">
+            <Button variant="brand" className="mt-8">
               NYC Market Hub
             </Button>
           </Link>
@@ -135,7 +135,7 @@ export default function RealEstate() {
             </Link>
           </div>
           <Link href="/profile">
-            <Button className="mt-8 h-11 rounded-none border border-brand-champagne bg-brand-champagne px-6 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-midnight hover:bg-brand-champagne/90">
+            <Button variant="brand" className="mt-8">
               Start Private Profile
             </Button>
           </Link>
