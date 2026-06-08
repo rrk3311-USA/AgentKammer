@@ -5,6 +5,7 @@ dist
 .config/
 .local/
 Archive.zip
+archived/assets/*.zip
 preview-script.mjs
 PREVIEW_IMAGES.md
 server/public
