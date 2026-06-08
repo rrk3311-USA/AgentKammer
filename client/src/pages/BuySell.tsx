@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { ArrowRight, Building2, Home, Search, ShieldCheck, TrendingUp } from "lucide-react";
+import { ArrowRight, Home, Search, ShieldCheck, TrendingUp } from "lucide-react";
 
 const buyerFlow = ["Objective", "Building Intelligence", "Comparable Analysis", "Offer Strategy"];
 
@@ -24,13 +24,6 @@ const sellerValue = [
   },
 ];
 
-const comparisonRows = [
-  ["Starts with", "Listings", "Building fit and client objective"],
-  ["Comps", "Broad neighborhood averages", "Building-relevant comparable analysis"],
-  ["Seller review", "Automated estimate", "Private value assessment and positioning read"],
-  ["Strategy", "Search and submit", "Structure, timing, and negotiation leverage"],
-];
-
 export default function BuySell() {
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
@@ -49,11 +42,12 @@ export default function BuySell() {
             </p>
           </div>
           <Card className="rounded-none border border-brand-ivory/14 bg-brand-ivory/[0.04] p-6 text-brand-ivory shadow-none">
-            <Building2 className="h-6 w-6 text-brand-champagne" strokeWidth={1.5} />
-            <p className="mt-5 font-serif text-3xl leading-tight text-brand-ivory">One building-first discipline.</p>
+            <p className="text-[0.66rem] font-semibold uppercase tracking-[0.22em] text-brand-champagne">
+              Primary Question
+            </p>
+            <p className="mt-4 font-serif text-3xl leading-tight text-brand-ivory">How do you help me transact?</p>
             <p className="mt-4 text-sm leading-6 text-brand-ivory/68">
-              Applied to acquisition, luxury leasing, and selective seller positioning when the building story supports
-              it.
+              Buyer strategy and seller positioning, with deeper methodology available on the Strategy page.
             </p>
           </Card>
         </div>
@@ -110,8 +104,7 @@ export default function BuySell() {
               <h2 className="font-serif text-4xl font-semibold text-brand-midnight">The Main Path</h2>
             </div>
             <p className="max-w-xl text-base leading-7 text-brand-graphite/72 lg:justify-self-end">
-              Most clients should not begin with every available listing. They should begin by understanding which
-              buildings actually fit their life, risk tolerance, timing, and negotiation posture.
+              A clear acquisition path from objective to offer strategy.
             </p>
           </div>
           <div className="mt-10 flex flex-col items-center gap-2 lg:flex-row lg:gap-3">
@@ -156,33 +149,6 @@ export default function BuySell() {
         </div>
       </section>
 
-      <section className="bg-brand-midnight px-6 py-16 text-brand-ivory lg:px-10 lg:py-20">
-        <div className="mx-auto max-w-7xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Difference</p>
-          <h2 className="font-serif text-4xl font-semibold">Traditional Flow vs Agent Kammer</h2>
-          <div className="mt-8 overflow-hidden border border-brand-ivory/16">
-            <div className="grid grid-cols-[0.8fr_1fr_1fr] bg-brand-ivory/[0.04]">
-              <div className="border-r border-brand-ivory/14 px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-brand-champagne">
-                Topic
-              </div>
-              <div className="border-r border-brand-ivory/14 px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-brand-champagne">
-                Typical
-              </div>
-              <div className="px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-brand-champagne">
-                Agent Kammer
-              </div>
-            </div>
-            {comparisonRows.map(([topic, typical, kammer]) => (
-              <div key={topic} className="grid grid-cols-[0.8fr_1fr_1fr] border-t border-brand-ivory/14">
-                <div className="border-r border-brand-ivory/14 px-4 py-3 text-sm text-brand-ivory/76">{topic}</div>
-                <div className="border-r border-brand-ivory/14 px-4 py-3 text-sm text-brand-ivory/76">{typical}</div>
-                <div className="px-4 py-3 text-sm text-brand-ivory/92">{kammer}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="px-6 py-16 lg:px-10 lg:py-20">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 border border-brand-champagne/35 bg-white/70 p-6 md:flex-row md:items-center md:justify-between lg:p-8">
           <div>
@@ -196,6 +162,9 @@ export default function BuySell() {
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
             <Link href="/profile">
               <Button variant="brand">Curate Matches</Button>
+            </Link>
+            <Link href="/strategy">
+              <Button variant="brandOutline">View Strategy</Button>
             </Link>
             <Link href="/contact">
               <Button variant="brandOutline">Ask About Selling</Button>

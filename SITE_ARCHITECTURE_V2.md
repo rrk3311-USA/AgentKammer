@@ -13,23 +13,22 @@ Agent Kammer is not Zillow, Airbnb, e-commerce, coaching, wellness, travel, or c
 
 ## Proposed Navigation
 
-- Home -> `/`
 - Lease -> `/profile` initially, future dedicated lease page
-- Buy -> `/buy-sell` or future buyer page
-- Sell -> `/buy-sell` or future seller section
-- Buildings -> `/#buildings`
+- Buy / Sell -> `/buy-sell`
+- Buildings -> `/buildings`
 - Intelligence -> `/real-estate`
-- About -> `/about`
-- Contact -> `/contact`
+- Strategy -> `/strategy`
+- Curate Matches -> `/profile`
 
 ## Production Route Map
 
 - `/` -> `Home.tsx`
+- `/buildings` -> `Buildings.tsx`
 - `/profile` -> `Profile.tsx`
 - `/buy-sell` -> `BuySell.tsx`
 - `/real-estate` -> `RealEstate.tsx`
 - `/new-york-market` -> `NewYorkMarket.tsx`
-- `/about` -> `About.tsx`
+- `/strategy` -> `Strategy.tsx`
 - `/contact` -> `Contact.tsx`
 - `/reverse-buyer-origination` -> `ReverseBuyerOrigination.tsx`
 - `/reverse-seller-architecture` -> `ReverseSellerOrigination.tsx`
@@ -38,13 +37,14 @@ Agent Kammer is not Zillow, Airbnb, e-commerce, coaching, wellness, travel, or c
 
 | Page | Recommendation | Notes |
 | --- | --- | --- |
-| `About.tsx` | KEEP | Production strategy/about page. |
+| `About.tsx` | ARCHIVE | Absorbed into `Strategy.tsx`. |
 | `AdminRBO.tsx` | ARCHIVE | Admin/dashboard artifact. |
 | `AffiliateProgram.tsx` | ARCHIVE | Not part of Manhattan advisory focus. |
 | `ArtGallery.tsx` | ARCHIVE | Abandoned concept. |
 | `Audiobooks.tsx` | ARCHIVE | Courses/media concept. |
 | `BrokerRegistration.tsx` | ARCHIVE | Marketplace/broker portal concept. |
 | `BuySell.tsx` | KEEP | Production advisory page. |
+| `Buildings.tsx` | KEEP | Production curated building universe. |
 | `CaliforniaMarket.tsx` | ARCHIVE | Non-Manhattan market. |
 | `CategoryPage.tsx` | ARCHIVE | Zillow-style category route. |
 | `Coaching.tsx` | ARCHIVE | Coaching concept. |
@@ -77,6 +77,7 @@ Agent Kammer is not Zillow, Airbnb, e-commerce, coaching, wellness, travel, or c
 | `ReverseByerOriginationGuide.tsx` | ARCHIVE | Typo/legacy duplicate. |
 | `ReverseSellerOrigination.tsx` | KEEP | Seller detail page. |
 | `SavedSearches.tsx` | ARCHIVE | Search portal behavior. |
+| `Strategy.tsx` | KEEP | Production methodology and trust page. |
 | `WellnessShop.tsx` | ARCHIVE | Wellness/e-commerce concept. |
 | `not-found.tsx` | KEEP | Fallback route. |
 

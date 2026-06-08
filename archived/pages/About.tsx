@@ -88,14 +88,10 @@ export default function About() {
           </div>
           <div className="flex flex-wrap gap-3">
             <Link href="/reverse-buyer-origination">
-              <Button variant="brand">
-                Buyer Flow
-              </Button>
+              <Button variant="brand">Buyer Flow</Button>
             </Link>
             <Link href="/profile">
-              <Button variant="brandOutline">
-                Start Profile
-              </Button>
+              <Button variant="brandOutline">Start Profile</Button>
             </Link>
           </div>
         </div>

@@ -4,29 +4,9 @@ import { Link } from "wouter";
 import {
   Building2,
   Compass,
-  Home as HomeIcon,
   MapPin,
   Search,
 } from "lucide-react";
-
-const intelligenceLenses = [
-  {
-    title: "Building Intelligence",
-    text: "The core view: pricing, liquidity, risk, amenities, resident profile, and building fit.",
-    icon: Building2,
-    emphasis: true,
-  },
-  {
-    title: "Comparable Analysis",
-    text: "A supporting lens that benchmarks active, pending, and recent trades around the building.",
-    icon: Search,
-  },
-  {
-    title: "Neighborhood Reports",
-    text: "A supporting lens for micro-market supply, demand, commute, amenities, and future context.",
-    icon: MapPin,
-  },
-];
 
 const reports = [
   { title: "Building Intelligence Report", text: "Pricing, liquidity, risk, buyer leverage, and resident fit for one building." },
@@ -45,7 +25,7 @@ export default function RealEstate() {
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.26em] text-brand-champagne">Intelligence</p>
             <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-7xl">Building Intelligence</h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-brand-ivory/82">
-              Comparable analysis and neighborhood reports organized around the building before recommendations are made.
+              Research outputs for comparing buildings, neighborhoods, timing, and opportunity windows.
             </p>
             <Link href="/new-york-market">
               <Button variant="brand" className="mt-8">
@@ -62,42 +42,17 @@ export default function RealEstate() {
         </div>
       </section>
 
-      <section className="border-b border-brand-graphite/10 bg-[#f7f3ea] px-6 py-14 lg:px-10">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr_0.9fr]">
-            {intelligenceLenses.map((item) => (
-              <Card
-                key={item.title}
-                className={`rounded-none border p-5 shadow-none ${
-                  item.emphasis
-                    ? "border-brand-champagne/55 bg-white/82 lg:p-6"
-                    : "border-brand-graphite/10 bg-white/62"
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-brand border border-brand-champagne/45 bg-brand-ivory text-brand-champagne">
-                    <item.icon className="h-5 w-5" strokeWidth={1.45} />
-                  </span>
-                  <h2 className="font-serif text-2xl font-semibold text-brand-midnight">{item.title}</h2>
-                </div>
-                <p className="mt-4 text-sm leading-6 text-brand-graphite/74">{item.text}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="reports" className="px-6 py-14 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-sapphire">Outputs</p>
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Outputs</p>
           <h2 className="font-serif text-4xl font-semibold text-brand-midnight">Research Deliverables</h2>
           <p className="mt-4 max-w-2xl text-base leading-7 text-brand-graphite/72">
-            Each deliverable supports the same building-first decision process instead of sending clients into separate research silos.
+            The intelligence page exists to show what gets produced, not to restate the strategy.
           </p>
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {reports.map((item) => (
               <Card key={item.title} className="rounded-lg border border-brand-graphite/12 bg-white p-5">
-                <Compass className="mb-3 h-4 w-4 text-brand-sapphire" />
+                <Compass className="mb-3 h-4 w-4 text-brand-champagne" />
                 <h3 className="font-serif text-lg font-semibold text-brand-midnight">{item.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-brand-graphite/76">{item.text}</p>
               </Card>
@@ -127,7 +82,7 @@ export default function RealEstate() {
             </Link>
             <Link href="/new-york-market">
               <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40" data-testid="card-nevada-market">
-                <HomeIcon className="mb-2 h-5 w-5 text-brand-champagne" />
+                <Search className="mb-2 h-5 w-5 text-brand-champagne" />
                 <h3 className="font-serif text-xl text-brand-ivory">Downtown</h3>
                 <p className="mt-1 text-sm text-brand-ivory/72">Tribeca, SoHo, Chelsea, Flatiron, and waterfront building context.</p>
               </Card>

@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import { Building2, Target, TrendingUp } from "lucide-react";
 import heroBackground from "@assets/generated_images/manhattan/rooftop-terrace-lifestyle-hero.png";
 import rooftopPoolWtc from "@assets/generated_images/manhattan/rooftop-pool-wtc.png";
+import { trackedBuildings } from "@/data/buildings";
 
 /*
  * BUILDING_IMAGE_RULE
@@ -26,27 +27,6 @@ import rooftopPoolWtc from "@assets/generated_images/manhattan/rooftop-pool-wtc.
 const sectionHeadline = "font-serif text-3xl font-semibold md:text-4xl lg:text-[2.65rem]";
 const eyebrow = "mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne";
 
-const threePaths = [
-  {
-    subtitle: "Building Intelligence",
-    text: "Research, pricing, liquidity, and opportunity monitoring before we recommend a building.",
-    href: "/real-estate",
-    role: "Core Methodology",
-  },
-  {
-    subtitle: "Luxury Leasing",
-    text: "Modern rentals in Manhattan's leading residential towers.",
-    href: "/profile",
-    role: "Application 01",
-  },
-  {
-    subtitle: "Strategic Acquisition",
-    text: "Primary residences, pied-à-terres, and investments.",
-    href: "/reverse-buyer-origination",
-    role: "Application 02",
-  },
-];
-
 const intelligencePillars = [
   {
     title: "Building Fit",
@@ -65,28 +45,9 @@ const intelligencePillars = [
   },
 ];
 
-const buildingsWeFollow = [
-  { name: "35 Hudson Yards", area: "Hudson Yards", slug: "35-hudson-yards" },
-  { name: "15 Hudson Yards", area: "Hudson Yards", slug: "15-hudson-yards" },
-  { name: "One High Line", area: "West Chelsea", slug: "one-high-line" },
-  { name: "Lantern House", area: "West Chelsea", slug: "lantern-house" },
-  { name: "565 Broome", area: "SoHo", slug: "565-broome" },
-  { name: "Manhattan West", area: "Penn District", slug: "manhattan-west" },
-  { name: "The Cortland", area: "West Side", slug: "the-cortland" },
-  { name: "Waterline Square", area: "UWS", slug: "waterline-square" },
-  { name: "The Avery", area: "Hell's Kitchen", slug: "the-avery" },
-  { name: "One Manhattan Square", area: "Two Bridges", slug: "one-manhattan-square" },
-  { name: "Tribeca Green", area: "Tribeca", slug: "tribeca-green" },
-  { name: "One Madison", area: "Flatiron", slug: "one-madison" },
-  { name: "111 West 57", area: "Midtown", slug: "111-west-57" },
-  { name: "220 Central Park South", area: "Central Park South", slug: "220-central-park-south" },
-  { name: "432 Park Avenue", area: "Midtown", slug: "432-park-avenue" },
-  { name: "Brookfield Place", area: "Battery Park City", slug: "brookfield-place" },
-  { name: "Hudson Yards Residences", area: "Hudson Yards", slug: "hudson-yards-residences" },
-  { name: "The Symoné", area: "West Chelsea", slug: "the-symone" },
-];
+const featuredBuildings = trackedBuildings.slice(0, 6);
 
-const relocationCriteria = ["Building", "Neighborhood", "Commute", "Amenities", "Budget", "Timing"];
+const relocationCriteria = ["Timing", "Tribe", "Building", "Neighborhood", "Commute", "Amenities", "Budget", "Networking"];
 
 function StylizedPhoto({
   src,
@@ -175,7 +136,7 @@ function BuildingsFollowStrip() {
         onScroll={updateThumb}
         className="buildings-scroll-strip -mx-6 flex snap-x gap-4 overflow-x-auto px-6 pb-2 lg:mx-0 lg:px-0"
       >
-        {buildingsWeFollow.map((building) => (
+        {featuredBuildings.map((building) => (
           <article
             key={building.name}
             className="min-w-[280px] snap-start border border-brand-champagne/20 bg-white/58 px-5 transition duration-300 hover:border-brand-champagne/70 sm:min-w-[320px] lg:min-w-[340px]"
@@ -201,7 +162,7 @@ function BuildingsFollowStrip() {
                   />
                 </div>
                 <p className="text-sm leading-6 text-brand-graphite/72">
-                  Tracked for building quality, resident experience, pricing context, and current opportunity windows.
+                  A featured building from the private watchlist.
                 </p>
               </div>
             </div>
@@ -262,7 +223,7 @@ export default function Home() {
                   Curate Matches
                 </Button>
               </Link>
-              <Link href="/#buildings">
+              <Link href="/buildings">
                 <Button variant="brandGhost">
                   Explore Buildings
                 </Button>
@@ -287,61 +248,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. Services */}
-      <section className="bg-brand-ivory px-6 py-16 lg:px-10 lg:py-20">
+      {/* 2. What We Do */}
+      <section className="bg-brand-ivory px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 border-b border-brand-midnight/10 pb-8 lg:grid-cols-[0.78fr_1fr] lg:items-end">
             <div>
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">
-                Three Ways We Help
+                What We Do
               </p>
-              <h2 className={`${sectionHeadline} text-brand-midnight`}>One Philosophy. Three Applications.</h2>
+              <h2 className={`${sectionHeadline} text-brand-midnight`}>Lease. Acquire. Study The Building.</h2>
             </div>
             <p className="max-w-xl text-base leading-7 text-brand-graphite/70 lg:justify-self-end">
-              Leasing, acquisition, and building research shaped around one idea: study the building before choosing
-              the residence.
+              Agent Kammer helps clients rent, buy, sell, and compare Manhattan residences through a building-first lens.
             </p>
           </div>
-          <div className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-[1.1fr_0.9fr] lg:gap-7">
-            <Link href={threePaths[0].href} className="group block">
-              <div className="h-full border border-brand-champagne/55 bg-white/78 p-6 text-brand-midnight shadow-[0_18px_42px_rgba(15,23,42,0.08)] transition duration-300 group-hover:-translate-y-1 group-hover:border-brand-champagne lg:p-8">
-                <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-brand border border-brand-champagne/60 bg-brand-ivory text-brand-champagne">
-                    <Building2 className="h-7 w-7" strokeWidth={1.65} />
-                  </div>
-                  <div>
-                    <p className="text-[0.66rem] font-semibold uppercase tracking-[0.2em] text-brand-champagne">
-                      {threePaths[0].role}
-                    </p>
-                    <h3 className="mt-1 font-serif text-[2rem] leading-tight text-brand-midnight lg:text-[2.45rem]">
-                      {threePaths[0].subtitle}
-                    </h3>
-                  </div>
-                </div>
-                <p className="mt-6 max-w-xl text-base leading-7 text-brand-graphite/78">{threePaths[0].text}</p>
-                <div className="mt-8 h-px w-full bg-gradient-to-r from-brand-champagne/70 via-brand-champagne/20 to-transparent" />
-                <p className="mt-5 max-w-lg text-sm leading-6 text-brand-graphite/62">
-                  Every recommendation starts with the same building-first lens, then resolves into the right path for
-                  the client.
-                </p>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            <Link href="/profile" className="group block">
+              <div className="h-full border border-brand-champagne/35 bg-white/75 p-5 transition group-hover:border-brand-champagne">
+                <p className="text-[0.64rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">Lease</p>
+                <h3 className="mt-3 font-serif text-2xl text-brand-midnight">Luxury Leasing</h3>
               </div>
             </Link>
-            <div className="grid gap-5">
-              {threePaths.slice(1).map((path) => (
-                <Link key={path.subtitle} href={path.href} className="group block">
-                  <div className="h-full border border-brand-midnight/10 bg-[#f8f5ed] px-6 py-5 text-brand-midnight transition duration-300 group-hover:-translate-y-0.5 group-hover:border-brand-champagne/70 group-hover:bg-white/80">
-                    <div className="flex items-baseline justify-between gap-4">
-                      <p className="text-[0.64rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">
-                        {path.role}
-                      </p>
-                      <span className="h-px flex-1 bg-brand-champagne/35" aria-hidden />
-                    </div>
-                    <h3 className="mt-4 font-serif text-[1.75rem] leading-tight text-brand-midnight">{path.subtitle}</h3>
-                    <p className="mt-3 text-base leading-7 text-brand-graphite/74">{path.text}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
+            <Link href="/buy-sell" className="group block">
+              <div className="h-full border border-brand-champagne/35 bg-white/75 p-5 transition group-hover:border-brand-champagne">
+                <p className="text-[0.64rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">Buy / Sell</p>
+                <h3 className="mt-3 font-serif text-2xl text-brand-midnight">Transaction Advisory</h3>
+              </div>
+            </Link>
+            <Link href="/buildings" className="group block">
+              <div className="h-full border border-brand-champagne/35 bg-white/75 p-5 transition group-hover:border-brand-champagne">
+                <p className="text-[0.64rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">Buildings</p>
+                <h3 className="mt-3 font-serif text-2xl text-brand-midnight">Curated Watchlist</h3>
+              </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -388,6 +327,11 @@ export default function Home() {
           </div>
           <div className="mt-10">
             <BuildingsFollowStrip />
+          </div>
+          <div className="mt-8 flex justify-center">
+            <Link href="/buildings">
+              <Button variant="brandOutline">View Building Watchlist</Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -450,7 +394,9 @@ export default function Home() {
               {relocationCriteria.map((item) => (
                 <li
                   key={item}
-                  className="border border-brand-ivory/12 bg-brand-ivory/[0.035] px-4 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-brand-ivory/82"
+                  className={`border border-brand-ivory/12 bg-brand-ivory/[0.035] px-4 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-brand-ivory/82 ${
+                    item === "Timing" || item === "Tribe" ? "text-center sm:col-span-2" : ""
+                  }`}
                 >
                   {item}
                 </li>
@@ -474,17 +420,17 @@ export default function Home() {
       </section>
 
       {/* 7. Start Your Manhattan Search */}
-      <section className="border-t border-brand-midnight/10 bg-brand-ivory px-6 py-20 text-brand-graphite lg:px-10 lg:py-24">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="bespoke-signature text-[3.1rem] leading-[0.95] md:text-[3.85rem] lg:text-[4.6rem]">
+      <section className="border-t border-brand-midnight/10 bg-brand-ivory px-6 py-12 text-brand-graphite lg:px-10 lg:py-14">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="bespoke-signature text-[2.85rem] leading-[0.95] md:text-[3.45rem] lg:text-[3.9rem]">
             Bespoke Matches
           </h2>
-          <p className="mt-6 text-base leading-7 text-brand-graphite/72">
+          <p className="mt-5 text-base leading-7 text-brand-graphite/72">
             Whether you&apos;re leasing your next residence or acquiring a long-term home, the search begins with the
             right building.
           </p>
           <Link href="/profile">
-            <Button variant="brand" className="mt-10 normal-case tracking-[0.06em]">
+            <Button variant="brand" className="mt-7 normal-case tracking-[0.06em]">
               Meet your matches
             </Button>
           </Link>

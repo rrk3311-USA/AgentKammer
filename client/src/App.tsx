@@ -11,9 +11,10 @@ import { Footer } from "@/components/Footer";
 const FloatingChatAssistant = lazy(() => import("@/components/FloatingChatAssistant").then((module) => ({ default: module.FloatingChatAssistant })));
 
 const Home = lazy(() => import("@/pages/Home"));
-const About = lazy(() => import("@/pages/About"));
+const Buildings = lazy(() => import("@/pages/Buildings"));
 const BuySell = lazy(() => import("@/pages/BuySell"));
 const RealEstate = lazy(() => import("@/pages/RealEstate"));
+const Strategy = lazy(() => import("@/pages/Strategy"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const NewYorkMarket = lazy(() => import("@/pages/NewYorkMarket"));
 const Profile = lazy(() => import("@/pages/Profile"));
@@ -39,9 +40,10 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/about" component={About} />
+      <Route path="/buildings" component={Buildings} />
       <Route path="/buy-sell" component={BuySell} />
       <Route path="/real-estate" component={RealEstate} />
+      <Route path="/strategy" component={Strategy} />
       <Route path="/profile" component={Profile} />
       <Route path="/contact" component={Contact} />
       <Route path="/new-york-market" component={NewYorkMarket} />

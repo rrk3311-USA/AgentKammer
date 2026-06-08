@@ -7,9 +7,9 @@ import { AgentKammerHorizontalLogo } from "@/components/AgentKammerHorizontalLog
 const navLinks = [
   { label: "Lease", href: "/profile" },
   { label: "Buy / Sell", href: "/buy-sell" },
-  { label: "Buildings", href: "/#buildings" },
-  { label: "Research", href: "/real-estate" },
-  { label: "About", href: "/about" },
+  { label: "Buildings", href: "/buildings" },
+  { label: "Intelligence", href: "/real-estate" },
+  { label: "Strategy", href: "/strategy" },
 ];
 
 export function Header() {
