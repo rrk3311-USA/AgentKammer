@@ -15,6 +15,8 @@ const Lease = lazy(() => import("@/pages/Lease"));
 const Buildings = lazy(() => import("@/pages/Buildings"));
 const BuySell = lazy(() => import("@/pages/BuySell"));
 const About = lazy(() => import("@/pages/About"));
+const Perspectives = lazy(() => import("@/pages/Perspectives"));
+const PerspectiveArticle = lazy(() => import("@/pages/PerspectiveArticle"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const NewYorkMarket = lazy(() => import("@/pages/NewYorkMarket"));
 const Profile = lazy(() => import("@/pages/Profile"));
@@ -51,6 +53,8 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/lease" component={Lease} />
       <Route path="/buildings" component={Buildings} />
+      <Route path="/perspectives/:slug" component={PerspectiveArticle} />
+      <Route path="/perspectives" component={Perspectives} />
       <Route path="/buy-sell" component={BuySell} />
       <Route path="/about" component={About} />
       <Route path="/profile" component={Profile} />

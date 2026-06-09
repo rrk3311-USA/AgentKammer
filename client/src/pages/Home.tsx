@@ -4,6 +4,8 @@ import { Link } from "wouter";
 import heroBackground from "@assets/generated_images/manhattan/rooftop-terrace-lifestyle-hero.png";
 import rooftopPoolWtc from "@assets/generated_images/manhattan/rooftop-pool-wtc.png";
 import { trackedBuildings } from "@/data/buildings";
+import { getRecentPerspectives } from "@/data/perspectives";
+import { PerspectiveCard } from "@/components/PerspectiveCard";
 
 /*
  * BUILDING_IMAGE_RULE
@@ -27,6 +29,7 @@ const sectionHeadline = "font-serif text-3xl font-semibold md:text-4xl lg:text-[
 const eyebrow = "mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne";
 
 const featuredBuildings = trackedBuildings.slice(0, 6);
+const recentPerspectives = getRecentPerspectives(3);
 
 const relocationCriteria = ["Timing", "Tribe", "Building", "Neighborhood", "Commute", "Amenities", "Budget", "Networking"];
 
@@ -363,7 +366,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Start Your Manhattan Search */}
+      {/* 7. Recent Observations */}
+      <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10 lg:py-16">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 border-b border-brand-midnight/10 pb-8 lg:grid-cols-[0.82fr_1fr] lg:items-end">
+            <div>
+              <p className={eyebrow}>Perspectives</p>
+              <h2 className={`${sectionHeadline} text-brand-midnight`}>Recent Observations</h2>
+            </div>
+            <p className="max-w-xl text-base leading-7 text-brand-graphite/78 lg:justify-self-end">
+              Notes on buildings, neighborhoods, and Manhattan living — written to clarify decisions, not fill a feed.
+            </p>
+          </div>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {recentPerspectives.map((article) => (
+              <PerspectiveCard key={article.slug} article={article} />
+            ))}
+          </div>
+          <div className="mt-8 flex justify-center">
+            <Link href="/perspectives">
+              <Button variant="brandOutline">View All Perspectives</Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Start Your Manhattan Search */}
       <section className="border-t border-brand-midnight/10 bg-brand-ivory px-6 py-12 text-brand-graphite lg:px-10 lg:py-14">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="bespoke-signature text-[2.85rem] leading-[0.95] md:text-[3.45rem] lg:text-[3.9rem]">

@@ -8,6 +8,7 @@ const navLinks = [
   { label: "Lease", href: "/lease" },
   { label: "Buy / Sell", href: "/buy-sell" },
   { label: "Buildings", href: "/buildings" },
+  { label: "Perspectives", href: "/perspectives" },
   { label: "About", href: "/about" },
 ];
 

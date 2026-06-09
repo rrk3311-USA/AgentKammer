@@ -5,8 +5,10 @@ const footerLinks = [
   { label: "Lease", href: "/lease" },
   { label: "Buy / Sell", href: "/buy-sell" },
   { label: "Buildings", href: "/buildings" },
+  { label: "Perspectives", href: "/perspectives" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
+  { label: "Join Manhattan Brief", href: "/perspectives#manhattan-brief" },
 ];
 
 export function Footer() {
