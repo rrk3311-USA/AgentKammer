@@ -23,6 +23,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
+import { hasBuildingReport } from "@/data/building-reports";
 import {
   type BuildingAmenityKey,
   type TrackedBuilding,
@@ -64,6 +65,8 @@ const amenityIcons: Record<BuildingAmenityKey, LucideIcon> = {
 };
 
 function BuildingWatchlistCard({ building }: { building: TrackedBuilding }) {
+  const reportAvailable = hasBuildingReport(building.slug);
+
   return (
     <article className="flex aspect-video w-full flex-col overflow-hidden border border-brand-champagne/25 bg-brand-midnight">
       <div className="grid min-h-0 flex-1 grid-cols-[0.44fr_0.56fr]">
@@ -107,6 +110,15 @@ function BuildingWatchlistCard({ building }: { building: TrackedBuilding }) {
           );
         })}
       </div>
+      {reportAvailable ? (
+        <div className="border-t border-brand-ivory/12 bg-brand-midnight px-5 py-3 sm:px-6">
+          <Link href={`/buildings/${building.slug}/report`}>
+            <span className="text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-brand-champagne transition hover:text-brand-ivory">
+              Read Building Report →
+            </span>
+          </Link>
+        </div>
+      ) : null}
     </article>
   );
 }

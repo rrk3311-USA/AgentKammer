@@ -1,7 +1,7 @@
 # Agent Kammer — Editorial Calendar
 
 **Purpose:** Prevent random publishing. Content quality is now the bottleneck — not the site.  
-**Companion:** `DESIGN_SYSTEM.md` (visual rules) · `client/src/data/perspectives.ts` (live perspectives)  
+**Companion:** `BUILDING_REPORT_TEMPLATE.md` (report structure) · `DESIGN_SYSTEM.md` (visual rules) · `client/src/data/perspectives.ts` (live perspectives)  
 **Positioning:** *Agent Kammer is a Manhattan advisory practice focused on modern residential buildings.*
 
 ---
@@ -30,7 +30,7 @@
 | **Building Report** | Deep interpretation (7 sections) | 1–2 per month | `/buildings/{slug}/report` (future) |
 | **Neighborhood Report** | Micro-market study | 1 per quarter | Perspectives or PDF |
 | **Perspective** | Observation → Conclusion (5 sections) | 2 per month max | `/perspectives/{slug}` |
-| **Market Note** | Short timing / liquidity read | Monthly | Manhattan Brief + Perspectives |
+| **Market Note** | Short timing / liquidity read | Monthly (not weekly) | Manhattan Brief + Perspectives |
 | **Client Story** | Anonymized decision arc | As available | Perspectives (Lifestyle tag) |
 
 ---
@@ -39,23 +39,17 @@
 
 ### Tier 1 — Building Reports (ship first)
 
-These differentiate the practice. Each report follows the Lantern House template (see DESIGN_SYSTEM §17).
+These differentiate the practice. Each report follows `BUILDING_REPORT_TEMPLATE.md` (8 sections, identical structure).
 
 | Building | Slug | Status | Target | Notes |
 |----------|------|--------|--------|-------|
-| **Lantern House** | `lantern-house` | 🔴 Not started | Q2 2026 | Chelsea waterfront — flagship report |
+| **Lantern House** | `lantern-house` | ✅ Published | Jun 2026 | Chelsea waterfront — flagship report |
 | **One High Line** | `one-high-line` | 🔴 Not started | Q2 2026 | West Chelsea, High Line proximity |
 | **35 Hudson Yards** | `35-hudson-yards` | 🔴 Not started | Q3 2026 | Hudson Yards anchor tower |
+| **15 Hudson Yards** | `15-hudson-yards` | 🔴 Not started | Q3 2026 | Hudson Yards residential tower |
+| **565 Broome** | `565-broome` | 🔴 Not started | Q4 2026 | SoHo modern luxury |
 
-**Report sections (required):**
-
-1. Resident profile  
-2. Commute analysis  
-3. Amenity value  
-4. Comparable buildings  
-5. Fit score (qualitative)  
-6. Pros / Cons  
-7. Who should live here  
+**Report sections (required):** See `BUILDING_REPORT_TEMPLATE.md` — 14 sections (Executive Summary → Bottom Line). Lantern House is the gold standard.  
 
 ---
 
@@ -75,6 +69,7 @@ These differentiate the practice. Each report follows the Lantern House template
 
 | Title | Content type | Slug | Published |
 |-------|--------------|------|-----------|
+| Why Some Luxury Buildings Have More Personality Than Others | 🏢 Building | `why-some-luxury-buildings-have-more-personality-than-others` | Jun 2026 |
 | Why The Building Matters More Than The Residence | 🏢 Building | `why-the-building-matters-more-than-the-residence` | May 2026 |
 | The Hidden Cost Of A Bad Commute | 🚕 Relocation | `the-hidden-cost-of-a-bad-commute` | May 2026 |
 | Why Manhattan Keeps Building Offices | 🏙 Development | `why-manhattan-keeps-building-offices` | Apr 2026 |
@@ -143,7 +138,7 @@ Slower is fine. Random is not.
 |---------|-------------|
 | Perspectives | `client/src/data/perspectives.ts` |
 | Building watchlist | `client/src/data/buildings.ts` |
-| Building Reports (future) | `client/src/data/building-reports.ts` (TBD) |
+| Building Reports | `client/src/data/building-reports.ts` · `/buildings/{slug}/report` |
 | Sitemap | `client/public/sitemap.xml` |
 | Newsletter signups | `/api/leads` · `leadSource: "manhattan_brief"` |
 

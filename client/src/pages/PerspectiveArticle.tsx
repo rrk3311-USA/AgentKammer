@@ -4,6 +4,7 @@ import { ManhattanBriefSubscribe } from "@/components/ManhattanBriefSubscribe";
 import { PerspectiveCard } from "@/components/PerspectiveCard";
 import { PerspectiveContentTag } from "@/components/PerspectiveContentTag";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
+import { getBuildingReportBySlug } from "@/data/building-reports";
 import {
   formatPerspectiveDate,
   getPerspectiveBySlug,
@@ -35,6 +36,9 @@ export default function PerspectiveArticle() {
   }
 
   const related = perspectives.filter((p) => p.slug !== article.slug).slice(0, 3);
+  const relatedReport = article.relatedBuildingReportSlug
+    ? getBuildingReportBySlug(article.relatedBuildingReportSlug)
+    : undefined;
 
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
@@ -68,6 +72,24 @@ export default function PerspectiveArticle() {
           ))}
         </div>
       </article>
+
+      {relatedReport ? (
+        <section className="border-t border-brand-midnight/10 bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10">
+          <div className="mx-auto max-w-3xl">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Building Report</p>
+            <h2 className="font-serif text-3xl font-semibold">{relatedReport.buildingName}</h2>
+            <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-brand-champagne">
+              {relatedReport.location}
+            </p>
+            <p className="mt-4 text-base leading-7 text-brand-ivory/82">{relatedReport.executiveSummary[0]}</p>
+            <div className="mt-6">
+              <Link href={`/buildings/${relatedReport.slug}/report`}>
+                <Button variant="brand">Read Building Report</Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="border-t border-brand-midnight/10 bg-[#f7f3ea] px-6 py-14 lg:px-10">
         <div className="mx-auto max-w-7xl">

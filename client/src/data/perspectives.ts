@@ -25,10 +25,34 @@ export type Perspective = {
   publishedAt: string;
   readMinutes: number;
   featured?: boolean;
+  relatedBuildingReportSlug?: string;
   sections: PerspectiveSections;
 };
 
 export const perspectives: Perspective[] = [
+  {
+    slug: "why-some-luxury-buildings-have-more-personality-than-others",
+    title: "Why Some Luxury Buildings Have More Personality Than Others",
+    excerpt:
+      "Price and amenities converge across Manhattan. Character does not. The buildings worth studying are the ones with a discernible point of view.",
+    contentType: "building",
+    publishedAt: "2026-06-07",
+    readMinutes: 6,
+    featured: true,
+    relatedBuildingReportSlug: "lantern-house",
+    sections: {
+      observation:
+        "Walk through enough luxury towers and a pattern emerges: similar finishes, similar amenity decks, similar marketing language. Many buildings compete on scale and specification. Few compete on identity.",
+      context:
+        "Architecture, scale, and neighborhood relationship shape how a building feels day to day — more than a wine room or a second gym. Some developments are designed to disappear into the skyline. Others are designed to be remembered.",
+      interpretation:
+        "Personality is not ornament. It is a set of choices about how a building relates to the street, the light, and the resident inside it. Buildings with personality often trade efficiency for experience — and attract residents who value that trade.",
+      implication:
+        "Lantern House is a useful case study: Heatherwick's bay windows and sculptural façade create exposure and charm in equal measure. That is not a flaw in the design — it is the point. Clients who need anonymity will feel friction. Clients who want a memorable home may feel immediately at home.",
+      conclusion:
+        "When studying Manhattan luxury, ask whether a building has a point of view — not only a price point. The watchlist should include towers worth comparing and towers worth remembering. They are not always the same list.",
+    },
+  },
   {
     slug: "why-the-building-matters-more-than-the-residence",
     title: "Why The Building Matters More Than The Residence",
@@ -37,7 +61,6 @@ export const perspectives: Perspective[] = [
     contentType: "building",
     publishedAt: "2026-05-15",
     readMinutes: 6,
-    featured: true,
     sections: {
       observation:
         "Most Manhattan searches begin inside an apartment — square footage, light, layout. Clients rarely ask first about doorman quality, resident turnover, or how the building actually feels at 7 a.m. on a Tuesday.",

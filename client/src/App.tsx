@@ -13,6 +13,7 @@ const FloatingChatAssistant = lazy(() => import("@/components/FloatingChatAssist
 const Home = lazy(() => import("@/pages/Home"));
 const Lease = lazy(() => import("@/pages/Lease"));
 const Buildings = lazy(() => import("@/pages/Buildings"));
+const BuildingReport = lazy(() => import("@/pages/BuildingReport"));
 const BuySell = lazy(() => import("@/pages/BuySell"));
 const About = lazy(() => import("@/pages/About"));
 const Perspectives = lazy(() => import("@/pages/Perspectives"));
@@ -52,6 +53,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/lease" component={Lease} />
+      <Route path="/buildings/:slug/report" component={BuildingReport} />
       <Route path="/buildings" component={Buildings} />
       <Route path="/perspectives/:slug" component={PerspectiveArticle} />
       <Route path="/perspectives" component={Perspectives} />

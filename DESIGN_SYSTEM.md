@@ -616,17 +616,7 @@ See `EDITORIAL_CALENDAR.md` for the publishing pipeline.
 
 Watchlist cards are the entry point. **Building Reports** are the differentiated product.
 
-Example: **Lantern House Report**
-
-| Section | Content |
-|---------|---------|
-| Resident profile | Who actually lives there, ownership mix, turnover |
-| Commute analysis | Realistic weekly routes — not map radius |
-| Amenity value | What matters vs marketing filler |
-| Comparable buildings | Towers worth comparing — and why |
-| Fit score | Qualitative judgment for client archetypes |
-| Pros / Cons | Honest tradeoffs |
-| Who should live here | Clear recommendation frame |
+Example: **Lantern House Report** — full structure in `BUILDING_REPORT_TEMPLATE.md` (8 sections: Overview → Who It Doesn't).
 
 **Not Zillow. Not listing data. Interpretation.**
 
