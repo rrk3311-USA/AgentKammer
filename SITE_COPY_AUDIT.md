@@ -22,21 +22,19 @@ For visual rules, see `DESIGN_SYSTEM.md`.
 - Agent Kammer
 - Modern Manhattan Luxury
 
-**Links:** Lease · Buy / Sell · Buildings · About · Contact
+**Links:** Lease · Buy / Sell · Buildings · Perspectives · About · Contact · Join Manhattan Brief
 
 **Contact**
 - New York, NY
-- info@AgentKammer.com
+- info@agentkammer.com
 - Instagram (placeholder)
 - LinkedIn (placeholder)
 
-**Compliance (expandable)**
-- Licensed Real Estate Salesperson · Equal Housing Opportunity · Required NY Disclosures
-- Real estate services are subject to applicable New York licensing, agency disclosure, fair housing, and consumer protection requirements. Full disclosures are available upon request.
-
 **Legal row**
 - Copyright 2026 · Agent Kammer
-- Privacy · Terms · Fair Housing · Agency Disclosure
+- Privacy · Terms
+
+*Pre-license: no salesperson, brokerage, fair housing, or NY disclosure language in footer or public pages.*
 
 ---
 
@@ -366,7 +364,7 @@ For visual rules, see `DESIGN_SYSTEM.md`.
 **Complimentary Seller First Read:** Know whether the move is worth exploring before you expose the property.
 
 ### Sidebar
-**Email:** info@AgentKammer.com  
+**Email:** info@agentkammer.com  
 **Phone:** (212) 123-4567  
 **Market Focus:** Manhattan luxury buildings, with emphasis on building fit and transaction timing.  
 **Discretion:** Seller, buyer, and relocation conversations are handled privately before any public exposure.
@@ -422,9 +420,9 @@ For visual rules, see `DESIGN_SYSTEM.md`.
 **Headline:** Reverse Buyer Origination™  
 **Tagline:** Strategy before search. Structure before offers.
 
-**How It Works:** Buyer Profile → Lenders Compete → Brokers Compete → One Summary
+**How It Works:** Buyer Profile → Lenders Compete → Fee Models Compared → One Summary
 
-**Deliverables:** APR comparison · Broker fee structure · Five-year cost delta · Recommended path
+**Deliverables:** APR comparison · Advisory fee structure · Five-year cost delta · Recommended path
 
 ---
 

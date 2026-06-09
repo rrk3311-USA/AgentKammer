@@ -121,8 +121,8 @@ export default function Contact() {
                 <Mail className="mt-0.5 h-5 w-5 shrink-0 text-brand-champagne" />
                 <div>
                   <h3 className="font-semibold text-brand-midnight">Email</h3>
-                  <a href="mailto:info@AgentKammer.com" className="text-sm text-brand-graphite/78 hover:text-brand-sapphire">
-                    info@AgentKammer.com
+                  <a href="mailto:info@agentkammer.com" className="text-sm text-brand-graphite/78 hover:text-brand-sapphire">
+                    info@agentkammer.com
                   </a>
                 </div>
               </div>

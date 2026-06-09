@@ -43,9 +43,11 @@ Lease  |  Buy / Sell  |  Buildings  |  About  |  [ Curate Matches ]
 
 ## Footer Navigation
 
-Lease · Buy / Sell · Buildings · About · Contact
+Lease · Buy / Sell · Buildings · Perspectives · About · Contact · Join Manhattan Brief
 
-Plus: brand block, `info@AgentKammer.com`, compliance expandable, legal row.
+Plus: brand block (`Agent Kammer` · `Modern Manhattan Luxury`), `info@agentkammer.com`, New York NY, legal row (Copyright · Privacy · Terms).
+
+*Pre-license: no salesperson, brokerage, fair housing, or NY disclosure copy on public pages.*
 
 ---
 

@@ -41,10 +41,10 @@ export function Footer() {
           <div className="lg:text-right">
             <p className="text-xs uppercase tracking-[0.18em] text-brand-ivory/60">New York, NY</p>
             <a
-              href="mailto:info@AgentKammer.com"
+              href="mailto:info@agentkammer.com"
               className="mt-3 inline-flex text-sm text-brand-ivory/82 transition hover:text-brand-champagne"
             >
-              info@AgentKammer.com
+              info@agentkammer.com
             </a>
             <div className="mt-3 flex gap-4 lg:justify-end">
               <span className="text-xs uppercase tracking-[0.14em] text-brand-ivory/50">Instagram</span>

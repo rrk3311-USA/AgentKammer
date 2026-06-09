@@ -62,13 +62,13 @@ export default function ReverseBuyerOrigination() {
   const steps = [
     { number: 1, title: "Buyer Profile", description: "Price range, down payment, credit band, target areas. No hard pulls." },
     { number: 2, title: "Lenders Compete", description: "APR bands, payments, credits, and closing costs — side by side." },
-    { number: 3, title: "Brokers Compete", description: "Fee structures compared across traditional and lean models." },
+    { number: 3, title: "Fee Models Compared", description: "Advisory and transaction fee structures compared across traditional and lean models." },
     { number: 4, title: "One Summary", description: "A single RBO report with recommended path and next actions." },
   ];
 
   const deliverables = [
     "APR and closing-cost comparison",
-    "Broker fee structure with net impact",
+    "Advisory fee structure with net impact",
     "Five-year cost delta vs traditional route",
     "Recommended execution path",
   ];
@@ -202,7 +202,7 @@ export default function ReverseBuyerOrigination() {
               <Card className="border border-brand-ivory/15 bg-brand-midnight p-5">
                 <TrendingUp className="mb-2 h-5 w-5 text-brand-champagne" />
                 <h3 className="font-semibold text-brand-ivory">Competing Offers</h3>
-                <p className="mt-1 text-sm text-brand-ivory/72">Lender and broker structures compared with clear math.</p>
+                <p className="mt-1 text-sm text-brand-ivory/72">Lender and advisory fee structures compared with clear math.</p>
               </Card>
               <Card className="border border-brand-ivory/15 bg-brand-midnight p-5">
                 <Calculator className="mb-2 h-5 w-5 text-brand-champagne" />

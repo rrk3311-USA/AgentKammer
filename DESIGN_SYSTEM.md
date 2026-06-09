@@ -637,7 +637,36 @@ Until reports ship, Buildings page lists research deliverables as placeholders �
 
 ---
 
-## 18. Evolution Path
+## 18. Pre-License Public Positioning
+
+Until exam, brokerage affiliation, and brokerage advertising rules are confirmed:
+
+**Do not show on public pages:**
+- Licensed Real Estate Salesperson
+- Equal Housing Opportunity
+- Agency disclosure / fair housing language
+- Brokerage name or MLS attribution
+- Google Business Profile (wait until licensed and brokerage guidance is clear)
+
+**Footer (current — sufficient):**
+
+```
+Agent Kammer
+Modern Manhattan Luxury
+
+New York, NY
+info@agentkammer.com
+
+Copyright · Privacy · Terms
+```
+
+**Position publicly as:** Manhattan observer and advisor-in-development — not an active licensed agent.
+
+**Google Business Profile:** Launch only after (1) exam passed, (2) brokerage affiliation, (3) brokerage-approved disclosures and branding.
+
+---
+
+## 19. Evolution Path
 
 Design consistency at this stage comes from **restraint**, not more components.
 
