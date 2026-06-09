@@ -53,27 +53,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-9 border-t border-brand-champagne/25 pt-5">
-          <details className="group text-xs text-brand-ivory/55">
-            <summary className="cursor-pointer list-none text-center uppercase tracking-[0.14em] text-brand-ivory/58 transition hover:text-brand-champagne">
-              <span>Licensed Real Estate Salesperson · Equal Housing Opportunity · Required NY Disclosures</span>
-              <span className="ml-2 text-brand-champagne/70 group-open:hidden">+</span>
-              <span className="ml-2 hidden text-brand-champagne/70 group-open:inline">−</span>
-            </summary>
-            <p className="mx-auto mt-3 max-w-3xl text-center leading-6">
-              Real estate services are subject to applicable New York licensing, agency disclosure, fair housing, and
-              consumer protection requirements. Full disclosures are available upon request.
-            </p>
-          </details>
-        </div>
-
-        <div className="mt-5 flex flex-col items-center justify-between gap-4 border-t border-brand-ivory/10 pt-5 text-xs text-brand-ivory/45 sm:flex-row">
+        <div className="mt-9 flex flex-col items-center justify-between gap-4 border-t border-brand-champagne/25 pt-5 text-xs text-brand-ivory/45 sm:flex-row">
           <p>Copyright 2026 · Agent Kammer</p>
           <div className="flex flex-wrap justify-center gap-x-5 gap-y-2">
             <span>Privacy</span>
             <span>Terms</span>
-            <span>Fair Housing</span>
-            <span>Agency Disclosure</span>
           </div>
         </div>
 
