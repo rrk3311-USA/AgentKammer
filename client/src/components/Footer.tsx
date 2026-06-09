@@ -2,11 +2,10 @@ import { Link } from "wouter";
 import logoEmblem from "@assets/agent-kammer-logo-emblem-gold-wreath.png";
 
 const footerLinks = [
-  { label: "Leasing", href: "/profile" },
+  { label: "Lease", href: "/lease" },
   { label: "Buy / Sell", href: "/buy-sell" },
   { label: "Buildings", href: "/buildings" },
-  { label: "Intelligence", href: "/real-estate" },
-  { label: "Strategy", href: "/strategy" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 

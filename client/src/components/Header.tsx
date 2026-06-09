@@ -5,11 +5,10 @@ import { useState } from "react";
 import { AgentKammerHorizontalLogo } from "@/components/AgentKammerHorizontalLogo";
 
 const navLinks = [
-  { label: "Lease", href: "/profile" },
+  { label: "Lease", href: "/lease" },
   { label: "Buy / Sell", href: "/buy-sell" },
   { label: "Buildings", href: "/buildings" },
-  { label: "Intelligence", href: "/real-estate" },
-  { label: "Strategy", href: "/strategy" },
+  { label: "About", href: "/about" },
 ];
 
 export function Header() {

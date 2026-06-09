@@ -19,7 +19,7 @@ const profileIncludes = [
 const nextSteps = [
   { title: "Buying", href: "/reverse-buyer-origination", text: "Reverse Buyer Origination™" },
   { title: "Selling", href: "/reverse-seller-architecture", text: "Reverse Seller Architecture™" },
-  { title: "Intelligence", href: "/real-estate", text: "Building Intelligence & Reports" },
+  { title: "Buildings", href: "/buildings", text: "Curated Watchlist & Reports" },
 ];
 
 export default function Profile() {

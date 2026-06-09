@@ -11,10 +11,10 @@ import { Footer } from "@/components/Footer";
 const FloatingChatAssistant = lazy(() => import("@/components/FloatingChatAssistant").then((module) => ({ default: module.FloatingChatAssistant })));
 
 const Home = lazy(() => import("@/pages/Home"));
+const Lease = lazy(() => import("@/pages/Lease"));
 const Buildings = lazy(() => import("@/pages/Buildings"));
 const BuySell = lazy(() => import("@/pages/BuySell"));
-const RealEstate = lazy(() => import("@/pages/RealEstate"));
-const Strategy = lazy(() => import("@/pages/Strategy"));
+const About = lazy(() => import("@/pages/About"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const NewYorkMarket = lazy(() => import("@/pages/NewYorkMarket"));
 const Profile = lazy(() => import("@/pages/Profile"));
@@ -22,11 +22,20 @@ const ReverseBuyerOrigination = lazy(() => import("@/pages/ReverseBuyerOriginati
 const ReverseSellerOrigination = lazy(() => import("@/pages/ReverseSellerOrigination"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
+function Redirect({ to }: { to: string }) {
+  const [, setLocation] = useLocation();
+
+  useEffect(() => {
+    setLocation(to);
+  }, [setLocation, to]);
+
+  return null;
+}
+
 function ScrollToTop() {
   const [location] = useLocation();
   
   useEffect(() => {
-    // Use setTimeout to ensure it happens after render and DOM updates
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: 'auto' });
       document.documentElement.scrollTop = 0;
@@ -40,15 +49,17 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/lease" component={Lease} />
       <Route path="/buildings" component={Buildings} />
       <Route path="/buy-sell" component={BuySell} />
-      <Route path="/real-estate" component={RealEstate} />
-      <Route path="/strategy" component={Strategy} />
+      <Route path="/about" component={About} />
       <Route path="/profile" component={Profile} />
       <Route path="/contact" component={Contact} />
       <Route path="/new-york-market" component={NewYorkMarket} />
       <Route path="/reverse-buyer-origination" component={ReverseBuyerOrigination} />
       <Route path="/reverse-seller-architecture" component={ReverseSellerOrigination} />
+      <Route path="/strategy">{() => <Redirect to="/buy-sell" />}</Route>
+      <Route path="/real-estate">{() => <Redirect to="/buildings" />}</Route>
       <Route component={NotFound} />
     </Switch>
   );

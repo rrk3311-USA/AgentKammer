@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Building2, Target, TrendingUp } from "lucide-react";
 import heroBackground from "@assets/generated_images/manhattan/rooftop-terrace-lifestyle-hero.png";
 import rooftopPoolWtc from "@assets/generated_images/manhattan/rooftop-pool-wtc.png";
 import { trackedBuildings } from "@/data/buildings";
@@ -26,24 +25,6 @@ import { trackedBuildings } from "@/data/buildings";
 
 const sectionHeadline = "font-serif text-3xl font-semibold md:text-4xl lg:text-[2.65rem]";
 const eyebrow = "mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne";
-
-const intelligencePillars = [
-  {
-    title: "Building Fit",
-    text: "Building-level pricing, liquidity, and resident profile.",
-    icon: Building2,
-  },
-  {
-    title: "Market Timing",
-    text: "Neighborhood supply, demand, and timing context.",
-    icon: TrendingUp,
-  },
-  {
-    title: "Deal Leverage",
-    text: "Negotiation windows, concessions, and acquisition leverage.",
-    icon: Target,
-  },
-];
 
 const featuredBuildings = trackedBuildings.slice(0, 6);
 
@@ -211,11 +192,11 @@ export default function Home() {
               <span className="mt-3 block text-brand-champagne/95">Only a Few Are Right For You</span>
             </h1>
             <p className="mt-5 max-w-xl text-base leading-[1.65] text-brand-ivory/92">
-              Luxury leasing, strategic acquisition, and building intelligence focused on Manhattan&apos;s premier
-              modern residential buildings.
+              The building matters more than the residence. Agent Kammer helps clients identify the right building,
+              neighborhood, amenities, commute, and lifestyle fit before narrowing the search.
             </p>
             <p className="mt-3 max-w-xl text-base leading-[1.65] text-brand-ivory/72">
-              Focused on Hudson Yards, Manhattan West, Chelsea, Tribeca, and Battery Park City.
+              Then lease it, acquire it, or sell it — within that context.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:mt-12 sm:flex-row">
               <Link href="/profile">
@@ -223,65 +204,29 @@ export default function Home() {
                   Curate Matches
                 </Button>
               </Link>
-              <Link href="/buildings">
+              <Link href="/about">
                 <Button variant="brandGhost">
-                  Explore Buildings
+                  Why Agent Kammer
                 </Button>
               </Link>
             </div>
           </div>
         </div>
-        <div className="relative border-t border-brand-champagne/45 bg-brand-midnight">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 divide-y divide-brand-champagne/25 px-6 lg:grid-cols-3 lg:divide-x lg:divide-y-0 lg:px-10">
-            {intelligencePillars.map((pillar) => (
-              <div key={pillar.title} className="flex gap-4 py-5 lg:px-8 first:lg:pl-0 last:lg:pr-0">
-                <pillar.icon className="mt-0.5 h-5 w-5 shrink-0 text-brand-champagne" strokeWidth={1.45} />
-                <div>
-                  <p className="text-[0.66rem] font-semibold uppercase tracking-[0.2em] text-brand-champagne">
-                    {pillar.title}
-                  </p>
-                  <p className="mt-1.5 text-xs leading-5 text-brand-ivory/72">{pillar.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
 
-      {/* 2. What We Do */}
+      {/* 2. Philosophy */}
       <section className="bg-brand-ivory px-6 py-14 lg:px-10 lg:py-16">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 border-b border-brand-midnight/10 pb-8 lg:grid-cols-[0.78fr_1fr] lg:items-end">
-            <div>
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">
-                What We Do
-              </p>
-              <h2 className={`${sectionHeadline} text-brand-midnight`}>Lease. Acquire. Study The Building.</h2>
-            </div>
-            <p className="max-w-xl text-base leading-7 text-brand-graphite/70 lg:justify-self-end">
-              Agent Kammer helps clients rent, buy, sell, and compare Manhattan residences through a building-first lens.
-            </p>
-          </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <Link href="/profile" className="group block">
-              <div className="h-full border border-brand-champagne/35 bg-white/75 p-5 transition group-hover:border-brand-champagne">
-                <p className="text-[0.64rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">Lease</p>
-                <h3 className="mt-3 font-serif text-2xl text-brand-midnight">Luxury Leasing</h3>
-              </div>
-            </Link>
-            <Link href="/buy-sell" className="group block">
-              <div className="h-full border border-brand-champagne/35 bg-white/75 p-5 transition group-hover:border-brand-champagne">
-                <p className="text-[0.64rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">Buy / Sell</p>
-                <h3 className="mt-3 font-serif text-2xl text-brand-midnight">Transaction Advisory</h3>
-              </div>
-            </Link>
-            <Link href="/buildings" className="group block">
-              <div className="h-full border border-brand-champagne/35 bg-white/75 p-5 transition group-hover:border-brand-champagne">
-                <p className="text-[0.64rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">Buildings</p>
-                <h3 className="mt-3 font-serif text-2xl text-brand-midnight">Curated Watchlist</h3>
-              </div>
-            </Link>
-          </div>
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Philosophy</p>
+          <h2 className={`${sectionHeadline} text-brand-midnight`}>Choose the Right Building First</h2>
+          <p className="mt-6 text-base leading-7 text-brand-graphite/74">
+            Agent Kammer exists because most Manhattan searches start in the wrong place. We study buildings, neighborhoods,
+            and fit before residences enter the conversation.
+          </p>
+          <p className="mt-4 text-base leading-7 text-brand-graphite/74">
+            Everything on this site supports one outcome: help ambitious clients choose the right building — then lease,
+            acquire, or sell within that context.
+          </p>
         </div>
       </section>
 

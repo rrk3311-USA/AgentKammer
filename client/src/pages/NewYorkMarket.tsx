@@ -69,7 +69,7 @@ export default function NewYorkMarket() {
               <Link href="/profile">
                 <Button variant="brand">Curate Matches</Button>
               </Link>
-              <Link href="/real-estate">
+              <Link href="/buildings">
                 <Button variant="brandGhost">Research Framework</Button>
               </Link>
             </div>

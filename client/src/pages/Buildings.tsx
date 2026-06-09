@@ -4,9 +4,12 @@ import {
   Building2,
   Car,
   Coffee,
+  Compass,
   Dumbbell,
   Laptop,
+  MapPin,
   PawPrint,
+  Search,
   ShieldCheck,
   ShoppingBag,
   Sofa,
@@ -28,6 +31,15 @@ import {
 } from "@/data/buildings";
 
 const comparisonPoints = ["Amenities", "Resident Experience", "Neighborhood Placement"];
+
+const reports = [
+  { title: "Building Report", text: "Pricing, liquidity, risk, resident fit, and what makes one building worth studying." },
+  { title: "Neighborhood Report", text: "Demand, supply, commute, amenities, and development context by micro-market." },
+  { title: "Opportunity Monitor", text: "Price cuts, stale listings, concessions, and moments where leverage becomes visible." },
+  { title: "Comparable Analysis", text: "Relevant active, pending, and closed comparables translated into decision context." },
+  { title: "Market Context", text: "Inventory, timing, and Manhattan demand perspective around a building shortlist." },
+  { title: "Resident Fit", text: "Who lives there, how the building operates, and whether the profile matches the client." },
+];
 
 const amenityIcons: Record<BuildingAmenityKey, LucideIcon> = {
   pool: Waves,
@@ -109,8 +121,8 @@ export default function Buildings() {
               Manhattan Buildings Worth Studying
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-brand-ivory/82">
-              A focused universe of modern Manhattan residential buildings tracked for fit, amenities, resident experience,
-              and neighborhood placement.
+              A curated Manhattan watchlist with building reports, neighborhood context, opportunity monitoring, and
+              resident fit — supporting the selection process, not replacing it.
             </p>
           </div>
           <Card className="rounded-none border border-brand-ivory/14 bg-brand-ivory/[0.04] p-6 text-brand-ivory shadow-none">
@@ -135,6 +147,26 @@ export default function Buildings() {
         </div>
       </section>
 
+      <section className="border-t border-brand-midnight/10 bg-brand-ivory px-6 py-14 lg:px-10 lg:py-16">
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Research</p>
+          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">What We Study Per Building</h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-brand-graphite/72">
+            These outputs support the watchlist. They are not a separate product — they explain why a building belongs on
+            the list.
+          </p>
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {reports.map((item) => (
+              <Card key={item.title} className="rounded-none border border-brand-graphite/12 bg-white/78 p-5 shadow-none">
+                <Compass className="mb-3 h-4 w-4 text-brand-champagne" />
+                <h3 className="font-serif text-lg font-semibold text-brand-midnight">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-brand-graphite/76">{item.text}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="border-t border-brand-midnight/10 bg-[#f3f2ee] px-6 pb-16 lg:px-10 lg:pb-20">
         <div className="mx-auto max-w-7xl pt-10">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
@@ -145,6 +177,36 @@ export default function Buildings() {
           <div className="mt-10 flex justify-center">
             <Link href="/profile">
               <Button variant="brand">Curate Matches</Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-brand-graphite/10 bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Markets</p>
+          <h2 className="font-serif text-3xl font-semibold">Manhattan Context Hubs</h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            <Link href="/new-york-market">
+              <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40">
+                <Building2 className="mb-2 h-5 w-5 text-brand-champagne" />
+                <h3 className="font-serif text-xl text-brand-ivory">Uptown</h3>
+                <p className="mt-1 text-sm text-brand-ivory/72">Central Park, Upper East Side, and Upper West Side context.</p>
+              </Card>
+            </Link>
+            <Link href="/new-york-market">
+              <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40">
+                <MapPin className="mb-2 h-5 w-5 text-brand-champagne" />
+                <h3 className="font-serif text-xl text-brand-ivory">Midtown</h3>
+                <p className="mt-1 text-sm text-brand-ivory/72">Hudson Yards, Manhattan West, and core tower inventory.</p>
+              </Card>
+            </Link>
+            <Link href="/new-york-market">
+              <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40">
+                <Search className="mb-2 h-5 w-5 text-brand-champagne" />
+                <h3 className="font-serif text-xl text-brand-ivory">Downtown</h3>
+                <p className="mt-1 text-sm text-brand-ivory/72">Tribeca, SoHo, Chelsea, Flatiron, and waterfront context.</p>
+              </Card>
             </Link>
           </div>
         </div>
