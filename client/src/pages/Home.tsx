@@ -189,14 +189,14 @@ export default function Home() {
               className="font-serif text-4xl font-semibold leading-[1.1] text-brand-ivory md:text-5xl lg:text-[3.35rem] lg:leading-[1.08]"
             >
               <span className="block">Manhattan Has Thousands of Residences</span>
-              <span className="mt-3 block text-brand-champagne/95">Only a Few Are Right For You</span>
+              <span className="mt-3 block text-brand-champagne/95">Only a Few Will Be Right For The Way You Live</span>
             </h1>
             <p className="mt-5 max-w-xl text-base leading-[1.65] text-brand-ivory/92">
-              The building matters more than the residence. Agent Kammer helps clients identify the right building,
-              neighborhood, amenities, commute, and lifestyle fit before narrowing the search.
+              Most Manhattan searches begin with apartments. We begin with the building — neighborhood, amenities,
+              commute, and how a client actually wants to live.
             </p>
             <p className="mt-3 max-w-xl text-base leading-[1.65] text-brand-ivory/72">
-              Then lease it, acquire it, or sell it — within that context.
+              Then lease it, acquire it, or sell it with that clarity.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:mt-12 sm:flex-row">
               <Link href="/profile">
@@ -218,14 +218,14 @@ export default function Home() {
       <section className="bg-brand-ivory px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-3xl text-center">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Philosophy</p>
-          <h2 className={`${sectionHeadline} text-brand-midnight`}>Choose the Right Building First</h2>
+          <h2 className={`${sectionHeadline} text-brand-midnight`}>Start With the Building, Not the Listing</h2>
           <p className="mt-6 text-base leading-7 text-brand-graphite/74">
-            Agent Kammer exists because most Manhattan searches start in the wrong place. We study buildings, neighborhoods,
-            and fit before residences enter the conversation.
+            Real estate decisions rarely begin with real estate. Most clients arrive with a career change, a relocation,
+            or a new chapter — not a floor plan requirement.
           </p>
           <p className="mt-4 text-base leading-7 text-brand-graphite/74">
-            Everything on this site supports one outcome: help ambitious clients choose the right building — then lease,
-            acquire, or sell within that context.
+            Agent Kammer studies buildings, neighborhoods, and resident fit before residences enter the conversation —
+            then helps clients lease, acquire, or sell with judgment already in place.
           </p>
         </div>
       </section>
@@ -238,13 +238,11 @@ export default function Home() {
               The Right Building Changes Everything
             </h2>
             <p className="mt-6 text-base leading-7 text-brand-graphite/82">
-              Most clients begin by searching residences.
+              Most people search residences. We start by understanding where and how a client wants to live.
             </p>
             <p className="mt-4 text-base leading-7 text-brand-graphite/82">
-              We begin by identifying the right building, neighborhood, amenities, commute, and lifestyle fit.
-            </p>
-            <p className="mt-4 text-base leading-7 text-brand-graphite/82">
-              Because the building often matters more than the residence itself.
+              That means contextual review first — neighborhood rhythm, building analysis, amenities, commute, and
+              resident fit — before any unit is worth discussing.
             </p>
           </div>
           <StylizedPhoto
@@ -266,8 +264,8 @@ export default function Home() {
               <h2 className={`${sectionHeadline} text-brand-midnight`}>Buildings We Track</h2>
             </div>
             <p className="max-w-xl text-base leading-7 text-brand-graphite/78 lg:justify-self-end">
-              Not a directory. A curated set of Manhattan buildings we monitor for fit, pricing context, resident experience,
-              and opportunity windows.
+              Not a directory. A curated watchlist we monitor through building reports, market perspective, resident
+              experience, and opportunity windows.
             </p>
           </div>
           <div className="mt-10">
@@ -310,7 +308,7 @@ export default function Home() {
               <p className="text-[0.64rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">Next Step</p>
               <p className="mt-3 font-serif text-2xl leading-tight text-brand-midnight">Strategic Ownership</p>
               <p className="mt-3 text-sm leading-6 text-brand-graphite/68">
-                The same building-first view carries into purchase, investment, and repeat decisions.
+                The same careful judgment carries into purchase, investment, and repeat decisions.
               </p>
             </div>
           </div>
@@ -325,10 +323,11 @@ export default function Home() {
             <p className={eyebrow}>Relocation Advisory</p>
             <h2 className={`${sectionHeadline} text-brand-ivory`}>Relocating To Manhattan</h2>
             <p className="mt-6 text-base leading-7 text-brand-ivory/78">
-              Most clients do not start with a property.
+              Most clients are not searching for an apartment. They are navigating a promotion, relocation, growing
+              family, or new chapter.
             </p>
             <p className="mt-4 text-base leading-7 text-brand-ivory/78">
-              They start with a new role, a new city, a growing family, or a lifestyle change.
+              The property search comes later — once timing, neighborhood, and lifestyle direction are clear.
             </p>
           </div>
           <div className="max-w-xl lg:justify-self-start">
@@ -371,8 +370,8 @@ export default function Home() {
             Bespoke Matches
           </h2>
           <p className="mt-5 text-base leading-7 text-brand-graphite/72">
-            Whether you&apos;re leasing your next residence or acquiring a long-term home, the search begins with the
-            right building.
+            Whether you&apos;re leasing your next residence or acquiring a long-term home, the search begins with
+            understanding where and how you want to live.
           </p>
           <Link href="/profile">
             <Button variant="brand" className="mt-7 normal-case tracking-[0.06em]">

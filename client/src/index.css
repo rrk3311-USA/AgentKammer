@@ -90,10 +90,10 @@
   --chart-4: 28 75% 52%;
   --chart-5: 340 75% 55%;
 
-  --font-sans: Inter, "Neue Haas Grotesk", system-ui, -apple-system, sans-serif;
-  --font-serif: "Noe Display", "Cormorant Garamond", Georgia, serif;
-  --font-script: "Allura", "Pinyon Script", cursive;
-  --font-display: "Cormorant Garamond", serif;
+  --font-sans: Inter, system-ui, -apple-system, sans-serif;
+  --font-serif: Cormorant, Georgia, serif;
+  --font-script: Allura, cursive;
+  --font-display: Cormorant, Georgia, serif;
   --font-mono: Menlo, Monaco, "Courier New", monospace;
   --radius: .5rem;
   --shadow-2xs: 0px 1px 2px 0px hsl(220 13% 11% / 0.02);

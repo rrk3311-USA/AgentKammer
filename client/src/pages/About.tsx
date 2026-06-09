@@ -5,27 +5,27 @@ import { Building2, Compass, Eye } from "lucide-react";
 
 const principles = [
   {
-    title: "Building-First Thinking",
-    text: "The building sets the commute, amenities, resident profile, and long-term context. That is where serious Manhattan decisions begin.",
-    icon: Building2,
-  },
-  {
-    title: "Advisor, Not Promoter",
-    text: "Agent Kammer interprets buildings, neighborhoods, and timing — rather than pushing inventory or amplifying hype.",
+    title: "Observer",
+    text: "Manhattan changes block by block. We pay attention to what most searches skip — resident profile, service quality, timing, and the details that shape daily life.",
     icon: Eye,
   },
   {
-    title: "Modern Manhattan Luxury",
-    text: "A focused view of premier modern residential buildings — not a directory of everything on the market.",
+    title: "Interpreter",
+    text: "Market data becomes useful only when translated into judgment. We turn building research and neighborhood context into clear recommendations.",
     icon: Compass,
+  },
+  {
+    title: "Advisor",
+    text: "Clients deserve interpretation, not inventory. Agent Kammer offers perspective before pressure — lease, acquire, or sell with clarity.",
+    icon: Building2,
   },
 ];
 
 const advisorContrast = [
-  ["Starts with listings", "Starts with the right building"],
-  ["Apartment-first search", "Building-first shortlist"],
-  ["Promotes what is available", "Interprets what is worth studying"],
-  ["Generic market language", "Distinctive, contextual guidance"],
+  ["Begins with listings", "Begins with how you want to live"],
+  ["Apartment search", "Curated watchlist"],
+  ["Shows what is available", "Explains what is worth studying"],
+  ["Market averages", "Contextual judgment"],
 ];
 
 export default function About() {
@@ -47,15 +47,15 @@ export default function About() {
       <section className="border-b border-brand-midnight/10 px-6 py-14 lg:px-10">
         <div className="mx-auto max-w-3xl">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Philosophy</p>
-          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">The Building Matters More</h2>
+          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">Why the Building Comes First</h2>
           <div className="mt-6 space-y-4 text-base leading-7 text-brand-graphite/76">
             <p>
-              Most clients are taught to search residences. Agent Kammer studies buildings first — neighborhood placement,
-              amenities, resident experience, commute, and what makes a tower worth studying at all.
+              Most clients are taught to search residences. Agent Kammer studies Manhattan more carefully — neighborhood
+              placement, amenities, resident experience, commute, and what makes a tower worth studying at all.
             </p>
             <p>
-              From there, the work extends naturally: lease the right building, acquire within it, or sell with context
-              already established.
+              The approach exists because luxury decisions deserve observation and judgment before any recommendation.
+              From there, the work extends naturally: lease, acquire, or sell with context already established.
             </p>
           </div>
         </div>
@@ -80,7 +80,7 @@ export default function About() {
       <section className="bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Positioning</p>
-          <h2 className="font-serif text-4xl font-semibold text-brand-ivory">Advisor vs Agent</h2>
+          <h2 className="font-serif text-4xl font-semibold text-brand-ivory">A Different Lens</h2>
           <div className="mt-8 overflow-hidden border border-brand-ivory/20">
             <div className="grid grid-cols-2 bg-brand-ivory/[0.04]">
               <div className="border-r border-brand-ivory/20 px-5 py-3 text-xs font-bold uppercase tracking-[0.16em] text-brand-champagne">
@@ -108,7 +108,8 @@ export default function About() {
               Choose the right building. Lease it. Acquire it. Sell it.
             </h2>
             <p className="mt-4 text-base leading-7 text-brand-graphite/72">
-              Everything else on this site supports those decisions — not the other way around.
+              Close study of buildings and neighborhoods comes before any recommendation — lease, acquire, or sell with
+              that clarity already in place.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">

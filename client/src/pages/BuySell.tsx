@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { ArrowRight, Building2, Compass, Home, Search, ShieldCheck, TrendingUp } from "lucide-react";
 
-const buyerFlow = ["Objective", "Building Context", "Comparable Analysis", "Offer Strategy"];
+const buyerFlow = ["Objective", "Resident Fit", "Comparable Analysis", "Offer Strategy"];
 
-const acquisitionFlow = ["Objectives", "Building Intelligence", "Strategy", "Execution"];
+const acquisitionFlow = ["Objectives", "Building Analysis", "Strategy", "Execution"];
 
 const comparisonRows = [
-  ["Property search", "Building-first shortlist"],
+  ["Property search", "Curated watchlist"],
   ["Listing-focused", "Objective-focused"],
   ["Offer submission", "Offer architecture"],
   ["Basic comps", "Comparable analysis"],
@@ -19,8 +19,8 @@ const comparisonRows = [
 
 const transactionLenses = [
   {
-    title: "Building Context",
-    text: "Pricing, liquidity, resident profile, amenity value, and building fit before recommendations are made.",
+    title: "Contextual Review",
+    text: "Pricing, liquidity, resident profile, amenity value, and lifestyle fit before recommendations are made.",
     icon: Building2,
   },
   {
@@ -63,11 +63,11 @@ export default function BuySell() {
               Buy / Sell
             </p>
             <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-6xl lg:text-7xl">
-              Acquire or Sell Within the Right Building Context
+              Acquire or Sell With Clear Context
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-brand-ivory/84">
               Transaction work begins after the building question is clear. Buyer origination, seller positioning, and
-              offer strategy live here — not on a separate strategy page.
+              offer strategy follow from observation and judgment — not from urgency.
             </p>
           </div>
           <Card className="rounded-none border border-brand-ivory/14 bg-brand-ivory/[0.04] p-6 text-brand-ivory shadow-none">
@@ -118,7 +118,8 @@ export default function BuySell() {
             Proper preparation prevents poor performance.
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-7 text-brand-graphite/72">
-            Most transactions become difficult long before the offer is written.
+            It is a philosophy we apply to every transaction — because most deals become difficult long before the offer
+            is written.
           </p>
           <div className="mt-10 flex flex-col items-center gap-2 lg:flex-row lg:items-center lg:gap-3">
             {acquisitionFlow.map((step, idx) => (
@@ -158,8 +159,8 @@ export default function BuySell() {
 
       <section className="px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-7xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Methodology</p>
-          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">What Supports the Transaction</h2>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Judgment</p>
+          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">What Informs the Decision</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {transactionLenses.map((lens) => (
               <Card key={lens.title} className="rounded-none border border-brand-champagne/35 bg-white/72 p-6 shadow-none">

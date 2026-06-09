@@ -68,7 +68,7 @@ export function MarketReportDownload({ market, marketName }: MarketReportDownloa
         </h2>
         
         <p className="mx-auto mb-8 max-w-2xl text-base leading-7 text-brand-ivory/72">
-          Receive a concise PDF brief with the market context, building intelligence, and advisory notes from this page.
+          Receive a concise PDF brief with market perspective, building analysis, and advisory notes from this page.
         </p>
 
         {isSuccess ? (
@@ -135,8 +135,8 @@ export function MarketReportDownload({ market, marketName }: MarketReportDownloa
               <CheckCircle className="h-4 w-4 text-brand-champagne" />
             </div>
             <div>
-              <h3 className="font-semibold mb-1">Building Context</h3>
-              <p className="text-sm leading-6 text-brand-ivory/66">Market data translated through the building-first lens.</p>
+              <h3 className="font-semibold mb-1">Contextual Review</h3>
+              <p className="text-sm leading-6 text-brand-ivory/66">Market data translated into clear judgment — not raw numbers.</p>
             </div>
           </div>
           

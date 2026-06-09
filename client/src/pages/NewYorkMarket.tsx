@@ -63,14 +63,14 @@ export default function NewYorkMarket() {
               New York Market Brief
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-brand-ivory/82">
-              A building-first view of Manhattan pricing, liquidity, neighborhood context, and acquisition timing.
+              A market perspective on Manhattan pricing, liquidity, neighborhood context, and acquisition timing.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/profile">
                 <Button variant="brand">Curate Matches</Button>
               </Link>
               <Link href="/buildings">
-                <Button variant="brandGhost">Research Framework</Button>
+                <Button variant="brandGhost">Building Research</Button>
               </Link>
             </div>
           </div>

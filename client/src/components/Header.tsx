@@ -25,10 +25,7 @@ export function Header() {
           <nav className="hidden min-w-0 flex-1 items-center justify-end gap-x-5 lg:flex xl:gap-x-7">
             {navLinks.map((link) => (
               <Link key={link.label} href={link.href} className="group relative shrink-0 px-1 py-2">
-                <span
-                  className="whitespace-nowrap text-[0.74rem] font-semibold uppercase tracking-[0.12em] text-brand-ivory transition group-hover:text-brand-champagne xl:text-[0.78rem]"
-                  style={{ fontFamily: "Neue Haas Grotesk, Inter, system-ui, sans-serif" }}
-                >
+                <span className="whitespace-nowrap font-sans text-[0.74rem] font-semibold uppercase tracking-[0.12em] text-brand-ivory transition group-hover:text-brand-champagne xl:text-[0.78rem]">
                   {link.label}
                 </span>
                 <span className="absolute bottom-0 left-1/2 h-[1.5px] w-0 -translate-x-1/2 bg-brand-champagne transition-all duration-200 group-hover:w-[86%]" />

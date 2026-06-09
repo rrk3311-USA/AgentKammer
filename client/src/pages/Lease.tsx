@@ -11,7 +11,7 @@ const leaseAudiences = [
   "First Manhattan lease decisions",
 ];
 
-const buildingFirstSteps = [
+const leaseApproachSteps = [
   {
     title: "Neighborhood",
     text: "Where the commute, rhythm, and daily life actually work.",
@@ -24,9 +24,17 @@ const buildingFirstSteps = [
   },
   {
     title: "Residence",
-    text: "Floor plan, light, and layout — only after the building is right.",
+    text: "Floor plan, light, and layout — once neighborhood and building research are clear.",
     icon: Users,
   },
+];
+
+const directInquiryComparison = [
+  ["One building", "Multiple buildings"],
+  ["One inventory source", "Curated watchlist"],
+  ["Property perspective", "Client perspective"],
+  ["Unit selection", "Building selection"],
+  ["Building fit", "Lifestyle fit"],
 ];
 
 export default function Lease() {
@@ -36,11 +44,11 @@ export default function Lease() {
         <div className="mx-auto max-w-7xl">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Lease</p>
           <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-6xl lg:text-7xl">
-            Building-First Luxury Leasing
+            Luxury Leasing, Considered Carefully
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-brand-ivory/84">
-            Most searches begin with apartments. Agent Kammer begins with the building — then narrows to residences
-            worth considering inside it.
+            Most searches begin with apartments. We begin with the building — then narrow to residences worth
+            considering inside it.
           </p>
         </div>
       </section>
@@ -51,7 +59,8 @@ export default function Lease() {
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Who This Serves</p>
             <h2 className="font-serif text-4xl font-semibold text-brand-midnight">For Clients Entering Manhattan</h2>
             <p className="mt-5 max-w-md text-base leading-7 text-brand-graphite/72">
-              Leasing is the primary path into the city. The work is designed for clients who want precision, not volume.
+              Leasing is the primary path into the city. People often arrive with a career change, not a property
+              requirement — and want precision, not volume.
             </p>
           </div>
           <ul className="grid gap-3">
@@ -70,12 +79,13 @@ export default function Lease() {
       <section className="bg-[#f7f3ea] px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Approach</p>
-          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">Building Before Residence</h2>
+          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">Neighborhood, Building, Residence</h2>
           <p className="mt-4 max-w-2xl text-base leading-7 text-brand-graphite/72">
-            The building shapes commute, amenities, neighbors, and resale context. We study that first.
+            The building shapes commute, amenities, neighbors, and resale context. We study that before any floor plan
+            enters the conversation.
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {buildingFirstSteps.map((step) => (
+            {leaseApproachSteps.map((step) => (
               <Card key={step.title} className="rounded-none border border-brand-champagne/35 bg-white/78 p-6 shadow-none">
                 <step.icon className="h-5 w-5 text-brand-champagne" strokeWidth={1.5} />
                 <h3 className="mt-4 font-serif text-2xl font-semibold text-brand-midnight">{step.title}</h3>
@@ -83,6 +93,35 @@ export default function Lease() {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10 lg:py-16">
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Comparison</p>
+          <h2 className="font-serif text-4xl font-semibold text-brand-ivory">
+            Why Not Simply Contact The Building Directly?
+          </h2>
+          <div className="mt-8 overflow-hidden border border-brand-ivory/20">
+            <div className="grid grid-cols-2 bg-brand-ivory/[0.04]">
+              <div className="border-r border-brand-ivory/20 px-5 py-3 text-xs font-bold uppercase tracking-[0.16em] text-brand-champagne">
+                Direct Building Inquiry
+              </div>
+              <div className="px-5 py-3 text-xs font-bold uppercase tracking-[0.16em] text-brand-champagne">
+                Agent Kammer
+              </div>
+            </div>
+            {directInquiryComparison.map(([left, right]) => (
+              <div key={left} className="grid grid-cols-2 border-t border-brand-ivory/20">
+                <div className="border-r border-brand-ivory/20 px-5 py-3 text-sm text-brand-ivory/78">{left}</div>
+                <div className="px-5 py-3 text-sm text-brand-ivory/92">{right}</div>
+              </div>
+            ))}
+          </div>
+          <p className="mt-8 max-w-2xl text-base leading-7 text-brand-ivory/84">
+            A building representative helps you understand their building. Agent Kammer helps you understand your
+            options.
+          </p>
         </div>
       </section>
 

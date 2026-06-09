@@ -12,7 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 const profileIncludes = [
   "Buyer Strategy Review",
   "Seller Positioning Review",
-  "Building Intelligence Review",
+  "Building Analysis Review",
   "Comparable and Neighborhood Context",
 ];
 
