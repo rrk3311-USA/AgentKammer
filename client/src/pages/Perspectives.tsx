@@ -5,13 +5,13 @@ import { ManhattanBriefSubscribe } from "@/components/ManhattanBriefSubscribe";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import {
   featuredPerspective,
-  perspectiveCategories,
+  perspectiveContentTypes,
   perspectives,
-  type PerspectiveCategory,
+  type PerspectiveContentType,
 } from "@/data/perspectives";
 
 export default function Perspectives() {
-  const [activeCategory, setActiveCategory] = useState<PerspectiveCategory | "All">("All");
+  const [activeType, setActiveType] = useState<PerspectiveContentType | "All">("All");
 
   usePageMetadata({
     title: "Perspectives — Observations From Manhattan",
@@ -21,9 +21,9 @@ export default function Perspectives() {
   });
 
   const filtered =
-    activeCategory === "All"
+    activeType === "All"
       ? perspectives.filter((p) => !p.featured)
-      : perspectives.filter((p) => !p.featured && p.category === activeCategory);
+      : perspectives.filter((p) => !p.featured && p.contentType === activeType);
 
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
@@ -54,31 +54,35 @@ export default function Perspectives() {
 
       <section className="bg-[#f7f3ea] px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-7xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Categories</p>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Content Types</p>
+          <p className="mb-6 max-w-2xl text-sm leading-6 text-brand-graphite/68">
+            Perspectives are observations — not listicles. Each note is tagged by the kind of judgment it offers.
+          </p>
           <div className="flex flex-wrap gap-2">
             <button
               type="button"
-              onClick={() => setActiveCategory("All")}
+              onClick={() => setActiveType("All")}
               className={`border px-3 py-2 text-[0.62rem] font-semibold uppercase tracking-[0.14em] transition ${
-                activeCategory === "All"
+                activeType === "All"
                   ? "border-brand-champagne bg-brand-midnight text-brand-ivory"
                   : "border-brand-champagne/35 bg-white/70 text-brand-graphite/72 hover:border-brand-champagne"
               }`}
             >
               All
             </button>
-            {perspectiveCategories.map((category) => (
+            {perspectiveContentTypes.map((type) => (
               <button
-                key={category}
+                key={type.id}
                 type="button"
-                onClick={() => setActiveCategory(category)}
+                onClick={() => setActiveType(type.id)}
                 className={`border px-3 py-2 text-[0.62rem] font-semibold uppercase tracking-[0.14em] transition ${
-                  activeCategory === category
+                  activeType === type.id
                     ? "border-brand-champagne bg-brand-midnight text-brand-ivory"
                     : "border-brand-champagne/35 bg-white/70 text-brand-graphite/72 hover:border-brand-champagne"
                 }`}
               >
-                {category}
+                <span aria-hidden="true">{type.emoji} </span>
+                {type.label}
               </button>
             ))}
           </div>

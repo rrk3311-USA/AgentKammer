@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Heart, Bed, Bath, Maximize, MapPin, ArrowRight, Clock, Lightbulb } from "lucide-react";
+import { Heart, Bed, Bath, Maximize, MapPin, ArrowRight, Clock, Compass } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { HappyDocIcon } from "./HappyDocIcon";
@@ -112,7 +112,7 @@ export function PropertyCard({
             <div className="flex items-center gap-1 flex-wrap">
               {dealScore && (
                 <Badge variant="default" className="text-xs px-1.5 py-0 h-auto flex items-center gap-0.5 bg-black text-white border border-[#D4AF37]">
-                  <Lightbulb className="h-2.5 w-2.5 fill-[#D4AF37] text-[#D4AF37]" />
+                  <Compass className="h-2.5 w-2.5 text-[#D4AF37]" strokeWidth={1.5} />
                   {dealScore} IQ
                 </Badge>
               )}

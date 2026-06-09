@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
-import { CheckCircle, DollarSign, Lock, TrendingUp, Zap } from "lucide-react";
+import { CheckCircle, Clock3, DollarSign, Lock, TrendingUp } from "lucide-react";
 
 export default function ReverseSellerOrigination() {
   const [phone, setPhone] = useState("");
@@ -59,7 +59,7 @@ export default function ReverseSellerOrigination() {
 
   const benefits = [
     { icon: DollarSign, title: "Maximize Net", description: "Scored by net outcome, not pitch quality." },
-    { icon: Zap, title: "Control Timeline", description: "Fast, balanced, and max-net paths mapped up front." },
+    { icon: Clock3, title: "Control Timeline", description: "Fast, balanced, and max-net paths mapped up front." },
     { icon: Lock, title: "Protect Privacy", description: "Test demand without full public exposure." },
     { icon: TrendingUp, title: "Market Signals", description: "Pricing tied to demand velocity and comps." },
   ];

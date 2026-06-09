@@ -242,7 +242,7 @@ export default function Contact() {
                   <option value="buy-sell">Buy / Sell</option>
                   <option value="selling">Selling / Free Value Assessment</option>
                   <option value="buying">Buying</option>
-                  <option value="intelligence">Intelligence / Research</option>
+                  <option value="building-research">Building Research</option>
                   <option value="investment">Investment</option>
                   <option value="general">General</option>
                 </select>

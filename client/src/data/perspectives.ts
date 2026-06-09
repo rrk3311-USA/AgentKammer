@@ -1,17 +1,13 @@
-export const perspectiveCategories = [
-  "Buildings",
-  "Neighborhoods",
-  "Market Notes",
-  "Relocation",
-  "Luxury Living",
-  "Architecture",
-  "Resident Experience",
-  "Buyer Psychology",
-  "Decision Quality",
-  "Urban Development",
+export const perspectiveContentTypes = [
+  { id: "building", label: "Building", emoji: "🏢" },
+  { id: "neighborhood", label: "Neighborhood", emoji: "📍" },
+  { id: "market-note", label: "Market Note", emoji: "📊" },
+  { id: "relocation", label: "Relocation", emoji: "🚕" },
+  { id: "development", label: "Development", emoji: "🏙" },
+  { id: "lifestyle", label: "Lifestyle", emoji: "🥂" },
 ] as const;
 
-export type PerspectiveCategory = (typeof perspectiveCategories)[number];
+export type PerspectiveContentType = (typeof perspectiveContentTypes)[number]["id"];
 
 export type PerspectiveSections = {
   observation: string;
@@ -25,7 +21,7 @@ export type Perspective = {
   slug: string;
   title: string;
   excerpt: string;
-  category: PerspectiveCategory;
+  contentType: PerspectiveContentType;
   publishedAt: string;
   readMinutes: number;
   featured?: boolean;
@@ -38,7 +34,7 @@ export const perspectives: Perspective[] = [
     title: "Why The Building Matters More Than The Residence",
     excerpt:
       "Floor plans change. Views shift. But the building sets commute, neighbors, service, and resale context for years.",
-    category: "Buildings",
+    contentType: "building",
     publishedAt: "2026-05-15",
     readMinutes: 6,
     featured: true,
@@ -60,7 +56,7 @@ export const perspectives: Perspective[] = [
     title: "The Hidden Cost Of A Bad Commute",
     excerpt:
       "A beautiful apartment with a draining daily route quietly taxes energy, judgment, and willingness to stay in the city.",
-    category: "Relocation",
+    contentType: "relocation",
     publishedAt: "2026-05-08",
     readMinutes: 5,
     sections: {
@@ -80,8 +76,8 @@ export const perspectives: Perspective[] = [
     slug: "why-manhattan-keeps-building-offices",
     title: "Why Manhattan Keeps Building Offices",
     excerpt:
-        "Residential demand and office construction move on different clocks. Understanding both clarifies where neighborhoods are heading.",
-    category: "Urban Development",
+      "Residential demand and office construction move on different clocks. Understanding both clarifies where neighborhoods are heading.",
+    contentType: "development",
     publishedAt: "2026-04-28",
     readMinutes: 7,
     sections: {
@@ -102,7 +98,7 @@ export const perspectives: Perspective[] = [
     title: "Luxury Is Often Proximity",
     excerpt:
       "The most desirable Manhattan addresses are less about ornament than about being exactly where a client needs to be.",
-    category: "Luxury Living",
+    contentType: "lifestyle",
     publishedAt: "2026-04-18",
     readMinutes: 5,
     sections: {
@@ -123,7 +119,7 @@ export const perspectives: Perspective[] = [
     title: "Why Some Luxury Buildings Feel Empty",
     excerpt:
       "High price and low presence are not contradictory in Manhattan. Resident profile and usage patterns explain the difference.",
-    category: "Resident Experience",
+    contentType: "building",
     publishedAt: "2026-04-02",
     readMinutes: 6,
     sections: {
@@ -144,7 +140,7 @@ export const perspectives: Perspective[] = [
     title: "Leasing Today, Buying Tomorrow",
     excerpt:
       "Many Manhattan clients enter through a lease and later acquire. The two decisions are best understood as one arc.",
-    category: "Buyer Psychology",
+    contentType: "lifestyle",
     publishedAt: "2026-03-22",
     readMinutes: 5,
     sections: {
@@ -165,7 +161,7 @@ export const perspectives: Perspective[] = [
     title: "The Building Before The Apartment",
     excerpt:
       "Inventory-first searches feel efficient. Building-first searches produce fewer mistakes.",
-    category: "Decision Quality",
+    contentType: "building",
     publishedAt: "2026-03-10",
     readMinutes: 5,
     sections: {
@@ -182,6 +178,10 @@ export const perspectives: Perspective[] = [
     },
   },
 ];
+
+export function getPerspectiveContentTypeMeta(contentType: PerspectiveContentType) {
+  return perspectiveContentTypes.find((type) => type.id === contentType)!;
+}
 
 export const featuredPerspective = perspectives.find((p) => p.featured) ?? perspectives[0];
 

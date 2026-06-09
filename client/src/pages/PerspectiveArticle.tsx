@@ -2,6 +2,7 @@ import { Link, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ManhattanBriefSubscribe } from "@/components/ManhattanBriefSubscribe";
 import { PerspectiveCard } from "@/components/PerspectiveCard";
+import { PerspectiveContentTag } from "@/components/PerspectiveContentTag";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import {
   formatPerspectiveDate,
@@ -44,9 +45,12 @@ export default function PerspectiveArticle() {
               ← Perspectives
             </span>
           </Link>
-          <p className="mt-6 text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">
-            {article.category} · {formatPerspectiveDate(article.publishedAt)} · {article.readMinutes} min read
-          </p>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <PerspectiveContentTag contentType={article.contentType} variant="dark" />
+            <p className="text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-brand-ivory/62">
+              {formatPerspectiveDate(article.publishedAt)} · {article.readMinutes} min read
+            </p>
+          </div>
           <h1 className="mt-4 font-serif text-4xl font-semibold leading-[1.02] md:text-5xl lg:text-6xl">
             {article.title}
           </h1>

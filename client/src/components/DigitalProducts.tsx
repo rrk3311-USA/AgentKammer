@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Download, Sparkles } from "lucide-react";
+import { Compass, Download } from "lucide-react";
 
 import skiCabinImage from "@assets/generated_images/ski_cabin_investment_report_cover.png";
 import creditScoreImage from "@assets/generated_images/Luxury_marble_desk_Manhattan_view_647cbb4e.png";
@@ -46,7 +46,7 @@ export function DigitalProducts() {
               padding: '0.5rem 1rem'
             }}
           >
-            <Sparkles className="h-4 w-4 mr-2" />
+            <Compass className="h-4 w-4 mr-2" />
             Premium Digital Resources
           </Badge>
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-3">

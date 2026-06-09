@@ -13,7 +13,6 @@ import {
   ShieldCheck,
   ShoppingBag,
   Sofa,
-  Sparkles,
   Sun,
   TrainFront,
   Trees,
@@ -30,7 +29,11 @@ import {
   trackedBuildings,
 } from "@/data/buildings";
 
-const comparisonPoints = ["Amenities", "Resident Experience", "Neighborhood Placement"];
+const comparisonPoints = [
+  { title: "Amenities", icon: Building2 },
+  { title: "Resident Experience", icon: UserRound },
+  { title: "Neighborhood Placement", icon: MapPin },
+];
 
 const reports = [
   { title: "Building Report", text: "Pricing, liquidity, risk, resident fit, and what makes one building worth studying." },
@@ -138,9 +141,9 @@ export default function Buildings() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-4 md:grid-cols-3">
             {comparisonPoints.map((point) => (
-              <Card key={point} className="rounded-none border border-brand-champagne/35 bg-white/72 p-5 shadow-none">
-                <Sparkles className="h-5 w-5 text-brand-champagne" strokeWidth={1.5} />
-                <p className="mt-4 font-serif text-2xl font-semibold text-brand-midnight">{point}</p>
+              <Card key={point.title} className="rounded-none border border-brand-champagne/35 bg-white/72 p-5 shadow-none">
+                <point.icon className="h-5 w-5 text-brand-champagne" strokeWidth={1.5} />
+                <p className="mt-4 font-serif text-2xl font-semibold text-brand-midnight">{point.title}</p>
               </Card>
             ))}
           </div>

@@ -53,7 +53,7 @@ export default function Profile() {
             <CheckCircle2 className="mx-auto mb-4 h-10 w-10 text-brand-champagne" />
             <h1 className="font-serif text-4xl font-semibold text-brand-midnight">Private Profile Created</h1>
             <p className="mt-3 text-brand-graphite/78">
-              We'll shape strategy, positioning, and intelligence around your inputs.
+              We&apos;ll shape strategy, positioning, and building context around your inputs.
             </p>
           </div>
 

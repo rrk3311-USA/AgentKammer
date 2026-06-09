@@ -1,12 +1,12 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Sparkles, TrendingUp, Gift, Zap } from "lucide-react";
+import { Compass, TrendingUp, Gift, Clock3 } from "lucide-react";
 
 const perks = [
   { icon: Gift, text: "Travel Rewards", color: "#d4af37" },
   { icon: TrendingUp, text: "Cashback", color: "#d4af37" },
-  { icon: Zap, text: "0% APR", color: "#d4af37" },
-  { icon: Sparkles, text: "Sign-up Bonus", color: "#d4af37" },
+  { icon: Clock3, text: "0% APR", color: "#d4af37" },
+  { icon: Compass, text: "Sign-up Bonus", color: "#d4af37" },
 ];
 
 const cards = [
@@ -42,7 +42,7 @@ export function StrategicCardMatching() {
               padding: '0.5rem 1rem'
             }}
           >
-            <Sparkles className="h-4 w-4 mr-2" />
+            <Compass className="h-4 w-4 mr-2" />
             Strategic Card Matching
           </Badge>
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-3">

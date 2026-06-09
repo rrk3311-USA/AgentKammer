@@ -29,7 +29,7 @@ const manhattanHubs = [
   },
 ];
 
-const intelligenceRows = [
+const marketMeasureRows = [
   ["Building Fit", "Resident profile, amenity value, sponsor quality, and long-term livability."],
   ["Comparable Analysis", "Active, pending, and closed trades filtered by true building relevance."],
   ["Neighborhood Context", "Supply, demand, commute, retail, schools, parks, and development pipeline."],
@@ -57,7 +57,7 @@ export default function NewYorkMarket() {
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-end">
           <div>
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">
-              Manhattan Market Intelligence
+              Manhattan Market Brief
             </p>
             <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-6xl lg:text-7xl">
               New York Market Brief
@@ -108,7 +108,7 @@ export default function NewYorkMarket() {
           <div className="grid gap-8 border-b border-brand-midnight/10 pb-8 lg:grid-cols-[0.8fr_1fr] lg:items-end">
             <div>
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Submarkets</p>
-              <h2 className="font-serif text-4xl font-semibold text-brand-midnight">Manhattan Intelligence Hubs</h2>
+              <h2 className="font-serif text-4xl font-semibold text-brand-midnight">Key Manhattan Submarkets</h2>
             </div>
             <p className="max-w-xl text-base leading-7 text-brand-graphite/72 lg:justify-self-end">
               Uptown, Midtown, and Downtown are reviewed by building quality first, then neighborhood momentum,
@@ -141,11 +141,11 @@ export default function NewYorkMarket() {
             </p>
           </div>
           <div className="border border-brand-champagne/35 bg-brand-ivory/70">
-            {intelligenceRows.map(([label, text], index) => (
+            {marketMeasureRows.map(([label, text], index) => (
               <div
                 key={label}
                 className={`grid gap-3 px-5 py-4 sm:grid-cols-[180px_1fr] ${
-                  index === intelligenceRows.length - 1 ? "" : "border-b border-brand-midnight/10"
+                  index === marketMeasureRows.length - 1 ? "" : "border-b border-brand-midnight/10"
                 }`}
               >
                 <p className="font-serif text-xl text-brand-midnight">{label}</p>
