@@ -6,7 +6,7 @@ import { ArrowRight, Building2, Compass, Home, Search, ShieldCheck, TrendingUp }
 
 const buyerFlow = ["Objective", "Building Context", "Comparable Analysis", "Offer Strategy"];
 
-const acquisitionFlow = ["Objectives", "Building Context", "Positioning", "Execution"];
+const acquisitionFlow = ["Objectives", "Building Intelligence", "Strategy", "Execution"];
 
 const comparisonRows = [
   ["Property search", "Building-first shortlist"],
@@ -113,8 +113,13 @@ export default function BuySell() {
 
       <section className="border-b border-brand-graphite/12 px-6 py-14 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Buyer Process</p>
-          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">Four Steps. One Discipline.</h2>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Preparation</p>
+          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">
+            Proper preparation prevents poor performance.
+          </h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-brand-graphite/72">
+            Most transactions become difficult long before the offer is written.
+          </p>
           <div className="mt-10 flex flex-col items-center gap-2 lg:flex-row lg:items-center lg:gap-3">
             {acquisitionFlow.map((step, idx) => (
               <Fragment key={step}>
