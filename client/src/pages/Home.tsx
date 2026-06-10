@@ -27,7 +27,7 @@ import { PerspectiveCard } from "@/components/PerspectiveCard";
 
 const sectionHeadline = "font-serif text-3xl font-semibold md:text-4xl lg:text-[2.65rem]";
 const eyebrowOnLight = "mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne-dark";
-const eyebrowOnDark = "mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne";
+const eyebrowOnDark = "mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-hero-champagne";
 
 const featuredBuildings = trackedBuildings.slice(0, 6);
 const recentPerspectives = getRecentPerspectives(3);

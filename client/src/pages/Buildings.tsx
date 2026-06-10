@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import { hasBuildingReport } from "@/data/building-reports";
 import { type TrackedBuilding, trackedBuildings } from "@/data/buildings";
+import { cardAreaLabel, cardAccentLabel, cardReportLink } from "@/lib/brand-typography";
 
 const comparisonPoints = [
   { title: "Amenities", icon: Building2 },
@@ -42,15 +43,13 @@ function BuildingWatchlistCard({ building }: { building: TrackedBuilding }) {
   const reportAvailable = hasBuildingReport(building.slug);
 
   return (
-    <article className="flex aspect-video w-full flex-col overflow-hidden border border-brand-champagne/25 bg-brand-midnight">
+    <article className="building-watchlist-card flex aspect-video w-full flex-col overflow-hidden border border-brand-champagne/25 bg-brand-midnight">
       <div className="grid min-h-0 flex-1 grid-cols-[0.44fr_0.56fr]">
         <div className="flex flex-col justify-center bg-brand-midnight px-5 py-5 text-brand-ivory sm:px-6 sm:py-6">
           <h2 className="font-serif text-[1.35rem] font-semibold leading-[1.08] tracking-[0.01em] sm:text-2xl md:text-[1.65rem]">
             {building.name}
           </h2>
-          <p className="mt-4 text-[0.68rem] font-medium tracking-[0.14em] text-brand-champagne sm:mt-5 sm:text-xs">
-            {building.area}
-          </p>
+          <p className={`mt-4 sm:mt-5 ${cardAreaLabel}`}>{building.area}</p>
           <div className="mt-5 border-t border-brand-ivory/10 pt-4 sm:mt-6">
             <p className="text-[0.58rem] font-medium uppercase tracking-[0.18em] text-brand-ivory/48">
               {building.price.label}
@@ -72,7 +71,7 @@ function BuildingWatchlistCard({ building }: { building: TrackedBuilding }) {
         </div>
       </div>
       <div className="shrink-0 border-t border-brand-ivory/12 bg-brand-midnight px-5 py-3 sm:px-6">
-        <p className="text-[0.56rem] font-semibold uppercase tracking-[0.2em] text-brand-champagne/75">Known For</p>
+        <p className={cardAccentLabel}>Known For</p>
         <p className="mt-2 text-[0.62rem] leading-relaxed tracking-[0.04em] text-brand-ivory/72">
           {building.knownFor.join(" · ")}
         </p>
@@ -80,9 +79,7 @@ function BuildingWatchlistCard({ building }: { building: TrackedBuilding }) {
       {reportAvailable ? (
         <div className="border-t border-brand-ivory/12 bg-brand-midnight px-5 py-3 sm:px-6">
           <Link href={`/buildings/${building.slug}/report`}>
-            <span className="text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-brand-champagne transition hover:text-brand-ivory">
-              Read Building Report →
-            </span>
+            <span className={cardReportLink}>Read Building Report →</span>
           </Link>
         </div>
       ) : null}

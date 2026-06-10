@@ -758,7 +758,7 @@
 
   /*
    * Champagne (#D6B45F) fails contrast on ivory/white. On light editorial surfaces,
-   * shift accent text to champagne-dark; navy sections keep bright champagne.
+   * shift accent text to champagne-dark. Navy cards/sections use hero-champagne (immune below).
    */
   :is(
       section.bg-white,
@@ -767,13 +767,13 @@
       section.bg-\[\#f7f3ea\],
       section.brand-surface-intelligence,
       main.bg-brand-ivory > section:not(.bg-brand-midnight),
-      main.bg-brand-ivory > article,
+      main.bg-brand-ivory > article:not(.building-watchlist-card):not(.bg-brand-midnight),
       .bg-white\/72,
       .bg-white\/76,
       .bg-white\/78,
       .bg-white\/80
     )
-    :where([class*="text-brand-champagne"]) {
+    :where([class*="text-brand-champagne"]:not([class*="hero-champagne"]):not([class*="champagne-dark"])) {
     --tw-text-opacity: 1;
     color: rgb(122 99 40 / var(--tw-text-opacity));
   }
@@ -785,25 +785,43 @@
       section.bg-\[\#f7f3ea\],
       section.brand-surface-intelligence,
       main.bg-brand-ivory > section:not(.bg-brand-midnight),
-      main.bg-brand-ivory > article,
+      main.bg-brand-ivory > article:not(.building-watchlist-card):not(.bg-brand-midnight),
       .bg-white\/72,
       .bg-white\/76,
       .bg-white\/78,
       .bg-white\/80
     )
-    :where([class*="hover:text-brand-champagne"]:hover) {
+    :where([class*="hover:text-brand-champagne"]:hover):not([class*="hero-champagne"]) {
     --tw-text-opacity: 1;
     color: rgb(122 99 40 / var(--tw-text-opacity));
   }
 
-  :is(section.bg-brand-midnight, .bg-brand-midnight) :where([class*="text-brand-champagne"]) {
-    --tw-text-opacity: 1;
-    color: rgb(214 180 95 / var(--tw-text-opacity));
+  /* Hero champagne on navy — must beat light-section ancestor rules */
+  :is(
+      section.bg-brand-midnight,
+      article.bg-brand-midnight,
+      article.building-watchlist-card,
+      .building-watchlist-card,
+      .bg-brand-midnight
+    )
+    :where([class*="hero-champagne"]) {
+    color: rgb(214 180 95 / var(--tw-text-opacity, 1));
   }
 
   :is(section.bg-brand-midnight, .bg-brand-midnight)
-    :where([class*="hover:text-brand-champagne"]:hover) {
-    --tw-text-opacity: 1;
-    color: rgb(214 180 95 / var(--tw-text-opacity));
+    :where([class*="text-brand-champagne"]:not([class*="champagne-dark"])) {
+    color: rgb(214 180 95 / var(--tw-text-opacity, 1));
+  }
+
+  :is(
+      section.bg-white,
+      section.bg-brand-ivory,
+      section.bg-\[\#f3f2ee\],
+      section.bg-\[\#f7f3ea\],
+      section.brand-surface-intelligence
+    )
+    :is(article.bg-brand-midnight, .building-watchlist-card, .bg-brand-midnight)
+    :where([class*="text-brand-champagne"]:not([class*="champagne-dark"])) {
+    color: rgb(214 180 95 / var(--tw-text-opacity, 1));
   }
 }
