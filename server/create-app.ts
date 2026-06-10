@@ -1,15 +1,10 @@
-import { createServer } from "http";
+import express, { type Express, type NextFunction, type Request, type Response } from "express";
+import { createServer, type Server } from "http";
 import { registerRoutes } from "./routes";
-import { setupVite, log } from "./vite";
-import express from "express";
+import { setupVite, serveStatic, log } from "./vite";
 
-declare module "http" {
-  interface IncomingMessage {
-    rawBody: unknown;
-  }
-}
-
-(async () => {
+export async function createApp(options: { static?: boolean } = {}): Promise<Express> {
+  const { static: serveClient = true } = options;
   const app = express();
 
   app.use(
@@ -52,11 +47,25 @@ declare module "http" {
   });
 
   await registerRoutes(app);
-  const server = createServer(app);
-  await setupVite(app, server);
 
-  const port = parseInt(process.env.PORT || "5000", 10);
-  server.listen(port, "0.0.0.0", () => {
-    log(`serving on port ${port}`);
+  app.use((err: { status?: number; statusCode?: number; message?: string }, _req: Request, res: Response, _next: NextFunction) => {
+    const status = err.status || err.statusCode || 500;
+    const message = err.message || "Internal Server Error";
+    res.status(status).json({ message });
+    throw err;
   });
-})();
+
+  if (serveClient) {
+    if (app.get("env") === "development") {
+      throw new Error("createApp({ static: true }) should not be used in development — use server/index.ts with setupVite");
+    }
+    serveStatic(app);
+  }
+
+  return app;
+}
+
+export async function createServerApp(): Promise<Server> {
+  const app = await createApp({ static: true });
+  return createServer(app);
+}

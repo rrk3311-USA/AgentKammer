@@ -1,5 +1,4 @@
 import type { Express } from "express";
-import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { 
   insertLeadSchema, 
@@ -625,7 +624,7 @@ function calculateLeadScore(leadData: LeadData): number {
   return score;
 }
 
-export async function registerRoutes(app: Express): Promise<Server> {
+export async function registerRoutes(app: Express): Promise<void> {
   const sessionLeads = new Map<string, { leadId?: string; data: LeadData; notified?: boolean }>();
 
   app.post("/api/chat", async (req, res) => {
@@ -1558,7 +1557,4 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  const httpServer = createServer(app);
-
-  return httpServer;
 }
