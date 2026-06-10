@@ -40,7 +40,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     name: "35 Hudson Yards",
     area: "Hudson Yards",
     slug: "35-hudson-yards",
-    price: { label: "From", value: "$42K/mo" },
+    price: { label: "Typical Lease", value: "$42K/mo" },
     knownFor: ["Location", "Service", "Scale", "Hudson Yards"],
     amenities: [
       { key: "gym", label: "Fitness Center" },
@@ -53,7 +53,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     name: "15 Hudson Yards",
     area: "Hudson Yards",
     slug: "15-hudson-yards",
-    price: { label: "From", value: "$35K/mo" },
+    price: { label: "Typical Lease", value: "$35K/mo" },
     knownFor: ["Wellness", "Retail", "Security", "Yards Living"],
     amenities: [
       { key: "pool", label: "Pool" },
@@ -66,8 +66,8 @@ export const trackedBuildings: TrackedBuilding[] = [
     name: "One High Line",
     area: "West Chelsea",
     slug: "one-high-line",
-    price: { label: "From", value: "$28K/mo" },
-    knownFor: ["Amenities", "High Line", "Waterfront", "Resort Feel"],
+    price: { label: "Typical Lease", value: "$28K/mo" },
+    knownFor: ["High Line", "Waterfront", "Resort Feel", "Scale"],
     amenities: [
       { key: "pool", label: "Pool" },
       { key: "gym", label: "Gym" },
@@ -79,7 +79,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     name: "Lantern House",
     area: "West Chelsea",
     slug: "lantern-house",
-    price: { label: "Starting Residence", value: "$32K+" },
+    price: { label: "Typical Residence", value: "$32K+" },
     knownFor: ["Design", "Character", "High Line", "Architecture"],
     amenities: [
       { key: "doorman", label: "Doorman" },
@@ -92,7 +92,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     name: "565 Broome",
     area: "SoHo",
     slug: "565-broome",
-    price: { label: "From", value: "$26K/mo" },
+    price: { label: "Typical Lease", value: "$26K/mo" },
     knownFor: ["Privacy", "SoHo", "Minimalism", "Views"],
     amenities: [
       { key: "concierge", label: "Concierge" },
@@ -105,7 +105,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     name: "Manhattan West",
     area: "Penn District",
     slug: "manhattan-west",
-    price: { label: "From", value: "$30K/mo" },
+    price: { label: "Typical Lease", value: "$30K/mo" },
     knownFor: ["Transit", "Convenience", "West Side", "Service"],
     amenities: [
       { key: "transit", label: "Transit Close" },
@@ -118,7 +118,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     name: "The Cortland",
     area: "West Side",
     slug: "the-cortland",
-    price: { label: "From", value: "$24K/mo" },
+    price: { label: "Typical Lease", value: "$24K/mo" },
     knownFor: ["Waterfront", "Family", "Park Access", "West Side"],
     amenities: [
       { key: "river-view", label: "River View" },
@@ -131,7 +131,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     name: "Waterline Square",
     area: "Upper West Side",
     slug: "waterline-square",
-    price: { label: "From", value: "$22K/mo" },
+    price: { label: "Typical Lease", value: "$22K/mo" },
     knownFor: ["Wellness", "Park", "Family", "Upper West"],
     amenities: [
       { key: "pool", label: "Pool" },
@@ -144,7 +144,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     name: "The Avery",
     area: "Hell's Kitchen",
     slug: "the-avery",
-    price: { label: "Lease Range", value: "$32K–$45K" },
+    price: { label: "Observed Range", value: "$32K–$45K" },
     knownFor: ["Views", "Service", "Midtown West", "Convenience"],
     amenities: [
       { key: "skyline", label: "Skyline Views" },
@@ -157,8 +157,8 @@ export const trackedBuildings: TrackedBuilding[] = [
     name: "One Manhattan Square",
     area: "Two Bridges",
     slug: "one-manhattan-square",
-    price: { label: "From", value: "$18K/mo" },
-    knownFor: ["Amenities", "Waterfront", "Value", "Downtown"],
+    price: { label: "Typical Lease", value: "$18K/mo" },
+    knownFor: ["Waterfront", "Value", "Downtown", "Scale"],
     amenities: [
       { key: "pool", label: "Pool" },
       { key: "lounge", label: "Residents Lounge" },
@@ -183,7 +183,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     name: "One Madison",
     area: "Flatiron",
     slug: "one-madison",
-    price: { label: "Lease Range", value: "$38K–$55K" },
+    price: { label: "Observed Range", value: "$38K–$55K" },
     knownFor: ["Park Views", "Flatiron", "Service", "Prestige"],
     amenities: [
       { key: "park", label: "Central Park Views" },
@@ -235,7 +235,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     name: "Brookfield Place",
     area: "Battery Park City",
     slug: "brookfield-place",
-    price: { label: "From", value: "$29K/mo" },
+    price: { label: "Typical Lease", value: "$29K/mo" },
     knownFor: ["Waterfront", "Retail", "FiDi", "Convenience"],
     amenities: [
       { key: "river-view", label: "River View" },
@@ -248,7 +248,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     name: "Hudson Yards Residences",
     area: "Hudson Yards",
     slug: "hudson-yards-residences",
-    price: { label: "From", value: "$33K/mo" },
+    price: { label: "Typical Lease", value: "$33K/mo" },
     knownFor: ["Yards Access", "Service", "Retail", "Transit"],
     amenities: [
       { key: "gym", label: "Fitness Center" },
@@ -261,7 +261,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     name: "The Symoné",
     area: "West Chelsea",
     slug: "the-symone",
-    price: { label: "From", value: "$27K/mo" },
+    price: { label: "Typical Lease", value: "$27K/mo" },
     knownFor: ["Chelsea", "Work-Life", "Service", "Modern"],
     amenities: [
       { key: "concierge", label: "Concierge" },

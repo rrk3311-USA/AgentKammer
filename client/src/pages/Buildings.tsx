@@ -4,12 +4,15 @@ import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import { hasBuildingReport } from "@/data/building-reports";
 import { type TrackedBuilding, trackedBuildings } from "@/data/buildings";
-import { buildingAmenityIconMap, buildingAmenityIconProps } from "@/lib/building-amenity-icons";
 import {
-  cardAccentLabel,
-  cardAmenityLabel,
-  cardAreaLabel,
-  cardReportLink,
+  cardBuildingName,
+  cardEditorialIndex,
+  cardKnownForLabel,
+  cardKnownForText,
+  cardNeighborhood,
+  cardPriceLabel,
+  cardPriceValue,
+  cardReportCta,
 } from "@/lib/brand-typography";
 
 const comparisonPoints = [
@@ -45,62 +48,45 @@ const reports = [
   },
 ];
 
-function BuildingWatchlistCard({ building }: { building: TrackedBuilding }) {
+const watchlistImageClass =
+  "absolute inset-0 h-full w-full object-cover object-center saturate-[0.9] contrast-[1.03]";
+
+function BuildingWatchlistCard({ building, index }: { building: TrackedBuilding; index: number }) {
   const reportAvailable = hasBuildingReport(building.slug);
 
   return (
-    <article className="building-watchlist-card flex min-h-[480px] w-full flex-col overflow-hidden border border-brand-champagne/25 bg-brand-midnight">
-      <div className="grid min-h-0 flex-1 grid-cols-1 sm:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
-        <div className="flex flex-col justify-between bg-brand-midnight px-7 py-8 text-brand-ivory lg:px-8">
-          <div>
-            <h2 className="font-serif text-[1.35rem] font-semibold leading-[1.08] tracking-[0.01em] sm:text-2xl md:text-[1.65rem]">
-              {building.name}
-            </h2>
-            <p className={`mt-5 ${cardAreaLabel}`}>{building.area}</p>
-            <div className="mt-6 border-t border-brand-ivory/10 pt-5">
-              <p className="text-[0.58rem] font-medium uppercase tracking-[0.18em] text-brand-ivory/48">
-                {building.price.label}
-              </p>
-              <p className="mt-1.5 font-serif text-base font-medium leading-snug text-brand-ivory/88 sm:text-lg md:text-xl">
-                {building.price.value}
-              </p>
-            </div>
-            <ul className="mt-6 grid grid-cols-4 gap-x-2 gap-y-5">
-              {building.amenities.map((amenity) => {
-                const Icon = buildingAmenityIconMap[amenity.key];
-                return (
-                  <li key={amenity.key} className="flex flex-col items-center gap-2.5 text-center">
-                    <Icon {...buildingAmenityIconProps} aria-hidden />
-                    <span className={cardAmenityLabel}>{amenity.label}</span>
-                  </li>
-                );
-              })}
-            </ul>
+    <article className="building-watchlist-card flex min-h-[560px] w-full flex-col overflow-hidden border border-brand-champagne/25 bg-brand-midnight">
+      <div className="grid min-h-0 flex-1 grid-cols-1 sm:grid-cols-[minmax(0,52fr)_minmax(0,48fr)]">
+        <div className="flex flex-col bg-brand-midnight px-7 py-9 text-brand-ivory lg:px-8 lg:py-10">
+          <p className={cardEditorialIndex}>No. {String(index + 1).padStart(2, "0")}</p>
+          <h2 className={`mt-4 ${cardBuildingName}`}>{building.name}</h2>
+          <p className={`mt-6 ${cardNeighborhood}`}>{building.area}</p>
+          <div className="mt-10">
+            <p className={cardPriceLabel}>{building.price.label}</p>
+            <p className={`mt-2 ${cardPriceValue}`}>{building.price.value}</p>
           </div>
         </div>
-        <div className="relative aspect-[4/3] w-full bg-brand-midnight sm:aspect-auto sm:min-h-full sm:h-full">
+        <div className="relative aspect-[4/3] w-full bg-brand-midnight sm:aspect-auto sm:h-full sm:min-h-full">
           <img
             src={`/buildings/thumbs/${building.slug}.webp`}
             alt={`${building.name} in ${building.area}, Manhattan`}
-            className="absolute inset-0 h-full w-full object-cover object-center brightness-[0.97] contrast-[1.03] saturate-[0.9]"
+            className={watchlistImageClass}
             loading="lazy"
             decoding="async"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.22)_0%,transparent_30%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.2)_0%,transparent_28%)]" />
         </div>
       </div>
-      <div className="shrink-0 border-t border-brand-ivory/12 bg-brand-midnight px-7 py-4 lg:px-8">
-        <p className={cardAccentLabel}>Known For</p>
-        <p className="mt-2.5 text-[0.62rem] leading-relaxed tracking-[0.04em] text-brand-ivory/76">
-          {building.knownFor.join(" · ")}
-        </p>
+      <div className="shrink-0 border-t border-brand-ivory/10 bg-brand-midnight px-7 py-7 lg:px-8 lg:py-8">
+        <p className={cardKnownForLabel}>Known For</p>
+        <p className={cardKnownForText}>{building.knownFor.join(" · ")}</p>
       </div>
       {reportAvailable ? (
         <Link
           href={`/buildings/${building.slug}/report`}
-          className="flex min-h-[60px] items-center border-t border-brand-ivory/12 bg-brand-midnight px-7 transition hover:bg-brand-ivory/[0.04] lg:px-8"
+          className="group flex min-h-[78px] items-center border-t border-brand-champagne/30 bg-brand-ivory px-7 transition hover:bg-[#f7f3ea] lg:px-8"
         >
-          <span className={cardReportLink}>Read Building Report →</span>
+          <span className={cardReportCta}>Read Building Report →</span>
         </Link>
       ) : null}
     </article>
@@ -179,9 +165,9 @@ export default function Buildings() {
 
       <section className="border-t border-brand-midnight/10 bg-[#f3f2ee] px-6 pb-16 lg:px-10 lg:pb-20">
         <div className="mx-auto max-w-7xl pt-10">
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
-            {trackedBuildings.map((building) => (
-              <BuildingWatchlistCard key={building.name} building={building} />
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-7">
+            {trackedBuildings.map((building, index) => (
+              <BuildingWatchlistCard key={building.name} building={building} index={index} />
             ))}
           </div>
         </div>
