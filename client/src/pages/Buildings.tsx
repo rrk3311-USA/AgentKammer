@@ -1,4 +1,4 @@
-import { Building2, Compass, MapPin, Search, UserRound } from "lucide-react";
+import { BookOpen, Building2, Compass, MapPin, Search, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
@@ -84,9 +84,14 @@ function BuildingWatchlistCard({ building, index }: { building: TrackedBuilding;
       {reportAvailable ? (
         <Link
           href={`/buildings/${building.slug}/report`}
-          className="group flex min-h-[78px] items-center border-t border-brand-champagne/30 bg-brand-ivory px-7 transition hover:bg-[#f7f3ea] lg:px-8"
+          className="group flex min-h-[78px] items-center justify-between border-t border-brand-champagne/30 bg-brand-ivory px-7 transition hover:bg-[#f7f3ea] lg:px-8"
         >
           <span className={cardReportCta}>Read Building Report →</span>
+          <BookOpen
+            className="h-5 w-5 shrink-0 text-brand-champagne-dark/70 transition group-hover:text-brand-champagne-dark"
+            strokeWidth={1.35}
+            aria-hidden
+          />
         </Link>
       ) : null}
     </article>
