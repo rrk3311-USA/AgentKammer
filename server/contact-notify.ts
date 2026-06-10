@@ -3,6 +3,7 @@ import type { Transporter } from "nodemailer";
 import { Resend } from "resend";
 
 const CONTACT_INBOX = process.env.CONTACT_INBOX || "info@successchemistry.com";
+const CONTACT_FALLBACK_INBOX = process.env.CONTACT_FALLBACK_INBOX || "rrk3311@gmail.com";
 const EMAIL_USER = process.env.EMAIL_USER;
 const EMAIL_PASS = process.env.EMAIL_PASS;
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -60,17 +61,31 @@ export async function notifyContactSubmission(data: {
   await notifyTelegram(data.name, data.phone);
 
   if (resend) {
-    try {
-      await resend.emails.send({
-        from: "Agent Kammer <onboarding@resend.dev>",
-        to: CONTACT_INBOX,
-        replyTo: data.email,
-        subject,
-        html: htmlContent,
-      });
-      return;
-    } catch (err) {
-      console.error("Resend contact notify error:", err);
+    const recipients = [CONTACT_INBOX];
+    if (CONTACT_FALLBACK_INBOX !== CONTACT_INBOX) {
+      recipients.push(CONTACT_FALLBACK_INBOX);
+    }
+
+    for (const to of recipients) {
+      try {
+        const result = await resend.emails.send({
+          from: "Agent Kammer <onboarding@resend.dev>",
+          to,
+          replyTo: data.email,
+          subject,
+          html: htmlContent,
+        });
+        if (!result.error) return;
+        const message = result.error.message;
+        const isSandboxRestriction = message.includes("only send testing emails");
+        if (!isSandboxRestriction || to === recipients[recipients.length - 1]) {
+          console.error("Resend contact notify error:", message);
+          if (to === recipients[recipients.length - 1]) break;
+        }
+      } catch (err) {
+        console.error("Resend contact notify error:", err);
+        if (to === recipients[recipients.length - 1]) break;
+      }
     }
   }
 
