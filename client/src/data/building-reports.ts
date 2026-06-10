@@ -203,6 +203,158 @@ export const buildingReports: BuildingReport[] = [
     ],
     relatedPerspectiveSlug: "why-some-luxury-buildings-have-more-personality-than-others",
   },
+  {
+    slug: "one-high-line",
+    buildingName: "One High Line",
+    series: "Agent Kammer Building Report Series",
+    location: "West Chelsea, Manhattan",
+    publishedAt: "2026-06-07",
+    readMinutes: 13,
+    buildingProfile: {
+      neighborhood: "West Chelsea",
+      buildingType: "Luxury Condominium & Rental",
+      design: "Bjarke Ingels Group (BIG)",
+      positioning:
+        "Amenity-forward luxury living directly adjacent to the High Line and Hudson River corridor.",
+    },
+    executiveSummary: [
+      "One High Line is what happens when a luxury building decides to compete as a destination rather than an address.",
+      "Many Manhattan towers add amenities because the market expects them. One High Line organizes daily life around them.",
+      "Designed by Bjarke Ingels Group for Related, the development pairs two towers with a shared amenity campus that feels closer to a private club than a typical condominium. Pools, fitness, entertainment spaces, and river-facing common areas are not afterthoughts — they are the product.",
+      "This is not the most understated building in West Chelsea. It may be the most complete lifestyle package on the High Line corridor.",
+    ],
+    observation: [
+      "West Chelsea now offers two distinct luxury philosophies within blocks of each other. Lantern House competes through architecture and neighborhood connection. One High Line competes through scale, amenities, and resort-like infrastructure.",
+      "Both are luxury. They solve for different residents.",
+      "That comparison is not academic — it is how serious buyers should evaluate the corridor.",
+    ],
+    residentProfile: {
+      likely: [
+        "Finance and private-equity professionals",
+        "Entertainment and media executives",
+        "Relocation clients seeking turnkey luxury",
+        "Families prioritizing on-site wellness and recreation",
+        "Buyers who want a full amenity stack without leaving the building",
+        "Part-time Manhattan residents who value service density",
+      ],
+      lessCommon: [
+        "Design minimalists seeking quiet anonymity",
+        "Buyers who rarely use common amenities",
+        "Residents who prefer boutique scale over resort infrastructure",
+      ],
+    },
+    residentProfileMix: [
+      { label: "Finance", filled: 4 },
+      { label: "Family", filled: 3 },
+      { label: "Creative", filled: 2 },
+      { label: "Investor", filled: 2 },
+    ],
+    differentiators: [
+      {
+        title: "Amenity Architecture",
+        body: "The building treats shared spaces as primary design elements, not marketing checkboxes. Daily life can plausibly center on the building — not only the apartment.",
+      },
+      {
+        title: "Two-Tower Scale",
+        body: "The paired-tower format creates vertical community within a larger footprint than boutique West Chelsea neighbors. More residents, more infrastructure, more programming potential.",
+      },
+      {
+        title: "High Line Integration",
+        body: "Direct adjacency to the High Line places the building inside one of Manhattan's most walked corridors — gallery access, dining, and downtown connectivity without a commute to the neighborhood.",
+      },
+      {
+        title: "Resort Positioning",
+        body: "The experience skews resort-like: pools, extensive fitness, entertainment and lounge environments. For the right buyer, that is convenience. For others, it is noise.",
+      },
+    ],
+    strengths: [
+      "Comprehensive amenity campus",
+      "Strong High Line and river corridor placement",
+      "BIG design pedigree with recognizable form",
+      "Turnkey luxury for relocation and busy professionals",
+      "Service and infrastructure density",
+      "West Chelsea cultural access",
+    ],
+    tradeoffs: [
+      "Less intimate than smaller West Chelsea buildings",
+      "Amenity value depends on actual usage",
+      "Resort atmosphere may feel impersonal to some residents",
+      "Premium pricing reflects infrastructure, not only residence size",
+      "Higher resident population than boutique alternatives",
+    ],
+    tradeoffsNote:
+      "A building should not be judged solely by strengths. The tradeoffs are often what determine fit.",
+    neighborhoodContext: {
+      intro: "West Chelsea continues to occupy a unique position within Manhattan. It combines:",
+      combines: [
+        "Art galleries",
+        "Waterfront access",
+        "High Line connectivity",
+        "Luxury residential development",
+        "Downtown accessibility",
+      ],
+      closing:
+        "One High Line sits at the intersection of cultural foot traffic and new residential infrastructure — a different daily rhythm than Midtown, with stronger amenity density than many downtown conversions.",
+    },
+    comparablesIntro: "When evaluating One High Line, buyers often compare:",
+    comparables: [
+      { slug: "lantern-house", name: "Lantern House", lines: ["More design-forward.", "More character-driven."] },
+      { slug: "565-broome", name: "565 Broome", lines: ["More minimalist.", "More SoHo privacy."] },
+      { slug: "35-hudson-yards", name: "35 Hudson Yards", lines: ["More corporate district integration.", "More Hudson Yards scale."] },
+      { slug: "the-cortland", name: "The Cortland", lines: ["More family-oriented waterfront.", "Less High Line adjacency."] },
+    ],
+    fit: [
+      {
+        label: "Excellent fit",
+        items: [
+          "Relocation executives wanting turnkey luxury",
+          "Residents who will use amenities weekly",
+          "Families prioritizing wellness and recreation on-site",
+          "Buyers seeking High Line proximity with full infrastructure",
+          "Professionals who value convenience over architectural minimalism",
+        ],
+      },
+      {
+        label: "Moderate fit",
+        items: [
+          "Creative professionals who want neighborhood character first",
+          "Pied-à-terre owners who rarely use common spaces",
+          "International buyers comparing trophy addresses",
+        ],
+      },
+      {
+        label: "Poor fit",
+        items: [
+          "Buyers seeking boutique anonymity",
+          "Residents who prefer design-led buildings over amenity-led buildings",
+          "Value investors who will not utilize the infrastructure they are paying for",
+        ],
+      },
+    ],
+    commute: {
+      destinations: [
+        "Hudson Yards",
+        "Meatpacking District",
+        "Flatiron",
+        "Financial District",
+        "Midtown West",
+      ],
+      closing:
+        "The location favors downtown and west-side commutes. Residents gain walkability along the High Line corridor while maintaining car and transit access to broader Manhattan.",
+    },
+    agentKammerPerspective: [
+      "The interesting thing about One High Line is not the finishes. Many Manhattan buildings have strong finishes.",
+      "The interesting thing is that the building asks a direct question: will you actually live inside the amenity stack you are buying into?",
+      "For residents who answer yes, One High Line can feel extraordinarily efficient — work, wellness, and entertainment compressed into one address.",
+      "For residents who answer no, the building can feel like paying for a resort membership attached to an apartment. That is not a flaw in the product. It is the fit question worth studying.",
+    ],
+    bottomLine: [
+      "One High Line is not trying to be quiet luxury. It is trying to be complete luxury.",
+      "For the right resident, that completeness is the point — a West Chelsea address with the infrastructure of a private club. For the wrong resident, the same infrastructure is simply overhead.",
+      "That distinction is why the building belongs on a serious Manhattan watchlist.",
+    ],
+    relatedPerspectiveSlug: "what-residents-actually-pay-for-in-luxury-buildings",
+  },
 ];
 
 export const featuredBuildingReport = buildingReports.find((r) => r.featured) ?? buildingReports[0];

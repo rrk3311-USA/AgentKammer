@@ -13,8 +13,8 @@ No new pages, navigation, Building DNA, dashboards, or scoring until:
 
 | Asset | Current | Required |
 |-------|---------|----------|
-| Building Reports | 1 | **5+** |
-| Perspectives | 8 | **10+** |
+| Building Reports | 2 | **5+** |
+| Perspectives | 9 | **10+** |
 | Manhattan Brief issues | 0 | **3+** |
 
 Until then: **write → publish → cross-link.** See `CONTENT_FIRST_DIRECTIVE.md`.
@@ -59,7 +59,7 @@ These differentiate the practice. Each report follows `BUILDING_REPORT_TEMPLATE.
 | # | Building | Slug | Status | Draft file | Notes |
 |---|----------|------|--------|------------|-------|
 | — | **Lantern House** | `lantern-house` | ✅ Published | `lantern-house.md` | Chelsea waterfront — gold standard |
-| 1 | **One High Line** | `one-high-line` | 🟡 Draft shell | `one-high-line.md` | West Chelsea, High Line proximity |
+| 1 | **One High Line** | `one-high-line` | ✅ Published | `one-high-line.md` | West Chelsea, High Line proximity |
 | 2 | **35 Hudson Yards** | `35-hudson-yards` | 🟡 Draft shell | `35-hudson-yards.md` | Hudson Yards anchor tower |
 | 3 | **15 Hudson Yards** | `15-hudson-yards` | 🟡 Draft shell | `15-hudson-yards.md` | Hudson Yards residential tower |
 | 4 | **565 Broome** | `565-broome` | 🟡 Draft shell | `565-broome.md` | SoHo modern luxury |
@@ -101,7 +101,7 @@ These differentiate the practice. Each report follows `BUILDING_REPORT_TEMPLATE.
 | 1 | Why Some Buildings Feel More Expensive Than They Are | `why-some-buildings-feel-more-expensive-than-they-are` | 🏢 Building | Q2 2026 |
 | 2 | The Quiet Luxury Buildings Of Manhattan | `the-quiet-luxury-buildings-of-manhattan` | 🏢 Building | Q2 2026 |
 | 3 | Why Service Quality Matters More Than Amenities | `why-service-quality-matters-more-than-amenities` | 🏢 Building | Q3 2026 |
-| 4 | What Residents Actually Pay For In Luxury Buildings | `what-residents-actually-pay-for-in-luxury-buildings` | 🥂 Lifestyle | Q3 2026 |
+| 4 | What Residents Actually Pay For In Luxury Buildings | `what-residents-actually-pay-for-in-luxury-buildings` | 🥂 Lifestyle | ✅ Jun 2026 |
 | 5 | The Difference Between Prestige And Convenience | `the-difference-between-prestige-and-convenience` | 🏢 Building | Q3 2026 |
 
 *Before writing:* confirm the piece answers **one question** and is not a guide or listicle. Use Observation → Context → Interpretation → Implication → Conclusion.

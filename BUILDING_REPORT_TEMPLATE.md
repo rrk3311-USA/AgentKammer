@@ -125,7 +125,7 @@ comparables:
 | # | Building | Slug | Status |
 |---|----------|------|--------|
 | 1 | **Lantern House** | `lantern-house` | ✅ Published |
-| 2 | **One High Line** | `one-high-line` | 🟡 Draft shell |
+| 2 | **One High Line** | `one-high-line` | ✅ Published |
 | 3 | **35 Hudson Yards** | `35-hudson-yards` | 🟡 Draft shell |
 | 4 | **15 Hudson Yards** | `15-hudson-yards` | 🟡 Draft shell |
 | 5 | **565 Broome** | `565-broome` | 🟡 Draft shell |

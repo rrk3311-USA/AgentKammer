@@ -31,6 +31,28 @@ export type Perspective = {
 
 export const perspectives: Perspective[] = [
   {
+    slug: "what-residents-actually-pay-for-in-luxury-buildings",
+    title: "What Residents Actually Pay For In Luxury Buildings",
+    excerpt:
+      "The monthly number on a listing is rarely the full story. In amenity-forward towers, residents often pay for infrastructure they never use — or infrastructure that defines their entire week.",
+    contentType: "lifestyle",
+    publishedAt: "2026-06-07",
+    readMinutes: 6,
+    relatedBuildingReportSlug: "one-high-line",
+    sections: {
+      observation:
+        "Luxury listings lead with price per square foot. Residents lead with how a building actually organizes their week — elevator reliability, doorman culture, gym hours, pool access, and whether the amenity deck feels like a second home or a showroom.",
+      context:
+        "Manhattan's newest towers increasingly compete through shared infrastructure: wellness campuses, entertainment lounges, pools, and service layers that inflate carrying costs whether or not a resident steps inside them. One High Line is a clear example — the product is not only the apartment but the resort-like stack wrapped around it.",
+      interpretation:
+        "What residents pay for is often a bundle: address, service density, neighbor profile, and optional lifestyle infrastructure. The bundle makes sense when usage is high. When usage is low, the same bundle becomes a tax on square footage the buyer never experiences.",
+      implication:
+        "Serious searches should separate the residence line item from the infrastructure line item. Ask how many days per month the buyer will realistically live inside the building's common world. That single question separates excellent fit at One High Line from expensive mismatch two blocks away at a design-led alternative.",
+      conclusion:
+        "Luxury is not one product. It is several products sold as one number. The buildings worth studying are the ones honest enough to show which product they are actually selling.",
+    },
+  },
+  {
     slug: "why-some-luxury-buildings-have-more-personality-than-others",
     title: "Why Some Luxury Buildings Have More Personality Than Others",
     excerpt:

@@ -50,7 +50,7 @@ Create and publish using the **existing** Building Report template. Do not inven
 | # | Building | Slug | Status |
 |---|----------|------|--------|
 | — | Lantern House | `lantern-house` | ✅ Published |
-| 1 | One High Line | `one-high-line` | 🔴 Draft |
+| 1 | One High Line | `one-high-line` | ✅ Published |
 | 2 | 35 Hudson Yards | `35-hudson-yards` | 🔴 Draft |
 | 3 | 15 Hudson Yards | `15-hudson-yards` | 🔴 Draft |
 | 4 | 565 Broome | `565-broome` | 🔴 Draft |
@@ -139,8 +139,8 @@ Instagram and Brief are **content assets**, not new site features.
 
 | Threshold | Current | Target |
 |-----------|---------|--------|
-| Building Reports | 1 | **5+** |
-| Perspectives | 8 | **10+** |
+| Building Reports | 2 | **5+** |
+| Perspectives | 9 | **10+** |
 | Manhattan Brief issues | 0 | **3+** |
 
 Only **after** these thresholds: evaluate additional editorial systems (e.g. Building DNA, new dashboards, scoring).
