@@ -26,7 +26,8 @@ import { PerspectiveCard } from "@/components/PerspectiveCard";
  */
 
 const sectionHeadline = "font-serif text-3xl font-semibold md:text-4xl lg:text-[2.65rem]";
-const eyebrow = "mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne";
+const eyebrowOnLight = "mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne-dark";
+const eyebrowOnDark = "mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne";
 
 const featuredBuildings = trackedBuildings.slice(0, 6);
 const recentPerspectives = getRecentPerspectives(3);
@@ -271,7 +272,7 @@ export default function Home() {
         <div className="relative z-[1] mx-auto max-w-7xl">
           <div className="grid gap-8 pb-8 lg:grid-cols-[0.82fr_1fr] lg:items-end">
             <div>
-              <p className={eyebrow}>Private Watchlist</p>
+              <p className={eyebrowOnLight}>Private Watchlist</p>
               <h2 className={`${sectionHeadline} text-brand-midnight`}>Buildings We Track</h2>
               <span className="mt-4 block h-px w-10 bg-brand-champagne" aria-hidden />
             </div>
@@ -295,7 +296,7 @@ export default function Home() {
       <section className="border-y border-brand-midnight/10 bg-[#f7f3ea] px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:gap-14">
           <div>
-            <p className={eyebrow}>Long-Term Client Path</p>
+            <p className={eyebrowOnLight}>Long-Term Client Path</p>
             <h2 className={`${sectionHeadline} text-brand-midnight`}>Leasing Today. Buying Tomorrow.</h2>
             <div className="mt-5 max-w-xl space-y-3.5 text-base leading-7 text-brand-graphite/76">
               <p>Many clients enter Manhattan through a luxury lease.</p>
@@ -332,7 +333,7 @@ export default function Home() {
         <div className="absolute inset-x-0 top-0 h-px bg-brand-champagne/35" aria-hidden />
         <div className="relative z-10 mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.92fr_1fr] lg:items-center lg:gap-16">
           <div className="max-w-2xl">
-            <p className={eyebrow}>Relocation Advisory</p>
+            <p className={eyebrowOnDark}>Relocation Advisory</p>
             <h2 className={`${sectionHeadline} text-brand-ivory`}>Relocating To Manhattan</h2>
             <p className="mt-6 text-base leading-7 text-brand-ivory/78">
               Most clients are not searching for an apartment. They are navigating a promotion, relocation, growing
@@ -380,7 +381,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 border-b border-brand-midnight/10 pb-8 lg:grid-cols-[0.82fr_1fr] lg:items-end">
             <div>
-              <p className={eyebrow}>Perspectives</p>
+              <p className={eyebrowOnLight}>Perspectives</p>
               <h2 className={`${sectionHeadline} text-brand-midnight`}>Recent Observations</h2>
             </div>
             <p className="max-w-xl text-base leading-7 text-brand-graphite/78 lg:justify-self-end">

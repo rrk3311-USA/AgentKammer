@@ -13,7 +13,7 @@ export function PerspectiveCard({ article, featured = false }: PerspectiveCardPr
     return (
       <Link href={`/perspectives/${article.slug}`}>
         <Card className="group rounded-none border border-brand-champagne/40 bg-white/80 p-6 shadow-none transition hover:-translate-y-0.5 hover:border-brand-champagne lg:p-8">
-          <p className="text-[0.66rem] font-semibold uppercase tracking-[0.2em] text-brand-champagne">Featured</p>
+          <p className="text-[0.66rem] font-semibold uppercase tracking-[0.2em] text-brand-champagne-dark">Featured</p>
           <div className="mt-3 flex flex-wrap items-center gap-3">
             <PerspectiveContentTag contentType={article.contentType} />
             <p className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-brand-graphite/48">
@@ -24,7 +24,7 @@ export function PerspectiveCard({ article, featured = false }: PerspectiveCardPr
             {article.title}
           </h2>
           <p className="mt-4 max-w-3xl text-base leading-7 text-brand-graphite/74">{article.excerpt}</p>
-          <p className="mt-5 text-sm font-semibold uppercase tracking-[0.14em] text-brand-champagne">Read perspective</p>
+          <p className="mt-5 text-sm font-semibold uppercase tracking-[0.14em] text-brand-champagne-dark">Read perspective</p>
         </Card>
       </Link>
     );

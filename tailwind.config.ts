@@ -19,6 +19,7 @@ export default {
           "ivory-logo": "#FBF2E9",
           graphite: "#222730",
           champagne: "#D6B45F",
+          "champagne-dark": "#7A6328",
           steel: "#5E718D",
           surface: "#F3F2EE",
         },
