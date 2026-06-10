@@ -73,6 +73,22 @@ export default function Intelligence() {
         </div>
       </section>
 
+      <section className="border-t border-brand-midnight/10 bg-[#f7f3ea] px-6 py-14 lg:px-10 lg:py-16">
+        <div className="mx-auto max-w-7xl">
+          <p className={eyebrowOnLight}>International</p>
+          <h2 className={`${sectionHeadline} text-brand-midnight`}>Global Client Research</h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-brand-graphite/72">
+            Building intelligence for clients arriving from the UK, UAE, Singapore, Hong Kong, and Europe — research
+            before the first Manhattan visit.
+          </p>
+          <div className="mt-8">
+            <Link href="/international">
+              <Button variant="brandOutline">International Advisory</Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="border-t border-brand-midnight/10 bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2">
           <Card className="rounded-none border border-brand-ivory/14 bg-brand-midnight p-6 shadow-none">

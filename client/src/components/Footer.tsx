@@ -7,6 +7,7 @@ const footerLinks = [
   { label: "Lease", href: "/lease" },
   { label: "Buildings", href: "/buildings" },
   { label: "Intelligence", href: "/intelligence" },
+  { label: "International", href: "/international" },
   { label: "About", href: "/about" },
   { label: "Manhattan Brief", href: "/perspectives#manhattan-brief" },
 ];

@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import { BeliefQuote } from "@/components/BeliefQuote";
 import { EditorialAccent } from "@/components/EditorialAccent";
 import { Building2, Compass, Eye } from "lucide-react";
+import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 const principles = [
   {
@@ -32,6 +33,13 @@ const advisorContrast = [
 ];
 
 export default function About() {
+  usePageMetadata({
+    title: "About — Modern Manhattan Residential Intelligence",
+    description:
+      "Agent Kammer is a Manhattan advisory practice focused on building research, neighborhood context, and research-led residential guidance.",
+    path: "/about",
+  });
+
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
       <section className="bg-brand-midnight px-6 py-16 text-brand-ivory lg:px-10 lg:py-20">

@@ -3,6 +3,7 @@ export const perspectiveContentTypes = [
   { id: "neighborhood", label: "Neighborhood" },
   { id: "market-note", label: "Market Note" },
   { id: "relocation", label: "Relocation" },
+  { id: "international", label: "International" },
   { id: "development", label: "Development" },
   { id: "lifestyle", label: "Lifestyle" },
 ] as const;
@@ -26,10 +27,141 @@ export type Perspective = {
   readMinutes: number;
   featured?: boolean;
   relatedBuildingReportSlug?: string;
+  /** Target markets for international SEO (e.g. UK, UAE, Singapore) */
+  markets?: string[];
   sections: PerspectiveSections;
 };
 
 export const perspectives: Perspective[] = [
+  {
+    slug: "studying-manhattan-buildings-before-your-first-visit",
+    title: "Studying Manhattan Buildings Before Your First Visit",
+    excerpt:
+      "International buyers rarely need to tour twenty apartments. They need to narrow the building field before they land — and Manhattan rewards that discipline.",
+    contentType: "international",
+    publishedAt: "2026-06-07",
+    readMinutes: 7,
+    featured: true,
+    markets: ["UK", "UAE", "Singapore", "Hong Kong", "Europe"],
+    sections: {
+      observation:
+        "Clients relocating from London, Dubai, or Singapore often arrive in Manhattan with a list of apartments but no building thesis. They spend the first week reacting to floor plans instead of evaluating address, service culture, and resident profile.",
+      context:
+        "Manhattan luxury is building-differentiated in ways that do not translate from other global cities. Co-op restrictions, amenity bundles, pied-à-terre concentration, and neighborhood micro-rhythms matter as much as square footage — and most of that information is knowable before a first showing.",
+      interpretation:
+        "Pre-visit building research is not caution. It is efficiency. The clients who study towers remotely — through reports, video walk-throughs, and neighborhood mapping — arrive with fewer variables and better questions.",
+      implication:
+        "Structure the search as building shortlist first, unit second. For international timelines, that sequence protects jet-lagged decision-making and reduces the temptation to accept a beautiful residence inside the wrong system.",
+      conclusion:
+        "The first visit should confirm a thesis, not discover one. Manhattan rewards clients who do their building homework before they pack a suitcase.",
+    },
+  },
+  {
+    slug: "what-a-uk-executive-should-know-about-manhattan-relocation",
+    title: "What A UK Executive Should Know About Manhattan Relocation",
+    excerpt:
+      "London and Manhattan share a finance culture but not a housing logic. The differences that surprise British executives are rarely about price.",
+    contentType: "international",
+    publishedAt: "2026-06-07",
+    readMinutes: 6,
+    markets: ["UK", "London"],
+    sections: {
+      observation:
+        "British executives often assume Manhattan works like Mayfair or Canary Wharf at a larger scale — freehold thinking, predictable commutes, and buildings that function as neutral containers for a good flat.",
+      context:
+        "Manhattan adds layers: leasehold mechanics in many new developments, co-op boards in established stock, doorman culture as daily infrastructure, and neighborhoods that change character within a few blocks. The city compresses professional life — proximity matters more than in London's distributed zones.",
+      interpretation:
+        "The adjustment is not cultural in the social sense. It is structural. A UK executive who optimizes for square footage over block and building often buys friction — longer evenings, weaker resale narrative, and a residence that fights the work week.",
+      implication:
+        "Map the actual weekly rhythm first: office location, school runs if relevant, airport access, and where peers actually gather. Tribeca, Hudson Yards, and West Chelsea solve different versions of the same executive life.",
+      conclusion:
+        "Manhattan is not a larger London. It is a different housing system with familiar professional gravity. Executives who learn that early make cleaner first decisions.",
+    },
+  },
+  {
+    slug: "why-some-buildings-feel-more-expensive-than-they-are",
+    title: "Why Some Buildings Feel More Expensive Than They Are",
+    excerpt:
+      "Carrying cost, service density, and neighbor profile can make a tower feel costly even when the price per foot looks competitive on paper.",
+    contentType: "building",
+    publishedAt: "2026-06-07",
+    readMinutes: 6,
+    sections: {
+      observation:
+        "Clients compare buildings by headline price and common charges. Six months later they describe one tower as feeling expensive and another as fair — often with the numbers inverted from their original spreadsheet.",
+      context:
+        "The felt cost of a building includes elevator reliability, staff continuity, amenity utilization pressure, and whether the address still reads clearly to future buyers. Some towers carry prestige premiums that do not convert to daily satisfaction.",
+      interpretation:
+        "Expensive-feeling buildings usually mismatch usage: high infrastructure cost with low personal benefit, or prestige positioning without resident culture. The building charges for a bundle the client never unpacks.",
+      implication:
+        "Separate the residence invoice from the building invoice before comparing. Ask which line items the client will actually consume — service, amenities, address narrative — and which are vanity carry.",
+      conclusion:
+        "A building that feels expensive is sending a signal. The research task is to determine whether that signal is quality, overhead, or misalignment — before the lease or purchase is signed.",
+    },
+  },
+  {
+    slug: "the-quiet-luxury-buildings-of-manhattan",
+    title: "The Quiet Luxury Buildings Of Manhattan",
+    excerpt:
+      "Not every significant Manhattan tower announces itself. Some of the most durable addresses trade volume for discretion — and attract a specific resident.",
+    contentType: "building",
+    publishedAt: "2026-06-06",
+    readMinutes: 7,
+    sections: {
+      observation:
+        "Marketing-forward towers dominate search attention. Yet some of Manhattan's most stable luxury addresses barely surface on portals — low turnover, restrained branding, and residents who prefer understatement.",
+      context:
+        "Quiet luxury buildings often sit in established blocks with proven service cultures: consistent staffing, restrained amenity programs, and neighbor profiles that skew toward long-horizon ownership rather than speculative churn.",
+      interpretation:
+        "Discretion is a product choice, not an accident. These buildings filter for clients who want excellent daily life without spectacle — and who understand that resale depth can come from reputation rather than billboard presence.",
+      implication:
+        "For buyers who dislike lobby performance and prefer architectural restraint, the quiet list may outperform the famous list. The research challenge is access: these buildings reveal themselves through advisory networks, not infinite scroll.",
+      conclusion:
+        "Quiet luxury is not hidden luxury for its own sake. It is a positioning decision — and for the right client, it is the most rational one in Manhattan.",
+    },
+  },
+  {
+    slug: "why-service-quality-matters-more-than-amenities",
+    title: "Why Service Quality Matters More Than Amenities",
+    excerpt:
+      "Pools and wine rooms photograph well. Doorman judgment, elevator timing, and staff continuity define whether a building actually works.",
+    contentType: "building",
+    publishedAt: "2026-06-05",
+    readMinutes: 6,
+    sections: {
+      observation:
+        "Listing sheets compete on amenity counts — second gyms, golf simulators, entertainment lounges. Residents describe satisfaction through different vocabulary: recognition at the door, package handling, repair responsiveness, and whether the building feels competently run.",
+      context:
+        "Amenity decks are capital expenses baked into monthly carrying costs whether or not a resident visits them. Service is the operating layer that runs every day — and in full-time Manhattan living, it touches more hours than any pool.",
+      interpretation:
+        "Service quality is the building's nervous system. When it fails, amenities become irrelevant. When it excels, even a modest amenity program feels sufficient because the residence itself is frictionless.",
+      implication:
+        "Tour buildings on a Tuesday morning, not only a Saturday open house. Watch elevator behavior, staff interaction, and whether the operation feels staffed for residents or staged for sales.",
+      conclusion:
+        "Amenities sell the first visit. Service determines the third year. Serious Manhattan research weights the operating culture at least as heavily as the renderings.",
+    },
+  },
+  {
+    slug: "tribeca-vs-hudson-yards-for-finance-professionals",
+    title: "Tribeca Vs Hudson Yards For Finance Professionals",
+    excerpt:
+      "Two addresses can both read as executive Manhattan — but they organize the week differently for people tied to Midtown and the west side.",
+    contentType: "neighborhood",
+    publishedAt: "2026-06-04",
+    readMinutes: 7,
+    sections: {
+      observation:
+        "Finance clients often shortlist Tribeca and Hudson Yards in the same conversation — both signal success, both offer modern product, both promise proximity to power centers. The lived experience diverges quickly.",
+      context:
+        "Tribeca carries established neighborhood texture: restaurant depth, school presence, cobblestone scale, and a quieter residential rhythm. Hudson Yards delivers new-tower infrastructure, corporate adjacency, and a skyline identity still forming its social habits.",
+      interpretation:
+        "Tribeca trades on earned character. Hudson Yards trades on institutional adjacency and amenity-forward product. Neither is universally correct — the choice is which version of executive life the client is actually buying.",
+      implication:
+        "Test commute reality to the client's actual office — not a generic Midtown pin. Ask whether they want weekend neighborhood life or weekday campus efficiency. Those answers split the decision faster than comparing floor plans.",
+      conclusion:
+        "For finance professionals, Tribeca and Hudson Yards are not interchangeable prestige options. They are two different contracts with the city — and the right one depends on how the client uses Manhattan, not how they describe it at dinner.",
+    },
+  },
   {
     slug: "what-residents-actually-pay-for-in-luxury-buildings",
     title: "What Residents Actually Pay For In Luxury Buildings",
@@ -60,7 +192,6 @@ export const perspectives: Perspective[] = [
     contentType: "building",
     publishedAt: "2026-06-07",
     readMinutes: 6,
-    featured: true,
     relatedBuildingReportSlug: "lantern-house",
     sections: {
       observation:
@@ -242,6 +373,10 @@ export function getRecentPerspectives(count = 3): Perspective[] {
 
 export function hasRelatedPerspective(buildingSlug: string): boolean {
   return perspectives.some((p) => p.relatedBuildingReportSlug === buildingSlug);
+}
+
+export function getInternationalPerspectives(): Perspective[] {
+  return perspectives.filter((p) => p.contentType === "international");
 }
 
 export function formatPerspectiveDate(isoDate: string): string {

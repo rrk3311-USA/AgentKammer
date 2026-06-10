@@ -25,10 +25,16 @@ export default function PerspectiveArticle() {
   const [, params] = useRoute("/perspectives/:slug");
   const article = params?.slug ? getPerspectiveBySlug(params.slug) : undefined;
 
+  const marketKeywords =
+    article?.markets?.length && article.contentType === "international"
+      ? `Manhattan luxury real estate ${article.markets.join(" ")} international buyers NYC relocation`
+      : undefined;
+
   usePageMetadata({
     title: article ? article.title : "Perspective Not Found",
     description: article?.excerpt ?? "Manhattan observations from Agent Kammer.",
     path: article ? `/perspectives/${article.slug}` : undefined,
+    keywords: marketKeywords,
   });
 
   if (!article) {

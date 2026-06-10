@@ -11,6 +11,7 @@ import {
   cardPriceValue,
   cardReportLink,
 } from "@/lib/brand-typography";
+import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 const comparisonPoints = [
   { title: "Amenities", icon: Building2 },
@@ -88,6 +89,15 @@ function BuildingWatchlistCard({ building }: { building: TrackedBuilding }) {
 }
 
 export default function Buildings() {
+  usePageMetadata({
+    title: "Buildings — Manhattan Watchlist & Intelligence",
+    description:
+      "Curated Manhattan residential buildings with pricing context, signature traits, and deep intelligence reports on towers worth studying.",
+    path: "/buildings",
+    keywords:
+      "Manhattan luxury buildings, NYC residential towers, Hudson Yards Chelsea Tribeca buildings, Manhattan building reports",
+  });
+
   return (
     <main className="min-h-screen bg-brand-surface text-brand-graphite">
       <section className="bg-brand-midnight px-6 py-16 text-brand-ivory lg:px-10 lg:py-20">

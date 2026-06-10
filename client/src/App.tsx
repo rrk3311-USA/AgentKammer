@@ -23,6 +23,7 @@ const About = lazy(() => import("@/pages/About"));
 const Perspectives = lazy(() => import("@/pages/Perspectives"));
 const PerspectiveArticle = lazy(() => import("@/pages/PerspectiveArticle"));
 const Contact = lazy(() => import("@/pages/Contact"));
+const International = lazy(() => import("@/pages/International"));
 const NewYorkMarket = lazy(() => import("@/pages/NewYorkMarket"));
 const Profile = lazy(() => import("@/pages/Profile"));
 const ReverseBuyerOrigination = lazy(() => import("@/pages/ReverseBuyerOrigination"));
@@ -69,6 +70,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/profile" component={Profile} />
       <Route path="/contact" component={Contact} />
+      <Route path="/international" component={International} />
       <Route path="/new-york-market" component={NewYorkMarket} />
       <Route path="/reverse-buyer-origination" component={ReverseBuyerOrigination} />
       <Route path="/reverse-seller-architecture" component={ReverseSellerOrigination} />

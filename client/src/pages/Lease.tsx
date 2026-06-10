@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import { Building2, MapPin, Users } from "lucide-react";
+import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 const leaseAudiences = [
   "Executives relocating to Manhattan",
@@ -38,6 +39,15 @@ const directInquiryComparison = [
 ];
 
 export default function Lease() {
+  usePageMetadata({
+    title: "Lease — Manhattan Luxury Rental Advisory",
+    description:
+      "Research-led leasing guidance for executives, founders, and international clients entering Manhattan through premier modern buildings.",
+    path: "/lease",
+    keywords:
+      "Manhattan luxury apartment lease, NYC executive rental, international Manhattan lease advisory",
+  });
+
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
       <section className="bg-brand-midnight px-6 py-16 text-brand-ivory lg:px-10 lg:py-20">

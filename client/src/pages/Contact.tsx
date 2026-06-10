@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 const sellerAssessment = [
   {
@@ -27,6 +28,15 @@ const sellerAssessment = [
 ];
 
 export default function Contact() {
+  usePageMetadata({
+    title: "Contact — Schedule Advisory Call",
+    description:
+      "Request private guidance on Manhattan buy, sell, lease, and relocation decisions. International clients welcome — we respond within 24 hours.",
+    path: "/contact",
+    keywords:
+      "Manhattan real estate advisory contact, NYC luxury apartment consultation, international Manhattan relocation",
+  });
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",

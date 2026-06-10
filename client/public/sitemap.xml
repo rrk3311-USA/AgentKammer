@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.agentkammer.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.agentkammer.com/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.agentkammer.com/" />
   </url>
   <url>
     <loc>https://www.agentkammer.com/buy</loc>
@@ -17,6 +20,9 @@
   </url>
   <url>
     <loc>https://www.agentkammer.com/strategy</loc>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/international</loc>
   </url>
   <url>
     <loc>https://www.agentkammer.com/buildings</loc>
@@ -35,6 +41,30 @@
   </url>
   <url>
     <loc>https://www.agentkammer.com/new-york-market</loc>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/perspectives/studying-manhattan-buildings-before-your-first-visit</loc>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/perspectives/what-a-uk-executive-should-know-about-manhattan-relocation</loc>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/perspectives/why-some-buildings-feel-more-expensive-than-they-are</loc>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/perspectives/the-quiet-luxury-buildings-of-manhattan</loc>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/perspectives/why-service-quality-matters-more-than-amenities</loc>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/perspectives/tribeca-vs-hudson-yards-for-finance-professionals</loc>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/perspectives/what-residents-actually-pay-for-in-luxury-buildings</loc>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/perspectives/why-some-luxury-buildings-have-more-personality-than-others</loc>
   </url>
   <url>
     <loc>https://www.agentkammer.com/perspectives/why-the-building-matters-more-than-the-residence</loc>
@@ -58,15 +88,9 @@
     <loc>https://www.agentkammer.com/perspectives/the-building-before-the-apartment</loc>
   </url>
   <url>
-    <loc>https://www.agentkammer.com/perspectives/why-some-luxury-buildings-have-more-personality-than-others</loc>
-  </url>
-  <url>
     <loc>https://www.agentkammer.com/buildings/lantern-house/report</loc>
   </url>
   <url>
     <loc>https://www.agentkammer.com/buildings/one-high-line/report</loc>
-  </url>
-  <url>
-    <loc>https://www.agentkammer.com/perspectives/what-residents-actually-pay-for-in-luxury-buildings</loc>
   </url>
 </urlset>

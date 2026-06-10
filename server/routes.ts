@@ -48,6 +48,7 @@ const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const EMAIL_USER = process.env.EMAIL_USER;
 const EMAIL_PASS = process.env.EMAIL_PASS;
+const CONTACT_INBOX = process.env.CONTACT_INBOX || "info@successchemistry.com";
 const ADMIN_USER = process.env.ADMIN_USER;
 const ADMIN_PASS = process.env.ADMIN_PASS;
 
@@ -145,6 +146,64 @@ function notifyLead(data: {
 }) {
   notifyTelegramNewLead(data);
   notifyEmailNewLead(data);
+}
+
+async function notifyContactSubmission(data: {
+  name: string;
+  email: string;
+  phone?: string;
+  message: string;
+}) {
+  const subject = `New Contact Form — ${data.name} — Agent Kammer`;
+  const htmlContent = `
+    <h2>New Contact Form Submission</h2>
+    <p><strong>Name:</strong> ${data.name}</p>
+    <p><strong>Email:</strong> <a href="mailto:${data.email}">${data.email}</a></p>
+    ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ""}
+    <p><strong>Message:</strong></p>
+    <pre style="font-family: Georgia, serif; white-space: pre-wrap; line-height: 1.5;">${data.message}</pre>
+    <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
+    <p><em>Reply directly to ${data.email}</em></p>
+  `;
+
+  notifyTelegramNewLead({
+    source: "contact-form",
+    name: data.name,
+    phone: data.phone,
+  });
+
+  if (resend) {
+    try {
+      await resend.emails.send({
+        from: "Agent Kammer <onboarding@resend.dev>",
+        to: CONTACT_INBOX,
+        replyTo: data.email,
+        subject,
+        html: htmlContent,
+      });
+      return;
+    } catch (err) {
+      console.error("Resend contact notify error:", err);
+    }
+  }
+
+  if (emailTransporter && EMAIL_USER) {
+    try {
+      await emailTransporter.sendMail({
+        from: `Agent Kammer <${EMAIL_USER}>`,
+        to: CONTACT_INBOX,
+        replyTo: data.email,
+        subject,
+        html: htmlContent,
+      });
+    } catch (err) {
+      console.error("Email contact notify error:", err);
+    }
+  } else {
+    console.warn(
+      `Contact submission stored but email not sent — configure RESEND_API_KEY or EMAIL_USER/EMAIL_PASS. Inbox: ${CONTACT_INBOX}`,
+    );
+  }
 }
 
 // Admin auth middleware
@@ -1240,12 +1299,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Create contact submission
       const submission = await storage.createContactSubmission(validatedData);
-      
-      // Send notifications
-      notifyLead({
-        phone: submission.phone ?? undefined,
-        source: "contact-form",
+
+      await notifyContactSubmission({
         name: submission.name,
+        email: submission.email,
+        phone: submission.phone ?? undefined,
+        message: submission.message,
       });
       
       res.json({

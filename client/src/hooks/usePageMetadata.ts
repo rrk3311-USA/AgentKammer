@@ -4,6 +4,8 @@ type PageMetadata = {
   title: string;
   description: string;
   path?: string;
+  keywords?: string;
+  locale?: string;
 };
 
 function upsertMeta(attr: "name" | "property", key: string, content: string) {
@@ -19,26 +21,43 @@ function upsertMeta(attr: "name" | "property", key: string, content: string) {
   element.setAttribute("content", content);
 }
 
-export function usePageMetadata({ title, description, path }: PageMetadata) {
+function upsertLink(rel: string, href: string, hreflang?: string) {
+  const selector = hreflang
+    ? `link[rel="${rel}"][hreflang="${hreflang}"]`
+    : `link[rel="${rel}"]:not([hreflang])`;
+  let element = document.querySelector(selector) as HTMLLinkElement | null;
+
+  if (!element) {
+    element = document.createElement("link");
+    element.rel = rel;
+    if (hreflang) element.hreflang = hreflang;
+    document.head.appendChild(element);
+  }
+
+  element.href = href;
+}
+
+export function usePageMetadata({ title, description, path, keywords, locale = "en" }: PageMetadata) {
   useEffect(() => {
     const fullTitle = title.includes("Agent Kammer") ? title : `${title} | Agent Kammer`;
 
     document.title = fullTitle;
+    document.documentElement.lang = locale;
     upsertMeta("name", "description", description);
     upsertMeta("property", "og:title", fullTitle);
     upsertMeta("property", "og:description", description);
+    upsertMeta("property", "og:locale", locale === "en" ? "en_US" : locale);
+
+    if (keywords) {
+      upsertMeta("name", "keywords", keywords);
+    }
 
     if (path) {
       const url = `https://www.agentkammer.com${path}`;
       upsertMeta("property", "og:url", url);
-
-      let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
-      if (!canonical) {
-        canonical = document.createElement("link");
-        canonical.rel = "canonical";
-        document.head.appendChild(canonical);
-      }
-      canonical.href = url;
+      upsertLink("canonical", url);
+      upsertLink("alternate", url, "en");
+      upsertLink("alternate", url, "x-default");
     }
-  }, [title, description, path]);
+  }, [title, description, path, keywords, locale]);
 }
