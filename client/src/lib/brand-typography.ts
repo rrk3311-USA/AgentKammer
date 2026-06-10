@@ -17,3 +17,6 @@ export const cardAreaLabel =
   "text-[0.68rem] font-medium tracking-[0.14em] text-brand-hero-champagne sm:text-xs";
 export const cardReportLink =
   "text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-brand-hero-champagne transition hover:text-brand-ivory";
+
+export const cardAmenityLabel =
+  "text-[0.52rem] font-medium leading-snug tracking-[0.05em] text-brand-ivory/68";

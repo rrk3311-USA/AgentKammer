@@ -4,7 +4,13 @@ import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import { hasBuildingReport } from "@/data/building-reports";
 import { type TrackedBuilding, trackedBuildings } from "@/data/buildings";
-import { cardAreaLabel, cardAccentLabel, cardReportLink } from "@/lib/brand-typography";
+import { buildingAmenityIconMap, buildingAmenityIconProps } from "@/lib/building-amenity-icons";
+import {
+  cardAccentLabel,
+  cardAmenityLabel,
+  cardAreaLabel,
+  cardReportLink,
+} from "@/lib/brand-typography";
 
 const comparisonPoints = [
   { title: "Amenities", icon: Building2 },
@@ -43,45 +49,59 @@ function BuildingWatchlistCard({ building }: { building: TrackedBuilding }) {
   const reportAvailable = hasBuildingReport(building.slug);
 
   return (
-    <article className="building-watchlist-card flex aspect-video w-full flex-col overflow-hidden border border-brand-champagne/25 bg-brand-midnight">
-      <div className="grid min-h-0 flex-1 grid-cols-[0.44fr_0.56fr]">
-        <div className="flex flex-col justify-center bg-brand-midnight px-5 py-5 text-brand-ivory sm:px-6 sm:py-6">
-          <h2 className="font-serif text-[1.35rem] font-semibold leading-[1.08] tracking-[0.01em] sm:text-2xl md:text-[1.65rem]">
-            {building.name}
-          </h2>
-          <p className={`mt-4 sm:mt-5 ${cardAreaLabel}`}>{building.area}</p>
-          <div className="mt-5 border-t border-brand-ivory/10 pt-4 sm:mt-6">
-            <p className="text-[0.58rem] font-medium uppercase tracking-[0.18em] text-brand-ivory/48">
-              {building.price.label}
-            </p>
-            <p className="mt-1 font-serif text-base font-medium leading-snug text-brand-ivory/82 sm:text-lg md:text-xl">
-              {building.price.value}
-            </p>
+    <article className="building-watchlist-card flex min-h-[480px] w-full flex-col overflow-hidden border border-brand-champagne/25 bg-brand-midnight">
+      <div className="grid min-h-0 flex-1 grid-cols-1 sm:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)]">
+        <div className="flex flex-col justify-between bg-brand-midnight px-7 py-8 text-brand-ivory lg:px-8">
+          <div>
+            <h2 className="font-serif text-[1.35rem] font-semibold leading-[1.08] tracking-[0.01em] sm:text-2xl md:text-[1.65rem]">
+              {building.name}
+            </h2>
+            <p className={`mt-5 ${cardAreaLabel}`}>{building.area}</p>
+            <div className="mt-6 border-t border-brand-ivory/10 pt-5">
+              <p className="text-[0.58rem] font-medium uppercase tracking-[0.18em] text-brand-ivory/48">
+                {building.price.label}
+              </p>
+              <p className="mt-1.5 font-serif text-base font-medium leading-snug text-brand-ivory/88 sm:text-lg md:text-xl">
+                {building.price.value}
+              </p>
+            </div>
+            <ul className="mt-6 grid grid-cols-4 gap-x-2 gap-y-5">
+              {building.amenities.map((amenity) => {
+                const Icon = buildingAmenityIconMap[amenity.key];
+                return (
+                  <li key={amenity.key} className="flex flex-col items-center gap-2.5 text-center">
+                    <Icon {...buildingAmenityIconProps} aria-hidden />
+                    <span className={cardAmenityLabel}>{amenity.label}</span>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>
-        <div className="relative min-h-0">
+        <div className="relative aspect-[4/3] w-full bg-brand-midnight sm:aspect-auto sm:min-h-full sm:h-full">
           <img
             src={`/buildings/thumbs/${building.slug}.webp`}
             alt={`${building.name} in ${building.area}, Manhattan`}
-            className="absolute inset-0 h-full w-full object-cover object-center saturate-[0.92]"
+            className="absolute inset-0 h-full w-full object-cover object-center brightness-[0.97] contrast-[1.03] saturate-[0.9]"
             loading="lazy"
             decoding="async"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.18)_0%,transparent_24%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.22)_0%,transparent_30%)]" />
         </div>
       </div>
-      <div className="shrink-0 border-t border-brand-ivory/12 bg-brand-midnight px-5 py-3 sm:px-6">
+      <div className="shrink-0 border-t border-brand-ivory/12 bg-brand-midnight px-7 py-4 lg:px-8">
         <p className={cardAccentLabel}>Known For</p>
-        <p className="mt-2 text-[0.62rem] leading-relaxed tracking-[0.04em] text-brand-ivory/72">
+        <p className="mt-2.5 text-[0.62rem] leading-relaxed tracking-[0.04em] text-brand-ivory/76">
           {building.knownFor.join(" · ")}
         </p>
       </div>
       {reportAvailable ? (
-        <div className="border-t border-brand-ivory/12 bg-brand-midnight px-5 py-3 sm:px-6">
-          <Link href={`/buildings/${building.slug}/report`}>
-            <span className={cardReportLink}>Read Building Report →</span>
-          </Link>
-        </div>
+        <Link
+          href={`/buildings/${building.slug}/report`}
+          className="flex min-h-[60px] items-center border-t border-brand-ivory/12 bg-brand-midnight px-7 transition hover:bg-brand-ivory/[0.04] lg:px-8"
+        >
+          <span className={cardReportLink}>Read Building Report →</span>
+        </Link>
       ) : null}
     </article>
   );
