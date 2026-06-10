@@ -1,20 +1,15 @@
-import { BookOpen, Building2, Compass, MapPin, Search, UserRound } from "lucide-react";
+import { Building2, Compass, MapPin, Search, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import { hasBuildingReport } from "@/data/building-reports";
 import { type TrackedBuilding, trackedBuildings } from "@/data/buildings";
-import { buildingAmenityIconMap, buildingAmenityIconProps } from "@/lib/building-amenity-icons";
 import {
-  cardAmenityLabel,
   cardBuildingName,
-  cardEditorialIndex,
-  cardKnownForLabel,
-  cardKnownForText,
+  cardHighlight,
   cardNeighborhood,
-  cardPriceLabel,
   cardPriceValue,
-  cardReportCta,
+  cardReportLink,
 } from "@/lib/brand-typography";
 
 const comparisonPoints = [
@@ -53,67 +48,48 @@ const reports = [
 const watchlistImageClass =
   "absolute inset-0 h-full w-full object-cover object-center saturate-[0.9] contrast-[1.03]";
 
-function BuildingWatchlistCard({ building, index }: { building: TrackedBuilding; index: number }) {
+function BuildingWatchlistCard({ building }: { building: TrackedBuilding }) {
   const reportAvailable = hasBuildingReport(building.slug);
 
   return (
-    <article className="building-watchlist-card flex min-h-[560px] w-full flex-col overflow-hidden border border-brand-champagne/25 bg-brand-midnight">
-      <div className="grid min-h-0 flex-1 grid-cols-1 sm:grid-cols-[minmax(0,52fr)_minmax(0,48fr)]">
-        <div className="flex flex-col bg-brand-midnight px-7 py-9 text-brand-ivory lg:px-8 lg:py-10">
-          <p className={cardEditorialIndex}>No. {String(index + 1).padStart(2, "0")}</p>
-          <h2 className={`mt-4 ${cardBuildingName}`}>{building.name}</h2>
-          <p className={`mt-6 ${cardNeighborhood}`}>{building.area}</p>
-          <div className="mt-10">
-            <p className={cardPriceLabel}>{building.price.label}</p>
-            <p className={`mt-2 ${cardPriceValue}`}>{building.price.value}</p>
-          </div>
-          <ul className="mt-9 grid grid-cols-4 gap-x-1 gap-y-1">
-            {building.amenities.map((amenity) => {
-              const Icon = buildingAmenityIconMap[amenity.key];
-              return (
-                <li key={amenity.key} className="flex flex-col items-center gap-2.5 text-center">
-                  <Icon {...buildingAmenityIconProps} aria-hidden />
-                  <span className={cardAmenityLabel}>{amenity.label}</span>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <div className="relative aspect-[4/3] w-full bg-brand-midnight sm:aspect-auto sm:h-full sm:min-h-full">
-          <img
-            src={`/buildings/thumbs/${building.slug}.webp`}
-            alt={`${building.name} in ${building.area}, Manhattan`}
-            className={watchlistImageClass}
-            loading="lazy"
-            decoding="async"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.2)_0%,transparent_28%)]" />
-        </div>
+    <article className="building-watchlist-card grid w-full overflow-hidden border border-brand-champagne/25 bg-brand-midnight sm:grid-cols-[minmax(0,55fr)_minmax(0,45fr)]">
+      <div className="flex flex-col justify-center px-6 py-5 text-brand-ivory lg:px-7 lg:py-6">
+        <h2 className={cardBuildingName}>{building.name}</h2>
+        <p className={cardNeighborhood}>{building.area}</p>
+        <p className={cardPriceValue}>{building.price.value}</p>
+        <ul className="mt-3 space-y-0.5">
+          {building.knownFor.map((item) => (
+            <li key={item} className={cardHighlight}>
+              {item}
+            </li>
+          ))}
+        </ul>
+        {reportAvailable ? (
+          <>
+            <div className="mt-4 h-px w-12 bg-brand-hero-champagne/28" aria-hidden />
+            <Link href={`/buildings/${building.slug}/report`} className={cardReportLink}>
+              Read Report →
+            </Link>
+          </>
+        ) : null}
       </div>
-      <div className="shrink-0 border-t border-brand-ivory/10 bg-brand-midnight px-7 py-7 lg:px-8 lg:py-8">
-        <p className={cardKnownForLabel}>Known For</p>
-        <p className={cardKnownForText}>{building.knownFor.join(" · ")}</p>
+      <div className="relative aspect-[5/4] w-full bg-brand-midnight sm:aspect-auto sm:min-h-[168px]">
+        <img
+          src={`/buildings/thumbs/${building.slug}.webp`}
+          alt={`${building.name} in ${building.area}, Manhattan`}
+          className={watchlistImageClass}
+          loading="lazy"
+          decoding="async"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.18)_0%,transparent_32%)]" />
       </div>
-      {reportAvailable ? (
-        <Link
-          href={`/buildings/${building.slug}/report`}
-          className="group flex min-h-[78px] items-center justify-between border-t border-brand-champagne/30 bg-brand-ivory px-7 transition hover:bg-[#f7f3ea] lg:px-8"
-        >
-          <span className={cardReportCta}>Read Building Report →</span>
-          <BookOpen
-            className="h-5 w-5 shrink-0 text-brand-champagne-dark/70 transition group-hover:text-brand-champagne-dark"
-            strokeWidth={1.35}
-            aria-hidden
-          />
-        </Link>
-      ) : null}
     </article>
   );
 }
 
 export default function Buildings() {
   return (
-    <main className="min-h-screen bg-brand-ivory text-brand-graphite">
+    <main className="min-h-screen bg-brand-surface text-brand-graphite">
       <section className="bg-brand-midnight px-6 py-16 text-brand-ivory lg:px-10 lg:py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_0.75fr] lg:items-end">
           <div>
@@ -144,8 +120,8 @@ export default function Buildings() {
         </div>
       </section>
 
-      <section className="bg-[#f3f2ee] px-6 py-14 lg:px-10 lg:py-16">
-        <div className="mx-auto max-w-7xl">
+      <section className="brand-surface-intelligence px-6 py-14 lg:px-10 lg:py-16">
+        <div className="relative z-[1] mx-auto max-w-7xl">
           <p className="mb-6 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Lens</p>
           <div className="grid gap-4 md:grid-cols-3">
             {comparisonPoints.map((point) => (
@@ -158,8 +134,8 @@ export default function Buildings() {
         </div>
       </section>
 
-      <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10 lg:py-16">
-        <div className="mx-auto max-w-7xl">
+      <section className="brand-surface-intelligence border-t border-brand-midnight/10 px-6 py-14 lg:px-10 lg:py-16">
+        <div className="relative z-[1] mx-auto max-w-7xl">
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Research</p>
           <h2 className="font-serif text-4xl font-semibold text-brand-midnight">What We Study</h2>
           <div className="mt-4 max-w-2xl space-y-3 text-base leading-7 text-brand-graphite/72">
@@ -181,18 +157,18 @@ export default function Buildings() {
         </div>
       </section>
 
-      <section className="border-t border-brand-midnight/10 bg-[#f3f2ee] px-6 pb-16 lg:px-10 lg:pb-20">
-        <div className="mx-auto max-w-7xl pt-10">
+      <section className="brand-surface-intelligence border-t border-brand-midnight/10 px-6 pb-16 lg:px-10 lg:pb-20">
+        <div className="relative z-[1] mx-auto max-w-7xl pt-10">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-7">
-            {trackedBuildings.map((building, index) => (
-              <BuildingWatchlistCard key={building.name} building={building} index={index} />
+            {trackedBuildings.map((building) => (
+              <BuildingWatchlistCard key={building.name} building={building} />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10 lg:py-16">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 border border-brand-champagne/35 bg-white p-6 shadow-[0_2px_22px_rgba(15,23,42,0.05)] md:flex-row md:items-center md:justify-between lg:p-8">
+      <section className="brand-surface-intelligence border-t border-brand-midnight/10 px-6 py-14 lg:px-10 lg:py-16">
+        <div className="relative z-[1] mx-auto flex max-w-7xl flex-col gap-6 border border-brand-champagne/35 bg-brand-ivory p-6 shadow-[0_2px_22px_rgba(15,23,42,0.05)] md:flex-row md:items-center md:justify-between lg:p-8">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Next Step</p>
             <h2 className="mt-2 font-serif text-3xl font-semibold text-brand-midnight">Request A Building Shortlist</h2>

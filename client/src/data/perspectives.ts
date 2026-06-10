@@ -240,6 +240,10 @@ export function getRecentPerspectives(count = 3): Perspective[] {
     .slice(0, count);
 }
 
+export function hasRelatedPerspective(buildingSlug: string): boolean {
+  return perspectives.some((p) => p.relatedBuildingReportSlug === buildingSlug);
+}
+
 export function formatPerspectiveDate(isoDate: string): string {
   return new Date(isoDate).toLocaleDateString("en-US", {
     month: "long",

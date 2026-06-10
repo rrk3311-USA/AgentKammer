@@ -16,7 +16,7 @@ Do not hotlink external URLs in markup.
 | `manhattan-west` | Manhattan West |
 | `the-cortland` | The Cortland |
 | `waterline-square` | Waterline Square |
-| `the-avery` | The Avery |
+| `the-avery` | EŌS (100 W 31st) |
 | `one-manhattan-square` | One Manhattan Square |
 | `tribeca-green` | Tribeca Green |
 | `one-madison` | One Madison |
@@ -24,8 +24,8 @@ Do not hotlink external URLs in markup.
 | `220-central-park-south` | 220 Central Park South |
 | `432-park-avenue` | 432 Park Avenue |
 | `brookfield-place` | Brookfield Place |
-| `hudson-yards-residences` | Hudson Yards Residences (Lyra NYC, 555 W 38th) |
-| `the-symone` | The Symoné (West Chelsea proxy: 606 W 30th until press photo) |
+| `hudson-yards-residences` | Lyra (555 W 38th) |
+| `the-symone` | 606 West 30th |
 
 ## Sourcing notes
 
