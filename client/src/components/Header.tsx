@@ -5,10 +5,11 @@ import { useState } from "react";
 import { AgentKammerHorizontalLogo } from "@/components/AgentKammerHorizontalLogo";
 
 const navLinks = [
+  { label: "Buy", href: "/buy" },
+  { label: "Sell", href: "/sell" },
   { label: "Lease", href: "/lease" },
-  { label: "Buy / Sell", href: "/buy-sell" },
   { label: "Buildings", href: "/buildings" },
-  { label: "Perspectives", href: "/perspectives" },
+  { label: "Intelligence", href: "/intelligence" },
   { label: "About", href: "/about" },
 ];
 
@@ -35,9 +36,9 @@ export function Header() {
           </nav>
 
           <div className="hidden shrink-0 lg:block">
-            <Link href="/profile">
+            <Link href="/contact">
               <Button variant="brand" className="whitespace-nowrap">
-                Curate Matches
+                Schedule Call
               </Button>
             </Link>
           </div>
@@ -66,9 +67,9 @@ export function Header() {
                 </span>
               </Link>
             ))}
-            <Link href="/profile">
+            <Link href="/contact">
               <Button variant="brand" className="mt-2 w-full">
-                Curate Matches
+                Schedule Call
               </Button>
             </Link>
           </nav>

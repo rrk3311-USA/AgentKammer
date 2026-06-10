@@ -1,89 +1,35 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import heroBackground from "@assets/generated_images/manhattan/rooftop-terrace-lifestyle-hero.png";
-import rooftopPoolWtc from "@assets/generated_images/manhattan/rooftop-pool-wtc.png";
-import { trackedBuildings } from "@/data/buildings";
-import { getRecentPerspectives } from "@/data/perspectives";
-import { PerspectiveCard } from "@/components/PerspectiveCard";
-
-/*
- * BUILDING_IMAGE_RULE
- * Buildings We Follow images must be LOCAL ONLY — served from client/public/buildings/
- * as /buildings/{slug}.jpg. Hardcode paths in this file; never hotlink http(s) URLs,
- * Wikimedia, stock sites, or @assets/manhattan imports in building card src attributes.
- *
- * Sourcing (download to public/buildings/ first, then reference locally):
- *   1. Official developer / building marketing galleries
- *   2. Architectural press (ArchDaily, Dezeen, NY YIMBY)
- *   3. Editorial photography (Wikimedia Commons CC — store locally, do not hotlink)
- *
- * Never: generic skyline, stock apartment interiors, unrelated buildings, AI substitutes.
- * Image accuracy over variety. Exterior architecture focus; cards use aspect-[4/5] object-cover.
- *
- * Remaining gap:
- * - the-symone.jpg — 606 West 30th Street (West Chelsea proxy; no Symoné press photo yet)
- */
+import { featuredBuildings, intelligenceReportTopics } from "@/data/featured-buildings";
+import { hasBuildingReport } from "@/data/building-reports";
+import { usePageMetadata } from "@/hooks/usePageMetadata";
+import { eyebrowOnDark, eyebrowOnLight } from "@/lib/brand-typography";
+import { Building2, Compass, FileText } from "lucide-react";
 
 const sectionHeadline = "font-serif text-3xl font-semibold md:text-4xl lg:text-[2.65rem]";
-const eyebrowOnLight = "mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne-dark";
-const eyebrowOnDark = "mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-hero-champagne";
 
-const featuredBuildings = trackedBuildings.slice(0, 6);
-const recentPerspectives = getRecentPerspectives(3);
+const whatWeDo = [
+  {
+    title: "Building Intelligence",
+    text: "In-depth research covering architecture, ownership, amenities, market positioning, pricing trends, and competitive context.",
+    icon: Building2,
+  },
+  {
+    title: "Buyer Advisory",
+    text: "Guidance for buyers evaluating opportunities across Manhattan's premier residential buildings.",
+    icon: Compass,
+  },
+  {
+    title: "Seller Positioning",
+    text: "Strategic market positioning for owners seeking maximum exposure and informed pricing decisions.",
+    icon: FileText,
+  },
+];
 
-const relocationCriteria = ["Timing", "Tribe", "Building", "Neighborhood", "Commute", "Amenities", "Budget", "Networking"];
-
-function StylizedPhoto({
-  src,
-  alt,
-  objectPosition = "center",
-  className = "",
-  fadeEdge,
-  fadeColor = "ivory",
-  fadeStrength = 1,
-  tone = "light",
-}: {
-  src: string;
-  alt: string;
-  objectPosition?: string;
-  className?: string;
-  fadeEdge?: "left" | "right";
-  fadeColor?: "ivory" | "white";
-  fadeStrength?: number;
-  tone?: "light" | "dark";
-}) {
-  const sectionColor = fadeColor === "white" ? "255,255,255" : "246,243,235";
-  const fade = (alpha: number) => Math.min(1, Math.max(0, alpha * fadeStrength));
-  const edgeFade =
-    fadeEdge === "right"
-      ? `linear-gradient(90deg, rgba(${sectionColor},0) 0%, rgba(${sectionColor},${fade(0.15)}) 42%, rgba(${sectionColor},${fade(0.72)}) 72%, rgba(${sectionColor},${fade(1)}) 100%)`
-      : fadeEdge === "left"
-        ? `linear-gradient(90deg, rgba(${sectionColor},${fade(1)}) 0%, rgba(${sectionColor},${fade(0.72)}) 28%, rgba(${sectionColor},${fade(0.15)}) 58%, rgba(${sectionColor},0) 100%)`
-        : undefined;
-  const toneOverlay =
-    tone === "light"
-      ? "linear-gradient(180deg, rgba(15,23,42,0.04) 0%, rgba(15,23,42,0.14) 100%)"
-      : "linear-gradient(180deg, rgba(15,23,42,0.35) 0%, rgba(15,23,42,0.72) 100%)";
-
-  return (
-    <div className={`relative w-full overflow-hidden ${className}`}>
-      <img
-        src={src}
-        alt={alt}
-        className="block h-auto w-full saturate-[0.88] contrast-[1.04]"
-        style={objectPosition !== "center" ? { objectPosition } : undefined}
-        loading="lazy"
-      />
-      <div className="pointer-events-none absolute inset-0" style={{ background: toneOverlay }} aria-hidden />
-      {edgeFade ? (
-        <div className="pointer-events-none absolute inset-0" style={{ background: edgeFade }} aria-hidden />
-      ) : null}
-    </div>
-  );
-}
-
-function BuildingsFollowStrip() {
+function FeaturedBuildingsStrip() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [thumb, setThumb] = useState({ size: 100, offset: 0, scrollable: false });
 
@@ -121,66 +67,68 @@ function BuildingsFollowStrip() {
         onScroll={updateThumb}
         className="buildings-scroll-strip -mx-6 flex snap-x gap-4 overflow-x-auto px-6 pb-2 lg:mx-0 lg:px-0"
       >
-        {featuredBuildings.map((building) => (
-          <article
-            key={building.name}
-            className="min-w-[280px] snap-start bg-white px-5 shadow-[0_2px_22px_rgba(15,23,42,0.07)] transition duration-300 hover:shadow-[0_6px_30px_rgba(15,23,42,0.11)] sm:min-w-[320px] lg:min-w-[340px]"
-          >
-            <div className="py-4">
-              <div className="flex gap-3">
-                <span className="w-0.5 shrink-0 bg-brand-champagne" aria-hidden />
-                <div>
-                  <p className="font-serif text-xl leading-tight text-brand-midnight">{building.name}</p>
-                  <p className="mt-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-brand-graphite/52">
-                    {building.area}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="pb-5">
-              <div className="flex gap-4">
-                <div className="relative h-24 w-28 shrink-0 overflow-hidden bg-brand-midnight/5">
+        {featuredBuildings.map((building) => {
+          const reportHref = hasBuildingReport(building.slug)
+            ? `/buildings/${building.slug}/report`
+            : "/buildings";
+
+          return (
+            <Link key={building.name} href={reportHref}>
+              <article className="min-w-[300px] snap-start border border-brand-champagne/30 bg-white shadow-[0_2px_22px_rgba(15,23,42,0.06)] transition hover:shadow-[0_6px_30px_rgba(15,23,42,0.1)] sm:min-w-[340px] lg:min-w-[360px]">
+                <div className="relative h-36 overflow-hidden bg-brand-midnight/5">
                   <img
                     src={`/buildings/thumbs/${building.slug}.webp`}
-                    alt={`${building.name} luxury residential building in ${building.area}, Manhattan`}
-                    width={224}
-                    height={192}
-                    sizes="112px"
-                    className="absolute inset-0 h-full w-full object-cover saturate-[0.9]"
+                    alt={`${building.name} in ${building.area}, Manhattan`}
+                    className="h-full w-full object-cover saturate-[0.9] contrast-[1.03]"
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
-                <div className="pt-1">
-                  <span className="mb-2 block h-px w-8 bg-brand-champagne" aria-hidden />
-                  <p className="text-sm leading-6 text-brand-graphite/72">
-                    A featured building from the private watchlist.
+                <div className="px-5 py-5">
+                  <h3 className="font-serif text-xl leading-tight text-brand-midnight">{building.name}</h3>
+                  <p className="mt-1 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-brand-graphite/52">
+                    {building.area}
                   </p>
+                  <ul className="mt-4 space-y-1 font-serif text-sm leading-snug text-brand-graphite/74">
+                    <li>{building.architecture}</li>
+                    <li>{building.lifestyle}</li>
+                    <li>{building.ownership}</li>
+                    <li>{building.marketPosition}</li>
+                  </ul>
                 </div>
-              </div>
-            </div>
-          </article>
-        ))}
+              </article>
+            </Link>
+          );
+        })}
       </div>
-      <div className="mt-4 h-1.5 w-full bg-brand-midnight/10" aria-hidden>
-        <div
-          className="h-full bg-gradient-to-r from-brand-champagne/85 to-brand-champagne transition-[margin-left,width] duration-100 ease-out"
-          style={{ width: `${thumb.size}%`, marginLeft: `${thumb.offset}%` }}
-        />
-      </div>
+      {thumb.scrollable ? (
+        <div className="mt-4 h-1.5 w-full bg-brand-midnight/10" aria-hidden>
+          <div
+            className="h-full bg-gradient-to-r from-brand-champagne/85 to-brand-champagne transition-[margin-left,width] duration-100 ease-out"
+            style={{ width: `${thumb.size}%`, marginLeft: `${thumb.offset}%` }}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }
 
 export default function Home() {
+  usePageMetadata({
+    title: "Modern Manhattan Residential Intelligence | Agent Kammer",
+    description:
+      "Research, analysis, and strategic guidance across a curated collection of Manhattan's most significant residential buildings.",
+    path: "/",
+  });
+
   return (
     <main className="bg-brand-ivory text-brand-graphite">
       {/* 1. Hero */}
       <section className="relative min-h-[85vh] overflow-hidden bg-brand-midnight text-brand-ivory">
         <img
           src={heroBackground}
-          alt="Luxury Manhattan rooftop terrace with skyline views at dusk"
-          className="absolute inset-0 h-full w-full object-cover opacity-92"
+          alt="Manhattan residential tower and skyline at dusk"
+          className="absolute inset-0 h-full w-full object-cover opacity-90"
           style={{ objectPosition: "82% 44%" }}
           loading="eager"
         />
@@ -194,228 +142,129 @@ export default function Home() {
         <div className="relative mx-auto flex min-h-[calc(85vh-96px)] max-w-7xl flex-col justify-start px-6 pb-16 pt-16 lg:px-10 lg:pb-20 lg:pt-[4.5rem]">
           <div className="flex max-w-xl flex-col lg:max-w-2xl">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">
-              Modern Manhattan Luxury
+              Modern Manhattan Residential Intelligence
             </p>
             <h1
               id="home-hero-title"
-              className="font-serif text-4xl font-semibold leading-[1.1] text-brand-ivory md:text-5xl lg:text-[3.35rem] lg:leading-[1.08]"
+              className="font-serif text-4xl font-semibold leading-[1.08] text-brand-ivory md:text-5xl lg:text-[3.2rem]"
             >
-              <span className="block">Manhattan Has Thousands of Residences</span>
-              <span className="mt-3 block text-brand-champagne/95">Only a Few Will Be Right For The Way You Live</span>
+              Modern Manhattan Residential Intelligence
             </h1>
-            <p className="mt-5 max-w-xl text-base leading-[1.65] text-brand-ivory/92">
-              Most Manhattan searches begin with apartments. We begin with the building — neighborhood, amenities,
-              commute, and how a client actually wants to live.
+            <p className="mt-5 max-w-xl text-base leading-[1.65] text-brand-ivory/88">
+              Research, analysis, and strategic guidance across a curated collection of Manhattan&apos;s most significant
+              residential buildings.
             </p>
-            <p className="mt-3 max-w-xl text-base leading-[1.65] text-brand-ivory/72">
-              Then lease it, acquire it, or sell it with that clarity.
-            </p>
-            <div className="mt-10 flex flex-col gap-3 sm:mt-12 sm:flex-row">
-              <Link href="/profile">
-                <Button variant="brand">
-                  Curate Matches
-                </Button>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <Link href="/buildings">
+                <Button variant="brand">Explore Buildings</Button>
               </Link>
-              <Link href="/about">
-                <Button variant="brandGhost">
-                  Why Agent Kammer
-                </Button>
+              <Link href="/contact">
+                <Button variant="brandGhost">Schedule Call</Button>
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. Philosophy */}
-      <section className="bg-brand-ivory px-6 py-14 lg:px-10 lg:py-16">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Philosophy</p>
-          <h2 className={`${sectionHeadline} text-brand-midnight`}>Start With the Building, Not the Listing</h2>
-          <p className="mt-6 text-base leading-7 text-brand-graphite/74">
-            Real estate decisions rarely begin with real estate. Most clients arrive with a career change, a relocation,
-            or a new chapter — not a floor plan requirement.
-          </p>
-          <p className="mt-4 text-base leading-7 text-brand-graphite/74">
-            Agent Kammer studies buildings, neighborhoods, and resident fit before residences enter the conversation —
-            then helps clients lease, acquire, or sell with judgment already in place.
-          </p>
-        </div>
-      </section>
-
-      {/* 3. Differentiator */}
-      <section className="bg-white">
-        <div className="mx-auto grid max-w-7xl items-center lg:grid-cols-[1fr_420px] xl:grid-cols-[1fr_520px]">
-          <div className="flex flex-col justify-center px-6 pb-10 pt-5 lg:px-10 lg:pb-12 lg:pt-7 xl:pb-14 xl:pt-9">
-            <h2 className={`${sectionHeadline} text-brand-midnight lg:text-[2.75rem]`}>
-              The Right Building Changes Everything
-            </h2>
-            <p className="mt-6 text-base leading-7 text-brand-graphite/82">
-              Most people search residences. We start by understanding where and how a client wants to live.
-            </p>
-            <p className="mt-4 text-base leading-7 text-brand-graphite/82">
-              That means contextual review first — neighborhood rhythm, building analysis, amenities, commute, and
-              resident fit — before any unit is worth discussing.
-            </p>
-          </div>
-          <StylizedPhoto
-            src="/buildings/lantern-house.jpg"
-            alt="Lantern House terrace overlooking Manhattan"
-            fadeEdge="left"
-            fadeColor="white"
-            fadeStrength={0.62}
-          />
-        </div>
-      </section>
-
-      {/* 4. Buildings We Follow */}
-      <section id="buildings" className="brand-surface-intelligence px-6 py-16 lg:px-10 lg:py-20">
+      {/* 2. What We Do */}
+      <section className="brand-surface-intelligence px-6 py-14 lg:px-10 lg:py-16">
         <div className="relative z-[1] mx-auto max-w-7xl">
-          <div className="grid gap-8 pb-8 lg:grid-cols-[0.82fr_1fr] lg:items-end">
-            <div>
-              <p className={eyebrowOnLight}>Private Watchlist</p>
-              <h2 className={`${sectionHeadline} text-brand-midnight`}>Buildings We Track</h2>
-              <span className="mt-4 block h-px w-10 bg-brand-champagne" aria-hidden />
-            </div>
-            <p className="max-w-xl text-base leading-7 text-brand-graphite/78 lg:justify-self-end">
-              Not a directory. A curated watchlist we monitor through building reports, market perspective, resident
-              experience, and opportunity windows.
-            </p>
-          </div>
-          <div className="mt-10">
-            <BuildingsFollowStrip />
-          </div>
-          <div className="mt-8 flex justify-center">
-            <Link href="/buildings">
-              <Button variant="brandOutline">View Building Watchlist</Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Leasing Today. Buying Tomorrow. */}
-      <section className="border-y border-brand-midnight/10 bg-[#f7f3ea] px-6 py-14 lg:px-10 lg:py-16">
-        <div className="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:gap-14">
-          <div>
-            <p className={eyebrowOnLight}>Long-Term Client Path</p>
-            <h2 className={`${sectionHeadline} text-brand-midnight`}>Leasing Today. Buying Tomorrow.</h2>
-            <div className="mt-5 max-w-xl space-y-3.5 text-base leading-7 text-brand-graphite/76">
-              <p>Many clients enter Manhattan through a luxury lease.</p>
-              <p>Over time, those same clients become buyers, investors, and repeat clients.</p>
-              <p>
-                We support both paths through a curated focus on Manhattan&apos;s premier modern residential buildings.
-              </p>
-            </div>
-          </div>
-          <div className="grid gap-4 border border-brand-champagne/35 bg-brand-ivory/80 p-4 shadow-[0_16px_36px_rgba(15,23,42,0.055)] sm:grid-cols-[1fr_auto_1fr] sm:items-stretch lg:p-5">
-            <div className="border border-brand-midnight/10 bg-white/72 p-5">
-              <p className="text-[0.64rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">Entry Point</p>
-              <p className="mt-3 font-serif text-2xl leading-tight text-brand-midnight">Luxury Lease</p>
-              <p className="mt-3 text-sm leading-6 text-brand-graphite/68">
-                A precise building match for the way a client wants to live now.
-              </p>
-            </div>
-            <div className="hidden items-center justify-center px-1 sm:flex" aria-hidden>
-              <span className="h-px w-10 bg-brand-champagne/55" />
-            </div>
-            <div className="border border-brand-midnight/10 bg-white/72 p-5">
-              <p className="text-[0.64rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">Next Step</p>
-              <p className="mt-3 font-serif text-2xl leading-tight text-brand-midnight">Strategic Ownership</p>
-              <p className="mt-3 text-sm leading-6 text-brand-graphite/68">
-                The same careful judgment carries into purchase, investment, and repeat decisions.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Relocating To Manhattan */}
-      <section className="relative overflow-hidden bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10 lg:py-[4.5rem]">
-        <div className="absolute inset-x-0 top-0 h-px bg-brand-champagne/35" aria-hidden />
-        <div className="relative z-10 mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.92fr_1fr] lg:items-center lg:gap-16">
-          <div className="max-w-2xl">
-            <p className={eyebrowOnDark}>Relocation Advisory</p>
-            <h2 className={`${sectionHeadline} text-brand-ivory`}>Relocating To Manhattan</h2>
-            <p className="mt-6 text-base leading-7 text-brand-ivory/78">
-              Most clients are not searching for an apartment. They are navigating a promotion, relocation, growing
-              family, or new chapter.
-            </p>
-            <p className="mt-4 text-base leading-7 text-brand-ivory/78">
-              The property search comes later — once timing, neighborhood, and lifestyle direction are clear.
-            </p>
-          </div>
-          <div className="max-w-xl lg:justify-self-start">
-            <p className="mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-brand-champagne">
-              We help identify the right:
-            </p>
-            <ul className="grid gap-2.5 sm:grid-cols-2">
-              {relocationCriteria.map((item) => (
-                <li
-                  key={item}
-                  className={`border border-brand-ivory/12 bg-brand-ivory/[0.035] px-4 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-brand-ivory/82 ${
-                    item === "Timing" || item === "Tribe" ? "text-center sm:col-span-2" : ""
-                  }`}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-6 max-w-sm border-l border-brand-champagne/45 pl-5 text-sm leading-6 text-brand-ivory/62">
-              before residences are selected.
-            </p>
-          </div>
-        </div>
-        <div className="pointer-events-none absolute bottom-0 right-0 hidden h-full w-[44%] opacity-85 lg:block" aria-hidden>
-          <img
-            src={rooftopPoolWtc}
-            alt=""
-            className="h-full w-full object-cover saturate-[0.85]"
-            style={{ objectPosition: "82% 78%" }}
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,1)_0%,rgba(15,23,42,0.9)_22%,rgba(15,23,42,0.55)_56%,rgba(15,23,42,0.18)_100%)]" />
-        </div>
-      </section>
-
-      {/* 7. Recent Observations */}
-      <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10 lg:py-16">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 border-b border-brand-midnight/10 pb-8 lg:grid-cols-[0.82fr_1fr] lg:items-end">
-            <div>
-              <p className={eyebrowOnLight}>Perspectives</p>
-              <h2 className={`${sectionHeadline} text-brand-midnight`}>Recent Observations</h2>
-            </div>
-            <p className="max-w-xl text-base leading-7 text-brand-graphite/78 lg:justify-self-end">
-              Notes on buildings, neighborhoods, and Manhattan living — written to clarify decisions, not fill a feed.
-            </p>
-          </div>
+          <p className={eyebrowOnLight}>What We Do</p>
+          <h2 className={`${sectionHeadline} text-brand-midnight`}>Research-Led Residential Advisory</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {recentPerspectives.map((article) => (
-              <PerspectiveCard key={article.slug} article={article} />
+            {whatWeDo.map((item) => (
+              <Card key={item.title} className="rounded-none border border-brand-champagne/35 bg-white/80 p-6 shadow-none">
+                <item.icon className="h-5 w-5 text-brand-champagne-dark" strokeWidth={1.4} />
+                <h3 className="mt-4 font-serif text-2xl font-semibold text-brand-midnight">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-brand-graphite/74">{item.text}</p>
+              </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* 3. Featured Buildings */}
+      <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10 lg:py-16">
+        <div className="mx-auto max-w-7xl">
+          <p className={eyebrowOnLight}>Featured Buildings</p>
+          <h2 className={`${sectionHeadline} text-brand-midnight`}>Buildings Worth Studying</h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-brand-graphite/72">
+            A curated collection — architecture, lifestyle, ownership profile, and market position. Not a listing portal.
+          </p>
+          <FeaturedBuildingsStrip />
           <div className="mt-8 flex justify-center">
-            <Link href="/perspectives">
-              <Button variant="brandOutline">View All Perspectives</Button>
+            <Link href="/buildings">
+              <Button variant="brandOutline">View Full Watchlist</Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 8. Start Your Manhattan Search */}
-      <section className="border-t border-brand-midnight/10 bg-[#f7f3ea] px-6 py-12 text-brand-graphite lg:px-10 lg:py-14">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="bespoke-signature text-[2.85rem] leading-[0.95] md:text-[3.45rem] lg:text-[3.9rem]">
-            Bespoke Matches
-          </h2>
-          <p className="mt-5 text-base leading-7 text-brand-graphite/72">
-            Whether you&apos;re leasing your next residence or acquiring a long-term home, the search begins with
-            understanding where and how you want to live.
+      {/* 4. Building Intelligence Reports */}
+      <section className="brand-surface-intelligence border-t border-brand-midnight/10 px-6 py-14 lg:px-10 lg:py-16">
+        <div className="relative z-[1] mx-auto max-w-7xl">
+          <p className={eyebrowOnLight}>Research Products</p>
+          <h2 className={`${sectionHeadline} text-brand-midnight`}>Building Intelligence Reports</h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-brand-graphite/72">
+            Structured research covering what matters before a transaction — not inventory to browse.
           </p>
-          <Link href="/profile">
-            <Button variant="brand" className="mt-7 normal-case tracking-[0.06em]">
-              Meet your matches
-            </Button>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {intelligenceReportTopics.map((topic) => (
+              <Card
+                key={topic}
+                className="rounded-none border border-brand-graphite/12 bg-white/78 px-5 py-4 shadow-none"
+              >
+                <p className="font-serif text-lg font-semibold text-brand-midnight">{topic}</p>
+              </Card>
+            ))}
+          </div>
+          <div className="mt-8">
+            <Link href="/intelligence">
+              <Button variant="brandOutline">Explore Intelligence</Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Strategy */}
+      <section className="bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10 lg:py-16">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className={eyebrowOnDark}>Strategy</p>
+          <h2 className={`${sectionHeadline} text-brand-ivory`}>
+            Every Transaction Starts With Understanding The Building.
+          </h2>
+          <p className="mt-6 text-base leading-7 text-brand-ivory/78">
+            Superior outcomes come from understanding architecture, ownership, resident profile, and competitive context
+            before listings enter the conversation.
+          </p>
+          <p className="mt-4 text-base leading-7 text-brand-ivory/68">
+            Agent Kammer studies significant buildings first. Representation follows from that clarity.
+          </p>
+          <Link href="/strategy" className="mt-8 inline-block">
+            <Button variant="brandGhost">Our Strategy</Button>
           </Link>
+        </div>
+      </section>
+
+      {/* 6. Buy / Sell Advisory */}
+      <section className="border-t border-brand-midnight/10 bg-[#f7f3ea] px-6 py-12 lg:px-10 lg:py-14">
+        <div className="mx-auto max-w-7xl">
+          <p className={eyebrowOnLight}>Advisory</p>
+          <h2 className="font-serif text-2xl font-semibold text-brand-midnight md:text-3xl">
+            Research-Informed Representation
+          </h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-brand-graphite/72">
+            Concise buyer and seller advisory throughout Manhattan — informed by building intelligence, not listing
+            volume.
+          </p>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <Link href="/buy">
+              <Button variant="brandOutline">Buyer Advisory</Button>
+            </Link>
+            <Link href="/sell">
+              <Button variant="brandOutline">Seller Positioning</Button>
+            </Link>
+          </div>
         </div>
       </section>
     </main>

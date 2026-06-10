@@ -2,13 +2,13 @@ import { Link } from "wouter";
 import logoEmblem from "@assets/agent-kammer-logo-emblem-gold-wreath.png";
 
 const footerLinks = [
+  { label: "Buy", href: "/buy" },
+  { label: "Sell", href: "/sell" },
   { label: "Lease", href: "/lease" },
-  { label: "Buy / Sell", href: "/buy-sell" },
   { label: "Buildings", href: "/buildings" },
-  { label: "Perspectives", href: "/perspectives" },
+  { label: "Intelligence", href: "/intelligence" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-  { label: "Join Manhattan Brief", href: "/perspectives#manhattan-brief" },
+  { label: "Manhattan Brief", href: "/perspectives#manhattan-brief" },
 ];
 
 export function Footer() {
@@ -25,7 +25,9 @@ export function Footer() {
               loading="lazy"
             />
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-brand-ivory">Agent Kammer</p>
-            <p className="mt-2 text-xs uppercase tracking-[0.18em] text-brand-champagne">Modern Manhattan Luxury</p>
+            <p className="mt-2 text-xs uppercase tracking-[0.18em] text-brand-champagne">
+              Modern Manhattan Residential Intelligence
+            </p>
           </div>
 
           <nav className="grid grid-cols-2 gap-x-8 gap-y-3 sm:flex sm:flex-wrap lg:justify-center" aria-label="Footer">

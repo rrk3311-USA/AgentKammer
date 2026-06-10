@@ -4,10 +4,16 @@
     <loc>https://www.agentkammer.com/</loc>
   </url>
   <url>
-    <loc>https://www.agentkammer.com/lease</loc>
+    <loc>https://www.agentkammer.com/buy</loc>
   </url>
   <url>
-    <loc>https://www.agentkammer.com/buy-sell</loc>
+    <loc>https://www.agentkammer.com/sell</loc>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/intelligence</loc>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/strategy</loc>
   </url>
   <url>
     <loc>https://www.agentkammer.com/buildings</loc>

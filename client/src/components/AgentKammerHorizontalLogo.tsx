@@ -5,9 +5,15 @@ interface AgentKammerHorizontalLogoProps {
   className?: string;
   /** `light` = ivory wordmark for dark backgrounds; `default` = standard header */
   variant?: "default" | "light";
+  /** Tagline belongs in hero — off by default in the header */
+  showTagline?: boolean;
 }
 
-export function AgentKammerHorizontalLogo({ className, variant = "default" }: AgentKammerHorizontalLogoProps) {
+export function AgentKammerHorizontalLogo({
+  className,
+  variant = "default",
+  showTagline = false,
+}: AgentKammerHorizontalLogoProps) {
   const isLight = variant === "light";
 
   return (
@@ -22,7 +28,7 @@ export function AgentKammerHorizontalLogo({ className, variant = "default" }: Ag
         className="h-12 w-12 shrink-0 object-contain sm:h-[3.25rem] sm:w-[3.25rem] lg:h-14 lg:w-14"
         loading="eager"
       />
-      <div className="flex flex-col items-center justify-center gap-1 lg:gap-1.5">
+      <div className={cn("flex flex-col items-center justify-center", showTagline && "gap-1 lg:gap-1.5")}>
         <p
           className={cn(
             "whitespace-nowrap font-serif text-[1.35rem] font-semibold leading-none tracking-[0.06em] sm:text-[1.55rem] lg:text-[1.85rem]",
@@ -31,14 +37,16 @@ export function AgentKammerHorizontalLogo({ className, variant = "default" }: Ag
         >
           AGENT KAMMER
         </p>
-        <p
-          className={cn(
-            "whitespace-nowrap text-center text-[0.5625rem] font-semibold uppercase leading-none tracking-[0.2em] sm:text-[0.625rem] lg:text-[0.6875rem] lg:tracking-[0.22em]",
-            isLight ? "text-brand-champagne" : "text-brand-champagne",
-          )}
-        >
-          Modern Manhattan Luxury
-        </p>
+        {showTagline ? (
+          <p
+            className={cn(
+              "whitespace-nowrap text-center text-[0.5625rem] font-semibold uppercase leading-none tracking-[0.2em] sm:text-[0.625rem] lg:text-[0.6875rem] lg:tracking-[0.22em]",
+              isLight ? "text-brand-champagne" : "text-brand-champagne",
+            )}
+          >
+            Modern Manhattan Luxury
+          </p>
+        ) : null}
       </div>
     </div>
   );

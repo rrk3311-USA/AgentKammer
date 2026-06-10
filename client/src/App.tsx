@@ -14,6 +14,10 @@ const Home = lazy(() => import("@/pages/Home"));
 const Lease = lazy(() => import("@/pages/Lease"));
 const Buildings = lazy(() => import("@/pages/Buildings"));
 const BuildingReport = lazy(() => import("@/pages/BuildingReport"));
+const Buy = lazy(() => import("@/pages/Buy"));
+const Sell = lazy(() => import("@/pages/Sell"));
+const Intelligence = lazy(() => import("@/pages/Intelligence"));
+const Strategy = lazy(() => import("@/pages/Strategy"));
 const BuySell = lazy(() => import("@/pages/BuySell"));
 const About = lazy(() => import("@/pages/About"));
 const Perspectives = lazy(() => import("@/pages/Perspectives"));
@@ -57,14 +61,17 @@ function Router() {
       <Route path="/buildings" component={Buildings} />
       <Route path="/perspectives/:slug" component={PerspectiveArticle} />
       <Route path="/perspectives" component={Perspectives} />
-      <Route path="/buy-sell" component={BuySell} />
+      <Route path="/buy" component={Buy} />
+      <Route path="/sell" component={Sell} />
+      <Route path="/intelligence" component={Intelligence} />
+      <Route path="/strategy" component={Strategy} />
+      <Route path="/buy-sell">{() => <Redirect to="/buy" />}</Route>
       <Route path="/about" component={About} />
       <Route path="/profile" component={Profile} />
       <Route path="/contact" component={Contact} />
       <Route path="/new-york-market" component={NewYorkMarket} />
       <Route path="/reverse-buyer-origination" component={ReverseBuyerOrigination} />
       <Route path="/reverse-seller-architecture" component={ReverseSellerOrigination} />
-      <Route path="/strategy">{() => <Redirect to="/buy-sell" />}</Route>
       <Route path="/real-estate">{() => <Redirect to="/buildings" />}</Route>
       <Route component={NotFound} />
     </Switch>
