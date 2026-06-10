@@ -4,7 +4,9 @@ import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import { hasBuildingReport } from "@/data/building-reports";
 import { type TrackedBuilding, trackedBuildings } from "@/data/buildings";
+import { buildingAmenityIconMap, buildingAmenityIconProps } from "@/lib/building-amenity-icons";
 import {
+  cardAmenityLabel,
   cardBuildingName,
   cardEditorialIndex,
   cardKnownForLabel,
@@ -65,6 +67,17 @@ function BuildingWatchlistCard({ building, index }: { building: TrackedBuilding;
             <p className={cardPriceLabel}>{building.price.label}</p>
             <p className={`mt-2 ${cardPriceValue}`}>{building.price.value}</p>
           </div>
+          <ul className="mt-9 grid grid-cols-4 gap-x-1 gap-y-1">
+            {building.amenities.map((amenity) => {
+              const Icon = buildingAmenityIconMap[amenity.key];
+              return (
+                <li key={amenity.key} className="flex flex-col items-center gap-2.5 text-center">
+                  <Icon {...buildingAmenityIconProps} aria-hidden />
+                  <span className={cardAmenityLabel}>{amenity.label}</span>
+                </li>
+              );
+            })}
+          </ul>
         </div>
         <div className="relative aspect-[4/3] w-full bg-brand-midnight sm:aspect-auto sm:h-full sm:min-h-full">
           <img

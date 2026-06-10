@@ -24,3 +24,5 @@ export const cardKnownForText =
   "mt-3 font-serif text-base leading-relaxed tracking-[0.02em] text-brand-ivory/82";
 export const cardReportCta =
   "text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-brand-champagne-dark transition group-hover:text-brand-midnight";
+export const cardAmenityLabel =
+  "text-[0.52rem] font-medium leading-snug tracking-[0.04em] text-brand-ivory/72";
