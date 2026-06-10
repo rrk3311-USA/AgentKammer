@@ -31,6 +31,7 @@ export interface TrackedBuilding {
   area: string;
   slug: string;
   price: BuildingPrice;
+  knownFor: string[];
   amenities: BuildingAmenity[];
 }
 
@@ -40,6 +41,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "Hudson Yards",
     slug: "35-hudson-yards",
     price: { label: "From", value: "$42K/mo" },
+    knownFor: ["Location", "Service", "Scale", "Hudson Yards"],
     amenities: [
       { key: "gym", label: "Fitness Center" },
       { key: "concierge", label: "Concierge" },
@@ -52,6 +54,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "Hudson Yards",
     slug: "15-hudson-yards",
     price: { label: "From", value: "$35K/mo" },
+    knownFor: ["Wellness", "Retail", "Security", "Yards Living"],
     amenities: [
       { key: "pool", label: "Pool" },
       { key: "doorman", label: "Doorman" },
@@ -64,6 +67,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "West Chelsea",
     slug: "one-high-line",
     price: { label: "From", value: "$28K/mo" },
+    knownFor: ["Amenities", "High Line", "Waterfront", "Resort Feel"],
     amenities: [
       { key: "pool", label: "Pool" },
       { key: "gym", label: "Gym" },
@@ -76,6 +80,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "West Chelsea",
     slug: "lantern-house",
     price: { label: "Starting Residence", value: "$32K+" },
+    knownFor: ["Design", "Character", "High Line", "Architecture"],
     amenities: [
       { key: "doorman", label: "Doorman" },
       { key: "park", label: "Park Nearby" },
@@ -88,6 +93,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "SoHo",
     slug: "565-broome",
     price: { label: "From", value: "$26K/mo" },
+    knownFor: ["Privacy", "SoHo", "Minimalism", "Views"],
     amenities: [
       { key: "concierge", label: "Concierge" },
       { key: "gym", label: "Fitness Center" },
@@ -100,6 +106,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "Penn District",
     slug: "manhattan-west",
     price: { label: "From", value: "$30K/mo" },
+    knownFor: ["Transit", "Convenience", "West Side", "Service"],
     amenities: [
       { key: "transit", label: "Transit Close" },
       { key: "gym", label: "Fitness Center" },
@@ -112,6 +119,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "West Side",
     slug: "the-cortland",
     price: { label: "From", value: "$24K/mo" },
+    knownFor: ["Waterfront", "Family", "Park Access", "West Side"],
     amenities: [
       { key: "river-view", label: "River View" },
       { key: "gym", label: "Gym" },
@@ -124,6 +132,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "Upper West Side",
     slug: "waterline-square",
     price: { label: "From", value: "$22K/mo" },
+    knownFor: ["Wellness", "Park", "Family", "Upper West"],
     amenities: [
       { key: "pool", label: "Pool" },
       { key: "park", label: "Park Access" },
@@ -136,6 +145,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "Hell's Kitchen",
     slug: "the-avery",
     price: { label: "Lease Range", value: "$32K–$45K" },
+    knownFor: ["Views", "Service", "Midtown West", "Convenience"],
     amenities: [
       { key: "skyline", label: "Skyline Views" },
       { key: "concierge", label: "Concierge" },
@@ -148,6 +158,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "Two Bridges",
     slug: "one-manhattan-square",
     price: { label: "From", value: "$18K/mo" },
+    knownFor: ["Amenities", "Waterfront", "Value", "Downtown"],
     amenities: [
       { key: "pool", label: "Pool" },
       { key: "lounge", label: "Residents Lounge" },
@@ -160,6 +171,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "Tribeca",
     slug: "tribeca-green",
     price: { label: "Typical Lease", value: "$28K–$38K" },
+    knownFor: ["Neighborhood", "Family", "Quiet", "Tribeca"],
     amenities: [
       { key: "park", label: "Park Nearby" },
       { key: "concierge", label: "Concierge" },
@@ -172,6 +184,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "Flatiron",
     slug: "one-madison",
     price: { label: "Lease Range", value: "$38K–$55K" },
+    knownFor: ["Park Views", "Flatiron", "Service", "Prestige"],
     amenities: [
       { key: "park", label: "Central Park Views" },
       { key: "concierge", label: "Concierge" },
@@ -184,6 +197,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "Midtown",
     slug: "111-west-57",
     price: { label: "Typical Lease", value: "$65K–$95K" },
+    knownFor: ["Design", "Prestige", "Privacy", "Midtown"],
     amenities: [
       { key: "concierge", label: "Concierge" },
       { key: "pool", label: "Pool" },
@@ -196,6 +210,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "Central Park South",
     slug: "220-central-park-south",
     price: { label: "Typical Residence", value: "$95K–$150K" },
+    knownFor: ["Park South", "Service", "Privacy", "Trophy"],
     amenities: [
       { key: "park", label: "Central Park Views" },
       { key: "concierge", label: "Concierge" },
@@ -208,6 +223,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "Midtown",
     slug: "432-park-avenue",
     price: { label: "Typical Residence", value: "$75K–$110K" },
+    knownFor: ["Height", "Views", "Midtown", "Icon"],
     amenities: [
       { key: "skyline", label: "Skyline Views" },
       { key: "concierge", label: "Concierge" },
@@ -220,6 +236,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "Battery Park City",
     slug: "brookfield-place",
     price: { label: "From", value: "$29K/mo" },
+    knownFor: ["Waterfront", "Retail", "FiDi", "Convenience"],
     amenities: [
       { key: "river-view", label: "River View" },
       { key: "shopping", label: "Shopping Nearby" },
@@ -232,6 +249,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "Hudson Yards",
     slug: "hudson-yards-residences",
     price: { label: "From", value: "$33K/mo" },
+    knownFor: ["Yards Access", "Service", "Retail", "Transit"],
     amenities: [
       { key: "gym", label: "Fitness Center" },
       { key: "concierge", label: "Concierge" },
@@ -244,6 +262,7 @@ export const trackedBuildings: TrackedBuilding[] = [
     area: "West Chelsea",
     slug: "the-symone",
     price: { label: "From", value: "$27K/mo" },
+    knownFor: ["Chelsea", "Work-Life", "Service", "Modern"],
     amenities: [
       { key: "concierge", label: "Concierge" },
       { key: "gym", label: "Gym" },

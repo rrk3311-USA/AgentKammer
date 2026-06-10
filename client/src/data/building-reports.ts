@@ -14,6 +14,12 @@ export type BuildingReportFitTier = {
   items: string[];
 };
 
+export type ResidentProfileBar = {
+  label: string;
+  filled: number;
+  total?: number;
+};
+
 export type BuildingReport = {
   slug: string;
   buildingName: string;
@@ -34,6 +40,7 @@ export type BuildingReport = {
     likely: string[];
     lessCommon: string[];
   };
+  residentProfileMix?: ResidentProfileBar[];
   differentiators: BuildingReportDifferentiator[];
   strengths: string[];
   tradeoffs: string[];
@@ -96,6 +103,12 @@ export const buildingReports: BuildingReport[] = [
         "Residents seeking complete privacy",
       ],
     },
+    residentProfileMix: [
+      { label: "Creative", filled: 4 },
+      { label: "Finance", filled: 2 },
+      { label: "Family", filled: 3 },
+      { label: "Investor", filled: 1 },
+    ],
     differentiators: [
       {
         title: "Architecture",

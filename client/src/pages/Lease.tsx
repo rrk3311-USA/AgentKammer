@@ -19,12 +19,12 @@ const leaseApproachSteps = [
   },
   {
     title: "Building",
-    text: "Amenities, resident profile, service level, and long-term fit.",
+    text: "Amenities, resident profile, service level, and overall fit.",
     icon: Building2,
   },
   {
     title: "Residence",
-    text: "Floor plan, light, and layout — once neighborhood and building research are clear.",
+    text: "Floor plan, light, layout, and view — once the larger decisions are clear.",
     icon: Users,
   },
 ];
@@ -46,10 +46,13 @@ export default function Lease() {
           <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-6xl lg:text-7xl">
             Luxury Leasing, Considered Carefully
           </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-brand-ivory/84">
-            Most searches begin with apartments. We begin with the building — then narrow to residences worth
-            considering inside it.
-          </p>
+          <div className="mt-7 max-w-2xl space-y-4 text-lg leading-8 text-brand-ivory/84">
+            <p>Most Manhattan searches begin with apartments.</p>
+            <p>
+              We begin by understanding where and how a client wants to live — then narrow the search to buildings and
+              residences worth considering.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -58,10 +61,11 @@ export default function Lease() {
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Who This Serves</p>
             <h2 className="font-serif text-4xl font-semibold text-brand-midnight">For Clients Entering Manhattan</h2>
-            <p className="mt-5 max-w-md text-base leading-7 text-brand-graphite/72">
-              Leasing is the primary path into the city. People often arrive with a career change, not a property
-              requirement — and want precision, not volume.
-            </p>
+            <div className="mt-5 max-w-md space-y-3 text-base leading-7 text-brand-graphite/72">
+              <p>Most leasing decisions begin with a new role, a relocation, or a major life change.</p>
+              <p>The goal is not to tour the most apartments.</p>
+              <p>The goal is to identify the right environment for the next chapter.</p>
+            </div>
           </div>
           <ul className="grid gap-3">
             {leaseAudiences.map((item) => (
@@ -80,10 +84,10 @@ export default function Lease() {
         <div className="mx-auto max-w-7xl">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Approach</p>
           <h2 className="font-serif text-4xl font-semibold text-brand-midnight">Neighborhood, Building, Residence</h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-brand-graphite/72">
-            The building shapes commute, amenities, neighbors, and resale context. We study that before any floor plan
-            enters the conversation.
-          </p>
+          <div className="mt-4 max-w-2xl space-y-3 text-base leading-7 text-brand-graphite/72">
+            <p>Most apartment searches start at the end of the process.</p>
+            <p>We prefer to start at the beginning.</p>
+          </div>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {leaseApproachSteps.map((step) => (
               <Card key={step.title} className="rounded-none border border-brand-champagne/35 bg-white/78 p-6 shadow-none">
@@ -98,7 +102,9 @@ export default function Lease() {
 
       <section className="bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10 lg:py-16">
         <div className="mx-auto max-w-7xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Comparison</p>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">
+            A Different Starting Point
+          </p>
           <h2 className="font-serif text-4xl font-semibold text-brand-ivory">
             Why Not Simply Contact The Building Directly?
           </h2>
@@ -125,15 +131,15 @@ export default function Lease() {
         </div>
       </section>
 
-      <section className="px-6 py-14 lg:px-10 lg:py-16">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 border border-brand-champagne/35 bg-white/70 p-6 md:flex-row md:items-center md:justify-between lg:p-8">
+      <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10 lg:py-16">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 border border-brand-champagne/35 bg-[#f7f3ea] p-6 md:flex-row md:items-center md:justify-between lg:p-8">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Next Step</p>
-            <h2 className="mt-2 font-serif text-3xl font-semibold text-brand-midnight">Curate your building shortlist.</h2>
-            <p className="mt-3 max-w-xl text-sm leading-6 text-brand-graphite/70">
-              Share timing, neighborhood preferences, and lifestyle context. We narrow the watchlist before residences
-              enter the conversation.
-            </p>
+            <h2 className="mt-2 font-serif text-3xl font-semibold text-brand-midnight">Request A Building Shortlist</h2>
+            <div className="mt-3 max-w-xl space-y-2 text-sm leading-6 text-brand-graphite/70">
+              <p>Share your timing, neighborhood preferences, and lifestyle goals.</p>
+              <p>We identify buildings worth considering before residences enter the conversation.</p>
+            </div>
           </div>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
             <Link href="/profile">

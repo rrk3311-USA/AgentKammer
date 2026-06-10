@@ -1,11 +1,13 @@
 import { Link, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ManhattanBriefSubscribe } from "@/components/ManhattanBriefSubscribe";
+import { ResidentProfileBars } from "@/components/ResidentProfileBars";
 import { PerspectiveContentTag } from "@/components/PerspectiveContentTag";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import {
   formatBuildingReportDate,
   getBuildingReportBySlug,
+  hasBuildingReport,
 } from "@/data/building-reports";
 import { getPerspectiveBySlug } from "@/data/perspectives";
 import NotFound from "@/pages/not-found";
@@ -101,7 +103,8 @@ export default function BuildingReport() {
 
           <section>
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Resident Profile</p>
-            <p className="mt-3 text-sm font-semibold uppercase tracking-[0.14em] text-brand-graphite/62">Likely residents include</p>
+            {report.residentProfileMix ? <ResidentProfileBars bars={report.residentProfileMix} /> : null}
+            <p className="mt-6 text-sm font-semibold uppercase tracking-[0.14em] text-brand-graphite/62">Likely residents include</p>
             <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-7 text-brand-graphite/78">
               {report.residentProfile.likely.map((item) => (
                 <li key={item}>{item}</li>
@@ -211,6 +214,37 @@ export default function BuildingReport() {
           </section>
         </div>
       </article>
+
+      {report.comparables.some((c) => c.slug) ? (
+        <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10">
+          <div className="mx-auto max-w-3xl">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Related Buildings</p>
+            <p className="font-serif text-2xl font-semibold text-brand-midnight">
+              If {report.buildingName} interests you
+            </p>
+            <ul className="mt-6 space-y-4">
+              {report.comparables
+                .filter((c) => c.slug)
+                .map((comp) => (
+                  <li key={comp.name}>
+                    <Link
+                      href={
+                        comp.slug && hasBuildingReport(comp.slug)
+                          ? `/buildings/${comp.slug}/report`
+                          : "/buildings"
+                      }
+                    >
+                      <span className="font-serif text-lg text-brand-midnight transition hover:text-brand-champagne">
+                        {comp.name}
+                      </span>
+                    </Link>
+                    <p className="mt-1 text-sm text-brand-graphite/68">{comp.lines[0]}</p>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
 
       {relatedPerspective ? (
         <section className="border-t border-brand-midnight/10 bg-[#f7f3ea] px-6 py-14 lg:px-10">

@@ -1,10 +1,10 @@
 export const perspectiveContentTypes = [
-  { id: "building", label: "Building", emoji: "🏢" },
-  { id: "neighborhood", label: "Neighborhood", emoji: "📍" },
-  { id: "market-note", label: "Market Note", emoji: "📊" },
-  { id: "relocation", label: "Relocation", emoji: "🚕" },
-  { id: "development", label: "Development", emoji: "🏙" },
-  { id: "lifestyle", label: "Lifestyle", emoji: "🥂" },
+  { id: "building", label: "Building" },
+  { id: "neighborhood", label: "Neighborhood" },
+  { id: "market-note", label: "Market Note" },
+  { id: "relocation", label: "Relocation" },
+  { id: "development", label: "Development" },
+  { id: "lifestyle", label: "Lifestyle" },
 ] as const;
 
 export type PerspectiveContentType = (typeof perspectiveContentTypes)[number]["id"];

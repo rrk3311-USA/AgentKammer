@@ -1,8 +1,23 @@
 # Agent Kammer — Editorial Calendar
 
 **Purpose:** Prevent random publishing. Content quality is now the bottleneck — not the site.  
+**Canonical directive:** `CONTENT_FIRST_DIRECTIVE.md` — overrides framework and feature work until content thresholds are met.  
 **Companion:** `BUILDING_REPORT_TEMPLATE.md` (report structure) · `DESIGN_SYSTEM.md` (visual rules) · `client/src/data/perspectives.ts` (live perspectives)  
 **Positioning:** *Agent Kammer is a Manhattan advisory practice focused on modern residential buildings.*
+
+---
+
+## Architecture Gate (do not bypass)
+
+No new pages, navigation, Building DNA, dashboards, or scoring until:
+
+| Asset | Current | Required |
+|-------|---------|----------|
+| Building Reports | 1 | **5+** |
+| Perspectives | 8 | **10+** |
+| Manhattan Brief issues | 0 | **3+** |
+
+Until then: **write → publish → cross-link.** See `CONTENT_FIRST_DIRECTIVE.md`.
 
 ---
 
@@ -27,7 +42,7 @@
 
 | Type | Format | Cadence | Destination |
 |------|--------|---------|---------------|
-| **Building Report** | Deep interpretation (7 sections) | 1–2 per month | `/buildings/{slug}/report` (future) |
+| **Building Report** | Deep interpretation (14 sections) | 1–2 per month | `/buildings/{slug}/report` |
 | **Neighborhood Report** | Micro-market study | 1 per quarter | Perspectives or PDF |
 | **Perspective** | Observation → Conclusion (5 sections) | 2 per month max | `/perspectives/{slug}` |
 | **Market Note** | Short timing / liquidity read | Monthly (not weekly) | Manhattan Brief + Perspectives |
@@ -35,21 +50,22 @@
 
 ---
 
-## Priority Queue
+## Priority Queue (Phases 1–3)
 
-### Tier 1 — Building Reports (ship first)
+### Phase 1 — Building Reports (ship first)
 
-These differentiate the practice. Each report follows `BUILDING_REPORT_TEMPLATE.md` (8 sections, identical structure).
+These differentiate the practice. Each report follows `BUILDING_REPORT_TEMPLATE.md` — 14 sections, identical structure. Drafts live in `content/building-reports/`.
 
-| Building | Slug | Status | Target | Notes |
-|----------|------|--------|--------|-------|
-| **Lantern House** | `lantern-house` | ✅ Published | Jun 2026 | Chelsea waterfront — flagship report |
-| **One High Line** | `one-high-line` | 🔴 Not started | Q2 2026 | West Chelsea, High Line proximity |
-| **35 Hudson Yards** | `35-hudson-yards` | 🔴 Not started | Q3 2026 | Hudson Yards anchor tower |
-| **15 Hudson Yards** | `15-hudson-yards` | 🔴 Not started | Q3 2026 | Hudson Yards residential tower |
-| **565 Broome** | `565-broome` | 🔴 Not started | Q4 2026 | SoHo modern luxury |
+| # | Building | Slug | Status | Draft file | Notes |
+|---|----------|------|--------|------------|-------|
+| — | **Lantern House** | `lantern-house` | ✅ Published | `lantern-house.md` | Chelsea waterfront — gold standard |
+| 1 | **One High Line** | `one-high-line` | 🟡 Draft shell | `one-high-line.md` | West Chelsea, High Line proximity |
+| 2 | **35 Hudson Yards** | `35-hudson-yards` | 🟡 Draft shell | `35-hudson-yards.md` | Hudson Yards anchor tower |
+| 3 | **15 Hudson Yards** | `15-hudson-yards` | 🟡 Draft shell | `15-hudson-yards.md` | Hudson Yards residential tower |
+| 4 | **565 Broome** | `565-broome` | 🟡 Draft shell | `565-broome.md` | SoHo modern luxury |
+| 5 | **Waterline Square** | `waterline-square` | 🟡 Draft shell | `waterline-square.md` | Upper West Side, park + wellness |
 
-**Report sections (required):** See `BUILDING_REPORT_TEMPLATE.md` — 14 sections (Executive Summary → Bottom Line). Lantern House is the gold standard.  
+**Per-report flywheel (Phase 3):** one Manhattan Brief issue · one linked Perspective · one Instagram carousel.
 
 ---
 
@@ -78,30 +94,41 @@ These differentiate the practice. Each report follows `BUILDING_REPORT_TEMPLATE.
 | Leasing Today, Buying Tomorrow | 🥂 Lifestyle | `leasing-today-buying-tomorrow` | Mar 2026 |
 | The Building Before The Apartment | 🏢 Building | `the-building-before-the-apartment` | Mar 2026 |
 
-#### Pipeline (approved topics — not yet written)
+#### Phase 2 — Perspectives (approved — write next)
 
-| Title (working) | Content type | Question it answers | Target |
-|-----------------|--------------|---------------------|--------|
-| What Concierge Service Actually Means | 🏢 Building | Why doorman quality changes daily life? | Q2 2026 |
-| Why Some Buildings Feel More Valuable Than They Are | 📊 Market Note | What drives perceived value beyond price? | Q2 2026 |
-| Tribeca vs Hudson Yards for Finance Professionals | 📍 Neighborhood | Where should a finance executive actually live? | Q3 2026 |
-| The First 90 Days in Manhattan | 🚕 Relocation | What should relocation clients decide first? | Q3 2026 |
+| # | Title | Suggested slug | Content type | Target |
+|---|-------|----------------|--------------|--------|
+| 1 | Why Some Buildings Feel More Expensive Than They Are | `why-some-buildings-feel-more-expensive-than-they-are` | 🏢 Building | Q2 2026 |
+| 2 | The Quiet Luxury Buildings Of Manhattan | `the-quiet-luxury-buildings-of-manhattan` | 🏢 Building | Q2 2026 |
+| 3 | Why Service Quality Matters More Than Amenities | `why-service-quality-matters-more-than-amenities` | 🏢 Building | Q3 2026 |
+| 4 | What Residents Actually Pay For In Luxury Buildings | `what-residents-actually-pay-for-in-luxury-buildings` | 🥂 Lifestyle | Q3 2026 |
+| 5 | The Difference Between Prestige And Convenience | `the-difference-between-prestige-and-convenience` | 🏢 Building | Q3 2026 |
 
-*Before writing:* confirm the piece answers **one question** and is not a guide or listicle.
+*Before writing:* confirm the piece answers **one question** and is not a guide or listicle. Use Observation → Context → Interpretation → Implication → Conclusion.
+
+#### Backlog (after Phase 2)
+
+| Title (working) | Content type | Question it answers |
+|-----------------|--------------|---------------------|
+| What Concierge Service Actually Means | 🏢 Building | Why doorman quality changes daily life? |
+| Tribeca vs Hudson Yards for Finance Professionals | 📍 Neighborhood | Where should a finance executive actually live? |
+| The First 90 Days in Manhattan | 🚕 Relocation | What should relocation clients decide first? |
 
 ---
 
-### Tier 4 — Market Notes (Manhattan Brief)
+### Phase 3 — Manhattan Brief (content flywheel)
 
-Monthly observations bundled in **Manhattan Brief** newsletter. Short — 300–500 words max.
+Each published Building Report spawns **one** Brief issue (300–500 words). Excerpt Executive Summary or one report section. Not a market recap.
 
-| Month | Topic (working) | Status |
-|-------|-----------------|--------|
-| Jun 2026 | Hudson Yards leasing velocity | 🔴 Planned |
-| Jul 2026 | Tribeca liquidity vs new development | 🔴 Planned |
-| Aug 2026 | Summer relocation window | 🔴 Planned |
+| Issue | Source report | Status |
+|-------|---------------|--------|
+| Brief #1 | Lantern House | 🔴 Planned |
+| Brief #2 | One High Line | 🔴 After Phase 1 #1 |
+| Brief #3 | 35 Hudson Yards | 🔴 After Phase 1 #2 |
 
-Market Notes reuse Perspectives discipline — one observation, one implication. Not market recaps.
+**Threshold:** 3+ Brief issues before evaluating new editorial systems.
+
+**Instagram:** One carousel per report — thesis hook from Executive Summary or one slide per section. Content asset only; no new site features.
 
 ---
 
@@ -138,7 +165,8 @@ Slower is fine. Random is not.
 |---------|-------------|
 | Perspectives | `client/src/data/perspectives.ts` |
 | Building watchlist | `client/src/data/buildings.ts` |
-| Building Reports | `client/src/data/building-reports.ts` · `/buildings/{slug}/report` |
+| Building Reports | `content/building-reports/{slug}.md` · `client/src/data/building-reports.ts` · `/buildings/{slug}/report` |
+| Content directive | `CONTENT_FIRST_DIRECTIVE.md` |
 | Sitemap | `client/public/sitemap.xml` |
 | Newsletter signups | `/api/leads` · `leadSource: "manhattan_brief"` |
 

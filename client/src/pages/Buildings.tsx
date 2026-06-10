@@ -1,34 +1,9 @@
-import type { LucideIcon } from "lucide-react";
-import {
-  Bell,
-  Building2,
-  Car,
-  Coffee,
-  Compass,
-  Dumbbell,
-  Laptop,
-  MapPin,
-  PawPrint,
-  Search,
-  ShieldCheck,
-  ShoppingBag,
-  Sofa,
-  Sun,
-  TrainFront,
-  Trees,
-  UserRound,
-  Waves,
-  Wine,
-} from "lucide-react";
+import { Building2, Compass, MapPin, Search, UserRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import { hasBuildingReport } from "@/data/building-reports";
-import {
-  type BuildingAmenityKey,
-  type TrackedBuilding,
-  trackedBuildings,
-} from "@/data/buildings";
+import { type TrackedBuilding, trackedBuildings } from "@/data/buildings";
 
 const comparisonPoints = [
   { title: "Amenities", icon: Building2 },
@@ -37,32 +12,31 @@ const comparisonPoints = [
 ];
 
 const reports = [
-  { title: "Building Report", text: "Pricing, liquidity, risk, resident fit, and what makes one building worth studying." },
-  { title: "Neighborhood Report", text: "Demand, supply, commute, amenities, and development context by micro-market." },
-  { title: "Opportunity Monitor", text: "Price cuts, stale listings, concessions, and moments where leverage becomes visible." },
-  { title: "Comparable Analysis", text: "Relevant active, pending, and closed comparables translated into decision context." },
-  { title: "Market Context", text: "Inventory, timing, and Manhattan demand perspective around a building shortlist." },
-  { title: "Resident Fit", text: "Who lives there, how the building operates, and whether the profile matches the client." },
+  {
+    title: "Building Report",
+    text: "Pricing, resident profile, strengths, tradeoffs, and what makes a building worth studying.",
+  },
+  {
+    title: "Neighborhood Context",
+    text: "Commute patterns, amenities, development activity, and local character.",
+  },
+  {
+    title: "Comparable Buildings",
+    text: "Relevant alternatives that help place a building in context.",
+  },
+  {
+    title: "Opportunity Monitor",
+    text: "Price reductions, stale inventory, concessions, and potential leverage.",
+  },
+  {
+    title: "Market Perspective",
+    text: "Inventory, timing, and broader Manhattan conditions surrounding a shortlist.",
+  },
+  {
+    title: "Resident Fit",
+    text: "Who tends to thrive there — and who may be better served elsewhere.",
+  },
 ];
-
-const amenityIcons: Record<BuildingAmenityKey, LucideIcon> = {
-  pool: Waves,
-  gym: Dumbbell,
-  "river-view": Building2,
-  concierge: Bell,
-  doorman: UserRound,
-  park: Trees,
-  "wine-room": Wine,
-  lounge: Sofa,
-  security: ShieldCheck,
-  transit: TrainFront,
-  skyline: Sun,
-  valet: Car,
-  "pet-friendly": PawPrint,
-  "work-from-home": Laptop,
-  shopping: ShoppingBag,
-  cafe: Coffee,
-};
 
 function BuildingWatchlistCard({ building }: { building: TrackedBuilding }) {
   const reportAvailable = hasBuildingReport(building.slug);
@@ -97,18 +71,11 @@ function BuildingWatchlistCard({ building }: { building: TrackedBuilding }) {
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.18)_0%,transparent_24%)]" />
         </div>
       </div>
-      <div className="grid shrink-0 grid-cols-4 gap-1 border-t border-brand-ivory/12 bg-brand-midnight px-3 py-2.5 sm:px-5 sm:py-3">
-        {building.amenities.map((amenity) => {
-          const Icon = amenityIcons[amenity.key];
-          return (
-            <div key={amenity.label} className="flex flex-col items-center gap-1.5 text-center">
-              <Icon className="h-4 w-4 text-brand-ivory/95 sm:h-[1.125rem] sm:w-[1.125rem]" strokeWidth={1.5} />
-              <span className="text-[0.5rem] font-medium leading-tight tracking-[0.02em] text-brand-ivory/68 sm:text-[0.54rem]">
-                {amenity.label}
-              </span>
-            </div>
-          );
-        })}
+      <div className="shrink-0 border-t border-brand-ivory/12 bg-brand-midnight px-5 py-3 sm:px-6">
+        <p className="text-[0.56rem] font-semibold uppercase tracking-[0.2em] text-brand-champagne/75">Known For</p>
+        <p className="mt-2 text-[0.62rem] leading-relaxed tracking-[0.04em] text-brand-ivory/72">
+          {building.knownFor.join(" · ")}
+        </p>
       </div>
       {reportAvailable ? (
         <div className="border-t border-brand-ivory/12 bg-brand-midnight px-5 py-3 sm:px-6">
@@ -135,10 +102,17 @@ export default function Buildings() {
             <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-6xl lg:text-7xl">
               Manhattan Buildings Worth Studying
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-brand-ivory/82">
-              A curated Manhattan watchlist with building reports, neighborhood context, opportunity monitoring, and
-              resident fit — supporting the selection process, not replacing it.
+            <p className="mt-6 max-w-2xl font-serif text-xl leading-8 text-brand-champagne/95 md:text-2xl">
+              Not every building deserves the same attention.
             </p>
+            <div className="mt-5 max-w-2xl space-y-4 text-lg leading-8 text-brand-ivory/82">
+              <p>
+                This watchlist focuses on modern Manhattan residential buildings that stand out for design, resident
+                experience, neighborhood placement, and long-term relevance.
+              </p>
+              <p>The goal is not to catalog everything.</p>
+              <p>The goal is to identify buildings worth understanding.</p>
+            </div>
           </div>
           <Card className="rounded-none border border-brand-ivory/14 bg-brand-ivory/[0.04] p-6 text-brand-ivory shadow-none">
             <p className="text-[0.66rem] font-semibold uppercase tracking-[0.22em] text-brand-champagne">
@@ -151,6 +125,7 @@ export default function Buildings() {
 
       <section className="bg-[#f3f2ee] px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-7xl">
+          <p className="mb-6 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Lens</p>
           <div className="grid gap-4 md:grid-cols-3">
             {comparisonPoints.map((point) => (
               <Card key={point.title} className="rounded-none border border-brand-champagne/35 bg-white/72 p-5 shadow-none">
@@ -162,14 +137,17 @@ export default function Buildings() {
         </div>
       </section>
 
-      <section className="border-t border-brand-midnight/10 bg-brand-ivory px-6 py-14 lg:px-10 lg:py-16">
+      <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Research</p>
-          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">What We Study Per Building</h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-brand-graphite/72">
-            These outputs support the watchlist. They are not a separate product — they explain why a building belongs on
-            the list.
-          </p>
+          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">What We Study</h2>
+          <div className="mt-4 max-w-2xl space-y-3 text-base leading-7 text-brand-graphite/72">
+            <p>Every building on this watchlist is evaluated through the same lens.</p>
+            <p>
+              The reports below are not separate products. They explain why a building belongs on the list in the first
+              place.
+            </p>
+          </div>
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {reports.map((item) => (
               <Card key={item.title} className="rounded-none border border-brand-graphite/12 bg-white/78 p-5 shadow-none">
@@ -189,7 +167,23 @@ export default function Buildings() {
               <BuildingWatchlistCard key={building.name} building={building} />
             ))}
           </div>
-          <div className="mt-10 flex justify-center">
+        </div>
+      </section>
+
+      <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10 lg:py-16">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 border border-brand-champagne/35 bg-white p-6 shadow-[0_2px_22px_rgba(15,23,42,0.05)] md:flex-row md:items-center md:justify-between lg:p-8">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Next Step</p>
+            <h2 className="mt-2 font-serif text-3xl font-semibold text-brand-midnight">Request A Building Shortlist</h2>
+            <div className="mt-3 max-w-2xl space-y-2 text-sm leading-6 text-brand-graphite/70">
+              <p>Most clients do not begin with a specific residence.</p>
+              <p>
+                They begin with a budget, a commute, a lifestyle preference, or a major life transition.
+              </p>
+              <p>We help narrow the field before the apartment search begins.</p>
+            </div>
+          </div>
+          <div className="shrink-0">
             <Link href="/profile">
               <Button variant="brand">Curate Matches</Button>
             </Link>
@@ -206,21 +200,27 @@ export default function Buildings() {
               <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40">
                 <Building2 className="mb-2 h-5 w-5 text-brand-champagne" />
                 <h3 className="font-serif text-xl text-brand-ivory">Uptown</h3>
-                <p className="mt-1 text-sm text-brand-ivory/72">Central Park, Upper East Side, and Upper West Side context.</p>
+                <p className="mt-1 text-sm text-brand-ivory/72">
+                  Central Park, the Upper East Side, and the Upper West Side.
+                </p>
               </Card>
             </Link>
             <Link href="/new-york-market">
               <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40">
                 <MapPin className="mb-2 h-5 w-5 text-brand-champagne" />
                 <h3 className="font-serif text-xl text-brand-ivory">Midtown</h3>
-                <p className="mt-1 text-sm text-brand-ivory/72">Hudson Yards, Manhattan West, and core tower inventory.</p>
+                <p className="mt-1 text-sm text-brand-ivory/72">
+                  Hudson Yards, Manhattan West, Billionaires&apos; Row, and core tower inventory.
+                </p>
               </Card>
             </Link>
             <Link href="/new-york-market">
               <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40">
                 <Search className="mb-2 h-5 w-5 text-brand-champagne" />
                 <h3 className="font-serif text-xl text-brand-ivory">Downtown</h3>
-                <p className="mt-1 text-sm text-brand-ivory/72">Tribeca, SoHo, Chelsea, Flatiron, and waterfront context.</p>
+                <p className="mt-1 text-sm text-brand-ivory/72">
+                  Tribeca, SoHo, Chelsea, Flatiron, and waterfront residential districts.
+                </p>
               </Card>
             </Link>
           </div>

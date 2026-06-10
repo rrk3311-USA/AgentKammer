@@ -2,7 +2,7 @@
 
 **Purpose:** Gold-standard structure for every building report. Write once, publish everywhere.  
 **Reference:** `content/building-reports/lantern-house.md` · `client/src/data/building-reports.ts`  
-**Companion:** `EDITORIAL_CALENDAR.md` · `DESIGN_SYSTEM.md`  
+**Companion:** `CONTENT_FIRST_DIRECTIVE.md` · `EDITORIAL_CALENDAR.md` · `DESIGN_SYSTEM.md`  
 **Positioning:** *Agent Kammer is a Manhattan advisory practice focused on modern residential buildings.*
 
 ---
@@ -125,10 +125,11 @@ comparables:
 | # | Building | Slug | Status |
 |---|----------|------|--------|
 | 1 | **Lantern House** | `lantern-house` | ✅ Published |
-| 2 | **One High Line** | `one-high-line` | 🔴 Not started |
-| 3 | **35 Hudson Yards** | `35-hudson-yards` | 🔴 Not started |
-| 4 | **15 Hudson Yards** | `15-hudson-yards` | 🔴 Not started |
-| 5 | **565 Broome** | `565-broome` | 🔴 Not started |
+| 2 | **One High Line** | `one-high-line` | 🟡 Draft shell |
+| 3 | **35 Hudson Yards** | `35-hudson-yards` | 🟡 Draft shell |
+| 4 | **15 Hudson Yards** | `15-hudson-yards` | 🟡 Draft shell |
+| 5 | **565 Broome** | `565-broome` | 🟡 Draft shell |
+| 6 | **Waterline Square** | `waterline-square` | 🟡 Draft shell |
 
 Copy `lantern-house.md`, swap metadata and section copy. Structure stays fixed.
 

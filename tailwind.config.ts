@@ -20,6 +20,7 @@ export default {
           graphite: "#222730",
           champagne: "#D6B45F",
           steel: "#5E718D",
+          surface: "#F3F2EE",
         },
         // Flat / base colors (regular buttons)
         background: "hsl(var(--background) / <alpha-value>)",

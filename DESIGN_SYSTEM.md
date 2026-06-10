@@ -49,7 +49,8 @@ The interface should feel like:
 | `bg-brand-ivory` | Default page canvas |
 | `bg-white` | Contrast strip within ivory pages (e.g. Recent Observations) |
 | `bg-[#f7f3ea]` | Warm secondary section — cards, pathways, continue-reading |
-| `bg-[#f3f2ee]` | Buildings page neutral strip |
+| `bg-[#f3f2ee]` / `brand-surface` | Buildings page neutral strip |
+| `.brand-surface-intelligence` | Warm ruled-paper texture — watchlist / report sections (horizontal rules + champagne wash + fine grain) |
 | `bg-brand-midnight` | Hero, comparison tables, newsletter blocks, relocation |
 
 ### Opacity conventions
@@ -250,11 +251,15 @@ Tone: professional contrast, never combative. No words like "bias."
 
 ### 6.4 Category / filter pills
 
+Component: `ObservationFilterPill` — Monocle / Robb Report tone, not SaaS tabs.
+
 ```
-border px-3 py-2 text-[0.62rem] font-semibold uppercase tracking-[0.14em]
-Active: border-brand-champagne bg-brand-midnight text-brand-ivory
-Inactive: border-brand-champagne/35 bg-white/70 text-brand-graphite/72
+border px-3.5 py-2 text-[0.62rem] font-semibold uppercase tracking-[0.14em]
+Active: border-brand-champagne bg-white text-brand-midnight (subtle inset shadow)
+Inactive: border-brand-champagne/22 bg-transparent text-brand-graphite/58
 ```
+
+No bright filled selected states. Lucide icon + label on Perspectives filters.
 
 ### 6.5 Forms & inputs
 
@@ -349,7 +354,7 @@ ArrowRight icon between steps on lg+
 
 ## 7. Iconography
 
-- Library: **Lucide React** only — no custom icon sets, no emoji in UI chrome (emoji allowed only in Perspective content type tags)
+- Library: **Lucide React** only — no custom icon sets, no emoji in UI chrome
 - Stroke: `strokeWidth={1.5}` – `1.6` (never filled icons in marketing)
 - Size: `h-4 w-4` (inline), `h-5 w-5` (cards), `h-6 w-6` (section icons)
 - Color: `text-brand-champagne` on light, `text-brand-ivory/95` on dark amenity bars
@@ -575,16 +580,16 @@ Located in `client/src/components/ui/`.
 
 ### Perspective content types (required on every article)
 
-| Tag | Emoji | Use for |
-|-----|-------|---------|
-| Building | 🏢 | Tower-specific interpretation, resident profile, building behavior |
-| Neighborhood | 📍 | Micro-market rhythm, placement, block-level context |
-| Market Note | 📊 | Pricing, liquidity, timing, inventory behavior |
-| Relocation | 🚕 | Career moves, commute, entering Manhattan |
-| Development | 🏙 | Urban development, office/residential construction, city trajectory |
-| Lifestyle | 🥂 | Luxury living, proximity, lease-to-buy arcs, daily life |
+| Tag | Lucide | Use for |
+|-----|--------|---------|
+| Building | `Building2` | Tower-specific interpretation, resident profile, building behavior |
+| Neighborhood | `MapPin` | Micro-market rhythm, placement, block-level context |
+| Market Note | `ChartColumn` | Pricing, liquidity, timing, inventory behavior |
+| Relocation | `TrainFront` | Career moves, commute, entering Manhattan |
+| Development | `Landmark` | Urban development, office/residential construction, city trajectory |
+| Lifestyle | `Compass` | Luxury living, proximity, lease-to-buy arcs, daily life |
 
-Component: `PerspectiveContentTag` — champagne border pill, emoji + uppercase label.  
+Component: `PerspectiveContentTag` — champagne border pill, Lucide icon + uppercase label (`perspectiveIconMap`).  
 Data: `client/src/data/perspectives.ts` → `contentType` field.
 
 Filter pills on `/perspectives` use the same six types — not open-ended category lists.

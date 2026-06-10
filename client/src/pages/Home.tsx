@@ -123,17 +123,22 @@ function BuildingsFollowStrip() {
         {featuredBuildings.map((building) => (
           <article
             key={building.name}
-            className="min-w-[280px] snap-start border border-brand-champagne/20 bg-white/58 px-5 transition duration-300 hover:border-brand-champagne/70 sm:min-w-[320px] lg:min-w-[340px]"
+            className="min-w-[280px] snap-start bg-white px-5 shadow-[0_2px_22px_rgba(15,23,42,0.07)] transition duration-300 hover:shadow-[0_6px_30px_rgba(15,23,42,0.11)] sm:min-w-[320px] lg:min-w-[340px]"
           >
             <div className="py-4">
-              <p className="font-serif text-xl leading-tight text-brand-midnight">{building.name}</p>
-              <p className="mt-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-brand-graphite/52">
-                {building.area}
-              </p>
+              <div className="flex gap-3">
+                <span className="w-0.5 shrink-0 bg-brand-champagne" aria-hidden />
+                <div>
+                  <p className="font-serif text-xl leading-tight text-brand-midnight">{building.name}</p>
+                  <p className="mt-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-brand-graphite/52">
+                    {building.area}
+                  </p>
+                </div>
+              </div>
             </div>
             <div className="pb-5">
               <div className="flex gap-4">
-                <div className="relative h-24 w-28 shrink-0 overflow-hidden border border-brand-champagne/20 bg-brand-midnight/5">
+                <div className="relative h-24 w-28 shrink-0 overflow-hidden bg-brand-midnight/5">
                   <img
                     src={`/buildings/thumbs/${building.slug}.webp`}
                     alt={`${building.name} luxury residential building in ${building.area}, Manhattan`}
@@ -145,15 +150,18 @@ function BuildingsFollowStrip() {
                     decoding="async"
                   />
                 </div>
-                <p className="text-sm leading-6 text-brand-graphite/72">
-                  A featured building from the private watchlist.
-                </p>
+                <div className="pt-1">
+                  <span className="mb-2 block h-px w-8 bg-brand-champagne" aria-hidden />
+                  <p className="text-sm leading-6 text-brand-graphite/72">
+                    A featured building from the private watchlist.
+                  </p>
+                </div>
               </div>
             </div>
           </article>
         ))}
       </div>
-      <div className="mt-4 h-1.5 w-full bg-brand-champagne/22" aria-hidden>
+      <div className="mt-4 h-1.5 w-full bg-brand-midnight/10" aria-hidden>
         <div
           className="h-full bg-gradient-to-r from-brand-champagne/85 to-brand-champagne transition-[margin-left,width] duration-100 ease-out"
           style={{ width: `${thumb.size}%`, marginLeft: `${thumb.offset}%` }}
@@ -259,12 +267,13 @@ export default function Home() {
       </section>
 
       {/* 4. Buildings We Follow */}
-      <section id="buildings" className="bg-brand-ivory px-6 py-16 lg:px-10 lg:py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 border-b border-brand-midnight/10 pb-8 lg:grid-cols-[0.82fr_1fr] lg:items-end">
+      <section id="buildings" className="brand-surface-intelligence px-6 py-16 lg:px-10 lg:py-20">
+        <div className="relative z-[1] mx-auto max-w-7xl">
+          <div className="grid gap-8 pb-8 lg:grid-cols-[0.82fr_1fr] lg:items-end">
             <div>
               <p className={eyebrow}>Private Watchlist</p>
               <h2 className={`${sectionHeadline} text-brand-midnight`}>Buildings We Track</h2>
+              <span className="mt-4 block h-px w-10 bg-brand-champagne" aria-hidden />
             </div>
             <p className="max-w-xl text-base leading-7 text-brand-graphite/78 lg:justify-self-end">
               Not a directory. A curated watchlist we monitor through building reports, market perspective, resident
@@ -392,7 +401,7 @@ export default function Home() {
       </section>
 
       {/* 8. Start Your Manhattan Search */}
-      <section className="border-t border-brand-midnight/10 bg-brand-ivory px-6 py-12 text-brand-graphite lg:px-10 lg:py-14">
+      <section className="border-t border-brand-midnight/10 bg-[#f7f3ea] px-6 py-12 text-brand-graphite lg:px-10 lg:py-14">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="bespoke-signature text-[2.85rem] leading-[0.95] md:text-[3.45rem] lg:text-[3.9rem]">
             Bespoke Matches

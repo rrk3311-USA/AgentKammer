@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { getPerspectiveContentTypeMeta, type PerspectiveContentType } from "@/data/perspectives";
+import { perspectiveIconMap, perspectiveIconProps } from "@/lib/perspective-icons";
 
 type PerspectiveContentTagProps = {
   contentType: PerspectiveContentType;
@@ -13,6 +14,7 @@ export function PerspectiveContentTag({
   className,
 }: PerspectiveContentTagProps) {
   const meta = getPerspectiveContentTypeMeta(contentType);
+  const Icon = perspectiveIconMap[contentType];
 
   return (
     <span
@@ -24,7 +26,7 @@ export function PerspectiveContentTag({
         className,
       )}
     >
-      <span aria-hidden="true">{meta.emoji}</span>
+      <Icon {...perspectiveIconProps} aria-hidden />
       {meta.label}
     </span>
   );
