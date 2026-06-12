@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import heroBackground from "@assets/generated_images/manhattan/rooftop-terrace-lifestyle-hero.png";
 import { featuredBuildings, intelligenceReportTopics } from "@/data/featured-buildings";
+import { featuredExecutiveHousingReport } from "@/data/executive-housing-reports";
 import { hasBuildingReport } from "@/data/building-reports";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { eyebrowOnDark, eyebrowOnLight } from "@/lib/brand-typography";
@@ -200,7 +201,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. Building Intelligence Reports */}
+      {/* 4. Executive Housing Report + Building Intelligence */}
+      <section className="border-t border-brand-midnight/10 bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10 lg:py-16">
+        <div className="mx-auto max-w-7xl">
+          <p className={eyebrowOnDark}>Featured Report</p>
+          <h2 className={`${sectionHeadline} text-brand-ivory`}>{featuredExecutiveHousingReport.title}</h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-brand-ivory/82">
+            {featuredExecutiveHousingReport.subtitle}. Syndicated for UK, UAE, Singapore, Hong Kong, and European
+            executive search.
+          </p>
+          <Link href={`/perspectives/reports/${featuredExecutiveHousingReport.slug}`} className="mt-8 inline-block">
+            <Button variant="brand">Read Report</Button>
+          </Link>
+        </div>
+      </section>
+
       <section className="brand-surface-intelligence border-t border-brand-midnight/10 px-6 py-14 lg:px-10 lg:py-16">
         <div className="relative z-[1] mx-auto max-w-7xl">
           <p className={eyebrowOnLight}>Research Products</p>
@@ -219,8 +234,8 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-8">
-            <Link href="/intelligence">
-              <Button variant="brandOutline">Explore Intelligence</Button>
+            <Link href="/perspectives#intelligence">
+              <Button variant="brandOutline">Explore Perspectives</Button>
             </Link>
           </div>
         </div>

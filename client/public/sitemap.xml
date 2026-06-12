@@ -16,7 +16,12 @@
     <loc>https://www.agentkammer.com/lease</loc>
   </url>
   <url>
-    <loc>https://www.agentkammer.com/intelligence</loc>
+    <loc>https://www.agentkammer.com/perspectives/reports/2026-executive-housing-report</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.agentkammer.com/perspectives/reports/2026-executive-housing-report" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.agentkammer.com/perspectives/reports/2026-executive-housing-report" />
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/perspectives/2026-executive-housing-report-for-international-buyers</loc>
   </url>
   <url>
     <loc>https://www.agentkammer.com/strategy</loc>

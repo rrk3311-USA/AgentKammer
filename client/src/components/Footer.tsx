@@ -4,9 +4,9 @@ import logoEmblem from "@assets/agent-kammer-logo-emblem-gold-wreath.png";
 const footerLinks = [
   { label: "Buy", href: "/buy" },
   { label: "Sell", href: "/sell" },
-  { label: "Lease", href: "/lease" },
   { label: "Buildings", href: "/buildings" },
-  { label: "Intelligence", href: "/intelligence" },
+  { label: "Perspectives", href: "/perspectives" },
+  { label: "Lease", href: "/lease" },
   { label: "International", href: "/international" },
   { label: "About", href: "/about" },
   { label: "Manhattan Brief", href: "/perspectives#manhattan-brief" },

@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { intelligenceReportTopics } from "@/data/featured-buildings";
+import { featuredExecutiveHousingReport } from "@/data/executive-housing-reports";
 import { getRecentPerspectives } from "@/data/perspectives";
 import { PerspectiveCard } from "@/components/PerspectiveCard";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
@@ -32,6 +33,27 @@ export default function Intelligence() {
             Research products covering architecture, ownership, resident profile, pricing context, and competitive
             positioning — before any transaction conversation begins.
           </p>
+        </div>
+      </section>
+
+      <section className="border-b border-brand-midnight/10 bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10 lg:py-16">
+        <div className="mx-auto max-w-7xl">
+          <p className={eyebrowOnDark}>Featured Report</p>
+          <h2 className={`${sectionHeadline} text-brand-ivory`}>{featuredExecutiveHousingReport.title}</h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-brand-ivory/82">
+            {featuredExecutiveHousingReport.executiveSummary[0]}
+          </p>
+          <p className="mt-2 text-sm text-brand-champagne">
+            Syndicated internationally · UK · UAE · APAC · Europe
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href={`/intelligence/${featuredExecutiveHousingReport.slug}`}>
+              <Button variant="brand">Read Executive Housing Report</Button>
+            </Link>
+            <Link href="/international">
+              <Button variant="brandGhost">International Advisory</Button>
+            </Link>
+          </div>
         </div>
       </section>
 

@@ -16,7 +16,7 @@ const Buildings = lazy(() => import("@/pages/Buildings"));
 const BuildingReport = lazy(() => import("@/pages/BuildingReport"));
 const Buy = lazy(() => import("@/pages/Buy"));
 const Sell = lazy(() => import("@/pages/Sell"));
-const Intelligence = lazy(() => import("@/pages/Intelligence"));
+const ExecutiveHousingReport = lazy(() => import("@/pages/ExecutiveHousingReport"));
 const Strategy = lazy(() => import("@/pages/Strategy"));
 const BuySell = lazy(() => import("@/pages/BuySell"));
 const About = lazy(() => import("@/pages/About"));
@@ -60,11 +60,13 @@ function Router() {
       <Route path="/lease" component={Lease} />
       <Route path="/buildings/:slug/report" component={BuildingReport} />
       <Route path="/buildings" component={Buildings} />
+      <Route path="/perspectives/reports/:slug" component={ExecutiveHousingReport} />
       <Route path="/perspectives/:slug" component={PerspectiveArticle} />
       <Route path="/perspectives" component={Perspectives} />
       <Route path="/buy" component={Buy} />
       <Route path="/sell" component={Sell} />
-      <Route path="/intelligence" component={Intelligence} />
+      <Route path="/intelligence/:slug">{({ slug }) => <Redirect to={`/perspectives/reports/${slug}`} />}</Route>
+      <Route path="/intelligence">{() => <Redirect to="/perspectives#intelligence" />}</Route>
       <Route path="/strategy" component={Strategy} />
       <Route path="/buy-sell">{() => <Redirect to="/buy" />}</Route>
       <Route path="/about" component={About} />

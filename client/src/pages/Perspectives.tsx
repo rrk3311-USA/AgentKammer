@@ -1,32 +1,47 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "wouter";
 import { PerspectiveCard } from "@/components/PerspectiveCard";
 import { EditorialAccent } from "@/components/EditorialAccent";
+import { FeaturedExecutiveReportCard } from "@/components/FeaturedExecutiveReportCard";
+import { IntelligenceReportsSubscribe } from "@/components/IntelligenceReportsSubscribe";
 import { ManhattanBriefSubscribe } from "@/components/ManhattanBriefSubscribe";
 import { ObservationFilterPill } from "@/components/ObservationFilterPill";
 import { perspectiveIconMap, perspectiveIconProps } from "@/lib/perspective-icons";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
+import { intelligenceHubCategories } from "@/data/intelligence-hub";
 import {
-  featuredPerspective,
   perspectiveContentTypes,
   perspectives,
   type PerspectiveContentType,
 } from "@/data/perspectives";
 
 export default function Perspectives() {
-  const [activeType, setActiveType] = useState<PerspectiveContentType | "All">("All");
+  const [location] = useLocation();
+  const typeParam = new URLSearchParams(window.location.search).get("type");
+  const initialType =
+    typeParam && perspectiveContentTypes.some((t) => t.id === typeParam)
+      ? (typeParam as PerspectiveContentType)
+      : "All";
+  const [activeType, setActiveType] = useState<PerspectiveContentType | "All">(initialType);
+
+  useEffect(() => {
+    const param = new URLSearchParams(window.location.search).get("type");
+    if (param && perspectiveContentTypes.some((t) => t.id === param)) {
+      setActiveType(param as PerspectiveContentType);
+    }
+  }, [location]);
 
   usePageMetadata({
-    title: "Perspectives — Observations From Manhattan",
+    title: "Perspectives — Manhattan Intelligence & Observations",
     description:
-      "Thoughtful notes on Manhattan buildings, neighborhoods, market behavior, relocation, luxury living, and what makes certain residences worth studying.",
+      "Executive Housing Report, building intelligence, neighborhood notes, and relocation guidance for Manhattan's modern residential market.",
     path: "/perspectives",
   });
 
   const filtered =
     activeType === "All"
-      ? perspectives.filter((p) => !p.featured)
-      : perspectives.filter((p) => !p.featured && p.contentType === activeType);
+      ? perspectives.filter((p) => p.slug !== "2026-executive-housing-report-for-international-buyers")
+      : perspectives.filter((p) => p.contentType === activeType);
 
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
@@ -35,40 +50,56 @@ export default function Perspectives() {
         <div className="relative z-[1] mx-auto max-w-7xl">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Perspectives</p>
           <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-6xl lg:text-7xl">
-            Observations From Manhattan
+            Manhattan Intelligence
           </h1>
-          <div className="mt-7 max-w-2xl space-y-4 text-lg leading-8 text-brand-ivory/84">
-            <p>Buildings tell stories. Neighborhoods evolve. Markets shift.</p>
-            <p>
-              The purpose of Perspectives is to document observations about Manhattan living, relocation, luxury
-              residential buildings, and the decisions that shape where people choose to live.
-            </p>
-            <p>
-              Thoughtful notes on buildings, neighborhoods, market behavior, relocation decisions, luxury living, and
-              what makes certain Manhattan residences worth studying.
-            </p>
-          </div>
-          <div className="mt-8">
-            <a href="#manhattan-brief">
-              <Button variant="brand">Subscribe To Manhattan Brief</Button>
-            </a>
-          </div>
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-brand-ivory/84">
+            Executive housing reports, building observations, neighborhood context, and relocation guidance — interpreted
+            with care, not urgency.
+          </p>
         </div>
       </section>
 
-      <section className="border-b border-brand-midnight/10 bg-brand-ivory px-6 py-14 lg:px-10">
+      <section id="intelligence" className="border-b border-brand-midnight/10 bg-[#f7f3ea] px-6 py-14 lg:px-10">
         <div className="mx-auto max-w-7xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Featured</p>
-          <PerspectiveCard article={featuredPerspective} featured />
+          <FeaturedExecutiveReportCard />
+        </div>
+      </section>
+
+      <section className="border-b border-brand-midnight/10 bg-white px-6 py-10 lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Intelligence Library</p>
+          <div className="flex flex-wrap gap-2">
+            {intelligenceHubCategories.map((category) => {
+              const isComingSoon = category.status === "coming-soon";
+              const content = (
+                <span
+                  className={`inline-flex items-center gap-1.5 rounded-sm border px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] ${
+                    category.featured
+                      ? "border-brand-champagne bg-brand-champagne/10 text-brand-midnight"
+                      : "border-brand-graphite/15 text-brand-graphite/78"
+                  } ${isComingSoon ? "opacity-60" : "hover:border-brand-champagne"}`}
+                >
+                  {category.label}
+                  {category.featured ? " ⭐" : null}
+                  {isComingSoon ? " · Soon" : null}
+                </span>
+              );
+
+              return isComingSoon ? (
+                <span key={category.id}>{content}</span>
+              ) : (
+                <Link key={category.id} href={category.href}>
+                  {content}
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </section>
 
       <section className="bg-[#f7f3ea] px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Areas Of Observation</p>
-          <p className="mb-6 max-w-2xl text-sm leading-6 text-brand-graphite/68">
-            Perspectives are observations — not listicles. Each note is tagged by the kind of judgment it offers.
-          </p>
           <div className="flex flex-wrap gap-2">
             <ObservationFilterPill active={activeType === "All"} onClick={() => setActiveType("All")}>
               All
@@ -99,13 +130,13 @@ export default function Perspectives() {
             </div>
           ) : (
             <p className="mt-6 text-base leading-7 text-brand-graphite/68">
-              No perspectives in this category yet. Browse all observations or subscribe to Manhattan Brief for the next
-              note.
+              No perspectives in this category yet.
             </p>
           )}
         </div>
       </section>
 
+      <IntelligenceReportsSubscribe variant="light" className="border-t border-brand-midnight/10" />
       <ManhattanBriefSubscribe />
     </main>
   );

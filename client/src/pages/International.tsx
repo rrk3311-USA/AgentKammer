@@ -5,34 +5,8 @@ import { Link } from "wouter";
 import { PerspectiveCard } from "@/components/PerspectiveCard";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { getInternationalPerspectives } from "@/data/perspectives";
+import { featuredExecutiveHousingReport } from "@/data/executive-housing-reports";
 import { eyebrowOnDark, eyebrowOnLight } from "@/lib/brand-typography";
-
-const targetMarkets = [
-  {
-    region: "United Kingdom",
-    code: "UK",
-    note: "Finance executives relocating from London — building-first research before the first Manhattan tour.",
-    searchTerms: "Manhattan luxury apartments UK buyers · NYC relocation from London",
-  },
-  {
-    region: "United Arab Emirates",
-    code: "UAE",
-    note: "Dubai and Abu Dhabi principals establishing a New York base — pied-à-terre and full-time residence decisions.",
-    searchTerms: "Manhattan property UAE investors · New York luxury real estate Dubai",
-  },
-  {
-    region: "Singapore & Hong Kong",
-    code: "APAC",
-    note: "Asia-Pacific executives comparing Manhattan against other global financial capitals.",
-    searchTerms: "Manhattan condo Singapore buyers · NYC relocation Hong Kong executive",
-  },
-  {
-    region: "Europe",
-    code: "EU",
-    note: "Continental and Nordic clients seeking Manhattan exposure with advisory-led building selection.",
-    searchTerms: "Manhattan luxury real estate European buyers · NYC apartment advisory",
-  },
-];
 
 const sectionHeadline = "font-serif text-3xl font-semibold md:text-4xl lg:text-[2.65rem]";
 
@@ -105,6 +79,19 @@ export default function International() {
         </div>
       </section>
 
+      <section className="border-t border-brand-midnight/10 bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10 lg:py-16">
+        <div className="mx-auto max-w-7xl">
+          <p className={eyebrowOnDark}>2026 Report</p>
+          <h2 className={`${sectionHeadline} text-brand-ivory`}>{featuredExecutiveHousingReport.title}</h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-brand-ivory/82">
+            {featuredExecutiveHousingReport.executiveSummary[0]}
+          </p>
+          <Link href={`/perspectives/reports/${featuredExecutiveHousingReport.slug}`} className="mt-8 inline-block">
+            <Button variant="brand">Read Executive Housing Report</Button>
+          </Link>
+        </div>
+      </section>
+
       <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <p className={eyebrowOnLight}>Priority Markets</p>
@@ -114,18 +101,17 @@ export default function International() {
             perspectives and advisory pages serve global search intent today.
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
-            {targetMarkets.map((market) => (
-              <Card
-                key={market.code}
-                className="rounded-none border border-brand-graphite/12 bg-brand-ivory/50 px-5 py-5 shadow-none"
-              >
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-champagne-dark">
-                  {market.code}
-                </p>
-                <h3 className="mt-2 font-serif text-xl font-semibold text-brand-midnight">{market.region}</h3>
-                <p className="mt-3 text-sm leading-6 text-brand-graphite/72">{market.note}</p>
-                <p className="mt-3 text-xs leading-5 text-brand-graphite/50">{market.searchTerms}</p>
-              </Card>
+            {featuredExecutiveHousingReport.syndication.map((item) => (
+              <Link key={item.code} href={`/perspectives/reports/${featuredExecutiveHousingReport.slug}`}>
+                <Card className="h-full rounded-none border border-brand-graphite/12 bg-brand-ivory/50 px-5 py-5 shadow-none transition hover:border-brand-champagne/50">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-champagne-dark">
+                    {item.code} · 2026 Report
+                  </p>
+                  <h3 className="mt-2 font-serif text-xl font-semibold text-brand-midnight">{item.headline}</h3>
+                  <p className="mt-3 text-sm leading-6 text-brand-graphite/72">{item.excerpt}</p>
+                  <p className="mt-3 text-xs leading-5 text-brand-graphite/50">{item.searchTerms}</p>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>

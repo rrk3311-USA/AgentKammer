@@ -34,6 +34,28 @@ export type Perspective = {
 
 export const perspectives: Perspective[] = [
   {
+    slug: "2026-executive-housing-report-for-international-buyers",
+    title: "The 2026 Executive Housing Report For International Buyers",
+    excerpt:
+      "Manhattan executive housing is a building decision before it is an apartment decision — especially for clients arriving from London, Dubai, Singapore, Hong Kong, and Europe.",
+    contentType: "international",
+    publishedAt: "2026-06-11",
+    readMinutes: 5,
+    markets: ["UK", "UAE", "Singapore", "Hong Kong", "Europe"],
+    sections: {
+      observation:
+        "International executives often request apartment tours before they can name three buildings they would seriously consider. The 2026 market rewards the opposite sequence: building thesis first, unit second.",
+      context:
+        "Agent Kammer's 2026 Executive Housing Report reads Manhattan through relocation, leasing, and acquisition — with explicit attention to how global clients misread co-op exposure, amenity bundles, and neighborhood micro-rhythms.",
+      interpretation:
+        "The report is not a market forecast deck. It is a decision framework: who is moving, which building signals matter, when leasing beats buying, and how international timelines should structure pre-visit research.",
+      implication:
+        "Clients from the UK, UAE, and Asia-Pacific should read the syndicated market angles before booking flights — UK finance commute logic, Gulf pied-à-terre concentration, and APAC comparisons to other financial capitals are indexed separately.",
+      conclusion:
+        "Start with the full report, then schedule advisory if you want a building shortlist mapped to your actual week. Manhattan punishes inventory-first searches — especially across time zones.",
+    },
+  },
+  {
     slug: "studying-manhattan-buildings-before-your-first-visit",
     title: "Studying Manhattan Buildings Before Your First Visit",
     excerpt:

@@ -30,7 +30,8 @@ Agent Kammer is not competing on listing volume. International SEO wins through 
 
 ## What Shipped (Phase 1)
 
-1. **`/international` hub** — market overview, advisory CTA, international perspectives
+1. **`/intelligence/2026-executive-housing-report`** — 2026 Executive Housing Report with UK/UAE/APAC/EU syndication blocks
+2. **`/international` hub** — market overview, advisory CTA, international perspectives
 2. **International content type** on Perspectives (`international` tag + Globe filter)
 3. **Two international perspectives** with `markets[]` metadata for SEO keywords
 4. **hreflang baseline** — `en` + `x-default` on homepage (sitemap + `index.html`)
