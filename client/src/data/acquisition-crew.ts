@@ -14,6 +14,7 @@ export type AdvisoryTeamTier = {
   durationDetail: string;
   complexity: 1 | 2 | 3 | 4;
   roles: string[];
+  buyerProfiles: string[];
 };
 
 export const acquisitionSteps: AcquisitionStep[] = [
@@ -46,11 +47,12 @@ export const advisoryTeamTiers: AdvisoryTeamTier[] = [
     subtitle: "Core coordination",
     teamSize: "3–5",
     risk: "Moderate",
-    riskDetail: "Financing, inspection, and closing coordination",
+    riskDetail: "Financing, inspection, and closing",
     duration: "60–90 days",
-    durationDetail: "Typical contract to close",
+    durationDetail: "Contract to close",
     complexity: 1,
     roles: ["Agent", "Attorney", "Mortgage broker", "Inspector"],
+    buyerProfiles: ["Executive", "Physician", "Entrepreneur"],
   },
   {
     id: "5m-20m",
@@ -58,9 +60,9 @@ export const advisoryTeamTiers: AdvisoryTeamTier[] = [
     subtitle: "Expanded structure",
     teamSize: "5–8",
     risk: "Elevated",
-    riskDetail: "Tax posture, insurance, and entity questions enter early",
+    riskDetail: "Tax, insurance, and entity questions enter early",
     duration: "90–120 days",
-    durationDetail: "More diligence before commitment",
+    durationDetail: "Extended diligence before commitment",
     complexity: 2,
     roles: [
       "Agent",
@@ -70,6 +72,7 @@ export const advisoryTeamTiers: AdvisoryTeamTier[] = [
       "Inspector",
       "Insurance advisor",
     ],
+    buyerProfiles: ["Managing Director", "Founder", "Attorney Partner"],
   },
   {
     id: "20m-50m",
@@ -77,9 +80,9 @@ export const advisoryTeamTiers: AdvisoryTeamTier[] = [
     subtitle: "Full advisory team",
     teamSize: "8–12",
     risk: "High",
-    riskDetail: "Estate, liquidity, renovation, and multi-counsel coordination",
+    riskDetail: "Estate, liquidity, renovation, and multi-counsel exposure",
     duration: "4–6 months",
-    durationDetail: "Structure before offer architecture",
+    durationDetail: "Structure precedes offer architecture",
     complexity: 3,
     roles: [
       "Lead agent",
@@ -92,6 +95,7 @@ export const advisoryTeamTiers: AdvisoryTeamTier[] = [
       "Architect",
       "Interior designer",
     ],
+    buyerProfiles: ["Family Office Principal", "Hedge Fund Partner"],
   },
   {
     id: "50m-plus",
@@ -99,9 +103,9 @@ export const advisoryTeamTiers: AdvisoryTeamTier[] = [
     subtitle: "Institutional scale",
     teamSize: "12–20+",
     risk: "Very high",
-    riskDetail: "International, security, succession, and staffing considerations",
+    riskDetail: "International, security, succession, and staffing exposure",
     duration: "6–12+ months",
-    durationDetail: "Extended planning and phased execution",
+    durationDetail: "Phased planning and execution",
     complexity: 4,
     roles: [
       "Lead agent",
@@ -117,5 +121,6 @@ export const advisoryTeamTiers: AdvisoryTeamTier[] = [
       "Insurance team",
       "Household staffing consultant",
     ],
+    buyerProfiles: ["UHNW Family", "International Principal", "Institutional Buyer"],
   },
 ];
