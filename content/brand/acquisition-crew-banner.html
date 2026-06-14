@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agent Kammer — Advisory Team Overview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --midnight: #0f172a;
+        --sapphire: #18366b;
+        --ivory: #f6f3eb;
+        --graphite: #222730;
+        --champagne: #d6b45f;
+        --champagne-dark: #7a6328;
+        --warm: #f7f3ea;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: #e8e4dc;
+        font-family: Inter, system-ui, sans-serif;
+        color: var(--graphite);
+      }
+
+      .banner {
+        width: 1080px;
+        max-width: 100%;
+        background: var(--ivory);
+        border: 1px solid rgba(214, 180, 95, 0.35);
+        overflow: hidden;
+      }
+
+      .hero {
+        background: var(--midnight);
+        padding: 48px 56px 44px;
+      }
+
+      .eyebrow {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--champagne);
+      }
+
+      .hero h1 {
+        margin-top: 14px;
+        max-width: 820px;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 52px;
+        font-weight: 600;
+        line-height: 1.02;
+        color: var(--ivory);
+      }
+
+      .hero p {
+        margin-top: 18px;
+        max-width: 720px;
+        font-size: 17px;
+        line-height: 1.65;
+        color: rgba(246, 243, 235, 0.9);
+      }
+
+      .panel {
+        background: rgba(24, 54, 107, 0.25);
+        border-top: 1px solid rgba(246, 243, 235, 0.15);
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        border-bottom: 1px solid rgba(246, 243, 235, 0.12);
+        background: rgba(246, 243, 235, 0.06);
+      }
+
+      .step {
+        padding: 18px 14px;
+        border-right: 1px solid rgba(246, 243, 235, 0.1);
+        text-align: left;
+      }
+
+      .step:last-child { border-right: none; }
+
+      .step-num {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        color: var(--champagne);
+      }
+
+      .step-title {
+        margin-top: 6px;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--ivory);
+      }
+
+      .main {
+        padding: 0;
+        background: var(--midnight);
+      }
+
+      .tier {
+        padding: 22px 28px;
+        border-bottom: 1px solid rgba(246, 243, 235, 0.12);
+      }
+
+      .tier-head {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+
+      .tier-band {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 28px;
+        font-weight: 600;
+        color: var(--ivory);
+      }
+
+      .tier-sub {
+        margin-top: 4px;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--champagne);
+      }
+
+      .meta {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+
+      .meta-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--champagne);
+      }
+
+      .meta-value {
+        margin-top: 6px;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--ivory);
+      }
+
+      .meta-detail {
+        margin-top: 4px;
+        font-size: 11px;
+        line-height: 1.45;
+        color: rgba(246, 243, 235, 0.72);
+      }
+
+      .roles {
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(246, 243, 235, 0.12);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .role {
+        font-size: 12px;
+        padding: 7px 11px;
+        border: 1px solid rgba(246, 243, 235, 0.22);
+        background: rgba(15, 23, 42, 0.55);
+        color: rgba(246, 243, 235, 0.92);
+      }
+
+      .footer {
+        padding: 32px 56px 36px;
+        background: var(--warm);
+        border-top: 1px solid rgba(214, 180, 95, 0.28);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 24px;
+      }
+
+      .quote {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 26px;
+        font-weight: 600;
+        line-height: 1.35;
+        color: var(--midnight);
+      }
+
+      .quote span {
+        display: block;
+        margin-top: 10px;
+        font-family: Inter, sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        color: rgba(34, 39, 48, 0.72);
+      }
+
+      .brand-name {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--midnight);
+        text-align: right;
+      }
+
+      .brand-url {
+        margin-top: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--champagne-dark);
+        text-align: right;
+      }
+
+      .preview-note {
+        max-width: 1080px;
+        margin: 16px auto 0;
+        text-align: center;
+        font-size: 12px;
+        color: #5e718d;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <article class="banner">
+        <header class="hero">
+          <p class="eyebrow">Strategy · Advisory Team Overview</p>
+          <h1>How Many People Should Be Involved In Your Deal?</h1>
+          <p>Complexity, risk, and timeline expand together as deal size increases.</p>
+        </header>
+
+        <section class="main panel">
+          <div class="steps">
+            <div class="step"><p class="step-num">01</p><p class="step-title">Property Analysis</p></div>
+            <div class="step"><p class="step-num">02</p><p class="step-title">Risk Analysis</p></div>
+            <div class="step"><p class="step-num">03</p><p class="step-title">Ownership Structure</p></div>
+            <div class="step"><p class="step-num">04</p><p class="step-title">Advisory Team</p></div>
+            <div class="step"><p class="step-num">05</p><p class="step-title">Acquisition Roadmap</p></div>
+          </div>
+
+          <div class="tier">
+            <div class="tier-head">
+              <div><p class="tier-band">Under $5M</p><p class="tier-sub">Core coordination</p></div>
+              <div class="meta">
+                <div><p class="meta-label">Team</p><p class="meta-value">3–5</p><p class="meta-detail">People involved</p></div>
+                <div><p class="meta-label">Risk</p><p class="meta-value">Moderate</p><p class="meta-detail">Financing &amp; closing</p></div>
+                <div><p class="meta-label">Duration</p><p class="meta-value">60–90 days</p><p class="meta-detail">Contract to close</p></div>
+                <div><p class="meta-label">Complexity</p><p class="meta-value">Level 1</p><p class="meta-detail">Of 4</p></div>
+              </div>
+            </div>
+            <div class="roles">
+              <span class="role">Agent</span><span class="role">Attorney</span><span class="role">Mortgage broker</span><span class="role">Inspector</span>
+            </div>
+          </div>
+
+          <div class="tier">
+            <div class="tier-head">
+              <div><p class="tier-band">$5M–$20M</p><p class="tier-sub">Expanded structure</p></div>
+              <div class="meta">
+                <div><p class="meta-label">Team</p><p class="meta-value">5–8</p></div>
+                <div><p class="meta-label">Risk</p><p class="meta-value">Elevated</p><p class="meta-detail">Tax &amp; entity questions</p></div>
+                <div><p class="meta-label">Duration</p><p class="meta-value">90–120 days</p></div>
+                <div><p class="meta-label">Complexity</p><p class="meta-value">Level 2</p></div>
+              </div>
+            </div>
+            <div class="roles">
+              <span class="role">Agent</span><span class="role">Attorney</span><span class="role">CPA</span><span class="role">Private bank</span><span class="role">Inspector</span><span class="role">Insurance</span>
+            </div>
+          </div>
+
+          <div class="tier">
+            <div class="tier-head">
+              <div><p class="tier-band">$20M–$50M</p><p class="tier-sub">Full advisory team</p></div>
+              <div class="meta">
+                <div><p class="meta-label">Team</p><p class="meta-value">8–12</p></div>
+                <div><p class="meta-label">Risk</p><p class="meta-value">High</p><p class="meta-detail">Estate &amp; liquidity</p></div>
+                <div><p class="meta-label">Duration</p><p class="meta-value">4–6 months</p></div>
+                <div><p class="meta-label">Complexity</p><p class="meta-value">Level 3</p></div>
+              </div>
+            </div>
+            <div class="roles">
+              <span class="role">Lead agent</span><span class="role">Real estate attorney</span><span class="role">Trust &amp; estate</span><span class="role">CPA</span><span class="role">Private banker</span><span class="role">Architect</span>
+            </div>
+          </div>
+
+          <div class="tier">
+            <div class="tier-head">
+              <div><p class="tier-band">$50M+</p><p class="tier-sub">Institutional scale</p></div>
+              <div class="meta">
+                <div><p class="meta-label">Team</p><p class="meta-value">12–20+</p></div>
+                <div><p class="meta-label">Risk</p><p class="meta-value">Very high</p><p class="meta-detail">International &amp; succession</p></div>
+                <div><p class="meta-label">Duration</p><p class="meta-value">6–12+ months</p></div>
+                <div><p class="meta-label">Complexity</p><p class="meta-value">Level 4</p></div>
+              </div>
+            </div>
+            <div class="roles">
+              <span class="role">Family office</span><span class="role">Tax attorney</span><span class="role">International counsel</span><span class="role">Wealth advisor</span><span class="role">Security</span><span class="role">Staffing</span>
+            </div>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <blockquote class="quote">
+            Sophisticated buyers purchase certainty, coordination, expertise — and fewer expensive errors.
+            <span>The apartment is only part of the decision.</span>
+          </blockquote>
+          <div>
+            <p class="brand-name">Agent Kammer</p>
+            <p class="brand-url">agentkammer.com/strategy</p>
+          </div>
+        </footer>
+      </article>
+      <p class="preview-note">Brand export · 1080px · Synced with /strategy</p>
+    </div>
+  </body>
+</html>
