@@ -1,18 +1,7 @@
 import { Link, useLocation } from "wouter";
 import {
   ArrowRight,
-  Baby,
-  BriefcaseBusiness,
-  Building2,
-  ChevronRight,
-  CircleDollarSign,
-  Ellipsis,
-  Home,
-  KeyRound,
   Menu,
-  Scale,
-  TrendingDown,
-  TrendingUp,
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -22,20 +11,6 @@ import { primaryNav } from "@/components/site-shell";
 import { openDecisionAssistant } from "@/lib/decision-assistant";
 
 const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brass focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy";
-
-const decisionTriggers = [
-  { label: "First Home", href: "/buyer-advisory", icon: KeyRound },
-  { label: "Growing Family", href: "/buyer-advisory", icon: Baby },
-  { label: "Relocation", href: "/services/corporate-relocation-buyers-nyc", icon: BriefcaseBusiness },
-  { label: "Upgrade", href: "/buyer-advisory", icon: TrendingUp },
-  { label: "Downsize", href: "/services/empty-nester-downsizing-nyc", icon: TrendingDown },
-  { label: "Luxury Rental", href: "/contact", icon: Home },
-  { label: "Investment", href: "/services/1031-exchange-new-york", icon: CircleDollarSign },
-  { label: "1031", href: "/services/1031-exchange-new-york", icon: Building2 },
-  { label: "Divorce", href: "/services/divorce-property-sales-nyc", icon: Scale },
-  { label: "Estate", href: "/services/probate-estate-sales-nyc", icon: Home },
-  { label: "More", href: "/services", icon: Ellipsis },
-];
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -135,29 +110,6 @@ export function Header() {
         </div>
       ) : null}
 
-      <div className="border-t border-brand-ivory/10 bg-brand-ivory text-brand-navy">
-        <div className="mx-auto grid max-w-site gap-3 px-6 py-3 lg:grid-cols-[minmax(180px,0.22fr)_minmax(0,1fr)] lg:px-10">
-          <div>
-            <p className="text-[9px] uppercase tracking-[0.22em] text-brand-brass">Decision Navigator</p>
-            <p className="mt-1 flex items-center gap-1 font-display text-2xl leading-none text-brand-navy">
-              What&apos;s changing?
-              <ChevronRight className="h-4 w-4" strokeWidth={1.5} />
-            </p>
-          </div>
-          <nav className="flex gap-2 overflow-x-auto py-1" aria-label="Housing decision triggers">
-            {decisionTriggers.map((trigger) => (
-              <Link
-                key={trigger.label}
-                href={trigger.href}
-                className="group inline-flex h-9 shrink-0 items-center gap-2 rounded-full border border-brand-border bg-transparent px-3.5 text-[10px] uppercase tracking-[0.12em] text-brand-graphite transition-colors hover:border-brand-navy/18 hover:bg-brand-stone/20 hover:text-brand-navy"
-              >
-                <trigger.icon className="h-3.5 w-3.5 text-brand-brass transition-colors group-hover:text-brand-navy" strokeWidth={1.5} />
-                {trigger.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      </div>
     </header>
   );
 }
