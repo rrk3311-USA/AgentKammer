@@ -28,6 +28,23 @@ const blueprintSegments = [
 const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
 const sessionStorageKey = "akDecisionAssistantSessionId";
 const navigationMemoryKey = "akDecisionAssistantNavigation";
+const openingPrompts = [
+  "Tell me what's changing...",
+  "I'm relocating to Manhattan...",
+  "We're getting divorced...",
+  "We need more space...",
+  "I'm not sure if I should sell...",
+  "I'm just exploring...",
+  "My company transferred me...",
+  "I'm buying my first home...",
+];
+
+const starterPrompts = [
+  { label: "Divorce", text: "I'm getting divorced.", path: "/services/divorce-property-sales-nyc" },
+  { label: "Relocation", text: "I'm relocating to Manhattan.", path: "/services/executive-relocation-nyc" },
+  { label: "Family", text: "We need more space for our family.", path: "/services/school-district-planning-nyc" },
+  { label: "First Home", text: "I'm buying my first home.", path: "/buyer-advisory" },
+];
 
 type Message = {
   role: "assistant" | "user";
@@ -39,6 +56,13 @@ type Answers = {
   details?: string;
   tradeOff?: string;
   email?: string;
+};
+
+type QuickAction = {
+  label: string;
+  response: string;
+  path?: string;
+  asksForEmail?: boolean;
 };
 
 function scoreLead(text: string) {
@@ -66,9 +90,9 @@ function buildRecap(answers: Answers, score: number) {
   ].filter(Boolean);
 
   return [
-    "New Decision Assistant lead",
+    "Decision Guide recommendation request",
     "",
-    `Lead quality: ${classifyLead(score)}`,
+    `Visitor quality: ${classifyLead(score)}`,
     `Qualifier score: ${score}`,
     `Checked modules: ${checked.join(", ") || "Initial situation only"}`,
     "",
@@ -121,6 +145,57 @@ function getBlueprintStrength(label: string, complete: boolean, leadScore: numbe
   return Math.min(52, 10 + leadScore * 8);
 }
 
+function getTradeoffGuidance(answer: string) {
+  const lower = answer.toLowerCase();
+  if (/(flex|rent|temporary|short|not sure|explor|option|optional)/.test(lower)) {
+    return "Flexibility appears more important than ownership right now. I would review Rent vs Buy before comparing buildings, because the wrong ownership structure can make a temporary chapter feel permanent.";
+  }
+  if (/(own|long|equity|invest|resale|appreciat|asset)/.test(lower)) {
+    return "Long-term ownership appears more important than flexibility right now. I would compare Condo vs Co-op before narrowing buildings, because financing, board rules, resale, and renovation control can change the whole decision.";
+  }
+  if (/(commute|school|space|layout|bedroom|family)/.test(lower)) {
+    return "Your lifestyle constraint is becoming the main filter. Before buildings, I would clarify the daily-life requirement: commute, space, schools, and the trade-offs you will not accept.";
+  }
+  if (/(price|budget|financ|mortgage|cash|cost|monthly)/.test(lower)) {
+    return "Budget is not just a number here. It affects financing, carrying costs, building type, and how much risk you can absorb if the timeline changes.";
+  }
+  return "That trade-off matters because it should filter the search before listings do. I would use it to decide which pages and buildings are worth your attention, and which ones to skip.";
+}
+
+function getUsefulActions(answers: Answers): QuickAction[] {
+  const context = answers.tradeOff || answers.details || answers.situation || "what you've shared";
+  const actions: QuickAction[] = [
+    {
+      label: "Read: Rent vs Buy",
+      path: "/buyer-advisory",
+      response: "I would start with Rent vs Buy because it separates flexibility from ownership. That should come before comparing buildings.",
+    },
+    {
+      label: "Compare: Condo vs Co-op",
+      path: "/building-reports",
+      response: "Condo vs Co-op matters because it changes approval risk, financing, renovation control, resale, and how much flexibility you keep.",
+    },
+    {
+      label: "Timeline",
+      response: "How soon might this decision become real: 30 days, 3-6 months, or just exploring?",
+    },
+    {
+      label: "Recommendation so far",
+      response: `Recommendation so far: use "${context}" as the first filter. Next, clarify timeline and flexibility before looking at listings.`,
+    },
+  ];
+
+  if (answers.details || answers.tradeOff) {
+    actions.push({
+      label: "Send recap",
+      asksForEmail: true,
+      response: "I can send a clean recap with the relevant briefs, what we learned, and the current recommendation. What email should I use?",
+    });
+  }
+
+  return actions;
+}
+
 export function DecisionAssistantDock() {
   const [location, setLocation] = useLocation();
   const [expanded, setExpanded] = useState(false);
@@ -131,10 +206,13 @@ export function DecisionAssistantDock() {
   const [leadScore, setLeadScore] = useState(0);
   const [sending, setSending] = useState(false);
   const [memoryLoaded, setMemoryLoaded] = useState(false);
+  const [promptIndex, setPromptIndex] = useState(0);
+  const [showStarters, setShowStarters] = useState(false);
+  const [quickActions, setQuickActions] = useState<QuickAction[]>([]);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      text: "Hi, I'm your Decision Guide. I'll learn about your situation while you browse. What's changing?",
+      text: "Hi, I'm AK, your Decision Guide. Most people start by looking at listings. I think it's better to understand your situation first. What's changing?",
     },
   ]);
   const transcriptRef = useRef<HTMLDivElement | null>(null);
@@ -198,6 +276,18 @@ export function DecisionAssistantDock() {
   }, [messages, expanded]);
 
   useEffect(() => {
+    const interval = window.setInterval(() => {
+      setPromptIndex((current) => (current + 1) % openingPrompts.length);
+    }, 3600);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setShowStarters(true), 8000);
+    return () => window.clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
     if (!memoryLoaded) return;
     const timeout = window.setTimeout(() => {
       void fetch("/api/decision-assistant/conversation", {
@@ -231,7 +321,7 @@ export function DecisionAssistantDock() {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({
-          name: "Decision Assistant Lead",
+          name: "Decision Guide Visitor",
           email: nextAnswers.email,
           timeline: nextAnswers.details || nextAnswers.situation,
           financing: nextAnswers.details,
@@ -248,7 +338,7 @@ export function DecisionAssistantDock() {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({
-          name: "Decision Assistant Lead",
+          name: "Decision Guide Visitor",
           email: nextAnswers.email,
           message: fullSummary,
         }),
@@ -257,7 +347,7 @@ export function DecisionAssistantDock() {
         ...current,
         {
           role: "assistant",
-          text: "I saved the lead and sent the recap. Based on what you shared, the next useful step is a tighter Decision Blueprint: timing, building filters, financing constraints, and the trade-offs to avoid before seeing listings.",
+          text: "Sent. I’ll keep the conversation here too, so you can keep refining the decision.",
         },
       ]);
       setStep("sent");
@@ -266,11 +356,50 @@ export function DecisionAssistantDock() {
         ...current,
         {
           role: "assistant",
-          text: "I saved the recap locally in this conversation, but the database/email handoff did not complete. You can still keep answering and refine the Decision Blueprint here.",
+          text: "I kept the recommendation here, but the email handoff did not complete. You can keep going.",
         },
       ]);
     } finally {
       setSending(false);
+    }
+  }
+
+  function handleStarter(prompt: (typeof starterPrompts)[number]) {
+    const nextScore = leadScore + scoreLead(prompt.text);
+    const nextAnswers = { ...answers, situation: prompt.text };
+    const nextMessages: Message[] = [...messages, { role: "user", text: prompt.text }];
+
+    setLocation(prompt.path);
+    if (prompt.label === "Divorce") {
+      nextMessages.push({ role: "assistant", text: "I'm sorry you're dealing with that." });
+      nextMessages.push({ role: "assistant", text: "The two biggest decisions are usually timing and whether keeping the home is realistic. Which one feels more important right now?" });
+    } else if (prompt.label === "Relocation") {
+      nextMessages.push({ role: "assistant", text: "Got it. Relocation usually comes down to timeline, commute, and how much flexibility you need before committing." });
+      nextMessages.push({ role: "assistant", text: "I'm opening the Executive Relocation Brief. How soon might this decision become real?" });
+    } else if (prompt.label === "Family") {
+      nextMessages.push({ role: "assistant", text: "More space is usually not just a bedroom count. It changes commute, school, building, and budget trade-offs." });
+      nextMessages.push({ role: "assistant", text: "What is driving the move most: space, schools, commute, or timing?" });
+    } else {
+      nextMessages.push({ role: "assistant", text: "First purchases are easier when we separate lifestyle fit from building risk and budget." });
+      nextMessages.push({ role: "assistant", text: "Are you closer to actively buying, or still learning what would make sense?" });
+    }
+
+    setExpanded(true);
+    setShowStarters(false);
+    setQuickActions(getUsefulActions(nextAnswers));
+    setMessages(nextMessages);
+    setAnswers(nextAnswers);
+    setLeadScore(nextScore);
+    setStep("details");
+  }
+
+  function handleQuickAction(action: QuickAction) {
+    if (action.path) setLocation(action.path);
+    setExpanded(true);
+    setMessages((current) => [...current, { role: "assistant", text: action.response }]);
+    if (action.asksForEmail) {
+      setStep("email");
+      setQuickActions([]);
     }
   }
 
@@ -290,11 +419,12 @@ export function DecisionAssistantDock() {
       nextAnswers = { ...nextAnswers, email: foundEmail };
       nextMessages.push({
         role: "assistant",
-        text: "Got it. I will send the recap with the qualifiers checked so far and the recommended next step.",
+        text: "Got it. I’ll send the recommendation with the Blueprint items checked so far and the next best step.",
       });
       setMessages(nextMessages);
       setAnswers(nextAnswers);
       setLeadScore(nextScore);
+      setQuickActions(getUsefulActions(nextAnswers));
       setInput("");
       void sendRecap(nextAnswers, nextScore);
       return;
@@ -306,7 +436,7 @@ export function DecisionAssistantDock() {
       if (/(relocat|moving|move.*manhattan|new job|job)/.test(lower)) {
         setLocation("/services/executive-relocation-nyc");
         nextMessages.push({ role: "assistant", text: "Got it. You're relocating to Manhattan." });
-        nextMessages.push({ role: "assistant", text: "Lifestyle updated. Opening Executive Relocation..." });
+        nextMessages.push({ role: "assistant", text: "I'm opening the Executive Relocation Brief. How soon might this decision become real?" });
       } else if (/(divorce|separat)/.test(lower)) {
         setLocation("/services/divorce-property-sales-nyc");
         nextMessages.push({ role: "assistant", text: "I'm sorry you're dealing with that." });
@@ -320,43 +450,47 @@ export function DecisionAssistantDock() {
               ? "Got it. This sounds time-sensitive."
               : "Got it. I'll help make the decision feel less scattered.",
         });
+        nextMessages.push({
+          role: "assistant",
+          text: "How soon might this decision become real?",
+        });
       }
-      nextMessages.push({
-        role: "assistant",
-        text: "I'd like to understand your timeline next.",
-      });
       nextStep = "details";
+      setQuickActions(getUsefulActions(nextAnswers));
     } else if (step === "details") {
       nextAnswers = { ...nextAnswers, details: answer };
       nextMessages.push({
         role: "assistant",
-        text: "Timeline updated.",
+        text: "Timeline added.",
       });
-      if (nextScore >= 3) {
-        nextMessages.push({
-          role: "assistant",
-          text: "I have enough to make the next step useful. Where should I send the recap?",
-        });
-        nextStep = "email";
-      } else {
-        nextMessages.push({
-          role: "assistant",
-          text: "What worries you most: price, commute, building rules, resale risk, layout, or timing?",
-        });
-        nextStep = "tradeoff";
-      }
+      nextMessages.push({
+        role: "assistant",
+        text: "That matters because urgency changes whether flexibility or long-term ownership should come first.",
+      });
+      nextMessages.push({
+        role: "assistant",
+        text: "Your next decision is whether to prioritize flexibility or long-term ownership. Which feels more important right now?",
+      });
+      nextStep = "tradeoff";
+      setQuickActions(getUsefulActions(nextAnswers));
     } else if (step === "tradeoff") {
       nextAnswers = { ...nextAnswers, tradeOff: answer };
       nextMessages.push({
         role: "assistant",
-        text: "Trade-off updated. If you want the recap, share the best email.",
+        text: getTradeoffGuidance(answer),
       });
-      nextStep = "email";
+      nextMessages.push({
+        role: "assistant",
+        text: "Want to read the relevant brief, compare ownership options, or see the recommendation so far?",
+      });
+      nextStep = "tradeoff";
+      setQuickActions(getUsefulActions(nextAnswers));
     } else {
       nextMessages.push({
         role: "assistant",
-        text: "You can keep adding context here. If you want the recap sent, include an email address in your next message.",
+        text: "You can keep adding context here. I’ll keep narrowing the next useful decision instead of turning this into a form.",
       });
+      setQuickActions(getUsefulActions(nextAnswers));
     }
 
     setMessages(nextMessages);
@@ -428,7 +562,7 @@ export function DecisionAssistantDock() {
               id="decision-guide-compact-input"
               value={input}
               onChange={(event) => setInput(event.target.value)}
-              placeholder="What's changing?"
+              placeholder={openingPrompts[promptIndex]}
               className="h-11 border border-brand-ivory/16 bg-brand-ivory/8 px-3 text-sm text-brand-ivory outline-none transition-colors placeholder:text-brand-ivory/48 focus:border-brand-brass"
             />
             <button
@@ -440,6 +574,20 @@ export function DecisionAssistantDock() {
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </button>
           </form>
+          {showStarters && step === "situation" ? (
+            <div className="flex flex-wrap gap-2 lg:col-start-3">
+              {starterPrompts.map((prompt) => (
+                <button
+                  key={prompt.label}
+                  type="button"
+                  onClick={() => handleStarter(prompt)}
+                  className="border border-brand-ivory/16 px-3 py-2 text-[10px] uppercase tracking-[0.12em] text-brand-ivory/72 transition-colors hover:border-brand-brass hover:text-brand-ivory"
+                >
+                  {prompt.label}
+                </button>
+              ))}
+            </div>
+          ) : null}
         </div>
       </aside>
     );
@@ -557,27 +705,57 @@ export function DecisionAssistantDock() {
               ))}
             </div>
             {step !== "sent" ? (
-              <form onSubmit={handleSubmit} className="mt-3 grid gap-2 md:grid-cols-[minmax(0,1fr)_auto]">
-                <label className="sr-only" htmlFor="decision-assistant-input">
-                  Answer the decision assistant
-                </label>
-                <textarea
-                  id="decision-assistant-input"
-                  value={input}
-                  onChange={(event) => setInput(event.target.value)}
-                  placeholder={step === "email" ? "Email for the recap..." : "Type a short answer..."}
-                  rows={2}
-                  className="min-h-12 resize-none border border-brand-border bg-white px-3 py-2 text-sm text-brand-navy outline-none transition-colors placeholder:text-brand-graphite/55 focus:border-brand-brass"
-                />
-                <button
-                  type="submit"
-                  disabled={sending}
-                  className="inline-flex h-12 items-center justify-center gap-2 border border-brand-navy bg-brand-navy px-5 text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:bg-brand-navy-secondary disabled:cursor-wait disabled:opacity-70"
-                >
-                  {sending ? "Sending" : "Send"}
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-                </button>
-              </form>
+              <>
+                {showStarters && step === "situation" ? (
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {starterPrompts.map((prompt) => (
+                      <button
+                        key={prompt.label}
+                        type="button"
+                        onClick={() => handleStarter(prompt)}
+                        className="border border-brand-border bg-white px-3 py-2 text-[10px] uppercase tracking-[0.12em] text-brand-graphite transition-colors hover:border-brand-brass hover:text-brand-navy"
+                      >
+                        {prompt.label}
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+                {quickActions.length > 0 ? (
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {quickActions.map((action) => (
+                      <button
+                        key={action.label}
+                        type="button"
+                        onClick={() => handleQuickAction(action)}
+                        className="border border-brand-border bg-white px-3 py-2 text-[10px] uppercase tracking-[0.12em] text-brand-graphite transition-colors hover:border-brand-brass hover:text-brand-navy"
+                      >
+                        {action.label}
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+                <form onSubmit={handleSubmit} className="mt-3 grid gap-2 md:grid-cols-[minmax(0,1fr)_auto]">
+                  <label className="sr-only" htmlFor="decision-assistant-input">
+                    Answer the decision assistant
+                  </label>
+                  <textarea
+                    id="decision-assistant-input"
+                    value={input}
+                    onChange={(event) => setInput(event.target.value)}
+                    placeholder={step === "email" ? "Email for the recap..." : openingPrompts[promptIndex]}
+                    rows={2}
+                    className="min-h-12 resize-none border border-brand-border bg-white px-3 py-2 text-sm text-brand-navy outline-none transition-colors placeholder:text-brand-graphite/55 focus:border-brand-brass"
+                  />
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="inline-flex h-12 items-center justify-center gap-2 border border-brand-navy bg-brand-navy px-5 text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:bg-brand-navy-secondary disabled:cursor-wait disabled:opacity-70"
+                  >
+                    {sending ? "Sending" : "Send"}
+                    <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                  </button>
+                </form>
+              </>
             ) : null}
           </div>
         ) : null}
