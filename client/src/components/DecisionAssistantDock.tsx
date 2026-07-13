@@ -752,7 +752,7 @@ export function DecisionAssistantDock() {
         className="fixed inset-x-0 bottom-0 z-40 border-t border-brand-brass/35 bg-brand-midnight px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 text-brand-ivory shadow-[0_-18px_38px_rgba(32,39,53,0.28)] md:px-6"
         aria-label="Decision Guide"
       >
-        <div className="mx-auto grid max-w-site gap-3 lg:grid-cols-[minmax(210px,0.22fr)_minmax(220px,0.25fr)_minmax(340px,0.53fr)] lg:items-center">
+        <div className="mx-auto grid max-w-site gap-3 lg:grid-cols-[minmax(210px,0.25fr)_minmax(220px,0.25fr)_minmax(340px,0.5fr)] lg:items-center">
           <div className="grid gap-2">
             <div className="flex items-center justify-between gap-3">
               <button type="button" onClick={() => setExpanded(true)} className="flex min-w-0 items-center gap-3 text-left">
@@ -807,21 +807,6 @@ export function DecisionAssistantDock() {
             <p className="mt-2 text-[10px] uppercase tracking-[0.14em] text-brand-ivory/64 2xl:hidden">
               Lifestyle · Building · Budget · Timeline
             </p>
-          </div>
-          <div className="min-w-0 lg:col-start-3">
-            <div className="mb-2 flex items-center gap-2 overflow-x-auto pb-1">
-              <span className="shrink-0 text-[10px] uppercase tracking-[0.16em] text-brand-brass">Navigator</span>
-              {starterPrompts.map((prompt) => (
-                <button
-                  key={prompt.label}
-                  type="button"
-                  onClick={() => handleStarter(prompt)}
-                  className="shrink-0 border border-brand-ivory/16 px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] text-brand-ivory/76 transition-colors hover:border-brand-brass hover:text-brand-ivory"
-                >
-                  {prompt.label}
-                </button>
-              ))}
-            </div>
           </div>
           <form onSubmit={handleSubmit} className="grid grid-cols-[minmax(0,1fr)_auto] gap-2 lg:col-start-3">
             <label className="sr-only" htmlFor="decision-guide-compact-input">
@@ -956,21 +941,6 @@ export function DecisionAssistantDock() {
         </div>
         {expanded ? (
           <div className="min-w-0 max-w-full overflow-hidden border-t border-brand-border pt-3">
-            {step === "situation" ? (
-              <div className="mb-3 flex max-w-full items-center gap-2 overflow-x-auto pb-1">
-                <span className="shrink-0 text-[10px] uppercase tracking-[0.16em] text-brand-brass">Navigator</span>
-                {starterPrompts.map((prompt) => (
-                  <button
-                    key={prompt.label}
-                    type="button"
-                    onClick={() => handleStarter(prompt)}
-                    className="shrink-0 border border-brand-border bg-white px-3 py-1.5 text-[10px] uppercase tracking-[0.12em] text-brand-graphite transition-colors hover:border-brand-brass hover:text-brand-navy"
-                  >
-                    {prompt.label}
-                  </button>
-                ))}
-              </div>
-            ) : null}
             <div ref={transcriptRef} className="max-h-[34dvh] max-w-full space-y-2 overflow-y-auto overflow-x-hidden pr-1 md:max-h-[24rem] md:space-y-3">
               {displayMessages.map((message, index) => (
                 <div

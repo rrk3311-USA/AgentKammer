@@ -13,7 +13,7 @@ export default function Contact() {
   usePageMetadata({
     title: "Contact",
     description:
-      "Contact page with a simple form for name, email, and message.",
+      "Request a private call with Agent Kammer.",
     path: "/contact",
   });
 
@@ -61,19 +61,19 @@ export default function Contact() {
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
       <PageHero
         eyebrow="Contact"
-        title="A simple contact page with the essentials only."
-        description="The updated local version keeps the inquiry form intentionally compact: name, email, and message. The surrounding layout still carries the full brand system."
+        title="Request a private call."
+        description="Share what is changing, what decision you are weighing, and where the conversation should begin. The response should help clarify the next step before listings or showings take over."
       />
 
       <PageSection className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
         <div>
           <SectionHeading
             eyebrow="Reach Out"
-            title="Use the form for buyer, relocation, report, or general advisory questions."
-            description="If the request already has a neighborhood, building, or timing component, include it in the message field and the site’s existing contact endpoint will handle the submission."
+            title="Use the form for buyer, relocation, report, sale, or general advisory questions."
+            description="If the request already has a neighborhood, building, timing issue, or ownership question, include it in the message so the first reply can be specific."
           />
           <div className="mt-8 grid gap-4">
-            <a href="mailto:raphael@agentkammer.com" className="rounded-card border border-brand-border bg-white p-6">
+            <a href="mailto:info@agentkammer.com" className="rounded-card border border-brand-border bg-white p-6">
               <div className="inline-flex items-center gap-3 text-brand-navy">
                 <Mail className="h-4 w-4 text-brand-brass" strokeWidth={1.5} />
                 <span className="text-sm uppercase tracking-[0.16em]">Info@agentkammer.com</span>
@@ -89,7 +89,7 @@ export default function Contact() {
         </div>
 
         <div className="rounded-card border border-brand-border bg-white p-8 shadow-soft lg:p-10">
-          <h2 className="font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">Send a Message</h2>
+          <h2 className="font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">Request a Call</h2>
           <form onSubmit={handleSubmit} className="mt-8 space-y-6">
               <div>
                 <label htmlFor="name" className="mb-2 block text-sm font-medium">
@@ -129,7 +129,7 @@ export default function Contact() {
                   id="message"
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Share the question, building, neighborhood, timeline, or relocation context you want to discuss."
+                  placeholder="Share what changed, what decision you are weighing, and the best next step you want help clarifying."
                   required
                   rows={6}
                   className="resize-none"
@@ -144,7 +144,7 @@ export default function Contact() {
                 data-testid="button-contact-submit"
                 disabled={contactMutation.isPending}
               >
-                {contactMutation.isPending ? "Sending..." : "Send Message"}
+                {contactMutation.isPending ? "Sending..." : "Request a Call"}
               </Button>
             </form>
         </div>

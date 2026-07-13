@@ -3,7 +3,6 @@ import { Link, useLocation } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { openDecisionAssistant } from "@/lib/decision-assistant";
 
 export const primaryNav = [
   { label: "About", href: "/about" },
@@ -131,7 +130,7 @@ export function CTA({
   title,
   description,
   href = "/contact",
-  label = "Start the Conversation",
+  label = "Request a Call",
 }: {
   title: string;
   description: string;
@@ -150,18 +149,25 @@ export function CTA({
             <p className="mt-5 max-w-2xl text-base leading-8 text-brand-graphite">{description}</p>
           </div>
           {href === "/contact" ? (
-            <button
-              type="button"
-              onClick={openDecisionAssistant}
-              className="group grid min-w-[15rem] border border-brand-navy/18 bg-brand-ivory px-5 py-4 text-left transition-colors hover:border-brand-brass/55 hover:bg-brand-surface"
-            >
-              <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">Decision Blueprint</span>
-              <span className="mt-3 h-px w-full bg-brand-border" aria-hidden />
-              <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em] text-brand-navy">
-                {label}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-              </span>
-            </button>
+            <div className="grid gap-3 sm:min-w-[16rem]">
+              <Link
+                href="/contact"
+                className="group grid border border-brand-navy bg-brand-navy px-5 py-4 text-left text-brand-ivory transition-colors hover:border-brand-brass"
+              >
+                <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">Private Advisory</span>
+                <span className="mt-3 h-px w-full bg-brand-ivory/18" aria-hidden />
+                <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
+                  {label}
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+                </span>
+              </Link>
+              <a
+                href="mailto:info@agentkammer.com"
+                className="border border-brand-border px-5 py-3 text-center text-[10px] uppercase tracking-[0.16em] text-brand-navy transition-colors hover:border-brand-brass"
+              >
+                info@agentkammer.com
+              </a>
+            </div>
           ) : (
             <Link href={href}>
               <Button variant="brand" className="gap-2 uppercase tracking-nav">

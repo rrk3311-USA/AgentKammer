@@ -108,7 +108,7 @@ export default function Home() {
               Diagnose before recommending.
             </h2>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-brand-graphite">
-              Each landing page becomes an educational brief: situation, risks, building considerations, timing, resources, and the questions that shape the recommendation.
+              Each page becomes an educational brief: situation, risks, building considerations, timing, resources, and the questions that shape the recommendation.
             </p>
           </div>
           <div className="mt-12 grid gap-px bg-brand-border sm:grid-cols-2 lg:grid-cols-4">
