@@ -40,10 +40,11 @@ const openingPrompts = [
 ];
 
 const starterPrompts = [
-  { label: "Divorce", text: "I'm getting divorced.", path: "/services/divorce-property-sales-nyc" },
-  { label: "Relocation", text: "I'm relocating to Manhattan.", path: "/services/executive-relocation-nyc" },
-  { label: "Family", text: "We need more space for our family.", path: "/services/school-district-planning-nyc" },
-  { label: "First Home", text: "I'm buying my first home.", path: "/buyer-advisory" },
+  { label: "We're relocating.", text: "We're relocating.", path: "/services/executive-relocation-nyc" },
+  { label: "We're getting divorced.", text: "We're getting divorced.", path: "/services/divorce-property-sales-nyc" },
+  { label: "We need more space.", text: "We need more space.", path: "/services/school-district-planning-nyc" },
+  { label: "I'm not sure if we should move.", text: "I'm not sure if we should move.", path: "/buyer-advisory" },
+  { label: "I'm just exploring.", text: "I'm just exploring.", path: "/buyer-advisory" },
 ];
 
 type Message = {
@@ -53,7 +54,8 @@ type Message = {
 
 type Answers = {
   situation?: string;
-  details?: string;
+  desire?: string;
+  constraints?: string;
   tradeOff?: string;
   email?: string;
 };
@@ -84,8 +86,9 @@ function classifyLead(score: number) {
 
 function buildRecap(answers: Answers, score: number) {
   const checked = [
-    answers.situation ? "Lifestyle/Situation" : null,
-    answers.details ? "Location/Building/Financial" : null,
+    answers.situation ? "Trigger/What changed" : null,
+    answers.desire ? "Desire/What they want next" : null,
+    answers.constraints ? "Constraints/What is limiting them" : null,
     answers.tradeOff ? "Trade-offs/Priorities" : null,
   ].filter(Boolean);
 
@@ -97,7 +100,8 @@ function buildRecap(answers: Answers, score: number) {
     `Checked modules: ${checked.join(", ") || "Initial situation only"}`,
     "",
     `Situation: ${answers.situation || "Not provided"}`,
-    `Details: ${answers.details || "Not provided"}`,
+    `Desire: ${answers.desire || "Not provided"}`,
+    `Constraints: ${answers.constraints || "Not provided"}`,
     `Trade-off / risk: ${answers.tradeOff || "Not provided"}`,
     "",
     "Recommended next step:",
@@ -122,8 +126,9 @@ function summarizeMemory(messages: Message[], answers: Answers, score: number) {
   return [
     `Decision Assistant memory: ${classifyLead(score)}`,
     answers.email ? `Email: ${answers.email}` : null,
-    answers.situation ? `Situation: ${answers.situation}` : null,
-    answers.details ? `Details: ${answers.details}` : null,
+    answers.situation ? `Trigger: ${answers.situation}` : null,
+    answers.desire ? `Desire: ${answers.desire}` : null,
+    answers.constraints ? `Constraints: ${answers.constraints}` : null,
     answers.tradeOff ? `Trade-off: ${answers.tradeOff}` : null,
     `Message count: ${messages.length}`,
   ]
@@ -148,22 +153,68 @@ function getBlueprintStrength(label: string, complete: boolean, leadScore: numbe
 function getTradeoffGuidance(answer: string) {
   const lower = answer.toLowerCase();
   if (/(flex|rent|temporary|short|not sure|explor|option|optional)/.test(lower)) {
-    return "Flexibility appears more important than ownership right now. I would review Rent vs Buy before comparing buildings, because the wrong ownership structure can make a temporary chapter feel permanent.";
+    return "Every move involves trade-offs. I think we're starting to identify yours: flexibility may matter more than ownership right now. I would review Rent vs Buy before comparing buildings.";
   }
   if (/(own|long|equity|invest|resale|appreciat|asset)/.test(lower)) {
-    return "Long-term ownership appears more important than flexibility right now. I would compare Condo vs Co-op before narrowing buildings, because financing, board rules, resale, and renovation control can change the whole decision.";
+    return "Every move involves trade-offs. I think we're starting to identify yours: long-term ownership may matter more than flexibility. I would compare Condo vs Co-op before narrowing buildings.";
   }
   if (/(commute|school|space|layout|bedroom|family)/.test(lower)) {
-    return "Your lifestyle constraint is becoming the main filter. Before buildings, I would clarify the daily-life requirement: commute, space, schools, and the trade-offs you will not accept.";
+    return "Every move involves trade-offs. I think we're starting to identify yours: daily life is the real constraint, not just the building. Let's clarify commute, space, schools, and the trade-offs you will not accept.";
   }
   if (/(price|budget|financ|mortgage|cash|cost|monthly)/.test(lower)) {
-    return "Budget is not just a number here. It affects financing, carrying costs, building type, and how much risk you can absorb if the timeline changes.";
+    return "Every move involves trade-offs. I think we're starting to identify yours: budget may be the constraint that shapes the rest of the decision. It affects financing, carrying costs, building type, and timeline risk.";
   }
-  return "That trade-off matters because it should filter the search before listings do. I would use it to decide which pages and buildings are worth your attention, and which ones to skip.";
+  return "Every move involves trade-offs. I think we're starting to identify yours. I would use that to decide which pages and buildings are worth your attention, and which ones to skip.";
+}
+
+function getSituationGuidance(answer: string, score: number) {
+  const lower = answer.toLowerCase();
+  if (/(pregnan|baby|child|kid|family|more space|bedroom|nursery|first child)/.test(lower)) {
+    return {
+      path: "/services/school-district-planning-nyc",
+      messages: [
+        "Congratulations. That changes more than just the number of bedrooms.",
+        "Before we look at neighborhoods or buildings, I'd like to understand what you hope the next home does better. Is it space, schools, commute, outdoor space, or a calmer daily routine?",
+      ],
+    };
+  }
+  if (/(company transferred|transferred|relocat|moving|move.*manhattan|new job|job)/.test(lower)) {
+    return {
+      path: "/services/executive-relocation-nyc",
+      messages: [
+        "Thanks. Executive relocations usually involve three decisions: how long you'll stay, commute requirements, and whether renting or buying makes more sense.",
+        "What are you hoping the move improves first: commute, flexibility, privacy, neighborhood fit, or long-term ownership?",
+      ],
+    };
+  }
+  if (/(divorce|separat)/.test(lower)) {
+    return {
+      path: "/services/divorce-property-sales-nyc",
+      messages: [
+        "I'm sorry you're dealing with that.",
+        "The two biggest decisions are usually timing and whether keeping the home is realistic. What would a better housing outcome give you now: stability, flexibility, privacy, financial clarity, or a cleaner timeline?",
+      ],
+    };
+  }
+  if (/(should.*sell|should.*move|not sure|stay|keep|move or|sell or|just explor|exploring)/.test(lower)) {
+    return {
+      path: "/buyer-advisory",
+      messages: [
+        "That is exactly the right place to start. You do not need to know whether moving is the answer yet.",
+        "If your current place could improve one thing, what would matter most: space, light, money, commute, lifestyle, or certainty?",
+      ],
+    };
+  }
+  return {
+    messages: [
+      score >= 4 ? "That helps. This sounds time-sensitive." : "That helps. We can make this feel less scattered.",
+      "Before we look at buildings or listings, what are you hoping your next home does better than your current one?",
+    ],
+  };
 }
 
 function getUsefulActions(answers: Answers): QuickAction[] {
-  const context = answers.tradeOff || answers.details || answers.situation || "what you've shared";
+  const context = answers.tradeOff || answers.constraints || answers.desire || answers.situation || "what you've shared";
   const actions: QuickAction[] = [
     {
       label: "Read: Rent vs Buy",
@@ -176,16 +227,16 @@ function getUsefulActions(answers: Answers): QuickAction[] {
       response: "Condo vs Co-op matters because it changes approval risk, financing, renovation control, resale, and how much flexibility you keep.",
     },
     {
-      label: "Timeline",
-      response: "How soon might this decision become real: 30 days, 3-6 months, or just exploring?",
+      label: "Constraints",
+      response: "What's making that difficult today: budget, timing, financing, school district, pets, building rules, or uncertainty?",
     },
     {
       label: "Recommendation so far",
-      response: `Recommendation so far: use "${context}" as the first filter. Next, clarify timeline and flexibility before looking at listings.`,
+      response: `Recommendation so far: use "${context}" as the first filter. Next, clarify constraints and trade-offs before looking at listings.`,
     },
   ];
 
-  if (answers.details || answers.tradeOff) {
+  if (answers.constraints || answers.tradeOff) {
     actions.push({
       label: "Send recap",
       asksForEmail: true,
@@ -201,7 +252,7 @@ export function DecisionAssistantDock() {
   const [expanded, setExpanded] = useState(false);
   const [input, setInput] = useState("");
   const [sessionId] = useState(getSessionId);
-  const [step, setStep] = useState<"situation" | "details" | "tradeoff" | "email" | "sent">("situation");
+  const [step, setStep] = useState<"situation" | "desire" | "constraints" | "tradeoff" | "email" | "sent">("situation");
   const [answers, setAnswers] = useState<Answers>({});
   const [leadScore, setLeadScore] = useState(0);
   const [sending, setSending] = useState(false);
@@ -212,7 +263,7 @@ export function DecisionAssistantDock() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      text: "Hi, I'm AK, your Decision Guide. Most people start by looking at listings. I think it's better to understand your situation first. What's changing?",
+      text: "Hi, I'm Raphi. I'll help you think through your housing decision before you spend time looking at listings. Whether you're just exploring or already planning a move, we'll figure it out together. What's changing?",
     },
   ]);
   const transcriptRef = useRef<HTMLDivElement | null>(null);
@@ -283,9 +334,18 @@ export function DecisionAssistantDock() {
   }, []);
 
   useEffect(() => {
-    const timeout = window.setTimeout(() => setShowStarters(true), 8000);
+    if (step !== "situation") {
+      setShowStarters(false);
+      return;
+    }
+    if (input.trim()) {
+      setShowStarters(false);
+      return;
+    }
+
+    const timeout = window.setTimeout(() => setShowStarters(true), 12000);
     return () => window.clearTimeout(timeout);
-  }, []);
+  }, [input, step]);
 
   useEffect(() => {
     if (!memoryLoaded) return;
@@ -298,7 +358,7 @@ export function DecisionAssistantDock() {
           sessionId,
           messages,
           leadEmail: answers.email,
-          categoryInterest: answers.details || answers.situation,
+          categoryInterest: answers.desire || answers.situation,
           leadScore,
           summary: summarizeMemory(messages, answers, leadScore),
         }),
@@ -323,13 +383,13 @@ export function DecisionAssistantDock() {
         body: JSON.stringify({
           name: "Decision Guide Visitor",
           email: nextAnswers.email,
-          timeline: nextAnswers.details || nextAnswers.situation,
-          financing: nextAnswers.details,
+          timeline: nextAnswers.constraints || nextAnswers.situation,
+          financing: nextAnswers.constraints,
           motivation: nextAnswers.situation,
-          communicationStyle: `Decision Assistant - ${classifyLead(nextScore)}`,
+          communicationStyle: `Decision Guide - ${classifyLead(nextScore)}`,
           conversationSummary: fullSummary,
           leadScore: nextScore,
-          marketInterest: nextAnswers.details,
+          marketInterest: nextAnswers.desire || nextAnswers.constraints,
           leadSource: "decision_assistant",
         }),
       });
@@ -368,21 +428,10 @@ export function DecisionAssistantDock() {
     const nextScore = leadScore + scoreLead(prompt.text);
     const nextAnswers = { ...answers, situation: prompt.text };
     const nextMessages: Message[] = [...messages, { role: "user", text: prompt.text }];
+    const guidance = getSituationGuidance(prompt.text, nextScore);
 
-    setLocation(prompt.path);
-    if (prompt.label === "Divorce") {
-      nextMessages.push({ role: "assistant", text: "I'm sorry you're dealing with that." });
-      nextMessages.push({ role: "assistant", text: "The two biggest decisions are usually timing and whether keeping the home is realistic. Which one feels more important right now?" });
-    } else if (prompt.label === "Relocation") {
-      nextMessages.push({ role: "assistant", text: "Got it. Relocation usually comes down to timeline, commute, and how much flexibility you need before committing." });
-      nextMessages.push({ role: "assistant", text: "I'm opening the Executive Relocation Brief. How soon might this decision become real?" });
-    } else if (prompt.label === "Family") {
-      nextMessages.push({ role: "assistant", text: "More space is usually not just a bedroom count. It changes commute, school, building, and budget trade-offs." });
-      nextMessages.push({ role: "assistant", text: "What is driving the move most: space, schools, commute, or timing?" });
-    } else {
-      nextMessages.push({ role: "assistant", text: "First purchases are easier when we separate lifestyle fit from building risk and budget." });
-      nextMessages.push({ role: "assistant", text: "Are you closer to actively buying, or still learning what would make sense?" });
-    }
+    setLocation(guidance.path || prompt.path);
+    guidance.messages.forEach((text) => nextMessages.push({ role: "assistant", text }));
 
     setExpanded(true);
     setShowStarters(false);
@@ -390,7 +439,7 @@ export function DecisionAssistantDock() {
     setMessages(nextMessages);
     setAnswers(nextAnswers);
     setLeadScore(nextScore);
-    setStep("details");
+    setStep("desire");
   }
 
   function handleQuickAction(action: QuickAction) {
@@ -432,44 +481,32 @@ export function DecisionAssistantDock() {
 
     if (step === "situation") {
       nextAnswers = { ...nextAnswers, situation: answer };
-      const lower = answer.toLowerCase();
-      if (/(relocat|moving|move.*manhattan|new job|job)/.test(lower)) {
-        setLocation("/services/executive-relocation-nyc");
-        nextMessages.push({ role: "assistant", text: "Got it. You're relocating to Manhattan." });
-        nextMessages.push({ role: "assistant", text: "I'm opening the Executive Relocation Brief. How soon might this decision become real?" });
-      } else if (/(divorce|separat)/.test(lower)) {
-        setLocation("/services/divorce-property-sales-nyc");
-        nextMessages.push({ role: "assistant", text: "I'm sorry you're dealing with that." });
-        nextMessages.push({ role: "assistant", text: "The two biggest decisions are usually timing and whether keeping the home is realistic. Which one feels more important right now?" });
-      } else {
-        const leadType = classifyLead(nextScore);
-        nextMessages.push({
-          role: "assistant",
-          text:
-            leadType === "High-intent"
-              ? "Got it. This sounds time-sensitive."
-              : "Got it. I'll help make the decision feel less scattered.",
-        });
-        nextMessages.push({
-          role: "assistant",
-          text: "How soon might this decision become real?",
-        });
-      }
-      nextStep = "details";
+      const guidance = getSituationGuidance(answer, nextScore);
+      if (guidance.path) setLocation(guidance.path);
+      guidance.messages.forEach((text) => nextMessages.push({ role: "assistant", text }));
+      nextStep = "desire";
       setQuickActions(getUsefulActions(nextAnswers));
-    } else if (step === "details") {
-      nextAnswers = { ...nextAnswers, details: answer };
+    } else if (step === "desire") {
+      nextAnswers = { ...nextAnswers, desire: answer };
       nextMessages.push({
         role: "assistant",
-        text: "Timeline added.",
+        text: "That helps. Now I understand what the next place is supposed to do better.",
       });
       nextMessages.push({
         role: "assistant",
-        text: "That matters because urgency changes whether flexibility or long-term ownership should come first.",
+        text: "What's making that difficult today: budget, timing, financing, school district, pets, building rules, or uncertainty?",
+      });
+      nextStep = "constraints";
+      setQuickActions(getUsefulActions(nextAnswers));
+    } else if (step === "constraints") {
+      nextAnswers = { ...nextAnswers, constraints: answer };
+      nextMessages.push({
+        role: "assistant",
+        text: "That helps. I have a much better sense of the shape of the decision now.",
       });
       nextMessages.push({
         role: "assistant",
-        text: "Your next decision is whether to prioritize flexibility or long-term ownership. Which feels more important right now?",
+        text: "If you can't have everything, what matters most: size, location, building quality, flexibility, cost control, or long-term value?",
       });
       nextStep = "tradeoff";
       setQuickActions(getUsefulActions(nextAnswers));
@@ -502,10 +539,10 @@ export function DecisionAssistantDock() {
 
   const completedSegments = {
     Lifestyle: Boolean(answers.situation),
-    Location: Boolean(answers.details),
-    Building: Boolean(answers.details),
-    Financial: Boolean(answers.details && leadScore >= 2),
-    Timeline: Boolean(answers.details),
+    Location: Boolean(answers.desire),
+    Building: Boolean(answers.desire || answers.constraints),
+    Financial: Boolean(answers.constraints && leadScore >= 2),
+    Timeline: Boolean(answers.constraints),
     "Trade-offs": Boolean(answers.tradeOff),
   };
   const blueprintCompletion = blueprintSegments.filter((segment) => completedSegments[segment.label as keyof typeof completedSegments]).length;
@@ -575,17 +612,20 @@ export function DecisionAssistantDock() {
             </button>
           </form>
           {showStarters && step === "situation" ? (
-            <div className="flex flex-wrap gap-2 lg:col-start-3">
-              {starterPrompts.map((prompt) => (
-                <button
-                  key={prompt.label}
-                  type="button"
-                  onClick={() => handleStarter(prompt)}
-                  className="border border-brand-ivory/16 px-3 py-2 text-[10px] uppercase tracking-[0.12em] text-brand-ivory/72 transition-colors hover:border-brand-brass hover:text-brand-ivory"
-                >
-                  {prompt.label}
-                </button>
-              ))}
+            <div className="lg:col-start-3">
+              <p className="mb-2 text-[10px] uppercase tracking-[0.16em] text-brand-ivory/52">Not sure where to start?</p>
+              <div className="flex flex-wrap gap-2">
+                {starterPrompts.map((prompt) => (
+                  <button
+                    key={prompt.label}
+                    type="button"
+                    onClick={() => handleStarter(prompt)}
+                    className="border-b border-brand-ivory/20 pb-1 text-left text-xs text-brand-ivory/72 transition-colors hover:border-brand-brass hover:text-brand-ivory"
+                  >
+                    {prompt.label}
+                  </button>
+                ))}
+              </div>
             </div>
           ) : null}
         </div>
@@ -612,7 +652,7 @@ export function DecisionAssistantDock() {
             <div>
               <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Decision Guide</p>
               <p className="text-sm font-medium text-brand-navy">
-                {expanded ? "I'll learn while you browse." : "Build your Decision Blueprint"}
+                {expanded ? "Tell me what's changing." : "Guidance before search"}
               </p>
             </div>
             {expanded ? (
@@ -707,17 +747,20 @@ export function DecisionAssistantDock() {
             {step !== "sent" ? (
               <>
                 {showStarters && step === "situation" ? (
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {starterPrompts.map((prompt) => (
-                      <button
-                        key={prompt.label}
-                        type="button"
-                        onClick={() => handleStarter(prompt)}
-                        className="border border-brand-border bg-white px-3 py-2 text-[10px] uppercase tracking-[0.12em] text-brand-graphite transition-colors hover:border-brand-brass hover:text-brand-navy"
-                      >
-                        {prompt.label}
-                      </button>
-                    ))}
+                  <div className="mt-3">
+                    <p className="mb-2 text-[10px] uppercase tracking-[0.16em] text-brand-graphite/60">Not sure where to start?</p>
+                    <div className="flex flex-wrap gap-2">
+                      {starterPrompts.map((prompt) => (
+                        <button
+                          key={prompt.label}
+                          type="button"
+                          onClick={() => handleStarter(prompt)}
+                          className="border-b border-brand-border pb-1 text-left text-xs text-brand-graphite transition-colors hover:border-brand-brass hover:text-brand-navy"
+                        >
+                          {prompt.label}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 ) : null}
                 {quickActions.length > 0 ? (
