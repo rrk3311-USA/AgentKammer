@@ -20,7 +20,7 @@ const blueprintSegments = [
   { label: "Lifestyle", filled: true, icon: UsersRound },
   { label: "Location", filled: true, icon: MapPinned },
   { label: "Building", filled: true, icon: Building2 },
-  { label: "Financial", filled: false, icon: Landmark },
+  { label: "Budget", filled: false, icon: Landmark },
   { label: "Timeline", filled: false, icon: CalendarClock },
   { label: "Trade-offs", filled: false, icon: SlidersHorizontal },
 ];
@@ -242,7 +242,7 @@ function getBlueprintStrength(label: string, complete: boolean, leadScore: numbe
   if (label === "Lifestyle") return 24;
   if (label === "Location") return Math.min(68, 22 + leadScore * 12);
   if (label === "Building") return Math.min(64, 18 + leadScore * 10);
-  if (label === "Financial") return Math.min(58, 12 + leadScore * 9);
+  if (label === "Budget") return Math.min(58, 12 + leadScore * 9);
   if (label === "Timeline") return Math.min(70, 16 + leadScore * 11);
   return Math.min(52, 10 + leadScore * 8);
 }
@@ -294,7 +294,7 @@ function getSituationGuidance(answer: string, score: number) {
     return {
       path: "/buyer-advisory",
       messages: [
-        "That is the right starting point. You do not need to know whether moving is the answer yet. I would compare staying against moving before looking at buildings, then test the decision against money, daily life, and timing.",
+        "That is the right starting point. You do not need to know whether moving is the answer yet. I would compare staying, renewing, renovating, renting, and moving before looking at buildings. The recommendation may be to do nothing for now, and that can be the right answer.",
       ],
     };
   }
@@ -322,11 +322,11 @@ function getUsefulActions(answers: Answers): QuickAction[] {
     },
     {
       label: "Constraints",
-      response: "What's making that difficult today: budget, timing, financing, school district, pets, building rules, or uncertainty?",
+      response: "What would disappoint you most if the decision went wrong: a long commute, high monthly cost, too little space, weak building quality, or losing flexibility?",
     },
     {
       label: "Recommendation so far",
-      response: `Recommendation so far: use "${context}" as the first filter. Next, clarify constraints and trade-offs before looking at listings.`,
+      response: `Recommendation so far: use "${context}" as the first filter. Next, compare whether anything should change at all before looking at listings.`,
     },
   ];
 
@@ -708,13 +708,42 @@ export function DecisionAssistantDock() {
     Lifestyle: Boolean(answers.situation),
     Location: Boolean(answers.desire),
     Building: Boolean(answers.desire || answers.constraints),
-    Financial: Boolean(answers.constraints && leadScore >= 2),
+    Budget: Boolean(answers.constraints && leadScore >= 2),
     Timeline: Boolean(answers.constraints),
     "Trade-offs": Boolean(answers.tradeOff),
   };
   const blueprintCompletion = blueprintSegments.filter((segment) => completedSegments[segment.label as keyof typeof completedSegments]).length;
   const blueprintPercent = Math.round((blueprintCompletion / blueprintSegments.length) * 100);
   const displayMessages = mergeConsecutiveMessages(messages);
+  const renderCompactBlueprintProgress = (tone: "dark" | "light") => (
+    <span className="grid grid-cols-6 gap-1" aria-label={`Decision Blueprint progress ${blueprintCompletion} of 6`}>
+      {blueprintSegments.map((segment, index) => {
+        const filled = completedSegments[segment.label as keyof typeof completedSegments];
+        return (
+          <span
+            key={segment.label}
+            className={tone === "dark" ? "h-2 overflow-hidden bg-brand-ivory/26" : "h-1.5 overflow-hidden bg-brand-border/75"}
+          >
+            <span
+              className={
+                filled
+                  ? tone === "dark"
+                    ? "block h-full animate-blueprint-fill bg-brand-brass"
+                    : "block h-full animate-blueprint-fill bg-brand-navy"
+                  : tone === "dark"
+                    ? "block h-full animate-blueprint-fill bg-brand-ivory/34"
+                    : "block h-full animate-blueprint-fill bg-brand-brass/40"
+              }
+              style={{
+                animationDelay: `${index * 65}ms`,
+                width: `${getBlueprintStrength(segment.label, Boolean(filled), leadScore)}%`,
+              }}
+            />
+          </span>
+        );
+      })}
+    </span>
+  );
 
   if (!expanded) {
     return (
@@ -724,25 +753,31 @@ export function DecisionAssistantDock() {
         aria-label="Decision Guide"
       >
         <div className="mx-auto grid max-w-site gap-3 lg:grid-cols-[minmax(210px,0.22fr)_minmax(220px,0.25fr)_minmax(340px,0.53fr)] lg:items-center">
-          <div className="flex items-center justify-between gap-3">
-            <button type="button" onClick={() => setExpanded(true)} className="flex min-w-0 items-center gap-3 text-left">
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-brand-ivory/18 bg-brand-ivory/8 text-brand-brass">
-                <Compass className="h-4 w-4" strokeWidth={1.6} />
-              </span>
-              <span className="min-w-0">
-                <span className="block text-[10px] uppercase tracking-[0.22em] text-brand-brass">Decision Guide</span>
-                <span className="mt-0.5 block truncate text-sm font-medium text-brand-ivory">What's changing?</span>
-              </span>
-            </button>
-            <div className="flex shrink-0 items-center gap-2">
-              <p className="font-mono text-[10px] text-brand-ivory/58">{blueprintCompletion}/6</p>
-              <button
-                type="button"
-                onClick={() => setExpanded(true)}
-                className="border border-brand-ivory/16 px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-brand-ivory/78 transition-colors hover:border-brand-brass hover:text-brand-ivory"
-              >
-                Open
+          <div className="grid gap-2">
+            <div className="flex items-center justify-between gap-3">
+              <button type="button" onClick={() => setExpanded(true)} className="flex min-w-0 items-center gap-3 text-left">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-brand-ivory/18 bg-brand-ivory/8 text-brand-brass">
+                  <Compass className="h-4 w-4" strokeWidth={1.6} />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[10px] uppercase tracking-[0.22em] text-brand-brass">Decision Guide</span>
+                  <span className="mt-0.5 block truncate text-sm font-medium text-brand-ivory">What's changing?</span>
+                </span>
               </button>
+              <div className="flex shrink-0 items-center gap-2">
+                <p className="font-mono text-[10px] text-brand-ivory/58">{blueprintCompletion}/6</p>
+                <button
+                  type="button"
+                  onClick={() => setExpanded(true)}
+                  className="border border-brand-ivory/16 px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-brand-ivory/78 transition-colors hover:border-brand-brass hover:text-brand-ivory"
+                >
+                  Open
+                </button>
+              </div>
+            </div>
+            <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 sm:hidden">
+              <span className="text-[10px] uppercase tracking-[0.16em] text-brand-brass">Progress</span>
+              {renderCompactBlueprintProgress("dark")}
             </div>
           </div>
           <div className="hidden sm:block" aria-label="Decision Blueprint modules">
@@ -770,7 +805,7 @@ export function DecisionAssistantDock() {
               ))}
             </div>
             <p className="mt-2 text-[10px] uppercase tracking-[0.14em] text-brand-ivory/64 2xl:hidden">
-              Lifestyle · Building · Financial · Timeline
+              Lifestyle · Building · Budget · Timeline
             </p>
           </div>
           <div className="min-w-0 lg:col-start-3">
@@ -847,6 +882,15 @@ export function DecisionAssistantDock() {
               </button>
             ) : null}
           </div>
+          {expanded ? (
+            <div className="grid gap-1.5 sm:hidden">
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-[10px] uppercase tracking-[0.18em] text-brand-brass">Progress</span>
+                <span className="font-mono text-[10px] text-brand-graphite">{blueprintCompletion}/6</span>
+              </div>
+              {renderCompactBlueprintProgress("light")}
+            </div>
+          ) : null}
           <div className="hidden border border-brand-border bg-white p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_1px_0_rgba(42,52,71,0.05)] sm:block" aria-label="Decision Blueprint modules">
             <div className="flex items-center justify-between gap-4">
               <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Decision Progress</p>
