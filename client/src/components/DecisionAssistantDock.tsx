@@ -58,6 +58,7 @@ type Answers = {
   constraints?: string;
   tradeOff?: string;
   email?: string;
+  phone?: string;
 };
 
 type QuickAction = {
@@ -65,6 +66,25 @@ type QuickAction = {
   response: string;
   path?: string;
   asksForEmail?: boolean;
+};
+
+type DecisionGuideAction = {
+  type: "open_page" | "update_blueprint" | "send_recap" | "recommend_page" | "none";
+  label: string;
+  path: string | null;
+  reason: string;
+};
+
+type DecisionGuideAiTurn = {
+  reply: string;
+  profile?: Partial<Answers>;
+  actions?: DecisionGuideAction[];
+  leadQualification?: {
+    score?: number;
+    quality?: string;
+    summary?: string;
+    missing?: string[];
+  };
 };
 
 function scoreLead(text: string) {
@@ -138,6 +158,18 @@ function summarizeMemory(messages: Message[], answers: Answers, score: number) {
 
 function transcript(messages: Message[]) {
   return messages.map((message) => `${message.role === "assistant" ? "Assistant" : "Visitor"}: ${message.text}`).join("\n");
+}
+
+function mergeDefinedProfile(current: Answers, profile?: Partial<Answers>) {
+  if (!profile) return current;
+  const next = { ...current };
+  (["situation", "desire", "constraints", "tradeOff", "email", "phone"] as const).forEach((key) => {
+    const value = profile[key];
+    if (typeof value === "string" && value.trim()) {
+      next[key] = value.trim();
+    }
+  });
+  return next;
 }
 
 function getBlueprintStrength(label: string, complete: boolean, leadScore: number) {
@@ -435,7 +467,7 @@ export function DecisionAssistantDock() {
 
     setExpanded(true);
     setShowStarters(false);
-    setQuickActions(getUsefulActions(nextAnswers));
+    setQuickActions([]);
     setMessages(nextMessages);
     setAnswers(nextAnswers);
     setLeadScore(nextScore);
@@ -452,6 +484,60 @@ export function DecisionAssistantDock() {
     }
   }
 
+  async function requestAiGuideTurn(
+    latestMessage: string,
+    profile: Answers,
+    score: number,
+    visibleMessages: Message[],
+  ): Promise<DecisionGuideAiTurn | null> {
+    try {
+      const response = await fetch("/api/decision-guide/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          sessionId,
+          latestMessage,
+          messages: visibleMessages,
+          profile,
+          leadScore: score,
+          pageContext: getPageContext(location),
+        }),
+      });
+
+      if (!response.ok) return null;
+      return (await response.json()) as DecisionGuideAiTurn;
+    } catch {
+      return null;
+    }
+  }
+
+  function applyAiGuideTurn(
+    aiTurn: DecisionGuideAiTurn | null,
+    baseMessages: Message[],
+    fallbackAnswers: Answers,
+    fallbackScore: number,
+  ) {
+    if (!aiTurn?.reply) return;
+    const mergedAnswers = mergeDefinedProfile(fallbackAnswers, aiTurn.profile);
+    const nextScore = typeof aiTurn.leadQualification?.score === "number" ? Math.round(aiTurn.leadQualification.score) : fallbackScore;
+
+    setMessages([...baseMessages, { role: "assistant", text: aiTurn.reply }]);
+    setAnswers(mergedAnswers);
+    setLeadScore(nextScore);
+    setQuickActions([]);
+
+    const openAction = aiTurn.actions?.find((action) => (action.type === "open_page" || action.type === "recommend_page") && action.path);
+    if (openAction?.path) {
+      setLocation(openAction.path);
+    }
+
+    const shouldSendRecap = aiTurn.actions?.some((action) => action.type === "send_recap");
+    if (shouldSendRecap && mergedAnswers.email) {
+      void sendRecap(mergedAnswers, nextScore);
+    }
+  }
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const answer = input.trim();
@@ -459,7 +545,8 @@ export function DecisionAssistantDock() {
     setExpanded(true);
 
     const foundEmail = answer.match(emailPattern)?.[0];
-    const nextMessages: Message[] = [...messages, { role: "user", text: answer }];
+    const baseMessages: Message[] = [...messages, { role: "user", text: answer }];
+    const nextMessages: Message[] = [...baseMessages];
     let nextAnswers = { ...answers };
     let nextStep = step;
     let nextScore = leadScore + scoreLead(answer);
@@ -473,7 +560,7 @@ export function DecisionAssistantDock() {
       setMessages(nextMessages);
       setAnswers(nextAnswers);
       setLeadScore(nextScore);
-      setQuickActions(getUsefulActions(nextAnswers));
+      setQuickActions([]);
       setInput("");
       void sendRecap(nextAnswers, nextScore);
       return;
@@ -485,7 +572,6 @@ export function DecisionAssistantDock() {
       if (guidance.path) setLocation(guidance.path);
       guidance.messages.forEach((text) => nextMessages.push({ role: "assistant", text }));
       nextStep = "desire";
-      setQuickActions(getUsefulActions(nextAnswers));
     } else if (step === "desire") {
       nextAnswers = { ...nextAnswers, desire: answer };
       nextMessages.push({
@@ -497,7 +583,6 @@ export function DecisionAssistantDock() {
         text: "What's making that difficult today: budget, timing, financing, school district, pets, building rules, or uncertainty?",
       });
       nextStep = "constraints";
-      setQuickActions(getUsefulActions(nextAnswers));
     } else if (step === "constraints") {
       nextAnswers = { ...nextAnswers, constraints: answer };
       nextMessages.push({
@@ -509,7 +594,6 @@ export function DecisionAssistantDock() {
         text: "If you can't have everything, what matters most: size, location, building quality, flexibility, cost control, or long-term value?",
       });
       nextStep = "tradeoff";
-      setQuickActions(getUsefulActions(nextAnswers));
     } else if (step === "tradeoff") {
       nextAnswers = { ...nextAnswers, tradeOff: answer };
       nextMessages.push({
@@ -521,20 +605,22 @@ export function DecisionAssistantDock() {
         text: "Want to read the relevant brief, compare ownership options, or see the recommendation so far?",
       });
       nextStep = "tradeoff";
-      setQuickActions(getUsefulActions(nextAnswers));
     } else {
       nextMessages.push({
         role: "assistant",
         text: "You can keep adding context here. I’ll keep narrowing the next useful decision instead of turning this into a form.",
       });
-      setQuickActions(getUsefulActions(nextAnswers));
     }
 
     setMessages(nextMessages);
     setAnswers(nextAnswers);
     setLeadScore(nextScore);
     setStep(nextStep);
+    setQuickActions([]);
     setInput("");
+    void requestAiGuideTurn(answer, nextAnswers, nextScore, baseMessages).then((aiTurn) => {
+      applyAiGuideTurn(aiTurn, baseMessages, nextAnswers, nextScore);
+    });
   };
 
   const completedSegments = {
@@ -600,7 +686,7 @@ export function DecisionAssistantDock() {
               value={input}
               onChange={(event) => setInput(event.target.value)}
               placeholder={openingPrompts[promptIndex]}
-              className="h-11 border border-brand-ivory/16 bg-brand-ivory/8 px-3 text-sm text-brand-ivory outline-none transition-colors placeholder:text-brand-ivory/48 focus:border-brand-brass"
+              className="h-11 border border-brand-ivory/16 bg-brand-ivory/8 px-3 text-sm text-brand-brass caret-brand-brass outline-none transition-colors placeholder:text-brand-brass/55 focus:border-brand-brass focus:bg-brand-ivory"
             />
             <button
               type="submit"
@@ -761,20 +847,6 @@ export function DecisionAssistantDock() {
                         </button>
                       ))}
                     </div>
-                  </div>
-                ) : null}
-                {quickActions.length > 0 ? (
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {quickActions.map((action) => (
-                      <button
-                        key={action.label}
-                        type="button"
-                        onClick={() => handleQuickAction(action)}
-                        className="border border-brand-border bg-white px-3 py-2 text-[10px] uppercase tracking-[0.12em] text-brand-graphite transition-colors hover:border-brand-brass hover:text-brand-navy"
-                      >
-                        {action.label}
-                      </button>
-                    ))}
                   </div>
                 ) : null}
                 <form onSubmit={handleSubmit} className="mt-3 grid gap-2 md:grid-cols-[minmax(0,1fr)_auto]">

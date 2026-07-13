@@ -20,6 +20,7 @@ import { generateMarketReportHTML, californiaMarketData, nycMarketData, nevadaMa
 import { z } from "zod";
 import { writeFileSync, mkdirSync, existsSync } from "fs";
 import { join } from "path";
+import { randomUUID } from "crypto";
 import nodemailer from "nodemailer";
 import type { Transporter } from "nodemailer";
 import { getMarketStatistics, getActiveListings, getRentalListings } from "./lib/rentcast";
@@ -529,6 +530,138 @@ interface LeadData {
   goals?: string;
 }
 
+const decisionGuideMessageSchema = z.object({
+  role: z.enum(["assistant", "user"]),
+  text: z.string(),
+});
+
+const decisionGuideProfileSchema = z.object({
+  situation: z.string().optional(),
+  desire: z.string().optional(),
+  constraints: z.string().optional(),
+  tradeOff: z.string().optional(),
+  email: z.string().optional(),
+  phone: z.string().optional(),
+});
+
+const decisionGuideChatSchema = z.object({
+  sessionId: z.string().optional(),
+  latestMessage: z.string().min(1),
+  messages: z.array(decisionGuideMessageSchema).default([]),
+  profile: decisionGuideProfileSchema.default({}),
+  leadScore: z.number().optional(),
+  pageContext: z
+    .object({
+      path: z.string().optional(),
+      title: z.string().optional(),
+      topics: z.array(z.string()).optional(),
+      prerequisites: z.array(z.string()).optional(),
+      related: z.array(z.string()).optional(),
+    })
+    .optional(),
+});
+
+const decisionGuideResponseSchema = {
+  type: "object",
+  additionalProperties: false,
+  required: ["reply", "profile", "actions", "leadQualification"],
+  properties: {
+    reply: {
+      type: "string",
+      description: "The visitor-facing answer from Raphi, concise and advisor-like.",
+    },
+    profile: {
+      type: "object",
+      additionalProperties: false,
+      required: ["situation", "desire", "constraints", "tradeOff", "email", "phone"],
+      properties: {
+        situation: { type: ["string", "null"] },
+        desire: { type: ["string", "null"] },
+        constraints: { type: ["string", "null"] },
+        tradeOff: { type: ["string", "null"] },
+        email: { type: ["string", "null"] },
+        phone: { type: ["string", "null"] },
+      },
+    },
+    actions: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["type", "label", "path", "reason"],
+        properties: {
+          type: { type: "string", enum: ["open_page", "update_blueprint", "send_recap", "recommend_page", "none"] },
+          label: { type: "string" },
+          path: { type: ["string", "null"] },
+          reason: { type: "string" },
+        },
+      },
+    },
+    leadQualification: {
+      type: "object",
+      additionalProperties: false,
+      required: ["score", "quality", "summary", "missing"],
+      properties: {
+        score: { type: "number" },
+        quality: { type: "string", enum: ["exploratory", "qualified", "high-intent"] },
+        summary: { type: "string" },
+        missing: { type: "array", items: { type: "string" } },
+      },
+    },
+  },
+};
+
+function extractResponseText(response: any) {
+  if (typeof response.output_text === "string" && response.output_text.trim()) {
+    return response.output_text.trim();
+  }
+
+  const parts: string[] = [];
+  for (const item of response.output ?? []) {
+    if (item.type !== "message") continue;
+    for (const content of item.content ?? []) {
+      if (content.type === "output_text" && typeof content.text === "string") {
+        parts.push(content.text);
+      }
+    }
+  }
+  return parts.join("\n").trim();
+}
+
+function readCookie(cookieHeader: string | undefined, name: string) {
+  if (!cookieHeader) return undefined;
+  const cookies = cookieHeader.split(";").map((part) => part.trim());
+  const match = cookies.find((part) => part.startsWith(`${name}=`));
+  if (!match) return undefined;
+  return decodeURIComponent(match.slice(name.length + 1));
+}
+
+function getOrCreateVisitorId(req: any, res: any) {
+  const existing = readCookie(req.headers.cookie, "ak_visitor_id");
+  if (existing && /^akv_[a-f0-9-]{36}$/i.test(existing)) return existing;
+
+  const visitorId = `akv_${randomUUID()}`;
+  res.cookie("ak_visitor_id", visitorId, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge: 1000 * 60 * 60 * 24 * 400,
+    path: "/",
+  });
+  return visitorId;
+}
+
+function compactProfile(profile: z.infer<typeof decisionGuideProfileSchema>) {
+  return {
+    situation: profile.situation || null,
+    desire: profile.desire || null,
+    constraints: profile.constraints || null,
+    tradeOff: profile.tradeOff || null,
+    email: profile.email || null,
+    phone: profile.phone || null,
+  };
+}
+
 function calculateLeadScore(leadData: LeadData): number {
   let score = 0;
   
@@ -569,6 +702,150 @@ function calculateLeadScore(leadData: LeadData): number {
 
 export async function registerRoutes(app: Express): Promise<void> {
   const sessionLeads = new Map<string, { leadId?: string; data: LeadData; notified?: boolean }>();
+
+  app.post("/api/decision-guide/chat", async (req, res) => {
+    try {
+      const visitorId = getOrCreateVisitorId(req, res);
+      const parsed = decisionGuideChatSchema.parse(req.body);
+      const memoryKey = visitorId;
+      const existingMemory = await storage.getChatConversationBySessionId(memoryKey);
+      const existingProfile = (() => {
+        if (!existingMemory?.summary) return {};
+        try {
+          const summary = JSON.parse(existingMemory.summary);
+          return summary.profile && typeof summary.profile === "object" ? summary.profile : {};
+        } catch {
+          return {};
+        }
+      })();
+      const currentProfile = compactProfile({ ...existingProfile, ...parsed.profile });
+      const conversation = parsed.messages.slice(-12).map((message) => ({
+        role: message.role,
+        text: message.text,
+      }));
+
+      if (!openai) {
+        return res.status(503).json({ error: "Decision Guide AI is not configured", visitorId });
+      }
+
+      const system = [
+        "You are Raphi, Agent Kammer's Decision Guide for Manhattan housing decisions.",
+        "You are not a generic chatbot and not a lead form. You are a senior advisor sitting across the table.",
+        "Your framework is TRIGGER -> DESIRE -> CONSTRAINTS -> TRADE-OFFS -> RECOMMENDATION.",
+        "First understand what changed. Then what the visitor wants the next home to do better. Then what is limiting them. Then what they will give up if they cannot have everything.",
+        "Never gate basic guidance behind contact information.",
+        "Ask for email or phone only when offering a clear deliverable: saving progress, sending a recap, delivering reports, scheduling a review, or arranging an introduction.",
+        "Qualification is invisible. Do not show scores to the visitor.",
+        "Internally qualify intent, urgency, financial readiness, decision clarity, property fit, and human-assistance readiness.",
+        "Return one warm, concise advisor reply and structured actions for the UI.",
+      ].join("\n");
+
+      const response = await openai.responses.create({
+        model: process.env.DECISION_GUIDE_MODEL || process.env.OPENAI_MODEL || "gpt-4o-mini",
+        input: [
+          { role: "developer", content: system },
+          {
+            role: "user",
+            content: JSON.stringify({
+              visitorId,
+              currentPage: parsed.pageContext,
+              currentProfile,
+              leadScore: parsed.leadScore ?? 0,
+              latestMessage: parsed.latestMessage,
+              conversation,
+              availableActions: [
+                "update_blueprint",
+                "recommend_page",
+                "open_page",
+                "send_recap",
+                "none",
+              ],
+              actionRules: {
+                open_page: "Use only when a page would clearly help. Include a path from currentPage.related when possible.",
+                send_recap: "Use only if the visitor provided email/phone or explicitly asked to save/send.",
+                update_blueprint: "Use when new trigger, desire, constraint, trade-off, email, or phone was learned.",
+              },
+            }),
+          },
+        ],
+        text: {
+          format: {
+            type: "json_schema",
+            name: "decision_guide_turn",
+            schema: decisionGuideResponseSchema,
+            strict: true,
+          },
+        },
+        temperature: 0.4,
+        store: false,
+      });
+
+      const outputText = extractResponseText(response);
+      const guideTurn = JSON.parse(outputText);
+      const nextProfile = compactProfile({ ...currentProfile, ...guideTurn.profile });
+      const allMessages = [...conversation, { role: "assistant", text: guideTurn.reply }];
+      const summary = {
+        visitorId,
+        profile: nextProfile,
+        leadQualification: guideTurn.leadQualification,
+        pageContext: parsed.pageContext,
+        actions: guideTurn.actions,
+        updatedAt: new Date().toISOString(),
+      };
+
+      if (existingMemory) {
+        await storage.updateChatConversation(existingMemory.id, {
+          messages: JSON.stringify(allMessages),
+          leadEmail: nextProfile.email || existingMemory.leadEmail,
+          leadPhone: nextProfile.phone || existingMemory.leadPhone,
+          categoryInterest: nextProfile.situation || nextProfile.desire || existingMemory.categoryInterest,
+          leadScore: Math.round(guideTurn.leadQualification.score),
+          summary: JSON.stringify(summary),
+        });
+      } else {
+        await storage.createChatConversation({
+          sessionId: memoryKey,
+          messages: JSON.stringify(allMessages),
+          leadEmail: nextProfile.email || undefined,
+          leadPhone: nextProfile.phone || undefined,
+          categoryInterest: nextProfile.situation || nextProfile.desire || undefined,
+          leadScore: Math.round(guideTurn.leadQualification.score),
+          summary: JSON.stringify(summary),
+        });
+      }
+
+      if ((nextProfile.email || nextProfile.phone) && !existingMemory?.leadEmail && !existingMemory?.leadPhone) {
+        await storage.createLead({
+          name: "Decision Guide Visitor",
+          email: nextProfile.email || undefined,
+          phone: nextProfile.phone || undefined,
+          timeline: nextProfile.constraints || undefined,
+          motivation: nextProfile.situation || undefined,
+          financing: nextProfile.constraints || undefined,
+          commitment: nextProfile.tradeOff || undefined,
+          communicationStyle: `Decision Guide - ${guideTurn.leadQualification.quality}`,
+          conversationSummary: JSON.stringify(summary, null, 2),
+          leadScore: Math.round(guideTurn.leadQualification.score),
+          marketInterest: nextProfile.desire || undefined,
+          leadSource: "decision_guide",
+        });
+      }
+
+      res.json({
+        visitorId,
+        reply: guideTurn.reply,
+        profile: nextProfile,
+        actions: guideTurn.actions,
+        leadQualification: guideTurn.leadQualification,
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ error: "Invalid Decision Guide request", details: error.errors });
+      }
+      console.error("Decision Guide chat error:", error);
+      res.status(500).json({ error: "Failed to generate Decision Guide response" });
+    }
+  });
 
   app.post("/api/chat", async (req, res) => {
     try {
