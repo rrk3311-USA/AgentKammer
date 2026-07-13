@@ -357,7 +357,7 @@ export function DecisionAssistantDock() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      text: "Hi, I'm Raphi. I'll help you think through your housing decision before you spend time looking at listings. Whether you're just exploring or already planning a move, we'll figure it out together. What's changing?",
+      text: "Hi, I'm Raphi. Before you spend time looking at listings, I’ll help you decide whether anything should change at all. Sometimes doing nothing is right. Sometimes it is the mistake. What's changing?",
     },
   ]);
   const transcriptRef = useRef<HTMLDivElement | null>(null);

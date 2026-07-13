@@ -29,15 +29,15 @@ export default function Services() {
     <main className="bg-brand-ivory">
       <PageHero
         eyebrow="Decision Briefs"
-        title="Start with the situation. Then decide whether anything should change."
-        description="Agent Kammer organizes housing guidance around the life event, constraint, or ownership question behind the search. The recommendation may be to buy, sell, rent, wait, renovate, refinance, or stay put."
+        title="The first question is whether anything should change at all."
+        description="Agent Kammer organizes housing guidance around the life event, constraint, or ownership question behind the search. The recommendation may be to buy, sell, rent, wait, renew, renovate, refinance, rent the current home, or stay put."
       />
 
       <PageSection className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)]">
         <SectionHeading
           eyebrow="Core"
-          title="The main paths stay simple."
-          description="Use these broad entry points when the situation is still forming. The Decision Guide and the footer navigator can then route visitors into a more specific brief."
+          title="The main paths stay simple because the visitor may not need a path yet."
+          description="Use these broad entry points when the situation is still forming. The Decision Guide and the footer navigator can then decide whether the visitor should move forward, slow down, or avoid a move entirely."
         />
         <div className="rounded-card border border-brand-border bg-white p-8">
           <div className="grid gap-4">
@@ -55,8 +55,8 @@ export default function Services() {
         <PageSection>
           <SectionHeading
             eyebrow="Brief Library"
-            title="Focused guidance for the situations that actually make people move."
-            description="Each brief turns a specific trigger into a smaller set of decisions: what changed, whether anything should change, what the options are, and which trade-offs matter most."
+            title="Focused guidance for the situations that make people question home."
+            description="Each brief turns a specific trigger into a smaller set of decisions: what changed, whether anything should change, what the options are, what could go wrong if nothing changes, and which trade-offs matter most."
           />
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             {serviceLandings.map((item) => (

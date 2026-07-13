@@ -21,7 +21,7 @@ const educationBlocks = [
   },
   {
     title: "Recommendation",
-    text: "Move only when the acquisition profile, building profile, and life profile point in the same direction.",
+    text: "Tell the visitor what to do, even when the strongest recommendation is to wait, renew, renovate, or do nothing.",
   },
 ];
 
@@ -41,22 +41,25 @@ export default function Home() {
             <p className="text-[10px] uppercase tracking-[0.3em] text-brand-brass">Agent Kammer</p>
             <p className="mt-3 text-[11px] uppercase tracking-[0.26em] text-brand-brass">Housing Decision Operating System</p>
             <h1 className="mt-4 max-w-[11ch] font-display text-[clamp(3.4rem,6.4vw,6.8rem)] leading-[0.88] text-brand-navy">
-              Live Where You Belong.
+              Is it better to do nothing?
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-brand-graphite">
-              Agent Kammer diagnoses why you are moving, what your life now requires, and which Manhattan buildings deserve consideration before any showing begins.
+              Nobody wakes up knowing whether to buy, sell, rent, wait, renew, renovate, or stay put. Agent Kammer diagnoses what changed and tells you what to do, even when the right answer is nothing.
+            </p>
+            <p className="mt-4 max-w-xl text-base leading-7 text-brand-graphite/82">
+              Sometimes doing nothing is the smartest move. Sometimes it is the most expensive mistake.
             </p>
             <div className="mt-7 flex flex-wrap items-stretch gap-3">
               <button
                 type="button"
                 onClick={openDecisionAssistant}
-                className="group grid min-w-[17rem] border border-brand-brass/45 bg-brand-surface px-5 py-4 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.65),0_1px_0_rgba(42,52,71,0.06)] transition-colors hover:border-brand-navy/22 hover:bg-white"
+                className="ak-call-button group grid min-w-[19rem] px-5 py-4 text-left transition-colors"
               >
-                <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">Decision Blueprint</span>
-                <span className="mt-3 h-px w-full bg-brand-brass/35" aria-hidden />
-                <span className="mt-3 flex items-center justify-between font-display text-2xl leading-none text-brand-navy">
-                  Start Decision Blueprint
-                  <MoveRight className="h-5 w-5 text-brand-brass transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
+                <span className="text-[10px] uppercase tracking-[0.24em] text-[#D7C29A]">Decision Guide</span>
+                <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
+                <span className="mt-3 flex items-center justify-between font-display text-2xl leading-none text-brand-ivory">
+                  Find out what to do
+                  <MoveRight className="h-5 w-5 text-[#D7C29A] transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
                 </span>
               </button>
               <Link
@@ -105,10 +108,10 @@ export default function Home() {
           <div className="max-w-4xl">
             <p className="text-[10px] uppercase tracking-[0.26em] text-brand-brass">Decision Brief</p>
             <h2 className="mt-4 max-w-3xl font-display text-[clamp(2.7rem,5vw,5.2rem)] leading-[0.9] text-brand-navy">
-              Diagnose before recommending.
+              The answer is not always move.
             </h2>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-brand-graphite">
-              Each page becomes an educational brief: situation, risks, building considerations, timing, resources, and the questions that shape the recommendation.
+              Each page becomes an educational brief: what changed, whether anything should change, what the real options are, and which recommendation protects the client best.
             </p>
           </div>
           <div className="mt-12 grid gap-px bg-brand-border sm:grid-cols-2 lg:grid-cols-4">

@@ -4,6 +4,14 @@ import { buildingReportsNav, primaryNav } from "@/components/site-shell";
 import { serviceLandings } from "@/data/service-landings";
 
 const changingLinks = [
+  { label: "Not Sure", href: "/buyer-advisory" },
+  { label: "Stay Put", href: "/buyer-advisory" },
+  { label: "Renew Lease", href: "/buyer-advisory" },
+  { label: "Wait", href: "/buyer-advisory" },
+  { label: "Renovate", href: "/buyer-advisory" },
+  { label: "Refinance", href: "/buyer-advisory" },
+  { label: "Rent Current Home", href: "/buyer-advisory" },
+  { label: "Sell or Keep", href: "/buyer-advisory" },
   { label: "Relocation", href: "/services/executive-relocation-nyc" },
   { label: "More Space", href: "/services/school-district-planning-nyc" },
   { label: "First Home", href: "/buyer-advisory" },
@@ -26,10 +34,10 @@ export function Footer() {
         <div>
           <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">Agent Kammer</p>
           <h2 className="mt-4 max-w-xl font-display text-[clamp(2.25rem,5vw,4.5rem)] leading-[0.9] tracking-[-0.03em] text-brand-navy">
-            Decisions before showings.
+            Is doing nothing smarter?
           </h2>
           <p className="mt-6 max-w-lg text-sm leading-7 text-brand-graphite">
-            Tell us what is changing. We will help decide whether to buy, sell, rent, wait, renovate, or stay put before a search takes over.
+            Tell us what is changing. We will help decide whether to buy, sell, rent, wait, renew, renovate, refinance, rent the current home, or stay put before a search takes over.
           </p>
           <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap">
             <Link
@@ -48,7 +56,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-[0.8fr_0.8fr_1.45fr_0.8fr]">
+        <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-[1.1fr_0.8fr_1.45fr_0.8fr]">
           <nav aria-label="What is changing">
             <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">What's Changing?</p>
             <div className="mt-4 grid gap-x-5 gap-y-3 sm:grid-cols-2">

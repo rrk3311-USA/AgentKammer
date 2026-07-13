@@ -21,9 +21,9 @@ function publicSummary(summary: string) {
 function decisionQuestions(title: string) {
   return [
     `What changed enough to make ${title.toLowerCase()} worth evaluating now?`,
-    "Should anything change, or is the smarter move to wait, renew, renovate, refinance, or stay put?",
+    "Is it better to do nothing, or is doing nothing the risk?",
     "If a move is right, which constraints should shape the shortlist before listings or showings begin?",
-    "Which trade-off matters most: location, space, building quality, monthly cost, flexibility, or long-term value?",
+    "Which option should win: buy, sell, rent, wait, renew, renovate, refinance, rent the current home, or stay put?",
   ];
 }
 
@@ -78,7 +78,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
         <SectionHeading
           eyebrow="Who It Helps"
           title={`${landing.navLabel} need a decision brief, not a generic search.`}
-          description="The first step is understanding why the move, sale, or purchase is being considered. From there, the work becomes narrower: decide whether anything should change, then decide what kind of change is worth pursuing."
+          description="The first step is understanding why the move, sale, or purchase is being considered. From there, the work becomes narrower: decide whether anything should change, whether doing nothing is wise or dangerous, then decide what kind of change is worth pursuing."
         />
         <div className="grid gap-4">
           {landing.audience.map((item, index) => (
@@ -94,8 +94,8 @@ export default function ServiceLanding({ slug }: { slug: string }) {
         <PageSection>
           <SectionHeading
             eyebrow="Decision Questions"
-            title="Before the market search starts, the important questions are still strategic."
-            description="Agent Kammer uses the same core framework across every situation: trigger, desire, constraints, trade-offs, and recommendation. Sometimes the right recommendation is to move. Sometimes it is to wait."
+            title="Before the market search starts, the first question is whether a market search should start at all."
+            description="Agent Kammer uses the same core framework across every situation: trigger, desire, constraints, trade-offs, and recommendation. Sometimes the right recommendation is to move. Sometimes it is to do nothing. Sometimes doing nothing is the worst option."
           />
           <div className="mt-12 grid gap-5 lg:grid-cols-4">
             {decisionQuestions(landing.navLabel).map((item, index) => (
@@ -111,8 +111,8 @@ export default function ServiceLanding({ slug }: { slug: string }) {
       <PageSection>
         <SectionHeading
           eyebrow="How The Brief Is Built"
-          title="The page becomes useful when it turns the situation into a shorter, clearer set of choices."
-          description="The goal is not to tour more property. The goal is to remove the wrong paths early, then spend attention only where the decision deserves it."
+          title="The page becomes useful when it turns uncertainty into a clear recommendation."
+          description="The goal is not to tour more property. The goal is to remove the wrong paths early, identify whether no action is viable, then spend attention only where the decision deserves it."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {landing.considerations.map((item, index) => (
@@ -129,14 +129,14 @@ export default function ServiceLanding({ slug }: { slug: string }) {
           <div className="max-w-3xl">
             <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">Decision Path</p>
             <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.94] tracking-[-0.03em] text-brand-ivory">
-              The recommendation may be to buy, sell, rent, wait, renovate, refinance, or do nothing yet.
+              The recommendation may be to buy, sell, rent, wait, renew, renovate, refinance, rent the current home, or do nothing yet.
             </h2>
             <p className="mt-6 text-base leading-8 text-brand-ivory/72 lg:text-lg">
-              That is the difference between guidance and a sales funnel. A good housing decision starts with the life change, then tests whether the market is actually the right answer.
+              That is the difference between guidance and a sales funnel. A good housing decision starts with the life change, then tests whether action is actually the right answer.
             </p>
           </div>
           <div className="grid gap-4">
-            {["What changed?", "Should anything change?", "What are the real options?", "Which option protects the client best?"].map((item, index) => (
+            {["What changed?", "Is doing nothing smarter?", "What are the real options?", "Which option protects the client best?"].map((item, index) => (
               <div key={item} className="grid grid-cols-[3rem_minmax(0,1fr)] items-center gap-4 border border-brand-ivory/14 bg-brand-ivory/5 p-5">
                 <span className="font-mono text-xs text-brand-brass">0{index + 1}</span>
                 <span className="text-sm uppercase tracking-[0.14em] text-brand-ivory/82">{item}</span>
