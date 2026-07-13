@@ -4,21 +4,17 @@ import {
   ArrowRight,
   BrainCircuit,
   Building2,
-  CalendarDays,
   CalendarClock,
   Check,
   Circle,
-  ClipboardList,
   Landmark,
   MapPinned,
-  MessageSquareText,
   Minimize2,
-  Save,
   SlidersHorizontal,
   UsersRound,
 } from "lucide-react";
 import { DECISION_ASSISTANT_OPEN_EVENT } from "@/lib/decision-assistant";
-import { getPageContext, getRelatedPages } from "@/lib/knowledge-graph/page-context";
+import { getPageContext } from "@/lib/knowledge-graph/page-context";
 
 const blueprintSegments = [
   { label: "Lifestyle", filled: true, icon: UsersRound },
@@ -29,59 +25,9 @@ const blueprintSegments = [
   { label: "Trade-offs", filled: false, icon: SlidersHorizontal },
 ];
 
-const commandCenterActions = [
-  { label: "Continue Conversation", shortLabel: "Continue", icon: MessageSquareText },
-  { label: "Decision Profile", shortLabel: "Profile", icon: ClipboardList },
-  { label: "Save Progress", shortLabel: "Save", icon: Save },
-  { label: "Schedule Review", shortLabel: "Schedule", icon: CalendarDays },
-];
-
-const industryLenses = [
-  {
-    label: "Finance",
-    route: "/services/finance-hedge-fund-relocation-nyc",
-    focus: "walkability to Midtown or Downtown, privacy, pied-a-terre logic, staff quality, and resale discipline",
-  },
-  {
-    label: "Medicine",
-    route: "/services/physician-relocation-nyc",
-    focus: "hospital commute, call schedule, parking, service reliability, and recovery time at home",
-  },
-  {
-    label: "Law",
-    route: "/services/executive-relocation-nyc",
-    focus: "office commute, privacy, late-hour convenience, building rules, and a low-friction ownership path",
-  },
-  {
-    label: "Technology",
-    route: "/services/executive-relocation-nyc",
-    focus: "hybrid work, downtown versus west side access, flexible space, building technology, and future resale",
-  },
-  {
-    label: "Media",
-    route: "/services/executive-relocation-nyc",
-    focus: "neighborhood identity, creative access, service expectations, privacy, and day-to-night lifestyle rhythm",
-  },
-  {
-    label: "Other",
-    route: "/services/executive-relocation-nyc",
-    focus: "work pattern, schedule pressure, commute, household needs, and building fit",
-  },
-] as const;
-
 const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
 const sessionStorageKey = "akDecisionAssistantSessionId";
 const navigationMemoryKey = "akDecisionAssistantNavigation";
-const industryLensKey = "akDecisionAssistantIndustryLens";
-
-const visitorStateLabels = {
-  visitor: "Visitor",
-  exploring: "Exploring",
-  learning: "Learning",
-  diagnosing: "Diagnosing",
-  planning: "Planning",
-  ready: "Ready",
-} as const;
 
 type Message = {
   role: "assistant" | "user";
@@ -165,19 +111,6 @@ function transcript(messages: Message[]) {
   return messages.map((message) => `${message.role === "assistant" ? "Assistant" : "Visitor"}: ${message.text}`).join("\n");
 }
 
-function hasSignal(text: string, pattern: RegExp) {
-  return pattern.test(text.toLowerCase());
-}
-
-function getVisitorState(messageCount: number, completion: number, score: number) {
-  if (completion >= 5 || score >= 4) return "ready";
-  if (completion >= 4 || score >= 3) return "planning";
-  if (completion >= 2 || messageCount >= 3) return "diagnosing";
-  if (messageCount > 1) return "learning";
-  if (messageCount === 1) return "exploring";
-  return "visitor";
-}
-
 function getBlueprintStrength(label: string, complete: boolean, leadScore: number) {
   if (complete) return 92;
   if (label === "Lifestyle") return 24;
@@ -198,27 +131,13 @@ export function DecisionAssistantDock() {
   const [leadScore, setLeadScore] = useState(0);
   const [sending, setSending] = useState(false);
   const [memoryLoaded, setMemoryLoaded] = useState(false);
-  const [visitedContent, setVisitedContent] = useState<string[]>(() => {
-    if (typeof window === "undefined") return [];
-    try {
-      return JSON.parse(window.localStorage.getItem(navigationMemoryKey) || "[]") as string[];
-    } catch {
-      return [];
-    }
-  });
-  const [industryLens, setIndustryLens] = useState<string>(() => {
-    if (typeof window === "undefined") return "";
-    return window.localStorage.getItem(industryLensKey) || "";
-  });
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      text: "I can give you a quick housing read before asking for contact info. Start with one sentence: what is changing, and what decision are you trying to make?",
+      text: "Hi, I'm your Decision Guide. I'll learn about your situation while you browse. What's changing?",
     },
   ]);
   const transcriptRef = useRef<HTMLDivElement | null>(null);
-  const currentPage = getPageContext(location);
-  const relatedPages = getRelatedPages(location);
 
   useEffect(() => {
     const open = () => setExpanded(true);
@@ -228,11 +147,13 @@ export function DecisionAssistantDock() {
 
   useEffect(() => {
     const title = getPageContext(location).title;
-    setVisitedContent((current) => {
+    try {
+      const current = JSON.parse(window.localStorage.getItem(navigationMemoryKey) || "[]") as string[];
       const next = [title, ...current.filter((item) => item !== title)].slice(0, 8);
       window.localStorage.setItem(navigationMemoryKey, JSON.stringify(next));
-      return next;
-    });
+    } catch {
+      window.localStorage.setItem(navigationMemoryKey, JSON.stringify([title]));
+    }
   }, [location]);
 
   useEffect(() => {
@@ -250,10 +171,7 @@ export function DecisionAssistantDock() {
         if (Array.isArray(savedMessages) && savedMessages.length > 0) {
           setMessages([
             ...savedMessages,
-            {
-              role: "assistant",
-              text: "I still have the context from this decision thread. You can continue from where we left off, or add what changed since then.",
-            },
+            { role: "assistant", text: "Welcome back. I still have the context from this decision." },
           ]);
         }
         if (typeof memory.leadScore === "number") {
@@ -356,57 +274,11 @@ export function DecisionAssistantDock() {
     }
   }
 
-  const openCommandAction = (label: string) => {
-    setExpanded(true);
-    if (label === "Continue Conversation") return;
-
-    const prompts: Record<string, string> = {
-      "Decision Profile": `Here is what I know so far from this thread and the page you are viewing: ${currentPage.title}. I can keep filling gaps as you browse.`,
-      "Save Progress": "Your Decision Blueprint progress is being saved to this conversation. Keep browsing and I will preserve the profile, route context, and next steps.",
-      "Schedule Review": "To schedule a useful review, I need the decision type, timing, budget range, and the main constraint. If you share an email, I can send the recap and recommended next step.",
-    };
-
-    setMessages((current) => [
-      ...current,
-      {
-        role: "assistant",
-        text: prompts[label] ?? "I can keep the conversation open while you review the material.",
-      },
-    ]);
-  };
-
-  const navigateWithContext = (path: string, title: string) => {
-    setLocation(path);
-    setExpanded(true);
-    setMessages((current) => [
-      ...current,
-      {
-        role: "assistant",
-        text: `I am opening ${title} and keeping this conversation active. As you read it, I can connect it back to your Decision Blueprint instead of starting over.`,
-      },
-    ]);
-  };
-
-  const chooseIndustryLens = (label: string) => {
-    const lens = industryLenses.find((item) => item.label === label);
-    if (!lens) return;
-    setIndustryLens(lens.label);
-    window.localStorage.setItem(industryLensKey, lens.label);
-    setExpanded(true);
-    setLocation(lens.route);
-    setMessages((current) => [
-      ...current,
-      {
-        role: "assistant",
-        text: `I am applying the ${lens.label} lens. I will keep the relocation page broad, but personalize the Decision Blueprint around ${lens.focus}.`,
-      },
-    ]);
-  };
-
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const answer = input.trim();
     if (!answer || sending) return;
+    setExpanded(true);
 
     const foundEmail = answer.match(emailPattern)?.[0];
     const nextMessages: Message[] = [...messages, { role: "user", text: answer }];
@@ -430,35 +302,46 @@ export function DecisionAssistantDock() {
 
     if (step === "situation") {
       nextAnswers = { ...nextAnswers, situation: answer };
-      const leadType = classifyLead(nextScore);
+      const lower = answer.toLowerCase();
+      if (/(relocat|moving|move.*manhattan|new job|job)/.test(lower)) {
+        setLocation("/services/executive-relocation-nyc");
+        nextMessages.push({ role: "assistant", text: "Got it. You're relocating to Manhattan." });
+        nextMessages.push({ role: "assistant", text: "Lifestyle updated. Opening Executive Relocation..." });
+      } else if (/(divorce|separat)/.test(lower)) {
+        setLocation("/services/divorce-property-sales-nyc");
+        nextMessages.push({ role: "assistant", text: "I'm sorry you're dealing with that." });
+        nextMessages.push({ role: "assistant", text: "The two biggest decisions are usually timing and whether keeping the home is realistic. Which one feels more important right now?" });
+      } else {
+        const leadType = classifyLead(nextScore);
+        nextMessages.push({
+          role: "assistant",
+          text:
+            leadType === "High-intent"
+              ? "Got it. This sounds time-sensitive."
+              : "Got it. I'll help make the decision feel less scattered.",
+        });
+      }
       nextMessages.push({
         role: "assistant",
-        text:
-          leadType === "High-intent"
-            ? "Initial read: this sounds time-sensitive enough to narrow quickly. I would not start with listings yet; I would first lock the acquisition profile and eliminate buildings that create financing, board, layout, or resale friction."
-            : "Initial read: this is still worth structuring before listings. The useful move is to separate life fit, building fit, timing, and financial constraints so the search does not sprawl.",
-      });
-      nextMessages.push({
-        role: "assistant",
-        text: "Answer in one sentence if you want: target area or building type, rough timing, and any budget/financing boundary you already know.",
+        text: "I'd like to understand your timeline next.",
       });
       nextStep = "details";
     } else if (step === "details") {
       nextAnswers = { ...nextAnswers, details: answer };
       nextMessages.push({
         role: "assistant",
-        text: `Decision Blueprint snapshot: ${classifyLead(nextScore)}. I have enough to check situation, location/building, timing, and financial boundary. The value now is avoiding the wrong building category before you spend time touring.`,
+        text: "Timeline updated.",
       });
       if (nextScore >= 3) {
         nextMessages.push({
           role: "assistant",
-          text: "This is enough signal for a useful human follow-up. Where should I send the recap and next-step brief?",
+          text: "I have enough to make the next step useful. Where should I send the recap?",
         });
         nextStep = "email";
       } else {
         nextMessages.push({
           role: "assistant",
-          text: "One more optional qualifier: what trade-off worries you most: price, monthly carry, commute, building rules, resale risk, layout, or timing?",
+          text: "What worries you most: price, commute, building rules, resale risk, layout, or timing?",
         });
         nextStep = "tradeoff";
       }
@@ -466,7 +349,7 @@ export function DecisionAssistantDock() {
       nextAnswers = { ...nextAnswers, tradeOff: answer };
       nextMessages.push({
         role: "assistant",
-        text: "That helps. I would treat that as the main filter before recommendations. If you want the recap, share the best email and I will send the checked qualifiers plus what to do next.",
+        text: "Trade-off updated. If you want the recap, share the best email.",
       });
       nextStep = "email";
     } else {
@@ -493,62 +376,19 @@ export function DecisionAssistantDock() {
   };
   const blueprintCompletion = blueprintSegments.filter((segment) => completedSegments[segment.label as keyof typeof completedSegments]).length;
   const blueprintPercent = Math.round((blueprintCompletion / blueprintSegments.length) * 100);
-  const profileText = `${answers.situation ?? ""} ${answers.details ?? ""} ${answers.tradeOff ?? ""} ${messages.map((message) => message.text).join(" ")}`;
-  const inferredIndustryLens =
-    industryLens ||
-    (hasSignal(profileText, /(finance|hedge fund|private equity|banking|trader|portfolio)/)
-      ? "Finance"
-      : hasSignal(profileText, /(doctor|physician|hospital|medicine|medical|surgeon|resident|fellowship)/)
-        ? "Medicine"
-        : hasSignal(profileText, /(law|lawyer|attorney|partner|legal|firm)/)
-          ? "Law"
-          : hasSignal(profileText, /(tech|startup|engineer|founder|product|software)/)
-            ? "Technology"
-            : hasSignal(profileText, /(media|creative|film|fashion|advertising|publishing)/)
-              ? "Media"
-              : "");
-  const profileSignals = [
-    { label: "Life Event", complete: Boolean(answers.situation) },
-    { label: "Industry", complete: Boolean(inferredIndustryLens) },
-    { label: "Timeline", complete: hasSignal(profileText, /(today|week|month|days|soon|timeline|asap|spring|summer|fall|winter|202\d)/) },
-    { label: "Budget", complete: hasSignal(profileText, /(budget|\$|million|mm|financing|mortgage|cash|pre.?approved)/) },
-    { label: "Household", complete: hasSignal(profileText, /(family|kids|children|spouse|partner|alone|household|school)/) },
-    { label: "Building Preferences", complete: hasSignal(profileText, /(condo|co-op|coop|townhouse|amenity|doorman|elevator|new development|building)/) },
-    { label: "Commute", complete: hasSignal(profileText, /(commute|office|work|subway|train|walk|midtown|downtown|tribeca|hudson yards)/) },
-    { label: "Neighborhood", complete: hasSignal(profileText, /(neighborhood|tribeca|soho|chelsea|ues|uws|downtown|midtown|west side|east side)/) },
-    { label: "Financing", complete: hasSignal(profileText, /(financing|mortgage|cash|loan|pre.?approved|1031|exchange)/) },
-    { label: "Risk Tolerance", complete: Boolean(answers.tradeOff) || hasSignal(profileText, /(risk|resale|monthly|carry|rules|board|restriction|concern)/) },
-    { label: "Investment Goals", complete: hasSignal(profileText, /(investment|yield|rent|rental|1031|appreciation|hold)/) },
-    { label: "Pets", complete: hasSignal(profileText, /(pet|dog|cat)/) },
-    { label: "Schools", complete: hasSignal(profileText, /(school|district|kids|children)/) },
-  ];
-  const missingSignal = profileSignals.find((signal) => !signal.complete && ["Timeline", "Budget", "Commute", "Risk Tolerance"].includes(signal.label));
-  const visitorState = getVisitorState(messages.length, blueprintCompletion, leadScore);
-  const visitorStateLabel = visitorStateLabels[visitorState];
-  const stateCopy =
-    visitorState === "ready"
-      ? "Enough signal for a useful human review."
-      : visitorState === "planning"
-        ? "Planning mode: recommendations are narrowing."
-        : visitorState === "diagnosing"
-          ? "Diagnosing: the Blueprint is filling live."
-          : visitorState === "learning"
-            ? `Learning from ${currentPage.title}.`
-            : `Reading ${currentPage.title}.`;
 
   if (!expanded) {
     return (
       <aside
         id="decision-assistant"
         className="fixed inset-x-0 bottom-0 z-40 border-t border-brand-brass/35 bg-brand-midnight px-3 py-3 text-brand-ivory shadow-[0_-18px_38px_rgba(32,39,53,0.28)] md:px-6"
-        aria-label="Decision Command Center"
+        aria-label="Decision Guide"
       >
-        <div className="mx-auto grid max-w-site gap-4 lg:grid-cols-[minmax(180px,0.2fr)_minmax(220px,0.32fr)_minmax(440px,0.48fr)] lg:items-center">
+        <div className="mx-auto grid max-w-site gap-4 lg:grid-cols-[minmax(220px,0.22fr)_minmax(240px,0.28fr)_minmax(340px,0.5fr)] lg:items-center">
           <div className="flex items-center justify-between gap-4 lg:block">
             <div>
-              <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Command Center</p>
+              <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Decision Guide</p>
               <p className="mt-1 text-sm font-medium text-brand-ivory">Decision Blueprint</p>
-              <p className="mt-1 text-[10px] uppercase tracking-[0.12em] text-brand-ivory/58">{visitorStateLabel}</p>
             </div>
             <p className="font-mono text-[10px] text-brand-ivory/58 lg:mt-1">{blueprintCompletion}/6 · {blueprintPercent}%</p>
           </div>
@@ -579,25 +419,27 @@ export function DecisionAssistantDock() {
             <p className="mt-2 text-[10px] uppercase tracking-[0.14em] text-brand-ivory/64 2xl:hidden">
               Lifestyle · Building · Financial · Timeline
             </p>
-            <p className="mt-1 text-[10px] uppercase tracking-[0.12em] text-brand-ivory/46">{stateCopy}</p>
           </div>
-          <div className="grid grid-cols-2 gap-2 xl:grid-cols-4">
-            {commandCenterActions.map((action) => (
-              <button
-                key={action.label}
-                type="button"
-                aria-label={action.label}
-                onClick={() => openCommandAction(action.label)}
-                className="group flex min-h-11 items-center justify-between gap-3 border border-brand-ivory/16 bg-brand-navy-secondary/78 px-3 text-left transition-colors hover:border-brand-brass/70 hover:bg-brand-navy-secondary"
-              >
-                <span className="inline-flex min-w-0 items-center gap-2 text-[10px] font-medium uppercase leading-4 tracking-[0.12em] text-brand-ivory">
-                  <action.icon className="h-3.5 w-3.5 text-brand-brass" strokeWidth={1.5} />
-                  <span>{action.shortLabel}</span>
-                </span>
-                <ArrowRight className="hidden h-3.5 w-3.5 shrink-0 text-brand-ivory/70 transition-transform group-hover:translate-x-0.5 2xl:block" strokeWidth={1.5} />
-              </button>
-            ))}
-          </div>
+          <form onSubmit={handleSubmit} className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto]">
+            <label className="sr-only" htmlFor="decision-guide-compact-input">
+              Tell the decision guide what is changing
+            </label>
+            <input
+              id="decision-guide-compact-input"
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              placeholder="What's changing?"
+              className="h-11 border border-brand-ivory/16 bg-brand-ivory/8 px-3 text-sm text-brand-ivory outline-none transition-colors placeholder:text-brand-ivory/48 focus:border-brand-brass"
+            />
+            <button
+              type="submit"
+              disabled={sending}
+              className="inline-flex h-11 items-center justify-center gap-2 border border-brand-ivory/18 bg-brand-navy-secondary px-4 text-[10px] uppercase tracking-[0.14em] text-brand-ivory transition-colors hover:border-brand-brass disabled:cursor-wait disabled:opacity-70"
+            >
+              Send
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </button>
+          </form>
         </div>
       </aside>
     );
@@ -611,7 +453,7 @@ export function DecisionAssistantDock() {
           ? "fixed inset-x-3 bottom-3 z-40 max-h-[70vh] overflow-hidden border border-brand-navy/18 bg-brand-ivory p-3 shadow-[0_-12px_42px_rgba(42,52,71,0.18)] md:inset-x-auto md:bottom-6 md:right-6 md:top-40 md:h-auto md:max-h-none md:min-w-[24rem] md:w-[min(30rem,34vw)] md:max-w-[42rem] md:resize-x md:overflow-auto md:p-4"
           : "fixed inset-x-0 bottom-0 z-40 border-t border-brand-brass/35 bg-brand-midnight px-3 py-3 text-brand-ivory shadow-[0_-18px_38px_rgba(32,39,53,0.28)] md:px-6"
       }
-      aria-label="Decision Command Center"
+      aria-label="Decision Guide"
     >
       <div className="mx-auto grid max-w-site gap-3">
         <div className={expanded ? "grid gap-3 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center md:grid-cols-1" : "grid gap-3 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-center"}>
@@ -620,11 +462,10 @@ export function DecisionAssistantDock() {
               <BrainCircuit className={expanded ? "h-4 w-4 animate-command-breathe" : "h-4 w-4"} strokeWidth={1.5} />
             </span>
             <div>
-              <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Command Center</p>
+              <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Decision Guide</p>
               <p className="text-sm font-medium text-brand-navy">
-                {expanded ? `${classifyLead(leadScore)} Decision Blueprint` : "Build your Decision Blueprint"}
+                {expanded ? "I'll learn while you browse." : "Build your Decision Blueprint"}
               </p>
-              {expanded ? <p className="mt-1 text-[10px] uppercase tracking-[0.12em] text-brand-graphite/62">{visitorStateLabel} · {stateCopy}</p> : null}
             </div>
             {expanded ? (
               <button
@@ -701,106 +542,6 @@ export function DecisionAssistantDock() {
           ) : null}
         </div>
         {expanded ? (
-          <div className="grid gap-3 border-t border-brand-border pt-3">
-            <div className="border border-brand-border bg-brand-surface p-3">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Viewing Now</p>
-                  <p className="mt-1 text-sm font-medium text-brand-navy">{currentPage.title}</p>
-                </div>
-                <p className="max-w-[12rem] text-right text-[10px] uppercase tracking-[0.13em] text-brand-graphite/70">
-                  {currentPage.topics.slice(0, 3).join(" · ")}
-                </p>
-              </div>
-              <div className="mt-3 border-l border-brand-brass/55 pl-3">
-                <p className="text-sm leading-6 text-brand-graphite">
-                  I noticed you are reading <span className="font-medium text-brand-navy">{currentPage.title}</span>. I will connect this page to your Blueprint instead of resetting the conversation.
-                </p>
-              </div>
-              {missingSignal ? (
-                <p className="mt-3 text-sm leading-6 text-brand-graphite">
-                  I know part of the decision, but I still need <span className="font-medium text-brand-navy">{missingSignal.label.toLowerCase()}</span> before recommendations get precise.
-                </p>
-              ) : null}
-            </div>
-
-            {currentPage.topics.some((topic) => ["relocation", "industry", "corporate", "luxury", "rentals"].includes(topic)) ? (
-              <div className="border border-brand-border bg-white p-3">
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Industry Lens</p>
-                    <p className="mt-1 text-sm leading-6 text-brand-graphite">
-                      {inferredIndustryLens
-                        ? `${inferredIndustryLens} context is active. Recommendations will adapt around work pattern and building fit.`
-                        : "Pick one if it matters. The page stays broad; the Decision Blueprint becomes specific."}
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {industryLenses.map((lens) => (
-                    <button
-                      key={lens.label}
-                      type="button"
-                      onClick={() => chooseIndustryLens(lens.label)}
-                      className={
-                        inferredIndustryLens === lens.label
-                          ? "border border-brand-navy bg-brand-navy px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] text-brand-ivory"
-                          : "border border-brand-border bg-brand-ivory px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] text-brand-navy transition-colors hover:border-brand-brass/55 hover:bg-brand-stone/20"
-                      }
-                    >
-                      {lens.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ) : null}
-
-            <div className="grid gap-3 lg:grid-cols-2">
-              <div className="border border-brand-border bg-white p-3">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Recommended Next</p>
-                <div className="mt-3 grid gap-2">
-                  {relatedPages.slice(0, 3).map((page) => (
-                    <button
-                      key={page.path}
-                      type="button"
-                      onClick={() => navigateWithContext(page.path, page.title)}
-                      className="group flex items-center justify-between gap-3 border border-brand-border bg-brand-ivory px-3 py-2 text-left text-sm text-brand-navy transition-colors hover:border-brand-brass/55 hover:bg-brand-stone/20"
-                    >
-                      <span>{page.title}</span>
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className="border border-brand-border bg-white p-3">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Decision Profile</p>
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  {profileSignals.slice(0, 8).map((signal) => (
-                    <span
-                      key={signal.label}
-                      className={
-                        signal.complete
-                          ? "border border-brand-navy/15 bg-brand-navy px-2 py-1 text-[10px] uppercase tracking-[0.12em] text-brand-ivory"
-                          : "border border-brand-border bg-brand-ivory px-2 py-1 text-[10px] uppercase tracking-[0.12em] text-brand-graphite"
-                      }
-                    >
-                      {signal.complete ? "✓ " : ""}
-                      {signal.label}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {visitedContent.length > 1 ? (
-              <div className="border border-brand-border bg-white p-3">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Recently Reviewed</p>
-                <p className="mt-2 text-sm leading-6 text-brand-graphite">{visitedContent.slice(0, 5).join(" → ")}</p>
-              </div>
-            ) : null}
-          </div>
-        ) : null}
-        {expanded ? (
           <div className="border-t border-brand-border pt-3">
             <div ref={transcriptRef} className="max-h-[42vh] space-y-3 overflow-y-auto pr-1 md:max-h-[24rem]">
               {messages.map((message, index) => (
@@ -809,7 +550,7 @@ export function DecisionAssistantDock() {
                   className={message.role === "assistant" ? "mr-8 border border-brand-border bg-white p-3" : "ml-8 bg-brand-navy p-3 text-brand-ivory"}
                 >
                   <p className="text-[10px] uppercase tracking-[0.18em] text-brand-brass">
-                    {message.role === "assistant" ? "Assistant" : "You"}
+                    {message.role === "assistant" ? "Guide" : "You"}
                   </p>
                   <p className="mt-2 text-sm leading-6">{message.text}</p>
                 </div>
