@@ -133,7 +133,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const apiKey = process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY;
+  const apiKey = process.env.XAI_API_KEY || process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY;
   if (!apiKey) {
     return res.status(503).json({ error: "Decision Guide AI is not configured" });
   }
@@ -144,8 +144,9 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     const parsed = requestSchema.parse(body);
     const openai = new OpenAI({
       apiKey,
-      baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
+      baseURL: process.env.XAI_API_KEY ? "https://api.x.ai/v1" : process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
     });
+    const defaultModel = process.env.XAI_API_KEY ? "grok-4.5" : "gpt-4o-mini";
 
     const instructions = [
       "You are Raphi, Agent Kammer's Decision Guide for Manhattan housing decisions.",
@@ -158,7 +159,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     ].join("\n");
 
     const response = await openai.responses.create({
-      model: process.env.DECISION_GUIDE_MODEL || process.env.OPENAI_MODEL || "gpt-4o-mini",
+      model: process.env.DECISION_GUIDE_MODEL || process.env.OPENAI_MODEL || defaultModel,
       input: [
         { role: "developer", content: instructions },
         {

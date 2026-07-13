@@ -34,16 +34,17 @@ if (process.env.RESEND_API_KEY) {
 
 // OpenAI client (optional - only needed for AI features)
 let openai: OpenAI | null = null;
-if (process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY) {
+if (process.env.XAI_API_KEY || process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY) {
   try {
     openai = new OpenAI({
-      apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY,
-      baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
+      apiKey: process.env.XAI_API_KEY || process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY,
+      baseURL: process.env.XAI_API_KEY ? "https://api.x.ai/v1" : process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
     });
   } catch (e) {
     // OpenAI not available - some features will be disabled
   }
 }
+const DEFAULT_DECISION_GUIDE_MODEL = process.env.XAI_API_KEY ? "grok-4.5" : "gpt-4o-mini";
 
 // Notification configuration
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -741,7 +742,7 @@ export async function registerRoutes(app: Express): Promise<void> {
       ].join("\n");
 
       const response = await openai.responses.create({
-        model: process.env.DECISION_GUIDE_MODEL || process.env.OPENAI_MODEL || "gpt-4o-mini",
+        model: process.env.DECISION_GUIDE_MODEL || process.env.OPENAI_MODEL || DEFAULT_DECISION_GUIDE_MODEL,
         input: [
           { role: "developer", content: system },
           {
