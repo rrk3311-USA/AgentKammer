@@ -50,13 +50,13 @@ export default function Home() {
               <button
                 type="button"
                 onClick={openDecisionAssistant}
-                className="group grid min-w-[17rem] border border-brand-navy bg-brand-navy px-5 py-4 text-left shadow-[0_1px_0_rgba(32,36,43,0.08)] transition-colors hover:bg-brand-midnight"
+                className="group grid min-w-[17rem] border border-brand-brass/45 bg-brand-surface px-5 py-4 text-left shadow-[inset_0_1px_0_rgba(255,255,255,0.65),0_1px_0_rgba(42,52,71,0.06)] transition-colors hover:border-brand-navy/22 hover:bg-white"
               >
                 <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">Decision Blueprint</span>
-                <span className="mt-3 h-px w-full bg-brand-ivory/18" aria-hidden />
-                <span className="mt-3 flex items-center justify-between font-display text-2xl leading-none text-brand-ivory">
+                <span className="mt-3 h-px w-full bg-brand-brass/35" aria-hidden />
+                <span className="mt-3 flex items-center justify-between font-display text-2xl leading-none text-brand-navy">
                   Start Decision Blueprint
-                  <MoveRight className="h-5 w-5 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
+                  <MoveRight className="h-5 w-5 text-brand-brass transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
                 </span>
               </button>
               <Link

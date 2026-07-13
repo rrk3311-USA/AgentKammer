@@ -11,6 +11,7 @@ export const primaryNav = [
   { label: "Buildings", href: "/building-reports" },
   { label: "Reports", href: "/building-reports/market-briefs" },
   { label: "Insights", href: "/insights" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 export const buildingReportsNav = [
