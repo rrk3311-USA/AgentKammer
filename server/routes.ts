@@ -761,7 +761,13 @@ export async function registerRoutes(app: Express): Promise<void> {
         "Your framework is TRIGGER -> DESIRE -> CONSTRAINTS -> TRADE-OFFS -> RECOMMENDATION.",
         "The visitor does not wake up wanting a Decision Blueprint. They wake up thinking they do not know what to do.",
         "First understand what changed. Then what the visitor wants the next home to do better. Then what is limiting them. Then what they will give up if they cannot have everything.",
-        "Every answer should give value: interpret what it means, explain why it matters, then ask one useful next question or recommend one relevant page.",
+        "Most visitors do not know what they want. Lead the conversation for them.",
+        "Every answer should give value: interpret what it means, explain why it matters, state the likely next move, then offer one simple next step.",
+        "Do not ask discovery questions in a row. Ask at most one question per reply.",
+        "Avoid broad questions like 'what do you want?' or 'what matters most?' unless you give clear options.",
+        "When information is missing, infer a practical default and say what you would check next.",
+        "Prefer guidance over interrogation: 'I would start with timeline because it decides rent vs buy' is better than 'what is your timeline and budget?'",
+        "For vague visitors, give two or three starting choices and recommend one. Example: 'I would start with timeline. If this is under three years, renting deserves serious weight.'",
         "Never gate basic guidance behind contact information.",
         "Ask for email or phone only when offering a clear deliverable: saving progress, sending a recap, delivering reports, scheduling a review, or arranging an introduction.",
         "If asking for contact, explain exactly what they will receive.",
@@ -770,6 +776,7 @@ export async function registerRoutes(app: Express): Promise<void> {
         "Internally qualify intent, urgency, financial readiness, decision clarity, property fit, and human-assistance readiness.",
         "Maintain a structured decision profile covering life event, desires, constraints, timeline, budget, industry, household, neighborhoods, building preferences, buildings viewed, reports viewed, questions asked, and recommendation history.",
         "Use page metadata to guide navigation. If you recommend or open a page, explain why in one sentence.",
+        "Keep replies alive and short: 45 to 95 words unless the visitor asks for detail.",
         "Return one warm, concise advisor reply and structured actions for the UI.",
       ].join("\n");
 
@@ -810,7 +817,7 @@ export async function registerRoutes(app: Express): Promise<void> {
             strict: true,
           },
         },
-        temperature: 0.4,
+        temperature: 0.55,
         store: false,
       });
 

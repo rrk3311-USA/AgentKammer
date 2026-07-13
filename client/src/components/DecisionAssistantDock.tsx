@@ -259,8 +259,7 @@ function getSituationGuidance(answer: string, score: number) {
     return {
       path: "/services/school-district-planning-nyc",
       messages: [
-        "Congratulations. That changes more than just the number of bedrooms.",
-        "Before we look at neighborhoods or buildings, I'd like to understand what you hope the next home does better. Is it space, schools, commute, outdoor space, or a calmer daily routine?",
+        "Congratulations. I would not start with listings yet. A first child usually changes daily rhythm more than bedroom count, so I would first separate space, commute, and school timing. If we pick one starting point, I would begin with daily routine.",
       ],
     };
   }
@@ -268,8 +267,7 @@ function getSituationGuidance(answer: string, score: number) {
     return {
       path: "/services/executive-relocation-nyc",
       messages: [
-        "Thanks. Executive relocations usually involve three decisions: how long you'll stay, commute requirements, and whether renting or buying makes more sense.",
-        "What are you hoping the move improves first: commute, flexibility, privacy, neighborhood fit, or long-term ownership?",
+        "Thanks. For a Manhattan relocation, I would lead with timeline because it decides whether renting or buying deserves more weight. Commute comes next, then building fit. If this is under three years, flexibility probably matters more than ownership.",
       ],
     };
   }
@@ -277,8 +275,7 @@ function getSituationGuidance(answer: string, score: number) {
     return {
       path: "/services/divorce-property-sales-nyc",
       messages: [
-        "I'm sorry you're dealing with that.",
-        "The two biggest decisions are usually timing and whether keeping the home is realistic. What would a better housing outcome give you now: stability, flexibility, privacy, financial clarity, or a cleaner timeline?",
+        "I'm sorry you're dealing with that. I would not start with listings. The first decision is usually whether timing or ownership risk is driving the move. I would start by clarifying whether keeping the home is realistic before comparing places.",
       ],
     };
   }
@@ -286,15 +283,15 @@ function getSituationGuidance(answer: string, score: number) {
     return {
       path: "/buyer-advisory",
       messages: [
-        "That is exactly the right place to start. You do not need to know whether moving is the answer yet.",
-        "If your current place could improve one thing, what would matter most: space, light, money, commute, lifestyle, or certainty?",
+        "That is the right starting point. You do not need to know whether moving is the answer yet. I would compare staying against moving before looking at buildings, then test the decision against money, daily life, and timing.",
       ],
     };
   }
   return {
     messages: [
-      score >= 4 ? "That helps. This sounds time-sensitive." : "That helps. We can make this feel less scattered.",
-      "Before we look at buildings or listings, what are you hoping your next home does better than your current one?",
+      score >= 4
+        ? "That helps. This sounds time-sensitive, so I would avoid browsing broadly. I would first narrow the decision around timeline, budget, and the one constraint that can break the move."
+        : "That helps. I would make this less scattered by identifying the trigger first, then the constraint. Once those are clear, buildings and neighborhoods become much easier to sort.",
     ],
   };
 }
@@ -674,22 +671,14 @@ export function DecisionAssistantDock() {
       nextAnswers = { ...nextAnswers, desire: answer };
       nextMessages.push({
         role: "assistant",
-        text: "That helps. Now I understand what the next place is supposed to do better.",
-      });
-      nextMessages.push({
-        role: "assistant",
-        text: "What's making that difficult today: budget, timing, financing, school district, pets, building rules, or uncertainty?",
+        text: "That helps. I would now check the constraint that can block this: budget, timing, financing, school district, pets, building rules, or uncertainty. Pick the one that feels most likely to create friction.",
       });
       nextStep = "constraints";
     } else if (step === "constraints") {
       nextAnswers = { ...nextAnswers, constraints: answer };
       nextMessages.push({
         role: "assistant",
-        text: "That helps. I have a much better sense of the shape of the decision now.",
-      });
-      nextMessages.push({
-        role: "assistant",
-        text: "If you can't have everything, what matters most: size, location, building quality, flexibility, cost control, or long-term value?",
+        text: "That helps. Now I would decide the trade-off instead of adding more search criteria. If everything cannot fit, I would rank size, location, building quality, flexibility, cost control, and long-term value.",
       });
       nextStep = "tradeoff";
     } else if (step === "tradeoff") {
@@ -700,7 +689,7 @@ export function DecisionAssistantDock() {
       });
       nextMessages.push({
         role: "assistant",
-        text: "Want to read the relevant brief, compare ownership options, or see the recommendation so far?",
+        text: "My next move would be to read the relevant brief or compare ownership options before looking at listings.",
       });
       nextStep = "tradeoff";
     } else {
