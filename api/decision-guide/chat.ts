@@ -12,6 +12,16 @@ const profileSchema = z.object({
   desire: z.string().optional(),
   constraints: z.string().optional(),
   tradeOff: z.string().optional(),
+  timeline: z.string().optional(),
+  budget: z.string().optional(),
+  industry: z.string().optional(),
+  household: z.string().optional(),
+  neighborhoods: z.string().optional(),
+  buildingPreferences: z.string().optional(),
+  buildingsViewed: z.string().optional(),
+  reportsViewed: z.string().optional(),
+  questionsAsked: z.string().optional(),
+  recommendationHistory: z.string().optional(),
   email: z.string().optional(),
   phone: z.string().optional(),
 });
@@ -30,7 +40,35 @@ const requestSchema = z.object({
       related: z.array(z.string()).optional(),
     })
     .optional(),
+  visitorState: z
+    .object({
+      navigationHistory: z.array(z.string()).optional(),
+    })
+    .optional(),
 });
+
+const profileKeys = [
+  "situation",
+  "desire",
+  "constraints",
+  "tradeOff",
+  "timeline",
+  "budget",
+  "industry",
+  "household",
+  "neighborhoods",
+  "buildingPreferences",
+  "buildingsViewed",
+  "reportsViewed",
+  "questionsAsked",
+  "recommendationHistory",
+  "email",
+  "phone",
+] as const;
+
+function responseProfileProperties() {
+  return Object.fromEntries(profileKeys.map((key) => [key, { type: ["string", "null"] }]));
+}
 
 const responseSchema = {
   type: "object",
@@ -41,15 +79,8 @@ const responseSchema = {
     profile: {
       type: "object",
       additionalProperties: false,
-      required: ["situation", "desire", "constraints", "tradeOff", "email", "phone"],
-      properties: {
-        situation: { type: ["string", "null"] },
-        desire: { type: ["string", "null"] },
-        constraints: { type: ["string", "null"] },
-        tradeOff: { type: ["string", "null"] },
-        email: { type: ["string", "null"] },
-        phone: { type: ["string", "null"] },
-      },
+      required: profileKeys,
+      properties: responseProfileProperties(),
     },
     actions: {
       type: "array",
@@ -150,11 +181,19 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
 
     const instructions = [
       "You are Raphi, Agent Kammer's Decision Guide for Manhattan housing decisions.",
-      "You are a senior advisor, not a chatbot and not a lead form.",
+      "You are a trusted Manhattan housing strategist sitting beside the visitor while they browse.",
+      "Never sound like a chatbot, CRM, lead form, or customer support.",
+      "Hide the technology. Show guidance.",
       "Use this framework: TRIGGER -> DESIRE -> CONSTRAINTS -> TRADE-OFFS -> RECOMMENDATION.",
+      "The visitor does not wake up wanting a Decision Blueprint. They wake up thinking they do not know what to do.",
+      "Give value first: interpret what their answer means, explain why it matters, then ask one useful next question or recommend one page.",
       "Never gate basic guidance behind contact information.",
       "Ask for email or phone only for a clear deliverable like saving progress, sending a recap, delivering reports, scheduling review, or arranging an introduction.",
+      "If asking for contact, explain exactly what they will receive.",
+      "Do not expose raw system updates like 'timeline updated' or 'profile saved'. Say human things like 'That helps me understand your situation much better.'",
       "Qualification is invisible. Do not show scores to the visitor.",
+      "Maintain a structured decision profile covering life event, desires, constraints, timeline, budget, industry, household, neighborhoods, building preferences, buildings viewed, reports viewed, questions asked, and recommendation history.",
+      "Use page metadata to guide navigation. If you recommend or open a page, explain why in one sentence.",
       "Return concise advisor guidance and structured actions for the UI.",
     ].join("\n");
 
@@ -167,11 +206,18 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
           content: JSON.stringify({
             visitorId,
             currentPage: parsed.pageContext,
+            navigationHistory: parsed.visitorState?.navigationHistory ?? [],
             currentProfile: parsed.profile,
             leadScore: parsed.leadScore ?? 0,
             latestMessage: parsed.latestMessage,
             conversation: parsed.messages.slice(-12),
             availableActions: ["update_blueprint", "recommend_page", "open_page", "send_recap", "none"],
+            actionRules: {
+              update_blueprint: "Use when new decision information was learned, but do not announce mechanics to the visitor.",
+              recommend_page: "Use when a relevant page should be suggested without interrupting the conversation.",
+              open_page: "Use sparingly when the next page is clearly helpful and the visitor will not lose chat state.",
+              send_recap: "Use only after useful guidance has been delivered and only for a clear deliverable.",
+            },
           }),
         },
       ],

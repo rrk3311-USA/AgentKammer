@@ -57,6 +57,16 @@ type Answers = {
   desire?: string;
   constraints?: string;
   tradeOff?: string;
+  timeline?: string;
+  budget?: string;
+  industry?: string;
+  household?: string;
+  neighborhoods?: string;
+  buildingPreferences?: string;
+  buildingsViewed?: string;
+  reportsViewed?: string;
+  questionsAsked?: string;
+  recommendationHistory?: string;
   email?: string;
   phone?: string;
 };
@@ -87,6 +97,27 @@ type DecisionGuideAiTurn = {
   };
 };
 
+function profileKeys() {
+  return [
+    "situation",
+    "desire",
+    "constraints",
+    "tradeOff",
+    "timeline",
+    "budget",
+    "industry",
+    "household",
+    "neighborhoods",
+    "buildingPreferences",
+    "buildingsViewed",
+    "reportsViewed",
+    "questionsAsked",
+    "recommendationHistory",
+    "email",
+    "phone",
+  ] as const;
+}
+
 function scoreLead(text: string) {
   const lower = text.toLowerCase();
   let score = 0;
@@ -110,6 +141,12 @@ function buildRecap(answers: Answers, score: number) {
     answers.desire ? "Desire/What they want next" : null,
     answers.constraints ? "Constraints/What is limiting them" : null,
     answers.tradeOff ? "Trade-offs/Priorities" : null,
+    answers.timeline ? "Timeline" : null,
+    answers.budget ? "Budget" : null,
+    answers.industry ? "Industry" : null,
+    answers.household ? "Household" : null,
+    answers.neighborhoods ? "Neighborhood preferences" : null,
+    answers.buildingPreferences ? "Building preferences" : null,
   ].filter(Boolean);
 
   return [
@@ -123,6 +160,16 @@ function buildRecap(answers: Answers, score: number) {
     `Desire: ${answers.desire || "Not provided"}`,
     `Constraints: ${answers.constraints || "Not provided"}`,
     `Trade-off / risk: ${answers.tradeOff || "Not provided"}`,
+    `Timeline: ${answers.timeline || "Not provided"}`,
+    `Budget: ${answers.budget || "Not provided"}`,
+    `Industry: ${answers.industry || "Not provided"}`,
+    `Household: ${answers.household || "Not provided"}`,
+    `Neighborhood preferences: ${answers.neighborhoods || "Not provided"}`,
+    `Building preferences: ${answers.buildingPreferences || "Not provided"}`,
+    `Buildings viewed: ${answers.buildingsViewed || "Not provided"}`,
+    `Reports viewed: ${answers.reportsViewed || "Not provided"}`,
+    `Questions asked: ${answers.questionsAsked || "Not provided"}`,
+    `Recommendation history: ${answers.recommendationHistory || "Not provided"}`,
     "",
     "Recommended next step:",
     score >= 4
@@ -150,6 +197,13 @@ function summarizeMemory(messages: Message[], answers: Answers, score: number) {
     answers.desire ? `Desire: ${answers.desire}` : null,
     answers.constraints ? `Constraints: ${answers.constraints}` : null,
     answers.tradeOff ? `Trade-off: ${answers.tradeOff}` : null,
+    answers.timeline ? `Timeline: ${answers.timeline}` : null,
+    answers.budget ? `Budget: ${answers.budget}` : null,
+    answers.industry ? `Industry: ${answers.industry}` : null,
+    answers.household ? `Household: ${answers.household}` : null,
+    answers.neighborhoods ? `Neighborhoods: ${answers.neighborhoods}` : null,
+    answers.buildingPreferences ? `Building preferences: ${answers.buildingPreferences}` : null,
+    answers.recommendationHistory ? `Recommendation history: ${answers.recommendationHistory}` : null,
     `Message count: ${messages.length}`,
   ]
     .filter(Boolean)
@@ -163,7 +217,7 @@ function transcript(messages: Message[]) {
 function mergeDefinedProfile(current: Answers, profile?: Partial<Answers>) {
   if (!profile) return current;
   const next = { ...current };
-  (["situation", "desire", "constraints", "tradeOff", "email", "phone"] as const).forEach((key) => {
+  profileKeys().forEach((key) => {
     const value = profile[key];
     if (typeof value === "string" && value.trim()) {
       next[key] = value.trim();
@@ -312,6 +366,15 @@ export function DecisionAssistantDock() {
       const current = JSON.parse(window.localStorage.getItem(navigationMemoryKey) || "[]") as string[];
       const next = [title, ...current.filter((item) => item !== title)].slice(0, 8);
       window.localStorage.setItem(navigationMemoryKey, JSON.stringify(next));
+      setAnswers((answersNow) => {
+        const viewed = next.join(", ");
+        const isReport = /report|brief|intelligence/i.test(title);
+        return {
+          ...answersNow,
+          reportsViewed: isReport ? viewed : answersNow.reportsViewed,
+          buildingsViewed: /building/i.test(title) ? viewed : answersNow.buildingsViewed,
+        };
+      });
     } catch {
       window.localStorage.setItem(navigationMemoryKey, JSON.stringify([title]));
     }
@@ -338,8 +401,21 @@ export function DecisionAssistantDock() {
         if (typeof memory.leadScore === "number") {
           setLeadScore(memory.leadScore);
         }
+        if (memory.summary) {
+          try {
+            const summary = JSON.parse(memory.summary);
+            if (summary?.profile && typeof summary.profile === "object") {
+              setAnswers((current) => mergeDefinedProfile(current, summary.profile));
+            }
+          } catch {
+            // Older saved summaries were plain text.
+          }
+        }
         if (memory.leadEmail) {
           setAnswers((current) => ({ ...current, email: memory.leadEmail }));
+        }
+        if (memory.leadPhone) {
+          setAnswers((current) => ({ ...current, phone: memory.leadPhone }));
         }
       } catch {
         // Memory is additive; if it fails, the assistant should still work.
@@ -390,9 +466,22 @@ export function DecisionAssistantDock() {
           sessionId,
           messages,
           leadEmail: answers.email,
+          leadPhone: answers.phone,
           categoryInterest: answers.desire || answers.situation,
           leadScore,
-          summary: summarizeMemory(messages, answers, leadScore),
+          summary: JSON.stringify({
+            profile: answers,
+            leadSummary: summarizeMemory(messages, answers, leadScore),
+            pageContext: getPageContext(location),
+            navigationHistory: (() => {
+              try {
+                return JSON.parse(window.localStorage.getItem(navigationMemoryKey) || "[]");
+              } catch {
+                return [];
+              }
+            })(),
+            updatedAt: new Date().toISOString(),
+          }),
         }),
       }).catch(() => {
         // Keep the chat usable even if memory persistence is temporarily unavailable.
@@ -502,6 +591,15 @@ export function DecisionAssistantDock() {
           profile,
           leadScore: score,
           pageContext: getPageContext(location),
+          visitorState: {
+            navigationHistory: (() => {
+              try {
+                return JSON.parse(window.localStorage.getItem(navigationMemoryKey) || "[]");
+              } catch {
+                return [];
+              }
+            })(),
+          },
         }),
       });
 
@@ -527,7 +625,7 @@ export function DecisionAssistantDock() {
     setLeadScore(nextScore);
     setQuickActions([]);
 
-    const openAction = aiTurn.actions?.find((action) => (action.type === "open_page" || action.type === "recommend_page") && action.path);
+    const openAction = aiTurn.actions?.find((action) => action.type === "open_page" && action.path);
     if (openAction?.path) {
       setLocation(openAction.path);
     }
@@ -645,7 +743,7 @@ export function DecisionAssistantDock() {
           <div className="flex items-center justify-between gap-4 lg:block">
             <div>
               <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Decision Guide</p>
-              <p className="mt-1 text-sm font-medium text-brand-ivory">Decision Blueprint</p>
+              <p className="mt-1 text-sm font-medium text-brand-ivory">Hi, I'm Raphi.</p>
             </div>
             <p className="font-mono text-[10px] text-brand-ivory/58 lg:mt-1">{blueprintCompletion}/6 · {blueprintPercent}%</p>
           </div>
@@ -754,7 +852,7 @@ export function DecisionAssistantDock() {
           </div>
           <div className="border border-brand-border bg-white p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_1px_0_rgba(42,52,71,0.05)]" aria-label="Decision Blueprint modules">
             <div className="flex items-center justify-between gap-4">
-              <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Decision Blueprint</p>
+              <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Decision Progress</p>
               <p className="font-mono text-[10px] text-brand-graphite">{blueprintCompletion}/6</p>
             </div>
             <div className="mt-3 grid grid-cols-6 gap-1" aria-hidden>

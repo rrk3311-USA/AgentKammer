@@ -541,6 +541,16 @@ const decisionGuideProfileSchema = z.object({
   desire: z.string().optional(),
   constraints: z.string().optional(),
   tradeOff: z.string().optional(),
+  timeline: z.string().optional(),
+  budget: z.string().optional(),
+  industry: z.string().optional(),
+  household: z.string().optional(),
+  neighborhoods: z.string().optional(),
+  buildingPreferences: z.string().optional(),
+  buildingsViewed: z.string().optional(),
+  reportsViewed: z.string().optional(),
+  questionsAsked: z.string().optional(),
+  recommendationHistory: z.string().optional(),
   email: z.string().optional(),
   phone: z.string().optional(),
 });
@@ -560,7 +570,35 @@ const decisionGuideChatSchema = z.object({
       related: z.array(z.string()).optional(),
     })
     .optional(),
+  visitorState: z
+    .object({
+      navigationHistory: z.array(z.string()).optional(),
+    })
+    .optional(),
 });
+
+const decisionGuideProfileKeys = [
+  "situation",
+  "desire",
+  "constraints",
+  "tradeOff",
+  "timeline",
+  "budget",
+  "industry",
+  "household",
+  "neighborhoods",
+  "buildingPreferences",
+  "buildingsViewed",
+  "reportsViewed",
+  "questionsAsked",
+  "recommendationHistory",
+  "email",
+  "phone",
+] as const;
+
+function decisionGuideResponseProfileProperties() {
+  return Object.fromEntries(decisionGuideProfileKeys.map((key) => [key, { type: ["string", "null"] }]));
+}
 
 const decisionGuideResponseSchema = {
   type: "object",
@@ -574,15 +612,8 @@ const decisionGuideResponseSchema = {
     profile: {
       type: "object",
       additionalProperties: false,
-      required: ["situation", "desire", "constraints", "tradeOff", "email", "phone"],
-      properties: {
-        situation: { type: ["string", "null"] },
-        desire: { type: ["string", "null"] },
-        constraints: { type: ["string", "null"] },
-        tradeOff: { type: ["string", "null"] },
-        email: { type: ["string", "null"] },
-        phone: { type: ["string", "null"] },
-      },
+      required: decisionGuideProfileKeys,
+      properties: decisionGuideResponseProfileProperties(),
     },
     actions: {
       type: "array",
@@ -653,14 +684,7 @@ function getOrCreateVisitorId(req: any, res: any) {
 }
 
 function compactProfile(profile: z.infer<typeof decisionGuideProfileSchema>) {
-  return {
-    situation: profile.situation || null,
-    desire: profile.desire || null,
-    constraints: profile.constraints || null,
-    tradeOff: profile.tradeOff || null,
-    email: profile.email || null,
-    phone: profile.phone || null,
-  };
+  return Object.fromEntries(decisionGuideProfileKeys.map((key) => [key, profile[key] || null]));
 }
 
 function calculateLeadScore(leadData: LeadData): number {
@@ -731,13 +755,21 @@ export async function registerRoutes(app: Express): Promise<void> {
 
       const system = [
         "You are Raphi, Agent Kammer's Decision Guide for Manhattan housing decisions.",
-        "You are not a generic chatbot and not a lead form. You are a senior advisor sitting across the table.",
+        "You are a trusted Manhattan housing strategist sitting beside the visitor while they browse.",
+        "Never sound like a chatbot, CRM, lead form, or customer support.",
+        "Hide the technology. Show guidance.",
         "Your framework is TRIGGER -> DESIRE -> CONSTRAINTS -> TRADE-OFFS -> RECOMMENDATION.",
+        "The visitor does not wake up wanting a Decision Blueprint. They wake up thinking they do not know what to do.",
         "First understand what changed. Then what the visitor wants the next home to do better. Then what is limiting them. Then what they will give up if they cannot have everything.",
+        "Every answer should give value: interpret what it means, explain why it matters, then ask one useful next question or recommend one relevant page.",
         "Never gate basic guidance behind contact information.",
         "Ask for email or phone only when offering a clear deliverable: saving progress, sending a recap, delivering reports, scheduling a review, or arranging an introduction.",
+        "If asking for contact, explain exactly what they will receive.",
+        "Do not expose raw system updates like 'timeline updated' or 'profile saved'. Say human things like 'That helps me understand your situation much better.'",
         "Qualification is invisible. Do not show scores to the visitor.",
         "Internally qualify intent, urgency, financial readiness, decision clarity, property fit, and human-assistance readiness.",
+        "Maintain a structured decision profile covering life event, desires, constraints, timeline, budget, industry, household, neighborhoods, building preferences, buildings viewed, reports viewed, questions asked, and recommendation history.",
+        "Use page metadata to guide navigation. If you recommend or open a page, explain why in one sentence.",
         "Return one warm, concise advisor reply and structured actions for the UI.",
       ].join("\n");
 
@@ -750,6 +782,7 @@ export async function registerRoutes(app: Express): Promise<void> {
             content: JSON.stringify({
               visitorId,
               currentPage: parsed.pageContext,
+              navigationHistory: parsed.visitorState?.navigationHistory ?? [],
               currentProfile,
               leadScore: parsed.leadScore ?? 0,
               latestMessage: parsed.latestMessage,
