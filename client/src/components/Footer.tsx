@@ -34,7 +34,7 @@ export function Footer() {
           <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-between gap-6 border border-brand-navy bg-brand-navy px-5 py-3 text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:border-brand-brass"
+              className="ak-call-button inline-flex items-center justify-between gap-6 px-5 py-3 text-[11px] uppercase tracking-[0.16em] transition-colors"
             >
               Request a Call
               <ArrowRight className="h-4 w-4" strokeWidth={1.5} />

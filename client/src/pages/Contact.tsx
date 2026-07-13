@@ -140,7 +140,7 @@ export default function Contact() {
               <Button
                 type="submit"
                 variant="brand"
-                className="w-full"
+                className="ak-call-button w-full"
                 data-testid="button-contact-submit"
                 disabled={contactMutation.isPending}
               >

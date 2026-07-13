@@ -152,10 +152,10 @@ export function CTA({
             <div className="grid gap-3 sm:min-w-[16rem]">
               <Link
                 href="/contact"
-                className="group grid border border-brand-navy bg-brand-navy px-5 py-4 text-left text-brand-ivory transition-colors hover:border-brand-brass"
+                className="ak-call-button group grid px-5 py-4 text-left transition-colors"
               >
                 <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">Private Advisory</span>
-                <span className="mt-3 h-px w-full bg-brand-ivory/18" aria-hidden />
+                <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
                 <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
                   {label}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
