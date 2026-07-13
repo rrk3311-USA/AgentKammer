@@ -65,7 +65,7 @@ export default function Contact() {
         description="Share what is changing, what decision you are weighing, and where the conversation should begin. The response should help clarify the next step before listings or showings take over."
       />
 
-      <PageSection className="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+      <PageSection className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
         <div>
           <SectionHeading
             eyebrow="Reach Out"

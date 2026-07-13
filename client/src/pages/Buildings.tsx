@@ -7,19 +7,19 @@ import { usePageMetadata } from "@/hooks/usePageMetadata";
 const reportTypes = [
   {
     title: "Individual Buildings",
-    text: "Targeted pages focused on a single asset, its positioning, design character, amenities, and buyer fit.",
+    text: "Use these when the question is whether a specific address deserves attention, caution, or a place on the shortlist.",
     href: "/building-reports/individual-buildings",
     icon: Building2,
   },
   {
     title: "Neighborhood Guides",
-    text: "High-level district views that connect architecture, lifestyle, access, and inventory rhythm.",
+    text: "Use these to decide where daily life, commute, building stock, schools, and neighborhood rhythm actually support the move.",
     href: "/building-reports/neighborhood-guides",
     icon: Map,
   },
   {
     title: "Market Briefs",
-    text: "Condensed notes on pricing pressure, buyer behavior, and strategic timing for active decision-makers.",
+    text: "Use these when timing, pricing pressure, inventory quality, or negotiation leverage could change what you should do next.",
     href: "/building-reports/market-briefs",
     icon: Newspaper,
   },
@@ -28,7 +28,7 @@ const reportTypes = [
 export default function Buildings() {
   usePageMetadata({
     title: "Building Reports",
-    description: "Overview of the Building Reports section, including sub-pages for buildings, neighborhood guides, and market briefs.",
+    description: "Building Reports help Agent Kammer clients study Manhattan buildings, neighborhoods, and market timing before making a housing decision.",
     path: "/building-reports",
   });
 
@@ -36,16 +36,16 @@ export default function Buildings() {
     <main className="bg-brand-ivory">
       <PageHero
         eyebrow="Building Reports"
-        title="Research-led pages that help clients see structure before making a move."
-        description="The Building Reports section is split into three clear tracks: individual buildings, neighborhood guides, and market briefs. Each one serves a different stage of the decision process while keeping the same design language and navigation."
+        title="Study the building before the showing."
+        description="Building Reports help separate attractive listings from durable decisions. Use them to understand address quality, neighborhood fit, timing risk, and whether a property deserves your attention at all."
       />
       <ReportSubnav />
 
       <PageSection>
         <SectionHeading
           eyebrow="Section Map"
-          title="Three report formats, one consistent editorial system."
-          description="The pages below are designed to work as a family. They share the same spacing grid, typography, and navigation while giving each content type its own use case."
+          title="Choose the report format that matches the uncertainty."
+          description="Some decisions require address-level detail. Others need neighborhood framing or a short market read before comparing property. The right report depends on what is still unclear."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {reportTypes.map((item) => (
@@ -63,18 +63,18 @@ export default function Buildings() {
       </PageSection>
 
       <section className="border-y border-brand-border bg-white">
-        <PageSection className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+        <PageSection className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
           <SectionHeading
             eyebrow="Usage"
-            title="Use the overview page to route the right reader to the right depth."
-            description="Some visitors need building-specific detail. Others need neighborhood framing or a concise timing note. This top-level page lets those paths stay separate without breaking the visual system."
+            title="The goal is not more information. The goal is better sequence."
+            description="Look at the wrong report too early and the search gets noisy. Start with the uncertainty: building quality, neighborhood fit, or timing leverage."
           />
           <div className="rounded-card border border-brand-border bg-brand-ivory p-8">
             <p className="font-display text-3xl leading-[0.95] tracking-[-0.03em] text-brand-navy">
-              The navigation now treats Building Reports as a proper section rather than a loose collection of disconnected pages.
+              A strong building brief should tell you whether to keep looking, go deeper, negotiate harder, wait, or walk away.
             </p>
-            <Link href="/building-reports/individual-buildings" className="mt-8 inline-block">
-              <Button variant="brand" className="gap-2 uppercase tracking-nav">
+            <Link href="/building-reports/individual-buildings" className="mt-8 inline-flex max-w-full">
+              <Button variant="brand" className="w-full max-w-full gap-2 whitespace-normal text-center uppercase tracking-nav sm:w-auto sm:whitespace-nowrap">
                 Start with Buildings
                 <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
               </Button>
@@ -85,7 +85,7 @@ export default function Buildings() {
 
       <CTA
         title="Want the reports shaped around a live search brief?"
-        description="Use the contact page to begin with the building or neighborhood question that matters most."
+        description="Request a call with the building, neighborhood, or timing question that needs a sharper answer."
       />
     </main>
   );

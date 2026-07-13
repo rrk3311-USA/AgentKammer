@@ -19,7 +19,7 @@ const principles = [
 export default function About() {
   usePageMetadata({
     title: "About",
-    description: "About the Agent Kammer advisory approach and the principles behind the updated site.",
+    description: "About the Agent Kammer advisory approach to Manhattan housing decisions, building intelligence, and private client strategy.",
     path: "/about",
   });
 
@@ -27,15 +27,15 @@ export default function About() {
     <main className="bg-brand-ivory">
       <PageHero
         eyebrow="About"
-        title="A brand system built to reflect discretion, intelligence, and confidence."
-        description="The updated site positions Agent Kammer less like a listing destination and more like a private advisory practice. The design language is editorial, the navigation is simplified, and the copy is structured around decision support."
+        title="Private housing guidance before the market gets loud."
+        description="Agent Kammer helps clients decide what should happen next: buy, sell, rent, wait, renovate, refinance, hold, or do nothing. The work starts with judgment, building intelligence, and a clear understanding of what changed."
       />
 
-      <PageSection className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)]">
+      <PageSection className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)]">
         <SectionHeading
           eyebrow="Practice"
           title="An approach shaped by market fluency and a preference for precision over noise."
-          description="The work spans acquisition strategy, relocation guidance, and report-based market framing. Every page in this version is written to clarify how the practice thinks, not just what it sells."
+          description="The work spans acquisition strategy, relocation guidance, building reports, and sale decisions. The goal is not to create urgency. The goal is to make the next move obvious enough that the client can act with confidence or choose not to act."
         />
         <div className="rounded-card border border-brand-border bg-white p-8">
           <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">At a Glance</p>
@@ -50,7 +50,7 @@ export default function About() {
             </div>
             <div>
               <p className="font-display text-4xl leading-none text-brand-navy">Refined</p>
-              <p className="mt-2 text-sm leading-7 text-brand-graphite">A restrained visual system with an 8-pixel rhythm and consistent navigation.</p>
+              <p className="mt-2 text-sm leading-7 text-brand-graphite">A focused process that reduces options until the right decision becomes legible.</p>
             </div>
           </div>
         </div>
@@ -71,8 +71,8 @@ export default function About() {
       </section>
 
       <CTA
-        title="Continue into the advisory sections."
-        description="From here, the strongest next routes are Buyer Advisory or Building Reports depending on the brief."
+        title="Bring the decision into focus."
+        description="Request a call to clarify what changed, what should happen next, and whether the best move is action or restraint."
       />
     </main>
   );

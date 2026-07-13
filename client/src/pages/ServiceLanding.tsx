@@ -13,9 +13,7 @@ const serviceHeroImages: Record<string, { src: string; alt: string }> = {
 };
 
 function publicSummary(summary: string) {
-  return summary
-    .replace(/^A supporting landing page for /i, "Guidance for ")
-    .replace(/^A landing page for /i, "Guidance for ");
+  return summary;
 }
 
 function decisionQuestions(title: string) {
@@ -74,11 +72,11 @@ export default function ServiceLanding({ slug }: { slug: string }) {
         }
       />
 
-      <PageSection className="grid gap-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
+      <PageSection className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
         <SectionHeading
           eyebrow="Who It Helps"
           title={`${landing.navLabel} need a decision brief, not a generic search.`}
-          description="The first step is understanding why the move, sale, or purchase is being considered. From there, the work becomes narrower: decide whether anything should change, whether doing nothing is wise or dangerous, then decide what kind of change is worth pursuing."
+          description="The first step is understanding why the move, sale, purchase, or hold decision is being considered. From there, the work becomes narrower: decide whether anything should change, whether doing nothing is wise or dangerous, then decide what kind of change is worth pursuing."
         />
         <div className="grid gap-4">
           {landing.audience.map((item, index) => (
@@ -111,7 +109,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
       <PageSection>
         <SectionHeading
           eyebrow="How The Brief Is Built"
-          title="The page becomes useful when it turns uncertainty into a clear recommendation."
+          title="The brief becomes useful when it turns uncertainty into a clear recommendation."
           description="The goal is not to tour more property. The goal is to remove the wrong paths early, identify whether no action is viable, then spend attention only where the decision deserves it."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
@@ -125,7 +123,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
       </PageSection>
 
       <section className="border-y border-brand-border bg-brand-navy text-brand-ivory">
-        <PageSection className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <PageSection className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <div className="max-w-3xl">
             <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">Decision Path</p>
             <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.94] tracking-[-0.03em] text-brand-ivory">
@@ -146,7 +144,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
         </PageSection>
       </section>
 
-      <PageSection className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+      <PageSection className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <div>
           <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">More Briefs</p>
           <h2 className="mt-4 max-w-3xl font-display text-[clamp(2rem,4vw,3.25rem)] leading-[0.95] tracking-[-0.03em] text-brand-navy">

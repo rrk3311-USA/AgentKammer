@@ -13,9 +13,7 @@ const coreServices = [
 ];
 
 function publicSummary(summary: string) {
-  return summary
-    .replace(/^A supporting landing page for /i, "Guidance for ")
-    .replace(/^A landing page for /i, "Guidance for ");
+  return summary;
 }
 
 export default function Services() {
@@ -33,11 +31,11 @@ export default function Services() {
         description="Agent Kammer organizes housing guidance around the life event, constraint, or ownership question behind the search. The recommendation may be to buy, sell, rent, wait, renew, renovate, refinance, rent the current home, or stay put."
       />
 
-      <PageSection className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)]">
+      <PageSection className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)]">
         <SectionHeading
           eyebrow="Core"
-          title="The main paths stay simple because the visitor may not need a path yet."
-          description="Use these broad entry points when the situation is still forming. The Decision Guide and the footer navigator can then decide whether the visitor should move forward, slow down, or avoid a move entirely."
+          title="The main paths stay simple because the right path may not be clear yet."
+          description="Use these broad entry points when the situation is still forming. The right recommendation may be to move forward, slow down, compare options, or avoid a move entirely."
         />
         <div className="rounded-card border border-brand-border bg-white p-8">
           <div className="grid gap-4">

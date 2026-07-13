@@ -21,7 +21,7 @@ const insights = [
 export default function Perspectives() {
   usePageMetadata({
     title: "Insights",
-    description: "Insights page for the updated Agent Kammer local site.",
+    description: "Selective Agent Kammer insights on Manhattan buildings, neighborhoods, timing, and housing decisions.",
     path: "/insights",
   });
 
@@ -30,14 +30,14 @@ export default function Perspectives() {
       <PageHero
         eyebrow="Insights"
         title="Editorial notes that connect the market to practical decisions."
-        description="The insights page works as a bridge between the advisory pages and the report library. It should feel intelligent and selective, not crowded."
+        description="Short observations for people who need more than listing alerts: building quality, neighborhood fit, timing pressure, and the trade-offs that shape a better housing decision."
       />
 
       <PageSection>
         <SectionHeading
           eyebrow="Recent Notes"
-          title="A concise set of observations keeps the section useful."
-          description="These cards route naturally into the Building Reports sub-pages, keeping the site connected through one consistent navigation model."
+          title="Read the note that matches the decision in front of you."
+          description="Each insight points toward a practical next step: compare buildings, narrow a neighborhood, understand timing, or decide whether waiting is the wiser move."
         />
         <div className="mt-12 grid gap-6">
           {insights.map((item) => (
@@ -54,8 +54,8 @@ export default function Perspectives() {
       </PageSection>
 
       <CTA
-        title="Need a more tailored read than a public insight note can provide?"
-        description="Use contact to turn the observation into a real search, building, or relocation brief."
+        title="Need a more tailored read than a public note can provide?"
+        description="Request a call to turn the observation into a decision brief for your building, neighborhood, timeline, or move question."
       />
     </main>
   );

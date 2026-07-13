@@ -66,12 +66,12 @@ export function Header() {
             <button
               type="button"
               onClick={openDecisionAssistant}
-              className="ak-header-blueprint group grid min-w-32 px-4 py-2 text-left transition-colors hover:bg-brand-ivory/12"
+              className="ak-header-blueprint group grid min-w-32 px-4 py-2 text-left transition-colors"
             >
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#D7C29A]">Blueprint</span>
-              <span className="mt-0.5 flex items-center justify-between gap-4 text-[11px] uppercase tracking-[0.16em] text-brand-ivory">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-brand-brass">Blueprint</span>
+              <span className="mt-0.5 flex items-center justify-between gap-4 text-[11px] uppercase tracking-[0.16em] text-[#1f2851]">
                 Begin
-                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+                <ArrowRight className="h-3.5 w-3.5 text-brand-brass transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
               </span>
             </button>
           </div>
@@ -113,10 +113,10 @@ export function Header() {
               }}
               className="ak-header-blueprint mt-4 grid w-full px-4 py-3 text-left"
             >
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#D7C29A]">Blueprint</span>
-              <span className="mt-1 flex items-center justify-between text-[11px] uppercase tracking-[0.14em] text-brand-ivory">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-brand-brass">Blueprint</span>
+              <span className="mt-1 flex items-center justify-between text-[11px] uppercase tracking-[0.14em] text-[#1f2851]">
                 Begin
-                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                <ArrowRight className="h-4 w-4 text-brand-brass" strokeWidth={1.5} />
               </span>
             </button>
           </nav>

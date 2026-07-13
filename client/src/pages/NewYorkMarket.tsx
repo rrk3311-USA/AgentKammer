@@ -19,7 +19,7 @@ const neighborhoods = [
 export default function NewYorkMarket() {
   usePageMetadata({
     title: "Neighborhood Guides",
-    description: "Neighborhood guide pages within the Building Reports section.",
+    description: "Manhattan neighborhood guides for deciding where daily life, commute, building stock, and budget fit best.",
     path: "/building-reports/neighborhood-guides",
   });
 
@@ -28,15 +28,15 @@ export default function NewYorkMarket() {
       <PageHero
         eyebrow="Building Reports"
         title="Neighborhood Guides"
-        description="Neighborhood guide pages sit one level above individual buildings. They contextualize inventory, atmosphere, access, and buyer fit without losing the restrained visual voice of the site."
+        description="Neighborhood fit determines the life around the apartment. These guides help compare commute, schools, building stock, street rhythm, service access, and whether the area supports the reason for moving."
       />
       <ReportSubnav />
 
       <PageSection>
         <SectionHeading
           eyebrow="Market Districts"
-          title="Neighborhood pages should help visitors decide where to focus before comparing specific buildings."
-          description="These guides work best when they connect daily life, architecture, and inventory tempo in a way that reduces search fatigue."
+          title="Choose geography before comparing every listing."
+          description="A clearer neighborhood decision reduces search fatigue, removes false options, and makes building comparisons more honest."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {neighborhoods.map((item) => (
@@ -50,7 +50,7 @@ export default function NewYorkMarket() {
 
       <CTA
         title="Refine the search geography before the building list grows."
-        description="Neighborhood framing is often the fastest way to improve buyer focus and reduce noise."
+        description="Request a call to compare neighborhoods around commute, lifestyle, schools, building type, and timing."
       />
     </main>
   );

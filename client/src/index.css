@@ -922,10 +922,18 @@
 
   .ak-header-blueprint {
     background:
-      linear-gradient(135deg, rgba(245, 242, 235, 0.1), rgba(245, 242, 235, 0.025)) padding-box,
-      linear-gradient(135deg, rgba(176, 141, 87, 0.82), rgba(245, 242, 235, 0.45), rgba(93, 102, 116, 0.64), rgba(176, 141, 87, 0.78)) border-box;
+      linear-gradient(135deg, rgba(245, 242, 235, 0.94), rgba(216, 209, 199, 0.88) 48%, rgba(238, 229, 210, 0.92)) padding-box,
+      linear-gradient(135deg, rgba(176, 141, 87, 0.95), rgba(245, 242, 235, 0.7), rgba(93, 102, 116, 0.62), rgba(176, 141, 87, 0.9)) border-box;
     border: 1px solid transparent;
-    box-shadow: inset 0 1px 0 rgba(245, 242, 235, 0.12);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.65),
+      0 1px 10px rgba(32, 39, 53, 0.18);
+  }
+
+  .ak-header-blueprint:hover {
+    background:
+      linear-gradient(135deg, rgba(255, 252, 244, 0.98), rgba(220, 212, 199, 0.94) 48%, rgba(242, 233, 214, 0.98)) padding-box,
+      linear-gradient(135deg, rgba(204, 170, 110, 1), rgba(245, 242, 235, 0.78), rgba(93, 102, 116, 0.7), rgba(176, 141, 87, 1)) border-box;
   }
 
   .ak-icon {

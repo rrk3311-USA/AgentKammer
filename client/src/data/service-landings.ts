@@ -17,7 +17,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Foreign Buyers",
     eyebrow: "High-Intent Buyer",
     summary:
-      "A landing page for international and foreign-national buyers entering the New York market with cross-border planning needs and a purchase-first mindset.",
+      "International and foreign-national buyers need a calm path through New York ownership: cross-border logistics, building rules, financing, advisors, timing, and whether buying now is actually the right move.",
     searchTerms: ["foreign buyers new york real estate", "international property buyers nyc", "foreign national buying condo nyc"],
     audience: [
       "International buyers acquiring a New York residence, pied-a-terre, or long-term investment property.",
@@ -37,7 +37,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Pied-a-Terre Buyers",
     eyebrow: "High-Intent Buyer",
     summary:
-      "A landing page for buyers seeking a city base, second residence, or occasional-use apartment in New York City.",
+      "A pied-a-terre decision should start with how often the home will be used, how easy it is to own remotely, and whether the building supports a low-friction New York base.",
     searchTerms: ["pied a terre buyers nyc", "buy pied a terre new york", "second home apartment nyc"],
     audience: [
       "Buyers seeking a part-time city residence with strong convenience and service quality.",
@@ -57,7 +57,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Widow Home Sales",
     eyebrow: "Seller Situation",
     summary:
-      "A landing page for sellers navigating a home sale after the loss of a spouse, with a calm advisory tone and a New York-specific framing.",
+      "After the loss of a spouse, the right housing decision may be to sell, wait, simplify, or hold. The brief keeps the process private, paced, and organized around what the family actually needs next.",
     searchTerms: ["widow selling home new york", "widow real estate agent nyc", "selling apartment after spouse dies nyc"],
     audience: [
       "Sellers managing a home or apartment transition after a spouse passes away.",
@@ -77,7 +77,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "1031 Exchange",
     eyebrow: "High-Intent Buyer",
     summary:
-      "A landing page for exchange-driven buyers who need speed, inventory focus, and deadline-aware execution in New York.",
+      "A 1031 exchange needs speed without panic. The brief narrows replacement options around deadline, asset fit, downside risk, and whether New York is the right place for the capital.",
     searchTerms: ["1031 exchange new york", "1031 exchange broker nyc", "1031 exchange apartment new york"],
     audience: [
       "Exchange buyers working against strict timing windows.",
@@ -97,7 +97,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "New Development",
     eyebrow: "High-Intent Buyer",
     summary:
-      "A landing page for buyers evaluating new condo inventory, sponsor product, and new-construction tradeoffs across New York City.",
+      "New development should be tested against resale alternatives, sponsor terms, carrying costs, building identity, and the buyer's real daily-life priorities before the showroom takes over.",
     searchTerms: ["new condo developments nyc", "new york new construction agent", "new development apartments nyc"],
     audience: [
       "Buyers comparing sponsor inventory and new-construction options.",
@@ -117,7 +117,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Single Women Buyers",
     eyebrow: "Demographic Buyer",
     summary:
-      "A landing page for women buying independently in New York City with an emphasis on clarity, safety, building fit, and long-term confidence.",
+      "Independent buyers need a process that protects confidence: building quality, daily safety, neighborhood fit, financing, resale logic, and whether the purchase should happen now or later.",
     searchTerms: ["single woman buying apartment nyc", "single women home buyers new york", "women buying condo nyc"],
     audience: [
       "Women buying independently for a primary residence or long-term base in the city.",
@@ -137,7 +137,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Female Doctors",
     eyebrow: "Demographic Buyer",
     summary:
-      "A landing page for high-performing women professionals buying in New York with an emphasis on efficiency, quality, and long-term fit.",
+      "Busy physicians and professionals need a sharper buying path: fewer weak tours, stronger building filters, clear trade-offs, and a recommendation that respects time and long-term fit.",
     searchTerms: ["female doctor buying apartment nyc", "women professionals buying condo new york", "doctor home buyer nyc"],
     audience: [
       "Female physicians and professionals balancing demanding schedules with a major purchase decision.",
@@ -157,7 +157,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Corporate Relocation",
     eyebrow: "Demographic Buyer",
     summary:
-      "A landing page for purchase-focused corporate relocations into New York City, designed for executives and professionals making a primary move rather than a rental stopgap.",
+      "Corporate relocation should not automatically mean rushing into a rental or purchase. The brief weighs timeline, commute, household needs, company support, and whether waiting creates more leverage.",
     searchTerms: ["corporate relocation home buyer nyc", "relocating to new york to buy apartment", "executive home purchase nyc"],
     audience: [
       "Professionals relocating into New York for a longer-term ownership decision.",
@@ -177,7 +177,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Executive Relocation",
     eyebrow: "High-Value Relocation",
     summary:
-      "A landing page for senior professionals, founders, partners, and executives relocating to New York who need a disciplined housing strategy before tours begin.",
+      "Executive relocation starts with the operating rhythm of the person moving: commute, privacy, service, family logistics, timeline, and whether buying, renting, or waiting is the smarter first step.",
     searchTerms: ["executive relocation nyc", "moving to manhattan executive", "relocating to new york for work"],
     audience: [
       "Executives and senior professionals moving into Manhattan with limited time and high expectations.",
@@ -197,7 +197,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "School Planning",
     eyebrow: "Family Move",
     summary:
-      "A landing page for families using school access, commute, building fit, and neighborhood rhythm to make a more confident New York housing decision.",
+      "School planning is really household planning. The brief connects schools, commute, bedroom needs, building rules, budget, and the cost of moving too early or too late.",
     searchTerms: ["best school districts nyc real estate", "nyc school district apartment search", "moving to nyc for schools"],
     audience: [
       "Families weighing public, private, and specialized school logistics alongside housing choices.",
@@ -217,7 +217,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Military Relocation",
     eyebrow: "Relocation Brief",
     summary:
-      "A landing page for military households and PCS-related moves into the New York area with timing, financing, commute, and rental-versus-buy decisions to resolve.",
+      "Military moves need clear triage: reporting location, PCS timing, financing, rental-versus-buy logic, household needs, and the situations where staying flexible beats forcing ownership.",
     searchTerms: ["military relocation nyc", "pcs housing new york", "military move new york real estate"],
     audience: [
       "Military households navigating a time-sensitive New York move.",
@@ -237,7 +237,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Physician Relocation",
     eyebrow: "High-Value Niche",
     summary:
-      "A landing page for physicians relocating to New York who need housing to fit hospital commute, call schedule, financing, parking, and daily recovery time.",
+      "Physician relocation decisions revolve around hospital commute, call schedule, recovery time, financing structure, parking, service reliability, and whether the home supports the work.",
     searchTerms: ["physician relocation nyc", "doctor relocating to new york", "hospital commute apartment nyc"],
     audience: [
       "Physicians and medical professionals moving to New York for hospital, fellowship, private-practice, or academic roles.",
@@ -257,7 +257,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Finance Relocation",
     eyebrow: "Manhattan-Specific",
     summary:
-      "A landing page for finance, private equity, hedge fund, and banking professionals relocating to Manhattan with privacy, commute, service quality, and asset discipline in focus.",
+      "Finance and hedge fund relocation requires asset discipline as much as lifestyle fit: commute, privacy, service quality, resale risk, carrying costs, and whether the first move should be temporary.",
     searchTerms: ["finance relocation manhattan", "hedge fund relocation nyc", "moving to manhattan finance professional"],
     audience: [
       "Finance professionals relocating for Midtown, Downtown, Hudson Yards, or hybrid office patterns.",
@@ -277,7 +277,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Pet-Friendly Moves",
     eyebrow: "Supporting Brief",
     summary:
-      "A supporting landing page for buyers and renters who need pet rules, building operations, outdoor access, and daily logistics included in the housing decision.",
+      "Pet-friendly moves should be filtered before anyone falls in love with a listing. The brief checks building rules, elevators, outdoor access, staff culture, and daily logistics early.",
     searchTerms: ["pet friendly apartments nyc buying", "dog friendly buildings manhattan", "nyc co-op pet rules"],
     audience: [
       "Households where pet rules can determine which buildings are viable.",
@@ -297,7 +297,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Divorce Sales",
     eyebrow: "Seller Situation",
     summary:
-      "A landing page for New York property sales tied to divorce, separation, or co-owned asset transitions where clarity and process control matter.",
+      "Co-owned property transitions require privacy, process control, and clear options. The brief helps decide whether to sell, hold, buy out, wait, or create a cleaner timeline.",
     searchTerms: ["divorce property sales nyc", "selling apartment during divorce new york", "divorce real estate agent nyc"],
     audience: [
       "Owners navigating sale decisions during divorce or separation.",
@@ -317,7 +317,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Probate Sales",
     eyebrow: "Seller Situation",
     summary:
-      "A landing page for estate representatives and families handling probate-related or inherited property sales in New York City.",
+      "Estate and probate sales need steady sequencing: authority, valuation, preparation, stakeholder communication, timing, and whether the property should be sold now or held.",
     searchTerms: ["probate estate sales nyc", "inherited apartment sale new york", "estate sale real estate agent nyc"],
     audience: [
       "Executors, heirs, and family members managing an inherited property sale.",
@@ -337,7 +337,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Pre-Foreclosure",
     eyebrow: "Seller Situation",
     summary:
-      "A landing page for owners considering a sale under financial pressure who need fast clarity, realistic options, and discreet handling in New York City.",
+      "Financial pressure calls for fast, realistic options without shame or panic. The brief tests sale, refinance, rental, negotiation, timing, and privacy before the window narrows.",
     searchTerms: ["pre foreclosure sale nyc", "financial distress home sale new york", "sell apartment before foreclosure nyc"],
     audience: [
       "Owners needing to understand sale options before pressure becomes a forced outcome.",
@@ -357,7 +357,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Empty Nesters",
     eyebrow: "Life-Stage Move",
     summary:
-      "A landing page for downsizing clients evaluating a simpler, more intentional next chapter in New York.",
+      "Downsizing should protect quality of life, not just reduce square footage. The brief weighs service, simplicity, sale timing, location, storage, and what would actually feel better.",
     searchTerms: ["downsizing apartment new york", "empty nester real estate agent nyc", "downsizing condo nyc"],
     audience: [
       "Clients moving from larger homes into a more efficient New York footprint.",
@@ -377,7 +377,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Retiree Buyers",
     eyebrow: "Life-Stage Buyer",
     summary:
-      "A landing page for retiree and senior buyers making a purposeful New York purchase with service, simplicity, and long-term usability in mind.",
+      "Retiree and senior buyers need comfort, service, access, layout, carrying-cost clarity, and long-term usability before prestige or inventory volume enters the conversation.",
     searchTerms: ["retiree home buyers nyc", "senior buying apartment new york", "retirement condo buyer nyc"],
     audience: [
       "Retirees and senior buyers seeking a more manageable New York residence.",
@@ -397,7 +397,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Townhouse Buyers",
     eyebrow: "High-Intent Buyer",
     summary:
-      "A landing page for townhouse and townhouse-style buyers looking for scale, privacy, and a more tailored ownership experience in New York City.",
+      "Townhouse buyers need to compare privacy and character against maintenance, block quality, renovation exposure, security, service trade-offs, and long-term resale fit.",
     searchTerms: ["townhouse buyers nyc", "buy townhouse new york city", "brownstone buyer nyc"],
     audience: [
       "Buyers seeking townhouse, brownstone, or privacy-oriented ownership in the city.",

@@ -1,21 +1,36 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { Link } from "wouter";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { PageSection } from "@/components/site-shell";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
-
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
+    <main className="min-h-screen bg-brand-ivory text-brand-graphite">
+      <PageSection className="flex min-h-[62vh] items-center">
+        <div className="max-w-3xl">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">Page Not Found</p>
+          <h1 className="mt-5 font-display text-[clamp(3rem,7vw,6rem)] leading-[0.9] tracking-[-0.04em] text-brand-navy">
+            This path does not have a decision brief yet.
+          </h1>
+          <p className="mt-6 max-w-xl text-base leading-8 text-brand-graphite lg:text-lg">
+            Start with the main Decision Brief library or request a call if the question is specific to a building, neighborhood, timeline, or life change.
           </p>
-        </CardContent>
-      </Card>
-    </div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/services">
+              <Button variant="brand" className="gap-2 uppercase tracking-nav">
+                Open Decision Briefs
+                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button variant="brandOutline" className="gap-2 uppercase tracking-nav">
+                Request a Call
+                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </PageSection>
+    </main>
   );
 }

@@ -27,7 +27,7 @@ export function PageSection({
   className?: string;
   children: ReactNode;
 }) {
-  return <section className={cn("mx-auto w-full max-w-site px-6 py-16 lg:px-10 lg:py-24", className)}>{children}</section>;
+  return <section className={cn("mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-24", className)}>{children}</section>;
 }
 
 export function SectionHeading({

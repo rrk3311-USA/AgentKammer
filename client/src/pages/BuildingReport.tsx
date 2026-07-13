@@ -23,7 +23,7 @@ const buildings = [
 export default function BuildingReport() {
   usePageMetadata({
     title: "Individual Buildings",
-    description: "Individual building report pages within the Agent Kammer Building Reports section.",
+    description: "Individual Manhattan building reports focused on building quality, buyer fit, resale logic, and decision risk.",
     path: "/building-reports/individual-buildings",
   });
 
@@ -32,15 +32,15 @@ export default function BuildingReport() {
       <PageHero
         eyebrow="Building Reports"
         title="Individual Buildings"
-        description="This sub-page frames how single-building coverage should read: selective, design-aware, and useful to buyers comparing address-level fit rather than just unit inventory."
+        description="A single address can look perfect online and still be the wrong decision. Individual building reports clarify architecture, service model, resale logic, board or sponsor dynamics, and whether the building fits the brief."
       />
       <ReportSubnav />
 
       <PageSection>
         <SectionHeading
           eyebrow="Sample Coverage"
-          title="Selected buildings can be presented as precise editorial briefs."
-          description="Each building card below shows the tone and density this template supports. The goal is clarity, not exhaustive data dumping."
+          title="Selected buildings should be read like decisions, not trophies."
+          description="Each brief should explain what the building is good for, who it serves, what trade-offs it creates, and when the better move is to keep looking."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {buildings.map((building) => (
@@ -54,7 +54,7 @@ export default function BuildingReport() {
       </PageSection>
 
       <section className="border-y border-brand-border bg-white">
-        <PageSection className="grid gap-6 lg:grid-cols-3">
+        <PageSection className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {["Architecture and identity", "Amenities and daily experience", "Fit relative to budget, timing, and buyer brief"].map((item, index) => (
             <div key={item} className="rounded-card border border-brand-border bg-brand-ivory p-6">
               <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">0{index + 1}</p>
@@ -66,7 +66,7 @@ export default function BuildingReport() {
 
       <CTA
         title="Need a short list of buildings mapped to your brief?"
-        description="The building report track works best when tied to budget, location preference, and timeline."
+        description="Request a call with your target neighborhoods, timing, and budget so the building list can be filtered before tours begin."
       />
     </main>
   );

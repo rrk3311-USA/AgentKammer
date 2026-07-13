@@ -21,7 +21,7 @@ const educationBlocks = [
   },
   {
     title: "Recommendation",
-    text: "Tell the visitor what to do, even when the strongest recommendation is to wait, renew, renovate, or do nothing.",
+    text: "Tell the client what to do, even when the strongest recommendation is to wait, renew, renovate, or do nothing.",
   },
 ];
 
@@ -111,7 +111,7 @@ export default function Home() {
               The answer is not always move.
             </h2>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-brand-graphite">
-              Each page becomes an educational brief: what changed, whether anything should change, what the real options are, and which recommendation protects the client best.
+              Each decision brief explains what changed, whether anything should change, what the real options are, and which recommendation protects the client best.
             </p>
           </div>
           <div className="mt-12 grid gap-px bg-brand-border sm:grid-cols-2 lg:grid-cols-4">

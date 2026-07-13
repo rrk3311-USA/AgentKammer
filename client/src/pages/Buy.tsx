@@ -3,23 +3,23 @@ import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 const phases = [
   {
-    title: "Brief Calibration",
-    text: "Clarify budget, neighborhoods, building preferences, and timing constraints before inventory review begins.",
+    title: "Should You Move?",
+    text: "Start with the trigger, desire, constraint, and trade-off. The answer may be buy, rent, wait, renew, renovate, or stay put.",
   },
   {
-    title: "Search Design",
-    text: "Reduce the field to the right set of buildings and layouts instead of reviewing every available listing.",
+    title: "What Would Improve?",
+    text: "Define what the next home has to do better: commute, light, privacy, service, space, school access, flexibility, or long-term value.",
   },
   {
-    title: "Execution",
-    text: "Offer structure, diligence, and negotiation management are handled with an emphasis on precision and leverage.",
+    title: "Which Path Wins?",
+    text: "Compare neighborhoods, building types, timing, financing, and opportunity cost before letting listings dictate the strategy.",
   },
 ];
 
 export default function Buy() {
   usePageMetadata({
     title: "Buyer Advisory",
-    description: "Buyer Advisory page for the updated Agent Kammer local site.",
+    description: "Buyer advisory for Manhattan clients deciding whether to buy, rent, wait, renew, renovate, or stay put.",
     path: "/buyer-advisory",
   });
 
@@ -27,15 +27,15 @@ export default function Buy() {
     <main className="bg-brand-ivory">
       <PageHero
         eyebrow="Buyer Advisory"
-        title="A buying process organized around fit, timing, and negotiation discipline."
-        description="This page reframes the buying service as advisory work rather than generic representation. The structure is designed to show how the process narrows options and improves decision quality."
+        title="Do not start with listings. Start with the decision."
+        description="Buyer Advisory helps answer the question underneath the search: should anything change, what should improve, and which path protects your lifestyle, budget, timeline, and leverage?"
       />
 
       <PageSection>
         <SectionHeading
           eyebrow="Process"
-          title="Three phases keep the buyer path focused and legible."
-          description="The design language stays consistent with the rest of the site, but the content is tailored to the needs of acquisition planning."
+          title="The buyer path should feel like discovery, not a mortgage application."
+          description="A strong purchase process teaches you what matters, removes weak options early, and stays honest when waiting or renewing would be smarter than forcing a transaction."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {phases.map((phase) => (
@@ -48,8 +48,8 @@ export default function Buy() {
       </PageSection>
 
       <CTA
-        title="Ready to shape a buyer brief?"
-        description="The next step is a concise contact note with budget, geography, and timing."
+        title="Ready to shape a buyer decision brief?"
+        description="Request a call with what changed, what you hope a new home solves, and what constraints are making the decision difficult."
       />
     </main>
   );

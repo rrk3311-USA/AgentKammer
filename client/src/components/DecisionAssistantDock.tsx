@@ -6,7 +6,6 @@ import {
   CalendarClock,
   Check,
   Circle,
-  Compass,
   Landmark,
   MapPinned,
   Minimize2,
@@ -24,6 +23,39 @@ const blueprintSegments = [
   { label: "Timeline", filled: false, icon: CalendarClock },
   { label: "Trade-offs", filled: false, icon: SlidersHorizontal },
 ];
+
+const blueprintMaterials: Record<string, { fill: string; track: string; icon: string }> = {
+  Lifestyle: {
+    fill: "bg-[#C9B48D]",
+    track: "bg-[#E7DDCB]",
+    icon: "text-[#B08D57]",
+  },
+  Location: {
+    fill: "bg-[#AEB8BE]",
+    track: "bg-[#E2E5E4]",
+    icon: "text-[#7E8A91]",
+  },
+  Building: {
+    fill: "bg-[#D8D1C7]",
+    track: "bg-[#ECE7DE]",
+    icon: "text-brand-brass",
+  },
+  Budget: {
+    fill: "bg-brand-navy",
+    track: "bg-[#D8D1C7]",
+    icon: "text-brand-navy",
+  },
+  Timeline: {
+    fill: "bg-[#8F8170]",
+    track: "bg-[#E5DED3]",
+    icon: "text-[#8F8170]",
+  },
+  "Trade-offs": {
+    fill: "bg-brand-charcoal",
+    track: "bg-[#DDD6CC]",
+    icon: "text-brand-charcoal",
+  },
+};
 
 const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
 const sessionStorageKey = "akDecisionAssistantSessionId";
@@ -45,6 +77,27 @@ const starterPrompts = [
   { label: "Upgrade", text: "We're considering an upgrade.", path: "/buyer-advisory" },
   { label: "Just exploring", text: "I'm just exploring.", path: "/buyer-advisory" },
 ];
+
+function DecisionGuideAvatar({ animated = false }: { animated?: boolean }) {
+  return (
+    <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-brand-brass/35 bg-[radial-gradient(circle_at_50%_18%,#F7F2EA_0_18%,#C8CDD2_19%_44%,#6F7884_45%_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_1px_8px_rgba(42,52,71,0.18)]">
+      <span
+        className={
+          animated
+            ? "absolute inset-0 animate-command-breathe rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.55),transparent_42%,rgba(176,141,87,0.28))]"
+            : "absolute inset-0 rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.55),transparent_42%,rgba(176,141,87,0.22))]"
+        }
+      />
+      <span className="absolute top-[6px] h-[11px] w-[11px] rounded-full bg-[#D8B99E] shadow-[0_0_0_2px_rgba(245,242,235,0.55)]" />
+      <span className="absolute top-[17px] h-[17px] w-[18px] rounded-t-[9px] bg-brand-navy" />
+      <span className="absolute top-[18px] h-[15px] w-[7px] bg-brand-ivory" />
+      <span className="absolute top-[18px] left-[9px] h-[15px] w-[8px] rotate-[15deg] bg-brand-midnight" />
+      <span className="absolute top-[18px] right-[9px] h-[15px] w-[8px] rotate-[-15deg] bg-brand-midnight" />
+      <span className="absolute top-[6px] h-[4px] w-[12px] rounded-t-full bg-brand-charcoal" />
+      <span className="sr-only">Decision Guide advisor portrait</span>
+    </span>
+  );
+}
 
 type Message = {
   role: "assistant" | "user";
@@ -719,20 +772,19 @@ export function DecisionAssistantDock() {
     <span className="grid grid-cols-6 gap-1" aria-label={`Decision Blueprint progress ${blueprintCompletion} of 6`}>
       {blueprintSegments.map((segment, index) => {
         const filled = completedSegments[segment.label as keyof typeof completedSegments];
+        const material = blueprintMaterials[segment.label];
         return (
           <span
             key={segment.label}
-            className={tone === "dark" ? "h-2 overflow-hidden bg-brand-ivory/26" : "h-1.5 overflow-hidden bg-brand-border/75"}
+            className={tone === "dark" ? "h-2 overflow-hidden bg-brand-ivory/26" : `h-1.5 overflow-hidden ${material.track}`}
           >
             <span
               className={
                 filled
-                  ? tone === "dark"
-                    ? "block h-full animate-blueprint-fill bg-brand-brass"
-                    : "block h-full animate-blueprint-fill bg-brand-navy"
+                  ? `block h-full animate-blueprint-fill ${material.fill}`
                   : tone === "dark"
                     ? "block h-full animate-blueprint-fill bg-brand-ivory/34"
-                    : "block h-full animate-blueprint-fill bg-brand-brass/40"
+                    : `block h-full animate-blueprint-fill ${material.track}`
               }
               style={{
                 animationDelay: `${index * 65}ms`,
@@ -756,9 +808,7 @@ export function DecisionAssistantDock() {
           <div className="grid gap-2">
             <div className="flex items-center justify-between gap-3">
               <button type="button" onClick={() => setExpanded(true)} className="flex min-w-0 items-center gap-3 text-left">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-brand-ivory/18 bg-brand-ivory/8 text-brand-brass">
-                  <Compass className="h-4 w-4" strokeWidth={1.6} />
-                </span>
+                <DecisionGuideAvatar />
                 <span className="min-w-0">
                   <span className="block text-[10px] uppercase tracking-[0.22em] text-brand-brass">Decision Guide</span>
                   <span className="mt-0.5 block truncate text-sm font-medium text-brand-ivory">What's changing?</span>
@@ -784,10 +834,11 @@ export function DecisionAssistantDock() {
             <div className="grid grid-cols-6 gap-1" aria-hidden>
               {blueprintSegments.map((segment, index) => {
                 const filled = completedSegments[segment.label as keyof typeof completedSegments];
+                const material = blueprintMaterials[segment.label];
                 return (
                   <span key={segment.label} className="h-1.5 overflow-hidden bg-brand-ivory/20">
                     <span
-                      className={filled ? "block h-full animate-blueprint-fill bg-brand-brass" : "block h-full animate-blueprint-fill bg-brand-ivory/34"}
+                      className={filled ? `block h-full animate-blueprint-fill ${material.fill}` : "block h-full animate-blueprint-fill bg-brand-ivory/34"}
                       style={{
                         animationDelay: `${index * 85}ms`,
                         width: `${getBlueprintStrength(segment.label, Boolean(filled), leadScore)}%`,
@@ -847,9 +898,7 @@ export function DecisionAssistantDock() {
       <div className="mx-auto grid w-full max-w-full gap-3 overflow-hidden md:max-w-site">
         <div className={expanded ? "grid min-w-0 gap-3 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center md:grid-cols-1" : "grid min-w-0 gap-3 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-center"}>
           <div className="flex min-w-0 items-center gap-3">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-brand-navy/18 bg-white text-brand-brass">
-              <Compass className={expanded ? "h-4 w-4 animate-command-breathe" : "h-4 w-4"} strokeWidth={1.6} />
-            </span>
+            <DecisionGuideAvatar animated={expanded} />
             <div className="min-w-0">
               <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Decision Guide</p>
               <p className="text-sm font-medium text-brand-navy">
@@ -884,7 +933,8 @@ export function DecisionAssistantDock() {
             <div className="mt-3 grid grid-cols-6 gap-1" aria-hidden>
               {blueprintSegments.map((segment) => {
                 const filled = completedSegments[segment.label as keyof typeof completedSegments];
-                return <span key={segment.label} className={filled ? "h-2 bg-brand-navy" : "h-2 bg-brand-border/70"} />;
+                const material = blueprintMaterials[segment.label];
+                return <span key={segment.label} className={filled ? `h-2 ${material.fill}` : `h-2 ${material.track}`} />;
               })}
             </div>
             {expanded ? (
@@ -892,15 +942,16 @@ export function DecisionAssistantDock() {
                 {blueprintSegments.map((segment) => {
                   const filled = completedSegments[segment.label as keyof typeof completedSegments];
                   const strength = getBlueprintStrength(segment.label, Boolean(filled), leadScore);
+                  const material = blueprintMaterials[segment.label];
                   return (
                     <div key={segment.label} className="grid grid-cols-[7rem_minmax(0,1fr)_1.5rem] items-center gap-3">
                       <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.12em] text-brand-graphite">
-                        <segment.icon className="h-3.5 w-3.5 shrink-0 text-brand-brass" strokeWidth={1.5} />
+                        <segment.icon className={`h-3.5 w-3.5 shrink-0 ${material.icon}`} strokeWidth={1.5} />
                         <span className="truncate">{segment.label}</span>
                       </span>
-                      <span className="h-2 overflow-hidden bg-brand-border/65" aria-hidden>
+                      <span className={`h-2 overflow-hidden ${material.track}`} aria-hidden>
                         <span
-                          className={filled ? "block h-full animate-blueprint-fill bg-brand-navy" : "block h-full animate-blueprint-fill bg-brand-brass/35"}
+                          className={filled ? `block h-full animate-blueprint-fill ${material.fill}` : "block h-full animate-blueprint-fill bg-brand-ivory/70"}
                           style={{ width: `${strength}%` }}
                         />
                       </span>
