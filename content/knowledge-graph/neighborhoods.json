@@ -1,0 +1,20 @@
+[
+  {
+    "id": "hudson-yards",
+    "title": "Hudson Yards",
+    "topics": ["executive relocation", "finance", "new development", "commute"],
+    "relatedRoutes": ["/building-reports/neighborhood-guides", "/services/finance-hedge-fund-relocation-nyc"]
+  },
+  {
+    "id": "upper-west-side",
+    "title": "Upper West Side",
+    "topics": ["family", "schools", "parks", "prewar", "3BR"],
+    "relatedRoutes": ["/building-reports/neighborhood-guides", "/services/school-district-planning-nyc"]
+  },
+  {
+    "id": "west-chelsea",
+    "title": "West Chelsea",
+    "topics": ["luxury", "architecture", "galleries", "views", "new development"],
+    "relatedRoutes": ["/building-reports/neighborhood-guides", "/services/executive-relocation-nyc"]
+  }
+]

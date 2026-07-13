@@ -1,0 +1,37 @@
+[
+  {
+    "from": "executive-relocation",
+    "to": "finance-relocation",
+    "relationship": "industry-personalization"
+  },
+  {
+    "from": "executive-relocation",
+    "to": "physician-relocation",
+    "relationship": "industry-personalization"
+  },
+  {
+    "from": "executive-relocation",
+    "to": "neighborhood-briefs",
+    "relationship": "commute-context"
+  },
+  {
+    "from": "growing-family",
+    "to": "school-planning",
+    "relationship": "household-priority"
+  },
+  {
+    "from": "international-buyer",
+    "to": "pied-a-terre",
+    "relationship": "ownership-use-case"
+  },
+  {
+    "from": "1031",
+    "to": "building-reports",
+    "relationship": "risk-diligence"
+  },
+  {
+    "from": "divorce",
+    "to": "stay-vs-sell",
+    "relationship": "decision-branch"
+  }
+]

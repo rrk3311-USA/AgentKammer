@@ -3,10 +3,17 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
+import { focusRing } from "@/lib/design-system"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-brand text-sm font-semibold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0" +
-  " hover-elevate active-elevate-2",
+  cn(
+    "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-button text-body-sm font-medium",
+    "h-12 px-7 transition-opacity duration-brand ease-brand-out",
+    "disabled:pointer-events-none disabled:opacity-40",
+    "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+    "no-default-hover-elevate no-default-active-elevate",
+    focusRing,
+  ),
   {
     variants: {
       variant: {
@@ -15,33 +22,29 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground border border-destructive-border",
         outline:
-          // Shows the background color of whatever card / sidebar / accent background it is inside of.
-          // Inherits the current text color.
-          " border [border-color:var(--button-outline)]  shadow-xs active:shadow-none ",
-        secondary: "border bg-secondary text-secondary-foreground border border-secondary-border ",
-        // Add a transparent border so that when someone toggles a border on later, it doesn't shift layout/size.
-        ghost: "border border-transparent",
+          "border border-brand-border bg-transparent text-brand-ink hover:opacity-80",
+        secondary:
+          "border border-brand-border bg-brand-surface text-brand-ink hover:opacity-80",
+        ghost: "border border-transparent text-brand-ink hover:opacity-80",
         luxury:
-          "!rounded-brand !bg-black text-white border-2 !border-[#d4af37] shadow-lg disabled:!opacity-100 disabled:pointer-events-auto disabled:!cursor-not-allowed",
+          "rounded-button border border-brand-gold bg-brand-navy text-brand-ivory hover:opacity-90",
         brand:
-          "min-h-0 rounded-brand border border-brand-champagne bg-brand-champagne px-7 py-3.5 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-midnight hover:bg-brand-champagne/90",
+          "border border-brand-brass bg-brand-brass text-brand-navy hover:opacity-90",
         brandGhost:
-          "min-h-0 rounded-brand border border-brand-champagne bg-brand-ivory/10 px-7 py-3.5 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-champagne hover:bg-brand-ivory/15 hover:text-brand-champagne",
+          "border border-brand-border bg-transparent text-brand-ink hover:opacity-80",
         brandOutline:
-          "min-h-0 rounded-brand border border-brand-midnight px-7 py-3.5 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-midnight hover:bg-brand-midnight/5",
+          "border border-brand-navy/25 bg-transparent text-brand-ink hover:opacity-80",
         brandSapphire:
-          "min-h-0 rounded-brand border border-brand-sapphire bg-brand-sapphire px-7 py-3.5 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-ivory hover:bg-brand-sapphire/90",
+          "border border-brand-navy-secondary bg-brand-navy-secondary text-brand-ivory hover:opacity-90",
         brandSapphireGhost:
-          "min-h-0 rounded-brand border border-brand-ivory/35 bg-transparent px-7 py-3.5 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-brand-ivory hover:bg-brand-ivory hover:text-brand-midnight",
+          "border border-brand-ivory/30 bg-transparent text-brand-ivory hover:opacity-80",
       },
-      // Heights are set as "min" heights, because sometimes Ai will place large amount of content
-      // inside buttons. With a min-height they will look appropriate with small amounts of content,
-      // but will expand to fit large amounts of content.
       size: {
-        default: "min-h-9 px-4 py-2",
-        sm: "min-h-8 rounded-brand px-3 text-xs",
-        lg: "min-h-10 rounded-brand px-8",
-        icon: "h-9 w-9 rounded-brand",
+        default: "h-12 px-7",
+        sm: "h-10 rounded-button px-5 text-body-sm",
+        compact: "h-9 rounded-button px-4 text-[0.8125rem] font-normal tracking-[0.01em]",
+        lg: "h-12 px-8",
+        icon: "h-12 w-12 rounded-button",
       },
     },
     defaultVariants: {

@@ -230,7 +230,7 @@ export default function BuySell() {
         </div>
       </section>
 
-      <section className="border-y border-brand-midnight/10 bg-[#f7f3ea] px-6 py-16 lg:px-10 lg:py-20">
+      <section className="border-y border-brand-midnight/10 bg-brand-warm px-6 py-16 lg:px-10 lg:py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.75fr_1fr] lg:items-start">
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">For Sellers</p>
@@ -260,7 +260,7 @@ export default function BuySell() {
       </section>
 
       <section className="border-t border-brand-midnight/10 bg-white px-6 py-16 lg:px-10 lg:py-20">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 border border-brand-champagne/35 bg-white p-6 shadow-[0_2px_22px_rgba(15,23,42,0.05)] md:flex-row md:items-center md:justify-between lg:p-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 border border-brand-champagne/35 bg-white p-6 shadow-[0_2px_22px_rgba(27,36,51,0.05)] md:flex-row md:items-center md:justify-between lg:p-8">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Next Step</p>
             <h2 className="mt-2 font-serif text-3xl font-semibold text-brand-midnight">Request A Private Review</h2>

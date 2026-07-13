@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
 import { Building2, MapPin, Users } from "lucide-react";
+import { BrandNavyHero } from "@/components/BrandNavyHero";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 const leaseAudiences = [
@@ -50,23 +51,21 @@ export default function Lease() {
 
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
-      <section className="bg-brand-midnight px-6 py-16 text-brand-ivory lg:px-10 lg:py-20">
-        <div className="mx-auto max-w-7xl">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Lease</p>
-          <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-6xl lg:text-7xl">
-            Luxury Leasing, Considered Carefully
-          </h1>
-          <div className="mt-7 max-w-2xl space-y-4 text-lg leading-8 text-brand-ivory/84">
+      <BrandNavyHero
+        eyebrow="Lease"
+        title="Luxury Leasing, Considered Carefully"
+        description={
+          <>
             <p>Most Manhattan searches begin with apartments.</p>
-            <p>
+            <p className="mt-4">
               We begin by understanding where and how a client wants to live — then narrow the search to buildings and
               residences worth considering.
             </p>
-          </div>
-        </div>
-      </section>
+          </>
+        }
+      />
 
-      <section className="border-b border-brand-midnight/10 px-6 py-14 lg:px-10">
+      <section className="border-b border-brand-midnight/10 bg-brand-warm px-6 py-14 lg:px-10">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1fr] lg:items-start">
           <div>
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Who This Serves</p>
@@ -90,7 +89,7 @@ export default function Lease() {
         </div>
       </section>
 
-      <section className="bg-[#f7f3ea] px-6 py-14 lg:px-10 lg:py-16">
+      <section className="bg-brand-warm px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Approach</p>
           <h2 className="font-serif text-4xl font-semibold text-brand-midnight">Neighborhood, Building, Residence</h2>
@@ -142,7 +141,7 @@ export default function Lease() {
       </section>
 
       <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10 lg:py-16">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 border border-brand-champagne/35 bg-[#f7f3ea] p-6 md:flex-row md:items-center md:justify-between lg:p-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 border border-brand-champagne/35 bg-brand-warm p-6 md:flex-row md:items-center md:justify-between lg:p-8">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Next Step</p>
             <h2 className="mt-2 font-serif text-3xl font-semibold text-brand-midnight">Request A Building Shortlist</h2>

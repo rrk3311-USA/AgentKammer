@@ -76,7 +76,7 @@ export default function ReverseBuyerOrigination() {
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
       <section className="relative overflow-hidden bg-brand-midnight text-brand-ivory">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.92)_0%,rgba(15,23,42,0.78)_45%,rgba(15,23,42,0.5)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(27,36,51,0.92)_0%,rgba(27,36,51,0.78)_45%,rgba(27,36,51,0.5)_100%)]" />
         <div className="relative mx-auto grid min-h-[580px] max-w-7xl grid-cols-1 items-center gap-10 px-6 py-16 lg:grid-cols-[1fr_1fr] lg:px-10">
           <div>
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.26em] text-brand-champagne">Buy</p>

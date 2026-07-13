@@ -16,7 +16,7 @@ export function ExecutiveHousingReportModule({
   if (variant === "compact") {
     return (
       <aside
-        className={`border-y border-brand-champagne/35 bg-[#f7f3ea] px-6 py-8 ${className}`}
+        className={`border-y border-brand-champagne/35 bg-brand-warm px-6 py-8 ${className}`}
         aria-label="Related intelligence"
       >
         <div className="mx-auto max-w-3xl">

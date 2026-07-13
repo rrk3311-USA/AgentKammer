@@ -2,8 +2,9 @@ import { Button } from "@/components/ui/button";
 import { AcquisitionCrewOverview } from "@/components/AcquisitionCrewOverview";
 import { acquisitionSteps } from "@/data/acquisition-crew";
 import { Link } from "wouter";
+import { BrandNavyHero } from "@/components/BrandNavyHero";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
-import { eyebrowOnDark, eyebrowOnLight } from "@/lib/brand-typography";
+import { eyebrowOnLight } from "@/lib/brand-typography";
 
 const sectionHeadline = "font-serif text-3xl font-semibold md:text-4xl lg:text-[2.65rem]";
 
@@ -25,18 +26,13 @@ export default function Strategy() {
 
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
-      <section className="bg-brand-midnight px-6 pb-4 pt-10 text-brand-ivory lg:px-10 lg:pb-5 lg:pt-12">
-        <div className="mx-auto max-w-7xl">
-          <p className={eyebrowOnDark}>Strategy</p>
-          <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-6xl lg:text-[2.75rem]">
-            How Sophisticated Acquisitions Are Structured
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg leading-7 text-brand-ivory/90">
-            Most buyers ask about price and layout. Fewer ask who belongs in the room — or how many professionals the
-            decision requires.
-          </p>
-        </div>
-      </section>
+      <BrandNavyHero
+        eyebrow="Strategy"
+        title="How Sophisticated Acquisitions Are Structured"
+        compact
+        titleClassName="lg:text-[2.75rem]"
+        description="Most buyers ask about price and layout. Fewer ask who belongs in the room — or how many professionals the decision requires."
+      />
 
       <AcquisitionCrewOverview />
 
@@ -62,7 +58,7 @@ export default function Strategy() {
         </div>
       </section>
 
-      <section className="border-t border-brand-midnight/10 bg-[#f7f3ea] px-6 py-14 lg:px-10 lg:py-16">
+      <section className="border-t border-brand-midnight/10 bg-brand-warm px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-3xl">
           <p className={eyebrowOnLight}>Approach</p>
           <h2 className={`${sectionHeadline} text-brand-midnight`}>Strategy Before Search</h2>

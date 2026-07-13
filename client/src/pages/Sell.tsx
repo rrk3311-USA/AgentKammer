@@ -2,8 +2,9 @@ import { Home, Search, ShieldCheck } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { BrandNavyHero } from "@/components/BrandNavyHero";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
-import { eyebrowOnDark, eyebrowOnLight } from "@/lib/brand-typography";
+import { eyebrowOnLight } from "@/lib/brand-typography";
 
 const sellerFocus = [
   {
@@ -33,18 +34,13 @@ export default function Sell() {
 
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
-      <section className="bg-brand-midnight px-6 py-16 text-brand-ivory lg:px-10 lg:py-20">
-        <div className="mx-auto max-w-7xl">
-          <p className={eyebrowOnDark}>Sell</p>
-          <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-6xl">Seller Positioning</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-brand-ivory/84">
-            Strategic market positioning for owners seeking maximum exposure and informed pricing — grounded in building
-            intelligence, not generic comparables.
-          </p>
-        </div>
-      </section>
+      <BrandNavyHero
+        eyebrow="Sell"
+        title="Seller Positioning"
+        description="Strategic market positioning for owners seeking maximum exposure and informed pricing — grounded in building intelligence, not generic comparables."
+      />
 
-      <section className="brand-surface-intelligence px-6 py-14 lg:px-10 lg:py-16">
+      <section className="bg-brand-warm px-6 py-14 lg:px-10 lg:py-16">
         <div className="relative z-[1] mx-auto max-w-7xl">
           <p className={eyebrowOnLight}>Approach</p>
           <div className="mt-8 grid gap-4 md:grid-cols-3">

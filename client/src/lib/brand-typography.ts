@@ -1,21 +1,29 @@
-/** Uppercase section labels — use hero champagne on navy, champagne-dark on ivory/white */
-export const eyebrowOnLight =
-  "text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne-dark";
-export const eyebrowOnLightWide =
-  "text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne-dark";
-export const eyebrowOnDark =
-  "text-xs font-semibold uppercase tracking-[0.24em] text-brand-hero-champagne";
-export const eyebrowOnDarkWide =
-  "text-xs font-semibold uppercase tracking-[0.28em] text-brand-hero-champagne";
+/** @deprecated Import from @/lib/design-system — kept for backward compatibility */
+export {
+  siteContainer,
+  contentContainer,
+  readingContainer,
+  sectionY,
+  typeH1 as displayHeadline,
+  typeH2,
+  typeH3,
+  typeBody,
+  typeEyebrow as eyebrowOnLight,
+  typeEyebrow as eyebrowOnLightWide,
+  typeEyebrowOnDark as eyebrowOnDark,
+  typeEyebrowOnDark as eyebrowOnDarkWide,
+} from "@/lib/design-system";
 
-/** Building watchlist cards — whisper, don't explain */
+/** Building watchlist cards — navy editorial surfaces */
 export const cardBuildingName =
-  "font-serif text-[1.875rem] font-semibold leading-tight tracking-[0.01em] text-brand-ivory lg:text-[2rem]";
+  "font-display text-display-3 font-medium leading-tight tracking-[-0.01em] text-brand-ivory";
 export const cardNeighborhood =
-  "mt-2 text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-brand-hero-champagne";
+  "mt-2 text-nav font-semibold uppercase tracking-nav text-brand-ivory/60";
 export const cardPriceValue =
-  "mt-3 font-serif text-3xl font-semibold leading-none tracking-[-0.01em] text-brand-ivory";
-export const cardHighlight =
-  "font-serif text-[0.88rem] leading-snug text-brand-ivory/76";
+  "mt-3 font-display text-display-3 font-medium leading-none tracking-[-0.01em] text-brand-ivory";
+export const cardHighlight = "text-body-lg leading-snug text-brand-ivory/76";
 export const cardReportLink =
-  "mt-3 inline-block font-serif text-[0.85rem] text-brand-hero-champagne/82 transition hover:text-brand-ivory";
+  "mt-3 inline-block text-body-sm font-medium text-brand-ivory/82 transition-opacity duration-brand ease-brand-out hover:opacity-80";
+
+export const displayHeadlineLight =
+  "font-display text-display-2 font-medium leading-[0.95] tracking-[-0.02em] text-brand-ivory";

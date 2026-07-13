@@ -730,6 +730,5 @@ export class DbStorage implements IStorage {
   }
 }
 
-// Temporarily using MemStorage for preview (no database required)
-// To use database: export const storage = new DbStorage();
-export const storage = new MemStorage();
+// Use persistent database storage when DATABASE_URL is configured; fall back to memory for local preview.
+export const storage = db ? new DbStorage() : new MemStorage();

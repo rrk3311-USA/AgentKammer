@@ -1,50 +1,71 @@
 import { cn } from "@/lib/utils";
-import logoEmblem from "@assets/agent-kammer-logo-emblem-gold-wreath.png";
+import { AkMonogramMark } from "@/components/AkMonogramMark";
 
 interface AgentKammerHorizontalLogoProps {
   className?: string;
-  /** `light` = ivory wordmark for dark backgrounds; `default` = standard header */
-  variant?: "default" | "light";
-  /** Tagline belongs in hero — off by default in the header */
+  variant?: "default" | "light" | "midnight";
   showTagline?: boolean;
+  layout?: "horizontal" | "stacked";
+  wordmarkOnly?: boolean;
+  emphasis?: "default" | "header";
 }
 
 export function AgentKammerHorizontalLogo({
   className,
   variant = "default",
   showTagline = false,
+  layout = "horizontal",
+  wordmarkOnly = false,
+  emphasis = "default",
 }: AgentKammerHorizontalLogoProps) {
-  const isLight = variant === "light";
+  const markVariant = variant === "default" || variant === "midnight" ? "midnight" : "ivory";
+  const textTone = markVariant === "midnight" ? "text-brand-navy" : "text-brand-ivory";
+  const accentTone = markVariant === "midnight" ? "text-brand-graphite" : "text-brand-ivory/72";
+  const stacked = layout === "stacked";
+  const headerStyle = emphasis === "header";
 
   return (
     <div
-      className={cn("flex shrink-0 items-center gap-3 sm:gap-3.5 lg:gap-4", className)}
+      className={cn(
+        "flex shrink-0",
+        stacked ? "flex-col items-start gap-4" : "items-center gap-3",
+        className,
+      )}
       aria-label="Agent Kammer"
     >
-      <img
-        src={logoEmblem}
-        alt=""
-        aria-hidden
-        className="h-12 w-12 shrink-0 object-contain sm:h-[3.25rem] sm:w-[3.25rem] lg:h-14 lg:w-14"
-        loading="eager"
-      />
-      <div className={cn("flex flex-col items-center justify-center", showTagline && "gap-1 lg:gap-1.5")}>
-        <p
+      {!wordmarkOnly ? (
+        <AkMonogramMark
+          variant={markVariant}
           className={cn(
-            "whitespace-nowrap font-serif text-[1.35rem] font-semibold leading-none tracking-[0.06em] sm:text-[1.55rem] lg:text-[1.85rem]",
-            isLight ? "text-brand-ivory" : "text-brand-ivory",
+            stacked ? "h-14 sm:h-16" : headerStyle ? "h-11 sm:h-12 xl:h-14" : "h-9 sm:h-10 xl:h-11",
+          )}
+        />
+      ) : null}
+      <div className={cn("flex flex-col", stacked ? "items-start" : "items-start")}>
+        <span
+          className={cn(
+            "font-display uppercase leading-none text-balance",
+            stacked
+              ? "text-[1.4rem] tracking-[0.28em] sm:text-[1.55rem]"
+              : wordmarkOnly
+                ? "text-[1rem] tracking-[0.28em] sm:text-[1.08rem] xl:text-[1.16rem]"
+                : headerStyle
+                  ? "text-[1.45rem] tracking-[0.12em] sm:text-[1.75rem] xl:text-[2.1rem]"
+                  : "text-[0.82rem] tracking-[0.24em] sm:text-[0.9rem] xl:text-[0.96rem]",
+            textTone,
           )}
         >
-          AGENT KAMMER
-        </p>
+          Agent Kammer
+        </span>
         {showTagline ? (
           <p
             className={cn(
-              "whitespace-nowrap text-center text-[0.5625rem] font-semibold uppercase leading-none tracking-[0.2em] sm:text-[0.625rem] lg:text-[0.6875rem] lg:tracking-[0.22em]",
-              isLight ? "text-brand-champagne" : "text-brand-champagne",
+              "mt-2 uppercase leading-none",
+              stacked ? "text-[0.6rem] tracking-[0.28em]" : "text-[0.46rem] tracking-[0.22em] sm:text-[0.5rem]",
+              accentTone,
             )}
           >
-            Modern Manhattan Luxury
+            Buildings Before Listings.
           </p>
         ) : null}
       </div>

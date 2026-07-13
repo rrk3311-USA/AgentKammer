@@ -134,7 +134,7 @@ export default function ExecutiveHousingReport() {
         </div>
       </section>
 
-      <section className="border-t border-brand-midnight/10 bg-[#f7f3ea] px-6 py-14 lg:px-10 lg:py-16">
+      <section className="border-t border-brand-midnight/10 bg-brand-warm px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">International Syndication</p>
           <h2 className="mt-3 font-serif text-3xl font-semibold text-brand-midnight">Published For Global Executive Search</h2>

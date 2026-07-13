@@ -76,7 +76,7 @@ export function IntelligenceReportsSubscribe({
   return (
     <section
       id={id}
-      className={`${isDark ? "bg-brand-midnight text-brand-ivory" : "border border-brand-champagne/35 bg-[#f7f3ea] text-brand-graphite"} px-6 py-10 lg:px-8 ${className}`}
+      className={`${isDark ? "bg-brand-midnight text-brand-ivory" : "border border-brand-champagne/35 bg-brand-warm text-brand-graphite"} px-6 py-10 lg:px-8 ${className}`}
     >
       <div className="mx-auto max-w-xl">
         <p

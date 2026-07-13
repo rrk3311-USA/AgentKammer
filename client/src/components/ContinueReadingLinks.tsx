@@ -13,7 +13,7 @@ export function ContinueReadingLinks({ links = continueReadingDefaults, excludeH
   if (items.length === 0) return null;
 
   return (
-    <section className="border-t border-brand-midnight/10 bg-[#f7f3ea] px-6 py-14 lg:px-10">
+    <section className="border-t border-brand-midnight/10 bg-brand-warm px-6 py-14 lg:px-10">
       <div className="mx-auto max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Continue Reading</p>
         <ul className="mt-8 space-y-5">

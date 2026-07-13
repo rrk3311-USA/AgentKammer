@@ -1,147 +1,47 @@
-import { Globe2, MapPin, Plane } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
-import { PerspectiveCard } from "@/components/PerspectiveCard";
+import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
-import { getInternationalPerspectives } from "@/data/perspectives";
-import { featuredExecutiveHousingReport } from "@/data/executive-housing-reports";
-import { eyebrowOnDark, eyebrowOnLight } from "@/lib/brand-typography";
 
-const sectionHeadline = "font-serif text-3xl font-semibold md:text-4xl lg:text-[2.65rem]";
+const relocationPoints = [
+  "Coordinate housing search against start dates, school or family priorities, and travel constraints.",
+  "Use building knowledge to avoid false fits when time for touring and diligence is compressed.",
+  "Create a calm transition plan that balances speed with confidence.",
+];
 
 export default function International() {
-  const internationalPerspectives = getInternationalPerspectives();
-
   usePageMetadata({
-    title: "International Manhattan Advisory",
-    description:
-      "Building intelligence and relocation guidance for international clients acquiring or leasing in Manhattan — UK, UAE, Singapore, Hong Kong, and Europe.",
-    path: "/international",
-    keywords:
-      "Manhattan luxury real estate international buyers, NYC relocation UK executives, Manhattan apartments UAE, Singapore Hong Kong Manhattan property advisory",
-    locale: "en",
+    title: "Executive Relocation",
+    description: "Executive Relocation page for the updated Agent Kammer local site.",
+    path: "/executive-relocation",
   });
 
   return (
-    <main className="min-h-screen bg-brand-surface text-brand-graphite">
-      <section className="bg-brand-midnight px-6 py-16 text-brand-ivory lg:px-10 lg:py-20">
-        <div className="mx-auto max-w-7xl">
-          <p className={eyebrowOnDark}>International</p>
-          <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-6xl lg:text-7xl">
-            Manhattan From Abroad
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-brand-ivory/84">
-            International clients do not need more listings. They need building context, neighborhood judgment, and a
-            research sequence that works across time zones — before the first visit.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/contact">
-              <Button variant="brand">Schedule Advisory Call</Button>
-            </Link>
-            <Link href="/perspectives">
-              <Button variant="brandOutline" className="border-brand-ivory/30 text-brand-ivory hover:bg-brand-ivory/10">
-                Read Perspectives
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+    <main className="bg-brand-ivory">
+      <PageHero
+        eyebrow="Executive Relocation"
+        title="Relocation planning for executives who need confidence without extra noise."
+        description="The relocation page focuses on clients managing a move under time pressure. It keeps the tone private, polished, and service-oriented while staying inside the same visual system as the rest of the site."
+      />
 
-      <section className="brand-surface-intelligence px-6 py-14 lg:px-10 lg:py-16">
-        <div className="relative z-[1] mx-auto max-w-7xl">
-          <p className={eyebrowOnLight}>How We Work</p>
-          <h2 className={`${sectionHeadline} text-brand-midnight`}>Building Research Across Time Zones</h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            <Card className="rounded-none border border-brand-graphite/12 bg-white/78 p-6 shadow-none">
-              <Globe2 className="h-5 w-5 text-brand-champagne-dark" strokeWidth={1.4} />
-              <h3 className="mt-4 font-serif text-xl font-semibold text-brand-midnight">Pre-Visit Shortlist</h3>
-              <p className="mt-3 text-sm leading-6 text-brand-graphite/72">
-                Narrow the building field remotely — reports, video context, and neighborhood mapping before you fly.
-              </p>
-            </Card>
-            <Card className="rounded-none border border-brand-graphite/12 bg-white/78 p-6 shadow-none">
-              <MapPin className="h-5 w-5 text-brand-champagne-dark" strokeWidth={1.4} />
-              <h3 className="mt-4 font-serif text-xl font-semibold text-brand-midnight">Neighborhood Fit</h3>
-              <p className="mt-3 text-sm leading-6 text-brand-graphite/72">
-                Tribeca, Hudson Yards, Chelsea, and Midtown solve different versions of executive life. We match block
-                to rhythm.
-              </p>
-            </Card>
-            <Card className="rounded-none border border-brand-graphite/12 bg-white/78 p-6 shadow-none">
-              <Plane className="h-5 w-5 text-brand-champagne-dark" strokeWidth={1.4} />
-              <h3 className="mt-4 font-serif text-xl font-semibold text-brand-midnight">Visit With A Thesis</h3>
-              <p className="mt-3 text-sm leading-6 text-brand-graphite/72">
-                The first Manhattan trip should confirm building conviction — not discover it under jet lag.
-              </p>
-            </Card>
-          </div>
+      <PageSection className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <SectionHeading
+          eyebrow="Relocation Scope"
+          title="The work combines market fluency with practical transition management."
+          description="The point is not only to source inventory. It is to design a move that lands well for the client and everyone affected by the timeline."
+        />
+        <div className="grid gap-4">
+          {relocationPoints.map((point, index) => (
+            <div key={point} className="rounded-card border border-brand-border bg-white p-6">
+              <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">0{index + 1}</p>
+              <p className="mt-3 text-base leading-8 text-brand-navy">{point}</p>
+            </div>
+          ))}
         </div>
-      </section>
+      </PageSection>
 
-      <section className="border-t border-brand-midnight/10 bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10 lg:py-16">
-        <div className="mx-auto max-w-7xl">
-          <p className={eyebrowOnDark}>2026 Report</p>
-          <h2 className={`${sectionHeadline} text-brand-ivory`}>{featuredExecutiveHousingReport.title}</h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-brand-ivory/82">
-            {featuredExecutiveHousingReport.executiveSummary[0]}
-          </p>
-          <Link href={`/perspectives/reports/${featuredExecutiveHousingReport.slug}`} className="mt-8 inline-block">
-            <Button variant="brand">Read Executive Housing Report</Button>
-          </Link>
-        </div>
-      </section>
-
-      <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10 lg:py-16">
-        <div className="mx-auto max-w-7xl">
-          <p className={eyebrowOnLight}>Priority Markets</p>
-          <h2 className={`${sectionHeadline} text-brand-midnight`}>Where Clients Arrive From</h2>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-brand-graphite/72">
-            English-language research for international buyers and renters. Full site translation is planned; indexed
-            perspectives and advisory pages serve global search intent today.
-          </p>
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            {featuredExecutiveHousingReport.syndication.map((item) => (
-              <Link key={item.code} href={`/perspectives/reports/${featuredExecutiveHousingReport.slug}`}>
-                <Card className="h-full rounded-none border border-brand-graphite/12 bg-brand-ivory/50 px-5 py-5 shadow-none transition hover:border-brand-champagne/50">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-champagne-dark">
-                    {item.code} · 2026 Report
-                  </p>
-                  <h3 className="mt-2 font-serif text-xl font-semibold text-brand-midnight">{item.headline}</h3>
-                  <p className="mt-3 text-sm leading-6 text-brand-graphite/72">{item.excerpt}</p>
-                  <p className="mt-3 text-xs leading-5 text-brand-graphite/50">{item.searchTerms}</p>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-brand-midnight/10 bg-[#f7f3ea] px-6 py-14 lg:px-10 lg:py-16">
-        <div className="mx-auto max-w-7xl">
-          <p className={eyebrowOnLight}>International Perspectives</p>
-          <h2 className={`${sectionHeadline} text-brand-midnight`}>Observations For Global Clients</h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            {internationalPerspectives.map((article) => (
-              <PerspectiveCard key={article.slug} article={article} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-brand-midnight/10 bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-serif text-3xl font-semibold md:text-4xl">Begin With A Conversation</h2>
-          <p className="mt-4 text-base leading-7 text-brand-ivory/78">
-            Share your timeline, origin market, and building questions. We respond within 24 hours.
-          </p>
-          <div className="mt-8">
-            <Link href="/contact">
-              <Button variant="brand">Request Private Guidance</Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CTA
+        title="Planning a move on a tight clock?"
+        description="Use the contact page to outline timing, household needs, and preferred neighborhoods."
+      />
     </main>
   );
 }

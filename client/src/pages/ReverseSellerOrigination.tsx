@@ -67,7 +67,7 @@ export default function ReverseSellerOrigination() {
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
       <section className="relative overflow-hidden bg-brand-midnight text-brand-ivory">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.92)_0%,rgba(15,23,42,0.78)_45%,rgba(15,23,42,0.5)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(27,36,51,0.92)_0%,rgba(27,36,51,0.78)_45%,rgba(27,36,51,0.5)_100%)]" />
         <div className="relative mx-auto max-w-5xl px-6 py-16 text-center lg:py-20">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.26em] text-brand-champagne">Sell</p>
           <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-7xl">Reverse Seller Architecture™</h1>

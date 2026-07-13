@@ -1,0 +1,56 @@
+[
+  {
+    "id": "executive-relocation",
+    "title": "Executive Relocation",
+    "type": "relocation",
+    "intent": "High commercial intent move into Manhattan or NYC.",
+    "routes": ["/services/executive-relocation-nyc", "/services/corporate-relocation-buyers-nyc"],
+    "profileSignals": ["industry", "work location", "timeline", "budget", "commute", "privacy"],
+    "related": ["finance-relocation", "physician-relocation", "neighborhood-briefs", "building-intelligence"]
+  },
+  {
+    "id": "international-buyer",
+    "title": "International Buyer",
+    "type": "buyer",
+    "intent": "Cross-border buyer entering the New York market.",
+    "routes": ["/services/foreign-buyers-new-york", "/international"],
+    "profileSignals": ["origin country", "use case", "budget", "financing", "advisor team"],
+    "related": ["pied-a-terre", "new-development", "building-rules"]
+  },
+  {
+    "id": "growing-family",
+    "title": "Growing Family",
+    "type": "life-stage",
+    "intent": "Household needs are changing and housing must support daily life.",
+    "routes": ["/buyer-advisory", "/services/school-district-planning-nyc"],
+    "profileSignals": ["household", "schools", "bedrooms", "commute", "neighborhood"],
+    "related": ["school-planning", "neighborhood-briefs", "building-intelligence"]
+  },
+  {
+    "id": "downsizing",
+    "title": "Downsizing",
+    "type": "life-stage",
+    "intent": "Move from larger or more complex housing into a simpler next chapter.",
+    "routes": ["/services/empty-nester-downsizing-nyc", "/services/retiree-senior-home-buyers-nyc"],
+    "profileSignals": ["timeline", "current home", "service needs", "accessibility", "neighborhood"],
+    "related": ["retirement", "sell-buy-timing", "building-service"]
+  },
+  {
+    "id": "divorce",
+    "title": "Divorce",
+    "type": "seller-situation",
+    "intent": "Co-owned property or housing decision under legal and emotional pressure.",
+    "routes": ["/services/divorce-property-sales-nyc"],
+    "profileSignals": ["ownership", "timeline", "legal constraints", "stay vs sell", "financial constraints"],
+    "related": ["stay-vs-sell", "decision-memo", "private-review"]
+  },
+  {
+    "id": "1031",
+    "title": "1031 Exchange",
+    "type": "investment",
+    "intent": "Deadline-driven replacement property decision.",
+    "routes": ["/services/1031-exchange-new-york"],
+    "profileSignals": ["deadline", "asset criteria", "budget", "financing", "risk tolerance"],
+    "related": ["building-reports", "new-development", "investment"]
+  }
+]

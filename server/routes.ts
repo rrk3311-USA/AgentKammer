@@ -6,6 +6,7 @@ import {
   insertRboBuyerProfileSchema,
   insertRsoSellerProfileSchema,
   insertContactSubmissionSchema,
+  insertChatConversationSchema,
   insertHomeValueRequestSchema,
   insertBrokerRegistrationSchema,
   insertAffiliateSchema,
@@ -736,6 +737,46 @@ export async function registerRoutes(app: Express): Promise<void> {
     } catch (error) {
       console.error("Lead creation error:", error);
       res.status(400).json({ error: "Invalid lead data" });
+    }
+  });
+
+  app.get("/api/decision-assistant/conversation/:sessionId", async (req, res) => {
+    try {
+      const conversation = await storage.getChatConversationBySessionId(req.params.sessionId);
+      res.json(conversation ?? null);
+    } catch (error) {
+      console.error("Decision assistant conversation fetch error:", error);
+      res.status(500).json({ error: "Failed to fetch conversation memory" });
+    }
+  });
+
+  app.post("/api/decision-assistant/conversation", async (req, res) => {
+    try {
+      const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
+      const parsed = insertChatConversationSchema.parse({
+        sessionId: body.sessionId,
+        messages: typeof body.messages === "string" ? body.messages : JSON.stringify(body.messages ?? []),
+        leadName: body.leadName,
+        leadEmail: body.leadEmail,
+        leadPhone: body.leadPhone,
+        categoryInterest: body.categoryInterest,
+        leadScore: body.leadScore,
+        summary: body.summary,
+      });
+
+      const existing = await storage.getChatConversationBySessionId(parsed.sessionId);
+      const conversation = existing
+        ? await storage.updateChatConversation(existing.id, parsed)
+        : await storage.createChatConversation(parsed);
+
+      res.json(conversation);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid conversation data", details: error.errors });
+        return;
+      }
+      console.error("Decision assistant conversation save error:", error);
+      res.status(500).json({ error: "Failed to save conversation memory" });
     }
   });
 

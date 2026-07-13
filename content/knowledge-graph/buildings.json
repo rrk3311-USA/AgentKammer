@@ -1,0 +1,16 @@
+[
+  {
+    "id": "one-high-line",
+    "title": "One High Line",
+    "neighborhood": "West Chelsea",
+    "topics": ["luxury", "new development", "service quality", "architecture", "views"],
+    "relatedRoutes": ["/building-reports", "/building-reports/individual-buildings"]
+  },
+  {
+    "id": "15-hudson-yards",
+    "title": "15 Hudson Yards",
+    "neighborhood": "Hudson Yards",
+    "topics": ["executive relocation", "commute", "new development", "amenities"],
+    "relatedRoutes": ["/building-reports", "/building-reports/individual-buildings"]
+  }
+]

@@ -16,7 +16,7 @@ export function FeaturedExecutiveReportCard({ variant = "light" }: FeaturedExecu
       className={
         isDark
           ? "border border-brand-ivory/14 bg-brand-midnight p-8 lg:p-10"
-          : "border border-brand-champagne/40 bg-white p-8 shadow-[0_2px_24px_rgba(15,23,42,0.05)] lg:p-10"
+          : "border border-brand-champagne/40 bg-white p-8 shadow-[0_2px_24px_rgba(27,36,51,0.05)] lg:p-10"
       }
     >
       <p

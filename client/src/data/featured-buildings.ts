@@ -85,13 +85,11 @@ export const featuredBuildings: FeaturedBuilding[] = [
 ];
 
 export const intelligenceReportTopics = [
-  "Market Position",
-  "Resident Profile",
-  "Ownership Structure",
-  "Price Per Square Foot Trends",
-  "Rental vs Ownership Dynamics",
-  "Competitive Buildings",
-  "Neighborhood Development Pipeline",
-  "Transportation",
-  "Amenities Analysis",
+  "Light",
+  "Privacy",
+  "Noise",
+  "Layout",
+  "Amenities",
+  "Carrying Cost",
+  "Exit Value",
 ] as const;

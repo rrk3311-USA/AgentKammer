@@ -1,267 +1,73 @@
-import { Link, useRoute } from "wouter";
-import { Button } from "@/components/ui/button";
-import { ManhattanBriefSubscribe } from "@/components/ManhattanBriefSubscribe";
-import { ResidentProfileBars } from "@/components/ResidentProfileBars";
-import { PerspectiveContentTag } from "@/components/PerspectiveContentTag";
+import { CTA, PageHero, PageSection, ReportSubnav, SectionHeading } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
-import {
-  formatBuildingReportDate,
-  getBuildingReportBySlug,
-  hasBuildingReport,
-} from "@/data/building-reports";
-import { getPerspectiveBySlug } from "@/data/perspectives";
-import NotFound from "@/pages/not-found";
 
-function Paragraphs({ lines }: { lines: string[] }) {
-  return (
-    <>
-      {lines.map((line) => (
-        <p key={line} className="mt-3 text-base leading-7 text-brand-graphite/78 first:mt-0">
-          {line}
-        </p>
-      ))}
-    </>
-  );
-}
+const buildings = [
+  {
+    name: "111 West 57th Street",
+    note: "Ultra-prime positioning, architectural identity, and a buyer profile driven by singularity.",
+  },
+  {
+    name: "15 Hudson Yards",
+    note: "Service-forward tower inventory for buyers seeking convenience, wellness, and new-development finish quality.",
+  },
+  {
+    name: "Lantern House",
+    note: "Design-led West Chelsea inventory with stronger aesthetic differentiation and outdoor appeal.",
+  },
+  {
+    name: "One High Line",
+    note: "A newer west-side address where view logic and building identity matter as much as floor plan count.",
+  },
+];
 
 export default function BuildingReport() {
-  const [, params] = useRoute("/buildings/:slug/report");
-  const report = params?.slug ? getBuildingReportBySlug(params.slug) : undefined;
-  const relatedPerspective = report?.relatedPerspectiveSlug
-    ? getPerspectiveBySlug(report.relatedPerspectiveSlug)
-    : undefined;
-
   usePageMetadata({
-    title: report ? `${report.buildingName} — Building Report` : "Building Report Not Found",
-    description: report
-      ? report.executiveSummary[0]
-      : "Manhattan building reports from Agent Kammer.",
-    path: report ? `/buildings/${report.slug}/report` : undefined,
+    title: "Individual Buildings",
+    description: "Individual building report pages within the Agent Kammer Building Reports section.",
+    path: "/building-reports/individual-buildings",
   });
 
-  if (!report) {
-    return <NotFound />;
-  }
-
   return (
-    <main className="min-h-screen bg-brand-ivory text-brand-graphite">
-      <section className="bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10 lg:py-20">
-        <div className="mx-auto max-w-3xl">
-          <Link href="/buildings">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-champagne transition hover:text-brand-ivory">
-              ← Buildings
-            </span>
-          </Link>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <PerspectiveContentTag contentType="building" variant="dark" />
-            <p className="text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-brand-ivory/62">
-              {report.series} · {formatBuildingReportDate(report.publishedAt)} · {report.readMinutes} min read
-            </p>
-          </div>
-          <h1 className="mt-4 font-serif text-4xl font-semibold leading-[1.02] md:text-5xl lg:text-6xl">
-            {report.buildingName}
-          </h1>
-          <p className="mt-4 text-sm font-semibold uppercase tracking-[0.2em] text-brand-champagne">
-            {report.location}
-          </p>
+    <main className="bg-brand-ivory">
+      <PageHero
+        eyebrow="Building Reports"
+        title="Individual Buildings"
+        description="This sub-page frames how single-building coverage should read: selective, design-aware, and useful to buyers comparing address-level fit rather than just unit inventory."
+      />
+      <ReportSubnav />
+
+      <PageSection>
+        <SectionHeading
+          eyebrow="Sample Coverage"
+          title="Selected buildings can be presented as precise editorial briefs."
+          description="Each building card below shows the tone and density this template supports. The goal is clarity, not exhaustive data dumping."
+        />
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          {buildings.map((building) => (
+            <div key={building.name} className="rounded-card border border-brand-border bg-white p-8">
+              <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">Building Profile</p>
+              <h3 className="mt-5 font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">{building.name}</h3>
+              <p className="mt-4 text-sm leading-7 text-brand-graphite">{building.note}</p>
+            </div>
+          ))}
         </div>
+      </PageSection>
+
+      <section className="border-y border-brand-border bg-white">
+        <PageSection className="grid gap-6 lg:grid-cols-3">
+          {["Architecture and identity", "Amenities and daily experience", "Fit relative to budget, timing, and buyer brief"].map((item, index) => (
+            <div key={item} className="rounded-card border border-brand-border bg-brand-ivory p-6">
+              <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">0{index + 1}</p>
+              <p className="mt-3 text-base leading-8 text-brand-navy">{item}</p>
+            </div>
+          ))}
+        </PageSection>
       </section>
 
-      <article className="px-6 py-14 lg:px-10 lg:py-16">
-        <div className="mx-auto max-w-3xl space-y-12">
-          <section>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Executive Summary</p>
-            <Paragraphs lines={report.executiveSummary} />
-          </section>
-
-          <section>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Observation</p>
-            <Paragraphs lines={report.observation} />
-          </section>
-
-          <section>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Building Profile</p>
-            <dl className="mt-4 grid gap-4 border border-brand-midnight/10 bg-white/60 p-5 sm:grid-cols-2">
-              <div>
-                <dt className="text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">Neighborhood</dt>
-                <dd className="mt-1 text-base text-brand-graphite/82">{report.buildingProfile.neighborhood}</dd>
-              </div>
-              <div>
-                <dt className="text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">Building Type</dt>
-                <dd className="mt-1 text-base text-brand-graphite/82">{report.buildingProfile.buildingType}</dd>
-              </div>
-              <div>
-                <dt className="text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">Design</dt>
-                <dd className="mt-1 text-base text-brand-graphite/82">{report.buildingProfile.design}</dd>
-              </div>
-              <div className="sm:col-span-2">
-                <dt className="text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-brand-champagne">Positioning</dt>
-                <dd className="mt-1 text-base text-brand-graphite/82">{report.buildingProfile.positioning}</dd>
-              </div>
-            </dl>
-          </section>
-
-          <section>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Resident Profile</p>
-            {report.residentProfileMix ? <ResidentProfileBars bars={report.residentProfileMix} /> : null}
-            <p className="mt-6 text-sm font-semibold uppercase tracking-[0.14em] text-brand-graphite/62">Likely residents include</p>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-7 text-brand-graphite/78">
-              {report.residentProfile.likely.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <p className="mt-6 text-sm font-semibold uppercase tracking-[0.14em] text-brand-graphite/62">Less common</p>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-7 text-brand-graphite/78">
-              {report.residentProfile.lessCommon.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </section>
-
-          <section>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">
-              What Makes {report.buildingName} Different
-            </p>
-            <div className="mt-4 space-y-6">
-              {report.differentiators.map((item) => (
-                <div key={item.title}>
-                  <h3 className="font-serif text-xl font-semibold text-brand-midnight">{item.title}</h3>
-                  <p className="mt-2 text-base leading-7 text-brand-graphite/78">{item.body}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Strengths</p>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-7 text-brand-graphite/78">
-              {report.strengths.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </section>
-
-          <section>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Tradeoffs</p>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-7 text-brand-graphite/78">
-              {report.tradeoffs.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <p className="mt-4 text-base leading-7 text-brand-graphite/78">{report.tradeoffsNote}</p>
-          </section>
-
-          <section>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Neighborhood Context</p>
-            <p className="mt-3 text-base leading-7 text-brand-graphite/78">{report.neighborhoodContext.intro}</p>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-7 text-brand-graphite/78">
-              {report.neighborhoodContext.combines.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <p className="mt-4 text-base leading-7 text-brand-graphite/78">{report.neighborhoodContext.closing}</p>
-          </section>
-
-          <section>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Comparable Buildings</p>
-            <p className="mt-3 text-base leading-7 text-brand-graphite/78">{report.comparablesIntro}</p>
-            <div className="mt-6 space-y-5">
-              {report.comparables.map((comp) => (
-                <div key={comp.name} className="border-l-2 border-brand-champagne/50 pl-4">
-                  <h3 className="font-serif text-lg font-semibold text-brand-midnight">{comp.name}</h3>
-                  <p className="mt-1 text-base leading-7 text-brand-graphite/78">{comp.lines[0]}</p>
-                  <p className="text-base leading-7 text-brand-graphite/78">{comp.lines[1]}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Who This Building Fits</p>
-            <div className="mt-4 space-y-6">
-              {report.fit.map((tier) => (
-                <div key={tier.label}>
-                  <p className="text-sm font-semibold uppercase tracking-[0.14em] text-brand-graphite/62">{tier.label}</p>
-                  <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-7 text-brand-graphite/78">
-                    {tier.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Commute Perspective</p>
-            <p className="mt-3 text-sm font-semibold uppercase tracking-[0.14em] text-brand-graphite/62">Typical access to</p>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-7 text-brand-graphite/78">
-              {report.commute.destinations.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <p className="mt-4 text-base leading-7 text-brand-graphite/78">{report.commute.closing}</p>
-          </section>
-
-          <section>
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Agent Kammer Perspective</p>
-            <Paragraphs lines={report.agentKammerPerspective} />
-          </section>
-
-          <section className="border-t border-brand-midnight/10 pt-10">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Bottom Line</p>
-            <Paragraphs lines={report.bottomLine} />
-          </section>
-        </div>
-      </article>
-
-      {report.comparables.some((c) => c.slug) ? (
-        <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10">
-          <div className="mx-auto max-w-3xl">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Related Buildings</p>
-            <p className="font-serif text-2xl font-semibold text-brand-midnight">
-              If {report.buildingName} interests you
-            </p>
-            <ul className="mt-6 space-y-4">
-              {report.comparables
-                .filter((c) => c.slug)
-                .map((comp) => (
-                  <li key={comp.name}>
-                    <Link
-                      href={
-                        comp.slug && hasBuildingReport(comp.slug)
-                          ? `/buildings/${comp.slug}/report`
-                          : "/buildings"
-                      }
-                    >
-                      <span className="font-serif text-lg text-brand-midnight transition hover:text-brand-champagne">
-                        {comp.name}
-                      </span>
-                    </Link>
-                    <p className="mt-1 text-sm text-brand-graphite/68">{comp.lines[0]}</p>
-                  </li>
-                ))}
-            </ul>
-          </div>
-        </section>
-      ) : null}
-
-      {relatedPerspective ? (
-        <section className="border-t border-brand-midnight/10 bg-[#f7f3ea] px-6 py-14 lg:px-10">
-          <div className="mx-auto max-w-3xl">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Related Perspective</p>
-            <h2 className="font-serif text-3xl font-semibold text-brand-midnight">{relatedPerspective.title}</h2>
-            <p className="mt-4 text-base leading-7 text-brand-graphite/76">{relatedPerspective.excerpt}</p>
-            <div className="mt-6">
-              <Link href={`/perspectives/${relatedPerspective.slug}`}>
-                <Button variant="brandOutline">Read Perspective</Button>
-              </Link>
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      <ManhattanBriefSubscribe />
+      <CTA
+        title="Need a short list of buildings mapped to your brief?"
+        description="The building report track works best when tied to budget, location preference, and timeline."
+      />
     </main>
   );
 }

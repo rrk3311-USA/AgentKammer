@@ -1,238 +1,92 @@
-import { Building2, Compass, MapPin, Search, UserRound } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Link } from "wouter";
-import { hasBuildingReport } from "@/data/building-reports";
-import { type TrackedBuilding, trackedBuildings } from "@/data/buildings";
-import {
-  cardBuildingName,
-  cardHighlight,
-  cardNeighborhood,
-  cardPriceValue,
-  cardReportLink,
-} from "@/lib/brand-typography";
+import { ArrowRight, Building2, Map, Newspaper } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { CTA, PageHero, PageSection, ReportSubnav, SectionHeading } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
-const comparisonPoints = [
-  { title: "Amenities", icon: Building2 },
-  { title: "Resident Experience", icon: UserRound },
-  { title: "Neighborhood Placement", icon: MapPin },
-];
-
-const reports = [
+const reportTypes = [
   {
-    title: "Building Report",
-    text: "Pricing, resident profile, strengths, tradeoffs, and what makes a building worth studying.",
+    title: "Individual Buildings",
+    text: "Targeted pages focused on a single asset, its positioning, design character, amenities, and buyer fit.",
+    href: "/building-reports/individual-buildings",
+    icon: Building2,
   },
   {
-    title: "Neighborhood Context",
-    text: "Commute patterns, amenities, development activity, and local character.",
+    title: "Neighborhood Guides",
+    text: "High-level district views that connect architecture, lifestyle, access, and inventory rhythm.",
+    href: "/building-reports/neighborhood-guides",
+    icon: Map,
   },
   {
-    title: "Comparable Buildings",
-    text: "Relevant alternatives that help place a building in context.",
-  },
-  {
-    title: "Opportunity Monitor",
-    text: "Price reductions, stale inventory, concessions, and potential leverage.",
-  },
-  {
-    title: "Market Perspective",
-    text: "Inventory, timing, and broader Manhattan conditions surrounding a shortlist.",
-  },
-  {
-    title: "Resident Fit",
-    text: "Who tends to thrive there — and who may be better served elsewhere.",
+    title: "Market Briefs",
+    text: "Condensed notes on pricing pressure, buyer behavior, and strategic timing for active decision-makers.",
+    href: "/building-reports/market-briefs",
+    icon: Newspaper,
   },
 ];
-
-const watchlistImageClass =
-  "absolute inset-0 h-full w-full object-cover object-center saturate-[0.9] contrast-[1.03]";
-
-function BuildingWatchlistCard({ building }: { building: TrackedBuilding }) {
-  const reportAvailable = hasBuildingReport(building.slug);
-
-  return (
-    <article className="building-watchlist-card grid w-full overflow-hidden border border-brand-champagne/25 bg-brand-midnight sm:grid-cols-[minmax(0,55fr)_minmax(0,45fr)]">
-      <div className="flex flex-col justify-center px-6 py-5 text-brand-ivory lg:px-7 lg:py-6">
-        <h2 className={cardBuildingName}>{building.name}</h2>
-        <p className={cardNeighborhood}>{building.area}</p>
-        <p className={cardPriceValue}>{building.price.value}</p>
-        <ul className="mt-3 space-y-0.5">
-          {building.knownFor.map((item) => (
-            <li key={item} className={cardHighlight}>
-              {item}
-            </li>
-          ))}
-        </ul>
-        {reportAvailable ? (
-          <>
-            <div className="mt-4 h-px w-12 bg-brand-hero-champagne/28" aria-hidden />
-            <Link href={`/buildings/${building.slug}/report`} className={cardReportLink}>
-              Read Report →
-            </Link>
-          </>
-        ) : null}
-      </div>
-      <div className="relative aspect-[5/4] w-full bg-brand-midnight sm:aspect-auto sm:min-h-[168px]">
-        <img
-          src={`/buildings/thumbs/${building.slug}.webp`}
-          alt={`${building.name} in ${building.area}, Manhattan`}
-          className={watchlistImageClass}
-          loading="lazy"
-          decoding="async"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,23,42,0.18)_0%,transparent_32%)]" />
-      </div>
-    </article>
-  );
-}
 
 export default function Buildings() {
   usePageMetadata({
-    title: "Buildings — Manhattan Watchlist & Intelligence",
-    description:
-      "Curated Manhattan residential buildings with pricing context, signature traits, and deep intelligence reports on towers worth studying.",
-    path: "/buildings",
-    keywords:
-      "Manhattan luxury buildings, NYC residential towers, Hudson Yards Chelsea Tribeca buildings, Manhattan building reports",
+    title: "Building Reports",
+    description: "Overview of the Building Reports section, including sub-pages for buildings, neighborhood guides, and market briefs.",
+    path: "/building-reports",
   });
 
   return (
-    <main className="min-h-screen bg-brand-surface text-brand-graphite">
-      <section className="bg-brand-midnight px-6 py-16 text-brand-ivory lg:px-10 lg:py-20">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_0.75fr] lg:items-end">
-          <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">
-              Curated Watchlist
-            </p>
-            <h1 className="font-serif text-5xl font-semibold leading-[0.98] md:text-6xl lg:text-7xl">
-              Manhattan Buildings Worth Studying
-            </h1>
-            <p className="mt-6 max-w-2xl font-serif text-xl leading-8 text-brand-champagne/95 md:text-2xl">
-              Not every building deserves the same attention.
-            </p>
-            <div className="mt-5 max-w-2xl space-y-4 text-lg leading-8 text-brand-ivory/82">
-              <p>
-                This watchlist focuses on modern Manhattan residential buildings that stand out for design, resident
-                experience, neighborhood placement, and long-term relevance.
-              </p>
-              <p>The goal is not to catalog everything.</p>
-              <p>The goal is to identify buildings worth understanding.</p>
-            </div>
-          </div>
-          <Card className="rounded-none border border-brand-ivory/14 bg-brand-ivory/[0.04] p-6 text-brand-ivory shadow-none">
-            <p className="text-[0.66rem] font-semibold uppercase tracking-[0.22em] text-brand-champagne">
-              Primary Question
-            </p>
-            <p className="mt-4 font-serif text-3xl leading-tight">Which buildings should I consider?</p>
-          </Card>
-        </div>
-      </section>
+    <main className="bg-brand-ivory">
+      <PageHero
+        eyebrow="Building Reports"
+        title="Research-led pages that help clients see structure before making a move."
+        description="The Building Reports section is split into three clear tracks: individual buildings, neighborhood guides, and market briefs. Each one serves a different stage of the decision process while keeping the same design language and navigation."
+      />
+      <ReportSubnav />
 
-      <section className="brand-surface-intelligence px-6 py-14 lg:px-10 lg:py-16">
-        <div className="relative z-[1] mx-auto max-w-7xl">
-          <p className="mb-6 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Lens</p>
-          <div className="grid gap-4 md:grid-cols-3">
-            {comparisonPoints.map((point) => (
-              <Card key={point.title} className="rounded-none border border-brand-champagne/35 bg-white/72 p-5 shadow-none">
-                <point.icon className="h-5 w-5 text-brand-champagne" strokeWidth={1.5} />
-                <p className="mt-4 font-serif text-2xl font-semibold text-brand-midnight">{point.title}</p>
-              </Card>
-            ))}
-          </div>
+      <PageSection>
+        <SectionHeading
+          eyebrow="Section Map"
+          title="Three report formats, one consistent editorial system."
+          description="The pages below are designed to work as a family. They share the same spacing grid, typography, and navigation while giving each content type its own use case."
+        />
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          {reportTypes.map((item) => (
+            <Link key={item.href} href={item.href} className="rounded-card border border-brand-border bg-white p-8 transition-transform hover:-translate-y-1">
+              <item.icon className="h-6 w-6 text-brand-brass" strokeWidth={1.5} />
+              <h3 className="mt-6 font-display text-3xl leading-[0.96] tracking-[-0.03em] text-brand-navy">{item.title}</h3>
+              <p className="mt-4 text-sm leading-7 text-brand-graphite">{item.text}</p>
+              <span className="mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy">
+                Open section
+                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+              </span>
+            </Link>
+          ))}
         </div>
-      </section>
+      </PageSection>
 
-      <section className="brand-surface-intelligence border-t border-brand-midnight/10 px-6 py-14 lg:px-10 lg:py-16">
-        <div className="relative z-[1] mx-auto max-w-7xl">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-brand-champagne">Research</p>
-          <h2 className="font-serif text-4xl font-semibold text-brand-midnight">What We Study</h2>
-          <div className="mt-4 max-w-2xl space-y-3 text-base leading-7 text-brand-graphite/72">
-            <p>Every building on this watchlist is evaluated through the same lens.</p>
-            <p>
-              The reports below are not separate products. They explain why a building belongs on the list in the first
-              place.
+      <section className="border-y border-brand-border bg-white">
+        <PageSection className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+          <SectionHeading
+            eyebrow="Usage"
+            title="Use the overview page to route the right reader to the right depth."
+            description="Some visitors need building-specific detail. Others need neighborhood framing or a concise timing note. This top-level page lets those paths stay separate without breaking the visual system."
+          />
+          <div className="rounded-card border border-brand-border bg-brand-ivory p-8">
+            <p className="font-display text-3xl leading-[0.95] tracking-[-0.03em] text-brand-navy">
+              The navigation now treats Building Reports as a proper section rather than a loose collection of disconnected pages.
             </p>
-          </div>
-          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {reports.map((item) => (
-              <Card key={item.title} className="rounded-none border border-brand-graphite/12 bg-white/78 p-5 shadow-none">
-                <Compass className="mb-3 h-4 w-4 text-brand-champagne" />
-                <h3 className="font-serif text-lg font-semibold text-brand-midnight">{item.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-brand-graphite/76">{item.text}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="brand-surface-intelligence border-t border-brand-midnight/10 px-6 pb-16 lg:px-10 lg:pb-20">
-        <div className="relative z-[1] mx-auto max-w-7xl pt-10">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-7">
-            {trackedBuildings.map((building) => (
-              <BuildingWatchlistCard key={building.name} building={building} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="brand-surface-intelligence border-t border-brand-midnight/10 px-6 py-14 lg:px-10 lg:py-16">
-        <div className="relative z-[1] mx-auto flex max-w-7xl flex-col gap-6 border border-brand-champagne/35 bg-brand-ivory p-6 shadow-[0_2px_22px_rgba(15,23,42,0.05)] md:flex-row md:items-center md:justify-between lg:p-8">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Next Step</p>
-            <h2 className="mt-2 font-serif text-3xl font-semibold text-brand-midnight">Request A Building Shortlist</h2>
-            <div className="mt-3 max-w-2xl space-y-2 text-sm leading-6 text-brand-graphite/70">
-              <p>Most clients do not begin with a specific residence.</p>
-              <p>
-                They begin with a budget, a commute, a lifestyle preference, or a major life transition.
-              </p>
-              <p>We help narrow the field before the apartment search begins.</p>
-            </div>
-          </div>
-          <div className="shrink-0">
-            <Link href="/profile">
-              <Button variant="brand">Curate Matches</Button>
+            <Link href="/building-reports/individual-buildings" className="mt-8 inline-block">
+              <Button variant="brand" className="gap-2 uppercase tracking-nav">
+                Start with Buildings
+                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+              </Button>
             </Link>
           </div>
-        </div>
+        </PageSection>
       </section>
 
-      <section className="border-t border-brand-graphite/10 bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10">
-        <div className="mx-auto max-w-7xl">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Markets</p>
-          <h2 className="font-serif text-3xl font-semibold">Manhattan Context Hubs</h2>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <Link href="/new-york-market">
-              <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40">
-                <Building2 className="mb-2 h-5 w-5 text-brand-champagne" />
-                <h3 className="font-serif text-xl text-brand-ivory">Uptown</h3>
-                <p className="mt-1 text-sm text-brand-ivory/72">
-                  Central Park, the Upper East Side, and the Upper West Side.
-                </p>
-              </Card>
-            </Link>
-            <Link href="/new-york-market">
-              <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40">
-                <MapPin className="mb-2 h-5 w-5 text-brand-champagne" />
-                <h3 className="font-serif text-xl text-brand-ivory">Midtown</h3>
-                <p className="mt-1 text-sm text-brand-ivory/72">
-                  Hudson Yards, Manhattan West, Billionaires&apos; Row, and core tower inventory.
-                </p>
-              </Card>
-            </Link>
-            <Link href="/new-york-market">
-              <Card className="border border-brand-ivory/14 bg-brand-midnight p-5 transition hover:border-brand-champagne/40">
-                <Search className="mb-2 h-5 w-5 text-brand-champagne" />
-                <h3 className="font-serif text-xl text-brand-ivory">Downtown</h3>
-                <p className="mt-1 text-sm text-brand-ivory/72">
-                  Tribeca, SoHo, Chelsea, Flatiron, and waterfront residential districts.
-                </p>
-              </Card>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <CTA
+        title="Want the reports shaped around a live search brief?"
+        description="Use the contact page to begin with the building or neighborhood question that matters most."
+      />
     </main>
   );
 }

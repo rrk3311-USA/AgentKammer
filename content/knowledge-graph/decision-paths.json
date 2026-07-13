@@ -1,0 +1,26 @@
+[
+  {
+    "id": "executive-relocation-path",
+    "trigger": "executive-relocation",
+    "steps": ["Executive Relocation Brief", "Industry Lens", "Neighborhood Briefs", "Building Intelligence", "Private Review"],
+    "example": "Executive Relocation -> Hudson Yards -> Luxury Rental -> Building Report"
+  },
+  {
+    "id": "divorce-path",
+    "trigger": "divorce",
+    "steps": ["Divorce Property Brief", "Stay vs Sell", "Building Reports", "Decision Memo", "Private Review"],
+    "example": "Divorce -> Stay vs Sell -> Decision Memo -> Attorney Resources"
+  },
+  {
+    "id": "growing-family-path",
+    "trigger": "growing-family",
+    "steps": ["Buyer Advisory", "School Planning Brief", "Neighborhood Briefs", "3BR Building Shortlist", "Private Review"],
+    "example": "Growing Family -> Schools -> Upper West Side -> 3BR Buildings"
+  },
+  {
+    "id": "international-buyer-path",
+    "trigger": "international-buyer",
+    "steps": ["International Buyer Brief", "Ownership Use Case", "Building Rules", "Pied-a-Terre Options", "Private Review"],
+    "example": "International Buyer -> Condo Rules -> Remote Ownership -> Building Report"
+  }
+]
