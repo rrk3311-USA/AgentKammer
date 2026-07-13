@@ -44,7 +44,7 @@ if (process.env.XAI_API_KEY || process.env.AI_INTEGRATIONS_OPENAI_API_KEY || pro
     // OpenAI not available - some features will be disabled
   }
 }
-const DEFAULT_DECISION_GUIDE_MODEL = process.env.XAI_API_KEY ? "grok-4.5" : "gpt-4o-mini";
+const DEFAULT_DECISION_GUIDE_MODEL = process.env.XAI_API_KEY ? "grok-4.3" : "gpt-4o-mini";
 
 // Notification configuration
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;

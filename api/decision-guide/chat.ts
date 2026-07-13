@@ -177,7 +177,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       apiKey,
       baseURL: process.env.XAI_API_KEY ? "https://api.x.ai/v1" : process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
     });
-    const defaultModel = process.env.XAI_API_KEY ? "grok-4.5" : "gpt-4o-mini";
+    const defaultModel = process.env.XAI_API_KEY ? "grok-4.3" : "gpt-4o-mini";
 
     const instructions = [
       "You are Raphi, Agent Kammer's Decision Guide for Manhattan housing decisions.",
