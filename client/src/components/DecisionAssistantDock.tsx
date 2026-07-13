@@ -495,7 +495,7 @@ export function DecisionAssistantDock() {
     try {
       const recap = buildRecap(nextAnswers, nextScore);
       const fullSummary = `${recap}\n\nConversation transcript:\n${transcript(messages)}`;
-      await fetch("/api/leads", {
+      const leadResponse = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -515,6 +515,11 @@ export function DecisionAssistantDock() {
           transcript: transcript(messages),
         }),
       });
+      if (!leadResponse.ok) {
+        const errorBody = await leadResponse.json().catch(() => null);
+        const message = typeof errorBody?.error === "string" ? errorBody.error : "Lead handoff failed";
+        throw new Error(message);
+      }
       setMessages((current) => [
         ...current,
         {

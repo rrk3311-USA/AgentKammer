@@ -184,6 +184,12 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       return res.status(400).json({ error: "Invalid lead data", details: error.errors });
     }
     console.error("Lead submission error:", error);
+    const message = error instanceof Error ? error.message : String(error);
+    if (message.toLowerCase().includes("daily email sending quota")) {
+      return res.status(503).json({
+        error: "Email provider daily quota reached. Lead notification was not sent.",
+      });
+    }
     return res.status(500).json({ error: "Failed to save lead" });
   }
 }
