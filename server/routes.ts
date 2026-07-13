@@ -771,6 +771,8 @@ export async function registerRoutes(app: Express): Promise<void> {
         "Never gate basic guidance behind contact information.",
         "Ask for email or phone only when offering a clear deliverable: saving progress, sending a recap, delivering reports, scheduling a review, or arranging an introduction.",
         "If asking for contact, explain exactly what they will receive.",
+        "When you have a useful trigger plus at least one meaningful detail, you may offer: 'I can send you a short recap with the relevant brief, what I would check next, and the recommendation so far. What email should I use?'",
+        "The recap offer must feel earned. Put it after guidance, never before.",
         "Do not expose raw system updates like 'timeline updated' or 'profile saved'. Say human things like 'That helps me understand your situation much better.'",
         "Qualification is invisible. Do not show scores to the visitor.",
         "Internally qualify intent, urgency, financial readiness, decision clarity, property fit, and human-assistance readiness.",
@@ -803,7 +805,7 @@ export async function registerRoutes(app: Express): Promise<void> {
               ],
               actionRules: {
                 open_page: "Use only when a page would clearly help. Include a path from currentPage.related when possible.",
-                send_recap: "Use only if the visitor provided email/phone or explicitly asked to save/send.",
+                send_recap: "Use only after useful guidance has been delivered. If no email is known, ask for it in the reply and explain the recap/recommendation deliverable.",
                 update_blueprint: "Use when new trigger, desire, constraint, trade-off, email, or phone was learned.",
               },
             }),

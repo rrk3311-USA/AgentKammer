@@ -338,6 +338,7 @@ export function DecisionAssistantDock() {
   const [step, setStep] = useState<"situation" | "desire" | "constraints" | "tradeoff" | "email" | "sent">("situation");
   const [answers, setAnswers] = useState<Answers>({});
   const [leadScore, setLeadScore] = useState(0);
+  const [leadQualification, setLeadQualification] = useState<DecisionGuideAiTurn["leadQualification"] | null>(null);
   const [sending, setSending] = useState(false);
   const [memoryLoaded, setMemoryLoaded] = useState(false);
   const [promptIndex, setPromptIndex] = useState(0);
@@ -509,16 +510,9 @@ export function DecisionAssistantDock() {
           leadScore: nextScore,
           marketInterest: nextAnswers.desire || nextAnswers.constraints,
           leadSource: "decision_assistant",
-        }),
-      });
-      await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          name: "Decision Guide Visitor",
-          email: nextAnswers.email,
-          message: fullSummary,
+          decisionProfile: nextAnswers,
+          leadQualification,
+          transcript: transcript(messages),
         }),
       });
       setMessages((current) => [
@@ -620,6 +614,7 @@ export function DecisionAssistantDock() {
     setMessages([...baseMessages, { role: "assistant", text: aiTurn.reply }]);
     setAnswers(mergedAnswers);
     setLeadScore(nextScore);
+    setLeadQualification(aiTurn.leadQualification ?? null);
     setQuickActions([]);
 
     const openAction = aiTurn.actions?.find((action) => action.type === "open_page" && action.path);
@@ -630,6 +625,8 @@ export function DecisionAssistantDock() {
     const shouldSendRecap = aiTurn.actions?.some((action) => action.type === "send_recap");
     if (shouldSendRecap && mergedAnswers.email) {
       void sendRecap(mergedAnswers, nextScore);
+    } else if (shouldSendRecap) {
+      setStep("email");
     }
   }
 

@@ -6,6 +6,9 @@ const leadSchema = z.object({
   email: z.string().email().optional(),
   phone: z.string().optional(),
   name: z.string().optional(),
+  timeline: z.string().optional(),
+  financing: z.string().optional(),
+  motivation: z.string().optional(),
   leadSource: z.string().min(1),
   conversationSummary: z.string().optional(),
   communicationStyle: z.string().optional(),
@@ -13,6 +16,16 @@ const leadSchema = z.object({
   marketInterest: z.string().optional(),
   reportUrl: z.string().optional(),
   audiobookTitle: z.string().optional(),
+  decisionProfile: z.record(z.unknown()).optional(),
+  leadQualification: z
+    .object({
+      score: z.number().optional(),
+      quality: z.string().optional(),
+      summary: z.string().optional(),
+      missing: z.array(z.string()).optional(),
+    })
+    .optional(),
+  transcript: z.string().optional(),
 });
 
 const CONTACT_INBOX = process.env.CONTACT_INBOX || "info@successchemistry.com";
@@ -28,16 +41,51 @@ type ApiResponse = {
 };
 
 function buildLeadHtml(data: z.infer<typeof leadSchema>) {
-  const rows = Object.entries(data)
+  const profile = data.decisionProfile ?? {};
+  const qualification = data.leadQualification;
+  const profileRows = Object.entries(profile)
+    .filter(([, value]) => value !== undefined && value !== null && value !== "")
+    .map(([key, value]) => `<tr><td style="padding:6px 10px;border-bottom:1px solid #e6dfd5;color:#6b6258;">${key}</td><td style="padding:6px 10px;border-bottom:1px solid #e6dfd5;"><strong>${String(value)}</strong></td></tr>`)
+    .join("");
+
+  const rows = [
+    ["Name", data.name],
+    ["Email", data.email],
+    ["Phone", data.phone],
+    ["Timeline", data.timeline],
+    ["Financing / constraint", data.financing],
+    ["Motivation / trigger", data.motivation],
+    ["Market interest", data.marketInterest],
+    ["Lead score", data.leadScore],
+    ["Readiness", qualification?.quality],
+    ["Qualification summary", qualification?.summary],
+    ["Missing info", qualification?.missing?.join(", ")],
+  ]
     .filter(([, value]) => value !== undefined && value !== null && value !== "")
     .map(([key, value]) => `<p><strong>${key}:</strong> ${String(value)}</p>`)
     .join("");
 
   return `
-    <h2>New Lead — ${data.leadSource}</h2>
+    <div style="font-family: Georgia, serif; color:#202735; line-height:1.45;">
+    <h2>New Decision Guide Lead — ${data.leadSource}</h2>
     ${rows}
+    ${profileRows ? `
+      <h3>Decision Profile</h3>
+      <table style="border-collapse:collapse;width:100%;max-width:720px;border-top:1px solid #e6dfd5;">
+        ${profileRows}
+      </table>
+    ` : ""}
+    ${data.conversationSummary ? `
+      <h3>Advisor Recap</h3>
+      <pre style="white-space:pre-wrap;font-family:Georgia,serif;background:#f5f2eb;border:1px solid #d8d1c7;padding:14px;">${data.conversationSummary}</pre>
+    ` : ""}
+    ${data.transcript ? `
+      <h3>Transcript</h3>
+      <pre style="white-space:pre-wrap;font-family:Georgia,serif;background:#fbfaf7;border:1px solid #d8d1c7;padding:14px;">${data.transcript}</pre>
+    ` : ""}
     <p><strong>Time:</strong> ${new Date().toLocaleString()}</p>
     ${data.email ? `<p><em>Reply directly to ${data.email}</em></p>` : ""}
+    </div>
   `;
 }
 
