@@ -1,19 +1,53 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-shell";
-import { serviceLandings } from "@/data/service-landings";
+import { decisionNavigationGroups } from "@/data/decision-navigation";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 const coreServices = [
-  { label: "Buyer Advisory", href: "/buyer-advisory" },
-  { label: "Building Reports", href: "/building-reports" },
-  { label: "Market Briefs", href: "/building-reports/market-briefs" },
+  { label: "What's Changing?", href: "/buyer-advisory" },
+  { label: "Should Anything Change?", href: "/buyer-advisory" },
+  { label: "Decision Frameworks", href: "/services#frameworks" },
   { label: "Private Contact", href: "/contact" },
 ];
 
-function publicSummary(summary: string) {
-  return summary;
+const flagshipFrameworks = [
+  { label: "Buy vs Rent", href: "/services/rent-vs-buy-manhattan-relocation" },
+  { label: "Stay vs Move", href: "/buyer-advisory" },
+  { label: "Sell vs Keep", href: "/buyer-advisory" },
+  { label: "Condo vs Co-op", href: "/services/condo-vs-coop-foreign-buyers-nyc" },
+  { label: "Renovate vs Relocate", href: "/buyer-advisory" },
+  { label: "Lease vs Buy", href: "/services/rent-vs-buy-manhattan-relocation" },
+  { label: "Building vs Apartment", href: "/building-reports" },
+  { label: "Neighborhood Fit", href: "/building-reports/neighborhood-guides" },
+  { label: "Opportunity Cost", href: "/building-reports/market-briefs" },
+  { label: "Total Cost of Ownership", href: "/building-reports/market-briefs" },
+  { label: "Decision Under Uncertainty", href: "/buyer-advisory" },
+];
+
+function BriefLibraryBlueprint() {
+  return (
+    <div className="pointer-events-none absolute right-8 top-10 hidden h-64 w-80 opacity-45 lg:block" aria-hidden="true">
+      <svg viewBox="0 0 360 260" fill="none" className="h-full w-full">
+        <path d="M34 210H326" stroke="currentColor" strokeWidth="1" className="text-brand-ivory/35" />
+        <path d="M72 210V82H284V210" stroke="currentColor" strokeWidth="1" className="text-brand-ivory/45" />
+        <path d="M102 210V112H254V210" stroke="currentColor" strokeWidth="1" className="text-brand-ivory/32" />
+        <path d="M132 210V142H224V210" stroke="currentColor" strokeWidth="1" className="text-brand-ivory/25" />
+        <path d="M72 82L180 28L284 82" stroke="currentColor" strokeWidth="1.2" className="text-brand-brass/65" />
+        <path d="M92 96H264" stroke="currentColor" strokeWidth="1" className="text-brand-ivory/18" />
+        <path d="M92 122H264" stroke="currentColor" strokeWidth="1" className="text-brand-ivory/18" />
+        <path d="M92 148H264" stroke="currentColor" strokeWidth="1" className="text-brand-ivory/18" />
+        <path d="M92 174H264" stroke="currentColor" strokeWidth="1" className="text-brand-ivory/18" />
+        <path d="M120 104V210" stroke="currentColor" strokeWidth="1" className="text-brand-ivory/14" />
+        <path d="M150 88V210" stroke="currentColor" strokeWidth="1" className="text-brand-ivory/14" />
+        <path d="M180 74V210" stroke="currentColor" strokeWidth="1" className="text-brand-ivory/14" />
+        <path d="M210 88V210" stroke="currentColor" strokeWidth="1" className="text-brand-ivory/14" />
+        <path d="M240 104V210" stroke="currentColor" strokeWidth="1" className="text-brand-ivory/14" />
+        <circle cx="72" cy="82" r="4" stroke="currentColor" strokeWidth="1" className="text-brand-brass/75" />
+        <circle cx="284" cy="210" r="4" stroke="currentColor" strokeWidth="1" className="text-brand-brass/75" />
+      </svg>
+    </div>
+  );
 }
 
 export default function Services() {
@@ -28,14 +62,14 @@ export default function Services() {
       <PageHero
         eyebrow="Decision Briefs"
         title="The first question is whether anything should change at all."
-        description="Agent Kammer organizes housing guidance around the life event, constraint, or ownership question behind the search. The recommendation may be to buy, sell, rent, wait, renew, renovate, refinance, rent the current home, or stay put."
+        description="Agent Kammer organizes the site around decisions, not real estate services. Everything begins with uncertainty, life change, options, trade-offs, and judgment before any building or property enters the conversation."
       />
 
       <PageSection className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)]">
         <SectionHeading
           eyebrow="Core"
-          title="The main paths stay simple because the right path may not be clear yet."
-          description="Use these broad entry points when the situation is still forming. The right recommendation may be to move forward, slow down, compare options, or avoid a move entirely."
+          title="The site should feel like it understands the situation before it suggests a transaction."
+          description="Use these entry points when the question is still forming. The recommendation may be to buy, sell, rent, renew, wait, renovate, refinance, keep the current home, or do nothing for now."
         />
         <div className="rounded-card border border-brand-border bg-white p-8">
           <div className="grid gap-4">
@@ -49,24 +83,65 @@ export default function Services() {
         </div>
       </PageSection>
 
-      <section className="border-y border-brand-border bg-white">
+      <section id="frameworks" className="border-y border-brand-border bg-brand-ivory">
         <PageSection>
           <SectionHeading
-            eyebrow="Brief Library"
-            title="Focused guidance for the situations that make people question home."
-            description="Each brief turns a specific trigger into a smaller set of decisions: what changed, whether anything should change, what the options are, what could go wrong if nothing changes, and which trade-offs matter most."
+            eyebrow="Decision Frameworks"
+            title="The intellectual center of the brand should be the frameworks, not the listings."
+            description="Every framework starts the same way: what changed, why it matters, what options exist, what trade-offs govern the choice, and which path has the highest expected value."
           />
-          <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            {serviceLandings.map((item) => (
-              <Link key={item.slug} href={`/services/${item.slug}`} className="rounded-card border border-brand-border bg-brand-ivory p-8 transition-transform hover:-translate-y-1">
-                <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">{item.eyebrow}</p>
-                <h3 className="mt-4 font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">{item.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-brand-graphite">{publicSummary(item.summary)}</p>
-                <span className="mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy">
-                  Open brief
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-                </span>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {flagshipFrameworks.map((framework) => (
+              <Link
+                key={framework.label}
+                href={framework.href}
+                className="group flex items-center justify-between rounded-card border border-brand-border bg-white px-5 py-4 text-sm text-brand-navy transition-colors hover:border-brand-brass hover:bg-brand-surface"
+              >
+                <span className="font-medium">{framework.label}</span>
+                <ArrowRight className="h-4 w-4 text-brand-navy/55 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
               </Link>
+            ))}
+          </div>
+        </PageSection>
+      </section>
+
+      <section className="relative overflow-hidden border-y border-brand-brass/25 bg-brand-navy text-brand-ivory">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(216,209,199,0.16),transparent_32%),linear-gradient(135deg,rgba(255,255,255,0.05),transparent_38%,rgba(0,0,0,0.16))]" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:repeating-linear-gradient(90deg,rgba(245,242,235,0.22)_0,rgba(245,242,235,0.22)_1px,transparent_1px,transparent_46px),repeating-linear-gradient(0deg,rgba(245,242,235,0.16)_0,rgba(245,242,235,0.16)_1px,transparent_1px,transparent_46px)]" aria-hidden="true" />
+        <BriefLibraryBlueprint />
+        <PageSection className="relative z-10">
+          <div className="max-w-4xl">
+            <p className="text-[12px] uppercase tracking-[0.32em] text-brand-brass">Information Architecture</p>
+            <h2 className="mt-6 max-w-3xl font-display text-5xl leading-[0.95] tracking-[-0.03em] text-brand-ivory md:text-6xl">
+              Organize the site around why people move, not around real estate services.
+            </h2>
+            <p className="mt-8 max-w-3xl text-lg leading-8 text-brand-ivory/76">
+              Each section should help the visitor think: this understands my situation. The transaction is only the downstream outcome of a good decision.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            {decisionNavigationGroups.map((group) => (
+              <div
+                id={group.title.toLowerCase().replace(/\s+/g, "-")}
+                key={group.title}
+                className="rounded-card border border-brand-ivory/14 bg-brand-ivory/[0.055] p-8 shadow-[0_28px_80px_rgba(0,0,0,0.18)]"
+              >
+                <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">Decision Category</p>
+                <h3 className="mt-4 font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-ivory">{group.title}</h3>
+                <p className="mt-4 min-h-[4.5rem] text-sm leading-7 text-brand-ivory/70">{group.description}</p>
+                <div className="mt-8 grid gap-2.5 sm:grid-cols-2">
+                  {group.items.map((item) => (
+                    <Link
+                      key={group.title + item.href + item.label}
+                      href={item.href}
+                      className="group/item flex items-center justify-between border-t border-brand-ivory/12 py-3 text-sm text-brand-ivory/84 transition-colors hover:text-brand-brass"
+                    >
+                      <span>{item.label}</span>
+                      <ArrowRight className="h-4 w-4 opacity-45 transition-transform group-hover/item:translate-x-1 group-hover/item:opacity-100" strokeWidth={1.5} />
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </PageSection>

@@ -5,13 +5,6 @@ import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-sh
 import { serviceLandingMap } from "@/data/service-landings";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
-const serviceHeroImages: Record<string, { src: string; alt: string }> = {
-  "1031-exchange-new-york": {
-    src: "/buildings/one-high-line.jpg",
-    alt: "Manhattan luxury condominium architecture at sunset",
-  },
-};
-
 function publicSummary(summary: string) {
   return summary;
 }
@@ -27,7 +20,6 @@ function decisionQuestions(title: string) {
 
 export default function ServiceLanding({ slug }: { slug: string }) {
   const landing = serviceLandingMap[slug];
-  const heroImage = landing ? serviceHeroImages[landing.slug] : undefined;
   const pagePath = landing ? `/services/${landing.slug}` : "/services";
   const pageUrl = `https://www.agentkammer.com${pagePath}`;
   const questions = landing ? decisionQuestions(landing.navLabel) : [];
@@ -122,8 +114,6 @@ export default function ServiceLanding({ slug }: { slug: string }) {
         eyebrow={landing.eyebrow}
         title={landing.title}
         description={publicSummary(landing.summary)}
-        image={heroImage?.src}
-        imageAlt={heroImage?.alt}
         kicker={
           <div>
             <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">Common Starting Points</p>
@@ -144,11 +134,11 @@ export default function ServiceLanding({ slug }: { slug: string }) {
           title={`${landing.navLabel} need a decision brief, not a generic search.`}
           description="The first step is understanding why the move, sale, purchase, or hold decision is being considered. From there, the work becomes narrower: decide whether anything should change, whether doing nothing is wise or dangerous, then decide what kind of change is worth pursuing."
         />
-        <div className="grid gap-4">
+        <div className="border-y border-brand-border">
           {landing.audience.map((item, index) => (
-            <div key={item} className="rounded-card border border-brand-border bg-white p-6">
-              <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">0{index + 1}</p>
-              <p className="mt-3 text-base leading-8 text-brand-navy">{item}</p>
+            <div key={item} className="grid gap-3 border-b border-brand-border py-5 last:border-b-0 md:grid-cols-[52px_minmax(0,1fr)] md:gap-5">
+              <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">0{index + 1}</p>
+              <p className="text-base leading-8 text-brand-navy">{item}</p>
             </div>
           ))}
         </div>
@@ -161,11 +151,14 @@ export default function ServiceLanding({ slug }: { slug: string }) {
             title="Before the market search starts, the first question is whether a market search should start at all."
             description="Agent Kammer uses the same core framework across every situation: trigger, desire, constraints, trade-offs, and recommendation. Sometimes the right recommendation is to move. Sometimes it is to do nothing. Sometimes doing nothing is the worst option."
           />
-          <div className="mt-12 grid gap-5 lg:grid-cols-4">
+          <div className="mt-12 border-t border-brand-border">
             {questions.map((item, index) => (
-              <div key={item} className="rounded-card border border-brand-border bg-brand-ivory p-8">
-                <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">0{index + 1}</p>
-                <p className="text-sm leading-7 text-brand-graphite">{item}</p>
+              <div
+                key={item}
+                className="grid gap-3 border-b border-brand-border py-6 md:grid-cols-[72px_minmax(0,1fr)] md:gap-6"
+              >
+                <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">0{index + 1}</p>
+                <p className="max-w-4xl text-sm leading-7 text-brand-graphite lg:text-[15px]">{item}</p>
               </div>
             ))}
           </div>
@@ -178,11 +171,11 @@ export default function ServiceLanding({ slug }: { slug: string }) {
           title="The brief becomes useful when it turns uncertainty into a clear recommendation."
           description="The goal is not to tour more property. The goal is to remove the wrong paths early, identify whether no action is viable, then spend attention only where the decision deserves it."
         />
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 grid gap-8 border-t border-brand-border pt-8 lg:grid-cols-3">
           {landing.considerations.map((item, index) => (
-            <div key={item} className="rounded-card border border-brand-border bg-white p-8 shadow-[0_1px_0_rgba(42,52,71,0.05)]">
-              <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">Lens 0{index + 1}</p>
-              <p className="mt-4 text-sm leading-7 text-brand-graphite">{item}</p>
+            <div key={item} className="border-t border-brand-border pt-5">
+              <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">Lens 0{index + 1}</p>
+              <p className="mt-4 text-sm leading-7 text-brand-graphite lg:text-[15px]">{item}</p>
             </div>
           ))}
         </div>
