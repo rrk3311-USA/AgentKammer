@@ -172,6 +172,26 @@ export const serviceLandings: ServiceLanding[] = [
     cta: "Start a purchase-focused relocation brief.",
   },
   {
+    slug: "rent-vs-buy-manhattan-relocation",
+    title: "Rent vs Buy After Relocating to Manhattan",
+    navLabel: "Rent vs Buy Relocation",
+    eyebrow: "Relocation Decision",
+    summary:
+      "Relocation does not automatically mean buying immediately or renting by default. The brief compares timeline, expected stay, liquidity, commute, building fit, tax exposure, and whether flexibility is worth more than ownership right now.",
+    searchTerms: ["rent vs buy manhattan relocation", "should i rent or buy in nyc after relocation", "relocating to manhattan rent or buy"],
+    audience: [
+      "Executives and professionals relocating to Manhattan who are unsure whether to rent first or buy now.",
+      "Households balancing a new job, new commute, unfamiliar neighborhoods, and a major financial decision.",
+      "Clients who need a clear first move before tours, leases, or purchase offers start driving the process.",
+    ],
+    considerations: [
+      "Start with expected length of stay, work location, liquidity, and how much uncertainty remains.",
+      "Compare the cost of waiting with the risk of buying the wrong building too quickly.",
+      "Use renting, buying, or waiting as strategy options instead of treating one as the default answer.",
+    ],
+    cta: "Compare rent, buy, and wait options after relocating.",
+  },
+  {
     slug: "executive-relocation-nyc",
     title: "Executive Relocation to NYC",
     navLabel: "Executive Relocation",
@@ -270,6 +290,26 @@ export const serviceLandings: ServiceLanding[] = [
       "Use the assistant to personalize the same relocation path for finance-specific constraints.",
     ],
     cta: "Build a finance-focused Manhattan housing brief.",
+  },
+  {
+    slug: "condo-vs-coop-foreign-buyers-nyc",
+    title: "Condo vs Co-op for Foreign Buyers in NYC",
+    navLabel: "Condo vs Co-op",
+    eyebrow: "Foreign Buyer Decision",
+    summary:
+      "Foreign buyers should compare condos and co-ops before falling in love with a listing. The brief explains approval risk, financing, remote ownership, subletting, liquidity, privacy, and resale fit.",
+    searchTerms: ["condo vs coop foreign buyer nyc", "foreign buyer co-op rules nyc", "can foreign buyers buy coops in new york"],
+    audience: [
+      "Foreign-national and international buyers comparing Manhattan condos, co-ops, and pied-a-terre options.",
+      "Buyers who need to understand board approval, financing friction, and building rules before shortlisting properties.",
+      "Clients coordinating advisors across countries who need a simple decision framework.",
+    ],
+    considerations: [
+      "Clarify whether the buyer needs remote ownership, rental flexibility, speed, or maximum long-term value.",
+      "Compare board approval risk, financing limits, sublet rules, and resale liquidity before tours.",
+      "Use building rules and ownership structure as first filters, not afterthoughts.",
+    ],
+    cta: "Clarify condo versus co-op fit before shortlisting buildings.",
   },
   {
     slug: "pet-friendly-moves-nyc",
