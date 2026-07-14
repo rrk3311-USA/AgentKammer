@@ -4,8 +4,6 @@ import {
   ArrowRight,
   Building2,
   CalendarClock,
-  Check,
-  Circle,
   Landmark,
   MapPinned,
   Minimize2,
@@ -14,6 +12,7 @@ import {
 } from "lucide-react";
 import { DECISION_ASSISTANT_OPEN_EVENT } from "@/lib/decision-assistant";
 import { getPageContext } from "@/lib/knowledge-graph/page-context";
+import { trackVisitorSignal } from "@/lib/visitor-signals";
 
 const blueprintSegments = [
   { label: "Lifestyle", filled: true, icon: UsersRound },
@@ -24,40 +23,8 @@ const blueprintSegments = [
   { label: "Trade-offs", filled: false, icon: SlidersHorizontal },
 ];
 
-const blueprintMaterials: Record<string, { fill: string; track: string; icon: string }> = {
-  Lifestyle: {
-    fill: "bg-[#C9B48D]",
-    track: "bg-[#E7DDCB]",
-    icon: "text-[#B08D57]",
-  },
-  Location: {
-    fill: "bg-[#AEB8BE]",
-    track: "bg-[#E2E5E4]",
-    icon: "text-[#7E8A91]",
-  },
-  Building: {
-    fill: "bg-[#D8D1C7]",
-    track: "bg-[#ECE7DE]",
-    icon: "text-brand-brass",
-  },
-  Budget: {
-    fill: "bg-brand-navy",
-    track: "bg-[#D8D1C7]",
-    icon: "text-brand-navy",
-  },
-  Timeline: {
-    fill: "bg-[#8F8170]",
-    track: "bg-[#E5DED3]",
-    icon: "text-[#8F8170]",
-  },
-  "Trade-offs": {
-    fill: "bg-brand-charcoal",
-    track: "bg-[#DDD6CC]",
-    icon: "text-brand-charcoal",
-  },
-};
-
 const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
+const phonePattern = /(?:\+?1[\s.-]?)?(?:\(?\d{3}\)?[\s.-]?)\d{3}[\s.-]?\d{4}/;
 const sessionStorageKey = "akDecisionAssistantSessionId";
 const navigationMemoryKey = "akDecisionAssistantNavigation";
 const openingPrompts = [
@@ -90,9 +57,20 @@ function DecisionGuideAvatar({ animated = false }: { animated?: boolean }) {
       />
       <img
         src="/images/decision-guide-raphi.png"
-        alt="Raphi, your Guidance Captain"
+        alt="Raphi, your Guidance Advisor"
         className="relative z-10 h-full w-full rounded-full object-cover object-[50%_20%]"
       />
+    </span>
+  );
+}
+
+function GuidanceAdvisorLabel({ tone = "dark" }: { tone?: "dark" | "light" }) {
+  const guidanceClass = tone === "dark" ? "text-brand-ivory/72" : "text-brand-cocoa";
+  const advisorClass = tone === "dark" ? "text-brand-brass" : "text-brand-navy";
+  return (
+    <span className="block text-[10px] uppercase tracking-[0.22em]">
+      <span className={guidanceClass}>Guidance</span>{" "}
+      <span className={advisorClass}>Advisor</span>
     </span>
   );
 }
@@ -109,10 +87,15 @@ type Answers = {
   tradeOff?: string;
   timeline?: string;
   budget?: string;
+  financingStatus?: string;
   industry?: string;
   household?: string;
+  geography?: string;
   neighborhoods?: string;
   buildingPreferences?: string;
+  dealBreakers?: string;
+  decisionMakers?: string;
+  confidenceReadiness?: string;
   buildingsViewed?: string;
   reportsViewed?: string;
   questionsAsked?: string;
@@ -155,10 +138,15 @@ function profileKeys() {
     "tradeOff",
     "timeline",
     "budget",
+    "financingStatus",
     "industry",
     "household",
+    "geography",
     "neighborhoods",
     "buildingPreferences",
+    "dealBreakers",
+    "decisionMakers",
+    "confidenceReadiness",
     "buildingsViewed",
     "reportsViewed",
     "questionsAsked",
@@ -193,14 +181,19 @@ function buildRecap(answers: Answers, score: number) {
     answers.tradeOff ? "Trade-offs/Priorities" : null,
     answers.timeline ? "Timeline" : null,
     answers.budget ? "Budget" : null,
+    answers.financingStatus ? "Financing status" : null,
     answers.industry ? "Industry" : null,
     answers.household ? "Household" : null,
+    answers.geography ? "Geography" : null,
     answers.neighborhoods ? "Neighborhood preferences" : null,
     answers.buildingPreferences ? "Building preferences" : null,
+    answers.dealBreakers ? "Deal breakers" : null,
+    answers.decisionMakers ? "Decision-makers" : null,
+    answers.confidenceReadiness ? "Confidence/readiness" : null,
   ].filter(Boolean);
 
   return [
-    "Guidance Captain recommendation request",
+    "Guidance Advisor recommendation request",
     "",
     `Visitor quality: ${classifyLead(score)}`,
     `Qualifier score: ${score}`,
@@ -212,14 +205,21 @@ function buildRecap(answers: Answers, score: number) {
     `Trade-off / risk: ${answers.tradeOff || "Not provided"}`,
     `Timeline: ${answers.timeline || "Not provided"}`,
     `Budget: ${answers.budget || "Not provided"}`,
+    `Financing status: ${answers.financingStatus || "Not provided"}`,
     `Industry: ${answers.industry || "Not provided"}`,
     `Household: ${answers.household || "Not provided"}`,
+    `Geography: ${answers.geography || "Not provided"}`,
     `Neighborhood preferences: ${answers.neighborhoods || "Not provided"}`,
     `Building preferences: ${answers.buildingPreferences || "Not provided"}`,
+    `Deal breakers: ${answers.dealBreakers || "Not provided"}`,
+    `Decision-makers: ${answers.decisionMakers || "Not provided"}`,
+    `Confidence/readiness: ${answers.confidenceReadiness || "Not provided"}`,
     `Buildings viewed: ${answers.buildingsViewed || "Not provided"}`,
     `Reports viewed: ${answers.reportsViewed || "Not provided"}`,
     `Questions asked: ${answers.questionsAsked || "Not provided"}`,
     `Recommendation history: ${answers.recommendationHistory || "Not provided"}`,
+    `Contact email: ${answers.email || "Not provided"}`,
+    `Contact phone: ${answers.phone || "Not provided"}`,
     "",
     "Recommended next step:",
     score >= 4
@@ -228,6 +228,49 @@ function buildRecap(answers: Answers, score: number) {
         ? "Send a concise recap and invite a short advisory call. Clarify timing, budget, and building criteria."
         : "Keep nurturing. Send educational building intelligence and let them continue the diagnostic before pushing for a call.",
   ].join("\n");
+}
+
+function hasContact(answers: Answers) {
+  return Boolean(answers.email || answers.phone);
+}
+
+function meaningfulProfileCount(answers: Answers) {
+  return [
+    answers.situation,
+    answers.desire,
+    answers.constraints,
+    answers.tradeOff,
+    answers.timeline,
+    answers.budget,
+    answers.financingStatus,
+    answers.household,
+    answers.geography,
+    answers.neighborhoods,
+    answers.buildingPreferences,
+    answers.dealBreakers,
+    answers.decisionMakers,
+    answers.confidenceReadiness,
+  ].filter(Boolean).length;
+}
+
+function shouldOfferContact(answers: Answers, score: number) {
+  if (hasContact(answers)) return false;
+  return score >= 2 || meaningfulProfileCount(answers) >= 2;
+}
+
+function buildContactOffer(answers: Answers, score: number) {
+  const isQualified = score >= 2 || meaningfulProfileCount(answers) >= 2;
+  if (!isQualified) {
+    return "I can keep this profile for you and send the useful pages later. What email or mobile should I use?";
+  }
+  return "I can send you a short recap with the relevant brief, what I would check next, and the recommendation so far. Share the best email or mobile and I’ll touch base from there.";
+}
+
+function nextDiagnosticStep(answers: Answers): "situation" | "desire" | "constraints" | "tradeoff" {
+  if (!answers.situation) return "situation";
+  if (!answers.desire) return "desire";
+  if (!answers.constraints) return "constraints";
+  return "tradeoff";
 }
 
 function getSessionId() {
@@ -249,10 +292,15 @@ function summarizeMemory(messages: Message[], answers: Answers, score: number) {
     answers.tradeOff ? `Trade-off: ${answers.tradeOff}` : null,
     answers.timeline ? `Timeline: ${answers.timeline}` : null,
     answers.budget ? `Budget: ${answers.budget}` : null,
+    answers.financingStatus ? `Financing status: ${answers.financingStatus}` : null,
     answers.industry ? `Industry: ${answers.industry}` : null,
     answers.household ? `Household: ${answers.household}` : null,
+    answers.geography ? `Geography: ${answers.geography}` : null,
     answers.neighborhoods ? `Neighborhoods: ${answers.neighborhoods}` : null,
     answers.buildingPreferences ? `Building preferences: ${answers.buildingPreferences}` : null,
+    answers.dealBreakers ? `Deal breakers: ${answers.dealBreakers}` : null,
+    answers.decisionMakers ? `Decision-makers: ${answers.decisionMakers}` : null,
+    answers.confidenceReadiness ? `Confidence/readiness: ${answers.confidenceReadiness}` : null,
     answers.recommendationHistory ? `Recommendation history: ${answers.recommendationHistory}` : null,
     `Message count: ${messages.length}`,
   ]
@@ -288,40 +336,23 @@ function mergeDefinedProfile(current: Answers, profile?: Partial<Answers>) {
   return next;
 }
 
-function getBlueprintStrength(label: string, complete: boolean, leadScore: number) {
-  if (complete) return 92;
-  if (label === "Lifestyle") return 24;
-  if (label === "Location") return Math.min(68, 22 + leadScore * 12);
-  if (label === "Building") return Math.min(64, 18 + leadScore * 10);
-  if (label === "Budget") return Math.min(58, 12 + leadScore * 9);
-  if (label === "Timeline") return Math.min(70, 16 + leadScore * 11);
-  return Math.min(52, 10 + leadScore * 8);
-}
-
-function PixelProgress({
-  material,
-  strength,
-  filled,
+function BlueprintProgressBar({
+  completion,
   tone,
-  delay = 0,
 }: {
-  material: { fill: string; track: string; icon: string };
-  strength: number;
-  filled: boolean;
+  completion: number;
   tone: "dark" | "light";
-  delay?: number;
 }) {
-  const trackClass = tone === "dark" ? "bg-brand-ivory/20" : material.track;
-  const fillClass = filled ? material.fill : tone === "dark" ? "bg-brand-ivory/32" : "bg-brand-border/65";
+  const percent = Math.max(0, Math.min(100, (completion / blueprintSegments.length) * 100));
+  const trackClass = tone === "dark" ? "bg-brand-ivory/16" : "bg-brand-navy/10";
   return (
-    <span className={`ak-pixel-progress ${trackClass}`} aria-hidden>
-      <span
-        className={`ak-pixel-progress-fill animate-blueprint-fill ${fillClass}`}
-        style={{
-          animationDelay: `${delay}ms`,
-          width: `${strength}%`,
-        }}
-      />
+    <span className={`ak-blueprint-main-progress ${trackClass}`} aria-label={`Decision Blueprint progress ${completion} of 6`}>
+      <span className="ak-blueprint-main-progress-fill" style={{ width: `${percent}%` }} />
+      <span className="ak-blueprint-main-progress-grid" aria-hidden>
+        {blueprintSegments.map((segment) => (
+          <span key={segment.label} />
+        ))}
+      </span>
     </span>
   );
 }
@@ -413,7 +444,7 @@ function getUsefulActions(answers: Answers): QuickAction[] {
     actions.push({
       label: "Send recap",
       asksForEmail: true,
-      response: "I can send a clean recap with the relevant briefs, what we learned, and the current recommendation. What email should I use?",
+      response: "I can send a clean recap with the relevant briefs, what we learned, and the current recommendation. What email or mobile should I use?",
     });
   }
 
@@ -423,6 +454,7 @@ function getUsefulActions(answers: Answers): QuickAction[] {
 export function DecisionAssistantDock() {
   const [location, setLocation] = useLocation();
   const [expanded, setExpanded] = useState(false);
+  const guideOpenedRef = useRef(false);
   const [input, setInput] = useState("");
   const [sessionId] = useState(getSessionId);
   const [step, setStep] = useState<"situation" | "desire" | "constraints" | "tradeoff" | "email" | "sent">("situation");
@@ -436,7 +468,7 @@ export function DecisionAssistantDock() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      text: "Hi, I'm Raphi. I’ll be your Guidance Captain for this decision. Before you spend time looking at listings, let’s decide whether anything should change at all. Sometimes doing nothing is right. Sometimes it is the mistake. What’s changing?",
+      text: "Hi, I'm Raphi. I’ll be your Guidance Advisor for this decision. Before you spend time looking at listings, let’s decide whether anything should change at all. Sometimes doing nothing is right. Sometimes it is the mistake. What’s changing?",
     },
   ]);
   const transcriptRef = useRef<HTMLDivElement | null>(null);
@@ -446,6 +478,12 @@ export function DecisionAssistantDock() {
     window.addEventListener(DECISION_ASSISTANT_OPEN_EVENT, open);
     return () => window.removeEventListener(DECISION_ASSISTANT_OPEN_EVENT, open);
   }, []);
+
+  useEffect(() => {
+    if (!expanded || guideOpenedRef.current) return;
+    guideOpenedRef.current = true;
+    trackVisitorSignal("decision_guide_open", location);
+  }, [expanded, location]);
 
   useEffect(() => {
     const title = getPageContext(location).title;
@@ -562,7 +600,7 @@ export function DecisionAssistantDock() {
   }, [answers, leadScore, memoryLoaded, messages, sessionId]);
 
   async function sendRecap(nextAnswers: Answers, nextScore: number) {
-    if (!nextAnswers.email) return;
+    if (!nextAnswers.email && !nextAnswers.phone) return;
     setSending(true);
     try {
       const recap = buildRecap(nextAnswers, nextScore);
@@ -572,12 +610,13 @@ export function DecisionAssistantDock() {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({
-          name: "Guidance Captain Visitor",
+          name: "Guidance Advisor Visitor",
           email: nextAnswers.email,
+          phone: nextAnswers.phone,
           timeline: nextAnswers.constraints || nextAnswers.situation,
           financing: nextAnswers.constraints,
           motivation: nextAnswers.situation,
-          communicationStyle: `Guidance Captain - ${classifyLead(nextScore)}`,
+          communicationStyle: `Guidance Advisor - ${classifyLead(nextScore)}`,
           conversationSummary: fullSummary,
           leadScore: nextScore,
           marketInterest: nextAnswers.desire || nextAnswers.constraints,
@@ -596,7 +635,9 @@ export function DecisionAssistantDock() {
         ...current,
         {
           role: "assistant",
-          text: "Sent. I’ll keep the conversation here too, so you can keep refining the decision.",
+          text: nextAnswers.email
+            ? "Sent. I’ll keep the conversation here too, so you can keep refining the decision."
+            : "Got it. I saved the decision profile and I’ll use that context when we touch base.",
         },
       ]);
       setStep("sent");
@@ -618,6 +659,7 @@ export function DecisionAssistantDock() {
     const nextAnswers = { ...answers, situation: prompt.text };
     const nextMessages: Message[] = [...messages, { role: "user", text: prompt.text }];
     const guidance = getSituationGuidance(prompt.text, nextScore);
+    trackVisitorSignal("decision_guide_message", prompt.text.slice(0, 120));
 
     setLocation(guidance.path || prompt.path);
     guidance.messages.forEach((text) => nextMessages.push({ role: "assistant", text }));
@@ -627,7 +669,7 @@ export function DecisionAssistantDock() {
     setMessages(nextMessages);
     setAnswers(nextAnswers);
     setLeadScore(nextScore);
-    setStep("desire");
+    setStep(shouldOfferContact(nextAnswers, nextScore) ? "email" : "desire");
   }
 
   function handleQuickAction(action: QuickAction) {
@@ -686,8 +728,14 @@ export function DecisionAssistantDock() {
     if (!aiTurn?.reply) return;
     const mergedAnswers = mergeDefinedProfile(fallbackAnswers, aiTurn.profile);
     const nextScore = typeof aiTurn.leadQualification?.score === "number" ? Math.round(aiTurn.leadQualification.score) : fallbackScore;
+    const replyMessages: Message[] = [...baseMessages, { role: "assistant", text: aiTurn.reply }];
+    const aiAskedForContact = /email|phone|mobile|contact|send|recap|touch base/i.test(aiTurn.reply);
 
-    setMessages([...baseMessages, { role: "assistant", text: aiTurn.reply }]);
+    if (shouldOfferContact(mergedAnswers, nextScore) && !aiAskedForContact) {
+      replyMessages.push({ role: "assistant", text: buildContactOffer(mergedAnswers, nextScore) });
+    }
+
+    setMessages(replyMessages);
     setAnswers(mergedAnswers);
     setLeadScore(nextScore);
     setLeadQualification(aiTurn.leadQualification ?? null);
@@ -699,9 +747,11 @@ export function DecisionAssistantDock() {
     }
 
     const shouldSendRecap = aiTurn.actions?.some((action) => action.type === "send_recap");
-    if (shouldSendRecap && mergedAnswers.email) {
+    if (shouldSendRecap && hasContact(mergedAnswers)) {
       void sendRecap(mergedAnswers, nextScore);
     } else if (shouldSendRecap) {
+      setStep("email");
+    } else if (shouldOfferContact(mergedAnswers, nextScore)) {
       setStep("email");
     }
   }
@@ -713,17 +763,21 @@ export function DecisionAssistantDock() {
     setExpanded(true);
 
     const foundEmail = answer.match(emailPattern)?.[0];
+    const foundPhone = answer.match(phonePattern)?.[0];
     const baseMessages: Message[] = [...messages, { role: "user", text: answer }];
     const nextMessages: Message[] = [...baseMessages];
     let nextAnswers = { ...answers };
     let nextStep = step;
     let nextScore = leadScore + scoreLead(answer);
+    const conversationStep = step === "email" ? nextDiagnosticStep(nextAnswers) : step;
 
-    if (foundEmail) {
-      nextAnswers = { ...nextAnswers, email: foundEmail };
+    if (foundEmail || foundPhone) {
+      nextAnswers = { ...nextAnswers, email: foundEmail || nextAnswers.email, phone: foundPhone || nextAnswers.phone };
       nextMessages.push({
         role: "assistant",
-        text: "Got it. I’ll send the recommendation with the Blueprint items checked so far and the next best step.",
+        text: foundEmail
+          ? "Got it. I’ll send the recommendation with the relevant brief, the profile items we have so far, and the next best step."
+          : "Got it. I saved the decision profile with what we have so far. I’ll use this context when we touch base.",
       });
       setMessages(nextMessages);
       setAnswers(nextAnswers);
@@ -734,27 +788,31 @@ export function DecisionAssistantDock() {
       return;
     }
 
-    if (step === "situation") {
+    if (conversationStep === "situation") {
       nextAnswers = { ...nextAnswers, situation: answer };
       const guidance = getSituationGuidance(answer, nextScore);
       if (guidance.path) setLocation(guidance.path);
       guidance.messages.forEach((text) => nextMessages.push({ role: "assistant", text }));
+      nextMessages.push({
+        role: "assistant",
+        text: "My next move is not to add search filters. It is to identify the outcome you want the housing decision to produce. What would a better result give you: more stability, more space, shorter routine, lower risk, or more flexibility?",
+      });
       nextStep = "desire";
-    } else if (step === "desire") {
+    } else if (conversationStep === "desire") {
       nextAnswers = { ...nextAnswers, desire: answer };
       nextMessages.push({
         role: "assistant",
-        text: "That helps. I would now check the constraint that can block this: budget, timing, financing, school district, pets, building rules, or uncertainty. Pick the one that feels most likely to create friction.",
+        text: "That helps. I would treat that as the success condition. Now I would check the constraint that can block it: budget, timing, financing, school district, pets, building rules, or uncertainty. Pick the one most likely to create friction.",
       });
       nextStep = "constraints";
-    } else if (step === "constraints") {
+    } else if (conversationStep === "constraints") {
       nextAnswers = { ...nextAnswers, constraints: answer };
       nextMessages.push({
         role: "assistant",
-        text: "That helps. Now I would decide the trade-off instead of adding more search criteria. If everything cannot fit, I would rank size, location, building quality, flexibility, cost control, and long-term value.",
+        text: "That is useful. I would not browse yet. The decision now is the trade-off: if everything cannot fit, what should win first: size, location, building quality, flexibility, cost control, or long-term value?",
       });
       nextStep = "tradeoff";
-    } else if (step === "tradeoff") {
+    } else if (conversationStep === "tradeoff") {
       nextAnswers = { ...nextAnswers, tradeOff: answer };
       nextMessages.push({
         role: "assistant",
@@ -762,14 +820,22 @@ export function DecisionAssistantDock() {
       });
       nextMessages.push({
         role: "assistant",
-        text: "My next move would be to read the relevant brief or compare ownership options before looking at listings.",
+        text: "My next move would be to read the relevant brief or compare ownership options before looking at listings. The goal is to decide what to do, not just what to tour.",
       });
       nextStep = "tradeoff";
     } else {
       nextMessages.push({
         role: "assistant",
-        text: "You can keep adding context here. I’ll keep narrowing the next useful decision instead of turning this into a form.",
+        text: "You can keep adding context here. I’ll keep narrowing the next useful decision instead of turning this into a form. Based on what you have shared, I would decide the next page or next call around the biggest unresolved constraint.",
       });
+    }
+
+    if (shouldOfferContact(nextAnswers, nextScore)) {
+      nextMessages.push({
+        role: "assistant",
+        text: buildContactOffer(nextAnswers, nextScore),
+      });
+      nextStep = "email";
     }
 
     setMessages(nextMessages);
@@ -798,26 +864,10 @@ export function DecisionAssistantDock() {
     "Trade-offs": Boolean(answers.tradeOff),
   };
   const blueprintCompletion = blueprintSegments.filter((segment) => completedSegments[segment.label as keyof typeof completedSegments]).length;
-  const blueprintPercent = Math.round((blueprintCompletion / blueprintSegments.length) * 100);
   const displayMessages = mergeConsecutiveMessages(messages);
   const recentMessages = displayMessages.slice(-2);
   const renderCompactBlueprintProgress = (tone: "dark" | "light") => (
-    <span className="grid grid-cols-6 gap-1" aria-label={`Decision Blueprint progress ${blueprintCompletion} of 6`}>
-      {blueprintSegments.map((segment, index) => {
-        const filled = completedSegments[segment.label as keyof typeof completedSegments];
-        const material = blueprintMaterials[segment.label];
-        return (
-          <PixelProgress
-            key={segment.label}
-            material={material}
-            strength={getBlueprintStrength(segment.label, Boolean(filled), leadScore)}
-            filled={Boolean(filled)}
-            tone={tone}
-            delay={index * 65}
-          />
-        );
-      })}
-    </span>
+    <BlueprintProgressBar completion={blueprintCompletion} tone={tone} />
   );
 
   if (!expanded) {
@@ -825,7 +875,7 @@ export function DecisionAssistantDock() {
       <aside
         id="decision-assistant"
         className="fixed inset-x-0 bottom-0 z-40 border-t border-brand-brass/35 bg-brand-midnight px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 text-brand-ivory shadow-[0_-18px_38px_rgba(32,39,53,0.28)] md:px-6"
-        aria-label="Guidance Captain"
+        aria-label="Guidance Advisor"
       >
         <div className="mx-auto grid max-w-site gap-3 lg:grid-cols-[minmax(210px,0.25fr)_minmax(220px,0.25fr)_minmax(340px,0.5fr)] lg:items-center">
           <div className="grid gap-2">
@@ -833,7 +883,7 @@ export function DecisionAssistantDock() {
               <button type="button" onClick={() => setExpanded(true)} className="flex min-w-0 items-center gap-3 text-left">
                 <DecisionGuideAvatar />
                 <span className="min-w-0">
-                  <span className="block text-[10px] uppercase tracking-[0.22em] text-brand-brass">Guidance Captain</span>
+                  <GuidanceAdvisorLabel tone="dark" />
                   <span className="mt-0.5 block truncate text-sm font-medium text-brand-ivory">What's changing?</span>
                 </span>
               </button>
@@ -854,36 +904,21 @@ export function DecisionAssistantDock() {
             </div>
           </div>
           <div className="hidden sm:block" aria-label="Decision Blueprint modules">
-            <div className="grid grid-cols-6 gap-1" aria-hidden>
-              {blueprintSegments.map((segment, index) => {
-                const filled = completedSegments[segment.label as keyof typeof completedSegments];
-                const material = blueprintMaterials[segment.label];
-                return (
-                  <PixelProgress
-                    key={segment.label}
-                    material={material}
-                    strength={getBlueprintStrength(segment.label, Boolean(filled), leadScore)}
-                    filled={Boolean(filled)}
-                    tone="dark"
-                    delay={index * 85}
-                  />
-                );
-              })}
-            </div>
-            <div className="mt-2 hidden grid-cols-6 gap-x-4 gap-y-1 2xl:grid">
+            <BlueprintProgressBar completion={blueprintCompletion} tone="dark" />
+            <div className="mt-2 hidden grid-cols-6 gap-x-4 gap-y-1 xl:grid">
               {blueprintSegments.map((segment) => (
                 <span key={segment.label} className="truncate text-[10px] uppercase tracking-[0.1em] text-brand-ivory/72">
                   {segment.label}
                 </span>
               ))}
             </div>
-            <p className="mt-2 text-[10px] uppercase tracking-[0.14em] text-brand-ivory/64 2xl:hidden">
-              Lifestyle · Building · Budget · Timeline
+            <p className="mt-2 text-[10px] uppercase tracking-[0.14em] text-brand-ivory/64 xl:hidden">
+              Six-part decision progress
             </p>
           </div>
           <form onSubmit={handleSubmit} className="grid grid-cols-[minmax(0,1fr)_auto] gap-2 lg:col-start-3">
             <label className="sr-only" htmlFor="decision-guide-compact-input">
-              Tell the Guidance Captain what is changing
+              Tell the Guidance Advisor what is changing
             </label>
             <input
               id="decision-guide-compact-input"
@@ -915,14 +950,14 @@ export function DecisionAssistantDock() {
           ? "fixed inset-x-0 bottom-0 z-40 max-h-[58dvh] w-full max-w-[100vw] overflow-hidden border-t border-brand-navy/18 bg-brand-ivory p-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-12px_42px_rgba(42,52,71,0.18)] md:inset-x-auto md:bottom-6 md:right-6 md:max-h-[min(38rem,calc(100dvh-8rem))] md:min-w-[24rem] md:w-[min(30rem,34vw)] md:max-w-[42rem] md:resize-x md:overflow-auto md:border md:p-3"
           : "fixed inset-x-0 bottom-0 z-40 border-t border-brand-brass/35 bg-brand-midnight px-3 py-3 text-brand-ivory shadow-[0_-18px_38px_rgba(32,39,53,0.28)] md:px-6"
       }
-      aria-label="Guidance Captain"
+      aria-label="Guidance Advisor"
     >
       <div className="mx-auto grid w-full max-w-full gap-2 overflow-hidden md:max-w-site">
         <div className={expanded ? "grid min-w-0 gap-2 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center md:grid-cols-1" : "grid min-w-0 gap-3 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-center"}>
           <div className="flex min-w-0 items-center gap-3">
             <DecisionGuideAvatar animated={expanded} />
             <div className="min-w-0">
-              <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Guidance Captain</p>
+              <GuidanceAdvisorLabel tone="light" />
               <p className="text-sm font-medium text-brand-navy">
                 {expanded ? "What's changing?" : "Guidance before search"}
               </p>
@@ -932,7 +967,7 @@ export function DecisionAssistantDock() {
                 type="button"
                 onClick={() => setExpanded(false)}
                 className="ml-auto flex h-9 w-9 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy"
-                aria-label="Minimize Guidance Captain"
+                aria-label="Minimize Guidance Advisor"
               >
                 <Minimize2 className="h-4 w-4" strokeWidth={1.5} />
               </button>
@@ -952,44 +987,23 @@ export function DecisionAssistantDock() {
               <p className="text-[9px] uppercase tracking-[0.2em] text-brand-brass">Decision Progress</p>
               <p className="font-mono text-[10px] text-brand-graphite">{blueprintCompletion}/6</p>
             </div>
-            <div className="mt-2 grid grid-cols-6 gap-1" aria-hidden>
-              {blueprintSegments.map((segment) => {
-                const filled = completedSegments[segment.label as keyof typeof completedSegments];
-                const material = blueprintMaterials[segment.label];
-                return (
-                  <PixelProgress
-                    key={segment.label}
-                    material={material}
-                    strength={getBlueprintStrength(segment.label, Boolean(filled), leadScore)}
-                    filled={Boolean(filled)}
-                    tone="light"
-                  />
-                );
-              })}
+            <div className="mt-2">
+              <BlueprintProgressBar completion={blueprintCompletion} tone="light" />
             </div>
             {expanded ? (
-              <div className="mt-2 grid gap-1.5">
-                {blueprintSegments.map((segment) => {
-                  const filled = completedSegments[segment.label as keyof typeof completedSegments];
-                  const strength = getBlueprintStrength(segment.label, Boolean(filled), leadScore);
-                  const material = blueprintMaterials[segment.label];
-                  return (
-                    <div key={segment.label} className="grid grid-cols-[5.75rem_minmax(0,1fr)_1rem] items-center gap-2">
-                      <span className="inline-flex items-center gap-1.5 text-[9px] uppercase tracking-[0.1em] text-brand-graphite">
-                        <segment.icon className={`h-3 w-3 shrink-0 ${material.icon}`} strokeWidth={1.5} />
-                        <span className="truncate">{segment.label}</span>
-                      </span>
-                      <PixelProgress material={material} strength={strength} filled={Boolean(filled)} tone="light" />
-                      <span className="flex justify-end">
-                        {filled ? (
-                          <Check className="h-3 w-3 text-brand-navy" strokeWidth={1.7} />
-                        ) : (
-                          <Circle className="h-2.5 w-2.5 text-brand-border" strokeWidth={1.7} />
-                        )}
-                      </span>
-                    </div>
-                  );
-                })}
+              <div className="mt-2 grid grid-cols-3 gap-x-3 gap-y-1 md:grid-cols-6">
+                {blueprintSegments.map((segment) => (
+                  <span
+                    key={segment.label}
+                    className={
+                      completedSegments[segment.label as keyof typeof completedSegments]
+                        ? "truncate text-[9px] uppercase tracking-[0.1em] text-brand-navy"
+                        : "truncate text-[9px] uppercase tracking-[0.1em] text-brand-graphite/52"
+                    }
+                  >
+                    {segment.label}
+                  </span>
+                ))}
               </div>
             ) : (
               <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 sm:grid-cols-3 lg:grid-cols-6">
@@ -1017,14 +1031,24 @@ export function DecisionAssistantDock() {
         </div>
         {expanded ? (
           <div className="min-w-0 max-w-full overflow-hidden border-t border-brand-border pt-2">
-            <div ref={transcriptRef} className="max-h-[24dvh] max-w-full space-y-1.5 overflow-y-auto overflow-x-hidden pr-1 md:max-h-[14rem]">
+            <div ref={transcriptRef} className="max-h-[24dvh] max-w-full space-y-1.5 overflow-y-auto overflow-x-hidden pr-1 md:max-h-[17rem]">
               {recentMessages.map((message, index) => (
                 <div
                   key={`${message.role}-${index}`}
-                  className={message.role === "assistant" ? "mr-2 max-w-full overflow-hidden border border-brand-border bg-white p-2.5 md:mr-5" : "ml-2 max-w-full overflow-hidden bg-brand-navy p-2.5 text-brand-ivory md:ml-5"}
+                  className={
+                    message.role === "assistant"
+                      ? "mr-2 max-w-full overflow-hidden border border-brand-navy bg-brand-navy p-2.5 text-brand-ivory md:mr-5"
+                      : "ml-2 max-w-full overflow-hidden border border-brand-border bg-white p-2.5 text-brand-navy md:ml-5"
+                  }
                 >
-                  <p className="text-[9px] uppercase tracking-[0.16em] text-brand-brass">
-                    {message.role === "assistant" ? "Guidance Captain" : "You"}
+                  <p
+                    className={
+                      message.role === "assistant"
+                        ? "text-[9px] uppercase tracking-[0.16em] text-brand-brass"
+                        : "text-[9px] uppercase tracking-[0.16em] text-brand-cocoa"
+                    }
+                  >
+                    {message.role === "assistant" ? "Guidance Advisor" : "You"}
                   </p>
                   <p className="mt-1.5 whitespace-pre-line break-words text-sm leading-5">{message.text}</p>
                 </div>
@@ -1034,14 +1058,14 @@ export function DecisionAssistantDock() {
               <>
                 <form onSubmit={handleSubmit} className="mt-2 grid w-full min-w-0 max-w-full grid-cols-[minmax(0,1fr)_auto] gap-2">
                   <label className="sr-only" htmlFor="decision-assistant-input">
-                    Answer the Guidance Captain
+                    Answer the Guidance Advisor
                   </label>
                   <textarea
                     id="decision-assistant-input"
                     value={input}
                     onChange={(event) => setInput(event.target.value)}
                     onKeyDown={handleInputKeyDown}
-                    placeholder={step === "email" ? "Email for the recap..." : openingPrompts[promptIndex]}
+                    placeholder={step === "email" ? "Email or mobile for the recap..." : openingPrompts[promptIndex]}
                     rows={1}
                     className="min-h-10 w-full min-w-0 resize-none border border-brand-border bg-white px-3 py-2 text-sm text-brand-navy outline-none transition-colors placeholder:text-brand-graphite/55 focus:border-brand-brass md:min-h-11"
                   />
