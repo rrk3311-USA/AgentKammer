@@ -6,6 +6,7 @@ type PageMetadata = {
   path?: string;
   keywords?: string;
   locale?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 };
 
 function upsertMeta(attr: "name" | "property", key: string, content: string) {
@@ -37,7 +38,21 @@ function upsertLink(rel: string, href: string, hreflang?: string) {
   element.href = href;
 }
 
-export function usePageMetadata({ title, description, path, keywords, locale = "en" }: PageMetadata) {
+function upsertStructuredData(data: Record<string, unknown> | Record<string, unknown>[]) {
+  const id = "page-structured-data";
+  let element = document.getElementById(id) as HTMLScriptElement | null;
+
+  if (!element) {
+    element = document.createElement("script");
+    element.id = id;
+    element.type = "application/ld+json";
+    document.head.appendChild(element);
+  }
+
+  element.textContent = JSON.stringify(data);
+}
+
+export function usePageMetadata({ title, description, path, keywords, locale = "en", structuredData }: PageMetadata) {
   useEffect(() => {
     const fullTitle = title.includes("Agent Kammer") ? title : `${title} | Agent Kammer`;
 
@@ -59,5 +74,9 @@ export function usePageMetadata({ title, description, path, keywords, locale = "
       upsertLink("alternate", url, "en");
       upsertLink("alternate", url, "x-default");
     }
-  }, [title, description, path, keywords, locale]);
+
+    if (structuredData) {
+      upsertStructuredData(structuredData);
+    }
+  }, [title, description, path, keywords, locale, structuredData]);
 }

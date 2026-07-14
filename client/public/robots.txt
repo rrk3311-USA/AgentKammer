@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.agentkammer.com/sitemap.xml
+
+# LLM and answer-engine summary
+# https://www.agentkammer.com/llms.txt

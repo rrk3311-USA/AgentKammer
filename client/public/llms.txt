@@ -1,0 +1,36 @@
+# Agent Kammer
+
+Agent Kammer is a Manhattan housing decision platform for people deciding whether to buy, sell, rent, wait, renew, renovate, refinance, rent their current home, or do nothing yet.
+
+The site is organized around Decision Briefs, Building Intelligence, and the Guidance Captain conversation layer.
+
+## Core URLs
+
+- Homepage: https://www.agentkammer.com/
+- Decision Briefs: https://www.agentkammer.com/services
+- Buyer Advisory: https://www.agentkammer.com/buyer-advisory
+- Building Intelligence: https://www.agentkammer.com/building-reports
+- Contact: https://www.agentkammer.com/contact
+
+## High-Intent Decision Briefs
+
+- International / foreign buyers: https://www.agentkammer.com/services/foreign-buyers-new-york
+- Executive relocation: https://www.agentkammer.com/services/executive-relocation-nyc
+- Corporate relocation: https://www.agentkammer.com/services/corporate-relocation-buyers-nyc
+- Finance and hedge fund relocation: https://www.agentkammer.com/services/finance-hedge-fund-relocation-nyc
+- Physician relocation: https://www.agentkammer.com/services/physician-relocation-nyc
+- School district planning: https://www.agentkammer.com/services/school-district-planning-nyc
+- 1031 exchange buyers: https://www.agentkammer.com/services/1031-exchange-new-york
+- New development buyers: https://www.agentkammer.com/services/new-development-nyc
+- Pied-a-terre buyers: https://www.agentkammer.com/services/pied-a-terre-buyers-nyc
+- Townhouse buyers: https://www.agentkammer.com/services/townhouse-buyers-nyc
+- Retiree and senior home buyers: https://www.agentkammer.com/services/retiree-senior-home-buyers-nyc
+- Empty nester downsizing: https://www.agentkammer.com/services/empty-nester-downsizing-nyc
+- Probate and estate sales: https://www.agentkammer.com/services/probate-estate-sales-nyc
+- Widow home sales: https://www.agentkammer.com/services/widow-home-sales-nyc
+- Divorce property sales: https://www.agentkammer.com/services/divorce-property-sales-nyc
+- Pre-foreclosure and financial distress sales: https://www.agentkammer.com/services/pre-foreclosure-financial-distress-sales-nyc
+
+## Positioning
+
+Agent Kammer does not start with listings. It starts with what changed, whether anything should change, what the real options are, and which recommendation protects the client best.

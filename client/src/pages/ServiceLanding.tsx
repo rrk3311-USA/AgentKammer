@@ -28,12 +28,78 @@ function decisionQuestions(title: string) {
 export default function ServiceLanding({ slug }: { slug: string }) {
   const landing = serviceLandingMap[slug];
   const heroImage = landing ? serviceHeroImages[landing.slug] : undefined;
+  const pagePath = landing ? `/services/${landing.slug}` : "/services";
+  const pageUrl = `https://www.agentkammer.com${pagePath}`;
+  const questions = landing ? decisionQuestions(landing.navLabel) : [];
+  const structuredData = landing
+    ? [
+        {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: `${landing.title} Decision Brief`,
+          serviceType: "Manhattan real estate advisory and housing decision guidance",
+          provider: {
+            "@type": "RealEstateAgent",
+            name: "Agent Kammer",
+            url: "https://www.agentkammer.com",
+            areaServed: "New York City",
+          },
+          areaServed: {
+            "@type": "City",
+            name: "New York",
+          },
+          audience: landing.audience.map((item) => ({
+            "@type": "Audience",
+            audienceType: item,
+          })),
+          description: publicSummary(landing.summary),
+          url: pageUrl,
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Agent Kammer",
+              item: "https://www.agentkammer.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Decision Briefs",
+              item: "https://www.agentkammer.com/services",
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: landing.title,
+              item: pageUrl,
+            },
+          ],
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: questions.map((question) => ({
+            "@type": "Question",
+            name: question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Agent Kammer starts by clarifying what changed, whether action is actually needed, the constraints shaping the decision, and which next step protects the client best before showings or listings take over.",
+            },
+          })),
+        },
+      ]
+    : undefined;
 
   usePageMetadata({
     title: landing?.title ?? "Services",
     description: landing ? publicSummary(landing.summary) : "Focused advisory pages for Agent Kammer.",
-    path: landing ? `/services/${landing.slug}` : "/services",
+    path: pagePath,
     keywords: landing?.searchTerms.join(", "),
+    structuredData,
   });
 
   if (!landing) {
@@ -96,7 +162,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
             description="Agent Kammer uses the same core framework across every situation: trigger, desire, constraints, trade-offs, and recommendation. Sometimes the right recommendation is to move. Sometimes it is to do nothing. Sometimes doing nothing is the worst option."
           />
           <div className="mt-12 grid gap-5 lg:grid-cols-4">
-            {decisionQuestions(landing.navLabel).map((item, index) => (
+            {questions.map((item, index) => (
               <div key={item} className="rounded-card border border-brand-border bg-brand-ivory p-8">
                 <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">0{index + 1}</p>
                 <p className="text-sm leading-7 text-brand-graphite">{item}</p>
