@@ -12,6 +12,18 @@ import { openDecisionAssistant } from "@/lib/decision-assistant";
 
 const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brass focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy";
 
+function isPrimaryNavActive(href: string, location: string) {
+  if (href === "/building-reports") {
+    return [
+      "/building-reports",
+      "/building-reports/individual-buildings",
+      "/building-reports/neighborhood-guides",
+    ].includes(location);
+  }
+
+  return href === "/" ? location === "/" : location.startsWith(href);
+}
+
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -31,19 +43,22 @@ export function Header() {
         scrolled ? "shadow-[0_10px_24px_rgba(32,39,53,0.14)]" : "",
       )}
     >
-      <div className="mx-auto grid max-w-site grid-cols-[1fr_auto] items-center gap-4 px-6 py-4 lg:grid-cols-[auto_1fr_auto] lg:px-8 xl:px-10">
+      <div className="mx-auto grid max-w-site grid-cols-[1fr_auto] items-center gap-4 px-6 py-3.5 lg:grid-cols-[auto_minmax(24rem,1fr)_auto] lg:px-8 xl:px-10">
         <Link href="/" data-testid="link-home" className={cn("justify-self-start", focusRing)}>
           <AgentKammerHorizontalLogo variant="light" emphasis="header" />
         </Link>
 
-        <nav className="hidden items-center justify-center gap-6 lg:flex xl:gap-8 2xl:gap-10" aria-label="Primary">
+        <nav
+          className="hidden justify-self-center border border-brand-ivory/10 bg-brand-ivory/[0.035] px-4 py-2 shadow-[inset_0_1px_0_rgba(245,242,235,0.06)] lg:flex lg:items-center lg:justify-center lg:gap-1 xl:gap-2"
+          aria-label="Primary"
+        >
           {primaryNav.map((link) => {
-            const active = link.href === "/" ? location === "/" : location.startsWith(link.href);
+            const active = isPrimaryNavActive(link.href, location);
             return (
-              <Link key={link.label} href={link.href} className={cn("group relative shrink-0 px-1 py-2", focusRing)}>
+              <Link key={link.label} href={link.href} className={cn("group relative shrink-0 px-3 py-1.5 xl:px-4", focusRing)}>
                 <span
                   className={cn(
-                    "relative text-[0.78rem] uppercase tracking-[0.18em] transition-colors",
+                    "relative text-[0.9rem] capitalize tracking-[0.06em] transition-colors",
                     active ? "text-[#F2E7CB]" : "text-[#AEB8BE] group-hover:text-[#F5F2EB]",
                   )}
                 >
@@ -68,10 +83,10 @@ export function Header() {
               onClick={openDecisionAssistant}
               className="ak-header-blueprint group grid min-w-32 px-4 py-2 text-left transition-colors"
             >
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#1B2348]">Blueprint</span>
-              <span className="mt-0.5 flex items-center justify-between gap-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#111936]">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-brand-brass">Blueprint</span>
+              <span className="mt-0.5 flex items-center justify-between gap-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory">
                 Begin
-                <ArrowRight className="h-3.5 w-3.5 text-[#111936] transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+                <ArrowRight className="h-3.5 w-3.5 text-brand-ivory transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
               </span>
             </button>
           </div>
@@ -90,12 +105,12 @@ export function Header() {
         <div className="ak-header-shell border-t border-brand-brass/30 lg:hidden">
           <nav className="flex flex-col gap-1 px-6 py-6">
             {primaryNav.map((link) => {
-              const active = link.href === "/" ? location === "/" : location.startsWith(link.href);
+              const active = isPrimaryNavActive(link.href, location);
               return (
                 <Link key={link.label} href={link.href}>
                   <span
                     className={cn(
-                      "block py-2.5 text-[12px] uppercase tracking-[0.2em]",
+                      "block py-2.5 text-[13px] capitalize tracking-[0.08em]",
                       active ? "text-[#F2E7CB]" : "text-[#AEB8BE]",
                     )}
                     onClick={() => setMobileMenuOpen(false)}
@@ -113,10 +128,10 @@ export function Header() {
               }}
               className="ak-header-blueprint mt-4 grid w-full px-4 py-3 text-left"
             >
-              <span className="text-[9px] uppercase tracking-[0.24em] text-[#1B2348]">Blueprint</span>
-              <span className="mt-1 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.14em] text-[#111936]">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-brand-brass">Blueprint</span>
+              <span className="mt-1 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-ivory">
                 Begin
-                <ArrowRight className="h-4 w-4 text-[#111936]" strokeWidth={1.5} />
+                <ArrowRight className="h-4 w-4 text-brand-ivory" strokeWidth={1.5} />
               </span>
             </button>
           </nav>

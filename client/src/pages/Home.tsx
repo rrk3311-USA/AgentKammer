@@ -8,20 +8,20 @@ import { openDecisionAssistant } from "@/lib/decision-assistant";
 
 const educationBlocks = [
   {
-    title: "Your Situation",
-    text: "Start with what changed in the household, career, balance sheet, or building need before looking at inventory.",
+    title: "What's Changing?",
+    text: "Start with the life event, pressure, or uncertainty behind the move before looking at neighborhoods or inventory.",
   },
   {
-    title: "Analysis",
-    text: "Avoid over-indexing on listings, amenities, or urgency before the decision model is clear.",
+    title: "Why It Matters",
+    text: "Clarify what the change affects: daily life, timing, cost, privacy, leverage, flexibility, or long-term fit.",
   },
   {
-    title: "Housing Intelligence",
-    text: "Study building quality, resale friction, financing constraints, timing pressure, and neighborhood fit together.",
+    title: "Options and Trade-Offs",
+    text: "Compare stay, move, buy, sell, rent, renew, renovate, or wait before any listing begins to dominate the decision.",
   },
   {
-    title: "Recommendation",
-    text: "Tell the client what to do, even when the strongest recommendation is to wait, renew, renovate, or do nothing.",
+    title: "Expected-Value Decision",
+    text: "Give the recommendation that best protects the client, even when that means doing nothing for now.",
   },
 ];
 
@@ -40,14 +40,14 @@ export default function Home() {
           <div className="flex min-h-[560px] flex-col justify-start pb-32 pt-10 lg:pr-16 lg:pt-16">
             <p className="text-[10px] uppercase tracking-[0.3em] text-brand-cocoa">Agent Kammer</p>
             <p className="mt-3 text-[11px] uppercase tracking-[0.26em] text-brand-cocoa">Housing Decision Operating System</p>
-            <h1 className="mt-4 max-w-[11ch] font-display text-[clamp(3.4rem,6.4vw,6.8rem)] leading-[0.88] text-brand-navy">
-              Is it better to do nothing?
+            <h1 className="mt-4 max-w-[12ch] font-display text-[clamp(3.4rem,6.4vw,6.8rem)] leading-[0.88] text-brand-navy">
+              Start with what feels unclear.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-brand-graphite">
-              Nobody wakes up knowing whether to buy, sell, rent, wait, renew, renovate, or stay put. Agent Kammer diagnoses what changed and tells you what to do, even when the right answer is nothing.
+              Should anything change? Agent Kammer starts with life change, uncertainty, and trade-offs before discussing buildings, neighborhoods, or listings.
             </p>
             <p className="mt-4 max-w-xl text-base leading-7 text-brand-graphite/82">
-              Sometimes doing nothing is the smartest move. Sometimes it is the most expensive mistake.
+              People do not wake up wanting to tour apartments. They wake up because life changed. The job here is to diagnose that change and guide the highest expected-value decision, even if that decision is to do nothing.
             </p>
             <div className="mt-7 flex flex-wrap items-stretch gap-3">
               <button
@@ -55,10 +55,13 @@ export default function Home() {
                 onClick={openDecisionAssistant}
                 className="ak-call-button group grid min-w-[19rem] px-5 py-4 text-left transition-colors"
               >
-                <span className="text-[10px] uppercase tracking-[0.24em] text-[#D7C29A]">Guidance Captain</span>
+                <span className="text-[10px] uppercase tracking-[0.24em]">
+                  <span className="text-brand-ivory/72">Guidance</span>{" "}
+                  <span className="text-[#D7C29A]">Advisor</span>
+                </span>
                 <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
                 <span className="mt-3 flex items-center justify-between font-display text-2xl leading-none text-brand-ivory">
-                  Find out what to do
+                  Begin the decision
                   <MoveRight className="h-5 w-5 text-[#D7C29A] transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
                 </span>
               </button>
@@ -77,13 +80,14 @@ export default function Home() {
           </div>
           <div className="relative min-h-[420px] overflow-hidden bg-brand-surface lg:min-h-[640px]">
             <img
-              src="/buildings/one-high-line-06.webp"
-              alt="Architectural material detail inside a Manhattan residential building"
-              className="absolute inset-0 h-full w-full object-cover object-center saturate-[0.22] contrast-[0.96] brightness-[0.92]"
+              src="/images/how-we-think-terrace.jpg"
+              alt="Manhattan skyline viewed from a high terrace at dusk"
+              className="absolute inset-0 h-full w-full object-cover object-center saturate-[0.68] contrast-[0.98] brightness-[0.74]"
             />
-            <div className="absolute inset-0 bg-brand-ivory/10" />
-            <div className="absolute inset-x-0 bottom-0 border-t border-brand-ivory/20 bg-brand-navy/78 p-6 text-brand-ivory backdrop-blur-sm">
-              <p className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">How We Think</p>
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/92 via-brand-navy/28 to-brand-navy/10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/28 via-transparent to-brand-navy/12" />
+            <div className="absolute inset-x-0 bottom-0 border-t border-brand-ivory/18 bg-brand-navy/50 p-6 text-brand-ivory backdrop-blur-[2px]">
+              <p className="text-[10px] uppercase tracking-[0.24em] text-[#D7C29A] drop-shadow-[0_1px_4px_rgba(18,24,49,0.7)]">How We Think</p>
               <p className="mt-2 font-display text-3xl leading-none">Buildings, context, strategy.</p>
             </div>
           </div>
@@ -106,12 +110,12 @@ export default function Home() {
       <section className="border-b border-brand-border bg-brand-ivory">
         <div className="mx-auto w-full max-w-site px-6 py-16 lg:px-10 lg:py-24">
           <div className="max-w-4xl">
-            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">Decision Brief</p>
+            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">Core Principle</p>
             <h2 className="mt-4 max-w-3xl font-display text-[clamp(2.7rem,5vw,5.2rem)] leading-[0.9] text-brand-navy">
-              The answer is not always move.
+              Everything begins with why life changed.
             </h2>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-brand-graphite">
-              Each decision brief explains what changed, whether anything should change, what the real options are, and which recommendation protects the client best.
+              The site is organized around uncertainty, triggers, options, trade-offs, and judgment. Buildings and properties come later, after the decision model is clear.
             </p>
           </div>
           <div className="mt-12 grid gap-px bg-brand-border sm:grid-cols-2 lg:grid-cols-4">
