@@ -197,7 +197,7 @@ function LoginCard({
 
         <label className="mt-8 block text-xs uppercase tracking-wider text-white/45">Username</label>
         <input
-          className="mt-2 w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2.5 text-sm outline-none focus:border-[#b08d57]/
+          className="mt-2 w-full rounded-lg border border-white/10 bg-black/30 px-3 py-2.5 text-sm outline-none focus:border-[#b08d57]"
           value={user}
           onChange={(e) => setUser(e.target.value)}
           autoComplete="username"
