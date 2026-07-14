@@ -35,6 +35,7 @@ import {
 import { buildAdminDashboard } from "./lib/admin-intelligence";
 import { signalStore } from "./lib/signal-store";
 import { SIGNAL_TYPES } from "@shared/crm-pipeline";
+import { claimVisitorToMember, publicMemberHub, appendRecommendationBrief, findMemberForVisitor } from "./lib/claim-account";
 
 // Initialize Resend client only if API key is available
 let resend: Resend | null = null;
@@ -909,6 +910,47 @@ export async function registerRoutes(app: Express): Promise<void> {
         });
       }
 
+      // If this visitor already has a Decision Hub account, store recommendation briefs there.
+      const wantsBrief =
+        Array.isArray(guideTurn.actions) &&
+        guideTurn.actions.some((action: { type?: string }) =>
+          action?.type === "send_recap" || action?.type === "update_blueprint",
+        );
+      const recommendationText =
+        guideTurn.leadQualification?.summary ||
+        (typeof guideTurn.reply === "string" && guideTurn.reply.length > 80 ? guideTurn.reply : null);
+
+      if (wantsBrief || recommendationText) {
+        const member = await findMemberForVisitor(storage, {
+          visitorId,
+          email: nextProfile.email || existingMemory?.leadEmail || null,
+        });
+        if (member && recommendationText) {
+          await appendRecommendationBrief(storage, member, {
+            title: "Decision recommendation",
+            body: [
+              recommendationText,
+              nextProfile.situation ? `Situation: ${nextProfile.situation}` : null,
+              nextProfile.desire ? `Goal: ${nextProfile.desire}` : null,
+              nextProfile.constraints ? `Constraints: ${nextProfile.constraints}` : null,
+              nextProfile.tradeOff ? `Priority: ${nextProfile.tradeOff}` : null,
+              guideTurn.reply && guideTurn.reply !== recommendationText ? `Advisor note: ${guideTurn.reply}` : null,
+            ]
+              .filter(Boolean)
+              .join("\n\n"),
+            source: "decision_guide",
+            score: Math.round(guideTurn.leadQualification?.score || 0),
+            decisionMap: {
+              situation: nextProfile.situation || null,
+              desire: nextProfile.desire || null,
+              constraints: nextProfile.constraints || null,
+              tradeOff: nextProfile.tradeOff || null,
+              recommendation: recommendationText,
+            },
+          });
+        }
+      }
+
       res.json({
         visitorId,
         reply: guideTurn.reply,
@@ -1648,6 +1690,142 @@ export async function registerRoutes(app: Express): Promise<void> {
     } catch (err) {
       console.error("Signal ingest error:", err);
       res.status(500).json({ error: "Failed to record signal" });
+    }
+  });
+
+  // Claim anonymous Decision Guide session into a member Decision Hub profile
+  app.post("/api/account/claim", async (req, res) => {
+    try {
+      const email = typeof req.body?.email === "string" ? req.body.email.trim().toLowerCase() : "";
+      if (!email || !email.includes("@")) {
+        return res.status(400).json({ ok: false, error: "Valid email is required" });
+      }
+
+      const visitorId = getOrCreateVisitorId(req, res);
+      const result = await claimVisitorToMember(storage, {
+        email,
+        visitorId,
+        assistantSessionId:
+          typeof req.body?.assistantSessionId === "string" ? req.body.assistantSessionId : null,
+        signalSessionId: typeof req.body?.signalSessionId === "string" ? req.body.signalSessionId : null,
+        displayName: typeof req.body?.displayName === "string" ? req.body.displayName : null,
+      });
+
+      res.cookie("ak_member_token", result.member.accessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 1000 * 60 * 60 * 24 * 400,
+        path: "/",
+      });
+
+      signalStore.add({
+        type: "email_capture",
+        source: "decision_hub_claim",
+        path: "/account",
+        sessionId: visitorId,
+        visitorId,
+        detail: `claimed:${result.claimedConversations}`,
+      });
+
+      res.json({
+        ok: true,
+        accessToken: result.member.accessToken,
+        claimedConversations: result.claimedConversations,
+        hasChatHistory: result.hasChatHistory,
+        hub: publicMemberHub(result.member, result.decisionMap),
+      });
+    } catch (err) {
+      console.error("Account claim error:", err);
+      res.status(500).json({ ok: false, error: "Failed to create member profile" });
+    }
+  });
+
+  app.get("/api/account/hub", async (req, res) => {
+    try {
+      const header = req.headers.authorization || "";
+      const bearer = header.startsWith("Bearer ") ? header.slice(7).trim() : "";
+      const cookieToken = readCookie(req.headers.cookie, "ak_member_token");
+      const token = bearer || cookieToken || "";
+      if (!token) {
+        return res.status(401).json({ ok: false, error: "Sign in required" });
+      }
+
+      const member = await storage.getMemberProfileByAccessToken(token);
+      if (!member) {
+        return res.status(401).json({ ok: false, error: "Invalid or expired session" });
+      }
+
+      res.json({ ok: true, hub: publicMemberHub(member) });
+    } catch (err) {
+      console.error("Account hub error:", err);
+      res.status(500).json({ ok: false, error: "Failed to load Decision Hub" });
+    }
+  });
+
+  // Save a recommendation brief into the member Decision Hub account section
+  app.post("/api/account/briefs", async (req, res) => {
+    try {
+      const header = req.headers.authorization || "";
+      const bearer = header.startsWith("Bearer ") ? header.slice(7).trim() : "";
+      const cookieToken = readCookie(req.headers.cookie, "ak_member_token");
+      const visitorId = getOrCreateVisitorId(req, res);
+      const email = typeof req.body?.email === "string" ? req.body.email.trim().toLowerCase() : "";
+      const title = typeof req.body?.title === "string" ? req.body.title.trim() : "Decision recommendation brief";
+      const body = typeof req.body?.body === "string" ? req.body.body.trim() : "";
+      if (!body) {
+        return res.status(400).json({ ok: false, error: "Brief body is required" });
+      }
+
+      let member = await findMemberForVisitor(storage, {
+        accessToken: bearer || cookieToken || null,
+        email: email || null,
+        visitorId,
+      });
+
+      // Auto-create lightweight member profile when a recap email is provided
+      if (!member && email) {
+        const claimed = await claimVisitorToMember(storage, {
+          email,
+          visitorId,
+          assistantSessionId:
+            typeof req.body?.assistantSessionId === "string" ? req.body.assistantSessionId : null,
+          signalSessionId: typeof req.body?.signalSessionId === "string" ? req.body.signalSessionId : null,
+        });
+        member = claimed.member;
+        res.cookie("ak_member_token", member.accessToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "lax",
+          maxAge: 1000 * 60 * 60 * 24 * 400,
+          path: "/",
+        });
+      }
+
+      if (!member) {
+        return res.status(401).json({
+          ok: false,
+          error: "Create an account first so recommendation briefs can be saved to your Decision Hub.",
+        });
+      }
+
+      const result = await appendRecommendationBrief(storage, member, {
+        title,
+        body,
+        source: req.body?.source === "recap" ? "recap" : "manual",
+        score: typeof req.body?.score === "number" ? req.body.score : null,
+        decisionMap: req.body?.decisionMap && typeof req.body.decisionMap === "object" ? req.body.decisionMap : null,
+      });
+
+      res.json({
+        ok: true,
+        brief: result.brief,
+        hub: publicMemberHub(result.member),
+        accessToken: result.member.accessToken,
+      });
+    } catch (err) {
+      console.error("Account brief error:", err);
+      res.status(500).json({ ok: false, error: "Failed to save recommendation brief" });
     }
   });
 

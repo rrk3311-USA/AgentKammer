@@ -11,9 +11,10 @@ import {
   type ChatConversation, type InsertChatConversation,
   type TravelDealSubscriber, type InsertTravelDealSubscriber,
   type TravelDeal, type InsertTravelDeal,
+  type MemberProfile, type InsertMemberProfile,
   users, leads, contentItems, rboBuyerProfiles,
   rsoSellerProfiles, contactSubmissions, homeValueRequests, brokerRegistrations, affiliates, chatConversations,
-  travelDealSubscribers, travelDeals
+  travelDealSubscribers, travelDeals, memberProfiles
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 import { drizzle } from "drizzle-orm/neon-http";
@@ -86,6 +87,13 @@ export interface IStorage {
   createTravelDeal(deal: InsertTravelDeal): Promise<TravelDeal>;
   getAllTravelDeals(): Promise<TravelDeal[]>;
   getTravelDealById(id: string): Promise<TravelDeal | undefined>;
+
+  createMemberProfile(profile: InsertMemberProfile): Promise<MemberProfile>;
+  updateMemberProfile(id: string, updates: Partial<InsertMemberProfile>): Promise<MemberProfile | undefined>;
+  getMemberProfileByEmail(email: string): Promise<MemberProfile | undefined>;
+  getMemberProfileByAccessToken(token: string): Promise<MemberProfile | undefined>;
+  getMemberProfileById(id: string): Promise<MemberProfile | undefined>;
+  getMemberProfileByVisitorId(visitorId: string): Promise<MemberProfile | undefined>;
 }
 
 export class MemStorage implements IStorage {
@@ -515,6 +523,65 @@ export class MemStorage implements IStorage {
   async getTravelDealById(id: string): Promise<TravelDeal | undefined> {
     return this.travelDealsMap.get(id);
   }
+
+  private memberProfilesMap: Map<string, MemberProfile> = new Map();
+
+  async createMemberProfile(insertProfile: InsertMemberProfile): Promise<MemberProfile> {
+    const id = randomUUID();
+    const profile: MemberProfile = {
+      email: insertProfile.email,
+      displayName: insertProfile.displayName ?? null,
+      accessToken: insertProfile.accessToken,
+      visitorIds: insertProfile.visitorIds ?? [],
+      conversationIds: insertProfile.conversationIds ?? [],
+      leadId: insertProfile.leadId ?? null,
+      goals: insertProfile.goals ?? null,
+      vision: insertProfile.vision ?? null,
+      priorities: insertProfile.priorities ?? null,
+      decisionMap: insertProfile.decisionMap ?? null,
+      briefs: insertProfile.briefs ?? null,
+      progressStage: insertProfile.progressStage ?? "exploring",
+      lastVisitorId: insertProfile.lastVisitorId ?? null,
+      id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    this.memberProfilesMap.set(id, profile);
+    return profile;
+  }
+
+  async updateMemberProfile(id: string, updates: Partial<InsertMemberProfile>): Promise<MemberProfile | undefined> {
+    const existing = this.memberProfilesMap.get(id);
+    if (!existing) return undefined;
+    const updated: MemberProfile = {
+      ...existing,
+      ...updates,
+      visitorIds: updates.visitorIds ?? existing.visitorIds,
+      conversationIds: updates.conversationIds ?? existing.conversationIds,
+      updatedAt: new Date(),
+    };
+    this.memberProfilesMap.set(id, updated);
+    return updated;
+  }
+
+  async getMemberProfileByEmail(email: string): Promise<MemberProfile | undefined> {
+    const normalized = email.trim().toLowerCase();
+    return Array.from(this.memberProfilesMap.values()).find((p) => p.email.toLowerCase() === normalized);
+  }
+
+  async getMemberProfileByAccessToken(token: string): Promise<MemberProfile | undefined> {
+    return Array.from(this.memberProfilesMap.values()).find((p) => p.accessToken === token);
+  }
+
+  async getMemberProfileById(id: string): Promise<MemberProfile | undefined> {
+    return this.memberProfilesMap.get(id);
+  }
+
+  async getMemberProfileByVisitorId(visitorId: string): Promise<MemberProfile | undefined> {
+    return Array.from(this.memberProfilesMap.values()).find((p) =>
+      (p.visitorIds || []).includes(visitorId) || p.lastVisitorId === visitorId,
+    );
+  }
 }
 
 export class DbStorage implements IStorage {
@@ -727,6 +794,42 @@ export class DbStorage implements IStorage {
   async getTravelDealById(id: string): Promise<TravelDeal | undefined> {
     const result = await db.select().from(travelDeals).where(eq(travelDeals.id, id));
     return result[0];
+  }
+
+  async createMemberProfile(insertProfile: InsertMemberProfile): Promise<MemberProfile> {
+    const result = await db.insert(memberProfiles).values(insertProfile).returning();
+    return result[0];
+  }
+
+  async updateMemberProfile(id: string, updates: Partial<InsertMemberProfile>): Promise<MemberProfile | undefined> {
+    const result = await db
+      .update(memberProfiles)
+      .set({ ...updates, updatedAt: new Date() })
+      .where(eq(memberProfiles.id, id))
+      .returning();
+    return result[0];
+  }
+
+  async getMemberProfileByEmail(email: string): Promise<MemberProfile | undefined> {
+    const result = await db.select().from(memberProfiles).where(eq(memberProfiles.email, email.trim().toLowerCase()));
+    return result[0];
+  }
+
+  async getMemberProfileByAccessToken(token: string): Promise<MemberProfile | undefined> {
+    const result = await db.select().from(memberProfiles).where(eq(memberProfiles.accessToken, token));
+    return result[0];
+  }
+
+  async getMemberProfileById(id: string): Promise<MemberProfile | undefined> {
+    const result = await db.select().from(memberProfiles).where(eq(memberProfiles.id, id));
+    return result[0];
+  }
+
+  async getMemberProfileByVisitorId(visitorId: string): Promise<MemberProfile | undefined> {
+    const rows = await db.select().from(memberProfiles);
+    return rows.find(
+      (p: MemberProfile) => (p.visitorIds || []).includes(visitorId) || p.lastVisitorId === visitorId,
+    );
   }
 }
 

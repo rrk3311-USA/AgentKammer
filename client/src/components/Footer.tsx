@@ -94,9 +94,20 @@ export function Footer() {
       </div>
 
       <div className="border-t border-brand-brass/28 bg-brand-charcoal text-brand-ivory">
-        <div className="mx-auto flex w-full max-w-site flex-col gap-3 px-6 py-4 text-[10px] uppercase tracking-[0.18em] text-brand-ivory/78 sm:flex-row sm:items-center sm:justify-between lg:px-10">
-          <p>Copyright 2026 Agent Kammer</p>
-          <div className="flex flex-wrap gap-x-5 gap-y-2">
+        <div className="mx-auto flex w-full max-w-site flex-col gap-4 px-6 py-5 sm:flex-row sm:items-center sm:justify-between lg:px-10">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+            <p className="text-[10px] uppercase tracking-[0.18em] text-brand-ivory/78">Copyright 2026 Agent Kammer</p>
+            <Link
+              href="/account"
+              className="inline-flex w-fit items-center border border-brand-brass/55 bg-brand-brass/15 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-ivory transition-colors hover:border-brand-brass hover:bg-brand-brass/25"
+            >
+              Create my account
+            </Link>
+          </div>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-[10px] uppercase tracking-[0.18em] text-brand-ivory/78">
+            <Link href="/account" className="transition-colors hover:text-brand-brass">
+              Decision Hub
+            </Link>
             <span>Privacy</span>
             <span>Terms</span>
             <span>Licenses</span>

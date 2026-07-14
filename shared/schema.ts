@@ -380,3 +380,36 @@ export const insertPipelineOpportunitySchema = createInsertSchema(pipelineOpport
 
 export type InsertPipelineOpportunity = z.infer<typeof insertPipelineOpportunitySchema>;
 export type PipelineOpportunity = typeof pipelineOpportunities.$inferSelect;
+
+// ---------------------------------------------------------------------------
+// Decision Hub member profiles (anonymous visitor → claimed account)
+// Auth providers (Google / magic link) attach later; email + access token first.
+// ---------------------------------------------------------------------------
+
+export const memberProfiles = pgTable("member_profiles", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  email: text("email").notNull().unique(),
+  displayName: text("display_name"),
+  accessToken: text("access_token").notNull(),
+  visitorIds: text("visitor_ids").array(),
+  conversationIds: text("conversation_ids").array(),
+  leadId: varchar("lead_id"),
+  goals: text("goals"),
+  vision: text("vision"),
+  priorities: text("priorities"),
+  decisionMap: text("decision_map"),
+  briefs: text("briefs"),
+  progressStage: text("progress_stage").default("exploring"),
+  lastVisitorId: text("last_visitor_id"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const insertMemberProfileSchema = createInsertSchema(memberProfiles).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type InsertMemberProfile = z.infer<typeof insertMemberProfileSchema>;
+export type MemberProfile = typeof memberProfiles.$inferSelect;

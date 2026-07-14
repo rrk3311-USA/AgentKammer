@@ -21,6 +21,8 @@ const ServiceLanding = lazy(() => import("@/pages/ServiceLanding"));
 const Buy = lazy(() => import("@/pages/Buy"));
 const Perspectives = lazy(() => import("@/pages/Perspectives"));
 const Contact = lazy(() => import("@/pages/Contact"));
+const Account = lazy(() => import("@/pages/Account"));
+const DecisionHub = lazy(() => import("@/pages/DecisionHub"));
 const AdminPortal = lazy(() => import("@/pages/AdminPortal"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
@@ -80,6 +82,8 @@ function Router() {
       <Route path="/buyer-advisory" component={Buy} />
       <Route path="/insights" component={Perspectives} />
       <Route path="/contact" component={Contact} />
+      <Route path="/account" component={Account} />
+      <Route path="/hub" component={DecisionHub} />
       <Route path="/buildings">{() => <Redirect to="/building-reports" />}</Route>
       <Route path="/buildings/:slug/report">{() => <Redirect to="/building-reports/individual-buildings" />}</Route>
       <Route path="/buy">{() => <Redirect to="/buyer-advisory" />}</Route>
@@ -99,7 +103,7 @@ function Router() {
       <Route path="/sell">{() => <Redirect to="/contact" />}</Route>
       <Route path="/strategy">{() => <Redirect to="/buyer-advisory" />}</Route>
       <Route path="/buy-sell">{() => <Redirect to="/buyer-advisory" />}</Route>
-      <Route path="/profile">{() => <Redirect to="/about" />}</Route>
+      <Route path="/profile">{() => <Redirect to="/account" />}</Route>
       <Route path="/reverse-buyer-origination">{() => <Redirect to="/buyer-advisory" />}</Route>
       <Route path="/reverse-seller-architecture">{() => <Redirect to="/contact" />}</Route>
       <Route path="/real-estate">{() => <Redirect to="/building-reports" />}</Route>

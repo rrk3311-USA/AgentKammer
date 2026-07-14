@@ -631,12 +631,53 @@ export function DecisionAssistantDock() {
         const message = typeof errorBody?.error === "string" ? errorBody.error : "Lead handoff failed";
         throw new Error(message);
       }
+
+      // Also store the recommendation brief in the member Decision Hub account section
+      try {
+        const memberToken = window.localStorage.getItem("ak_member_token");
+        const briefResponse = await fetch("/api/account/briefs", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(memberToken ? { Authorization: `Bearer ${memberToken}` } : {}),
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            email: nextAnswers.email,
+            title: "Decision recommendation brief",
+            body: fullSummary,
+            source: "recap",
+            score: nextScore,
+            assistantSessionId: sessionId,
+            decisionMap: {
+              situation: nextAnswers.situation || null,
+              desire: nextAnswers.desire || null,
+              constraints: nextAnswers.constraints || null,
+              tradeOff: nextAnswers.tradeOff || null,
+              recommendation: leadQualification?.summary || null,
+            },
+          }),
+        });
+        if (briefResponse.ok) {
+          const briefBody = await briefResponse.json().catch(() => ({}));
+          if (briefBody?.accessToken) {
+            try {
+              window.localStorage.setItem("ak_member_token", briefBody.accessToken);
+            } catch {
+              /* ignore */
+            }
+          }
+        }
+      } catch {
+        /* hub save is secondary to lead handoff */
+      }
+
       setMessages((current) => [
         ...current,
         {
           role: "assistant",
           text: nextAnswers.email
-            ? "Sent. I’ll keep the conversation here too, so you can keep refining the decision."
+            ? "Sent. I also saved this recommendation brief in your Decision Hub account so you can reopen it anytime."
             : "Got it. I saved the decision profile and I’ll use that context when we touch base.",
         },
       ]);
