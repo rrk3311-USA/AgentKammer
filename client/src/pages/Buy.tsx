@@ -29,6 +29,7 @@ export default function Buy() {
         eyebrow="Buyer Advisory"
         title="Start with what changed, not what is for sale."
         description="Buyer Advisory begins with uncertainty and life change. The first job is to decide whether anything should happen at all, then compare options, trade-offs, and timing before discussing buildings."
+        art="decision-framework"
       />
 
       <PageSection>

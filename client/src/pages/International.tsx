@@ -20,6 +20,7 @@ export default function International() {
         eyebrow="Executive Relocation"
         title="Relocation planning for executives who need confidence without extra noise."
         description="The relocation page focuses on clients managing a move under time pressure. It keeps the tone private, polished, and service-oriented while staying inside the same visual system as the rest of the site."
+        art="relocation"
       />
 
       <PageSection className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">

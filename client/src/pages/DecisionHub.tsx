@@ -88,6 +88,7 @@ export default function DecisionHub() {
         eyebrow="Decision Hub"
         title="My Real Estate Life"
         description="Goals, vision, Decision Map, and recommendation briefs Raphi sends you — saved in your account."
+        art="decision-framework"
       />
 
       <div className="border-b border-brand-border bg-brand-ivory text-brand-ink">

@@ -19,14 +19,66 @@ export const buildingReportsNav = [
   { label: "Market Briefs", href: "/building-reports/market-briefs" },
 ] as const;
 
-type HeroArtVariant =
+export type HeroArtVariant =
   | "reports-overview"
   | "individual-buildings"
   | "neighborhood-guides"
   | "market-briefs"
+  | "decision-framework"
+  | "private-advisory"
+  | "capital-strategy"
+  | "international"
   | "professional-buyer"
+  | "military"
+  | "relocation"
+  | "family-planning"
+  | "seller-transition"
+  | "new-development"
+  | "pet-friendly"
+  | "retirement"
+  | "ownership-structure"
+  | "single-women"
   | "townhouse-buyer"
-  | "insights";
+  | "insights"
+  | "building"
+  | "contact"
+  | "brief";
+
+function resolveHeroArt(eyebrow: string, title: string, variant?: HeroArtVariant): HeroArtVariant {
+  if (variant) return variant;
+
+  const topic = `${eyebrow} ${title}`.toLowerCase();
+  if (/study the building|building reports/.test(topic) && !/individual buildings|neighborhood guides|market briefs/.test(topic)) {
+    return "reports-overview";
+  }
+  if (/individual buildings/.test(topic)) return "individual-buildings";
+  if (/neighborhood guides|upper west|upper east|tribeca|chelsea|hudson yards|financial district/.test(topic)) {
+    return "neighborhood-guides";
+  }
+  if (/market briefs/.test(topic)) return "market-briefs";
+  if (/buyer advisory|decision briefs|decision hub|create your account|my real estate life|anything should change|first question/.test(topic)) {
+    return "decision-framework";
+  }
+  if (/about|private housing guidance/.test(topic)) return "private-advisory";
+  if (/1031|finance|hedge fund/.test(topic)) return "capital-strategy";
+  if (/condo|co-op|rent vs buy/.test(topic)) return "ownership-structure";
+  if (/foreign|international|pied-a-terre/.test(topic)) return "international";
+  if (/doctor|physician|medical|professional/.test(topic)) return "professional-buyer";
+  if (/military/.test(topic)) return "military";
+  if (/relocation|relocating/.test(topic)) return "relocation";
+  if (/school|family|more space/.test(topic)) return "family-planning";
+  if (/widow|estate|probate|divorce|foreclosure|distress/.test(topic)) return "seller-transition";
+  if (/new development/.test(topic)) return "new-development";
+  if (/pet/.test(topic)) return "pet-friendly";
+  if (/retiree|senior|empty nester|downsizing|downsize/.test(topic)) return "retirement";
+  if (/single women/.test(topic)) return "single-women";
+  if (/townhouse|brownstone/.test(topic)) return "townhouse-buyer";
+  if (/insight|editorial|notes/.test(topic)) return "insights";
+  if (/contact|request a private call/.test(topic)) return "contact";
+  if (/building|report|intelligence/.test(topic)) return "building";
+  if (/brief|service|buyer|decision/.test(topic)) return "brief";
+  return "brief";
+}
 
 export function PageSection({
   className,
@@ -71,32 +123,30 @@ function ArchitecturalHeroDrawing({
   title: string;
   variant?: HeroArtVariant;
 }) {
-  const topic = `${eyebrow} ${title}`.toLowerCase();
-  const isReportOverview = variant === "reports-overview" || (/study the building|building reports/.test(topic) && !/individual buildings|neighborhood guides|market briefs/.test(topic));
-  const isIndividualBuilding = variant === "individual-buildings" || /individual buildings/.test(topic);
-  const isNeighborhoodGuide = variant === "neighborhood-guides" || /neighborhood guides/.test(topic);
-  const isMarketBrief = variant === "market-briefs" || /market briefs/.test(topic);
-  const isDecisionFramework = /buyer advisory|decision briefs|start with the decision|anything should change|first question/.test(topic);
-  const isPrivateAdvisory = /about|private housing guidance/.test(topic);
-  const isCapitalStrategy = /1031|finance|hedge fund/.test(topic);
-  const isOwnershipStructure = /condo|co-op|rent vs buy/.test(topic);
-  const isInternational = /foreign|international|pied-a-terre/.test(topic) && !isOwnershipStructure;
-  const isProfessionalBuyer =
-    variant === "professional-buyer" || /doctor|physician|medical|professional/.test(topic);
-  const isMilitary = /military/.test(topic);
-  const isRelocation = /relocation|relocating/.test(topic) && !isOwnershipStructure;
-  const isFamilyPlanning = /school|family|more space/.test(topic);
-  const isSellerTransition = /widow|estate|probate|divorce|foreclosure|distress/.test(topic);
-  const isNewDevelopment = /new development/.test(topic);
-  const isPetFriendly = /pet/.test(topic);
-  const isRetirement = /retiree|senior|empty nester|downsizing|downsize/.test(topic);
-  const isSingleWomen = /single women/.test(topic);
-  const isTownhouseBuyer =
-    variant === "townhouse-buyer" || /townhouse|brownstone/.test(topic);
-  const isInsights = variant === "insights" || /insight|editorial|notes/.test(topic);
-  const isBuilding = /building|report|intelligence/.test(topic);
-  const isContact = /contact|call|advisory/.test(topic);
-  const isBrief = /brief|service|buyer|relocation|decision/.test(topic);
+  const art = resolveHeroArt(eyebrow, title, variant);
+  const isReportOverview = art === "reports-overview";
+  const isIndividualBuilding = art === "individual-buildings";
+  const isNeighborhoodGuide = art === "neighborhood-guides";
+  const isMarketBrief = art === "market-briefs";
+  const isDecisionFramework = art === "decision-framework";
+  const isPrivateAdvisory = art === "private-advisory";
+  const isCapitalStrategy = art === "capital-strategy";
+  const isOwnershipStructure = art === "ownership-structure";
+  const isInternational = art === "international";
+  const isProfessionalBuyer = art === "professional-buyer";
+  const isMilitary = art === "military";
+  const isRelocation = art === "relocation";
+  const isFamilyPlanning = art === "family-planning";
+  const isSellerTransition = art === "seller-transition";
+  const isNewDevelopment = art === "new-development";
+  const isPetFriendly = art === "pet-friendly";
+  const isRetirement = art === "retirement";
+  const isSingleWomen = art === "single-women";
+  const isTownhouseBuyer = art === "townhouse-buyer";
+  const isInsights = art === "insights";
+  const isBuilding = art === "building";
+  const isContact = art === "contact";
+  const isBrief = art === "brief";
 
   return (
     <div className="pointer-events-none select-none" aria-hidden>

@@ -63,6 +63,7 @@ export default function Services() {
         eyebrow="Decision Briefs"
         title="The first question is whether anything should change at all."
         description="Agent Kammer organizes the site around decisions, not real estate services. Everything begins with uncertainty, life change, options, trade-offs, and judgment before any building or property enters the conversation."
+        art="decision-framework"
       />
 
       <PageSection className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)]">

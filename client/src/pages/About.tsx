@@ -29,6 +29,7 @@ export default function About() {
         eyebrow="About"
         title="Private housing guidance before the market gets loud."
         description="Agent Kammer helps clients decide what should happen next: buy, sell, rent, wait, renovate, refinance, hold, or do nothing. The work starts with judgment, building intelligence, and a clear understanding of what changed."
+        art="private-advisory"
       />
 
       <PageSection className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)]">

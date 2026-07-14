@@ -114,6 +114,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
         eyebrow={landing.eyebrow}
         title={landing.title}
         description={publicSummary(landing.summary)}
+        art={landing.art}
         kicker={
           <div>
             <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">Common Starting Points</p>

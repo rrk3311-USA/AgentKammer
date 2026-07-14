@@ -1,5 +1,8 @@
+import type { HeroArtVariant } from "@/components/site-shell";
+
 export type ServiceLanding = {
   slug: string;
+  art: HeroArtVariant;
   title: string;
   navLabel: string;
   eyebrow: string;
@@ -13,6 +16,7 @@ export type ServiceLanding = {
 export const serviceLandings: ServiceLanding[] = [
   {
     slug: "foreign-buyers-new-york",
+    art: "international",
     title: "Foreign Buyers in New York",
     navLabel: "Foreign Buyers",
     eyebrow: "High-Intent Buyer",
@@ -33,6 +37,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "pied-a-terre-buyers-nyc",
+    art: "international",
     title: "Pied-a-Terre Buyers in NYC",
     navLabel: "Pied-a-Terre Buyers",
     eyebrow: "High-Intent Buyer",
@@ -53,6 +58,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "widow-home-sales-nyc",
+    art: "seller-transition",
     title: "Widow Home Sales in New York",
     navLabel: "Widow Home Sales",
     eyebrow: "Seller Situation",
@@ -73,6 +79,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "1031-exchange-new-york",
+    art: "capital-strategy",
     title: "1031 Exchange Buyers in New York",
     navLabel: "1031 Exchange",
     eyebrow: "High-Intent Buyer",
@@ -93,6 +100,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "new-development-nyc",
+    art: "new-development",
     title: "New Development Buyers in NYC",
     navLabel: "New Development",
     eyebrow: "High-Intent Buyer",
@@ -113,6 +121,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "single-women-buying-apartment-nyc",
+    art: "single-women",
     title: "Single Women Buying Apartments in NYC",
     navLabel: "Single Women Buyers",
     eyebrow: "Demographic Buyer",
@@ -133,6 +142,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "female-doctors-professionals-buying-nyc",
+    art: "professional-buyer",
     title: "Female Doctors and Professionals Buying in NYC",
     navLabel: "Female Doctors",
     eyebrow: "Demographic Buyer",
@@ -153,6 +163,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "corporate-relocation-buyers-nyc",
+    art: "relocation",
     title: "Corporate Relocation Buyers in NYC",
     navLabel: "Corporate Relocation",
     eyebrow: "Demographic Buyer",
@@ -173,6 +184,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "rent-vs-buy-manhattan-relocation",
+    art: "ownership-structure",
     title: "Rent vs Buy After Relocating to Manhattan",
     navLabel: "Rent vs Buy Relocation",
     eyebrow: "Relocation Decision",
@@ -193,6 +205,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "executive-relocation-nyc",
+    art: "relocation",
     title: "Executive Relocation to NYC",
     navLabel: "Executive Relocation",
     eyebrow: "High-Value Relocation",
@@ -213,6 +226,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "school-district-planning-nyc",
+    art: "family-planning",
     title: "School District Planning in NYC",
     navLabel: "School Planning",
     eyebrow: "Family Move",
@@ -233,6 +247,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "military-relocation-nyc",
+    art: "military",
     title: "Military Relocation to NYC",
     navLabel: "Military Relocation",
     eyebrow: "Relocation Brief",
@@ -253,6 +268,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "physician-relocation-nyc",
+    art: "professional-buyer",
     title: "Physician Relocation to NYC",
     navLabel: "Physician Relocation",
     eyebrow: "High-Value Niche",
@@ -273,6 +289,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "finance-hedge-fund-relocation-nyc",
+    art: "capital-strategy",
     title: "Finance and Hedge Fund Relocation to NYC",
     navLabel: "Finance Relocation",
     eyebrow: "Manhattan-Specific",
@@ -293,6 +310,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "condo-vs-coop-foreign-buyers-nyc",
+    art: "ownership-structure",
     title: "Condo vs Co-op for Foreign Buyers in NYC",
     navLabel: "Condo vs Co-op",
     eyebrow: "Foreign Buyer Decision",
@@ -313,6 +331,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "pet-friendly-moves-nyc",
+    art: "pet-friendly",
     title: "Pet-Friendly Moves in NYC",
     navLabel: "Pet-Friendly Moves",
     eyebrow: "Supporting Brief",
@@ -333,6 +352,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "divorce-property-sales-nyc",
+    art: "seller-transition",
     title: "Divorce Property Sales in NYC",
     navLabel: "Divorce Sales",
     eyebrow: "Seller Situation",
@@ -353,6 +373,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "probate-estate-sales-nyc",
+    art: "seller-transition",
     title: "Probate and Estate Sales in NYC",
     navLabel: "Probate Sales",
     eyebrow: "Seller Situation",
@@ -373,6 +394,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "pre-foreclosure-financial-distress-sales-nyc",
+    art: "seller-transition",
     title: "Pre-Foreclosure and Financial Distress Sales in NYC",
     navLabel: "Pre-Foreclosure",
     eyebrow: "Seller Situation",
@@ -393,6 +415,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "empty-nester-downsizing-nyc",
+    art: "retirement",
     title: "Empty Nester Downsizing in New York",
     navLabel: "Empty Nesters",
     eyebrow: "Life-Stage Move",
@@ -413,6 +436,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "retiree-senior-home-buyers-nyc",
+    art: "retirement",
     title: "Retiree and Senior Home Buyers in NYC",
     navLabel: "Retiree Buyers",
     eyebrow: "Life-Stage Buyer",
@@ -433,6 +457,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "townhouse-buyers-nyc",
+    art: "townhouse-buyer",
     title: "Townhouse Buyers in NYC",
     navLabel: "Townhouse Buyers",
     eyebrow: "High-Intent Buyer",
@@ -453,6 +478,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "upper-west-side-buyers-nyc",
+    art: "neighborhood-guides",
     title: "Upper West Side Buyers in NYC",
     navLabel: "Upper West Side",
     eyebrow: "NYC Neighborhood",
@@ -478,6 +504,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "upper-east-side-buyers-nyc",
+    art: "neighborhood-guides",
     title: "Upper East Side Buyers in NYC",
     navLabel: "Upper East Side",
     eyebrow: "NYC Neighborhood",
@@ -503,6 +530,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "tribeca-buyers-nyc",
+    art: "neighborhood-guides",
     title: "Tribeca Buyers in NYC",
     navLabel: "Tribeca",
     eyebrow: "NYC Neighborhood",
@@ -528,6 +556,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "chelsea-buyers-nyc",
+    art: "neighborhood-guides",
     title: "Chelsea Buyers in NYC",
     navLabel: "Chelsea",
     eyebrow: "NYC Neighborhood",
@@ -553,6 +582,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "hudson-yards-buyers-nyc",
+    art: "neighborhood-guides",
     title: "Hudson Yards Buyers in NYC",
     navLabel: "Hudson Yards",
     eyebrow: "NYC Neighborhood",
@@ -578,6 +608,7 @@ export const serviceLandings: ServiceLanding[] = [
   },
   {
     slug: "financial-district-buyers-nyc",
+    art: "neighborhood-guides",
     title: "Financial District Buyers in NYC",
     navLabel: "Financial District",
     eyebrow: "NYC Neighborhood",

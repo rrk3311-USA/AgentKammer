@@ -129,6 +129,7 @@ export default function Account() {
         eyebrow="Decision Hub"
         title="Create your account"
         description="Save progress with Raphi. Your goals, Decision Map, conversations, and building reports live in one member place — so you can return months later and pick up where you left off."
+        art="decision-framework"
       />
 
       <div className="border-b border-brand-border bg-brand-ivory text-brand-ink">
