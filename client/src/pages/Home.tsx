@@ -38,8 +38,8 @@ export default function Home() {
       <section className="border-b border-brand-border bg-brand-ivory">
         <div className="mx-auto grid w-full max-w-site gap-0 px-6 py-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(340px,0.72fr)] lg:px-10">
           <div className="flex min-h-[560px] flex-col justify-start pb-32 pt-10 lg:pr-16 lg:pt-16">
-            <p className="text-[10px] uppercase tracking-[0.3em] text-brand-brass">Agent Kammer</p>
-            <p className="mt-3 text-[11px] uppercase tracking-[0.26em] text-brand-brass">Housing Decision Operating System</p>
+            <p className="text-[10px] uppercase tracking-[0.3em] text-brand-cocoa">Agent Kammer</p>
+            <p className="mt-3 text-[11px] uppercase tracking-[0.26em] text-brand-cocoa">Housing Decision Operating System</p>
             <h1 className="mt-4 max-w-[11ch] font-display text-[clamp(3.4rem,6.4vw,6.8rem)] leading-[0.88] text-brand-navy">
               Is it better to do nothing?
             </h1>
@@ -55,7 +55,7 @@ export default function Home() {
                 onClick={openDecisionAssistant}
                 className="ak-call-button group grid min-w-[19rem] px-5 py-4 text-left transition-colors"
               >
-                <span className="text-[10px] uppercase tracking-[0.24em] text-[#D7C29A]">Decision Guide</span>
+                <span className="text-[10px] uppercase tracking-[0.24em] text-[#D7C29A]">Guidance Captain</span>
                 <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
                 <span className="mt-3 flex items-center justify-between font-display text-2xl leading-none text-brand-ivory">
                   Find out what to do
@@ -64,11 +64,11 @@ export default function Home() {
               </button>
               <Link
                 href="/building-reports"
-                className="group grid min-w-[15rem] border border-brand-border bg-transparent px-5 py-4 text-left transition-colors hover:bg-brand-stone/20"
+                className="group grid min-w-[15rem] border border-brand-border bg-white/45 px-5 py-4 text-left transition-colors hover:border-brand-brass hover:bg-white"
               >
-                <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">Building Intelligence</span>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-brand-navy">Building Intelligence</span>
                 <span className="mt-3 h-px w-full bg-brand-border" aria-hidden />
-                <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em] text-brand-navy">
+                <span className="mt-3 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy">
                   Explore Building Intelligence
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
                 </span>
@@ -93,7 +93,7 @@ export default function Home() {
       <section className="border-b border-brand-border bg-brand-ivory text-brand-ink">
         <div className="mx-auto flex w-full max-w-site flex-col gap-4 px-6 py-6 lg:px-10">
           <div className="flex flex-wrap items-baseline gap-x-8 gap-y-2">
-            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-brass">Building Intelligence</p>
+            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">Building Intelligence</p>
             <p className="text-[11px] uppercase tracking-[0.18em] text-brand-graphite">ICC Commercial Building Inspector</p>
             <p className="text-[11px] uppercase tracking-[0.18em] text-brand-graphite">Blueprint Reading</p>
             <p className="text-[11px] uppercase tracking-[0.18em] text-brand-graphite">OSHA 30</p>
@@ -106,7 +106,7 @@ export default function Home() {
       <section className="border-b border-brand-border bg-brand-ivory">
         <div className="mx-auto w-full max-w-site px-6 py-16 lg:px-10 lg:py-24">
           <div className="max-w-4xl">
-            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-brass">Decision Brief</p>
+            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">Decision Brief</p>
             <h2 className="mt-4 max-w-3xl font-display text-[clamp(2.7rem,5vw,5.2rem)] leading-[0.9] text-brand-navy">
               The answer is not always move.
             </h2>
@@ -116,12 +116,33 @@ export default function Home() {
           </div>
           <div className="mt-12 grid gap-px bg-brand-border sm:grid-cols-2 lg:grid-cols-4">
             {educationBlocks.map((block) => (
-              <article key={block.title} className="bg-brand-ivory p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]">
-                <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">{block.title}</p>
+              <article key={block.title} className="bg-white p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)]">
+                <p className="text-[0.95rem] font-semibold uppercase tracking-[0.14em] text-brand-navy">{block.title}</p>
                 <p className="mt-4 text-sm leading-7 text-brand-graphite">{block.text}</p>
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="border-b border-brand-brass/30 bg-brand-navy text-brand-ivory">
+        <div className="mx-auto grid w-full max-w-site gap-8 px-6 py-16 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:px-10 lg:py-20">
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">Private Advisory</p>
+            <h2 className="mt-4 max-w-3xl font-display text-[clamp(2.4rem,4.8vw,4.75rem)] leading-[0.9] text-brand-ivory">
+              Before the footer, decide the next move.
+            </h2>
+            <p className="mt-6 max-w-2xl text-base leading-8 text-brand-ivory/76">
+              Request a call when the question is not which listing to see, but whether to move, wait, renew, renovate, sell, or do nothing.
+            </p>
+          </div>
+          <Link
+            href="/contact"
+            className="ak-call-button inline-flex items-center justify-between gap-8 px-5 py-4 text-[11px] uppercase tracking-[0.16em]"
+          >
+            Request a Call
+            <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+          </Link>
         </div>
       </section>
     </main>

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -43,7 +43,7 @@ export function SectionHeading({
 }) {
   return (
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
-      <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</p>
+      <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">{eyebrow}</p>
       <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.94] tracking-[-0.03em] text-brand-navy">
         {title}
       </h2>
@@ -138,15 +138,15 @@ export function CTA({
   label?: string;
 }) {
   return (
-    <section className="border-t border-brand-border bg-brand-ivory">
+    <section className="border-t border-brand-brass/30 bg-brand-navy text-brand-ivory">
       <PageSection className="py-16 lg:py-20">
-        <div className="grid gap-8 border border-brand-border bg-white p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_1px_0_rgba(42,52,71,0.06)] lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:p-12">
+        <div className="grid gap-8 border border-brand-ivory/14 bg-brand-ivory/[0.04] p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_16px_36px_rgba(18,24,49,0.16)] lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:p-12">
           <div>
             <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">Private Advisory</p>
-            <h2 className="mt-4 font-display text-[clamp(2rem,3.8vw,3.25rem)] leading-[0.95] tracking-[-0.03em] text-brand-navy">
+            <h2 className="mt-4 font-display text-[clamp(2rem,3.8vw,3.25rem)] leading-[0.95] tracking-[-0.03em] text-brand-ivory">
               {title}
             </h2>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-brand-graphite">{description}</p>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-brand-ivory/74">{description}</p>
           </div>
           {href === "/contact" ? (
             <div className="grid gap-3 sm:min-w-[16rem]">
@@ -162,10 +162,12 @@ export function CTA({
                 </span>
               </Link>
               <a
-                href="mailto:info@agentkammer.com"
-                className="border border-brand-border px-5 py-3 text-center text-[10px] uppercase tracking-[0.16em] text-brand-navy transition-colors hover:border-brand-brass"
+                href="/contact#request-call"
+                aria-label="Email Agent Kammer"
+                className="inline-flex items-center justify-center gap-3 border border-brand-ivory/18 px-5 py-3 text-center text-[10px] uppercase tracking-[0.16em] text-brand-ivory/82 transition-colors hover:border-brand-brass hover:text-brand-ivory"
               >
-                info@agentkammer.com
+                <Mail className="h-3.5 w-3.5 text-brand-brass" strokeWidth={1.5} />
+                Email
               </a>
             </div>
           ) : (

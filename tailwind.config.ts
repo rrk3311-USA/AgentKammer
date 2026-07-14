@@ -57,6 +57,7 @@ export default {
           stone: "#D8D1C7",
           gold: "#B08D57",
           brass: "#B08D57",
+          cocoa: "#7A5A3A",
           success: "#2F6B4F",
           error: "#B42318",
           /* legacy aliases */

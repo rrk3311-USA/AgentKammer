@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import {
   ArrowRight,
@@ -80,21 +80,19 @@ const starterPrompts = [
 
 function DecisionGuideAvatar({ animated = false }: { animated?: boolean }) {
   return (
-    <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-brand-brass/35 bg-[radial-gradient(circle_at_50%_18%,#F7F2EA_0_18%,#C8CDD2_19%_44%,#6F7884_45%_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_1px_8px_rgba(42,52,71,0.18)]">
+    <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-brand-brass/45 bg-brand-ivory p-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_1px_8px_rgba(42,52,71,0.22)]">
       <span
         className={
           animated
-            ? "absolute inset-0 animate-command-breathe rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.55),transparent_42%,rgba(176,141,87,0.28))]"
-            : "absolute inset-0 rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.55),transparent_42%,rgba(176,141,87,0.22))]"
+            ? "absolute inset-0 animate-command-breathe rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.5),transparent_42%,rgba(176,141,87,0.24))]"
+            : "absolute inset-0 rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.5),transparent_42%,rgba(176,141,87,0.18))]"
         }
       />
-      <span className="absolute top-[6px] h-[11px] w-[11px] rounded-full bg-[#D8B99E] shadow-[0_0_0_2px_rgba(245,242,235,0.55)]" />
-      <span className="absolute top-[17px] h-[17px] w-[18px] rounded-t-[9px] bg-brand-navy" />
-      <span className="absolute top-[18px] h-[15px] w-[7px] bg-brand-ivory" />
-      <span className="absolute top-[18px] left-[9px] h-[15px] w-[8px] rotate-[15deg] bg-brand-midnight" />
-      <span className="absolute top-[18px] right-[9px] h-[15px] w-[8px] rotate-[-15deg] bg-brand-midnight" />
-      <span className="absolute top-[6px] h-[4px] w-[12px] rounded-t-full bg-brand-charcoal" />
-      <span className="sr-only">Decision Guide advisor portrait</span>
+      <img
+        src="/images/decision-guide-raphi.png"
+        alt="Raphi, your Guidance Captain"
+        className="relative z-10 h-full w-full rounded-full object-cover object-[50%_20%]"
+      />
     </span>
   );
 }
@@ -202,7 +200,7 @@ function buildRecap(answers: Answers, score: number) {
   ].filter(Boolean);
 
   return [
-    "Decision Guide recommendation request",
+    "Guidance Captain recommendation request",
     "",
     `Visitor quality: ${classifyLead(score)}`,
     `Qualifier score: ${score}`,
@@ -298,6 +296,34 @@ function getBlueprintStrength(label: string, complete: boolean, leadScore: numbe
   if (label === "Budget") return Math.min(58, 12 + leadScore * 9);
   if (label === "Timeline") return Math.min(70, 16 + leadScore * 11);
   return Math.min(52, 10 + leadScore * 8);
+}
+
+function PixelProgress({
+  material,
+  strength,
+  filled,
+  tone,
+  delay = 0,
+}: {
+  material: { fill: string; track: string; icon: string };
+  strength: number;
+  filled: boolean;
+  tone: "dark" | "light";
+  delay?: number;
+}) {
+  const trackClass = tone === "dark" ? "bg-brand-ivory/20" : material.track;
+  const fillClass = filled ? material.fill : tone === "dark" ? "bg-brand-ivory/32" : "bg-brand-border/65";
+  return (
+    <span className={`ak-pixel-progress ${trackClass}`} aria-hidden>
+      <span
+        className={`ak-pixel-progress-fill animate-blueprint-fill ${fillClass}`}
+        style={{
+          animationDelay: `${delay}ms`,
+          width: `${strength}%`,
+        }}
+      />
+    </span>
+  );
 }
 
 function getTradeoffGuidance(answer: string) {
@@ -410,7 +436,7 @@ export function DecisionAssistantDock() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      text: "Hi, I'm Raphi. Before you spend time looking at listings, I’ll help you decide whether anything should change at all. Sometimes doing nothing is right. Sometimes it is the mistake. What's changing?",
+      text: "Hi, I'm Raphi. I’ll be your Guidance Captain for this decision. Before you spend time looking at listings, let’s decide whether anything should change at all. Sometimes doing nothing is right. Sometimes it is the mistake. What’s changing?",
     },
   ]);
   const transcriptRef = useRef<HTMLDivElement | null>(null);
@@ -546,12 +572,12 @@ export function DecisionAssistantDock() {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({
-          name: "Decision Guide Visitor",
+          name: "Guidance Captain Visitor",
           email: nextAnswers.email,
           timeline: nextAnswers.constraints || nextAnswers.situation,
           financing: nextAnswers.constraints,
           motivation: nextAnswers.situation,
-          communicationStyle: `Decision Guide - ${classifyLead(nextScore)}`,
+          communicationStyle: `Guidance Captain - ${classifyLead(nextScore)}`,
           conversationSummary: fullSummary,
           leadScore: nextScore,
           marketInterest: nextAnswers.desire || nextAnswers.constraints,
@@ -757,6 +783,12 @@ export function DecisionAssistantDock() {
     });
   };
 
+  const handleInputKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key !== "Enter" || event.shiftKey || event.nativeEvent.isComposing) return;
+    event.preventDefault();
+    event.currentTarget.form?.requestSubmit();
+  };
+
   const completedSegments = {
     Lifestyle: Boolean(answers.situation),
     Location: Boolean(answers.desire),
@@ -768,30 +800,21 @@ export function DecisionAssistantDock() {
   const blueprintCompletion = blueprintSegments.filter((segment) => completedSegments[segment.label as keyof typeof completedSegments]).length;
   const blueprintPercent = Math.round((blueprintCompletion / blueprintSegments.length) * 100);
   const displayMessages = mergeConsecutiveMessages(messages);
+  const recentMessages = displayMessages.slice(-2);
   const renderCompactBlueprintProgress = (tone: "dark" | "light") => (
     <span className="grid grid-cols-6 gap-1" aria-label={`Decision Blueprint progress ${blueprintCompletion} of 6`}>
       {blueprintSegments.map((segment, index) => {
         const filled = completedSegments[segment.label as keyof typeof completedSegments];
         const material = blueprintMaterials[segment.label];
         return (
-          <span
+          <PixelProgress
             key={segment.label}
-            className={tone === "dark" ? "h-2 overflow-hidden bg-brand-ivory/26" : `h-1.5 overflow-hidden ${material.track}`}
-          >
-            <span
-              className={
-                filled
-                  ? `block h-full animate-blueprint-fill ${material.fill}`
-                  : tone === "dark"
-                    ? "block h-full animate-blueprint-fill bg-brand-ivory/34"
-                    : `block h-full animate-blueprint-fill ${material.track}`
-              }
-              style={{
-                animationDelay: `${index * 65}ms`,
-                width: `${getBlueprintStrength(segment.label, Boolean(filled), leadScore)}%`,
-              }}
-            />
-          </span>
+            material={material}
+            strength={getBlueprintStrength(segment.label, Boolean(filled), leadScore)}
+            filled={Boolean(filled)}
+            tone={tone}
+            delay={index * 65}
+          />
         );
       })}
     </span>
@@ -802,7 +825,7 @@ export function DecisionAssistantDock() {
       <aside
         id="decision-assistant"
         className="fixed inset-x-0 bottom-0 z-40 border-t border-brand-brass/35 bg-brand-midnight px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 text-brand-ivory shadow-[0_-18px_38px_rgba(32,39,53,0.28)] md:px-6"
-        aria-label="Decision Guide"
+        aria-label="Guidance Captain"
       >
         <div className="mx-auto grid max-w-site gap-3 lg:grid-cols-[minmax(210px,0.25fr)_minmax(220px,0.25fr)_minmax(340px,0.5fr)] lg:items-center">
           <div className="grid gap-2">
@@ -810,7 +833,7 @@ export function DecisionAssistantDock() {
               <button type="button" onClick={() => setExpanded(true)} className="flex min-w-0 items-center gap-3 text-left">
                 <DecisionGuideAvatar />
                 <span className="min-w-0">
-                  <span className="block text-[10px] uppercase tracking-[0.22em] text-brand-brass">Decision Guide</span>
+                  <span className="block text-[10px] uppercase tracking-[0.22em] text-brand-brass">Guidance Captain</span>
                   <span className="mt-0.5 block truncate text-sm font-medium text-brand-ivory">What's changing?</span>
                 </span>
               </button>
@@ -836,15 +859,14 @@ export function DecisionAssistantDock() {
                 const filled = completedSegments[segment.label as keyof typeof completedSegments];
                 const material = blueprintMaterials[segment.label];
                 return (
-                  <span key={segment.label} className="h-1.5 overflow-hidden bg-brand-ivory/20">
-                    <span
-                      className={filled ? `block h-full animate-blueprint-fill ${material.fill}` : "block h-full animate-blueprint-fill bg-brand-ivory/34"}
-                      style={{
-                        animationDelay: `${index * 85}ms`,
-                        width: `${getBlueprintStrength(segment.label, Boolean(filled), leadScore)}%`,
-                      }}
-                    />
-                  </span>
+                  <PixelProgress
+                    key={segment.label}
+                    material={material}
+                    strength={getBlueprintStrength(segment.label, Boolean(filled), leadScore)}
+                    filled={Boolean(filled)}
+                    tone="dark"
+                    delay={index * 85}
+                  />
                 );
               })}
             </div>
@@ -861,7 +883,7 @@ export function DecisionAssistantDock() {
           </div>
           <form onSubmit={handleSubmit} className="grid grid-cols-[minmax(0,1fr)_auto] gap-2 lg:col-start-3">
             <label className="sr-only" htmlFor="decision-guide-compact-input">
-              Tell the decision guide what is changing
+              Tell the Guidance Captain what is changing
             </label>
             <input
               id="decision-guide-compact-input"
@@ -890,17 +912,17 @@ export function DecisionAssistantDock() {
       id="decision-assistant"
       className={
         expanded
-          ? "fixed inset-x-0 bottom-0 z-40 max-h-[68dvh] w-full max-w-[100vw] overflow-hidden border-t border-brand-navy/18 bg-brand-ivory p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-12px_42px_rgba(42,52,71,0.18)] md:inset-x-auto md:bottom-6 md:right-6 md:top-40 md:h-auto md:max-h-none md:min-w-[24rem] md:w-[min(30rem,34vw)] md:max-w-[42rem] md:resize-x md:overflow-auto md:border md:p-4"
+          ? "fixed inset-x-0 bottom-0 z-40 max-h-[58dvh] w-full max-w-[100vw] overflow-hidden border-t border-brand-navy/18 bg-brand-ivory p-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-12px_42px_rgba(42,52,71,0.18)] md:inset-x-auto md:bottom-6 md:right-6 md:max-h-[min(38rem,calc(100dvh-8rem))] md:min-w-[24rem] md:w-[min(30rem,34vw)] md:max-w-[42rem] md:resize-x md:overflow-auto md:border md:p-3"
           : "fixed inset-x-0 bottom-0 z-40 border-t border-brand-brass/35 bg-brand-midnight px-3 py-3 text-brand-ivory shadow-[0_-18px_38px_rgba(32,39,53,0.28)] md:px-6"
       }
-      aria-label="Decision Guide"
+      aria-label="Guidance Captain"
     >
-      <div className="mx-auto grid w-full max-w-full gap-3 overflow-hidden md:max-w-site">
-        <div className={expanded ? "grid min-w-0 gap-3 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center md:grid-cols-1" : "grid min-w-0 gap-3 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-center"}>
+      <div className="mx-auto grid w-full max-w-full gap-2 overflow-hidden md:max-w-site">
+        <div className={expanded ? "grid min-w-0 gap-2 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center md:grid-cols-1" : "grid min-w-0 gap-3 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-center"}>
           <div className="flex min-w-0 items-center gap-3">
             <DecisionGuideAvatar animated={expanded} />
             <div className="min-w-0">
-              <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Decision Guide</p>
+              <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Guidance Captain</p>
               <p className="text-sm font-medium text-brand-navy">
                 {expanded ? "What's changing?" : "Guidance before search"}
               </p>
@@ -910,7 +932,7 @@ export function DecisionAssistantDock() {
                 type="button"
                 onClick={() => setExpanded(false)}
                 className="ml-auto flex h-9 w-9 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy"
-                aria-label="Minimize decision assistant"
+                aria-label="Minimize Guidance Captain"
               >
                 <Minimize2 className="h-4 w-4" strokeWidth={1.5} />
               </button>
@@ -925,41 +947,44 @@ export function DecisionAssistantDock() {
               {renderCompactBlueprintProgress("light")}
             </div>
           ) : null}
-          <div className="hidden border border-brand-border bg-white p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_1px_0_rgba(42,52,71,0.05)] sm:block" aria-label="Decision Blueprint modules">
+          <div className="hidden border border-brand-border bg-white p-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_1px_0_rgba(42,52,71,0.05)] sm:block" aria-label="Decision Blueprint modules">
             <div className="flex items-center justify-between gap-4">
-              <p className="text-[10px] uppercase tracking-[0.22em] text-brand-brass">Decision Progress</p>
+              <p className="text-[9px] uppercase tracking-[0.2em] text-brand-brass">Decision Progress</p>
               <p className="font-mono text-[10px] text-brand-graphite">{blueprintCompletion}/6</p>
             </div>
-            <div className="mt-3 grid grid-cols-6 gap-1" aria-hidden>
+            <div className="mt-2 grid grid-cols-6 gap-1" aria-hidden>
               {blueprintSegments.map((segment) => {
                 const filled = completedSegments[segment.label as keyof typeof completedSegments];
                 const material = blueprintMaterials[segment.label];
-                return <span key={segment.label} className={filled ? `h-2 ${material.fill}` : `h-2 ${material.track}`} />;
+                return (
+                  <PixelProgress
+                    key={segment.label}
+                    material={material}
+                    strength={getBlueprintStrength(segment.label, Boolean(filled), leadScore)}
+                    filled={Boolean(filled)}
+                    tone="light"
+                  />
+                );
               })}
             </div>
             {expanded ? (
-              <div className="mt-4 grid gap-3">
+              <div className="mt-2 grid gap-1.5">
                 {blueprintSegments.map((segment) => {
                   const filled = completedSegments[segment.label as keyof typeof completedSegments];
                   const strength = getBlueprintStrength(segment.label, Boolean(filled), leadScore);
                   const material = blueprintMaterials[segment.label];
                   return (
-                    <div key={segment.label} className="grid grid-cols-[7rem_minmax(0,1fr)_1.5rem] items-center gap-3">
-                      <span className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.12em] text-brand-graphite">
-                        <segment.icon className={`h-3.5 w-3.5 shrink-0 ${material.icon}`} strokeWidth={1.5} />
+                    <div key={segment.label} className="grid grid-cols-[5.75rem_minmax(0,1fr)_1rem] items-center gap-2">
+                      <span className="inline-flex items-center gap-1.5 text-[9px] uppercase tracking-[0.1em] text-brand-graphite">
+                        <segment.icon className={`h-3 w-3 shrink-0 ${material.icon}`} strokeWidth={1.5} />
                         <span className="truncate">{segment.label}</span>
                       </span>
-                      <span className={`h-2 overflow-hidden ${material.track}`} aria-hidden>
-                        <span
-                          className={filled ? `block h-full animate-blueprint-fill ${material.fill}` : "block h-full animate-blueprint-fill bg-brand-ivory/70"}
-                          style={{ width: `${strength}%` }}
-                        />
-                      </span>
+                      <PixelProgress material={material} strength={strength} filled={Boolean(filled)} tone="light" />
                       <span className="flex justify-end">
                         {filled ? (
-                          <Check className="h-3.5 w-3.5 text-brand-navy" strokeWidth={1.7} />
+                          <Check className="h-3 w-3 text-brand-navy" strokeWidth={1.7} />
                         ) : (
-                          <Circle className="h-3 w-3 text-brand-border" strokeWidth={1.7} />
+                          <Circle className="h-2.5 w-2.5 text-brand-border" strokeWidth={1.7} />
                         )}
                       </span>
                     </div>
@@ -991,38 +1016,39 @@ export function DecisionAssistantDock() {
           ) : null}
         </div>
         {expanded ? (
-          <div className="min-w-0 max-w-full overflow-hidden border-t border-brand-border pt-3">
-            <div ref={transcriptRef} className="max-h-[34dvh] max-w-full space-y-2 overflow-y-auto overflow-x-hidden pr-1 md:max-h-[24rem] md:space-y-3">
-              {displayMessages.map((message, index) => (
+          <div className="min-w-0 max-w-full overflow-hidden border-t border-brand-border pt-2">
+            <div ref={transcriptRef} className="max-h-[24dvh] max-w-full space-y-1.5 overflow-y-auto overflow-x-hidden pr-1 md:max-h-[14rem]">
+              {recentMessages.map((message, index) => (
                 <div
                   key={`${message.role}-${index}`}
-                  className={message.role === "assistant" ? "mr-4 max-w-full overflow-hidden border border-brand-border bg-white p-3 md:mr-8" : "ml-4 max-w-full overflow-hidden bg-brand-navy p-3 text-brand-ivory md:ml-8"}
+                  className={message.role === "assistant" ? "mr-2 max-w-full overflow-hidden border border-brand-border bg-white p-2.5 md:mr-5" : "ml-2 max-w-full overflow-hidden bg-brand-navy p-2.5 text-brand-ivory md:ml-5"}
                 >
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-brand-brass">
-                    {message.role === "assistant" ? "Guide" : "You"}
+                  <p className="text-[9px] uppercase tracking-[0.16em] text-brand-brass">
+                    {message.role === "assistant" ? "Guidance Captain" : "You"}
                   </p>
-                  <p className="mt-2 whitespace-pre-line break-words text-sm leading-6">{message.text}</p>
+                  <p className="mt-1.5 whitespace-pre-line break-words text-sm leading-5">{message.text}</p>
                 </div>
               ))}
             </div>
             {step !== "sent" ? (
               <>
-                <form onSubmit={handleSubmit} className="mt-3 grid w-full min-w-0 max-w-full grid-cols-[minmax(0,1fr)_auto] gap-2">
+                <form onSubmit={handleSubmit} className="mt-2 grid w-full min-w-0 max-w-full grid-cols-[minmax(0,1fr)_auto] gap-2">
                   <label className="sr-only" htmlFor="decision-assistant-input">
-                    Answer the decision assistant
+                    Answer the Guidance Captain
                   </label>
                   <textarea
                     id="decision-assistant-input"
                     value={input}
                     onChange={(event) => setInput(event.target.value)}
+                    onKeyDown={handleInputKeyDown}
                     placeholder={step === "email" ? "Email for the recap..." : openingPrompts[promptIndex]}
                     rows={1}
-                    className="min-h-11 w-full min-w-0 resize-none border border-brand-border bg-white px-3 py-2 text-sm text-brand-navy outline-none transition-colors placeholder:text-brand-graphite/55 focus:border-brand-brass md:min-h-12"
+                    className="min-h-10 w-full min-w-0 resize-none border border-brand-border bg-white px-3 py-2 text-sm text-brand-navy outline-none transition-colors placeholder:text-brand-graphite/55 focus:border-brand-brass md:min-h-11"
                   />
                   <button
                     type="submit"
                     disabled={sending}
-                    className="inline-flex h-11 w-12 shrink-0 items-center justify-center gap-2 border border-brand-navy bg-brand-navy text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:bg-brand-navy-secondary disabled:cursor-wait disabled:opacity-70 md:h-12 md:w-auto md:px-5"
+                    className="inline-flex h-10 w-12 shrink-0 items-center justify-center gap-2 border border-brand-navy bg-brand-navy text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:bg-brand-navy-secondary disabled:cursor-wait disabled:opacity-70 md:h-11 md:w-auto md:px-4"
                   >
                     <span className="hidden md:inline">{sending ? "Sending" : "Send"}</span>
                     <ArrowRight className="h-4 w-4" strokeWidth={1.5} />

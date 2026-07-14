@@ -44,7 +44,7 @@ export function Header() {
                 <span
                   className={cn(
                     "relative text-[0.78rem] uppercase tracking-[0.18em] transition-colors",
-                    active ? "text-[#D7C29A]" : "text-[#D8D1C7]/82 group-hover:text-brand-ivory",
+                    active ? "text-[#F2E7CB]" : "text-[#AEB8BE] group-hover:text-[#F5F2EB]",
                   )}
                 >
                   {link.label}
@@ -68,10 +68,10 @@ export function Header() {
               onClick={openDecisionAssistant}
               className="ak-header-blueprint group grid min-w-32 px-4 py-2 text-left transition-colors"
             >
-              <span className="text-[9px] uppercase tracking-[0.24em] text-brand-brass">Blueprint</span>
-              <span className="mt-0.5 flex items-center justify-between gap-4 text-[11px] uppercase tracking-[0.16em] text-[#1f2851]">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-[#1B2348]">Blueprint</span>
+              <span className="mt-0.5 flex items-center justify-between gap-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#111936]">
                 Begin
-                <ArrowRight className="h-3.5 w-3.5 text-brand-brass transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+                <ArrowRight className="h-3.5 w-3.5 text-[#111936] transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
               </span>
             </button>
           </div>
@@ -96,7 +96,7 @@ export function Header() {
                   <span
                     className={cn(
                       "block py-2.5 text-[12px] uppercase tracking-[0.2em]",
-                      active ? "text-[#D7C29A]" : "text-[#D8D1C7]/84",
+                      active ? "text-[#F2E7CB]" : "text-[#AEB8BE]",
                     )}
                     onClick={() => setMobileMenuOpen(false)}
                   >
@@ -113,16 +113,17 @@ export function Header() {
               }}
               className="ak-header-blueprint mt-4 grid w-full px-4 py-3 text-left"
             >
-              <span className="text-[9px] uppercase tracking-[0.24em] text-brand-brass">Blueprint</span>
-              <span className="mt-1 flex items-center justify-between text-[11px] uppercase tracking-[0.14em] text-[#1f2851]">
+              <span className="text-[9px] uppercase tracking-[0.24em] text-[#1B2348]">Blueprint</span>
+              <span className="mt-1 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.14em] text-[#111936]">
                 Begin
-                <ArrowRight className="h-4 w-4 text-brand-brass" strokeWidth={1.5} />
+                <ArrowRight className="h-4 w-4 text-[#111936]" strokeWidth={1.5} />
               </span>
             </button>
           </nav>
         </div>
       ) : null}
 
+      <div className="ak-metal-divider" aria-hidden />
     </header>
   );
 }
