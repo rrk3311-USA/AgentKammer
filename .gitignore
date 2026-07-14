@@ -19,6 +19,8 @@ Archive.zip
 output/
 tmp/
 pdfs/
+scratch/
+.playwright-cli/
 
 # Replit / design scratch assets — keep generated_images and active logos only
 attached_assets/Pasted-*
