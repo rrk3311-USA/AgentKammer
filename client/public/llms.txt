@@ -14,6 +14,16 @@ The site is organized around Decision Briefs, Building Intelligence, and the Gui
 
 ## High-Intent Decision Briefs
 
+### NYC neighborhoods
+- Upper West Side: https://www.agentkammer.com/services/upper-west-side-buyers-nyc
+- Upper East Side: https://www.agentkammer.com/services/upper-east-side-buyers-nyc
+- Tribeca: https://www.agentkammer.com/services/tribeca-buyers-nyc
+- Chelsea: https://www.agentkammer.com/services/chelsea-buyers-nyc
+- Hudson Yards: https://www.agentkammer.com/services/hudson-yards-buyers-nyc
+- Financial District: https://www.agentkammer.com/services/financial-district-buyers-nyc
+- Neighborhood guides hub: https://www.agentkammer.com/building-reports/neighborhood-guides
+
+### Life-change and buyer niches
 - International / foreign buyers: https://www.agentkammer.com/services/foreign-buyers-new-york
 - Executive relocation: https://www.agentkammer.com/services/executive-relocation-nyc
 - Corporate relocation: https://www.agentkammer.com/services/corporate-relocation-buyers-nyc

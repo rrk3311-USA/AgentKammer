@@ -1,6 +1,8 @@
 # Agent Kammer Directory Submission Kit
 
-Last updated: 2026-07-13
+Last updated: 2026-07-14
+
+Companion execution guide: [geo-seo-execution.md](./geo-seo-execution.md)
 
 ## Goal
 

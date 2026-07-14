@@ -81,6 +81,19 @@ export const decisionNavigationGroups: DecisionNavGroup[] = [
     ],
   },
   {
+    title: "NYC Neighborhoods",
+    description: "Manhattan geography should narrow before listings expand. These Decision Briefs help choose the right district first.",
+    items: [
+      { label: "Upper West Side", href: "/services/upper-west-side-buyers-nyc" },
+      { label: "Upper East Side", href: "/services/upper-east-side-buyers-nyc" },
+      { label: "Tribeca", href: "/services/tribeca-buyers-nyc" },
+      { label: "Chelsea", href: "/services/chelsea-buyers-nyc" },
+      { label: "Hudson Yards", href: "/services/hudson-yards-buyers-nyc" },
+      { label: "Financial District", href: "/services/financial-district-buyers-nyc" },
+      { label: "All Neighborhood Guides", href: "/building-reports/neighborhood-guides" },
+    ],
+  },
+  {
     title: "Building Intelligence",
     description: "Only after the decision model is clear should the site move into buildings, neighborhoods, and market evidence.",
     items: [

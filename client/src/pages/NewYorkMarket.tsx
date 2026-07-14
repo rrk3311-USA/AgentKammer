@@ -1,25 +1,46 @@
+import { Link } from "wouter";
+import { ArrowRight } from "lucide-react";
 import { CTA, PageHero, PageSection, ReportSubnav, SectionHeading } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 const neighborhoods = [
   {
-    name: "Tribeca",
-    note: "Low-volume, high-conviction buying shaped by scale, privacy, and family-oriented floor plans.",
-  },
-  {
-    name: "West Chelsea",
-    note: "Gallery adjacency, newer product, and architecture-led demand with stronger stylistic variance.",
+    name: "Upper West Side",
+    note: "Schools, park adjacency, co-op culture, and classic residential rhythm before the listing tour expands.",
+    href: "/services/upper-west-side-buyers-nyc",
   },
   {
     name: "Upper East Side",
-    note: "Deep inventory and established service patterns with more nuanced co-op and condominium tradeoffs.",
+    note: "Deep inventory with nuanced co-op boards, service buildings, and family-oriented tradeoffs.",
+    href: "/services/upper-east-side-buyers-nyc",
+  },
+  {
+    name: "Tribeca",
+    note: "Low-volume, high-conviction buying shaped by loft scale, privacy, and family floor plans.",
+    href: "/services/tribeca-buyers-nyc",
+  },
+  {
+    name: "Chelsea",
+    note: "Gallery adjacency, newer West Chelsea product, and architecture-led demand with real lifestyle filters.",
+    href: "/services/chelsea-buyers-nyc",
+  },
+  {
+    name: "Hudson Yards",
+    note: "Amenity-heavy new development that still needs commute, carrying-cost, and use-case pressure testing.",
+    href: "/services/hudson-yards-buyers-nyc",
+  },
+  {
+    name: "Financial District",
+    note: "Commute convenience versus weekend livability across conversions, waterfront stock, and Battery Park City.",
+    href: "/services/financial-district-buyers-nyc",
   },
 ];
 
 export default function NewYorkMarket() {
   usePageMetadata({
     title: "Neighborhood Guides",
-    description: "Manhattan neighborhood guides for deciding where daily life, commute, building stock, and budget fit best.",
+    description:
+      "Manhattan neighborhood Decision Briefs for Upper West Side, Upper East Side, Tribeca, Chelsea, Hudson Yards, and the Financial District.",
     path: "/building-reports/neighborhood-guides",
   });
 
@@ -41,10 +62,18 @@ export default function NewYorkMarket() {
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {neighborhoods.map((item) => (
-            <div key={item.name} className="rounded-card border border-brand-border bg-white p-8">
+            <Link
+              key={item.name}
+              href={item.href}
+              className="group rounded-card border border-brand-border bg-white p-8 transition-colors hover:border-brand-navy/30"
+            >
               <h3 className="font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">{item.name}</h3>
               <p className="mt-4 text-sm leading-7 text-brand-graphite">{item.note}</p>
-            </div>
+              <span className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy">
+                Decision Brief
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+              </span>
+            </Link>
           ))}
         </div>
       </PageSection>

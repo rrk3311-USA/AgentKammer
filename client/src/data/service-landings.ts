@@ -451,6 +451,156 @@ export const serviceLandings: ServiceLanding[] = [
     ],
     cta: "Start a townhouse search brief in New York City.",
   },
+  {
+    slug: "upper-west-side-buyers-nyc",
+    title: "Upper West Side Buyers in NYC",
+    navLabel: "Upper West Side",
+    eyebrow: "NYC Neighborhood",
+    summary:
+      "Upper West Side decisions hinge on school convenience, park adjacency, co-op culture, building age, and whether the neighborhood supports the reason for moving—not just apartment size.",
+    searchTerms: [
+      "upper west side real estate agent",
+      "buy apartment upper west side nyc",
+      "uws condo vs coop",
+      "upper west side buyer guide",
+    ],
+    audience: [
+      "Families and professionals comparing UWS buildings around schools, parks, and daily rhythm.",
+      "Buyers weighing classic co-ops against full-service condominiums west of Central Park.",
+      "Relocating clients who want neighborhood fit before a long listing tour.",
+    ],
+    considerations: [
+      "Start with lifestyle and school logistics before comparing every listing.",
+      "Separate cosmetic apartment issues from building and board constraints.",
+      "Use building intelligence to avoid false comparisons across different eras of stock.",
+    ],
+    cta: "Start an Upper West Side decision brief.",
+  },
+  {
+    slug: "upper-east-side-buyers-nyc",
+    title: "Upper East Side Buyers in NYC",
+    navLabel: "Upper East Side",
+    eyebrow: "NYC Neighborhood",
+    summary:
+      "Upper East Side buying needs a clear filter for co-op boards, service buildings, quiet side streets, and whether the neighborhood matches commute, family, or pied-a-terre use.",
+    searchTerms: [
+      "upper east side real estate agent",
+      "buy apartment upper east side nyc",
+      "ues coop board prep",
+      "upper east side condo buyer",
+    ],
+    audience: [
+      "Buyers comparing UES co-ops, condominiums, and service-oriented buildings.",
+      "Families prioritizing schools, museums, and established residential blocks.",
+      "Clients who need board, financing, and building-rule clarity early.",
+    ],
+    considerations: [
+      "Decide ownership structure before falling for a specific apartment.",
+      "Map commute and daily life against the right micro-neighborhood.",
+      "Use building reports to understand service quality and long-term fit.",
+    ],
+    cta: "Start an Upper East Side decision brief.",
+  },
+  {
+    slug: "tribeca-buyers-nyc",
+    title: "Tribeca Buyers in NYC",
+    navLabel: "Tribeca",
+    eyebrow: "NYC Neighborhood",
+    summary:
+      "Tribeca is low-volume and high-conviction: loft scale, privacy, family floor plans, and boutique buildings matter more than browsing every downtown listing.",
+    searchTerms: [
+      "tribeca real estate agent",
+      "buy loft tribeca nyc",
+      "tribeca condo buyer guide",
+      "family apartment tribeca",
+    ],
+    audience: [
+      "Buyers seeking loft-scale living, privacy, and downtown family-oriented stock.",
+      "Clients comparing Tribeca against SoHo, Battery Park City, and West Village alternatives.",
+      "People who need help separating architecture appeal from ownership practicality.",
+    ],
+    considerations: [
+      "Filter for true loft usability versus cosmetic industrial look.",
+      "Weigh privacy and scale against price, carrying costs, and resale depth.",
+      "Confirm building operations before committing to a remote or low-frequency ownership plan.",
+    ],
+    cta: "Start a Tribeca decision brief.",
+  },
+  {
+    slug: "chelsea-buyers-nyc",
+    title: "Chelsea Buyers in NYC",
+    navLabel: "Chelsea",
+    eyebrow: "NYC Neighborhood",
+    summary:
+      "Chelsea and West Chelsea decisions turn on gallery adjacency, newer product, High Line access, and whether architecture-led inventory fits the buyer’s real lifestyle.",
+    searchTerms: [
+      "chelsea real estate agent nyc",
+      "west chelsea condo buyer",
+      "buy apartment chelsea manhattan",
+      "high line real estate buyer",
+    ],
+    audience: [
+      "Buyers comparing Chelsea classic stock with West Chelsea new development.",
+      "Clients who want design-forward buildings without losing practical ownership logic.",
+      "Relocating professionals prioritizing transit, culture, and walkability.",
+    ],
+    considerations: [
+      "Separate architectural prestige from day-to-day livability and noise.",
+      "Compare new development carrying costs against older full-service options.",
+      "Use neighborhood fit to narrow the building shortlist early.",
+    ],
+    cta: "Start a Chelsea decision brief.",
+  },
+  {
+    slug: "hudson-yards-buyers-nyc",
+    title: "Hudson Yards Buyers in NYC",
+    navLabel: "Hudson Yards",
+    eyebrow: "NYC Neighborhood",
+    summary:
+      "Hudson Yards buying should start with commute, amenities, new-development trade-offs, and whether the district’s lifestyle actually matches how the home will be used.",
+    searchTerms: [
+      "hudson yards real estate agent",
+      "buy condo hudson yards nyc",
+      "hudson yards new development buyer",
+      "west side condo hudson yards",
+    ],
+    audience: [
+      "Buyers considering Hudson Yards condominiums and amenity-heavy towers.",
+      "Corporate relocators comparing Hudson Yards with Chelsea, Midtown West, and Tribeca.",
+      "Clients evaluating new development value versus established neighborhoods.",
+    ],
+    considerations: [
+      "Pressure-test amenity value against common charges and resale depth.",
+      "Clarify commute and weekday use before chasing skyline views.",
+      "Compare Hudson Yards product against nearby alternatives with different ownership profiles.",
+    ],
+    cta: "Start a Hudson Yards decision brief.",
+  },
+  {
+    slug: "financial-district-buyers-nyc",
+    title: "Financial District Buyers in NYC",
+    navLabel: "Financial District",
+    eyebrow: "NYC Neighborhood",
+    summary:
+      "Financial District decisions depend on commute convenience, building conversion quality, weekend lifestyle, and whether FiDi living supports the buyer’s actual week—not just the office address.",
+    searchTerms: [
+      "financial district real estate agent",
+      "buy apartment financial district nyc",
+      "fidi condo buyer guide",
+      "downtown manhattan buyer agent",
+    ],
+    audience: [
+      "Finance professionals and relocators prioritizing a short downtown commute.",
+      "Buyers comparing FiDi conversions, waterfront stock, and Battery Park City options.",
+      "Clients who need clarity on weekend livability versus weekday convenience.",
+    ],
+    considerations: [
+      "Separate office-adjacent convenience from full residential quality of life.",
+      "Inspect conversion buildings carefully for layout, light, and service standards.",
+      "Decide whether FiDi is a primary home, pied-a-terre, or temporary base.",
+    ],
+    cta: "Start a Financial District decision brief.",
+  },
 ];
 
 export const serviceLandingMap = Object.fromEntries(serviceLandings.map((item) => [item.slug, item])) as Record<string, ServiceLanding>;
