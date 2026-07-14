@@ -22,7 +22,7 @@ const sectionLabels: { key: keyof PerspectiveSections; label: string }[] = [
 ];
 
 export default function PerspectiveArticle() {
-  const [, params] = useRoute("/perspectives/:slug");
+  const [, params] = useRoute("/insights/:slug");
   const article = params?.slug ? getPerspectiveBySlug(params.slug) : undefined;
 
   const marketKeywords =
@@ -31,9 +31,9 @@ export default function PerspectiveArticle() {
       : undefined;
 
   usePageMetadata({
-    title: article ? article.title : "Perspective Not Found",
+    title: article ? article.title : "Insight Not Found",
     description: article?.excerpt ?? "Manhattan observations from Agent Kammer.",
-    path: article ? `/perspectives/${article.slug}` : undefined,
+    path: article ? `/insights/${article.slug}` : undefined,
     keywords: marketKeywords,
   });
 
@@ -54,9 +54,9 @@ export default function PerspectiveArticle() {
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
       <section className="bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10 lg:py-20">
         <div className="mx-auto max-w-3xl">
-          <Link href="/perspectives">
+          <Link href="/insights">
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-champagne transition hover:text-brand-ivory">
-              ← Perspectives
+              ← Insights
             </span>
           </Link>
           <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -99,7 +99,7 @@ export default function PerspectiveArticle() {
             <h2 className="font-serif text-3xl font-semibold">{relatedExecutiveReport.title}</h2>
             <p className="mt-4 text-base leading-7 text-brand-ivory/82">{relatedExecutiveReport.executiveSummary[0]}</p>
             <Link
-              href={`/perspectives/reports/${relatedExecutiveReport.slug}`}
+              href={`/insights/reports/${relatedExecutiveReport.slug}`}
               className="mt-6 inline-block font-serif text-sm text-brand-champagne transition hover:text-brand-ivory"
             >
               Read the full report →
@@ -118,7 +118,7 @@ export default function PerspectiveArticle() {
             </p>
             <p className="mt-4 text-base leading-7 text-brand-graphite/72">{relatedReport.executiveSummary[0]}</p>
             <Link
-              href={`/buildings/${relatedReport.slug}/report`}
+              href={`/building-reports/${relatedReport.slug}`}
               className="mt-6 inline-block font-serif text-sm text-brand-midnight transition hover:text-brand-champagne-dark"
             >
               Read building report →
@@ -127,7 +127,7 @@ export default function PerspectiveArticle() {
         </section>
       ) : null}
 
-      <ContinueReadingLinks excludeHref={`/perspectives/${article.slug}`} />
+      <ContinueReadingLinks excludeHref={`/insights/${article.slug}`} />
     </main>
   );
 }

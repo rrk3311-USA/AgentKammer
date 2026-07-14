@@ -100,7 +100,7 @@ export default function Strategy() {
             <Link href="/buy">
               <Button variant="brandOutline">Buyer Advisory</Button>
             </Link>
-            <Link href="/perspectives#intelligence">
+            <Link href="/insights#intelligence">
               <Button variant="brandOutline">View Intelligence</Button>
             </Link>
           </div>

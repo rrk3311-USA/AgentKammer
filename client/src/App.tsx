@@ -24,6 +24,9 @@ const Contact = lazy(() => import("@/pages/Contact"));
 const Account = lazy(() => import("@/pages/Account"));
 const DecisionHub = lazy(() => import("@/pages/DecisionHub"));
 const AdminPortal = lazy(() => import("@/pages/AdminPortal"));
+const BuildingReportDetail = lazy(() => import("@/pages/BuildingReportDetail"));
+const PerspectiveArticle = lazy(() => import("@/pages/PerspectiveArticle"));
+const ExecutiveHousingReport = lazy(() => import("@/pages/ExecutiveHousingReport"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 function Redirect({ to }: { to: string }) {
@@ -79,13 +82,16 @@ function Router() {
       <Route path="/building-reports/individual-buildings" component={BuildingReport} />
       <Route path="/building-reports/neighborhood-guides" component={NewYorkMarket} />
       <Route path="/building-reports/market-briefs" component={Intelligence} />
+      <Route path="/building-reports/:slug" component={BuildingReportDetail} />
       <Route path="/buyer-advisory" component={Buy} />
       <Route path="/insights" component={Perspectives} />
+      <Route path="/insights/reports/:slug" component={ExecutiveHousingReport} />
+      <Route path="/insights/:slug" component={PerspectiveArticle} />
       <Route path="/contact" component={Contact} />
       <Route path="/account" component={Account} />
       <Route path="/hub" component={DecisionHub} />
       <Route path="/buildings">{() => <Redirect to="/building-reports" />}</Route>
-      <Route path="/buildings/:slug/report">{() => <Redirect to="/building-reports/individual-buildings" />}</Route>
+      <Route path="/buildings/:slug/report">{({ slug }) => <Redirect to={`/building-reports/${slug}`} />}</Route>
       <Route path="/buy">{() => <Redirect to="/buyer-advisory" />}</Route>
       <Route path="/executive-relocation">{() => <Redirect to="/services/executive-relocation-nyc" />}</Route>
       <Route path="/corporate-relocation">{() => <Redirect to="/services/corporate-relocation-buyers-nyc" />}</Route>
@@ -99,6 +105,8 @@ function Router() {
       <Route path="/new-york-market">{() => <Redirect to="/building-reports/neighborhood-guides" />}</Route>
       <Route path="/intelligence">{() => <Redirect to="/building-reports/market-briefs" />}</Route>
       <Route path="/perspectives">{() => <Redirect to="/insights" />}</Route>
+      <Route path="/perspectives/reports/:slug">{({ slug }) => <Redirect to={`/insights/reports/${slug}`} />}</Route>
+      <Route path="/perspectives/:slug">{({ slug }) => <Redirect to={`/insights/${slug}`} />}</Route>
       <Route path="/lease">{() => <Redirect to="/contact" />}</Route>
       <Route path="/sell">{() => <Redirect to="/contact" />}</Route>
       <Route path="/strategy">{() => <Redirect to="/buyer-advisory" />}</Route>

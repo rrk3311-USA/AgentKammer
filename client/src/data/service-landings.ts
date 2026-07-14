@@ -10,6 +10,7 @@ export type ServiceLanding = {
   searchTerms: string[];
   audience: string[];
   considerations: string[];
+  depthNotes?: string[];
   cta: string;
 };
 
@@ -33,6 +34,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Coordinate advisors across tax, legal, and financing considerations without losing purchase focus.",
       "Keep the process precise, discreet, and understandable for cross-border buyers.",
     ],
+    depthNotes: [
+      "Confirm whether the target buildings accept international buyers, pied-à-terre use, and remote board or closing logistics before flights are booked.",
+      "Separate FIRPTA, financing, and advisor sequencing from the building thesis so tax complexity does not force a weak address.",
+      "Prefer condominiums when co-op board timing or sponsorship risk is incompatible with a cross-border calendar.",
+    ],
     cta: "Start an international buying brief for New York.",
   },
   {
@@ -53,6 +59,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Prioritize building rules, service consistency, and practical ease of ownership.",
       "Balance prestige and location with how often the apartment will actually be used.",
       "Use building context to avoid buying a property that looks good on paper but underperforms in practice.",
+    ],
+    depthNotes: [
+      "Prioritize lock-and-leave buildings with stable service culture over maximum square footage you will rarely use.",
+      "Check building rules on short stays, sublets, and package handling before falling for a view.",
+      "Model carrying costs against actual nights in the city — prestige alone is a weak brief.",
     ],
     cta: "Build a pied-a-terre shortlist for New York City.",
   },
@@ -75,6 +86,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Coordinate pricing, prep, and communications with discretion.",
       "Translate the transaction into manageable decisions when the situation is emotionally heavy.",
     ],
+    depthNotes: [
+      "Sequence grief, estate paperwork, and market timing so the sale does not create avoidable pressure.",
+      "Decide whether staging, light renovation, or as-is pricing best protects net proceeds.",
+      "Clarify who needs to approve the path: executor, attorney, family stakeholders, or all three.",
+    ],
     cta: "Request private guidance for a New York home sale.",
   },
   {
@@ -95,6 +111,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Keep the search tightly filtered so time is spent only on viable assets.",
       "Balance exchange timing with building quality and downside protection.",
       "Coordinate advisors, paperwork, and execution without losing momentum.",
+    ],
+    depthNotes: [
+      "Lock identification and closing timelines against Manhattan inventory reality before naming replacement property.",
+      "Compare like-kind fit at the building level — not just price band — so the exchange does not force a mismatched address.",
+      "Coordinate QI, tax counsel, and building diligence on one calendar.",
     ],
     cta: "Start a 1031 exchange property brief.",
   },
@@ -117,6 +138,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Look at service model, carrying costs, and real building identity.",
       "Translate developer messaging into buyer-level decision criteria.",
     ],
+    depthNotes: [
+      "Pressure-test sponsor concessions against common charges, tax abatement cliffs, and five-year resale depth.",
+      "Compare the tower to a strong resale alternative in the same neighborhood before treating new as automatically better.",
+      "Confirm finish quality, service staffing, and actual weekday use — not amenity brochure language alone.",
+    ],
     cta: "Get a shortlist of New York development options.",
   },
   {
@@ -137,6 +163,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Prioritize building quality, access, and daily experience alongside price.",
       "Use neighborhood and service context to reduce decision fatigue.",
       "Keep the advisory process confident and pressure-free.",
+    ],
+    depthNotes: [
+      "Filter for buildings with strong door culture, lighting, and practical security without over-indexing on marketing language.",
+      "Balance autonomy and privacy against co-op board process risk when timing matters.",
+      "Keep the brief on daily life fit — commute, storage, guests — before aesthetic preference expands the tour list.",
     ],
     cta: "Build a confident NYC buying brief.",
   },
@@ -159,6 +190,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Use building-level analysis to reduce unnecessary tours and decision fatigue.",
       "Focus on daily-life fit, long-term ownership logic, and negotiation discipline.",
     ],
+    depthNotes: [
+      "Map hospital or practice commute against sleep schedule and call nights before choosing a district.",
+      "Prefer buildings that support irregular hours: reliable staff, package handling, quiet stacks.",
+      "Decide early whether ownership or a flexible lease better protects a demanding first year.",
+    ],
     cta: "Create a concise NYC purchase brief.",
   },
   {
@@ -179,6 +215,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Keep the process efficient while still giving enough neighborhood and building context.",
       "Use a purchase-first lens rather than treating relocation as automatically rental-oriented.",
       "Align the search with timing, lifestyle, and long-term ownership logic.",
+    ],
+    depthNotes: [
+      "Align start date, temporary housing, and school or partner needs before committing to a purchase timeline.",
+      "Use a two-neighborhood band when the company address and lifestyle preferences conflict.",
+      "Default to turnkey condominiums when board timing cannot absorb a compressed move.",
     ],
     cta: "Start a purchase-focused relocation brief.",
   },
@@ -201,6 +242,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Compare the cost of waiting with the risk of buying the wrong building too quickly.",
       "Use renting, buying, or waiting as strategy options instead of treating one as the default answer.",
     ],
+    depthNotes: [
+      "Price the optionality of renting for 6–18 months against the certainty cost of buying under time pressure.",
+      "Include common charges, taxes, and exit friction — not just mortgage versus rent.",
+      "If residency duration is unclear, rent-first is often the higher expected-value move.",
+    ],
     cta: "Compare rent, buy, and wait options after relocating.",
   },
   {
@@ -221,6 +267,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Start with work location, commute tolerance, service expectations, and privacy requirements.",
       "Use industry context to shape the shortlist without creating separate niche pages for every profession.",
       "Separate impressive buildings from buildings that actually fit the client's operating rhythm.",
+    ],
+    depthNotes: [
+      "Build a 30 / 60 / 90 day decision tree: temporary stay, short lease, or purchase-ready condominium.",
+      "Prioritize service consistency and lock-and-leave operations for travel-heavy weeks.",
+      "Keep the first tour week confirmatory — building shortlist prepared before arrival.",
     ],
     cta: "Create an executive relocation Decision Blueprint.",
   },
@@ -243,6 +294,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Compare school access with commute, building rules, space, and long-term resale logic.",
       "Keep the search focused enough to avoid chasing every possible neighborhood.",
     ],
+    depthNotes: [
+      "Treat school logistics as a geography filter before apartment size becomes the conversation.",
+      "Check building rules on renovations, bedrooms, and occupancy that affect family use.",
+      "Compare UES / UWS / Tribeca trade-offs explicitly rather than touring all three at once.",
+    ],
     cta: "Build a school-aware housing brief.",
   },
   {
@@ -263,6 +319,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Clarify reporting location, move window, household needs, and financing constraints early.",
       "Filter buildings and neighborhoods around practical daily-life fit, not only listing appeal.",
       "Use the Decision Blueprint to preserve context if the timeline or duty location changes.",
+    ],
+    depthNotes: [
+      "Coordinate orders, temporary lodging, and lease or purchase timing against Manhattan lead times.",
+      "Prefer buildings that tolerate compressed diligence and clear move-in operations.",
+      "Decide early whether a short lease bridge is wiser than forcing a purchase.",
     ],
     cta: "Start a military relocation housing brief.",
   },
@@ -285,6 +346,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Evaluate parking, elevators, staffing, package flow, and service reliability where they affect daily life.",
       "Keep the process efficient enough for limited availability without skipping building-level diligence.",
     ],
+    depthNotes: [
+      "Anchor the search on hospital campus commute and overnight call reality.",
+      "Filter for quiet exposures and reliable building operations over trophy amenity lists.",
+      "When schedule volatility is high, rent-first often protects better than an urgent buy.",
+    ],
     cta: "Create a physician relocation Decision Blueprint.",
   },
   {
@@ -305,6 +371,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Map work patterns against commute friction, privacy, service model, and neighborhood rhythm.",
       "Prioritize buildings that fit ownership goals and exit risk, not just prestige.",
       "Use the assistant to personalize the same relocation path for finance-specific constraints.",
+    ],
+    depthNotes: [
+      "Map Midtown, downtown, and west-side commute math against actual office days.",
+      "Separate entertaining needs from primary living needs so the brief stays honest.",
+      "Compare Tribeca, Chelsea, Hudson Yards, and FiDi as different products — not one downtown blur.",
     ],
     cta: "Build a finance-focused Manhattan housing brief.",
   },
@@ -327,6 +398,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Compare board approval risk, financing limits, sublet rules, and resale liquidity before tours.",
       "Use building rules and ownership structure as first filters, not afterthoughts.",
     ],
+    depthNotes: [
+      "Co-op board process, financing limits, and pied-à-terre rules can eliminate otherwise perfect apartments.",
+      "Condominiums usually win for cross-border timelines; co-ops can win on value when residency is stable.",
+      "Make ownership structure a gate before emotional attachment to a specific unit.",
+    ],
     cta: "Clarify condo versus co-op fit before shortlisting buildings.",
   },
   {
@@ -347,6 +423,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Check building pet policies before emotional attachment to a listing.",
       "Evaluate elevator logistics, nearby outdoor space, staff culture, and board restrictions.",
       "Fold pet requirements into the broader Decision Blueprint rather than treating them as an afterthought.",
+    ],
+    depthNotes: [
+      "Verify weight, breed, and number limits in offering plans and house rules — not broker verbal assurances.",
+      "Factor elevator culture, outdoor access, and deposit policy into building fit.",
+      "A pet-friendly claim without operational clarity is not a green light.",
     ],
     cta: "Add pet requirements to the Decision Blueprint.",
   },
@@ -369,6 +450,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Maintain professionalism and discretion in a situation where emotions can raise friction.",
       "Keep the sale strategy aligned with practical resolution rather than added stress.",
     ],
+    depthNotes: [
+      "Align legal milestones with listing strategy so pricing does not absorb avoidable conflict.",
+      "Decide whether one party remains in place temporarily and how that affects showings.",
+      "Protect net outcome with clear roles among counsel, agent, and both principals.",
+    ],
     cta: "Request guidance for a New York divorce property sale.",
   },
   {
@@ -389,6 +475,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Simplify the sale process into clear steps around valuation, preparation, and timing.",
       "Balance legal/estate logistics with market realities and pricing discipline.",
       "Keep communications steady and practical when multiple stakeholders are involved.",
+    ],
+    depthNotes: [
+      "Clarify authority, court timing, and required approvals before marketing begins.",
+      "Choose as-is versus light preparation based on net proceeds, not aesthetics alone.",
+      "Coordinate beneficiaries early to avoid late objections after a bid arrives.",
     ],
     cta: "Plan an estate or probate property sale in New York.",
   },
@@ -411,6 +502,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Keep communications discreet and focused on practical choices.",
       "Turn an urgent situation into an organized decision framework rather than reactive chaos.",
     ],
+    depthNotes: [
+      "Map hard deadlines against realistic Manhattan marketing and diligence windows.",
+      "Prioritize certainty of close when timeline risk exceeds price maximization.",
+      "Coordinate counsel and lender communication so the path stays coherent.",
+    ],
     cta: "Request a fast, private sale assessment.",
   },
   {
@@ -431,6 +527,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Treat the move as a quality-of-life shift, not only a square-footage reduction.",
       "Balance lock-and-leave convenience with character, service, and location.",
       "Coordinate timing across sale, purchase, and move logistics carefully.",
+    ],
+    depthNotes: [
+      "Define what must improve: fewer stairs, better service, lower carrying cost, or simpler operations.",
+      "Compare selling now versus renting the current home if the next purchase is unclear.",
+      "Avoid shrinking into the wrong building just to complete a move.",
     ],
     cta: "Plan a downsizing move with more clarity.",
   },
@@ -453,6 +554,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Use neighborhood and building context to simplify the field.",
       "Treat the purchase as a lifestyle decision supported by smart ownership logic.",
     ],
+    depthNotes: [
+      "Weight elevator reliability, medical access, and daily services above speculative resale narratives.",
+      "Test whether a full-service condominium beats a large classic apartment that no longer fits.",
+      "Keep the brief on livability for the next decade, not peak entertaining capacity.",
+    ],
     cta: "Create a retirement-focused New York buying brief.",
   },
   {
@@ -473,6 +579,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Weigh privacy and individuality against maintenance burden and service tradeoffs.",
       "Use block, neighborhood, and building-form context to avoid false comparisons.",
       "Frame the purchase around lifestyle fit as much as asset class.",
+    ],
+    depthNotes: [
+      "Price maintenance, facade work, and systems risk honestly against privacy and character.",
+      "Read the block as carefully as the house — noise, light, and neighboring stock matter.",
+      "Compare boutique control against full-service condominium ease before committing.",
     ],
     cta: "Start a townhouse search brief in New York City.",
   },
@@ -500,6 +611,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Separate cosmetic apartment issues from building and board constraints.",
       "Use building intelligence to avoid false comparisons across different eras of stock.",
     ],
+    depthNotes: [
+      "Use school and park logistics to narrow micro-neighborhoods before touring every classic co-op.",
+      "Separate cosmetic apartment issues from board and building constraints early.",
+      "Compare co-op value against condominium ease with a clear residency horizon.",
+    ],
     cta: "Start an Upper West Side decision brief.",
   },
   {
@@ -525,6 +641,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Decide ownership structure before falling for a specific apartment.",
       "Map commute and daily life against the right micro-neighborhood.",
       "Use building reports to understand service quality and long-term fit.",
+    ],
+    depthNotes: [
+      "Treat board readiness as part of the brief — financing, references, and timeline.",
+      "Choose avenue versus side-street living deliberately; they solve different problems.",
+      "Do not let museum-mile prestige override commute and daily service reality.",
     ],
     cta: "Start an Upper East Side decision brief.",
   },
@@ -552,6 +673,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Weigh privacy and scale against price, carrying costs, and resale depth.",
       "Confirm building operations before committing to a remote or low-frequency ownership plan.",
     ],
+    depthNotes: [
+      "Filter for true loft usability — light, layout, and quiet — versus industrial cosmetics.",
+      "Accept lower inventory velocity as a trade-off for scale and privacy.",
+      "Compare Tribeca against Battery Park City and West Village only after the brief is clear.",
+    ],
     cta: "Start a Tribeca decision brief.",
   },
   {
@@ -577,6 +703,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Separate architectural prestige from day-to-day livability and noise.",
       "Compare new development carrying costs against older full-service options.",
       "Use neighborhood fit to narrow the building shortlist early.",
+    ],
+    depthNotes: [
+      "Separate classic Chelsea texture from West Chelsea tower living before mixing tours.",
+      "Pressure-test design prestige against noise, tourists, and weekday practicality.",
+      "Use High Line adjacency as a lifestyle filter, not an automatic premium justification.",
     ],
     cta: "Start a Chelsea decision brief.",
   },
@@ -604,6 +735,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Clarify commute and weekday use before chasing skyline views.",
       "Compare Hudson Yards product against nearby alternatives with different ownership profiles.",
     ],
+    depthNotes: [
+      "Model amenities and common charges against how many days the home is actually used.",
+      "Compare Hudson Yards to Chelsea and Tribeca on neighborhood feel, not only finish quality.",
+      "Corporate relocators should confirm office gravity before paying for skyline theater.",
+    ],
     cta: "Start a Hudson Yards decision brief.",
   },
   {
@@ -629,6 +765,11 @@ export const serviceLandings: ServiceLanding[] = [
       "Separate office-adjacent convenience from full residential quality of life.",
       "Inspect conversion buildings carefully for layout, light, and service standards.",
       "Decide whether FiDi is a primary home, pied-a-terre, or temporary base.",
+    ],
+    depthNotes: [
+      "Separate weekday commute wins from weekend livability before choosing a conversion.",
+      "Inspect service standards carefully — FiDi quality varies more than brochure language suggests.",
+      "Decide primary home versus pied-à-terre use; the right building changes with that answer.",
     ],
     cta: "Start a Financial District decision brief.",
   },

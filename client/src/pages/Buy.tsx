@@ -1,10 +1,12 @@
+import { Link } from "wouter";
+import { ArrowRight } from "lucide-react";
 import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 const phases = [
   {
     title: "What's Changing?",
-    text: "Start with the trigger behind the move: work, family, pressure, timing, cost, privacy, or uncertainty.",
+    text: "Start with the trigger: new job, family need, divorce, estate, school pressure, commute, cost, privacy, or simple uncertainty that has become expensive.",
   },
   {
     title: "Why Does It Matter?",
@@ -16,10 +18,45 @@ const phases = [
   },
 ];
 
+const scenarios = [
+  {
+    title: "Executive relocating to Manhattan",
+    trigger: "Start date in 60–120 days, household in motion, limited touring bandwidth.",
+    likely: "Often rent first or buy only in turnkey condominiums with clear service culture.",
+    href: "/services/executive-relocation-nyc",
+  },
+  {
+    title: "First Manhattan purchase",
+    trigger: "Leaving a rental or another city without a building thesis yet.",
+    likely: "Neighborhood and ownership structure before apartment romance — condo vs co-op clarity early.",
+    href: "/services/condo-vs-coop-foreign-buyers-nyc",
+  },
+  {
+    title: "Family needing more space / schools",
+    trigger: "Bedroom count, school logistics, or outdoor access stopped fitting.",
+    likely: "Geography first (UWS, UES, Tribeca, etc.), then building rules that support the household.",
+    href: "/services/school-district-planning-nyc",
+  },
+  {
+    title: "Sell, keep, or wait",
+    trigger: "Life changed but the financial or emotional case for selling is unclear.",
+    likely: "Sometimes the highest-value move is to hold, renovate, or rent the current home.",
+    href: "/contact",
+  },
+];
+
+const deliverables = [
+  "Situation diagnosis: what changed and whether action is required",
+  "Options table: buy, rent, wait, renew, renovate, refinance, or stay put",
+  "Building and neighborhood filters matched to the brief",
+  "Timing posture: move now, negotiate, wait, or do nothing yet",
+];
+
 export default function Buy() {
   usePageMetadata({
     title: "Buyer Advisory",
-    description: "Buyer advisory for Manhattan clients deciding whether to buy, rent, wait, renew, renovate, or stay put.",
+    description:
+      "Buyer advisory for Manhattan clients deciding whether to buy, rent, wait, renew, renovate, or stay put — before listings take over.",
     path: "/buyer-advisory",
   });
 
@@ -36,7 +73,7 @@ export default function Buy() {
         <SectionHeading
           eyebrow="Decision Hierarchy"
           title="Diagnose the situation before prescribing the move."
-          description="The advisory path should feel like judgment, not intake. Clarify the life change, explain why it matters, compare the options, identify the trade-offs, and only then move toward properties."
+          description="Clarify the life change, explain why it matters, compare the options, identify the trade-offs, and only then move toward properties."
         />
         <div className="mt-12 border-y border-brand-border">
           {phases.map((phase, index) => (
@@ -52,23 +89,54 @@ export default function Buy() {
             </div>
           ))}
         </div>
+      </PageSection>
 
-        <div className="mt-14 grid gap-10 border-t border-brand-border pt-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">Philosophy</p>
-            <h3 className="mt-4 font-display text-[clamp(2rem,4vw,3.1rem)] leading-[0.95] tracking-[-0.03em] text-brand-navy">
-              Organize the site around why people move, not around real estate services.
-            </h3>
+      <section className="border-y border-brand-border bg-white">
+        <PageSection>
+          <SectionHeading
+            eyebrow="Common Scenarios"
+            title="How the advisory usually starts in practice."
+            description="These are not scripts. They are patterns — useful for recognizing which Decision Brief or Building Report should come next."
+          />
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            {scenarios.map((item) => (
+              <Link
+                key={item.title}
+                href={item.href}
+                className="group rounded-card border border-brand-border bg-brand-ivory p-7 transition-colors hover:border-brand-navy/30"
+              >
+                <h3 className="font-display text-3xl leading-[0.95] tracking-[-0.03em] text-brand-navy">{item.title}</h3>
+                <p className="mt-4 text-sm leading-7 text-brand-graphite">
+                  <span className="text-brand-cocoa">Trigger: </span>
+                  {item.trigger}
+                </p>
+                <p className="mt-3 text-sm leading-7 text-brand-graphite">
+                  <span className="text-brand-cocoa">Often points to: </span>
+                  {item.likely}
+                </p>
+                <span className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy">
+                  Open related path
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+                </span>
+              </Link>
+            ))}
           </div>
-          <div className="space-y-6 text-base leading-8 text-brand-graphite">
-            <p>
-              People do not wake up wanting a condo search. They wake up because life changed, the current home stopped fitting, or uncertainty became expensive.
-            </p>
-            <p>
-              Buyer advisory should therefore start with diagnosis, move through options and trade-offs, and only then narrow toward buildings, blocks, and inventory.
-            </p>
-          </div>
-        </div>
+        </PageSection>
+      </section>
+
+      <PageSection className="grid gap-10 lg:grid-cols-2">
+        <SectionHeading
+          eyebrow="What You Receive"
+          title="A Decision Brief, not a pile of listings."
+          description="The deliverable is a clear recommendation. Sometimes that recommendation is to wait. Sometimes doing nothing is the risk."
+        />
+        <ul className="space-y-4 self-center">
+          {deliverables.map((item) => (
+            <li key={item} className="border-b border-brand-border py-4 text-base leading-8 text-brand-navy last:border-b-0">
+              {item}
+            </li>
+          ))}
+        </ul>
       </PageSection>
 
       <CTA

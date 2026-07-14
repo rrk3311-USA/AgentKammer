@@ -13,7 +13,7 @@ type PerspectiveCardProps = {
 export function PerspectiveCard({ article, featured = false }: PerspectiveCardProps) {
   if (featured) {
     return (
-      <Link href={`/perspectives/${article.slug}`}>
+      <Link href={`/insights/${article.slug}`}>
         <Card className={cn(surfaceCard, "group p-8 hover:opacity-95 lg:p-10")}>
           <p className={typeSmall}>Featured</p>
           <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -35,7 +35,7 @@ export function PerspectiveCard({ article, featured = false }: PerspectiveCardPr
   }
 
   return (
-    <Link href={`/perspectives/${article.slug}`}>
+    <Link href={`/insights/${article.slug}`}>
       <Card className={cn(surfaceCard, "group flex h-full flex-col p-8 hover:opacity-95")}>
         <PerspectiveContentTag contentType={article.contentType} />
         <h3 className={cn(typeH3, "mt-4 transition-opacity duration-brand ease-brand-out group-hover:opacity-80")}>

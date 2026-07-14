@@ -24,14 +24,14 @@ function Paragraphs({ lines }: { lines: string[] }) {
 }
 
 export default function ExecutiveHousingReport() {
-  const [, params] = useRoute("/perspectives/reports/:slug");
+  const [, params] = useRoute("/insights/reports/:slug");
   const report = params?.slug ? getExecutiveHousingReportBySlug(params.slug) : undefined;
   const relatedPerspective = report?.relatedPerspectiveSlug
     ? getPerspectiveBySlug(report.relatedPerspectiveSlug)
     : undefined;
 
   const syndicationKeywords = report?.syndication.map((s) => s.searchTerms).join(" · ");
-  const reportPath = report ? `/perspectives/reports/${report.slug}` : undefined;
+  const reportPath = report ? `/insights/reports/${report.slug}` : undefined;
 
   usePageMetadata({
     title: report ? report.title : "Report Not Found",
@@ -53,9 +53,9 @@ export default function ExecutiveHousingReport() {
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
       <section className="bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10 lg:py-20">
         <div className="mx-auto max-w-3xl">
-          <Link href="/perspectives">
+          <Link href="/insights">
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-champagne transition hover:text-brand-ivory">
-              ← Perspectives
+              ← Insights
             </span>
           </Link>
           <p className="mt-6 text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-brand-ivory/62">
@@ -159,7 +159,7 @@ export default function ExecutiveHousingReport() {
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Related Perspective</p>
             <h2 className="mt-3 font-serif text-3xl font-semibold">{relatedPerspective.title}</h2>
             <p className="mt-4 text-base leading-7 text-brand-ivory/82">{relatedPerspective.excerpt}</p>
-            <Link href={`/perspectives/${relatedPerspective.slug}`} className="mt-6 inline-block font-serif text-sm text-brand-champagne transition hover:text-brand-ivory">
+            <Link href={`/insights/${relatedPerspective.slug}`} className="mt-6 inline-block font-serif text-sm text-brand-champagne transition hover:text-brand-ivory">
               Read perspective →
             </Link>
           </div>

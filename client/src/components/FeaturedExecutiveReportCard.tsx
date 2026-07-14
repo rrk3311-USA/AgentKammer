@@ -8,7 +8,7 @@ type FeaturedExecutiveReportCardProps = {
 
 export function FeaturedExecutiveReportCard({ variant = "light" }: FeaturedExecutiveReportCardProps) {
   const report = featuredExecutiveHousingReport;
-  const href = `/perspectives/reports/${report.slug}`;
+  const href = `/insights/reports/${report.slug}`;
   const isDark = variant === "dark";
 
   return (

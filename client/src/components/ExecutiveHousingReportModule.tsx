@@ -11,7 +11,7 @@ export function ExecutiveHousingReportModule({
   className = "",
 }: ExecutiveHousingReportModuleProps) {
   const report = featuredExecutiveHousingReport;
-  const href = `/perspectives/reports/${report.slug}`;
+  const href = `/insights/reports/${report.slug}`;
 
   if (variant === "compact") {
     return (

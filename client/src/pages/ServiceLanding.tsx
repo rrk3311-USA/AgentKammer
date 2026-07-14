@@ -132,8 +132,8 @@ export default function ServiceLanding({ slug }: { slug: string }) {
       <PageSection className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
         <SectionHeading
           eyebrow="Who It Helps"
-          title={`${landing.navLabel} need a decision brief, not a generic search.`}
-          description="The first step is understanding why the move, sale, purchase, or hold decision is being considered. From there, the work becomes narrower: decide whether anything should change, whether doing nothing is wise or dangerous, then decide what kind of change is worth pursuing."
+          title={`${landing.navLabel}: start with the situation, not the inventory.`}
+          description={`${publicSummary(landing.summary)} From there, the work narrows: decide whether anything should change, whether doing nothing is wise or dangerous, then decide what kind of change is worth pursuing.`}
         />
         <div className="border-y border-brand-border">
           {landing.audience.map((item, index) => (
@@ -149,8 +149,8 @@ export default function ServiceLanding({ slug }: { slug: string }) {
         <PageSection>
           <SectionHeading
             eyebrow="Decision Questions"
-            title="Before the market search starts, the first question is whether a market search should start at all."
-            description="Agent Kammer uses the same core framework across every situation: trigger, desire, constraints, trade-offs, and recommendation. Sometimes the right recommendation is to move. Sometimes it is to do nothing. Sometimes doing nothing is the worst option."
+            title={`What ${landing.navLabel.toLowerCase()} should clarify before tours begin.`}
+            description="These questions keep the brief honest. Sometimes the right recommendation is to move. Sometimes it is to wait. Sometimes doing nothing is the worst option."
           />
           <div className="mt-12 border-t border-brand-border">
             {questions.map((item, index) => (
@@ -168,9 +168,9 @@ export default function ServiceLanding({ slug }: { slug: string }) {
 
       <PageSection>
         <SectionHeading
-          eyebrow="How The Brief Is Built"
-          title="The brief becomes useful when it turns uncertainty into a clear recommendation."
-          description="The goal is not to tour more property. The goal is to remove the wrong paths early, identify whether no action is viable, then spend attention only where the decision deserves it."
+          eyebrow="Manhattan Lenses"
+          title={`How Agent Kammer reads ${landing.navLabel.toLowerCase()} decisions.`}
+          description="Each lens removes a class of false options early so attention stays on buildings, neighborhoods, and timing that actually fit."
         />
         <div className="mt-12 grid gap-8 border-t border-brand-border pt-8 lg:grid-cols-3">
           {landing.considerations.map((item, index) => (
@@ -182,6 +182,25 @@ export default function ServiceLanding({ slug }: { slug: string }) {
         </div>
       </PageSection>
 
+      {landing.depthNotes?.length ? (
+        <section className="border-y border-brand-border bg-white">
+          <PageSection>
+            <SectionHeading
+              eyebrow="What Usually Matters"
+              title="Practical Manhattan detail for this brief."
+            />
+            <div className="mt-10 space-y-6">
+              {landing.depthNotes.map((note, index) => (
+                <div key={note} className="grid gap-3 border-b border-brand-border pb-6 last:border-b-0 md:grid-cols-[52px_minmax(0,1fr)]">
+                  <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">0{index + 1}</p>
+                  <p className="text-base leading-8 text-brand-navy">{note}</p>
+                </div>
+              ))}
+            </div>
+          </PageSection>
+        </section>
+      ) : null}
+
       <section className="border-y border-brand-border bg-brand-navy text-brand-ivory">
         <PageSection className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <div className="max-w-3xl">
@@ -190,7 +209,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
               The recommendation may be to buy, sell, rent, wait, renew, renovate, refinance, rent the current home, or do nothing yet.
             </h2>
             <p className="mt-6 text-base leading-8 text-brand-ivory/72 lg:text-lg">
-              That is the difference between guidance and a sales funnel. A good housing decision starts with the life change, then tests whether action is actually the right answer.
+              For {landing.navLabel.toLowerCase()}, the first win is clarity: what changed, whether action is required, and which path protects the client best.
             </p>
           </div>
           <div className="grid gap-4">

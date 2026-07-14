@@ -69,8 +69,8 @@ export default function Services() {
       <PageSection className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1fr)]">
         <SectionHeading
           eyebrow="Core"
-          title="The site should feel like it understands the situation before it suggests a transaction."
-          description="Use these entry points when the question is still forming. The recommendation may be to buy, sell, rent, renew, wait, renovate, refinance, keep the current home, or do nothing for now."
+          title="Begin when the question is still forming."
+          description="Use these entry points before a transaction is obvious. The recommendation may be to buy, sell, rent, renew, wait, renovate, refinance, keep the current home, or do nothing for now."
         />
         <div className="rounded-card border border-brand-border bg-white p-8">
           <div className="grid gap-4">
@@ -88,7 +88,7 @@ export default function Services() {
         <PageSection>
           <SectionHeading
             eyebrow="Decision Frameworks"
-            title="The intellectual center of the brand should be the frameworks, not the listings."
+            title="Frameworks that clarify the choice before inventory takes over."
             description="Every framework starts the same way: what changed, why it matters, what options exist, what trade-offs govern the choice, and which path has the highest expected value."
           />
           <div className="mt-12 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -112,12 +112,12 @@ export default function Services() {
         <BriefLibraryBlueprint />
         <PageSection className="relative z-10">
           <div className="max-w-4xl">
-            <p className="text-[12px] uppercase tracking-[0.32em] text-brand-brass">Information Architecture</p>
+            <p className="text-[12px] uppercase tracking-[0.32em] text-brand-brass">Decision Brief Library</p>
             <h2 className="mt-6 max-w-3xl font-display text-5xl leading-[0.95] tracking-[-0.03em] text-brand-ivory md:text-6xl">
-              Organize the site around why people move, not around real estate services.
+              Start from the life change, then choose the brief that matches it.
             </h2>
             <p className="mt-8 max-w-3xl text-lg leading-8 text-brand-ivory/76">
-              Each section should help the visitor think: this understands my situation. The transaction is only the downstream outcome of a good decision.
+              Relocation, schools, foreign buyers, estate sales, downsizing, and neighborhood fit each need a different first filter. The transaction is only the outcome of a clear recommendation.
             </p>
           </div>
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
