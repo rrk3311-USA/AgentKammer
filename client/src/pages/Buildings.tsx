@@ -3,6 +3,7 @@ import { ArrowRight, Building2, Map, Newspaper } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CTA, PageHero, PageSection, ReportSubnav, SectionHeading } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
+import { buildingReports, formatBuildingReportDate } from "@/data/building-reports";
 
 const reportTypes = [
   {
@@ -28,7 +29,8 @@ const reportTypes = [
 export default function Buildings() {
   usePageMetadata({
     title: "Building Reports",
-    description: "Building Reports help Agent Kammer clients study Manhattan buildings, neighborhoods, and market timing before making a housing decision.",
+    description:
+      "Building Reports help Agent Kammer clients study Manhattan buildings, neighborhoods, and market timing before making a housing decision.",
     path: "/building-reports",
   });
 
@@ -44,9 +46,9 @@ export default function Buildings() {
 
       <PageSection>
         <SectionHeading
-          eyebrow="Section Map"
+          eyebrow="Start Here"
           title="Choose the report format that matches the uncertainty."
-          description="Some decisions require address-level detail. Others need neighborhood framing or a short market read before comparing property. The right report depends on what is still unclear."
+          description="Some decisions need address-level detail. Others need neighborhood framing or a short market read before comparing property."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {reportTypes.map((item) => (
@@ -64,23 +66,33 @@ export default function Buildings() {
       </PageSection>
 
       <section className="border-y border-brand-border bg-white">
-        <PageSection className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+        <PageSection>
           <SectionHeading
-            eyebrow="Usage"
-            title="The goal is not more information. The goal is better sequence."
-            description="Look at the wrong report too early and the search gets noisy. Start with the uncertainty: building quality, neighborhood fit, or timing leverage."
+            eyebrow="Featured Building Reports"
+            title="Published address studies."
+            description="Full reports with resident fit, trade-offs, comparables, and a bottom line — including when to walk away."
           />
-          <div className="rounded-card border border-brand-border bg-brand-ivory p-8">
-            <p className="font-display text-3xl leading-[0.95] tracking-[-0.03em] text-brand-navy">
-              A strong building brief should tell you whether to keep looking, go deeper, negotiate harder, wait, or walk away.
-            </p>
-            <Link href="/building-reports/individual-buildings" className="mt-8 inline-flex max-w-full">
-              <Button variant="brand" className="w-full max-w-full gap-2 whitespace-normal text-center uppercase tracking-nav sm:w-auto sm:whitespace-nowrap">
-                Start with Buildings
-                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-              </Button>
-            </Link>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {buildingReports.map((report) => (
+              <Link
+                key={report.slug}
+                href={`/building-reports/${report.slug}`}
+                className="rounded-card border border-brand-border bg-brand-ivory p-7 transition-colors hover:border-brand-navy/30"
+              >
+                <p className="text-[11px] uppercase tracking-[0.18em] text-brand-brass">
+                  {formatBuildingReportDate(report.publishedAt)} · {report.readMinutes} min
+                </p>
+                <h3 className="mt-4 font-display text-3xl text-brand-navy">{report.buildingName}</h3>
+                <p className="mt-3 text-sm leading-7 text-brand-graphite">{report.executiveSummary[0]}</p>
+              </Link>
+            ))}
           </div>
+          <Link href="/building-reports/individual-buildings" className="mt-8 inline-flex">
+            <Button variant="brand" className="gap-2 uppercase tracking-nav">
+              All individual buildings
+              <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+            </Button>
+          </Link>
         </PageSection>
       </section>
 
