@@ -38,6 +38,7 @@ export default function Buildings() {
         eyebrow="Building Reports"
         title="Study the building before the showing."
         description="Building Reports help separate attractive listings from durable decisions. Use them to understand address quality, neighborhood fit, timing risk, and whether a property deserves your attention at all."
+        art="reports-overview"
       />
       <ReportSubnav />
 

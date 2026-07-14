@@ -33,6 +33,7 @@ export default function BuildingReport() {
         eyebrow="Building Reports"
         title="Individual Buildings"
         description="A single address can look perfect online and still be the wrong decision. Individual building reports clarify architecture, service model, resale logic, board or sponsor dynamics, and whether the building fits the brief."
+        art="individual-buildings"
       />
       <ReportSubnav />
 

@@ -31,6 +31,7 @@ export default function Perspectives() {
         eyebrow="Insights"
         title="Editorial notes that connect the market to practical decisions."
         description="Short observations for people who need more than listing alerts: building quality, neighborhood fit, timing pressure, and the trade-offs that shape a better housing decision."
+        art="insights"
       />
 
       <PageSection>

@@ -29,6 +29,7 @@ export default function NewYorkMarket() {
         eyebrow="Building Reports"
         title="Neighborhood Guides"
         description="Neighborhood fit determines the life around the apartment. These guides help compare commute, schools, building stock, street rhythm, service access, and whether the area supports the reason for moving."
+        art="neighborhood-guides"
       />
       <ReportSubnav />
 

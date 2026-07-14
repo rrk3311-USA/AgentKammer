@@ -20,6 +20,7 @@ export default function Intelligence() {
         eyebrow="Building Reports"
         title="Market Briefs"
         description="Market briefs translate pricing pressure, inventory quality, buyer behavior, and timing risk into practical guidance: move now, negotiate, wait, widen the search, or do nothing yet."
+        art="market-briefs"
       />
       <ReportSubnav />
 
