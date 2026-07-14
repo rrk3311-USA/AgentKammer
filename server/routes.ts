@@ -25,6 +25,16 @@ import nodemailer from "nodemailer";
 import type { Transporter } from "nodemailer";
 import { getMarketStatistics, getActiveListings, getRentalListings } from "./lib/rentcast";
 import { notifyContactSubmission } from "./contact-notify";
+import { buildDecisionGuideSystemPrompt } from "./prompts/decision-guide";
+import { retrieveDecisionGuideKnowledge } from "./lib/decision-guide-knowledge";
+import {
+  buildFlatProfileFromStructured,
+  normalizeStructuredProfile,
+  updateStructuredProfile,
+} from "./lib/decision-guide-profile";
+import { buildAdminDashboard } from "./lib/admin-intelligence";
+import { signalStore } from "./lib/signal-store";
+import { SIGNAL_TYPES } from "@shared/crm-pipeline";
 
 // Initialize Resend client only if API key is available
 let resend: Resend | null = null;
@@ -51,8 +61,9 @@ const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 const EMAIL_USER = process.env.EMAIL_USER;
 const EMAIL_PASS = process.env.EMAIL_PASS;
-const ADMIN_USER = process.env.ADMIN_USER;
-const ADMIN_PASS = process.env.ADMIN_PASS;
+// Local defaults so /admin works before production secrets are set.
+const ADMIN_USER = process.env.ADMIN_USER || (process.env.NODE_ENV === "production" ? "" : "admin");
+const ADMIN_PASS = process.env.ADMIN_PASS || (process.env.NODE_ENV === "production" ? "" : "kammer");
 
 let emailTransporter: Transporter | null = null;
 if (EMAIL_USER && EMAIL_PASS) {
@@ -150,8 +161,14 @@ function notifyLead(data: {
   notifyEmailNewLead(data);
 }
 
-// Admin auth middleware
+// Admin auth middleware (HTTP Basic)
 function requireAdmin(req: any, res: any, next: any) {
+  if (!ADMIN_USER || !ADMIN_PASS) {
+    return res.status(503).json({
+      error: "Admin credentials not configured. Set ADMIN_USER and ADMIN_PASS.",
+    });
+  }
+
   const authHeader = req.headers.authorization || "";
   const [scheme, encoded] = authHeader.split(" ");
 
@@ -161,7 +178,9 @@ function requireAdmin(req: any, res: any, next: any) {
   }
 
   const decoded = Buffer.from(encoded, "base64").toString("utf8");
-  const [user, pass] = decoded.split(":");
+  const colon = decoded.indexOf(":");
+  const user = colon >= 0 ? decoded.slice(0, colon) : decoded;
+  const pass = colon >= 0 ? decoded.slice(colon + 1) : "";
 
   if (user === ADMIN_USER && pass === ADMIN_PASS) {
     return next();
@@ -543,10 +562,15 @@ const decisionGuideProfileSchema = z.object({
   tradeOff: z.string().optional(),
   timeline: z.string().optional(),
   budget: z.string().optional(),
+  financingStatus: z.string().optional(),
   industry: z.string().optional(),
   household: z.string().optional(),
+  geography: z.string().optional(),
   neighborhoods: z.string().optional(),
   buildingPreferences: z.string().optional(),
+  dealBreakers: z.string().optional(),
+  decisionMakers: z.string().optional(),
+  confidenceReadiness: z.string().optional(),
   buildingsViewed: z.string().optional(),
   reportsViewed: z.string().optional(),
   questionsAsked: z.string().optional(),
@@ -584,10 +608,15 @@ const decisionGuideProfileKeys = [
   "tradeOff",
   "timeline",
   "budget",
+  "financingStatus",
   "industry",
   "household",
+  "geography",
   "neighborhoods",
   "buildingPreferences",
+  "dealBreakers",
+  "decisionMakers",
+  "confidenceReadiness",
   "buildingsViewed",
   "reportsViewed",
   "questionsAsked",
@@ -726,6 +755,14 @@ function calculateLeadScore(leadData: LeadData): number {
 }
 
 export async function registerRoutes(app: Express): Promise<void> {
+  // Keep the internal portal out of search indexes even if a crawler ignores robots.txt.
+  app.use((req, res, next) => {
+    if (req.path === "/admin" || req.path.startsWith("/admin/") || req.path.startsWith("/api/admin")) {
+      res.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
+    }
+    next();
+  });
+
   const sessionLeads = new Map<string, { leadId?: string; data: LeadData; notified?: boolean }>();
 
   app.post("/api/decision-guide/chat", async (req, res) => {
@@ -734,61 +771,36 @@ export async function registerRoutes(app: Express): Promise<void> {
       const parsed = decisionGuideChatSchema.parse(req.body);
       const memoryKey = visitorId;
       const existingMemory = await storage.getChatConversationBySessionId(memoryKey);
-      const existingProfile = (() => {
+      const existingMemorySummary = (() => {
         if (!existingMemory?.summary) return {};
         try {
-          const summary = JSON.parse(existingMemory.summary);
-          return summary.profile && typeof summary.profile === "object" ? summary.profile : {};
+          return JSON.parse(existingMemory.summary);
         } catch {
           return {};
         }
       })();
+      const existingStructuredProfile = normalizeStructuredProfile(existingMemorySummary.structuredProfile);
+      const existingProfile = {
+        ...buildFlatProfileFromStructured(existingStructuredProfile),
+        ...(existingMemorySummary.profile && typeof existingMemorySummary.profile === "object" ? existingMemorySummary.profile : {}),
+      };
       const currentProfile = compactProfile({ ...existingProfile, ...parsed.profile });
       const conversation = parsed.messages.slice(-12).map((message) => ({
         role: message.role,
         text: message.text,
       }));
+      const approvedKnowledge = retrieveDecisionGuideKnowledge({
+        latestMessage: parsed.latestMessage,
+        currentPage: parsed.pageContext,
+        profile: currentProfile,
+        navigationHistory: parsed.visitorState?.navigationHistory ?? [],
+      });
 
       if (!openai) {
         return res.status(503).json({ error: "Decision Guide AI is not configured", visitorId });
       }
 
-      const system = [
-        "You are Raphi, Agent Kammer's Decision Guide for Manhattan housing decisions.",
-        "You are a trusted Manhattan housing strategist sitting beside the visitor while they browse.",
-        "Never sound like a chatbot, CRM, lead form, or customer support.",
-        "Hide the technology. Show guidance.",
-        "Your framework is TRIGGER -> DESIRE -> CONSTRAINTS -> TRADE-OFFS -> RECOMMENDATION.",
-        "Your job is not to help the visitor buy a home. Your job is to help them make the right housing decision, even if that means doing nothing.",
-        "The recommendation can be buy, sell, rent, wait six months, stay put, renew the lease, refinance, renovate, rent the current home, keep an investment property, or explore another neighborhood first.",
-        "The central question is often: is it better to do nothing? Sometimes doing nothing is the smartest move. Sometimes it is the worst move.",
-        "You should be willing to tell the visitor what to do, including when the answer is to wait, renew, stay put, or avoid a transaction.",
-        "Use this decision path when useful: what changed -> should anything change -> if yes, what should change -> compare the options -> recommendation.",
-        "The visitor does not wake up wanting a Decision Blueprint. They wake up thinking they do not know what to do.",
-        "First understand what changed. Then what the visitor wants the next home to do better. Then what is limiting them. Then what they will give up if they cannot have everything.",
-        "Most visitors do not know what they want. Lead the conversation for them.",
-        "Make discovery feel interesting, not like a mortgage application or intake form.",
-        "Every answer should give value: interpret what it means, explain why it matters, state the likely next move, then offer one simple next step.",
-        "Do not ask discovery questions in a row. Ask at most one question per reply.",
-        "Avoid broad questions like 'what do you want?' or 'what matters most?' unless you give clear options.",
-        "When asking about priorities, prefer guided prompts like 'which would disappoint you more: long commute, high monthly costs, too little space, weak building quality, or losing flexibility?'",
-        "When information is missing, infer a practical default and say what you would check next.",
-        "Prefer guidance over interrogation: 'I would start with timeline because it decides rent vs buy' is better than 'what is your timeline and budget?'",
-        "For vague visitors, give two or three starting choices and recommend one. Example: 'I would start with timeline. If this is under three years, renting deserves serious weight.'",
-        "Never gate basic guidance behind contact information.",
-        "Ask for email or phone only when offering a clear deliverable: saving progress, sending a recap, delivering reports, scheduling a review, or arranging an introduction.",
-        "If asking for contact, explain exactly what they will receive.",
-        "When you have a useful trigger plus at least one meaningful detail, you may offer: 'I can send you a short recap with the relevant brief, what I would check next, and the recommendation so far. What email should I use?'",
-        "The recap offer must feel earned. Put it after guidance, never before.",
-        "Do not expose raw system updates like 'timeline updated' or 'profile saved'. Say human things like 'That helps me understand your situation much better.'",
-        "Qualification is invisible. Do not show scores to the visitor.",
-        "Internally qualify intent, urgency, financial readiness, decision clarity, property fit, and human-assistance readiness.",
-        "Quietly consider risk, including resale risk, assessment risk, financing risk, flood risk, and future development risk, but do not show a raw risk category unless the visitor asks.",
-        "Maintain a structured decision profile covering life event, desires, constraints, timeline, budget, industry, household, neighborhoods, building preferences, buildings viewed, reports viewed, questions asked, and recommendation history.",
-        "Use page metadata to guide navigation. If you recommend or open a page, explain why in one sentence.",
-        "Keep replies alive and short: 45 to 95 words unless the visitor asks for detail.",
-        "Return one warm, concise advisor reply and structured actions for the UI.",
-      ].join("\n");
+      const system = buildDecisionGuideSystemPrompt();
 
       const response = await openai.responses.create({
         model: process.env.DECISION_GUIDE_MODEL || process.env.OPENAI_MODEL || DEFAULT_DECISION_GUIDE_MODEL,
@@ -799,8 +811,10 @@ export async function registerRoutes(app: Express): Promise<void> {
             content: JSON.stringify({
               visitorId,
               currentPage: parsed.pageContext,
+              approvedKnowledge,
               navigationHistory: parsed.visitorState?.navigationHistory ?? [],
               currentProfile,
+              currentStructuredProfile: existingStructuredProfile,
               leadScore: parsed.leadScore ?? 0,
               latestMessage: parsed.latestMessage,
               conversation,
@@ -813,7 +827,7 @@ export async function registerRoutes(app: Express): Promise<void> {
               ],
               actionRules: {
                 open_page: "Use only when a page would clearly help. Include a path from currentPage.related when possible.",
-                send_recap: "Use only after useful guidance has been delivered. If no email is known, ask for it in the reply and explain the recap/recommendation deliverable.",
+                send_recap: "Use only after useful guidance has been delivered. If no email or phone is known, ask for the best email or mobile in the reply and explain the recap/recommendation deliverable.",
                 update_blueprint: "Use when new trigger, desire, constraint, trade-off, email, or phone was learned.",
               },
             }),
@@ -834,14 +848,27 @@ export async function registerRoutes(app: Express): Promise<void> {
       const outputText = extractResponseText(response);
       const guideTurn = JSON.parse(outputText);
       const nextProfile = compactProfile({ ...currentProfile, ...guideTurn.profile });
+      const nowIso = new Date().toISOString();
+      const structuredProfile = updateStructuredProfile(
+        existingStructuredProfile,
+        nextProfile,
+        parsed.latestMessage,
+        nowIso,
+      );
       const allMessages = [...conversation, { role: "assistant", text: guideTurn.reply }];
       const summary = {
         visitorId,
+        conversationMemory: {
+          recentMessages: allMessages,
+          lastUpdated: nowIso,
+        },
         profile: nextProfile,
+        structuredProfile,
         leadQualification: guideTurn.leadQualification,
         pageContext: parsed.pageContext,
+        approvedKnowledgeIds: approvedKnowledge.map((doc) => doc.id),
         actions: guideTurn.actions,
-        updatedAt: new Date().toISOString(),
+        updatedAt: nowIso,
       };
 
       if (existingMemory) {
@@ -872,12 +899,12 @@ export async function registerRoutes(app: Express): Promise<void> {
           phone: nextProfile.phone || undefined,
           timeline: nextProfile.constraints || undefined,
           motivation: nextProfile.situation || undefined,
-          financing: nextProfile.constraints || undefined,
-          commitment: nextProfile.tradeOff || undefined,
+          financing: nextProfile.financingStatus || nextProfile.constraints || undefined,
+          commitment: nextProfile.confidenceReadiness || nextProfile.tradeOff || undefined,
           communicationStyle: `Decision Guide - ${guideTurn.leadQualification.quality}`,
           conversationSummary: JSON.stringify(summary, null, 2),
           leadScore: Math.round(guideTurn.leadQualification.score),
-          marketInterest: nextProfile.desire || undefined,
+          marketInterest: nextProfile.geography || nextProfile.desire || undefined,
           leadSource: "decision_guide",
         });
       }
@@ -1551,6 +1578,76 @@ export async function registerRoutes(app: Express): Promise<void> {
     } catch (err) {
       console.error("Error loading RBO profiles:", err);
       res.status(500).json({ ok: false, error: "Server error" });
+    }
+  });
+
+  // Admin session check (login form uses this)
+  app.get("/api/admin/session", requireAdmin, async (_req, res) => {
+    res.json({
+      ok: true,
+      user: ADMIN_USER,
+      storageMode: process.env.DATABASE_URL ? "database" : "memory",
+    });
+  });
+
+  // Internal portal: pipeline + funnel + strategy scoring dashboard
+  app.get("/api/admin/dashboard", requireAdmin, async (_req, res) => {
+    try {
+      const dashboard = await buildAdminDashboard(storage, {
+        storageMode: process.env.DATABASE_URL ? "database" : "memory",
+        signals: signalStore.all(),
+      });
+      res.json({ ok: true, dashboard });
+    } catch (err) {
+      console.error("Admin dashboard error:", err);
+      res.status(500).json({ ok: false, error: "Failed to build admin dashboard" });
+    }
+  });
+
+  app.get("/api/admin/pipeline", requireAdmin, async (_req, res) => {
+    try {
+      const dashboard = await buildAdminDashboard(storage, {
+        storageMode: process.env.DATABASE_URL ? "database" : "memory",
+        signals: signalStore.all(),
+      });
+      res.json({
+        ok: true,
+        pipeline: dashboard.pipeline,
+        people: dashboard.people,
+        generatedAt: dashboard.generatedAt,
+      });
+    } catch (err) {
+      console.error("Admin pipeline error:", err);
+      res.status(500).json({ ok: false, error: "Failed to load pipeline" });
+    }
+  });
+
+  // Visitor marketing signals (public; feeds funnel + scoring)
+  app.post("/api/signals", async (req, res) => {
+    try {
+      const body = req.body || {};
+      const type = typeof body.type === "string" ? body.type.trim() : "";
+      if (!type) {
+        return res.status(400).json({ error: "type is required" });
+      }
+      const allowed = new Set<string>(SIGNAL_TYPES as unknown as string[]);
+      // Allow custom types but prefer known ones
+      const signalType = allowed.has(type) ? type : type.slice(0, 64);
+
+      const signal = signalStore.add({
+        type: signalType,
+        source: typeof body.source === "string" ? body.source.slice(0, 200) : null,
+        path: typeof body.path === "string" ? body.path.slice(0, 500) : null,
+        referrer: typeof body.referrer === "string" ? body.referrer.slice(0, 500) : null,
+        sessionId: typeof body.sessionId === "string" ? body.sessionId.slice(0, 120) : null,
+        visitorId: typeof body.visitorId === "string" ? body.visitorId.slice(0, 120) : null,
+        detail: typeof body.detail === "string" ? body.detail.slice(0, 500) : null,
+      });
+
+      res.json({ ok: true, id: signal.id });
+    } catch (err) {
+      console.error("Signal ingest error:", err);
+      res.status(500).json({ error: "Failed to record signal" });
     }
   });
 

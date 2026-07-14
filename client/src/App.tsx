@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy, useEffect, useRef } from "react";
 import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { DecisionAssistantDock } from "@/components/DecisionAssistantDock";
+import { initVisitorSignalTracking, trackPageViewSignal } from "@/lib/visitor-signals";
 
 const Home = lazy(() => import("@/pages/Home"));
 const About = lazy(() => import("@/pages/About"));
@@ -20,6 +21,7 @@ const ServiceLanding = lazy(() => import("@/pages/ServiceLanding"));
 const Buy = lazy(() => import("@/pages/Buy"));
 const Perspectives = lazy(() => import("@/pages/Perspectives"));
 const Contact = lazy(() => import("@/pages/Contact"));
+const AdminPortal = lazy(() => import("@/pages/AdminPortal"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 function Redirect({ to }: { to: string }) {
@@ -45,9 +47,28 @@ function ScrollToTop() {
   return null;
 }
 
+function VisitorSignals() {
+  const [location] = useLocation();
+  const bootstrapped = useRef(false);
+
+  useEffect(() => {
+    if (location.startsWith("/admin")) return;
+    if (!bootstrapped.current) {
+      bootstrapped.current = true;
+      initVisitorSignalTracking(location);
+      return;
+    }
+    trackPageViewSignal(location);
+  }, [location]);
+
+  return null;
+}
+
 function Router() {
   return (
     <Switch>
+      <Route path="/admin" component={AdminPortal} />
+      <Route path="/admin/*" component={AdminPortal} />
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/services" component={Services} />
@@ -87,21 +108,43 @@ function Router() {
   );
 }
 
+function AppShell() {
+  const [location] = useLocation();
+  const isAdmin = location.startsWith("/admin");
+
+  if (isAdmin) {
+    return (
+      <>
+        <ScrollToTop />
+        <Suspense fallback={<div className="min-h-screen bg-[#14181f] px-6 py-12 text-white/50">Loading admin…</div>}>
+          <Router />
+        </Suspense>
+        <Toaster />
+      </>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-brand-charcoal text-brand-ink">
+      <ScrollToTop />
+      <VisitorSignals />
+      <Header />
+      <Suspense fallback={<div className="mx-auto w-full max-w-7xl px-6 py-12 text-white/70">Loading...</div>}>
+        <Router />
+      </Suspense>
+      <Footer />
+      <DecisionAssistantDock />
+      <Toaster />
+    </div>
+  );
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <TooltipProvider>
-          <div className="min-h-screen bg-brand-ivory pb-48 text-brand-ink md:pb-40">
-            <ScrollToTop />
-            <Header />
-            <Suspense fallback={<div className="mx-auto w-full max-w-7xl px-6 py-12 text-white/70">Loading...</div>}>
-              <Router />
-            </Suspense>
-            <Footer />
-            <DecisionAssistantDock />
-          </div>
-          <Toaster />
+          <AppShell />
         </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>

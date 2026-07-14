@@ -299,3 +299,84 @@ export const insertTravelDealSchema = createInsertSchema(travelDeals).omit({
 
 export type InsertTravelDeal = z.infer<typeof insertTravelDealSchema>;
 export type TravelDeal = typeof travelDeals.$inferSelect;
+
+// ---------------------------------------------------------------------------
+// CRM OS tables (visitor → contact → lead → opportunity)
+// Business truth lives here; PostHog stays behavioral telemetry.
+// ---------------------------------------------------------------------------
+
+export const visitorProfiles = pgTable("visitor_profiles", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  sessionId: text("session_id").notNull(),
+  visitorId: text("visitor_id"),
+  firstSource: text("first_source"),
+  lastSource: text("last_source"),
+  firstPath: text("first_path"),
+  lastPath: text("last_path"),
+  referrer: text("referrer"),
+  utmSource: text("utm_source"),
+  utmMedium: text("utm_medium"),
+  utmCampaign: text("utm_campaign"),
+  visitCount: integer("visit_count").default(1),
+  lastSeenAt: timestamp("last_seen_at").defaultNow().notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertVisitorProfileSchema = createInsertSchema(visitorProfiles).omit({
+  id: true,
+  createdAt: true,
+  lastSeenAt: true,
+});
+
+export type InsertVisitorProfile = z.infer<typeof insertVisitorProfileSchema>;
+export type VisitorProfile = typeof visitorProfiles.$inferSelect;
+
+export const leadSignalEvents = pgTable("lead_signal_events", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  sessionId: text("session_id"),
+  visitorId: text("visitor_id"),
+  leadId: varchar("lead_id"),
+  contactId: varchar("contact_id"),
+  signalType: text("signal_type").notNull(),
+  source: text("source"),
+  path: text("path"),
+  referrer: text("referrer"),
+  detail: text("detail"),
+  scoreDelta: integer("score_delta").default(0),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertLeadSignalEventSchema = createInsertSchema(leadSignalEvents).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertLeadSignalEvent = z.infer<typeof insertLeadSignalEventSchema>;
+export type LeadSignalEvent = typeof leadSignalEvents.$inferSelect;
+
+export const pipelineOpportunities = pgTable("pipeline_opportunities", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  leadId: varchar("lead_id"),
+  contactId: varchar("contact_id"),
+  conversationId: varchar("conversation_id"),
+  displayName: text("display_name"),
+  email: text("email"),
+  phone: text("phone"),
+  stage: text("stage").notNull().default("new_signals"),
+  strategyScore: integer("strategy_score").default(0),
+  source: text("source"),
+  summary: text("summary"),
+  nextAction: text("next_action"),
+  owner: text("owner"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const insertPipelineOpportunitySchema = createInsertSchema(pipelineOpportunities).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type InsertPipelineOpportunity = z.infer<typeof insertPipelineOpportunitySchema>;
+export type PipelineOpportunity = typeof pipelineOpportunities.$inferSelect;
