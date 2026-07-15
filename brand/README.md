@@ -1,6 +1,10 @@
-# Agent Kammer Brand Source
+# Agent Kammer Brand Assets
 
-This folder is the source of truth for reusable brand assets and standards.
+**Canonical brand rules (mission, voice, vocabulary, colors, UI, writing):**
+
+→ [`docs/brand/AGENT-KAMMER-BRAND.md`](../docs/brand/AGENT-KAMMER-BRAND.md)
+
+This `brand/` folder is the drop zone for reusable brand assets (logo masters, photography, social, etc.).
 
 ```txt
 brand/
@@ -16,4 +20,5 @@ brand/
   motion/
 ```
 
-Production UI tokens still live in `tailwind.config.ts` and `client/src/index.css`. Brand assets should be added here first, then copied or referenced by the app as needed.
+**Shipped UI logos** live in `client/public/brand/` (`ak-monogram-*.png`).  
+**Implementation tokens** live in `client/src/index.css` and `tailwind.config.ts`.
