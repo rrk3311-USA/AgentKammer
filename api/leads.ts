@@ -28,7 +28,7 @@ const leadSchema = z.object({
   transcript: z.string().optional(),
 });
 
-const CONTACT_INBOX = process.env.CONTACT_INBOX || "info@successchemistry.com";
+const CONTACT_INBOX = process.env.CONTACT_INBOX || "info@agentkammer.com";
 const CONTACT_FALLBACK_INBOX = process.env.CONTACT_FALLBACK_INBOX || "rrk3311@gmail.com";
 
 type ApiRequest = {

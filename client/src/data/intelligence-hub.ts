@@ -86,7 +86,7 @@ export const executiveHousingHubLinks: IntelligenceHubLink[] = [
   {
     label: "Manhattan Luxury Rental Index",
     description: "Quarterly read on executive rental depth across premier modern buildings.",
-    href: "/lease",
+    href: "/building-reports/market-briefs",
     status: "coming-soon",
   },
 ];

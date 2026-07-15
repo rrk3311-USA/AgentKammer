@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import type { Transporter } from "nodemailer";
 import { Resend } from "resend";
 
-const CONTACT_INBOX = process.env.CONTACT_INBOX || "info@successchemistry.com";
+const CONTACT_INBOX = process.env.CONTACT_INBOX || "info@agentkammer.com";
 const CONTACT_FALLBACK_INBOX = process.env.CONTACT_FALLBACK_INBOX || "rrk3311@gmail.com";
 const EMAIL_USER = process.env.EMAIL_USER;
 const EMAIL_PASS = process.env.EMAIL_PASS;
