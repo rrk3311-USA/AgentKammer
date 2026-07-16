@@ -382,8 +382,8 @@ export type InsertPipelineOpportunity = z.infer<typeof insertPipelineOpportunity
 export type PipelineOpportunity = typeof pipelineOpportunities.$inferSelect;
 
 // ---------------------------------------------------------------------------
-// Decision Hub member profiles (anonymous visitor → claimed account)
-// Auth providers (Google / magic link) attach later; email + access token first.
+// Decision Hub member profiles (anonymous visitor → email+PIN verified account)
+// Auth: cookie session after PIN (magic link next). Never issue access from email alone.
 // ---------------------------------------------------------------------------
 
 export const memberProfiles = pgTable("member_profiles", {

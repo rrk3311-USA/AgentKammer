@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import { AgentKammerHorizontalLogo } from "@/components/AgentKammerHorizontalLogo";
 import { cn } from "@/lib/utils";
 import { primaryNav } from "@/components/site-shell";
-import { openDecisionAssistant } from "@/lib/decision-assistant";
 
 const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brass focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy";
 
@@ -39,23 +38,23 @@ export function Header() {
   return (
     <header
       className={cn(
-        "ak-header-shell sticky top-0 z-50 w-full border-b border-brand-brass/35 text-brand-ivory transition-[box-shadow] duration-brand ease-brand-out",
+        "ak-header-shell sticky top-0 z-50 w-full border-b border-brand-brass/22 text-brand-ivory transition-[box-shadow] duration-brand ease-brand-out",
         scrolled ? "shadow-[0_10px_24px_rgba(32,39,53,0.14)]" : "",
       )}
     >
-      <div className="mx-auto grid max-w-site grid-cols-[1fr_auto] items-center gap-4 px-6 py-3.5 lg:grid-cols-[auto_minmax(24rem,1fr)_auto] lg:px-8 xl:px-10">
+      <div className="mx-auto grid max-w-site grid-cols-[1fr_auto] items-center gap-4 px-6 py-2.5 lg:grid-cols-[auto_minmax(24rem,1fr)_auto] lg:px-8 xl:px-10">
         <Link href="/" data-testid="link-home" className={cn("justify-self-start", focusRing)}>
           <AgentKammerHorizontalLogo variant="light" emphasis="header" />
         </Link>
 
         <nav
-          className="hidden justify-self-center border border-brand-ivory/10 bg-brand-ivory/[0.035] px-4 py-2 shadow-[inset_0_1px_0_rgba(245,242,235,0.06)] lg:flex lg:items-center lg:justify-center lg:gap-1 xl:gap-2"
+          className="hidden justify-self-center border border-brand-ivory/10 bg-brand-ivory/[0.035] px-5 py-1.5 shadow-[inset_0_1px_0_rgba(245,242,235,0.06)] lg:flex lg:items-center lg:justify-center lg:gap-2 xl:gap-3.5"
           aria-label="Primary"
         >
           {primaryNav.map((link) => {
             const active = isPrimaryNavActive(link.href, location);
             return (
-              <Link key={link.label} href={link.href} className={cn("group relative shrink-0 px-3 py-1.5 xl:px-4", focusRing)}>
+              <Link key={link.label} href={link.href} className={cn("group relative shrink-0 px-3.5 py-1.5 xl:px-5", focusRing)}>
                 <span
                   className={cn(
                     "relative text-[0.9rem] capitalize tracking-[0.06em] transition-colors",
@@ -78,17 +77,15 @@ export function Header() {
 
         <div className="flex items-center justify-end gap-2">
           <div className="hidden lg:block">
-            <button
-              type="button"
-              onClick={openDecisionAssistant}
-              className="ak-header-blueprint group grid min-w-32 px-4 py-2 text-left transition-colors"
+            <Link
+              href="/belonging"
+              className="ak-header-blueprint group inline-flex min-w-[11.5rem] items-center justify-between gap-4 px-4 py-2 text-left transition-colors"
             >
-              <span className="text-[9px] uppercase tracking-[0.24em] text-brand-brass">Blueprint</span>
-              <span className="mt-0.5 flex items-center justify-between gap-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory">
-                Begin
-                <ArrowRight className="h-3.5 w-3.5 text-brand-ivory transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+              <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-ivory">
+                Decision Assessment
               </span>
-            </button>
+              <ArrowRight className="h-3.5 w-3.5 shrink-0 text-brand-ivory/85 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+            </Link>
           </div>
           <button
             onClick={() => setMobileMenuOpen((open) => !open)}
@@ -120,20 +117,16 @@ export function Header() {
                 </Link>
               );
             })}
-            <button
-              type="button"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                openDecisionAssistant();
-              }}
-              className="ak-header-blueprint mt-4 grid w-full px-4 py-3 text-left"
+            <Link
+              href="/belonging"
+              onClick={() => setMobileMenuOpen(false)}
+              className="ak-header-blueprint mt-4 flex w-full items-center justify-between gap-4 px-4 py-3 text-left"
             >
-              <span className="text-[9px] uppercase tracking-[0.24em] text-brand-brass">Blueprint</span>
-              <span className="mt-1 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-ivory">
-                Begin
-                <ArrowRight className="h-4 w-4 text-brand-ivory" strokeWidth={1.5} />
+              <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-ivory">
+                Decision Assessment
               </span>
-            </button>
+              <ArrowRight className="h-4 w-4 shrink-0 text-brand-ivory/85" strokeWidth={1.5} />
+            </Link>
           </nav>
         </div>
       ) : null}

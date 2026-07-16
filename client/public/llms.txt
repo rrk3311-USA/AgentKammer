@@ -1,16 +1,33 @@
 # Agent Kammer
 
-Agent Kammer is a Manhattan housing decision platform for people deciding whether to buy, sell, rent, wait, renew, renovate, refinance, rent their current home, or do nothing yet.
+Agent Kammer is a Real Estate Strategist helping people make better real estate decisions — including whether to buy, sell, rent, wait, renew, renovate, refinance, keep, or do nothing yet.
 
-The site is organized around Decision Briefs, Building Intelligence, and the Guidance Captain conversation layer.
+**Buildings before listings.** The quality of the asset matters more than the marketing of the listing.
+
+Agent Kammer provides strategic guidance, clarifies complex real estate decisions, and connects clients with the right local professionals when transaction expertise is needed — anywhere in the U.S.
+
+## Brand stack
+
+- Agent Kammer
+- Real Estate Strategist
+- Buildings before listings. (philosophy)
+- Better real estate decisions. (promise)
+- Live Where You Belong. (outcome)
+- What’s changing? (opener)
+- Are you living where you belong? (diagnostic)
 
 ## Core URLs
 
 - Homepage: https://www.agentkammer.com/
+- Decision Assessment: https://www.agentkammer.com/belonging
 - Decision Briefs: https://www.agentkammer.com/services
-- Buyer Advisory: https://www.agentkammer.com/buyer-advisory
+- Housing Advisory / Start Here: https://www.agentkammer.com/buyer-advisory
 - Building Intelligence: https://www.agentkammer.com/building-reports
 - Contact: https://www.agentkammer.com/contact
+
+## Funnel
+
+Belonging Assessment → Decision Profile → Discovery Call (when warranted) → Decision Blueprint → Curated local expert (when a transaction is right)
 
 ## High-Intent Decision Briefs
 
@@ -45,4 +62,4 @@ The site is organized around Decision Briefs, Building Intelligence, and the Gui
 
 ## Positioning
 
-Agent Kammer does not start with listings. It starts with what changed, whether anything should change, what the real options are, and which recommendation protects the client best.
+Agent Kammer does not start with listings. It starts with what changed, whether anything should change, what the real options are, and which recommendation protects the client best. When a transaction is appropriate, Agent Kammer curates the right local professionals and remains the advisory continuity layer.

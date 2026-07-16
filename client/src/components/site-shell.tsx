@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { ArrowRight, Mail } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const primaryNav = [
@@ -114,14 +113,16 @@ export function SectionHeading({
   );
 }
 
-function ArchitecturalHeroDrawing({
+export function ArchitecturalHeroDrawing({
   eyebrow,
   title,
   variant,
+  className,
 }: {
   eyebrow: string;
   title: string;
   variant?: HeroArtVariant;
+  className?: string;
 }) {
   const art = resolveHeroArt(eyebrow, title, variant);
   const isReportOverview = art === "reports-overview";
@@ -149,7 +150,7 @@ function ArchitecturalHeroDrawing({
   const isBrief = art === "brief";
 
   return (
-    <div className="pointer-events-none select-none" aria-hidden>
+    <div className={cn("pointer-events-none select-none", className)} aria-hidden>
       <svg
         viewBox="0 0 420 260"
         className="h-auto w-full max-w-[25rem] text-brand-ivory/70"
@@ -509,40 +510,40 @@ export function ReportSubnav() {
 }
 
 export function CTA({
-  title,
-  description,
-  href = "/contact",
-  label = "Request a Call",
+  title = "Find out if you’re living where you belong.",
+  description = "A short Decision Assessment builds your profile — belonging, friction, and a clear next step — before any call.",
+  href = "/belonging",
+  label = "Start Decision Assessment",
 }: {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   href?: string;
   label?: string;
 }) {
   return (
     <section className="border-t border-brand-brass/30 bg-brand-navy text-brand-ivory">
       <PageSection className="py-16 lg:py-20">
-        <div className="grid gap-8 border border-brand-ivory/14 bg-brand-ivory/[0.04] p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_16px_36px_rgba(18,24,49,0.16)] lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:p-12">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">Private Advisory</p>
+            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">Decision Assessment</p>
             <h2 className="mt-4 font-display text-[clamp(2rem,3.8vw,3.25rem)] leading-[0.95] tracking-[-0.03em] text-brand-ivory">
               {title}
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-8 text-brand-ivory/74">{description}</p>
           </div>
-          {href === "/contact" ? (
-            <div className="grid gap-3 sm:min-w-[16rem]">
-              <Link
-                href="/contact"
-                className="ak-call-button group grid px-5 py-4 text-left transition-colors"
-              >
-                <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">Private Advisory</span>
-                <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
-                <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
-                  {label}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-                </span>
-              </Link>
+          <div className="grid gap-3 sm:min-w-[16rem]">
+            <Link
+              href={href}
+              className="ak-call-button group grid px-5 py-4 text-left transition-colors"
+            >
+              <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">Belonging</span>
+              <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
+              <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
+                {label}
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+              </span>
+            </Link>
+            {href === "/contact" ? (
               <a
                 href="/contact#request-call"
                 aria-label="Email Agent Kammer"
@@ -551,15 +552,8 @@ export function CTA({
                 <Mail className="h-3.5 w-3.5 text-brand-brass" strokeWidth={1.5} />
                 Email
               </a>
-            </div>
-          ) : (
-            <Link href={href}>
-              <Button variant="brand" className="gap-2 uppercase tracking-nav">
-                {label}
-                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-              </Button>
-            </Link>
-          )}
+            ) : null}
+          </div>
         </div>
       </PageSection>
     </section>

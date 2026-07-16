@@ -5,7 +5,6 @@ import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { useToast } from "@/hooks/use-toast";
 import { trackVisitorSignal } from "@/lib/visitor-signals";
 
-const MEMBER_TOKEN_KEY = "ak_member_token";
 const ASSISTANT_SESSION_KEY = "akDecisionAssistantSessionId";
 const SIGNAL_SESSION_KEY = "ak_visitor_session";
 
@@ -39,25 +38,23 @@ function readSession(key: string) {
 
 export default function Account() {
   usePageMetadata({
-    title: "Create Your Account",
+    title: "Resume My Decision",
     description:
-      "Save your Decision Map, goals, and conversations in your Agent Kammer Decision Hub.",
+      "Resume your Decision with email and a one-time PIN — no password, no account to set up.",
     path: "/account",
   });
 
   const { toast } = useToast();
   const [, setLocation] = useLocation();
   const [email, setEmail] = useState("");
+  const [pin, setPin] = useState("");
+  const [phase, setPhase] = useState<"email" | "pin">("email");
   const [sending, setSending] = useState(false);
   const [hub, setHub] = useState<HubSnapshot | null>(null);
+  const [hint, setHint] = useState<string | null>(null);
 
   useEffect(() => {
-    const token = readLocal(MEMBER_TOKEN_KEY);
-    if (!token) return;
-    void fetch("/api/account/hub", {
-      headers: { Authorization: `Bearer ${token}` },
-      credentials: "include",
-    })
+    void fetch("/api/account/hub", { credentials: "include" })
       .then(async (res) => {
         if (!res.ok) return;
         const body = await res.json();
@@ -66,13 +63,13 @@ export default function Account() {
       .catch(() => undefined);
   }, []);
 
-  const claimAccount = async (event: FormEvent) => {
+  const requestPin = async (event: FormEvent) => {
     event.preventDefault();
     const trimmed = email.trim().toLowerCase();
     if (!trimmed || !trimmed.includes("@")) {
       toast({
         title: "Email needed",
-        description: "Enter the email where we should save your Decision Hub.",
+        description: "Enter the email where we should send your verification code.",
         variant: "destructive",
       });
       return;
@@ -80,7 +77,7 @@ export default function Account() {
 
     setSending(true);
     try {
-      trackVisitorSignal("email_capture", "create_account_claim");
+      trackVisitorSignal("email_capture", "create_account_pin_request");
       const response = await fetch("/api/account/claim", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -93,29 +90,76 @@ export default function Account() {
       });
       const body = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error(body.error || "Claim failed");
+        throw new Error(body.error || "Could not send code");
       }
 
-      if (body.accessToken) {
-        try {
-          window.localStorage.setItem(MEMBER_TOKEN_KEY, body.accessToken);
-        } catch {
-          /* ignore */
-        }
+      setEmail(trimmed);
+      setPhase("pin");
+      setHint(
+        typeof body.devPin === "string"
+          ? `Dev code: ${body.devPin}`
+          : body.message || "Check your email for a 6-digit code.",
+      );
+      toast({
+        title: "Code sent",
+        description: body.message || "Enter the 6-digit code from your email.",
+      });
+    } catch (err) {
+      toast({
+        title: "Could not send code",
+        description: err instanceof Error ? err.message : "Please try again in a moment.",
+        variant: "destructive",
+      });
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const verifyPin = async (event: FormEvent) => {
+    event.preventDefault();
+    const code = pin.trim();
+    if (!/^\d{6}$/.test(code)) {
+      toast({
+        title: "Six digits needed",
+        description: "Enter the 6-digit code from your email.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setSending(true);
+    try {
+      trackVisitorSignal("email_capture", "create_account_pin_verify");
+      const response = await fetch("/api/account/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email, pin: code }),
+      });
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(body.error || "Verification failed");
+      }
+
+      // Prefer httpOnly cookie; clear any legacy localStorage token
+      try {
+        window.localStorage.removeItem("ak_member_token");
+      } catch {
+        /* ignore */
       }
 
       setHub(body.hub as HubSnapshot);
       toast({
-        title: body.hasChatHistory ? "Decision Map saved" : "Account created",
+        title: body.hasChatHistory ? "Decision Map restored" : "Decision Hub ready",
         description: body.hasChatHistory
-          ? "Your Raphi conversation is now attached to this member profile."
-          : "Your Decision Hub is ready. Chat with Raphi anytime — it will stay linked.",
+          ? "Your conversation is attached to this profile."
+          : "You can return anytime from this device — or verify email again elsewhere.",
       });
       setLocation("/hub");
-    } catch {
+    } catch (err) {
       toast({
-        title: "Could not create account",
-        description: "Please try again in a moment.",
+        title: "Could not verify",
+        description: err instanceof Error ? err.message : "Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -126,9 +170,9 @@ export default function Account() {
   return (
     <>
       <PageHero
-        eyebrow="Decision Hub"
-        title="Create your account"
-        description="Save progress with Raphi. Your goals, Decision Map, conversations, and building reports live in one member place — so you can return months later and pick up where you left off."
+        eyebrow="Resume My Decision"
+        title="Resume where you left off."
+        description="Chat freely — nothing to set up. When you want to keep your Decision Map, enter email, verify with a one-time PIN, and continue planning from anywhere."
         art="decision-framework"
       />
 
@@ -137,47 +181,30 @@ export default function Account() {
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
             <div>
               <SectionHeading
-                eyebrow="Membership"
-                title="Your real estate life, organized"
-                description="Not another transaction portal. A Decision Hub for direction, homes, buildings, documents, and advisor memory."
+                eyebrow="How it works"
+                title="No sign-up ceremony"
+                description="You explore freely, invisibly, before anything is saved. Email + PIN only when you want to save or recover your Decision."
               />
               <ul className="mt-8 grid gap-3 text-sm leading-6 text-brand-graphite">
-                <li>My Direction — vision, goals, priorities</li>
-                <li>My Decisions — briefs and open questions</li>
-                <li>My Buildings & Reports — what you have explored</li>
-                <li>My Conversations — every chat with Raphi</li>
+                <li>Cookie — return on the same device</li>
+                <li>Email + PIN — recover on another device</li>
+                <li>Magic link — coming next from your Decision Recap email</li>
               </ul>
             </div>
 
             <div className="border border-brand-border bg-white p-6 sm:p-8">
-              <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Sign in</p>
-              <h2 className="mt-3 font-display text-3xl leading-none text-brand-navy">Save your Decision Map</h2>
+              <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Verify</p>
+              <h2 className="mt-3 font-display text-3xl leading-none text-brand-navy">
+                {phase === "email" ? "Email me a code" : "Enter your code"}
+              </h2>
               <p className="mt-3 text-sm leading-6 text-brand-graphite/75">
-                No password. Continue with Google later, or create your hub with email now — we attach your current chat automatically.
+                {phase === "email"
+                  ? "We never open your Decision Hub from email alone — only after the PIN."
+                  : `Code sent to ${email}. Expires in 15 minutes.`}
               </p>
 
-              <button
-                type="button"
-                className="mt-8 flex w-full items-center justify-center gap-3 border border-brand-border bg-white px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:border-brand-brass"
-                onClick={() => {
-                  trackVisitorSignal("account_google_intent", "create_account");
-                  toast({
-                    title: "Google sign-in next",
-                    description: "Use email below for now — it claims your current Raphi session into a member profile.",
-                  });
-                }}
-              >
-                Continue with Google
-              </button>
-
-              <div className="my-6 flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-brand-cocoa/80">
-                <span className="h-px flex-1 bg-brand-border" />
-                or
-                <span className="h-px flex-1 bg-brand-border" />
-              </div>
-
               {hub ? (
-                <div className="border border-brand-brass/40 bg-brand-ivory/80 px-4 py-5 text-sm leading-6 text-brand-graphite">
+                <div className="mt-8 border border-brand-brass/40 bg-brand-ivory/80 px-4 py-5 text-sm leading-6 text-brand-graphite">
                   <p className="font-medium text-brand-navy">Hub ready for {hub.email}</p>
                   <p className="mt-2">
                     {hub.conversationCount > 0
@@ -191,10 +218,10 @@ export default function Account() {
                     Open Decision Hub
                   </Link>
                 </div>
-              ) : (
-                <form onSubmit={claimAccount} className="grid gap-3">
+              ) : phase === "email" ? (
+                <form onSubmit={requestPin} className="mt-8 grid gap-3">
                   <label className="text-[10px] uppercase tracking-[0.18em] text-brand-cocoa" htmlFor="account-email">
-                    Email me into my Decision Hub
+                    Email
                   </label>
                   <input
                     id="account-email"
@@ -211,17 +238,55 @@ export default function Account() {
                     disabled={sending}
                     className="bg-brand-navy px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:bg-brand-navy/90 disabled:opacity-60"
                   >
-                    {sending ? "Saving…" : "Create my account"}
+                    {sending ? "Sending…" : "Send verification code"}
+                  </button>
+                </form>
+              ) : (
+                <form onSubmit={verifyPin} className="mt-8 grid gap-3">
+                  <label className="text-[10px] uppercase tracking-[0.18em] text-brand-cocoa" htmlFor="account-pin">
+                    6-digit code
+                  </label>
+                  <input
+                    id="account-pin"
+                    type="text"
+                    inputMode="numeric"
+                    autoComplete="one-time-code"
+                    pattern="\d{6}"
+                    maxLength={6}
+                    required
+                    value={pin}
+                    onChange={(e) => setPin(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                    placeholder="••••••"
+                    className="w-full border border-brand-border bg-white px-3 py-3 text-center text-lg tracking-[0.35em] text-brand-ink outline-none focus:border-brand-brass"
+                  />
+                  {hint ? <p className="text-xs text-brand-graphite/70">{hint}</p> : null}
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="bg-brand-navy px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:bg-brand-navy/90 disabled:opacity-60"
+                  >
+                    {sending ? "Verifying…" : "Open Decision Hub"}
+                  </button>
+                  <button
+                    type="button"
+                    className="text-[11px] uppercase tracking-[0.14em] text-brand-graphite hover:text-brand-brass"
+                    onClick={() => {
+                      setPhase("email");
+                      setPin("");
+                      setHint(null);
+                    }}
+                  >
+                    Use a different email
                   </button>
                 </form>
               )}
 
               <p className="mt-6 text-[12px] leading-5 text-brand-graphite/65">
                 Already exploring with Raphi?{" "}
-                <Link href="/buyer-advisory" className="text-brand-navy underline-offset-2 hover:underline">
-                  Continue the Decision Guide
+                <Link href="/" className="text-brand-navy underline decoration-brand-brass/40 underline-offset-2">
+                  Continue on the homepage
                 </Link>
-                . Creating an account claims that progress into your hub.
+                — your chat attaches when you verify.
               </p>
             </div>
           </div>

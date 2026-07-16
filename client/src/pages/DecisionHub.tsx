@@ -3,8 +3,6 @@ import { Link } from "wouter";
 import { PageHero, PageSection, SectionHeading } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
-const MEMBER_TOKEN_KEY = "ak_member_token";
-
 type RecommendationBrief = {
   id: string;
   title: string;
@@ -37,8 +35,8 @@ type HubSnapshot = {
 
 export default function DecisionHub() {
   usePageMetadata({
-    title: "Decision Hub",
-    description: "Your Agent Kammer member space for goals, Decision Map, and recommendation briefs.",
+    title: "My Decision",
+    description: "Your Decision Hub — goals, Decision Map, and recommendation briefs, saved and ready to resume.",
     path: "/hub",
   });
 
@@ -48,28 +46,13 @@ export default function DecisionHub() {
   const [openBriefId, setOpenBriefId] = useState<string | null>(null);
 
   useEffect(() => {
-    const token = (() => {
-      try {
-        return window.localStorage.getItem(MEMBER_TOKEN_KEY);
-      } catch {
-        return null;
-      }
-    })();
-
-    if (!token) {
-      setLoading(false);
-      setError("Create an account to open your Decision Hub.");
-      return;
-    }
-
     void fetch("/api/account/hub", {
-      headers: { Authorization: `Bearer ${token}` },
       credentials: "include",
     })
       .then(async (res) => {
         const body = await res.json().catch(() => ({}));
         if (!res.ok) {
-          setError(body.error || "Could not load your hub");
+          setError(body.error || "Verify your email to open your Decision Hub.");
           return;
         }
         const nextHub = body.hub as HubSnapshot;
@@ -86,8 +69,8 @@ export default function DecisionHub() {
     <>
       <PageHero
         eyebrow="Decision Hub"
-        title="My Real Estate Life"
-        description="Goals, vision, Decision Map, and recommendation briefs Raphi sends you — saved in your account."
+        title="My Decision"
+        description="Goals, vision, Decision Map, and recommendation briefs Raphi sends you — saved to your Decision Hub, ready whenever you resume."
         art="decision-framework"
       />
 
@@ -98,15 +81,15 @@ export default function DecisionHub() {
           ) : error || !hub ? (
             <div className="max-w-xl">
               <SectionHeading
-                eyebrow="Member access"
+                eyebrow="Resume access"
                 title="Save your Decision Map first"
-                description={error || "No member session found."}
+                description={error || "No active session found."}
               />
               <Link
                 href="/account"
                 className="mt-8 inline-flex bg-brand-navy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory"
               >
-                Create my account
+                Resume My Decision
               </Link>
             </div>
           ) : (
@@ -167,10 +150,10 @@ export default function DecisionHub() {
 
               <div className="grid gap-6">
                 <div className="border border-brand-border bg-white p-6">
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-brand-cocoa">My Decisions</p>
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-brand-cocoa">Decision History</p>
                   <h2 className="mt-3 font-display text-3xl leading-none text-brand-navy">Recommendation briefs</h2>
                   <p className="mt-3 text-sm leading-6 text-brand-graphite/75">
-                    When Raphi sends a recommendation or recap, it lands here in your account — not only in email.
+                    When Raphi sends a recommendation or recap, it lands here in your Decision Hub — not only in email.
                   </p>
 
                   {briefs.length === 0 ? (
@@ -215,7 +198,7 @@ export default function DecisionHub() {
                   <p className="text-[10px] uppercase tracking-[0.2em] text-brand-cocoa">Next</p>
                   <h2 className="mt-3 font-display text-2xl leading-none text-brand-navy">Keep building with Raphi</h2>
                   <p className="mt-3 text-sm leading-6 text-brand-graphite/75">
-                    New recommendation briefs stay linked to this member profile.
+                    New recommendation briefs stay linked to this Decision Hub.
                   </p>
                   <div className="mt-6 grid gap-3">
                     <Link
@@ -228,7 +211,7 @@ export default function DecisionHub() {
                       href="/account"
                       className="inline-flex justify-center border border-brand-border px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy"
                     >
-                      Account settings
+                      Update email &amp; PIN
                     </Link>
                   </div>
                 </div>

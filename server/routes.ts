@@ -36,6 +36,8 @@ import { buildAdminDashboard } from "./lib/admin-intelligence";
 import { signalStore } from "./lib/signal-store";
 import { SIGNAL_TYPES } from "@shared/crm-pipeline";
 import { claimVisitorToMember, publicMemberHub, appendRecommendationBrief, findMemberForVisitor } from "./lib/claim-account";
+import { canSendAccountPin, generateAccountPin, storeAccountPin, verifyAccountPin } from "./lib/account-otp";
+import { sendVisitorPinEmail } from "./lib/send-visitor-email";
 
 // Initialize Resend client only if API key is available
 let resend: Resend | null = null;
@@ -1693,7 +1695,7 @@ export async function registerRoutes(app: Express): Promise<void> {
     }
   });
 
-  // Claim anonymous Decision Guide session into a member Decision Hub profile
+  // Start email + PIN verification (does not issue a member session)
   app.post("/api/account/claim", async (req, res) => {
     try {
       const email = typeof req.body?.email === "string" ? req.body.email.trim().toLowerCase() : "";
@@ -1701,14 +1703,85 @@ export async function registerRoutes(app: Express): Promise<void> {
         return res.status(400).json({ ok: false, error: "Valid email is required" });
       }
 
+      const cooldown = canSendAccountPin(email);
+      if (!cooldown.ok) {
+        return res.status(429).json({
+          ok: false,
+          error: "Please wait a moment before requesting another code.",
+          waitMs: cooldown.waitMs,
+        });
+      }
+
       const visitorId = getOrCreateVisitorId(req, res);
-      const result = await claimVisitorToMember(storage, {
+      const pin = generateAccountPin();
+      storeAccountPin({
         email,
+        pin,
         visitorId,
         assistantSessionId:
           typeof req.body?.assistantSessionId === "string" ? req.body.assistantSessionId : null,
         signalSessionId: typeof req.body?.signalSessionId === "string" ? req.body.signalSessionId : null,
         displayName: typeof req.body?.displayName === "string" ? req.body.displayName : null,
+      });
+
+      const mail = await sendVisitorPinEmail({
+        email,
+        pin,
+        resumeUrl: "https://www.agentkammer.com/account",
+      });
+
+      signalStore.add({
+        type: "email_capture",
+        source: "decision_hub_pin_request",
+        path: "/account",
+        sessionId: visitorId,
+        visitorId,
+        detail: mail.sent ? "pin_sent" : "pin_queued_no_mailer",
+      });
+
+      const payload: Record<string, unknown> = {
+        ok: true,
+        needsVerification: true,
+        email,
+        message: mail.sent
+          ? "We sent a 6-digit code to your email. Enter it to open your Decision Hub."
+          : "Enter the verification code to open your Decision Hub.",
+      };
+
+      // Local/dev only — never expose PIN when mailer is configured in production
+      if (!mail.sent && process.env.NODE_ENV !== "production") {
+        payload.devPin = pin;
+        console.info(`[account-otp] PIN for ${email}: ${pin}`);
+      }
+
+      res.json(payload);
+    } catch (err) {
+      console.error("Account claim error:", err);
+      res.status(500).json({ ok: false, error: "Failed to start verification" });
+    }
+  });
+
+  // Verify PIN and issue httpOnly member session
+  app.post("/api/account/verify", async (req, res) => {
+    try {
+      const email = typeof req.body?.email === "string" ? req.body.email.trim().toLowerCase() : "";
+      const pin = typeof req.body?.pin === "string" ? req.body.pin.trim() : "";
+      if (!email || !email.includes("@") || !/^\d{6}$/.test(pin)) {
+        return res.status(400).json({ ok: false, error: "Email and 6-digit code are required" });
+      }
+
+      const verified = verifyAccountPin(email, pin);
+      if (!verified.ok) {
+        return res.status(401).json({ ok: false, error: verified.error });
+      }
+
+      const visitorId = getOrCreateVisitorId(req, res);
+      const result = await claimVisitorToMember(storage, {
+        email,
+        visitorId: verified.pending.visitorId || visitorId,
+        assistantSessionId: verified.pending.assistantSessionId,
+        signalSessionId: verified.pending.signalSessionId,
+        displayName: verified.pending.displayName,
       });
 
       res.cookie("ak_member_token", result.member.accessToken, {
@@ -1721,7 +1794,7 @@ export async function registerRoutes(app: Express): Promise<void> {
 
       signalStore.add({
         type: "email_capture",
-        source: "decision_hub_claim",
+        source: "decision_hub_verified",
         path: "/account",
         sessionId: visitorId,
         visitorId,
@@ -1730,14 +1803,14 @@ export async function registerRoutes(app: Express): Promise<void> {
 
       res.json({
         ok: true,
-        accessToken: result.member.accessToken,
+        verified: true,
         claimedConversations: result.claimedConversations,
         hasChatHistory: result.hasChatHistory,
         hub: publicMemberHub(result.member, result.decisionMap),
       });
     } catch (err) {
-      console.error("Account claim error:", err);
-      res.status(500).json({ ok: false, error: "Failed to create member profile" });
+      console.error("Account verify error:", err);
+      res.status(500).json({ ok: false, error: "Failed to verify code" });
     }
   });
 
@@ -1769,7 +1842,7 @@ export async function registerRoutes(app: Express): Promise<void> {
       const header = req.headers.authorization || "";
       const bearer = header.startsWith("Bearer ") ? header.slice(7).trim() : "";
       const cookieToken = readCookie(req.headers.cookie, "ak_member_token");
-      const visitorId = getOrCreateVisitorId(req, res);
+      getOrCreateVisitorId(req, res);
       const email = typeof req.body?.email === "string" ? req.body.email.trim().toLowerCase() : "";
       const title = typeof req.body?.title === "string" ? req.body.title.trim() : "Decision recommendation brief";
       const body = typeof req.body?.body === "string" ? req.body.body.trim() : "";
@@ -1777,35 +1850,21 @@ export async function registerRoutes(app: Express): Promise<void> {
         return res.status(400).json({ ok: false, error: "Brief body is required" });
       }
 
-      let member = await findMemberForVisitor(storage, {
+      // Only authenticated members (verified email + PIN / cookie session)
+      const member = await findMemberForVisitor(storage, {
         accessToken: bearer || cookieToken || null,
-        email: email || null,
-        visitorId,
+        visitorId: null,
+        email: null,
       });
-
-      // Auto-create lightweight member profile when a recap email is provided
-      if (!member && email) {
-        const claimed = await claimVisitorToMember(storage, {
-          email,
-          visitorId,
-          assistantSessionId:
-            typeof req.body?.assistantSessionId === "string" ? req.body.assistantSessionId : null,
-          signalSessionId: typeof req.body?.signalSessionId === "string" ? req.body.signalSessionId : null,
-        });
-        member = claimed.member;
-        res.cookie("ak_member_token", member.accessToken, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "lax",
-          maxAge: 1000 * 60 * 60 * 24 * 400,
-          path: "/",
-        });
-      }
 
       if (!member) {
         return res.status(401).json({
           ok: false,
-          error: "Create an account first so recommendation briefs can be saved to your Decision Hub.",
+          needsVerification: true,
+          error:
+            email
+              ? "Verify your email with the PIN we send before saving briefs to your Decision Hub."
+              : "Create an account first so recommendation briefs can be saved to your Decision Hub.",
         });
       }
 
@@ -1821,7 +1880,6 @@ export async function registerRoutes(app: Express): Promise<void> {
         ok: true,
         brief: result.brief,
         hub: publicMemberHub(result.member),
-        accessToken: result.member.accessToken,
       });
     } catch (err) {
       console.error("Account brief error:", err);

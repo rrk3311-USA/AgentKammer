@@ -1,28 +1,45 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-shell";
-import { serviceLandingMap } from "@/data/service-landings";
+import { ArchitecturalHeroDrawing, CTA, PageSection } from "@/components/site-shell";
+import { serviceLandings, serviceLandingMap, type ServiceLanding } from "@/data/service-landings";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
-function publicSummary(summary: string) {
-  return summary;
+function editorialCopy(landing: ServiceLanding) {
+  const paragraphOne = landing.summary;
+  const paragraphTwo =
+    landing.audience[0] && landing.considerations[0]
+      ? `${landing.audience[0]} ${landing.considerations[0]}`
+      : landing.considerations.slice(0, 2).join(" ");
+  const paragraphThree =
+    landing.depthNotes?.[0] ??
+    landing.considerations[landing.considerations.length - 1] ??
+    "The recommendation may be to buy, sell, rent, wait, renovate, or do nothing yet — whichever protects the client best.";
+
+  const quoteRaw =
+    landing.depthNotes?.[1] ??
+    "The first win is clarity: what changed, whether action is required, and which path protects the client best.";
+  const quote = quoteRaw.replace(/^["“]|["”]$/g, "");
+
+  const recommendation =
+    landing.depthNotes?.[landing.depthNotes.length - 1] ??
+    `For ${landing.navLabel.toLowerCase()}, begin with whether anything should change — then choose the path with the highest expected value.`;
+
+  return { paragraphOne, paragraphTwo, paragraphThree, quote, recommendation };
 }
 
-function decisionQuestions(title: string) {
-  return [
-    `What changed enough to make ${title.toLowerCase()} worth evaluating now?`,
-    "Is it better to do nothing, or is doing nothing the risk?",
-    "If a move is right, which constraints should shape the shortlist before listings or showings begin?",
-    "Which option should win: buy, sell, rent, wait, renew, renovate, refinance, rent the current home, or stay put?",
-  ];
+function nextBrief(slug: string) {
+  const index = serviceLandings.findIndex((item) => item.slug === slug);
+  if (index < 0) return serviceLandings[0];
+  return serviceLandings[(index + 1) % serviceLandings.length];
 }
 
 export default function ServiceLanding({ slug }: { slug: string }) {
   const landing = serviceLandingMap[slug];
   const pagePath = landing ? `/services/${landing.slug}` : "/services";
   const pageUrl = `https://www.agentkammer.com${pagePath}`;
-  const questions = landing ? decisionQuestions(landing.navLabel) : [];
+  const next = landing ? nextBrief(landing.slug) : null;
+  const copy = landing ? editorialCopy(landing) : null;
+
   const structuredData = landing
     ? [
         {
@@ -40,11 +57,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
             "@type": "City",
             name: "New York",
           },
-          audience: landing.audience.map((item) => ({
-            "@type": "Audience",
-            audienceType: item,
-          })),
-          description: publicSummary(landing.summary),
+          description: landing.summary,
           url: pageUrl,
         },
         {
@@ -71,38 +84,27 @@ export default function ServiceLanding({ slug }: { slug: string }) {
             },
           ],
         },
-        {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: questions.map((question) => ({
-            "@type": "Question",
-            name: question,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Agent Kammer starts by clarifying what changed, whether action is actually needed, the constraints shaping the decision, and which next step protects the client best before showings or listings take over.",
-            },
-          })),
-        },
       ]
     : undefined;
 
   usePageMetadata({
     title: landing?.title ?? "Services",
-    description: landing ? publicSummary(landing.summary) : "Focused advisory pages for Agent Kammer.",
+    description: landing?.summary ?? "Focused advisory pages for Agent Kammer.",
     path: pagePath,
     keywords: landing?.searchTerms.join(", "),
     structuredData,
   });
 
-  if (!landing) {
+  if (!landing || !copy || !next) {
     return (
       <main className="bg-brand-ivory">
         <PageSection>
-          <SectionHeading
-            eyebrow="Services"
-            title="Service page not found."
-            description="This URL does not match one of the current Decision Brief pages."
-          />
+          <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">Services</p>
+          <h1 className="mt-4 font-display text-4xl text-brand-navy">Service page not found.</h1>
+          <p className="mt-4 text-brand-graphite">This URL does not match one of the current Decision Brief pages.</p>
+          <Link href="/services" className="mt-8 inline-flex text-[11px] uppercase tracking-[0.16em] text-brand-navy">
+            Back to Decision Briefs
+          </Link>
         </PageSection>
       </main>
     );
@@ -110,139 +112,67 @@ export default function ServiceLanding({ slug }: { slug: string }) {
 
   return (
     <main className="bg-brand-ivory">
-      <PageHero
-        eyebrow={landing.eyebrow}
-        title={landing.title}
-        description={publicSummary(landing.summary)}
-        art={landing.art}
-        kicker={
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">Common Starting Points</p>
-            <div className="mt-3 space-y-2">
-              {landing.searchTerms.map((term) => (
-                <p key={term} className="text-sm uppercase tracking-[0.12em] text-brand-ivory/82">
-                  {term}
-                </p>
-              ))}
-            </div>
-          </div>
-        }
-      />
-
-      <PageSection className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
-        <SectionHeading
-          eyebrow="Who It Helps"
-          title={`${landing.navLabel}: start with the situation, not the inventory.`}
-          description={`${publicSummary(landing.summary)} From there, the work narrows: decide whether anything should change, whether doing nothing is wise or dangerous, then decide what kind of change is worth pursuing.`}
-        />
-        <div className="border-y border-brand-border">
-          {landing.audience.map((item, index) => (
-            <div key={item} className="grid gap-3 border-b border-brand-border py-5 last:border-b-0 md:grid-cols-[52px_minmax(0,1fr)] md:gap-5">
-              <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">0{index + 1}</p>
-              <p className="text-base leading-8 text-brand-navy">{item}</p>
-            </div>
-          ))}
+      {/* Title + image */}
+      <section className="border-b border-brand-border">
+        <div className="mx-auto max-w-site px-6 pb-10 pt-14 lg:px-10 lg:pb-14 lg:pt-20">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">{landing.eyebrow}</p>
+          <h1 className="mt-5 max-w-4xl font-display text-[clamp(2.8rem,5.5vw,5.5rem)] leading-[0.9] tracking-[-0.03em] text-brand-navy">
+            {landing.title}
+          </h1>
         </div>
-      </PageSection>
-
-      <section className="border-y border-brand-border bg-white">
-        <PageSection>
-          <SectionHeading
-            eyebrow="Decision Questions"
-            title={`What ${landing.navLabel.toLowerCase()} should clarify before tours begin.`}
-            description="These questions keep the brief honest. Sometimes the right recommendation is to move. Sometimes it is to wait. Sometimes doing nothing is the worst option."
+        <div className="relative mx-auto flex aspect-[16/9] max-h-[520px] w-full max-w-site items-center justify-center overflow-hidden bg-brand-navy lg:aspect-[21/9]">
+          <ArchitecturalHeroDrawing
+            eyebrow={landing.eyebrow}
+            title={landing.title}
+            variant={landing.art}
+            className="flex w-full max-w-4xl items-center justify-center px-8 [&_svg]:max-w-none"
           />
-          <div className="mt-12 border-t border-brand-border">
-            {questions.map((item, index) => (
-              <div
-                key={item}
-                className="grid gap-3 border-b border-brand-border py-6 md:grid-cols-[72px_minmax(0,1fr)] md:gap-6"
-              >
-                <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">0{index + 1}</p>
-                <p className="max-w-4xl text-sm leading-7 text-brand-graphite lg:text-[15px]">{item}</p>
-              </div>
-            ))}
-          </div>
-        </PageSection>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-navy/50 via-transparent to-brand-navy/20" />
+        </div>
       </section>
 
-      <PageSection>
-        <SectionHeading
-          eyebrow="Manhattan Lenses"
-          title={`How Agent Kammer reads ${landing.navLabel.toLowerCase()} decisions.`}
-          description="Each lens removes a class of false options early so attention stays on buildings, neighborhoods, and timing that actually fit."
-        />
-        <div className="mt-12 grid gap-8 border-t border-brand-border pt-8 lg:grid-cols-3">
-          {landing.considerations.map((item, index) => (
-            <div key={item} className="border-t border-brand-border pt-5">
-              <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">Lens 0{index + 1}</p>
-              <p className="mt-4 text-sm leading-7 text-brand-graphite lg:text-[15px]">{item}</p>
-            </div>
-          ))}
-        </div>
-      </PageSection>
+      {/* Article body: three paragraphs + quote + recommendation */}
+      <article className="border-b border-brand-border">
+        <div className="mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24">
+          <p className="text-lg leading-9 text-brand-graphite lg:text-xl lg:leading-10">{copy.paragraphOne}</p>
+          <p className="mt-8 text-lg leading-9 text-brand-graphite lg:text-xl lg:leading-10">{copy.paragraphTwo}</p>
+          <p className="mt-8 text-lg leading-9 text-brand-graphite lg:text-xl lg:leading-10">{copy.paragraphThree}</p>
 
-      {landing.depthNotes?.length ? (
-        <section className="border-y border-brand-border bg-white">
-          <PageSection>
-            <SectionHeading
-              eyebrow="What Usually Matters"
-              title="Practical Manhattan detail for this brief."
-            />
-            <div className="mt-10 space-y-6">
-              {landing.depthNotes.map((note, index) => (
-                <div key={note} className="grid gap-3 border-b border-brand-border pb-6 last:border-b-0 md:grid-cols-[52px_minmax(0,1fr)]">
-                  <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">0{index + 1}</p>
-                  <p className="text-base leading-8 text-brand-navy">{note}</p>
-                </div>
-              ))}
-            </div>
-          </PageSection>
-        </section>
-      ) : null}
-
-      <section className="border-y border-brand-border bg-brand-navy text-brand-ivory">
-        <PageSection className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-          <div className="max-w-3xl">
-            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">Decision Path</p>
-            <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.94] tracking-[-0.03em] text-brand-ivory">
-              The recommendation may be to buy, sell, rent, wait, renew, renovate, refinance, rent the current home, or do nothing yet.
-            </h2>
-            <p className="mt-6 text-base leading-8 text-brand-ivory/72 lg:text-lg">
-              For {landing.navLabel.toLowerCase()}, the first win is clarity: what changed, whether action is required, and which path protects the client best.
+          <blockquote className="my-14 border-l-2 border-brand-brass pl-6">
+            <p className="font-display text-[clamp(1.75rem,3vw,2.35rem)] leading-[1.15] text-brand-navy">
+              “{copy.quote}”
             </p>
-          </div>
-          <div className="grid gap-4">
-            {["What changed?", "Is doing nothing smarter?", "What are the real options?", "Which option protects the client best?"].map((item, index) => (
-              <div key={item} className="grid grid-cols-[3rem_minmax(0,1fr)] items-center gap-4 border border-brand-ivory/14 bg-brand-ivory/5 p-5">
-                <span className="font-mono text-xs text-brand-brass">0{index + 1}</span>
-                <span className="text-sm uppercase tracking-[0.14em] text-brand-ivory/82">{item}</span>
-              </div>
-            ))}
-          </div>
-        </PageSection>
-      </section>
+          </blockquote>
 
-      <PageSection className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-        <div>
-          <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">More Briefs</p>
-          <h2 className="mt-4 max-w-3xl font-display text-[clamp(2rem,4vw,3.25rem)] leading-[0.95] tracking-[-0.03em] text-brand-navy">
-            Compare this brief with the rest of the Decision Brief library.
-          </h2>
+          <div className="border-y border-brand-border py-8">
+            <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Recommendation</p>
+            <p className="mt-4 font-display text-2xl leading-snug text-brand-navy md:text-3xl">{copy.recommendation}</p>
+          </div>
+
+          <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <Link
+              href="/belonging"
+              className="ak-call-button inline-flex items-center justify-between gap-6 px-5 py-4 text-[11px] uppercase tracking-[0.16em]"
+            >
+              Find out if you belong
+              <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+            </Link>
+            <Link
+              href={`/services/${next.slug}`}
+              className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-brand-graphite transition-colors hover:text-brand-brass"
+            >
+              Next: {next.navLabel}
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </Link>
+          </div>
         </div>
-        <Link href="/services">
-          <Button variant="brandOutline" className="gap-2 uppercase tracking-nav">
-            Back to Decision Briefs
-            <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-          </Button>
-        </Link>
-      </PageSection>
+      </article>
 
       <CTA
-        title={landing.cta}
-        description="Request a call to turn the situation into a concise decision brief: what changed, what should happen next, what to avoid, and which pages or buildings deserve attention."
-        href="/contact"
-        label="Request a Call"
+        title="Find out if you’re living where you belong."
+        description={`For ${landing.navLabel.toLowerCase()}, the assessment builds a Decision Profile before any call — so the recommendation can be stay, move, wait, or do nothing.`}
+        href="/belonging"
+        label="Start Decision Assessment"
       />
     </main>
   );

@@ -22,6 +22,10 @@ function upsertMeta(attr: "name" | "property", key: string, content: string) {
   element.setAttribute("content", content);
 }
 
+function removeMeta(attr: "name" | "property", key: string) {
+  document.querySelector(`meta[${attr}="${key}"]`)?.remove();
+}
+
 function upsertLink(rel: string, href: string, hreflang?: string) {
   const selector = hreflang
     ? `link[rel="${rel}"][hreflang="${hreflang}"]`
@@ -52,6 +56,10 @@ function upsertStructuredData(data: Record<string, unknown> | Record<string, unk
   element.textContent = JSON.stringify(data);
 }
 
+function clearStructuredData() {
+  document.getElementById("page-structured-data")?.remove();
+}
+
 export function usePageMetadata({ title, description, path, keywords, locale = "en", structuredData }: PageMetadata) {
   useEffect(() => {
     const fullTitle = title.includes("Agent Kammer") ? title : `${title} | Agent Kammer`;
@@ -65,6 +73,8 @@ export function usePageMetadata({ title, description, path, keywords, locale = "
 
     if (keywords) {
       upsertMeta("name", "keywords", keywords);
+    } else {
+      removeMeta("name", "keywords");
     }
 
     if (path) {
@@ -77,6 +87,8 @@ export function usePageMetadata({ title, description, path, keywords, locale = "
 
     if (structuredData) {
       upsertStructuredData(structuredData);
+    } else {
+      clearStructuredData();
     }
   }, [title, description, path, keywords, locale, structuredData]);
 }

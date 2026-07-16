@@ -21,6 +21,10 @@ const ServiceLanding = lazy(() => import("@/pages/ServiceLanding"));
 const Buy = lazy(() => import("@/pages/Buy"));
 const Perspectives = lazy(() => import("@/pages/Perspectives"));
 const Contact = lazy(() => import("@/pages/Contact"));
+const Belonging = lazy(() => import("@/pages/Belonging"));
+const Privacy = lazy(() => import("@/pages/Privacy"));
+const Terms = lazy(() => import("@/pages/Terms"));
+const Licenses = lazy(() => import("@/pages/Licenses"));
 const Account = lazy(() => import("@/pages/Account"));
 const DecisionHub = lazy(() => import("@/pages/DecisionHub"));
 const AdminPortal = lazy(() => import("@/pages/AdminPortal"));
@@ -88,6 +92,10 @@ function Router() {
       <Route path="/insights/reports/:slug" component={ExecutiveHousingReport} />
       <Route path="/insights/:slug" component={PerspectiveArticle} />
       <Route path="/contact" component={Contact} />
+      <Route path="/belonging" component={Belonging} />
+      <Route path="/privacy" component={Privacy} />
+      <Route path="/terms" component={Terms} />
+      <Route path="/licenses" component={Licenses} />
       <Route path="/account" component={Account} />
       <Route path="/hub" component={DecisionHub} />
       <Route path="/buildings">{() => <Redirect to="/building-reports" />}</Route>

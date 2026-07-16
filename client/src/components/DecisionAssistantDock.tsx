@@ -594,10 +594,10 @@ export function DecisionAssistantDock() {
       }).catch(() => {
         // Keep the chat usable even if memory persistence is temporarily unavailable.
       });
-    }, 350);
+    }, 1500);
 
     return () => window.clearTimeout(timeout);
-  }, [answers, leadScore, memoryLoaded, messages, sessionId]);
+  }, [answers, leadScore, memoryLoaded, messages, sessionId, location]);
 
   async function sendRecap(nextAnswers: Answers, nextScore: number) {
     if (!nextAnswers.email && !nextAnswers.phone) return;
@@ -632,15 +632,12 @@ export function DecisionAssistantDock() {
         throw new Error(message);
       }
 
-      // Also store the recommendation brief in the member Decision Hub account section
+      // Hub brief only when already verified (cookie session) — never auto-claim by email
+      let hubSaved = false;
       try {
-        const memberToken = window.localStorage.getItem("ak_member_token");
         const briefResponse = await fetch("/api/account/briefs", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            ...(memberToken ? { Authorization: `Bearer ${memberToken}` } : {}),
-          },
+          headers: { "Content-Type": "application/json" },
           credentials: "include",
           body: JSON.stringify({
             email: nextAnswers.email,
@@ -658,16 +655,7 @@ export function DecisionAssistantDock() {
             },
           }),
         });
-        if (briefResponse.ok) {
-          const briefBody = await briefResponse.json().catch(() => ({}));
-          if (briefBody?.accessToken) {
-            try {
-              window.localStorage.setItem("ak_member_token", briefBody.accessToken);
-            } catch {
-              /* ignore */
-            }
-          }
-        }
+        hubSaved = briefResponse.ok;
       } catch {
         /* hub save is secondary to lead handoff */
       }
@@ -677,7 +665,9 @@ export function DecisionAssistantDock() {
         {
           role: "assistant",
           text: nextAnswers.email
-            ? "Sent. I also saved this recommendation brief in your Decision Hub account so you can reopen it anytime."
+            ? hubSaved
+              ? "Saved and submitted. Your recommendation brief is in your Decision Hub — verify email anytime to reopen it on another device."
+              : "Saved and submitted to our team. To keep this in your Decision Hub, verify your email with a one-time code and Resume My Decision anytime."
             : "Got it. I saved the decision profile and I’ll use that context when we touch base.",
         },
       ]);

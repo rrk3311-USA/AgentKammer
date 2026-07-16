@@ -37,7 +37,7 @@ export function AgentKammerHorizontalLogo({
         <AkMonogramMark
           variant={markVariant}
           className={cn(
-            stacked ? "h-14 sm:h-16" : headerStyle ? "h-11 sm:h-12 xl:h-14" : "h-9 sm:h-10 xl:h-11",
+            stacked ? "h-14 sm:h-16" : headerStyle ? "h-12 sm:h-[3.25rem] xl:h-[3.75rem]" : "h-9 sm:h-10 xl:h-11",
           )}
         />
       ) : null}

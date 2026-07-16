@@ -1,43 +1,26 @@
 import { Link } from "wouter";
-import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-shell";
+import { ArrowRight } from "lucide-react";
+import { ArchitecturalHeroDrawing, CTA, PageHero } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
-const principles = [
-  {
-    title: "Advisory First",
-    text: "The work starts with judgment and positioning, not volume or velocity. A recommendation can be to wait, rent first, or do nothing.",
-  },
-  {
-    title: "Building-Led Perspective",
-    text: "Good decisions happen when the building, block, and buyer brief are understood together — before apartments dominate attention.",
-  },
-  {
-    title: "Quiet Execution",
-    text: "The tone is measured, private, and precise from first call through close. Urgency is never manufactured.",
-  },
-];
-
-const credentials = [
-  "New York State licensed real estate practice",
-  "ICC Commercial Building Inspector training",
-  "Blueprint reading and construction-document literacy",
-  "OSHA 30 construction safety foundation",
-];
-
-const situations = [
-  { label: "Executive relocation", href: "/services/executive-relocation-nyc" },
-  { label: "Foreign / international buyers", href: "/services/foreign-buyers-new-york" },
-  { label: "School and family planning", href: "/services/school-district-planning-nyc" },
-  { label: "1031 exchange buyers", href: "/services/1031-exchange-new-york" },
-  { label: "Estate and probate sales", href: "/services/probate-estate-sales-nyc" },
-  { label: "Empty-nester downsizing", href: "/services/empty-nester-downsizing-nyc" },
-];
+function SketchDivider({ variant }: { variant: "private-advisory" | "decision-framework" | "building" }) {
+  return (
+    <div className="flex justify-center border-y border-brand-border bg-brand-navy py-10" aria-hidden>
+      <ArchitecturalHeroDrawing
+        eyebrow="About"
+        title="Agent Kammer"
+        variant={variant}
+        className="opacity-90 [&_svg]:max-w-[18rem]"
+      />
+    </div>
+  );
+}
 
 export default function About() {
   usePageMetadata({
     title: "About",
     description:
-      "About Agent Kammer: Manhattan housing decisions guided by building intelligence, life-change diagnosis, and private advisory judgment.",
+      "About Agent Kammer: housing decisions guided by building intelligence, life-change diagnosis, and private advisory judgment.",
     path: "/about",
   });
 
@@ -46,96 +29,80 @@ export default function About() {
       <PageHero
         eyebrow="About"
         title="Private housing guidance before the market gets loud."
-        description="Agent Kammer helps clients decide what should happen next: buy, sell, rent, wait, renovate, refinance, hold, or do nothing. The work starts with judgment, building intelligence, and a clear understanding of what changed."
+        description="Raphael Kammer built Agent Kammer for clients who want judgment — not a louder search. The practice diagnoses what changed, whether anything should change, and whether this is still where you belong."
         art="private-advisory"
       />
 
-      <PageSection className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)]">
-        <SectionHeading
-          eyebrow="Practice"
-          title="Manhattan decisions need more than a listing feed."
-          description="Raphael Kammer built Agent Kammer for clients who want a decision operating system — not a louder search. The practice combines market fluency with building-level literacy so recommendations stay grounded in how New York residences actually work."
-        />
-        <div className="rounded-card border border-brand-border bg-white p-8">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">At a Glance</p>
-          <div className="mt-6 grid gap-6">
-            <div>
-              <p className="font-display text-4xl leading-none text-brand-navy">New York</p>
-              <p className="mt-2 text-sm leading-7 text-brand-graphite">
-                Primary focus on Manhattan neighborhoods, buildings, and ownership structures.
-              </p>
-            </div>
-            <div>
-              <p className="font-display text-4xl leading-none text-brand-navy">Private</p>
-              <p className="mt-2 text-sm leading-7 text-brand-graphite">
-                Communication designed for executives, principals, families, and cross-border clients.
-              </p>
-            </div>
-            <div>
-              <p className="font-display text-4xl leading-none text-brand-navy">Building-first</p>
-              <p className="mt-2 text-sm leading-7 text-brand-graphite">
-                Address quality and resident fit before floor-plan fascination takes over.
-              </p>
-            </div>
-          </div>
-        </div>
-      </PageSection>
+      <article className="mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24">
+        <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Practice</p>
+        <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] leading-[0.94] text-brand-navy">
+          Manhattan decisions need more than a listing feed.
+        </h2>
+        <p className="mt-8 text-lg leading-9 text-brand-graphite">
+          Agent Kammer is a Real Estate Strategist practice. The work starts with life change, uncertainty, and trade-offs — then building-level literacy — before apartments or urgency take over.
+        </p>
+        <p className="mt-6 text-lg leading-9 text-brand-graphite">
+          A recommendation can be to wait, rent first, renovate, sell, buy, or do nothing. When a transaction is right, Agent Kammer remains the advisory layer and curates the right local professionals for execution.
+        </p>
+        <p className="mt-6 text-lg leading-9 text-brand-graphite">
+          Buildings before listings. Better real estate decisions. Live Where You Belong — whether that means stay or move.
+        </p>
+      </article>
 
-      <section className="border-y border-brand-border bg-white">
-        <PageSection className="grid gap-10 lg:grid-cols-2">
-          <div>
-            <SectionHeading
-              eyebrow="Credentials That Matter"
-              title="Building literacy changes the quality of advice."
-              description="Inspector training and construction-document fluency are not marketing props. They help separate cosmetic issues from functional and building-related risk before a client commits capital or time."
-            />
-          </div>
-          <ul className="space-y-4 self-center">
-            {credentials.map((item) => (
-              <li key={item} className="border-b border-brand-border py-4 text-base leading-8 text-brand-navy last:border-b-0">
-                {item}
-              </li>
-            ))}
-          </ul>
-        </PageSection>
-      </section>
+      <SketchDivider variant="building" />
 
-      <PageSection>
-        <SectionHeading eyebrow="Principles" title="Three ideas organize the work." align="center" />
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {principles.map((item) => (
-            <div key={item.title} className="rounded-card border border-brand-border bg-white p-8">
-              <h3 className="font-display text-3xl leading-[0.95] tracking-[-0.03em] text-brand-navy">{item.title}</h3>
-              <p className="mt-4 text-sm leading-7 text-brand-graphite">{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </PageSection>
+      <article className="mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24">
+        <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Credentials That Matter</p>
+        <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] leading-[0.94] text-brand-navy">
+          Building literacy changes the quality of advice.
+        </h2>
+        <p className="mt-8 text-lg leading-9 text-brand-graphite">
+          ICC Commercial Building Inspector training, blueprint reading, OSHA 30, and New York State licensed real estate practice are not marketing props. They help separate cosmetic issues from functional and building-related risk before a client commits capital or time.
+        </p>
+        <p className="mt-6 text-lg leading-9 text-brand-graphite">
+          That literacy sits behind Decision Briefs and Building Reports — used after the decision frame is clear, never as a substitute for asking whether anything should change.
+        </p>
+      </article>
 
-      <section className="border-y border-brand-border bg-white">
-        <PageSection>
-          <SectionHeading
-            eyebrow="Situations Served"
-            title="The practice shows up where life change meets Manhattan complexity."
-            description="A first call usually covers what changed, whether anything should change, and which Decision Brief or Building Report should come next."
-          />
-          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {situations.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="rounded-card border border-brand-border bg-brand-ivory px-5 py-4 text-sm text-brand-navy transition-colors hover:border-brand-brass"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-        </PageSection>
-      </section>
+      <SketchDivider variant="decision-framework" />
+
+      <article className="mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24">
+        <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Principles</p>
+        <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] leading-[0.94] text-brand-navy">
+          Three ideas organize the work.
+        </h2>
+        <ol className="mt-10 space-y-10">
+          <li>
+            <p className="font-display text-2xl text-brand-navy">Advisory first</p>
+            <p className="mt-3 text-base leading-8 text-brand-graphite">
+              Judgment and positioning before volume or velocity. Doing nothing can be the win.
+            </p>
+          </li>
+          <li>
+            <p className="font-display text-2xl text-brand-navy">Building-led perspective</p>
+            <p className="mt-3 text-base leading-8 text-brand-graphite">
+              Building, block, and buyer brief together — before floor plans dominate attention.
+            </p>
+          </li>
+          <li>
+            <p className="font-display text-2xl text-brand-navy">Quiet execution</p>
+            <p className="mt-3 text-base leading-8 text-brand-graphite">
+              Measured, private, precise. Urgency is never manufactured.
+            </p>
+          </li>
+        </ol>
+        <Link
+          href="/belonging"
+          className="mt-12 inline-flex items-center gap-3 border-b border-brand-brass pb-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-navy transition-colors hover:text-brand-brass"
+        >
+          Find out if you’re living where you belong
+          <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+        </Link>
+      </article>
 
       <CTA
-        title="Bring the decision into focus."
-        description="Request a call to clarify what changed, what should happen next, and whether the best move is action or restraint."
+        title="Find out if you’re living where you belong."
+        description="The Decision Assessment is how most relationships begin — a profile first, a call only when it adds judgment."
       />
     </main>
   );

@@ -11,6 +11,7 @@ Do **not** call this a “proposal.” It is a decision artifact — clarity bef
 
 **Related**
 
+- Front door diagnostic: [`docs/product/BELONGING-ASSESSMENT.md`](./BELONGING-ASSESSMENT.md)
 - Hub module alignment: [`docs/architecture/ARCHITECTURE-REVIEW.md`](../architecture/ARCHITECTURE-REVIEW.md) · [`docs/architecture/SYSTEM-DESIGN.md`](../architecture/SYSTEM-DESIGN.md)
 - Ops / next action: [`docs/integrations/notion-crm.md`](../integrations/notion-crm.md) · [`docs/admin/ADMIN-COMMAND-CENTER.md`](../admin/ADMIN-COMMAND-CENTER.md)
 - Notion (shareable):
@@ -25,13 +26,15 @@ Do **not** call this a “proposal.” It is a decision artifact — clarity bef
 Insert in the client journey:
 
 ```txt
-Decision Guide → Discovery Call → Decision Blueprint™ → Building Intelligence / Search → …
+Belonging Assessment → Decision Profile → Discovery Call → Decision Blueprint™ → Building Intelligence / Search → …
 ```
 
 | Stage | Role |
 |-------|------|
-| **Decision Guide** | Early clarity — what changed, constraints, options to consider |
-| **Discovery Call** | Human synthesis — goals, risk tolerance, timeline, building vs life trade-offs |
+| **Belonging Assessment** | Free diagnostic — are you living where you belong? Spec: [`BELONGING-ASSESSMENT.md`](./BELONGING-ASSESSMENT.md) |
+| **Decision Profile** | Visitor report + internal Decision Quality Score (help-worthiness routing) |
+| **Decision Guide / Guidance Advisor** | Early clarity — what changed, constraints, options to consider |
+| **Discovery Call** | Human synthesis — goals, risk tolerance, timeline, building vs life trade-offs (starts from the Decision Profile when available) |
 | **Decision Blueprint™** | Written decision state — situation, key decisions, lens, path, next step |
 | **Building Intelligence / Search** | Evidence and shortlist after the decision frame is set |
 
@@ -74,7 +77,8 @@ Every Blueprint uses these headings in order.
 **4. How We Work** — Always include the full pipeline so the client sees where Blueprint sits:
 
 ```txt
-Decision Guide
+Belonging Assessment
+  → Decision Guide
   → Discovery Call
   → Decision Blueprint™
   → Building Intelligence™
@@ -207,7 +211,8 @@ Copy from the line below. Replace bracketed prompts. Keep headings. Keep philoso
 ## 4. How We Work
 
 ```txt
-Decision Guide
+Belonging Assessment
+  → Decision Guide
   → Discovery Call
   → Decision Blueprint™   ← you are here
   → Building Intelligence™

@@ -161,7 +161,7 @@ flowchart TB
     D --> D4[Market Briefs]
   end
 
-  subgraph Footer["Footer Decision Library"]
+  subgraph Footer["Footer Research Library"]
     G[Start Here / Decisions / Life Changes]
     H[Buyer & Seller Guides]
     I[NYC Neighborhoods]
@@ -174,7 +174,7 @@ flowchart TB
 |---------|--------|----------|
 | Primary | `client/src/components/site-shell.tsx` → `Header.tsx` | 5 links + opens Decision Assistant |
 | Building subnav | `buildingReportsNav` + `ReportSubnav` | On Building Intelligence pages |
-| Footer | `Footer.tsx` + `decision-navigation.ts` | Decision Tree copy + Decision Library groups |
+| Footer | `Footer.tsx` + `decision-navigation.ts` | Research Library (Browse): search + Popular Searches pills + reduced quick-link cluster |
 | Services anchors | `Services.tsx` | `#frameworks`, `#decisions`, `#life-changes`, etc. |
 
 Privacy / Terms / Licenses in the footer are **spans only** (not linked) today.

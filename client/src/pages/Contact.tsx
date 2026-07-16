@@ -2,12 +2,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Mail, MapPin } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { PageHero, PageSection, SectionHeading } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
+import { Link } from "wouter";
 
 const decisionTypes = [
   "Buy",
@@ -18,18 +19,32 @@ const decisionTypes = [
   "Renovate",
   "Refinance",
   "Rent current home",
+  "Decision Assessment / belonging",
   "Not sure yet",
 ];
 
 const timelines = ["Now / 30 days", "1-3 months", "3-6 months", "6+ months", "Just exploring"];
 const budgetRanges = ["Under $1M", "$1M-$2M", "$2M-$4M", "$4M+", "Rental", "Not sure / private"];
-const nextSteps = ["Private call", "Email recap first", "Building or neighborhood brief", "Seller strategy", "Not sure"];
+const nextSteps = ["Private call", "Email recap first", "Building or neighborhood brief", "Seller strategy", "Decision Assessment", "Not sure"];
+
+function readIntent() {
+  if (typeof window === "undefined") return null;
+  return new URLSearchParams(window.location.search).get("intent");
+}
 
 export default function Contact() {
+  const [intent, setIntent] = useState<string | null>(null);
+  const isBelonging = intent === "belonging";
+
+  useEffect(() => {
+    setIntent(readIntent());
+  }, []);
+
   usePageMetadata({
-    title: "Contact",
-    description:
-      "Request a private call with Agent Kammer.",
+    title: isBelonging ? "Decision Assessment Intake" : "Contact",
+    description: isBelonging
+      ? "Request your Decision Assessment — find out if you’re living where you belong."
+      : "Request a private call with Agent Kammer.",
     path: "/contact",
   });
 
@@ -44,6 +59,16 @@ export default function Contact() {
     nextStep: "",
     message: "",
   });
+
+  useEffect(() => {
+    if (!isBelonging) return;
+    setFormData((current) => ({
+      ...current,
+      decisionType: current.decisionType || "Decision Assessment / belonging",
+      nextStep: current.nextStep || "Decision Assessment",
+    }));
+  }, [isBelonging]);
+
   const { toast } = useToast();
 
   const contactMutation = useMutation({
@@ -101,24 +126,45 @@ export default function Contact() {
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
       <PageHero
-        eyebrow="Contact"
-        title="Request a private call."
-        description="Share what is changing, what decision you are weighing, and where the conversation should begin. The response should help clarify the next step before listings or showings take over."
+        eyebrow={isBelonging ? "Decision Assessment" : "Contact"}
+        title={isBelonging ? "Request your Decision Assessment." : "Request a private call."}
+        description={
+          isBelonging
+            ? "Share enough context to prepare a Decision Profile — what changed, what feels off about where you live, and what a good five-year outcome looks like. The scored AI report is in build; intake today is human-paced."
+            : "Share what is changing, what decision you are weighing, and where the conversation should begin. Or start with the Belonging Assessment first."
+        }
         art="contact"
+        kicker={
+          isBelonging ? undefined : (
+            <Link href="/belonging" className="text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass">
+              Prefer the Decision Assessment? Find out if you’re living where you belong →
+            </Link>
+          )
+        }
       />
 
       <PageSection className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
         <div>
           <SectionHeading
-            eyebrow="Reach Out"
-            title="Use the request form when there is enough context to respond well."
-            description="A few filters keep the first reply useful: what changed, what decision is on the table, timing, budget or readiness, and the best next step."
+            eyebrow={isBelonging ? "Intake" : "Reach Out"}
+            title={
+              isBelonging
+                ? "Tell us what belonging would feel like."
+                : "Use the request form when there is enough context to respond well."
+            }
+            description={
+              isBelonging
+                ? "A few filters keep the first profile useful: what changed, what drains you, timing, and whether you want a call after the report."
+                : "A few filters keep the first reply useful: what changed, what decision is on the table, timing, budget or readiness, and the best next step."
+            }
           />
           <div className="mt-8 grid gap-4">
             <a href="#request-call" className="rounded-card border border-brand-border bg-white p-6">
               <div className="inline-flex items-center gap-3 text-brand-navy">
                 <Mail className="h-4 w-4 text-brand-brass" strokeWidth={1.5} />
-                <span className="text-sm uppercase tracking-[0.16em]">Send a Filtered Request</span>
+                <span className="text-sm uppercase tracking-[0.16em]">
+                  {isBelonging ? "Send Assessment Intake" : "Send a Filtered Request"}
+                </span>
               </div>
             </a>
             <div className="rounded-card border border-brand-border bg-white p-6">
@@ -131,9 +177,13 @@ export default function Contact() {
         </div>
 
         <div id="request-call" className="rounded-card border border-brand-border bg-white p-8 shadow-soft lg:p-10">
-          <h2 className="font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">Request a Call</h2>
+          <h2 className="font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">
+            {isBelonging ? "Assessment Intake" : "Request a Call"}
+          </h2>
           <p className="mt-3 text-sm leading-7 text-brand-graphite">
-            Answer the minimum filters so the reply can include a useful recommendation, not just a scheduling link.
+            {isBelonging
+              ? "Answer the minimum filters so the Decision Profile can start from real context — not a blank calendar invite."
+              : "Answer the minimum filters so the reply can include a useful recommendation, not just a scheduling link."}
           </p>
           <form onSubmit={handleSubmit} className="mt-8 space-y-6">
               <div className="grid gap-5 md:grid-cols-2">
