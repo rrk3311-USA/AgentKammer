@@ -10,7 +10,7 @@ import {
   sendPinEmail,
   setCooldownCookie,
   setPendingOtpCookie,
-} from "./_shared";
+} from "./_shared.js";
 
 // Start email + PIN verification (does not issue a member session).
 export default async function handler(req: ApiRequest, res: ApiResponse) {

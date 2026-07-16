@@ -9,7 +9,7 @@ import {
   parseBody,
   publicHub,
   setMemberCookie,
-} from "./_shared";
+} from "./_shared.js";
 
 // Save a recommendation brief into the member's Decision Hub. Only
 // authenticated members (verified email + PIN / cookie session) — never

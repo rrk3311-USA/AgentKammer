@@ -13,7 +13,7 @@ import {
   publicHub,
   setMemberCookie,
   setPendingOtpCookie,
-} from "./_shared";
+} from "./_shared.js";
 
 // Verify PIN and issue a signed, httpOnly member session cookie.
 export default async function handler(req: ApiRequest, res: ApiResponse) {

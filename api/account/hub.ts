@@ -1,4 +1,4 @@
-import { ApiRequest, ApiResponse, getMemberFromRequest, publicHub, readCookie } from "./_shared";
+import { ApiRequest, ApiResponse, getMemberFromRequest, publicHub, readCookie } from "./_shared.js";
 
 export default async function handler(req: ApiRequest, res: ApiResponse) {
   if (req.method !== "GET") {
