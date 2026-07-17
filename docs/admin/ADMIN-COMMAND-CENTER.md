@@ -7,7 +7,7 @@
 **Related docs**
 
 - [Notion CRM sync contract](../integrations/notion-crm.md)
-- [Decision Blueprint™ (post–Discovery Call deliverable)](../product/DECISION-BLUEPRINT.md)
+- [Decision Blueprint™ (post–Housing Strategy Session deliverable)](../product/DECISION-BLUEPRINT.md)
 - [Admin portal (implementation notes)](../admin-portal.md)
 - [Architecture review (Decision OS)](../architecture/ARCHITECTURE-REVIEW.md)
 - [System design](../architecture/SYSTEM-DESIGN.md)
@@ -109,7 +109,7 @@ Target: one **Person** with aliases; everything else attaches to the Person ([AR
 
 Payload fields mirrored to Notion (see sync contract): Name, Email/phone, Source page, Decision Guide summary, Goals, Timeline, Budget, Neighborhoods/buildings, Lead score, Pipeline stage, Recommended next action, Last activity, Full conversation link.
 
-**Recommended next action (advisor journey):** after Discovery Call, next action should be **Deliver Decision Blueprint™** (or the Blueprint’s §6 step once delivered). Do not label this a “proposal.” Journey: Decision Guide → Discovery Call → Decision Blueprint™ → Building Intelligence / Search → … Full contract: [`docs/product/DECISION-BLUEPRINT.md`](../product/DECISION-BLUEPRINT.md).
+**Recommended next action (advisor journey):** after Housing Strategy Session, next action should be **Deliver Decision Blueprint™** (or the Blueprint’s §6 step once delivered). Do not label this a “proposal.” Journey: Decision Guide → Housing Strategy Session → Decision Blueprint™ → Building Intelligence / Search → … Full contract: [`docs/product/DECISION-BLUEPRINT.md`](../product/DECISION-BLUEPRINT.md).
 
 ---
 
@@ -119,7 +119,7 @@ Payload fields mirrored to Notion (see sync contract): Name, Email/phone, Source
 New Signals → Engaged → Profiled → Qualified → Call Ready → Active
 ```
 
-Computed on website for scoring / `/admin` peek. Human stage notes and next actions live primarily in Notion until durable `pipeline_opportunities` write-back exists. **Call Ready → Active** typically includes Discovery Call + Decision Blueprint™ delivery before heavy search.
+Computed on website for scoring / `/admin` peek. Human stage notes and next actions live primarily in Notion until durable `pipeline_opportunities` write-back exists. **Call Ready → Active** typically includes Housing Strategy Session + Decision Blueprint™ delivery before heavy search.
 
 ---
 

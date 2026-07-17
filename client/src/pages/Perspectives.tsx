@@ -76,7 +76,7 @@ export default function Perspectives() {
 
       <CTA
         title="Need a more tailored read than a public note can provide?"
-        description="Request a call to turn the observation into a decision brief for your building, neighborhood, timeline, or move question."
+        description="Begin a Housing Strategy Session to turn the observation into a decision brief for your building, neighborhood, timeline, or move question."
       />
     </main>
   );

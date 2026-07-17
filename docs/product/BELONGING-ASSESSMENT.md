@@ -1,17 +1,19 @@
 # Belonging Assessment
 
 **Status:** Product brief (spec first; build next)  
-**Position in journey:** public front door — before Discovery Call  
+**Position in journey:** public front door — before Housing Strategy Session  
 **Tone:** diagnostic · advisory · life-first — not a quiz gimmick or valuation funnel
 
 **Canonical name:** Belonging Assessment  
+**Public names (preferred):** Housing Decision Assessment · Life & Housing Assessment  
 **Public promise:** Find out if you’re living where you belong.  
-**Visitor artifact:** Decision Profile (report)  
+**Visitor artifact:** Agent Kammer Decision Profile (report / future PDF)  
 **Internal artifact:** Decision Quality Score + opportunity routing
 
 **Related**
 
 - Brand: [`docs/brand/AGENT-KAMMER-BRAND.md`](../brand/AGENT-KAMMER-BRAND.md) — two-question spine, outcome vs diagnostic
+- Practice model: [`docs/product/RESIDENTIAL-ADVISORY.md`](./RESIDENTIAL-ADVISORY.md)
 - Next deliverable: [`docs/product/DECISION-BLUEPRINT.md`](./DECISION-BLUEPRINT.md)
 - Architecture: [`docs/architecture/SYSTEM-DESIGN.md`](../architecture/SYSTEM-DESIGN.md)
 
@@ -24,7 +26,7 @@ Insert at the start of the client journey:
 ```txt
 Belonging Assessment
   → Decision Profile (visitor) + Decision Quality Score (internal)
-  → Discovery Call (when warranted)
+  → Housing Strategy Session (when warranted)
   → Decision Blueprint™
   → Building Intelligence / Search
   → …
@@ -35,10 +37,10 @@ Belonging Assessment
 | **Belonging Assessment** | Free diagnostic — life fit, not listing filters |
 | **Decision Profile** | Personalized report the visitor receives by email |
 | **Decision Quality Score** | Internal — help-worthiness and follow-up routing |
-| **Discovery Call** | Human synthesis when the profile warrants it |
-| **Decision Blueprint™** | Written decision state after the call |
+| **Housing Strategy Session** | Human synthesis when the profile warrants it |
+| **Decision Blueprint™** | Written decision state after the Housing Strategy Session |
 
-This is the product. Not “book a call.” Not “get a home valuation.” The AI is the first diagnostician of an advisory practice.
+This is the product. Not “book a free call.” Not “get a home valuation.” The AI is the first diagnostician of an advisory practice.
 
 ---
 
@@ -101,28 +103,31 @@ Avoid leading with beds/baths, Zillow-style filters, or “are you a buyer or se
 
 ---
 
-## Visitor output — Decision Profile
+## Visitor output — Agent Kammer Decision Profile
 
-Delivered as a personalized report (email + on-site / account later).
+Delivered as a personalized report (email + on-site / account later; polished PDF is the long-term artifact people revisit and share).
+
+Belonging Score is **one dimension** of a larger profile — not the whole product.
 
 ### Structure
 
 ```txt
+Agent Kammer Decision Profile
 Are You Living Where You Belong?
 
 Belonging Score: NN/100
+Decision Readiness: …
+Lifestyle Fit: …
+Financial Flexibility: …
+Timing Outlook: …
+Recommended Next Step: …
+  (posture + reasoning — people pay for the reasoning)
 
 Strengths
-  • …
   • …
 
 Friction
   • …
-  • …
-
-Recommendation
-  One clear posture + horizon
-  e.g. Stay for now; begin planning a move within 18–24 months.
 ```
 
 ### Recommendation vocabulary (use these)
@@ -130,12 +135,16 @@ Recommendation
 Stay · Renovate · Rent · Buy · Sell · Wait · Do nothing yet  
 (Combinations allowed: stay-and-renovate, wait-then-buy, etc.)
 
+Always include **why** — a personalized recommendation with reasoning, not a bare label.
+
 ### Tone of the report
 
 - Measured, specific, adult
 - No manufactured urgency
 - No “dream home” language
-- One recommended posture — not a menu of services to upsell
+- No “real estate quiz” framing — this is a Housing Decision Assessment
+- One recommended posture + reasoning — not a menu of services to upsell
+- Designed to be revisited and updated as life changes (ongoing advisory, not one-time transaction)
 
 ---
 
@@ -195,9 +204,9 @@ Decision Quality Score: NN/100
 
 1. Immediate: Decision Profile summary + Belonging Score + recommendation
 2. Optional sequence (nurture only when routing says so): short notes tied to their friction points — not listing alerts
-3. Clear path to Request a call / Begin the decision when ready
+3. Clear path to Book a Housing Strategy Session / Begin the decision when ready
 
-Assessment answers + scores feed the advisor brief before any Discovery Call so the call starts from a known decision profile.
+Assessment answers + scores feed the advisor brief before any Housing Strategy Session so the session starts from a known decision profile.
 
 ---
 
@@ -208,9 +217,9 @@ Optimize for:
 - Completed assessments (not bounce vanity)
 - Report open / revisit rate
 - “This was useful” signal (optional one-tap)
-- Discovery Calls that start already oriented
+- Housing Strategy Sessions that start already oriented
 - Decisions that include stay / wait / renovate as wins
-- Follow-up precision (call the right people; leave others alone)
+- Follow-up precision (engage the right people; leave others alone)
 
 Do **not** optimize for:
 

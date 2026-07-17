@@ -21,6 +21,7 @@ const ServiceLanding = lazy(() => import("@/pages/ServiceLanding"));
 const Buy = lazy(() => import("@/pages/Buy"));
 const Perspectives = lazy(() => import("@/pages/Perspectives"));
 const Contact = lazy(() => import("@/pages/Contact"));
+const Advisory = lazy(() => import("@/pages/Advisory"));
 const Belonging = lazy(() => import("@/pages/Belonging"));
 const Privacy = lazy(() => import("@/pages/Privacy"));
 const Terms = lazy(() => import("@/pages/Terms"));
@@ -92,6 +93,7 @@ function Router() {
       <Route path="/insights/reports/:slug" component={ExecutiveHousingReport} />
       <Route path="/insights/:slug" component={PerspectiveArticle} />
       <Route path="/contact" component={Contact} />
+      <Route path="/advisory" component={Advisory} />
       <Route path="/belonging" component={Belonging} />
       <Route path="/privacy" component={Privacy} />
       <Route path="/terms" component={Terms} />

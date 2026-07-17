@@ -142,7 +142,7 @@ Only after profiles/citations/search console are set.
 
 Every page should end with:
 
-Request a call.
+Begin a Housing Strategy Session.
 
 Minimum filters:
 

@@ -1,20 +1,21 @@
 # Agent Kammer
 
-Agent Kammer is a Real Estate Strategist helping people make better real estate decisions — including whether to buy, sell, rent, wait, renew, renovate, refinance, keep, or do nothing yet.
+Agent Kammer is a Residential Advisory practice helping people make better real estate decisions — including whether to buy, sell, rent, wait, renew, renovate, refinance, keep, or do nothing yet.
 
 **Buildings before listings.** The quality of the asset matters more than the marketing of the listing.
 
-Agent Kammer provides strategic guidance, clarifies complex real estate decisions, and connects clients with the right local professionals when transaction expertise is needed — anywhere in the U.S.
+**Agent Kammer Residential Advisory** — ongoing strategic guidance for life’s biggest residential decisions. When transaction expertise is needed, Agent Kammer connects clients with the right local professionals — anywhere in the U.S.
 
 ## Brand stack
 
 - Agent Kammer
-- Real Estate Strategist
+- Residential Advisory
 - Buildings before listings. (philosophy)
 - Better real estate decisions. (promise)
 - Live Where You Belong. (outcome)
 - What’s changing? (opener)
 - Are you living where you belong? (diagnostic)
+- Ongoing strategic guidance for life’s biggest residential decisions. (practice line)
 
 ## Core URLs
 
@@ -23,13 +24,34 @@ Agent Kammer provides strategic guidance, clarifies complex real estate decision
 - Decision Briefs: https://www.agentkammer.com/services
 - Housing Advisory / Start Here: https://www.agentkammer.com/buyer-advisory
 - Building Intelligence: https://www.agentkammer.com/building-reports
+- Residential Advisory (offer stack): https://www.agentkammer.com/advisory
 - Contact: https://www.agentkammer.com/contact
 
-## Funnel
+## Client journey
 
-Belonging Assessment → Decision Profile → Discovery Call (when warranted) → Decision Blueprint → Curated local expert (when a transaction is right)
+1. What's Changing? — https://www.agentkammer.com/services#whats-changing
+2. Decision Assessment — https://www.agentkammer.com/belonging
+3. Relevant Decision Brief — situation pages under /services/...
+4. Strategy — Housing Strategy Session / Decision Blueprint — https://www.agentkammer.com/advisory
 
-## High-Intent Decision Briefs
+Start Here (journey map): https://www.agentkammer.com/buyer-advisory  
+Do not collapse Start Here and Decision Assessment into one step.
+
+## Offerings (summary)
+
+À la carte: Housing Strategy Session · Building Second Opinion · Residential Portfolio Review  
+Memberships: Essentials · Executive Advisory · Private Residential Office
+
+The product is the ongoing advisory relationship — not a bundle of calls.
+
+## Decision surface (/services)
+
+Three questions:
+- What's Changing? (life changes)
+- What Decision Are You Facing? (buy / sell / rent / stay / wait / renovate / …)
+- What Are You Trying to Understand? (condo vs co-op, buildings, investment, schools, …)
+
+Each page opened from this surface is a Decision Brief.
 
 ### NYC neighborhoods
 - Upper West Side: https://www.agentkammer.com/services/upper-west-side-buyers-nyc

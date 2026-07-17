@@ -44,7 +44,7 @@ No Notion → website writes in v1.
 | Neighborhoods / buildings | Neighborhoods / buildings | Free text or later Buildings relation |
 | Lead score | Lead score (number) | From website strategy score |
 | Pipeline stage | Pipeline stage | New Signals → … → Active |
-| Recommended next action | Recommended next action | Operator-facing — after Discovery Call, prefer Blueprint delivery or the Blueprint’s own next step (see below) |
+| Recommended next action | Recommended next action | Operator-facing — after Housing Strategy Session, prefer Blueprint delivery or the Blueprint’s own next step (see below) |
 | Last activity | Last activity (date) | Recency |
 | Full conversation link | Full conversation link (URL) | Admin or deep link when available |
 
@@ -62,9 +62,9 @@ Notion (under CRM Command Center):
 |-------|----------------------------------|
 | Call booked / just completed | `Deliver Decision Blueprint™` |
 | Blueprint delivered | Use §6 of the Blueprint (one action) — e.g. Building Report, tour shortlist, wait, renovate first, offer strategy |
-| Earlier (pre-call) | Decision Guide follow-up · schedule Discovery Call |
+| Earlier (pre-call) | Decision Guide follow-up · schedule Housing Strategy Session |
 
-When creating a Task / Follow-up from Recommended next action after a Discovery Call, title it for Blueprint delivery first, then for the Blueprint’s recommended next step.
+When creating a Task / Follow-up from Recommended next action after a Housing Strategy Session, title it for Blueprint delivery first, then for the Blueprint’s recommended next step.
 
 ---
 
@@ -75,7 +75,7 @@ When the website creates or meaningfully updates a lead:
 1. **Create or update Person** in Notion People (match on email, else phone, else website ID).
 2. **Attach Conversation** — create/update Conversations row linked to Person; store summary + full conversation link.
 3. **Attach Opportunity** — create/update Leads / Opportunities row linked to Person with score, stage, goals, next action.
-4. **Optional:** create Tasks / Follow-ups from Recommended next action (Status = Todo) — including Blueprint delivery after Discovery Call.
+4. **Optional:** create Tasks / Follow-ups from Recommended next action (Status = Todo) — including Blueprint delivery after Housing Strategy Session.
 
 Failures in Notion sync must log and swallow — website lead create always succeeds.
 

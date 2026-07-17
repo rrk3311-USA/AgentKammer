@@ -185,23 +185,23 @@ Privacy / Terms / Licenses in the footer are **spans only** (not linked) today.
 
 ### Client advisory journey (canonical)
 
-Post–Discovery Call deliverable is the **Decision Blueprint™** (aliases: Strategic Recommendation · Executive Decision Brief). Do **not** call it a “proposal.” Spec + template: [`docs/product/DECISION-BLUEPRINT.md`](../product/DECISION-BLUEPRINT.md). Notion: [Guide & Recap](https://www.notion.so/39d0ad628ae581158d9dc26128a751ea) · [Template](https://www.notion.so/39d0ad628ae581dcae58c4b4bf93585a).
+Post–Housing Strategy Session deliverable is the **Decision Blueprint™** (aliases: Strategic Recommendation · Executive Decision Brief). Do **not** call it a “proposal.” Spec + template: [`docs/product/DECISION-BLUEPRINT.md`](../product/DECISION-BLUEPRINT.md). Notion: [Guide & Recap](https://www.notion.so/39d0ad628ae581158d9dc26128a751ea) · [Template](https://www.notion.so/39d0ad628ae581dcae58c4b4bf93585a).
 
 ```txt
-Decision Guide → Discovery Call → Decision Blueprint™ → Building Intelligence / Search → …
+Decision Guide → Housing Strategy Session → Decision Blueprint™ → Building Intelligence / Search → …
 ```
 
 Full How We Work pipeline (Blueprint §4):
 
 ```txt
-Decision Guide → Discovery Call → Decision Blueprint™ → Building Intelligence™
+Decision Guide → Housing Strategy Session → Decision Blueprint™ → Building Intelligence™
   → Property Search → Building Reports → Decision Memo → Offer Strategy
   → Negotiation → Closing → Ownership Intelligence
 ```
 
 ```mermaid
 flowchart LR
-  DG[Decision Guide] --> DC[Discovery Call]
+  DG[Decision Guide] --> DC[Housing Strategy Session]
   DC --> BP[Decision Blueprint™]
   BP --> BI[Building Intelligence / Search]
   BI --> BR[Building Reports]
@@ -284,7 +284,7 @@ flowchart TB
   Rec --> Out[Stay | Renovate | Move | Invest]
 ```
 
-**Hub modules (Planned):** Goals · Decision Timeline · **Decision Blueprint™** (post–Discovery Call decision artifact; not a proposal — see [`DECISION-BLUEPRINT.md`](../product/DECISION-BLUEPRINT.md)) · Saved Buildings · Neighborhoods · Reports · Renovation Planner · Vision Board · Documents · AI Advisor.
+**Hub modules (Planned):** Goals · Decision Timeline · **Decision Blueprint™** (post–Housing Strategy Session decision artifact; not a proposal — see [`DECISION-BLUEPRINT.md`](../product/DECISION-BLUEPRINT.md)) · Saved Buildings · Neighborhoods · Reports · Renovation Planner · Vision Board · Documents · AI Advisor.
 
 Prior Person / Timeline / Graph priorities nest under this evolution (unchanged P0/P1).
 

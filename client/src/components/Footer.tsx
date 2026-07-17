@@ -11,19 +11,30 @@ const libraryLinks = decisionNavigationGroups.flatMap((group) =>
 );
 
 const quickLinks = [
-  { label: "Start Here", href: "/buyer-advisory" },
+  { label: "What's Changing?", href: "/services#whats-changing" },
   { label: "Decision Assessment", href: "/belonging" },
-  { label: "Building Intelligence", href: "/building-reports" },
+  { label: "Start Here", href: "/buyer-advisory" },
+  { label: "Building Intelligence Library", href: "/building-reports" },
+  { label: "Residential Advisory", href: "/advisory" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
+const lifeChangeLinks = [
+  { label: "Executive Relocation", href: "/services/executive-relocation-nyc" },
+  { label: "Growing Family", href: "/services/new-baby-growing-family-nyc" },
+  { label: "Divorce", href: "/services/divorce-property-sales-nyc" },
+  { label: "Retirement", href: "/services/retiree-senior-home-buyers-nyc" },
+  { label: "First Home", href: "/services/first-home-buyers-nyc" },
+  { label: "Inheritance", href: "/services/inheritance-housing-nyc" },
+] as const;
+
 const searchPrompts = [
-  "Search: Should I move?",
-  "Search: Condo vs Co-op",
-  "Search: Executive relocation",
-  "Search: What's changing?",
-  "Search: Should I renovate before selling?",
-  "Search: Should I wait to buy?",
+  "Search: Should I stay or move?",
+  "Search: Should I buy now or wait?",
+  "Search: Is Manhattan worth it?",
+  "Search: Should I rent for one more year?",
+  "Search: Should I renovate first?",
+  "Search: Is this building a good investment?",
 ] as const;
 
 const popularSearches = [
@@ -44,7 +55,7 @@ export function Footer() {
   useEffect(() => {
     const interval = window.setInterval(() => {
       setPromptIndex((current) => (current + 1) % searchPrompts.length);
-    }, 4000);
+    }, 3200);
     return () => window.clearInterval(interval);
   }, []);
 
@@ -73,7 +84,7 @@ export function Footer() {
               Live Where You Belong.
             </p>
             <p className="mt-4 max-w-sm text-sm leading-7 text-brand-graphite">
-              Buildings before listings. Better real estate decisions — including the decision to stay.
+              Buildings before listings. Private housing guidance. Local execution when needed.
             </p>
             <nav aria-label="Footer" className="mt-8 flex flex-wrap gap-x-5 gap-y-2">
               {quickLinks.map((link) => (
@@ -86,6 +97,27 @@ export function Footer() {
                 </Link>
               ))}
             </nav>
+
+            <div className="mt-10 border-t border-brand-border pt-8">
+              <p className="text-[10px] uppercase tracking-[0.18em] text-brand-cocoa">Life Changes</p>
+              <nav aria-label="Life Changes" className="mt-4 flex flex-col gap-2.5">
+                {lifeChangeLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm text-brand-navy transition-colors hover:text-brand-brass"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+              <Link
+                href="/services#whats-changing"
+                className="mt-4 inline-block text-[11px] uppercase tracking-[0.14em] text-brand-cocoa transition-colors hover:text-brand-brass"
+              >
+                All life changes →
+              </Link>
+            </div>
           </div>
 
           <div>

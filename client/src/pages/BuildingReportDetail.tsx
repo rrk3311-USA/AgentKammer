@@ -258,7 +258,7 @@ export default function BuildingReportDetail() {
 
       <CTA
         title={`Want ${report.buildingName} mapped to your brief?`}
-        description="Request a call with timing, budget, and what the next home needs to do better than the current one."
+        description="Begin a Housing Strategy Session with timing, budget, and what the next home needs to do better than the current one."
       />
     </main>
   );

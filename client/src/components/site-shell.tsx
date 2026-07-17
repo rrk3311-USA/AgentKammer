@@ -4,10 +4,10 @@ import { ArrowRight, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const primaryNav = [
-  { label: "Start Here", href: "/buyer-advisory" },
+  { label: "What's Changing?", href: "/services#whats-changing" },
   { label: "Decisions", href: "/services#decisions" },
-  { label: "Life Changes", href: "/services#life-changes" },
-  { label: "Building Intelligence", href: "/building-reports" },
+  { label: "Understand", href: "/services#understand" },
+  { label: "Building Library", href: "/building-reports" },
   { label: "About", href: "/about" },
 ] as const;
 
@@ -73,7 +73,7 @@ function resolveHeroArt(eyebrow: string, title: string, variant?: HeroArtVariant
   if (/single women/.test(topic)) return "single-women";
   if (/townhouse|brownstone/.test(topic)) return "townhouse-buyer";
   if (/insight|editorial|notes/.test(topic)) return "insights";
-  if (/contact|request a private call/.test(topic)) return "contact";
+  if (/contact|request a private call|housing strategy session/.test(topic)) return "contact";
   if (/building|report|intelligence/.test(topic)) return "building";
   if (/brief|service|buyer|decision/.test(topic)) return "brief";
   return "brief";

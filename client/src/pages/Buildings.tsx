@@ -98,7 +98,7 @@ export default function Buildings() {
 
       <CTA
         title="Want the reports shaped around a live search brief?"
-        description="Request a call with the building, neighborhood, or timing question that needs a sharper answer."
+        description="Begin a Housing Strategy Session with the building, neighborhood, or timing question that needs a sharper answer."
       />
     </main>
   );

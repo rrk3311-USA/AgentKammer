@@ -199,7 +199,7 @@ Permanent client hub modules (target — **Planned**, not Live):
 |--------|------|
 | Goals | What the Person is optimizing for |
 | Decision Timeline | Living spine (heart of Hub — P0) |
-| Decision Blueprint™ | Post–Discovery Call decision artifact (Situation · Key Decisions · BI Lens · How We Work · Why AK · Next Step). Aliases: Strategic Recommendation · Executive Decision Brief. **Not** a “proposal.” Spec: [`docs/product/DECISION-BLUEPRINT.md`](../product/DECISION-BLUEPRINT.md). Notion: [Guide & Recap](https://www.notion.so/39d0ad628ae581158d9dc26128a751ea) · [Template](https://www.notion.so/39d0ad628ae581dcae58c4b4bf93585a). **Planned** in Hub; human-delivered via Markdown/Notion today |
+| Decision Blueprint™ | Post–Housing Strategy Session decision artifact (Situation · Key Decisions · BI Lens · How We Work · Why AK · Next Step). Aliases: Strategic Recommendation · Executive Decision Brief. **Not** a “proposal.” Spec: [`docs/product/DECISION-BLUEPRINT.md`](../product/DECISION-BLUEPRINT.md). Notion: [Guide & Recap](https://www.notion.so/39d0ad628ae581158d9dc26128a751ea) · [Template](https://www.notion.so/39d0ad628ae581dcae58c4b4bf93585a). **Planned** in Hub; human-delivered via Markdown/Notion today |
 | Saved Buildings | Building shortlist |
 | Neighborhoods | Place shortlist |
 | Reports | Building / market / decision briefs |
@@ -208,7 +208,7 @@ Permanent client hub modules (target — **Planned**, not Live):
 | Documents | Artifacts & uploads |
 | AI Advisor | Companion entry (Decision Guide evolution) |
 
-**Client journey insert (accepted):** Decision Guide → Discovery Call → **Decision Blueprint™** → Building Intelligence / Search → …
+**Client journey insert (accepted):** Decision Guide → Housing Strategy Session → **Decision Blueprint™** → Building Intelligence / Search → …
 
 Earlier hub tree (Identity, Timeline, Vision Board, Goals, Decision Map, …) remains valid detail under this evolution; Timeline and Person identity stay P0.
 

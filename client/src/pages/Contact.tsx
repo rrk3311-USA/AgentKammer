@@ -25,7 +25,7 @@ const decisionTypes = [
 
 const timelines = ["Now / 30 days", "1-3 months", "3-6 months", "6+ months", "Just exploring"];
 const budgetRanges = ["Under $1M", "$1M-$2M", "$2M-$4M", "$4M+", "Rental", "Not sure / private"];
-const nextSteps = ["Private call", "Email recap first", "Building or neighborhood brief", "Seller strategy", "Decision Assessment", "Not sure"];
+const nextSteps = ["Housing Strategy Session", "Email recap first", "Building or neighborhood brief", "Seller strategy", "Decision Assessment", "Not sure"];
 
 function readIntent() {
   if (typeof window === "undefined") return null;
@@ -44,7 +44,7 @@ export default function Contact() {
     title: isBelonging ? "Decision Assessment Intake" : "Contact",
     description: isBelonging
       ? "Request your Decision Assessment — find out if you’re living where you belong."
-      : "Request a private call with Agent Kammer.",
+      : "Book a Housing Strategy Session with Agent Kammer Residential Advisory.",
     path: "/contact",
   });
 
@@ -74,7 +74,7 @@ export default function Contact() {
   const contactMutation = useMutation({
     mutationFn: async (data: typeof formData) => {
       const structuredMessage = [
-        "Lead Qualification Profile",
+        "Advisory Intake Profile",
         `What changed: ${data.whatChanged}`,
         `Decision type: ${data.decisionType}`,
         `Timeline: ${data.timeline}`,
@@ -127,7 +127,7 @@ export default function Contact() {
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
       <PageHero
         eyebrow={isBelonging ? "Decision Assessment" : "Contact"}
-        title={isBelonging ? "Request your Decision Assessment." : "Request a private call."}
+        title={isBelonging ? "Request your Decision Assessment." : "Book a Housing Strategy Session."}
         description={
           isBelonging
             ? "Share enough context to prepare a Decision Profile — what changed, what feels off about where you live, and what a good five-year outcome looks like. The scored AI report is in build; intake today is human-paced."
@@ -136,9 +136,14 @@ export default function Contact() {
         art="contact"
         kicker={
           isBelonging ? undefined : (
-            <Link href="/belonging" className="text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass">
-              Prefer the Decision Assessment? Find out if you’re living where you belong →
-            </Link>
+            <div className="space-y-2">
+              <Link href="/belonging" className="block text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass">
+                Prefer the Decision Assessment? Find out if you’re living where you belong →
+              </Link>
+              <Link href="/advisory" className="block text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass">
+                See how Residential Advisory sessions and memberships work →
+              </Link>
+            </div>
           )
         }
       />
@@ -154,7 +159,7 @@ export default function Contact() {
             }
             description={
               isBelonging
-                ? "A few filters keep the first profile useful: what changed, what drains you, timing, and whether you want a call after the report."
+                ? "A few filters keep the first profile useful: what changed, what drains you, timing, and whether you want a Housing Strategy Session after the report."
                 : "A few filters keep the first reply useful: what changed, what decision is on the table, timing, budget or readiness, and the best next step."
             }
           />
@@ -178,7 +183,7 @@ export default function Contact() {
 
         <div id="request-call" className="rounded-card border border-brand-border bg-white p-8 shadow-soft lg:p-10">
           <h2 className="font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">
-            {isBelonging ? "Assessment Intake" : "Request a Call"}
+            {isBelonging ? "Assessment Intake" : "Housing Strategy Session"}
           </h2>
           <p className="mt-3 text-sm leading-7 text-brand-graphite">
             {isBelonging
@@ -359,7 +364,7 @@ export default function Contact() {
                 data-testid="button-contact-submit"
                 disabled={contactMutation.isPending}
               >
-                {contactMutation.isPending ? "Sending..." : "Request a Call"}
+                {contactMutation.isPending ? "Sending..." : isBelonging ? "Send Assessment Intake" : "Begin the Housing Strategy Session"}
               </Button>
             </form>
         </div>

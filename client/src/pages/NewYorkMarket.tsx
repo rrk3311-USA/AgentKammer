@@ -115,7 +115,7 @@ export default function NewYorkMarket() {
 
       <CTA
         title="Refine the search geography before the building list grows."
-        description="Request a call to compare neighborhoods around commute, lifestyle, schools, building type, and timing."
+        description="Begin a Housing Strategy Session to compare neighborhoods around commute, lifestyle, schools, building type, and timing."
       />
     </main>
   );

@@ -1,7 +1,7 @@
 # Agent Kammer Decision Blueprint™
 
 **Status:** Spec + client-ready template (docs first; Hub module **Planned**)  
-**Position in journey:** post–Discovery Call deliverable  
+**Position in journey:** post–Housing Strategy Session deliverable  
 **Tone:** advisor-first · Decision Intelligence · not a sales proposal
 
 **Canonical name:** Decision Blueprint™  
@@ -12,6 +12,7 @@ Do **not** call this a “proposal.” It is a decision artifact — clarity bef
 **Related**
 
 - Front door diagnostic: [`docs/product/BELONGING-ASSESSMENT.md`](./BELONGING-ASSESSMENT.md)
+- Practice model: [`docs/product/RESIDENTIAL-ADVISORY.md`](./RESIDENTIAL-ADVISORY.md)
 - Hub module alignment: [`docs/architecture/ARCHITECTURE-REVIEW.md`](../architecture/ARCHITECTURE-REVIEW.md) · [`docs/architecture/SYSTEM-DESIGN.md`](../architecture/SYSTEM-DESIGN.md)
 - Ops / next action: [`docs/integrations/notion-crm.md`](../integrations/notion-crm.md) · [`docs/admin/ADMIN-COMMAND-CENTER.md`](../admin/ADMIN-COMMAND-CENTER.md)
 - Notion (shareable):
@@ -26,7 +27,7 @@ Do **not** call this a “proposal.” It is a decision artifact — clarity bef
 Insert in the client journey:
 
 ```txt
-Belonging Assessment → Decision Profile → Discovery Call → Decision Blueprint™ → Building Intelligence / Search → …
+Belonging Assessment → Decision Profile → Housing Strategy Session → Decision Blueprint™ → Building Intelligence / Search → …
 ```
 
 | Stage | Role |
@@ -34,7 +35,7 @@ Belonging Assessment → Decision Profile → Discovery Call → Decision Bluepr
 | **Belonging Assessment** | Free diagnostic — are you living where you belong? Spec: [`BELONGING-ASSESSMENT.md`](./BELONGING-ASSESSMENT.md) |
 | **Decision Profile** | Visitor report + internal Decision Quality Score (help-worthiness routing) |
 | **Decision Guide / Guidance Advisor** | Early clarity — what changed, constraints, options to consider |
-| **Discovery Call** | Human synthesis — goals, risk tolerance, timeline, building vs life trade-offs (starts from the Decision Profile when available) |
+| **Housing Strategy Session** | Human synthesis — goals, risk tolerance, timeline, building vs life trade-offs (starts from the Decision Profile when available) |
 | **Decision Blueprint™** | Written decision state — situation, key decisions, lens, path, next step |
 | **Building Intelligence / Search** | Evidence and shortlist after the decision frame is set |
 
@@ -46,7 +47,7 @@ Belonging Assessment → Decision Profile → Discovery Call → Decision Bluepr
 
 | Is | Is not |
 |----|--------|
-| A Decision Intelligence artifact after Discovery | A listing packet or CMA |
+| A Decision Intelligence artifact after a Housing Strategy Session | A listing packet or CMA |
 | Structured decision state the client can revisit | A “proposal” or retainer pitch |
 | Evidence-backed (ICC, construction, envelope, BIS™) | Credentials theater |
 | One clear recommended next step | A menu of services to upsell |
@@ -68,7 +69,7 @@ Every Blueprint uses these headings in order.
 
 ### Section notes
 
-**1. Your Situation** — Life change, housing goals, hard constraints (budget, timeline, schools, board, financing, insurance appetite, renovation appetite). Mirror language from Decision Guide + Discovery Call; no fluff.
+**1. Your Situation** — Life change, housing goals, hard constraints (budget, timeline, schools, board, financing, insurance appetite, renovation appetite). Mirror language from Decision Guide + Housing Strategy Session; no fluff.
 
 **2. Key Decisions** — Name the live forks. Typically a primary path plus what would change the recommendation. Options: Stay · Move · Renovate · Wait · Invest (or combinations, e.g. renovate-then-wait).
 
@@ -79,7 +80,7 @@ Every Blueprint uses these headings in order.
 ```txt
 Belonging Assessment
   → Decision Guide
-  → Discovery Call
+  → Housing Strategy Session
   → Decision Blueprint™
   → Building Intelligence™
   → Property Search
@@ -129,7 +130,7 @@ If a specific building is already in play, cite the relevant Building Report sec
 | Hub module (client-facing) | **Planned** |
 | Public marketing page | **Out of scope** for now |
 
-**CRM:** After Discovery Call, set **Recommended next action** to Blueprint delivery or the Blueprint’s own next step (e.g. “Deliver Decision Blueprint™” → then “Building Report: {building}”). See Notion CRM sync contract.
+**CRM:** After Housing Strategy Session, set **Recommended next action** to Blueprint delivery or the Blueprint’s own next step (e.g. “Deliver Decision Blueprint™” → then “Building Report: {building}”). See Notion CRM sync contract.
 
 ---
 
@@ -141,7 +142,7 @@ Copy from the line below. Replace bracketed prompts. Keep headings. Keep philoso
 # Decision Blueprint™
 **Prepared for:** [Client name(s)]  
 **Date:** [YYYY-MM-DD]  
-**Discovery Call:** [Date]  
+**Housing Strategy Session:** [Date]  
 **Prepared by:** Agent Kammer  
 
 *Also known as: Strategic Recommendation / Executive Decision Brief*  
@@ -213,7 +214,7 @@ Copy from the line below. Replace bracketed prompts. Keep headings. Keep philoso
 ```txt
 Belonging Assessment
   → Decision Guide
-  → Discovery Call
+  → Housing Strategy Session
   → Decision Blueprint™   ← you are here
   → Building Intelligence™
   → Property Search
@@ -258,7 +259,7 @@ Belonging Assessment
 |------|---------|
 | **Decision Guide** | Live AI companion / early conversation |
 | **Decision Brief** | Public service / niche landing content (SEO + education) |
-| **Decision Blueprint™** | Post–Discovery Call personal decision artifact (this doc) |
+| **Decision Blueprint™** | Post–Housing Strategy Session personal decision artifact (this doc) |
 | **Decision Memo** | Later-stage memo before offer / major commitment |
 | **Building Report** | Building-level interpretation (evidence for Blueprint & search) |
 

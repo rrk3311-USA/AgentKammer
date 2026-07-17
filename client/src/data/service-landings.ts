@@ -773,6 +773,188 @@ export const serviceLandings: ServiceLanding[] = [
     ],
     cta: "Start a Financial District decision brief.",
   },
+  {
+    slug: "first-home-buyers-nyc",
+    art: "professional-buyer",
+    title: "First Home Buyers in NYC",
+    navLabel: "First Home",
+    eyebrow: "Life Change",
+    summary:
+      "A first purchase should start with whether buying now is actually right — not with open houses. The brief clarifies readiness, trade-offs, and what a good first home needs to do.",
+    searchTerms: ["first home buyers nyc", "first time home buyer manhattan", "should I buy my first apartment nyc"],
+    audience: [
+      "People considering a first purchase in New York within the next few years — or sooner.",
+      "Renters unsure whether to keep renting, wait, or buy a smaller foothold.",
+      "Clients who want clarity before they get pulled into inventory.",
+    ],
+    considerations: [
+      "Separate emotional readiness from financial readiness and timeline pressure.",
+      "Decide what the first home must solve versus what can wait for a later move.",
+      "Compare buy vs. wait vs. rent-another-year before touring.",
+    ],
+    depthNotes: [
+      "Name the life change driving the purchase — marriage, job, family, or simply wanting roots.",
+      "Model carrying costs and exit optionality; a first home that is hard to sell becomes a trap.",
+      "Prefer a clear Decision Profile over a rushed offer on the first building that feels exciting.",
+    ],
+    cta: "Start a first-home Decision Brief.",
+  },
+  {
+    slug: "marriage-housing-nyc",
+    art: "seller-transition",
+    title: "Marriage and Housing Decisions in NYC",
+    navLabel: "Marriage",
+    eyebrow: "Life Change",
+    summary:
+      "Marriage often forces a housing question: whose place, a new place, rent first, or buy together. The brief starts with how you want to live — not with listings.",
+    searchTerms: ["marriage housing decisions nyc", "buying apartment after marriage nyc", "combining households new york"],
+    audience: [
+      "Couples merging households or deciding whether to buy after marriage.",
+      "Partners comparing whose lease, whose building, or a clean start.",
+      "Clients who want a shared decision frame before capital is committed.",
+    ],
+    considerations: [
+      "Map lifestyle, commute, and space needs for both people — not one person’s default.",
+      "Decide rent-first vs. buy now based on timeline certainty, not wedding momentum.",
+      "Clarify ownership structure, contribution, and exit assumptions early.",
+    ],
+    depthNotes: [
+      "Separate the celebration timeline from the housing timeline; they rarely match.",
+      "Name non-negotiables for each partner before comparing buildings.",
+      "If one person already owns, weigh keep / sell / rent against starting fresh.",
+    ],
+    cta: "Start a marriage and housing Decision Brief.",
+  },
+  {
+    slug: "new-baby-growing-family-nyc",
+    art: "professional-buyer",
+    title: "New Baby and Growing Family Housing in NYC",
+    navLabel: "New Baby",
+    eyebrow: "Life Change",
+    summary:
+      "A new child changes sleep, space, schools, and patience for friction. The brief asks whether anything should change now — or whether the current home can stretch a little longer.",
+    searchTerms: ["new baby apartment nyc", "growing family housing manhattan", "need more space after baby nyc"],
+    audience: [
+      "Parents expecting a child or newly navigating life with a baby in the city.",
+      "Households deciding whether to expand, relocate for schools, or stay put.",
+      "Clients who feel urgency but want a decision that still works in three years.",
+    ],
+    considerations: [
+      "Weigh space, light, elevator access, and neighborhood fit against timing pressure.",
+      "Separate “we need more space someday” from “we need a different home this year.”",
+      "Factor school planning early without letting district panic force a weak purchase.",
+    ],
+    depthNotes: [
+      "List what currently fails: bedroom count, storage, noise, commute, outdoor access.",
+      "Compare renovate / reconfigure vs. move before touring larger apartments.",
+      "If schools matter, read the school-district brief after the life-change frame is clear.",
+    ],
+    cta: "Start a growing-family Decision Brief.",
+  },
+  {
+    slug: "aging-parents-housing-nyc",
+    art: "seller-transition",
+    title: "Aging Parents and Housing Decisions in NYC",
+    navLabel: "Aging Parents",
+    eyebrow: "Life Change",
+    summary:
+      "Helping parents age in place, downsize, or relocate is a family decision — not a listing problem. The brief keeps dignity, logistics, and building fit ahead of urgency.",
+    searchTerms: ["aging parents housing nyc", "helping parents downsize manhattan", "senior housing decisions new york"],
+    audience: [
+      "Adult children coordinating housing for aging parents in or near New York.",
+      "Families comparing stay-put adaptations, downsizing, or a move closer to caregivers.",
+      "Clients who need a calm process across siblings, attorneys, and buildings.",
+    ],
+    considerations: [
+      "Prioritize accessibility, building service, medical access, and social continuity.",
+      "Decide whether the parent’s home should be sold, rented, or held — separately from where they live next.",
+      "Pace decisions around capacity and consent, not market FOMO.",
+    ],
+    depthNotes: [
+      "Separate the parent’s daily-life needs from the estate or sale strategy.",
+      "Inspect elevator buildings, bathroom access, and doorman support before aesthetics.",
+      "Clarify who decides, who pays, and who lives with the outcome.",
+    ],
+    cta: "Start an aging-parents Decision Brief.",
+  },
+  {
+    slug: "job-loss-housing-nyc",
+    art: "capital-strategy",
+    title: "Job Loss and Housing Decisions in NYC",
+    navLabel: "Job Loss",
+    eyebrow: "Life Change",
+    summary:
+      "Income disruption changes what housing should do next: protect runway, reduce burn, or hold steady. The brief prioritizes options before panic moves.",
+    searchTerms: ["job loss housing decisions nyc", "should I sell after layoff nyc", "rent after job loss manhattan"],
+    audience: [
+      "Homeowners or renters facing layoff, career transition, or sudden income change.",
+      "Households deciding whether to sell, rent, downsize, or wait.",
+      "Clients who need a clear priority order: liquidity, housing stability, then market timing.",
+    ],
+    considerations: [
+      "Protect decision quality — avoid selling or breaking a lease solely from short-term fear.",
+      "Model runway, carrying costs, and realistic re-employment timelines.",
+      "Compare stay / sell / rent / downsize as strategies, not moral judgments.",
+    ],
+    depthNotes: [
+      "List fixed housing costs against liquid reserves before choosing a path.",
+      "If selling, decide whether speed or net proceeds matters more right now.",
+      "Separate career narrative from building thesis; a temporary income gap is not always a permanent location change.",
+    ],
+    cta: "Start a job-loss housing Decision Brief.",
+  },
+  {
+    slug: "remote-work-housing-nyc",
+    art: "professional-buyer",
+    title: "Remote Work and Housing Decisions in NYC",
+    navLabel: "Remote Work",
+    eyebrow: "Life Change",
+    summary:
+      "Remote or hybrid work rewrites commute math, space needs, and whether Manhattan still fits. The brief asks what the home must support now — not what it supported in 2019.",
+    searchTerms: ["remote work housing nyc", "hybrid work apartment manhattan", "should I leave nyc remote work"],
+    audience: [
+      "People whose work pattern changed and whose home no longer matches the week.",
+      "Households comparing stay in NYC, leave, or redesign space for deep work.",
+      "Clients deciding whether a move is necessary or whether the current home can adapt.",
+    ],
+    considerations: [
+      "Map office days, quiet hours, and guest patterns before chasing square footage.",
+      "Decide whether the problem is location, layout, noise, or simply missing a dedicated work room.",
+      "Compare renovate / reconfigure vs. relocate vs. second workspace elsewhere.",
+    ],
+    depthNotes: [
+      "Count real office days per month — hybrid myths break many purchase briefs.",
+      "Prioritize light, acoustics, and a closable work door over prestige address.",
+      "If leaving the city is on the table, treat it as a life-fit decision, not only a cost decision.",
+    ],
+    cta: "Start a remote-work Decision Brief.",
+  },
+  {
+    slug: "inheritance-housing-nyc",
+    art: "seller-transition",
+    title: "Inheritance and Housing Decisions in NYC",
+    navLabel: "Inheritance",
+    eyebrow: "Life Change",
+    summary:
+      "Inheriting a home raises keep, sell, rent, and family questions at once. The brief organizes the decision before emotions and paperwork collide.",
+    searchTerms: ["inherited apartment nyc", "inheritance housing decisions new york", "should I keep inherited property nyc"],
+    audience: [
+      "Heirs deciding what to do with an inherited apartment, townhouse, or share of a property.",
+      "Families coordinating siblings, executors, and next-step housing for themselves.",
+      "Clients who need a private, paced process more than a quick listing.",
+    ],
+    considerations: [
+      "Separate estate administration from the housing strategy for the property itself.",
+      "Compare keep / sell / rent against carrying costs, family use, and tax advice.",
+      "Decide whether anyone should live there — and on what terms — before marketing.",
+    ],
+    depthNotes: [
+      "Confirm authority to decide: executor, co-heirs, or court timeline.",
+      "Inspect the building and condition with a cool eye; sentimental value is real and still not a renovation plan.",
+      "If selling, sequence repairs and pricing against family readiness, not only broker urgency.",
+    ],
+    cta: "Start an inheritance Decision Brief.",
+  },
 ];
 
 export const serviceLandingMap = Object.fromEntries(serviceLandings.map((item) => [item.slug, item])) as Record<string, ServiceLanding>;

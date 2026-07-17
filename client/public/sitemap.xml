@@ -54,6 +54,11 @@
       <lastmod>2026-07-14</lastmod>
   </url>
   <url>
+    <loc>https://www.agentkammer.com/advisory</loc>
+    <priority>0.7</priority>
+      <lastmod>2026-07-16</lastmod>
+  </url>
+  <url>
     <loc>https://www.agentkammer.com/services/foreign-buyers-new-york</loc>
     <priority>0.9</priority>
       <lastmod>2026-07-14</lastmod>
@@ -192,6 +197,41 @@
     <loc>https://www.agentkammer.com/services/financial-district-buyers-nyc</loc>
     <priority>0.9</priority>
     <lastmod>2026-07-14</lastmod>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/services/first-home-buyers-nyc</loc>
+    <priority>0.9</priority>
+    <lastmod>2026-07-16</lastmod>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/services/marriage-housing-nyc</loc>
+    <priority>0.9</priority>
+    <lastmod>2026-07-16</lastmod>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/services/new-baby-growing-family-nyc</loc>
+    <priority>0.9</priority>
+    <lastmod>2026-07-16</lastmod>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/services/aging-parents-housing-nyc</loc>
+    <priority>0.9</priority>
+    <lastmod>2026-07-16</lastmod>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/services/job-loss-housing-nyc</loc>
+    <priority>0.9</priority>
+    <lastmod>2026-07-16</lastmod>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/services/remote-work-housing-nyc</loc>
+    <priority>0.9</priority>
+    <lastmod>2026-07-16</lastmod>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/services/inheritance-housing-nyc</loc>
+    <priority>0.9</priority>
+    <lastmod>2026-07-16</lastmod>
   </url>
   <url>
     <loc>https://www.agentkammer.com/building-reports/lantern-house</loc>

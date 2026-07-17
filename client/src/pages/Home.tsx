@@ -19,9 +19,9 @@ const featuredBriefSlugs = [
 
 export default function Home() {
   usePageMetadata({
-    title: "Agent Kammer | Real Estate Strategist",
+    title: "Agent Kammer | Private Housing Advisory",
     description:
-      "Agent Kammer helps people make better real estate decisions — buildings before listings — and live where they belong. Stay, renovate, rent, buy, sell, or wait.",
+      "Private housing guidance before the market gets loud. Buildings before listings. Local execution when needed. Stay, renovate, rent, buy, sell, or wait.",
     path: "/",
   });
 
@@ -36,16 +36,21 @@ export default function Home() {
         <div className="mx-auto grid w-full max-w-site gap-0 px-6 py-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(340px,0.72fr)] lg:px-10">
           <div className="flex min-h-[560px] flex-col justify-start pb-32 pt-10 lg:pr-16 lg:pt-16">
             <p className="text-[10px] uppercase tracking-[0.3em] text-brand-cocoa">Agent Kammer</p>
-            <p className="mt-3 text-[11px] uppercase tracking-[0.26em] text-brand-cocoa">Real Estate Strategist</p>
+            <p className="mt-3 text-[11px] uppercase tracking-[0.26em] text-brand-cocoa">Private Housing Advisory</p>
             <p className="mt-3 text-[11px] uppercase tracking-[0.22em] text-brand-brass/90">Buildings before listings.</p>
             <h1 className="mt-4 max-w-[12ch] font-display text-[clamp(3.4rem,6.4vw,6.8rem)] leading-[0.88] text-brand-navy">
               Start with what feels unclear.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-brand-graphite">
-              Better real estate decisions — anywhere in the U.S. We start with life change, uncertainty, and trade-offs before buildings, neighborhoods, or listings.
+              Private housing guidance. Local execution when needed. We start with life change, uncertainty, and trade-offs before buildings, neighborhoods, or listings.
             </p>
-            <p className="mt-4 max-w-xl text-base leading-7 text-brand-graphite/82">
-              People do not wake up wanting to tour apartments. They wake up because life changed. The job here is to diagnose that change and guide the highest expected-value decision — even if that means doing nothing — then curate the right local professionals when a transaction is appropriate.
+            <blockquote className="mt-8 max-w-xl border-l border-brand-brass pl-5">
+              <p className="font-display text-[clamp(1.65rem,2.8vw,2.15rem)] leading-[1.15] tracking-[-0.02em] text-brand-navy">
+                People do not wake up wanting to tour apartments. They wake up because life changed.
+              </p>
+            </blockquote>
+            <p className="mt-5 max-w-xl text-base leading-7 text-brand-graphite/82">
+              The job here is to diagnose that change and guide the highest expected-value decision — even if that means doing nothing — then curate the right local professionals when a transaction is appropriate.
             </p>
             <div className="mt-7 flex flex-wrap items-stretch gap-3">
               <button
@@ -67,10 +72,10 @@ export default function Home() {
                 href="/building-reports"
                 className="group grid min-w-[15rem] border border-brand-border bg-white/45 px-5 py-4 text-left transition-colors hover:border-brand-brass hover:bg-white"
               >
-                <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-brand-navy">Building Intelligence</span>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-brand-navy">Building Intelligence Library</span>
                 <span className="mt-3 h-px w-full bg-brand-border" aria-hidden />
                 <span className="mt-3 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy">
-                  Explore Building Intelligence
+                  Explore the library
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
                 </span>
               </Link>
@@ -135,23 +140,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4 · Building Intelligence */}
+      {/* 4 · Building Intelligence Library */}
       <section className="border-b border-brand-border bg-brand-navy text-brand-ivory">
         <div className="mx-auto grid w-full max-w-site gap-10 px-6 py-20 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:px-10 lg:py-28">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-brass">Building Intelligence</p>
+            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-brass">Building Intelligence Library</p>
             <h2 className="mt-4 max-w-xl font-display text-[clamp(2.4rem,4.5vw,3.75rem)] leading-[0.92] text-brand-ivory">
               The asset before the listing.
             </h2>
             <p className="mt-6 max-w-xl text-base leading-8 text-brand-ivory/74">
-              Building Reports read quality, context, and fit — not marketing copy. ICC literacy, construction documents, and market judgment, used only after the decision frame is clear.
+              A knowledge resource — Building Reports that read quality, context, and fit, not marketing copy. Used only after the decision frame is clear.
             </p>
           </div>
           <Link
             href="/building-reports"
             className="group inline-flex items-center justify-between gap-6 border border-brand-ivory/20 px-5 py-4 text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:border-brand-brass"
           >
-            Explore Building Intelligence
+            Open the library
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
           </Link>
         </div>
@@ -162,16 +167,16 @@ export default function Home() {
         <div className="mx-auto w-full max-w-site px-6 py-20 lg:px-10 lg:py-28">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
-              <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">Decision Briefs</p>
+              <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">What's Changing?</p>
               <h2 className="mt-4 font-display text-[clamp(2.4rem,4.5vw,3.75rem)] leading-[0.92] text-brand-navy">
                 Start from what changed.
               </h2>
             </div>
             <Link
-              href="/services"
+              href="/services#whats-changing"
               className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-brass"
             >
-              All briefs
+              Explore situations
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
           </div>
@@ -196,16 +201,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6 · Private Advisory */}
+      {/* 6 · Residential Advisory */}
       <section className="border-b border-brand-brass/30 bg-brand-navy text-brand-ivory">
         <div className="mx-auto flex w-full max-w-site flex-col gap-8 px-6 py-16 lg:flex-row lg:items-end lg:gap-10 lg:px-10 lg:py-20">
           <div className="min-w-0 max-w-3xl flex-1">
-            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">Private Advisory</p>
+            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">Residential Advisory</p>
             <h2 className="mt-4 font-display text-[clamp(2.4rem,4.8vw,4.25rem)] leading-[0.9] text-brand-ivory">
               Find out if you’re living where you belong.
             </h2>
             <p className="mt-6 max-w-2xl text-base leading-8 text-brand-ivory/76">
-              The assessment is the front door — not a valuation form. When a call is warranted, we already know your Decision Profile.
+              The assessment is the front door — not a valuation form. When a Housing Strategy Session is warranted, we already know your Decision Profile.
             </p>
           </div>
           <Link

@@ -84,7 +84,7 @@ export default function BuildingReport() {
 
       <CTA
         title="Need a short list of buildings mapped to your brief?"
-        description="Request a call with your target neighborhoods, timing, and budget so the building list can be filtered before tours begin."
+        description="Begin a Housing Strategy Session with your target neighborhoods, timing, and budget so the building list can be filtered before tours begin."
       />
     </main>
   );

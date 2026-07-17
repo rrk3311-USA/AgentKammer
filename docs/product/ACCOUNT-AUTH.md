@@ -59,6 +59,7 @@ The auth mechanism below is unchanged. The words a visitor sees describing it sh
 - Brand: [`docs/brand/AGENT-KAMMER-BRAND.md`](../brand/AGENT-KAMMER-BRAND.md)
 - Decision Cases model: [`docs/product/DECISION-CASES.md`](./DECISION-CASES.md)
 - Belonging Assessment: [`docs/product/BELONGING-ASSESSMENT.md`](./BELONGING-ASSESSMENT.md)
+- Residential Advisory offer stack (Housing Strategy Session, memberships): [`docs/product/RESIDENTIAL-ADVISORY.md`](./RESIDENTIAL-ADVISORY.md)
 - Architecture: [`docs/architecture/SYSTEM-DESIGN.md`](../architecture/SYSTEM-DESIGN.md)
 
 ---

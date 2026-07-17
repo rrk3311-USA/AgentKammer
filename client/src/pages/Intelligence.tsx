@@ -91,7 +91,7 @@ export default function Intelligence() {
 
       <CTA
         title="Need the brief translated into a live decision?"
-        description="Request a call to turn market context into a recommendation for your timing, building target, or neighborhood plan."
+        description="Begin a Housing Strategy Session to turn market context into a recommendation for your timing, building target, or neighborhood plan."
       />
     </main>
   );
