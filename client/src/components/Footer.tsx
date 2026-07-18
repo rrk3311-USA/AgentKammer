@@ -21,10 +21,10 @@ const quickLinks = [
 
 const lifeChangeLinks = [
   { label: "Executive Relocation", href: "/services/executive-relocation-nyc" },
-  { label: "Growing Family", href: "/services/new-baby-growing-family-nyc" },
-  { label: "Divorce", href: "/services/divorce-property-sales-nyc" },
-  { label: "Retirement", href: "/services/retiree-senior-home-buyers-nyc" },
   { label: "First Home", href: "/services/first-home-buyers-nyc" },
+  { label: "Growing Family", href: "/services/new-baby-growing-family-nyc" },
+  { label: "More Space", href: "/services/school-district-planning-nyc" },
+  { label: "Retirement", href: "/services/retiree-senior-home-buyers-nyc" },
   { label: "Inheritance", href: "/services/inheritance-housing-nyc" },
 ] as const;
 

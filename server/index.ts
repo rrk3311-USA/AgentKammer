@@ -1,3 +1,4 @@
+import "./load-env";
 import { createServer } from "http";
 import { registerRoutes } from "./routes";
 import { setupVite, log } from "./vite";

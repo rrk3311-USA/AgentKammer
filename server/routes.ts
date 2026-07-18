@@ -38,6 +38,17 @@ import { SIGNAL_TYPES } from "@shared/crm-pipeline";
 import { claimVisitorToMember, publicMemberHub, appendRecommendationBrief, findMemberForVisitor } from "./lib/claim-account";
 import { canSendAccountPin, generateAccountPin, storeAccountPin, verifyAccountPin } from "./lib/account-otp";
 import { sendVisitorPinEmail } from "./lib/send-visitor-email";
+import { processDecisionGuideTurn } from "./lib/advisory/profile-service";
+import { registerAdvisoryAdminRoutes } from "./lib/advisory/admin-routes";
+import {
+  getClientProfileByEmail,
+  getClientProfileByVisitorId,
+  listAdvisorReviews,
+  listGoals,
+  listSavedItems,
+  rowToClientProfile,
+} from "./lib/advisory/repository";
+import { rateLimit } from "./lib/advisory/rate-limit";
 
 // Initialize Resend client only if API key is available
 let resend: Resend | null = null;
@@ -771,6 +782,11 @@ export async function registerRoutes(app: Express): Promise<void> {
   app.post("/api/decision-guide/chat", async (req, res) => {
     try {
       const visitorId = getOrCreateVisitorId(req, res);
+      const limited = rateLimit(`decision-guide:${visitorId}`, { limit: 40, windowMs: 60_000 });
+      if (!limited.ok) {
+        res.setHeader("Retry-After", String(limited.retryAfterSec));
+        return res.status(429).json({ error: "Too many Decision Guide requests. Please wait a moment.", visitorId });
+      }
       const parsed = decisionGuideChatSchema.parse(req.body);
       const memoryKey = visitorId;
       const existingMemory = await storage.getChatConversationBySessionId(memoryKey);
@@ -912,6 +928,40 @@ export async function registerRoutes(app: Express): Promise<void> {
         });
       }
 
+      // Advisor OS: structured client profile + lead scoring + Attio sync queue (non-blocking)
+      let advisoryTurn: Awaited<ReturnType<typeof processDecisionGuideTurn>> | null = null;
+      try {
+        const messageCount = allMessages.filter((m) => m.role === "user").length;
+        advisoryTurn = await processDecisionGuideTurn({
+          visitorId,
+          sessionId: parsed.sessionId || visitorId,
+          pagePath: parsed.pageContext?.path,
+          latestMessage: parsed.latestMessage,
+          flatProfile: nextProfile,
+          conversationSummary: guideTurn.leadQualification?.summary || guideTurn.reply,
+          messageCount,
+          guideActions: guideTurn.actions,
+          callRequested: Array.isArray(guideTurn.actions)
+            ? guideTurn.actions.some((a: { type?: string }) => a?.type === "request_call")
+            : false,
+        });
+        // Prefer advisory score for internal qualification when available
+        if (advisoryTurn && summary.leadQualification) {
+          summary.leadQualification = {
+            ...summary.leadQualification,
+            score: advisoryTurn.leadScore,
+          };
+          if (existingMemory) {
+            await storage.updateChatConversation(existingMemory.id, {
+              leadScore: advisoryTurn.leadScore,
+              summary: JSON.stringify(summary),
+            });
+          }
+        }
+      } catch (advisoryError) {
+        console.error("[advisory] decision guide profile turn failed (swallowed)", advisoryError);
+      }
+
       // If this visitor already has a Decision Hub account, store recommendation briefs there.
       const wantsBrief =
         Array.isArray(guideTurn.actions) &&
@@ -958,7 +1008,16 @@ export async function registerRoutes(app: Express): Promise<void> {
         reply: guideTurn.reply,
         profile: nextProfile,
         actions: guideTurn.actions,
-        leadQualification: guideTurn.leadQualification,
+        leadQualification: {
+          ...guideTurn.leadQualification,
+          score: advisoryTurn?.leadScore ?? guideTurn.leadQualification.score,
+        },
+        // Advisor OS fields (score not shown in customer UI)
+        profileUpdates: advisoryTurn?.profileUpdates ?? {},
+        leadScore: advisoryTurn?.leadScore,
+        shouldSyncToAttio: advisoryTurn?.shouldSyncToAttio ?? false,
+        shouldCreateAdvisorTask: advisoryTurn?.shouldCreateAdvisorTask ?? false,
+        decisionActions: advisoryTurn?.actions ?? [],
       });
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -2201,4 +2260,72 @@ export async function registerRoutes(app: Express): Promise<void> {
     }
   });
 
+  // Lightweight client hub snapshot (email+PIN session or visitor cookie)
+  app.get("/api/hub/snapshot", async (req, res) => {
+    try {
+      const visitorId = readCookie(req.headers.cookie, "ak_visitor_id");
+      const authHeader = req.headers.authorization;
+      const bearer = authHeader?.startsWith("Bearer ") ? authHeader.slice(7) : null;
+      const memberToken = bearer || readCookie(req.headers.cookie, "ak_member_token");
+
+      let email: string | null = null;
+      if (memberToken) {
+        const member = await storage.getMemberProfileByAccessToken(memberToken);
+        if (member) email = member.email;
+      }
+
+      const byVisitor = visitorId ? await getClientProfileByVisitorId(visitorId) : null;
+      const byEmail = !byVisitor && email ? await getClientProfileByEmail(email) : null;
+      const resolved = byVisitor || byEmail;
+      if (!resolved) {
+        return res.status(404).json({
+          error: "No housing profile yet. Start the Decision Guide to begin.",
+          visitorId: visitorId || null,
+        });
+      }
+
+      const profile = rowToClientProfile(resolved);
+      const [goals, saved, reviews] = await Promise.all([
+        listGoals(resolved.id),
+        listSavedItems(resolved.id),
+        listAdvisorReviews(resolved.id),
+      ]);
+
+      // Never expose lead score or internal notes to the customer hub
+      res.json({
+        hub: {
+          visitorId: profile.visitorId,
+          currentObjective: profile.desiredOutcome || profile.situation || "Clarify what is changing",
+          timeline: profile.timeline || null,
+          nextRecommendedStep: profile.nextRecommendedAction || "Ask another question in the Decision Guide",
+          conversationSummary: profile.lastConversationSummary || null,
+          upcomingReview: reviews[0]
+            ? {
+                date: reviews[0].nextReviewDate || reviews[0].reviewDate,
+                summary: reviews[0].clientVisibleSummary,
+              }
+            : null,
+          roadmapMilestone: profile.lifecycleStage,
+          goals: goals.map((g) => ({ id: g.id, goal: g.goal, status: g.status })),
+          saved: saved.map((s) => ({
+            id: s.id,
+            type: s.itemType,
+            title: s.title,
+            path: s.path,
+          })),
+          reviews: reviews.map((r) => ({
+            id: r.id,
+            reviewDate: r.reviewDate,
+            summary: r.clientVisibleSummary,
+            nextReviewDate: r.nextReviewDate,
+          })),
+        },
+      });
+    } catch (error) {
+      console.error("[hub/snapshot] failed", error);
+      res.status(500).json({ error: "Failed to load hub" });
+    }
+  });
+
+  registerAdvisoryAdminRoutes(app, requireAdmin);
 }

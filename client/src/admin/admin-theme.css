@@ -1,0 +1,120 @@
+/* Agent Kammer Advisory OS — confidential client records */
+
+.ak-admin {
+  --ak-navy: #0d182b;
+  --ak-stone: #2a3447;
+  --ak-card: #f7f5f1;
+  --ak-card-alt: #f1ece4;
+  --ak-border: #d8d1c7;
+  --ak-ink: #111827;
+  --ak-secondary: #5b6573;
+  --ak-muted: #8a94a3;
+  --ak-brass: #b89a63;
+  --ak-success: #5d8a62;
+  --ak-warning: #c98c2c;
+  --ak-danger: #b45454;
+  --ak-ivory: #f7f5f1;
+  --ak-radius: 12px;
+  --ak-radius-sm: 10px;
+
+  font-family: Inter, "Neue Haas Grotesk", system-ui, -apple-system, sans-serif;
+  color: var(--ak-ink);
+  background: var(--ak-navy);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ak-admin * {
+  box-sizing: border-box;
+}
+
+.ak-admin-display {
+  font-family: "Cormorant Garamond", "Iowan Old Style", Didot, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.ak-admin-card {
+  background: var(--ak-card);
+  border: 1px solid var(--ak-border);
+  border-radius: var(--ak-radius);
+}
+
+.ak-admin-card-alt {
+  background: var(--ak-card-alt);
+  border: 1px solid var(--ak-border);
+  border-radius: var(--ak-radius);
+}
+
+.ak-admin-input {
+  width: 100%;
+  background: var(--ak-ivory);
+  border: 1px solid var(--ak-border);
+  border-radius: var(--ak-radius-sm);
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--ak-ink);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ak-admin-input:focus {
+  border-color: var(--ak-stone);
+  box-shadow: 0 0 0 1px var(--ak-stone);
+}
+
+.ak-admin-input::placeholder {
+  color: var(--ak-muted);
+}
+
+.ak-admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--ak-radius-sm);
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.ak-admin-btn-ghost {
+  background: transparent;
+  border: 1px solid var(--ak-border);
+  color: var(--ak-secondary);
+}
+
+.ak-admin-btn-ghost:hover {
+  border-color: var(--ak-stone);
+  color: var(--ak-ink);
+}
+
+.ak-admin-btn-primary {
+  background: var(--ak-stone);
+  border: 1px solid var(--ak-stone);
+  color: var(--ak-ivory);
+}
+
+.ak-admin-btn-primary:hover {
+  background: #243040;
+}
+
+.ak-admin-btn-danger {
+  background: transparent;
+  border: 1px solid var(--ak-danger);
+  color: var(--ak-danger);
+}
+
+.ak-admin-btn-success {
+  background: transparent;
+  border: 1px solid var(--ak-success);
+  color: var(--ak-success);
+}
+
+.ak-admin-divider {
+  border: 0;
+  border-top: 1px solid var(--ak-border);
+  margin: 0;
+}

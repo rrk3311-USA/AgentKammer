@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Advisor OS Onboarding — Agent Kammer</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0D182B;
+      --stone: #2A3447;
+      --ivory: #F7F5F1;
+      --card: #F1ECE4;
+      --brass: #B89A63;
+      --ink: #1A1F2B;
+      --muted: #6B7280;
+      --line: rgba(13, 24, 43, 0.12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse 80% 50% at 10% -10%, rgba(184, 154, 99, 0.12), transparent 55%),
+        linear-gradient(180deg, #EDE8DF 0%, var(--ivory) 40%, #E8E2D8 100%);
+      line-height: 1.55;
+    }
+    a { color: var(--navy); }
+    .shell {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+    header.hero {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 18px;
+      padding: 2.25rem 2rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 20px 50px rgba(13, 24, 43, 0.18);
+    }
+    .eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      font-weight: 600;
+      margin: 0 0 0.75rem;
+    }
+    h1 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-weight: 600;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      line-height: 1.15;
+      margin: 0 0 0.75rem;
+      color: #fff;
+    }
+    .lede {
+      margin: 0;
+      max-width: 36rem;
+      color: rgba(255,255,255,0.72);
+      font-size: 1.05rem;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+    }
+    .meta strong { color: var(--brass); font-weight: 600; }
+    nav.toc {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    nav.toc h2 {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 0.75rem;
+      font-weight: 600;
+    }
+    nav.toc ol {
+      margin: 0;
+      padding-left: 1.15rem;
+      columns: 2;
+      gap: 1.5rem;
+    }
+    @media (max-width: 640px) {
+      nav.toc ol { columns: 1; }
+    }
+    nav.toc a {
+      text-decoration: none;
+      color: var(--stone);
+      font-size: 0.95rem;
+    }
+    nav.toc a:hover { color: var(--brass); }
+    section {
+      background: rgba(255,255,255,0.55);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.5rem 1.6rem 1.65rem;
+      margin-bottom: 1.1rem;
+    }
+    section h2 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.65rem;
+      font-weight: 600;
+      margin: 0 0 0.65rem;
+      color: var(--navy);
+    }
+    section h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin: 1.25rem 0 0.4rem;
+      color: var(--stone);
+    }
+    p { margin: 0 0 0.75rem; color: var(--stone); }
+    ul, ol { margin: 0 0 0.75rem; padding-left: 1.2rem; color: var(--stone); }
+    li { margin-bottom: 0.35rem; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    @media (max-width: 700px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--ivory);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+    }
+    .card strong {
+      display: block;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: 0.35rem;
+    }
+    .card p { margin: 0; font-size: 0.92rem; }
+    .stages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 0.75rem 0 0;
+    }
+    .stages span {
+      background: var(--navy);
+      color: rgba(255,255,255,0.88);
+      font-size: 0.78rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .stages span.client { background: var(--brass); color: var(--navy); font-weight: 600; }
+    .callout {
+      border-left: 3px solid var(--brass);
+      background: rgba(184, 154, 99, 0.1);
+      padding: 0.85rem 1rem;
+      border-radius: 0 10px 10px 0;
+      margin: 0.85rem 0;
+      font-size: 0.95rem;
+      color: var(--stone);
+    }
+    .checklist li { list-style: none; margin-left: -0.4rem; }
+    .checklist li::before {
+      content: "☐ ";
+      color: var(--brass);
+      font-weight: 600;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.86em;
+      background: rgba(13, 24, 43, 0.06);
+      padding: 0.1em 0.35em;
+      border-radius: 4px;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.65rem 1rem;
+      border-radius: 10px;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: var(--brass);
+      color: var(--navy);
+    }
+    .btn-ghost {
+      background: transparent;
+      border-color: rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.85);
+    }
+    .btn-secondary {
+      background: var(--navy);
+      color: #fff;
+    }
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <p class="eyebrow">Agent Kammer · Internal</p>
+      <h1>Advisor OS onboarding</h1>
+      <p class="lede">
+        How the website, admin companion, and Attio work together.
+        Website captures signal. Admin monitors. Attio runs the relationship.
+      </p>
+      <div class="meta">
+        <span><strong>Audience</strong> Advisors &amp; ops</span>
+        <span><strong>Systems</strong> Site · /admin · Attio</span>
+        <span><strong>Updated</strong> July 2026</span>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="/guides/advisor-practice-guide.html">Practice &amp; offers guide</a>
+        <a class="btn btn-ghost" href="/admin/clients">Open admin clients</a>
+        <a class="btn btn-ghost" href="/admin">Admin overview</a>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#model">Operating model</a></li>
+        <li><a href="#objects">People · Housing · Deals</a></li>
+        <li><a href="#lifecycle">Canonical lifecycle</a></li>
+        <li><a href="#lists">Lists &amp; when to use them</a></li>
+        <li><a href="#daily">Daily workflow</a></li>
+        <li><a href="#verify">First-day verification</a></li>
+        <li><a href="#dont">What not to do</a></li>
+      </ol>
+    </nav>
+
+    <section id="model">
+      <h2>1. Operating model</h2>
+      <p>Three layers stay separate on purpose:</p>
+      <div class="grid-2">
+        <div class="card">
+          <strong>Website</strong>
+          <p>Decision Guide + Hub. Captures light profile data and intent. Clients never see Attio or lead scores.</p>
+        </div>
+        <div class="card">
+          <strong>Admin companion</strong>
+          <p><code>/admin</code> — monitor charts, conversations, stage, and force Attio resync. Not the system of record for tasks.</p>
+        </div>
+        <div class="card">
+          <strong>Attio</strong>
+          <p>Internal CRM of record: People, Housing Advisory charts, lists, tasks, and Transactions when a real deal starts.</p>
+        </div>
+        <div class="card">
+          <strong>Sync rule</strong>
+          <p>Chat is never blocked on Attio. Profile changes queue async. Use <em>Resync Attio</em> after manual stage changes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="objects">
+      <h2>2. People · Housing · Deals</h2>
+      <h3>People — identity &amp; ops only</h3>
+      <ul>
+        <li>Native contact fields (name, email, phone)</li>
+        <li>Visitor ID, Lead source, Lifecycle stage, Lead score</li>
+        <li>Timeline, Assigned advisor, Last active, Next action</li>
+        <li>Attio sync status</li>
+      </ul>
+      <p>Do <strong>not</strong> store the full housing profile on People.</p>
+
+      <h3>Housing Advisory — longitudinal chart</h3>
+      <ul>
+        <li>Situation, desired outcome, current housing</li>
+        <li>Locations, budget, timeline</li>
+        <li>Financing / credit / down-payment readiness</li>
+        <li>Constraints, trade-offs, dealbreakers</li>
+        <li>Readiness &amp; belonging scores</li>
+        <li>Advisor summary, next recommendation, next review, membership status</li>
+      </ul>
+
+      <h3>Transactions — real execution only</h3>
+      <p>Create a Transaction when purchase, sale, lease, or buy-sell execution begins — not while someone is still planning. Put open deals on <strong>Active Transactions</strong>. Link Client → People and optionally Housing chart.</p>
+      <div class="callout">
+        Closing a deal does <strong>not</strong> make the Person Inactive. Move them to <strong>Advisory Client</strong> unless the relationship has truly ended.
+      </div>
+    </section>
+
+    <section id="lifecycle">
+      <h2>3. Canonical lifecycle</h2>
+      <p>One vocabulary everywhere: website database, admin, Attio People, and list stages.</p>
+      <div class="stages">
+        <span>New Signal</span>
+        <span>Engaged</span>
+        <span>Profiled</span>
+        <span>Qualified</span>
+        <span>Call Ready</span>
+        <span>Long-Term Nurture</span>
+        <span class="client">Advisory Client</span>
+        <span class="client">Transaction Ready</span>
+        <span class="client">Inactive</span>
+      </div>
+      <h3>When to use Inactive</h3>
+      <ul>
+        <li>Disqualified leads</li>
+        <li>Unresponsive after a defined period</li>
+        <li>Opted out</li>
+        <li>Former clients with no ongoing relationship</li>
+      </ul>
+      <p>Deal stages (Preparing → Closed / Lost) live only on Transactions — never on People lifecycle.</p>
+    </section>
+
+    <section id="lists">
+      <h2>4. Lists &amp; when to use them</h2>
+      <div class="grid-2">
+        <div class="card">
+          <strong>Lead Pipeline</strong>
+          <p>Pre-client board: New Signal → Long-Term Nurture. Website sync places leads here.</p>
+        </div>
+        <div class="card">
+          <strong>Current Clients</strong>
+          <p>When lifecycle = Advisory Client (or Transaction Ready / Inactive). Automation moves them off Lead Pipeline.</p>
+        </div>
+        <div class="card">
+          <strong>Active Transactions</strong>
+          <p>Open deal files only. Stay empty during pure advisory / planning.</p>
+        </div>
+        <div class="card">
+          <strong>Admin actions</strong>
+          <p>Mark <em>Advisory Client</em> in <code>/admin/clients</code>, then <em>Resync Attio</em> to refresh lists.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="daily">
+      <h2>5. Daily workflow</h2>
+      <ol>
+        <li>Scan <a href="/admin">Overview</a> for Call Ready and high-intent signals.</li>
+        <li>Open the client in <a href="/admin/clients">Clients</a> — read AI summary + chart fields.</li>
+        <li>Work the relationship in <strong>Attio</strong> (notes, tasks, list stage).</li>
+        <li>If you change stage in admin, click <strong>Resync Attio</strong>.</li>
+        <li>When execution starts, create a <strong>Transaction</strong> and add it to Active Transactions.</li>
+        <li>After close, keep Person as <strong>Advisory Client</strong> unless the relationship ends → then <strong>Inactive</strong>.</li>
+      </ol>
+    </section>
+
+    <section id="verify">
+      <h2>6. First-day verification</h2>
+      <p>Confirm the model is live in your workspace:</p>
+      <ol class="checklist">
+        <li>Open a lead in <code>/admin/clients</code></li>
+        <li>Change lifecycle to <strong>Advisory Client</strong></li>
+        <li>Trigger <strong>Resync Attio</strong></li>
+        <li>Person leaves Lead Pipeline</li>
+        <li>Person appears on Current Clients</li>
+        <li>List stage = Advisory Client</li>
+        <li>Housing data remains on the linked Housing Advisory record</li>
+        <li>No deal appears on Active Transactions</li>
+      </ol>
+      <div class="actions">
+        <a class="btn btn-secondary" href="/admin/clients">Start verification in admin</a>
+      </div>
+    </section>
+
+    <section id="dont">
+      <h2>7. What not to do</h2>
+      <ul>
+        <li>Don’t invent parallel stage labels (“Exploring”, “Ready Soon”) in Attio or admin.</li>
+        <li>Don’t dump the housing chart onto the People record.</li>
+        <li>Don’t create Transactions for planning-only clients.</li>
+        <li>Don’t mark Inactive just because a deal closed.</li>
+        <li>Don’t expect every chat turn to sync — summaries and stage/profile changes do.</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>Agent Kammer · Advisor OS · <a href="/guides/advisor-os-onboarding.html">This guide</a> · <a href="/admin">Admin</a></p>
+      <p>Buildings before listings. Decisions before emotions.</p>
+    </footer>
+  </div>
+</body>
+</html>

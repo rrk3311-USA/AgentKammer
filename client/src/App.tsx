@@ -27,8 +27,16 @@ const Privacy = lazy(() => import("@/pages/Privacy"));
 const Terms = lazy(() => import("@/pages/Terms"));
 const Licenses = lazy(() => import("@/pages/Licenses"));
 const Account = lazy(() => import("@/pages/Account"));
-const DecisionHub = lazy(() => import("@/pages/DecisionHub"));
+const HubHome = lazy(() => import("@/pages/hub/HubHome"));
+const HubRoadmap = lazy(() => import("@/pages/hub/HubRoadmap"));
+const HubConversations = lazy(() => import("@/pages/hub/HubConversations"));
+const HubSaved = lazy(() => import("@/pages/hub/HubSaved"));
+const HubReviews = lazy(() => import("@/pages/hub/HubReviews"));
+const HubProfile = lazy(() => import("@/pages/hub/HubProfile"));
+const AdminOverview = lazy(() => import("@/pages/AdminOverview"));
 const AdminPortal = lazy(() => import("@/pages/AdminPortal"));
+const AdminClients = lazy(() => import("@/pages/AdminClients"));
+const AdminSection = lazy(() => import("@/pages/AdminSection"));
 const BuildingReportDetail = lazy(() => import("@/pages/BuildingReportDetail"));
 const PerspectiveArticle = lazy(() => import("@/pages/PerspectiveArticle"));
 const ExecutiveHousingReport = lazy(() => import("@/pages/ExecutiveHousingReport"));
@@ -77,8 +85,18 @@ function VisitorSignals() {
 function Router() {
   return (
     <Switch>
-      <Route path="/admin" component={AdminPortal} />
-      <Route path="/admin/*" component={AdminPortal} />
+      <Route path="/admin/clients/:id" component={AdminClients} />
+      <Route path="/admin/clients" component={AdminClients} />
+      <Route path="/admin/pipeline" component={AdminPortal} />
+      <Route path="/admin/conversations">{() => <AdminSection section="conversations" />}</Route>
+      <Route path="/admin/reviews">{() => <AdminSection section="reviews" />}</Route>
+      <Route path="/admin/tasks">{() => <AdminSection section="tasks" />}</Route>
+      <Route path="/admin/reports">{() => <AdminSection section="reports" />}</Route>
+      <Route path="/admin/calendar">{() => <AdminSection section="calendar" />}</Route>
+      <Route path="/admin/team">{() => <AdminSection section="team" />}</Route>
+      <Route path="/admin/settings">{() => <AdminSection section="settings" />}</Route>
+      <Route path="/admin" component={AdminOverview} />
+      <Route path="/admin/*">{() => <Redirect to="/admin" />}</Route>
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/services" component={Services} />
@@ -99,7 +117,12 @@ function Router() {
       <Route path="/terms" component={Terms} />
       <Route path="/licenses" component={Licenses} />
       <Route path="/account" component={Account} />
-      <Route path="/hub" component={DecisionHub} />
+      <Route path="/hub/roadmap" component={HubRoadmap} />
+      <Route path="/hub/conversations" component={HubConversations} />
+      <Route path="/hub/saved" component={HubSaved} />
+      <Route path="/hub/reviews" component={HubReviews} />
+      <Route path="/hub/profile" component={HubProfile} />
+      <Route path="/hub" component={HubHome} />
       <Route path="/buildings">{() => <Redirect to="/building-reports" />}</Route>
       <Route path="/buildings/:slug/report">{({ slug }) => <Redirect to={`/building-reports/${slug}`} />}</Route>
       <Route path="/buy">{() => <Redirect to="/buyer-advisory" />}</Route>
@@ -138,7 +161,7 @@ function AppShell() {
     return (
       <>
         <ScrollToTop />
-        <Suspense fallback={<div className="min-h-screen bg-[#14181f] px-6 py-12 text-white/50">Loading admin…</div>}>
+        <Suspense fallback={<div className="min-h-screen bg-[#0D182B] px-6 py-12 font-[Inter,sans-serif] text-[#8A94A3]">Opening advisory…</div>}>
           <Router />
         </Suspense>
         <Toaster />

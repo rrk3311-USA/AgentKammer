@@ -413,3 +413,221 @@ export const insertMemberProfileSchema = createInsertSchema(memberProfiles).omit
 
 export type InsertMemberProfile = z.infer<typeof insertMemberProfileSchema>;
 export type MemberProfile = typeof memberProfiles.$inferSelect;
+
+// ---------------------------------------------------------------------------
+// Advisor OS — Attio-connected client charts (Phase 1+)
+// Website = customer intelligence layer; Attio = operational CRM.
+// ---------------------------------------------------------------------------
+
+export const visitors = pgTable("visitors", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  visitorId: text("visitor_id").notNull().unique(),
+  sessionId: text("session_id"),
+  email: text("email"),
+  phone: text("phone"),
+  claimedMemberId: varchar("claimed_member_id"),
+  firstPath: text("first_path"),
+  lastPath: text("last_path"),
+  visitCount: integer("visit_count").default(1),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  lastActiveAt: timestamp("last_active_at").defaultNow().notNull(),
+});
+
+export const insertVisitorSchema = createInsertSchema(visitors).omit({
+  id: true,
+  createdAt: true,
+  lastActiveAt: true,
+});
+
+export type InsertVisitor = z.infer<typeof insertVisitorSchema>;
+export type Visitor = typeof visitors.$inferSelect;
+
+export const clientProfiles = pgTable("client_profiles", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  visitorId: text("visitor_id").notNull().unique(),
+  attioPersonId: text("attio_person_id"),
+  attioRecordId: text("attio_record_id"),
+  firstName: text("first_name"),
+  lastName: text("last_name"),
+  email: text("email"),
+  phone: text("phone"),
+  situation: text("situation"),
+  desiredOutcome: text("desired_outcome"),
+  currentHousing: text("current_housing"),
+  currentLocation: text("current_location"),
+  targetLocations: text("target_locations").array(),
+  propertyTypes: text("property_types").array(),
+  budgetRange: text("budget_range"),
+  timeline: text("timeline"),
+  financingStatus: text("financing_status"),
+  creditReadiness: text("credit_readiness"),
+  downPaymentReadiness: text("down_payment_readiness"),
+  decisionMakers: text("decision_makers").array(),
+  constraints: text("constraints").array(),
+  tradeOffs: text("trade_offs").array(),
+  dealBreakers: text("deal_breakers").array(),
+  buildingsViewed: text("buildings_viewed").array(),
+  listingsViewed: text("listings_viewed").array(),
+  readinessScore: integer("readiness_score"),
+  belongingScore: integer("belonging_score"),
+  leadScore: integer("lead_score").default(0),
+  lifecycleStage: text("lifecycle_stage").notNull().default("anonymous"),
+  nextRecommendedAction: text("next_recommended_action"),
+  lastConversationSummary: text("last_conversation_summary"),
+  internalAdvisorSummary: text("internal_advisor_summary"),
+  assignedAdvisor: text("assigned_advisor"),
+  assignedPartner: text("assigned_partner"),
+  scoreBreakdown: text("score_breakdown"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  lastActiveAt: timestamp("last_active_at").defaultNow().notNull(),
+});
+
+export const insertClientProfileSchema = createInsertSchema(clientProfiles).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  lastActiveAt: true,
+});
+
+export type InsertClientProfile = z.infer<typeof insertClientProfileSchema>;
+export type ClientProfileRow = typeof clientProfiles.$inferSelect;
+
+export const chatSessions = pgTable("chat_sessions", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  clientProfileId: varchar("client_profile_id").notNull(),
+  visitorId: text("visitor_id").notNull(),
+  sessionId: text("session_id").notNull(),
+  pagePath: text("page_path"),
+  status: text("status").notNull().default("active"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export type ChatSession = typeof chatSessions.$inferSelect;
+
+export const chatMessages = pgTable("chat_messages", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  sessionId: varchar("session_id").notNull(),
+  clientProfileId: varchar("client_profile_id").notNull(),
+  role: text("role").notNull(),
+  content: text("content").notNull(),
+  metadata: text("metadata"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export type ChatMessage = typeof chatMessages.$inferSelect;
+
+export const profileEvents = pgTable("profile_events", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  clientProfileId: varchar("client_profile_id").notNull(),
+  eventType: text("event_type").notNull(),
+  detail: text("detail"),
+  actorRole: text("actor_role").default("system"),
+  actorId: text("actor_id"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export type ProfileEvent = typeof profileEvents.$inferSelect;
+
+export const savedItems = pgTable("saved_items", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  clientProfileId: varchar("client_profile_id").notNull(),
+  itemType: text("item_type").notNull(),
+  title: text("title").notNull(),
+  path: text("path"),
+  externalId: text("external_id"),
+  notes: text("notes"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export type SavedItem = typeof savedItems.$inferSelect;
+
+export const goals = pgTable("goals", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  clientProfileId: varchar("client_profile_id").notNull(),
+  goal: text("goal").notNull(),
+  status: text("status").notNull().default("active"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export type Goal = typeof goals.$inferSelect;
+
+export const advisorReviews = pgTable("advisor_reviews", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  clientProfileId: varchar("client_profile_id").notNull(),
+  reviewDate: timestamp("review_date").notNull(),
+  advisorId: text("advisor_id").notNull(),
+  whatChanged: text("what_changed").notNull(),
+  currentObjective: text("current_objective").notNull(),
+  progressSinceLastReview: text("progress_since_last_review").notNull(),
+  financialReadinessUpdate: text("financial_readiness_update"),
+  housingUpdate: text("housing_update"),
+  risks: text("risks").array(),
+  recommendations: text("recommendations").array(),
+  next90DayPlan: text("next_90_day_plan").array(),
+  nextReviewDate: timestamp("next_review_date"),
+  clientVisibleSummary: text("client_visible_summary").notNull(),
+  internalNotes: text("internal_notes"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export type AdvisorReviewRow = typeof advisorReviews.$inferSelect;
+
+export const attioSyncJobs = pgTable("attio_sync_jobs", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  clientProfileId: varchar("client_profile_id").notNull(),
+  action: text("action").notNull(),
+  payload: text("payload").notNull(),
+  status: text("status").notNull().default("pending"),
+  attemptCount: integer("attempt_count").notNull().default(0),
+  lastError: text("last_error"),
+  nextRetryAt: timestamp("next_retry_at"),
+  dedupeKey: text("dedupe_key"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export type AttioSyncJobRow = typeof attioSyncJobs.$inferSelect;
+
+export const attioSyncLogs = pgTable("attio_sync_logs", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  jobId: varchar("job_id"),
+  clientProfileId: varchar("client_profile_id"),
+  action: text("action").notNull(),
+  level: text("level").notNull().default("info"),
+  message: text("message").notNull(),
+  detail: text("detail"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export type AttioSyncLogRow = typeof attioSyncLogs.$inferSelect;
+
+export const accountClaimTokens = pgTable("account_claim_tokens", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  email: text("email").notNull(),
+  visitorId: text("visitor_id"),
+  tokenHash: text("token_hash").notNull(),
+  pinHash: text("pin_hash"),
+  purpose: text("purpose").notNull().default("claim"),
+  expiresAt: timestamp("expires_at").notNull(),
+  consumedAt: timestamp("consumed_at"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export type AccountClaimToken = typeof accountClaimTokens.$inferSelect;
+
+export const auditLogs = pgTable("audit_logs", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  actorRole: text("actor_role").notNull(),
+  actorId: text("actor_id"),
+  action: text("action").notNull(),
+  resourceType: text("resource_type").notNull(),
+  resourceId: text("resource_id"),
+  detail: text("detail"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export type AuditLog = typeof auditLogs.$inferSelect;

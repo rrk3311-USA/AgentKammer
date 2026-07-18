@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Advisor Practice Guide — Agent Kammer</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0D182B;
+      --stone: #2A3447;
+      --ivory: #F7F5F1;
+      --card: #F1ECE4;
+      --brass: #B89A63;
+      --ink: #1A1F2B;
+      --muted: #6B7280;
+      --line: rgba(13, 24, 43, 0.12);
+      --ok: #3D6B5A;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse 70% 40% at 90% 0%, rgba(184, 154, 99, 0.14), transparent 50%),
+        linear-gradient(180deg, #E8E2D8 0%, var(--ivory) 35%, #EDE8DF 100%);
+      line-height: 1.55;
+    }
+    .shell { max-width: 960px; margin: 0 auto; padding: 2.25rem 1.25rem 4rem; }
+    .hero {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 18px;
+      padding: 2.25rem 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 22px 50px rgba(13, 24, 43, 0.2);
+    }
+    .eyebrow {
+      margin: 0 0 0.65rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
+      font-weight: 600;
+    }
+    h1 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(2.1rem, 4.2vw, 3rem);
+      font-weight: 600;
+      line-height: 1.1;
+      margin: 0 0 0.85rem;
+    }
+    .lede { margin: 0; max-width: 38rem; color: rgba(255,255,255,0.72); font-size: 1.06rem; }
+    .meta {
+      display: flex; flex-wrap: wrap; gap: 0.75rem 1.35rem;
+      margin-top: 1.35rem; font-size: 0.85rem; color: rgba(255,255,255,0.42);
+    }
+    .meta strong { color: var(--brass); }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.35rem; }
+    .btn {
+      display: inline-flex; align-items: center; text-decoration: none;
+      font-size: 0.9rem; font-weight: 600; padding: 0.65rem 1rem; border-radius: 10px;
+    }
+    .btn-primary { background: var(--brass); color: var(--navy); }
+    .btn-ghost { border: 1px solid rgba(255,255,255,0.28); color: rgba(255,255,255,0.88); }
+    .btn-navy { background: var(--navy); color: #fff; }
+    .btn-soft { background: var(--card); color: var(--navy); border: 1px solid var(--line); }
+
+    nav.toc {
+      background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+      padding: 1.2rem 1.4rem; margin-bottom: 1.25rem;
+    }
+    nav.toc h2 {
+      margin: 0 0 0.7rem; font-size: 0.68rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted); font-weight: 600;
+    }
+    nav.toc ol { margin: 0; padding-left: 1.15rem; columns: 2; gap: 1.5rem; }
+    @media (max-width: 640px) { nav.toc ol { columns: 1; } }
+    nav.toc a { color: var(--stone); text-decoration: none; font-size: 0.95rem; }
+    nav.toc a:hover { color: var(--brass); }
+
+    section {
+      background: rgba(255,255,255,0.58);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.45rem 1.55rem 1.6rem;
+      margin-bottom: 1rem;
+    }
+    section h2 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.7rem; font-weight: 600; margin: 0 0 0.55rem; color: var(--navy);
+    }
+    section h3 {
+      font-size: 1rem; font-weight: 600; margin: 1.2rem 0 0.4rem; color: var(--stone);
+    }
+    p, li { color: var(--stone); }
+    p { margin: 0 0 0.7rem; }
+    ul, ol { margin: 0 0 0.7rem; padding-left: 1.2rem; }
+    li { margin-bottom: 0.35rem; }
+
+    .grid-2, .grid-3 { display: grid; gap: 0.75rem; }
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+    @media (max-width: 760px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--ivory); border: 1px solid var(--line);
+      border-radius: 10px; padding: 1rem 1.1rem;
+    }
+    .card .tag {
+      display: block; font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--brass); font-weight: 600; margin-bottom: 0.35rem;
+    }
+    .card h4 {
+      margin: 0 0 0.35rem; font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.35rem; color: var(--navy); font-weight: 600;
+    }
+    .card .price {
+      margin: 0 0 0.5rem; font-size: 0.82rem; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--navy); font-weight: 600;
+    }
+    .card p { margin: 0; font-size: 0.92rem; }
+
+    .callout {
+      border-left: 3px solid var(--brass);
+      background: rgba(184, 154, 99, 0.12);
+      padding: 0.85rem 1rem; border-radius: 0 10px 10px 0;
+      margin: 0.85rem 0; font-size: 0.95rem;
+    }
+    .warn {
+      border-left-color: #9A5B4A;
+      background: rgba(154, 91, 74, 0.1);
+    }
+    .ok {
+      border-left-color: var(--ok);
+      background: rgba(61, 107, 90, 0.1);
+    }
+    .script {
+      background: var(--navy);
+      color: rgba(255,255,255,0.88);
+      border-radius: 12px;
+      padding: 1.1rem 1.2rem;
+      margin: 0.85rem 0;
+      font-size: 0.95rem;
+    }
+    .script strong { color: var(--brass); }
+    table {
+      width: 100%; border-collapse: collapse; font-size: 0.92rem; margin: 0.75rem 0;
+    }
+    th, td {
+      text-align: left; padding: 0.65rem 0.55rem;
+      border-bottom: 1px solid var(--line); vertical-align: top;
+    }
+    th { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    code {
+      font-family: ui-monospace, Menlo, monospace; font-size: 0.86em;
+      background: rgba(13,24,43,0.06); padding: 0.1em 0.35em; border-radius: 4px;
+    }
+    footer {
+      margin-top: 1.75rem; text-align: center; font-size: 0.85rem; color: var(--muted);
+    }
+    footer a { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <p class="eyebrow">Agent Kammer · Advisor recruiting &amp; practice</p>
+      <h1>How we advise, offer, and earn</h1>
+      <p class="lede">
+        Onboarding guide for advisors joining the practice: what we sell, how money is made,
+        what to pitch after a Housing Strategy Session, and how the tools support the work.
+      </p>
+      <div class="meta">
+        <span><strong>For</strong> Recruited advisors &amp; partners</span>
+        <span><strong>Not</strong> Client-facing</span>
+        <span><strong>Companion</strong> <a href="/guides/advisor-os-onboarding.html" style="color:var(--brass)">Systems / Attio guide</a></span>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary" href="#money">How we make money</a>
+        <a class="btn btn-ghost" href="#after-session">After the session — pitch</a>
+        <a class="btn btn-ghost" href="#offers">Offer stack</a>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#frame">The practice frame</a></li>
+        <li><a href="#money">How we make money</a></li>
+        <li><a href="#offers">Offer stack (what to sell)</a></li>
+        <li><a href="#journey">Client journey</a></li>
+        <li><a href="#after-session">After the session — how to pitch</a></li>
+        <li><a href="#scripts">Language that works</a></li>
+        <li><a href="#tools">Tools you’ll use</a></li>
+        <li><a href="#role">What we expect from advisors</a></li>
+      </ol>
+    </nav>
+
+    <section id="frame">
+      <h2>1. The practice frame</h2>
+      <p>
+        Agent Kammer is a <strong>residential advisory practice</strong> — not a listing mill and not a “get them on a free discovery call” funnel.
+        Clients pay for <strong>judgment on real decisions</strong>: buy vs wait, stay vs move, which building, renovate vs relocate, how to sequence a sale and purchase.
+      </p>
+      <div class="grid-2">
+        <div class="card">
+          <span class="tag">Product</span>
+          <h4>The advisory relationship</h4>
+          <p>A session is how advice is delivered. Continuity (membership) is how advice compounds. Both are valid outcomes.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Naming</span>
+          <h4>Housing Strategy Session</h4>
+          <p>Public name for the first paid ~60‑minute engagement. Internally people still say “discovery” — publicly we do not. It is paid work with a written summary, not a free sales screen.</p>
+        </div>
+      </div>
+      <div class="callout">
+        One session with a clear written recommendation can be a complete, successful engagement.
+        Upselling membership is appropriate when decisions will keep evolving — never because “we need a close.”
+      </div>
+    </section>
+
+    <section id="money">
+      <h2>2. How we make money</h2>
+      <p>Revenue comes from advisory fees first. Transaction work is secondary and only when execution is the right next step.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Layer</th>
+            <th>What it is</th>
+            <th>How it earns</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>À la carte sessions</strong></td>
+            <td>Housing Strategy Session, Building Second Opinion, Portfolio Review</td>
+            <td>One-time advisory fee (guidance bands below)</td>
+          </tr>
+          <tr>
+            <td><strong>Memberships</strong></td>
+            <td>Essentials · Executive Advisory · Private Residential Office</td>
+            <td>Monthly retainer for ongoing judgment &amp; coordination</td>
+          </tr>
+          <tr>
+            <td><strong>Transaction / partner path</strong></td>
+            <td>When a client is ready to buy, sell, or lease</td>
+            <td>Execution via licensed brokerage partners / coordinated deal work — tracked in Attio as a Transaction. Never invent urgency to force this.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout ok">
+        <strong>Advisor mental model:</strong> Get paid for clarity early. Earn continuity when the relationship warrants it.
+        Earn deal economics only when a real transaction begins — after the advisory work, not instead of it.
+      </div>
+      <div class="callout warn">
+        Do not pitch “I’ll find you listings for free and get paid at closing” as the Agent Kammer model.
+        That collapses us back into commodity brokerage. We sell the decision layer.
+      </div>
+    </section>
+
+    <section id="offers">
+      <h2>3. Offer stack (what to sell)</h2>
+      <h3>À la carte — begin with one decision</h3>
+      <div class="grid-3">
+        <div class="card">
+          <span class="tag">Primary entry</span>
+          <h4>Housing Strategy Session</h4>
+          <p class="price">$250–500</p>
+          <p>~60 min + written action summary. One major decision. Complete engagement on its own.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Scoped</span>
+          <h4>Building Second Opinion</h4>
+          <p class="price">By scope</p>
+          <p>Independent read on one building/property: fit, risk, resale, questions before commit.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Multi-property</span>
+          <h4>Residential Portfolio Review</h4>
+          <p class="price">By scope</p>
+          <p>Keep / sell / renovate / rent across what they own — lifestyle + long-term goals.</p>
+        </div>
+      </div>
+
+      <h3>Memberships — when decisions keep evolving</h3>
+      <div class="grid-3">
+        <div class="card">
+          <span class="tag">Continuity</span>
+          <h4>Essentials</h4>
+          <p class="price">$250–500/mo</p>
+          <p>Monthly touchpoint, email access, annual portfolio review, market updates, written summaries.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Active planning</span>
+          <h4>Executive Advisory</h4>
+          <p class="price">$750–1,500/mo</p>
+          <p>Two sessions/mo, priority scheduling, portfolio oversight, building research, vendors, family planning.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Family office lane</span>
+          <h4>Private Residential Office</h4>
+          <p class="price">$2,500–5,000+/mo</p>
+          <p>Standing residential office: deep access, coordination across pros, annual master plan.</p>
+        </div>
+      </div>
+      <p style="margin-top:0.85rem;font-size:0.9rem;color:var(--muted)">
+        Price bands are planning guidance. Final terms are confirmed with the practice before any engagement or membership starts.
+        Public offer page: <a href="/advisory">/advisory</a>
+      </p>
+    </section>
+
+    <section id="journey">
+      <h2>4. Client journey</h2>
+      <ol>
+        <li><strong>Attract</strong> — Research Library, insights, Belonging Assessment, Decision Guide on the site.</li>
+        <li><strong>Book</strong> — Housing Strategy Session (paid). This is the work, not a free qualifier.</li>
+        <li><strong>Deliver</strong> — Session + written strategy summary / Decision Blueprint.</li>
+        <li><strong>Recommend</strong> — Soft next step: stop (complete), membership, deeper à la carte, or (only if ready) transaction path.</li>
+        <li><strong>Operate</strong> — Admin monitors; Attio holds the chart, lists, and tasks.</li>
+      </ol>
+      <div class="callout">
+        Funnel shorthand:<br />
+        <code>Belonging / Decision Guide → Housing Strategy Session → Written summary → Membership or pause → Transaction only when ready</code>
+      </div>
+    </section>
+
+    <section id="after-session">
+      <h2>5. After the session — how to pitch</h2>
+      <p>
+        End every Housing Strategy Session with <strong>one primary recommendation</strong> and a soft continuity ask.
+        Match the ask to their situation — do not run the same close every time.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>If you hear…</th>
+            <th>Recommend…</th>
+            <th>Why</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>One clear decision, then quiet for 6–12 months</td>
+            <td><strong>Stop here</strong> (complete) — optional follow-up note in 90 days</td>
+            <td>Protects trust; one session was the product</td>
+          </tr>
+          <tr>
+            <td>Ongoing questions, market watching, “we’ll decide later this year”</td>
+            <td><strong>Essentials</strong></td>
+            <td>Light continuity without overselling</td>
+          </tr>
+          <tr>
+            <td>Active relocation / buy-sell this quarter, multiple moving parts</td>
+            <td><strong>Executive Advisory</strong></td>
+            <td>Needs cadence + research + coordination</td>
+          </tr>
+          <tr>
+            <td>Complex portfolio, family office needs, multi-advisor team</td>
+            <td><strong>Private Residential Office</strong></td>
+            <td>High coordination burden</td>
+          </tr>
+          <tr>
+            <td>Stuck on one building / underwriting a specific property</td>
+            <td><strong>Building Second Opinion</strong></td>
+            <td>Scoped à la carte, not a membership by default</td>
+          </tr>
+          <tr>
+            <td>Several owned properties, keep/sell/renovate unclear</td>
+            <td><strong>Residential Portfolio Review</strong></td>
+            <td>Scoped deep work before retainer</td>
+          </tr>
+          <tr>
+            <td>Decision made; ready to execute purchase/sale/lease</td>
+            <td><strong>Transaction path</strong> (partner / deal file)</td>
+            <td>Only now — create Attio Transaction; do not invent deals from planning talk</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Close structure (last 8–10 minutes)</h3>
+      <ol>
+        <li><strong>Recap the decision</strong> — one sentence recommendation.</li>
+        <li><strong>Confirm the written summary</strong> — what they’ll receive and when.</li>
+        <li><strong>Name the continuity option</strong> that fits (or name that none is needed).</li>
+        <li><strong>Ask a preference question</strong>, not a hard close: “Would light monthly oversight help, or should we pause until X?”</li>
+        <li><strong>Log in admin / Attio</strong> — stage, next action, membership interest Y/N.</li>
+      </ol>
+    </section>
+
+    <section id="scripts">
+      <h2>6. Language that works</h2>
+      <div class="script">
+        <strong>Soft membership ask</strong><br />
+        “You’ve got a clear next step from today’s session. If the decisions keep shifting over the next few months — financing, building shortlist, timing — Essentials gives you a standing place to think it through without starting from zero each time. If you’d rather pause after the written summary, that’s a complete outcome too.”
+      </div>
+      <div class="script">
+        <strong>Executive Advisory ask</strong><br />
+        “You’re coordinating a sale and a purchase in the same season. That’s not one decision — it’s a sequence. Executive Advisory is built for that cadence: two strategy sessions a month, research between them, and priority when something breaks.”
+      </div>
+      <div class="script">
+        <strong>When not to pitch</strong><br />
+        “Your decision is to wait twelve months and revisit. I’ll send the written summary. No membership needed unless something changes — and if it does, we start fresh with a session.”
+      </div>
+      <h3>Words to avoid (public / client)</h3>
+      <ul>
+        <li>“Discovery call,” “free consult,” “qualification,” “lead,” “prospect”</li>
+        <li>“I’ll get paid when you buy” as the value proposition</li>
+        <li>Pressure closes, false urgency, inventing a deal that isn’t there</li>
+      </ul>
+      <h3>Words to use</h3>
+      <ul>
+        <li>Housing Strategy Session · written summary · advisory relationship · membership · when you’re ready to execute</li>
+        <li>“Do nothing” / “wait” as a valid recommendation</li>
+      </ul>
+    </section>
+
+    <section id="tools">
+      <h2>7. Tools you’ll use</h2>
+      <div class="grid-2">
+        <div class="card">
+          <span class="tag">Client-facing</span>
+          <h4>Website</h4>
+          <p>Decision Guide, Belonging, Research Library, <a href="/advisory">/advisory</a> offers, contact. Captures signal; never shows lead score.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Internal monitor</span>
+          <h4>Admin · /admin</h4>
+          <p>Client charts, stage, summaries, Resync Attio. Use after sessions to set Advisory Client / next action.</p>
+        </div>
+        <div class="card">
+          <span class="tag">CRM of record</span>
+          <h4>Attio</h4>
+          <p>People (ops), Housing Advisory (chart), Lead Pipeline vs Current Clients, Transactions only for real deals.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Systems detail</span>
+          <h4>OS onboarding</h4>
+          <p>Lifecycle stages, list rules, verification checklist → <a href="/guides/advisor-os-onboarding.html">Advisor OS guide</a></p>
+        </div>
+      </div>
+      <div class="actions" style="margin-top:1rem">
+        <a class="btn btn-navy" href="/admin/clients">Open admin clients</a>
+        <a class="btn btn-soft" href="/guides/advisor-os-onboarding.html">Open systems guide</a>
+        <a class="btn btn-soft" href="/advisory">View public offers</a>
+      </div>
+    </section>
+
+    <section id="role">
+      <h2>8. What we expect from advisors</h2>
+      <div class="grid-2">
+        <div class="card">
+          <span class="tag">You own</span>
+          <h4>Judgment &amp; delivery</h4>
+          <p>Run the session, write a clear recommendation, recommend the right next offer (including “none”), keep the chart honest in Attio.</p>
+        </div>
+        <div class="card">
+          <span class="tag">You protect</span>
+          <h4>Trust economics</h4>
+          <p>Never force membership or invent a transaction. Prefer a smaller correct engagement over a larger wrong one.</p>
+        </div>
+        <div class="card">
+          <span class="tag">You use</span>
+          <h4>One stage language</h4>
+          <p>New Signal → … → Advisory Client → Transaction Ready → Inactive. Same words in admin and Attio.</p>
+        </div>
+        <div class="card">
+          <span class="tag">You escalate</span>
+          <h4>When execution starts</h4>
+          <p>Ready to buy/sell/lease → create Transaction, stay Advisory Client / Transaction Ready on People — don’t mark Inactive after a close.</p>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>Recruiting one-liner:</strong> We hire advisors who can charge for clarity — and who know when not to sell the next thing.
+      </div>
+    </section>
+
+    <footer>
+      <p>
+        Agent Kammer Residential Advisory · Internal ·
+        <a href="/guides/advisor-practice-guide.html">Practice guide</a> ·
+        <a href="/guides/advisor-os-onboarding.html">Systems guide</a>
+      </p>
+      <p>Buildings before listings. Decisions before emotions.</p>
+    </footer>
+  </div>
+</body>
+</html>
