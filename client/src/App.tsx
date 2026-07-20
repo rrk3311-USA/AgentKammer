@@ -37,6 +37,8 @@ const AdminOverview = lazy(() => import("@/pages/AdminOverview"));
 const AdminPortal = lazy(() => import("@/pages/AdminPortal"));
 const AdminClients = lazy(() => import("@/pages/AdminClients"));
 const AdminSection = lazy(() => import("@/pages/AdminSection"));
+const InternationalHub = lazy(() => import("@/pages/InternationalHub"));
+const InternationalCountry = lazy(() => import("@/pages/InternationalCountry"));
 const BuildingReportDetail = lazy(() => import("@/pages/BuildingReportDetail"));
 const PerspectiveArticle = lazy(() => import("@/pages/PerspectiveArticle"));
 const ExecutiveHousingReport = lazy(() => import("@/pages/ExecutiveHousingReport"));
@@ -112,6 +114,10 @@ function Router() {
       <Route path="/insights/:slug" component={PerspectiveArticle} />
       <Route path="/contact" component={Contact} />
       <Route path="/advisory" component={Advisory} />
+      <Route path="/international/:country">
+        {(params) => <InternationalCountry country={params.country} />}
+      </Route>
+      <Route path="/international" component={InternationalHub} />
       <Route path="/belonging" component={Belonging} />
       <Route path="/privacy" component={Privacy} />
       <Route path="/terms" component={Terms} />
@@ -128,7 +134,6 @@ function Router() {
       <Route path="/buy">{() => <Redirect to="/buyer-advisory" />}</Route>
       <Route path="/executive-relocation">{() => <Redirect to="/services/executive-relocation-nyc" />}</Route>
       <Route path="/corporate-relocation">{() => <Redirect to="/services/corporate-relocation-buyers-nyc" />}</Route>
-      <Route path="/international">{() => <Redirect to="/services/foreign-buyers-new-york" />}</Route>
       <Route path="/senior-downsizing">{() => <Redirect to="/services/retiree-senior-home-buyers-nyc" />}</Route>
       <Route path="/school-district-planning">{() => <Redirect to="/services/school-district-planning-nyc" />}</Route>
       <Route path="/military-relocation">{() => <Redirect to="/services/military-relocation-nyc" />}</Route>

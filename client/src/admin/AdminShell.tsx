@@ -172,6 +172,14 @@ export function AdminShell({
           </div>
           <div className="mt-3 flex flex-wrap gap-3">
             <a
+              href="/international"
+              target="_blank"
+              rel="noreferrer"
+              className="text-[11px] text-[var(--ak-brass)]/80 hover:text-[var(--ak-brass)]"
+            >
+              Intl hub
+            </a>
+            <a
               href="/guides/advisor-practice-guide.html"
               target="_blank"
               rel="noreferrer"
@@ -270,6 +278,22 @@ export function AdminShell({
                 className="ak-admin-btn ak-admin-btn-ghost !normal-case !tracking-normal !text-[13px] !font-medium"
               >
                 Practice guide
+              </a>
+              <a
+                href="/international"
+                target="_blank"
+                rel="noreferrer"
+                className="ak-admin-btn ak-admin-btn-ghost !normal-case !tracking-normal !text-[13px] !font-medium"
+              >
+                Intl hub
+              </a>
+              <a
+                href="/guides/international-buyer-hub.html"
+                target="_blank"
+                rel="noreferrer"
+                className="ak-admin-btn ak-admin-btn-ghost !normal-case !tracking-normal !text-[13px] !font-medium"
+              >
+                Intl guide
               </a>
               <a
                 href="/guides/advisor-os-onboarding.html"

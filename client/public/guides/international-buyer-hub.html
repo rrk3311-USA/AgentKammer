@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>International Buyer Hub — Agent Kammer</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root { --navy:#0D182B; --brass:#B89A63; --ivory:#F7F5F1; --stone:#2A3447; --line:rgba(13,24,43,.12); }
+    body { margin:0; font-family:"Source Sans 3",sans-serif; background:linear-gradient(180deg,#E8E2D8,#F7F5F1); color:var(--stone); line-height:1.55; }
+    .shell { max-width:880px; margin:0 auto; padding:2.5rem 1.25rem 4rem; }
+    .hero { background:var(--navy); color:#fff; border-radius:16px; padding:2rem; margin-bottom:1.25rem; }
+    h1 { font-family:"Cormorant Garamond",Georgia,serif; font-size:clamp(2rem,4vw,2.8rem); margin:0 0 .75rem; }
+    .eyebrow { font-size:.7rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.45); margin:0 0 .75rem; }
+    .lede { color:rgba(255,255,255,.72); margin:0; }
+    section { background:rgba(255,255,255,.55); border:1px solid var(--line); border-radius:12px; padding:1.35rem 1.5rem; margin-bottom:1rem; }
+    h2 { font-family:"Cormorant Garamond",Georgia,serif; color:var(--navy); font-size:1.55rem; margin:0 0 .5rem; }
+    a { color:var(--navy); }
+    .btn { display:inline-block; margin:.35rem .35rem 0 0; padding:.65rem 1rem; background:var(--brass); color:var(--navy); text-decoration:none; font-weight:600; border-radius:10px; font-size:.9rem; }
+    .btn-ghost { background:transparent; border:1px solid rgba(255,255,255,.3); color:#fff; }
+    code { background:rgba(13,24,43,.06); padding:.1em .35em; border-radius:4px; font-size:.88em; }
+    .callout { border-left:3px solid var(--brass); background:rgba(184,154,99,.12); padding:.85rem 1rem; margin:.75rem 0; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <p class="eyebrow">Internal · Product system</p>
+      <h1>International Manhattan Buyer Hub</h1>
+      <p class="lede">Reusable multilingual system for international buyers. Educate first. Strategy request second. Language-matched specialist follow-up after every submission.</p>
+      <div style="margin-top:1.25rem">
+        <a class="btn" href="/international">Open hub</a>
+        <a class="btn btn-ghost" href="/international/china">China</a>
+        <a class="btn btn-ghost" href="/international/germany">Germany</a>
+        <a class="btn btn-ghost" href="/international/japan">Japan</a>
+        <a class="btn btn-ghost" href="/international/brazil">Brazil</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Live URLs</h2>
+      <ul>
+        <li><code>/international</code> — English hub (43 countries by region)</li>
+        <li><code>/international/:country</code> — same page template for every market</li>
+        <li>Premium localized: China · Germany · Japan</li>
+        <li>Form API: <code>POST /api/international-strategy</code></li>
+        <li>Docs: <code>docs/product/INTERNATIONAL-BUYER-HUB.md</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Where forms are collected</h2>
+      <p><strong>Not</strong> a generic contact inbox as the system of record.</p>
+      <p>Flow: Form → <code>client_profiles</code> → Attio Lead Pipeline → work in <code>/admin/clients</code>.</p>
+      <p>Email is only an ops alert. Each lead gets contact + buying profile + marketing UTMs + AI summary + status + next action.</p>
+      <p>Optional checkbox: <em>Would you like a personalized Manhattan Buying Roadmap?</em> for 6–18 month buyers.</p>
+    </section>
+
+    <section>
+      <h2>Required form promise</h2>
+      <div class="callout">
+        After you submit, a <strong>specialist who speaks your language</strong> will get in touch to review your goals and recommend the next step.
+      </div>
+      <p>Shown on the form and on the confirmation screen. Country pages localize this sentence.</p>
+    </section>
+
+    <section>
+      <h2>Page system</h2>
+      <p>Every country page uses the same order: Hero → Intro → FAQ → Neighborhoods → Process → Mistakes → Professional team → Resources → Strategy form.</p>
+      <p>Add new countries via <code>COUNTRY_SEEDS</code> / <code>buildCountry()</code> in <code>client/src/data/international-hub.ts</code> — do not invent a new layout.</p>
+    </section>
+
+    <section>
+      <h2>Ops follow-up</h2>
+      <ol>
+        <li>Email arrives with preferred language in the subject.</li>
+        <li>Assign someone who can speak that language (or a trusted bilingual partner).</li>
+        <li>Local Express also queues Attio person + housing + follow-up task.</li>
+        <li>Recommend Housing Strategy Session / membership only when appropriate — see Practice guide.</li>
+      </ol>
+      <p><a href="/guides/advisor-practice-guide.html">Advisor practice guide</a> · <a href="/guides/advisor-os-onboarding.html">Systems guide</a></p>
+    </section>
+  </div>
+</body>
+</html>

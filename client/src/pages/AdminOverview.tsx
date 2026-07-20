@@ -241,6 +241,33 @@ export default function AdminOverview() {
       <div className="space-y-6 px-4 py-6 sm:px-6">
         {error && <p className="text-sm text-[var(--ak-danger)]">{error}</p>}
 
+        <section className="ak-admin-card flex flex-wrap items-center justify-between gap-4 px-5 py-4">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--ak-brass)]">
+              International Buyer Hub
+            </p>
+            <p className="mt-1 text-[15px] text-[var(--ak-ink)]">
+              Public hub + country pages — strategy forms land in Clients / Lead Pipeline.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <a
+              href="/international"
+              target="_blank"
+              rel="noreferrer"
+              className="ak-admin-btn ak-admin-btn-primary !normal-case !tracking-normal !text-[13px] !font-medium"
+            >
+              Open hub
+            </a>
+            <Link
+              href="/admin/clients"
+              className="ak-admin-btn ak-admin-btn-ghost !normal-case !tracking-normal !text-[13px] !font-medium"
+            >
+              View leads
+            </Link>
+          </div>
+        </section>
+
         {/* Metrics */}
         <section className="grid grid-cols-2 gap-3 xl:grid-cols-5">
           <MetricCard label="People" value={dashboard?.pipeline.totalPeople ?? clients.length} hint="+ this week" />

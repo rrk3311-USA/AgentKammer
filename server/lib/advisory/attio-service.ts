@@ -261,6 +261,7 @@ export class AttioService {
   }
 
   async createTask(recordId: string, task: AttioTask): Promise<void> {
+    const assigneeEmail = process.env.ATTIO_DEFAULT_ASSIGNEE_EMAIL?.trim();
     await this.request("POST", "/tasks", {
       data: {
         content: task.content.slice(0, 2000),
@@ -273,6 +274,10 @@ export class AttioService {
             target_record_id: recordId,
           },
         ],
+        // Attio requires `assignees` on create; empty is valid, or assign via env.
+        assignees: assigneeEmail
+          ? [{ workspace_member_email_address: assigneeEmail }]
+          : [],
       },
     });
   }

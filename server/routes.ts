@@ -1986,6 +1986,24 @@ export async function registerRoutes(app: Express): Promise<void> {
     }
   });
 
+  // International Manhattan strategy request (hub form)
+  app.post("/api/international-strategy", async (req, res) => {
+    try {
+      const { ingestInternationalStrategyRequest } = await import(
+        "./lib/advisory/international-strategy"
+      );
+      const result = await ingestInternationalStrategyRequest(req.body);
+      res.json(result);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Invalid form data", details: error.errors });
+      } else {
+        console.error("International strategy submission error:", error);
+        res.status(500).json({ error: "Failed to submit strategy request" });
+      }
+    }
+  });
+
   // Contact form endpoint
   app.post("/api/contact", async (req, res) => {
     try {

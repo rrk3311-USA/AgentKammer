@@ -50,6 +50,8 @@ const COPY: Record<
 
 const PRACTICE_GUIDE_HREF = "/guides/advisor-practice-guide.html";
 const SYSTEMS_GUIDE_HREF = "/guides/advisor-os-onboarding.html";
+const INTL_GUIDE_HREF = "/guides/international-buyer-hub.html";
+const INTL_HUB_HREF = "/international";
 
 export default function AdminSection({ section }: { section: keyof typeof COPY }) {
   const [, setLocation] = useLocation();
@@ -89,6 +91,40 @@ export default function AdminSection({ section }: { section: keyof typeof COPY }
                 <p className="mt-1 text-[16px] text-[var(--ak-ink)]">Advisor practice guide</p>
                 <p className="mt-1 text-[13px] text-[var(--ak-secondary)]">
                   Business model, offers, how we earn, and what to pitch after a Housing Strategy Session.
+                </p>
+              </div>
+              <span className="shrink-0 text-[13px] text-[var(--ak-brass)]">Open →</span>
+            </a>
+            <a
+              href={INTL_HUB_HREF}
+              target="_blank"
+              rel="noreferrer"
+              className="ak-admin-card flex items-center justify-between gap-4 px-5 py-4 no-underline transition hover:bg-[var(--ak-card)]"
+            >
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--ak-brass)]">
+                  International
+                </p>
+                <p className="mt-1 text-[16px] text-[var(--ak-ink)]">Live International Buyer Hub</p>
+                <p className="mt-1 text-[13px] text-[var(--ak-secondary)]">
+                  Public hub + 43 country pages. Forms land in Clients / Attio Lead Pipeline.
+                </p>
+              </div>
+              <span className="shrink-0 text-[13px] text-[var(--ak-brass)]">Open hub →</span>
+            </a>
+            <a
+              href={INTL_GUIDE_HREF}
+              target="_blank"
+              rel="noreferrer"
+              className="ak-admin-card flex items-center justify-between gap-4 px-5 py-4 no-underline transition hover:bg-[var(--ak-card)]"
+            >
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--ak-brass)]">
+                  International
+                </p>
+                <p className="mt-1 text-[16px] text-[var(--ak-ink)]">International Buyer Hub guide</p>
+                <p className="mt-1 text-[13px] text-[var(--ak-secondary)]">
+                  Country pages, strategy form, and language-matched specialist follow-up.
                 </p>
               </div>
               <span className="shrink-0 text-[13px] text-[var(--ak-brass)]">Open →</span>

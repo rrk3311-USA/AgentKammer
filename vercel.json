@@ -11,7 +11,6 @@
     { "source": "/reverse-buyer-origination", "destination": "/buyer-advisory", "permanent": true },
     { "source": "/executive-relocation", "destination": "/services/executive-relocation-nyc", "permanent": true },
     { "source": "/corporate-relocation", "destination": "/services/corporate-relocation-buyers-nyc", "permanent": true },
-    { "source": "/international", "destination": "/services/foreign-buyers-new-york", "permanent": true },
     { "source": "/senior-downsizing", "destination": "/services/retiree-senior-home-buyers-nyc", "permanent": true },
     { "source": "/school-district-planning", "destination": "/services/school-district-planning-nyc", "permanent": true },
     { "source": "/military-relocation", "destination": "/services/military-relocation-nyc", "permanent": true },
