@@ -240,6 +240,19 @@ async function syncAttio(data: Payload, classified: ReturnType<typeof classify>)
   const { firstName, lastName } = splitName(data.fullName);
   const email = data.email.trim().toLowerCase();
 
+  const attioStage =
+    {
+      inactive: "Inactive",
+      engaged: "Engaged",
+      profiled: "Profiled",
+      qualified: "Qualified",
+      call_ready: "Call Ready",
+      long_term_nurture: "Long-Term Nurture",
+      advisory_client: "Advisory Client",
+      transaction_ready: "Transaction Ready",
+      new_signal: "New Signal",
+    }[classified.lifecycleStage] || "Engaged";
+
   const personRes = (await attioRequest(
     `/objects/${encodeURIComponent(peopleObject)}/records?matching_attribute=email_addresses`,
     "PUT",
@@ -251,6 +264,12 @@ async function syncAttio(data: Payload, classified: ReturnType<typeof classify>)
           ...(data.contactDetail
             ? { phone_numbers: [{ original_phone_number: data.contactDetail }] }
             : {}),
+          lead_source: [{ value: "agent_kammer_website" }],
+          lifecycle_stage: [{ option: attioStage }],
+          lead_score: [{ value: classified.leadScore }],
+          next_action: [
+            { value: `${classified.nextAction} · Speak ${data.preferredLanguage}` },
+          ],
         },
       },
     },
@@ -259,41 +278,46 @@ async function syncAttio(data: Payload, classified: ReturnType<typeof classify>)
   const personId = personRes?.data?.id?.record_id;
   if (!personId) throw new Error("Attio person upsert returned no record id");
 
+  const situation = `International buyer · ${data.country} · ${data.buyingGoal}`;
+  const desired = data.wantRoadmap
+    ? `${data.buyingGoal} · Requested Manhattan Buying Roadmap`
+    : data.buyingGoal;
+
+  const housingValues: Record<string, unknown> = {
+    client: [{ target_object: peopleObject, target_record_id: personId }],
+    situation: [{ value: situation }],
+    desired_outcome: [{ value: desired }],
+    current_location: [{ value: data.country }],
+    budget_range: [{ value: data.budget }],
+    timeline: [{ value: data.timeline }],
+    financing_status: [{ value: data.financing }],
+    recommended_next_action: [
+      { value: `${classified.nextAction} · Speak ${data.preferredLanguage}` },
+    ],
+    last_ai_summary: [{ value: classified.aiSummary.slice(0, 2000) }],
+    last_advisor_summary: [{ value: buildMessage(data, classified).slice(0, 2000) }],
+    lead_score: [{ value: classified.leadScore }],
+    lifecycle_stage: [{ option: attioStage }],
+    website_visitor_id: [{ value: `intl_${email.replace(/[^a-z0-9]/gi, "_").slice(0, 48)}` }],
+  };
+  if (data.neighborhoods?.length) {
+    housingValues.target_locations = [
+      { value: data.neighborhoods.filter((n) => n !== "Not sure yet").join(", ") },
+    ];
+  }
+
   const housingRes = (await attioRequest(
     `/objects/${encodeURIComponent(housingObject)}/records`,
     "POST",
-    {
-      data: {
-        values: {
-          name: [`Intl · ${data.country} · ${data.fullName}`],
-          associated_person: [{ target_object: peopleObject, target_record_id: personId }],
-          lifecycle_stage: [{ option: classified.lifecycleStage }],
-          situation: [
-            `International buyer · ${data.country} · ${data.buyingGoal}`,
-          ],
-          desired_outcome: [
-            data.wantRoadmap
-              ? `${data.buyingGoal} · Requested Manhattan Buying Roadmap`
-              : data.buyingGoal,
-          ],
-          budget_range: [data.budget],
-          timeline: [data.timeline],
-          next_recommended_action: [
-            `${classified.nextAction} · Speak ${data.preferredLanguage}`,
-          ],
-          last_conversation_summary: [classified.aiSummary.slice(0, 2000)],
-          lead_score: [classified.leadScore],
-        },
-      },
-    },
+    { data: { values: housingValues } },
   ).catch(async (err) => {
-    // Fallback: minimal create if custom attributes differ
     console.warn("[international-strategy] housing rich create failed, retrying minimal", err);
     return attioRequest(`/objects/${encodeURIComponent(housingObject)}/records`, "POST", {
       data: {
         values: {
-          name: [`Intl · ${data.country} · ${data.fullName}`],
-          associated_person: [{ target_object: peopleObject, target_record_id: personId }],
+          client: [{ target_object: peopleObject, target_record_id: personId }],
+          situation: [{ value: situation }],
+          lifecycle_stage: [{ option: attioStage }],
         },
       },
     });
