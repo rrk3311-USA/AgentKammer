@@ -534,17 +534,40 @@ export function CTA({
             <p className="mt-5 max-w-2xl text-base leading-8 text-brand-ivory/74">{description}</p>
           </div>
           <div className="grid gap-3 sm:min-w-[16rem]">
-            <Link
-              href={href}
-              className="ak-call-button group grid px-5 py-4 text-left transition-colors"
-            >
-              <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">Belonging</span>
-              <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
-              <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
-                {label}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-              </span>
-            </Link>
+            {href.startsWith("#") ? (
+              <a
+                href={href}
+                className="ak-call-button group grid px-5 py-4 text-left transition-colors"
+                onClick={(e) => {
+                  const id = href.slice(1);
+                  const el = typeof document !== "undefined" ? document.getElementById(id) : null;
+                  if (el) {
+                    e.preventDefault();
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                    history.replaceState(null, "", href);
+                  }
+                }}
+              >
+                <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</span>
+                <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
+                <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
+                  {label}
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+                </span>
+              </a>
+            ) : (
+              <Link
+                href={href}
+                className="ak-call-button group grid px-5 py-4 text-left transition-colors"
+              >
+                <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">Belonging</span>
+                <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
+                <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
+                  {label}
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+                </span>
+              </Link>
+            )}
             {href === "/contact" ? (
               <a
                 href="/contact#request-call"
