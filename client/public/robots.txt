@@ -3,7 +3,9 @@ Allow: /
 Disallow: /admin
 Disallow: /admin/
 
+Sitemap: https://www.agentkammer.com/sitemap-index.xml
 Sitemap: https://www.agentkammer.com/sitemap.xml
+Sitemap: https://www.agentkammer.com/sitemap-international.xml
 
 # LLM and answer-engine summary
 # https://www.agentkammer.com/llms.txt

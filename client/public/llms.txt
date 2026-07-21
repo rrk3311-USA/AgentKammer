@@ -87,3 +87,52 @@ Each page opened from this surface is a Decision Brief.
 ## Positioning
 
 Agent Kammer does not start with listings. It starts with what changed, whether anything should change, what the real options are, and which recommendation protects the client best. When a transaction is appropriate, Agent Kammer curates the right local professionals and remains the advisory continuity layer.
+
+## International Buyer Hub countries
+
+Hub: https://www.agentkammer.com/international
+
+- https://www.agentkammer.com/international/china
+- https://www.agentkammer.com/international/germany
+- https://www.agentkammer.com/international/japan
+- https://www.agentkammer.com/international/korea
+- https://www.agentkammer.com/international/hong-kong
+- https://www.agentkammer.com/international/taiwan
+- https://www.agentkammer.com/international/singapore
+- https://www.agentkammer.com/international/india
+- https://www.agentkammer.com/international/vietnam
+- https://www.agentkammer.com/international/thailand
+- https://www.agentkammer.com/international/indonesia
+- https://www.agentkammer.com/international/malaysia
+- https://www.agentkammer.com/international/france
+- https://www.agentkammer.com/international/spain
+- https://www.agentkammer.com/international/italy
+- https://www.agentkammer.com/international/netherlands
+- https://www.agentkammer.com/international/switzerland
+- https://www.agentkammer.com/international/united-kingdom
+- https://www.agentkammer.com/international/ireland
+- https://www.agentkammer.com/international/sweden
+- https://www.agentkammer.com/international/norway
+- https://www.agentkammer.com/international/denmark
+- https://www.agentkammer.com/international/finland
+- https://www.agentkammer.com/international/poland
+- https://www.agentkammer.com/international/czechia
+- https://www.agentkammer.com/international/romania
+- https://www.agentkammer.com/international/hungary
+- https://www.agentkammer.com/international/greece
+- https://www.agentkammer.com/international/portugal
+- https://www.agentkammer.com/international/russia
+- https://www.agentkammer.com/international/ukraine
+- https://www.agentkammer.com/international/turkey
+- https://www.agentkammer.com/international/uae
+- https://www.agentkammer.com/international/saudi-arabia
+- https://www.agentkammer.com/international/israel
+- https://www.agentkammer.com/international/canada
+- https://www.agentkammer.com/international/mexico
+- https://www.agentkammer.com/international/brazil
+- https://www.agentkammer.com/international/argentina
+- https://www.agentkammer.com/international/colombia
+- https://www.agentkammer.com/international/chile
+- https://www.agentkammer.com/international/australia
+- https://www.agentkammer.com/international/new-zealand
+
