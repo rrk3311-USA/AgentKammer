@@ -25,7 +25,15 @@ const decisionTypes = [
 
 const timelines = ["Now / 30 days", "1-3 months", "3-6 months", "6+ months", "Just exploring"];
 const budgetRanges = ["Under $1M", "$1M-$2M", "$2M-$4M", "$4M+", "Rental", "Not sure / private"];
-const nextSteps = ["Housing Strategy Session", "Email recap first", "Building or neighborhood brief", "Seller strategy", "Decision Assessment", "Not sure"];
+const nextSteps = [
+  "Property Strategy Session",
+  "Property Snapshot",
+  "Property Intelligence Report",
+  "Acquisition Dossier",
+  "Decision Assessment",
+  "Email recap first",
+  "Not sure",
+];
 
 function readIntent() {
   if (typeof window === "undefined") return null;
@@ -41,10 +49,10 @@ export default function Contact() {
   }, []);
 
   usePageMetadata({
-    title: isBelonging ? "Decision Assessment Intake" : "Contact",
+    title: isBelonging ? "Decision Assessment Intake" : "Request Intelligence",
     description: isBelonging
       ? "Request your Decision Assessment — find out if you’re living where you belong."
-      : "Book a Housing Strategy Session with Agent Kammer Residential Advisory.",
+      : "Request Intelligence from Agent Kammer — Assessment, Property Snapshot, Report, or Acquisition Dossier.",
     path: "/contact",
   });
 
@@ -126,8 +134,8 @@ export default function Contact() {
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
       <PageHero
-        eyebrow={isBelonging ? "Decision Assessment" : "Contact"}
-        title={isBelonging ? "Request your Decision Assessment." : "Book a Housing Strategy Session."}
+        eyebrow={isBelonging ? "Decision Assessment" : "Request Intelligence"}
+        title={isBelonging ? "Request your Decision Assessment." : "Request Intelligence."}
         description={
           isBelonging
             ? "Share enough context to prepare a Decision Profile — what changed, what feels off about where you live, and what a good five-year outcome looks like. The scored AI report is in build; intake today is human-paced."
@@ -168,7 +176,7 @@ export default function Contact() {
               <div className="inline-flex items-center gap-3 text-brand-navy">
                 <Mail className="h-4 w-4 text-brand-brass" strokeWidth={1.5} />
                 <span className="text-sm uppercase tracking-[0.16em]">
-                  {isBelonging ? "Send Assessment Intake" : "Send a Filtered Request"}
+                  {isBelonging ? "Send Assessment Intake" : "Request Intelligence"}
                 </span>
               </div>
             </a>
@@ -183,7 +191,7 @@ export default function Contact() {
 
         <div id="request-call" className="rounded-card border border-brand-border bg-white p-8 shadow-soft lg:p-10">
           <h2 className="font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">
-            {isBelonging ? "Assessment Intake" : "Housing Strategy Session"}
+            {isBelonging ? "Assessment Intake" : "Request Intelligence"}
           </h2>
           <p className="mt-3 text-sm leading-7 text-brand-graphite">
             {isBelonging
@@ -364,7 +372,7 @@ export default function Contact() {
                 data-testid="button-contact-submit"
                 disabled={contactMutation.isPending}
               >
-                {contactMutation.isPending ? "Sending..." : isBelonging ? "Send Assessment Intake" : "Begin the Housing Strategy Session"}
+                {contactMutation.isPending ? "Sending..." : isBelonging ? "Send Assessment Intake" : "Request Intelligence"}
               </Button>
             </form>
         </div>

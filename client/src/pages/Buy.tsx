@@ -8,7 +8,7 @@ const journey = [
     step: "01",
     title: "What's Changing?",
     text: "Name the life change — relocation, family, divorce, retirement, remote work, or simple uncertainty that has become expensive.",
-    href: "/services#whats-changing",
+    href: "/situations#whats-changing",
     cta: "Explore situations",
   },
   {
@@ -22,7 +22,7 @@ const journey = [
     step: "03",
     title: "Read the relevant Decision Brief",
     text: "Open the short editorial that matches your situation or the decision path you face — clarity before inventory.",
-    href: "/services",
+    href: "/situations",
     cta: "Browse Decision Briefs",
   },
   {
@@ -39,25 +39,25 @@ const scenarios = [
     title: "Executive relocating to Manhattan",
     trigger: "Start date in 60–120 days, household in motion, limited touring bandwidth.",
     likely: "Often rent first or buy only in turnkey condominiums with clear service culture.",
-    href: "/services/executive-relocation-nyc",
+    href: "/situations/executive-relocation-nyc",
   },
   {
     title: "First Manhattan purchase",
     trigger: "Leaving a rental or another city without a building thesis yet.",
     likely: "Neighborhood and ownership structure before apartment romance — condo vs co-op clarity early.",
-    href: "/services/first-home-buyers-nyc",
+    href: "/situations/first-home-buyers-nyc",
   },
   {
     title: "Growing family / schools",
     trigger: "Bedroom count, school logistics, or outdoor access stopped fitting.",
     likely: "Geography first, then building rules that support the household.",
-    href: "/services/new-baby-growing-family-nyc",
+    href: "/situations/new-baby-growing-family-nyc",
   },
   {
     title: "Sell, keep, or wait",
     trigger: "Life changed but the financial or emotional case for selling is unclear.",
     likely: "Sometimes the highest-value move is to hold, renovate, or rent the current home.",
-    href: "/services#decisions",
+    href: "/situations#decisions",
   },
 ];
 

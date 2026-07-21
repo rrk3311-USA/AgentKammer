@@ -12,8 +12,8 @@ const understand = decisionNavigationGroups.find((group) => group.title === "Wha
 const journey = [
   { step: "01", title: "What's Changing?", href: "#whats-changing", text: "Name the life change." },
   { step: "02", title: "Decision Assessment", href: "/belonging", text: "Build your Decision Profile." },
-  { step: "03", title: "Decision Brief", href: "#whats-changing", text: "Read the situation that fits." },
-  { step: "04", title: "Strategy", href: "/advisory", text: "Housing Strategy Session or Blueprint." },
+  { step: "03", title: "Situation", href: "#whats-changing", text: "Read the situation that fits." },
+  { step: "04", title: "Request Intelligence", href: "/contact", text: "Prescribe Snapshot, Report, or Dossier." },
 ] as const;
 
 function BriefList({ items }: { items: { label: string; href: string }[] }) {
@@ -69,10 +69,10 @@ function OsSection({
 
 export default function Services() {
   usePageMetadata({
-    title: "What's Changing?",
+    title: "Situations",
     description:
-      "Explore your housing situation like an operating system: what changed, what decision you face, and what you need to understand — before listings.",
-    path: "/services",
+      "Explore your housing situation: what changed, what decision you face, and what you need to understand — before listings.",
+    path: "/situations",
   });
 
   useEffect(() => {
@@ -93,12 +93,12 @@ export default function Services() {
     <main className="bg-brand-ivory">
       <section className="border-b border-brand-border">
         <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-24">
-          <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">What's Changing?</p>
+          <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">Situations</p>
           <h1 className="mt-5 max-w-4xl font-display text-[clamp(2.8rem,5.5vw,5.25rem)] leading-[0.9] tracking-[-0.03em] text-brand-navy">
             Explore your situation — not a property search.
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-brand-graphite">
-            This is the decision surface: what changed in your life, what decision you face, and what you still need to understand. Each page you open from here is a Decision Brief.
+            Decision Intelligence starts here: what changed in your life, what decision you face, and what you still need to understand. Each page is a Situation — research, not a product.
           </p>
 
           <ol className="mt-12 grid gap-4 border-t border-brand-border pt-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -142,10 +142,11 @@ export default function Services() {
       />
 
       <CTA
-        title="Take the Decision Assessment."
-        description="If the situation is still open, build a Decision Profile first — then return to the Decision Brief that fits."
-        href="/belonging"
-        label="Start Decision Assessment"
+        title="Request Intelligence."
+        description="If the situation is still open, start with the Decision Assessment — or request intelligence and we will prescribe the next step."
+        href="/contact"
+        label="Request Intelligence"
+        eyebrow="Request Intelligence"
       />
     </main>
   );

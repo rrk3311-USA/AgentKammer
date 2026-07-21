@@ -16,6 +16,7 @@ const Buildings = lazy(() => import("@/pages/Buildings"));
 const BuildingReport = lazy(() => import("@/pages/BuildingReport"));
 const NewYorkMarket = lazy(() => import("@/pages/NewYorkMarket"));
 const Intelligence = lazy(() => import("@/pages/Intelligence"));
+const IntelligenceHome = lazy(() => import("@/pages/IntelligenceHome"));
 const Services = lazy(() => import("@/pages/Services"));
 const ServiceLanding = lazy(() => import("@/pages/ServiceLanding"));
 const Buy = lazy(() => import("@/pages/Buy"));
@@ -101,8 +102,10 @@ function Router() {
       <Route path="/admin/*">{() => <Redirect to="/admin" />}</Route>
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
-      <Route path="/services" component={Services} />
-      <Route path="/services/:slug">{({ slug }) => <ServiceLanding slug={slug} />}</Route>
+      <Route path="/situations" component={Services} />
+      <Route path="/situations/:slug">{({ slug }) => <ServiceLanding slug={slug} />}</Route>
+      <Route path="/services">{() => <Redirect to="/situations" />}</Route>
+      <Route path="/services/:slug">{({ slug }) => <Redirect to={`/situations/${slug}`} />}</Route>
       <Route path="/building-reports" component={Buildings} />
       <Route path="/building-reports/individual-buildings" component={BuildingReport} />
       <Route path="/building-reports/neighborhood-guides" component={NewYorkMarket} />
@@ -114,6 +117,7 @@ function Router() {
       <Route path="/insights/:slug" component={PerspectiveArticle} />
       <Route path="/contact" component={Contact} />
       <Route path="/advisory" component={Advisory} />
+      <Route path="/intelligence" component={IntelligenceHome} />
       <Route path="/international/:country">
         {(params) => <InternationalCountry country={params.country} />}
       </Route>
@@ -132,16 +136,15 @@ function Router() {
       <Route path="/buildings">{() => <Redirect to="/building-reports" />}</Route>
       <Route path="/buildings/:slug/report">{({ slug }) => <Redirect to={`/building-reports/${slug}`} />}</Route>
       <Route path="/buy">{() => <Redirect to="/buyer-advisory" />}</Route>
-      <Route path="/executive-relocation">{() => <Redirect to="/services/executive-relocation-nyc" />}</Route>
-      <Route path="/corporate-relocation">{() => <Redirect to="/services/corporate-relocation-buyers-nyc" />}</Route>
-      <Route path="/senior-downsizing">{() => <Redirect to="/services/retiree-senior-home-buyers-nyc" />}</Route>
-      <Route path="/school-district-planning">{() => <Redirect to="/services/school-district-planning-nyc" />}</Route>
-      <Route path="/military-relocation">{() => <Redirect to="/services/military-relocation-nyc" />}</Route>
-      <Route path="/physician-relocation">{() => <Redirect to="/services/physician-relocation-nyc" />}</Route>
-      <Route path="/finance-relocation">{() => <Redirect to="/services/finance-hedge-fund-relocation-nyc" />}</Route>
-      <Route path="/pet-friendly-moves">{() => <Redirect to="/services/pet-friendly-moves-nyc" />}</Route>
+      <Route path="/executive-relocation">{() => <Redirect to="/situations/executive-relocation-nyc" />}</Route>
+      <Route path="/corporate-relocation">{() => <Redirect to="/situations/corporate-relocation-buyers-nyc" />}</Route>
+      <Route path="/senior-downsizing">{() => <Redirect to="/situations/retiree-senior-home-buyers-nyc" />}</Route>
+      <Route path="/school-district-planning">{() => <Redirect to="/situations/school-district-planning-nyc" />}</Route>
+      <Route path="/military-relocation">{() => <Redirect to="/situations/military-relocation-nyc" />}</Route>
+      <Route path="/physician-relocation">{() => <Redirect to="/situations/physician-relocation-nyc" />}</Route>
+      <Route path="/finance-relocation">{() => <Redirect to="/situations/finance-hedge-fund-relocation-nyc" />}</Route>
+      <Route path="/pet-friendly-moves">{() => <Redirect to="/situations/pet-friendly-moves-nyc" />}</Route>
       <Route path="/new-york-market">{() => <Redirect to="/building-reports/neighborhood-guides" />}</Route>
-      <Route path="/intelligence">{() => <Redirect to="/building-reports/market-briefs" />}</Route>
       <Route path="/perspectives">{() => <Redirect to="/insights" />}</Route>
       <Route path="/perspectives/reports/:slug">{({ slug }) => <Redirect to={`/insights/reports/${slug}`} />}</Route>
       <Route path="/perspectives/:slug">{({ slug }) => <Redirect to={`/insights/${slug}`} />}</Route>
@@ -175,7 +178,7 @@ function AppShell() {
   }
 
   return (
-    <div className="min-h-screen bg-brand-charcoal text-brand-ink">
+    <div className="min-h-screen bg-brand-charcoal pb-[5.75rem] text-brand-ink md:pb-[5.25rem]">
       <ScrollToTop />
       <VisitorSignals />
       <Header />

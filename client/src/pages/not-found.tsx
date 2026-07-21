@@ -16,7 +16,7 @@ export default function NotFound() {
             Start with the main Decision Brief library, or begin with a Housing Strategy Session if the question is specific to a building, neighborhood, timeline, or life change.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/services">
+            <Link href="/situations">
               <Button variant="brand" className="gap-2 uppercase tracking-nav">
                 Open Decision Briefs
                 <ArrowRight className="h-4 w-4" strokeWidth={1.5} />

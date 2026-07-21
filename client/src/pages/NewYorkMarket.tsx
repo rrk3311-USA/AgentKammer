@@ -10,7 +10,7 @@ const neighborhoods = [
     stock: "Deep co-op stock, classic full-service buildings, selective condominiums",
     bestFor: "School logistics, park life, established residential blocks",
     avoidIf: "You need brand-new amenity towers as the primary brief",
-    href: "/services/upper-west-side-buyers-nyc",
+    href: "/situations/upper-west-side-buyers-nyc",
   },
   {
     name: "Upper East Side",
@@ -18,7 +18,7 @@ const neighborhoods = [
     stock: "Co-op heavy, strong service condominiums, townhouse pockets",
     bestFor: "Board-ready buyers, schools, established Upper East routines",
     avoidIf: "You want downtown loft culture or Hudson Yards amenity density",
-    href: "/services/upper-east-side-buyers-nyc",
+    href: "/situations/upper-east-side-buyers-nyc",
   },
   {
     name: "Tribeca",
@@ -26,7 +26,7 @@ const neighborhoods = [
     stock: "Converted lofts, boutique condominiums, limited resale velocity",
     bestFor: "Scale, privacy, downtown family living",
     avoidIf: "You need broad inventory and fast comparable depth",
-    href: "/services/tribeca-buyers-nyc",
+    href: "/situations/tribeca-buyers-nyc",
   },
   {
     name: "Chelsea",
@@ -34,7 +34,7 @@ const neighborhoods = [
     stock: "Mix of classic Chelsea and West Chelsea new development",
     bestFor: "Design-led living, walkability, cultural density",
     avoidIf: "You want quiet co-op culture above all else",
-    href: "/services/chelsea-buyers-nyc",
+    href: "/situations/chelsea-buyers-nyc",
   },
   {
     name: "Hudson Yards",
@@ -42,7 +42,7 @@ const neighborhoods = [
     stock: "Large condominium towers, amenity packages, newer inventory",
     bestFor: "Corporate relocators, amenity-forward weekday living",
     avoidIf: "You prioritize neighborhood texture over tower infrastructure",
-    href: "/services/hudson-yards-buyers-nyc",
+    href: "/situations/hudson-yards-buyers-nyc",
   },
   {
     name: "Financial District",
@@ -50,7 +50,7 @@ const neighborhoods = [
     stock: "Conversions, waterfront condominiums, mixed service quality",
     bestFor: "Downtown commute, pied-à-terre or primary with office gravity",
     avoidIf: "Weekend lifestyle and street rhythm are the main brief",
-    href: "/services/financial-district-buyers-nyc",
+    href: "/situations/financial-district-buyers-nyc",
   },
 ];
 

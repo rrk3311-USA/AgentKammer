@@ -7,7 +7,7 @@ import { buildingReports, formatBuildingReportDate } from "@/data/building-repor
 
 const reportTypes = [
   {
-    title: "Individual Buildings",
+    title: "Building Profiles",
     text: "Use these when the question is whether a specific address deserves attention, caution, or a place on the shortlist.",
     href: "/building-reports/individual-buildings",
     icon: Building2,
@@ -28,18 +28,18 @@ const reportTypes = [
 
 export default function Buildings() {
   usePageMetadata({
-    title: "Building Reports",
+    title: "Building Intelligence",
     description:
-      "Building Reports help Agent Kammer clients study Manhattan buildings, neighborhoods, and market timing before making a housing decision.",
+      "Building Intelligence helps Agent Kammer clients study Manhattan buildings, neighborhoods, and market timing before making a housing decision.",
     path: "/building-reports",
   });
 
   return (
     <main className="bg-brand-ivory">
       <PageHero
-        eyebrow="Building Reports"
+        eyebrow="Building Intelligence"
         title="Study the building before the showing."
-        description="Building Reports help separate attractive listings from durable decisions. Use them to understand address quality, neighborhood fit, timing risk, and whether a property deserves your attention at all."
+        description="Building Profiles separate attractive listings from durable decisions — address quality, neighborhood fit, timing risk, and whether a property deserves your attention at all."
         art="reports-overview"
       />
       <ReportSubnav />
@@ -47,7 +47,7 @@ export default function Buildings() {
       <PageSection>
         <SectionHeading
           eyebrow="Start Here"
-          title="Choose the report format that matches the uncertainty."
+          title="Choose the format that matches the uncertainty."
           description="Some decisions need address-level detail. Others need neighborhood framing or a short market read before comparing property."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
@@ -68,9 +68,9 @@ export default function Buildings() {
       <section className="border-y border-brand-border bg-white">
         <PageSection>
           <SectionHeading
-            eyebrow="Featured Building Reports"
+            eyebrow="Featured Building Profiles"
             title="Published address studies."
-            description="Full reports with resident fit, trade-offs, comparables, and a bottom line — including when to walk away."
+            description="Editorial profiles with resident fit, trade-offs, comparables, and a bottom line — including when to walk away."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             {buildingReports.map((report) => (
@@ -89,7 +89,7 @@ export default function Buildings() {
           </div>
           <Link href="/building-reports/individual-buildings" className="mt-8 inline-flex">
             <Button variant="brand" className="gap-2 uppercase tracking-nav">
-              All individual buildings
+              All Building Profiles
               <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
             </Button>
           </Link>
@@ -97,8 +97,11 @@ export default function Buildings() {
       </section>
 
       <CTA
-        title="Want the reports shaped around a live search brief?"
-        description="Begin a Housing Strategy Session with the building, neighborhood, or timing question that needs a sharper answer."
+        title="Request Intelligence."
+        description="Tell us the building, neighborhood, or timing question that needs a sharper answer — Snapshot, Report, or Dossier."
+        href="/contact"
+        label="Request Intelligence"
+        eyebrow="Request Intelligence"
       />
     </main>
   );

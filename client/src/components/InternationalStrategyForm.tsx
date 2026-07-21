@@ -160,7 +160,7 @@ export function InternationalStrategyForm({
             Belonging Assessment
           </a>
           {" · "}
-          <a href="/services/foreign-buyers-new-york" className="underline underline-offset-4">
+          <a href="/situations/foreign-buyers-new-york" className="underline underline-offset-4">
             International Buyer Decision Brief
           </a>
         </p>

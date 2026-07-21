@@ -4,16 +4,16 @@ import { ArrowRight, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const primaryNav = [
-  { label: "What's Changing?", href: "/services#whats-changing" },
-  { label: "Decisions", href: "/services#decisions" },
-  { label: "Understand", href: "/services#understand" },
-  { label: "Building Library", href: "/building-reports" },
+  { label: "Home", href: "/" },
+  { label: "Situations", href: "/situations" },
+  { label: "Intelligence", href: "/intelligence" },
+  { label: "Buildings", href: "/building-reports" },
   { label: "About", href: "/about" },
 ] as const;
 
 export const buildingReportsNav = [
   { label: "Overview", href: "/building-reports" },
-  { label: "Individual Buildings", href: "/building-reports/individual-buildings" },
+  { label: "Building Profiles", href: "/building-reports/individual-buildings" },
   { label: "Neighborhood Guides", href: "/building-reports/neighborhood-guides" },
   { label: "Market Briefs", href: "/building-reports/market-briefs" },
 ] as const;
@@ -510,11 +510,11 @@ export function ReportSubnav() {
 }
 
 export function CTA({
-  title = "Find out if you’re living where you belong.",
-  description = "A short Decision Assessment builds your profile — belonging, friction, and a clear next step — before any call.",
-  href = "/belonging",
-  label = "Start Decision Assessment",
-  eyebrow = "Decision Assessment",
+  title = "Request Intelligence.",
+  description = "Tell us the decision in front of you. We will prescribe the right next level — Assessment, Snapshot, Report, or Dossier.",
+  href = "/contact",
+  label = "Request Intelligence",
+  eyebrow = "Request Intelligence",
 }: {
   title?: string;
   description?: string;
@@ -560,7 +560,7 @@ export function CTA({
                 href={href}
                 className="ak-call-button group grid px-5 py-4 text-left transition-colors"
               >
-                <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">Belonging</span>
+                <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</span>
                 <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
                 <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
                   {label}

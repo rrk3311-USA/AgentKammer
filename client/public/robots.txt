@@ -3,6 +3,31 @@ Allow: /
 Disallow: /admin
 Disallow: /admin/
 
+# Explicit allow for major AI / answer-engine crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
 Sitemap: https://www.agentkammer.com/sitemap-index.xml
 Sitemap: https://www.agentkammer.com/sitemap.xml
 Sitemap: https://www.agentkammer.com/sitemap-international.xml

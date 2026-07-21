@@ -17,27 +17,27 @@ const comingSoon = [
 
 export default function BuildingReport() {
   usePageMetadata({
-    title: "Individual Buildings",
+    title: "Building Profiles",
     description:
-      "Manhattan building reports on architecture, resident fit, trade-offs, commute, and whether an address deserves a place on your shortlist.",
+      "Manhattan Building Profiles on architecture, resident fit, trade-offs, commute, and whether an address deserves a place on your shortlist.",
     path: "/building-reports/individual-buildings",
   });
 
   return (
     <main className="bg-brand-ivory">
       <PageHero
-        eyebrow="Building Reports"
-        title="Individual Buildings"
-        description="A single address can look perfect online and still be the wrong decision. These reports clarify architecture, service model, resale logic, board or sponsor dynamics, and whether the building fits the brief."
+        eyebrow="Building Intelligence"
+        title="Building Profiles"
+        description="A single address can look perfect online and still be the wrong decision. These editorial profiles clarify architecture, service model, resale logic, board or sponsor dynamics, and whether the building fits the brief."
         art="individual-buildings"
       />
       <ReportSubnav />
 
       <PageSection>
         <SectionHeading
-          eyebrow="Published Reports"
+          eyebrow="Published Profiles"
           title="Study the building before the apartment becomes the conversation."
-          description="Each report covers executive summary, resident fit, strengths, trade-offs, neighborhood context, comparables, and a clear bottom line — including when the better move is to keep looking."
+          description="Each profile covers executive summary, resident fit, strengths, trade-offs, neighborhood context, comparables, and a clear bottom line — including when the better move is to keep looking."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {buildingReports.map((building) => (
@@ -55,7 +55,7 @@ export default function BuildingReport() {
               <p className="mt-2 text-sm uppercase tracking-[0.14em] text-brand-cocoa">{building.location}</p>
               <p className="mt-4 text-sm leading-7 text-brand-graphite">{building.executiveSummary[0]}</p>
               <span className="mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy">
-                Read report
+                Read profile
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
               </span>
             </Link>
@@ -68,7 +68,7 @@ export default function BuildingReport() {
           <SectionHeading
             eyebrow="On the Watchlist"
             title="Additional buildings under study."
-            description="These addresses appear often in executive and design-led searches. Full reports publish as the research is ready."
+            description="These addresses appear often in executive and design-led searches. Full profiles publish as the research is ready."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             {comingSoon.map((building) => (
@@ -83,8 +83,11 @@ export default function BuildingReport() {
       </section>
 
       <CTA
-        title="Need a short list of buildings mapped to your brief?"
-        description="Begin a Housing Strategy Session with your target neighborhoods, timing, and budget so the building list can be filtered before tours begin."
+        title="Request Intelligence."
+        description="Share your target neighborhoods, timing, and budget so the building list can be filtered before tours begin."
+        href="/contact"
+        label="Request Intelligence"
+        eyebrow="Request Intelligence"
       />
     </main>
   );

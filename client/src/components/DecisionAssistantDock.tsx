@@ -13,6 +13,12 @@ import {
 import { DECISION_ASSISTANT_OPEN_EVENT } from "@/lib/decision-assistant";
 import { getPageContext } from "@/lib/knowledge-graph/page-context";
 import { trackVisitorSignal } from "@/lib/visitor-signals";
+import { resolveChatLanguage } from "@/data/site-language";
+import {
+  getPageEngagement,
+  isColdConversation,
+  type EngagementStarter,
+} from "@/data/decision-guide-engagement";
 
 const blueprintSegments = [
   { label: "Lifestyle", filled: true, icon: UsersRound },
@@ -27,23 +33,8 @@ const emailPattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
 const phonePattern = /(?:\+?1[\s.-]?)?(?:\(?\d{3}\)?[\s.-]?)\d{3}[\s.-]?\d{4}/;
 const sessionStorageKey = "akDecisionAssistantSessionId";
 const navigationMemoryKey = "akDecisionAssistantNavigation";
-const openingPrompts = [
-  "Tell me what's changing...",
-  "I'm relocating to Manhattan...",
-  "We need more space...",
-  "I'm not sure if I should sell...",
-  "I'm just exploring...",
-  "My company transferred me...",
-  "I'm buying my first home...",
-];
-
-const starterPrompts = [
-  { label: "Relocation", text: "We're relocating.", path: "/services/executive-relocation-nyc" },
-  { label: "More space", text: "We need more space.", path: "/services/school-district-planning-nyc" },
-  { label: "First home", text: "I'm buying my first home.", path: "/buyer-advisory" },
-  { label: "Upgrade", text: "We're considering an upgrade.", path: "/buyer-advisory" },
-  { label: "Just exploring", text: "I'm just exploring.", path: "/buyer-advisory" },
-];
+const dwellNudgeKey = "akDecisionGuideDwellNudges";
+const DEFAULT_GREETING = getPageEngagement("/").greeting;
 
 function DecisionGuideAvatar({ animated = false }: { animated?: boolean }) {
   return (
@@ -253,17 +244,17 @@ function meaningfulProfileCount(answers: Answers) {
   ].filter(Boolean).length;
 }
 
-function shouldOfferContact(answers: Answers, score: number) {
+function shouldOfferContact(answers: Answers, score: number, userMessageCount = 0) {
   if (hasContact(answers)) return false;
-  return score >= 2 || meaningfulProfileCount(answers) >= 2;
+  // Court first — only invite contact after a real conversation and clear signal.
+  const depth = meaningfulProfileCount(answers);
+  const hasEnoughRapport = userMessageCount >= 4 || depth >= 4;
+  const hasStrongIntent = score >= 4 && depth >= 3;
+  return hasEnoughRapport && (hasStrongIntent || depth >= 5);
 }
 
-function buildContactOffer(answers: Answers, score: number) {
-  const isQualified = score >= 2 || meaningfulProfileCount(answers) >= 2;
-  if (!isQualified) {
-    return "I can keep this profile for you and send the useful pages later. What email or mobile should I use?";
-  }
-  return "I can send you a short recap with the relevant brief, what I would check next, and the recommendation so far. Share the best email or mobile and I’ll touch base from there.";
+function buildContactOffer(_answers: Answers, _score: number) {
+  return "We've got a clearer picture now. If you'd like, I can send you a short note with what I'd recommend next — no pressure either way. What's the best email or mobile?";
 }
 
 function nextDiagnosticStep(answers: Answers): "situation" | "desire" | "constraints" | "tradeoff" {
@@ -378,7 +369,7 @@ function getSituationGuidance(answer: string, score: number) {
   const lower = answer.toLowerCase();
   if (/(pregnan|baby|child|kid|family|more space|bedroom|nursery|first child)/.test(lower)) {
     return {
-      path: "/services/school-district-planning-nyc",
+      path: "/situations/school-district-planning-nyc",
       messages: [
         "Congratulations. I would not start with listings yet. A first child usually changes daily rhythm more than bedroom count, so I would first separate space, commute, and school timing. If we pick one starting point, I would begin with daily routine.",
       ],
@@ -386,7 +377,7 @@ function getSituationGuidance(answer: string, score: number) {
   }
   if (/(company transferred|transferred|relocat|moving|move.*manhattan|new job|job)/.test(lower)) {
     return {
-      path: "/services/executive-relocation-nyc",
+      path: "/situations/executive-relocation-nyc",
       messages: [
         "Thanks. For a Manhattan relocation, I would lead with timeline because it decides whether renting or buying deserves more weight. Commute comes next, then building fit. If this is under three years, flexibility probably matters more than ownership.",
       ],
@@ -394,7 +385,7 @@ function getSituationGuidance(answer: string, score: number) {
   }
   if (/(divorce|separat)/.test(lower)) {
     return {
-      path: "/services/divorce-property-sales-nyc",
+      path: "/situations/divorce-property-sales-nyc",
       messages: [
         "I'm sorry you're dealing with that. I would not start with listings. The first decision is usually whether timing or ownership risk is driving the move. I would start by clarifying whether keeping the home is realistic before comparing places.",
       ],
@@ -411,8 +402,8 @@ function getSituationGuidance(answer: string, score: number) {
   return {
     messages: [
       score >= 4
-        ? "That helps. This sounds time-sensitive, so I would avoid browsing broadly. I would first narrow the decision around timeline, budget, and the one constraint that can break the move."
-        : "That helps. I would make this less scattered by identifying the trigger first, then the constraint. Once those are clear, buildings and neighborhoods become much easier to sort.",
+        ? "I can already feel the clock in that. Before we chase buildings, let's make sure the decision itself is right — timing first, then the one thing that could break the move. No rush to qualify anything; just clarity."
+        : "That already tells me something. Most people in your seat feel a little scattered here — I'd start by naming the trigger, then the real constraint. Once those settle, neighborhoods get much easier.",
     ],
   };
 }
@@ -442,9 +433,10 @@ function getUsefulActions(answers: Answers): QuickAction[] {
 
   if (answers.constraints || answers.tradeOff) {
     actions.push({
-      label: "Send recap",
+      label: "Send a note",
       asksForEmail: true,
-      response: "I can send a clean recap with the relevant briefs, what we learned, and the current recommendation. What email or mobile should I use?",
+      response:
+        "If you'd like, I can send a short note with what we've figured out and what I'd check next — entirely optional. What's the best email or mobile?",
     });
   }
 
@@ -455,6 +447,7 @@ export function DecisionAssistantDock() {
   const [location, setLocation] = useLocation();
   const [expanded, setExpanded] = useState(false);
   const guideOpenedRef = useRef(false);
+  const lastPageHelperRef = useRef<string | null>(null);
   const [input, setInput] = useState("");
   const [sessionId] = useState(getSessionId);
   const [step, setStep] = useState<"situation" | "desire" | "constraints" | "tradeoff" | "email" | "sent">("situation");
@@ -465,16 +458,24 @@ export function DecisionAssistantDock() {
   const [memoryLoaded, setMemoryLoaded] = useState(false);
   const [promptIndex, setPromptIndex] = useState(0);
   const [quickActions, setQuickActions] = useState<QuickAction[]>([]);
+  const [dwellNudge, setDwellNudge] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      text: "Hi, I'm Raphi. I’ll be your Guidance Advisor for this decision. Before you spend time looking at listings, let’s decide whether anything should change at all. Sometimes doing nothing is right. Sometimes it is the mistake. What’s changing?",
+      text: DEFAULT_GREETING,
     },
   ]);
   const transcriptRef = useRef<HTMLDivElement | null>(null);
+  const engagement = getPageEngagement(location);
+  const openingPrompts = engagement.prompts;
+  const starterPrompts = engagement.starters;
+  const cold = isColdConversation(messages);
 
   useEffect(() => {
-    const open = () => setExpanded(true);
+    const open = () => {
+      setExpanded(true);
+      setDwellNudge(null);
+    };
     window.addEventListener(DECISION_ASSISTANT_OPEN_EVENT, open);
     return () => window.removeEventListener(DECISION_ASSISTANT_OPEN_EVENT, open);
   }, []);
@@ -504,6 +505,48 @@ export function DecisionAssistantDock() {
       window.localStorage.setItem(navigationMemoryKey, JSON.stringify([title]));
     }
   }, [location]);
+
+  // Page-aware greeting when the visitor moves and has not started chatting yet.
+  useEffect(() => {
+    if (!memoryLoaded) return;
+    const page = getPageEngagement(location);
+    if (lastPageHelperRef.current === location) return;
+
+    setMessages((current) => {
+      if (!isColdConversation(current)) {
+        lastPageHelperRef.current = location;
+        return current;
+      }
+      const onlyAssistantGreeting =
+        current.length <= 1 && current[0]?.role === "assistant";
+      if (!onlyAssistantGreeting) {
+        lastPageHelperRef.current = location;
+        return current;
+      }
+      lastPageHelperRef.current = location;
+      return [{ role: "assistant", text: page.greeting }];
+    });
+    setPromptIndex(0);
+    setDwellNudge(null);
+  }, [location, memoryLoaded]);
+
+  // Soft dwell nudge — engage visitors who linger without opening chat.
+  useEffect(() => {
+    if (expanded || !memoryLoaded) return;
+    const timer = window.setTimeout(() => {
+      try {
+        const nudged = JSON.parse(window.sessionStorage.getItem(dwellNudgeKey) || "[]") as string[];
+        if (nudged.includes(location) || nudged.length >= 4) return;
+        const tip = getPageEngagement(location).nudge;
+        setDwellNudge(tip);
+        window.sessionStorage.setItem(dwellNudgeKey, JSON.stringify([...nudged, location].slice(0, 8)));
+        trackVisitorSignal("decision_guide_dwell_nudge", location);
+      } catch {
+        setDwellNudge(getPageEngagement(location).nudge);
+      }
+    }, 14000);
+    return () => window.clearTimeout(timer);
+  }, [location, expanded, memoryLoaded]);
 
   useEffect(() => {
     let cancelled = false;
@@ -558,10 +601,10 @@ export function DecisionAssistantDock() {
 
   useEffect(() => {
     const interval = window.setInterval(() => {
-      setPromptIndex((current) => (current + 1) % openingPrompts.length);
+      setPromptIndex((current) => (current + 1) % Math.max(openingPrompts.length, 1));
     }, 3600);
     return () => window.clearInterval(interval);
-  }, []);
+  }, [openingPrompts.length, location]);
 
   useEffect(() => {
     if (!memoryLoaded) return;
@@ -685,14 +728,15 @@ export function DecisionAssistantDock() {
     }
   }
 
-  function handleStarter(prompt: (typeof starterPrompts)[number]) {
+  function handleStarter(prompt: EngagementStarter) {
     const nextScore = leadScore + scoreLead(prompt.text);
     const nextAnswers = { ...answers, situation: prompt.text };
     const nextMessages: Message[] = [...messages, { role: "user", text: prompt.text }];
     const guidance = getSituationGuidance(prompt.text, nextScore);
     trackVisitorSignal("decision_guide_message", prompt.text.slice(0, 120));
+    setDwellNudge(null);
 
-    setLocation(guidance.path || prompt.path);
+    setLocation(guidance.path || prompt.path || location);
     guidance.messages.forEach((text) => nextMessages.push({ role: "assistant", text }));
 
     setExpanded(true);
@@ -700,7 +744,7 @@ export function DecisionAssistantDock() {
     setMessages(nextMessages);
     setAnswers(nextAnswers);
     setLeadScore(nextScore);
-    setStep(shouldOfferContact(nextAnswers, nextScore) ? "email" : "desire");
+    setStep(shouldOfferContact(nextAnswers, nextScore, nextMessages.filter((m) => m.role === "user").length) ? "email" : "desire");
   }
 
   function handleQuickAction(action: QuickAction) {
@@ -732,6 +776,7 @@ export function DecisionAssistantDock() {
           leadScore: score,
           pageContext: getPageContext(location),
           visitorState: {
+            preferredLanguage: resolveChatLanguage() || undefined,
             navigationHistory: (() => {
               try {
                 return JSON.parse(window.localStorage.getItem(navigationMemoryKey) || "[]");
@@ -760,9 +805,10 @@ export function DecisionAssistantDock() {
     const mergedAnswers = mergeDefinedProfile(fallbackAnswers, aiTurn.profile);
     const nextScore = typeof aiTurn.leadQualification?.score === "number" ? Math.round(aiTurn.leadQualification.score) : fallbackScore;
     const replyMessages: Message[] = [...baseMessages, { role: "assistant", text: aiTurn.reply }];
+    const userTurns = replyMessages.filter((message) => message.role === "user").length;
     const aiAskedForContact = /email|phone|mobile|contact|send|recap|touch base/i.test(aiTurn.reply);
 
-    if (shouldOfferContact(mergedAnswers, nextScore) && !aiAskedForContact) {
+    if (shouldOfferContact(mergedAnswers, nextScore, userTurns) && !aiAskedForContact) {
       replyMessages.push({ role: "assistant", text: buildContactOffer(mergedAnswers, nextScore) });
     }
 
@@ -780,9 +826,9 @@ export function DecisionAssistantDock() {
     const shouldSendRecap = aiTurn.actions?.some((action) => action.type === "send_recap");
     if (shouldSendRecap && hasContact(mergedAnswers)) {
       void sendRecap(mergedAnswers, nextScore);
-    } else if (shouldSendRecap) {
+    } else if (shouldSendRecap && shouldOfferContact(mergedAnswers, nextScore, userTurns)) {
       setStep("email");
-    } else if (shouldOfferContact(mergedAnswers, nextScore)) {
+    } else if (shouldOfferContact(mergedAnswers, nextScore, userTurns)) {
       setStep("email");
     }
   }
@@ -833,14 +879,14 @@ export function DecisionAssistantDock() {
       nextAnswers = { ...nextAnswers, desire: answer };
       nextMessages.push({
         role: "assistant",
-        text: "That helps. I would treat that as the success condition. Now I would check the constraint that can block it: budget, timing, financing, school district, pets, building rules, or uncertainty. Pick the one most likely to create friction.",
+        text: "That already helps. I'd treat that as the success condition. When you're ready, we can look at what usually blocks it — timing, budget, building rules, schools, or flexibility. No rush; which of those feels closest?",
       });
       nextStep = "constraints";
     } else if (conversationStep === "constraints") {
       nextAnswers = { ...nextAnswers, constraints: answer };
       nextMessages.push({
         role: "assistant",
-        text: "That is useful. I would not browse yet. The decision now is the trade-off: if everything cannot fit, what should win first: size, location, building quality, flexibility, cost control, or long-term value?",
+        text: "Good — that constraint is the real filter. If everything can't fit, what should win first: size, location, building quality, flexibility, cost control, or long-term value?",
       });
       nextStep = "tradeoff";
     } else if (conversationStep === "tradeoff") {
@@ -851,17 +897,18 @@ export function DecisionAssistantDock() {
       });
       nextMessages.push({
         role: "assistant",
-        text: "My next move would be to read the relevant brief or compare ownership options before looking at listings. The goal is to decide what to do, not just what to tour.",
+        text: "I'd read the relevant brief or compare ownership options before any tours. We're deciding what to do — not collecting listings for sport.",
       });
       nextStep = "tradeoff";
     } else {
       nextMessages.push({
         role: "assistant",
-        text: "You can keep adding context here. I’ll keep narrowing the next useful decision instead of turning this into a form. Based on what you have shared, I would decide the next page or next call around the biggest unresolved constraint.",
+        text: "Keep telling me what matters. I'll stay with you and keep sharpening the decision — no forms, no rush. From what you've shared, I'd go next toward the biggest unresolved tension.",
       });
     }
 
-    if (shouldOfferContact(nextAnswers, nextScore)) {
+    const userTurns = nextMessages.filter((message) => message.role === "user").length;
+    if (shouldOfferContact(nextAnswers, nextScore, userTurns)) {
       nextMessages.push({
         role: "assistant",
         text: buildContactOffer(nextAnswers, nextScore),
@@ -896,7 +943,7 @@ export function DecisionAssistantDock() {
   };
   const blueprintCompletion = blueprintSegments.filter((segment) => completedSegments[segment.label as keyof typeof completedSegments]).length;
   const displayMessages = mergeConsecutiveMessages(messages);
-  const recentMessages = displayMessages.slice(-2);
+  const recentMessages = cold ? displayMessages.slice(-3) : displayMessages.slice(-2);
   const renderCompactBlueprintProgress = (tone: "dark" | "light") => (
     <BlueprintProgressBar completion={blueprintCompletion} tone={tone} />
   );
@@ -908,21 +955,48 @@ export function DecisionAssistantDock() {
         className="fixed inset-x-0 bottom-0 z-40 border-t border-brand-brass/35 bg-brand-midnight px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 text-brand-ivory shadow-[0_-18px_38px_rgba(32,39,53,0.28)] md:px-6"
         aria-label="Guidance Advisor"
       >
+        {dwellNudge ? (
+          <button
+            type="button"
+            onClick={() => {
+              setDwellNudge(null);
+              setExpanded(true);
+            }}
+            className="mx-auto mb-3 flex w-full max-w-site items-start gap-3 border border-brand-brass/40 bg-brand-navy/90 px-3 py-2.5 text-left transition-colors hover:border-brand-brass"
+          >
+            <DecisionGuideAvatar animated />
+            <span className="min-w-0 flex-1">
+              <span className="block text-[10px] uppercase tracking-[0.18em] text-brand-brass">Raphi · on this page</span>
+              <span className="mt-1 block text-sm leading-5 text-brand-ivory">{dwellNudge}</span>
+            </span>
+            <span className="shrink-0 self-center text-[10px] uppercase tracking-[0.14em] text-brand-brass">Ask</span>
+          </button>
+        ) : null}
         <div className="mx-auto grid max-w-site gap-3 lg:grid-cols-[minmax(210px,0.25fr)_minmax(220px,0.25fr)_minmax(340px,0.5fr)] lg:items-center">
           <div className="grid gap-2">
             <div className="flex items-center justify-between gap-3">
-              <button type="button" onClick={() => setExpanded(true)} className="flex min-w-0 items-center gap-3 text-left">
+              <button
+                type="button"
+                onClick={() => {
+                  setDwellNudge(null);
+                  setExpanded(true);
+                }}
+                className="flex min-w-0 items-center gap-3 text-left"
+              >
                 <DecisionGuideAvatar />
                 <span className="min-w-0">
                   <GuidanceAdvisorLabel tone="dark" />
-                  <span className="mt-0.5 block truncate text-sm font-medium text-brand-ivory">What's changing?</span>
+                  <span className="mt-0.5 block truncate text-sm font-medium text-brand-ivory">{engagement.headline}</span>
                 </span>
               </button>
               <div className="flex shrink-0 items-center gap-2">
                 <p className="font-mono text-[10px] text-brand-ivory/58">{blueprintCompletion}/6</p>
                 <button
                   type="button"
-                  onClick={() => setExpanded(true)}
+                  onClick={() => {
+                    setDwellNudge(null);
+                    setExpanded(true);
+                  }}
                   className="border border-brand-ivory/16 px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-brand-ivory/78 transition-colors hover:border-brand-brass hover:text-brand-ivory"
                 >
                   Open
@@ -955,8 +1029,11 @@ export function DecisionAssistantDock() {
               id="decision-guide-compact-input"
               value={input}
               onChange={(event) => setInput(event.target.value)}
-              placeholder={openingPrompts[promptIndex]}
-              onFocus={() => setExpanded(true)}
+              placeholder={openingPrompts[promptIndex % openingPrompts.length]}
+              onFocus={() => {
+                setDwellNudge(null);
+                setExpanded(true);
+              }}
               className="h-11 min-w-0 border border-brand-ivory/16 bg-brand-ivory/8 px-3 text-sm text-brand-brass caret-brand-brass outline-none transition-colors placeholder:text-brand-brass/55 focus:border-brand-brass focus:bg-brand-ivory"
             />
             <button
@@ -989,9 +1066,7 @@ export function DecisionAssistantDock() {
             <DecisionGuideAvatar animated={expanded} />
             <div className="min-w-0">
               <GuidanceAdvisorLabel tone="light" />
-              <p className="text-sm font-medium text-brand-navy">
-                {expanded ? "What's changing?" : "Guidance before search"}
-              </p>
+              <p className="text-sm font-medium text-brand-navy">{engagement.headline}</p>
             </div>
             {expanded ? (
               <button
@@ -1085,6 +1160,38 @@ export function DecisionAssistantDock() {
                 </div>
               ))}
             </div>
+            {cold && step !== "sent" ? (
+              <div className="mt-2 flex flex-wrap gap-1.5" aria-label="Quick starters">
+                {starterPrompts.map((prompt) => (
+                  <button
+                    key={prompt.label}
+                    type="button"
+                    onClick={() => handleStarter(prompt)}
+                    className="border border-brand-border bg-white px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
+                  >
+                    {prompt.label}
+                  </button>
+                ))}
+              </div>
+            ) : null}
+            {quickActions.length > 0 && step !== "sent" ? (
+              <div className="mt-2 flex flex-wrap gap-1.5" aria-label="Suggested actions">
+                {quickActions.map((action) => (
+                  <button
+                    key={action.label}
+                    type="button"
+                    onClick={() => {
+                      if (action.path) setLocation(action.path);
+                      setInput(action.response);
+                      setExpanded(true);
+                    }}
+                    className="border border-brand-brass/35 bg-brand-surface px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-brass"
+                  >
+                    {action.label}
+                  </button>
+                ))}
+              </div>
+            ) : null}
             {step !== "sent" ? (
               <>
                 <form onSubmit={handleSubmit} className="mt-2 grid w-full min-w-0 max-w-full grid-cols-[minmax(0,1fr)_auto] gap-2">
@@ -1096,7 +1203,7 @@ export function DecisionAssistantDock() {
                     value={input}
                     onChange={(event) => setInput(event.target.value)}
                     onKeyDown={handleInputKeyDown}
-                    placeholder={step === "email" ? "Email or mobile for the recap..." : openingPrompts[promptIndex]}
+                    placeholder={step === "email" ? "Email or mobile for the recap..." : openingPrompts[promptIndex % openingPrompts.length]}
                     rows={1}
                     className="min-h-10 w-full min-w-0 resize-none border border-brand-border bg-white px-3 py-2 text-sm text-brand-navy outline-none transition-colors placeholder:text-brand-graphite/55 focus:border-brand-brass md:min-h-11"
                   />

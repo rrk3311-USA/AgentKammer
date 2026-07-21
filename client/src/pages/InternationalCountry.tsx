@@ -1,10 +1,12 @@
 import { Link, Redirect } from "wouter";
+import { useEffect } from "react";
 import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-shell";
 import { InternationalStrategyForm } from "@/components/InternationalStrategyForm";
 import {
   internationalCountryMap,
   isInternationalCountrySlug,
 } from "@/data/international-hub";
+import { setStoredPreferredLanguage } from "@/data/site-language";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 function InternationalCountryContent({ country }: { country: string }) {
@@ -17,6 +19,13 @@ function InternationalCountryContent({ country }: { country: string }) {
     path: `/international/${page.slug}`,
     locale: page.languageCode,
   });
+
+  // Sync chat language so Raphi speaks this country's language on the rest of the site too.
+  useEffect(() => {
+    if (page.preferredLanguageLabel) {
+      setStoredPreferredLanguage(page.preferredLanguageLabel);
+    }
+  }, [page.preferredLanguageLabel]);
 
   return (
     <main className="bg-brand-ivory" lang={page.languageCode}>

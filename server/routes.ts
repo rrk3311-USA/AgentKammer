@@ -611,6 +611,7 @@ const decisionGuideChatSchema = z.object({
   visitorState: z
     .object({
       navigationHistory: z.array(z.string()).optional(),
+      preferredLanguage: z.string().max(80).optional(),
     })
     .optional(),
 });
@@ -832,6 +833,7 @@ export async function registerRoutes(app: Express): Promise<void> {
               currentPage: parsed.pageContext,
               approvedKnowledge,
               navigationHistory: parsed.visitorState?.navigationHistory ?? [],
+              preferredLanguage: parsed.visitorState?.preferredLanguage || null,
               currentProfile,
               currentStructuredProfile: existingStructuredProfile,
               leadScore: parsed.leadScore ?? 0,
@@ -846,7 +848,8 @@ export async function registerRoutes(app: Express): Promise<void> {
               ],
               actionRules: {
                 open_page: "Use only when a page would clearly help. Include a path from currentPage.related when possible.",
-                send_recap: "Use only after useful guidance has been delivered. If no email or phone is known, ask for the best email or mobile in the reply and explain the recap/recommendation deliverable.",
+                send_recap:
+                  "Use sparingly and late. Only after several useful exchanges and real guidance. Never in the first few turns. Frame as an optional note, not a lead capture. If no email or phone is known, invite gently in the reply.",
                 update_blueprint: "Use when new trigger, desire, constraint, trade-off, email, or phone was learned.",
               },
             }),
@@ -860,7 +863,7 @@ export async function registerRoutes(app: Express): Promise<void> {
             strict: true,
           },
         },
-        temperature: 0.55,
+        temperature: 0.7,
         store: false,
       });
 

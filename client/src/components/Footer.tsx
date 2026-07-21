@@ -2,6 +2,11 @@ import { Link, useLocation } from "wouter";
 import { useEffect, useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { decisionNavigationGroups } from "@/data/decision-navigation";
+import {
+  SITE_LANGUAGE_LOOP,
+  setStoredPreferredLanguage,
+} from "@/data/site-language";
+import { openDecisionAssistant } from "@/lib/decision-assistant";
 
 const libraryLinks = decisionNavigationGroups.flatMap((group) =>
   group.items.map((item) => ({
@@ -11,21 +16,21 @@ const libraryLinks = decisionNavigationGroups.flatMap((group) =>
 );
 
 const quickLinks = [
-  { label: "What's Changing?", href: "/services#whats-changing" },
+  { label: "Situations", href: "/situations" },
+  { label: "Intelligence", href: "/intelligence" },
+  { label: "Building Intelligence", href: "/building-reports" },
   { label: "Decision Assessment", href: "/belonging" },
-  { label: "Start Here", href: "/buyer-advisory" },
-  { label: "Building Intelligence Library", href: "/building-reports" },
-  { label: "Residential Advisory", href: "/advisory" },
-  { label: "Contact", href: "/contact" },
+  { label: "Insights", href: "/insights" },
+  { label: "Request Intelligence", href: "/contact" },
 ] as const;
 
 const lifeChangeLinks = [
-  { label: "Executive Relocation", href: "/services/executive-relocation-nyc" },
-  { label: "First Home", href: "/services/first-home-buyers-nyc" },
-  { label: "Growing Family", href: "/services/new-baby-growing-family-nyc" },
-  { label: "More Space", href: "/services/school-district-planning-nyc" },
-  { label: "Retirement", href: "/services/retiree-senior-home-buyers-nyc" },
-  { label: "Inheritance", href: "/services/inheritance-housing-nyc" },
+  { label: "Executive Relocation", href: "/situations/executive-relocation-nyc" },
+  { label: "First Home", href: "/situations/first-home-buyers-nyc" },
+  { label: "Growing Family", href: "/situations/new-baby-growing-family-nyc" },
+  { label: "More Space", href: "/situations/school-district-planning-nyc" },
+  { label: "Retirement", href: "/situations/retiree-senior-home-buyers-nyc" },
+  { label: "Inheritance", href: "/situations/inheritance-housing-nyc" },
 ] as const;
 
 const searchPrompts = [
@@ -38,13 +43,13 @@ const searchPrompts = [
 ] as const;
 
 const popularSearches = [
-  { label: "Rent vs Buy", href: "/services/rent-vs-buy-manhattan-relocation" },
+  { label: "Rent vs Buy", href: "/situations/rent-vs-buy-manhattan-relocation" },
   { label: "Stay vs Sell", href: "/buyer-advisory" },
-  { label: "Relocation", href: "/services/executive-relocation-nyc" },
+  { label: "Relocation", href: "/situations/executive-relocation-nyc" },
   { label: "Luxury Buildings", href: "/insights/the-quiet-luxury-buildings-of-manhattan" },
-  { label: "Building Reports", href: "/building-reports" },
-  { label: "School Districts", href: "/services/school-district-planning-nyc" },
-  { label: "Investment", href: "/services/1031-exchange-new-york" },
+  { label: "Building Profiles", href: "/building-reports" },
+  { label: "School Districts", href: "/situations/school-district-planning-nyc" },
+  { label: "Investment", href: "/situations/1031-exchange-new-york" },
 ] as const;
 
 export function Footer() {
@@ -112,7 +117,7 @@ export function Footer() {
                 ))}
               </nav>
               <Link
-                href="/services#whats-changing"
+                href="/situations#whats-changing"
                 className="mt-4 inline-block text-[11px] uppercase tracking-[0.14em] text-brand-cocoa transition-colors hover:text-brand-brass"
               >
                 All life changes →
@@ -121,12 +126,12 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Browse the Practice</p>
+            <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Browse Intelligence</p>
             <h3 className="mt-3 font-display text-[clamp(1.85rem,3.6vw,2.15rem)] leading-[0.95] text-brand-navy">
-              Research Library
+              Situations & Profiles
             </h3>
             <p className="mt-3 max-w-md text-sm leading-7 text-brand-graphite">
-              Before making a housing decision, explore the research.
+              Before making a housing decision, explore Situations and Building Profiles.
             </p>
 
             <p className="mt-7 text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">
@@ -178,10 +183,53 @@ export function Footer() {
               )}
             </div>
             <Link
-              href="/services"
+              href="/situations"
               className="mt-3 inline-block text-[11px] uppercase tracking-[0.14em] text-brand-navy transition-colors hover:text-brand-brass"
             >
-              Explore the complete research library.
+              Explore all Situations.
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="border-t border-brand-border bg-white/50">
+        <div className="mx-auto w-full max-w-site px-6 py-8 lg:px-10">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-xl">
+              <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Languages</p>
+              <p className="mt-2 font-display text-2xl leading-[0.95] text-brand-navy">
+                Read in your language. Chat in your language.
+              </p>
+              <p className="mt-3 text-sm leading-7 text-brand-graphite">
+                Country guides are localized. The Decision Guide will reply in the language you write —
+                or the one you select here. Full English-site page translation is rolling out next.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => openDecisionAssistant()}
+              className="inline-flex w-fit border border-brand-navy bg-brand-navy px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:bg-brand-charcoal"
+            >
+              Open Decision Guide
+            </button>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {SITE_LANGUAGE_LOOP.map((lang) => (
+              <Link
+                key={lang.code}
+                href={lang.href}
+                onClick={() => setStoredPreferredLanguage(lang.nativeLabel)}
+                className="border border-brand-border bg-brand-ivory px-3 py-2 text-sm text-brand-navy transition-colors hover:border-brand-navy"
+                title={`${lang.label} — open guide & set chat language`}
+              >
+                {lang.nativeLabel}
+              </Link>
+            ))}
+            <Link
+              href="/international"
+              className="border border-brand-brass/40 bg-white px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-brand-brass transition-colors hover:border-brand-brass"
+            >
+              All countries →
             </Link>
           </div>
         </div>

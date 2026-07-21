@@ -35,7 +35,7 @@ function nextBrief(slug: string) {
 
 export default function ServiceLanding({ slug }: { slug: string }) {
   const landing = serviceLandingMap[slug];
-  const pagePath = landing ? `/services/${landing.slug}` : "/services";
+  const pagePath = landing ? `/situations/${landing.slug}` : "/situations";
   const pageUrl = `https://www.agentkammer.com${pagePath}`;
   const next = landing ? nextBrief(landing.slug) : null;
   const copy = landing ? editorialCopy(landing) : null;
@@ -45,8 +45,8 @@ export default function ServiceLanding({ slug }: { slug: string }) {
         {
           "@context": "https://schema.org",
           "@type": "Service",
-          name: `${landing.title} Decision Brief`,
-          serviceType: "Manhattan real estate advisory and housing decision guidance",
+          name: `${landing.title} Situation`,
+          serviceType: "Manhattan real estate decision intelligence",
           provider: {
             "@type": "RealEstateAgent",
             name: "Agent Kammer",
@@ -73,8 +73,8 @@ export default function ServiceLanding({ slug }: { slug: string }) {
             {
               "@type": "ListItem",
               position: 2,
-              name: "Decision Briefs",
-              item: "https://www.agentkammer.com/services",
+              name: "Situations",
+              item: "https://www.agentkammer.com/situations",
             },
             {
               "@type": "ListItem",
@@ -88,8 +88,8 @@ export default function ServiceLanding({ slug }: { slug: string }) {
     : undefined;
 
   usePageMetadata({
-    title: landing?.title ?? "Services",
-    description: landing?.summary ?? "Focused advisory pages for Agent Kammer.",
+    title: landing?.title ?? "Situations",
+    description: landing?.summary ?? "Focused situation pages for Agent Kammer.",
     path: pagePath,
     keywords: landing?.searchTerms.join(", "),
     structuredData,
@@ -99,11 +99,11 @@ export default function ServiceLanding({ slug }: { slug: string }) {
     return (
       <main className="bg-brand-ivory">
         <PageSection>
-          <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">Services</p>
-          <h1 className="mt-4 font-display text-4xl text-brand-navy">Service page not found.</h1>
-          <p className="mt-4 text-brand-graphite">This URL does not match one of the current Decision Brief pages.</p>
-          <Link href="/services" className="mt-8 inline-flex text-[11px] uppercase tracking-[0.16em] text-brand-navy">
-            Back to Decision Briefs
+          <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">Situations</p>
+          <h1 className="mt-4 font-display text-4xl text-brand-navy">Situation page not found.</h1>
+          <p className="mt-4 text-brand-graphite">This URL does not match one of the current Situation pages.</p>
+          <Link href="/situations" className="mt-8 inline-flex text-[11px] uppercase tracking-[0.16em] text-brand-navy">
+            Back to Situations
           </Link>
         </PageSection>
       </main>
@@ -158,7 +158,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
               <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
             </Link>
             <Link
-              href={`/services/${next.slug}`}
+              href={`/situations/${next.slug}`}
               className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-brand-graphite transition-colors hover:text-brand-brass"
             >
               Next: {next.navLabel}
@@ -169,10 +169,11 @@ export default function ServiceLanding({ slug }: { slug: string }) {
       </article>
 
       <CTA
-        title="Find out if you’re living where you belong."
-        description={`For ${landing.navLabel.toLowerCase()}, the assessment builds a Decision Profile before any call — so the recommendation can be stay, move, wait, or do nothing.`}
-        href="/belonging"
-        label="Start Decision Assessment"
+        title="Request Intelligence."
+        description={`For ${landing.navLabel.toLowerCase()}, tell us the decision in front of you — Assessment, Snapshot, Report, or Dossier.`}
+        href="/contact"
+        label="Request Intelligence"
+        eyebrow="Request Intelligence"
       />
     </main>
   );

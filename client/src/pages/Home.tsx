@@ -72,10 +72,10 @@ export default function Home() {
                 href="/building-reports"
                 className="group grid min-w-[15rem] border border-brand-border bg-white/45 px-5 py-4 text-left transition-colors hover:border-brand-brass hover:bg-white"
               >
-                <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-brand-navy">Building Intelligence Library</span>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-brand-navy">Building Intelligence</span>
                 <span className="mt-3 h-px w-full bg-brand-border" aria-hidden />
                 <span className="mt-3 flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy">
-                  Explore the library
+                  Explore Building Profiles
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
                 </span>
               </Link>
@@ -144,7 +144,7 @@ export default function Home() {
       <section className="border-b border-brand-border bg-brand-navy text-brand-ivory">
         <div className="mx-auto grid w-full max-w-site gap-10 px-6 py-20 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:px-10 lg:py-28">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-brass">Building Intelligence Library</p>
+            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-brass">Building Intelligence</p>
             <h2 className="mt-4 max-w-xl font-display text-[clamp(2.4rem,4.5vw,3.75rem)] leading-[0.92] text-brand-ivory">
               The asset before the listing.
             </h2>
@@ -173,7 +173,7 @@ export default function Home() {
               </h2>
             </div>
             <Link
-              href="/services#whats-changing"
+              href="/situations#whats-changing"
               className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-brass"
             >
               Explore situations
@@ -184,7 +184,7 @@ export default function Home() {
             {featuredBriefs.map((brief) => (
               <Link
                 key={brief.slug}
-                href={`/services/${brief.slug}`}
+                href={`/situations/${brief.slug}`}
                 className="group grid gap-2 border-b border-brand-border py-7 transition-colors md:grid-cols-[minmax(0,0.35fr)_minmax(0,1fr)_auto] md:items-baseline md:gap-8"
               >
                 <p className="text-[11px] uppercase tracking-[0.18em] text-brand-cocoa">{brief.eyebrow}</p>

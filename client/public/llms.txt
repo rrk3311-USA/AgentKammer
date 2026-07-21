@@ -29,6 +29,17 @@ Agent Kammer is a Residential Advisory practice helping people make better real 
 - International Buyer Decision Brief: https://www.agentkammer.com/services/foreign-buyers-new-york
 - Contact: https://www.agentkammer.com/contact
 
+## Building reports (crawlable)
+
+Individual building intelligence pages — publicly indexed:
+
+- Lantern House: https://www.agentkammer.com/building-reports/lantern-house
+- One High Line: https://www.agentkammer.com/building-reports/one-high-line
+- Building Intelligence hub: https://www.agentkammer.com/building-reports
+- Individual buildings index: https://www.agentkammer.com/building-reports/individual-buildings
+- Neighborhood guides: https://www.agentkammer.com/building-reports/neighborhood-guides
+- Market briefs: https://www.agentkammer.com/building-reports/market-briefs
+
 ## Client journey
 
 1. What's Changing? — https://www.agentkammer.com/services#whats-changing
