@@ -121,10 +121,11 @@ export default function InternationalHub() {
       </section>
 
       <CTA
-        title="Prefer a shorter Decision Brief first?"
-        description="Read the International Buyer brief, then return to request your Manhattan strategy."
-        href="/services/foreign-buyers-new-york"
-        label="Open Decision Brief"
+        title="Ready to request a Manhattan strategy?"
+        description="Tell us your country, language, and goals — a specialist who speaks your language will get in touch."
+        href="#strategy-request"
+        label="Request your strategy"
+        eyebrow="Strategy request"
       />
     </main>
   );

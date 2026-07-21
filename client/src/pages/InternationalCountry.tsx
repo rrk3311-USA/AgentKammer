@@ -9,6 +9,7 @@ import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 function InternationalCountryContent({ country }: { country: string }) {
   const page = internationalCountryMap[country];
+  const { ui } = page;
 
   usePageMetadata({
     title: page.metaTitle,
@@ -40,14 +41,14 @@ function InternationalCountryContent({ country }: { country: string }) {
         ))}
         <p className="mt-6 text-sm text-brand-graphite/80">
           <Link href="/international" className="underline underline-offset-4">
-            ← All international guides
+            {ui.backToHub}
           </Link>
         </p>
       </PageSection>
 
       <section className="border-y border-brand-border bg-white">
         <PageSection>
-          <SectionHeading eyebrow="FAQ" title="Common questions" />
+          <SectionHeading eyebrow={ui.faqEyebrow} title={ui.faqTitle} />
           <div className="mt-10 divide-y divide-brand-border border-y border-brand-border">
             {page.faqs.map((faq) => (
               <details key={faq.q} className="py-6">
@@ -62,10 +63,7 @@ function InternationalCountryContent({ country }: { country: string }) {
       </section>
 
       <PageSection>
-        <SectionHeading
-          eyebrow="Neighborhoods"
-          title="Areas international buyers often consider"
-        />
+        <SectionHeading eyebrow={ui.neighborhoodsEyebrow} title={ui.neighborhoodsTitle} />
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {page.neighborhoods.map((n) => (
             <div key={n.name} className="border border-brand-border bg-white p-7">
@@ -81,7 +79,7 @@ function InternationalCountryContent({ country }: { country: string }) {
 
       <section className="border-y border-brand-border bg-white">
         <PageSection>
-          <SectionHeading eyebrow="Process" title="Buying path" />
+          <SectionHeading eyebrow={ui.processEyebrow} title={ui.processTitle} />
           <ol className="mt-12 space-y-8">
             {page.processSteps.map((step, i) => (
               <li
@@ -102,7 +100,7 @@ function InternationalCountryContent({ country }: { country: string }) {
       </section>
 
       <PageSection>
-        <SectionHeading eyebrow="Things to know" title="Common mistakes" />
+        <SectionHeading eyebrow={ui.mistakesEyebrow} title={ui.mistakesTitle} />
         <ul className="mt-10 max-w-3xl space-y-4">
           {page.commonMistakes.map((m) => (
             <li
@@ -118,9 +116,9 @@ function InternationalCountryContent({ country }: { country: string }) {
       <section className="border-y border-brand-border bg-white">
         <PageSection>
           <SectionHeading
-            eyebrow="Professional team"
-            title="Who supports a Manhattan purchase"
-            description="You work with a coordinated bench — not a single listing agent improvising alone."
+            eyebrow={ui.teamEyebrow}
+            title={ui.teamTitle}
+            description={ui.teamDescription}
           />
           <div className="mt-12 grid gap-6 md:grid-cols-2">
             {page.team.map((member) => (
@@ -134,7 +132,7 @@ function InternationalCountryContent({ country }: { country: string }) {
       </section>
 
       <PageSection>
-        <SectionHeading eyebrow="Resources" title="Continue reading" />
+        <SectionHeading eyebrow={ui.resourcesEyebrow} title={ui.resourcesTitle} />
         <div className="mt-10 flex flex-wrap gap-4">
           {page.resources.map((r) => (
             <Link
@@ -159,16 +157,36 @@ function InternationalCountryContent({ country }: { country: string }) {
               headline: page.formHeadline,
               subhead: page.formSubhead,
               specialistPromise: page.specialistPromise,
+              submitLabel: ui.submitLabel,
+              formEyebrow: ui.formEyebrow,
+              successEyebrow: ui.successEyebrow,
+              successTitle: ui.successTitle,
+              successWait: ui.successWait,
+              roadmapLabel: ui.roadmapLabel,
+              fieldFullName: ui.fieldFullName,
+              fieldEmail: ui.fieldEmail,
+              fieldCountry: ui.fieldCountry,
+              fieldLanguage: ui.fieldLanguage,
+              fieldContactMethod: ui.fieldContactMethod,
+              fieldContactDetail: ui.fieldContactDetail,
+              fieldGoal: ui.fieldGoal,
+              fieldBudget: ui.fieldBudget,
+              fieldTimeline: ui.fieldTimeline,
+              fieldFinancing: ui.fieldFinancing,
+              fieldNeighborhoods: ui.fieldNeighborhoods,
+              fieldHelp: ui.fieldHelp,
+              fieldHowFound: ui.fieldHowFound,
             }}
           />
         </PageSection>
       </section>
 
       <CTA
-        title="Ready for a written strategy?"
-        description="Or continue with Belonging Assessment and Decision Briefs while you wait for your specialist."
-        href="/advisory"
-        label="See Residential Advisory"
+        title={ui.ctaTitle}
+        description={ui.ctaDescription}
+        href={ui.ctaHref}
+        label={ui.ctaLabel}
+        eyebrow={ui.formEyebrow}
       />
     </main>
   );

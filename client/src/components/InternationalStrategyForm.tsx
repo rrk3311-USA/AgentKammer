@@ -7,21 +7,58 @@ import {
   MANHATTAN_NEIGHBORHOOD_OPTIONS,
   TIMELINE_OPTIONS,
 } from "@/data/international-hub";
+import { ENGLISH_UI } from "@/data/international-locales";
 
 export type StrategyFormLabels = {
   headline: string;
   subhead: string;
   specialistPromise: string;
   submitLabel?: string;
+  formEyebrow?: string;
+  successEyebrow?: string;
+  successTitle?: string;
+  successWait?: string;
+  roadmapLabel?: string;
+  fieldFullName?: string;
+  fieldEmail?: string;
+  fieldCountry?: string;
+  fieldLanguage?: string;
+  fieldContactMethod?: string;
+  fieldContactDetail?: string;
+  fieldGoal?: string;
+  fieldBudget?: string;
+  fieldTimeline?: string;
+  fieldFinancing?: string;
+  fieldNeighborhoods?: string;
+  fieldHelp?: string;
+  fieldHowFound?: string;
 };
 
-const defaultLabels: StrategyFormLabels = {
+const defaultLabels: Required<StrategyFormLabels> = {
   headline: "Request Your Manhattan Strategy",
   subhead:
     "Tell us about your situation. We'll review your goals and recommend the most appropriate next step.",
   specialistPromise:
     "After you submit, a specialist who speaks your language will get in touch to review your goals and recommend the right next step — the beginning of a consultation, not an automated sales pitch.",
-  submitLabel: "Submit strategy request",
+  submitLabel: ENGLISH_UI.submitLabel,
+  formEyebrow: ENGLISH_UI.formEyebrow,
+  successEyebrow: ENGLISH_UI.successEyebrow,
+  successTitle: ENGLISH_UI.successTitle,
+  successWait: ENGLISH_UI.successWait,
+  roadmapLabel: ENGLISH_UI.roadmapLabel,
+  fieldFullName: ENGLISH_UI.fieldFullName,
+  fieldEmail: ENGLISH_UI.fieldEmail,
+  fieldCountry: ENGLISH_UI.fieldCountry,
+  fieldLanguage: ENGLISH_UI.fieldLanguage,
+  fieldContactMethod: ENGLISH_UI.fieldContactMethod,
+  fieldContactDetail: ENGLISH_UI.fieldContactDetail,
+  fieldGoal: ENGLISH_UI.fieldGoal,
+  fieldBudget: ENGLISH_UI.fieldBudget,
+  fieldTimeline: ENGLISH_UI.fieldTimeline,
+  fieldFinancing: ENGLISH_UI.fieldFinancing,
+  fieldNeighborhoods: ENGLISH_UI.fieldNeighborhoods,
+  fieldHelp: ENGLISH_UI.fieldHelp,
+  fieldHowFound: ENGLISH_UI.fieldHowFound,
 };
 
 type Props = {
@@ -108,23 +145,24 @@ export function InternationalStrategyForm({
   if (status === "done") {
     return (
       <div className="border border-brand-border bg-white p-8 sm:p-10">
-        <p className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">Request received</p>
+        <p className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">
+          {copy.successEyebrow}
+        </p>
         <h3 className="mt-4 font-display text-[clamp(1.75rem,3vw,2.4rem)] leading-[0.96] text-brand-navy">
-          A specialist who speaks your language will get in touch.
+          {copy.successTitle}
         </h3>
         <p className="mt-5 max-w-2xl text-base leading-8 text-brand-graphite">
           {copy.specialistPromise}
         </p>
+        <p className="mt-4 text-sm leading-7 text-brand-graphite/80">{copy.successWait}</p>
         <p className="mt-4 text-sm leading-7 text-brand-graphite/80">
-          Typical review time is within one to two business days. While you wait, you can continue with the{" "}
           <a href="/belonging" className="underline underline-offset-4">
             Belonging Assessment
-          </a>{" "}
-          or the{" "}
+          </a>
+          {" · "}
           <a href="/services/foreign-buyers-new-york" className="underline underline-offset-4">
             International Buyer Decision Brief
           </a>
-          .
         </p>
       </div>
     );
@@ -136,7 +174,7 @@ export function InternationalStrategyForm({
 
   return (
     <form onSubmit={onSubmit} className="border border-brand-border bg-white p-8 sm:p-10">
-      <p className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">Strategy request</p>
+      <p className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">{copy.formEyebrow}</p>
       <h3 className="mt-4 font-display text-[clamp(1.75rem,3vw,2.5rem)] leading-[0.96] text-brand-navy">
         {copy.headline}
       </h3>
@@ -148,7 +186,7 @@ export function InternationalStrategyForm({
       <div className="mt-10 grid gap-6 sm:grid-cols-2">
         <div>
           <label className={label} htmlFor="fullName">
-            Full name
+            {copy.fieldFullName}
           </label>
           <input
             id="fullName"
@@ -160,7 +198,7 @@ export function InternationalStrategyForm({
         </div>
         <div>
           <label className={label} htmlFor="email">
-            Email
+            {copy.fieldEmail}
           </label>
           <input
             id="email"
@@ -173,7 +211,7 @@ export function InternationalStrategyForm({
         </div>
         <div>
           <label className={label} htmlFor="country">
-            Country of residence
+            {copy.fieldCountry}
           </label>
           <input
             id="country"
@@ -185,7 +223,7 @@ export function InternationalStrategyForm({
         </div>
         <div>
           <label className={label} htmlFor="preferredLanguage">
-            Preferred language
+            {copy.fieldLanguage}
           </label>
           <input
             id="preferredLanguage"
@@ -197,7 +235,7 @@ export function InternationalStrategyForm({
         </div>
         <div>
           <label className={label} htmlFor="contactMethod">
-            Preferred contact method
+            {copy.fieldContactMethod}
           </label>
           <select
             id="contactMethod"
@@ -214,7 +252,7 @@ export function InternationalStrategyForm({
         </div>
         <div>
           <label className={label} htmlFor="contactDetail">
-            WhatsApp / WeChat / Phone (optional)
+            {copy.fieldContactDetail}
           </label>
           <input
             id="contactDetail"
@@ -225,7 +263,7 @@ export function InternationalStrategyForm({
         </div>
         <div>
           <label className={label} htmlFor="buyingGoal">
-            Buying goal
+            {copy.fieldGoal}
           </label>
           <select
             id="buyingGoal"
@@ -234,7 +272,7 @@ export function InternationalStrategyForm({
             value={form.buyingGoal}
             onChange={(e) => setForm({ ...form, buyingGoal: e.target.value })}
           >
-            <option value="">Select…</option>
+            <option value="">—</option>
             {BUYING_GOALS.map((g) => (
               <option key={g} value={g}>
                 {g}
@@ -244,7 +282,7 @@ export function InternationalStrategyForm({
         </div>
         <div>
           <label className={label} htmlFor="budget">
-            Budget
+            {copy.fieldBudget}
           </label>
           <select
             id="budget"
@@ -253,7 +291,7 @@ export function InternationalStrategyForm({
             value={form.budget}
             onChange={(e) => setForm({ ...form, budget: e.target.value })}
           >
-            <option value="">Select…</option>
+            <option value="">—</option>
             {BUDGET_BANDS.map((b) => (
               <option key={b} value={b}>
                 {b}
@@ -263,7 +301,7 @@ export function InternationalStrategyForm({
         </div>
         <div>
           <label className={label} htmlFor="timeline">
-            Timeline
+            {copy.fieldTimeline}
           </label>
           <select
             id="timeline"
@@ -272,7 +310,7 @@ export function InternationalStrategyForm({
             value={form.timeline}
             onChange={(e) => setForm({ ...form, timeline: e.target.value })}
           >
-            <option value="">Select…</option>
+            <option value="">—</option>
             {TIMELINE_OPTIONS.map((t) => (
               <option key={t} value={t}>
                 {t}
@@ -282,7 +320,7 @@ export function InternationalStrategyForm({
         </div>
         <div>
           <label className={label} htmlFor="financing">
-            Financing
+            {copy.fieldFinancing}
           </label>
           <select
             id="financing"
@@ -291,7 +329,7 @@ export function InternationalStrategyForm({
             value={form.financing}
             onChange={(e) => setForm({ ...form, financing: e.target.value })}
           >
-            <option value="">Select…</option>
+            <option value="">—</option>
             {FINANCING_OPTIONS.map((f) => (
               <option key={f} value={f}>
                 {f}
@@ -302,7 +340,7 @@ export function InternationalStrategyForm({
       </div>
 
       <div className="mt-8">
-        <p className={label}>Neighborhoods of interest</p>
+        <p className={label}>{copy.fieldNeighborhoods}</p>
         <div className="mt-2 flex flex-wrap gap-2">
           {MANHATTAN_NEIGHBORHOOD_OPTIONS.map((n) => {
             const on = neighborhoods.includes(n);
@@ -326,7 +364,7 @@ export function InternationalStrategyForm({
 
       <div className="mt-8">
         <label className={label} htmlFor="helpUnderstanding">
-          What would you like help understanding?
+          {copy.fieldHelp}
         </label>
         <textarea
           id="helpUnderstanding"
@@ -334,20 +372,18 @@ export function InternationalStrategyForm({
           className={field}
           value={form.helpUnderstanding}
           onChange={(e) => setForm({ ...form, helpUnderstanding: e.target.value })}
-          placeholder="Condo vs co-op, financing, neighborhoods, taxes, remote buying…"
         />
       </div>
 
       <div className="mt-8">
         <label className={label} htmlFor="howFound">
-          How did you find us? (optional)
+          {copy.fieldHowFound}
         </label>
         <input
           id="howFound"
           className={field}
           value={form.howFound}
           onChange={(e) => setForm({ ...form, howFound: e.target.value })}
-          placeholder="Google, YouTube, Instagram, LinkedIn, referral…"
         />
       </div>
 
@@ -358,14 +394,7 @@ export function InternationalStrategyForm({
           checked={wantRoadmap}
           onChange={(e) => setWantRoadmap(e.target.checked)}
         />
-        <span>
-          <span className="block text-sm font-medium text-brand-navy">
-            Would you like a personalized Manhattan Buying Roadmap?
-          </span>
-          <span className="mt-1 block text-sm leading-6 text-brand-graphite">
-            Ideal if you are 6–18 months from buying — tailored next steps without requiring a call today.
-          </span>
-        </span>
+        <span className="block text-sm font-medium text-brand-navy">{copy.roadmapLabel}</span>
       </label>
 
       {(error || status === "error") && (
@@ -377,7 +406,7 @@ export function InternationalStrategyForm({
         disabled={status === "loading"}
         className="mt-8 bg-brand-navy px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory disabled:opacity-60"
       >
-        {status === "loading" ? "Sending…" : copy.submitLabel || "Submit strategy request"}
+        {status === "loading" ? "…" : copy.submitLabel}
       </button>
     </form>
   );

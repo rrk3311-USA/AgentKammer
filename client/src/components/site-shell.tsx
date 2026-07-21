@@ -514,18 +514,20 @@ export function CTA({
   description = "A short Decision Assessment builds your profile — belonging, friction, and a clear next step — before any call.",
   href = "/belonging",
   label = "Start Decision Assessment",
+  eyebrow = "Decision Assessment",
 }: {
   title?: string;
   description?: string;
   href?: string;
   label?: string;
+  eyebrow?: string;
 }) {
   return (
     <section className="border-t border-brand-brass/30 bg-brand-navy text-brand-ivory">
       <PageSection className="py-16 lg:py-20">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">Decision Assessment</p>
+            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</p>
             <h2 className="mt-4 font-display text-[clamp(2rem,3.8vw,3.25rem)] leading-[0.95] tracking-[-0.03em] text-brand-ivory">
               {title}
             </h2>

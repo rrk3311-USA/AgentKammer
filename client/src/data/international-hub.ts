@@ -1,7 +1,17 @@
 /**
  * International Manhattan Buyer Hub — reusable content system.
  * English hub + localized country pages across major markets.
+ * Content/UI packs live in international-locales.ts (applied via buildCountry).
  */
+
+import {
+  applyLocaleTemplate,
+  LOCALE_PACKS,
+  resolveLocaleKey,
+  type InternationalUiCopy,
+} from "./international-locales";
+
+export type { InternationalUiCopy };
 
 export type InternationalRegion = "Asia" | "Europe" | "Middle East" | "Americas" | "Oceania";
 
@@ -26,6 +36,7 @@ export type InternationalCountryPage = {
   preferredLanguageLabel: string;
   flagEmoji: string;
   region: InternationalRegion;
+  localeKey: string;
   heroEyebrow: string;
   heroTitle: string;
   heroDescription: string;
@@ -42,6 +53,7 @@ export type InternationalCountryPage = {
   specialistPromise: string;
   metaTitle: string;
   metaDescription: string;
+  ui: InternationalUiCopy;
 };
 
 export type InternationalCountrySlug = string;
@@ -159,6 +171,16 @@ type CountrySeed = {
 
 function buildCountry(seed: CountrySeed): InternationalCountryPage {
   const name = seed.countryName;
+  const language = seed.preferredLanguageLabel;
+  const localeKey = resolveLocaleKey(seed.languageCode);
+  const pack = LOCALE_PACKS[localeKey] ?? LOCALE_PACKS.en;
+  /** Prefer native country label in non-English templates (e.g. 대한민국, España). */
+  const countryLabel =
+    localeKey === "en" ? name : seed.countryNameNative?.trim() || name;
+  const t = (template: string) => applyLocaleTemplate(template, countryLabel, language);
+  /** Premium custom pages (China / Germany / Japan) keep authored copy; others use locale packs. */
+  const isCustom = Boolean(seed.faqs?.length);
+
   return {
     slug: seed.slug,
     countryName: seed.countryName,
@@ -167,58 +189,50 @@ function buildCountry(seed: CountrySeed): InternationalCountryPage {
     preferredLanguageLabel: seed.preferredLanguageLabel,
     flagEmoji: seed.flagEmoji,
     region: seed.region,
+    localeKey,
     heroEyebrow: `${seed.countryNameNative} · ${seed.countryName}`,
-    heroTitle:
-      seed.heroTitle ??
-      `Buying in Manhattan from ${name} — clarity before the search.`,
+    heroTitle: isCustom && seed.heroTitle ? seed.heroTitle : t(pack.heroTitle),
     heroDescription:
-      seed.heroDescription ??
-      `A decision-first guide for buyers from ${name}: ownership structures, process, neighborhoods, and financing — then a strategy request. After you submit, a specialist who speaks your language will get in touch.`,
-    introTitle: seed.introTitle ?? "Why Manhattan is different for international buyers",
-    introBody: seed.introBody ?? [
-      "Manhattan real estate is organized around buildings and ownership structures — not just listings. International buyers often start with visa and citizenship questions. In New York, U.S. citizenship is generally not required to purchase residential property; co-op boards, financing, and source-of-funds documentation usually matter more than your passport.",
-      "Agent Kammer works as a decision advisor first: clarify whether to buy, which ownership path fits, which neighborhoods match your life, and what timeline is realistic — then execute.",
-    ],
+      isCustom && seed.heroDescription ? seed.heroDescription : t(pack.heroDescription),
+    introTitle: isCustom && seed.introTitle ? seed.introTitle : t(pack.introTitle),
+    introBody:
+      isCustom && seed.introBody?.length
+        ? seed.introBody
+        : pack.introBody.map((p) => t(p)),
     faqs:
-      seed.faqs ??
-      [
-        {
-          q: `Can citizens of ${name} buy residential property in Manhattan?`,
-          a: "Yes. U.S. citizenship is generally not required. Constraints usually come from property type (especially co-ops), financing, board approval, and documentation — not from nationality alone.",
-        },
-        {
-          q: `Can I buy remotely from ${name}?`,
-          a: "Many steps can be remote — video tours, attorneys, contracts, and capital arrangements. What should not be remote is judgment: building diligence and a written strategy before you offer.",
-        },
-        {
-          q: `Condo vs co-op for buyers from ${name}?`,
-          a: "Condos are typically more accessible for international buyers. Co-ops require board approval and can be stricter for foreign nationals, financing, or investment use. Decide structure before falling in love with a unit.",
-        },
-        {
-          q: "Is financing available?",
-          a: "Yes, but with fewer options than for U.S. buyers. Many international buyers proceed with cash or hybrid structures. Confirm financing feasibility before you offer.",
-        },
-        {
-          q: "What costs should I budget beyond purchase price?",
-          a: "Closing costs, possible transfer taxes, ongoing taxes and carrying costs, and tax consequences on a future sale. Exact figures belong in a written strategy for your case.",
-        },
-      ],
-    neighborhoods: seed.neighborhoods ?? SHARED_NEIGHBORHOODS,
-    processSteps: seed.processSteps ?? SHARED_PROCESS,
-    commonMistakes: seed.commonMistakes ?? SHARED_MISTAKES,
-    team: seed.team ?? SHARED_TEAM,
+      isCustom && seed.faqs
+        ? seed.faqs
+        : pack.faqs.map((f) => ({ q: t(f.q), a: t(f.a) })),
+    neighborhoods:
+      isCustom && seed.neighborhoods
+        ? seed.neighborhoods
+        : pack.neighborhoods.map((n) => ({
+            name: n.name,
+            blurb: t(n.blurb),
+            typicalBuyer: t(n.typicalBuyer),
+          })),
+    processSteps:
+      isCustom && seed.processSteps
+        ? seed.processSteps
+        : pack.processSteps.map((s) => ({ title: t(s.title), text: t(s.text) })),
+    commonMistakes:
+      isCustom && seed.commonMistakes ? seed.commonMistakes : pack.commonMistakes.map((m) => t(m)),
+    team:
+      isCustom && seed.team
+        ? seed.team
+        : pack.team.map((m) => ({ role: t(m.role), description: t(m.description) })),
     resources: seed.resources ?? [...SHARED_RESOURCES],
-    formHeadline: seed.formHeadline ?? "Request your Manhattan strategy",
-    formSubhead:
-      seed.formSubhead ??
-      `Tell us your situation. After you submit, a specialist who speaks ${seed.preferredLanguageLabel} will get in touch with the right next step.`,
+    formHeadline:
+      isCustom && seed.formHeadline ? seed.formHeadline : t(pack.formHeadline),
+    formSubhead: isCustom && seed.formSubhead ? seed.formSubhead : t(pack.formSubhead),
     specialistPromise:
-      seed.specialistPromise ??
-      `After you submit, a specialist who speaks your preferred language (${seed.preferredLanguageLabel}) will get in touch to review your goals and recommend the next step — the start of a consultation, not an automated sales pitch.`,
-    metaTitle: seed.metaTitle ?? `Manhattan Real Estate for Buyers from ${name}`,
+      isCustom && seed.specialistPromise
+        ? seed.specialistPromise
+        : t(pack.specialistPromise),
+    metaTitle: isCustom && seed.metaTitle ? seed.metaTitle : t(pack.metaTitle),
     metaDescription:
-      seed.metaDescription ??
-      `Guide for buyers from ${name} considering Manhattan: eligibility, condo vs co-op, remote purchase, costs, and neighborhoods. Strategy request with language-matched follow-up.`,
+      isCustom && seed.metaDescription ? seed.metaDescription : t(pack.metaDescription),
+    ui: pack.ui,
   };
 }
 
