@@ -962,26 +962,29 @@ export function DecisionAssistantDock() {
               setDwellNudge(null);
               setExpanded(true);
             }}
-            className="mx-auto mb-3 flex w-full max-w-site items-start gap-3 border border-brand-brass/40 bg-brand-navy/90 px-3 py-2.5 text-left transition-colors hover:border-brand-brass"
+            className="relative mx-auto mb-3 flex w-full max-w-site items-start gap-3 border border-brand-brass/40 bg-brand-navy/95 px-3.5 py-2.5 text-left shadow-[0_8px_24px_rgba(0,0,0,0.22)] transition-colors hover:border-brand-brass"
           >
-            <DecisionGuideAvatar animated />
             <span className="min-w-0 flex-1">
-              <span className="block text-[10px] uppercase tracking-[0.18em] text-brand-brass">Raphi · on this page</span>
+              <span className="block text-[10px] uppercase tracking-[0.18em] text-brand-brass">On this page</span>
               <span className="mt-1 block text-sm leading-5 text-brand-ivory">{dwellNudge}</span>
             </span>
             <span className="shrink-0 self-center text-[10px] uppercase tracking-[0.14em] text-brand-brass">Ask</span>
+            <span
+              className="pointer-events-none absolute -bottom-[5px] left-7 h-2.5 w-2.5 rotate-45 border-b border-r border-brand-brass/40 bg-brand-navy/95"
+              aria-hidden
+            />
           </button>
         ) : null}
-        <div className="mx-auto grid max-w-site gap-3 lg:grid-cols-[minmax(210px,0.25fr)_minmax(220px,0.25fr)_minmax(340px,0.5fr)] lg:items-center">
-          <div className="grid gap-2">
-            <div className="flex items-center justify-between gap-3">
+        <div className="mx-auto grid max-w-site gap-3 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1fr)_minmax(0,1.25fr)] lg:items-center">
+          <div className="grid min-w-0 gap-2">
+            <div className="flex min-w-0 items-center gap-3">
               <button
                 type="button"
                 onClick={() => {
                   setDwellNudge(null);
                   setExpanded(true);
                 }}
-                className="flex min-w-0 items-center gap-3 text-left"
+                className="flex min-w-0 flex-1 items-center gap-3 text-left"
               >
                 <DecisionGuideAvatar />
                 <span className="min-w-0">
@@ -989,7 +992,7 @@ export function DecisionAssistantDock() {
                   <span className="mt-0.5 block truncate text-sm font-medium text-brand-ivory">{engagement.headline}</span>
                 </span>
               </button>
-              <div className="flex shrink-0 items-center gap-2">
+              <div className="flex shrink-0 items-center gap-2 lg:hidden">
                 <p className="font-mono text-[10px] text-brand-ivory/58">{blueprintCompletion}/6</p>
                 <button
                   type="button"
@@ -1008,9 +1011,14 @@ export function DecisionAssistantDock() {
               {renderCompactBlueprintProgress("dark")}
             </div>
           </div>
-          <div className="hidden sm:block" aria-label="Decision Blueprint modules">
-            <BlueprintProgressBar completion={blueprintCompletion} tone="dark" />
-            <div className="mt-2 hidden grid-cols-6 gap-x-4 gap-y-1 xl:grid">
+          <div className="hidden min-w-0 sm:block" aria-label="Decision Blueprint modules">
+            <div className="flex min-w-0 items-center gap-3">
+              <p className="hidden shrink-0 font-mono text-[10px] text-brand-ivory/58 lg:block">{blueprintCompletion}/6</p>
+              <div className="min-w-0 flex-1">
+                <BlueprintProgressBar completion={blueprintCompletion} tone="dark" />
+              </div>
+            </div>
+            <div className="mt-2 hidden grid-cols-6 gap-x-2 gap-y-1 xl:grid">
               {blueprintSegments.map((segment) => (
                 <span key={segment.label} className="truncate text-[10px] uppercase tracking-[0.1em] text-brand-ivory/72">
                   {segment.label}
@@ -1021,7 +1029,7 @@ export function DecisionAssistantDock() {
               Six-part decision progress
             </p>
           </div>
-          <form onSubmit={handleSubmit} className="grid grid-cols-[minmax(0,1fr)_auto] gap-2 lg:col-start-3">
+          <form onSubmit={handleSubmit} className="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] gap-2">
             <label className="sr-only" htmlFor="decision-guide-compact-input">
               Tell the Guidance Advisor what is changing
             </label>

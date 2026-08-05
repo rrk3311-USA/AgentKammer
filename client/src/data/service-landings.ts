@@ -3,6 +3,8 @@ import type { HeroArtVariant } from "@/components/site-shell";
 export type ServiceLanding = {
   slug: string;
   art: HeroArtVariant;
+  /** Optional editorial banner illustration (paper-sketch style). */
+  heroImage?: string;
   title: string;
   navLabel: string;
   eyebrow: string;
@@ -252,6 +254,7 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "executive-relocation-nyc",
     art: "relocation",
+    heroImage: "/images/situations/executive-relocation-nyc.png",
     title: "Executive Relocation to NYC",
     navLabel: "Executive Relocation",
     eyebrow: "High-Value Relocation",

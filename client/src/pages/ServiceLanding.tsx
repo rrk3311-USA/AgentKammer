@@ -112,31 +112,83 @@ export default function ServiceLanding({ slug }: { slug: string }) {
 
   return (
     <main className="bg-brand-ivory">
-      {/* Title + image */}
-      <section className="border-b border-brand-border">
-        <div className="mx-auto max-w-site px-6 pb-10 pt-14 lg:px-10 lg:pb-14 lg:pt-20">
-          <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">{landing.eyebrow}</p>
-          <h1 className="mt-5 max-w-4xl font-display text-[clamp(2.8rem,5.5vw,5.5rem)] leading-[0.9] tracking-[-0.03em] text-brand-navy">
-            {landing.title}
-          </h1>
-        </div>
-        <div className="relative mx-auto flex aspect-[16/9] max-h-[520px] w-full max-w-site items-center justify-center overflow-hidden bg-brand-navy lg:aspect-[21/9]">
-          <ArchitecturalHeroDrawing
-            eyebrow={landing.eyebrow}
-            title={landing.title}
-            variant={landing.art}
-            className="flex w-full max-w-4xl items-center justify-center px-8 [&_svg]:max-w-none"
+      {landing.heroImage ? (
+        <section className="relative w-full overflow-hidden border-b border-brand-border bg-[#FBF2E3]">
+          <img
+            src={`${landing.heroImage}?v=8`}
+            alt=""
+            className="block h-[clamp(270px,68vw,360px)] w-[112%] max-w-none translate-x-[6%] object-cover object-[58%_18%] opacity-[0.92] pt-6 sm:h-auto sm:w-full sm:max-w-full sm:translate-x-0 sm:object-contain sm:object-right sm:opacity-100 sm:pt-8 sm:max-h-[min(56vh,520px)] lg:max-h-[min(52vh,560px)] lg:pt-10"
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-navy/50 via-transparent to-brand-navy/20" />
-        </div>
-      </section>
+          {/* Mobile cream wash — light only, so the glass tower still reads */}
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 w-[55%] bg-gradient-to-r from-[#FBF2E3] via-[#FBF2E3]/70 to-transparent sm:hidden"
+            aria-hidden
+          />
+          <div className="absolute inset-0 flex items-start sm:items-center">
+            <div className="w-full px-6 pt-14 pb-10 sm:pt-20 md:pl-[12%] lg:px-10 lg:pb-12 lg:pl-[clamp(4rem,18vw,14rem)] lg:pt-24 xl:pl-[clamp(5rem,22vw,18rem)]">
+              <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">{landing.eyebrow}</p>
+              <h1 className="mt-6 max-w-[12ch] font-display text-[clamp(2.35rem,9vw,4.75rem)] leading-[0.92] tracking-[-0.03em] text-brand-navy sm:mt-4 sm:max-w-[16ch] sm:text-[clamp(2.4rem,5.2vw,4.75rem)]">
+                {landing.title}
+              </h1>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <section className="border-b border-brand-border">
+          <div className="mx-auto max-w-site px-6 pb-10 pt-14 lg:px-10 lg:pb-14 lg:pt-20">
+            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">{landing.eyebrow}</p>
+            <h1 className="mt-5 max-w-4xl font-display text-[clamp(2.8rem,5.5vw,5.5rem)] leading-[0.9] tracking-[-0.03em] text-brand-navy">
+              {landing.title}
+            </h1>
+          </div>
+          <div className="relative mx-auto flex aspect-[16/9] max-h-[520px] w-full max-w-site items-center justify-center overflow-hidden bg-brand-navy lg:aspect-[21/9]">
+            <ArchitecturalHeroDrawing
+              eyebrow={landing.eyebrow}
+              title={landing.title}
+              variant={landing.art}
+              className="flex w-full max-w-4xl items-center justify-center px-8 [&_svg]:max-w-none"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-navy/50 via-transparent to-brand-navy/20" />
+          </div>
+        </section>
+      )}
 
       {/* Article body: three paragraphs + quote + recommendation */}
       <article className="border-b border-brand-border">
-        <div className="mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24">
-          <p className="text-lg leading-9 text-brand-graphite lg:text-xl lg:leading-10">{copy.paragraphOne}</p>
-          <p className="mt-8 text-lg leading-9 text-brand-graphite lg:text-xl lg:leading-10">{copy.paragraphTwo}</p>
-          <p className="mt-8 text-lg leading-9 text-brand-graphite lg:text-xl lg:leading-10">{copy.paragraphThree}</p>
+        <div
+          className={
+            landing.heroImage
+              ? "mx-auto max-w-[90%] pb-14 pt-7 text-left sm:mx-0 sm:ml-[clamp(1.5rem,18vw,22.5rem)] sm:mr-6 sm:max-w-[680px] sm:pb-16 sm:pt-8 lg:mr-10 lg:pb-24 lg:pt-10"
+              : "mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24"
+          }
+        >
+          <p
+            className={
+              landing.heroImage
+                ? "text-[clamp(1.125rem,4.2vw,1.25rem)] leading-[1.55] text-brand-graphite sm:text-lg sm:leading-[1.7] lg:text-xl"
+                : "text-lg leading-9 text-brand-graphite lg:text-xl lg:leading-10"
+            }
+          >
+            {copy.paragraphOne}
+          </p>
+          <p
+            className={
+              landing.heroImage
+                ? "mt-6 text-[1.05rem] leading-[1.55] text-brand-graphite sm:mt-8 sm:text-lg sm:leading-[1.7] lg:text-xl"
+                : "mt-8 text-lg leading-9 text-brand-graphite lg:text-xl lg:leading-10"
+            }
+          >
+            {copy.paragraphTwo}
+          </p>
+          <p
+            className={
+              landing.heroImage
+                ? "mt-6 text-[1.05rem] leading-[1.55] text-brand-graphite sm:mt-8 sm:text-lg sm:leading-[1.7] lg:text-xl"
+                : "mt-8 text-lg leading-9 text-brand-graphite lg:text-xl lg:leading-10"
+            }
+          >
+            {copy.paragraphThree}
+          </p>
 
           <blockquote className="my-14 border-l-2 border-brand-brass pl-6">
             <p className="font-display text-[clamp(1.75rem,3vw,2.35rem)] leading-[1.15] text-brand-navy">
