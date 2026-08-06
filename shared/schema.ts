@@ -415,7 +415,7 @@ export type InsertMemberProfile = z.infer<typeof insertMemberProfileSchema>;
 export type MemberProfile = typeof memberProfiles.$inferSelect;
 
 // ---------------------------------------------------------------------------
-// Advisor OS — Attio-connected client charts (Phase 1+)
+// Advisor OS - Attio-connected client charts (Phase 1+)
 // Website = customer intelligence layer; Attio = operational CRM.
 // ---------------------------------------------------------------------------
 

@@ -28,7 +28,7 @@ const COPY: Record<
     title: "Reports",
     emptyTitle: "No reports drafted",
     emptyDescription:
-      "Housing strategy briefs and consultation notes will collect here—editorial documents, not dashboards.",
+      "Housing strategy briefs and consultation notes will collect here - editorial documents, not dashboards.",
   },
   calendar: {
     title: "Calendar",

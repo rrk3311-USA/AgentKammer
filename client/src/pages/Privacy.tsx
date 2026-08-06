@@ -28,7 +28,7 @@ export default function Privacy() {
 
         <h2 className="mt-12 font-display text-3xl text-brand-navy">How we use it</h2>
         <p className="mt-4 text-lg leading-9 text-brand-graphite">
-          We use this information to provide decision guidance, prepare Decision Profiles and briefs, respond to inquiries, improve the product, prevent abuse, and — when you ask — save and restore your Decision Hub. We do not sell personal information.
+          We use this information to provide decision guidance, prepare Decision Profiles and briefs, respond to inquiries, improve the product, prevent abuse, and - when you ask - save and restore your Decision Hub. We do not sell personal information.
         </p>
 
         <h2 className="mt-12 font-display text-3xl text-brand-navy">Cookies and sessions</h2>

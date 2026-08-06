@@ -5,7 +5,7 @@ import { usePageMetadata } from "@/hooks/usePageMetadata";
 const profileDimensions = [
   {
     label: "Belonging Score",
-    text: "How well your current home and place fit the life you want — one signal inside a larger profile.",
+    text: "How well your current home and place fit the life you want - one signal inside a larger profile.",
   },
   {
     label: "Decision Readiness",
@@ -13,11 +13,11 @@ const profileDimensions = [
   },
   {
     label: "Lifestyle Fit",
-    text: "Routine, space, privacy, commute, and environment — what serves you and what drains you.",
+    text: "Routine, space, privacy, commute, and environment - what serves you and what drains you.",
   },
   {
     label: "Financial Flexibility",
-    text: "How much room you have to wait, renovate, relocate, or hold — without a hard sell frame.",
+    text: "How much room you have to wait, renovate, relocate, or hold - without a hard sell frame.",
   },
   {
     label: "Timing Outlook",
@@ -25,7 +25,7 @@ const profileDimensions = [
   },
   {
     label: "Recommended Next Step",
-    text: "A personalized recommendation — including whether to stay, wait, renovate, rent, buy, or sell — with the reasoning behind it.",
+    text: "A personalized recommendation - including whether to stay, wait, renovate, rent, buy, or sell - with the reasoning behind it.",
   },
 ];
 
@@ -33,7 +33,7 @@ export default function Belonging() {
   usePageMetadata({
     title: "Housing Decision Assessment | Are You Living Where You Belong?",
     description:
-      "Take the Housing Decision Assessment. Receive an Agent Kammer Decision Profile — belonging, readiness, lifestyle fit, timing, and a reasoned next step.",
+      "Take the Housing Decision Assessment. Receive an Agent Kammer Decision Profile - belonging, readiness, lifestyle fit, timing, and a reasoned next step.",
     path: "/belonging",
   });
 
@@ -46,7 +46,7 @@ export default function Belonging() {
             Find out if you’re living where you belong.
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-brand-graphite">
-            A guided assessment about your life, priorities, and housing—not listings. Your responses help tailor your Decision Profile and determine whether a Housing Strategy Session would add value.
+            A guided assessment about your life, priorities, and housing - not listings. Your responses help tailor your Decision Profile and determine whether a Housing Strategy Session would add value.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
@@ -72,7 +72,7 @@ export default function Belonging() {
             </Link>
           </div>
           <p className="mt-6 max-w-xl text-sm leading-7 text-brand-graphite/80">
-            The scored profile is in active build. Requesting the assessment today opens a private intake so your Agent Kammer Decision Profile can be prepared manually — same diagnostic, human-paced.
+            The scored profile is in active build. Requesting the assessment today opens a private intake so your Agent Kammer Decision Profile can be prepared manually - same diagnostic, human-paced.
           </p>
         </div>
       </section>
@@ -84,7 +84,7 @@ export default function Belonging() {
             Your Decision Profile
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-8 text-brand-graphite">
-            Belonging Score is one piece of a larger profile — something you can revisit and update as life changes, not a one-time quiz result.
+            Belonging Score is one piece of a larger profile - something you can revisit and update as life changes, not a one-time quiz result.
           </p>
           <div className="mt-12 grid gap-10 border-t border-brand-border pt-10 sm:grid-cols-2 lg:grid-cols-3">
             {profileDimensions.map((item) => (
@@ -105,7 +105,7 @@ export default function Belonging() {
               Diagnose before you decide.
             </h2>
             <p className="mt-5 text-base leading-8 text-brand-ivory/74">
-              Live Where You Belong is the outcome — stay or move. This Housing Decision Assessment is the diagnostic that gets you there. People don’t take a real estate quiz; they receive an Agent Kammer Decision Profile.
+              Live Where You Belong is the outcome - stay or move. This Housing Decision Assessment is the diagnostic that gets you there. People don’t take a real estate quiz; they receive an Agent Kammer Decision Profile.
             </p>
           </div>
           <Link

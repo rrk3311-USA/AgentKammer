@@ -12,7 +12,7 @@ import {
 } from "./_shared.js";
 
 // Save a recommendation brief into the member's Decision Hub. Only
-// authenticated members (verified email + PIN / cookie session) — never
+// authenticated members (verified email + PIN / cookie session) - never
 // save a brief by email alone.
 export default async function handler(req: ApiRequest, res: ApiResponse) {
   if (req.method !== "POST") {

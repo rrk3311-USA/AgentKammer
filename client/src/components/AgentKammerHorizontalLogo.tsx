@@ -65,7 +65,7 @@ export function AgentKammerHorizontalLogo({
               accentTone,
             )}
           >
-            Buildings Before Listings.
+            Buildings Before Listings
           </p>
         ) : null}
       </div>

@@ -51,8 +51,8 @@ export default function Contact() {
   usePageMetadata({
     title: isBelonging ? "Decision Assessment Intake" : "Request Intelligence",
     description: isBelonging
-      ? "Request your Decision Assessment — find out if you’re living where you belong."
-      : "Request Intelligence from Agent Kammer — Assessment, Property Snapshot, Report, or Acquisition Dossier.",
+      ? "Request your Decision Assessment - find out if you’re living where you belong."
+      : "Request Intelligence from Agent Kammer - Assessment, Property Snapshot, Report, or Acquisition Dossier.",
     path: "/contact",
   });
 
@@ -138,7 +138,7 @@ export default function Contact() {
         title={isBelonging ? "Request your Decision Assessment." : "Request Intelligence."}
         description={
           isBelonging
-            ? "Share enough context to prepare a Decision Profile — what changed, what feels off about where you live, and what a good five-year outcome looks like. The scored AI report is in build; intake today is human-paced."
+            ? "Share enough context to prepare a Decision Profile - what changed, what feels off about where you live, and what a good five-year outcome looks like. The scored AI report is in build; intake today is human-paced."
             : "Share what is changing, what decision you are weighing, and where the conversation should begin. Or start with the Belonging Assessment first."
         }
         art="contact"
@@ -195,7 +195,7 @@ export default function Contact() {
           </h2>
           <p className="mt-3 text-sm leading-7 text-brand-graphite">
             {isBelonging
-              ? "Answer the minimum filters so the Decision Profile can start from real context — not a blank calendar invite."
+              ? "Answer the minimum filters so the Decision Profile can start from real context - not a blank calendar invite."
               : "Answer the minimum filters so the reply can include a useful recommendation, not just a scheduling link."}
           </p>
           <form onSubmit={handleSubmit} className="mt-8 space-y-6">

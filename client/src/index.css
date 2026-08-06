@@ -730,6 +730,21 @@
     background: transparent;
   }
 
+  /* Footer What's Changing - hide native bar; custom pill drawn in React */
+  .ak-footer-scroll {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-left: 2rem;
+  }
+
+  .ak-footer-scroll::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
   .buildings-scroll-strip {
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -739,7 +754,7 @@
     display: none;
   }
 
-  /* Intelligence surfaces — warm ruled paper, not decorative waves */
+  /* Intelligence surfaces - warm ruled paper, not decorative waves */
   .brand-surface-intelligence {
     position: relative;
     background-color: var(--brand-surface-warm);
@@ -810,7 +825,7 @@
     color: rgb(122 99 40 / var(--tw-text-opacity));
   }
 
-  /* Hero champagne on navy — must beat light-section ancestor rules */
+  /* Hero champagne on navy - must beat light-section ancestor rules */
   :is(
       section.bg-brand-midnight,
       article.bg-brand-midnight,

@@ -1,4 +1,4 @@
-/** @deprecated Import from @/lib/design-system — kept for backward compatibility */
+/** @deprecated Import from @/lib/design-system - kept for backward compatibility */
 export {
   siteContainer,
   contentContainer,
@@ -14,7 +14,7 @@ export {
   typeEyebrowOnDark as eyebrowOnDarkWide,
 } from "@/lib/design-system";
 
-/** Building watchlist cards — navy editorial surfaces */
+/** Building watchlist cards - navy editorial surfaces */
 export const cardBuildingName =
   "font-display text-display-3 font-medium leading-tight tracking-[-0.01em] text-brand-ivory";
 export const cardNeighborhood =

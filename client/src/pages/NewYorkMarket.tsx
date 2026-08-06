@@ -67,7 +67,7 @@ export default function NewYorkMarket() {
       <PageHero
         eyebrow="Building Reports"
         title="Neighborhood Guides"
-        description="Neighborhood fit determines the life around the apartment. Compare commute, schools, building stock, street rhythm, and whether the area supports the reason for moving — before the listing tour expands."
+        description="Neighborhood fit determines the life around the apartment. Compare commute, schools, building stock, street rhythm, and whether the area supports the reason for moving - before the listing tour expands."
         art="neighborhood-guides"
       />
       <ReportSubnav />

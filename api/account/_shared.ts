@@ -4,7 +4,7 @@ import { Resend } from "resend";
 
 // Shared helpers for the Decision Hub account (email + PIN) API routes.
 // Filename is prefixed with `_` so Vercel does not turn this into its own
-// Serverless Function — see https://vercel.com/docs/functions/configuring-functions/advanced-configuration
+// Serverless Function - see https://vercel.com/docs/functions/configuring-functions/advanced-configuration
 //
 // DURABILITY NOTE: this project has no DATABASE_URL configured on Vercel, so
 // claim/verify/hub/briefs are four independent Serverless Functions that
@@ -13,7 +13,7 @@ import { Resend } from "resend";
 // entirely in signed, httpOnly cookies (HMAC-SHA256 with ACCOUNT_SESSION_SECRET).
 // The cookie payload IS the source of truth, so this works correctly across
 // cold starts, scale-out, and regions. Trade-off: capped history (a handful
-// of recent briefs) because of the ~4KB per-cookie limit — a real Postgres
+// of recent briefs) because of the ~4KB per-cookie limit - a real Postgres
 // table (schema already defined in shared/schema.ts as `memberProfiles`)
 // would remove that cap if DATABASE_URL is ever wired up.
 
@@ -91,7 +91,7 @@ function getSecret() {
   return (
     process.env.ACCOUNT_SESSION_SECRET ||
     // Fall back so the flow degrades gracefully instead of 500ing if the
-    // dedicated secret is ever missing — still HMAC-signed, just with a
+    // dedicated secret is ever missing - still HMAC-signed, just with a
     // weaker, shared key. Set ACCOUNT_SESSION_SECRET in Vercel for real use.
     `${process.env.RESEND_API_KEY || ""}ak-account-fallback-secret`
   );

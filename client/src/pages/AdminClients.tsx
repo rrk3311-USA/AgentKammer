@@ -176,7 +176,7 @@ export default function AdminClients() {
       }
     >
       <div className="flex min-h-[calc(100vh-88px)] flex-col lg:flex-row">
-        {/* Apple Mail–style list */}
+        {/* Apple Mail-style list */}
         <section className="flex w-full flex-col border-b border-[var(--ak-border)] bg-[var(--ak-card)] lg:w-[360px] lg:shrink-0 lg:border-b-0 lg:border-r">
           <div className="space-y-3 border-b border-[var(--ak-border)] px-4 py-4">
             <select
@@ -279,7 +279,7 @@ export default function AdminClients() {
               <div className="max-w-md text-center">
                 <p className="ak-admin-display text-[28px] text-[var(--ak-ink)]">Select a client</p>
                 <p className="mt-3 text-[14px] leading-relaxed text-[var(--ak-secondary)]">
-                  Open a chart to review situation, plan, conversation, and next recommendation —
+                  Open a chart to review situation, plan, conversation, and next recommendation -
                   privately, without CRM noise.
                 </p>
               </div>
@@ -508,7 +508,7 @@ function EditorialBlock({
           large ? "text-[16px]" : "text-[14px]"
         } ${muted ? "text-[var(--ak-secondary)]" : "text-[var(--ak-ink)]"}`}
       >
-        {body?.trim() || "—"}
+        {body?.trim() || " - "}
       </p>
     </div>
   );

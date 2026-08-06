@@ -23,7 +23,7 @@ export default function Terms() {
 
         <h2 className="mt-10 font-display text-3xl text-brand-navy">Advisory, not brokerage inventory</h2>
         <p className="mt-4 text-lg leading-9 text-brand-graphite">
-          Agent Kammer provides strategic housing guidance. Content and AI outputs are informational decision support — not a substitute for licensed local brokerage, legal, tax, or inspection advice. Recommendations may include staying, waiting, renovating, renting, buying, selling, or doing nothing.
+          Agent Kammer provides strategic housing guidance. Content and AI outputs are informational decision support - not a substitute for licensed local brokerage, legal, tax, or inspection advice. Recommendations may include staying, waiting, renovating, renting, buying, selling, or doing nothing.
         </p>
 
         <h2 className="mt-12 font-display text-3xl text-brand-navy">No guarantee of outcomes</h2>

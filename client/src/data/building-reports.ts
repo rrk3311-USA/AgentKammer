@@ -220,13 +220,13 @@ export const buildingReports: BuildingReport[] = [
     executiveSummary: [
       "One High Line is what happens when a luxury building decides to compete as a destination rather than an address.",
       "Many Manhattan towers add amenities because the market expects them. One High Line organizes daily life around them.",
-      "Designed by Bjarke Ingels Group for Related, the development pairs two towers with a shared amenity campus that feels closer to a private club than a typical condominium. Pools, fitness, entertainment spaces, and river-facing common areas are not afterthoughts — they are the product.",
+      "Designed by Bjarke Ingels Group for Related, the development pairs two towers with a shared amenity campus that feels closer to a private club than a typical condominium. Pools, fitness, entertainment spaces, and river-facing common areas are not afterthoughts - they are the product.",
       "This is not the most understated building in West Chelsea. It may be the most complete lifestyle package on the High Line corridor.",
     ],
     observation: [
       "West Chelsea now offers two distinct luxury philosophies within blocks of each other. Lantern House competes through architecture and neighborhood connection. One High Line competes through scale, amenities, and resort-like infrastructure.",
       "Both are luxury. They solve for different residents.",
-      "That comparison is not academic — it is how serious buyers should evaluate the corridor.",
+      "That comparison is not academic - it is how serious buyers should evaluate the corridor.",
     ],
     residentProfile: {
       likely: [
@@ -252,7 +252,7 @@ export const buildingReports: BuildingReport[] = [
     differentiators: [
       {
         title: "Amenity Architecture",
-        body: "The building treats shared spaces as primary design elements, not marketing checkboxes. Daily life can plausibly center on the building — not only the apartment.",
+        body: "The building treats shared spaces as primary design elements, not marketing checkboxes. Daily life can plausibly center on the building - not only the apartment.",
       },
       {
         title: "Two-Tower Scale",
@@ -260,7 +260,7 @@ export const buildingReports: BuildingReport[] = [
       },
       {
         title: "High Line Integration",
-        body: "Direct adjacency to the High Line places the building inside one of Manhattan's most walked corridors — gallery access, dining, and downtown connectivity without a commute to the neighborhood.",
+        body: "Direct adjacency to the High Line places the building inside one of Manhattan's most walked corridors - gallery access, dining, and downtown connectivity without a commute to the neighborhood.",
       },
       {
         title: "Resort Positioning",
@@ -294,7 +294,7 @@ export const buildingReports: BuildingReport[] = [
         "Downtown accessibility",
       ],
       closing:
-        "One High Line sits at the intersection of cultural foot traffic and new residential infrastructure — a different daily rhythm than Midtown, with stronger amenity density than many downtown conversions.",
+        "One High Line sits at the intersection of cultural foot traffic and new residential infrastructure - a different daily rhythm than Midtown, with stronger amenity density than many downtown conversions.",
     },
     comparablesIntro: "When evaluating One High Line, buyers often compare:",
     comparables: [
@@ -345,12 +345,12 @@ export const buildingReports: BuildingReport[] = [
     agentKammerPerspective: [
       "The interesting thing about One High Line is not the finishes. Many Manhattan buildings have strong finishes.",
       "The interesting thing is that the building asks a direct question: will you actually live inside the amenity stack you are buying into?",
-      "For residents who answer yes, One High Line can feel extraordinarily efficient — work, wellness, and entertainment compressed into one address.",
+      "For residents who answer yes, One High Line can feel extraordinarily efficient - work, wellness, and entertainment compressed into one address.",
       "For residents who answer no, the building can feel like paying for a resort membership attached to an apartment. That is not a flaw in the product. It is the fit question worth studying.",
     ],
     bottomLine: [
       "One High Line is not trying to be quiet luxury. It is trying to be complete luxury.",
-      "For the right resident, that completeness is the point — a West Chelsea address with the infrastructure of a private club. For the wrong resident, the same infrastructure is simply overhead.",
+      "For the right resident, that completeness is the point - a West Chelsea address with the infrastructure of a private club. For the wrong resident, the same infrastructure is simply overhead.",
       "That distinction is why the building belongs on a serious Manhattan watchlist.",
     ],
     relatedPerspectiveSlug: "what-residents-actually-pay-for-in-luxury-buildings",

@@ -29,7 +29,7 @@ export const internationalStrategySchema = z.object({
   neighborhoods: z.array(z.string().max(80)).max(20).optional().default([]),
   helpUnderstanding: z.string().max(4000).optional().nullable(),
   howFound: z.string().max(200).optional().nullable(),
-  /** Lower-friction ask — many 6–18 month buyers want a roadmap, not a call. */
+  /** Lower-friction ask - many 6-18 month buyers want a roadmap, not a call. */
   wantRoadmap: z.boolean().optional().default(false),
   sourcePage: z.string().max(200).optional().nullable(),
   countrySlug: z.string().max(40).optional().nullable(),
@@ -77,8 +77,8 @@ function budgetPoints(budget: string): number {
 function timelinePoints(timeline: string): number {
   const t = timeline.toLowerCase();
   if (t.includes("ready now") || t.includes("within 3")) return 25;
-  if (t.includes("3–6") || t.includes("3-6")) return 18;
-  if (t.includes("6–12") || t.includes("6-12")) return 10;
+  if (t.includes("3-6") || t.includes("3-6")) return 18;
+  if (t.includes("6-12") || t.includes("6-12")) return 10;
   if (t.includes("more than") || t.includes("researching")) return 4;
   return 8;
 }
@@ -118,7 +118,7 @@ function classifyLead(data: InternationalStrategyInput): {
     status = "Ready for Call";
     lifecycleStage = "call_ready";
     nextAction = "Schedule Housing Strategy Session";
-  } else if (data.wantRoadmap && /6–12|6-12|more than|researching/i.test(data.timeline)) {
+  } else if (data.wantRoadmap && /6-12|6-12|more than|researching/i.test(data.timeline)) {
     status = "Early Research";
     lifecycleStage = "engaged";
     nextAction = "Send Manhattan Buying Roadmap";
@@ -171,7 +171,7 @@ function buildOpsMessage(
     "International Manhattan Strategy Request → Advisor OS profile",
     `Status: ${classified.status} · Score: ${classified.leadScore}`,
     `Next action: ${classified.nextAction}`,
-    `Language: ${data.preferredLanguage} — assign matching specialist`,
+    `Language: ${data.preferredLanguage} - assign matching specialist`,
     "",
     classified.aiSummary,
     "",
@@ -266,7 +266,7 @@ export async function ingestInternationalStrategyRequest(raw: unknown) {
   const taskContent =
     classified.nextAction === "No action"
       ? null
-      : `Intl lead (${classified.status}): ${classified.nextAction} — ${data.fullName} [${data.preferredLanguage}]`;
+      : `Intl lead (${classified.status}): ${classified.nextAction} - ${data.fullName} [${data.preferredLanguage}]`;
 
   await queueProfileSyncBundle(profile!.id, {
     updateStage: true,

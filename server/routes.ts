@@ -139,8 +139,8 @@ async function notifyEmailNewLead(data: {
   try {
     const subject =
       data.source === "reverse-buyer-origination"
-        ? "New RBO Lead — Agent Kammer"
-        : "New AI Chatbot Lead — Agent Kammer";
+        ? "New RBO Lead - Agent Kammer"
+        : "New AI Chatbot Lead - Agent Kammer";
 
     const htmlContent = `
       <h2>${subject}</h2>
@@ -1810,7 +1810,7 @@ export async function registerRoutes(app: Express): Promise<void> {
           : "Enter the verification code to open your Decision Hub.",
       };
 
-      // Local/dev only — never expose PIN when mailer is configured in production
+      // Local/dev only - never expose PIN when mailer is configured in production
       if (!mail.sent && process.env.NODE_ENV !== "production") {
         payload.devPin = pin;
         console.info(`[account-otp] PIN for ${email}: ${pin}`);

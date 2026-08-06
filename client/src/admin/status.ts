@@ -1,5 +1,5 @@
 /**
- * Canonical CRM stage labels — identical in website DB mapping, Attio lists, and admin.
+ * Canonical CRM stage labels - identical in website DB mapping, Attio lists, and admin.
  * Do not invent parallel labels like "Exploring" for internal CRM views.
  */
 
@@ -13,7 +13,7 @@ import {
 export const CRM_STAGES = ATTIO_PIPELINE_STAGES;
 export type CrmStage = AttioPipelineStage;
 
-/** Display label for admin / Attio — always an Attio pipeline stage. */
+/** Display label for admin / Attio - always an Attio pipeline stage. */
 export function toCrmStage(stage?: string | null): CrmStage {
   if (!stage) return "New Signal";
   if ((ATTIO_PIPELINE_STAGES as readonly string[]).includes(stage)) {
@@ -25,7 +25,7 @@ export function toCrmStage(stage?: string | null): CrmStage {
   return "New Signal";
 }
 
-/** @deprecated Use toCrmStage — kept so existing imports keep compiling during rename. */
+/** @deprecated Use toCrmStage - kept so existing imports keep compiling during rename. */
 export function toAdvisoryStatus(stage?: string | null): CrmStage {
   return toCrmStage(stage);
 }
@@ -57,7 +57,7 @@ export const LIFECYCLE_FILTER_OPTIONS: Array<{ value: LifecycleStage; label: Crm
 ];
 
 export function formatRelativeActivity(iso?: string | null): string {
-  if (!iso) return "—";
+  if (!iso) return " - ";
   try {
     const then = new Date(iso).getTime();
     const diff = Date.now() - then;
@@ -70,6 +70,6 @@ export function formatRelativeActivity(iso?: string | null): string {
     if (days < 14) return `${days}d ago`;
     return new Date(iso).toLocaleDateString(undefined, { month: "short", day: "numeric" });
   } catch {
-    return "—";
+    return " - ";
   }
 }

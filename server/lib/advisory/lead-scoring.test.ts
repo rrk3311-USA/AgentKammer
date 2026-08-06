@@ -10,7 +10,7 @@ describe("scoreClientProfile", () => {
         timeline: "3-6 months",
         currentLocation: "Chicago",
         targetLocations: ["Upper West Side", "Park Slope"],
-        budgetRange: "1.5–2.2M",
+        budgetRange: "1.5-2.2M",
         financingStatus: "speaking with lenders",
         email: "family@example.org",
         lifecycleStage: "anonymous",

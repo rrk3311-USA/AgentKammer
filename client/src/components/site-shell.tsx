@@ -511,7 +511,7 @@ export function ReportSubnav() {
 
 export function CTA({
   title = "Request Intelligence.",
-  description = "Tell us the decision in front of you. We will prescribe the right next level — Assessment, Snapshot, Report, or Dossier.",
+  description = "Tell us the decision in front of you. We will prescribe the right next level - Assessment, Snapshot, Report, or Dossier.",
   href = "/contact",
   label = "Request Intelligence",
   eyebrow = "Request Intelligence",

@@ -81,7 +81,7 @@ async function sendContactEmail(data: {
   phone?: string;
   message: string;
 }) {
-  const subject = `New Contact Form — ${data.name} — Agent Kammer`;
+  const subject = `New Contact Form - ${data.name} - Agent Kammer`;
   const html = buildContactHtml(data);
   const recipients = [CONTACT_INBOX];
   if (CONTACT_FALLBACK_INBOX !== CONTACT_INBOX) {

@@ -185,7 +185,7 @@ export default function BuildingReportDetail() {
       </section>
 
       <PageSection>
-        <SectionHeading eyebrow="Fit Tiers" title="Who this building serves well — and who should keep looking." />
+        <SectionHeading eyebrow="Fit Tiers" title="Who this building serves well - and who should keep looking." />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {report.fit.map((tier) => (
             <div key={tier.label} className="rounded-card border border-brand-border bg-white p-7">

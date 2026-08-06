@@ -6,7 +6,7 @@ import { fetchHubSnapshot, HubShell, type HubSnapshot } from "./HubShell";
 export default function HubProfile() {
   usePageMetadata({
     title: "Profile",
-    description: "Lightweight housing profile — claim with email when you want continuity.",
+    description: "Lightweight housing profile - claim with email when you want continuity.",
     path: "/hub/profile",
   });
 
@@ -24,19 +24,19 @@ export default function HubProfile() {
             <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#2A3447]/55">
               Objective
             </dt>
-            <dd className="mt-1 text-[#2F3136]/85">{hub?.currentObjective || "—"}</dd>
+            <dd className="mt-1 text-[#2F3136]/85">{hub?.currentObjective || " - "}</dd>
           </div>
           <div>
             <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#2A3447]/55">
               Timeline
             </dt>
-            <dd className="mt-1 text-[#2F3136]/85">{hub?.timeline || "—"}</dd>
+            <dd className="mt-1 text-[#2F3136]/85">{hub?.timeline || " - "}</dd>
           </div>
           <div>
             <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#2A3447]/55">
               Visitor id
             </dt>
-            <dd className="mt-1 text-[#2F3136]/55 font-mono text-xs">{hub?.visitorId || "—"}</dd>
+            <dd className="mt-1 text-[#2F3136]/55 font-mono text-xs">{hub?.visitorId || " - "}</dd>
           </div>
         </dl>
         <Link

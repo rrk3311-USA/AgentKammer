@@ -1,5 +1,5 @@
 /**
- * International Manhattan Buyer Hub — full localization packs by language.
+ * International Manhattan Buyer Hub - full localization packs by language.
  * English is the base; country pages apply {country} and {language} templates.
  */
 
@@ -64,18 +64,18 @@ export type InternationalLocalePack = {
 
 export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
   "en":   {
-    heroTitle: "Buying in Manhattan from {country} — clarity before the search.",
-    heroDescription: "A decision-first guide for buyers from {country}: ownership structures, process, neighborhoods, and financing — then a strategy request. After you submit, a specialist who speaks {language} will get in touch.",
+    heroTitle: "Buying in Manhattan from {country} - clarity before the search.",
+    heroDescription: "A decision-first guide for buyers from {country}: ownership structures, process, neighborhoods, and financing - then a strategy request. After you submit, a specialist who speaks {language} will get in touch.",
     introTitle: "Why Manhattan is different for international buyers",
-    introBody: ["Manhattan real estate is organized around buildings and ownership structures — not just listings. International buyers often start with visa and citizenship questions. In New York, U.S. citizenship is generally not required to purchase residential property; co-op boards, financing, and source-of-funds documentation usually matter more than your passport.", "Agent Kammer works as a decision advisor first: clarify whether to buy, which ownership path fits, which neighborhoods match your life, and what timeline is realistic — then execute."],
+    introBody: ["Manhattan real estate is organized around buildings and ownership structures - not just listings. International buyers often start with visa and citizenship questions. In New York, U.S. citizenship is generally not required to purchase residential property; co-op boards, financing, and source-of-funds documentation usually matter more than your passport.", "Agent Kammer works as a decision advisor first: clarify whether to buy, which ownership path fits, which neighborhoods match your life, and what timeline is realistic - then execute."],
     faqs:     [
             {
         q: "Can citizens of {country} buy residential property in Manhattan?",
-        a: "Yes. U.S. citizenship is generally not required. Constraints usually come from property type (especially co-ops), financing, board approval, and documentation — not from nationality alone.",
+        a: "Yes. U.S. citizenship is generally not required. Constraints usually come from property type (especially co-ops), financing, board approval, and documentation - not from nationality alone.",
       },
             {
         q: "Can I buy remotely from {country}?",
-        a: "Many steps can be remote — video tours, attorneys, contracts, and capital arrangements. What should not be remote is judgment: building diligence and a written strategy before you offer.",
+        a: "Many steps can be remote - video tours, attorneys, contracts, and capital arrangements. What should not be remote is judgment: building diligence and a written strategy before you offer.",
       },
             {
         q: "Condo vs co-op for buyers from {country}?",
@@ -93,29 +93,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Newer inventory and service-oriented buildings — common for international and corporate moves.",
+        blurb: "Newer inventory and service-oriented buildings - common for international and corporate moves.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Quieter streets and high building quality — often chosen for long-term family holds.",
+        blurb: "Quieter streets and high building quality - often chosen for long-term family holds.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Parks, schools, and daily livability — strong for family relocation.",
+        blurb: "Parks, schools, and daily livability - strong for family relocation.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Relative value and rental flexibility — useful for investment or work-oriented stays.",
+        blurb: "Relative value and rental flexibility - useful for investment or work-oriented stays.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Clarify purpose & timeline",
-        text: "Primary home, pied-à-terre, investment, family, or relocation — purpose drives structure.",
+        text: "Primary home, pied-à-terre, investment, family, or relocation - purpose drives structure.",
       },
             {
         title: "Choose ownership path",
@@ -123,7 +123,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Confirm capital path",
-        text: "Cash, financing, or hybrid — plus source-of-funds readiness.",
+        text: "Cash, financing, or hybrid - plus source-of-funds readiness.",
       },
             {
         title: "Building diligence",
@@ -134,7 +134,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
         text: "New York is attorney-led. Timing varies by property type and approvals.",
       },
     ],
-    commonMistakes: ["Falling in love with a unit before learning co-op or financing constraints", "Underestimating closing costs and ongoing carrying costs", "Offering without a local attorney and a clear source-of-funds path", "Treating \"can buy\" as \"should buy\" — without a written decision framework"],
+    commonMistakes: ["Falling in love with a unit before learning co-op or financing constraints", "Underestimating closing costs and ongoing carrying costs", "Offering without a local attorney and a clear source-of-funds path", "Treating \"can buy\" as \"should buy\" - without a written decision framework"],
     team:     [
             {
         role: "Housing Advisor",
@@ -150,12 +150,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Tax / Structure Counsel",
-        description: "Coordinates with your advisors on holding structure and cross-border tax questions — referred as needed.",
+        description: "Coordinates with your advisors on holding structure and cross-border tax questions - referred as needed.",
       },
     ],
     formHeadline: "Request your Manhattan strategy",
     formSubhead: "Tell us your situation. After you submit, a specialist who speaks {language} will get in touch with the right next step.",
-    specialistPromise: "After you submit, a specialist who speaks your preferred language ({language}) will get in touch to review your goals and recommend the next step — the start of a consultation, not an automated sales pitch.",
+    specialistPromise: "After you submit, a specialist who speaks your preferred language ({language}) will get in touch to review your goals and recommend the next step - the start of a consultation, not an automated sales pitch.",
     metaTitle: "Manhattan Real Estate for Buyers from {country}",
     metaDescription: "Guide for buyers from {country} considering Manhattan: eligibility, condo vs co-op, remote purchase, costs, and neighborhoods. Strategy request with {language} follow-up.",
     ui:     {
@@ -170,17 +170,17 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       mistakesEyebrow: "Common mistakes",
       mistakesTitle: "What to avoid before you offer",
       teamEyebrow: "Your team",
-      teamTitle: "Who helps you decide — and close",
+      teamTitle: "Who helps you decide - and close",
       teamDescription: "Manhattan purchases are attorney-led. We coordinate the advisory layer so structure, neighborhood fit, and timeline stay aligned.",
       resourcesEyebrow: "Resources",
       resourcesTitle: "Go deeper before you commit",
       ctaTitle: "Ready for a strategy conversation?",
-      ctaDescription: "Share your goals and timeline. A specialist who speaks your language will follow up with a clear next step — not a generic sales sequence.",
+      ctaDescription: "Share your goals and timeline. A specialist who speaks your language will follow up with a clear next step - not a generic sales sequence.",
       ctaLabel: "Request your strategy",
       formEyebrow: "Strategy request",
       submitLabel: "Submit request",
       successEyebrow: "Received",
-      successTitle: "Thank you — we will be in touch",
+      successTitle: "Thank you - we will be in touch",
       successWait: "A specialist will review your submission and reach out in your preferred language.",
       roadmapLabel: "Your roadmap",
       fieldFullName: "Full name",
@@ -200,13 +200,13 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
   },
   "zh-CN":   {
     heroTitle: "在曼哈顿购置住宅：清晰决策，而非冲动搜索。",
-    heroDescription: "为来自{country}的买家准备的曼哈顿购房指南：产权结构、流程、社区与融资——先理解，再行动。提交后，会有能用{language}沟通的顾问与您联系。",
+    heroDescription: "为来自{country}的买家准备的曼哈顿购房指南：产权结构、流程、社区与融资 -  - 先理解，再行动。提交后，会有能用{language}沟通的顾问与您联系。",
     introTitle: "为什么曼哈顿对国际买家不同",
-    introBody: ["曼哈顿市场以建筑与所有权结构为核心，而不是以“房源列表”为核心。国际买家常先问签证与国籍——在纽约，购买住宅物业通常不要求美国公民身份，但合作公寓（co-op）董事会审批、融资路径与资金来源文件通常比护照本身更关键。", "Agent Kammer 以决策顾问方式工作：先判断买或不买、买哪种产权、在哪个社区、以何种时间表推进——再进入执行。"],
+    introBody: ["曼哈顿市场以建筑与所有权结构为核心，而不是以“房源列表”为核心。国际买家常先问签证与国籍 -  - 在纽约，购买住宅物业通常不要求美国公民身份，但合作公寓（co-op）董事会审批、融资路径与资金来源文件通常比护照本身更关键。", "Agent Kammer 以决策顾问方式工作：先判断买或不买、买哪种产权、在哪个社区、以何种时间表推进 -  - 再进入执行。"],
     faqs:     [
             {
         q: "{country}公民可以在曼哈顿购买住宅吗？",
-        a: "可以。购买住宅物业一般不要求美国公民身份。限制通常来自物业类型（尤其是 co-op）、融资、董事会审批与文件——而非国籍本身。",
+        a: "可以。购买住宅物业一般不要求美国公民身份。限制通常来自物业类型（尤其是 co-op）、融资、董事会审批与文件 -  - 而非国籍本身。",
       },
             {
         q: "可以从{country}远程购买吗？",
@@ -250,7 +250,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     processSteps:     [
             {
         title: "明确用途与时间表",
-        text: "自住、子女就学、投资或迁居——用途决定结构。",
+        text: "自住、子女就学、投资或迁居 -  - 用途决定结构。",
       },
             {
         title: "选择产权路径",
@@ -269,7 +269,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
         text: "纽约由律师主导；周期因物业与审批而异。",
       },
     ],
-    commonMistakes: ["先爱上单位，再发现 co-op 或融资不可行", "低估成交与持有成本", "没有本地律师与清晰资金路径就出价", "把“能买”当成“应该买”——缺少书面决策框架"],
+    commonMistakes: ["先爱上单位，再发现 co-op 或融资不可行", "低估成交与持有成本", "没有本地律师与清晰资金路径就出价", "把“能买”当成“应该买” -  - 缺少书面决策框架"],
     team:     [
             {
         role: "住房顾问",
@@ -285,12 +285,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "税务/结构顾问",
-        description: "就持有结构与跨境税务与您的顾问协调——按需转介。",
+        description: "就持有结构与跨境税务与您的顾问协调 -  - 按需转介。",
       },
     ],
     formHeadline: "申请您的曼哈顿购房策略",
     formSubhead: "告诉我们您的情况。提交后，会有能用{language}沟通的顾问与您联系。",
-    specialistPromise: "提交后，一位能用{language}沟通的顾问将与您联系，审核目标并建议下一步——这是咨询的开始，不是自动推销。",
+    specialistPromise: "提交后，一位能用{language}沟通的顾问将与您联系，审核目标并建议下一步 -  - 这是咨询的开始，不是自动推销。",
     metaTitle: "{country}买家曼哈顿住宅指南",
     metaDescription: "为来自{country}的买家准备的曼哈顿指南：资格、Condo 与 Co-op、远程购买、成本与社区。提交后有{language}顾问跟进。",
     ui:     {
@@ -315,7 +315,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "策略申请",
       submitLabel: "提交申请",
       successEyebrow: "已收到",
-      successTitle: "谢谢——我们会尽快联系您",
+      successTitle: "谢谢 -  - 我们会尽快联系您",
       successWait: "顾问将审阅您的信息，并以您偏好的语言联系您。",
       roadmapLabel: "您的路线图",
       fieldFullName: "姓名",
@@ -335,13 +335,13 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
   },
   "zh-TW":   {
     heroTitle: "在曼哈頓購屋：先做判斷，再看物件。",
-    heroDescription: "為來自{country}的買家準備的曼哈頓購屋指南：產權結構、流程、社區與融資——先理解，再行動。提交後，會有能用{language}溝通的顧問與您聯絡。",
+    heroDescription: "為來自{country}的買家準備的曼哈頓購屋指南：產權結構、流程、社區與融資 -  - 先理解，再行動。提交後，會有能用{language}溝通的顧問與您聯絡。",
     introTitle: "為什麼曼哈頓對國際買家不同",
-    introBody: ["曼哈頓市場以建築與所有權結構為核心，而不是以「房源列表」為核心。國際買家常先問簽證與國籍——在紐約，購買住宅物業通常不要求美國公民身份，但合作公寓（co-op）董事會審批、融資路徑與資金來源文件通常比護照本身更關鍵。", "Agent Kammer 以決策顧問方式工作：先判斷買或不買、買哪種產權、在哪個社區、以何種時間表推進——再進入執行。"],
+    introBody: ["曼哈頓市場以建築與所有權結構為核心，而不是以「房源列表」為核心。國際買家常先問簽證與國籍 -  - 在紐約，購買住宅物業通常不要求美國公民身份，但合作公寓（co-op）董事會審批、融資路徑與資金來源文件通常比護照本身更關鍵。", "Agent Kammer 以決策顧問方式工作：先判斷買或不買、買哪種產權、在哪個社區、以何種時間表推進 -  - 再進入執行。"],
     faqs:     [
             {
         q: "{country}公民可以在曼哈頓購買住宅嗎？",
-        a: "可以。購買住宅物業一般不要求美國公民身份。限制通常來自物業類型（尤其是 co-op）、融資、董事會審批與文件——而非國籍本身。",
+        a: "可以。購買住宅物業一般不要求美國公民身份。限制通常來自物業類型（尤其是 co-op）、融資、董事會審批與文件 -  - 而非國籍本身。",
       },
             {
         q: "可以從{country}遠距購買嗎？",
@@ -385,7 +385,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     processSteps:     [
             {
         title: "明確用途與時間表",
-        text: "自住、子女就學、投資或遷居——用途決定結構。",
+        text: "自住、子女就學、投資或遷居 -  - 用途決定結構。",
       },
             {
         title: "選擇產權路徑",
@@ -404,7 +404,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
         text: "紐約由律師主導；週期因物業與審批而異。",
       },
     ],
-    commonMistakes: ["先愛上單位，再發現 co-op 或融資不可行", "低估成交與持有成本", "沒有本地律師與清晰資金路徑就出價", "把「能買」當成「應該買」——缺少書面決策框架"],
+    commonMistakes: ["先愛上單位，再發現 co-op 或融資不可行", "低估成交與持有成本", "沒有本地律師與清晰資金路徑就出價", "把「能買」當成「應該買」 -  - 缺少書面決策框架"],
     team:     [
             {
         role: "住房顧問",
@@ -420,12 +420,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "稅務/結構顧問",
-        description: "就持有結構與跨境稅務與您的顧問協調——按需轉介。",
+        description: "就持有結構與跨境稅務與您的顧問協調 -  - 按需轉介。",
       },
     ],
     formHeadline: "申請您的曼哈頓購屋策略",
     formSubhead: "告訴我們您的情況。提交後，會有能用{language}溝通的顧問與您聯絡。",
-    specialistPromise: "提交後，一位能用{language}溝通的顧問將與您聯絡，檢視目標並建議下一步——這是諮詢的開始，不是自動推銷。",
+    specialistPromise: "提交後，一位能用{language}溝通的顧問將與您聯絡，檢視目標並建議下一步 -  - 這是諮詢的開始，不是自動推銷。",
     metaTitle: "{country}買家曼哈頓住宅指南",
     metaDescription: "為來自{country}的買家準備的曼哈頓指南：資格、Condo 與 Co-op、遠距購買、成本與社區。提交後有{language}顧問跟進。",
     ui:     {
@@ -450,7 +450,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "策略申請",
       submitLabel: "提交申請",
       successEyebrow: "已收到",
-      successTitle: "謝謝——我們會盡快聯絡您",
+      successTitle: "謝謝 -  - 我們會盡快聯絡您",
       successWait: "顧問將審閱您的資訊，並以您偏好的語言聯絡您。",
       roadmapLabel: "您的路線圖",
       fieldFullName: "姓名",
@@ -607,7 +607,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     heroTitle: "맨해튼 주택 구매: 검색 전에 판단을 정리하세요.",
     heroDescription: "{country}에서 오는 바이어를 위한 맨해튼 가이드: 소유 구조, 절차, 동네, 자금. 제출 후 {language}로 소통 가능한 전문가가 연락드립니다.",
     introTitle: "맨해튼이 다른 이유",
-    introBody: ["맨해튼 시장은 매물 목록보다 건물과 소유 구조가 중심입니다. 미국 시민권은 보통 필요하지 않으며, co-op, 자금 조달, 실사가 더 중요합니다.", "Agent Kammer는 결정을 먼저 돕습니다. 살지 여부, 어떤 구조, 어떤 동네, 어떤 일정 — 그다음 실행합니다."],
+    introBody: ["맨해튼 시장은 매물 목록보다 건물과 소유 구조가 중심입니다. 미국 시민권은 보통 필요하지 않으며, co-op, 자금 조달, 실사가 더 중요합니다.", "Agent Kammer는 결정을 먼저 돕습니다. 살지 여부, 어떤 구조, 어떤 동네, 어떤 일정 - 그다음 실행합니다."],
     faqs:     [
             {
         q: "{country} 국민도 맨해튼에서 주택을 살 수 있나요?",
@@ -627,35 +627,35 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         q: "매매가 외 비용은?",
-        a: "클로징 비용, 양도세 가능성, 유지비, 향후 매각 세금 등 — 서면 전략에 담깁니다.",
+        a: "클로징 비용, 양도세 가능성, 유지비, 향후 매각 세금 등 - 서면 전략에 담깁니다.",
       },
     ],
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "신규 재고와 서비스 중심 건물 — 국제·기업 이동에 흔함.",
+        blurb: "신규 재고와 서비스 중심 건물 - 국제·기업 이동에 흔함.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "조용한 거리와 높은 건축 품질 — 장기 가족 보유.",
+        blurb: "조용한 거리와 높은 건축 품질 - 장기 가족 보유.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "공원, 학교, 생활 편의 — 가족 이주.",
+        blurb: "공원, 학교, 생활 편의 - 가족 이주.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "상대적 가치와 유연성 — 투자 또는 짧은 체류.",
+        blurb: "상대적 가치와 유연성 - 투자 또는 짧은 체류.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "목적과 일정",
-        text: "주거, pied-à-terre, 투자, 이주 — 목적이 구조를 결정합니다.",
+        text: "주거, pied-à-terre, 투자, 이주 - 목적이 구조를 결정합니다.",
       },
             {
         title: "소유 경로",
@@ -663,7 +663,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "자금 경로",
-        text: "현금, 대출, 혼합 — 자금 출처 준비.",
+        text: "현금, 대출, 혼합 - 자금 출처 준비.",
       },
             {
         title: "건물 실사",
@@ -690,7 +690,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "세무·구조 자문",
-        description: "보유 구조와 국경 간 세무 — 필요 시 연결.",
+        description: "보유 구조와 국경 간 세무 - 필요 시 연결.",
       },
     ],
     formHeadline: "맨해튼 전략 상담 요청",
@@ -739,10 +739,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "de":   {
-    heroTitle: "Immobilien in Manhattan kaufen — mit Klarheit statt Druck.",
+    heroTitle: "Immobilien in Manhattan kaufen - mit Klarheit statt Druck.",
     heroDescription: "Leitfaden für Käufer aus {country}: Eigentumsformen, Prozess, Finanzierung und typische Fehler. Nach dem Absenden meldet sich ein Berater, der {language} spricht.",
     introTitle: "Warum Manhattan anders ist",
-    introBody: ["Der Manhattan-Markt denkt in Gebäuden und Eigentumsstrukturen — nicht nur in Inseraten. Internationale Käufer fragen oft zuerst nach Visum und Staatsangehörigkeit. In New York ist für den Kauf von Wohnimmobilien in der Regel keine US-Staatsbürgerschaft erforderlich; entscheidend sind eher Condo vs. Co-op, Finanzierung und Due Diligence.", "Agent Kammer arbeitet entscheidungsorientiert: erst klären, ob und wie gekauft werden sollte — dann ausführen."],
+    introBody: ["Der Manhattan-Markt denkt in Gebäuden und Eigentumsstrukturen - nicht nur in Inseraten. Internationale Käufer fragen oft zuerst nach Visum und Staatsangehörigkeit. In New York ist für den Kauf von Wohnimmobilien in der Regel keine US-Staatsbürgerschaft erforderlich; entscheidend sind eher Condo vs. Co-op, Finanzierung und Due Diligence.", "Agent Kammer arbeitet entscheidungsorientiert: erst klären, ob und wie gekauft werden sollte - dann ausführen."],
     faqs:     [
             {
         q: "Können Käufer aus {country} in Manhattan kaufen?",
@@ -768,29 +768,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Neuere Gebäude und Servicekultur — häufig bei internationalen und Corporate-Zügen.",
+        blurb: "Neuere Gebäude und Servicekultur - häufig bei internationalen und Corporate-Zügen.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Ruhige Straßen, hohe Bauqualität — oft für langfristige Familienentscheidungen.",
+        blurb: "Ruhige Straßen, hohe Bauqualität - oft für langfristige Familienentscheidungen.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Parks, Schulen, Alltagstauglichkeit — stark für Relocations mit Kindern.",
+        blurb: "Parks, Schulen, Alltagstauglichkeit - stark für Relocations mit Kindern.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Relative Wertigkeit und Flexibilität — nützlich für Investment oder work-oriented stays.",
+        blurb: "Relative Wertigkeit und Flexibilität - nützlich für Investment oder work-oriented stays.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Zweck und Zeitplan",
-        text: "Eigennutzung, Pied-à-terre, Investment oder Relocation — Zweck steuert alles.",
+        text: "Eigennutzung, Pied-à-terre, Investment oder Relocation - Zweck steuert alles.",
       },
             {
         title: "Eigentumsstruktur",
@@ -798,7 +798,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Kapitalpfad",
-        text: "Cash, Finanzierung oder hybrid — Compliance früh klären.",
+        text: "Cash, Finanzierung oder hybrid - Compliance früh klären.",
       },
             {
         title: "Gebäude-Due-Diligence",
@@ -825,12 +825,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Steuer- / Strukturberatung",
-        description: "Abstimmung zu Haltungsstruktur und grenzüberschreitenden Steuerfragen — bei Bedarf vermittelt.",
+        description: "Abstimmung zu Haltungsstruktur und grenzüberschreitenden Steuerfragen - bei Bedarf vermittelt.",
       },
     ],
     formHeadline: "Manhattan-Strategie anfragen",
     formSubhead: "Beschreiben Sie Ihre Situation. Nach dem Absenden meldet sich ein Berater, der {language} spricht.",
-    specialistPromise: "Nach dem Absenden meldet sich ein Spezialist, der {language} spricht, prüft Ihre Ziele und empfiehlt den nächsten Schritt — der Beginn einer Beratung, kein automatischer Verkaufsdruck.",
+    specialistPromise: "Nach dem Absenden meldet sich ein Spezialist, der {language} spricht, prüft Ihre Ziele und empfiehlt den nächsten Schritt - der Beginn einer Beratung, kein automatischer Verkaufsdruck.",
     metaTitle: "Manhattan Immobilien für Käufer aus {country}",
     metaDescription: "Leitfaden für Käufer aus {country} in Manhattan: Kaufberechtigung, Condo vs Co-op, Remote-Kauf, Kosten und Stadtteile. Anschließend Kontakt durch {language}-sprachigen Berater.",
     ui:     {
@@ -855,7 +855,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Strategie-Anfrage",
       submitLabel: "Anfrage senden",
       successEyebrow: "Erhalten",
-      successTitle: "Danke — wir melden uns",
+      successTitle: "Danke - wir melden uns",
       successWait: "Ein Spezialist prüft Ihre Angaben und kontaktiert Sie in Ihrer Sprache.",
       roadmapLabel: "Ihr Fahrplan",
       fieldFullName: "Vollständiger Name",
@@ -874,10 +874,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "fr":   {
-    heroTitle: "Acheter à Manhattan depuis {country} — la clarté avant la recherche.",
+    heroTitle: "Acheter à Manhattan depuis {country} - la clarté avant la recherche.",
     heroDescription: "Guide pour les acheteurs de {country} : structures de propriété, processus, quartiers et financement. Après envoi, un spécialiste qui parle {language} vous contactera.",
     introTitle: "Pourquoi Manhattan est différent",
-    introBody: ["Le marché manhattanite repose sur les immeubles et les structures de propriété — pas seulement les annonces. La citoyenneté américaine n'est généralement pas requise ; les co-ops, le financement et la due diligence comptent davantage.", "Agent Kammer conseille d'abord la décision : acheter ou non, quelle structure, quels quartiers, quel calendrier — puis l'exécution."],
+    introBody: ["Le marché manhattanite repose sur les immeubles et les structures de propriété - pas seulement les annonces. La citoyenneté américaine n'est généralement pas requise ; les co-ops, le financement et la due diligence comptent davantage.", "Agent Kammer conseille d'abord la décision : acheter ou non, quelle structure, quels quartiers, quel calendrier - puis l'exécution."],
     faqs:     [
             {
         q: "Les ressortissants de {country} peuvent-ils acheter à Manhattan ?",
@@ -903,29 +903,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Immeubles récents et services — fréquent pour les profils internationaux.",
+        blurb: "Immeubles récents et services - fréquent pour les profils internationaux.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Rues calmes et qualité de construction — choix familial long terme.",
+        blurb: "Rues calmes et qualité de construction - choix familial long terme.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Parcs, écoles et vie quotidienne — relocation familiale.",
+        blurb: "Parcs, écoles et vie quotidienne - relocation familiale.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Valeur relative et flexibilité locative — investissement ou pied-à-terre.",
+        blurb: "Valeur relative et flexibilité locative - investissement ou pied-à-terre.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Objectif et calendrier",
-        text: "Résidence, pied-à-terre, investissement ou relocation — l'objectif guide la structure.",
+        text: "Résidence, pied-à-terre, investissement ou relocation - l'objectif guide la structure.",
       },
             {
         title: "Structure de propriété",
@@ -933,7 +933,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Capital",
-        text: "Cash, financement ou mixte — conformité tôt.",
+        text: "Cash, financement ou mixte - conformité tôt.",
       },
             {
         title: "Due diligence immeuble",
@@ -960,12 +960,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Conseil fiscal / structure",
-        description: "Structure de détention et fiscalité transfrontalière — orientation si besoin.",
+        description: "Structure de détention et fiscalité transfrontalière - orientation si besoin.",
       },
     ],
     formHeadline: "Demandez votre stratégie Manhattan",
     formSubhead: "Décrivez votre situation. Après l'envoi, un spécialiste qui parle {language} vous contactera.",
-    specialistPromise: "Après l'envoi, un spécialiste qui parle {language} vous contactera pour examiner vos objectifs et recommander la prochaine étape — le début d'une consultation, pas une vente automatisée.",
+    specialistPromise: "Après l'envoi, un spécialiste qui parle {language} vous contactera pour examiner vos objectifs et recommander la prochaine étape - le début d'une consultation, pas une vente automatisée.",
     metaTitle: "Immobilier Manhattan pour les acheteurs de {country}",
     metaDescription: "Guide pour les acheteurs de {country} : éligibilité, condo vs co-op, achat à distance, coûts et quartiers. Suivi en {language}.",
     ui:     {
@@ -990,7 +990,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Demande de stratégie",
       submitLabel: "Envoyer",
       successEyebrow: "Reçu",
-      successTitle: "Merci — nous vous contacterons",
+      successTitle: "Merci - nous vous contacterons",
       successWait: "Un spécialiste examinera votre demande dans votre langue.",
       roadmapLabel: "Votre feuille de route",
       fieldFullName: "Nom complet",
@@ -1009,10 +1009,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "es":   {
-    heroTitle: "Comprar en Manhattan desde {country} — claridad antes de buscar.",
+    heroTitle: "Comprar en Manhattan desde {country} - claridad antes de buscar.",
     heroDescription: "Guía para compradores de {country}: estructuras de propiedad, proceso, barrios y financiación. Tras enviar, un especialista que habla {language} se pondrá en contacto.",
     introTitle: "Por qué Manhattan es diferente",
-    introBody: ["El mercado de Manhattan se organiza en torno a edificios y estructuras de propiedad — no solo anuncios. La ciudadanía estadounidense generalmente no es obligatoria; importan más los co-ops, la financiación y la diligencia.", "Agent Kammer trabaja primero la decisión: si comprar, qué estructura, qué barrios y qué calendario — luego la ejecución."],
+    introBody: ["El mercado de Manhattan se organiza en torno a edificios y estructuras de propiedad - no solo anuncios. La ciudadanía estadounidense generalmente no es obligatoria; importan más los co-ops, la financiación y la diligencia.", "Agent Kammer trabaja primero la decisión: si comprar, qué estructura, qué barrios y qué calendario - luego la ejecución."],
     faqs:     [
             {
         q: "¿Pueden comprar en Manhattan personas de {country}?",
@@ -1038,29 +1038,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Inventario más nuevo y edificios orientados al servicio — común en perfiles internacionales.",
+        blurb: "Inventario más nuevo y edificios orientados al servicio - común en perfiles internacionales.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Calles tranquilas y alta calidad — elección familiar a largo plazo.",
+        blurb: "Calles tranquilas y alta calidad - elección familiar a largo plazo.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Parques, escuelas y vida diaria — relocación familiar.",
+        blurb: "Parques, escuelas y vida diaria - relocación familiar.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Valor relativo y flexibilidad — inversión o pied-à-terre.",
+        blurb: "Valor relativo y flexibilidad - inversión o pied-à-terre.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Objetivo y calendario",
-        text: "Vivienda, pied-à-terre, inversión o relocación — el objetivo guía la estructura.",
+        text: "Vivienda, pied-à-terre, inversión o relocación - el objetivo guía la estructura.",
       },
             {
         title: "Estructura de propiedad",
@@ -1068,7 +1068,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Capital",
-        text: "Efectivo, financiación o mixto — cumplimiento temprano.",
+        text: "Efectivo, financiación o mixto - cumplimiento temprano.",
       },
             {
         title: "Diligencia del edificio",
@@ -1095,12 +1095,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Asesor fiscal / estructura",
-        description: "Estructura de tenencia y fiscalidad transfronteriza — referidos si hace falta.",
+        description: "Estructura de tenencia y fiscalidad transfronteriza - referidos si hace falta.",
       },
     ],
     formHeadline: "Solicite su estrategia en Manhattan",
     formSubhead: "Cuéntenos su situación. Tras enviar, un especialista que habla {language} se pondrá en contacto.",
-    specialistPromise: "Tras enviarlo, un especialista que habla {language} se pondrá en contacto para revisar sus objetivos y recomendar el siguiente paso — el inicio de una consulta, no una venta automática.",
+    specialistPromise: "Tras enviarlo, un especialista que habla {language} se pondrá en contacto para revisar sus objetivos y recomendar el siguiente paso - el inicio de una consulta, no una venta automática.",
     metaTitle: "Inmobiliario Manhattan para compradores de {country}",
     metaDescription: "Guía para compradores de {country}: elegibilidad, condo vs co-op, compra remota, costes y barrios. Seguimiento en {language}.",
     ui:     {
@@ -1125,7 +1125,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Solicitud de estrategia",
       submitLabel: "Enviar",
       successEyebrow: "Recibido",
-      successTitle: "Gracias — nos pondremos en contacto",
+      successTitle: "Gracias - nos pondremos en contacto",
       successWait: "Un especialista revisará su solicitud en su idioma.",
       roadmapLabel: "Su hoja de ruta",
       fieldFullName: "Nombre completo",
@@ -1144,10 +1144,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "it":   {
-    heroTitle: "Comprare a Manhattan da {country} — chiarezza prima della ricerca.",
+    heroTitle: "Comprare a Manhattan da {country} - chiarezza prima della ricerca.",
     heroDescription: "Guida per acquirenti da {country}: strutture di proprietà, processo, quartieri e finanziamento. Dopo l'invio, uno specialista che parla {language} ti contatterà.",
     introTitle: "Perché Manhattan è diversa",
-    introBody: ["Il mercato di Manhattan ruota attorno a edifici e strutture di proprietà — non solo annunci. La cittadinanza USA di solito non è richiesta; contano co-op, finanziamento e due diligence.", "Agent Kammer lavora prima sulla decisione: comprare o no, quale struttura, quali quartieri e tempistiche — poi l'esecuzione."],
+    introBody: ["Il mercato di Manhattan ruota attorno a edifici e strutture di proprietà - non solo annunci. La cittadinanza USA di solito non è richiesta; contano co-op, finanziamento e due diligence.", "Agent Kammer lavora prima sulla decisione: comprare o no, quale struttura, quali quartieri e tempistiche - poi l'esecuzione."],
     faqs:     [
             {
         q: "I cittadini di {country} possono acquistare a Manhattan?",
@@ -1173,29 +1173,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Immeubles récents et services — fréquent pour les profils internationaux.",
+        blurb: "Immeubles récents et services - fréquent pour les profils internationaux.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Rues calmes et qualité de construction — choix familial long terme.",
+        blurb: "Rues calmes et qualité de construction - choix familial long terme.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Parcs, écoles et vie quotidienne — relocation familiale.",
+        blurb: "Parcs, écoles et vie quotidienne - relocation familiale.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Valeur relative et flexibilité locative — investissement ou pied-à-terre.",
+        blurb: "Valeur relative et flexibilité locative - investissement ou pied-à-terre.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Objectif et calendrier",
-        text: "Résidence, pied-à-terre, investissement ou relocation — l'objectif guide la structure.",
+        text: "Résidence, pied-à-terre, investissement ou relocation - l'objectif guide la structure.",
       },
             {
         title: "Structure de propriété",
@@ -1203,7 +1203,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Capital",
-        text: "Cash, financement ou mixte — conformité tôt.",
+        text: "Cash, financement ou mixte - conformité tôt.",
       },
             {
         title: "Due diligence immeuble",
@@ -1230,12 +1230,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Conseil fiscal / structure",
-        description: "Structure de détention et fiscalité transfrontalière — orientation si besoin.",
+        description: "Structure de détention et fiscalité transfrontalière - orientation si besoin.",
       },
     ],
     formHeadline: "Richiedi la tua strategia Manhattan",
     formSubhead: "Descrivi la tua situazione. Dopo l'invio, uno specialista che parla {language} ti contatterà.",
-    specialistPromise: "Dopo l'invio, uno specialista che parla {language} ti contatterà per esaminare i tuoi obiettivi e consigliare il passo successivo — l'inizio di una consulenza, non una vendita automatica.",
+    specialistPromise: "Dopo l'invio, uno specialista che parla {language} ti contatterà per esaminare i tuoi obiettivi e consigliare il passo successivo - l'inizio di una consulenza, non una vendita automatica.",
     metaTitle: "Immobiliare Manhattan per acquirenti da {country}",
     metaDescription: "Guida per acquirenti da {country}: idoneità, condo vs co-op, acquisto remoto, costi e quartieri. Follow-up in {language}.",
     ui:     {
@@ -1260,7 +1260,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Richiesta strategia",
       submitLabel: "Invia",
       successEyebrow: "Ricevuto",
-      successTitle: "Grazie — ti contatteremo",
+      successTitle: "Grazie - ti contatteremo",
       successWait: "Uno specialista risponderà nella tua lingua.",
       roadmapLabel: "La tua roadmap",
       fieldFullName: "Nome completo",
@@ -1279,18 +1279,18 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "pt":   {
-    heroTitle: "Comprar em Manhattan a partir de {country} — clareza antes da procura.",
-    heroDescription: "Guia orientado para a decisão, para compradores de {country}: estruturas de propriedade, processo, bairros e financiamento — e depois um pedido de estratégia. Após o envio, um especialista que fala {language} entrará em contacto.",
+    heroTitle: "Comprar em Manhattan a partir de {country} - clareza antes da procura.",
+    heroDescription: "Guia orientado para a decisão, para compradores de {country}: estruturas de propriedade, processo, bairros e financiamento - e depois um pedido de estratégia. Após o envio, um especialista que fala {language} entrará em contacto.",
     introTitle: "Porque Manhattan é diferente para compradores internacionais",
-    introBody: ["O mercado imobiliário de Manhattan organiza-se em torno de edifícios e estruturas de propriedade — não apenas anúncios. Muitos compradores internacionais começam por vistos e cidadania. Em Nova Iorque, a cidadania americana em geral não é exigida para comprar habitação; os conselhos de administração das co-ops, o financiamento e a documentação da origem dos fundos costumam importar mais do que o passaporte.", "A Agent Kammer trabalha primeiro como consultora de decisão: clarificar se deve comprar, que via de propriedade se adequa, que bairros correspondem à sua vida e que calendário é realista — e só depois executar."],
+    introBody: ["O mercado imobiliário de Manhattan organiza-se em torno de edifícios e estruturas de propriedade - não apenas anúncios. Muitos compradores internacionais começam por vistos e cidadania. Em Nova Iorque, a cidadania americana em geral não é exigida para comprar habitação; os conselhos de administração das co-ops, o financiamento e a documentação da origem dos fundos costumam importar mais do que o passaporte.", "A Agent Kammer trabalha primeiro como consultora de decisão: clarificar se deve comprar, que via de propriedade se adequa, que bairros correspondem à sua vida e que calendário é realista - e só depois executar."],
     faqs:     [
             {
         q: "Os cidadãos de {country} podem comprar habitação em Manhattan?",
-        a: "Sim. A cidadania americana em geral não é exigida. As limitações vêm sobretudo do tipo de imóvel (especialmente co-ops), do financiamento, da aprovação do conselho e da documentação — não apenas da nacionalidade.",
+        a: "Sim. A cidadania americana em geral não é exigida. As limitações vêm sobretudo do tipo de imóvel (especialmente co-ops), do financiamento, da aprovação do conselho e da documentação - não apenas da nacionalidade.",
       },
             {
         q: "Posso comprar à distância a partir de {country}?",
-        a: "Muitas etapas podem ser feitas à distância — visitas por vídeo, advogados, contratos e organização de capital. O que não deve ser remoto é o juízo: diligência ao edifício e estratégia escrita antes de fazer uma proposta.",
+        a: "Muitas etapas podem ser feitas à distância - visitas por vídeo, advogados, contratos e organização de capital. O que não deve ser remoto é o juízo: diligência ao edifício e estratégia escrita antes de fazer uma proposta.",
       },
             {
         q: "Condomínio ou co-op para compradores de {country}?",
@@ -1308,29 +1308,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Edifícios mais recentes e orientados ao serviço — frequentes em perfis internacionais e corporativos.",
+        blurb: "Edifícios mais recentes e orientados ao serviço - frequentes em perfis internacionais e corporativos.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Ruas mais calmas e elevada qualidade construtiva — escolha comum para famílias a longo prazo.",
+        blurb: "Ruas mais calmas e elevada qualidade construtiva - escolha comum para famílias a longo prazo.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Parques, escolas e vida quotidiana — forte para relocalização familiar.",
+        blurb: "Parques, escolas e vida quotidiana - forte para relocalização familiar.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Valor relativo e flexibilidade de arrendamento — útil para investimento ou estadias orientadas ao trabalho.",
+        blurb: "Valor relativo e flexibilidade de arrendamento - útil para investimento ou estadias orientadas ao trabalho.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Clarificar objectivo e calendário",
-        text: "Residência principal, pied-à-terre, investimento, família ou relocalização — o objectivo define a estrutura.",
+        text: "Residência principal, pied-à-terre, investimento, família ou relocalização - o objectivo define a estrutura.",
       },
             {
         title: "Escolher a via de propriedade",
@@ -1338,7 +1338,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Confirmar o percurso de capital",
-        text: "Capital próprio, financiamento ou híbrido — mais prontidão quanto à origem dos fundos.",
+        text: "Capital próprio, financiamento ou híbrido - mais prontidão quanto à origem dos fundos.",
       },
             {
         title: "Diligência ao edifício",
@@ -1349,7 +1349,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
         text: "Nova Iorque é conduzida por advogados. Os prazos variam consoante o tipo de imóvel e aprovações.",
       },
     ],
-    commonMistakes: ["Apegar-se a um apartamento antes de conhecer limitações de co-op ou financiamento", "Subestimar custos de closing e encargos correntes", "Propor sem advogado local e percurso claro da origem dos fundos", "Confundir «pode comprar» com «deve comprar» — sem quadro de decisão escrito"],
+    commonMistakes: ["Apegar-se a um apartamento antes de conhecer limitações de co-op ou financiamento", "Subestimar custos de closing e encargos correntes", "Propor sem advogado local e percurso claro da origem dos fundos", "Confundir «pode comprar» com «deve comprar» - sem quadro de decisão escrito"],
     team:     [
             {
         role: "Consultor de habitação",
@@ -1365,12 +1365,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Consultor fiscal / estrutura",
-        description: "Alinha com os seus consultores a estrutura de detenção e fiscalidade transfronteiriça — encaminhado quando necessário.",
+        description: "Alinha com os seus consultores a estrutura de detenção e fiscalidade transfronteiriça - encaminhado quando necessário.",
       },
     ],
     formHeadline: "Peça a sua estratégia para Manhattan",
     formSubhead: "Descreva a sua situação. Após o envio, um especialista que fala {language} entrará em contacto com o passo seguinte adequado.",
-    specialistPromise: "Após o envio, um especialista que fala {language} entrará em contacto para rever os seus objectivos e recomendar o próximo passo — o início de uma consulta, não um discurso de vendas automatizado.",
+    specialistPromise: "Após o envio, um especialista que fala {language} entrará em contacto para rever os seus objectivos e recomendar o próximo passo - o início de uma consulta, não um discurso de vendas automatizado.",
     metaTitle: "Imobiliário em Manhattan para compradores de {country}",
     metaDescription: "Guia para compradores de {country}: elegibilidade, condomínio vs. co-op, compra à distância, custos e bairros. Acompanhamento em {language}.",
     ui:     {
@@ -1385,17 +1385,17 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       mistakesEyebrow: "Erros frequentes",
       mistakesTitle: "O que evitar antes de propor",
       teamEyebrow: "A sua equipa",
-      teamTitle: "Quem ajuda a decidir — e a fechar",
+      teamTitle: "Quem ajuda a decidir - e a fechar",
       teamDescription: "As compras em Manhattan são conduzidas por advogados. Coordenamos a camada consultiva para alinhar estrutura, bairro e calendário.",
       resourcesEyebrow: "Recursos",
       resourcesTitle: "Aprofundar antes de se comprometer",
       ctaTitle: "Pronto para uma conversa estratégica?",
-      ctaDescription: "Partilhe objectivos e calendário. Um especialista que fala {language} responderá com um próximo passo claro — não uma sequência genérica de vendas.",
+      ctaDescription: "Partilhe objectivos e calendário. Um especialista que fala {language} responderá com um próximo passo claro - não uma sequência genérica de vendas.",
       ctaLabel: "Pedir estratégia",
       formEyebrow: "Pedido de estratégia",
       submitLabel: "Enviar pedido",
       successEyebrow: "Recebido",
-      successTitle: "Obrigado — entraremos em contacto",
+      successTitle: "Obrigado - entraremos em contacto",
       successWait: "Um especialista reverá o seu pedido na sua língua preferida.",
       roadmapLabel: "O seu roteiro",
       fieldFullName: "Nome completo",
@@ -1414,10 +1414,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "pt-BR":   {
-    heroTitle: "Comprar em Manhattan a partir do {country} — clareza antes da busca.",
+    heroTitle: "Comprar em Manhattan a partir do {country} - clareza antes da busca.",
     heroDescription: "Guia para compradores do {country}: estruturas de propriedade, processo, bairros e financiamento. Após o envio, um especialista que fala {language} entrará em contato.",
     introTitle: "Por que Manhattan é diferente",
-    introBody: ["O mercado de Manhattan gira em torno de edifícios e estruturas de propriedade — não só anúncios. A cidadania americana geralmente não é exigida; co-ops, financiamento e diligência importam mais.", "A Agent Kammer trabalha a decisão primeiro: comprar ou não, qual estrutura, quais bairros e qual cronograma — depois a execução."],
+    introBody: ["O mercado de Manhattan gira em torno de edifícios e estruturas de propriedade - não só anúncios. A cidadania americana geralmente não é exigida; co-ops, financiamento e diligência importam mais.", "A Agent Kammer trabalha a decisão primeiro: comprar ou não, qual estrutura, quais bairros e qual cronograma - depois a execução."],
     faqs:     [
             {
         q: "Compradores do {country} podem adquirir imóvel em Manhattan?",
@@ -1443,29 +1443,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Estoque mais novo e edifícios orientados a serviço — comum em perfis internacionais.",
+        blurb: "Estoque mais novo e edifícios orientados a serviço - comum em perfis internacionais.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Ruas tranquilas e alta qualidade — famílias de longo prazo.",
+        blurb: "Ruas tranquilas e alta qualidade - famílias de longo prazo.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Parques, escolas e vida diária — relocação familiar.",
+        blurb: "Parques, escolas e vida diária - relocação familiar.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Valor relativo e flexibilidade — investimento ou pied-à-terre.",
+        blurb: "Valor relativo e flexibilidade - investimento ou pied-à-terre.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Objetivo e cronograma",
-        text: "Moradia, pied-à-terre, investimento ou relocação — o objetivo guia a estrutura.",
+        text: "Moradia, pied-à-terre, investimento ou relocação - o objetivo guia a estrutura.",
       },
             {
         title: "Caminho de propriedade",
@@ -1473,7 +1473,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Capital",
-        text: "Cash, financiamento ou híbrido — compliance cedo.",
+        text: "Cash, financiamento ou híbrido - compliance cedo.",
       },
             {
         title: "Diligência do edifício",
@@ -1500,12 +1500,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Consultor fiscal / estrutura",
-        description: "Estrutura de holding e tributação transfronteiriça — encaminhamento quando necessário.",
+        description: "Estrutura de holding e tributação transfronteiriça - encaminhamento quando necessário.",
       },
     ],
     formHeadline: "Solicite sua estratégia em Manhattan",
     formSubhead: "Conte sua situação. Após o envio, um especialista que fala {language} entrará em contato.",
-    specialistPromise: "Após o envio, um especialista que fala {language} entrará em contato para revisar seus objetivos e recomendar o próximo passo — o início de uma consultoria, não uma venda automática.",
+    specialistPromise: "Após o envio, um especialista que fala {language} entrará em contato para revisar seus objetivos e recomendar o próximo passo - o início de uma consultoria, não uma venda automática.",
     metaTitle: "Imóveis em Manhattan para compradores do {country}",
     metaDescription: "Guia para compradores do {country}: elegibilidade, condo vs co-op, compra remota, custos e bairros. Acompanhamento em {language}.",
     ui:     {
@@ -1530,7 +1530,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Pedido de estratégia",
       submitLabel: "Enviar",
       successEyebrow: "Recebido",
-      successTitle: "Obrigado — entraremos em contato",
+      successTitle: "Obrigado - entraremos em contato",
       successWait: "Um especialista revisará seu pedido no seu idioma.",
       roadmapLabel: "Seu roteiro",
       fieldFullName: "Nome completo",
@@ -1549,10 +1549,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "nl":   {
-    heroTitle: "Koop in Manhattan bij {country} – duidelijkheid vóór zoeken.",
+    heroTitle: "Koop in Manhattan bij {country} - duidelijkheid vóór zoeken.",
     heroDescription: "{country} Kopersgids: eigendomsstructuren, processen, buurten en financiering. Na verzending neemt een specialist die {language} spreekt contact met u op.",
     introTitle: "Waarom Manhattan anders is",
-    introBody: ["De markt in Manhattan is gebouwd op gebouwen en onroerendgoedstructuren – niet alleen op vermeldingen. Amerikaans staatsburgerschap is over het algemeen niet vereist; coöperaties, financiering en due diligence zijn belangrijker.", "Agent Kammer adviseert eerst de beslissing: kopen of niet, welke structuur, welke buurten, welke planning – en dan de uitvoering."],
+    introBody: ["De markt in Manhattan is gebouwd op gebouwen en onroerendgoedstructuren - niet alleen op vermeldingen. Amerikaans staatsburgerschap is over het algemeen niet vereist; coöperaties, financiering en due diligence zijn belangrijker.", "Agent Kammer adviseert eerst de beslissing: kopen of niet, welke structuur, welke buurten, welke planning - en dan de uitvoering."],
     faqs:     [
             {
         q: "Kunnen inwoners van {country} kopen in Manhattan?",
@@ -1578,7 +1578,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Recente gebouwen en diensten – gebruikelijk voor internationale profielen.",
+        blurb: "Recente gebouwen en diensten - gebruikelijk voor internationale profielen.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
@@ -1588,19 +1588,19 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         name: "Upper West Side",
-        blurb: "Parken, scholen en het dagelijks leven – gezinsverhuizing.",
+        blurb: "Parken, scholen en het dagelijks leven - gezinsverhuizing.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Relatieve waarde en huurflexibiliteit — investering of pied-à-terre.",
+        blurb: "Relatieve waarde en huurflexibiliteit - investering of pied-à-terre.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Doelstelling en tijdschema",
-        text: "Woonplaats, pied-à-terre, investering of verhuizing – het doel bepaalt de structuur.",
+        text: "Woonplaats, pied-à-terre, investering of verhuizing - het doel bepaalt de structuur.",
       },
             {
         title: "Eigendomsstructuur",
@@ -1635,7 +1635,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Belastingadvies/structuur",
-        description: "Holdingstructuur en grensoverschrijdende belastingheffing – begeleiding indien nodig.",
+        description: "Holdingstructuur en grensoverschrijdende belastingheffing - begeleiding indien nodig.",
       },
     ],
     formHeadline: "Vraag uw Manhattan-strategie aan",
@@ -1684,10 +1684,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "sv":   {
-    heroTitle: "Köp på Manhattan från {country} — klarhet före sökning.",
+    heroTitle: "Köp på Manhattan från {country} - klarhet före sökning.",
     heroDescription: "{country} Köpguide: Ägarstrukturer, processer, grannskap och finansiering. Efter sändningen kommer en specialist som talar {language} att kontakta dig.",
     introTitle: "Varför Manhattan är annorlunda",
-    introBody: ["Manhattan-marknaden bygger på byggnader och fastighetsstrukturer – inte bara listor. U.S.A. medborgarskap krävs i allmänhet inte; kooperativ, finansiering och due diligence är viktigare.", "Agent Kammer ger först råd om beslutet: att köpa eller inte, vilken struktur, vilka stadsdelar, vilket schema - sedan utförandet."],
+    introBody: ["Manhattan-marknaden bygger på byggnader och fastighetsstrukturer - inte bara listor. U.S.A. medborgarskap krävs i allmänhet inte; kooperativ, finansiering och due diligence är viktigare.", "Agent Kammer ger först råd om beslutet: att köpa eller inte, vilken struktur, vilka stadsdelar, vilket schema - sedan utförandet."],
     faqs:     [
             {
         q: "Kan {country}-medborgare köpa på Manhattan?",
@@ -1713,29 +1713,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Senaste byggnader och tjänster — vanligt för internationella profiler.",
+        blurb: "Senaste byggnader och tjänster - vanligt för internationella profiler.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Tysta gator och kvalitetsbygge — långsiktigt familjeval.",
+        blurb: "Tysta gator och kvalitetsbygge - långsiktigt familjeval.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Parker, skolor och vardagsliv — familjeflyttning.",
+        blurb: "Parker, skolor och vardagsliv - familjeflyttning.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Relativt värde och hyresflexibilitet — investering eller pied-à-terre.",
+        blurb: "Relativt värde och hyresflexibilitet - investering eller pied-à-terre.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Mål och tidsplan",
-        text: "Bostad, pied-à-terre, investering eller omlokalisering — syftet styr strukturen.",
+        text: "Bostad, pied-à-terre, investering eller omlokalisering - syftet styr strukturen.",
       },
             {
         title: "Ägarstruktur",
@@ -1743,7 +1743,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Kapital",
-        text: "Kontanter, finansiering eller blandad — efterlevnad tidigt.",
+        text: "Kontanter, finansiering eller blandad - efterlevnad tidigt.",
       },
             {
         title: "Bygga due diligence",
@@ -1770,7 +1770,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Skatterådgivning/struktur",
-        description: "Holdingstruktur och gränsöverskridande beskattning — vägledning vid behov.",
+        description: "Holdingstruktur och gränsöverskridande beskattning - vägledning vid behov.",
       },
     ],
     formHeadline: "Begär din Manhattan-strategi",
@@ -1800,7 +1800,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Policyförfrågan",
       submitLabel: "Skicka",
       successEyebrow: "Mottagen",
-      successTitle: "Tack – vi kontaktar dig",
+      successTitle: "Tack - vi kontaktar dig",
       successWait: "En specialist granskar din begäran på ditt språk.",
       roadmapLabel: "Din färdplan",
       fieldFullName: "Fullständigt namn",
@@ -1819,7 +1819,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "nb":   {
-    heroTitle: "Kjøp på Manhattan fra {country} — klarhet før søk.",
+    heroTitle: "Kjøp på Manhattan fra {country} - klarhet før søk.",
     heroDescription: "{country} Kjøperveiledning: Eierskapsstrukturer, prosesser, nabolag og finansiering. Etter sending vil en spesialist som snakker {language} kontakte deg.",
     introTitle: "Hvorfor Manhattan er annerledes",
     introBody: ["Manhattan-markedet er bygget på bygninger og eiendomsstrukturer - ikke bare oppføringer. Amerikansk statsborgerskap er vanligvis ikke påkrevd; co-ops, finansiering og due diligence betyr mer.", "Agent Kammer gir først råd om beslutningen: å kjøpe eller ikke, hvilken struktur, hvilke nabolag, hvilken tidsplan - deretter utførelsen."],
@@ -1848,29 +1848,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Nyere bygninger og tjenester – vanlig for internasjonale profiler.",
+        blurb: "Nyere bygninger og tjenester - vanlig for internasjonale profiler.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Stille gater og kvalitetskonstruksjon — langsiktig familievalg.",
+        blurb: "Stille gater og kvalitetskonstruksjon - langsiktig familievalg.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Parker, skoler og dagligliv — familieflytting.",
+        blurb: "Parker, skoler og dagligliv - familieflytting.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Relativ verdi og leiefleksibilitet — investering eller pied-à-terre.",
+        blurb: "Relativ verdi og leiefleksibilitet - investering eller pied-à-terre.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Mål og tidsplan",
-        text: "Bosted, pied-à-terre, investering eller flytting — formålet styrer strukturen.",
+        text: "Bosted, pied-à-terre, investering eller flytting - formålet styrer strukturen.",
       },
             {
         title: "Eierstruktur",
@@ -1878,7 +1878,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Kapital",
-        text: "Kontanter, finansiering eller blandet – overholdelse tidlig.",
+        text: "Kontanter, finansiering eller blandet - overholdelse tidlig.",
       },
             {
         title: "Bygge due diligence",
@@ -1905,12 +1905,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Skatteråd/struktur",
-        description: "Beholdningsstruktur og grenseoverskridende beskatning — veiledning om nødvendig.",
+        description: "Beholdningsstruktur og grenseoverskridende beskatning - veiledning om nødvendig.",
       },
     ],
     formHeadline: "Be om din Manhattan-strategi",
     formSubhead: "Beskriv situasjonen din. Etter sending vil en spesialist som snakker {language} kontakte deg.",
-    specialistPromise: "Etter sending vil en spesialist som snakker {language} kontakte deg for å vurdere målene dine og anbefale neste trinn – starten på en konsultasjon, ikke et automatisert salg.",
+    specialistPromise: "Etter sending vil en spesialist som snakker {language} kontakte deg for å vurdere målene dine og anbefale neste trinn - starten på en konsultasjon, ikke et automatisert salg.",
     metaTitle: "Manhattan eiendom for {country}-kjøpere",
     metaDescription: "Veiledning for {country}-kjøpere: kvalifisering, leilighet vs. co-op, fjernkjøp, kostnader og nabolag. Sporet på {language}.",
     ui:     {
@@ -1935,7 +1935,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Forespørsel om retningslinjer",
       submitLabel: "Sende",
       successEyebrow: "Mottatt",
-      successTitle: "Takk – vi kontakter deg",
+      successTitle: "Takk - vi kontakter deg",
       successWait: "En spesialist vil vurdere forespørselen din på ditt språk.",
       roadmapLabel: "Veikartet ditt",
       fieldFullName: "Fullt navn",
@@ -1954,7 +1954,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "da":   {
-    heroTitle: "Køb på Manhattan fra {country} — klarhed før søgning.",
+    heroTitle: "Køb på Manhattan fra {country} - klarhed før søgning.",
     heroDescription: "{country} Købervejledning: Ejerskabsstrukturer, processer, kvarterer og finansiering. Efter afsendelsen vil en specialist, der taler {language}, kontakte dig.",
     introTitle: "Hvorfor Manhattan er anderledes",
     introBody: ["Manhattan-markedet er bygget på bygninger og ejendomsstrukturer - ikke kun fortegnelser. amerikansk statsborgerskab er generelt ikke påkrævet; co-ops, finansiering og due diligence betyder mere.", "Agent Kammer rådgiver først beslutningen: at købe eller ej, hvilken struktur, hvilke kvarterer, hvilken tidsplan - derefter udførelsen."],
@@ -1983,29 +1983,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Nylige bygninger og tjenester — fælles for internationale profiler.",
+        blurb: "Nylige bygninger og tjenester - fælles for internationale profiler.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Stille gader og kvalitetsbyggeri — langsigtet familievalg.",
+        blurb: "Stille gader og kvalitetsbyggeri - langsigtet familievalg.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Parker, skoler og dagligdagen — familieflytning.",
+        blurb: "Parker, skoler og dagligdagen - familieflytning.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Relativ værdi og lejefleksibilitet — investering eller pied-à-terre.",
+        blurb: "Relativ værdi og lejefleksibilitet - investering eller pied-à-terre.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Målsætning og tidsplan",
-        text: "Bopæl, pied-à-terre, investering eller flytning — formålet styrer strukturen.",
+        text: "Bopæl, pied-à-terre, investering eller flytning - formålet styrer strukturen.",
       },
             {
         title: "Ejerstruktur",
@@ -2013,7 +2013,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Kapital",
-        text: "Kontanter, finansiering eller blandet — overholdelse tidligt.",
+        text: "Kontanter, finansiering eller blandet - overholdelse tidligt.",
       },
             {
         title: "Opbygning af due diligence",
@@ -2040,7 +2040,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Skatterådgivning/struktur",
-        description: "Beholdningsstruktur og grænseoverskridende beskatning — vejledning om nødvendigt.",
+        description: "Beholdningsstruktur og grænseoverskridende beskatning - vejledning om nødvendigt.",
       },
     ],
     formHeadline: "Anmod om din Manhattan-strategi",
@@ -2070,7 +2070,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Politikanmodning",
       submitLabel: "Sende",
       successEyebrow: "Modtaget",
-      successTitle: "Tak – vi kontakter dig",
+      successTitle: "Tak - vi kontakter dig",
       successWait: "En specialist vil gennemgå din anmodning på dit sprog.",
       roadmapLabel: "Din køreplan",
       fieldFullName: "Fulde navn",
@@ -2089,10 +2089,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "fi":   {
-    heroTitle: "Osta Manhattanilta {country}:stä – selkeys ennen hakua.",
+    heroTitle: "Osta Manhattanilta {country}:stä - selkeys ennen hakua.",
     heroDescription: "{country} Buyers Guide: Omistusrakenteet, prosessit, kaupunginosat ja rahoitus. Lähetyksen jälkeen {language}-kieltä puhuva asiantuntija ottaa sinuun yhteyttä.",
     introTitle: "Miksi Manhattan on erilainen",
-    introBody: ["Manhattanin markkinat perustuvat rakennuksiin ja kiinteistörakenteisiin – ei vain listauksiin. Yhdysvaltain kansalaisuutta ei yleensä vaadita; osuuskunnat, rahoitus ja due diligence ovat tärkeämpiä.", "Agent Kammer neuvoo ensin päätöstä: ostaa vai ei, mikä rakenne, mitkä kaupunginosat, mikä aikataulu - sitten toteutus."],
+    introBody: ["Manhattanin markkinat perustuvat rakennuksiin ja kiinteistörakenteisiin - ei vain listauksiin. Yhdysvaltain kansalaisuutta ei yleensä vaadita; osuuskunnat, rahoitus ja due diligence ovat tärkeämpiä.", "Agent Kammer neuvoo ensin päätöstä: ostaa vai ei, mikä rakenne, mitkä kaupunginosat, mikä aikataulu - sitten toteutus."],
     faqs:     [
             {
         q: "Voivatko {country}:n kansalaiset ostaa Manhattanilla?",
@@ -2118,29 +2118,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Viimeaikaiset rakennukset ja palvelut – yleisiä kansainvälisille profiileille.",
+        blurb: "Viimeaikaiset rakennukset ja palvelut - yleisiä kansainvälisille profiileille.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Hiljaiset kadut ja laadukas rakentaminen – pitkäaikainen perhevalinta.",
+        blurb: "Hiljaiset kadut ja laadukas rakentaminen - pitkäaikainen perhevalinta.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Puistot, koulut ja arki – perheen muuttaminen.",
+        blurb: "Puistot, koulut ja arki - perheen muuttaminen.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Suhteellinen arvo ja vuokran joustavuus – investointi tai pied-à-terre.",
+        blurb: "Suhteellinen arvo ja vuokran joustavuus - investointi tai pied-à-terre.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Tavoite ja aikataulu",
-        text: "Asuinpaikka, pied-à-terre, sijoitus tai muutto – tarkoitus ohjaa rakennetta.",
+        text: "Asuinpaikka, pied-à-terre, sijoitus tai muutto - tarkoitus ohjaa rakennetta.",
       },
             {
         title: "Omistusrakenne",
@@ -2148,7 +2148,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Pääoma",
-        text: "Käteinen, rahoitus tai seka – noudattaminen aikaisin.",
+        text: "Käteinen, rahoitus tai seka - noudattaminen aikaisin.",
       },
             {
         title: "Rakennus due diligence",
@@ -2175,12 +2175,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Veroneuvonta / rakenne",
-        description: "Omistusrakenne ja rajat ylittävä verotus – ohjeita tarvittaessa.",
+        description: "Omistusrakenne ja rajat ylittävä verotus - ohjeita tarvittaessa.",
       },
     ],
     formHeadline: "Pyydä Manhattan-strategiaasi",
     formSubhead: "Kuvaile tilannettasi. Lähetyksen jälkeen {language}-kieltä puhuva asiantuntija ottaa sinuun yhteyttä.",
-    specialistPromise: "Lähetyksen jälkeen {language}-kieltä puhuva asiantuntija ottaa sinuun yhteyttä tarkistaakseen tavoitteesi ja suositellakseen seuraavaa vaihetta – konsultoinnin aloittamista, ei automaattista myyntiä.",
+    specialistPromise: "Lähetyksen jälkeen {language}-kieltä puhuva asiantuntija ottaa sinuun yhteyttä tarkistaakseen tavoitteesi ja suositellakseen seuraavaa vaihetta - konsultoinnin aloittamista, ei automaattista myyntiä.",
     metaTitle: "Manhattanin kiinteistöt {country}:n ostajille",
     metaDescription: "Opas {country}:n ostajille: kelpoisuus, asunto vs. osuuskunta, etäosto, kustannukset ja kaupunginosat. Seurattu kielellä {language}.",
     ui:     {
@@ -2205,7 +2205,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Käytäntöpyyntö",
       submitLabel: "Lähetä",
       successEyebrow: "Vastaanotettu",
-      successTitle: "Kiitos – otamme sinuun yhteyttä",
+      successTitle: "Kiitos - otamme sinuun yhteyttä",
       successWait: "Asiantuntija tarkistaa pyyntösi kielelläsi.",
       roadmapLabel: "Sinun tiekarttasi",
       fieldFullName: "Koko nimi",
@@ -2224,10 +2224,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "pl":   {
-    heroTitle: "Kup na Manhattanie od {country} — przejrzystość przed wyszukiwaniem.",
+    heroTitle: "Kup na Manhattanie od {country} - przejrzystość przed wyszukiwaniem.",
     heroDescription: "{country} Przewodnik dla kupujących: Struktury własności, procesy, sąsiedztwo i finansowanie. Po wysłaniu skontaktuje się z Tobą specjalista posługujący się językiem {language}.",
     introTitle: "Dlaczego Manhattan jest inny",
-    introBody: ["Rynek Manhattanu opiera się na budynkach i konstrukcjach nieruchomości – a nie tylko na giełdach. Obywatelstwo amerykańskie generalnie nie jest wymagane; Większe znaczenie mają spółdzielnie, finansowanie i należyta staranność.", "Agent Kammer najpierw doradza w sprawie decyzji: kupić czy nie, jaki obiekt, jakie dzielnice, jaki harmonogram – potem realizacja."],
+    introBody: ["Rynek Manhattanu opiera się na budynkach i konstrukcjach nieruchomości - a nie tylko na giełdach. Obywatelstwo amerykańskie generalnie nie jest wymagane; Większe znaczenie mają spółdzielnie, finansowanie i należyta staranność.", "Agent Kammer najpierw doradza w sprawie decyzji: kupić czy nie, jaki obiekt, jakie dzielnice, jaki harmonogram - potem realizacja."],
     faqs:     [
             {
         q: "Czy obywatele {country} mogą kupować na Manhattanie?",
@@ -2253,29 +2253,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Najnowsze budynki i usługi — wspólne dla profili międzynarodowych.",
+        blurb: "Najnowsze budynki i usługi - wspólne dla profili międzynarodowych.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Ciche ulice i wysokiej jakości budownictwo — długoterminowy wybór rodziny.",
+        blurb: "Ciche ulice i wysokiej jakości budownictwo - długoterminowy wybór rodziny.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Parki, szkoły i życie codzienne — przeprowadzka rodzin.",
+        blurb: "Parki, szkoły i życie codzienne - przeprowadzka rodzin.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Wartość względna i elastyczność wynajmu – inwestycja lub pied-à-terre.",
+        blurb: "Wartość względna i elastyczność wynajmu - inwestycja lub pied-à-terre.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Cel i harmonogram",
-        text: "Rezydencja, pied-à-terre, inwestycja lub przeprowadzka – cel kieruje strukturą.",
+        text: "Rezydencja, pied-à-terre, inwestycja lub przeprowadzka - cel kieruje strukturą.",
       },
             {
         title: "Struktura własności",
@@ -2283,7 +2283,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Kapitał",
-        text: "Gotówka, finansowanie lub mieszana – wczesna zgodność.",
+        text: "Gotówka, finansowanie lub mieszana - wczesna zgodność.",
       },
             {
         title: "Budowanie należytej staranności",
@@ -2310,12 +2310,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Doradztwo podatkowe / struktura",
-        description: "Struktura holdingu i opodatkowanie transgraniczne – w razie potrzeby wytyczne.",
+        description: "Struktura holdingu i opodatkowanie transgraniczne - w razie potrzeby wytyczne.",
       },
     ],
     formHeadline: "Poproś o strategię na Manhattanie",
     formSubhead: "Opisz swoją sytuację. Po wysłaniu skontaktuje się z Tobą specjalista posługujący się językiem {language}.",
-    specialistPromise: "Po wysłaniu skontaktuje się z Tobą specjalista posługujący się językiem {language}, aby przejrzeć Twoje cele i zalecić kolejny krok – rozpoczęcie konsultacji, a nie automatycznej sprzedaży.",
+    specialistPromise: "Po wysłaniu skontaktuje się z Tobą specjalista posługujący się językiem {language}, aby przejrzeć Twoje cele i zalecić kolejny krok - rozpoczęcie konsultacji, a nie automatycznej sprzedaży.",
     metaTitle: "Nieruchomości na Manhattanie dla kupujących {country}",
     metaDescription: "Przewodnik dla kupujących w {country}: kwalifikowalność, mieszkanie a spółdzielnia, kupowanie na odległość, koszty i sąsiedztwo. Śledzone w {language}.",
     ui:     {
@@ -2340,7 +2340,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Żądanie dotyczące zasad",
       submitLabel: "Wysłać",
       successEyebrow: "Otrzymane",
-      successTitle: "Dziękujemy – skontaktujemy się z Tobą",
+      successTitle: "Dziękujemy - skontaktujemy się z Tobą",
       successWait: "Specjalista rozpatrzy Twoją prośbę w Twoim języku.",
       roadmapLabel: "Twój plan działania",
       fieldFullName: "Pełne imię i nazwisko",
@@ -2359,10 +2359,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "cs":   {
-    heroTitle: "Koupit na Manhattanu od {country} — přehlednost před hledáním.",
+    heroTitle: "Koupit na Manhattanu od {country} - přehlednost před hledáním.",
     heroDescription: "Průvodce kupujícími {country}: Vlastnické struktury, procesy, sousedství a financování. Po odeslání vás bude kontaktovat specialista, který mluví {language}.",
     introTitle: "Proč je Manhattan jiný",
-    introBody: ["Manhattanský trh je postaven na budovách a majetkových strukturách – nejen na výpisech. Americké občanství se obecně nevyžaduje; více záleží na kooperacích, financování a due diligence.", "Agent Kammer nejprve doporučí rozhodnutí: koupit či nekoupit, jakou strukturu, které čtvrti, jaký plán – pak provedení."],
+    introBody: ["Manhattanský trh je postaven na budovách a majetkových strukturách - nejen na výpisech. Americké občanství se obecně nevyžaduje; více záleží na kooperacích, financování a due diligence.", "Agent Kammer nejprve doporučí rozhodnutí: koupit či nekoupit, jakou strukturu, které čtvrti, jaký plán - pak provedení."],
     faqs:     [
             {
         q: "Mohou občané {country} nakupovat na Manhattanu?",
@@ -2388,29 +2388,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Nedávné budovy a služby – společné pro mezinárodní profily.",
+        blurb: "Nedávné budovy a služby - společné pro mezinárodní profily.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Klidné ulice a kvalitní výstavba — dlouhodobá rodinná volba.",
+        blurb: "Klidné ulice a kvalitní výstavba - dlouhodobá rodinná volba.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Parky, školy a každodenní život — stěhování rodin.",
+        blurb: "Parky, školy a každodenní život - stěhování rodin.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Relativní hodnota a flexibilita nájmu – investice nebo pied-à-terre.",
+        blurb: "Relativní hodnota a flexibilita nájmu - investice nebo pied-à-terre.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Cíl a harmonogram",
-        text: "Rezidence, pied-à-terre, investice nebo přemístění — účel řídí strukturu.",
+        text: "Rezidence, pied-à-terre, investice nebo přemístění - účel řídí strukturu.",
       },
             {
         title: "Vlastnická struktura",
@@ -2418,7 +2418,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Kapitál",
-        text: "Hotovostní, finanční nebo smíšené – včasné plnění.",
+        text: "Hotovostní, finanční nebo smíšené - včasné plnění.",
       },
             {
         title: "Budování due diligence",
@@ -2445,12 +2445,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Daňové poradenství / struktura",
-        description: "Holdingová struktura a přeshraniční zdanění – v případě potřeby pokyny.",
+        description: "Holdingová struktura a přeshraniční zdanění - v případě potřeby pokyny.",
       },
     ],
     formHeadline: "Vyžádejte si svou strategii na Manhattanu",
     formSubhead: "Popište svou situaci. Po odeslání vás bude kontaktovat specialista, který mluví {language}.",
-    specialistPromise: "Po odeslání vás bude kontaktovat specialista, který mluví {language}, aby zkontroloval vaše cíle a doporučí další krok – zahájení konzultace, nikoli automatizovaný prodej.",
+    specialistPromise: "Po odeslání vás bude kontaktovat specialista, který mluví {language}, aby zkontroloval vaše cíle a doporučí další krok - zahájení konzultace, nikoli automatizovaný prodej.",
     metaTitle: "Manhattan Real Estate pro kupující {country}",
     metaDescription: "Průvodce pro kupující z {country}: způsobilost, byt vs. co-op, vzdálený nákup, náklady a sousedství. Sledováno v {language}.",
     ui:     {
@@ -2475,7 +2475,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Žádost o zásady",
       submitLabel: "Poslat",
       successEyebrow: "Přijato",
-      successTitle: "Děkujeme – budeme vás kontaktovat",
+      successTitle: "Děkujeme - budeme vás kontaktovat",
       successWait: "Specialista zkontroluje vaši žádost ve vašem jazyce.",
       roadmapLabel: "Váš plán",
       fieldFullName: "Celé jméno",
@@ -2494,10 +2494,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "ro":   {
-    heroTitle: "Cumpărați în Manhattan de la {country} — claritate înainte de căutare.",
+    heroTitle: "Cumpărați în Manhattan de la {country} - claritate înainte de căutare.",
     heroDescription: "{country} Ghidul cumpărătorilor: structuri de proprietate, procese, vecinătăți și finanțare. După trimitere, vă va contacta un specialist care vorbește {language}.",
     introTitle: "De ce Manhattan este diferit",
-    introBody: ["Piața din Manhattan este construită pe clădiri și structuri de proprietate – nu doar pe listări. În general, nu este necesară cetățenia SUA; cooperativele, finanțarea și due diligence contează mai mult.", "Agent Kammer sfătuiește mai întâi decizia: să cumpărați sau nu, ce structură, ce cartiere, ce program — apoi execuția."],
+    introBody: ["Piața din Manhattan este construită pe clădiri și structuri de proprietate - nu doar pe listări. În general, nu este necesară cetățenia SUA; cooperativele, finanțarea și due diligence contează mai mult.", "Agent Kammer sfătuiește mai întâi decizia: să cumpărați sau nu, ce structură, ce cartiere, ce program - apoi execuția."],
     faqs:     [
             {
         q: "Cetățenii {country} pot cumpăra în Manhattan?",
@@ -2523,29 +2523,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Clădiri și servicii recente — comune pentru profilurile internaționale.",
+        blurb: "Clădiri și servicii recente - comune pentru profilurile internaționale.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Străzi liniștite și construcție de calitate — alegere de familie pe termen lung.",
+        blurb: "Străzi liniștite și construcție de calitate - alegere de familie pe termen lung.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Parcuri, școli și viața de zi cu zi — relocarea familiei.",
+        blurb: "Parcuri, școli și viața de zi cu zi - relocarea familiei.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Valoare relativă și flexibilitate de închiriere — investiție sau pied-à-terre.",
+        blurb: "Valoare relativă și flexibilitate de închiriere - investiție sau pied-à-terre.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Obiectiv și orar",
-        text: "Reședință, pied-à-terre, investiție sau relocare — scopul ghidează structura.",
+        text: "Reședință, pied-à-terre, investiție sau relocare - scopul ghidează structura.",
       },
             {
         title: "Structura proprietății",
@@ -2580,12 +2580,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Consiliere/structură fiscală",
-        description: "Structura holdingului și impozitarea transfrontalieră — îndrumări, dacă este necesar.",
+        description: "Structura holdingului și impozitarea transfrontalieră - îndrumări, dacă este necesar.",
       },
     ],
     formHeadline: "Solicitați-vă strategia Manhattan",
     formSubhead: "Descrieți situația dvs. După trimitere, vă va contacta un specialist care vorbește {language}.",
-    specialistPromise: "După trimitere, un specialist care vorbește {language} vă va contacta pentru a vă revizui obiectivele și a recomanda următorul pas — începerea unei consultații, nu o vânzare automată.",
+    specialistPromise: "După trimitere, un specialist care vorbește {language} vă va contacta pentru a vă revizui obiectivele și a recomanda următorul pas - începerea unei consultații, nu o vânzare automată.",
     metaTitle: "Manhattan Real Estate pentru cumpărătorii {country}",
     metaDescription: "Ghid pentru cumpărătorii {country}: eligibilitate, condo vs. cooperativă, cumpărare de la distanță, costuri și vecinătăți. Urmărit în {language}.",
     ui:     {
@@ -2629,10 +2629,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "hu":   {
-    heroTitle: "Vásároljon Manhattanben a következő országból: {country} – egyértelműség a keresés előtt.",
+    heroTitle: "Vásároljon Manhattanben a következő országból: {country} - egyértelműség a keresés előtt.",
     heroDescription: "{country} vásárlói útmutató: Tulajdonosi struktúrák, folyamatok, szomszédságok és finanszírozás. Az elküldést követően egy {language} nyelvet beszélő szakember felveszi Önnel a kapcsolatot.",
     introTitle: "Miért más Manhattan?",
-    introBody: ["A manhattani piac épületekre és ingatlanszerkezetekre épül – nem csak a listákra. Az Egyesült Államok állampolgársága általában nem szükséges; a szövetkezetek, a finanszírozás és a kellő gondosság fontosabb.", "Az Agent Kammer először a döntést tanácsolja: vásárolni vagy sem, melyik építményt, melyik környéket, melyik ütemezést - majd a végrehajtást."],
+    introBody: ["A manhattani piac épületekre és ingatlanszerkezetekre épül - nem csak a listákra. Az Egyesült Államok állampolgársága általában nem szükséges; a szövetkezetek, a finanszírozás és a kellő gondosság fontosabb.", "Az Agent Kammer először a döntést tanácsolja: vásárolni vagy sem, melyik építményt, melyik környéket, melyik ütemezést - majd a végrehajtást."],
     faqs:     [
             {
         q: "{country} állampolgárai vásárolhatnak Manhattanben?",
@@ -2658,29 +2658,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Legutóbbi épületek és szolgáltatások – közös a nemzetközi profiloknál.",
+        blurb: "Legutóbbi épületek és szolgáltatások - közös a nemzetközi profiloknál.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Csendes utcák és minőségi építkezés – hosszú távú családi választás.",
+        blurb: "Csendes utcák és minőségi építkezés - hosszú távú családi választás.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Parkok, iskolák és mindennapi élet – családok áthelyezése.",
+        blurb: "Parkok, iskolák és mindennapi élet - családok áthelyezése.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Relatív érték és bérleti díj rugalmassága – befektetés vagy pied-à-terre.",
+        blurb: "Relatív érték és bérleti díj rugalmassága - befektetés vagy pied-à-terre.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Cél és ütemterv",
-        text: "Lakóhely, pied-à-terre, befektetés vagy áthelyezés – a cél vezérli a szerkezetet.",
+        text: "Lakóhely, pied-à-terre, befektetés vagy áthelyezés - a cél vezérli a szerkezetet.",
       },
             {
         title: "Tulajdonosi szerkezet",
@@ -2688,7 +2688,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Tőke",
-        text: "Készpénz, finanszírozás vagy vegyes – korai megfelelés.",
+        text: "Készpénz, finanszírozás vagy vegyes - korai megfelelés.",
       },
             {
         title: "Építési átvilágítás",
@@ -2715,12 +2715,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Adótanácsadás / struktúra",
-        description: "Holdingstruktúra és határokon átnyúló adózás – szükség esetén útmutatás.",
+        description: "Holdingstruktúra és határokon átnyúló adózás - szükség esetén útmutatás.",
       },
     ],
     formHeadline: "Kérje manhattani stratégiáját",
     formSubhead: "Írja le helyzetét. Az elküldést követően egy {language} nyelvet beszélő szakember felveszi Önnel a kapcsolatot.",
-    specialistPromise: "Az elküldést követően egy {language} nyelvet beszélő szakember felveszi Önnel a kapcsolatot, hogy áttekintse céljait, és javasolja a következő lépést – a konzultáció megkezdését, nem pedig az automatizált értékesítést.",
+    specialistPromise: "Az elküldést követően egy {language} nyelvet beszélő szakember felveszi Önnel a kapcsolatot, hogy áttekintse céljait, és javasolja a következő lépést - a konzultáció megkezdését, nem pedig az automatizált értékesítést.",
     metaTitle: "Manhattani ingatlan {country} vásárlói számára",
     metaDescription: "Útmutató az {country} vásárlóinak: jogosultság, társasház kontra szövetkezet, távoli vásárlás, költségek és környékek. Nyomon követés: {language}.",
     ui:     {
@@ -2745,7 +2745,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Házirend kérés",
       submitLabel: "Elküld",
       successEyebrow: "Megkapta",
-      successTitle: "Köszönjük – felvesszük Önnel a kapcsolatot",
+      successTitle: "Köszönjük - felvesszük Önnel a kapcsolatot",
       successWait: "Egy szakértő megvizsgálja kérelmét az Ön nyelvén.",
       roadmapLabel: "Az Ön útiterve",
       fieldFullName: "Teljes név",
@@ -2764,10 +2764,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "el":   {
-    heroTitle: "Αγορά στο Μανχάταν από {country} — σαφήνεια πριν από την αναζήτηση.",
+    heroTitle: "Αγορά στο Μανχάταν από {country} - σαφήνεια πριν από την αναζήτηση.",
     heroDescription: "{country} Οδηγός αγοραστών: Δομές ιδιοκτησίας, διαδικασίες, γειτονιές και χρηματοδότηση. Μετά την αποστολή, ένας ειδικός που μιλάει {language} θα επικοινωνήσει μαζί σας.",
     introTitle: "Γιατί το Μανχάταν είναι διαφορετικό",
-    introBody: ["Η αγορά του Μανχάταν είναι χτισμένη σε κτίρια και κατασκευές ακινήτων — όχι μόνο σε καταχωρήσεις. Η υπηκοότητα των ΗΠΑ γενικά δεν απαιτείται. Οι συνεταιρισμοί, η χρηματοδότηση και η δέουσα επιμέλεια έχουν μεγαλύτερη σημασία.", "Ο Agent Kammer συμβουλεύει πρώτα την απόφαση: να αγοράσετε ή όχι, ποια δομή, ποιες γειτονιές, ποιο χρονοδιάγραμμα — μετά την εκτέλεση."],
+    introBody: ["Η αγορά του Μανχάταν είναι χτισμένη σε κτίρια και κατασκευές ακινήτων - όχι μόνο σε καταχωρήσεις. Η υπηκοότητα των ΗΠΑ γενικά δεν απαιτείται. Οι συνεταιρισμοί, η χρηματοδότηση και η δέουσα επιμέλεια έχουν μεγαλύτερη σημασία.", "Ο Agent Kammer συμβουλεύει πρώτα την απόφαση: να αγοράσετε ή όχι, ποια δομή, ποιες γειτονιές, ποιο χρονοδιάγραμμα - μετά την εκτέλεση."],
     faqs:     [
             {
         q: "Μπορούν οι υπήκοοι {country} να αγοράσουν στο Μανχάταν;",
@@ -2793,29 +2793,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Πρόσφατα κτίρια και υπηρεσίες — κοινά για διεθνή προφίλ.",
+        blurb: "Πρόσφατα κτίρια και υπηρεσίες - κοινά για διεθνή προφίλ.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Ήσυχοι δρόμοι και ποιοτική κατασκευή — μακροπρόθεσμη οικογενειακή επιλογή.",
+        blurb: "Ήσυχοι δρόμοι και ποιοτική κατασκευή - μακροπρόθεσμη οικογενειακή επιλογή.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Πάρκα, σχολεία και καθημερινή ζωή — μετεγκατάσταση οικογένειας.",
+        blurb: "Πάρκα, σχολεία και καθημερινή ζωή - μετεγκατάσταση οικογένειας.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Σχετική αξία και ευελιξία ενοικίασης — επένδυση ή εξαγορά.",
+        blurb: "Σχετική αξία και ευελιξία ενοικίασης - επένδυση ή εξαγορά.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Στόχος και χρονοδιάγραμμα",
-        text: "Κατοικία, εξοχική κατοικία, επένδυση ή μετεγκατάσταση — ο σκοπός καθοδηγεί τη δομή.",
+        text: "Κατοικία, εξοχική κατοικία, επένδυση ή μετεγκατάσταση - ο σκοπός καθοδηγεί τη δομή.",
       },
             {
         title: "Ιδιοκτησιακή δομή",
@@ -2823,7 +2823,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Κεφάλαιο",
-        text: "Μετρητά, χρηματοδότηση ή μεικτά — έγκαιρη συμμόρφωση.",
+        text: "Μετρητά, χρηματοδότηση ή μεικτά - έγκαιρη συμμόρφωση.",
       },
             {
         title: "Δημιουργία δέουσας επιμέλειας",
@@ -2850,12 +2850,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Φορολογικές συμβουλές / δομή",
-        description: "Δομή εκμετάλλευσης και διασυνοριακή φορολογία — καθοδήγηση εάν είναι απαραίτητο.",
+        description: "Δομή εκμετάλλευσης και διασυνοριακή φορολογία - καθοδήγηση εάν είναι απαραίτητο.",
       },
     ],
     formHeadline: "Ζητήστε τη στρατηγική σας στο Μανχάταν",
     formSubhead: "Περιγράψτε την κατάστασή σας. Μετά την αποστολή, ένας ειδικός που μιλάει {language} θα επικοινωνήσει μαζί σας.",
-    specialistPromise: "Μετά την αποστολή, ένας ειδικός που μιλάει {language} θα επικοινωνήσει μαζί σας για να ελέγξει τους στόχους σας και να σας προτείνει το επόμενο βήμα — την έναρξη μιας διαβούλευσης, όχι μιας αυτοματοποιημένης πώλησης.",
+    specialistPromise: "Μετά την αποστολή, ένας ειδικός που μιλάει {language} θα επικοινωνήσει μαζί σας για να ελέγξει τους στόχους σας και να σας προτείνει το επόμενο βήμα - την έναρξη μιας διαβούλευσης, όχι μιας αυτοματοποιημένης πώλησης.",
     metaTitle: "Manhattan Real Estate για {country} αγοραστές",
     metaDescription: "Οδηγός για {country} αγοραστές: καταλληλότητα, condo έναντι co-op, εξ αποστάσεως αγορές, κόστος και γειτονιές. Παρακολούθηση σε {language}.",
     ui:     {
@@ -2880,7 +2880,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Αίτημα πολιτικής",
       submitLabel: "Στέλνω",
       successEyebrow: "Ελήφθη",
-      successTitle: "Σας ευχαριστούμε — θα επικοινωνήσουμε μαζί σας",
+      successTitle: "Σας ευχαριστούμε - θα επικοινωνήσουμε μαζί σας",
       successWait: "Ένας ειδικός θα εξετάσει το αίτημά σας στη γλώσσα σας.",
       roadmapLabel: "Ο οδικός σας χάρτης",
       fieldFullName: "Ονοματεπώνυμο",
@@ -2899,10 +2899,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "ru":   {
-    heroTitle: "Покупайте на Манхэттене в {country} — ясность перед поиском.",
+    heroTitle: "Покупайте на Манхэттене в {country} - ясность перед поиском.",
     heroDescription: "{country} Руководство для покупателей: структуры собственности, процессы, районы и финансирование. После отправки с вами свяжется специалист, владеющий {language}.",
     introTitle: "Почему Манхэттен отличается от других",
-    introBody: ["Рынок Манхэттена построен на зданиях и объектах недвижимости, а не только на листингах. Гражданство США обычно не требуется; кооперативы, финансирование и комплексная проверка имеют большее значение.", "Agent Kammer сначала консультирует решение: покупать или нет, какое строение, какие кварталы, какой график — потом исполнение."],
+    introBody: ["Рынок Манхэттена построен на зданиях и объектах недвижимости, а не только на листингах. Гражданство США обычно не требуется; кооперативы, финансирование и комплексная проверка имеют большее значение.", "Agent Kammer сначала консультирует решение: покупать или нет, какое строение, какие кварталы, какой график - потом исполнение."],
     faqs:     [
             {
         q: "Могут ли граждане {country} совершать покупки на Манхэттене?",
@@ -2928,29 +2928,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Недавние здания и услуги — обычное дело для международных профилей.",
+        blurb: "Недавние здания и услуги - обычное дело для международных профилей.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Тихие улицы и качественное строительство — долгосрочный семейный выбор.",
+        blurb: "Тихие улицы и качественное строительство - долгосрочный семейный выбор.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Парки, школы и повседневная жизнь — семейный переезд.",
+        blurb: "Парки, школы и повседневная жизнь - семейный переезд.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Относительная стоимость и гибкость в аренде — для инвестиций или для проживания.",
+        blurb: "Относительная стоимость и гибкость в аренде - для инвестиций или для проживания.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Цель и график",
-        text: "Место жительства, жилое помещение, инвестиции или переезд — цель определяет структуру.",
+        text: "Место жительства, жилое помещение, инвестиции или переезд - цель определяет структуру.",
       },
             {
         title: "Структура собственности",
@@ -2958,7 +2958,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Капитал",
-        text: "Денежные средства, финансирование или смешанный вариант — соблюдение требований на ранней стадии.",
+        text: "Денежные средства, финансирование или смешанный вариант - соблюдение требований на ранней стадии.",
       },
             {
         title: "Проведение комплексной проверки",
@@ -2985,12 +2985,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Налоговые консультации/структура",
-        description: "Холдинговая структура и трансграничное налогообложение — рекомендации при необходимости.",
+        description: "Холдинговая структура и трансграничное налогообложение - рекомендации при необходимости.",
       },
     ],
     formHeadline: "Запросите свою стратегию Манхэттена",
     formSubhead: "Опишите вашу ситуацию. После отправки с вами свяжется специалист, владеющий {language}.",
-    specialistPromise: "После отправки с вами свяжется специалист, владеющий {language}, чтобы уточнить ваши цели и порекомендовать следующий шаг — начало консультации, а не автоматической продажи.",
+    specialistPromise: "После отправки с вами свяжется специалист, владеющий {language}, чтобы уточнить ваши цели и порекомендовать следующий шаг - начало консультации, а не автоматической продажи.",
     metaTitle: "Недвижимость на Манхэттене для покупателей {country}",
     metaDescription: "Руководство для покупателей {country}: право на участие, кондоминиум или кооператив, дистанционная покупка, стоимость и районы. Отслеживается на {language}.",
     ui:     {
@@ -3015,7 +3015,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Запрос политики",
       submitLabel: "Отправлять",
       successEyebrow: "Полученный",
-      successTitle: "Спасибо — мы с вами свяжемся",
+      successTitle: "Спасибо - мы с вами свяжемся",
       successWait: "Специалист рассмотрит ваш запрос на вашем языке.",
       roadmapLabel: "Ваша дорожная карта",
       fieldFullName: "Полное имя",
@@ -3034,10 +3034,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "uk":   {
-    heroTitle: "Купити в Манхеттені з {country} — зрозумілість перед пошуком.",
+    heroTitle: "Купити в Манхеттені з {country} - зрозумілість перед пошуком.",
     heroDescription: "Посібник для покупців {country}: структури власності, процеси, сусідство та фінансування. Після відправки з вами зв'яжеться фахівець, який володіє {language}.",
     introTitle: "Чому Манхеттен інший",
-    introBody: ["Ринок Манхеттена побудований на будівлях і структурах власності, а не просто на лістингах. Громадянство США зазвичай не вимагається; кооперативи, фінансування та належна обачність важливіші.", "Agent Kammer спочатку радить рішення: купувати чи ні, яку структуру, які райони, який розклад — потім виконання."],
+    introBody: ["Ринок Манхеттена побудований на будівлях і структурах власності, а не просто на лістингах. Громадянство США зазвичай не вимагається; кооперативи, фінансування та належна обачність важливіші.", "Agent Kammer спочатку радить рішення: купувати чи ні, яку структуру, які райони, який розклад - потім виконання."],
     faqs:     [
             {
         q: "Чи можуть громадяни {country} купувати на Мангеттені?",
@@ -3063,29 +3063,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Недавні будівлі та послуги — загальні для міжнародних профілів.",
+        blurb: "Недавні будівлі та послуги - загальні для міжнародних профілів.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Тихі вулиці та якісне будівництво — довгостроковий сімейний вибір.",
+        blurb: "Тихі вулиці та якісне будівництво - довгостроковий сімейний вибір.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Парки, школи та повсякденне життя — сімейний переїзд.",
+        blurb: "Парки, школи та повсякденне життя - сімейний переїзд.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Відносна вартість і гнучкість оренди — інвестиції чи приватні будинки.",
+        blurb: "Відносна вартість і гнучкість оренди - інвестиції чи приватні будинки.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Мета та графік",
-        text: "Резиденція, pied-à-terre, інвестиція чи переїзд — мета керує структурою.",
+        text: "Резиденція, pied-à-terre, інвестиція чи переїзд - мета керує структурою.",
       },
             {
         title: "Структура власності",
@@ -3093,7 +3093,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Капітал",
-        text: "Готівка, фінансування або змішаний — відповідність раніше.",
+        text: "Готівка, фінансування або змішаний - відповідність раніше.",
       },
             {
         title: "Побудова належної обачності",
@@ -3120,12 +3120,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Податкові консультації / уклад",
-        description: "Холдингова структура та транскордонне оподаткування — вказівки, якщо необхідно.",
+        description: "Холдингова структура та транскордонне оподаткування - вказівки, якщо необхідно.",
       },
     ],
     formHeadline: "Запитайте свою стратегію Манхеттена",
     formSubhead: "Опишіть свою ситуацію. Після відправки з вами зв'яжеться фахівець, який володіє {language}.",
-    specialistPromise: "Після відправлення з вами зв’яжеться фахівець, який володіє {language}, щоб ознайомитися з вашими цілями та порекомендувати наступний крок — початок консультації, а не автоматизованого продажу.",
+    specialistPromise: "Після відправлення з вами зв’яжеться фахівець, який володіє {language}, щоб ознайомитися з вашими цілями та порекомендувати наступний крок - початок консультації, а не автоматизованого продажу.",
     metaTitle: "Нерухомість Манхеттена для покупців {country}",
     metaDescription: "Посібник для покупців у {country}: відповідність вимогам, квартира чи кооператив, дистанційна покупка, витрати та сусідство. Відстежено такою мовою: {language}.",
     ui:     {
@@ -3150,7 +3150,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Запит політики",
       submitLabel: "Надіслати",
       successEyebrow: "Отримано",
-      successTitle: "Дякуємо — ми з вами зв'яжемось",
+      successTitle: "Дякуємо - ми з вами зв'яжемось",
       successWait: "Спеціаліст розгляне ваш запит на вашій мові.",
       roadmapLabel: "Ваша дорожня карта",
       fieldFullName: "ПІБ",
@@ -3169,7 +3169,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "tr":   {
-    heroTitle: "Manhattan'da {country}'ten satın alın — aramadan önce netlik.",
+    heroTitle: "Manhattan'da {country}'ten satın alın - aramadan önce netlik.",
     heroDescription: "{country} Alıcı Rehberi: Sahiplik Yapıları, Süreçler, Mahalleler ve Finansman. Gönderdikten sonra {language} bilen bir uzman sizinle iletişime geçecektir.",
     introTitle: "Manhattan neden farklı?",
     introBody: ["Manhattan pazarı sadece listelemeler değil, binalar ve mülk yapıları üzerine kuruludur. ABD vatandaşlığı genellikle gerekli değildir; kooperatifler, finansman ve durum tespiti daha önemlidir.", "Agent Kammer önce kararı tavsiye ediyor: satın almak ya da almamak, hangi yapıyı, hangi mahalleleri, hangi programı, ardından icrayı."],
@@ -3198,17 +3198,17 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Yeni binalar ve hizmetler — uluslararası profiller için ortaktır.",
+        blurb: "Yeni binalar ve hizmetler - uluslararası profiller için ortaktır.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Sessiz sokaklar ve kaliteli inşaat — uzun vadeli aile tercihi.",
+        blurb: "Sessiz sokaklar ve kaliteli inşaat - uzun vadeli aile tercihi.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Parklar, okullar ve günlük yaşam – ailenin taşınması.",
+        blurb: "Parklar, okullar ve günlük yaşam - ailenin taşınması.",
         typicalBuyer: "Family relocation",
       },
             {
@@ -3228,7 +3228,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Başkent",
-        text: "Nakit, finansman veya karışık – erken uyum.",
+        text: "Nakit, finansman veya karışık - erken uyum.",
       },
             {
         title: "Durum tespiti oluşturma",
@@ -3285,7 +3285,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Politika isteği",
       submitLabel: "Göndermek",
       successEyebrow: "Kabul edilmiş",
-      successTitle: "Teşekkür ederiz — sizinle iletişime geçeceğiz",
+      successTitle: "Teşekkür ederiz - sizinle iletişime geçeceğiz",
       successWait: "Bir uzman isteğinizi kendi dilinizde inceleyecektir.",
       roadmapLabel: "Yol haritanız",
       fieldFullName: "Ad Soyad",
@@ -3304,7 +3304,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "ar":   {
-    heroTitle: "اشترِ في مانهاتن من {country} — الوضوح قبل البحث.",
+    heroTitle: "اشترِ في مانهاتن من {country} - الوضوح قبل البحث.",
     heroDescription: "دليل المشترين في {country}: هياكل الملكية والعمليات والأحياء والتمويل. بعد الإرسال، سيتصل بك أحد المتخصصين الذين يتحدثون {language}.",
     introTitle: "لماذا مانهاتن مختلفة",
     introBody: ["تم بناء سوق مانهاتن على المباني والهياكل العقارية، وليس فقط على قوائم العقارات. الجنسية الأمريكية غير مطلوبة بشكل عام؛ التعاونيات والتمويل والعناية الواجبة أكثر أهمية.", "ينصح Agent Kammer أولاً باتخاذ القرار: الشراء أم لا، أي هيكل، أي أحياء، أي جدول زمني - ثم التنفيذ."],
@@ -3420,7 +3420,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "طلب السياسة",
       submitLabel: "يرسل",
       successEyebrow: "تلقى",
-      successTitle: "شكرا لك – سوف نتصل بك",
+      successTitle: "شكرا لك - سوف نتصل بك",
       successWait: "سيقوم أحد المتخصصين بمراجعة طلبك بلغتك.",
       roadmapLabel: "خريطة الطريق الخاصة بك",
       fieldFullName: "الاسم الكامل",
@@ -3574,7 +3574,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "vi":   {
-    heroTitle: "Mua ở Manhattan từ {country} — sự rõ ràng trước khi tìm kiếm.",
+    heroTitle: "Mua ở Manhattan từ {country} - sự rõ ràng trước khi tìm kiếm.",
     heroDescription: "{country} Hướng dẫn người mua: Cơ cấu sở hữu, quy trình, vùng lân cận và tài chính. Sau khi gửi, chuyên gia nói {language} sẽ liên hệ với bạn.",
     introTitle: "Tại sao Manhattan lại khác biệt",
     introBody: ["Thị trường Manhattan được xây dựng dựa trên các tòa nhà và cấu trúc bất động sản - không chỉ là danh sách niêm yết. Quốc tịch Hoa Kỳ thường không bắt buộc; hợp tác xã, tài chính và thẩm định quan trọng hơn.", "Agent Kammer trước tiên đưa ra quyết định: mua hay không, công trình nào, khu dân cư nào, lịch trình nào - sau đó là thực hiện."],
@@ -3665,7 +3665,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     ],
     formHeadline: "Yêu cầu chiến lược Manhattan của bạn",
     formSubhead: "Mô tả tình huống của bạn. Sau khi gửi, chuyên gia nói {language} sẽ liên hệ với bạn.",
-    specialistPromise: "Sau khi gửi, chuyên gia nói {language} sẽ liên hệ với bạn để xem xét mục tiêu của bạn và đề xuất bước tiếp theo — bắt đầu tư vấn chứ không phải bán hàng tự động.",
+    specialistPromise: "Sau khi gửi, chuyên gia nói {language} sẽ liên hệ với bạn để xem xét mục tiêu của bạn và đề xuất bước tiếp theo - bắt đầu tư vấn chứ không phải bán hàng tự động.",
     metaTitle: "Bất động sản Manhattan dành cho người mua {country}",
     metaDescription: "Hướng dẫn dành cho người mua {country}: tính đủ điều kiện, căn hộ chung cư so với hợp tác xã, mua từ xa, chi phí và vùng lân cận. Được theo dõi trong {language}.",
     ui:     {
@@ -3709,7 +3709,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "th":   {
-    heroTitle: "ซื้อในแมนฮัตตันจาก {country} — ความชัดเจนก่อนการค้นหา",
+    heroTitle: "ซื้อในแมนฮัตตันจาก {country} - ความชัดเจนก่อนการค้นหา",
     heroDescription: "คู่มือผู้ซื้อ {country}: โครงสร้างการเป็นเจ้าของ กระบวนการ บริเวณใกล้เคียง และการจัดหาเงินทุน หลังจากส่งแล้ว ผู้เชี่ยวชาญที่พูดได้ {language} จะติดต่อคุณ",
     introTitle: "เหตุใดแมนฮัตตันจึงแตกต่าง",
     introBody: ["ตลาดแมนฮัตตันสร้างขึ้นจากอาคารและโครงสร้างทรัพย์สิน ไม่ใช่แค่รายการสินค้าเท่านั้น โดยทั่วไปแล้วไม่จำเป็นต้องมีสัญชาติอเมริกัน สหกรณ์ การเงิน และความรอบคอบมีความสำคัญมากกว่า", "Agent Kammer ให้คำแนะนำในการตัดสินใจก่อน: จะซื้อหรือไม่ โครงสร้างไหน ย่านไหน กำหนดการไหน จากนั้นจึงดำเนินการ"],
@@ -3738,29 +3738,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "อาคารและบริการล่าสุด — เป็นเรื่องธรรมดาสำหรับโปรไฟล์ระดับนานาชาติ",
+        blurb: "อาคารและบริการล่าสุด - เป็นเรื่องธรรมดาสำหรับโปรไฟล์ระดับนานาชาติ",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "ถนนที่เงียบสงบและการก่อสร้างที่มีคุณภาพ — ทางเลือกของครอบครัวในระยะยาว",
+        blurb: "ถนนที่เงียบสงบและการก่อสร้างที่มีคุณภาพ - ทางเลือกของครอบครัวในระยะยาว",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "สวนสาธารณะ โรงเรียน และชีวิตประจำวัน — การย้ายถิ่นฐานของครอบครัว",
+        blurb: "สวนสาธารณะ โรงเรียน และชีวิตประจำวัน - การย้ายถิ่นฐานของครอบครัว",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "มูลค่าสัมพัทธ์และความยืดหยุ่นในการเช่า — การลงทุนหรือ pied-à-terre",
+        blurb: "มูลค่าสัมพัทธ์และความยืดหยุ่นในการเช่า - การลงทุนหรือ pied-à-terre",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "วัตถุประสงค์และตารางเวลา",
-        text: "ที่พักอาศัย pied-à-terre การลงทุน หรือการย้ายที่ตั้ง — วัตถุประสงค์เป็นแนวทางในโครงสร้าง",
+        text: "ที่พักอาศัย pied-à-terre การลงทุน หรือการย้ายที่ตั้ง - วัตถุประสงค์เป็นแนวทางในโครงสร้าง",
       },
             {
         title: "โครงสร้างการเป็นเจ้าของ",
@@ -3768,7 +3768,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "เมืองหลวง",
-        text: "เงินสด การเงิน หรือแบบผสม — ปฏิบัติตามข้อกำหนดแต่เนิ่นๆ",
+        text: "เงินสด การเงิน หรือแบบผสม - ปฏิบัติตามข้อกำหนดแต่เนิ่นๆ",
       },
             {
         title: "การสร้างความรอบคอบ",
@@ -3795,7 +3795,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "คำแนะนำ/โครงสร้างภาษี",
-        description: "โครงสร้างการถือครองและการเก็บภาษีข้ามพรมแดน — คำแนะนำหากจำเป็น",
+        description: "โครงสร้างการถือครองและการเก็บภาษีข้ามพรมแดน - คำแนะนำหากจำเป็น",
       },
     ],
     formHeadline: "ขอกลยุทธ์แมนฮัตตันของคุณ",
@@ -3825,7 +3825,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "คำขอนโยบาย",
       submitLabel: "ส่ง",
       successEyebrow: "ได้รับ",
-      successTitle: "ขอบคุณ — เราจะติดต่อคุณ",
+      successTitle: "ขอบคุณ - เราจะติดต่อคุณ",
       successWait: "ผู้เชี่ยวชาญจะตรวจสอบคำขอของคุณในภาษาของคุณ",
       roadmapLabel: "แผนงานของคุณ",
       fieldFullName: "ชื่อเต็ม",
@@ -3844,10 +3844,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "id":   {
-    heroTitle: "Beli di Manhattan dari {country} — kejelasan sebelum pencarian.",
+    heroTitle: "Beli di Manhattan dari {country} - kejelasan sebelum pencarian.",
     heroDescription: "Panduan Pembeli {country}: Struktur Kepemilikan, Proses, Lingkungan dan Pembiayaan. Setelah mengirim, seorang spesialis yang berbicara {language} akan menghubungi Anda.",
     introTitle: "Mengapa Manhattan berbeda",
-    introBody: ["Pasar Manhattan dibangun di atas bangunan dan struktur properti — bukan hanya listing. Kewarganegaraan AS umumnya tidak diperlukan; koperasi, pembiayaan dan uji tuntas lebih penting.", "Agent Kammer pertama-tama menyarankan keputusan: membeli atau tidak, struktur yang mana, lingkungan yang mana, jadwal yang mana — lalu pelaksanaannya."],
+    introBody: ["Pasar Manhattan dibangun di atas bangunan dan struktur properti - bukan hanya listing. Kewarganegaraan AS umumnya tidak diperlukan; koperasi, pembiayaan dan uji tuntas lebih penting.", "Agent Kammer pertama-tama menyarankan keputusan: membeli atau tidak, struktur yang mana, lingkungan yang mana, jadwal yang mana - lalu pelaksanaannya."],
     faqs:     [
             {
         q: "Bisakah warga negara {country} membeli di Manhattan?",
@@ -3873,29 +3873,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Bangunan dan layanan terkini — umum untuk profil internasional.",
+        blurb: "Bangunan dan layanan terkini - umum untuk profil internasional.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Jalanan yang tenang dan konstruksi berkualitas — pilihan keluarga jangka panjang.",
+        blurb: "Jalanan yang tenang dan konstruksi berkualitas - pilihan keluarga jangka panjang.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Taman, sekolah, dan kehidupan sehari-hari — relokasi keluarga.",
+        blurb: "Taman, sekolah, dan kehidupan sehari-hari - relokasi keluarga.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Nilai relatif dan fleksibilitas sewa — investasi atau pied-à-terre.",
+        blurb: "Nilai relatif dan fleksibilitas sewa - investasi atau pied-à-terre.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Tujuan dan jadwal",
-        text: "Tempat tinggal, pied-à-terre, investasi atau relokasi — tujuan memandu struktur tersebut.",
+        text: "Tempat tinggal, pied-à-terre, investasi atau relokasi - tujuan memandu struktur tersebut.",
       },
             {
         title: "Struktur kepemilikan",
@@ -3903,7 +3903,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Modal",
-        text: "Tunai, pembiayaan atau campuran – kepatuhan sejak dini.",
+        text: "Tunai, pembiayaan atau campuran - kepatuhan sejak dini.",
       },
             {
         title: "Membangun uji tuntas",
@@ -3930,12 +3930,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Saran/struktur perpajakan",
-        description: "Struktur kepemilikan dan perpajakan lintas batas — panduan jika diperlukan.",
+        description: "Struktur kepemilikan dan perpajakan lintas batas - panduan jika diperlukan.",
       },
     ],
     formHeadline: "Minta strategi Manhattan Anda",
     formSubhead: "Jelaskan situasi Anda. Setelah mengirim, seorang spesialis yang berbicara {language} akan menghubungi Anda.",
-    specialistPromise: "Setelah mengirim, pakar yang bisa berbahasa {language} akan menghubungi Anda untuk meninjau tujuan Anda dan merekomendasikan langkah berikutnya — memulai konsultasi, bukan penjualan otomatis.",
+    specialistPromise: "Setelah mengirim, pakar yang bisa berbahasa {language} akan menghubungi Anda untuk meninjau tujuan Anda dan merekomendasikan langkah berikutnya - memulai konsultasi, bukan penjualan otomatis.",
     metaTitle: "Manhattan Real Estate untuk Pembeli {country}",
     metaDescription: "Panduan untuk pembeli {country}: kelayakan, kondominium vs. koperasi, pembelian jarak jauh, biaya, dan lingkungan sekitar. Dilacak dalam {language}.",
     ui:     {
@@ -3960,7 +3960,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Permintaan kebijakan",
       submitLabel: "Mengirim",
       successEyebrow: "Diterima",
-      successTitle: "Terima kasih — kami akan menghubungi Anda",
+      successTitle: "Terima kasih - kami akan menghubungi Anda",
       successWait: "Seorang pakar akan meninjau permintaan Anda dalam bahasa Anda.",
       roadmapLabel: "Peta jalan Anda",
       fieldFullName: "Nama lengkap",
@@ -3979,10 +3979,10 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     },
   },
   "ms":   {
-    heroTitle: "Beli di Manhattan dari {country} — kejelasan sebelum carian.",
+    heroTitle: "Beli di Manhattan dari {country} - kejelasan sebelum carian.",
     heroDescription: "Panduan Pembeli {country}: Struktur Pemilikan, Proses, Kejiranan dan Pembiayaan. Selepas menghantar, pakar yang bercakap {language} akan menghubungi anda.",
     introTitle: "Mengapa Manhattan berbeza",
-    introBody: ["Pasar Manhattan dibina di atas bangunan dan struktur hartanah — bukan hanya penyenaraian. Kewarganegaraan A.S. pada umumnya tidak diperlukan; koperasi, pembiayaan dan usaha wajar lebih penting.", "Agent Kammer mula-mula menasihatkan keputusan: untuk membeli atau tidak, struktur mana, kejiranan mana, jadual mana - kemudian pelaksanaan."],
+    introBody: ["Pasar Manhattan dibina di atas bangunan dan struktur hartanah - bukan hanya penyenaraian. Kewarganegaraan A.S. pada umumnya tidak diperlukan; koperasi, pembiayaan dan usaha wajar lebih penting.", "Agent Kammer mula-mula menasihatkan keputusan: untuk membeli atau tidak, struktur mana, kejiranan mana, jadual mana - kemudian pelaksanaan."],
     faqs:     [
             {
         q: "Bolehkah warganegara {country} membeli di Manhattan?",
@@ -4008,29 +4008,29 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
     neighborhoods:     [
             {
         name: "Hudson Yards / West Midtown",
-        blurb: "Bangunan dan perkhidmatan terkini — biasa untuk profil antarabangsa.",
+        blurb: "Bangunan dan perkhidmatan terkini - biasa untuk profil antarabangsa.",
         typicalBuyer: "Executive / pied-à-terre",
       },
             {
         name: "Tribeca",
-        blurb: "Jalan yang tenang dan pembinaan berkualiti — pilihan keluarga jangka panjang.",
+        blurb: "Jalan yang tenang dan pembinaan berkualiti - pilihan keluarga jangka panjang.",
         typicalBuyer: "Family / long-term hold",
       },
             {
         name: "Upper West Side",
-        blurb: "Taman, sekolah dan kehidupan seharian — pemindahan keluarga.",
+        blurb: "Taman, sekolah dan kehidupan seharian - pemindahan keluarga.",
         typicalBuyer: "Family relocation",
       },
             {
         name: "Financial District",
-        blurb: "Nilai relatif dan fleksibiliti sewa — pelaburan atau pied-à-terre.",
+        blurb: "Nilai relatif dan fleksibiliti sewa - pelaburan atau pied-à-terre.",
         typicalBuyer: "Investment / pied-à-terre",
       },
     ],
     processSteps:     [
             {
         title: "Objektif dan jadual waktu",
-        text: "Kediaman, pied-à-terre, pelaburan atau penempatan semula — tujuan membimbing struktur.",
+        text: "Kediaman, pied-à-terre, pelaburan atau penempatan semula - tujuan membimbing struktur.",
       },
             {
         title: "Struktur pemilikan",
@@ -4038,7 +4038,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         title: "Modal",
-        text: "Tunai, pembiayaan atau campuran — pematuhan awal.",
+        text: "Tunai, pembiayaan atau campuran - pematuhan awal.",
       },
             {
         title: "Membina usaha wajar",
@@ -4065,12 +4065,12 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       },
             {
         role: "Nasihat cukai / struktur",
-        description: "Struktur pegangan dan cukai rentas sempadan — panduan jika perlu.",
+        description: "Struktur pegangan dan cukai rentas sempadan - panduan jika perlu.",
       },
     ],
     formHeadline: "Minta strategi Manhattan anda",
     formSubhead: "Terangkan keadaan anda. Selepas menghantar, pakar yang bercakap {language} akan menghubungi anda.",
-    specialistPromise: "Selepas menghantar, pakar yang bercakap {language} akan menghubungi anda untuk menyemak matlamat anda dan mengesyorkan langkah seterusnya — permulaan perundingan, bukan jualan automatik.",
+    specialistPromise: "Selepas menghantar, pakar yang bercakap {language} akan menghubungi anda untuk menyemak matlamat anda dan mengesyorkan langkah seterusnya - permulaan perundingan, bukan jualan automatik.",
     metaTitle: "Hartanah Manhattan untuk Pembeli {country}",
     metaDescription: "Panduan untuk pembeli {country}: kelayakan, kondo lwn koperasi, pembelian jauh, kos dan kawasan kejiranan. Dijejaki dalam {language}.",
     ui:     {
@@ -4095,7 +4095,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       formEyebrow: "Permintaan dasar",
       submitLabel: "Hantar",
       successEyebrow: "Diterima",
-      successTitle: "Terima kasih — kami akan menghubungi anda",
+      successTitle: "Terima kasih - kami akan menghubungi anda",
       successWait: "Pakar akan menyemak permintaan anda dalam bahasa anda.",
       roadmapLabel: "Pelan jalan anda",
       fieldFullName: "Nama penuh",

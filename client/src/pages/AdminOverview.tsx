@@ -165,13 +165,13 @@ export default function AdminOverview() {
       if (c.lifecycleStage === "call_ready") {
         items.push({
           id: `call-${c.id}`,
-          label: `Call requested lead — ${displayName(c)}`,
+          label: `Call requested lead - ${displayName(c)}`,
           when: "Today",
         });
       } else if ((c.leadScore ?? 0) >= 65) {
         items.push({
           id: `review-${c.id}`,
-          label: `Review profile — ${displayName(c)}`,
+          label: `Review profile - ${displayName(c)}`,
           when: "Tomorrow",
         });
       }
@@ -247,7 +247,7 @@ export default function AdminOverview() {
               International Buyer Hub
             </p>
             <p className="mt-1 text-[15px] text-[var(--ak-ink)]">
-              Public hub + country pages — strategy forms land in Clients / Lead Pipeline.
+              Public hub + country pages - strategy forms land in Clients / Lead Pipeline.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -528,7 +528,7 @@ export default function AdminOverview() {
                         await fetch(`/api/admin/clients/${selected.id}/task`, {
                           method: "POST",
                           headers: authHeaders(token),
-                          body: JSON.stringify({ content: `Follow up — ${displayName(selected)}` }),
+                          body: JSON.stringify({ content: `Follow up - ${displayName(selected)}` }),
                         });
                       }}
                     >
@@ -600,7 +600,7 @@ function Field({ label, value }: { label: string; value?: string | null }) {
       <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[var(--ak-muted)]">
         {label}
       </p>
-      <p className="mt-1 text-[13px] leading-relaxed text-[var(--ak-ink)]">{value?.trim() || "—"}</p>
+      <p className="mt-1 text-[13px] leading-relaxed text-[var(--ak-ink)]">{value?.trim() || " - "}</p>
     </div>
   );
 }

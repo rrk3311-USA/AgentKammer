@@ -248,7 +248,7 @@ export async function processDecisionGuideTurn(input: {
           : crossedCallReady
             ? "Review new qualified profile"
             : timelineNowUrgent
-              ? "Follow up — timeline under six months"
+              ? "Follow up - timeline under six months"
               : "Review updated housing goals"
         : undefined,
       taskDedupeKey: shouldCreateAdvisorTask

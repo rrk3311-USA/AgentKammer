@@ -37,7 +37,7 @@ export async function queueAttioSync(input: {
     dedupeKey: input.dedupeKey,
   });
 
-  // Fire-and-forget processing — never awaited by chat handlers
+  // Fire-and-forget processing - never awaited by chat handlers
   void processAttioSyncQueue().catch((err) => {
     console.error("[attio-sync] queue processor error", err);
   });

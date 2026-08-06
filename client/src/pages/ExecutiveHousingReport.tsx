@@ -119,7 +119,7 @@ export default function ExecutiveHousingReport() {
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Intelligence Hub</p>
           <h2 className="mt-3 font-serif text-3xl font-semibold text-brand-midnight">Continue From This Report</h2>
           <p className="mt-4 text-base leading-7 text-brand-graphite/72">
-            One report, many spokes — building reports, relocation guides, and profession-specific reads.
+            One report, many spokes - building reports, relocation guides, and profession-specific reads.
           </p>
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
             {liveHubLinks.map((item) => (

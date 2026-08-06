@@ -6,7 +6,7 @@ import { fetchHubSnapshot, HubShell, type HubSnapshot } from "./HubShell";
 export default function HubHome() {
   usePageMetadata({
     title: "Decision Hub",
-    description: "Your housing plan, next step, and advisor reviews — private and ready when you return.",
+    description: "Your housing plan, next step, and advisor reviews - private and ready when you return.",
     path: "/hub",
   });
 
@@ -22,7 +22,7 @@ export default function HubHome() {
   return (
     <HubShell
       title="Your plan"
-      description="A calm place to continue your housing decision — without pressure, and without starting over."
+      description="A calm place to continue your housing decision - without pressure, and without starting over."
     >
       {loading ? (
         <p className="text-sm text-brand-graphite">Loading your hub…</p>

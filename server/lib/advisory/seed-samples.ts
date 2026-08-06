@@ -22,7 +22,7 @@ const samples = [
     timeline: "3-6 months",
     currentLocation: "Austin, TX",
     targetLocations: ["Upper West Side", "Park Slope"],
-    budgetRange: "$1.6–2.1M",
+    budgetRange: "$1.6-2.1M",
     financingStatus: "Pre-approval in progress",
     message: "We're relocating for work and unsure where we'll feel at home.",
   },
@@ -38,7 +38,7 @@ const samples = [
     targetLocations: ["Brooklyn Heights", "Tribeca"],
     budgetRange: "Flexible",
     financingStatus: "Cash / portfolio",
-    message: "We may do nothing this year — want a clear plan either way.",
+    message: "We may do nothing this year - want a clear plan either way.",
   },
   {
     visitorId: "akv_seed_callready_003",
@@ -51,9 +51,9 @@ const samples = [
     timeline: "1-3 months",
     currentLocation: "Upper East Side",
     targetLocations: ["Tribeca", "West Village"],
-    budgetRange: "$2.5–3.5M",
+    budgetRange: "$2.5-3.5M",
     financingStatus: "Pre-approved",
-    message: "I'd like to request a call — we're ready to move this quarter.",
+    message: "I'd like to request a call - we're ready to move this quarter.",
     callRequested: true,
   },
   {
@@ -167,7 +167,7 @@ export async function seedAdvisorySamples(): Promise<{
           : sample.email
             ? "Prepare consultation brief"
             : "Continue Decision Guide",
-        internalAdvisorSummary: "Seed sample — safe for local demo.",
+        internalAdvisorSummary: "Seed sample - safe for local demo.",
       })) ?? row;
 
     const session = await ensureChatSession({

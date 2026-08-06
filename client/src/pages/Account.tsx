@@ -40,7 +40,7 @@ export default function Account() {
   usePageMetadata({
     title: "Resume My Decision",
     description:
-      "Resume your Decision with email and a one-time PIN — no password, no account to set up.",
+      "Resume your Decision with email and a one-time PIN - no password, no account to set up.",
     path: "/account",
   });
 
@@ -153,7 +153,7 @@ export default function Account() {
         title: body.hasChatHistory ? "Decision Map restored" : "Decision Hub ready",
         description: body.hasChatHistory
           ? "Your conversation is attached to this profile."
-          : "You can return anytime from this device — or verify email again elsewhere.",
+          : "You can return anytime from this device - or verify email again elsewhere.",
       });
       setLocation("/hub");
     } catch (err) {
@@ -172,7 +172,7 @@ export default function Account() {
       <PageHero
         eyebrow="Resume My Decision"
         title="Resume where you left off."
-        description="Chat freely — nothing to set up. When you want to keep your Decision Map, enter email, verify with a one-time PIN, and continue planning from anywhere."
+        description="Chat freely - nothing to set up. When you want to keep your Decision Map, enter email, verify with a one-time PIN, and continue planning from anywhere."
         art="decision-framework"
       />
 
@@ -186,9 +186,9 @@ export default function Account() {
                 description="You explore freely, invisibly, before anything is saved. Email + PIN only when you want to save or recover your Decision."
               />
               <ul className="mt-8 grid gap-3 text-sm leading-6 text-brand-graphite">
-                <li>Cookie — return on the same device</li>
-                <li>Email + PIN — recover on another device</li>
-                <li>Magic link — coming next from your Decision Recap email</li>
+                <li>Cookie - return on the same device</li>
+                <li>Email + PIN - recover on another device</li>
+                <li>Magic link - coming next from your Decision Recap email</li>
               </ul>
             </div>
 
@@ -199,7 +199,7 @@ export default function Account() {
               </h2>
               <p className="mt-3 text-sm leading-6 text-brand-graphite/75">
                 {phase === "email"
-                  ? "We never open your Decision Hub from email alone — only after the PIN."
+                  ? "We never open your Decision Hub from email alone - only after the PIN."
                   : `Code sent to ${email}. Expires in 15 minutes.`}
               </p>
 
@@ -286,7 +286,7 @@ export default function Account() {
                 <Link href="/" className="text-brand-navy underline decoration-brand-brass/40 underline-offset-2">
                   Continue on the homepage
                 </Link>
-                — your chat attaches when you verify.
+                - your chat attaches when you verify.
               </p>
             </div>
           </div>

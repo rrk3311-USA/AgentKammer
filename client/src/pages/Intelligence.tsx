@@ -15,9 +15,9 @@ const briefs = [
     date: "July 2026",
     title: "Relocation clients are buying turnkey service over raw square footage.",
     observation:
-      "Executives and international movers on compressed timelines are prioritizing concierge quality, lock-and-leave ease, and predictable building operations — even when that means fewer rooms.",
+      "Executives and international movers on compressed timelines are prioritizing concierge quality, lock-and-leave ease, and predictable building operations - even when that means fewer rooms.",
     implication:
-      "For 60–120 day arrivals, rent-first or amenity-strong condominiums often beat a co-op board process. For longer horizons, co-op value can still win if board timing is realistic.",
+      "For 60-120 day arrivals, rent-first or amenity-strong condominiums often beat a co-op board process. For longer horizons, co-op value can still win if board timing is realistic.",
     posture: "Rent first when the clock is short · Buy when residency is stable",
   },
   {
@@ -26,7 +26,7 @@ const briefs = [
     observation:
       "Buyers who start with apartments before geography burn weeks comparing incompatible lifestyles. UWS school logic, Tribeca loft scale, and FiDi commute convenience are different products.",
     implication:
-      "Lock a neighborhood thesis — or a two-neighborhood band — before touring. Building reports only become efficient after geography is narrowed.",
+      "Lock a neighborhood thesis - or a two-neighborhood band - before touring. Building reports only become efficient after geography is narrowed.",
     posture: "Choose geography first · Then study buildings",
   },
   {
@@ -53,7 +53,7 @@ export default function Intelligence() {
       <PageHero
         eyebrow="Building Reports"
         title="Market Briefs"
-        description="Short reads that answer one question: what should this change in your decision — timing, budget, neighborhood, building selection, or negotiation posture?"
+        description="Short reads that answer one question: what should this change in your decision - timing, budget, neighborhood, building selection, or negotiation posture?"
         art="market-briefs"
       />
       <ReportSubnav />

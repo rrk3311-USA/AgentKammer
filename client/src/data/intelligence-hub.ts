@@ -43,7 +43,7 @@ export const intelligenceHubCategories = [
 export const executiveHousingHubLinks: IntelligenceHubLink[] = [
   {
     label: "Finance Executive Guide",
-    description: "Tribeca vs Hudson Yards for finance professionals — commute, rhythm, and building fit.",
+    description: "Tribeca vs Hudson Yards for finance professionals - commute, rhythm, and building fit.",
     href: "/insights/tribeca-vs-hudson-yards-for-finance-professionals",
     status: "live",
   },
@@ -61,13 +61,13 @@ export const executiveHousingHubLinks: IntelligenceHubLink[] = [
   },
   {
     label: "Founder Relocation Guide",
-    description: "Establishing a New York base — leasing before ownership, building conviction first.",
+    description: "Establishing a New York base - leasing before ownership, building conviction first.",
     href: "/insights/leasing-today-buying-tomorrow",
     status: "live",
   },
   {
     label: "Lantern House Report",
-    description: "West Chelsea design-led luxury — resident profile, tradeoffs, and neighborhood context.",
+    description: "West Chelsea design-led luxury - resident profile, tradeoffs, and neighborhood context.",
     href: "/building-reports/lantern-house",
     status: "live",
   },
@@ -100,13 +100,13 @@ export const continueReadingDefaults: IntelligenceHubLink[] = [
   },
   {
     label: "Finance Executives In Manhattan",
-    description: "Tribeca vs Hudson Yards — two contracts with the city for finance professionals.",
+    description: "Tribeca vs Hudson Yards - two contracts with the city for finance professionals.",
     href: "/insights/tribeca-vs-hudson-yards-for-finance-professionals",
     status: "live",
   },
   {
     label: "International Relocation Guide",
-    description: "Study buildings before the first visit — Manhattan rewards pre-visit discipline.",
+    description: "Study buildings before the first visit - Manhattan rewards pre-visit discipline.",
     href: "/insights/studying-manhattan-buildings-before-your-first-visit",
     status: "live",
   },

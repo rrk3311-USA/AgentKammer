@@ -1,5 +1,5 @@
 /**
- * International Manhattan Buyer Hub — reusable content system.
+ * International Manhattan Buyer Hub - reusable content system.
  * English hub + localized country pages across major markets.
  * Content/UI packs live in international-locales.ts (applied via buildCountry).
  */
@@ -61,9 +61,9 @@ export type InternationalCountrySlug = string;
 export const INTERNATIONAL_HUB = {
   path: "/international",
   eyebrow: "International Buyers",
-  title: "Buying residential real estate in Manhattan — from anywhere.",
+  title: "Buying residential real estate in Manhattan - from anywhere.",
   description:
-    "A decision-first resource for international buyers. Understand ownership structures, process, neighborhoods, and financing before you commit — then request a strategy conversation with a specialist who speaks your language.",
+    "A decision-first resource for international buyers. Understand ownership structures, process, neighborhoods, and financing before you commit - then request a strategy conversation with a specialist who speaks your language.",
   metaTitle: "International Manhattan Buyers",
   metaDescription:
     "Premium guide for international buyers considering Manhattan real estate: FAQs, neighborhoods, process, and a strategy request with multilingual follow-up.",
@@ -95,7 +95,7 @@ const SHARED_TEAM: InternationalTeamRole[] = [
   {
     role: "Tax / Structure Counsel",
     description:
-      "Coordinates with your advisors on holding structure and cross-border tax questions — referred as needed.",
+      "Coordinates with your advisors on holding structure and cross-border tax questions - referred as needed.",
   },
 ];
 
@@ -109,30 +109,30 @@ const SHARED_RESOURCES = [
 const SHARED_NEIGHBORHOODS: InternationalNeighborhood[] = [
   {
     name: "Hudson Yards / West Midtown",
-    blurb: "Newer inventory and service-oriented buildings — common for international and corporate moves.",
+    blurb: "Newer inventory and service-oriented buildings - common for international and corporate moves.",
     typicalBuyer: "Executive / pied-à-terre",
   },
   {
     name: "Tribeca",
-    blurb: "Quieter streets and high building quality — often chosen for long-term family holds.",
+    blurb: "Quieter streets and high building quality - often chosen for long-term family holds.",
     typicalBuyer: "Family / long-term hold",
   },
   {
     name: "Upper West Side",
-    blurb: "Parks, schools, and daily livability — strong for family relocation.",
+    blurb: "Parks, schools, and daily livability - strong for family relocation.",
     typicalBuyer: "Family relocation",
   },
   {
     name: "Financial District",
-    blurb: "Relative value and rental flexibility — useful for investment or work-oriented stays.",
+    blurb: "Relative value and rental flexibility - useful for investment or work-oriented stays.",
     typicalBuyer: "Investment / pied-à-terre",
   },
 ];
 
 const SHARED_PROCESS = [
-  { title: "Clarify purpose & timeline", text: "Primary home, pied-à-terre, investment, family, or relocation — purpose drives structure." },
+  { title: "Clarify purpose & timeline", text: "Primary home, pied-à-terre, investment, family, or relocation - purpose drives structure." },
   { title: "Choose ownership path", text: "Most international buyers evaluate condominiums first; co-ops need a separate diligence track." },
-  { title: "Confirm capital path", text: "Cash, financing, or hybrid — plus source-of-funds readiness." },
+  { title: "Confirm capital path", text: "Cash, financing, or hybrid - plus source-of-funds readiness." },
   { title: "Building diligence", text: "Understand the building before a single apartment becomes emotional." },
   { title: "Contract & close", text: "New York is attorney-led. Timing varies by property type and approvals." },
 ];
@@ -141,7 +141,7 @@ const SHARED_MISTAKES = [
   "Falling in love with a unit before learning co-op or financing constraints",
   "Underestimating closing costs and ongoing carrying costs",
   "Offering without a local attorney and a clear source-of-funds path",
-  "Treating \"can buy\" as \"should buy\" — without a written decision framework",
+  "Treating \"can buy\" as \"should buy\" - without a written decision framework",
 ];
 
 type CountrySeed = {
@@ -247,16 +247,16 @@ const COUNTRY_SEEDS: CountrySeed[] = [
     region: "Asia",
     heroTitle: "在曼哈顿购置住宅：清晰决策，而非冲动搜索。",
     heroDescription:
-      "为来自中国的买家准备的曼哈顿购房指南：外国人能否购买、公寓与合作公寓、远程签约、税务与流程——先理解，再行动。提交后，会有能用中文沟通的顾问与您联系。",
+      "为来自中国的买家准备的曼哈顿购房指南：外国人能否购买、公寓与合作公寓、远程签约、税务与流程 -  - 先理解，再行动。提交后，会有能用中文沟通的顾问与您联系。",
     introTitle: "为什么曼哈顿对国际买家不同",
     introBody: [
-      "曼哈顿市场以建筑与所有权结构为核心，而不是以“房源列表”为核心。国际买家常先问签证与国籍——在纽约，购买住宅物业通常不要求美国公民身份，但合作公寓（co-op）董事会审批、融资路径与税务规划会显著改变可行方案。",
-      "Agent Kammer 以决策顾问方式工作：先判断买或不买、买哪种产权、在哪个社区、以何种时间表推进——再进入执行。",
+      "曼哈顿市场以建筑与所有权结构为核心，而不是以“房源列表”为核心。国际买家常先问签证与国籍 -  - 在纽约，购买住宅物业通常不要求美国公民身份，但合作公寓（co-op）董事会审批、融资路径与税务规划会显著改变可行方案。",
+      "Agent Kammer 以决策顾问方式工作：先判断买或不买、买哪种产权、在哪个社区、以何种时间表推进 -  - 再进入执行。",
     ],
     faqs: [
       {
         q: "中国公民可以在曼哈顿买房吗？",
-        a: "可以。购买住宅物业一般不要求美国公民身份或绿卡。关键限制通常来自物业类型（尤其是 co-op）、融资、资金来源证明，以及董事会审批——而不是护照本身。",
+        a: "可以。购买住宅物业一般不要求美国公民身份或绿卡。关键限制通常来自物业类型（尤其是 co-op）、融资、资金来源证明，以及董事会审批 -  - 而不是护照本身。",
       },
       {
         q: "可以远程购买吗？",
@@ -272,7 +272,7 @@ const COUNTRY_SEEDS: CountrySeed[] = [
       },
       {
         q: "需要担心哪些税费？",
-        a: "除购房价外，还需预算成交成本、可能的转让税、年度地税/物业费，以及未来出售时的税务后果。具体数字取决于物业类型与结构——应在书面策略中单独列出。",
+        a: "除购房价外，还需预算成交成本、可能的转让税、年度地税/物业费，以及未来出售时的税务后果。具体数字取决于物业类型与结构 -  - 应在书面策略中单独列出。",
       },
     ],
     neighborhoods: [
@@ -282,7 +282,7 @@ const COUNTRY_SEEDS: CountrySeed[] = [
       { name: "Financial District", blurb: "相对价值与租赁弹性，适合投资或工作导向的居住。", typicalBuyer: "Investment / pied-à-terre" },
     ],
     processSteps: [
-      { title: "明确用途与时间表", text: "自住、子女就学、投资还是跳板——用途决定产权与社区。" },
+      { title: "明确用途与时间表", text: "自住、子女就学、投资还是跳板 -  - 用途决定产权与社区。" },
       { title: "确定产权结构", text: "多数国际买家优先评估 condo；co-op 需单独尽职。" },
       { title: "资金路径", text: "现金、融资或混合；同步准备资金来源与合规文件。" },
       { title: "建筑尽职调查", text: "在心动某套房之前，先理解建筑财务、规则与转售逻辑。" },
@@ -292,18 +292,18 @@ const COUNTRY_SEEDS: CountrySeed[] = [
       "先爱上某套房，再发现 co-op 董事会或融资不可行",
       "低估成交成本与年度持有成本",
       "没有本地律师与清晰的资金合规路径就开始出价",
-      "把“能买”当成“应该买”——缺少书面决策框架",
+      "把“能买”当成“应该买” -  - 缺少书面决策框架",
     ],
     team: [
       { role: "住房顾问", description: "负责决策框架：用途、产权路径、社区、时间表与下一步行动。" },
       { role: "房地产律师", description: "主导纽约合同审查、主体结构与成交协调。" },
       { role: "融资专员", description: "在需要贷款时梳理现金与按揭选项，以及外国买家融资限制。" },
-      { role: "税务/结构顾问", description: "就持有结构与跨境税务问题与您的顾问协调——按需转介。" },
+      { role: "税务/结构顾问", description: "就持有结构与跨境税务问题与您的顾问协调 -  - 按需转介。" },
     ],
     formHeadline: "申请您的曼哈顿购房策略",
     formSubhead: "告诉我们您的情况。提交后，会有能用中文沟通的顾问与您联系，说明合适的下一步。",
     specialistPromise:
-      "提交后，一位能用您所选语言（中文）沟通的顾问将与您联系，审核您的目标并建议下一步——这是咨询的开始，不是自动推销。",
+      "提交后，一位能用您所选语言（中文）沟通的顾问将与您联系，审核您的目标并建议下一步 -  - 这是咨询的开始，不是自动推销。",
     metaTitle: "中国买家购买曼哈顿房产指南",
     metaDescription:
       "为中国买家准备的曼哈顿购房指南：外国人购买资格、Condo 与 Co-op、远程交易、税费与社区。提交策略申请后有中文顾问跟进。",
@@ -317,13 +317,13 @@ const COUNTRY_SEEDS: CountrySeed[] = [
     preferredLanguageLabel: "Deutsch",
     flagEmoji: "🇩🇪",
     region: "Europe",
-    heroTitle: "Immobilien in Manhattan kaufen — mit Klarheit statt Druck.",
+    heroTitle: "Immobilien in Manhattan kaufen - mit Klarheit statt Druck.",
     heroDescription:
       "Leitfaden für Käufer aus Deutschland: Eigentumsformen, Prozess, Finanzierung und typische Fehler. Nach dem Absenden meldet sich ein Berater, der Deutsch spricht.",
     introTitle: "Warum Manhattan anders ist",
     introBody: [
-      "Der Manhattan-Markt denkt in Gebäuden und Eigentumsstrukturen — nicht nur in Inseraten. Internationale Käufer fragen oft zuerst nach Visum und Staatsangehörigkeit. In New York ist für den Kauf von Wohnimmobilien in der Regel keine US-Staatsbürgerschaft erforderlich; entscheidend sind eher Condo vs. Co-op, Finanzierung und Due Diligence.",
-      "Agent Kammer arbeitet entscheidungsorientiert: erst klären, ob und wie gekauft werden sollte — dann ausführen.",
+      "Der Manhattan-Markt denkt in Gebäuden und Eigentumsstrukturen - nicht nur in Inseraten. Internationale Käufer fragen oft zuerst nach Visum und Staatsangehörigkeit. In New York ist für den Kauf von Wohnimmobilien in der Regel keine US-Staatsbürgerschaft erforderlich; entscheidend sind eher Condo vs. Co-op, Finanzierung und Due Diligence.",
+      "Agent Kammer arbeitet entscheidungsorientiert: erst klären, ob und wie gekauft werden sollte - dann ausführen.",
     ],
     faqs: [
       { q: "Können deutsche Staatsangehörige in Manhattan kaufen?", a: "Ja. Für den Kauf ist in der Regel keine US-Staatsbürgerschaft nötig. Einschränkungen entstehen eher durch Co-op-Boards, Finanzierung und Nachweise zur Mittelherkunft." },
@@ -333,15 +333,15 @@ const COUNTRY_SEEDS: CountrySeed[] = [
       { q: "Welche Nebenkosten?", a: "Neben dem Kaufpreis: Closing Costs, mögliche Transfersteuern, laufende Charges/Steuern und spätere Verkaufssteuern. Zahlen gehören in die schriftliche Strategie." },
     ],
     neighborhoods: [
-      { name: "Tribeca", blurb: "Ruhige Straßen, hohe Bauqualität — oft für langfristige Familienentscheidungen.", typicalBuyer: "Familie / langfristig" },
-      { name: "Upper West Side", blurb: "Parks, Schulen, Alltagstauglichkeit — stark für Relocations mit Kindern.", typicalBuyer: "Familien-Relocation" },
-      { name: "Chelsea / West Village", blurb: "Lifestyle und Lage — häufig für Pied-à-terre und Paare.", typicalBuyer: "Pied-à-terre" },
-      { name: "Hudson Yards", blurb: "Neuere Gebäude und Servicekultur — häufig bei internationalen und Corporate-Zügen.", typicalBuyer: "Executive" },
+      { name: "Tribeca", blurb: "Ruhige Straßen, hohe Bauqualität - oft für langfristige Familienentscheidungen.", typicalBuyer: "Familie / langfristig" },
+      { name: "Upper West Side", blurb: "Parks, Schulen, Alltagstauglichkeit - stark für Relocations mit Kindern.", typicalBuyer: "Familien-Relocation" },
+      { name: "Chelsea / West Village", blurb: "Lifestyle und Lage - häufig für Pied-à-terre und Paare.", typicalBuyer: "Pied-à-terre" },
+      { name: "Hudson Yards", blurb: "Neuere Gebäude und Servicekultur - häufig bei internationalen und Corporate-Zügen.", typicalBuyer: "Executive" },
     ],
     processSteps: [
-      { title: "Zweck und Zeitplan", text: "Eigennutzung, Pied-à-terre, Investment oder Relocation — Zweck steuert alles." },
+      { title: "Zweck und Zeitplan", text: "Eigennutzung, Pied-à-terre, Investment oder Relocation - Zweck steuert alles." },
       { title: "Eigentumsstruktur", text: "Condo zuerst prüfen; Co-op nur mit klarer Board-Strategie." },
-      { title: "Kapitalpfad", text: "Cash, Finanzierung oder hybrid — Compliance früh klären." },
+      { title: "Kapitalpfad", text: "Cash, Finanzierung oder hybrid - Compliance früh klären." },
       { title: "Gebäude-Due-Diligence", text: "Gebäude verstehen, bevor eine einzelne Wohnung emotional wird." },
       { title: "Vertrag und Closing", text: "In NY führen Anwälte den Prozess; Dauer hängt von Typ und Freigaben ab." },
     ],
@@ -355,13 +355,13 @@ const COUNTRY_SEEDS: CountrySeed[] = [
       { role: "Wohnungsberater", description: "Verantwortet den Entscheidungsrahmen: Zweck, Eigentumspfad, Viertel, Zeitplan und nächste Aktion." },
       { role: "Immobilienanwalt", description: "Führt Vertragsprüfung, Strukturfragen und Closing-Koordination in New York." },
       { role: "Finanzierungsspezialist", description: "Klärt Cash- vs. Hypothekenoptionen und Grenzen für ausländische Kreditnehmer." },
-      { role: "Steuer- / Strukturberatung", description: "Abstimmung zu Haltungsstruktur und grenzüberschreitenden Steuerfragen — bei Bedarf vermittelt." },
+      { role: "Steuer- / Strukturberatung", description: "Abstimmung zu Haltungsstruktur und grenzüberschreitenden Steuerfragen - bei Bedarf vermittelt." },
     ],
     formHeadline: "Manhattan-Strategie anfragen",
     formSubhead:
-      "Beschreiben Sie Ihre Situation. Nach dem Absenden meldet sich ein Berater, der Deutsch spricht — mit dem passenden nächsten Schritt.",
+      "Beschreiben Sie Ihre Situation. Nach dem Absenden meldet sich ein Berater, der Deutsch spricht - mit dem passenden nächsten Schritt.",
     specialistPromise:
-      "Nach dem Absenden meldet sich ein Spezialist, der Ihre gewählte Sprache (Deutsch) spricht, prüft Ihre Ziele und empfiehlt den nächsten Schritt — der Beginn einer Beratung, kein automatischer Verkaufsdruck.",
+      "Nach dem Absenden meldet sich ein Spezialist, der Ihre gewählte Sprache (Deutsch) spricht, prüft Ihre Ziele und empfiehlt den nächsten Schritt - der Beginn einer Beratung, kein automatischer Verkaufsdruck.",
     metaTitle: "Manhattan Immobilien für Käufer aus Deutschland",
     metaDescription:
       "Leitfaden für deutsche Käufer in Manhattan: Kaufberechtigung, Condo vs Co-op, Remote-Kauf, Kosten und Stadtteile. Danach Kontakt durch deutschsprachigen Berater.",
@@ -445,7 +445,7 @@ const COUNTRY_SEEDS: CountrySeed[] = [
     region: "Asia",
     heroTitle: "在曼哈頓置業：先想清楚，再開始搜尋。",
     formHeadline: "申請您的曼哈頓置業策略",
-    specialistPromise: "提交後，會有能以繁體中文溝通的顧問與您聯絡，檢視目標並建議下一步——這是諮詢的開始，不是自動推銷。",
+    specialistPromise: "提交後，會有能以繁體中文溝通的顧問與您聯絡，檢視目標並建議下一步 -  - 這是諮詢的開始，不是自動推銷。",
   },  {
     slug: "taiwan",
     countryName: "Taiwan",
@@ -456,7 +456,7 @@ const COUNTRY_SEEDS: CountrySeed[] = [
     region: "Asia",
     heroTitle: "在曼哈頓購屋：先做判斷，再看物件。",
     formHeadline: "申請您的曼哈頓購屋策略",
-    specialistPromise: "提交後，會有能以繁體中文溝通的顧問與您聯繫，檢視目標並建議下一步——這是諮詢的開始，不是自動推銷。",
+    specialistPromise: "提交後，會有能以繁體中文溝通的顧問與您聯繫，檢視目標並建議下一步 -  - 這是諮詢的開始，不是自動推銷。",
   },  {
     slug: "singapore",
     countryName: "Singapore",
@@ -520,10 +520,10 @@ const COUNTRY_SEEDS: CountrySeed[] = [
     preferredLanguageLabel: "Français",
     flagEmoji: "🇫🇷",
     region: "Europe",
-    heroTitle: "Acheter à Manhattan depuis la France — la clarté avant la recherche.",
+    heroTitle: "Acheter à Manhattan depuis la France - la clarté avant la recherche.",
     formHeadline: "Demandez votre stratégie Manhattan",
     formSubhead: "Décrivez votre situation. Après l'envoi, un spécialiste qui parle français vous contactera.",
-    specialistPromise: "Après l'envoi, un spécialiste qui parle français vous contactera pour examiner vos objectifs et recommander la prochaine étape — le début d'une consultation, pas une vente automatisée.",
+    specialistPromise: "Après l'envoi, un spécialiste qui parle français vous contactera pour examiner vos objectifs et recommander la prochaine étape - le début d'une consultation, pas une vente automatisée.",
   },  {
     slug: "spain",
     countryName: "Spain",
@@ -532,9 +532,9 @@ const COUNTRY_SEEDS: CountrySeed[] = [
     preferredLanguageLabel: "Español",
     flagEmoji: "🇪🇸",
     region: "Europe",
-    heroTitle: "Comprar en Manhattan desde España — claridad antes de buscar.",
+    heroTitle: "Comprar en Manhattan desde España - claridad antes de buscar.",
     formHeadline: "Solicite su estrategia en Manhattan",
-    specialistPromise: "Tras enviarlo, un especialista que habla español se pondrá en contacto para revisar sus objetivos y recomendar el siguiente paso — el inicio de una consulta, no una venta automática.",
+    specialistPromise: "Tras enviarlo, un especialista que habla español se pondrá en contacto para revisar sus objetivos y recomendar el siguiente paso - el inicio de una consulta, no una venta automática.",
   },  {
     slug: "italy",
     countryName: "Italy",
@@ -543,7 +543,7 @@ const COUNTRY_SEEDS: CountrySeed[] = [
     preferredLanguageLabel: "Italiano",
     flagEmoji: "🇮🇹",
     region: "Europe",
-    heroTitle: "Comprare a Manhattan dall'Italia — chiarezza prima della ricerca.",
+    heroTitle: "Comprare a Manhattan dall'Italia - chiarezza prima della ricerca.",
     formHeadline: "Richiedi la tua strategia Manhattan",
     specialistPromise: "Dopo l'invio, uno specialista che parla italiano ti contatterà per esaminare i tuoi obiettivi e consigliare il passo successivo.",
   },  {
@@ -688,7 +688,7 @@ const COUNTRY_SEEDS: CountrySeed[] = [
     preferredLanguageLabel: "Русский",
     flagEmoji: "🇷🇺",
     region: "Europe",
-    heroTitle: "Покупка жилья на Манхэттене — ясность до поиска.",
+    heroTitle: "Покупка жилья на Манхэттене - ясность до поиска.",
     formHeadline: "Запросите стратегию по Манхэттену",
     specialistPromise: "После отправки с вами свяжется специалист, говорящий по-русски, чтобы обсудить цели и предложить следующий шаг.",
   },  {
@@ -757,7 +757,7 @@ const COUNTRY_SEEDS: CountrySeed[] = [
     preferredLanguageLabel: "Español",
     flagEmoji: "🇲🇽",
     region: "Americas",
-    heroTitle: "Comprar en Manhattan desde México — claridad antes de buscar.",
+    heroTitle: "Comprar en Manhattan desde México - claridad antes de buscar.",
     formHeadline: "Solicite su estrategia en Manhattan",
     specialistPromise: "Después de enviarlo, un especialista que habla español se pondrá en contacto para revisar sus objetivos y recomendar el siguiente paso.",
   },  {
@@ -768,10 +768,10 @@ const COUNTRY_SEEDS: CountrySeed[] = [
     preferredLanguageLabel: "Português (Brasil)",
     flagEmoji: "🇧🇷",
     region: "Americas",
-    heroTitle: "Comprar em Manhattan a partir do Brasil — clareza antes da busca.",
+    heroTitle: "Comprar em Manhattan a partir do Brasil - clareza antes da busca.",
     formHeadline: "Solicite sua estratégia em Manhattan",
     formSubhead: "Conte sua situação. Após o envio, um especialista que fala português entrará em contato.",
-    specialistPromise: "Após o envio, um especialista que fala português entrará em contato para revisar seus objetivos e recomendar o próximo passo — o início de uma consultoria, não uma venda automática.",
+    specialistPromise: "Após o envio, um especialista que fala português entrará em contato para revisar seus objetivos e recomendar o próximo passo - o início de uma consultoria, não uma venda automática.",
   },  {
     slug: "argentina",
     countryName: "Argentina",
@@ -837,7 +837,7 @@ export function countriesByRegion(region: InternationalRegion): InternationalCou
 export const INTERNATIONAL_HUB_FAQS: InternationalFaq[] = [
   {
     q: "Can foreigners buy residential property in Manhattan?",
-    a: "Yes. U.S. citizenship is generally not required to purchase. Constraints usually come from property type (especially co-ops), financing, board approval, and documentation — not from your passport alone.",
+    a: "Yes. U.S. citizenship is generally not required to purchase. Constraints usually come from property type (especially co-ops), financing, board approval, and documentation - not from your passport alone.",
   },
   {
     q: "Do I need a visa to own?",
@@ -858,9 +858,9 @@ export const INTERNATIONAL_HUB_FAQS: InternationalFaq[] = [
 ];
 
 export const INTERNATIONAL_PROCESS = [
-  { title: "Clarify purpose & timeline", text: "Primary home, pied-à-terre, investment, family, or relocation — purpose drives structure." },
+  { title: "Clarify purpose & timeline", text: "Primary home, pied-à-terre, investment, family, or relocation - purpose drives structure." },
   { title: "Choose ownership path", text: "Most international buyers evaluate condominiums first; co-ops need a separate diligence track." },
-  { title: "Confirm capital path", text: "Cash, financing, or hybrid — plus source-of-funds readiness." },
+  { title: "Confirm capital path", text: "Cash, financing, or hybrid - plus source-of-funds readiness." },
   { title: "Building diligence", text: "Understand the building before a single apartment becomes emotional." },
   { title: "Contract & close", text: "New York is attorney-led. Timing varies by property type and approvals." },
 ];
@@ -878,17 +878,17 @@ export const BUYING_GOALS = [
 
 export const BUDGET_BANDS = [
   "Under $1M",
-  "$1M–$3M",
-  "$3M–$5M",
-  "$5M–$10M",
+  "$1M-$3M",
+  "$3M-$5M",
+  "$5M-$10M",
   "$10M+",
 ] as const;
 
 export const TIMELINE_OPTIONS = [
   "Ready now",
   "Within 3 months",
-  "3–6 months",
-  "6–12 months",
+  "3-6 months",
+  "6-12 months",
   "More than one year",
   "Just researching",
 ] as const;

@@ -71,7 +71,7 @@ export default function Services() {
   usePageMetadata({
     title: "Situations",
     description:
-      "Explore your housing situation: what changed, what decision you face, and what you need to understand — before listings.",
+      "Explore your housing situation: what changed, what decision you face, and what you need to understand - before listings.",
     path: "/situations",
   });
 
@@ -95,10 +95,10 @@ export default function Services() {
         <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-24">
           <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">Situations</p>
           <h1 className="mt-5 max-w-4xl font-display text-[clamp(2.8rem,5.5vw,5.25rem)] leading-[0.9] tracking-[-0.03em] text-brand-navy">
-            Explore your situation — not a property search.
+            Explore your situation - not a property search.
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-brand-graphite">
-            Decision Intelligence starts here: what changed in your life, what decision you face, and what you still need to understand. Each page is a Situation — research, not a product.
+            Decision Intelligence starts here: what changed in your life, what decision you face, and what you still need to understand. Each page is a Situation - research, not a product.
           </p>
 
           <ol className="mt-12 grid gap-4 border-t border-brand-border pt-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -129,7 +129,7 @@ export default function Services() {
         id="decisions"
         eyebrow="02 · Paths"
         title="What Decision Are You Facing?"
-        description="Once the situation is clear, name the path — including stay put, wait, or do nothing yet."
+        description="Once the situation is clear, name the path - including stay put, wait, or do nothing yet."
         items={decisions?.items ?? []}
       />
 
@@ -137,13 +137,13 @@ export default function Services() {
         id="understand"
         eyebrow="03 · Research"
         title="What Are You Trying to Understand?"
-        description="Ownership structure, building evidence, and market questions — after the life change and decision path are named."
+        description="Ownership structure, building evidence, and market questions - after the life change and decision path are named."
         items={understand?.items ?? []}
       />
 
       <CTA
         title="Request Intelligence."
-        description="If the situation is still open, start with the Decision Assessment — or request intelligence and we will prescribe the next step."
+        description="If the situation is still open, start with the Decision Assessment - or request intelligence and we will prescribe the next step."
         href="/contact"
         label="Request Intelligence"
         eyebrow="Request Intelligence"

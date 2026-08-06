@@ -57,7 +57,7 @@ export async function createApp(options: { static?: boolean } = {}): Promise<Exp
 
   if (serveClient) {
     if (app.get("env") === "development") {
-      throw new Error("createApp({ static: true }) should not be used in development — use server/index.ts with setupVite");
+      throw new Error("createApp({ static: true }) should not be used in development - use server/index.ts with setupVite");
     }
     serveStatic(app);
   }

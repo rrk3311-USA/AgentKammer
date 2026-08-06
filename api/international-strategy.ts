@@ -53,8 +53,8 @@ function budgetPoints(budget: string): number {
 function timelinePoints(timeline: string): number {
   const t = timeline.toLowerCase();
   if (t.includes("ready now") || t.includes("within 3")) return 25;
-  if (t.includes("3–6") || t.includes("3-6")) return 18;
-  if (t.includes("6–12") || t.includes("6-12")) return 10;
+  if (t.includes("3-6") || t.includes("3-6")) return 18;
+  if (t.includes("6-12") || t.includes("6-12")) return 10;
   if (t.includes("more than") || t.includes("researching")) return 4;
   return 8;
 }
@@ -85,7 +85,7 @@ function classify(data: Payload) {
     status = "Ready for Call";
     nextAction = "Schedule Housing Strategy Session";
     lifecycleStage = "call_ready";
-  } else if (data.wantRoadmap && /6–12|6-12|more than|researching/i.test(data.timeline)) {
+  } else if (data.wantRoadmap && /6-12|6-12|more than|researching/i.test(data.timeline)) {
     status = "Early Research";
     nextAction = "Send Manhattan Buying Roadmap";
     lifecycleStage = "engaged";
@@ -125,7 +125,7 @@ function buildMessage(data: Payload, classified: ReturnType<typeof classify>) {
     "International Manhattan Strategy Request",
     `Status: ${classified.status} · Score: ${classified.leadScore}`,
     `Next action: ${classified.nextAction}`,
-    `Language: ${data.preferredLanguage} — assign matching specialist`,
+    `Language: ${data.preferredLanguage} - assign matching specialist`,
     "",
     classified.aiSummary,
     "",
@@ -155,7 +155,7 @@ function buildMessage(data: Payload, classified: ReturnType<typeof classify>) {
 }
 
 async function sendEmail(data: Payload, classified: ReturnType<typeof classify>) {
-  const subject = `Intl Strategy [${classified.status}] — ${data.preferredLanguage} — ${data.fullName}`;
+  const subject = `Intl Strategy [${classified.status}] - ${data.preferredLanguage} - ${data.fullName}`;
   const html = `
     <h2>International Strategy Request</h2>
     <p><strong>Status:</strong> ${classified.status} · Score ${classified.leadScore}</p>
@@ -358,7 +358,7 @@ async function syncAttio(data: Payload, classified: ReturnType<typeof classify>)
         const assigneeEmail = process.env.ATTIO_DEFAULT_ASSIGNEE_EMAIL?.trim();
         await attioRequest("/tasks", "POST", {
           data: {
-            content: `Intl lead (${classified.status}): ${classified.nextAction} — ${data.fullName} [${data.preferredLanguage}]`,
+            content: `Intl lead (${classified.status}): ${classified.nextAction} - ${data.fullName} [${data.preferredLanguage}]`,
             format: "plaintext",
             deadline_at: null,
             is_completed: false,

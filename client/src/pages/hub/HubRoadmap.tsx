@@ -19,7 +19,7 @@ const STAGE_INDEX: Record<string, number> = {
 export default function HubRoadmap() {
   usePageMetadata({
     title: "Roadmap",
-    description: "A simple path from clarifying goals to closing — at your pace.",
+    description: "A simple path from clarifying goals to closing - at your pace.",
     path: "/hub/roadmap",
   });
 

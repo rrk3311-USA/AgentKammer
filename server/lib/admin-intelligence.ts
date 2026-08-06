@@ -502,10 +502,10 @@ export async function buildAdminDashboard(
 
   // Scoring analytics
   const bands = [
-    { band: "Cold 0–24", min: 0, max: 24 },
-    { band: "Warm 25–49", min: 25, max: 49 },
-    { band: "Hot 50–74", min: 50, max: 74 },
-    { band: "Priority 75–100", min: 75, max: 100 },
+    { band: "Cold 0-24", min: 0, max: 24 },
+    { band: "Warm 25-49", min: 25, max: 49 },
+    { band: "Hot 50-74", min: 50, max: 74 },
+    { band: "Priority 75-100", min: 75, max: 100 },
   ];
   const distribution = bands.map((b) => ({
     ...b,
@@ -537,12 +537,12 @@ export async function buildAdminDashboard(
   const social = people.filter((p) => isSocialSource(p.source)).length;
   if (priority > 0) {
     strategyNotes.push(
-      `${priority} priority lead${priority === 1 ? "" : "s"} (score 75+) — work call-ready first.`,
+      `${priority} priority lead${priority === 1 ? "" : "s"} (score 75+) - work call-ready first.`,
     );
   }
   if (noIdentity > 0) {
     strategyNotes.push(
-      `${noIdentity} engaged visitor${noIdentity === 1 ? "" : "s"} still anonymous — push email/phone after value preview.`,
+      `${noIdentity} engaged visitor${noIdentity === 1 ? "" : "s"} still anonymous - push email/phone after value preview.`,
     );
   }
   if (funnelCounts.conversation > 0 && funnelCounts.email / funnelCounts.conversation < 0.25) {
@@ -552,7 +552,7 @@ export async function buildAdminDashboard(
   }
   if (social > 0) {
     strategyNotes.push(
-      `${social} social-sourced contact${social === 1 ? "" : "s"} — tag campaign UTM and route high-intent DMs to call-ready.`,
+      `${social} social-sourced contact${social === 1 ? "" : "s"} - tag campaign UTM and route high-intent DMs to call-ready.`,
     );
   }
   if (people.length === 0) {
@@ -561,7 +561,7 @@ export async function buildAdminDashboard(
     );
   }
   if (strategyNotes.length === 0) {
-    strategyNotes.push("Pipeline healthy — prioritize highest readiness scores for outreach today.");
+    strategyNotes.push("Pipeline healthy - prioritize highest readiness scores for outreach today.");
   }
 
   const todayHigh = people

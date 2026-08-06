@@ -5,6 +5,8 @@ export type ServiceLanding = {
   art: HeroArtVariant;
   /** Optional editorial banner illustration (paper-sketch style). */
   heroImage?: string;
+  /** Paper tone behind heroImage - should match the art. */
+  heroPaper?: string;
   title: string;
   navLabel: string;
   eyebrow: string;
@@ -65,7 +67,7 @@ export const serviceLandings: ServiceLanding[] = [
     depthNotes: [
       "Prioritize lock-and-leave buildings with stable service culture over maximum square footage you will rarely use.",
       "Check building rules on short stays, sublets, and package handling before falling for a view.",
-      "Model carrying costs against actual nights in the city — prestige alone is a weak brief.",
+      "Model carrying costs against actual nights in the city - prestige alone is a weak brief.",
     ],
     cta: "Build a pied-a-terre shortlist for New York City.",
   },
@@ -116,7 +118,7 @@ export const serviceLandings: ServiceLanding[] = [
     ],
     depthNotes: [
       "Lock identification and closing timelines against Manhattan inventory reality before naming replacement property.",
-      "Compare like-kind fit at the building level — not just price band — so the exchange does not force a mismatched address.",
+      "Compare like-kind fit at the building level - not just price band - so the exchange does not force a mismatched address.",
       "Coordinate QI, tax counsel, and building diligence on one calendar.",
     ],
     cta: "Start a 1031 exchange property brief.",
@@ -143,7 +145,7 @@ export const serviceLandings: ServiceLanding[] = [
     depthNotes: [
       "Pressure-test sponsor concessions against common charges, tax abatement cliffs, and five-year resale depth.",
       "Compare the tower to a strong resale alternative in the same neighborhood before treating new as automatically better.",
-      "Confirm finish quality, service staffing, and actual weekday use — not amenity brochure language alone.",
+      "Confirm finish quality, service staffing, and actual weekday use - not amenity brochure language alone.",
     ],
     cta: "Get a shortlist of New York development options.",
   },
@@ -169,7 +171,7 @@ export const serviceLandings: ServiceLanding[] = [
     depthNotes: [
       "Filter for buildings with strong door culture, lighting, and practical security without over-indexing on marketing language.",
       "Balance autonomy and privacy against co-op board process risk when timing matters.",
-      "Keep the brief on daily life fit — commute, storage, guests — before aesthetic preference expands the tour list.",
+      "Keep the brief on daily life fit - commute, storage, guests - before aesthetic preference expands the tour list.",
     ],
     cta: "Build a confident NYC buying brief.",
   },
@@ -204,26 +206,26 @@ export const serviceLandings: ServiceLanding[] = [
     art: "relocation",
     title: "Corporate Relocation Buyers in NYC",
     navLabel: "Corporate Relocation",
-    eyebrow: "Demographic Buyer",
+    eyebrow: "Relocation Brief",
     summary:
-      "Corporate relocation should not automatically mean rushing into a rental or purchase. The brief weighs timeline, commute, household needs, company support, and whether waiting creates more leverage.",
+      "Company moves still start with operating rhythm: timeline, commute, household needs, and whether renting, buying, or waiting creates more leverage. For the fuller relocation brief, start with Executive Relocation.",
     searchTerms: ["corporate relocation home buyer nyc", "relocating to new york to buy apartment", "executive home purchase nyc"],
     audience: [
-      "Professionals relocating into New York for a longer-term ownership decision.",
+      "Professionals relocating into New York for work who need a clear first housing path.",
       "Households balancing timing, commute, and neighborhood fit while entering a new market.",
-      "Buyers who want to purchase confidently instead of defaulting into a temporary move.",
+      "Buyers comparing temporary housing against a purchase under company pressure.",
     ],
     considerations: [
       "Keep the process efficient while still giving enough neighborhood and building context.",
-      "Use a purchase-first lens rather than treating relocation as automatically rental-oriented.",
-      "Align the search with timing, lifestyle, and long-term ownership logic.",
+      "Compare rent-first, buy-now, and wait before tours drive the decision.",
+      "Align the search with start date, lifestyle, and long-term ownership logic.",
     ],
     depthNotes: [
-      "Align start date, temporary housing, and school or partner needs before committing to a purchase timeline.",
+      "If the move is senior-level or high-stakes, use the Executive Relocation brief as the primary path.",
       "Use a two-neighborhood band when the company address and lifestyle preferences conflict.",
       "Default to turnkey condominiums when board timing cannot absorb a compressed move.",
     ],
-    cta: "Start a purchase-focused relocation brief.",
+    cta: "Continue with the Executive Relocation Decision Blueprint.",
   },
   {
     slug: "rent-vs-buy-manhattan-relocation",
@@ -245,8 +247,8 @@ export const serviceLandings: ServiceLanding[] = [
       "Use renting, buying, or waiting as strategy options instead of treating one as the default answer.",
     ],
     depthNotes: [
-      "Price the optionality of renting for 6–18 months against the certainty cost of buying under time pressure.",
-      "Include common charges, taxes, and exit friction — not just mortgage versus rent.",
+      "Price the optionality of renting for 6-18 months against the certainty cost of buying under time pressure.",
+      "Include common charges, taxes, and exit friction - not just mortgage versus rent.",
       "If residency duration is unclear, rent-first is often the higher expected-value move.",
     ],
     cta: "Compare rent, buy, and wait options after relocating.",
@@ -255,6 +257,7 @@ export const serviceLandings: ServiceLanding[] = [
     slug: "executive-relocation-nyc",
     art: "relocation",
     heroImage: "/images/situations/executive-relocation-nyc.png",
+    heroPaper: "#FBF1E2",
     title: "Executive Relocation to NYC",
     navLabel: "Executive Relocation",
     eyebrow: "High-Value Relocation",
@@ -274,13 +277,15 @@ export const serviceLandings: ServiceLanding[] = [
     depthNotes: [
       "Build a 30 / 60 / 90 day decision tree: temporary stay, short lease, or purchase-ready condominium.",
       "Prioritize service consistency and lock-and-leave operations for travel-heavy weeks.",
-      "Keep the first tour week confirmatory — building shortlist prepared before arrival.",
+      "Keep the first tour week confirmatory - building shortlist prepared before arrival.",
     ],
     cta: "Create an executive relocation Decision Blueprint.",
   },
   {
     slug: "school-district-planning-nyc",
     art: "family-planning",
+    heroImage: "/images/situations/school-district-planning-nyc.png",
+    heroPaper: "#F5EDE0",
     title: "School District Planning in NYC",
     navLabel: "School Planning",
     eyebrow: "Family Move",
@@ -378,7 +383,7 @@ export const serviceLandings: ServiceLanding[] = [
     depthNotes: [
       "Map Midtown, downtown, and west-side commute math against actual office days.",
       "Separate entertaining needs from primary living needs so the brief stays honest.",
-      "Compare Tribeca, Chelsea, Hudson Yards, and FiDi as different products — not one downtown blur.",
+      "Compare Tribeca, Chelsea, Hudson Yards, and FiDi as different products - not one downtown blur.",
     ],
     cta: "Build a finance-focused Manhattan housing brief.",
   },
@@ -428,7 +433,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Fold pet requirements into the broader Decision Blueprint rather than treating them as an afterthought.",
     ],
     depthNotes: [
-      "Verify weight, breed, and number limits in offering plans and house rules — not broker verbal assurances.",
+      "Verify weight, breed, and number limits in offering plans and house rules - not broker verbal assurances.",
       "Factor elevator culture, outdoor access, and deposit policy into building fit.",
       "A pet-friendly claim without operational clarity is not a green light.",
     ],
@@ -437,9 +442,11 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "divorce-property-sales-nyc",
     art: "seller-transition",
+    heroImage: "/images/situations/divorce-property-sales-nyc.png",
+    heroPaper: "#FCEEDB",
     title: "Divorce Property Sales in NYC",
-    navLabel: "Divorce Sales",
-    eyebrow: "Seller Situation",
+    navLabel: "Divorce",
+    eyebrow: "Life Change",
     summary:
       "Co-owned property transitions require privacy, process control, and clear options. The brief helps decide whether to sell, hold, buy out, wait, or create a cleaner timeline.",
     searchTerms: ["divorce property sales nyc", "selling apartment during divorce new york", "divorce real estate agent nyc"],
@@ -515,9 +522,11 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "empty-nester-downsizing-nyc",
     art: "retirement",
+    heroImage: "/images/situations/empty-nester-downsizing-nyc.png",
+    heroPaper: "#F9EFDC",
     title: "Empty Nester Downsizing in New York",
-    navLabel: "Empty Nesters",
-    eyebrow: "Life-Stage Move",
+    navLabel: "Empty Nest",
+    eyebrow: "Life Change",
     summary:
       "Downsizing should protect quality of life, not just reduce square footage. The brief weighs service, simplicity, sale timing, location, storage, and what would actually feel better.",
     searchTerms: ["downsizing apartment new york", "empty nester real estate agent nyc", "downsizing condo nyc"],
@@ -541,6 +550,8 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "retiree-senior-home-buyers-nyc",
     art: "retirement",
+    heroImage: "/images/situations/retiree-senior-home-buyers-nyc.png",
+    heroPaper: "#F5E7D0",
     title: "Retiree and Senior Home Buyers in NYC",
     navLabel: "Retiree Buyers",
     eyebrow: "Life-Stage Buyer",
@@ -585,7 +596,7 @@ export const serviceLandings: ServiceLanding[] = [
     ],
     depthNotes: [
       "Price maintenance, facade work, and systems risk honestly against privacy and character.",
-      "Read the block as carefully as the house — noise, light, and neighboring stock matter.",
+      "Read the block as carefully as the house - noise, light, and neighboring stock matter.",
       "Compare boutique control against full-service condominium ease before committing.",
     ],
     cta: "Start a townhouse search brief in New York City.",
@@ -597,7 +608,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Upper West Side",
     eyebrow: "NYC Neighborhood",
     summary:
-      "Upper West Side decisions hinge on school convenience, park adjacency, co-op culture, building age, and whether the neighborhood supports the reason for moving—not just apartment size.",
+      "Upper West Side decisions hinge on school convenience, park adjacency, co-op culture, building age, and whether the neighborhood supports the reason for moving - not just apartment size.",
     searchTerms: [
       "upper west side real estate agent",
       "buy apartment upper west side nyc",
@@ -646,7 +657,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Use building reports to understand service quality and long-term fit.",
     ],
     depthNotes: [
-      "Treat board readiness as part of the brief — financing, references, and timeline.",
+      "Treat board readiness as part of the brief - financing, references, and timeline.",
       "Choose avenue versus side-street living deliberately; they solve different problems.",
       "Do not let museum-mile prestige override commute and daily service reality.",
     ],
@@ -677,7 +688,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Confirm building operations before committing to a remote or low-frequency ownership plan.",
     ],
     depthNotes: [
-      "Filter for true loft usability — light, layout, and quiet — versus industrial cosmetics.",
+      "Filter for true loft usability - light, layout, and quiet - versus industrial cosmetics.",
       "Accept lower inventory velocity as a trade-off for scale and privacy.",
       "Compare Tribeca against Battery Park City and West Village only after the brief is clear.",
     ],
@@ -752,7 +763,7 @@ export const serviceLandings: ServiceLanding[] = [
     navLabel: "Financial District",
     eyebrow: "NYC Neighborhood",
     summary:
-      "Financial District decisions depend on commute convenience, building conversion quality, weekend lifestyle, and whether FiDi living supports the buyer’s actual week—not just the office address.",
+      "Financial District decisions depend on commute convenience, building conversion quality, weekend lifestyle, and whether FiDi living supports the buyer’s actual week - not just the office address.",
     searchTerms: [
       "financial district real estate agent",
       "buy apartment financial district nyc",
@@ -771,7 +782,7 @@ export const serviceLandings: ServiceLanding[] = [
     ],
     depthNotes: [
       "Separate weekday commute wins from weekend livability before choosing a conversion.",
-      "Inspect service standards carefully — FiDi quality varies more than brochure language suggests.",
+      "Inspect service standards carefully - FiDi quality varies more than brochure language suggests.",
       "Decide primary home versus pied-à-terre use; the right building changes with that answer.",
     ],
     cta: "Start a Financial District decision brief.",
@@ -779,14 +790,16 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "first-home-buyers-nyc",
     art: "professional-buyer",
+    heroImage: "/images/situations/first-home-buyers-nyc.png",
+    heroPaper: "#F9F3EA",
     title: "First Home Buyers in NYC",
     navLabel: "First Home",
     eyebrow: "Life Change",
     summary:
-      "A first purchase should start with whether buying now is actually right — not with open houses. The brief clarifies readiness, trade-offs, and what a good first home needs to do.",
+      "A first purchase should start with whether buying now is actually right - not with open houses. The brief clarifies readiness, trade-offs, and what a good first home needs to do.",
     searchTerms: ["first home buyers nyc", "first time home buyer manhattan", "should I buy my first apartment nyc"],
     audience: [
-      "People considering a first purchase in New York within the next few years — or sooner.",
+      "People considering a first purchase in New York within the next few years - or sooner.",
       "Renters unsure whether to keep renting, wait, or buy a smaller foothold.",
       "Clients who want clarity before they get pulled into inventory.",
     ],
@@ -796,7 +809,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Compare buy vs. wait vs. rent-another-year before touring.",
     ],
     depthNotes: [
-      "Name the life change driving the purchase — marriage, job, family, or simply wanting roots.",
+      "Name the life change driving the purchase - marriage, job, family, or simply wanting roots.",
       "Model carrying costs and exit optionality; a first home that is hard to sell becomes a trap.",
       "Prefer a clear Decision Profile over a rushed offer on the first building that feels exciting.",
     ],
@@ -805,11 +818,13 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "marriage-housing-nyc",
     art: "seller-transition",
+    heroImage: "/images/situations/marriage-housing-nyc.png",
+    heroPaper: "#FAF3E4",
     title: "Marriage and Housing Decisions in NYC",
     navLabel: "Marriage",
     eyebrow: "Life Change",
     summary:
-      "Marriage often forces a housing question: whose place, a new place, rent first, or buy together. The brief starts with how you want to live — not with listings.",
+      "Marriage often forces a housing question: whose place, a new place, rent first, or buy together. The brief starts with how you want to live - not with listings.",
     searchTerms: ["marriage housing decisions nyc", "buying apartment after marriage nyc", "combining households new york"],
     audience: [
       "Couples merging households or deciding whether to buy after marriage.",
@@ -817,7 +832,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Clients who want a shared decision frame before capital is committed.",
     ],
     considerations: [
-      "Map lifestyle, commute, and space needs for both people — not one person’s default.",
+      "Map lifestyle, commute, and space needs for both people - not one person’s default.",
       "Decide rent-first vs. buy now based on timeline certainty, not wedding momentum.",
       "Clarify ownership structure, contribution, and exit assumptions early.",
     ],
@@ -831,11 +846,13 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "new-baby-growing-family-nyc",
     art: "professional-buyer",
+    heroImage: "/images/situations/new-baby-growing-family-nyc.png",
+    heroPaper: "#FBF1E0",
     title: "New Baby and Growing Family Housing in NYC",
-    navLabel: "New Baby",
+    navLabel: "Growing Family",
     eyebrow: "Life Change",
     summary:
-      "A new child changes sleep, space, schools, and patience for friction. The brief asks whether anything should change now — or whether the current home can stretch a little longer.",
+      "A new child changes sleep, space, schools, and patience for friction. The brief asks whether anything should change now - or whether the current home can stretch a little longer.",
     searchTerms: ["new baby apartment nyc", "growing family housing manhattan", "need more space after baby nyc"],
     audience: [
       "Parents expecting a child or newly navigating life with a baby in the city.",
@@ -857,11 +874,13 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "aging-parents-housing-nyc",
     art: "seller-transition",
+    heroImage: "/images/situations/aging-parents-housing-nyc.png",
+    heroPaper: "#FCF4E2",
     title: "Aging Parents and Housing Decisions in NYC",
     navLabel: "Aging Parents",
     eyebrow: "Life Change",
     summary:
-      "Helping parents age in place, downsize, or relocate is a family decision — not a listing problem. The brief keeps dignity, logistics, and building fit ahead of urgency.",
+      "Helping parents age in place, downsize, or relocate is a family decision - not a listing problem. The brief keeps dignity, logistics, and building fit ahead of urgency.",
     searchTerms: ["aging parents housing nyc", "helping parents downsize manhattan", "senior housing decisions new york"],
     audience: [
       "Adult children coordinating housing for aging parents in or near New York.",
@@ -870,7 +889,7 @@ export const serviceLandings: ServiceLanding[] = [
     ],
     considerations: [
       "Prioritize accessibility, building service, medical access, and social continuity.",
-      "Decide whether the parent’s home should be sold, rented, or held — separately from where they live next.",
+      "Decide whether the parent’s home should be sold, rented, or held - separately from where they live next.",
       "Pace decisions around capacity and consent, not market FOMO.",
     ],
     depthNotes: [
@@ -883,8 +902,10 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "job-loss-housing-nyc",
     art: "capital-strategy",
-    title: "Job Loss and Housing Decisions in NYC",
-    navLabel: "Job Loss",
+    heroImage: "/images/situations/job-loss-housing-nyc.png",
+    heroPaper: "#FDF5E3",
+    title: "Job Change and Housing Decisions in NYC",
+    navLabel: "Job Change",
     eyebrow: "Life Change",
     summary:
       "Income disruption changes what housing should do next: protect runway, reduce burn, or hold steady. The brief prioritizes options before panic moves.",
@@ -895,7 +916,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Clients who need a clear priority order: liquidity, housing stability, then market timing.",
     ],
     considerations: [
-      "Protect decision quality — avoid selling or breaking a lease solely from short-term fear.",
+      "Protect decision quality - avoid selling or breaking a lease solely from short-term fear.",
       "Model runway, carrying costs, and realistic re-employment timelines.",
       "Compare stay / sell / rent / downsize as strategies, not moral judgments.",
     ],
@@ -909,11 +930,13 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "remote-work-housing-nyc",
     art: "professional-buyer",
+    heroImage: "/images/situations/remote-work-housing-nyc.png",
+    heroPaper: "#FAECD6",
     title: "Remote Work and Housing Decisions in NYC",
     navLabel: "Remote Work",
     eyebrow: "Life Change",
     summary:
-      "Remote or hybrid work rewrites commute math, space needs, and whether Manhattan still fits. The brief asks what the home must support now — not what it supported in 2019.",
+      "Remote or hybrid work rewrites commute math, space needs, and whether Manhattan still fits. The brief asks what the home must support now - not what it supported in 2019.",
     searchTerms: ["remote work housing nyc", "hybrid work apartment manhattan", "should I leave nyc remote work"],
     audience: [
       "People whose work pattern changed and whose home no longer matches the week.",
@@ -926,7 +949,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Compare renovate / reconfigure vs. relocate vs. second workspace elsewhere.",
     ],
     depthNotes: [
-      "Count real office days per month — hybrid myths break many purchase briefs.",
+      "Count real office days per month - hybrid myths break many purchase briefs.",
       "Prioritize light, acoustics, and a closable work door over prestige address.",
       "If leaving the city is on the table, treat it as a life-fit decision, not only a cost decision.",
     ],
@@ -935,6 +958,8 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "inheritance-housing-nyc",
     art: "seller-transition",
+    heroImage: "/images/situations/inheritance-housing-nyc.png",
+    heroPaper: "#FDF3DF",
     title: "Inheritance and Housing Decisions in NYC",
     navLabel: "Inheritance",
     eyebrow: "Life Change",
@@ -949,7 +974,7 @@ export const serviceLandings: ServiceLanding[] = [
     considerations: [
       "Separate estate administration from the housing strategy for the property itself.",
       "Compare keep / sell / rent against carrying costs, family use, and tax advice.",
-      "Decide whether anyone should live there — and on what terms — before marketing.",
+      "Decide whether anyone should live there - and on what terms - before marketing.",
     ],
     depthNotes: [
       "Confirm authority to decide: executor, co-heirs, or court timeline.",

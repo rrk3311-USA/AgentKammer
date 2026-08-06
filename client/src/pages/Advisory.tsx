@@ -5,8 +5,8 @@ const alaCarte = [
   {
     title: "Housing Strategy Session",
     format: "~60 minutes · written action summary",
-    text: "One major decision — buy vs. wait, stay vs. move, comparing two buildings, renovate vs. relocate, executive relocation. Ends with a written summary you can act on, not a transcript.",
-    price: "$250–500",
+    text: "One major decision - buy vs. wait, stay vs. move, comparing two buildings, renovate vs. relocate, executive relocation. Ends with a written summary you can act on, not a transcript.",
+    price: "$250-500",
   },
   {
     title: "Building Second Opinion",
@@ -17,7 +17,7 @@ const alaCarte = [
   {
     title: "Residential Portfolio Review",
     format: "Session + written notes",
-    text: "Every property you own, reviewed together: what to keep, sell, renovate, or rent — weighed against lifestyle and long-term goals, not just market value.",
+    text: "Every property you own, reviewed together: what to keep, sell, renovate, or rent - weighed against lifestyle and long-term goals, not just market value.",
     price: "By scope",
   },
 ];
@@ -25,29 +25,29 @@ const alaCarte = [
 const memberships = [
   {
     title: "Essentials",
-    price: "$250–500/mo",
+    price: "$250-500/mo",
     text: "A monthly strategy touchpoint, email access for questions as they come up, an annual portfolio review, market updates, and written decision summaries you can keep.",
   },
   {
     title: "Executive Advisory",
-    price: "$750–1,500/mo",
+    price: "$750-1,500/mo",
     text: "Two sessions a month, priority scheduling, ongoing portfolio oversight, building research, renovation guidance, vendor recommendations, and family planning conversations.",
   },
   {
     title: "Private Residential Office",
-    price: "$2,500–5,000+/mo",
-    text: "A family office for residential real estate — reasonable unlimited strategy sessions, coordination across architects, inspectors, lenders, attorneys, and brokers, and an annual residential master plan.",
+    price: "$2,500-5,000+/mo",
+    text: "A family office for residential real estate - reasonable unlimited strategy sessions, coordination across architects, inspectors, lenders, attorneys, and brokers, and an annual residential master plan.",
   },
 ];
 
 const journey = [
   {
     title: "Start with what you're reading",
-    text: "Most relationships begin with the Research Library, a Decision Brief, or the Belonging Assessment — not a sales page.",
+    text: "Most relationships begin with the Research Library, a Decision Brief, or the Belonging Assessment - not a sales page.",
   },
   {
     title: "Book a Housing Strategy Session",
-    text: "One paid session, built around one real decision. This is a complete engagement on its own — not a qualifying call.",
+    text: "One paid session, built around one real decision. This is a complete engagement on its own - not a qualifying call.",
   },
   {
     title: "Receive a written strategy summary",
@@ -63,7 +63,7 @@ export default function Advisory() {
   usePageMetadata({
     title: "Residential Advisory",
     description:
-      "Agent Kammer Residential Advisory: how the Housing Strategy Session, à la carte reviews, and ongoing advisory memberships work — judgment over listing access.",
+      "Agent Kammer Residential Advisory: how the Housing Strategy Session, à la carte reviews, and ongoing advisory memberships work - judgment over listing access.",
     path: "/advisory",
   });
 
@@ -72,7 +72,7 @@ export default function Advisory() {
       <PageHero
         eyebrow="Residential Advisory"
         title="Ongoing strategic guidance for life's biggest residential decisions."
-        description="Agent Kammer is building a residential advisory practice, not chasing leads. Clients pay for judgment, not listing access — and a session is one way to reach it, not the product itself."
+        description="Agent Kammer is building a residential advisory practice, not chasing leads. Clients pay for judgment, not listing access - and a session is one way to reach it, not the product itself."
         art="private-advisory"
       />
 
@@ -82,10 +82,10 @@ export default function Advisory() {
           The product is the advisory relationship.
         </h2>
         <p className="mt-8 text-lg leading-9 text-brand-graphite">
-          A conversation is how a session happens to be delivered — it is not what a client is paying for. What a client is paying for is judgment applied to a real decision: whether to buy, wait, renovate, sell, or do nothing at all.
+          A conversation is how a session happens to be delivered - it is not what a client is paying for. What a client is paying for is judgment applied to a real decision: whether to buy, wait, renovate, sell, or do nothing at all.
         </p>
         <p className="mt-6 text-lg leading-9 text-brand-graphite">
-          That means a single Housing Strategy Session can be a complete, successful engagement. It also means some clients prefer the guidance to continue as decisions evolve — through one of the memberships below.
+          That means a single Housing Strategy Session can be a complete, successful engagement. It also means some clients prefer the guidance to continue as decisions evolve - through one of the memberships below.
         </p>
       </PageSection>
 
@@ -94,7 +94,7 @@ export default function Advisory() {
           <SectionHeading
             eyebrow="À La Carte"
             title="Begin with one decision."
-            description="Priced per engagement. Ranges below are current guidance, not a checkout — every engagement starts with a conversation about scope."
+            description="Priced per engagement. Ranges below are current guidance, not a checkout - every engagement starts with a conversation about scope."
           />
           <div className="mt-12 border-t border-brand-border">
             {alaCarte.map((item, index) => (
@@ -119,7 +119,7 @@ export default function Advisory() {
         <SectionHeading
           eyebrow="Memberships"
           title="For decisions that keep evolving."
-          description="Not a bundle of meetings — an ongoing advisory relationship. Session counts are a supporting detail, not the offer."
+          description="Not a bundle of meetings - an ongoing advisory relationship. Session counts are a supporting detail, not the offer."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {memberships.map((tier) => (
@@ -157,7 +157,7 @@ export default function Advisory() {
 
       <CTA
         title="Begin with a Housing Strategy Session."
-        description="One major decision, a written action summary, and a clear next step — with an ongoing advisory relationship available if the decisions keep evolving."
+        description="One major decision, a written action summary, and a clear next step - with an ongoing advisory relationship available if the decisions keep evolving."
         href="/contact"
         label="Book a Housing Strategy Session"
       />

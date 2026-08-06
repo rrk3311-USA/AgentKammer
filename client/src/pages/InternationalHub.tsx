@@ -30,7 +30,7 @@ export default function InternationalHub() {
         <SectionHeading
           eyebrow="Where are you buying from?"
           title="Start with your country."
-          description="Each page follows the same premium structure — localized for your language and common questions — then ends with a strategy request. After you submit, a specialist who speaks your language will get in touch."
+          description="Each page follows the same premium structure - localized for your language and common questions - then ends with a strategy request. After you submit, a specialist who speaks your language will get in touch."
         />
         <div className="mt-14 space-y-16">
           {INTERNATIONAL_REGIONS.map((region) => {
@@ -122,7 +122,7 @@ export default function InternationalHub() {
 
       <CTA
         title="Ready to request a Manhattan strategy?"
-        description="Tell us your country, language, and goals — a specialist who speaks your language will get in touch."
+        description="Tell us your country, language, and goals - a specialist who speaks your language will get in touch."
         href="#strategy-request"
         label="Request your strategy"
         eyebrow="Strategy request"

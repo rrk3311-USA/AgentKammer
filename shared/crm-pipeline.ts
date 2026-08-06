@@ -70,7 +70,7 @@ export const SIGNAL_TYPES = [
 
 export type SignalType = (typeof SIGNAL_TYPES)[number];
 
-/** Points toward strategy lead score (0–100 scale after normalization helpers). */
+/** Points toward strategy lead score (0-100 scale after normalization helpers). */
 export const SIGNAL_SCORE_WEIGHTS: Record<SignalType, number> = {
   page_view: 1,
   social_referral: 3,
@@ -138,7 +138,7 @@ function clamp(n: number, min: number, max: number) {
 }
 
 export function normalizeScore(raw: number): number {
-  // Soft cap: raw signal sum → 0–100
+  // Soft cap: raw signal sum → 0-100
   return clamp(Math.round((raw / (raw + 40)) * 100), 0, 100);
 }
 
@@ -278,7 +278,7 @@ export function computeStrategyScore(input: ScoreInput): StrategyScoreBreakdown 
     });
   }
 
-  // Fold legacy leadScore (0–20-ish) into engagement
+  // Fold legacy leadScore (0-20-ish) into engagement
   if (typeof input.leadScore === "number" && input.leadScore > 0) {
     const pts = Math.min(20, input.leadScore * 1.5);
     engagement += pts;

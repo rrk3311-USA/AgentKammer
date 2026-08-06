@@ -7,7 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { DecisionAssistantDock } from "@/components/DecisionAssistantDock";
+import { GuidanceAdvisorLauncher } from "@/components/DecisionAssistantDock";
 import { initVisitorSignalTracking, trackPageViewSignal } from "@/lib/visitor-signals";
 
 const Home = lazy(() => import("@/pages/Home"));
@@ -178,7 +178,7 @@ function AppShell() {
   }
 
   return (
-    <div className="min-h-screen bg-brand-charcoal pb-[5.75rem] text-brand-ink md:pb-[5.25rem]">
+    <div className="min-h-screen bg-brand-charcoal pb-[calc(5.5rem+env(safe-area-inset-bottom))] text-brand-ink md:pb-[calc(5rem+env(safe-area-inset-bottom))]">
       <ScrollToTop />
       <VisitorSignals />
       <Header />
@@ -186,7 +186,7 @@ function AppShell() {
         <Router />
       </Suspense>
       <Footer />
-      <DecisionAssistantDock />
+      <GuidanceAdvisorLauncher />
       <Toaster />
     </div>
   );

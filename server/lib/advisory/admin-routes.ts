@@ -313,7 +313,7 @@ export function registerAdvisoryAdminRoutes(
     }
   });
 
-  // Inbound Attio webhooks (stage/task events) — verify signature; no browser secrets.
+  // Inbound Attio webhooks (stage/task events) - verify signature; no browser secrets.
   app.post("/api/webhooks/attio", async (req, res) => {
     try {
       const raw = typeof req.body === "string" ? req.body : JSON.stringify(req.body ?? {});

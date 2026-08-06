@@ -8,7 +8,7 @@ import { buildingReports, formatBuildingReportDate } from "@/data/building-repor
 const levels = [
   {
     name: "Decision Intelligence",
-    text: "Clarify the decision before the search — what changed, whether anything should change, and which path protects you.",
+    text: "Clarify the decision before the search - what changed, whether anything should change, and which path protects you.",
     href: "/situations",
     cta: "Explore Situations",
   },
@@ -20,13 +20,13 @@ const levels = [
   },
   {
     name: "Property Intelligence",
-    text: "Diligence on a specific property — from a free Property Snapshot to a full Property Intelligence Report.",
+    text: "Diligence on a specific property - from a free Property Snapshot to a full Property Intelligence Report.",
     href: "/contact",
     cta: "Request Intelligence",
   },
   {
     name: "Executive Intelligence",
-    text: "Full acquisition judgment and continuity — Executive Acquisition Dossier and Executive Intelligence Retainer.",
+    text: "Full acquisition judgment and continuity - Executive Acquisition Dossier and Executive Intelligence Retainer.",
     href: "/contact",
     cta: "Request Intelligence",
   },
@@ -48,7 +48,7 @@ export default function IntelligenceHome() {
   usePageMetadata({
     title: "Intelligence",
     description:
-      "Helping you make better real estate decisions through intelligence — Decision, Building, Property, and Executive Intelligence from Agent Kammer.",
+      "Helping you make better real estate decisions through intelligence - Decision, Building, Property, and Executive Intelligence from Agent Kammer.",
     path: "/intelligence",
   });
 
@@ -57,7 +57,7 @@ export default function IntelligenceHome() {
       <PageHero
         eyebrow="Intelligence"
         title="Better real estate decisions through intelligence."
-        description="Agent Kammer is an intelligence practice — not a listing feed. Products are simply how deeper intelligence is delivered."
+        description="Agent Kammer is an intelligence practice - not a listing feed. Products are simply how deeper intelligence is delivered."
         art="decision-framework"
       />
 
@@ -95,7 +95,7 @@ export default function IntelligenceHome() {
           <SectionHeading
             eyebrow="Public Offers"
             title="Four ways to begin."
-            description="Everything else is a service or feature — not another product on the shelf."
+            description="Everything else is a service or feature - not another product on the shelf."
           />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {offers.map((offer) => (
@@ -116,7 +116,7 @@ export default function IntelligenceHome() {
         <SectionHeading
           eyebrow="Building Profiles"
           title="Study the building before the showing."
-          description="Editorial address studies — free to read, distinct from paid Property Intelligence."
+          description="Editorial address studies - free to read, distinct from paid Property Intelligence."
         />
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {buildingReports.map((report) => (
@@ -140,7 +140,7 @@ export default function IntelligenceHome() {
           <SectionHeading
             eyebrow="Insights"
             title="Notes that sharpen the next decision."
-            description="Kept for depth and SEO — surfaced here under Intelligence, not as a separate primary nav item."
+            description="Kept for depth and SEO - surfaced here under Intelligence, not as a separate primary nav item."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {insightPreview.map((item) => (
@@ -166,7 +166,7 @@ export default function IntelligenceHome() {
 
       <CTA
         title="Request Intelligence."
-        description="Tell us the decision in front of you. We will prescribe the right next level — Assessment, Snapshot, Report, or Dossier."
+        description="Tell us the decision in front of you. We will prescribe the right next level - Assessment, Snapshot, Report, or Dossier."
         href="/contact"
         label="Request Intelligence"
         eyebrow="Request Intelligence"

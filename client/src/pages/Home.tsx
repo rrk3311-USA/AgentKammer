@@ -5,7 +5,7 @@ import { openDecisionAssistant } from "@/lib/decision-assistant";
 import { serviceLandingMap } from "@/data/service-landings";
 
 const howWeDecide = [
-  { step: "01", title: "What's changing?", text: "Life event, pressure, or uncertainty — before neighborhoods or inventory." },
+  { step: "01", title: "What's changing?", text: "Life event, pressure, or uncertainty - before neighborhoods or inventory." },
   { step: "02", title: "Should anything change?", text: "Sometimes the highest-value recommendation is to do nothing." },
   { step: "03", title: "Where do you belong?", text: "Even if you stay, is the environment still serving the life you want?" },
 ];
@@ -37,7 +37,7 @@ export default function Home() {
           <div className="flex min-h-[560px] flex-col justify-start pb-32 pt-10 lg:pr-16 lg:pt-16">
             <p className="text-[10px] uppercase tracking-[0.3em] text-brand-cocoa">Agent Kammer</p>
             <p className="mt-3 text-[11px] uppercase tracking-[0.26em] text-brand-cocoa">Private Housing Advisory</p>
-            <p className="mt-3 text-[11px] uppercase tracking-[0.22em] text-brand-brass/90">Buildings before listings.</p>
+            <p className="mt-3 text-[11px] uppercase tracking-[0.22em] text-brand-brass/90">Buildings before listings</p>
             <h1 className="mt-4 max-w-[12ch] font-display text-[clamp(3.4rem,6.4vw,6.8rem)] leading-[0.88] text-brand-navy">
               Start with what feels unclear.
             </h1>
@@ -50,7 +50,7 @@ export default function Home() {
               </p>
             </blockquote>
             <p className="mt-5 max-w-xl text-base leading-7 text-brand-graphite/82">
-              The job here is to diagnose that change and guide the highest expected-value decision — even if that means doing nothing — then curate the right local professionals when a transaction is appropriate.
+              The job here is to diagnose that change and guide the highest expected-value decision - even if that means doing nothing - then curate the right local professionals when a transaction is appropriate.
             </p>
             <div className="mt-7 flex flex-wrap items-stretch gap-3">
               <button
@@ -106,7 +106,7 @@ export default function Home() {
               Are you living where you belong?
             </h2>
             <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-brand-graphite">
-              Most people have never been asked. A free assessment builds your Decision Profile — belonging score, friction, and a clear next step. Stay, renovate, rent, buy, sell, or wait.
+              Most people have never been asked. A free assessment builds your Decision Profile - belonging score, friction, and a clear next step. Stay, renovate, rent, buy, sell, or wait.
             </p>
             <Link
               href="/belonging"
@@ -149,7 +149,7 @@ export default function Home() {
               The asset before the listing.
             </h2>
             <p className="mt-6 max-w-xl text-base leading-8 text-brand-ivory/74">
-              A knowledge resource — Building Reports that read quality, context, and fit, not marketing copy. Used only after the decision frame is clear.
+              A knowledge resource - Building Reports that read quality, context, and fit, not marketing copy. Used only after the decision frame is clear.
             </p>
           </div>
           <Link
@@ -210,7 +210,7 @@ export default function Home() {
               Find out if you’re living where you belong.
             </h2>
             <p className="mt-6 max-w-2xl text-base leading-8 text-brand-ivory/76">
-              The assessment is the front door — not a valuation form. When a Housing Strategy Session is warranted, we already know your Decision Profile.
+              The assessment is the front door - not a valuation form. When a Housing Strategy Session is warranted, we already know your Decision Profile.
             </p>
           </div>
           <Link

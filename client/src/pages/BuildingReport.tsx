@@ -37,7 +37,7 @@ export default function BuildingReport() {
         <SectionHeading
           eyebrow="Published Profiles"
           title="Study the building before the apartment becomes the conversation."
-          description="Each profile covers executive summary, resident fit, strengths, trade-offs, neighborhood context, comparables, and a clear bottom line — including when the better move is to keep looking."
+          description="Each profile covers executive summary, resident fit, strengths, trade-offs, neighborhood context, comparables, and a clear bottom line - including when the better move is to keep looking."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {buildingReports.map((building) => (

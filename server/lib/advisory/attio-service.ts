@@ -54,7 +54,7 @@ export function isAttioConfigured(): boolean {
   return getAttioConfig() != null;
 }
 
-/** Status for admin troubleshooting — never returns the API key. */
+/** Status for admin troubleshooting - never returns the API key. */
 export function getAttioSetupStatus() {
   const apiKey = Boolean(process.env.ATTIO_API_KEY?.trim());
   const peopleObjectId = process.env.ATTIO_PEOPLE_OBJECT_ID?.trim() || "people";

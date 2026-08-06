@@ -13,7 +13,7 @@ export const LIFECYCLE_STAGES = [
   "advisory_client",
   "transaction_ready",
   "active_client",
-  /** Deal completed — relationship continues as advisory (not Inactive). */
+  /** Deal completed - relationship continues as advisory (not Inactive). */
   "closed",
   "long_term_nurture",
   /** Disqualified, opted out, unresponsive, or former with no ongoing relationship. */
@@ -23,7 +23,7 @@ export const LIFECYCLE_STAGES = [
 export type LifecycleStage = (typeof LIFECYCLE_STAGES)[number];
 
 /**
- * Canonical CRM stage labels — website, Attio People/Housing, and admin must match.
+ * Canonical CRM stage labels - website, Attio People/Housing, and admin must match.
  * Deal execution stages live on Transactions / Active Transactions, not here.
  */
 export const ATTIO_PIPELINE_STAGES = [
@@ -133,7 +133,7 @@ export type AttioSyncAction =
   | "update_stage"
   | "sync_pipeline_lists";
 
-/** Lead board vs Current Clients board — deals stay on Transactions object. */
+/** Lead board vs Current Clients board - deals stay on Transactions object. */
 export const ATTIO_LEAD_LIST_STAGES: AttioPipelineStage[] = [
   "New Signal",
   "Engaged",
@@ -226,7 +226,7 @@ export function mergeLifecycleStage(
   const order = LIFECYCLE_STAGES;
   const currentIdx = current ? order.indexOf(current) : -1;
   const derivedIdx = order.indexOf(scoreDerived);
-  // Manual relationship stages — score should not pull them backward
+  // Manual relationship stages - score should not pull them backward
   if (
     current === "long_term_nurture" ||
     current === "closed" ||

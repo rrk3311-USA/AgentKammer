@@ -35,11 +35,11 @@ const defaultEngagement: PageEngagement = {
   ],
   nudge: "Still deciding? I can help you figure out whether anything should change.",
   greeting:
-    "Hi, I'm Raphi — your Guidance Advisor. Before you spend time on listings, let's decide whether anything should change at all. Sometimes doing nothing is right. What's changing?",
+    "Hi, I'm Raphi - your Guidance Advisor. Before you spend time on listings, let's decide whether anything should change at all. Sometimes doing nothing is right. What's changing?",
   starters: [
     { label: "Relocation", text: "We're relocating.", path: "/situations/executive-relocation-nyc" },
-    { label: "More space", text: "We need more space.", path: "/situations/school-district-planning-nyc" },
-    { label: "First home", text: "I'm buying my first home.", path: "/buyer-advisory" },
+    { label: "Growing family", text: "Our family is growing.", path: "/situations/new-baby-growing-family-nyc" },
+    { label: "First home", text: "I'm buying my first home.", path: "/situations/first-home-buyers-nyc" },
     { label: "Just exploring", text: "I'm just exploring.", path: "/buyer-advisory" },
   ],
   pageHelper: "I'm with you on this page. Tell me what you're trying to decide and I'll point you to the next useful move.",
@@ -50,7 +50,7 @@ const byPath: Record<string, Partial<PageEngagement>> = {
     headline: "Start with the decision, not the listings",
     nudge: "Most visitors start here unsure. I can help you decide whether to move, wait, or stay put.",
     greeting:
-      "Hi, I'm Raphi. I'll stay with you across the site. Before you browse buildings, tell me what's changing — relocation, space, family, investment, or just exploring.",
+      "Hi, I'm Raphi. I'll stay with you across the site. Before you browse buildings, tell me what's changing - relocation, space, family, investment, or just exploring.",
     pageHelper: "You're on the homepage. If you tell me the life change, I'll open the right brief.",
     starters: [
       { label: "Relocating", text: "We're relocating to Manhattan.", path: "/situations/executive-relocation-nyc" },
@@ -63,8 +63,8 @@ const byPath: Record<string, Partial<PageEngagement>> = {
     headline: "Buyer decisions before tours",
     nudge: "Want a clear buy / wait / rent path before you look at apartments?",
     greeting:
-      "You're in Buyer Advisory. I help decide buy, wait, rent, or stay — then which neighborhoods and building types fit. What's driving the search?",
-    pageHelper: "On Buyer Advisory I'll keep you focused on fit, not inventory. What's the main pressure — timing, budget, or lifestyle?",
+      "You're in Buyer Advisory. I help decide buy, wait, rent, or stay - then which neighborhoods and building types fit. What's driving the search?",
+    pageHelper: "On Buyer Advisory I'll keep you focused on fit, not inventory. What's the main pressure - timing, budget, or lifestyle?",
     starters: [
       { label: "Buy now?", text: "Should I buy now or wait?" },
       { label: "First purchase", text: "This would be my first home in NYC." },
@@ -84,18 +84,25 @@ const byPath: Record<string, Partial<PageEngagement>> = {
     nudge: "Relocating? I can help you decide rent-first vs buy, and which neighborhoods match your commute.",
     greeting:
       "Executive relocation is where timing and commute decide almost everything. When do you need to be settled, and where will you work?",
-    pageHelper: "On the relocation brief — share start date and office area and I'll recommend rent vs buy next.",
+    pageHelper: "On the relocation brief - share start date and office area and I'll recommend rent vs buy next.",
     starters: [
-      { label: "Start soon", text: "I need to be settled within 60–90 days." },
+      { label: "Start soon", text: "I need to be settled within 60-90 days." },
       { label: "Rent first?", text: "Should I rent first or buy on arrival?" },
       { label: "Family move", text: "We're relocating with kids." },
       { label: "Solo / pied-à-terre", text: "I need a weekday pied-à-terre." },
     ],
   },
   "/situations/corporate-relocation-buyers-nyc": {
-    headline: "Corporate move decisions",
-    nudge: "Company move? I can map timeline, budget, and neighborhood fit before HR pressure builds.",
-    greeting: "Corporate relocation works best when we lock timeline and work location first. What's your report / start window?",
+    headline: "Company move - start here",
+    nudge: "For the main relocation path, use Executive Relocation. I can still map timeline and rent vs buy here.",
+    greeting:
+      "Company moves still start with operating rhythm. For the fuller brief, open Executive Relocation - or tell me your start window and whether rent or buy is on the table.",
+    starters: [
+      { label: "Executive path", text: "Show me the executive relocation brief.", path: "/situations/executive-relocation-nyc" },
+      { label: "Rent vs buy", text: "Should I rent first or buy after relocating?", path: "/situations/rent-vs-buy-manhattan-relocation" },
+      { label: "Start window", text: "My report date is..." },
+      { label: "Family move", text: "We're relocating with kids." },
+    ],
   },
   "/situations/foreign-buyers-new-york": {
     headline: "International buyer path",
@@ -110,7 +117,7 @@ const byPath: Record<string, Partial<PageEngagement>> = {
     ],
   },
   "/situations/rent-vs-buy-manhattan-relocation": {
-    headline: "Rent vs buy — honestly",
+    headline: "Rent vs buy - honestly",
     nudge: "I can tell you when renting is smarter than buying for your timeline.",
     greeting: "Rent vs buy in Manhattan is mostly a timeline and liquidity decision. How long do you expect to stay?",
   },
@@ -156,7 +163,7 @@ const byPath: Record<string, Partial<PageEngagement>> = {
   "/international": {
     headline: "Choose your country guide",
     prompts: ["I'm buying from...", "I need Mandarin guidance...", "Pied-à-terre from abroad...", "Remote ownership concerns..."],
-    nudge: "Pick your country — or tell me where you're buying from and I'll open the right guide.",
+    nudge: "Pick your country - or tell me where you're buying from and I'll open the right guide.",
     greeting:
       "I'm Raphi. For international buyers I stay with you in your language. Which country are you buying from, and is this primary home, pied-à-terre, or investment?",
     pageHelper: "You're on the International Hub. Name your country and I'll take you to the localized guide.",
@@ -170,7 +177,7 @@ const byPath: Record<string, Partial<PageEngagement>> = {
   "/belonging": {
     headline: "Belonging Assessment",
     nudge: "The assessment helps clarify fit. Want me to interpret what your answers mean for next steps?",
-    greeting: "Belonging is about whether Manhattan — and which part — will actually work for your life. What's prompting the assessment?",
+    greeting: "Belonging is about whether Manhattan - and which part - will actually work for your life. What's prompting the assessment?",
   },
   "/advisory": {
     headline: "Advisory, not inventory",
@@ -182,7 +189,7 @@ const byPath: Record<string, Partial<PageEngagement>> = {
     nudge: "If you want Raphael to review your situation, I can prepare a clean brief first.",
     greeting:
       "Before you book time, I can capture the decision so the call is useful. What's the one question you want answered?",
-    pageHelper: "On Contact — if you share the core question, I'll shape a short brief for the team.",
+    pageHelper: "On Contact - if you share the core question, I'll shape a short brief for the team.",
   },
   "/insights": {
     headline: "Read, then decide",
@@ -195,7 +202,7 @@ const byPath: Record<string, Partial<PageEngagement>> = {
   },
   "/account": {
     headline: "Resume your decision",
-    nudge: "I can pick up where you left off — what should we refine next?",
+    nudge: "I can pick up where you left off - what should we refine next?",
   },
   "/hub": {
     headline: "Your Decision Hub",
@@ -231,8 +238,8 @@ export function getPageEngagement(path: string): PageEngagement {
     const label = country.replace(/\b\w/g, (c) => c.toUpperCase());
     return mergeEngagement({
       headline: `${label} buyer decisions`,
-      nudge: `Questions about buying from ${label}? Ask me in your language — banking, buildings, or timeline.`,
-      greeting: `You're on the ${label} buyer guide. I'm Raphi — ask in your language about process, buildings, or whether buying makes sense for you.`,
+      nudge: `Questions about buying from ${label}? Ask me in your language - banking, buildings, or timeline.`,
+      greeting: `You're on the ${label} buyer guide. I'm Raphi - ask in your language about process, buildings, or whether buying makes sense for you.`,
       pageHelper: `On the ${label} guide. Tell me primary home, pied-à-terre, or investment and I'll focus the next step.`,
       prompts: [
         "Is condo or co-op better for me?",
@@ -263,7 +270,7 @@ export function getPageEngagement(path: string): PageEngagement {
       headline: "Building fit & risk",
       nudge: "Have a concern about this building or area? Ask me before you fall for the lobby.",
       greeting: "Building reports are for pressure-testing fit. What are you trying to confirm or rule out?",
-      pageHelper: "Looking at a building report — tell me what would make you walk away.",
+      pageHelper: "Looking at a building report - tell me what would make you walk away.",
     });
   }
 
@@ -272,7 +279,7 @@ export function getPageEngagement(path: string): PageEngagement {
       headline: "Apply this insight to your case",
       nudge: "Want me to translate this article into a decision for your situation?",
       greeting: "Insights matter when applied. Tell me your situation and I'll connect this piece to a next move.",
-      pageHelper: "Reading an insight — should I help you decide what it means for buy, wait, or relocate?",
+      pageHelper: "Reading an insight - should I help you decide what it means for buy, wait, or relocate?",
     });
   }
 

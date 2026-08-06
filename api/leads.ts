@@ -67,7 +67,7 @@ function buildLeadHtml(data: z.infer<typeof leadSchema>) {
 
   return `
     <div style="font-family: Georgia, serif; color:#202735; line-height:1.45;">
-    <h2>New Decision Guide Lead — ${data.leadSource}</h2>
+    <h2>New Decision Guide Lead - ${data.leadSource}</h2>
     ${rows}
     ${profileRows ? `
       <h3>Decision Profile</h3>
@@ -126,7 +126,7 @@ async function sendViaGmail(to: string, subject: string, html: string, replyTo?:
 }
 
 async function notifyLead(data: z.infer<typeof leadSchema>) {
-  const subject = `New Lead — ${data.leadSource} — Agent Kammer`;
+  const subject = `New Lead - ${data.leadSource} - Agent Kammer`;
   const html = buildLeadHtml(data);
   const replyTo = data.email;
   const recipients = [CONTACT_INBOX];

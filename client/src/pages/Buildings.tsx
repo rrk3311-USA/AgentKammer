@@ -39,7 +39,7 @@ export default function Buildings() {
       <PageHero
         eyebrow="Building Intelligence"
         title="Study the building before the showing."
-        description="Building Profiles separate attractive listings from durable decisions — address quality, neighborhood fit, timing risk, and whether a property deserves your attention at all."
+        description="Building Profiles separate attractive listings from durable decisions - address quality, neighborhood fit, timing risk, and whether a property deserves your attention at all."
         art="reports-overview"
       />
       <ReportSubnav />
@@ -70,7 +70,7 @@ export default function Buildings() {
           <SectionHeading
             eyebrow="Featured Building Profiles"
             title="Published address studies."
-            description="Editorial profiles with resident fit, trade-offs, comparables, and a bottom line — including when to walk away."
+            description="Editorial profiles with resident fit, trade-offs, comparables, and a bottom line - including when to walk away."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             {buildingReports.map((report) => (
@@ -98,7 +98,7 @@ export default function Buildings() {
 
       <CTA
         title="Request Intelligence."
-        description="Tell us the building, neighborhood, or timing question that needs a sharper answer — Snapshot, Report, or Dossier."
+        description="Tell us the building, neighborhood, or timing question that needs a sharper answer - Snapshot, Report, or Dossier."
         href="/contact"
         label="Request Intelligence"
         eyebrow="Request Intelligence"

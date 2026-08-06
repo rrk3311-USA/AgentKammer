@@ -9,29 +9,38 @@ export type DecisionNavGroup = {
   items: DecisionNavItem[];
 };
 
-/** Primary OS surface groups — used on /situations and Research Library search. */
+const whatsChangingItems: DecisionNavItem[] = [
+  { label: "Executive Relocation", href: "/situations/executive-relocation-nyc" },
+  { label: "First Home", href: "/situations/first-home-buyers-nyc" },
+  { label: "Growing Family", href: "/situations/new-baby-growing-family-nyc" },
+  { label: "Marriage", href: "/situations/marriage-housing-nyc" },
+  { label: "Divorce", href: "/situations/divorce-property-sales-nyc" },
+  { label: "Empty Nest", href: "/situations/empty-nester-downsizing-nyc" },
+  { label: "Aging Parents", href: "/situations/aging-parents-housing-nyc" },
+  { label: "Inheritance", href: "/situations/inheritance-housing-nyc" },
+  { label: "Retirement", href: "/situations/retiree-senior-home-buyers-nyc" },
+  { label: "Remote Work", href: "/situations/remote-work-housing-nyc" },
+  { label: "Job Change", href: "/situations/job-loss-housing-nyc" },
+  { label: "International Move", href: "/international" },
+];
+
+const understandItems: DecisionNavItem[] = [
+  { label: "Rent vs Buy", href: "/situations/rent-vs-buy-manhattan-relocation" },
+  { label: "School Districts", href: "/situations/school-district-planning-nyc" },
+  { label: "Condo vs Co-op", href: "/situations/condo-vs-coop-foreign-buyers-nyc" },
+  { label: "New Development", href: "/situations/new-development-nyc" },
+  { label: "Pied-à-Terre", href: "/situations/pied-a-terre-buyers-nyc" },
+  { label: "Foreign Buyers", href: "/situations/foreign-buyers-new-york" },
+  { label: "Investment / 1031", href: "/situations/1031-exchange-new-york" },
+  { label: "Building Profiles", href: "/building-reports" },
+];
+
+/** Primary OS surface groups - used on /situations and Research Library search. */
 export const decisionNavigationGroups: DecisionNavGroup[] = [
   {
     title: "What's Changing?",
     description: "The trigger comes first. These life changes make people question home before they look at listings.",
-    items: [
-      { label: "Executive Relocation", href: "/situations/executive-relocation-nyc" },
-      { label: "First Home", href: "/situations/first-home-buyers-nyc" },
-      { label: "Growing Family", href: "/situations/new-baby-growing-family-nyc" },
-      { label: "More Space", href: "/situations/school-district-planning-nyc" },
-      { label: "Retirement", href: "/situations/retiree-senior-home-buyers-nyc" },
-      { label: "Inheritance", href: "/situations/inheritance-housing-nyc" },
-      { label: "Divorce", href: "/situations/divorce-property-sales-nyc" },
-      { label: "Empty Nest", href: "/situations/empty-nester-downsizing-nyc" },
-      { label: "Marriage", href: "/situations/marriage-housing-nyc" },
-      { label: "Remote Work", href: "/situations/remote-work-housing-nyc" },
-      { label: "Downsizing", href: "/situations/empty-nester-downsizing-nyc" },
-      { label: "Aging Parents", href: "/situations/aging-parents-housing-nyc" },
-      { label: "Job Change", href: "/situations/job-loss-housing-nyc" },
-      { label: "International Move", href: "/international" },
-      { label: "Estate Planning", href: "/situations/probate-estate-sales-nyc" },
-      { label: "Corporate Relocation", href: "/situations/corporate-relocation-buyers-nyc" },
-    ],
+    items: whatsChangingItems,
   },
   {
     title: "What Decision Are You Facing?",
@@ -50,40 +59,13 @@ export const decisionNavigationGroups: DecisionNavGroup[] = [
   },
   {
     title: "What Are You Trying to Understand?",
-    description: "Evidence and structure once the life change and decision path are named — buildings, ownership types, and research.",
-    items: [
-      { label: "Condo vs Co-op", href: "/situations/condo-vs-coop-foreign-buyers-nyc" },
-      { label: "New Development", href: "/situations/new-development-nyc" },
-      { label: "Pied-à-Terre", href: "/situations/pied-a-terre-buyers-nyc" },
-      { label: "Foreign Buyers", href: "/situations/foreign-buyers-new-york" },
-      { label: "Building Profiles", href: "/building-reports" },
-      { label: "Luxury Buildings", href: "/insights/the-quiet-luxury-buildings-of-manhattan" },
-      { label: "Investment", href: "/situations/1031-exchange-new-york" },
-      { label: "School Districts", href: "/situations/school-district-planning-nyc" },
-    ],
+    description: "Evidence and structure once the life change and decision path are named - buildings, ownership types, and research.",
+    items: understandItems,
   },
   {
     title: "Life Changes",
-    description: "Alias of What's Changing? — kept for older links and library search synonyms.",
-    items: [
-      { label: "Executive Relocation", href: "/situations/executive-relocation-nyc" },
-      { label: "First Home", href: "/situations/first-home-buyers-nyc" },
-      { label: "Growing Family", href: "/situations/new-baby-growing-family-nyc" },
-      { label: "More Space", href: "/situations/school-district-planning-nyc" },
-      { label: "Retirement", href: "/situations/retiree-senior-home-buyers-nyc" },
-      { label: "Inheritance", href: "/situations/inheritance-housing-nyc" },
-      { label: "Divorce", href: "/situations/divorce-property-sales-nyc" },
-      { label: "Empty Nest", href: "/situations/empty-nester-downsizing-nyc" },
-      { label: "Marriage", href: "/situations/marriage-housing-nyc" },
-      { label: "Remote Work", href: "/situations/remote-work-housing-nyc" },
-      { label: "Downsizing", href: "/situations/empty-nester-downsizing-nyc" },
-      { label: "Aging Parents", href: "/situations/aging-parents-housing-nyc" },
-      { label: "Job Change", href: "/situations/job-loss-housing-nyc" },
-      { label: "International Move", href: "/international" },
-      { label: "Estate Planning", href: "/situations/probate-estate-sales-nyc" },
-      { label: "Corporate Relocation", href: "/situations/corporate-relocation-buyers-nyc" },
-      { label: "Second Home", href: "/situations/pied-a-terre-buyers-nyc" },
-    ],
+    description: "Alias of What's Changing? - kept for older links and library search synonyms.",
+    items: whatsChangingItems,
   },
   {
     title: "NYC Neighborhoods",
@@ -100,7 +82,7 @@ export const decisionNavigationGroups: DecisionNavGroup[] = [
   },
   {
     title: "Building Intelligence Library",
-    description: "A knowledge resource — buildings, neighborhoods, and market evidence after the decision model is clear.",
+    description: "A knowledge resource - buildings, neighborhoods, and market evidence after the decision model is clear.",
     items: [
       { label: "Buildings", href: "/building-reports" },
       { label: "Neighborhoods", href: "/building-reports/neighborhood-guides" },

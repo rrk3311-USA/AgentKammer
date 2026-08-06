@@ -38,7 +38,7 @@ describe("processDecisionGuideTurn profile synchronization", () => {
     const second = await processDecisionGuideTurn({
       visitorId,
       sessionId: "sess-1",
-      latestMessage: "Please save this plan — my email is merge-test@agentkammer.test",
+      latestMessage: "Please save this plan - my email is merge-test@agentkammer.test",
       flatProfile: {
         situation: "Relocating for work",
         desire: "Find the right borough for a young family",

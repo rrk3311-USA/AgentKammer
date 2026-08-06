@@ -36,7 +36,7 @@ type HubSnapshot = {
 export default function DecisionHub() {
   usePageMetadata({
     title: "My Decision",
-    description: "Your Decision Hub — goals, Decision Map, and recommendation briefs, saved and ready to resume.",
+    description: "Your Decision Hub - goals, Decision Map, and recommendation briefs, saved and ready to resume.",
     path: "/hub",
   });
 
@@ -70,7 +70,7 @@ export default function DecisionHub() {
       <PageHero
         eyebrow="Decision Hub"
         title="My Decision"
-        description="Goals, vision, Decision Map, and recommendation briefs Raphi sends you — saved to your Decision Hub, ready whenever you resume."
+        description="Goals, vision, Decision Map, and recommendation briefs Raphi sends you - saved to your Decision Hub, ready whenever you resume."
         art="decision-framework"
       />
 
@@ -107,7 +107,7 @@ export default function DecisionHub() {
                     <dl className="mt-4 grid gap-4 text-sm leading-6 text-brand-graphite">
                       <div>
                         <dt className="text-[11px] uppercase tracking-[0.14em] text-brand-navy">Vision</dt>
-                        <dd className="mt-1">{hub.vision || "Still forming — keep talking with Raphi."}</dd>
+                        <dd className="mt-1">{hub.vision || "Still forming - keep talking with Raphi."}</dd>
                       </div>
                       <div>
                         <dt className="text-[11px] uppercase tracking-[0.14em] text-brand-navy">Goals</dt>
@@ -124,23 +124,23 @@ export default function DecisionHub() {
                     <p className="text-[10px] uppercase tracking-[0.2em] text-brand-cocoa">My Decision Map</p>
                     <dl className="mt-4 grid gap-3 text-sm leading-6 text-brand-graphite">
                       <div>
-                        <span className="text-brand-navy">Situation — </span>
-                        {hub.decisionMap?.situation || "—"}
+                        <span className="text-brand-navy">Situation - </span>
+                        {hub.decisionMap?.situation || " - "}
                       </div>
                       <div>
-                        <span className="text-brand-navy">Desire — </span>
-                        {hub.decisionMap?.desire || "—"}
+                        <span className="text-brand-navy">Desire - </span>
+                        {hub.decisionMap?.desire || " - "}
                       </div>
                       <div>
-                        <span className="text-brand-navy">Constraints — </span>
-                        {hub.decisionMap?.constraints || "—"}
+                        <span className="text-brand-navy">Constraints - </span>
+                        {hub.decisionMap?.constraints || " - "}
                       </div>
                       <div>
-                        <span className="text-brand-navy">Trade-off — </span>
-                        {hub.decisionMap?.tradeOff || "—"}
+                        <span className="text-brand-navy">Trade-off - </span>
+                        {hub.decisionMap?.tradeOff || " - "}
                       </div>
                       <div>
-                        <span className="text-brand-navy">Recommendation so far — </span>
+                        <span className="text-brand-navy">Recommendation so far - </span>
                         {hub.decisionMap?.recommendation || "Still exploring."}
                       </div>
                     </dl>
@@ -153,12 +153,12 @@ export default function DecisionHub() {
                   <p className="text-[10px] uppercase tracking-[0.2em] text-brand-cocoa">Decision History</p>
                   <h2 className="mt-3 font-display text-3xl leading-none text-brand-navy">Recommendation briefs</h2>
                   <p className="mt-3 text-sm leading-6 text-brand-graphite/75">
-                    When Raphi sends a recommendation or recap, it lands here in your Decision Hub — not only in email.
+                    When Raphi sends a recommendation or recap, it lands here in your Decision Hub - not only in email.
                   </p>
 
                   {briefs.length === 0 ? (
                     <p className="mt-6 border border-dashed border-brand-border px-4 py-5 text-sm leading-6 text-brand-graphite">
-                      No briefs yet. Continue with the Guidance Advisor, then ask for a recommendation or recap — it will appear in this section.
+                      No briefs yet. Continue with the Guidance Advisor, then ask for a recommendation or recap - it will appear in this section.
                     </p>
                   ) : (
                     <div className="mt-6 grid gap-3">

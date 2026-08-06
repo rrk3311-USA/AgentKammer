@@ -46,7 +46,7 @@ export async function notifyContactSubmission(data: {
   phone?: string;
   message: string;
 }) {
-  const subject = `New Contact Form — ${data.name} — Agent Kammer`;
+  const subject = `New Contact Form - ${data.name} - Agent Kammer`;
   const htmlContent = `
     <h2>New Contact Form Submission</h2>
     <p><strong>Name:</strong> ${data.name}</p>
@@ -105,6 +105,6 @@ export async function notifyContactSubmission(data: {
   }
 
   console.warn(
-    `Contact submission received but email not sent — configure RESEND_API_KEY or EMAIL_USER/EMAIL_PASS. Inbox: ${CONTACT_INBOX}`,
+    `Contact submission received but email not sent - configure RESEND_API_KEY or EMAIL_USER/EMAIL_PASS. Inbox: ${CONTACT_INBOX}`,
   );
 }

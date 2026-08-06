@@ -1,6 +1,6 @@
 /**
  * Site-wide language preference for Decision Guide + language loop UI.
- * Full page translation of the main English site is not shipped yet —
+ * Full page translation of the main English site is not shipped yet -
  * international buyers go to localized /international/:country pages.
  */
 

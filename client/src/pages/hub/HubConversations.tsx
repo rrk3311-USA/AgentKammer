@@ -16,7 +16,7 @@ export default function HubConversations() {
   }, []);
 
   return (
-    <HubShell title="Conversations" description="What you’ve explored — and what an advisor has shared with you.">
+    <HubShell title="Conversations" description="What you’ve explored - and what an advisor has shared with you.">
       <div className="space-y-8 max-w-2xl">
         {hub?.conversationSummary ? (
           <article className="border-t border-[#D8D1C7] pt-6">

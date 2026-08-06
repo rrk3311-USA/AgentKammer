@@ -47,7 +47,7 @@ export function IntelligenceReportsSubscribe({
       await apiRequest("POST", "/api/leads", {
         email,
         leadSource: "intelligence_reports",
-        conversationSummary: "Subscribed to Intelligence Reports — Executive Housing, Building Intelligence, Market Trends",
+        conversationSummary: "Subscribed to Intelligence Reports - Executive Housing, Building Intelligence, Market Trends",
         communicationStyle: "Intelligence Reports",
         leadScore: 3,
       });
@@ -88,7 +88,7 @@ export function IntelligenceReportsSubscribe({
           Receive Future Intelligence Reports
         </h2>
         <p className={`mt-3 text-sm leading-6 ${isDark ? "text-brand-ivory/72" : "text-brand-graphite/72"}`}>
-          Get quarterly updates on Manhattan executive housing, building research, and market context — not listing blasts.
+          Get quarterly updates on Manhattan executive housing, building research, and market context - not listing blasts.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3 sm:flex-row">

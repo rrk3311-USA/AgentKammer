@@ -39,7 +39,7 @@ const defaultLabels: Required<StrategyFormLabels> = {
   subhead:
     "Tell us about your situation. We'll review your goals and recommend the most appropriate next step.",
   specialistPromise:
-    "After you submit, a specialist who speaks your language will get in touch to review your goals and recommend the right next step — the beginning of a consultation, not an automated sales pitch.",
+    "After you submit, a specialist who speaks your language will get in touch to review your goals and recommend the right next step - the beginning of a consultation, not an automated sales pitch.",
   submitLabel: ENGLISH_UI.submitLabel,
   formEyebrow: ENGLISH_UI.formEyebrow,
   successEyebrow: ENGLISH_UI.successEyebrow,
@@ -272,7 +272,7 @@ export function InternationalStrategyForm({
             value={form.buyingGoal}
             onChange={(e) => setForm({ ...form, buyingGoal: e.target.value })}
           >
-            <option value="">—</option>
+            <option value=""> - </option>
             {BUYING_GOALS.map((g) => (
               <option key={g} value={g}>
                 {g}
@@ -291,7 +291,7 @@ export function InternationalStrategyForm({
             value={form.budget}
             onChange={(e) => setForm({ ...form, budget: e.target.value })}
           >
-            <option value="">—</option>
+            <option value=""> - </option>
             {BUDGET_BANDS.map((b) => (
               <option key={b} value={b}>
                 {b}
@@ -310,7 +310,7 @@ export function InternationalStrategyForm({
             value={form.timeline}
             onChange={(e) => setForm({ ...form, timeline: e.target.value })}
           >
-            <option value="">—</option>
+            <option value=""> - </option>
             {TIMELINE_OPTIONS.map((t) => (
               <option key={t} value={t}>
                 {t}
@@ -329,7 +329,7 @@ export function InternationalStrategyForm({
             value={form.financing}
             onChange={(e) => setForm({ ...form, financing: e.target.value })}
           >
-            <option value="">—</option>
+            <option value=""> - </option>
             {FINANCING_OPTIONS.map((f) => (
               <option key={f} value={f}>
                 {f}

@@ -16,7 +16,7 @@ export default function HubReviews() {
   }, []);
 
   return (
-    <HubShell title="Reviews" description="Quarterly strategy notes written for you — not internal team commentary.">
+    <HubShell title="Reviews" description="Quarterly strategy notes written for you - not internal team commentary.">
       <div className="space-y-8 max-w-2xl">
         {(hub?.reviews || []).map((review) => (
           <article key={review.id} className="border-t border-[#D8D1C7] pt-6">
