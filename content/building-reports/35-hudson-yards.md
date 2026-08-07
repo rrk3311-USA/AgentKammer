@@ -17,7 +17,7 @@ Hudson Yards, Manhattan
 
 ### Executive Summary
 
-<!-- 3–5 short paragraphs. Thesis + why study this building now. -->
+<!-- 3-5 short paragraphs. Thesis + why study this building now. -->
 
 ---
 

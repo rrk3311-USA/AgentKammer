@@ -52,6 +52,9 @@ const PRACTICE_GUIDE_HREF = "/guides/advisor-practice-guide.html";
 const SYSTEMS_GUIDE_HREF = "/guides/advisor-os-onboarding.html";
 const INTL_GUIDE_HREF = "/guides/international-buyer-hub.html";
 const INTL_HUB_HREF = "/international";
+const MARKETING_FUNNEL_HREF = "/admin/real-estate-marketing-funnel.html";
+const EXAM_HIERARCHY_HREF = "/admin/ny-real-estate-exam-hierarchy.html";
+const EXAM_PASS_HREF = "/admin/ny-salesperson-exam-pass.html";
 
 export default function AdminSection({ section }: { section: keyof typeof COPY }) {
   const [, setLocation] = useLocation();
@@ -142,6 +145,57 @@ export default function AdminSection({ section }: { section: keyof typeof COPY }
                 <p className="mt-1 text-[16px] text-[var(--ak-ink)]">Advisor OS / Attio guide</p>
                 <p className="mt-1 text-[13px] text-[var(--ak-secondary)]">
                   People vs Housing vs Deals, lifecycle stages, and list verification.
+                </p>
+              </div>
+              <span className="shrink-0 text-[13px] text-[var(--ak-brass)]">Open →</span>
+            </a>
+            <a
+              href={MARKETING_FUNNEL_HREF}
+              target="_blank"
+              rel="noreferrer"
+              className="ak-admin-card flex items-center justify-between gap-4 px-5 py-4 no-underline transition hover:bg-[var(--ak-card)]"
+            >
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--ak-brass)]">
+                  Internal study
+                </p>
+                <p className="mt-1 text-[16px] text-[var(--ak-ink)]">Real estate marketing funnel</p>
+                <p className="mt-1 text-[13px] text-[var(--ak-secondary)]">
+                  Awareness through advocacy - relationship-driven journey map for the practice.
+                </p>
+              </div>
+              <span className="shrink-0 text-[13px] text-[var(--ak-brass)]">Open →</span>
+            </a>
+            <a
+              href={EXAM_HIERARCHY_HREF}
+              target="_blank"
+              rel="noreferrer"
+              className="ak-admin-card flex items-center justify-between gap-4 px-5 py-4 no-underline transition hover:bg-[var(--ak-card)]"
+            >
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--ak-brass)]">
+                  Internal study
+                </p>
+                <p className="mt-1 text-[16px] text-[var(--ak-ink)]">NY real estate exam hierarchy</p>
+                <p className="mt-1 text-[13px] text-[var(--ak-secondary)]">
+                  Eleven-branch map with decision trees for agency, liens, deeds, and ownership.
+                </p>
+              </div>
+              <span className="shrink-0 text-[13px] text-[var(--ak-brass)]">Open →</span>
+            </a>
+            <a
+              href={EXAM_PASS_HREF}
+              target="_blank"
+              rel="noreferrer"
+              className="ak-admin-card flex items-center justify-between gap-4 px-5 py-4 no-underline transition hover:bg-[var(--ak-card)]"
+            >
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--ak-brass)]">
+                  Internal study
+                </p>
+                <p className="mt-1 text-[16px] text-[var(--ak-ink)]">Pass the NY salesperson exam</p>
+                <p className="mt-1 text-[13px] text-[var(--ak-secondary)]">
+                  Full study book - 10 volumes, 70 practice questions, 21-day plan, and trap dictionary.
                 </p>
               </div>
               <span className="shrink-0 text-[13px] text-[var(--ak-brass)]">Open →</span>

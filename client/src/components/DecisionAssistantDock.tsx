@@ -4,6 +4,8 @@ import {
   ArrowRight,
   Building2,
   CalendarClock,
+  Check,
+  Circle,
   Landmark,
   MapPinned,
   Minimize2,
@@ -24,7 +26,7 @@ const blueprintSegments = [
   { label: "Lifestyle", filled: true, icon: UsersRound },
   { label: "Location", filled: true, icon: MapPinned },
   { label: "Building", filled: true, icon: Building2 },
-  { label: "Budget", filled: false, icon: Landmark },
+  { label: "Financial", filled: false, icon: Landmark },
   { label: "Timeline", filled: false, icon: CalendarClock },
   { label: "Trade-offs", filled: false, icon: SlidersHorizontal },
 ];
@@ -939,10 +941,10 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
 
   const completedSegments = {
     Lifestyle: Boolean(answers.situation),
-    Location: Boolean(answers.desire),
-    Building: Boolean(answers.desire || answers.constraints),
-    Budget: Boolean(answers.constraints && leadScore >= 2),
-    Timeline: Boolean(answers.constraints),
+    Location: Boolean(answers.desire || answers.geography || answers.neighborhoods),
+    Building: Boolean(answers.buildingPreferences || answers.desire),
+    Financial: Boolean(answers.budget || answers.financingStatus || (answers.constraints && leadScore >= 2)),
+    Timeline: Boolean(answers.timeline || answers.constraints),
     "Trade-offs": Boolean(answers.tradeOff),
   };
   const blueprintCompletion = blueprintSegments.filter((segment) => completedSegments[segment.label as keyof typeof completedSegments]).length;
@@ -1023,19 +1025,42 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
           </div>
           <div className="mt-2">{renderCompactBlueprintProgress("light")}</div>
           {expanded ? (
-            <div className="mt-2 grid grid-cols-3 gap-x-3 gap-y-1">
-              {blueprintSegments.map((segment) => (
-                <span
-                  key={segment.label}
-                  className={
-                    completedSegments[segment.label as keyof typeof completedSegments]
-                      ? "truncate text-[9px] uppercase tracking-[0.1em] text-brand-navy"
-                      : "truncate text-[9px] uppercase tracking-[0.1em] text-brand-graphite/52"
-                  }
-                >
-                  {segment.label}
-                </span>
-              ))}
+            <div className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-2">
+              {blueprintSegments.map((segment) => {
+                const filled = completedSegments[segment.label as keyof typeof completedSegments];
+                return (
+                  <div
+                    key={segment.label}
+                    className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2"
+                  >
+                    <segment.icon
+                      className={
+                        filled
+                          ? "h-3.5 w-3.5 shrink-0 text-brand-brass"
+                          : "h-3.5 w-3.5 shrink-0 text-brand-brass/70"
+                      }
+                      strokeWidth={1.5}
+                      aria-hidden
+                    />
+                    <span
+                      className={
+                        filled
+                          ? "truncate text-[9px] uppercase tracking-[0.12em] text-brand-brass"
+                          : "truncate text-[9px] uppercase tracking-[0.12em] text-brand-brass/75"
+                      }
+                    >
+                      {segment.label}
+                    </span>
+                    <span className="flex justify-end" aria-hidden>
+                      {filled ? (
+                        <Check className="h-3 w-3 text-brand-brass" strokeWidth={1.8} />
+                      ) : (
+                        <Circle className="h-2.5 w-2.5 text-brand-brass/45" strokeWidth={1.7} />
+                      )}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           ) : null}
         </div>

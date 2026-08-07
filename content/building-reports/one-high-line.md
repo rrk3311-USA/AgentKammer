@@ -23,7 +23,7 @@ Many Manhattan towers add amenities because the market expects them.
 
 One High Line organizes daily life around them.
 
-Designed by Bjarke Ingels Group for Related, the development pairs two towers with a shared amenity campus that feels closer to a private club than a typical condominium. Pools, fitness, entertainment spaces, and river-facing common areas are not afterthoughts — they are the product.
+Designed by Bjarke Ingels Group for Related, the development pairs two towers with a shared amenity campus that feels closer to a private club than a typical condominium. Pools, fitness, entertainment spaces, and river-facing common areas are not afterthoughts - they are the product.
 
 This is not the most understated building in West Chelsea.
 
@@ -43,7 +43,7 @@ Both are luxury.
 
 They solve for different residents.
 
-That comparison is not academic — it is how serious buyers should evaluate the corridor.
+That comparison is not academic - it is how serious buyers should evaluate the corridor.
 
 ---
 
@@ -79,7 +79,7 @@ That comparison is not academic — it is how serious buyers should evaluate the
 
 ### Amenity Architecture
 
-The building treats shared spaces as primary design elements, not marketing checkboxes. Daily life can plausibly center on the building — not only the apartment.
+The building treats shared spaces as primary design elements, not marketing checkboxes. Daily life can plausibly center on the building - not only the apartment.
 
 ### Two-Tower Scale
 
@@ -87,7 +87,7 @@ The paired-tower format creates vertical community within a larger footprint tha
 
 ### High Line Integration
 
-Direct adjacency to the High Line places the building inside one of Manhattan's most walked corridors — gallery access, dining, and downtown connectivity without a commute to "the neighborhood."
+Direct adjacency to the High Line places the building inside one of Manhattan's most walked corridors - gallery access, dining, and downtown connectivity without a commute to "the neighborhood."
 
 ### Resort Positioning
 
@@ -132,7 +132,7 @@ It combines:
 - Luxury residential development
 - Downtown accessibility
 
-One High Line sits at the intersection of cultural foot traffic and new residential infrastructure — a different daily rhythm than Midtown, with stronger amenity density than many downtown conversions.
+One High Line sits at the intersection of cultural foot traffic and new residential infrastructure - a different daily rhythm than Midtown, with stronger amenity density than many downtown conversions.
 
 ---
 
@@ -210,7 +210,7 @@ The interesting thing is that the building asks a direct question:
 
 Will you actually live inside the amenity stack you are buying into?
 
-For residents who answer yes, One High Line can feel extraordinarily efficient — work, wellness, and entertainment compressed into one address.
+For residents who answer yes, One High Line can feel extraordinarily efficient - work, wellness, and entertainment compressed into one address.
 
 For residents who answer no, the building can feel like paying for a resort membership attached to an apartment.
 
@@ -226,7 +226,7 @@ One High Line is not trying to be quiet luxury.
 
 It is trying to be complete luxury.
 
-For the right resident, that completeness is the point — a West Chelsea address with the infrastructure of a private club.
+For the right resident, that completeness is the point - a West Chelsea address with the infrastructure of a private club.
 
 For the wrong resident, the same infrastructure is simply overhead.
 

@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow, noarchive" />
+<title>Property Decision Assessment | Agent Kammer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --navy: #0D182B;
+  --navy-mid: #152238;
+  --brass: #B8956C;
+  --brass-deep: #96754f;
+  --paper: #0D182B;
+  --soft: #FBFAF8;
+  --ink: #252B33;
+  --muted: #6a727c;
+  --line: #DDD8CF;
+  --card: #ffffff;
+  --good: #356859;
+  --bad: #874D4D;
+  --trade: #625A76;
+  --ask: #49677D;
+  --flag: #874D4D;
+  --calc: #F1F2F4;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: Manrope, "Segoe UI", sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.55;
+  padding: 28px 18px 120px;
+}
+.wrap { max-width: 960px; margin: 0 auto; }
+.ico { display: block; flex-shrink: 0; }
+
+.cover {
+  position: relative; overflow: hidden;
+  background: var(--navy); color: #f4f1ea;
+  border-radius: 10px; border: 1px solid rgba(184,149,108,.5);
+  padding: 32px 30px 28px; margin-bottom: 18px;
+}
+.cover-art {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 55% at 14% -8%, rgba(184,149,108,.1), transparent 58%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.012) 0, rgba(255,255,255,.012) 1px, transparent 1px, transparent 14px);
+}
+.cover-inner { position: relative; z-index: 1; }
+.brand-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark {
+  width: 44px; height: 44px; border-radius: 6px; background: #0a1220;
+  border: 1px solid rgba(184,149,108,.35); overflow: hidden; flex-shrink: 0;
+}
+.brand-mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.brand-text .name {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.3rem; font-weight: 600; letter-spacing: .02em; line-height: 1; color: #f4f1ea;
+}
+.brand-text .tag { margin-top: 5px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--brass); font-weight: 700; }
+.stamp {
+  border: 1px solid rgba(184,149,108,.55);
+  padding: 8px 10px; text-align: center; min-width: 108px;
+  color: rgba(244,241,234,.78); line-height: 1.25;
+}
+.stamp .s1 { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; font-weight: 800; }
+.stamp .s2 { font-size: 8px; letter-spacing: .16em; text-transform: uppercase; margin-top: 3px; color: rgba(184,149,108,.85); font-weight: 700; }
+.cover-kicker { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; font-weight: 700; color: var(--brass); margin-bottom: 12px; }
+.cover h1 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.5rem, 5.5vw, 3.35rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.02;
+  color: #f4f1ea; max-width: 14ch;
+}
+.cover .deck { margin-top: 14px; max-width: 48ch; color: rgba(244,241,234,.72); font-size: .95rem; }
+.cover-rule {
+  margin: 28px 0 22px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184,149,108,.7), transparent);
+}
+.cover-meta {
+  display: grid; gap: 14px 18px;
+  grid-template-columns: repeat(12, 1fr); align-items: end;
+}
+.cover-meta .cell {
+  grid-column: span 2;
+  background: transparent; border: none; border-bottom: 1px solid rgba(184,149,108,.28);
+  border-radius: 0; padding: 0 0 8px;
+}
+.cover-meta .cell.score-hero {
+  grid-column: span 4;
+  border: 1px solid rgba(184,149,108,.4);
+  padding: 12px 14px 10px;
+}
+.cover-meta .k {
+  font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--brass); font-weight: 700;
+}
+.cover-meta .v { margin-top: 5px; font-size: .9rem; font-weight: 600; color: #fff; min-height: 1.15em; }
+.cover-meta .v.empty { color: rgba(255,255,255,.32); font-weight: 500; }
+.cover-meta .score-hero .v {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 2rem; font-weight: 500; letter-spacing: -.02em; margin-top: 2px;
+}
+@media (max-width: 720px) {
+  .cover-meta { grid-template-columns: repeat(6, 1fr); }
+  .cover-meta .cell { grid-column: span 3; }
+  .cover-meta .cell.score-hero { grid-column: span 6; }
+}
+
+.toolbar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+  background: rgba(13,24,43,.88); backdrop-filter: blur(12px);
+  border: 1px solid rgba(184,149,108,.28); border-radius: 10px;
+  padding: 8px 10px; margin-bottom: 18px;
+}
+.toolbar a, .toolbar button {
+  font-size: 11px; font-weight: 650; text-decoration: none; color: rgba(244,241,234,.86);
+  padding: 6px 9px; border-radius: 6px; border: 1px solid transparent; background: transparent;
+  cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 5px;
+}
+.toolbar a:hover, .toolbar button:hover { background: rgba(255,255,255,.08); border-color: rgba(184,149,108,.35); }
+.toolbar .btn-print { background: var(--brass); color: var(--navy); border-color: var(--brass); }
+.toolbar .spacer { flex: 1; }
+.toolbar .hint { font-size: 11px; color: rgba(244,241,234,.5); font-weight: 600; }
+
+.phase-shell {
+  border: none; border-radius: 0; margin-bottom: 48px; background: transparent;
+  box-shadow: none; overflow: visible;
+}
+.phase-shell > summary {
+  list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: 14px;
+  padding: 8px 0 20px; margin-bottom: 28px;
+  border-bottom: 1px solid rgba(184,149,108,.4);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 2.05rem; font-weight: 500; color: #f4f1ea; user-select: none;
+}
+.phase-shell > summary::-webkit-details-marker { display: none; }
+.phase-shell > summary .phase-tag {
+  font-family: Manrope, sans-serif; font-size: 11px; font-weight: 800;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--brass);
+  background: transparent; padding: 0;
+}
+.phase-shell > summary .chev {
+  margin-left: auto; width: 8px; height: 8px;
+  border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted);
+  transform: rotate(45deg); transition: transform .2s; align-self: center;
+}
+.phase-shell[open] > summary .chev { transform: rotate(-135deg); }
+.phase-body { padding: 0; background: transparent; }
+
+.card, .module-shell, .submod-shell, .verdict-card, details.meta-fold {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: none;
+}
+.card {
+  padding: 32px 28px; margin-bottom: 28px; break-inside: avoid;
+  background: #fff;
+}
+.module-shell {
+  margin-bottom: 36px; overflow: visible; break-inside: avoid;
+  background: transparent; border: none; border-radius: 0;
+}
+.module-shell > summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 0 10px; margin-bottom: 4px;
+  font-weight: 600; color: var(--muted); font-size: .78rem;
+  letter-spacing: .08em; text-transform: uppercase;
+  border-bottom: none;
+}
+.module-shell[open] > summary { border-bottom: none; color: var(--brass-deep); }
+.module-shell > summary::-webkit-details-marker { display: none; }
+.module-shell > summary .ico { display: none; }
+.mod-num {
+  font-family: Manrope, sans-serif; font-size: 11px; font-weight: 800;
+  letter-spacing: .14em; color: var(--brass); min-width: 1.8em;
+}
+.module-body {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 28px 32px;
+}
+.sec-head {
+  padding: 22px 0 18px; margin-bottom: 22px;
+  border-top: none;
+  border-bottom: 1px solid rgba(184,149,108,.55);
+}
+.sec-head .sec-num {
+  font-size: 11px; font-weight: 800; letter-spacing: .2em; color: var(--brass);
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.sec-head h2, .card > h2, .module-body > h2 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.9rem, 3.2vw, 2.25rem); font-weight: 500; color: var(--navy);
+  letter-spacing: .02em; text-transform: uppercase; line-height: 1.08;
+  display: block; margin: 0;
+}
+.sec-head h2 .ico, .card > h2 .ico, .module-body > h2 .ico { display: none; }
+.lead { color: var(--muted); font-size: .9rem; margin: 8px 0 0; max-width: 52ch; }
+.card > .vol, .module-body > .vol {
+  font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--brass); margin-bottom: 8px; display: block;
+}
+.subhead, .subhead.fact-sub {
+  margin: 28px 0 12px; padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ask); display: block;
+}
+.subhead.fact-sub:first-of-type { margin-top: 16px; border-top: 0; padding-top: 0; }
+.submod-shell {
+  margin: 18px 0; background: var(--soft);
+  border: 1px solid var(--line); border-radius: 8px;
+}
+.submod-shell > summary {
+  list-style: none; cursor: pointer; padding: 12px 16px;
+  font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--navy);
+}
+.submod-shell > summary::-webkit-details-marker { display: none; }
+.submod-body { padding: 4px 16px 16px; }
+
+.fact-grid {
+  display: grid; gap: 14px 16px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+.fact-grid > .field { grid-column: span 3; }
+.fact-grid > .field.wide2 { grid-column: span 6; }
+.fact-grid > .field.span4 { grid-column: span 4; }
+.fact-grid > .field.span8 { grid-column: span 8; }
+.fact-grid > .field.wide, .fact-grid > .field.signature { grid-column: span 12; }
+@media (max-width: 720px) {
+  .fact-grid > .field, .fact-grid > .field.wide2, .fact-grid > .field.span4 { grid-column: span 6; }
+  .fact-grid > .field.wide, .fact-grid > .field.span8, .fact-grid > .field.signature { grid-column: span 12; }
+}
+
+.field label {
+  display: block; font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--ask); margin-bottom: 8px;
+}
+.field input, .field textarea, .field select, .obs-form input, .obs-form select, .obs-form textarea {
+  width: 100%; border: none; border-bottom: 1px solid #E5E1D8; border-radius: 0;
+  padding: 12px 0 10px; font: inherit; font-size: .95rem; color: var(--ink); background: transparent;
+}
+.field input::placeholder, .field textarea::placeholder {
+  color: #B7B3AA; font-weight: 400;
+}
+.field textarea {
+  min-height: 96px; resize: vertical; border: none; border-bottom: 1px solid #E5E1D8;
+  border-radius: 0; padding: 12px 0 10px; background: transparent;
+}
+.field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--brass); }
+.field.calc label::after { content: "  🔒"; font-size: 10px; opacity: .55; }
+.field.calc input {
+  background: var(--calc); border: 1px solid #d5d8dd; border-radius: 6px;
+  padding: 8px 10px; color: var(--navy); font-weight: 700; font-variant-numeric: tabular-nums;
+}
+.field.signature textarea, #iWouldPay {
+  min-height: 140px; font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.35rem; font-weight: 550; border: 1px solid rgba(184,149,108,.45);
+  background: #FBF9F5; padding: 14px 16px; border-radius: 8px;
+}
+
+.lenses { display: grid; gap: 16px; }
+@media (min-width: 820px) {
+  .lenses { grid-template-columns: 1fr 1fr; }
+  .lenses .span2 { grid-column: 1 / -1; }
+}
+.lens {
+  border-radius: 8px; border: 1px solid #E8E4DB; border-left-width: 2px;
+  padding: 16px 16px 14px; background: #fff;
+}
+.lens.good, .lens.up { border-left-color: var(--good); }
+.lens.bad, .lens.down { border-left-color: var(--bad); }
+.lens.trade { border-left-color: var(--trade); }
+.lens.ask { border-left-color: var(--ask); }
+.lens.flag { border-left-color: var(--flag); }
+.lens.take {
+  border-left-color: var(--brass);
+  border-color: rgba(184,149,108,.4);
+}
+.lens-head { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+.lens-head .mark {
+  width: 22px; height: 22px; display: grid; place-items: center;
+  background: transparent; flex-shrink: 0; font-size: 13px; font-weight: 700; line-height: 1;
+}
+.lens-head .mark svg { display: none; }
+.lens.good .mark::before, .lens.up .mark::before { content: "✓"; color: var(--good); }
+.lens.bad .mark::before, .lens.down .mark::before { content: "⚠"; color: var(--bad); }
+.lens.trade .mark::before { content: "⇄"; color: var(--trade); }
+.lens.ask .mark::before { content: "?"; color: var(--ask); font-size: 15px; }
+.lens.flag .mark::before { content: "⚑"; color: var(--flag); }
+.lens.take .mark::before { content: "✎"; color: var(--brass-deep); }
+.lens-head h3 {
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--navy); font-weight: 800;
+}
+.lens-head .sub { font-size: .76rem; color: var(--muted); text-transform: none; letter-spacing: 0; font-weight: 500; margin-top: 2px; }
+.lens textarea {
+  width: 100%; min-height: 86px; border: none; border-radius: 0; padding: 6px 0 0;
+  font: inherit; font-size: .92rem; background: transparent; color: var(--ink); resize: vertical;
+}
+.lens textarea:focus { outline: none; }
+
+.chips-inline, .pattern-chips, .type-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.chip-btn, .pattern-chip, .type-row label {
+  border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 999px;
+  padding: 4px 9px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: inherit;
+}
+.type-row label { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); }
+.type-row label:has(input:checked) { border-color: rgba(184,149,108,.65); color: var(--ink); background: #FBF9F5; }
+
+.take-grid { display: grid; gap: 12px; }
+@media (min-width: 700px) {
+  .take-grid { grid-template-columns: 1fr 1fr; }
+  .take-grid .full, .take-grid .signature { grid-column: 1 / -1; }
+}
+.value-split { display: grid; gap: 12px; margin-bottom: 12px; }
+@media (min-width: 700px) { .value-split { grid-template-columns: 1fr 1fr; } }
+.note {
+  margin-top: 14px; padding: 12px 0 0; border-top: 1px solid rgba(184,149,108,.4);
+  background: transparent; font-size: .86rem; color: var(--muted); font-style: italic;
+}
+.pattern-lib {
+  border: 1px solid var(--line); border-radius: 10px; padding: 18px; background: #fff; margin: 14px 0;
+}
+.pattern-lib h4 {
+  font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.2rem; color: var(--navy);
+  display: flex; align-items: center; gap: 8px; font-weight: 550;
+}
+.pattern-lib .sub { font-size: .8rem; color: var(--muted); margin: 4px 0 12px; }
+.obs-form { display: grid; gap: 8px; margin-top: 8px; border-top: 1px solid var(--line); padding-top: 12px; }
+@media (min-width: 720px) { .obs-form { grid-template-columns: 1fr 1fr; } .obs-form .full { grid-column: 1 / -1; } }
+.btn {
+  border: 1px solid var(--navy); background: var(--navy); color: #fff; border-radius: 6px;
+  padding: 7px 11px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.btn.ghost { background: #fff; color: var(--navy); }
+.obs-list { display: grid; gap: 8px; margin-top: 12px; }
+.obs-card {
+  border: 1px solid var(--line); border-radius: 8px; padding: 12px; background: #fff; font-size: .86rem; color: var(--muted);
+}
+.obs-card strong { color: var(--navy); display: block; margin-bottom: 4px; }
+.obs-card .meta-line { margin-top: 6px; font-size: .74rem; color: var(--brass-deep); font-weight: 700; }
+.obs-card button {
+  margin-top: 8px; border: 1px solid var(--line); background: #fff; border-radius: 5px;
+  padding: 4px 8px; font-size: 11px; cursor: pointer; font-family: inherit;
+}
+.legend { display: none; }
+
+.verdict-card {
+  background: #fff; color: var(--ink); border: 1px solid var(--line);
+  border-radius: 8px; padding: 40px 32px 36px;
+}
+.verdict-card h2 { color: var(--navy) !important; text-transform: uppercase; }
+.verdict-card .lead { color: var(--muted); }
+.verdict-card .vol {
+  font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--brass); margin-bottom: 8px; display: block;
+}
+.decision-hero {
+  text-align: center; padding: 48px 20px 52px; margin: 12px 0 36px;
+  border-top: 1px solid rgba(184,149,108,.45);
+  border-bottom: 1px solid rgba(184,149,108,.45);
+  background: var(--soft);
+}
+.decision-hero .dh-label {
+  font-size: 11px; letter-spacing: .22em; text-transform: uppercase; font-weight: 800; color: var(--brass);
+}
+.decision-hero .dh-score {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(5.5rem, 14vw, 7.5rem); font-weight: 500; line-height: .92;
+  color: var(--navy); margin: 14px 0 8px; letter-spacing: -.04em;
+}
+.decision-hero .dh-score span { font-size: .35em; color: var(--muted); font-weight: 500; letter-spacing: 0; }
+.decision-hero .dh-grade {
+  font-family: "Cormorant Garamond", Georgia, serif; font-size: 2rem; color: var(--navy); font-weight: 550;
+}
+.decision-hero .dh-verdict {
+  margin-top: 10px; font-size: 13px; letter-spacing: .28em; text-transform: uppercase;
+  font-weight: 800; color: var(--brass);
+}
+.dh-because {
+  margin: 22px auto 0; max-width: 42ch;
+}
+.dh-because label {
+  display: block; font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--brass); font-weight: 800; margin-bottom: 8px;
+}
+.dh-because textarea {
+  width: 100%; min-height: 72px; border: none; border-bottom: 1px solid rgba(184,149,108,.35);
+  background: transparent; font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.25rem; font-style: italic; color: var(--navy); text-align: center;
+  resize: vertical; padding: 8px 0;
+}
+.wow-grid {
+  display: grid; gap: 20px 28px; margin-top: 8px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) { .wow-grid { grid-template-columns: 1fr 1fr; } }
+.wow-grid .field label { color: var(--brass); letter-spacing: .14em; }
+.wow-grid .field input, .wow-grid .field textarea {
+  border-bottom-color: rgba(184,149,108,.35);
+  font-size: 1.02rem;
+}
+.score-panel {
+  margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line);
+}
+.score-panel summary {
+  list-style: none; cursor: pointer; font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; font-weight: 800; color: var(--muted);
+}
+.score-panel summary::-webkit-details-marker { display: none; }
+.score-table { width: 100%; border-collapse: collapse; font-size: .9rem; margin-top: 8px; }
+.score-table th, .score-table td { border-bottom: 1px solid var(--line); padding: 10px 6px; text-align: left; }
+.score-table th { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.score-table input[type="number"] {
+  width: 72px; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font: inherit; background: #fff;
+}
+.score-table .total-row td { font-weight: 800; color: var(--navy); border-bottom: 0; padding-top: 14px; }
+.verdict { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; justify-content: center; }
+.verdict label {
+  display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px;
+  border: 1px solid var(--line); border-radius: 999px; font-size: .82rem; font-weight: 650;
+  color: var(--muted); cursor: pointer; background: #fff;
+}
+.verdict label:has(input:checked) { background: var(--navy); border-color: var(--navy); color: #fff; }
+.core {
+  margin-top: 22px; padding: 18px 0 0; background: transparent;
+  border-top: 1px solid rgba(184,149,108,.4);
+  font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.25rem;
+  color: var(--navy); font-weight: 550; font-style: italic; text-align: center;
+}
+details.meta-fold { padding: 14px 16px; margin-bottom: 14px; }
+details.meta-fold > summary {
+  cursor: pointer; font-weight: 750; color: var(--navy); list-style: none;
+  display: flex; align-items: center; gap: 8px;
+}
+details.meta-fold > summary::-webkit-details-marker { display: none; }
+details.meta-fold[open] > summary { margin-bottom: 12px; }
+.footnote { text-align: center; color: rgba(244,241,234,.45); font-size: .74rem; margin-top: 16px; }
+.module-shell > summary { color: rgba(244,241,234,.55) !important; }
+.module-shell[open] > summary { color: var(--brass) !important; }
+details.meta-fold { background: #fff; }
+.print-footer { display: none; }
+
+@media print {
+  @page { size: letter; margin: 0.6in 0.6in 0.85in 0.6in; }
+  body {
+    background: #fff !important; padding: 0 !important; font-size: 10.5pt;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .toolbar, .no-print, .chip-btn, .pattern-chips, .obs-form .actions, .obs-card button,
+  .phase-shell > summary .chev, .footnote, .module-shell > summary { display: none !important; }
+  .wrap { max-width: none; }
+  .cover {
+    border-radius: 0; margin: 0 0 18px; break-after: page;
+    min-height: 9in; display: flex; flex-direction: column; justify-content: space-between;
+    padding: 36px 32px; background: var(--navy) !important;
+  }
+  .phase-shell > summary { display: none !important; }
+  .phase-body { padding: 0; }
+  #snapshot, #market, #frame, #location, #building, #unit, #price, #alts, #risk, #longevity, #placement, #score {
+    break-before: page;
+  }
+  #snapshot { break-before: auto; }
+  .card, .module-shell, .submod-shell, .verdict-card { border-color: #ddd; margin-bottom: 14px; }
+  .module-body, .submod-body { display: block !important; padding: 0 0 12px; }
+  .submod-shell > summary { display: block !important; cursor: default; border-bottom: 1px solid var(--line); }
+  .lens textarea, .field textarea, .field input, .field select {
+    border: none !important; background: transparent !important; padding: 0 !important;
+    min-height: 0 !important; resize: none !important;
+  }
+  .field.calc input { background: transparent !important; }
+  .print-hide, .lens.print-hide, .screen-only { display: none !important; }
+  details.meta-fold { display: none; }
+  a { color: inherit; text-decoration: none; }
+  .print-footer {
+    display: flex !important; justify-content: space-between; align-items: center;
+    position: fixed; bottom: 0; left: 0; right: 0;
+    padding: 6px 0.6in; font-size: 8pt; color: #666;
+    border-top: 1px solid #ccc; background: #fff;
+  }
+  .print-footer .pf-brand { font-weight: 700; color: var(--navy); }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="cover" id="top">
+  <div class="cover-art" aria-hidden="true"></div>
+  <div class="cover-inner">
+    <div class="brand-row">
+      <div class="brand">
+        <div class="brand-mark"><img src="assets/ak-monogram-ivory.png" alt="AK" width="44" height="44" /></div>
+        <div class="brand-text">
+          <div class="name">Agent Kammer</div>
+          <div class="tag">Decision Intelligence</div>
+        </div>
+      </div>
+      <div class="stamp" aria-label="Internal assessment">
+        <div class="s1">Internal<br>Assessment</div>
+        <div class="s2">Version 1.0</div>
+      </div>
+    </div>
+    <div class="cover-kicker">Property Assessment</div>
+    <h1>Property Decision Assessment</h1>
+    <p class="deck">Facts, trade-offs, and a clear recommendation. Prepared for decision-making, not a formal appraisal.</p>
+    <div class="cover-rule" aria-hidden="true"></div>
+    <div class="cover-meta">
+      <div class="cell"><div class="k">Property</div><div class="v empty" id="coverAddress">Address pending</div></div>
+      <div class="cell"><div class="k">Asking</div><div class="v empty" id="coverPrice">-</div></div>
+      <div class="cell score-hero"><div class="k">Decision score</div><div class="v" id="coverScore">0 / 100</div></div>
+      <div class="cell"><div class="k">Verdict</div><div class="v empty" id="coverVerdict">Pending</div></div>
+      <div class="cell"><div class="k">Grade</div><div class="v empty" id="coverGrade">-</div></div>
+      <div class="cell"><div class="k">Date</div><div class="v" id="coverDate">-</div></div>
+    </div>
+  </div>
+</header>
+
+<nav class="toolbar no-print" aria-label="Report navigation">
+  <a href="#phase-facts">01 Facts</a>
+  <a href="#phase-analysis">02 Analysis</a>
+  <a href="#phase-decision">03 Decision</a>
+  <span class="spacer"></span>
+  <span class="hint">Autosaves locally</span>
+  <button type="button" class="btn-print" id="printBtn"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 17H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><path d="M6 13h12v8H6z"/></svg> Print / PDF</button>
+  <button type="button" id="clearBtn">Clear</button>
+</nav>
+
+<details class="phase-shell phase-facts" id="phase-facts" open>
+  <summary><span class="phase-tag">Chapter 01</span> Facts <span class="chev" aria-hidden="true"></span></summary>
+  <div class="phase-body">
+<section class="card" id="snapshot">
+  <div class="sec-head">
+    <div class="sec-num">01</div>
+    <h2>Property Snapshot</h2>
+    <p class="lead">Listing, ownership, physical, and price facts only. Judgment belongs in Analysis.</p>
+  </div>
+
+  <h3 class="subhead fact-sub">Listing identity</h3>
+<div class="fact-grid"><div class="field"><label for="mls">MLS #</label><input id="mls" data-persist type="text" placeholder="" /></div><div class="field wide2"><label for="address">Address</label><input id="address" data-persist type="text" placeholder="Full address / building + unit" /></div><div class="field"><label for="propertyType">Property Type</label><input id="propertyType" data-persist type="text" placeholder="Condo, co-op, townhouse..." /></div><div class="field"><label for="status">Status</label><input id="status" data-persist type="text" placeholder="" /></div><div class="field wide2"><label for="buildingName">Building Name</label><input id="buildingName" data-persist type="text" placeholder="" /></div><div class="field"><label for="constructionType">Construction Type</label><input id="constructionType" data-persist type="text" placeholder="" /></div><div class="field"><label for="developer">Developer</label><input id="developer" data-persist type="text" placeholder="" /></div><div class="field"><label for="architect">Architect</label><input id="architect" data-persist type="text" placeholder="" /></div><div class="field"><label for="assessDate">Assessment date</label><input id="assessDate" data-persist type="date" placeholder="" /></div></div>
+
+  <h3 class="subhead fact-sub">Time / price metrics</h3>
+<div class="fact-grid"><div class="field"><label for="initialListPrice">Initial list price</label><input id="initialListPrice" data-persist type="text" placeholder="$" /></div><div class="field"><label for="askingPrice">Current list price</label><input id="askingPrice" data-persist type="text" placeholder="$" /></div><div class="field calc"><label for="pctReduction">% reduction</label><input id="pctReduction" data-persist type="text" placeholder="Auto calculated" readonly /></div><div class="field"><label for="ppsqft">Price / Sq Ft</label><input id="ppsqft" data-persist type="text" placeholder="" /></div><div class="field"><label for="listedDate">Listed date</label><input id="listedDate" data-persist type="date" placeholder="" /></div><div class="field"><label for="dom">Days on market (current)</label><input id="dom" data-persist type="text" placeholder="" /></div><div class="field"><label for="cumulativeDom">Cumulative DOM</label><input id="cumulativeDom" data-persist type="text" placeholder="" /></div><div class="field calc"><label for="lastSaleAskPct">Last sale → current ask %</label><input id="lastSaleAskPct" data-persist type="text" placeholder="Auto calculated" readonly /></div><div class="field calc"><label for="lastSaleAskAnnPct">Last sale → current ask annualized %</label><input id="lastSaleAskAnnPct" data-persist type="text" placeholder="Auto calculated" readonly /></div></div>
+
+  <h3 class="subhead fact-sub">Transaction history</h3>
+<div class="fact-grid"><div class="field"><label for="lastSoldDate">Last sold date</label><input id="lastSoldDate" data-persist type="date" placeholder="" /></div><div class="field"><label for="lastSoldPrice">Last sold price</label><input id="lastSoldPrice" data-persist type="text" placeholder="$" /></div><div class="field"><label for="originalPurchasePrice">Original purchase price</label><input id="originalPurchasePrice" data-persist type="text" placeholder="$ (seller acquired)" /></div><div class="field calc"><label for="totalAppreciation">Total appreciation since last sale</label><input id="totalAppreciation" data-persist type="text" placeholder="Auto calculated" readonly /></div><div class="field calc"><label for="annualizedAppreciation">Annualized appreciation</label><input id="annualizedAppreciation" data-persist type="text" placeholder="Auto calculated" readonly /></div><div class="field"><label for="relistings">Number of relistings</label><input id="relistings" data-persist type="text" placeholder="" /></div><div class="field wide2"><label for="withdrawnExpired">Withdrawn / expired history</label><input id="withdrawnExpired" data-persist type="text" placeholder="" /></div><div class="field wide2"><label for="priceChanges">Price changes</label><input id="priceChanges" data-persist type="text" placeholder="" /></div></div>
+
+  <h3 class="subhead fact-sub">Ownership / legal facts</h3>
+<div class="fact-grid"><div class="field"><label for="ownershipStructure">Ownership structure</label><input id="ownershipStructure" data-persist type="text" placeholder="Condo / Co-op / Fee simple / etc." /></div><div class="field"><label for="sponsorUnit">Sponsor unit?</label><input id="sponsorUnit" data-persist type="text" placeholder="Yes / No / Unknown" /></div><div class="field"><label for="landLease">Land lease?</label><input id="landLease" data-persist type="text" placeholder="Yes / No · years remaining" /></div><div class="field"><label for="taxAbatementExp">Tax abatement expiration</label><input id="taxAbatementExp" data-persist type="text" placeholder="" /></div><div class="field wide2"><label for="rentalRestrictions">Rental restrictions</label><input id="rentalRestrictions" data-persist type="text" placeholder="" /></div><div class="field"><label for="flipTax">Flip tax</label><input id="flipTax" data-persist type="text" placeholder="" /></div><div class="field wide2"><label for="financingRestrictions">Financing restrictions</label><input id="financingRestrictions" data-persist type="text" placeholder="" /></div><div class="field"><label for="hoa">HOA / Common charges</label><input id="hoa" data-persist type="text" placeholder="" /></div><div class="field"><label for="taxes">Taxes</label><input id="taxes" data-persist type="text" placeholder="" /></div></div>
+
+  <h3 class="subhead fact-sub">Physical facts</h3>
+<div class="fact-grid"><div class="field"><label for="yearBuilt">Year built</label><input id="yearBuilt" data-persist type="text" placeholder="" /></div><div class="field"><label for="renovationYear">Renovation year</label><input id="renovationYear" data-persist type="text" placeholder="" /></div><div class="field wide2"><label for="renoArchitect">Architect / designer of renovation</label><input id="renoArchitect" data-persist type="text" placeholder="" /></div><div class="field"><label for="intSqft">Interior sq ft</label><input id="intSqft" data-persist type="text" placeholder="" /></div><div class="field"><label for="extSqft">Exterior sq ft</label><input id="extSqft" data-persist type="text" placeholder="" /></div><div class="field"><label for="lotSize">Lot size</label><input id="lotSize" data-persist type="text" placeholder="" /></div><div class="field"><label for="ceilingHeight">Ceiling height</label><input id="ceilingHeight" data-persist type="text" placeholder="" /></div><div class="field"><label for="exposure">Exposure</label><input id="exposure" data-persist type="text" placeholder="N / S / E / W / corner" /></div><div class="field"><label for="orientation">Orientation</label><input id="orientation" data-persist type="text" placeholder="" /></div><div class="field"><label for="terraceSize">Terrace / balcony size</label><input id="terraceSize" data-persist type="text" placeholder="" /></div><div class="field"><label for="storageIncluded">Storage included?</label><input id="storageIncluded" data-persist type="text" placeholder="Yes / No · size / location" /></div><div class="field"><label for="parking">Parking</label><input id="parking" data-persist type="text" placeholder="" /></div><div class="field"><label for="parkingTenure">Parking deeded or licensed?</label><input id="parkingTenure" data-persist type="text" placeholder="Deed / license / rental / none" /></div><div class="field"><label for="stories">Stories</label><input id="stories" data-persist type="text" placeholder="" /></div><div class="field"><label for="floor">Floor</label><input id="floor" data-persist type="text" placeholder="" /></div><div class="field"><label for="beds">Beds</label><input id="beds" data-persist type="text" placeholder="" /></div><div class="field"><label for="baths">Baths</label><input id="baths" data-persist type="text" placeholder="" /></div></div>
+
+</section>
+<section class="card" id="market">
+  <div class="sec-head">
+    <div class="sec-num">02</div>
+    <h2>Market Context</h2>
+    <p class="lead">External evidence around the listing - still closer to facts than to your verdict.</p>
+  </div>
+  <div class="fact-grid"><div class="field wide2"><label for="comps">Comparable Sales</label><textarea id="comps" data-persist placeholder=""></textarea></div><div class="field wide2"><label for="activeComp">Active Competition</label><textarea id="activeComp" data-persist placeholder=""></textarea></div><div class="field wide2"><label for="pending">Pending Sales</label><textarea id="pending" data-persist placeholder=""></textarea></div><div class="field wide2"><label for="neighTrend">Neighborhood Trend</label><textarea id="neighTrend" data-persist placeholder=""></textarea></div><div class="field wide2"><label for="inventory">Inventory</label><textarea id="inventory" data-persist placeholder=""></textarea></div><div class="field wide2"><label for="absorption">Absorption Rate</label><textarea id="absorption" data-persist placeholder=""></textarea></div><div class="field wide2"><label for="monthsSupply">Months of Supply</label><textarea id="monthsSupply" data-persist placeholder=""></textarea></div><div class="field wide2"><label for="priceHistory">Price History</label><textarea id="priceHistory" data-persist placeholder=""></textarea></div><div class="field wide2"><label for="estValue">Estimated Value Range</label><textarea id="estValue" data-persist placeholder=""></textarea></div></div>
+</section>
+  </div>
+</details>
+
+<details class="phase-shell phase-analysis" id="phase-analysis">
+  <summary><span class="phase-tag">Chapter 02</span> Analysis <span class="chev" aria-hidden="true"></span></summary>
+  <div class="phase-body">
+<details class="module-shell" id="frame">
+  <summary><span class="mod-num">01</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 16l9 5 9-5"/></svg> Frame</summary>
+  <div class="module-body">
+  <div class="sec-head">
+    <div class="sec-num">01</div>
+    <h2>Frame</h2>
+    <p class="lead">Property type and the real decision context.</p>
+  </div>
+<div class="type-row">
+    <label><input type="checkbox" data-chip /> Condo</label><label><input type="checkbox" data-chip /> Co-op</label><label><input type="checkbox" data-chip /> Townhouse</label><label><input type="checkbox" data-chip /> Single-family</label><label><input type="checkbox" data-chip /> New development</label><label><input type="checkbox" data-chip /> Resale</label><label><input type="checkbox" data-chip /> Investment</label><label><input type="checkbox" data-chip /> Pied-a-terre</label>
+  </div>
+  <div class="lenses" style="margin-top:12px">
+    <div class="lens ask">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.5 1-1.5 2.2V14M12 17h.01"/></svg></span><div><h3>Real goal</h3><div class="sub">What is this decision actually for?</div></div></div>
+  <textarea data-persist id="realGoal" placeholder="Primary residence, optionality, prestige, yield..."></textarea>
+</div>
+    <div class="lens trade">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 8h14"/><path d="M7 8l-3 7h6L7 8zM17 8l-3 7h6l-3-7z"/></svg></span><div><h3>Opening trade-off</h3><div class="sub">Gain vs give up by even considering this</div></div></div>
+  <textarea data-persist id="openingTrade" placeholder="Commute vs space, prestige vs carrying cost..."></textarea>
+</div>
+  </div>
+</div>
+</details>
+<details class="module-shell" id="location">
+  <summary><span class="mod-num">02</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4l-5 2v14l5-2 6 2 5-2V4l-5 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg> Location</summary>
+  <div class="module-body">
+  <div class="sec-head">
+    <div class="sec-num">02</div>
+    <h2>Location</h2>
+    <p class="lead">Neighborhood quality as gains and costs - not one score.</p>
+  </div>
+<div class="legend">
+      <span><svg class="ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Benefits</span><span><svg class="ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg> Drawbacks</span>
+      <span><svg class="ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 8h14"/><path d="M7 8l-3 7h6L7 8zM17 8l-3 7h6l-3-7z"/></svg> Trade-offs</span><span><svg class="ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.5 1-1.5 2.2V14M12 17h.01"/></svg> Unknowns</span>
+      <span><svg class="ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg> Red flags</span>
+    </div>
+  <div class="lenses"><div class="lens good">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div><h3>Benefits</h3><div class="sub">What makes this location strong?</div></div></div>
+  <div class="chips-inline screen-only"><button type="button" class="chip-btn" data-add="locBenefits">Walkable</button><button type="button" class="chip-btn" data-add="locBenefits">Great restaurants</button><button type="button" class="chip-btn" data-add="locBenefits">Transit access</button><button type="button" class="chip-btn" data-add="locBenefits">Park / waterfront</button><button type="button" class="chip-btn" data-add="locBenefits">Protected views</button></div><textarea data-persist id="locBenefits" placeholder="Walkable\nGreat restaurants"></textarea>
+</div><div class="lens bad">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg></span><div><h3>Drawbacks</h3><div class="sub">What does this location cost them?</div></div></div>
+  <div class="chips-inline screen-only"><button type="button" class="chip-btn" data-add="locDrawbacks">Tourist traffic</button><button type="button" class="chip-btn" data-add="locDrawbacks">Noise</button><button type="button" class="chip-btn" data-add="locDrawbacks">High prices</button><button type="button" class="chip-btn" data-add="locDrawbacks">Nightlife spillover</button></div><textarea data-persist id="locDrawbacks" placeholder=""></textarea>
+</div><div class="lens trade">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 8h14"/><path d="M7 8l-3 7h6L7 8zM17 8l-3 7h6l-3-7z"/></svg></span><div><h3>Trade-offs</h3><div class="sub">What are they exchanging?</div></div></div>
+  <div class="chips-inline screen-only"><button type="button" class="chip-btn" data-add="locTrades">Better commute vs smaller apartment</button><button type="button" class="chip-btn" data-add="locTrades">Great neighborhood vs higher HOA</button></div><textarea data-persist id="locTrades" placeholder=""></textarea>
+</div><div class="lens ask">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.5 1-1.5 2.2V14M12 17h.01"/></svg></span><div><h3>Unknowns</h3><div class="sub">What still needs an answer?</div></div></div>
+  <textarea data-persist id="locQuestions" placeholder="Will construction block views?"></textarea>
+</div><div class="lens flag span2">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg></span><div><h3>Red flags</h3><div class="sub">What could invalidate the location thesis?</div></div></div>
+  <div class="chips-inline screen-only"><button type="button" class="chip-btn" data-add="locFlags">Empty storefronts</button><button type="button" class="chip-btn" data-add="locFlags">Flood zone</button><button type="button" class="chip-btn" data-add="locFlags">Major planned development</button></div><textarea data-persist id="locFlags" placeholder=""></textarea>
+</div><div class="lens take span2">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span><div><h3>My Take - Location</h3></div></div>
+  <div class="take-grid">
+<div class="field "><label for="locStrength">Strength</label><input id="locStrength" data-persist type="text" placeholder="" /></div>
+<div class="field "><label for="locWeakness">Weakness</label><input id="locWeakness" data-persist type="text" placeholder="" /></div>
+<div class="field "><label for="locLargestTrade">Key trade-off</label><input id="locLargestTrade" data-persist type="text" placeholder="" /></div>
+<div class="field "><label for="locOpportunity">Decision impact</label><input id="locOpportunity" data-persist type="text" placeholder="" /></div>
+</div>
+</div></div>
+  
+</div>
+</details>
+<details class="module-shell" id="building">
+  <summary><span class="mod-num">03</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V6l8-3 8 3v14"/><path d="M9 20v-6h6v6M9 9h.01M15 9h.01M9 13h.01M15 13h.01"/></svg> Building</summary>
+  <div class="module-body">
+  <div class="sec-head">
+    <div class="sec-num">03</div>
+    <h2>Building</h2>
+    <p class="lead">Reputation, operations, and financial health as trade-offs.</p>
+  </div>
+<div class="legend">
+      <span><svg class="ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Benefits</span><span><svg class="ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg> Drawbacks</span>
+      <span><svg class="ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 8h14"/><path d="M7 8l-3 7h6L7 8zM17 8l-3 7h6l-3-7z"/></svg> Trade-offs</span><span><svg class="ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.5 1-1.5 2.2V14M12 17h.01"/></svg> Unknowns</span>
+      <span><svg class="ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg> Red flags</span>
+    </div>
+  <div class="lenses"><div class="lens good">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div><h3>Benefits</h3><div class="sub">Reputation, arrival, operations, amenities that matter</div></div></div>
+  <div class="chips-inline screen-only"><button type="button" class="chip-btn" data-add="bldgBenefits">Respected developer</button><button type="button" class="chip-btn" data-add="bldgBenefits">Strong management</button><button type="button" class="chip-btn" data-add="bldgBenefits">Useful amenities</button><button type="button" class="chip-btn" data-add="bldgBenefits">Doorman / security</button></div><textarea data-persist id="bldgBenefits" placeholder=""></textarea>
+</div><div class="lens bad">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg></span><div><h3>Drawbacks</h3><div class="sub">What about the building costs them?</div></div></div>
+  <div class="chips-inline screen-only"><button type="button" class="chip-btn" data-add="bldgDrawbacks">High common charges</button><button type="button" class="chip-btn" data-add="bldgDrawbacks">Amenity theater</button><button type="button" class="chip-btn" data-add="bldgDrawbacks">Aging systems</button><button type="button" class="chip-btn" data-add="bldgDrawbacks">Lawsuits</button></div><textarea data-persist id="bldgDrawbacks" placeholder=""></textarea>
+</div><div class="lens trade">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 8h14"/><path d="M7 8l-3 7h6L7 8zM17 8l-3 7h6l-3-7z"/></svg></span><div><h3>Trade-offs</h3><div class="sub">Boutique vs mega tower, service vs cost</div></div></div>
+  <div class="chips-inline screen-only"><button type="button" class="chip-btn" data-add="bldgTrades">Boutique vs mega tower</button><button type="button" class="chip-btn" data-add="bldgTrades">Full service vs carrying cost</button></div><textarea data-persist id="bldgTrades" placeholder=""></textarea>
+</div><div class="lens ask">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.5 1-1.5 2.2V14M12 17h.01"/></svg></span><div><h3>Unknowns</h3><div class="sub">Reserves, CapEx, management, sponsor control</div></div></div>
+  <textarea data-persist id="bldgQuestions" placeholder=""></textarea>
+</div><div class="lens flag span2">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg></span><div><h3>Red flags</h3><div class="sub">Deferred maintenance, litigation, delinquency</div></div></div>
+  <div class="chips-inline screen-only"><button type="button" class="chip-btn" data-add="bldgFlags">Deferred maintenance</button><button type="button" class="chip-btn" data-add="bldgFlags">Litigation</button><button type="button" class="chip-btn" data-add="bldgFlags">High delinquency</button><button type="button" class="chip-btn" data-add="bldgFlags">Land lease</button></div><textarea data-persist id="bldgFlags" placeholder=""></textarea>
+</div><div class="lens take span2">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span><div><h3>My Take - Building</h3></div></div>
+  <div class="take-grid">
+<div class="field "><label for="bldgStrength">Strength</label><input id="bldgStrength" data-persist type="text" placeholder="" /></div>
+<div class="field "><label for="bldgWeakness">Weakness</label><input id="bldgWeakness" data-persist type="text" placeholder="" /></div>
+<div class="field "><label for="bldgLargestTrade">Key trade-off</label><input id="bldgLargestTrade" data-persist type="text" placeholder="" /></div>
+<div class="field "><label for="bldgOpportunity">Decision impact</label><input id="bldgOpportunity" data-persist type="text" placeholder="" /></div>
+</div>
+</div></div>
+  
+</div>
+</details>
+<details class="module-shell" id="unit">
+  <summary><span class="mod-num">04</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v9H4z"/><path d="M9 20v-6h6v6"/></svg> Unit</summary>
+  <div class="module-body">
+  <div class="sec-head">
+    <div class="sec-num">04</div>
+    <h2>Unit</h2>
+    <p class="lead">Light, layout, functionality and daily experience.</p>
+  </div>
+<details class="submod-shell" id="light-view">
+  <summary>Light &amp; View</summary>
+  <div class="submod-body"><div class="lenses" style="margin-bottom:8px">
+    <div class="lens good">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div><h3>Benefits</h3></div></div>
+  <div class="chips-inline screen-only"><button type="button" class="chip-btn" data-add="lightBenefits">South exposure</button><button type="button" class="chip-btn" data-add="lightBenefits">Open views</button><button type="button" class="chip-btn" data-add="lightBenefits">High ceilings</button><button type="button" class="chip-btn" data-add="lightBenefits">Protected view</button></div><textarea data-persist id="lightBenefits" placeholder=""></textarea>
+</div>
+    <div class="lens bad">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg></span><div><h3>Drawbacks</h3></div></div>
+  <textarea data-persist id="lightDrawbacks" placeholder="Limited winter light"></textarea>
+</div>
+    <div class="lens trade">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 8h14"/><path d="M7 8l-3 7h6L7 8zM17 8l-3 7h6l-3-7z"/></svg></span><div><h3>Trade-offs</h3></div></div>
+  <textarea data-persist id="lightTrades" placeholder="Bright but hotter summers"></textarea>
+</div>
+    <div class="lens flag">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg></span><div><h3>Red flags</h3></div></div>
+  <textarea data-persist id="lightFlags" placeholder="Adjacent tower planned"></textarea>
+</div>
+  </div>
+
+  </div>
+</details><details class="submod-shell" id="layout-liv">
+  <summary>Layout &amp; Livability</summary>
+  <div class="submod-body"><div class="lenses" style="margin-bottom:8px">
+    <div class="lens good">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div><h3>Benefits</h3></div></div>
+  <textarea data-persist id="layoutBenefits" placeholder=""></textarea>
+</div>
+    <div class="lens bad">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg></span><div><h3>Drawbacks</h3></div></div>
+  <textarea data-persist id="layoutDrawbacks" placeholder=""></textarea>
+</div>
+    <div class="lens trade">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 8h14"/><path d="M7 8l-3 7h6L7 8zM17 8l-3 7h6l-3-7z"/></svg></span><div><h3>Trade-offs</h3></div></div>
+  <textarea data-persist id="layoutTrades" placeholder=""></textarea>
+</div>
+    <div class="lens ask">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.5 1-1.5 2.2V14M12 17h.01"/></svg></span><div><h3>Unknowns</h3></div></div>
+  <textarea data-persist id="layoutQuestions" placeholder=""></textarea>
+</div>
+  </div>
+
+  </div>
+</details>
+    <details class="submod-shell" id="materials-interior">
+      <summary>Materials &amp; Interior Architecture</summary>
+      <div class="submod-body">
+        <p class="lead">Internal knowledge layer feeding Unit analysis - not a new Decision Score category.</p>
+        <div class="lenses" style="margin-bottom:10px">
+          <div class="lens good">
+            <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div><h3>Benefits</h3><div class="sub">Layout / materials that work</div></div></div>
+            <textarea data-persist id="interiorBenefits" placeholder=""></textarea>
+          </div>
+          <div class="lens bad">
+            <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg></span><div><h3>Drawbacks</h3><div class="sub">Friction in daily use</div></div></div>
+            <textarea data-persist id="interiorDrawbacks" placeholder=""></textarea>
+          </div>
+          <div class="lens trade">
+            <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 8h14"/><path d="M7 8l-3 7h6L7 8zM17 8l-3 7h6l-3-7z"/></svg></span><div><h3>Trade-offs</h3><div class="sub">Beauty vs durability, open vs private</div></div></div>
+            <textarea data-persist id="interiorTrades" placeholder=""></textarea>
+          </div>
+          <div class="lens ask">
+            <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.5 1-1.5 2.2V14M12 17h.01"/></svg></span><div><h3>Unknowns</h3></div></div>
+            <textarea data-persist id="interiorQuestions" placeholder=""></textarea>
+          </div>
+          <div class="lens flag span2">
+            <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg></span><div><h3>Red flags</h3></div></div>
+            <textarea data-persist id="interiorFlags" placeholder=""></textarea>
+          </div>
+        </div>
+        <div class="pattern-lib" id="designPatternLibrary">
+          <h4><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M6 3v16"/></svg> Design Pattern Library</h4>
+          <p class="sub">Select a pattern, refine the observation, then log it. Pattern → Benefit → Drawback → Trade-off → Severity → Fix → Buyer impact.</p>
+          <div class="pattern-chips screen-only" id="patternChips"></div>
+          <div class="obs-form screen-only" id="obsForm">
+            <div class="field full"><label for="obsPattern">Pattern</label><input id="obsPattern" type="text" /></div>
+            <div class="field"><label for="obsBenefit">Benefit</label><input id="obsBenefit" type="text" /></div>
+            <div class="field"><label for="obsDrawback">Drawback</label><input id="obsDrawback" type="text" /></div>
+            <div class="field full"><label for="obsTrade">Trade-off</label><input id="obsTrade" type="text" /></div>
+            <div class="field"><label for="obsImpact">Impact</label><select id="obsImpact"><option>Cosmetic</option><option selected>Functional</option><option>Financial</option><option>Long-term</option></select></div>
+            <div class="field"><label for="obsFix">Fixability</label><select id="obsFix"><option>Easy</option><option>Expensive</option><option selected>Difficult</option><option>Impossible</option></select></div>
+            <div class="field"><label for="obsSeverity">Severity (1-5)</label><select id="obsSeverity"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div>
+            <div class="field"><label for="obsCost">Cost / difficulty to fix</label><input id="obsCost" type="text" /></div>
+            <div class="field full"><label for="obsBuyer">Buyer impact</label><input id="obsBuyer" type="text" /></div>
+            <div class="field full actions">
+              <button type="button" class="btn" id="addObsBtn"><svg class="ico" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Add observation</button>
+              <button type="button" class="btn ghost" id="clearObsBtn">Clear form</button>
+              <span class="hint" id="obsCount" style="font-size:12px;color:var(--muted);font-weight:600">0 logged</span>
+            </div>
+          </div>
+          <div class="obs-list" id="obsList"></div>
+        </div>
+        <div class="lens take span2">
+          <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span><div><h3>My Take - Materials &amp; Interior Architecture</h3></div></div>
+          <div class="take-grid">
+            <div class="field"><label for="intStrength">Strength</label><input id="intStrength" data-persist type="text" placeholder="" /></div>
+            <div class="field"><label for="intWeakness">Weakness</label><input id="intWeakness" data-persist type="text" placeholder="" /></div>
+            <div class="field"><label for="intLargestTrade">Key trade-off</label><input id="intLargestTrade" data-persist type="text" placeholder="" /></div>
+            <div class="field"><label for="intOpportunity">Decision impact</label><input id="intOpportunity" data-persist type="text" placeholder="" /></div>
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="submod-shell" id="condition-perception">
+      <summary>Condition &amp; Perception</summary>
+      <div class="submod-body">
+        <div class="lenses" style="margin-bottom:8px">
+          <div class="lens good">
+            <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div><h3>Benefits</h3></div></div>
+            <textarea data-persist id="condBenefits" placeholder=""></textarea>
+          </div>
+          <div class="lens bad">
+            <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg></span><div><h3>Drawbacks</h3></div></div>
+            <textarea data-persist id="condDrawbacks" placeholder=""></textarea>
+          </div>
+          <div class="lens flag">
+            <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg></span><div><h3>Red flags</h3></div></div>
+            <textarea data-persist id="condFlags" placeholder=""></textarea>
+          </div>
+          <div class="lens ask">
+            <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.5 1-1.5 2.2V14M12 17h.01"/></svg></span><div><h3>Unknowns</h3></div></div>
+            <textarea data-persist id="condQuestions" placeholder=""></textarea>
+          </div>
+        </div>
+      </div>
+    </details>
+    <div class="lens take span2">
+      <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span><div><h3>My Take - Unit (overall)</h3></div></div>
+      <div class="take-grid">
+        <div class="field"><label for="unitStrength">Strength</label><input id="unitStrength" data-persist type="text" placeholder="" /></div>
+        <div class="field"><label for="unitWeakness">Weakness</label><input id="unitWeakness" data-persist type="text" placeholder="" /></div>
+        <div class="field"><label for="unitLargestTrade">Key trade-off</label><input id="unitLargestTrade" data-persist type="text" placeholder="" /></div>
+        <div class="field"><label for="unitOpportunity">Decision impact</label><input id="unitOpportunity" data-persist type="text" placeholder="" /></div>
+      </div>
+    </div>
+  </div>
+</details>
+<details class="module-shell" id="price">
+  <summary><span class="mod-num">05</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M17 6.5c0-2-2-3.5-5-3.5S7 4.5 7 6.5 9 9 12 9s5 1.2 5 3.5-2 3.5-5 3.5-5-1.5-5-3.5"/></svg> Price</summary>
+  <div class="module-body">
+  <div class="sec-head">
+    <div class="sec-num">05</div>
+    <h2>Price</h2>
+    <p class="lead">What adds value, what reduces it, and which trade-offs the price forces.</p>
+  </div>
+<div class="value-split">
+    <div class="lens up">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h6v6"/></svg></span><div><h3>Adds value</h3><div class="sub">Value drivers</div></div></div>
+  <div class="chips-inline screen-only"><button type="button" class="chip-btn" data-add="valueUp">Corner unit</button><button type="button" class="chip-btn" data-add="valueUp">Protected views</button><button type="button" class="chip-btn" data-add="valueUp">Low HOA</button><button type="button" class="chip-btn" data-add="valueUp">Scarcity</button></div><textarea data-persist id="valueUp" placeholder=""></textarea>
+</div>
+    <div class="lens down">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 17H2L12 3z"/><path d="M12 9v5M12 17h.01"/></svg></span><div><h3>Reduces value</h3><div class="sub">Value drains</div></div></div>
+  <div class="chips-inline screen-only"><button type="button" class="chip-btn" data-add="valueDown">High carrying costs</button><button type="button" class="chip-btn" data-add="valueDown">Poor layout</button><button type="button" class="chip-btn" data-add="valueDown">Land lease</button><button type="button" class="chip-btn" data-add="valueDown">Litigation</button></div><textarea data-persist id="valueDown" placeholder=""></textarea>
+</div>
+  </div>
+  <div class="lenses">
+    <div class="lens trade">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 8h14"/><path d="M7 8l-3 7h6L7 8zM17 8l-3 7h6l-3-7z"/></svg></span><div><h3>Trade-offs forced by price</h3></div></div>
+  <div class="chips-inline screen-only"><button type="button" class="chip-btn" data-add="priceTrades">Better building / worse location</button><button type="button" class="chip-btn" data-add="priceTrades">Better location / smaller apartment</button></div><textarea data-persist id="priceTrades" placeholder=""></textarea>
+</div>
+    <div class="lens ask">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.5 1-1.5 2.2V14M12 17h.01"/></svg></span><div><h3>Unknowns</h3></div></div>
+  <textarea data-persist id="priceQuestions" placeholder="What would I pay?"></textarea>
+</div>
+    <div class="lens flag span2">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg></span><div><h3>Red flags</h3></div></div>
+  <textarea data-persist id="priceFlags" placeholder=""></textarea>
+</div>
+    <div class="lens take span2">
+      <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span><div><h3>My Take - Price</h3></div></div>
+      <div class="take-grid">
+        <div class="field signature"><label for="iWouldPay">What would I pay?</label><textarea id="iWouldPay" data-persist placeholder=""></textarea></div>
+        <div class="field "><label for="rationalBuyer">Rational buyer price</label><input id="rationalBuyer" data-persist type="text" placeholder="" /></div>
+        <div class="field "><label for="compellingPrice">Compelling price</label><input id="compellingPrice" data-persist type="text" placeholder="" /></div>
+        <div class="field "><label for="priceLargestTrade">Key trade-off</label><input id="priceLargestTrade" data-persist type="text" placeholder="" /></div>
+        <div class="field "><label for="priceOpportunity">Decision impact</label><input id="priceOpportunity" data-persist type="text" placeholder="" /></div>
+        <div class="field "><label for="priceUnknown">Biggest unknown</label><input id="priceUnknown" data-persist type="text" placeholder="" /></div>
+      </div>
+    </div>
+  </div>
+  <div class="note">Not merely "What is it worth?" Ask whether this is the best use of this buyer's money.</div>
+</div>
+</details>
+<details class="module-shell" id="alts">
+  <summary><span class="mod-num">06</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg> Alternatives</summary>
+  <div class="module-body">
+  <div class="sec-head">
+    <div class="sec-num">06</div>
+    <h2>Alternatives</h2>
+    <p class="lead">Opportunity cost against the next-best use of capital.</p>
+  </div>
+<div class="lenses">
+    <div class="lens good">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div><h3>Why this could still win</h3></div></div>
+  <textarea data-persist id="altWhyWin" placeholder=""></textarea>
+</div>
+    <div class="lens bad">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg></span><div><h3>Why an alternative might win</h3></div></div>
+  <textarea data-persist id="altWhyLose" placeholder=""></textarea>
+</div>
+    <div class="lens trade span2">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 8h14"/><path d="M7 8l-3 7h6L7 8zM17 8l-3 7h6l-3-7z"/></svg></span><div><h3>Core alternative trade-off</h3></div></div>
+  <textarea data-persist id="altTrade" placeholder=""></textarea>
+</div>
+    <div class="lens take span2">
+      <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span><div><h3>My Take - Alternatives</h3></div></div>
+      <div class="take-grid">
+        <div class="field "><label for="bestAlt">Best alternative</label><input id="bestAlt" data-persist type="text" placeholder="" /></div>
+        <div class="field "><label for="altUnknown">Biggest unknown vs alternative</label><input id="altUnknown" data-persist type="text" placeholder="" /></div>
+      </div>
+    </div>
+  </div>
+</div>
+</details>
+<details class="module-shell" id="risk">
+  <summary><span class="mod-num">07</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 17H2L12 3z"/><path d="M12 9v5M12 17h.01"/></svg> Risk</summary>
+  <div class="module-body">
+  <div class="sec-head">
+    <div class="sec-num">07</div>
+    <h2>Risk</h2>
+    <p class="lead">Risks you can price, accept, or that break the thesis.</p>
+  </div>
+<div class="lenses">
+    <div class="lens ask">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.5 1-1.5 2.2V14M12 17h.01"/></svg></span><div><h3>Known risks we can price</h3></div></div>
+  <textarea data-persist id="riskKnown" placeholder=""></textarea>
+</div>
+    <div class="lens flag">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></svg></span><div><h3>Risks that could break the thesis</h3></div></div>
+  <textarea data-persist id="riskBreak" placeholder=""></textarea>
+</div>
+    <div class="lens trade">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 8h14"/><path d="M7 8l-3 7h6L7 8zM17 8l-3 7h6l-3-7z"/></svg></span><div><h3>Risks we are consciously accepting</h3></div></div>
+  <textarea data-persist id="riskAccept" placeholder=""></textarea>
+</div>
+    <div class="lens take">
+      <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span><div><h3>My Take - Risk</h3></div></div>
+      <div class="field "><label for="hiddenRisk">Hidden risk</label><input id="hiddenRisk" data-persist type="text" placeholder="" /></div>
+      <div style="height:8px"></div>
+      <div class="field "><label for="riskUnknown">Biggest unknown</label><input id="riskUnknown" data-persist type="text" placeholder="" /></div>
+    </div>
+  </div>
+</div>
+</details>
+<details class="module-shell" id="longevity">
+  <summary><span class="mod-num">08</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h6v6"/></svg> Longevity</summary>
+  <div class="module-body">
+  <div class="sec-head">
+    <div class="sec-num">08</div>
+    <h2>Longevity</h2>
+    <p class="lead">How the asset ages over a 5-10 year hold.</p>
+  </div>
+<div class="lenses">
+    <div class="lens good">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div><h3>Why it ages well</h3></div></div>
+  <textarea data-persist id="longGood" placeholder=""></textarea>
+</div>
+    <div class="lens bad">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg></span><div><h3>Why it may age poorly</h3></div></div>
+  <textarea data-persist id="longBad" placeholder=""></textarea>
+</div>
+    <div class="lens ask">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.5 1-1.5 2.2V14M12 17h.01"/></svg></span><div><h3>5 / 10 year questions</h3></div></div>
+  <textarea data-persist id="longAsk" placeholder=""></textarea>
+</div>
+    <div class="lens take">
+      <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span><div><h3>My Take - Longevity</h3></div></div>
+      <div class="field "><label for="longStrength">Strength</label><input id="longStrength" data-persist type="text" placeholder="" /></div>
+      <div style="height:8px"></div>
+      <div class="field "><label for="longUnknown">Biggest unknown</label><input id="longUnknown" data-persist type="text" placeholder="" /></div>
+    </div>
+  </div>
+</div>
+</details>
+<details class="module-shell" id="placement">
+  <summary><span class="mod-num">09</span><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 19c1.5-3 4-4.5 7-4.5s5.5 1.5 7 4.5"/></svg> Fit</summary>
+  <div class="module-body">
+  <div class="sec-head">
+    <div class="sec-num">09</div>
+    <h2>Fit</h2>
+    <p class="lead">Who thrives here - and who does not.</p>
+  </div>
+<div class="lenses">
+    <div class="lens good">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><div><h3>Thrives here</h3></div></div>
+  <textarea data-persist id="thrives" placeholder=""></textarea>
+</div>
+    <div class="lens bad">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg></span><div><h3>Probably wrong for</h3></div></div>
+  <textarea data-persist id="wrongFor" placeholder=""></textarea>
+</div>
+    <div class="lens trade span2">
+  <div class="lens-head"><span class="mark"><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M5 8h14"/><path d="M7 8l-3 7h6L7 8zM17 8l-3 7h6l-3-7z"/></svg></span><div><h3>Fit trade-off</h3></div></div>
+  <textarea data-persist id="fitTrade" placeholder=""></textarea>
+</div>
+  </div>
+  <div class="type-row" style="margin-top:12px">
+    <label><input type="checkbox" data-chip /> Executive</label><label><input type="checkbox" data-chip /> Couple</label><label><input type="checkbox" data-chip /> Family</label><label><input type="checkbox" data-chip /> Investor</label><label><input type="checkbox" data-chip /> Creative</label><label><input type="checkbox" data-chip /> International</label><label><input type="checkbox" data-chip /> Pied-a-terre</label><label><input type="checkbox" data-chip /> Empty nester</label><label><input type="checkbox" data-chip /> Remote worker</label>
+  </div>
+</div>
+</details>
+  </div>
+</details>
+
+<details class="phase-shell phase-decision" id="phase-decision" open>
+  <summary><span class="phase-tag">Chapter 03</span> Decision <span class="chev" aria-hidden="true"></span></summary>
+  <div class="phase-body">
+    <div class="verdict-card" id="score">
+  <div class="sec-head" style="border-bottom-color: rgba(184,149,108,.55)">
+    <div class="sec-num">03</div>
+    <h2>Final Verdict</h2>
+    <p class="lead">The forcing function. Score, grade, and the call you would defend.</p>
+  </div>
+
+  <div class="decision-hero">
+    <div class="dh-label">Decision score</div>
+    <div class="dh-score" id="heroScore">0 <span>/100</span></div>
+    <div class="dh-grade" id="heroGrade">-</div>
+    <div class="dh-verdict" id="heroVerdict">Pending</div>
+    <div class="dh-because">
+      <label for="finalAnswer">Because</label>
+      <textarea id="finalAnswer" data-persist placeholder="One clear sentence."></textarea>
+    </div>
+  </div>
+
+  <div class="verdict" style="margin-bottom:28px">
+    <label><input type="radio" name="verdict" value="Strong Buy" data-persist-radio /> Strong Buy</label>
+    <label><input type="radio" name="verdict" value="Buy" data-persist-radio /> Buy</label>
+    <label><input type="radio" name="verdict" value="Negotiate" data-persist-radio /> Negotiate</label>
+    <label><input type="radio" name="verdict" value="Situational" data-persist-radio /> Situational</label>
+    <label><input type="radio" name="verdict" value="Pass" data-persist-radio /> Pass</label>
+  </div>
+
+  <div class="wow-grid">
+    <div class="field"><label for="primaryStrength">Biggest strength</label><input id="primaryStrength" data-persist type="text" placeholder="" /></div>
+    <div class="field"><label for="biggestTradeoff">Biggest weakness</label><input id="biggestTradeoff" data-persist type="text" placeholder="" /></div>
+    <div class="field"><label for="hiddenRiskOut">Biggest risk</label><input id="hiddenRiskOut" data-persist type="text" placeholder="" /></div>
+    <div class="field"><label for="whoBelongs">Would I buy?</label><input id="whoBelongs" data-persist type="text" placeholder="Yes / No / Conditional - why" /></div>
+    <div class="field" style="grid-column:1/-1"><label for="bestPrice">Fair price</label><input id="bestPrice" data-persist type="text" placeholder="" /></div>
+    <div class="field"><label for="grade">Grade</label>
+      <select id="grade" data-persist><option value="">Select</option><option>A</option><option>A-</option><option>B+</option><option>B</option><option>B-</option><option>C+</option><option>C</option><option>C-</option><option>D</option><option>F</option></select>
+    </div>
+    <div class="field"><label for="priceAssessment">Price assessment</label><input id="priceAssessment" data-persist type="text" placeholder="" /></div>
+    <div class="field"><label for="bestAltOut">Best alternative</label><input id="bestAltOut" data-persist type="text" placeholder="" /></div>
+  </div>
+
+  <div class="core">Given the goal, alternatives, costs, risks and future consequences - is this actually the best decision?</div>
+
+  <details class="score-panel">
+    <summary>Score breakdown</summary>
+    <table class="score-table">
+      <thead><tr><th>Category</th><th>Max</th><th>Score</th></tr></thead>
+      <tbody>
+        <tr><td>Location</td><td>/15</td><td><input type="number" min="0" max="15" data-score data-max="15" data-persist id="sLoc" /></td></tr>
+        <tr><td>Building</td><td>/15</td><td><input type="number" min="0" max="15" data-score data-max="15" data-persist id="sBldg" /></td></tr>
+        <tr><td>Unit quality</td><td>/15</td><td><input type="number" min="0" max="15" data-score data-max="15" data-persist id="sUnit" /></td></tr>
+        <tr><td>Financial value</td><td>/20</td><td><input type="number" min="0" max="20" data-score data-max="20" data-persist id="sFin" /></td></tr>
+        <tr><td>Lifestyle fit</td><td>/10</td><td><input type="number" min="0" max="10" data-score data-max="10" data-persist id="sLife" /></td></tr>
+        <tr><td>Design and perception</td><td>/10</td><td><input type="number" min="0" max="10" data-score data-max="10" data-persist id="sDesign" /></td></tr>
+        <tr><td>Risk (higher = cleaner risk picture)</td><td>/10</td><td><input type="number" min="0" max="10" data-score data-max="10" data-persist id="sRisk" /></td></tr>
+        <tr><td>Future flexibility</td><td>/5</td><td><input type="number" min="0" max="5" data-score data-max="5" data-persist id="sFlex" /></td></tr>
+        <tr class="total-row"><td>TOTAL</td><td>/100</td><td><span id="totalScore">0</span></td></tr>
+      </tbody>
+    </table>
+  </details>
+</div>
+  </div>
+</details>
+
+<details class="meta-fold no-print" id="metadata">
+  <summary><svg class="ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> Metadata</summary>
+  <p class="lead">Source control and process notes. Hidden from print by default.</p>
+  <div class="fact-grid">
+    <div class="field "><label for="metaSource">Source</label><input id="metaSource" data-persist type="text" placeholder="" /></div>
+    <div class="field "><label for="metaUpdated">Last updated</label><input id="metaUpdated" data-persist type="text" placeholder="" /></div>
+    <div class="field "><label for="metaVideo">Video recorded</label><input id="metaVideo" data-persist type="text" placeholder="" /></div>
+    <div class="field "><label for="metaMlsVerified">MLS verified</label><input id="metaMlsVerified" data-persist type="text" placeholder="" /></div>
+    <div class="field "><label for="metaAi">AI assisted?</label><input id="metaAi" data-persist type="text" placeholder="" /></div>
+    <div class="field wide"><label for="metaNotes">Notes</label><textarea id="metaNotes" data-persist placeholder=""></textarea></div>
+    <div class="field wide"><label for="metaDocs">Documents</label><textarea id="metaDocs" data-persist placeholder=""></textarea></div>
+    <div class="field wide"><label for="metaPhotos">Photos</label><textarea id="metaPhotos" data-persist placeholder=""></textarea></div>
+    <div class="field wide"><label for="metaFloorplans">Floorplans</label><textarea id="metaFloorplans" data-persist placeholder=""></textarea></div>
+  </div>
+</details>
+
+<p class="footnote no-print">Agent Kammer · Property Decision Assessment · Not a formal appraisal · For client decision support and advisor fieldwork</p>
+</div>
+
+<div class="print-footer" aria-hidden="true">
+  <span class="pf-brand">Agent Kammer · Property Decision Assessment</span>
+  <span class="pf-address" id="printFooterAddress"></span>
+</div>
+
+<script>
+(function () {
+  var KEY = "akPropertyDecisionIntelV3";
+  var observations = [];
+  var PATTERNS = [
+    { label: "Marble countertops", benefit: "Premium appearance and natural variation", drawback: "Softer/more porous; prone to staining and etching vs quartz", trade: "Luxury look vs daily durability and maintenance", impact: "Long-term", fix: "Expensive", severity: "3", cost: "Replace or refinish is costly", buyer: "Entertainers notice; practical cooks may reject" },
+    { label: "Quartz counters", benefit: "More durable and practical for daily use", drawback: "Less natural/unique look than stone", trade: "Performance vs material authenticity", impact: "Functional", fix: "Expensive", severity: "2", cost: "Replacement if style mismatch", buyer: "Practical households prefer; design purists may discount" },
+    { label: "Stove directly behind sink", benefit: "Compact kitchen footprint", drawback: "Tight circulation; two people cannot cook comfortably", trade: "Space efficiency vs kitchen usability", impact: "Functional", fix: "Difficult", severity: "4", cost: "Hard without reconfiguring kitchen", buyer: "Serious cooks and families feel this immediately" },
+    { label: "Island clearance too narrow", benefit: "Extra counter/storage in plan", drawback: "Cramped circulation; appliances/people collide", trade: "Work surface vs movement", impact: "Functional", fix: "Difficult", severity: "4", cost: "Often requires layout change", buyer: "Daily usability hit; resale friction for families" },
+    { label: "Appliance doors colliding", benefit: "Dense appliance package", drawback: "Doors/drawers block each other in use", trade: "Spec sheet vs real operation", impact: "Functional", fix: "Difficult", severity: "4", cost: "May need cabinetry redesign", buyer: "Daily frustration; smart buyers test in person" },
+    { label: "Poor kitchen work triangle", benefit: "Open or sculptural kitchen look", drawback: "Inefficient path between sink/stove/fridge", trade: "Aesthetics vs cooking ergonomics", impact: "Functional", fix: "Difficult", severity: "4", cost: "Major kitchen redesign", buyer: "Cooks reject; investors may ignore" },
+    { label: "Long hallway / wasted SF", benefit: "Privacy separation / grand entry feel", drawback: "Paid square footage with low livability", trade: "Circulation drama vs usable rooms", impact: "Financial", fix: "Difficult", severity: "3", cost: "Hard to reclaim without renovation", buyer: "PPSF shoppers discount" },
+    { label: "Awkward door swings", benefit: "Standard door package", drawback: "Doors hit walls, fixtures, or pathways", trade: "Privacy doors vs clear movement", impact: "Functional", fix: "Easy", severity: "2", cost: "Often cheap to rehang", buyer: "Minor alone; stacks with other friction" },
+    { label: "Lack of furniture walls (excess glass)", benefit: "Light, views, modern openness", drawback: "Nowhere to place sofa/bed/art; acoustics suffer", trade: "Glass lifestyle vs furnishability", impact: "Functional", fix: "Difficult", severity: "4", cost: "Hard without adding walls/millwork", buyer: "Furniture-first buyers struggle" },
+    { label: "Floor-to-ceiling windows", benefit: "Light and views", drawback: "Heat gain/loss, privacy, furniture limits", trade: "Brightness/views vs comfort and privacy", impact: "Long-term", fix: "Expensive", severity: "3", cost: "Shades help; glass change is major", buyer: "View seekers pay up; privacy seekers hesitate" },
+    { label: "Open kitchen", benefit: "Entertaining and visual connection", drawback: "Smell, noise, visual clutter into living space", trade: "Social cooking vs separation", impact: "Functional", fix: "Difficult", severity: "3", cost: "Closing kitchen is a big reno", buyer: "Entertainers love; smell-sensitive dislike" },
+    { label: "Bedrooms too close to entertaining", benefit: "Compact / efficient footprint", drawback: "Noise and privacy conflicts", trade: "Efficiency vs quiet sleeping", impact: "Functional", fix: "Difficult", severity: "4", cost: "Hard without reconfiguration", buyer: "Families and WFH buyers care" },
+    { label: "Split bedrooms", benefit: "Privacy for guests/partners/WFH", drawback: "Less convenient for young families", trade: "Adult privacy vs family clustering", impact: "Functional", fix: "Impossible", severity: "2", cost: "Plan is fixed", buyer: "Couples/guests: plus. Young kids: minus" },
+    { label: "Freestanding tub", benefit: "Luxury appearance / spa feel", drawback: "Uses space; cleaning and splash practicality", trade: "Hotel look vs bathroom utility", impact: "Cosmetic", fix: "Expensive", severity: "2", cost: "Bath reno to remove", buyer: "Lifestyle buyers like; practical buyers shrug" },
+    { label: "Insufficient storage", benefit: "More open volume / cleaner look", drawback: "Clutter migrates into rooms", trade: "Visual calm vs real-life storage", impact: "Functional", fix: "Expensive", severity: "4", cost: "Custom millwork", buyer: "City buyers with stuff - major issue" },
+    { label: "Trendy finishes vs timeless", benefit: "Photogenic / current", drawback: "Dates quickly; replacement cycle sooner", trade: "Now-appeal vs long-hold resilience", impact: "Long-term", fix: "Expensive", severity: "3", cost: "Finish refresh in a few years", buyer: "Long-hold buyers discount" },
+    { label: "Beautiful material poorly suited to daily use", benefit: "High design impact", drawback: "Wear, maintenance, or performance mismatch", trade: "Showpiece vs lived-in durability", impact: "Long-term", fix: "Expensive", severity: "4", cost: "Often full replacement in zone of use", buyer: "Design lovers conflicted; practical buyers walk" }
+  ];
+
+  function $(id) { return document.getElementById(id); }
+  function escapeHtml(s) {
+    return String(s || "").replace(/[&<>"']/g, function (c) {
+      return ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" })[c];
+    });
+  }
+  function setCover(el, text, emptyLabel) {
+    if (!el) return;
+    var t = (text || "").trim();
+    if (!t) { el.textContent = emptyLabel || "-"; el.classList.add("empty"); }
+    else { el.textContent = t; el.classList.remove("empty"); }
+  }
+
+  function parseMoney(v) {
+    if (v == null) return null;
+    var s = String(v).replace(/[^0-9.\-]/g, "");
+    if (!s) return null;
+    var n = Number(s);
+    return isFinite(n) ? n : null;
+  }
+  function parseDate(v) {
+    if (!v) return null;
+    var d = new Date(String(v).length <= 10 ? String(v) + "T12:00:00" : String(v));
+    return isNaN(d.getTime()) ? null : d;
+  }
+  function yearsBetween(a, b) {
+    if (!a || !b) return null;
+    var ms = Math.abs(b.getTime() - a.getTime());
+    return ms / (365.25 * 24 * 60 * 60 * 1000);
+  }
+  function fmtMoney(n) {
+    if (n == null || !isFinite(n)) return "";
+    var sign = n < 0 ? "-" : "";
+    var abs = Math.abs(n);
+    return sign + "$" + Math.round(abs).toLocaleString("en-US");
+  }
+  function fmtPct(n) {
+    if (n == null || !isFinite(n)) return "";
+    var sign = n > 0 ? "+" : "";
+    return sign + n.toFixed(1) + "%";
+  }
+  function setCalc(id, value) {
+    var el = $(id);
+    if (!el) return;
+    el.value = value || "";
+  }
+  function updateMetrics() {
+    var initial = parseMoney($("initialListPrice") && $("initialListPrice").value);
+    var current = parseMoney($("askingPrice") && $("askingPrice").value);
+    var lastSold = parseMoney($("lastSoldPrice") && $("lastSoldPrice").value);
+    var original = parseMoney($("originalPurchasePrice") && $("originalPurchasePrice").value);
+    var base = lastSold != null ? lastSold : original;
+    var lastDate = parseDate($("lastSoldDate") && $("lastSoldDate").value);
+    var nowDate = parseDate($("assessDate") && $("assessDate").value) || new Date();
+
+    if (initial != null && current != null && initial > 0) {
+      setCalc("pctReduction", fmtPct(((current - initial) / initial) * 100));
+    } else setCalc("pctReduction", "");
+
+    if (base != null && current != null) {
+      var delta = current - base;
+      setCalc("totalAppreciation", fmtMoney(delta) + (base > 0 ? " (" + fmtPct((delta / base) * 100) + ")" : ""));
+      if (base > 0) setCalc("lastSaleAskPct", fmtPct((delta / base) * 100));
+      else setCalc("lastSaleAskPct", "");
+    } else {
+      setCalc("totalAppreciation", "");
+      setCalc("lastSaleAskPct", "");
+    }
+
+    var yrs = yearsBetween(lastDate, nowDate);
+    if (base != null && current != null && yrs != null && yrs > 0 && base > 0) {
+      var ann = (Math.pow(current / base, 1 / yrs) - 1) * 100;
+      setCalc("annualizedAppreciation", fmtPct(ann));
+      setCalc("lastSaleAskAnnPct", fmtPct(ann));
+    } else {
+      setCalc("annualizedAppreciation", "");
+      setCalc("lastSaleAskAnnPct", "");
+    }
+  }
+
+  function updateCover() {
+    updatePrintFooter();
+    setCover($("coverAddress"), $("address") && $("address").value, "Address pending");
+    setCover($("coverPrice"), $("askingPrice") && $("askingPrice").value, "-");
+    var score = $("totalScore") ? $("totalScore").textContent : "0";
+    if ($("coverScore")) {
+      $("coverScore").textContent = score + " / 100";
+      $("coverScore").classList.remove("empty");
+    }
+    if ($("heroScore")) $("heroScore").innerHTML = score + ' <span>/100</span>';
+    var verdict = document.querySelector('input[name="verdict"]:checked');
+    var vText = verdict ? verdict.value : "";
+    setCover($("coverVerdict"), vText, "Pending");
+    setCover($("coverGrade"), $("grade") && $("grade").value, "-");
+    if ($("heroGrade")) $("heroGrade").textContent = ($("grade") && $("grade").value) ? $("grade").value : "-";
+    if ($("heroVerdict")) $("heroVerdict").textContent = vText ? vText.toUpperCase() : "PENDING";
+    var d = $("assessDate") && $("assessDate").value;
+    if (d) {
+      try { $("coverDate").textContent = new Date(d + "T12:00:00").toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }); }
+      catch (e) { $("coverDate").textContent = d; }
+      $("coverDate").classList.remove("empty");
+    } else { setCover($("coverDate"), "", "-"); }
+  }
+  function updateTotal() {
+    var total = 0;
+    document.querySelectorAll("input[data-score]").forEach(function (el) {
+      var max = Number(el.getAttribute("data-max") || 0);
+      var v = Number(el.value || 0);
+      if (v > max) { el.value = String(max); v = max; }
+      if (v < 0) { el.value = "0"; v = 0; }
+      total += v;
+    });
+    $("totalScore").textContent = String(total);
+    updateCover();
+  }
+  function renderObs() {
+    var list = $("obsList");
+    if (!list) return;
+    $("obsCount").textContent = observations.length + " logged";
+    if (!observations.length) {
+      list.innerHTML = '<p class="sub" style="margin:0;color:var(--muted);font-size:.82rem">No design patterns logged yet.</p>';
+      return;
+    }
+    list.innerHTML = observations.map(function (o, i) {
+      return '<div class="obs-card"><strong>' + escapeHtml(o.pattern) + '</strong>' +
+        '<div>Benefit: ' + escapeHtml(o.benefit) + '</div>' +
+        '<div>Drawback: ' + escapeHtml(o.drawback) + '</div>' +
+        '<div>Trade-off: ' + escapeHtml(o.trade) + '</div>' +
+        '<div class="meta-line">Impact: ' + escapeHtml(o.impact) + ' · Fixability: ' + escapeHtml(o.fix) +
+        ' · Severity: ' + escapeHtml(o.severity) + ' · Cost: ' + escapeHtml(o.cost || "-") + '</div>' +
+        '<div>Buyer impact: ' + escapeHtml(o.buyer || "-") + '</div>' +
+        '<button type="button" class="screen-only" data-del="' + i + '">Remove</button></div>';
+    }).join("");
+  }
+  function clearObsForm() {
+    ["obsPattern","obsBenefit","obsDrawback","obsTrade","obsCost","obsBuyer"].forEach(function (id) { $(id).value = ""; });
+    $("obsImpact").value = "Functional"; $("obsFix").value = "Difficult"; $("obsSeverity").value = "3";
+  }
+  function loadPattern(p) {
+    $("obsPattern").value = p.label; $("obsBenefit").value = p.benefit; $("obsDrawback").value = p.drawback;
+    $("obsTrade").value = p.trade; $("obsImpact").value = p.impact; $("obsFix").value = p.fix;
+    $("obsSeverity").value = p.severity; $("obsCost").value = p.cost || ""; $("obsBuyer").value = p.buyer || "";
+  }
+  function save() {
+    updateMetrics();
+    var data = { fields: {}, radios: {}, chips: [], observations: observations };
+    document.querySelectorAll("[data-persist]").forEach(function (el) { data.fields[el.id] = el.value; });
+    document.querySelectorAll("[data-persist-radio]").forEach(function (el) { if (el.checked) data.radios[el.name] = el.value; });
+    document.querySelectorAll("input[data-chip]").forEach(function (el, i) { data.chips[i] = el.checked; });
+    try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
+    updateTotal(); renderObs();
+  }
+  function load() {
+    var raw = null;
+    try { raw = localStorage.getItem(KEY); } catch (e) {}
+    if (!raw) { try { raw = localStorage.getItem("akPropertyDecisionIntelV2"); } catch (e) {} }
+    if (raw) {
+      var data = JSON.parse(raw);
+      Object.keys(data.fields || {}).forEach(function (id) { var el = $(id); if (el) el.value = data.fields[id]; });
+      if (data.fields && data.fields.propertyName && $("address") && !$("address").value) $("address").value = data.fields.propertyName;
+      Object.keys(data.radios || {}).forEach(function (name) {
+        var el = document.querySelector('input[name="' + name + '"][value="' + data.radios[name] + '"]');
+        if (el) el.checked = true;
+      });
+      document.querySelectorAll("input[data-chip]").forEach(function (el, i) { if (data.chips && data.chips[i]) el.checked = true; });
+      observations = Array.isArray(data.observations) ? data.observations : [];
+    }
+    var host = $("patternChips");
+    if (host) host.innerHTML = PATTERNS.map(function (p, idx) {
+      return '<button type="button" class="pattern-chip" data-pattern-idx="' + idx + '">' + escapeHtml(p.label) + '</button>';
+    }).join("");
+    if ($("assessDate") && !$("assessDate").value) $("assessDate").valueAsDate = new Date();
+    updateMetrics(); updateTotal(); renderObs();
+  }
+
+  document.querySelectorAll(".chip-btn[data-add]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var el = $(btn.getAttribute("data-add")); if (!el) return;
+      var text = btn.textContent.trim(), current = el.value.trim();
+      if (current.indexOf(text) !== -1) return;
+      el.value = current ? current + "\n" + text : text; save();
+    });
+  });
+  document.addEventListener("click", function (e) {
+    var chip = e.target.closest("[data-pattern-idx]");
+    if (chip) { loadPattern(PATTERNS[Number(chip.getAttribute("data-pattern-idx"))]); return; }
+    var del = e.target.closest("[data-del]");
+    if (del) { observations.splice(Number(del.getAttribute("data-del")), 1); save(); }
+  });
+  $("addObsBtn").addEventListener("click", function () {
+    var pattern = $("obsPattern").value.trim();
+    if (!pattern) { alert("Add a pattern name first."); return; }
+    observations.push({
+      pattern: pattern, benefit: $("obsBenefit").value.trim(), drawback: $("obsDrawback").value.trim(),
+      trade: $("obsTrade").value.trim(), impact: $("obsImpact").value, fix: $("obsFix").value,
+      severity: $("obsSeverity").value, cost: $("obsCost").value.trim(), buyer: $("obsBuyer").value.trim()
+    });
+    clearObsForm(); save();
+  });
+  $("clearObsBtn").addEventListener("click", clearObsForm);
+  $("printBtn").addEventListener("click", function () { updateCover(); window.print(); });
+  document.addEventListener("change", function (e) {
+    if (e.target.matches("[data-persist], [data-persist-radio], input[data-score], input[data-chip]")) save();
+  });
+  document.addEventListener("input", function (e) {
+    if (e.target.matches("[data-persist], input[data-score]")) save();
+  });
+  $("clearBtn").addEventListener("click", function () {
+    if (!confirm("Clear this assessment in this browser?")) return;
+    try { localStorage.removeItem(KEY); localStorage.removeItem("akPropertyDecisionIntelV2"); } catch (e) {}
+    document.querySelectorAll("[data-persist]").forEach(function (el) { el.value = ""; });
+    document.querySelectorAll("[data-persist-radio], input[data-chip]").forEach(function (el) { el.checked = false; });
+    observations = []; clearObsForm(); updateTotal(); renderObs();
+  });
+
+  var printState = [];
+  function hideEmptyFields(hide) {
+    document.querySelectorAll(".field").forEach(function (f) {
+      var el = f.querySelector("input, textarea, select");
+      if (!el) return;
+      var empty = !String(el.value || "").trim() || (el.tagName === "SELECT" && !el.value);
+      if (hide && empty) f.classList.add("print-hide");
+      else f.classList.remove("print-hide");
+    });
+    document.querySelectorAll(".lens").forEach(function (l) {
+      var ta = l.querySelector("textarea");
+      if (!ta) return;
+      if (hide && !ta.value.trim()) l.classList.add("print-hide");
+      else l.classList.remove("print-hide");
+    });
+  }
+  function updatePrintFooter() {
+    var addr = $("address") && $("address").value.trim();
+    var pf = $("printFooterAddress");
+    if (pf) pf.textContent = addr || "";
+  }
+  window.addEventListener("beforeprint", function () {
+    printState = [];
+    document.querySelectorAll("details").forEach(function (d) {
+      printState.push({ el: d, open: d.open });
+      d.open = true;
+    });
+    hideEmptyFields(true);
+    updatePrintFooter();
+    updateCover();
+  });
+  window.addEventListener("afterprint", function () {
+    printState.forEach(function (s) { s.el.open = s.open; });
+    printState = [];
+    hideEmptyFields(false);
+  });
+  load();
+})();
+</script>
+</body>
+</html>

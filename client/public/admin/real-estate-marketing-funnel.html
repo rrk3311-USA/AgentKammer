@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <meta name="robots" content="noindex, nofollow" />
+ <title>Real Estate Marketing Funnel | Internal | Agent Kammer</title>
+ <style>
+ :root {
+ --navy: #0f1c2e;
+ --navy-dark: #0a1420;
+ --stage1: #1a365d;
+ --stage2: #2c5282;
+ --stage3: #2b6cb0;
+ --stage4: #4a5568;
+ --stage5: #718096;
+ --stage6: #a0aec0;
+ --stage7: #cbd5e0;
+ --text-light: #f7fafc;
+ --text-dark: #1a202c;
+ --text-muted: #4a5568;
+ --border: #e2e8f0;
+ --card-bg: #ffffff;
+ --accent: #2b6cb0;
+ }
+
+ * {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+ }
+
+ body {
+ font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+ background: #f0f4f8;
+ color: var(--text-dark);
+ line-height: 1.45;
+ padding: 24px 16px 48px;
+ }
+
+ .container {
+ max-width: 1280px;
+ margin: 0 auto;
+ background: white;
+ border-radius: 12px;
+ box-shadow: 0 10px 40px rgba(15, 28, 46, 0.12);
+ overflow: hidden;
+ }
+
+ /* Header */
+ header {
+ background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+ color: white;
+ text-align: center;
+ padding: 32px 24px 28px;
+ }
+
+ header h1 {
+ font-size: clamp(1.6rem, 4vw, 2.1rem);
+ font-weight: 700;
+ letter-spacing: 0.04em;
+ margin-bottom: 8px;
+ }
+
+ header p {
+ font-size: 1rem;
+ opacity: 0.9;
+ font-weight: 400;
+ }
+
+ /* Mindset Shift */
+ .mindset {
+ display: grid;
+ grid-template-columns: 140px repeat(7, 1fr);
+ background: #1a2332;
+ color: white;
+ font-size: 0.72rem;
+ border-bottom: 1px solid rgba(255,255,255,0.08);
+ }
+
+ .mindset .label {
+ padding: 12px 10px;
+ font-weight: 700;
+ text-transform: uppercase;
+ letter-spacing: 0.04em;
+ display: flex;
+ align-items: center;
+ background: #121a27;
+ }
+
+ .mindset .cell {
+ padding: 10px 8px;
+ text-align: center;
+ border-left: 1px solid rgba(255,255,255,0.06);
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ gap: 2px;
+ }
+
+ .mindset .stage-name {
+ font-weight: 600;
+ font-size: 0.7rem;
+ opacity: 0.95;
+ }
+
+ .mindset .quote {
+ font-style: italic;
+ opacity: 0.75;
+ font-size: 0.68rem;
+ }
+
+ /* Funnel stages header */
+ .funnel-header {
+ display: grid;
+ grid-template-columns: 140px repeat(7, 1fr);
+ }
+
+ .funnel-header .label {
+ background: var(--navy);
+ color: white;
+ padding: 16px 10px;
+ font-weight: 700;
+ font-size: 0.75rem;
+ text-transform: uppercase;
+ letter-spacing: 0.05em;
+ display: flex;
+ align-items: center;
+ }
+
+ .stage {
+ padding: 18px 10px 16px;
+ text-align: center;
+ color: white;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 6px;
+ }
+
+ .stage .num {
+ width: 28px;
+ height: 28px;
+ border-radius: 50%;
+ background: rgba(255,255,255,0.2);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-weight: 700;
+ font-size: 0.85rem;
+ }
+
+ .stage .title {
+ font-weight: 700;
+ font-size: 0.78rem;
+ letter-spacing: 0.03em;
+ line-height: 1.2;
+ }
+
+ .stage .icon {
+ font-size: 1.4rem;
+ margin: 2px 0;
+ opacity: 0.9;
+ }
+
+ .stage .desc {
+ font-size: 0.68rem;
+ opacity: 0.9;
+ line-height: 1.35;
+ max-width: 140px;
+ }
+
+ .s1 { background: #1a365d; }
+ .s2 { background: #2a4a7a; }
+ .s3 { background: #2c5a8a; }
+ .s4 { background: #3d5a73; }
+ .s5 { background: #5a6d80; }
+ .s6 { background: #7a8a9a; }
+ .s7 { background: #9aa8b5; color: #1a202c; }
+ .s7 .num { background: rgba(0,0,0,0.12); }
+
+ /* Data rows */
+ .row {
+ display: grid;
+ grid-template-columns: 140px repeat(7, 1fr);
+ border-bottom: 1px solid var(--border);
+ }
+
+ .row:last-of-type {
+ border-bottom: none;
+ }
+
+ .row .label {
+ background: #f7fafc;
+ padding: 12px 10px;
+ font-weight: 700;
+ font-size: 0.72rem;
+ text-transform: uppercase;
+ letter-spacing: 0.03em;
+ color: var(--navy);
+ display: flex;
+ align-items: center;
+ border-right: 1px solid var(--border);
+ }
+
+ .row .cell {
+ padding: 10px 8px;
+ font-size: 0.72rem;
+ border-left: 1px solid var(--border);
+ line-height: 1.4;
+ }
+
+ .row .cell ul {
+ list-style: none;
+ padding: 0;
+ }
+
+ .row .cell li {
+ position: relative;
+ padding-left: 10px;
+ margin-bottom: 3px;
+ }
+
+ .row .cell li::before {
+ content: "•";
+ position: absolute;
+ left: 0;
+ color: var(--accent);
+ font-weight: bold;
+ }
+
+ .row.alt .cell {
+ background: #fafbfc;
+ }
+
+ /* Bottom section */
+ .bottom {
+ display: grid;
+ grid-template-columns: 1.1fr 1fr 0.9fr;
+ gap: 0;
+ border-top: 3px solid var(--navy);
+ }
+
+ .bottom-card {
+ padding: 22px 20px;
+ background: var(--navy);
+ color: white;
+ }
+
+ .bottom-card:nth-child(2) {
+ background: #152238;
+ border-left: 1px solid rgba(255,255,255,0.08);
+ border-right: 1px solid rgba(255,255,255,0.08);
+ }
+
+ .bottom-card h3 {
+ font-size: 0.85rem;
+ font-weight: 700;
+ letter-spacing: 0.04em;
+ margin-bottom: 12px;
+ text-transform: uppercase;
+ opacity: 0.95;
+ }
+
+ .bottom-card p,
+ .bottom-card li {
+ font-size: 0.78rem;
+ opacity: 0.9;
+ line-height: 1.45;
+ }
+
+ .framework-list {
+ list-style: none;
+ margin-top: 10px;
+ }
+
+ .framework-list li {
+ display: flex;
+ gap: 10px;
+ margin-bottom: 10px;
+ align-items: flex-start;
+ }
+
+ .framework-list .icon {
+ flex-shrink: 0;
+ width: 22px;
+ text-align: center;
+ font-size: 1rem;
+ }
+
+ .framework-list strong {
+ display: block;
+ font-size: 0.78rem;
+ margin-bottom: 1px;
+ }
+
+ .framework-list span {
+ font-size: 0.72rem;
+ opacity: 0.8;
+ }
+
+ .connect-box {
+ margin-top: 14px;
+ background: rgba(255,255,255,0.08);
+ border: 1px dashed rgba(255,255,255,0.25);
+ border-radius: 8px;
+ padding: 12px;
+ text-align: center;
+ font-size: 0.78rem;
+ font-weight: 600;
+ }
+
+ /* Comparison table */
+ .compare-table {
+ width: 100%;
+ border-collapse: collapse;
+ font-size: 0.72rem;
+ margin-top: 8px;
+ }
+
+ .compare-table th {
+ background: rgba(255,255,255,0.1);
+ padding: 7px 8px;
+ text-align: left;
+ font-weight: 600;
+ }
+
+ .compare-table td {
+ padding: 6px 8px;
+ border-bottom: 1px solid rgba(255,255,255,0.07);
+ }
+
+ .compare-table tr:last-child td {
+ border-bottom: none;
+ }
+
+ .compare-note {
+ margin-top: 12px;
+ font-size: 0.72rem;
+ opacity: 0.85;
+ font-style: italic;
+ line-height: 1.4;
+ }
+
+ .principle {
+ font-size: 0.95rem;
+ font-weight: 500;
+ line-height: 1.5;
+ font-style: italic;
+ opacity: 0.95;
+ margin-top: 8px;
+ }
+
+ .skyline {
+ margin-top: 18px;
+ text-align: center;
+ opacity: 0.35;
+ font-size: 1.8rem;
+ letter-spacing: 2px;
+ }
+
+ /* Footer */
+ footer {
+ background: var(--navy-dark);
+ color: rgba(255,255,255,0.7);
+ text-align: center;
+ padding: 16px 20px;
+ font-size: 0.75rem;
+ letter-spacing: 0.06em;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ flex-wrap: wrap;
+ gap: 10px;
+ }
+
+ footer .tagline {
+ text-transform: uppercase;
+ }
+
+ footer .brand {
+ font-weight: 700;
+ color: white;
+ display: flex;
+ align-items: center;
+ gap: 8px;
+ }
+
+ footer .logo {
+ width: 28px;
+ height: 28px;
+ background: white;
+ color: var(--navy);
+ border-radius: 4px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-weight: 800;
+ font-size: 0.7rem;
+ }
+
+ /* Responsive */
+ @media (max-width: 1000px) {
+ .mindset,
+ .funnel-header,
+ .row {
+ grid-template-columns: 110px repeat(7, 1fr);
+ }
+
+ .stage .desc,
+ .row .cell {
+ font-size: 0.65rem;
+ }
+
+ .bottom {
+ grid-template-columns: 1fr;
+ }
+
+ .bottom-card:nth-child(2) {
+ border-left: none;
+ border-right: none;
+ border-top: 1px solid rgba(255,255,255,0.08);
+ border-bottom: 1px solid rgba(255,255,255,0.08);
+ }
+ }
+
+ @media (max-width: 720px) {
+ body {
+ padding: 12px 8px 32px;
+ }
+
+ .mindset,
+ .funnel-header,
+ .row {
+ display: block;
+ }
+
+ .mindset .label,
+ .funnel-header .label,
+ .row .label {
+ width: 100%;
+ border-right: none;
+ border-bottom: 1px solid rgba(255,255,255,0.1);
+ }
+
+ .mindset .cell,
+ .stage,
+ .row .cell {
+ border-left: none;
+ border-bottom: 1px solid var(--border);
+ padding: 12px;
+ text-align: left;
+ }
+
+ .stage {
+ flex-direction: row;
+ flex-wrap: wrap;
+ gap: 10px;
+ text-align: left;
+ }
+
+ .stage .desc {
+ max-width: none;
+ flex: 1 1 100%;
+ }
+
+ .row .cell ul {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 4px 12px;
+ }
+
+ footer {
+ flex-direction: column;
+ text-align: center;
+ }
+ }
+ </style>
+</head>
+<body>
+ <div class="container">
+ <!-- Header -->
+ <header>
+ <p style="font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;opacity:0.75;margin-bottom:8px;font-weight:700;">Internal · Agent Kammer</p>
+ <h1>REAL ESTATE MARKETING FUNNEL</h1>
+ <p>From Awareness to Advocacy - A Relationship-Driven Journey</p>
+ </header>
+
+ <!-- Mindset Shift -->
+ <div class="mindset">
+ <div class="label">Mindset Shift</div>
+ <div class="cell">
+ <span class="stage-name">Unaware</span>
+ <span class="quote">"I don't know what I don't know"</span>
+ </div>
+ <div class="cell">
+ <span class="stage-name">Curious</span>
+ <span class="quote">"Maybe I should learn more"</span>
+ </div>
+ <div class="cell">
+ <span class="stage-name">Recognizes Need</span>
+ <span class="quote">"Something has to change"</span>
+ </div>
+ <div class="cell">
+ <span class="stage-name">Seeks Guidance</span>
+ <span class="quote">"Who can I trust?"</span>
+ </div>
+ <div class="cell">
+ <span class="stage-name">Decides</span>
+ <span class="quote">"This is the right move"</span>
+ </div>
+ <div class="cell">
+ <span class="stage-name">Acts</span>
+ <span class="quote">"Let's make it happen"</span>
+ </div>
+ <div class="cell">
+ <span class="stage-name">Advocates</span>
+ <span class="quote">"I'm glad I made the move"</span>
+ </div>
+ </div>
+
+ <!-- Funnel Stages -->
+ <div class="funnel-header">
+ <div class="label">The Funnel</div>
+ <div class="stage s1">
+ <div class="num">1</div>
+ <div class="title">PROSPECT<br>AWARENESS</div>
+ <div class="icon">🔭</div>
+ <div class="desc">They see you, your content or your brand for the first time.</div>
+ </div>
+ <div class="stage s2">
+ <div class="num">2</div>
+ <div class="title">EDUCATION</div>
+ <div class="icon">📖</div>
+ <div class="desc">They consume your content and start to see value.</div>
+ </div>
+ <div class="stage s3">
+ <div class="num">3</div>
+ <div class="title">DIAGNOSTICS</div>
+ <div class="icon">👤</div>
+ <div class="desc">They realize their situation could be better, but they're not sure how.</div>
+ </div>
+ <div class="stage s4">
+ <div class="num">4</div>
+ <div class="title">TRUST &amp;<br>RELATIONSHIP</div>
+ <div class="icon">🤝</div>
+ <div class="desc">They reach out or engage. You build trust through conversations.</div>
+ </div>
+ <div class="stage s5">
+ <div class="num">5</div>
+ <div class="title">SOLUTION<br>&amp; PLANNING</div>
+ <div class="icon">📋</div>
+ <div class="desc">You provide insight, strategy, and options tailored to their life and goals.</div>
+ </div>
+ <div class="stage s6">
+ <div class="num">6</div>
+ <div class="title">DECISION<br>&amp; ACTION</div>
+ <div class="icon">🔑</div>
+ <div class="desc">They take action with confidence.</div>
+ </div>
+ <div class="stage s7">
+ <div class="num">7</div>
+ <div class="title">ADVOCACY<br>&amp; REFERRAL</div>
+ <div class="icon">👥</div>
+ <div class="desc">They refer you, leave reviews, and become long-term connections.</div>
+ </div>
+ </div>
+
+ <!-- Goal -->
+ <div class="row">
+ <div class="label">Goal</div>
+ <div class="cell">Get noticed</div>
+ <div class="cell">Provide value</div>
+ <div class="cell">Create clarity</div>
+ <div class="cell">Build trust</div>
+ <div class="cell">Deliver strategy</div>
+ <div class="cell">Close &amp; execute</div>
+ <div class="cell">Turn clients into advocates</div>
+ </div>
+
+ <!-- What They Think / Feel -->
+ <div class="row alt">
+ <div class="label">What They<br>Think / Feel</div>
+ <div class="cell">
+ <ul>
+ <li>Not thinking about moving</li>
+ <li>Scrolling, distracted</li>
+ </ul>
+ </div>
+ <div class="cell">
+ <ul>
+ <li>This is helpful</li>
+ <li>I like this perspective</li>
+ </ul>
+ </div>
+ <div class="cell">
+ <ul>
+ <li>Maybe I should make a change</li>
+ <li>What are my options?</li>
+ </ul>
+ </div>
+ <div class="cell">
+ <ul>
+ <li>I like and trust this advisor</li>
+ <li>They get my situation</li>
+ </ul>
+ </div>
+ <div class="cell">
+ <ul>
+ <li>This makes sense</li>
+ <li>They're looking out for me</li>
+ </ul>
+ </div>
+ <div class="cell">
+ <ul>
+ <li>This feels right</li>
+ <li>Let's do it</li>
+ </ul>
+ </div>
+ <div class="cell">
+ <ul>
+ <li>That was the best experience</li>
+ <li>I'll tell my friends</li>
+ </ul>
+ </div>
+ </div>
+
+ <!-- What You Do -->
+ <div class="row">
+ <div class="label">What You Do</div>
+ <div class="cell">
+ <ul>
+ <li>Content on social media</li>
+ <li>SEO / Google presence</li>
+ <li>Thought leadership</li>
+ </ul>
+ </div>
+ <div class="cell">
+ <ul>
+ <li>Educational videos</li>
+ <li>Building reports</li>
+ <li>Market insights</li>
+ </ul>
+ </div>
+ <div class="cell">
+ <ul>
+ <li>Lifestyle diagnostic content</li>
+ <li>Ask the right questions</li>
+ <li>Case studies</li>
+ </ul>
+ </div>
+ <div class="cell">
+ <ul>
+ <li>Discovery calls</li>
+ <li>Listen deeply</li>
+ <li>Provide honest insight</li>
+ </ul>
+ </div>
+ <div class="cell">
+ <ul>
+ <li>Custom strategies</li>
+ <li>Property / building recommendations</li>
+ <li>Decision memos</li>
+ </ul>
+ </div>
+ <div class="cell">
+ <ul>
+ <li>Negotiate</li>
+ <li>Handle details</li>
+ <li>Guide through closing</li>
+ </ul>
+ </div>
+ <div class="cell">
+ <ul>
+ <li>Follow up</li>
+ <li>Provide value post-closing</li>
+ <li>Ask for referrals &amp; reviews</li>
+ </ul>
+ </div>
+ </div>
+
+ <!-- Key Touchpoints -->
+ <div class="row alt">
+ <div class="label">Key<br>Touchpoints</div>
+ <div class="cell">Instagram, YouTube, LinkedIn, Website, Podcasts, Events</div>
+ <div class="cell">Blog, Videos, Building Reports, Newsletters</div>
+ <div class="cell">Diagnostic Framework, Surveys, Strategy Videos</div>
+ <div class="cell">Calls, DMs, Events, Private Consultations</div>
+ <div class="cell">Proposals, Reports, Presentations, Strategy Calls</div>
+ <div class="cell">Offers, Contracts, Inspections, Closings</div>
+ <div class="cell">Follow-up Calls, Events, Client Community</div>
+ </div>
+
+ <!-- Content / Assets -->
+ <div class="row">
+ <div class="label">Content /<br>Assets</div>
+ <div class="cell">Short-form videos, Market insights, Neighborhood spotlights</div>
+ <div class="cell">Deep dive videos, Guides, eBooks, Market reports</div>
+ <div class="cell">"Should I move?" Checklists, Lifestyle diagnostics</div>
+ <div class="cell">Behind-the-scenes, Client stories, Testimonials</div>
+ <div class="cell">Custom building reports, Decision memos, Financial analysis</div>
+ <div class="cell">Transaction updates, Closing checklist</div>
+ <div class="cell">Client events, Referral program, Thank you packages</div>
+ </div>
+
+ <!-- Metric of Success -->
+ <div class="row alt">
+ <div class="label">Metric of<br>Success</div>
+ <div class="cell">Impressions, Reach, Follower Growth</div>
+ <div class="cell">Engagement, Video Views, Downloads</div>
+ <div class="cell">Diagnostic Completions, Inquiries</div>
+ <div class="cell">Conversations, Call Bookings, Trust Signals</div>
+ <div class="cell">Proposals Sent, Strategy Acceptance, Next Steps</div>
+ <div class="cell">Deals Closed, Volume, Commission</div>
+ <div class="cell">Referrals, Reviews, Repeat Business</div>
+ </div>
+
+ <!-- Bottom Section -->
+ <div class="bottom">
+ <!-- Lifestyle Diagnostics -->
+ <div class="bottom-card">
+ <h3>Lifestyle Diagnostics™ Framework</h3>
+ <p>The core of the funnel. You don't sell property.<br>You diagnose life situations.</p>
+ <ul class="framework-list">
+ <li>
+ <span class="icon">👤</span>
+ <div>
+ <strong>Life Stage</strong>
+ <span>Where they are in life (career, family, retirement, etc.)</span>
+ </div>
+ </li>
+ <li>
+ <span class="icon">😣</span>
+ <div>
+ <strong>Pain Points</strong>
+ <span>What's not working in their current situation?</span>
+ </div>
+ </li>
+ <li>
+ <span class="icon">🎯</span>
+ <div>
+ <strong>Goals &amp; Aspirations</strong>
+ <span>What do they want more of in life?</span>
+ </div>
+ </li>
+ <li>
+ <span class="icon">⛓️</span>
+ <div>
+ <strong>Constraints</strong>
+ <span>Budget, timing, location, flexibility</span>
+ </div>
+ </li>
+ <li>
+ <span class="icon">✨</span>
+ <div>
+ <strong>Ideal Outcome</strong>
+ <span>What does success look like for them?</span>
+ </div>
+ </li>
+ </ul>
+ <div class="connect-box">
+ You connect the dots and show them the smarter move.
+ </div>
+ </div>
+
+ <!-- Comparison -->
+ <div class="bottom-card">
+ <h3>Real Estate vs Product / Service Funnel</h3>
+ <table class="compare-table">
+ <thead>
+ <tr>
+ <th>Product / Service Funnel</th>
+ <th>Real Estate Funnel</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Problem Aware</td>
+ <td>Lifestyle Unaware</td>
+ </tr>
+ <tr>
+ <td>Solution Aware</td>
+ <td>Need Aware</td>
+ </tr>
+ <tr>
+ <td>Product Evaluation</td>
+ <td>Strategic Guidance</td>
+ </tr>
+ <tr>
+ <td>Price Comparison</td>
+ <td>Trust &amp; Relationship</td>
+ </tr>
+ <tr>
+ <td>Purchase</td>
+ <td>Decision &amp; Execution</td>
+ </tr>
+ <tr>
+ <td>Repeat Purchase</td>
+ <td>Referral &amp; Relationship</td>
+ </tr>
+ </tbody>
+ </table>
+ <p class="compare-note">
+ Real estate is high-trust, high-consideration, and emotionally driven.<br>
+ It's not about pushing - it's about guiding.
+ </p>
+ </div>
+
+ <!-- Key Principle -->
+ <div class="bottom-card">
+ <h3>Key Principle</h3>
+ <p class="principle">
+ "People don't buy real estate.<br>
+ They buy a better life.<br>
+ Your job is to help them see the next right move."
+ </p>
+ <div class="skyline">🏙️🌆🏢</div>
+ </div>
+ </div>
+
+ <!-- Footer -->
+ <footer>
+ <div class="tagline">Buildings before listings. Decisions before emotions. Live where you belong.</div>
+ <div class="brand">
+ <div class="logo">AK</div>
+ <span>AGENT KAMMER · REAL ESTATE STRATEGIST</span>
+ </div>
+ </footer>
+ </div>
+</body>
+</html>

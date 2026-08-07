@@ -43,6 +43,15 @@ const InternationalCountry = lazy(() => import("@/pages/InternationalCountry"));
 const BuildingReportDetail = lazy(() => import("@/pages/BuildingReportDetail"));
 const PerspectiveArticle = lazy(() => import("@/pages/PerspectiveArticle"));
 const ExecutiveHousingReport = lazy(() => import("@/pages/ExecutiveHousingReport"));
+const RealEstateOwnership = lazy(() => import("@/pages/RealEstateOwnership"));
+const RealEstateDeeds = lazy(() => import("@/pages/RealEstateDeeds"));
+const RealEstateMortgages = lazy(() => import("@/pages/RealEstateMortgages"));
+const FixedRateMortgage = lazy(() => import("@/pages/FixedRateMortgage"));
+const AdjustableRateMortgage = lazy(() => import("@/pages/AdjustableRateMortgage"));
+const MortgageClauses = lazy(() => import("@/pages/MortgageClauses"));
+const ManhattanExplained = lazy(() => import("@/pages/ManhattanExplained"));
+const LiensEasements = lazy(() => import("@/pages/LiensEasements"));
+const Guides = lazy(() => import("@/pages/Guides"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 function Redirect({ to }: { to: string }) {
@@ -126,6 +135,15 @@ function Router() {
       <Route path="/privacy" component={Privacy} />
       <Route path="/terms" component={Terms} />
       <Route path="/licenses" component={Licenses} />
+      <Route path="/guides/real-estate-ownership" component={RealEstateOwnership} />
+      <Route path="/guides/real-estate-deeds" component={RealEstateDeeds} />
+      <Route path="/guides/how-mortgages-work" component={RealEstateMortgages} />
+      <Route path="/guides/fixed-rate-mortgage" component={FixedRateMortgage} />
+      <Route path="/guides/adjustable-rate-mortgage" component={AdjustableRateMortgage} />
+      <Route path="/guides/mortgage-clauses" component={MortgageClauses} />
+      <Route path="/guides/manhattan-explained" component={ManhattanExplained} />
+      <Route path="/guides/liens-easements" component={LiensEasements} />
+      <Route path="/guides" component={Guides} />
       <Route path="/account" component={Account} />
       <Route path="/hub/roadmap" component={HubRoadmap} />
       <Route path="/hub/conversations" component={HubConversations} />

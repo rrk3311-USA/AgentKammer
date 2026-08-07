@@ -1,10 +1,10 @@
 # Agent Kammer
 
-Agent Kammer is a Residential Advisory practice helping people make better real estate decisions — including whether to buy, sell, rent, wait, renew, renovate, refinance, keep, or do nothing yet.
+Agent Kammer is a Residential Advisory practice helping people make better real estate decisions - including whether to buy, sell, rent, wait, renew, renovate, refinance, keep, or do nothing yet.
 
 **Buildings before listings.** The quality of the asset matters more than the marketing of the listing.
 
-**Agent Kammer Residential Advisory** — ongoing strategic guidance for life’s biggest residential decisions. When transaction expertise is needed, Agent Kammer connects clients with the right local professionals — anywhere in the U.S.
+**Agent Kammer Residential Advisory** - ongoing strategic guidance for life’s biggest residential decisions. When transaction expertise is needed, Agent Kammer connects clients with the right local professionals - anywhere in the U.S.
 
 ## Brand stack
 
@@ -31,7 +31,7 @@ Agent Kammer is a Residential Advisory practice helping people make better real 
 
 ## Building reports (crawlable)
 
-Individual building intelligence pages — publicly indexed:
+Individual building intelligence pages - publicly indexed:
 
 - Lantern House: https://www.agentkammer.com/building-reports/lantern-house
 - One High Line: https://www.agentkammer.com/building-reports/one-high-line
@@ -42,10 +42,10 @@ Individual building intelligence pages — publicly indexed:
 
 ## Client journey
 
-1. What's Changing? — https://www.agentkammer.com/services#whats-changing
-2. Decision Assessment — https://www.agentkammer.com/belonging
-3. Relevant Decision Brief — situation pages under /services/...
-4. Strategy — Housing Strategy Session / Decision Blueprint — https://www.agentkammer.com/advisory
+1. What's Changing? - https://www.agentkammer.com/services#whats-changing
+2. Decision Assessment - https://www.agentkammer.com/belonging
+3. Relevant Decision Brief - situation pages under /services/...
+4. Strategy - Housing Strategy Session / Decision Blueprint - https://www.agentkammer.com/advisory
 
 Start Here (journey map): https://www.agentkammer.com/buyer-advisory  
 Do not collapse Start Here and Decision Assessment into one step.
@@ -55,7 +55,7 @@ Do not collapse Start Here and Decision Assessment into one step.
 À la carte: Housing Strategy Session · Building Second Opinion · Residential Portfolio Review  
 Memberships: Essentials · Executive Advisory · Private Residential Office
 
-The product is the ongoing advisory relationship — not a bundle of calls.
+The product is the ongoing advisory relationship - not a bundle of calls.
 
 ## Decision surface (/services)
 

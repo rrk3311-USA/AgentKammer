@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>NY Real Estate Exam Hierarchy Map | Internal | Agent Kammer</title>
+  <style>
+    :root {
+      --navy: #0f1c2e;
+      --navy-mid: #1a2d45;
+      --ink: #142033;
+      --muted: #5a6a7e;
+      --line: #d8e0ea;
+      --paper: #f4f7fb;
+      --card: #ffffff;
+      --brass: #b8956c;
+      --brass-deep: #8f7048;
+      --b1: #1e4d6b;
+      --b2: #2a6b4f;
+      --b3: #8a4f2a;
+      --b4: #3d4f8c;
+      --b5: #6b3d6e;
+      --b6: #1f6b5c;
+      --b7: #7a3d4a;
+      --b8: #4a5c2e;
+      --b9: #2e5a6b;
+      --b10: #5c4a2e;
+      --b11: #4a3d6b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(ellipse 80% 50% at 10% -10%, rgba(184, 149, 108, 0.12), transparent 50%),
+        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(30, 77, 107, 0.1), transparent 45%),
+        var(--paper);
+      color: var(--ink);
+      line-height: 1.5;
+      padding: 28px 16px 64px;
+    }
+
+    .wrap { max-width: 1180px; margin: 0 auto; }
+
+    .banner {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      color: #f7fafc;
+      border-radius: 16px;
+      padding: 28px 28px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 12px 40px rgba(15, 28, 46, 0.18);
+    }
+
+    .banner-kicker {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--brass);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .banner h1 {
+      font-size: clamp(1.55rem, 3vw, 2.1rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      max-width: 22ch;
+    }
+
+    .banner p {
+      margin-top: 10px;
+      max-width: 62ch;
+      color: rgba(247, 250, 252, 0.82);
+      font-size: 0.98rem;
+    }
+
+    .banner-meta {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #e8eef6;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    @media (min-width: 960px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr) 320px;
+        align-items: start;
+      }
+      .sidebar { position: sticky; top: 16px; }
+    }
+
+    .howto, .branch, .trees {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 2px 10px rgba(15, 28, 46, 0.04);
+    }
+
+    .howto h2, .trees h2, .branch h2 {
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .howto ol {
+      padding-left: 1.2rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .howto li { margin-bottom: 6px; }
+    .howto strong { color: var(--ink); }
+
+    .quick {
+      margin-top: 14px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .quick a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.88rem;
+      padding: 7px 9px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .quick a:hover {
+      background: var(--paper);
+      border-color: var(--line);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .branches { display: grid; gap: 14px; }
+
+    .branch { border-top: 4px solid var(--accent, var(--b1)); }
+
+    .branch-head {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .num {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--accent, var(--b1));
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.95rem;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .branch-head h2 {
+      text-transform: none;
+      letter-spacing: -0.01em;
+      font-size: 1.15rem;
+      margin-bottom: 2px;
+    }
+
+    .branch-head .sub {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .leaf {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 13px;
+      margin-bottom: 8px;
+      background: #fafcfe;
+    }
+
+    .leaf:last-child { margin-bottom: 0; }
+
+    .leaf h3 {
+      font-size: 0.92rem;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .leaf ul {
+      padding-left: 1.1rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .leaf li { margin-bottom: 3px; }
+    .leaf li strong { color: var(--ink); font-weight: 600; }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(15, 28, 46, 0.06);
+      color: var(--navy-mid);
+    }
+
+    .tree {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+      background: #fafcfe;
+    }
+
+    .tree:last-child { margin-bottom: 0; }
+
+    .tree h3 {
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+
+    .q {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--brass-deep);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .flow {
+      display: grid;
+      gap: 5px;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .flow div {
+      padding: 6px 8px;
+      border-left: 3px solid var(--brass);
+      background: #fff;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .flow strong { color: var(--ink); }
+
+    .scale {
+      display: grid;
+      gap: 4px;
+      font-size: 0.84rem;
+    }
+
+    .scale span {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .scale .most { border-color: #2a6b4f; background: #f0faf4; }
+    .scale .least { border-color: #8a4f2a; background: #fff8f2; }
+
+    .note {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(184, 149, 108, 0.12);
+      border: 1px solid rgba(184, 149, 108, 0.35);
+      font-size: 0.86rem;
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .footnote {
+      margin-top: 18px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .b1 { --accent: var(--b1); }
+    .b2 { --accent: var(--b2); }
+    .b3 { --accent: var(--b3); }
+    .b4 { --accent: var(--b4); }
+    .b5 { --accent: var(--b5); }
+    .b6 { --accent: var(--b6); }
+    .b7 { --accent: var(--b7); }
+    .b8 { --accent: var(--b8); }
+    .b9 { --accent: var(--b9); }
+    .b10 { --accent: var(--b10); }
+    .b11 { --accent: var(--b11); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="banner">
+      <div class="banner-kicker">Internal study tool · Admin only</div>
+      <h1>NY Real Estate Exam Hierarchy Map</h1>
+      <p>
+        Use this map when a question feels crowded. Pick the branch first, then the leaf, then the detail.
+        Built for New York salesperson / broker exam framing - not legal advice.
+      </p>
+      <div class="banner-meta">
+        <span class="chip">11 branches</span>
+        <span class="chip">Decision trees</span>
+        <span class="chip">Fiduciary duties always on</span>
+      </div>
+    </header>
+
+    <div class="layout">
+      <main class="branches">
+
+        <section class="branch b1" id="people">
+          <div class="branch-head">
+            <div class="num">1</div>
+            <div>
+              <h2>People</h2>
+              <p class="sub">Relationships, agency, listings, disclosure, licensing</p>
+            </div>
+          </div>
+          <div class="leaf">
+            <h3>1.1 Agency</h3>
+            <ul>
+              <li><strong>NY types:</strong> seller's agent, buyer's agent, broker's agent, dual agent, designated sales agent (under disclosed dual agency)</li>
+              <li><strong>Creation:</strong> express (written or oral) or implied by conduct; listing agreements that create agency should be in writing</li>
+              <li><strong>Termination:</strong> fulfillment, mutual agreement, expiration; operation of law (death, incapacity, bankruptcy, destruction of the property); acts of the parties (revocation, renunciation, abandonment)</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>1.2 Fiduciary duties (OLD CAR)</h3>
+            <ul>
+              <li><strong>O</strong>bedience · <strong>L</strong>oyalty · <strong>D</strong>isclosure</li>
+              <li><strong>C</strong>onfidentiality · <strong>A</strong>ccounting · <strong>R</strong>easonable care (includes skill and diligence)</li>
+              <li>Also obey license law and fair housing. Confidentiality continues after the relationship ends for client secrets.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Loyalty = client's interest first</span>
+              <span class="tag">Accounting = money and documents</span>
+            </div>
+          </div>
+          <div class="leaf">
+            <h3>1.3 Listings &amp; buyer agreements</h3>
+            <ul>
+              <li><strong>Exclusive right to sell:</strong> listing broker is owed a commission if the property sells during the term, even if the owner finds the buyer</li>
+              <li><strong>Exclusive agency:</strong> owner may sell personally without owing the listing broker</li>
+              <li><strong>Open listing:</strong> many brokers; only the procuring cause earns</li>
+              <li><strong>Net listing:</strong> illegal in New York (broker keeps anything above a net price to the seller)</li>
+              <li><strong>Buyer representation:</strong> exclusive or non-exclusive buyer agency agreement</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>1.4 Disclosure (NY focus)</h3>
+            <ul>
+              <li><strong>Real Property Law §443</strong> agency disclosure: seller/buyer and landlord/tenant forms; provide at first substantive contact</li>
+              <li><strong>Property Condition Disclosure:</strong> NY sellers of most 1-4 family homes must give a PCD statement or credit the buyer $500</li>
+              <li>Disclose known material facts; do not lie or conceal known defects. Stigmatized-property rules are not the same as physical defects</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>1.5 Licensing &amp; practice</h3>
+            <ul>
+              <li><strong>DOS / DLS:</strong> Division of Licensing Services, New York Department of State</li>
+              <li><strong>Categories:</strong> salesperson, associate broker, broker; pocket card; salesperson must be sponsored by a broker</li>
+              <li><strong>Independent contractor vs employee:</strong> written IC agreement is common; the broker still supervises licensees</li>
+              <li><strong>Commission:</strong> always negotiable; paid through the broker; referral fees require proper licensing and agreements</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="branch b2" id="ownership">
+          <div class="branch-head">
+            <div class="num">2</div>
+            <div>
+              <h2>Ownership (Estates &amp; Interests)</h2>
+              <p class="sub">Who owns what, and how long</p>
+            </div>
+          </div>
+          <div class="leaf">
+            <h3>2.1 Bundle of rights</h3>
+            <ul>
+              <li>Possess · Control · Enjoy · Exclude · Dispose · Devise / bequeath</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>2.2 Estates in real property</h3>
+            <ul>
+              <li><strong>Freehold (ownership):</strong> fee simple absolute, fee simple defeasible (condition / determinable), life estate</li>
+              <li><strong>Leasehold (possession):</strong> estate for years (fixed term), periodic tenancy, tenancy at will, tenancy at sufferance (holdover)</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>2.3 Forms of ownership</h3>
+            <ul>
+              <li><strong>Severalty:</strong> one owner</li>
+              <li><strong>Tenancy in common:</strong> undivided interests (can be unequal); no right of survivorship; heirs take</li>
+              <li><strong>Joint tenancy:</strong> equal shares + right of survivorship; four unities (time, title, interest, possession)</li>
+              <li><strong>Tenancy by the entirety:</strong> married couple (NY); survivorship; neither alone can convey whole</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>2.4 Related structures</h3>
+            <ul>
+              <li>Trusts; life estate / remainder / reversion</li>
+              <li>Business entities: LLC, corporation, partnership (entity holds title)</li>
+              <li>Condo = real property (unit + undivided common interest). Co-op = shares of stock + proprietary lease (personal property interest in the shares)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="branch b3" id="rights">
+          <div class="branch-head">
+            <div class="num">3</div>
+            <div>
+              <h2>Rights on Land</h2>
+              <p class="sub">Encumbrances &amp; limitations on ownership</p>
+            </div>
+          </div>
+          <div class="leaf">
+            <h3>3.1 Easements</h3>
+            <ul>
+              <li><strong>Appurtenant:</strong> benefits a dominant estate; burdens a servient estate; runs with the land</li>
+              <li><strong>In gross:</strong> benefits a person or utility; no dominant estate</li>
+              <li><strong>Creation:</strong> grant (written), necessity (landlocked), prescription (open, notorious, continuous, hostile = without permission; commonly 10 years in NY), implication, condemnation</li>
+              <li><strong>Termination:</strong> release, abandonment, merger of dominant and servient, condemnation, end of purpose / prescription against the easement</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>3.2 Encroachments &amp; surveys</h3>
+            <ul>
+              <li>Physical intrusion across a boundary (fence, building overhang, driveway). Surveys and legal descriptions settle location disputes</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>3.3 Liens</h3>
+            <ul>
+              <li><strong>Voluntary:</strong> mortgage created by the owner (NY uses mortgages, not deeds of trust)</li>
+              <li><strong>Involuntary:</strong> judgment, mechanic's / materialman's, property tax, federal or state tax, child support (created by law or court process)</li>
+              <li><strong>Specific:</strong> attaches to one property (mortgage, property tax, mechanic's)</li>
+              <li><strong>General:</strong> attaches to all of the debtor's property (judgment lien; many federal tax liens)</li>
+              <li><strong>Lis pendens:</strong> recorded notice of pending litigation about the property - not itself a money lien</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>3.4 Deed restrictions &amp; appurtenances</h3>
+            <ul>
+              <li>Covenants / deed restrictions: affirmative or negative; may run with the land</li>
+              <li>Appurtenances: rights, privileges, and improvements that transfer with the land</li>
+              <li>License (revocable permission, not an estate); profit a prendre; mineral rights; riparian (flowing water) / littoral (lake or ocean); avulsion (sudden) vs accretion (gradual)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="branch b4" id="transfer">
+          <div class="branch-head">
+            <div class="num">4</div>
+            <div>
+              <h2>Transferring Property</h2>
+              <p class="sub">Title, deeds, closing, recording</p>
+            </div>
+          </div>
+          <div class="leaf">
+            <h3>4.1 Deeds (conveyance)</h3>
+            <ul>
+              <li><strong>Types (protection high to low):</strong> full covenant and warranty · bargain and sale (most common in NY residential) · quitclaim (no warranties of title)</li>
+              <li>Also: executor's, administrator's, referee's when estate or court sale context requires</li>
+              <li><strong>Essentials:</strong> competent grantor, identifiable grantee, consideration (often recited), granting words, legal description, grantor signature, delivery and acceptance. Acknowledgment needed to record</li>
+              <li><strong>Title passes on delivery</strong> with intent to convey - recording gives constructive notice; it is not what transfers title</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>4.2 Title</h3>
+            <ul>
+              <li>Chain of title · public records search · abstract · title report · owner's / lender's title insurance</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>4.3 Closing process &amp; money</h3>
+            <ul>
+              <li>Typical path: signed contract → title work → loan approval → appraisal → Closing Disclosure → closing → recording</li>
+              <li>Roles: attorneys (NY attorney-closing culture), title company, lender, brokers</li>
+              <li><strong>Buyer costs:</strong> points, title insurance, recording, mortgage tax (where applicable), prepaids</li>
+              <li><strong>Seller costs:</strong> commission, transfer tax, mortgage payoff, prorations</li>
+              <li><strong>Adjustments:</strong> taxes, rents, common charges, fuel/oil</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>4.4 Recording</h3>
+            <ul>
+              <li>Gives constructive notice; priority among recorded interests; record in the county where the property lies</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="branch b5" id="contracts">
+          <div class="branch-head">
+            <div class="num">5</div>
+            <div>
+              <h2>Contracts &amp; Leases</h2>
+              <p class="sub">Promises that bind parties</p>
+            </div>
+          </div>
+          <div class="leaf">
+            <h3>5.1 Essentials</h3>
+            <ul>
+              <li>Offer · acceptance · consideration · legal capacity · lawful purpose · writing when Statute of Frauds applies (real property sales)</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>5.2 Contingencies</h3>
+            <ul>
+              <li>Financing · appraisal · home sale · inspection · attorney approval (common in NY residential)</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>5.3 Leases</h3>
+            <ul>
+              <li><strong>Types:</strong> gross, net / triple-net, percentage (retail)</li>
+              <li><strong>Elements:</strong> parties, premises, term, rent, use, default, renewal / options</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>5.4 Changes &amp; breach</h3>
+            <ul>
+              <li>Addenda · amendments · assignment · novation</li>
+              <li>Breach remedies: specific performance, damages, rescission, forfeiture of deposit (per contract / law)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="branch b6" id="money">
+          <div class="branch-head">
+            <div class="num">6</div>
+            <div>
+              <h2>Money &amp; Financing</h2>
+              <p class="sub">How purchases get funded</p>
+            </div>
+          </div>
+          <div class="leaf">
+            <h3>6.1 Structures &amp; products</h3>
+            <ul>
+              <li>Fixed · ARM · balloon · interest-only · fully amortizing</li>
+              <li>Conventional · FHA · VA · USDA · jumbo</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>6.2 Key terms</h3>
+            <ul>
+              <li><strong>PITI</strong> · <strong>LTV</strong> · <strong>PMI</strong> · <strong>DTI</strong> · points / discount points</li>
+              <li>Loan costs, third-party fees, prepaids, escrow / reserves</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>6.3 Taxes touching the deal</h3>
+            <ul>
+              <li>Ad valorem property tax · assessment · tax liens · NYS / local transfer taxes · NYC mansion tax on high-price residential purchases where it applies</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="branch b7" id="value">
+          <div class="branch-head">
+            <div class="num">7</div>
+            <div>
+              <h2>Value</h2>
+              <p class="sub">Worth, price, and appraisal</p>
+            </div>
+          </div>
+          <div class="leaf">
+            <h3>7.1 CMA vs appraisal</h3>
+            <ul>
+              <li><strong>CMA:</strong> licensee tool using comps / adjustments for listing or offer strategy - not an appraisal</li>
+              <li><strong>Appraisal:</strong> licensed / certified appraiser; USPAP; report for lender or other client</li>
+            </ul>
+          </div>
+          <div class="leaf">
+            <h3>7.2 Approaches to value</h3>
+            <ul>
+              <li><strong>Sales comparison</strong> · <strong>Cost</strong> (replacement / reproduction minus depreciation) · <strong>Income</strong> (cap rate / GRM)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="branch b8" id="land-use">
+          <div class="branch-head">
+            <div class="num">8</div>
+            <div>
+              <h2>Land Use &amp; Zoning</h2>
+              <p class="sub">What you can build and how</p>
+            </div>
+          </div>
+          <div class="leaf">
+            <h3>8.1 Zoning &amp; approvals</h3>
+            <ul>
+              <li>Zoning map · districts · use regs · bulk / dimensional regs</li>
+              <li><strong>Area variance</strong> vs <strong>use variance</strong> · special / conditional use permit</li>
+              <li>Planning board · site plan · subdivision · SEQRA / environmental review</li>
+              <li>Building permit · Certificate of Occupancy (CO) · violations</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="branch b9" id="buildings">
+          <div class="branch-head">
+            <div class="num">9</div>
+            <div>
+              <h2>Buildings &amp; Structures</h2>
+              <p class="sub">Physical property &amp; systems</p>
+            </div>
+          </div>
+          <div class="leaf">
+            <h3>9.1 Structure, systems, safety</h3>
+            <ul>
+              <li>Foundation · framing · roof · walls · floors</li>
+              <li>Plumbing · electrical · heating / cooling / HVAC</li>
+              <li>Fire safety · exits · smoke / CO detectors · handrails · code compliance</li>
+              <li>Inspections: home · WDI / termite · radon · oil tank</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="branch b10" id="environment">
+          <div class="branch-head">
+            <div class="num">10</div>
+            <div>
+              <h2>Environmental Issues</h2>
+              <p class="sub">Hazards, laws, disclosure</p>
+            </div>
+          </div>
+          <div class="leaf">
+            <h3>10.1 Hazards &amp; law</h3>
+            <ul>
+              <li>Lead-based paint (pre-1978 disclosure) · asbestos · mold · radon · underground oil tanks · meth lab residue</li>
+              <li>CERCLA / Superfund · brownfields · Clean Water Act · NYS environmental rules</li>
+              <li>Disclose known environmental defects; property condition forms</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="branch b11" id="fair-housing">
+          <div class="branch-head">
+            <div class="num">11</div>
+            <div>
+              <h2>Fair Housing &amp; Law</h2>
+              <p class="sub">Who is protected and what is banned</p>
+            </div>
+          </div>
+          <div class="leaf">
+            <h3>11.1 Federal + New York</h3>
+            <ul>
+              <li><strong>Federal Fair Housing Act:</strong> race, color, religion, national origin, sex, disability, familial status</li>
+              <li><strong>NY Human Rights Law adds (among others):</strong> age, marital status, military status, sexual orientation, gender identity or expression, lawful source of income, and additional classes - memorize the current DOS exam list for your year</li>
+              <li><strong>Illegal practices:</strong> refusal to deal, steering, blockbusting, redlining, disparate treatment, disparate impact</li>
+              <li>Advertising must not express preference, limitation, or discrimination based on a protected class</li>
+            </ul>
+          </div>
+        </section>
+
+      </main>
+
+      <aside class="sidebar">
+        <div class="howto">
+          <h2>How to use</h2>
+          <ol>
+            <li><strong>Read the stem.</strong> What is the question really about?</li>
+            <li><strong>Pick a branch</strong> with the quick list below.</li>
+            <li><strong>Open the leaf</strong> (agency, liens, deeds, and so on).</li>
+            <li><strong>Match the detail</strong> to the answer choices.</li>
+            <li>If two branches compete, use a decision tree.</li>
+          </ol>
+
+          <div class="quick">
+            <a href="#people"><span class="dot" style="background:var(--b1)"></span> People / agency / licensing?</a>
+            <a href="#ownership"><span class="dot" style="background:var(--b2)"></span> Who owns / how held?</a>
+            <a href="#rights"><span class="dot" style="background:var(--b3)"></span> Rights on land / liens?</a>
+            <a href="#transfer"><span class="dot" style="background:var(--b4)"></span> Deed / title / closing?</a>
+            <a href="#contracts"><span class="dot" style="background:var(--b5)"></span> Contract or lease?</a>
+            <a href="#money"><span class="dot" style="background:var(--b6)"></span> Money / financing?</a>
+            <a href="#value"><span class="dot" style="background:var(--b7)"></span> Price / appraisal?</a>
+            <a href="#land-use"><span class="dot" style="background:var(--b8)"></span> Zoning / permits?</a>
+            <a href="#buildings"><span class="dot" style="background:var(--b9)"></span> Building / systems?</a>
+            <a href="#environment"><span class="dot" style="background:var(--b10)"></span> Environmental?</a>
+            <a href="#fair-housing"><span class="dot" style="background:var(--b11)"></span> Fair housing?</a>
+          </div>
+        </div>
+
+        <div class="trees" style="margin-top:14px">
+          <h2>Decision trees</h2>
+
+          <div class="tree">
+            <h3>Easements</h3>
+            <div class="q">How was it created?</div>
+            <div class="flow">
+              <div>Written grant → <strong>Easement by grant</strong></div>
+              <div>Landlocked → <strong>Necessity</strong></div>
+              <div>Long open hostile use (w/o permission; often 10 yrs NY) → <strong>Prescription</strong></div>
+              <div>Prior common ownership / intent → <strong>Implication</strong></div>
+              <div>Government takes for public use → <strong>Condemnation</strong></div>
+            </div>
+          </div>
+
+          <div class="tree">
+            <h3>Liens</h3>
+            <div class="q">Who created it?</div>
+            <div class="flow">
+              <div>Owner (mortgage) → <strong>Voluntary</strong></div>
+              <div>Law / court / statute → <strong>Involuntary</strong></div>
+            </div>
+            <div class="q" style="margin-top:8px">What does it attach to?</div>
+            <div class="flow">
+              <div>One property → <strong>Specific</strong></div>
+              <div>All property → <strong>General</strong></div>
+            </div>
+          </div>
+
+          <div class="tree">
+            <h3>Deeds</h3>
+            <div class="q">How much protection?</div>
+            <div class="scale">
+              <span class="most"><strong>Warranty</strong><span>Most</span></span>
+              <span><strong>Bargain &amp; sale</strong><span>NY common</span></span>
+              <span class="least"><strong>Quitclaim</strong><span>None</span></span>
+            </div>
+          </div>
+
+          <div class="tree">
+            <h3>Ownership</h3>
+            <div class="q">Who owns?</div>
+            <div class="flow">
+              <div>One person / entity → <strong>Severalty</strong></div>
+              <div>Two+ · no survivorship → <strong>Tenancy in common</strong></div>
+              <div>Two+ · equal · survivorship → <strong>Joint tenancy</strong></div>
+              <div>Married couple (NY) → <strong>Tenancy by the entirety</strong></div>
+            </div>
+          </div>
+
+          <div class="tree">
+            <h3>Agency</h3>
+            <div class="q">Who does the agent represent?</div>
+            <div class="flow">
+              <div>Seller → <strong>Listing / seller's agent</strong></div>
+              <div>Buyer → <strong>Buyer's agent</strong></div>
+              <div>Both (disclosed) → <strong>Dual agent</strong></div>
+              <div>Same firm, dual agency, different agents → <strong>Designated sales agent</strong></div>
+            </div>
+          </div>
+
+          <div class="note">Remember fiduciary duties at all times.</div>
+        </div>
+      </aside>
+    </div>
+
+    <p class="footnote">
+      Agent Kammer internal · Not for public guides · Study aid only · Verify against current NY DOS exam outline
+      · <a href="./ny-salesperson-exam-pass.html" style="color:inherit;font-weight:700">Full pass study book</a>
+    </p>
+  </div>
+</body>
+</html>
