@@ -1,3 +1,5 @@
+ARCHIVE ONLY — Success Chemistry / Fresh1 is a separate repo (rrk3311-USA/Fresh1). Do not deploy into agentkammer Vercel.
+
 # Session Work Report — June 7, 2026
 
 **For:** Return review (~1 hour away)  

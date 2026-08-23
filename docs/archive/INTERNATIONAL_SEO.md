@@ -1,3 +1,5 @@
+ARCHIVE ONLY — Success Chemistry / Fresh1 is a separate repo (rrk3311-USA/Fresh1). Do not deploy into agentkammer Vercel.
+
 # International SEO Strategy — Agent Kammer
 
 **Status:** Phase 1 live (English content + market targeting)  
