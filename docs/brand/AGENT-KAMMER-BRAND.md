@@ -14,6 +14,13 @@ If this doc and code disagree on colors/type, **code wins** — then update this
 Live site: https://www.agentkammer.com  
 Contact: info@agentkammer.com · United States (Phase 1 nationwide · Phase 2 Manhattan specialization)
 
+### Repo / deploy firewall (do not confuse brands)
+
+**Fresh1** = Success Chemistry ecom — separate GitHub (`rrk3311-USA/Fresh1`) + separate Vercel project (`scv2-success-chemistry`).  
+**AgentKammer** = this repo only (`rrk3311-USA/AgentKammer`) → Vercel project `agentkammer`.
+
+Never deploy Fresh1 / Success Chemistry into the `agentkammer` Vercel project. Never point Agent Kammer production contact (`CONTACT_INBOX`, public mailto, email defaults) at Success Chemistry. Archive docs that mention `info@successchemistry.com` are historical only.
+
 ---
 
 ## 1. Mission
@@ -437,7 +444,7 @@ One job per section. One headline. One short supporting sentence. Cards only whe
 | Listing-first language | Portal behavior |
 | Home valuation / CMA as primary lead magnet | Transaction funnel; prefer Belonging Assessment |
 | “House Doctor” as brand or headline | Sounds like inspector/repair; keep as private analogy |
-| Success Chemistry / SC contact defaults | Wrong brand |
+| Success Chemistry / SC contact defaults | Wrong brand — production inbox is `info@agentkammer.com` only |
 | Transaction-only success | Conflicts with Decision Philosophy |
 | Treating “Buildings before listings” as inspector marketing | It’s asset-quality philosophy, not a credential flex |
 | Treating “Live Where You Belong” as “you should move” | Outcome includes stay, renovate, wait |
@@ -701,7 +708,7 @@ Belonging Assessment: life questions first (not listing filters) — see product
 | Build toward platform loops | Optimize only for page views or listing clicks |
 | Use brass sparingly | Gold glow everywhere |
 | Keep redirects for old URLs | Leave orphan listing-era pages in the repo |
-| Deploy only this repo to `agentkammer` on Vercel | Deploy Fresh1 / Success Chemistry into Agent Kammer |
+| Deploy only this repo (`rrk3311-USA/AgentKammer`) to Vercel project `agentkammer` | Deploy Fresh1 / Success Chemistry (`rrk3311-USA/Fresh1` → `scv2-success-chemistry`) into Agent Kammer |
 | Say Decision Intelligence for Housing when describing the product/AI layer | Say “AI Real Estate Advisor” or lead with “chatbot” |
 | Say Resume My Decision / My Decision / Decision History | Say Account / Dashboard / Login / Profile as primary UI labels |
 | Think in Cases (one decision, tracked over time) | Think in “users” with accounts |

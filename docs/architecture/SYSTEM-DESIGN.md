@@ -721,7 +721,7 @@ Scoring weights live in `SIGNAL_SCORE_WEIGHTS` (`shared/crm-pipeline.ts`).
 | Data | Drizzle ORM + Zod; Neon (`@neondatabase/serverless`) or MemStorage |
 | AI | OpenAI SDK (Responses API); configurable xAI / OpenAI models |
 | Notify | Telegram bot API, Nodemailer / Resend |
-| Deploy | Vercel (`vercel.json` SPA + API rewrites) |
+| Deploy | Vercel project `agentkammer` only (`vercel.json` SPA + API rewrites). Fresh1 / Success Chemistry is a separate repo and Vercel project (`scv2-success-chemistry`) — never deploy it here. |
 | Auth | Admin Basic; Member opaque token cookie (**not** Supabase Auth yet) |
 | PDF | Puppeteer (market report paths) |
 
