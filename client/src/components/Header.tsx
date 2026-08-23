@@ -9,7 +9,7 @@ import { AgentKammerHorizontalLogo } from "@/components/AgentKammerHorizontalLog
 import { cn } from "@/lib/utils";
 import { primaryNav } from "@/components/site-shell";
 
-const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-brass focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy";
+const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-stone focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy";
 
 function isPrimaryNavActive(href: string, location: string) {
   if (href === "/") return location === "/";
@@ -66,7 +66,7 @@ export function Header() {
                   {link.label}
                   <span
                     className={cn(
-                      "absolute -bottom-2 left-0 h-px bg-gradient-to-r from-transparent via-brand-brass to-transparent transition-all duration-brand",
+                      "absolute -bottom-2 left-0 h-px bg-gradient-to-r from-transparent via-brand-stone to-transparent transition-all duration-brand",
                       active ? "w-full opacity-100" : "w-0 opacity-0 group-hover:w-full group-hover:opacity-80",
                     )}
                     aria-hidden

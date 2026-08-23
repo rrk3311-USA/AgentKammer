@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 const NAV = [
   { href: "/hub", label: "Home" },
-  { href: "/hub/roadmap", label: "Roadmap" },
+  { href: "/hub/roadmap", label: "Where things stand" },
   { href: "/hub/conversations", label: "Conversations" },
   { href: "/hub/saved", label: "Saved" },
   { href: "/hub/reviews", label: "Reviews" },

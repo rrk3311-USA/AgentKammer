@@ -3,7 +3,6 @@ import { useState } from "react";
 import { decisionNavigationGroups } from "@/data/decision-navigation";
 import { SITE_LANGUAGE_LOOP, setStoredPreferredLanguage } from "@/data/site-language";
 import { AkMonogramMark } from "@/components/AkMonogramMark";
-import { DecisionAssistantDock } from "@/components/DecisionAssistantDock";
 import { cn } from "@/lib/utils";
 
 const whatsChangingItems =
@@ -29,38 +28,32 @@ export function Footer() {
   return (
     <footer className="border-t border-brand-border bg-brand-ivory text-brand-graphite">
       <div className="mx-auto w-full max-w-site px-6 py-8 lg:px-10 lg:py-10">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:items-start lg:gap-10">
-          <div className="min-w-0">
-            <h3 className="font-display text-[clamp(1.5rem,3vw,1.85rem)] leading-[0.95] text-brand-navy">
-              What's Changing?
-            </h3>
-            <nav aria-label="What's Changing" className="mt-4 flex flex-wrap gap-2">
-              {whatsChangingItems.map((item) => (
-                <Link key={item.href + item.label} href={item.href} className={pillClass}>
+        <div className="min-w-0">
+          <h3 className="font-display text-[clamp(1.5rem,3vw,1.85rem)] leading-[0.95] text-brand-navy">
+            What's Changing?
+          </h3>
+          <nav aria-label="What's Changing" className="mt-4 flex flex-wrap gap-2">
+            {whatsChangingItems.map((item) => (
+              <Link key={item.href + item.label} href={item.href} className={pillClass}>
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="mt-8">
+            <p className="text-[10px] uppercase tracking-[0.18em] text-brand-cocoa">Popular Searches</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {popularSearches.map((item) => (
+                <button
+                  key={item.href + item.label}
+                  type="button"
+                  onClick={() => navigate(item.href)}
+                  className="w-fit text-left text-[11px] uppercase tracking-[0.1em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
+                >
                   {item.label}
-                </Link>
+                </button>
               ))}
-            </nav>
-
-            <div className="mt-8">
-              <p className="text-[10px] uppercase tracking-[0.18em] text-brand-cocoa">Popular Searches</p>
-              <div className="mt-3 flex flex-col gap-2">
-                {popularSearches.map((item) => (
-                  <button
-                    key={item.href + item.label}
-                    type="button"
-                    onClick={() => navigate(item.href)}
-                    className="w-fit text-left text-[11px] uppercase tracking-[0.1em] text-brand-navy transition-colors hover:text-brand-brass"
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
             </div>
-          </div>
-
-          <div className="min-w-0 self-start">
-            <DecisionAssistantDock variant="embedded" />
           </div>
         </div>
       </div>

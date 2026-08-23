@@ -5,9 +5,10 @@ import { cn } from "@/lib/utils";
 
 export const primaryNav = [
   { label: "Home", href: "/" },
+  { label: "Start Here", href: "/buyer-advisory" },
   { label: "Situations", href: "/situations" },
-  { label: "Intelligence", href: "/intelligence" },
   { label: "Buildings", href: "/building-reports" },
+  { label: "Guides", href: "/guides" },
   { label: "About", href: "/about" },
 ] as const;
 

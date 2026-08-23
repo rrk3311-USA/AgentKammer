@@ -7,7 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { GuidanceAdvisorLauncher } from "@/components/DecisionAssistantDock";
+import { DecisionAssistantDock } from "@/components/DecisionAssistantDock";
 import { initVisitorSignalTracking, trackPageViewSignal } from "@/lib/visitor-signals";
 
 const Home = lazy(() => import("@/pages/Home"));
@@ -204,7 +204,7 @@ function AppShell() {
         <Router />
       </Suspense>
       <Footer />
-      <GuidanceAdvisorLauncher />
+      <DecisionAssistantDock />
       <Toaster />
     </div>
   );

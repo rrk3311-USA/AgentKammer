@@ -24,7 +24,24 @@ const decisionTypes = [
 ];
 
 const timelines = ["Now / 30 days", "1-3 months", "3-6 months", "6+ months", "Just exploring"];
-const budgetRanges = ["Under $1M", "$1M-$2M", "$2M-$4M", "$4M+", "Rental", "Not sure / private"];
+const budgetRanges = [
+  "Exploring / not ready",
+  "Under $1M",
+  "$1M-$2M",
+  "$2M-$5M",
+  "$5M+",
+  "Rental",
+  "Not sure / private",
+];
+
+function routingNote(budgetRange: string) {
+  if (budgetRange.includes("$5M+")) return "This lane is reviewed by Raphi.";
+  if (budgetRange === "Exploring / not ready" || budgetRange === "Not sure / private") {
+    return "Exploring stays with the Guidance Advisor and Decision Hub until a call is useful.";
+  }
+  if (budgetRange) return "Ready buyers under $5M may be introduced to Diego Micheo at Douglas Elliman.";
+  return "";
+}
 const nextSteps = [
   "Property Strategy Session",
   "Property Snapshot",
@@ -87,7 +104,8 @@ export default function Contact() {
         `Decision type: ${data.decisionType}`,
         `Timeline: ${data.timeline}`,
         `Budget / readiness: ${data.budgetRange}`,
-        `Preferred next step: ${data.nextStep}`,
+        `Routing: ${routingNote(data.budgetRange) || "Unspecified"}`,
+        `What the call is for: ${data.nextStep}`,
         "",
         "Additional context:",
         data.message || "No additional context provided.",
@@ -310,7 +328,7 @@ export default function Contact() {
               <div className="grid gap-5 md:grid-cols-2">
                 <div>
                   <label htmlFor="budgetRange" className="mb-2 block text-sm font-medium">
-                    Budget / readiness
+                    Budget lane
                   </label>
                   <select
                     id="budgetRange"
@@ -326,11 +344,18 @@ export default function Contact() {
                       <option key={item} value={item}>{item}</option>
                     ))}
                   </select>
+                  {formData.budgetRange ? (
+                    <p className="mt-2 text-xs leading-5 text-brand-graphite/80">{routingNote(formData.budgetRange)}</p>
+                  ) : (
+                    <p className="mt-2 text-xs leading-5 text-brand-graphite/70">
+                      $5M+ is reviewed by Raphi. Ready under $5M may go to Diego Micheo at Douglas Elliman. Exploring stays in chat and the Decision Hub.
+                    </p>
+                  )}
                 </div>
 
                 <div>
                   <label htmlFor="nextStep" className="mb-2 block text-sm font-medium">
-                    Best next step
+                    What the call is for
                   </label>
                   <select
                     id="nextStep"
