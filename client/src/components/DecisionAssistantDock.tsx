@@ -12,7 +12,7 @@ import {
   SlidersHorizontal,
   UsersRound,
 } from "lucide-react";
-import { DECISION_ASSISTANT_OPEN_EVENT, openDecisionAssistant } from "@/lib/decision-assistant";
+import { DECISION_ASSISTANT_OPEN_EVENT } from "@/lib/decision-assistant";
 import { getPageContext } from "@/lib/knowledge-graph/page-context";
 import { trackVisitorSignal } from "@/lib/visitor-signals";
 import { resolveChatLanguage } from "@/data/site-language";
@@ -40,12 +40,12 @@ const DEFAULT_GREETING = getPageEngagement("/").greeting;
 
 function DecisionGuideAvatar({ animated = false }: { animated?: boolean }) {
   return (
-    <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-brand-brass/45 bg-brand-ivory p-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_1px_8px_rgba(42,52,71,0.22)]">
+    <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-brand-stone bg-brand-ivory p-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_1px_8px_rgba(42,52,71,0.22)]">
       <span
         className={
           animated
-            ? "absolute inset-0 animate-command-breathe rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.5),transparent_42%,rgba(176,141,87,0.24))]"
-            : "absolute inset-0 rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.5),transparent_42%,rgba(176,141,87,0.18))]"
+            ? "absolute inset-0 animate-command-breathe rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.5),transparent_42%,rgba(216,209,199,0.35))]"
+            : "absolute inset-0 rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.5),transparent_42%,rgba(216,209,199,0.28))]"
         }
       />
       <img
@@ -59,7 +59,7 @@ function DecisionGuideAvatar({ animated = false }: { animated?: boolean }) {
 
 function GuidanceAdvisorLabel({ tone = "dark" }: { tone?: "dark" | "light" }) {
   const guidanceClass = tone === "dark" ? "text-brand-ivory/72" : "text-brand-cocoa";
-  const advisorClass = tone === "dark" ? "text-brand-brass" : "text-brand-navy";
+  const advisorClass = tone === "dark" ? "text-brand-stone" : "text-brand-navy";
   return (
     <span className="block text-[10px] uppercase tracking-[0.22em]">
       <span className={guidanceClass}>Guidance</span>{" "}
@@ -742,7 +742,6 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
     trackVisitorSignal("decision_guide_message", prompt.text.slice(0, 120));
     setDwellNudge(null);
 
-    setLocation(guidance.path || prompt.path || location);
     guidance.messages.forEach((text) => nextMessages.push({ role: "assistant", text }));
 
     setExpanded(true);
@@ -754,13 +753,13 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   }
 
   function handleQuickAction(action: QuickAction) {
-    if (action.path) setLocation(action.path);
     setExpanded(true);
     setMessages((current) => [...current, { role: "assistant", text: action.response }]);
     if (action.asksForEmail) {
       setStep("email");
       setQuickActions([]);
     }
+    if (action.path) setLocation(action.path);
   }
 
   async function requestAiGuideTurn(
@@ -824,9 +823,17 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
     setLeadQualification(aiTurn.leadQualification ?? null);
     setQuickActions([]);
 
-    const openAction = aiTurn.actions?.find((action) => action.type === "open_page" && action.path);
-    if (openAction?.path) {
-      setLocation(openAction.path);
+    const recommended = aiTurn.actions?.find(
+      (action) => (action.type === "open_page" || action.type === "recommend_page") && action.path,
+    );
+    if (recommended?.path) {
+      setQuickActions([
+        {
+          label: recommended.label || "Open recommended page",
+          path: recommended.path,
+          response: recommended.reason || "This page is the next useful read.",
+        },
+      ]);
     }
 
     const shouldSendRecap = aiTurn.actions?.some((action) => action.type === "send_recap");
@@ -874,12 +881,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
     if (conversationStep === "situation") {
       nextAnswers = { ...nextAnswers, situation: answer };
       const guidance = getSituationGuidance(answer, nextScore);
-      if (guidance.path) setLocation(guidance.path);
       guidance.messages.forEach((text) => nextMessages.push({ role: "assistant", text }));
-      nextMessages.push({
-        role: "assistant",
-        text: "My next move is not to add search filters. It is to identify the outcome you want the housing decision to produce. What would a better result give you: more stability, more space, shorter routine, lower risk, or more flexibility?",
-      });
       nextStep = "desire";
     } else if (conversationStep === "desire") {
       nextAnswers = { ...nextAnswers, desire: answer };
@@ -955,258 +957,228 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   );
 
   return (
-    <aside
-      id="decision-assistant"
-      className={
-        expanded
-          ? "flex min-h-[28rem] flex-col gap-2.5 border border-brand-navy/18 bg-brand-ivory p-3 text-brand-navy shadow-[0_12px_42px_rgba(42,52,71,0.12)] lg:min-h-[32rem]"
-          : "flex flex-col gap-2.5 border border-brand-navy/18 bg-brand-ivory p-3 text-brand-navy shadow-[0_8px_28px_rgba(42,52,71,0.08)]"
-      }
-      aria-label="Guidance Advisor"
-    >
+    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40">
       {dwellNudge && !expanded ? (
-        <button
-          type="button"
-          onClick={() => {
-            setDwellNudge(null);
-            setExpanded(true);
-            inputRef.current?.focus();
-          }}
-          className="relative flex w-full items-start gap-3 border border-brand-brass/40 bg-brand-navy px-3.5 py-2.5 text-left text-brand-ivory transition-colors hover:border-brand-brass"
-        >
-          <span className="min-w-0 flex-1">
-            <span className="block text-[10px] uppercase tracking-[0.18em] text-brand-brass">On this page</span>
-            <span className="mt-1 block text-sm leading-5">{dwellNudge}</span>
-          </span>
-          <span className="shrink-0 self-center text-[10px] uppercase tracking-[0.14em] text-brand-brass">Ask</span>
-        </button>
+        <div className="pointer-events-auto mx-auto mb-2 w-[min(36rem,calc(100%-1.5rem))]">
+          <button
+            type="button"
+            onClick={() => {
+              setDwellNudge(null);
+              setExpanded(true);
+              inputRef.current?.focus({ preventScroll: true });
+            }}
+            className="relative flex w-full items-start gap-3 border border-brand-stone bg-brand-navy px-3.5 py-2.5 text-left text-brand-ivory shadow-[0_8px_24px_rgba(13,24,43,0.18)] transition-colors hover:border-brand-ivory/40"
+          >
+            <span className="min-w-0 flex-1">
+              <span className="block text-[10px] uppercase tracking-[0.18em] text-brand-stone">On this page</span>
+              <span className="mt-1 block text-sm leading-5">{dwellNudge}</span>
+            </span>
+            <span className="shrink-0 self-center text-[10px] uppercase tracking-[0.14em] text-brand-stone">Ask</span>
+          </button>
+        </div>
       ) : null}
 
-      <div className={expanded ? "grid gap-2.5 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] sm:items-start" : "grid gap-2.5"}>
-        <div className="flex min-w-0 items-center gap-3">
-          <DecisionGuideAvatar animated={expanded} />
-          <div className="min-w-0 flex-1">
-            <GuidanceAdvisorLabel tone="light" />
-            <p className="truncate text-sm font-medium text-brand-navy">{engagement.headline}</p>
-          </div>
-          {expanded ? (
-            <button
-              type="button"
-              onClick={() => setExpanded(false)}
-              className="flex h-9 w-9 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy sm:hidden"
-              aria-label="Minimize Guidance Advisor"
-            >
-              <Minimize2 className="h-4 w-4" strokeWidth={1.5} />
-            </button>
-          ) : (
-            <p className="shrink-0 font-mono text-[10px] text-brand-graphite">{blueprintCompletion}/6</p>
-          )}
-        </div>
-
+      <aside
+        id="decision-assistant"
+        className={
+          expanded
+            ? "pointer-events-auto flex max-h-[min(70vh,40rem)] flex-col border-t border-brand-stone bg-brand-ivory text-brand-navy shadow-[0_-14px_36px_rgba(13,24,43,0.16)]"
+            : "pointer-events-auto flex flex-col border-t border-brand-stone bg-brand-ivory text-brand-navy shadow-[0_-10px_28px_rgba(13,24,43,0.12)]"
+        }
+        aria-label="Guidance Advisor"
+      >
         <div
-          className="border border-brand-border bg-white p-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_1px_0_rgba(42,52,71,0.05)]"
-          aria-label="Decision Blueprint modules"
+          className={
+            expanded
+              ? "mx-auto flex w-full max-w-site flex-col gap-2.5 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3"
+              : "mx-auto flex w-full max-w-site flex-col gap-2.5 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3"
+          }
         >
-          <div className="flex items-center justify-between gap-4">
-            <p className="text-[9px] uppercase tracking-[0.2em] text-brand-brass">Decision Progress</p>
-            <div className="flex items-center gap-2">
-              <p className="font-mono text-[10px] text-brand-graphite">{blueprintCompletion}/6</p>
+          <div className={expanded ? "grid gap-2.5 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] sm:items-start" : "grid gap-2.5"}>
+            <div className="flex min-w-0 items-center gap-3">
+              <DecisionGuideAvatar animated={expanded} />
+              <div className="min-w-0 flex-1">
+                <GuidanceAdvisorLabel tone="light" />
+                <p className="truncate text-sm font-medium text-brand-navy">{engagement.headline}</p>
+              </div>
               {expanded ? (
                 <button
                   type="button"
                   onClick={() => setExpanded(false)}
-                  className="hidden h-7 w-7 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy sm:inline-flex"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy sm:hidden"
                   aria-label="Minimize Guidance Advisor"
                 >
-                  <Minimize2 className="h-3.5 w-3.5" strokeWidth={1.5} />
+                  <Minimize2 className="h-4 w-4" strokeWidth={1.5} />
                 </button>
+              ) : (
+                <p className="shrink-0 font-mono text-[10px] text-brand-graphite">{blueprintCompletion}/6</p>
+              )}
+            </div>
+
+            <div
+              className="border border-brand-border bg-white p-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_1px_0_rgba(42,52,71,0.05)]"
+              aria-label="Decision Blueprint modules"
+            >
+              <div className="flex items-center justify-between gap-4">
+                <p className="text-[9px] uppercase tracking-[0.2em] text-brand-cocoa">Decision Progress</p>
+                <div className="flex items-center gap-2">
+                  <p className="font-mono text-[10px] text-brand-graphite">{blueprintCompletion}/6</p>
+                  {expanded ? (
+                    <button
+                      type="button"
+                      onClick={() => setExpanded(false)}
+                      className="hidden h-7 w-7 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy sm:inline-flex"
+                      aria-label="Minimize Guidance Advisor"
+                    >
+                      <Minimize2 className="h-3.5 w-3.5" strokeWidth={1.5} />
+                    </button>
+                  ) : null}
+                </div>
+              </div>
+              <div className="mt-2">{renderCompactBlueprintProgress("light")}</div>
+              {expanded ? (
+                <div className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-2">
+                  {blueprintSegments.map((segment) => {
+                    const filled = completedSegments[segment.label as keyof typeof completedSegments];
+                    return (
+                      <div
+                        key={segment.label}
+                        className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2"
+                      >
+                        <segment.icon
+                          className={
+                            filled
+                              ? "h-3.5 w-3.5 shrink-0 text-brand-navy"
+                              : "h-3.5 w-3.5 shrink-0 text-brand-navy/45"
+                          }
+                          strokeWidth={1.5}
+                          aria-hidden
+                        />
+                        <span
+                          className={
+                            filled
+                              ? "truncate text-[9px] uppercase tracking-[0.12em] text-brand-navy"
+                              : "truncate text-[9px] uppercase tracking-[0.12em] text-brand-navy/60"
+                          }
+                        >
+                          {segment.label}
+                        </span>
+                        <span className="flex justify-end" aria-hidden>
+                          {filled ? (
+                            <Check className="h-3 w-3 text-brand-navy" strokeWidth={1.8} />
+                          ) : (
+                            <Circle className="h-2.5 w-2.5 text-brand-stone" strokeWidth={1.7} />
+                          )}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
               ) : null}
             </div>
           </div>
-          <div className="mt-2">{renderCompactBlueprintProgress("light")}</div>
+
           {expanded ? (
-            <div className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-2">
-              {blueprintSegments.map((segment) => {
-                const filled = completedSegments[segment.label as keyof typeof completedSegments];
-                return (
+            <>
+              <div ref={transcriptRef} className="min-h-0 flex-1 space-y-1.5 overflow-y-auto overflow-x-hidden pr-1">
+                {recentMessages.map((message, index) => (
                   <div
-                    key={segment.label}
-                    className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2"
+                    key={`${message.role}-${index}`}
+                    className={
+                      message.role === "assistant"
+                        ? "max-w-full overflow-hidden border border-brand-navy bg-brand-navy p-2.5 text-brand-ivory"
+                        : "max-w-full overflow-hidden border border-brand-border bg-white p-2.5 text-brand-navy"
+                    }
                   >
-                    <segment.icon
+                    <p
                       className={
-                        filled
-                          ? "h-3.5 w-3.5 shrink-0 text-brand-brass"
-                          : "h-3.5 w-3.5 shrink-0 text-brand-brass/70"
-                      }
-                      strokeWidth={1.5}
-                      aria-hidden
-                    />
-                    <span
-                      className={
-                        filled
-                          ? "truncate text-[9px] uppercase tracking-[0.12em] text-brand-brass"
-                          : "truncate text-[9px] uppercase tracking-[0.12em] text-brand-brass/75"
+                        message.role === "assistant"
+                          ? "text-[9px] uppercase tracking-[0.16em] text-brand-stone"
+                          : "text-[9px] uppercase tracking-[0.16em] text-brand-cocoa"
                       }
                     >
-                      {segment.label}
-                    </span>
-                    <span className="flex justify-end" aria-hidden>
-                      {filled ? (
-                        <Check className="h-3 w-3 text-brand-brass" strokeWidth={1.8} />
-                      ) : (
-                        <Circle className="h-2.5 w-2.5 text-brand-brass/45" strokeWidth={1.7} />
-                      )}
-                    </span>
+                      {message.role === "assistant" ? "Guidance Advisor" : "You"}
+                    </p>
+                    <p className="mt-1.5 whitespace-pre-line break-words text-sm leading-5">{message.text}</p>
                   </div>
-                );
-              })}
-            </div>
+                ))}
+              </div>
+
+              {cold && step !== "sent" ? (
+                <div className="flex flex-wrap gap-1.5" aria-label="Quick starters">
+                  {starterPrompts.map((prompt) => (
+                    <button
+                      key={prompt.label}
+                      type="button"
+                      onClick={() => {
+                        setExpanded(true);
+                        handleStarter(prompt);
+                      }}
+                      className="border border-brand-border bg-white px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
+                    >
+                      {prompt.label}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+
+              {quickActions.length > 0 && step !== "sent" ? (
+                <div className="flex flex-wrap gap-1.5" aria-label="Suggested actions">
+                  {quickActions.map((action) => (
+                    <button
+                      key={action.label}
+                      type="button"
+                      onClick={() => handleQuickAction(action)}
+                      className="border border-brand-stone bg-brand-surface px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
+                    >
+                      {action.label}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+            </>
+          ) : (
+            <p className="line-clamp-2 text-sm leading-5 text-brand-graphite">
+              {recentMessages[recentMessages.length - 1]?.text ?? "Tell me what's changing..."}
+            </p>
+          )}
+
+          {step !== "sent" ? (
+            <form onSubmit={handleSubmit} className="mt-auto grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] gap-2">
+              <label className="sr-only" htmlFor="decision-assistant-input">
+                Tell me what's changing
+              </label>
+              <textarea
+                ref={inputRef}
+                id="decision-assistant-input"
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                onFocus={() => {
+                  setDwellNudge(null);
+                  setExpanded(true);
+                }}
+                onKeyDown={handleInputKeyDown}
+                placeholder={
+                  step === "email"
+                    ? "Email or mobile for the recap..."
+                    : openingPrompts[promptIndex % openingPrompts.length] || "Tell me what's changing..."
+                }
+                rows={expanded ? 2 : 1}
+                className="min-h-10 w-full min-w-0 resize-none border border-brand-border bg-white px-3 py-2 text-sm text-brand-navy outline-none transition-colors placeholder:text-brand-graphite/55 focus:border-brand-navy md:min-h-11"
+              />
+              <button
+                type="submit"
+                disabled={sending}
+                onClick={() => setExpanded(true)}
+                className="inline-flex h-10 w-12 shrink-0 items-center justify-center gap-2 border border-brand-navy bg-brand-navy text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:bg-brand-navy-secondary disabled:cursor-wait disabled:opacity-70 md:h-11 md:w-auto md:px-4"
+              >
+                <span className="hidden md:inline">{sending ? "Sending" : "Send"}</span>
+                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+              </button>
+            </form>
           ) : null}
         </div>
-      </div>
-
-      {expanded ? (
-        <>
-          <div ref={transcriptRef} className="min-h-0 flex-1 space-y-1.5 overflow-y-auto overflow-x-hidden pr-1">
-            {recentMessages.map((message, index) => (
-              <div
-                key={`${message.role}-${index}`}
-                className={
-                  message.role === "assistant"
-                    ? "max-w-full overflow-hidden border border-brand-navy bg-brand-navy p-2.5 text-brand-ivory"
-                    : "max-w-full overflow-hidden border border-brand-border bg-white p-2.5 text-brand-navy"
-                }
-              >
-                <p
-                  className={
-                    message.role === "assistant"
-                      ? "text-[9px] uppercase tracking-[0.16em] text-brand-brass"
-                      : "text-[9px] uppercase tracking-[0.16em] text-brand-cocoa"
-                  }
-                >
-                  {message.role === "assistant" ? "Guidance Advisor" : "You"}
-                </p>
-                <p className="mt-1.5 whitespace-pre-line break-words text-sm leading-5">{message.text}</p>
-              </div>
-            ))}
-          </div>
-
-          {cold && step !== "sent" ? (
-            <div className="flex flex-wrap gap-1.5" aria-label="Quick starters">
-              {starterPrompts.map((prompt) => (
-                <button
-                  key={prompt.label}
-                  type="button"
-                  onClick={() => {
-                    setExpanded(true);
-                    handleStarter(prompt);
-                  }}
-                  className="border border-brand-border bg-white px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
-                >
-                  {prompt.label}
-                </button>
-              ))}
-            </div>
-          ) : null}
-
-          {quickActions.length > 0 && step !== "sent" ? (
-            <div className="flex flex-wrap gap-1.5" aria-label="Suggested actions">
-              {quickActions.map((action) => (
-                <button
-                  key={action.label}
-                  type="button"
-                  onClick={() => {
-                    if (action.path) setLocation(action.path);
-                    setInput(action.response);
-                    setExpanded(true);
-                  }}
-                  className="border border-brand-brass/35 bg-brand-surface px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-brass"
-                >
-                  {action.label}
-                </button>
-              ))}
-            </div>
-          ) : null}
-        </>
-      ) : (
-        <p className="line-clamp-2 text-sm leading-5 text-brand-graphite">
-          {recentMessages[recentMessages.length - 1]?.text ?? "Tell me what's changing..."}
-        </p>
-      )}
-
-      {step !== "sent" ? (
-        <form onSubmit={handleSubmit} className="mt-auto grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] gap-2">
-          <label className="sr-only" htmlFor="decision-assistant-input">
-            Tell me what's changing
-          </label>
-          <textarea
-            ref={inputRef}
-            id="decision-assistant-input"
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-            onFocus={() => {
-              setDwellNudge(null);
-              setExpanded(true);
-            }}
-            onKeyDown={handleInputKeyDown}
-            placeholder={
-              step === "email"
-                ? "Email or mobile for the recap..."
-                : openingPrompts[promptIndex % openingPrompts.length] || "Tell me what's changing..."
-            }
-            rows={expanded ? 2 : 1}
-            className="min-h-10 w-full min-w-0 resize-none border border-brand-border bg-white px-3 py-2 text-sm text-brand-navy outline-none transition-colors placeholder:text-brand-graphite/55 focus:border-brand-brass md:min-h-11"
-          />
-          <button
-            type="submit"
-            disabled={sending}
-            onClick={() => setExpanded(true)}
-            className="inline-flex h-10 w-12 shrink-0 items-center justify-center gap-2 border border-brand-navy bg-brand-navy text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:bg-brand-navy-secondary disabled:cursor-wait disabled:opacity-70 md:h-11 md:w-auto md:px-4"
-          >
-            <span className="hidden md:inline">{sending ? "Sending" : "Send"}</span>
-            <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-          </button>
-        </form>
-      ) : null}
-    </aside>
-  );
-}
-
-export function GuidanceAdvisorLauncher() {
-  const [location] = useLocation();
-  const [visible, setVisible] = useState(true);
-  const engagement = getPageEngagement(location);
-
-  useEffect(() => {
-    const target = document.getElementById("decision-assistant");
-    if (!target || typeof IntersectionObserver === "undefined") return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setVisible(!entry?.isIntersecting),
-      { threshold: 0.2 },
-    );
-    observer.observe(target);
-    return () => observer.disconnect();
-  }, [location]);
-
-  if (!visible) return null;
-
-  return (
-    <aside
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-brand-brass/35 bg-brand-midnight px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 text-brand-ivory shadow-[0_-18px_38px_rgba(32,39,53,0.28)] md:inset-x-auto md:bottom-6 md:right-6 md:w-[min(22rem,34vw)] md:border md:border-brand-brass/35 md:px-4 md:shadow-[0_12px_42px_rgba(32,39,53,0.28)]"
-      aria-label="Open Guidance Advisor"
-    >
-      <button type="button" onClick={() => openDecisionAssistant()} className="flex w-full items-center gap-3 text-left">
-        <DecisionGuideAvatar />
-        <span className="min-w-0 flex-1">
-          <GuidanceAdvisorLabel tone="dark" />
-          <span className="mt-0.5 block truncate text-sm font-medium text-brand-ivory">{engagement.headline}</span>
-          <span className="mt-1 block truncate text-xs text-brand-brass/80">Tell me what's changing...</span>
-        </span>
-        <span className="shrink-0 border border-brand-ivory/16 px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-brand-ivory/78">
-          Ask
-        </span>
-      </button>
-    </aside>
+      </aside>
+    </div>
   );
 }

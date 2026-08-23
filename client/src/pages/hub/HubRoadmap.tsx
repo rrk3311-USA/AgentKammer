@@ -6,20 +6,20 @@ import { fetchHubSnapshot, HubShell, type HubSnapshot } from "./HubShell";
 const STAGE_INDEX: Record<string, number> = {
   anonymous: 0,
   engaged: 0,
-  profiled: 1,
+  profiled: 0,
   qualified: 2,
-  call_ready: 3,
+  call_ready: 1,
   advisory_client: 3,
   transaction_ready: 4,
-  active_client: 6,
-  closed: 7,
-  long_term_nurture: 1,
+  active_client: 5,
+  closed: 5,
+  long_term_nurture: 0,
 };
 
 export default function HubRoadmap() {
   usePageMetadata({
-    title: "Roadmap",
-    description: "A simple path from clarifying goals to closing - at your pace.",
+    title: "Where things stand",
+    description: "A simple path from a clarified situation to a search in motion - at your pace.",
     path: "/hub/roadmap",
   });
 
@@ -32,7 +32,7 @@ export default function HubRoadmap() {
   const active = STAGE_INDEX[hub?.roadmapMilestone || "anonymous"] ?? 0;
 
   return (
-    <HubShell title="Roadmap" description="Milestones, not a sales funnel.">
+    <HubShell title="Where things stand" description="Six checkpoints. Not a sales funnel.">
       <ol className="space-y-0">
         {ROADMAP_MILESTONES.map((milestone, index) => {
           const done = index < active;

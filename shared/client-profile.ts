@@ -198,14 +198,12 @@ export const STAFF_ROLES = ["admin", "advisor", "partner", "assistant", "client"
 export type StaffRole = (typeof STAFF_ROLES)[number];
 
 export const ROADMAP_MILESTONES = [
-  "Clarify goals",
-  "Improve readiness",
-  "Review financing",
-  "Define target market",
-  "Begin search",
-  "Evaluate options",
-  "Prepare offer",
-  "Close",
+  "Situation clarified",
+  "Strategy Session held",
+  "Financing posture set (cash / pre-approval)",
+  "Target band chosen",
+  "Shortlist ready",
+  "Search in motion",
 ] as const;
 
 export function lifecycleFromLeadScore(score: number): LifecycleStage {

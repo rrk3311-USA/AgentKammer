@@ -1,7 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
+import { ROADMAP_MILESTONES } from "@shared/client-profile";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { fetchHubSnapshot, HubShell, type HubSnapshot } from "./HubShell";
+
+const STANDING_INDEX: Record<string, number> = {
+  anonymous: 0,
+  engaged: 0,
+  profiled: 0,
+  qualified: 2,
+  call_ready: 1,
+  advisory_client: 3,
+  transaction_ready: 4,
+  active_client: 5,
+  closed: 5,
+  long_term_nurture: 0,
+};
 
 export default function HubHome() {
   usePageMetadata({
@@ -32,6 +46,19 @@ export default function HubHome() {
             Start a conversation in the Decision Guide. When you are ready, you can save your plan with an
             email and return here anytime.
           </p>
+          <div className="border border-[#D8D1C7] bg-[#F5F2EB] px-5 py-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#2A3447]/55">
+              Where things stand
+            </p>
+            <ol className="mt-4 space-y-2">
+              {ROADMAP_MILESTONES.map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm text-[#2F3136]/85">
+                  <span className="mt-0.5 text-[11px] text-[#2A3447]">○</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
           <div className="flex flex-wrap gap-3">
             <Link
               href="/belonging"
@@ -93,6 +120,29 @@ export default function HubHome() {
           </div>
 
           <aside className="space-y-4">
+            <div className="border border-[#D8D1C7] bg-[#F5F2EB] px-5 py-4">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#2A3447]/55">
+                Where things stand
+              </p>
+              <ol className="mt-4 space-y-2">
+                {ROADMAP_MILESTONES.map((item, index) => {
+                  const active = STANDING_INDEX[hub.roadmapMilestone] ?? 0;
+                  const checked = index <= active;
+                  return (
+                    <li key={item} className="flex items-start gap-2 text-sm text-[#2F3136]/85">
+                      <span className="mt-0.5 text-[11px] text-[#2A3447]">{checked ? "✓" : "○"}</span>
+                      <span>{item}</span>
+                    </li>
+                  );
+                })}
+              </ol>
+              <Link
+                href="/hub/roadmap"
+                className="mt-4 inline-block text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2A3447]"
+              >
+                Open checklist
+              </Link>
+            </div>
             <Link
               href="/belonging"
               className="block bg-[#2A3447] px-5 py-4 text-center text-[11px] font-semibold uppercase tracking-[0.16em] text-[#F5F2EB]"
