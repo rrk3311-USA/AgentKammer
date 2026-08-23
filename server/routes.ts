@@ -1379,7 +1379,7 @@ export async function registerRoutes(app: Express): Promise<void> {
               </div>
               
               <div style="text-align: center; margin-bottom: 30px;">
-                <a href="${process.env.REPLIT_DOMAINS?.split(',')[0] || 'https://agentkammer.com'}" 
+                <a href="${process.env.SITE_URL || 'https://www.agentkammer.com'}" 
                    style="display: inline-block; background: #d4af37; color: #0a1628; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 16px;">
                   Explore Properties
                 </a>

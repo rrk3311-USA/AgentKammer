@@ -26,6 +26,13 @@ Manhattan housing advisory site — Decision OS product surface.
 - https://www.agentkammer.com/llms.txt — positioning, IA, URLs
 - https://www.agentkammer.com/sitemap.xml — crawl map
 
+## How we ship
+
+- **Production branch:** `luxury-homepage` (Vercel)
+- **Feature work:** branch off `luxury-homepage` → PR into `luxury-homepage` → merge
+- Do not push to Replit. Ignore local clones that are out of date unless synced from `luxury-homepage`.
+- **Env:** `DATABASE_URL`, `SITE_URL`, and other secrets live on Vercel only
+
 ## Commands
 
 ```bash
