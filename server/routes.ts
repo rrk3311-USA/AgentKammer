@@ -40,6 +40,7 @@ import { canSendAccountPin, generateAccountPin, storeAccountPin, verifyAccountPi
 import { sendVisitorPinEmail } from "./lib/send-visitor-email";
 import { processDecisionGuideTurn } from "./lib/advisory/profile-service";
 import { registerAdvisoryAdminRoutes } from "./lib/advisory/admin-routes";
+import { registerBuyerIntelAdminRoutes, registerBuyerIntelPublicRoutes } from "./lib/buyer-intel/admin-routes";
 import {
   getClientProfileByEmail,
   getClientProfileByVisitorId,
@@ -2023,6 +2024,21 @@ export async function registerRoutes(app: Express): Promise<void> {
       // Create contact submission
       const submission = await storage.createContactSubmission(validatedData);
 
+      try {
+        const { ingestContactIntake } = await import("./lib/buyer-intel/ingest");
+        await ingestContactIntake({
+          name: validatedData.name,
+          email: validatedData.email,
+          phone: validatedData.phone ?? undefined,
+          timeline: typeof req.body.timeline === "string" ? req.body.timeline : undefined,
+          budgetRange: typeof req.body.budgetRange === "string" ? req.body.budgetRange : undefined,
+          message: validatedData.message,
+          sourceRowId: submission.id,
+        });
+      } catch (error) {
+        console.error("[buyer-intel] contact ingest failed", error);
+      }
+
       await notifyContactSubmission({
         name: submission.name,
         email: submission.email,
@@ -2349,4 +2365,6 @@ export async function registerRoutes(app: Express): Promise<void> {
   });
 
   registerAdvisoryAdminRoutes(app, requireAdmin);
+  registerBuyerIntelAdminRoutes(app, requireAdmin);
+  registerBuyerIntelPublicRoutes(app);
 }

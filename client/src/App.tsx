@@ -135,6 +135,8 @@ function Router() {
       <Route path="/privacy" component={Privacy} />
       <Route path="/terms" component={Terms} />
       <Route path="/licenses" component={Licenses} />
+      <Route path="/guides/condo-coop-reference">{() => <Redirect to="/situations/condo-vs-coop" />}</Route>
+      <Route path="/guides/coop-condo-condop-terms">{() => <Redirect to="/situations/coop-condo-condop-terms" />}</Route>
       <Route path="/guides/real-estate-ownership" component={RealEstateOwnership} />
       <Route path="/guides/real-estate-deeds" component={RealEstateDeeds} />
       <Route path="/guides/how-mortgages-work" component={RealEstateMortgages} />

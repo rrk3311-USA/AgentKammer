@@ -68,7 +68,7 @@ export default function Guides() {
       <PageHero
         eyebrow="Guides"
         title="Clear frameworks before listings."
-        description="Educational pages and shareable HTML guides - ownership structures, the relationship funnel, and international buyer path."
+        description="Educational pages and shareable HTML guides — ownership, condo vs co-op, condop terms, and related decision frameworks."
         art="decision-framework"
       />
 

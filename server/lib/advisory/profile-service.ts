@@ -289,6 +289,14 @@ export async function processDecisionGuideTurn(input: {
     detail: JSON.stringify({ leadScore: breakdown.leadScore, lifecycleStage }),
   });
 
+  try {
+    const { ingestClientProfileRow } = await import("../buyer-intel/ingest");
+    const row = await getClientProfileByVisitorId(input.visitorId);
+    if (row) await ingestClientProfileRow(row);
+  } catch (error) {
+    console.error("[buyer-intel] ingest from decision guide failed", error);
+  }
+
   return {
     profile,
     profileUpdates,

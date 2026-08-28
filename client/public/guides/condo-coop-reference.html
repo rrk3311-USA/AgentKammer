@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Condo vs Co-op — A Free Reference | Agent Kammer</title>
+  <meta name="description" content="A free, plain-English reference for condominiums and cooperatives: what you own, what you pay, what to check before an offer, and the words listings actually use." />
+  <link rel="canonical" href="https://www.agentkammer.com/guides/condo-coop-reference.html" />
+  <meta property="og:title" content="Condo vs Co-op — A Free Reference" />
+  <meta property="og:description" content="What you own, what you pay, and what to look at before you fall in love with a listing." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.agentkammer.com/guides/condo-coop-reference.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0D182B;
+      --navy-mid: #152238;
+      --ink: #252B33;
+      --muted: #6a727c;
+      --line: #DDD8CF;
+      --paper: #F5F2EB;
+      --card: #FBFAF8;
+      --brass: #B8956C;
+      --good: #356859;
+      --ask: #49677D;
+      --ivory: #f4f1ea;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Manrope, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(ellipse 70% 40% at 0% 0%, rgba(184,149,108,.14), transparent 52%),
+        radial-gradient(ellipse 50% 32% at 100% 0%, rgba(73,103,125,.12), transparent 46%),
+        var(--paper);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    a { color: var(--ask); }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 22px 16px 80px; }
+
+    .cover {
+      position: relative; overflow: hidden;
+      background: var(--navy); color: var(--ivory);
+      border-radius: 12px; border: 1px solid rgba(184,149,108,.5);
+      padding: 28px 26px 24px; margin-bottom: 16px;
+    }
+    .cover-art {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 55% at 14% -8%, rgba(184,149,108,.12), transparent 58%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.012) 0, rgba(255,255,255,.012) 1px, transparent 1px, transparent 14px);
+    }
+    .cover-inner { position: relative; z-index: 1; }
+    .brand-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+    .brand-mark {
+      width: 44px; height: 44px; border-radius: 6px; background: #0a1220;
+      border: 1px solid rgba(184,149,108,.35); overflow: hidden; flex-shrink: 0;
+    }
+    .brand-mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .brand-text .name {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.28rem; font-weight: 600; letter-spacing: .02em; line-height: 1; color: var(--ivory);
+    }
+    .brand-text .tag { margin-top: 5px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--brass); font-weight: 700; }
+    .stamp {
+      border: 1px solid rgba(184,149,108,.55);
+      padding: 8px 10px; text-align: center; min-width: 120px;
+      color: rgba(244,241,234,.78); line-height: 1.25;
+    }
+    .stamp .s1 { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; font-weight: 800; }
+    .stamp .s2 { font-size: 8px; letter-spacing: .16em; text-transform: uppercase; margin-top: 3px; color: rgba(184,149,108,.85); font-weight: 700; }
+    .kicker { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: var(--brass); margin-bottom: 10px; }
+    .cover h1 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(2.1rem, 5vw, 3.15rem); font-weight: 500; letter-spacing: -.02em; line-height: 1.05;
+      max-width: 14ch;
+    }
+    .cover .deck { margin-top: 12px; max-width: 58ch; color: rgba(244,241,234,.72); font-size: .95rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    .chip {
+      font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 999px;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); color: #e8eef6;
+    }
+    .cover-links { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn {
+      display: inline-flex; align-items: center; text-decoration: none;
+      font-size: 13px; font-weight: 700; padding: 9px 14px; border-radius: 8px;
+      background: var(--brass); color: var(--navy);
+    }
+    .btn.ghost {
+      background: transparent; color: var(--ivory);
+      border: 1px solid rgba(255,255,255,.28);
+    }
+
+    .nav {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(245,242,235,.92); backdrop-filter: blur(10px);
+      border: 1px solid var(--line); border-radius: 12px;
+      padding: 10px 12px; margin-bottom: 16px;
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .nav a {
+      text-decoration: none; font-size: 12px; font-weight: 650;
+      color: var(--navy); padding: 6px 9px; border-radius: 8px; border: 1px solid transparent;
+    }
+    .nav a:hover { background: #fff; border-color: var(--line); }
+
+    .grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    @media (min-width: 980px) {
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .span-2 { grid-column: span 2; }
+      .span-3 { grid-column: 1 / -1; }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(13,24,43,.04);
+    }
+    .card-h {
+      background: var(--navy);
+      color: var(--ivory);
+      padding: 11px 14px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    .card-h h2 {
+      font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 800;
+    }
+    .card-b { padding: 14px 14px 16px; }
+    .card p, .card li { font-size: 13.5px; }
+    .lead { color: var(--muted); margin-bottom: 10px; }
+
+    .pair { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    @media (min-width: 520px) { .pair { grid-template-columns: 1fr 1fr; } }
+    .mini {
+      border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: #fff;
+    }
+    .mini h3 { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+    .mini.condo h3 { color: var(--ask); }
+    .mini.coop h3 { color: var(--good); }
+
+    .issues { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .issue {
+      border: 1px solid var(--line); border-radius: 10px; padding: 10px;
+      background: #fff; font-size: 12.5px; font-weight: 650;
+    }
+    .issue span { display: block; color: var(--muted); font-weight: 500; font-size: 11.5px; margin-top: 3px; }
+
+    .call {
+      margin-top: 12px; background: var(--navy); color: var(--ivory);
+      border-radius: 8px; padding: 9px 11px; font-size: 12.5px; font-weight: 650;
+    }
+    .tip {
+      margin-top: 10px; border-left: 3px solid var(--brass);
+      padding: 8px 10px; background: rgba(184,149,108,.12); font-size: 12.5px;
+    }
+
+    .flow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 10px 0 12px; }
+    .step {
+      background: var(--navy); color: var(--ivory); border-radius: 999px;
+      padding: 6px 10px; font-size: 11.5px; font-weight: 700;
+    }
+    .arrow { color: var(--brass); font-weight: 800; }
+
+    .checks label {
+      display: flex; gap: 8px; align-items: flex-start;
+      padding: 6px 0; border-bottom: 1px solid rgba(216,209,207,.6);
+      font-size: 13px; cursor: pointer;
+    }
+    .checks label:last-of-type { border-bottom: 0; }
+    input[type="checkbox"] { margin-top: 3px; accent-color: var(--navy); }
+    .progress { margin-top: 8px; font-size: 12px; color: var(--muted); }
+
+    .venn-wrap { display: flex; justify-content: center; padding: 8px 0 4px; }
+    .venn { position: relative; width: 260px; height: 150px; }
+    .circ {
+      position: absolute; top: 18px; width: 132px; height: 132px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+    }
+    .c1 { left: 0; background: rgba(73,103,125,.28); border: 1px solid rgba(73,103,125,.45); color: var(--ask); }
+    .c2 { right: 0; background: rgba(53,104,89,.28); border: 1px solid rgba(53,104,89,.45); color: var(--good); }
+    .mid {
+      position: absolute; left: 50%; top: 62px; transform: translateX(-50%);
+      font-size: 11px; font-weight: 800; color: var(--navy); letter-spacing: .08em; text-transform: uppercase;
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    th, td { text-align: left; padding: 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+    td:first-child { font-weight: 700; width: 36%; color: var(--navy); }
+
+    textarea {
+      width: 100%; min-height: 88px; margin-top: 8px; padding: 8px;
+      border: 1px solid var(--line); border-radius: 8px; font-family: inherit; font-size: 13px;
+      background: #fff;
+    }
+
+    .foot {
+      margin-top: 16px; background: var(--navy); color: var(--ivory);
+      border-radius: 12px; padding: 18px 18px; display: grid; gap: 14px;
+    }
+    @media (min-width: 720px) { .foot { grid-template-columns: 1.2fr .8fr; align-items: center; } }
+    .foot h3 { color: var(--brass); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 6px; }
+    .foot a.btn { justify-self: start; }
+    .related { margin-top: 14px; font-size: 13px; color: var(--muted); }
+    .related a { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="cover">
+      <div class="cover-art"></div>
+      <div class="cover-inner">
+        <div class="brand-row">
+          <a class="brand" href="/">
+            <div class="brand-mark"><img src="/brand/ak-monogram-ivory.png" alt="Agent Kammer" /></div>
+            <div class="brand-text">
+              <div class="name">Agent Kammer</div>
+              <div class="tag">Residential Advisory</div>
+            </div>
+          </a>
+          <div class="stamp">
+            <div class="s1">Free reference</div>
+            <div class="s2">Keep · share · reuse</div>
+          </div>
+        </div>
+        <div class="kicker">Buildings before listings</div>
+        <h1>Condo vs co-op</h1>
+        <p class="deck">A quiet place to understand what you actually own, what you pay each month, and what is worth checking before an offer — whether you buy, wait, or stay put.</p>
+        <div class="chips">
+          <span class="chip">Free</span>
+          <span class="chip">No account</span>
+          <span class="chip">Checklists stay on this device</span>
+        </div>
+        <div class="cover-links">
+        <a class="btn" href="/situations/condo-vs-coop">Decision Brief</a>
+        <a class="btn ghost" href="/guides">All guides</a>
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="Sections">
+      <a href="#own">What you own</a>
+      <a href="#coop">How a co-op works</a>
+      <a href="#look">Before an offer</a>
+      <a href="#papers">Papers to request</a>
+      <a href="#money">Building health</a>
+      <a href="#condo">How a condo works</a>
+      <a href="#hybrid">Condop</a>
+      <a href="#words">Words you’ll hear</a>
+      <a href="#notes">Your notes</a>
+    </nav>
+
+    <div class="grid">
+      <article class="card span-2" id="own">
+        <div class="card-h"><h2>What you own</h2></div>
+        <div class="card-b">
+          <p class="lead">The listing shows rooms. The structure decides your rights, your monthly bill, and how hard it is to sell later.</p>
+          <div class="pair">
+            <div class="mini condo">
+              <h3>Condominium</h3>
+              <p>You own your unit — usually with a deed — plus a share of the shared parts of the building (halls, roof, systems, land).</p>
+            </div>
+            <div class="mini coop">
+              <h3>Cooperative</h3>
+              <p>A corporation owns the building. You buy shares in that corporation and get the right to live in a specific apartment.</p>
+            </div>
+          </div>
+          <p class="tip">If two homes look identical, the better decision is often the healthier building — not the nicer staging.</p>
+        </div>
+      </article>
+
+      <article class="card" id="coop">
+        <div class="card-h"><h2>How a co-op works</h2></div>
+        <div class="card-b">
+          <p class="lead">You are a shareholder first, a resident second.</p>
+          <div class="flow">
+            <span class="step">Buy shares</span><span class="arrow">→</span>
+            <span class="step">Join the corporation</span><span class="arrow">→</span>
+            <span class="step">Right to occupy</span><span class="arrow">→</span>
+            <span class="step">Live there</span>
+          </div>
+          <p>The board can usually approve who moves in. Monthly <em>maintenance</em> often covers operations and a share of the building’s own mortgage. Sublets, renovations, and pied-à-terre use are frequently restricted.</p>
+        </div>
+      </article>
+
+      <article class="card" id="look">
+        <div class="card-h"><h2>Look at these before an offer</h2></div>
+        <div class="card-b">
+          <p class="lead">Use this on any building you are considering. Checks stay in this browser only.</p>
+          <div class="issues">
+            <div class="issue">Money<span>Reserves, debt, late payers</span></div>
+            <div class="issue">Condition<span>Facade, elevators, systems</span></div>
+            <div class="issue">Rules<span>Pets, guests, renovations</span></div>
+            <div class="issue">Culture<span>How the board actually behaves</span></div>
+            <div class="issue">Legal<span>Open disputes, insurance</span></div>
+            <div class="issue">Assessments<span>Past, pending, likely</span></div>
+          </div>
+          <div class="checks" id="dd-checks" data-store="ak-condo-coop-look"></div>
+          <div class="call">Investigate the building before you compete for the apartment.</div>
+        </div>
+      </article>
+
+      <article class="card" id="papers">
+        <div class="card-h"><h2>Papers worth requesting</h2></div>
+        <div class="card-b">
+          <p class="lead">Especially for a co-op. Your attorney and lender will want most of this anyway — asking early saves time.</p>
+          <div class="checks" id="doc-checks" data-store="ak-condo-coop-docs"></div>
+        </div>
+      </article>
+
+      <article class="card" id="money">
+        <div class="card-h"><h2>Is the building healthy?</h2></div>
+        <div class="card-b">
+          <p class="lead">A beautiful unit in a thin building is an expensive problem.</p>
+          <div class="checks" id="fin-checks" data-store="ak-condo-coop-fin"></div>
+          <div class="call">Strong reserves, manageable debt, and reliable income are the quiet green flags.</div>
+        </div>
+      </article>
+
+      <article class="card" id="condo">
+        <div class="card-h"><h2>How a condo works</h2></div>
+        <div class="card-b">
+          <p class="lead">Closer to “ordinary” homeownership — with a homeowners’ association layered on top.</p>
+          <ul>
+            <li>You typically get a deed and can mortgage the unit</li>
+            <li><em>Common charges</em> fund day-to-day operations; assessments fund big repairs</li>
+            <li>A board may have a right of first refusal — usually weaker than a co-op’s ability to say no</li>
+            <li>House rules still matter: pets, floors, terraces, short-term stays</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-h"><h2>New buildings &amp; occupancy</h2></div>
+        <div class="card-b">
+          <p>Sponsor sales and conversions come with an offering plan. Read the plan, not only the brochure.</p>
+          <p style="margin-top:8px">A <strong>certificate of occupancy</strong> is the city’s statement that a space may be lived in for a lawful use. Closings stall when that paper does not match how the home will actually be used.</p>
+          <p class="tip">If a listing feels early — “coming soon,” “testing the market,” incomplete amenities — ask what has been legally offered and what is still a promise.</p>
+        </div>
+      </article>
+
+      <article class="card" id="hybrid">
+        <div class="card-h"><h2>What a condop is</h2></div>
+        <div class="card-b">
+          <p class="lead">A hybrid: part condominium, part cooperative. Common when a residential co-op isolates shops or other income in a condo piece of the same building.</p>
+          <div class="venn-wrap">
+            <div class="venn">
+              <div class="circ c1">Condo</div>
+              <div class="circ c2">Co-op</div>
+              <div class="mid">Condop</div>
+            </div>
+          </div>
+          <p class="tip">Do not assume “condop” means you own the unit but lease the land. Ask for the offering plan and have counsel explain <em>this</em> building’s structure.</p>
+        </div>
+      </article>
+
+      <article class="card span-3" id="words">
+        <div class="card-h"><h2>Words you’ll hear</h2></div>
+        <div class="card-b">
+          <div class="pair" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+            <table>
+              <thead><tr><th>Word</th><th>In practice</th></tr></thead>
+              <tbody>
+                <tr><td>Common elements</td><td>Shared parts of a condo: halls, roof, mechanicals, land.</td></tr>
+                <tr><td>Reserve fund</td><td>Cash set aside for big repairs — a health signal.</td></tr>
+                <tr><td>Maintenance</td><td>Co-op monthly: operations, and often a share of building debt.</td></tr>
+                <tr><td>Common charges</td><td>Condo monthly for operations (separate from your mortgage).</td></tr>
+              </tbody>
+            </table>
+            <table>
+              <thead><tr><th>Word</th><th>In practice</th></tr></thead>
+              <tbody>
+                <tr><td>Proprietary lease</td><td>The co-op’s occupancy agreement tied to your shares.</td></tr>
+                <tr><td>Flip tax</td><td>A fee the co-op may charge when you sell.</td></tr>
+                <tr><td>Right of first refusal</td><td>The condo/HOA may match a bona fide offer.</td></tr>
+                <tr><td>Board package</td><td>The application a co-op board reviews before approving you.</td></tr>
+              </tbody>
+            </table>
+            <table>
+              <thead><tr><th>Word</th><th>In practice</th></tr></thead>
+              <tbody>
+                <tr><td>Pied-à-terre</td><td>Part-time use; many co-ops limit or forbid it.</td></tr>
+                <tr><td>Sponsor</td><td>The party selling under an offering plan (new or conversion).</td></tr>
+                <tr><td>Underlying mortgage</td><td>The loan the co-op corporation itself owes.</td></tr>
+                <tr><td>House rules</td><td>Day-to-day building rules beyond the bylaws.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </article>
+
+      <article class="card span-3" id="notes">
+        <div class="card-h"><h2>Notes for a building you’re considering</h2></div>
+        <div class="card-b">
+          <p class="lead">Optional. Saved only on this device. Useful when two listings start to blur together.</p>
+          <textarea id="notes" placeholder="Address, what you liked, what still feels unclear…"></textarea>
+        </div>
+      </article>
+    </div>
+
+    <footer class="foot">
+      <div>
+        <h3>Keep this in mind</h3>
+        <p>Condos and co-ops are different machines. Structure, papers, and the building’s finances decide whether a home is a good fit — not the photos.</p>
+      </div>
+      <div>
+        <h3>If you want a second mind</h3>
+        <p style="margin-bottom:10px">The recommendation can be to wait. Start with whether anything should change.</p>
+        <a class="btn" href="/belonging">Start the Decision Assessment</a>
+      </div>
+    </footer>
+
+    <p class="related">
+      Educational reference, not legal or tax advice.
+      <a href="/situations/condo-vs-coop">Condo vs Co-op brief</a>
+      · <a href="/situations/coop-condo-condop-terms">Terms chart</a>
+      · <a href="/guides">Guides</a>
+      · <a href="/guides/real-estate-ownership">How ownership works</a>
+      · <a href="/building-reports">Building profiles</a>
+      · <a href="/">Agent Kammer</a>
+    </p>
+  </div>
+
+  <script>
+    const LOOK = [
+      "Looked at two or three years of building financials (or asked why they are missing)",
+      "Asked about the reserve fund versus upcoming work",
+      "For a co-op: asked about the building’s own mortgage",
+      "Read house rules for pets, sublets, renovations, and part-time use",
+      "Skimmed recent minutes for disputes, assessments, or surprises",
+      "Asked who manages the building and whether insurance looks current"
+    ];
+    const DOCS = [
+      "Offering plan / later amendments",
+      "Proprietary lease (co-op)",
+      "Bylaws",
+      "House rules",
+      "Financial statements",
+      "Current budget",
+      "Board minutes",
+      "Alteration rules (if you might renovate)",
+      "Share allocation (co-op)",
+      "Building / lender questionnaire",
+      "Application instructions"
+    ];
+    const FIN = [
+      "Balance sheet",
+      "Income statement",
+      "How cash actually moves",
+      "Reserve schedule",
+      "Budget versus what was spent",
+      "Owners behind on payments",
+      "Special assessments — past and pending"
+    ];
+
+    function bindList(id, items) {
+      const root = document.getElementById(id);
+      const key = root.dataset.store;
+      let saved = [];
+      try { saved = JSON.parse(localStorage.getItem(key) || "[]"); } catch (e) { saved = []; }
+      root.innerHTML = items.map(function (label, i) {
+        const on = saved.indexOf(i) >= 0 ? "checked" : "";
+        return "<label><input type=\"checkbox\" data-i=\"" + i + "\" " + on + " /> " + label + "</label>";
+      }).join("");
+      function renderProgress() {
+        const n = root.querySelectorAll("input:checked").length;
+        var bar = root.nextElementSibling;
+        if (!bar || !bar.classList.contains("progress")) {
+          bar = document.createElement("p");
+          bar.className = "progress";
+          root.after(bar);
+        }
+        bar.textContent = n + " of " + items.length + " noted";
+      }
+      root.addEventListener("change", function () {
+        const on = [].map.call(root.querySelectorAll("input:checked"), function (el) {
+          return Number(el.dataset.i);
+        });
+        localStorage.setItem(key, JSON.stringify(on));
+        renderProgress();
+      });
+      renderProgress();
+    }
+
+    bindList("dd-checks", LOOK);
+    bindList("doc-checks", DOCS);
+    bindList("fin-checks", FIN);
+
+    var notes = document.getElementById("notes");
+    try { notes.value = localStorage.getItem("ak-condo-coop-notes") || ""; } catch (e) {}
+    notes.addEventListener("input", function () {
+      localStorage.setItem("ak-condo-coop-notes", notes.value);
+    });
+  </script>
+</body>
+</html>

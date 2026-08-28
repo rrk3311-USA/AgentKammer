@@ -388,10 +388,72 @@ export const serviceLandings: ServiceLanding[] = [
     cta: "Build a finance-focused Manhattan housing brief.",
   },
   {
+    slug: "condo-vs-coop",
+    art: "ownership-structure",
+    title: "Condo vs Co-op",
+    navLabel: "Condo vs Co-op",
+    eyebrow: "What Are You Trying to Understand?",
+    summary:
+      "Two homes can look the same and still be different machines. A condominium is usually a deed to a unit plus a share of the building. A cooperative is shares in a corporation and the right to occupy. Structure decides what you pay each month, who can say no, and how hard it is to leave.",
+    searchTerms: [
+      "condo vs co-op nyc",
+      "manhattan condo versus cooperative",
+      "what is a co-op apartment",
+      "condo vs coop before buying",
+    ],
+    audience: [
+      "Anyone comparing apartments who needs the ownership difference in plain English before tours take over.",
+      "Buyers, owners, and wait-and-see households who should judge the building — reserves, rules, assessments — not only the listing.",
+      "People who want a free reference they can return to while two addresses start to blur.",
+    ],
+    considerations: [
+      "Name the structure first: deed plus common elements, or shares plus a proprietary lease.",
+      "Read the building as an asset — financials, house rules, assessments — before competing for a particular unit.",
+      "Match how you will actually live and leave: board interviews, pied-à-terre use, financing, and resale friction.",
+    ],
+    depthNotes: [
+      "The listing shows rooms. The legal form decides your rights. Investigate the building before you fall in love with a view.",
+      "A healthy building has strong reserves, manageable debt, and rules you can live with. A beautiful unit in a thin building is an expensive problem.",
+      "Choose the structure that fits the life you are trying to live. The recommendation may be a condo, a co-op, a rental, or waiting.",
+    ],
+    cta: "Read the condo versus co-op brief before shortlisting buildings.",
+  },
+  {
+    slug: "coop-condo-condop-terms",
+    art: "ownership-structure",
+    title: "Co-op, Condo & Condop Terms",
+    navLabel: "Co-op · Condo terms",
+    eyebrow: "What Are You Trying to Understand?",
+    summary:
+      "Listings use the same words as if every building were the same machine. Maintenance is not common charges. A board package is not a condo closing binder. A condop is not a slogan — it is two ownership forms in one address. Name the term, then name which structure it actually belongs to.",
+    searchTerms: [
+      "coop vs condo terms nyc",
+      "what is a condop",
+      "board package vs bylaws",
+      "maintenance vs common charges",
+      "offering plan nyc condo coop",
+    ],
+    audience: [
+      "Anyone reading listing copy, offering plans, or attorney emails who needs the vocabulary without an exam poster.",
+      "Buyers comparing a co-op, a condo, and a building labeled condop in the same week.",
+    ],
+    considerations: [
+      "Map each word to co-op, condo, or the condop portion it actually governs.",
+      "Treat house rules, alteration agreements, and board packages as friction — not decoration.",
+      "When a term appears on a condop, ask which slice of the building you would own.",
+    ],
+    depthNotes: [
+      "The useful question is not “is this a nice building?” It is “which legal machine am I entering, and which documents will run my life there?”",
+      "Co-ops run on shares, a proprietary lease, and a board. Condos run on a deed and an association. Condops split the building — often a residential co-op and a condo piece.",
+      "Keep the terms chart nearby while you read. If a word does not apply to the structure, do not let the listing pretend it does.",
+    ],
+    cta: "Use the terms chart before you treat listing language as universal.",
+  },
+  {
     slug: "condo-vs-coop-foreign-buyers-nyc",
     art: "ownership-structure",
     title: "Condo vs Co-op for Foreign Buyers in NYC",
-    navLabel: "Condo vs Co-op",
+    navLabel: "Foreign · Condo vs Co-op",
     eyebrow: "Foreign Buyer Decision",
     summary:
       "Foreign buyers should compare condos and co-ops before falling in love with a listing. The brief explains approval risk, financing, remote ownership, subletting, liquidity, privacy, and resale fit.",

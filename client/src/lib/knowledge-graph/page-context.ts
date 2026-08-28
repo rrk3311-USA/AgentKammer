@@ -50,11 +50,29 @@ export const pageGraph = [
     related: ["/situations/condo-vs-coop-foreign-buyers-nyc", "/situations/pied-a-terre-buyers-nyc", "/situations/new-development-nyc"],
   },
   {
+    path: "/situations/condo-vs-coop",
+    title: "Condo vs Co-op Brief",
+    topics: ["condo", "co-op", "ownership structure", "building health", "board approval"],
+    prerequisites: ["use case", "financing", "timeline", "lifestyle rules"],
+    related: [
+      "/situations/coop-condo-condop-terms",
+      "/situations/condo-vs-coop-foreign-buyers-nyc",
+      "/guides/real-estate-ownership",
+    ],
+  },
+  {
+    path: "/situations/coop-condo-condop-terms",
+    title: "Co-op, Condo & Condop Terms Brief",
+    topics: ["condop", "board package", "maintenance", "common charges", "offering plan"],
+    prerequisites: ["ownership structure", "listing language", "building type"],
+    related: ["/situations/condo-vs-coop", "/guides/real-estate-ownership", "/situations/pied-a-terre-buyers-nyc"],
+  },
+  {
     path: "/situations/condo-vs-coop-foreign-buyers-nyc",
     title: "Condo vs Co-op Foreign Buyer Brief",
     topics: ["foreign buyer", "condo", "co-op", "board approval", "remote ownership"],
     prerequisites: ["use case", "financing", "rental flexibility", "ownership structure"],
-    related: ["/situations/foreign-buyers-new-york", "/situations/pied-a-terre-buyers-nyc", "/building-reports"],
+    related: ["/situations/condo-vs-coop", "/situations/coop-condo-condop-terms", "/building-reports"],
   },
   {
     path: "/situations/school-district-planning-nyc",

@@ -31,6 +31,12 @@ function nextBrief(slug: string) {
   if (slug === "corporate-relocation-buyers-nyc") {
     return serviceLandingMap["executive-relocation-nyc"] ?? serviceLandings[0];
   }
+  if (slug === "condo-vs-coop") {
+    return serviceLandingMap["coop-condo-condop-terms"] ?? serviceLandings[0];
+  }
+  if (slug === "coop-condo-condop-terms") {
+    return serviceLandingMap["pied-a-terre-buyers-nyc"] ?? serviceLandings[0];
+  }
   const index = serviceLandings.findIndex((item) => item.slug === slug);
   if (index < 0) return serviceLandings[0];
   return serviceLandings[(index + 1) % serviceLandings.length];
@@ -199,6 +205,46 @@ export default function ServiceLanding({ slug }: { slug: string }) {
               : "mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24"
           }
         >
+          {landing.slug === "condo-vs-coop" ? (
+            <p className="mb-8 border border-brand-border bg-white/60 px-4 py-3 text-sm leading-6 text-brand-graphite">
+              Keep a printable checklist:{" "}
+              <a
+                href="/guides/condo-coop-reference.html"
+                className="text-brand-navy underline underline-offset-4"
+                target="_blank"
+                rel="noreferrer"
+              >
+                condo vs co-op reference
+              </a>
+              . Vocabulary:{" "}
+              <Link href="/situations/coop-condo-condop-terms" className="text-brand-navy underline underline-offset-4">
+                co-op, condo &amp; condop terms
+              </Link>
+              . Buying from overseas?{" "}
+              <Link href="/situations/condo-vs-coop-foreign-buyers-nyc" className="text-brand-navy underline underline-offset-4">
+                Foreign-buyer structure brief
+              </Link>
+              .
+            </p>
+          ) : null}
+          {landing.slug === "coop-condo-condop-terms" ? (
+            <p className="mb-8 border border-brand-border bg-white/60 px-4 py-3 text-sm leading-6 text-brand-graphite">
+              Keep the comparison chart open:{" "}
+              <a
+                href="/guides/coop-condo-condop-terms.html"
+                className="text-brand-navy underline underline-offset-4"
+                target="_blank"
+                rel="noreferrer"
+              >
+                co-op, condo &amp; condop terms
+              </a>
+              . Start with structure:{" "}
+              <Link href="/situations/condo-vs-coop" className="text-brand-navy underline underline-offset-4">
+                Condo vs co-op
+              </Link>
+              .
+            </p>
+          ) : null}
           {landing.slug === "corporate-relocation-buyers-nyc" ? (
             <p className="mb-8 border border-brand-border bg-white/60 px-4 py-3 text-sm leading-6 text-brand-graphite">
               Looking for the main relocation path? Start with{" "}

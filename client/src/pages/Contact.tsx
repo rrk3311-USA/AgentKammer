@@ -116,6 +116,8 @@ export default function Contact() {
         email: data.email,
         phone: data.phone || undefined,
         message: structuredMessage,
+        timeline: data.timeline,
+        budgetRange: data.budgetRange,
       });
     },
     onSuccess: () => {

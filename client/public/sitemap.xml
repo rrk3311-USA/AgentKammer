@@ -349,6 +349,16 @@
       <lastmod>2026-07-14</lastmod>
   </url>
   <url>
+    <loc>https://www.agentkammer.com/situations/condo-vs-coop</loc>
+    <priority>0.9</priority>
+    <lastmod>2026-08-27</lastmod>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/situations/coop-condo-condop-terms</loc>
+    <priority>0.9</priority>
+    <lastmod>2026-08-27</lastmod>
+  </url>
+  <url>
     <loc>https://www.agentkammer.com/services/condo-vs-coop-foreign-buyers-nyc</loc>
     <priority>0.9</priority>
       <lastmod>2026-07-14</lastmod>
@@ -542,5 +552,20 @@
     <loc>https://www.agentkammer.com/insights/the-building-before-the-apartment</loc>
     <priority>0.7</priority>
     <lastmod>2026-07-14</lastmod>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/guides</loc>
+    <priority>0.7</priority>
+    <lastmod>2026-08-27</lastmod>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/guides/condo-coop-reference.html</loc>
+    <priority>0.8</priority>
+    <lastmod>2026-08-27</lastmod>
+  </url>
+  <url>
+    <loc>https://www.agentkammer.com/guides/coop-condo-condop-terms.html</loc>
+    <priority>0.8</priority>
+    <lastmod>2026-08-27</lastmod>
   </url>
 </urlset>

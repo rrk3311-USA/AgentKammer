@@ -1157,10 +1157,17 @@ export default function RealEstateDeeds() {
               </Link>
               {" · "}
               <Link
-                href="/situations/condo-vs-coop-foreign-buyers-nyc"
+                href="/situations/condo-vs-coop"
                 className="text-brand-navy underline underline-offset-2"
               >
                 Condo vs Co-op
+              </Link>
+              {" · "}
+              <Link
+                href="/situations/coop-condo-condop-terms"
+                className="text-brand-navy underline underline-offset-2"
+              >
+                Terms
               </Link>
             </p>
           </section>

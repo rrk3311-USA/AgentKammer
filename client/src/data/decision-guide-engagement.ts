@@ -126,6 +126,31 @@ const byPath: Record<string, Partial<PageEngagement>> = {
     nudge: "Family move? Let's align schools, bedrooms, and commute before you tour.",
     greeting: "School planning is really a three-way trade-off: schools, space, and commute. Which would disappoint you most if it went wrong?",
   },
+  "/situations/condo-vs-coop": {
+    headline: "Condo vs co-op, plainly",
+    nudge: "I can help you choose structure before you fall for a listing.",
+    greeting:
+      "Condo vs co-op is really about what you own, who can say no, and how you leave. Are you comparing a specific building, or still choosing the form?",
+    pageHelper: "You're in the Condo vs Co-op brief. Tell me how you'll use the home and I'll pressure-test structure.",
+    starters: [
+      { label: "Foreign buyer", text: "I'm buying from overseas.", path: "/situations/condo-vs-coop-foreign-buyers-nyc" },
+      { label: "Pied-à-terre", text: "It would be a part-time New York base.", path: "/situations/pied-a-terre-buyers-nyc" },
+      { label: "Terms", text: "I keep seeing words like condop and board package.", path: "/situations/coop-condo-condop-terms" },
+      { label: "Ownership guide", text: "Show me how ownership works more broadly.", path: "/guides/real-estate-ownership" },
+    ],
+  },
+  "/situations/coop-condo-condop-terms": {
+    headline: "The words listings use",
+    nudge: "I can tell you which terms belong to a co-op, a condo, or a condop portion.",
+    greeting:
+      "Listings mix co-op, condo, and condop language. Which word is confusing you — board package, maintenance, offering plan, or condop?",
+    pageHelper: "You're in the terms brief. Name a listing phrase and I'll map it to the structure it actually belongs to.",
+    starters: [
+      { label: "Condo vs co-op", text: "Start with the ownership difference.", path: "/situations/condo-vs-coop" },
+      { label: "What is a condop?", text: "What does condop actually mean in New York?" },
+      { label: "Maintenance", text: "Why is co-op maintenance different from condo common charges?" },
+    ],
+  },
   "/situations/pied-a-terre-buyers-nyc": {
     headline: "Pied-à-terre rules & fit",
     nudge: "Pied-à-terre purchases live or die on building rules. Want me to pressure-test yours?",

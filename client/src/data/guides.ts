@@ -19,6 +19,22 @@ export const publicGuides: GuideEntry[] = [
     kind: "page",
   },
   {
+    title: "Condo vs Co-op",
+    description:
+      "Decision Brief — what you own, what you pay, and what to check in the building before an offer.",
+    href: "/situations/condo-vs-coop",
+    audience: "public",
+    kind: "page",
+  },
+  {
+    title: "Co-op, Condo & Condop Terms",
+    description:
+      "Decision Brief — where board packages, maintenance, bylaws, and offering plans actually apply.",
+    href: "/situations/coop-condo-condop-terms",
+    audience: "public",
+    kind: "page",
+  },
+  {
     title: "How Real Estate Deeds Work",
     description:
       "Deed types, essential parts, delivery & recording, and New York transfer nuances.",

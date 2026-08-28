@@ -27,7 +27,8 @@ const whatsChangingItems: DecisionNavItem[] = [
 const understandItems: DecisionNavItem[] = [
   { label: "Rent vs Buy", href: "/situations/rent-vs-buy-manhattan-relocation" },
   { label: "School Districts", href: "/situations/school-district-planning-nyc" },
-  { label: "Condo vs Co-op", href: "/situations/condo-vs-coop-foreign-buyers-nyc" },
+  { label: "Condo vs Co-op", href: "/situations/condo-vs-coop" },
+  { label: "Co-op · Condo terms", href: "/situations/coop-condo-condop-terms" },
   { label: "New Development", href: "/situations/new-development-nyc" },
   { label: "Pied-à-Terre", href: "/situations/pied-a-terre-buyers-nyc" },
   { label: "Foreign Buyers", href: "/situations/foreign-buyers-new-york" },

@@ -510,6 +510,42 @@ export async function listSavedItems(clientProfileId: string): Promise<SavedItem
   return Array.from(mem.saved.values()).filter((s) => s.clientProfileId === clientProfileId);
 }
 
+export async function createSavedItem(input: {
+  clientProfileId: string;
+  itemType: string;
+  title: string;
+  path?: string;
+  externalId?: string;
+  notes?: string;
+}): Promise<SavedItem> {
+  if (db) {
+    const [row] = await db
+      .insert(savedItems)
+      .values({
+        clientProfileId: input.clientProfileId,
+        itemType: input.itemType,
+        title: input.title,
+        path: input.path,
+        externalId: input.externalId,
+        notes: input.notes,
+      })
+      .returning();
+    return row;
+  }
+  const row: SavedItem = {
+    id: randomUUID(),
+    clientProfileId: input.clientProfileId,
+    itemType: input.itemType,
+    title: input.title,
+    path: input.path ?? null,
+    externalId: input.externalId ?? null,
+    notes: input.notes ?? null,
+    createdAt: now(),
+  };
+  mem.saved.set(row.id, row);
+  return row;
+}
+
 export async function listAdvisorReviews(clientProfileId: string): Promise<AdvisorReviewRow[]> {
   if (db) {
     return db

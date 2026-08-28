@@ -1068,10 +1068,24 @@ export default function RealEstateOwnership() {
             are separate questions - both matter before you fall in love with a
             unit.{" "}
             <Link
+              href="/situations/condo-vs-coop"
+              className="text-brand-navy underline underline-offset-2"
+            >
+              Condo vs co-op brief
+            </Link>
+            {" · "}
+            <Link
+              href="/situations/coop-condo-condop-terms"
+              className="text-brand-navy underline underline-offset-2"
+            >
+              Terms chart
+            </Link>
+            {" · "}
+            <Link
               href="/situations/condo-vs-coop-foreign-buyers-nyc"
               className="text-brand-navy underline underline-offset-2"
             >
-              Condo vs Co-op guide
+              Foreign-buyer angle
             </Link>
           </p>
         </section>
@@ -1242,6 +1256,20 @@ export default function RealEstateOwnership() {
             className="text-brand-navy underline underline-offset-4"
           >
             All Guides
+          </Link>
+          {" · "}
+          <Link
+            href="/situations/condo-vs-coop"
+            className="text-brand-navy underline underline-offset-4"
+          >
+            Condo vs co-op
+          </Link>
+          {" · "}
+          <Link
+            href="/situations/coop-condo-condop-terms"
+            className="text-brand-navy underline underline-offset-4"
+          >
+            Terms
           </Link>
           {" · "}
           <Link

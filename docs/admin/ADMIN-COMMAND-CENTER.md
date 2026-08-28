@@ -11,6 +11,7 @@
 - [Admin portal (implementation notes)](../admin-portal.md)
 - [Architecture review (Decision OS)](../architecture/ARCHITECTURE-REVIEW.md)
 - [System design](../architecture/SYSTEM-DESIGN.md)
+- [Buyer Intelligence DB (Postgres spec for Codex)](../product/BUYER-INTELLIGENCE-DB.md)
 
 **Notion workspace**
 

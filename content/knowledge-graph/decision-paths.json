@@ -18,9 +18,9 @@
     "example": "Growing Family -> Schools -> Upper West Side -> 3BR Buildings"
   },
   {
-    "id": "international-buyer-path",
-    "trigger": "international-buyer",
-    "steps": ["International Buyer Brief", "Ownership Use Case", "Building Rules", "Pied-a-Terre Options", "Private Review"],
-    "example": "International Buyer -> Condo Rules -> Remote Ownership -> Building Report"
+    "id": "condo-vs-coop-path",
+    "trigger": "condo-vs-coop",
+    "steps": ["Condo vs Co-op Brief", "Co-op Condo Condop Terms", "Building Intelligence", "Pied-a-Terre or Foreign-Buyer Brief if needed", "Private Review"],
+    "example": "Condo vs Co-op -> Terms chart -> Building Health -> Belonging Assessment"
   }
 ]

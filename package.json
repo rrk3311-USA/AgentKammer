@@ -13,7 +13,8 @@
     "db:push": "drizzle-kit push",
     "test": "vitest run",
     "test:watch": "vitest",
-    "seed:advisory": "tsx scripts/seed-advisory.ts"
+    "seed:advisory": "tsx scripts/seed-advisory.ts",
+    "seed:buyer-intel": "tsx scripts/seed-buyer-intel.ts"
   },
   "dependencies": {
     "@fontsource/cormorant-garamond": "^5.2.11",
