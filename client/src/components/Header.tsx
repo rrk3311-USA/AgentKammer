@@ -46,7 +46,7 @@ export function Header() {
     >
       <div className="mx-auto grid max-w-site grid-cols-[1fr_auto] items-center gap-4 px-6 py-2.5 lg:grid-cols-[auto_minmax(24rem,1fr)_auto] lg:px-8 xl:px-10">
         <Link href="/" data-testid="link-home" className={cn("justify-self-start", focusRing)}>
-          <AgentKammerHorizontalLogo variant="light" emphasis="header" />
+          <AgentKammerHorizontalLogo variant="light" emphasis="header" showTagline />
         </Link>
 
         <nav

@@ -14,6 +14,7 @@ import {
   setMemberCookie,
   setPendingOtpCookie,
 } from "./_shared.js";
+import { loadMemberFromDatabase, persistMemberToDatabase } from "./persist.js";
 
 // Verify PIN and issue a signed, httpOnly member session cookie.
 export default async function handler(req: ApiRequest, res: ApiResponse) {
@@ -52,10 +53,12 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
 
     const visitorId = getOrCreateVisitorId(req, res);
     const existing = getMemberFromRequest(req);
-    const member = createOrMergeMember(email, existing, {
+    const merged = createOrMergeMember(email, existing, {
       visitorId: pending.v || visitorId,
       displayName: pending.d,
     });
+    const member = await loadMemberFromDatabase(email, merged);
+    await persistMemberToDatabase(member);
 
     setMemberCookie(res, member);
 

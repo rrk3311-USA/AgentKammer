@@ -10,6 +10,7 @@ import {
   publicHub,
   setMemberCookie,
 } from "./_shared.js";
+import { loadMemberFromDatabase, persistMemberToDatabase } from "./persist.js";
 
 // Save a recommendation brief into the member's Decision Hub. Only
 // authenticated members (verified email + PIN / cookie session) - never
@@ -30,8 +31,8 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       return res.status(400).json({ ok: false, error: "Brief body is required" });
     }
 
-    const member = getMemberFromRequest(req);
-    if (!member) {
+    const session = getMemberFromRequest(req);
+    if (!session) {
       return res.status(401).json({
         ok: false,
         needsVerification: true,
@@ -41,6 +42,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       });
     }
 
+    const member = await loadMemberFromDatabase(session.e, session);
     const decisionMap = capDecisionMap(body.decisionMap);
     const score = typeof body.score === "number" ? body.score : null;
     const source = body.source === "recap" ? "recap" : "manual";
@@ -53,6 +55,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       decisionMap,
     });
 
+    await persistMemberToDatabase(nextMember);
     setMemberCookie(res, nextMember);
 
     return res.status(200).json({

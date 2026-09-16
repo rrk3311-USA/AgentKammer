@@ -1,10 +1,9 @@
 import { Link } from "wouter";
-import { ArrowRight, MoveRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { CTA } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { openDecisionAssistant } from "@/lib/decision-assistant";
 import { serviceLandingMap } from "@/data/service-landings";
-import { publicGuides } from "@/data/guides";
 
 const howWeDecide = [
   { step: "01", title: "What's changing?", text: "Life event, pressure, or uncertainty - before neighborhoods or inventory." },
@@ -12,39 +11,30 @@ const howWeDecide = [
   { step: "03", title: "Where do you belong?", text: "Even if you stay, is the environment still serving the life you want?" },
 ];
 
-const startHere = [
-  { step: "01", title: "What's Changing?", text: "Name the life change - relocation, family, uncertainty - before listings take over." },
-  { step: "02", title: "Decision Assessment", text: "The diagnostic. Belonging, friction, and whether anything should change at all." },
-  { step: "03", title: "Read the brief", text: "The editorial that matches your situation. Clarity before inventory." },
-  { step: "04", title: "Strategy when you want judgment", text: "A Housing Strategy Session and written next step - not a listing tour." },
-];
-
 const featuredBriefSlugs = [
   "executive-relocation-nyc",
   "foreign-buyers-new-york",
   "empty-nester-downsizing-nyc",
-  "rent-vs-buy-manhattan-relocation",
 ] as const;
 
 export default function Home() {
   usePageMetadata({
-    title: "Agent Kammer | Private Housing Advisory",
+    title: "Agent Kammer | Live Where You Belong",
     description:
-      "Private housing guidance before the market gets loud. Local execution when needed. Stay, renovate, rent, buy, sell, or wait.",
+      "Live where you belong. Private housing guidance before the market gets loud. Stay, renovate, rent, buy, sell, or wait.",
     path: "/",
   });
 
   const featuredBriefs = featuredBriefSlugs
     .map((slug) => serviceLandingMap[slug])
     .filter(Boolean);
-  const featuredGuides = publicGuides.slice(0, 4);
 
   return (
     <main className="bg-brand-ivory text-brand-ink">
-      {/* 1 · Hero */}
+      {/* 1 · Hero — belonging + soft handoff into the sticky advisor */}
       <section className="border-b border-brand-border bg-brand-ivory">
         <div className="mx-auto grid w-full max-w-site gap-0 px-6 py-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(340px,0.72fr)] lg:px-10">
-          <div className="flex min-h-[560px] flex-col justify-start pb-32 pt-10 lg:pr-16 lg:pt-16">
+          <div className="flex min-h-[480px] flex-col justify-start pb-20 pt-10 lg:min-h-[520px] lg:pr-16 lg:pt-16">
             <p className="text-[10px] uppercase tracking-[0.3em] text-brand-cocoa">Agent Kammer</p>
             <p className="mt-3 text-[11px] uppercase tracking-[0.26em] text-brand-cocoa">Private Housing Advisory</p>
             <h1 className="mt-4 max-w-[12ch] font-display text-[clamp(3.4rem,6.4vw,6.8rem)] leading-[0.88] text-brand-navy">
@@ -58,28 +48,24 @@ export default function Home() {
                 People do not wake up wanting to tour apartments. They wake up because life changed.
               </p>
             </blockquote>
-            <p className="mt-5 max-w-xl text-base leading-7 text-brand-graphite/82">
-              The job here is to diagnose that change and guide the highest expected-value decision - even if that means doing nothing - then curate the right local professionals when a transaction is appropriate.
-            </p>
-            <div className="mt-7">
+            <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
               <button
                 type="button"
                 onClick={openDecisionAssistant}
-                className="ak-call-button group grid min-w-[19rem] px-5 py-4 text-left transition-colors"
+                className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
               >
-                <span className="text-[10px] uppercase tracking-[0.24em]">
-                  <span className="text-brand-ivory/72">Guidance</span>{" "}
-                  <span className="text-brand-stone">Advisor</span>
-                </span>
-                <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
-                <span className="mt-3 flex items-center justify-between font-display text-2xl leading-none text-brand-ivory">
-                  Begin the decision
-                  <MoveRight className="h-5 w-5 text-brand-stone transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
-                </span>
+                Ask the Guidance Advisor
+                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
               </button>
+              <Link
+                href="/buyer-advisory"
+                className="text-[11px] uppercase tracking-[0.16em] text-brand-graphite transition-colors hover:text-brand-navy"
+              >
+                Start Here
+              </Link>
             </div>
           </div>
-          <div className="relative min-h-[420px] overflow-hidden bg-brand-surface lg:min-h-[640px]">
+          <div className="relative min-h-[360px] overflow-hidden bg-brand-surface lg:min-h-[520px]">
             <img
               src="/images/how-we-think-terrace.jpg"
               alt="Manhattan skyline viewed from a high terrace at dusk"
@@ -89,78 +75,64 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/28 via-transparent to-brand-navy/12" />
             <div className="absolute inset-x-0 bottom-0 border-t border-brand-ivory/18 bg-brand-navy/50 p-6 text-brand-ivory backdrop-blur-[2px]">
               <p className="text-[10px] uppercase tracking-[0.24em] text-brand-stone">How We Think</p>
-              <p className="mt-2 font-display text-3xl leading-none">Buildings, context, strategy.</p>
+              <p className="mt-2 font-display text-3xl leading-none">Life first. Then the building.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2 · How we decide */}
+      {/* 2 · How we decide — compact */}
       <section className="border-b border-brand-border bg-white">
-        <div className="mx-auto w-full max-w-site px-6 py-20 lg:px-10 lg:py-28">
+        <div className="mx-auto w-full max-w-site px-6 py-14 lg:px-10 lg:py-16">
           <div className="max-w-2xl">
             <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">How We Decide</p>
-            <h2 className="mt-4 font-display text-[clamp(2.4rem,4.5vw,3.75rem)] leading-[0.92] text-brand-navy">
+            <h2 className="mt-3 font-display text-[clamp(2rem,3.6vw,2.85rem)] leading-[0.94] text-brand-navy">
               Three questions. Then judgment.
             </h2>
           </div>
-          <div className="mt-14 grid gap-10 border-t border-brand-border pt-10 md:grid-cols-3 md:gap-8">
+          <div className="mt-10 grid gap-8 border-t border-brand-border pt-8 md:grid-cols-3 md:gap-8">
             {howWeDecide.map((item) => (
               <article key={item.step}>
                 <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">{item.step}</p>
-                <h3 className="mt-4 font-display text-2xl leading-none text-brand-navy md:text-3xl">{item.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-brand-graphite">{item.text}</p>
+                <h3 className="mt-3 font-display text-2xl leading-none text-brand-navy">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-brand-graphite">{item.text}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 3 · Start Here */}
+      {/* 3 · Start Here — one card, not a second journey list */}
       <section className="border-b border-brand-border bg-brand-ivory">
-        <div className="mx-auto w-full max-w-site px-6 py-20 lg:px-10 lg:py-28">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mx-auto w-full max-w-site px-6 py-14 lg:px-10 lg:py-16">
+          <article className="border border-brand-border bg-white px-6 py-8 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-10 lg:px-10 lg:py-10">
             <div className="max-w-2xl">
               <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">Start Here</p>
-              <h2 className="mt-4 font-display text-[clamp(2.4rem,4.5vw,3.75rem)] leading-[0.92] text-brand-navy">
+              <h2 className="mt-3 font-display text-[clamp(2rem,3.6vw,2.85rem)] leading-[0.94] text-brand-navy">
                 A clear path through the decision.
               </h2>
-              <p className="mt-6 max-w-xl text-base leading-8 text-brand-graphite">
-                The journey map - not the diagnostic, not the brief, not the paid session. Four steps, no overlap.
+              <p className="mt-5 max-w-xl text-base leading-8 text-brand-graphite">
+                The journey map - not the diagnostic. Name what changed, then read the brief that matches. Strategy only when you want judgment.
               </p>
             </div>
             <Link
               href="/buyer-advisory"
-              className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
+              className="mt-6 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-navy-secondary lg:mt-0"
             >
               Open Start Here
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
-          </div>
-          <div className="mt-12 border-t border-brand-border">
-            {startHere.map((item) => (
-              <article
-                key={item.step}
-                className="grid gap-2 border-b border-brand-border py-7 md:grid-cols-[80px_minmax(0,1fr)] md:items-baseline md:gap-8"
-              >
-                <p className="text-[11px] uppercase tracking-[0.18em] text-brand-cocoa">{item.step}</p>
-                <div>
-                  <p className="font-display text-2xl leading-none text-brand-navy md:text-3xl">{item.title}</p>
-                  <p className="mt-3 max-w-2xl text-sm leading-7 text-brand-graphite">{item.text}</p>
-                </div>
-              </article>
-            ))}
-          </div>
+          </article>
         </div>
       </section>
 
       {/* 4 · Situations */}
       <section className="border-b border-brand-border bg-white">
-        <div className="mx-auto w-full max-w-site px-6 py-20 lg:px-10 lg:py-28">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mx-auto w-full max-w-site px-6 py-14 lg:px-10 lg:py-16">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
               <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">Situations</p>
-              <h2 className="mt-4 font-display text-[clamp(2.4rem,4.5vw,3.75rem)] leading-[0.92] text-brand-navy">
+              <h2 className="mt-3 font-display text-[clamp(2rem,3.6vw,2.85rem)] leading-[0.94] text-brand-navy">
                 Start from what changed.
               </h2>
             </div>
@@ -172,16 +144,16 @@ export default function Home() {
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
           </div>
-          <div className="mt-12 border-t border-brand-border">
+          <div className="mt-8 border-t border-brand-border">
             {featuredBriefs.map((brief) => (
               <Link
                 key={brief.slug}
                 href={`/situations/${brief.slug}`}
-                className="group grid gap-2 border-b border-brand-border py-7 transition-colors md:grid-cols-[minmax(0,0.35fr)_minmax(0,1fr)_auto] md:items-baseline md:gap-8"
+                className="group grid gap-2 border-b border-brand-border py-6 transition-colors md:grid-cols-[minmax(0,0.35fr)_minmax(0,1fr)_auto] md:items-baseline md:gap-8"
               >
                 <p className="text-[11px] uppercase tracking-[0.18em] text-brand-cocoa">{brief.eyebrow}</p>
                 <div>
-                  <p className="font-display text-2xl leading-none text-brand-navy transition-colors group-hover:text-brand-navy-secondary md:text-3xl">
+                  <p className="font-display text-2xl leading-none text-brand-navy transition-colors group-hover:text-brand-navy-secondary">
                     {brief.navLabel}
                   </p>
                   <p className="mt-3 max-w-2xl text-sm leading-7 text-brand-graphite line-clamp-2">{brief.summary}</p>
@@ -193,16 +165,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5 · Buildings */}
+      {/* 5 · Buildings teaser */}
       <section className="border-b border-brand-border bg-brand-navy text-brand-ivory">
-        <div className="mx-auto grid w-full max-w-site gap-10 px-6 py-20 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:px-10 lg:py-28">
+        <div className="mx-auto grid w-full max-w-site gap-8 px-6 py-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:px-10 lg:py-16">
           <div>
             <p className="text-[10px] uppercase tracking-[0.26em] text-brand-stone">Buildings</p>
-            <h2 className="mt-4 max-w-xl font-display text-[clamp(2.4rem,4.5vw,3.75rem)] leading-[0.92] text-brand-ivory">
+            <h2 className="mt-3 max-w-xl font-display text-[clamp(2rem,3.6vw,2.85rem)] leading-[0.94] text-brand-ivory">
               The asset before the listing.
             </h2>
-            <p className="mt-6 max-w-xl text-base leading-8 text-brand-ivory/74">
-              A knowledge resource - Building Reports that read quality, context, and fit, not marketing copy. Used only after the decision frame is clear.
+            <p className="mt-5 max-w-xl text-base leading-8 text-brand-ivory/74">
+              Building Reports read quality, context, and fit - used only after the decision frame is clear.
             </p>
           </div>
           <Link
@@ -215,40 +187,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6 · Guides */}
+      {/* 6 · Guides — light teaser; full library stays in nav + footer */}
       <section className="border-b border-brand-border bg-brand-ivory">
-        <div className="mx-auto w-full max-w-site px-6 py-20 lg:px-10 lg:py-28">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <div className="max-w-2xl">
-              <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">Guides</p>
-              <h2 className="mt-4 font-display text-[clamp(2.4rem,4.5vw,3.75rem)] leading-[0.92] text-brand-navy">
-                Structure before search.
-              </h2>
-            </div>
-            <Link
-              href="/guides"
-              className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
-            >
-              Browse guides
-              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-            </Link>
-          </div>
-          <div className="mt-12 grid gap-px bg-brand-border sm:grid-cols-2">
-            {featuredGuides.map((guide) => (
-              <Link
-                key={guide.href}
-                href={guide.href}
-                className="group bg-brand-ivory p-7 transition-colors hover:bg-white"
-              >
-                <p className="font-display text-2xl leading-none text-brand-navy">{guide.title}</p>
-                <p className="mt-3 text-sm leading-7 text-brand-graphite line-clamp-2">{guide.description}</p>
-                <span className="mt-5 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-brand-navy">
-                  Open guide
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-                </span>
-              </Link>
-            ))}
-          </div>
+        <div className="mx-auto flex w-full max-w-site flex-col gap-3 px-6 py-8 sm:flex-row sm:items-center sm:justify-between lg:px-10">
+          <p className="text-sm leading-7 text-brand-graphite">
+            <span className="text-[10px] uppercase tracking-[0.22em] text-brand-cocoa">Guides</span>
+            <span className="mt-2 block text-brand-navy">Structure before search - ownership, condo vs co-op, and related frameworks.</span>
+          </p>
+          <Link
+            href="/guides"
+            className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
+          >
+            Browse guides
+            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+          </Link>
         </div>
       </section>
 

@@ -1,4 +1,5 @@
 import { ApiRequest, ApiResponse, getMemberFromRequest, publicHub, readCookie } from "./_shared.js";
+import { loadMemberFromDatabase } from "./persist.js";
 
 export default async function handler(req: ApiRequest, res: ApiResponse) {
   if (req.method !== "GET") {
@@ -13,11 +14,12 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       return res.status(401).json({ ok: false, error: "Sign in required" });
     }
 
-    const member = getMemberFromRequest(req);
-    if (!member) {
+    const session = getMemberFromRequest(req);
+    if (!session) {
       return res.status(401).json({ ok: false, error: "Invalid or expired session" });
     }
 
+    const member = await loadMemberFromDatabase(session.e, session);
     return res.status(200).json({ ok: true, hub: publicHub(member) });
   } catch (err) {
     console.error("Account hub error:", err);

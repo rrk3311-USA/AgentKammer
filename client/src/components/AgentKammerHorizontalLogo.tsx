@@ -61,11 +61,15 @@ export function AgentKammerHorizontalLogo({
           <p
             className={cn(
               "mt-2 uppercase leading-none",
-              stacked ? "text-[0.6rem] tracking-[0.28em]" : "text-[0.46rem] tracking-[0.22em] sm:text-[0.5rem]",
+              stacked
+                ? "text-[0.6rem] tracking-[0.28em]"
+                : headerStyle
+                  ? "mt-1.5 text-[0.58rem] tracking-[0.16em] sm:text-[0.62rem]"
+                  : "text-[0.46rem] tracking-[0.22em] sm:text-[0.5rem]",
               accentTone,
             )}
           >
-            Buildings Before Listings
+            Live Where You Belong
           </p>
         ) : null}
       </div>

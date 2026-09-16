@@ -6,16 +6,10 @@ import { Resend } from "resend";
 // Filename is prefixed with `_` so Vercel does not turn this into its own
 // Serverless Function - see https://vercel.com/docs/functions/configuring-functions/advanced-configuration
 //
-// DURABILITY NOTE: this project has no DATABASE_URL configured on Vercel, so
-// claim/verify/hub/briefs are four independent Serverless Functions that
-// cannot share in-memory state. Instead of an in-memory Map (which would
-// silently break across cold starts *and* across functions), state is kept
-// entirely in signed, httpOnly cookies (HMAC-SHA256 with ACCOUNT_SESSION_SECRET).
-// The cookie payload IS the source of truth, so this works correctly across
-// cold starts, scale-out, and regions. Trade-off: capped history (a handful
-// of recent briefs) because of the ~4KB per-cookie limit - a real Postgres
-// table (schema already defined in shared/schema.ts as `memberProfiles`)
-// would remove that cap if DATABASE_URL is ever wired up.
+// DURABILITY: signed httpOnly cookies (HMAC-SHA256 with ACCOUNT_SESSION_SECRET)
+// are the session. When Vercel `DATABASE_URL` (Neon) is set, verify/hub/briefs
+// also persist `member_profiles` (see persist.ts + shared/schema.ts). Missing
+// DATABASE_URL fails open to cookies — Hub still works, with a ~4KB brief cap.
 
 export type ApiRequest = {
   method?: string;

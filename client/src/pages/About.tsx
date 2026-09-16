@@ -51,22 +51,7 @@ export default function About() {
           Some clients work together for weeks. Others for years. Decisions evolve, and the guidance evolves with them.
         </p>
         <p className="mt-6 text-lg leading-9 text-brand-graphite">
-          Buildings before listings. Helping people make better housing decisions throughout life - not just real estate transactions. Live Where You Belong - whether that means stay or move.
-        </p>
-      </article>
-
-      <SketchDivider variant="building" />
-
-      <article className="mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24">
-        <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Credentials That Matter</p>
-        <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] leading-[0.94] text-brand-navy">
-          Building literacy changes the quality of advice.
-        </h2>
-        <p className="mt-8 text-lg leading-9 text-brand-graphite">
-          ICC Commercial Building Inspector training, blueprint reading, OSHA 30, and New York State licensed real estate practice are not marketing props. They help separate cosmetic issues from functional and building-related risk before a client commits capital or time.
-        </p>
-        <p className="mt-6 text-lg leading-9 text-brand-graphite">
-          That literacy sits behind Decision Briefs and Building Reports - used after the decision frame is clear, never as a substitute for asking whether anything should change.
+          Live Where You Belong - whether that means stay, renovate, rent, buy, sell, or wait. The practice helps people make better housing decisions throughout life - not just real estate transactions.
         </p>
       </article>
 
@@ -107,8 +92,8 @@ export default function About() {
       </article>
 
       <CTA
-        title="Find out if you’re living where you belong."
-        description="The Decision Assessment is how most relationships begin - a profile first, a Housing Strategy Session only when it adds judgment."
+        title="When you want a human reply."
+        description="Share what is changing. We will prescribe the right next step - Assessment, Snapshot, Report, or a quiet conversation."
       />
     </main>
   );
