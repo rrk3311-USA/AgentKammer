@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
+import { openDecisionAssistant } from "@/lib/decision-assistant";
 
 const journey = [
   {
@@ -77,6 +78,19 @@ export default function Buy() {
         description="Start Here is the journey map. The Decision Assessment is the diagnostic. Decision Briefs are the research. Strategy is the paid advisory layer. They are not the same step."
         art="decision-framework"
       />
+
+      <div className="border-b border-brand-border bg-brand-ivory">
+        <div className="mx-auto flex w-full max-w-site px-6 py-4 lg:px-10">
+          <button
+            type="button"
+            onClick={openDecisionAssistant}
+            className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
+          >
+            Ask the Guidance Advisor
+            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+          </button>
+        </div>
+      </div>
 
       <PageSection>
         <SectionHeading

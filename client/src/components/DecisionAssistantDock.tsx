@@ -474,14 +474,16 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   const starterPrompts = engagement.starters;
   const cold = isColdConversation(messages);
 
+  const openPanel = () => {
+    setDwellNudge(null);
+    setExpanded(true);
+    window.setTimeout(() => {
+      inputRef.current?.focus({ preventScroll: true });
+    }, 150);
+  };
+
   useEffect(() => {
-    const open = () => {
-      setExpanded(true);
-      setDwellNudge(null);
-      window.setTimeout(() => {
-        inputRef.current?.focus({ preventScroll: true });
-      }, 450);
-    };
+    const open = () => openPanel();
     window.addEventListener(DECISION_ASSISTANT_OPEN_EVENT, open);
     return () => window.removeEventListener(DECISION_ASSISTANT_OPEN_EVENT, open);
   }, []);
@@ -956,63 +958,69 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
     <BlueprintProgressBar completion={blueprintCompletion} tone={tone} />
   );
 
+  if (!expanded) {
+    return (
+      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40">
+        <div className="mx-auto flex w-full max-w-site justify-end px-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6 lg:px-10">
+          <div className="pointer-events-auto flex max-w-[min(20rem,calc(100%-0.5rem))] flex-col items-end gap-2">
+            {dwellNudge ? (
+              <button
+                type="button"
+                onClick={openPanel}
+                className="w-full border border-brand-stone bg-brand-navy px-3.5 py-2.5 text-left text-brand-ivory shadow-[0_8px_24px_rgba(13,24,43,0.18)] transition-colors hover:border-brand-ivory/40"
+              >
+                <span className="block text-[10px] uppercase tracking-[0.18em] text-brand-stone">On this page</span>
+                <span className="mt-1 block text-sm leading-5">{dwellNudge}</span>
+              </button>
+            ) : null}
+            <button
+              type="button"
+              id="decision-assistant"
+              onClick={openPanel}
+              className="flex items-stretch border border-brand-stone bg-brand-ivory text-left text-brand-navy shadow-[0_8px_24px_rgba(13,24,43,0.16)] transition-colors hover:border-brand-navy"
+              aria-label="Open Guidance Advisor"
+              aria-expanded={false}
+            >
+              <span className="flex h-16 w-16 shrink-0 items-center justify-center bg-brand-navy">
+                <DecisionGuideAvatar />
+              </span>
+              <span className="hidden min-w-0 flex-col justify-center px-3 py-2 sm:flex">
+                <GuidanceAdvisorLabel tone="light" />
+                <span className="mt-0.5 max-w-[11rem] truncate text-sm font-medium text-brand-navy">
+                  {engagement.headline}
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40">
-      {dwellNudge && !expanded ? (
-        <div className="pointer-events-auto mx-auto mb-2 w-[min(36rem,calc(100%-1.5rem))]">
-          <button
-            type="button"
-            onClick={() => {
-              setDwellNudge(null);
-              setExpanded(true);
-              inputRef.current?.focus({ preventScroll: true });
-            }}
-            className="relative flex w-full items-start gap-3 border border-brand-stone bg-brand-navy px-3.5 py-2.5 text-left text-brand-ivory shadow-[0_8px_24px_rgba(13,24,43,0.18)] transition-colors hover:border-brand-ivory/40"
-          >
-            <span className="min-w-0 flex-1">
-              <span className="block text-[10px] uppercase tracking-[0.18em] text-brand-stone">On this page</span>
-              <span className="mt-1 block text-sm leading-5">{dwellNudge}</span>
-            </span>
-            <span className="shrink-0 self-center text-[10px] uppercase tracking-[0.14em] text-brand-stone">Ask</span>
-          </button>
-        </div>
-      ) : null}
-
       <aside
         id="decision-assistant"
-        className={
-          expanded
-            ? "pointer-events-auto flex max-h-[min(70vh,40rem)] flex-col border-t border-brand-stone bg-brand-ivory text-brand-navy shadow-[0_-14px_36px_rgba(13,24,43,0.16)]"
-            : "pointer-events-auto flex flex-col border-t border-brand-stone bg-brand-ivory text-brand-navy shadow-[0_-10px_28px_rgba(13,24,43,0.12)]"
-        }
+        className="pointer-events-auto flex max-h-[min(70vh,40rem)] flex-col border-t border-brand-stone bg-brand-ivory text-brand-navy shadow-[0_-14px_36px_rgba(13,24,43,0.16)]"
         aria-label="Guidance Advisor"
+        aria-expanded={true}
       >
-        <div
-          className={
-            expanded
-              ? "mx-auto flex w-full max-w-site flex-col gap-2.5 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3"
-              : "mx-auto flex w-full max-w-site flex-col gap-2.5 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3"
-          }
-        >
-          <div className={expanded ? "grid gap-2.5 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] sm:items-start" : "grid gap-2.5"}>
+        <div className="mx-auto flex w-full max-w-site flex-col gap-2.5 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3">
+          <div className="grid gap-2.5 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] sm:items-start">
             <div className="flex min-w-0 items-center gap-3">
-              <DecisionGuideAvatar animated={expanded} />
+              <DecisionGuideAvatar animated />
               <div className="min-w-0 flex-1">
                 <GuidanceAdvisorLabel tone="light" />
                 <p className="truncate text-sm font-medium text-brand-navy">{engagement.headline}</p>
               </div>
-              {expanded ? (
-                <button
-                  type="button"
-                  onClick={() => setExpanded(false)}
-                  className="flex h-9 w-9 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy sm:hidden"
-                  aria-label="Minimize Guidance Advisor"
-                >
-                  <Minimize2 className="h-4 w-4" strokeWidth={1.5} />
-                </button>
-              ) : (
-                <p className="shrink-0 font-mono text-[10px] text-brand-graphite">{blueprintCompletion}/6</p>
-              )}
+              <button
+                type="button"
+                onClick={() => setExpanded(false)}
+                className="flex h-9 w-9 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy sm:hidden"
+                aria-label="Minimize Guidance Advisor"
+              >
+                <Minimize2 className="h-4 w-4" strokeWidth={1.5} />
+              </button>
             </div>
 
             <div
@@ -1023,125 +1031,110 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
                 <p className="text-[9px] uppercase tracking-[0.2em] text-brand-cocoa">Decision Progress</p>
                 <div className="flex items-center gap-2">
                   <p className="font-mono text-[10px] text-brand-graphite">{blueprintCompletion}/6</p>
-                  {expanded ? (
-                    <button
-                      type="button"
-                      onClick={() => setExpanded(false)}
-                      className="hidden h-7 w-7 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy sm:inline-flex"
-                      aria-label="Minimize Guidance Advisor"
-                    >
-                      <Minimize2 className="h-3.5 w-3.5" strokeWidth={1.5} />
-                    </button>
-                  ) : null}
+                  <button
+                    type="button"
+                    onClick={() => setExpanded(false)}
+                    className="hidden h-7 w-7 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy sm:inline-flex"
+                    aria-label="Minimize Guidance Advisor"
+                  >
+                    <Minimize2 className="h-3.5 w-3.5" strokeWidth={1.5} />
+                  </button>
                 </div>
               </div>
               <div className="mt-2">{renderCompactBlueprintProgress("light")}</div>
-              {expanded ? (
-                <div className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-2">
-                  {blueprintSegments.map((segment) => {
-                    const filled = completedSegments[segment.label as keyof typeof completedSegments];
-                    return (
-                      <div
-                        key={segment.label}
-                        className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2"
+              <div className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-2">
+                {blueprintSegments.map((segment) => {
+                  const filled = completedSegments[segment.label as keyof typeof completedSegments];
+                  return (
+                    <div
+                      key={segment.label}
+                      className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2"
+                    >
+                      <segment.icon
+                        className={
+                          filled
+                            ? "h-3.5 w-3.5 shrink-0 text-brand-navy"
+                            : "h-3.5 w-3.5 shrink-0 text-brand-navy/45"
+                        }
+                        strokeWidth={1.5}
+                        aria-hidden
+                      />
+                      <span
+                        className={
+                          filled
+                            ? "truncate text-[9px] uppercase tracking-[0.12em] text-brand-navy"
+                            : "truncate text-[9px] uppercase tracking-[0.12em] text-brand-navy/60"
+                        }
                       >
-                        <segment.icon
-                          className={
-                            filled
-                              ? "h-3.5 w-3.5 shrink-0 text-brand-navy"
-                              : "h-3.5 w-3.5 shrink-0 text-brand-navy/45"
-                          }
-                          strokeWidth={1.5}
-                          aria-hidden
-                        />
-                        <span
-                          className={
-                            filled
-                              ? "truncate text-[9px] uppercase tracking-[0.12em] text-brand-navy"
-                              : "truncate text-[9px] uppercase tracking-[0.12em] text-brand-navy/60"
-                          }
-                        >
-                          {segment.label}
-                        </span>
-                        <span className="flex justify-end" aria-hidden>
-                          {filled ? (
-                            <Check className="h-3 w-3 text-brand-navy" strokeWidth={1.8} />
-                          ) : (
-                            <Circle className="h-2.5 w-2.5 text-brand-stone" strokeWidth={1.7} />
-                          )}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : null}
+                        {segment.label}
+                      </span>
+                      <span className="flex justify-end" aria-hidden>
+                        {filled ? (
+                          <Check className="h-3 w-3 text-brand-navy" strokeWidth={1.8} />
+                        ) : (
+                          <Circle className="h-2.5 w-2.5 text-brand-stone" strokeWidth={1.7} />
+                        )}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
-          {expanded ? (
-            <>
-              <div ref={transcriptRef} className="min-h-0 flex-1 space-y-1.5 overflow-y-auto overflow-x-hidden pr-1">
-                {recentMessages.map((message, index) => (
-                  <div
-                    key={`${message.role}-${index}`}
-                    className={
-                      message.role === "assistant"
-                        ? "max-w-full overflow-hidden border border-brand-navy bg-brand-navy p-2.5 text-brand-ivory"
-                        : "max-w-full overflow-hidden border border-brand-border bg-white p-2.5 text-brand-navy"
-                    }
-                  >
-                    <p
-                      className={
-                        message.role === "assistant"
-                          ? "text-[9px] uppercase tracking-[0.16em] text-brand-stone"
-                          : "text-[9px] uppercase tracking-[0.16em] text-brand-cocoa"
-                      }
-                    >
-                      {message.role === "assistant" ? "Guidance Advisor" : "You"}
-                    </p>
-                    <p className="mt-1.5 whitespace-pre-line break-words text-sm leading-5">{message.text}</p>
-                  </div>
-                ))}
+          <div ref={transcriptRef} className="min-h-0 flex-1 space-y-1.5 overflow-y-auto overflow-x-hidden pr-1">
+            {recentMessages.map((message, index) => (
+              <div
+                key={`${message.role}-${index}`}
+                className={
+                  message.role === "assistant"
+                    ? "max-w-full overflow-hidden border border-brand-navy bg-brand-navy p-2.5 text-brand-ivory"
+                    : "max-w-full overflow-hidden border border-brand-border bg-white p-2.5 text-brand-navy"
+                }
+              >
+                <p
+                  className={
+                    message.role === "assistant"
+                      ? "text-[9px] uppercase tracking-[0.16em] text-brand-stone"
+                      : "text-[9px] uppercase tracking-[0.16em] text-brand-cocoa"
+                  }
+                >
+                  {message.role === "assistant" ? "Guidance Advisor" : "You"}
+                </p>
+                <p className="mt-1.5 whitespace-pre-line break-words text-sm leading-5">{message.text}</p>
               </div>
+            ))}
+          </div>
 
-              {cold && step !== "sent" ? (
-                <div className="flex flex-wrap gap-1.5" aria-label="Quick starters">
-                  {starterPrompts.map((prompt) => (
-                    <button
-                      key={prompt.label}
-                      type="button"
-                      onClick={() => {
-                        setExpanded(true);
-                        handleStarter(prompt);
-                      }}
-                      className="border border-brand-border bg-white px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
-                    >
-                      {prompt.label}
-                    </button>
-                  ))}
-                </div>
-              ) : null}
+          {cold && step !== "sent" ? (
+            <div className="flex flex-wrap gap-1.5" aria-label="Quick starters">
+              {starterPrompts.map((prompt) => (
+                <button
+                  key={prompt.label}
+                  type="button"
+                  onClick={() => handleStarter(prompt)}
+                  className="border border-brand-border bg-white px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
+                >
+                  {prompt.label}
+                </button>
+              ))}
+            </div>
+          ) : null}
 
-              {quickActions.length > 0 && step !== "sent" ? (
-                <div className="flex flex-wrap gap-1.5" aria-label="Suggested actions">
-                  {quickActions.map((action) => (
-                    <button
-                      key={action.label}
-                      type="button"
-                      onClick={() => handleQuickAction(action)}
-                      className="border border-brand-stone bg-brand-surface px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
-                    >
-                      {action.label}
-                    </button>
-                  ))}
-                </div>
-              ) : null}
-            </>
-          ) : (
-            <p className="line-clamp-2 text-sm leading-5 text-brand-graphite">
-              {recentMessages[recentMessages.length - 1]?.text ?? "Tell me what's changing..."}
-            </p>
-          )}
+          {quickActions.length > 0 && step !== "sent" ? (
+            <div className="flex flex-wrap gap-1.5" aria-label="Suggested actions">
+              {quickActions.map((action) => (
+                <button
+                  key={action.label}
+                  type="button"
+                  onClick={() => handleQuickAction(action)}
+                  className="border border-brand-stone bg-brand-surface px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
+                >
+                  {action.label}
+                </button>
+              ))}
+            </div>
+          ) : null}
 
           {step !== "sent" ? (
             <form onSubmit={handleSubmit} className="mt-auto grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] gap-2">
@@ -1153,23 +1146,19 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
                 id="decision-assistant-input"
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
-                onFocus={() => {
-                  setDwellNudge(null);
-                  setExpanded(true);
-                }}
+                onFocus={() => setDwellNudge(null)}
                 onKeyDown={handleInputKeyDown}
                 placeholder={
                   step === "email"
                     ? "Email or mobile for the recap..."
                     : openingPrompts[promptIndex % openingPrompts.length] || "Tell me what's changing..."
                 }
-                rows={expanded ? 2 : 1}
+                rows={2}
                 className="min-h-10 w-full min-w-0 resize-none border border-brand-border bg-white px-3 py-2 text-sm text-brand-navy outline-none transition-colors placeholder:text-brand-graphite/55 focus:border-brand-navy md:min-h-11"
               />
               <button
                 type="submit"
                 disabled={sending}
-                onClick={() => setExpanded(true)}
                 className="inline-flex h-10 w-12 shrink-0 items-center justify-center gap-2 border border-brand-navy bg-brand-navy text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:bg-brand-navy-secondary disabled:cursor-wait disabled:opacity-70 md:h-11 md:w-auto md:px-4"
               >
                 <span className="hidden md:inline">{sending ? "Sending" : "Send"}</span>
