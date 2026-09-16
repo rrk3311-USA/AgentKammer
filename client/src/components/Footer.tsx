@@ -26,7 +26,7 @@ export function Footer() {
   const [langsOpen, setLangsOpen] = useState(false);
 
   return (
-    <footer className="border-t border-brand-border bg-brand-ivory text-brand-graphite">
+    <footer className="border-t border-brand-border bg-brand-ivory pb-24 text-brand-graphite">
       <div className="mx-auto w-full max-w-site px-6 py-8 lg:px-10 lg:py-10">
         <div className="min-w-0">
           <h3 className="font-display text-[clamp(1.5rem,3vw,1.85rem)] leading-[0.95] text-brand-navy">
