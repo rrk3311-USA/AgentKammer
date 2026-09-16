@@ -18,6 +18,7 @@ Manhattan housing advisory site — Decision OS product surface.
 | `shared/` | Drizzle schema + CRM pipeline |
 | `content/` | Building-report markdown + knowledge graph |
 | `docs/` | Live architecture/product docs (`docs/archive/` = historical) |
+| `docs/product/PAY-TO-RUN-TOOLS.md` | Unlisted Tools desk + credits wallet (off primary nav) |
 | `docs/brand/` | Canonical brand operating manual |
 | `brand/` | Brand asset drop zone (production logos live in `client/public/brand/`) |
 

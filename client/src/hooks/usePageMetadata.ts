@@ -6,6 +6,7 @@ type PageMetadata = {
   path?: string;
   keywords?: string;
   locale?: string;
+  robots?: string;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
 };
 
@@ -60,7 +61,7 @@ function clearStructuredData() {
   document.getElementById("page-structured-data")?.remove();
 }
 
-export function usePageMetadata({ title, description, path, keywords, locale = "en", structuredData }: PageMetadata) {
+export function usePageMetadata({ title, description, path, keywords, locale = "en", robots, structuredData }: PageMetadata) {
   useEffect(() => {
     const fullTitle = title.includes("Agent Kammer") ? title : `${title} | Agent Kammer`;
 
@@ -77,6 +78,12 @@ export function usePageMetadata({ title, description, path, keywords, locale = "
       removeMeta("name", "keywords");
     }
 
+    if (robots) {
+      upsertMeta("name", "robots", robots);
+    } else {
+      removeMeta("name", "robots");
+    }
+
     if (path) {
       const url = `https://www.agentkammer.com${path}`;
       upsertMeta("property", "og:url", url);
@@ -90,5 +97,5 @@ export function usePageMetadata({ title, description, path, keywords, locale = "
     } else {
       clearStructuredData();
     }
-  }, [title, description, path, keywords, locale, structuredData]);
+  }, [title, description, path, keywords, locale, robots, structuredData]);
 }

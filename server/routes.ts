@@ -41,6 +41,7 @@ import { sendVisitorPinEmail } from "./lib/send-visitor-email";
 import { processDecisionGuideTurn } from "./lib/advisory/profile-service";
 import { registerAdvisoryAdminRoutes } from "./lib/advisory/admin-routes";
 import { registerBuyerIntelAdminRoutes, registerBuyerIntelPublicRoutes } from "./lib/buyer-intel/admin-routes";
+import { registerToolsRoutes } from "./lib/tools/routes";
 import {
   getClientProfileByEmail,
   getClientProfileByVisitorId,
@@ -2367,4 +2368,5 @@ export async function registerRoutes(app: Express): Promise<void> {
   registerAdvisoryAdminRoutes(app, requireAdmin);
   registerBuyerIntelAdminRoutes(app, requireAdmin);
   registerBuyerIntelPublicRoutes(app);
+  registerToolsRoutes(app);
 }

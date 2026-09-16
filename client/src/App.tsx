@@ -52,6 +52,8 @@ const MortgageClauses = lazy(() => import("@/pages/MortgageClauses"));
 const ManhattanExplained = lazy(() => import("@/pages/ManhattanExplained"));
 const LiensEasements = lazy(() => import("@/pages/LiensEasements"));
 const Guides = lazy(() => import("@/pages/Guides"));
+const ToolsHome = lazy(() => import("@/pages/tools/ToolsHome"));
+const LivabilityTool = lazy(() => import("@/pages/tools/LivabilityTool"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 function Redirect({ to }: { to: string }) {
@@ -146,6 +148,8 @@ function Router() {
       <Route path="/guides/manhattan-explained" component={ManhattanExplained} />
       <Route path="/guides/liens-easements" component={LiensEasements} />
       <Route path="/guides" component={Guides} />
+      <Route path="/tools/livability" component={LivabilityTool} />
+      <Route path="/tools" component={ToolsHome} />
       <Route path="/account" component={Account} />
       <Route path="/hub/roadmap" component={HubRoadmap} />
       <Route path="/hub/conversations" component={HubConversations} />

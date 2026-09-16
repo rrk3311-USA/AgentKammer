@@ -633,3 +633,4 @@ export const auditLogs = pgTable("audit_logs", {
 export type AuditLog = typeof auditLogs.$inferSelect;
 
 export * from "./schema-buyer-intel";
+export * from "./schema-tools";
