@@ -64,7 +64,7 @@ export function AgentKammerHorizontalLogo({
               stacked
                 ? "text-[0.6rem] tracking-[0.28em]"
                 : headerStyle
-                  ? "mt-1.5 text-[0.58rem] tracking-[0.16em] sm:text-[0.62rem]"
+                  ? "mt-1.5 whitespace-nowrap text-[0.5rem] tracking-[0.1em] sm:text-[0.62rem] sm:tracking-[0.16em]"
                   : "text-[0.46rem] tracking-[0.22em] sm:text-[0.5rem]",
               accentTone,
             )}
