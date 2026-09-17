@@ -1,20 +1,9 @@
 import { useEffect, useState } from "react";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { ROADMAP_MILESTONES } from "@shared/client-profile";
+import { publicMilestoneChecks } from "@shared/get-qualified";
 import { fetchHubSnapshot, HubShell, type HubSnapshot } from "./HubShell";
-
-const STAGE_INDEX: Record<string, number> = {
-  anonymous: 0,
-  engaged: 0,
-  profiled: 0,
-  qualified: 2,
-  call_ready: 1,
-  advisory_client: 3,
-  transaction_ready: 4,
-  active_client: 5,
-  closed: 5,
-  long_term_nurture: 0,
-};
+import { QualifySubstatus } from "./HubStanding";
 
 export default function HubRoadmap() {
   usePageMetadata({
@@ -29,14 +18,20 @@ export default function HubRoadmap() {
     void fetchHubSnapshot().then(setHub);
   }, []);
 
-  const active = STAGE_INDEX[hub?.roadmapMilestone || "anonymous"] ?? 0;
+  const checks = publicMilestoneChecks({
+    roadmapMilestone: hub?.roadmapMilestone,
+    strategySessionHeld: hub?.strategySessionHeld,
+  });
 
   return (
     <HubShell title="Where things stand" description="Six checkpoints. Not a sales funnel.">
+      <div className="mb-8 max-w-xl">
+        <QualifySubstatus hub={hub} />
+      </div>
       <ol className="space-y-0">
         {ROADMAP_MILESTONES.map((milestone, index) => {
-          const done = index < active;
-          const current = index === active;
+          const done = checks[index];
+          const current = !done && checks.slice(0, index).every(Boolean);
           return (
             <li
               key={milestone}

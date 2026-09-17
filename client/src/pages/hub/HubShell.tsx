@@ -62,12 +62,20 @@ export function HubShell({
 
 export type HubSnapshot = {
   visitorId: string;
+  email?: string | null;
+  displayName?: string | null;
   currentObjective: string;
   timeline: string | null;
   nextRecommendedStep: string;
   conversationSummary: string | null;
   upcomingReview: { date: string; summary: string } | null;
   roadmapMilestone: string;
+  getQualifiedComplete?: boolean;
+  sessionBooked?: boolean;
+  strategySessionHeld?: boolean;
+  qualifyRoute?: "raphi_calendar" | "diego_handoff" | "nurture" | null;
+  calendarUrl?: string | null;
+  diegoUrl?: string | null;
   goals: Array<{ id: string; goal: string; status: string }>;
   saved: Array<{ id: string; type: string; title: string; path: string | null }>;
   reviews: Array<{

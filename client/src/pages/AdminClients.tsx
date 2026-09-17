@@ -442,6 +442,20 @@ export default function AdminClients() {
                     </button>
                     <button
                       type="button"
+                      className="ak-admin-btn ak-admin-btn-ghost"
+                      title="Flips Hub trophy #2 only. Get Qualified submit never does this."
+                      onClick={async () => {
+                        await fetch(`/api/admin/clients/${c.id}/strategy-session`, {
+                          method: "POST",
+                          headers: authHeaders(token!),
+                        });
+                        await loadDetail(token!, c.id);
+                      }}
+                    >
+                      Mark Strategy Session held
+                    </button>
+                    <button
+                      type="button"
                       className="ak-admin-btn ak-admin-btn-danger"
                       onClick={async () => {
                         await fetch(`/api/admin/clients/${c.id}/lifecycle`, {

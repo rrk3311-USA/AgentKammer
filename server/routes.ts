@@ -50,6 +50,9 @@ import {
   rowToClientProfile,
 } from "./lib/advisory/repository";
 import { rateLimit } from "./lib/advisory/rate-limit";
+import { resolveHubProgress, submitGetQualified, updateQualifyFlags } from "./lib/get-qualified";
+import { buildProgressCookieHeader, unsignProgress } from "./lib/hub-progress-cookie";
+import { nextStepForRoute } from "@shared/get-qualified";
 
 // Initialize Resend client only if API key is available
 let resend: Resend | null = null;
@@ -2008,6 +2011,78 @@ export async function registerRoutes(app: Express): Promise<void> {
     }
   });
 
+  // Get Qualified — own table, not contact_submissions
+  app.post("/api/qualify", async (req, res) => {
+    try {
+      const visitorId = getOrCreateVisitorId(req, res);
+      const outcome = await submitGetQualified({
+        body: req.body,
+        visitorId,
+        querySource: req.query?.source,
+      });
+      if (!outcome.ok) {
+        return res.status(outcome.status).json({ ok: false, error: outcome.error });
+      }
+      res.setHeader("Set-Cookie", buildProgressCookieHeader(outcome.result.cookie));
+      res.json({
+        ok: true,
+        id: outcome.result.id,
+        persisted: outcome.result.persisted,
+        processPdfSent: outcome.result.processPdfSent,
+        hubCreated: outcome.result.hubCreated,
+        route: outcome.result.route,
+        status: outcome.result.status,
+        progress: outcome.result.progress,
+        nextStep: outcome.result.nextStep,
+        hubPath: outcome.result.hubPath,
+        calendarUrl: outcome.result.calendarUrl,
+        diegoUrl: outcome.result.diegoUrl,
+        processPdfPath: outcome.result.processPdfPath,
+      });
+    } catch (error) {
+      console.error("[qualify] submit failed", error);
+      res.status(500).json({ ok: false, error: "Could not save those details. Please try again." });
+    }
+  });
+
+  app.post("/api/qualify/session", async (req, res) => {
+    try {
+      const cookie = unsignProgress(readCookie(req.headers.cookie, "ak_hub_progress"));
+      const email =
+        (typeof req.body?.email === "string" && req.body.email.trim()) || cookie?.e || "";
+      if (!email) {
+        return res.status(400).json({ ok: false, error: "Email is required to record a booking." });
+      }
+      const updated = await updateQualifyFlags({
+        email,
+        sessionBooked: true,
+        status: "booked",
+      });
+      const progress = {
+        getQualifiedComplete: true,
+        sessionBooked: true,
+        strategySessionHeld: updated?.strategySessionHeld ?? Boolean(cookie?.ssh),
+        qualifyRoute: updated?.route ?? cookie?.qr ?? null,
+      };
+      res.setHeader(
+        "Set-Cookie",
+        buildProgressCookieHeader({
+          e: email.trim().toLowerCase(),
+          n: cookie?.n,
+          gq: true,
+          sb: true,
+          ssh: progress.strategySessionHeld,
+          qr: progress.qualifyRoute,
+          at: new Date().toISOString(),
+        }),
+      );
+      res.json({ ok: true, progress });
+    } catch (error) {
+      console.error("[qualify] session hook failed", error);
+      res.status(500).json({ ok: false, error: "Could not record the booking hook." });
+    }
+  });
+
   // Contact form endpoint
   app.post("/api/contact", async (req, res) => {
     try {
@@ -2297,52 +2372,83 @@ export async function registerRoutes(app: Express): Promise<void> {
     }
   });
 
-  // Lightweight client hub snapshot (email+PIN session or visitor cookie)
+  // Lightweight client hub snapshot (email+PIN session, visitor cookie, or Get Qualified progress)
   app.get("/api/hub/snapshot", async (req, res) => {
     try {
       const visitorId = readCookie(req.headers.cookie, "ak_visitor_id");
       const authHeader = req.headers.authorization;
       const bearer = authHeader?.startsWith("Bearer ") ? authHeader.slice(7) : null;
       const memberToken = bearer || readCookie(req.headers.cookie, "ak_member_token");
+      const progressCookie = unsignProgress(readCookie(req.headers.cookie, "ak_hub_progress"));
 
-      let email: string | null = null;
+      let email: string | null = progressCookie?.e || null;
+      let memberId: string | null = null;
+      let memberName: string | null = progressCookie?.n || null;
       if (memberToken) {
         const member = await storage.getMemberProfileByAccessToken(memberToken);
-        if (member) email = member.email;
+        if (member) {
+          email = member.email;
+          memberId = member.id;
+          memberName = member.displayName;
+        }
       }
+
+      const progress = await resolveHubProgress({
+        email,
+        memberId,
+        cookie: progressCookie,
+      });
 
       const byVisitor = visitorId ? await getClientProfileByVisitorId(visitorId) : null;
       const byEmail = !byVisitor && email ? await getClientProfileByEmail(email) : null;
       const resolved = byVisitor || byEmail;
-      if (!resolved) {
+
+      if (!resolved && !progress.getQualifiedComplete) {
         return res.status(404).json({
           error: "No housing profile yet. Start the Decision Guide to begin.",
           visitorId: visitorId || null,
         });
       }
 
-      const profile = rowToClientProfile(resolved);
-      const [goals, saved, reviews] = await Promise.all([
-        listGoals(resolved.id),
-        listSavedItems(resolved.id),
-        listAdvisorReviews(resolved.id),
-      ]);
+      const profile = resolved ? rowToClientProfile(resolved) : null;
+      const [goals, saved, reviews] = resolved
+        ? await Promise.all([
+            listGoals(resolved.id),
+            listSavedItems(resolved.id),
+            listAdvisorReviews(resolved.id),
+          ])
+        : [[], [], []];
+
+      const qualifyNext = progress.qualifyRoute ? nextStepForRoute(progress.qualifyRoute) : null;
 
       // Never expose lead score or internal notes to the customer hub
       res.json({
         hub: {
-          visitorId: profile.visitorId,
-          currentObjective: profile.desiredOutcome || profile.situation || "Clarify what is changing",
-          timeline: profile.timeline || null,
-          nextRecommendedStep: profile.nextRecommendedAction || "Ask another question in the Decision Guide",
-          conversationSummary: profile.lastConversationSummary || null,
+          visitorId: profile?.visitorId || visitorId || "qualify",
+          email: email || null,
+          displayName: memberName || profile?.firstName || null,
+          currentObjective: progress.getQualifiedComplete
+            ? "Your plan is waiting"
+            : profile?.desiredOutcome || profile?.situation || "Clarify what is changing",
+          timeline: profile?.timeline || null,
+          nextRecommendedStep:
+            qualifyNext ||
+            profile?.nextRecommendedAction ||
+            "Ask another question in the Decision Guide",
+          conversationSummary: profile?.lastConversationSummary || null,
           upcomingReview: reviews[0]
             ? {
                 date: reviews[0].nextReviewDate || reviews[0].reviewDate,
                 summary: reviews[0].clientVisibleSummary,
               }
             : null,
-          roadmapMilestone: profile.lifecycleStage,
+          roadmapMilestone: profile?.lifecycleStage || "exploring",
+          getQualifiedComplete: progress.getQualifiedComplete,
+          sessionBooked: progress.sessionBooked,
+          strategySessionHeld: progress.strategySessionHeld,
+          qualifyRoute: progress.qualifyRoute,
+          calendarUrl: progress.qualifyRoute === "raphi_calendar" ? process.env.RAPHI_CALENDAR_URL || null : null,
+          diegoUrl: progress.qualifyRoute === "diego_handoff" ? process.env.DIEGO_ELLIMAN_URL || null : null,
           goals: goals.map((g) => ({ id: g.id, goal: g.goal, status: g.status })),
           saved: saved.map((s) => ({
             id: s.id,
