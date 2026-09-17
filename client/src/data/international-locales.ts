@@ -170,7 +170,7 @@ export const LOCALE_PACKS: Record<string, InternationalLocalePack> = {
       mistakesEyebrow: "Common mistakes",
       mistakesTitle: "What to avoid before you offer",
       teamEyebrow: "Your team",
-      teamTitle: "Who helps you decide. And close",
+      teamTitle: "Who helps you decide, and close",
       teamDescription: "Manhattan purchases are attorney-led. We coordinate the advisory layer so structure, neighborhood fit, and timeline stay aligned.",
       resourcesEyebrow: "Resources",
       resourcesTitle: "Go deeper before you commit",

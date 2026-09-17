@@ -143,7 +143,7 @@ const byPath: Record<string, Partial<PageEngagement>> = {
     headline: "The words listings use",
     nudge: "I can tell you which terms belong to a co-op, a condo, or a condop portion.",
     greeting:
-      "Listings mix co-op, condo, and condop language. Which word is confusing you. Board package, maintenance, offering plan, or condop?",
+      "Listings mix co-op, condo, and condop language. Which word is confusing you: board package, maintenance, offering plan, or condop?",
     pageHelper: "You're in the terms brief. Name a listing phrase and I'll map it to the structure it actually belongs to.",
     starters: [
       { label: "Condo vs co-op", text: "Start with the ownership difference.", path: "/situations/condo-vs-coop" },
@@ -202,7 +202,7 @@ const byPath: Record<string, Partial<PageEngagement>> = {
   "/belonging": {
     headline: "Belonging Assessment",
     nudge: "The assessment helps clarify fit. Want me to interpret what your answers mean for next steps?",
-    greeting: "Belonging is about whether Manhattan. And which part. Will actually work for your life. What's prompting the assessment?",
+    greeting: "Belonging is about whether Manhattan (and which part) will actually work for your life. What's prompting the assessment?",
   },
   "/advisory": {
     headline: "Advisory, not inventory",

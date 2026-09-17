@@ -171,7 +171,7 @@ export const serviceLandings: ServiceLanding[] = [
     depthNotes: [
       "Filter for buildings with strong door culture, lighting, and practical security without over-indexing on marketing language.",
       "Balance autonomy and privacy against co-op board process risk when timing matters.",
-      "Keep the brief on daily life fit. Commute, storage, guests. Before aesthetic preference expands the tour list.",
+      "Keep the brief on daily life fit (commute, storage, guests) before aesthetic preference expands the tour list.",
     ],
     cta: "Build a confident NYC buying brief.",
   },
@@ -408,7 +408,7 @@ export const serviceLandings: ServiceLanding[] = [
     ],
     considerations: [
       "Name the structure first: deed plus common elements, or shares plus a proprietary lease.",
-      "Read the building as an asset. Financials, house rules, assessments. Before competing for a particular unit.",
+      "Read the building as an asset (financials, house rules, assessments) before competing for a particular unit.",
       "Match how you will actually live and leave: board interviews, pied-à-terre use, financing, and resale friction.",
     ],
     depthNotes: [
@@ -1036,7 +1036,7 @@ export const serviceLandings: ServiceLanding[] = [
     considerations: [
       "Separate estate administration from the housing strategy for the property itself.",
       "Compare keep / sell / rent against carrying costs, family use, and tax advice.",
-      "Decide whether anyone should live there. And on what terms. Before marketing.",
+      "Decide whether anyone should live there, and on what terms, before marketing.",
     ],
     depthNotes: [
       "Confirm authority to decide: executor, co-heirs, or court timeline.",

@@ -116,9 +116,9 @@ export const perspectives: Perspective[] = [
       interpretation:
         "Expensive-feeling buildings usually mismatch usage: high infrastructure cost with low personal benefit, or prestige positioning without resident culture. The building charges for a bundle the client never unpacks.",
       implication:
-        "Separate the residence invoice from the building invoice before comparing. Ask which line items the client will actually consume. Service, amenities, address narrative. And which are vanity carry.",
+        "Separate the residence invoice from the building invoice before comparing. Ask which line items the client will actually consume (service, amenities, address narrative) and which are vanity carry.",
       conclusion:
-        "A building that feels expensive is sending a signal. The research task is to determine whether that signal is quality, overhead, or misalignment. Before the lease or purchase is signed.",
+        "A building that feels expensive is sending a signal. The research task is to determine whether that signal is quality, overhead, or misalignment, before the lease or purchase is signed.",
     },
   },
   {

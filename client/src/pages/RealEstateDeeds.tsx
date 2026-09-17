@@ -1019,7 +1019,7 @@ export default function RealEstateDeeds() {
                     key={item.step}
                     className="relative flex flex-col items-center text-center"
                   >
-                    {index < deliverySteps.length. 1 ? (
+                    {index < deliverySteps.length - 1 ? (
                       <div
                         className="pointer-events-none absolute left-[58%] top-7 hidden h-0.5 w-[84%] bg-brand-brass/50 sm:block"
                         aria-hidden

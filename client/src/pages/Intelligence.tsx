@@ -26,7 +26,7 @@ const briefs = [
     observation:
       "Buyers who start with apartments before geography burn weeks comparing incompatible lifestyles. UWS school logic, Tribeca loft scale, and FiDi commute convenience are different products.",
     implication:
-      "Lock a neighborhood thesis. Or a two-neighborhood band. Before touring. Building reports only become efficient after geography is narrowed.",
+      "Lock a neighborhood thesis, or a two-neighborhood band, before touring. Building reports only become efficient after geography is narrowed.",
     posture: "Choose geography first · Then study buildings",
   },
   {

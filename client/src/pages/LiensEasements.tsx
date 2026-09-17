@@ -519,7 +519,7 @@ export default function LiensEasements() {
               Focus on definitions. Understand the distinctions.
             </h2>
             <p className="mt-6 max-w-lg text-base leading-8 text-brand-ivory/75">
-              If you can sort claim vs right vs permission. And voluntary vs involuntary, general vs specific. Most
+              If you can sort claim vs right vs permission, and voluntary vs involuntary, general vs specific, most
               exam-style questions fall into place.
             </p>
           </div>
