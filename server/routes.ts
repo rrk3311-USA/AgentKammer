@@ -850,7 +850,7 @@ export async function registerRoutes(app: Express): Promise<void> {
               actionRules: {
                 open_page: "Recommend a page in the reply. Do not treat this as a forced redirect. Include a path from currentPage.related when possible.",
                 send_recap:
-                  "Use sparingly and late. Only after several useful exchanges and real guidance. Never in the first few turns. Frame as an optional note, not a lead capture. If no email or phone is known, invite gently in the reply.",
+                  "Use only after several educational, useful turns and real guidance. Never in turns 1 through 5. Never as a reason to collect contact. If they asked to save, continue later, or book, you may offer 'want this waiting for you?' If no email or phone is known, invite only then.",
                 update_blueprint: "Use when new trigger, desire, constraint, trade-off, email, or phone was learned.",
               },
             }),

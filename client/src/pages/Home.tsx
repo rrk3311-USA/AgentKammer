@@ -7,16 +7,16 @@ import { serviceLandingMap } from "@/data/service-landings";
 import { publicGuides } from "@/data/guides";
 
 const howWeDecide = [
-  { step: "01", title: "What's changing?", text: "Life event, pressure, or uncertainty - before neighborhoods or inventory." },
+  { step: "01", title: "What's changing?", text: "Name the life event, pressure, or uncertainty. Neighborhoods and inventory come later." },
   { step: "02", title: "Should anything change?", text: "Sometimes the highest-value recommendation is to do nothing." },
   { step: "03", title: "Where do you belong?", text: "Even if you stay, is the environment still serving the life you want?" },
 ];
 
 const startHere = [
-  { step: "01", title: "What's Changing?", text: "Name the life change - relocation, family, uncertainty - before listings take over." },
+  { step: "01", title: "What's Changing?", text: "Name the life change (relocation, family, uncertainty) before listings take over." },
   { step: "02", title: "Decision Assessment", text: "The diagnostic. Belonging, friction, and whether anything should change at all." },
   { step: "03", title: "Read the brief", text: "The editorial that matches your situation. Clarity before inventory." },
-  { step: "04", title: "Strategy when you want judgment", text: "A Housing Strategy Session and written next step - not a listing tour." },
+  { step: "04", title: "Strategy when you want judgment", text: "A Housing Strategy Session and a written next step. Not a listing tour." },
 ];
 
 const featuredBriefSlugs = [
@@ -59,7 +59,7 @@ export default function Home() {
               </p>
             </blockquote>
             <p className="mt-5 max-w-xl text-base leading-7 text-brand-graphite/82">
-              The job here is to diagnose that change and guide the highest expected-value decision - even if that means doing nothing - then curate the right local professionals when a transaction is appropriate.
+              The job here is to diagnose that change and recommend the highest expected-value decision, even if that means doing nothing. When a transaction is appropriate, we introduce the right local professionals.
             </p>
             <div className="mt-7">
               <button
@@ -73,7 +73,7 @@ export default function Home() {
                 </span>
                 <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
                 <span className="mt-3 flex items-center justify-between font-display text-2xl leading-none text-brand-ivory">
-                  Begin the decision
+                  Ask what's changing
                   <MoveRight className="h-5 w-5 text-brand-stone transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
                 </span>
               </button>
@@ -126,7 +126,7 @@ export default function Home() {
                 A clear path through the decision.
               </h2>
               <p className="mt-6 max-w-xl text-base leading-8 text-brand-graphite">
-                The journey map - not the diagnostic, not the brief, not the paid session. Four steps, no overlap.
+                Four steps, no overlap. This is the path. It is not the diagnostic, the brief, or the paid session.
               </p>
             </div>
             <Link
@@ -202,7 +202,7 @@ export default function Home() {
               The asset before the listing.
             </h2>
             <p className="mt-6 max-w-xl text-base leading-8 text-brand-ivory/74">
-              A knowledge resource - Building Reports that read quality, context, and fit, not marketing copy. Used only after the decision frame is clear.
+              Building Reports read quality, context, and fit, not marketing copy. We use them only after the decision frame is clear.
             </p>
           </div>
           <Link
@@ -255,7 +255,7 @@ export default function Home() {
       {/* 7 · Quiet close */}
       <CTA
         title="When you want a human reply."
-        description="Share what is changing. We will prescribe the right next step - Assessment, Snapshot, Report, or a quiet conversation."
+        description="Share what is changing. We will prescribe the right next step: Assessment, Snapshot, Report, or a quiet conversation."
         href="/contact"
         label="Request Intelligence"
         eyebrow="Request Intelligence"

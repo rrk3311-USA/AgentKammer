@@ -46,10 +46,10 @@ const deedTypes: {
   {
     title: "General Warranty Deed",
     summary:
-      "Strongest ordinary protection for a buyer - grantor warrants title against claims, including from prior owners.",
+      "Strongest ordinary protection for a buyer. Grantor warrants title against claims, including from prior owners.",
     points: [
       "Full covenants / warranties (scope varies by state form)",
-      "Most common in many U.S. home sales",
+      "Most common in many U.S. Home sales",
       "Buyer still relies on title search + title insurance",
     ],
     protection: "Best protection",
@@ -60,7 +60,7 @@ const deedTypes: {
   {
     title: "Special Warranty Deed",
     summary:
-      "Grantor warrants title only against claims arising during their ownership - not the full past chain.",
+      "Grantor warrants title only against claims arising during their ownership, not the full past chain.",
     points: [
       "Limited look-back vs general warranty",
       "Common in some commercial and investor sales",
@@ -74,7 +74,7 @@ const deedTypes: {
   {
     title: "Bargain and Sale Deed",
     summary:
-      "Standard New York residential form - conveys the grantor's interest. Arms-length NY sales usually use a bargain & sale deed with covenants against the grantor's acts.",
+      "Standard New York residential form. Conveys the grantor's interest. Arms-length NY sales usually use a bargain & sale deed with covenants against the grantor's acts.",
     points: [
       "With covenants ≈ limited warranty for the grantor's period",
       "Without covenants, protection is much thinner",
@@ -88,7 +88,7 @@ const deedTypes: {
   {
     title: "Quitclaim Deed",
     summary:
-      "Transfers whatever interest the grantor may have - with no warranties that title is good or even exists.",
+      "Transfers whatever interest the grantor may have. With no warranties that title is good or even exists.",
     points: [
       "Often used for family transfers or clearing clouds",
       "Does not prove the grantor owns clear title",
@@ -102,11 +102,11 @@ const deedTypes: {
   {
     title: "Special Purpose Deed",
     summary:
-      "Used for a specific job - correcting title, releasing a claim, or fulfilling a court/administrative need.",
+      "Used for a specific job. Correcting title, releasing a claim, or fulfilling a court/administrative need.",
     points: [
       "Examples: correction deed, release deed, executor deed variants",
       "Warranties depend on the form and purpose",
-      "Situational - not a default purchase deed",
+      "Situational, not a default purchase deed",
     ],
     protection: "Situational use",
     tone: "situational",
@@ -116,7 +116,7 @@ const deedTypes: {
   {
     title: "Sheriff's / Referee's Deed",
     summary:
-      "Issued through foreclosure or court sale - transfers only the interest that can be conveyed in that proceeding.",
+      "Issued through foreclosure or court sale. Transfers only the interest that can be conveyed in that proceeding.",
     points: [
       "Buyer beware: limited or no warranties",
       "Title defects and liens may still matter",
@@ -148,7 +148,7 @@ const deedParts = [
   {
     title: "Consideration",
     detail:
-      'Value exchanged is usually recited - price, or "love and affection," etc.',
+      'Value exchanged is usually recited. Price, or "love and affection," etc.',
     icon: Scale,
   },
   {
@@ -159,7 +159,7 @@ const deedParts = [
   },
   {
     title: "Covenants / warranties",
-    detail: "Promises about title - if any - made by the grantor",
+    detail: "Promises about title. If any. Made by the grantor",
     icon: Shield,
   },
   {
@@ -255,7 +255,7 @@ const nycNotes = [
   {
     title: "Attorney-driven closings",
     detail:
-      "New York residential deals are typically lawyer-led. The deed form is reviewed with counsel - usually a bargain & sale deed with covenants against the grantor's acts, not a general warranty deed.",
+      "New York residential deals are typically lawyer-led. The deed form is reviewed with counsel. Usually a bargain & sale deed with covenants against the grantor's acts, not a general warranty deed.",
   },
   {
     title: "Recording is not optional in practice",
@@ -265,17 +265,17 @@ const nycNotes = [
   {
     title: "Title search + title insurance",
     detail:
-      "The deed transfers only what the grantor can convey. Title diligence and an owner's title policy are how buyers manage hidden liens and defects - even with a strong deed form.",
+      "The deed transfers only what the grantor can convey. Title diligence and an owner's title policy are how buyers manage hidden liens and defects. Even with a strong deed form.",
   },
   {
     title: "Co-ops are different",
     detail:
-      "Co-op transfers are usually stock/share certificates plus a proprietary lease assignment - not a condo- or house-style deed for the unit itself.",
+      "Co-op transfers are usually stock/share certificates plus a proprietary lease assignment, not a condo- or house-style deed for the unit itself.",
   },
 ] as const;
 
 const specialNotes = [
-  "Understand the deed type before you sign - warranties are not all equal.",
+  "Understand the deed type before you sign. Warranties are not all equal.",
   "Quitclaim is a tool, not a substitute for clear marketable title on a purchase.",
   "Always run (or update) a title search before relying on ownership.",
   "Recording protects against later conflicting claims; delay creates risk.",
@@ -283,10 +283,10 @@ const specialNotes = [
 
 const takeaways = [
   "Deed = the instrument that transfers title",
-  "Warranties vary by deed type - read the form",
+  "Warranties vary by deed type. Read the form",
   "In NY, bargain & sale (often with grantor's-acts covenants) + title insurance is the common stack",
   "Delivery usually transfers between the parties; recording protects against the world",
-  "Use counsel - especially for NYC condo, co-op, and entity titles",
+  "Use counsel. Especially for NYC condo, co-op, and entity titles",
 ] as const;
 
 function SectionLabel({
@@ -686,7 +686,7 @@ function DeedScrollIllustration({ className }: { className?: string }) {
           <rect
             x="74"
             y={93 + i * 24}
-            width={120 - (i % 3) * 12}
+            width={120. (i % 3) * 12}
             height="6"
             rx="2"
             fill="#0f1c2e"
@@ -808,7 +808,7 @@ export default function RealEstateDeeds() {
   usePageMetadata({
     title: "How Real Estate Deeds Work",
     description:
-      "A clear guide to deed types, essential deed parts, delivery and recording, and New York nuances - educational overview for housing decisions.",
+      "A clear guide to deed types, essential deed parts, delivery and recording, and New York nuances. Educational overview for housing decisions.",
     path: "/guides/real-estate-deeds",
   });
 
@@ -832,7 +832,7 @@ export default function RealEstateDeeds() {
               <span className="font-semibold text-brand-navy">grantor</span>) to
               another (the{" "}
               <span className="font-semibold text-brand-navy">grantee</span>).
-              Educational overview only - not legal advice. Confirm forms and
+              Educational overview only. Not legal advice. Confirm forms and
               recording with counsel in the property's jurisdiction.
             </p>
           </div>
@@ -1063,7 +1063,7 @@ export default function RealEstateDeeds() {
                 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-700"
                 strokeWidth={1.5}
               />
-              Signing alone is not enough - delivery (with intent) usually
+              Signing alone is not enough. Delivery (with intent) usually
               transfers between the parties; recording protects you against
               later claimants without notice.
             </div>
@@ -1235,7 +1235,7 @@ export default function RealEstateDeeds() {
                 </p>
               </div>
               <p className="mt-3 text-sm leading-6 text-brand-ivory/90">
-                Prefer the market-standard deed form for your jurisdiction - and
+                Prefer the market-standard deed form for your jurisdiction. And
                 always record. In New York that is often a bargain & sale deed
                 with covenants against the grantor's acts, backed by title
                 search and title insurance.

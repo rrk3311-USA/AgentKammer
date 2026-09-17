@@ -39,7 +39,7 @@ const defaultLabels: Required<StrategyFormLabels> = {
   subhead:
     "Tell us about your situation. We'll review your goals and recommend the most appropriate next step.",
   specialistPromise:
-    "After you submit, a specialist who speaks your language will get in touch to review your goals and recommend the right next step - the beginning of a consultation, not an automated sales pitch.",
+    "After you submit, a specialist who speaks your language will get in touch to review your goals and recommend the right next step. The beginning of a consultation, not an automated sales pitch.",
   submitLabel: ENGLISH_UI.submitLabel,
   formEyebrow: ENGLISH_UI.formEyebrow,
   successEyebrow: ENGLISH_UI.successEyebrow,

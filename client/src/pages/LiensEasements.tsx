@@ -14,7 +14,7 @@ const quickAnswers = [
     q: "Architects hired, unpaid, and filed a claim for services?",
     a: "Mechanic's / construction lien (where statute allows design professionals)",
   },
-  { q: "Lien created by the owner's agreement (e.g. mortgage)?", a: "Voluntary lien" },
+  { q: "Lien created by the owner's agreement (e.g. Mortgage)?", a: "Voluntary lien" },
   { q: "Lien created by law without the owner's consent?", a: "Involuntary lien" },
   { q: "Lien that can reach multiple assets of the debtor?", a: "General lien" },
   { q: "Lien that attaches only to a particular property?", a: "Specific lien" },
@@ -131,7 +131,7 @@ const reminders = [
   {
     title: "Tax liens",
     detail:
-      "Property tax liens are typically involuntary and specific. Broader 'tax lien' exam language sometimes means a general federal tax lien - read the question.",
+      "Property tax liens are typically involuntary and specific. Broader 'tax lien' exam language sometimes means a general federal tax lien. Read the question.",
   },
   {
     title: "Mechanic's liens",
@@ -147,7 +147,7 @@ const reminders = [
 const memoryTips = [
   "Property tax lien: involuntary + specific (usually superior priority)",
   "Federal / many judgment liens: can be general",
-  "Lis pendens: notice of pending litigation - not itself a money lien",
+  "Lis pendens: notice of pending litigation, not itself a money lien",
   "Mechanic's lien: unpaid labor or materials that improved the property",
   "Easement: right to use (interest in land)",
   "License: permission (usually personal / revocable)",
@@ -193,7 +193,7 @@ export default function LiensEasements() {
   usePageMetadata({
     title: "Liens, Easements & Related Concepts",
     description:
-      "A clear guide to voluntary and involuntary liens, easement types, easement vs license, lis pendens, and encumbrances - educational overview.",
+      "A clear guide to voluntary and involuntary liens, easement types, easement vs license, lis pendens, and encumbrances. Educational overview.",
     path: "/guides/liens-easements",
   });
 
@@ -253,7 +253,7 @@ export default function LiensEasements() {
           <div className="mt-8 space-y-6 text-[17px] leading-8 text-brand-graphite lg:mt-0">
             <p>
               Liens secure money claims. Easements create rights to use land. Licenses grant permission. Encumbrance is
-              the umbrella word for burdens on title or use. Educational overview only - not legal advice. State rules
+              the umbrella word for burdens on title or use. Educational overview only. Not legal advice. State rules
               (especially mechanic's liens and prescription periods) vary.
             </p>
             <p>
@@ -519,7 +519,7 @@ export default function LiensEasements() {
               Focus on definitions. Understand the distinctions.
             </h2>
             <p className="mt-6 max-w-lg text-base leading-8 text-brand-ivory/75">
-              If you can sort claim vs right vs permission - and voluntary vs involuntary, general vs specific - most
+              If you can sort claim vs right vs permission, and voluntary vs involuntary, general vs specific, most
               exam-style questions fall into place.
             </p>
           </div>

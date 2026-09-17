@@ -60,12 +60,12 @@ export const decisionNavigationGroups: DecisionNavGroup[] = [
   },
   {
     title: "What Are You Trying to Understand?",
-    description: "Evidence and structure once the life change and decision path are named - buildings, ownership types, and research.",
+    description: "Evidence and structure once the life change and decision path are named. Buildings, ownership types, and research.",
     items: understandItems,
   },
   {
     title: "Life Changes",
-    description: "Alias of What's Changing? - kept for older links and library search synonyms.",
+    description: "Alias of What's Changing?. Kept for older links and library search synonyms.",
     items: whatsChangingItems,
   },
   {
@@ -83,7 +83,7 @@ export const decisionNavigationGroups: DecisionNavGroup[] = [
   },
   {
     title: "Building Intelligence Library",
-    description: "A knowledge resource - buildings, neighborhoods, and market evidence after the decision model is clear.",
+    description: "A knowledge resource. Buildings, neighborhoods, and market evidence after the decision model is clear.",
     items: [
       { label: "Buildings", href: "/building-reports" },
       { label: "Neighborhoods", href: "/building-reports/neighborhood-guides" },

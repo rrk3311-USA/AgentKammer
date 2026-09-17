@@ -198,7 +198,7 @@ function AppShell() {
   }
 
   return (
-    <div className="min-h-screen bg-brand-charcoal pb-[calc(5.5rem+env(safe-area-inset-bottom))] text-brand-ink md:pb-[calc(5rem+env(safe-area-inset-bottom))]">
+    <div className="ak-app-shell min-h-screen bg-brand-charcoal text-brand-ink">
       <ScrollToTop />
       <VisitorSignals />
       <Header />

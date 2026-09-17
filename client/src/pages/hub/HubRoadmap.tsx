@@ -19,7 +19,7 @@ const STAGE_INDEX: Record<string, number> = {
 export default function HubRoadmap() {
   usePageMetadata({
     title: "Where things stand",
-    description: "A simple path from a clarified situation to a search in motion - at your pace.",
+    description: "A simple path from a clarified situation to a search in motion. At your pace.",
     path: "/hub/roadmap",
   });
 

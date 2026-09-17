@@ -12,7 +12,7 @@ const researchPaths = [
     href: "/international",
   },
   {
-    label: "Request a Curated Shortlist",
+    label: "Request a Building Shortlist",
     description: "A building-first shortlist mapped to your timeline.",
     href: "/contact",
   },

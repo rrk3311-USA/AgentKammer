@@ -2,33 +2,34 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
+import { openDecisionAssistant } from "@/lib/decision-assistant";
 
 const journey = [
   {
     step: "01",
     title: "What's Changing?",
-    text: "Name the life change - relocation, family, divorce, retirement, remote work, or simple uncertainty that has become expensive.",
+    text: "Name the life change: relocation, family, divorce, retirement, remote work, or simple uncertainty that has become expensive.",
     href: "/situations#whats-changing",
     cta: "Explore situations",
   },
   {
     step: "02",
     title: "Take the Decision Assessment",
-    text: "Build a Decision Profile: belonging, friction, and whether anything should change at all. This is the diagnostic - not a sales call.",
+    text: "Build a Decision Profile: belonging, friction, and whether anything should change at all. This is the diagnostic, not a sales call.",
     href: "/belonging",
     cta: "Start assessment",
   },
   {
     step: "03",
     title: "Read the relevant Decision Brief",
-    text: "Open the short editorial that matches your situation or the decision path you face - clarity before inventory.",
+    text: "Open the short editorial that matches your situation or the decision path you face. Clarity before inventory.",
     href: "/situations",
     cta: "Browse Decision Briefs",
   },
   {
     step: "04",
     title: "Receive your strategy",
-    text: "A Housing Strategy Session and written action summary - Decision Blueprint when the case warrants it. Memberships if guidance should continue.",
+    text: "A Housing Strategy Session and written action summary. Decision Blueprint when the case warrants it. Memberships if guidance should continue.",
     href: "/advisory",
     cta: "See advisory",
   },
@@ -44,7 +45,7 @@ const scenarios = [
   {
     title: "First Manhattan purchase",
     trigger: "Leaving a rental or another city without a building thesis yet.",
-    likely: "Neighborhood and ownership structure before apartment romance - condo vs co-op clarity early.",
+    likely: "Neighborhood and ownership structure before apartment romance. Condo vs co-op clarity early.",
     href: "/situations/first-home-buyers-nyc",
   },
   {
@@ -65,7 +66,7 @@ export default function Buy() {
   usePageMetadata({
     title: "Start Here",
     description:
-      "The Agent Kammer advisory journey: what's changing, Decision Assessment, Decision Brief, then strategy - before listings take over.",
+      "How we work: what's changing, Decision Assessment, Decision Brief, then strategy, before listings take over.",
     path: "/buyer-advisory",
   });
 
@@ -73,16 +74,24 @@ export default function Buy() {
     <main className="bg-brand-ivory">
       <PageHero
         eyebrow="Start Here"
-        title="A clear path through the decision - not another search."
-        description="Start Here is the journey map. The Decision Assessment is the diagnostic. Decision Briefs are the research. Strategy is the paid advisory layer. They are not the same step."
+        title="A clear path through the decision. Not another search."
+        description="Start Here is the path. The Decision Assessment is the diagnostic. Decision Briefs are the research. Strategy is the paid advisory layer. They are not the same step."
         art="decision-framework"
       />
 
       <PageSection>
+        <button
+          type="button"
+          onClick={openDecisionAssistant}
+          className="mb-10 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
+        >
+          Ask the Guidance Advisor
+          <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+        </button>
         <SectionHeading
-          eyebrow="Advisory Journey"
+          eyebrow="How We Work"
           title="Four steps. No overlap."
-          description="If you only remember one sequence: name what changed, take the assessment, read the brief that fits, then get a written strategy when you want judgment - not inventory."
+          description="If you only remember one sequence: name what changed, take the assessment, read the brief that fits, then get a written strategy when you want judgment, not inventory."
         />
         <div className="mt-12 border-y border-brand-border">
           {journey.map((step) => (
@@ -113,8 +122,8 @@ export default function Buy() {
         <PageSection>
           <SectionHeading
             eyebrow="Common Situations"
-            title="How the journey usually begins in practice."
-            description="Patterns - useful for recognizing which Decision Brief should come next after the assessment."
+            title="How the work usually begins in practice."
+            description="Patterns that help you recognize which Decision Brief should come next after the assessment."
           />
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             {scenarios.map((item) => (

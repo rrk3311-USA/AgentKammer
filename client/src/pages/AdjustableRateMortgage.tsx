@@ -52,7 +52,7 @@ const components = [
   {
     title: "Initial / start rate",
     detail:
-      "Rate during the introductory fixed period - frequently priced below a comparable fixed rate, but not always.",
+      "Rate during the introductory fixed period. Frequently priced below a comparable fixed rate, but not always.",
   },
   {
     title: "Caps",
@@ -253,8 +253,8 @@ export default function AdjustableRateMortgage() {
           </p>
           <p className="mt-4 max-w-3xl text-sm leading-6 text-brand-graphite">
             An adjustable-rate mortgage (ARM) keeps a fixed rate for an
-            introductory period, then adjusts based on an index plus a margin -
-            usually limited by caps. Educational overview only - not lending
+            introductory period, then adjusts based on an index plus a margin,
+            usually limited by caps. Educational overview only. Not lending
             advice.
           </p>
         </div>
@@ -589,7 +589,7 @@ export default function AdjustableRateMortgage() {
             strokeWidth={0}
           />
           <p className="text-[11px] font-semibold uppercase tracking-[0.16em] sm:text-[12px]">
-            Stability vs opportunity - pick with your timeline
+            Stability vs opportunity. Pick with your timeline
           </p>
         </footer>
 

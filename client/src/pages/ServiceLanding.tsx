@@ -13,7 +13,7 @@ function editorialCopy(landing: ServiceLanding) {
   const paragraphThree =
     landing.depthNotes?.[0] ??
     landing.considerations[landing.considerations.length - 1] ??
-    "The recommendation may be to buy, sell, rent, wait, renovate, or do nothing yet - whichever protects the client best.";
+    "The recommendation may be to buy, sell, rent, wait, renovate, or do nothing yet. Whichever protects the client best.";
 
   const quoteRaw =
     landing.depthNotes?.[1] ??
@@ -22,7 +22,7 @@ function editorialCopy(landing: ServiceLanding) {
 
   const recommendation =
     landing.depthNotes?.[landing.depthNotes.length - 1] ??
-    `For ${landing.navLabel.toLowerCase()}, begin with whether anything should change - then choose the path with the highest expected value.`;
+    `For ${landing.navLabel.toLowerCase()}, begin with whether anything should change. Then choose the path with the highest expected value.`;
 
   return { paragraphOne, paragraphTwo, paragraphThree, quote, recommendation };
 }
@@ -318,7 +318,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
 
       <CTA
         title="Request Intelligence."
-        description={`For ${landing.navLabel.toLowerCase()}, tell us the decision in front of you - Assessment, Snapshot, Report, or Dossier.`}
+        description={`For ${landing.navLabel.toLowerCase()}, tell us the decision in front of you. Assessment, Snapshot, Report, or Dossier.`}
         href="/contact"
         label="Request Intelligence"
         eyebrow="Request Intelligence"

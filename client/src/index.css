@@ -864,6 +864,16 @@
     @apply bg-brand-ivory font-sans text-body-lg text-brand-ink;
   }
 
+  html[data-advisor="open"] .ak-app-shell {
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+  }
+
+  @media (min-width: 768px) {
+    html[data-advisor="open"] .ak-app-shell {
+      padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+    }
+  }
+
   ::selection {
     background-color: rgb(15 23 42 / 0.12);
   }
