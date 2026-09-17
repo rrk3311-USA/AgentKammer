@@ -59,7 +59,7 @@ export default function Guides() {
   usePageMetadata({
     title: "Guides",
     description:
-      "Educational guides from Agent Kammer - ownership structures, marketing funnel, and international buyer decision frameworks.",
+      "Educational guides from Agent Kammer: ownership structures and international buyer decision frameworks.",
     path: "/guides",
   });
 
@@ -68,7 +68,7 @@ export default function Guides() {
       <PageHero
         eyebrow="Guides"
         title="Clear frameworks before listings."
-        description="Educational pages and shareable HTML guides — ownership, condo vs co-op, condop terms, and related decision frameworks."
+        description="Educational pages and shareable HTML guides: ownership, condo vs co-op, condop terms, and related decision frameworks."
         art="decision-framework"
       />
 

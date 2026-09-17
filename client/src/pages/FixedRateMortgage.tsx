@@ -259,7 +259,7 @@ export default function FixedRateMortgage() {
             term, so the scheduled principal & interest (P&I) payment stays
             level if you pay as agreed. Taxes, insurance, and HOA dues (and
             escrow for them) can still change your total monthly housing cost.
-            Educational overview only - not lending advice.
+            Educational overview only. Not lending advice.
           </p>
         </div>
       </header>
@@ -277,7 +277,7 @@ export default function FixedRateMortgage() {
                 does not reset with the market. Your{" "}
                 <span className="font-semibold text-brand-navy">P&I</span>{" "}
                 (principal and interest) stays the same each month if you pay on
-                schedule - even if market rates climb.
+                schedule. Even if market rates climb.
               </p>
             </div>
             <FixedPaymentChart />
@@ -489,7 +489,7 @@ export default function FixedRateMortgage() {
           <p className="text-[13px] leading-5 text-brand-navy/90">
             <span className="font-semibold">Memory:</span> Fixed = "fix it and
             forget it" for the rate. You still refinance if you want a lower
-            market rate later - the loan itself will not auto-adjust down.
+            market rate later. The loan itself will not auto-adjust down.
           </p>
         </aside>
 
@@ -499,7 +499,7 @@ export default function FixedRateMortgage() {
             strokeWidth={1.5}
           />
           <p className="text-[11px] font-semibold uppercase tracking-[0.16em] sm:text-[12px]">
-            Stability today and tomorrow - at the cost of flexibility
+            Stability today and tomorrow. At the cost of flexibility
           </p>
         </footer>
 

@@ -21,7 +21,7 @@ export const publicGuides: GuideEntry[] = [
   {
     title: "Condo vs Co-op",
     description:
-      "Decision Brief — what you own, what you pay, and what to check in the building before an offer.",
+      "Decision Brief. What you own, what you pay, and what to check in the building before an offer.",
     href: "/situations/condo-vs-coop",
     audience: "public",
     kind: "page",
@@ -29,7 +29,7 @@ export const publicGuides: GuideEntry[] = [
   {
     title: "Co-op, Condo & Condop Terms",
     description:
-      "Decision Brief — where board packages, maintenance, bylaws, and offering plans actually apply.",
+      "Decision Brief. Where board packages, maintenance, bylaws, and offering plans actually apply.",
     href: "/situations/coop-condo-condop-terms",
     audience: "public",
     kind: "page",
@@ -45,7 +45,7 @@ export const publicGuides: GuideEntry[] = [
   {
     title: "How Mortgages Work",
     description:
-      "Mortgage family tree - 15 types in five groups, with links to fixed, ARM, and clauses.",
+      "Mortgage family tree. 15 types in five groups, with links to fixed, ARM, and clauses.",
     href: "/guides/how-mortgages-work",
     audience: "public",
     kind: "page",
@@ -53,7 +53,7 @@ export const publicGuides: GuideEntry[] = [
   {
     title: "Fixed-Rate Mortgage",
     description:
-      "Same rate, same P&I - terms, amortization, pros & cons, and when fixed wins.",
+      "Same rate, same P&I. Terms, amortization, pros & cons, and when fixed wins.",
     href: "/guides/fixed-rate-mortgage",
     audience: "public",
     kind: "page",
@@ -77,7 +77,7 @@ export const publicGuides: GuideEntry[] = [
   {
     title: "Manhattan Explained",
     description:
-      "Neighborhood name origins - Dutch roots, forts, people & institutions, and street-map portmanteaus.",
+      "Neighborhood name origins. Dutch roots, forts, people & institutions, and street-map portmanteaus.",
     href: "/guides/manhattan-explained",
     audience: "public",
     kind: "page",
@@ -119,7 +119,7 @@ export const practiceGuides: GuideEntry[] = [
   {
     title: "Real Estate Marketing Funnel",
     description:
-      "From awareness to advocacy - the relationship-driven journey behind Agent Kammer.",
+      "From awareness to advocacy. The relationship-driven journey behind Agent Kammer.",
     href: "/admin/real-estate-marketing-funnel.html",
     audience: "practice",
     kind: "html",
@@ -135,7 +135,7 @@ export const practiceGuides: GuideEntry[] = [
   {
     title: "Pass the NY Salesperson Exam",
     description:
-      "Full internal study book - 10 volumes, 70 practice questions, 21-day plan, and trap dictionary.",
+      "Full internal study book. 10 volumes, 70 practice questions, 21-day plan, and trap dictionary.",
     href: "/admin/ny-salesperson-exam-pass.html",
     audience: "practice",
     kind: "html",

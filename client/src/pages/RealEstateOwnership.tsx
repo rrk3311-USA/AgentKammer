@@ -53,7 +53,7 @@ const businessEntities = [
   },
   {
     title: "Joint Venture",
-    detail: "Deal-specific collaboration - entity or contract",
+    detail: "Deal-specific collaboration. Entity or contract",
     icon: Users,
   },
 ] as const;
@@ -62,7 +62,7 @@ const estateForms = [
   {
     title: "Fee Simple Estate",
     detail:
-      "Greatest ownership interest - full control, subject to law & encumbrances",
+      "Greatest ownership interest. Full control, subject to law & encumbrances",
     icon: Home,
     badge: "Most complete",
   },
@@ -93,7 +93,7 @@ const propertyRights = [
     title: "Riparian rights",
     subtitle: "Rivers & streams",
     detail:
-      "Rights tied to land bordering flowing water - use is reasonable and shared, not absolute ownership of the water.",
+      "Rights tied to land bordering flowing water. Use is reasonable and shared, not absolute ownership of the water.",
     icon: Waves,
     art: "from-sky-100 via-sky-50 to-white",
     accent: "text-sky-800",
@@ -103,7 +103,7 @@ const propertyRights = [
     title: "Littoral rights",
     subtitle: "Lakes & seas",
     detail:
-      "Rights for land bordering navigable lakes or oceans - typically to the high-water mark (state rules vary).",
+      "Rights for land bordering navigable lakes or oceans. Typically to the high-water mark (state rules vary).",
     icon: Trees,
     art: "from-cyan-100 via-sky-50 to-white",
     accent: "text-cyan-900",
@@ -113,7 +113,7 @@ const propertyRights = [
     title: "Air rights",
     subtitle: "Space above",
     detail:
-      "Right to the airspace above the land - critical in dense cities where unused development rights can transfer.",
+      "Right to the airspace above the land. Critical in dense cities where unused development rights can transfer.",
     icon: Building2,
     art: "from-violet-100 via-violet-50 to-white",
     accent: "text-violet-900",
@@ -123,7 +123,7 @@ const propertyRights = [
     title: "Subsurface rights",
     subtitle: "Below the surface",
     detail:
-      "Rights beneath the surface (minerals, oil, gas, tunnels) - can be severed from surface ownership.",
+      "Rights beneath the surface (minerals, oil, gas, tunnels). Can be severed from surface ownership.",
     icon: Mountain,
     art: "from-amber-100 via-[#fbf6ec] to-white",
     accent: "text-amber-950",
@@ -134,7 +134,7 @@ const propertyRights = [
 const propertyTraits = [
   {
     title: "Immobility",
-    detail: "Land cannot be moved - location is fixed.",
+    detail: "Land cannot be moved. Location is fixed.",
     icon: MapPin,
   },
   {
@@ -149,7 +149,7 @@ const propertyTraits = [
   },
   {
     title: "Illiquid",
-    detail: "Not instantly sold - time, diligence, and capital required.",
+    detail: "Not instantly sold. Time, diligence, and capital required.",
     icon: Scale,
   },
   {
@@ -301,7 +301,7 @@ const entityExamples = [
     entity: "Individual",
     example: "John Doe buys a condo",
     works: "Title in personal name",
-    liability: "None - personal assets at risk",
+    liability: "None. Personal assets at risk",
     tax: "Reported on personal return",
   },
   {
@@ -362,12 +362,12 @@ const otherConcepts = [
   {
     title: "Tenancy by the Entirety",
     detail:
-      "Married spouses in many states (incl. NY) - survivorship + creditor nuances",
+      "Married spouses in many states (incl. NY). Survivorship + creditor nuances",
   },
   {
     title: "Trust (revocable / irrevocable)",
     detail:
-      "Trustee holds title for beneficiaries - estate planning, privacy, and control trade-offs",
+      "Trustee holds title for beneficiaries. Estate planning, privacy, and control trade-offs",
   },
   {
     title: "Endowment / Institution",
@@ -391,13 +391,13 @@ const nycOwnershipForms = [
   {
     title: "House / Townhouse",
     detail:
-      "Fee ownership of the structure and land (or lot interest) - classic fee-simple residential holding.",
+      "Fee ownership of the structure and land (or lot interest). Classic fee-simple residential holding.",
     tone: "brass" as const,
   },
   {
     title: "Leasehold condo / ground lease",
     detail:
-      "You own improvements or a unit interest, but land (or a long term) is leased - underwriting and exit can differ.",
+      "You own improvements or a unit interest, but land (or a long term) is leased. Underwriting and exit can differ.",
     tone: "sky" as const,
   },
 ] as const;
@@ -416,7 +416,7 @@ const missingLayers = [
   {
     title: "Foreign owners",
     detail:
-      "Non-U.S. buyers can usually purchase, but financing, FIRPTA on sale, and entity choice need specialist review.",
+      "Non-U.S. Buyers can usually purchase, but financing, FIRPTA on sale, and entity choice need specialist review.",
   },
   {
     title: "Guarantees & veil risks",
@@ -427,7 +427,7 @@ const missingLayers = [
 
 const quickCompare = [
   { entity: "Individual", liability: false, passThrough: true },
-  { entity: "Gen. partnership", liability: false, passThrough: true },
+  { entity: "Gen. Partnership", liability: false, passThrough: true },
   { entity: "LLC", liability: true, passThrough: true },
   { entity: "S-Corp", liability: true, passThrough: true },
   { entity: "C-Corp", liability: true, passThrough: false },
@@ -438,7 +438,7 @@ const takeaways = [
   "Estate = WHAT rights they have",
   "In NYC, condo / co-op / house change the ownership vehicle",
   "LLCs are most common for investment holdings",
-  "Separate property LLCs help isolate risk - if maintained",
+  "Separate property LLCs help isolate risk. If maintained",
   "Always confirm structure with a CPA + attorney",
 ] as const;
 
@@ -531,7 +531,7 @@ export default function RealEstateOwnership() {
   usePageMetadata({
     title: "How Real Estate Ownership Works",
     description:
-      "Entities, estates, property rights, fixtures, NYC condo/co-op ownership, and how title structures fit together - educational overview for housing decisions.",
+      "Entities, estates, property rights, fixtures, NYC condo/co-op ownership, and how title structures fit together. Educational overview for housing decisions.",
     path: "/guides/real-estate-ownership",
   });
 
@@ -549,7 +549,7 @@ export default function RealEstateOwnership() {
             Know it. Understand it. Own the decision.
           </p>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-brand-graphite">
-            Educational overview only - not legal, tax, or accounting advice.
+            Educational overview only. Not legal, tax, or accounting advice.
             Structure decisions with a qualified attorney and CPA.
           </p>
         </div>
@@ -829,7 +829,7 @@ export default function RealEstateOwnership() {
               </div>
             </div>
             <p className="border-t border-brand-navy/10 px-4 py-2.5 text-[12px] leading-5 text-brand-graphite">
-              Intent, method of attachment, and adaptation decide - write it
+              Intent, method of attachment, and adaptation decide. Write it
               into the contract when unsure.
             </p>
           </section>
@@ -903,7 +903,7 @@ export default function RealEstateOwnership() {
                   <li>• One class of stock</li>
                 </ul>
                 <p className="mt-3 border-t border-emerald-300/60 pt-3 text-[12px] font-semibold text-emerald-900">
-                  Best for: Active operating businesses - often a poor fit for
+                  Best for: Active operating businesses. Often a poor fit for
                   rental holdings
                 </p>
               </div>
@@ -923,7 +923,7 @@ export default function RealEstateOwnership() {
                   <li>• Multiple stock classes OK</li>
                 </ul>
                 <p className="mt-3 border-t border-sky-300/60 pt-3 text-[12px] font-semibold text-sky-900">
-                  Best for: Raising capital / institutional structures -
+                  Best for: Raising capital / institutional structures,
                   uncommon for simple rentals
                 </p>
               </div>
@@ -987,7 +987,7 @@ export default function RealEstateOwnership() {
                 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-700"
                 strokeWidth={1.5}
               />
-              If Property LLC #1 is sued, #2 and #3 are often protected - if
+              If Property LLC #1 is sued, #2 and #3 are often protected. If
               entities stay separate (no commingling, proper records; personal
               guarantees can still create exposure).
             </div>
@@ -1065,7 +1065,7 @@ export default function RealEstateOwnership() {
           </div>
           <p className="border-t border-brand-navy/10 bg-[#eef2f7] px-4 py-2.5 text-[12px] leading-5 text-brand-graphite">
             Entity choice (individual vs LLC) and product type (condo vs co-op)
-            are separate questions - both matter before you fall in love with a
+            are separate questions. Both matter before you fall in love with a
             unit.{" "}
             <Link
               href="/situations/condo-vs-coop"
@@ -1210,7 +1210,7 @@ export default function RealEstateOwnership() {
               </table>
             </div>
             <p className="border-t border-emerald-200 bg-emerald-50/60 px-4 py-2 text-[11px] leading-4 text-brand-graphite">
-              Defaults only - LLCs can elect corporate tax treatment; limited
+              Defaults only. LLCs can elect corporate tax treatment; limited
               partnerships differ from general partnerships.
             </p>
           </section>

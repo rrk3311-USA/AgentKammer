@@ -36,7 +36,7 @@ const groups: {
   {
     tone: "program",
     title: "Loan programs",
-    blurb: "Who backs or buys the loan - market conforming vs FHA/VA.",
+    blurb: "Who backs or buys the loan. Market conforming vs FHA/VA.",
   },
   {
     tone: "rate",
@@ -47,7 +47,7 @@ const groups: {
     tone: "payment",
     title: "Payment structure",
     blurb:
-      "How principal is repaid - fully amortizing, balloon, or interest-only.",
+      "How principal is repaid. Fully amortizing, balloon, or interest-only.",
   },
   {
     tone: "special",
@@ -89,7 +89,7 @@ const mortgageTypes: {
     n: 3,
     title: "VA",
     summary:
-      "Guaranteed by the Dept. of Veterans Affairs for eligible veterans, service members, and some surviving spouses - often $0 down.",
+      "Guaranteed by the Dept. Of Veterans Affairs for eligible veterans, service members, and some surviving spouses. Often $0 down.",
     tone: "program",
     icon: Flag,
   },
@@ -131,7 +131,7 @@ const mortgageTypes: {
     n: 8,
     title: "Blanket",
     summary:
-      "One loan secured by multiple properties - common for developers or investors.",
+      "One loan secured by multiple properties. Common for developers or investors.",
     tone: "special",
     icon: Layers,
   },
@@ -139,7 +139,7 @@ const mortgageTypes: {
     n: 9,
     title: "Package",
     summary:
-      "Finances real estate plus personal property (e.g. appliances) in one loan.",
+      "Finances real estate plus personal property (e.g. Appliances) in one loan.",
     tone: "special",
     icon: Package,
   },
@@ -163,7 +163,7 @@ const mortgageTypes: {
     n: 12,
     title: "Wrap-Around",
     summary:
-      'Seller financing that "wraps" an existing mortgage - high due-on-sale and counsel risk; uncommon today.',
+      'Seller financing that "wraps" an existing mortgage. High due-on-sale and counsel risk; uncommon today.',
     tone: "equity",
     icon: RefreshCw,
   },
@@ -179,7 +179,7 @@ const mortgageTypes: {
     n: 14,
     title: "Home Equity Loan (HEL)",
     summary:
-      "Lump-sum loan secured by home equity - often a second lien; typically fixed rate and fixed payments.",
+      "Lump-sum loan secured by home equity. Often a second lien; typically fixed rate and fixed payments.",
     tone: "equity",
     icon: Wallet,
   },
@@ -187,7 +187,7 @@ const mortgageTypes: {
     n: 15,
     title: "HELOC",
     summary:
-      "Revolving line of credit against equity - draw what you need during the draw period; rates are often variable.",
+      "Revolving line of credit against equity. Draw what you need during the draw period; rates are often variable.",
     tone: "equity",
     icon: CreditCard,
   },
@@ -196,7 +196,7 @@ const mortgageTypes: {
 const deepLinks = [
   {
     title: "Fixed-Rate Mortgage",
-    detail: "Same rate, same P&I - terms, amortization, pros & cons.",
+    detail: "Same rate, same P&I. Terms, amortization, pros & cons.",
     href: "/guides/fixed-rate-mortgage",
     icon: Lock,
   },
@@ -429,7 +429,7 @@ export default function RealEstateMortgages() {
   usePageMetadata({
     title: "How Mortgages Work",
     description:
-      "Mortgage family tree: conventional, FHA, VA, fixed, ARM, balloon, equity loans, and more - educational overview for housing decisions.",
+      "Mortgage family tree: conventional, FHA, VA, fixed, ARM, balloon, equity loans, and more. Educational overview for housing decisions.",
     path: "/guides/how-mortgages-work",
   });
 
@@ -456,9 +456,9 @@ export default function RealEstateMortgages() {
               creates the debt and the{" "}
               <span className="font-semibold text-brand-navy">mortgage</span>{" "}
               (or deed of trust, in some states) pledges the property as
-              collateral. Think in five groups - program, rate, payment shape,
-              special purpose, and equity tools - then drill into fixed, ARM,
-              and key clauses. Educational overview only - not lending or legal
+              collateral. Think in five groups. Program, rate, payment shape,
+              special purpose, and equity tools. Then drill into fixed, ARM,
+              and key clauses. Educational overview only. Not lending or legal
               advice.
             </p>
           </div>
@@ -500,7 +500,7 @@ export default function RealEstateMortgages() {
           <p className="border-t border-brand-navy/10 px-4 py-2.5 text-[12px] leading-5 text-brand-graphite">
             Note:{" "}
             <span className="font-semibold text-emerald-800">Conventional</span>{" "}
-            sits with FHA/VA as a loan <em>program</em> group - but it is{" "}
+            sits with FHA/VA as a loan <em>program</em> group. But it is{" "}
             <span className="font-semibold">not</span> government-insured. FHA
             is insured; VA is guaranteed.
           </p>
@@ -625,7 +625,7 @@ export default function RealEstateMortgages() {
                   <span className="font-semibold">rate</span>,{" "}
                   <span className="font-semibold">payment shape</span>,{" "}
                   <span className="font-semibold">special job</span>, or{" "}
-                  <span className="font-semibold">equity tool</span> - then ask
+                  <span className="font-semibold">equity tool</span>. Then ask
                   what problem it solves.
                 </p>
               </div>
@@ -648,7 +648,7 @@ export default function RealEstateMortgages() {
                 "Conventional ≠ government-backed; FHA insured / VA guaranteed",
                 "Fixed vs ARM is about rate risk over time",
                 "Equity products borrow against what you already own",
-                "Always read clauses - due-on-sale and acceleration matter",
+                "Always read clauses. Due-on-sale and acceleration matter",
               ].map((item) => (
                 <li
                   key={item}

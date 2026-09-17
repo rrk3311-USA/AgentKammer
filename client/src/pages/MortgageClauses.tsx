@@ -46,7 +46,7 @@ const clauses: {
     definition:
       "Lets the lender demand full repayment if ownership is sold or transferred.",
     trigger:
-      "Sale, transfer of title, or certain ownership changes - federal law recognizes limited exceptions (e.g. some transfers to a surviving spouse or into certain living trusts).",
+      "Sale, transfer of title, or certain ownership changes. Federal law recognizes limited exceptions (e.g. Some transfers to a surviving spouse or into certain living trusts).",
     effect:
       "Loan can be called due before the scheduled term ends when the property changes hands.",
     remember: "Alienation = ownership changes → loan can be due",
@@ -67,7 +67,7 @@ const clauses: {
   {
     title: "Prepayment Penalty",
     definition:
-      "Allows the lender to charge a fee if the borrower pays off or refinances early within a defined window. Less common on many modern qualified primary-residence loans - still check the note.",
+      "Allows the lender to charge a fee if the borrower pays off or refinances early within a defined window. Less common on many modern qualified primary-residence loans. Still check the note.",
     trigger:
       "Early payoff or refinance during a penalty period (if the loan includes one).",
     effect:
@@ -118,13 +118,13 @@ const glossary = [
     title: "Straight / interest-only",
     detail:
       "Payments cover interest during the term; principal is typically due at maturity.",
-    tip: "Interest now, principal later - different from a balloon that may amortize partially.",
+    tip: "Interest now, principal later. Different from a balloon that may amortize partially.",
   },
   {
     title: "Balloon mortgage",
     detail:
       'Payments for a period, then a large remaining principal ("balloon") is due at maturity.',
-    tip: "Some principal may be paid along the way - still a big end payment.",
+    tip: "Some principal may be paid along the way. Still a big end payment.",
   },
   {
     title: "Home equity",
@@ -134,7 +134,7 @@ const glossary = [
   {
     title: "P&I",
     detail:
-      "Principal and interest - the loan payment pieces before taxes/insurance escrow.",
+      "Principal and interest. The loan payment pieces before taxes/insurance escrow.",
     tip: "Fixed-rate P&I stays level; ARM P&I can change after resets.",
   },
 ] as const;
@@ -199,7 +199,7 @@ export default function MortgageClauses() {
   usePageMetadata({
     title: "Mortgage Clauses & Key Terms",
     description:
-      "Acceleration, alienation (due-on-sale), defeasance, prepayment penalty, plus a quick mortgage glossary - educational overview.",
+      "Acceleration, alienation (due-on-sale), defeasance, prepayment penalty, plus a quick mortgage glossary. Educational overview.",
     path: "/guides/mortgage-clauses",
   });
 
@@ -218,8 +218,8 @@ export default function MortgageClauses() {
           </p>
           <p className="mt-4 max-w-3xl text-sm leading-6 text-brand-graphite">
             These clauses show up in notes and mortgages again and again. Learn
-            the trigger and the effect - then use the glossary for nearby terms.
-            Educational overview only - not legal advice. Loan documents
+            the trigger and the effect. Then use the glossary for nearby terms.
+            Educational overview only. Not legal advice. Loan documents
             control.
           </p>
         </div>
@@ -313,7 +313,7 @@ export default function MortgageClauses() {
                 if you exit early
               </p>
               <p className="text-[12px] text-brand-graphite">
-                A · A · D · P - purpose, trigger, effect.
+                A · A · D · P. Purpose, trigger, effect.
               </p>
             </div>
           </section>
@@ -455,7 +455,7 @@ export default function MortgageClauses() {
             <span className="font-semibold">Don't confuse:</span> Borrower
             paying extra principal early is <em>prepayment</em> (may trigger a
             penalty). <em>Lender acceleration</em> is the lender calling the
-            full balance after default - different direction, same "speeds up
+            full balance after default. Different direction, same "speeds up
             the loan" idea.
           </p>
         </aside>

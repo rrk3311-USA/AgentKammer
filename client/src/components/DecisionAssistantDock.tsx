@@ -12,7 +12,17 @@ import {
   SlidersHorizontal,
   UsersRound,
 } from "lucide-react";
-import { DECISION_ASSISTANT_OPEN_EVENT } from "@/lib/decision-assistant";
+import {
+  DECISION_ASSISTANT_OPEN_EVENT,
+  clearDecisionAssistantNudge,
+  nudgeDecisionAssistant,
+} from "@/lib/decision-assistant";
+import {
+  buildContactOffer,
+  hasContact,
+  replyAsksForContact,
+  shouldOfferContact,
+} from "@/lib/decision-contact";
 import { getPageContext } from "@/lib/knowledge-graph/page-context";
 import { trackVisitorSignal } from "@/lib/visitor-signals";
 import { resolveChatLanguage } from "@/data/site-language";
@@ -223,42 +233,6 @@ function buildRecap(answers: Answers, score: number) {
   ].join("\n");
 }
 
-function hasContact(answers: Answers) {
-  return Boolean(answers.email || answers.phone);
-}
-
-function meaningfulProfileCount(answers: Answers) {
-  return [
-    answers.situation,
-    answers.desire,
-    answers.constraints,
-    answers.tradeOff,
-    answers.timeline,
-    answers.budget,
-    answers.financingStatus,
-    answers.household,
-    answers.geography,
-    answers.neighborhoods,
-    answers.buildingPreferences,
-    answers.dealBreakers,
-    answers.decisionMakers,
-    answers.confidenceReadiness,
-  ].filter(Boolean).length;
-}
-
-function shouldOfferContact(answers: Answers, score: number, userMessageCount = 0) {
-  if (hasContact(answers)) return false;
-  // Court first - only invite contact after a real conversation and clear signal.
-  const depth = meaningfulProfileCount(answers);
-  const hasEnoughRapport = userMessageCount >= 4 || depth >= 4;
-  const hasStrongIntent = score >= 4 && depth >= 3;
-  return hasEnoughRapport && (hasStrongIntent || depth >= 5);
-}
-
-function buildContactOffer(_answers: Answers, _score: number) {
-  return "We've got a clearer picture now. If you'd like, I can send you a short note with what I'd recommend next - no pressure either way. What's the best email or mobile?";
-}
-
 function nextDiagnosticStep(answers: Answers): "situation" | "desire" | "constraints" | "tradeoff" {
   if (!answers.situation) return "situation";
   if (!answers.desire) return "desire";
@@ -404,8 +378,8 @@ function getSituationGuidance(answer: string, score: number) {
   return {
     messages: [
       score >= 4
-        ? "I can already feel the clock in that. Before we chase buildings, let's make sure the decision itself is right - timing first, then the one thing that could break the move. No rush to qualify anything; just clarity."
-        : "That already tells me something. Most people in your seat feel a little scattered here - I'd start by naming the trigger, then the real constraint. Once those settle, neighborhoods get much easier.",
+        ? "I can already feel the clock in that. Before we chase buildings, let's make sure the decision itself is right. Timing first, then the one thing that could break the move. No rush to qualify anything. Just clarity."
+        : "That already tells me something. Most people in your seat feel a little scattered here. I would start by naming the trigger, then the real constraint. Once those settle, neighborhoods get much easier.",
     ],
   };
 }
@@ -438,7 +412,7 @@ function getUsefulActions(answers: Answers): QuickAction[] {
       label: "Send a note",
       asksForEmail: true,
       response:
-        "If you'd like, I can send a short note with what we've figured out and what I'd check next - entirely optional. What's the best email or mobile?",
+        "If you want this waiting for you, I can save a short note of what we figured out and what I would check next. Entirely optional. What email or mobile should I use?",
     });
   }
 
@@ -460,7 +434,6 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   const [memoryLoaded, setMemoryLoaded] = useState(false);
   const [promptIndex, setPromptIndex] = useState(0);
   const [quickActions, setQuickActions] = useState<QuickAction[]>([]);
-  const [dwellNudge, setDwellNudge] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -477,7 +450,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   useEffect(() => {
     const open = () => {
       setExpanded(true);
-      setDwellNudge(null);
+      clearDecisionAssistantNudge();
       window.setTimeout(() => {
         inputRef.current?.focus({ preventScroll: true });
       }, 450);
@@ -485,6 +458,14 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
     window.addEventListener(DECISION_ASSISTANT_OPEN_EVENT, open);
     return () => window.removeEventListener(DECISION_ASSISTANT_OPEN_EVENT, open);
   }, []);
+
+  useEffect(() => {
+    document.documentElement.dataset.advisor = expanded ? "open" : "closed";
+    if (expanded) clearDecisionAssistantNudge();
+    return () => {
+      delete document.documentElement.dataset.advisor;
+    };
+  }, [expanded]);
 
   useEffect(() => {
     if (!expanded || guideOpenedRef.current) return;
@@ -533,10 +514,10 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
       return [{ role: "assistant", text: page.greeting }];
     });
     setPromptIndex(0);
-    setDwellNudge(null);
+    clearDecisionAssistantNudge();
   }, [location, memoryLoaded]);
 
-  // Soft dwell nudge - engage visitors who linger without opening chat.
+  // Soft dwell nudge nests on Resume Decision; never a competing bar.
   useEffect(() => {
     if (expanded || !memoryLoaded) return;
     const timer = window.setTimeout(() => {
@@ -544,11 +525,11 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
         const nudged = JSON.parse(window.sessionStorage.getItem(dwellNudgeKey) || "[]") as string[];
         if (nudged.includes(location) || nudged.length >= 4) return;
         const tip = getPageEngagement(location).nudge;
-        setDwellNudge(tip);
+        nudgeDecisionAssistant(tip);
         window.sessionStorage.setItem(dwellNudgeKey, JSON.stringify([...nudged, location].slice(0, 8)));
         trackVisitorSignal("decision_guide_dwell_nudge", location);
       } catch {
-        setDwellNudge(getPageEngagement(location).nudge);
+        nudgeDecisionAssistant(getPageEngagement(location).nudge);
       }
     }, 14000);
     return () => window.clearTimeout(timer);
@@ -715,9 +696,9 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
           role: "assistant",
           text: nextAnswers.email
             ? hubSaved
-              ? "Saved and submitted. Your recommendation brief is in your Decision Hub - verify email anytime to reopen it on another device."
+              ? "Saved and submitted. Your recommendation brief is in your Decision Hub. Verify email anytime to reopen it on another device."
               : "Saved and submitted to our team. To keep this in your Decision Hub, verify your email with a one-time code and Resume My Decision anytime."
-            : "Got it. I saved the decision profile and I’ll use that context when we touch base.",
+            : "Noted. I saved the decision profile and will use that context when we next speak.",
         },
       ]);
       setStep("sent");
@@ -740,7 +721,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
     const nextMessages: Message[] = [...messages, { role: "user", text: prompt.text }];
     const guidance = getSituationGuidance(prompt.text, nextScore);
     trackVisitorSignal("decision_guide_message", prompt.text.slice(0, 120));
-    setDwellNudge(null);
+    clearDecisionAssistantNudge();
 
     guidance.messages.forEach((text) => nextMessages.push({ role: "assistant", text }));
 
@@ -749,7 +730,11 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
     setMessages(nextMessages);
     setAnswers(nextAnswers);
     setLeadScore(nextScore);
-    setStep(shouldOfferContact(nextAnswers, nextScore, nextMessages.filter((m) => m.role === "user").length) ? "email" : "desire");
+    setStep(
+      shouldOfferContact(nextAnswers, nextScore, nextMessages.filter((m) => m.role === "user").length, prompt.text)
+        ? "email"
+        : "desire",
+    );
   }
 
   function handleQuickAction(action: QuickAction) {
@@ -811,10 +796,12 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
     const nextScore = typeof aiTurn.leadQualification?.score === "number" ? Math.round(aiTurn.leadQualification.score) : fallbackScore;
     const replyMessages: Message[] = [...baseMessages, { role: "assistant", text: aiTurn.reply }];
     const userTurns = replyMessages.filter((message) => message.role === "user").length;
-    const aiAskedForContact = /email|phone|mobile|contact|send|recap|touch base/i.test(aiTurn.reply);
+    const latestUserText = [...baseMessages].reverse().find((message) => message.role === "user")?.text ?? "";
+    const offerContact = shouldOfferContact(mergedAnswers, nextScore, userTurns, latestUserText);
+    const aiAskedForContact = replyAsksForContact(aiTurn.reply);
 
-    if (shouldOfferContact(mergedAnswers, nextScore, userTurns) && !aiAskedForContact) {
-      replyMessages.push({ role: "assistant", text: buildContactOffer(mergedAnswers, nextScore) });
+    if (offerContact && !aiAskedForContact) {
+      replyMessages.push({ role: "assistant", text: buildContactOffer() });
     }
 
     setMessages(replyMessages);
@@ -836,12 +823,10 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
       ]);
     }
 
-    const shouldSendRecap = aiTurn.actions?.some((action) => action.type === "send_recap");
+    const shouldSendRecap = offerContact && aiTurn.actions?.some((action) => action.type === "send_recap");
     if (shouldSendRecap && hasContact(mergedAnswers)) {
       void sendRecap(mergedAnswers, nextScore);
-    } else if (shouldSendRecap && shouldOfferContact(mergedAnswers, nextScore, userTurns)) {
-      setStep("email");
-    } else if (shouldOfferContact(mergedAnswers, nextScore, userTurns)) {
+    } else if (offerContact && (shouldSendRecap || aiAskedForContact)) {
       setStep("email");
     }
   }
@@ -866,8 +851,8 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
       nextMessages.push({
         role: "assistant",
         text: foundEmail
-          ? "Got it. I’ll send the recommendation with the relevant brief, the profile items we have so far, and the next best step."
-          : "Got it. I saved the decision profile with what we have so far. I’ll use this context when we touch base.",
+          ? "Thank you. I will send the recommendation with the relevant brief, the profile items we have so far, and the next best step."
+          : "Thank you. I saved the decision profile with what we have so far, and I will use this context when we next speak.",
       });
       setMessages(nextMessages);
       setAnswers(nextAnswers);
@@ -887,14 +872,14 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
       nextAnswers = { ...nextAnswers, desire: answer };
       nextMessages.push({
         role: "assistant",
-        text: "That already helps. I'd treat that as the success condition. When you're ready, we can look at what usually blocks it - timing, budget, building rules, schools, or flexibility. No rush; which of those feels closest?",
+        text: "That already helps. I would treat that as the success condition. When you are ready, we can look at what usually blocks it: timing, budget, building rules, schools, or flexibility. No rush. Which of those feels closest?",
       });
       nextStep = "constraints";
     } else if (conversationStep === "constraints") {
       nextAnswers = { ...nextAnswers, constraints: answer };
       nextMessages.push({
         role: "assistant",
-        text: "Good - that constraint is the real filter. If everything can't fit, what should win first: size, location, building quality, flexibility, cost control, or long-term value?",
+        text: "Good. That constraint is the real filter. If everything cannot fit, what should win first: size, location, building quality, flexibility, cost control, or long-term value?",
       });
       nextStep = "tradeoff";
     } else if (conversationStep === "tradeoff") {
@@ -905,21 +890,21 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
       });
       nextMessages.push({
         role: "assistant",
-        text: "I'd read the relevant brief or compare ownership options before any tours. We're deciding what to do - not collecting listings for sport.",
+        text: "I would read the relevant brief or compare ownership options before any tours. We are deciding what to do, not collecting listings for sport.",
       });
       nextStep = "tradeoff";
     } else {
       nextMessages.push({
         role: "assistant",
-        text: "Keep telling me what matters. I'll stay with you and keep sharpening the decision - no forms, no rush. From what you've shared, I'd go next toward the biggest unresolved tension.",
+        text: "Keep telling me what matters. I will stay with you and keep sharpening the decision. No forms. No rush. From what you have shared, I would go next toward the biggest unresolved tension.",
       });
     }
 
     const userTurns = nextMessages.filter((message) => message.role === "user").length;
-    if (shouldOfferContact(nextAnswers, nextScore, userTurns)) {
+    if (shouldOfferContact(nextAnswers, nextScore, userTurns, answer)) {
       nextMessages.push({
         role: "assistant",
-        text: buildContactOffer(nextAnswers, nextScore),
+        text: buildContactOffer(),
       });
       nextStep = "email";
     }
@@ -956,63 +941,31 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
     <BlueprintProgressBar completion={blueprintCompletion} tone={tone} />
   );
 
+  if (!expanded) return null;
+
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40">
-      {dwellNudge && !expanded ? (
-        <div className="pointer-events-auto mx-auto mb-2 w-[min(36rem,calc(100%-1.5rem))]">
-          <button
-            type="button"
-            onClick={() => {
-              setDwellNudge(null);
-              setExpanded(true);
-              inputRef.current?.focus({ preventScroll: true });
-            }}
-            className="relative flex w-full items-start gap-3 border border-brand-stone bg-brand-navy px-3.5 py-2.5 text-left text-brand-ivory shadow-[0_8px_24px_rgba(13,24,43,0.18)] transition-colors hover:border-brand-ivory/40"
-          >
-            <span className="min-w-0 flex-1">
-              <span className="block text-[10px] uppercase tracking-[0.18em] text-brand-stone">On this page</span>
-              <span className="mt-1 block text-sm leading-5">{dwellNudge}</span>
-            </span>
-            <span className="shrink-0 self-center text-[10px] uppercase tracking-[0.14em] text-brand-stone">Ask</span>
-          </button>
-        </div>
-      ) : null}
-
       <aside
         id="decision-assistant"
-        className={
-          expanded
-            ? "pointer-events-auto flex max-h-[min(70vh,40rem)] flex-col border-t border-brand-stone bg-brand-ivory text-brand-navy shadow-[0_-14px_36px_rgba(13,24,43,0.16)]"
-            : "pointer-events-auto flex flex-col border-t border-brand-stone bg-brand-ivory text-brand-navy shadow-[0_-10px_28px_rgba(13,24,43,0.12)]"
-        }
+        className="pointer-events-auto flex max-h-[min(70vh,40rem)] flex-col border-t border-brand-stone bg-brand-ivory text-brand-navy shadow-[0_-14px_36px_rgba(13,24,43,0.16)]"
         aria-label="Guidance Advisor"
       >
-        <div
-          className={
-            expanded
-              ? "mx-auto flex w-full max-w-site flex-col gap-2.5 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3"
-              : "mx-auto flex w-full max-w-site flex-col gap-2.5 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3"
-          }
-        >
-          <div className={expanded ? "grid gap-2.5 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] sm:items-start" : "grid gap-2.5"}>
+        <div className="mx-auto flex w-full max-w-site flex-col gap-2.5 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3">
+          <div className="grid gap-2.5 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] sm:items-start">
             <div className="flex min-w-0 items-center gap-3">
-              <DecisionGuideAvatar animated={expanded} />
+              <DecisionGuideAvatar animated />
               <div className="min-w-0 flex-1">
                 <GuidanceAdvisorLabel tone="light" />
                 <p className="truncate text-sm font-medium text-brand-navy">{engagement.headline}</p>
               </div>
-              {expanded ? (
-                <button
-                  type="button"
-                  onClick={() => setExpanded(false)}
-                  className="flex h-9 w-9 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy sm:hidden"
-                  aria-label="Minimize Guidance Advisor"
-                >
-                  <Minimize2 className="h-4 w-4" strokeWidth={1.5} />
-                </button>
-              ) : (
-                <p className="shrink-0 font-mono text-[10px] text-brand-graphite">{blueprintCompletion}/6</p>
-              )}
+              <button
+                type="button"
+                onClick={() => setExpanded(false)}
+                className="flex h-9 w-9 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy sm:hidden"
+                aria-label="Minimize Guidance Advisor"
+              >
+                <Minimize2 className="h-4 w-4" strokeWidth={1.5} />
+              </button>
             </div>
 
             <div
@@ -1023,125 +976,110 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
                 <p className="text-[9px] uppercase tracking-[0.2em] text-brand-cocoa">Decision Progress</p>
                 <div className="flex items-center gap-2">
                   <p className="font-mono text-[10px] text-brand-graphite">{blueprintCompletion}/6</p>
-                  {expanded ? (
-                    <button
-                      type="button"
-                      onClick={() => setExpanded(false)}
-                      className="hidden h-7 w-7 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy sm:inline-flex"
-                      aria-label="Minimize Guidance Advisor"
-                    >
-                      <Minimize2 className="h-3.5 w-3.5" strokeWidth={1.5} />
-                    </button>
-                  ) : null}
+                  <button
+                    type="button"
+                    onClick={() => setExpanded(false)}
+                    className="hidden h-7 w-7 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy sm:inline-flex"
+                    aria-label="Minimize Guidance Advisor"
+                  >
+                    <Minimize2 className="h-3.5 w-3.5" strokeWidth={1.5} />
+                  </button>
                 </div>
               </div>
               <div className="mt-2">{renderCompactBlueprintProgress("light")}</div>
-              {expanded ? (
-                <div className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-2">
-                  {blueprintSegments.map((segment) => {
-                    const filled = completedSegments[segment.label as keyof typeof completedSegments];
-                    return (
-                      <div
-                        key={segment.label}
-                        className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2"
+              <div className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-2">
+                {blueprintSegments.map((segment) => {
+                  const filled = completedSegments[segment.label as keyof typeof completedSegments];
+                  return (
+                    <div
+                      key={segment.label}
+                      className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2"
+                    >
+                      <segment.icon
+                        className={
+                          filled
+                            ? "h-3.5 w-3.5 shrink-0 text-brand-navy"
+                            : "h-3.5 w-3.5 shrink-0 text-brand-navy/45"
+                        }
+                        strokeWidth={1.5}
+                        aria-hidden
+                      />
+                      <span
+                        className={
+                          filled
+                            ? "truncate text-[9px] uppercase tracking-[0.12em] text-brand-navy"
+                            : "truncate text-[9px] uppercase tracking-[0.12em] text-brand-navy/60"
+                        }
                       >
-                        <segment.icon
-                          className={
-                            filled
-                              ? "h-3.5 w-3.5 shrink-0 text-brand-navy"
-                              : "h-3.5 w-3.5 shrink-0 text-brand-navy/45"
-                          }
-                          strokeWidth={1.5}
-                          aria-hidden
-                        />
-                        <span
-                          className={
-                            filled
-                              ? "truncate text-[9px] uppercase tracking-[0.12em] text-brand-navy"
-                              : "truncate text-[9px] uppercase tracking-[0.12em] text-brand-navy/60"
-                          }
-                        >
-                          {segment.label}
-                        </span>
-                        <span className="flex justify-end" aria-hidden>
-                          {filled ? (
-                            <Check className="h-3 w-3 text-brand-navy" strokeWidth={1.8} />
-                          ) : (
-                            <Circle className="h-2.5 w-2.5 text-brand-stone" strokeWidth={1.7} />
-                          )}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : null}
+                        {segment.label}
+                      </span>
+                      <span className="flex justify-end" aria-hidden>
+                        {filled ? (
+                          <Check className="h-3 w-3 text-brand-navy" strokeWidth={1.8} />
+                        ) : (
+                          <Circle className="h-2.5 w-2.5 text-brand-stone" strokeWidth={1.7} />
+                        )}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
-          {expanded ? (
-            <>
-              <div ref={transcriptRef} className="min-h-0 flex-1 space-y-1.5 overflow-y-auto overflow-x-hidden pr-1">
-                {recentMessages.map((message, index) => (
-                  <div
-                    key={`${message.role}-${index}`}
-                    className={
-                      message.role === "assistant"
-                        ? "max-w-full overflow-hidden border border-brand-navy bg-brand-navy p-2.5 text-brand-ivory"
-                        : "max-w-full overflow-hidden border border-brand-border bg-white p-2.5 text-brand-navy"
-                    }
-                  >
-                    <p
-                      className={
-                        message.role === "assistant"
-                          ? "text-[9px] uppercase tracking-[0.16em] text-brand-stone"
-                          : "text-[9px] uppercase tracking-[0.16em] text-brand-cocoa"
-                      }
-                    >
-                      {message.role === "assistant" ? "Guidance Advisor" : "You"}
-                    </p>
-                    <p className="mt-1.5 whitespace-pre-line break-words text-sm leading-5">{message.text}</p>
-                  </div>
-                ))}
+          <div ref={transcriptRef} className="min-h-0 flex-1 space-y-1.5 overflow-y-auto overflow-x-hidden pr-1">
+            {recentMessages.map((message, index) => (
+              <div
+                key={`${message.role}-${index}`}
+                className={
+                  message.role === "assistant"
+                    ? "max-w-full overflow-hidden border border-brand-navy bg-brand-navy p-2.5 text-brand-ivory"
+                    : "max-w-full overflow-hidden border border-brand-border bg-white p-2.5 text-brand-navy"
+                }
+              >
+                <p
+                  className={
+                    message.role === "assistant"
+                      ? "text-[9px] uppercase tracking-[0.16em] text-brand-stone"
+                      : "text-[9px] uppercase tracking-[0.16em] text-brand-cocoa"
+                  }
+                >
+                  {message.role === "assistant" ? "Guidance Advisor" : "You"}
+                </p>
+                <p className="mt-1.5 whitespace-pre-line break-words text-sm leading-5">{message.text}</p>
               </div>
+            ))}
+          </div>
 
-              {cold && step !== "sent" ? (
-                <div className="flex flex-wrap gap-1.5" aria-label="Quick starters">
-                  {starterPrompts.map((prompt) => (
-                    <button
-                      key={prompt.label}
-                      type="button"
-                      onClick={() => {
-                        setExpanded(true);
-                        handleStarter(prompt);
-                      }}
-                      className="border border-brand-border bg-white px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
-                    >
-                      {prompt.label}
-                    </button>
-                  ))}
-                </div>
-              ) : null}
+          {cold && step !== "sent" ? (
+            <div className="flex flex-wrap gap-1.5" aria-label="Quick starters">
+              {starterPrompts.map((prompt) => (
+                <button
+                  key={prompt.label}
+                  type="button"
+                  onClick={() => handleStarter(prompt)}
+                  className="border border-brand-border bg-white px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
+                >
+                  {prompt.label}
+                </button>
+              ))}
+            </div>
+          ) : null}
 
-              {quickActions.length > 0 && step !== "sent" ? (
-                <div className="flex flex-wrap gap-1.5" aria-label="Suggested actions">
-                  {quickActions.map((action) => (
-                    <button
-                      key={action.label}
-                      type="button"
-                      onClick={() => handleQuickAction(action)}
-                      className="border border-brand-stone bg-brand-surface px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
-                    >
-                      {action.label}
-                    </button>
-                  ))}
-                </div>
-              ) : null}
-            </>
-          ) : (
-            <p className="line-clamp-2 text-sm leading-5 text-brand-graphite">
-              {recentMessages[recentMessages.length - 1]?.text ?? "Tell me what's changing..."}
-            </p>
-          )}
+          {quickActions.length > 0 && step !== "sent" ? (
+            <div className="flex flex-wrap gap-1.5" aria-label="Suggested actions">
+              {quickActions.map((action) => (
+                <button
+                  key={action.label}
+                  type="button"
+                  onClick={() => handleQuickAction(action)}
+                  className="border border-brand-stone bg-brand-surface px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
+                >
+                  {action.label}
+                </button>
+              ))}
+            </div>
+          ) : null}
 
           {step !== "sent" ? (
             <form onSubmit={handleSubmit} className="mt-auto grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] gap-2">
@@ -1153,23 +1091,19 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
                 id="decision-assistant-input"
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
-                onFocus={() => {
-                  setDwellNudge(null);
-                  setExpanded(true);
-                }}
+                onFocus={() => clearDecisionAssistantNudge()}
                 onKeyDown={handleInputKeyDown}
                 placeholder={
                   step === "email"
-                    ? "Email or mobile for the recap..."
+                    ? "Email or mobile if you want this waiting for you..."
                     : openingPrompts[promptIndex % openingPrompts.length] || "Tell me what's changing..."
                 }
-                rows={expanded ? 2 : 1}
+                rows={2}
                 className="min-h-10 w-full min-w-0 resize-none border border-brand-border bg-white px-3 py-2 text-sm text-brand-navy outline-none transition-colors placeholder:text-brand-graphite/55 focus:border-brand-navy md:min-h-11"
               />
               <button
                 type="submit"
                 disabled={sending}
-                onClick={() => setExpanded(true)}
                 className="inline-flex h-10 w-12 shrink-0 items-center justify-center gap-2 border border-brand-navy bg-brand-navy text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:bg-brand-navy-secondary disabled:cursor-wait disabled:opacity-70 md:h-11 md:w-auto md:px-4"
               >
                 <span className="hidden md:inline">{sending ? "Sending" : "Send"}</span>

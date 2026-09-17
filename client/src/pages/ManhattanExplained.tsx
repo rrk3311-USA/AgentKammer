@@ -11,7 +11,7 @@ type Place = {
 const dutch: Place[] = [
   {
     name: "Harlem",
-    meaning: "Nieuw Haarlem - named for Haarlem in the Netherlands.",
+    meaning: "Nieuw Haarlem. Named for Haarlem in the Netherlands.",
   },
   {
     name: "Greenwich Village",
@@ -19,11 +19,11 @@ const dutch: Place[] = [
   },
   {
     name: "Gramercy",
-    meaning: 'From Krom Moerasje - roughly "crooked little swamp."',
+    meaning: 'From Krom Moerasje. Roughly "crooked little swamp."',
   },
   {
     name: "Bowery",
-    meaning: "From bouwerij - farm. The road once led to the farms.",
+    meaning: "From bouwerij. Farm. The road once led to the farms.",
   },
   {
     name: "Turtle Bay",
@@ -56,7 +56,7 @@ const history: Place[] = [
   {
     name: "Fort George",
     meaning:
-      "After a Revolutionary-era fort on the bluff, associated with King George - not George V.",
+      "After a Revolutionary-era fort on the bluff, associated with King George, not George V.",
   },
   {
     name: "Hell's Kitchen",
@@ -91,7 +91,7 @@ const people: Place[] = [
     name: "Chelsea",
     meaning: "Captain Thomas Clarke named his estate for Chelsea in London.",
     aside:
-      'Sometimes linked to London\'s Chelsea / Royal Hospital Chelsea - not merely a "nursing home."',
+      'Sometimes linked to London\'s Chelsea / Royal Hospital Chelsea, not merely a "nursing home."',
   },
 ];
 
@@ -102,7 +102,7 @@ const streets: Place[] = [
   { name: "Nolita", meaning: "North of Little Italy." },
   {
     name: "Alphabet City",
-    meaning: "Avenues A, B, C, and D - the far East Side grid made literal.",
+    meaning: "Avenues A, B, C, and D. The far East Side grid made literal.",
   },
 ];
 
@@ -122,7 +122,7 @@ const chapters = [
     id: "history",
     kicker: "Chapter II",
     title: "Forts, walls, nicknames",
-    lead: "Some names are architecture and defense. Others are reputation - the city's informal memory of danger, graft, and wartime ground.",
+    lead: "Some names are architecture and defense. Others are reputation. The city's informal memory of danger, graft, and wartime ground.",
     places: history,
     art: "/guides/manhattan/manhattan-chapter-history.png",
     artAlt: "Illustration of a stone fort and harbor battery at dusk",
@@ -132,7 +132,7 @@ const chapters = [
     id: "people",
     kicker: "Chapter III",
     title: "People & institutions",
-    lead: "A founder, a financier, a newspaper - Manhattan often names a place after whoever left the deepest mark on that block of time.",
+    lead: "A founder, a financier, a newspaper. Manhattan often names a place after whoever left the deepest mark on that block of time.",
     places: people,
     art: "/guides/manhattan/manhattan-chapter-people.png",
     artAlt: "Illustration of a Gilded Age mansion on a tree-lined hill",
@@ -142,7 +142,7 @@ const chapters = [
     id: "streets",
     kicker: "Chapter IV",
     title: "The map talking to itself",
-    lead: "In the late twentieth century, downtown invented a new dialect: portmanteaus that describe location and nothing else - and somehow became permanent.",
+    lead: "In the late twentieth century, downtown invented a new dialect: portmanteaus that describe location and nothing else. And somehow became permanent.",
     places: streets,
     art: "/guides/manhattan/manhattan-chapter-streets.png",
     artAlt: "Abstract navy and champagne street-grid map of downtown Manhattan",
@@ -172,9 +172,9 @@ function PlaceRow({ place }: { place: Place }) {
 
 export default function ManhattanExplained() {
   usePageMetadata({
-    title: "Manhattan Explained - Neighborhood Names",
+    title: "Manhattan Explained. Neighborhood Names",
     description:
-      "An editorial guide to Manhattan neighborhood names - Dutch roots, Revolutionary forts, people & institutions, and street-map portmanteaus.",
+      "An editorial guide to Manhattan neighborhood names. Dutch roots, Revolutionary forts, people & institutions, and street-map portmanteaus.",
     path: "/guides/manhattan-explained",
   });
 
@@ -225,7 +225,7 @@ export default function ManhattanExplained() {
               Manhattan Explained
             </h1>
             <p className="me-fade-up-delay mt-6 max-w-md text-lg leading-8 text-brand-ivory/80">
-              The stories inside the names - from Lenape ground to Dutch farms
+              The stories inside the names. From Lenape ground to Dutch farms
               to twentieth-century portmanteaus.
             </p>
           </div>
@@ -240,7 +240,7 @@ export default function ManhattanExplained() {
               Opening
             </p>
             <h2 className="mt-4 font-display text-[clamp(2rem,3.5vw,3rem)] leading-[0.95] text-brand-navy">
-              Island of many hills - and many names
+              Island of many hills. And many names
             </h2>
           </div>
           <div className="mt-8 space-y-6 text-[17px] leading-8 text-brand-graphite lg:mt-0">
@@ -254,7 +254,7 @@ export default function ManhattanExplained() {
             </p>
             <p>
               Read the island this way and the street signs stop being
-              decoration. They become a compact history of who named what - and
+              decoration. They become a compact history of who named what. And
               why the name stuck.
             </p>
           </div>
@@ -373,7 +373,7 @@ export default function ManhattanExplained() {
             </h2>
             <p className="mt-6 max-w-lg text-base leading-8 text-brand-ivory/75">
               Popular maps compress contested histories. Where origins are
-              debated - Turtle Bay, Hell's Kitchen - we leave the uncertainty
+              debated. Turtle Bay, Hell's Kitchen. We leave the uncertainty
               visible. The rest is the city's own long memory, written in street
               language.
             </p>

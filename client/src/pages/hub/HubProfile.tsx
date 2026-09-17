@@ -6,7 +6,7 @@ import { fetchHubSnapshot, HubShell, type HubSnapshot } from "./HubShell";
 export default function HubProfile() {
   usePageMetadata({
     title: "Profile",
-    description: "Lightweight housing profile - claim with email when you want continuity.",
+    description: "Lightweight housing profile. Claim with email when you want continuity.",
     path: "/hub/profile",
   });
 

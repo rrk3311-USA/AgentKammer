@@ -29,7 +29,7 @@ export default function About() {
       <PageHero
         eyebrow="About"
         title="Private housing guidance before the market gets loud."
-        description="Raphael Kammer built Agent Kammer for clients who want judgment - not a louder search. The practice diagnoses what changed, whether anything should change, and whether this is still where you belong."
+        description="Raphael Kammer built Agent Kammer for clients who want judgment, not a louder search. The practice diagnoses what changed, whether anything should change, and whether this is still where you belong."
         art="private-advisory"
       />
 
@@ -39,19 +39,19 @@ export default function About() {
           Manhattan decisions need more than a listing feed.
         </h2>
         <p className="mt-8 text-lg leading-9 text-brand-graphite">
-          Agent Kammer is an independent housing advisory practice. The work starts with life change, uncertainty, and trade-offs - then building-level literacy - before apartments or urgency take over.
+          Agent Kammer is an independent housing advisory practice. The work starts with life change, uncertainty, and trade-offs, then building-level literacy, before apartments or urgency take over.
         </p>
         <p className="mt-6 text-lg leading-9 text-brand-graphite">
-          Whether you’re planning your first purchase in five years, relocating, deciding whether to stay, or managing multiple properties, the process begins with clarity - not listings.
+          First purchase, relocation, a stay-or-go question, or a portfolio of homes: the process begins with clarity, not listings.
         </p>
         <p className="mt-6 text-lg leading-9 text-brand-graphite">
-          A recommendation can be to wait, rent first, renovate, sell, buy, or do nothing. When a transaction is right, Agent Kammer remains the advisory layer and curates the right local professionals for execution.
+          A recommendation can be to wait, rent first, renovate, sell, buy, or do nothing. When a transaction is right, Agent Kammer remains the advisory layer and introduces the right local professionals for execution.
         </p>
         <p className="mt-6 text-lg leading-9 text-brand-graphite">
           Some clients work together for weeks. Others for years. Decisions evolve, and the guidance evolves with them.
         </p>
         <p className="mt-6 text-lg leading-9 text-brand-graphite">
-          Buildings before listings. Helping people make better housing decisions throughout life - not just real estate transactions. Live Where You Belong - whether that means stay or move.
+          Buildings before listings. Helping people make better housing decisions throughout life, not just real estate transactions. Live Where You Belong, whether that means stay or move.
         </p>
       </article>
 
@@ -63,10 +63,10 @@ export default function About() {
           Building literacy changes the quality of advice.
         </h2>
         <p className="mt-8 text-lg leading-9 text-brand-graphite">
-          ICC Commercial Building Inspector training, blueprint reading, OSHA 30, and New York State licensed real estate practice are not marketing props. They help separate cosmetic issues from functional and building-related risk before a client commits capital or time.
+          We read buildings as assets: structure, operations, and how they actually work for the people who live in them. That literacy informs judgment. It is not a pitch for inspections.
         </p>
         <p className="mt-6 text-lg leading-9 text-brand-graphite">
-          That literacy sits behind Decision Briefs and Building Reports - used after the decision frame is clear, never as a substitute for asking whether anything should change.
+          That literacy sits behind Decision Briefs and Building Reports, used after the decision frame is clear, never as a substitute for asking whether anything should change.
         </p>
       </article>
 
@@ -87,7 +87,7 @@ export default function About() {
           <li>
             <p className="font-display text-2xl text-brand-navy">Building-led perspective</p>
             <p className="mt-3 text-base leading-8 text-brand-graphite">
-              Building, block, and buyer brief together - before floor plans dominate attention.
+              Building, block, and buyer brief together, before floor plans dominate attention.
             </p>
           </li>
           <li>
@@ -108,7 +108,7 @@ export default function About() {
 
       <CTA
         title="Find out if you’re living where you belong."
-        description="The Decision Assessment is how most relationships begin - a profile first, a Housing Strategy Session only when it adds judgment."
+        description="The Decision Assessment is how most relationships begin. A profile first. A Housing Strategy Session only when it adds judgment."
       />
     </main>
   );
