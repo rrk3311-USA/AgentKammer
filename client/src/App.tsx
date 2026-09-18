@@ -55,6 +55,8 @@ const ManhattanExplained = lazy(() => import("@/pages/ManhattanExplained"));
 const LiensEasements = lazy(() => import("@/pages/LiensEasements"));
 const Guides = lazy(() => import("@/pages/Guides"));
 const Qualify = lazy(() => import("@/pages/Qualify"));
+const ToolsHome = lazy(() => import("@/pages/tools/ToolsHome"));
+const LivabilityTool = lazy(() => import("@/pages/tools/LivabilityTool"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 function Redirect({ to }: { to: string }) {
@@ -85,7 +87,7 @@ function VisitorSignals() {
   const bootstrapped = useRef(false);
 
   useEffect(() => {
-    if (location.startsWith("/admin") || location.startsWith("/tools")) return;
+    if (location.startsWith("/admin") || location.startsWith("/tools/curation")) return;
     if (!bootstrapped.current) {
       bootstrapped.current = true;
       initVisitorSignalTracking(location);
@@ -111,10 +113,12 @@ function Router() {
       <Route path="/admin/team">{() => <AdminSection section="team" />}</Route>
       <Route path="/admin/settings">{() => <AdminSection section="settings" />}</Route>
       <Route path="/admin/curation" component={AdminCuration} />
+      <Route path="/admin/tools" component={ToolsIndex} />
       <Route path="/admin" component={AdminOverview} />
       <Route path="/admin/*">{() => <Redirect to="/admin" />}</Route>
       <Route path="/tools/curation" component={AdminCuration} />
-      <Route path="/tools" component={ToolsIndex} />
+      <Route path="/tools/livability" component={LivabilityTool} />
+      <Route path="/tools" component={ToolsHome} />
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/situations" component={Services} />
@@ -190,7 +194,7 @@ function Router() {
 
 function AppShell() {
   const [location] = useLocation();
-  const isAdmin = location.startsWith("/admin") || location.startsWith("/tools");
+  const isAdmin = location.startsWith("/admin") || location.startsWith("/tools/curation");
 
   if (isAdmin) {
     return (

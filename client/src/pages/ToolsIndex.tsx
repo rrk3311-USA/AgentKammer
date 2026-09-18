@@ -88,7 +88,7 @@ export default function ToolsIndex() {
           onClick={() => {
             sessionStorage.removeItem(AUTH_KEY);
             setToken(null);
-            setLocation("/tools");
+            setLocation("/admin/tools");
           }}
         >
           Sign out

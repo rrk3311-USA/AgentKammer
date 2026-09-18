@@ -29,6 +29,10 @@
     { "source": "/reverse-seller-architecture", "destination": "/contact", "permanent": true },
     { "source": "/real-estate", "destination": "/building-reports", "permanent": true }
   ],
+  "functions": {
+    "api/tools/runs.ts": { "maxDuration": 30 },
+    "api/tools/webhook.ts": { "maxDuration": 15 }
+  },
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/(.*)", "destination": "/index.html" }

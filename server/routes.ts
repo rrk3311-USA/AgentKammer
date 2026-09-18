@@ -42,6 +42,7 @@ import { processDecisionGuideTurn } from "./lib/advisory/profile-service";
 import { registerAdvisoryAdminRoutes } from "./lib/advisory/admin-routes";
 import { registerBuyerIntelAdminRoutes, registerBuyerIntelPublicRoutes } from "./lib/buyer-intel/admin-routes";
 import { registerCurationAdminRoutes, registerCurationPublicRoutes } from "./lib/curation/admin-routes";
+import { registerToolsRoutes } from "./lib/tools/routes";
 import {
   getClientProfileByEmail,
   getClientProfileByVisitorId,
@@ -2482,4 +2483,5 @@ export async function registerRoutes(app: Express): Promise<void> {
   registerBuyerIntelPublicRoutes(app);
   registerCurationAdminRoutes(app, requireAdmin);
   registerCurationPublicRoutes(app);
+  registerToolsRoutes(app);
 }

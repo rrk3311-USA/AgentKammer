@@ -1,6 +1,7 @@
 import { Link, useLocation } from "wouter";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MessageCircle } from "lucide-react";
+import { fetchToolsStatus } from "@/lib/tools-client";
 import { decisionNavigationGroups } from "@/data/decision-navigation";
 import { SITE_LANGUAGE_LOOP, setStoredPreferredLanguage } from "@/data/site-language";
 import { AkMonogramMark } from "@/components/AkMonogramMark";
@@ -49,6 +50,13 @@ function ResumeDecisionNest() {
 export function Footer() {
   const [, navigate] = useLocation();
   const [langsOpen, setLangsOpen] = useState(false);
+  const [toolsPublic, setToolsPublic] = useState(false);
+
+  useEffect(() => {
+    void fetchToolsStatus()
+      .then((status) => setToolsPublic(status.public))
+      .catch(() => setToolsPublic(false));
+  }, []);
 
   return (
     <footer className="border-t border-brand-border bg-brand-ivory text-brand-graphite">
@@ -123,6 +131,11 @@ export function Footer() {
               <Link href="/licenses" className="transition-colors hover:text-brand-brass">
                 Licenses
               </Link>
+              {toolsPublic ? (
+                <Link href="/tools" className="transition-colors hover:text-brand-brass">
+                  Tools
+                </Link>
+              ) : null}
               <Link href="/contact" className="transition-colors hover:text-brand-brass">
                 Contact
               </Link>
