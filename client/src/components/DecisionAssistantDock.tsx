@@ -1,4 +1,4 @@
-import { FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
+import { CSSProperties, FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import {
   ArrowRight,
@@ -43,32 +43,25 @@ const navigationMemoryKey = "akDecisionAssistantNavigation";
 const dwellNudgeKey = "akDecisionGuideDwellNudges";
 const DEFAULT_GREETING = getPageEngagement("/").greeting;
 
-function DecisionGuideAvatar({ animated = false }: { animated?: boolean }) {
+function GuidanceStarProgress({ completion }: { completion: number }) {
+  const ratio = Math.max(0, Math.min(1, completion / blueprintSegments.length));
+  const specks = completion === 0 ? 1 : Math.min(completion + 1, 6);
   return (
-    <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden border border-white/10 bg-[#050507]">
-      <span
-        className={
-          animated
-            ? "absolute inset-0 animate-command-breathe bg-[linear-gradient(180deg,rgba(255,255,255,0.08),transparent_46%)]"
-            : "absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),transparent_46%)]"
-        }
-      />
-      <img
-        src="/images/decision-guide-raphi.png"
-        alt="Raphi, your Guidance Advisor"
-        className="relative z-10 h-full w-full object-cover object-[50%_20%]"
-      />
-    </span>
-  );
-}
-
-function GuidanceAdvisorLabel({ tone = "dark" }: { tone?: "dark" | "light" }) {
-  const guidanceClass = tone === "dark" ? "text-[#efe6d6]/62" : "text-brand-cocoa";
-  const advisorClass = tone === "dark" ? "text-[#c6a870]" : "text-brand-navy";
-  return (
-    <span className="block text-[10px] uppercase tracking-[0.22em]">
-      <span className={guidanceClass}>Guidance</span>{" "}
-      <span className={advisorClass}>Advisor</span>
+    <span
+      className="ak-guidance-star"
+      style={{ "--ak-star": String(Math.max(0.1, ratio)) } as CSSProperties}
+      aria-label={`Guidance progress ${completion} of 6`}
+    >
+      <span className="ak-guidance-star-wake" aria-hidden />
+      <span className="ak-guidance-star-head" aria-hidden />
+      {Array.from({ length: specks }, (_, index) => (
+        <span
+          key={index}
+          className="ak-guidance-star-speck"
+          style={{ "--ak-speck": String(index) } as CSSProperties}
+          aria-hidden
+        />
+      ))}
     </span>
   );
 }
@@ -296,25 +289,6 @@ function mergeDefinedProfile(current: Answers, profile?: Partial<Answers>) {
     }
   });
   return next;
-}
-
-function GuidanceSparkProgress({ completion }: { completion: number }) {
-  return (
-    <span className="ak-guidance-sparks" aria-label={`Guidance progress ${completion} of 6`}>
-      {blueprintSegments.map((segment, index) => (
-        <span
-          key={segment.label}
-          className={
-            index < completion
-              ? index === completion - 1
-                ? "is-lit is-lead"
-                : "is-lit"
-              : undefined
-          }
-        />
-      ))}
-    </span>
-  );
 }
 
 function getTradeoffGuidance(answer: string) {
@@ -1007,40 +981,36 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
           aria-label="Guidance Advisor"
           aria-expanded="true"
         >
-          <div
-            className="ak-guidance-handle"
-            onPointerDown={(event) => beginSheetDrag(event.clientY)}
-            onPointerUp={(event) => finishSheetDrag(event.clientY)}
-            onPointerCancel={() => {
-              sheetDrag.current = null;
-            }}
-          >
-            <span />
-          </div>
-
-          <div className="flex min-h-0 flex-1 flex-col gap-3 px-4 pb-[max(0.85rem,env(safe-area-inset-bottom))]">
-            <div className="flex min-w-0 items-center gap-3">
+          <div className="flex min-h-0 flex-1 flex-col gap-3 px-4 pb-[max(0.85rem,env(safe-area-inset-bottom))] pt-1">
+            <div
+              className="flex min-h-11 min-w-0 items-center gap-2 [touch-action:none]"
+              onPointerDown={(event) => beginSheetDrag(event.clientY)}
+              onPointerUp={(event) => finishSheetDrag(event.clientY)}
+              onPointerCancel={() => {
+                sheetDrag.current = null;
+              }}
+            >
               <button
                 type="button"
                 onClick={toggleSheet}
-                className="flex min-h-11 min-w-0 flex-1 items-center gap-3 text-left"
+                className="min-h-11 min-w-0 flex-1 text-left"
                 aria-label="Collapse Guidance Advisor"
               >
-                <DecisionGuideAvatar animated />
-                <GuidanceAdvisorLabel tone="dark" />
+                <GuidanceStarProgress completion={blueprintCompletion} />
+                <span className="mt-2 block text-[10px] uppercase tracking-[0.22em] text-[#d8c089]/70">
+                  Guidance Advisor
+                </span>
               </button>
               <button
                 type="button"
                 onClick={collapseSheet}
-                className="inline-flex h-11 w-11 shrink-0 items-center justify-center text-[#f4f0e8]/55 transition-colors hover:text-[#f4f0e8]"
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center text-[#f4f0e8]/50 transition-colors hover:text-[#f4f0e8]"
                 aria-label="Close Guidance Advisor"
                 data-testid="button-guidance-close"
               >
                 <X className="h-4 w-4" strokeWidth={1.5} />
               </button>
             </div>
-
-            <GuidanceSparkProgress completion={blueprintCompletion} />
 
             <div ref={transcriptRef} className="min-h-0 flex-1 space-y-4 overflow-y-auto overflow-x-hidden pr-1">
               {recentMessages.map((message, index) => (
