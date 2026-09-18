@@ -153,7 +153,7 @@ export function ArchitecturalHeroDrawing({
     <div className={cn("pointer-events-none select-none", className)} aria-hidden>
       <svg
         viewBox="0 0 420 260"
-        className="h-auto w-full max-w-[25rem] text-brand-ivory/45"
+        className="h-auto w-full max-w-[25rem] text-brand-navy/45"
         fill="none"
         role="presentation"
       >
@@ -452,15 +452,15 @@ export function PageHero({
   art?: HeroArtVariant;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-brand-border bg-brand-navy text-brand-ivory">
+    <section className="relative overflow-hidden border-b border-brand-border bg-brand-paper text-brand-ink">
       {image ? (
         <img
           src={image}
           alt={imageAlt ?? ""}
-          className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.28] saturate-[0.7] contrast-[0.96]"
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.22] saturate-[0.7] contrast-[0.96]"
         />
       ) : null}
-      {image ? <div className="absolute inset-0 bg-brand-navy/78" /> : null}
+      {image ? <div className="absolute inset-0 bg-brand-paper/82" /> : null}
       <PageSection className="relative grid gap-12 py-16 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.78fr)] lg:items-end lg:py-24">
         <div>
           <p className="ak-kicker">{eyebrow}</p>
@@ -484,7 +484,7 @@ export function ReportSubnav() {
   const [location] = useLocation();
 
   return (
-    <div className="overflow-x-auto border-b border-brand-border bg-brand-navy">
+    <div className="overflow-x-auto border-b border-brand-border bg-brand-paper">
       <div className="mx-auto flex w-full max-w-site gap-3 px-6 py-4 lg:px-10">
         {buildingReportsNav.map((item) => {
           const active = location === item.href;
@@ -496,7 +496,7 @@ export function ReportSubnav() {
                 "ak-nav-link whitespace-nowrap border px-4 py-2 transition-colors",
                 active
                   ? "border-[#F5E7CD] bg-[#F5E7CD] text-brand-navy"
-                  : "border-brand-border bg-transparent text-brand-ivory hover:border-[#F5E7CD]",
+                  : "border-brand-border bg-transparent text-brand-navy hover:border-brand-navy",
               )}
             >
               {item.label}
@@ -522,7 +522,7 @@ export function CTA({
   eyebrow?: string;
 }) {
   return (
-    <section className="border-t border-brand-border bg-brand-navy text-brand-ivory">
+    <section className="border-t border-brand-border bg-brand-paper text-brand-ink">
       <PageSection className="py-16 lg:py-20">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
@@ -571,7 +571,7 @@ export function CTA({
               <a
                 href="/contact#request-call"
                 aria-label="Email Agent Kammer"
-                className="ak-nav-link inline-flex items-center justify-center gap-3 border border-[#F5E7CD] px-5 py-3 text-center text-brand-ivory transition-colors hover:bg-[#F5E7CD] hover:text-brand-navy"
+                className="ak-nav-link inline-flex items-center justify-center gap-3 border border-brand-navy px-5 py-3 text-center text-brand-navy transition-colors hover:bg-[#F5E7CD]"
               >
                 <Mail className="h-3.5 w-3.5 text-brand-brass" strokeWidth={1.5} />
                 Email

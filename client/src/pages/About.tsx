@@ -5,7 +5,7 @@ import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 function SketchDivider({ variant }: { variant: "private-advisory" | "decision-framework" | "building" }) {
   return (
-    <div className="flex justify-center border-y border-brand-border bg-brand-navy py-10" aria-hidden>
+    <div className="flex justify-center border-y border-brand-border bg-brand-paper py-10" aria-hidden>
       <ArchitecturalHeroDrawing
         eyebrow="About"
         title="Agent Kammer"
@@ -25,7 +25,7 @@ export default function About() {
   });
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-paper">
       <PageHero
         eyebrow="About"
         title="Private housing guidance before the market gets loud."

@@ -90,7 +90,7 @@ export default function Services() {
   }, []);
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-paper">
       <section className="border-b border-brand-border">
         <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-24">
           <p className="ak-kicker">Situations</p>

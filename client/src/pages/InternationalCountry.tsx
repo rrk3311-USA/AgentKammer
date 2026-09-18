@@ -28,7 +28,7 @@ function InternationalCountryContent({ country }: { country: string }) {
   }, [page.preferredLanguageLabel]);
 
   return (
-    <main className="bg-brand-navy" lang={page.languageCode}>
+    <main className="bg-brand-paper" lang={page.languageCode}>
       <PageHero
         eyebrow={page.heroEyebrow}
         title={page.heroTitle}

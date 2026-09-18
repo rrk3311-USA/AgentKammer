@@ -18,7 +18,7 @@ export default function InternationalHub() {
   });
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-paper">
       <PageHero
         eyebrow={INTERNATIONAL_HUB.eyebrow}
         title={INTERNATIONAL_HUB.title}

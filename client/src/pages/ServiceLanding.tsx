@@ -107,7 +107,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
 
   if (!landing || !copy || !next) {
     return (
-      <main className="bg-brand-navy">
+      <main className="bg-brand-paper">
         <PageSection>
           <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">Situations</p>
           <h1 className="mt-4 font-display text-4xl text-brand-navy">Situation page not found.</h1>
@@ -121,11 +121,11 @@ export default function ServiceLanding({ slug }: { slug: string }) {
   }
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-paper">
       {landing.heroImage ? (
         <section
           className="relative w-full overflow-hidden border-b border-brand-border"
-          style={{ backgroundColor: landing.heroPaper ?? "#2A3447" }}
+          style={{ backgroundColor: landing.heroPaper ?? "#F7F5F0" }}
         >
           <img
             src={`${landing.heroImage}?v=15`}
@@ -136,7 +136,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
           <div
             className="pointer-events-none absolute inset-y-0 left-0 w-[55%] sm:hidden"
             style={{
-              background: `linear-gradient(to right, ${landing.heroPaper ?? "#2A3447"}, ${landing.heroPaper ?? "#2A3447"}B3, transparent)`,
+              background: `linear-gradient(to right, ${landing.heroPaper ?? "#F7F5F0"}, ${landing.heroPaper ?? "#F7F5F0"}B3, transparent)`,
             }}
             aria-hidden
           />
@@ -150,15 +150,17 @@ export default function ServiceLanding({ slug }: { slug: string }) {
           </div>
         </section>
       ) : editorialLayout ? (
-        <section className="relative w-full overflow-hidden border-b border-brand-border bg-brand-navy">
+        <section className="relative w-full overflow-hidden border-b border-brand-border bg-brand-paper">
           <div className="relative grid min-h-[clamp(300px,78vw,420px)] w-full grid-cols-1 sm:min-h-[min(52vh,520px)] sm:grid-cols-[minmax(16rem,48%)_1fr] lg:min-h-[min(48vh,560px)]">
             {/* Title column - reserved width so it cannot collide with art */}
             <div className="relative z-10 flex items-start px-6 pb-8 pt-14 sm:items-center sm:pb-12 sm:pt-16 md:pl-[12%] lg:px-10 lg:pl-[clamp(4rem,18vw,14rem)] lg:pt-20 xl:pl-[clamp(5rem,22vw,18rem)]">
               <div className="w-full max-w-[18.5rem] sm:max-w-[26rem]">
                 <p className="ak-kicker">{landing.eyebrow}</p>
-                <h1 className="ak-display mt-4 max-w-[11ch] sm:max-w-[14ch]">
-                  {landing.title}
-                </h1>
+                <div className="ak-title-band mt-4">
+                  <h1 className="ak-display max-w-[11ch] sm:max-w-[14ch]">
+                    {landing.title}
+                  </h1>
+                </div>
               </div>
             </div>
             {/* Art column - only in the right grid track on sm+; lower/right on mobile */}
@@ -171,7 +173,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
               />
             </div>
             <div
-              className="pointer-events-none absolute inset-y-0 left-0 w-[82%] bg-gradient-to-r from-brand-ivory from-[48%] via-brand-ivory/90 to-transparent sm:hidden"
+              className="pointer-events-none absolute inset-y-0 left-0 w-[82%] bg-gradient-to-r from-brand-paper from-[48%] via-brand-paper/90 to-transparent sm:hidden"
               aria-hidden
             />
           </div>
@@ -180,9 +182,11 @@ export default function ServiceLanding({ slug }: { slug: string }) {
         <section className="border-b border-brand-border">
           <div className="mx-auto max-w-site px-6 pb-10 pt-14 lg:px-10 lg:pb-14 lg:pt-20">
             <p className="ak-kicker">{landing.eyebrow}</p>
-            <h1 className="ak-display mt-4 max-w-4xl">
-              {landing.title}
-            </h1>
+            <div className="ak-title-band mt-4">
+              <h1 className="ak-display max-w-4xl">
+                {landing.title}
+              </h1>
+            </div>
           </div>
           <div className="relative mx-auto flex aspect-[16/9] max-h-[420px] w-full max-w-site items-center justify-center overflow-hidden bg-brand-paper lg:aspect-[21/9]">
             <ArchitecturalHeroDrawing

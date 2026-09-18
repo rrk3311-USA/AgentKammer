@@ -82,7 +82,7 @@ export default function LivabilityTool() {
   const fileNames = useMemo(() => files.map((file) => file.name).join(", "), [files]);
 
   if (unlocked === null) {
-    return <div className="bg-brand-navy px-6 py-24 text-brand-graphite">Opening Livability…</div>;
+    return <div className="bg-brand-paper px-6 py-24 text-brand-graphite">Opening Livability…</div>;
   }
   if (!unlocked) return <ToolsComingSoon />;
 
@@ -137,7 +137,7 @@ export default function LivabilityTool() {
   };
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-paper">
       <PageHero
         eyebrow="Livability Score"
         title="How this home lives."

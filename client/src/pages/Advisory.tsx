@@ -79,7 +79,7 @@ export default function Advisory() {
   });
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-paper">
       <PageHero
         eyebrow="Residential Advisory"
         title="Ongoing strategic guidance for life's biggest residential decisions."

@@ -24,7 +24,7 @@ export default function BuildingReport() {
   });
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-paper">
       <PageHero
         eyebrow="Building Intelligence"
         title="Building Profiles"

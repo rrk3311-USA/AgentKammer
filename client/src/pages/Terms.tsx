@@ -11,7 +11,7 @@ export default function Terms() {
   });
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-paper">
       <PageHero
         eyebrow="Legal"
         title="Terms of use"

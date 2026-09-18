@@ -39,7 +39,7 @@ export default function Belonging() {
   });
 
   return (
-    <main className="bg-brand-navy text-brand-ivory">
+    <main className="bg-brand-paper text-brand-ink">
       <section className="border-b border-brand-border">
         <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-24">
           <p className="ak-kicker">{PUBLIC_PRODUCTS.situation.label}</p>
@@ -77,7 +77,7 @@ export default function Belonging() {
         </div>
       </section>
 
-      <section className="border-b border-brand-border bg-brand-navy">
+      <section className="border-b border-brand-border bg-brand-paper">
         <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-20">
           <p className="ak-kicker">What You Receive</p>
           <h2 className="ak-title mt-4 max-w-2xl">
@@ -97,7 +97,7 @@ export default function Belonging() {
         </div>
       </section>
 
-      <section className="border-b border-brand-border bg-brand-navy">
+      <section className="border-b border-brand-border bg-brand-paper">
         <div className="mx-auto flex max-w-site flex-col gap-8 px-6 py-16 lg:flex-row lg:items-end lg:justify-between lg:px-10 lg:py-20">
           <div className="max-w-2xl">
             <p className="ak-kicker">Not a valuation</p>
