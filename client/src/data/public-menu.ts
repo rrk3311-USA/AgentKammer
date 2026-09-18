@@ -72,3 +72,12 @@ export function contactHref(id: PublicProductId): string {
   if (id === "guidance") return PUBLIC_PRODUCTS.guidance.href;
   return `/contact?intent=${id}`;
 }
+
+/** Footer Site map only. Do not add these to the six-item header. */
+export const FOOTER_SITEMAP_QUIET = [
+  { label: "Get Qualified", href: "/qualify" },
+  { label: "Hub", href: "/hub" },
+  { label: "Tools", href: "/tools" },
+  { label: "Contact", href: "/contact" },
+  { label: "Intelligence", href: "/intelligence" },
+] as const;

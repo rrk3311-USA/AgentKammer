@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { primaryNav } from "@/components/site-shell";
 import {
   CONTACT_NEXT_STEPS,
+  FOOTER_SITEMAP_QUIET,
   KAMMER_VERDICTS,
   PUBLIC_PRODUCTS,
   resolvePublicIntent,
@@ -45,5 +46,19 @@ describe("public menu lock", () => {
       ["Guides", "/guides"],
       ["About", "/about"],
     ]);
+  });
+
+  it("keeps footer Site map quiet links off the header", () => {
+    expect(FOOTER_SITEMAP_QUIET.map((item) => [item.label, item.href])).toEqual([
+      ["Get Qualified", "/qualify"],
+      ["Hub", "/hub"],
+      ["Tools", "/tools"],
+      ["Contact", "/contact"],
+      ["Intelligence", "/intelligence"],
+    ]);
+    const headerHrefs = new Set(primaryNav.map((item) => item.href));
+    for (const item of FOOTER_SITEMAP_QUIET) {
+      expect(headerHrefs.has(item.href)).toBe(false);
+    }
   });
 });
