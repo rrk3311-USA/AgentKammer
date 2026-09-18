@@ -106,7 +106,7 @@ export const continueReadingDefaults: IntelligenceHubLink[] = [
   },
   {
     label: "International Relocation Guide",
-    description: "Study buildings before the first visit. Manhattan rewards pre-visit discipline.",
+    description: "Clarity before the first visit. Manhattan rewards pre-visit discipline.",
     href: "/insights/studying-manhattan-buildings-before-your-first-visit",
     status: "live",
   },

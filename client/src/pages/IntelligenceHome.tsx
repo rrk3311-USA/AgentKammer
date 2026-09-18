@@ -48,7 +48,7 @@ export default function IntelligenceHome() {
   usePageMetadata({
     title: "Intelligence",
     description:
-      "Helping you make better real estate decisions through intelligence. Decision, Building, Property, and Executive Intelligence from Agent Kammer.",
+      "Helping you make better housing decisions through judgment. Situation, property, and executive intelligence from Agent Kammer.",
     path: "/intelligence",
   });
 
@@ -114,9 +114,9 @@ export default function IntelligenceHome() {
 
       <PageSection>
         <SectionHeading
-          eyebrow="Building Profiles"
-          title="Study the building before the showing."
-          description="Editorial address studies. Free to read, distinct from paid Property Intelligence."
+          eyebrow="Quiet library"
+          title="Notes after the decision is framed."
+          description="Optional address studies. A side tool, never the pitch, distinct from paid Property Intelligence."
         />
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {buildingReports.map((report) => (
