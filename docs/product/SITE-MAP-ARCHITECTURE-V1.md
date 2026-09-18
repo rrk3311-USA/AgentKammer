@@ -1,7 +1,7 @@
 # Agent Kammer — Site Map & Architecture
 
 **Version:** 1.0  
-**Status:** Locked — stop renaming; start building  
+**Status:** Structural reference only. Public product names are superseded by [`PUBLIC-MENU-LOCK.md`](./PUBLIC-MENU-LOCK.md).  
 **Site:** https://www.agentkammer.com  
 **Updated:** 2026-07-21  
 **Sources:** Live codebase + [Building Intelligence Report](https://chatgpt.com/share/6a5ff67e-3fac-83e8-9526-8d130fd47415)

@@ -133,7 +133,13 @@ export function Footer() {
             </div>
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-[10px] uppercase tracking-[0.18em] text-brand-ivory/78">
               <Link href="/belonging" className="transition-colors hover:text-brand-brass">
-                Assessment
+                Situation Assessment
+              </Link>
+              <Link href="/contact?intent=property" className="transition-colors hover:text-brand-brass">
+                Property Assessment
+              </Link>
+              <Link href="/contact?intent=strategy" className="transition-colors hover:text-brand-brass">
+                Strategy Session
               </Link>
               <Link href="/account" className="transition-colors hover:text-brand-brass">
                 Decision Hub

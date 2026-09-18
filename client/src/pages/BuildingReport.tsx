@@ -83,11 +83,11 @@ export default function BuildingReport() {
       </section>
 
       <CTA
-        title="Request Intelligence."
-        description="Share your target neighborhoods, timing, and budget so the building list can be filtered before tours begin."
-        href="/contact"
-        label="Request Intelligence"
-        eyebrow="Request Intelligence"
+        title="Need judgment on an address?"
+        description="Share your target neighborhoods, timing, and budget. A Property Assessment is the address review. Livability Score stays on the Tools desk."
+        href="/contact?intent=property"
+        label="Property Assessment"
+        eyebrow="Property Assessment"
       />
     </main>
   );

@@ -1,11 +1,16 @@
 import { Link } from "wouter";
 import { ArrowRight, MoveRight } from "lucide-react";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
+import { KAMMER_VERDICTS, PUBLIC_PRODUCTS } from "@/data/public-menu";
 
 const profileDimensions = [
   {
-    label: "Belonging Score",
-    text: "How well your current home and place fit the life you want. One signal inside a larger profile.",
+    label: "Fit verdict",
+    text: `${KAMMER_VERDICTS.join(", ")}. How well this life and place still fit. A verdict, not a /100 score.`,
+  },
+  {
+    label: "WHO",
+    text: "Who the home is for now: household, rhythm, privacy, and the life that has to work here.",
   },
   {
     label: "Decision Readiness",
@@ -20,10 +25,6 @@ const profileDimensions = [
     text: "How much room you have to wait, renovate, relocate, or hold, without a hard sell frame.",
   },
   {
-    label: "Timing Outlook",
-    text: "Whether the next months favor action, patience, or a staged path.",
-  },
-  {
     label: "Recommended Next Step",
     text: "A personalized recommendation, including whether to stay, wait, renovate, rent, buy, or sell, with the reasoning behind it.",
   },
@@ -31,9 +32,9 @@ const profileDimensions = [
 
 export default function Belonging() {
   usePageMetadata({
-    title: "Housing Decision Assessment | Are You Living Where You Belong?",
+    title: `${PUBLIC_PRODUCTS.situation.label} | Are You Living Where You Belong?`,
     description:
-      "Take the Housing Decision Assessment. Receive an Agent Kammer Decision Profile: belonging, readiness, lifestyle fit, timing, and a reasoned next step.",
+      "Take the Situation Assessment. Receive an Agent Kammer profile: fit verdict, WHO, readiness, lifestyle fit, timing, and a reasoned next step.",
     path: "/belonging",
   });
 
@@ -41,16 +42,16 @@ export default function Belonging() {
     <main className="bg-brand-ivory text-brand-ink">
       <section className="border-b border-brand-border">
         <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-24">
-          <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">Housing Decision Assessment</p>
+          <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">{PUBLIC_PRODUCTS.situation.label}</p>
           <h1 className="mt-5 max-w-4xl font-display text-[clamp(2.8rem,5.5vw,5.25rem)] leading-[0.9] text-brand-navy">
             Find out if you’re living where you belong.
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-brand-graphite">
-            A guided assessment about your life, priorities, and housing, not listings. Your responses help tailor your Decision Profile and determine whether a Housing Strategy Session would add value.
+            A guided life diagnostic about your life, priorities, and housing, not listings. Your responses help tailor your profile and determine whether a Strategy Session would add value.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
-              href="/contact?intent=belonging"
+              href="/contact?intent=situation"
               className="ak-call-button group grid min-w-[18rem] px-5 py-4 text-left transition-colors"
             >
               <span className="text-[10px] uppercase tracking-[0.24em]">
@@ -64,15 +65,15 @@ export default function Belonging() {
               </span>
             </Link>
             <Link
-              href="/contact"
+              href="/contact?intent=strategy"
               className="inline-flex items-center gap-2 border border-brand-border bg-white/50 px-5 py-4 text-[11px] uppercase tracking-[0.16em] text-brand-navy transition-colors hover:border-brand-brass"
             >
-              Prefer a Housing Strategy Session first
+              Prefer a Strategy Session first
               <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
             </Link>
           </div>
           <p className="mt-6 max-w-xl text-sm leading-7 text-brand-graphite/80">
-            The scored profile is in active build. Requesting the assessment today opens a private intake so your Agent Kammer Decision Profile can be prepared manually. Same diagnostic, human-paced.
+            The scored profile is in active build. Requesting the assessment today opens a private intake so your Agent Kammer profile can be prepared manually. Same diagnostic, human-paced. Public language stays Pick, Consider, Wait, Pass, and WHO. Not a /100 score.
           </p>
         </div>
       </section>
@@ -81,10 +82,10 @@ export default function Belonging() {
         <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-20">
           <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">What You Receive</p>
           <h2 className="mt-4 max-w-2xl font-display text-[clamp(2rem,4vw,3.25rem)] leading-[0.94] text-brand-navy">
-            Your Decision Profile
+            Your situation profile
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-8 text-brand-graphite">
-            Belonging Score is one piece of a larger profile, something you can revisit and update as life changes, not a one-time quiz result.
+            Fit verdict and WHO are the show language: something you can revisit as life changes, not a one-time quiz result.
           </p>
           <div className="mt-12 grid gap-10 border-t border-brand-border pt-10 sm:grid-cols-2 lg:grid-cols-3">
             {profileDimensions.map((item) => (
@@ -105,11 +106,11 @@ export default function Belonging() {
               Diagnose before you decide.
             </h2>
             <p className="mt-5 text-base leading-8 text-brand-ivory/74">
-              Live Where You Belong is the outcome: stay or move. This Housing Decision Assessment is the diagnostic that gets you there. People don’t take a real estate quiz; they receive an Agent Kammer Decision Profile.
+              Live Where You Belong is the outcome: stay or move. This Situation Assessment is the diagnostic that gets you there. People don’t take a real estate quiz; they receive an Agent Kammer profile.
             </p>
           </div>
           <Link
-            href="/contact?intent=belonging"
+            href="/contact?intent=situation"
             className="ak-call-button inline-flex shrink-0 items-center justify-between gap-8 px-5 py-4 text-[11px] uppercase tracking-[0.16em]"
           >
             Start Assessment

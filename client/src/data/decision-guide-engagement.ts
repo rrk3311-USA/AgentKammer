@@ -200,13 +200,13 @@ const byPath: Record<string, Partial<PageEngagement>> = {
     ],
   },
   "/belonging": {
-    headline: "Belonging Assessment",
-    nudge: "The assessment helps clarify fit. Want me to interpret what your answers mean for next steps?",
-    greeting: "Belonging is about whether Manhattan (and which part) will actually work for your life. What's prompting the assessment?",
+    headline: "Situation Assessment",
+    nudge: "The Situation Assessment helps clarify fit. Want me to interpret what your answers mean for next steps?",
+    greeting: "This Situation Assessment is about whether Manhattan (and which part) will actually work for your life. What's prompting the assessment?",
   },
   "/advisory": {
     headline: "Advisory, not inventory",
-    nudge: "I can help you decide if a Housing Strategy Session is the right next step.",
+    nudge: "I can help you decide if a Strategy Session is the right next step.",
     greeting: "Residential advisory here is for judgment, not a listing tour. What decision are you stuck on?",
   },
   "/contact": {

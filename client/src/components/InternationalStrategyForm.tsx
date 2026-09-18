@@ -157,7 +157,7 @@ export function InternationalStrategyForm({
         <p className="mt-4 text-sm leading-7 text-brand-graphite/80">{copy.successWait}</p>
         <p className="mt-4 text-sm leading-7 text-brand-graphite/80">
           <a href="/belonging" className="underline underline-offset-4">
-            Belonging Assessment
+            Situation Assessment
           </a>
           {" · "}
           <a href="/situations/foreign-buyers-new-york" className="underline underline-offset-4">

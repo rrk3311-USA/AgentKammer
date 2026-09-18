@@ -167,7 +167,7 @@ export const pageGraph = [
   },
   {
     path: "/belonging",
-    title: "Belonging Assessment",
+    title: "Situation Assessment",
     topics: ["fit", "lifestyle", "neighborhood"],
     prerequisites: ["household", "lifestyle"],
     related: ["/buyer-advisory", "/building-reports/neighborhood-guides", "/contact"],

@@ -70,7 +70,7 @@ export default function BuildingReportDetail() {
         <SectionHeading
           eyebrow="Executive Summary"
           title="Read the building as a decision, not a trophy."
-          description="The first job is to decide whether this address deserves deeper attention, negotiation energy, or a pass."
+          description="The first job is a verdict: Pick, Consider, Wait, or Pass, plus who the address is for. Not a /100 score."
         />
         <Paragraphs lines={report.executiveSummary} />
       </PageSection>
@@ -258,7 +258,10 @@ export default function BuildingReportDetail() {
 
       <CTA
         title={`Want ${report.buildingName} mapped to your brief?`}
-        description="Begin a Housing Strategy Session with timing, budget, and what the next home needs to do better than the current one."
+        description="Request a Property Assessment with timing, budget, and what the next home needs to do better than the current one. Verdicts use Pick, Consider, Wait, Pass, and WHO."
+        href="/contact?intent=property"
+        label="Property Assessment"
+        eyebrow="Property Assessment"
       />
     </main>
   );

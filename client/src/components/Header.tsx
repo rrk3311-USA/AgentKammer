@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { AgentKammerHorizontalLogo } from "@/components/AgentKammerHorizontalLogo";
 import { cn } from "@/lib/utils";
 import { primaryNav } from "@/components/site-shell";
+import { PUBLIC_PRODUCTS } from "@/data/public-menu";
+import { openDecisionAssistant } from "@/lib/decision-assistant";
 
 const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-stone focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy";
 
@@ -79,15 +81,17 @@ export function Header() {
 
         <div className="flex items-center justify-end gap-2">
           <div className="hidden lg:block">
-            <Link
-              href="/contact"
+            <button
+              type="button"
+              onClick={openDecisionAssistant}
               className="ak-header-blueprint group inline-flex min-w-[11.5rem] items-center justify-between gap-4 px-4 py-2 text-left transition-colors"
+              data-testid="button-header-guidance"
             >
               <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-ivory">
-                Request Intelligence
+                {PUBLIC_PRODUCTS.guidance.label}
               </span>
               <ArrowRight className="h-3.5 w-3.5 shrink-0 text-brand-ivory/85 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-            </Link>
+            </button>
           </div>
           <button
             onClick={() => setMobileMenuOpen((open) => !open)}
@@ -119,16 +123,20 @@ export function Header() {
                 </Link>
               );
             })}
-            <Link
-              href="/contact"
-              onClick={() => setMobileMenuOpen(false)}
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                openDecisionAssistant();
+              }}
               className="ak-header-blueprint mt-4 flex w-full items-center justify-between gap-4 px-4 py-3 text-left"
+              data-testid="button-header-guidance-mobile"
             >
               <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-ivory">
-                Request Intelligence
+                {PUBLIC_PRODUCTS.guidance.label}
               </span>
               <ArrowRight className="h-4 w-4 shrink-0 text-brand-ivory/85" strokeWidth={1.5} />
-            </Link>
+            </button>
           </nav>
         </div>
       ) : null}

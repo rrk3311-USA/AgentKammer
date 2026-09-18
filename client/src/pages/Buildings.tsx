@@ -97,11 +97,11 @@ export default function Buildings() {
       </section>
 
       <CTA
-        title="Request Intelligence."
-        description="Tell us the building, neighborhood, or timing question that needs a sharper answer. Snapshot, Report, or Dossier."
-        href="/contact"
-        label="Request Intelligence"
-        eyebrow="Request Intelligence"
+        title="Need judgment on an address?"
+        description="Request a Property Assessment. Livability Score stays on the Tools desk, separate from this review."
+        href="/contact?intent=property"
+        label="Property Assessment"
+        eyebrow="Property Assessment"
       />
     </main>
   );

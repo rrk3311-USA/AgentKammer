@@ -9,6 +9,13 @@ import { apiRequest } from "@/lib/queryClient";
 import { PageHero, PageSection, SectionHeading } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { Link } from "wouter";
+import {
+  CONTACT_NEXT_STEPS,
+  PUBLIC_PRODUCTS,
+  resolvePublicIntent,
+  type PublicProductId,
+} from "@/data/public-menu";
+import { openDecisionAssistant } from "@/lib/decision-assistant";
 
 const decisionTypes = [
   "Buy",
@@ -19,7 +26,7 @@ const decisionTypes = [
   "Renovate",
   "Refinance",
   "Rent current home",
-  "Decision Assessment / belonging",
+  PUBLIC_PRODUCTS.situation.label,
   "Not sure yet",
 ];
 
@@ -37,39 +44,75 @@ const budgetRanges = [
 function routingNote(budgetRange: string) {
   if (budgetRange.includes("$5M+")) return "This lane is reviewed by Raphi.";
   if (budgetRange === "Exploring / not ready" || budgetRange === "Not sure / private") {
-    return "Exploring stays with the Guidance Advisor and Decision Hub until a call is useful.";
+    return "Exploring stays with the Guidance Advisor and Decision Hub until a Strategy Session is useful.";
   }
   if (budgetRange) return "Ready buyers under $5M may be introduced to Diego Micheo at Douglas Elliman.";
   return "";
 }
-const nextSteps = [
-  "Property Strategy Session",
-  "Property Snapshot",
-  "Property Intelligence Report",
-  "Acquisition Dossier",
-  "Decision Assessment",
-  "Email recap first",
-  "Not sure",
-];
+const nextSteps = [...CONTACT_NEXT_STEPS, "Not sure"] as const;
+
+const intakeCopy: Record<
+  PublicProductId | "default",
+  { title: string; eyebrow: string; description: string; nextStep: string; decisionType?: string }
+> = {
+  default: {
+    title: "Tell us the next step.",
+    eyebrow: "Begin",
+    description:
+      "Share what is changing and which public step you want: Guidance, Situation Assessment, Property Assessment, Livability Score, or a Strategy Session.",
+    nextStep: "",
+  },
+  guidance: {
+    title: "Continue with Guidance.",
+    eyebrow: PUBLIC_PRODUCTS.guidance.advisor,
+    description: PUBLIC_PRODUCTS.guidance.text,
+    nextStep: PUBLIC_PRODUCTS.guidance.label,
+  },
+  situation: {
+    title: "Request your Situation Assessment.",
+    eyebrow: PUBLIC_PRODUCTS.situation.label,
+    description:
+      "Share enough context to prepare a life diagnostic: what changed, what feels off about where you live, and what a good five-year outcome looks like.",
+    nextStep: PUBLIC_PRODUCTS.situation.label,
+    decisionType: PUBLIC_PRODUCTS.situation.label,
+  },
+  property: {
+    title: "Request a Property Assessment.",
+    eyebrow: PUBLIC_PRODUCTS.property.label,
+    description: PUBLIC_PRODUCTS.property.text,
+    nextStep: PUBLIC_PRODUCTS.property.label,
+  },
+  livability: {
+    title: "Request a Livability Score.",
+    eyebrow: `${PUBLIC_PRODUCTS.livability.label} · Tools`,
+    description: PUBLIC_PRODUCTS.livability.text,
+    nextStep: PUBLIC_PRODUCTS.livability.label,
+  },
+  strategy: {
+    title: "Request a Strategy Session.",
+    eyebrow: PUBLIC_PRODUCTS.strategy.label,
+    description: PUBLIC_PRODUCTS.strategy.text,
+    nextStep: PUBLIC_PRODUCTS.strategy.label,
+  },
+};
 
 function readIntent() {
   if (typeof window === "undefined") return null;
-  return new URLSearchParams(window.location.search).get("intent");
+  return resolvePublicIntent(new URLSearchParams(window.location.search).get("intent"));
 }
 
 export default function Contact() {
-  const [intent, setIntent] = useState<string | null>(null);
-  const isBelonging = intent === "belonging";
+  const [intent, setIntent] = useState<PublicProductId | null>(null);
+  const copy = intakeCopy[intent ?? "default"];
+  const isSituation = intent === "situation";
 
   useEffect(() => {
     setIntent(readIntent());
   }, []);
 
   usePageMetadata({
-    title: isBelonging ? "Decision Assessment Intake" : "Request Intelligence",
-    description: isBelonging
-      ? "Request your Decision Assessment. Find out if you’re living where you belong."
-      : "Request Intelligence from Agent Kammer: Assessment, Property Snapshot, Report, or Acquisition Dossier.",
+    title: copy.title.replace(/\.$/, ""),
+    description: copy.description,
     path: "/contact",
   });
 
@@ -86,13 +129,13 @@ export default function Contact() {
   });
 
   useEffect(() => {
-    if (!isBelonging) return;
+    if (!intent) return;
     setFormData((current) => ({
       ...current,
-      decisionType: current.decisionType || "Decision Assessment / belonging",
-      nextStep: current.nextStep || "Decision Assessment",
+      decisionType: current.decisionType || copy.decisionType || current.decisionType,
+      nextStep: current.nextStep || copy.nextStep,
     }));
-  }, [isBelonging]);
+  }, [intent, copy.decisionType, copy.nextStep]);
 
   const { toast } = useToast();
 
@@ -154,40 +197,41 @@ export default function Contact() {
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
       <PageHero
-        eyebrow={isBelonging ? "Decision Assessment" : "Request Intelligence"}
-        title={isBelonging ? "Request your Decision Assessment." : "Request Intelligence."}
-        description={
-          isBelonging
-            ? "Share enough context to prepare a Decision Profile: what changed, what feels off about where you live, and what a good five-year outcome looks like. The scored AI report is in build; intake today is human-paced."
-            : "Share what is changing, what decision you are weighing, and where the conversation should begin. Or start with the Belonging Assessment first."
-        }
+        eyebrow={copy.eyebrow}
+        title={copy.title}
+        description={copy.description}
         art="contact"
         kicker={
-          isBelonging ? undefined : (
-            <div className="space-y-2">
-              <Link href="/belonging" className="block text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass">
-                Prefer the Decision Assessment? Find out if you’re living where you belong →
-              </Link>
-              <Link href="/advisory" className="block text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass">
-                See how Residential Advisory sessions and memberships work →
-              </Link>
-            </div>
-          )
+          <div className="space-y-2">
+            <button
+              type="button"
+              onClick={openDecisionAssistant}
+              className="block text-left text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass"
+            >
+              Prefer Guidance? Open the Guidance Advisor →
+            </button>
+            <Link href="/belonging" className="block text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass">
+              Prefer the Situation Assessment? Find out if you’re living where you belong →
+            </Link>
+            <Link href="/advisory" className="block text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass">
+              See how a Strategy Session works. Memberships follow by invitation →
+            </Link>
+          </div>
         }
       />
 
       <PageSection className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
         <div>
           <SectionHeading
-            eyebrow={isBelonging ? "Intake" : "Reach Out"}
+            eyebrow={isSituation ? "Intake" : "Reach Out"}
             title={
-              isBelonging
+              isSituation
                 ? "Tell us what belonging would feel like."
                 : "Use the request form when there is enough context to respond well."
             }
             description={
-              isBelonging
-                ? "A few filters keep the first profile useful: what changed, what drains you, timing, and whether you want a Housing Strategy Session after the report."
+              isSituation
+                ? "A few filters keep the first profile useful: what changed, what drains you, timing, and whether you want a Strategy Session after the assessment."
                 : "A few filters keep the first reply useful: what changed, what decision is on the table, timing, budget or readiness, and the best next step."
             }
           />
@@ -196,7 +240,7 @@ export default function Contact() {
               <div className="inline-flex items-center gap-3 text-brand-navy">
                 <Mail className="h-4 w-4 text-brand-brass" strokeWidth={1.5} />
                 <span className="text-sm uppercase tracking-[0.16em]">
-                  {isBelonging ? "Send Assessment Intake" : "Request Intelligence"}
+                  {isSituation ? "Send Assessment Intake" : "Send the next step"}
                 </span>
               </div>
             </a>
@@ -211,11 +255,11 @@ export default function Contact() {
 
         <div id="request-call" className="rounded-card border border-brand-border bg-white p-8 shadow-soft lg:p-10">
           <h2 className="font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">
-            {isBelonging ? "Assessment Intake" : "Request Intelligence"}
+            {isSituation ? "Assessment Intake" : copy.eyebrow}
           </h2>
           <p className="mt-3 text-sm leading-7 text-brand-graphite">
-            {isBelonging
-              ? "Answer the minimum filters so the Decision Profile can start from real context, not a blank calendar invite."
+            {isSituation
+              ? "Answer the minimum filters so the Situation Assessment can start from real context, not a blank calendar invite."
               : "Answer the minimum filters so the reply can include a useful recommendation, not just a scheduling link."}
           </p>
           <form onSubmit={handleSubmit} className="mt-8 space-y-6">
@@ -357,7 +401,7 @@ export default function Contact() {
 
                 <div>
                   <label htmlFor="nextStep" className="mb-2 block text-sm font-medium">
-                    What the call is for
+                    What you want next
                   </label>
                   <select
                     id="nextStep"
@@ -399,7 +443,7 @@ export default function Contact() {
                 data-testid="button-contact-submit"
                 disabled={contactMutation.isPending}
               >
-                {contactMutation.isPending ? "Sending..." : isBelonging ? "Send Assessment Intake" : "Request Intelligence"}
+                {contactMutation.isPending ? "Sending..." : isSituation ? "Send Assessment Intake" : "Send the next step"}
               </Button>
             </form>
         </div>

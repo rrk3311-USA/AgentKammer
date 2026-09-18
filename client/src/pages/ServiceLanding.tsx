@@ -317,11 +317,11 @@ export default function ServiceLanding({ slug }: { slug: string }) {
       </article>
 
       <CTA
-        title="Request Intelligence."
-        description={`For ${landing.navLabel.toLowerCase()}, tell us the decision in front of you. Assessment, Snapshot, Report, or Dossier.`}
-        href="/contact"
-        label="Request Intelligence"
-        eyebrow="Request Intelligence"
+        title="If this situation is yours."
+        description={`For ${landing.navLabel.toLowerCase()}, start with the Situation Assessment, or request a Property Assessment if an address is already in play.`}
+        href="/belonging"
+        label="Situation Assessment"
+        eyebrow="Start Here"
       />
     </main>
   );
