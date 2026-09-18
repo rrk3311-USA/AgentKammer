@@ -981,26 +981,41 @@
     align-items: center;
     justify-content: center;
     gap: 0.55rem;
-    border: 1px solid rgba(176, 141, 87, 0.55);
-    background: #202735;
+    border: 1px solid rgba(198, 168, 112, 0.28);
+    border-radius: 0;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 42%),
+      #0c0e12;
     padding: 0 1.1rem;
-    color: #f5f2eb;
+    color: #efe6d6;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    box-shadow: 0 8px 18px rgba(13, 24, 43, 0.2);
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.35);
   }
 
   .ak-guidance-chip:hover {
-    border-color: rgba(176, 141, 87, 0.8);
-    color: #fff;
+    border-color: rgba(198, 168, 112, 0.48);
+    color: #f7f1e6;
   }
 
   .ak-guidance-sheet {
     max-height: min(52vh, 32.5rem);
-    margin-bottom: max(0.45rem, env(safe-area-inset-bottom));
-    animation: ak-guidance-rise 260ms cubic-bezier(0.19, 1, 0.22, 1);
+    border-radius: 0;
+    border: 1px solid rgba(198, 168, 112, 0.22);
+    border-bottom: 0;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, transparent 22%),
+      #0c0e12;
+    color: #efe6d6;
+    box-shadow: 0 -12px 28px rgba(0, 0, 0, 0.42);
+    animation: ak-guidance-rise 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .ak-guidance-sheet,
+  .ak-guidance-sheet * {
+    border-radius: 0;
   }
 
   .ak-guidance-handle {
@@ -1015,23 +1030,46 @@
 
   .ak-guidance-handle > span {
     display: block;
-    height: 0.25rem;
-    width: 2.75rem;
-    border-radius: 999px;
-    background: rgba(42, 52, 71, 0.18);
+    height: 1px;
+    width: 2.25rem;
+    border-radius: 0;
+    background: rgba(239, 230, 214, 0.28);
+  }
+
+  .ak-guidance-sheet .ak-blueprint-main-progress {
+    height: 0.2rem;
+    border: 0;
+    border-radius: 0;
+    background: rgba(239, 230, 214, 0.12);
+    box-shadow: none;
+  }
+
+  .ak-guidance-sheet .ak-blueprint-main-progress-fill {
+    min-width: 0.2rem;
+    background: rgba(198, 168, 112, 0.72);
+    box-shadow: none;
+  }
+
+  .ak-guidance-sheet .ak-blueprint-main-progress-fill::after {
+    display: none;
+  }
+
+  .ak-guidance-sheet .ak-blueprint-main-progress-grid > span {
+    border-right-color: rgba(12, 14, 18, 0.55);
   }
 
   @media (min-width: 768px) {
     .ak-guidance-sheet {
       max-width: 32rem;
       max-height: min(46vh, 30rem);
+      border-bottom: 1px solid rgba(198, 168, 112, 0.22);
     }
   }
 
   @keyframes ak-guidance-rise {
     from {
-      transform: translateY(10%);
-      opacity: 0.55;
+      transform: translateY(8%);
+      opacity: 0.7;
     }
     to {
       transform: translateY(0);

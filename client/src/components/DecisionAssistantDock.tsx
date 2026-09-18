@@ -45,26 +45,26 @@ const DEFAULT_GREETING = getPageEngagement("/").greeting;
 
 function DecisionGuideAvatar({ animated = false }: { animated?: boolean }) {
   return (
-    <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-brand-stone bg-brand-ivory p-[2px] shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_1px_8px_rgba(42,52,71,0.22)]">
+    <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden border border-white/15 bg-[#0c0e12]">
       <span
         className={
           animated
-            ? "absolute inset-0 animate-command-breathe rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.5),transparent_42%,rgba(216,209,199,0.35))]"
-            : "absolute inset-0 rounded-full bg-[linear-gradient(135deg,rgba(255,255,255,0.5),transparent_42%,rgba(216,209,199,0.28))]"
+            ? "absolute inset-0 animate-command-breathe bg-[linear-gradient(180deg,rgba(255,255,255,0.08),transparent_46%)]"
+            : "absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),transparent_46%)]"
         }
       />
       <img
         src="/images/decision-guide-raphi.png"
         alt="Raphi, your Guidance Advisor"
-        className="relative z-10 h-full w-full rounded-full object-cover object-[50%_20%]"
+        className="relative z-10 h-full w-full object-cover object-[50%_20%]"
       />
     </span>
   );
 }
 
 function GuidanceAdvisorLabel({ tone = "dark" }: { tone?: "dark" | "light" }) {
-  const guidanceClass = tone === "dark" ? "text-brand-ivory/72" : "text-brand-cocoa";
-  const advisorClass = tone === "dark" ? "text-brand-stone" : "text-brand-navy";
+  const guidanceClass = tone === "dark" ? "text-[#efe6d6]/62" : "text-brand-cocoa";
+  const advisorClass = tone === "dark" ? "text-[#c6a870]" : "text-brand-navy";
   return (
     <span className="block text-[10px] uppercase tracking-[0.22em]">
       <span className={guidanceClass}>Guidance</span>{" "}
@@ -1004,11 +1004,11 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   const chipLabel = messages.some((message) => message.role === "user") ? "Resume Decision" : "Guidance";
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-3">
+    <div className={expanded ? "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center" : "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-3"}>
       {expanded ? (
         <aside
           id="decision-assistant"
-          className="ak-guidance-sheet pointer-events-auto flex w-full flex-col border border-brand-stone/70 bg-brand-ivory text-brand-navy shadow-[0_-10px_28px_rgba(13,24,43,0.14)]"
+          className="ak-guidance-sheet pointer-events-auto flex w-full flex-col"
           aria-label="Guidance Advisor"
           aria-expanded="true"
         >
@@ -1033,14 +1033,14 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
               >
                 <DecisionGuideAvatar animated />
                 <span className="min-w-0 flex-1">
-                  <GuidanceAdvisorLabel tone="light" />
-                  <span className="block truncate text-sm font-medium text-brand-navy">{engagement.headline}</span>
+                  <GuidanceAdvisorLabel tone="dark" />
+                  <span className="block truncate text-sm font-medium text-[#efe6d6]">{engagement.headline}</span>
                 </span>
               </button>
               <button
                 type="button"
                 onClick={collapseSheet}
-                className="inline-flex h-11 w-11 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy"
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center border border-white/15 bg-transparent text-[#efe6d6]/70 transition-colors hover:border-white/30 hover:text-[#efe6d6]"
                 aria-label="Close Guidance Advisor"
                 data-testid="button-guidance-close"
               >
@@ -1049,9 +1049,9 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
             </div>
 
             <div className="flex items-center gap-3" aria-label="Decision Blueprint progress">
-              <p className="shrink-0 text-[9px] uppercase tracking-[0.18em] text-brand-cocoa">Progress</p>
-              <div className="min-w-0 flex-1">{renderCompactBlueprintProgress("light")}</div>
-              <p className="shrink-0 font-mono text-[10px] text-brand-graphite">{blueprintCompletion}/6</p>
+              <p className="shrink-0 text-[9px] uppercase tracking-[0.18em] text-[#c6a870]/70">Progress</p>
+              <div className="min-w-0 flex-1">{renderCompactBlueprintProgress("dark")}</div>
+              <p className="shrink-0 font-mono text-[10px] text-[#efe6d6]/50">{blueprintCompletion}/6</p>
             </div>
 
             <div ref={transcriptRef} className="min-h-0 flex-1 space-y-1.5 overflow-y-auto overflow-x-hidden pr-1">
@@ -1060,15 +1060,15 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
                   key={`${message.role}-${index}`}
                   className={
                     message.role === "assistant"
-                      ? "max-w-full overflow-hidden border border-brand-navy bg-brand-navy p-2.5 text-brand-ivory"
-                      : "max-w-full overflow-hidden border border-brand-border bg-white p-2.5 text-brand-navy"
+                      ? "max-w-full overflow-hidden border border-white/10 bg-white/[0.04] p-2.5 text-[#efe6d6]"
+                      : "max-w-full overflow-hidden border border-white/12 bg-transparent p-2.5 text-[#efe6d6]/88"
                   }
                 >
                   <p
                     className={
                       message.role === "assistant"
-                        ? "text-[9px] uppercase tracking-[0.16em] text-brand-stone"
-                        : "text-[9px] uppercase tracking-[0.16em] text-brand-cocoa"
+                        ? "text-[9px] uppercase tracking-[0.16em] text-[#c6a870]/75"
+                        : "text-[9px] uppercase tracking-[0.16em] text-[#efe6d6]/45"
                     }
                   >
                     {message.role === "assistant" ? "Guidance Advisor" : "You"}
@@ -1085,7 +1085,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
                     key={prompt.label}
                     type="button"
                     onClick={() => handleStarter(prompt)}
-                    className="min-h-11 border border-brand-border bg-white px-3 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
+                    className="min-h-11 border border-white/15 bg-transparent px-3 text-[11px] text-[#efe6d6] transition-colors hover:border-[#c6a870]/50"
                   >
                     {prompt.label}
                   </button>
@@ -1100,7 +1100,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
                     key={action.label}
                     type="button"
                     onClick={() => handleQuickAction(action)}
-                    className="min-h-11 border border-brand-stone bg-brand-surface px-3 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
+                    className="min-h-11 border border-[#c6a870]/35 bg-transparent px-3 text-[11px] text-[#efe6d6] transition-colors hover:border-[#c6a870]/60"
                   >
                     {action.label}
                   </button>
@@ -1126,12 +1126,12 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
                       : openingPrompts[promptIndex % openingPrompts.length] || "Tell me what's changing..."
                   }
                   rows={2}
-                  className="min-h-11 w-full min-w-0 resize-none border border-brand-border bg-white px-3 py-2 text-sm text-brand-navy outline-none transition-colors placeholder:text-brand-graphite/55 focus:border-brand-navy"
+                  className="min-h-11 w-full min-w-0 resize-none border border-white/15 bg-black/25 px-3 py-2 text-sm text-[#efe6d6] outline-none transition-colors placeholder:text-[#efe6d6]/35 focus:border-[#c6a870]/45"
                 />
                 <button
                   type="submit"
                   disabled={sending}
-                  className="inline-flex h-11 w-11 shrink-0 items-center justify-center gap-2 border border-brand-navy bg-brand-navy text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:bg-brand-navy-secondary disabled:cursor-wait disabled:opacity-70 md:w-auto md:px-4"
+                  className="inline-flex h-11 w-11 shrink-0 items-center justify-center gap-2 border border-[#c6a870]/40 bg-transparent text-[11px] uppercase tracking-[0.16em] text-[#efe6d6] transition-colors hover:border-[#c6a870]/70 disabled:cursor-wait disabled:opacity-70 md:w-auto md:px-4"
                 >
                   <span className="hidden md:inline">{sending ? "Sending" : "Send"}</span>
                   <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
@@ -1152,7 +1152,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
             <button
               type="button"
               onClick={toggleSheet}
-              className="mb-2 w-full border border-brand-brass/40 bg-brand-navy px-3 py-2 text-left text-brand-ivory shadow-[0_8px_18px_rgba(13,24,43,0.2)]"
+              className="mb-2 w-full border border-[#c6a870]/28 bg-[#0c0e12] px-3 py-2 text-left text-[#efe6d6]"
             >
               <span className="block text-[10px] uppercase tracking-[0.18em] text-brand-stone">Guidance Advisor</span>
               <span className="mt-1 block text-sm leading-5">{nudge}</span>
