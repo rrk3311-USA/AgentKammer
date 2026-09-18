@@ -32,7 +32,23 @@ Manhattan housing advisory site — Decision OS product surface.
 - **Production branch:** `luxury-homepage` (Vercel project: `agentkammer`)
 - **Feature work:** branch off `luxury-homepage` → PR into `luxury-homepage` → merge
 - Do not push to Replit. Ignore local clones that are out of date unless synced from `luxury-homepage`.
-- **Env:** `DATABASE_URL`, `SITE_URL`, and other secrets live on Vercel only. Contact defaults in this repo are `info@agentkammer.com` / `agentkammer.com` — never Success Chemistry.
+- **Env:** Secrets live on Vercel only (project `agentkammer`). Contact defaults in this repo are `info@agentkammer.com` / `agentkammer.com` — never Success Chemistry.
+
+### Vercel env for Decision Hub persistence
+
+Hub/member schema already exists (`member_profiles` in `shared/schema.ts`). Production `/api/account/*` functions persist there **only when** `DATABASE_URL` is set. Missing env fails open to signed cookies (works, but briefs are capped by cookie size).
+
+Set these on the `agentkammer` Vercel project (Production + Preview):
+
+| Variable | Required for | Notes |
+|----------|--------------|--------|
+| `DATABASE_URL` | Hub DB persistence | Neon pooled Postgres URL. Then run `npm run db:push` once against that database so `member_profiles` exists. |
+| `ACCOUNT_SESSION_SECRET` | Hub sessions | HMAC key for `ak_member_token` / OTP cookies. Generate a long random string. |
+| `RESEND_API_KEY` | PIN email | Preferred mailer for Resume My Decision codes. |
+| `ACCOUNT_EMAIL_FROM` | PIN email | e.g. `Agent Kammer <info@agentkammer.com>` |
+| `SITE_URL` | Absolute links | `https://www.agentkammer.com` |
+
+Optional fallbacks: `EMAIL_USER` / `EMAIL_PASS` if Resend is unset. Do not invent or commit database credentials — Raphi sets Neon + Vercel.
 
 ## Repo / deploy firewall
 
