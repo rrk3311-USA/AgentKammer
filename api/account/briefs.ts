@@ -10,7 +10,7 @@ import {
   publicHub,
   setMemberCookie,
 } from "./_shared.js";
-import { loadMemberFromDatabase, persistMemberToDatabase } from "./persist.js";
+import { loadMemberFromDatabase, persistMemberToDatabase } from "./_persist.js";
 
 // Save a recommendation brief into the member's Decision Hub. Only
 // authenticated members (verified email + PIN / cookie session) - never

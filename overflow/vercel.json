@@ -1,0 +1,42 @@
+{
+  "framework": null,
+  "installCommand": "cp ../package.json ../package-lock.json . && npm ci",
+  "buildCommand": "echo overflow-api",
+  "outputDirectory": "public",
+  "functions": {
+    "api/international-strategy.ts": {
+      "includeFiles": "../{server,shared}/**"
+    },
+    "api/tools/status.ts": {
+      "includeFiles": "../{server,shared}/**"
+    },
+    "api/tools/wallet.ts": {
+      "includeFiles": "../{server,shared}/**"
+    },
+    "api/tools/runs.ts": {
+      "maxDuration": 30,
+      "includeFiles": "../{server,shared}/**"
+    },
+    "api/tools/checkout.ts": {
+      "includeFiles": "../{server,shared}/**"
+    },
+    "api/tools/checkout/confirm.ts": {
+      "includeFiles": "../{server,shared}/**"
+    },
+    "api/tools/webhook.ts": {
+      "maxDuration": 15,
+      "includeFiles": "../{server,shared}/**"
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Credentials", "value": "true" },
+        { "key": "Access-Control-Allow-Origin", "value": "https://www.agentkammer.com" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Authorization,Content-Type,Stripe-Signature,x-tools-preview" }
+      ]
+    }
+  ]
+}

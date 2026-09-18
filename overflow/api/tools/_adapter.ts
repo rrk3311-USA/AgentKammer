@@ -1,4 +1,4 @@
-import type { ToolsReq, ToolsRes } from "../../server/lib/tools/http";
+import type { ToolsReq, ToolsRes } from "../../../server/lib/tools/http";
 
 export type VercelReq = {
   method?: string;
