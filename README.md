@@ -56,3 +56,14 @@ vercel deploy --prod   # deploy THIS repo only to the agentkammer project
 
 Design tokens (implementation): `client/src/index.css`, `client/src/lib/design-system.ts`, `tailwind.config.ts`.  
 Brand rules (human/AI): `docs/brand/AGENT-KAMMER-BRAND.md`.
+
+## Curation IQ (unlisted)
+
+Raphi’s **Kammer Report / Property Assessment queue** — Suggested (IQ) → Selected (Raphi). Not in the public nav.
+
+- Desk: `/tools/curation` (alias `/admin/curation`). Same Basic auth as `/admin`.
+- **v1 source:** operators capture StreetEasy *Most Popular* per band (Weekly OS style) and **paste sale URLs**. No production StreetEasy / Zillow scrapers. MLS / RESO swaps in later via `MlsFeedAdapter` without redesigning the two layers.
+- Universe: Manhattan condos, for sale, research $5–20M; primary publish $5–15M; $15–20M trophy-only. Cap 3–5 live on-sale picks.
+- Replacing a suggestion secretly sets `raphi_replaced` (admin only). Suggested history stays.
+- Seed: `npm run seed:curation` — SAMPLE placeholders so the desk is demoable before the first real paste.
+- Docs: [`docs/admin/CURATION-IQ.md`](docs/admin/CURATION-IQ.md)

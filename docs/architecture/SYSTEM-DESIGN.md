@@ -507,6 +507,8 @@ From `server/routes.ts`. Auth: **Public** · **Member token** · **Admin Basic**
 | GET | `/api/admin/dashboard` | Admin |
 | GET | `/api/admin/pipeline` | Admin |
 | GET | `/api/admin/rbo-profiles` | Admin |
+| GET / POST | `/api/admin/curation*` | Admin — Curation IQ Suggested → Selected |
+| GET | `/api/curation/picks` | Public — Selected on-sale only |
 | GET | `/api/chat-conversations` | Admin |
 | DELETE | `/api/chat-conversations/:id` | Admin |
 | GET | `/api/affiliates` | Admin |

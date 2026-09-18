@@ -52,6 +52,7 @@ const PRACTICE_GUIDE_HREF = "/guides/advisor-practice-guide.html";
 const SYSTEMS_GUIDE_HREF = "/guides/advisor-os-onboarding.html";
 const INTL_GUIDE_HREF = "/guides/international-buyer-hub.html";
 const INTL_HUB_HREF = "/international";
+const CURATION_IQ_HREF = "/tools/curation";
 const MARKETING_FUNNEL_HREF = "/admin/real-estate-marketing-funnel.html";
 const EXAM_HIERARCHY_HREF = "/admin/ny-real-estate-exam-hierarchy.html";
 const EXAM_PASS_HREF = "/admin/ny-salesperson-exam-pass.html";
@@ -145,6 +146,21 @@ export default function AdminSection({ section }: { section: keyof typeof COPY }
                 <p className="mt-1 text-[16px] text-[var(--ak-ink)]">Advisor OS / Attio guide</p>
                 <p className="mt-1 text-[13px] text-[var(--ak-secondary)]">
                   People vs Housing vs Deals, lifecycle stages, and list verification.
+                </p>
+              </div>
+              <span className="shrink-0 text-[13px] text-[var(--ak-brass)]">Open →</span>
+            </a>
+            <a
+              href={CURATION_IQ_HREF}
+              className="ak-admin-card flex items-center justify-between gap-4 px-5 py-4 no-underline transition hover:bg-[var(--ak-card)]"
+            >
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--ak-brass)]">
+                  Unlisted desk
+                </p>
+                <p className="mt-1 text-[16px] text-[var(--ak-ink)]">Curation IQ</p>
+                <p className="mt-1 text-[13px] text-[var(--ak-secondary)]">
+                  Suggested → Selected report queue. Not in the sidebar. Paste StreetEasy sale URLs until MLS lands.
                 </p>
               </div>
               <span className="shrink-0 text-[13px] text-[var(--ak-brass)]">Open →</span>

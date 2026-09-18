@@ -6,6 +6,7 @@
 |--------|-----|----------|
 | Visitor site | `/` and public routes | Prospects — Decision Guide, reports, contact |
 | Internal portal | `/admin` | You — pipeline, funnel, strategy scoring |
+| Unlisted tools | `/tools` · `/tools/curation` | You — Curation IQ (Suggested → Selected). Not in the sidebar. |
 
 ## Login
 
@@ -16,9 +17,9 @@ Auth is HTTP Basic, stored in `sessionStorage` for the browser session. All `/ap
 
 ## Indexing
 
-- `robots.txt` disallows `/admin` and `/admin/`
-- Admin UI sets `noindex, nofollow, noarchive` on mount
-- `/admin` is not listed in `sitemap.xml`
+- `robots.txt` disallows `/admin`, `/admin/`, `/tools`, `/tools/`
+- Admin / tools UI sets `noindex, nofollow, noarchive` on mount
+- `/admin` and `/tools` are not listed in `sitemap.xml`
 
 ## Opening screen
 
@@ -63,11 +64,18 @@ Live visitor beacon: `POST /api/signals` + `client/src/lib/visitor-signals.ts`
 | GET | `/api/admin/pipeline` | Basic |
 | GET | `/api/admin/rbo-profiles` | Basic |
 | POST | `/api/signals` | Public |
+| GET | `/api/admin/curation` | Basic — Curation IQ desk |
+| POST | `/api/admin/curation/suggestions` | Basic — paste listing URL into Suggested |
+| POST | `/api/admin/curation/suggestions/:id/promote` | Basic — Suggested → Selected |
+| PATCH | `/api/admin/curation/selections/:id` | Basic — edit / replace (`raphi_replaced`) |
+| POST | `/api/admin/curation/selections/:id/on-sale` | Basic — sell / unsell |
+| GET | `/api/curation/picks` | Public — Selected on-sale only (no replace mark) |
 
 ## Stack notes
 
 - **Now:** Drizzle + Neon/MemStorage (same Postgres shape as Supabase)
 - **Next:** point `DATABASE_URL` at Supabase Postgres; `npm run db:push`
+- **Curation IQ:** `curation_batches` / `curation_suggestions` / `curation_selections` in `shared/schema-curation.ts`. v1 is operator paste of StreetEasy Most Popular sale URLs (1st & 15th). MLS later. See [`admin/CURATION-IQ.md`](./admin/CURATION-IQ.md).
 - **PostHog:** behavioral funnels/session replay — not CRM storage. Finish PostHog wizard when Node ≥ 22.22 if required by the wizard package.
 
 ## PostHog (optional)

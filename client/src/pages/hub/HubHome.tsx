@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { ROADMAP_MILESTONES } from "@shared/client-profile";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { fetchHubSnapshot, HubShell, type HubSnapshot } from "./HubShell";
+import { HubPicks } from "./HubPicks";
 
 const STANDING_INDEX: Record<string, number> = {
   anonymous: 0,
@@ -59,6 +60,7 @@ export default function HubHome() {
               ))}
             </ol>
           </div>
+          <HubPicks />
           <div className="flex flex-wrap gap-3">
             <Link
               href="/belonging"
@@ -107,6 +109,7 @@ export default function HubHome() {
                 </p>
               </div>
             )}
+            <HubPicks />
             {hub.upcomingReview && (
               <div className="border-t border-[#D8D1C7] pt-6">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#2A3447]/55">
