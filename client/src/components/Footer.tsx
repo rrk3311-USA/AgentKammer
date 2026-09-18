@@ -31,7 +31,7 @@ function ResumeDecisionNest() {
       <button
         type="button"
         onClick={openDecisionAssistant}
-        className="inline-flex min-h-11 items-center gap-2 border border-white/12 bg-[#050507] px-3.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#f4f0e8] transition-colors hover:border-white/25"
+        className="inline-flex min-h-11 items-center gap-2 rounded-button border border-[#d8d1c7]/35 bg-[rgba(42,52,71,0.94)] px-3.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#f5f2eb] transition-colors hover:border-[#d8d1c7]/55"
         aria-label="Open Guidance Advisor"
         data-testid="button-footer-guidance"
       >

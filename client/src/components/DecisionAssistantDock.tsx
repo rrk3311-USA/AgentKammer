@@ -992,9 +992,9 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
           aria-label="Guidance Advisor"
           aria-expanded="true"
         >
-          <div className="flex min-h-0 flex-1 flex-col gap-3 px-4 pb-[max(0.85rem,env(safe-area-inset-bottom))] pt-1">
+          <div className="flex min-h-0 flex-1 flex-col">
             <div
-              className="flex min-h-11 min-w-0 items-center gap-2 [touch-action:none]"
+              className="ak-guidance-sheet-chrome flex min-h-11 min-w-0 items-center gap-2 px-4 pt-1 [touch-action:none]"
               onPointerDown={(event) => beginSheetDrag(event.clientY)}
               onPointerUp={(event) => finishSheetDrag(event.clientY)}
               onPointerCancel={() => {
@@ -1009,14 +1009,14 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
                 aria-label="Collapse Guidance Advisor"
               >
                 <GuidanceStarProgress completion={blueprintCompletion} />
-                <span className="mt-1.5 block text-[10px] uppercase tracking-[0.22em] text-[#d8c089]/62">
+                <span className="mt-1 block text-[10px] uppercase tracking-[0.22em] text-[#b08d57]">
                   Guidance Advisor
                 </span>
               </button>
               <button
                 type="button"
                 onClick={collapseSheet}
-                className="inline-flex h-11 w-11 shrink-0 items-center justify-center text-[#f4f0e8]/50 transition-colors hover:text-[#f4f0e8]"
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-button text-[#f5f2eb]/50 transition-colors hover:text-[#f5f2eb]"
                 aria-label="Close Guidance Advisor"
                 data-testid="button-guidance-close"
               >
@@ -1024,31 +1024,32 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
               </button>
             </div>
 
-            <div ref={transcriptRef} className="min-h-0 flex-1 space-y-4 overflow-y-auto overflow-x-hidden pr-1">
+            <div className="flex min-h-0 flex-1 flex-col gap-3 px-4 pb-[max(0.85rem,env(safe-area-inset-bottom))] pt-3">
+              <div ref={transcriptRef} className="min-h-0 flex-1 space-y-3 overflow-y-auto overflow-x-hidden pr-1">
               {recentMessages.map((message, index) => (
                 <div key={`${message.role}-${index}`} className="max-w-full">
                   <p
                     className={
                       message.role === "assistant"
-                        ? "text-[10px] uppercase tracking-[0.2em] text-[#d8c089]/80"
-                        : "text-[10px] uppercase tracking-[0.2em] text-[#f4f0e8]/40"
+                        ? "text-[10px] uppercase tracking-[0.2em] text-[#b08d57]"
+                        : "text-[10px] uppercase tracking-[0.2em] text-[#f5f2eb]/40"
                     }
                   >
                     {message.role === "assistant" ? "Guidance Advisor" : "You"}
                   </p>
-                  <p className="mt-2 whitespace-pre-line break-words text-[15px] leading-6 text-[#f4f0e8]/88">{message.text}</p>
+                  <p className="mt-1.5 whitespace-pre-line break-words text-[14px] leading-6 text-[#f5f2eb]/90">{message.text}</p>
                 </div>
               ))}
             </div>
 
-            {cold && step !== "sent" ? (
+              {cold && step !== "sent" ? (
               <div className="flex flex-wrap gap-2" aria-label="Quick starters">
                 {starterPrompts.map((prompt) => (
                   <button
                     key={prompt.label}
                     type="button"
                     onClick={() => handleStarter(prompt)}
-                    className="min-h-11 border border-white/10 px-3 text-[11px] text-[#f4f0e8]/80 transition-colors hover:border-white/25 hover:text-[#f4f0e8]"
+                    className="min-h-10 rounded-button border border-[#d8d1c7]/35 px-3 text-[12px] text-[#f5f2eb]/80 transition-colors hover:border-[#d8d1c7]/60 hover:text-[#f5f2eb]"
                   >
                     {prompt.label}
                   </button>
@@ -1056,14 +1057,14 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
               </div>
             ) : null}
 
-            {quickActions.length > 0 && step !== "sent" ? (
+              {quickActions.length > 0 && step !== "sent" ? (
               <div className="flex flex-wrap gap-2" aria-label="Suggested actions">
                 {quickActions.map((action) => (
                   <button
                     key={action.label}
                     type="button"
                     onClick={() => handleQuickAction(action)}
-                    className="min-h-11 border border-white/10 px-3 text-[11px] text-[#f4f0e8]/80 transition-colors hover:border-white/25 hover:text-[#f4f0e8]"
+                    className="min-h-10 rounded-button border border-[#d8d1c7]/35 px-3 text-[12px] text-[#f5f2eb]/80 transition-colors hover:border-[#d8d1c7]/60 hover:text-[#f5f2eb]"
                   >
                     {action.label}
                   </button>
@@ -1071,8 +1072,8 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
               </div>
             ) : null}
 
-            {step !== "sent" ? (
-              <form onSubmit={handleSubmit} className="mt-auto grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-end gap-2 border-t border-white/[0.08] pt-3">
+              {step !== "sent" ? (
+              <form onSubmit={handleSubmit} className="mt-auto grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-end gap-2 border-t border-[#d8d1c7]/25 pt-3">
                 <label className="sr-only" htmlFor="decision-assistant-input">
                   Tell me what's changing
                 </label>
@@ -1089,18 +1090,19 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
                       : openingPrompts[promptIndex % openingPrompts.length] || "Tell me what's changing..."
                   }
                   rows={2}
-                  className="min-h-11 w-full min-w-0 resize-none border-0 bg-transparent px-0 py-2 text-sm text-[#f4f0e8] outline-none placeholder:text-[#f4f0e8]/32"
+                  className="min-h-10 w-full min-w-0 resize-none border-0 bg-transparent px-0 py-2 text-sm text-[#f5f2eb] outline-none placeholder:text-[#f5f2eb]/32"
                 />
                 <button
                   type="submit"
                   disabled={sending}
-                  className="inline-flex h-11 w-11 shrink-0 items-center justify-center text-[#f4f0e8]/70 transition-colors hover:text-[#f4f0e8] disabled:cursor-wait disabled:opacity-70 md:w-auto md:px-2"
+                  className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-button text-[#f5f2eb]/70 transition-colors hover:text-[#f5f2eb] disabled:cursor-wait disabled:opacity-70 md:w-auto md:px-2"
                 >
                   <span className="sr-only">{sending ? "Sending" : "Send"}</span>
                   <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
                 </button>
               </form>
-            ) : null}
+              ) : null}
+            </div>
           </div>
         </aside>
       ) : (
@@ -1115,7 +1117,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
             <button
               type="button"
               onClick={toggleSheet}
-              className="mb-2 w-full border border-[#c6a870]/28 bg-[#0c0e12] px-3 py-2 text-left text-[#efe6d6]"
+              className="mb-2 w-full rounded-card border border-[#d8d1c7]/40 bg-[rgba(42,52,71,0.94)] px-3 py-2 text-left text-[#f5f2eb]"
             >
               <span className="block text-[10px] uppercase tracking-[0.18em] text-brand-stone">Guidance Advisor</span>
               <span className="mt-1 block text-sm leading-5">{nudge}</span>
