@@ -39,13 +39,15 @@ export default function Belonging() {
   });
 
   return (
-    <main className="bg-brand-ivory text-brand-ink">
+    <main className="bg-brand-navy text-brand-ivory">
       <section className="border-b border-brand-border">
         <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-24">
           <p className="ak-kicker">{PUBLIC_PRODUCTS.situation.label}</p>
-          <h1 className="ak-display mt-4 max-w-4xl">
-            Find out if you’re living where you belong.
-          </h1>
+          <div className="ak-title-band mt-4">
+            <h1 className="ak-display max-w-4xl">
+              Find out if you’re living where you belong.
+            </h1>
+          </div>
           <p className="ak-lede mt-6 max-w-2xl">
             A guided life diagnostic about your life, priorities, and housing, not listings. Your responses help tailor your profile and determine whether a Strategy Session would add value.
           </p>
@@ -54,12 +56,9 @@ export default function Belonging() {
               href="/contact?intent=situation"
               className="ak-call-button group grid min-w-[18rem] px-5 py-4 text-left transition-colors"
             >
-              <span className="text-[10px] uppercase tracking-[0.24em]">
-                <span className="text-brand-ivory/72">Start</span>{" "}
-                <span className="text-[#D7C29A]">Assessment</span>
-              </span>
-              <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
-              <span className="mt-3 flex items-center justify-between font-display text-2xl leading-none text-brand-ivory">
+              <span className="ak-nav-link text-brand-navy/70">Start Assessment</span>
+              <span className="mt-3 h-px w-full bg-brand-navy/20" aria-hidden />
+              <span className="mt-3 flex items-center justify-between font-display text-2xl leading-none text-brand-navy">
                 Begin
                 <MoveRight className="h-5 w-5 text-[#D7C29A] transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
               </span>
@@ -78,7 +77,7 @@ export default function Belonging() {
         </div>
       </section>
 
-      <section className="border-b border-brand-border bg-brand-ivory">
+      <section className="border-b border-brand-border bg-brand-navy">
         <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-20">
           <p className="ak-kicker">What You Receive</p>
           <h2 className="ak-title mt-4 max-w-2xl">
@@ -98,7 +97,7 @@ export default function Belonging() {
         </div>
       </section>
 
-      <section className="border-b border-brand-border bg-brand-ivory">
+      <section className="border-b border-brand-border bg-brand-navy">
         <div className="mx-auto flex max-w-site flex-col gap-8 px-6 py-16 lg:flex-row lg:items-end lg:justify-between lg:px-10 lg:py-20">
           <div className="max-w-2xl">
             <p className="ak-kicker">Not a valuation</p>

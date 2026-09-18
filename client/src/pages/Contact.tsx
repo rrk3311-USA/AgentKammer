@@ -195,7 +195,7 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen bg-brand-ivory text-brand-graphite">
+    <main className="min-h-screen bg-brand-navy text-brand-ivory">
       <PageHero
         eyebrow={copy.eyebrow}
         title={copy.title}

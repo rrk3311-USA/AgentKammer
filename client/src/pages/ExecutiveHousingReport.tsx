@@ -50,8 +50,8 @@ export default function ExecutiveHousingReport() {
   const liveHubLinks = executiveHousingHubLinks.filter((l) => l.status === "live");
 
   return (
-    <main className="min-h-screen bg-brand-ivory text-brand-graphite">
-      <section className="border-b border-brand-border bg-brand-ivory px-6 py-14 lg:px-10 lg:py-20">
+    <main className="min-h-screen bg-brand-navy text-brand-ivory">
+      <section className="border-b border-brand-border bg-brand-navy px-6 py-14 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-3xl">
           <Link href="/insights">
             <span className="ak-nav-link text-brand-navy transition hover:text-brand-navy-secondary">
@@ -154,7 +154,7 @@ export default function ExecutiveHousingReport() {
       </section>
 
       {relatedPerspective ? (
-        <section className="border-t border-brand-border bg-brand-ivory px-6 py-14 lg:px-10">
+        <section className="border-t border-brand-border bg-brand-navy px-6 py-14 lg:px-10">
           <div className="mx-auto max-w-3xl">
             <p className="ak-kicker">Related Perspective</p>
             <h2 className="ak-title mt-3">{relatedPerspective.title}</h2>

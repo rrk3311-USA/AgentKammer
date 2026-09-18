@@ -46,7 +46,7 @@ export default function BuildingReportDetail() {
   const otherReports = buildingReports.filter((item) => item.slug !== report.slug);
 
   return (
-    <main className="bg-brand-ivory">
+    <main className="bg-brand-navy">
       <PageHero
         eyebrow="Building Report"
         title={report.buildingName}

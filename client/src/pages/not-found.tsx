@@ -5,7 +5,7 @@ import { PageSection } from "@/components/site-shell";
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-brand-ivory text-brand-graphite">
+    <main className="min-h-screen bg-brand-navy text-brand-ivory">
       <PageSection className="flex min-h-[62vh] items-center">
         <div className="max-w-3xl">
           <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">Page Not Found</p>

@@ -198,7 +198,7 @@ export default function LiensEasements() {
   });
 
   return (
-    <main className="bg-brand-ivory text-brand-ink">
+    <main className="bg-brand-navy text-brand-ivory">
       <style>{`
         @keyframes le-fade-up {
           from { opacity: 0; transform: translateY(18px); }
@@ -242,7 +242,7 @@ export default function LiensEasements() {
         </div>
       </section>
 
-      <section className="border-b border-brand-border bg-brand-ivory">
+      <section className="border-b border-brand-border bg-brand-navy">
         <div className="mx-auto max-w-site px-6 py-16 sm:px-8 lg:grid lg:grid-cols-[1fr_1.35fr] lg:gap-16 lg:px-10 lg:py-24">
           <div>
             <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">Opening</p>
@@ -312,7 +312,7 @@ export default function LiensEasements() {
         </div>
       </section>
 
-      <section id="liens" className="scroll-mt-20 border-b border-brand-border bg-brand-ivory">
+      <section id="liens" className="scroll-mt-20 border-b border-brand-border bg-brand-navy">
         <div className="mx-auto max-w-site px-6 py-16 sm:px-8 lg:px-10 lg:py-24">
           <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)] lg:gap-14">
             <figure className="overflow-hidden bg-brand-midnight/5">
@@ -411,7 +411,7 @@ export default function LiensEasements() {
         </div>
       </section>
 
-      <section id="license" className="scroll-mt-20 border-b border-brand-border bg-brand-ivory">
+      <section id="license" className="scroll-mt-20 border-b border-brand-border bg-brand-navy">
         <div className="mx-auto max-w-site px-6 py-16 sm:px-8 lg:px-10 lg:py-24">
           <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)] lg:gap-14">
             <figure className="overflow-hidden bg-brand-midnight/5">

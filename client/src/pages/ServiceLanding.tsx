@@ -107,7 +107,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
 
   if (!landing || !copy || !next) {
     return (
-      <main className="bg-brand-ivory">
+      <main className="bg-brand-navy">
         <PageSection>
           <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">Situations</p>
           <h1 className="mt-4 font-display text-4xl text-brand-navy">Situation page not found.</h1>
@@ -121,11 +121,11 @@ export default function ServiceLanding({ slug }: { slug: string }) {
   }
 
   return (
-    <main className="bg-brand-ivory">
+    <main className="bg-brand-navy">
       {landing.heroImage ? (
         <section
           className="relative w-full overflow-hidden border-b border-brand-border"
-          style={{ backgroundColor: landing.heroPaper ?? "#F5E7CD" }}
+          style={{ backgroundColor: landing.heroPaper ?? "#2A3447" }}
         >
           <img
             src={`${landing.heroImage}?v=15`}
@@ -136,7 +136,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
           <div
             className="pointer-events-none absolute inset-y-0 left-0 w-[55%] sm:hidden"
             style={{
-              background: `linear-gradient(to right, ${landing.heroPaper ?? "#F5E7CD"}, ${landing.heroPaper ?? "#F5E7CD"}B3, transparent)`,
+              background: `linear-gradient(to right, ${landing.heroPaper ?? "#2A3447"}, ${landing.heroPaper ?? "#2A3447"}B3, transparent)`,
             }}
             aria-hidden
           />
@@ -150,7 +150,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
           </div>
         </section>
       ) : editorialLayout ? (
-        <section className="relative w-full overflow-hidden border-b border-brand-border bg-brand-ivory">
+        <section className="relative w-full overflow-hidden border-b border-brand-border bg-brand-navy">
           <div className="relative grid min-h-[clamp(300px,78vw,420px)] w-full grid-cols-1 sm:min-h-[min(52vh,520px)] sm:grid-cols-[minmax(16rem,48%)_1fr] lg:min-h-[min(48vh,560px)]">
             {/* Title column - reserved width so it cannot collide with art */}
             <div className="relative z-10 flex items-start px-6 pb-8 pt-14 sm:items-center sm:pb-12 sm:pt-16 md:pl-[12%] lg:px-10 lg:pl-[clamp(4rem,18vw,14rem)] lg:pt-20 xl:pl-[clamp(5rem,22vw,18rem)]">

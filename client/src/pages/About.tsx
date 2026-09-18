@@ -5,7 +5,7 @@ import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 function SketchDivider({ variant }: { variant: "private-advisory" | "decision-framework" | "building" }) {
   return (
-    <div className="flex justify-center border-y border-brand-border bg-brand-ivory py-10" aria-hidden>
+    <div className="flex justify-center border-y border-brand-border bg-brand-navy py-10" aria-hidden>
       <ArchitecturalHeroDrawing
         eyebrow="About"
         title="Agent Kammer"
@@ -25,7 +25,7 @@ export default function About() {
   });
 
   return (
-    <main className="bg-brand-ivory">
+    <main className="bg-brand-navy">
       <PageHero
         eyebrow="About"
         title="Private housing guidance before the market gets loud."
@@ -35,9 +35,11 @@ export default function About() {
 
       <article className="mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24">
         <p className="ak-kicker">Practice</p>
-        <h2 className="ak-title mt-4">
+        <div className="ak-title-band mt-4">
+          <h2 className="ak-title">
           Manhattan decisions need more than a listing feed.
         </h2>
+        </div>
         <p className="ak-lede mt-8">
           Agent Kammer is an independent housing advisory practice. The work starts with life change, uncertainty, and trade-offs, then building-level literacy, before apartments or urgency take over.
         </p>
@@ -59,10 +61,12 @@ export default function About() {
 
       <article className="mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24">
         <p className="ak-kicker">Credentials That Matter</p>
-        <h2 className="ak-title mt-4">
+        <div className="ak-title-band mt-4">
+          <h2 className="ak-title">
           Building literacy changes the quality of advice.
         </h2>
-        <p className="mt-8 text-lg leading-9 text-brand-graphite">
+        </div>
+        <p className="ak-copy mt-8">
           We read buildings as assets: structure, operations, and how they actually work for the people who live in them. That literacy informs judgment. It is not a pitch for inspections.
         </p>
         <p className="ak-copy mt-6">
@@ -74,9 +78,11 @@ export default function About() {
 
       <article className="mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24">
         <p className="ak-kicker">Principles</p>
-        <h2 className="ak-title mt-4">
+        <div className="ak-title-band mt-4">
+          <h2 className="ak-title">
           Three ideas organize the work.
         </h2>
+        </div>
         <ol className="mt-10 space-y-10">
           <li>
             <p className="ak-heading">Advisory first</p>

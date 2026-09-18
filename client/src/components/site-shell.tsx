@@ -105,7 +105,9 @@ export function SectionHeading({
   return (
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
       <p className="ak-kicker">{eyebrow}</p>
-      <h2 className="ak-title mt-4">{title}</h2>
+      <div className="ak-title-band mt-4">
+        <h2 className="ak-title">{title}</h2>
+      </div>
       {description ? <p className="ak-lede mt-5">{description}</p> : null}
     </div>
   );
@@ -151,7 +153,7 @@ export function ArchitecturalHeroDrawing({
     <div className={cn("pointer-events-none select-none", className)} aria-hidden>
       <svg
         viewBox="0 0 420 260"
-        className="h-auto w-full max-w-[25rem] text-brand-navy/45"
+        className="h-auto w-full max-w-[25rem] text-brand-ivory/45"
         fill="none"
         role="presentation"
       >
@@ -450,7 +452,7 @@ export function PageHero({
   art?: HeroArtVariant;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-brand-border bg-brand-ivory text-brand-ink">
+    <section className="relative overflow-hidden border-b border-brand-border bg-brand-navy text-brand-ivory">
       {image ? (
         <img
           src={image}
@@ -458,11 +460,13 @@ export function PageHero({
           className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.28] saturate-[0.7] contrast-[0.96]"
         />
       ) : null}
-      {image ? <div className="absolute inset-0 bg-brand-ivory/78" /> : null}
+      {image ? <div className="absolute inset-0 bg-brand-navy/78" /> : null}
       <PageSection className="relative grid gap-12 py-16 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.78fr)] lg:items-end lg:py-24">
         <div>
           <p className="ak-kicker">{eyebrow}</p>
-          <h1 className="ak-display mt-4 max-w-4xl">{title}</h1>
+          <div className="ak-title-band mt-4 max-w-4xl">
+            <h1 className="ak-display">{title}</h1>
+          </div>
         </div>
         <div className="space-y-6">
           {!image ? <ArchitecturalHeroDrawing eyebrow={eyebrow} title={title} variant={art} /> : null}
@@ -480,7 +484,7 @@ export function ReportSubnav() {
   const [location] = useLocation();
 
   return (
-    <div className="overflow-x-auto border-b border-brand-border bg-brand-ivory">
+    <div className="overflow-x-auto border-b border-brand-border bg-brand-navy">
       <div className="mx-auto flex w-full max-w-site gap-3 px-6 py-4 lg:px-10">
         {buildingReportsNav.map((item) => {
           const active = location === item.href;
@@ -491,8 +495,8 @@ export function ReportSubnav() {
               className={cn(
                 "ak-nav-link whitespace-nowrap border px-4 py-2 transition-colors",
                 active
-                  ? "border-brand-navy bg-brand-navy text-brand-ivory"
-                  : "border-brand-border bg-brand-paper text-brand-navy hover:border-brand-navy",
+                  ? "border-[#F5E7CD] bg-[#F5E7CD] text-brand-navy"
+                  : "border-brand-border bg-transparent text-brand-ivory hover:border-[#F5E7CD]",
               )}
             >
               {item.label}
@@ -518,12 +522,14 @@ export function CTA({
   eyebrow?: string;
 }) {
   return (
-    <section className="border-t border-brand-border bg-brand-ivory text-brand-ink">
+    <section className="border-t border-brand-border bg-brand-navy text-brand-ivory">
       <PageSection className="py-16 lg:py-20">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
             <p className="ak-kicker">{eyebrow}</p>
-            <h2 className="ak-title mt-4">{title}</h2>
+            <div className="ak-title-band mt-4">
+              <h2 className="ak-title">{title}</h2>
+            </div>
             <p className="ak-lede mt-5 max-w-2xl">{description}</p>
           </div>
           <div className="grid gap-3 sm:min-w-[16rem]">
@@ -541,9 +547,9 @@ export function CTA({
                   }
                 }}
               >
-                <span className="ak-nav-link text-brand-ivory/72">{eyebrow}</span>
-                <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
-                <span className="ak-nav-link mt-3 flex items-center justify-between">
+                <span className="ak-nav-link text-brand-navy/70">{eyebrow}</span>
+                <span className="mt-3 h-px w-full bg-brand-navy/20" aria-hidden />
+                <span className="ak-nav-link mt-3 flex items-center justify-between text-brand-navy">
                   {label}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
                 </span>
@@ -553,9 +559,9 @@ export function CTA({
                 href={href}
                 className="ak-call-button group grid px-5 py-4 text-left transition-colors"
               >
-                <span className="ak-nav-link text-brand-ivory/72">{eyebrow}</span>
-                <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
-                <span className="ak-nav-link mt-3 flex items-center justify-between">
+                <span className="ak-nav-link text-brand-navy/70">{eyebrow}</span>
+                <span className="mt-3 h-px w-full bg-brand-navy/20" aria-hidden />
+                <span className="ak-nav-link mt-3 flex items-center justify-between text-brand-navy">
                   {label}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
                 </span>
@@ -565,7 +571,7 @@ export function CTA({
               <a
                 href="/contact#request-call"
                 aria-label="Email Agent Kammer"
-                className="ak-nav-link inline-flex items-center justify-center gap-3 border border-brand-border px-5 py-3 text-center text-brand-navy transition-colors hover:border-brand-navy"
+                className="ak-nav-link inline-flex items-center justify-center gap-3 border border-[#F5E7CD] px-5 py-3 text-center text-brand-ivory transition-colors hover:bg-[#F5E7CD] hover:text-brand-navy"
               >
                 <Mail className="h-3.5 w-3.5 text-brand-brass" strokeWidth={1.5} />
                 Email

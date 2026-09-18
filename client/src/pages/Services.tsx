@@ -55,9 +55,9 @@ function OsSection({
     <section id={id} className="scroll-mt-28 border-b border-brand-border">
       <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-20">
         <p className="ak-kicker">{eyebrow}</p>
-        <h2 className="ak-title mt-4 max-w-2xl">
-          {title}
-        </h2>
+        <div className="ak-title-band mt-4">
+          <h2 className="ak-title max-w-2xl">{title}</h2>
+        </div>
         <p className="ak-lede mt-4 max-w-xl">{description}</p>
         <div className="mt-10">
           <BriefList items={items} />
@@ -90,13 +90,15 @@ export default function Services() {
   }, []);
 
   return (
-    <main className="bg-brand-ivory">
+    <main className="bg-brand-navy">
       <section className="border-b border-brand-border">
         <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-24">
           <p className="ak-kicker">Situations</p>
-          <h1 className="ak-display mt-4 max-w-4xl">
-            Explore your situation, not a property search.
-          </h1>
+          <div className="ak-title-band mt-4">
+            <h1 className="ak-display max-w-4xl">
+              Explore your situation, not a property search.
+            </h1>
+          </div>
           <p className="ak-lede mt-6 max-w-2xl">
             Decision Intelligence starts here: what changed in your life, what decision you face, and what you still need to understand. Each page is a Situation: research, not a product.
           </p>

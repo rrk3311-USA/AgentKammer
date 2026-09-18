@@ -64,7 +64,7 @@ export default function Guides() {
   });
 
   return (
-    <main className="bg-brand-ivory">
+    <main className="bg-brand-navy">
       <PageHero
         eyebrow="Guides"
         title="Clear frameworks before listings."
