@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { AgentKammerHorizontalLogo } from "@/components/AgentKammerHorizontalLogo";
 import { cn } from "@/lib/utils";
 import { primaryNav } from "@/components/site-shell";
+import { PAGE_SCROLL_ID } from "@/lib/decision-assistant";
 
 const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-stone focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy";
 
@@ -31,10 +32,18 @@ export function Header() {
   const [location] = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
+    const scroller = document.getElementById(PAGE_SCROLL_ID);
+    const onScroll = () => {
+      const y = scroller?.scrollTop ?? window.scrollY;
+      setScrolled(y > 16);
+    };
     onScroll();
+    scroller?.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      scroller?.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, [location]);
 
   return (

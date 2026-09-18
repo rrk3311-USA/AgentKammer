@@ -730,19 +730,31 @@
     background: transparent;
   }
 
-  /* Footer What's Changing - hide native bar; custom pill drawn in React */
-  .ak-footer-scroll {
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-left: 2rem;
+  .ak-app-shell > header {
+    flex-shrink: 0;
   }
 
-  .ak-footer-scroll::-webkit-scrollbar {
-    display: none;
-    width: 0;
-    height: 0;
+  .ak-app-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .ak-site-dock {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 40;
+  }
+
+  .ak-guidance-band {
+    border-top: 1px solid var(--brand-border);
+    background: var(--brand-ivory);
+    color: var(--brand-navy);
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
   }
 
   .buildings-scroll-strip {
@@ -862,16 +874,6 @@
 
   body {
     @apply bg-brand-ivory font-sans text-body-lg text-brand-ink;
-  }
-
-  html[data-advisor="open"] .ak-app-shell {
-    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
-  }
-
-  @media (min-width: 768px) {
-    html[data-advisor="open"] .ak-app-shell {
-      padding-bottom: calc(5rem + env(safe-area-inset-bottom));
-    }
   }
 
   ::selection {

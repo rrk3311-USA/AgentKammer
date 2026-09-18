@@ -5,15 +5,18 @@ import {
   Building2,
   CalendarClock,
   Check,
+  ChevronDown,
+  ChevronUp,
   Circle,
   Landmark,
   MapPinned,
-  Minimize2,
   SlidersHorizontal,
   UsersRound,
 } from "lucide-react";
 import {
   DECISION_ASSISTANT_OPEN_EVENT,
+  DECISION_ASSISTANT_NUDGE_EVENT,
+  DECISION_ASSISTANT_NUDGE_CLEAR_EVENT,
   clearDecisionAssistantNudge,
   nudgeDecisionAssistant,
 } from "@/lib/decision-assistant";
@@ -419,9 +422,10 @@ function getUsefulActions(answers: Answers): QuickAction[] {
   return actions;
 }
 
-export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }) {
+export function DecisionAssistantDock() {
   const [location, setLocation] = useLocation();
   const [expanded, setExpanded] = useState(false);
+  const [nudge, setNudge] = useState<string | null>(null);
   const guideOpenedRef = useRef(false);
   const lastPageHelperRef = useRef<string | null>(null);
   const [input, setInput] = useState("");
@@ -450,21 +454,32 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   useEffect(() => {
     const open = () => {
       setExpanded(true);
+      setNudge(null);
       clearDecisionAssistantNudge();
       window.setTimeout(() => {
         inputRef.current?.focus({ preventScroll: true });
-      }, 450);
+      }, 80);
     };
+    const onNudge = (event: Event) => {
+      const text = (event as CustomEvent<{ text?: string }>).detail?.text?.trim();
+      if (text) setNudge(text);
+    };
+    const onClear = () => setNudge(null);
     window.addEventListener(DECISION_ASSISTANT_OPEN_EVENT, open);
-    return () => window.removeEventListener(DECISION_ASSISTANT_OPEN_EVENT, open);
+    window.addEventListener(DECISION_ASSISTANT_NUDGE_EVENT, onNudge);
+    window.addEventListener(DECISION_ASSISTANT_NUDGE_CLEAR_EVENT, onClear);
+    return () => {
+      window.removeEventListener(DECISION_ASSISTANT_OPEN_EVENT, open);
+      window.removeEventListener(DECISION_ASSISTANT_NUDGE_EVENT, onNudge);
+      window.removeEventListener(DECISION_ASSISTANT_NUDGE_CLEAR_EVENT, onClear);
+    };
   }, []);
 
   useEffect(() => {
-    document.documentElement.dataset.advisor = expanded ? "open" : "closed";
-    if (expanded) clearDecisionAssistantNudge();
-    return () => {
-      delete document.documentElement.dataset.advisor;
-    };
+    if (expanded) {
+      setNudge(null);
+      clearDecisionAssistantNudge();
+    }
   }, [expanded]);
 
   useEffect(() => {
@@ -517,7 +532,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
     clearDecisionAssistantNudge();
   }, [location, memoryLoaded]);
 
-  // Soft dwell nudge nests on Resume Decision; never a competing bar.
+  // Soft dwell nudge sits in the Guidance band; never a competing overlay.
   useEffect(() => {
     if (expanded || !memoryLoaded) return;
     const timer = window.setTimeout(() => {
@@ -937,97 +952,94 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   const blueprintCompletion = blueprintSegments.filter((segment) => completedSegments[segment.label as keyof typeof completedSegments]).length;
   const displayMessages = mergeConsecutiveMessages(messages);
   const recentMessages = cold ? displayMessages.slice(-3) : displayMessages.slice(-2);
+  const lastAssistant = [...displayMessages].reverse().find((message) => message.role === "assistant");
   const renderCompactBlueprintProgress = (tone: "dark" | "light") => (
     <BlueprintProgressBar completion={blueprintCompletion} tone={tone} />
   );
 
-  if (!expanded) return null;
-
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40">
-      <aside
-        id="decision-assistant"
-        className="pointer-events-auto flex max-h-[min(70vh,40rem)] flex-col border-t border-brand-stone bg-brand-ivory text-brand-navy shadow-[0_-14px_36px_rgba(13,24,43,0.16)]"
-        aria-label="Guidance Advisor"
-      >
-        <div className="mx-auto flex w-full max-w-site flex-col gap-2.5 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3">
-          <div className="grid gap-2.5 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] sm:items-start">
-            <div className="flex min-w-0 items-center gap-3">
-              <DecisionGuideAvatar animated />
-              <div className="min-w-0 flex-1">
-                <GuidanceAdvisorLabel tone="light" />
-                <p className="truncate text-sm font-medium text-brand-navy">{engagement.headline}</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setExpanded(false)}
-                className="flex h-9 w-9 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy sm:hidden"
-                aria-label="Minimize Guidance Advisor"
-              >
-                <Minimize2 className="h-4 w-4" strokeWidth={1.5} />
-              </button>
-            </div>
+    <aside id="decision-assistant" className="ak-guidance-band" aria-label="Guidance Advisor">
+      <div className="mx-auto flex w-full max-w-site flex-col gap-2 px-3 pt-2 sm:px-6 lg:px-10">
+        {nudge && !expanded ? (
+          <p className="border border-brand-brass/40 bg-white px-2.5 py-1.5 text-xs leading-5 text-brand-navy">
+            {nudge}
+          </p>
+        ) : null}
 
-            <div
-              className="border border-brand-border bg-white p-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_1px_0_rgba(42,52,71,0.05)]"
-              aria-label="Decision Blueprint modules"
-            >
-              <div className="flex items-center justify-between gap-4">
-                <p className="text-[9px] uppercase tracking-[0.2em] text-brand-cocoa">Decision Progress</p>
-                <div className="flex items-center gap-2">
-                  <p className="font-mono text-[10px] text-brand-graphite">{blueprintCompletion}/6</p>
-                  <button
-                    type="button"
-                    onClick={() => setExpanded(false)}
-                    className="hidden h-7 w-7 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy sm:inline-flex"
-                    aria-label="Minimize Guidance Advisor"
+        <div className="flex min-w-0 items-center gap-3">
+          <DecisionGuideAvatar animated={expanded} />
+          <div className="min-w-0 flex-1">
+            <GuidanceAdvisorLabel tone="light" />
+            <p className="truncate text-sm font-medium text-brand-navy">
+              {expanded ? engagement.headline : lastAssistant?.text || engagement.headline}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setExpanded((open) => !open)}
+            className="flex h-9 w-9 shrink-0 items-center justify-center border border-brand-border bg-white text-brand-graphite transition-colors hover:text-brand-navy"
+            aria-expanded={expanded}
+            aria-label={expanded ? "Show less Guidance Advisor" : "Show more Guidance Advisor"}
+          >
+            {expanded ? <ChevronDown className="h-4 w-4" strokeWidth={1.5} /> : <ChevronUp className="h-4 w-4" strokeWidth={1.5} />}
+          </button>
+        </div>
+
+        {expanded ? (
+          <div
+            className="border border-brand-border bg-white p-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_1px_0_rgba(42,52,71,0.05)]"
+            aria-label="Decision Blueprint modules"
+          >
+            <div className="flex items-center justify-between gap-4">
+              <p className="text-[9px] uppercase tracking-[0.2em] text-brand-cocoa">Decision Progress</p>
+              <p className="font-mono text-[10px] text-brand-graphite">{blueprintCompletion}/6</p>
+            </div>
+            <div className="mt-2">{renderCompactBlueprintProgress("light")}</div>
+            <div className="mt-2.5 hidden grid-cols-2 gap-x-4 gap-y-2 sm:grid">
+              {blueprintSegments.map((segment) => {
+                const filled = completedSegments[segment.label as keyof typeof completedSegments];
+                return (
+                  <div
+                    key={segment.label}
+                    className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2"
                   >
-                    <Minimize2 className="h-3.5 w-3.5" strokeWidth={1.5} />
-                  </button>
-                </div>
-              </div>
-              <div className="mt-2">{renderCompactBlueprintProgress("light")}</div>
-              <div className="mt-2.5 grid grid-cols-2 gap-x-4 gap-y-2">
-                {blueprintSegments.map((segment) => {
-                  const filled = completedSegments[segment.label as keyof typeof completedSegments];
-                  return (
-                    <div
-                      key={segment.label}
-                      className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2"
+                    <segment.icon
+                      className={
+                        filled
+                          ? "h-3.5 w-3.5 shrink-0 text-brand-navy"
+                          : "h-3.5 w-3.5 shrink-0 text-brand-navy/45"
+                      }
+                      strokeWidth={1.5}
+                      aria-hidden
+                    />
+                    <span
+                      className={
+                        filled
+                          ? "truncate text-[9px] uppercase tracking-[0.12em] text-brand-navy"
+                          : "truncate text-[9px] uppercase tracking-[0.12em] text-brand-navy/60"
+                      }
                     >
-                      <segment.icon
-                        className={
-                          filled
-                            ? "h-3.5 w-3.5 shrink-0 text-brand-navy"
-                            : "h-3.5 w-3.5 shrink-0 text-brand-navy/45"
-                        }
-                        strokeWidth={1.5}
-                        aria-hidden
-                      />
-                      <span
-                        className={
-                          filled
-                            ? "truncate text-[9px] uppercase tracking-[0.12em] text-brand-navy"
-                            : "truncate text-[9px] uppercase tracking-[0.12em] text-brand-navy/60"
-                        }
-                      >
-                        {segment.label}
-                      </span>
-                      <span className="flex justify-end" aria-hidden>
-                        {filled ? (
-                          <Check className="h-3 w-3 text-brand-navy" strokeWidth={1.8} />
-                        ) : (
-                          <Circle className="h-2.5 w-2.5 text-brand-stone" strokeWidth={1.7} />
-                        )}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
+                      {segment.label}
+                    </span>
+                    <span className="flex justify-end" aria-hidden>
+                      {filled ? (
+                        <Check className="h-3 w-3 text-brand-navy" strokeWidth={1.8} />
+                      ) : (
+                        <Circle className="h-2.5 w-2.5 text-brand-stone" strokeWidth={1.7} />
+                      )}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           </div>
+        ) : null}
 
-          <div ref={transcriptRef} className="min-h-0 flex-1 space-y-1.5 overflow-y-auto overflow-x-hidden pr-1">
+        {expanded ? (
+          <div
+            ref={transcriptRef}
+            className="max-h-[min(28vh,14rem)] min-h-0 space-y-1.5 overflow-y-auto overflow-x-hidden pr-1 sm:max-h-[min(32vh,18rem)]"
+          >
             {recentMessages.map((message, index) => (
               <div
                 key={`${message.role}-${index}`}
@@ -1050,69 +1062,72 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
               </div>
             ))}
           </div>
+        ) : null}
 
-          {cold && step !== "sent" ? (
-            <div className="flex flex-wrap gap-1.5" aria-label="Quick starters">
-              {starterPrompts.map((prompt) => (
-                <button
-                  key={prompt.label}
-                  type="button"
-                  onClick={() => handleStarter(prompt)}
-                  className="border border-brand-border bg-white px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
-                >
-                  {prompt.label}
-                </button>
-              ))}
-            </div>
-          ) : null}
-
-          {quickActions.length > 0 && step !== "sent" ? (
-            <div className="flex flex-wrap gap-1.5" aria-label="Suggested actions">
-              {quickActions.map((action) => (
-                <button
-                  key={action.label}
-                  type="button"
-                  onClick={() => handleQuickAction(action)}
-                  className="border border-brand-stone bg-brand-surface px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
-                >
-                  {action.label}
-                </button>
-              ))}
-            </div>
-          ) : null}
-
-          {step !== "sent" ? (
-            <form onSubmit={handleSubmit} className="mt-auto grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] gap-2">
-              <label className="sr-only" htmlFor="decision-assistant-input">
-                Tell me what's changing
-              </label>
-              <textarea
-                ref={inputRef}
-                id="decision-assistant-input"
-                value={input}
-                onChange={(event) => setInput(event.target.value)}
-                onFocus={() => clearDecisionAssistantNudge()}
-                onKeyDown={handleInputKeyDown}
-                placeholder={
-                  step === "email"
-                    ? "Email or mobile if you want this waiting for you..."
-                    : openingPrompts[promptIndex % openingPrompts.length] || "Tell me what's changing..."
-                }
-                rows={2}
-                className="min-h-10 w-full min-w-0 resize-none border border-brand-border bg-white px-3 py-2 text-sm text-brand-navy outline-none transition-colors placeholder:text-brand-graphite/55 focus:border-brand-navy md:min-h-11"
-              />
+        {expanded && cold && step !== "sent" ? (
+          <div className="flex flex-wrap gap-1.5" aria-label="Quick starters">
+            {starterPrompts.map((prompt) => (
               <button
-                type="submit"
-                disabled={sending}
-                className="inline-flex h-10 w-12 shrink-0 items-center justify-center gap-2 border border-brand-navy bg-brand-navy text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:bg-brand-navy-secondary disabled:cursor-wait disabled:opacity-70 md:h-11 md:w-auto md:px-4"
+                key={prompt.label}
+                type="button"
+                onClick={() => handleStarter(prompt)}
+                className="border border-brand-border bg-white px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
               >
-                <span className="hidden md:inline">{sending ? "Sending" : "Send"}</span>
-                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                {prompt.label}
               </button>
-            </form>
-          ) : null}
-        </div>
-      </aside>
-    </div>
+            ))}
+          </div>
+        ) : null}
+
+        {expanded && quickActions.length > 0 && step !== "sent" ? (
+          <div className="flex flex-wrap gap-1.5" aria-label="Suggested actions">
+            {quickActions.map((action) => (
+              <button
+                key={action.label}
+                type="button"
+                onClick={() => handleQuickAction(action)}
+                className="border border-brand-stone bg-brand-surface px-2.5 py-1.5 text-[11px] text-brand-navy transition-colors hover:border-brand-navy"
+              >
+                {action.label}
+              </button>
+            ))}
+          </div>
+        ) : null}
+
+        {step !== "sent" ? (
+          <form onSubmit={handleSubmit} className="grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] gap-2">
+            <label className="sr-only" htmlFor="decision-assistant-input">
+              Tell me what's changing
+            </label>
+            <textarea
+              ref={inputRef}
+              id="decision-assistant-input"
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              onFocus={() => {
+                clearDecisionAssistantNudge();
+                setNudge(null);
+              }}
+              onKeyDown={handleInputKeyDown}
+              placeholder={
+                step === "email"
+                  ? "Email or mobile if you want this waiting for you..."
+                  : openingPrompts[promptIndex % openingPrompts.length] || "Tell me what's changing..."
+              }
+              rows={1}
+              className="min-h-10 w-full min-w-0 resize-none border border-brand-border bg-white px-3 py-2 text-sm text-brand-navy outline-none transition-colors placeholder:text-brand-graphite/55 focus:border-brand-navy md:min-h-11"
+            />
+            <button
+              type="submit"
+              disabled={sending}
+              className="inline-flex h-10 w-12 shrink-0 items-center justify-center gap-2 border border-brand-navy bg-brand-navy text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:bg-brand-navy-secondary disabled:cursor-wait disabled:opacity-70 md:h-11 md:w-auto md:px-4"
+            >
+              <span className="hidden md:inline">{sending ? "Sending" : "Send"}</span>
+              <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+            </button>
+          </form>
+        ) : null}
+      </div>
+    </aside>
   );
 }

@@ -6,9 +6,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { Footer, FooterBar } from "@/components/Footer";
 import { DecisionAssistantDock } from "@/components/DecisionAssistantDock";
 import { initVisitorSignalTracking, trackPageViewSignal } from "@/lib/visitor-signals";
+import { PAGE_SCROLL_ID } from "@/lib/decision-assistant";
 
 const Home = lazy(() => import("@/pages/Home"));
 const About = lazy(() => import("@/pages/About"));
@@ -66,14 +67,16 @@ function Redirect({ to }: { to: string }) {
 
 function ScrollToTop() {
   const [location] = useLocation();
-  
+
   useEffect(() => {
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'auto' });
+    const scroller = document.getElementById(PAGE_SCROLL_ID);
+    window.setTimeout(() => {
+      if (scroller) scroller.scrollTo({ top: 0, behavior: "auto" });
+      window.scrollTo({ top: 0, behavior: "auto" });
       document.documentElement.scrollTop = 0;
     }, 0);
   }, [location]);
-  
+
   return null;
 }
 
@@ -198,15 +201,20 @@ function AppShell() {
   }
 
   return (
-    <div className="ak-app-shell min-h-screen bg-brand-charcoal text-brand-ink">
+    <div className="ak-app-shell bg-brand-charcoal text-brand-ink">
       <ScrollToTop />
       <VisitorSignals />
       <Header />
-      <Suspense fallback={<div className="mx-auto w-full max-w-7xl px-6 py-12 text-white/70">Loading...</div>}>
-        <Router />
-      </Suspense>
-      <Footer />
-      <DecisionAssistantDock />
+      <div id={PAGE_SCROLL_ID} className="ak-app-scroll">
+        <Suspense fallback={<div className="mx-auto w-full max-w-7xl px-6 py-12 text-white/70">Loading...</div>}>
+          <Router />
+        </Suspense>
+        <Footer />
+      </div>
+      <div className="ak-site-dock">
+        <FooterBar />
+        <DecisionAssistantDock />
+      </div>
       <Toaster />
     </div>
   );
