@@ -20,7 +20,7 @@ export default function About() {
   usePageMetadata({
     title: "About",
     description:
-      "About Agent Kammer: housing decisions guided by building intelligence, life-change diagnosis, and private advisory judgment.",
+      "About Agent Kammer: private housing advisory that diagnoses life change and recommends the highest-value decision, including doing nothing.",
     path: "/about",
   });
 
@@ -39,7 +39,7 @@ export default function About() {
           Manhattan decisions need more than a listing feed.
         </h2>
         <p className="mt-8 text-lg leading-9 text-brand-graphite">
-          Agent Kammer is an independent housing advisory practice. The work starts with life change, uncertainty, and trade-offs, then building-level literacy, before apartments or urgency take over.
+          Agent Kammer is an independent housing advisory practice. The work starts with life change, uncertainty, and trade-offs, before apartments or urgency take over.
         </p>
         <p className="mt-6 text-lg leading-9 text-brand-graphite">
           First purchase, relocation, a stay-or-go question, or a portfolio of homes: the process begins with clarity, not listings.
@@ -51,22 +51,22 @@ export default function About() {
           Some clients work together for weeks. Others for years. Decisions evolve, and the guidance evolves with them.
         </p>
         <p className="mt-6 text-lg leading-9 text-brand-graphite">
-          Buildings before listings. Helping people make better housing decisions throughout life, not just real estate transactions. Live Where You Belong, whether that means stay or move.
+          Helping people make better housing decisions throughout life, not just real estate transactions. Live where you belong, whether that means stay or move.
         </p>
       </article>
 
       <SketchDivider variant="building" />
 
       <article className="mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24">
-        <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Credentials That Matter</p>
+        <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">The Dapper Analyst</p>
         <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] leading-[0.94] text-brand-navy">
-          Building literacy changes the quality of advice.
+          Judgment is the product.
         </h2>
         <p className="mt-8 text-lg leading-9 text-brand-graphite">
-          We read buildings as assets: structure, operations, and how they actually work for the people who live in them. That literacy informs judgment. It is not a pitch for inspections.
+          Agent Kammer sells a recommendation you can trust: buy, wait, renovate, rent, sell, or do nothing. The tone is fiduciary and sophisticated — not inspector theater, not a certification costume, not a building-as-hero pitch.
         </p>
         <p className="mt-6 text-lg leading-9 text-brand-graphite">
-          That literacy sits behind Decision Briefs and Building Reports, used after the decision frame is clear, never as a substitute for asking whether anything should change.
+          Research exists as a quiet side tool after the decision frame is clear. It never substitutes for asking whether anything should change.
         </p>
       </article>
 
@@ -85,9 +85,9 @@ export default function About() {
             </p>
           </li>
           <li>
-            <p className="font-display text-2xl text-brand-navy">Building-led perspective</p>
+            <p className="font-display text-2xl text-brand-navy">Life first</p>
             <p className="mt-3 text-base leading-8 text-brand-graphite">
-              Building, block, and buyer brief together, before floor plans dominate attention.
+              Diagnose what changed, whether anything should change, and whether this is still where you belong — before inventory dominates attention.
             </p>
           </li>
           <li>

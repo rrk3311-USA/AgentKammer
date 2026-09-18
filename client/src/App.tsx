@@ -53,6 +53,7 @@ const ManhattanExplained = lazy(() => import("@/pages/ManhattanExplained"));
 const LiensEasements = lazy(() => import("@/pages/LiensEasements"));
 const Guides = lazy(() => import("@/pages/Guides"));
 const NotFound = lazy(() => import("@/pages/not-found"));
+const Tank007 = lazy(() => import("@/pages/internal/Tank007"));
 
 function Redirect({ to }: { to: string }) {
   const [, setLocation] = useLocation();
@@ -82,7 +83,7 @@ function VisitorSignals() {
   const bootstrapped = useRef(false);
 
   useEffect(() => {
-    if (location.startsWith("/admin")) return;
+    if (location.startsWith("/admin") || location.startsWith("/internal")) return;
     if (!bootstrapped.current) {
       bootstrapped.current = true;
       initVisitorSignalTracking(location);
@@ -109,6 +110,8 @@ function Router() {
       <Route path="/admin/settings">{() => <AdminSection section="settings" />}</Route>
       <Route path="/admin" component={AdminOverview} />
       <Route path="/admin/*">{() => <Redirect to="/admin" />}</Route>
+      <Route path="/internal/007" component={Tank007} />
+      <Route path="/internal/007-tank">{() => <Redirect to="/internal/007" />}</Route>
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/situations" component={Services} />
@@ -184,8 +187,9 @@ function Router() {
 function AppShell() {
   const [location] = useLocation();
   const isAdmin = location.startsWith("/admin");
+  const isInternal = location.startsWith("/internal");
 
-  if (isAdmin) {
+  if (isAdmin || isInternal) {
     return (
       <>
         <ScrollToTop />

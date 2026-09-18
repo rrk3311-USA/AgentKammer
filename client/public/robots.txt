@@ -2,6 +2,8 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /admin/
+Disallow: /internal
+Disallow: /internal/
 
 # Explicit allow for major AI / answer-engine crawlers
 User-agent: GPTBot

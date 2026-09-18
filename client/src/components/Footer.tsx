@@ -18,8 +18,8 @@ const popularSearches = [
   { label: "Rent vs Buy", href: "/situations/rent-vs-buy-manhattan-relocation" },
   { label: "Stay vs Sell", href: "/buyer-advisory" },
   { label: "NYC Relocation", href: "/situations/executive-relocation-nyc" },
-  { label: "Luxury Buildings", href: "/insights/the-quiet-luxury-buildings-of-manhattan" },
-  { label: "Building Profiles", href: "/building-reports" },
+  { label: "Intelligence", href: "/intelligence" },
+  { label: "Start Here", href: "/buyer-advisory" },
   { label: "School Districts", href: "/situations/school-district-planning-nyc" },
   { label: "Investment", href: "/situations/1031-exchange-new-york" },
 ] as const;

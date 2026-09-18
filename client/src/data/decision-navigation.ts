@@ -33,7 +33,6 @@ const understandItems: DecisionNavItem[] = [
   { label: "Pied-à-Terre", href: "/situations/pied-a-terre-buyers-nyc" },
   { label: "Foreign Buyers", href: "/situations/foreign-buyers-new-york" },
   { label: "Investment / 1031", href: "/situations/1031-exchange-new-york" },
-  { label: "Building Profiles", href: "/building-reports" },
 ];
 
 /** Primary OS surface groups - used on /situations and Research Library search. */
@@ -60,7 +59,7 @@ export const decisionNavigationGroups: DecisionNavGroup[] = [
   },
   {
     title: "What Are You Trying to Understand?",
-    description: "Evidence and structure once the life change and decision path are named. Buildings, ownership types, and research.",
+    description: "Evidence and structure once the life change and decision path are named. Ownership types, trade-offs, and research.",
     items: understandItems,
   },
   {
@@ -82,12 +81,11 @@ export const decisionNavigationGroups: DecisionNavGroup[] = [
     ],
   },
   {
-    title: "Building Intelligence Library",
-    description: "A knowledge resource. Buildings, neighborhoods, and market evidence after the decision model is clear.",
+    title: "Research library",
+    description: "A quiet knowledge resource after the decision model is clear. Not the public pitch.",
     items: [
-      { label: "Buildings", href: "/building-reports" },
+      { label: "Intelligence", href: "/intelligence" },
       { label: "Neighborhoods", href: "/building-reports/neighborhood-guides" },
-      { label: "Building Reports", href: "/building-reports/individual-buildings" },
       { label: "Market Briefs", href: "/building-reports/market-briefs" },
       { label: "Life Changes", href: "/situations" },
       { label: "Insights", href: "/insights" },

@@ -13,10 +13,10 @@ const levels = [
     cta: "Explore Situations",
   },
   {
-    name: "Building Intelligence",
-    text: "Study the address before the apartment. Editorial Building Profiles on resident fit, trade-offs, and when to walk away.",
-    href: "/building-reports",
-    cta: "Open Building Profiles",
+    name: "Quiet library",
+    text: "Optional notes after the decision is framed. A side tool, never the pitch.",
+    href: "/intelligence",
+    cta: "Open Intelligence",
   },
   {
     name: "Property Intelligence",

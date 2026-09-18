@@ -1,0 +1,124 @@
+.ak-tank {
+  --tank-navy: #070b12;
+  --tank-panel: #0e1624;
+  --tank-line: rgba(176, 141, 87, 0.28);
+  --tank-brass: #b08d57;
+  --tank-ivory: #f5f2eb;
+  --tank-mute: #8a94a3;
+  --tank-green: #6f9b7a;
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 500px at 10% -10%, rgba(176, 141, 87, 0.08), transparent 50%),
+    linear-gradient(180deg, #0a101a 0%, var(--tank-navy) 40%, #05080e 100%);
+  color: var(--tank-ivory);
+  font-family: Inter, "Neue Haas Grotesk", system-ui, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.ak-tank::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(5, 8, 14, 0.18) 3px,
+    rgba(5, 8, 14, 0.18) 4px
+  );
+  opacity: 0.35;
+  z-index: 0;
+}
+
+.ak-tank-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.ak-tank-display {
+  font-family: "Cormorant Garamond", "Iowan Old Style", Didot, serif;
+  letter-spacing: -0.02em;
+}
+
+.ak-tank-kicker {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--tank-brass);
+}
+
+.ak-tank-panel {
+  border: 1px solid var(--tank-line);
+  background: linear-gradient(180deg, rgba(14, 22, 36, 0.94), rgba(10, 16, 26, 0.88));
+  box-shadow: inset 0 1px 0 rgba(245, 242, 235, 0.04);
+}
+
+.ak-tank-clock {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.ak-tank-frog {
+  width: 42px;
+  height: 42px;
+  color: var(--tank-brass);
+}
+
+.ak-tank input,
+.ak-tank select,
+.ak-tank textarea {
+  width: 100%;
+  background: rgba(5, 8, 14, 0.55);
+  border: 1px solid rgba(176, 141, 87, 0.22);
+  color: var(--tank-ivory);
+  padding: 10px 12px;
+  font-size: 13px;
+  outline: none;
+}
+
+.ak-tank textarea {
+  min-height: 72px;
+  resize: vertical;
+}
+
+.ak-tank input:focus,
+.ak-tank select:focus,
+.ak-tank textarea:focus {
+  border-color: var(--tank-brass);
+}
+
+.ak-tank button.tank-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--tank-brass);
+  background: rgba(176, 141, 87, 0.12);
+  color: var(--tank-ivory);
+  padding: 10px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ak-tank button.tank-btn:hover {
+  background: rgba(176, 141, 87, 0.22);
+}
+
+.ak-tank button.tank-ghost {
+  border: 1px solid rgba(245, 242, 235, 0.18);
+  background: transparent;
+  color: var(--tank-mute);
+  padding: 8px 10px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ak-tank button.tank-ghost:hover {
+  color: var(--tank-ivory);
+}

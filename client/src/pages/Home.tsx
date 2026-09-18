@@ -51,7 +51,7 @@ export default function Home() {
               Live where you belong
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-brand-graphite">
-              Private housing guidance. Local execution when needed. We start with life change, uncertainty, and trade-offs before buildings, neighborhoods, or listings.
+              Private housing guidance. Local execution when needed. We start with life change, uncertainty, and trade-offs before inventory, tours, or urgency.
             </p>
             <blockquote className="mt-8 max-w-xl border-l border-brand-stone pl-5">
               <p className="font-display text-[clamp(1.65rem,2.8vw,2.15rem)] leading-[1.15] tracking-[-0.02em] text-brand-navy">
@@ -89,7 +89,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/28 via-transparent to-brand-navy/12" />
             <div className="absolute inset-x-0 bottom-0 border-t border-brand-ivory/18 bg-brand-navy/50 p-6 text-brand-ivory backdrop-blur-[2px]">
               <p className="text-[10px] uppercase tracking-[0.24em] text-brand-stone">How We Think</p>
-              <p className="mt-2 font-display text-3xl leading-none">Buildings, context, strategy.</p>
+              <p className="mt-2 font-display text-3xl leading-none">Judgment, context, strategy.</p>
             </div>
           </div>
         </div>
@@ -193,23 +193,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5 · Buildings */}
+      {/* 5 · Intelligence (quiet library, not the pitch) */}
       <section className="border-b border-brand-border bg-brand-navy text-brand-ivory">
         <div className="mx-auto grid w-full max-w-site gap-10 px-6 py-20 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:px-10 lg:py-28">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-stone">Buildings</p>
+            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-stone">Intelligence</p>
             <h2 className="mt-4 max-w-xl font-display text-[clamp(2.4rem,4.5vw,3.75rem)] leading-[0.92] text-brand-ivory">
-              The asset before the listing.
+              Judgment first. Library second.
             </h2>
             <p className="mt-6 max-w-xl text-base leading-8 text-brand-ivory/74">
-              Building Reports read quality, context, and fit, not marketing copy. We use them only after the decision frame is clear.
+              The product is whether you should act at all. A quiet research library exists after the decision is framed. It is not the homepage pitch.
             </p>
           </div>
           <Link
-            href="/building-reports"
+            href="/intelligence"
             className="group inline-flex items-center justify-between gap-6 border border-brand-ivory/20 px-5 py-4 text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:border-brand-stone"
           >
-            Open the library
+            Open Intelligence
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
           </Link>
         </div>
