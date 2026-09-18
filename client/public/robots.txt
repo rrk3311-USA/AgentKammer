@@ -4,6 +4,8 @@ Disallow: /admin
 Disallow: /admin/
 Disallow: /tools
 Disallow: /tools/
+Disallow: /internal
+Disallow: /internal/
 
 # Explicit allow for major AI / answer-engine crawlers
 User-agent: GPTBot

@@ -205,9 +205,9 @@ export function AdminShell({
             )}
           </div>
           <p className="ak-admin-display mt-4 text-[9px] uppercase tracking-[0.14em] leading-relaxed text-white/25">
-            Buildings before listings.
+            Judgment before inventory.
             <br />
-            Decisions before emotions.
+            Fiduciary before commission.
           </p>
         </div>
       </aside>

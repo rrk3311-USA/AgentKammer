@@ -1,0 +1,224 @@
+.ak-tank {
+  --tank-navy: #0c1016;
+  --tank-brass: #c4a574;
+  --tank-ivory: #f3ead8;
+  --tank-mute: #9a9080;
+  --tank-rule: rgba(196, 165, 116, 0.35);
+  min-height: 100vh;
+  background-color: var(--tank-navy);
+  background-image:
+    linear-gradient(180deg, rgba(12, 16, 22, 0.2) 0%, transparent 28%),
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(196, 165, 116, 0.07), transparent 55%);
+  color: var(--tank-ivory);
+  font-family: "Newsreader", "Iowan Old Style", "Times New Roman", serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.ak-tank::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 119px,
+      rgba(196, 165, 116, 0.035) 119px,
+      rgba(196, 165, 116, 0.035) 120px
+    );
+  z-index: 0;
+}
+
+.ak-tank-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.ak-tank-display {
+  font-family: "Cormorant Garamond", "Newsreader", Didot, serif;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+}
+
+.ak-tank-kicker {
+  font-family: Inter, "Neue Haas Grotesk", system-ui, sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--tank-brass);
+}
+
+.ak-tank-tape {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  border-top: 1px solid var(--tank-rule);
+  border-bottom: 1px solid var(--tank-rule);
+  padding: 0.55rem 0;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--tank-brass);
+}
+
+.ak-tank-brief {
+  position: relative;
+  padding: 1.35rem 0 1.6rem;
+  border-bottom: 1px solid rgba(243, 234, 216, 0.08);
+}
+
+.ak-tank-brief::before,
+.ak-tank-brief::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: var(--tank-brass);
+  border-style: solid;
+  opacity: 0.55;
+}
+
+.ak-tank-brief::before {
+  top: 0.4rem;
+  left: 0;
+  border-width: 1px 0 0 1px;
+}
+
+.ak-tank-brief::after {
+  top: 0.4rem;
+  right: 0;
+  border-width: 1px 1px 0 0;
+}
+
+.ak-tank-clock {
+  font-family: Inter, ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  letter-spacing: 0.04em;
+}
+
+.ak-tank-frog {
+  width: 36px;
+  height: 36px;
+  color: var(--tank-brass);
+}
+
+.ak-tank-ui {
+  font-family: Inter, "Neue Haas Grotesk", system-ui, sans-serif;
+}
+
+.ak-tank input,
+.ak-tank select,
+.ak-tank textarea {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--tank-rule);
+  border-radius: 0;
+  color: var(--tank-ivory);
+  padding: 8px 0;
+  font-size: 14px;
+  font-family: Inter, system-ui, sans-serif;
+  outline: none;
+  color-scheme: dark;
+}
+
+.ak-tank textarea {
+  min-height: 64px;
+  resize: vertical;
+  border: 1px solid var(--tank-rule);
+  padding: 10px 12px;
+}
+
+.ak-tank input:focus,
+.ak-tank select:focus,
+.ak-tank textarea:focus {
+  border-color: var(--tank-brass);
+}
+
+.ak-tank button.tank-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-bottom: 1px solid var(--tank-brass);
+  background: transparent;
+  color: var(--tank-ivory);
+  padding: 10px 2px;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.ak-tank button.tank-btn:hover {
+  color: var(--tank-brass);
+}
+
+.ak-tank button.tank-ghost {
+  border: 0;
+  background: transparent;
+  color: var(--tank-mute);
+  padding: 6px 0;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ak-tank button.tank-ghost:hover {
+  color: var(--tank-ivory);
+}
+
+.ak-tank-pin {
+  letter-spacing: 0.32em;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.ak-tank-instrument {
+  display: grid;
+  gap: 0.85rem 2rem;
+}
+
+@media (min-width: 640px) {
+  .ak-tank-instrument {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.ak-tank-instrument > div {
+  border: 0;
+  border-top: 1px solid var(--tank-rule);
+  padding-top: 0.75rem;
+}
+
+.ak-tank-goal {
+  border: 0;
+  border-left: 1px solid var(--tank-brass);
+  padding: 0.15rem 0 0.85rem 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.ak-tank-gate {
+  max-width: 26rem;
+  border: 0;
+  border-top: 1px solid var(--tank-rule);
+  border-bottom: 1px solid var(--tank-rule);
+  padding: 2rem 0.25rem;
+  background: transparent;
+}
+
+@media (max-width: 430px) {
+  .ak-tank-inner {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
