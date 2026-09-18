@@ -125,7 +125,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
       {landing.heroImage ? (
         <section
           className="relative w-full overflow-hidden border-b border-brand-border"
-          style={{ backgroundColor: landing.heroPaper ?? "#FBF2E3" }}
+          style={{ backgroundColor: landing.heroPaper ?? "#F5E7CD" }}
         >
           <img
             src={`${landing.heroImage}?v=15`}
@@ -136,27 +136,27 @@ export default function ServiceLanding({ slug }: { slug: string }) {
           <div
             className="pointer-events-none absolute inset-y-0 left-0 w-[55%] sm:hidden"
             style={{
-              background: `linear-gradient(to right, ${landing.heroPaper ?? "#FBF2E3"}, ${landing.heroPaper ?? "#FBF2E3"}B3, transparent)`,
+              background: `linear-gradient(to right, ${landing.heroPaper ?? "#F5E7CD"}, ${landing.heroPaper ?? "#F5E7CD"}B3, transparent)`,
             }}
             aria-hidden
           />
           <div className="absolute inset-0 flex items-start sm:items-center">
             <div className="w-full px-6 pt-14 pb-10 sm:pt-20 md:pl-[12%] lg:px-10 lg:pb-12 lg:pl-[clamp(4rem,18vw,14rem)] lg:pt-24 xl:pl-[clamp(5rem,22vw,18rem)]">
-              <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">{landing.eyebrow}</p>
-              <h1 className="mt-6 max-w-[12ch] font-display text-[clamp(2.35rem,9vw,4.75rem)] leading-[0.92] tracking-[-0.03em] text-brand-navy sm:mt-4 sm:max-w-[16ch] sm:text-[clamp(2.4rem,5.2vw,4.75rem)]">
+              <p className="ak-kicker">{landing.eyebrow}</p>
+              <h1 className="ak-display mt-5 max-w-[12ch] sm:mt-4 sm:max-w-[16ch]">
                 {landing.title}
               </h1>
             </div>
           </div>
         </section>
       ) : editorialLayout ? (
-        <section className="relative w-full overflow-hidden border-b border-brand-border bg-brand-navy">
+        <section className="relative w-full overflow-hidden border-b border-brand-border bg-brand-ivory">
           <div className="relative grid min-h-[clamp(300px,78vw,420px)] w-full grid-cols-1 sm:min-h-[min(52vh,520px)] sm:grid-cols-[minmax(16rem,48%)_1fr] lg:min-h-[min(48vh,560px)]">
             {/* Title column - reserved width so it cannot collide with art */}
             <div className="relative z-10 flex items-start px-6 pb-8 pt-14 sm:items-center sm:pb-12 sm:pt-16 md:pl-[12%] lg:px-10 lg:pl-[clamp(4rem,18vw,14rem)] lg:pt-20 xl:pl-[clamp(5rem,22vw,18rem)]">
               <div className="w-full max-w-[18.5rem] sm:max-w-[26rem]">
-                <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass/90">{landing.eyebrow}</p>
-                <h1 className="mt-5 max-w-[11ch] font-display text-[clamp(2.1rem,8.2vw,3.4rem)] leading-[0.94] tracking-[-0.03em] text-brand-ivory sm:mt-4 sm:max-w-[14ch] sm:text-[clamp(2.25rem,4.4vw,4.25rem)]">
+                <p className="ak-kicker">{landing.eyebrow}</p>
+                <h1 className="ak-display mt-4 max-w-[11ch] sm:max-w-[14ch]">
                   {landing.title}
                 </h1>
               </div>
@@ -171,7 +171,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
               />
             </div>
             <div
-              className="pointer-events-none absolute inset-y-0 left-0 w-[82%] bg-gradient-to-r from-brand-navy from-[48%] via-brand-navy/90 to-transparent sm:hidden"
+              className="pointer-events-none absolute inset-y-0 left-0 w-[82%] bg-gradient-to-r from-brand-ivory from-[48%] via-brand-ivory/90 to-transparent sm:hidden"
               aria-hidden
             />
           </div>
@@ -179,19 +179,18 @@ export default function ServiceLanding({ slug }: { slug: string }) {
       ) : (
         <section className="border-b border-brand-border">
           <div className="mx-auto max-w-site px-6 pb-10 pt-14 lg:px-10 lg:pb-14 lg:pt-20">
-            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">{landing.eyebrow}</p>
-            <h1 className="mt-5 max-w-4xl font-display text-[clamp(2.8rem,5.5vw,5.5rem)] leading-[0.9] tracking-[-0.03em] text-brand-navy">
+            <p className="ak-kicker">{landing.eyebrow}</p>
+            <h1 className="ak-display mt-4 max-w-4xl">
               {landing.title}
             </h1>
           </div>
-          <div className="relative mx-auto flex aspect-[16/9] max-h-[520px] w-full max-w-site items-center justify-center overflow-hidden bg-brand-navy lg:aspect-[21/9]">
+          <div className="relative mx-auto flex aspect-[16/9] max-h-[420px] w-full max-w-site items-center justify-center overflow-hidden bg-brand-paper lg:aspect-[21/9]">
             <ArchitecturalHeroDrawing
               eyebrow={landing.eyebrow}
               title={landing.title}
               variant={landing.art}
               className="flex w-full max-w-4xl items-center justify-center px-8 [&_svg]:max-w-none"
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-navy/50 via-transparent to-brand-navy/20" />
           </div>
         </section>
       )}
@@ -261,8 +260,8 @@ export default function ServiceLanding({ slug }: { slug: string }) {
           <p
             className={
               editorialLayout
-                ? "text-[clamp(1.125rem,4.2vw,1.25rem)] leading-[1.55] text-brand-graphite sm:text-lg sm:leading-[1.7] lg:text-xl"
-                : "text-lg leading-9 text-brand-graphite lg:text-xl lg:leading-10"
+                ? "ak-lede"
+                : "ak-lede"
             }
           >
             {copy.paragraphOne}
@@ -270,8 +269,8 @@ export default function ServiceLanding({ slug }: { slug: string }) {
           <p
             className={
               editorialLayout
-                ? "mt-6 text-[1.05rem] leading-[1.55] text-brand-graphite sm:mt-8 sm:text-lg sm:leading-[1.7] lg:text-xl"
-                : "mt-8 text-lg leading-9 text-brand-graphite lg:text-xl lg:leading-10"
+                ? "ak-copy mt-6 sm:mt-8"
+                : "ak-copy mt-8"
             }
           >
             {copy.paragraphTwo}
@@ -279,22 +278,22 @@ export default function ServiceLanding({ slug }: { slug: string }) {
           <p
             className={
               editorialLayout
-                ? "mt-6 text-[1.05rem] leading-[1.55] text-brand-graphite sm:mt-8 sm:text-lg sm:leading-[1.7] lg:text-xl"
-                : "mt-8 text-lg leading-9 text-brand-graphite lg:text-xl lg:leading-10"
+                ? "ak-copy mt-6 sm:mt-8"
+                : "ak-copy mt-8"
             }
           >
             {copy.paragraphThree}
           </p>
 
-          <blockquote className="my-14 border-l-2 border-brand-brass pl-6">
-            <p className="font-display text-[clamp(1.75rem,3vw,2.35rem)] leading-[1.15] text-brand-navy">
+          <blockquote className="my-12 border-l-2 border-brand-border pl-6">
+            <p className="ak-title">
               “{copy.quote}”
             </p>
           </blockquote>
 
           <div className="border-y border-brand-border py-8">
-            <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Recommendation</p>
-            <p className="mt-4 font-display text-2xl leading-snug text-brand-navy md:text-3xl">{copy.recommendation}</p>
+            <p className="ak-kicker">Recommendation</p>
+            <p className="ak-heading mt-4">{copy.recommendation}</p>
           </div>
 
           <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

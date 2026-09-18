@@ -144,9 +144,9 @@ export default function LivabilityTool() {
         description="Submit an address, a listing link, or photos. The first run is free. After that, one credit is one dollar."
         art="neighborhood-guides"
         kicker={
-          <div className="space-y-3 text-sm leading-6 text-brand-ivory/82">
-            <p className="text-[10px] uppercase tracking-[0.2em] text-brand-brass">Wallet</p>
-            <p className="font-display text-3xl text-brand-ivory">{wallet ? wallet.credits : "—"} credits</p>
+          <div className="ak-copy space-y-3">
+            <p className="ak-kicker">Wallet</p>
+            <p className="ak-title">{wallet ? wallet.credits : "—"} credits</p>
             <p>{wallet?.nextRunLabel || "Loading run cost…"}</p>
           </div>
         }

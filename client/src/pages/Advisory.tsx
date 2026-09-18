@@ -100,7 +100,7 @@ export default function Advisory() {
         </p>
       </PageSection>
 
-      <section className="border-y border-brand-border bg-white">
+      <section className="border-y border-brand-border">
         <PageSection>
           <SectionHeading
             eyebrow="Public ladder"
@@ -149,7 +149,7 @@ export default function Advisory() {
         </p>
       </PageSection>
 
-      <section className="border-y border-brand-border bg-white">
+      <section className="border-y border-brand-border">
         <PageSection>
           <SectionHeading
             eyebrow="How It Begins"

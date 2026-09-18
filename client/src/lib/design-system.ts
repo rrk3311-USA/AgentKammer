@@ -10,14 +10,13 @@ export const siteContainer = "mx-auto w-full max-w-site px-6 lg:px-10";
 export const contentContainer = "mx-auto w-full max-w-content";
 export const readingContainer = "mx-auto w-full max-w-reading";
 
-/** Typography scale */
-export const typeH1 =
-  "font-display text-[clamp(4rem,5vw,5rem)] font-medium leading-[0.95] tracking-[-0.03em] text-brand-ink";
-export const typeH2 = "font-display text-display-2 font-medium tracking-[-0.02em] text-brand-ink";
-export const typeH3 = "font-display text-display-3 font-medium tracking-[-0.02em] text-brand-ink";
-export const typeBody = "text-body-lg leading-relaxed text-brand-graphite";
-export const typeBodyInk = "text-body-lg leading-relaxed text-brand-ink";
-export const typeSmall = "text-body-sm leading-relaxed text-brand-graphite";
+/** Typography scale — four public sizes: display, title, heading, body/meta */
+export const typeH1 = "ak-display";
+export const typeH2 = "ak-title";
+export const typeH3 = "ak-heading";
+export const typeBody = "ak-lede";
+export const typeBodyInk = "ak-lede text-brand-ink";
+export const typeSmall = "ak-meta";
 
 /** Header navigation - sans, light, small (mockup) */
 export const typeHeaderNav =
@@ -30,12 +29,12 @@ export const typeNav =
   "font-sans text-[0.6875rem] font-normal uppercase tracking-[0.12em] text-brand-graphite transition-opacity duration-brand ease-brand-out";
 export const typeNavActive = "font-sans text-[0.6875rem] font-medium uppercase tracking-[0.12em] text-brand-ink";
 
-export const typeEyebrow = "font-sans text-[0.6875rem] font-normal uppercase tracking-[0.14em] text-brand-graphite";
+export const typeEyebrow = "ak-kicker";
 export const typeEyebrowOnDark = "font-sans text-[0.6875rem] font-normal uppercase tracking-[0.14em] text-brand-ivory/65";
 
 /** Surfaces */
 export const surfaceCard =
-  "rounded-card border border-brand-border bg-brand-surface transition-opacity duration-brand ease-brand-out";
+  "ak-card rounded-card transition-opacity duration-brand ease-brand-out";
 export const surfaceImage = "overflow-hidden rounded-image bg-brand-surface";
 
 /** Motion - fade / subtle scale only */

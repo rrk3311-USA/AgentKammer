@@ -83,7 +83,7 @@ export default function Buy() {
         <button
           type="button"
           onClick={openDecisionAssistant}
-          className="mb-10 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
+          className="ak-nav-link mb-10 inline-flex items-center gap-2 text-brand-navy transition-colors hover:text-brand-navy-secondary"
         >
           Ask the Guidance Advisor
           <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
@@ -99,16 +99,14 @@ export default function Buy() {
               key={step.step}
               className="grid gap-5 border-b border-brand-border py-8 last:border-b-0 lg:grid-cols-[80px_minmax(0,1fr)_auto] lg:items-start lg:gap-8"
             >
-              <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand-cocoa">{step.step}</p>
+              <p className="ak-kicker">{step.step}</p>
               <div>
-                <h3 className="font-display text-[clamp(1.85rem,3vw,2.7rem)] leading-[0.96] tracking-[-0.03em] text-brand-navy">
-                  {step.title}
-                </h3>
-                <p className="mt-3 max-w-2xl text-sm leading-7 text-brand-graphite lg:text-[15px]">{step.text}</p>
+                <h3 className="ak-heading">{step.title}</h3>
+                <p className="ak-meta mt-3 max-w-2xl">{step.text}</p>
               </div>
               <Link
                 href={step.href}
-                className="inline-flex items-center gap-2 self-start text-[11px] uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-brass lg:mt-2"
+                className="ak-nav-link inline-flex items-center gap-2 self-start text-brand-navy transition-colors hover:text-brand-navy-secondary lg:mt-2"
               >
                 {step.cta}
                 <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
@@ -118,7 +116,7 @@ export default function Buy() {
         </div>
       </PageSection>
 
-      <section className="border-y border-brand-border bg-white">
+      <section className="border-y border-brand-border">
         <PageSection>
           <SectionHeading
             eyebrow="Common Situations"
@@ -130,10 +128,10 @@ export default function Buy() {
               <Link
                 key={item.title}
                 href={item.href}
-                className="group rounded-card border border-brand-border bg-brand-ivory p-7 transition-colors hover:border-brand-navy/30"
+                className="ak-card group rounded-card p-7 transition-colors hover:border-brand-navy/40"
               >
-                <h3 className="font-display text-3xl leading-[0.95] tracking-[-0.03em] text-brand-navy">{item.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-brand-graphite">
+                <h3 className="ak-heading">{item.title}</h3>
+                <p className="ak-meta mt-4">
                   <span className="text-brand-cocoa">Trigger: </span>
                   {item.trigger}
                 </p>

@@ -52,23 +52,23 @@ export default function PerspectiveArticle() {
 
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
-      <section className="bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10 lg:py-20">
+      <section className="border-b border-brand-border bg-brand-ivory px-6 py-14 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-3xl">
           <Link href="/insights">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-champagne transition hover:text-brand-ivory">
+            <span className="ak-nav-link text-brand-navy transition hover:text-brand-navy-secondary">
               ← Insights
             </span>
           </Link>
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <PerspectiveContentTag contentType={article.contentType} variant="dark" />
-            <p className="text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-brand-ivory/62">
+            <PerspectiveContentTag contentType={article.contentType} variant="light" />
+            <p className="ak-kicker">
               {formatPerspectiveDate(article.publishedAt)} · {article.readMinutes} min read
             </p>
           </div>
-          <h1 className="mt-4 font-serif text-4xl font-semibold leading-[1.02] md:text-5xl lg:text-6xl">
+          <h1 className="ak-display mt-4">
             {article.title}
           </h1>
-          <p className="mt-6 text-lg leading-8 text-brand-ivory/82">{article.excerpt}</p>
+          <p className="ak-lede mt-6">{article.excerpt}</p>
         </div>
       </section>
 
@@ -93,14 +93,14 @@ export default function PerspectiveArticle() {
       <IntelligenceReportsSubscribe variant="light" className="border-t border-brand-midnight/10" />
 
       {relatedExecutiveReport ? (
-        <section className="border-t border-brand-midnight/10 bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10">
+        <section className="border-t border-brand-border bg-brand-ivory px-6 py-14 lg:px-10">
           <div className="mx-auto max-w-3xl">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Intelligence Report</p>
-            <h2 className="font-serif text-3xl font-semibold">{relatedExecutiveReport.title}</h2>
-            <p className="mt-4 text-base leading-7 text-brand-ivory/82">{relatedExecutiveReport.executiveSummary[0]}</p>
+            <p className="ak-kicker mb-3">Intelligence Report</p>
+            <h2 className="ak-title">{relatedExecutiveReport.title}</h2>
+            <p className="ak-lede mt-4">{relatedExecutiveReport.executiveSummary[0]}</p>
             <Link
               href={`/insights/reports/${relatedExecutiveReport.slug}`}
-              className="mt-6 inline-block font-serif text-sm text-brand-champagne transition hover:text-brand-ivory"
+              className="ak-nav-link mt-6 inline-block text-brand-navy transition hover:text-brand-navy-secondary"
             >
               Read the full report →
             </Link>
@@ -109,17 +109,17 @@ export default function PerspectiveArticle() {
       ) : null}
 
       {relatedReport ? (
-        <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10">
+        <section className="border-t border-brand-border bg-brand-ivory px-6 py-14 lg:px-10">
           <div className="mx-auto max-w-3xl">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Building Report</p>
-            <h2 className="font-serif text-3xl font-semibold text-brand-midnight">{relatedReport.buildingName}</h2>
-            <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-brand-champagne-dark">
+            <p className="ak-kicker mb-3">Building Report</p>
+            <h2 className="ak-title">{relatedReport.buildingName}</h2>
+            <p className="ak-kicker mt-2">
               {relatedReport.location}
             </p>
-            <p className="mt-4 text-base leading-7 text-brand-graphite/72">{relatedReport.executiveSummary[0]}</p>
+            <p className="ak-lede mt-4">{relatedReport.executiveSummary[0]}</p>
             <Link
               href={`/building-reports/${relatedReport.slug}`}
-              className="mt-6 inline-block font-serif text-sm text-brand-midnight transition hover:text-brand-champagne-dark"
+              className="ak-nav-link mt-6 inline-block text-brand-navy transition hover:text-brand-navy-secondary"
             >
               Read building report →
             </Link>

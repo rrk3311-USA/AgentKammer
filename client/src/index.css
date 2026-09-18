@@ -1,6 +1,5 @@
 @import "@fontsource/cormorant-garamond/500.css";
 @import "@fontsource/cormorant-garamond/600.css";
-@import "@fontsource/cormorant-garamond/700.css";
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
 @import "@fontsource/inter/600.css";
@@ -16,17 +15,19 @@
   --brand-midnight: #202735;
   --brand-charcoal: #2c3138;
   --brand-navy-secondary: #3f4b59;
-  --brand-ivory: #f5f2eb;
-  --brand-surface: #f5f2eb;
-  --brand-beige: #f5f2eb;
+  --brand-ivory: #f5e7cd;
+  --brand-paper: #fff8ee;
+  --brand-surface: #f5e7cd;
+  --brand-beige: #f5e7cd;
   --brand-graphite: #2c3138;
-  --brand-border: #d8d1c7;
+  --brand-border: #d4c4a8;
   --brand-gold: #b08d57;
   --brand-success: #2f6b4f;
   --brand-error: #b42318;
-  --brand-stone: #d8d1c7;
-  --brand-warm: #f5f2eb;
-  --brand-surface-warm: #f5f2eb;
+  --brand-stone: #d4c4a8;
+  --brand-warm: #f5e7cd;
+  --brand-surface-warm: #f5e7cd;
+  --brand-cocoa: #6b4a2a;
 
   --button-outline: rgba(17, 17, 17, 0.14);
   --badge-outline: rgba(0,0,0, .05);
@@ -38,7 +39,7 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
 
-  --background: 0 0% 100%;
+  --background: 39 66% 88%;
 
   --foreground: 0 0% 10%;
 
@@ -103,7 +104,7 @@
   --font-sans: Inter, "Neue Haas Grotesk", system-ui, -apple-system, sans-serif;
   --font-display: "Cormorant Garamond", "Iowan Old Style", "Times New Roman", serif;
   --font-serif: var(--font-display);
-  --font-script: Allura, cursive;
+  --font-script: var(--font-display);
   --font-mono: Menlo, Monaco, "Courier New", monospace;
   --radius: 0.5rem;
   --shadow-2xs: 0px 1px 2px 0px hsl(220 13% 11% / 0.02);
@@ -269,90 +270,6 @@
     color: var(--brand-ink);
   }
 
-  @keyframes wiggle {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-3deg); }
-    75% { transform: rotate(3deg); }
-  }
-
-  @keyframes sparkle {
-    0% { opacity: 0; transform: translateY(0) scale(0); }
-    50% { opacity: 1; transform: translateY(-10px) scale(1); }
-    100% { opacity: 0; transform: translateY(-20px) scale(0); }
-  }
-
-  .animate-wiggle {
-    animation: wiggle 3s ease-in-out infinite;
-  }
-
-  .animate-sparkle {
-    animation: sparkle 2s ease-in-out infinite;
-  }
-
-  .animate-sparkle-delayed {
-    animation: sparkle 2s ease-in-out 0.3s infinite;
-  }
-
-  .animate-sparkle-delayed-2 {
-    animation: sparkle 2s ease-in-out 0.6s infinite;
-  }
-
-  .animate-sparkle-delayed-3 {
-    animation: sparkle 2s ease-in-out 0.9s infinite;
-  }
-
-  @keyframes clock-rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  @keyframes sparkle-glow {
-    0%, 100% { opacity: 0.6; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.1); }
-  }
-
-  @keyframes bounce-down {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(4px); }
-  }
-
-  .animate-clock {
-    animation: clock-rotate 60s linear infinite;
-  }
-
-  .animate-sparkle-glow {
-    animation: sparkle-glow 2s ease-in-out infinite;
-  }
-
-  .animate-bounce-down {
-    animation: bounce-down 1.5s ease-in-out infinite;
-  }
-
-  @keyframes ping-fast {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0; transform: scale(1.5); }
-  }
-
-  @keyframes ping-fast-red {
-    0%, 100% { opacity: 0; transform: scale(1.5); }
-    50% { opacity: 1; transform: scale(1); }
-  }
-
-  .animate-ping-fast {
-    animation: ping-fast 0.8s cubic-bezier(0, 0, 0.2, 1) infinite;
-  }
-
-  .animate-ping-fast-red {
-    animation: ping-fast-red 0.8s cubic-bezier(0, 0, 0.2, 1) infinite;
-  }
-
-  .animate-ping-slow {
-    animation: ping-fast 1.36s cubic-bezier(0, 0, 0.2, 1) infinite;
-  }
-
-  .animate-ping-slow-red {
-    animation: ping-fast-red 1.36s cubic-bezier(0, 0, 0.2, 1) infinite;
-  }
 }
 
 /**
@@ -395,30 +312,6 @@
   /* Keep reports heading ivory on navy */
   #reports h2 {
     color: rgb(246 243 235) !important;
-  }
-
-  .bespoke-signature {
-    font-family: var(--font-script);
-    font-weight: 400;
-    letter-spacing: 0.015em;
-    color: var(--brand-midnight);
-    text-shadow: 0 2px 18px rgba(15, 23, 42, 0.08);
-  }
-
-  .bespoke-signature::after {
-    content: "";
-    display: block;
-    width: min(72%, 18rem);
-    height: 1px;
-    margin: 0.65rem auto 0;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(214, 180, 95, 0.12) 12%,
-      rgba(15, 23, 42, 0.34) 48%,
-      rgba(214, 180, 95, 0.18) 88%,
-      transparent 100%
-    );
   }
 
   /* Hide ugly search cancel button in Chrome until we can style it properly */
@@ -506,230 +399,6 @@
     inset: -1px;
   }
 
-  /* Morning Email Icon Animation - 3 states cycling */
-  @keyframes morningIcon1 {
-    0%, 27% {
-      opacity: 1;
-    }
-    30%, 97% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @keyframes morningIcon2 {
-    0%, 30% {
-      opacity: 0;
-    }
-    33%, 60% {
-      opacity: 1;
-    }
-    63%, 100% {
-      opacity: 0;
-    }
-  }
-
-  @keyframes morningIcon3 {
-    0%, 63% {
-      opacity: 0;
-    }
-    66%, 94% {
-      opacity: 1;
-    }
-    97%, 100% {
-      opacity: 0;
-    }
-  }
-
-  .morning-icon-1 {
-    animation: morningIcon1 6s ease-in-out infinite;
-  }
-
-  .morning-icon-2 {
-    animation: morningIcon2 6s ease-in-out infinite;
-  }
-
-  .morning-icon-3 {
-    animation: morningIcon3 6s ease-in-out infinite;
-  }
-
-  /* Interest Rate Ticker Animations */
-  @keyframes pulse-subtle {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.92;
-    }
-  }
-
-  @keyframes bounce-slow {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-3px);
-    }
-  }
-
-  @keyframes colorPulse {
-    0%, 100% {
-      background-color: #d4af37;
-      box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
-    }
-    50% {
-      background-color: #ffffff;
-      box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
-    }
-  }
-
-  @keyframes subtle-nod {
-    0%, 100% {
-      transform: translateY(0) rotate(0deg);
-    }
-    15% {
-      transform: translateY(-1px) rotate(-0.5deg);
-    }
-    30% {
-      transform: translateY(0.5px) rotate(0.3deg);
-    }
-    45% {
-      transform: translateY(-0.5px) rotate(-0.3deg);
-    }
-    60% {
-      transform: translateY(0.3px) rotate(0.2deg);
-    }
-    75% {
-      transform: translateY(-0.2px) rotate(-0.1deg);
-    }
-  }
-
-  @keyframes waveform {
-    0%, 100% {
-      transform: scaleY(0.3);
-    }
-    50% {
-      transform: scaleY(1);
-    }
-  }
-
-  .animate-pulse-subtle {
-    animation: pulse-subtle 3s ease-in-out infinite;
-  }
-
-  .animate-bounce-slow {
-    animation: bounce-slow 2s ease-in-out infinite;
-  }
-
-  .animate-subtle-nod {
-    animation: subtle-nod 1.8s ease-in-out infinite;
-  }
-
-  .animate-waveform {
-    animation: waveform 0.6s ease-in-out infinite;
-    transform-origin: bottom;
-  }
-
-  .ticker-number {
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .send-button-black {
-    background-color: #000000 !important;
-    background: #000000 !important;
-  }
-
-  @keyframes brainBreathe {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.2);
-    }
-  }
-
-  .animate-brain-breathe {
-    animation: brainBreathe 2s ease-in-out infinite;
-  }
-
-  @keyframes buttonPulseGlow {
-    0% {
-      box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.8), inset 0 0 0 0 rgba(212, 175, 55, 0);
-    }
-    50% {
-      box-shadow: 0 0 0 8px rgba(212, 175, 55, 0), inset 0 0 0 1px rgba(212, 175, 55, 0.6);
-    }
-    100% {
-      box-shadow: 0 0 0 0 rgba(212, 175, 55, 0), inset 0 0 0 0 rgba(212, 175, 55, 0);
-    }
-  }
-
-  .animate-button-pulse-glow {
-    animation: buttonPulseGlow 2.5s ease-in-out infinite;
-  }
-
-  @keyframes floatInWord {
-    0% {
-      opacity: 0;
-      transform: translate(0, 20px) scale(0.8);
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0.7;
-      transform: translate(0, -10px) scale(1);
-    }
-  }
-
-  .animate-float-word {
-    animation: floatInWord 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  }
-
-  .financial-word {
-    position: absolute;
-    font-weight: 600;
-    color: #d4af37;
-    text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
-    white-space: nowrap;
-    pointer-events: none;
-  }
-
-  /* Gold Scrollbar Styling - Always Visible */
-  .scrollbar-gold {
-    scrollbar-width: thin;
-    scrollbar-color: #d4af37 rgba(212, 175, 55, 0.1);
-  }
-
-  .scrollbar-gold::-webkit-scrollbar {
-    -webkit-appearance: none;
-    height: 12px;
-    width: 12px;
-    display: block !important;
-  }
-
-  .scrollbar-gold::-webkit-scrollbar-track {
-    background: rgba(212, 175, 55, 0.15);
-    border-radius: 6px;
-  }
-
-  .scrollbar-gold::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
-    border-radius: 6px;
-    min-width: 50px;
-    border: 2px solid rgba(212, 175, 55, 0.3);
-  }
-
-  .scrollbar-gold::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #e5c158 0%, #f9e076 100%);
-  }
-
-  .scrollbar-gold::-webkit-scrollbar-corner {
-    background: transparent;
-  }
-
   /* Footer What's Changing - hide native bar; custom pill drawn in React */
   .ak-footer-scroll {
     overflow-y: auto;
@@ -788,6 +457,7 @@
   :is(
       section.bg-white,
       section.bg-brand-ivory,
+      section.bg-brand-paper,
       section.bg-\[\#f3f2ee\],
       section.bg-brand-warm,
       section.brand-surface-intelligence,
@@ -808,6 +478,7 @@
   :is(
       section.bg-white,
       section.bg-brand-ivory,
+      section.bg-brand-paper,
       section.bg-\[\#f3f2ee\],
       section.bg-brand-warm,
       section.brand-surface-intelligence,
@@ -845,6 +516,7 @@
   :is(
       section.bg-white,
       section.bg-brand-ivory,
+      section.bg-brand-paper,
       section.bg-\[\#f3f2ee\],
       section.bg-brand-warm,
       section.brand-surface-intelligence
@@ -888,11 +560,76 @@
 
 @layer components {
   .ak-section {
-    @apply py-30 lg:py-40;
+    @apply py-16 lg:py-24;
   }
 
   .ak-prose {
-    @apply max-w-reading text-body-lg leading-relaxed text-brand-graphite;
+    @apply max-w-reading text-base leading-7 text-brand-graphite;
+  }
+
+  .ak-kicker {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brand-cocoa);
+  }
+
+  .ak-display {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4.25rem);
+    font-weight: 500;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--brand-navy);
+  }
+
+  .ak-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--brand-navy);
+  }
+
+  .ak-heading {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--brand-navy);
+  }
+
+  .ak-lede {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--brand-graphite);
+  }
+
+  .ak-copy {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--brand-graphite);
+  }
+
+  .ak-meta {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--brand-graphite);
+  }
+
+  .ak-nav-link {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .ak-card {
+    border: 1px solid var(--brand-border);
+    background-color: var(--brand-paper);
   }
 
   .ak-link {

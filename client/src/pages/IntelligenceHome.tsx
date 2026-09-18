@@ -114,7 +114,7 @@ export default function IntelligenceHome() {
         </p>
       </PageSection>
 
-      <section className="border-y border-brand-border bg-white">
+      <section className="border-y border-brand-border">
         <PageSection>
           <SectionHeading
             eyebrow="After the hour"
@@ -156,7 +156,7 @@ export default function IntelligenceHome() {
         </div>
       </PageSection>
 
-      <section className="border-t border-brand-border bg-white">
+      <section className="border-t border-brand-border">
         <PageSection>
           <SectionHeading
             eyebrow="Insights"

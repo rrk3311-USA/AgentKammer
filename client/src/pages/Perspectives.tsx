@@ -42,7 +42,7 @@ export default function Perspectives() {
         </Link>
       </PageSection>
 
-      <section className="border-y border-brand-border bg-white">
+      <section className="border-y border-brand-border">
         <PageSection>
           <SectionHeading
             eyebrow="Library"

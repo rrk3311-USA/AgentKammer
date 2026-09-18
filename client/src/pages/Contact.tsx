@@ -206,14 +206,14 @@ export default function Contact() {
             <button
               type="button"
               onClick={openDecisionAssistant}
-              className="block text-left text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass"
+              className="ak-copy block text-left underline decoration-brand-border underline-offset-4 hover:text-brand-navy"
             >
               Prefer Guidance? Open the Guidance Advisor →
             </button>
-            <Link href="/belonging" className="block text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass">
+            <Link href="/belonging" className="ak-copy block underline decoration-brand-border underline-offset-4 hover:text-brand-navy">
               Prefer the Situation Assessment? Find out if you’re living where you belong →
             </Link>
-            <Link href="/advisory" className="block text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass">
+            <Link href="/advisory" className="ak-copy block underline decoration-brand-border underline-offset-4 hover:text-brand-navy">
               See how a Strategy Session works. Memberships follow by invitation →
             </Link>
           </div>

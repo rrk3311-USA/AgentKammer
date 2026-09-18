@@ -51,25 +51,25 @@ export default function ExecutiveHousingReport() {
 
   return (
     <main className="min-h-screen bg-brand-ivory text-brand-graphite">
-      <section className="bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10 lg:py-20">
+      <section className="border-b border-brand-border bg-brand-ivory px-6 py-14 lg:px-10 lg:py-20">
         <div className="mx-auto max-w-3xl">
           <Link href="/insights">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-champagne transition hover:text-brand-ivory">
+            <span className="ak-nav-link text-brand-navy transition hover:text-brand-navy-secondary">
               ← Insights
             </span>
           </Link>
-          <p className="mt-6 text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-brand-ivory/62">
+          <p className="ak-kicker mt-6">
             {report.series} · {formatExecutiveHousingReportDate(report.publishedAt)} · {report.readMinutes} min read
           </p>
-          <h1 className="mt-4 font-serif text-4xl font-semibold leading-[1.02] md:text-5xl lg:text-6xl">
+          <h1 className="ak-display mt-4">
             {report.title}
           </h1>
-          <p className="mt-4 text-lg leading-8 text-brand-ivory/84">{report.subtitle}</p>
+          <p className="ak-lede mt-4">{report.subtitle}</p>
           <div className="mt-6 flex flex-wrap gap-2">
             {report.markets.map((market) => (
               <span
                 key={market}
-                className="border border-brand-ivory/20 px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-brand-champagne"
+                className="ak-nav-link border border-brand-border px-2.5 py-1 text-brand-navy"
               >
                 {market}
               </span>
@@ -114,7 +114,7 @@ export default function ExecutiveHousingReport() {
         </div>
       </article>
 
-      <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10 lg:py-16">
+      <section className="border-t border-brand-border px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Intelligence Hub</p>
           <h2 className="mt-3 font-serif text-3xl font-semibold text-brand-midnight">Continue From This Report</h2>
@@ -154,12 +154,12 @@ export default function ExecutiveHousingReport() {
       </section>
 
       {relatedPerspective ? (
-        <section className="border-t border-brand-midnight/10 bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10">
+        <section className="border-t border-brand-border bg-brand-ivory px-6 py-14 lg:px-10">
           <div className="mx-auto max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Related Perspective</p>
-            <h2 className="mt-3 font-serif text-3xl font-semibold">{relatedPerspective.title}</h2>
-            <p className="mt-4 text-base leading-7 text-brand-ivory/82">{relatedPerspective.excerpt}</p>
-            <Link href={`/insights/${relatedPerspective.slug}`} className="mt-6 inline-block font-serif text-sm text-brand-champagne transition hover:text-brand-ivory">
+            <p className="ak-kicker">Related Perspective</p>
+            <h2 className="ak-title mt-3">{relatedPerspective.title}</h2>
+            <p className="ak-lede mt-4">{relatedPerspective.excerpt}</p>
+            <Link href={`/insights/${relatedPerspective.slug}`} className="ak-nav-link mt-6 inline-block text-brand-navy transition hover:text-brand-navy-secondary">
               Read perspective →
             </Link>
           </div>
@@ -168,7 +168,7 @@ export default function ExecutiveHousingReport() {
 
       <ContinueYourResearch />
 
-      <IntelligenceReportsSubscribe variant="dark" className="border-t border-brand-midnight/10" />
+      <IntelligenceReportsSubscribe variant="light" className="border-t border-brand-border" />
     </main>
   );
 }

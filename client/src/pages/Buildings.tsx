@@ -52,11 +52,11 @@ export default function Buildings() {
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {reportTypes.map((item) => (
-            <Link key={item.href} href={item.href} className="rounded-card border border-brand-border bg-white p-8 transition-transform hover:-translate-y-1">
-              <item.icon className="h-6 w-6 text-brand-brass" strokeWidth={1.5} />
-              <h3 className="mt-6 font-display text-3xl leading-[0.96] tracking-[-0.03em] text-brand-navy">{item.title}</h3>
-              <p className="mt-4 text-sm leading-7 text-brand-graphite">{item.text}</p>
-              <span className="mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy">
+            <Link key={item.href} href={item.href} className="ak-card rounded-card p-8 transition-colors hover:border-brand-navy/40">
+              <item.icon className="h-6 w-6 text-brand-navy" strokeWidth={1.5} />
+              <h3 className="ak-heading mt-6">{item.title}</h3>
+              <p className="ak-meta mt-4">{item.text}</p>
+              <span className="ak-nav-link mt-8 inline-flex items-center gap-2 text-brand-navy">
                 Open section
                 <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
               </span>
@@ -65,7 +65,7 @@ export default function Buildings() {
         </div>
       </PageSection>
 
-      <section className="border-y border-brand-border bg-white">
+      <section className="border-y border-brand-border">
         <PageSection>
           <SectionHeading
             eyebrow="Featured Building Profiles"
@@ -77,7 +77,7 @@ export default function Buildings() {
               <Link
                 key={report.slug}
                 href={`/building-reports/${report.slug}`}
-                className="rounded-card border border-brand-border bg-brand-ivory p-7 transition-colors hover:border-brand-navy/30"
+              className="ak-card rounded-card p-7 transition-colors hover:border-brand-navy/40"
               >
                 <p className="text-[11px] uppercase tracking-[0.18em] text-brand-brass">
                   {formatBuildingReportDate(report.publishedAt)} · {report.readMinutes} min

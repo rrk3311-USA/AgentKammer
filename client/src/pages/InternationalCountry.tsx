@@ -55,7 +55,7 @@ function InternationalCountryContent({ country }: { country: string }) {
         </p>
       </PageSection>
 
-      <section className="border-y border-brand-border bg-white">
+      <section className="border-y border-brand-border">
         <PageSection>
           <SectionHeading eyebrow={ui.faqEyebrow} title={ui.faqTitle} />
           <div className="mt-10 divide-y divide-brand-border border-y border-brand-border">
@@ -86,7 +86,7 @@ function InternationalCountryContent({ country }: { country: string }) {
         </div>
       </PageSection>
 
-      <section className="border-y border-brand-border bg-white">
+      <section className="border-y border-brand-border">
         <PageSection>
           <SectionHeading eyebrow={ui.processEyebrow} title={ui.processTitle} />
           <ol className="mt-12 space-y-8">
@@ -122,7 +122,7 @@ function InternationalCountryContent({ country }: { country: string }) {
         </ul>
       </PageSection>
 
-      <section className="border-y border-brand-border bg-white">
+      <section className="border-y border-brand-border">
         <PageSection>
           <SectionHeading
             eyebrow={ui.teamEyebrow}
@@ -155,7 +155,7 @@ function InternationalCountryContent({ country }: { country: string }) {
         </div>
       </PageSection>
 
-      <section className="border-y border-brand-border bg-white" id="strategy-request">
+      <section className="border-y border-brand-border" id="strategy-request">
         <PageSection className="max-w-[52rem]">
           <InternationalStrategyForm
             sourcePage={`/international/${page.slug}`}

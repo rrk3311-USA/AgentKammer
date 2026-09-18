@@ -63,7 +63,7 @@ export default function BuildingReport() {
         </div>
       </PageSection>
 
-      <section className="border-y border-brand-border bg-white">
+      <section className="border-y border-brand-border">
         <PageSection>
           <SectionHeading
             eyebrow="On the Watchlist"

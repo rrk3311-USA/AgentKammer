@@ -75,7 +75,7 @@ export default function InternationalHub() {
         </p>
       </PageSection>
 
-      <section className="border-y border-brand-border bg-white">
+      <section className="border-y border-brand-border">
         <PageSection>
           <SectionHeading
             eyebrow="Essentials"
@@ -114,7 +114,7 @@ export default function InternationalHub() {
         </ol>
       </PageSection>
 
-      <section className="border-y border-brand-border bg-white" id="strategy-request">
+      <section className="border-y border-brand-border" id="strategy-request">
         <PageSection className="max-w-[52rem]">
           <InternationalStrategyForm sourcePage="/international" />
         </PageSection>

@@ -42,11 +42,11 @@ export default function Belonging() {
     <main className="bg-brand-ivory text-brand-ink">
       <section className="border-b border-brand-border">
         <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-24">
-          <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">{PUBLIC_PRODUCTS.situation.label}</p>
-          <h1 className="mt-5 max-w-4xl font-display text-[clamp(2.8rem,5.5vw,5.25rem)] leading-[0.9] text-brand-navy">
+          <p className="ak-kicker">{PUBLIC_PRODUCTS.situation.label}</p>
+          <h1 className="ak-display mt-4 max-w-4xl">
             Find out if you’re living where you belong.
           </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-brand-graphite">
+          <p className="ak-lede mt-6 max-w-2xl">
             A guided life diagnostic about your life, priorities, and housing, not listings. Your responses help tailor your profile and determine whether a Strategy Session would add value.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
@@ -78,34 +78,34 @@ export default function Belonging() {
         </div>
       </section>
 
-      <section className="border-b border-brand-border bg-white">
+      <section className="border-b border-brand-border bg-brand-ivory">
         <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-20">
-          <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">What You Receive</p>
-          <h2 className="mt-4 max-w-2xl font-display text-[clamp(2rem,4vw,3.25rem)] leading-[0.94] text-brand-navy">
+          <p className="ak-kicker">What You Receive</p>
+          <h2 className="ak-title mt-4 max-w-2xl">
             Your situation profile
           </h2>
-          <p className="mt-5 max-w-2xl text-base leading-8 text-brand-graphite">
+          <p className="ak-lede mt-5 max-w-2xl">
             Fit verdict and WHO are the show language: something you can revisit as life changes, not a one-time quiz result.
           </p>
           <div className="mt-12 grid gap-10 border-t border-brand-border pt-10 sm:grid-cols-2 lg:grid-cols-3">
             {profileDimensions.map((item) => (
               <article key={item.label}>
-                <p className="text-[11px] uppercase tracking-[0.18em] text-brand-brass">{item.label}</p>
-                <p className="mt-4 text-sm leading-7 text-brand-graphite">{item.text}</p>
+                <p className="ak-kicker">{item.label}</p>
+                <p className="ak-meta mt-4">{item.text}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-brand-navy text-brand-ivory">
+      <section className="border-b border-brand-border bg-brand-ivory">
         <div className="mx-auto flex max-w-site flex-col gap-8 px-6 py-16 lg:flex-row lg:items-end lg:justify-between lg:px-10 lg:py-20">
           <div className="max-w-2xl">
-            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">Not a valuation</p>
-            <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3.25rem)] leading-[0.94]">
+            <p className="ak-kicker">Not a valuation</p>
+            <h2 className="ak-title mt-4">
               Diagnose before you decide.
             </h2>
-            <p className="mt-5 text-base leading-8 text-brand-ivory/74">
+            <p className="ak-lede mt-5">
               Live Where You Belong is the outcome: stay or move. This Situation Assessment is the diagnostic that gets you there. People don’t take a real estate quiz; they receive an Agent Kammer profile.
             </p>
           </div>

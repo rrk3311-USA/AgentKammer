@@ -18,7 +18,7 @@ function GuideCard({ guide }: { guide: GuideEntry }) {
           {guide.kind === "html" ? "HTML guide" : "Interactive page"}
         </span>
       </div>
-      <h2 className="mt-6 font-display text-2xl leading-[0.98] tracking-[-0.02em] text-brand-navy sm:text-3xl">
+      <h2 className="ak-heading mt-6">
         {guide.title}
       </h2>
       <p className="mt-3 text-sm leading-7 text-brand-graphite">
@@ -38,7 +38,7 @@ function GuideCard({ guide }: { guide: GuideEntry }) {
     return (
       <a
         href={guide.href}
-        className="group block border border-brand-border bg-white p-7 transition-colors hover:border-brand-navy/30 sm:p-8"
+        className="ak-card group block p-7 transition-colors hover:border-brand-navy/40 sm:p-8"
       >
         {body}
       </a>
@@ -48,7 +48,7 @@ function GuideCard({ guide }: { guide: GuideEntry }) {
   return (
     <Link
       href={guide.href}
-      className="group block border border-brand-border bg-white p-7 transition-colors hover:border-brand-navy/30 sm:p-8"
+        className="ak-card group block p-7 transition-colors hover:border-brand-navy/40 sm:p-8"
     >
       {body}
     </Link>

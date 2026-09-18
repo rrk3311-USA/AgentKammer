@@ -83,10 +83,10 @@ export default function NewYorkMarket() {
             <Link
               key={item.name}
               href={item.href}
-              className="group rounded-card border border-brand-border bg-white p-8 transition-colors hover:border-brand-navy/30"
+              className="ak-card group rounded-card p-8 transition-colors hover:border-brand-navy/40"
             >
-              <h3 className="font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">{item.name}</h3>
-              <p className="mt-4 max-w-3xl text-sm leading-7 text-brand-graphite">{item.note}</p>
+              <h3 className="ak-title">{item.name}</h3>
+              <p className="ak-meta mt-4 max-w-3xl">{item.note}</p>
               <div className="mt-6 grid gap-4 border-t border-brand-border pt-5 text-sm leading-7 text-brand-graphite md:grid-cols-3">
                 <p>
                   <span className="text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">Stock</span>

@@ -262,7 +262,7 @@ export default function Qualify() {
         </form>
       </PageSection>
 
-      <section className="border-t border-brand-border bg-white">
+      <section className="border-t border-brand-border">
         <PageSection>
           <SectionHeading
             eyebrow="How the process works"

@@ -53,7 +53,7 @@ export default function BuildingReportDetail() {
         description={`${report.location}. ${report.buildingProfile.positioning}`}
         art="individual-buildings"
         kicker={
-          <div className="space-y-2 text-sm uppercase tracking-[0.14em] text-brand-ivory/82">
+          <div className="ak-meta space-y-2 uppercase tracking-[0.14em]">
             <p>{report.series}</p>
             <p>
               {formatBuildingReportDate(report.publishedAt)} · {report.readMinutes} min read

@@ -25,7 +25,7 @@ function BriefList({ items }: { items: { label: string; href: string }[] }) {
           href={item.href}
           className="group flex items-baseline justify-between gap-6 border-b border-brand-border py-6"
         >
-          <span className="font-display text-2xl leading-none text-brand-navy transition-colors group-hover:text-brand-brass md:text-3xl">
+          <span className="ak-heading transition-colors group-hover:text-brand-navy-secondary">
             {item.label}
           </span>
           <ArrowRight
@@ -54,11 +54,11 @@ function OsSection({
   return (
     <section id={id} className="scroll-mt-28 border-b border-brand-border">
       <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-20">
-        <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">{eyebrow}</p>
-        <h2 className="mt-4 max-w-2xl font-display text-[clamp(2rem,3.5vw,3rem)] leading-[0.95] text-brand-navy">
+        <p className="ak-kicker">{eyebrow}</p>
+        <h2 className="ak-title mt-4 max-w-2xl">
           {title}
         </h2>
-        <p className="mt-4 max-w-xl text-base leading-7 text-brand-graphite">{description}</p>
+        <p className="ak-lede mt-4 max-w-xl">{description}</p>
         <div className="mt-10">
           <BriefList items={items} />
         </div>
@@ -93,11 +93,11 @@ export default function Services() {
     <main className="bg-brand-ivory">
       <section className="border-b border-brand-border">
         <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-24">
-          <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">Situations</p>
-          <h1 className="mt-5 max-w-4xl font-display text-[clamp(2.8rem,5.5vw,5.25rem)] leading-[0.9] tracking-[-0.03em] text-brand-navy">
+          <p className="ak-kicker">Situations</p>
+          <h1 className="ak-display mt-4 max-w-4xl">
             Explore your situation, not a property search.
           </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-brand-graphite">
+          <p className="ak-lede mt-6 max-w-2xl">
             Decision Intelligence starts here: what changed in your life, what decision you face, and what you still need to understand. Each page is a Situation: research, not a product.
           </p>
 
@@ -105,11 +105,11 @@ export default function Services() {
             {journey.map((item) => (
               <li key={item.step}>
                 <Link href={item.href} className="group block">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-cocoa">{item.step}</p>
-                  <p className="mt-2 font-display text-xl leading-tight text-brand-navy transition-colors group-hover:text-brand-brass">
+                  <p className="ak-kicker">{item.step}</p>
+                  <p className="ak-heading mt-2 transition-colors group-hover:text-brand-navy-secondary">
                     {item.title}
                   </p>
-                  <p className="mt-2 text-sm leading-6 text-brand-graphite">{item.text}</p>
+                  <p className="ak-meta mt-2">{item.text}</p>
                 </Link>
               </li>
             ))}

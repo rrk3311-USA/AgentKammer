@@ -104,13 +104,9 @@ export function SectionHeading({
 }) {
   return (
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
-      <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">{eyebrow}</p>
-      <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.94] tracking-[-0.03em] text-brand-navy">
-        {title}
-      </h2>
-      {description ? (
-        <p className="mt-6 text-base leading-8 text-brand-graphite lg:text-lg">{description}</p>
-      ) : null}
+      <p className="ak-kicker">{eyebrow}</p>
+      <h2 className="ak-title mt-4">{title}</h2>
+      {description ? <p className="ak-lede mt-5">{description}</p> : null}
     </div>
   );
 }
@@ -155,15 +151,15 @@ export function ArchitecturalHeroDrawing({
     <div className={cn("pointer-events-none select-none", className)} aria-hidden>
       <svg
         viewBox="0 0 420 260"
-        className="h-auto w-full max-w-[25rem] text-brand-ivory/70"
+        className="h-auto w-full max-w-[25rem] text-brand-navy/45"
         fill="none"
         role="presentation"
       >
         <defs>
           <linearGradient id="hero-line-metal" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stopColor="#F5F2EB" stopOpacity="0.22" />
+            <stop offset="0%" stopColor="#2A3447" stopOpacity="0.22" />
             <stop offset="52%" stopColor="#B08D57" stopOpacity="0.82" />
-            <stop offset="100%" stopColor="#F5F2EB" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#2A3447" stopOpacity="0.3" />
           </linearGradient>
         </defs>
 
@@ -454,28 +450,25 @@ export function PageHero({
   art?: HeroArtVariant;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-brand-border bg-brand-navy text-brand-ivory">
+    <section className="relative overflow-hidden border-b border-brand-border bg-brand-ivory text-brand-ink">
       {image ? (
         <img
           src={image}
           alt={imageAlt ?? ""}
-          className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.58] saturate-[0.9] contrast-[1.05]"
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.28] saturate-[0.7] contrast-[0.96]"
         />
       ) : null}
-      <div className="absolute inset-0 bg-brand-navy/58" />
-      <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/72 to-brand-navy/32" />
-      <PageSection className="relative grid gap-12 py-20 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.78fr)] lg:items-end lg:py-28">
+      {image ? <div className="absolute inset-0 bg-brand-ivory/78" /> : null}
+      <PageSection className="relative grid gap-12 py-16 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.78fr)] lg:items-end lg:py-24">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</p>
-          <h1 className="mt-5 max-w-4xl font-display text-[clamp(3rem,7vw,6rem)] leading-[0.9] tracking-[-0.04em] text-brand-ivory">
-            {title}
-          </h1>
+          <p className="ak-kicker">{eyebrow}</p>
+          <h1 className="ak-display mt-4 max-w-4xl">{title}</h1>
         </div>
         <div className="space-y-6">
           {!image ? <ArchitecturalHeroDrawing eyebrow={eyebrow} title={title} variant={art} /> : null}
-          <p className="max-w-xl text-base leading-8 text-brand-ivory/78 lg:text-lg">{description}</p>
+          <p className="ak-lede max-w-xl">{description}</p>
           {kicker ? (
-            <div className="border border-brand-brass/30 bg-brand-navy/55 p-6 backdrop-blur-sm">{kicker}</div>
+            <div className="ak-card p-6">{kicker}</div>
           ) : null}
         </div>
       </PageSection>
@@ -487,7 +480,7 @@ export function ReportSubnav() {
   const [location] = useLocation();
 
   return (
-    <div className="overflow-x-auto border-b border-brand-brass/28 bg-brand-charcoal">
+    <div className="overflow-x-auto border-b border-brand-border bg-brand-ivory">
       <div className="mx-auto flex w-full max-w-site gap-3 px-6 py-4 lg:px-10">
         {buildingReportsNav.map((item) => {
           const active = location === item.href;
@@ -496,10 +489,10 @@ export function ReportSubnav() {
               key={item.href}
               href={item.href}
               className={cn(
-                "whitespace-nowrap rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors",
+                "ak-nav-link whitespace-nowrap border px-4 py-2 transition-colors",
                 active
-                  ? "border-brand-brass bg-brand-brass text-brand-navy"
-                  : "border-brand-ivory/68 bg-brand-ivory text-brand-navy hover:border-brand-brass hover:bg-brand-surface",
+                  ? "border-brand-navy bg-brand-navy text-brand-ivory"
+                  : "border-brand-border bg-brand-paper text-brand-navy hover:border-brand-navy",
               )}
             >
               {item.label}
@@ -525,15 +518,13 @@ export function CTA({
   eyebrow?: string;
 }) {
   return (
-    <section className="border-t border-brand-brass/30 bg-brand-navy text-brand-ivory">
+    <section className="border-t border-brand-border bg-brand-ivory text-brand-ink">
       <PageSection className="py-16 lg:py-20">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</p>
-            <h2 className="mt-4 font-display text-[clamp(2rem,3.8vw,3.25rem)] leading-[0.95] tracking-[-0.03em] text-brand-ivory">
-              {title}
-            </h2>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-brand-ivory/74">{description}</p>
+            <p className="ak-kicker">{eyebrow}</p>
+            <h2 className="ak-title mt-4">{title}</h2>
+            <p className="ak-lede mt-5 max-w-2xl">{description}</p>
           </div>
           <div className="grid gap-3 sm:min-w-[16rem]">
             {href.startsWith("#") ? (
@@ -550,9 +541,9 @@ export function CTA({
                   }
                 }}
               >
-                <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</span>
+                <span className="ak-nav-link text-brand-ivory/72">{eyebrow}</span>
                 <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
-                <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
+                <span className="ak-nav-link mt-3 flex items-center justify-between">
                   {label}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
                 </span>
@@ -562,9 +553,9 @@ export function CTA({
                 href={href}
                 className="ak-call-button group grid px-5 py-4 text-left transition-colors"
               >
-                <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</span>
+                <span className="ak-nav-link text-brand-ivory/72">{eyebrow}</span>
                 <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
-                <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
+                <span className="ak-nav-link mt-3 flex items-center justify-between">
                   {label}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
                 </span>
@@ -574,7 +565,7 @@ export function CTA({
               <a
                 href="/contact#request-call"
                 aria-label="Email Agent Kammer"
-                className="inline-flex items-center justify-center gap-3 border border-brand-ivory/18 px-5 py-3 text-center text-[10px] uppercase tracking-[0.16em] text-brand-ivory/82 transition-colors hover:border-brand-brass hover:text-brand-ivory"
+                className="ak-nav-link inline-flex items-center justify-center gap-3 border border-brand-border px-5 py-3 text-center text-brand-navy transition-colors hover:border-brand-navy"
               >
                 <Mail className="h-3.5 w-3.5 text-brand-brass" strokeWidth={1.5} />
                 Email
