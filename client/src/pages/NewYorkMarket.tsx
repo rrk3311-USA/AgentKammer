@@ -1,7 +1,9 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { CTA, PageHero, PageSection, ReportSubnav, SectionHeading } from "@/components/site-shell";
+import { CTA, PageSection, ReportSubnav, SectionHeading } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
+
+const paper = "#F4EFE4";
 
 const neighborhoods = [
   {
@@ -11,6 +13,8 @@ const neighborhoods = [
     bestFor: "School logistics, park life, established residential blocks",
     avoidIf: "You need brand-new amenity towers as the primary brief",
     href: "/situations/upper-west-side-buyers-nyc",
+    map: "/images/neighborhoods/upper-west-side.png",
+    mapAlt: "Map-art of the Upper West Side west of Central Park",
   },
   {
     name: "Upper East Side",
@@ -19,6 +23,8 @@ const neighborhoods = [
     bestFor: "Board-ready buyers, schools, established Upper East routines",
     avoidIf: "You want downtown loft culture or Hudson Yards amenity density",
     href: "/situations/upper-east-side-buyers-nyc",
+    map: "/images/neighborhoods/upper-east-side.png",
+    mapAlt: "Map-art of the Upper East Side east of Central Park",
   },
   {
     name: "Tribeca",
@@ -27,6 +33,8 @@ const neighborhoods = [
     bestFor: "Scale, privacy, downtown family living",
     avoidIf: "You need broad inventory and fast comparable depth",
     href: "/situations/tribeca-buyers-nyc",
+    map: "/images/neighborhoods/tribeca.png",
+    mapAlt: "Map-art of Tribeca below Canal Street along the Hudson",
   },
   {
     name: "Chelsea",
@@ -35,6 +43,8 @@ const neighborhoods = [
     bestFor: "Design-led living, walkability, cultural density",
     avoidIf: "You want quiet co-op culture above all else",
     href: "/situations/chelsea-buyers-nyc",
+    map: "/images/neighborhoods/chelsea.png",
+    mapAlt: "Map-art of Chelsea with Hudson piers and the High Line",
   },
   {
     name: "Hudson Yards",
@@ -43,6 +53,8 @@ const neighborhoods = [
     bestFor: "Corporate relocators, amenity-forward weekday living",
     avoidIf: "You prioritize neighborhood texture over tower infrastructure",
     href: "/situations/hudson-yards-buyers-nyc",
+    map: "/images/neighborhoods/hudson-yards.png",
+    mapAlt: "Map-art of Hudson Yards rail-yard deck and Hudson Park",
   },
   {
     name: "Financial District",
@@ -51,6 +63,8 @@ const neighborhoods = [
     bestFor: "Downtown commute, pied-à-terre or primary with office gravity",
     avoidIf: "Weekend lifestyle and street rhythm are the main brief",
     href: "/situations/financial-district-buyers-nyc",
+    map: "/images/neighborhoods/financial-district.png",
+    mapAlt: "Map-art of the Financial District at the southern tip of Manhattan",
   },
 ];
 
@@ -64,12 +78,29 @@ export default function NewYorkMarket() {
 
   return (
     <main className="bg-brand-ivory">
-      <PageHero
-        eyebrow="Building Reports"
-        title="Neighborhood Guides"
-        description="Neighborhood fit determines the life around the apartment. Compare commute, schools, building stock, street rhythm, and whether the area supports the reason for moving, before the listing tour expands."
-        art="neighborhood-guides"
-      />
+      <section className="relative w-full overflow-hidden border-b border-brand-border" style={{ backgroundColor: paper }}>
+        <img
+          src="/images/neighborhoods/manhattan.png"
+          alt="Map-art of Manhattan with Central Park, Broadway, and the districts in this library"
+          className="block h-[clamp(270px,68vw,360px)] w-[112%] max-w-none translate-x-[6%] object-cover object-[72%_40%] opacity-[0.92] pt-6 sm:h-auto sm:w-full sm:max-w-full sm:translate-x-0 sm:object-contain sm:object-right sm:opacity-100 sm:pt-8 sm:max-h-[min(56vh,520px)] lg:max-h-[min(52vh,560px)] lg:pt-10"
+        />
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 w-[55%] sm:hidden"
+          style={{ background: `linear-gradient(to right, ${paper}, ${paper}B3, transparent)` }}
+          aria-hidden
+        />
+        <div className="absolute inset-0 flex items-start sm:items-center">
+          <div className="w-full px-6 pt-14 pb-10 sm:pt-20 md:pl-[12%] lg:px-10 lg:pb-12 lg:pl-[clamp(4rem,18vw,14rem)] lg:pt-24 xl:pl-[clamp(5rem,22vw,18rem)]">
+            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">Building Reports</p>
+            <h1 className="mt-6 max-w-[12ch] font-display text-[clamp(2.35rem,9vw,4.75rem)] leading-[0.92] tracking-[-0.03em] text-brand-navy sm:mt-4 sm:max-w-[16ch] sm:text-[clamp(2.4rem,5.2vw,4.75rem)]">
+              Neighborhood Guides
+            </h1>
+            <p className="mt-5 max-w-sm text-sm leading-7 text-brand-graphite/85 sm:text-base">
+              Neighborhood fit determines the life around the apartment. Compare commute, schools, street rhythm, and whether the area supports the reason for moving.
+            </p>
+          </div>
+        </div>
+      </section>
       <ReportSubnav />
 
       <PageSection>
@@ -83,31 +114,42 @@ export default function NewYorkMarket() {
             <Link
               key={item.name}
               href={item.href}
-              className="group rounded-card border border-brand-border bg-white p-8 transition-colors hover:border-brand-navy/30"
+              className="group overflow-hidden rounded-card border border-brand-border bg-white transition-colors hover:border-brand-navy/30"
             >
-              <h3 className="font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">{item.name}</h3>
-              <p className="mt-4 max-w-3xl text-sm leading-7 text-brand-graphite">{item.note}</p>
-              <div className="mt-6 grid gap-4 border-t border-brand-border pt-5 text-sm leading-7 text-brand-graphite md:grid-cols-3">
-                <p>
-                  <span className="text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">Stock</span>
-                  <br />
-                  {item.stock}
-                </p>
-                <p>
-                  <span className="text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">Best for</span>
-                  <br />
-                  {item.bestFor}
-                </p>
-                <p>
-                  <span className="text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">Avoid if</span>
-                  <br />
-                  {item.avoidIf}
-                </p>
+              <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(14rem,22rem)] md:items-stretch">
+                <div className="p-8">
+                  <h3 className="font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">{item.name}</h3>
+                  <p className="mt-4 max-w-3xl text-sm leading-7 text-brand-graphite">{item.note}</p>
+                  <div className="mt-6 grid gap-4 border-t border-brand-border pt-5 text-sm leading-7 text-brand-graphite md:grid-cols-3">
+                    <p>
+                      <span className="text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">Stock</span>
+                      <br />
+                      {item.stock}
+                    </p>
+                    <p>
+                      <span className="text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">Best for</span>
+                      <br />
+                      {item.bestFor}
+                    </p>
+                    <p>
+                      <span className="text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">Avoid if</span>
+                      <br />
+                      {item.avoidIf}
+                    </p>
+                  </div>
+                  <span className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy">
+                    Open Decision Brief
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+                  </span>
+                </div>
+                <div className="relative hidden min-h-[12rem] overflow-hidden md:block" style={{ backgroundColor: paper }}>
+                  <img
+                    src={item.map}
+                    alt={item.mapAlt}
+                    className="absolute inset-0 h-full w-full object-cover object-[78%_50%]"
+                  />
+                </div>
               </div>
-              <span className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy">
-                Open Decision Brief
-                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-              </span>
             </Link>
           ))}
         </div>
