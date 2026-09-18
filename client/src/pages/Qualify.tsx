@@ -115,7 +115,7 @@ export default function Qualify() {
   };
 
   return (
-    <main className="min-h-screen bg-brand-paper text-brand-ink">
+    <main className="min-h-screen bg-brand-navy text-brand-ivory">
       <PageHero
         eyebrow="Get Qualified"
         title="A couple of details so we use the call well."

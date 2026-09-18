@@ -11,7 +11,7 @@ export default function Licenses() {
   });
 
   return (
-    <main className="bg-brand-paper">
+    <main className="bg-brand-navy">
       <PageHero
         eyebrow="Legal"
         title="Licenses & credentials"

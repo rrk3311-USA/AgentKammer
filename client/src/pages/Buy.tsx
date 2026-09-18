@@ -71,7 +71,7 @@ export default function Buy() {
   });
 
   return (
-    <main className="bg-brand-paper">
+    <main className="bg-brand-navy">
       <PageHero
         eyebrow="Start Here"
         title="A clear path through the decision. Not another search."

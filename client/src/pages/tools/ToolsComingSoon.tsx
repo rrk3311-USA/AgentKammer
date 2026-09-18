@@ -10,7 +10,7 @@ export function ToolsComingSoon() {
   });
 
   return (
-    <main className="bg-brand-paper">
+    <main className="bg-brand-navy">
       <PageHero
         eyebrow="Tools"
         title="A private desk is being prepared."

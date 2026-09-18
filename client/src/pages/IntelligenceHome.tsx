@@ -60,7 +60,7 @@ export default function IntelligenceHome() {
   });
 
   return (
-    <main className="bg-brand-paper">
+    <main className="bg-brand-navy">
       <PageHero
         eyebrow="Intelligence"
         title="One public ladder. Five names."

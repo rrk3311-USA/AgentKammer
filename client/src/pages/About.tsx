@@ -5,7 +5,7 @@ import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 function SketchDivider({ variant }: { variant: "private-advisory" | "decision-framework" | "building" }) {
   return (
-    <div className="flex justify-center border-y border-brand-border bg-brand-paper py-10" aria-hidden>
+    <div className="flex justify-center border-y border-brand-border bg-brand-navy py-10" aria-hidden>
       <ArchitecturalHeroDrawing
         eyebrow="About"
         title="Agent Kammer"
@@ -25,7 +25,7 @@ export default function About() {
   });
 
   return (
-    <main className="bg-brand-paper">
+    <main className="bg-brand-navy">
       <PageHero
         eyebrow="About"
         title="Private housing guidance before the market gets loud."
@@ -105,7 +105,7 @@ export default function About() {
         </ol>
         <Link
           href="/belonging"
-          className="ak-nav-link mt-12 inline-flex items-center gap-3 border-b border-brand-border pb-1 text-brand-navy transition-colors hover:text-brand-navy-secondary"
+          className="ak-nav-link mt-12 inline-flex items-center gap-3 border-b border-brand-border pb-1 transition-opacity hover:opacity-80"
         >
           Find out if you’re living where you belong
           <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
