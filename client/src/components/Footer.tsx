@@ -31,7 +31,7 @@ function ResumeDecisionNest() {
       <button
         type="button"
         onClick={openDecisionAssistant}
-        className="inline-flex min-h-11 items-center gap-2 rounded-button border border-[#d8d1c7]/35 bg-[rgba(42,52,71,0.94)] px-3.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#f5f2eb] transition-colors hover:border-[#d8d1c7]/55"
+        className="ak-guidance-chip ak-guidance-pinstripe min-w-0"
         aria-label="Open Guidance Advisor"
         data-testid="button-footer-guidance"
       >
@@ -40,7 +40,7 @@ function ResumeDecisionNest() {
       </button>
       <Link
         href="/account"
-        className="inline-flex min-h-11 items-center border border-brand-ivory/20 px-3.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory/86 transition-colors hover:border-brand-brass hover:text-brand-brass"
+        className="ak-guidance-chip ak-guidance-pinstripe min-w-0"
       >
         Resume Decision
       </Link>
