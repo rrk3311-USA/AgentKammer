@@ -1,9 +1,11 @@
 import { Link, useLocation } from "wouter";
 import { useState } from "react";
+import { MessageCircle } from "lucide-react";
 import { decisionNavigationGroups } from "@/data/decision-navigation";
 import { SITE_LANGUAGE_LOOP, setStoredPreferredLanguage } from "@/data/site-language";
 import { AkMonogramMark } from "@/components/AkMonogramMark";
 import { cn } from "@/lib/utils";
+import { openDecisionAssistant } from "@/lib/decision-assistant";
 
 const whatsChangingItems =
   decisionNavigationGroups.find((group) => group.title === "What's Changing?")?.items ?? [];
@@ -23,10 +25,20 @@ const pillClass =
 
 function ResumeDecisionNest() {
   return (
-    <div id="resume-decision-nest">
+    <div id="resume-decision-nest" className="flex flex-wrap items-center gap-2">
+      <button
+        type="button"
+        onClick={openDecisionAssistant}
+        className="inline-flex min-h-11 items-center gap-2 border border-brand-brass/70 px-3.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:border-brand-brass hover:text-brand-brass"
+        aria-label="Open Guidance Advisor"
+        data-testid="button-footer-guidance"
+      >
+        <MessageCircle className="h-4 w-4" strokeWidth={1.5} />
+        Guidance
+      </button>
       <Link
         href="/account"
-        className="inline-flex min-h-11 items-center border border-brand-brass/70 px-3.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:border-brand-brass hover:text-brand-brass"
+        className="inline-flex min-h-11 items-center border border-brand-ivory/20 px-3.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory/86 transition-colors hover:border-brand-brass hover:text-brand-brass"
       >
         Resume Decision
       </Link>

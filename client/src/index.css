@@ -868,6 +868,10 @@
     padding-bottom: calc(4.25rem + env(safe-area-inset-bottom));
   }
 
+  html[data-advisor-footer="1"] .ak-app-shell {
+    padding-bottom: 0;
+  }
+
   ::selection {
     background-color: rgb(15 23 42 / 0.12);
   }

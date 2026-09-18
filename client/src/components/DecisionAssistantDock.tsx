@@ -418,6 +418,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   const [location, setLocation] = useLocation();
   const [expanded, setExpanded] = useState(false);
   const [nudge, setNudge] = useState<string | null>(null);
+  const [footerVisible, setFooterVisible] = useState(false);
   const sheetDrag = useRef<{ y: number } | null>(null);
   const guideOpenedRef = useRef(false);
   const lastPageHelperRef = useRef<string | null>(null);
@@ -478,6 +479,25 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
       delete document.documentElement.dataset.advisor;
     };
   }, [expanded]);
+
+  useEffect(() => {
+    const nest = document.getElementById("resume-decision-nest");
+    if (!nest || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const visible = Boolean(entry?.isIntersecting);
+        setFooterVisible(visible);
+        if (visible) document.documentElement.dataset.advisorFooter = "1";
+        else delete document.documentElement.dataset.advisorFooter;
+      },
+      { rootMargin: "0px 0px -12px 0px", threshold: 0.4 },
+    );
+    observer.observe(nest);
+    return () => {
+      observer.disconnect();
+      delete document.documentElement.dataset.advisorFooter;
+    };
+  }, []);
 
   useEffect(() => {
     if (!expanded || guideOpenedRef.current) return;
@@ -1121,7 +1141,13 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
           </div>
         </aside>
       ) : (
-        <div className="pointer-events-auto flex w-full max-w-[22rem] flex-col items-center pb-[max(0.65rem,env(safe-area-inset-bottom))] pt-2">
+        <div
+          className={
+            footerVisible
+              ? "pointer-events-none hidden"
+              : "pointer-events-auto flex w-full max-w-[22rem] flex-col items-center pb-[max(0.65rem,env(safe-area-inset-bottom))] pt-2"
+          }
+        >
           {nudge ? (
             <button
               type="button"
