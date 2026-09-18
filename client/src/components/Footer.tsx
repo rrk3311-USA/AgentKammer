@@ -141,6 +141,9 @@ export function Footer() {
               <Link href="/contact?intent=strategy" className="transition-colors hover:text-brand-brass">
                 Strategy Session
               </Link>
+              <Link href="/intelligence" className="transition-colors hover:text-brand-brass">
+                Intelligence
+              </Link>
               <Link href="/account" className="transition-colors hover:text-brand-brass">
                 Decision Hub
               </Link>

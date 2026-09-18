@@ -255,10 +255,10 @@ export default function Home() {
       {/* 7 · Quiet close */}
       <CTA
         title="When you want a human reply."
-        description="Share what is changing. We will recommend Guidance, a Situation Assessment, a Property Assessment, or a Strategy Session."
+        description="The homepage starts with Guidance. Write only if a Situation Assessment, Property Assessment, or Strategy Session is already the right next step."
         href="/contact"
-        label="Begin"
-        eyebrow="Start Here"
+        label="Write"
+        eyebrow="Contact"
       />
     </main>
   );

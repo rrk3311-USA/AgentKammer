@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { primaryNav } from "@/components/site-shell";
 import {
   CONTACT_NEXT_STEPS,
   KAMMER_VERDICTS,
@@ -33,5 +34,16 @@ describe("public menu lock", () => {
 
   it("keeps show verdicts without numeric scores", () => {
     expect([...KAMMER_VERDICTS]).toEqual(["Pick", "Consider", "Wait", "Pass"]);
+  });
+
+  it("locks primary header nav to six short labels", () => {
+    expect(primaryNav.map((item) => [item.label, item.href])).toEqual([
+      ["Home", "/"],
+      ["Start Here", "/buyer-advisory"],
+      ["Situations", "/situations"],
+      ["Buildings", "/building-reports"],
+      ["Guides", "/guides"],
+      ["About", "/about"],
+    ]);
   });
 });

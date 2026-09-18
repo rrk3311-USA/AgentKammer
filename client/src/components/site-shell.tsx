@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { ArrowRight, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/** Locked primary header: exactly these six. Intelligence, Assessment, Get Qualified, and International stay out. */
 export const primaryNav = [
   { label: "Home", href: "/" },
   { label: "Start Here", href: "/buyer-advisory" },

@@ -4,6 +4,14 @@
 **Branch of record:** `luxury-homepage`  
 **Do not** treat [SITE-MAP-ARCHITECTURE-V1.md](./SITE-MAP-ARCHITECTURE-V1.md) Intelligence SKUs as live public names.
 
+## Primary header
+
+Exactly six short labels: Home · Start Here · Situations · Buildings · Guides · About.
+
+**Not in top nav:** Intelligence · Decision Hub · Assessment · Get Qualified · International. Intelligence may live in the footer.
+
+**Header CTA:** quiet **Guidance** control that opens the Advisor. Not a seventh nav item. Never “Request Intelligence.”
+
 ## The five public products
 
 | # | Name | Job | Route / surface |
