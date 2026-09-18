@@ -23,7 +23,7 @@ export default function Privacy() {
 
         <h2 className="mt-10 font-display text-3xl text-brand-navy">What we collect</h2>
         <p className="mt-4 text-lg leading-9 text-brand-graphite">
-          When you use the site, Guidance Advisor, Decision Assessment, or contact forms, we may collect: name, email, phone, messages, decision-profile answers, pages viewed, approximate location derived from request metadata, and anonymous visitor identifiers stored in cookies.
+          When you use the site, Guidance Advisor, Situation Assessment, or contact forms, we may collect: name, email, phone, messages, decision-profile answers, pages viewed, approximate location derived from request metadata, and anonymous visitor identifiers stored in cookies.
         </p>
 
         <h2 className="mt-12 font-display text-3xl text-brand-navy">How we use it</h2>

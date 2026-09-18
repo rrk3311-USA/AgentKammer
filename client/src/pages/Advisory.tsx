@@ -1,61 +1,72 @@
 import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
+import { PUBLIC_PRODUCTS } from "@/data/public-menu";
 
-const alaCarte = [
+const publicLadder = [
   {
-    title: "Housing Strategy Session",
+    title: PUBLIC_PRODUCTS.guidance.label,
+    format: PUBLIC_PRODUCTS.guidance.advisor,
+    text: PUBLIC_PRODUCTS.guidance.text,
+    price: "Open",
+  },
+  {
+    title: PUBLIC_PRODUCTS.situation.label,
+    format: "Life diagnostic",
+    text: PUBLIC_PRODUCTS.situation.text,
+    price: "Intake",
+  },
+  {
+    title: PUBLIC_PRODUCTS.property.label,
+    format: "Address review",
+    text: PUBLIC_PRODUCTS.property.text,
+    price: "By scope",
+  },
+  {
+    title: PUBLIC_PRODUCTS.strategy.label,
     format: "~60 minutes · written action summary",
-    text: "One major decision. Buy vs. Wait, stay vs. Move, comparing two buildings, renovate vs. Relocate, executive relocation. Ends with a written summary you can act on, not a transcript.",
+    text: "One major decision. Buy versus wait, stay versus move, two buildings, renovate versus relocate. Ends with a written summary you can act on. Qualification for the hour is a gate, not a product card.",
     price: "$250-500",
-  },
-  {
-    title: "Building Second Opinion",
-    format: "Session + written notes",
-    text: "A second, independent read on one building or property: strengths, risks, resale considerations, lifestyle fit, and the questions worth investigating before you commit.",
-    price: "By scope",
-  },
-  {
-    title: "Residential Portfolio Review",
-    format: "Session + written notes",
-    text: "Every property you own, reviewed together: what to keep, sell, renovate, or rent. Weighed against lifestyle and long-term goals, not just market value.",
-    price: "By scope",
   },
 ];
 
-const memberships = [
+const afterSession = [
+  {
+    title: "Acquisition Dossier",
+    text: "Full acquisition judgment when the hour shows the case needs it. Offered after a Strategy Session, by invitation.",
+  },
   {
     title: "Essentials",
     price: "$250-500/mo",
-    text: "A monthly strategy touchpoint, email access for questions as they come up, an annual portfolio review, market updates, and written decision summaries you can keep.",
+    text: "A monthly strategy touchpoint, email access, an annual portfolio review, and written decision summaries.",
   },
   {
     title: "Executive Advisory",
     price: "$750-1,500/mo",
-    text: "Two sessions a month, priority scheduling, ongoing portfolio oversight, building research, renovation guidance, vendor recommendations, and family planning conversations.",
+    text: "Two sessions a month, priority scheduling, ongoing portfolio oversight, and family planning conversations.",
   },
   {
     title: "Private Residential Office",
     price: "$2,500-5,000+/mo",
-    text: "A family office for residential real estate. Reasonable unlimited strategy sessions, coordination across architects, inspectors, lenders, attorneys, and brokers, and an annual residential master plan.",
+    text: "A family office for residential real estate. Coordination across architects, inspectors, lenders, attorneys, and brokers.",
   },
 ];
 
 const journey = [
   {
-    title: "Start with what you're reading",
-    text: "Most relationships begin with the Research Library, a Decision Brief, or the Belonging Assessment, not a sales page.",
+    title: "Start with Guidance or the Situation Assessment",
+    text: "Most relationships begin with the Guidance Advisor, a Situation, or the Situation Assessment. Not a sales page.",
   },
   {
-    title: "Book a Housing Strategy Session",
-    text: "One paid session, built around one real decision. This is a complete engagement on its own, not a qualifying call.",
+    title: "Book a Strategy Session",
+    text: "One paid hour, built around one real decision. This is a complete engagement on its own, not a qualifying call.",
   },
   {
     title: "Receive a written strategy summary",
     text: "A clear recommendation and next step, in writing, so the value of the session outlasts the conversation.",
   },
   {
-    title: "Decide what continuity you need",
-    text: "Some clients need exactly one session. Others prefer ongoing advisory through a membership as decisions keep evolving. Both are correct outcomes.",
+    title: "Continue only if the case needs it",
+    text: "A Dossier or membership is offered after the hour, by invitation. Some clients need exactly one session. That is a correct outcome.",
   },
 ];
 
@@ -63,7 +74,7 @@ export default function Advisory() {
   usePageMetadata({
     title: "Residential Advisory",
     description:
-      "Agent Kammer Residential Advisory: how the Housing Strategy Session, à la carte reviews, and ongoing advisory memberships work. Judgment over listing access.",
+      "Agent Kammer Residential Advisory: Guidance, Situation Assessment, Property Assessment, and a Strategy Session. Memberships follow by invitation.",
     path: "/advisory",
   });
 
@@ -72,7 +83,7 @@ export default function Advisory() {
       <PageHero
         eyebrow="Residential Advisory"
         title="Ongoing strategic guidance for life's biggest residential decisions."
-        description="Agent Kammer is building a residential advisory practice, not chasing leads. Clients pay for judgment, not listing access. And a session is one way to reach it, not the product itself."
+        description="One public ladder. Clients pay for judgment, not listing access. A Strategy Session is one way to reach it, not a Discovery Call, and not two session names."
         art="private-advisory"
       />
 
@@ -85,19 +96,19 @@ export default function Advisory() {
           A conversation is how a session happens to be delivered. It is not what a client is paying for. What a client is paying for is judgment applied to a real decision: whether to buy, wait, renovate, sell, or do nothing at all.
         </p>
         <p className="mt-6 text-lg leading-9 text-brand-graphite">
-          That means a single Housing Strategy Session can be a complete, successful engagement. It also means some clients prefer the guidance to continue as decisions evolve. Through one of the memberships below.
+          That means a single Strategy Session can be a complete, successful engagement. Continuity, when it is useful, is offered after the hour.
         </p>
       </PageSection>
 
       <section className="border-y border-brand-border bg-white">
         <PageSection>
           <SectionHeading
-            eyebrow="À La Carte"
-            title="Begin with one decision."
-            description="Priced per engagement. Ranges below are current guidance, not a checkout. Every engagement starts with a conversation about scope."
+            eyebrow="Public ladder"
+            title="Begin with one of four names."
+            description={`${PUBLIC_PRODUCTS.livability.label} stays on the Tools desk. It is not sold here, and it is not a Property Assessment.`}
           />
           <div className="mt-12 border-t border-brand-border">
-            {alaCarte.map((item, index) => (
+            {publicLadder.map((item, index) => (
               <div
                 key={item.title}
                 className="grid gap-4 border-b border-brand-border py-8 lg:grid-cols-[80px_minmax(0,260px)_minmax(0,1fr)_160px] lg:items-start lg:gap-8"
@@ -117,15 +128,18 @@ export default function Advisory() {
 
       <PageSection>
         <SectionHeading
-          eyebrow="Memberships"
-          title="For decisions that keep evolving."
-          description="Not a bundle of meetings. An ongoing advisory relationship. Session counts are a supporting detail, not the offer."
+          eyebrow="After the hour"
+          title="By invitation, after a Strategy Session."
+          description="Dossier and memberships are continuity. They are not first cards on the public shelf."
         />
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {memberships.map((tier) => (
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          {afterSession.map((tier) => (
             <div key={tier.title} className="border border-brand-border bg-white p-8">
-              <h3 className="font-display text-3xl leading-[0.95] tracking-[-0.02em] text-brand-navy">{tier.title}</h3>
-              <p className="mt-3 text-[11px] uppercase tracking-[0.16em] text-brand-brass">{tier.price}</p>
+              <p className="text-[11px] uppercase tracking-[0.16em] text-brand-brass">By invitation</p>
+              <h3 className="mt-3 font-display text-3xl leading-[0.95] tracking-[-0.02em] text-brand-navy">{tier.title}</h3>
+              {"price" in tier && tier.price ? (
+                <p className="mt-3 text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">{tier.price}</p>
+              ) : null}
               <p className="mt-5 text-sm leading-7 text-brand-graphite">{tier.text}</p>
             </div>
           ))}
@@ -156,10 +170,11 @@ export default function Advisory() {
       </section>
 
       <CTA
-        title="Begin with a Housing Strategy Session."
-        description="One major decision, a written action summary, and a clear next step. With an ongoing advisory relationship available if the decisions keep evolving."
-        href="/contact"
-        label="Book a Housing Strategy Session"
+        title="Begin with a Strategy Session."
+        description="One major decision, a written action summary, and a clear next step. Continuity is available if the decisions keep evolving."
+        href="/contact?intent=strategy"
+        label="Book a Strategy Session"
+        eyebrow={PUBLIC_PRODUCTS.strategy.label}
       />
     </main>
   );

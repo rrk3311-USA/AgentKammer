@@ -14,8 +14,8 @@ const journey = [
   },
   {
     step: "02",
-    title: "Take the Decision Assessment",
-    text: "Build a Decision Profile: belonging, friction, and whether anything should change at all. This is the diagnostic, not a sales call.",
+    title: "Take the Situation Assessment",
+    text: "Build a situation profile: belonging, friction, and whether anything should change at all. This is the diagnostic, not a sales call.",
     href: "/belonging",
     cta: "Start assessment",
   },
@@ -29,7 +29,7 @@ const journey = [
   {
     step: "04",
     title: "Receive your strategy",
-    text: "A Housing Strategy Session and written action summary. Decision Blueprint when the case warrants it. Memberships if guidance should continue.",
+    text: "A Strategy Session and written action summary. Continuity, when needed, is offered after the hour by invitation.",
     href: "/advisory",
     cta: "See advisory",
   },
@@ -66,7 +66,7 @@ export default function Buy() {
   usePageMetadata({
     title: "Start Here",
     description:
-      "How we work: what's changing, Decision Assessment, Decision Brief, then strategy, before listings take over.",
+      "How we work: what's changing, Situation Assessment, Decision Brief, then a Strategy Session, before listings take over.",
     path: "/buyer-advisory",
   });
 
@@ -75,7 +75,7 @@ export default function Buy() {
       <PageHero
         eyebrow="Start Here"
         title="A clear path through the decision. Not another search."
-        description="Start Here is the path. The Decision Assessment is the diagnostic. Decision Briefs are the research. Strategy is the paid advisory layer. They are not the same step."
+        description="Start Here is the path. The Situation Assessment is the diagnostic. Decision Briefs are the research. A Strategy Session is the paid advisory layer. They are not the same step."
         art="decision-framework"
       />
 
@@ -91,7 +91,7 @@ export default function Buy() {
         <SectionHeading
           eyebrow="How We Work"
           title="Four steps. No overlap."
-          description="If you only remember one sequence: name what changed, take the assessment, read the brief that fits, then get a written strategy when you want judgment, not inventory."
+          description="If you only remember one sequence: name what changed, take the Situation Assessment, read the brief that fits, then get a written strategy when you want judgment, not inventory."
         />
         <div className="mt-12 border-y border-brand-border">
           {journey.map((step) => (
@@ -152,10 +152,11 @@ export default function Buy() {
       </section>
 
       <CTA
-        title="Start with the Decision Assessment."
-        description="If you already know what changed, browse What's Changing? If the question is still open, build your Decision Profile first."
+        title="Start with the Situation Assessment."
+        description="If you already know what changed, browse What's Changing? If the question is still open, build your situation profile first."
         href="/belonging"
-        label="Start Decision Assessment"
+        label="Start Situation Assessment"
+        eyebrow="Start Here"
       />
     </main>
   );

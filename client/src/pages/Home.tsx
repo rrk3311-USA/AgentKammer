@@ -14,9 +14,9 @@ const howWeDecide = [
 
 const startHere = [
   { step: "01", title: "What's Changing?", text: "Name the life change (relocation, family, uncertainty) before listings take over." },
-  { step: "02", title: "Decision Assessment", text: "The diagnostic. Belonging, friction, and whether anything should change at all." },
+  { step: "02", title: "Situation Assessment", text: "The diagnostic. Belonging, friction, and whether anything should change at all." },
   { step: "03", title: "Read the brief", text: "The editorial that matches your situation. Clarity before inventory." },
-  { step: "04", title: "Strategy when you want judgment", text: "A Housing Strategy Session and a written next step. Not a listing tour." },
+  { step: "04", title: "Strategy when you want judgment", text: "A Strategy Session and a written next step. Not a listing tour." },
 ];
 
 const featuredBriefSlugs = [
@@ -255,10 +255,10 @@ export default function Home() {
       {/* 7 · Quiet close */}
       <CTA
         title="When you want a human reply."
-        description="Share what is changing. We will prescribe the right next step: Assessment, Snapshot, Report, or a quiet conversation."
+        description="The homepage starts with Guidance. Write only if a Situation Assessment, Property Assessment, or Strategy Session is already the right next step."
         href="/contact"
-        label="Request Intelligence"
-        eyebrow="Request Intelligence"
+        label="Write"
+        eyebrow="Contact"
       />
     </main>
   );

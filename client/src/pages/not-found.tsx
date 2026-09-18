@@ -13,7 +13,7 @@ export default function NotFound() {
             This path does not have a decision brief yet.
           </h1>
           <p className="mt-6 max-w-xl text-base leading-8 text-brand-graphite lg:text-lg">
-            Start with the main Decision Brief library, or begin with a Housing Strategy Session if the question is specific to a building, neighborhood, timeline, or life change.
+            Start with the main Decision Brief library, or begin with a Strategy Session if the question is specific to a building, neighborhood, timeline, or life change.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/situations">
@@ -22,9 +22,9 @@ export default function NotFound() {
                 <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
               </Button>
             </Link>
-            <Link href="/contact">
+            <Link href="/contact?intent=strategy">
               <Button variant="brandOutline" className="gap-2 uppercase tracking-nav">
-                Begin a Housing Strategy Session
+                Begin a Strategy Session
                 <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
               </Button>
             </Link>

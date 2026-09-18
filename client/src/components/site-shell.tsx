@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { ArrowRight, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/** Locked primary header: exactly these six. Intelligence, Assessment, Get Qualified, and International stay out. */
 export const primaryNav = [
   { label: "Home", href: "/" },
   { label: "Start Here", href: "/buyer-advisory" },
@@ -511,11 +512,11 @@ export function ReportSubnav() {
 }
 
 export function CTA({
-  title = "Request Intelligence.",
-  description = "Tell us the decision in front of you. We will prescribe the right next step: Assessment, Snapshot, Report, or Dossier.",
-  href = "/contact",
-  label = "Request Intelligence",
-  eyebrow = "Request Intelligence",
+  title = "Start Here.",
+  description = "Begin with Guidance, a Situation Assessment, or a Strategy Session when you want a live hour of judgment.",
+  href = "/buyer-advisory",
+  label = "Start Here",
+  eyebrow = "Start Here",
 }: {
   title?: string;
   description?: string;

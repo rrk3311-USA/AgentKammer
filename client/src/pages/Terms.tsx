@@ -15,7 +15,7 @@ export default function Terms() {
       <PageHero
         eyebrow="Legal"
         title="Terms of use"
-        description="These terms govern use of agentkammer.com, the Guidance Advisor, Decision Assessment, and Decision Hub."
+        description="These terms govern use of agentkammer.com, the Guidance Advisor, Situation Assessment, and Decision Hub."
         art="decision-framework"
       />
       <article className="mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24">

@@ -20,7 +20,7 @@ Agent Kammer is a Residential Advisory practice helping people make better real 
 ## Core URLs
 
 - Homepage: https://www.agentkammer.com/
-- Decision Assessment: https://www.agentkammer.com/belonging
+- Situation Assessment: https://www.agentkammer.com/belonging
 - Decision Briefs: https://www.agentkammer.com/services
 - Housing Advisory / Start Here: https://www.agentkammer.com/buyer-advisory
 - Building Intelligence: https://www.agentkammer.com/building-reports
@@ -42,18 +42,19 @@ Individual building intelligence pages. Publicly indexed:
 
 ## How we work
 
-1. What's Changing?. Https://www.agentkammer.com/services#whats-changing
-2. Decision Assessment. Https://www.agentkammer.com/belonging
-3. Relevant Decision Brief. Situation pages under /services/...
-4. Strategy. Housing Strategy Session / Decision Blueprint. Https://www.agentkammer.com/advisory
+1. Guidance. Guidance Advisor chat on every page.
+2. Situation Assessment. Https://www.agentkammer.com/belonging
+3. Property Assessment. Address review. Https://www.agentkammer.com/contact?intent=property
+4. Livability Score. Tools desk only. Not a Property Assessment.
+5. Strategy Session. Live hour. Https://www.agentkammer.com/contact?intent=strategy
 
 Start Here (path): https://www.agentkammer.com/buyer-advisory  
-Do not collapse Start Here and Decision Assessment into one step.
+Do not collapse Start Here and Situation Assessment into one step.
 
 ## Offerings (summary)
 
-À la carte: Housing Strategy Session · Building Second Opinion · Residential Portfolio Review  
-Memberships: Essentials · Executive Advisory · Private Residential Office
+Public ladder: Guidance · Situation Assessment · Property Assessment · Livability Score (Tools) · Strategy Session  
+After the hour, by invitation: Acquisition Dossier · Essentials · Executive Advisory · Private Residential Office
 
 The product is the ongoing advisory relationship, not a bundle of calls.
 

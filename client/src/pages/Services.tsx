@@ -11,9 +11,9 @@ const understand = decisionNavigationGroups.find((group) => group.title === "Wha
 
 const journey = [
   { step: "01", title: "What's Changing?", href: "#whats-changing", text: "Name the life change." },
-  { step: "02", title: "Decision Assessment", href: "/belonging", text: "Build your Decision Profile." },
+  { step: "02", title: "Situation Assessment", href: "/belonging", text: "Build your situation profile." },
   { step: "03", title: "Situation", href: "#whats-changing", text: "Read the situation that fits." },
-  { step: "04", title: "Request Intelligence", href: "/contact", text: "Prescribe Snapshot, Report, or Dossier." },
+  { step: "04", title: "Strategy Session", href: "/contact?intent=strategy", text: "A live hour when you want judgment, not a listing tour." },
 ] as const;
 
 function BriefList({ items }: { items: { label: string; href: string }[] }) {
@@ -142,11 +142,11 @@ export default function Services() {
       />
 
       <CTA
-        title="Request Intelligence."
-        description="If the situation is still open, start with the Decision Assessment, or request intelligence and we will prescribe the next step."
-        href="/contact"
-        label="Request Intelligence"
-        eyebrow="Request Intelligence"
+        title="Start with the Situation Assessment."
+        description="If the situation is still open, begin the diagnostic. If an address is already in play, request a Property Assessment."
+        href="/belonging"
+        label="Situation Assessment"
+        eyebrow="Start Here"
       />
     </main>
   );
