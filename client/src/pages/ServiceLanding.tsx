@@ -129,7 +129,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
         >
           <img
             src={`${landing.heroImage}?v=15`}
-            alt=""
+            alt={landing.heroImageAlt ?? ""}
             className="block h-[clamp(270px,68vw,360px)] w-[112%] max-w-none translate-x-[6%] object-cover object-[62%_28%] opacity-[0.92] pt-6 sm:h-auto sm:w-full sm:max-w-full sm:translate-x-0 sm:object-contain sm:object-right sm:opacity-100 sm:pt-8 sm:max-h-[min(56vh,520px)] lg:max-h-[min(52vh,560px)] lg:pt-10"
           />
           {/* Mobile cream wash - light only, so the art still reads */}

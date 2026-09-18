@@ -7,6 +7,8 @@ export type ServiceLanding = {
   heroImage?: string;
   /** Paper tone behind heroImage - should match the art. */
   heroPaper?: string;
+  /** Accessible description for heroImage. */
+  heroImageAlt?: string;
   title: string;
   navLabel: string;
   eyebrow: string;
@@ -666,6 +668,10 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "upper-west-side-buyers-nyc",
     art: "neighborhood-guides",
+    heroImage: "/images/neighborhoods/upper-west-side.png",
+    heroPaper: "#F4EFE4",
+    heroImageAlt:
+      "Map-art of the Upper West Side: Hudson River and Riverside Park on the west, Broadway as a diagonal, Central Park on the east",
     title: "Upper West Side Buyers in NYC",
     navLabel: "Upper West Side",
     eyebrow: "NYC Neighborhood",
@@ -697,6 +703,10 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "upper-east-side-buyers-nyc",
     art: "neighborhood-guides",
+    heroImage: "/images/neighborhoods/upper-east-side.png",
+    heroPaper: "#F4EFE4",
+    heroImageAlt:
+      "Map-art of the Upper East Side: Central Park on the west, the avenue grid, East River and Roosevelt Island on the east",
     title: "Upper East Side Buyers in NYC",
     navLabel: "Upper East Side",
     eyebrow: "NYC Neighborhood",
@@ -728,6 +738,10 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "tribeca-buyers-nyc",
     art: "neighborhood-guides",
+    heroImage: "/images/neighborhoods/tribeca.png",
+    heroPaper: "#F4EFE4",
+    heroImageAlt:
+      "Map-art of Tribeca: Hudson River on the west and a triangle of irregular downtown blocks below Canal Street",
     title: "Tribeca Buyers in NYC",
     navLabel: "Tribeca",
     eyebrow: "NYC Neighborhood",
@@ -759,6 +773,10 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "chelsea-buyers-nyc",
     art: "neighborhood-guides",
+    heroImage: "/images/neighborhoods/chelsea.png",
+    heroPaper: "#F4EFE4",
+    heroImageAlt:
+      "Map-art of Chelsea: Hudson River and Chelsea Piers on the west, a west-side grid, and the High Line as a gold path",
     title: "Chelsea Buyers in NYC",
     navLabel: "Chelsea",
     eyebrow: "NYC Neighborhood",
@@ -790,6 +808,10 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "hudson-yards-buyers-nyc",
     art: "neighborhood-guides",
+    heroImage: "/images/neighborhoods/hudson-yards.png",
+    heroPaper: "#F4EFE4",
+    heroImageAlt:
+      "Map-art of Hudson Yards: Hudson River on the west, Javits as a riverfront block, the rail-yard superblock and Hudson Park, High Line from the south",
     title: "Hudson Yards Buyers in NYC",
     navLabel: "Hudson Yards",
     eyebrow: "NYC Neighborhood",
@@ -821,6 +843,10 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "financial-district-buyers-nyc",
     art: "neighborhood-guides",
+    heroImage: "/images/neighborhoods/financial-district.png",
+    heroPaper: "#F4EFE4",
+    heroImageAlt:
+      "Map-art of the Financial District: southern tip of Manhattan, Battery Park, Broadway diagonal, Wall Street, harbor water",
     title: "Financial District Buyers in NYC",
     navLabel: "Financial District",
     eyebrow: "NYC Neighborhood",
