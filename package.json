@@ -14,7 +14,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "seed:advisory": "tsx scripts/seed-advisory.ts",
-    "seed:buyer-intel": "tsx scripts/seed-buyer-intel.ts"
+    "seed:buyer-intel": "tsx scripts/seed-buyer-intel.ts",
+    "seed:curation": "tsx scripts/seed-curation.ts"
   },
   "dependencies": {
     "@fontsource/cormorant-garamond": "^5.2.11",

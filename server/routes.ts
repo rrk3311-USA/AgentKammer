@@ -41,6 +41,7 @@ import { sendVisitorPinEmail } from "./lib/send-visitor-email";
 import { processDecisionGuideTurn } from "./lib/advisory/profile-service";
 import { registerAdvisoryAdminRoutes } from "./lib/advisory/admin-routes";
 import { registerBuyerIntelAdminRoutes, registerBuyerIntelPublicRoutes } from "./lib/buyer-intel/admin-routes";
+import { registerCurationAdminRoutes, registerCurationPublicRoutes } from "./lib/curation/admin-routes";
 import {
   getClientProfileByEmail,
   getClientProfileByVisitorId,
@@ -776,7 +777,13 @@ function calculateLeadScore(leadData: LeadData): number {
 export async function registerRoutes(app: Express): Promise<void> {
   // Keep the internal portal out of search indexes even if a crawler ignores robots.txt.
   app.use((req, res, next) => {
-    if (req.path === "/admin" || req.path.startsWith("/admin/") || req.path.startsWith("/api/admin")) {
+    if (
+      req.path === "/admin" ||
+      req.path.startsWith("/admin/") ||
+      req.path.startsWith("/api/admin") ||
+      req.path === "/tools" ||
+      req.path.startsWith("/tools/")
+    ) {
       res.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
     }
     next();
@@ -2473,4 +2480,6 @@ export async function registerRoutes(app: Express): Promise<void> {
   registerAdvisoryAdminRoutes(app, requireAdmin);
   registerBuyerIntelAdminRoutes(app, requireAdmin);
   registerBuyerIntelPublicRoutes(app);
+  registerCurationAdminRoutes(app, requireAdmin);
+  registerCurationPublicRoutes(app);
 }

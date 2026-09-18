@@ -38,6 +38,8 @@ const AdminOverview = lazy(() => import("@/pages/AdminOverview"));
 const AdminPortal = lazy(() => import("@/pages/AdminPortal"));
 const AdminClients = lazy(() => import("@/pages/AdminClients"));
 const AdminSection = lazy(() => import("@/pages/AdminSection"));
+const AdminCuration = lazy(() => import("@/pages/AdminCuration"));
+const ToolsIndex = lazy(() => import("@/pages/ToolsIndex"));
 const InternationalHub = lazy(() => import("@/pages/InternationalHub"));
 const InternationalCountry = lazy(() => import("@/pages/InternationalCountry"));
 const BuildingReportDetail = lazy(() => import("@/pages/BuildingReportDetail"));
@@ -83,7 +85,7 @@ function VisitorSignals() {
   const bootstrapped = useRef(false);
 
   useEffect(() => {
-    if (location.startsWith("/admin")) return;
+    if (location.startsWith("/admin") || location.startsWith("/tools")) return;
     if (!bootstrapped.current) {
       bootstrapped.current = true;
       initVisitorSignalTracking(location);
@@ -108,8 +110,11 @@ function Router() {
       <Route path="/admin/calendar">{() => <AdminSection section="calendar" />}</Route>
       <Route path="/admin/team">{() => <AdminSection section="team" />}</Route>
       <Route path="/admin/settings">{() => <AdminSection section="settings" />}</Route>
+      <Route path="/admin/curation" component={AdminCuration} />
       <Route path="/admin" component={AdminOverview} />
       <Route path="/admin/*">{() => <Redirect to="/admin" />}</Route>
+      <Route path="/tools/curation" component={AdminCuration} />
+      <Route path="/tools" component={ToolsIndex} />
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/situations" component={Services} />
@@ -185,7 +190,7 @@ function Router() {
 
 function AppShell() {
   const [location] = useLocation();
-  const isAdmin = location.startsWith("/admin");
+  const isAdmin = location.startsWith("/admin") || location.startsWith("/tools");
 
   if (isAdmin) {
     return (

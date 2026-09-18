@@ -84,6 +84,8 @@ Relations: People ↔ Leads / Opportunities · People ↔ Conversations · Peopl
 
 Current useful tabs: **Pipeline** · **Funnel** · **Signals** · **People** (read-oriented aggregation from website SoT).
 
+Unlisted operator desk (not in the sidebar): **Curation IQ** at `/tools/curation` — Suggested → Selected report queue. Paste StreetEasy Most Popular sale URLs until MLS lands. Contract: [`CURATION-IQ.md`](./CURATION-IQ.md).
+
 | Module | Status on `/admin` |
 |--------|--------------------|
 | Dashboard (Today’s Activity) | **Live** (keep) |

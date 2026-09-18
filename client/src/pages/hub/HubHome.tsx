@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "wouter";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { fetchHubSnapshot, HubShell, type HubSnapshot } from "./HubShell";
+import { HubPicks } from "./HubPicks";
 import { WhereThingsStand } from "./HubStanding";
 
 function readSearch() {
@@ -52,6 +53,7 @@ export default function HubHome() {
             email and return here anytime.
           </p>
           <WhereThingsStand hub={hub} />
+          <HubPicks />
           <div className="flex flex-wrap gap-3">
             <Link
               href="/belonging"
@@ -109,6 +111,7 @@ export default function HubHome() {
                 </p>
               </div>
             )}
+            <HubPicks />
             {hub?.upcomingReview && (
               <div className="border-t border-[#D8D1C7] pt-6">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#2A3447]/55">
