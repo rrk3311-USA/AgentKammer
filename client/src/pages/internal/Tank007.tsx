@@ -1,5 +1,14 @@
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
-import { isGateOpen, lockGate, tryUnlock } from "@/lib/007-tank/gate";
+import { APPLE_HEALTH_SLEEP_HOOK, readNativeSleep } from "@/lib/007-tank/apple-health-sleep";
+import {
+  clearCommanderPin,
+  hasCommanderPin,
+  isGateOpen,
+  lockGate,
+  setCommanderPin,
+  tankSharePath,
+  tryUnlockPin,
+} from "@/lib/007-tank/gate";
 import {
   DOMAIN_LABEL,
   DOMAINS,
@@ -29,6 +38,19 @@ import {
   saveTimeStore,
   setConsent,
 } from "@/lib/007-tank/time-tracking";
+import {
+  QUALITY_LABEL,
+  SleepQuality,
+  addNight,
+  createNight,
+  formatClock,
+  formatSleepDuration,
+  durationMs,
+  isValidNight,
+  loadSleepStore,
+  removeNight,
+  saveSleepStore,
+} from "@/lib/007-tank/sleep";
 import { LIFE_PLAN_PERK_POLICY } from "@shared/life-plan-perk";
 import "./tank-007.css";
 
@@ -67,8 +89,11 @@ function useNyClock() {
 
 export default function Tank007() {
   const [unlocked, setUnlocked] = useState(false);
-  const [phrase, setPhrase] = useState("");
+  const [needsSetup, setNeedsSetup] = useState(false);
+  const [pin, setPin] = useState("");
+  const [pinConfirm, setPinConfirm] = useState("");
   const [gateError, setGateError] = useState<string | null>(null);
+  const [shareNote, setShareNote] = useState<string | null>(null);
   const [consent, setConsentState] = useState(false);
   const [visibleMs, setVisibleMs] = useState(0);
   const [activeMs, setActiveMs] = useState(0);
@@ -82,9 +107,13 @@ export default function Tank007() {
     horizon: "week" as Horizon,
   });
   const [formError, setFormError] = useState<string | null>(null);
+  const [sleepStore, setSleepStore] = useState(() => loadSleepStore());
+  const [sleepDraft, setSleepDraft] = useState({ bedAt: "", wakeAt: "", quality: "" as SleepQuality, note: "" });
+  const [sleepError, setSleepError] = useState<string | null>(null);
   const lastInput = useRef(Date.now());
   const clock = useNyClock();
   const native = useMemo(() => readNativeScreenTime(), []);
+  const nativeSleep = useMemo(() => readNativeSleep(), []);
 
   useEffect(() => {
     document.title = "007 Tank | Internal";
@@ -96,6 +125,7 @@ export default function Tank007() {
     }
     robots.setAttribute("content", "noindex, nofollow");
     setUnlocked(isGateOpen());
+    setNeedsSetup(!hasCommanderPin());
     const store = loadTimeStore();
     setConsentState(store.consent);
     const day = store.days[localDayKey()] ?? emptyDay();
@@ -133,13 +163,36 @@ export default function Tank007() {
     };
   }, [unlocked, consent]);
 
-  const unlock = (e: FormEvent) => {
+  const unlock = async (e: FormEvent) => {
     e.preventDefault();
-    if (tryUnlock(phrase)) {
+    setGateError(null);
+    if (needsSetup) {
+      const result = await setCommanderPin(pin, pinConfirm);
+      if (!result.ok) {
+        setGateError(result.error);
+        return;
+      }
       setUnlocked(true);
-      setGateError(null);
+      setNeedsSetup(false);
+      setPin("");
+      setPinConfirm("");
+      return;
+    }
+    if (await tryUnlockPin(pin)) {
+      setUnlocked(true);
+      setPin("");
     } else {
-      setGateError("Phrase rejected.");
+      setGateError("PIN rejected.");
+    }
+  };
+
+  const copyShareLink = async () => {
+    const url = `${window.location.origin}${tankSharePath()}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setShareNote("Copied.");
+    } catch {
+      setShareNote(url);
     }
   };
 
@@ -165,32 +218,65 @@ export default function Tank007() {
     setFormError(null);
   };
 
+  const persistSleep = (next: typeof sleepStore) => {
+    setSleepStore(next);
+    saveSleepStore(next);
+  };
+
+  const logNight = (e: FormEvent) => {
+    e.preventDefault();
+    if (!isValidNight(sleepDraft)) {
+      setSleepError("Bed and wake are required. Wake must be after bed. This is your log, not Watch sleep.");
+      return;
+    }
+    persistSleep(addNight(sleepStore, createNight(sleepDraft)));
+    setSleepDraft({ bedAt: "", wakeAt: "", quality: "", note: "" });
+    setSleepError(null);
+  };
+
   const goals = plan.goals.filter((g) => (horizonFilter === "all" ? true : g.horizon === horizonFilter));
 
   if (!unlocked) {
     return (
-      <main className="ak-tank flex min-h-screen items-center justify-center px-6">
-        <div className="ak-tank-inner ak-tank-panel w-full max-w-md p-8">
+      <main className="ak-tank flex min-h-screen items-center justify-center px-4">
+        <div className="ak-tank-inner ak-tank-panel w-full max-w-md p-6 sm:p-8">
           <p className="ak-tank-kicker">Internal · Commander only</p>
           <h1 className="ak-tank-display mt-3 text-4xl text-brand-ivory">007 Tank</h1>
           <p className="mt-3 text-sm leading-6 text-[var(--tank-mute)]">
-            Life-management HUD for Raphael Kammer. Not a public Agent Kammer surface. Phrase is in the tank spec.
+            {needsSetup
+              ? "First visit: set a numeric PIN on this device. It stays in this browser. Session unlocks after."
+              : "Enter PIN. Session-only until you lock or close the tab."}
           </p>
           <form className="mt-6 space-y-4" onSubmit={unlock}>
             <label className="block text-[10px] uppercase tracking-[0.18em] text-[var(--tank-brass)]">
-              Clearance phrase
+              PIN
               <input
-                className="mt-2"
+                className="ak-tank-pin mt-2"
                 type="password"
+                inputMode="numeric"
                 autoComplete="off"
-                value={phrase}
-                onChange={(e) => setPhrase(e.target.value)}
-                data-testid="tank-gate-input"
+                value={pin}
+                onChange={(e) => setPin(e.target.value.replace(/\D/g, "").slice(0, 8))}
+                data-testid="tank-pin-input"
               />
             </label>
+            {needsSetup ? (
+              <label className="block text-[10px] uppercase tracking-[0.18em] text-[var(--tank-brass)]">
+                Confirm PIN
+                <input
+                  className="ak-tank-pin mt-2"
+                  type="password"
+                  inputMode="numeric"
+                  autoComplete="off"
+                  value={pinConfirm}
+                  onChange={(e) => setPinConfirm(e.target.value.replace(/\D/g, "").slice(0, 8))}
+                  data-testid="tank-pin-confirm"
+                />
+              </label>
+            ) : null}
             {gateError ? <p className="text-sm text-red-300">{gateError}</p> : null}
             <button className="tank-btn w-full" type="submit" data-testid="tank-gate-submit">
-              Open the tank
+              {needsSetup ? "Set PIN and open" : "Open the tank"}
             </button>
           </form>
         </div>
@@ -213,16 +299,34 @@ export default function Tank007() {
             <p className="ak-tank-kicker">Commander Kammer · Manhattan</p>
             <p className="ak-tank-clock mt-1 text-sm text-brand-ivory/80">{clock} NY</p>
           </div>
-          <button
-            type="button"
-            className="tank-ghost"
-            onClick={() => {
-              lockGate();
-              setUnlocked(false);
-            }}
-          >
-            Lock
-          </button>
+          <div className="flex flex-wrap items-center gap-2">
+            <button type="button" className="tank-ghost" onClick={copyShareLink} data-testid="tank-copy-link">
+              Copy phone link
+            </button>
+            <button
+              type="button"
+              className="tank-ghost"
+              onClick={() => {
+                lockGate();
+                setUnlocked(false);
+                setNeedsSetup(!hasCommanderPin());
+              }}
+            >
+              Lock
+            </button>
+            <button
+              type="button"
+              className="tank-ghost"
+              onClick={() => {
+                clearCommanderPin();
+                setUnlocked(false);
+                setNeedsSetup(true);
+              }}
+            >
+              Reset PIN
+            </button>
+          </div>
+          {shareNote ? <p className="w-full text-right text-[11px] text-[var(--tank-brass)]">{shareNote}</p> : null}
         </header>
 
         <div className="mt-5 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
@@ -273,6 +377,89 @@ export default function Tank007() {
             </ul>
           </section>
         </div>
+
+        <section className="ak-tank-panel mt-4 p-5" data-testid="tank-sleep">
+          <p className="ak-tank-kicker">Sleep · commander log</p>
+          <h2 className="ak-tank-display mt-2 text-2xl sm:text-3xl">Stillness hours</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--tank-mute)]">
+            You log bed and wake. Optional quality. Not Apple Health, not Watch, not OS sleep. Hook{" "}
+            <code>{APPLE_HEALTH_SLEEP_HOOK.id}</code> is unwired.
+          </p>
+          <p className="mt-1 text-[11px] text-[var(--tank-mute)]">{nativeSleep.reason}</p>
+          <form className="mt-5 grid gap-3 sm:grid-cols-2" onSubmit={logNight} data-testid="tank-sleep-form">
+            <label className="text-[10px] uppercase tracking-[0.16em] text-[var(--tank-brass)]">
+              Bed
+              <input
+                className="mt-2"
+                type="datetime-local"
+                value={sleepDraft.bedAt}
+                onChange={(e) => setSleepDraft({ ...sleepDraft, bedAt: e.target.value })}
+                data-testid="sleep-bed"
+              />
+            </label>
+            <label className="text-[10px] uppercase tracking-[0.16em] text-[var(--tank-brass)]">
+              Wake
+              <input
+                className="mt-2"
+                type="datetime-local"
+                value={sleepDraft.wakeAt}
+                onChange={(e) => setSleepDraft({ ...sleepDraft, wakeAt: e.target.value })}
+                data-testid="sleep-wake"
+              />
+            </label>
+            <label className="text-[10px] uppercase tracking-[0.16em] text-[var(--tank-brass)]">
+              Quality (optional)
+              <select
+                className="mt-2"
+                value={sleepDraft.quality}
+                onChange={(e) => setSleepDraft({ ...sleepDraft, quality: e.target.value as SleepQuality })}
+                data-testid="sleep-quality"
+              >
+                <option value="">Skip</option>
+                <option value="thin">{QUALITY_LABEL.thin}</option>
+                <option value="ok">{QUALITY_LABEL.ok}</option>
+                <option value="deep">{QUALITY_LABEL.deep}</option>
+              </select>
+            </label>
+            <label className="text-[10px] uppercase tracking-[0.16em] text-[var(--tank-brass)]">
+              Note (optional)
+              <input
+                className="mt-2"
+                value={sleepDraft.note}
+                onChange={(e) => setSleepDraft({ ...sleepDraft, note: e.target.value })}
+                data-testid="sleep-note"
+              />
+            </label>
+            {sleepError ? <p className="text-sm text-red-300 sm:col-span-2">{sleepError}</p> : null}
+            <button className="tank-btn sm:col-span-2" type="submit" data-testid="sleep-log">
+              Log night
+            </button>
+          </form>
+          <ol className="mt-5 space-y-3" data-testid="sleep-list">
+            {sleepStore.nights.length === 0 ? (
+              <li className="border border-dashed border-[var(--tank-line)] px-4 py-5 text-sm text-[var(--tank-mute)]">
+                No nights logged. Stillness is a choice you record, not a Watch estimate.
+              </li>
+            ) : (
+              sleepStore.nights.map((night) => {
+                const ms = durationMs(night.bedAt, night.wakeAt) ?? 0;
+                return (
+                  <li key={night.id} className="border border-[var(--tank-line)] px-4 py-4" data-testid={`sleep-night-${night.id}`}>
+                    <p className="ak-tank-clock ak-tank-display text-2xl">{formatSleepDuration(ms)}</p>
+                    <p className="mt-1 text-sm text-brand-ivory/80">
+                      {formatClock(night.bedAt)} → {formatClock(night.wakeAt)}
+                      {night.quality ? ` · ${QUALITY_LABEL[night.quality]}` : ""}
+                    </p>
+                    {night.note ? <p className="mt-1 text-sm text-[var(--tank-mute)]">{night.note}</p> : null}
+                    <button type="button" className="tank-ghost mt-3" onClick={() => persistSleep(removeNight(sleepStore, night.id))}>
+                      Drop
+                    </button>
+                  </li>
+                );
+              })
+            )}
+          </ol>
+        </section>
 
         <section className="ak-tank-panel mt-4 p-5" data-testid="tank-life-plan">
           <div className="flex flex-wrap items-end justify-between gap-4">
