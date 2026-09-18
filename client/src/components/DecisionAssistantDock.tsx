@@ -2,7 +2,6 @@ import { CSSProperties, FormEvent, KeyboardEvent, useEffect, useRef, useState } 
 import { useLocation } from "wouter";
 import {
   ArrowRight,
-  MessageCircle,
   X,
 } from "lucide-react";
 import {
@@ -42,6 +41,18 @@ const sessionStorageKey = "akDecisionAssistantSessionId";
 const navigationMemoryKey = "akDecisionAssistantNavigation";
 const dwellNudgeKey = "akDecisionGuideDwellNudges";
 const DEFAULT_GREETING = getPageEngagement("/").greeting;
+
+function GuidanceAdvisorFace({ size = "sheet" }: { size?: "sheet" | "chip" }) {
+  return (
+    <span className={size === "chip" ? "ak-guidance-face is-chip" : "ak-guidance-face"}>
+      <img
+        src="/images/decision-guide-raphi.png"
+        alt="Raphi, your Guidance Advisor"
+        className="ak-guidance-face-photo"
+      />
+    </span>
+  );
+}
 
 function GuidanceStarProgress({ completion }: { completion: number }) {
   const ratio = Math.max(0, Math.min(1, completion / blueprintSegments.length));
@@ -990,6 +1001,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
                 sheetDrag.current = null;
               }}
             >
+              <GuidanceAdvisorFace />
               <button
                 type="button"
                 onClick={toggleSheet}
@@ -997,7 +1009,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
                 aria-label="Collapse Guidance Advisor"
               >
                 <GuidanceStarProgress completion={blueprintCompletion} />
-                <span className="mt-2 block text-[10px] uppercase tracking-[0.22em] text-[#d8c089]/70">
+                <span className="mt-1.5 block text-[10px] uppercase tracking-[0.22em] text-[#d8c089]/62">
                   Guidance Advisor
                 </span>
               </button>
@@ -1118,7 +1130,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
             aria-label={chipLabel === "Guidance" ? "Open Guidance Advisor" : "Resume Decision with Guidance Advisor"}
             data-testid="button-guidance-chip"
           >
-            <MessageCircle className="h-4 w-4" strokeWidth={1.5} />
+            <GuidanceAdvisorFace size="chip" />
             <span>{chipLabel}</span>
           </button>
         </div>

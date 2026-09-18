@@ -1015,6 +1015,30 @@
     border-radius: 0;
   }
 
+  .ak-guidance-face {
+    position: relative;
+    display: flex;
+    height: 2.25rem;
+    width: 2.25rem;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 1px solid rgba(216, 192, 137, 0.28);
+    background: #050507;
+  }
+
+  .ak-guidance-face.is-chip {
+    height: 1.35rem;
+    width: 1.35rem;
+    border-color: rgba(216, 192, 137, 0.22);
+  }
+
+  .ak-guidance-face-photo {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: 50% 18%;
+  }
+
   .ak-guidance-star {
     position: relative;
     display: block;
