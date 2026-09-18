@@ -313,6 +313,32 @@ export function registerAdvisoryAdminRoutes(
     }
   });
 
+  // Marks Hub trophy #2 only. Get Qualified submit must never do this.
+  app.post("/api/admin/clients/:id/strategy-session", requireAdmin, async (req, res) => {
+    try {
+      const row = await getClientProfileById(req.params.id);
+      if (!row?.email) {
+        return res.status(400).json({
+          error: "Client email is required to mark a Strategy Session held.",
+        });
+      }
+      const { updateQualifyFlags } = await import("../get-qualified");
+      const updated = await updateQualifyFlags({
+        email: row.email,
+        strategySessionHeld: true,
+      });
+      await recordProfileEvent(row.id, "strategy_session_held", "Marked held by advisor", "admin");
+      res.json({
+        ok: true,
+        strategySessionHeld: true,
+        submissionId: updated?.id || null,
+      });
+    } catch (error) {
+      console.error("[admin] strategy-session mark failed", error);
+      res.status(500).json({ error: "Failed to mark Strategy Session held" });
+    }
+  });
+
   // Inbound Attio webhooks (stage/task events) - verify signature; no browser secrets.
   app.post("/api/webhooks/attio", async (req, res) => {
     try {

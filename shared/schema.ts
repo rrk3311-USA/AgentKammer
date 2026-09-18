@@ -619,6 +619,37 @@ export const accountClaimTokens = pgTable("account_claim_tokens", {
 
 export type AccountClaimToken = typeof accountClaimTokens.$inferSelect;
 
+// ---------------------------------------------------------------------------
+// Get Qualified — own table (not contact_submissions). Site Neon only.
+// Hub sub-status lives here; the six public trophies stay on the roadmap.
+// ---------------------------------------------------------------------------
+
+export const getQualifiedSubmissions = pgTable("get_qualified_submissions", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone"),
+  budgetLane: text("budget_lane").notNull(),
+  callPurpose: text("call_purpose").notNull(),
+  notes: text("notes"),
+  source: text("source").notNull().default("site"),
+  route: text("route").notNull(),
+  status: text("status").notNull().default("new"),
+  processPdfSent: boolean("process_pdf_sent").notNull().default(false),
+  hubMemberId: varchar("hub_member_id"),
+  sessionBooked: boolean("session_booked").notNull().default(false),
+  strategySessionHeld: boolean("strategy_session_held").notNull().default(false),
+});
+
+export const insertGetQualifiedSubmissionSchema = createInsertSchema(getQualifiedSubmissions).omit({
+  id: true,
+  createdAt: true,
+});
+
+export type InsertGetQualifiedSubmission = z.infer<typeof insertGetQualifiedSubmissionSchema>;
+export type GetQualifiedSubmission = typeof getQualifiedSubmissions.$inferSelect;
+
 export const auditLogs = pgTable("audit_logs", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   actorRole: text("actor_role").notNull(),
