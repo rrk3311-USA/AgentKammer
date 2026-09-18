@@ -2,8 +2,7 @@ import { Link, useLocation } from "wouter";
 import { useEffect, useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { fetchToolsStatus } from "@/lib/tools-client";
-import { primaryNav } from "@/components/site-shell";
-import { FOOTER_SITEMAP_QUIET, PUBLIC_PRODUCTS } from "@/data/public-menu";
+import { FOOTER_DARK_LINKS } from "@/data/site-map";
 import { decisionNavigationGroups } from "@/data/decision-navigation";
 import { SITE_LANGUAGE_LOOP, setStoredPreferredLanguage } from "@/data/site-language";
 import { AkMonogramMark } from "@/components/AkMonogramMark";
@@ -25,9 +24,6 @@ const popularSearches = [
 
 const pillClass =
   "rounded-full border border-brand-border bg-white px-4 py-1.5 text-[11px] uppercase tracking-[0.1em] text-brand-navy transition-colors hover:border-brand-brass hover:text-brand-brass";
-
-const sitemapLinkClass =
-  "text-left text-[11px] uppercase tracking-[0.12em] text-brand-navy transition-colors hover:text-brand-brass";
 
 function ResumeDecisionNest() {
   return (
@@ -65,75 +61,33 @@ export function Footer() {
 
   return (
     <footer className="border-t border-brand-border bg-brand-ivory text-brand-graphite">
-      <div className="mx-auto grid w-full max-w-site gap-10 px-6 py-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(15rem,0.75fr)] lg:gap-16 lg:px-10 lg:py-12">
-        <div className="min-w-0">
-          <h3 className="font-display text-[clamp(1.5rem,3vw,1.85rem)] leading-[0.95] text-brand-navy">
-            What's Changing?
-          </h3>
-          <nav aria-label="What's Changing" className="mt-4 flex flex-wrap gap-2">
-            {whatsChangingItems.map((item) => (
-              <Link key={item.href + item.label} href={item.href} className={pillClass}>
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+      <div className="mx-auto w-full max-w-site px-6 py-8 lg:px-10 lg:py-12">
+        <h3 className="font-display text-[clamp(1.5rem,3vw,1.85rem)] leading-[0.95] text-brand-navy">
+          What's Changing?
+        </h3>
+        <nav aria-label="What's Changing" className="mt-4 flex flex-wrap gap-2">
+          {whatsChangingItems.map((item) => (
+            <Link key={item.href + item.label} href={item.href} className={pillClass}>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
 
-          <div className="mt-8">
-            <p className="text-[10px] uppercase tracking-[0.18em] text-brand-cocoa">Popular Searches</p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {popularSearches.map((item) => (
-                <button
-                  key={item.href + item.label}
-                  type="button"
-                  onClick={() => navigate(item.href)}
-                  className="w-fit text-left text-[11px] uppercase tracking-[0.1em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
+        <div className="mt-8">
+          <p className="text-[10px] uppercase tracking-[0.18em] text-brand-cocoa">Popular Searches</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {popularSearches.map((item) => (
+              <button
+                key={item.href + item.label}
+                type="button"
+                onClick={() => navigate(item.href)}
+                className="w-fit text-left text-[11px] uppercase tracking-[0.1em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
+              >
+                {item.label}
+              </button>
+            ))}
           </div>
         </div>
-
-        <nav aria-labelledby="footer-sitemap-heading" data-testid="footer-sitemap">
-          <h3
-            id="footer-sitemap-heading"
-            className="font-display text-[clamp(1.5rem,3vw,1.85rem)] leading-[0.95] text-brand-navy"
-          >
-            Site map
-          </h3>
-          <p className="mt-5 text-[10px] uppercase tracking-[0.18em] text-brand-cocoa">Primary</p>
-          <ul className="mt-3 flex flex-col gap-2">
-            {primaryNav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className={sitemapLinkClass}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 text-[10px] uppercase tracking-[0.18em] text-brand-cocoa">Quiet</p>
-          <ul className="mt-3 flex flex-col gap-2">
-            <li>
-              <button
-                type="button"
-                onClick={openDecisionAssistant}
-                className={sitemapLinkClass}
-                aria-label="Open Guidance Advisor"
-                data-testid="button-footer-sitemap-guidance"
-              >
-                {PUBLIC_PRODUCTS.guidance.label}
-              </button>
-            </li>
-            {FOOTER_SITEMAP_QUIET.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className={sitemapLinkClass}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </div>
 
       <div className="border-t border-brand-brass/28 bg-brand-charcoal text-brand-ivory">
@@ -148,43 +102,26 @@ export function Footer() {
               </div>
               <ResumeDecisionNest />
             </div>
-            <div className="flex flex-wrap gap-x-4 gap-y-1 text-[10px] uppercase tracking-[0.18em] text-brand-ivory/78">
-              <Link href="/belonging" className="transition-colors hover:text-brand-brass">
-                Situation Assessment
-              </Link>
-              <Link href="/contact?intent=property" className="transition-colors hover:text-brand-brass">
-                Property Assessment
-              </Link>
-              <Link href="/contact?intent=strategy" className="transition-colors hover:text-brand-brass">
-                Strategy Session
-              </Link>
-              <Link href="/intelligence" className="transition-colors hover:text-brand-brass">
-                Intelligence
-              </Link>
-              <Link href="/account" className="transition-colors hover:text-brand-brass">
-                Decision Hub
-              </Link>
-              <Link href="/privacy" className="transition-colors hover:text-brand-brass">
-                Privacy
-              </Link>
-              <Link href="/guides" className="transition-colors hover:text-brand-brass">
-                Guides
-              </Link>
-              <Link href="/terms" className="transition-colors hover:text-brand-brass">
-                Terms
-              </Link>
-              <Link href="/licenses" className="transition-colors hover:text-brand-brass">
-                Licenses
-              </Link>
+            <nav
+              aria-label="Footer"
+              className="flex flex-wrap gap-x-4 gap-y-1 text-[10px] uppercase tracking-[0.18em] text-brand-ivory/78"
+            >
+              {FOOTER_DARK_LINKS.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="transition-colors hover:text-brand-brass"
+                  data-testid={item.href === "/sitemap" ? "link-footer-sitemap" : undefined}
+                >
+                  {item.label}
+                </Link>
+              ))}
               {toolsPublic ? (
                 <Link href="/tools" className="transition-colors hover:text-brand-brass">
                   Tools
                 </Link>
               ) : null}
-              <Link href="/contact" className="transition-colors hover:text-brand-brass">
-                Contact
-              </Link>
-            </div>
+            </nav>
           </div>
 
           <div className="border-t border-brand-ivory/10 pt-2">
