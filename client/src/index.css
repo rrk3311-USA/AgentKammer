@@ -981,35 +981,32 @@
     align-items: center;
     justify-content: center;
     gap: 0.55rem;
-    border: 1px solid rgba(198, 168, 112, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 0;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 42%),
-      #0c0e12;
+    background: #050507;
     padding: 0 1.1rem;
-    color: #efe6d6;
+    color: #f4f0e8;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.4);
   }
 
   .ak-guidance-chip:hover {
-    border-color: rgba(198, 168, 112, 0.48);
-    color: #f7f1e6;
+    border-color: rgba(255, 255, 255, 0.2);
   }
 
   .ak-guidance-sheet {
     max-height: min(52vh, 32.5rem);
     border-radius: 0;
-    border: 1px solid rgba(198, 168, 112, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-bottom: 0;
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, transparent 22%),
-      #0c0e12;
-    color: #efe6d6;
-    box-shadow: 0 -12px 28px rgba(0, 0, 0, 0.42);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 18%),
+      #050507;
+    color: #f4f0e8;
+    box-shadow: 0 -18px 40px rgba(0, 0, 0, 0.5);
     animation: ak-guidance-rise 220ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
@@ -1020,7 +1017,7 @@
 
   .ak-guidance-handle {
     display: flex;
-    min-height: 1.15rem;
+    min-height: 1.05rem;
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -1031,49 +1028,71 @@
   .ak-guidance-handle > span {
     display: block;
     height: 1px;
-    width: 2.25rem;
-    border-radius: 0;
-    background: rgba(239, 230, 214, 0.28);
+    width: 1.75rem;
+    background: rgba(255, 255, 255, 0.16);
   }
 
-  .ak-guidance-sheet .ak-blueprint-main-progress {
-    height: 0.2rem;
-    border: 0;
-    border-radius: 0;
-    background: rgba(239, 230, 214, 0.12);
-    box-shadow: none;
+  .ak-guidance-sparks {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.45rem;
+    align-items: center;
+    height: 0.7rem;
   }
 
-  .ak-guidance-sheet .ak-blueprint-main-progress-fill {
-    min-width: 0.2rem;
-    background: rgba(198, 168, 112, 0.72);
-    box-shadow: none;
+  .ak-guidance-sparks > span {
+    position: relative;
+    display: block;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
   }
 
-  .ak-guidance-sheet .ak-blueprint-main-progress-fill::after {
-    display: none;
+  .ak-guidance-sparks > span.is-lit {
+    background: linear-gradient(90deg, rgba(243, 230, 196, 0.15), rgba(255, 246, 223, 0.95) 72%, rgba(216, 192, 137, 0.4));
+    box-shadow: 0 0 10px rgba(216, 192, 137, 0.45);
   }
 
-  .ak-guidance-sheet .ak-blueprint-main-progress-grid > span {
-    border-right-color: rgba(12, 14, 18, 0.55);
+  .ak-guidance-sparks > span.is-lead::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 3px;
+    height: 3px;
+    margin-top: -1.5px;
+    background: #fff8e8;
+    box-shadow: 0 0 8px 2px rgba(255, 246, 223, 0.55);
+    animation: ak-guidance-spark 2.8s ease-in-out infinite;
   }
 
   @media (min-width: 768px) {
     .ak-guidance-sheet {
       max-width: 32rem;
       max-height: min(46vh, 30rem);
-      border-bottom: 1px solid rgba(198, 168, 112, 0.22);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
   }
 
   @keyframes ak-guidance-rise {
     from {
       transform: translateY(8%);
-      opacity: 0.7;
+      opacity: 0.72;
     }
     to {
       transform: translateY(0);
       opacity: 1;
+    }
+  }
+
+  @keyframes ak-guidance-spark {
+    0%,
+    100% {
+      opacity: 0.55;
+      box-shadow: 0 0 6px 1px rgba(255, 246, 223, 0.35);
+    }
+    50% {
+      opacity: 1;
+      box-shadow: 0 0 12px 3px rgba(255, 246, 223, 0.62);
     }
   }
 

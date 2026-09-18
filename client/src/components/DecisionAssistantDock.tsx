@@ -45,7 +45,7 @@ const DEFAULT_GREETING = getPageEngagement("/").greeting;
 
 function DecisionGuideAvatar({ animated = false }: { animated?: boolean }) {
   return (
-    <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden border border-white/15 bg-[#0c0e12]">
+    <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden border border-white/10 bg-[#050507]">
       <span
         className={
           animated
@@ -298,23 +298,21 @@ function mergeDefinedProfile(current: Answers, profile?: Partial<Answers>) {
   return next;
 }
 
-function BlueprintProgressBar({
-  completion,
-  tone,
-}: {
-  completion: number;
-  tone: "dark" | "light";
-}) {
-  const percent = Math.max(0, Math.min(100, (completion / blueprintSegments.length) * 100));
-  const trackClass = tone === "dark" ? "bg-brand-ivory/16" : "bg-brand-navy/10";
+function GuidanceSparkProgress({ completion }: { completion: number }) {
   return (
-    <span className={`ak-blueprint-main-progress ${trackClass}`} aria-label={`Decision Blueprint progress ${completion} of 6`}>
-      <span className="ak-blueprint-main-progress-fill" style={{ width: `${percent}%` }} />
-      <span className="ak-blueprint-main-progress-grid" aria-hidden>
-        {blueprintSegments.map((segment) => (
-          <span key={segment.label} />
-        ))}
-      </span>
+    <span className="ak-guidance-sparks" aria-label={`Guidance progress ${completion} of 6`}>
+      {blueprintSegments.map((segment, index) => (
+        <span
+          key={segment.label}
+          className={
+            index < completion
+              ? index === completion - 1
+                ? "is-lit is-lead"
+                : "is-lit"
+              : undefined
+          }
+        />
+      ))}
     </span>
   );
 }
@@ -997,9 +995,6 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   const blueprintCompletion = blueprintSegments.filter((segment) => completedSegments[segment.label as keyof typeof completedSegments]).length;
   const displayMessages = mergeConsecutiveMessages(messages);
   const recentMessages = cold ? displayMessages.slice(-3) : displayMessages.slice(-2);
-  const renderCompactBlueprintProgress = (tone: "dark" | "light") => (
-    <BlueprintProgressBar completion={blueprintCompletion} tone={tone} />
-  );
 
   const chipLabel = messages.some((message) => message.role === "user") ? "Resume Decision" : "Guidance";
 
@@ -1023,24 +1018,21 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
             <span />
           </div>
 
-          <div className="flex min-h-0 flex-1 flex-col gap-2 px-3 pb-[max(0.65rem,env(safe-area-inset-bottom))]">
-            <div className="flex min-w-0 items-center gap-2.5">
+          <div className="flex min-h-0 flex-1 flex-col gap-3 px-4 pb-[max(0.85rem,env(safe-area-inset-bottom))]">
+            <div className="flex min-w-0 items-center gap-3">
               <button
                 type="button"
                 onClick={toggleSheet}
-                className="flex min-h-11 min-w-0 flex-1 items-center gap-2.5 text-left"
+                className="flex min-h-11 min-w-0 flex-1 items-center gap-3 text-left"
                 aria-label="Collapse Guidance Advisor"
               >
                 <DecisionGuideAvatar animated />
-                <span className="min-w-0 flex-1">
-                  <GuidanceAdvisorLabel tone="dark" />
-                  <span className="block truncate text-sm font-medium text-[#efe6d6]">{engagement.headline}</span>
-                </span>
+                <GuidanceAdvisorLabel tone="dark" />
               </button>
               <button
                 type="button"
                 onClick={collapseSheet}
-                className="inline-flex h-11 w-11 shrink-0 items-center justify-center border border-white/15 bg-transparent text-[#efe6d6]/70 transition-colors hover:border-white/30 hover:text-[#efe6d6]"
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center text-[#f4f0e8]/55 transition-colors hover:text-[#f4f0e8]"
                 aria-label="Close Guidance Advisor"
                 data-testid="button-guidance-close"
               >
@@ -1048,44 +1040,33 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
               </button>
             </div>
 
-            <div className="flex items-center gap-3" aria-label="Decision Blueprint progress">
-              <p className="shrink-0 text-[9px] uppercase tracking-[0.18em] text-[#c6a870]/70">Progress</p>
-              <div className="min-w-0 flex-1">{renderCompactBlueprintProgress("dark")}</div>
-              <p className="shrink-0 font-mono text-[10px] text-[#efe6d6]/50">{blueprintCompletion}/6</p>
-            </div>
+            <GuidanceSparkProgress completion={blueprintCompletion} />
 
-            <div ref={transcriptRef} className="min-h-0 flex-1 space-y-1.5 overflow-y-auto overflow-x-hidden pr-1">
+            <div ref={transcriptRef} className="min-h-0 flex-1 space-y-4 overflow-y-auto overflow-x-hidden pr-1">
               {recentMessages.map((message, index) => (
-                <div
-                  key={`${message.role}-${index}`}
-                  className={
-                    message.role === "assistant"
-                      ? "max-w-full overflow-hidden border border-white/10 bg-white/[0.04] p-2.5 text-[#efe6d6]"
-                      : "max-w-full overflow-hidden border border-white/12 bg-transparent p-2.5 text-[#efe6d6]/88"
-                  }
-                >
+                <div key={`${message.role}-${index}`} className="max-w-full">
                   <p
                     className={
                       message.role === "assistant"
-                        ? "text-[9px] uppercase tracking-[0.16em] text-[#c6a870]/75"
-                        : "text-[9px] uppercase tracking-[0.16em] text-[#efe6d6]/45"
+                        ? "text-[10px] uppercase tracking-[0.2em] text-[#d8c089]/80"
+                        : "text-[10px] uppercase tracking-[0.2em] text-[#f4f0e8]/40"
                     }
                   >
                     {message.role === "assistant" ? "Guidance Advisor" : "You"}
                   </p>
-                  <p className="mt-1.5 whitespace-pre-line break-words text-sm leading-5">{message.text}</p>
+                  <p className="mt-2 whitespace-pre-line break-words text-[15px] leading-6 text-[#f4f0e8]/88">{message.text}</p>
                 </div>
               ))}
             </div>
 
             {cold && step !== "sent" ? (
-              <div className="flex flex-wrap gap-1.5" aria-label="Quick starters">
+              <div className="flex flex-wrap gap-2" aria-label="Quick starters">
                 {starterPrompts.map((prompt) => (
                   <button
                     key={prompt.label}
                     type="button"
                     onClick={() => handleStarter(prompt)}
-                    className="min-h-11 border border-white/15 bg-transparent px-3 text-[11px] text-[#efe6d6] transition-colors hover:border-[#c6a870]/50"
+                    className="min-h-11 border border-white/10 px-3 text-[11px] text-[#f4f0e8]/80 transition-colors hover:border-white/25 hover:text-[#f4f0e8]"
                   >
                     {prompt.label}
                   </button>
@@ -1094,13 +1075,13 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
             ) : null}
 
             {quickActions.length > 0 && step !== "sent" ? (
-              <div className="flex flex-wrap gap-1.5" aria-label="Suggested actions">
+              <div className="flex flex-wrap gap-2" aria-label="Suggested actions">
                 {quickActions.map((action) => (
                   <button
                     key={action.label}
                     type="button"
                     onClick={() => handleQuickAction(action)}
-                    className="min-h-11 border border-[#c6a870]/35 bg-transparent px-3 text-[11px] text-[#efe6d6] transition-colors hover:border-[#c6a870]/60"
+                    className="min-h-11 border border-white/10 px-3 text-[11px] text-[#f4f0e8]/80 transition-colors hover:border-white/25 hover:text-[#f4f0e8]"
                   >
                     {action.label}
                   </button>
@@ -1109,7 +1090,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
             ) : null}
 
             {step !== "sent" ? (
-              <form onSubmit={handleSubmit} className="mt-auto grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] gap-2">
+              <form onSubmit={handleSubmit} className="mt-auto grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-end gap-2 border-t border-white/[0.08] pt-3">
                 <label className="sr-only" htmlFor="decision-assistant-input">
                   Tell me what's changing
                 </label>
@@ -1126,14 +1107,14 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
                       : openingPrompts[promptIndex % openingPrompts.length] || "Tell me what's changing..."
                   }
                   rows={2}
-                  className="min-h-11 w-full min-w-0 resize-none border border-white/15 bg-black/25 px-3 py-2 text-sm text-[#efe6d6] outline-none transition-colors placeholder:text-[#efe6d6]/35 focus:border-[#c6a870]/45"
+                  className="min-h-11 w-full min-w-0 resize-none border-0 bg-transparent px-0 py-2 text-sm text-[#f4f0e8] outline-none placeholder:text-[#f4f0e8]/32"
                 />
                 <button
                   type="submit"
                   disabled={sending}
-                  className="inline-flex h-11 w-11 shrink-0 items-center justify-center gap-2 border border-[#c6a870]/40 bg-transparent text-[11px] uppercase tracking-[0.16em] text-[#efe6d6] transition-colors hover:border-[#c6a870]/70 disabled:cursor-wait disabled:opacity-70 md:w-auto md:px-4"
+                  className="inline-flex h-11 w-11 shrink-0 items-center justify-center text-[#f4f0e8]/70 transition-colors hover:text-[#f4f0e8] disabled:cursor-wait disabled:opacity-70 md:w-auto md:px-2"
                 >
-                  <span className="hidden md:inline">{sending ? "Sending" : "Send"}</span>
+                  <span className="sr-only">{sending ? "Sending" : "Send"}</span>
                   <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
                 </button>
               </form>
