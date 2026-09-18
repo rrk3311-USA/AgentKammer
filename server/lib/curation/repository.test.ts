@@ -67,11 +67,13 @@ describe("Curation IQ", () => {
     const selected = await promoteSuggestion(first.id);
     const live = await setOnSale(selected.id, true);
     expect(live.onSale).toBe(true);
+    expect(live.status).toBe("on_sale");
     expect((await listPublicPicks()).map((row) => row.id)).toEqual([live.id]);
     expect((await listPublicPicks())[0]).not.toHaveProperty("raphiReplaced");
 
     const off = await setOnSale(selected.id, false);
     expect(off.onSale).toBe(false);
+    expect(off.status).toBe("pending");
     expect(await listPublicPicks()).toEqual([]);
     expect((await listSelections()).length).toBe(1);
   });

@@ -365,7 +365,13 @@ export async function setOnSale(id: string, onSale: boolean): Promise<CurationSe
   const next: CurationSelection = {
     ...current,
     onSale,
-    status: onSale && current.status === "pending" ? "on_sale" : current.status,
+    status: onSale
+      ? current.status === "pending"
+        ? "on_sale"
+        : current.status
+      : current.status === "on_sale"
+        ? "pending"
+        : current.status,
     updatedAt: now(),
   };
 
