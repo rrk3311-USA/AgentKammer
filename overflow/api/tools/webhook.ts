@@ -1,4 +1,4 @@
-import { handleToolsWebhook } from "../../server/lib/tools/http";
+import { handleToolsWebhook } from "../../../server/lib/tools/http";
 import { adaptTools, type VercelReq, type VercelRes } from "./_adapter";
 
 export const config = {

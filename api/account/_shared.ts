@@ -8,7 +8,7 @@ import { Resend } from "resend";
 //
 // DURABILITY: signed httpOnly cookies (HMAC-SHA256 with ACCOUNT_SESSION_SECRET)
 // are the session. When Vercel `DATABASE_URL` (Neon) is set, verify/hub/briefs
-// also persist `member_profiles` (see persist.ts + shared/schema.ts). Missing
+// also persist `member_profiles` (see _persist.ts + shared/schema.ts). Missing
 // DATABASE_URL fails open to cookies — Hub still works, with a ~4KB brief cap.
 
 export type ApiRequest = {

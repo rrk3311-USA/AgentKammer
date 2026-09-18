@@ -14,7 +14,7 @@ import {
   setMemberCookie,
   setPendingOtpCookie,
 } from "./_shared.js";
-import { loadMemberFromDatabase, persistMemberToDatabase } from "./persist.js";
+import { loadMemberFromDatabase, persistMemberToDatabase } from "./_persist.js";
 
 // Verify PIN and issue a signed, httpOnly member session cookie.
 export default async function handler(req: ApiRequest, res: ApiResponse) {
