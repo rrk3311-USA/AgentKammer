@@ -95,9 +95,6 @@ export default function NewYorkMarket() {
             <h1 className="mt-6 max-w-[12ch] font-display text-[clamp(2.35rem,9vw,4.75rem)] leading-[0.92] tracking-[-0.03em] text-brand-navy sm:mt-4 sm:max-w-[16ch] sm:text-[clamp(2.4rem,5.2vw,4.75rem)]">
               Neighborhood Guides
             </h1>
-            <p className="mt-5 max-w-sm text-sm leading-7 text-brand-graphite/85 sm:text-base">
-              Neighborhood fit determines the life around the apartment. Compare commute, schools, street rhythm, and whether the area supports the reason for moving.
-            </p>
           </div>
         </div>
       </section>
