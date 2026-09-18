@@ -870,10 +870,24 @@
 @layer base {
   html {
     @apply scroll-smooth antialiased;
+    height: 100%;
   }
 
   body {
     @apply bg-brand-ivory font-sans text-body-lg text-brand-ink;
+    height: 100%;
+  }
+
+  #root {
+    height: 100%;
+  }
+
+  .ak-app-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
   }
 
   ::selection {

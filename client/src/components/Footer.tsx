@@ -63,33 +63,34 @@ export function Footer() {
 
 export function FooterBar() {
   const [langsOpen, setLangsOpen] = useState(false);
+  const [siteOpen, setSiteOpen] = useState(false);
 
   return (
     <div className="ak-site-dock-footer border-t border-brand-brass/28 bg-brand-charcoal text-brand-ivory">
-      <div className="mx-auto flex w-full max-w-site flex-col gap-2 px-4 py-2 sm:px-6 lg:px-10">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1.5">
-            <div className="flex items-center gap-2">
-              <AkMonogramMark variant="ivory" className="h-5 w-auto opacity-90" />
-              <p className="text-[10px] uppercase tracking-[0.18em] text-brand-ivory/78">
-                Copyright 2026 Agent Kammer
-              </p>
-            </div>
+      <div className="mx-auto flex w-full max-w-site flex-col gap-1.5 px-3 py-1.5 sm:px-6 lg:px-10">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+            <AkMonogramMark variant="ivory" className="h-5 w-auto shrink-0 opacity-90" />
+            <p className="hidden text-[10px] uppercase tracking-[0.18em] text-brand-ivory/78 sm:inline">
+              Copyright 2026 Agent Kammer
+            </p>
+            <p className="text-[10px] uppercase tracking-[0.14em] text-brand-ivory/78 sm:hidden">© 2026</p>
             <Link
               href="/account"
-              className="inline-flex items-center border border-brand-brass/70 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:bg-brand-brass/50"
+              className="inline-flex shrink-0 items-center border border-brand-brass/70 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-ivory transition-colors hover:bg-brand-brass/50"
             >
-              Resume Decision
+              <span className="sm:hidden">Resume</span>
+              <span className="hidden sm:inline">Resume Decision</span>
             </Link>
             <button
               type="button"
               onClick={scrollPageToTop}
-              className="text-[10px] uppercase tracking-[0.16em] text-brand-ivory/70 transition-colors hover:text-brand-brass"
+              className="shrink-0 text-[10px] uppercase tracking-[0.14em] text-brand-ivory/70 transition-colors hover:text-brand-brass"
             >
-              Page top
+              Top
             </button>
           </div>
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-[10px] uppercase tracking-[0.18em] text-brand-ivory/78">
+          <div className="hidden flex-wrap justify-end gap-x-4 gap-y-1 text-[10px] uppercase tracking-[0.18em] text-brand-ivory/78 lg:flex">
             <Link href="/belonging" className="transition-colors hover:text-brand-brass">
               Assessment
             </Link>
@@ -112,48 +113,90 @@ export function FooterBar() {
               Contact
             </Link>
           </div>
+          <div className="flex shrink-0 items-center gap-2 lg:hidden">
+            <button
+              type="button"
+              className="text-[9px] uppercase tracking-[0.16em] text-brand-ivory/55 transition-colors hover:text-brand-brass"
+              aria-expanded={siteOpen}
+              onClick={() => {
+                setSiteOpen((open) => !open);
+                setLangsOpen(false);
+              }}
+            >
+              Site {siteOpen ? "−" : "+"}
+            </button>
+            <button
+              type="button"
+              className="text-[9px] uppercase tracking-[0.16em] text-brand-ivory/55 transition-colors hover:text-brand-brass"
+              aria-expanded={langsOpen}
+              onClick={() => {
+                setLangsOpen((open) => !open);
+                setSiteOpen(false);
+              }}
+            >
+              Lang {langsOpen ? "−" : "+"}
+            </button>
+          </div>
         </div>
 
-        <div className="border-t border-brand-ivory/10 pt-1.5">
-          <button
-            type="button"
-            className="flex w-full items-center justify-between text-[9px] uppercase tracking-[0.18em] text-brand-ivory/55 transition-colors hover:text-brand-brass sm:hidden"
-            aria-expanded={langsOpen}
-            onClick={() => setLangsOpen((open) => !open)}
-          >
-            <span>Languages</span>
-            <span aria-hidden>{langsOpen ? "−" : "+"}</span>
-          </button>
+        {siteOpen ? (
           <nav
-            aria-label="Languages"
-            className={cn(
-              "flex-wrap gap-x-2.5 gap-y-1",
-              langsOpen ? "mt-2 flex" : "hidden",
-              "sm:mt-0 sm:flex sm:items-center",
-            )}
+            aria-label="Site"
+            className="flex flex-wrap gap-x-3 gap-y-1 border-t border-brand-ivory/10 pt-1.5 text-[10px] uppercase tracking-[0.16em] text-brand-ivory/78 lg:hidden"
           >
-            <span className="mr-0.5 hidden text-[9px] uppercase tracking-[0.18em] text-brand-ivory/45 sm:inline">
-              Lang
-            </span>
-            {SITE_LANGUAGE_LOOP.map((lang) => (
-              <Link
-                key={lang.code}
-                href={lang.href}
-                onClick={() => setStoredPreferredLanguage(lang.nativeLabel)}
-                className="text-[11px] leading-snug text-brand-ivory/72 transition-colors hover:text-brand-brass"
-                title={`${lang.label}: open guide and set chat language`}
-              >
-                {lang.nativeLabel}
-              </Link>
-            ))}
-            <Link
-              href="/international"
-              className="text-[10px] uppercase tracking-[0.14em] text-brand-brass/80 transition-colors hover:text-brand-brass"
-            >
-              All →
+            <Link href="/belonging" className="transition-colors hover:text-brand-brass">
+              Assessment
+            </Link>
+            <Link href="/account" className="transition-colors hover:text-brand-brass">
+              Hub
+            </Link>
+            <Link href="/privacy" className="transition-colors hover:text-brand-brass">
+              Privacy
+            </Link>
+            <Link href="/guides" className="transition-colors hover:text-brand-brass">
+              Guides
+            </Link>
+            <Link href="/terms" className="transition-colors hover:text-brand-brass">
+              Terms
+            </Link>
+            <Link href="/licenses" className="transition-colors hover:text-brand-brass">
+              Licenses
+            </Link>
+            <Link href="/contact" className="transition-colors hover:text-brand-brass">
+              Contact
             </Link>
           </nav>
-        </div>
+        ) : null}
+
+        <nav
+          aria-label="Languages"
+          className={cn(
+            "flex-wrap gap-x-2.5 gap-y-1",
+            langsOpen ? "flex border-t border-brand-ivory/10 pt-1.5" : "hidden",
+            "lg:flex lg:items-center lg:border-t lg:border-brand-ivory/10 lg:pt-1.5",
+          )}
+        >
+          <span className="mr-0.5 hidden text-[9px] uppercase tracking-[0.18em] text-brand-ivory/45 lg:inline">
+            Lang
+          </span>
+          {SITE_LANGUAGE_LOOP.map((lang) => (
+            <Link
+              key={lang.code}
+              href={lang.href}
+              onClick={() => setStoredPreferredLanguage(lang.nativeLabel)}
+              className="text-[11px] leading-snug text-brand-ivory/72 transition-colors hover:text-brand-brass"
+              title={`${lang.label}: open guide and set chat language`}
+            >
+              {lang.nativeLabel}
+            </Link>
+          ))}
+          <Link
+            href="/international"
+            className="text-[10px] uppercase tracking-[0.14em] text-brand-brass/80 transition-colors hover:text-brand-brass"
+          >
+            All →
+          </Link>
+        </nav>
       </div>
     </div>
   );
