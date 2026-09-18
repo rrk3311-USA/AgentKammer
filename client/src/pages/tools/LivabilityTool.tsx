@@ -82,7 +82,7 @@ export default function LivabilityTool() {
   const fileNames = useMemo(() => files.map((file) => file.name).join(", "), [files]);
 
   if (unlocked === null) {
-    return <div className="bg-brand-navy px-6 py-24 text-brand-graphite">Opening Livability…</div>;
+    return <div className="bg-brand-field px-6 py-24 text-brand-graphite">Opening Livability…</div>;
   }
   if (!unlocked) return <ToolsComingSoon />;
 
@@ -137,7 +137,7 @@ export default function LivabilityTool() {
   };
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-field">
       <PageHero
         eyebrow="Livability Score"
         title="How this home lives."
@@ -217,11 +217,11 @@ export default function LivabilityTool() {
               <span className="block text-[10px] uppercase tracking-[0.2em] text-brand-brass">
                 {wallet?.nextRunCredits === 0 ? "First run free" : "1 credit"}
               </span>
-              <span className="mt-2 block text-[11px] uppercase tracking-[0.16em] text-brand-ivory">
+              <span className="mt-2 block text-[11px] uppercase tracking-[0.16em] text-brand-navy">
                 {submitting ? "Reading the home…" : "Run Livability Score"}
               </span>
             </span>
-            <ArrowRight className="h-4 w-4 text-brand-ivory" strokeWidth={1.5} />
+            <ArrowRight className="h-4 w-4 text-brand-navy" strokeWidth={1.5} />
           </button>
         </form>
 
@@ -266,7 +266,7 @@ export default function LivabilityTool() {
               <div className="mt-6 grid gap-3">
                 {DIMENSION_LABELS.map((dimension) => (
                   <div key={dimension.key}>
-                    <div className="flex justify-between text-[10px] uppercase tracking-[0.14em] text-brand-ivory/70">
+                    <div className="flex justify-between text-[10px] uppercase tracking-[0.14em] text-brand-navy/70">
                       <span>{dimension.label}</span>
                       <span>{result.dimensions[dimension.key]}</span>
                     </div>
@@ -279,7 +279,7 @@ export default function LivabilityTool() {
                   </div>
                 ))}
               </div>
-              <ul className="mt-6 space-y-2 text-xs leading-5 text-brand-ivory/70">
+              <ul className="mt-6 space-y-2 text-xs leading-5 text-brand-navy/70">
                 {result.notes.map((note) => (
                   <li key={note}>{note}</li>
                 ))}

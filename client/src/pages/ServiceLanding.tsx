@@ -107,12 +107,12 @@ export default function ServiceLanding({ slug }: { slug: string }) {
 
   if (!landing || !copy || !next) {
     return (
-      <main className="bg-brand-navy">
+      <main className="bg-brand-field">
         <PageSection>
           <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">Situations</p>
-          <h1 className="mt-4 font-display text-4xl text-brand-ivory">Situation page not found.</h1>
-          <p className="mt-4 text-brand-ivory/75">This URL does not match one of the current Situation pages.</p>
-          <Link href="/situations" className="mt-8 inline-flex text-[11px] uppercase tracking-[0.16em] text-brand-ivory">
+          <h1 className="mt-4 font-display text-4xl text-brand-navy">Situation page not found.</h1>
+          <p className="mt-4 text-brand-navy/75">This URL does not match one of the current Situation pages.</p>
+          <Link href="/situations" className="mt-8 inline-flex text-[11px] uppercase tracking-[0.16em] text-brand-navy">
             Back to Situations
           </Link>
         </PageSection>
@@ -121,7 +121,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
   }
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-field">
       {landing.heroImage ? (
         <section
           className="relative w-full overflow-hidden border-b border-brand-border"
@@ -152,7 +152,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
           </div>
         </section>
       ) : editorialLayout ? (
-        <section className="relative w-full overflow-hidden border-b border-brand-border bg-brand-navy">
+        <section className="relative w-full overflow-hidden border-b border-brand-border bg-brand-field">
           <div className="relative grid min-h-[clamp(300px,78vw,420px)] w-full grid-cols-1 sm:min-h-[min(52vh,520px)] sm:grid-cols-[minmax(16rem,48%)_1fr] lg:min-h-[min(48vh,560px)]">
             {/* Title column - reserved width so it cannot collide with art */}
             <div className="relative z-10 flex items-start px-6 pb-8 pt-14 sm:items-center sm:pb-12 sm:pt-16 md:pl-[12%] lg:px-10 lg:pl-[clamp(4rem,18vw,14rem)] lg:pt-20 xl:pl-[clamp(5rem,22vw,18rem)]">
@@ -175,7 +175,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
               />
             </div>
             <div
-              className="pointer-events-none absolute inset-y-0 left-0 w-[82%] bg-gradient-to-r from-brand-navy from-[48%] via-brand-navy/90 to-transparent sm:hidden"
+              className="pointer-events-none absolute inset-y-0 left-0 w-[82%] bg-gradient-to-r from-brand-field from-[48%] via-brand-field/90 to-transparent sm:hidden"
               aria-hidden
             />
           </div>
@@ -190,7 +190,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
               </h1>
             </div>
           </div>
-          <div className="relative mx-auto flex aspect-[16/9] max-h-[420px] w-full max-w-site items-center justify-center overflow-hidden bg-brand-navy lg:aspect-[21/9]">
+          <div className="relative mx-auto flex aspect-[16/9] max-h-[420px] w-full max-w-site items-center justify-center overflow-hidden bg-brand-field lg:aspect-[21/9]">
             <ArchitecturalHeroDrawing
               eyebrow={landing.eyebrow}
               title={landing.title}

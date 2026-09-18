@@ -27,6 +27,7 @@ const Belonging = lazy(() => import("@/pages/Belonging"));
 const Privacy = lazy(() => import("@/pages/Privacy"));
 const Terms = lazy(() => import("@/pages/Terms"));
 const Licenses = lazy(() => import("@/pages/Licenses"));
+const Sitemap = lazy(() => import("@/pages/Sitemap"));
 const Account = lazy(() => import("@/pages/Account"));
 const HubHome = lazy(() => import("@/pages/hub/HubHome"));
 const HubRoadmap = lazy(() => import("@/pages/hub/HubRoadmap"));
@@ -159,6 +160,7 @@ function Router() {
       <Route path="/guides/manhattan-explained" component={ManhattanExplained} />
       <Route path="/guides/liens-easements" component={LiensEasements} />
       <Route path="/guides" component={Guides} />
+      <Route path="/sitemap" component={Sitemap} />
       <Route path="/account" component={Account} />
       <Route path="/qualify" component={Qualify} />
       <Route path="/hub/roadmap" component={HubRoadmap} />
@@ -213,11 +215,11 @@ function AppShell() {
   }
 
   return (
-    <div className="ak-app-shell min-h-screen bg-brand-navy text-brand-ivory">
+    <div className="ak-app-shell min-h-screen bg-brand-field text-brand-navy">
       <ScrollToTop />
       <VisitorSignals />
       <Header />
-      <Suspense fallback={<div className="mx-auto w-full max-w-7xl px-6 py-12 text-brand-ivory/70">Loading...</div>}>
+      <Suspense fallback={<div className="mx-auto w-full max-w-7xl px-6 py-12 text-brand-navy/70">Loading...</div>}>
         <Router />
       </Suspense>
       <Footer />

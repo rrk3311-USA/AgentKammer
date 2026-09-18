@@ -32,14 +32,14 @@ export default function ToolsHome() {
   }, []);
 
   if (!status) {
-    return <div className="bg-brand-navy px-6 py-24 text-brand-graphite">Opening the desk…</div>;
+    return <div className="bg-brand-field px-6 py-24 text-brand-graphite">Opening the desk…</div>;
   }
   if (!status.unlocked) {
     return <ToolsComingSoon />;
   }
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-field">
       <PageHero
         eyebrow="Tools"
         title="Paid analyses, held in a quiet wallet."

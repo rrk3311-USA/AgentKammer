@@ -19,7 +19,7 @@ export default function Perspectives() {
   });
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-field">
       <PageHero
         eyebrow="Insights"
         title="Notes that connect the market to a practical next step."

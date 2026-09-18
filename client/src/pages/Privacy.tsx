@@ -11,7 +11,7 @@ export default function Privacy() {
   });
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-field">
       <PageHero
         eyebrow="Legal"
         title="Privacy"

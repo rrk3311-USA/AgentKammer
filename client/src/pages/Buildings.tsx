@@ -35,7 +35,7 @@ export default function Buildings() {
   });
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-field">
       <PageHero
         eyebrow="Building Intelligence"
         title="Study the building before the showing."

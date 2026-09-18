@@ -176,7 +176,7 @@ export default function Account() {
         art="decision-framework"
       />
 
-      <div className="border-b border-brand-border bg-brand-navy text-brand-ivory">
+      <div className="border-b border-brand-border bg-brand-field text-brand-navy">
         <PageSection>
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
             <div>

@@ -40,7 +40,7 @@ export default function Home() {
   const featuredGuides = publicGuides.slice(0, 4);
 
   return (
-    <main className="bg-brand-navy text-brand-ivory">
+    <main className="bg-brand-field text-brand-navy">
       <section className="border-b border-brand-border bg-brand-paper text-brand-ink">
         <div className="mx-auto grid w-full max-w-site gap-10 px-6 py-12 lg:grid-cols-[minmax(0,1fr)_minmax(300px,0.72fr)] lg:items-end lg:px-10 lg:py-20">
           <div className="max-w-2xl">
@@ -89,7 +89,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-b border-brand-border bg-brand-navy">
+      <section className="border-b border-brand-border bg-brand-field">
         <div className="mx-auto w-full max-w-site px-6 py-16 lg:px-10 lg:py-20">
           <p className="ak-kicker">How We Decide</p>
           <div className="ak-title-band mt-4">
@@ -107,7 +107,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-b border-brand-border bg-brand-navy">
+      <section className="border-b border-brand-border bg-brand-field">
         <div className="mx-auto w-full max-w-site px-6 py-16 lg:px-10 lg:py-20">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
@@ -144,7 +144,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-b border-brand-border bg-brand-navy">
+      <section className="border-b border-brand-border bg-brand-field">
         <div className="mx-auto w-full max-w-site px-6 py-16 lg:px-10 lg:py-20">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
@@ -173,14 +173,14 @@ export default function Home() {
                   <p className="ak-heading group-hover:opacity-80">{brief.navLabel}</p>
                   <p className="ak-meta mt-2 max-w-2xl line-clamp-2">{brief.summary}</p>
                 </div>
-                <ArrowRight className="hidden h-4 w-4 text-brand-ivory/40 transition-transform group-hover:translate-x-0.5 group-hover:text-brand-ivory md:block" strokeWidth={1.5} />
+                <ArrowRight className="hidden h-4 w-4 text-brand-navy/40 transition-transform group-hover:translate-x-0.5 group-hover:text-brand-navy md:block" strokeWidth={1.5} />
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-b border-brand-border bg-brand-navy">
+      <section className="border-b border-brand-border bg-brand-field">
         <div className="mx-auto w-full max-w-site px-6 py-16 lg:px-10 lg:py-20">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">

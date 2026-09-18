@@ -49,7 +49,7 @@ export default function Intelligence() {
   });
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-field">
       <PageHero
         eyebrow="Building Reports"
         title="Market Briefs"

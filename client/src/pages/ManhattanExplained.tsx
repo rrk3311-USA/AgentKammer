@@ -179,7 +179,7 @@ export default function ManhattanExplained() {
   });
 
   return (
-    <main className="bg-brand-navy text-brand-ivory">
+    <main className="bg-brand-field text-brand-navy">
       <style>{`
  @keyframes me-fade-up {
  from { opacity: 0; transform: translateY(18px); }
@@ -233,7 +233,7 @@ export default function ManhattanExplained() {
       </section>
 
       {/* Opening essay */}
-      <section className="border-b border-brand-border bg-brand-navy">
+      <section className="border-b border-brand-border bg-brand-field">
         <div className="mx-auto max-w-site px-6 py-16 sm:px-8 lg:grid lg:grid-cols-[1fr_1.35fr] lg:gap-16 lg:px-10 lg:py-24">
           <div>
             <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">
@@ -322,7 +322,7 @@ export default function ManhattanExplained() {
           className={
             chapter.tone === "paper"
               ? "scroll-mt-20 border-b border-brand-border bg-white"
-              : "scroll-mt-20 border-b border-brand-border bg-brand-navy"
+              : "scroll-mt-20 border-b border-brand-border bg-brand-field"
           }
         >
           <div className="mx-auto max-w-site px-6 py-16 sm:px-8 lg:px-10 lg:py-24">

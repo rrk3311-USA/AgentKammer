@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { primaryNav } from "@/components/site-shell";
+import { FOOTER_DARK_LINKS, getSiteMapGroups } from "./site-map";
 import {
   CONTACT_NEXT_STEPS,
   FOOTER_SITEMAP_QUIET,
@@ -48,7 +49,7 @@ describe("public menu lock", () => {
     ]);
   });
 
-  it("keeps footer Site map quiet links off the header", () => {
+  it("keeps sitemap quiet links off the header", () => {
     expect(FOOTER_SITEMAP_QUIET.map((item) => [item.label, item.href])).toEqual([
       ["Get Qualified", "/qualify"],
       ["Hub", "/hub"],
@@ -60,5 +61,20 @@ describe("public menu lock", () => {
     for (const item of FOOTER_SITEMAP_QUIET) {
       expect(headerHrefs.has(item.href)).toBe(false);
     }
+  });
+
+  it("puts one Sitemap link in the dark footer and keeps Licenses off it", () => {
+    const sitemapLinks = FOOTER_DARK_LINKS.filter((item) => item.href === "/sitemap");
+    expect(sitemapLinks).toEqual([{ label: "Sitemap", href: "/sitemap" }]);
+    expect(FOOTER_DARK_LINKS.some((item) => item.href === "/licenses")).toBe(false);
+    expect(FOOTER_DARK_LINKS.some((item) => item.label.toLowerCase() === "licenses")).toBe(false);
+  });
+
+  it("exposes a judgment-first HTML sitemap with licenses only on the page", () => {
+    const groups = getSiteMapGroups();
+    expect(groups.some((group) => group.title === "Site map")).toBe(false);
+    const legal = groups.find((group) => group.title === "Legal");
+    expect(legal?.items.map((item) => item.href)).toEqual(["/privacy", "/terms", "/licenses"]);
+    expect(groups[0]?.items.map((item) => item.href)).toEqual(primaryNav.map((item) => item.href));
   });
 });

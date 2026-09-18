@@ -74,7 +74,7 @@ export default function DecisionHub() {
         art="decision-framework"
       />
 
-      <div className="border-b border-brand-border bg-brand-navy text-brand-ivory">
+      <div className="border-b border-brand-border bg-brand-field text-brand-navy">
         <PageSection>
           {loading ? (
             <p className="text-sm text-brand-graphite">Loading your hub…</p>
@@ -183,7 +183,7 @@ export default function DecisionHub() {
                               </span>
                             </button>
                             {open ? (
-                              <div className="border-t border-brand-border bg-brand-navy/60 px-4 py-4 text-sm leading-6 whitespace-pre-wrap text-brand-graphite">
+                              <div className="border-t border-brand-border bg-brand-field/60 px-4 py-4 text-sm leading-6 whitespace-pre-wrap text-brand-graphite">
                                 {brief.body}
                               </div>
                             ) : null}

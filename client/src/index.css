@@ -17,7 +17,8 @@
   --brand-navy-secondary: #3f4b59;
   --brand-ivory: #f5e7cd;
   --brand-paper: #f7f5f0;
-  --brand-surface: #f7f5f0;
+  --brand-field: #c8c3ba;
+  --brand-surface: #c8c3ba;
   --brand-beige: #f5e7cd;
   --brand-graphite: #2c3138;
   --brand-border: #ddd6c8;
@@ -25,8 +26,8 @@
   --brand-success: #2f6b4f;
   --brand-error: #b42318;
   --brand-stone: #d4c4a8;
-  --brand-warm: #f7f5f0;
-  --brand-surface-warm: #f7f5f0;
+  --brand-warm: #c8c3ba;
+  --brand-surface-warm: #c8c3ba;
   --brand-cocoa: #6b4a2a;
 
   --button-outline: rgba(17, 17, 17, 0.14);
@@ -266,8 +267,8 @@
 
   body {
     @apply font-sans antialiased bg-background text-foreground;
-    background-color: var(--brand-navy);
-    color: var(--brand-ivory);
+    background-color: var(--brand-field);
+    color: var(--brand-navy);
   }
 
 }
@@ -300,17 +301,6 @@
   .bg-\[\#060E21\],
   .bg-black {
     color: rgb(245 242 235);
-  }
-
-  /* Graphite utilities stay dark in the footer; on navy mains they must read. */
-  main .text-brand-graphite,
-  main [class*="text-brand-graphite"] {
-    color: rgba(245, 231, 205, 0.78);
-  }
-
-  main :is(.ak-card, .ak-call-button, .bg-white, .bg-brand-ivory, .bg-brand-paper) .text-brand-graphite,
-  main :is(.ak-card, .ak-call-button, .bg-white, .bg-brand-ivory, .bg-brand-paper) [class*="text-brand-graphite"] {
-    color: #2c3138;
   }
 
   #alerts-request-button {
@@ -545,7 +535,7 @@
   }
 
   body {
-    @apply bg-brand-navy font-sans text-body-lg text-brand-ivory;
+    @apply bg-brand-field font-sans text-body-lg text-brand-navy;
   }
 
   html[data-advisor] .ak-app-shell {
@@ -576,7 +566,7 @@
   }
 
   .ak-prose {
-    @apply max-w-reading text-base leading-7 text-brand-ivory/80;
+    @apply max-w-reading text-base leading-7 text-brand-navy;
   }
 
   .ak-kicker {
@@ -610,7 +600,7 @@
     font-weight: 500;
     line-height: 0.95;
     letter-spacing: -0.03em;
-    color: #f5e7cd;
+    color: #2a3447;
   }
 
   .ak-title {
@@ -619,7 +609,7 @@
     font-weight: 500;
     line-height: 1.05;
     letter-spacing: -0.02em;
-    color: #f5e7cd;
+    color: #2a3447;
   }
 
   .ak-heading {
@@ -628,25 +618,25 @@
     font-weight: 500;
     line-height: 1.15;
     letter-spacing: -0.02em;
-    color: #f5e7cd;
+    color: #2a3447;
   }
 
   .ak-lede {
     font-size: 1.125rem;
     line-height: 1.7;
-    color: rgba(245, 231, 205, 0.82);
+    color: #2a3447;
   }
 
   .ak-copy {
     font-size: 1rem;
     line-height: 1.7;
-    color: rgba(245, 231, 205, 0.82);
+    color: #2a3447;
   }
 
   .ak-meta {
     font-size: 0.875rem;
     line-height: 1.7;
-    color: rgba(245, 231, 205, 0.72);
+    color: #2a3447;
   }
 
   .ak-nav-link {
@@ -654,23 +644,6 @@
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #f5e7cd;
-  }
-
-  /* Homepage hero stays a light field; keep ink readable there. */
-  .bg-brand-paper .ak-display,
-  .bg-brand-paper .ak-title,
-  .bg-brand-paper .ak-heading {
-    color: #2a3447;
-  }
-
-  .bg-brand-paper .ak-lede,
-  .bg-brand-paper .ak-copy,
-  .bg-brand-paper .ak-meta {
-    color: #2c3138;
-  }
-
-  .bg-brand-paper .ak-nav-link {
     color: #2a3447;
   }
 

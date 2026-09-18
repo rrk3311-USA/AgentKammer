@@ -63,7 +63,7 @@ export default function NewYorkMarket() {
   });
 
   return (
-    <main className="bg-brand-navy">
+    <main className="bg-brand-field">
       <PageHero
         eyebrow="Building Reports"
         title="Neighborhood Guides"
