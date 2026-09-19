@@ -52,7 +52,9 @@ export default function BuildingReportDetail() {
         eyebrow="Building Report"
         title={report.buildingName}
         description={`${report.location}. ${report.buildingProfile.positioning}`}
-        art="individual-buildings"
+        art={report.heroImage ? undefined : "individual-buildings"}
+        image={report.heroImage}
+        imageAlt={report.heroImageAlt}
         kicker={
           <div className="space-y-2 text-sm uppercase tracking-[0.14em] text-brand-ivory/82">
             <p>{report.series}</p>

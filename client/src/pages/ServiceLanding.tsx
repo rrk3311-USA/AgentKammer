@@ -49,7 +49,10 @@ export default function ServiceLanding({ slug }: { slug: string }) {
   const pageUrl = `https://www.agentkammer.com${pagePath}`;
   const next = landing ? nextBrief(landing.slug) : null;
   const copy = landing ? editorialCopy(landing) : null;
-  const editorialLayout = Boolean(landing?.heroImage) || landing?.slug === "rent-vs-buy-manhattan-relocation";
+  const editorialLayout =
+    Boolean(landing?.heroImage) ||
+    landing?.slug === "rent-vs-buy-manhattan-relocation" ||
+    landing?.slug === "school-district-planning-nyc";
 
   const structuredData = landing
     ? [

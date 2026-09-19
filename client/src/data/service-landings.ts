@@ -286,8 +286,6 @@ export const serviceLandings: ServiceLanding[] = [
   {
     slug: "school-district-planning-nyc",
     art: "family-planning",
-    heroImage: "/images/situations/school-district-planning-nyc.png",
-    heroPaper: "#F5EDE0",
     title: "School District Planning in NYC",
     navLabel: "School Planning",
     eyebrow: "Family Move",

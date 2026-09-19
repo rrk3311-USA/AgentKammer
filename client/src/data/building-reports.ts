@@ -60,12 +60,17 @@ export type BuildingReport = {
   agentKammerPerspective: string[];
   bottomLine: string[];
   relatedPerspectiveSlug?: string;
+  heroImage?: string;
+  heroImageAlt?: string;
 };
 
 export const buildingReports: BuildingReport[] = [
   {
     slug: "lantern-house",
     buildingName: "Lantern House",
+    heroImage: "/buildings/lantern-house.jpg",
+    heroImageAlt:
+      "Lantern House terrace and curved bay windows looking toward the Manhattan skyline",
     series: "Agent Kammer Building Report Series",
     location: "West Chelsea, Manhattan",
     publishedAt: "2026-06-07",

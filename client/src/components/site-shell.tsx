@@ -297,13 +297,19 @@ export function ArchitecturalHeroDrawing({
           </>
         ) : isFamilyPlanning ? (
           <>
-            <path d="M86 116H188V222H86V116Z" stroke="currentColor" strokeOpacity="0.38" strokeWidth="1.1" />
-            <path d="M232 84H334V222H232V84Z" stroke="currentColor" strokeOpacity="0.42" strokeWidth="1.1" />
-            <path d="M106 144H140M106 168H158M252 114H314M252 138H314M252 162H294" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
-            <path d="M188 178H232" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
-            <circle cx="140" cy="82" r="18" stroke="currentColor" strokeOpacity="0.26" strokeWidth="1" />
-            <path d="M130 82H150M140 72V92" stroke="url(#hero-line-metal)" strokeWidth="1.15" />
-            <path d="M112 222V188H158V222M270 222V176H310V222" stroke="url(#hero-line-metal)" strokeWidth="1.1" />
+            <path d="M88 86H198V186H88V86Z" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" />
+            <path d="M88 119H198M88 152H198M125 86V186M161 86V186" stroke="currentColor" strokeOpacity="0.16" strokeWidth="1" />
+            <path d="M108 102H141V135H108V102Z" stroke="currentColor" strokeOpacity="0.32" strokeWidth="1" />
+            <circle cx="124" cy="118" r="3.5" stroke="url(#hero-line-metal)" strokeWidth="1" />
+            <path d="M236 118L292 78H348V222H236V118Z" stroke="currentColor" strokeOpacity="0.44" strokeWidth="1.15" />
+            <path d="M256 106L292 78L328 106" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <path d="M284 78V62H300V78" stroke="currentColor" strokeOpacity="0.34" strokeWidth="1" />
+            <path d="M288 62H296V54H288V62Z" stroke="url(#hero-line-metal)" strokeWidth="1.1" />
+            <path d="M254 138H276V166H254V138ZM308 138H330V166H308V138Z" stroke="currentColor" strokeOpacity="0.26" strokeWidth="1" />
+            <path d="M278 222V186H306V222" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
+            <path d="M198 154C214 154 222 168 236 168" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <path d="M96 210C112 194 132 194 148 210" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
+            <path d="M168 222V198H188V222" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
           </>
         ) : isSellerTransition ? (
           <>

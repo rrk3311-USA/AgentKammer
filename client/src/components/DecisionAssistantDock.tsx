@@ -992,7 +992,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
       type="button"
       id="decision-assistant"
       onClick={toggleSheet}
-      className="ak-guidance-chip ak-guidance-pinstripe pointer-events-auto"
+      className="ak-guidance-chip pointer-events-auto"
       aria-expanded="false"
       aria-label={chipLabel === "Guidance" ? "Open Guidance Advisor" : "Resume Decision with Guidance Advisor"}
       data-testid="button-guidance-chip"
