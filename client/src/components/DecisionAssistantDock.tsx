@@ -988,13 +988,13 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
       {expanded ? (
         <aside
           id="decision-assistant"
-          className="ak-guidance-sheet ak-guidance-pinstripe pointer-events-auto flex w-full flex-col"
+          className="ak-guidance-sheet pointer-events-auto flex w-full flex-col"
           aria-label="Guidance Advisor"
           aria-expanded="true"
         >
           <div className="flex min-h-0 flex-1 flex-col">
             <div
-              className="ak-guidance-sheet-chrome ak-guidance-pinstripe flex min-h-[6.25rem] min-w-0 items-center gap-2 px-4 py-2 [touch-action:none]"
+              className="ak-guidance-sheet-chrome flex min-h-[6.25rem] min-w-0 items-center gap-2 px-4 py-2 [touch-action:none]"
               onPointerDown={(event) => beginSheetDrag(event.clientY)}
               onPointerUp={(event) => finishSheetDrag(event.clientY)}
               onPointerCancel={() => {
@@ -1117,7 +1117,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
             <button
               type="button"
               onClick={toggleSheet}
-              className="mb-2 w-full rounded-card border border-[#d8d1c7]/40 ak-guidance-pinstripe px-3 py-2 text-left text-[#f5f2eb]"
+              className="mb-2 w-full rounded-card border border-[#d8d1c7]/40 bg-[rgba(42,52,71,0.95)] px-3 py-2 text-left text-[#f5f2eb]"
             >
               <span className="block text-[10px] uppercase tracking-[0.18em] text-brand-stone">Guidance Advisor</span>
               <span className="mt-1 block text-sm leading-5">{nudge}</span>
@@ -1127,7 +1127,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
             type="button"
             id="decision-assistant"
             onClick={toggleSheet}
-            className="ak-guidance-chip ak-guidance-pinstripe"
+            className="ak-guidance-chip"
             aria-expanded="false"
             aria-label={chipLabel === "Guidance" ? "Open Guidance Advisor" : "Resume Decision with Guidance Advisor"}
             data-testid="button-guidance-chip"
