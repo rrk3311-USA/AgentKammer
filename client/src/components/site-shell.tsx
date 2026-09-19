@@ -27,6 +27,9 @@ export type HeroArtVariant =
   | "neighborhood-guides"
   | "market-briefs"
   | "decision-framework"
+  | "start-here"
+  | "situations"
+  | "guides"
   | "private-advisory"
   | "capital-strategy"
   | "international"
@@ -58,6 +61,9 @@ function resolveHeroArt(eyebrow: string, title: string, variant?: HeroArtVariant
     return "neighborhood-guides";
   }
   if (/market briefs/.test(topic)) return "market-briefs";
+  if (/start here|clear path through/.test(topic)) return "start-here";
+  if (/situations|explore your situation/.test(topic)) return "situations";
+  if (/guides|clear frameworks before/.test(topic)) return "guides";
   if (/buyer advisory|decision briefs|decision hub|create your account|my real estate life|anything should change|first question/.test(topic)) {
     return "decision-framework";
   }
@@ -131,6 +137,9 @@ export function ArchitecturalHeroDrawing({
   const isNeighborhoodGuide = art === "neighborhood-guides";
   const isMarketBrief = art === "market-briefs";
   const isDecisionFramework = art === "decision-framework";
+  const isStartHere = art === "start-here";
+  const isSituations = art === "situations";
+  const isGuides = art === "guides";
   const isPrivateAdvisory = art === "private-advisory";
   const isCapitalStrategy = art === "capital-strategy";
   const isOwnershipStructure = art === "ownership-structure";
@@ -167,8 +176,6 @@ export function ArchitecturalHeroDrawing({
         </defs>
 
         <path d="M22 222H394" stroke="currentColor" strokeOpacity="0.28" strokeWidth="1" />
-        <path d="M55 54H360V222H55V54Z" stroke="currentColor" strokeOpacity="0.36" strokeWidth="1" />
-        <path d="M83 82H332V222H83V82Z" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
 
         {isMarketBrief ? (
           <>
@@ -209,15 +216,58 @@ export function ArchitecturalHeroDrawing({
           </>
         ) : isReportOverview ? (
           <>
-            <path d="M82 168H178V222H82V168Z" stroke="currentColor" strokeOpacity="0.42" strokeWidth="1.1" />
-            <path d="M206 118H338V222H206V118Z" stroke="currentColor" strokeOpacity="0.42" strokeWidth="1.1" />
-            <path d="M112 196H148M238 148H306M238 168H306M238 188H288" stroke="currentColor" strokeOpacity="0.23" strokeWidth="1" />
-            <path d="M178 195H206" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
-            <path d="M192 195L204 183M192 195L204 207" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
-            <path d="M90 112C126 72 162 80 198 110C238 144 282 130 328 76" stroke="currentColor" strokeOpacity="0.24" strokeWidth="1" />
-            <circle cx="90" cy="112" r="3.5" stroke="url(#hero-line-metal)" strokeWidth="1" />
-            <circle cx="198" cy="110" r="3.5" stroke="url(#hero-line-metal)" strokeWidth="1" />
-            <circle cx="328" cy="76" r="3.5" stroke="url(#hero-line-metal)" strokeWidth="1" />
+            <path d="M92 222V48H196V222" stroke="currentColor" strokeOpacity="0.5" strokeWidth="1.15" />
+            <path d="M108 222V64H180V222" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
+            {Array.from({ length: 8 }).map((_, index) => (
+              <path key={`overview-floor-${index}`} d={`M92 ${68 + index * 18}H196`} stroke="currentColor" strokeOpacity="0.16" strokeWidth="1" />
+            ))}
+            {Array.from({ length: 3 }).map((_, index) => (
+              <path key={`overview-bay-${index}`} d={`M116 ${48}V222`} transform={`translate(${index * 22} 0)`} stroke="currentColor" strokeOpacity="0.14" strokeWidth="1" />
+            ))}
+            <path d="M92 48L144 28L196 48" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <path d="M128 222V176H160V222" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
+            <path d="M228 86H348V186H228V86Z" stroke="currentColor" strokeOpacity="0.42" strokeWidth="1.1" />
+            <path d="M228 136H348M278 86V186M318 86V186" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" />
+            <path d="M240 98H266V124H240V98Z" stroke="currentColor" strokeOpacity="0.28" strokeWidth="1" />
+            <path d="M290 148H336V174H290V148Z" stroke="url(#hero-line-metal)" strokeWidth="1.15" />
+            <path d="M196 154H228" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
+            <path d="M78 88V182M78 88H92M78 182H92" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" />
+            <path d="M74 88H82M74 182H82" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
+          </>
+        ) : isStartHere ? (
+          <>
+            <circle cx="108" cy="168" r="14" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.1" />
+            <circle cx="186" cy="112" r="14" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.1" />
+            <circle cx="264" cy="168" r="14" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.1" />
+            <circle cx="342" cy="96" r="14" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <path d="M122 168H172M200 112H250M278 168H328" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <path d="M108 154V142M186 98V86M264 154V142M342 82V70" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
+            <path d="M102 168H114M180 112H192M258 168H270M336 96H348" stroke="url(#hero-line-metal)" strokeWidth="1.1" />
+            <path d="M98 196H128M176 140H216M254 196H284M328 124H356" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" />
+          </>
+        ) : isSituations ? (
+          <>
+            <circle cx="118" cy="136" r="16" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <path d="M134 136C176 136 198 78 248 78" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <path d="M134 136H248" stroke="currentColor" strokeOpacity="0.28" strokeWidth="1.1" />
+            <path d="M134 136C176 136 198 194 248 194" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <circle cx="262" cy="78" r="11" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.1" />
+            <circle cx="262" cy="136" r="11" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.1" />
+            <circle cx="262" cy="194" r="11" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.1" />
+            <path d="M273 78H328M273 136H328M273 194H328" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1" />
+            <path d="M328 70V86M328 128V144M328 186V202" stroke="currentColor" strokeOpacity="0.16" strokeWidth="1" />
+            <path d="M110 136H126M118 128V144" stroke="url(#hero-line-metal)" strokeWidth="1.1" />
+          </>
+        ) : isGuides ? (
+          <>
+            <path d="M92 78H214V210H92V78Z" stroke="currentColor" strokeOpacity="0.34" strokeWidth="1" />
+            <path d="M108 62H230V194H108V62Z" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.1" />
+            <path d="M124 88H214M124 112H200M124 136H186" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
+            <path d="M124 160H168" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
+            <path d="M258 86H338V210H258V86Z" stroke="currentColor" strokeOpacity="0.38" strokeWidth="1.1" />
+            <path d="M298 86V210" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
+            <path d="M270 112H286M310 112H326M270 140H286M310 140H326" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
+            <path d="M230 148H258" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
           </>
         ) : isDecisionFramework ? (
           <>
@@ -231,12 +281,16 @@ export function ArchitecturalHeroDrawing({
           </>
         ) : isPrivateAdvisory ? (
           <>
-            <path d="M98 212V88L210 42L322 88V212" stroke="currentColor" strokeOpacity="0.44" strokeWidth="1.1" />
-            <path d="M126 212V106H294V212" stroke="currentColor" strokeOpacity="0.24" strokeWidth="1" />
-            <path d="M164 212V142H256V212" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
-            <path d="M70 128H98M322 128H350M70 176H98M322 176H350" stroke="currentColor" strokeOpacity="0.16" strokeWidth="1" />
-            <path d="M112 76H308M142 62H278" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" />
-            <circle cx="210" cy="128" r="28" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" />
+            <ellipse cx="142" cy="118" rx="38" ry="48" stroke="currentColor" strokeOpacity="0.42" strokeWidth="1.15" />
+            <path d="M108 158C118 188 166 188 176 158" stroke="currentColor" strokeOpacity="0.28" strokeWidth="1" />
+            <circle cx="142" cy="112" r="18" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
+            <circle cx="286" cy="128" r="54" stroke="currentColor" strokeOpacity="0.34" strokeWidth="1.1" />
+            <circle cx="286" cy="128" r="28" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1" />
+            <path d="M286 78V178M236 128H336" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" />
+            <path d="M286 84V100" stroke="url(#hero-line-metal)" strokeWidth="1.35" />
+            <path d="M278 92L286 78L294 92" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
+            <path d="M180 128H232" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
+            <path d="M320 112H338M320 144H338" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" />
           </>
         ) : isCapitalStrategy ? (
           <>

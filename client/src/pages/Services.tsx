@@ -95,7 +95,7 @@ export default function Services() {
         eyebrow="Situations"
         title="Explore your situation, not a property search."
         description="Decision Intelligence starts here: what changed in your life, what decision you face, and what you still need to understand. Each page is a Situation: research, not a product."
-        art="decision-framework"
+        art="situations"
       />
 
       <DecisionFramework

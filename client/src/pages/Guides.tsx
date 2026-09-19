@@ -18,7 +18,7 @@ export default function Guides() {
         eyebrow="Guides"
         title="Clear frameworks before listings."
         description="Educational pages and shareable HTML guides: ownership, condo vs co-op, condop terms, and related decision frameworks."
-        art="decision-framework"
+        art="guides"
       />
 
       <section className="border-b border-brand-border bg-brand-ivory">

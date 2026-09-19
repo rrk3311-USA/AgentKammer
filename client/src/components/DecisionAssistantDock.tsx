@@ -401,6 +401,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   const [location, setLocation] = useLocation();
   const [expanded, setExpanded] = useState(false);
   const [nudge, setNudge] = useState<string | null>(null);
+  const [charcoalFooterOnScreen, setCharcoalFooterOnScreen] = useState(false);
   const sheetDrag = useRef<{ y: number } | null>(null);
   const guideOpenedRef = useRef(false);
   const lastPageHelperRef = useRef<string | null>(null);
@@ -461,6 +462,19 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
       delete document.documentElement.dataset.advisor;
     };
   }, [expanded]);
+
+  useEffect(() => {
+    const bar = document.querySelector("[data-ak-charcoal-footer]");
+    if (!bar || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setCharcoalFooterOnScreen(Boolean(entry?.isIntersecting));
+      },
+      { threshold: 0 },
+    );
+    observer.observe(bar);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!expanded || guideOpenedRef.current) return;
@@ -1098,7 +1112,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
             </div>
           </div>
         </aside>
-      ) : (
+      ) : charcoalFooterOnScreen ? null : (
         <div className="pointer-events-auto flex w-full max-w-[22rem] flex-col items-center pb-[max(0.65rem,env(safe-area-inset-bottom))] pt-2">
           {nudge ? (
             <button

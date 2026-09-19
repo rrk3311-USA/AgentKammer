@@ -78,7 +78,7 @@ export default function Buy() {
         eyebrow="Start Here"
         title="A clear path through the decision. Not another search."
         description="Start Here is the path. The Situation Assessment is the diagnostic. Decision Briefs are the research. A Strategy Session is the paid advisory layer. They are not the same step."
-        art="decision-framework"
+        art="start-here"
       />
 
       <DecisionFramework

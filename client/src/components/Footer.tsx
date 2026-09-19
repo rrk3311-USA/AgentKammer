@@ -66,7 +66,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-brand-brass/28 bg-brand-charcoal text-brand-ivory">
+      <div data-ak-charcoal-footer className="border-t border-brand-brass/28 bg-brand-charcoal text-brand-ivory">
         <div className="mx-auto flex w-full max-w-site flex-col gap-2.5 px-6 py-3 lg:px-10">
           <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-2">
