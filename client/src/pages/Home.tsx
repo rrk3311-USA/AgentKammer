@@ -46,10 +46,13 @@ export default function Home() {
       <section className="border-b border-brand-border bg-brand-ivory">
         <div className="mx-auto grid w-full max-w-site gap-0 px-6 py-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(340px,0.72fr)] lg:px-10">
           <div className="flex min-h-[560px] flex-col justify-start pb-32 pt-10 lg:pr-16 lg:pt-16">
-            <p className="text-[11px] uppercase tracking-[0.28em] text-brand-cocoa">Agent Kammer</p>
-            <p className="mt-3 text-[11px] uppercase tracking-[0.26em] text-brand-cocoa">Private Housing Advisory</p>
+            <p className="text-[11px] uppercase tracking-[0.28em] text-brand-cocoa">
+              Agent Kammer · Private Housing Advisory
+            </p>
             <h1 className="mt-4 max-w-[12ch] font-display text-[clamp(3.25rem,6vw,4.5rem)] leading-[0.92] text-brand-navy">
-              Live where you belong
+              Live where
+              <br />
+              you belong
             </h1>
             <p className="mt-6 max-w-xl text-[17px] leading-8 text-brand-graphite">
               Private housing guidance. Local execution when needed. We start with life change, uncertainty, and trade-offs before buildings, neighborhoods, or listings.
@@ -59,24 +62,14 @@ export default function Home() {
                 People do not wake up wanting to tour apartments. They wake up because life changed.
               </p>
             </blockquote>
-            <p className="mt-5 max-w-xl text-base leading-7 text-brand-graphite/82">
-              The job here is to diagnose that change and recommend the highest expected-value decision, even if that means doing nothing. When a transaction is appropriate, we introduce the right local professionals.
-            </p>
-            <div className="mt-7">
+            <div className="mt-8">
               <button
                 type="button"
                 onClick={openDecisionAssistant}
-                className="ak-call-button group grid min-w-[19rem] rounded-button px-5 py-4 text-left transition-colors"
+                className="ak-call-button group inline-flex min-w-[19rem] items-center justify-between gap-6 rounded-button px-5 py-4 text-[14px] font-semibold uppercase tracking-[0.12em] text-brand-ivory transition-colors"
               >
-                <span className="text-[11px] uppercase tracking-[0.24em]">
-                  <span className="text-brand-ivory/72">Guidance</span>{" "}
-                  <span className="text-brand-stone">Advisor</span>
-                </span>
-                <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
-                <span className="mt-3 flex items-center justify-between text-[14px] font-semibold uppercase tracking-[0.12em] text-brand-ivory">
-                  Ask what's changing
-                  <MoveRight className="h-4 w-4 text-brand-stone transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
-                </span>
+                Ask what's changing
+                <MoveRight className="h-4 w-4 text-brand-stone transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
               </button>
             </div>
           </div>

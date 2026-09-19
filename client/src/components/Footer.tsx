@@ -31,7 +31,7 @@ function ResumeDecisionNest() {
       <button
         type="button"
         onClick={openDecisionAssistant}
-        className="ak-guidance-chip min-w-0"
+        className="ak-guidance-chip ak-guidance-pinstripe min-w-0"
         aria-label="Open Guidance Advisor"
         data-testid="button-footer-guidance"
       >
@@ -40,7 +40,7 @@ function ResumeDecisionNest() {
       </button>
       <Link
         href="/account"
-        className="ak-guidance-chip min-w-0"
+        className="ak-guidance-chip ak-guidance-pinstripe min-w-0"
       >
         Resume Decision
       </Link>

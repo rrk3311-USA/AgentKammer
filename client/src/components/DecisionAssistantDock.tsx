@@ -994,7 +994,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
         >
           <div className="flex min-h-0 flex-1 flex-col">
             <div
-              className="ak-guidance-sheet-chrome flex min-h-[5.15rem] min-w-0 items-center gap-2 px-4 py-2 [touch-action:none]"
+              className="ak-guidance-sheet-chrome flex min-h-11 min-w-0 items-center gap-2 px-4 py-1 [touch-action:none]"
               onPointerDown={(event) => beginSheetDrag(event.clientY)}
               onPointerUp={(event) => finishSheetDrag(event.clientY)}
               onPointerCancel={() => {
@@ -1005,13 +1005,11 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
               <button
                 type="button"
                 onClick={toggleSheet}
-                className="min-h-11 min-w-0 flex-1 text-left"
+                className="flex min-h-11 min-w-0 flex-1 items-center gap-2 text-left"
                 aria-label="Collapse Guidance Advisor"
               >
                 <GuidanceStarProgress completion={blueprintCompletion} />
-                <span className="mt-1 block text-[10px] uppercase tracking-[0.22em] text-[#b08d57]">
-                  Guidance Advisor
-                </span>
+                <span className="sr-only">Guidance Advisor</span>
               </button>
               <button
                 type="button"
@@ -1127,7 +1125,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
             type="button"
             id="decision-assistant"
             onClick={toggleSheet}
-            className="ak-guidance-chip"
+            className="ak-guidance-chip ak-guidance-pinstripe"
             aria-expanded="false"
             aria-label={chipLabel === "Guidance" ? "Open Guidance Advisor" : "Resume Decision with Guidance Advisor"}
             data-testid="button-guidance-chip"
