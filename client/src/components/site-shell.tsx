@@ -599,7 +599,7 @@ export function sameCtaPhrase(a: string, b: string) {
 
 export function CTA({
   title = "Start Here.",
-  description = "Begin with Guidance, a Situation Assessment, or a Strategy Session when you want a live hour of judgment.",
+  description = "Begin with Guidance, a Situation Assessment, a Property Assessment, or a Livability Score.",
   href = "/buyer-advisory",
   label = "Start Here",
   eyebrow = "Start Here",

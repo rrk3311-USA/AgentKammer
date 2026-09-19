@@ -77,10 +77,10 @@ export default function Perspectives() {
 
       <CTA
         title="Need a more tailored read than a public note can provide?"
-        description="Begin a Strategy Session to turn the observation into a decision brief for your building, neighborhood, timeline, or move question."
-        href="/contact?intent=strategy"
-        label="Strategy Session"
-        eyebrow="Strategy Session"
+        description="Write if you want the observation turned into a decision brief for your building, neighborhood, timeline, or move question."
+        href="/contact"
+        label="Contact"
+        eyebrow="Contact"
       />
     </main>
   );

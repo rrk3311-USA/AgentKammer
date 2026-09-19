@@ -51,7 +51,7 @@ export default function Belonging() {
       <EditorialHero
         eyebrow={PUBLIC_PRODUCTS.situation.label}
         title="Find out if you’re living where you belong."
-        description="A guided life diagnostic about your life, priorities, and housing, not listings. Your responses help tailor your profile and determine whether a Strategy Session would add value."
+        description="A guided life diagnostic about your life, priorities, and housing, not listings. Your responses help tailor your profile and the next step that would actually help."
       >
         <Link
           href="/contact?intent=situation"
@@ -61,9 +61,9 @@ export default function Belonging() {
           <MoveRight className="h-4 w-4 text-brand-stone transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
         </Link>
         <p className="mt-6 max-w-xl text-base leading-7 text-brand-graphite">
-          Prefer a Strategy Session first?{" "}
-          <Link href="/contact?intent=strategy" className="text-brand-navy underline underline-offset-4">
-            Request the hour
+          Prefer to write first?{" "}
+          <Link href="/contact" className="text-brand-navy underline underline-offset-4">
+            Send the next step
           </Link>
           . The scored profile is in active build. Requesting the assessment today opens a private intake so your Agent Kammer profile can be prepared manually. Same diagnostic, human-paced. Public language stays Pick, Consider, Wait, Pass, and WHO. Not a /100 score.
         </p>

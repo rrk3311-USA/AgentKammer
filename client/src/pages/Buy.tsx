@@ -31,10 +31,10 @@ const journey = [
   },
   {
     step: "04",
-    title: "Receive your strategy",
-    text: "A Strategy Session and written action summary. Continuity, when needed, is offered after the hour by invitation.",
-    href: "/advisory",
-    cta: "See advisory",
+    title: "Write if the next step is already clear",
+    text: "Request a Property Assessment if an address is in play, or a Livability Score if daily fit is the question. Continuity, when needed, is offered by invitation.",
+    href: "/contact",
+    cta: "Contact",
     surface: "white" as const,
   },
 ];
@@ -70,7 +70,7 @@ export default function Buy() {
   usePageMetadata({
     title: "Start Here",
     description:
-      "How we work: what's changing, Situation Assessment, Decision Brief, then a Strategy Session, before listings take over.",
+      "How we work: what's changing, Situation Assessment, Decision Brief, then a written next step, before listings take over.",
     path: "/buyer-advisory",
   });
 
@@ -79,7 +79,7 @@ export default function Buy() {
       <PageHero
         eyebrow="Start Here"
         title="A clear path through the decision. Not another search."
-        description="Start Here is the path. The Situation Assessment is the diagnostic. Decision Briefs are the research. A Strategy Session is the paid advisory layer. They are not the same step."
+        description="Start Here is the path. The Situation Assessment is the diagnostic. Decision Briefs are the research. Contact is for a written next step. They are not the same step."
         art="start-here"
       />
 

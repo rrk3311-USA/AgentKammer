@@ -2,8 +2,8 @@
  * Locked public product vocabulary (Simplification brief LOCK).
  * Do not merchandise additional SKUs as equal primary offers.
  *
- * Get Qualified and Curation IQ are separate PRs. Leave hooks only:
- * Get Qualified = gate copy for a Strategy Session, never a product card.
+ * Strategy Session and Get Qualified are shelved for later monetization.
+ * Routes stay; they are not current public offers.
  */
 
 export const KAMMER_VERDICTS = ["Pick", "Consider", "Wait", "Pass"] as const;
@@ -35,11 +35,21 @@ export const PUBLIC_PRODUCTS = {
     desk: "Tools",
     text: "A Tools-desk read on daily fit. Kept separate from Property Assessment.",
   },
+} as const;
+
+/** Shelved — later monetization. Keep routes; do not merchandise as public offers. */
+export const SHELVED_OFFERS = {
   strategy: {
     id: "strategy",
     label: "Strategy Session",
     href: "/contact?intent=strategy",
-    text: "A live hour of judgment. One session door. Not a Discovery Call.",
+    text: "A live hour of judgment. Shelved from the public menu. Not a Discovery Call.",
+  },
+  qualify: {
+    id: "qualify",
+    label: "Get Qualified",
+    href: "/qualify",
+    text: "A briefing that only existed to book a Strategy Session. Shelved from the public menu.",
   },
 } as const;
 
@@ -48,10 +58,10 @@ export const CONTACT_NEXT_STEPS = [
   PUBLIC_PRODUCTS.situation.label,
   PUBLIC_PRODUCTS.property.label,
   PUBLIC_PRODUCTS.livability.label,
-  PUBLIC_PRODUCTS.strategy.label,
 ] as const;
 
 export type PublicProductId = keyof typeof PUBLIC_PRODUCTS;
+export type ShelvedOfferId = keyof typeof SHELVED_OFFERS;
 
 const INTENT_ALIASES: Record<string, PublicProductId> = {
   guidance: "guidance",
@@ -59,12 +69,17 @@ const INTENT_ALIASES: Record<string, PublicProductId> = {
   situation: "situation",
   property: "property",
   livability: "livability",
-  strategy: "strategy",
 };
 
 export function resolvePublicIntent(raw: string | null | undefined): PublicProductId | null {
   if (!raw) return null;
   return INTENT_ALIASES[raw.trim().toLowerCase()] ?? null;
+}
+
+/** Deep-link intake only. Strategy Session is not a public offer. */
+export function resolveShelvedIntent(raw: string | null | undefined): "strategy" | null {
+  if (!raw) return null;
+  return raw.trim().toLowerCase() === "strategy" ? "strategy" : null;
 }
 
 export function contactHref(id: PublicProductId): string {
@@ -75,7 +90,6 @@ export function contactHref(id: PublicProductId): string {
 
 /** Quiet sitemap entries only. Do not add these to the five-item header. */
 export const FOOTER_SITEMAP_QUIET = [
-  { label: "Get Qualified", href: "/qualify" },
   { label: "Hub", href: "/hub" },
   { label: "Tools", href: "/tools" },
   { label: "Intelligence", href: "/intelligence" },

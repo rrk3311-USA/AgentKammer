@@ -121,7 +121,7 @@ export default function Home() {
 
       <CTA
         title="When you want a human reply."
-        description="The homepage starts with Guidance. Write only if a Situation Assessment, Property Assessment, or Strategy Session is already the right next step."
+        description="The homepage starts with Guidance. Write only if a Situation Assessment, Property Assessment, or Livability Score is already the right next step."
         href="/contact"
         label="Contact"
         eyebrow="Contact"
