@@ -84,7 +84,7 @@ export default function About() {
 
       <CTA
         title="Find out if you’re living where you belong."
-        description="The Situation Assessment is how most relationships begin. A profile first. A Strategy Session only when it adds judgment."
+        description="The Situation Assessment is how most relationships begin. A profile first. A written next step when the picture is clear."
         href="/belonging"
         label="Situation Assessment"
         eyebrow="Start Here"

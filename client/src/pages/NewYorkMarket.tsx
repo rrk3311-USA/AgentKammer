@@ -93,10 +93,10 @@ export default function NewYorkMarket() {
 
       <CTA
         title="Refine the search geography before the building list grows."
-        description="Begin a Strategy Session to compare neighborhoods around commute, lifestyle, schools, building type, and timing."
-        href="/contact?intent=strategy"
-        label="Strategy Session"
-        eyebrow="Strategy Session"
+        description="Write if you want neighborhoods compared around commute, lifestyle, schools, building type, and timing."
+        href="/contact"
+        label="Contact"
+        eyebrow="Contact"
       />
     </main>
   );

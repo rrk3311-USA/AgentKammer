@@ -24,17 +24,17 @@ const publicLadder = [
     price: "By scope",
   },
   {
-    title: PUBLIC_PRODUCTS.strategy.label,
-    format: "~60 minutes · written action summary",
-    text: "One major decision. Buy versus wait, stay versus move, two buildings, renovate versus relocate. Ends with a written summary you can act on. Qualification for the hour is a gate, not a product card.",
-    price: "$250-500",
+    title: PUBLIC_PRODUCTS.livability.label,
+    format: "Tools desk",
+    text: PUBLIC_PRODUCTS.livability.text,
+    price: "By request",
   },
 ];
 
 const afterSession = [
   {
     title: "Acquisition Dossier",
-    text: "Full acquisition judgment when the hour shows the case needs it. Offered after a Strategy Session, by invitation.",
+    text: "Full acquisition judgment when the case needs it. Offered by invitation, after the relationship begins.",
   },
   {
     title: "Essentials",
@@ -59,16 +59,16 @@ const journey = [
     text: "Most relationships begin with the Guidance Advisor, a Situation, or the Situation Assessment. Not a sales page.",
   },
   {
-    title: "Book a Strategy Session",
-    text: "One paid hour, built around one real decision. This is a complete engagement on its own, not a qualifying call.",
+    title: "Write when a human reply is useful",
+    text: "If an address is already in play, request a Property Assessment. If daily fit is the question, request a Livability Score.",
   },
   {
-    title: "Receive a written strategy summary",
-    text: "A clear recommendation and next step, in writing, so the value of the session outlasts the conversation.",
+    title: "Receive a written next step",
+    text: "A clear recommendation you can act on, so the value of the work outlasts the first conversation.",
   },
   {
     title: "Continue only if the case needs it",
-    text: "A Dossier or membership is offered after the hour, by invitation. Some clients need exactly one session. That is a correct outcome.",
+    text: "A Dossier or membership is offered by invitation. Some clients need exactly one diagnostic. That is a correct outcome.",
   },
 ];
 
@@ -76,7 +76,7 @@ export default function Advisory() {
   usePageMetadata({
     title: "Residential Advisory",
     description:
-      "Agent Kammer Residential Advisory: Guidance, Situation Assessment, Property Assessment, and a Strategy Session. Memberships follow by invitation.",
+      "Agent Kammer Residential Advisory: Guidance, Situation Assessment, Property Assessment, and Livability Score. Memberships follow by invitation.",
     path: "/advisory",
   });
 
@@ -85,7 +85,7 @@ export default function Advisory() {
       <PageHero
         eyebrow="Residential Advisory"
         title="Ongoing strategic guidance for life's biggest residential decisions."
-        description="One public ladder. Clients pay for judgment, not listing access. A Strategy Session is one way to reach it, not a Discovery Call, and not two session names."
+        description="One public ladder. Clients pay for judgment, not listing access. Four names: Guidance, Situation Assessment, Property Assessment, and Livability Score."
         art="private-advisory"
       />
 
@@ -96,7 +96,7 @@ export default function Advisory() {
           A conversation is how a session happens to be delivered. It is not what a client is paying for. What a client is paying for is judgment applied to a real decision: whether to buy, wait, renovate, sell, or do nothing at all.
         </p>
         <p className={`mt-6 ${grammar.bodyWide}`}>
-          That means a single Strategy Session can be a complete, successful engagement. Continuity, when it is useful, is offered after the hour.
+          That means a single diagnostic can be a complete, successful engagement. Continuity, when it is useful, is offered by invitation.
         </p>
       </PageSection>
 
@@ -105,7 +105,7 @@ export default function Advisory() {
           <SectionHeading
             eyebrow="Public ladder"
             title="Begin with one of four names."
-            description={`${PUBLIC_PRODUCTS.livability.label} stays on the Tools desk. It is not sold here, and it is not a Property Assessment.`}
+            description={`${PUBLIC_PRODUCTS.livability.label} stays on the Tools desk. It is not a Property Assessment.`}
           />
           <div className="mt-12 border-t border-brand-border">
             {publicLadder.map((item, index) => (
@@ -128,8 +128,8 @@ export default function Advisory() {
 
       <PageSection>
         <SectionHeading
-          eyebrow="After the hour"
-          title="By invitation, after a Strategy Session."
+          eyebrow="By invitation"
+          title="Continuity when the work continues."
           description="Dossier and memberships are continuity. They are not first cards on the public shelf."
         />
         <LibraryList
@@ -137,8 +137,8 @@ export default function Advisory() {
             eyebrow: "price" in tier && tier.price ? `By invitation · ${tier.price}` : "By invitation",
             title: tier.title,
             text: tier.text,
-            href: "/contact?intent=strategy",
-            cta: "After a Strategy Session",
+            href: "/contact",
+            cta: "Write to the practice",
           }))}
         />
         <p className="mt-8 max-w-2xl text-sm leading-7 text-brand-graphite/80">
@@ -158,11 +158,11 @@ export default function Advisory() {
       />
 
       <CTA
-        title="Begin with a Strategy Session."
-        description="One major decision, a written action summary, and a clear next step. Continuity is available if the decisions keep evolving."
-        href="/contact?intent=strategy"
-        label="Book a Strategy Session"
-        eyebrow={PUBLIC_PRODUCTS.strategy.label}
+        title="Start with Guidance, or the Situation Assessment."
+        description="One major decision, a written next step, and a clear recommendation. Continuity is available if the decisions keep evolving."
+        href="/belonging"
+        label="Situation Assessment"
+        eyebrow="Start Here"
       />
     </main>
   );

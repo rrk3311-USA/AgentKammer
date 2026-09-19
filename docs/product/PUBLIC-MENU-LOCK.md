@@ -12,29 +12,42 @@ Exactly five short labels: Home · Start Here · Situations · Guides · Contact
 
 **Header CTA:** filled **Guidance** control (`ak-call-button` without the stripe overlay) that opens the Advisor. Not a sixth nav item. Never “Request Intelligence.” The floating Guidance chip stays solid — no pinstripe.
 
-**Footer:** quiet end — identity, Start Here · Situations · Guides · About, then Privacy · Terms · Contact, then languages. Envelope stays with Contact at the end. No product strip, no Intelligence, no public Decision Hub, no Sitemap competing in charcoal.
+**Footer:** quiet end — identity, Start Here · Situations · Guides · About · Get Qualified, then Privacy · Terms · Contact, then languages. Envelope stays with Contact at the end. Get Qualified is an onboard utility, not a fifth product. No product strip, no Intelligence, no public Decision Hub, no Sitemap competing in charcoal.
 
-## The five public products
+## The four public products
 
 | # | Name | Job | Route / surface |
 |---|------|-----|-----------------|
 | 1 | **Guidance** | Guidance Advisor chat | Dock / header verb |
 | 2 | **Situation Assessment** | Life diagnostic | `/belonging` |
 | 3 | **Property Assessment** | Address review | `/contact?intent=property` |
-| 4 | **Livability Score** | Tools desk only | Not a merchandised SKU |
-| 5 | **Strategy Session** | Live hour | `/contact?intent=strategy` |
+| 4 | **Livability Score** | Tools desk only | `/contact?intent=livability` |
+
+## Footer onboard (not a product)
+
+| Name | Job | Route |
+|------|-----|-------|
+| **Get Qualified** | Onboard briefing | `/qualify` |
+
+Keep this as a charcoal footer link. Do not add it to the four-product menu, header, or Contact next-step picker.
+
+## Shelved / later monetization
+
+Keep the route. Do not merchandise it as a current public offer.
+
+| Shelved | Route | Status |
+|---------|-------|--------|
+| **Strategy Session** | `/contact?intent=strategy` | Not a public offer |
 
 ## Retired as public SKUs
 
 | Retired | Use instead |
 |---------|-------------|
-| Request Intelligence | Guidance, Start Here, or Situation Assessment |
-| Decision Assessment / Belonging Assessment / Housing Decision Assessment | Situation Assessment |
 | Property Snapshot / Property Intelligence Report / Building Second Opinion / Kammer Report | Property Assessment |
-| Housing Strategy Session / Property Strategy Session / Discovery Call | Strategy Session |
-| Acquisition Dossier / memberships as equal primary cards | Nest behind Strategy Session (by invitation / after the hour) |
+| Housing Strategy Session / Property Strategy Session / Discovery Call / Strategy Session | Guidance, Situation Assessment, or Contact |
+| Acquisition Dossier / memberships as equal primary cards | By invitation, after the relationship begins |
 
-**Get Qualified** is gate copy for the hour only. Do not rebuild it here. **Curation IQ** is a separate PR.
+**Curation IQ** is a separate PR.
 
 ## Show language
 

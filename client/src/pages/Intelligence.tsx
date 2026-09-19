@@ -88,10 +88,10 @@ export default function Intelligence() {
 
       <CTA
         title="Need the brief translated into a live decision?"
-        description="Begin a Strategy Session to turn market context into a recommendation for your timing, building target, or neighborhood plan."
-        href="/contact?intent=strategy"
-        label="Strategy Session"
-        eyebrow="Strategy Session"
+        description="Write if you want market context turned into a recommendation for your timing, building target, or neighborhood plan."
+        href="/contact"
+        label="Contact"
+        eyebrow="Contact"
       />
     </main>
   );
