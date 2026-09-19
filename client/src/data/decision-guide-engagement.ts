@@ -163,12 +163,12 @@ const byPath: Record<string, Partial<PageEngagement>> = {
     headline: "Frameworks before listings",
     nudge: "Looking for structure, a neighborhood, or a report? Tell me which and I'll open the right chapter.",
     greeting:
-      "Guides is the knowledge library: Decision Guides, Neighborhoods, and the Kammer Report. What do you need to understand first?",
+      "Guides is the knowledge library: Decision Guides, Neighborhoods, and Property Assessment. What do you need to understand first?",
     pageHelper: "You're in Guides. Name the question — ownership, geography, or a Manhattan report — and I'll point you.",
     starters: [
       { label: "Neighborhoods", text: "Help me choose a neighborhood.", path: "/guides#neighborhoods" },
       { label: "Condo vs co-op", text: "Should I focus on condos or co-ops?", path: "/situations/condo-vs-coop" },
-      { label: "Kammer Report", text: "What are you observing about Manhattan?", path: "/guides#kammer-report" },
+      { label: "Property Assessment", text: "What are you observing about Manhattan?", path: "/guides#kammer-report" },
     ],
   },
   "/building-reports/neighborhood-guides": {

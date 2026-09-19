@@ -30,7 +30,7 @@ Exactly five short labels: Home · Start Here · Situations · Guides · Contact
 |---------|-------------|
 | Request Intelligence | Guidance, Start Here, or Situation Assessment |
 | Decision Assessment / Belonging Assessment / Housing Decision Assessment | Situation Assessment |
-| Property Snapshot / Property Intelligence Report / Building Second Opinion | Property Assessment |
+| Property Snapshot / Property Intelligence Report / Building Second Opinion / Kammer Report | Property Assessment |
 | Housing Strategy Session / Property Strategy Session / Discovery Call | Strategy Session |
 | Acquisition Dossier / memberships as equal primary cards | Nest behind Strategy Session (by invitation / after the hour) |
 
@@ -38,6 +38,6 @@ Exactly five short labels: Home · Start Here · Situations · Guides · Contact
 
 ## Show language
 
-Kammer Report verdicts: **Pick / Consider / Wait / Pass** plus **WHO** the address is for. Do not publish `/100` scores on public show copy.
+Property Assessment verdicts: **Pick / Consider / Wait / Pass** plus **WHO** the address is for. Do not publish `/100` scores on public show copy.
 
 Livability Score must not merge into Property Assessment.

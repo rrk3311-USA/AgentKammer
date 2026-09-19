@@ -126,7 +126,7 @@ export const pageGraph = [
   {
     path: "/guides",
     title: "Guides",
-    topics: ["frameworks", "neighborhoods", "kammer report", "ownership"],
+    topics: ["frameworks", "neighborhoods", "property assessment", "ownership"],
     prerequisites: ["situation", "decision"],
     related: ["/guides#decision-guides", "/guides#neighborhoods", "/guides#kammer-report", "/buyer-advisory"],
   },

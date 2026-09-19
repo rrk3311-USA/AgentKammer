@@ -4,7 +4,7 @@ import { grammar } from "@/components/visual-grammar";
 const researchPaths = [
   {
     label: "Guides",
-    description: "Decision frameworks, neighborhoods, and the Kammer Report.",
+    description: "Decision frameworks, neighborhoods, and Property Assessment.",
     href: "/guides",
   },
   {

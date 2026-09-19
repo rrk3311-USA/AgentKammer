@@ -89,11 +89,11 @@ export function getSiteMapGroups(): SiteMapGroup[] {
     },
     {
       title: "Guides",
-      description: "Educational frameworks, neighborhoods, and the Kammer Report before anyone looks at a listing.",
+      description: "Educational frameworks, neighborhoods, and Property Assessment before anyone looks at a listing.",
       items: [
         { label: "Decision Guides", href: "/guides#decision-guides" },
         { label: "Neighborhoods", href: "/guides#neighborhoods" },
-        { label: "Kammer Report", href: "/guides#kammer-report" },
+        { label: "Property Assessment", href: "/guides#kammer-report" },
         ...publicGuides.map((guide) => ({ label: guide.title, href: guide.href })),
       ],
     },

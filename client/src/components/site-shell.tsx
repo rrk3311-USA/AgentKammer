@@ -17,7 +17,7 @@ export const primaryNav = [
 export const guidesLibraryNav = [
   { label: "Decision Guides", href: "/guides#decision-guides", id: "decision-guides" },
   { label: "Neighborhoods", href: "/guides#neighborhoods", id: "neighborhoods" },
-  { label: "Kammer Report", href: "/guides#kammer-report", id: "kammer-report" },
+  { label: "Property Assessment", href: "/guides#kammer-report", id: "kammer-report" },
 ] as const;
 
 export type HeroArtVariant =

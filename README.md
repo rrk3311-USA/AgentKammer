@@ -76,7 +76,7 @@ Brand rules (human/AI): `docs/brand/AGENT-KAMMER-BRAND.md`.
 
 ## Curation IQ (unlisted)
 
-Raphi’s **Kammer Report / Property Assessment queue** — Suggested (IQ) → Selected (Raphi). Not in the public nav.
+Raphi’s **Property Assessment queue** — Suggested (IQ) → Selected (Raphi). Not in the public nav.
 
 - Desk: `/tools/curation` (alias `/admin/curation`). Same Basic auth as `/admin`.
 - **v1 source:** operators capture StreetEasy *Most Popular* per band (Weekly OS style) and **paste sale URLs**. No production StreetEasy / Zillow scrapers. MLS / RESO swaps in later via `MlsFeedAdapter` without redesigning the two layers.

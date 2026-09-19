@@ -47,7 +47,7 @@ export type InsertCurationSuggestion = z.infer<typeof insertCurationSuggestionSc
 export type CurationSuggestion = typeof curationSuggestions.$inferSelect;
 
 /**
- * Selected (Raphi) — Kammer Report / Property Assessment queue.
+ * Selected (Raphi) — Property Assessment queue.
  * on_sale controls the public drop. raphi_replaced is admin-secret.
  */
 export const curationSelections = pgTable("curation_selections", {
