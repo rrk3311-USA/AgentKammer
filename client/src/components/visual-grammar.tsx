@@ -1,4 +1,3 @@
-import React from "react";
 import React, { type ReactNode } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
