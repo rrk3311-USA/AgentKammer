@@ -1111,7 +1111,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
                       : openingPrompts[promptIndex % openingPrompts.length] || "Tell me what's changing..."
                   }
                   rows={cold ? 1 : 2}
-                  className={`min-h-10 w-full min-w-0 resize-none border-0 bg-transparent px-0 text-sm text-[#f5f2eb] outline-none placeholder:text-[#f5f2eb]/32 ${cold ? "py-1.5" : "py-2"}`}
+                  className={`min-h-10 w-full min-w-0 resize-none border-0 bg-transparent px-0 text-sm text-[#f5f2eb] outline-none placeholder:text-[#f5f2eb]/32 ${cold ? "overflow-hidden py-1.5" : "py-2"}`}
                 />
                 <button
                   type="submit"
