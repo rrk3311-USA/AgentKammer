@@ -51,9 +51,10 @@ describe("public menu lock", () => {
       ["Start Here", "/buyer-advisory"],
       ["Situations", "/situations"],
       ["Guides", "/guides"],
-      ["About", "/about"],
+      ["Contact", "/contact"],
     ]);
     expect(primaryNav.some((item) => item.label === "Buildings")).toBe(false);
+    expect(primaryNav.some((item) => item.label === "About")).toBe(false);
   });
 
   it("keeps sitemap quiet links off the header", () => {
@@ -61,7 +62,6 @@ describe("public menu lock", () => {
       ["Get Qualified", "/qualify"],
       ["Hub", "/hub"],
       ["Tools", "/tools"],
-      ["Contact", "/contact"],
       ["Intelligence", "/intelligence"],
     ]);
     const headerHrefs = new Set(primaryNav.map((item) => item.href));

@@ -4,13 +4,13 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { grammar } from "@/components/visual-grammar";
 
-/** Locked primary header: these five. Guidance is a utility, not a sixth door. Intelligence, Assessment, Get Qualified, and International stay out. */
+/** Locked primary header: these five. Guidance is the pinstripe utility, not a sixth door. */
 export const primaryNav = [
   { label: "Home", href: "/" },
   { label: "Start Here", href: "/buyer-advisory" },
   { label: "Situations", href: "/situations" },
   { label: "Guides", href: "/guides" },
-  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 /** Guides library chapters. Building Profiles stay reachable, not a selector item. */

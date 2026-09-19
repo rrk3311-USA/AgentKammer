@@ -28,8 +28,8 @@ function isPrimaryNavActive(href: string, location: string) {
   return location === href || location.startsWith(`${href}/`);
 }
 
-const quietGuidanceClass =
-  "text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory/68 transition-colors hover:text-brand-ivory";
+const headerGuidanceClass =
+  "ak-call-button inline-flex items-center px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -88,7 +88,7 @@ export function Header() {
             <button
               type="button"
               onClick={openDecisionAssistant}
-              className={cn(quietGuidanceClass, focusRing)}
+              className={cn(headerGuidanceClass, focusRing)}
               data-testid="button-header-guidance"
             >
               {PUBLIC_PRODUCTS.guidance.label}
@@ -130,7 +130,7 @@ export function Header() {
                 setMobileMenuOpen(false);
                 openDecisionAssistant();
               }}
-              className={cn("mt-4 py-2.5 text-left", quietGuidanceClass)}
+              className={cn("mt-4 w-fit", headerGuidanceClass)}
               data-testid="button-header-guidance-mobile"
             >
               {PUBLIC_PRODUCTS.guidance.label}
