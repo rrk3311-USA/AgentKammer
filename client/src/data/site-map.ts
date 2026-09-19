@@ -1,7 +1,7 @@
 import { primaryNav } from "@/components/site-shell";
 import { publicGuides } from "@/data/guides";
 import { decisionNavigationGroups } from "@/data/decision-navigation";
-import { FOOTER_SITEMAP_QUIET, PUBLIC_PRODUCTS } from "@/data/public-menu";
+import { FOOTER_SITEMAP_QUIET, GET_QUALIFIED, PUBLIC_PRODUCTS } from "@/data/public-menu";
 
 export type SiteMapItem = {
   label: string;
@@ -20,6 +20,7 @@ export const FOOTER_DARK_NAV = [
   { label: "Situations", href: "/situations" },
   { label: "Guides", href: "/guides" },
   { label: "About", href: "/about" },
+  GET_QUALIFIED,
 ] as const;
 
 /** Charcoal quiet row. Envelope sits with Contact. Sitemap is not a competing item. */

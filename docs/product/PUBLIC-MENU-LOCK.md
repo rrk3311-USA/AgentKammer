@@ -12,7 +12,7 @@ Exactly five short labels: Home · Start Here · Situations · Guides · Contact
 
 **Header CTA:** filled **Guidance** control (`ak-call-button` without the stripe overlay) that opens the Advisor. Not a sixth nav item. Never “Request Intelligence.” The floating Guidance chip stays solid — no pinstripe.
 
-**Footer:** quiet end — identity, Start Here · Situations · Guides · About, then Privacy · Terms · Contact, then languages. Envelope stays with Contact at the end. No product strip, no Intelligence, no public Decision Hub, no Sitemap competing in charcoal.
+**Footer:** quiet end — identity, Start Here · Situations · Guides · About · Get Qualified, then Privacy · Terms · Contact, then languages. Envelope stays with Contact at the end. Get Qualified is an onboard utility, not a fifth product. No product strip, no Intelligence, no public Decision Hub, no Sitemap competing in charcoal.
 
 ## The four public products
 
@@ -23,14 +23,21 @@ Exactly five short labels: Home · Start Here · Situations · Guides · Contact
 | 3 | **Property Assessment** | Address review | `/contact?intent=property` |
 | 4 | **Livability Score** | Tools desk only | `/contact?intent=livability` |
 
+## Footer onboard (not a product)
+
+| Name | Job | Route |
+|------|-----|-------|
+| **Get Qualified** | Onboard briefing | `/qualify` |
+
+Keep this as a charcoal footer link. Do not add it to the four-product menu, header, or Contact next-step picker.
+
 ## Shelved / later monetization
 
-Keep the routes. Do not merchandise them as current public offers.
+Keep the route. Do not merchandise it as a current public offer.
 
 | Shelved | Route | Status |
 |---------|-------|--------|
 | **Strategy Session** | `/contact?intent=strategy` | Not a public offer |
-| **Get Qualified** | `/qualify` | Not a public CTA; it only existed to book the hour |
 
 ## Retired as public SKUs
 

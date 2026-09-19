@@ -10,6 +10,7 @@ import {
 import {
   CONTACT_NEXT_STEPS,
   FOOTER_SITEMAP_QUIET,
+  GET_QUALIFIED,
   KAMMER_VERDICTS,
   PUBLIC_PRODUCTS,
   SHELVED_OFFERS,
@@ -36,11 +37,11 @@ describe("public menu lock", () => {
     expect(CONTACT_NEXT_STEPS).not.toContain("Get Qualified");
   });
 
-  it("keeps Strategy Session and Get Qualified shelved, not public", () => {
+  it("keeps Strategy Session shelved and Get Qualified as a footer onboard tool", () => {
     expect(SHELVED_OFFERS.strategy.label).toBe("Strategy Session");
     expect(SHELVED_OFFERS.strategy.href).toBe("/contact?intent=strategy");
-    expect(SHELVED_OFFERS.qualify.label).toBe("Get Qualified");
-    expect(SHELVED_OFFERS.qualify.href).toBe("/qualify");
+    expect(Object.keys(SHELVED_OFFERS)).toEqual(["strategy"]);
+    expect(GET_QUALIFIED).toEqual({ label: "Get Qualified", href: "/qualify" });
     expect(resolvePublicIntent("strategy")).toBeNull();
     expect(resolveShelvedIntent("strategy")).toBe("strategy");
     expect(resolvePublicIntent("qualify")).toBeNull();
@@ -71,12 +72,12 @@ describe("public menu lock", () => {
 
   it("keeps sitemap quiet links off the header", () => {
     expect(FOOTER_SITEMAP_QUIET.map((item) => [item.label, item.href])).toEqual([
+      ["Get Qualified", "/qualify"],
       ["Hub", "/hub"],
       ["Tools", "/tools"],
       ["Intelligence", "/intelligence"],
     ]);
-    expect(FOOTER_SITEMAP_QUIET.some((item) => item.href === "/qualify")).toBe(false);
-    expect(FOOTER_SITEMAP_QUIET.some((item) => item.label === "Get Qualified")).toBe(false);
+    expect(FOOTER_SITEMAP_QUIET.some((item) => item.href === "/qualify")).toBe(true);
     const headerHrefs = new Set(primaryNav.map((item) => item.href));
     for (const item of FOOTER_SITEMAP_QUIET) {
       expect(headerHrefs.has(item.href)).toBe(false);
@@ -89,6 +90,7 @@ describe("public menu lock", () => {
       ["Situations", "/situations"],
       ["Guides", "/guides"],
       ["About", "/about"],
+      ["Get Qualified", "/qualify"],
     ]);
     expect(FOOTER_DARK_META.map((item) => [item.label, item.href])).toEqual([
       ["Privacy", "/privacy"],
@@ -102,8 +104,8 @@ describe("public menu lock", () => {
     expect(FOOTER_DARK_LINKS.some((item) => item.href === "/account")).toBe(false);
     expect(FOOTER_DARK_LINKS.some((item) => item.label.includes("Assessment"))).toBe(false);
     expect(FOOTER_DARK_LINKS.some((item) => item.label === "Strategy Session")).toBe(false);
-    expect(FOOTER_DARK_LINKS.some((item) => item.label === "Get Qualified")).toBe(false);
-    expect(FOOTER_DARK_LINKS.some((item) => item.href === "/qualify")).toBe(false);
+    expect(FOOTER_DARK_LINKS.filter((item) => item.label === "Get Qualified")).toHaveLength(1);
+    expect(FOOTER_DARK_LINKS.some((item) => item.href === "/qualify")).toBe(true);
     expect(FOOTER_DARK_LINKS.some((item) => item.href === "/licenses")).toBe(false);
     expect(FOOTER_DARK_LINKS.some((item) => item.label.toLowerCase() === "email")).toBe(false);
   });
@@ -144,8 +146,8 @@ describe("public menu lock", () => {
     expect(doors.some((item) => item.label === "Overview" && item.href === "/building-reports")).toBe(false);
     expect(doors.some((item) => item.label === "Market Briefs")).toBe(false);
     expect(doors.some((item) => item.label === "Strategy Session")).toBe(false);
-    expect(doors.some((item) => item.label === "Get Qualified")).toBe(false);
-    expect(doors.some((item) => item.href === "/qualify")).toBe(false);
+    expect(doors.filter((item) => item.label === "Get Qualified")).toHaveLength(1);
+    expect(doors.some((item) => item.href === "/qualify")).toBe(true);
     expect(doors.some((item) => item.href === "/contact?intent=strategy")).toBe(false);
   });
 });

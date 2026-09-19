@@ -2,8 +2,8 @@
  * Locked public product vocabulary (Simplification brief LOCK).
  * Do not merchandise additional SKUs as equal primary offers.
  *
- * Strategy Session and Get Qualified are shelved for later monetization.
- * Routes stay; they are not current public offers.
+ * Strategy Session is shelved for later monetization. Route stays; not a public offer.
+ * Get Qualified is a footer onboard tool, not a fifth product.
  */
 
 export const KAMMER_VERDICTS = ["Pick", "Consider", "Wait", "Pass"] as const;
@@ -37,7 +37,7 @@ export const PUBLIC_PRODUCTS = {
   },
 } as const;
 
-/** Shelved — later monetization. Keep routes; do not merchandise as public offers. */
+/** Shelved — later monetization. Keep the route; do not merchandise as a public offer. */
 export const SHELVED_OFFERS = {
   strategy: {
     id: "strategy",
@@ -45,12 +45,12 @@ export const SHELVED_OFFERS = {
     href: "/contact?intent=strategy",
     text: "A live hour of judgment. Shelved from the public menu. Not a Discovery Call.",
   },
-  qualify: {
-    id: "qualify",
-    label: "Get Qualified",
-    href: "/qualify",
-    text: "A briefing that only existed to book a Strategy Session. Shelved from the public menu.",
-  },
+} as const;
+
+/** Footer onboard tool. Not a fifth public product. */
+export const GET_QUALIFIED = {
+  label: "Get Qualified",
+  href: "/qualify",
 } as const;
 
 export const CONTACT_NEXT_STEPS = [
@@ -90,6 +90,7 @@ export function contactHref(id: PublicProductId): string {
 
 /** Quiet sitemap entries only. Do not add these to the five-item header. */
 export const FOOTER_SITEMAP_QUIET = [
+  GET_QUALIFIED,
   { label: "Hub", href: "/hub" },
   { label: "Tools", href: "/tools" },
   { label: "Intelligence", href: "/intelligence" },
