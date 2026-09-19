@@ -8,6 +8,7 @@ import {
   TIMELINE_OPTIONS,
 } from "@/data/international-hub";
 import { ENGLISH_UI } from "@/data/international-locales";
+import { grammar } from "@/components/visual-grammar";
 
 export type StrategyFormLabels = {
   headline: string;
@@ -148,7 +149,7 @@ export function InternationalStrategyForm({
         <p className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">
           {copy.successEyebrow}
         </p>
-        <h3 className="mt-4 font-display text-[clamp(1.75rem,3vw,2.4rem)] leading-[0.96] text-brand-navy">
+        <h3 className={`mt-4 ${grammar.section}`}>
           {copy.successTitle}
         </h3>
         <p className="mt-5 max-w-2xl text-base leading-8 text-brand-graphite">
@@ -175,7 +176,7 @@ export function InternationalStrategyForm({
   return (
     <form onSubmit={onSubmit} className="border border-brand-border bg-white p-8 sm:p-10">
       <p className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">{copy.formEyebrow}</p>
-      <h3 className="mt-4 font-display text-[clamp(1.75rem,3vw,2.5rem)] leading-[0.96] text-brand-navy">
+      <h3 className={`mt-4 ${grammar.section}`}>
         {copy.headline}
       </h3>
       <p className="mt-4 max-w-2xl text-base leading-8 text-brand-graphite">{copy.subhead}</p>

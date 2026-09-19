@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { PageHero } from "@/components/site-shell";
+import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 export default function Licenses() {
@@ -21,18 +22,18 @@ export default function Licenses() {
       <article className="mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24">
         <p className="text-sm text-brand-graphite/70">Last updated: July 2026</p>
 
-        <h2 className="mt-10 font-display text-3xl text-brand-navy">Real estate practice</h2>
-        <p className="mt-4 text-lg leading-9 text-brand-graphite">
+        <h2 className={`mt-10 ${grammar.section}`}>Real estate practice</h2>
+        <p className={`mt-4 ${grammar.bodyWide}`}>
           Raphael Kammer’s New York State real estate salesperson license status is disclosed on client materials and updated as credentials advance. Where Agent Kammer is not the listing or buyer’s broker of record, we curate and coordinate with appropriately licensed local professionals for execution.
         </p>
 
-        <h2 className="mt-12 font-display text-3xl text-brand-navy">Geographic scope</h2>
-        <p className="mt-4 text-lg leading-9 text-brand-graphite">
+        <h2 className={`mt-12 ${grammar.section}`}>Geographic scope</h2>
+        <p className={`mt-4 ${grammar.bodyWide}`}>
           Phase 1 focuses on decision guidance available nationwide. Always confirm current license status for any jurisdiction before relying on transaction representation.
         </p>
 
-        <h2 className="mt-12 font-display text-3xl text-brand-navy">Requests</h2>
-        <p className="mt-4 text-lg leading-9 text-brand-graphite">
+        <h2 className={`mt-12 ${grammar.section}`}>Requests</h2>
+        <p className={`mt-4 ${grammar.bodyWide}`}>
           For current license numbers or partner brokerage details for a specific matter, contact{" "}
           <a className="text-brand-navy underline decoration-brand-brass/50 underline-offset-4" href="mailto:info@agentkammer.com">
             info@agentkammer.com

@@ -111,7 +111,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
       <main className="bg-brand-ivory">
         <PageSection>
           <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">Situations</p>
-          <h1 className="mt-4 font-display text-4xl text-brand-navy">Situation page not found.</h1>
+          <h1 className={`mt-4 ${grammar.display}`}>Situation page not found.</h1>
           <p className="mt-4 text-brand-graphite">This URL does not match one of the current Situation pages.</p>
           <Link href="/situations" className="mt-8 inline-flex text-[11px] uppercase tracking-[0.16em] text-brand-navy">
             Back to Situations

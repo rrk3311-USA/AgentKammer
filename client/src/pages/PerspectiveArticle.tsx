@@ -95,11 +95,11 @@ export default function PerspectiveArticle() {
         <section className="border-t border-brand-midnight/10 bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10">
           <div className="mx-auto max-w-3xl">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Intelligence Report</p>
-            <h2 className="font-serif text-3xl font-semibold">{relatedExecutiveReport.title}</h2>
+            <h2 className={grammar.sectionOnDark}>{relatedExecutiveReport.title}</h2>
             <p className="mt-4 text-base leading-7 text-brand-ivory/82">{relatedExecutiveReport.executiveSummary[0]}</p>
             <Link
               href={`/insights/reports/${relatedExecutiveReport.slug}`}
-              className="mt-6 inline-block font-serif text-sm text-brand-champagne transition hover:text-brand-ivory"
+              className="mt-6 inline-block text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-champagne transition hover:text-brand-ivory"
             >
               Read the full report →
             </Link>
@@ -111,14 +111,14 @@ export default function PerspectiveArticle() {
         <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10">
           <div className="mx-auto max-w-3xl">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Building Report</p>
-            <h2 className="font-serif text-3xl font-semibold text-brand-midnight">{relatedReport.buildingName}</h2>
+            <h2 className={grammar.section}>{relatedReport.buildingName}</h2>
             <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-brand-champagne-dark">
               {relatedReport.location}
             </p>
             <p className="mt-4 text-base leading-7 text-brand-graphite/72">{relatedReport.executiveSummary[0]}</p>
             <Link
               href={`/building-reports/${relatedReport.slug}`}
-              className="mt-6 inline-block font-serif text-sm text-brand-midnight transition hover:text-brand-champagne-dark"
+              className="mt-6 inline-block text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition hover:text-brand-navy-secondary"
             >
               Read building report →
             </Link>

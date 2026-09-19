@@ -2,7 +2,7 @@ import { Link, Redirect } from "wouter";
 import { useEffect } from "react";
 import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-shell";
 import { DecisionFramework } from "@/components/DecisionFramework";
-import { grammar } from "@/components/visual-grammar";
+import { GrammarRows, grammar } from "@/components/visual-grammar";
 import { InternationalStrategyForm } from "@/components/InternationalStrategyForm";
 import {
   internationalCountryMap,
@@ -61,7 +61,7 @@ function InternationalCountryContent({ country }: { country: string }) {
           <div className="mt-10 divide-y divide-brand-border border-y border-brand-border">
             {page.faqs.map((faq) => (
               <details key={faq.q} className="py-6">
-                <summary className="cursor-pointer list-none font-display text-xl text-brand-navy">
+                <summary className={`cursor-pointer list-none ${grammar.rowTitle}`}>
                   {faq.q}
                 </summary>
                 <p className="mt-3 max-w-3xl text-sm leading-7 text-brand-graphite">{faq.a}</p>
@@ -73,17 +73,13 @@ function InternationalCountryContent({ country }: { country: string }) {
 
       <PageSection>
         <SectionHeading eyebrow={ui.neighborhoodsEyebrow} title={ui.neighborhoodsTitle} />
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {page.neighborhoods.map((n) => (
-            <div key={n.name} className="border border-brand-border bg-white p-7">
-              <h3 className={grammar.rowTitle}>{n.name}</h3>
-              <p className="mt-2 text-[11px] uppercase tracking-[0.14em] text-brand-brass">
-                {n.typicalBuyer}
-              </p>
-              <p className="mt-4 text-sm leading-7 text-brand-graphite">{n.blurb}</p>
-            </div>
-          ))}
-        </div>
+        <GrammarRows
+          items={page.neighborhoods.map((n) => ({
+            eyebrow: n.typicalBuyer,
+            title: n.name,
+            text: n.blurb,
+          }))}
+        />
       </PageSection>
 
       <DecisionFramework
@@ -120,7 +116,7 @@ function InternationalCountryContent({ country }: { country: string }) {
           <div className="mt-12 grid gap-6 md:grid-cols-2">
             {page.team.map((member) => (
               <div key={member.role} className="border border-brand-border bg-brand-ivory p-7">
-                <h3 className="font-display text-2xl text-brand-navy">{member.role}</h3>
+                <h3 className={grammar.rowTitle}>{member.role}</h3>
                 <p className="mt-4 text-sm leading-7 text-brand-graphite">{member.description}</p>
               </div>
             ))}

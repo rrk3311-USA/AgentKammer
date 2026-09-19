@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import { Link, useSearch } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { PageHero, PageSection } from "@/components/site-shell";
+import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { useToast } from "@/hooks/use-toast";
 import {
@@ -155,7 +156,7 @@ export default function LivabilityTool() {
       <PageSection className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.7fr)] lg:items-start">
         <form onSubmit={onSubmit} className="border border-brand-border bg-white p-6 sm:p-8">
           <p className="text-[10px] uppercase tracking-[0.2em] text-brand-cocoa">Inputs</p>
-          <h2 className="mt-3 font-display text-3xl leading-none text-brand-navy">Read the place</h2>
+          <h2 className={`mt-3 ${grammar.section}`}>Read the place</h2>
           <p className="mt-3 text-sm leading-7 text-brand-graphite">
             Use any one field, or all three. This is a livability read — not a condition report.
           </p>

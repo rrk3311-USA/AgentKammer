@@ -237,7 +237,7 @@ export default function Contact() {
             }
           />
           <div className="mt-8 grid gap-4">
-            <a href="#request-call" className="rounded-card border border-brand-border bg-white p-6">
+            <a href="#request-call" className="border border-brand-border bg-white p-6">
               <div className="inline-flex items-center gap-3 text-brand-navy">
                 <Mail className="h-4 w-4 text-brand-brass" strokeWidth={1.5} />
                 <span className="text-sm uppercase tracking-[0.16em]">
@@ -245,7 +245,7 @@ export default function Contact() {
                 </span>
               </div>
             </a>
-            <div className="rounded-card border border-brand-border bg-white p-6">
+            <div className="border border-brand-border bg-white p-6">
               <div className="inline-flex items-center gap-3 text-brand-navy">
                 <MapPin className="h-4 w-4 text-brand-brass" strokeWidth={1.5} />
                 <span className="text-sm uppercase tracking-[0.16em]">New York, New York</span>
@@ -254,7 +254,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <div id="request-call" className="rounded-card border border-brand-border bg-white p-8 shadow-soft lg:p-10">
+        <div id="request-call" className="border border-brand-border bg-white p-8 lg:p-10">
           <h2 className={grammar.section}>
             {isSituation ? "Assessment Intake" : copy.eyebrow}
           </h2>

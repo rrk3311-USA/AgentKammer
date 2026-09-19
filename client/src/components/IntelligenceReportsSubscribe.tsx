@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import { grammar } from "@/components/visual-grammar";
 
 const reportTopics = [
   "Executive Housing",
@@ -84,7 +85,7 @@ export function IntelligenceReportsSubscribe({
         >
           Intelligence Reports
         </p>
-        <h2 className={`mt-3 font-serif text-2xl font-semibold md:text-3xl ${isDark ? "text-brand-ivory" : "text-brand-midnight"}`}>
+        <h2 className={`mt-3 ${isDark ? grammar.sectionOnDark : grammar.section}`}>
           Receive Future Intelligence Reports
         </h2>
         <p className={`mt-3 text-sm leading-6 ${isDark ? "text-brand-ivory/72" : "text-brand-graphite/72"}`}>

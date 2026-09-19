@@ -141,3 +141,21 @@ export function LibraryList({ items, columns = 2 }: { items: readonly LibraryIte
     </div>
   );
 }
+
+export function GrammarRows({
+  items,
+}: {
+  items: readonly { eyebrow?: string; title: string; text?: ReactNode }[];
+}) {
+  return (
+    <div className="mt-12 border-t border-brand-border">
+      {items.map((item) => (
+        <article key={item.title} className="border-b border-brand-border py-7">
+          {item.eyebrow ? <p className={cn(grammar.eyebrow, "tracking-[0.18em]")}>{item.eyebrow}</p> : null}
+          <p className={cn(item.eyebrow ? "mt-3" : "", grammar.rowTitle)}>{item.title}</p>
+          {item.text ? <div className="mt-3 max-w-2xl text-base leading-7 text-brand-graphite">{item.text}</div> : null}
+        </article>
+      ))}
+    </div>
+  );
+}

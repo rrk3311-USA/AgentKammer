@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { PageHero, PageSection, SectionHeading } from "@/components/site-shell";
+import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { fetchToolsStatus, rememberToolsPreviewFromLocation, type ToolsStatus } from "@/lib/tools-client";
 import { ToolsComingSoon } from "./ToolsComingSoon";
@@ -59,11 +60,11 @@ export default function ToolsHome() {
             const live = tool.status === "live";
             const body = (
               <>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-brand-cocoa">{tool.eyebrow || (live ? "Open" : "Later")}</p>
-                <h2 className="mt-4 font-display text-3xl leading-[0.95] tracking-[-0.02em] text-brand-navy">
+                <p className={grammar.eyebrow}>{tool.eyebrow || (live ? "Open" : "Later")}</p>
+                <h2 className={`mt-4 ${grammar.rowTitle}`}>
                   {tool.name}
                 </h2>
-                <p className="mt-4 text-sm leading-7 text-brand-graphite">{tool.tagline || tool.description}</p>
+                <p className="mt-4 text-base leading-7 text-brand-graphite">{tool.tagline || tool.description}</p>
                 <span className="mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-brand-navy">
                   {live ? "Open tool" : "Scaffolded"}
                   <ArrowRight className="h-4 w-4" strokeWidth={1.5} />

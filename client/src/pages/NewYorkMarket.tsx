@@ -112,7 +112,7 @@ export default function NewYorkMarket() {
             <Link
               key={item.name}
               href={item.href}
-              className="group overflow-hidden rounded-card border border-brand-border bg-white transition-colors hover:border-brand-navy/30"
+              className="group overflow-hidden border border-brand-border bg-white transition-colors hover:border-brand-navy/30"
             >
               <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(14rem,22rem)] md:items-stretch">
                 <div className="p-8">
