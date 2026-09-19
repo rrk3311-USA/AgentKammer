@@ -5,7 +5,6 @@ import {
   FOOTER_DARK_LINKS,
   FOOTER_DARK_META,
   FOOTER_DARK_NAV,
-  FOOTER_POPULAR_LINKS,
   getSiteMapGroups,
 } from "./site-map";
 import {
@@ -93,7 +92,7 @@ describe("public menu lock", () => {
     expect(FOOTER_DARK_LINKS.some((item) => item.label.toLowerCase() === "email")).toBe(false);
   });
 
-  it("keeps the full What's Changing set in the ivory footer and four Popular links", () => {
+  it("keeps the full What's Changing set in the ivory footer and no Popular row", () => {
     const whatsChanging = decisionNavigationGroups.find((group) => group.title === "What's Changing?");
     expect(whatsChanging?.items.map((item) => item.label)).toEqual([
       "Executive Relocation",
@@ -108,12 +107,6 @@ describe("public menu lock", () => {
       "Remote Work",
       "Job Change",
       "International Move",
-    ]);
-    expect(FOOTER_POPULAR_LINKS.map((item) => [item.label, item.href])).toEqual([
-      ["Rent vs Buy", "/situations/rent-vs-buy-manhattan-relocation"],
-      ["NYC Relocation", "/situations/executive-relocation-nyc"],
-      ["Neighborhoods", "/guides#neighborhoods"],
-      ["Kammer Report", "/guides#kammer-report"],
     ]);
   });
 

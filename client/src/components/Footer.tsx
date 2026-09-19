@@ -4,7 +4,6 @@ import { useState } from "react";
 import {
   FOOTER_DARK_META,
   FOOTER_DARK_NAV,
-  FOOTER_POPULAR_LINKS,
 } from "@/data/site-map";
 import { decisionNavigationGroups } from "@/data/decision-navigation";
 import { SITE_LANGUAGE_LOOP, setStoredPreferredLanguage } from "@/data/site-language";
@@ -36,24 +35,6 @@ export function Footer() {
             </Link>
           ))}
         </nav>
-
-        <div className="mt-6">
-          <p className="text-[9px] uppercase tracking-[0.16em] text-brand-cocoa">Popular</p>
-          <nav aria-label="Popular" className="mt-2 flex flex-wrap items-center text-[10px] uppercase tracking-[0.14em] text-brand-navy">
-            {FOOTER_POPULAR_LINKS.map((item, index) => (
-              <span key={item.href + item.label} className="inline-flex items-center">
-                {index > 0 ? (
-                  <span className="px-2 text-brand-cocoa/40" aria-hidden>
-                    ·
-                  </span>
-                ) : null}
-                <Link href={item.href} className="transition-colors hover:text-brand-navy-secondary">
-                  {item.label}
-                </Link>
-              </span>
-            ))}
-          </nav>
-        </div>
       </div>
 
       <div data-ak-charcoal-footer className="border-t border-brand-brass/28 bg-brand-charcoal text-brand-ivory">

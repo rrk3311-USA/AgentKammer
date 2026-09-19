@@ -14,14 +14,6 @@ export type SiteMapGroup = {
   items: readonly SiteMapItem[];
 };
 
-/** Ivory popular row. Four links only. */
-export const FOOTER_POPULAR_LINKS = [
-  { label: "Rent vs Buy", href: "/situations/rent-vs-buy-manhattan-relocation" },
-  { label: "NYC Relocation", href: "/situations/executive-relocation-nyc" },
-  { label: "Neighborhoods", href: "/guides#neighborhoods" },
-  { label: "Kammer Report", href: "/guides#kammer-report" },
-] as const;
-
 /** Charcoal primary row. Home stays in the header; Guidance stays a floating utility. */
 export const FOOTER_DARK_NAV = [
   { label: "Start Here", href: "/buyer-advisory" },
