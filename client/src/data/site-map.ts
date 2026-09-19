@@ -14,7 +14,14 @@ export type SiteMapGroup = {
   items: readonly SiteMapItem[];
 };
 
-/** Dark-grey footer utilities only. Licenses stay off this list. */
+/** Charcoal-bar tail: Terms, Contact, then one Sitemap. Licenses stays off this bar. */
+export const FOOTER_DARK_TAIL_LINKS = [
+  { label: "Terms", href: "/terms" },
+  { label: "Contact", href: "/contact" },
+  { label: "Sitemap", href: "/sitemap" },
+] as const;
+
+/** Dark-grey footer utilities. Licenses stay off this list. */
 export const FOOTER_DARK_LINKS = [
   { label: PUBLIC_PRODUCTS.situation.label, href: PUBLIC_PRODUCTS.situation.href },
   { label: PUBLIC_PRODUCTS.property.label, href: PUBLIC_PRODUCTS.property.href },
@@ -23,9 +30,7 @@ export const FOOTER_DARK_LINKS = [
   { label: "Decision Hub", href: "/account" },
   { label: "Privacy", href: "/privacy" },
   { label: "Guides", href: "/guides" },
-  { label: "Terms", href: "/terms" },
-  { label: "Contact", href: "/contact" },
-  { label: "Sitemap", href: "/sitemap" },
+  ...FOOTER_DARK_TAIL_LINKS,
 ] as const;
 
 export const SITE_MAP_LEGAL: SiteMapItem[] = [

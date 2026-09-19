@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { primaryNav } from "@/components/site-shell";
-import { FOOTER_DARK_LINKS, getSiteMapGroups } from "./site-map";
+import { decisionNavigationGroups } from "./decision-navigation";
+import { FOOTER_DARK_LINKS, FOOTER_DARK_TAIL_LINKS, getSiteMapGroups } from "./site-map";
 import {
   CONTACT_NEXT_STEPS,
   FOOTER_SITEMAP_QUIET,
@@ -66,8 +67,20 @@ describe("public menu lock", () => {
   it("puts one Sitemap link in the dark footer and keeps Licenses off it", () => {
     const sitemapLinks = FOOTER_DARK_LINKS.filter((item) => item.href === "/sitemap");
     expect(sitemapLinks).toEqual([{ label: "Sitemap", href: "/sitemap" }]);
+    expect(FOOTER_DARK_TAIL_LINKS.map((item) => [item.label, item.href])).toEqual([
+      ["Terms", "/terms"],
+      ["Contact", "/contact"],
+      ["Sitemap", "/sitemap"],
+    ]);
+    expect(FOOTER_DARK_LINKS.slice(-3)).toEqual([...FOOTER_DARK_TAIL_LINKS]);
     expect(FOOTER_DARK_LINKS.some((item) => item.href === "/licenses")).toBe(false);
     expect(FOOTER_DARK_LINKS.some((item) => item.label.toLowerCase() === "licenses")).toBe(false);
+  });
+
+  it("keeps Sitemap off the ivory What's Changing nav", () => {
+    const whatsChanging = decisionNavigationGroups.find((group) => group.title === "What's Changing?");
+    expect(whatsChanging?.items.some((item) => item.href === "/sitemap")).toBe(false);
+    expect(whatsChanging?.items.some((item) => item.label.toLowerCase() === "sitemap")).toBe(false);
   });
 
   it("exposes a judgment-first HTML sitemap with licenses only on the page", () => {
