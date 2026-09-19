@@ -29,7 +29,7 @@ function isPrimaryNavActive(href: string, location: string) {
 }
 
 const headerGuidanceClass =
-  "ak-call-button inline-flex items-center px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory";
+  "ak-call-button inline-flex items-center px-5 py-2.5 text-[13px] font-semibold uppercase tracking-[0.14em] text-brand-ivory";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
