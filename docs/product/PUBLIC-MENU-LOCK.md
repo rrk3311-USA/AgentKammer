@@ -10,7 +10,7 @@ Exactly five short labels: Home · Start Here · Situations · Guides · Contact
 
 **Not in top nav:** About · Buildings · Intelligence · Decision Hub · Assessment · Get Qualified · International.
 
-**Header CTA:** pinstripe **Guidance** control (`ak-call-button`) that opens the Advisor. Not a sixth nav item. Never “Request Intelligence.” The floating Guidance chip stays solid — no pinstripe.
+**Header CTA:** filled **Guidance** control (`ak-call-button` without the stripe overlay) that opens the Advisor. Not a sixth nav item. Never “Request Intelligence.” The floating Guidance chip stays solid — no pinstripe.
 
 **Footer:** quiet end — identity, Start Here · Situations · Guides · About, then Privacy · Terms · Contact, then languages. Envelope stays with Contact at the end. No product strip, no Intelligence, no public Decision Hub, no Sitemap competing in charcoal.
 

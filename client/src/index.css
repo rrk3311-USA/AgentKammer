@@ -929,6 +929,10 @@
       0 10px 24px rgba(32, 39, 53, 0.18);
   }
 
+  .ak-call-button--no-stripe::before {
+    content: none;
+  }
+
   .ak-header-shell {
     background:
       linear-gradient(180deg, rgba(42, 52, 71, 0.98), rgba(32, 39, 53, 0.98)),
