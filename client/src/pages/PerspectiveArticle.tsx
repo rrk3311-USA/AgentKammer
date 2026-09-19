@@ -3,6 +3,7 @@ import { ContinueReadingLinks } from "@/components/ContinueReadingLinks";
 import { ExecutiveHousingReportModule } from "@/components/ExecutiveHousingReportModule";
 import { IntelligenceReportsSubscribe } from "@/components/IntelligenceReportsSubscribe";
 import { PerspectiveContentTag } from "@/components/PerspectiveContentTag";
+import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { getBuildingReportBySlug } from "@/data/building-reports";
 import { executiveHousingReports } from "@/data/executive-housing-reports";
@@ -65,10 +66,8 @@ export default function PerspectiveArticle() {
               {formatPerspectiveDate(article.publishedAt)} · {article.readMinutes} min read
             </p>
           </div>
-          <h1 className="mt-4 font-serif text-4xl font-semibold leading-[1.02] md:text-5xl lg:text-6xl">
-            {article.title}
-          </h1>
-          <p className="mt-6 text-lg leading-8 text-brand-ivory/82">{article.excerpt}</p>
+          <h1 className={`mt-4 ${grammar.displayOnDark}`}>{article.title}</h1>
+          <p className={`mt-6 ${grammar.bodyOnDark}`}>{article.excerpt}</p>
         </div>
       </section>
 

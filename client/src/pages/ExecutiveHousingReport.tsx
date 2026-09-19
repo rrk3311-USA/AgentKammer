@@ -2,6 +2,7 @@ import { Link, useRoute } from "wouter";
 import { Card } from "@/components/ui/card";
 import { ContinueYourResearch } from "@/components/ContinueYourResearch";
 import { IntelligenceReportsSubscribe } from "@/components/IntelligenceReportsSubscribe";
+import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { executiveHousingHubLinks } from "@/data/intelligence-hub";
 import {
@@ -61,10 +62,8 @@ export default function ExecutiveHousingReport() {
           <p className="mt-6 text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-brand-ivory/62">
             {report.series} · {formatExecutiveHousingReportDate(report.publishedAt)} · {report.readMinutes} min read
           </p>
-          <h1 className="mt-4 font-serif text-4xl font-semibold leading-[1.02] md:text-5xl lg:text-6xl">
-            {report.title}
-          </h1>
-          <p className="mt-4 text-lg leading-8 text-brand-ivory/84">{report.subtitle}</p>
+          <h1 className={`mt-4 ${grammar.displayOnDark}`}>{report.title}</h1>
+          <p className={`mt-4 ${grammar.bodyOnDark}`}>{report.subtitle}</p>
           <div className="mt-6 flex flex-wrap gap-2">
             {report.markets.map((market) => (
               <span

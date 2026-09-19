@@ -45,7 +45,7 @@ export default function Sitemap() {
             <nav key={group.title} aria-labelledby={`sitemap-${group.title}`}>
               <h2
                 id={`sitemap-${group.title}`}
-                className="font-display text-[clamp(1.4rem,2.4vw,1.85rem)] leading-[0.95] text-brand-navy"
+                className="font-display text-[clamp(1.65rem,2.4vw,1.85rem)] leading-[0.95] text-brand-navy"
               >
                 {group.title}
               </h2>

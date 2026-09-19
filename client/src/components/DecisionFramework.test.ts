@@ -23,4 +23,26 @@ describe("DecisionFramework", () => {
     expect(html).toContain("02");
     expect(html).toContain("What&#x27;s changing?");
   });
+
+  it("renders optional step actions without a second divider system", () => {
+    const html = renderToStaticMarkup(
+      createElement(DecisionFramework, {
+        eyebrow: "How We Work",
+        title: "Four steps. No overlap.",
+        description: "Name what changed first.",
+        items: [
+          {
+            step: "01",
+            title: "What's Changing?",
+            text: "Name the life change.",
+            href: undefined,
+            cta: "Explore situations",
+            onClick: () => undefined,
+          },
+        ],
+      }),
+    );
+    expect(html).toContain("Explore situations");
+    expect(html).toContain("type=\"button\"");
+  });
 });

@@ -245,7 +245,7 @@ export default function AdjustableRateMortgage() {
           <p className="text-[11px] uppercase tracking-[0.2em] text-brand-brass">
             Educational guide
           </p>
-          <h1 className="mt-3 font-display text-[clamp(1.85rem,4vw,2.75rem)] font-medium leading-[0.98] tracking-[-0.02em] text-brand-navy">
+          <h1 className="mt-3 font-display text-[clamp(3.25rem,6vw,4.5rem)] leading-[0.92] text-brand-navy">
             ARM & Fixed vs ARM
           </h1>
           <p className="mt-2 text-sm font-semibold uppercase tracking-[0.16em] text-brand-navy/70">

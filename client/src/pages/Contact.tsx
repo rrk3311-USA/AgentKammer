@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { PageHero, PageSection, SectionHeading } from "@/components/site-shell";
+import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { Link } from "wouter";
 import {
@@ -254,7 +255,7 @@ export default function Contact() {
         </div>
 
         <div id="request-call" className="rounded-card border border-brand-border bg-white p-8 shadow-soft lg:p-10">
-          <h2 className="font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">
+          <h2 className={grammar.section}>
             {isSituation ? "Assessment Intake" : copy.eyebrow}
           </h2>
           <p className="mt-3 text-sm leading-7 text-brand-graphite">

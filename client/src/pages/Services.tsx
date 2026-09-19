@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { CTA } from "@/components/site-shell";
+import { DecisionFramework } from "@/components/DecisionFramework";
+import { EditorialHero, grammar } from "@/components/visual-grammar";
 import { decisionNavigationGroups } from "@/data/decision-navigation";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
@@ -10,10 +12,10 @@ const decisions = decisionNavigationGroups.find((group) => group.title === "What
 const understand = decisionNavigationGroups.find((group) => group.title === "What Are You Trying to Understand?");
 
 const journey = [
-  { step: "01", title: "What's Changing?", href: "#whats-changing", text: "Name the life change." },
-  { step: "02", title: "Situation Assessment", href: "/belonging", text: "Build your situation profile." },
-  { step: "03", title: "Situation", href: "#whats-changing", text: "Read the situation that fits." },
-  { step: "04", title: "Strategy Session", href: "/contact?intent=strategy", text: "A live hour when you want judgment, not a listing tour." },
+  { step: "01", title: "What's Changing?", text: "Name the life change.", href: "#whats-changing", cta: "Open life changes" },
+  { step: "02", title: "Situation Assessment", text: "Build your situation profile.", href: "/belonging", cta: "Start assessment" },
+  { step: "03", title: "Situation", text: "Read the situation that fits.", href: "#whats-changing", cta: "Browse situations" },
+  { step: "04", title: "Strategy Session", text: "A live hour when you want judgment, not a listing tour.", href: "/contact?intent=strategy", cta: "Request the hour" },
 ] as const;
 
 function BriefList({ items }: { items: { label: string; href: string }[] }) {
@@ -25,11 +27,11 @@ function BriefList({ items }: { items: { label: string; href: string }[] }) {
           href={item.href}
           className="group flex items-baseline justify-between gap-6 border-b border-brand-border py-6"
         >
-          <span className="font-display text-2xl leading-none text-brand-navy transition-colors group-hover:text-brand-brass md:text-3xl">
+          <span className={`${grammar.rowTitle} transition-colors group-hover:text-brand-navy-secondary`}>
             {item.label}
           </span>
           <ArrowRight
-            className="h-4 w-4 shrink-0 text-brand-navy/35 transition-transform group-hover:translate-x-0.5 group-hover:text-brand-brass"
+            className="h-4 w-4 shrink-0 text-brand-navy/35 transition-transform group-hover:translate-x-0.5 group-hover:text-brand-navy-secondary"
             strokeWidth={1.5}
           />
         </Link>
@@ -53,12 +55,10 @@ function OsSection({
 }) {
   return (
     <section id={id} className="scroll-mt-28 border-b border-brand-border">
-      <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-20">
-        <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">{eyebrow}</p>
-        <h2 className="mt-4 max-w-2xl font-display text-[clamp(2rem,3.5vw,3rem)] leading-[0.95] text-brand-navy">
-          {title}
-        </h2>
-        <p className="mt-4 max-w-xl text-base leading-7 text-brand-graphite">{description}</p>
+      <div className={grammar.pad}>
+        <p className={grammar.eyebrow}>{eyebrow}</p>
+        <h2 className={`mt-4 max-w-2xl ${grammar.section}`}>{title}</h2>
+        <p className={`mt-5 ${grammar.body}`}>{description}</p>
         <div className="mt-10">
           <BriefList items={items} />
         </div>
@@ -91,31 +91,18 @@ export default function Services() {
 
   return (
     <main className="bg-brand-ivory">
-      <section className="border-b border-brand-border">
-        <div className="mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-24">
-          <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">Situations</p>
-          <h1 className="mt-5 max-w-4xl font-display text-[clamp(2.8rem,5.5vw,5.25rem)] leading-[0.9] tracking-[-0.03em] text-brand-navy">
-            Explore your situation, not a property search.
-          </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-brand-graphite">
-            Decision Intelligence starts here: what changed in your life, what decision you face, and what you still need to understand. Each page is a Situation: research, not a product.
-          </p>
+      <EditorialHero
+        eyebrow="Situations"
+        title="Explore your situation, not a property search."
+        description="Decision Intelligence starts here: what changed in your life, what decision you face, and what you still need to understand. Each page is a Situation: research, not a product."
+      />
 
-          <ol className="mt-12 grid gap-4 border-t border-brand-border pt-10 sm:grid-cols-2 lg:grid-cols-4">
-            {journey.map((item) => (
-              <li key={item.step}>
-                <Link href={item.href} className="group block">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-cocoa">{item.step}</p>
-                  <p className="mt-2 font-display text-xl leading-tight text-brand-navy transition-colors group-hover:text-brand-brass">
-                    {item.title}
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-brand-graphite">{item.text}</p>
-                </Link>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      <DecisionFramework
+        eyebrow="Start Here"
+        title="A clear path through the decision."
+        description="Four steps. No overlap. Name what changed, then diagnose, then read, then a live hour only if you want judgment."
+        items={journey}
+      />
 
       <OsSection
         id="whats-changing"

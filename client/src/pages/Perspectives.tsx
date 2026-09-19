@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-shell";
+import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { formatPerspectiveDate, perspectives } from "@/data/perspectives";
 import { PerspectiveContentTag } from "@/components/PerspectiveContentTag";
@@ -54,7 +55,7 @@ export default function Perspectives() {
               <Link
                 key={item.slug}
                 href={`/insights/${item.slug}`}
-                className="group rounded-card border border-brand-border bg-brand-ivory p-8 transition-colors hover:border-brand-navy/30"
+                className="group border-b border-brand-border bg-brand-ivory py-8 transition-colors hover:bg-white"
               >
                 <div className="flex flex-wrap items-center gap-3">
                   <PerspectiveContentTag contentType={item.contentType} />
@@ -62,7 +63,7 @@ export default function Perspectives() {
                     {formatPerspectiveDate(item.publishedAt)} · {item.readMinutes} min
                   </p>
                 </div>
-                <h3 className="mt-4 font-display text-4xl leading-[0.98] tracking-[-0.03em] text-brand-navy">{item.title}</h3>
+                <h3 className={`mt-4 ${grammar.rowTitle}`}>{item.title}</h3>
                 <p className="mt-4 max-w-3xl text-sm leading-7 text-brand-graphite">{item.excerpt}</p>
                 <span className="mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy">
                   Continue reading

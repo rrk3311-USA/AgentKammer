@@ -238,7 +238,7 @@ export default function FixedRateMortgage() {
           </p>
           <div className="mt-3 flex flex-wrap items-start justify-between gap-4">
             <div>
-              <h1 className="font-display text-[clamp(1.85rem,4vw,2.75rem)] font-medium leading-[0.98] tracking-[-0.02em] text-brand-navy">
+              <h1 className="font-display text-[clamp(3.25rem,6vw,4.5rem)] leading-[0.92] text-brand-navy">
                 Fixed-Rate Mortgage
               </h1>
               <p className="mt-2 text-sm font-semibold uppercase tracking-[0.16em] text-brand-navy/70">

@@ -1,6 +1,8 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-shell";
+import { DecisionFramework } from "@/components/DecisionFramework";
+import { LibraryList, grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { perspectives } from "@/data/perspectives";
 import { buildingReports, formatBuildingReportDate } from "@/data/building-reports";
@@ -68,51 +70,19 @@ export default function IntelligenceHome() {
         art="decision-framework"
       />
 
-      <PageSection>
-        <SectionHeading
-          eyebrow="The Ladder"
-          title="How the work is offered in public."
-          description="One sequence. No overlapping SKUs. Verdicts use Pick, Consider, Wait, Pass, and who the address is for. Not a /100 score."
-        />
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {ladder.map((level, index) => {
-            const body = (
-              <>
-                <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-                <h3 className="mt-5 font-display text-3xl leading-[0.95] tracking-[-0.03em] text-brand-navy">
-                  {level.name}
-                </h3>
-                <p className="mt-4 text-sm leading-7 text-brand-graphite">{level.text}</p>
-                <span className="mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy">
-                  {level.cta}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-                </span>
-              </>
-            );
-            const className = "group rounded-card border border-brand-border bg-white p-8 text-left transition-colors hover:border-brand-navy/30";
-            if ("openChat" in level && level.openChat) {
-              return (
-                <button key={level.name} type="button" onClick={openDecisionAssistant} className={className}>
-                  {body}
-                </button>
-              );
-            }
-            return (
-              <Link key={level.name} href={level.href} className={className}>
-                {body}
-              </Link>
-            );
-          })}
-        </div>
-        <p className="mt-8 max-w-2xl text-sm leading-7 text-brand-graphite/80">
-          {PUBLIC_PRODUCTS.livability.label} remains {PUBLIC_PRODUCTS.livability.desk} desk language. It is not a fifth card on this ladder, and it is not a Property Assessment.
-        </p>
-        <p className="mt-3 text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">
-          Show verdicts · {KAMMER_VERDICTS.join(" · ")} · WHO
-        </p>
-      </PageSection>
+      <DecisionFramework
+        eyebrow="The Ladder"
+        title="How the work is offered in public."
+        description={`One sequence. No overlapping SKUs. ${PUBLIC_PRODUCTS.livability.label} stays on the Tools desk, not as a fifth card. Verdicts use ${KAMMER_VERDICTS.join(", ")}, and WHO. Not a /100 score.`}
+        items={ladder.map((level, index) => ({
+          step: String(index + 1).padStart(2, "0"),
+          title: level.name,
+          text: level.text,
+          href: "openChat" in level && level.openChat ? undefined : level.href,
+          cta: level.cta,
+          onClick: "openChat" in level && level.openChat ? openDecisionAssistant : undefined,
+        }))}
+      />
 
       <section className="border-y border-brand-border bg-white">
         <PageSection>
@@ -121,15 +91,15 @@ export default function IntelligenceHome() {
             title="By invitation, after a Strategy Session."
             description="These continue the relationship. They are not sold as equal primary offers."
           />
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
-            {afterSession.map((offer) => (
-              <div key={offer.name} className="border border-brand-border bg-brand-ivory p-6">
-                <p className="text-[11px] uppercase tracking-[0.2em] text-brand-brass">By invitation</p>
-                <p className="mt-4 font-display text-2xl leading-tight text-brand-navy">{offer.name}</p>
-                <p className="mt-3 text-sm leading-7 text-brand-graphite">{offer.text}</p>
-              </div>
-            ))}
-          </div>
+          <LibraryList
+            items={afterSession.map((offer) => ({
+              eyebrow: "By invitation",
+              title: offer.name,
+              text: offer.text,
+              href: "/contact?intent=strategy",
+              cta: "After a Strategy Session",
+            }))}
+          />
         </PageSection>
       </section>
 
@@ -139,21 +109,15 @@ export default function IntelligenceHome() {
           title="Study the building before the showing."
           description="Editorial address studies. Free to read, distinct from a Property Assessment."
         />
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {buildingReports.map((report) => (
-            <Link
-              key={report.slug}
-              href={`/building-reports/${report.slug}`}
-              className="rounded-card border border-brand-border bg-white p-7 transition-colors hover:border-brand-navy/30"
-            >
-              <p className="text-[11px] uppercase tracking-[0.18em] text-brand-brass">
-                {formatBuildingReportDate(report.publishedAt)} · {report.readMinutes} min
-              </p>
-              <h3 className="mt-4 font-display text-3xl text-brand-navy">{report.buildingName}</h3>
-              <p className="mt-3 text-sm leading-7 text-brand-graphite">{report.executiveSummary[0]}</p>
-            </Link>
-          ))}
-        </div>
+        <LibraryList
+          items={buildingReports.map((report) => ({
+            eyebrow: `${formatBuildingReportDate(report.publishedAt)} · ${report.readMinutes} min`,
+            title: report.buildingName,
+            text: report.executiveSummary[0],
+            href: `/building-reports/${report.slug}`,
+            cta: "Read profile",
+          }))}
+        />
       </PageSection>
 
       <section className="border-t border-brand-border bg-white">
@@ -163,22 +127,16 @@ export default function IntelligenceHome() {
             title="Notes that sharpen the next decision."
             description="Kept for depth and SEO. Surfaced here under Intelligence, not as a separate primary nav item."
           />
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {insightPreview.map((item) => (
-              <Link
-                key={item.slug}
-                href={`/insights/${item.slug}`}
-                className="border border-brand-border bg-brand-ivory p-6 transition-colors hover:border-brand-brass"
-              >
-                <p className="font-display text-2xl leading-tight text-brand-navy">{item.title}</p>
-                <p className="mt-3 text-sm leading-7 text-brand-graphite">{item.excerpt}</p>
-              </Link>
-            ))}
-          </div>
-          <Link
-            href="/insights"
-            className="mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy"
-          >
+          <LibraryList
+            columns={3}
+            items={insightPreview.map((item) => ({
+              title: item.title,
+              text: item.excerpt,
+              href: `/insights/${item.slug}`,
+              cta: "Read insight",
+            }))}
+          />
+          <Link href="/insights" className={`${grammar.textLink} mt-8`}>
             All insights
             <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
           </Link>

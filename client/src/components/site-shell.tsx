@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { ArrowRight, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { grammar } from "@/components/visual-grammar";
 
 /** Locked primary header: exactly these six. Intelligence, Assessment, Get Qualified, and International stay out. */
 export const primaryNav = [
@@ -88,7 +89,7 @@ export function PageSection({
   className?: string;
   children: ReactNode;
 }) {
-  return <section className={cn("mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-24", className)}>{children}</section>;
+  return <section className={cn(grammar.pad, className)}>{children}</section>;
 }
 
 export function SectionHeading({
@@ -104,12 +105,10 @@ export function SectionHeading({
 }) {
   return (
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
-      <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">{eyebrow}</p>
-      <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.94] tracking-[-0.03em] text-brand-navy">
-        {title}
-      </h2>
+      <p className={grammar.eyebrow}>{eyebrow}</p>
+      <h2 className={cn("mt-4", grammar.section)}>{title}</h2>
       {description ? (
-        <p className="mt-6 text-base leading-8 text-brand-graphite lg:text-lg">{description}</p>
+        <p className="mt-5 max-w-xl text-base leading-7 text-brand-graphite lg:text-[17px] lg:leading-8">{description}</p>
       ) : null}
     </div>
   );
@@ -464,19 +463,15 @@ export function PageHero({
       ) : null}
       <div className="absolute inset-0 bg-brand-navy/58" />
       <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/72 to-brand-navy/32" />
-      <PageSection className="relative grid gap-12 py-20 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.78fr)] lg:items-end lg:py-28">
+      <PageSection className="relative grid gap-12 py-20 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.78fr)] lg:items-end lg:py-24">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</p>
-          <h1 className="mt-5 max-w-4xl font-display text-[clamp(3rem,7vw,6rem)] leading-[0.9] tracking-[-0.04em] text-brand-ivory">
-            {title}
-          </h1>
+          <p className={grammar.eyebrowOnDark}>{eyebrow}</p>
+          <h1 className={cn("mt-4 max-w-[18ch]", grammar.displayOnDark)}>{title}</h1>
         </div>
         <div className="space-y-6">
           {!image ? <ArchitecturalHeroDrawing eyebrow={eyebrow} title={title} variant={art} /> : null}
-          <p className="max-w-xl text-base leading-8 text-brand-ivory/78 lg:text-lg">{description}</p>
-          {kicker ? (
-            <div className="border border-brand-brass/30 bg-brand-navy/55 p-6 backdrop-blur-sm">{kicker}</div>
-          ) : null}
+          <p className={grammar.bodyOnDark}>{description}</p>
+          {kicker ? <div className="border-l border-brand-stone pl-5">{kicker}</div> : null}
         </div>
       </PageSection>
     </section>
@@ -529,11 +524,9 @@ export function CTA({
       <PageSection className="py-16 lg:py-20">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</p>
-            <h2 className="mt-4 font-display text-[clamp(2rem,3.8vw,3.25rem)] leading-[0.95] tracking-[-0.03em] text-brand-ivory">
-              {title}
-            </h2>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-brand-ivory/74">{description}</p>
+            <p className={grammar.eyebrowOnDark}>{eyebrow}</p>
+            <h2 className={cn("mt-4", grammar.sectionOnDark)}>{title}</h2>
+            <p className={cn("mt-5", grammar.bodyOnDark)}>{description}</p>
           </div>
           <div className="grid gap-3 sm:min-w-[16rem]">
             {href.startsWith("#") ? (

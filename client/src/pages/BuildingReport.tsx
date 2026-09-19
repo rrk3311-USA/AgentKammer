@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { CTA, PageHero, PageSection, ReportSubnav, SectionHeading } from "@/components/site-shell";
+import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { buildingReports, formatBuildingReportDate } from "@/data/building-reports";
 
@@ -49,9 +50,7 @@ export default function BuildingReport() {
               <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">
                 {formatBuildingReportDate(building.publishedAt)} · {building.readMinutes} min
               </p>
-              <h3 className="mt-5 font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">
-                {building.buildingName}
-              </h3>
+              <h3 className={`mt-5 ${grammar.rowTitle}`}>{building.buildingName}</h3>
               <p className="mt-2 text-sm uppercase tracking-[0.14em] text-brand-cocoa">{building.location}</p>
               <p className="mt-4 text-sm leading-7 text-brand-graphite">{building.executiveSummary[0]}</p>
               <span className="mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy">
@@ -74,7 +73,7 @@ export default function BuildingReport() {
             {comingSoon.map((building) => (
               <div key={building.name} className="rounded-card border border-brand-border bg-brand-ivory p-8">
                 <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">Coming soon</p>
-                <h3 className="mt-5 font-display text-3xl leading-[0.95] tracking-[-0.03em] text-brand-navy">{building.name}</h3>
+                <h3 className={`mt-5 ${grammar.rowTitle}`}>{building.name}</h3>
                 <p className="mt-4 text-sm leading-7 text-brand-graphite">{building.note}</p>
               </div>
             ))}

@@ -1,4 +1,6 @@
 import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-shell";
+import { DecisionFramework } from "@/components/DecisionFramework";
+import { LibraryList, grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { PUBLIC_PRODUCTS } from "@/data/public-menu";
 
@@ -88,14 +90,12 @@ export default function Advisory() {
       />
 
       <PageSection className="max-w-[42rem]">
-        <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Relationship, Not Calls</p>
-        <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] leading-[0.94] text-brand-navy">
-          The product is the advisory relationship.
-        </h2>
-        <p className="mt-8 text-lg leading-9 text-brand-graphite">
+        <p className={grammar.eyebrow}>Relationship, Not Calls</p>
+        <h2 className={`mt-4 ${grammar.section}`}>The product is the advisory relationship.</h2>
+        <p className={`mt-8 ${grammar.bodyWide}`}>
           A conversation is how a session happens to be delivered. It is not what a client is paying for. What a client is paying for is judgment applied to a real decision: whether to buy, wait, renovate, sell, or do nothing at all.
         </p>
-        <p className="mt-6 text-lg leading-9 text-brand-graphite">
+        <p className={`mt-6 ${grammar.bodyWide}`}>
           That means a single Strategy Session can be a complete, successful engagement. Continuity, when it is useful, is offered after the hour.
         </p>
       </PageSection>
@@ -115,7 +115,7 @@ export default function Advisory() {
               >
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand-cocoa">0{index + 1}</p>
                 <div>
-                  <h3 className="font-display text-2xl leading-[0.98] tracking-[-0.02em] text-brand-navy">{item.title}</h3>
+                  <h3 className={grammar.rowTitle}>{item.title}</h3>
                   <p className="mt-2 text-[11px] uppercase tracking-[0.14em] text-brand-cocoa">{item.format}</p>
                 </div>
                 <p className="max-w-2xl text-sm leading-7 text-brand-graphite lg:text-[15px]">{item.text}</p>
@@ -132,42 +132,30 @@ export default function Advisory() {
           title="By invitation, after a Strategy Session."
           description="Dossier and memberships are continuity. They are not first cards on the public shelf."
         />
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {afterSession.map((tier) => (
-            <div key={tier.title} className="border border-brand-border bg-white p-8">
-              <p className="text-[11px] uppercase tracking-[0.16em] text-brand-brass">By invitation</p>
-              <h3 className="mt-3 font-display text-3xl leading-[0.95] tracking-[-0.02em] text-brand-navy">{tier.title}</h3>
-              {"price" in tier && tier.price ? (
-                <p className="mt-3 text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">{tier.price}</p>
-              ) : null}
-              <p className="mt-5 text-sm leading-7 text-brand-graphite">{tier.text}</p>
-            </div>
-          ))}
-        </div>
+        <LibraryList
+          items={afterSession.map((tier) => ({
+            eyebrow: "price" in tier && tier.price ? `By invitation · ${tier.price}` : "By invitation",
+            title: tier.title,
+            text: tier.text,
+            href: "/contact?intent=strategy",
+            cta: "After a Strategy Session",
+          }))}
+        />
         <p className="mt-8 max-w-2xl text-sm leading-7 text-brand-graphite/80">
           Price bands are current guidance for planning purposes. Final terms are confirmed directly with the practice before any membership begins.
         </p>
       </PageSection>
 
-      <section className="border-y border-brand-border bg-white">
-        <PageSection>
-          <SectionHeading
-            eyebrow="How It Begins"
-            title="From research to a written recommendation."
-          />
-          <ol className="mt-12 space-y-10">
-            {journey.map((step, index) => (
-              <li key={step.title} className="grid gap-3 border-b border-brand-border pb-8 last:border-b-0 lg:grid-cols-[80px_minmax(0,1fr)] lg:gap-8">
-                <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand-cocoa">0{index + 1}</p>
-                <div>
-                  <p className="font-display text-2xl text-brand-navy">{step.title}</p>
-                  <p className="mt-3 max-w-2xl text-base leading-8 text-brand-graphite">{step.text}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </PageSection>
-      </section>
+      <DecisionFramework
+        eyebrow="How It Begins"
+        title="From research to a written recommendation."
+        description="Most relationships begin with Guidance or the Situation Assessment. Continuity is optional."
+        items={journey.map((step, index) => ({
+          step: `0${index + 1}`,
+          title: step.title,
+          text: step.text,
+        }))}
+      />
 
       <CTA
         title="Begin with a Strategy Session."

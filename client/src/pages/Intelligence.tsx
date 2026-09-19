@@ -1,4 +1,5 @@
 import { CTA, PageHero, PageSection, ReportSubnav, SectionHeading } from "@/components/site-shell";
+import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 const briefs = [
@@ -68,9 +69,7 @@ export default function Intelligence() {
           {briefs.map((brief) => (
             <article key={brief.title} className="rounded-card border border-brand-border bg-white p-8">
               <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">{brief.date}</p>
-              <h3 className="mt-4 font-display text-3xl leading-[1.05] tracking-[-0.03em] text-brand-navy md:text-4xl">
-                {brief.title}
-              </h3>
+              <h3 className={`mt-4 ${grammar.rowTitle}`}>{brief.title}</h3>
               <div className="mt-6 grid gap-6 lg:grid-cols-2">
                 <div>
                   <p className="text-[11px] uppercase tracking-[0.18em] text-brand-cocoa">Observation</p>

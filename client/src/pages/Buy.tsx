@@ -1,6 +1,8 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-shell";
+import { CTA, PageHero } from "@/components/site-shell";
+import { DecisionFramework } from "@/components/DecisionFramework";
+import { LibraryList, grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { openDecisionAssistant } from "@/lib/decision-assistant";
 
@@ -38,27 +40,27 @@ const journey = [
 const scenarios = [
   {
     title: "Executive relocating to Manhattan",
-    trigger: "Start date in 60-120 days, household in motion, limited touring bandwidth.",
-    likely: "Often rent first or buy only in turnkey condominiums with clear service culture.",
+    text: "Trigger: start date in 60-120 days, household in motion, limited touring bandwidth. Often rent first or buy only in turnkey condominiums with clear service culture.",
     href: "/situations/executive-relocation-nyc",
+    cta: "Open related brief",
   },
   {
     title: "First Manhattan purchase",
-    trigger: "Leaving a rental or another city without a building thesis yet.",
-    likely: "Neighborhood and ownership structure before apartment romance. Condo vs co-op clarity early.",
+    text: "Trigger: leaving a rental or another city without a building thesis yet. Neighborhood and ownership structure before apartment romance. Condo vs co-op clarity early.",
     href: "/situations/first-home-buyers-nyc",
+    cta: "Open related brief",
   },
   {
     title: "Growing family / schools",
-    trigger: "Bedroom count, school logistics, or outdoor access stopped fitting.",
-    likely: "Geography first, then building rules that support the household.",
+    text: "Trigger: bedroom count, school logistics, or outdoor access stopped fitting. Geography first, then building rules that support the household.",
     href: "/situations/new-baby-growing-family-nyc",
+    cta: "Open related brief",
   },
   {
     title: "Sell, keep, or wait",
-    trigger: "Life changed but the financial or emotional case for selling is unclear.",
-    likely: "Sometimes the highest-value move is to hold, renovate, or rent the current home.",
+    text: "Trigger: life changed but the financial or emotional case for selling is unclear. Sometimes the highest-value move is to hold, renovate, or rent the current home.",
     href: "/situations#decisions",
+    cta: "Open related brief",
   },
 ];
 
@@ -79,76 +81,28 @@ export default function Buy() {
         art="decision-framework"
       />
 
-      <PageSection>
-        <button
-          type="button"
-          onClick={openDecisionAssistant}
-          className="mb-10 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
-        >
-          Ask the Guidance Advisor
-          <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-        </button>
-        <SectionHeading
-          eyebrow="How We Work"
-          title="Four steps. No overlap."
-          description="If you only remember one sequence: name what changed, take the Situation Assessment, read the brief that fits, then get a written strategy when you want judgment, not inventory."
-        />
-        <div className="mt-12 border-y border-brand-border">
-          {journey.map((step) => (
-            <div
-              key={step.step}
-              className="grid gap-5 border-b border-brand-border py-8 last:border-b-0 lg:grid-cols-[80px_minmax(0,1fr)_auto] lg:items-start lg:gap-8"
-            >
-              <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand-cocoa">{step.step}</p>
-              <div>
-                <h3 className="font-display text-[clamp(1.85rem,3vw,2.7rem)] leading-[0.96] tracking-[-0.03em] text-brand-navy">
-                  {step.title}
-                </h3>
-                <p className="mt-3 max-w-2xl text-sm leading-7 text-brand-graphite lg:text-[15px]">{step.text}</p>
-              </div>
-              <Link
-                href={step.href}
-                className="inline-flex items-center gap-2 self-start text-[11px] uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-brass lg:mt-2"
-              >
-                {step.cta}
-                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-              </Link>
-            </div>
-          ))}
-        </div>
-      </PageSection>
+      <DecisionFramework
+        eyebrow="How We Work"
+        title="Four steps. No overlap."
+        description="If you only remember one sequence: name what changed, take the Situation Assessment, read the brief that fits, then get a written strategy when you want judgment, not inventory."
+        items={journey}
+        action={
+          <button type="button" onClick={openDecisionAssistant} className={grammar.textLink}>
+            Open Guidance
+            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+          </button>
+        }
+      />
 
-      <section className="border-y border-brand-border bg-white">
-        <PageSection>
-          <SectionHeading
-            eyebrow="Common Situations"
-            title="How the work usually begins in practice."
-            description="Patterns that help you recognize which Decision Brief should come next after the assessment."
-          />
-          <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            {scenarios.map((item) => (
-              <Link
-                key={item.title}
-                href={item.href}
-                className="group rounded-card border border-brand-border bg-brand-ivory p-7 transition-colors hover:border-brand-navy/30"
-              >
-                <h3 className="font-display text-3xl leading-[0.95] tracking-[-0.03em] text-brand-navy">{item.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-brand-graphite">
-                  <span className="text-brand-cocoa">Trigger: </span>
-                  {item.trigger}
-                </p>
-                <p className="mt-3 text-sm leading-7 text-brand-graphite">
-                  <span className="text-brand-cocoa">Often points to: </span>
-                  {item.likely}
-                </p>
-                <span className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy">
-                  Open related brief
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </PageSection>
+      <section className="border-b border-brand-border bg-brand-ivory">
+        <div className={grammar.pad}>
+          <p className={grammar.eyebrow}>Common Situations</p>
+          <h2 className={`mt-4 ${grammar.section}`}>How the work usually begins in practice.</h2>
+          <p className={`mt-5 ${grammar.body}`}>
+            Patterns that help you recognize which Decision Brief should come next after the assessment.
+          </p>
+          <LibraryList items={scenarios} />
+        </div>
       </section>
 
       <CTA

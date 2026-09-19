@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { CTA, PageSection, ReportSubnav, SectionHeading } from "@/components/site-shell";
+import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 const paper = "#F4EFE4";
@@ -92,7 +93,7 @@ export default function NewYorkMarket() {
         <div className="absolute inset-0 flex items-start sm:items-center">
           <div className="w-full px-6 pt-14 pb-10 sm:pt-20 md:pl-[12%] lg:px-10 lg:pb-12 lg:pl-[clamp(4rem,18vw,14rem)] lg:pt-24 xl:pl-[clamp(5rem,22vw,18rem)]">
             <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">Building Reports</p>
-            <h1 className="mt-6 max-w-[12ch] font-display text-[clamp(2.35rem,9vw,4.75rem)] leading-[0.92] tracking-[-0.03em] text-brand-navy sm:mt-4 sm:max-w-[16ch] sm:text-[clamp(2.4rem,5.2vw,4.75rem)]">
+            <h1 className={`mt-6 max-w-[16ch] sm:mt-4 ${grammar.display}`}>
               Neighborhood Guides
             </h1>
           </div>
@@ -115,7 +116,7 @@ export default function NewYorkMarket() {
             >
               <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(14rem,22rem)] md:items-stretch">
                 <div className="p-8">
-                  <h3 className="font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">{item.name}</h3>
+                  <h3 className={grammar.rowTitle}>{item.name}</h3>
                   <p className="mt-4 max-w-3xl text-sm leading-7 text-brand-graphite">{item.note}</p>
                   <div className="mt-6 grid gap-4 border-t border-brand-border pt-5 text-sm leading-7 text-brand-graphite md:grid-cols-3">
                     <p>

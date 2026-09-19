@@ -1,5 +1,7 @@
 import { Link } from "wouter";
 import { CTA, PageHero, PageSection, SectionHeading } from "@/components/site-shell";
+import { DecisionFramework } from "@/components/DecisionFramework";
+import { grammar } from "@/components/visual-grammar";
 import { InternationalStrategyForm } from "@/components/InternationalStrategyForm";
 import {
   INTERNATIONAL_HUB,
@@ -49,7 +51,7 @@ export default function InternationalHub() {
                       <p className="text-2xl" aria-hidden>
                         {c.flagEmoji}
                       </p>
-                      <h3 className="mt-4 font-display text-2xl text-brand-navy group-hover:underline">
+                      <h3 className={`mt-4 ${grammar.rowTitle} group-hover:text-brand-navy-secondary`}>
                         {c.countryName}
                       </h3>
                       <p className="mt-1 text-sm text-brand-cocoa">{c.countryNameNative}</p>
@@ -94,25 +96,16 @@ export default function InternationalHub() {
         </PageSection>
       </section>
 
-      <PageSection>
-        <SectionHeading eyebrow="Process" title="How a Manhattan purchase typically unfolds." />
-        <ol className="mt-12 space-y-8">
-          {INTERNATIONAL_PROCESS.map((step, i) => (
-            <li
-              key={step.title}
-              className="grid gap-3 border-b border-brand-border pb-8 lg:grid-cols-[80px_1fr]"
-            >
-              <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand-cocoa">
-                0{i + 1}
-              </p>
-              <div>
-                <p className="font-display text-2xl text-brand-navy">{step.title}</p>
-                <p className="mt-2 max-w-2xl text-base leading-8 text-brand-graphite">{step.text}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </PageSection>
+      <DecisionFramework
+        eyebrow="Process"
+        title="How a Manhattan purchase typically unfolds."
+        description="The same sequence, localized for language and country after you start from the hub."
+        items={INTERNATIONAL_PROCESS.map((step, i) => ({
+          step: `0${i + 1}`,
+          title: step.title,
+          text: step.text,
+        }))}
+      />
 
       <section className="border-y border-brand-border bg-white" id="strategy-request">
         <PageSection className="max-w-[52rem]">
