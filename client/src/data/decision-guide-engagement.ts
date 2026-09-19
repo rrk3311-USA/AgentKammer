@@ -205,7 +205,7 @@ const byPath: Record<string, Partial<PageEngagement>> = {
   },
   "/advisory": {
     headline: "Advisory, not inventory",
-    nudge: "I can help you decide if a Strategy Session is the right next step.",
+    nudge: "I can help you decide whether Guidance, a Situation Assessment, or a written next step is useful.",
     greeting: "Residential advisory here is for judgment, not a listing tour. What decision are you stuck on?",
   },
   "/contact": {

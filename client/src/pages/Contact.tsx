@@ -14,6 +14,7 @@ import {
   CONTACT_NEXT_STEPS,
   PUBLIC_PRODUCTS,
   resolvePublicIntent,
+  resolveShelvedIntent,
   type PublicProductId,
 } from "@/data/public-menu";
 import { openDecisionAssistant } from "@/lib/decision-assistant";
@@ -45,7 +46,7 @@ const budgetRanges = [
 function routingNote(budgetRange: string) {
   if (budgetRange.includes("$5M+")) return "This lane is reviewed by Raphi.";
   if (budgetRange === "Exploring / not ready" || budgetRange === "Not sure / private") {
-    return "Exploring stays with the Guidance Advisor and Decision Hub until a Strategy Session is useful.";
+    return "Exploring stays with the Guidance Advisor and Decision Hub until a next step is clear.";
   }
   if (budgetRange) return "Ready buyers under $5M may be introduced to Diego Micheo at Douglas Elliman.";
   return "";
@@ -53,14 +54,14 @@ function routingNote(budgetRange: string) {
 const nextSteps = [...CONTACT_NEXT_STEPS, "Not sure"] as const;
 
 const intakeCopy: Record<
-  PublicProductId | "default",
+  PublicProductId | "strategy" | "default",
   { title: string; eyebrow: string; description: string; nextStep: string; decisionType?: string }
 > = {
   default: {
     title: "Tell us the next step.",
     eyebrow: "Begin",
     description:
-      "Share what is changing and which public step you want: Guidance, Situation Assessment, Property Assessment, Livability Score, or a Strategy Session.",
+      "Share what is changing and which public step you want: Guidance, Situation Assessment, Property Assessment, or a Livability Score.",
     nextStep: "",
   },
   guidance: {
@@ -90,20 +91,22 @@ const intakeCopy: Record<
     nextStep: PUBLIC_PRODUCTS.livability.label,
   },
   strategy: {
-    title: "Request a Strategy Session.",
-    eyebrow: PUBLIC_PRODUCTS.strategy.label,
-    description: PUBLIC_PRODUCTS.strategy.text,
-    nextStep: PUBLIC_PRODUCTS.strategy.label,
+    title: "Tell us the next step.",
+    eyebrow: "Begin",
+    description:
+      "Share what is changing and which public step you want: Guidance, Situation Assessment, Property Assessment, or a Livability Score.",
+    nextStep: "",
   },
 };
 
 function readIntent() {
   if (typeof window === "undefined") return null;
-  return resolvePublicIntent(new URLSearchParams(window.location.search).get("intent"));
+  const raw = new URLSearchParams(window.location.search).get("intent");
+  return resolvePublicIntent(raw) ?? resolveShelvedIntent(raw);
 }
 
 export default function Contact() {
-  const [intent, setIntent] = useState<PublicProductId | null>(null);
+  const [intent, setIntent] = useState<PublicProductId | "strategy" | null>(null);
   const copy = intakeCopy[intent ?? "default"];
   const isSituation = intent === "situation";
 
@@ -215,7 +218,7 @@ export default function Contact() {
               Prefer the Situation Assessment? Find out if you’re living where you belong →
             </Link>
             <Link href="/advisory" className="block text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass">
-              See how a Strategy Session works. Memberships follow by invitation →
+              See how Residential Advisory works. Memberships follow by invitation →
             </Link>
           </div>
         }
@@ -232,7 +235,7 @@ export default function Contact() {
             }
             description={
               isSituation
-                ? "A few filters keep the first profile useful: what changed, what drains you, timing, and whether you want a Strategy Session after the assessment."
+                ? "A few filters keep the first profile useful: what changed, what drains you, timing, and what a useful next step would be."
                 : "A few filters keep the first reply useful: what changed, what decision is on the table, timing, budget or readiness, and the best next step."
             }
           />

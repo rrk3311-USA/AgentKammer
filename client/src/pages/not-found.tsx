@@ -11,15 +11,15 @@ export default function NotFound() {
           <p className={grammar.eyebrow}>Page Not Found</p>
           <h1 className={`mt-4 ${grammar.display}`}>This path does not have a decision brief yet.</h1>
           <p className={`mt-6 ${grammar.body}`}>
-            Start with the main Decision Brief library, or begin with a Strategy Session if the question is specific to a building, neighborhood, timeline, or life change.
+            Start with the main Decision Brief library, or write if the question is specific to a building, neighborhood, timeline, or life change.
           </p>
           <div className="mt-8 flex flex-wrap gap-6">
             <Link href="/situations" className={grammar.textLink}>
               Open Decision Briefs
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
-            <Link href="/contact?intent=strategy" className={grammar.textLink}>
-              Begin a Strategy Session
+            <Link href="/contact" className={grammar.textLink}>
+              Contact
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
           </div>

@@ -10,27 +10,41 @@ import {
 import {
   CONTACT_NEXT_STEPS,
   FOOTER_SITEMAP_QUIET,
+  GET_QUALIFIED,
   KAMMER_VERDICTS,
   PUBLIC_PRODUCTS,
+  SHELVED_OFFERS,
   resolvePublicIntent,
+  resolveShelvedIntent,
 } from "./public-menu";
 
 describe("public menu lock", () => {
-  it("exposes exactly the five locked products", () => {
+  it("exposes exactly the four locked public products", () => {
     expect(Object.keys(PUBLIC_PRODUCTS)).toEqual([
       "guidance",
       "situation",
       "property",
       "livability",
-      "strategy",
     ]);
     expect([...CONTACT_NEXT_STEPS]).toEqual([
       "Guidance",
       "Situation Assessment",
       "Property Assessment",
       "Livability Score",
-      "Strategy Session",
     ]);
+    expect(Object.keys(PUBLIC_PRODUCTS)).not.toContain("strategy");
+    expect(CONTACT_NEXT_STEPS).not.toContain("Strategy Session");
+    expect(CONTACT_NEXT_STEPS).not.toContain("Get Qualified");
+  });
+
+  it("keeps Strategy Session shelved and Get Qualified as a footer onboard tool", () => {
+    expect(SHELVED_OFFERS.strategy.label).toBe("Strategy Session");
+    expect(SHELVED_OFFERS.strategy.href).toBe("/contact?intent=strategy");
+    expect(Object.keys(SHELVED_OFFERS)).toEqual(["strategy"]);
+    expect(GET_QUALIFIED).toEqual({ label: "Get Qualified", href: "/qualify" });
+    expect(resolvePublicIntent("strategy")).toBeNull();
+    expect(resolveShelvedIntent("strategy")).toBe("strategy");
+    expect(resolvePublicIntent("qualify")).toBeNull();
   });
 
   it("maps legacy belonging intent to Situation Assessment", () => {
@@ -63,6 +77,7 @@ describe("public menu lock", () => {
       ["Tools", "/tools"],
       ["Intelligence", "/intelligence"],
     ]);
+    expect(FOOTER_SITEMAP_QUIET.some((item) => item.href === "/qualify")).toBe(true);
     const headerHrefs = new Set(primaryNav.map((item) => item.href));
     for (const item of FOOTER_SITEMAP_QUIET) {
       expect(headerHrefs.has(item.href)).toBe(false);
@@ -75,6 +90,7 @@ describe("public menu lock", () => {
       ["Situations", "/situations"],
       ["Guides", "/guides"],
       ["About", "/about"],
+      ["Get Qualified", "/qualify"],
     ]);
     expect(FOOTER_DARK_META.map((item) => [item.label, item.href])).toEqual([
       ["Privacy", "/privacy"],
@@ -88,6 +104,8 @@ describe("public menu lock", () => {
     expect(FOOTER_DARK_LINKS.some((item) => item.href === "/account")).toBe(false);
     expect(FOOTER_DARK_LINKS.some((item) => item.label.includes("Assessment"))).toBe(false);
     expect(FOOTER_DARK_LINKS.some((item) => item.label === "Strategy Session")).toBe(false);
+    expect(FOOTER_DARK_LINKS.filter((item) => item.label === "Get Qualified")).toHaveLength(1);
+    expect(FOOTER_DARK_LINKS.some((item) => item.href === "/qualify")).toBe(true);
     expect(FOOTER_DARK_LINKS.some((item) => item.href === "/licenses")).toBe(false);
     expect(FOOTER_DARK_LINKS.some((item) => item.label.toLowerCase() === "email")).toBe(false);
   });
@@ -99,11 +117,11 @@ describe("public menu lock", () => {
       "First Home",
       "Growing Family",
       "Marriage",
-      "Divorce",
+      "Retirement",
       "Empty Nest",
       "Aging Parents",
       "Inheritance",
-      "Retirement",
+      "Divorce",
       "Remote Work",
       "Job Change",
       "International Move",
@@ -127,5 +145,9 @@ describe("public menu lock", () => {
     expect(doors.some((item) => item.label === "Buildings")).toBe(false);
     expect(doors.some((item) => item.label === "Overview" && item.href === "/building-reports")).toBe(false);
     expect(doors.some((item) => item.label === "Market Briefs")).toBe(false);
+    expect(doors.some((item) => item.label === "Strategy Session")).toBe(false);
+    expect(doors.filter((item) => item.label === "Get Qualified")).toHaveLength(1);
+    expect(doors.some((item) => item.href === "/qualify")).toBe(true);
+    expect(doors.some((item) => item.href === "/contact?intent=strategy")).toBe(false);
   });
 });

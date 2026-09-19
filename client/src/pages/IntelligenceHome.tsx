@@ -30,17 +30,17 @@ const ladder = [
     cta: "Request Property Assessment",
   },
   {
-    name: PUBLIC_PRODUCTS.strategy.label,
-    text: PUBLIC_PRODUCTS.strategy.text,
-    href: PUBLIC_PRODUCTS.strategy.href,
-    cta: "Request a Strategy Session",
+    name: PUBLIC_PRODUCTS.livability.label,
+    text: PUBLIC_PRODUCTS.livability.text,
+    href: PUBLIC_PRODUCTS.livability.href,
+    cta: "Request Livability Score",
   },
 ] as const;
 
 const afterSession = [
   {
     name: "Acquisition Dossier",
-    text: "Full acquisition judgment. Offered after a Strategy Session, by invitation. Not a first public card.",
+    text: "Full acquisition judgment. Offered by invitation after the relationship begins. Not a first public card.",
   },
   {
     name: "Advisory memberships",
@@ -57,7 +57,7 @@ export default function IntelligenceHome() {
   usePageMetadata({
     title: "Intelligence",
     description:
-      "One public ladder: Guidance, Situation Assessment, Property Assessment, and a Strategy Session. Livability Score stays on the Tools desk.",
+      "One public ladder: Guidance, Situation Assessment, Property Assessment, and Livability Score.",
     path: "/intelligence",
   });
 
@@ -65,15 +65,15 @@ export default function IntelligenceHome() {
     <main className="bg-brand-ivory">
       <PageHero
         eyebrow="Intelligence"
-        title="One public ladder. Five names."
-        description="Guidance, Situation Assessment, Property Assessment, Livability Score on the Tools desk, and a Strategy Session. Dossier and memberships follow the hour, by invitation."
+        title="One public ladder. Four names."
+        description="Guidance, Situation Assessment, Property Assessment, and Livability Score on the Tools desk. Dossier and memberships follow by invitation."
         art="decision-framework"
       />
 
       <DecisionFramework
         eyebrow="The Ladder"
         title="How the work is offered in public."
-        description={`One sequence. No overlapping SKUs. ${PUBLIC_PRODUCTS.livability.label} stays on the Tools desk, not as a fifth card. Verdicts use ${KAMMER_VERDICTS.join(", ")}, and WHO. Not a /100 score.`}
+        description={`One sequence. No overlapping SKUs. ${PUBLIC_PRODUCTS.livability.label} stays on the Tools desk, not merged into Property Assessment. Verdicts use ${KAMMER_VERDICTS.join(", ")}, and WHO. Not a /100 score.`}
         items={ladder.map((level, index) => ({
           step: String(index + 1).padStart(2, "0"),
           title: level.name,
@@ -87,8 +87,8 @@ export default function IntelligenceHome() {
       <section className="border-y border-brand-border bg-white">
         <PageSection>
           <SectionHeading
-            eyebrow="After the hour"
-            title="By invitation, after a Strategy Session."
+            eyebrow="By invitation"
+            title="Continuity when the work continues."
             description="These continue the relationship. They are not sold as equal primary offers."
           />
           <LibraryList
@@ -96,8 +96,8 @@ export default function IntelligenceHome() {
               eyebrow: "By invitation",
               title: offer.name,
               text: offer.text,
-              href: "/contact?intent=strategy",
-              cta: "After a Strategy Session",
+              href: "/contact",
+              cta: "Write to the practice",
             }))}
           />
         </PageSection>
@@ -145,7 +145,7 @@ export default function IntelligenceHome() {
 
       <CTA
         title="Start with Guidance, or the Situation Assessment."
-        description="If an address is already in play, request a Property Assessment. A Strategy Session is the live hour when you want judgment in the room."
+        description="If an address is already in play, request a Property Assessment. If daily fit is the question, request a Livability Score."
         href="/belonging"
         label="Situation Assessment"
         eyebrow="Start Here"
