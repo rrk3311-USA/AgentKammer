@@ -1065,48 +1065,49 @@
   .ak-guidance-star {
     position: relative;
     display: block;
-    height: 4.18125rem;
-    overflow: hidden;
+    width: 100%;
+    height: 1.75rem;
+    overflow: visible;
   }
 
   .ak-guidance-star-wake {
     position: absolute;
     left: 0;
     top: 50%;
-    height: 2.46px;
-    width: calc(100% * var(--ak-star, 0.1));
+    height: 5px;
+    width: calc(100% * var(--ak-star, 0.36));
     transform: translateY(-50%);
     background: linear-gradient(
       90deg,
       rgba(176, 141, 87, 0) 0%,
-      rgba(176, 141, 87, 0.16) 24%,
-      rgba(212, 180, 95, 0.48) 74%,
-      rgba(255, 244, 214, 0.82) 100%
+      rgba(176, 141, 87, 0.22) 18%,
+      rgba(212, 180, 95, 0.62) 68%,
+      rgba(255, 244, 214, 0.95) 100%
     );
-    box-shadow: 0 0 18px rgba(176, 141, 87, calc(0.12 + var(--ak-star, 0.1) * 0.32));
+    box-shadow: 0 0 22px rgba(176, 141, 87, calc(0.18 + var(--ak-star, 0.36) * 0.4));
     transition: width 1100ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .ak-guidance-star-head {
     position: absolute;
-    left: calc(100% * var(--ak-star, 0.1));
+    left: calc(100% * var(--ak-star, 0.36));
     top: 50%;
-    width: 9.84px;
-    height: 9.84px;
+    width: 16px;
+    height: 16px;
     background: #f6e7b8;
-    transform: translate(-50%, -50%) rotate(45deg);
-    box-shadow: 0 0 16px 4px rgba(212, 180, 95, 0.32);
+    transform: translate(-40%, -50%) rotate(45deg);
+    box-shadow: 0 0 18px 5px rgba(212, 180, 95, 0.42);
     animation: ak-guidance-sleep 5.4s ease-in-out infinite;
   }
 
   .ak-guidance-star-speck {
     position: absolute;
-    left: calc(100% * var(--ak-star, 0.1) * (0.16 + var(--ak-speck, 0) * 0.12));
-    top: calc(50% + ((var(--ak-speck, 0) - 2) * 7.38px));
-    width: 2.46px;
-    height: 2.46px;
-    background: rgba(244, 228, 180, 0.62);
-    box-shadow: 0 0 8px rgba(212, 180, 95, 0.36);
+    left: calc(100% * var(--ak-star, 0.36) * (0.18 + var(--ak-speck, 0) * 0.14));
+    top: calc(50% + ((var(--ak-speck, 0) - 2) * 4px));
+    width: 3.5px;
+    height: 3.5px;
+    background: rgba(244, 228, 180, 0.72);
+    box-shadow: 0 0 10px rgba(212, 180, 95, 0.42);
     animation: ak-guidance-sleep 6.6s ease-in-out infinite;
     animation-delay: calc(var(--ak-speck, 0) * 0.85s);
   }

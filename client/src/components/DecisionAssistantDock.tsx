@@ -60,7 +60,7 @@ function GuidanceStarProgress({ completion }: { completion: number }) {
   return (
     <span
       className="ak-guidance-star"
-      style={{ "--ak-star": String(Math.max(0.1, ratio)) } as CSSProperties}
+      style={{ "--ak-star": String(Math.max(0.36, ratio)) } as CSSProperties}
       aria-label={`Guidance progress ${completion} of 6`}
     >
       <span className="ak-guidance-star-wake" aria-hidden />
@@ -994,7 +994,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
         >
           <div className="flex min-h-0 flex-1 flex-col">
             <div
-              className="ak-guidance-sheet-chrome flex min-h-11 min-w-0 items-center gap-2 px-4 py-1 [touch-action:none]"
+              className="ak-guidance-sheet-chrome flex min-h-9 min-w-0 items-center gap-2 px-3 py-0.5 [touch-action:none]"
               onPointerDown={(event) => beginSheetDrag(event.clientY)}
               onPointerUp={(event) => finishSheetDrag(event.clientY)}
               onPointerCancel={() => {
@@ -1005,7 +1005,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
               <button
                 type="button"
                 onClick={toggleSheet}
-                className="flex min-h-11 min-w-0 flex-1 items-center gap-2 text-left"
+                className="flex min-h-0 min-w-0 flex-1 items-center text-left"
                 aria-label="Collapse Guidance Advisor"
               >
                 <GuidanceStarProgress completion={blueprintCompletion} />
@@ -1014,7 +1014,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
               <button
                 type="button"
                 onClick={collapseSheet}
-                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-button text-[#f5f2eb]/50 transition-colors hover:text-[#f5f2eb]"
+                className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-button text-[#f5f2eb]/50 transition-colors hover:text-[#f5f2eb]"
                 aria-label="Close Guidance Advisor"
                 data-testid="button-guidance-close"
               >
