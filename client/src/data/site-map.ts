@@ -32,9 +32,9 @@ export const FOOTER_DARK_NAV = [
 
 /** Charcoal quiet row. Envelope sits with Contact. Sitemap is not a competing item. */
 export const FOOTER_DARK_META = [
-  { label: "Contact", href: "/contact" },
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 /** Combined charcoal links for lock tests. No products, Intelligence, Decision Hub, Sitemap, or duplicate Guides. */

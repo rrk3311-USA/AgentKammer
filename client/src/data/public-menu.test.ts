@@ -78,9 +78,9 @@ describe("public menu lock", () => {
       ["About", "/about"],
     ]);
     expect(FOOTER_DARK_META.map((item) => [item.label, item.href])).toEqual([
-      ["Contact", "/contact"],
       ["Privacy", "/privacy"],
       ["Terms", "/terms"],
+      ["Contact", "/contact"],
     ]);
     expect(FOOTER_DARK_LINKS).toEqual([...FOOTER_DARK_NAV, ...FOOTER_DARK_META]);
     expect(FOOTER_DARK_LINKS.filter((item) => item.label === "Guides")).toHaveLength(1);
