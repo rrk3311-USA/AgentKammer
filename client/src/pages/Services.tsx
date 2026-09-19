@@ -79,7 +79,7 @@ export default function Services() {
         </div>
       </ModuleSection>
 
-      <ModuleSection id="decisions" surface="mist">
+      <ModuleSection id="decisions" surface="stone">
         <div className={grammar.padLoose}>
           <ModuleIntro
             eyebrow="02 · Paths"
@@ -90,7 +90,7 @@ export default function Services() {
         </div>
       </ModuleSection>
 
-      <ModuleSection id="understand" surface="white">
+      <ModuleSection id="understand" surface="pause">
         <div className={grammar.padLoose}>
           <ModuleIntro
             eyebrow="03 · Research"

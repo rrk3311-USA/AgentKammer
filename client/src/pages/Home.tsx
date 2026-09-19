@@ -82,7 +82,7 @@ export default function Home() {
         items={howWeDecide}
       />
 
-      <section className="border-b border-brand-border bg-brand-ivory">
+      <section className="border-b border-brand-border bg-brand-navy/[0.05]">
         <div className="mx-auto w-full max-w-site px-6 py-20 lg:px-10 lg:py-24">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
@@ -99,12 +99,12 @@ export default function Home() {
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
           </div>
-          <div className="mt-12 grid gap-px bg-brand-border sm:grid-cols-3">
+          <div className="ak-felt-grid mt-12 grid sm:grid-cols-3">
             {featuredBriefs.map((brief) => (
               <Link
                 key={brief.slug}
                 href={`/situations/${brief.slug}`}
-                className="group bg-brand-ivory p-7 transition-colors hover:bg-white"
+                className="ak-felt-item group p-7"
               >
                 <p className="text-[11px] uppercase tracking-[0.18em] text-brand-cocoa">{brief.eyebrow}</p>
                 <p className="mt-3 font-display text-[1.65rem] leading-none text-brand-navy transition-colors group-hover:text-brand-navy-secondary">

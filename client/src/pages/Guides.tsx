@@ -76,7 +76,7 @@ export default function Guides() {
       />
       <ReportSubnav />
 
-      <ModuleSection id="decision-guides" surface="white">
+      <ModuleSection id="decision-guides" surface="ivory">
         <div className={grammar.padLoose}>
           <ModuleIntro
             eyebrow="Decision Guides"
@@ -105,7 +105,7 @@ export default function Guides() {
         </div>
       </ModuleSection>
 
-      <ModuleSection id="neighborhoods" surface="mist">
+      <ModuleSection id="neighborhoods" surface="stone">
         <div className={grammar.padLoose}>
           <ModuleIntro
             eyebrow="Neighborhoods"
@@ -123,7 +123,7 @@ export default function Guides() {
         </div>
       </ModuleSection>
 
-      <ModuleSection id="kammer-report" surface="stone">
+      <ModuleSection id="kammer-report" surface="pause">
         <div className={grammar.padLoose}>
           <ModuleIntro
             eyebrow="Property Assessment"
@@ -149,7 +149,7 @@ export default function Guides() {
               })),
             ]}
           />
-          <div className="mt-16 border-t border-brand-border pt-12">
+          <div className="ak-felt-rule mt-16 border-t pt-12">
             <p className={grammar.eyebrow}>Recent notes</p>
             <ul className="mt-8 space-y-8">
               {kammerMarketNotes.map((note) => (
