@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { PageHero, PageSection } from "@/components/site-shell";
+import { grammar } from "@/components/visual-grammar";
 import { getSiteMapGroups } from "@/data/site-map";
 import { PUBLIC_PRODUCTS } from "@/data/public-menu";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
@@ -28,7 +29,7 @@ export default function Sitemap() {
         <div className="mb-10 max-w-2xl">
           <p className="text-[10px] uppercase tracking-[0.18em] text-brand-cocoa">Guidance</p>
           <p className="mt-3 text-base leading-8 text-brand-graphite">
-            {PUBLIC_PRODUCTS.guidance.text} The sticky Guidance band under the footer stays where it is.
+            {PUBLIC_PRODUCTS.guidance.text} Guidance is one chip: the floating tab, or that same chip nested in the charcoal footer.
           </p>
           <button
             type="button"
@@ -45,7 +46,7 @@ export default function Sitemap() {
             <nav key={group.title} aria-labelledby={`sitemap-${group.title}`}>
               <h2
                 id={`sitemap-${group.title}`}
-                className="font-display text-[clamp(1.4rem,2.4vw,1.85rem)] leading-[0.95] text-brand-navy"
+                className={grammar.rowTitle}
               >
                 {group.title}
               </h2>

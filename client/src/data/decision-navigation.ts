@@ -33,7 +33,7 @@ const understandItems: DecisionNavItem[] = [
   { label: "Pied-à-Terre", href: "/situations/pied-a-terre-buyers-nyc" },
   { label: "Foreign Buyers", href: "/situations/foreign-buyers-new-york" },
   { label: "Investment / 1031", href: "/situations/1031-exchange-new-york" },
-  { label: "Building Profiles", href: "/building-reports" },
+  { label: "Building Profiles", href: "/building-reports/individual-buildings" },
 ];
 
 /** Primary OS surface groups - used on /situations and Research Library search. */
@@ -78,17 +78,16 @@ export const decisionNavigationGroups: DecisionNavGroup[] = [
       { label: "Chelsea", href: "/situations/chelsea-buyers-nyc" },
       { label: "Hudson Yards", href: "/situations/hudson-yards-buyers-nyc" },
       { label: "Financial District", href: "/situations/financial-district-buyers-nyc" },
-      { label: "All Neighborhood Guides", href: "/building-reports/neighborhood-guides" },
+      { label: "All Neighborhood Guides", href: "/guides#neighborhoods" },
     ],
   },
   {
-    title: "Building Intelligence Library",
-    description: "A knowledge resource. Buildings, neighborhoods, and market evidence after the decision model is clear.",
+    title: "Guides library",
+    description: "One knowledge library: decision frameworks, neighborhoods, and the Kammer Report.",
     items: [
-      { label: "Buildings", href: "/building-reports" },
-      { label: "Neighborhoods", href: "/building-reports/neighborhood-guides" },
-      { label: "Building Reports", href: "/building-reports/individual-buildings" },
-      { label: "Market Briefs", href: "/building-reports/market-briefs" },
+      { label: "Decision Guides", href: "/guides#decision-guides" },
+      { label: "Neighborhoods", href: "/guides#neighborhoods" },
+      { label: "Kammer Report", href: "/guides#kammer-report" },
       { label: "Life Changes", href: "/situations" },
       { label: "Insights", href: "/insights" },
     ],

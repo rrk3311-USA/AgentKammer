@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowRight } from "lucide-react";
+import { DarkStatement, grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 type Place = {
@@ -153,7 +153,7 @@ const chapters = [
 function PlaceRow({ place }: { place: Place }) {
   return (
     <li className="group grid gap-2 border-t border-brand-navy/10 py-7 first:border-t-0 sm:grid-cols-[minmax(10rem,0.9fr)_minmax(0,1.4fr)] sm:gap-8 sm:py-8">
-      <h3 className="font-display text-[clamp(1.65rem,2.6vw,2.15rem)] leading-[1.05] tracking-[-0.02em] text-brand-navy transition-colors group-hover:text-brand-brass">
+      <h3 className={`${grammar.rowTitle} transition-colors group-hover:text-brand-navy-secondary`}>
         {place.name}
       </h3>
       <div>
@@ -180,51 +180,26 @@ export default function ManhattanExplained() {
 
   return (
     <main className="bg-brand-ivory text-brand-ink">
-      <style>{`
- @keyframes me-fade-up {
- from { opacity: 0; transform: translateY(18px); }
- to { opacity: 1; transform: translateY(0); }
- }
- @keyframes me-ken {
- from { transform: scale(1.04); }
- to { transform: scale(1); }
- }
- .me-fade-up {
- animation: me-fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
- }
- .me-fade-up-delay {
- animation: me-fade-up 1s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
- }
- .me-cover-zoom {
- animation: me-ken 14s ease-out both;
- }
- `}</style>
-
-      {/* Cover art banner */}
-      <section className="relative overflow-hidden bg-brand-midnight text-brand-ivory">
-        <div className="relative min-h-[min(78vh,720px)] w-full">
+      <section className="relative overflow-hidden bg-brand-navy text-brand-ivory">
+        <div className="relative min-h-[min(62vh,560px)] w-full">
           <img
             src="/guides/manhattan/manhattan-explained-cover.png"
             alt="Editorial cover: Lower Manhattan skyline at night with a translucent golden map of the island"
-            className="me-cover-zoom absolute inset-0 h-full w-full object-cover object-[center_40%]"
+            className="absolute inset-0 h-full w-full object-cover object-[center_40%] saturate-[0.68] contrast-[0.98] brightness-[0.74]"
           />
           <div
-            className="absolute inset-0 bg-gradient-to-t from-brand-midnight via-brand-midnight/55 to-brand-midnight/25"
+            className="absolute inset-0 bg-gradient-to-t from-brand-navy/92 via-brand-navy/28 to-brand-navy/10"
             aria-hidden
           />
           <div
-            className="absolute inset-0 bg-gradient-to-r from-brand-midnight/80 via-brand-midnight/35 to-transparent"
+            className="absolute inset-0 bg-gradient-to-r from-brand-navy/28 via-transparent to-brand-navy/12"
             aria-hidden
           />
 
-          <div className="relative mx-auto flex min-h-[min(78vh,720px)] max-w-site flex-col justify-end px-6 pb-14 pt-28 sm:px-8 lg:px-10 lg:pb-20">
-            <p className="me-fade-up text-[10px] uppercase tracking-[0.28em] text-brand-champagne">
-              Agent Kammer · Field notes
-            </p>
-            <h1 className="me-fade-up-delay mt-5 max-w-[12ch] font-display text-[clamp(3rem,7.5vw,6.25rem)] font-medium leading-[0.88] tracking-[-0.03em]">
-              Manhattan Explained
-            </h1>
-            <p className="me-fade-up-delay mt-6 max-w-md text-lg leading-8 text-brand-ivory/80">
+          <div className="relative mx-auto flex min-h-[min(62vh,560px)] max-w-site flex-col justify-end px-6 pb-14 pt-28 lg:px-10 lg:pb-20">
+            <p className={grammar.eyebrowOnDark}>Agent Kammer · Field notes</p>
+            <h1 className={`mt-4 max-w-[12ch] ${grammar.displayOnDark}`}>Manhattan Explained</h1>
+            <p className={`mt-6 ${grammar.bodyOnDark}`}>
               The stories inside the names. From Lenape ground to Dutch farms
               to twentieth-century portmanteaus.
             </p>
@@ -236,12 +211,8 @@ export default function ManhattanExplained() {
       <section className="border-b border-brand-border bg-brand-ivory">
         <div className="mx-auto max-w-site px-6 py-16 sm:px-8 lg:grid lg:grid-cols-[1fr_1.35fr] lg:gap-16 lg:px-10 lg:py-24">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">
-              Opening
-            </p>
-            <h2 className="mt-4 font-display text-[clamp(2rem,3.5vw,3rem)] leading-[0.95] text-brand-navy">
-              Island of many hills. And many names
-            </h2>
+            <p className={grammar.eyebrow}>Opening</p>
+            <h2 className={`mt-4 ${grammar.section}`}>Island of many hills. And many names</h2>
           </div>
           <div className="mt-8 space-y-6 text-[17px] leading-8 text-brand-graphite lg:mt-0">
             <p>
@@ -266,12 +237,8 @@ export default function ManhattanExplained() {
         <div className="mx-auto max-w-site px-6 py-14 sm:px-8 lg:px-10 lg:py-16">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">
-                The chapters
-              </p>
-              <h2 className="mt-3 font-display text-[clamp(1.85rem,3vw,2.5rem)] leading-[0.95] text-brand-navy">
-                Four ways a place gets named
-              </h2>
+              <p className={grammar.eyebrow}>The chapters</p>
+              <h2 className={`mt-3 ${grammar.section}`}>Four ways a place gets named</h2>
             </div>
             <p className="max-w-sm text-sm leading-6 text-brand-graphite/75">
               Dutch ground · forts & nicknames · people & institutions · the map
@@ -290,7 +257,7 @@ export default function ManhattanExplained() {
                   <img
                     src={chapter.art}
                     alt=""
-                    className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
+                    className="h-full w-full object-cover"
                   />
                 </div>
                 <div
@@ -301,7 +268,7 @@ export default function ManhattanExplained() {
                   <p className="text-[9px] uppercase tracking-[0.2em] text-brand-champagne/85 sm:text-[10px]">
                     {chapter.kicker}
                   </p>
-                  <p className="mt-1 font-display text-[clamp(1.05rem,2vw,1.35rem)] leading-tight text-brand-ivory">
+                  <p className={`mt-1 ${grammar.rowTitle} text-brand-ivory`}>
                     {chapter.title}
                   </p>
                 </div>
@@ -340,12 +307,8 @@ export default function ManhattanExplained() {
               </figure>
 
               <div>
-                <p className="text-[10px] uppercase tracking-[0.26em] text-brand-brass">
-                  {chapter.kicker}
-                </p>
-                <h2 className="mt-4 font-display text-[clamp(2.25rem,4.5vw,3.75rem)] leading-[0.92] tracking-[-0.02em] text-brand-navy">
-                  {chapter.title}
-                </h2>
+                <p className={grammar.eyebrow}>{chapter.kicker}</p>
+                <h2 className={`mt-4 ${grammar.section}`}>{chapter.title}</h2>
                 <p className="mt-6 max-w-xl text-base leading-8 text-brand-graphite sm:text-lg">
                   {chapter.lead}
                 </p>
@@ -361,44 +324,13 @@ export default function ManhattanExplained() {
         </section>
       ))}
 
-      {/* Closing */}
-      <section className="bg-brand-midnight text-brand-ivory">
-        <div className="mx-auto max-w-site px-6 py-16 sm:px-8 lg:grid lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:gap-16 lg:px-10 lg:py-24">
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-champagne">
-              Closing
-            </p>
-            <h2 className="mt-4 max-w-xl font-display text-[clamp(2rem,4vw,3.25rem)] leading-[0.94]">
-              Every block has a story. Start with the name.
-            </h2>
-            <p className="mt-6 max-w-lg text-base leading-8 text-brand-ivory/75">
-              Popular maps compress contested histories. Where origins are
-              debated. Turtle Bay, Hell's Kitchen. We leave the uncertainty
-              visible. The rest is the city's own long memory, written in street
-              language.
-            </p>
-          </div>
-          <div className="mt-10 flex flex-col gap-4 lg:mt-0 lg:items-end">
-            <Link
-              href="/building-reports/neighborhood-guides"
-              className="group inline-flex items-center gap-3 border border-brand-champagne/40 px-5 py-4 text-[11px] uppercase tracking-[0.18em] text-brand-champagne transition hover:border-brand-champagne hover:bg-brand-champagne/10"
-            >
-              Neighborhood guides
-              <ArrowRight
-                className="h-4 w-4 transition-transform group-hover:translate-x-1"
-                strokeWidth={1.5}
-              />
-            </Link>
-            <Link
-              href="/guides"
-              className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-ivory/55 transition hover:text-brand-ivory"
-            >
-              All guides
-              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <DarkStatement
+        eyebrow="Closing"
+        title="Every block has a story. Start with the name."
+        description="Popular maps compress contested histories. Where origins are debated. Turtle Bay, Hell's Kitchen. We leave the uncertainty visible. The rest is the city's own long memory, written in street language."
+        href="/guides#neighborhoods"
+        label="Neighborhoods"
+      />
     </main>
   );
 }

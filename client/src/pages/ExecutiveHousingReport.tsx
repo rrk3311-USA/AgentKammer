@@ -2,6 +2,7 @@ import { Link, useRoute } from "wouter";
 import { Card } from "@/components/ui/card";
 import { ContinueYourResearch } from "@/components/ContinueYourResearch";
 import { IntelligenceReportsSubscribe } from "@/components/IntelligenceReportsSubscribe";
+import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { executiveHousingHubLinks } from "@/data/intelligence-hub";
 import {
@@ -61,10 +62,8 @@ export default function ExecutiveHousingReport() {
           <p className="mt-6 text-[0.66rem] font-semibold uppercase tracking-[0.18em] text-brand-ivory/62">
             {report.series} · {formatExecutiveHousingReportDate(report.publishedAt)} · {report.readMinutes} min read
           </p>
-          <h1 className="mt-4 font-serif text-4xl font-semibold leading-[1.02] md:text-5xl lg:text-6xl">
-            {report.title}
-          </h1>
-          <p className="mt-4 text-lg leading-8 text-brand-ivory/84">{report.subtitle}</p>
+          <h1 className={`mt-4 ${grammar.displayOnDark}`}>{report.title}</h1>
+          <p className={`mt-4 ${grammar.bodyOnDark}`}>{report.subtitle}</p>
           <div className="mt-6 flex flex-wrap gap-2">
             {report.markets.map((market) => (
               <span
@@ -117,7 +116,7 @@ export default function ExecutiveHousingReport() {
       <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Intelligence Hub</p>
-          <h2 className="mt-3 font-serif text-3xl font-semibold text-brand-midnight">Continue From This Report</h2>
+          <h2 className={`mt-3 ${grammar.section}`}>Continue From This Report</h2>
           <p className="mt-4 text-base leading-7 text-brand-graphite/72">
             One report, many spokes. Building reports, relocation guides, and profession-specific reads.
           </p>
@@ -125,7 +124,7 @@ export default function ExecutiveHousingReport() {
             {liveHubLinks.map((item) => (
               <Link key={item.href} href={item.href}>
                 <Card className="h-full rounded-none border border-brand-graphite/12 bg-brand-ivory/40 px-5 py-4 shadow-none transition hover:border-brand-champagne/45">
-                  <p className="font-serif text-lg font-semibold text-brand-midnight">{item.label}</p>
+                  <p className={grammar.rowTitle}>{item.label}</p>
                   <p className="mt-2 text-sm leading-6 text-brand-graphite/68">{item.description}</p>
                 </Card>
               </Link>
@@ -137,7 +136,7 @@ export default function ExecutiveHousingReport() {
       <section className="border-t border-brand-midnight/10 bg-brand-warm px-6 py-14 lg:px-10 lg:py-16">
         <div className="mx-auto max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">International Syndication</p>
-          <h2 className="mt-3 font-serif text-3xl font-semibold text-brand-midnight">Published For Global Executive Search</h2>
+          <h2 className={`mt-3 ${grammar.section}`}>Published For Global Executive Search</h2>
           <div className="mt-8 space-y-4">
             {report.syndication.map((item) => (
               <Card
@@ -145,7 +144,7 @@ export default function ExecutiveHousingReport() {
                 className="rounded-none border border-brand-graphite/12 bg-white/80 px-5 py-5 shadow-none"
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-champagne-dark">{item.code}</p>
-                <h3 className="mt-2 font-serif text-xl font-semibold text-brand-midnight">{item.headline}</h3>
+                <h3 className={`mt-2 ${grammar.rowTitle}`}>{item.headline}</h3>
                 <p className="mt-3 text-sm leading-6 text-brand-graphite/72">{item.excerpt}</p>
               </Card>
             ))}
@@ -157,9 +156,9 @@ export default function ExecutiveHousingReport() {
         <section className="border-t border-brand-midnight/10 bg-brand-midnight px-6 py-14 text-brand-ivory lg:px-10">
           <div className="mx-auto max-w-3xl">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-champagne">Related Perspective</p>
-            <h2 className="mt-3 font-serif text-3xl font-semibold">{relatedPerspective.title}</h2>
+            <h2 className={`mt-3 ${grammar.sectionOnDark}`}>{relatedPerspective.title}</h2>
             <p className="mt-4 text-base leading-7 text-brand-ivory/82">{relatedPerspective.excerpt}</p>
-            <Link href={`/insights/${relatedPerspective.slug}`} className="mt-6 inline-block font-serif text-sm text-brand-champagne transition hover:text-brand-ivory">
+            <Link href={`/insights/${relatedPerspective.slug}`} className="mt-6 inline-block text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-champagne transition hover:text-brand-ivory">
               Read perspective →
             </Link>
           </div>

@@ -1,5 +1,6 @@
 import { Link } from "wouter";
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
+import { DarkStatement, grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 const quickAnswers = [
@@ -199,43 +200,25 @@ export default function LiensEasements() {
 
   return (
     <main className="bg-brand-ivory text-brand-ink">
-      <style>{`
-        @keyframes le-fade-up {
-          from { opacity: 0; transform: translateY(18px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes le-ken {
-          from { transform: scale(1.04); }
-          to { transform: scale(1); }
-        }
-        .le-fade-up { animation: le-fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
-        .le-fade-up-delay { animation: le-fade-up 1s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both; }
-        .le-cover-zoom { animation: le-ken 14s ease-out both; }
-      `}</style>
-
-      <section className="relative overflow-hidden bg-brand-midnight text-brand-ivory">
-        <div className="relative min-h-[min(78vh,720px)] w-full">
+      <section className="relative overflow-hidden bg-brand-navy text-brand-ivory">
+        <div className="relative min-h-[min(62vh,560px)] w-full">
           <img
             src="/guides/liens-easements/liens-easements-cover.png"
             alt="Editorial cover art: survey map with an easement path and lien seal motifs"
-            className="le-cover-zoom absolute inset-0 h-full w-full object-cover object-center"
+            className="absolute inset-0 h-full w-full object-cover object-center saturate-[0.68] contrast-[0.98] brightness-[0.74]"
           />
           <div
-            className="absolute inset-0 bg-gradient-to-t from-brand-midnight via-brand-midnight/60 to-brand-midnight/30"
+            className="absolute inset-0 bg-gradient-to-t from-brand-navy/92 via-brand-navy/28 to-brand-navy/10"
             aria-hidden
           />
           <div
-            className="absolute inset-0 bg-gradient-to-r from-brand-midnight/85 via-brand-midnight/40 to-transparent"
+            className="absolute inset-0 bg-gradient-to-r from-brand-navy/28 via-transparent to-brand-navy/12"
             aria-hidden
           />
-          <div className="relative mx-auto flex min-h-[min(78vh,720px)] max-w-site flex-col justify-end px-6 pb-14 pt-28 sm:px-8 lg:px-10 lg:pb-20">
-            <p className="le-fade-up text-[10px] uppercase tracking-[0.28em] text-brand-champagne">
-              Educational guide
-            </p>
-            <h1 className="le-fade-up-delay mt-5 max-w-[14ch] font-display text-[clamp(2.8rem,7vw,5.5rem)] font-medium leading-[0.9] tracking-[-0.03em]">
-              Liens, Easements & Related Concepts
-            </h1>
-            <p className="le-fade-up-delay mt-6 max-w-lg text-lg leading-8 text-brand-ivory/80">
+          <div className="relative mx-auto flex min-h-[min(62vh,560px)] max-w-site flex-col justify-end px-6 pb-14 pt-28 lg:px-10 lg:pb-20">
+            <p className={grammar.eyebrowOnDark}>Educational guide</p>
+            <h1 className={`mt-4 max-w-[14ch] ${grammar.displayOnDark}`}>Liens, Easements & Related Concepts</h1>
+            <p className={`mt-6 ${grammar.bodyOnDark}`}>
               Pass the distinction test: what burdens title, what creates a right to use, and what is only permission.
             </p>
           </div>
@@ -245,10 +228,8 @@ export default function LiensEasements() {
       <section className="border-b border-brand-border bg-brand-ivory">
         <div className="mx-auto max-w-site px-6 py-16 sm:px-8 lg:grid lg:grid-cols-[1fr_1.35fr] lg:gap-16 lg:px-10 lg:py-24">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">Opening</p>
-            <h2 className="mt-4 font-display text-[clamp(2rem,3.5vw,3rem)] leading-[0.95] text-brand-navy">
-              Know the difference
-            </h2>
+            <p className={grammar.eyebrow}>Opening</p>
+            <h2 className={`mt-4 ${grammar.section}`}>Know the difference</h2>
           </div>
           <div className="mt-8 space-y-6 text-[17px] leading-8 text-brand-graphite lg:mt-0">
             <p>
@@ -268,10 +249,8 @@ export default function LiensEasements() {
         <div className="mx-auto max-w-site px-6 py-14 sm:px-8 lg:px-10 lg:py-16">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="text-[10px] uppercase tracking-[0.26em] text-brand-cocoa">The chapters</p>
-              <h2 className="mt-3 font-display text-[clamp(1.85rem,3vw,2.5rem)] leading-[0.95] text-brand-navy">
-                Four ways to hold the map
-              </h2>
+              <p className={grammar.eyebrow}>The chapters</p>
+              <h2 className={`mt-3 ${grammar.section}`}>Four ways to hold the map</h2>
             </div>
             <p className="max-w-sm text-sm leading-6 text-brand-graphite/75">
               Liens · easements · license contrast · quick answers
@@ -327,10 +306,8 @@ export default function LiensEasements() {
               </figcaption>
             </figure>
             <div>
-              <p className="text-[10px] uppercase tracking-[0.26em] text-brand-brass">{chapters[0].kicker}</p>
-              <h2 className="mt-4 font-display text-[clamp(2.25rem,4.5vw,3.75rem)] leading-[0.92] tracking-[-0.02em] text-brand-navy">
-                {chapters[0].title}
-              </h2>
+              <p className={grammar.eyebrow}>{chapters[0].kicker}</p>
+              <h2 className={`mt-4 ${grammar.section}`}>{chapters[0].title}</h2>
               <p className="mt-6 max-w-xl text-base leading-8 text-brand-graphite sm:text-lg">{chapters[0].lead}</p>
 
               <div className="mt-10 overflow-x-auto border border-brand-navy/10 bg-white">
@@ -388,10 +365,8 @@ export default function LiensEasements() {
               </figcaption>
             </figure>
             <div>
-              <p className="text-[10px] uppercase tracking-[0.26em] text-brand-brass">{chapters[1].kicker}</p>
-              <h2 className="mt-4 font-display text-[clamp(2.25rem,4.5vw,3.75rem)] leading-[0.92] tracking-[-0.02em] text-brand-navy">
-                {chapters[1].title}
-              </h2>
+              <p className={grammar.eyebrow}>{chapters[1].kicker}</p>
+              <h2 className={`mt-4 ${grammar.section}`}>{chapters[1].title}</h2>
               <p className="mt-6 max-w-xl text-base leading-8 text-brand-graphite sm:text-lg">{chapters[1].lead}</p>
               <ol className="mt-10 max-w-3xl">
                 {easementTypes.map((item) => (
@@ -399,9 +374,7 @@ export default function LiensEasements() {
                     key={item.title}
                     className="grid gap-2 border-t border-brand-navy/10 py-6 first:border-t-0 sm:grid-cols-[minmax(10rem,0.95fr)_minmax(0,1.3fr)] sm:gap-8"
                   >
-                    <h3 className="font-display text-[clamp(1.35rem,2.2vw,1.75rem)] leading-tight text-brand-navy">
-                      {item.title}
-                    </h3>
+                    <h3 className={grammar.rowTitle}>{item.title}</h3>
                     <p className="text-[15px] leading-7 text-brand-graphite/90">{item.detail}</p>
                   </li>
                 ))}
@@ -426,10 +399,8 @@ export default function LiensEasements() {
               </figcaption>
             </figure>
             <div>
-              <p className="text-[10px] uppercase tracking-[0.26em] text-brand-brass">{chapters[2].kicker}</p>
-              <h2 className="mt-4 font-display text-[clamp(2.25rem,4.5vw,3.75rem)] leading-[0.92] tracking-[-0.02em] text-brand-navy">
-                {chapters[2].title}
-              </h2>
+              <p className={grammar.eyebrow}>{chapters[2].kicker}</p>
+              <h2 className={`mt-4 ${grammar.section}`}>{chapters[2].title}</h2>
               <p className="mt-6 max-w-xl text-base leading-8 text-brand-graphite sm:text-lg">{chapters[2].lead}</p>
 
               <div className="mt-10 grid gap-4 sm:grid-cols-2">
@@ -472,10 +443,8 @@ export default function LiensEasements() {
               </figcaption>
             </figure>
             <div>
-              <p className="text-[10px] uppercase tracking-[0.26em] text-brand-brass">{chapters[3].kicker}</p>
-              <h2 className="mt-4 font-display text-[clamp(2.25rem,4.5vw,3.75rem)] leading-[0.92] tracking-[-0.02em] text-brand-navy">
-                {chapters[3].title}
-              </h2>
+              <p className={grammar.eyebrow}>{chapters[3].kicker}</p>
+              <h2 className={`mt-4 ${grammar.section}`}>{chapters[3].title}</h2>
               <p className="mt-6 max-w-xl text-base leading-8 text-brand-graphite sm:text-lg">{chapters[3].lead}</p>
 
               <ul className="mt-8 space-y-2">
@@ -511,36 +480,13 @@ export default function LiensEasements() {
         </div>
       </section>
 
-      <section className="bg-brand-midnight text-brand-ivory">
-        <div className="mx-auto max-w-site px-6 py-16 sm:px-8 lg:grid lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:gap-16 lg:px-10 lg:py-24">
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.26em] text-brand-champagne">Closing</p>
-            <h2 className="mt-4 max-w-xl font-display text-[clamp(2rem,4vw,3.25rem)] leading-[0.94]">
-              Focus on definitions. Understand the distinctions.
-            </h2>
-            <p className="mt-6 max-w-lg text-base leading-8 text-brand-ivory/75">
-              If you can sort claim vs right vs permission, and voluntary vs involuntary, general vs specific, most
-              exam-style questions fall into place.
-            </p>
-          </div>
-          <div className="mt-10 flex flex-col gap-4 lg:mt-0 lg:items-end">
-            <Link
-              href="/guides/real-estate-deeds"
-              className="group inline-flex items-center gap-3 border border-brand-champagne/40 px-5 py-4 text-[11px] uppercase tracking-[0.18em] text-brand-champagne transition hover:border-brand-champagne hover:bg-brand-champagne/10"
-            >
-              Deeds guide
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
-            </Link>
-            <Link
-              href="/guides"
-              className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-ivory/55 transition hover:text-brand-ivory"
-            >
-              All guides
-              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <DarkStatement
+        eyebrow="Closing"
+        title="Focus on definitions. Understand the distinctions."
+        description="If you can sort claim vs right vs permission, and voluntary vs involuntary, general vs specific, most exam-style questions fall into place."
+        href="/guides/real-estate-deeds"
+        label="Deeds guide"
+      />
     </main>
   );
 }

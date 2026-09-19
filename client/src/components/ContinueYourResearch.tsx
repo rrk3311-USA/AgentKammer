@@ -1,10 +1,11 @@
 import { Link } from "wouter";
+import { grammar } from "@/components/visual-grammar";
 
 const researchPaths = [
   {
-    label: "Building Intelligence",
-    description: "Deep reports on Manhattan towers worth studying.",
-    href: "/buildings",
+    label: "Guides",
+    description: "Decision frameworks, neighborhoods, and the Kammer Report.",
+    href: "/guides",
   },
   {
     label: "International Buyer Guide",
@@ -27,7 +28,7 @@ export function ContinueYourResearch() {
           {researchPaths.map((item) => (
             <li key={item.label} className="border-b border-brand-midnight/8 pb-6 last:border-0 last:pb-0">
               <Link href={item.href} className="group block">
-                <p className="font-serif text-xl font-semibold text-brand-midnight transition group-hover:text-brand-champagne-dark">
+                <p className={`${grammar.rowTitle} transition group-hover:text-brand-navy-secondary`}>
                   {item.label} →
                 </p>
                 <p className="mt-2 text-sm leading-6 text-brand-graphite/68">{item.description}</p>

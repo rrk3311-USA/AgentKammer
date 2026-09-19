@@ -1,6 +1,7 @@
 import { Link, useRoute } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { CTA, PageHero, PageSection, ReportSubnav, SectionHeading } from "@/components/site-shell";
+import { GrammarRows, LibraryList, grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import {
   buildingReports,
@@ -51,7 +52,9 @@ export default function BuildingReportDetail() {
         eyebrow="Building Report"
         title={report.buildingName}
         description={`${report.location}. ${report.buildingProfile.positioning}`}
-        art="individual-buildings"
+        art={report.heroImage ? undefined : "individual-buildings"}
+        image={report.heroImage}
+        imageAlt={report.heroImageAlt}
         kicker={
           <div className="space-y-2 text-sm uppercase tracking-[0.14em] text-brand-ivory/82">
             <p>{report.series}</p>
@@ -112,14 +115,12 @@ export default function BuildingReportDetail() {
           eyebrow="Differentiators"
           title="What actually separates this building from nearby alternatives."
         />
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {report.differentiators.map((item) => (
-            <div key={item.title} className="rounded-card border border-brand-border bg-white p-7">
-              <h3 className="font-display text-3xl leading-[0.95] tracking-[-0.03em] text-brand-navy">{item.title}</h3>
-              <p className="mt-4 text-sm leading-7 text-brand-graphite">{item.body}</p>
-            </div>
-          ))}
-        </div>
+        <GrammarRows
+          items={report.differentiators.map((item) => ({
+            title: item.title,
+            text: item.body,
+          }))}
+        />
       </PageSection>
 
       <section className="border-y border-brand-border bg-white">
@@ -163,24 +164,12 @@ export default function BuildingReportDetail() {
       <section className="border-y border-brand-border bg-white">
         <PageSection>
           <SectionHeading eyebrow="Comparables" title={report.comparablesIntro} />
-          <div className="mt-10 grid gap-4 md:grid-cols-2">
-            {report.comparables.map((item) => (
-              <div key={item.name} className="rounded-card border border-brand-border bg-brand-ivory p-6">
-                {item.slug && getBuildingReportBySlug(item.slug) ? (
-                  <Link href={`/building-reports/${item.slug}`} className="font-display text-3xl text-brand-navy hover:text-brand-brass">
-                    {item.name}
-                  </Link>
-                ) : (
-                  <h3 className="font-display text-3xl text-brand-navy">{item.name}</h3>
-                )}
-                <ul className="mt-4 space-y-2 text-sm leading-7 text-brand-graphite">
-                  {item.lines.map((line) => (
-                    <li key={line}>{line}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+          <GrammarRows
+            items={report.comparables.map((item) => ({
+              title: item.name,
+              text: item.lines.join(" "),
+            }))}
+          />
         </PageSection>
       </section>
 
@@ -188,9 +177,9 @@ export default function BuildingReportDetail() {
         <SectionHeading eyebrow="Fit Tiers" title="Who this building serves well. And who should keep looking." />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {report.fit.map((tier) => (
-            <div key={tier.label} className="rounded-card border border-brand-border bg-white p-7">
-              <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">{tier.label}</p>
-              <ul className="mt-5 space-y-3 text-sm leading-7 text-brand-graphite">
+            <div key={tier.label} className="border-t border-brand-border pt-6">
+              <p className={grammar.eyebrow}>{tier.label}</p>
+              <ul className="mt-5 space-y-3 text-base leading-7 text-brand-graphite">
                 {tier.items.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -240,18 +229,14 @@ export default function BuildingReportDetail() {
         <section className="border-t border-brand-border bg-white">
           <PageSection>
             <SectionHeading eyebrow="More Reports" title="Compare another address before the shortlist hardens." />
-            <div className="mt-10 grid gap-4 md:grid-cols-2">
-              {otherReports.map((item) => (
-                <Link
-                  key={item.slug}
-                  href={`/building-reports/${item.slug}`}
-                  className="rounded-card border border-brand-border bg-brand-ivory p-6 transition-colors hover:border-brand-navy/30"
-                >
-                  <h3 className="font-display text-3xl text-brand-navy">{item.buildingName}</h3>
-                  <p className="mt-3 text-sm leading-7 text-brand-graphite">{item.executiveSummary[0]}</p>
-                </Link>
-              ))}
-            </div>
+            <LibraryList
+              items={otherReports.map((item) => ({
+                title: item.buildingName,
+                text: item.executiveSummary[0],
+                href: `/building-reports/${item.slug}`,
+                cta: "Read profile",
+              }))}
+            />
           </PageSection>
         </section>
       ) : null}

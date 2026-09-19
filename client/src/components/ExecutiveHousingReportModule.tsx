@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { featuredExecutiveHousingReport } from "@/data/executive-housing-reports";
+import { grammar } from "@/components/visual-grammar";
 
 type ExecutiveHousingReportModuleProps = {
   variant?: "inline" | "compact";
@@ -23,11 +24,11 @@ export function ExecutiveHousingReportModule({
           <p className="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-brand-champagne-dark">
             Related Intelligence
           </p>
-          <h2 className="mt-2 font-serif text-2xl font-semibold text-brand-midnight">{report.title}</h2>
+          <h2 className={`mt-2 ${grammar.rowTitle}`}>{report.title}</h2>
           <p className="mt-3 text-sm leading-6 text-brand-graphite/72">
             A quarterly briefing on Manhattan housing trends, building intelligence, and executive relocation patterns.
           </p>
-          <Link href={href} className="mt-4 inline-block font-serif text-sm text-brand-midnight transition hover:text-brand-champagne-dark">
+          <Link href={href} className={`mt-4 ${grammar.textLink}`}>
             Read the full report →
           </Link>
         </div>
@@ -45,12 +46,12 @@ export function ExecutiveHousingReportModule({
         <p className="text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-brand-champagne-dark">
           Executive Housing Report 2026
         </p>
-        <p className="mx-auto mt-4 max-w-md font-serif text-lg leading-8 text-brand-graphite/82">
+        <p className={`mx-auto mt-4 max-w-md ${grammar.body}`}>
           A quarterly briefing on Manhattan housing trends, building intelligence, and executive relocation patterns.
         </p>
         <Link
           href={href}
-          className="mt-5 inline-block border border-brand-midnight/20 px-6 py-2.5 font-serif text-sm text-brand-midnight transition hover:border-brand-champagne hover:text-brand-champagne-dark"
+          className="mt-5 inline-block border border-brand-midnight/20 px-6 py-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition hover:border-brand-champagne hover:text-brand-navy-secondary"
         >
           Read Report
         </Link>

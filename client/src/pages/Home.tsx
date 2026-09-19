@@ -5,7 +5,6 @@ import { DecisionFramework } from "@/components/DecisionFramework";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { openDecisionAssistant } from "@/lib/decision-assistant";
 import { serviceLandingMap } from "@/data/service-landings";
-import { publicGuides } from "@/data/guides";
 
 const howWeDecide = [
   { step: "01", title: "What's changing?", text: "Name the life event, pressure, or uncertainty. Neighborhoods and inventory come later." },
@@ -13,18 +12,10 @@ const howWeDecide = [
   { step: "03", title: "Where do you belong?", text: "Even if you stay, is the environment still serving the life you want?" },
 ];
 
-const startHere = [
-  { step: "01", title: "What's Changing?", text: "Name the life change (relocation, family, uncertainty) before listings take over." },
-  { step: "02", title: "Situation Assessment", text: "The diagnostic. Belonging, friction, and whether anything should change at all." },
-  { step: "03", title: "Read the brief", text: "The editorial that matches your situation. Clarity before inventory." },
-  { step: "04", title: "Strategy when you want judgment", text: "A Strategy Session and a written next step. Not a listing tour." },
-];
-
 const featuredBriefSlugs = [
   "executive-relocation-nyc",
   "foreign-buyers-new-york",
-  "empty-nester-downsizing-nyc",
-  "rent-vs-buy-manhattan-relocation",
+  "new-baby-growing-family-nyc",
 ] as const;
 
 export default function Home() {
@@ -38,11 +29,9 @@ export default function Home() {
   const featuredBriefs = featuredBriefSlugs
     .map((slug) => serviceLandingMap[slug])
     .filter(Boolean);
-  const featuredGuides = publicGuides.slice(0, 4);
 
   return (
     <main className="bg-brand-ivory text-brand-ink">
-      {/* Editorial · Hero */}
       <section className="border-b border-brand-border bg-brand-ivory">
         <div className="mx-auto grid w-full max-w-site gap-0 px-6 py-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(340px,0.72fr)] lg:px-10">
           <div className="flex min-h-[560px] flex-col justify-start pb-32 pt-10 lg:pr-16 lg:pt-16">
@@ -55,7 +44,7 @@ export default function Home() {
               you belong
             </h1>
             <p className="mt-6 max-w-xl text-[17px] leading-8 text-brand-graphite">
-              Private housing guidance. Local execution when needed. We start with life change, uncertainty, and trade-offs before buildings, neighborhoods, or listings.
+              Private housing guidance before the market gets loud.
             </p>
             <blockquote className="mt-8 max-w-xl border-l border-brand-stone pl-5">
               <p className="font-display text-[clamp(1.75rem,2.4vw,2rem)] leading-[1.2] tracking-[-0.02em] text-brand-navy">
@@ -68,7 +57,7 @@ export default function Home() {
                 onClick={openDecisionAssistant}
                 className="ak-call-button group inline-flex min-w-[19rem] items-center justify-between gap-6 rounded-button px-5 py-4 text-[14px] font-semibold uppercase tracking-[0.12em] text-brand-ivory transition-colors"
               >
-                Ask what's changing
+                What's changing
                 <MoveRight className="h-4 w-4 text-brand-stone transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
               </button>
             </div>
@@ -92,27 +81,9 @@ export default function Home() {
       <DecisionFramework
         eyebrow="How We Decide"
         title="Three questions. Then judgment."
-        description="Neighborhoods and inventory come later."
         items={howWeDecide}
       />
 
-      <DecisionFramework
-        eyebrow="Start Here"
-        title="A clear path through the decision."
-        description="Four steps. No overlap. This is the path. It is not the diagnostic, the brief, or the paid session."
-        items={startHere}
-        action={
-          <Link
-            href="/buyer-advisory"
-            className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
-          >
-            Open Start Here
-            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-          </Link>
-        }
-      />
-
-      {/* Editorial · Situations (same grammar as Structure, not a fourth type) */}
       <section className="border-b border-brand-border bg-brand-ivory">
         <div className="mx-auto w-full max-w-site px-6 py-20 lg:px-10 lg:py-24">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
@@ -123,14 +94,14 @@ export default function Home() {
               </h2>
             </div>
             <Link
-              href="/situations#whats-changing"
+              href="/situations"
               className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
             >
-              Explore situations
+              View all situations
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
           </div>
-          <div className="mt-12 grid gap-px bg-brand-border sm:grid-cols-2">
+          <div className="mt-12 grid gap-px bg-brand-border sm:grid-cols-3">
             {featuredBriefs.map((brief) => (
               <Link
                 key={brief.slug}
@@ -148,70 +119,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Dark Statement · The asset before the listing */}
-      <section className="border-b border-brand-border bg-brand-navy text-brand-ivory">
-        <div className="mx-auto grid w-full max-w-site gap-10 px-6 py-20 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:px-10 lg:py-24">
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.26em] text-brand-stone">Buildings</p>
-            <h2 className="mt-4 max-w-xl font-display text-[clamp(2.25rem,4vw,2.75rem)] leading-[1.02] text-brand-ivory">
-              The asset before the listing.
-            </h2>
-            <p className="mt-6 max-w-xl text-base leading-8 text-brand-ivory/74 lg:text-[17px]">
-              Building Reports read quality, context, and fit, not marketing copy. We use them only after the decision frame is clear.
-            </p>
-          </div>
-          <Link
-            href="/building-reports"
-            className="group inline-flex items-center justify-between gap-6 rounded-button border border-brand-ivory/20 px-5 py-4 text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:border-brand-stone"
-          >
-            Open the library
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-          </Link>
-        </div>
-      </section>
-
-      {/* Editorial · Structure before search */}
-      <section className="border-b border-brand-border bg-brand-ivory">
-        <div className="mx-auto w-full max-w-site px-6 py-20 lg:px-10 lg:py-24">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <div className="max-w-2xl">
-              <p className="text-[11px] uppercase tracking-[0.26em] text-brand-cocoa">Guides</p>
-              <h2 className="mt-4 font-display text-[clamp(2.25rem,4vw,2.75rem)] leading-[1.02] text-brand-navy">
-                Structure before search.
-              </h2>
-            </div>
-            <Link
-              href="/guides"
-              className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
-            >
-              Browse guides
-              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-            </Link>
-          </div>
-          <div className="mt-12 grid gap-px bg-brand-border sm:grid-cols-2">
-            {featuredGuides.map((guide) => (
-              <Link
-                key={guide.href}
-                href={guide.href}
-                className="group bg-brand-ivory p-7 transition-colors hover:bg-white"
-              >
-                <p className="font-display text-[1.65rem] leading-none text-brand-navy">{guide.title}</p>
-                <p className="mt-3 text-base leading-7 text-brand-graphite line-clamp-2">{guide.description}</p>
-                <span className="mt-5 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-brand-navy">
-                  Open guide
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <CTA
         title="When you want a human reply."
         description="The homepage starts with Guidance. Write only if a Situation Assessment, Property Assessment, or Strategy Session is already the right next step."
         href="/contact"
-        label="Write"
+        label="Contact"
         eyebrow="Contact"
       />
     </main>

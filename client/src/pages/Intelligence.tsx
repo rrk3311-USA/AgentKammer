@@ -1,4 +1,5 @@
 import { CTA, PageHero, PageSection, ReportSubnav, SectionHeading } from "@/components/site-shell";
+import { GrammarRows } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 const briefs = [
@@ -64,29 +65,25 @@ export default function Intelligence() {
           title="Market notes should change a recommendation, not just describe the weather."
           description="Each brief pairs an observation with a decision implication and a recommended posture: move, negotiate, wait, widen the search, or do nothing yet."
         />
-        <div className="mt-12 grid gap-6">
-          {briefs.map((brief) => (
-            <article key={brief.title} className="rounded-card border border-brand-border bg-white p-8">
-              <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">{brief.date}</p>
-              <h3 className="mt-4 font-display text-3xl leading-[1.05] tracking-[-0.03em] text-brand-navy md:text-4xl">
-                {brief.title}
-              </h3>
-              <div className="mt-6 grid gap-6 lg:grid-cols-2">
-                <div>
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-brand-cocoa">Observation</p>
-                  <p className="mt-3 text-sm leading-7 text-brand-graphite">{brief.observation}</p>
-                </div>
-                <div>
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-brand-cocoa">Implication</p>
-                  <p className="mt-3 text-sm leading-7 text-brand-graphite">{brief.implication}</p>
-                </div>
-              </div>
-              <p className="mt-6 border-t border-brand-border pt-5 text-[11px] uppercase tracking-[0.16em] text-brand-navy">
-                Posture: {brief.posture}
-              </p>
-            </article>
-          ))}
-        </div>
+        <GrammarRows
+          items={briefs.map((brief) => ({
+            eyebrow: brief.date,
+            title: brief.title,
+            text: (
+              <>
+                <p>
+                  <span className="text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">Observation. </span>
+                  {brief.observation}
+                </p>
+                <p className="mt-3">
+                  <span className="text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">Implication. </span>
+                  {brief.implication}
+                </p>
+                <p className="mt-4 text-[11px] uppercase tracking-[0.16em] text-brand-navy">Posture: {brief.posture}</p>
+              </>
+            ),
+          }))}
+        />
       </PageSection>
 
       <CTA

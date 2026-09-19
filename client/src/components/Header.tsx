@@ -14,8 +14,13 @@ const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible
 
 function isPrimaryNavActive(href: string, location: string) {
   if (href === "/") return location === "/";
-  if (href === "/building-reports") {
-    return location === "/building-reports" || location.startsWith("/building-reports/");
+  if (href === "/guides") {
+    return (
+      location === "/guides" ||
+      location.startsWith("/guides/") ||
+      location === "/building-reports" ||
+      location.startsWith("/building-reports/")
+    );
   }
   if (href === "/situations") {
     return location === "/situations" || location.startsWith("/situations/");
@@ -23,8 +28,8 @@ function isPrimaryNavActive(href: string, location: string) {
   return location === href || location.startsWith(`${href}/`);
 }
 
-const quietGuidanceClass =
-  "text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory/68 transition-colors hover:text-brand-ivory";
+const headerGuidanceClass =
+  "ak-call-button ak-call-button--no-stripe inline-flex items-center px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-brand-ivory";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -83,7 +88,7 @@ export function Header() {
             <button
               type="button"
               onClick={openDecisionAssistant}
-              className={cn(quietGuidanceClass, focusRing)}
+              className={cn(headerGuidanceClass, focusRing)}
               data-testid="button-header-guidance"
             >
               {PUBLIC_PRODUCTS.guidance.label}
@@ -125,7 +130,7 @@ export function Header() {
                 setMobileMenuOpen(false);
                 openDecisionAssistant();
               }}
-              className={cn("mt-4 py-2.5 text-left", quietGuidanceClass)}
+              className={cn("mt-4 w-fit", headerGuidanceClass)}
               data-testid="button-header-guidance-mobile"
             >
               {PUBLIC_PRODUCTS.guidance.label}

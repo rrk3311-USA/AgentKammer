@@ -1,6 +1,5 @@
-import { Link } from "wouter";
-import { ArrowRight } from "lucide-react";
 import { CTA, PageHero, PageSection, ReportSubnav, SectionHeading } from "@/components/site-shell";
+import { GrammarRows, LibraryList } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { buildingReports, formatBuildingReportDate } from "@/data/building-reports";
 
@@ -26,7 +25,7 @@ export default function BuildingReport() {
   return (
     <main className="bg-brand-ivory">
       <PageHero
-        eyebrow="Building Intelligence"
+        eyebrow="Guides"
         title="Building Profiles"
         description="A single address can look perfect online and still be the wrong decision. These editorial profiles clarify architecture, service model, resale logic, board or sponsor dynamics, and whether the building fits the brief."
         art="individual-buildings"
@@ -39,28 +38,15 @@ export default function BuildingReport() {
           title="Study the building before the apartment becomes the conversation."
           description="Each profile covers executive summary, resident fit, strengths, trade-offs, neighborhood context, comparables, and a clear bottom line. Including when the better move is to keep looking."
         />
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {buildingReports.map((building) => (
-            <Link
-              key={building.slug}
-              href={`/building-reports/${building.slug}`}
-              className="group rounded-card border border-brand-border bg-white p-8 transition-colors hover:border-brand-navy/30"
-            >
-              <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">
-                {formatBuildingReportDate(building.publishedAt)} · {building.readMinutes} min
-              </p>
-              <h3 className="mt-5 font-display text-4xl leading-[0.95] tracking-[-0.03em] text-brand-navy">
-                {building.buildingName}
-              </h3>
-              <p className="mt-2 text-sm uppercase tracking-[0.14em] text-brand-cocoa">{building.location}</p>
-              <p className="mt-4 text-sm leading-7 text-brand-graphite">{building.executiveSummary[0]}</p>
-              <span className="mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy">
-                Read profile
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-              </span>
-            </Link>
-          ))}
-        </div>
+        <LibraryList
+          items={buildingReports.map((building) => ({
+            eyebrow: `${formatBuildingReportDate(building.publishedAt)} · ${building.readMinutes} min`,
+            title: building.buildingName,
+            text: building.executiveSummary[0],
+            href: `/building-reports/${building.slug}`,
+            cta: "Read profile",
+          }))}
+        />
       </PageSection>
 
       <section className="border-y border-brand-border bg-white">
@@ -70,15 +56,13 @@ export default function BuildingReport() {
             title="Additional buildings under study."
             description="These addresses appear often in executive and design-led searches. Full profiles publish as the research is ready."
           />
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {comingSoon.map((building) => (
-              <div key={building.name} className="rounded-card border border-brand-border bg-brand-ivory p-8">
-                <p className="text-[11px] uppercase tracking-[0.22em] text-brand-brass">Coming soon</p>
-                <h3 className="mt-5 font-display text-3xl leading-[0.95] tracking-[-0.03em] text-brand-navy">{building.name}</h3>
-                <p className="mt-4 text-sm leading-7 text-brand-graphite">{building.note}</p>
-              </div>
-            ))}
-          </div>
+          <GrammarRows
+            items={comingSoon.map((building) => ({
+              eyebrow: "Coming soon",
+              title: building.name,
+              text: building.note,
+            }))}
+          />
         </PageSection>
       </section>
 

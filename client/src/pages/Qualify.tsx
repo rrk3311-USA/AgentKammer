@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { PageHero, PageSection, SectionHeading } from "@/components/site-shell";
+import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
@@ -152,12 +153,12 @@ export default function Qualify() {
 
         <form
           onSubmit={handleSubmit}
-          className="rounded-card border border-brand-border bg-white p-8 shadow-soft lg:p-10"
+          className="border border-brand-border bg-white p-8 lg:p-10"
         >
           <p className="text-[11px] uppercase tracking-[0.2em] text-brand-cocoa">
             {source === "phone" ? "From the phone line" : "A few details"}
           </p>
-          <h2 className="mt-3 font-display text-3xl leading-[0.95] text-brand-navy">
+          <h2 className={`mt-3 ${grammar.section}`}>
             So the next hour is useful.
           </h2>
 

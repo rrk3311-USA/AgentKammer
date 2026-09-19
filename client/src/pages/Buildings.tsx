@@ -1,7 +1,6 @@
 import { Link } from "wouter";
-import { ArrowRight, Building2, Map, Newspaper } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { CTA, PageHero, PageSection, ReportSubnav, SectionHeading } from "@/components/site-shell";
+import { CTA, PageHero, ReportSubnav } from "@/components/site-shell";
+import { LibraryList, grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { buildingReports, formatBuildingReportDate } from "@/data/building-reports";
 
@@ -10,19 +9,19 @@ const reportTypes = [
     title: "Building Profiles",
     text: "Use these when the question is whether a specific address deserves attention, caution, or a place on the shortlist.",
     href: "/building-reports/individual-buildings",
-    icon: Building2,
+    cta: "Open section",
   },
   {
     title: "Neighborhood Guides",
     text: "Use these to decide where daily life, commute, building stock, schools, and neighborhood rhythm actually support the move.",
     href: "/building-reports/neighborhood-guides",
-    icon: Map,
+    cta: "Open section",
   },
   {
     title: "Market Briefs",
     text: "Use these when timing, pricing pressure, inventory quality, or negotiation leverage could change what you should do next.",
     href: "/building-reports/market-briefs",
-    icon: Newspaper,
+    cta: "Open section",
   },
 ];
 
@@ -44,56 +43,37 @@ export default function Buildings() {
       />
       <ReportSubnav />
 
-      <PageSection>
-        <SectionHeading
-          eyebrow="Start Here"
-          title="Choose the format that matches the uncertainty."
-          description="Some decisions need address-level detail. Others need neighborhood framing or a short market read before comparing property."
-        />
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {reportTypes.map((item) => (
-            <Link key={item.href} href={item.href} className="rounded-card border border-brand-border bg-white p-8 transition-transform hover:-translate-y-1">
-              <item.icon className="h-6 w-6 text-brand-brass" strokeWidth={1.5} />
-              <h3 className="mt-6 font-display text-3xl leading-[0.96] tracking-[-0.03em] text-brand-navy">{item.title}</h3>
-              <p className="mt-4 text-sm leading-7 text-brand-graphite">{item.text}</p>
-              <span className="mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy">
-                Open section
-                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-              </span>
-            </Link>
-          ))}
+      <section className="border-b border-brand-border bg-brand-ivory">
+        <div className={`${grammar.pad} lg:py-28`}>
+          <p className={grammar.eyebrow}>Start Here</p>
+          <h2 className={`mt-4 ${grammar.section}`}>Choose the format that matches the uncertainty.</h2>
+          <p className={`mt-5 ${grammar.body}`}>
+            Some decisions need address-level detail. Others need neighborhood framing or a short market read before comparing property.
+          </p>
+          <LibraryList columns={3} items={reportTypes} />
         </div>
-      </PageSection>
+      </section>
 
-      <section className="border-y border-brand-border bg-white">
-        <PageSection>
-          <SectionHeading
-            eyebrow="Featured Building Profiles"
-            title="Published address studies."
-            description="Editorial profiles with resident fit, trade-offs, comparables, and a bottom line. Including when to walk away."
+      <section className="border-b border-brand-border bg-white">
+        <div className={`${grammar.pad} lg:py-28`}>
+          <p className={grammar.eyebrow}>Featured Building Profiles</p>
+          <h2 className={`mt-4 ${grammar.section}`}>Published address studies.</h2>
+          <p className={`mt-5 ${grammar.body}`}>
+            Editorial profiles with resident fit, trade-offs, comparables, and a bottom line. Including when to walk away.
+          </p>
+          <LibraryList
+            items={buildingReports.map((report) => ({
+              eyebrow: `${formatBuildingReportDate(report.publishedAt)} · ${report.readMinutes} min`,
+              title: report.buildingName,
+              text: report.executiveSummary[0],
+              href: `/building-reports/${report.slug}`,
+              cta: "Read profile",
+            }))}
           />
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {buildingReports.map((report) => (
-              <Link
-                key={report.slug}
-                href={`/building-reports/${report.slug}`}
-                className="rounded-card border border-brand-border bg-brand-ivory p-7 transition-colors hover:border-brand-navy/30"
-              >
-                <p className="text-[11px] uppercase tracking-[0.18em] text-brand-brass">
-                  {formatBuildingReportDate(report.publishedAt)} · {report.readMinutes} min
-                </p>
-                <h3 className="mt-4 font-display text-3xl text-brand-navy">{report.buildingName}</h3>
-                <p className="mt-3 text-sm leading-7 text-brand-graphite">{report.executiveSummary[0]}</p>
-              </Link>
-            ))}
-          </div>
-          <Link href="/building-reports/individual-buildings" className="mt-8 inline-flex">
-            <Button variant="brand" className="gap-2 uppercase tracking-nav">
-              All Building Profiles
-              <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-            </Button>
+          <Link href="/building-reports/individual-buildings" className={`${grammar.textLink} mt-8`}>
+            All Building Profiles
           </Link>
-        </PageSection>
+        </div>
       </section>
 
       <CTA

@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { ArchitecturalHeroDrawing, CTA, PageSection } from "@/components/site-shell";
+import { grammar } from "@/components/visual-grammar";
 import { serviceLandings, serviceLandingMap, type ServiceLanding } from "@/data/service-landings";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
@@ -48,7 +49,10 @@ export default function ServiceLanding({ slug }: { slug: string }) {
   const pageUrl = `https://www.agentkammer.com${pagePath}`;
   const next = landing ? nextBrief(landing.slug) : null;
   const copy = landing ? editorialCopy(landing) : null;
-  const editorialLayout = Boolean(landing?.heroImage) || landing?.slug === "rent-vs-buy-manhattan-relocation";
+  const editorialLayout =
+    Boolean(landing?.heroImage) ||
+    landing?.slug === "rent-vs-buy-manhattan-relocation" ||
+    landing?.slug === "school-district-planning-nyc";
 
   const structuredData = landing
     ? [
@@ -110,7 +114,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
       <main className="bg-brand-ivory">
         <PageSection>
           <p className="text-[11px] uppercase tracking-[0.22em] text-brand-cocoa">Situations</p>
-          <h1 className="mt-4 font-display text-4xl text-brand-navy">Situation page not found.</h1>
+          <h1 className={`mt-4 ${grammar.display}`}>Situation page not found.</h1>
           <p className="mt-4 text-brand-graphite">This URL does not match one of the current Situation pages.</p>
           <Link href="/situations" className="mt-8 inline-flex text-[11px] uppercase tracking-[0.16em] text-brand-navy">
             Back to Situations
@@ -142,8 +146,8 @@ export default function ServiceLanding({ slug }: { slug: string }) {
           />
           <div className="absolute inset-0 flex items-start sm:items-center">
             <div className="w-full px-6 pt-14 pb-10 sm:pt-20 md:pl-[12%] lg:px-10 lg:pb-12 lg:pl-[clamp(4rem,18vw,14rem)] lg:pt-24 xl:pl-[clamp(5rem,22vw,18rem)]">
-              <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">{landing.eyebrow}</p>
-              <h1 className="mt-6 max-w-[12ch] font-display text-[clamp(2.35rem,9vw,4.75rem)] leading-[0.92] tracking-[-0.03em] text-brand-navy sm:mt-4 sm:max-w-[16ch] sm:text-[clamp(2.4rem,5.2vw,4.75rem)]">
+              <p className={grammar.eyebrow}>{landing.eyebrow}</p>
+              <h1 className={`mt-6 max-w-[16ch] sm:mt-4 ${grammar.display}`}>
                 {landing.title}
               </h1>
             </div>
@@ -155,8 +159,8 @@ export default function ServiceLanding({ slug }: { slug: string }) {
             {/* Title column - reserved width so it cannot collide with art */}
             <div className="relative z-10 flex items-start px-6 pb-8 pt-14 sm:items-center sm:pb-12 sm:pt-16 md:pl-[12%] lg:px-10 lg:pl-[clamp(4rem,18vw,14rem)] lg:pt-20 xl:pl-[clamp(5rem,22vw,18rem)]">
               <div className="w-full max-w-[18.5rem] sm:max-w-[26rem]">
-                <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass/90">{landing.eyebrow}</p>
-                <h1 className="mt-5 max-w-[11ch] font-display text-[clamp(2.1rem,8.2vw,3.4rem)] leading-[0.94] tracking-[-0.03em] text-brand-ivory sm:mt-4 sm:max-w-[14ch] sm:text-[clamp(2.25rem,4.4vw,4.25rem)]">
+                <p className={grammar.eyebrowOnDark}>{landing.eyebrow}</p>
+                <h1 className={`mt-5 max-w-[14ch] sm:mt-4 ${grammar.displayOnDark}`}>
                   {landing.title}
                 </h1>
               </div>
@@ -179,8 +183,8 @@ export default function ServiceLanding({ slug }: { slug: string }) {
       ) : (
         <section className="border-b border-brand-border">
           <div className="mx-auto max-w-site px-6 pb-10 pt-14 lg:px-10 lg:pb-14 lg:pt-20">
-            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">{landing.eyebrow}</p>
-            <h1 className="mt-5 max-w-4xl font-display text-[clamp(2.8rem,5.5vw,5.5rem)] leading-[0.9] tracking-[-0.03em] text-brand-navy">
+            <p className={grammar.eyebrow}>{landing.eyebrow}</p>
+            <h1 className={`mt-5 max-w-[18ch] ${grammar.display}`}>
               {landing.title}
             </h1>
           </div>
@@ -258,43 +262,17 @@ export default function ServiceLanding({ slug }: { slug: string }) {
               .
             </p>
           ) : null}
-          <p
-            className={
-              editorialLayout
-                ? "text-[clamp(1.125rem,4.2vw,1.25rem)] leading-[1.55] text-brand-graphite sm:text-lg sm:leading-[1.7] lg:text-xl"
-                : "text-lg leading-9 text-brand-graphite lg:text-xl lg:leading-10"
-            }
-          >
-            {copy.paragraphOne}
-          </p>
-          <p
-            className={
-              editorialLayout
-                ? "mt-6 text-[1.05rem] leading-[1.55] text-brand-graphite sm:mt-8 sm:text-lg sm:leading-[1.7] lg:text-xl"
-                : "mt-8 text-lg leading-9 text-brand-graphite lg:text-xl lg:leading-10"
-            }
-          >
-            {copy.paragraphTwo}
-          </p>
-          <p
-            className={
-              editorialLayout
-                ? "mt-6 text-[1.05rem] leading-[1.55] text-brand-graphite sm:mt-8 sm:text-lg sm:leading-[1.7] lg:text-xl"
-                : "mt-8 text-lg leading-9 text-brand-graphite lg:text-xl lg:leading-10"
-            }
-          >
-            {copy.paragraphThree}
-          </p>
+          <p className={grammar.bodyWide}>{copy.paragraphOne}</p>
+          <p className={`mt-6 ${grammar.bodyWide}`}>{copy.paragraphTwo}</p>
+          <p className={`mt-6 ${grammar.bodyWide}`}>{copy.paragraphThree}</p>
 
-          <blockquote className="my-14 border-l-2 border-brand-brass pl-6">
-            <p className="font-display text-[clamp(1.75rem,3vw,2.35rem)] leading-[1.15] text-brand-navy">
-              “{copy.quote}”
-            </p>
+          <blockquote className="my-12 max-w-xl border-l border-brand-stone pl-5">
+            <p className={grammar.quote}>“{copy.quote}”</p>
           </blockquote>
 
           <div className="border-y border-brand-border py-8">
-            <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Recommendation</p>
-            <p className="mt-4 font-display text-2xl leading-snug text-brand-navy md:text-3xl">{copy.recommendation}</p>
+            <p className={grammar.eyebrow}>Recommendation</p>
+            <p className={`mt-4 ${grammar.section}`}>{copy.recommendation}</p>
           </div>
 
           <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

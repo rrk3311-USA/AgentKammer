@@ -1,23 +1,23 @@
-import type { ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import { Link, useLocation } from "wouter";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { grammar } from "@/components/visual-grammar";
 
-/** Locked primary header: exactly these six. Intelligence, Assessment, Get Qualified, and International stay out. */
+/** Locked primary header: these five. Guidance is the pinstripe utility, not a sixth door. */
 export const primaryNav = [
   { label: "Home", href: "/" },
   { label: "Start Here", href: "/buyer-advisory" },
   { label: "Situations", href: "/situations" },
-  { label: "Buildings", href: "/building-reports" },
   { label: "Guides", href: "/guides" },
-  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
-export const buildingReportsNav = [
-  { label: "Overview", href: "/building-reports" },
-  { label: "Building Profiles", href: "/building-reports/individual-buildings" },
-  { label: "Neighborhood Guides", href: "/building-reports/neighborhood-guides" },
-  { label: "Market Briefs", href: "/building-reports/market-briefs" },
+/** Guides library chapters. Building Profiles stay reachable, not a selector item. */
+export const guidesLibraryNav = [
+  { label: "Decision Guides", href: "/guides#decision-guides", id: "decision-guides" },
+  { label: "Neighborhoods", href: "/guides#neighborhoods", id: "neighborhoods" },
+  { label: "Kammer Report", href: "/guides#kammer-report", id: "kammer-report" },
 ] as const;
 
 export type HeroArtVariant =
@@ -26,6 +26,9 @@ export type HeroArtVariant =
   | "neighborhood-guides"
   | "market-briefs"
   | "decision-framework"
+  | "start-here"
+  | "situations"
+  | "guides"
   | "private-advisory"
   | "capital-strategy"
   | "international"
@@ -57,6 +60,9 @@ function resolveHeroArt(eyebrow: string, title: string, variant?: HeroArtVariant
     return "neighborhood-guides";
   }
   if (/market briefs/.test(topic)) return "market-briefs";
+  if (/start here|clear path through/.test(topic)) return "start-here";
+  if (/situations|explore your situation/.test(topic)) return "situations";
+  if (/guides|clear frameworks before/.test(topic)) return "guides";
   if (/buyer advisory|decision briefs|decision hub|create your account|my real estate life|anything should change|first question/.test(topic)) {
     return "decision-framework";
   }
@@ -88,7 +94,7 @@ export function PageSection({
   className?: string;
   children: ReactNode;
 }) {
-  return <section className={cn("mx-auto max-w-site px-6 py-16 lg:px-10 lg:py-24", className)}>{children}</section>;
+  return <section className={cn(grammar.pad, className)}>{children}</section>;
 }
 
 export function SectionHeading({
@@ -104,12 +110,10 @@ export function SectionHeading({
 }) {
   return (
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
-      <p className="text-[11px] uppercase tracking-[0.24em] text-brand-cocoa">{eyebrow}</p>
-      <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3.5rem)] leading-[0.94] tracking-[-0.03em] text-brand-navy">
-        {title}
-      </h2>
+      <p className={grammar.eyebrow}>{eyebrow}</p>
+      <h2 className={cn("mt-4", grammar.section)}>{title}</h2>
       {description ? (
-        <p className="mt-6 text-base leading-8 text-brand-graphite lg:text-lg">{description}</p>
+        <p className="mt-5 max-w-xl text-base leading-7 text-brand-graphite lg:text-[17px] lg:leading-8">{description}</p>
       ) : null}
     </div>
   );
@@ -132,6 +136,9 @@ export function ArchitecturalHeroDrawing({
   const isNeighborhoodGuide = art === "neighborhood-guides";
   const isMarketBrief = art === "market-briefs";
   const isDecisionFramework = art === "decision-framework";
+  const isStartHere = art === "start-here";
+  const isSituations = art === "situations";
+  const isGuides = art === "guides";
   const isPrivateAdvisory = art === "private-advisory";
   const isCapitalStrategy = art === "capital-strategy";
   const isOwnershipStructure = art === "ownership-structure";
@@ -168,8 +175,6 @@ export function ArchitecturalHeroDrawing({
         </defs>
 
         <path d="M22 222H394" stroke="currentColor" strokeOpacity="0.28" strokeWidth="1" />
-        <path d="M55 54H360V222H55V54Z" stroke="currentColor" strokeOpacity="0.36" strokeWidth="1" />
-        <path d="M83 82H332V222H83V82Z" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
 
         {isMarketBrief ? (
           <>
@@ -210,15 +215,58 @@ export function ArchitecturalHeroDrawing({
           </>
         ) : isReportOverview ? (
           <>
-            <path d="M82 168H178V222H82V168Z" stroke="currentColor" strokeOpacity="0.42" strokeWidth="1.1" />
-            <path d="M206 118H338V222H206V118Z" stroke="currentColor" strokeOpacity="0.42" strokeWidth="1.1" />
-            <path d="M112 196H148M238 148H306M238 168H306M238 188H288" stroke="currentColor" strokeOpacity="0.23" strokeWidth="1" />
-            <path d="M178 195H206" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
-            <path d="M192 195L204 183M192 195L204 207" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
-            <path d="M90 112C126 72 162 80 198 110C238 144 282 130 328 76" stroke="currentColor" strokeOpacity="0.24" strokeWidth="1" />
-            <circle cx="90" cy="112" r="3.5" stroke="url(#hero-line-metal)" strokeWidth="1" />
-            <circle cx="198" cy="110" r="3.5" stroke="url(#hero-line-metal)" strokeWidth="1" />
-            <circle cx="328" cy="76" r="3.5" stroke="url(#hero-line-metal)" strokeWidth="1" />
+            <path d="M92 222V48H196V222" stroke="currentColor" strokeOpacity="0.5" strokeWidth="1.15" />
+            <path d="M108 222V64H180V222" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
+            {Array.from({ length: 8 }).map((_, index) => (
+              <path key={`overview-floor-${index}`} d={`M92 ${68 + index * 18}H196`} stroke="currentColor" strokeOpacity="0.16" strokeWidth="1" />
+            ))}
+            {Array.from({ length: 3 }).map((_, index) => (
+              <path key={`overview-bay-${index}`} d={`M116 ${48}V222`} transform={`translate(${index * 22} 0)`} stroke="currentColor" strokeOpacity="0.14" strokeWidth="1" />
+            ))}
+            <path d="M92 48L144 28L196 48" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <path d="M128 222V176H160V222" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
+            <path d="M228 86H348V186H228V86Z" stroke="currentColor" strokeOpacity="0.42" strokeWidth="1.1" />
+            <path d="M228 136H348M278 86V186M318 86V186" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" />
+            <path d="M240 98H266V124H240V98Z" stroke="currentColor" strokeOpacity="0.28" strokeWidth="1" />
+            <path d="M290 148H336V174H290V148Z" stroke="url(#hero-line-metal)" strokeWidth="1.15" />
+            <path d="M196 154H228" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
+            <path d="M78 88V182M78 88H92M78 182H92" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" />
+            <path d="M74 88H82M74 182H82" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
+          </>
+        ) : isStartHere ? (
+          <>
+            <circle cx="108" cy="168" r="14" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.1" />
+            <circle cx="186" cy="112" r="14" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.1" />
+            <circle cx="264" cy="168" r="14" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.1" />
+            <circle cx="342" cy="96" r="14" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <path d="M122 168H172M200 112H250M278 168H328" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <path d="M108 154V142M186 98V86M264 154V142M342 82V70" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
+            <path d="M102 168H114M180 112H192M258 168H270M336 96H348" stroke="url(#hero-line-metal)" strokeWidth="1.1" />
+            <path d="M98 196H128M176 140H216M254 196H284M328 124H356" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" />
+          </>
+        ) : isSituations ? (
+          <>
+            <circle cx="118" cy="136" r="16" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <path d="M134 136C176 136 198 78 248 78" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <path d="M134 136H248" stroke="currentColor" strokeOpacity="0.28" strokeWidth="1.1" />
+            <path d="M134 136C176 136 198 194 248 194" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <circle cx="262" cy="78" r="11" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.1" />
+            <circle cx="262" cy="136" r="11" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.1" />
+            <circle cx="262" cy="194" r="11" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.1" />
+            <path d="M273 78H328M273 136H328M273 194H328" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1" />
+            <path d="M328 70V86M328 128V144M328 186V202" stroke="currentColor" strokeOpacity="0.16" strokeWidth="1" />
+            <path d="M110 136H126M118 128V144" stroke="url(#hero-line-metal)" strokeWidth="1.1" />
+          </>
+        ) : isGuides ? (
+          <>
+            <path d="M92 78H214V210H92V78Z" stroke="currentColor" strokeOpacity="0.34" strokeWidth="1" />
+            <path d="M108 62H230V194H108V62Z" stroke="currentColor" strokeOpacity="0.4" strokeWidth="1.1" />
+            <path d="M124 88H214M124 112H200M124 136H186" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
+            <path d="M124 160H168" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
+            <path d="M258 86H338V210H258V86Z" stroke="currentColor" strokeOpacity="0.38" strokeWidth="1.1" />
+            <path d="M298 86V210" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
+            <path d="M270 112H286M310 112H326M270 140H286M310 140H326" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
+            <path d="M230 148H258" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
           </>
         ) : isDecisionFramework ? (
           <>
@@ -232,12 +280,16 @@ export function ArchitecturalHeroDrawing({
           </>
         ) : isPrivateAdvisory ? (
           <>
-            <path d="M98 212V88L210 42L322 88V212" stroke="currentColor" strokeOpacity="0.44" strokeWidth="1.1" />
-            <path d="M126 212V106H294V212" stroke="currentColor" strokeOpacity="0.24" strokeWidth="1" />
-            <path d="M164 212V142H256V212" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
-            <path d="M70 128H98M322 128H350M70 176H98M322 176H350" stroke="currentColor" strokeOpacity="0.16" strokeWidth="1" />
-            <path d="M112 76H308M142 62H278" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" />
-            <circle cx="210" cy="128" r="28" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" />
+            <ellipse cx="142" cy="118" rx="38" ry="48" stroke="currentColor" strokeOpacity="0.42" strokeWidth="1.15" />
+            <path d="M108 158C118 188 166 188 176 158" stroke="currentColor" strokeOpacity="0.28" strokeWidth="1" />
+            <circle cx="142" cy="112" r="18" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
+            <circle cx="286" cy="128" r="54" stroke="currentColor" strokeOpacity="0.34" strokeWidth="1.1" />
+            <circle cx="286" cy="128" r="28" stroke="currentColor" strokeOpacity="0.2" strokeWidth="1" />
+            <path d="M286 78V178M236 128H336" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" />
+            <path d="M286 84V100" stroke="url(#hero-line-metal)" strokeWidth="1.35" />
+            <path d="M278 92L286 78L294 92" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
+            <path d="M180 128H232" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
+            <path d="M320 112H338M320 144H338" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" />
           </>
         ) : isCapitalStrategy ? (
           <>
@@ -298,13 +350,19 @@ export function ArchitecturalHeroDrawing({
           </>
         ) : isFamilyPlanning ? (
           <>
-            <path d="M86 116H188V222H86V116Z" stroke="currentColor" strokeOpacity="0.38" strokeWidth="1.1" />
-            <path d="M232 84H334V222H232V84Z" stroke="currentColor" strokeOpacity="0.42" strokeWidth="1.1" />
-            <path d="M106 144H140M106 168H158M252 114H314M252 138H314M252 162H294" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
-            <path d="M188 178H232" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
-            <circle cx="140" cy="82" r="18" stroke="currentColor" strokeOpacity="0.26" strokeWidth="1" />
-            <path d="M130 82H150M140 72V92" stroke="url(#hero-line-metal)" strokeWidth="1.15" />
-            <path d="M112 222V188H158V222M270 222V176H310V222" stroke="url(#hero-line-metal)" strokeWidth="1.1" />
+            <path d="M88 86H198V186H88V86Z" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" />
+            <path d="M88 119H198M88 152H198M125 86V186M161 86V186" stroke="currentColor" strokeOpacity="0.16" strokeWidth="1" />
+            <path d="M108 102H141V135H108V102Z" stroke="currentColor" strokeOpacity="0.32" strokeWidth="1" />
+            <circle cx="124" cy="118" r="3.5" stroke="url(#hero-line-metal)" strokeWidth="1" />
+            <path d="M236 118L292 78H348V222H236V118Z" stroke="currentColor" strokeOpacity="0.44" strokeWidth="1.15" />
+            <path d="M256 106L292 78L328 106" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <path d="M284 78V62H300V78" stroke="currentColor" strokeOpacity="0.34" strokeWidth="1" />
+            <path d="M288 62H296V54H288V62Z" stroke="url(#hero-line-metal)" strokeWidth="1.1" />
+            <path d="M254 138H276V166H254V138ZM308 138H330V166H308V138Z" stroke="currentColor" strokeOpacity="0.26" strokeWidth="1" />
+            <path d="M278 222V186H306V222" stroke="url(#hero-line-metal)" strokeWidth="1.2" />
+            <path d="M198 154C214 154 222 168 236 168" stroke="url(#hero-line-metal)" strokeWidth="1.25" />
+            <path d="M96 210C112 194 132 194 148 210" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
+            <path d="M168 222V198H188V222" stroke="currentColor" strokeOpacity="0.22" strokeWidth="1" />
           </>
         ) : isSellerTransition ? (
           <>
@@ -464,51 +522,79 @@ export function PageHero({
       ) : null}
       <div className="absolute inset-0 bg-brand-navy/58" />
       <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/72 to-brand-navy/32" />
-      <PageSection className="relative grid gap-12 py-20 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.78fr)] lg:items-end lg:py-28">
+      <PageSection className="relative grid gap-12 py-20 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.78fr)] lg:items-end lg:py-24">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</p>
-          <h1 className="mt-5 max-w-4xl font-display text-[clamp(3rem,7vw,6rem)] leading-[0.9] tracking-[-0.04em] text-brand-ivory">
-            {title}
-          </h1>
+          <p className={grammar.eyebrowOnDark}>{eyebrow}</p>
+          <h1 className={cn("mt-4 max-w-[18ch]", grammar.displayOnDark)}>{title}</h1>
         </div>
         <div className="space-y-6">
           {!image ? <ArchitecturalHeroDrawing eyebrow={eyebrow} title={title} variant={art} /> : null}
-          <p className="max-w-xl text-base leading-8 text-brand-ivory/78 lg:text-lg">{description}</p>
-          {kicker ? (
-            <div className="border border-brand-brass/30 bg-brand-navy/55 p-6 backdrop-blur-sm">{kicker}</div>
-          ) : null}
+          <p className={grammar.bodyOnDark}>{description}</p>
+          {kicker ? <div className="border-l border-brand-stone pl-5">{kicker}</div> : null}
         </div>
       </PageSection>
     </section>
   );
 }
 
+function activeGuidesChapter(location: string, hash: string) {
+  const chapter = hash.replace(/^#/, "");
+  if (location === "/guides" || location.startsWith("/guides/")) {
+    return chapter;
+  }
+  if (location.startsWith("/building-reports/neighborhood-guides")) return "neighborhoods";
+  if (location.startsWith("/building-reports")) return "kammer-report";
+  return "";
+}
+
 export function ReportSubnav() {
   const [location] = useLocation();
+  const [hash, setHash] = React.useState(() => (typeof window === "undefined" ? "" : window.location.hash));
+
+  React.useEffect(() => {
+    const sync = () => setHash(window.location.hash);
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, [location]);
+
+  const activeId = activeGuidesChapter(location, hash);
 
   return (
-    <div className="overflow-x-auto border-b border-brand-brass/28 bg-brand-charcoal">
-      <div className="mx-auto flex w-full max-w-site gap-3 px-6 py-4 lg:px-10">
-        {buildingReportsNav.map((item) => {
-          const active = location === item.href;
+    <nav aria-label="Guides library" className="border-b border-brand-border bg-brand-ivory">
+      <div className="mx-auto flex w-full max-w-site flex-wrap items-center gap-y-2 px-6 py-5 lg:px-10">
+        {guidesLibraryNav.map((item, index) => {
+          const active = activeId === item.id;
           return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "whitespace-nowrap rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors",
-                active
-                  ? "border-brand-brass bg-brand-brass text-brand-navy"
-                  : "border-brand-ivory/68 bg-brand-ivory text-brand-navy hover:border-brand-brass hover:bg-brand-surface",
-              )}
-            >
-              {item.label}
-            </Link>
+            <React.Fragment key={item.id}>
+              {index > 0 ? (
+                <span className="px-3 text-[11px] text-brand-cocoa/45" aria-hidden>
+                  ·
+                </span>
+              ) : null}
+              <Link
+                href={item.href}
+                className={cn(
+                  "whitespace-nowrap text-[11px] uppercase tracking-[0.18em] transition-colors",
+                  active ? "text-brand-navy" : "text-brand-graphite hover:text-brand-navy",
+                )}
+              >
+                {item.label}
+              </Link>
+            </React.Fragment>
           );
         })}
       </div>
-    </div>
+    </nav>
   );
+}
+
+function ctaPhrase(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+export function sameCtaPhrase(a: string, b: string) {
+  return ctaPhrase(a) === ctaPhrase(b);
 }
 
 export function CTA({
@@ -524,22 +610,41 @@ export function CTA({
   label?: string;
   eyebrow?: string;
 }) {
+  const hideSectionEyebrow = sameCtaPhrase(eyebrow, title);
+  const hideButtonEyebrow = sameCtaPhrase(eyebrow, label);
+  const actionClass = hideButtonEyebrow
+    ? "ak-call-button group inline-flex min-w-[16rem] items-center justify-between gap-6 px-5 py-4 text-left text-[14px] font-semibold uppercase tracking-[0.12em] transition-colors"
+    : "ak-call-button group grid px-5 py-4 text-left transition-colors";
+  const actionInner = hideButtonEyebrow ? (
+    <>
+      <span>{label}</span>
+      <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+    </>
+  ) : (
+    <>
+      <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</span>
+      <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
+      <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
+        {label}
+        <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+      </span>
+    </>
+  );
+
   return (
     <section className="border-t border-brand-brass/30 bg-brand-navy text-brand-ivory">
       <PageSection className="py-16 lg:py-20">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
-            <p className="text-[11px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</p>
-            <h2 className="mt-4 font-display text-[clamp(2rem,3.8vw,3.25rem)] leading-[0.95] tracking-[-0.03em] text-brand-ivory">
-              {title}
-            </h2>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-brand-ivory/74">{description}</p>
+            {hideSectionEyebrow ? null : <p className={grammar.eyebrowOnDark}>{eyebrow}</p>}
+            <h2 className={cn(hideSectionEyebrow ? "" : "mt-4", grammar.sectionOnDark)}>{title}</h2>
+            <p className={cn("mt-5", grammar.bodyOnDark)}>{description}</p>
           </div>
           <div className="grid gap-3 sm:min-w-[16rem]">
             {href.startsWith("#") ? (
               <a
                 href={href}
-                className="ak-call-button group grid px-5 py-4 text-left transition-colors"
+                className={actionClass}
                 onClick={(e) => {
                   const id = href.slice(1);
                   const el = typeof document !== "undefined" ? document.getElementById(id) : null;
@@ -550,36 +655,13 @@ export function CTA({
                   }
                 }}
               >
-                <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</span>
-                <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
-                <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
-                  {label}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-                </span>
+                {actionInner}
               </a>
             ) : (
-              <Link
-                href={href}
-                className="ak-call-button group grid px-5 py-4 text-left transition-colors"
-              >
-                <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</span>
-                <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
-                <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
-                  {label}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-                </span>
+              <Link href={href} className={actionClass}>
+                {actionInner}
               </Link>
             )}
-            {href === "/contact" ? (
-              <a
-                href="/contact#request-call"
-                aria-label="Email Agent Kammer"
-                className="inline-flex items-center justify-center gap-3 border border-brand-ivory/18 px-5 py-3 text-center text-[10px] uppercase tracking-[0.16em] text-brand-ivory/82 transition-colors hover:border-brand-brass hover:text-brand-ivory"
-              >
-                <Mail className="h-3.5 w-3.5 text-brand-brass" strokeWidth={1.5} />
-                Email
-              </a>
-            ) : null}
           </div>
         </div>
       </PageSection>

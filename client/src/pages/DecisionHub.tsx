@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { PageHero, PageSection, SectionHeading } from "@/components/site-shell";
+import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 type RecommendationBrief = {
@@ -151,7 +152,7 @@ export default function DecisionHub() {
               <div className="grid gap-6">
                 <div className="border border-brand-border bg-white p-6">
                   <p className="text-[10px] uppercase tracking-[0.2em] text-brand-cocoa">Decision History</p>
-                  <h2 className="mt-3 font-display text-3xl leading-none text-brand-navy">Recommendation briefs</h2>
+                  <h2 className={`mt-3 ${grammar.section}`}>Recommendation briefs</h2>
                   <p className="mt-3 text-sm leading-6 text-brand-graphite/75">
                     When Raphi sends a recommendation or recap, it lands here in your Decision Hub. Not only in email.
                   </p>
@@ -196,7 +197,7 @@ export default function DecisionHub() {
 
                 <div className="border border-brand-border bg-white p-6">
                   <p className="text-[10px] uppercase tracking-[0.2em] text-brand-cocoa">Next</p>
-                  <h2 className="mt-3 font-display text-2xl leading-none text-brand-navy">Keep building with Raphi</h2>
+                  <h2 className={`mt-3 ${grammar.rowTitle}`}>Keep building with Raphi</h2>
                   <p className="mt-3 text-sm leading-6 text-brand-graphite/75">
                     New recommendation briefs stay linked to this Decision Hub.
                   </p>

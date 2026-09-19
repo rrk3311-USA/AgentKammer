@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import type { IntelligenceHubLink } from "@/data/intelligence-hub";
 import { continueReadingDefaults } from "@/data/intelligence-hub";
+import { grammar } from "@/components/visual-grammar";
 
 type ContinueReadingLinksProps = {
   links?: IntelligenceHubLink[];
@@ -20,7 +21,7 @@ export function ContinueReadingLinks({ links = continueReadingDefaults, excludeH
           {items.map((item) => (
             <li key={item.href}>
               <Link href={item.href} className="group block">
-                <p className="font-serif text-lg font-semibold text-brand-midnight transition group-hover:text-brand-champagne-dark">
+                <p className={`${grammar.rowTitle} transition group-hover:text-brand-navy-secondary`}>
                   {item.label} →
                 </p>
                 {item.description ? (

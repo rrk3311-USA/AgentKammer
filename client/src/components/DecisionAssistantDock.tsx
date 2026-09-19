@@ -372,7 +372,7 @@ function getUsefulActions(answers: Answers): QuickAction[] {
     },
     {
       label: "Compare: Condo vs Co-op",
-      path: "/building-reports",
+      path: "/situations/condo-vs-coop",
       response: "Condo vs Co-op matters because it changes approval risk, financing, renovation control, resale, and how much flexibility you keep.",
     },
     {
@@ -401,7 +401,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   const [location, setLocation] = useLocation();
   const [expanded, setExpanded] = useState(false);
   const [nudge, setNudge] = useState<string | null>(null);
-  const [footerVisible, setFooterVisible] = useState(false);
+  const [charcoalFooterOnScreen, setCharcoalFooterOnScreen] = useState(false);
   const sheetDrag = useRef<{ y: number } | null>(null);
   const guideOpenedRef = useRef(false);
   const lastPageHelperRef = useRef<string | null>(null);
@@ -464,22 +464,16 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   }, [expanded]);
 
   useEffect(() => {
-    const nest = document.getElementById("resume-decision-nest");
-    if (!nest || typeof IntersectionObserver === "undefined") return;
+    const bar = document.querySelector("[data-ak-charcoal-footer]");
+    if (!bar || typeof IntersectionObserver === "undefined") return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const visible = Boolean(entry?.isIntersecting);
-        setFooterVisible(visible);
-        if (visible) document.documentElement.dataset.advisorFooter = "1";
-        else delete document.documentElement.dataset.advisorFooter;
+        setCharcoalFooterOnScreen(Boolean(entry?.isIntersecting));
       },
-      { rootMargin: "0px 0px -12px 0px", threshold: 0.4 },
+      { threshold: 0 },
     );
-    observer.observe(nest);
-    return () => {
-      observer.disconnect();
-      delete document.documentElement.dataset.advisorFooter;
-    };
+    observer.observe(bar);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -532,7 +526,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
     clearDecisionAssistantNudge();
   }, [location, memoryLoaded]);
 
-  // Soft dwell nudge nests on Resume Decision; never a competing bar.
+  // Soft dwell nudge on the Guidance chip; never a competing bar.
   useEffect(() => {
     if (expanded || !memoryLoaded) return;
     const timer = window.setTimeout(() => {
@@ -983,6 +977,21 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
 
   const chipLabel = messages.some((message) => message.role === "user") ? "Resume Decision" : "Guidance";
 
+  const idleChip = (
+    <button
+      type="button"
+      id="decision-assistant"
+      onClick={toggleSheet}
+      className="ak-guidance-chip pointer-events-auto"
+      aria-expanded="false"
+      aria-label={chipLabel === "Guidance" ? "Open Guidance Advisor" : "Resume Decision with Guidance Advisor"}
+      data-testid="button-guidance-chip"
+    >
+      <GuidanceAdvisorFace size="chip" />
+      <span>{chipLabel}</span>
+    </button>
+  );
+
   return (
     <div className={expanded ? "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center" : "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-3"}>
       {expanded ? (
@@ -1103,14 +1112,8 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
             </div>
           </div>
         </aside>
-      ) : (
-        <div
-          className={
-            footerVisible
-              ? "pointer-events-none hidden"
-              : "pointer-events-auto flex w-full max-w-[22rem] flex-col items-center pb-[max(0.65rem,env(safe-area-inset-bottom))] pt-2"
-          }
-        >
+      ) : charcoalFooterOnScreen ? null : (
+        <div className="pointer-events-auto flex w-full max-w-[22rem] flex-col items-center pb-[max(0.65rem,env(safe-area-inset-bottom))] pt-2">
           {nudge ? (
             <button
               type="button"
@@ -1121,18 +1124,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
               <span className="mt-1 block text-sm leading-5">{nudge}</span>
             </button>
           ) : null}
-          <button
-            type="button"
-            id="decision-assistant"
-            onClick={toggleSheet}
-            className="ak-guidance-chip ak-guidance-pinstripe"
-            aria-expanded="false"
-            aria-label={chipLabel === "Guidance" ? "Open Guidance Advisor" : "Resume Decision with Guidance Advisor"}
-            data-testid="button-guidance-chip"
-          >
-            <GuidanceAdvisorFace size="chip" />
-            <span>{chipLabel}</span>
-          </button>
+          {idleChip}
         </div>
       )}
     </div>

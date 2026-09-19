@@ -12,10 +12,8 @@ import { initVisitorSignalTracking, trackPageViewSignal } from "@/lib/visitor-si
 
 const Home = lazy(() => import("@/pages/Home"));
 const About = lazy(() => import("@/pages/About"));
-const Buildings = lazy(() => import("@/pages/Buildings"));
 const BuildingReport = lazy(() => import("@/pages/BuildingReport"));
 const NewYorkMarket = lazy(() => import("@/pages/NewYorkMarket"));
-const Intelligence = lazy(() => import("@/pages/Intelligence"));
 const IntelligenceHome = lazy(() => import("@/pages/IntelligenceHome"));
 const Services = lazy(() => import("@/pages/Services"));
 const ServiceLanding = lazy(() => import("@/pages/ServiceLanding"));
@@ -65,7 +63,15 @@ function Redirect({ to }: { to: string }) {
   const [, setLocation] = useLocation();
 
   useEffect(() => {
-    setLocation(to);
+    const hashIndex = to.indexOf("#");
+    const path = hashIndex === -1 ? to : to.slice(0, hashIndex);
+    const hash = hashIndex === -1 ? "" : to.slice(hashIndex + 1);
+    setLocation(path);
+    if (hash) {
+      window.location.hash = hash;
+    } else if (window.location.hash) {
+      window.history.replaceState(null, "", path);
+    }
   }, [setLocation, to]);
 
   return null;
@@ -75,6 +81,7 @@ function ScrollToTop() {
   const [location] = useLocation();
   
   useEffect(() => {
+    if (window.location.hash) return;
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: 'auto' });
       document.documentElement.scrollTop = 0;
@@ -129,11 +136,11 @@ function Router() {
       <Route path="/situations/:slug">{({ slug }) => <ServiceLanding slug={slug} />}</Route>
       <Route path="/services">{() => <Redirect to="/situations" />}</Route>
       <Route path="/services/:slug">{({ slug }) => <Redirect to={`/situations/${slug}`} />}</Route>
-      <Route path="/building-reports" component={Buildings} />
       <Route path="/building-reports/individual-buildings" component={BuildingReport} />
       <Route path="/building-reports/neighborhood-guides" component={NewYorkMarket} />
-      <Route path="/building-reports/market-briefs" component={Intelligence} />
+      <Route path="/building-reports/market-briefs">{() => <Redirect to="/guides#kammer-report" />}</Route>
       <Route path="/building-reports/:slug" component={BuildingReportDetail} />
+      <Route path="/building-reports">{() => <Redirect to="/guides#kammer-report" />}</Route>
       <Route path="/buyer-advisory" component={Buy} />
       <Route path="/insights" component={Perspectives} />
       <Route path="/insights/reports/:slug" component={ExecutiveHousingReport} />
@@ -169,7 +176,7 @@ function Router() {
       <Route path="/hub/reviews" component={HubReviews} />
       <Route path="/hub/profile" component={HubProfile} />
       <Route path="/hub" component={HubHome} />
-      <Route path="/buildings">{() => <Redirect to="/building-reports" />}</Route>
+      <Route path="/buildings">{() => <Redirect to="/guides#kammer-report" />}</Route>
       <Route path="/buildings/:slug/report">{({ slug }) => <Redirect to={`/building-reports/${slug}`} />}</Route>
       <Route path="/buy">{() => <Redirect to="/buyer-advisory" />}</Route>
       <Route path="/executive-relocation">{() => <Redirect to="/situations/executive-relocation-nyc" />}</Route>
@@ -191,7 +198,7 @@ function Router() {
       <Route path="/profile">{() => <Redirect to="/account" />}</Route>
       <Route path="/reverse-buyer-origination">{() => <Redirect to="/buyer-advisory" />}</Route>
       <Route path="/reverse-seller-architecture">{() => <Redirect to="/contact" />}</Route>
-      <Route path="/real-estate">{() => <Redirect to="/building-reports" />}</Route>
+      <Route path="/real-estate">{() => <Redirect to="/guides#kammer-report" />}</Route>
       <Route component={NotFound} />
     </Switch>
   );
@@ -215,12 +222,14 @@ function AppShell() {
   }
 
   return (
-    <div className="ak-app-shell min-h-screen bg-brand-charcoal text-brand-ink">
+    <div className="ak-app-shell flex min-h-screen flex-col bg-brand-ivory text-brand-ink">
       <ScrollToTop />
       <VisitorSignals />
       <Header />
-      <Suspense fallback={<div className="mx-auto w-full max-w-7xl px-6 py-12 text-white/70">Loading...</div>}>
-        <Router />
+      <Suspense fallback={<div className="mx-auto w-full max-w-7xl flex-1 px-6 py-12 text-brand-graphite/70">Loading...</div>}>
+        <div className="flex-1">
+          <Router />
+        </div>
       </Suspense>
       <Footer />
       <DecisionAssistantDock />

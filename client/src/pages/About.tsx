@@ -1,20 +1,9 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { ArchitecturalHeroDrawing, CTA, PageHero } from "@/components/site-shell";
+import { CTA, PageHero } from "@/components/site-shell";
+import { DecisionFramework } from "@/components/DecisionFramework";
+import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
-
-function SketchDivider({ variant }: { variant: "private-advisory" | "decision-framework" | "building" }) {
-  return (
-    <div className="flex justify-center border-y border-brand-border bg-brand-navy py-10" aria-hidden>
-      <ArchitecturalHeroDrawing
-        eyebrow="About"
-        title="Agent Kammer"
-        variant={variant}
-        className="opacity-90 [&_svg]:max-w-[18rem]"
-      />
-    </div>
-  );
-}
 
 export default function About() {
   usePageMetadata({
@@ -33,78 +22,65 @@ export default function About() {
         art="private-advisory"
       />
 
-      <article className="mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24">
-        <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Practice</p>
-        <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] leading-[0.94] text-brand-navy">
-          Manhattan decisions need more than a listing feed.
-        </h2>
-        <p className="mt-8 text-lg leading-9 text-brand-graphite">
+      <article className="mx-auto max-w-[42rem] px-6 py-20 lg:px-10 lg:py-24">
+        <p className={grammar.eyebrow}>Practice</p>
+        <h2 className={`mt-4 ${grammar.section}`}>Manhattan decisions need more than a listing feed.</h2>
+        <p className={`mt-8 ${grammar.bodyWide}`}>
           Agent Kammer is an independent housing advisory practice. The work starts with life change, uncertainty, and trade-offs, then building-level literacy, before apartments or urgency take over.
         </p>
-        <p className="mt-6 text-lg leading-9 text-brand-graphite">
+        <p className={`mt-6 ${grammar.bodyWide}`}>
           First purchase, relocation, a stay-or-go question, or a portfolio of homes: the process begins with clarity, not listings.
         </p>
-        <p className="mt-6 text-lg leading-9 text-brand-graphite">
+        <p className={`mt-6 ${grammar.bodyWide}`}>
           A recommendation can be to wait, rent first, renovate, sell, buy, or do nothing. When a transaction is right, Agent Kammer remains the advisory layer and introduces the right local professionals for execution.
         </p>
-        <p className="mt-6 text-lg leading-9 text-brand-graphite">
+        <p className={`mt-6 ${grammar.bodyWide}`}>
           Some clients work together for weeks. Others for years. Decisions evolve, and the guidance evolves with them.
         </p>
-        <p className="mt-6 text-lg leading-9 text-brand-graphite">
+        <p className={`mt-6 ${grammar.bodyWide}`}>
           Buildings before listings. Helping people make better housing decisions throughout life, not just real estate transactions. Live Where You Belong, whether that means stay or move.
         </p>
       </article>
 
-      <SketchDivider variant="building" />
-
-      <article className="mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24">
-        <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Credentials That Matter</p>
-        <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] leading-[0.94] text-brand-navy">
-          Building literacy changes the quality of advice.
-        </h2>
-        <p className="mt-8 text-lg leading-9 text-brand-graphite">
+      <article className="mx-auto max-w-[42rem] border-t border-brand-border px-6 py-20 lg:px-10 lg:py-24">
+        <p className={grammar.eyebrow}>Credentials That Matter</p>
+        <h2 className={`mt-4 ${grammar.section}`}>Building literacy changes the quality of advice.</h2>
+        <p className={`mt-8 ${grammar.bodyWide}`}>
           We read buildings as assets: structure, operations, and how they actually work for the people who live in them. That literacy informs judgment. It is not a pitch for inspections.
         </p>
-        <p className="mt-6 text-lg leading-9 text-brand-graphite">
+        <p className={`mt-6 ${grammar.bodyWide}`}>
           That literacy sits behind Decision Briefs and Building Reports, used after the decision frame is clear, never as a substitute for asking whether anything should change.
         </p>
       </article>
 
-      <SketchDivider variant="decision-framework" />
-
-      <article className="mx-auto max-w-[42rem] px-6 py-16 lg:px-10 lg:py-24">
-        <p className="text-[10px] uppercase tracking-[0.24em] text-brand-cocoa">Principles</p>
-        <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3rem)] leading-[0.94] text-brand-navy">
-          Three ideas organize the work.
-        </h2>
-        <ol className="mt-10 space-y-10">
-          <li>
-            <p className="font-display text-2xl text-brand-navy">Advisory first</p>
-            <p className="mt-3 text-base leading-8 text-brand-graphite">
-              Judgment and positioning before volume or velocity. Doing nothing can be the win.
-            </p>
-          </li>
-          <li>
-            <p className="font-display text-2xl text-brand-navy">Building-led perspective</p>
-            <p className="mt-3 text-base leading-8 text-brand-graphite">
-              Building, block, and buyer brief together, before floor plans dominate attention.
-            </p>
-          </li>
-          <li>
-            <p className="font-display text-2xl text-brand-navy">Quiet execution</p>
-            <p className="mt-3 text-base leading-8 text-brand-graphite">
-              Measured, private, precise. Urgency is never manufactured.
-            </p>
-          </li>
-        </ol>
-        <Link
-          href="/belonging"
-          className="mt-12 inline-flex items-center gap-3 border-b border-brand-brass pb-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-navy transition-colors hover:text-brand-brass"
-        >
-          Find out if you’re living where you belong
-          <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-        </Link>
-      </article>
+      <DecisionFramework
+        eyebrow="Principles"
+        title="Three ideas organize the work."
+        description="Judgment first. Buildings next. Quiet execution throughout."
+        items={[
+          {
+            step: "01",
+            title: "Advisory first",
+            text: "Judgment and positioning before volume or velocity. Doing nothing can be the win.",
+          },
+          {
+            step: "02",
+            title: "Building-led perspective",
+            text: "Building, block, and buyer brief together, before floor plans dominate attention.",
+          },
+          {
+            step: "03",
+            title: "Quiet execution",
+            text: "Measured, private, precise. Urgency is never manufactured.",
+          },
+        ]}
+        action={
+          <Link href="/belonging" className={grammar.textLink}>
+            Find out if you’re living where you belong
+            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+          </Link>
+        }
+      />
 
       <CTA
         title="Find out if you’re living where you belong."
