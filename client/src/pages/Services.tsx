@@ -62,8 +62,8 @@ export default function Services() {
     <main className="bg-brand-ivory">
       <PageHero
         eyebrow="Situations"
-        title="Explore your situation, not a property search."
-        description="Decision Intelligence starts here: what changed in your life, what decision you face, and what you still need to understand. Each page is a Situation: research, not a product."
+        title="Start from what changed."
+        description="What's changing, what decision you face, and what you still need to understand. Each page is a situation: research, not a product."
         art="situations"
       />
 
@@ -103,11 +103,11 @@ export default function Services() {
       </ModuleSection>
 
       <CTA
-        title="Start with the Situation Assessment."
-        description="If the situation is still open, begin the diagnostic. If an address is already in play, request a Property Assessment."
-        href="/belonging"
-        label="Situation Assessment"
-        eyebrow="Start Here"
+        title="When you need to understand the model."
+        description="Guides is the knowledge library. Guidance stays the human layer, from the header."
+        href="/guides"
+        label="Guides"
+        eyebrow="Guides"
       />
     </main>
   );

@@ -2,7 +2,7 @@
 
 **Status:** Built, **unlisted** until `TOOLS_PUBLIC=1`  
 **Routes:** `/tools` · `/tools/livability`  
-**Not in primary nav:** Home · Start Here · Situations · Buildings · Guides · About
+**Not in primary nav:** Home · Start Here · Guides · Contact
 
 A private analysis desk. First tool is **Livability Score**. More tools can share the same wallet later (`building-fit` and `decision-brief` are scaffolded).
 

@@ -3,7 +3,6 @@ import { ArrowRight, MoveRight } from "lucide-react";
 import { CTA } from "@/components/site-shell";
 import { DecisionFramework } from "@/components/DecisionFramework";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
-import { openDecisionAssistant } from "@/lib/decision-assistant";
 import { serviceLandingMap } from "@/data/service-landings";
 
 const howWeDecide = [
@@ -52,14 +51,13 @@ export default function Home() {
               </p>
             </blockquote>
             <div className="mt-8">
-              <button
-                type="button"
-                onClick={openDecisionAssistant}
+              <Link
+                href="/situations"
                 className="ak-call-button group inline-flex min-w-[19rem] items-center justify-between gap-6 rounded-button px-5 py-4 text-[14px] font-semibold uppercase tracking-[0.12em] text-brand-ivory transition-colors"
               >
                 What's changing
                 <MoveRight className="h-4 w-4 text-brand-stone transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
-              </button>
+              </Link>
             </div>
           </div>
           <div className="relative min-h-[420px] overflow-hidden bg-brand-surface lg:min-h-[640px]">
@@ -97,7 +95,7 @@ export default function Home() {
               href="/situations"
               className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
             >
-              View all situations
+              Start Here
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
           </div>

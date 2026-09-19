@@ -13,7 +13,7 @@ export const PUBLIC_PRODUCTS = {
     id: "guidance",
     label: "Guidance",
     advisor: "Guidance Advisor",
-    href: "/buyer-advisory",
+    href: "/",
     text: "A quiet conversation with the Guidance Advisor. Chat only. Not a call.",
   },
   situation: {

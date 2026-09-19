@@ -40,7 +40,7 @@ const defaultEngagement: PageEngagement = {
     { label: "Relocation", text: "We're relocating.", path: "/situations/executive-relocation-nyc" },
     { label: "Growing family", text: "Our family is growing.", path: "/situations/new-baby-growing-family-nyc" },
     { label: "First home", text: "I'm buying my first home.", path: "/situations/first-home-buyers-nyc" },
-    { label: "Just exploring", text: "I'm just exploring.", path: "/buyer-advisory" },
+    { label: "Just exploring", text: "I'm just exploring.", path: "/situations" },
   ],
   pageHelper: "I'm with you on this page. Tell me what you're trying to decide and I'll point you to the next useful move.",
 };
@@ -54,29 +54,22 @@ const byPath: Record<string, Partial<PageEngagement>> = {
     pageHelper: "You're on the homepage. If you tell me the life change, I'll open the right brief.",
     starters: [
       { label: "Relocating", text: "We're relocating to Manhattan.", path: "/situations/executive-relocation-nyc" },
-      { label: "Buy or wait?", text: "Should I buy now or wait?", path: "/buyer-advisory" },
+      { label: "Buy or wait?", text: "Should I buy now or wait?", path: "/situations#decisions" },
       { label: "International", text: "I'm buying from abroad.", path: "/international" },
       { label: "Just exploring", text: "I'm just exploring for now." },
-    ],
-  },
-  "/buyer-advisory": {
-    headline: "Buyer decisions before tours",
-    nudge: "Want a clear buy / wait / rent path before you look at apartments?",
-    greeting:
-      "You're in Buyer Advisory. I help decide buy, wait, rent, or stay. Then which neighborhoods and building types fit. What's driving the search?",
-    pageHelper: "On Buyer Advisory I'll keep you focused on fit, not inventory. What's the main pressure: timing, budget, or lifestyle?",
-    starters: [
-      { label: "Buy now?", text: "Should I buy now or wait?" },
-      { label: "First purchase", text: "This would be my first home in NYC." },
-      { label: "Upgrade", text: "We're considering an upgrade." },
-      { label: "Budget unclear", text: "I'm not sure what budget makes sense." },
     ],
   },
   "/situations": {
     headline: "Which life change fits?",
     nudge: "Pick a situation and I'll help you choose the right advisory path.",
-    greeting: "You're looking at services. Tell me the life change and I'll recommend which brief matters first.",
-    pageHelper: "Services covers many situations. Name yours and I'll narrow it.",
+    greeting:
+      "You're at Start Here. Name what changed — relocation, family, a decision path — and I'll open the right brief.",
+    starters: [
+      { label: "Relocation", text: "We're relocating.", path: "/situations/executive-relocation-nyc" },
+      { label: "Growing family", text: "Our family is growing.", path: "/situations/new-baby-growing-family-nyc" },
+      { label: "First home", text: "I'm buying my first home.", path: "/situations/first-home-buyers-nyc" },
+      { label: "Just exploring", text: "I'm just exploring." },
+    ],
   },
   "/situations/executive-relocation-nyc": {
     headline: "Relocation timing & fit",

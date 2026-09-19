@@ -347,7 +347,7 @@ function getSituationGuidance(answer: string, score: number) {
   }
   if (/(should.*sell|should.*move|not sure|stay|keep|move or|sell or|just explor|exploring)/.test(lower)) {
     return {
-      path: "/buyer-advisory",
+      path: "/situations",
       messages: [
         "That is the right starting point. You do not need to know whether moving is the answer yet. I would compare staying, renewing, renovating, renting, and moving before looking at buildings. The recommendation may be to do nothing for now, and that can be the right answer.",
       ],
@@ -367,7 +367,7 @@ function getUsefulActions(answers: Answers): QuickAction[] {
   const actions: QuickAction[] = [
     {
       label: "Read: Rent vs Buy",
-      path: "/buyer-advisory",
+      path: "/situations",
       response: "I would start with Rent vs Buy because it separates flexibility from ownership. That should come before comparing buildings.",
     },
     {

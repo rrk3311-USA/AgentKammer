@@ -58,16 +58,17 @@ describe("public menu lock", () => {
     expect([...KAMMER_VERDICTS]).toEqual(["Pick", "Consider", "Wait", "Pass"]);
   });
 
-  it("locks primary header nav to five short labels", () => {
+  it("locks primary header nav to Home · Start Here · Guides · Contact", () => {
     expect(primaryNav.map((item) => [item.label, item.href])).toEqual([
       ["Home", "/"],
-      ["Start Here", "/buyer-advisory"],
-      ["Situations", "/situations"],
+      ["Start Here", "/situations"],
       ["Guides", "/guides"],
       ["Contact", "/contact"],
     ]);
+    expect(primaryNav.some((item) => item.label === "Situations")).toBe(false);
     expect(primaryNav.some((item) => item.label === "Buildings")).toBe(false);
     expect(primaryNav.some((item) => item.label === "About")).toBe(false);
+    expect(primaryNav.some((item) => item.href === "/buyer-advisory")).toBe(false);
   });
 
   it("keeps Guides selector as Decision Guides · Neighborhoods · Property Assessment", () => {
@@ -96,8 +97,7 @@ describe("public menu lock", () => {
 
   it("keeps the charcoal footer quiet: doors, then Contact · Privacy · Terms", () => {
     expect(FOOTER_DARK_NAV.map((item) => [item.label, item.href])).toEqual([
-      ["Start Here", "/buyer-advisory"],
-      ["Situations", "/situations"],
+      ["Start Here", "/situations"],
       ["Guides", "/guides"],
       ["About", "/about"],
       ["Get Qualified", "/qualify"],
@@ -109,6 +109,7 @@ describe("public menu lock", () => {
     ]);
     expect(FOOTER_DARK_LINKS).toEqual([...FOOTER_DARK_NAV, ...FOOTER_DARK_META]);
     expect(FOOTER_DARK_LINKS.filter((item) => item.label === "Guides")).toHaveLength(1);
+    expect(FOOTER_DARK_LINKS.some((item) => item.label === "Situations")).toBe(false);
     expect(FOOTER_DARK_LINKS.some((item) => item.href === "/sitemap")).toBe(false);
     expect(FOOTER_DARK_LINKS.some((item) => item.href === "/intelligence")).toBe(false);
     expect(FOOTER_DARK_LINKS.some((item) => item.href === "/account")).toBe(false);
@@ -153,6 +154,7 @@ describe("public menu lock", () => {
     expect(groups.some((group) => group.title === "Building library")).toBe(false);
     const doors = groups.flatMap((group) => group.items);
     expect(doors.some((item) => item.label === "Buildings")).toBe(false);
+    expect(doors.filter((item) => item.label === "Situations")).toHaveLength(0);
     expect(doors.some((item) => item.label === "Overview" && item.href === "/building-reports")).toBe(false);
     expect(doors.some((item) => item.label === "Market Briefs")).toBe(false);
     expect(doors.some((item) => item.label === "Kammer Report")).toBe(false);

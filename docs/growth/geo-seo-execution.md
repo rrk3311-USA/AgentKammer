@@ -39,7 +39,7 @@ Use the **matching Decision Brief**, not the homepage, when a directory allows a
 | Intent cluster | Primary URL | Secondary |
 |---|---|---|
 | Executive relocation NYC | `/services/executive-relocation-nyc` | `/services/rent-vs-buy-manhattan-relocation` |
-| Corporate relocation | `/services/corporate-relocation-buyers-nyc` | `/buyer-advisory` |
+| Corporate relocation | `/services/corporate-relocation-buyers-nyc` | `/situations` |
 | Foreign / international buyer | `/services/foreign-buyers-new-york` | `/services/condo-vs-coop-foreign-buyers-nyc` |
 | 1031 exchange | `/services/1031-exchange-new-york` | `/building-reports` |
 | Physician relocation | `/services/physician-relocation-nyc` | `/services/female-doctors-professionals-buying-nyc` |
@@ -50,7 +50,7 @@ Use the **matching Decision Brief**, not the homepage, when a directory allows a
 | Downsizing / retiree | `/services/empty-nester-downsizing-nyc` | `/services/retiree-senior-home-buyers-nyc` |
 | New development | `/services/new-development-nyc` | `/building-reports` |
 | Building intelligence | `/building-reports` | `/building-reports/individual-buildings` |
-| Decision frameworks hub | `/services` | `/buyer-advisory` |
+| Decision frameworks hub | `/services` | `/situations` |
 | Upper West Side | `/services/upper-west-side-buyers-nyc` | `/building-reports/neighborhood-guides` |
 | Upper East Side | `/services/upper-east-side-buyers-nyc` | `/building-reports/neighborhood-guides` |
 | Tribeca | `/services/tribeca-buyers-nyc` | `/building-reports/neighborhood-guides` |

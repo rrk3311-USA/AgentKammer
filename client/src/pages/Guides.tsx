@@ -174,9 +174,9 @@ export default function Guides() {
       <DarkStatement
         eyebrow="Next"
         title="If the question is a life change, start there."
-        description="Guides explain the model. Situations name what changed. Start Here is how we work together."
+        description="Guides explain the model. Start Here names what changed. Guidance is the human layer."
         href="/situations"
-        label="Situations"
+        label="Start Here"
       />
     </main>
   );
