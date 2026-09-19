@@ -1031,26 +1031,36 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
               </button>
             </div>
 
-            <div className="flex min-h-0 flex-1 flex-col gap-3 px-4 pb-[max(0.85rem,env(safe-area-inset-bottom))] pt-3">
+            <div
+              className={
+                cold
+                  ? "flex min-h-0 flex-1 flex-col gap-2 overflow-hidden px-3 pb-[max(0.65rem,env(safe-area-inset-bottom))] pt-2"
+                  : "flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-4 pb-[max(0.85rem,env(safe-area-inset-bottom))] pt-3"
+              }
+            >
               <div ref={transcriptRef} className="min-h-0 flex-1 space-y-3 overflow-y-auto overflow-x-hidden pr-1">
               {recentMessages.map((message, index) => (
                 <div key={`${message.role}-${index}`} className="max-w-full">
-                  <p
-                    className={
-                      message.role === "assistant"
-                        ? "text-[10px] uppercase tracking-[0.2em] text-[#b08d57]"
-                        : "text-[10px] uppercase tracking-[0.2em] text-[#f5f2eb]/40"
-                    }
-                  >
-                    {message.role === "assistant" ? "Guidance Advisor" : "You"}
+                  {cold ? null : (
+                    <p
+                      className={
+                        message.role === "assistant"
+                          ? "text-[10px] uppercase tracking-[0.2em] text-[#b08d57]"
+                          : "text-[10px] uppercase tracking-[0.2em] text-[#f5f2eb]/40"
+                      }
+                    >
+                      {message.role === "assistant" ? "Guidance Advisor" : "You"}
+                    </p>
+                  )}
+                  <p className={`whitespace-pre-line break-words text-[#f5f2eb]/90 ${cold ? "line-clamp-3 text-[13px] leading-5" : "mt-1.5 text-[14px] leading-6"}`}>
+                    {message.text}
                   </p>
-                  <p className="mt-1.5 whitespace-pre-line break-words text-[14px] leading-6 text-[#f5f2eb]/90">{message.text}</p>
                 </div>
               ))}
             </div>
 
               {cold && step !== "sent" ? (
-              <div className="flex flex-wrap gap-2" aria-label="Quick starters">
+              <div className="flex shrink-0 flex-wrap gap-2" aria-label="Quick starters">
                 {starterPrompts.map((prompt) => (
                   <button
                     key={prompt.label}
@@ -1065,7 +1075,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
             ) : null}
 
               {quickActions.length > 0 && step !== "sent" ? (
-              <div className="flex flex-wrap gap-2" aria-label="Suggested actions">
+              <div className="flex shrink-0 flex-wrap gap-2" aria-label="Suggested actions">
                 {quickActions.map((action) => (
                   <button
                     key={action.label}
@@ -1080,7 +1090,11 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
             ) : null}
 
               {step !== "sent" ? (
-              <form onSubmit={handleSubmit} className="mt-auto grid w-full min-w-0 grid-cols-[minmax(0,1fr)_auto] items-end gap-2 border-t border-[#d8d1c7]/25 pt-3">
+              <form
+                onSubmit={handleSubmit}
+                className={`mt-auto grid w-full min-w-0 shrink-0 grid-cols-[minmax(0,1fr)_auto] items-end gap-2 border-t border-[#d8d1c7]/25 ${cold ? "pt-2" : "pt-3"}`}
+                data-testid="guidance-composer"
+              >
                 <label className="sr-only" htmlFor="decision-assistant-input">
                   Tell me what's changing
                 </label>
@@ -1096,8 +1110,8 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
                       ? "Email or mobile if you want this waiting for you..."
                       : openingPrompts[promptIndex % openingPrompts.length] || "Tell me what's changing..."
                   }
-                  rows={2}
-                  className="min-h-10 w-full min-w-0 resize-none border-0 bg-transparent px-0 py-2 text-sm text-[#f5f2eb] outline-none placeholder:text-[#f5f2eb]/32"
+                  rows={cold ? 1 : 2}
+                  className={`min-h-10 w-full min-w-0 resize-none border-0 bg-transparent px-0 text-sm text-[#f5f2eb] outline-none placeholder:text-[#f5f2eb]/32 ${cold ? "py-1.5" : "py-2"}`}
                 />
                 <button
                   type="submit"

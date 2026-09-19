@@ -1009,7 +1009,9 @@
 
   .ak-guidance-sheet.is-start {
     max-width: 14.3rem;
-    max-height: min(27vh, 16.9rem);
+    /* Bound height so chips + composer stay visible; greeting scrolls above. */
+    height: min(33vh, 20.15rem);
+    max-height: min(33vh, 20.15rem);
     margin-inline: auto;
     border-bottom: 1px solid #d8d1c7;
     border-radius: 10px;
@@ -1142,7 +1144,8 @@
 
     .ak-guidance-sheet.is-start {
       max-width: 14.3rem;
-      max-height: min(26vh, 15.925rem);
+      height: min(32vh, 19.175rem);
+      max-height: min(32vh, 19.175rem);
     }
   }
 
