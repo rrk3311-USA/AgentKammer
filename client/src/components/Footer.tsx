@@ -24,10 +24,6 @@ const popularSearches = [
 const pillClass =
   "rounded-full border border-brand-border bg-white px-4 py-1.5 text-[11px] uppercase tracking-[0.1em] text-brand-navy transition-colors hover:border-brand-brass hover:text-brand-brass";
 
-function GuidanceDockNest() {
-  return <div id="resume-decision-nest" className="flex min-h-11 min-w-[13rem] items-center" />;
-}
-
 export function Footer() {
   const [, navigate] = useLocation();
   const [langsOpen, setLangsOpen] = useState(false);
@@ -73,14 +69,11 @@ export function Footer() {
       <div className="border-t border-brand-brass/28 bg-brand-charcoal text-brand-ivory">
         <div className="mx-auto flex w-full max-w-site flex-col gap-2.5 px-6 py-3 lg:px-10">
           <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
-              <div className="flex items-center gap-2">
-                <AkMonogramMark variant="ivory" className="h-5 w-auto opacity-90" />
-                <p className="text-[10px] uppercase tracking-[0.18em] text-brand-ivory/78">
-                  Copyright 2026 Agent Kammer
-                </p>
-              </div>
-              <GuidanceDockNest />
+            <div className="flex items-center gap-2">
+              <AkMonogramMark variant="ivory" className="h-5 w-auto opacity-90" />
+              <p className="text-[10px] uppercase tracking-[0.18em] text-brand-ivory/78">
+                Copyright 2026 Agent Kammer
+              </p>
             </div>
             <nav
               aria-label="Footer"

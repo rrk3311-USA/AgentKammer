@@ -868,10 +868,6 @@
     padding-bottom: calc(4.25rem + env(safe-area-inset-bottom));
   }
 
-  html[data-advisor-footer="1"] .ak-app-shell {
-    padding-bottom: 0;
-  }
-
   ::selection {
     background-color: rgb(15 23 42 / 0.12);
   }
@@ -993,10 +989,6 @@
     text-transform: uppercase;
     white-space: nowrap;
     box-shadow: 0 -8px 20px rgba(42, 52, 71, 0.22);
-  }
-
-  #resume-decision-nest .ak-guidance-chip {
-    box-shadow: none;
   }
 
   .ak-guidance-chip:hover {

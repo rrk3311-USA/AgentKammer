@@ -1,5 +1,4 @@
 import { CSSProperties, FormEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
 import { useLocation } from "wouter";
 import {
   ArrowRight,
@@ -402,8 +401,6 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   const [location, setLocation] = useLocation();
   const [expanded, setExpanded] = useState(false);
   const [nudge, setNudge] = useState<string | null>(null);
-  const [footerVisible, setFooterVisible] = useState(false);
-  const [footerNest, setFooterNest] = useState<HTMLElement | null>(null);
   const sheetDrag = useRef<{ y: number } | null>(null);
   const guideOpenedRef = useRef(false);
   const lastPageHelperRef = useRef<string | null>(null);
@@ -464,26 +461,6 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
       delete document.documentElement.dataset.advisor;
     };
   }, [expanded]);
-
-  useEffect(() => {
-    const nest = document.getElementById("resume-decision-nest");
-    setFooterNest(nest);
-    if (!nest || typeof IntersectionObserver === "undefined") return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const visible = Boolean(entry?.isIntersecting);
-        setFooterVisible(visible);
-        if (visible) document.documentElement.dataset.advisorFooter = "1";
-        else delete document.documentElement.dataset.advisorFooter;
-      },
-      { rootMargin: "0px 0px -12px 0px", threshold: 0.4 },
-    );
-    observer.observe(nest);
-    return () => {
-      observer.disconnect();
-      delete document.documentElement.dataset.advisorFooter;
-    };
-  }, []);
 
   useEffect(() => {
     if (!expanded || guideOpenedRef.current) return;
@@ -985,7 +962,6 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   const recentMessages = cold ? displayMessages.slice(-3) : displayMessages.slice(-2);
 
   const chipLabel = messages.some((message) => message.role === "user") ? "Resume Decision" : "Guidance";
-  const nestChip = footerVisible && Boolean(footerNest) && !expanded;
 
   const idleChip = (
     <button
@@ -1003,9 +979,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   );
 
   return (
-    <>
-      {nestChip && footerNest ? createPortal(idleChip, footerNest) : null}
-      <div className={expanded ? "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center" : "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-3"}>
+    <div className={expanded ? "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center" : "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-3"}>
       {expanded ? (
         <aside
           id="decision-assistant"
@@ -1124,7 +1098,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
             </div>
           </div>
         </aside>
-      ) : nestChip ? null : (
+      ) : (
         <div className="pointer-events-auto flex w-full max-w-[22rem] flex-col items-center pb-[max(0.65rem,env(safe-area-inset-bottom))] pt-2">
           {nudge ? (
             <button
@@ -1139,7 +1113,6 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
           {idleChip}
         </div>
       )}
-      </div>
-    </>
+    </div>
   );
 }
