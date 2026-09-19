@@ -1,3 +1,4 @@
+import { Mail } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { useEffect, useState } from "react";
 import { fetchToolsStatus } from "@/lib/tools-client";
@@ -85,16 +86,36 @@ export function Footer() {
               aria-label="Footer"
               className="flex flex-wrap gap-x-4 gap-y-1 text-[10px] uppercase tracking-[0.18em] text-brand-ivory/78"
             >
-              {FOOTER_DARK_LINKS.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="transition-colors hover:text-brand-brass"
-                  data-testid={item.href === "/sitemap" ? "link-footer-sitemap" : undefined}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {FOOTER_DARK_LINKS.map((item) =>
+                item.label === "Contact" ? (
+                  <span key={item.href} className="inline-flex items-center gap-1.5">
+                    <Link
+                      href={item.href}
+                      className="transition-colors hover:text-brand-brass"
+                      data-testid="link-footer-contact"
+                    >
+                      {item.label}
+                    </Link>
+                    <Link
+                      href="/contact#request-call"
+                      aria-label="Email Agent Kammer"
+                      className="inline-flex text-brand-brass transition-colors hover:text-brand-ivory"
+                      data-testid="link-footer-contact-mail"
+                    >
+                      <Mail className="h-3.5 w-3.5" strokeWidth={1.5} />
+                    </Link>
+                  </span>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="transition-colors hover:text-brand-brass"
+                    data-testid={item.href === "/sitemap" ? "link-footer-sitemap" : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                ),
+              )}
               {toolsPublic ? (
                 <Link href="/tools" className="transition-colors hover:text-brand-brass">
                   Tools

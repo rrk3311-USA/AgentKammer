@@ -1,6 +1,6 @@
 import React, { type ReactNode } from "react";
 import { Link, useLocation } from "wouter";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { grammar } from "@/components/visual-grammar";
 
@@ -579,16 +579,6 @@ export function CTA({
                 {actionInner}
               </Link>
             )}
-            {href === "/contact" ? (
-              <a
-                href="/contact#request-call"
-                aria-label="Email Agent Kammer"
-                className="inline-flex items-center justify-center gap-3 border border-brand-ivory/18 px-5 py-3 text-center text-[10px] uppercase tracking-[0.16em] text-brand-ivory/82 transition-colors hover:border-brand-brass hover:text-brand-ivory"
-              >
-                <Mail className="h-3.5 w-3.5 text-brand-brass" strokeWidth={1.5} />
-                Email
-              </a>
-            ) : null}
           </div>
         </div>
       </PageSection>

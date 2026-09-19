@@ -211,7 +211,7 @@ export default function Home() {
         title="When you want a human reply."
         description="The homepage starts with Guidance. Write only if a Situation Assessment, Property Assessment, or Strategy Session is already the right next step."
         href="/contact"
-        label="Write"
+        label="Contact"
         eyebrow="Contact"
       />
     </main>

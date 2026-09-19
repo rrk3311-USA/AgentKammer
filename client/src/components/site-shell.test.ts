@@ -7,6 +7,7 @@ describe("CTA button copy", () => {
   it("treats matching eyebrow and label as the same phrase", () => {
     expect(sameCtaPhrase("Property Assessment", "PROPERTY ASSESSMENT")).toBe(true);
     expect(sameCtaPhrase("Start Here.", "Start Here")).toBe(true);
+    expect(sameCtaPhrase("Contact", "Contact")).toBe(true);
     expect(sameCtaPhrase("Contact", "Write")).toBe(false);
   });
 
@@ -25,18 +26,20 @@ describe("CTA button copy", () => {
     expect(html).toContain("text-[14px]");
   });
 
-  it("keeps a distinct button eyebrow when the label differs", () => {
+  it("uses a single Contact label without a gold eyebrow or Email button", () => {
     const html = renderToStaticMarkup(
       createElement(CTA, {
         title: "When you want a human reply.",
         description: "Write only if a session is already the next step.",
-        href: "#request-call",
-        label: "Write",
+        href: "#contact",
+        label: "Contact",
         eyebrow: "Contact",
       }),
     );
-    expect(html).toContain("Contact");
-    expect(html).toContain("Write");
-    expect(html).toContain("tracking-[0.24em] text-brand-brass");
+    expect(html).toContain("<span>Contact</span>");
+    expect(html).not.toContain("<span>Write</span>");
+    expect(html).not.toContain("Email Agent Kammer");
+    expect(html).not.toContain("tracking-[0.24em] text-brand-brass");
+    expect(html).toContain("text-[14px]");
   });
 });

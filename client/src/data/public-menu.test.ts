@@ -75,6 +75,7 @@ describe("public menu lock", () => {
     expect(FOOTER_DARK_LINKS.slice(-3)).toEqual([...FOOTER_DARK_TAIL_LINKS]);
     expect(FOOTER_DARK_LINKS.some((item) => item.href === "/licenses")).toBe(false);
     expect(FOOTER_DARK_LINKS.some((item) => item.label.toLowerCase() === "licenses")).toBe(false);
+    expect(FOOTER_DARK_LINKS.some((item) => item.label.toLowerCase() === "email")).toBe(false);
   });
 
   it("keeps Sitemap off the ivory What's Changing nav", () => {
