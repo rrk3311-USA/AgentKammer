@@ -973,7 +973,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   };
   const blueprintCompletion = blueprintSegments.filter((segment) => completedSegments[segment.label as keyof typeof completedSegments]).length;
   const displayMessages = mergeConsecutiveMessages(messages);
-  const recentMessages = cold ? displayMessages.slice(-3) : displayMessages.slice(-2);
+  const recentMessages = cold ? displayMessages.slice(-1) : displayMessages.slice(-2);
 
   const chipLabel = messages.some((message) => message.role === "user") ? "Resume Decision" : "Guidance";
 
