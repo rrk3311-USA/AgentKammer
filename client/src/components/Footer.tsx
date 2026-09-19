@@ -90,19 +90,19 @@ export function Footer() {
                 item.label === "Contact" ? (
                   <span key={item.href} className="inline-flex items-center gap-1.5">
                     <Link
-                      href={item.href}
-                      className="transition-colors hover:text-brand-brass"
-                      data-testid="link-footer-contact"
-                    >
-                      {item.label}
-                    </Link>
-                    <Link
                       href="/contact#request-call"
                       aria-label="Email Agent Kammer"
                       className="inline-flex text-brand-brass transition-colors hover:text-brand-ivory"
                       data-testid="link-footer-contact-mail"
                     >
                       <Mail className="h-3.5 w-3.5" strokeWidth={1.5} />
+                    </Link>
+                    <Link
+                      href={item.href}
+                      className="transition-colors hover:text-brand-brass"
+                      data-testid="link-footer-contact"
+                    >
+                      {item.label}
                     </Link>
                   </span>
                 ) : (

@@ -14,11 +14,11 @@ export type SiteMapGroup = {
   items: readonly SiteMapItem[];
 };
 
-/** Charcoal-bar tail: Terms, Contact, then one Sitemap. Licenses stays off this bar. */
+/** Charcoal-bar tail: Terms, Sitemap, then envelope + Contact. Licenses stays off this bar. */
 export const FOOTER_DARK_TAIL_LINKS = [
   { label: "Terms", href: "/terms" },
-  { label: "Contact", href: "/contact" },
   { label: "Sitemap", href: "/sitemap" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 /** Dark-grey footer utilities. Licenses stay off this list. */

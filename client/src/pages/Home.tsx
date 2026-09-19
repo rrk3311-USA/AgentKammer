@@ -15,7 +15,7 @@ const howWeDecide = [
 const featuredBriefSlugs = [
   "executive-relocation-nyc",
   "foreign-buyers-new-york",
-  "empty-nester-downsizing-nyc",
+  "new-baby-growing-family-nyc",
 ] as const;
 
 export default function Home() {
@@ -116,27 +116,6 @@ export default function Home() {
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="border-b border-brand-border bg-brand-navy text-brand-ivory">
-        <div className="mx-auto grid w-full max-w-site gap-10 px-6 py-20 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:px-10 lg:py-24">
-          <div>
-            <p className="text-[11px] uppercase tracking-[0.26em] text-brand-stone">Buildings</p>
-            <h2 className="mt-4 max-w-xl font-display text-[clamp(2.25rem,4vw,2.75rem)] leading-[1.02] text-brand-ivory">
-              The asset before the listing.
-            </h2>
-            <p className="mt-6 max-w-xl text-base leading-8 text-brand-ivory/74 lg:text-[17px]">
-              Building Reports read quality, context, and fit, not marketing copy. We use them only after the decision frame is clear.
-            </p>
-          </div>
-          <Link
-            href="/building-reports"
-            className="group inline-flex items-center justify-between gap-6 rounded-button border border-brand-ivory/20 px-5 py-4 text-[11px] uppercase tracking-[0.16em] text-brand-ivory transition-colors hover:border-brand-stone"
-          >
-            Building Reports
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-          </Link>
         </div>
       </section>
 

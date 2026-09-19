@@ -69,8 +69,8 @@ describe("public menu lock", () => {
     expect(sitemapLinks).toEqual([{ label: "Sitemap", href: "/sitemap" }]);
     expect(FOOTER_DARK_TAIL_LINKS.map((item) => [item.label, item.href])).toEqual([
       ["Terms", "/terms"],
-      ["Contact", "/contact"],
       ["Sitemap", "/sitemap"],
+      ["Contact", "/contact"],
     ]);
     expect(FOOTER_DARK_LINKS.slice(-3)).toEqual([...FOOTER_DARK_TAIL_LINKS]);
     expect(FOOTER_DARK_LINKS.some((item) => item.href === "/licenses")).toBe(false);
