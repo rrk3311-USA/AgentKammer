@@ -988,7 +988,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
       {expanded ? (
         <aside
           id="decision-assistant"
-          className="ak-guidance-sheet pointer-events-auto flex w-full flex-col"
+          className={`ak-guidance-sheet pointer-events-auto flex w-full flex-col${cold ? " is-start" : ""}`}
           aria-label="Guidance Advisor"
           aria-expanded="true"
         >
