@@ -1,13 +1,11 @@
 import { Link, useLocation } from "wouter";
 import { useEffect, useState } from "react";
-import { MessageCircle } from "lucide-react";
 import { fetchToolsStatus } from "@/lib/tools-client";
 import { FOOTER_DARK_LINKS } from "@/data/site-map";
 import { decisionNavigationGroups } from "@/data/decision-navigation";
 import { SITE_LANGUAGE_LOOP, setStoredPreferredLanguage } from "@/data/site-language";
 import { AkMonogramMark } from "@/components/AkMonogramMark";
 import { cn } from "@/lib/utils";
-import { openDecisionAssistant } from "@/lib/decision-assistant";
 
 const whatsChangingItems =
   decisionNavigationGroups.find((group) => group.title === "What's Changing?")?.items ?? [];
@@ -25,27 +23,8 @@ const popularSearches = [
 const pillClass =
   "rounded-full border border-brand-border bg-white px-4 py-1.5 text-[11px] uppercase tracking-[0.1em] text-brand-navy transition-colors hover:border-brand-brass hover:text-brand-brass";
 
-function ResumeDecisionNest() {
-  return (
-    <div id="resume-decision-nest" className="flex flex-wrap items-center gap-2">
-      <button
-        type="button"
-        onClick={openDecisionAssistant}
-        className="ak-guidance-chip ak-guidance-pinstripe min-w-0"
-        aria-label="Open Guidance Advisor"
-        data-testid="button-footer-guidance"
-      >
-        <MessageCircle className="h-4 w-4" strokeWidth={1.5} />
-        Guidance
-      </button>
-      <Link
-        href="/account"
-        className="ak-guidance-chip ak-guidance-pinstripe min-w-0"
-      >
-        Resume Decision
-      </Link>
-    </div>
-  );
+function GuidanceDockNest() {
+  return <div id="resume-decision-nest" className="flex min-h-11 min-w-[11.5rem] items-center" />;
 }
 
 export function Footer() {
@@ -100,7 +79,7 @@ export function Footer() {
                   Copyright 2026 Agent Kammer
                 </p>
               </div>
-              <ResumeDecisionNest />
+              <GuidanceDockNest />
             </div>
             <nav
               aria-label="Footer"

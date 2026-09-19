@@ -28,7 +28,7 @@ export default function Sitemap() {
         <div className="mb-10 max-w-2xl">
           <p className="text-[10px] uppercase tracking-[0.18em] text-brand-cocoa">Guidance</p>
           <p className="mt-3 text-base leading-8 text-brand-graphite">
-            {PUBLIC_PRODUCTS.guidance.text} The sticky Guidance band under the footer stays where it is.
+            {PUBLIC_PRODUCTS.guidance.text} Guidance is one chip: the floating tab, or that same chip nested in the charcoal footer.
           </p>
           <button
             type="button"
