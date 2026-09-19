@@ -64,7 +64,7 @@ export function Footer() {
       </div>
 
       <div data-ak-charcoal-footer className="border-t border-brand-brass/28 bg-brand-charcoal text-brand-ivory">
-        <div className="mx-auto flex w-full max-w-site flex-col gap-4 px-6 py-6 lg:px-10">
+        <div className="mx-auto flex w-full max-w-site flex-col gap-2.5 px-6 pb-2 pt-5 lg:px-10">
           <div className="flex items-start gap-3">
             <AkMonogramMark variant="ivory" className="mt-0.5 h-6 w-auto opacity-90" />
             <div>
@@ -75,57 +75,61 @@ export function Footer() {
             </div>
           </div>
 
-          <nav aria-label="Footer" className="flex flex-wrap items-center">
-            {FOOTER_DARK_NAV.map((item, index) => (
-              <span key={item.href} className="inline-flex items-center">
-                {index > 0 ? (
-                  <span className="px-2.5 text-[10px] text-brand-ivory/28" aria-hidden>
-                    ·
-                  </span>
-                ) : null}
-                <Link href={item.href} className={charcoalLink}>
-                  {item.label}
-                </Link>
-              </span>
-            ))}
-          </nav>
-
-          <nav aria-label="Footer legal" className="flex flex-wrap items-center">
-            {FOOTER_DARK_META.map((item, index) => (
-              <span key={item.href} className="inline-flex items-center">
-                {index > 0 ? (
-                  <span className="px-2.5 text-[10px] text-brand-ivory/28" aria-hidden>
-                    ·
-                  </span>
-                ) : null}
-                {item.label === "Contact" ? (
-                  <span className="inline-flex items-center gap-1.5">
-                    <Link
-                      href="/contact#request-call"
-                      aria-label="Email Agent Kammer"
-                      className="inline-flex text-brand-brass transition-colors hover:text-brand-ivory"
-                      data-testid="link-footer-contact-mail"
-                    >
-                      <Mail className="h-3.5 w-3.5" strokeWidth={1.5} />
-                    </Link>
-                    <Link
-                      href={item.href}
-                      className={charcoalLink}
-                      data-testid="link-footer-contact"
-                    >
-                      {item.label}
-                    </Link>
-                  </span>
-                ) : (
+          <div className="flex flex-wrap items-center">
+            <nav aria-label="Footer" className="inline-flex flex-wrap items-center">
+              {FOOTER_DARK_NAV.map((item, index) => (
+                <span key={item.href} className="inline-flex items-center">
+                  {index > 0 ? (
+                    <span className="px-2.5 text-[10px] text-brand-ivory/28" aria-hidden>
+                      ·
+                    </span>
+                  ) : null}
                   <Link href={item.href} className={charcoalLink}>
                     {item.label}
                   </Link>
-                )}
-              </span>
-            ))}
-          </nav>
+                </span>
+              ))}
+            </nav>
+            <span className="px-2.5 text-[10px] text-brand-ivory/28" aria-hidden>
+              ·
+            </span>
+            <nav aria-label="Footer legal" className="inline-flex flex-wrap items-center">
+              {FOOTER_DARK_META.map((item, index) => (
+                <span key={item.href} className="inline-flex items-center">
+                  {index > 0 ? (
+                    <span className="px-2.5 text-[10px] text-brand-ivory/28" aria-hidden>
+                      ·
+                    </span>
+                  ) : null}
+                  {item.label === "Contact" ? (
+                    <span className="inline-flex items-center gap-1.5">
+                      <Link
+                        href="/contact#request-call"
+                        aria-label="Email Agent Kammer"
+                        className="inline-flex text-brand-brass transition-colors hover:text-brand-ivory"
+                        data-testid="link-footer-contact-mail"
+                      >
+                        <Mail className="h-3.5 w-3.5" strokeWidth={1.5} />
+                      </Link>
+                      <Link
+                        href={item.href}
+                        className={charcoalLink}
+                        data-testid="link-footer-contact"
+                      >
+                        {item.label}
+                      </Link>
+                    </span>
+                  ) : (
+                    <Link href={item.href} className={charcoalLink}>
+                      {item.label}
+                    </Link>
+                  )}
+                </span>
+              ))}
+            </nav>
+          </div>
 
-          <div className="border-t border-brand-ivory/10 pt-3">
+          <div className="border-t border-brand-ivory/10 pt-1.5">
             <button
               type="button"
               className="flex w-full items-center justify-between text-[9px] uppercase tracking-[0.18em] text-brand-ivory/55 transition-colors hover:text-brand-brass sm:hidden"
@@ -151,7 +155,7 @@ export function Footer() {
                   key={lang.code}
                   href={lang.href}
                   onClick={() => setStoredPreferredLanguage(lang.nativeLabel)}
-                  className="text-[11px] leading-snug text-brand-ivory/72 transition-colors hover:text-brand-brass"
+                  className="text-[11px] leading-none text-brand-ivory/72 transition-colors hover:text-brand-brass"
                   title={`${lang.label}: open guide and set chat language`}
                 >
                   {lang.nativeLabel}
