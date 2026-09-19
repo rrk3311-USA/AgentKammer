@@ -998,7 +998,7 @@
   }
 
   .ak-guidance-sheet {
-    max-height: min(48vh, 32rem);
+    max-height: min(42vh, 26rem);
     overflow: hidden;
     border-radius: 10px 10px 0 0;
     border: 1px solid #d8d1c7;
@@ -1042,7 +1042,7 @@
   .ak-guidance-star {
     position: relative;
     display: block;
-    height: 5.1rem;
+    height: 4.18125rem;
     overflow: hidden;
   }
 
@@ -1050,7 +1050,7 @@
     position: absolute;
     left: 0;
     top: 50%;
-    height: 3px;
+    height: 2.46px;
     width: calc(100% * var(--ak-star, 0.1));
     transform: translateY(-50%);
     background: linear-gradient(
@@ -1068,8 +1068,8 @@
     position: absolute;
     left: calc(100% * var(--ak-star, 0.1));
     top: 50%;
-    width: 12px;
-    height: 12px;
+    width: 9.84px;
+    height: 9.84px;
     background: #f6e7b8;
     transform: translate(-50%, -50%) rotate(45deg);
     box-shadow: 0 0 16px 4px rgba(212, 180, 95, 0.32);
@@ -1079,9 +1079,9 @@
   .ak-guidance-star-speck {
     position: absolute;
     left: calc(100% * var(--ak-star, 0.1) * (0.16 + var(--ak-speck, 0) * 0.12));
-    top: calc(50% + ((var(--ak-speck, 0) - 2) * 9px));
-    width: 3px;
-    height: 3px;
+    top: calc(50% + ((var(--ak-speck, 0) - 2) * 7.38px));
+    width: 2.46px;
+    height: 2.46px;
     background: rgba(244, 228, 180, 0.62);
     box-shadow: 0 0 8px rgba(212, 180, 95, 0.36);
     animation: ak-guidance-sleep 6.6s ease-in-out infinite;
@@ -1090,8 +1090,8 @@
 
   @media (min-width: 768px) {
     .ak-guidance-sheet {
-      max-width: 28rem;
-      max-height: min(48vh, 32rem);
+      max-width: 22rem;
+      max-height: min(40vh, 24.5rem);
       border-bottom: 1px solid #d8d1c7;
       border-radius: 10px;
     }

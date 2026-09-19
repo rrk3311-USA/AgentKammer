@@ -994,7 +994,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
         >
           <div className="flex min-h-0 flex-1 flex-col">
             <div
-              className="ak-guidance-sheet-chrome flex min-h-[6.25rem] min-w-0 items-center gap-2 px-4 py-2 [touch-action:none]"
+              className="ak-guidance-sheet-chrome flex min-h-[5.15rem] min-w-0 items-center gap-2 px-4 py-2 [touch-action:none]"
               onPointerDown={(event) => beginSheetDrag(event.clientY)}
               onPointerUp={(event) => finishSheetDrag(event.clientY)}
               onPointerCancel={() => {
