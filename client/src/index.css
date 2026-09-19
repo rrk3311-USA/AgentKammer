@@ -1121,24 +1121,24 @@
   }
 
   .ak-guidance-sheet.is-start .ak-guidance-star {
-    height: 0.875rem;
+    height: 0.4375rem;
   }
 
   .ak-guidance-sheet.is-start .ak-guidance-star-wake {
-    height: 2.5px;
-    box-shadow: 0 0 11px rgba(176, 141, 87, calc(0.18 + var(--ak-star, 0.36) * 0.4));
+    height: 1.25px;
+    box-shadow: 0 0 6px rgba(176, 141, 87, calc(0.18 + var(--ak-star, 0.36) * 0.4));
   }
 
   .ak-guidance-sheet.is-start .ak-guidance-star-head {
-    width: 8px;
-    height: 8px;
-    box-shadow: 0 0 9px 2.5px rgba(212, 180, 95, 0.42);
+    width: 4px;
+    height: 4px;
+    box-shadow: 0 0 5px 1.25px rgba(212, 180, 95, 0.42);
   }
 
   .ak-guidance-sheet.is-start .ak-guidance-star-speck {
-    top: calc(50% + ((var(--ak-speck, 0) - 2) * 2px));
-    width: 1.75px;
-    height: 1.75px;
+    top: calc(50% + ((var(--ak-speck, 0) - 2) * 1px));
+    width: 0.875px;
+    height: 0.875px;
   }
 
   @media (min-width: 768px) {
