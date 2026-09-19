@@ -1,8 +1,15 @@
 import { Link } from "wouter";
 import { PageHero } from "@/components/site-shell";
-import { LibraryList, grammar } from "@/components/visual-grammar";
+import { LibraryList, ModuleIntro, ModuleSection, grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { publicGuides } from "@/data/guides";
+
+const featuredTitles = [
+  "How Real Estate Ownership Works",
+  "Condo vs Co-op",
+  "How Mortgages Work",
+  "International Buyer Hub Guide",
+];
 
 export default function Guides() {
   usePageMetadata({
@@ -11,6 +18,9 @@ export default function Guides() {
       "Educational guides from Agent Kammer: ownership structures and international buyer decision frameworks.",
     path: "/guides",
   });
+
+  const featured = publicGuides.filter((guide) => featuredTitles.includes(guide.title));
+  const reference = publicGuides.filter((guide) => !featuredTitles.includes(guide.title));
 
   return (
     <main className="bg-brand-ivory">
@@ -21,16 +31,37 @@ export default function Guides() {
         art="guides"
       />
 
-      <section className="border-b border-brand-border bg-brand-ivory">
+      <ModuleSection surface="ivory">
         <div className={grammar.pad}>
-          <p className={grammar.eyebrow}>Library</p>
-          <h2 className={`mt-4 ${grammar.section}`}>Start with structure.</h2>
-          <p className={`mt-5 ${grammar.body}`}>
-            These live on the site so you can return to them, share them, and use them before browsing buildings.
-          </p>
+          <ModuleIntro
+            eyebrow="Library"
+            title="Start with structure."
+            description="These live on the site so you can return to them, share them, and use them before browsing buildings."
+          />
+        </div>
+      </ModuleSection>
+
+      <ModuleSection surface="white">
+        <div className={grammar.padLoose}>
+          <ModuleIntro eyebrow="Foundational" title="Begin with the frameworks." />
           <LibraryList
             columns={2}
-            items={publicGuides.map((guide) => ({
+            items={featured.map((guide) => ({
+              title: guide.title,
+              text: guide.description,
+              href: guide.href,
+              cta: "Open guide",
+            }))}
+          />
+        </div>
+      </ModuleSection>
+
+      <ModuleSection surface="mist">
+        <div className={grammar.padLoose}>
+          <ModuleIntro eyebrow="Reference" title="Return here for terms and detail." />
+          <LibraryList
+            columns={3}
+            items={reference.map((guide) => ({
               title: guide.title,
               text: guide.description,
               href: guide.href,
@@ -52,7 +83,7 @@ export default function Guides() {
             </Link>
           </p>
         </div>
-      </section>
+      </ModuleSection>
     </main>
   );
 }

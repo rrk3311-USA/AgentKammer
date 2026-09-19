@@ -1,9 +1,12 @@
 import { useEffect } from "react";
-import { Link } from "wouter";
-import { ArrowRight } from "lucide-react";
 import { CTA, PageHero } from "@/components/site-shell";
-import { DecisionFramework } from "@/components/DecisionFramework";
-import { grammar } from "@/components/visual-grammar";
+import {
+  CompactLinkRow,
+  ModuleCards,
+  ModuleIntro,
+  ModuleSection,
+  grammar,
+} from "@/components/visual-grammar";
 import { decisionNavigationGroups } from "@/data/decision-navigation";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
@@ -11,61 +14,16 @@ const whatsChanging = decisionNavigationGroups.find((group) => group.title === "
 const decisions = decisionNavigationGroups.find((group) => group.title === "What Decision Are You Facing?");
 const understand = decisionNavigationGroups.find((group) => group.title === "What Are You Trying to Understand?");
 
-const journey = [
-  { step: "01", title: "What's Changing?", text: "Name the life change.", href: "#whats-changing", cta: "Open life changes" },
-  { step: "02", title: "Situation Assessment", text: "Build your situation profile.", href: "/belonging", cta: "Start assessment" },
-  { step: "03", title: "Situation", text: "Read the situation that fits.", href: "#whats-changing", cta: "Browse situations" },
-  { step: "04", title: "Strategy Session", text: "A live hour when you want judgment, not a listing tour.", href: "/contact?intent=strategy", cta: "Request the hour" },
-] as const;
+const primaryChangeLabels = [
+  "Executive Relocation",
+  "First Home",
+  "Growing Family",
+  "Marriage",
+  "Divorce",
+  "Empty Nest",
+];
 
-function BriefList({ items }: { items: { label: string; href: string }[] }) {
-  return (
-    <div className="border-t border-brand-border">
-      {items.map((item) => (
-        <Link
-          key={item.href + item.label}
-          href={item.href}
-          className="group flex items-baseline justify-between gap-6 border-b border-brand-border py-6"
-        >
-          <span className={`${grammar.rowTitle} transition-colors group-hover:text-brand-navy-secondary`}>
-            {item.label}
-          </span>
-          <ArrowRight
-            className="h-4 w-4 shrink-0 text-brand-navy/35 transition-transform group-hover:translate-x-0.5 group-hover:text-brand-navy-secondary"
-            strokeWidth={1.5}
-          />
-        </Link>
-      ))}
-    </div>
-  );
-}
-
-function OsSection({
-  id,
-  eyebrow,
-  title,
-  description,
-  items,
-}: {
-  id: string;
-  eyebrow: string;
-  title: string;
-  description: string;
-  items: { label: string; href: string }[];
-}) {
-  return (
-    <section id={id} className="scroll-mt-28 border-b border-brand-border">
-      <div className={grammar.pad}>
-        <p className={grammar.eyebrow}>{eyebrow}</p>
-        <h2 className={`mt-4 max-w-2xl ${grammar.section}`}>{title}</h2>
-        <p className={`mt-5 ${grammar.body}`}>{description}</p>
-        <div className="mt-10">
-          <BriefList items={items} />
-        </div>
-      </div>
-    </section>
-  );
-}
+const featuredUnderstandLabels = ["Rent vs Buy", "Condo vs Co-op", "Foreign Buyers", "Building Profiles"];
 
 export default function Services() {
   usePageMetadata({
@@ -89,6 +47,17 @@ export default function Services() {
     }
   }, []);
 
+  const changeItems = whatsChanging?.items ?? [];
+  const primaryChanges = primaryChangeLabels
+    .map((label) => changeItems.find((item) => item.label === label))
+    .filter((item): item is NonNullable<typeof item> => Boolean(item));
+  const secondaryChanges = changeItems.filter((item) => !primaryChangeLabels.includes(item.label));
+  const understandItems = understand?.items ?? [];
+  const featuredUnderstand = featuredUnderstandLabels
+    .map((label) => understandItems.find((item) => item.label === label))
+    .filter((item): item is NonNullable<typeof item> => Boolean(item));
+  const secondaryUnderstand = understandItems.filter((item) => !featuredUnderstandLabels.includes(item.label));
+
   return (
     <main className="bg-brand-ivory">
       <PageHero
@@ -98,36 +67,40 @@ export default function Services() {
         art="situations"
       />
 
-      <DecisionFramework
-        eyebrow="Start Here"
-        title="A clear path through the decision."
-        description="Four steps. No overlap. Name what changed, then diagnose, then read, then a live hour only if you want judgment."
-        items={journey}
-      />
+      <ModuleSection id="whats-changing" surface="ivory">
+        <div className={grammar.padLoose}>
+          <ModuleIntro
+            eyebrow="01 · Life Changes"
+            title="What's Changing?"
+            description="Start with the situation that sounds most like yours. The life change comes before the listing."
+          />
+          <ModuleCards items={primaryChanges} columns={2} />
+          {secondaryChanges.length ? <CompactLinkRow items={secondaryChanges} /> : null}
+        </div>
+      </ModuleSection>
 
-      <OsSection
-        id="whats-changing"
-        eyebrow="01 · Life Changes"
-        title="What's Changing?"
-        description="Start with the situation that sounds most like yours. The life change comes before the listing."
-        items={whatsChanging?.items ?? []}
-      />
+      <ModuleSection id="decisions" surface="mist">
+        <div className={grammar.padLoose}>
+          <ModuleIntro
+            eyebrow="02 · Paths"
+            title="What Decision Are You Facing?"
+            description="Once the situation is clear, name the path, including stay put, wait, or do nothing yet."
+          />
+          <ModuleCards items={decisions?.items ?? []} columns={3} size="compact" />
+        </div>
+      </ModuleSection>
 
-      <OsSection
-        id="decisions"
-        eyebrow="02 · Paths"
-        title="What Decision Are You Facing?"
-        description="Once the situation is clear, name the path, including stay put, wait, or do nothing yet."
-        items={decisions?.items ?? []}
-      />
-
-      <OsSection
-        id="understand"
-        eyebrow="03 · Research"
-        title="What Are You Trying to Understand?"
-        description="Ownership structure, building evidence, and market questions, after the life change and decision path are named."
-        items={understand?.items ?? []}
-      />
+      <ModuleSection id="understand" surface="white">
+        <div className={grammar.padLoose}>
+          <ModuleIntro
+            eyebrow="03 · Research"
+            title="What Are You Trying to Understand?"
+            description="Ownership structure, building evidence, and market questions, after the life change and decision path are named."
+          />
+          <ModuleCards items={featuredUnderstand} columns={2} size="editorial" />
+          {secondaryUnderstand.length ? <CompactLinkRow items={secondaryUnderstand} /> : null}
+        </div>
+      </ModuleSection>
 
       <CTA
         title="Start with the Situation Assessment."

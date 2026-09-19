@@ -1,10 +1,8 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { CTA, PageHero } from "@/components/site-shell";
-import { DecisionFramework } from "@/components/DecisionFramework";
-import { LibraryList, grammar } from "@/components/visual-grammar";
+import { LibraryList, ModuleIntro, ModuleSection, grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
-import { openDecisionAssistant } from "@/lib/decision-assistant";
 
 const journey = [
   {
@@ -13,6 +11,7 @@ const journey = [
     text: "Name the life change: relocation, family, divorce, retirement, remote work, or simple uncertainty that has become expensive.",
     href: "/situations#whats-changing",
     cta: "Explore situations",
+    surface: "ivory" as const,
   },
   {
     step: "02",
@@ -20,6 +19,7 @@ const journey = [
     text: "Build a situation profile: belonging, friction, and whether anything should change at all. This is the diagnostic, not a sales call.",
     href: "/belonging",
     cta: "Start assessment",
+    surface: "white" as const,
   },
   {
     step: "03",
@@ -27,6 +27,7 @@ const journey = [
     text: "Open the short editorial that matches your situation or the decision path you face. Clarity before inventory.",
     href: "/situations",
     cta: "Browse Decision Briefs",
+    surface: "mist" as const,
   },
   {
     step: "04",
@@ -34,6 +35,7 @@ const journey = [
     text: "A Strategy Session and written action summary. Continuity, when needed, is offered after the hour by invitation.",
     href: "/advisory",
     cta: "See advisory",
+    surface: "white" as const,
   },
 ];
 
@@ -81,29 +83,30 @@ export default function Buy() {
         art="start-here"
       />
 
-      <DecisionFramework
-        eyebrow="How We Work"
-        title="Four steps. No overlap."
-        description="If you only remember one sequence: name what changed, take the Situation Assessment, read the brief that fits, then get a written strategy when you want judgment, not inventory."
-        items={journey}
-        action={
-          <button type="button" onClick={openDecisionAssistant} className={grammar.textLink}>
-            Open Guidance
-            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-          </button>
-        }
-      />
+      {journey.map((step) => (
+        <ModuleSection key={step.step} surface={step.surface}>
+          <div className={grammar.padLoose}>
+            <p className="text-[11px] uppercase tracking-[0.18em] text-brand-cocoa">{step.step}</p>
+            <h2 className={`mt-6 max-w-2xl ${grammar.section}`}>{step.title}</h2>
+            <p className={`mt-6 ${grammar.body}`}>{step.text}</p>
+            <Link href={step.href} className={`${grammar.textLink} mt-8`}>
+              {step.cta}
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </Link>
+          </div>
+        </ModuleSection>
+      ))}
 
-      <section className="border-b border-brand-border bg-brand-ivory">
-        <div className={grammar.pad}>
-          <p className={grammar.eyebrow}>Common Situations</p>
-          <h2 className={`mt-4 ${grammar.section}`}>How the work usually begins in practice.</h2>
-          <p className={`mt-5 ${grammar.body}`}>
-            Patterns that help you recognize which Decision Brief should come next after the assessment.
-          </p>
+      <ModuleSection surface="stone">
+        <div className={grammar.padLoose}>
+          <ModuleIntro
+            eyebrow="Common Situations"
+            title="How the work usually begins in practice."
+            description="Patterns that help you recognize which Decision Brief should come next after the assessment."
+          />
           <LibraryList items={scenarios} />
         </div>
-      </section>
+      </ModuleSection>
 
       <CTA
         title="Start with the Situation Assessment."

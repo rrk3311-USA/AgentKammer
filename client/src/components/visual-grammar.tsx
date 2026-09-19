@@ -19,7 +19,98 @@ export const grammar = {
   textLink:
     "inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-navy-secondary",
   pad: "mx-auto w-full max-w-site px-6 py-20 lg:px-10 lg:py-24",
+  padLoose: "mx-auto w-full max-w-site px-6 py-24 lg:px-10 lg:py-28",
 } as const;
+
+const moduleSurface: Record<"ivory" | "white" | "mist" | "stone", string> = {
+  ivory: "bg-brand-ivory",
+  white: "bg-white",
+  mist: "bg-brand-mist",
+  stone: "bg-brand-soft-stone",
+};
+
+export function ModuleSection({
+  id,
+  surface = "ivory",
+  children,
+}: {
+  id?: string;
+  surface?: keyof typeof moduleSurface;
+  children: ReactNode;
+}) {
+  return (
+    <section id={id} className={cn("scroll-mt-28", moduleSurface[surface])}>
+      {children}
+    </section>
+  );
+}
+
+export function ModuleIntro({
+  eyebrow,
+  title,
+  description,
+}: {
+  eyebrow: string;
+  title: string;
+  description?: string;
+}) {
+  return (
+    <div className="max-w-2xl">
+      <p className={grammar.eyebrow}>{eyebrow}</p>
+      <h2 className={cn("mt-4", grammar.section)}>{title}</h2>
+      {description ? <p className={cn("mt-5", grammar.body)}>{description}</p> : null}
+    </div>
+  );
+}
+
+export type ModuleCardItem = {
+  label: string;
+  href: string;
+  text?: string;
+};
+
+export function ModuleCards({
+  items,
+  columns = 2,
+  size = "standard",
+}: {
+  items: readonly ModuleCardItem[];
+  columns?: 2 | 3 | 4;
+  size?: "standard" | "compact" | "editorial";
+}) {
+  const cols =
+    columns === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : columns === 3 ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2";
+  const pad = size === "compact" ? "px-5 py-5" : size === "editorial" ? "p-8 lg:p-10" : "p-7";
+  const titleClass = grammar.rowTitle;
+
+  return (
+    <div className={cn("mt-12 grid gap-px bg-brand-border", cols)}>
+      {items.map((item) => (
+        <Link
+          key={item.href + item.label}
+          href={item.href}
+          className={cn("group bg-white/80 transition-colors hover:bg-white", pad)}
+        >
+          <span className={cn(titleClass, "transition-colors group-hover:text-brand-navy-secondary")}>{item.label}</span>
+          {item.text ? <p className="mt-3 line-clamp-2 text-base leading-7 text-brand-graphite">{item.text}</p> : null}
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+export function CompactLinkRow({ items }: { items: readonly ModuleCardItem[] }) {
+  return (
+    <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
+      {items.map((item) => (
+        <Link key={item.href + item.label} href={item.href} className={grammar.textLink}>
+          {item.label}
+          <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+        </Link>
+      ))}
+    </div>
+  );
+}
 
 export function EditorialHero({
   eyebrow,

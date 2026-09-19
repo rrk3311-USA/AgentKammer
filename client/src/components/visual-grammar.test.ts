@@ -8,6 +8,7 @@ describe("visual grammar", () => {
     expect(grammar.display).toContain("clamp(3.25rem,6vw,4.5rem)");
     expect(grammar.section).toContain("clamp(2.25rem,4vw,2.75rem)");
     expect(grammar.quote).toContain("clamp(1.75rem,2.4vw,2rem)");
+    expect(grammar.padLoose).toContain("py-24");
   });
 
   it("renders an ivory editorial hero with one eyebrow, title, and body", () => {

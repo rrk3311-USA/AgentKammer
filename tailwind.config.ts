@@ -58,6 +58,8 @@ export default {
           gold: "#B08D57",
           brass: "#B08D57",
           cocoa: "#7A5A3A",
+          mist: "#EEEAE2",
+          "soft-stone": "#E9E5DD",
           success: "#2F6B4F",
           error: "#B42318",
           /* legacy aliases */

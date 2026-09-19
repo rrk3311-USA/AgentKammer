@@ -978,7 +978,7 @@
     align-items: center;
     justify-content: flex-start;
     gap: 0.55rem;
-    border: 1px solid rgba(216, 209, 199, 0.35);
+    border: 1px solid rgba(216, 209, 199, 0.28);
     border-radius: 8px;
     background: #2a3447;
     padding: 0 1.55rem 0 1.1rem;
@@ -988,7 +988,7 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
     white-space: nowrap;
-    box-shadow: 0 -8px 20px rgba(42, 52, 71, 0.22);
+    box-shadow: 0 -4px 12px rgba(30, 35, 42, 0.12);
   }
 
   .ak-guidance-chip:hover {

@@ -44,7 +44,7 @@ export default function Buildings() {
       <ReportSubnav />
 
       <section className="border-b border-brand-border bg-brand-ivory">
-        <div className={grammar.pad}>
+        <div className={`${grammar.pad} lg:py-28`}>
           <p className={grammar.eyebrow}>Start Here</p>
           <h2 className={`mt-4 ${grammar.section}`}>Choose the format that matches the uncertainty.</h2>
           <p className={`mt-5 ${grammar.body}`}>
@@ -55,7 +55,7 @@ export default function Buildings() {
       </section>
 
       <section className="border-b border-brand-border bg-white">
-        <div className={grammar.pad}>
+        <div className={`${grammar.pad} lg:py-28`}>
           <p className={grammar.eyebrow}>Featured Building Profiles</p>
           <h2 className={`mt-4 ${grammar.section}`}>Published address studies.</h2>
           <p className={`mt-5 ${grammar.body}`}>
