@@ -6,11 +6,13 @@
 
 ## Primary header
 
-Exactly six short labels: Home · Start Here · Situations · Buildings · Guides · About.
+Exactly five short labels: Home · Start Here · Situations · Guides · About.
 
-**Not in top nav:** Intelligence · Decision Hub · Assessment · Get Qualified · International. Intelligence may live in the footer.
+**Not in top nav:** Buildings · Intelligence · Decision Hub · Assessment · Get Qualified · International.
 
-**Header CTA:** quiet **Guidance** control that opens the Advisor. Not a seventh nav item. Never “Request Intelligence.”
+**Header CTA:** quiet **Guidance** control that opens the Advisor. Not a sixth nav item. Never “Request Intelligence.”
+
+**Footer:** quiet end — identity, Start Here · Situations · Guides · About, then Contact · Privacy · Terms, then languages. No product strip, no Intelligence, no public Decision Hub, no Sitemap competing in charcoal.
 
 ## The five public products
 

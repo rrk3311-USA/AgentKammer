@@ -1,87 +1,105 @@
 import { Mail } from "lucide-react";
-import { Link, useLocation } from "wouter";
-import { useEffect, useState } from "react";
-import { fetchToolsStatus } from "@/lib/tools-client";
-import { FOOTER_DARK_LINKS } from "@/data/site-map";
+import { Link } from "wouter";
+import { useState } from "react";
+import {
+  FOOTER_DARK_META,
+  FOOTER_DARK_NAV,
+  FOOTER_POPULAR_LINKS,
+  FOOTER_WHATS_CHANGING_PREVIEW_LABELS,
+} from "@/data/site-map";
 import { decisionNavigationGroups } from "@/data/decision-navigation";
 import { SITE_LANGUAGE_LOOP, setStoredPreferredLanguage } from "@/data/site-language";
 import { AkMonogramMark } from "@/components/AkMonogramMark";
 import { cn } from "@/lib/utils";
 
-const whatsChangingItems =
+const allWhatsChanging =
   decisionNavigationGroups.find((group) => group.title === "What's Changing?")?.items ?? [];
-
-const popularSearches = [
-  { label: "Rent vs Buy", href: "/situations/rent-vs-buy-manhattan-relocation" },
-  { label: "Stay vs Sell", href: "/buyer-advisory" },
-  { label: "NYC Relocation", href: "/situations/executive-relocation-nyc" },
-  { label: "Luxury Buildings", href: "/insights/the-quiet-luxury-buildings-of-manhattan" },
-  { label: "Building Profiles", href: "/building-reports" },
-  { label: "School Districts", href: "/situations/school-district-planning-nyc" },
-  { label: "Investment", href: "/situations/1031-exchange-new-york" },
-] as const;
+const whatsChangingItems = FOOTER_WHATS_CHANGING_PREVIEW_LABELS.map((label) =>
+  allWhatsChanging.find((item) => item.label === label),
+).filter((item): item is NonNullable<typeof item> => Boolean(item));
 
 const pillClass =
-  "rounded-full border border-brand-border bg-white px-4 py-1.5 text-[11px] uppercase tracking-[0.1em] text-brand-navy transition-colors hover:border-brand-brass hover:text-brand-brass";
+  "rounded-full border border-brand-border/70 bg-transparent px-2.5 py-0.5 text-[9px] uppercase tracking-[0.12em] text-brand-graphite transition-colors hover:border-brand-navy/40 hover:text-brand-navy";
+
+const charcoalLink =
+  "text-[10px] uppercase tracking-[0.16em] text-brand-ivory/78 transition-colors hover:text-brand-brass";
 
 export function Footer() {
-  const [, navigate] = useLocation();
   const [langsOpen, setLangsOpen] = useState(false);
-  const [toolsPublic, setToolsPublic] = useState(false);
-
-  useEffect(() => {
-    void fetchToolsStatus()
-      .then((status) => setToolsPublic(status.public))
-      .catch(() => setToolsPublic(false));
-  }, []);
 
   return (
     <footer className="border-t border-brand-border bg-brand-ivory text-brand-graphite">
-      <div className="mx-auto w-full max-w-site px-6 py-8 lg:px-10 lg:py-12">
-        <h3 className="font-display text-[clamp(1.5rem,3vw,1.85rem)] leading-[0.95] text-brand-navy">
+      <div className="mx-auto w-full max-w-site px-6 py-7 lg:px-10 lg:py-9">
+        <h3 className="font-display text-[clamp(1.15rem,2.2vw,1.4rem)] leading-[0.95] text-brand-navy">
           What's Changing?
         </h3>
-        <nav aria-label="What's Changing" className="mt-4 flex flex-wrap gap-2">
+        <nav aria-label="What's Changing" className="mt-3 flex flex-wrap items-center gap-1.5">
           {whatsChangingItems.map((item) => (
             <Link key={item.href + item.label} href={item.href} className={pillClass}>
               {item.label}
             </Link>
           ))}
+          <Link href="/situations" className="ml-1 text-[9px] uppercase tracking-[0.14em] text-brand-navy/70 hover:text-brand-navy">
+            All situations
+          </Link>
         </nav>
 
-        <div className="mt-8">
-          <p className="text-[10px] uppercase tracking-[0.18em] text-brand-cocoa">Popular Searches</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {popularSearches.map((item) => (
-              <button
-                key={item.href + item.label}
-                type="button"
-                onClick={() => navigate(item.href)}
-                className="w-fit text-left text-[11px] uppercase tracking-[0.1em] text-brand-navy transition-colors hover:text-brand-navy-secondary"
-              >
-                {item.label}
-              </button>
+        <div className="mt-6">
+          <p className="text-[9px] uppercase tracking-[0.16em] text-brand-cocoa">Popular</p>
+          <nav aria-label="Popular" className="mt-2 flex flex-wrap items-center text-[10px] uppercase tracking-[0.14em] text-brand-navy">
+            {FOOTER_POPULAR_LINKS.map((item, index) => (
+              <span key={item.href + item.label} className="inline-flex items-center">
+                {index > 0 ? (
+                  <span className="px-2 text-brand-cocoa/40" aria-hidden>
+                    ·
+                  </span>
+                ) : null}
+                <Link href={item.href} className="transition-colors hover:text-brand-navy-secondary">
+                  {item.label}
+                </Link>
+              </span>
             ))}
-          </div>
+          </nav>
         </div>
       </div>
 
       <div data-ak-charcoal-footer className="border-t border-brand-brass/28 bg-brand-charcoal text-brand-ivory">
-        <div className="mx-auto flex w-full max-w-site flex-col gap-2.5 px-6 py-3 lg:px-10">
-          <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-2">
-              <AkMonogramMark variant="ivory" className="h-5 w-auto opacity-90" />
-              <p className="text-[10px] uppercase tracking-[0.18em] text-brand-ivory/78">
-                Copyright 2026 Agent Kammer
+        <div className="mx-auto flex w-full max-w-site flex-col gap-4 px-6 py-6 lg:px-10">
+          <div className="flex items-start gap-3">
+            <AkMonogramMark variant="ivory" className="mt-0.5 h-6 w-auto opacity-90" />
+            <div>
+              <p className="font-display text-[1.35rem] leading-none text-brand-ivory">Agent Kammer</p>
+              <p className="mt-1.5 text-[10px] uppercase tracking-[0.16em] text-brand-ivory/62">
+                Private Housing Advisory
               </p>
             </div>
-            <nav
-              aria-label="Footer"
-              className="flex flex-wrap gap-x-4 gap-y-1 text-[10px] uppercase tracking-[0.18em] text-brand-ivory/78"
-            >
-              {FOOTER_DARK_LINKS.map((item) =>
-                item.label === "Contact" ? (
-                  <span key={item.href} className="inline-flex items-center gap-1.5">
+          </div>
+
+          <nav aria-label="Footer" className="flex flex-wrap items-center">
+            {FOOTER_DARK_NAV.map((item, index) => (
+              <span key={item.href} className="inline-flex items-center">
+                {index > 0 ? (
+                  <span className="px-2.5 text-[10px] text-brand-ivory/28" aria-hidden>
+                    ·
+                  </span>
+                ) : null}
+                <Link href={item.href} className={charcoalLink}>
+                  {item.label}
+                </Link>
+              </span>
+            ))}
+          </nav>
+
+          <nav aria-label="Footer legal" className="flex flex-wrap items-center">
+            {FOOTER_DARK_META.map((item, index) => (
+              <span key={item.href} className="inline-flex items-center">
+                {index > 0 ? (
+                  <span className="px-2.5 text-[10px] text-brand-ivory/28" aria-hidden>
+                    ·
+                  </span>
+                ) : null}
+                {item.label === "Contact" ? (
+                  <span className="inline-flex items-center gap-1.5">
                     <Link
                       href="/contact#request-call"
                       aria-label="Email Agent Kammer"
@@ -92,32 +110,22 @@ export function Footer() {
                     </Link>
                     <Link
                       href={item.href}
-                      className="transition-colors hover:text-brand-brass"
+                      className={charcoalLink}
                       data-testid="link-footer-contact"
                     >
                       {item.label}
                     </Link>
                   </span>
                 ) : (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="transition-colors hover:text-brand-brass"
-                    data-testid={item.href === "/sitemap" ? "link-footer-sitemap" : undefined}
-                  >
+                  <Link href={item.href} className={charcoalLink}>
                     {item.label}
                   </Link>
-                ),
-              )}
-              {toolsPublic ? (
-                <Link href="/tools" className="transition-colors hover:text-brand-brass">
-                  Tools
-                </Link>
-              ) : null}
-            </nav>
-          </div>
+                )}
+              </span>
+            ))}
+          </nav>
 
-          <div className="border-t border-brand-ivory/10 pt-2">
+          <div className="border-t border-brand-ivory/10 pt-3">
             <button
               type="button"
               className="flex w-full items-center justify-between text-[9px] uppercase tracking-[0.18em] text-brand-ivory/55 transition-colors hover:text-brand-brass sm:hidden"

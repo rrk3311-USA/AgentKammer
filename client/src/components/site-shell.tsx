@@ -4,21 +4,20 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { grammar } from "@/components/visual-grammar";
 
-/** Locked primary header: exactly these six. Intelligence, Assessment, Get Qualified, and International stay out. */
+/** Locked primary header: these five. Guidance is a utility, not a sixth door. Intelligence, Assessment, Get Qualified, and International stay out. */
 export const primaryNav = [
   { label: "Home", href: "/" },
   { label: "Start Here", href: "/buyer-advisory" },
   { label: "Situations", href: "/situations" },
-  { label: "Buildings", href: "/building-reports" },
   { label: "Guides", href: "/guides" },
   { label: "About", href: "/about" },
 ] as const;
 
-export const buildingReportsNav = [
-  { label: "Overview", href: "/building-reports" },
-  { label: "Building Profiles", href: "/building-reports/individual-buildings" },
-  { label: "Neighborhood Guides", href: "/building-reports/neighborhood-guides" },
-  { label: "Market Briefs", href: "/building-reports/market-briefs" },
+/** Guides library chapters. Building Profiles stay reachable, not a selector item. */
+export const guidesLibraryNav = [
+  { label: "Decision Guides", href: "/guides#decision-guides", id: "decision-guides" },
+  { label: "Neighborhoods", href: "/guides#neighborhoods", id: "neighborhoods" },
+  { label: "Kammer Report", href: "/guides#kammer-report", id: "kammer-report" },
 ] as const;
 
 export type HeroArtVariant =
@@ -538,31 +537,55 @@ export function PageHero({
   );
 }
 
+function activeGuidesChapter(location: string, hash: string) {
+  const chapter = hash.replace(/^#/, "");
+  if (location === "/guides" || location.startsWith("/guides/")) {
+    return chapter;
+  }
+  if (location.startsWith("/building-reports/neighborhood-guides")) return "neighborhoods";
+  if (location.startsWith("/building-reports")) return "kammer-report";
+  return "";
+}
+
 export function ReportSubnav() {
   const [location] = useLocation();
+  const [hash, setHash] = React.useState(() => (typeof window === "undefined" ? "" : window.location.hash));
+
+  React.useEffect(() => {
+    const sync = () => setHash(window.location.hash);
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, [location]);
+
+  const activeId = activeGuidesChapter(location, hash);
 
   return (
-    <div className="overflow-x-auto border-b border-brand-brass/28 bg-brand-charcoal">
-      <div className="mx-auto flex w-full max-w-site gap-3 px-6 py-4 lg:px-10">
-        {buildingReportsNav.map((item) => {
-          const active = location === item.href;
+    <nav aria-label="Guides library" className="border-b border-brand-border bg-brand-ivory">
+      <div className="mx-auto flex w-full max-w-site flex-wrap items-center gap-y-2 px-6 py-5 lg:px-10">
+        {guidesLibraryNav.map((item, index) => {
+          const active = activeId === item.id;
           return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "whitespace-nowrap rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.18em] transition-colors",
-                active
-                  ? "border-brand-brass bg-brand-brass text-brand-navy"
-                  : "border-brand-ivory/68 bg-brand-ivory text-brand-navy hover:border-brand-brass hover:bg-brand-surface",
-              )}
-            >
-              {item.label}
-            </Link>
+            <React.Fragment key={item.id}>
+              {index > 0 ? (
+                <span className="px-3 text-[11px] text-brand-cocoa/45" aria-hidden>
+                  ·
+                </span>
+              ) : null}
+              <Link
+                href={item.href}
+                className={cn(
+                  "whitespace-nowrap text-[11px] uppercase tracking-[0.18em] transition-colors",
+                  active ? "text-brand-navy" : "text-brand-graphite hover:text-brand-navy",
+                )}
+              >
+                {item.label}
+              </Link>
+            </React.Fragment>
           );
         })}
       </div>
-    </div>
+    </nav>
   );
 }
 

@@ -14,8 +14,13 @@ const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible
 
 function isPrimaryNavActive(href: string, location: string) {
   if (href === "/") return location === "/";
-  if (href === "/building-reports") {
-    return location === "/building-reports" || location.startsWith("/building-reports/");
+  if (href === "/guides") {
+    return (
+      location === "/guides" ||
+      location.startsWith("/guides/") ||
+      location === "/building-reports" ||
+      location.startsWith("/building-reports/")
+    );
   }
   if (href === "/situations") {
     return location === "/situations" || location.startsWith("/situations/");

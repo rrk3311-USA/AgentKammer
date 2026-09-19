@@ -3,9 +3,9 @@ import { grammar } from "@/components/visual-grammar";
 
 const researchPaths = [
   {
-    label: "Building Intelligence",
-    description: "Deep reports on Manhattan towers worth studying.",
-    href: "/buildings",
+    label: "Guides",
+    description: "Decision frameworks, neighborhoods, and the Kammer Report.",
+    href: "/guides",
   },
   {
     label: "International Buyer Guide",

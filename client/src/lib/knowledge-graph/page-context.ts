@@ -124,11 +124,11 @@ export const pageGraph = [
     related: ["/building-reports/individual-buildings", "/situations/new-development-nyc", "/contact"],
   },
   {
-    path: "/building-reports",
-    title: "Building Intelligence",
-    topics: ["building health", "resale", "amenities", "building rules"],
-    prerequisites: ["building type", "neighborhood", "risk tolerance"],
-    related: ["/building-reports/individual-buildings", "/building-reports/neighborhood-guides", "/buyer-advisory"],
+    path: "/guides",
+    title: "Guides",
+    topics: ["frameworks", "neighborhoods", "kammer report", "ownership"],
+    prerequisites: ["situation", "decision"],
+    related: ["/guides#decision-guides", "/guides#neighborhoods", "/guides#kammer-report", "/buyer-advisory"],
   },
   {
     path: "/building-reports/neighborhood-guides",

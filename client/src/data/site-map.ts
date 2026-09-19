@@ -14,24 +14,40 @@ export type SiteMapGroup = {
   items: readonly SiteMapItem[];
 };
 
-/** Charcoal-bar tail: Terms, Sitemap, then envelope + Contact. Licenses stays off this bar. */
-export const FOOTER_DARK_TAIL_LINKS = [
-  { label: "Terms", href: "/terms" },
-  { label: "Sitemap", href: "/sitemap" },
-  { label: "Contact", href: "/contact" },
+/** Ivory What’s Changing preview — not the full 12 on every page. */
+export const FOOTER_WHATS_CHANGING_PREVIEW_LABELS = [
+  "Executive Relocation",
+  "First Home",
+  "Growing Family",
+  "Marriage",
+  "International Move",
 ] as const;
 
-/** Dark-grey footer utilities. Licenses stay off this list. */
-export const FOOTER_DARK_LINKS = [
-  { label: PUBLIC_PRODUCTS.situation.label, href: PUBLIC_PRODUCTS.situation.href },
-  { label: PUBLIC_PRODUCTS.property.label, href: PUBLIC_PRODUCTS.property.href },
-  { label: PUBLIC_PRODUCTS.strategy.label, href: PUBLIC_PRODUCTS.strategy.href },
-  { label: "Intelligence", href: "/intelligence" },
-  { label: "Decision Hub", href: "/account" },
-  { label: "Privacy", href: "/privacy" },
-  { label: "Guides", href: "/guides" },
-  ...FOOTER_DARK_TAIL_LINKS,
+/** Ivory popular row. Four links only. */
+export const FOOTER_POPULAR_LINKS = [
+  { label: "Rent vs Buy", href: "/situations/rent-vs-buy-manhattan-relocation" },
+  { label: "NYC Relocation", href: "/situations/executive-relocation-nyc" },
+  { label: "Neighborhoods", href: "/guides#neighborhoods" },
+  { label: "Kammer Report", href: "/guides#kammer-report" },
 ] as const;
+
+/** Charcoal primary row. Home stays in the header; Guidance stays a floating utility. */
+export const FOOTER_DARK_NAV = [
+  { label: "Start Here", href: "/buyer-advisory" },
+  { label: "Situations", href: "/situations" },
+  { label: "Guides", href: "/guides" },
+  { label: "About", href: "/about" },
+] as const;
+
+/** Charcoal quiet row. Envelope sits with Contact. Sitemap is not a competing item. */
+export const FOOTER_DARK_META = [
+  { label: "Contact", href: "/contact" },
+  { label: "Privacy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
+] as const;
+
+/** Combined charcoal links for lock tests. No products, Intelligence, Decision Hub, Sitemap, or duplicate Guides. */
+export const FOOTER_DARK_LINKS = [...FOOTER_DARK_NAV, ...FOOTER_DARK_META] as const;
 
 export const SITE_MAP_LEGAL: SiteMapItem[] = [
   { label: "Privacy", href: "/privacy" },
@@ -47,15 +63,16 @@ export function getSiteMapGroups(): SiteMapGroup[] {
   return [
     {
       title: "Primary",
-      description: "The six locked doors in the header. Start Here is the judgment path, not a listing feed.",
+      description: "The five locked doors in the header. Start Here is the judgment path, not a listing feed. Guidance is the floating utility.",
       items: primaryNav,
     },
     {
       title: "Practice doors",
-      description: "Quiet ways in. Guidance is the chat. The rest stay off the six-item header.",
+      description: "Quiet ways in. Guidance is the chat. The rest stay off the five-item header.",
       items: [
         { label: PUBLIC_PRODUCTS.guidance.label, href: PUBLIC_PRODUCTS.guidance.href },
         ...FOOTER_SITEMAP_QUIET,
+        { label: "Sitemap", href: "/sitemap" },
       ],
     },
     {
@@ -88,19 +105,14 @@ export function getSiteMapGroups(): SiteMapGroup[] {
       items: groupItems("NYC Neighborhoods"),
     },
     {
-      title: "Building library",
-      description: "A side tool after the life question is clear. Not the public pitch.",
-      items: [
-        { label: "Overview", href: "/building-reports" },
-        { label: "Building Profiles", href: "/building-reports/individual-buildings" },
-        { label: "Neighborhood Guides", href: "/building-reports/neighborhood-guides" },
-        { label: "Market Briefs", href: "/building-reports/market-briefs" },
-      ],
-    },
-    {
       title: "Guides",
-      description: "Educational frameworks before anyone looks at a listing.",
-      items: publicGuides.map((guide) => ({ label: guide.title, href: guide.href })),
+      description: "Educational frameworks, neighborhoods, and the Kammer Report before anyone looks at a listing.",
+      items: [
+        { label: "Decision Guides", href: "/guides#decision-guides" },
+        { label: "Neighborhoods", href: "/guides#neighborhoods" },
+        { label: "Kammer Report", href: "/guides#kammer-report" },
+        ...publicGuides.map((guide) => ({ label: guide.title, href: guide.href })),
+      ],
     },
     {
       title: "Legal",

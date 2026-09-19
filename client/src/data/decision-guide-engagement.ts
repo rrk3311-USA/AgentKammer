@@ -159,17 +159,16 @@ const byPath: Record<string, Partial<PageEngagement>> = {
     headline: "1031 timing pressure",
     nudge: "Exchange clocks are unforgiving. Share your deadline and I'll prioritize the next move.",
   },
-  "/building-reports": {
-    headline: "Building intelligence first",
-    nudge: "Looking at buildings? Tell me what you're optimizing for and I'll steer you to the right report type.",
+  "/guides": {
+    headline: "Frameworks before listings",
+    nudge: "Looking for structure, a neighborhood, or a report? Tell me which and I'll open the right chapter.",
     greeting:
-      "Building Intelligence is for deciding fit and risk before emotional tours. Are you comparing neighborhoods, a shortlist of buildings, or ownership type?",
-    pageHelper: "You're in Building Intelligence. Tell me condo vs co-op preference or a neighborhood and I'll narrow what to read.",
+      "Guides is the knowledge library: Decision Guides, Neighborhoods, and the Kammer Report. What do you need to understand first?",
+    pageHelper: "You're in Guides. Name the question — ownership, geography, or a Manhattan report — and I'll point you.",
     starters: [
-      { label: "Neighborhoods", text: "Help me choose a neighborhood.", path: "/building-reports/neighborhood-guides" },
-      { label: "One building", text: "I want to pressure-test a specific building." },
-      { label: "Condo vs co-op", text: "Should I focus on condos or co-ops?" },
-      { label: "Resale risk", text: "I'm worried about resale and assessments." },
+      { label: "Neighborhoods", text: "Help me choose a neighborhood.", path: "/guides#neighborhoods" },
+      { label: "Condo vs co-op", text: "Should I focus on condos or co-ops?", path: "/situations/condo-vs-coop" },
+      { label: "Kammer Report", text: "What are you observing about Manhattan?", path: "/guides#kammer-report" },
     ],
   },
   "/building-reports/neighborhood-guides": {

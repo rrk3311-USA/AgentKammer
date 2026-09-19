@@ -328,8 +328,8 @@ export default function ManhattanExplained() {
         eyebrow="Closing"
         title="Every block has a story. Start with the name."
         description="Popular maps compress contested histories. Where origins are debated. Turtle Bay, Hell's Kitchen. We leave the uncertainty visible. The rest is the city's own long memory, written in street language."
-        href="/building-reports/neighborhood-guides"
-        label="Neighborhood guides"
+        href="/guides#neighborhoods"
+        label="Neighborhoods"
       />
     </main>
   );

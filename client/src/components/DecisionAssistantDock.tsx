@@ -372,7 +372,7 @@ function getUsefulActions(answers: Answers): QuickAction[] {
     },
     {
       label: "Compare: Condo vs Co-op",
-      path: "/building-reports",
+      path: "/situations/condo-vs-coop",
       response: "Condo vs Co-op matters because it changes approval risk, financing, renovation control, resale, and how much flexibility you keep.",
     },
     {

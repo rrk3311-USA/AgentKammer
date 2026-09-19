@@ -1,7 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { primaryNav } from "@/components/site-shell";
 import { decisionNavigationGroups } from "./decision-navigation";
-import { FOOTER_DARK_LINKS, FOOTER_DARK_TAIL_LINKS, getSiteMapGroups } from "./site-map";
+import {
+  FOOTER_DARK_LINKS,
+  FOOTER_DARK_META,
+  FOOTER_DARK_NAV,
+  FOOTER_POPULAR_LINKS,
+  FOOTER_WHATS_CHANGING_PREVIEW_LABELS,
+  getSiteMapGroups,
+} from "./site-map";
 import {
   CONTACT_NEXT_STEPS,
   FOOTER_SITEMAP_QUIET,
@@ -39,15 +46,15 @@ describe("public menu lock", () => {
     expect([...KAMMER_VERDICTS]).toEqual(["Pick", "Consider", "Wait", "Pass"]);
   });
 
-  it("locks primary header nav to six short labels", () => {
+  it("locks primary header nav to five short labels", () => {
     expect(primaryNav.map((item) => [item.label, item.href])).toEqual([
       ["Home", "/"],
       ["Start Here", "/buyer-advisory"],
       ["Situations", "/situations"],
-      ["Buildings", "/building-reports"],
       ["Guides", "/guides"],
       ["About", "/about"],
     ]);
+    expect(primaryNav.some((item) => item.label === "Buildings")).toBe(false);
   });
 
   it("keeps sitemap quiet links off the header", () => {
@@ -64,18 +71,44 @@ describe("public menu lock", () => {
     }
   });
 
-  it("puts one Sitemap link in the dark footer and keeps Licenses off it", () => {
-    const sitemapLinks = FOOTER_DARK_LINKS.filter((item) => item.href === "/sitemap");
-    expect(sitemapLinks).toEqual([{ label: "Sitemap", href: "/sitemap" }]);
-    expect(FOOTER_DARK_TAIL_LINKS.map((item) => [item.label, item.href])).toEqual([
-      ["Terms", "/terms"],
-      ["Sitemap", "/sitemap"],
-      ["Contact", "/contact"],
+  it("keeps the charcoal footer quiet: doors, then Contact · Privacy · Terms", () => {
+    expect(FOOTER_DARK_NAV.map((item) => [item.label, item.href])).toEqual([
+      ["Start Here", "/buyer-advisory"],
+      ["Situations", "/situations"],
+      ["Guides", "/guides"],
+      ["About", "/about"],
     ]);
-    expect(FOOTER_DARK_LINKS.slice(-3)).toEqual([...FOOTER_DARK_TAIL_LINKS]);
+    expect(FOOTER_DARK_META.map((item) => [item.label, item.href])).toEqual([
+      ["Contact", "/contact"],
+      ["Privacy", "/privacy"],
+      ["Terms", "/terms"],
+    ]);
+    expect(FOOTER_DARK_LINKS).toEqual([...FOOTER_DARK_NAV, ...FOOTER_DARK_META]);
+    expect(FOOTER_DARK_LINKS.filter((item) => item.label === "Guides")).toHaveLength(1);
+    expect(FOOTER_DARK_LINKS.some((item) => item.href === "/sitemap")).toBe(false);
+    expect(FOOTER_DARK_LINKS.some((item) => item.href === "/intelligence")).toBe(false);
+    expect(FOOTER_DARK_LINKS.some((item) => item.href === "/account")).toBe(false);
+    expect(FOOTER_DARK_LINKS.some((item) => item.label.includes("Assessment"))).toBe(false);
+    expect(FOOTER_DARK_LINKS.some((item) => item.label === "Strategy Session")).toBe(false);
     expect(FOOTER_DARK_LINKS.some((item) => item.href === "/licenses")).toBe(false);
-    expect(FOOTER_DARK_LINKS.some((item) => item.label.toLowerCase() === "licenses")).toBe(false);
     expect(FOOTER_DARK_LINKS.some((item) => item.label.toLowerCase() === "email")).toBe(false);
+  });
+
+  it("limits the ivory footer to a short What's Changing set and four Popular links", () => {
+    expect([...FOOTER_WHATS_CHANGING_PREVIEW_LABELS]).toEqual([
+      "Executive Relocation",
+      "First Home",
+      "Growing Family",
+      "Marriage",
+      "International Move",
+    ]);
+    expect(FOOTER_WHATS_CHANGING_PREVIEW_LABELS.length).toBeLessThan(12);
+    expect(FOOTER_POPULAR_LINKS.map((item) => [item.label, item.href])).toEqual([
+      ["Rent vs Buy", "/situations/rent-vs-buy-manhattan-relocation"],
+      ["NYC Relocation", "/situations/executive-relocation-nyc"],
+      ["Neighborhoods", "/guides#neighborhoods"],
+      ["Kammer Report", "/guides#kammer-report"],
+    ]);
   });
 
   it("keeps Sitemap off the ivory What's Changing nav", () => {
@@ -90,5 +123,10 @@ describe("public menu lock", () => {
     const legal = groups.find((group) => group.title === "Legal");
     expect(legal?.items.map((item) => item.href)).toEqual(["/privacy", "/terms", "/licenses"]);
     expect(groups[0]?.items.map((item) => item.href)).toEqual(primaryNav.map((item) => item.href));
+    expect(groups.some((group) => group.title === "Building library")).toBe(false);
+    const doors = groups.flatMap((group) => group.items);
+    expect(doors.some((item) => item.label === "Buildings")).toBe(false);
+    expect(doors.some((item) => item.label === "Overview" && item.href === "/building-reports")).toBe(false);
+    expect(doors.some((item) => item.label === "Market Briefs")).toBe(false);
   });
 });

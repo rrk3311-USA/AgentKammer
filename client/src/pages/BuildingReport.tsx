@@ -25,7 +25,7 @@ export default function BuildingReport() {
   return (
     <main className="bg-brand-ivory">
       <PageHero
-        eyebrow="Building Intelligence"
+        eyebrow="Guides"
         title="Building Profiles"
         description="A single address can look perfect online and still be the wrong decision. These editorial profiles clarify architecture, service model, resale logic, board or sponsor dynamics, and whether the building fits the brief."
         art="individual-buildings"

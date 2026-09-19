@@ -73,7 +73,7 @@ export function contactHref(id: PublicProductId): string {
   return `/contact?intent=${id}`;
 }
 
-/** Quiet sitemap entries only. Do not add these to the six-item header. */
+/** Quiet sitemap entries only. Do not add these to the five-item header. */
 export const FOOTER_SITEMAP_QUIET = [
   { label: "Get Qualified", href: "/qualify" },
   { label: "Hub", href: "/hub" },
