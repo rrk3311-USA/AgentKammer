@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { CTA } from "@/components/site-shell";
+import { CTA, PageHero } from "@/components/site-shell";
 import { DecisionFramework } from "@/components/DecisionFramework";
-import { EditorialHero, grammar } from "@/components/visual-grammar";
+import { grammar } from "@/components/visual-grammar";
 import { decisionNavigationGroups } from "@/data/decision-navigation";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
@@ -91,10 +91,11 @@ export default function Services() {
 
   return (
     <main className="bg-brand-ivory">
-      <EditorialHero
+      <PageHero
         eyebrow="Situations"
         title="Explore your situation, not a property search."
         description="Decision Intelligence starts here: what changed in your life, what decision you face, and what you still need to understand. Each page is a Situation: research, not a product."
+        art="decision-framework"
       />
 
       <DecisionFramework
