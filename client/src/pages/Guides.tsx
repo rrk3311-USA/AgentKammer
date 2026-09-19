@@ -45,7 +45,7 @@ export default function Guides() {
   usePageMetadata({
     title: "Guides",
     description:
-      "Educational guides from Agent Kammer: ownership structures, neighborhood fit, and the Kammer Report.",
+      "Educational guides from Agent Kammer: ownership structures, neighborhood fit, and Property Assessment.",
     path: "/guides",
   });
 
@@ -71,7 +71,7 @@ export default function Guides() {
       <PageHero
         eyebrow="Guides"
         title="Clear frameworks before listings."
-        description="One knowledge library: decision frameworks, neighborhood fit, and the reports actually produced. Study structure before you study a listing."
+        description="One knowledge library: decision frameworks, neighborhood fit, and Property Assessment. Study structure before you study a listing."
         art="guides"
       />
       <ReportSubnav />
@@ -126,7 +126,7 @@ export default function Guides() {
       <ModuleSection id="kammer-report" surface="stone">
         <div className={grammar.padLoose}>
           <ModuleIntro
-            eyebrow="Kammer Report"
+            eyebrow="Property Assessment"
             title="What I’m observing about Manhattan."
             description="The archive of reports actually produced: executive housing intelligence and address studies. Building Profiles stay in this library; they are not a separate public category."
           />

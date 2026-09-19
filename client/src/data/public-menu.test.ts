@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { primaryNav } from "@/components/site-shell";
+import { guidesLibraryNav, primaryNav } from "@/components/site-shell";
 import { decisionNavigationGroups } from "./decision-navigation";
 import {
   FOOTER_DARK_LINKS,
@@ -54,6 +54,16 @@ describe("public menu lock", () => {
     ]);
     expect(primaryNav.some((item) => item.label === "Buildings")).toBe(false);
     expect(primaryNav.some((item) => item.label === "About")).toBe(false);
+  });
+
+  it("keeps Guides selector as Decision Guides · Neighborhoods · Property Assessment", () => {
+    expect(guidesLibraryNav.map((item) => [item.label, item.href])).toEqual([
+      ["Decision Guides", "/guides#decision-guides"],
+      ["Neighborhoods", "/guides#neighborhoods"],
+      ["Property Assessment", "/guides#kammer-report"],
+    ]);
+    expect(guidesLibraryNav.some((item) => item.label === "Kammer Report")).toBe(false);
+    expect(guidesLibraryNav.some((item) => item.label === "Buildings")).toBe(false);
   });
 
   it("keeps sitemap quiet links off the header", () => {
@@ -127,5 +137,12 @@ describe("public menu lock", () => {
     expect(doors.some((item) => item.label === "Buildings")).toBe(false);
     expect(doors.some((item) => item.label === "Overview" && item.href === "/building-reports")).toBe(false);
     expect(doors.some((item) => item.label === "Market Briefs")).toBe(false);
+    expect(doors.some((item) => item.label === "Kammer Report")).toBe(false);
+    const guides = groups.find((group) => group.title === "Guides");
+    expect(guides?.items.map((item) => item.label).slice(0, 3)).toEqual([
+      "Decision Guides",
+      "Neighborhoods",
+      "Property Assessment",
+    ]);
   });
 });

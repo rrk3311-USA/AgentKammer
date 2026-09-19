@@ -79,7 +79,7 @@ export default function ToolsIndex() {
           </p>
           <p className="mt-1 text-[18px] text-[var(--ak-ink)]">Suggested → Selected report queue</p>
           <p className="mt-2 text-[13px] leading-relaxed text-[var(--ak-secondary)]">
-            Twice-monthly shortlist, Kammer Report queue, secret replacement mark, sell / unsell.
+            Twice-monthly shortlist, Property Assessment queue, secret replacement mark, sell / unsell.
           </p>
         </Link>
         <button

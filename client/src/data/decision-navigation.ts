@@ -83,11 +83,11 @@ export const decisionNavigationGroups: DecisionNavGroup[] = [
   },
   {
     title: "Guides library",
-    description: "One knowledge library: decision frameworks, neighborhoods, and the Kammer Report.",
+    description: "One knowledge library: decision frameworks, neighborhoods, and Property Assessment.",
     items: [
       { label: "Decision Guides", href: "/guides#decision-guides" },
       { label: "Neighborhoods", href: "/guides#neighborhoods" },
-      { label: "Kammer Report", href: "/guides#kammer-report" },
+      { label: "Property Assessment", href: "/guides#kammer-report" },
       { label: "Life Changes", href: "/situations" },
       { label: "Insights", href: "/insights" },
     ],

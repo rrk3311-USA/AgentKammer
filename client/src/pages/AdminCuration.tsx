@@ -267,7 +267,7 @@ export default function AdminCuration() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--ak-brass)]">
-              Unlisted · Kammer Report queue
+              Unlisted · Property Assessment queue
             </p>
             <h1 className="ak-admin-display mt-1 text-[32px] text-[var(--ak-ink)]">Curation IQ</h1>
             <p className="mt-1 max-w-2xl text-[13px] leading-relaxed text-[var(--ak-secondary)]">

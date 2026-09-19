@@ -4,7 +4,7 @@
 **Surface:** unlisted `/tools/curation` (alias `/admin/curation`)  
 **Not in:** public header, sitemap, or the Advisory sidebar
 
-Raphi’s **Kammer Report / Property Assessment queue**. Twice-monthly Suggested shortlist (1st & 15th). He edits freely. A secret admin mark is set when he replaces a suggestion.
+Raphi’s **Property Assessment queue**. Twice-monthly Suggested shortlist (1st & 15th). He edits freely. A secret admin mark is set when he replaces a suggestion.
 
 ## Layers (never collapse)
 
