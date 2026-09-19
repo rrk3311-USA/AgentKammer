@@ -1,8 +1,8 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { CTA } from "@/components/site-shell";
+import { CTA, PageHero } from "@/components/site-shell";
 import { DecisionFramework } from "@/components/DecisionFramework";
-import { EditorialHero, grammar } from "@/components/visual-grammar";
+import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 export default function About() {
@@ -15,10 +15,11 @@ export default function About() {
 
   return (
     <main className="bg-brand-ivory">
-      <EditorialHero
+      <PageHero
         eyebrow="About"
         title="Private housing guidance before the market gets loud."
         description="Raphael Kammer built Agent Kammer for clients who want judgment, not a louder search. The practice diagnoses what changed, whether anything should change, and whether this is still where you belong."
+        art="private-advisory"
       />
 
       <article className="mx-auto max-w-[42rem] px-6 py-20 lg:px-10 lg:py-24">
