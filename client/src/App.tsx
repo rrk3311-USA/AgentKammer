@@ -222,12 +222,14 @@ function AppShell() {
   }
 
   return (
-    <div className="ak-app-shell min-h-screen bg-brand-charcoal text-brand-ink">
+    <div className="ak-app-shell flex min-h-screen flex-col bg-brand-ivory text-brand-ink">
       <ScrollToTop />
       <VisitorSignals />
       <Header />
-      <Suspense fallback={<div className="mx-auto w-full max-w-7xl px-6 py-12 text-white/70">Loading...</div>}>
-        <Router />
+      <Suspense fallback={<div className="mx-auto w-full max-w-7xl flex-1 px-6 py-12 text-brand-graphite/70">Loading...</div>}>
+        <div className="flex-1">
+          <Router />
+        </div>
       </Suspense>
       <Footer />
       <DecisionAssistantDock />

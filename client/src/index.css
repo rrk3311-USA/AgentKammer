@@ -864,10 +864,6 @@
     @apply bg-brand-ivory font-sans text-body-lg text-brand-ink;
   }
 
-  html[data-advisor] .ak-app-shell {
-    padding-bottom: calc(4.25rem + env(safe-area-inset-bottom));
-  }
-
   ::selection {
     background-color: rgb(15 23 42 / 0.12);
   }

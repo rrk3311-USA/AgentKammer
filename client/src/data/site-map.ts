@@ -14,15 +14,6 @@ export type SiteMapGroup = {
   items: readonly SiteMapItem[];
 };
 
-/** Ivory What’s Changing preview — not the full 12 on every page. */
-export const FOOTER_WHATS_CHANGING_PREVIEW_LABELS = [
-  "Executive Relocation",
-  "First Home",
-  "Growing Family",
-  "Marriage",
-  "International Move",
-] as const;
-
 /** Ivory popular row. Four links only. */
 export const FOOTER_POPULAR_LINKS = [
   { label: "Rent vs Buy", href: "/situations/rent-vs-buy-manhattan-relocation" },

@@ -6,7 +6,6 @@ import {
   FOOTER_DARK_META,
   FOOTER_DARK_NAV,
   FOOTER_POPULAR_LINKS,
-  FOOTER_WHATS_CHANGING_PREVIEW_LABELS,
   getSiteMapGroups,
 } from "./site-map";
 import {
@@ -94,15 +93,22 @@ describe("public menu lock", () => {
     expect(FOOTER_DARK_LINKS.some((item) => item.label.toLowerCase() === "email")).toBe(false);
   });
 
-  it("limits the ivory footer to a short What's Changing set and four Popular links", () => {
-    expect([...FOOTER_WHATS_CHANGING_PREVIEW_LABELS]).toEqual([
+  it("keeps the full What's Changing set in the ivory footer and four Popular links", () => {
+    const whatsChanging = decisionNavigationGroups.find((group) => group.title === "What's Changing?");
+    expect(whatsChanging?.items.map((item) => item.label)).toEqual([
       "Executive Relocation",
       "First Home",
       "Growing Family",
       "Marriage",
+      "Divorce",
+      "Empty Nest",
+      "Aging Parents",
+      "Inheritance",
+      "Retirement",
+      "Remote Work",
+      "Job Change",
       "International Move",
     ]);
-    expect(FOOTER_WHATS_CHANGING_PREVIEW_LABELS.length).toBeLessThan(12);
     expect(FOOTER_POPULAR_LINKS.map((item) => [item.label, item.href])).toEqual([
       ["Rent vs Buy", "/situations/rent-vs-buy-manhattan-relocation"],
       ["NYC Relocation", "/situations/executive-relocation-nyc"],
