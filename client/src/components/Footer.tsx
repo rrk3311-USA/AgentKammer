@@ -24,7 +24,7 @@ const pillClass =
   "rounded-full border border-brand-border bg-white px-4 py-1.5 text-[11px] uppercase tracking-[0.1em] text-brand-navy transition-colors hover:border-brand-brass hover:text-brand-brass";
 
 function GuidanceDockNest() {
-  return <div id="resume-decision-nest" className="flex min-h-11 min-w-[11.5rem] items-center" />;
+  return <div id="resume-decision-nest" className="flex min-h-11 min-w-[13rem] items-center" />;
 }
 
 export function Footer() {
