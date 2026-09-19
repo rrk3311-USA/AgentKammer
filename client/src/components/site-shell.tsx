@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { ArrowRight, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -506,6 +506,14 @@ export function ReportSubnav() {
   );
 }
 
+function ctaPhrase(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+export function sameCtaPhrase(a: string, b: string) {
+  return ctaPhrase(a) === ctaPhrase(b);
+}
+
 export function CTA({
   title = "Start Here.",
   description = "Begin with Guidance, a Situation Assessment, or a Strategy Session when you want a live hour of judgment.",
@@ -519,20 +527,41 @@ export function CTA({
   label?: string;
   eyebrow?: string;
 }) {
+  const hideSectionEyebrow = sameCtaPhrase(eyebrow, title);
+  const hideButtonEyebrow = sameCtaPhrase(eyebrow, label);
+  const actionClass = hideButtonEyebrow
+    ? "ak-call-button group inline-flex min-w-[16rem] items-center justify-between gap-6 px-5 py-4 text-left text-[14px] font-semibold uppercase tracking-[0.12em] transition-colors"
+    : "ak-call-button group grid px-5 py-4 text-left transition-colors";
+  const actionInner = hideButtonEyebrow ? (
+    <>
+      <span>{label}</span>
+      <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+    </>
+  ) : (
+    <>
+      <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</span>
+      <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
+      <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
+        {label}
+        <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+      </span>
+    </>
+  );
+
   return (
     <section className="border-t border-brand-brass/30 bg-brand-navy text-brand-ivory">
       <PageSection className="py-16 lg:py-20">
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
-            <p className={grammar.eyebrowOnDark}>{eyebrow}</p>
-            <h2 className={cn("mt-4", grammar.sectionOnDark)}>{title}</h2>
+            {hideSectionEyebrow ? null : <p className={grammar.eyebrowOnDark}>{eyebrow}</p>}
+            <h2 className={cn(hideSectionEyebrow ? "" : "mt-4", grammar.sectionOnDark)}>{title}</h2>
             <p className={cn("mt-5", grammar.bodyOnDark)}>{description}</p>
           </div>
           <div className="grid gap-3 sm:min-w-[16rem]">
             {href.startsWith("#") ? (
               <a
                 href={href}
-                className="ak-call-button group grid px-5 py-4 text-left transition-colors"
+                className={actionClass}
                 onClick={(e) => {
                   const id = href.slice(1);
                   const el = typeof document !== "undefined" ? document.getElementById(id) : null;
@@ -543,24 +572,11 @@ export function CTA({
                   }
                 }}
               >
-                <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</span>
-                <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
-                <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
-                  {label}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-                </span>
+                {actionInner}
               </a>
             ) : (
-              <Link
-                href={href}
-                className="ak-call-button group grid px-5 py-4 text-left transition-colors"
-              >
-                <span className="text-[10px] uppercase tracking-[0.24em] text-brand-brass">{eyebrow}</span>
-                <span className="mt-3 h-px w-full bg-brand-ivory/24" aria-hidden />
-                <span className="mt-3 flex items-center justify-between text-[11px] uppercase tracking-[0.16em]">
-                  {label}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
-                </span>
+              <Link href={href} className={actionClass}>
+                {actionInner}
               </Link>
             )}
             {href === "/contact" ? (

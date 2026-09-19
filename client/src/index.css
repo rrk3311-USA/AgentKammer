@@ -904,6 +904,7 @@
     isolation: isolate;
     overflow: hidden;
     border: 1px solid transparent;
+    border-radius: 8px;
     background:
       linear-gradient(135deg, #26305f 0%, #1f2851 42%, #313f6d 100%) padding-box,
       linear-gradient(135deg, rgba(176, 141, 87, 0.42), rgba(245, 242, 235, 0.22) 40%, rgba(93, 102, 116, 0.35) 68%, rgba(176, 141, 87, 0.4)) border-box;
