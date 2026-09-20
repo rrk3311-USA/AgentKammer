@@ -435,18 +435,21 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   ]);
   const transcriptRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
+  const startWithMessageRef = useRef<(text: string) => void>(() => undefined);
   const engagement = getPageEngagement(location);
   const openingPrompts = engagement.prompts;
   const starterPrompts = engagement.starters;
   const cold = isColdConversation(messages);
 
   useEffect(() => {
-    const open = () => {
+    const open = (event: Event) => {
+      const starter = (event as CustomEvent<{ starter?: string }>).detail?.starter?.trim();
       setExpanded(true);
       setNudge(null);
       clearDecisionAssistantNudge();
       window.setTimeout(() => {
         inputRef.current?.focus({ preventScroll: true });
+        if (starter) startWithMessageRef.current(starter);
       }, 280);
     };
     window.addEventListener(DECISION_ASSISTANT_OPEN_EVENT, open);
@@ -757,6 +760,10 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
         : "desire",
     );
   }
+
+  startWithMessageRef.current = (text: string) => {
+    handleStarter({ label: text, text });
+  };
 
   function handleQuickAction(action: QuickAction) {
     setExpanded(true);

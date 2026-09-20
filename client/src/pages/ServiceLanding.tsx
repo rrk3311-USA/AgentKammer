@@ -1,8 +1,11 @@
+import React from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
+import { DecisionFacingChips } from "@/components/DecisionFacingChips";
 import { ArchitecturalHeroDrawing, CTA, PageSection } from "@/components/site-shell";
 import { grammar } from "@/components/visual-grammar";
 import { serviceLandings, serviceLandingMap, type ServiceLanding } from "@/data/service-landings";
+import { openDecisionAssistant } from "@/lib/decision-assistant";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 function editorialCopy(landing: ServiceLanding) {
@@ -275,14 +278,11 @@ export default function ServiceLanding({ slug }: { slug: string }) {
             <p className={`mt-4 ${grammar.section}`}>{copy.recommendation}</p>
           </div>
 
-          <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <Link
-              href="/belonging"
-              className="ak-call-button inline-flex items-center justify-between gap-6 px-5 py-4 text-[11px] uppercase tracking-[0.16em]"
-            >
-              Request a Situation Assessment
-              <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-            </Link>
+          <div className="mt-12 space-y-6">
+            <div>
+              <p className={grammar.eyebrow}>What Decision Are You Facing?</p>
+              <DecisionFacingChips className="mt-4" />
+            </div>
             <Link
               href={`/situations/${next.slug}`}
               className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-brand-graphite transition-colors hover:text-brand-brass"
@@ -296,10 +296,12 @@ export default function ServiceLanding({ slug }: { slug: string }) {
 
       <CTA
         title="If this situation is yours."
-        description={`For ${landing.navLabel.toLowerCase()}, the next step is the Situation Assessment. Guidance stays in the header if you want to talk first.`}
+        description={`For ${landing.navLabel.toLowerCase()}, the next step is the Situation Assessment.`}
         href="/belonging"
-        label="Request a Situation Assessment"
-        eyebrow="Assessment"
+        label="Situation Assessment"
+        eyebrow="Situation Assessment"
+        guidanceLabel="Prefer to talk it through? Open Guidance →"
+        onGuidanceClick={() => openDecisionAssistant()}
       />
     </main>
   );

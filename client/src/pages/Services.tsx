@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { DecisionFacingChips } from "@/components/DecisionFacingChips";
 import { CTA, PageHero } from "@/components/site-shell";
 import {
   CompactLinkRow,
@@ -11,7 +12,6 @@ import { decisionNavigationGroups } from "@/data/decision-navigation";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 const whatsChanging = decisionNavigationGroups.find((group) => group.title === "What's Changing?");
-const decisions = decisionNavigationGroups.find((group) => group.title === "What Decision Are You Facing?");
 const understand = decisionNavigationGroups.find((group) => group.title === "What Are You Trying to Understand?");
 
 const primaryChangeLabels = [
@@ -84,9 +84,9 @@ export default function Services() {
           <ModuleIntro
             eyebrow="02 · Paths"
             title="What Decision Are You Facing?"
-            description="Once the situation is clear, name the path, including stay put, wait, or do nothing yet."
+            description="Once the situation is clear, name the path, including stay put, wait, or do nothing yet. Each chip opens Guidance."
           />
-          <ModuleCards items={decisions?.items ?? []} columns={3} size="compact" />
+          <DecisionFacingChips className="mt-12" />
         </div>
       </ModuleSection>
 
