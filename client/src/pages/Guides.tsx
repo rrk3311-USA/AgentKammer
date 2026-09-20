@@ -110,7 +110,7 @@ export default function Guides() {
           <ModuleIntro
             eyebrow="Neighborhoods"
             title="Geography before inventory."
-            description="Tribeca, Chelsea, Hudson Yards, the Upper West Side, and the other Manhattan briefs. Lock one or two districts before comparing buildings."
+            description="Tribeca, Chelsea, Hudson Yards, the Upper West Side, and the other Manhattan Situations. Lock one or two districts before comparing buildings."
           />
           <ModuleCards
             columns={3}
