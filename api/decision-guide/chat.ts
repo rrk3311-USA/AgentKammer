@@ -201,8 +201,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
               update_blueprint: "Use when new decision information was learned, but do not announce mechanics to the visitor.",
               recommend_page: "Use when a relevant page should be suggested after you give guidance.",
               open_page: "Use when the next page is clearly helpful. Do not say 'I am opening'; just give the reason.",
-              send_recap:
-                "Use only after several educational, useful turns and real guidance. Never in turns 1 through 5. Never as a reason to collect contact. If they asked to save, continue later, or book, you may offer 'want this waiting for you?' If no email is known, invite only then.",
+              send_recap: "Use only after useful guidance has been delivered. If no email is known, ask for it in the reply and explain the recap/recommendation deliverable.",
             },
           }),
         },
