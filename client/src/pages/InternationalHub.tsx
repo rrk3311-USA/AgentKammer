@@ -69,9 +69,9 @@ export default function InternationalHub() {
           })}
         </div>
         <p className="mt-10 text-sm text-brand-graphite/80">
-          Prefer the English Decision Brief first?{" "}
+          Prefer the English Situation first?{" "}
           <Link href="/situations/foreign-buyers-new-york" className="underline underline-offset-4">
-            International Buyer Decision Brief
+            International Buyer Situation
           </Link>
           .
         </p>

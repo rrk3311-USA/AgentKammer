@@ -103,11 +103,11 @@ export default function Services() {
       </ModuleSection>
 
       <CTA
-        title="When you need to understand the model."
-        description="Guides is the knowledge library. Guidance stays the human layer, from the header."
-        href="/guides"
-        label="Guides"
-        eyebrow="Guides"
+        title="When the situation is yours."
+        description="The next step is the Situation Assessment. Guidance stays in the header if you want to talk first. Guides stay in the library."
+        href="/belonging"
+        label="Find out if this is the right fit for you"
+        eyebrow="Assessment"
       />
     </main>
   );

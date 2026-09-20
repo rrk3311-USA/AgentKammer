@@ -32,6 +32,11 @@ describe("public menu lock", () => {
       "Property Assessment",
       "Livability Score",
     ]);
+    expect(PUBLIC_PRODUCTS.situation.cta).toBe("Find out if this is the right fit for you");
+    expect(PUBLIC_PRODUCTS.situation.label).toBe("Situation Assessment");
+    expect(PUBLIC_PRODUCTS.situation.cta.toLowerCase()).not.toContain("belong");
+    expect(CONTACT_NEXT_STEPS).not.toContain("Find out if you belong");
+    expect(CONTACT_NEXT_STEPS).not.toContain("Decision Brief");
     expect(Object.keys(PUBLIC_PRODUCTS)).not.toContain("strategy");
     expect(CONTACT_NEXT_STEPS).not.toContain("Strategy Session");
     expect(CONTACT_NEXT_STEPS).not.toContain("Get Qualified");

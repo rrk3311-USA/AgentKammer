@@ -161,8 +161,8 @@ export default function Advisory() {
         title="Start with Guidance, or the Situation Assessment."
         description="One major decision, a written next step, and a clear recommendation. Continuity is available if the decisions keep evolving."
         href="/belonging"
-        label="Situation Assessment"
-        eyebrow="Start Here"
+        label="Find out if this is the right fit for you"
+        eyebrow="Assessment"
       />
     </main>
   );

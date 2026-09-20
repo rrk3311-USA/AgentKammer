@@ -9,13 +9,13 @@ export default function NotFound() {
       <PageSection className="flex min-h-[62vh] items-center">
         <div className="max-w-3xl">
           <p className={grammar.eyebrow}>Page Not Found</p>
-          <h1 className={`mt-4 ${grammar.display}`}>This path does not have a decision brief yet.</h1>
+          <h1 className={`mt-4 ${grammar.display}`}>This path does not have a Situation yet.</h1>
           <p className={`mt-6 ${grammar.body}`}>
-            Start with the main Decision Brief library, or write if the question is specific to a building, neighborhood, timeline, or life change.
+            Start Here names what changed, or write if the question is specific to a building, neighborhood, timeline, or life change.
           </p>
           <div className="mt-8 flex flex-wrap gap-6">
             <Link href="/situations" className={grammar.textLink}>
-              Open Decision Briefs
+              Start Here
               <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
             </Link>
             <Link href="/contact" className={grammar.textLink}>

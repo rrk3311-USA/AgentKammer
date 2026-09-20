@@ -55,7 +55,7 @@ export const TOOL_CATALOG: ToolDefinition[] = [
   },
   {
     slug: "decision-brief",
-    name: "Decision Brief",
+    name: "Situation",
     eyebrow: "Later",
     tagline: "A one-page read on whether anything should change.",
     description: "Scaffolded for later. Same wallet, same credit.",

@@ -77,7 +77,7 @@ export default function Perspectives() {
 
       <CTA
         title="Need a more tailored read than a public note can provide?"
-        description="Write if you want the observation turned into a decision brief for your building, neighborhood, timeline, or move question."
+        description="Write if you want the observation applied to your situation, building, neighborhood, timeline, or move question."
         href="/contact"
         label="Contact"
         eyebrow="Contact"

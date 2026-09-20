@@ -40,7 +40,7 @@ const profileDimensions = [
 
 export default function Belonging() {
   usePageMetadata({
-    title: `${PUBLIC_PRODUCTS.situation.label} | Are You Living Where You Belong?`,
+    title: PUBLIC_PRODUCTS.situation.label,
     description:
       "Take the Situation Assessment. Receive an Agent Kammer profile: fit verdict, WHO, readiness, lifestyle fit, timing, and a reasoned next step.",
     path: "/belonging",
@@ -50,8 +50,8 @@ export default function Belonging() {
     <main className="bg-brand-ivory text-brand-ink">
       <EditorialHero
         eyebrow={PUBLIC_PRODUCTS.situation.label}
-        title="Find out if you’re living where you belong."
-        description="A guided life diagnostic about your life, priorities, and housing, not listings. Your responses help tailor your profile and the next step that would actually help."
+        title="Figure out your situation."
+        description="A structured diagnostic about your life, priorities, and housing, not listings. Your responses help tailor your profile and the next step that would actually help."
       >
         <Link
           href="/contact?intent=situation"

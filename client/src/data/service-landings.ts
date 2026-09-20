@@ -696,7 +696,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Separate cosmetic apartment issues from board and building constraints early.",
       "Compare co-op value against condominium ease with a clear residency horizon.",
     ],
-    cta: "Start an Upper West Side decision brief.",
+    cta: "Start an Upper West Side Situation.",
   },
   {
     slug: "upper-east-side-buyers-nyc",
@@ -731,7 +731,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Choose avenue versus side-street living deliberately; they solve different problems.",
       "Do not let museum-mile prestige override commute and daily service reality.",
     ],
-    cta: "Start an Upper East Side decision brief.",
+    cta: "Start an Upper East Side Situation.",
   },
   {
     slug: "tribeca-buyers-nyc",
@@ -766,7 +766,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Accept lower inventory velocity as a trade-off for scale and privacy.",
       "Compare Tribeca against Battery Park City and West Village only after the brief is clear.",
     ],
-    cta: "Start a Tribeca decision brief.",
+    cta: "Start a Tribeca Situation.",
   },
   {
     slug: "chelsea-buyers-nyc",
@@ -801,7 +801,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Pressure-test design prestige against noise, tourists, and weekday practicality.",
       "Use High Line adjacency as a lifestyle filter, not an automatic premium justification.",
     ],
-    cta: "Start a Chelsea decision brief.",
+    cta: "Start a Chelsea Situation.",
   },
   {
     slug: "hudson-yards-buyers-nyc",
@@ -836,7 +836,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Compare Hudson Yards to Chelsea and Tribeca on neighborhood feel, not only finish quality.",
       "Corporate relocators should confirm office gravity before paying for skyline theater.",
     ],
-    cta: "Start a Hudson Yards decision brief.",
+    cta: "Start a Hudson Yards Situation.",
   },
   {
     slug: "financial-district-buyers-nyc",
@@ -871,7 +871,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Inspect service standards carefully. FiDi quality varies more than brochure language suggests.",
       "Decide primary home versus pied-à-terre use; the right building changes with that answer.",
     ],
-    cta: "Start a Financial District decision brief.",
+    cta: "Start a Financial District Situation.",
   },
   {
     slug: "first-home-buyers-nyc",
@@ -899,7 +899,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Model carrying costs and exit optionality; a first home that is hard to sell becomes a trap.",
       "Prefer a clear Decision Profile over a rushed offer on the first building that feels exciting.",
     ],
-    cta: "Start a first-home Decision Brief.",
+    cta: "Start a first-home Situation.",
   },
   {
     slug: "marriage-housing-nyc",
@@ -927,7 +927,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Name non-negotiables for each partner before comparing buildings.",
       "If one person already owns, weigh keep / sell / rent against starting fresh.",
     ],
-    cta: "Start a marriage and housing Decision Brief.",
+    cta: "Start a marriage and housing Situation.",
   },
   {
     slug: "new-baby-growing-family-nyc",
@@ -955,7 +955,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Compare renovate / reconfigure vs. Move before touring larger apartments.",
       "If schools matter, read the school-district brief after the life-change frame is clear.",
     ],
-    cta: "Start a growing-family Decision Brief.",
+    cta: "Start a growing-family Situation.",
   },
   {
     slug: "aging-parents-housing-nyc",
@@ -983,7 +983,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Inspect elevator buildings, bathroom access, and doorman support before aesthetics.",
       "Clarify who decides, who pays, and who lives with the outcome.",
     ],
-    cta: "Start an aging-parents Decision Brief.",
+    cta: "Start an aging-parents Situation.",
   },
   {
     slug: "job-loss-housing-nyc",
@@ -1011,7 +1011,7 @@ export const serviceLandings: ServiceLanding[] = [
       "If selling, decide whether speed or net proceeds matters more right now.",
       "Separate career narrative from building thesis; a temporary income gap is not always a permanent location change.",
     ],
-    cta: "Start a job-loss housing Decision Brief.",
+    cta: "Start a job-loss housing Situation.",
   },
   {
     slug: "remote-work-housing-nyc",
@@ -1039,7 +1039,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Prioritize light, acoustics, and a closable work door over prestige address.",
       "If leaving the city is on the table, treat it as a life-fit decision, not only a cost decision.",
     ],
-    cta: "Start a remote-work Decision Brief.",
+    cta: "Start a remote-work Situation.",
   },
   {
     slug: "inheritance-housing-nyc",
@@ -1067,7 +1067,7 @@ export const serviceLandings: ServiceLanding[] = [
       "Inspect the building and condition with a cool eye; sentimental value is real and still not a renovation plan.",
       "If selling, sequence repairs and pricing against family readiness, not only broker urgency.",
     ],
-    cta: "Start an inheritance Decision Brief.",
+    cta: "Start an inheritance Situation.",
   },
 ];
 

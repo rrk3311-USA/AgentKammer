@@ -74,7 +74,7 @@ export default function NewYorkMarket() {
                     </p>
                   </div>
                   <span className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-brand-navy">
-                    Open Decision Brief
+                    Open Situation
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
                   </span>
                 </div>

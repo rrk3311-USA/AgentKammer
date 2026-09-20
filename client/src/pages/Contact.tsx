@@ -215,7 +215,7 @@ export default function Contact() {
               Prefer Guidance? Open the Guidance Advisor →
             </button>
             <Link href="/belonging" className="block text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass">
-              Prefer the Situation Assessment? Find out if you’re living where you belong →
+              Prefer the Situation Assessment? Find out if this is the right fit for you →
             </Link>
             <Link href="/advisory" className="block text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass">
               See how Residential Advisory works. Memberships follow by invitation →

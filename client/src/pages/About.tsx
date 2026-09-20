@@ -49,7 +49,7 @@ export default function About() {
           We read buildings as assets: structure, operations, and how they actually work for the people who live in them. That literacy informs judgment. It is not a pitch for inspections.
         </p>
         <p className={`mt-6 ${grammar.bodyWide}`}>
-          That literacy sits behind Decision Briefs and Building Reports, used after the decision frame is clear, never as a substitute for asking whether anything should change.
+          That literacy sits behind Situation pages and Building Reports, used after the decision frame is clear, never as a substitute for asking whether anything should change.
         </p>
       </article>
 
@@ -76,18 +76,18 @@ export default function About() {
         ]}
         action={
           <Link href="/belonging" className={grammar.textLink}>
-            Find out if you’re living where you belong
+            Find out if this is the right fit for you
             <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
           </Link>
         }
       />
 
       <CTA
-        title="Find out if you’re living where you belong."
+        title="Figure out your situation."
         description="The Situation Assessment is how most relationships begin. A profile first. A written next step when the picture is clear."
         href="/belonging"
-        label="Situation Assessment"
-        eyebrow="Start Here"
+        label="Find out if this is the right fit for you"
+        eyebrow="Assessment"
       />
     </main>
   );

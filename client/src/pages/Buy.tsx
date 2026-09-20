@@ -23,10 +23,10 @@ const journey = [
   },
   {
     step: "03",
-    title: "Read the relevant Decision Brief",
+    title: "Read the relevant Situation",
     text: "Open the short editorial that matches your situation or the decision path you face. Clarity before inventory.",
     href: "/situations",
-    cta: "Browse Decision Briefs",
+    cta: "Browse Situations",
     surface: "mist" as const,
   },
   {
@@ -44,25 +44,25 @@ const scenarios = [
     title: "Executive relocating to Manhattan",
     text: "Trigger: start date in 60-120 days, household in motion, limited touring bandwidth. Often rent first or buy only in turnkey condominiums with clear service culture.",
     href: "/situations/executive-relocation-nyc",
-    cta: "Open related brief",
+    cta: "Open related Situation",
   },
   {
     title: "First Manhattan purchase",
     text: "Trigger: leaving a rental or another city without a building thesis yet. Neighborhood and ownership structure before apartment romance. Condo vs co-op clarity early.",
     href: "/situations/first-home-buyers-nyc",
-    cta: "Open related brief",
+    cta: "Open related Situation",
   },
   {
     title: "Growing family / schools",
     text: "Trigger: bedroom count, school logistics, or outdoor access stopped fitting. Geography first, then building rules that support the household.",
     href: "/situations/new-baby-growing-family-nyc",
-    cta: "Open related brief",
+    cta: "Open related Situation",
   },
   {
     title: "Sell, keep, or wait",
     text: "Trigger: life changed but the financial or emotional case for selling is unclear. Sometimes the highest-value move is to hold, renovate, or rent the current home.",
     href: "/situations#decisions",
-    cta: "Open related brief",
+    cta: "Open related Situation",
   },
 ];
 
@@ -70,7 +70,7 @@ export default function Buy() {
   usePageMetadata({
     title: "Start Here",
     description:
-      "How we work: what's changing, Situation Assessment, Decision Brief, then a written next step, before listings take over.",
+      "How we work: Start Here, Situation, Assessment, then Contact, before listings take over.",
     path: "/buyer-advisory",
   });
 
@@ -79,7 +79,7 @@ export default function Buy() {
       <PageHero
         eyebrow="Start Here"
         title="A clear path through the decision. Not another search."
-        description="Start Here is the path. The Situation Assessment is the diagnostic. Decision Briefs are the research. Contact is for a written next step. They are not the same step."
+        description="Start Here names what changed. A Situation explains it. The Situation Assessment is the diagnostic. Contact is for a written next step. They are not the same step."
         art="start-here"
       />
 
@@ -102,7 +102,7 @@ export default function Buy() {
           <ModuleIntro
             eyebrow="Common Situations"
             title="How the work usually begins in practice."
-            description="Patterns that help you recognize which Decision Brief should come next after the assessment."
+            description="Patterns that help you recognize which Situation comes next before the assessment."
           />
           <LibraryList items={scenarios} />
         </div>
@@ -112,8 +112,8 @@ export default function Buy() {
         title="Start with the Situation Assessment."
         description="If you already know what changed, browse What's Changing? If the question is still open, build your situation profile first."
         href="/belonging"
-        label="Start Situation Assessment"
-        eyebrow="Start Here"
+        label="Find out if this is the right fit for you"
+        eyebrow="Assessment"
       />
     </main>
   );

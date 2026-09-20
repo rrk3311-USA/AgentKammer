@@ -147,8 +147,8 @@ export default function IntelligenceHome() {
         title="Start with Guidance, or the Situation Assessment."
         description="If an address is already in play, request a Property Assessment. If daily fit is the question, request a Livability Score."
         href="/belonging"
-        label="Situation Assessment"
-        eyebrow="Start Here"
+        label="Find out if this is the right fit for you"
+        eyebrow="Assessment"
       />
     </main>
   );

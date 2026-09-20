@@ -162,7 +162,7 @@ export function InternationalStrategyForm({
           </a>
           {" · "}
           <a href="/situations/foreign-buyers-new-york" className="underline underline-offset-4">
-            International Buyer Decision Brief
+            International Buyer Situation
           </a>
         </p>
       </div>

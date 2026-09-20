@@ -280,7 +280,7 @@ export default function ServiceLanding({ slug }: { slug: string }) {
               href="/belonging"
               className="ak-call-button inline-flex items-center justify-between gap-6 px-5 py-4 text-[11px] uppercase tracking-[0.16em]"
             >
-              Find out if you belong
+              Find out if this is the right fit for you
               <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
             </Link>
             <Link
@@ -296,10 +296,10 @@ export default function ServiceLanding({ slug }: { slug: string }) {
 
       <CTA
         title="If this situation is yours."
-        description={`For ${landing.navLabel.toLowerCase()}, start with the Situation Assessment, or request a Property Assessment if an address is already in play.`}
+        description={`For ${landing.navLabel.toLowerCase()}, the next step is the Situation Assessment. Guidance stays in the header if you want to talk first.`}
         href="/belonging"
-        label="Situation Assessment"
-        eyebrow="Start Here"
+        label="Find out if this is the right fit for you"
+        eyebrow="Assessment"
       />
     </main>
   );
