@@ -113,6 +113,18 @@ type QuickAction = {
   asksForEmail?: boolean;
 };
 
+const SITUATION_ASSESSMENT_PATH = "/belonging";
+const SITUATION_ASSESSMENT_CTA = "Request a Situation Assessment";
+
+function replyOffersSituationAssessment(reply: string) {
+  const text = reply.toLowerCase();
+  return (
+    text.includes("situation assessment") ||
+    text.includes("/belonging") ||
+    text.includes("do the assessment")
+  );
+}
+
 type DecisionGuideAction = {
   type: "open_page" | "update_blueprint" | "send_recap" | "recommend_page" | "none";
   label: string;
@@ -817,20 +829,31 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
     setAnswers(mergedAnswers);
     setLeadScore(nextScore);
     setLeadQualification(aiTurn.leadQualification ?? null);
-    setQuickActions([]);
-
+    const nextQuickActions: QuickAction[] = [];
     const recommended = aiTurn.actions?.find(
       (action) => (action.type === "open_page" || action.type === "recommend_page") && action.path,
     );
     if (recommended?.path) {
-      setQuickActions([
-        {
-          label: recommended.label || "Open recommended page",
-          path: recommended.path,
-          response: recommended.reason || "This page is the next useful read.",
-        },
-      ]);
+      nextQuickActions.push({
+        label:
+          recommended.path === SITUATION_ASSESSMENT_PATH
+            ? recommended.label || SITUATION_ASSESSMENT_CTA
+            : recommended.label || "Open recommended page",
+        path: recommended.path,
+        response: recommended.reason || "This page is the next useful read.",
+      });
     }
+    if (
+      !nextQuickActions.some((action) => action.path === SITUATION_ASSESSMENT_PATH) &&
+      replyOffersSituationAssessment(aiTurn.reply)
+    ) {
+      nextQuickActions.unshift({
+        label: SITUATION_ASSESSMENT_CTA,
+        path: SITUATION_ASSESSMENT_PATH,
+        response: "The next step is a Situation Assessment. This opens the intake so Agent Kammer can assess your situation properly.",
+      });
+    }
+    setQuickActions(nextQuickActions);
 
     const shouldSendRecap = offerContact && aiTurn.actions?.some((action) => action.type === "send_recap");
     if (shouldSendRecap && hasContact(mergedAnswers)) {

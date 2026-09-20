@@ -106,7 +106,7 @@ export default function Services() {
         title="When the situation is yours."
         description="The next step is the Situation Assessment. Guidance stays in the header if you want to talk first. Guides stay in the library."
         href="/belonging"
-        label="Find out if this is the right fit for you"
+        label="Request a Situation Assessment"
         eyebrow="Assessment"
       />
     </main>

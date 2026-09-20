@@ -176,7 +176,7 @@ export default function Guides() {
         title="If you want a structured answer."
         description="Guides stay the research library. The Situation Assessment is how you figure out your situation."
         href="/belonging"
-        label="Find out if this is the right fit for you"
+        label="Request a Situation Assessment"
       />
     </main>
   );

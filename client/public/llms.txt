@@ -49,7 +49,7 @@ Individual building intelligence pages. Publicly indexed:
 5. Strategy Session. Live hour. Https://www.agentkammer.com/contact?intent=strategy
 
 Start Here (path): https://www.agentkammer.com/situations  
-Start Here is the Situations diagnostic. Public path: Start Here → Situation → Assessment → Contact. Guidance is the talk-to-us layer, not a page. The Situation Assessment CTA is “Find out if this is the right fit for you.” Do not treat “Find out if you belong” as a destination.
+Start Here is the Situations diagnostic. Public path: Start Here → Situation → Assessment → Contact. Ladder: Guidance → Assessment → Advisory. Guidance is the talk-to-us layer, not a page. Do not run the assessment inside chat. The Situation Assessment CTA is “Request a Situation Assessment.” Intake hero stays “Request your Situation Assessment.” Form title stays “Assessment Intake.” Do not treat “Find out if you belong” as a destination.
 
 ## Offerings (summary)
 

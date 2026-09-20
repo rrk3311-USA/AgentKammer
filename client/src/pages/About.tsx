@@ -76,7 +76,7 @@ export default function About() {
         ]}
         action={
           <Link href="/belonging" className={grammar.textLink}>
-            Find out if this is the right fit for you
+            Request a Situation Assessment
             <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
           </Link>
         }
@@ -86,7 +86,7 @@ export default function About() {
         title="Figure out your situation."
         description="The Situation Assessment is how most relationships begin. A profile first. A written next step when the picture is clear."
         href="/belonging"
-        label="Find out if this is the right fit for you"
+        label="Request a Situation Assessment"
         eyebrow="Assessment"
       />
     </main>

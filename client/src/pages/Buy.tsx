@@ -112,7 +112,7 @@ export default function Buy() {
         title="Start with the Situation Assessment."
         description="If you already know what changed, browse What's Changing? If the question is still open, build your situation profile first."
         href="/belonging"
-        label="Find out if this is the right fit for you"
+        label="Request a Situation Assessment"
         eyebrow="Assessment"
       />
     </main>

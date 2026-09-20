@@ -193,8 +193,9 @@ const byPath: Record<string, Partial<PageEngagement>> = {
   },
   "/belonging": {
     headline: "Situation Assessment",
-    nudge: "The Situation Assessment helps clarify fit. Want me to interpret what your answers mean for next steps?",
-    greeting: "This Situation Assessment is about whether Manhattan (and which part) will actually work for your life. What's prompting the assessment?",
+    nudge: "This page is intake, not a quiz. I can explain what the assessment is for. The form itself stays on the page.",
+    greeting:
+      "This is Assessment intake, not a quiz. Tell me what is changing if you want to talk first. When you are ready, request the Situation Assessment so Agent Kammer can assess it properly.",
   },
   "/advisory": {
     headline: "Advisory, not inventory",
