@@ -27,6 +27,8 @@
   --brand-stone: #d8d1c7;
   --brand-warm: #f5f2eb;
   --brand-surface-warm: #f5f2eb;
+  /* Navy at 8.5% — felt rules, not a new brand hue */
+  --brand-felt: rgba(42, 52, 71, 0.085);
 
   --button-outline: rgba(17, 17, 17, 0.14);
   --badge-outline: rgba(0,0,0, .05);
@@ -376,6 +378,25 @@
  * need to be distinguished from eachother visually.
  */
 @layer utilities {
+  /* Thin 1px felt gutters for situation/guide grids. Navy at low alpha, not boxed cards. */
+  .ak-felt-grid {
+    gap: 1px;
+    background-color: var(--brand-felt);
+  }
+
+  .ak-felt-item {
+    background-color: transparent;
+    transition: background-color 200ms ease;
+  }
+
+  .ak-felt-item:hover {
+    background-color: rgba(42, 52, 71, 0.03);
+  }
+
+  .ak-felt-rule {
+    border-color: var(--brand-felt);
+  }
+
   /* Dark sections: keep body copy readable without fighting explicit component classes. */
   .bg-brand-midnight,
   .bg-\[\#0a1628\],
@@ -1009,7 +1030,9 @@
 
   .ak-guidance-sheet.is-start {
     max-width: 14.3rem;
-    max-height: min(27vh, 16.9rem);
+    /* Bound height so chips + composer stay visible; greeting scrolls above. */
+    height: min(33vh, 20.15rem);
+    max-height: min(33vh, 20.15rem);
     margin-inline: auto;
     border-bottom: 1px solid #d8d1c7;
     border-radius: 10px;
@@ -1142,7 +1165,8 @@
 
     .ak-guidance-sheet.is-start {
       max-width: 14.3rem;
-      max-height: min(26vh, 15.925rem);
+      height: min(32vh, 19.175rem);
+      max-height: min(32vh, 19.175rem);
     }
   }
 

@@ -17,7 +17,6 @@ const NewYorkMarket = lazy(() => import("@/pages/NewYorkMarket"));
 const IntelligenceHome = lazy(() => import("@/pages/IntelligenceHome"));
 const Services = lazy(() => import("@/pages/Services"));
 const ServiceLanding = lazy(() => import("@/pages/ServiceLanding"));
-const Buy = lazy(() => import("@/pages/Buy"));
 const Perspectives = lazy(() => import("@/pages/Perspectives"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const Advisory = lazy(() => import("@/pages/Advisory"));
@@ -141,7 +140,7 @@ function Router() {
       <Route path="/building-reports/market-briefs">{() => <Redirect to="/guides#kammer-report" />}</Route>
       <Route path="/building-reports/:slug" component={BuildingReportDetail} />
       <Route path="/building-reports">{() => <Redirect to="/guides#kammer-report" />}</Route>
-      <Route path="/buyer-advisory" component={Buy} />
+      <Route path="/buyer-advisory">{() => <Redirect to="/situations" />}</Route>
       <Route path="/insights" component={Perspectives} />
       <Route path="/insights/reports/:slug" component={ExecutiveHousingReport} />
       <Route path="/insights/:slug" component={PerspectiveArticle} />
@@ -178,7 +177,7 @@ function Router() {
       <Route path="/hub" component={HubHome} />
       <Route path="/buildings">{() => <Redirect to="/guides#kammer-report" />}</Route>
       <Route path="/buildings/:slug/report">{({ slug }) => <Redirect to={`/building-reports/${slug}`} />}</Route>
-      <Route path="/buy">{() => <Redirect to="/buyer-advisory" />}</Route>
+      <Route path="/buy">{() => <Redirect to="/situations" />}</Route>
       <Route path="/executive-relocation">{() => <Redirect to="/situations/executive-relocation-nyc" />}</Route>
       <Route path="/corporate-relocation">{() => <Redirect to="/situations/corporate-relocation-buyers-nyc" />}</Route>
       <Route path="/senior-downsizing">{() => <Redirect to="/situations/retiree-senior-home-buyers-nyc" />}</Route>
@@ -193,10 +192,10 @@ function Router() {
       <Route path="/perspectives/:slug">{({ slug }) => <Redirect to={`/insights/${slug}`} />}</Route>
       <Route path="/lease">{() => <Redirect to="/contact" />}</Route>
       <Route path="/sell">{() => <Redirect to="/contact" />}</Route>
-      <Route path="/strategy">{() => <Redirect to="/buyer-advisory" />}</Route>
-      <Route path="/buy-sell">{() => <Redirect to="/buyer-advisory" />}</Route>
+      <Route path="/strategy">{() => <Redirect to="/situations" />}</Route>
+      <Route path="/buy-sell">{() => <Redirect to="/situations" />}</Route>
       <Route path="/profile">{() => <Redirect to="/account" />}</Route>
-      <Route path="/reverse-buyer-origination">{() => <Redirect to="/buyer-advisory" />}</Route>
+      <Route path="/reverse-buyer-origination">{() => <Redirect to="/situations" />}</Route>
       <Route path="/reverse-seller-architecture">{() => <Redirect to="/contact" />}</Route>
       <Route path="/real-estate">{() => <Redirect to="/guides#kammer-report" />}</Route>
       <Route component={NotFound} />

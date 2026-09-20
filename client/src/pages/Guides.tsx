@@ -45,7 +45,7 @@ export default function Guides() {
   usePageMetadata({
     title: "Guides",
     description:
-      "Educational guides from Agent Kammer: ownership structures, neighborhood fit, and the Kammer Report.",
+      "Educational guides from Agent Kammer: ownership structures, neighborhood fit, and Property Assessment.",
     path: "/guides",
   });
 
@@ -71,12 +71,12 @@ export default function Guides() {
       <PageHero
         eyebrow="Guides"
         title="Clear frameworks before listings."
-        description="One knowledge library: decision frameworks, neighborhood fit, and the reports actually produced. Study structure before you study a listing."
+        description="One knowledge library: decision frameworks, neighborhood fit, and Property Assessment. Study structure before you study a listing."
         art="guides"
       />
       <ReportSubnav />
 
-      <ModuleSection id="decision-guides" surface="white">
+      <ModuleSection id="decision-guides" surface="ivory">
         <div className={grammar.padLoose}>
           <ModuleIntro
             eyebrow="Decision Guides"
@@ -105,7 +105,7 @@ export default function Guides() {
         </div>
       </ModuleSection>
 
-      <ModuleSection id="neighborhoods" surface="mist">
+      <ModuleSection id="neighborhoods" surface="stone">
         <div className={grammar.padLoose}>
           <ModuleIntro
             eyebrow="Neighborhoods"
@@ -123,10 +123,10 @@ export default function Guides() {
         </div>
       </ModuleSection>
 
-      <ModuleSection id="kammer-report" surface="stone">
+      <ModuleSection id="kammer-report" surface="pause">
         <div className={grammar.padLoose}>
           <ModuleIntro
-            eyebrow="Kammer Report"
+            eyebrow="Property Assessment"
             title="What I’m observing about Manhattan."
             description="The archive of reports actually produced: executive housing intelligence and address studies. Building Profiles stay in this library; they are not a separate public category."
           />
@@ -149,7 +149,7 @@ export default function Guides() {
               })),
             ]}
           />
-          <div className="mt-16 border-t border-brand-border pt-12">
+          <div className="ak-felt-rule mt-16 border-t pt-12">
             <p className={grammar.eyebrow}>Recent notes</p>
             <ul className="mt-8 space-y-8">
               {kammerMarketNotes.map((note) => (
@@ -174,9 +174,9 @@ export default function Guides() {
       <DarkStatement
         eyebrow="Next"
         title="If the question is a life change, start there."
-        description="Guides explain the model. Situations name what changed. Start Here is how we work together."
+        description="Guides explain the model. Start Here names what changed. Guidance is the human layer."
         href="/situations"
-        label="Situations"
+        label="Start Here"
       />
     </main>
   );

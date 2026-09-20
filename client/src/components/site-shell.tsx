@@ -4,11 +4,10 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { grammar } from "@/components/visual-grammar";
 
-/** Locked primary header: these five. Guidance is the pinstripe utility, not a sixth door. */
+/** Locked primary header: Home · Start Here · Guides · Contact. Guidance is the filled utility, not a fifth door. */
 export const primaryNav = [
   { label: "Home", href: "/" },
-  { label: "Start Here", href: "/buyer-advisory" },
-  { label: "Situations", href: "/situations" },
+  { label: "Start Here", href: "/situations" },
   { label: "Guides", href: "/guides" },
   { label: "Contact", href: "/contact" },
 ] as const;
@@ -17,7 +16,7 @@ export const primaryNav = [
 export const guidesLibraryNav = [
   { label: "Decision Guides", href: "/guides#decision-guides", id: "decision-guides" },
   { label: "Neighborhoods", href: "/guides#neighborhoods", id: "neighborhoods" },
-  { label: "Kammer Report", href: "/guides#kammer-report", id: "kammer-report" },
+  { label: "Property Assessment", href: "/guides#kammer-report", id: "kammer-report" },
 ] as const;
 
 export type HeroArtVariant =
@@ -600,7 +599,7 @@ export function sameCtaPhrase(a: string, b: string) {
 export function CTA({
   title = "Start Here.",
   description = "Begin with Guidance, a Situation Assessment, a Property Assessment, or a Livability Score.",
-  href = "/buyer-advisory",
+  href = "/situations",
   label = "Start Here",
   eyebrow = "Start Here",
 }: {

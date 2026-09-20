@@ -133,7 +133,7 @@ That works in New York, California, Florida, Texas — anywhere in the U.S.
                              → membership if guidance should continue
 ```
 
-Do **not** collapse Start Here and Decision Assessment into the same step. Start Here (`/buyer-advisory`) is the journey map. The Assessment is the diagnostic. Decision Briefs are the research layer. Strategy is the paid advisory relationship.
+Start Here (`/situations`) is the Situations diagnostic. Situation Assessment (`/belonging`) remains contextual, not a competing header door. Decision Briefs are a format inside a situation journey. Guidance is the human layer (header / chip).
 
 **Commercial journey:**
 

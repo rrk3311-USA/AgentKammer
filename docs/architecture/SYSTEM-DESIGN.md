@@ -84,14 +84,14 @@ Defined in `client/src/App.tsx` (Wouter). Admin uses a stripped shell (no Header
 |------|------|-------|
 | `/` | Home | Decision OS entry |
 | `/about` | About | |
-| `/services` | Services hub | Decision brief library |
-| `/services/:slug` | ServiceLanding | 28 advisor landings |
-| `/building-reports` | Buildings | Building Intelligence overview |
-| `/building-reports/individual-buildings` | BuildingReport | |
+| `/situations` | Start Here | Situations diagnostic. Header “Start Here” |
+| `/situations/:slug` | ServiceLanding | Decision briefs |
+| `/services` | Redirect | `/situations` |
+| `/building-reports` | Redirect | `/guides#kammer-report` |
+| `/building-reports/individual-buildings` | BuildingReport | Quiet library |
 | `/building-reports/neighborhood-guides` | NewYorkMarket | |
-| `/building-reports/market-briefs` | Intelligence | |
 | `/building-reports/:slug` | BuildingReportDetail | |
-| `/buyer-advisory` | Buy | “Start Here” |
+| `/buyer-advisory` | Redirect | `/situations` |
 | `/insights` | Perspectives | |
 | `/insights/:slug` | PerspectiveArticle | |
 | `/insights/reports/:slug` | ExecutiveHousingReport | |
@@ -119,7 +119,7 @@ Defined in `client/src/App.tsx` (Wouter). Admin uses a stripped shell (no Header
 |------|-----|
 | `/buildings` | `/building-reports` |
 | `/buildings/:slug/report` | `/building-reports/:slug` |
-| `/buy` | `/buyer-advisory` |
+| `/buy` | `/situations` |
 | `/executive-relocation` | `/services/executive-relocation-nyc` |
 | `/corporate-relocation` | `/services/corporate-relocation-buyers-nyc` |
 | `/international` | `/services/foreign-buyers-new-york` |
@@ -133,7 +133,7 @@ Defined in `client/src/App.tsx` (Wouter). Admin uses a stripped shell (no Header
 | `/intelligence` | `/building-reports/market-briefs` |
 | `/perspectives`, `/perspectives/*` | `/insights`, `/insights/*` |
 | `/lease`, `/sell`, `/reverse-seller-architecture` | `/contact` |
-| `/strategy`, `/buy-sell`, `/reverse-buyer-origination` | `/buyer-advisory` |
+| `/strategy`, `/buy-sell`, `/reverse-buyer-origination` | `/situations` |
 | `/profile` | `/account` |
 | `/real-estate` | `/building-reports` |
 
@@ -146,12 +146,12 @@ Fallback: `NotFound`.
 ```mermaid
 flowchart TB
   subgraph Header["Primary nav — site-shell.tsx"]
-    A[Start Here → /buyer-advisory]
-    B[Decisions → /services#decisions]
-    C[Life Changes → /services#life-changes]
-    D[Building Intelligence → /building-reports]
-    E[About → /about]
-    F[CTA: Blueprint / Begin → Decision Assistant]
+    A[Start Here → /situations]
+    B[Guides → /guides]
+    C[Contact → /contact]
+    D[Home → /]
+    E[About → /about — footer]
+    F[CTA: Guidance → Decision Assistant]
   end
 
   subgraph BI["Building Intelligence subnav"]

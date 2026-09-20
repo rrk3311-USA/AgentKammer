@@ -21,8 +21,8 @@ Agent Kammer is a Residential Advisory practice helping people make better real 
 
 - Homepage: https://www.agentkammer.com/
 - Situation Assessment: https://www.agentkammer.com/belonging
-- Decision Briefs: https://www.agentkammer.com/services
-- Housing Advisory / Start Here: https://www.agentkammer.com/buyer-advisory
+- Decision Briefs: https://www.agentkammer.com/situations
+- Housing Advisory / Start Here: https://www.agentkammer.com/situations
 - Building Intelligence: https://www.agentkammer.com/building-reports
 - Residential Advisory (offer stack): https://www.agentkammer.com/advisory
 - International Buyer Hub: https://www.agentkammer.com/international
@@ -48,8 +48,8 @@ Individual building intelligence pages. Publicly indexed:
 4. Livability Score. Tools desk only. Not a Property Assessment.
 5. Strategy Session. Live hour. Https://www.agentkammer.com/contact?intent=strategy
 
-Start Here (path): https://www.agentkammer.com/buyer-advisory  
-Do not collapse Start Here and Situation Assessment into one step.
+Start Here (path): https://www.agentkammer.com/situations  
+Start Here is the Situations diagnostic. Situation Assessment stays contextual. Guidance is the human layer.
 
 ## Offerings (summary)
 

@@ -203,7 +203,7 @@ export default function DecisionHub() {
                   </p>
                   <div className="mt-6 grid gap-3">
                     <Link
-                      href="/buyer-advisory"
+                      href="/situations"
                       className="inline-flex justify-center bg-brand-navy px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory"
                     >
                       Continue Decision Guide

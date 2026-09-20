@@ -26,7 +26,7 @@ export function DecisionFramework({
   action?: ReactNode;
 }) {
   return (
-    <section className="border-b border-brand-border bg-white">
+    <section className="border-b border-brand-border bg-brand-soft-stone">
       <div className="mx-auto w-full max-w-site px-6 py-20 lg:px-10 lg:py-24">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
@@ -40,11 +40,11 @@ export function DecisionFramework({
           </div>
           {action}
         </div>
-        <div className="mt-12 border-t border-brand-border">
+        <div className="ak-felt-rule mt-12 border-t">
           {items.map((item) => (
             <article
               key={item.step + item.title}
-              className="grid gap-2 border-b border-brand-border py-7 md:grid-cols-[80px_minmax(0,1fr)] md:items-baseline md:gap-8"
+              className="ak-felt-rule grid gap-2 border-b py-7 md:grid-cols-[80px_minmax(0,1fr)] md:items-baseline md:gap-8"
             >
               <p className="text-[11px] uppercase tracking-[0.18em] text-brand-cocoa">{item.step}</p>
               <div>

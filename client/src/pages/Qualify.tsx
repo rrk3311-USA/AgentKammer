@@ -290,7 +290,7 @@ export default function Qualify() {
           </a>
           <p className="mt-8 text-sm text-brand-graphite/70">
             Prefer to keep reading first?{" "}
-            <Link href="/buyer-advisory" className="underline decoration-brand-brass/50 underline-offset-4">
+            <Link href="/situations" className="underline decoration-brand-brass/50 underline-offset-4">
               Stay in Guidance
             </Link>
             .

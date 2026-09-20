@@ -16,8 +16,7 @@ export type SiteMapGroup = {
 
 /** Charcoal primary row. Home stays in the header; Guidance stays a floating utility. */
 export const FOOTER_DARK_NAV = [
-  { label: "Start Here", href: "/buyer-advisory" },
-  { label: "Situations", href: "/situations" },
+  { label: "Start Here", href: "/situations" },
   { label: "Guides", href: "/guides" },
   { label: "About", href: "/about" },
   GET_QUALIFIED,
@@ -47,12 +46,12 @@ export function getSiteMapGroups(): SiteMapGroup[] {
   return [
     {
       title: "Primary",
-      description: "The five locked doors in the header. Start Here is the judgment path, not a listing feed. Guidance is the floating utility.",
+      description: "The locked header doors. Start Here is the Situations diagnostic. Guidance is the floating utility.",
       items: primaryNav,
     },
     {
       title: "Practice doors",
-      description: "Quiet ways in. Guidance is the chat. The rest stay off the five-item header.",
+      description: "Quiet ways in. Guidance is the chat. The rest stay off the header.",
       items: [
         { label: PUBLIC_PRODUCTS.guidance.label, href: PUBLIC_PRODUCTS.guidance.href },
         ...FOOTER_SITEMAP_QUIET,
@@ -89,11 +88,11 @@ export function getSiteMapGroups(): SiteMapGroup[] {
     },
     {
       title: "Guides",
-      description: "Educational frameworks, neighborhoods, and the Kammer Report before anyone looks at a listing.",
+      description: "Educational frameworks, neighborhoods, and Property Assessment before anyone looks at a listing.",
       items: [
         { label: "Decision Guides", href: "/guides#decision-guides" },
         { label: "Neighborhoods", href: "/guides#neighborhoods" },
-        { label: "Kammer Report", href: "/guides#kammer-report" },
+        { label: "Property Assessment", href: "/guides#kammer-report" },
         ...publicGuides.map((guide) => ({ label: guide.title, href: guide.href })),
       ],
     },

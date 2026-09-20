@@ -107,7 +107,7 @@ export default function IntelligenceHome() {
         <SectionHeading
           eyebrow="Building Profiles"
           title="Study the building before the showing."
-          description="Editorial address studies. Free to read, distinct from a Property Assessment."
+          description="Published address studies in the Property Assessment library. Request one when a specific building is in play."
         />
         <LibraryList
           items={buildingReports.map((report) => ({

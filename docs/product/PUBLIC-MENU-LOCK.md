@@ -6,13 +6,15 @@
 
 ## Primary header
 
-Exactly five short labels: Home · Start Here · Situations · Guides · Contact.
+Exactly four short labels: Home · Start Here · Guides · Contact.
 
-**Not in top nav:** About · Buildings · Intelligence · Decision Hub · Assessment · Get Qualified · International.
+Start Here is the Situations diagnostic (`/situations`). There is no separate Situations nav item. Old `/buyer-advisory` redirects there.
+
+**Not in top nav:** About · Buildings · Situations · Intelligence · Decision Hub · Assessment · Get Qualified · International · Decision Briefs.
 
 **Header CTA:** filled **Guidance** control (`ak-call-button` without the stripe overlay) that opens the Advisor. Not a sixth nav item. Never “Request Intelligence.” The floating Guidance chip stays solid — no pinstripe.
 
-**Footer:** quiet end — identity, Start Here · Situations · Guides · About · Get Qualified, then Privacy · Terms · Contact, then languages. Envelope stays with Contact at the end. Get Qualified is an onboard utility, not a fifth product. No product strip, no Intelligence, no public Decision Hub, no Sitemap competing in charcoal.
+**Footer:** quiet end — identity, Start Here · Guides · About · Get Qualified, then Privacy · Terms · Contact, then languages. Envelope stays with Contact at the end. Get Qualified is an onboard utility, not a fifth product. Situations is not a separate footer item. No product strip, no Intelligence, no public Decision Hub, no Sitemap competing in charcoal.
 
 ## The four public products
 
@@ -43,9 +45,7 @@ Keep the route. Do not merchandise it as a current public offer.
 
 | Retired | Use instead |
 |---------|-------------|
-| Request Intelligence | Guidance, Start Here, or Situation Assessment |
-| Decision Assessment / Belonging Assessment / Housing Decision Assessment | Situation Assessment |
-| Property Snapshot / Property Intelligence Report / Building Second Opinion | Property Assessment |
+| Property Snapshot / Property Intelligence Report / Building Second Opinion / Kammer Report | Property Assessment |
 | Housing Strategy Session / Property Strategy Session / Discovery Call / Strategy Session | Guidance, Situation Assessment, or Contact |
 | Acquisition Dossier / memberships as equal primary cards | By invitation, after the relationship begins |
 
@@ -53,6 +53,6 @@ Keep the route. Do not merchandise it as a current public offer.
 
 ## Show language
 
-Kammer Report verdicts: **Pick / Consider / Wait / Pass** plus **WHO** the address is for. Do not publish `/100` scores on public show copy.
+Property Assessment verdicts: **Pick / Consider / Wait / Pass** plus **WHO** the address is for. Do not publish `/100` scores on public show copy.
 
 Livability Score must not merge into Property Assessment.

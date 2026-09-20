@@ -1287,7 +1287,7 @@ export default function RealEstateOwnership() {
           </Link>
           {" · "}
           <Link
-            href="/buyer-advisory"
+            href="/situations"
             className="text-brand-navy underline underline-offset-4"
           >
             Buyer Advisory
