@@ -18,7 +18,8 @@ describe("Situation page CTAs", () => {
     expect(html).toContain("<span>Situation Assessment</span>");
     expect(html).toContain("Prefer to talk it through? Open Guidance →");
     expect(html).toContain("What Decision Are You Facing?");
-    expect(html).toContain("Opens Guidance");
+    expect(html).toContain("Explore this decision with Guidance.");
+    expect(html).toContain("bg-brand-navy-secondary/15");
     expect(html).toContain("Open Guidance: I&#x27;m considering buying.");
     expect(html).toContain("Open Guidance: I&#x27;m wondering whether I should stay where I am.");
     expect(html).toContain("Open Guidance: I&#x27;m considering waiting before making a move.");
