@@ -110,7 +110,7 @@ export default function Guides() {
           <ModuleIntro
             eyebrow="Neighborhoods"
             title="Geography before inventory."
-            description="Tribeca, Chelsea, Hudson Yards, the Upper West Side, and the other Manhattan briefs. Lock one or two districts before comparing buildings."
+            description="Tribeca, Chelsea, Hudson Yards, the Upper West Side, and the other Manhattan Situations. Lock one or two districts before comparing buildings."
           />
           <ModuleCards
             columns={3}
@@ -172,11 +172,11 @@ export default function Guides() {
       </ModuleSection>
 
       <DarkStatement
-        eyebrow="Next"
-        title="If the question is a life change, start there."
-        description="Guides explain the model. Start Here names what changed. Guidance is the human layer."
-        href="/situations"
-        label="Start Here"
+        eyebrow="Assessment"
+        title="If you want a structured answer."
+        description="Guides stay the research library. The Situation Assessment is how you figure out your situation."
+        href="/belonging"
+        label="Request a Situation Assessment"
       />
     </main>
   );

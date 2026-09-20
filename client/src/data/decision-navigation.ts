@@ -1,7 +1,22 @@
 export type DecisionNavItem = {
   label: string;
   href: string;
+  /** When set, the control opens Guidance with this starter. Not a destination. */
+  starter?: string;
 };
+
+/** Decision chips on Situation / Start Here pages. They open Guidance; they are not pages. */
+export const decisionFacingItems: DecisionNavItem[] = [
+  { label: "Buy", href: "/situations#decisions", starter: "I'm considering buying." },
+  { label: "Sell", href: "/situations#decisions", starter: "I'm considering selling." },
+  { label: "Rent", href: "/situations#decisions", starter: "I'm considering renting." },
+  { label: "Renew Lease", href: "/situations#decisions", starter: "I'm considering renewing my lease." },
+  { label: "Stay Put", href: "/situations#decisions", starter: "I'm wondering whether I should stay where I am." },
+  { label: "Wait", href: "/situations#decisions", starter: "I'm considering waiting before making a move." },
+  { label: "Renovate", href: "/situations#decisions", starter: "I'm considering renovating." },
+  { label: "Refinance", href: "/situations#decisions", starter: "I'm considering refinancing." },
+  { label: "Sell or Keep", href: "/situations#decisions", starter: "I'm wondering whether I should sell or keep." },
+];
 
 export type DecisionNavGroup = {
   title: string;
@@ -45,18 +60,8 @@ export const decisionNavigationGroups: DecisionNavGroup[] = [
   },
   {
     title: "What Decision Are You Facing?",
-    description: "The visible path only comes after the diagnosis. Name the decision once the situation is clear.",
-    items: [
-      { label: "Buy", href: "/situations#decisions" },
-      { label: "Sell", href: "/contact" },
-      { label: "Rent", href: "/situations#decisions" },
-      { label: "Renew Lease", href: "/situations#decisions" },
-      { label: "Stay Put", href: "/situations#decisions" },
-      { label: "Wait", href: "/situations#decisions" },
-      { label: "Renovate", href: "/situations#decisions" },
-      { label: "Refinance", href: "/situations#decisions" },
-      { label: "Sell or Keep", href: "/situations#decisions" },
-    ],
+    description: "The visible path only comes after the diagnosis. Name the decision once the situation is clear. Each chip opens Guidance.",
+    items: decisionFacingItems,
   },
   {
     title: "What Are You Trying to Understand?",

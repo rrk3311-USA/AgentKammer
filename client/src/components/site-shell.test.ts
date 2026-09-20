@@ -1,6 +1,7 @@
 import React, { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
+import { Router } from "wouter";
 import { CTA, sameCtaPhrase } from "./site-shell";
 
 describe("CTA button copy", () => {
@@ -41,5 +42,28 @@ describe("CTA button copy", () => {
     expect(html).not.toContain("Email Agent Kammer");
     expect(html).not.toContain("tracking-[0.24em] text-brand-brass");
     expect(html).toContain("text-[14px]");
+  });
+
+  it("keeps the deep-navy closer and a quieter Guidance text link", () => {
+    const html = renderToStaticMarkup(
+      createElement(
+        Router,
+        { ssrPath: "/situations/executive-relocation-nyc" },
+        createElement(CTA, {
+          title: "If this situation is yours.",
+          description: "The next step is the Situation Assessment.",
+          href: "/belonging",
+          label: "Situation Assessment",
+          eyebrow: "Situation Assessment",
+          guidanceLabel: "Prefer to talk it through? Open Guidance →",
+          onGuidanceClick: () => undefined,
+        }),
+      ),
+    );
+    expect(html).toContain("bg-brand-navy");
+    expect(html).toContain("href=\"/belonging\"");
+    expect(html).toContain("<span>Situation Assessment</span>");
+    expect(html).toContain("Prefer to talk it through? Open Guidance →");
+    expect(html).not.toContain("Find out if you belong");
   });
 });

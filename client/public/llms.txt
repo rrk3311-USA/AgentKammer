@@ -14,19 +14,19 @@ Agent Kammer is a Residential Advisory practice helping people make better real 
 - Better real estate decisions. (promise)
 - Live Where You Belong. (outcome)
 - What’s changing? (opener)
-- Are you living where you belong? (diagnostic)
+- Situation Assessment. (diagnostic)
 - Ongoing strategic guidance for life’s biggest residential decisions. (practice line)
 
 ## Core URLs
 
 - Homepage: https://www.agentkammer.com/
 - Situation Assessment: https://www.agentkammer.com/belonging
-- Decision Briefs: https://www.agentkammer.com/situations
+- Start Here / Situations: https://www.agentkammer.com/situations
 - Housing Advisory / Start Here: https://www.agentkammer.com/situations
 - Building Intelligence: https://www.agentkammer.com/building-reports
 - Residential Advisory (offer stack): https://www.agentkammer.com/advisory
 - International Buyer Hub: https://www.agentkammer.com/international
-- International Buyer Decision Brief: https://www.agentkammer.com/services/foreign-buyers-new-york
+- International Buyer Situation: https://www.agentkammer.com/situations/foreign-buyers-new-york
 - Contact: https://www.agentkammer.com/contact
 
 ## Building reports (crawlable)
@@ -49,7 +49,7 @@ Individual building intelligence pages. Publicly indexed:
 5. Strategy Session. Live hour. Https://www.agentkammer.com/contact?intent=strategy
 
 Start Here (path): https://www.agentkammer.com/situations  
-Start Here is the Situations diagnostic. Situation Assessment stays contextual. Guidance is the human layer.
+Start Here is the Situations diagnostic. Public path: Start Here → Situation → Assessment → Contact. Ladder: Guidance → Assessment → Advisory. Guidance is the talk-to-us layer, not a page. Do not run the assessment inside chat. The Situation Assessment CTA is “Request a Situation Assessment.” Intake hero stays “Request your Situation Assessment.” Form title stays “Assessment Intake.” Do not treat “Find out if you belong” as a destination.
 
 ## Offerings (summary)
 
@@ -65,7 +65,7 @@ Three questions:
 - What Decision Are You Facing? (buy / sell / rent / stay / wait / renovate / …)
 - What Are You Trying to Understand? (condo vs co-op, buildings, investment, schools, …)
 
-Each page opened from this surface is a Decision Brief.
+Each page opened from this surface is a Situation.
 
 ### NYC neighborhoods
 - Upper West Side: https://www.agentkammer.com/services/upper-west-side-buyers-nyc

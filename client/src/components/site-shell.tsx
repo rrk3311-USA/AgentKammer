@@ -602,12 +602,16 @@ export function CTA({
   href = "/situations",
   label = "Start Here",
   eyebrow = "Start Here",
+  guidanceLabel,
+  onGuidanceClick,
 }: {
   title?: string;
   description?: string;
   href?: string;
   label?: string;
   eyebrow?: string;
+  guidanceLabel?: string;
+  onGuidanceClick?: () => void;
 }) {
   const hideSectionEyebrow = sameCtaPhrase(eyebrow, title);
   const hideButtonEyebrow = sameCtaPhrase(eyebrow, label);
@@ -661,6 +665,15 @@ export function CTA({
                 {actionInner}
               </Link>
             )}
+            {guidanceLabel && onGuidanceClick ? (
+              <button
+                type="button"
+                onClick={onGuidanceClick}
+                className="text-left text-sm leading-6 text-brand-ivory/68 underline decoration-brand-ivory/28 underline-offset-4 transition-colors hover:text-brand-ivory"
+              >
+                {guidanceLabel}
+              </button>
+            ) : null}
           </div>
         </div>
       </PageSection>

@@ -21,7 +21,7 @@ export const publicGuides: GuideEntry[] = [
   {
     title: "Condo vs Co-op",
     description:
-      "Decision Brief. What you own, what you pay, and what to check in the building before an offer.",
+      "What you own, what you pay, and what to check in the building before an offer.",
     href: "/situations/condo-vs-coop",
     audience: "public",
     kind: "page",
@@ -29,7 +29,7 @@ export const publicGuides: GuideEntry[] = [
   {
     title: "Co-op, Condo & Condop Terms",
     description:
-      "Decision Brief. Where board packages, maintenance, bylaws, and offering plans actually apply.",
+      "Where board packages, maintenance, bylaws, and offering plans actually apply.",
     href: "/situations/coop-condo-condop-terms",
     audience: "public",
     kind: "page",

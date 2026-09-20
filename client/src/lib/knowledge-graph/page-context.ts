@@ -12,14 +12,14 @@ export const pageGraph = [
     title: "Housing Decision OS",
     topics: ["life event", "building intelligence", "decision blueprint"],
     prerequisites: ["life event", "timeline", "budget"],
-    related: ["/situations", "/situations/executive-relocation-nyc", "/situations/foreign-buyers-new-york"],
+    related: ["/situations", "/belonging", "/situations/executive-relocation-nyc", "/situations/foreign-buyers-new-york"],
   },
   {
     path: "/situations",
     title: "Start Here",
     topics: ["life event", "relocation", "family", "investment", "buying"],
     prerequisites: ["life event", "timeline", "budget"],
-    related: ["/guides", "/situations/executive-relocation-nyc", "/international"],
+    related: ["/belonging", "/guides", "/situations/executive-relocation-nyc", "/international"],
   },
   {
     path: "/situations/corporate-relocation-buyers-nyc",
@@ -128,7 +128,7 @@ export const pageGraph = [
     title: "Guides",
     topics: ["frameworks", "neighborhoods", "property assessment", "ownership"],
     prerequisites: ["situation", "decision"],
-    related: ["/guides#decision-guides", "/guides#neighborhoods", "/guides#kammer-report", "/situations"],
+    related: ["/guides#decision-guides", "/guides#neighborhoods", "/guides#kammer-report", "/belonging"],
   },
   {
     path: "/building-reports/neighborhood-guides",
@@ -142,7 +142,7 @@ export const pageGraph = [
     title: "Private Review",
     topics: ["schedule", "recap", "advisor review"],
     prerequisites: ["email", "timeline", "decision profile"],
-    related: ["/guides", "/building-reports"],
+    related: ["/belonging", "/guides", "/building-reports"],
   },
   {
     path: "/international",
@@ -190,13 +190,31 @@ export const pageGraph = [
 
 export function getPageContext(path: string) {
   const bare = path.split("?")[0].split("#")[0] || "/";
+  if (bare.startsWith("/situations/") && bare !== "/situations") {
+    const listed = pageGraph.find((page) => bare === page.path);
+    if (listed) {
+      return {
+        ...listed,
+        related: listed.related.includes("/belonging")
+          ? listed.related
+          : ["/belonging", ...listed.related],
+      };
+    }
+    return {
+      path: bare,
+      title: "Situation",
+      topics: ["situation", "life change", "housing decision"],
+      prerequisites: ["what changed", "timeline"],
+      related: ["/belonging", "/situations", "/contact"],
+    } satisfies PageContext;
+  }
   if (bare.startsWith("/international/") && bare !== "/international") {
     return {
       path: bare,
       title: "International Country Guide",
       topics: ["international", "country guide", "remote ownership", "language"],
       prerequisites: ["origin country", "use case", "budget", "financing"],
-      related: ["/international", "/situations/foreign-buyers-new-york", "/contact"],
+      related: ["/international", "/situations/foreign-buyers-new-york", "/belonging", "/contact"],
     } satisfies PageContext;
   }
   return pageGraph.find((page) => bare === page.path || (page.path !== "/" && bare.startsWith(page.path))) ?? pageGraph[0];

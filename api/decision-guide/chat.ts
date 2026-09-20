@@ -199,8 +199,10 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
             availableActions: ["update_blueprint", "recommend_page", "open_page", "send_recap", "none"],
             actionRules: {
               update_blueprint: "Use when new decision information was learned, but do not announce mechanics to the visitor.",
-              recommend_page: "Use when a relevant page should be suggested after you give guidance.",
-              open_page: "Use when the next page is clearly helpful. Do not say 'I am opening'; just give the reason.",
+              recommend_page:
+                "Use when a relevant page should be suggested after you give guidance. Same /belonging rule as open_page when a Situation Assessment is the next step.",
+              open_page:
+                "Use when the next page is clearly helpful. Do not say 'I am opening'; just give the reason. When a Situation Assessment is the next step, path must be /belonging and label must be Request a Situation Assessment or Do the assessment. Never run the assessment quiz in chat. /belonging is always allowed for this handoff.",
               send_recap:
                 "Use only after several educational, useful turns and real guidance. Never in turns 1 through 5. Never as a reason to collect contact. If they asked to save, continue later, or book, you may offer 'want this waiting for you?' If no email is known, invite only then.",
             },

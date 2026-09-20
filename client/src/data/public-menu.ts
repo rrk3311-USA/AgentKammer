@@ -20,7 +20,8 @@ export const PUBLIC_PRODUCTS = {
     id: "situation",
     label: "Situation Assessment",
     href: "/belonging",
-    text: "A life diagnostic: what changed, whether anything should change, and where you belong.",
+    cta: "Request a Situation Assessment",
+    text: "A structured diagnostic: what changed, whether anything should change, and which path fits.",
   },
   property: {
     id: "property",

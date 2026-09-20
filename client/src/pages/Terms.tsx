@@ -44,7 +44,7 @@ export default function Terms() {
 
         <h2 className={`mt-12 ${grammar.section}`}>Intellectual property</h2>
         <p className={`mt-4 ${grammar.bodyWide}`}>
-          Site design, Decision Briefs, Building Reports, and brand materials are owned by Agent Kammer or licensors. You may not copy them for commercial redistribution without permission.
+          Site design, Situation pages, Building Reports, and brand materials are owned by Agent Kammer or licensors. You may not copy them for commercial redistribution without permission.
         </p>
 
         <h2 className={`mt-12 ${grammar.section}`}>Limitation of liability</h2>

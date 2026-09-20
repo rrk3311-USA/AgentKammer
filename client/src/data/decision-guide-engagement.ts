@@ -51,7 +51,7 @@ const byPath: Record<string, Partial<PageEngagement>> = {
     nudge: "Most visitors start here unsure. I can help you decide whether to move, wait, or stay put.",
     greeting:
       "Hi, I'm Raphi. I'll stay with you across the site. Before you browse buildings, tell me what's changing. Relocation, space, family, investment, or just exploring.",
-    pageHelper: "You're on the homepage. If you tell me the life change, I'll open the right brief.",
+    pageHelper: "You're on the homepage. If you tell me the life change, I'll open the right Situation.",
     starters: [
       { label: "Relocating", text: "We're relocating to Manhattan.", path: "/situations/executive-relocation-nyc" },
       { label: "Buy or wait?", text: "Should I buy now or wait?", path: "/situations#decisions" },
@@ -63,7 +63,7 @@ const byPath: Record<string, Partial<PageEngagement>> = {
     headline: "Which life change fits?",
     nudge: "Pick a situation and I'll help you choose the right advisory path.",
     greeting:
-      "You're at Start Here. Name what changed — relocation, family, a decision path — and I'll open the right brief.",
+      "You're at Start Here. Name what changed — relocation, family, a decision path — and I'll open the right Situation.",
     starters: [
       { label: "Relocation", text: "We're relocating.", path: "/situations/executive-relocation-nyc" },
       { label: "Growing family", text: "Our family is growing.", path: "/situations/new-baby-growing-family-nyc" },
@@ -193,8 +193,9 @@ const byPath: Record<string, Partial<PageEngagement>> = {
   },
   "/belonging": {
     headline: "Situation Assessment",
-    nudge: "The Situation Assessment helps clarify fit. Want me to interpret what your answers mean for next steps?",
-    greeting: "This Situation Assessment is about whether Manhattan (and which part) will actually work for your life. What's prompting the assessment?",
+    nudge: "This page is intake, not a quiz. I can explain what the assessment is for. The form itself stays on the page.",
+    greeting:
+      "This is Assessment intake, not a quiz. Tell me what is changing if you want to talk first. When you are ready, request the Situation Assessment so Agent Kammer can assess it properly.",
   },
   "/advisory": {
     headline: "Advisory, not inventory",

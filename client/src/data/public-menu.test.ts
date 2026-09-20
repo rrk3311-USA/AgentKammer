@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { guidesLibraryNav, primaryNav } from "@/components/site-shell";
-import { decisionNavigationGroups } from "./decision-navigation";
+import { decisionFacingItems, decisionNavigationGroups } from "./decision-navigation";
 import {
   FOOTER_DARK_LINKS,
   FOOTER_DARK_META,
@@ -32,6 +32,11 @@ describe("public menu lock", () => {
       "Property Assessment",
       "Livability Score",
     ]);
+    expect(PUBLIC_PRODUCTS.situation.cta).toBe("Request a Situation Assessment");
+    expect(PUBLIC_PRODUCTS.situation.label).toBe("Situation Assessment");
+    expect(PUBLIC_PRODUCTS.situation.cta.toLowerCase()).not.toContain("belong");
+    expect(CONTACT_NEXT_STEPS).not.toContain("Find out if you belong");
+    expect(CONTACT_NEXT_STEPS).not.toContain("Decision Brief");
     expect(Object.keys(PUBLIC_PRODUCTS)).not.toContain("strategy");
     expect(CONTACT_NEXT_STEPS).not.toContain("Strategy Session");
     expect(CONTACT_NEXT_STEPS).not.toContain("Get Qualified");
@@ -119,6 +124,24 @@ describe("public menu lock", () => {
     expect(FOOTER_DARK_LINKS.some((item) => item.href === "/qualify")).toBe(true);
     expect(FOOTER_DARK_LINKS.some((item) => item.href === "/licenses")).toBe(false);
     expect(FOOTER_DARK_LINKS.some((item) => item.label.toLowerCase() === "email")).toBe(false);
+  });
+
+  it("makes decision chips Guidance starters, not /buy /rent /wait pages", () => {
+    expect(decisionFacingItems.map((item) => [item.label, item.starter])).toEqual([
+      ["Buy", "I'm considering buying."],
+      ["Sell", "I'm considering selling."],
+      ["Rent", "I'm considering renting."],
+      ["Renew Lease", "I'm considering renewing my lease."],
+      ["Stay Put", "I'm wondering whether I should stay where I am."],
+      ["Wait", "I'm considering waiting before making a move."],
+      ["Renovate", "I'm considering renovating."],
+      ["Refinance", "I'm considering refinancing."],
+      ["Sell or Keep", "I'm wondering whether I should sell or keep."],
+    ]);
+    for (const item of decisionFacingItems) {
+      expect(item.href).not.toMatch(/^\/(buy|sell|rent|wait)(\/|$)/);
+      expect(item.starter).toBeTruthy();
+    }
   });
 
   it("keeps the full What's Changing set in the ivory footer and no Popular row", () => {

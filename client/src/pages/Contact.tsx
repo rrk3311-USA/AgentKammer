@@ -215,7 +215,7 @@ export default function Contact() {
               Prefer Guidance? Open the Guidance Advisor →
             </button>
             <Link href="/belonging" className="block text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass">
-              Prefer the Situation Assessment? Find out if you’re living where you belong →
+              Prefer the Situation Assessment? Request a Situation Assessment →
             </Link>
             <Link href="/advisory" className="block text-sm text-brand-ivory/90 underline decoration-brand-brass/50 underline-offset-4 hover:text-brand-brass">
               See how Residential Advisory works. Memberships follow by invitation →
@@ -263,7 +263,7 @@ export default function Contact() {
           </h2>
           <p className="mt-3 text-sm leading-7 text-brand-graphite">
             {isSituation
-              ? "Answer the minimum filters so the Situation Assessment can start from real context, not a blank calendar invite."
+              ? "This isn’t a quiz. It’s the context we need to assess your situation properly."
               : "Answer the minimum filters so the reply can include a useful recommendation, not just a scheduling link."}
           </p>
           <form onSubmit={handleSubmit} className="mt-8 space-y-6">

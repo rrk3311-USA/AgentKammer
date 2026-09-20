@@ -100,7 +100,7 @@ const SHARED_TEAM: InternationalTeamRole[] = [
 ];
 
 const SHARED_RESOURCES = [
-  { label: "International Buyer Decision Brief", href: "/situations/foreign-buyers-new-york" },
+  { label: "International Buyer Situation", href: "/situations/foreign-buyers-new-york" },
   { label: "Condo vs Co-op for Foreign Buyers", href: "/situations/condo-vs-coop-foreign-buyers-nyc" },
   { label: "Situation Assessment", href: "/belonging" },
   { label: "Residential Advisory", href: "/advisory" },

@@ -1,6 +1,6 @@
+import React, { useState } from "react";
 import { Mail } from "lucide-react";
-import { Link } from "wouter";
-import { useState } from "react";
+import { Link, useLocation } from "wouter";
 import {
   FOOTER_DARK_META,
   FOOTER_DARK_NAV,
@@ -13,29 +13,78 @@ import { cn } from "@/lib/utils";
 const whatsChangingItems =
   decisionNavigationGroups.find((group) => group.title === "What's Changing?")?.items ?? [];
 
+/** Situation pages are `/situations/:slug`. Start Here (`/situations`) is not one. */
+export function isSituationPagePath(location: string) {
+  const path = location.split(/[?#]/)[0] ?? location;
+  return /^\/situations\/[^/]+\/?$/.test(path);
+}
+
 const pillClass =
   "rounded-full border border-brand-border bg-white px-5 py-2 text-[11px] uppercase tracking-[0.1em] text-brand-navy transition-colors hover:border-brand-brass hover:text-brand-brass";
+
+const situationIndexLink =
+  "text-[12px] leading-5 text-brand-graphite/72 transition-colors hover:text-brand-navy";
 
 const charcoalLink =
   "text-[10px] uppercase tracking-[0.16em] text-brand-ivory/78 transition-colors hover:text-brand-brass";
 
+export function footerTopRuleClass(exploreOtherSituations: boolean) {
+  return cn(
+    "bg-brand-ivory text-brand-graphite",
+    exploreOtherSituations ? "border-t-2 border-brand-navy/28" : "border-t border-brand-border",
+  );
+}
+
+export function FooterIvoryIndex({ exploreOtherSituations }: { exploreOtherSituations: boolean }) {
+  return (
+    <div
+      className={cn(
+        "mx-auto w-full max-w-site px-6 lg:px-10",
+        exploreOtherSituations ? "py-12 lg:py-16" : "py-7 lg:py-9",
+      )}
+    >
+      {exploreOtherSituations ? (
+        <>
+          <h3 className="text-[11px] uppercase tracking-[0.2em] text-brand-graphite/70">
+            Explore other situations
+          </h3>
+          <nav
+            aria-label="Explore other situations"
+            className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3"
+          >
+            {whatsChangingItems.map((item) => (
+              <Link key={item.href + item.label} href={item.href} className={situationIndexLink}>
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </>
+      ) : (
+        <>
+          <h3 className="font-display text-[clamp(1.15rem,2.2vw,1.4rem)] leading-[0.95] text-brand-navy">
+            What's Changing?
+          </h3>
+          <nav aria-label="What's Changing" className="mt-3 flex flex-wrap items-center gap-2">
+            {whatsChangingItems.map((item) => (
+              <Link key={item.href + item.label} href={item.href} className={pillClass}>
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </>
+      )}
+    </div>
+  );
+}
+
 export function Footer() {
   const [langsOpen, setLangsOpen] = useState(false);
+  const [location] = useLocation();
+  const exploreOtherSituations = isSituationPagePath(location);
 
   return (
-    <footer className="border-t border-brand-border bg-brand-ivory text-brand-graphite">
-      <div className="mx-auto w-full max-w-site px-6 py-7 lg:px-10 lg:py-9">
-        <h3 className="font-display text-[clamp(1.15rem,2.2vw,1.4rem)] leading-[0.95] text-brand-navy">
-          What's Changing?
-        </h3>
-        <nav aria-label="What's Changing" className="mt-3 flex flex-wrap items-center gap-2">
-          {whatsChangingItems.map((item) => (
-            <Link key={item.href + item.label} href={item.href} className={pillClass}>
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-      </div>
+    <footer className={footerTopRuleClass(exploreOtherSituations)}>
+      <FooterIvoryIndex exploreOtherSituations={exploreOtherSituations} />
 
       <div data-ak-charcoal-footer className="border-t border-brand-brass/28 bg-brand-charcoal text-brand-ivory">
         <div className="mx-auto flex w-full max-w-site flex-col gap-2.5 px-6 pb-2 pt-5 lg:px-10">

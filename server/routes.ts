@@ -859,7 +859,8 @@ export async function registerRoutes(app: Express): Promise<void> {
                 "none",
               ],
               actionRules: {
-                open_page: "Recommend a page in the reply. Do not treat this as a forced redirect. Include a path from currentPage.related when possible.",
+                open_page:
+                  "Recommend a page in the reply. Do not treat this as a forced redirect. Include a path from currentPage.related when possible. When a Situation Assessment is the next step, path must be /belonging and label must be Request a Situation Assessment or Do the assessment. Never run the assessment quiz in chat. /belonging is always allowed for this handoff.",
                 send_recap:
                   "Use only after several educational, useful turns and real guidance. Never in turns 1 through 5. Never as a reason to collect contact. If they asked to save, continue later, or book, you may offer 'want this waiting for you?' If no email or phone is known, invite only then.",
                 update_blueprint: "Use when new trigger, desire, constraint, trade-off, email, or phone was learned.",
