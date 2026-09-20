@@ -191,5 +191,10 @@ describe("public menu lock", () => {
       "Neighborhoods",
       "Property Assessment",
     ]);
+    expect(guides?.items).toEqual(
+      expect.arrayContaining([
+        { label: "Frontage vs Setback", href: "/guides/frontage-vs-setback.html" },
+      ]),
+    );
   });
 });

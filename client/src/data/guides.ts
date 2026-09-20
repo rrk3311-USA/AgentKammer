@@ -91,6 +91,14 @@ export const publicGuides: GuideEntry[] = [
     kind: "page",
   },
   {
+    title: "Frontage vs Setback",
+    description:
+      "Real Estate Essentials field guide. The listing sells the curb; the code sells the buildable box.",
+    href: "/guides/frontage-vs-setback.html",
+    audience: "public",
+    kind: "html",
+  },
+  {
     title: "International Buyer Hub Guide",
     description:
       "How the multilingual Manhattan buyer funnel is structured for decision-first inbound.",
