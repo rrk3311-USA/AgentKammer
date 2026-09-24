@@ -906,7 +906,7 @@
       color: var(--ivory-soft);
       font-family: var(--ui); font-size: 0.78rem; font-weight: 500;
       letter-spacing: 0.04em;
-      cursor: pointer; text-decoration: none;
+      cursor: pointer; text-decoration: none; white-space: nowrap;
       transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
     }
     .action-bar .ab-btn:hover,
@@ -1670,6 +1670,10 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m4 7 8 6 8-6"/></svg>
           <span>Email to someone</span>
         </a>
+        <a class="ab-btn" id="ab-text" href="#" title="Text this guide to someone">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 8h8M8 11.5h5"/></svg>
+          <span>Text to someone</span>
+        </a>
         <button type="button" class="ab-btn" id="ab-bookmark" title="Bookmark this page">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10a1 1 0 0 1 1 1v15l-6-3.5L6 20V5a1 1 0 0 1 1-1z"/></svg>
           <span id="ab-bookmark-label">Bookmark</span>
@@ -1780,6 +1784,57 @@
       var sub = encodeURIComponent(document.title);
       var body = encodeURIComponent('Thought you might find this useful:\n\n' + document.title + '\n' + location.href);
       emailOther.href = 'mailto:?subject=' + sub + '&body=' + body;
+    }
+
+    var textBtn = document.getElementById('ab-text');
+    if (textBtn) {
+      var canon = document.querySelector('link[rel="canonical"]');
+      var pageUrl = (canon && canon.href) ? canon.href : (location.origin + location.pathname);
+      pageUrl = String(pageUrl).split('#')[0].split('?')[0];
+      var h1 = document.querySelector('h1');
+      var guideTitle = ((h1 && h1.textContent) || document.title || '').replace(/\s+/g, ' ').trim();
+      var smsText = guideTitle + ', an Agent Kammer field guide: ' + pageUrl;
+      var ua = navigator.userAgent || '';
+      var plat = navigator.platform || '';
+      var touchPts = navigator.maxTouchPoints || 0;
+      var hasTouch = ('ontouchstart' in window) || touchPts > 0;
+      var isIOS = /iPhone|iPad|iPod/i.test(ua) || /iPhone|iPad|iPod/i.test(plat);
+      var isIPadOS = !isIOS && /Mac/i.test(plat) && touchPts > 1;
+      var isMac = !isIOS && !isIPadOS && (/Mac/i.test(plat) || /Macintosh/i.test(ua));
+      var appleSms = isIOS || isIPadOS || isMac;
+      var isAndroid = /Android/i.test(ua);
+      var isMobileUa = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(ua);
+      var desktopNoPhone = (!appleSms && !isAndroid && !isMobileUa) || (!hasTouch && !appleSms);
+      textBtn.href = 'sms:' + (appleSms ? '&' : '?') + 'body=' + encodeURIComponent(smsText);
+      textBtn.addEventListener('click', function (e) {
+        function copySms(showToast) {
+          function done() { if (showToast) toast('Link copied. Paste it into a text.'); }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(smsText).then(done).catch(function () {
+              try {
+                var ta = document.createElement('textarea');
+                ta.value = smsText;
+                ta.setAttribute('readonly', '');
+                ta.style.position = 'fixed';
+                ta.style.left = '-9999px';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+              } catch (err) {}
+              done();
+            });
+          } else {
+            done();
+          }
+        }
+        if (desktopNoPhone) {
+          e.preventDefault();
+          copySms(true);
+          return;
+        }
+        if (isMac) copySms(false);
+      });
     }
     var emailMeBtn = document.getElementById('ab-email-me-btn');
     if (emailMeBtn) emailMeBtn.addEventListener('click', function () {
