@@ -3,834 +3,1051 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>How to Buy in NYC Field Guide | Agent Kammer</title>
-  <meta name="description" content="Twelve attorney-driven steps from budget to keys in New York. Condo and co-op paths, closing-cost ranges, stalls, tracks & boosters, and a light 1031 overlay. Agent Kammer field guide — educational only." />
+  <title>How to Buy in NYC | Agent Kammer</title>
+  <meta name="description" content="Twelve attorney-driven steps from budget to keys in New York. Condo and co-op paths, closing-cost ranges, stalls, tracks and boosters, and a light 1031 overlay. Agent Kammer field guide, educational only." />
   <meta name="author" content="Agent Kammer" />
-  <meta name="geo.region" content="US-NY" />
-  <meta name="geo.placename" content="Manhattan, New York" />
   <link rel="canonical" href="https://www.agentkammer.com/guides/how-to-buy-in-nyc.html" />
-
   <meta property="og:title" content="How to Buy in NYC | Agent Kammer" />
-  <meta property="og:description" content="New York runs on attorneys. Paths, twelve steps, costs, stalls, and a quiet 1031 overlay — live where you belong." />
+  <meta property="og:description" content="New York runs on attorneys. Paths, twelve steps, costs, stalls, and a quiet 1031 overlay. Live where you belong." />
   <meta property="og:type" content="article" />
-  <meta property="og:url" content="https://www.agentkammer.com/guides/how-to-buy-in-nyc.html" />
-  <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="Agent Kammer" />
-  <meta property="og:image" content="https://www.agentkammer.com/brand/ak-monogram-ivory.png" />
-  <meta property="og:image:alt" content="Agent Kammer monogram" />
-
+  <meta property="og:url" content="https://www.agentkammer.com/guides/how-to-buy-in-nyc.html" />
+  <meta property="og:image" content="https://www.agentkammer.com/guides/assets/how-to-buy-in-nyc/nyc-hero-web.jpg" />
+  <meta property="og:image:alt" content="New York skyline at dusk, Empire State Building" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
   <style>
+
     :root {
       --navy: #2A3447;
       --midnight: #202735;
-      --navy-secondary: #3F4B59;
-      --charcoal: #2C3138;
-      --ink: #20242B;
+      --deep: #161C28;
       --ivory: #F5F2EB;
+      --ivory-soft: rgba(245, 242, 235, 0.9);
+      --ivory-mute: rgba(245, 242, 235, 0.78);
       --brass: #B08D57;
-      --stone: #D8D1C7;
-      --cocoa: #7A5A3A;
-      --sage: #5A6E62;
+      --brass-line: rgba(176, 141, 87, 0.4);
       --gold: #E4D4B0;
-      --card: #FFFcf7;
-      --success: #2F6B4F;
-      --warn: #8A6A2F;
-      --error: #B42318;
-      --display: "Playfair Display", Georgia, serif;
+      --display: "Playfair Display", Georgia, "Times New Roman", serif;
       --ui: Montserrat, "Segoe UI", system-ui, sans-serif;
+      --col: 1000px;
+      --pad: clamp(18px, 4.2vw, 36px);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     body {
       font-family: var(--ui);
-      background: var(--ivory);
-      color: var(--ink);
-      line-height: 1.55;
+      background: #0E1218;
+      color: var(--ivory-soft);
+      font-size: 1.125rem;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
     }
-    img { display: block; max-width: 100%; }
-    a { color: var(--brass); }
-    a:hover { color: var(--navy); }
-    .wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
-    .mast {
-      background: var(--midnight);
-      color: var(--ivory);
-      padding: 22px 0 36px;
-      border-bottom: 1px solid rgba(176, 141, 87, 0.38);
+    img, svg { display: block; max-width: 100%; height: auto; }
+    a { color: var(--gold); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: var(--ivory); }
+
+    /* Reading progress — fixed left edge */
+    .read-progress {
+      position: fixed; left: 0; top: 0; bottom: 0; width: 3px;
+      background: rgba(176,141,87,0.14); z-index: 40;
+      pointer-events: none;
     }
-    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
-    .brand img {
-      width: 44px;
-      height: auto;
-      display: block;
-      border: 0;
-      background: transparent;
-      box-shadow: none;
+    .read-progress-fill {
+      width: 100%; height: 0%;
+      background: var(--brass);
+      box-shadow: 0 0 8px rgba(176,141,87,0.35);
+      transition: height 0.08s linear;
     }
-    .brand-name {
-      font-family: var(--ui);
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      line-height: 1.15;
-      color: var(--ivory);
+    .read-progress-ticks {
+      position: absolute; inset: 0; pointer-events: none;
     }
-    .brand-line {
-      display: block;
-      margin-top: 6px;
-      font-size: 9px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--brass);
-      font-weight: 500;
+    .read-progress-ticks span {
+      position: absolute; left: 0; width: 5px; height: 1px;
+      background: rgba(176,141,87,0.45);
     }
-    .mast-kicker {
-      margin: 28px 0 10px;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--brass);
+    @media (max-width: 819px) {
+      .read-progress { width: 2px; }
+      .read-progress-ticks { display: none; }
     }
-    .mast h1 {
-      font-family: var(--display);
-      font-weight: 500;
-      font-size: clamp(2.15rem, 6.5vw, 3.1rem);
-      letter-spacing: -0.025em;
-      line-height: 1.02;
-      max-width: 16ch;
-      color: var(--ivory);
+
+    .page-col {
+      max-width: var(--col);
+      margin: 0 auto;
+      background: var(--deep);
+      box-shadow: 0 0 0 1px rgba(176,141,87,0.12), 0 28px 90px rgba(0,0,0,0.38);
+      min-height: 60vh;
     }
-    .dek {
-      margin-top: 14px;
-      max-width: 46ch;
-      color: rgba(245, 242, 235, 0.78);
-      font-size: 0.98rem;
-      line-height: 1.55;
+    .wrap { max-width: var(--col); margin: 0 auto; padding: 0 var(--pad); }
+
+    .topbar { position: absolute; top: 0; left: 0; right: 0; z-index: 5; padding: 18px 0; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ivory); }
+    .brand img { width: 36px; height: auto; }
+    .brand-name { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
+    .brand-line { display: block; margin-top: 4px; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--brass); font-weight: 500; }
+
+    body > .hero {
+      position: relative; width: 100%;
+      min-height: min(86vh, 780px);
+      display: flex; align-items: flex-end;
+      color: var(--ivory); overflow: hidden;
     }
-    main { padding: 28px 0 20px; }
-    section { margin: 0 0 28px; }
-    .panel { background: var(--card); border: 1px solid var(--stone); padding: 22px 20px 20px; }
+    .hero-media { position: absolute; inset: 0; background: var(--midnight); }
+    .hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 38%; }
+    .hero-scrim {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(22,28,40,0.5) 0%, rgba(22,28,40,0.2) 32%, rgba(22,28,40,0.78) 72%, var(--deep) 100%),
+        linear-gradient(90deg, rgba(22,28,40,0.55) 0%, rgba(22,28,40,0.2) 60%, transparent 100%);
+    }
+    .hero-inner { position: relative; z-index: 2; width: 100%; padding: 0 0 clamp(40px, 7vh, 72px); }
+    body > .hero .wrap { max-width: var(--col); }
+    .eyebrow {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--brass); margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-family: var(--display); font-weight: 600;
+      font-size: clamp(2.75rem, 7.5vw, 5rem);
+      line-height: 1.02; letter-spacing: -0.02em; max-width: 14ch; color: var(--ivory);
+    }
+    .hero-dek { margin-top: 18px; max-width: 36rem; font-size: clamp(1.05rem, 1.8vw, 1.2rem); color: var(--ivory-mute); }
+    .hero-rule { width: 64px; height: 1px; background: var(--brass); margin: 26px 0 0; border: 0; }
+
+    .secnav {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(22,28,40,0.94); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--brass-line);
+    }
+    .secnav-inner { display: flex; gap: 2px; overflow-x: auto; padding: 12px 0; scrollbar-width: none; }
+    .secnav-inner::-webkit-scrollbar { display: none; }
+    .secnav a {
+      flex: 0 0 auto; padding: 8px 12px; font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--ivory-mute);
+      text-decoration: none; border: 1px solid transparent; white-space: nowrap;
+    }
+    .secnav a:hover { color: var(--ivory); border-color: var(--brass-line); }
+
+    main { padding: 8px 0 40px; }
+    .section {
+      padding: clamp(36px, 5vw, 64px) 0;
+      border-bottom: 1px solid rgba(176,141,87,0.16);
+    }
     .kicker {
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--cocoa);
-      font-weight: 600;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--brass); margin: 0 0 10px;
     }
     h2 {
-      font-family: var(--display);
-      font-weight: 500;
-      font-size: clamp(1.65rem, 5vw, 2.15rem);
-      color: var(--navy);
-      letter-spacing: -0.02em;
-      line-height: 1.05;
-      margin: 6px 0 10px;
+      font-family: var(--display); font-weight: 600;
+      font-size: clamp(1.85rem, 4.2vw, 2.65rem);
+      line-height: 1.08; letter-spacing: -0.015em; color: var(--ivory); margin: 0 0 12px;
     }
-    h3 {
-      font-family: var(--display);
-      font-weight: 600;
-      font-size: 1.22rem;
-      color: var(--navy);
-      letter-spacing: -0.015em;
-      margin-bottom: 6px;
-    }
-    p { font-size: 0.96rem; color: var(--charcoal); }
-    .lede { max-width: 62ch; }
-    .rule { height: 1px; background: var(--brass); opacity: 0.5; border: 0; margin: 14px 0 16px; }
-    .disclaimer {
-      background: #E8EEE9;
-      border: 1px solid rgba(90, 110, 98, 0.28);
-      border-left: 3px solid var(--sage);
-      padding: 18px 18px 16px;
-    }
-    .disclaimer .kicker { color: var(--sage); }
-    .disclaimer ul { margin: 10px 0 0 18px; }
-    .disclaimer li { margin: 6px 0; font-size: 0.92rem; color: var(--charcoal); max-width: 62ch; }
-    .paths {
+    h3 { font-family: var(--display); font-weight: 600; font-size: 1.45rem; color: var(--ivory); margin: 0 0 8px; }
+    .lede { max-width: 42ch; font-size: 1.125rem; color: var(--ivory-mute); margin: 0 0 8px; }
+    p { font-size: 1.125rem; color: var(--ivory-mute); }
+    .rule { width: 48px; height: 1px; background: var(--brass); border: 0; margin: 18px 0 22px; opacity: 0.7; }
+
+    /* Half-width alternating section openers */
+    .sec-split {
       display: grid;
-      gap: 12px;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(20px, 3vw, 36px);
+      align-items: center;
+      margin-bottom: 28px;
     }
+    .sec-split.art-left .sec-art { order: 1; }
+    .sec-split.art-left .sec-intro { order: 2; }
+    .sec-split.art-right .sec-art { order: 2; }
+    .sec-split.art-right .sec-intro { order: 1; }
+    .sec-intro { min-width: 0; }
+
+    .sec-art { margin: 0; width: 100%; max-width: 100%; }
+    .sec-art-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background-color: #161C28;
+      background-image: url("assets/how-to-buy-in-nyc/paint/linen-navy-tile.webp");
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 0 0 1px rgba(245,242,235,0.1), 0 12px 28px rgba(0,0,0,0.3);
+    }
+    .sec-art-frame img,
+    .sec-art-frame picture,
+    .sec-art-frame picture img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      display: block; margin: 0;
+      /* never cover-crop — signature + building tops stay intact */
+    }
+    /* Captions sit BELOW the frame — never overlay the signature */
+    .sec-art .g-label {
+      margin-top: 8px;
+      font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(245,242,235,0.42);
+    }
+    .sec-art .g-own { display: none; } /* drop print CTA that could crowd the mark */
+
+    @media (max-width: 819px) {
+      .sec-split {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .sec-split .sec-art,
+      .sec-split .sec-intro { order: unset !important; }
+      .sec-split .sec-art { order: -1 !important; max-width: 78%; margin: 0 auto; }
+      .hero { min-height: min(70vh, 560px); }
+      .hero h1 { font-size: clamp(2.4rem, 11vw, 3.2rem); }
+    }
+
+    /* Kill legacy multi-col */
+    .sec-banner, .sub-row { display: block !important; }
+    .sub-row .g-piece.g-sub { display: none !important; }
+    .banner-art, .banner-canvas, .sub-canvas { display: none !important; }
+    .split, .stack { display: block !important; }
+    .section .art { display: none !important; }
+    .sec-banner .banner-copy { display: none !important; }
+    .sec-banner { border: none !important; margin: 0 !important; padding: 0 !important; }
+
+    .paths { display: grid; gap: 14px; }
     .path {
-      border: 1px solid var(--stone);
-      background: var(--card);
-      padding: 18px 16px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      min-height: 100%;
-    }
-    .path.overlay {
-      background: var(--navy);
-      color: var(--ivory);
-      border-color: var(--navy);
-    }
-    .path.overlay h3 { color: var(--ivory); }
-    .path.overlay p { color: rgba(245, 242, 235, 0.82); }
-    .path.overlay .tag { color: var(--gold); border-color: rgba(228, 212, 176, 0.4); }
-    .path .tag {
-      align-self: flex-start;
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--cocoa);
-      border: 1px solid var(--stone);
-      padding: 5px 9px;
-    }
-    .path h3 { margin: 0; font-size: 1.35rem; }
-    .path p { font-size: 0.9rem; max-width: 36ch; }
-    .path.path-thin {
-      padding: 12px 14px 12px;
-      gap: 4px;
-      min-height: 0;
-      background: rgba(245, 242, 235, 0.55);
-      border-style: dashed;
-    }
-    .path.path-thin h3 { font-size: 1.05rem; }
-    .path.path-thin p { font-size: 0.84rem; max-width: 52ch; }
-    #tracks-boosters table { min-width: 720px; }
-    #tracks-boosters td:first-child { white-space: nowrap; }
-    #coming-next .lede { max-width: 58ch; }
-    .callouts {
-      display: grid;
-      gap: 10px;
-      margin-top: 16px;
-    }
-    .callout {
-      background: var(--midnight);
-      color: var(--ivory);
-      padding: 14px 16px;
-      font-size: 0.92rem;
-    }
-    .callout strong {
-      display: block;
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 4px;
-      font-weight: 700;
-    }
-    .table-wrap { overflow-x: auto; margin-top: 14px; -webkit-overflow-scrolling: touch; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; min-width: 560px; }
-    th, td { text-align: left; padding: 10px 10px; border-bottom: 1px solid var(--stone); vertical-align: top; }
-    th {
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--cocoa);
-      font-weight: 700;
-      background: rgba(245, 242, 235, 0.65);
-    }
-    td { color: var(--charcoal); }
-    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-    td.step-num {
-      font-family: var(--display);
-      font-size: 1.15rem;
-      color: var(--brass);
-      font-weight: 600;
-      width: 2.2rem;
-    }
-    caption {
-      caption-side: bottom;
-      text-align: left;
-      padding-top: 10px;
-      font-size: 0.78rem;
-      color: var(--navy-secondary);
-      line-height: 1.45;
-    }
-    .budget-note {
-      margin-top: 14px;
-      border-left: 2px solid var(--brass);
-      padding: 10px 0 10px 14px;
-      font-size: 0.92rem;
-      color: var(--charcoal);
-      max-width: 62ch;
-    }
-    .carry { display: grid; gap: 12px; }
-    .carry article {
-      border-top: 1px solid var(--stone);
-      padding-top: 12px;
-    }
-    .carry article:first-of-type { border-top: 0; padding-top: 0; }
-    .carry strong {
-      display: block;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--navy);
-      margin-bottom: 4px;
-    }
-    .stalls { display: grid; gap: 12px; }
-    .stall {
-      border: 1px solid var(--stone);
-      background: var(--card);
-      padding: 16px 16px 14px;
-    }
-    .stall-head {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-    .stall h3 { margin: 0; }
-    .stamp {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 5px 9px;
-      border: 1px solid;
-      white-space: nowrap;
-    }
-    .stamp.pick { color: var(--success); border-color: rgba(47, 107, 79, 0.45); background: rgba(47, 107, 79, 0.08); }
-    .stamp.consider { color: var(--warn); border-color: rgba(138, 106, 47, 0.45); background: rgba(228, 212, 176, 0.35); }
-    .stamp.wait { color: var(--cocoa); border-color: rgba(122, 90, 58, 0.4); background: rgba(122, 90, 58, 0.08); }
-    .stamp.pass { color: var(--error); border-color: rgba(180, 35, 24, 0.4); background: rgba(180, 35, 24, 0.06); }
-    .plate-1031 {
-      background: var(--midnight);
-      color: var(--ivory);
+      border: 1px solid rgba(176, 141, 87, 0.28);
+      background: rgba(42, 52, 71, 0.45);
       padding: 22px 20px 20px;
     }
-    .plate-1031 .kicker { color: var(--gold); }
-    .plate-1031 h2 { color: var(--ivory); }
-    .plate-1031 p { color: rgba(245, 242, 235, 0.82); }
-    .plate-1031 .clocks {
-      display: grid;
-      gap: 10px;
-      margin-top: 14px;
+    .path.overlay { background: linear-gradient(160deg, rgba(42,52,71,0.9), rgba(32,39,53,0.95)); border-color: var(--brass-line); }
+    .path.thin { border-style: dashed; background: transparent; opacity: 0.94; }
+    .tag {
+      display: inline-block; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+      border: 1px solid rgba(228, 212, 176, 0.35); padding: 4px 8px; margin-bottom: 10px;
     }
-    .plate-1031 .clock {
-      border: 1px solid rgba(176, 141, 87, 0.35);
-      padding: 12px 14px;
+    .path p { font-size: 1.05rem; max-width: 58ch; }
+
+    .table-wrap {
+      overflow-x: auto; margin: 8px 0 18px;
+      border: 1px solid rgba(176, 141, 87, 0.22);
     }
-    .plate-1031 .clock .n {
-      font-family: var(--display);
-      font-size: 1.55rem;
-      color: var(--gold);
-      line-height: 1.1;
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; min-width: 520px; }
+    th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid rgba(216,209,199,0.12); vertical-align: top; }
+    th {
+      font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--brass); font-weight: 700; background: rgba(42,52,71,0.55);
     }
-    .plate-1031 .clock .t {
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 600;
-      margin-bottom: 4px;
+    td { color: var(--ivory-mute); }
+    td.step-num { font-family: var(--display); font-size: 1.3rem; color: var(--brass); font-weight: 600; width: 2.4rem; }
+    caption { caption-side: bottom; text-align: left; padding: 12px 14px; font-size: 0.78rem; color: rgba(245,242,235,0.48); }
+
+    .callouts { display: grid; gap: 12px; margin: 18px 0; }
+    .callout { border-left: 2px solid var(--brass); padding: 10px 0 10px 16px; font-size: 1.05rem; color: var(--ivory-mute); }
+    .callout strong { color: var(--ivory); }
+    .budget-note, .phase-note { font-size: 1.05rem; color: var(--ivory-mute); max-width: 62ch; }
+    .phase-note strong {
+      display: block; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--brass); margin-bottom: 4px; font-weight: 700;
     }
-    .faq details {
-      border-bottom: 1px solid var(--stone);
-      padding: 12px 0;
+    .disclaimer-box { border-left: 2px solid var(--brass); padding: 4px 0 4px 18px; }
+    .disclaimer-box ul { margin: 12px 0 0 18px; max-width: 58ch; }
+    .disclaimer-box li { margin: 8px 0; font-size: 1.05rem; color: var(--ivory-mute); }
+
+    .stalls { display: grid; gap: 14px; }
+    .stall { border: 1px solid rgba(176,141,87,0.22); background: rgba(42,52,71,0.35); padding: 18px; }
+    .stall-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+    .stamp {
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 3px 8px; border: 1px solid rgba(176,141,87,0.4); color: var(--brass);
     }
-    .faq details:first-of-type { border-top: 1px solid var(--stone); }
+    .stamp.pass { color: #E8A090; border-color: rgba(180,60,40,0.45); }
+    .stamp.wait { color: #D4B87A; }
+    .stamp.consider { color: var(--gold); }
+    .stamp.pick { color: #8FCFB0; border-color: rgba(47,107,79,0.5); }
+
+    .clocks { display: grid; gap: 12px; }
+    @media (min-width: 640px) { .clocks { grid-template-columns: 1fr 1fr 1fr; } }
+    .clock { border: 1px solid rgba(176,141,87,0.25); padding: 16px; background: rgba(32,39,53,0.6); }
+
+    .faq details { border-bottom: 1px solid rgba(176,141,87,0.18); padding: 14px 0; }
     .faq summary {
-      cursor: pointer;
-      font-family: var(--display);
-      font-size: 1.15rem;
-      color: var(--navy);
-      font-weight: 600;
-      list-style: none;
+      cursor: pointer; list-style: none; font-family: var(--display);
+      font-size: 1.25rem; color: var(--ivory); font-weight: 560;
     }
     .faq summary::-webkit-details-marker { display: none; }
-    .faq summary::before {
-      content: "+";
-      display: inline-block;
-      width: 1.2em;
-      color: var(--brass);
-      font-weight: 700;
+    .faq summary::before { content: "+"; display: inline-block; width: 1.2em; color: var(--brass); font-family: var(--ui); font-weight: 600; }
+    .faq details[open] summary::before { content: "-"; }
+    .faq details p { margin-top: 10px; max-width: 62ch; }
+
+    /* Scroll reveal — slide from art side */
+    .js-reveal .reveal-left, .js-reveal .reveal-right, .js-reveal .reveal {
+      opacity: 0; transition: opacity 0.7s ease, transform 0.7s ease;
     }
-    .faq details[open] summary::before { content: "–"; }
-    .faq details p { margin-top: 8px; max-width: 62ch; padding-left: 1.2em; }
-    footer {
+    .js-reveal .reveal-left { transform: translateX(-28px); }
+    .js-reveal .reveal-right { transform: translateX(28px); }
+    .js-reveal .reveal { transform: translateY(16px); }
+    .reveal-left.is-in, .reveal-right.is-in, .reveal.is-in {
+      opacity: 1; transform: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-left, .reveal-right, .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* —— Brand action bar —— */
+    .action-bar {
+      border-top: 1px solid var(--brass-line);
       background: var(--midnight);
-      color: var(--ivory);
-      padding: 28px 0 36px;
-      border-top: 1px solid rgba(176, 141, 87, 0.28);
+      padding: 28px 0 32px;
     }
-    .foot-script { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass); line-height: 1.3; }
-    .foot-legal {
-      margin-top: 12px;
-      font-size: 12px;
-      color: rgba(245, 242, 235, 0.68);
-      line-height: 1.65;
-      max-width: 68ch;
+    .action-bar-inner {
+      display: flex; flex-wrap: wrap; gap: 10px 12px;
+      align-items: stretch;
     }
-    .foot-legal a { color: var(--gold); }
+    .action-bar .ab-btn,
+    .action-bar .ab-field-wrap {
+      display: inline-flex; align-items: center; gap: 10px;
+      min-height: 48px; padding: 12px 16px;
+      border: 1px solid rgba(176,141,87,0.32);
+      background: rgba(42,52,71,0.35);
+      color: var(--ivory-soft);
+      font-family: var(--ui); font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.04em;
+      cursor: pointer; text-decoration: none;
+      transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+    }
+    .action-bar .ab-btn:hover,
+    .action-bar .ab-field-wrap:focus-within {
+      border-color: var(--brass); color: var(--ivory); background: rgba(42,52,71,0.55);
+    }
+    .action-bar .ab-btn svg { width: 18px; height: 18px; flex: 0 0 auto; stroke: var(--brass); fill: none; stroke-width: 1.4; }
+    .action-bar .ab-btn.is-saved {
+      border-color: var(--brass); color: var(--gold);
+    }
+    .action-bar .ab-field-wrap { padding: 0 0 0 14px; gap: 0; flex: 1 1 220px; max-width: 360px; }
+    .action-bar .ab-field-wrap input {
+      flex: 1 1 auto; min-width: 0; border: 0; background: transparent;
+      color: var(--ivory); font-family: var(--ui); font-size: 0.78rem;
+      padding: 12px 10px; outline: none;
+    }
+    .action-bar .ab-field-wrap input::placeholder { color: rgba(245,242,235,0.4); }
+    .action-bar .ab-field-wrap button {
+      border: 0; border-left: 1px solid rgba(176,141,87,0.28);
+      background: transparent; color: var(--brass);
+      font-family: var(--ui); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 12px 14px; cursor: pointer; min-height: 48px;
+    }
+    .action-bar .ab-note {
+      flex: 1 1 100%; margin-top: 4px;
+      font-size: 0.68rem; color: rgba(245,242,235,0.4); letter-spacing: 0.02em;
+    }
+    .ab-toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(12px);
+      background: var(--navy); color: var(--ivory); border: 1px solid var(--brass-line);
+      padding: 10px 16px; font-size: 0.78rem; letter-spacing: 0.04em;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 50;
+    }
+    .ab-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    footer {
+      border-top: 1px solid var(--brass-line);
+      padding: 40px 0 56px; background: #1a2030;
+    }
+    .foot-script { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); }
+    .foot-legal { margin-top: 14px; font-size: 0.88rem; color: rgba(245,242,235,0.58); line-height: 1.65; max-width: 68ch; }
     .foot-legal strong { color: var(--ivory); font-weight: 500; }
-    @media (min-width: 720px) {
-      .wrap { padding: 0 32px; }
-      .mast { padding: 28px 0 44px; }
-      main { padding: 36px 0 28px; }
-      .paths { grid-template-columns: 1fr 1fr; }
-      .paths .path.overlay,
-      .paths .path.path-thin { grid-column: 1 / -1; }
-      .callouts { grid-template-columns: repeat(3, 1fr); }
-      .plate-1031 .clocks { grid-template-columns: 1fr 1fr 1.2fr; }
-      .panel { padding: 26px 24px 22px; }
-      .plate-1031 { padding: 28px 24px 24px; }
-    }
+    .foot-credits { margin-top: 18px; font-size: 0.72rem; color: rgba(245,242,235,0.4); line-height: 1.55; max-width: 72ch; }
+
+    /* Print */
     @media print {
-      body { background: #fff; }
-      .mast { background: #fff; color: var(--navy); border-bottom: 1px solid var(--brass); }
-      .mast-kicker { color: var(--cocoa); }
-      .dek { color: var(--charcoal); }
-      .path.overlay, .callout, .plate-1031, footer {
-        background: #fff; color: var(--navy); border: 1px solid var(--stone);
+      body { background: #fff !important; color: #20242B !important; font-size: 11pt; }
+      .read-progress, .secnav, .topbar, .action-bar, .ab-toast, .hero-scrim { display: none !important; }
+      .page-col { box-shadow: none; max-width: none; background: #fff; }
+      .hero { min-height: 0; page-break-after: avoid; }
+      .hero-media img { max-height: 220pt; object-fit: cover; }
+      .hero h1, h2, h3, .kicker, p, td, th, .lede, .phase-note, .budget-note, li, summary {
+        color: #20242B !important;
       }
-      .path.overlay h3, .plate-1031 h2 { color: var(--navy); }
-      .stamp { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .kicker, .brand-line, .foot-script, th, .stamp, .tag { color: #8A6E3E !important; }
+      .section { page-break-before: always; border: none; padding-top: 12pt; }
+      .section:first-of-type { page-break-before: avoid; }
+      .sec-art-frame { box-shadow: none; border: 1px solid #ccc; background: #1a2230 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      a { color: #20242B; text-decoration: none; }
+      .path, .stall, .clock { border-color: #ccc; background: #faf8f4; }
     }
+
   </style>
 </head>
 <body>
-  <header class="mast">
-    <div class="wrap">
-      <a class="brand" href="https://www.agentkammer.com/">
-        <img src="/brand/ak-monogram-ivory-free.png" alt="Agent Kammer monogram" width="44" height="44" />
-        <span>
-          <span class="brand-name">Agent Kammer</span>
-          <span class="brand-line">Live Where You Belong.</span>
-        </span>
-      </a>
-      <p class="mast-kicker">Field guide</p>
-      <h1>How to buy in NYC</h1>
-      <p class="dek">New York runs on attorneys, not escrow theater. Choose the path, know the twelve steps, budget day-one and carry, then decide where you will not stall.</p>
+  <div class="read-progress" aria-hidden="true">
+    <div class="read-progress-fill" id="read-progress-fill"></div>
+    <div class="read-progress-ticks" id="read-progress-ticks"></div>
+  </div>
+
+  <!-- hero-fullbleed -->
+  <header class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <picture>
+        <source type="image/webp" srcset="assets/how-to-buy-in-nyc/nyc-hero-web.webp" />
+        <img src="assets/how-to-buy-in-nyc/nyc-hero-web.jpg" alt="" width="1916" height="1440" />
+      </picture>
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="topbar">
+      <div class="wrap">
+        <a class="brand" href="https://www.agentkammer.com/">
+          <img src="assets/how-to-buy-in-nyc/ak-monogram-ivory-web.png" alt="Agent Kammer monogram" width="44" height="48" />
+          <span>
+            <span class="brand-name">Agent Kammer</span>
+            <span class="brand-line">Live where you belong.</span>
+          </span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-inner">
+      <div class="wrap">
+        <p class="eyebrow">Field guide</p>
+        <h1>How to buy in NYC</h1>
+        <p class="hero-dek">In New York, attorneys draft the contracts. Pick a path, walk twelve steps from budget to keys, price day one and monthly carry, then name the places a file can die. A home here is a quiet trade between freedom and belonging. Get the trade right.</p>
+        <hr class="hero-rule" />
+      </div>
     </div>
   </header>
+  <div class="page-col">
+  <nav class="secnav" aria-label="Section navigation">
+    <div class="wrap">
+      <div class="secnav-inner">
+        <a href="#before">Before</a>
+        <a href="#paths">Paths</a>
+        <a href="#twelve-steps">Twelve steps</a>
+        <a href="#closing-costs">Closing costs</a>
+        <a href="#carry">Carry</a>
+        <a href="#stalls">Stalls</a>
+        <a href="#exchange">1031</a>
+        <a href="#tracks-boosters">Tracks</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+  </nav>
 
   <main>
-    <div class="wrap">
+    <section class="section" id="before">
+        <div class="wrap">
 
-      <section class="disclaimer" id="before">
-        <p class="kicker">Before you read</p>
-        <h2 style="font-size:1.45rem;margin-top:4px">Educational only</h2>
-        <ul>
-          <li>This is general guidance on process and typical cost ranges. Every transaction differs by building, counsel, lender, and your facts.</li>
-          <li>It is not legal, tax, or investment advice, and not a quote or offer of any transaction terms.</li>
-          <li>Confirm anything material with a New York real estate attorney and a CPA before you act. Brokerage context: Agent Kammer — live where you belong.</li>
-        </ul>
-      </section>
-
-      <section class="panel" id="paths">
-        <p class="kicker">Path chooser</p>
-        <h2>Pick the building type first</h2>
-        <p class="lede">Condo, co-op, and house each change the paperwork, the board (or lack of one), and what you carry after closing. A 1031 is not a fourth type — it is an overlay on a sale that funds a purchase.</p>
-        <hr class="rule" />
-        <div class="paths">
-          <article class="path">
-            <span class="tag">Deed</span>
-            <h3>Condo</h3>
-            <p>You buy a unit (and a share of common elements) with a deed. Title insurance, mansion tax, and — if financed — mortgage recording tax sit on the buyer’s side. Boards exist, but they do not interview like a co-op.</p>
-          </article>
-          <article class="path">
-            <span class="tag">Shares + lease</span>
-            <h3>Co-op</h3>
-            <p>You buy shares and a proprietary lease. No deed transfer, so no title policy and no mortgage recording tax in the condo sense — but the board package, interview, and possible PASS decide whether the deal lives.</p>
-          </article>
-          <article class="path path-thin" aria-label="House / townhouse — rare path">
-            <span class="tag">Rare in Manhattan volume</span>
-            <h3>House / townhouse</h3>
-            <p>Fee simple, land and structure — inspections matter. Thin on this page because the volume is condo and co-op. Separate guide next.</p>
-          </article>
-          <article class="path overlay">
-            <span class="tag">Overlay — not a building type</span>
-            <h3>1031 exchange</h3>
-            <p>If you are selling investment property and buying another, a qualified intermediary and the 45 / 180-day clocks sit on top of the same sell → buy sequence. Choose condo, co-op, or house as the asset; the exchange rules decide the timing and the QI, not the floor plan.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="panel" id="twelve-steps">
-        <p class="kicker">The sequence</p>
-        <h2>Twelve steps from budget to keys</h2>
-        <p class="lede">Attorneys draft the contract. Agents do not. The timetable below is what usually decides pace — not a promise that your file will move that fast.</p>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Step</th>
-                <th>Typical time</th>
-                <th>What decides it</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="step-num">1</td>
-                <td>Set the budget and the financing route</td>
-                <td>1–2 weeks</td>
-                <td>Cash, or which lender will take your file</td>
-              </tr>
-              <tr>
-                <td class="step-num">2</td>
-                <td>Engage a buyer’s agent in writing</td>
-                <td>Same week</td>
-                <td>Whose side they are on, and who pays them</td>
-              </tr>
-              <tr>
-                <td class="step-num">3</td>
-                <td>Engage a New York real estate attorney</td>
-                <td>Same week</td>
-                <td>New York contracts are drafted by attorneys, not agents</td>
-              </tr>
-              <tr>
-                <td class="step-num">4</td>
-                <td>Search and view</td>
-                <td>2–8 weeks</td>
-                <td>Condo or co-op decides how wide the field is</td>
-              </tr>
-              <tr>
-                <td class="step-num">5</td>
-                <td>Offer, with proof of funds</td>
-                <td>Days</td>
-                <td>Offers without documented funds are not taken seriously</td>
-              </tr>
-              <tr>
-                <td class="step-num">6</td>
-                <td>Attorney reviews the building’s documents</td>
-                <td>1–2 weeks</td>
-                <td>Financials, minutes, offering plan, litigation</td>
-              </tr>
-              <tr>
-                <td class="step-num">7</td>
-                <td>Sign the contract, pay 10% deposit</td>
-                <td>Days</td>
-                <td>Deposit is held in the seller attorney’s escrow</td>
-              </tr>
-              <tr>
-                <td class="step-num">8</td>
-                <td>Loan application and appraisal</td>
-                <td>3–6 weeks</td>
-                <td>Skipped on a cash purchase</td>
-              </tr>
-              <tr>
-                <td class="step-num">9</td>
-                <td>Board application (co-ops only)</td>
-                <td>4–8 weeks</td>
-                <td>Financials, references, interview</td>
-              </tr>
-              <tr>
-                <td class="step-num">10</td>
-                <td>Clear title and buy insurance</td>
-                <td>1–2 weeks</td>
-                <td>Runs in parallel; lighter on co-ops (no deed)</td>
-              </tr>
-              <tr>
-                <td class="step-num">11</td>
-                <td>Final walk-through</td>
-                <td>Day before</td>
-                <td>Condition, and that what was agreed remains</td>
-              </tr>
-              <tr>
-                <td class="step-num">12</td>
-                <td>Closing</td>
-                <td>1 day</td>
-                <td>Attorneys, lender, title company, transfer of funds</td>
-              </tr>
-            </tbody>
-            <caption>
-              General process map for NYC residential purchases — educational guidance, not a transaction timeline guarantee. Your counsel and lender set the real calendar.
-            </caption>
-          </table>
-        </div>
-        <div class="callouts" aria-label="Timeline callouts">
-          <div class="callout">
-            <strong>Cash condo</strong>
-            About 6–10 weeks from accepted offer to closing when the file is clean.
-          </div>
-          <div class="callout">
-            <strong>With a mortgage</strong>
-            Longer — often in the 8–12 week band once appraisal and underwriting join the dance.
-          </div>
-          <div class="callout">
-            <strong>Co-op + board</strong>
-            About 10–16 weeks. The board sets the pace; thin packages invite a PASS.
-          </div>
-        </div>
-      </section>
-
-      <section class="panel" id="closing-costs">
-        <p class="kicker">Day one</p>
-        <h2>What the buyer pays at closing</h2>
-        <p class="lede">Figures below are <strong>general guidance</strong> in an August 2026 style — not a quote, not a guarantee, and not Agent Kammer’s bill. Confirm every line with counsel and the title company on your deal.</p>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Condominium</th>
-                <th>Co-op</th>
-                <th>Note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Mansion tax</td>
-                <td>1.00–3.90%</td>
-                <td>1.00–3.90%</td>
-                <td>From $1m, in bands, on the whole price</td>
-              </tr>
-              <tr>
-                <td>Mortgage recording tax</td>
-                <td>~1.80–1.925%</td>
-                <td>None (typical)</td>
-                <td>On the loan amount for condo financing; buyer often nets after the lender’s 0.25% share</td>
-              </tr>
-              <tr>
-                <td>Title insurance</td>
-                <td>≈0.45%</td>
-                <td>None (typical)</td>
-                <td>No deed transfers in a co-op share purchase</td>
-              </tr>
-              <tr>
-                <td>Attorney</td>
-                <td>$3,000–6,000</td>
-                <td>$3,000–6,000</td>
-                <td>Often higher on new development or complex title</td>
-              </tr>
-              <tr>
-                <td>Building / application fees</td>
-                <td>$1,000–2,500</td>
-                <td>$1,500–3,000</td>
-                <td>Move-in deposits are often refundable</td>
-              </tr>
-              <tr>
-                <td>Appraisal &amp; inspection</td>
-                <td>$800–2,000</td>
-                <td>$800–2,000</td>
-                <td>Some cash buyers skip; rarely wise on houses</td>
-              </tr>
-              <tr>
-                <td>New-development premium</td>
-                <td>~1.825–2.075%</td>
-                <td>—</td>
-                <td>Sponsor sales often shift transfer taxes toward the buyer — <span class="stamp consider" style="margin-left:4px;vertical-align:middle">CONSIDER</span> the all-in before you fall for the amenity floor. Stack that against <a href="#tracks-boosters">sponsor / new-dev incentives</a> (credits, tax shifts, buydowns) in Tracks &amp; boosters</td>
-              </tr>
-            </tbody>
-            <caption>
-              General guidance as of August 2026-style market practice — not an offer, quote, or guarantee of any transaction terms. Rates and practices change; verify with your attorney and title company.
-            </caption>
-          </table>
-        </div>
-        <p class="budget-note">
-          <strong>Budget shape:</strong> on a $2,000,000 resale condominium with a mortgage, plan roughly <strong>3–5%</strong> of price in closing costs on top of the deposit. On a sponsor new-development, often more — commonly discussed in a <strong>5–6%</strong> band once transfer taxes lean your way. Net the sponsor’s advertised credits and rate buydowns against that band (see <a href="#tracks-boosters">Tracks &amp; boosters</a>).
-        </p>
-      </section>
-
-      <section class="panel" id="carry">
-        <p class="kicker">After the keys</p>
-        <h2>What you carry once you own</h2>
-        <p class="lede">Day-one costs get you to closing. Carry decides whether the home still fits six months later. Ask for the monthly number before you lock the offer.</p>
-        <hr class="rule" />
-        <div class="carry">
-          <article>
-            <strong>Condo — common charges</strong>
-            <p>Monthly common charges cover building operations, reserves, and shared services. Real-estate taxes are billed separately (often escrowed with the loan). Read the budget and the minutes for special assessments already in motion.</p>
-          </article>
-          <article>
-            <strong>Co-op — maintenance</strong>
-            <p>Maintenance usually wraps building ops and the shareholder’s share of the underlying mortgage and taxes into one line. Compare buildings on all-in monthly cost, not just share price.</p>
-          </article>
-          <article>
-            <strong>House / townhouse — taxes &amp; systems</strong>
-            <p>You own the envelope. Property taxes, insurance, and every boiler, roof, and sidewalk repair sit with you. An inspection is not optional theater — it is how you price carry.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="panel" id="stalls">
-        <p class="kicker">Friction</p>
-        <h2>Where deals stall</h2>
-        <p class="lede">Most NYC files do not die on the floor plan. They die on funds, boards, and paper that arrives late from abroad.</p>
-        <hr class="rule" />
-        <div class="stalls">
-          <article class="stall">
-            <div class="stall-head">
-              <h3>Source of funds</h3>
-              <span class="stamp wait">WAIT</span>
+        <div class="sec-split art-left">
+          <figure class="sec-art reveal-left">
+            <div class="sec-art-frame">
+              <picture>
+                <source type="image/webp" srcset="assets/how-to-buy-in-nyc/paint/paint-before-rk.webp" />
+                <img src="assets/how-to-buy-in-nyc/paint/paint-before-rk.jpg" alt="Counsel brief, sealed, signed R. Kammer" width="1280" height="720" />
+              </picture>
             </div>
-            <p>Money that appears from an account nobody has documented stops the file at the bank, the title company, or both. Show where the funds sit and how they got there at the start — not when the wire is due. <em>Decision stamp: incomplete trail = WAIT until the paper is clean.</em></p>
-          </article>
-          <article class="stall">
-            <div class="stall-head">
-              <h3>Co-op board</h3>
-              <span class="stamp pass">PASS risk</span>
+            <figcaption class="g-label">Counsel brief, sealed</figcaption>
+          </figure>
+          <div class="sec-intro reveal-right">
+            <p class="kicker">Before you read</p>
+            <h2>Educational only</h2>
+            <p class="lede">Process notes and typical cost bands. Your building, counsel, lender, and facts will move the numbers.</p>
+          </div>
+        </div>
+
+        
+          <div class="sub-row">
+<div class="sub-copy disclaimer-box">
+              <ul>
+                <li>This is general guidance on process and typical cost ranges. Every transaction differs by building, counsel, lender, and your facts.</li>
+                <li>It is not legal, tax, or investment advice, and not a quote or offer of any transaction terms.</li>
+                <li>Confirm anything material with a New York real estate attorney and a CPA before you act. Brokerage context: Agent Kammer. Live where you belong.</li>
+              </ul>
             </div>
-            <p>A board can decline without giving a reason. Thin packages — light U.S. income history, thin references, or assets that do not read clearly on the application — raise PASS risk after the deposit is already committed. Build the package with counsel before you romanticize the lobby.</p>
-          </article>
-          <article class="stall">
-            <div class="stall-head">
-              <h3>Signing from abroad / POA</h3>
-              <span class="stamp consider">CONSIDER</span>
+          </div>
+        </div>
+      </section>
+
+            <section class="section" id="paths">
+        <div class="wrap">
+
+        <div class="sec-split art-right">
+          <figure class="sec-art reveal-right">
+            <div class="sec-art-frame">
+              <picture>
+                <source type="image/webp" srcset="assets/how-to-buy-in-nyc/paint/paint-condo-rk.webp" />
+                <img src="assets/how-to-buy-in-nyc/paint/paint-condo-rk.jpg" alt="Condo deed path, signed R. Kammer" width="1280" height="720" />
+              </picture>
             </div>
-            <p>Contracts can be signed remotely, but a power of attorney must be drafted, notarized, and often apostilled in your country. That is measured in weeks, not days. Start it early, or CONSIDER delaying the offer until the POA path is real.</p>
-          </article>
-          <article class="stall">
-            <div class="stall-head">
-              <h3>How you hold title</h3>
-              <span class="stamp pick">PICK early</span>
+            <figcaption class="g-label">Condo, deed path</figcaption>
+          </figure>
+          <div class="sec-intro reveal-left">
+            <p class="kicker">Path chooser</p>
+            <h2>Pick the building type first</h2>
+            <p class="lede">Condo, co-op, and house each change the paperwork, the board (or lack of one), and what you carry after closing. A 1031 sits on top of a sale that funds a purchase, with timing rules and a qualified intermediary riding along.</p>
+          </div>
+        </div>
+
+        
+          <div class="sub-row">
+<article class="path sub-copy">
+              <span class="tag">Shares + lease</span>
+              <h3>Co-op</h3>
+              <p>You buy shares and a proprietary lease. No deed transfer, so no title policy and no mortgage recording tax in the condo sense. The board package, interview, and possible PASS decide whether the deal lives.</p>
+            </article>
+          </div>
+          <div class="sub-row art-right">
+<article class="path thin sub-copy" aria-label="House / townhouse, rare path">
+              <span class="tag">Rare in Manhattan volume</span>
+              <h3>House / townhouse</h3>
+              <p>Fee simple: land and structure. Inspections matter. Thin on this page because the volume is condo and co-op. Separate guide next.</p>
+            </article>
+          </div>
+          <div class="sub-row">
+<article class="path overlay sub-copy">
+              <span class="tag">Overlay, not a building type</span>
+              <h3>1031 exchange</h3>
+              <p>If you are selling investment property and buying another, a qualified intermediary and the 45 / 180-day clocks sit on top of the same sell → buy sequence. Choose condo, co-op, or house as the asset; the exchange rules decide the timing and the QI, not the floor plan.</p>
+            </article>
+          </div>
+          <p class="budget-note" style="margin-top:8px"><strong>Condo</strong> (deed path) is introduced in the banner: unit plus deed, title insurance, mansion tax, and mortgage recording tax on the buyer’s side when financed. Boards exist, but they do not interview like a co-op.</p>
+        </div>
+      </section>
+
+            <section class="section" id="twelve-steps">
+        <div class="wrap">
+
+        <div class="sec-split art-left">
+          <figure class="sec-art reveal-left">
+            <div class="sec-art-frame">
+              <picture>
+                <source type="image/webp" srcset="assets/how-to-buy-in-nyc/paint/paint-twelve-steps-rk.webp" />
+                <img src="assets/how-to-buy-in-nyc/paint/paint-twelve-steps-rk.jpg" alt="Steps from budget to keys, signed R. Kammer" width="1280" height="720" />
+              </picture>
             </div>
-            <p>Personally, through a U.S. LLC, or another structure changes income tax, estate exposure, and what happens on sale. PICK the form with counsel and your CPA before contract — restructuring after is expensive theater.</p>
+            <figcaption class="g-label">Steps, budget to keys</figcaption>
+          </figure>
+          <div class="sec-intro reveal-right">
+            <p class="kicker">The sequence</p>
+            <h2>Twelve steps from budget to keys</h2>
+            <p class="lede">Attorneys draft the contract. Agents do not. The timetable below is what usually sets the pace. Your file may move slower. Patience here is a form of intelligence.</p>
+          </div>
+        </div>
+
+        
+          <div class="sub-row">
+<div class="sub-copy phase-note"><strong>Steps 4-5</strong>Search and view, then offer with proof of funds. Condo or co-op decides how wide the field is; undocumented funds are not taken seriously.</div>
+          </div>
+          <div class="sub-row art-right">
+<div class="sub-copy phase-note"><strong>Steps 6-7</strong>Attorney reviews financials, minutes, offering plan, litigation. Then contract and 10% deposit in the seller attorney’s escrow.</div>
+          </div>
+          <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Step</th>
+                    <th>Typical time</th>
+                    <th>What decides it</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td class="step-num">1</td><td>Set the budget and the financing route</td><td>1-2 weeks</td><td>Cash, or which lender will take your file</td></tr>
+                  <tr><td class="step-num">2</td><td>Engage a buyer’s agent in writing</td><td>Same week</td><td>Whose side they are on, and who pays them</td></tr>
+                  <tr><td class="step-num">3</td><td>Engage a New York real estate attorney</td><td>Same week</td><td>New York contracts are drafted by attorneys, not agents</td></tr>
+                  <tr><td class="step-num">4</td><td>Search and view</td><td>2-8 weeks</td><td>Condo or co-op decides how wide the field is</td></tr>
+                  <tr><td class="step-num">5</td><td>Offer, with proof of funds</td><td>Days</td><td>Offers without documented funds are not taken seriously</td></tr>
+                  <tr><td class="step-num">6</td><td>Attorney reviews the building’s documents</td><td>1-2 weeks</td><td>Financials, minutes, offering plan, litigation</td></tr>
+                  <tr><td class="step-num">7</td><td>Sign the contract, pay 10% deposit</td><td>Days</td><td>Deposit is held in the seller attorney’s escrow</td></tr>
+                  <tr><td class="step-num">8</td><td>Loan application and appraisal</td><td>3-6 weeks</td><td>Skipped on a cash purchase</td></tr>
+                  <tr><td class="step-num">9</td><td>Board application (co-ops only)</td><td>4-8 weeks</td><td>Financials, references, interview</td></tr>
+                  <tr><td class="step-num">10</td><td>Clear title and buy insurance</td><td>1-2 weeks</td><td>Runs in parallel; lighter on co-ops (no deed)</td></tr>
+                  <tr><td class="step-num">11</td><td>Final walk-through</td><td>Day before</td><td>Condition, and that what was agreed remains</td></tr>
+                  <tr><td class="step-num">12</td><td>Closing</td><td>1 day</td><td>Attorneys, lender, title company, transfer of funds</td></tr>
+                </tbody>
+                <caption>General process map for NYC residential purchases. Educational guidance, not a transaction timeline guarantee. Your counsel and lender set the real calendar.</caption>
+              </table>
+            </div>
+            <div class="callouts" aria-label="Timeline callouts">
+              <div class="callout"><strong>Cash condo</strong>About 6-10 weeks from accepted offer to closing when the file is clean.</div>
+          <div class="sub-row">
+<div class="sub-copy phase-note"><strong>Steps 8-9</strong>Loan application and appraisal (skipped on cash), then board application on co-ops: financials, references, interview.</div>
+          </div>
+          <div class="sub-row art-right">
+<div class="sub-copy phase-note"><strong>Steps 10-12</strong>Clear title and insurance in parallel, final walk-through the day before, closing with attorneys, lender, and title.</div>
+          </div>
+          <div class="sub-row">
+<div class="sub-copy phase-note"><strong>Pace bands</strong>Cash condo about 6-10 weeks; with a mortgage often 8-12; co-op + board about 10-16. The board sets the pace; thin packages invite a PASS.</div>
+          </div>
+        </div>
+        </div>
+      </section>
+
+            <section class="section" id="closing-costs">
+        <div class="wrap">
+
+        <div class="sec-split art-right">
+          <figure class="sec-art reveal-right">
+            <div class="sec-art-frame">
+              <picture>
+                <source type="image/webp" srcset="assets/how-to-buy-in-nyc/paint/paint-closing-costs-rk.webp" />
+                <img src="assets/how-to-buy-in-nyc/paint/paint-closing-costs-rk.jpg" alt="Closing ledger, signed R. Kammer" width="1280" height="720" />
+              </picture>
+            </div>
+            <figcaption class="g-label">Closing ledger</figcaption>
+          </figure>
+          <div class="sec-intro reveal-left">
+            <p class="kicker">Day one</p>
+            <h2>What the buyer pays at closing</h2>
+            <p class="lede">Figures below are general guidance in an August 2026 style. Not a quote, not a guarantee, and not Agent Kammer’s bill. Confirm every line with counsel and the title company on your deal.</p>
+          </div>
+        </div>
+
+        
+          <div class="sub-row">
+<div class="sub-copy phase-note"><strong>MRT &amp; title</strong>Mortgage recording tax and title insurance typically sit on financed condos; co-op share purchases usually skip both (no deed).</div>
+          </div>
+          <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Item</th><th>Condominium</th><th>Co-op</th><th>Note</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Mansion tax</td><td>1.00-3.90%</td><td>1.00-3.90%</td><td>From $1m, in bands, on the whole price</td></tr>
+                  <tr><td>Mortgage recording tax</td><td>~1.80-1.925%</td><td>None (typical)</td><td>On the loan amount for condo financing; buyer often nets after the lender’s 0.25% share</td></tr>
+                  <tr><td>Title insurance</td><td>≈0.45%</td><td>None (typical)</td><td>No deed transfers in a co-op share purchase</td></tr>
+                  <tr><td>Attorney</td><td>$3,000-6,000</td><td>$3,000-6,000</td><td>Often higher on new development or complex title</td></tr>
+                  <tr><td>Building / application fees</td><td>$1,000-2,500</td><td>$1,500-3,000</td><td>Move-in deposits are often refundable</td></tr>
+                  <tr><td>Appraisal &amp; inspection</td><td>$800-2,000</td><td>$800-2,000</td><td>Some cash buyers skip; rarely wise on houses</td></tr>
+                  <tr><td>New-development premium</td><td>~1.825-2.075%</td><td>n/a</td><td>Sponsor sales often shift transfer taxes toward the buyer. <span class="stamp consider" style="margin-left:4px;vertical-align:middle">CONSIDER</span> the all-in before you fall for the amenity floor. Stack that against <a href="#tracks-boosters">sponsor / new-dev incentives</a> (credits, tax shifts, buydowns) in Tracks &amp; boosters</td></tr>
+                </tbody>
+                <caption>General guidance as of August 2026-style market practice. Not an offer, quote, or guarantee of any transaction terms. Rates and practices change; verify with your attorney and title company.</caption>
+              </table>
+            </div>
+          <div class="sub-row art-right">
+<div class="sub-copy phase-note"><strong>Fixed fees</strong>Attorney, building/application fees, appraisal &amp; inspection. Plan them on both condo and co-op paths.</div>
+          </div>
+          <div class="sub-row">
+<div class="sub-copy phase-note"><strong>New-development premium</strong>Sponsor sales often shift transfer taxes toward the buyer. CONSIDER the all-in before the amenity floor, and stack against sponsor incentives in Tracks &amp; boosters.</div>
+          </div>
+          <div class="sub-row art-right">
+<div class="sub-copy"><p class="budget-note">
+              <strong>Budget shape:</strong> on a $2,000,000 resale condominium with a mortgage, plan roughly <strong>3-5%</strong> of price in closing costs on top of the deposit. On a sponsor new-development, often more (commonly discussed in a <strong>5-6%</strong> band once transfer taxes lean your way). Net the sponsor’s advertised credits and rate buydowns against that band (see <a href="#tracks-boosters">Tracks &amp; boosters</a>). Price is what you pay; value is what still fits after the fees.
+            </p></div>
+          </div>
+        </div>
+      </section>
+
+            <section class="section" id="carry">
+        <div class="wrap">
+
+        <div class="sec-split art-left">
+          <figure class="sec-art reveal-left">
+            <div class="sec-art-frame">
+              <picture>
+                <source type="image/webp" srcset="assets/how-to-buy-in-nyc/paint/paint-carry-rk.webp" />
+                <img src="assets/how-to-buy-in-nyc/paint/paint-carry-rk.jpg" alt="Keys and monthly carry, signed R. Kammer" width="1280" height="720" />
+              </picture>
+            </div>
+            <figcaption class="g-label">Keys & monthly carry</figcaption>
+          </figure>
+          <div class="sec-intro reveal-right">
+            <p class="kicker">After the keys</p>
+            <h2>What you carry once you own</h2>
+            <p class="lede">Day-one costs get you to closing. Carry decides whether the home still fits six months later. Ask for the monthly number before you lock the offer. Belonging has a monthly price.</p>
+          </div>
+        </div>
+
+        
+          <div class="sub-row">
+<article class="sub-copy">
+              <strong style="display:block;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px">Co-op maintenance</strong>
+              <p>Maintenance usually wraps building ops and the shareholder’s share of the underlying mortgage and taxes into one line. Compare buildings on all-in monthly cost, not just share price.</p>
+            </article>
+          </div>
+          <div class="sub-row art-right">
+<article class="sub-copy">
+              <strong style="display:block;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px">House / townhouse: taxes &amp; systems</strong>
+              <p>You own the envelope. Property taxes, insurance, and every boiler, roof, and sidewalk repair sit with you. An inspection is how you price carry, not optional theater.</p>
+            </article>
+          </div>
+          <p class="budget-note"><strong>Condo common charges</strong> (banner): monthly common charges cover operations, reserves, and shared services; taxes are billed separately. Read the budget and minutes for special assessments already in motion.</p>
+        </div>
+      </section>
+
+            <section class="section" id="stalls">
+        <div class="wrap">
+
+        <div class="sec-split art-right">
+          <figure class="sec-art reveal-right">
+            <div class="sec-art-frame">
+              <picture>
+                <source type="image/webp" srcset="assets/how-to-buy-in-nyc/paint/paint-stalls-rk.webp" />
+                <img src="assets/how-to-buy-in-nyc/paint/paint-stalls-rk.jpg" alt="Where deals stall, signed R. Kammer" width="1280" height="720" />
+              </picture>
+            </div>
+            <figcaption class="g-label">Where deals stall</figcaption>
+          </figure>
+          <div class="sec-intro reveal-left">
+            <p class="kicker">Friction</p>
+            <h2>Where deals stall</h2>
+            <p class="lede">Most NYC files do not die on the floor plan. They die on funds, boards, and paper that arrives late from abroad. The lobby is rarely the problem.</p>
+          </div>
+        </div>
+
+        
+          <div class="sub-row">
+<article class="stall sub-copy">
+              <div class="stall-head"><h3>Co-op board</h3><span class="stamp pass">PASS risk</span></div>
+              <p>A board can decline without giving a reason. Thin packages (light U.S. income history, thin references, or assets that do not read clearly on the application) raise PASS risk after the deposit is already committed. Build the package with counsel before you romanticize the lobby.</p>
+            </article>
+          </div>
+          <div class="sub-row art-right">
+<article class="stall sub-copy">
+              <div class="stall-head"><h3>Signing from abroad / POA</h3><span class="stamp consider">CONSIDER</span></div>
+              <p>Contracts can be signed remotely, but a power of attorney must be drafted, notarized, and often apostilled in your country. That is measured in weeks, not days. Start it early, or CONSIDER delaying the offer until the POA path is real.</p>
+            </article>
+          </div>
+          <div class="sub-row">
+<article class="stall sub-copy">
+              <div class="stall-head"><h3>How you hold title</h3><span class="stamp pick">PICK early</span></div>
+              <p>Personally, through a U.S. LLC, or another structure changes income tax, estate exposure, and what happens on sale. PICK the form with counsel and your CPA before contract. Restructuring after is expensive theater.</p>
+            </article>
+          </div>
+          <article class="stall" style="margin-top:14px">
+            <div class="stall-head"><h3>Source of funds</h3><span class="stamp wait">WAIT</span></div>
+            <p>Money that appears from an account nobody has documented stops the file at the bank, the title company, or both. Show where the funds sit and how they got there at the start, not when the wire is due. <em>Decision stamp: incomplete trail = WAIT until the paper is clean.</em> (Banner art.)</p>
           </article>
         </div>
       </section>
 
-      <section class="plate-1031" id="exchange">
-        <p class="kicker">Optional overlay</p>
-        <h2>1031 in one quiet plate</h2>
-        <p class="lede" style="max-width:58ch">If this purchase is funded by selling investment property, the exchange sits on top of the same twelve steps. It does not invent a new building type.</p>
-        <div class="clocks">
-          <div class="clock">
-            <div class="t">Qualified intermediary</div>
-            <div class="n">QI</div>
-            <p style="margin-top:6px;font-size:0.88rem">Proceeds never touch your hands. Engage the QI before the sale closes.</p>
-          </div>
-          <div class="clock">
-            <div class="t">Identify</div>
-            <div class="n">45 days</div>
-            <p style="margin-top:6px;font-size:0.88rem">From sale closing — name replacement property under the exchange rules.</p>
-          </div>
-          <div class="clock">
-            <div class="t">Close the buy</div>
-            <div class="n">180 days</div>
-            <p style="margin-top:6px;font-size:0.88rem">Complete the purchase inside the statutory window, or the deferral fails.</p>
+            <section class="section plate-1031" id="exchange">
+        <div class="wrap">
+
+        <div class="sec-split art-left">
+          <figure class="sec-art reveal-left">
+            <div class="sec-art-frame">
+              <picture>
+                <source type="image/webp" srcset="assets/how-to-buy-in-nyc/paint/paint-1031-rk.webp" />
+                <img src="assets/how-to-buy-in-nyc/paint/paint-1031-rk.jpg" alt="1031 overlay, signed R. Kammer" width="1280" height="720" />
+              </picture>
+            </div>
+            <figcaption class="g-label">1031 overlay</figcaption>
+          </figure>
+          <div class="sec-intro reveal-right">
+            <p class="kicker">Optional overlay</p>
+            <h2>1031 in one quiet plate</h2>
+            <p class="lede">If this purchase is funded by selling investment property, the exchange sits on top of the same twelve steps. It does not invent a new building type.</p>
           </div>
         </div>
-        <p style="margin-top:16px;font-size:0.88rem;color:rgba(245,242,235,0.7);max-width:58ch">
-          Overlay on sell → buy only. Tax treatment depends on your facts — confirm with a CPA who lives in 1031 work. Educational only.
-        </p>
-      </section>
 
-
-      <section class="panel" id="tracks-boosters">
-        <p class="kicker">After the straight path</p>
-        <h2>Tracks &amp; boosters</h2>
-        <p class="lede">Things to ask after the straight path — not a second tutorial.</p>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Track</th>
-                <th>What it is</th>
-                <th>Timeline</th>
-                <th>Cost / rate effect</th>
-                <th>Ask</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Cash</strong></td>
-                <td>Skip loan + appraisal wait</td>
-                <td>Fastest</td>
-                <td>No MRT on loan; opportunity cost</td>
-                <td>Proof of funds early?</td>
-              </tr>
-              <tr>
-                <td><strong>High down / strong file</strong></td>
-                <td>Cleaner underwriting</td>
-                <td>Faster loan path</td>
-                <td>Sometimes better pricing</td>
-                <td>Can we lock early?</td>
-              </tr>
-              <tr>
-                <td><strong>Buyer-ordered appraisal</strong></td>
-                <td>Parallel diligence</td>
-                <td>Shaves days if lender accepts</td>
-                <td>Appraisal fee now</td>
-                <td>Will your lender use it?</td>
-              </tr>
-              <tr>
-                <td><strong>Co-op vs condo path</strong></td>
-                <td>Board gate or not</td>
-                <td>Co-op adds weeks</td>
-                <td>Package risk</td>
-                <td>Board appetite for this file?</td>
-              </tr>
-              <tr>
-                <td><strong>Sponsor / new-dev incentives</strong></td>
-                <td>Credits, transfer-tax shifts, rate buydowns, free common-charge months, parking</td>
-                <td>Day-one; sometimes timeline</td>
-                <td>Day-one cost &amp; sometimes timeline</td>
-                <td>What does the incentive really cost vs Living Fit? (read offering plan amendments)</td>
-              </tr>
-              <tr>
-                <td><strong>1031 overlay</strong></td>
-                <td>Swap clock on top</td>
-                <td>45/180 bound</td>
-                <td>QI + tax structure</td>
-                <td>QI engaged before close?</td>
-              </tr>
-              <tr>
-                <td><strong>Mortgage assumption</strong></td>
-                <td>Take seller’s rate/loan</td>
-                <td>Niche; lender + due-on-sale</td>
-                <td>Can cut APR vs new money</td>
-                <td>Is the loan assumable? Who qualifies?</td>
-              </tr>
-              <tr>
-                <td><strong>Creative / leverage</strong></td>
-                <td>Seller financing, wrap, JV, etc.</td>
-                <td>Deal-dependent</td>
-                <td>Structure drives APR &amp; risk</td>
-                <td>What’s documented vs handshake?</td>
-              </tr>
-            </tbody>
-            <caption>
-              Comparison only — not a second how-to. Confirm structure, tax, and lender rules with counsel and a CPA. Educational guidance, not a quote or offer.
-            </caption>
-          </table>
+        
+          <div class="sub-row">
+<div class="clock sub-copy">
+              <div class="t">Identify</div>
+              <div class="n">45 days</div>
+              <p>From sale closing, name replacement property under the exchange rules.</p>
+            </div>
+          </div>
+          <div class="sub-row art-right">
+<div class="clock sub-copy">
+              <div class="t">Close the buy</div>
+              <div class="n">180 days</div>
+              <p>Complete the purchase inside the statutory window, or the deferral fails.</p>
+            </div>
+          </div>
+          <p style="margin-top:18px;font-size:0.88rem;color:rgba(245,242,235,0.55);max-width:58ch">
+            QI (banner): proceeds never touch your hands. Engage the QI before the sale closes. Overlay on sell → buy only. Tax treatment depends on your facts; confirm with a CPA who lives in 1031 work. Educational only.
+          </p>
         </div>
       </section>
 
-      <section class="panel faq" id="faq">
-        <p class="kicker">Short answers</p>
-        <h2>FAQ</h2>
-        <details>
-          <summary>Can a non-resident buy U.S. property?</summary>
-          <p>Yes. There is no citizenship or residency requirement to own real property in the United States, and owning it does not confer a visa.</p>
-        </details>
-        <details>
-          <summary>Do I need to be in New York to close?</summary>
-          <p>No. Closings are routinely completed by power of attorney. Remote notarization is available in some circumstances. The POA must be prepared well in advance.</p>
-        </details>
-        <details>
-          <summary>How large a deposit is normal?</summary>
-          <p>Ten percent of the price at contract, held in the seller attorney’s escrow until closing. It is at risk if you walk away outside the contract’s contingencies.</p>
-        </details>
-        <details>
-          <summary>Is an inspection usual in New York?</summary>
-          <p>Less common for apartments than elsewhere in the U.S., because many building systems are the building’s responsibility. For a house or townhouse it is essential. For a large apartment it is still often worth doing.</p>
-        </details>
+            <section class="section" id="tracks-boosters">
+        <div class="wrap">
+
+        <div class="sec-split art-right">
+          <figure class="sec-art reveal-right">
+            <div class="sec-art-frame">
+              <picture>
+                <source type="image/webp" srcset="assets/how-to-buy-in-nyc/paint/paint-tracks-rk.webp" />
+                <img src="assets/how-to-buy-in-nyc/paint/paint-tracks-rk.jpg" alt="Tracks and boosters, signed R. Kammer" width="1280" height="720" />
+              </picture>
+            </div>
+            <figcaption class="g-label">Tracks & boosters</figcaption>
+          </figure>
+          <div class="sec-intro reveal-left">
+            <p class="kicker">After the straight path</p>
+            <h2>Tracks &amp; boosters</h2>
+            <p class="lede">Questions worth asking after the straight path. Not a second tutorial.</p>
+          </div>
+        </div>
+
+        
+          <div class="sub-row">
+<div class="sub-copy phase-note"><strong>Co-op vs condo</strong>Board gate or not. Co-op adds weeks and package risk. Ask: board appetite for this file?</div>
+          </div>
+          <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Track</th><th>What it is</th><th>Timeline</th><th>Cost / rate effect</th><th>Ask</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong style="color:var(--ivory)">Cash</strong></td><td>Skip loan + appraisal wait</td><td>Fastest</td><td>No MRT on loan; opportunity cost</td><td>Proof of funds early?</td></tr>
+                  <tr><td><strong style="color:var(--ivory)">High down / strong file</strong></td><td>Cleaner underwriting</td><td>Faster loan path</td><td>Sometimes better pricing</td><td>Can we lock early?</td></tr>
+                  <tr><td><strong style="color:var(--ivory)">Buyer-ordered appraisal</strong></td><td>Parallel diligence</td><td>Shaves days if lender accepts</td><td>Appraisal fee now</td><td>Will your lender use it?</td></tr>
+                  <tr><td><strong style="color:var(--ivory)">Co-op vs condo path</strong></td><td>Board gate or not</td><td>Co-op adds weeks</td><td>Package risk</td><td>Board appetite for this file?</td></tr>
+                  <tr><td><strong style="color:var(--ivory)">Sponsor / new-dev incentives</strong></td><td>Credits, transfer-tax shifts, rate buydowns, free common-charge months, parking</td><td>Day-one; sometimes timeline</td><td>Day-one cost &amp; sometimes timeline</td><td>What does the incentive really cost vs Living Fit? (read offering plan amendments)</td></tr>
+                  <tr><td><strong style="color:var(--ivory)">1031 overlay</strong></td><td>Swap clock on top</td><td>45/180 bound</td><td>QI + tax structure</td><td>QI engaged before close?</td></tr>
+                  <tr><td><strong style="color:var(--ivory)">Mortgage assumption</strong></td><td>Take seller’s rate/loan</td><td>Niche; lender + due-on-sale</td><td>Can cut APR vs new money</td><td>Is the loan assumable? Who qualifies?</td></tr>
+                  <tr><td><strong style="color:var(--ivory)">Creative / leverage</strong></td><td>Seller financing, wrap, JV, etc.</td><td>Deal-dependent</td><td>Structure drives APR &amp; risk</td><td>What’s documented vs handshake?</td></tr>
+                </tbody>
+                <caption>Comparison only, not a second how-to. Confirm structure, tax, and lender rules with counsel and a CPA. Educational guidance, not a quote or offer.</caption>
+              </table>
+            </div>
+          <div class="sub-row art-right">
+<div class="sub-copy phase-note"><strong>Sponsor / new-dev</strong>Credits, transfer-tax shifts, rate buydowns, free common-charge months, parking. What does the incentive really cost vs Living Fit?</div>
+          </div>
+          <div class="sub-row">
+<div class="sub-copy phase-note"><strong>1031 overlay</strong>Swap clock on top (45/180 bound). QI engaged before close?</div>
+          </div>
+          <div class="sub-row art-right">
+<div class="sub-copy phase-note"><strong>Assumption &amp; creative</strong>Take the seller’s rate when assumable; seller financing / wrap / JV only when documented. Handshake theater does not close.</div>
+          </div>
+        </div>
       </section>
 
-      <section class="panel" id="coming-next">
-        <p class="kicker">Coming next</p>
-        <h2>Owning a landmark</h2>
-        <p class="lede">Fabric rules vs co-op board — Stahl House / Palm Springs teaching lane. Outline only for now; the full landmark article lives elsewhere.</p>
+            <section class="section faq" id="faq">
+        <div class="wrap">
+
+        <div class="sec-split art-left">
+          <figure class="sec-art reveal-left">
+            <div class="sec-art-frame">
+              <picture>
+                <source type="image/webp" srcset="assets/how-to-buy-in-nyc/paint/paint-faq-rk.webp" />
+                <img src="assets/how-to-buy-in-nyc/paint/paint-faq-rk.jpg" alt="FAQ, signed R. Kammer" width="1280" height="720" />
+              </picture>
+            </div>
+            <figcaption class="g-label">FAQ</figcaption>
+          </figure>
+          <div class="sec-intro reveal-right">
+            <p class="kicker">Short answers</p>
+            <h2>FAQ</h2>
+            <p class="lede">Non-residents can buy (ownership does not confer a visa). Below: presence at closing, deposits, and inspections.</p>
+          </div>
+        </div>
+
+        
+          <div class="sub-row faq-row">
+<details class="sub-copy" open>
+              <summary>Do I need to be in New York to close?</summary>
+              <p>No. Closings are routinely completed by power of attorney. Remote notarization is available in some circumstances. The POA must be prepared well in advance.</p>
+            </details>
+          </div>
+          <div class="sub-row faq-row art-right">
+<details class="sub-copy">
+              <summary>How large a deposit is normal?</summary>
+              <p>Ten percent of the price at contract, held in the seller attorney’s escrow until closing. It is at risk if you walk away outside the contract’s contingencies.</p>
+            </details>
+          </div>
+          <div class="sub-row faq-row">
+<details class="sub-copy">
+              <summary>Is an inspection usual in New York?</summary>
+              <p>Less common for apartments than elsewhere in the U.S., because many building systems are the building’s responsibility. For a house or townhouse it is essential. For a large apartment it is still often worth doing.</p>
+            </details>
+          </div>
+          <details>
+            <summary>Can a non-resident buy U.S. property?</summary>
+            <p>Yes. There is no citizenship or residency requirement to own real property in the United States, and owning it does not confer a visa. (Banner art.)</p>
+          </details>
+        </div>
       </section>
 
-    </div>
+            <section class="section" id="coming-next">
+        <div class="wrap">
+
+        <div class="sec-split art-right">
+          <figure class="sec-art reveal-right">
+            <div class="sec-art-frame">
+              <picture>
+                <source type="image/webp" srcset="assets/how-to-buy-in-nyc/paint/paint-coming-next-rk.webp" />
+                <img src="assets/how-to-buy-in-nyc/paint/paint-coming-next-rk.jpg" alt="Coming next, signed R. Kammer" width="1280" height="720" />
+              </picture>
+            </div>
+            <figcaption class="g-label">Coming next</figcaption>
+          </figure>
+          <div class="sec-intro reveal-left">
+            <p class="kicker">Coming next</p>
+            <h2>Owning a landmark</h2>
+            <p class="lede">Fabric rules versus co-op board. Stahl House / Palm Springs teaching lane. Outline only for now; the full landmark article lives elsewhere.</p>
+          </div>
+        </div>
+
+        
+          <div class="sub-row">
+<div class="sub-copy phase-note"><strong>More elsewhere</strong>This page stops at the doorway. The full landmark article (fabric rules, board tension, and the teaching lane) lives in a separate guide.</div>
+          </div>
+        </div>
+      </section>
   </main>
 
-  <footer>
+    <section class="action-bar" aria-label="Guide actions">
     <div class="wrap">
-      <div class="foot-script">Live where you belong</div>
+      <div class="action-bar-inner">
+        <button type="button" class="ab-btn" id="ab-print" title="Save as PDF">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V3h10v5"/><path d="M7 17H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="7" y="13" width="10" height="8" rx="1"/></svg>
+          <span>Save as PDF</span>
+        </button>
+        <button type="button" class="ab-btn" id="ab-share" title="Share this guide">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 11.1 15.8 6.4M8.2 12.9l7.6 4.7"/></svg>
+          <span>Share</span>
+        </button>
+        <div class="ab-field-wrap" title="Email this guide to yourself">
+          <input type="email" id="ab-email-me" placeholder="Email to myself" autocomplete="email" aria-label="Email to myself" />
+          <button type="button" id="ab-email-me-btn">Send</button>
+        </div>
+        <a class="ab-btn" id="ab-email-other" href="#">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m4 7 8 6 8-6"/></svg>
+          <span>Email to someone</span>
+        </a>
+        <button type="button" class="ab-btn" id="ab-bookmark" title="Bookmark this guide">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10a1 1 0 0 1 1 1v15l-6-3.5L6 20V5a1 1 0 0 1 1-1z"/></svg>
+          <span id="ab-bookmark-label">Bookmark</span>
+        </button>
+      </div>
+    </div>
+  </section>
+  <div class="ab-toast" id="ab-toast" role="status" aria-live="polite"></div>
+
+<footer>
+    <div class="wrap">
+      <div class="foot-script">Live where you belong.</div>
       <p class="foot-legal">
-        <strong>Educational only</strong> — not legal, tax, or investment advice. The figures and timelines on this page are general guidance (August 2026-style ranges) and do not represent an offer, a quote, or a guarantee of any transaction terms. Confirm anything material with a New York attorney and a CPA before you act.
+        <strong>Educational only</strong>, not legal, tax, or investment advice. The figures and timelines on this page are general guidance (August 2026-style ranges) and do not represent an offer, a quote, or a guarantee of any transaction terms. Confirm anything material with a New York attorney and a CPA before you act.
         <br /><br />
         <a href="https://www.agentkammer.com/buyer-advisory">Back to Buyer Advisory</a>
         · <a href="https://www.agentkammer.com/">agentkammer.com</a>
       </p>
+      <p class="foot-credits">
+        Hero photograph: Daniel Lawrence Lu (Dllu), Empire State Building from Rockefeller Center.
+        <a href="https://commons.wikimedia.org/wiki/File:View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu.jpg">Wikimedia Commons</a>,
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+        Section charcoal art: original architectural linework for Agent Kammer.
+        Full credits: <a href="assets/how-to-buy-in-nyc/CREDITS.md">CREDITS.md</a>.
+      </p>
     </div>
   </footer>
+  </div>
+
+  
+  <script>
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Progress bar */
+    var fill = document.getElementById('read-progress-fill');
+    var ticks = document.getElementById('read-progress-ticks');
+    var sections = Array.prototype.slice.call(document.querySelectorAll('main .section[id]'));
+    if (ticks && sections.length) {
+      sections.forEach(function (sec) {
+        var s = document.createElement('span');
+        ticks.appendChild(s);
+      });
+    }
+    function updateProgress() {
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - doc.clientHeight;
+      var p = max > 0 ? (window.scrollY / max) * 100 : 0;
+      if (fill) fill.style.height = Math.min(100, Math.max(0, p)) + '%';
+      if (ticks) {
+        var spans = ticks.children;
+        sections.forEach(function (sec, i) {
+          var top = sec.getBoundingClientRect().top + window.scrollY;
+          var pct = max > 0 ? (top / (doc.scrollHeight)) * 100 : 0;
+          if (spans[i]) spans[i].style.top = pct + '%';
+        });
+      }
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+
+    /* Reveal */
+    document.documentElement.classList.add('js-reveal');
+    setTimeout(function(){ document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(n){ var r=n.getBoundingClientRect(); if (r.top < innerHeight) n.classList.add('is-in'); }); }, 900);
+    var nodes = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    if (reduce) {
+      nodes.forEach(function (n) { n.classList.add('is-in'); });
+    } else if (nodes.length && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+      nodes.forEach(function (n) { io.observe(n); });
+    }
+
+    /* Action bar */
+    function toast(msg) {
+      var t = document.getElementById('ab-toast');
+      if (!t) return;
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(function () { t.classList.remove('show'); }, 3200);
+    }
+    var printBtn = document.getElementById('ab-print');
+    if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
+
+    var shareBtn = document.getElementById('ab-share');
+    if (shareBtn) shareBtn.addEventListener('click', function () {
+      var data = { title: document.title, url: location.href, text: document.querySelector('.hero-dek') && document.querySelector('.hero-dek').textContent || '' };
+      if (navigator.share) {
+        navigator.share(data).catch(function () {});
+      } else if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(location.href).then(function () { toast('Link copied'); });
+      } else {
+        toast('Copy this URL from the address bar');
+      }
+    });
+
+    var emailOther = document.getElementById('ab-email-other');
+    if (emailOther) {
+      var sub = encodeURIComponent(document.title);
+      var body = encodeURIComponent('Thought you might find this useful:
+
+' + document.title + '
+' + location.href);
+      emailOther.href = 'mailto:?subject=' + sub + '&body=' + body;
+    }
+
+    var emailMeBtn = document.getElementById('ab-email-me-btn');
+    if (emailMeBtn) emailMeBtn.addEventListener('click', function () {
+      var v = ((document.getElementById('ab-email-me') || {}).value || '').trim();
+      if (!v || v.indexOf('@') < 0) { toast('Enter an email'); return; }
+      var sub = encodeURIComponent(document.title);
+      var body = encodeURIComponent('Save this field guide:\n\n' + document.title + '\n' + location.href);
+      window.location.href = 'mailto:' + encodeURIComponent(v) + '?subject=' + sub + '&body=' + body;
+    });
+
+    var bmKey = 'ak-guide-saved:' + location.pathname;
+    var bmBtn = document.getElementById('ab-bookmark');
+    var bmLabel = document.getElementById('ab-bookmark-label');
+    function syncBm() {
+      var on = localStorage.getItem(bmKey) === '1';
+      if (bmBtn) bmBtn.classList.toggle('is-saved', on);
+      if (bmLabel) bmLabel.textContent = on ? 'Saved' : 'Bookmark';
+    }
+    syncBm();
+    if (bmBtn) bmBtn.addEventListener('click', function () {
+      var on = localStorage.getItem(bmKey) === '1';
+      if (on) localStorage.removeItem(bmKey); else localStorage.setItem(bmKey, '1');
+      syncBm();
+      var mac = /Mac|iPhone|iPad|iPod/.test(navigator.platform || '') || (navigator.userAgent || '').indexOf('Mac') >= 0;
+      var tip = mac
+        ? 'Press Cmd+D to bookmark, or save this page to your home screen.'
+        : 'Press Ctrl+D to bookmark, or save this page to your home screen.';
+      toast(tip);
+    });
+  })();
+  </script>
+
 </body>
 </html>
