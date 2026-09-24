@@ -21,7 +21,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -40,8 +40,8 @@
       --success: #2F6B4F;
       --warn: #8A6A2F;
       --error: #B42318;
-      --display: "Cormorant Garamond", "Times New Roman", serif;
-      --ui: Inter, "Segoe UI", system-ui, sans-serif;
+      --display: "Playfair Display", Georgia, serif;
+      --ui: Montserrat, "Segoe UI", system-ui, sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -62,23 +62,32 @@
       padding: 22px 0 36px;
       border-bottom: 1px solid rgba(176, 141, 87, 0.38);
     }
-    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
-    .brand img { width: 44px; height: 44px; border: 1px solid rgba(228, 212, 176, 0.28); }
+    .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+    .brand img {
+      width: 44px;
+      height: auto;
+      display: block;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
     .brand-name {
-      font-family: var(--display);
-      font-size: 1.35rem;
+      font-family: var(--ui);
+      font-size: 0.78rem;
       font-weight: 600;
-      letter-spacing: 0.02em;
-      line-height: 1;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      line-height: 1.15;
+      color: var(--ivory);
     }
     .brand-line {
       display: block;
-      margin-top: 5px;
+      margin-top: 6px;
       font-size: 9px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--brass);
-      font-weight: 600;
+      font-weight: 500;
     }
     .mast-kicker {
       margin: 28px 0 10px;
@@ -386,7 +395,7 @@
   <header class="mast">
     <div class="wrap">
       <a class="brand" href="https://www.agentkammer.com/">
-        <img src="/brand/ak-monogram-ivory.png" alt="Agent Kammer monogram" width="44" height="44" />
+        <img src="/brand/ak-monogram-ivory-free.png" alt="Agent Kammer monogram" width="44" height="44" />
         <span>
           <span class="brand-name">Agent Kammer</span>
           <span class="brand-line">Live Where You Belong.</span>
