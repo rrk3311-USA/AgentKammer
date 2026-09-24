@@ -792,7 +792,38 @@
 
     .callouts { display: grid; gap: 12px; margin: 18px 0; }
     .callout { border-left: 2px solid var(--brass); padding: 10px 0 10px 16px; font-size: 1.05rem; color: var(--ivory-mute); }
-    .callout strong { color: var(--ivory); }
+    .callout-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 11px;
+      font-family: var(--ui);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-variant: small-caps;
+      color: #B08D57;
+      line-height: 1.2;
+    }
+    .callout-mark,
+    .play-mark {
+      display: block;
+      width: 17px;
+      height: 17px;
+      flex: 0 0 17px;
+      max-width: none;
+      overflow: visible;
+      color: #B08D57;
+    }
+    .play-mark,
+    .play-mark *,
+    .callout-mark,
+    .callout-mark * {
+      fill: none;
+      stroke: #B08D57;
+    }
+    .callout-body { margin: 0; color: var(--ivory-mute); }
     .budget-note, .phase-note { font-size: 1.05rem; color: var(--ivory-mute); max-width: 62ch; }
     .phase-note strong {
       display: block; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
@@ -918,7 +949,7 @@
       .hero h1, h2, h3, .kicker, p, td, th, .lede, .phase-note, .budget-note, li, summary {
         color: #20242B !important;
       }
-      .kicker, .brand-line, .foot-script, th, .stamp, .tag { color: #8A6E3E !important; }
+      .kicker, .brand-line, .foot-script, th, .stamp, .tag, .callout-label { color: #8A6E3E !important; }
       .section { page-break-before: always; border: none; padding-top: 12pt; }
       .section:first-of-type { page-break-before: avoid; }
       .sec-art-frame { box-shadow: none; border: 1px solid #ccc; background: #1a2230 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -1127,7 +1158,10 @@
               </table>
             </div>
             <div class="callouts" aria-label="Timeline callouts">
-              <div class="callout"><strong>Cash condo</strong>About 6-10 weeks from accepted offer to closing when the file is clean.</div>
+              <div class="callout">
+                <p class="callout-label"><span>Cash condo</span></p>
+                <p class="callout-body">About 6-10 weeks from accepted offer to closing when the file is clean.</p>
+              </div>
           <div class="sub-row">
 <div class="sub-copy phase-note"><strong>Steps 8-9</strong>Loan application and appraisal (skipped on cash), then board application on co-ops: financials, references, interview.</div>
           </div>
