@@ -99,6 +99,14 @@ export const publicGuides: GuideEntry[] = [
     kind: "html",
   },
   {
+    title: "How wealth is held",
+    description:
+      "Holding companies, family offices, trusts, and LLCs, and where Manhattan property fits in the stack.",
+    href: "/guides/how-wealth-is-held.html",
+    audience: "public",
+    kind: "html",
+  },
+  {
     title: "International Buyer Hub Guide",
     description:
       "How the multilingual Manhattan buyer funnel is structured for decision-first inbound.",
