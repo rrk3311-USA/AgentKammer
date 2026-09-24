@@ -191,5 +191,10 @@ describe("public menu lock", () => {
       "Neighborhoods",
       "Property Assessment",
     ]);
+    expect(guides?.items).toEqual(
+      expect.arrayContaining([
+        { label: "How to buy in NYC", href: "/guides/how-to-buy-in-nyc.html" },
+      ]),
+    );
   });
 });
