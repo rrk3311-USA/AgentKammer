@@ -21,7 +21,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -41,7 +41,6 @@
       --warn: #8A6A2F;
       --error: #B42318;
       --display: "Cormorant Garamond", "Times New Roman", serif;
-      --script: Allura, cursive;
       --ui: Inter, "Segoe UI", system-ui, sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -81,37 +80,29 @@
       color: var(--brass);
       font-weight: 600;
     }
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 18px; }
-    .chip {
-      border: 1px solid rgba(216, 209, 199, 0.35);
-      color: var(--gold);
+    .mast-kicker {
+      margin: 28px 0 10px;
       font-size: 10px;
       font-weight: 600;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      padding: 7px 11px;
-    }
-    .script-accent {
-      font-family: var(--script);
-      font-size: 1.55rem;
-      color: var(--gold);
-      line-height: 1;
-      margin-bottom: 4px;
+      color: var(--brass);
     }
     .mast h1 {
       font-family: var(--display);
       font-weight: 500;
-      font-size: clamp(2.05rem, 7.2vw, 3.35rem);
-      letter-spacing: -0.03em;
-      line-height: 0.96;
-      max-width: 14ch;
+      font-size: clamp(2.15rem, 6.5vw, 3.1rem);
+      letter-spacing: -0.025em;
+      line-height: 1.02;
+      max-width: 16ch;
+      color: var(--ivory);
     }
-    .mast h1 em { font-style: italic; font-weight: 500; color: var(--gold); }
     .dek {
       margin-top: 14px;
-      max-width: 48ch;
+      max-width: 46ch;
       color: rgba(245, 242, 235, 0.78);
       font-size: 0.98rem;
+      line-height: 1.55;
     }
     main { padding: 28px 0 20px; }
     section { margin: 0 0 28px; }
@@ -356,7 +347,7 @@
       padding: 28px 0 36px;
       border-top: 1px solid rgba(176, 141, 87, 0.28);
     }
-    .foot-script { font-family: var(--script); font-size: 1.55rem; color: var(--gold); line-height: 1; }
+    .foot-script { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass); line-height: 1.3; }
     .foot-legal {
       margin-top: 12px;
       font-size: 12px;
@@ -381,7 +372,7 @@
     @media print {
       body { background: #fff; }
       .mast { background: #fff; color: var(--navy); border-bottom: 1px solid var(--brass); }
-      .script-accent, .chip { color: var(--cocoa); }
+      .mast-kicker { color: var(--cocoa); }
       .dek { color: var(--charcoal); }
       .path.overlay, .callout, .plate-1031, footer {
         background: #fff; color: var(--navy); border: 1px solid var(--stone);
@@ -401,13 +392,8 @@
           <span class="brand-line">Live Where You Belong.</span>
         </span>
       </a>
-      <div class="chips" aria-label="Topics">
-        <span class="chip">Buyers</span>
-        <span class="chip">NYC process</span>
-        <span class="chip">Field guide</span>
-      </div>
-      <p class="script-accent">Field guide</p>
-      <h1>How to buy <em>in NYC</em></h1>
+      <p class="mast-kicker">Field guide</p>
+      <h1>How to buy in NYC</h1>
       <p class="dek">New York runs on attorneys, not escrow theater. Choose the path, know the twelve steps, budget day-one and carry, then decide where you will not stall.</p>
     </div>
   </header>
