@@ -1,0 +1,197 @@
+{
+  "guides": [
+    {
+      "title": "How Real Estate Ownership Works",
+      "url": "/guides/real-estate-ownership",
+      "description": "Entities, estates, NYC condo/co-op/house, title holding, and how ownership rights fit together.",
+      "category": "Ownership",
+      "tags": [
+        "ownership",
+        "entities",
+        "estates",
+        "title",
+        "condo",
+        "co-op",
+        "house",
+        "nyc"
+      ]
+    },
+    {
+      "title": "Condo vs Co-op",
+      "url": "/situations/condo-vs-coop",
+      "description": "What you own, what you pay, and what to check in the building before an offer.",
+      "category": "Building types",
+      "tags": [
+        "condo",
+        "co-op",
+        "coop",
+        "board",
+        "common charges",
+        "maintenance",
+        "offer"
+      ]
+    },
+    {
+      "title": "Co-op, Condo & Condop Terms",
+      "url": "/situations/coop-condo-condop-terms",
+      "description": "Where board packages, maintenance, bylaws, and offering plans actually apply.",
+      "category": "Building types",
+      "tags": [
+        "co-op",
+        "coop",
+        "condo",
+        "condop",
+        "board package",
+        "bylaws",
+        "offering plan",
+        "maintenance"
+      ]
+    },
+    {
+      "title": "How Real Estate Deeds Work",
+      "url": "/guides/real-estate-deeds",
+      "description": "Deed types, essential parts, delivery & recording, and New York transfer nuances.",
+      "category": "Deeds",
+      "tags": [
+        "deed",
+        "title",
+        "recording",
+        "transfer",
+        "new york",
+        "warranty",
+        "quitclaim"
+      ]
+    },
+    {
+      "title": "How Mortgages Work",
+      "url": "/guides/how-mortgages-work",
+      "description": "Mortgage family tree. 15 types in five groups, with links to fixed, ARM, and clauses.",
+      "category": "Mortgages",
+      "tags": [
+        "mortgage",
+        "loan",
+        "fixed",
+        "arm",
+        "clauses",
+        "financing"
+      ]
+    },
+    {
+      "title": "Fixed-Rate Mortgage",
+      "url": "/guides/fixed-rate-mortgage",
+      "description": "Same rate, same P&I. Terms, amortization, pros & cons, and when fixed wins.",
+      "category": "Mortgages",
+      "tags": [
+        "mortgage",
+        "fixed-rate",
+        "amortization",
+        "p&i",
+        "rate"
+      ]
+    },
+    {
+      "title": "ARM & Fixed vs ARM",
+      "url": "/guides/adjustable-rate-mortgage",
+      "description": "How ARMs adjust, caps, common 5/1 structures, and a Fixed vs ARM decision guide.",
+      "category": "Mortgages",
+      "tags": [
+        "arm",
+        "adjustable",
+        "caps",
+        "5/1",
+        "fixed vs arm",
+        "mortgage"
+      ]
+    },
+    {
+      "title": "Mortgage Clauses & Key Terms",
+      "url": "/guides/mortgage-clauses",
+      "description": "Acceleration, due-on-sale, defeasance, prepayment penalty, plus a quick glossary.",
+      "category": "Mortgages",
+      "tags": [
+        "acceleration",
+        "due-on-sale",
+        "defeasance",
+        "prepayment",
+        "glossary",
+        "clauses"
+      ]
+    },
+    {
+      "title": "Manhattan Explained",
+      "url": "/guides/manhattan-explained",
+      "description": "Neighborhood name origins. Dutch roots, forts, people & institutions, and street-map portmanteaus.",
+      "category": "Neighborhoods",
+      "tags": [
+        "manhattan",
+        "neighborhoods",
+        "nyc",
+        "streets",
+        "dutch",
+        "history"
+      ]
+    },
+    {
+      "title": "Liens, Easements & Related Concepts",
+      "url": "/guides/liens-easements",
+      "description": "Voluntary vs involuntary liens, easement types, easement vs license, lis pendens, and encumbrances.",
+      "category": "Encumbrances",
+      "tags": [
+        "lien",
+        "easement",
+        "license",
+        "lis pendens",
+        "encumbrance"
+      ]
+    },
+    {
+      "title": "How to buy in NYC",
+      "url": "/guides/how-to-buy-in-nyc.html",
+      "description": "Twelve attorney-driven steps, condo vs co-op costs, tracks & boosters (cash, sponsor incentives, 1031, assumption).",
+      "category": "Buying in New York",
+      "tags": [
+        "nyc",
+        "buy",
+        "closing costs",
+        "co-op",
+        "coop",
+        "condo",
+        "attorney",
+        "1031",
+        "sponsor",
+        "assumption",
+        "cash"
+      ]
+    },
+    {
+      "title": "How wealth is held",
+      "url": "/guides/how-wealth-is-held.html",
+      "description": "Holding companies, family offices, trusts, and LLCs, and where Manhattan property fits in the stack.",
+      "category": "Wealth",
+      "tags": [
+        "wealth",
+        "trust",
+        "llc",
+        "family office",
+        "holding company",
+        "title",
+        "manhattan",
+        "entities"
+      ]
+    },
+    {
+      "title": "International Buyer Hub Guide",
+      "url": "/guides/international-buyer-hub.html",
+      "description": "How the multilingual Manhattan buyer funnel is structured for decision-first inbound.",
+      "category": "International buyers",
+      "tags": [
+        "international",
+        "buyer",
+        "manhattan",
+        "multilingual",
+        "inbound",
+        "funnel"
+      ]
+    }
+  ]
+}
