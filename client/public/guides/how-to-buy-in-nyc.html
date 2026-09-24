@@ -34,7 +34,24 @@
       --ui: Montserrat, "Segoe UI", system-ui, sans-serif;
       --col: 1000px;
       --pad: clamp(18px, 4.2vw, 36px);
+
+      --page-top-buffer: 56px;
+      --mast-art-gap: 56px;
+      --mast-row: 84px;
+      --section-top-pad: 64px;
+      --scroll-clear: 88px;
     }
+
+    @media (max-width: 819px) {
+      :root {
+        --page-top-buffer: 36px;
+        --mast-art-gap: 36px;
+        --mast-row: 84px;
+        --section-top-pad: 40px;
+        --scroll-clear: 72px;
+      }
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -82,20 +99,143 @@
       min-height: 60vh;
     }
     .wrap { max-width: var(--col); margin: 0 auto; padding: 0 var(--pad); }
-
-    .topbar { position: absolute; top: 0; left: 0; right: 0; z-index: 5; padding: 18px 0; }
     .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ivory); }
     .brand img { width: 36px; height: auto; }
     .brand-name { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
     .brand-line { display: block; margin-top: 4px; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--brass); font-weight: 500; }
 
+    /* Top breathing room: buffer above mast, gap between mast and hero art */
+    .topbar {
+      position: absolute;
+      top: var(--page-top-buffer);
+      left: 0; right: 0;
+      z-index: 5;
+      padding: 14px 0;
+    }
     body > .hero {
       position: relative; width: 100%;
       min-height: min(86vh, 780px);
       display: flex; align-items: flex-end;
       color: var(--ivory); overflow: hidden;
+      background: #0E1218;
     }
-    .hero-media { position: absolute; inset: 0; background: var(--midnight); }
+    .hero-media {
+      position: absolute;
+      top: calc(var(--page-top-buffer) + var(--mast-row) + var(--mast-art-gap));
+      left: 0; right: 0; bottom: 0;
+      background: var(--midnight);
+    }
+    .hero-scrim {
+      position: absolute;
+      top: calc(var(--page-top-buffer) + var(--mast-row) + var(--mast-art-gap));
+      left: 0; right: 0; bottom: 0;
+      background:
+        linear-gradient(180deg, rgba(22,28,40,0.5) 0%, rgba(22,28,40,0.2) 32%, rgba(22,28,40,0.78) 72%, var(--deep) 100%),
+        linear-gradient(90deg, rgba(22,28,40,0.55) 0%, rgba(22,28,40,0.2) 60%, transparent 100%);
+    }
+
+    .secnav {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(22,28,40,0.94); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--brass-line);
+    }
+    .secnav-row {
+      display: flex; align-items: center; gap: 0;
+      padding: 10px 0; min-width: 0;
+    }
+    .secnav-home {
+      display: flex; align-items: center; gap: 4px;
+      flex: 0 0 auto;
+    }
+    .secnav-home a {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 10px; font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ivory-mute); text-decoration: none;
+      border: 1px solid transparent; white-space: nowrap;
+    }
+    .secnav-home a:hover { color: var(--ivory); border-color: var(--brass-line); }
+    .secnav-home-link img {
+      width: 20px; height: auto; display: block; flex: 0 0 auto;
+    }
+    .secnav-rule {
+      flex: 0 0 auto;
+      width: 1px; height: 22px;
+      background: var(--brass);
+      opacity: 0.45;
+      margin: 0 8px 0 4px;
+    }
+    .secnav-inner {
+      display: flex; gap: 2px; overflow-x: auto;
+      flex: 1 1 auto; min-width: 0;
+      padding: 0; scrollbar-width: none;
+    }
+    .secnav-inner::-webkit-scrollbar { display: none; }
+    .secnav-inner a {
+      flex: 0 0 auto; padding: 8px 12px; font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--ivory-mute);
+      text-decoration: none; border: 1px solid transparent; white-space: nowrap;
+    }
+    .secnav-inner a:hover { color: var(--ivory); border-color: var(--brass-line); }
+
+    main { padding: 8px 0 40px; }
+    .section {
+      padding: var(--section-top-pad) 0 clamp(36px, 5vw, 64px);
+      border-bottom: 1px solid rgba(176,141,87,0.16);
+      scroll-margin-top: var(--scroll-clear);
+    }
+
+    .keep-reading {
+      padding: clamp(40px, 6vw, 72px) 0 clamp(36px, 5vw, 56px);
+      border-bottom: 1px solid rgba(176,141,87,0.16);
+    }
+    .keep-reading h2 { margin-bottom: 22px; }
+    .kr-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 0 0 28px;
+    }
+    .kr-card {
+      display: flex; flex-direction: column; gap: 8px;
+      padding: 18px 16px;
+      border: 1px solid rgba(176,141,87,0.28);
+      background: rgba(42,52,71,0.35);
+      text-decoration: none;
+      color: var(--ivory-mute);
+      transition: border-color 0.15s ease, background 0.15s ease;
+      min-height: 7.5rem;
+    }
+    .kr-card:hover {
+      border-color: var(--brass);
+      background: rgba(42,52,71,0.55);
+      color: var(--ivory-mute);
+    }
+    .kr-title {
+      font-family: var(--display); font-weight: 600;
+      font-size: 1.2rem; line-height: 1.25; color: var(--ivory);
+    }
+    .kr-teaser {
+      font-size: 0.95rem; line-height: 1.5; color: var(--ivory-mute);
+    }
+    .kr-all { text-align: center; margin: 0; }
+    .kr-all-btn {
+      display: inline-block;
+      padding: 14px 28px;
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      text-decoration: none;
+      color: var(--deep);
+      background: var(--brass);
+      border: 1px solid var(--brass);
+    }
+    .kr-all-btn:hover { color: var(--ivory); background: transparent; }
+    @media (max-width: 819px) {
+      .kr-grid { grid-template-columns: 1fr; }
+      .secnav-home a { padding: 8px 8px; }
+      .secnav-rule { margin: 0 6px 0 2px; }
+    }
+
     .hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 38%; }
     .hero-scrim {
       position: absolute; inset: 0;
@@ -116,26 +256,6 @@
     }
     .hero-dek { margin-top: 18px; max-width: 36rem; font-size: clamp(1.05rem, 1.8vw, 1.2rem); color: var(--ivory-mute); }
     .hero-rule { width: 64px; height: 1px; background: var(--brass); margin: 26px 0 0; border: 0; }
-
-    .secnav {
-      position: sticky; top: 0; z-index: 20;
-      background: rgba(22,28,40,0.94); backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--brass-line);
-    }
-    .secnav-inner { display: flex; gap: 2px; overflow-x: auto; padding: 12px 0; scrollbar-width: none; }
-    .secnav-inner::-webkit-scrollbar { display: none; }
-    .secnav a {
-      flex: 0 0 auto; padding: 8px 12px; font-size: 0.62rem; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase; color: var(--ivory-mute);
-      text-decoration: none; border: 1px solid transparent; white-space: nowrap;
-    }
-    .secnav a:hover { color: var(--ivory); border-color: var(--brass-line); }
-
-    main { padding: 8px 0 40px; }
-    .section {
-      padding: clamp(36px, 5vw, 64px) 0;
-      border-bottom: 1px solid rgba(176,141,87,0.16);
-    }
     .kicker {
       font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
       color: var(--brass); margin: 0 0 10px;
@@ -419,7 +539,16 @@
   <div class="page-col">
   <nav class="secnav" aria-label="Section navigation">
     <div class="wrap">
-      <div class="secnav-inner">
+      <div class="secnav-row">
+        <div class="secnav-home">
+          <a class="secnav-home-link" href="/" title="Agent Kammer home">
+            <img src="assets/how-to-buy-in-nyc/ak-monogram-ivory-web.png" alt="" width="20" height="22" />
+            <span>Home</span>
+          </a>
+          <a class="secnav-guides-link" href="/guides">All guides</a>
+        </div>
+        <span class="secnav-rule" aria-hidden="true"></span>
+        <div class="secnav-inner">
         <a href="#before">Before</a>
         <a href="#paths">Paths</a>
         <a href="#twelve-steps">Twelve steps</a>
@@ -429,6 +558,7 @@
         <a href="#exchange">1031</a>
         <a href="#tracks-boosters">Tracks</a>
         <a href="#faq">FAQ</a>
+      </div>
       </div>
     </div>
   </nav>
@@ -889,7 +1019,29 @@
       </section>
   </main>
 
-    <section class="action-bar" aria-label="Guide actions">
+  <section class="keep-reading" aria-label="Keep reading">
+    <div class="wrap">
+      <p class="kicker">More field guides</p>
+      <h2>Keep reading</h2>
+      <div class="kr-grid">
+          <a class="kr-card" href="/guides/how-wealth-is-held.html">
+            <span class="kr-title">How wealth is held</span>
+            <span class="kr-teaser">Holding companies, family offices, and the containers that take title on a $5M+ purchase.</span>
+          </a>
+          <a class="kr-card" href="/guides/real-estate-ownership">
+            <span class="kr-title">How Real Estate Ownership Works</span>
+            <span class="kr-teaser">Entities, estates, and how title holding fits together when you buy in New York.</span>
+          </a>
+          <a class="kr-card" href="/situations/condo-vs-coop">
+            <span class="kr-title">Condo vs Co-op</span>
+            <span class="kr-teaser">What you own, what you pay, and what to check in the building before an offer.</span>
+          </a>
+      </div>
+      <p class="kr-all"><a class="kr-all-btn" href="/guides">Back to all guides</a></p>
+    </div>
+  </section>
+
+  <section class="action-bar" aria-label="Guide actions">
     <div class="wrap">
       <div class="action-bar-inner">
         <button type="button" class="ab-btn" id="ab-print" title="Save as PDF">
