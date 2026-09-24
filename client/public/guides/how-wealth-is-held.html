@@ -837,7 +837,39 @@
 
     .callouts { display: grid; gap: 12px; margin: 18px 0; }
     .callout { border-left: 2px solid var(--brass); padding: 10px 0 10px 16px; font-size: 1.05rem; color: var(--ivory-mute); }
-    .callout strong { color: var(--ivory); }
+    .callout-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 11px;
+      font-family: var(--ui);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-variant: small-caps;
+      color: #B08D57;
+      line-height: 1.2;
+    }
+    .callout-mark,
+    .play-mark {
+      display: block;
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      max-width: none;
+      overflow: visible;
+      color: #B08D57;
+    }
+    /* fill on <symbol> does not reach <use> clones; force hairline on every shape */
+    .play-mark,
+    .play-mark *,
+    .callout-mark,
+    .callout-mark * {
+      fill: none;
+      stroke: #B08D57;
+    }
+    .callout-body { margin: 0; color: var(--ivory-mute); }
     .budget-note, .phase-note { font-size: 1.05rem; color: var(--ivory-mute); max-width: 62ch; }
     .phase-note strong {
       display: block; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
@@ -963,7 +995,8 @@
       .hero h1, h2, h3, .kicker, p, td, th, .lede, .phase-note, .budget-note, li, summary {
         color: #20242B !important;
       }
-      .kicker, .brand-line, .foot-script, th, .stamp, .tag { color: #8A6E3E !important; }
+      .kicker, .brand-line, .foot-script, th, .stamp, .tag, .callout-label { color: #8A6E3E !important; }
+      .callout-mark { color: #8A6E3E !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       .section { page-break-before: always; border: none; padding-top: 12pt; }
       .section:first-of-type { page-break-before: avoid; }
       .sec-art-frame { box-shadow: none; border: 1px solid #ccc; background: #1a2230 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -1091,7 +1124,10 @@
           <p>Family offices, holding companies, trusts, and funds aren't abstractions. They decide whether an offer can be wired in forty-eight hours or needs a quarterly investment-committee meeting. They decide whether title sits in a personal name or behind an LLC. They decide whether a co-op board will even entertain the application.</p>
           <p>This field guide explains, in plain language, how wealth is commonly held by founders, families, pensions, endowments, and public markets, and where Manhattan real estate fits inside those patterns. It's written for sophisticated buyers and the people who advise them. It isn't advice to buy or sell any security, isn't a recommendation of any allocation, and isn't personalized tax or legal guidance. Structures described here are general patterns. Every family's situation is distinct. Agent Kammer is a licensed New York real estate salesperson, not a financial advisor. The aim is shared vocabulary, so when your counsel, CPA, and family office speak in shorthand, you can follow, and so when you buy property, you understand the container you're putting it in.</p>
           <p>People hold wealth the way they do for reasons that aren't purely financial. Legacy. Privacy. Patience. A sense of belonging that outlasts a single address. Knowing that helps you read the paperwork with a cooler head.</p>
-          <div class="callout"><strong>The play</strong>Before you fall for the light and the layout, ask counsel one blunt question: who signs, through which entity, and will this building even take that buyer? Get the answer before the offer letter goes out.</div>
+          <div class="callout">
+            <p class="callout-label"><svg class="callout-mark play-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18" aria-hidden="true" focusable="false"><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.1 3.4 4.5 2.3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.5 4.1 4.9 3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M4.2 3.7 10.6 12.4"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M9.8 12.1 13.6 13.1 12.4 15"/><circle fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" cx="15.3" cy="15.4" r="1.15"/></svg><span>The play</span></p>
+            <p class="callout-body">Before you fall for the light and the layout, ask counsel one blunt question: who signs, through which entity, and will this building even take that buyer? Get the answer before the offer letter goes out.</p>
+          </div>
           <div class="module"><p class="module-label">Key terms</p>
             <ul class="term-list">
               <li><strong>Holding structure.</strong> The legal and organizational arrangement through which assets are owned and controlled.</li>
@@ -1139,7 +1175,10 @@
         <p>Most large fortunes don't sit in a checking account. They begin with an operating company, the business that creates value. Founders and early investors hold equity in that company, often through classes of stock that separate economic ownership from voting control. Those shares may then move into trusts or limited liability companies for estate planning, liability separation, or privacy. A family office may sit above or beside those entities, coordinating investments, taxes, philanthropy, and real estate. At the top (or the side) sit diversified holdings: public securities, private funds, art, operating businesses, and property.</p>
           <p>Control often flows upward through voting rights and board seats. Economic benefit flows through dividends, distributions, and capital gains. Liability is usually contained at the entity level if formalities are respected. The stack isn't a product to buy. It's a description of how many families and institutions already arrange their affairs.</p>
           <p>There's a quiet philosophy under the paperwork. Some people want their name on everything. Others prefer distance between the life they live and the assets that fund it. Neither impulse is wrong. Both show up in how title is taken.</p>
-          <div class="callout"><strong>The play</strong>Map your family's stack on one page (operating company, trusts, LLCs, office). Then ask which layer should take title, and whether that choice helps privacy, slows a resale, or both.</div>
+          <div class="callout">
+            <p class="callout-label"><svg class="callout-mark play-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18" aria-hidden="true" focusable="false"><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.1 3.4 4.5 2.3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.5 4.1 4.9 3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M4.2 3.7 10.6 12.4"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M9.8 12.1 13.6 13.1 12.4 15"/><circle fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" cx="15.3" cy="15.4" r="1.15"/></svg><span>The play</span></p>
+            <p class="callout-body">Map your family's stack on one page (operating company, trusts, LLCs, office). Then ask which layer should take title, and whether that choice helps privacy, slows a resale, or both.</p>
+          </div>
           <div class="module"><p class="module-label">Key terms</p>
             <ul class="term-list">
               <li><strong>Operating company.</strong> The business that produces goods or services and generates earnings.</li>
@@ -1188,7 +1227,10 @@
         <p>In its simplest form, a holding company is a parent whose primary assets are equity interests in subsidiaries or portfolio companies. Berkshire Hathaway is a well-known public example of a diversified holding company. Many private families use quieter versions of the same idea. The holding company sits between owners and operating businesses. It can take majority or minority stakes. Majority stakes usually bring board control and the ability to set strategy. Minority stakes may still come with negotiated protections: information rights, tag-along rights on a sale, anti-dilution provisions, veto rights over major actions, and buyback or put arrangements.</p>
           <p>Money moves in several ways. Operating companies may pay dividends or partnership-style distributions up to the holding company. The holding company may distribute cash to its own owners, retain it for new investments, or extend intercompany loans to subsidiaries. Management fees sometimes compensate the people who run the holding entity. When a stake is sold, proceeds may be recycled or distributed. Tax distributions (cash sent to owners specifically so they can pay taxes on pass-through income) are a common feature of privately held structures and should be discussed with a CPA, not assumed from a brochure.</p>
           <p>None of this is a recommendation to form or invest in any particular holding company. It's a map of mechanisms you'll hear named in family-office and counsel meetings.</p>
-          <div class="callout"><strong>The play</strong>If a holding company will fund the purchase, confirm the managers who can sign and wire before contract. Mismatched wiring instructions kill more deals than price ever does.</div>
+          <div class="callout">
+            <p class="callout-label"><svg class="callout-mark play-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18" aria-hidden="true" focusable="false"><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.1 3.4 4.5 2.3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.5 4.1 4.9 3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M4.2 3.7 10.6 12.4"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M9.8 12.1 13.6 13.1 12.4 15"/><circle fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" cx="15.3" cy="15.4" r="1.15"/></svg><span>The play</span></p>
+            <p class="callout-body">If a holding company will fund the purchase, confirm the managers who can sign and wire before contract. Mismatched wiring instructions kill more deals than price ever does.</p>
+          </div>
           <div class="module"><p class="module-label">Key terms</p>
             <ul class="term-list">
               <li><strong>Distribution.</strong> A payment of cash or property from an entity to its owners.</li>
@@ -1239,7 +1281,10 @@
           <p>Typical functions include portfolio construction and manager selection; tax planning and preparation coordination; estate and trust work with outside counsel; direct and fund investments; philanthropy and foundation administration; concierge and lifestyle services; cybersecurity and physical security; and real estate (acquisition, renovation oversight, leasing, and disposition). Decision rights vary. Some families give the office broad authority within an investment policy. Others require family principals to approve every major commitment, including residential purchases above a threshold.</p>
           <p>For Manhattan buyers, the family office is frequently the gate that an offer must pass. That isn't bureaucracy for its own sake. It's how families keep residential purchases aligned with liquidity, liability, and succession plans. An independent buyer's advisor who understands that process can prepare materials the office actually needs: entity documents, proof of funds pathways, and a clear narrative of intended use (primary residence, pied-à-terre, or holding for family members).</p>
           <p>Patience shows up here more than people admit. A home bought in a hurry can sit awkwardly against a family's longer story. The office's job, at its best, is to keep that story intact.</p>
-          <div class="callout"><strong>The play</strong>Ask the office for its approval checklist on day one: entity, proof of funds, insurance, security. Build those days into your offer timeline so you do not bid like a cash buyer and then wait three weeks for a committee.</div>
+          <div class="callout">
+            <p class="callout-label"><svg class="callout-mark play-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18" aria-hidden="true" focusable="false"><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.1 3.4 4.5 2.3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.5 4.1 4.9 3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M4.2 3.7 10.6 12.4"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M9.8 12.1 13.6 13.1 12.4 15"/><circle fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" cx="15.3" cy="15.4" r="1.15"/></svg><span>The play</span></p>
+            <p class="callout-body">Ask the office for its approval checklist on day one: entity, proof of funds, insurance, security. Build those days into your offer timeline so you do not bid like a cash buyer and then wait three weeks for a committee.</p>
+          </div>
           <div class="module"><p class="module-label">Key terms</p>
             <ul class="term-list">
               <li><strong>Single-family office (SFO).</strong> An office dedicated to one family's affairs.</li>
@@ -1295,7 +1340,10 @@
 <tr><td>Binding rules</td><td>ERISA or public pension statutes; funding rules</td><td>Spending policies; donor restrictions; fiduciary duty</td><td>National law, political oversight, investment mandates</td></tr>
 <tr><td>Liquidity needs</td><td>Benefit payments on a schedule</td><td>Annual spending rate plus opportunistic calls</td><td>Policy-dependent; can be patient or stabilization-driven</td></tr>
 </tbody></table></div>
-          <div class="callout"><strong>The play</strong>When the seller, sponsor, or neighboring owner is institutional, expect slower tempo and thicker paperwork. Ask your advisor who actually decides, and price that patience into the strategy.</div>
+          <div class="callout">
+            <p class="callout-label"><svg class="callout-mark play-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18" aria-hidden="true" focusable="false"><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.1 3.4 4.5 2.3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.5 4.1 4.9 3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M4.2 3.7 10.6 12.4"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M9.8 12.1 13.6 13.1 12.4 15"/><circle fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" cx="15.3" cy="15.4" r="1.15"/></svg><span>The play</span></p>
+            <p class="callout-body">When the seller, sponsor, or neighboring owner is institutional, expect slower tempo and thicker paperwork. Ask your advisor who actually decides, and price that patience into the strategy.</p>
+          </div>
           <div class="module"><p class="module-label">Key terms</p>
             <ul class="term-list">
               <li><strong>Pension fund.</strong> A pool of assets dedicated to paying retirement benefits.</li>
@@ -1344,7 +1392,10 @@
         <p>Public stock offers daily liquidity and transparent pricing, with limited direct control for ordinary shareholders. Mutual funds and exchange-traded funds (ETFs) package diversified exposures with professional management and, for ETFs, intraday trading. Real estate investment trusts (REITs) are companies that own or finance income-producing real estate and trade like stocks when listed. Vornado Realty Trust and SL Green Realty are familiar New York-focused examples of listed REIT platforms, named here as examples of the form, not as suggestions. Business development companies (BDCs) such as Ares Capital (again, example) invest in private middle-market companies and are structured for retail-accessible exposure to that lending and equity niche under their own regulatory framework. Listed private-equity managers offer public shares in the management companies that run private funds, which isn't the same as owning the funds' underlying portfolio.</p>
           <p>On the private side, interval funds may offer limited periodic liquidity. Direct minority stakes in private companies and interests in private equity funds typically involve multi-year lockups, capital calls, and negotiated or fund-document governance. Access to many private offerings is limited to accredited investors or qualified purchasers under U.S. securities rules, a status based on income, net worth, or other regulatory tests. The concept matters because it shapes who can participate. It isn't advice to seek any particular investment.</p>
           <p>Trade-offs are structural. More liquidity usually means less control and more mark-to-market volatility. More control usually means less liquidity and higher operational burden. Access constraints exist to match sophistication and loss-bearing capacity with complexity. They don't imply that private is superior to public.</p>
-          <div class="callout"><strong>The play</strong>Treat the residence as an illiquid, high-control holding. Ask whether you need liquidity inside five years. If you might, condo usually outruns co-op on exit speed, and that should shape the search, not just the lifestyle pitch.</div>
+          <div class="callout">
+            <p class="callout-label"><svg class="callout-mark play-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18" aria-hidden="true" focusable="false"><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.1 3.4 4.5 2.3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.5 4.1 4.9 3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M4.2 3.7 10.6 12.4"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M9.8 12.1 13.6 13.1 12.4 15"/><circle fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" cx="15.3" cy="15.4" r="1.15"/></svg><span>The play</span></p>
+            <p class="callout-body">Treat the residence as an illiquid, high-control holding. Ask whether you need liquidity inside five years. If you might, condo usually outruns co-op on exit speed, and that should shape the search, not just the lifestyle pitch.</p>
+          </div>
           <div class="module"><p class="module-label">Key terms</p>
             <ul class="term-list">
               <li><strong>REIT.</strong> A company focused on real estate ownership or financing, often with pass-through tax treatment if rules are met.</li>
@@ -1394,7 +1445,10 @@
         <p>Dividends are payments from a corporation to shareholders, often reported on Form 1099-DIV for U.S. taxpayers when paid by domestic corporations or certain intermediaries. Partnerships, LLCs taxed as partnerships, and S corporations typically issue Schedule K-1s, which allocate shares of income, gain, loss, and deduction whether or not cash was distributed. That mismatch (taxable income without a matching cash distribution) is often called phantom income. Pass-through entities are designed so that tax is paid at the owner level. The entity itself often pays little or no entity-level federal income tax if it qualifies. Capital gains generally arise when an asset is sold for more than its tax basis. Holding period and asset type affect rates and character under current law, which changes and should never be assumed from a general guide.</p>
           <p>Distributions from partnerships may be tax-free to the extent of basis, taxable as gain beyond basis, or treated specially under complex rules. Again, that's territory for a CPA and tax counsel. International investors face withholding and treaty issues beyond this guide's scope. The practical habit for buyers is simple: before wiring earnest money through a new LLC, confirm with your CPA how that entity will report, who signs returns, and whether estimated taxes or tax distributions are needed if the entity holds other income-producing assets.</p>
           <p>Agent Kammer does not provide tax advice. The vocabulary above exists so you can ask sharper questions.</p>
-          <div class="callout"><strong>The play</strong>Sequence the CPA call before the contract. Confirm how the purchasing LLC (if any) will report, who signs returns, and whether estimated taxes or tax distributions are needed. Wiring earnest money into an entity you have not briefed is how quiet tax problems start.</div>
+          <div class="callout">
+            <p class="callout-label"><svg class="callout-mark play-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18" aria-hidden="true" focusable="false"><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.1 3.4 4.5 2.3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.5 4.1 4.9 3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M4.2 3.7 10.6 12.4"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M9.8 12.1 13.6 13.1 12.4 15"/><circle fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" cx="15.3" cy="15.4" r="1.15"/></svg><span>The play</span></p>
+            <p class="callout-body">Sequence the CPA call before the contract. Confirm how the purchasing LLC (if any) will report, who signs returns, and whether estimated taxes or tax distributions are needed. Wiring earnest money into an entity you have not briefed is how quiet tax problems start.</p>
+          </div>
           <div class="module"><p class="module-label">Key terms</p>
             <ul class="term-list">
               <li><strong>Dividend.</strong> A corporate distribution to shareholders, often from earnings.</li>
@@ -1445,7 +1499,10 @@
           <p>Family offices often run an internal approval: investment or principal committee, insurance, and sometimes security. Build that into the offer timeline. Co-operative apartments frequently restrict or heavily condition purchases by LLCs, trusts, or other entities. Boards may require personal guarantees, interviews with beneficial owners, and financial disclosure that feels invasive by design. Condominiums generally allow entity purchasers more readily, subject to the offering plan and board packages. Townhouses (fee-simple houses) offer maximum privacy and control of the physical asset, with corresponding responsibility for facade, roof, and systems. They suit buyers who want a discrete holding rather than a building governed by a board.</p>
           <p>Developer sales teams represent the seller's interest. An independent buyer's advisor represents the buyer's interest: comparables, negotiation, due diligence coordination, and quiet handling of entity and family-office process. That distinction matters most at the top of the market, where information asymmetry is expensive.</p>
           <p>Belonging, here, is practical. You want a home you can actually inhabit inside a structure your advisors can still defend a decade from now.</p>
-          <div class="callout"><strong>The play</strong>If you want an LLC on title, ask the listing side early whether the co-op board accepts entity buyers, and on what terms (guarantees, interviews, financials). Condos and townhouses usually flex more. Do not discover the board's answer after you have fallen for the apartment.</div>
+          <div class="callout">
+            <p class="callout-label"><svg class="callout-mark play-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18" aria-hidden="true" focusable="false"><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.1 3.4 4.5 2.3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M3.5 4.1 4.9 3"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M4.2 3.7 10.6 12.4"/><path fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" d="M9.8 12.1 13.6 13.1 12.4 15"/><circle fill="none" stroke="#B08D57" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" cx="15.3" cy="15.4" r="1.15"/></svg><span>The play</span></p>
+            <p class="callout-body">If you want an LLC on title, ask the listing side early whether the co-op board accepts entity buyers, and on what terms (guarantees, interviews, financials). Condos and townhouses usually flex more. Do not discover the board's answer after you have fallen for the apartment.</p>
+          </div>
           <div class="module"><p class="module-label">Key terms</p>
             <ul class="term-list">
               <li><strong>Beneficial-ownership disclosure.</strong> Rules requiring identification of natural persons who ultimately own or control an entity.</li>
