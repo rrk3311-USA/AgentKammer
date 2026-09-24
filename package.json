@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "NODE_ENV=development tsx server/index.ts",
     "dev:site": "PORT=5174 NODE_ENV=development tsx server/index.ts",
+    "prebuild": "tsx scripts/build-guides-index.ts",
+    "guides:index": "tsx scripts/build-guides-index.ts",
     "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist && tsx scripts/prerender-building-reports.ts",
     "prerender:buildings": "tsx scripts/prerender-building-reports.ts",
     "start": "NODE_ENV=production node dist/index.js",
