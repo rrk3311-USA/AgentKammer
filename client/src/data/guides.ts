@@ -91,6 +91,14 @@ export const publicGuides: GuideEntry[] = [
     kind: "page",
   },
   {
+    title: "How to buy in NYC",
+    description:
+      "Twelve attorney-driven steps, condo vs co-op costs, tracks & boosters (cash, sponsor incentives, 1031, assumption).",
+    href: "/guides/how-to-buy-in-nyc.html",
+    audience: "public",
+    kind: "html",
+  },
+  {
     title: "International Buyer Hub Guide",
     description:
       "How the multilingual Manhattan buyer funnel is structured for decision-first inbound.",
