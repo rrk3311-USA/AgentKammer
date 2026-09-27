@@ -88,11 +88,11 @@ export function getSiteMapGroups(): SiteMapGroup[] {
     },
     {
       title: "Guides",
-      description: "Educational frameworks, neighborhoods, and Property Assessment before anyone looks at a listing.",
+      description: "Educational frameworks and neighborhood fit. Field guides and Property Assessments live on the Resource Hub.",
       items: [
-        { label: "Decision Guides", href: "/guides#decision-guides" },
+        { label: "Resource Hub", href: "/resources" },
         { label: "Neighborhoods", href: "/guides#neighborhoods" },
-        { label: "Property Assessment", href: "/guides#kammer-report" },
+        { label: "Property Assessments", href: "/resources#assessments" },
         ...publicGuides.map((guide) => ({ label: guide.title, href: guide.href })),
       ],
     },

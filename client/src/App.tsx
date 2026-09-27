@@ -76,6 +76,27 @@ function Redirect({ to }: { to: string }) {
   return null;
 }
 
+function HardRedirect({ to }: { to: string }) {
+  useEffect(() => {
+    window.location.replace(to);
+  }, [to]);
+
+  return null;
+}
+
+function ResourcesHubEscape() {
+  useEffect(() => {
+    const path = window.location.pathname.replace(/\/+$/, "") || "/";
+    if (path !== "/resources") return;
+    const flag = "ak-resources-hub-escape";
+    if (sessionStorage.getItem(flag)) return;
+    sessionStorage.setItem(flag, "1");
+    window.location.replace(`/resources${window.location.hash || ""}`);
+  }, []);
+
+  return null;
+}
+
 function ScrollToTop() {
   const [location] = useLocation();
   
@@ -137,9 +158,9 @@ function Router() {
       <Route path="/services/:slug">{({ slug }) => <Redirect to={`/situations/${slug}`} />}</Route>
       <Route path="/building-reports/individual-buildings" component={BuildingReport} />
       <Route path="/building-reports/neighborhood-guides" component={NewYorkMarket} />
-      <Route path="/building-reports/market-briefs">{() => <Redirect to="/guides#kammer-report" />}</Route>
+      <Route path="/building-reports/market-briefs">{() => <HardRedirect to="/resources#assessments" />}</Route>
       <Route path="/building-reports/:slug" component={BuildingReportDetail} />
-      <Route path="/building-reports">{() => <Redirect to="/guides#kammer-report" />}</Route>
+      <Route path="/building-reports">{() => <HardRedirect to="/resources#assessments" />}</Route>
       <Route path="/buyer-advisory">{() => <Redirect to="/situations" />}</Route>
       <Route path="/insights" component={Perspectives} />
       <Route path="/insights/reports/:slug" component={ExecutiveHousingReport} />
@@ -166,6 +187,7 @@ function Router() {
       <Route path="/guides/manhattan-explained" component={ManhattanExplained} />
       <Route path="/guides/liens-easements" component={LiensEasements} />
       <Route path="/guides" component={Guides} />
+      <Route path="/resources" component={ResourcesHubEscape} />
       <Route path="/sitemap" component={Sitemap} />
       <Route path="/account" component={Account} />
       <Route path="/qualify" component={Qualify} />
@@ -175,7 +197,7 @@ function Router() {
       <Route path="/hub/reviews" component={HubReviews} />
       <Route path="/hub/profile" component={HubProfile} />
       <Route path="/hub" component={HubHome} />
-      <Route path="/buildings">{() => <Redirect to="/guides#kammer-report" />}</Route>
+      <Route path="/buildings">{() => <HardRedirect to="/resources#assessments" />}</Route>
       <Route path="/buildings/:slug/report">{({ slug }) => <Redirect to={`/building-reports/${slug}`} />}</Route>
       <Route path="/buy">{() => <Redirect to="/situations" />}</Route>
       <Route path="/executive-relocation">{() => <Redirect to="/situations/executive-relocation-nyc" />}</Route>
@@ -197,7 +219,7 @@ function Router() {
       <Route path="/profile">{() => <Redirect to="/account" />}</Route>
       <Route path="/reverse-buyer-origination">{() => <Redirect to="/situations" />}</Route>
       <Route path="/reverse-seller-architecture">{() => <Redirect to="/contact" />}</Route>
-      <Route path="/real-estate">{() => <Redirect to="/guides#kammer-report" />}</Route>
+      <Route path="/real-estate">{() => <HardRedirect to="/resources#assessments" />}</Route>
       <Route component={NotFound} />
     </Switch>
   );

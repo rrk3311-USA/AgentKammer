@@ -54,7 +54,7 @@ export default function Sitemap() {
               <ul className="mt-5 flex flex-col gap-2">
                 {group.items.map((item) => (
                   <li key={`${group.title}-${item.href}-${item.label}`}>
-                    {item.href.endsWith(".html") ? (
+                    {item.href.endsWith(".html") || item.href === "/resources" || item.href.startsWith("/resources#") ? (
                       <a
                         href={item.href}
                         className="text-[12px] uppercase tracking-[0.1em] text-brand-navy transition-colors hover:text-brand-brass"

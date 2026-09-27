@@ -12,11 +12,11 @@ export const primaryNav = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
-/** Guides library chapters. Building Profiles stay reachable, not a selector item. */
+/** Guides library chapters. Field guides and assessments live on the Resource Hub. */
 export const guidesLibraryNav = [
-  { label: "Decision Guides", href: "/guides#decision-guides", id: "decision-guides" },
   { label: "Neighborhoods", href: "/guides#neighborhoods", id: "neighborhoods" },
-  { label: "Property Assessment", href: "/guides#kammer-report", id: "kammer-report" },
+  { label: "Field Guides", href: "/resources#field-guides", id: "field-guides" },
+  { label: "Property Assessments", href: "/resources#assessments", id: "assessments" },
 ] as const;
 
 export type HeroArtVariant =
@@ -542,7 +542,7 @@ function activeGuidesChapter(location: string, hash: string) {
     return chapter;
   }
   if (location.startsWith("/building-reports/neighborhood-guides")) return "neighborhoods";
-  if (location.startsWith("/building-reports")) return "kammer-report";
+  if (location.startsWith("/building-reports")) return "assessments";
   return "";
 }
 
@@ -564,6 +564,11 @@ export function ReportSubnav() {
       <div className="mx-auto flex w-full max-w-site flex-wrap items-center gap-y-2 px-6 py-5 lg:px-10">
         {guidesLibraryNav.map((item, index) => {
           const active = activeId === item.id;
+          const className = cn(
+            "whitespace-nowrap text-[11px] uppercase tracking-[0.18em] transition-colors",
+            active ? "text-brand-navy" : "text-brand-graphite hover:text-brand-navy",
+          );
+          const hard = item.href.startsWith("/resources");
           return (
             <React.Fragment key={item.id}>
               {index > 0 ? (
@@ -571,15 +576,15 @@ export function ReportSubnav() {
                   ·
                 </span>
               ) : null}
-              <Link
-                href={item.href}
-                className={cn(
-                  "whitespace-nowrap text-[11px] uppercase tracking-[0.18em] transition-colors",
-                  active ? "text-brand-navy" : "text-brand-graphite hover:text-brand-navy",
-                )}
-              >
-                {item.label}
-              </Link>
+              {hard ? (
+                <a href={item.href} className={className}>
+                  {item.label}
+                </a>
+              ) : (
+                <Link href={item.href} className={className}>
+                  {item.label}
+                </Link>
+              )}
             </React.Fragment>
           );
         })}
