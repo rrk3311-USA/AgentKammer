@@ -88,11 +88,11 @@ export const decisionNavigationGroups: DecisionNavGroup[] = [
   },
   {
     title: "Guides library",
-    description: "One knowledge library: decision frameworks, neighborhoods, and Property Assessment.",
+    description: "Decision frameworks and neighborhood fit. Field guides and Property Assessments live on the Resource Hub.",
     items: [
-      { label: "Decision Guides", href: "/guides#decision-guides" },
+      { label: "Resource Hub", href: "/resources" },
       { label: "Neighborhoods", href: "/guides#neighborhoods" },
-      { label: "Property Assessment", href: "/guides#kammer-report" },
+      { label: "Property Assessments", href: "/resources#assessments" },
       { label: "Start Here", href: "/situations" },
       { label: "Insights", href: "/insights" },
     ],

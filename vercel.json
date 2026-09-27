@@ -5,7 +5,7 @@
   "redirects": [
     { "source": "/services", "destination": "/situations", "permanent": true },
     { "source": "/services/:slug", "destination": "/situations/:slug", "permanent": true },
-    { "source": "/buildings", "destination": "/building-reports", "permanent": true },
+    { "source": "/buildings", "destination": "/resources#assessments", "permanent": true },
     { "source": "/buildings/:slug/report", "destination": "/building-reports/:slug", "permanent": true },
     { "source": "/buy", "destination": "/buyer-advisory", "permanent": true },
     { "source": "/strategy", "destination": "/buyer-advisory", "permanent": true },
@@ -27,7 +27,9 @@
     { "source": "/sell", "destination": "/contact", "permanent": true },
     { "source": "/profile", "destination": "/account", "permanent": true },
     { "source": "/reverse-seller-architecture", "destination": "/contact", "permanent": true },
-    { "source": "/real-estate", "destination": "/building-reports", "permanent": true }
+    { "source": "/real-estate", "destination": "/resources#assessments", "permanent": true },
+    { "source": "/building-reports", "destination": "/resources#assessments", "permanent": true },
+    { "source": "/building-reports/market-briefs", "destination": "/resources#assessments", "permanent": true }
   ],
   "rewrites": [
     {
@@ -39,6 +41,8 @@
       "destination": "https://agentkammer-ops.vercel.app/api/tools/:path*"
     },
     { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/resources", "destination": "/resources/index.html" },
+    { "source": "/resources/", "destination": "/resources/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

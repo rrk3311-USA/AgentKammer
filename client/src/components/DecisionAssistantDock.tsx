@@ -772,7 +772,13 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
       setStep("email");
       setQuickActions([]);
     }
-    if (action.path) setLocation(action.path);
+    if (action.path) {
+      if (action.path === "/resources" || action.path.startsWith("/resources#")) {
+        window.location.assign(action.path);
+        return;
+      }
+      setLocation(action.path);
+    }
   }
 
   async function requestAiGuideTurn(

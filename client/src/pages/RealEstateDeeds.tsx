@@ -1267,12 +1267,12 @@ export default function RealEstateDeeds() {
         </footer>
 
         <p className="pb-6 text-center text-sm text-brand-graphite">
-          <Link
-            href="/guides"
+          <a
+            href="/resources"
             className="text-brand-navy underline underline-offset-4"
           >
-            All Guides
-          </Link>
+            Resource Hub
+          </a>
           {" · "}
           <Link
             href="/guides/real-estate-ownership"

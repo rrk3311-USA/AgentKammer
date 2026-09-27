@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Resource Hub | Agent Kammer</title>
+  <meta name="description" content="Field guides and Property Assessments from Agent Kammer. Read the structure before you look at a listing." />
+  <meta name="author" content="Agent Kammer" />
+  <link rel="canonical" href="https://www.agentkammer.com/resources" />
+  <meta property="og:title" content="Resource Hub | Agent Kammer" />
+  <meta property="og:description" content="Field guides and Property Assessments. Read the structure before you look at a listing." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Agent Kammer" />
+  <meta property="og:url" content="https://www.agentkammer.com/resources" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #2A3447;
+      --midnight: #202735;
+      --deep: #161C28;
+      --ivory: #F5F2EB;
+      --ivory-soft: rgba(245, 242, 235, 0.9);
+      --ivory-mute: rgba(245, 242, 235, 0.78);
+      --brass: #B08D57;
+      --brass-line: rgba(176, 141, 87, 0.4);
+      --gold: #E4D4B0;
+      --display: "Playfair Display", Georgia, "Times New Roman", serif;
+      --ui: Montserrat, "Segoe UI", system-ui, sans-serif;
+      --col: 1000px;
+      --pad: clamp(18px, 4.2vw, 36px);
+      --section-top-pad: 64px;
+      --scroll-clear: 88px;
+    }
+
+    @media (max-width: 819px) {
+      :root {
+        --section-top-pad: 40px;
+        --scroll-clear: 72px;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body {
+      font-family: var(--ui);
+      background-color: #0E1218;
+      background-image: url("/guides/assets/how-to-buy-in-nyc/paint/linen-navy-tile.webp");
+      background-size: 420px auto;
+      color: var(--ivory-soft);
+      font-size: 1.125rem;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img, svg { display: block; max-width: 100%; height: auto; }
+    a { color: var(--gold); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: var(--ivory); }
+
+    .page-col {
+      max-width: var(--col);
+      width: 100%;
+      margin: 0 auto;
+      background: var(--deep);
+      box-shadow: 0 0 0 1px rgba(176,141,87,0.12), 0 28px 90px rgba(0,0,0,0.38);
+      min-height: 100vh;
+    }
+    .wrap { max-width: var(--col); margin: 0 auto; padding: 0 var(--pad); }
+    .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ivory); }
+    .brand img { width: 36px; height: auto; }
+    .brand-name { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
+    .brand-line { display: block; margin-top: 4px; font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--brass); font-weight: 500; }
+
+    .hub-head {
+      padding: clamp(36px, 6vw, 64px) 0 28px;
+    }
+    .eyebrow {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--brass); margin: 28px 0 14px;
+    }
+    h1 {
+      font-family: var(--display); font-weight: 600;
+      font-size: clamp(2.75rem, 7vw, 4.4rem);
+      line-height: 1.02; letter-spacing: -0.02em; color: var(--ivory);
+    }
+    .hero-dek { margin-top: 16px; max-width: 36rem; font-size: clamp(1.05rem, 1.8vw, 1.2rem); color: var(--ivory-mute); }
+    .hero-rule { width: 64px; height: 1px; background: var(--brass); margin: 26px 0 0; border: 0; }
+
+    .secnav {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(22,28,40,0.94); backdrop-filter: blur(10px);
+      border-bottom: none;
+      box-shadow: none;
+    }
+    .secnav::after {
+      content: "";
+      display: block;
+      height: 3px;
+      width: 100%;
+      background-color: #B08D57;
+      background-image:
+        repeating-linear-gradient(
+          90deg,
+          rgba(255,255,255,0.045) 0 1px,
+          rgba(0,0,0,0.05) 1px 2px,
+          transparent 2px 5px
+        ),
+        linear-gradient(
+          90deg,
+          #7A5A2E 0%,
+          #B08D57 28%,
+          #E9D3A0 50%,
+          #B08D57 72%,
+          #7A5A2E 100%
+        );
+    }
+    .secnav::before {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 3px;
+      pointer-events: none;
+      z-index: 2;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,245,220,0) 35%,
+        rgba(255,245,220,0.38) 50%,
+        rgba(255,245,220,0) 65%,
+        transparent 100%
+      );
+      background-size: 45% 100%;
+      background-repeat: no-repeat;
+      background-position: -45% 0;
+      animation: ak-gold-glint 9s ease-in-out infinite;
+      opacity: 0.85;
+    }
+    @keyframes ak-gold-glint {
+      0%, 12% { background-position: -45% 0; opacity: 0; }
+      18% { opacity: 0.7; }
+      45% { background-position: 145% 0; opacity: 0.55; }
+      55%, 100% { background-position: 145% 0; opacity: 0; }
+    }
+    .secnav-rule {
+      flex: 0 0 auto;
+      width: 2px;
+      height: 22px;
+      margin: 0 8px 0 4px;
+      border: 0;
+      background-color: #B08D57;
+      background-image:
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,0.05) 0 1px,
+          rgba(0,0,0,0.06) 1px 2px,
+          transparent 2px 4px
+        ),
+        linear-gradient(
+          180deg,
+          #7A5A2E 0%,
+          #B08D57 30%,
+          #E9D3A0 50%,
+          #B08D57 70%,
+          #7A5A2E 100%
+        );
+    }
+    .secnav-row {
+      display: flex; align-items: center; gap: 0;
+      padding: 10px 0; min-width: 0;
+    }
+    .secnav-home {
+      display: flex; align-items: center; gap: 4px;
+      flex: 0 0 auto;
+    }
+    .secnav-home a,
+    .secnav-inner a {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 12px; font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ivory-mute); text-decoration: none;
+      border: 1px solid transparent; white-space: nowrap;
+    }
+    .secnav-home a:hover,
+    .secnav-inner a:hover { color: var(--ivory); border-color: var(--brass-line); }
+    .secnav-home-link img {
+      width: 20px; height: auto; display: block; flex: 0 0 auto;
+    }
+    .secnav-inner {
+      display: flex; gap: 2px; overflow-x: auto;
+      flex: 1 1 auto; min-width: 0;
+      scrollbar-width: none;
+    }
+    .secnav-inner::-webkit-scrollbar { display: none; }
+
+    main { padding: 8px 0 40px; }
+    .section {
+      padding: var(--section-top-pad) 0 clamp(36px, 5vw, 64px);
+      border-bottom: 1px solid rgba(176,141,87,0.16);
+      scroll-margin-top: var(--scroll-clear);
+    }
+    .kicker {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--brass); margin: 0 0 10px;
+    }
+    h2 {
+      font-family: var(--display); font-weight: 600;
+      font-size: clamp(1.85rem, 4.2vw, 2.65rem);
+      line-height: 1.08; letter-spacing: -0.015em; color: var(--ivory); margin: 0 0 12px;
+    }
+    h3 { font-family: var(--display); font-weight: 600; font-size: 1.45rem; color: var(--ivory); margin: 0 0 8px; }
+    .lede { max-width: 42ch; font-size: 1.125rem; color: var(--ivory-mute); margin: 0 0 22px; }
+    p { font-size: 1.125rem; color: var(--ivory-mute); }
+
+    .hub-search { margin: 28px 0 8px; }
+
+    .guide-search { margin: 4px 0 8px; }
+    .guide-search-label {
+      display: block;
+      font-family: var(--ui);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #B08D57;
+      margin: 0 0 12px;
+    }
+    .guide-search-field {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: var(--navy);
+      border: 1px solid var(--brass);
+      border-radius: 2px;
+    }
+    .guide-search-field::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      padding: 1.5px;
+      border-radius: 2px;
+      background: linear-gradient(
+        135deg,
+        #7A5A2E 0%,
+        #B08D57 28%,
+        #E9D3A0 50%,
+        #B08D57 72%,
+        #7A5A2E 100%
+      );
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+              mask-composite: exclude;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .guide-search-field:focus-within { border-color: transparent; }
+    .guide-search-field:focus-within::before { opacity: 1; }
+    .guide-search-icon {
+      flex: 0 0 auto;
+      width: 18px;
+      height: 18px;
+      margin-left: 14px;
+      stroke: var(--brass);
+      fill: none;
+      stroke-width: 1.4;
+    }
+    .guide-search-field input {
+      flex: 1 1 auto;
+      min-width: 0;
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: #F5F2EB;
+      font-family: var(--ui);
+      font-size: 16px;
+      line-height: 1.4;
+      padding: 14px 14px 14px 10px;
+      border-radius: 2px;
+      outline: none;
+    }
+    .guide-search-field input::placeholder { color: rgba(245, 242, 235, 0.48); }
+    .guide-search-status {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .guide-search-results {
+      list-style: none;
+      margin: 8px 0 0;
+      padding: 0;
+      border: 1px solid rgba(176,141,87,0.28);
+      background: var(--navy);
+      border-radius: 2px;
+    }
+    .guide-search-results[hidden],
+    .guide-search-empty[hidden] { display: none !important; }
+    .guide-search-results li { border-bottom: 1px solid rgba(176,141,87,0.16); }
+    .guide-search-results li:last-child { border-bottom: 0; }
+    .guide-search-hit {
+      display: block;
+      padding: 12px 14px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .guide-search-hit-title {
+      display: inline;
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 1.15rem;
+      line-height: 1.3;
+      color: #F5F2EB;
+    }
+    .guide-search-results li.is-active .guide-search-hit-title,
+    .guide-search-hit:hover .guide-search-hit-title {
+      text-decoration: underline;
+      text-decoration-color: var(--brass);
+      text-decoration-thickness: 1px;
+    }
+    .guide-search-hit-desc {
+      display: block;
+      margin-top: 4px;
+      font-family: var(--ui);
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: var(--ivory-mute);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .guide-search-empty {
+      margin: 10px 0 0;
+      font-size: 0.95rem;
+      color: var(--ivory-mute);
+    }
+
+    .hub-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .hub-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 18px 16px;
+      border: 1px solid rgba(176,141,87,0.28);
+      background: rgba(42,52,71,0.35);
+      text-decoration: none;
+      color: var(--ivory-mute);
+      position: relative;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .hub-card::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      padding: 1.5px;
+      border-radius: 2px;
+      background: linear-gradient(
+        135deg,
+        #7A5A2E 0%,
+        #B08D57 28%,
+        #E9D3A0 50%,
+        #B08D57 72%,
+        #7A5A2E 100%
+      );
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+              mask-composite: exclude;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .hub-card:hover,
+    .hub-card:focus-visible {
+      transform: translateY(-3px);
+      background: rgba(42,52,71,0.55);
+      border-color: transparent;
+      box-shadow: 0 14px 28px rgba(0,0,0,0.28);
+      color: var(--ivory-mute);
+      outline: none;
+    }
+    .hub-card:hover::before,
+    .hub-card:focus-visible::before { opacity: 1; }
+    .hub-card-art {
+      margin: -18px -16px 8px;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background-color: #161C28;
+      background-image: url("/guides/assets/how-to-buy-in-nyc/paint/linen-navy-tile.webp");
+      background-size: cover;
+      background-position: center;
+    }
+    .hub-card-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hub-card-rule {
+      width: 48px;
+      height: 1px;
+      background: var(--brass);
+      border: 0;
+      margin: 2px 0 6px;
+    }
+    .hub-title {
+      font-family: var(--display); font-weight: 600;
+      font-size: 1.35rem; line-height: 1.25; color: var(--ivory);
+    }
+    .hub-teaser {
+      font-size: 0.98rem; line-height: 1.5; color: var(--ivory-mute);
+    }
+
+    footer {
+      border-top: 1px solid var(--brass-line);
+      padding: 40px 0 56px; background: #1a2030;
+    }
+    .foot-script { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); }
+    .foot-legal { margin-top: 14px; font-size: 0.88rem; color: rgba(245,242,235,0.58); line-height: 1.65; max-width: 68ch; }
+    .foot-legal strong { color: var(--ivory); font-weight: 500; }
+
+    @media (max-width: 819px) {
+      .secnav::after,
+      .secnav::before { height: 2px; }
+      .secnav-rule { width: 2px; height: 18px; margin: 0 6px 0 2px; }
+      .secnav-home a { padding: 8px 8px; }
+      h1 { font-size: clamp(2.4rem, 11vw, 3.2rem); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .secnav::before,
+      .hub-card { animation: none !important; transition: none !important; }
+      .hub-card:hover,
+      .hub-card:focus-visible { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-col">
+    <header class="hub-head">
+      <div class="wrap">
+        <a class="brand" href="/">
+          <img src="/brand/ak-monogram-ivory-free.png" alt="Agent Kammer monogram" width="44" height="48" />
+          <span>
+            <span class="brand-name">Agent Kammer</span>
+            <span class="brand-line">Live where you belong.</span>
+          </span>
+        </a>
+        <h1>Resource Hub</h1>
+        <p class="hero-dek">Field guides and Property Assessments, kept in one place.</p>
+        <hr class="hero-rule" />
+      </div>
+    </header>
+
+    <nav class="secnav" aria-label="Section navigation">
+      <div class="wrap">
+        <div class="secnav-row">
+          <div class="secnav-home">
+            <a class="secnav-home-link" href="/" title="Agent Kammer home">
+              <img src="/brand/ak-monogram-ivory-free.png" alt="" width="20" height="22" />
+              <span>Home</span>
+            </a>
+          </div>
+          <span class="secnav-rule" aria-hidden="true"></span>
+          <div class="secnav-inner">
+            <a href="#field-guides">Field Guides</a>
+            <a href="#assessments">Property Assessments</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div class="wrap hub-search">
+        <div class="guide-search" id="guide-search" data-guide-search data-index="/guides/guides-index.json" data-current="">
+          <label class="guide-search-label" for="guide-search-input">Search the field guides</label>
+          <div class="guide-search-field">
+            <svg class="guide-search-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.25" />
+              <path d="m16.2 16.2 4.3 4.3" />
+            </svg>
+            <input
+              id="guide-search-input"
+              data-guide-search-input
+              type="search"
+              role="combobox"
+              aria-autocomplete="list"
+              aria-controls="guide-search-list"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              placeholder="Try co-op, trust, closing costs"
+              autocomplete="off"
+              spellcheck="false"
+              enterkeyhint="search"
+            />
+          </div>
+          <div class="guide-search-status" data-guide-search-status role="status" aria-live="polite"></div>
+          <ul class="guide-search-results" id="guide-search-list" data-guide-search-list role="listbox" hidden></ul>
+          <p class="guide-search-empty" data-guide-search-empty hidden>Nothing yet on that.</p>
+        </div>
+      </div>
+
+      <!-- Mirrors publicGuides in client/src/data/guides.ts and /guides/guides-index.json. Keep in sync. -->
+      <section class="section" id="field-guides">
+        <div class="wrap">
+          <p class="kicker">Field Guides</p>
+          <h2>The public library</h2>
+          <p class="lede">Read these before you look at a listing.</p>
+          <div class="hub-list">
+            <a class="hub-card" href="/guides/real-estate-ownership">
+              <hr class="hub-card-rule" />
+              <p class="kicker">Ownership</p>
+              <span class="hub-title">How Real Estate Ownership Works</span>
+              <span class="hub-teaser">Entities, estates, NYC condo/co-op/house, title holding, and how ownership rights fit together.</span>
+            </a>
+            <a class="hub-card" href="/situations/condo-vs-coop">
+              <hr class="hub-card-rule" />
+              <p class="kicker">Building types</p>
+              <span class="hub-title">Condo vs Co-op</span>
+              <span class="hub-teaser">What you own, what you pay, and what to check in the building before an offer.</span>
+            </a>
+            <a class="hub-card" href="/situations/coop-condo-condop-terms">
+              <hr class="hub-card-rule" />
+              <p class="kicker">Building types</p>
+              <span class="hub-title">Co-op, Condo &amp; Condop Terms</span>
+              <span class="hub-teaser">Where board packages, maintenance, bylaws, and offering plans actually apply.</span>
+            </a>
+            <a class="hub-card" href="/guides/real-estate-deeds">
+              <hr class="hub-card-rule" />
+              <p class="kicker">Deeds</p>
+              <span class="hub-title">How Real Estate Deeds Work</span>
+              <span class="hub-teaser">Deed types, essential parts, delivery &amp; recording, and New York transfer nuances.</span>
+            </a>
+            <a class="hub-card" href="/guides/how-mortgages-work">
+              <hr class="hub-card-rule" />
+              <p class="kicker">Mortgages</p>
+              <span class="hub-title">How Mortgages Work</span>
+              <span class="hub-teaser">Mortgage family tree. 15 types in five groups, with links to fixed, ARM, and clauses.</span>
+            </a>
+            <a class="hub-card" href="/guides/fixed-rate-mortgage">
+              <hr class="hub-card-rule" />
+              <p class="kicker">Mortgages</p>
+              <span class="hub-title">Fixed-Rate Mortgage</span>
+              <span class="hub-teaser">Same rate, same P&amp;I. Terms, amortization, pros &amp; cons, and when fixed wins.</span>
+            </a>
+            <a class="hub-card" href="/guides/adjustable-rate-mortgage">
+              <hr class="hub-card-rule" />
+              <p class="kicker">Mortgages</p>
+              <span class="hub-title">ARM &amp; Fixed vs ARM</span>
+              <span class="hub-teaser">How ARMs adjust, caps, common 5/1 structures, and a Fixed vs ARM decision guide.</span>
+            </a>
+            <a class="hub-card" href="/guides/mortgage-clauses">
+              <hr class="hub-card-rule" />
+              <p class="kicker">Mortgages</p>
+              <span class="hub-title">Mortgage Clauses &amp; Key Terms</span>
+              <span class="hub-teaser">Acceleration, due-on-sale, defeasance, prepayment penalty, plus a quick glossary.</span>
+            </a>
+            <a class="hub-card" href="/guides/manhattan-explained">
+              <div class="hub-card-art">
+                <img src="/guides/manhattan/manhattan-explained-cover.png" alt="" width="1200" height="675" />
+              </div>
+              <p class="kicker">Neighborhoods</p>
+              <span class="hub-title">Manhattan Explained</span>
+              <span class="hub-teaser">Neighborhood name origins. Dutch roots, forts, people &amp; institutions, and street-map portmanteaus.</span>
+            </a>
+            <a class="hub-card" href="/guides/liens-easements">
+              <div class="hub-card-art">
+                <img src="/guides/liens-easements/liens-easements-cover.png" alt="" width="1200" height="675" />
+              </div>
+              <p class="kicker">Encumbrances</p>
+              <span class="hub-title">Liens, Easements &amp; Related Concepts</span>
+              <span class="hub-teaser">Voluntary vs involuntary liens, easement types, easement vs license, lis pendens, and encumbrances.</span>
+            </a>
+            <a class="hub-card" href="/guides/how-to-buy-in-nyc.html">
+              <div class="hub-card-art">
+                <picture>
+                  <source type="image/webp" srcset="/guides/assets/how-to-buy-in-nyc/nyc-hero-web.webp" />
+                  <img src="/guides/assets/how-to-buy-in-nyc/nyc-hero-web.jpg" alt="" width="1916" height="1440" />
+                </picture>
+              </div>
+              <p class="kicker">Buying in New York</p>
+              <span class="hub-title">How to buy in NYC</span>
+              <span class="hub-teaser">Twelve attorney-driven steps, condo vs co-op costs, tracks &amp; boosters (cash, sponsor incentives, 1031, assumption).</span>
+            </a>
+            <a class="hub-card" href="/guides/how-wealth-is-held.html">
+              <div class="hub-card-art">
+                <picture>
+                  <source type="image/webp" srcset="/guides/assets/how-wealth-is-held/paint-hero-rk.webp" />
+                  <img src="/guides/assets/how-wealth-is-held/paint-hero-rk.jpg" alt="" width="1600" height="900" />
+                </picture>
+              </div>
+              <p class="kicker">Wealth</p>
+              <span class="hub-title">How wealth is held</span>
+              <span class="hub-teaser">Holding companies, family offices, trusts, and LLCs, and where Manhattan property fits in the stack.</span>
+            </a>
+            <a class="hub-card" href="/guides/international-buyer-hub.html">
+              <hr class="hub-card-rule" />
+              <p class="kicker">International buyers</p>
+              <span class="hub-title">International Buyer Hub Guide</span>
+              <span class="hub-teaser">How the multilingual Manhattan buyer funnel is structured for decision-first inbound.</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="assessments">
+        <div class="wrap">
+          <p class="kicker">Property Assessments</p>
+          <h2>What is already written</h2>
+          <p class="lede">Reports that exist. Address studies and executive housing.</p>
+          <div class="hub-list">
+            <a class="hub-card" href="/insights/reports/2026-executive-housing-report">
+              <hr class="hub-card-rule" />
+              <p class="kicker">Executive housing</p>
+              <span class="hub-title">2026 Executive Housing Report</span>
+              <span class="hub-teaser">Manhattan Modern Residential. Relocation, Leasing, and Acquisition</span>
+            </a>
+            <a class="hub-card" href="/building-reports/lantern-house">
+              <div class="hub-card-art">
+                <img src="/buildings/lantern-house.jpg" alt="Lantern House terrace and curved bay windows looking toward the Manhattan skyline" width="1200" height="800" />
+              </div>
+              <p class="kicker">West Chelsea</p>
+              <span class="hub-title">Lantern House</span>
+              <span class="hub-teaser">Lantern House is one of the rare Manhattan buildings that feels residential before it feels luxurious.</span>
+            </a>
+            <a class="hub-card" href="/building-reports/one-high-line">
+              <hr class="hub-card-rule" />
+              <p class="kicker">West Chelsea</p>
+              <span class="hub-title">One High Line</span>
+              <span class="hub-teaser">One High Line is what happens when a luxury building decides to compete as a destination rather than an address.</span>
+            </a>
+            <a class="hub-card" href="/building-reports/individual-buildings">
+              <hr class="hub-card-rule" />
+              <p class="kicker">Archive</p>
+              <span class="hub-title">Building Profiles</span>
+              <span class="hub-teaser">The address-study archive. Reachable from here, not a header destination.</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tools: commission calculator is being drafted separately. Do not show a Tools card or link /tools. -->
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot-script">Live where you belong.</div>
+        <p class="foot-legal">
+          <strong>Educational only</strong>, not legal, tax, or investment advice. These notes are general guidance and do not represent an offer, a quote, or a guarantee of any transaction terms. Confirm anything material with a New York attorney and a CPA before you act.
+          <br /><br />
+          <a href="/guides">Guides</a>
+          · <a href="/">agentkammer.com</a>
+        </p>
+      </div>
+    </footer>
+  </div>
+  <script src="/guides/guides-search.js" defer></script>
+</body>
+</html>

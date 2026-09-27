@@ -76,11 +76,11 @@ describe("public menu lock", () => {
     expect(primaryNav.some((item) => item.href === "/buyer-advisory")).toBe(false);
   });
 
-  it("keeps Guides selector as Decision Guides · Neighborhoods · Property Assessment", () => {
+  it("keeps Guides selector as Neighborhoods · Field Guides · Property Assessments", () => {
     expect(guidesLibraryNav.map((item) => [item.label, item.href])).toEqual([
-      ["Decision Guides", "/guides#decision-guides"],
       ["Neighborhoods", "/guides#neighborhoods"],
-      ["Property Assessment", "/guides#kammer-report"],
+      ["Field Guides", "/resources#field-guides"],
+      ["Property Assessments", "/resources#assessments"],
     ]);
     expect(guidesLibraryNav.some((item) => item.label === "Kammer Report")).toBe(false);
     expect(guidesLibraryNav.some((item) => item.label === "Buildings")).toBe(false);
@@ -187,9 +187,9 @@ describe("public menu lock", () => {
     expect(doors.some((item) => item.href === "/contact?intent=strategy")).toBe(false);
     const guides = groups.find((group) => group.title === "Guides");
     expect(guides?.items.map((item) => item.label).slice(0, 3)).toEqual([
-      "Decision Guides",
+      "Resource Hub",
       "Neighborhoods",
-      "Property Assessment",
+      "Property Assessments",
     ]);
     expect(guides?.items).toEqual(
       expect.arrayContaining([

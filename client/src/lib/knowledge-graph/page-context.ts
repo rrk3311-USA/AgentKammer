@@ -128,7 +128,7 @@ export const pageGraph = [
     title: "Guides",
     topics: ["frameworks", "neighborhoods", "property assessment", "ownership"],
     prerequisites: ["situation", "decision"],
-    related: ["/guides#decision-guides", "/guides#neighborhoods", "/guides#kammer-report", "/belonging"],
+    related: ["/resources#field-guides", "/guides#neighborhoods", "/resources#assessments", "/belonging"],
   },
   {
     path: "/building-reports/neighborhood-guides",
