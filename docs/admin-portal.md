@@ -17,9 +17,9 @@ Auth is HTTP Basic, stored in `sessionStorage` for the browser session. All `/ap
 
 ## Indexing
 
-- `robots.txt` disallows `/admin`, `/admin/`, `/tools`, `/tools/`
+- `robots.txt` disallows `/admin`, `/admin/`, `/tools`, `/tools/`, `/hub`, `/hub/`
 - Admin / tools UI sets `noindex, nofollow, noarchive` on mount
-- `/admin` and `/tools` are not listed in `sitemap.xml`
+- `/admin`, `/tools`, and `/hub` are not listed in `sitemap.xml`
 
 ## Opening screen
 

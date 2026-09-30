@@ -140,12 +140,7 @@ export default function Qualify() {
               conversation with a written next step — not a tour booking.
             </p>
             <p>
-              Ready buyers under $5 million are warmly introduced to Diego Micheo at Douglas Elliman.
-              That is the right lane for local execution, not a lesser one.
-            </p>
-            <p>
-              If you are still forming the question, stay with Guidance and the Decision Hub. No
-              calendar pressure.
+              If you are still forming the question, stay with Guidance. No calendar pressure.
             </p>
             <p className="text-sm leading-7 text-brand-graphite/75">{PROCESS_PDF_FOOTER}</p>
           </div>

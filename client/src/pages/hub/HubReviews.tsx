@@ -7,6 +7,7 @@ export default function HubReviews() {
     title: "Reviews",
     description: "Client-visible advisor review summaries.",
     path: "/hub/reviews",
+    robots: "noindex, nofollow",
   });
 
   const [hub, setHub] = useState<HubSnapshot | null>(null);

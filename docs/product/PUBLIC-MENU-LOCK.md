@@ -14,6 +14,8 @@ Start Here is the Situations diagnostic (`/situations`). There is no separate Si
 
 **Header CTA:** filled **Guidance** control (`ak-call-button` without the stripe overlay) that opens the Advisor. Not a sixth nav item. Never “Request Intelligence.” The floating Guidance chip stays solid — no pinstripe.
 
+**Field hamburger (mobile only):** Home · Start Here · Guides · **Calculator** · Contact. Calculator lands on `/calculator`. Do not merchandise Tools or Hub. `/hub` stays unlisted.
+
 **Footer:** quiet end — identity, Start Here · Guides · About · Get Qualified, then Privacy · Terms · Contact, then languages. Envelope stays with Contact at the end. Get Qualified is an onboard utility, not a fifth product. Situations is not a separate footer item. No product strip, no Intelligence, no public Decision Hub, no Sitemap competing in charcoal.
 
 ## The four public products
@@ -23,7 +25,7 @@ Start Here is the Situations diagnostic (`/situations`). There is no separate Si
 | 1 | **Guidance** | Guidance Advisor chat | Dock / header verb |
 | 2 | **Situation Assessment** | Life diagnostic | `/belonging` |
 | 3 | **Property Assessment** | Address review | `/contact?intent=property` |
-| 4 | **Livability Score** | Tools desk only | `/contact?intent=livability` |
+| 4 | **Livability Score** | Separate from Property Assessment | `/contact?intent=livability` |
 
 ## Footer onboard (not a product)
 
@@ -48,6 +50,13 @@ Keep the route. Do not merchandise it as a current public offer.
 | Property Snapshot / Property Intelligence Report / Building Second Opinion / Kammer Report | Property Assessment |
 | Housing Strategy Session / Property Strategy Session / Discovery Call / Strategy Session | Guidance, Situation Assessment, or Contact |
 | Acquisition Dossier / memberships as equal primary cards | By invitation, after the relationship begins |
+
+## Unlisted (keep the route, do not merchandise)
+
+| Name | Route | Status |
+|------|-------|--------|
+| **Hub** | `/hub` | After Get Qualified. Not in hamburger, footer, or sitemap. |
+| **Tools** | `/tools` | Operator desk. Not a public category. |
 
 **Curation IQ** is a separate PR.
 

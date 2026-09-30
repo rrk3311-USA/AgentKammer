@@ -66,14 +66,14 @@ export default function IntelligenceHome() {
       <PageHero
         eyebrow="Intelligence"
         title="One public ladder. Four names."
-        description="Guidance, Situation Assessment, Property Assessment, and Livability Score on the Tools desk. Dossier and memberships follow by invitation."
+        description="Guidance, Situation Assessment, Property Assessment, and Livability Score. Dossier and memberships follow by invitation."
         art="decision-framework"
       />
 
       <DecisionFramework
         eyebrow="The Ladder"
         title="How the work is offered in public."
-        description={`One sequence. No overlapping SKUs. ${PUBLIC_PRODUCTS.livability.label} stays on the Tools desk, not merged into Property Assessment. Verdicts use ${KAMMER_VERDICTS.join(", ")}, and WHO. Not a /100 score.`}
+        description={`One sequence. No overlapping SKUs. ${PUBLIC_PRODUCTS.livability.label} stays separate from Property Assessment. Verdicts use ${KAMMER_VERDICTS.join(", ")}, and WHO. Not a /100 score.`}
         items={ladder.map((level, index) => ({
           step: String(index + 1).padStart(2, "0"),
           title: level.name,

@@ -33,8 +33,8 @@ export const PUBLIC_PRODUCTS = {
     id: "livability",
     label: "Livability Score",
     href: "/contact?intent=livability",
-    desk: "Tools",
-    text: "A Tools-desk read on daily fit. Kept separate from Property Assessment.",
+    desk: "Calculator",
+    text: "A read on daily fit. Kept separate from Property Assessment.",
   },
 } as const;
 
@@ -92,7 +92,6 @@ export function contactHref(id: PublicProductId): string {
 /** Quiet sitemap entries only. Do not add these to the five-item header. */
 export const FOOTER_SITEMAP_QUIET = [
   GET_QUALIFIED,
-  { label: "Hub", href: "/hub" },
-  { label: "Tools", href: "/tools" },
+  { label: "Calculator", href: "/calculator" },
   { label: "Intelligence", href: "/intelligence" },
 ] as const;

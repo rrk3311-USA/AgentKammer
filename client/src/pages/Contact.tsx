@@ -43,14 +43,6 @@ const budgetRanges = [
   "Not sure / private",
 ];
 
-function routingNote(budgetRange: string) {
-  if (budgetRange.includes("$5M+")) return "This lane is reviewed by Raphi.";
-  if (budgetRange === "Exploring / not ready" || budgetRange === "Not sure / private") {
-    return "Exploring stays with the Guidance Advisor and Decision Hub until a next step is clear.";
-  }
-  if (budgetRange) return "Ready buyers under $5M may be introduced to Diego Micheo at Douglas Elliman.";
-  return "";
-}
 const nextSteps = [...CONTACT_NEXT_STEPS, "Not sure"] as const;
 
 const intakeCopy: Record<
@@ -86,7 +78,7 @@ const intakeCopy: Record<
   },
   livability: {
     title: "Request a Livability Score.",
-    eyebrow: `${PUBLIC_PRODUCTS.livability.label} · Tools`,
+    eyebrow: PUBLIC_PRODUCTS.livability.label,
     description: PUBLIC_PRODUCTS.livability.text,
     nextStep: PUBLIC_PRODUCTS.livability.label,
   },
@@ -151,7 +143,6 @@ export default function Contact() {
         `Decision type: ${data.decisionType}`,
         `Timeline: ${data.timeline}`,
         `Budget / readiness: ${data.budgetRange}`,
-        `Routing: ${routingNote(data.budgetRange) || "Unspecified"}`,
         `What the call is for: ${data.nextStep}`,
         "",
         "Additional context:",
@@ -394,13 +385,9 @@ export default function Contact() {
                       <option key={item} value={item}>{item}</option>
                     ))}
                   </select>
-                  {formData.budgetRange ? (
-                    <p className="mt-2 text-xs leading-5 text-brand-graphite/80">{routingNote(formData.budgetRange)}</p>
-                  ) : (
-                    <p className="mt-2 text-xs leading-5 text-brand-graphite/70">
-                      $5M+ is reviewed by Raphi. Ready under $5M may go to Diego Micheo at Douglas Elliman. Exploring stays in chat and the Decision Hub.
-                    </p>
-                  )}
+                  <p className="mt-2 text-xs leading-5 text-brand-graphite/70">
+                    A range helps us read timing. Exploring can stay in Guidance.
+                  </p>
                 </div>
 
                 <div>

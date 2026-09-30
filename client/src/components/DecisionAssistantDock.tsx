@@ -720,8 +720,8 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
           role: "assistant",
           text: nextAnswers.email
             ? hubSaved
-              ? "Saved and submitted. Your recommendation brief is in your Decision Hub. Verify email anytime to reopen it on another device."
-              : "Saved and submitted to our team. To keep this in your Decision Hub, verify your email with a one-time code and Resume My Decision anytime."
+              ? "Saved and submitted. Your recommendation brief is with us. Verify email anytime to reopen it on another device."
+              : "Saved and submitted to our team. To keep this, verify your email with a one-time code and Resume My Decision anytime."
             : "Noted. I saved the decision profile and will use that context when we next speak.",
         },
       ]);

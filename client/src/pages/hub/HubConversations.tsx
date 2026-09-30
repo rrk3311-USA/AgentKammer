@@ -7,6 +7,7 @@ export default function HubConversations() {
     title: "Conversations",
     description: "Saved conversation summaries and advisor recaps.",
     path: "/hub/conversations",
+    robots: "noindex, nofollow",
   });
 
   const [hub, setHub] = useState<HubSnapshot | null>(null);

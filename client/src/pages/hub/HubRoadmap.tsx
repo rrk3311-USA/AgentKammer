@@ -10,6 +10,7 @@ export default function HubRoadmap() {
     title: "Where things stand",
     description: "A simple path from a clarified situation to a search in motion. At your pace.",
     path: "/hub/roadmap",
+    robots: "noindex, nofollow",
   });
 
   const [hub, setHub] = useState<HubSnapshot | null>(null);

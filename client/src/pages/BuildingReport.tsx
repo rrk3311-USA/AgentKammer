@@ -68,7 +68,7 @@ export default function BuildingReport() {
 
       <CTA
         title="Need judgment on an address?"
-        description="Share your target neighborhoods, timing, and budget. A Property Assessment is the address review. Livability Score stays on the Tools desk."
+        description="Share your target neighborhoods, timing, and budget. A Property Assessment is the address review. Livability Score stays a separate read."
         href="/contact?intent=property"
         label="Property Assessment"
         eyebrow="Property Assessment"

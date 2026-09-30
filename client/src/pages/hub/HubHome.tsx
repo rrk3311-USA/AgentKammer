@@ -15,6 +15,7 @@ export default function HubHome() {
     title: "Decision Hub",
     description: "Your housing plan, next step, and advisor reviews. Private and ready when you return.",
     path: "/hub",
+    robots: "noindex, nofollow",
   });
 
   const [hub, setHub] = useState<HubSnapshot | null>(null);

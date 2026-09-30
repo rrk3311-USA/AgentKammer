@@ -78,7 +78,7 @@ export default function Buildings() {
 
       <CTA
         title="Need judgment on an address?"
-        description="Request a Property Assessment. Livability Score stays on the Tools desk, separate from this review."
+        description="Request a Property Assessment. Livability Score stays a separate read."
         href="/contact?intent=property"
         label="Property Assessment"
         eyebrow="Property Assessment"

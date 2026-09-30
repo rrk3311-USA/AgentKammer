@@ -55,6 +55,7 @@ const Sitemap = lazy(() => import("@/pages/Sitemap"));
 const Qualify = lazy(() => import("@/pages/Qualify"));
 const ToolsHome = lazy(() => import("@/pages/tools/ToolsHome"));
 const LivabilityTool = lazy(() => import("@/pages/tools/LivabilityTool"));
+const Calculator = lazy(() => import("@/pages/Calculator"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 const Tank007 = lazy(() => import("@/pages/internal/Tank007"));
 
@@ -148,6 +149,7 @@ function Router() {
       <Route path="/tools/curation" component={AdminCuration} />
       <Route path="/tools/livability" component={LivabilityTool} />
       <Route path="/tools" component={ToolsHome} />
+      <Route path="/calculator" component={Calculator} />
       <Route path="/internal/007" component={Tank007} />
       <Route path="/internal/007-tank">{() => <Redirect to="/internal/007" />}</Route>
       <Route path="/" component={Home} />

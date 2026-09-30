@@ -43,6 +43,7 @@ export default function Account() {
     description:
       "Resume your Decision with email and a one-time PIN. No password, no account to set up.",
     path: "/account",
+    robots: "noindex, nofollow",
   });
 
   const { toast } = useToast();
