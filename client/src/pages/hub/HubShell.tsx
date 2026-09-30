@@ -1,14 +1,6 @@
 import { Link, useLocation } from "wouter";
 import type { ReactNode } from "react";
-
-const NAV = [
-  { href: "/hub", label: "Home" },
-  { href: "/hub/roadmap", label: "Where things stand" },
-  { href: "/hub/conversations", label: "Conversations" },
-  { href: "/hub/saved", label: "Saved" },
-  { href: "/hub/reviews", label: "Reviews" },
-  { href: "/hub/profile", label: "Profile" },
-];
+import { hubFieldNav } from "@/data/mobile-nav";
 
 export function HubShell({
   title,
@@ -35,7 +27,7 @@ export function HubShell({
             </p>
           )}
           <nav className="mt-6 flex gap-1 overflow-x-auto pb-1">
-            {NAV.map((item) => {
+            {hubFieldNav.map((item) => {
               const active =
                 item.href === "/hub" ? location === "/hub" : location.startsWith(item.href);
               return (

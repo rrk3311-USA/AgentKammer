@@ -521,7 +521,7 @@ export function PageHero({
       ) : null}
       <div className="absolute inset-0 bg-brand-navy/58" />
       <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/72 to-brand-navy/32" />
-      <PageSection className="relative grid gap-12 py-20 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.78fr)] lg:items-end lg:py-24">
+      <PageSection className="relative grid gap-8 py-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.78fr)] lg:items-end lg:gap-12 lg:py-24">
         <div>
           <p className={grammar.eyebrowOnDark}>{eyebrow}</p>
           <h1 className={cn("mt-4 max-w-[18ch]", grammar.displayOnDark)}>{title}</h1>
@@ -561,7 +561,7 @@ export function ReportSubnav() {
 
   return (
     <nav aria-label="Guides library" className="border-b border-brand-border bg-brand-ivory">
-      <div className="mx-auto flex w-full max-w-site flex-wrap items-center gap-y-2 px-6 py-5 lg:px-10">
+      <div className="mx-auto flex w-full max-w-site flex-wrap items-center gap-y-2 px-5 py-4 sm:px-6 lg:px-10 lg:py-5">
         {guidesLibraryNav.map((item, index) => {
           const active = activeId === item.id;
           const className = cn(
@@ -621,8 +621,8 @@ export function CTA({
   const hideSectionEyebrow = sameCtaPhrase(eyebrow, title);
   const hideButtonEyebrow = sameCtaPhrase(eyebrow, label);
   const actionClass = hideButtonEyebrow
-    ? "ak-call-button group inline-flex min-w-[16rem] items-center justify-between gap-6 px-5 py-4 text-left text-[14px] font-semibold uppercase tracking-[0.12em] transition-colors"
-    : "ak-call-button group grid px-5 py-4 text-left transition-colors";
+    ? "ak-call-button group inline-flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-[14px] font-semibold uppercase tracking-[0.12em] transition-colors sm:w-auto sm:min-w-[16rem] sm:gap-6"
+    : "ak-call-button group grid w-full px-5 py-4 text-left transition-colors sm:min-w-[16rem]";
   const actionInner = hideButtonEyebrow ? (
     <>
       <span>{label}</span>
@@ -641,8 +641,8 @@ export function CTA({
 
   return (
     <section className="border-t border-brand-brass/30 bg-brand-navy text-brand-ivory">
-      <PageSection className="py-16 lg:py-20">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+      <PageSection className="py-12 lg:py-20">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-8">
           <div>
             {hideSectionEyebrow ? null : <p className={grammar.eyebrowOnDark}>{eyebrow}</p>}
             <h2 className={cn(hideSectionEyebrow ? "" : "mt-4", grammar.sectionOnDark)}>{title}</h2>

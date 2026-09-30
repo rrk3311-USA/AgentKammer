@@ -50,7 +50,7 @@ describe("Footer situation index", () => {
     expect(html).toContain('aria-label="Explore other situations"');
     expect(html).not.toContain("What&#x27;s Changing?");
     expect(html).not.toContain("rounded-full border border-brand-border bg-white");
-    expect(html).toContain("py-12 lg:py-16");
+    expect(html).toContain("py-10 lg:py-16");
     expect(html).toContain("text-[12px] leading-5 text-brand-graphite/72");
     expect(footerTopRuleClass(true)).toContain("border-t-2 border-brand-navy/28");
     for (const href of situationHrefs) {

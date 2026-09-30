@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AgentKammerHorizontalLogo } from "@/components/AgentKammerHorizontalLogo";
+import { MobileFieldMenu } from "@/components/MobileFieldMenu";
 import { cn } from "@/lib/utils";
 import { primaryNav } from "@/components/site-shell";
 import { PUBLIC_PRODUCTS } from "@/data/public-menu";
@@ -43,6 +44,19 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [location]);
 
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <header
       className={cn(
@@ -50,7 +64,7 @@ export function Header() {
         scrolled ? "shadow-[0_10px_24px_rgba(32,39,53,0.14)]" : "",
       )}
     >
-      <div className="mx-auto grid max-w-site grid-cols-[1fr_auto] items-center gap-4 px-6 py-2.5 lg:grid-cols-[auto_minmax(24rem,1fr)_auto] lg:px-8 xl:px-10">
+      <div className="mx-auto grid max-w-site grid-cols-[1fr_auto] items-center gap-3 px-5 py-2.5 sm:px-6 lg:grid-cols-[auto_minmax(24rem,1fr)_auto] lg:gap-4 lg:px-8 xl:px-10">
         <Link href="/" data-testid="link-home" className={cn("justify-self-start", focusRing)}>
           <AgentKammerHorizontalLogo variant="light" emphasis="header" />
         </Link>
@@ -105,39 +119,7 @@ export function Header() {
         </div>
       </div>
 
-      {mobileMenuOpen ? (
-        <div className="ak-header-shell border-t border-brand-brass/30 lg:hidden">
-          <nav className="flex flex-col gap-1 px-6 py-6">
-            {primaryNav.map((link) => {
-              const active = isPrimaryNavActive(link.href, location);
-              return (
-                <Link key={link.label} href={link.href}>
-                  <span
-                    className={cn(
-                      "block py-2.5 text-[13px] capitalize tracking-[0.08em]",
-                      active ? "text-[#F2E7CB]" : "text-[#AEB8BE]",
-                    )}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </span>
-                </Link>
-              );
-            })}
-            <button
-              type="button"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                openDecisionAssistant();
-              }}
-              className={cn("mt-4 w-fit", headerGuidanceClass)}
-              data-testid="button-header-guidance-mobile"
-            >
-              {PUBLIC_PRODUCTS.guidance.label}
-            </button>
-          </nav>
-        </div>
-      ) : null}
+      {mobileMenuOpen ? <MobileFieldMenu location={location} onClose={() => setMobileMenuOpen(false)} /> : null}
 
       <div className="ak-metal-divider" aria-hidden />
     </header>

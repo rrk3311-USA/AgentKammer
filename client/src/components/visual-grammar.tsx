@@ -5,21 +5,21 @@ import { cn } from "@/lib/utils";
 
 /** Homepage-locked type. Reuse these; do not invent sizes per module. */
 export const grammar = {
-  eyebrow: "text-[11px] uppercase tracking-[0.26em] text-brand-cocoa",
-  eyebrowOnDark: "text-[11px] uppercase tracking-[0.26em] text-brand-stone",
-  display: "font-display text-[clamp(3.25rem,6vw,4.5rem)] leading-[0.92] text-brand-navy",
-  displayOnDark: "font-display text-[clamp(3.25rem,6vw,4.5rem)] leading-[0.92] text-brand-ivory",
-  section: "font-display text-[clamp(2.25rem,4vw,2.75rem)] leading-[1.02] text-brand-navy",
-  sectionOnDark: "font-display text-[clamp(2.25rem,4vw,2.75rem)] leading-[1.02] text-brand-ivory",
-  quote: "font-display text-[clamp(1.75rem,2.4vw,2rem)] leading-[1.2] tracking-[-0.02em] text-brand-navy",
-  body: "max-w-xl text-[17px] leading-8 text-brand-graphite",
-  bodyWide: "text-[17px] leading-8 text-brand-graphite",
-  bodyOnDark: "max-w-xl text-base leading-8 text-brand-ivory/74 lg:text-[17px]",
-  rowTitle: "font-display text-[1.65rem] leading-none text-brand-navy md:text-[1.85rem]",
+  eyebrow: "text-[11px] uppercase tracking-[0.16em] text-brand-cocoa sm:tracking-[0.22em] lg:tracking-[0.26em]",
+  eyebrowOnDark: "text-[11px] uppercase tracking-[0.16em] text-brand-stone sm:tracking-[0.22em] lg:tracking-[0.26em]",
+  display: "font-display text-[clamp(2.75rem,10.5vw,4.5rem)] leading-[0.92] text-brand-navy",
+  displayOnDark: "font-display text-[clamp(2.75rem,10.5vw,4.5rem)] leading-[0.92] text-brand-ivory",
+  section: "font-display text-[clamp(1.85rem,6vw,2.75rem)] leading-[1.06] text-brand-navy",
+  sectionOnDark: "font-display text-[clamp(1.85rem,6vw,2.75rem)] leading-[1.06] text-brand-ivory",
+  quote: "font-display text-[clamp(1.35rem,3.8vw,2rem)] leading-[1.25] tracking-[-0.02em] text-brand-navy",
+  body: "max-w-xl text-[16px] leading-7 text-brand-graphite lg:text-[17px] lg:leading-8",
+  bodyWide: "text-[16px] leading-7 text-brand-graphite lg:text-[17px] lg:leading-8",
+  bodyOnDark: "max-w-xl text-[15px] leading-7 text-brand-ivory/74 lg:text-[17px] lg:leading-8",
+  rowTitle: "font-display text-[1.45rem] leading-[1.08] text-brand-navy md:text-[1.85rem]",
   textLink:
     "inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-navy transition-colors hover:text-brand-navy-secondary",
-  pad: "mx-auto w-full max-w-site px-6 py-20 lg:px-10 lg:py-24",
-  padLoose: "mx-auto w-full max-w-site px-6 py-24 lg:px-10 lg:py-28",
+  pad: "mx-auto w-full max-w-site px-5 py-12 sm:px-6 lg:px-10 lg:py-24",
+  padLoose: "mx-auto w-full max-w-site px-5 py-16 sm:px-6 lg:px-10 lg:py-28",
 } as const;
 
 const moduleSurface: Record<"ivory" | "white" | "mist" | "stone" | "pause", string> = {
@@ -81,11 +81,11 @@ export function ModuleCards({
 }) {
   const cols =
     columns === 4 ? "sm:grid-cols-2 lg:grid-cols-4" : columns === 3 ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2";
-  const pad = size === "compact" ? "px-5 py-5" : size === "editorial" ? "p-8 lg:p-10" : "p-7";
+  const pad = size === "compact" ? "px-5 py-5" : size === "editorial" ? "p-6 sm:p-8 lg:p-10" : "p-5 sm:p-7";
   const titleClass = grammar.rowTitle;
 
   return (
-    <div className={cn("ak-felt-grid mt-12 grid", cols)}>
+    <div className={cn("ak-felt-grid mt-8 grid sm:mt-12", cols)}>
       {items.map((item) => (
         <Link
           key={item.href + item.label}
@@ -131,13 +131,13 @@ export function EditorialHero({
       <div className={grammar.pad}>
         <p className={grammar.eyebrow}>{eyebrow}</p>
         <h1 className={cn("mt-4 max-w-[18ch]", grammar.display)}>{title}</h1>
-        <p className={cn("mt-6", grammar.body)}>{description}</p>
+        <p className={cn("mt-5 lg:mt-6", grammar.body)}>{description}</p>
         {quote ? (
-          <blockquote className="mt-8 max-w-xl border-l border-brand-stone pl-5">
+          <blockquote className="mt-6 max-w-xl border-l border-brand-stone pl-4 lg:mt-8 lg:pl-5">
             <p className={grammar.quote}>{quote}</p>
           </blockquote>
         ) : null}
-        {children ? <div className="mt-8">{children}</div> : null}
+        {children ? <div className="mt-6 lg:mt-8">{children}</div> : null}
       </div>
     </section>
   );
@@ -169,7 +169,7 @@ export function DarkStatement({
 
   return (
     <section className="border-b border-brand-border bg-brand-navy text-brand-ivory">
-      <div className={cn(grammar.pad, "grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end")}>
+      <div className={cn(grammar.pad, "grid gap-7 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:gap-10")}>
         <div>
           <p className={grammar.eyebrowOnDark}>{eyebrow}</p>
           <h2 className={cn("mt-4 max-w-xl", grammar.sectionOnDark)}>{title}</h2>
@@ -199,7 +199,7 @@ export type LibraryItem = {
 
 export function LibraryList({ items, columns = 2 }: { items: readonly LibraryItem[]; columns?: 2 | 3 }) {
   return (
-    <div className={cn("ak-felt-grid mt-12 grid", columns === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2")}>
+    <div className={cn("ak-felt-grid mt-8 grid sm:mt-12", columns === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2")}>
       {items.map((item) => {
         const body = (
           <>
@@ -216,7 +216,7 @@ export function LibraryList({ items, columns = 2 }: { items: readonly LibraryIte
             ) : null}
           </>
         );
-        const className = "ak-felt-item group p-7";
+        const className = "ak-felt-item group p-5 sm:p-7";
         if (item.href.endsWith(".html")) {
           return (
             <a key={item.href + item.title} href={item.href} className={className}>
@@ -240,9 +240,9 @@ export function GrammarRows({
   items: readonly { eyebrow?: string; title: string; text?: ReactNode }[];
 }) {
   return (
-    <div className="ak-felt-rule mt-12 border-t">
+    <div className="ak-felt-rule mt-8 border-t sm:mt-12">
       {items.map((item) => (
-        <article key={item.title} className="ak-felt-rule border-b py-7">
+        <article key={item.title} className="ak-felt-rule border-b py-5 sm:py-7">
           {item.eyebrow ? <p className={cn(grammar.eyebrow, "tracking-[0.18em]")}>{item.eyebrow}</p> : null}
           <p className={cn(item.eyebrow ? "mt-3" : "", grammar.rowTitle)}>{item.title}</p>
           {item.text ? <div className="mt-3 max-w-2xl text-base leading-7 text-brand-graphite">{item.text}</div> : null}

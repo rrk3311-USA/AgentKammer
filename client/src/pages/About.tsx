@@ -22,7 +22,7 @@ export default function About() {
         art="private-advisory"
       />
 
-      <article className="mx-auto max-w-[42rem] px-6 py-20 lg:px-10 lg:py-24">
+      <article className="mx-auto max-w-[42rem] px-5 py-12 sm:px-6 lg:px-10 lg:py-24">
         <p className={grammar.eyebrow}>Practice</p>
         <h2 className={`mt-4 ${grammar.section}`}>Manhattan decisions need more than a listing feed.</h2>
         <p className={`mt-8 ${grammar.bodyWide}`}>
@@ -42,7 +42,7 @@ export default function About() {
         </p>
       </article>
 
-      <article className="mx-auto max-w-[42rem] border-t border-brand-border px-6 py-20 lg:px-10 lg:py-24">
+      <article className="mx-auto max-w-[42rem] border-t border-brand-border px-5 py-12 sm:px-6 lg:px-10 lg:py-24">
         <p className={grammar.eyebrow}>Credentials That Matter</p>
         <h2 className={`mt-4 ${grammar.section}`}>Building literacy changes the quality of advice.</h2>
         <p className={`mt-8 ${grammar.bodyWide}`}>
