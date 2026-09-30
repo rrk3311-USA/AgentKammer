@@ -1,15 +1,26 @@
 # Agent Kammer — Brand Operating Manual
 
-**Canonical brand reference.** Hand this to Claude, ChatGPT, Grok, Figma, developers, and future teammates.
+**Site / product operating manual.** Hand this to Claude, ChatGPT, Grok, Figma, developers, and future teammates for the visual system, Brand DNA, and older product philosophy.
+
+### Authority (read this first)
+
+For anything published, posted, sent, or shown to the public (site copy, Instagram, plates, Story cards, listing reviews, emails, PDFs), **`AGENTS.md` and `.cursor/rules/` win** if they disagree with this file. Public product names and IA are locked in [`docs/product/PUBLIC-MENU-LOCK.md`](../product/PUBLIC-MENU-LOCK.md). If this doc and code disagree on colors or type, **code wins**, then update this file.
+
+**Raphi is not licensed.** Public work is educational commentary only. No implied brokerage, no offer to represent, list, show, negotiate, or assemble a transaction team, and no promised outcomes. Disclaimer, exactly: `Educational commentary. Not advice. Opinions of Raphael Kammer.`
+
+**Public products (only these four):** Guidance · Situation Assessment · Property Assessment · Livability Score. Get Qualified is a footer onboard utility, not a fifth product. Strategy Session (including Housing Strategy Session) is shelved. Memberships and dossiers are by invitation after a relationship begins. Do not merchandise them on public shelves.
+
+**"Live Where You Belong"** is a Real Estate Essentials **plate footer only** (`Live Where You Belong · Agent Kammer`). It is not the site tagline. Manhattan Minute Stories use no tagline. The diagnostic question remains "Are you living where you belong?"
 
 | Layer | Where it lives |
 |-------|----------------|
-| **This document** | Mission, philosophy, Brand DNA, visual inspiration, voice, vocabulary, visual system, UI principles, writing, platform vision |
+| **House rules (publication)** | `AGENTS.md` · `.cursor/rules/` · `brand/stone-platinum-story-kit.md` |
+| **This document** | Brand DNA, visual system, older site product philosophy. Subordinate on publication copy. |
+| **Public IA / product names** | [`docs/product/PUBLIC-MENU-LOCK.md`](../product/PUBLIC-MENU-LOCK.md) · https://www.agentkammer.com/llms.txt |
 | **Code tokens (implementation)** | `client/src/index.css` · `tailwind.config.ts` · `client/src/lib/design-system.ts` |
-| **Public IA / URLs** | https://www.agentkammer.com/llms.txt · sitemap.xml |
 | **Product architecture** | `docs/architecture/SYSTEM-DESIGN.md` · `docs/product/DECISION-BLUEPRINT.md` · `docs/product/BELONGING-ASSESSMENT.md` · `docs/product/RESIDENTIAL-ADVISORY.md` · `docs/product/DECISION-CASES.md` |
 
-If this doc and code disagree on colors/type, **code wins** — then update this file.
+Older product docs still describe Housing Strategy Sessions and memberships as a practice model. That language is **internal / future**, not public merchandising, until Raphi is licensed and those SKUs are unlocked.
 
 Live site: https://www.agentkammer.com  
 Contact: info@agentkammer.com · United States (Phase 1 nationwide · Phase 2 Manhattan specialization)
@@ -25,9 +36,11 @@ Never deploy Fresh1 / Success Chemistry into the `agentkammer` Vercel project. N
 
 ## 1. Mission
 
-Help people make better real estate decisions — including the decision to do nothing — before listings, showings, or urgency take over.
+Help people make better real estate decisions, including the decision to do nothing, before listings, showings, or urgency take over.
 
-Agent Kammer is a **Residential Advisory** practice: ongoing strategic guidance for life’s biggest residential decisions, clarity on complex choices, and connection to the right local professionals when transaction expertise is needed. The recommendation can legitimately be “stay put.”
+Agent Kammer is Raphael Kammer's **Manhattan luxury real estate publication** and a **Residential Advisory** practice in formation. Judgment is the product. Traditional agents try to make you want the property. Agent Kammer helps you understand whether you should want it. The recommendation can legitimately be “stay put.”
+
+Until Raphi is licensed, public work is **educational commentary**, not a brokerage or a transaction-team service. Do not describe the public site as assembling local professionals, putting together a deal team, or representing a buyer or seller.
 
 The internal system that powers the product may be called a Decision OS; that name is **not** the public brand.
 
@@ -37,20 +50,22 @@ The internal system that powers the product may be called a Decision OS; that na
 
 ```txt
 Agent Kammer
-Residential Advisory
+Residential Advisory                 ← practice category
+Manhattan luxury real estate publication
+                                     ← public description (unlicensed)
 
-Buildings before listings.     ← core philosophy (permanent)
-Better real estate decisions.  ← customer promise
-Live Where You Belong.         ← outcome (not a move slogan)
-What’s changing?               ← conversation opener
+Buildings before listings.           ← core philosophy (permanent)
+Better real estate decisions.        ← customer promise
+Live Where You Belong.               ← plate footer only, not the site tagline
+What’s changing?                     ← conversation opener
 
-Ongoing strategic guidance for life’s biggest residential decisions.
-                               ← practice positioning line
+Guidance · Situation Assessment · Property Assessment · Livability Score
+                                     ← the four public products
 ```
 
-**Permanent foundation:** *Buildings before listings* is not a Manhattan slogan and not an inspector credential. It means: **the quality of the asset matters more than the marketing of the listing.** That is true in New York, Miami, Dallas, Seattle — anywhere.
+**Permanent foundation:** *Buildings before listings* is not a Manhattan slogan and not an inspector credential. It means: **the quality of the asset matters more than the marketing of the listing.** That is true in New York, Miami, Dallas, Seattle, anywhere.
 
-**Outcome line:** *Live Where You Belong* is not “you should move.” It is the result of good judgment — stay, renovate, rent, buy, sell, or wait — whichever best aligns with the life someone is trying to live.
+**Plate line (not the site tagline):** *Live Where You Belong* is the Real Estate Essentials plate footer (`Live Where You Belong · Agent Kammer`). It is not a move slogan and not the homepage or site tagline. Stay, renovate, rent, buy, sell, or wait can all be correct. Manhattan Minute Stories carry no tagline. The diagnostic on the site is “Are you living where you belong?”
 
 ---
 
@@ -65,10 +80,10 @@ These principles are the foundation for every feature, page, and recommendation.
 - **The highest-value recommendation may be to do nothing.**
 - **Doing nothing is not the same as belonging.** Someone can stay and still be poorly served by their environment.
 - **Intelligence reduces regret.**
-- **Advice should remain valuable even if no transaction occurs.**
-- **Judgment before access.** Clients hire Agent Kammer for judgment — not for access to listings.
-- **Independent advice first; execution through the right team second.**
-- **Help-worthiness over close-likelihood.** Score how much we can genuinely help — not only how likely someone is to buy or sell.
+- **Commentary should remain valuable even if no transaction occurs.**
+- **Judgment before access.** People come to Agent Kammer for judgment, not for access to listings.
+- **Independent judgment first.** Assembling a transaction team is not a public offer while Raphi is unlicensed. Keep that language internal / Phase 2.
+- **Help-worthiness over close-likelihood.** Score how much we can genuinely help, not only how likely someone is to buy or sell.
 
 If a feature only works when someone buys or sells, it fails this philosophy.
 
@@ -79,7 +94,7 @@ Housing decisions are deeper than “Should I buy or sell?” They resolve into 
 1. **Should anything change?** — Sometimes the answer is no.
 2. **Are you living where you belong?** — Even if nothing changes, is this environment still serving who you want to become?
 
-“Live Where You Belong” is the **outcome** of that process — not a sales slogan. Valid answers include stay, renovate, rent, buy, sell, wait, or do nothing yet.
+“Are you living where you belong?” is the **diagnostic**. “Live Where You Belong” is a **plate footer**, not a sales slogan and not the site tagline. Valid answers include stay, renovate, rent, buy, sell, wait, or do nothing yet.
 
 **Analogy (explain the method; do not brand as this):** Primary-care physician for housing decisions — diagnose the fit between person and home, then prescribe. Do **not** call the brand “House Doctor” publicly; it reads as inspector/repair. Preferred framing: *I diagnose housing decisions before recommending solutions.*
 
@@ -87,62 +102,67 @@ Housing decisions are deeper than “Should I buy or sell?” They resolve into 
 
 ## 3. Positioning
 
-**Core line:** Clients hire Agent Kammer for judgment, not access to listings.
+**Core line:** Judgment, not access to listings.
 
 **Practice / category:** Residential Advisory  
+**Public description:** Manhattan luxury real estate publication  
 **Practice line:** Ongoing strategic guidance for life’s biggest residential decisions.  
 **Promise:** Better real estate decisions.  
 **Philosophy:** Buildings before listings.  
-**Outcome:** Live Where You Belong.  
+**Plate footer:** Live Where You Belong. (plates only)  
 **Wedge:** What’s changing?  
 **Spine:** Should I do anything at all?  
 **Diagnostic:** Are you living where you belong?
 
 | Layer | Line | Role |
 |-------|------|------|
-| Practice | Residential Advisory | Public category — consulting / wealth-management peer set |
-| Practice line | Ongoing strategic guidance for life’s biggest residential decisions. | What the practice is |
-| Philosophy | Buildings before listings. | Permanent — asset quality over listing marketing |
-| Promise | Better real estate decisions. | What clients hire us for |
-| Outcome | Live Where You Belong. | Tagline — applies whether they move or not |
-| Diagnostic | Are you living where you belong? | Assessment question — not the tagline |
+| Practice | Residential Advisory | Practice category. Peer set is consulting / wealth-management, not brokerage merchandising. |
+| Public description | Manhattan luxury real estate publication | What the unlicensed public channel is |
+| Practice line | Ongoing strategic guidance for life’s biggest residential decisions. | What the practice is becoming |
+| Philosophy | Buildings before listings. | Permanent. Asset quality over listing marketing. |
+| Promise | Better real estate decisions. | What people come for |
+| Plate footer | Live Where You Belong. | Real Estate Essentials plates only. Not the site tagline. |
+| Diagnostic | Are you living where you belong? | Assessment question. Not a tagline. |
 | Opener | What’s changing? / Should anything change? | Conversation and homepage spine |
+| Public products | Guidance · Situation Assessment · Property Assessment · Livability Score | The only four names on the public shelf |
 
 **Public explanation:**
 
-> Agent Kammer Residential Advisory provides ongoing strategic guidance for life’s biggest residential decisions — and connects clients with the right local professionals when transaction expertise is needed.
+> Agent Kammer is Raphael Kammer's Manhattan luxury real estate publication. The public tools are Guidance, Situation Assessment, Property Assessment, and Livability Score. Everything published is educational commentary.
 
-That works in New York, California, Florida, Texas — anywhere in the U.S.
+Do **not** use this as public copy: “connects clients with the right local professionals when transaction expertise is needed.” That is transaction-team language. It is the kind of phrase compliance review flags while Raphi is unlicensed.
 
 **Perception shift:**
 
 | Instead of | Say |
 |------------|-----|
 | I’m looking for clients | I’m building a residential advisory practice |
-| Discovery Call | Housing Strategy Session |
-| Close / convert | Solve a real problem; membership if guidance should continue |
-| Bundle of monthly calls | Ongoing advisory relationship |
+| Discovery Call / Housing Strategy Session / Book a session | Guidance, Situation Assessment, or Contact |
+| Close / convert | Solve a real problem |
+| Bundle of monthly calls / membership as a public card | By invitation, after the relationship begins |
+| Assemble / curate a transaction team | Educational commentary. Stay silent on execution teams in public copy. |
 
-**Public advisory journey (unmistakable sequence):**
+**Public journey (locked):**
 
 ```txt
-1. What's Changing?          → /services (life-change Decision Briefs)
-2. Decision Assessment       → /belonging (Decision Profile)
-3. Relevant Decision Brief   → situation / path / research page
-4. Strategy                  → Housing Strategy Session + written summary / Decision Blueprint™
-                             → membership if guidance should continue
+1. What's Changing?          → /situations (Start Here)
+2. Guidance                  → header / dock Advisor
+3. Situation Assessment      → /belonging
+4. Property Assessment       → /contact?intent=property
+5. Livability Score          → Tools desk / /contact?intent=livability
 ```
 
-Start Here (`/situations`) is the Situations diagnostic. Situation Assessment (`/belonging`) remains contextual, not a competing header door. Decision Briefs are a format inside a situation journey. Guidance is the human layer (header / chip).
+Start Here (`/situations`) is the Situations diagnostic. Situation Assessment (`/belonging`) remains contextual, not a competing header door. Decision Briefs are a format inside a situation journey. Guidance is the human layer (header / chip). Get Qualified (`/qualify`) is footer-only. Strategy Session (`/contact?intent=strategy`) stays on the route and stays off the public shelf.
 
-**Commercial journey:**
+**Internal / future commercial path (not public merchandising):**
 
 ```txt
 Insights / Decision Briefs
-  → Paid Housing Strategy Session
-  → Written strategy summary / Decision Blueprint™
+  → (shelved) Strategy Session + written summary / Decision Blueprint™
   → Soft invite to advisory membership (when decisions will evolve)
 ```
+
+Keep that path in [`docs/product/RESIDENTIAL-ADVISORY.md`](../product/RESIDENTIAL-ADVISORY.md). Do not teach it as the current public offer.
 
 **OS browse surface (`/services`) — three questions:**
 
@@ -152,13 +172,11 @@ What Decision Are You Facing?
 What Are You Trying to Understand?
 ```
 
-**Long-term product frame (internal):** Housing Decision OS — decision intelligence, building intelligence, research library, personal decision profile, long-term planning, professional referrals when execution is needed. Do **not** lead marketing with “Decision OS”; lead with Residential Advisory and the four-step journey.
+**Long-term product frame (internal):** Housing Decision OS: decision intelligence, building intelligence, research library, personal decision profile, long-term planning. Do **not** lead marketing with “Decision OS.” Lead with the four public products and Residential Advisory as the practice category.
 
-You’re creating a **decision profile**, not collecting a lead. You’re selling judgment, not local market access. The product is the **ongoing advisory relationship**; sessions are one way clients access expertise — do not center everything on “calls.”
+You’re creating a **decision profile**, not collecting a lead. You’re offering judgment, not local market access. Do not center public copy on “calls,” sessions, or memberships.
 
-Offerings, pricing bands, and membership tiers: [`docs/product/RESIDENTIAL-ADVISORY.md`](../product/RESIDENTIAL-ADVISORY.md).
-
-**Primary lead magnet (not a home valuation):**
+**Primary diagnostic (not a home valuation):**
 
 > Find out if you’re living where you belong.
 
@@ -166,15 +184,16 @@ Spec: [`docs/product/BELONGING-ASSESSMENT.md`](../product/BELONGING-ASSESSMENT.m
 
 **Not:** Buy | Sell | Rent as the first frame.  
 **Not:** Another listing portal, CMA mill, or “luxury brokerage” brochure.  
-**Not:** A casual referral / “matchmaker” story.  
+**Not:** A casual referral / “matchmaker” story, or any public offer to assemble a transaction team.  
 **Not:** “Get a home valuation” as the front door.  
-**Not (Phase 1):** Leading as an NYC-only specialist.
+**Not:** Housing Strategy Session, Discovery Call, or memberships as public SKUs.  
+**Not (Phase 1):** Leading as a licensed NYC specialist.
 
-We diagnose life change and belonging, map options and trade-offs, then use building-quality judgment. A valid recommendation can be stay put, renovate, refinance, wait, lease, rent elsewhere, buy, sell, or relocate — then, when needed, assemble the right local team.
+We diagnose life change and belonging, map options and trade-offs, then use building-quality judgment. A valid conclusion can be stay put, renovate, refinance, wait, lease, rent elsewhere, buy, sell, or relocate. Saying what someone should do next as a licensed transaction is out of scope for public copy.
 
 ### Category lock: Residential Advisory + Decision Intelligence for Housing
 
-**Residential Advisory** is the public practice category — Raphael-led, editorial voice, peer set with consulting and executive advisory. Underneath that, whenever we describe the *product* (Decision Hub, saved Cases, the Guidance Advisor, AI-assisted intake) rather than the practice, the category to own is:
+**Residential Advisory** is the practice category: Raphael-led, editorial voice, peer set with consulting and executive advisory. The unlicensed **public** description is a Manhattan luxury real estate publication. Underneath that, whenever we describe the *product* (Decision Hub, saved Cases, the Guidance Advisor, AI-assisted intake) rather than the practice, the category to own is:
 
 **Decision Intelligence for Housing.**
 
@@ -183,10 +202,10 @@ Not:
 - **“AI Real Estate Advisor”** — reads like a chatbot with a name tag.
 - **A chatbot** — the Guidance Advisor is a tool inside a decision practice, not the product itself.
 - **Zillow-style agent tools** — listings-first, transaction-first.
-- **“Discovery Call”** — sales-process language; use Housing Strategy Session.
-- **Call packages** — memberships are ongoing advisory relationships, not bundled meetings.
+- **“Discovery Call” / “Housing Strategy Session”** — sales-process language. Not a public offer. Point people to Guidance, Situation Assessment, or Contact.
+- **Call packages / public memberships** — not on the public shelf. Invitation only, after a relationship begins.
 
-**Competitor frame to hold when writing product copy:** wealth advisors, executive coaches, McKinsey-style consultants, concierge relocation firms — not Zillow agents. Those categories keep **client files** and **engagements**, not “user accounts.” Agent Kammer’s product language should read the same way.
+**Competitor frame to hold when writing product copy:** wealth advisors, executive coaches, McKinsey-style consultants, editorial publications, concierge relocation firms. Not Zillow agents. Those categories keep **client files** and **engagements**, not “user accounts.” Agent Kammer’s product language should read the same way.
 
 ### Cases, not users
 
@@ -206,27 +225,23 @@ No account required → chat freely → save by email → PIN → resume anywher
 
 What a client receives back is a **Decision Recap**, not a raw transcript. Full auth model: [`docs/product/ACCOUNT-AUTH.md`](../product/ACCOUNT-AUTH.md).
 
-### When a transaction is appropriate
+### When a transaction is appropriate (internal / Phase 2)
 
-Agent Kammer remains the **continuity and advisory layer**. Transaction work is handled by the right professional for that client’s specific market and needs.
-
-1. Curate / assemble / coordinate the right brokerage and specialists.
-2. Stay with the client as the trusted advisory layer throughout.
-3. The client experiences **one trusted advisor**; licensed local execution is handled by the appropriate partner.
+Do **not** publish this as a current service. While Raphi is unlicensed, public copy stops at educational commentary. The older continuity model (Agent Kammer stays the advisory layer; a licensed local professional handles execution) is a future practice note, not a public offer to curate, assemble, or coordinate a transaction team.
 
 ### Phase 1 vs Phase 2 (do not rebuild the brand)
 
-| | Phase 1 (now · next 3–5 months) | Phase 2 (after NY salesperson license + ICC depth) |
+| | Phase 1 (now · unlicensed) | Phase 2 (after NY salesperson license + ICC depth) |
 |--|--------------------------------|-----------------------------------------------------|
-| **Market** | Nationwide decision guidance | Manhattan specialization layered on |
-| **Public category** | Residential Advisory | Manhattan Residential Advisory *or* Building Intelligence for Manhattan |
-| **Emphasis** | Strategy sessions, memberships, referral network, audience | Building reports, executive relocation, high-end NYC advisory |
-| **Philosophy** | Buildings before listings | Same — unchanged |
-| **Promise** | Better real estate decisions | Same — unchanged |
+| **Market** | Nationwide decision guidance + Manhattan publication | Manhattan specialization layered on |
+| **Public category** | Manhattan luxury real estate publication · Residential Advisory as practice category | Manhattan Residential Advisory *or* Building Intelligence for Manhattan |
+| **Emphasis** | Four public products, educational commentary, audience | Licensed advisory, building reports, executive relocation. Sessions and memberships only if Raphi unlocks them. |
+| **Philosophy** | Buildings before listings | Same. Unchanged. |
+| **Promise** | Better real estate decisions | Same. Unchanged. |
 
 Phase 2 adds credentials and geography proof. It does **not** change identity.
 
-**Proof categories (ecosystem):** Belonging Assessment · Decision Brief · Timeline · Vision Board · Building Report · AI Advisor (Guidance Advisor). Show the system working together — not philosophy alone, and not a property grid.
+**Proof categories (ecosystem):** Situation Assessment · Decision Brief · Timeline · Vision Board · Property Assessment · Guidance Advisor. Show the system working together, not philosophy alone, and not a property grid.
 
 ---
 
@@ -236,13 +251,16 @@ Do not optimize only for a marketing site. Today’s surfaces are the front door
 
 ### Website (today)
 
-- Education
-- Belonging Assessment (free diagnostic — planned / front door)
-- Decision Briefs
-- Building Reports
-- Contact / Housing Strategy Session intake
-- À la carte advisory (Strategy Session · Building Second Opinion · Portfolio Review)
-- Guidance Advisor (early clarity)
+- Education / publication (including Luxury Intelligence as a reading channel, not a fifth product)
+- Guidance (header / dock)
+- Situation Assessment (`/belonging`)
+- Property Assessment (`/contact?intent=property`)
+- Livability Score (Tools desk)
+- Decision Briefs / Start Here (`/situations`)
+- Contact
+- Get Qualified (`/qualify`, footer onboard only)
+
+Shelved on the route, not merchandised: Strategy Session (`/contact?intent=strategy`).
 
 ### Platform (tomorrow)
 
@@ -254,7 +272,7 @@ Do not optimize only for a marketing site. Today’s surfaces are the front door
 - Remodel planner (including from uploaded photos)
 - Saved buildings
 - Goal tracking
-- Advisory memberships (Essentials · Executive · Private Residential Office)
+- Advisory memberships (Essentials · Executive · Private Residential Office), invitation only
 - Ongoing advisory / returning-user dashboards
 - Opportunity routing (help-worthiness + follow-up cadence)
 
@@ -292,7 +310,7 @@ Product, content, and UX choices should be judged against this list — not vani
 | Adult | Respect the client’s uncertainty |
 | Protective | Highest expected-value recommendation — even “do nothing” |
 | Independent | Willing to recommend no deal |
-| Continuity | Stays the trusted advisor when a transaction team is curated |
+| Continuity | Stays with the decision over time. Does not pitch a transaction team in public copy. |
 
 **Tone:** Quiet confidence. Editorial, not hype. Think private counsel, not portal marketing.
 
@@ -349,18 +367,19 @@ When someone asks an AI to “design a new page,” point here first, then to Co
 ## 9. Messaging hierarchy
 
 1. **Brand** — Agent Kammer (hero-level; never demote to nav-only)
-2. **Category** — Residential Advisory
+2. **Category** — Residential Advisory (practice) · Manhattan luxury real estate publication (public)
 3. **Practice line** — Ongoing strategic guidance for life’s biggest residential decisions.
 4. **Philosophy** — Buildings before listings.
 5. **Promise** — Better real estate decisions.
-6. **Outcome** — Live Where You Belong. (tagline — move or not)
+6. **Plate footer** — Live Where You Belong. (Real Estate Essentials plates only. Not the site tagline.)
 7. **Wedge** — What’s changing? / Should anything change?
 8. **Diagnostic** — Are you living where you belong? (assessment, not slogan)
-9. **Proof** — Ecosystem artifacts (assessment report, briefs, reports, advisor)
-10. **Paid entry** — Housing Strategy Session (not “Discovery Call”)
-11. **Ongoing** — Advisory membership when decisions evolve (relationship, not call bundle)
-12. **Execution (when needed)** — Curate / assemble / coordinate the right local transaction team; Agent Kammer remains continuity
-13. **CTA** — Find out if you’re living where you belong · Begin the decision · Book a Housing Strategy Session
+9. **Proof** — Ecosystem artifacts (assessment report, briefs, Property Assessment, advisor)
+10. **Public products** — Guidance · Situation Assessment · Property Assessment · Livability Score
+11. **Footer onboard** — Get Qualified (not a fifth product)
+12. **CTA** — Find out if you’re living where you belong · Start Here · Guidance · Request a Property Assessment
+
+Do **not** put Housing Strategy Session, advisory membership, or “assemble the right transaction team” in this public hierarchy.
 
 One job per section. One headline. One short supporting sentence. Cards only when they hold an interaction.
 
@@ -373,38 +392,33 @@ One job per section. One headline. One short supporting sentence. Cards only whe
 | Term | Use |
 |------|-----|
 | Agent Kammer | Brand name |
-| Residential Advisory | Preferred public practice / category |
+| Residential Advisory | Practice / category. Do not imply a licensed brokerage. |
 | Agent Kammer Residential Advisory | Full practice name when space allows |
+| Manhattan luxury real estate publication | Public description while unlicensed |
 | Ongoing strategic guidance for life’s biggest residential decisions. | Practice positioning line |
-| Buildings before listings | Permanent core philosophy — not geography-bound |
+| Buildings before listings | Permanent core philosophy. Not geography-bound. |
 | Better real estate decisions | Customer promise |
-| Live Where You Belong | Outcome / tagline — stay or move can both be correct |
+| Live Where You Belong | Plate footer only (`Live Where You Belong · Agent Kammer`). Not the site tagline. |
+| Educational commentary. Not advice. Opinions of Raphael Kammer. | Exact public disclaimer |
+| Guidance | Public product 1. Header / dock Advisor. |
+| Situation Assessment | Public product 2. `/belonging`. Preferred public name over Belonging Assessment. |
+| Property Assessment | Public product 3. Address review. Verdicts: Pick / Consider / Wait / Pass. |
+| Livability Score | Public product 4. Tools desk only. Do not merge into Property Assessment. |
+| Get Qualified | Footer onboard utility. Not a fifth product. |
 | Judgment, not access to listings | Positioning line |
 | What’s changing? | Primary wedge / dock prompt |
 | Should I do anything at all? / Should anything change? | Homepage spine / first decision question |
-| Are you living where you belong? | Diagnostic question — assessment lead magnet, not the tagline |
+| Are you living where you belong? | Diagnostic question. Assessment lead magnet. Not the tagline. |
 | Find out if you’re living where you belong | Assessment CTA (preferred over “get a valuation”) |
-| Belonging Assessment | Free life-fit diagnostic (product name) |
+| Belonging Assessment | Internal / older product name for Situation Assessment |
 | Decision Profile | Personalized assessment report + internal profile |
-| Housing Strategy Session | Canonical first paid session — replaces Discovery Call |
-| Building Second Opinion | À la carte review of one building / property |
-| Residential Portfolio Review | À la carte review of every property owned |
-| Advisory membership | Ongoing relationship (Essentials · Executive Advisory · Private Residential Office) |
 | Housing Advisory | Preferred entry hub name (evolving from Buyer Advisory) |
 | Decision Brief | Content unit for situation landings |
-| Research Library | Footer brand surface — searchable browse layer, complementary to the Guidance Advisor (Think). Preferred over “Decision Library” |
+| Research Library | Footer brand surface. Searchable browse layer, complementary to the Guidance Advisor (Think). Preferred over “Decision Library” |
 | Building Report / Building Intelligence | Asset- and market-level evidence (Phase 2 deepens Manhattan) |
 | Guidance Advisor | Chat persona (one name only) |
 | Begin the decision | Primary CTA (alongside assessment CTA where appropriate) |
-| Book a Housing Strategy Session | Paid-entry CTA (preferred over “Request a call”) |
-| Decision Blueprint™ | Post–Housing Strategy Session deliverable (not a “proposal”) |
-| Raphael Kammer | Principal — introduce early on branded surfaces |
-| Curate the right transaction team | When a deal is appropriate |
-| Assemble the right professionals | Same idea — intentional, high-end |
-| Coordinate the right brokerage partner | Partner language |
-| Recommend the right transaction specialist | Specialist language |
-| Build the right advisory team | Continuity + partners |
-| Continuity and advisory layer | Agent Kammer’s role during a transaction |
+| Raphael Kammer | Principal. Introduce early on branded surfaces. |
 | Manhattan Residential Advisory | Phase 2 category option |
 | Building Intelligence for Manhattan | Phase 2 emphasis option |
 | Decision Intelligence for Housing | Product-layer category — pair with Residential Advisory whenever describing the Decision Hub / AI-assisted layer specifically |
@@ -421,23 +435,35 @@ One job per section. One headline. One short supporting sentence. Cards only whe
 | Term | Use |
 |------|-----|
 | Decision OS / Housing Decision Operating System | Architecture docs, engineering, admin |
+| Housing Strategy Session / Strategy Session / Property Strategy Session | Shelved. Route may exist. Not a public offer. |
+| Decision Blueprint™ | Internal / future post-session deliverable. Not a public SKU. |
+| Building Second Opinion / Residential Portfolio Review | Retired public names. Use Property Assessment. |
+| Advisory membership / Essentials / Executive / Private Residential Office | Invitation only, after a relationship begins. Not a public card. |
+| Acquisition Dossier | Same. By invitation. |
+| Continuity and advisory layer / curate-assemble-coordinate a transaction team | Future licensed practice note. Never public copy while unlicensed. |
 | Blueprint Begin | Retire as public header CTA label; prefer Begin the decision |
 | Decision Assistant | Prefer Guidance Advisor publicly |
-| Decision Quality Score / Opportunity Score | Internal — help-worthiness and follow-up routing |
+| Decision Quality Score / Opportunity Score | Internal. Help-worthiness and follow-up routing. |
 | Lead score | Ops only; never frame the visitor experience as “lead capture” |
-| House Doctor | Method analogy only — never public brand or headline |
-| “Account” / “member profile” | Backend/schema terms (`member_profiles` table) — fine in code and internal docs, not as a public UI label |
+| House Doctor | Method analogy only. Never public brand or headline. |
+| “Account” / “member profile” | Backend/schema terms (`member_profiles` table). Fine in code and internal docs, not as a public UI label. |
 
 ### Retired / avoid
 
 | Term | Why |
 |------|-----|
-| Discovery Call | Sales-process language; use Housing Strategy Session |
-| Real Estate Strategist | Superseded by Residential Advisory as the public category |
+| Discovery Call | Sales-process language. Do not replace it with Housing Strategy Session on public surfaces. |
+| Housing Strategy Session / Property Strategy Session / Strategy Session as a public offer | Shelved. Use Guidance, Situation Assessment, or Contact. |
+| Book a Housing Strategy Session | Same. Not a public CTA. |
+| Advisory membership as a public card | Invitation only. Not merchandised with the four products. |
+| Curate / assemble / coordinate the right transaction team | Implies brokerage. Compliance flags this while unlicensed. |
+| Connect clients with the right local professionals | Same idea. Not public copy. |
+| Live Where You Belong as the site tagline | Plate footer only. Do not teach it as the homepage or site tagline. |
+| Real Estate Strategist | Superseded by Residential Advisory as the practice category |
 | “I’m looking for clients” | Undersells the practice; say residential advisory practice |
-| Call package / “X calls per month” as the product | Product is the advisory relationship; sessions are one access method |
-| Matchmaker / matchmaking | Sounds informal; use curate / assemble / coordinate |
-| “I just refer people” | Undersells continuity and judgment |
+| Call package / “X calls per month” as the product | Do not merchandise sessions or call bundles |
+| Matchmaker / matchmaking | Informal and implies a referral desk. Do not use. |
+| “I just refer people” | Implies a referral / transaction-team service |
 | Leading as NYC-only specialist (Phase 1) | Premature; broaden first, specialize in Phase 2 |
 | Proposal (for Blueprint) | Sounds salesy; use Decision Blueprint™ |
 | Buy \| Sell \| Rent as primary nav | Erases differentiation |
@@ -447,7 +473,7 @@ One job per section. One headline. One short supporting sentence. Cards only whe
 | Success Chemistry / SC contact defaults | Wrong brand — production inbox is `info@agentkammer.com` only |
 | Transaction-only success | Conflicts with Decision Philosophy |
 | Treating “Buildings before listings” as inspector marketing | It’s asset-quality philosophy, not a credential flex |
-| Treating “Live Where You Belong” as “you should move” | Outcome includes stay, renovate, wait |
+| Treating “Live Where You Belong” as “you should move” | Outcome includes stay, renovate, wait. And it is still plate-only, not the site tagline. |
 | “Account” as a primary UI label | Sounds like software signup; use Resume My Decision / My Decision |
 | “Dashboard” | SaaS-feeling; use My Decision / Decision Hub |
 | “Login” / “Sign in” | Use Resume My Decision |
@@ -560,7 +586,7 @@ Identity and IA can be excellent while the page still feels dense. Prefer **fewe
 | **Decision Brief (service landing)** | Title → one dominant image/drawing → three paragraphs → one quote → one recommendation → Belonging CTA → next brief |
 | **About** | Editorial article rhythm + architectural sketches between sections — not card grids |
 | **Footer** | Brand surface, not a standard footer — **Research Library** (Browse): quiet brand line, rotating-placeholder search, Popular Searches pills, reduced quick-link cluster. Complementary to the Guidance Advisor dock (Think). Do not repeat the full taxonomy on every page as visual noise |
-| **Primary CTA** | Find out if you’re living where you belong / Start Decision Assessment — not “Request a Call” as the default offer |
+| **Primary CTA** | Find out if you’re living where you belong / Situation Assessment / Guidance. Not “Request a Call” and not “Book a Housing Strategy Session.” |
 
 **Anti-pattern:** Hero → hierarchy → scenarios → what you receive → CTA → footer taxonomy. That is six ideas. Cut to three narrative beats plus CTA.
 
@@ -575,10 +601,12 @@ Identity and IA can be excellent while the page still feels dense. Prefer **fewe
 1. Agent Kammer (brand)
 2. Residential Advisory (category — not “Decision OS”)
 3. Buildings before listings. (philosophy signal)
-4. Headline: Live Where You Belong. (outcome)
+4. Headline: What’s changing? / Should anything change? (do **not** use Live Where You Belong as the site H1 or tagline)
 5. One supporting sentence (practice line or promise)
-6. Primary CTA: Find out if you’re living where you belong / Start Decision Assessment → `/belonging`
+6. Primary CTA: What’s changing → `/situations`, or Guidance / Situation Assessment → `/belonging`
 7. Dominant visual = terrace / building atmosphere (full-bleed plane)
+
+The current homepage still shows “Live where you belong” as an H1. Treat that as legacy composition, not the rule for new work. New pages and new copy do not make that line the site tagline.
 
 **Below fold (keep lean)**
 
@@ -586,7 +614,7 @@ Identity and IA can be excellent while the page still feels dense. Prefer **fewe
 2. How we decide (three questions only)
 3. Building Intelligence (one beat)
 4. Featured Decision Briefs (short list)
-5. Residential Advisory → Belonging Assessment or Housing Strategy Session
+5. Residential Advisory → Guidance, Situation Assessment, Property Assessment, or Livability Score
 
 **Nav language:** Keep life-change framing (Start Here · Decisions · Life Changes · Building Intelligence · About). Do **not** regress to Buy | Sell | Rent as primary IA.  
 **Header CTA:** Decision Assessment → `/belonging` (not “Begin the decision” as the default product offer).
@@ -599,7 +627,7 @@ Identity and IA can be excellent while the page still feels dense. Prefer **fewe
 Eyebrow     → uppercase tracked cocoa/brass label
 Headline    → Cormorant, navy, clamp size
 Body        → Inter, graphite, max ~2 lines in hero
-Primary CTA → navy fill, “Start Decision Assessment” / Find out if you belong → `/belonging`
+Primary CTA → navy fill, “Start Situation Assessment” / Find out if you belong → `/belonging`
 Secondary   → border only, quieter action
 PageHero    → navy band + optional blueprint art (inner pages)
 Section     → ivory canvas, hairline borders, generous py-30/40
@@ -623,7 +651,7 @@ Belonging Assessment: life questions first (not listing filters) — see product
 
 > Find out if you’re living where you belong.
 
-> Live Where You Belong — whether that means stay, renovate, rent, buy, sell, or wait.
+> Are you living where you belong? Stay, renovate, rent, buy, sell, or wait can all be correct.
 
 > I diagnose housing decisions before recommending solutions.
 
@@ -643,15 +671,13 @@ Belonging Assessment: life questions first (not listing filters) — see product
 
 > Ongoing strategic guidance for life’s biggest residential decisions.
 
-> Book a Housing Strategy Session — one major decision, a written action summary.
+> Some people only need one diagnostic. That is a correct outcome.
 
-> Some clients only need one conversation. Others prefer an ongoing advisory relationship.
+> Educational commentary. Not advice. Opinions of Raphael Kammer.
 
-> When a transaction is right, we curate the right local team — and remain the advisory layer throughout.
+> Independent judgment, including when the better move is to stay put.
 
-> One trusted advisor. The right professionals for execution.
-
-> Independent advice — including when the best move is to stay put.
+> Request a Property Assessment if an address is already in play.
 
 ### Weak
 
@@ -659,9 +685,11 @@ Belonging Assessment: life questions first (not listing filters) — see product
 
 > Housing Decision Operating System (as the public H1 category)
 
-> Book a Discovery Call
+> Book a Discovery Call / Book a Housing Strategy Session
 
 > I’m looking for clients
+
+> We’ll put together your transaction team
 
 > X strategy calls per month (as the product definition)
 
@@ -688,18 +716,18 @@ Belonging Assessment: life questions first (not listing filters) — see product
 | Do | Don’t |
 |----|-------|
 | Lead with What’s changing? / Should anything change? | Lead with listings or Buy/Sell/Rent nav |
-| Use Live Where You Belong as an outcome (stay or move) | Treat it as a “you should move” slogan |
-| Use Are you living where you belong? as the diagnostic | Confuse the diagnostic with the tagline |
-| Offer Belonging Assessment before valuation forms | Lead with “get a home valuation” |
+| Keep Live Where You Belong on Real Estate Essentials plates only | Use it as the site tagline or a “you should move” slogan |
+| Use Are you living where you belong? as the diagnostic | Confuse the diagnostic with a tagline |
+| Offer Situation Assessment before valuation forms | Lead with “get a home valuation” |
 | Score help-worthiness internally | Optimize only for close-likelihood |
-| Say Residential Advisory | Lead with Decision OS or “Real Estate Strategist” on marketing surfaces |
-| Say Housing Strategy Session | Say Discovery Call |
-| Frame memberships as ongoing advisory | Sell “call packages” |
+| Say Residential Advisory as the practice category | Lead with Decision OS or “Real Estate Strategist” on marketing surfaces |
+| Name the four public products | Say Discovery Call, Housing Strategy Session, or Book a session |
+| Keep memberships invitation-only and off the public shelf | Sell “call packages” or put memberships next to the four products |
 | Keep Buildings before listings as permanent philosophy | Treat it as Manhattan-only or inspector marketing |
 | Lead with judgment, not listing access | Sell “access” or portal inventory |
-| Advise nationwide; curate local experts | Over-claim NYC specialty before Phase 2 |
-| Curate / assemble / coordinate the right team | Say “matchmaker” or “I just refer” |
-| Remain the continuity layer during a deal | Disappear once a brokerage is introduced |
+| Publish educational commentary nationwide | Over-claim a licensed NYC specialty, or offer to assemble a transaction team |
+| Stay silent on execution teams in public copy | Say “matchmaker,” “I just refer,” or “we’ll put together your team” |
+| Use the exact disclaimer on published work | Imply brokerage, representation, or a promised outcome |
 | Say “building a residential advisory practice” | Say “looking for clients” |
 | Match Brand DNA (calm, architectural, private) | Tech-startup, flashy, AI-looking, luxury-cliché surfaces |
 | Show ecosystem proof early | Pure philosophy with no artifact |
@@ -715,7 +743,9 @@ Belonging Assessment: life questions first (not listing filters) — see product
 
 ---
 
-## 20. Related files (do not replace this manual)
+## 20. Related files
+
+This manual still owns Brand DNA and the visual system. It does **not** own publication copy. House rules and the public menu lock win there.
 
 | File | Role |
 |------|------|
@@ -726,11 +756,13 @@ Belonging Assessment: life questions first (not listing filters) — see product
 | `docs/architecture/SYSTEM-DESIGN.md` | System architecture |
 | `docs/product/DECISION-BLUEPRINT.md` | Blueprint deliverable contract |
 | `docs/product/BELONGING-ASSESSMENT.md` | Belonging Assessment product brief |
-| `docs/product/RESIDENTIAL-ADVISORY.md` | Practice model — Strategy Session, à la carte, memberships |
+| `AGENTS.md` · `.cursor/rules/` | House rules. Win for publication copy. |
+| `docs/product/PUBLIC-MENU-LOCK.md` | Locked public products and IA |
+| `docs/product/RESIDENTIAL-ADVISORY.md` | Older practice model (sessions, à la carte, memberships). Internal / future. Not public merchandising. |
 | `docs/product/ACCOUNT-AUTH.md` | Email + PIN auth (no password) |
 | `docs/product/DECISION-CASES.md` | Cases mental model — Decision Intelligence for Housing category |
 | `docs/archive/*` | Historical — not authority |
 
 ---
 
-*Last updated: July 2026 · Align with: Residential Advisory practice · Housing Strategy Session (retire Discovery Call) · Belonging Assessment front door · memberships as ongoing relationships · Housing Advisory rename → Raphael + sample brief → account/memory/timeline loop.*
+*Last updated: September 2026 · Align with: AGENTS.md + `.cursor/rules/` (publication) · PUBLIC-MENU-LOCK (four products) · unlicensed educational commentary · Live Where You Belong is plate-only · sessions, memberships, and transaction-team language retired from public copy.*
