@@ -119,5 +119,5 @@ fi
 
 echo "prepared $DATE"
 echo "video: $OUT/Agent-Kammer-Manhattan-Minute-${DATE}.mp4"
-echo "Send the MP4 to the approval inbox: https://app.notion.com/p/47634e315afa4cfa82af00777d628c72"
+echo "Send the MP4 to the approval inbox and @mention Raphael Kammer: https://app.notion.com/p/47634e315afa4cfa82af00777d628c72"
 echo "After Raphi sets Status to Done: scripts/manhattan-minute/publish-instagram.py $OUT/Agent-Kammer-Manhattan-Minute-${DATE}.mp4 --i-approve-publish"

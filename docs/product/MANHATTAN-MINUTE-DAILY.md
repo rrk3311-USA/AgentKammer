@@ -14,6 +14,8 @@ Everything waits for Raphi. Agents prepare. They do not merge or post.
 | The automation itself (this PR) | https://github.com/rrk3311-USA/AgentKammer/pull/42 | Review and merge. That is the deploy onto `luxury-homepage`. |
 | Each morning's Story (MP4 + verdict) | https://app.notion.com/p/47634e315afa4cfa82af00777d628c72 | Watch the file. Set Status to Done. Then post by hand or run the gated publish job. |
 
+Every approval row assigns **Raphael Kammer** (`rrk3311@gmail.com`) on the Approver person field and @mentions him in a comment. That is what puts it in the Notion inbox (bell) and under Home → Assigned to me. Do not create a row without that mention.
+
 Notion OS (under Content Hub): https://app.notion.com/p/3eb0ad628ae581c19b31f4478f588fcd
 
 House rules win: educational commentary only. Disclaimer, exactly: `Educational commentary. Not advice. Opinions of Raphael Kammer.` Agents prepare. They do not post.
