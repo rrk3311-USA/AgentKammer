@@ -24,9 +24,9 @@ describe("mobile field menu", () => {
     }
   });
 
-  it("puts Guides, Calculator, Hub, and every public guide in the hamburger", () => {
+  it("puts Guides, Calculator, and every public guide in the hamburger", () => {
     const ids = mobileFieldNav.map((item) => item.id);
-    expect(ids).toEqual(["home", "start", "guides", "calculator", "hub", "contact"]);
+    expect(ids).toEqual(["home", "start", "guides", "calculator", "contact"]);
     const hrefs = collectMobileNavHrefs();
     expect(hrefs).toContain("/guides");
     expect(hrefs).toContain("/resources");
@@ -34,9 +34,9 @@ describe("mobile field menu", () => {
     expect(hrefs).toContain("/calculator");
     expect(hrefs).not.toContain("/tools");
     expect(hrefs).not.toContain("/tools/livability");
-    expect(hrefs).toContain("/hub");
+    expect(hrefs).not.toContain("/hub");
     for (const page of hubFieldNav) {
-      expect(hrefs).toContain(page.href);
+      expect(hrefs).not.toContain(page.href);
     }
     for (const guide of publicGuides) {
       expect(hrefs).toContain(guide.href);
@@ -44,7 +44,7 @@ describe("mobile field menu", () => {
   });
 
   it("opens the section that matches the field you are already in", () => {
-    expect(defaultOpenSectionId("/hub/saved")).toBe("hub");
+    expect(defaultOpenSectionId("/hub/saved")).toBeNull();
     expect(defaultOpenSectionId("/calculator")).toBe("calculator");
     expect(defaultOpenSectionId("/tools/livability")).toBeNull();
     expect(defaultOpenSectionId("/guides/how-mortgages-work")).toBe("guides");
@@ -59,7 +59,8 @@ describe("mobile field menu", () => {
     expect(html).toContain("Guides");
     expect(html).toContain("Calculator");
     expect(html).not.toContain("Tools");
-    expect(html).toContain("Hub");
+    expect(html).not.toMatch(/>Hub</);
+    expect(html).not.toContain('href="/hub"');
     expect(html).toContain("aria-expanded");
     expect(html).toContain("Guidance");
     expect(html).toContain("data-testid=\"button-header-guidance-mobile\"");

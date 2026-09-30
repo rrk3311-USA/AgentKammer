@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { PageHero, PageSection } from "@/components/site-shell";
+import { PageSection } from "@/components/site-shell";
 import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import {
@@ -52,12 +52,12 @@ export default function Calculator() {
     path: "/calculator",
   });
 
-  const [price, setPrice] = useState(String(DEFAULT_CARRY.price));
+  const [price, setPrice] = useState("3,500,000");
   const [downPercent, setDownPercent] = useState(String(DEFAULT_CARRY.downPercent));
   const [ratePercent, setRatePercent] = useState(String(DEFAULT_CARRY.ratePercent));
   const [years, setYears] = useState(String(DEFAULT_CARRY.years));
-  const [taxMonthly, setTaxMonthly] = useState(String(DEFAULT_CARRY.taxMonthly));
-  const [commonMonthly, setCommonMonthly] = useState(String(DEFAULT_CARRY.commonMonthly));
+  const [taxMonthly, setTaxMonthly] = useState("2,800");
+  const [commonMonthly, setCommonMonthly] = useState("3,200");
 
   const input: CarryInput = useMemo(
     () => ({
@@ -75,25 +75,26 @@ export default function Calculator() {
 
   return (
     <main className="bg-brand-ivory text-brand-ink">
-      <PageHero
-        eyebrow="Calculator"
-        title="What does this home cost each month?"
-        description="Carry first. Listings later. A quiet read of mortgage, tax, and common charges — educational, not a pre-approval."
-        art="capital-strategy"
-      />
-
       <section className="border-b border-brand-border bg-brand-navy text-brand-ivory">
-        <PageSection className="grid gap-8 py-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end lg:py-20">
+        <PageSection className="grid gap-10 py-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:py-16">
           <div>
-            <p className={grammar.eyebrowOnDark}>Monthly carry</p>
-            <p className="mt-4 font-display text-[clamp(3.25rem,10vw,5.5rem)] leading-[0.9] tracking-[-0.03em]">
+            <p className={grammar.eyebrowOnDark}>Calculator</p>
+            <p className="mt-5 font-display text-[clamp(3.5rem,11vw,6.25rem)] leading-[0.86] tracking-[-0.03em]">
               {formatUsd(result.monthly)}
             </p>
+            <p className="mt-5 font-display text-[clamp(1.45rem,3.4vw,2.1rem)] leading-[1.15] tracking-[-0.02em] text-brand-ivory/88">
+              What does this home cost each month?
+            </p>
           </div>
-          <p className={grammar.bodyOnDark}>
-            On a {formatUsd(input.price)} purchase with {input.downPercent}% down. Cash to close begins near{" "}
-            {formatUsd(result.down)}, before closing costs.
-          </p>
+          <div className="max-w-md space-y-5 border-l border-brand-ivory/16 pl-5 lg:pl-8">
+            <p className={grammar.bodyOnDark}>
+              On a {formatUsd(input.price)} purchase with {input.downPercent}% down. Cash to close begins near{" "}
+              {formatUsd(result.down)}, before closing costs.
+            </p>
+            <p className={grammar.bodyOnDark}>
+              Carry first. Listings later. Mortgage, tax, and common charges — educational, not a pre-approval.
+            </p>
+          </div>
         </PageSection>
       </section>
 
