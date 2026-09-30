@@ -2,7 +2,6 @@ import { decisionNavigationGroups } from "@/data/decision-navigation";
 import { publicGuides } from "@/data/guides";
 import { manhattanNeighborhoodGuides } from "@/data/manhattan-neighborhoods";
 import { guidesLibraryNav } from "@/components/site-shell";
-import { TOOL_CATALOG } from "@shared/tools";
 
 export type MobileNavLink = {
   label: string;
@@ -36,11 +35,6 @@ export const hubFieldNav: readonly MobileNavLink[] = [
 const whatsChanging =
   decisionNavigationGroups.find((group) => group.title === "What's Changing?")?.items ?? [];
 
-const liveTools = TOOL_CATALOG.filter((tool) => tool.status === "live").map((tool) => ({
-  label: tool.name,
-  href: tool.href,
-}));
-
 function isBranch(item: MobileNavLink | MobileNavBranch): item is MobileNavBranch {
   return "children" in item && Array.isArray(item.children);
 }
@@ -48,7 +42,7 @@ function isBranch(item: MobileNavLink | MobileNavBranch): item is MobileNavBranc
 /**
  * Mobile field menu. Not the locked desktop header.
  * Home · Start Here · Guides · Contact stay the four doors.
- * Tools and Hub nest here so the hamburger works in the field.
+ * Calculator and Hub nest here so the hamburger works in the field.
  */
 export const mobileFieldNav: readonly MobileNavSection[] = [
   { id: "home", label: "Home", href: "/" },
@@ -77,12 +71,7 @@ export const mobileFieldNav: readonly MobileNavSection[] = [
       ...publicGuides.map((guide) => ({ label: guide.title, href: guide.href })),
     ],
   },
-  {
-    id: "tools",
-    label: "Tools",
-    href: "/tools",
-    children: [{ label: "Tools desk", href: "/tools" }, ...liveTools],
-  },
+  { id: "calculator", label: "Calculator", href: "/calculator" },
   {
     id: "hub",
     label: "Hub",
@@ -115,7 +104,7 @@ export function collectMobileNavHrefs(sections: readonly MobileNavSection[] = mo
 export function defaultOpenSectionId(location: string): string | null {
   const path = location.split(/[?#]/)[0] ?? location;
   if (path === "/hub" || path.startsWith("/hub/")) return "hub";
-  if (path === "/tools" || path.startsWith("/tools/")) return "tools";
+  if (path === "/calculator" || path.startsWith("/calculator/")) return "calculator";
   if (
     path === "/guides" ||
     path.startsWith("/guides/") ||

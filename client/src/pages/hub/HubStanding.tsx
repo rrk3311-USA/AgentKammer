@@ -34,7 +34,7 @@ export function QualifySubstatus({
         </span>
         {route === "diego_handoff" ? (
           <span className="inline-flex items-center border border-[#B08D57]/50 bg-[#F5F2EB] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#2A3447]">
-            Diego route
+            Local execution
           </span>
         ) : null}
         {route && route !== "diego_handoff" ? (
@@ -70,16 +70,7 @@ export function QualifySubstatus({
       ) : null}
       {route === "diego_handoff" ? (
         <p className="text-sm leading-6 text-[#2F3136]/80">
-          Ready buyers under $5 million go to Diego Micheo at Douglas Elliman. A warm handoff — not a
-          lesser lane.
-          {hub?.diegoUrl ? (
-            <>
-              {" "}
-              <a href={hub.diegoUrl} target="_blank" rel="noreferrer" className="underline underline-offset-4">
-                Elliman profile
-              </a>
-            </>
-          ) : null}
+          Local execution is the next lane when a transaction is actually the right step.
         </p>
       ) : null}
       {route === "nurture" ? (

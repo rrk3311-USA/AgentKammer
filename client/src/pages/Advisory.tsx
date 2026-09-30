@@ -25,7 +25,7 @@ const publicLadder = [
   },
   {
     title: PUBLIC_PRODUCTS.livability.label,
-    format: "Tools desk",
+    format: "Separate read",
     text: PUBLIC_PRODUCTS.livability.text,
     price: "By request",
   },
@@ -105,7 +105,7 @@ export default function Advisory() {
           <SectionHeading
             eyebrow="Public ladder"
             title="Begin with one of four names."
-            description={`${PUBLIC_PRODUCTS.livability.label} stays on the Tools desk. It is not a Property Assessment.`}
+            description={`${PUBLIC_PRODUCTS.livability.label} stays separate from Property Assessment.`}
           />
           <div className="mt-12 border-t border-brand-border">
             {publicLadder.map((item, index) => (

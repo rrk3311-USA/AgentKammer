@@ -14,6 +14,8 @@ Start Here is the Situations diagnostic (`/situations`). There is no separate Si
 
 **Header CTA:** filled **Guidance** control (`ak-call-button` without the stripe overlay) that opens the Advisor. Not a sixth nav item. Never “Request Intelligence.” The floating Guidance chip stays solid — no pinstripe.
 
+**Field hamburger (mobile only):** Home · Start Here · Guides · **Calculator** · Hub · Contact. Calculator lands on `/calculator`. Do not merchandise Tools.
+
 **Footer:** quiet end — identity, Start Here · Guides · About · Get Qualified, then Privacy · Terms · Contact, then languages. Envelope stays with Contact at the end. Get Qualified is an onboard utility, not a fifth product. Situations is not a separate footer item. No product strip, no Intelligence, no public Decision Hub, no Sitemap competing in charcoal.
 
 ## The four public products
@@ -23,7 +25,7 @@ Start Here is the Situations diagnostic (`/situations`). There is no separate Si
 | 1 | **Guidance** | Guidance Advisor chat | Dock / header verb |
 | 2 | **Situation Assessment** | Life diagnostic | `/belonging` |
 | 3 | **Property Assessment** | Address review | `/contact?intent=property` |
-| 4 | **Livability Score** | Tools desk only | `/contact?intent=livability` |
+| 4 | **Livability Score** | Separate from Property Assessment | `/contact?intent=livability` |
 
 ## Footer onboard (not a product)
 

@@ -57,7 +57,7 @@ export const CALL_PURPOSE_LABELS: Record<QualifyCallPurpose, string> = {
 
 export const ROUTE_LABELS: Record<QualifyRoute, string> = {
   raphi_calendar: "Strategy Session with Raphi",
-  diego_handoff: "Diego Micheo · Douglas Elliman",
+  diego_handoff: "Local execution",
   nurture: "Stay in Guidance",
 };
 
@@ -129,7 +129,7 @@ export function nextStepForRoute(route: QualifyRoute): string {
     return "Reserve a Strategy Session when you are ready. No pressure to book from this page.";
   }
   if (route === "diego_handoff") {
-    return "A warm introduction to Diego Micheo at Douglas Elliman is the right next lane.";
+    return "Local execution is the next lane when a transaction is actually the right step.";
   }
   return "Stay with Guidance and your Decision Hub. A live session can wait.";
 }

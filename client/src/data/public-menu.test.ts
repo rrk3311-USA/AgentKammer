@@ -90,7 +90,7 @@ describe("public menu lock", () => {
     expect(FOOTER_SITEMAP_QUIET.map((item) => [item.label, item.href])).toEqual([
       ["Get Qualified", "/qualify"],
       ["Hub", "/hub"],
-      ["Tools", "/tools"],
+      ["Calculator", "/calculator"],
       ["Intelligence", "/intelligence"],
     ]);
     expect(FOOTER_SITEMAP_QUIET.some((item) => item.href === "/qualify")).toBe(true);
