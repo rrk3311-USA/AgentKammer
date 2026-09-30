@@ -15,6 +15,7 @@ const About = lazy(() => import("@/pages/About"));
 const BuildingReport = lazy(() => import("@/pages/BuildingReport"));
 const NewYorkMarket = lazy(() => import("@/pages/NewYorkMarket"));
 const IntelligenceHome = lazy(() => import("@/pages/IntelligenceHome"));
+const LuxuryIntelligence = lazy(() => import("@/pages/LuxuryIntelligence"));
 const Services = lazy(() => import("@/pages/Services"));
 const ServiceLanding = lazy(() => import("@/pages/ServiceLanding"));
 const Perspectives = lazy(() => import("@/pages/Perspectives"));
@@ -167,6 +168,8 @@ function Router() {
       <Route path="/insights/:slug" component={PerspectiveArticle} />
       <Route path="/contact" component={Contact} />
       <Route path="/advisory" component={Advisory} />
+      <Route path="/intelligence/luxury" component={LuxuryIntelligence} />
+      <Route path="/luxury-intelligence">{() => <Redirect to="/intelligence/luxury" />}</Route>
       <Route path="/intelligence" component={IntelligenceHome} />
       <Route path="/international/:country">
         {(params) => <InternationalCountry country={params.country} />}

@@ -1,7 +1,12 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { grammar } from "@/components/visual-grammar";
 
 const researchPaths = [
+  {
+    label: "Luxury Intelligence",
+    description: "The public channel. Read the brief or save a PDF copy.",
+    href: "/intelligence/luxury",
+  },
   {
     label: "Resource Hub",
     description: "Field guides and Property Assessments.",
@@ -20,12 +25,16 @@ const researchPaths = [
 ];
 
 export function ContinueYourResearch() {
+  const [location] = useLocation();
+  const current = location.split(/[?#]/)[0] ?? location;
+  const items = researchPaths.filter((item) => item.href !== current);
+
   return (
     <section className="border-t border-brand-midnight/10 bg-white px-6 py-14 lg:px-10">
       <div className="mx-auto max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-champagne">Continue Your Research</p>
         <ul className="mt-8 space-y-6">
-          {researchPaths.map((item) => (
+          {items.map((item) => (
             <li key={item.label} className="border-b border-brand-midnight/8 pb-6 last:border-0 last:pb-0">
               {item.href.startsWith("/resources") ? (
                 <a href={item.href} className="group block">

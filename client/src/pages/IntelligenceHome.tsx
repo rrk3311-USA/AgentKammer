@@ -6,6 +6,7 @@ import { LibraryList, grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { perspectives } from "@/data/perspectives";
 import { buildingReports, formatBuildingReportDate } from "@/data/building-reports";
+import { luxuryIntelligenceEdition, luxuryIntelligencePath } from "@/data/luxury-intelligence";
 import { KAMMER_VERDICTS, PUBLIC_PRODUCTS } from "@/data/public-menu";
 import { openDecisionAssistant } from "@/lib/decision-assistant";
 
@@ -57,7 +58,7 @@ export default function IntelligenceHome() {
   usePageMetadata({
     title: "Intelligence",
     description:
-      "One public ladder: Guidance, Situation Assessment, Property Assessment, and Livability Score.",
+      "Luxury Intelligence is the public channel. The ladder remains Guidance, Situation Assessment, Property Assessment, and Livability Score.",
     path: "/intelligence",
   });
 
@@ -66,9 +67,23 @@ export default function IntelligenceHome() {
       <PageHero
         eyebrow="Intelligence"
         title="One public ladder. Four names."
-        description="Guidance, Situation Assessment, Property Assessment, and Livability Score on the Tools desk. Dossier and memberships follow by invitation."
+        description="Luxury Intelligence is the reading channel. The offers stay Guidance, Situation Assessment, Property Assessment, and Livability Score."
         art="decision-framework"
       />
+
+      <section className="border-b border-brand-border bg-white">
+        <PageSection>
+          <SectionHeading
+            eyebrow={luxuryIntelligenceEdition.series}
+            title="The public channel is now on the site."
+            description="Read the opening brief on the web, or save a PDF copy. This is the library, not a fifth product."
+          />
+          <Link href={luxuryIntelligencePath} className={`${grammar.textLink} mt-8`}>
+            Open Luxury Intelligence
+            <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+          </Link>
+        </PageSection>
+      </section>
 
       <DecisionFramework
         eyebrow="The Ladder"

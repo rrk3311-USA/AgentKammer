@@ -66,6 +66,7 @@ export function getSiteMapGroups(): SiteMapGroup[] {
         { label: PUBLIC_PRODUCTS.property.label, href: PUBLIC_PRODUCTS.property.href },
         { label: PUBLIC_PRODUCTS.livability.label, href: PUBLIC_PRODUCTS.livability.href },
         { label: "Intelligence", href: "/intelligence" },
+        { label: "Luxury Intelligence", href: "/intelligence/luxury" },
         { label: "Decision Hub", href: "/account" },
         { label: "International", href: "/international" },
         { label: "Insights", href: "/insights" },
@@ -91,6 +92,7 @@ export function getSiteMapGroups(): SiteMapGroup[] {
       description: "Educational frameworks and neighborhood fit. Field guides and Property Assessments live on the Resource Hub.",
       items: [
         { label: "Resource Hub", href: "/resources" },
+        { label: "Luxury Intelligence", href: "/intelligence/luxury" },
         { label: "Neighborhoods", href: "/guides#neighborhoods" },
         { label: "Property Assessments", href: "/resources#assessments" },
         ...publicGuides.map((guide) => ({ label: guide.title, href: guide.href })),
