@@ -1,0 +1,104 @@
+/* Agent Kammer · Stone + Platinum story kit (v11 system). Shared by cover.html and end-panel.html.
+   Canvas 1080x1920. Values match /workspace/property-assessment/story/kammer-report-2026-09-28-story-grey-v11.html */
+:root{
+  --deep:#161C28; --navy:#2A3447; --slate:#555C69; --meta:#5F6672;
+  --label:#4A5058;          /* graphite small caps labels (AA on stone and cool ivory) */
+  --meta-stone:#454B55;     /* secondary text sitting on the stone */
+  --sep:rgba(22,28,40,.26); /* quiet middle-dot separators */
+  --plat-ink:#7E858C;
+  --display:"Cormorant Garamond", Georgia, serif;
+  --ui:Inter, "Helvetica Neue", Arial, sans-serif;
+  --x:56px;                 /* content inset: content edges sit at 64px (x + 8) */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#CFCCC6}
+#capture{
+  width:1080px;height:1920px;position:relative;overflow:hidden;
+  background:#CFCCC6 url(assets/stone-bg.png) 0 0/1080px 1920px no-repeat;  /* procedural honed limestone */
+  color:var(--deep);font-family:var(--ui);
+  font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1;
+  text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;
+}
+/* platinum inlay picture frame: 2px ring at inset 32 + inner hairline at inset 39 */
+#capture::before{content:"";position:absolute;inset:32px;border-radius:3px;padding:2px;pointer-events:none;z-index:1;
+  background:linear-gradient(135deg,#7E858C 0%,#C9CED3 22%,#EEF0F2 42%,#9AA1A8 60%,#7E858C 80%,#C9CED3 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;}
+#capture::after{content:"";position:absolute;inset:39px;border-radius:2px;border:1px solid rgba(238,240,242,.55);box-shadow:0 0 0 1px rgba(126,133,140,.18);pointer-events:none;z-index:1}
+
+/* Page header group: monogram top 100, kicker, 40px platinum hairline */
+.mast{position:absolute;top:100px;left:0;right:0;display:flex;flex-direction:column;align-items:center}
+.mast img{width:46px;height:auto;display:block}
+.kicker{margin-top:14px;font-size:16px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--label);padding-left:.32em;line-height:1}
+.mast .rule{margin-top:18px;width:40px;height:1px;background:linear-gradient(90deg,rgba(126,133,140,0),#7E858C 30%,#9AA1A8 70%,rgba(154,161,168,0))}
+
+/* Headline: Cormorant 92 / .98, italic accent */
+.title{position:absolute;top:250px;left:0;right:0;font-family:var(--display);font-weight:400;font-size:92px;line-height:.98;letter-spacing:-.012em;color:var(--deep);text-align:center}
+.title em{font-style:italic}
+.sep{color:var(--sep);padding:0 .42em}
+
+/* Small caps label (column headers, note headings, date lines) */
+.label{font-size:14px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--label);line-height:1}
+
+/* Cool ivory app panel with platinum ring and brushed platinum title bar */
+.panel{position:absolute;top:382px;left:64px;right:64px;
+  background:linear-gradient(160deg,#FDFDFC 0%,#F8F8F7 55%,#F0F1F1 100%);
+  border-radius:26px;overflow:hidden;
+  box-shadow:0 1px 2px rgba(22,28,40,.05),0 10px 24px rgba(22,28,40,.07),0 36px 80px rgba(22,28,40,.12);}
+.panel::before{content:"";position:absolute;inset:0;border-radius:26px;padding:2px;z-index:4;pointer-events:none;
+  background:linear-gradient(135deg,#7E858C 0%,#9AA1A8 20%,#C9CED3 36%,#EEF0F2 50%,#C9CED3 64%,#9AA1A8 80%,#7E858C 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;}
+.panel::after{content:"";position:absolute;top:64px;left:8px;right:8px;bottom:8px;border-radius:0 0 19px 19px;border:1px solid rgba(126,133,140,.30);border-top:0;z-index:3;pointer-events:none}
+.bar{height:64px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;column-gap:24px;padding:0 30px;position:relative;
+  border-bottom:1px solid rgba(94,101,109,.45);
+  background-color:#C9CED3;
+  background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,rgba(0,0,0,.035) 1px 2px,transparent 2px 5px),
+    linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 45%,rgba(0,0,0,.05) 100%),
+    linear-gradient(90deg,#8E959C 0%,#AEB4BA 12%,#C9CED3 30%,#EEF0F2 50%,#C9CED3 70%,#AEB4BA 88%,#8E959C 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55);}
+.dots{display:flex;align-items:center;gap:9px}
+.dots i{width:11px;height:11px;border-radius:50%;display:block;background:rgba(42,52,71,.26);box-shadow:inset 0 0 0 1px rgba(42,52,71,.16)}
+.bar .t{font-size:18px;line-height:1;font-weight:500;letter-spacing:.01em;color:#2A3447;white-space:nowrap;font-variant-numeric:tabular-nums lining-nums}
+.bar .t b{font-weight:600;color:#2A3447}
+.bar .t .sep{color:rgba(42,52,71,.40);padding:0 .5em}
+.bar .r{justify-self:end;display:block;width:22px;height:auto;opacity:.72}
+.thead,.row{display:grid;grid-template-columns:156px 1fr 176px;column-gap:16px;padding:0 28px}
+.thead{height:54px;align-items:center;border-bottom:1px solid rgba(126,133,140,.28)}
+.thead span{font-size:14px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--label);line-height:1}
+.row{padding-top:32px;padding-bottom:32px;align-items:start;position:relative}
+/* platinum row dividers: 2px, solid left, fading over the right quarter */
+.row + .row::before{content:"";position:absolute;top:-1px;left:28px;right:28px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,#7E858C 0%,#AEB4BA 22%,#DDE0E3 42%,#B4BAC0 62%,#9AA1A8 75%,rgba(154,161,168,0) 100%);}
+.addr{font-size:40px;font-weight:600;line-height:1.12;letter-spacing:-.02em;color:var(--deep)}
+.meta{margin-top:8px;font-size:26px;line-height:1.3;color:var(--meta)}
+.why{margin-top:10px;font-family:var(--display);font-style:italic;font-weight:500;font-size:35px;line-height:1.14;text-wrap:balance;color:var(--slate)}
+
+/* Inlaid call bars (recessed, muted, letterpress label). White label AA: pick >= 5.1, consider >= 4.9, pass >= 6.7 */
+.mark{display:block;width:176px;height:48px;line-height:48px;text-align:center;position:relative;overflow:hidden;
+  font-family:var(--ui);font-weight:700;font-size:18px;letter-spacing:.22em;text-indent:.22em;text-transform:uppercase;
+  color:#FFFFFF;border-radius:3px;text-shadow:0 -1px 0 rgba(0,0,0,.28);
+  box-shadow:inset 0 3px 5px rgba(0,0,0,.30),inset 0 1px 1px rgba(0,0,0,.22),inset 0 0 0 1px rgba(0,0,0,.14),
+    inset 0 -1px 0 rgba(255,255,255,.08),0 1px 0 rgba(255,255,255,1),0 -1px 0 rgba(80,87,95,.16);}
+.mark.pick{background:linear-gradient(90deg,#56765F 0%,#4E6D57 35%,#44604D 65%,#34503F 100%)}
+.mark.consider{background:linear-gradient(90deg,#8F6A37 0%,#876434 35%,#7C5C32 65%,#6E5230 100%)}
+.mark.pass{background:linear-gradient(90deg,#954245 0%,#8A3E41 35%,#7A383B 65%,#5E3032 100%)}
+
+/* Note block on the stone */
+.note{position:absolute;left:calc(var(--x) + 8px);right:calc(var(--x) + 8px)}
+.note .k{display:flex;align-items:center;gap:14px}
+.note .k i{display:block;width:32px;height:1px;background:var(--plat-ink)}
+.note p{margin-top:18px;font-size:30px;line-height:1.42;letter-spacing:-.006em;color:var(--deep);font-weight:400;text-wrap:pretty}
+.note p b{font-weight:650;font-variant-numeric:tabular-nums lining-nums}
+.note p .src,.note p .disc{color:var(--meta-stone)}
+
+/* Navy pinstripe divider with AGENTKAMMER.COM (1px lines every 7px) */
+.divider{position:absolute;top:1596px;left:calc(var(--x) + 8px);right:calc(var(--x) + 8px);display:flex;align-items:center}
+.stripe{flex:1 1 0;height:18px;min-width:32px;background-image:repeating-linear-gradient(90deg,rgba(42,52,71,.22) 0 1px,transparent 1px 7px)}
+.site{flex:0 0 auto;padding:0 22px;font-size:16px;font-weight:600;letter-spacing:.24em;text-indent:.24em;text-transform:uppercase;color:var(--deep);line-height:1}
+
+/* Footer: tagline + small print (no QR anywhere since Sep 29; the old QR tile styles were removed) */
+.fbody{position:absolute;top:1665px;left:calc(var(--x) + 8px);right:calc(var(--x) + 8px);display:grid;grid-template-columns:173px 1fr;column-gap:34px;align-items:stretch}
+.ftext{display:flex;flex-direction:column;justify-content:space-between;height:173px}
+.tag{display:block;font-family:var(--display);font-style:italic;font-weight:500;font-size:28px;line-height:1.2;color:var(--deep)}
+.fine{font-size:15px;line-height:1.5;color:var(--deep);text-align:left;text-wrap:pretty;font-variant-numeric:tabular-nums lining-nums}

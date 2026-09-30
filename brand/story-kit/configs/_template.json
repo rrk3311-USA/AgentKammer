@@ -1,0 +1,45 @@
+{
+  "_how": "Daily config template. Copy to configs/YYYY-MM-DD.json and set date. Run tools/cover_facts.py to fill the cover facts (wx*, t10*, sunset, spokenWeather). Fill the board slots from that day's script only, and fill deal.verdict with the real call (Pick, Consider, Wait or Pass); a production build refuses a missing or invalid verdict. Leave titleAlign as center (approved default).",
+  "date": "YYYY-MM-DD",
+  "show": "The Manhattan Minute",
+  "fine": "Educational commentary. Not advice. Opinions of Raphael Kammer.",
+  "titleAlign": "center",
+  "r1Label": "The discount check",
+  "r1FigurePre": "",
+  "r1Figure": "",
+  "r1FigureLabel": "off original ask",
+  "r1": "",
+  "r1Meta": "",
+  "r2Label": "One deal",
+  "r2": "",
+  "r2Meta": "",
+  "r2Aside": "",
+  "r3Label": "One thing to watch",
+  "r3": "",
+  "r3Accent": "",
+  "r3Meta": "",
+  "boardCues": {
+    "r1": "The discount check",
+    "r2": "One deal",
+    "r2Aside": "[aside]",
+    "r3": "One thing to watch"
+  },
+  "deal": {
+    "band": "",
+    "area": "",
+    "price": "",
+    "verdict": "",
+    "qualifier": "",
+    "who": "",
+    "header": false
+  },
+  "endArt": "",
+  "ctaLead": "Swipe up",
+  "cta": "Download today’s brief",
+  "compassBands": [
+    "$5M to $10M",
+    "$10M to $20M",
+    "$20M and up"
+  ],
+  "compassMinSales": 5
+}

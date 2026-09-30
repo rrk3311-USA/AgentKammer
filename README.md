@@ -2,11 +2,17 @@
 
 Manhattan housing advisory site — Decision OS product surface.
 
-## Brand operating manual (canonical)
+## Agent rules (Cursor)
 
-**Hand this to AIs, designers, and developers:**
+Every Cursor agent in this repo should follow [`AGENTS.md`](AGENTS.md) and the files in [`.cursor/rules/`](.cursor/rules/). Those win for publication copy, Instagram, plates and listing reviews.
+
+## Brand operating manual (site product)
+
+The live site product / brand operating manual is still:
 
 [`docs/brand/AGENT-KAMMER-BRAND.md`](docs/brand/AGENT-KAMMER-BRAND.md)
+
+If that file and `AGENTS.md` disagree on publication voice or Story/plate footers, `AGENTS.md` and Raphi win. Ask before guessing.
 
 ## Layout
 

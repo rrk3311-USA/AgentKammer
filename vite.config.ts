@@ -35,6 +35,7 @@ export default defineConfig({
         "**/output/**",
         "**/tmp/**",
         "**/pdfs/**",
+        "**/brand/story-kit/**",
       ],
     },
   },

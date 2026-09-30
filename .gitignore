@@ -22,6 +22,15 @@ pdfs/
 scratch/
 .playwright-cli/
 
+# Manhattan Minute story kit: local installs and renders only
+brand/story-kit/node_modules/
+brand/story-kit/out/*
+!brand/story-kit/out/.gitkeep
+brand/story-kit/tools/__pycache__/
+brand/story-kit/**/*.mp4
+brand/story-kit/**/*.mp3
+brand/story-kit/**/*.wav
+
 # Design scratch assets — keep generated_images and active logos only
 attached_assets/Pasted-*
 attached_assets/Screenshot*
