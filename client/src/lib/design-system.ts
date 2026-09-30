@@ -6,7 +6,7 @@
 /** 8px grid section rhythm - 120px mobile, 160px desktop */
 export const sectionY = "py-30 lg:py-40";
 
-export const siteContainer = "mx-auto w-full max-w-site px-6 lg:px-10";
+export const siteContainer = "mx-auto w-full max-w-site px-5 sm:px-6 lg:px-10";
 export const contentContainer = "mx-auto w-full max-w-content";
 export const readingContainer = "mx-auto w-full max-w-reading";
 

@@ -50,7 +50,7 @@ export function Header() {
         scrolled ? "shadow-[0_10px_24px_rgba(32,39,53,0.14)]" : "",
       )}
     >
-      <div className="mx-auto grid max-w-site grid-cols-[1fr_auto] items-center gap-4 px-6 py-2.5 lg:grid-cols-[auto_minmax(24rem,1fr)_auto] lg:px-8 xl:px-10">
+      <div className="mx-auto grid max-w-site grid-cols-[1fr_auto] items-center gap-3 px-5 py-2.5 sm:px-6 lg:grid-cols-[auto_minmax(24rem,1fr)_auto] lg:gap-4 lg:px-8 xl:px-10">
         <Link href="/" data-testid="link-home" className={cn("justify-self-start", focusRing)}>
           <AgentKammerHorizontalLogo variant="light" emphasis="header" />
         </Link>
@@ -107,7 +107,7 @@ export function Header() {
 
       {mobileMenuOpen ? (
         <div className="ak-header-shell border-t border-brand-brass/30 lg:hidden">
-          <nav className="flex flex-col gap-1 px-6 py-6">
+          <nav className="flex flex-col gap-1 px-5 py-5 sm:px-6">
             {primaryNav.map((link) => {
               const active = isPrimaryNavActive(link.href, location);
               return (

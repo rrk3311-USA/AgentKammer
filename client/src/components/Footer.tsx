@@ -39,8 +39,8 @@ export function FooterIvoryIndex({ exploreOtherSituations }: { exploreOtherSitua
   return (
     <div
       className={cn(
-        "mx-auto w-full max-w-site px-6 lg:px-10",
-        exploreOtherSituations ? "py-12 lg:py-16" : "py-7 lg:py-9",
+        "mx-auto w-full max-w-site px-5 sm:px-6 lg:px-10",
+        exploreOtherSituations ? "py-10 lg:py-16" : "py-6 lg:py-9",
       )}
     >
       {exploreOtherSituations ? (
@@ -87,7 +87,7 @@ export function Footer() {
       <FooterIvoryIndex exploreOtherSituations={exploreOtherSituations} />
 
       <div data-ak-charcoal-footer className="border-t border-brand-brass/28 bg-brand-charcoal text-brand-ivory">
-        <div className="mx-auto flex w-full max-w-site flex-col gap-2.5 px-6 pb-2 pt-5 lg:px-10">
+        <div className="mx-auto flex w-full max-w-site flex-col gap-2.5 px-5 pb-2 pt-5 sm:px-6 lg:px-10">
           <div className="flex flex-wrap items-center gap-x-10 gap-y-3">
             <div className="flex shrink-0 items-start gap-3">
               <AkMonogramMark variant="ivory" className="mt-0.5 h-6 w-auto opacity-90" />

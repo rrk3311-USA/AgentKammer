@@ -6,10 +6,11 @@ import { EditorialHero, GrammarRows, ModuleCards, ModuleSection, grammar } from 
 
 describe("visual grammar", () => {
   it("locks homepage display and section sizes", () => {
-    expect(grammar.display).toContain("clamp(3.25rem,6vw,4.5rem)");
-    expect(grammar.section).toContain("clamp(2.25rem,4vw,2.75rem)");
-    expect(grammar.quote).toContain("clamp(1.75rem,2.4vw,2rem)");
-    expect(grammar.padLoose).toContain("py-24");
+    expect(grammar.display).toContain("clamp(2.75rem,10.5vw,4.5rem)");
+    expect(grammar.section).toContain("clamp(1.85rem,6vw,2.75rem)");
+    expect(grammar.quote).toContain("clamp(1.35rem,3.8vw,2rem)");
+    expect(grammar.pad).toContain("px-5 py-12");
+    expect(grammar.padLoose).toContain("py-16");
   });
 
   it("renders an ivory editorial hero with one eyebrow, title, and body", () => {

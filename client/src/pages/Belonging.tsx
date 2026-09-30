@@ -55,7 +55,7 @@ export default function Belonging() {
       >
         <Link
           href="/contact?intent=situation"
-          className="ak-call-button group inline-flex min-w-[19rem] items-center justify-between gap-6 rounded-button px-5 py-4 text-[14px] font-semibold uppercase tracking-[0.12em] text-brand-ivory transition-colors"
+          className="ak-call-button group inline-flex w-full items-center justify-between gap-4 rounded-button px-5 py-4 text-[14px] font-semibold uppercase tracking-[0.12em] text-brand-ivory transition-colors sm:w-auto sm:min-w-[19rem] sm:gap-6"
         >
           Begin assessment
           <MoveRight className="h-4 w-4 text-brand-stone transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
