@@ -5,6 +5,15 @@
 **Voice:** spoken over the three cards. Production voice is Kokoro `af_heart`.  
 **Do not** treat this as a fifth public product. Luxury Intelligence stays the reading channel. This is the daily Story.
 
+## Where to send for approval
+
+Everything waits for Raphi. Agents prepare. They do not merge or post.
+
+| What | Send here | What Raphi does |
+|------|-----------|-----------------|
+| The automation itself (this PR) | https://github.com/rrk3311-USA/AgentKammer/pull/42 | Review and merge. That is the deploy onto `luxury-homepage`. |
+| Each morning's Story (MP4 + verdict) | https://app.notion.com/p/47634e315afa4cfa82af00777d628c72 | Watch the file. Set Status to Done. Then post by hand or run the gated publish job. |
+
 Notion OS (under Content Hub): https://app.notion.com/p/3eb0ad628ae581c19b31f4478f588fcd
 
 House rules win: educational commentary only. Disclaimer, exactly: `Educational commentary. Not advice. Opinions of Raphael Kammer.` Agents prepare. They do not post.
