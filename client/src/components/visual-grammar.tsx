@@ -5,8 +5,8 @@ import { cn } from "@/lib/utils";
 
 /** Homepage-locked type. Reuse these; do not invent sizes per module. */
 export const grammar = {
-  eyebrow: "text-[11px] uppercase tracking-[0.26em] text-brand-cocoa",
-  eyebrowOnDark: "text-[11px] uppercase tracking-[0.26em] text-brand-stone",
+  eyebrow: "text-[11px] uppercase tracking-[0.16em] text-brand-cocoa sm:tracking-[0.22em] lg:tracking-[0.26em]",
+  eyebrowOnDark: "text-[11px] uppercase tracking-[0.16em] text-brand-stone sm:tracking-[0.22em] lg:tracking-[0.26em]",
   display: "font-display text-[clamp(2.75rem,10.5vw,4.5rem)] leading-[0.92] text-brand-navy",
   displayOnDark: "font-display text-[clamp(2.75rem,10.5vw,4.5rem)] leading-[0.92] text-brand-ivory",
   section: "font-display text-[clamp(1.85rem,6vw,2.75rem)] leading-[1.06] text-brand-navy",

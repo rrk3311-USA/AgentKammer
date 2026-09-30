@@ -36,7 +36,9 @@ export default function Home() {
         <div className="mx-auto grid w-full max-w-site gap-8 px-5 py-6 sm:px-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(340px,0.72fr)] lg:gap-0 lg:px-10">
           <div className="flex flex-col justify-start pt-2 lg:min-h-[560px] lg:pb-24 lg:pr-16 lg:pt-16">
             <p className={grammar.eyebrow}>
-              Agent Kammer · Private Housing Advisory
+              <span className="block sm:inline">Agent Kammer</span>
+              <span className="hidden sm:inline"> · </span>
+              <span className="mt-1 block sm:mt-0 sm:inline">Private Housing Advisory</span>
             </p>
             <h1 className={`mt-3 max-w-[12ch] lg:mt-4 ${grammar.display}`}>
               Live where
