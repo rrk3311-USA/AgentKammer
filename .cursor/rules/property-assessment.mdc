@@ -1,0 +1,68 @@
+---
+description: Property Assessment (formerly Kammer Report) listing review for Manhattan condos: the eight lines plus EXIT, the fixed RECORDS sweep, CARRY 5Y, and a Pick / Consider / Wait / Pass call for one lifestyle WHO. Use for the weekly board, Instagram cuts, the daily deal row, or any listing judgment.
+globs: "**/*assessment*, **/*listing*"
+alwaysApply: false
+---
+# Property Assessment listing review
+
+Public name: Property Assessment ("Kammer Report" is retired). The output is a call that can miss. No scores out of 100, no fight cards, no clickbait certainty. Popular is the input; judgment is the product. A #1 can still be a Pass, and Wait is a real call.
+
+## Inputs
+Address, ask, beds and baths, interior SF, neighbourhood, listing URL; the floor plan before the beauty shots; common charges and taxes; days on market, price history, same-building or nearby comps; price band on the weekly board ($5M to $10M, $10M to $15M, $15M to $20M); the RECORDS sweep.
+
+## Process (same order every time)
+1. One line: what they think they're buying.
+2. Floor plan first: function.
+3. One sentence per line:
+   - WHO: one lifestyle it is unusually good for (never demographics).
+   - USE: primary, family layout, pied-a-terre, entertaining or privacy.
+   - FUNCTION: does the plan work in real life; only the 1 to 3 drivers that change the decision.
+   - TRADE-OFF: what they give up.
+   - MONEY: ask, SF, $/SF, comps, premium or discount, carry, price history; commodity floor plus trophy slice; name the scarcity in one noun; plus CARRY 5Y.
+   - RISK: what a seduced buyer overrates, plus the RECORDS sweep.
+   - RIVAL: the #2 in band, only if real.
+   - EXIT: next-buyer pool, financeability, new supply, round-trip cost.
+   - VERDICT: Pick, Consider, Wait or Pass, for that WHO.
+4. One line: who it is wrong for.
+5. Go deep on one hidden flaw until it is specific enough to be wrong later.
+6. Wrinkle: one dry, highbrow line about the property (dead-room test). Never roast the buyer.
+7. Stop. Fast on seven, deep on one.
+
+## RECORDS sweep (fixed, about 15 minutes)
+DOF tax bill (abatements and end dates), ACRIS (sale history, sponsor units, liens, declaration), DOB BIS / DOB NOW (C of O vs TCO, violations, FISP facade rating), HPD (complaints, violations), NYSCEF (suits naming board or sponsor), LL84 / LL97 (emissions, fine exposure), ZoLa (zoning, unused FAR next door, landmark district), FEMA and NYC flood maps, 311. Board minutes, financials, reserves and budgets are real-deal-only: say "unknown from public records", never guess. Every negative needs its source and date.
+
+## CARRY 5Y
+"Carry today $X. Heading up / flat / unknown, because ___." Drivers: abatement end, LL97 exposure, facade work, assessments, and the second-home surcharge only when USE is pied-a-terre.
+
+## EXIT
+Who buys it from you and how many exist at this price; financeability (litigation, or one owner or sponsor above 20% of units); sponsor still selling or new launches nearby; round-trip cost (mansion tax, transfer tax, flip tax). Note rendered or virtually staged photos.
+
+## Light
+Judge light from the plan, orientation of the main rooms, height versus neighbours and whether the view is protected or at risk (ZoLa, DOB NOW). Never narrate windows.
+
+## Deliverable
+```
+Address:
+Band (if weekly):
+WHO:
+USE:
+Hidden flaw:
+MONEY: ask · $/SF · commodity floor · trophy slice · scarcity (one noun)
+CARRY 5Y: today $X · heading ___ because ___
+RECORDS: findings with source and date, or "unknown from public records"
+EXIT:
+Wrong for:
+Verdict: Pick | Consider | Wait | Pass
+MONEY label (one line):
+Wrinkle:
+Thumbnail label: [Address] · [VERDICT]
+```
+
+## Weekly board mode
+Three Manhattan condo #1s, one per band. Inventory from Zillow and Redfin (condo, Manhattan, in band); attention signal is Zillow saves/day and views/day (format pending approval); record signal values and the date pulled. Status HOLD / NEW / MOVER / CONTRACT / WAIT; full overview only for NEW or changed. Never fake an episode.
+
+## Shared row signature
+Wherever a listing appears (weekly board, daily Story deal row, Instagram): band, address, area and price, one italic read, FOR/WHO line, verdict chip. Each product keeps its own palette.
+
+## Compliance
+Opinion language, never claimed fact. Public-record anchor for every negative. No engineering, inspection or appraisal claims (point to a licensed inspector or an attorney). Fair housing: WHO is lifestyle, never demographics; schools only from objective third-party sources and never in WHO. Run `compliance-review.mdc` before anything public.

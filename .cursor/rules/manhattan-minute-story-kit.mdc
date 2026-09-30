@@ -1,0 +1,43 @@
+---
+description: The Manhattan Minute daily Instagram Story kit (stone and platinum): cover, board and end card templates, layout, footer, sticker zone, verdict row, rendering and checks. Use when editing brand/story-kit/ or producing a daily Story.
+globs: "brand/story-kit/**, brand/stone-platinum-story-kit.md"
+alwaysApply: false
+---
+# The Manhattan Minute story kit
+
+Full spec: `brand/stone-platinum-story-kit.md`. Code: `brand/story-kit/`. Read the spec before changing a template.
+
+## Product
+A daily 1080x1920 Instagram Story in three cards: `cover-editorial.html` (cover), `board-hybrid.html` (board), `end-panel.html` (end card). Stone background (`assets/stone-bg.png`), platinum rules and frame ring, Cormorant Garamond plus Inter. Palette: `--deep` #161C28, `--navy` #2A3447, `--slate` #555C69, `--label` #4A5058, `--meta-stone` #454B55 on stone (`--meta` #5F6672 only inside ivory cards). This palette belongs to this product; other products keep their own.
+
+## Page layout (locked defaults)
+- No top header on any card: no monogram, no kicker, no header rules. Key text starts at about y 255, inside the Instagram top safe area (about 250px).
+- Text runs x 104 to 960 (clears the Reels action rail). Key content stays between y 250 and about 1560.
+- Footer, identical on all three cards and anchored at y 1725: AK monogram (30px wide) 1725 to 1754, then AGENTKAMMER.COM with its hatched rule 1768 to 1786, then the disclaimer 1806 to 1829, then the date as the final row 1845 to 1860. The date never sits above the website. No tagline on any card, and no "Agent Kammer" wording (the .com is the brand line). The footer falls in the bottom 200px, which Instagram's reply bar can cover; nothing essential goes there.
+- Disclaimer, exactly: `Educational commentary. Not advice. Opinions of Raphael Kammer.`
+- No QR codes.
+
+## Cover
+Corner clock bleeding off the top left (no hands, opacity .20, stone halo on the words), nameplate "The / Manhattan / Minute" centred at 172px (`titleAlign` defaults to `center`), info strip (NYC weather, 10 yr Treasury, sunset; fetched by `tools/cover_facts.py`, never typed), then "In this minute" and the 01 to 03 contents list.
+
+## Board: section hierarchy
+- 01 statistic: one key figure (Cormorant 150) with its caption and one meta line.
+- 02 assessment card: the shared property row in a clipped ivory editorial insert (platinum hairline border, thin top rule, clipped top right corner, PROPERTY ASSESSMENT tag). Band, address, area and price, one italic read, FOR/WHO line, and an engraved outline chip with Pick, Consider, Wait or Pass. No browser chrome.
+- 03 thesis: the one thing to watch, Cormorant 70 with an optional italic second line.
+- Rhythm: 01, divider, 02 card, divider, 03. Sections reveal under the voiceover.
+
+## End card
+"Until / tomorrow." sign-off from y 258, charcoal owl art 530 to 1061 (six scenes rotate by day), then the CTA (platinum chevron, SWIPE UP, "Download today's brief") 1000 to 1130. The link sticker zone, 1190 to 1440 (x 240 to 840), stays empty stone. No thank you, contact, follow, phone, email or big logo.
+
+## Rules for content
+- Facts only from that day's script and fetched sources; never invent a number or a call.
+- `deal.verdict` is required for production builds (Pick, Consider, Wait or Pass). `--allow-placeholder` is for review renders only and must never ship.
+- No em or en dashes in any config value (the renderer refuses them). Ranges use "to".
+
+## Working
+- New day: copy `configs/_template.json` to `configs/YYYY-MM-DD.json` and fill it.
+- Stills: `node shoot.mjs cover-editorial configs/DATE.json --out=out/Agent-Kammer-Manhattan-Minute-DATE-cover.png` (also `board-hybrid`, `end-panel`; board-mid with `--reveal=r1:1,r2:0.2,r2Aside:0,r3:0`).
+- Video: `python3 tools/build_story.py configs/DATE.json AUDIO.mp3` (only when asked; stills are the default for design work).
+- After any copy or colour change run `python3 tools/contrast_check.py <template> configs/DATE.json` for all three templates, including every end card art scene. It must print PASS.
+- Output names: `Agent-Kammer-Manhattan-Minute-YYYY-MM-DD` plus `-cover.png`, `-board.png`, `-board-mid.png`, `-end.png`, `.mp4`, `.pdf`.
+- Update `brand/stone-platinum-story-kit.md` whenever a default changes.
