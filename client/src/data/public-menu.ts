@@ -92,7 +92,6 @@ export function contactHref(id: PublicProductId): string {
 /** Quiet sitemap entries only. Do not add these to the five-item header. */
 export const FOOTER_SITEMAP_QUIET = [
   GET_QUALIFIED,
-  { label: "Hub", href: "/hub" },
   { label: "Calculator", href: "/calculator" },
   { label: "Intelligence", href: "/intelligence" },
 ] as const;

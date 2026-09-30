@@ -66,7 +66,6 @@ export function getSiteMapGroups(): SiteMapGroup[] {
         { label: PUBLIC_PRODUCTS.property.label, href: PUBLIC_PRODUCTS.property.href },
         { label: PUBLIC_PRODUCTS.livability.label, href: PUBLIC_PRODUCTS.livability.href },
         { label: "Intelligence", href: "/intelligence" },
-        { label: "Decision Hub", href: "/account" },
         { label: "International", href: "/international" },
         { label: "Insights", href: "/insights" },
       ],

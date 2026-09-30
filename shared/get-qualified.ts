@@ -131,7 +131,7 @@ export function nextStepForRoute(route: QualifyRoute): string {
   if (route === "diego_handoff") {
     return "Local execution is the next lane when a transaction is actually the right step.";
   }
-  return "Stay with Guidance and your Decision Hub. A live session can wait.";
+  return "Stay with Guidance. A live session can wait.";
 }
 
 /**
