@@ -186,8 +186,9 @@ describe("public menu lock", () => {
     expect(doors.some((item) => item.href === "/qualify")).toBe(true);
     expect(doors.some((item) => item.href === "/contact?intent=strategy")).toBe(false);
     const guides = groups.find((group) => group.title === "Guides");
-    expect(guides?.items.map((item) => item.label).slice(0, 3)).toEqual([
+    expect(guides?.items.map((item) => item.label).slice(0, 4)).toEqual([
       "Resource Hub",
+      "Luxury Intelligence",
       "Neighborhoods",
       "Property Assessments",
     ]);

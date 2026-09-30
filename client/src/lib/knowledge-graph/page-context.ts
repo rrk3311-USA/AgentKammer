@@ -166,6 +166,20 @@ export const pageGraph = [
     related: ["/situations", "/building-reports/neighborhood-guides", "/contact"],
   },
   {
+    path: "/intelligence/luxury",
+    title: "Luxury Intelligence",
+    topics: ["luxury intelligence", "building intelligence", "executive housing", "judgment"],
+    prerequisites: ["situation"],
+    related: ["/intelligence", "/insights", "/resources", "/belonging"],
+  },
+  {
+    path: "/intelligence",
+    title: "Intelligence",
+    topics: ["guidance", "situation assessment", "property assessment", "luxury intelligence"],
+    prerequisites: ["situation"],
+    related: ["/intelligence/luxury", "/belonging", "/insights"],
+  },
+  {
     path: "/insights",
     title: "Insights",
     topics: ["market", "perspective", "decision framing"],

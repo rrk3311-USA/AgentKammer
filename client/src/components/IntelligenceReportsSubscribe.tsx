@@ -7,9 +7,9 @@ import { apiRequest } from "@/lib/queryClient";
 import { grammar } from "@/components/visual-grammar";
 
 const reportTopics = [
+  "Luxury Intelligence",
   "Executive Housing",
   "Building Intelligence",
-  "Manhattan Market Trends",
 ];
 
 type IntelligenceReportsSubscribeProps = {

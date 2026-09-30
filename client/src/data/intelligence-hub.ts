@@ -7,6 +7,12 @@ export type IntelligenceHubLink = {
 
 export const intelligenceHubCategories = [
   {
+    id: "luxury-intelligence",
+    label: "Luxury Intelligence",
+    featured: true,
+    href: "/intelligence/luxury",
+  },
+  {
     id: "executive-housing",
     label: "Executive Housing Report 2026",
     featured: true,
@@ -92,6 +98,12 @@ export const executiveHousingHubLinks: IntelligenceHubLink[] = [
 ];
 
 export const continueReadingDefaults: IntelligenceHubLink[] = [
+  {
+    label: "Luxury Intelligence",
+    description: "The public channel. Judgment on the buildings and lives worth covering.",
+    href: "/intelligence/luxury",
+    status: "live",
+  },
   {
     label: "2026 Executive Housing Report",
     description: "Quarterly briefing on Manhattan housing trends, building intelligence, and executive relocation.",

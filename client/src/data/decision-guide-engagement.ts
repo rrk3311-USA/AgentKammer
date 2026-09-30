@@ -209,6 +209,17 @@ const byPath: Record<string, Partial<PageEngagement>> = {
       "Before you book time, I can capture the decision so the call is useful. What's the one question you want answered?",
     pageHelper: "On Contact. If you share the core question, I'll shape a short brief for the team.",
   },
+  "/intelligence/luxury": {
+    headline: "Luxury Intelligence",
+    nudge: "This brief is the public channel. Tell me the decision and I will point to the right report.",
+    greeting:
+      "Luxury Intelligence is judgment on the buildings worth covering, not a listing feed. What decision are you trying to make?",
+  },
+  "/intelligence": {
+    headline: "Intelligence",
+    nudge: "Start with the Luxury Intelligence brief, or name the decision and I will route you.",
+    greeting: "The public channel is Luxury Intelligence. The offers are Guidance, Situation Assessment, Property Assessment, and Livability Score. Which do you need?",
+  },
   "/insights": {
     headline: "Read, then decide",
     nudge: "Insights are useful when tied to your situation. Tell me what you're deciding and I'll point to the right piece.",

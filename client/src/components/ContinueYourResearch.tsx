@@ -3,6 +3,11 @@ import { grammar } from "@/components/visual-grammar";
 
 const researchPaths = [
   {
+    label: "Luxury Intelligence",
+    description: "The public channel. Read the brief or save a PDF copy.",
+    href: "/intelligence/luxury",
+  },
+  {
     label: "Resource Hub",
     description: "Field guides and Property Assessments.",
     href: "/resources",

@@ -91,6 +91,7 @@ export const decisionNavigationGroups: DecisionNavGroup[] = [
     description: "Decision frameworks and neighborhood fit. Field guides and Property Assessments live on the Resource Hub.",
     items: [
       { label: "Resource Hub", href: "/resources" },
+      { label: "Luxury Intelligence", href: "/intelligence/luxury" },
       { label: "Neighborhoods", href: "/guides#neighborhoods" },
       { label: "Property Assessments", href: "/resources#assessments" },
       { label: "Start Here", href: "/situations" },

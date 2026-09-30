@@ -83,7 +83,7 @@ export function Footer() {
   const exploreOtherSituations = isSituationPagePath(location);
 
   return (
-    <footer className={footerTopRuleClass(exploreOtherSituations)}>
+    <footer className={cn(footerTopRuleClass(exploreOtherSituations), "print:hidden")}>
       <FooterIvoryIndex exploreOtherSituations={exploreOtherSituations} />
 
       <div data-ak-charcoal-footer className="border-t border-brand-brass/28 bg-brand-charcoal text-brand-ivory">

@@ -46,7 +46,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "ak-header-shell sticky top-0 z-50 w-full border-b border-brand-brass/22 text-brand-ivory transition-[box-shadow] duration-brand ease-brand-out",
+        "ak-header-shell sticky top-0 z-50 w-full border-b border-brand-brass/22 text-brand-ivory transition-[box-shadow] duration-brand ease-brand-out print:hidden",
         scrolled ? "shadow-[0_10px_24px_rgba(32,39,53,0.14)]" : "",
       )}
     >
