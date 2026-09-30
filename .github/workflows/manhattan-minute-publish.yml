@@ -1,0 +1,38 @@
+name: Manhattan Minute publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type PUBLISH. Stories go live immediately."
+        required: true
+        type: string
+      video_public_url:
+        description: "HTTPS URL of this exact approved MP4"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Publish Instagram Story
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Confirm
+        run: |
+          if [ "${{ github.event.inputs.confirm }}" != "PUBLISH" ]; then
+            echo "refusing: confirm must be PUBLISH"
+            exit 2
+          fi
+
+      - name: Post Story
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_VIDEO_PUBLIC_URL: ${{ github.event.inputs.video_public_url }}
+        run: python3 scripts/manhattan-minute/publish-instagram.py --i-approve-publish
