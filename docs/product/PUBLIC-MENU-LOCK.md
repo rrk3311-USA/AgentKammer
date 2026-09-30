@@ -51,6 +51,13 @@ Keep the route. Do not merchandise it as a current public offer.
 | Housing Strategy Session / Property Strategy Session / Discovery Call / Strategy Session | Guidance, Situation Assessment, or Contact |
 | Acquisition Dossier / memberships as equal primary cards | By invitation, after the relationship begins |
 
+## Unlisted (keep the route, do not merchandise)
+
+| Name | Route | Status |
+|------|-------|--------|
+| **Hub** | `/hub` | After Get Qualified. Not in hamburger, footer, or sitemap. |
+| **Tools** | `/tools` | Operator desk. Not a public category. |
+
 **Curation IQ** is a separate PR.
 
 ## Show language

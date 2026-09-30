@@ -783,7 +783,9 @@ export async function registerRoutes(app: Express): Promise<void> {
       req.path.startsWith("/admin/") ||
       req.path.startsWith("/api/admin") ||
       req.path === "/tools" ||
-      req.path.startsWith("/tools/")
+      req.path.startsWith("/tools/") ||
+      req.path === "/hub" ||
+      req.path.startsWith("/hub/")
     ) {
       res.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
     }

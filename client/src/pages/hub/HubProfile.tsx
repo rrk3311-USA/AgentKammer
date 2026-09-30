@@ -8,6 +8,7 @@ export default function HubProfile() {
     title: "Profile",
     description: "Lightweight housing profile. Claim with email when you want continuity.",
     path: "/hub/profile",
+    robots: "noindex, nofollow",
   });
 
   const [hub, setHub] = useState<HubSnapshot | null>(null);

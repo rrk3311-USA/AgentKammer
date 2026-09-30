@@ -8,6 +8,7 @@ export default function HubSaved() {
     title: "Saved",
     description: "Pages, buildings, listings, and goals you’ve kept.",
     path: "/hub/saved",
+    robots: "noindex, nofollow",
   });
 
   const [hub, setHub] = useState<HubSnapshot | null>(null);
