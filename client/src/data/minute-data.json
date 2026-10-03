@@ -1,0 +1,20 @@
+{
+  "notes": [
+    "PIPELINE: overwrite this file daily with the current Manhattan Minute. The /board page reads only this current object. Do not add past dailies, an archive, listing photos, or QR codes.",
+    "The Manhattan Minute Instagram Story swipe-up lands on /board. Keep this record to one deal of the day.",
+    "SAMPLE: placeholder until the daily pipeline is live. The page shows a sample tag when sample is true."
+  ],
+  "sample": true,
+  "kicker": "Today's Minute",
+  "source": "The Manhattan Minute",
+  "date": "Oct 2, 2026",
+  "dateISO": "2026-10-02",
+  "address": "1200 Fifth Avenue #PHB",
+  "neighborhood": "Upper Carnegie Hill",
+  "band": "$15M to $20M",
+  "price": "$17,995,000",
+  "call": "PASS",
+  "callQualifier": "at ask",
+  "callClass": "pass",
+  "aside": "A penthouse where the dining room and the terrace have never shared a floor."
+}

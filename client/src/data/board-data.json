@@ -1,0 +1,195 @@
+{
+  "notes": [
+    "PIPELINE: overwrite this file weekly. The /board page imports it at build time. Do not add listing photos, QR codes, scores, or an archive of past weeks.",
+    "Tally counts (HOLD / NEW / MOVER / SOLD / IN CONTRACT / WAIT) are computed from listings[].status and listings[].bandCall. Never type the tally into this file.",
+    "VISUAL SAMPLE (Raphi, Oct 1): this week's movement is placeholder data so the board can show HOLD, NEW, MOVER and WAIT. Every field listed in a listing's sample array is invented; the page must carry a SAMPLE DATA bar.",
+    "Real (from the Sep 28 board): last week's three #1s, their asks, neighborhoods, calls and WHO lines; 221 W 77th #16 and 50 W 66th #5D WHO lines; the 50 W 66th $12.3M to $12.8M fair value read; the 'what would prove it wrong' lines.",
+    "Sample (invented): week of Oct 5, all this-week statuses, the $12,750,000 cut on 50 W 66th #5D, the $15M to $20M NEW listing (a named placeholder, not a real address), the Did the call hold results."
+  ],
+  "guidance": [
+    "Bands are the shelf. #1 only per band. HOLD / NEW / MOVER / SOLD / IN CONTRACT / WAIT. Three listings, not a tournament. No leaderboard, fight card, or score.",
+    "Calls are words only: Pick / Consider / Wait / Pass, plus one WHO line. A #1 can still be a Pass. Do not manufacture a pick.",
+    "Copy rules: no em or en dashes, no listing photos, no QR codes, no 'real estate advisor', no guarantees."
+  ],
+  "sample": {
+    "on": true,
+    "bar": "Sample data · Visual sample of the weekly board, not a published board",
+    "note": "Sample data. This week's statuses, the price change and the $15M to $20M listing are placeholders to show how the board moves. Last week's column is the Sep 28 board."
+  },
+  "kicker": "Property Assessment",
+  "headingPre": "This week's",
+  "headingEm": "board",
+  "week": "Week of Oct 5, 2026",
+  "weekSample": true,
+  "universe": "Manhattan condos, $5M+",
+  "lede": "Three price bands. The #1 in each, the call on it, and what moved since last week.",
+  "lastWeekLabel": "Sep 28",
+  "barTitle": "Property Assessment",
+  "panelNote": "Popular is the input. Judgment is the product.",
+  "method": "#1 in band: the top organic condo in each band's ranking that week. A #1 can still be a Pass. Calls are words only, for one WHO, and can miss. Market opinion from public listing data. Not an appraisal.",
+  "statusKey": [
+    {
+      "code": "HOLD",
+      "cls": "hold",
+      "tally": "Hold",
+      "meaning": "Same listing still #1. No material change."
+    },
+    {
+      "code": "NEW",
+      "cls": "new",
+      "tally": "New",
+      "meaning": "A different listing is now #1."
+    },
+    {
+      "code": "MOVER",
+      "cls": "mover",
+      "tally": "Mover",
+      "meaning": "Same listing, but a real price cut or new information."
+    },
+    {
+      "code": "SOLD / IN CONTRACT",
+      "cls": "sold",
+      "tally": "Sold or contract",
+      "meaning": "Last week's #1 is gone. New #1 takes the slot."
+    },
+    {
+      "code": "WAIT",
+      "cls": "wait",
+      "tally": "Band wait",
+      "meaning": "Nothing in the band is worth recommending. Say so. Do not manufacture a pick."
+    }
+  ],
+  "verdictLine": "Verdict stays words: Pick / Consider / Wait / Pass, plus one WHO line.",
+  "brief": [
+    {
+      "k": "What changed",
+      "v": "One new #1, one price cut, one hold.",
+      "sample": true
+    },
+    {
+      "k": "Strongest call",
+      "v": "221 W 77th #16 · PICK, second week at #1.",
+      "sample": true
+    },
+    {
+      "k": "Theme",
+      "em": "Same monthly, different lives.",
+      "v": "Two Upper West Side five-bedrooms carry at about $11,700 a month each, and their asking prices sit $4.3M apart.",
+      "sample": false
+    }
+  ],
+  "checks": {
+    "title": "Did the call hold?",
+    "intro": "Last week's three calls, checked against this week. Each call names what would prove it wrong.",
+    "items": [
+      {
+        "band": "$5M to $10M",
+        "address": "221 W 77th St #16",
+        "call": "PICK",
+        "callClass": "pick",
+        "result": "Holding",
+        "resultClass": "held",
+        "resultNote": "Still #1, ask unchanged.",
+        "sample": true,
+        "test": "If it sells above #17's $2,917/sf, the market is telling me the bedrooms don't matter and I was wrong."
+      },
+      {
+        "band": "$10M to $15M",
+        "address": "50 W 66th St #5D",
+        "call": "CONSIDER",
+        "callClass": "consider",
+        "result": "Held",
+        "resultClass": "held",
+        "resultNote": "Ask cut to $12,750,000, inside my $12.3M to $12.8M fair value read.",
+        "sample": true,
+        "test": "If 5D closes at or above $13M, the D line's scarcity is worth more than I'm giving it credit for."
+      },
+      {
+        "band": "$15M to $20M",
+        "address": "1200 Fifth Ave #PHB",
+        "call": "PASS",
+        "qualifier": "at ask",
+        "callClass": "pass",
+        "result": "Open",
+        "resultClass": "open",
+        "resultNote": "Off the #1 slot this week. No sale recorded.",
+        "sample": true,
+        "test": "If it sells above $16M within a year, I've underrated the terrace."
+      }
+    ]
+  },
+  "footer": {
+    "site": "AGENTKAMMER.COM",
+    "fine": "Educational commentary. Not advice. Opinions of Raphael Kammer."
+  },
+  "listings": [
+    {
+      "band": "$5M to $10M",
+      "address": "221 W 77th St #16",
+      "neighborhood": "Upper West Side",
+      "price": "$8,950,000",
+      "status": "HOLD",
+      "who": "Family-layout primary buyer who wants a private-landing full floor and can live without outdoor space",
+      "call": "PICK",
+      "callQualifier": "",
+      "callClass": "pick",
+      "moveNote": "Week 2 at #1",
+      "last": {
+        "address": "221 W 77th St #16",
+        "price": "$8,950,000",
+        "call": "PICK",
+        "same": true
+      },
+      "sample": ["status", "moveNote"]
+    },
+    {
+      "band": "$10M to $15M",
+      "address": "50 W 66th St #5D",
+      "neighborhood": "Lincoln Square",
+      "price": "$12,750,000",
+      "status": "MOVER",
+      "who": "Amenity-first family layout: five en-suite bedrooms with a 50,000 sf amenity program downstairs",
+      "call": "CONSIDER",
+      "callQualifier": "",
+      "callClass": "consider",
+      "moveNote": "Cut $500,000 from $13,250,000",
+      "last": {
+        "address": "50 W 66th St #5D",
+        "price": "$13,250,000",
+        "call": "CONSIDER",
+        "same": true
+      },
+      "sample": ["status", "price", "moveNote"]
+    },
+    {
+      "band": "$15M to $20M",
+      "address": "Sample Listing C",
+      "neighborhood": "Placeholder neighborhood",
+      "price": "$16,500,000",
+      "status": "NEW",
+      "bandCall": "WAIT",
+      "who": "Placeholder WHO line: one use-based buyer fit, never demographics",
+      "call": "WAIT",
+      "callQualifier": "",
+      "callClass": "wait",
+      "moveNote": "Replaces last week's #1",
+      "last": {
+        "address": "1200 Fifth Ave #PHB",
+        "price": "$17,995,000",
+        "call": "PASS",
+        "callQualifier": "at ask",
+        "same": false
+      },
+      "sample": [
+        "address",
+        "neighborhood",
+        "price",
+        "status",
+        "bandCall",
+        "who",
+        "call",
+        "moveNote"
+      ]
+    }
+  ]
+}

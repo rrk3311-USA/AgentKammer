@@ -40,8 +40,8 @@ function isBranch(item: MobileNavLink | MobileNavBranch): item is MobileNavBranc
 }
 
 /**
- * Mobile field menu. Not the locked desktop header.
- * Home · Start Here · Guides · Contact stay the four doors.
+ * Mobile field menu. Not the desktop header.
+ * Home · Start Here · Guides · The Board · Contact stay the public doors.
  * Calculator nests here so the hamburger works in the field. Hub stays off this list for now.
  */
 export const mobileFieldNav: readonly MobileNavSection[] = [
@@ -71,6 +71,7 @@ export const mobileFieldNav: readonly MobileNavSection[] = [
       ...publicGuides.map((guide) => ({ label: guide.title, href: guide.href })),
     ],
   },
+  { id: "board", label: "The Board", href: "/board" },
   { id: "calculator", label: "Calculator", href: "/calculator" },
   { id: "contact", label: "Contact", href: "/contact" },
 ];
@@ -97,6 +98,7 @@ export function collectMobileNavHrefs(sections: readonly MobileNavSection[] = mo
 
 export function defaultOpenSectionId(location: string): string | null {
   const path = location.split(/[?#]/)[0] ?? location;
+  if (path === "/board" || path.startsWith("/board/")) return "board";
   if (path === "/calculator" || path.startsWith("/calculator/")) return "calculator";
   if (
     path === "/guides" ||

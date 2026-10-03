@@ -6,15 +6,17 @@
 
 ## Primary header
 
-Exactly four short labels: Home · Start Here · Guides · Contact.
+Five short labels: Home · Start Here · Guides · The Board · Contact.
 
 Start Here is the Situations diagnostic (`/situations`). There is no separate Situations nav item. Old `/buyer-advisory` redirects there.
+
+**The Board** (`/board`) is the weekly Property Assessment destination (This week's board) plus today's Manhattan Minute. Editorial, not a fifth product SKU.
 
 **Not in top nav:** About · Buildings · Situations · Intelligence · Decision Hub · Assessment · Get Qualified · International · Decision Briefs.
 
 **Header CTA:** filled **Guidance** control (`ak-call-button` without the stripe overlay) that opens the Advisor. Not a sixth nav item. Never “Request Intelligence.” The floating Guidance chip stays solid — no pinstripe.
 
-**Field hamburger (mobile only):** Home · Start Here · Guides · **Calculator** · Contact. Calculator lands on `/calculator`. Do not merchandise Tools or Hub. `/hub` stays unlisted.
+**Field hamburger (mobile only):** Home · Start Here · Guides · **The Board** · **Calculator** · Contact. Calculator lands on `/calculator`. Do not merchandise Tools or Hub. `/hub` stays unlisted.
 
 **Footer:** quiet end — identity, Start Here · Guides · About · Get Qualified, then Privacy · Terms · Contact, then languages. Envelope stays with Contact at the end. Get Qualified is an onboard utility, not a fifth product. Situations is not a separate footer item. No product strip, no Intelligence, no public Decision Hub, no Sitemap competing in charcoal.
 
