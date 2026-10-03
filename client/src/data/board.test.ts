@@ -48,7 +48,7 @@ describe("weekly board data", () => {
     expect(minuteData.price).toBe("$17,995,000");
     expect(minuteData.call).toBe("PASS");
     expect(minuteData.callQualifier).toBe("at ask");
-    expect(minuteData.aside).toBe("A penthouse where the dining room and the terrace have never shared a floor.");
+    expect(minuteData.aside).toBe("Here, every dinner outside begins with a commute upstairs.");
     expect(minuteData.date).toBe("Oct 2, 2026");
     expect(minuteData.sample).toBe(true);
     expect(Array.isArray((minuteData as { archive?: unknown }).archive)).toBe(false);
