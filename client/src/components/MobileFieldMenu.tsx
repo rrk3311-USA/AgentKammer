@@ -104,10 +104,10 @@ export function MobileFieldMenu({
   }, [location]);
 
   return (
-    <div className="ak-header-shell min-h-[calc(100dvh-4.25rem)] border-t border-brand-brass/30 lg:hidden">
+    <div className="ak-header-shell min-h-[calc(100dvh-4rem)] border-t border-brand-brass/30 sm:min-h-[calc(100dvh-4.75rem)] lg:hidden">
       <nav
         aria-label="Field"
-        className="mx-auto flex max-h-[calc(100dvh-4.25rem)] w-full max-w-site flex-col overflow-y-auto px-5 pb-10 pt-2 sm:px-6"
+        className="mx-auto flex max-h-[calc(100dvh-4rem)] w-full max-w-site flex-col overflow-y-auto px-4 pb-10 pt-2 sm:max-h-[calc(100dvh-4.75rem)] sm:px-6"
       >
         {mobileFieldNav.map((section) => {
           const expandable = Boolean(section.children?.length);

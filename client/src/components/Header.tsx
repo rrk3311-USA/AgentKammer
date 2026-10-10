@@ -3,7 +3,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AgentKammerHorizontalLogo } from "@/components/AgentKammerHorizontalLogo";
 import { MobileFieldMenu } from "@/components/MobileFieldMenu";
 import { cn } from "@/lib/utils";
@@ -72,7 +72,7 @@ export function Header() {
         scrolled ? "shadow-[0_10px_24px_rgba(32,39,53,0.14)]" : "",
       )}
     >
-      <div className="mx-auto grid max-w-site grid-cols-[1fr_auto] items-center gap-3 px-5 py-2.5 sm:px-6 lg:grid-cols-[auto_minmax(24rem,1fr)_auto] lg:gap-4 lg:px-8 xl:px-10">
+      <div className="mx-auto grid max-w-site grid-cols-[1fr_auto] items-center gap-3 px-4 py-2 sm:px-6 sm:py-2.5 lg:grid-cols-[auto_minmax(24rem,1fr)_auto] lg:gap-4 lg:px-8 xl:px-10">
         <Link href="/" data-testid="link-home" className={cn("justify-self-start", focusRing)}>
           <AgentKammerHorizontalLogo variant="light" emphasis="header" />
         </Link>
