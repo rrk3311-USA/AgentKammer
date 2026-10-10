@@ -21,8 +21,10 @@ describe("sticky public header", () => {
   it("keeps the hamburger size, left-aligned logo, and tighter mobile chrome", () => {
     const html = renderToStaticMarkup(createElement(Router, { ssrPath: "/" }, createElement(Header)));
     expect(html).toContain("ak-header-shell sticky top-0");
-    expect(html).toContain("px-4 py-2");
-    expect(html).toContain("sm:px-6 sm:py-2.5");
+    expect(html).toContain("min-h-16");
+    expect(html).toContain("sm:min-h-0");
+    expect(html).toContain("px-4 py-2.5");
+    expect(html).toContain("sm:px-6");
     expect(html).toContain("lg:px-8");
     expect(html).toContain("xl:px-10");
     expect(html).toContain("h-5 w-5");
