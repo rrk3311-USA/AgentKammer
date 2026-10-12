@@ -192,6 +192,23 @@
         "inbound",
         "funnel"
       ]
+    },
+    {
+      "title": "The Grammar of a Building",
+      "url": "/guides/building-terms",
+      "description": "Twenty-four architectural and building terms, drawn and explained for people reading a Manhattan building and apartment, from cornice and lintel to risers and steam heat.",
+      "category": "Buildings",
+      "tags": [
+        "grammar",
+        "building",
+        "architecture",
+        "manhattan",
+        "cornice",
+        "lintel",
+        "facade",
+        "terms",
+        "nyc"
+      ]
     }
   ]
 }

@@ -43,6 +43,8 @@
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/resources", "destination": "/resources/index.html" },
     { "source": "/resources/", "destination": "/resources/index.html" },
+    { "source": "/guides/building-terms", "destination": "/guides/building-terms/index.html" },
+    { "source": "/guides/building-terms/", "destination": "/guides/building-terms/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

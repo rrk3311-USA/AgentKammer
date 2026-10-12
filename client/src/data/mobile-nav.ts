@@ -114,5 +114,10 @@ export function defaultOpenSectionId(location: string): string | null {
 }
 
 export function isHardMobileHref(href: string) {
-  return href.endsWith(".html") || href.startsWith("/resources");
+  return (
+    href.endsWith(".html") ||
+    href.startsWith("/resources") ||
+    href === "/guides/building-terms" ||
+    href.startsWith("/guides/building-terms/")
+  );
 }

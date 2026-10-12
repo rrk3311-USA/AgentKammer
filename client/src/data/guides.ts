@@ -163,6 +163,26 @@ export const publicGuides: GuideEntry[] = [
     category: "International buyers",
     tags: ["international", "buyer", "manhattan", "multilingual", "inbound", "funnel"],
   },
+  {
+    title: "The Grammar of a Building",
+    description:
+      "Twenty-four architectural and building terms, drawn and explained for people reading a Manhattan building and apartment, from cornice and lintel to risers and steam heat.",
+    href: "/guides/building-terms",
+    audience: "public",
+    kind: "html",
+    category: "Buildings",
+    tags: [
+      "grammar",
+      "building",
+      "architecture",
+      "manhattan",
+      "cornice",
+      "lintel",
+      "facade",
+      "terms",
+      "nyc",
+    ],
+  },
 ];
 
 /** Internal practice docs - admin Settings; not listed on public /guides. */
