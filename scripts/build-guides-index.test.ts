@@ -25,5 +25,6 @@ describe("build-guides-index", () => {
 
     expect(nycHits.some((entry) => entry.url.endsWith("how-to-buy-in-nyc.html"))).toBe(true);
     expect(wealthHits.some((entry) => entry.url.endsWith("how-wealth-is-held.html"))).toBe(true);
+    expect(index.some((entry) => entry.url === "/guides/building-terms" && /grammar|building/.test(hay(entry)))).toBe(true);
   });
 });

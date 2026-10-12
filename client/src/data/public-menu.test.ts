@@ -197,6 +197,7 @@ describe("public menu lock", () => {
       expect.arrayContaining([
         { label: "How to buy in NYC", href: "/guides/how-to-buy-in-nyc.html" },
         { label: "How wealth is held", href: "/guides/how-wealth-is-held.html" },
+        { label: "The Grammar of a Building", href: "/guides/building-terms" },
       ]),
     );
   });

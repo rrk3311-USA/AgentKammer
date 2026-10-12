@@ -10,6 +10,7 @@ import {
   collectMobileNavHrefs,
   defaultOpenSectionId,
   hubFieldNav,
+  isHardMobileHref,
   mobileFieldNav,
 } from "./mobile-nav";
 
@@ -41,6 +42,12 @@ describe("mobile field menu", () => {
     for (const guide of publicGuides) {
       expect(hrefs).toContain(guide.href);
     }
+  });
+
+  it("treats the building-terms field guide as a hard static href", () => {
+    expect(isHardMobileHref("/guides/building-terms")).toBe(true);
+    expect(isHardMobileHref("/guides/how-to-buy-in-nyc.html")).toBe(true);
+    expect(isHardMobileHref("/guides/how-mortgages-work")).toBe(false);
   });
 
   it("opens the section that matches the field you are already in", () => {
