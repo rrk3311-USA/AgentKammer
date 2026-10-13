@@ -89,7 +89,8 @@ footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;m
  .dlg{grid-template-columns:1fr}.dlg .art{padding:28px 40px 18px}.dlg .txt{padding:22px 22px 32px}.dlg h3{font-size:1.6rem}
 }
 
-.mast{background:var(--deep);border-bottom:1px solid rgba(176,141,87,.3)}
+.mast{background:var(--deep);border-bottom:0;position:relative}
+.mast::after{content:"";display:block;height:2px;background:linear-gradient(90deg,transparent 0%,rgba(176,141,87,.45) 14%,rgba(245,242,235,.4) 36%,rgba(93,102,116,.5) 52%,rgba(245,242,235,.36) 70%,rgba(176,141,87,.45) 88%,transparent 100%)}
 .mast .wrap{height:76px}
 .brand img{background:transparent!important;padding:0!important;width:40px!important}
 .brand-name{color:var(--ivory);font:500 1.25rem 'Cormorant Garamond','Playfair Display',serif;letter-spacing:.16em;text-transform:uppercase}
