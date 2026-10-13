@@ -63,6 +63,30 @@ These are two different products. Do not mix GitHub remotes, Vercel projects, en
 - AgentKammer = this repo only → `agentkammer` Vercel.
 - Historical Success Chemistry inbox strings in `docs/archive/` are **not** production. Do not copy them into env or deploy this repo into the Fresh1 / SC project.
 
+## Weekly board + Manhattan Minute
+
+Public destination: [`/board`](https://www.agentkammer.com/board) (This week's board). Header label: **The Board**.
+
+A future pipeline overwrites the JSON and redeploys. The page imports the files at build time. Tally counts are computed in `client/src/data/board.ts`, never stored.
+
+| File | Cadence | What to overwrite |
+|------|---------|-------------------|
+| `client/src/data/board-data.json` | weekly | The three band #1s, movement, calls, brief, and “Did the call hold?” |
+| `client/src/data/minute-data.json` | daily | The current Manhattan Minute only. No archive. |
+
+**`board-data.json`**
+
+- `sample.on` / `weekSample` / `listings[].sample[]` / `brief[].sample` / `checks.items[].sample` turn on the SAMPLE DATA bar. Keep `sample.on` true until the week is real.
+- `listings[]` (three bands: `$5M to $10M`, `$10M to $15M`, `$15M to $20M`): `band`, `address`, `neighborhood`, `price`, `status` (`HOLD` / `NEW` / `MOVER` / `SOLD / IN CONTRACT` / `WAIT`), optional `bandCall`, `who`, `call` (`PICK` / `CONSIDER` / `WAIT` / `PASS`), `callQualifier`, `callClass`, `moveNote`, `last` (`address`, `price`, `call`, `callQualifier?`, `same`).
+- `statusKey[]`, `brief[]`, `checks`, `footer.fine` (must stay `Educational commentary. Not advice. Opinions of Raphael Kammer.`).
+
+**`minute-data.json`**
+
+- Current daily only: `sample`, `date`, `dateISO`, `address`, `neighborhood`, `band`, `price`, `call`, `callQualifier`, `callClass`, `aside`.
+- Instagram Story swipe-up lands on `/board`. Do not add past dailies, listing photos, or QR codes.
+
+Copy rules: no em or en dashes, no “real estate advisor”, no guarantees. Schema comments also live in `client/src/data/board.ts`.
+
 ## Commands
 
 ```bash

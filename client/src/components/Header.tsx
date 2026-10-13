@@ -70,13 +70,13 @@ export function Header() {
         </Link>
 
         <nav
-          className="hidden justify-self-center border border-brand-ivory/10 bg-brand-ivory/[0.035] px-5 py-1.5 shadow-[inset_0_1px_0_rgba(245,242,235,0.06)] lg:flex lg:items-center lg:justify-center lg:gap-2 xl:gap-3.5"
+          className="hidden justify-self-center border border-brand-ivory/10 bg-brand-ivory/[0.035] px-3 py-1.5 shadow-[inset_0_1px_0_rgba(245,242,235,0.06)] lg:flex lg:items-center lg:justify-center lg:gap-1.5 xl:gap-3 xl:px-5"
           aria-label="Primary"
         >
           {primaryNav.map((link) => {
             const active = isPrimaryNavActive(link.href, location);
             return (
-              <Link key={link.label} href={link.href} className={cn("group relative shrink-0 px-3.5 py-1.5 xl:px-5", focusRing)}>
+              <Link key={link.label} href={link.href} className={cn("group relative shrink-0 px-2.5 py-1.5 xl:px-4", focusRing)}>
                 <span
                   className={cn(
                     "relative text-[0.9rem] capitalize tracking-[0.06em] transition-colors",

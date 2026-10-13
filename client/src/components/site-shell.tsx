@@ -4,11 +4,12 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { grammar } from "@/components/visual-grammar";
 
-/** Locked primary header: Home · Start Here · Guides · Contact. Guidance is the filled utility, not a fifth door. */
+/** Primary header: Home · Start Here · Guides · The Board · Contact. Guidance is the filled utility, not a nav door. */
 export const primaryNav = [
   { label: "Home", href: "/" },
   { label: "Start Here", href: "/situations" },
   { label: "Guides", href: "/guides" },
+  { label: "The Board", href: "/board" },
   { label: "Contact", href: "/contact" },
 ] as const;
 

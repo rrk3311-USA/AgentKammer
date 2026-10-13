@@ -20,6 +20,7 @@ Agent Kammer is a Residential Advisory practice helping people make better real 
 ## Core URLs
 
 - Homepage: https://www.agentkammer.com/
+- This week's board: https://www.agentkammer.com/board
 - Situation Assessment: https://www.agentkammer.com/belonging
 - Start Here / Situations: https://www.agentkammer.com/situations
 - Housing Advisory / Start Here: https://www.agentkammer.com/situations
