@@ -29,7 +29,6 @@ export function AgentKammerHorizontalLogo({
       className={cn(
         "flex shrink-0",
         stacked ? "flex-col items-start gap-4" : "items-center gap-3",
-        headerStyle ? "min-w-0" : "",
         className,
       )}
       aria-label="Agent Kammer"
@@ -51,18 +50,14 @@ export function AgentKammerHorizontalLogo({
               : wordmarkOnly
                 ? "text-[1rem] tracking-[0.28em] sm:text-[1.08rem] xl:text-[1.16rem]"
                 : headerStyle
-                  ? "whitespace-nowrap text-[1.2rem] tracking-[0.1em] sm:text-[1.55rem] sm:tracking-[0.12em] xl:text-[2.1rem]"
+                  ? "text-[1.45rem] tracking-[0.12em] sm:text-[1.75rem] xl:text-[2.1rem]"
                   : "text-[0.82rem] tracking-[0.24em] sm:text-[0.9rem] xl:text-[0.96rem]",
             textTone,
           )}
         >
           Agent Kammer
         </span>
-        {headerStyle ? (
-          <p className="mt-1.5 whitespace-nowrap uppercase leading-none text-[0.5rem] tracking-[0.14em] text-brand-ivory/72 sm:text-[0.58rem] sm:tracking-[0.18em] xl:text-[0.64rem] xl:tracking-[0.2em]">
-            Live where you belong.
-          </p>
-        ) : showTagline ? (
+        {showTagline ? (
           <p
             className={cn(
               "mt-2 uppercase leading-none",
