@@ -33,15 +33,6 @@ const decisionTypes = [
 ];
 
 const timelines = ["Now / 30 days", "1-3 months", "3-6 months", "6+ months", "Just exploring"];
-const budgetRanges = [
-  "Exploring / not ready",
-  "Under $1M",
-  "$1M-$2M",
-  "$2M-$5M",
-  "$5M+",
-  "Rental",
-  "Not sure / private",
-];
 
 const nextSteps = [...CONTACT_NEXT_STEPS, "Not sure"] as const;
 
@@ -119,7 +110,6 @@ export default function Contact() {
     whatChanged: "",
     decisionType: "",
     timeline: "",
-    budgetRange: "",
     nextStep: "",
     message: "",
   });
@@ -142,7 +132,6 @@ export default function Contact() {
         `What changed: ${data.whatChanged}`,
         `Decision type: ${data.decisionType}`,
         `Timeline: ${data.timeline}`,
-        `Budget / readiness: ${data.budgetRange}`,
         `What the call is for: ${data.nextStep}`,
         "",
         "Additional context:",
@@ -155,7 +144,6 @@ export default function Contact() {
         phone: data.phone || undefined,
         message: structuredMessage,
         timeline: data.timeline,
-        budgetRange: data.budgetRange,
       });
     },
     onSuccess: () => {
@@ -170,7 +158,6 @@ export default function Contact() {
         whatChanged: "",
         decisionType: "",
         timeline: "",
-        budgetRange: "",
         nextStep: "",
         message: "",
       });
@@ -227,7 +214,7 @@ export default function Contact() {
             description={
               isSituation
                 ? "A few filters keep the first profile useful: what changed, what drains you, timing, and what a useful next step would be."
-                : "A few filters keep the first reply useful: what changed, what decision is on the table, timing, budget or readiness, and the best next step."
+                : "A few filters keep the first reply useful: what changed, what decision is on the table, timing, and the best next step."
             }
           />
           <div className="mt-8 grid gap-4">
@@ -366,49 +353,24 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="grid gap-5 md:grid-cols-2">
-                <div>
-                  <label htmlFor="budgetRange" className="mb-2 block text-sm font-medium">
-                    Budget lane
-                  </label>
-                  <select
-                    id="budgetRange"
-                    name="budgetRange"
-                    value={formData.budgetRange}
-                    onChange={(e) => setFormData({ ...formData, budgetRange: e.target.value })}
-                    required
-                    className="h-11 w-full border border-brand-border bg-white px-3 text-sm text-brand-navy outline-none focus:border-brand-brass"
-                    data-testid="select-contact-budget"
-                  >
-                    <option value="">Choose one</option>
-                    {budgetRanges.map((item) => (
-                      <option key={item} value={item}>{item}</option>
-                    ))}
-                  </select>
-                  <p className="mt-2 text-xs leading-5 text-brand-graphite/70">
-                    A range helps us read timing. Exploring can stay in Guidance.
-                  </p>
-                </div>
-
-                <div>
-                  <label htmlFor="nextStep" className="mb-2 block text-sm font-medium">
-                    What you want next
-                  </label>
-                  <select
-                    id="nextStep"
-                    name="nextStep"
-                    value={formData.nextStep}
-                    onChange={(e) => setFormData({ ...formData, nextStep: e.target.value })}
-                    required
-                    className="h-11 w-full border border-brand-border bg-white px-3 text-sm text-brand-navy outline-none focus:border-brand-brass"
-                    data-testid="select-contact-next-step"
-                  >
-                    <option value="">Choose one</option>
-                    {nextSteps.map((item) => (
-                      <option key={item} value={item}>{item}</option>
-                    ))}
-                  </select>
-                </div>
+              <div>
+                <label htmlFor="nextStep" className="mb-2 block text-sm font-medium">
+                  What you want next
+                </label>
+                <select
+                  id="nextStep"
+                  name="nextStep"
+                  value={formData.nextStep}
+                  onChange={(e) => setFormData({ ...formData, nextStep: e.target.value })}
+                  required
+                  className="h-11 w-full border border-brand-border bg-white px-3 text-sm text-brand-navy outline-none focus:border-brand-brass"
+                  data-testid="select-contact-next-step"
+                >
+                  <option value="">Choose one</option>
+                  {nextSteps.map((item) => (
+                    <option key={item} value={item}>{item}</option>
+                  ))}
+                </select>
               </div>
 
               <div>
