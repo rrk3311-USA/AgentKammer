@@ -1,0 +1,13 @@
+Good morning. This is the Manhattan Minute.
+
+[weather] {{spokenWeather}}
+
+The discount check. {{r1Figure}} {{r1FigureLabel}}. {{r1Meta}}
+
+One deal. {{r2}}. {{r2Meta}}
+
+[aside] {{r2Aside}}
+
+One thing to watch. {{r3}} {{r3Accent}}
+
+Until tomorrow.

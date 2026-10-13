@@ -1,0 +1,98 @@
+name: Manhattan Minute daily
+
+on:
+  schedule:
+    # 8:00 AM EDT / 7:00 AM EST, weekdays. Cover facts need morning ET.
+    - cron: "0 12 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "America/New_York date (YYYY-MM-DD). Empty means today."
+        required: false
+        type: string
+      stills_only:
+        description: "Render the three panels without the spoken video"
+        required: false
+        type: boolean
+        default: false
+      allow_placeholder:
+        description: "Review build only. Never publish this output."
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    name: Prepare spoken Story
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check story kit
+        id: kit
+        run: |
+          if [ -d brand/story-kit ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "Story kit is not on this branch yet. Merge PR #40, then this job can build."
+          fi
+
+      - uses: actions/setup-python@v5
+        if: steps.kit.outputs.present == 'true'
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        if: steps.kit.outputs.present == 'true'
+        with:
+          node-version: "22"
+
+      - name: Install voice and render tools
+        if: steps.kit.outputs.present == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python3 -m pip install --upgrade pip
+          python3 -m pip install edge-tts
+          cd brand/story-kit
+          if [ -f package.json ]; then npm ci; else npm install playwright; fi
+          npx playwright install --with-deps chromium
+
+      - name: Prepare today
+        if: steps.kit.outputs.present == 'true'
+        env:
+          MM_DATE: ${{ github.event.inputs.date }}
+          STILLS: ${{ github.event.inputs.stills_only }}
+          PLACEHOLDER: ${{ github.event.inputs.allow_placeholder }}
+        run: |
+          chmod +x scripts/manhattan-minute/daily.sh
+          args=()
+          if [ -n "$MM_DATE" ]; then args+=(--date "$MM_DATE"); fi
+          if [ "$STILLS" = "true" ]; then args+=(--stills-only); fi
+          if [ "$PLACEHOLDER" = "true" ]; then args+=(--allow-placeholder); fi
+          set +e
+          scripts/manhattan-minute/daily.sh "${args[@]}"
+          code=$?
+          set -e
+          if [ "$code" -eq 3 ]; then
+            echo "Config is waiting for a real deal and verdict. Nothing was invented."
+            exit 0
+          fi
+          exit "$code"
+
+      - name: Upload Story artifacts
+        if: steps.kit.outputs.present == 'true' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: manhattan-minute
+          path: |
+            brand/story-kit/out/Agent-Kammer-Manhattan-Minute-*
+            brand/story-kit/out/audio/*
+            brand/story-kit/configs/*.json
+          if-no-files-found: warn
+          retention-days: 14
