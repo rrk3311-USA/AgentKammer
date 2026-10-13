@@ -1,0 +1,58 @@
+/* Editorial layer for the Stone + Platinum kit (board.html, cover-editorial.html).
+   Loads after kit.css and reuses its canvas, frame ring + hairline, header group, pinstripe divider and tokens.
+   Page grid: text from x=104 to x=960 (keeps the Reels action rail clear); platinum rules run 104 to 976. */
+.ed{--L:104px;--R:104px;--textR:120px}
+.ed .col{position:absolute;left:var(--L);right:var(--R)}
+.ed .tr{padding-right:16px}                     /* right-aligned text stops at x=960 */
+
+/* Platinum rules */
+.prule{display:block;height:1px;background:linear-gradient(90deg,#7E858C 0%,#AEB4BA 22%,#DDE0E3 45%,#B4BAC0 65%,#9AA1A8 82%,#7E858C 100%)}
+.prule.heavy{height:2px;border-radius:1px}
+.prule.fade{background:linear-gradient(90deg,#7E858C 0%,#AEB4BA 22%,#DDE0E3 42%,#B4BAC0 62%,#9AA1A8 75%,rgba(154,161,168,0) 100%)}
+.prule.short{width:40px}
+.dbl{display:flex;flex-direction:column;gap:5px}  /* 2px + 1px double rule, like a front-page nameplate */
+
+/* Running head / dateline: small caps on the stone */
+.runhead{display:flex;justify-content:space-between;align-items:baseline;padding:16px 16px 15px 0}
+.caps{font-family:var(--ui);font-size:15px;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--label);line-height:1}
+.ital{font-family:var(--display);font-style:italic;font-weight:500;color:var(--slate)}
+
+/* Figures */
+.ed .fig{font-family:var(--display);font-weight:400;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"lnum" 1,"tnum" 1;color:var(--deep);letter-spacing:-.02em}
+.ed b.f{font-weight:600;color:var(--deep);font-variant-numeric:tabular-nums lining-nums}
+
+/* Footer without QR: pinstripe divider (kit), then tagline and small print centred */
+.edfoot{position:absolute;left:var(--L);right:var(--R);text-align:center}
+.edfoot .tag{display:block;font-family:var(--display);font-style:italic;font-weight:500;font-size:30px;line-height:1.2;color:var(--deep)}
+.edfoot .fine{margin-top:14px;text-align:center;font-size:15px;line-height:1.5;color:var(--meta-stone)}
+
+/* Card: a distinct ivory sheet on the stone (deal card, cover info strip).
+   Platinum hairline border, an inner 1px mat line at 8px, soft shadow. Text on it is measured against #F0F1F1. */
+.card{position:relative;background:linear-gradient(160deg,#FCFCFB 0%,#F8F8F6 55%,#F3F3F1 100%);border-radius:4px;
+  box-shadow:0 1px 2px rgba(22,28,40,.06),0 10px 22px rgba(22,28,40,.08),0 28px 60px rgba(22,28,40,.10)}
+.card::before{content:"";position:absolute;inset:0;border-radius:4px;padding:1.5px;pointer-events:none;
+  background:linear-gradient(135deg,#7E858C 0%,#B4BAC0 22%,#EEF0F2 45%,#B4BAC0 68%,#7E858C 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}
+.card::after{content:"";position:absolute;inset:8px;border:1px solid rgba(126,133,140,.26);border-radius:2px;pointer-events:none}
+.eyebrow{display:flex;align-items:center;gap:14px}
+.eyebrow i{display:block;width:32px;height:1px;background:var(--plat-ink)}
+/* Weather icons: thin line, navy ink, 44px */
+.wxi{width:48px;height:48px;flex:0 0 auto;stroke:var(--navy);stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* Shared editorial footer (Sep 29 update): anchored to the bottom so the divider sits at the same y on every card.
+   (The cover teaser was removed late on Sep 29; .teaser is kept only for reuse.) The date (small caps), the pinstripe AGENTKAMMER.COM divider, the tagline
+   and the small print. The dateline under the top double rule is gone on all three cards. */
+.efoot{position:absolute;left:var(--L);right:var(--R);top:var(--foot-top,1725px);display:flex;flex-direction:column;align-items:center;text-align:center}
+/* FOOTER (Raphi, Sep 29 night, no-header layout; moved down 135px as a unit on Sep 30), identical on all three cards.
+   Top to bottom: the AK monogram (small, centred), AGENTKAMMER.COM with its hatched rule (the brand line), the
+   disclaimer, then the date as the final row. Anchored at its top (--foot-top, 1725) so everything sits at the same y on
+   every card: monogram 1725 to 1754, rule 1768 to 1786, disclaimer 1806 to 1829, date 1845 to 1860 (60px above the
+   bottom edge). No header, no tagline on any card. */
+.efoot .teaser{max-width:760px;margin:0 auto 26px;font-family:var(--display);font-style:italic;font-weight:500;font-size:42px;line-height:1.18;color:var(--deep);text-wrap:balance}
+.efoot .mono{display:block;width:30px;height:auto;margin:0 auto 14px;opacity:.86}   /* AK monogram, 30px wide (the old header mark was 46) */
+.efoot .divider{position:static;align-self:stretch;margin:0 -40px}
+.efoot .tag{margin-top:22px;display:block;font-family:var(--display);font-style:italic;font-weight:500;font-size:30px;line-height:1.2;color:var(--deep)}
+.efoot .fine{margin-top:20px;font-size:15px;line-height:1.5;color:var(--meta-stone);text-align:center}
+.efoot .tag + .fine{margin-top:12px}
+.efoot .date{display:block;margin-top:16px;line-height:1;color:var(--navy)}   /* navy, not --label: 15px caps need 4.5:1 against the darkest stone grain too */

@@ -1,0 +1,46 @@
+---
+description: Agent Kammer house style for any copy or design (blog or Perspective, field guide, Instagram post, caption, email, Real Estate Essentials plate): voice, anti-AI pass, advisory language, formats, tokens, art rules and the publish checklist.
+globs: "**/*.md, **/*.mdx, **/*.html, **/*.css"
+alwaysApply: false
+---
+# Agent Kammer house style
+
+## Voice
+A suave, quietly affluent Manhattan advisor talking to one smart client over coffee. Private-club calm, dry wit, specific detail. Traditional agents make you want the property; Agent Kammer helps you decide whether you should. Light philosophical notes (belonging, patience, price vs value) at most once per section and only when earned. Humor about 5%, aimed at the object or the decision, never at people.
+
+Sounds like: "If I were in your position, I'd probably look at it this way." "I'm not sure I'd optimize for that." "Given what you've told me, I think the more important question is..."
+Does not sound like: "You need to...", "Trust me", "This is definitely the one", "Here's why this is an amazing opportunity."
+Useful shape: Observation, Interpretation, Judgment, Trade-off, Recommendation (public Perspectives often stop at implication).
+
+## Anti-AI pass (every string, including alt text, titles and meta)
+1. No em dashes or en dashes. Use periods, commas or parentheses; ranges use "to".
+2. Cut the tells: "it's not X, it's Y", neat groups of three, delve, navigate, journey, seamless, unlock, empower, landscape, crucial, robust, "in today's market", "whether you're", slogan closers, fake-drama colon setups, excessive bold.
+3. Human rhythm: vary sentence length; contractions are fine.
+4. Facts only: every number, step and link accurate; never invent statistics. If the facts are not real, mark it SAMPLE and keep it unpublished.
+5. End on a clear fact or a quiet implication, never a rally cry.
+
+## Formats
+- Blog or Perspective: concrete Manhattan title, 1 to 2 sentence excerpt, then Observation, Context, Interpretation, Implication, Conclusion. Filter: does it help someone make a better decision?
+- Field guide: mast, hero, "Educational only" block up front, section nav, sections (kicker, H2, lede, cards), standalone art between sections, keep-reading cards, disclosure footer.
+- Instagram: 1080x1350 feed or 1080x1920 Story/Reel. Verdict stamps are Pick / Consider / Wait / Pass.
+- Real Estate Essentials plate: cream paper texture, the real AK monogram alone at top centre (never an invented badge or a filled circle behind it), brass small caps series label, large serif title, two columns (navy and sage headers) of three cards, a navy thesis banner, and a footer reading "Live Where You Belong · Agent Kammer". That footer is for plates only. The Manhattan Minute Story uses no tagline and no "Agent Kammer" wording; its footer is AGENTKAMMER.COM only. The educational disclaimer sits on the HTML page rather than the plate.
+
+## Tokens
+Deep #161C28, navy #2A3447, midnight #202735, ivory #F5F2EB, brass #B08D57, sage #5A6E62. Instagram and plates use Cormorant Garamond with Inter; guides use Playfair Display with Montserrat. Each product keeps its own palette (the daily Story uses stone and platinum, see `manhattan-minute-story-kit.mdc`).
+
+## Art
+- Art is never a background behind text in guides and plates; each graphic stands alone with the caption below it. (The Story kit uses decorative art layers on stone with live text beside them, per its own spec.)
+- Architectural linework and charcoal or graphite looks; no faces as focus, no readable fake documents, no cartoon icons, no busy stock, no AI skyline soup, no text baked into art.
+- Plates are signed R. Kammer, lower right. Photography only when freely licensed, with attribution kept.
+
+## Compliance
+Educational commentary only; Raphi is not licensed. Disclaimer for Story products, exactly: `Educational commentary. Not advice. Opinions of Raphael Kammer.` Stamps are educational judgments, not price predictions. Never invent credentials, listings or data. Fair housing: describe property, never people.
+
+## Before publishing
+- [ ] Anti-AI pass (dashes, tells, rhythm, no slogan closer)
+- [ ] Voice: advisor over coffee, not brochure or finance-bro
+- [ ] Art separated from type where the format requires it
+- [ ] Tokens match the product
+- [ ] Educational disclosure present
+- [ ] Facts sourced; SAMPLE if not
+- [ ] `compliance-review.mdc` passed and Raphi approved

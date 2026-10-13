@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Daily cover · Stone + Platinum story kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@300..700&display=block" rel="stylesheet"/>
+<link rel="stylesheet" href="kit.css"/>
+<style>
+/* Cover-specific layout (daily). Shared tokens and components live in kit.css */
+.cover .title{top:258px;font-size:112px}
+.cover .panel{top:440px}
+.cover .thead,.cover .row{grid-template-columns:92px 1fr}
+.cover .row{padding-top:50px;padding-bottom:50px}
+.cover .addr{font-size:44px}
+.cover .why{font-size:36px}
+.cover .num{font-size:22px;font-weight:500;line-height:49.3px;color:var(--slate);letter-spacing:.02em;font-variant-numeric:tabular-nums lining-nums}
+.cover .note{top:auto}
+/* QR removed kit-wide (Raphi, Sep 29): footer is tagline + small print, centred */
+.fbody{grid-template-columns:1fr}
+.ftext{height:auto;justify-content:flex-start;text-align:center}
+.ftext .fine{margin-top:14px;text-align:center}
+/* Footer block moved down 125px as a unit (Sep 30, Raphi: the footer sits low): divider 1721, tagline and small print
+   from 1790, small print ending at 1860. */
+#capture.cover .divider{top:1721px}
+#capture.cover .fbody{top:1790px}
+</style>
+</head>
+<body>
+<div id="capture" class="cover">
+  <header class="mast">
+    <img src="assets/ak-deep.png" alt="AK"/>
+    <div class="kicker" data-slot="show"></div>
+    <span class="rule"></span>
+  </header>
+
+  <h1 class="title"><span data-slot="headline"></span> <em data-slot="accent"></em></h1>
+
+  <section class="panel">
+    <div class="bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div class="t"><b data-slot="show"></b><span class="sep">·</span><span data-slot="dateShort"></span></div>
+      <img class="r" src="assets/ak-deep.png" alt=""/>
+    </div>
+    <div class="thead"><span data-slot="colA"></span><span data-slot="colB"></span></div>
+    <div class="row"><div class="num">01</div><div><div class="addr" data-slot="seg1"></div><div class="why" data-slot="seg1Line" data-optional></div></div></div>
+    <div class="row"><div class="num">02</div><div><div class="addr" data-slot="seg2"></div><div class="why" data-slot="seg2Line" data-optional></div></div></div>
+    <div class="row"><div class="num">03</div><div><div class="addr" data-slot="seg3"></div><div class="why" data-slot="seg3Line" data-optional></div></div></div>
+  </section>
+
+  <section class="note" id="teaser">
+    <div class="k label"><i></i><span data-slot="teaserLabel"></span></div>
+    <p data-slot="teaser"></p>
+  </section>
+
+  <div class="divider" role="presentation"><span class="stripe"></span><span class="site">agentkammer.com</span><span class="stripe"></span></div>
+  <footer class="fbody">
+    <div class="ftext">
+      <span class="tag" data-slot="tagline"></span>
+      <p class="fine" data-slot="fine"></p>
+    </div>
+  </footer>
+</div>
+<script src="kit.js"></script>
+<script>
+applyKitConfig({
+  show: "The Manhattan Minute",
+  headline: "The morning",
+  accent: "read",
+  colA: "Part",
+  colB: "In this minute",
+  seg1: "The discount check",  seg1Line: "How far asks are bending before contracts.",
+  seg2: "One deal",            seg2Line: "One listing, and how I would think about it.",
+  seg3: "One thing to watch",  seg3Line: "What could move the market next.",
+  teaserLabel: "Today",
+  teaser: "Manhattan luxury, briefly, from the desk of Agent Kammer.",
+  tagline: "Live where you belong.",
+  fine: "Educational commentary. Not advice. Opinions of Raphael Kammer."
+});
+// place the teaser note 49px under the panel, like the weekly card
+(function(){ const p=document.querySelector('.panel').getBoundingClientRect(); document.getElementById('teaser').style.top=Math.round(p.bottom+49)+'px'; })();
+</script>
+</body>
+</html>

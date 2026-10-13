@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Daily board (editorial) · Stone + Platinum story kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@300..700&display=block" rel="stylesheet"/>
+<link rel="stylesheet" href="kit.css"/>
+<link rel="stylesheet" href="editorial.css"/>
+<style>
+/* Editorial art board: the middle card of the Manhattan Minute video. Sections fill in as the voice reaches them;
+   tools/build_story.py drives setReveal(). No panel, no bar: type, figures and platinum rules on the stone. */
+.bd .top{top:250px}
+.bd .sections{top:318px}
+.bd .sec{display:grid;grid-template-columns:128px 1fr;column-gap:0;padding:var(--pad,58px) 0;position:relative}
+.bd .sec + .sec{border-top:0}
+.bd .sec + .sec::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,#7E858C 0%,#AEB4BA 22%,#DDE0E3 42%,#B4BAC0 62%,#9AA1A8 75%,rgba(154,161,168,0) 100%)}
+.bd .num{font-family:var(--display);font-weight:300;font-size:96px;line-height:.74;letter-spacing:-.02em;color:var(--slate);
+  font-variant-numeric:lining-nums tabular-nums;padding-top:2px}
+.bd .body{min-width:0;padding-right:16px}
+.bd .seg{display:block;line-height:1;margin-bottom:20px}
+/* 01: the discount check */
+.bd .statrow{display:grid;grid-template-columns:auto 1fr;column-gap:16px;align-items:baseline}
+.bd .stat{font-size:232px;line-height:.8;white-space:nowrap}
+.bd .pre{font-family:var(--display);font-style:italic;font-weight:500;font-size:54px;line-height:1;color:var(--slate)}
+.bd .pre[hidden]+.stat{grid-column:1 / -1}
+.bd .statcap{grid-column:2;margin-top:14px;font-family:var(--display);font-style:italic;font-weight:500;font-size:48px;line-height:1.05;color:var(--deep)}
+.bd .meta{margin-top:30px;font-family:var(--ui);font-size:28px;line-height:1.35;color:var(--meta-stone);text-wrap:balance}
+/* 02: one deal */
+.bd .addr{font-family:var(--display);font-weight:400;font-size:112px;line-height:.96;letter-spacing:-.015em;color:var(--deep);text-wrap:balance}
+.bd .addr + .meta{margin-top:22px}
+.bd .aside{margin-top:30px;display:grid;grid-template-columns:40px 1fr;column-gap:18px;align-items:start}
+.bd .aside i{display:block;height:1px;margin-top:26px;background:linear-gradient(90deg,#7E858C,#9AA1A8)}
+.bd .aside p{font-family:var(--display);font-style:italic;font-weight:500;font-size:42px;line-height:1.14;color:var(--slate);text-wrap:balance}
+/* 03: one thing to watch */
+.bd .watch{font-family:var(--display);font-weight:400;font-size:74px;line-height:1.02;letter-spacing:-.012em;color:var(--deep);text-wrap:balance}
+.bd .watch em{display:block;font-style:italic;font-weight:400;color:var(--deep)}
+.bd .watch + .meta{margin-top:22px}
+.bd .fill{will-change:opacity,transform}
+.bd .divider{top:1723px}   /* footer block moved down 75px as a unit (Sep 30): small print ends at 1860 */
+.bd .edfoot{top:1787px}
+</style>
+</head>
+<body>
+<div id="capture" class="ed bd">
+  <header class="mast">
+    <img src="assets/ak-deep.png" alt="AK"/>
+    <div class="kicker" data-slot="show"></div>
+    <span class="rule"></span>
+  </header>
+
+  <div class="col top">
+    <div class="dbl"><span class="prule heavy"></span><span class="prule"></span></div>
+    <div class="runhead"><span class="caps" data-slot="dateLong"></span><span class="ital" style="font-size:30px;line-height:1" data-slot="boardAccent"></span></div>
+  </div>
+
+  <div class="col sections" id="sections">
+    <section class="sec" data-row="r1">
+      <div class="num dim">01</div>
+      <div class="body fill" data-part="r1">
+        <span class="seg caps" data-slot="r1Label"></span>
+        <div class="statrow">
+          <span class="pre" data-slot="r1FigurePre" data-optional></span>
+          <div class="fig stat" data-slot="r1Figure"></div>
+          <div class="statcap" data-slot="r1FigureLabel" data-optional></div>
+        </div>
+        <div class="meta" data-slot="r1Meta" data-optional data-figures></div>
+      </div>
+    </section>
+
+    <section class="sec" data-row="r2">
+      <div class="num dim">02</div>
+      <div class="body">
+        <div class="fill" data-part="r2">
+          <span class="seg caps" data-slot="r2Label"></span>
+          <div class="addr" data-slot="r2"></div>
+          <div class="meta" data-slot="r2Meta" data-optional data-figures></div>
+        </div>
+        <div class="aside fill" data-part="r2Aside" data-show-if="r2Aside"><i></i><p data-slot="r2Aside"></p></div>
+      </div>
+    </section>
+
+    <section class="sec" data-row="r3">
+      <div class="num dim">03</div>
+      <div class="body fill" data-part="r3">
+        <span class="seg caps" data-slot="r3Label"></span>
+        <div class="watch"><span data-slot="r3"></span><em data-slot="r3Accent" data-optional></em></div>
+        <div class="meta" data-slot="r3Meta" data-optional data-figures></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="divider" role="presentation"><span class="stripe"></span><span class="site">agentkammer.com</span><span class="stripe"></span></div>
+  <footer class="edfoot">
+    <span class="tag" data-slot="tagline"></span>
+    <p class="fine" data-slot="fine"></p>
+  </footer>
+</div>
+<script src="kit.js"></script>
+<script>
+const cfg = applyKitConfig({
+  show: "The Manhattan Minute",
+  boardAccent: "In this minute",
+  r1Label: "The discount check", r1FigurePre: "", r1Figure: "", r1FigureLabel: "", r1Meta: "",
+  r2Label: "One deal", r2: "", r2Meta: "", r2Aside: "",
+  r3Label: "One thing to watch", r3: "", r3Accent: "", r3Meta: "",
+  tagline: "Live where you belong.",
+  fine: "Educational commentary. Not advice. Opinions of Raphael Kammer."
+});
+// Figures in meta lines ($15M, 14%, 17) set 600 deep tabular.
+document.querySelectorAll('[data-figures]').forEach(el => {
+  if (el.hidden) return;
+  const t = el.textContent; el.textContent = '';
+  t.split(/(\$?\d[\d,.]*(?:\s?(?:%|M|K|B)\b|%)?)/).forEach((s, i) => {
+    if (!s) return;
+    if (i % 2) { const b = document.createElement('b'); b.className = 'f'; b.textContent = s; el.appendChild(b); }
+    else el.appendChild(document.createTextNode(s));
+  });
+});
+// Fit. Width: a long key figure shrinks until the figure row stays inside x=960.
+// Height: tighten section padding (58 -> 20px), then scale the display sizes down in 5% steps (to 80%),
+// until the sections end above the 1560 safe line. window.BOARD_FIT reports the result (read by build_story.py).
+window.fitBoard = function(){
+  const box = document.getElementById('sections');
+  const big = [...document.querySelectorAll('.stat,.addr,.watch')];
+  big.forEach(e => { e.style.fontSize = ''; e.dataset.base = parseFloat(getComputedStyle(e).fontSize); });
+  const row = document.querySelector('.statrow'), stat = document.querySelector('.stat');
+  let fw = 1;
+  const rowRight = () => Math.max(...[...row.children].filter(c => !c.hidden).map(c => c.getBoundingClientRect().right));
+  while (rowRight() > 960 && fw > 0.4) { fw = +(fw - 0.04).toFixed(2); stat.style.fontSize = (stat.dataset.base * fw) + 'px'; }
+  stat.dataset.base = stat.dataset.base * fw;
+  let pad = 58, scale = 1, bottom;
+  for (;;) {
+    box.style.setProperty('--pad', pad + 'px');
+    big.forEach(e => { e.style.fontSize = (e.dataset.base * scale) + 'px'; });
+    bottom = box.getBoundingClientRect().bottom - pad;   // last section's bottom padding is air, not content
+    if (bottom <= 1560) break;
+    if (pad > 20) pad = Math.max(20, pad - 4); else if (scale > 0.8) scale = +(scale - 0.05).toFixed(2); else break;
+  }
+  return window.BOARD_FIT = { rowPadding: pad, scale, figureScale: fw, keyBottom: Math.round(bottom), ok: bottom <= 1560 };
+};
+fitBoard(); document.fonts.ready.then(fitBoard);
+
+// Reveal control: progress 0..1 per part (r1, r2, r2Aside, r3), eased (ease-out cubic).
+// Content fades in with a 16px rise. The section numeral waits at 22% and comes up with its section.
+window.BOARD_PARTS = [...document.querySelectorAll('[data-part]')].filter(e => !e.hidden).map(e => e.dataset.part);
+const ease = p => 1 - Math.pow(1 - Math.min(1, Math.max(0, p)), 3);
+window.setReveal = function(prog){
+  document.querySelectorAll('[data-part]').forEach(el => {
+    const e = ease(prog[el.dataset.part] ?? 1);
+    el.style.opacity = e.toFixed(4); el.style.transform = `translateY(${((1 - e) * 16).toFixed(2)}px)`;
+  });
+  document.querySelectorAll('[data-row]').forEach(row => {
+    const e = ease(prog[row.dataset.row] ?? 1);
+    row.querySelectorAll('.dim').forEach(d => d.style.opacity = (0.22 + 0.78 * e).toFixed(4));
+  });
+};
+(function(){
+  const r = (new URLSearchParams(location.search).get('reveal') || cfg.reveal || 'all');
+  const prog = {};
+  if (r === 'none') BOARD_PARTS.forEach(p => prog[p] = 0);
+  else if (r !== 'all') r.split(',').forEach(kv => { const [k, v] = kv.split(':'); prog[k] = parseFloat(v); });
+  setReveal(prog);
+})();
+</script>
+</body>
+</html>
