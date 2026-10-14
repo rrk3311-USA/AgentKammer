@@ -211,13 +211,13 @@ footer .in{max-width:1100px;margin:0 auto}
  .print-page .mm-frame .c.br{bottom:1.15mm;right:1.15mm;border-bottom-width:.95pt;border-right-width:.95pt}
  .print-hud{break-after:page;page-break-after:always}
  .print-plan{break-after:auto;page-break-after:auto}
- .mm-head{position:relative;z-index:1;display:grid;grid-template-columns:18mm minmax(0,1fr) 18mm;align-items:center;column-gap:4mm;padding:0 0 3.2mm;margin:0 0 4mm;border-bottom:.4pt solid #B8BCC2;width:100%}
- .mm-ak{display:block;width:13pt;height:auto;margin:0;filter:brightness(0) saturate(100%) invert(16%) sepia(14%) saturate(1042%) hue-rotate(182deg) brightness(94%) contrast(91%)}
- .mm-head-mid{min-width:0;text-align:center}
- .mm-kicker{margin:0 0 1.2mm;font:600 5.8pt/1 var(--sans);letter-spacing:.34em;text-transform:uppercase;color:#2a3447}
- .mm-display{margin:0;font:400 19pt/.92 var(--serif);color:#161c28}
- .mm-display em{font-style:italic;font-weight:400}
- .mm-folio{margin:0;text-align:right;font:600 5.8pt/1 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:#2a3447}
+ .mm-head{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:4mm;padding:0 0 3mm;margin:0 0 4mm;border-bottom:.4pt solid #B8BCC2;width:100%}
+ .mm-brand{display:flex;align-items:center;gap:3.4mm;min-width:0}
+ .mm-ak{display:block;width:22pt;height:auto;margin:0;flex:0 0 auto;filter:brightness(0) saturate(100%) invert(16%) sepia(14%) saturate(1042%) hue-rotate(182deg) brightness(94%) contrast(91%)}
+ .mm-brand-text{min-width:0}
+ .mm-name{margin:0;font:600 7.4pt/1.05 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:#161c28}
+ .mm-site{margin:1.15mm 0 0;font:600 5pt/1 var(--sans);letter-spacing:.34em;text-transform:uppercase;color:#2a3447}
+ .mm-folio{margin:0;text-align:right;font:600 5.6pt/1 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:#2a3447}
  .mm-strip{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;margin:0 0 4mm;background:#f7f3ea;border:.45pt solid #B8BCC2}
  .print-plan .mm-strip{grid-template-columns:repeat(3,minmax(0,1fr))}
  .mm-strip>div{padding:2.4mm 2.5mm 2.2mm;text-align:left;border-left:.35pt solid #cfc8bb}
@@ -369,10 +369,12 @@ footer .in{max-width:1100px;margin:0 auto}
  <section class="print-page print-hud">
   <div class="mm-frame" aria-hidden="true"><i class="rule-out"></i><i class="rule-in"></i><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i></div>
   <header class="mm-head">
-   <img class="mm-ak" src="assets/ak-monogram.png" alt="" width="28" height="30">
-   <div class="mm-head-mid">
-    <p class="mm-kicker">The Kammer Report</p>
-    <p class="mm-display">The <em>Wheel</em> of Life</p>
+   <div class="mm-brand">
+    <img class="mm-ak" src="assets/ak-monogram.png" alt="" width="40" height="43">
+    <div class="mm-brand-text">
+     <p class="mm-name">Agent Kammer</p>
+     <p class="mm-site">agentkammer.com</p>
+    </div>
    </div>
    <p class="mm-folio">01 / 02</p>
   </header>
@@ -418,10 +420,12 @@ footer .in{max-width:1100px;margin:0 auto}
  <section class="print-page print-plan">
   <div class="mm-frame" aria-hidden="true"><i class="rule-out"></i><i class="rule-in"></i><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i></div>
   <header class="mm-head">
-   <img class="mm-ak" src="assets/ak-monogram.png" alt="" width="28" height="30">
-   <div class="mm-head-mid">
-    <p class="mm-kicker">The Kammer Report</p>
-    <p class="mm-display">The <em>Action</em> Plan</p>
+   <div class="mm-brand">
+    <img class="mm-ak" src="assets/ak-monogram.png" alt="" width="40" height="43">
+    <div class="mm-brand-text">
+     <p class="mm-name">Agent Kammer</p>
+     <p class="mm-site">agentkammer.com</p>
+    </div>
    </div>
    <p class="mm-folio">02 / 02</p>
   </header>
