@@ -167,6 +167,10 @@ body.dock-on{padding-bottom:176px}
 .move textarea{width:100%;min-height:104px;resize:vertical;font:italic 1.2rem/1.45 var(--serif);color:var(--deep);background:rgba(255,255,255,.55);border:1px solid #d8cfbd;padding:12px 14px}
 .move textarea::placeholder{color:#9a9182}
 .saved{font-size:.8rem;color:#7a7365;min-height:1.3em;margin:10px 0 0}
+.timeline{display:grid;gap:16px;margin:10px 0 0}
+.tl{display:grid;grid-template-columns:88px minmax(0,1fr);gap:12px;align-items:start}
+.tl .when{font:600 10px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--stone-blue);padding-top:4px}
+.tl p{margin:0;color:#4c5465;font-size:.95rem}
 .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
 .btn{font:600 11px var(--sans);letter-spacing:.24em;text-transform:uppercase;padding:15px 22px;min-height:46px;border:1px solid var(--deep);background:var(--deep);color:var(--ivory);cursor:pointer;transition:background .25s,color .25s}
 .btn:hover{background:var(--stone-blue)}
@@ -191,47 +195,71 @@ footer .in{max-width:1100px;margin:0 auto}
 }
 @media print{
  @page{size:auto;margin:.5in}
- html,body{background:#d8d2c6!important;color:#1c1914;width:100%;max-width:100%;margin:0;padding:0!important}
+ html,body{background:#d8d2c6!important;color:#1c1914;width:100%;height:100%;max-width:100%;margin:0;padding:0!important}
  body>*{display:none!important}
  .print-doc,.print-doc *{box-sizing:border-box}
- .print-doc{display:block!important;width:100%;max-width:100%;overflow:hidden;color:#1c1914;font:400 10pt/1.4 var(--serif)}
+ .print-doc{display:block!important;width:100%;max-width:100%;height:auto;overflow:hidden;color:#1c1914;font:400 10pt/1.35 var(--serif)}
  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
- .print-page{display:flex;flex-direction:column;width:100%;max-width:100%;min-height:9.9in;overflow:hidden;position:relative;padding:9mm 8mm 8mm;background-color:#ddd6ca;background-image:radial-gradient(120% 90% at 50% 0%,#e8e3d9,#d2cbbf);border:.55pt solid #2a241c;outline:.55pt solid #2a241c;outline-offset:-2.6mm}
+ .print-page{display:flex;flex-direction:column;width:100%;max-width:100%;min-height:10in;height:100vh;overflow:hidden;position:relative;padding:8mm 7.5mm 7mm;background:#d8d2c6}
+ .print-page .mm-frame{position:absolute;inset:0;pointer-events:none;z-index:2}
+ .print-page .mm-frame .rule-out{position:absolute;inset:0;border:1.15pt solid #B8BCC2}
+ .print-page .mm-frame .rule-in{position:absolute;inset:1.7mm;border:.4pt solid #D6D9DE}
+ .print-page .mm-frame i.c{position:absolute;width:5.6mm;height:5.6mm;border-color:#B8BCC2;border-style:solid;border-width:0}
+ .print-page .mm-frame .c.tl{top:1.15mm;left:1.15mm;border-top-width:.95pt;border-left-width:.95pt}
+ .print-page .mm-frame .c.tr{top:1.15mm;right:1.15mm;border-top-width:.95pt;border-right-width:.95pt}
+ .print-page .mm-frame .c.bl{bottom:1.15mm;left:1.15mm;border-bottom-width:.95pt;border-left-width:.95pt}
+ .print-page .mm-frame .c.br{bottom:1.15mm;right:1.15mm;border-bottom-width:.95pt;border-right-width:.95pt}
  .print-hud{break-after:page;page-break-after:always}
  .print-plan{break-after:auto;page-break-after:auto}
- .mm-head{text-align:center;padding:1mm 0 4mm;border-bottom:.4pt solid #2a241c;margin:0 0 1mm;width:100%;max-width:100%}
- .mm-ak{display:block;width:16pt;height:auto;margin:0 auto 3pt;filter:brightness(0)}
- .mm-title{margin:0;font:500 6.5pt/1.2 var(--sans);letter-spacing:.42em;text-transform:uppercase;color:#1c1914}
- .mm-block{display:grid;grid-template-columns:16mm minmax(0,1fr);gap:2mm 5mm;padding:5mm 0;border-top:.35pt solid rgba(42,36,28,.45);width:100%;max-width:100%;align-items:start}
- .print-hud>.mm-block:first-of-type,#print-plan-body>.mm-block:first-child{border-top:0}
- .mm-num{font:400 26pt/.85 var(--serif);letter-spacing:.02em;color:#1c1914;margin:0}
- .mm-body{min-width:0;max-width:100%}
- .mm-label{margin:1.5pt 0 5pt;font:500 6.5pt/1.2 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:#1c1914}
- .mm-figure{margin:0;font:400 26pt/1.02 var(--serif);color:#1c1914;max-width:100%;overflow-wrap:anywhere}
- .mm-figure em{font-style:italic;font-weight:400}
- .mm-figure-sm{font-size:16pt;margin-top:3mm}
- .mm-sub{margin:2mm 0 0;font:italic 400 12pt/1.3 var(--serif);color:#1c1914;max-width:100%}
- .mm-card{position:relative;background:#f8f4eb;padding:5mm 5.5mm 4.5mm;width:100%;max-width:100%;overflow:hidden;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%)}
- .mm-card::after{content:"";position:absolute;top:0;right:0;border-style:solid;border-width:0 16px 16px 0;border-color:transparent #c8c0b2 #c8c0b2 transparent}
- .mm-card-tag{position:absolute;top:3.5mm;right:7mm;font:500 6pt/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:#8a8478}
- .mm-card-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:3mm 5mm;align-items:center;width:100%;max-width:100%}
- .mm-card svg{display:block;width:100%;max-width:100%;height:auto;max-height:48mm}
- #printwheel circle.ring{stroke:#2a241c}
+ .mm-head{position:relative;z-index:1;display:grid;grid-template-columns:18mm minmax(0,1fr) 18mm;align-items:center;column-gap:4mm;padding:0 0 3.2mm;margin:0 0 4mm;border-bottom:.4pt solid #B8BCC2;width:100%}
+ .mm-ak{display:block;width:13pt;height:auto;margin:0;filter:brightness(0) saturate(100%) invert(16%) sepia(14%) saturate(1042%) hue-rotate(182deg) brightness(94%) contrast(91%)}
+ .mm-head-mid{min-width:0;text-align:center}
+ .mm-kicker{margin:0 0 1.2mm;font:600 5.8pt/1 var(--sans);letter-spacing:.34em;text-transform:uppercase;color:#2a3447}
+ .mm-display{margin:0;font:400 19pt/.92 var(--serif);color:#161c28}
+ .mm-display em{font-style:italic;font-weight:400}
+ .mm-folio{margin:0;text-align:right;font:600 5.8pt/1 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:#2a3447}
+ .mm-strip{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;margin:0 0 4mm;background:#f7f3ea;border:.45pt solid #B8BCC2}
+ .print-plan .mm-strip{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .mm-strip>div{padding:2.4mm 2.5mm 2.2mm;text-align:left;border-left:.35pt solid #cfc8bb}
+ .mm-strip>div:first-child{border-left:0}
+ .mm-strip .k{display:block;margin:0 0 1.2mm;font:600 5.4pt/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#2a3447}
+ .mm-strip .v{display:block;margin:0;font:400 12.5pt/1 var(--serif);color:#161c28;font-variant-numeric:tabular-nums}
+ .mm-strip .v em{font-style:italic}
+ .mm-board{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-rows:minmax(72mm,1fr) auto;gap:4mm;align-items:stretch;width:100%;flex:0 0 auto}
+ .mm-cell{display:flex;flex-direction:column;background:#f7f3ea;border:.4pt solid #B8BCC2;padding:3.2mm 4mm 3mm;min-width:0;min-height:0}
+ .mm-label{margin:0 0 2.4mm;font:600 5.8pt/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:#2a3447}
+ .mm-cell svg{display:block;width:100%;max-width:88mm;height:auto;max-height:78mm;margin:auto}
+ #printwheel circle.ring{stroke:#2a3447}
  #printwheel line{stroke:#c8c1b4}
  #printwheel text{fill:#1c1914}
- .mm-scores{list-style:none;margin:0;padding:0;width:100%;max-width:100%}
- .mm-scores li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;padding:2.2pt 0;border-bottom:.35pt solid #e2dcd0;font:400 8.5pt/1.2 var(--serif);color:#1c1914}
+ .mm-scores{list-style:none;margin:0;padding:0;width:100%;flex:1 1 auto;display:flex;flex-direction:column}
+ .mm-scores li{display:grid;grid-template-columns:minmax(0,1fr) 11mm;column-gap:3mm;align-items:baseline;flex:1 1 0;min-height:7.4mm;padding:0;border-bottom:.35pt solid #d8d1c4;font:400 10pt/1.15 var(--serif);color:#1c1914}
+ .mm-scores li:last-child{border-bottom:0}
  .mm-scores li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
- .mm-scores b{font:italic 400 11pt/1 var(--serif);font-weight:400}
- .mm-pair{margin:0 0 2mm;font:400 20pt/1.05 var(--serif);max-width:100%;overflow-wrap:anywhere}
+ .mm-scores b{font:italic 400 12pt/1.15 var(--serif);font-weight:400;text-align:right;font-variant-numeric:tabular-nums}
+ .mm-hl{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:4mm}
+ .mm-pair{margin:0;font:400 13.5pt/1.15 var(--serif);font-variant-numeric:tabular-nums}
  .mm-pair em{font-style:italic}
- .mm-note{margin:2mm 0 0;font:italic 400 12pt/1.35 var(--serif)}
- .mm-hint{margin:1.5mm 0 0;font:italic 400 10pt/1.35 var(--serif);color:#3a352c}
- footer.mm-foot,.mm-foot{background:transparent!important;color:#1c1914!important;text-align:center;margin-top:auto;padding:4.5mm 0 0!important;border:0;border-top:.4pt solid #2a241c;width:100%;max-width:100%;font-size:inherit}
- .mm-date,.mm-url{margin:0 0 1.5mm;font:500 6.5pt/1.3 var(--sans);letter-spacing:.32em;text-transform:uppercase;color:#1c1914}
- .mm-url{letter-spacing:.28em}
- .mm-tagline{margin:2mm 0 2mm;font:italic 400 10pt/1.3 var(--serif);color:#1c1914}
- .mm-disc{margin:0;font:400 6.5pt/1.35 var(--sans);letter-spacing:.02em;color:#6b6457}
+ .mm-sub{margin:1.4mm 0 0;font:italic 400 9pt/1.3 var(--serif);color:#3a352c}
+ .mm-plan{position:relative;z-index:1;width:100%;flex:0 0 auto}
+ .mm-plan-head,.mm-plan-row{display:grid;grid-template-columns:30mm minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);column-gap:4mm;align-items:start}
+ .mm-plan-head{margin:0 0 1.6mm;padding:0 0 1.5mm;border-bottom:.4pt solid #B8BCC2}
+ .mm-plan-head span{font:600 5.4pt/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:#2a3447}
+ .mm-plan-row{padding:2.4mm 0;border-bottom:.35pt solid #cfc8bb}
+ .mm-plan-row:last-child{border-bottom:0}
+ .mm-plan-row .who{min-width:0}
+ .mm-plan-row .who b{display:block;font:italic 400 11pt/1.15 var(--serif);font-weight:400}
+ .mm-plan-row .who span{display:block;margin-top:.9mm;font:600 5.6pt/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#2a3447;font-variant-numeric:tabular-nums}
+ .mm-plan-row p{margin:0;font:400 8.2pt/1.32 var(--serif);color:#1c1914}
+ .mm-notes{position:relative;z-index:1;flex:1 1 auto;display:flex;flex-direction:column;min-height:22mm;margin:4mm 0 0;background:#f7f3ea;border:.4pt solid #B8BCC2;overflow:hidden}
+ .mm-notes .lab{flex:0 0 auto;margin:0;padding:2.2mm 4mm 0;font:600 5.8pt/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:#2a3447}
+ .mm-rules{flex:1 1 auto;display:flex;flex-direction:column;min-height:18mm;margin:1.6mm 4mm 3mm;overflow:hidden}
+ .mm-rules i{display:block;flex:0 0 5.4mm;height:5.4mm;width:100%;border:0;border-bottom:.3pt solid #c8c1b4;margin:0;padding:0}
+ footer.mm-foot,.mm-foot{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.9fr) minmax(0,1fr) minmax(0,1.3fr);column-gap:4mm;align-items:end;background:transparent!important;color:#1c1914!important;margin-top:4mm;padding:2.6mm 0 0!important;border:0;border-top:.4pt solid #B8BCC2;width:100%;font-size:inherit;flex:0 0 auto}
+ .mm-date,.mm-url,.mm-tagline,.mm-disc{margin:0;color:#1c1914}
+ .mm-date,.mm-url{font:600 5.5pt/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase}
+ .mm-tagline{font:italic 400 8.2pt/1.2 var(--serif);text-align:center}
+ .mm-disc{font:400 5.5pt/1.25 var(--sans);letter-spacing:.02em;color:#6b6457;text-align:right}
 }
 </style>
 </head>
@@ -264,7 +292,7 @@ footer .in{max-width:1100px;margin:0 auto}
  <p class="quote rv">Most people can describe a building faster than they can describe their week.</p>
  <div class="rv d1">
   <p>Score each area from 1 to 10. One is neglected. Ten is about as good as you'd honestly want it. First instinct tends to beat a long debate.</p>
-  <p>The wheel stays with you at the foot of the page. Adjust from there, or in each chapter. At the end I'll show you the two areas sitting lowest and ask for one small move on each.</p>
+  <p>The wheel stays with you at the foot of the page. Adjust from there, or in each chapter. At the end I'll name the lowest areas and offer a week, a month, and a season of small moves to bring the shape back toward round.</p>
  </div>
 </section>
 
@@ -281,7 +309,7 @@ footer .in{max-width:1100px;margin:0 auto}
   <div class="pgrid">
    <div>
     <figure class="plate" style="margin:0">
-     <svg id="bigwheel" class="wheel" viewBox="-270 -240 540 480" role="img" aria-labelledby="bw-t bw-d"><title id="bw-t">Your wheel of life</title><desc id="bw-d"></desc></svg>
+     <svg id="bigwheel" class="wheel" viewBox="-320 -280 640 560" role="img" aria-labelledby="bw-t bw-d"><title id="bw-t">Your wheel of life</title><desc id="bw-d"></desc></svg>
     </figure>
     <p class="cap">A rounder wheel tends to roll more smoothly than a bigger one.</p>
     <ul class="scores" id="scores" aria-label="All scores"></ul>
@@ -291,13 +319,13 @@ footer .in{max-width:1100px;margin:0 auto}
     <p class="saved" id="saved" aria-live="polite"></p>
     <div class="actions">
      <button class="btn" id="print" type="button">Print or save as PDF</button>
-     <button class="btn ghost" id="dl" type="button">Download as text</button>
+     <button class="btn ghost" id="share" type="button">Share</button>
      <button class="btn ghost" id="reset" type="button">Start over</button>
     </div>
    </div>
   </div>
   <div class="closer">
-   <p class="quote">Home keeps asking the same question. Answer it when you are ready.</p>
+   <p class="quote">The rooms you keep shape the week you get. Answer them when you are ready.</p>
    <p class="caps">Live where you belong</p>
   </div>
  </div>
@@ -339,36 +367,46 @@ footer .in{max-width:1100px;margin:0 auto}
 
 <article class="print-doc" id="print-doc" aria-hidden="true">
  <section class="print-page print-hud">
+  <div class="mm-frame" aria-hidden="true"><i class="rule-out"></i><i class="rule-in"></i><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i></div>
   <header class="mm-head">
    <img class="mm-ak" src="assets/ak-monogram.png" alt="" width="28" height="30">
-   <p class="mm-title">The Wheel of Life</p>
-  </header>
-  <div class="mm-block">
-   <p class="mm-num">01</p>
-   <div class="mm-body">
-    <p class="mm-label">The check-in</p>
-    <div id="print-checkin"></div>
+   <div class="mm-head-mid">
+    <p class="mm-kicker">The Kammer Report</p>
+    <p class="mm-display">The <em>Wheel</em> of Life</p>
    </div>
+   <p class="mm-folio">01 / 02</p>
+  </header>
+  <div class="mm-strip" aria-label="Check-in snapshot">
+   <div><span class="k">Average</span><span class="v" id="print-avg"></span></div>
+   <div><span class="k">Spread</span><span class="v" id="print-spread"></span></div>
+   <div><span class="k">Highest</span><span class="v" id="print-hi"></span></div>
+   <div><span class="k">Lowest</span><span class="v" id="print-lo"></span></div>
   </div>
-  <div class="mm-block">
-   <p class="mm-num">02</p>
-   <div class="mm-body">
-    <p class="mm-label">Your wheel</p>
-    <div class="mm-card">
-     <span class="mm-card-tag">Scores</span>
-     <div class="mm-card-grid">
-      <svg id="printwheel" class="wheel" viewBox="-320 -280 640 560" role="img" aria-label="Your wheel of life"></svg>
-      <ul class="mm-scores" id="print-scores"></ul>
-     </div>
+  <div class="mm-board">
+   <div class="mm-cell">
+    <p class="mm-label">The wheel</p>
+    <svg id="printwheel" class="wheel" viewBox="-205 -198 410 396" role="img" aria-label="Your wheel of life"></svg>
+   </div>
+   <div class="mm-cell">
+    <p class="mm-label">Eight scores</p>
+    <ul class="mm-scores" id="print-scores"></ul>
+   </div>
+   <div class="mm-hl">
+    <div class="mm-cell">
+     <p class="mm-label">Highest</p>
+     <p class="mm-pair" id="print-high-line"></p>
+     <p class="mm-sub" id="print-high-sub"></p>
+    </div>
+    <div class="mm-cell">
+     <p class="mm-label">Lowest</p>
+     <p class="mm-pair" id="print-low-line"></p>
+     <p class="mm-sub" id="print-low-sub"></p>
     </div>
    </div>
   </div>
-  <div class="mm-block">
-   <p class="mm-num">03</p>
-   <div class="mm-body">
-    <p class="mm-label">The shape</p>
-    <div id="print-shape"></div>
-   </div>
+  <div class="mm-notes">
+   <p class="lab">Notes</p>
+   <div class="mm-rules" aria-hidden="true"></div>
   </div>
   <footer class="mm-foot">
    <p class="mm-date" id="print-date"></p>
@@ -378,11 +416,28 @@ footer .in{max-width:1100px;margin:0 auto}
   </footer>
  </section>
  <section class="print-page print-plan">
+  <div class="mm-frame" aria-hidden="true"><i class="rule-out"></i><i class="rule-in"></i><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i></div>
   <header class="mm-head">
    <img class="mm-ak" src="assets/ak-monogram.png" alt="" width="28" height="30">
-   <p class="mm-title">The Action Plan</p>
+   <div class="mm-head-mid">
+    <p class="mm-kicker">The Kammer Report</p>
+    <p class="mm-display">The <em>Action</em> Plan</p>
+   </div>
+   <p class="mm-folio">02 / 02</p>
   </header>
-  <div id="print-plan-body"></div>
+  <div class="mm-strip" aria-label="Plan snapshot">
+   <div><span class="k">Priority</span><span class="v" id="print-pri"></span></div>
+   <div><span class="k">Next</span><span class="v" id="print-next"></span></div>
+   <div><span class="k">Protect</span><span class="v" id="print-keep"></span></div>
+  </div>
+  <div class="mm-plan">
+   <div class="mm-plan-head" aria-hidden="true"><span>Area</span><span>This week</span><span>30 days</span><span>90 days</span></div>
+   <div id="print-plan-body"></div>
+  </div>
+  <div class="mm-notes">
+   <p class="lab">Notes</p>
+   <div class="mm-rules" aria-hidden="true"></div>
+  </div>
   <footer class="mm-foot">
    <p class="mm-date" id="print-date-2"></p>
    <p class="mm-url">Agentkammer.com</p>
@@ -407,14 +462,14 @@ const PHOTOS=[
  {src:"assets/home.jpg",pos:"74% 46%"}
 ];
 const AREAS=[
- {k:"health",n:"Health",q:"How's your body holding up when you ask something of it?",p:"The body keeps quieter books than the bank. It still keeps them.",h:"An earlier night, a longer walk, or water before the first coffee. Pick one and repeat it."},
- {k:"career",n:"Career",q:"Does your work still feel like it's taking you somewhere?",p:"Ambition makes a fine tenant. I'd think twice before handing it the deed.",h:"One conversation you've been postponing, or a protected hour on the work you actually care about."},
- {k:"money",n:"Money",q:"When a statement arrives, is your first feeling calm or a small flinch?",p:"Enough is a number. Very few people ever write it down.",h:"Read last month's statement with a cup of tea and no judgment. Just notice."},
- {k:"relationships",n:"Relationships",q:"Who would you call at two in the morning, and do they know it?",p:"Bridges look permanent. Someone is always out there maintaining them.",h:"A message to someone you miss. Nothing clever required."},
- {k:"family",n:"Family",q:"How easy is it to be yourself around the people you come from?",p:"Some doors you keep walking through for the rest of your life.",h:"A call with no agenda. Listen a little longer than you usually would."},
- {k:"growth",n:"Personal growth",q:"When did you last learn something purely because you wanted to?",p:"Curiosity ages better than certainty. I've yet to see an exception.",h:"Twenty minutes with a book, a lesson, or a question you've been circling."},
- {k:"fun",n:"Fun and recreation",q:"Is there room in your week for something with no purpose at all?",p:"An evening that accomplishes nothing can still be the best one of the month.",h:"Put something pointless on the calendar and guard it like a board meeting."},
- {k:"home",n:"Home and environment",q:"Does walking through your front door feel like arriving?",p:"Home is the room where your shoulders finally drop.",h:"Clear one surface. Fix the lamp that flickers. Open a window on purpose."}];
+ {k:"health",n:"Health",q:"When you ask your body for a long walk or an early morning, what does it offer back?",p:"Energy is the quiet ledger of the week. You feel it before you name it.",h:"Protect one earlier night, or take the longer way home on foot.",w:"Walk twenty minutes on three mornings. Same route if it helps you start.",m:"Put a standing hour on the calendar for movement, and treat it like a meeting you already accepted.",qtr:"Notice which rooms and hours make rest easier. Keep those, and drop one habit that steals the morning."},
+ {k:"career",n:"Career",q:"At the end of a good day, did the work still feel like it belongs to you?",p:"Ambition makes a fine tenant. The hours still have to belong to a life you would choose twice.",h:"Block one protected hour for the work you actually want your name on.",w:"Write the one conversation you have been postponing, and send it before Friday.",m:"Choose a single project to finish, and decline one request that only looks urgent.",qtr:"Name the kind of week you want your work to produce, then cut one standing obligation that does not serve it."},
+ {k:"money",n:"Money",q:"When you open a statement, do you already know what you will see?",p:"Money is a language of options. Clarity is the first courtesy you owe yourself.",h:"Read last month's statement once, with a cup of tea and no corrections.",w:"Open the last statement and write three numbers you actually understand.",m:"Set a recurring hour to look at the same three numbers, nothing more.",qtr:"Write what enough would look like for this season of life. Keep it on paper, not in a pitch."},
+ {k:"relationships",n:"Relationships",q:"Who has heard from you lately without a reason attached?",p:"The people you love rarely need a performance. They need to know the door is still open.",h:"Send one unpolished note to someone you miss.",w:"Write to one person you have been meaning to see, and offer a specific hour.",m:"Make one recurring plan that is not a birthday or a crisis.",qtr:"Name the two people who keep you honest, and put their names on the calendar first."},
+ {k:"family",n:"Family",q:"When you sit with the people you come from, how much of yourself do you leave at the door?",p:"Family is a long room. You can rearrange the furniture. You cannot pretend the walls are new.",h:"Call with no agenda, and listen a little longer than you usually would.",w:"Make one call that is not about logistics.",m:"Share a meal, or a walk, without a problem to solve.",qtr:"Decide which family rhythm you want to keep, and which one you can let go of without a speech."},
+ {k:"growth",n:"Personal growth",q:"What did you learn this month that nobody assigned you?",p:"Curiosity is how a life stays interesting after the title is already printed.",h:"Give twenty minutes to a book, a lesson, or a question you have been circling.",w:"Read or listen for twenty minutes on three evenings, no output required.",m:"Finish one short course, essay, or chapter you started and abandoned.",qtr:"Choose one subject you want to be fluent in by next season, and give it a standing hour."},
+ {k:"fun",n:"Fun and recreation",q:"When did you last do something that would look useless on a calendar?",p:"Pleasure is not a reward for finishing the list. It is part of how a week stays humane.",h:"Put something pointless on the calendar and guard it like a board meeting.",w:"Schedule one evening with no purpose and keep it.",m:"Repeat a pleasure you already know works: a table, a walk, a room with music.",qtr:"Build one recurring ritual that exists only because you like it."},
+ {k:"home",n:"Home and environment",q:"Does this address give the other seven areas room to breathe, or does it quietly tax them?",p:"A home is never only rooms. It sets the hour you sleep, the people you see, and the work you can still do after you walk in.",h:"Walk the apartment at the hour you usually return. Name one friction that follows you into the next morning.",w:"Clear the surface you land on when you come in, and leave one lamp ready.",m:"Change one evening habit the rooms currently force: dinner at the table, or the phone left in another room.",qtr:"Write what this address gives the rest of the wheel, and what it takes. Decide whether the rooms still match the life."}];
 const WORDS=["","Neglected","Thin","Strained","Uneven","Holding","Steady","Good","Strong","Rich","Full"];
 const SAMPLE={health:6,career:8,money:5,relationships:7,family:3,growth:6,fun:4,home:9};
 const SHORT={growth:"Growth",fun:"Fun",home:"Home",relationships:"Relate"};
@@ -488,7 +543,17 @@ function makeWheel(svg,R,labels,uid){
  });
  svg.appendChild(el("circle",{r:R/40,fill:"#161C28",stroke:"#C9C2B3"}));
  const lt=[];
- if(labels)AREAS.forEach((a,i)=>{const ang=-Math.PI/2+(i+.5)*2*Math.PI/N,[x,y]=pt(R+22,ang);const t=el("text",{x:x.toFixed(1),y:(y+4).toFixed(1),"text-anchor":Math.abs(x)<12?"middle":x>0?"start":"end",fill:uid==="p"?"#1c1914":"#F5F2EB","font-family":"Montserrat,sans-serif","font-size":uid==="p"?9:11.5,"letter-spacing":uid==="p"?.8:2.2});t.textContent=(SHORT[a.k]||a.n).toUpperCase();svg.appendChild(t);lt.push(t)});
+ if(labels)AREAS.forEach((a,i)=>{
+  const ang=-Math.PI/2+(i+.5)*2*Math.PI/N,reach=uid==="b"?R+38:uid==="p"?R+28:R+22,[x,y]=pt(reach,ang);
+  const t=el("text",{x:x.toFixed(1),y:(y+3).toFixed(1),"text-anchor":Math.abs(x)<20?"middle":x>0?"start":"end",fill:uid==="p"?"#1c1914":"#F5F2EB","font-family":"Montserrat,sans-serif","font-size":uid==="p"?7.2:uid==="b"?8.4:11.5,"letter-spacing":uid==="b"?0.35:uid==="p"?.45:2.2});
+  const label=(uid==="b"?a.n:uid==="p"&&a.k==="relationships"?"Relations":(SHORT[a.k]||a.n)).toUpperCase();
+  if(uid==="b"&&label.length>14){
+   const cut=label.lastIndexOf(" ",14),head=cut>0?label.slice(0,cut):label,tail=cut>0?label.slice(cut+1):"";
+   const t1=el("tspan",{x:x.toFixed(1),dy:"-0.4em"});t1.textContent=head;t.appendChild(t1);
+   if(tail){const t2=el("tspan",{x:x.toFixed(1),dy:"1.2em"});t2.textContent=tail;t.appendChild(t2)}
+  }else t.textContent=label;
+  svg.appendChild(t);lt.push(t);
+ });
  return{svg,set(lows){AREAS.forEach((a,i)=>{const r=Math.max(R*st.s[a.k]/10,R*.04);gs[i].setAttribute("d",arc(r,i));bs[i].setAttribute("d",arc(r,i));if(lt[i])lt[i].setAttribute("fill",uid==="p"?"#1c1914":(lows.includes(a.k)?"#E8E4DC":"#F5F2EB"))})}};
 }
 function catmull(pts){
@@ -519,24 +584,33 @@ function paintVibe(){
 const big=makeWheel($("bigwheel"),180,true,"b"),mini=makeWheel($("miniwheel"),180,false,"m"),prt=makeWheel($("printwheel"),150,true,"p");
 let pt1,sel=AREAS[0].k;
 function ranked(){return AREAS.map((a,i)=>({...a,v:st.s[a.k],i})).sort((x,y)=>x.v-y.v||x.i-y.i)}
-function lowest(){return ranked().slice(0,2)}
+function focusAreas(){
+ const r=ranked(),out=[r[0]];
+ for(let i=1;i<3;i++){if(r[i]&&r[i].v<=r[0].v+2)out.push(r[i])}
+ return out;
+}
 function highest(){return ranked().slice(-2).reverse()}
 function paintPrint(){
- const lo=lowest(),hi=highest(),lk=lo.map(o=>o.k);
+ const lo=focusAreas(),hi=highest(),lk=lo.map(o=>o.k);
  const vals=AREAS.map(a=>st.s[a.k]),avg=vals.reduce((x,y)=>x+y,0)/N,spread=Math.max(...vals)-Math.min(...vals);
  const d=new Date().toLocaleDateString(undefined,{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+ const short=o=>SHORT[o.k]||o.n;
  prt.set(lk);
  $("print-date").textContent=d;
  $("print-date-2").textContent=d;
- $("print-checkin").innerHTML=`<p class="mm-figure">Average <em>${avg.toFixed(1)}</em></p><p class="mm-sub">of 10, with a spread of <em>${spread}</em>. Eight parts of how the week actually feels.</p>`;
+ $("print-avg").innerHTML=`<em>${avg.toFixed(1)}</em>`;
+ $("print-spread").innerHTML=`<em>${spread}</em>`;
+ $("print-hi").innerHTML=`<em>${short(hi[0])}</em> ${hi[0].v}`;
+ $("print-lo").innerHTML=`<em>${short(lo[0])}</em> ${lo[0].v}`;
+ $("print-pri").innerHTML=`<em>${short(lo[0])}</em> ${lo[0].v}`;
+ $("print-next").innerHTML=lo[1]?`<em>${short(lo[1])}</em> ${lo[1].v}`:`<em>Hold</em>`;
+ $("print-keep").innerHTML=`<em>${short(hi[0])}</em> ${hi[0].v}`;
  $("print-scores").innerHTML=AREAS.map(a=>`<li><span>${a.n}</span><b>${st.s[a.k]}</b></li>`).join("");
- const tie=lo[0].v===lo[1].v;
- $("print-shape").innerHTML=`<p class="mm-pair"><em>${lo[0].n}</em> ${lo[0].v} · <em>${lo[1].n}</em> ${lo[1].v}</p><p class="mm-sub">Lowest right now${tie?" (tied, so I took them in order)":""}. One small move on each by Sunday.</p><p class="mm-figure mm-figure-sm">Holding well: <em>${hi[0].n}</em> ${hi[0].v} · <em>${hi[1].n}</em> ${hi[1].v}</p>`;
- const note=o=>{
-  const written=(st.m[o.k]||"").trim();
-  return written||o.h;
- };
- $("print-plan-body").innerHTML=`<div class="mm-block"><p class="mm-num">01</p><div class="mm-body"><p class="mm-label">Priority</p><p class="mm-figure"><em>${lo[0].n}</em> ${lo[0].v}</p><p class="mm-hint">${lo[0].h}</p><p class="mm-note">${esc(note(lo[0]))}</p></div></div><div class="mm-block"><p class="mm-num">02</p><div class="mm-body"><p class="mm-label">Your moves</p><div class="mm-card"><span class="mm-card-tag">Notes</span><p class="mm-pair"><em>${lo[1].n}</em> ${lo[1].v}</p><p class="mm-hint">${lo[1].h}</p><p class="mm-note">${esc(note(lo[1]))}</p><p class="mm-pair" style="margin-top:4mm;font-size:16pt"><em>${lo[0].n}</em> ${lo[0].v}</p><p class="mm-note">${esc(note(lo[0]))}</p></div></div></div><div class="mm-block"><p class="mm-num">03</p><div class="mm-body"><p class="mm-label">Protect these</p><p class="mm-figure"><em>${hi[0].n}</em> ${hi[0].v}</p><p class="mm-sub">${hi[0].p}</p><p class="mm-figure mm-figure-sm"><em>${hi[1].n}</em> ${hi[1].v}</p><p class="mm-sub">${hi[1].p}</p></div></div>`;
+ $("print-high-line").innerHTML=`<em>${hi[0].n}</em> ${hi[0].v}`;
+ $("print-high-sub").textContent=hi[1]?`${hi[1].n} ${hi[1].v} · Keep what is already holding.`:"Keep what is already holding.";
+ $("print-low-line").innerHTML=lo.map(o=>`<em>${o.n}</em> ${o.v}`).join(" · ");
+ $("print-low-sub").textContent="A week, a month, and a season of small moves on page two.";
+ $("print-plan-body").innerHTML=lo.map(o=>`<div class="mm-plan-row"><div class="who"><b>${esc(o.n)}</b><span>${o.v} of 10</span></div><p>${esc(o.w)}</p><p>${esc(o.m)}</p><p>${esc(o.qtr)}</p></div>`).join("");
 }
 function setScore(k,v,pulse){
  st.s[k]=v;save();paintDial(k);if(sel===k)paintDock();update(pulse);
@@ -554,21 +628,21 @@ function select(k,scroll){
  if(scroll){const ch=$("ch-"+k);if(ch)ch.scrollIntoView({behavior:reduce?"auto":"smooth",block:"center"})}
 }
 function update(pulse){
- const lo=lowest(),lk=lo.map(o=>o.k);
+ const lo=focusAreas(),lk=lo.map(o=>o.k);
  big.set(lk);mini.set(lk);prt.set(lk);paintVibe();paintPrint();
  if(pulse){[big,mini].forEach(w=>w.svg.classList.add("pulse"));clearTimeout(pt1);pt1=setTimeout(()=>[big,mini].forEach(w=>w.svg.classList.remove("pulse")),900)}
  const v=AREAS.map(a=>st.s[a.k]),avg=v.reduce((x,y)=>x+y,0)/N;
  $("bw-d").textContent="Scores: "+AREAS.map(a=>a.n+" "+st.s[a.k]).join(", ")+".";
  $("scores").innerHTML=AREAS.map(a=>`<li class="${lk.includes(a.k)?"low":""}"><span>${a.n}</span><b>${st.s[a.k]}</b></li>`).join("")+`<li style="grid-column:1/-1;border:0"><span><i>Average ${avg.toFixed(1)}, spread of ${Math.max(...v)-Math.min(...v)}</i></span></li>`;
- const tie=lo[0].v===lo[1].v;
- $("lede").innerHTML=`Lowest right now: <em>${lo[0].n}</em> at ${lo[0].v}, and <em>${lo[1].n}</em> at ${lo[1].v}${tie?" (tied, so I took them in order)":""}. One small move on each by Sunday.`
+ const names=lo.map(o=>`<em>${o.n}</em> at ${o.v}`).join(", then ");
+ $("lede").innerHTML=`Lowest right now: ${names}. A week, a month, and a season of small moves can bring the wheel back toward round.`
  renderMoves(lo);
 }
 let lastKeys="";
 function renderMoves(lo){
  const keys=lo.map(o=>o.k+o.v).join();if(keys===lastKeys)return;lastKeys=keys;
  const m=$("moves"),act=document.activeElement&&document.activeElement.id;
- m.innerHTML=lo.map(o=>`<div class="move"><div class="top"><h3 class="caps">${o.n}</h3><span class="sc">${o.v}<span class="vh"> out of 10</span></span></div><p>${o.h}</p><label for="m-${o.k}">One small move this week</label><textarea id="m-${o.k}" placeholder="Something you'd actually do by Sunday">${esc(st.m[o.k]||"")}</textarea></div>`).join("");
+ m.innerHTML=lo.map(o=>`<div class="move"><div class="top"><h3 class="caps">${o.n}</h3><span class="sc">${o.v}<span class="vh"> out of 10</span></span></div><p>${o.h}</p><div class="timeline" aria-label="Suggested plan for ${o.n}"><div class="tl"><span class="when">This week</span><p>${o.w}</p></div><div class="tl"><span class="when">30 days</span><p>${o.m}</p></div><div class="tl"><span class="when">90 days</span><p>${o.qtr}</p></div></div><label for="m-${o.k}">Your note for this area</label><textarea id="m-${o.k}" placeholder="A move you would actually keep">${esc(st.m[o.k]||"")}</textarea></div>`).join("");
  m.querySelectorAll("textarea").forEach(t=>t.addEventListener("input",()=>{st.m[t.id.slice(2)]=t.value;save();$("saved").textContent="Saved in this browser."}));
  if(act&&$(act)&&act.startsWith("m-"))$(act).focus();
 }
@@ -582,6 +656,7 @@ AREAS.forEach(a=>{
  chips.appendChild(b);
 });
 $("dock-r").addEventListener("input",()=>setScore(sel,+$("dock-r").value,true));
+document.querySelectorAll(".mm-rules").forEach(n=>{n.innerHTML="<i></i>".repeat(56)});
 AREAS.forEach(a=>paintDial(a.k));paintDock();update(false);
 
 const rvs=document.querySelectorAll(".rv");
@@ -596,9 +671,17 @@ $("toPersp").addEventListener("click",e=>{e.preventDefault();$("perspective").sc
 
 $("print").onclick=()=>{document.querySelectorAll("textarea[id^='m-']").forEach(t=>{st.m[t.id.slice(2)]=t.value});save();paintPrint();window.print()};
 window.addEventListener("beforeprint",()=>{document.querySelectorAll("textarea[id^='m-']").forEach(t=>{st.m[t.id.slice(2)]=t.value});save();paintPrint()});
-$("dl").onclick=()=>{const lo=lowest(),d=new Date().toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"});
- const t=`THE WHEEL OF LIFE\nAgent Kammer, agentkammer.com\n${d}\n\n`+AREAS.map(a=>`${a.n}: ${st.s[a.k]} / 10`).join("\n")+`\n\nONE SMALL MOVE THIS WEEK\n`+lo.map(o=>`${o.n} (${o.v}/10): ${st.m[o.k]||"(not written yet)"}`).join("\n")+`\n\nEducational only. For personal reflection.\nLive where you belong.\n`;
- const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/plain"}));a.download="wheel-of-life.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),800)};
+$("share").onclick=async()=>{
+ const url=location.href.split("#")[0],title="The Wheel of Life",text="A ten-minute check-in on how the week actually feels.";
+ try{
+  if(navigator.share){await navigator.share({title,text,url});$("saved").textContent="Shared.";return}
+ }catch(e){if(e&&e.name==="AbortError")return}
+ try{
+  await navigator.clipboard.writeText(url);$("saved").textContent="Link copied.";
+ }catch(e){
+  const inp=document.createElement("input");inp.value=url;document.body.appendChild(inp);inp.select();document.execCommand("copy");inp.remove();$("saved").textContent="Link copied.";
+ }
+};
 $("reset").onclick=()=>{if(!confirm("Clear your scores and notes on this device?"))return;st={s:{...SAMPLE},m:{}};AREAS.forEach(a=>paintDial(a.k));sel=AREAS[0].k;paintDock();save();lastKeys="";$("saved").textContent="";update(true)};
 })();
 </script>
