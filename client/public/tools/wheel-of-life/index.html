@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>The Wheel of Life | Agent Kammer</title>
-<meta name="description" content="A quiet evening check on eight parts of your life. Score each one, watch the shape form, and choose one small move for the week.">
+<meta name="description" content="Score eight parts of how life feels this week, then pick one small move.">
 <meta name="theme-color" content="#161C28">
 <link rel="icon" href="assets/ak-monogram.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -196,15 +196,15 @@ footer .caps{color:var(--ivory);font-size:13px;margin-bottom:10px}
   <hr class="rule rv d1">
   <h1 id="h-hero" class="caps rv d1"><small>The</small>Wheel of Life</h1>
   <hr class="rule rv d2">
-  <p class="dek rv d2">Eight parts of a life, scored honestly over one unhurried evening. The shape you end up with usually says more than any single number.</p>
+  <p class="dek rv d2">Eight parts of how a week actually feels, scored from 1 to 10. The shape is usually more honest than any one number.</p>
   <div class="meta rv d3"><span class="num">01</span><span class="num">Eight areas</span><span class="num">About ten minutes</span></div>
-  <p class="edu rv d3"><strong>Educational only.</strong> A reflection exercise for personal growth. It isn't therapy, medical or financial advice, or a diagnosis, and it promises no particular outcome. Your answers stay in this browser.</p>
+  <p class="edu rv d3"><strong>Educational only.</strong> Score how this week actually feels. Answers stay in this browser.</p>
   <a class="cue rv d3" href="#intro"><i aria-hidden="true"></i>Begin</a>
  </div>
 </section>
 
 <section class="intro" id="intro" aria-label="How this works">
- <p class="quote rv">A city is easy to read from the fiftieth floor. A life, less so.</p>
+ <p class="quote rv">Most people can describe a building faster than they can describe their week.</p>
  <div class="rv d1">
   <p>Scroll through the eight chapters and score each area from 1 to 10. One is neglected. Ten is about as good as you'd honestly want it. First instinct tends to beat a long debate.</p>
   <p>The wheel in the corner fills in as you go. At the end I'll show you the two areas sitting lowest and ask for one small move on each. Nothing grand, just something you'd actually do by Sunday.</p>
@@ -241,7 +241,7 @@ footer .caps{color:var(--ivory);font-size:13px;margin-bottom:10px}
    </div>
   </div>
   <div class="closer">
-   <p class="quote">The rooms change, the city changes. The question of where you belong keeps coming back, a little clearer each time.</p>
+   <p class="quote">Home keeps asking the same question. Answer it when you are ready.</p>
    <p class="caps">Live where you belong</p>
   </div>
  </div>
@@ -253,7 +253,7 @@ footer .caps{color:var(--ivory);font-size:13px;margin-bottom:10px}
 <footer>
  <div class="in">
   <p class="caps">Agent Kammer</p>
-  <p>Educational content only. Not therapy, medical, financial or professional advice.</p>
+  <p>Educational content only. For personal reflection. Answers stay in this browser.</p>
   <p class="credit">Photography adapted (toned and cropped) from Wikimedia Commons: Empire State Building from Rockefeller Center by Daniel Lawrence Lu, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Brooklyn Bridge, Manhattan by Suiseiseki, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>. Other scenes are original illustrations.</p>
  </div>
 </footer>
@@ -393,7 +393,7 @@ function update(pulse){
  $("bw-d").textContent="Scores: "+AREAS.map(a=>a.n+" "+st.s[a.k]).join(", ")+".";
  $("scores").innerHTML=AREAS.map(a=>`<li class="${lk.includes(a.k)?"low":""}"><span>${a.n}</span><b>${st.s[a.k]}</b></li>`).join("")+`<li style="grid-column:1/-1;border:0"><span><i>Average ${avg.toFixed(1)}, spread of ${Math.max(...v)-Math.min(...v)}</i></span></li>`;
  const tie=lo[0].v===lo[1].v;
- $("lede").innerHTML=`The two lowest areas on your wheel right now are <em>${lo[0].n}</em>, at ${lo[0].v}, and <em>${lo[1].n}</em>, at ${lo[1].v}${tie?" (tied, so I've taken them in order)":""}. I'd be inclined to leave the big plans for another day. Small, repeatable moves tend to outlast grand ones, and a week is long enough to notice something.`;
+ $("lede").innerHTML=`Lowest right now: <em>${lo[0].n}</em> at ${lo[0].v}, and <em>${lo[1].n}</em> at ${lo[1].v}${tie?" (tied, so I took them in order)":""}. One small move on each by Sunday.`
  renderMoves(lo);
 }
 let lastKeys="";
@@ -424,7 +424,7 @@ $("toPersp").addEventListener("click",e=>{e.preventDefault();miniBtn.click()});
 /* ---------- actions ---------- */
 $("print").onclick=()=>window.print();
 $("dl").onclick=()=>{const lo=lowest(),d=new Date().toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"});
- const t=`THE WHEEL OF LIFE\nAgent Kammer, agentkammer.com\n${d}\n\n`+AREAS.map(a=>`${a.n}: ${st.s[a.k]} / 10`).join("\n")+`\n\nONE SMALL MOVE THIS WEEK\n`+lo.map(o=>`${o.n} (${o.v}/10): ${st.m[o.k]||"(not written yet)"}`).join("\n")+`\n\nEducational only. A personal reflection tool, not professional advice.\nLive where you belong.\n`;
+ const t=`THE WHEEL OF LIFE\nAgent Kammer, agentkammer.com\n${d}\n\n`+AREAS.map(a=>`${a.n}: ${st.s[a.k]} / 10`).join("\n")+`\n\nONE SMALL MOVE THIS WEEK\n`+lo.map(o=>`${o.n} (${o.v}/10): ${st.m[o.k]||"(not written yet)"}`).join("\n")+`\n\nEducational only. For personal reflection.\nLive where you belong.\n`;
  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/plain"}));a.download="wheel-of-life.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),800)};
 $("reset").onclick=()=>{if(!confirm("Clear your scores and notes on this device?"))return;st={s:{},m:{}};AREAS.forEach(a=>{st.s[a.k]=5;$("r-"+a.k).value=5;paintDial(a.k)});save();lastKeys="";$("saved").textContent="";update(true)};
 })();
