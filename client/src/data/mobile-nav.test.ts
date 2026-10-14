@@ -18,22 +18,23 @@ describe("mobile field menu", () => {
   it("keeps Calculator and Hub out of the locked desktop header", () => {
     const headerHrefs = new Set(primaryNav.map((item) => item.href));
     expect(headerHrefs.has("/calculator")).toBe(false);
-    expect(headerHrefs.has("/tools")).toBe(false);
+    expect(headerHrefs.has("/tools")).toBe(true);
     expect(headerHrefs.has("/hub")).toBe(false);
     for (const item of FOOTER_SITEMAP_QUIET) {
       expect(headerHrefs.has(item.href)).toBe(false);
     }
   });
 
-  it("puts Guides, Calculator, and every public guide in the hamburger", () => {
+  it("puts Guides, Tools, and every public guide in the hamburger", () => {
     const ids = mobileFieldNav.map((item) => item.id);
-    expect(ids).toEqual(["home", "start", "guides", "calculator", "contact"]);
+    expect(ids).toEqual(["home", "start", "guides", "tools", "contact"]);
     const hrefs = collectMobileNavHrefs();
     expect(hrefs).toContain("/guides");
     expect(hrefs).toContain("/resources");
     expect(hrefs).toContain("/resources#field-guides");
+    expect(hrefs).toContain("/tools");
     expect(hrefs).toContain("/calculator");
-    expect(hrefs).not.toContain("/tools");
+    expect(hrefs).toContain("/tools/wheel-of-life/");
     expect(hrefs).not.toContain("/tools/livability");
     expect(hrefs).not.toContain("/hub");
     for (const page of hubFieldNav) {
@@ -47,13 +48,15 @@ describe("mobile field menu", () => {
   it("treats the building-terms field guide as a hard static href", () => {
     expect(isHardMobileHref("/guides/building-terms")).toBe(true);
     expect(isHardMobileHref("/guides/how-to-buy-in-nyc.html")).toBe(true);
+    expect(isHardMobileHref("/tools/wheel-of-life/")).toBe(true);
     expect(isHardMobileHref("/guides/how-mortgages-work")).toBe(false);
   });
 
   it("opens the section that matches the field you are already in", () => {
     expect(defaultOpenSectionId("/hub/saved")).toBeNull();
-    expect(defaultOpenSectionId("/calculator")).toBe("calculator");
-    expect(defaultOpenSectionId("/tools/livability")).toBeNull();
+    expect(defaultOpenSectionId("/calculator")).toBe("tools");
+    expect(defaultOpenSectionId("/tools")).toBe("tools");
+    expect(defaultOpenSectionId("/tools/livability")).toBe("tools");
     expect(defaultOpenSectionId("/guides/how-mortgages-work")).toBe("guides");
     expect(defaultOpenSectionId("/situations/first-home-buyers-nyc")).toBe("start");
     expect(defaultOpenSectionId("/")).toBeNull();
@@ -64,12 +67,21 @@ describe("mobile field menu", () => {
       createElement(Router, { ssrPath: "/guides" }, createElement(MobileFieldMenu, { location: "/guides", onClose: () => undefined })),
     );
     expect(html).toContain("Guides");
-    expect(html).toContain("Calculator");
-    expect(html).not.toContain("Tools");
+    expect(html).toContain("Tools");
     expect(html).not.toMatch(/>Hub</);
     expect(html).not.toContain('href="/hub"');
     expect(html).toContain("aria-expanded");
     expect(html).toContain("Guidance");
     expect(html).toContain("data-testid=\"button-header-guidance-mobile\"");
+  });
+
+  it("nests Calculator and Wheel of Life under Tools", () => {
+    const html = renderToStaticMarkup(
+      createElement(Router, { ssrPath: "/tools" }, createElement(MobileFieldMenu, { location: "/tools", onClose: () => undefined })),
+    );
+    expect(html).toContain("All tools");
+    expect(html).toContain("Calculator");
+    expect(html).toContain("Wheel of Life");
+    expect(html).toContain('href="/tools/wheel-of-life/"');
   });
 });

@@ -1,92 +1,84 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
 import { PageHero, PageSection, SectionHeading } from "@/components/site-shell";
 import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
-import { fetchToolsStatus, rememberToolsPreviewFromLocation, type ToolsStatus } from "@/lib/tools-client";
-import { ToolsComingSoon } from "./ToolsComingSoon";
+
+type ToolCard = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  href: string;
+  hard?: boolean;
+};
+
+const PUBLIC_TOOLS: readonly ToolCard[] = [
+  {
+    eyebrow: "Monthly carry",
+    title: "Calculator",
+    description: "Price, down payment, rate, tax, and common charges before the listing takes over.",
+    href: "/calculator",
+  },
+  {
+    eyebrow: "Personal check-in",
+    title: "Wheel of Life",
+    description: "Score eight parts of how a week actually feels, then pick one small move.",
+    href: "/tools/wheel-of-life/",
+    hard: true,
+  },
+];
+
+function CardBody({ card }: { card: ToolCard }) {
+  return (
+    <>
+      <p className={grammar.eyebrow}>{card.eyebrow}</p>
+      <h2 className={`mt-4 ${grammar.rowTitle}`}>{card.title}</h2>
+      <p className="mt-4 text-base leading-7 text-brand-graphite">{card.description}</p>
+      <span className="mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-brand-navy">
+        Open tool
+        <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+      </span>
+    </>
+  );
+}
 
 export default function ToolsHome() {
   usePageMetadata({
     title: "Tools",
-    description: "Pay-to-run housing analyses from Agent Kammer. First tool: Livability Score.",
+    description: "Monthly carry before a listing takes over, and a short check-in on how a week actually feels.",
     path: "/tools",
-    robots: "noindex, nofollow",
   });
-
-  const [status, setStatus] = useState<ToolsStatus | null>(null);
-
-  useEffect(() => {
-    rememberToolsPreviewFromLocation();
-    void fetchToolsStatus().then(setStatus).catch(() => {
-      setStatus({
-        ok: false,
-        public: false,
-        previewRequired: true,
-        unlocked: false,
-        stripeConfigured: false,
-        paymentsStubbed: true,
-        catalog: [],
-      });
-    });
-  }, []);
-
-  if (!status) {
-    return <div className="bg-brand-ivory px-6 py-24 text-brand-graphite">Opening the desk…</div>;
-  }
-  if (!status.unlocked) {
-    return <ToolsComingSoon />;
-  }
 
   return (
     <main className="bg-brand-ivory">
       <PageHero
         eyebrow="Tools"
-        title="Paid analyses, held in a quiet wallet."
-        description="Run a Livability Score from an address, a listing link, or photos. The first run is free. After that, one credit is one dollar."
+        title="Two desks you can open now."
+        description="A quiet monthly-carry calculator, and a personal check-in on how the week actually feels."
         art="decision-framework"
       />
 
       <PageSection>
         <SectionHeading
           eyebrow="Desk"
-          title="Start with how a home lives."
-          description="Not in the primary navigation. Same navy, ivory, and brass as the rest of the practice. More tools will share this wallet."
+          title="Start with the month, or the week."
+          description="The calculator is already on the site. The Wheel of Life sits beside it."
         />
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {status.catalog.map((tool) => {
-            const live = tool.status === "live";
-            const body = (
-              <>
-                <p className={grammar.eyebrow}>{tool.eyebrow || (live ? "Open" : "Later")}</p>
-                <h2 className={`mt-4 ${grammar.rowTitle}`}>
-                  {tool.name}
-                </h2>
-                <p className="mt-4 text-base leading-7 text-brand-graphite">{tool.tagline || tool.description}</p>
-                <span className="mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-brand-navy">
-                  {live ? "Open tool" : "Scaffolded"}
-                  <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-                </span>
-              </>
-            );
-
-            if (!live) {
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          {PUBLIC_TOOLS.map((card) => {
+            const className =
+              "group block border border-brand-border bg-white p-7 transition-colors hover:border-brand-navy/30";
+            if (card.hard) {
               return (
-                <div key={tool.slug} className="border border-brand-border bg-white/70 p-7 opacity-80">
-                  {body}
-                </div>
+                <a key={card.href} href={card.href} className={className}>
+                  <CardBody card={card} />
+                </a>
               );
             }
-
             return (
-              <Link
-                key={tool.slug}
-                href={tool.href}
-                className="group block border border-brand-border bg-white p-7 transition-colors hover:border-brand-navy/30"
-              >
-                {body}
+              <Link key={card.href} href={card.href} className={className}>
+                <CardBody card={card} />
               </Link>
             );
           })}

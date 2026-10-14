@@ -461,7 +461,13 @@ export async function handleToolsWebhook(req: ToolsReq, res: ToolsRes) {
 }
 
 export function toolsNoindexHeaders(path: string): boolean {
-  return path === "/tools" || path.startsWith("/tools/") || path.startsWith("/api/tools");
+  return (
+    path === "/tools/livability" ||
+    path.startsWith("/tools/livability/") ||
+    path === "/tools/curation" ||
+    path.startsWith("/tools/curation/") ||
+    path.startsWith("/api/tools")
+  );
 }
 
 export { toolsArePublic };

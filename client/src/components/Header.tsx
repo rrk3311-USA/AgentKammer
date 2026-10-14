@@ -26,6 +26,14 @@ function isPrimaryNavActive(href: string, location: string) {
   if (href === "/situations") {
     return location === "/situations" || location.startsWith("/situations/");
   }
+  if (href === "/tools") {
+    return (
+      location === "/tools" ||
+      location.startsWith("/tools/") ||
+      location === "/calculator" ||
+      location.startsWith("/calculator/")
+    );
+  }
   return location === href || location.startsWith(`${href}/`);
 }
 
