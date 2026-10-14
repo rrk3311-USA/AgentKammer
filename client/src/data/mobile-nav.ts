@@ -41,8 +41,8 @@ function isBranch(item: MobileNavLink | MobileNavBranch): item is MobileNavBranc
 
 /**
  * Mobile field menu. Not the locked desktop header.
- * Home · Start Here · Guides · Contact stay the four doors.
- * Calculator nests here so the hamburger works in the field. Hub stays off this list for now.
+ * Home · Start Here · Guides · Interactive Tools · Contact stay the five doors.
+ * Calculator and Wheel of Life nest under Interactive Tools. Hub stays off this list for now.
  */
 export const mobileFieldNav: readonly MobileNavSection[] = [
   { id: "home", label: "Home", href: "/" },
@@ -71,7 +71,16 @@ export const mobileFieldNav: readonly MobileNavSection[] = [
       ...publicGuides.map((guide) => ({ label: guide.title, href: guide.href })),
     ],
   },
-  { id: "calculator", label: "Calculator", href: "/calculator" },
+  {
+    id: "tools",
+    label: "Interactive Tools",
+    href: "/tools",
+    children: [
+      { label: "All tools", href: "/tools" },
+      { label: "Calculator", href: "/calculator" },
+      { label: "Wheel of Life", href: "/tools/wheel-of-life/" },
+    ],
+  },
   { id: "contact", label: "Contact", href: "/contact" },
 ];
 
@@ -97,7 +106,14 @@ export function collectMobileNavHrefs(sections: readonly MobileNavSection[] = mo
 
 export function defaultOpenSectionId(location: string): string | null {
   const path = location.split(/[?#]/)[0] ?? location;
-  if (path === "/calculator" || path.startsWith("/calculator/")) return "calculator";
+  if (
+    path === "/calculator" ||
+    path.startsWith("/calculator/") ||
+    path === "/tools" ||
+    path.startsWith("/tools/")
+  ) {
+    return "tools";
+  }
   if (
     path === "/guides" ||
     path.startsWith("/guides/") ||
@@ -118,6 +134,8 @@ export function isHardMobileHref(href: string) {
     href.endsWith(".html") ||
     href.startsWith("/resources") ||
     href === "/guides/building-terms" ||
-    href.startsWith("/guides/building-terms/")
+    href.startsWith("/guides/building-terms/") ||
+    href === "/tools/wheel-of-life" ||
+    href.startsWith("/tools/wheel-of-life/")
   );
 }

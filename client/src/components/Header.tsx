@@ -26,6 +26,14 @@ function isPrimaryNavActive(href: string, location: string) {
   if (href === "/situations") {
     return location === "/situations" || location.startsWith("/situations/");
   }
+  if (href === "/tools") {
+    return (
+      location === "/tools" ||
+      location.startsWith("/tools/") ||
+      location === "/calculator" ||
+      location.startsWith("/calculator/")
+    );
+  }
   return location === href || location.startsWith(`${href}/`);
 }
 
@@ -76,10 +84,10 @@ export function Header() {
           {primaryNav.map((link) => {
             const active = isPrimaryNavActive(link.href, location);
             return (
-              <Link key={link.label} href={link.href} className={cn("group relative shrink-0 px-3.5 py-1.5 xl:px-5", focusRing)}>
+              <Link key={link.label} href={link.href} className={cn("group relative shrink-0 px-2.5 py-1.5 xl:px-4", focusRing)}>
                 <span
                   className={cn(
-                    "relative text-[0.9rem] capitalize tracking-[0.06em] transition-colors",
+                    "relative whitespace-nowrap text-[0.9rem] capitalize tracking-[0.06em] transition-colors",
                     active ? "text-[#F2E7CB]" : "text-[#AEB8BE] group-hover:text-[#F5F2EB]",
                   )}
                 >

@@ -782,8 +782,10 @@ export async function registerRoutes(app: Express): Promise<void> {
       req.path === "/admin" ||
       req.path.startsWith("/admin/") ||
       req.path.startsWith("/api/admin") ||
-      req.path === "/tools" ||
-      req.path.startsWith("/tools/") ||
+      req.path === "/tools/livability" ||
+      req.path.startsWith("/tools/livability/") ||
+      req.path === "/tools/curation" ||
+      req.path.startsWith("/tools/curation/") ||
       req.path === "/hub" ||
       req.path.startsWith("/hub/")
     ) {
