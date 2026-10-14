@@ -180,6 +180,43 @@ body.dock-on{padding-bottom:176px}
 .closer .quote{color:var(--deep);margin:0 auto;max-width:18em;font-size:clamp(1.4rem,3.6vw,1.9rem)}
 .closer .caps{font-size:12px;letter-spacing:.4em;color:var(--stone-blue);margin-top:22px}
 
+.needs{margin-top:clamp(48px,8vw,72px);padding-top:clamp(36px,6vw,52px);border-top:1px solid #d8cfbd}
+.needs .kicker{color:var(--stone-blue)}
+.needs h3{font-size:clamp(1.35rem,3.6vw,1.85rem);color:var(--deep);letter-spacing:.2em;margin:12px 0 0}
+.needs .lede{margin-top:16px}
+.need-grid{display:grid;gap:36px;margin-top:32px}
+@media(min-width:900px){.need-grid{grid-template-columns:.9fr 1.1fr;align-items:start}}
+.need-plate{margin:0;background:#f7f3ea;border:1px solid #d8d1c4;padding:clamp(16px,3vw,24px)}
+.need-plate svg{width:100%;height:auto;max-height:280px}
+.need-cap{font:italic 1rem var(--serif);color:#6b6457;margin:12px 0 0}
+.need-ask{font:600 10.5px/1.4 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--stone-blue);margin:0 0 12px}
+.need-read p{margin:0 0 14px;color:#4c5465}
+.need-read p em{color:var(--deep);font-style:italic;font-weight:600}
+.need-map{list-style:none;margin:0;padding:0}
+.need-map li{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid #ddd5c5;padding:8px 0;font-size:.9rem;color:#4c5465}
+.need-map b{font:italic 400 1.05rem var(--serif);font-weight:400;color:var(--deep)}
+.need-map span{text-align:right;max-width:16em}
+.need-map li.low b{color:#7a7368}
+.need-qs{display:none;margin-top:22px;padding-top:18px;border-top:1px solid #d8cfbd}
+.need-qs.on{display:grid;gap:18px}
+.need-q label{display:block;font:italic 1.05rem/1.4 var(--serif);color:var(--deep);margin-bottom:8px}
+.need-q .n{display:block;font:600 10px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--stone-blue);margin-bottom:6px}
+.need-pips{display:flex;gap:8px}
+.need-pips button{width:36px;height:36px;border:1px solid #d8d1c4;background:transparent;color:#7a7368;font:600 12px var(--sans);cursor:pointer}
+.need-pips button:hover{border-color:var(--stone-blue);color:var(--deep)}
+.need-pips button[aria-pressed="true"]{background:var(--stone-blue);border-color:var(--stone-blue);color:var(--ivory)}
+.beliefs{display:grid;gap:10px;margin-top:8px}
+.belief{text-align:left;width:100%;padding:14px 16px;border:1px solid #d8d1c4;background:rgba(255,255,255,.45);color:var(--deep);font:italic 1.12rem/1.4 var(--serif);cursor:pointer}
+.belief:hover{border-color:var(--stone-blue);background:#f3eee4}
+.belief[aria-pressed="true"]{border-color:var(--stone-blue);background:#efeae0}
+.keep{margin-top:8px;padding-top:16px;border-top:1px solid #d8cfbd}
+.keep .line{font:italic 400 clamp(1.2rem,2.8vw,1.45rem)/1.35 var(--serif);color:var(--deep);margin:0 0 12px}
+.keep .act{margin:0;color:#4c5465}
+.need-nav{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.need-tag{display:inline-block;margin-top:6px;font:600 9px/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--stone-blue)}
+.need-step[hidden]{display:none!important}
+.look{margin-top:8px}
+
 footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px) 120px;font-size:.8rem;text-align:center}
 footer .in{max-width:1100px;margin:0 auto}
 .report{font:500 11px var(--sans);letter-spacing:.42em;text-transform:uppercase;color:var(--ivory);margin:0 0 8px}
@@ -251,7 +288,17 @@ footer .in{max-width:1100px;margin:0 auto}
  .mm-plan-row .who b{display:block;font:italic 400 11pt/1.15 var(--serif);font-weight:400}
  .mm-plan-row .who span{display:block;margin-top:.9mm;font:600 5.6pt/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#2a3447;font-variant-numeric:tabular-nums}
  .mm-plan-row p{margin:0;font:400 8.2pt/1.32 var(--serif);color:#1c1914}
- .mm-notes{position:relative;z-index:1;flex:1 1 auto;display:flex;flex-direction:column;min-height:22mm;margin:4mm 0 0;background:#f7f3ea;border:.4pt solid #B8BCC2;overflow:hidden}
+ .mm-plan-row .feed{display:block;margin-top:.8mm;font:600 5.2pt/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#2a3447}
+ .mm-needs{position:relative;z-index:1;margin:3.5mm 0 0;padding:3mm 4mm 2.8mm;background:#f7f3ea;border:.4pt solid #B8BCC2}
+ .mm-needs .mm-label{margin:0 0 2.2mm}
+ .mm-need-bars{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:2.5mm;width:100%}
+ .mm-need-bars>div{min-width:0}
+ .mm-need-bars .n{display:block;margin:0 0 1.2mm;font:600 5pt/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#2a3447;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .mm-need-bars .bar{display:block;height:2.2mm;background:#e8e2d6;border:.3pt solid #B8BCC2;position:relative;overflow:hidden}
+ .mm-need-bars .bar i{display:block;height:100%;background:#2a3447;width:var(--p,40%)}
+ .mm-need-bars .v{display:block;margin:1mm 0 0;font:italic 400 8.5pt/1 var(--serif);font-variant-numeric:tabular-nums}
+ .mm-need-note{margin:2.2mm 0 0;font:italic 400 8pt/1.3 var(--serif);color:#3a352c}
+ .mm-notes{position:relative;z-index:1;flex:1 1 auto;display:flex;flex-direction:column;min-height:18mm;margin:4mm 0 0;background:#f7f3ea;border:.4pt solid #B8BCC2;overflow:hidden}
  .mm-notes .lab{flex:0 0 auto;margin:0;padding:2.2mm 4mm 0;font:600 5.8pt/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:#2a3447}
  .mm-rules{flex:1 1 auto;display:flex;flex-direction:column;min-height:18mm;margin:1.6mm 4mm 3mm;overflow:hidden}
  .mm-rules i{display:block;flex:0 0 5.4mm;height:5.4mm;width:100%;border:0;border-bottom:.3pt solid #c8c1b4;margin:0;padding:0}
@@ -292,7 +339,7 @@ footer .in{max-width:1100px;margin:0 auto}
  <p class="quote rv">Most people can describe a building faster than they can describe their week.</p>
  <div class="rv d1">
   <p>Score each area from 1 to 10. One is neglected. Ten is about as good as you'd honestly want it. First instinct tends to beat a long debate.</p>
-  <p>The wheel stays with you at the foot of the page. Adjust from there, or in each chapter. At the end I'll name the lowest areas and offer a week, a month, and a season of small moves to bring the shape back toward round.</p>
+  <p>The wheel stays with you at the foot of the page. Adjust from there, or in each chapter. At the end I'll name the lowest areas, read six quieter needs, and offer a week, a month, and a season of small moves to bring the shape back toward round.</p>
  </div>
 </section>
 
@@ -324,6 +371,48 @@ footer .in{max-width:1100px;margin:0 auto}
     </div>
    </div>
   </div>
+  <section class="needs" id="needs" aria-labelledby="h-needs">
+   <span class="num">11</span>
+   <hr class="rule">
+   <p class="kicker">A second reading</p>
+   <h3 id="h-needs" class="caps">Six quiet needs</h3>
+   <hr class="rule">
+   <p class="lede">Eight rooms describe the week. These six describe what the week is quietly asking for. Certainty, variety, significance, connection, growth, contribution. A lens for reflection. Educational only.</p>
+   <div class="need-grid">
+    <div>
+     <figure class="need-plate">
+      <svg id="needchart" viewBox="-210 -198 420 396" role="img" aria-labelledby="nc-t nc-d"><title id="nc-t">Six quiet needs</title><desc id="nc-d"></desc></svg>
+     </figure>
+     <p class="need-cap">Drawn first from the wheel. You may refine it, one question at a time.</p>
+     <button class="btn ghost look" id="need-look" type="button">A closer look</button>
+     <div class="need-qs" id="need-qs"></div>
+    </div>
+    <div class="need-read">
+     <div class="need-step" id="needs-a">
+      <p id="need-lede" aria-live="polite"></p>
+      <ul class="need-map" id="need-map"></ul>
+      <div class="need-nav"><button class="btn" id="need-to-b" type="button">Continue</button></div>
+     </div>
+     <div class="need-step" id="needs-b" hidden>
+      <p id="need-starve" aria-live="polite"></p>
+      <div class="need-nav"><button class="btn" id="need-to-c" type="button">Continue</button></div>
+     </div>
+     <div class="need-step" id="needs-c" hidden>
+      <p class="need-ask">Which of these sounds familiar?</p>
+      <div class="beliefs" id="beliefs" role="group" aria-label="Familiar sentences"></div>
+     </div>
+     <div class="need-step" id="needs-d" hidden>
+      <div class="keep">
+       <p class="kicker" style="color:var(--stone-blue)">A line you can keep</p>
+       <p class="line" id="keep-line"></p>
+       <p class="kicker" style="color:var(--stone-blue);margin-top:18px">A first hour</p>
+       <p class="act" id="keep-act"></p>
+      </div>
+      <div class="need-nav"><button class="btn ghost" id="need-back-c" type="button">Choose another</button></div>
+     </div>
+    </div>
+   </div>
+  </section>
   <div class="closer">
    <p class="quote">The rooms you keep shape the week you get. Answer them when you are ready.</p>
    <p class="caps">Live where you belong</p>
@@ -438,6 +527,11 @@ footer .in{max-width:1100px;margin:0 auto}
    <div class="mm-plan-head" aria-hidden="true"><span>Area</span><span>This week</span><span>30 days</span><span>90 days</span></div>
    <div id="print-plan-body"></div>
   </div>
+  <div class="mm-needs">
+   <p class="mm-label">Six needs</p>
+   <div class="mm-need-bars" id="print-needs"></div>
+   <p class="mm-need-note" id="print-need-note"></p>
+  </div>
   <div class="mm-notes">
    <p class="lab">Notes</p>
    <div class="mm-rules" aria-hidden="true"></div>
@@ -477,10 +571,37 @@ const AREAS=[
 const WORDS=["","Neglected","Thin","Strained","Uneven","Holding","Steady","Good","Strong","Rich","Full"];
 const SAMPLE={health:6,career:8,money:5,relationships:7,family:3,growth:6,fun:4,home:9};
 const SHORT={growth:"Growth",fun:"Fun",home:"Home",relationships:"Relate"};
+const NEEDS=[
+ {k:"certainty",n:"Certainty",q:"Does the week feel as if the floor will hold?"},
+ {k:"variety",n:"Variety",q:"Did anything happen this week that you did not already know by heart?"},
+ {k:"significance",n:"Significance",q:"Did the week notice that you were the one living it?"},
+ {k:"connection",n:"Connection",q:"Who, this week, knew where to find you without a reason attached?"},
+ {k:"growth",n:"Growth",q:"Did you learn something nobody assigned you?"},
+ {k:"contribution",n:"Contribution",q:"Did anything you did make a room easier for someone else?"}
+];
+const FEED={health:["certainty","growth"],career:["significance","contribution"],money:["certainty","significance"],relationships:["connection","variety"],family:["connection","certainty"],growth:["growth","significance"],fun:["variety","connection"],home:["certainty","connection"]};
+const PRIMARY={health:"certainty",career:"significance",money:"certainty",relationships:"connection",family:"connection",growth:"growth",fun:"variety",home:"certainty"};
+const BELIEFS=[
+ {id:"fun-wait",areas:["fun"],needs:["variety"],s:"Pleasure can wait until the rest of the list is finished.",r:"A week is more humane when one hour has no purpose.",a:"Put a single empty evening on this week's calendar and leave it empty."},
+ {id:"family-peace",areas:["family"],needs:["connection"],s:"If I keep the peace, I do not have to say what I actually need.",r:"A quiet call can be a kind of honesty.",a:"Make one family call this week with no errand attached."},
+ {id:"money-look",areas:["money"],needs:["certainty"],s:"If I do not look, the numbers cannot change the week.",r:"Three numbers, looked at once, are already a kind of floor.",a:"Open last month's statement and write down three figures you understand."},
+ {id:"health-later",areas:["health"],needs:["certainty","growth"],s:"My body will keep up if I keep moving the calendar.",r:"The week holds better when the body is given a small, repeating hour.",a:"Walk twenty minutes on two mornings, same route."},
+ {id:"career-name",areas:["career"],needs:["significance","contribution"],s:"The work that has my name on it can wait one more week.",r:"One protected hour is how a name stays on the work.",a:"Block a single hour this week for the work you would like to be known for."},
+ {id:"home-friction",areas:["home"],needs:["certainty"],s:"The rooms are fine. The friction is just how apartments are.",r:"A lamp left on, a clear surface, can change the hour you walk in.",a:"Clear the surface you land on when you come home, and leave one lamp ready."},
+ {id:"rel-meanwell",areas:["relationships"],needs:["connection"],s:"People who matter already know I mean well.",r:"Meaning well is quieter when it arrives as a specific hour.",a:"Offer one person a day and an hour, not a vague soon."},
+ {id:"growth-later",areas:["growth"],needs:["growth"],s:"Learning is something I will return to when the title is quieter.",r:"Twenty minutes with no output still counts as a furnished mind.",a:"Read or listen for twenty minutes on two evenings this week, nothing to produce."},
+ {id:"cert-ready",areas:["money","home","health"],needs:["certainty"],s:"If I stay ready for the worst, nothing can catch me off guard.",r:"A little structure is enough. Staying braced is not a floor.",a:"Choose one recurring hour this week that is already decided, and keep it."},
+ {id:"var-resp",areas:["fun"],needs:["variety"],s:"A predictable week is a responsible week.",r:"Responsibility includes a little weather on purpose.",a:"Change one familiar route, table, or evening, once."},
+ {id:"sig-unseemly",areas:["career","growth"],needs:["significance"],s:"Wanting the week to notice me is unseemly.",r:"Wanting your name on the work is simply wanting to be in it.",a:"Write one sentence about the work you want your name on this month."},
+ {id:"conn-needless",areas:["relationships","family"],needs:["connection"],s:"I should not need anyone to pick up.",r:"Needing a door to stay open is ordinary.",a:"Send one unpolished note to someone you miss."},
+ {id:"contrib-large",areas:["career"],needs:["contribution"],s:"What I give only counts if it is large.",r:"A room made easier for one person is already of use.",a:"Do one small thing this week that makes someone else's hour lighter, and stop there."}
+];
 const KEY="ak-wheel-of-life-v3";
-let st={s:{},m:{}};
-try{const o=JSON.parse(localStorage.getItem(KEY));if(o&&o.s)st={s:o.s,m:o.m||{}}}catch(e){}
+let st={s:{},m:{},n:{},b:""};
+try{const o=JSON.parse(localStorage.getItem(KEY));if(o&&o.s)st={s:o.s,m:o.m||{},n:o.n&&typeof o.n==="object"?o.n:{},b:typeof o.b==="string"?o.b:""}}catch(e){}
 AREAS.forEach(a=>{const v=+st.s[a.k];st.s[a.k]=v>=1&&v<=10?v:SAMPLE[a.k]});
+NEEDS.forEach(n=>{const v=+st.n[n.k];st.n[n.k]=v>=1&&v<=5?v:0});
+if(!BELIEFS.some(b=>b.id===st.b))st.b="";
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -560,6 +681,76 @@ function makeWheel(svg,R,labels,uid){
  });
  return{svg,set(lows){AREAS.forEach((a,i)=>{const r=Math.max(R*st.s[a.k]/10,R*.04);gs[i].setAttribute("d",arc(r,i));bs[i].setAttribute("d",arc(r,i));if(lt[i])lt[i].setAttribute("fill",uid==="p"?"#1c1914":(lows.includes(a.k)?"#E8E4DC":"#F5F2EB"))})}};
 }
+function makeNeedChart(svg,R){
+ const NN=NEEDS.length;
+ const keep=[...svg.querySelectorAll("title,desc")];
+ svg.replaceChildren();
+ keep.forEach(n=>svg.appendChild(n));
+ const rings=el("g",{});svg.appendChild(rings);
+ for(let l=2;l<=10;l+=2)rings.appendChild(el("circle",{r:(R*l/10).toFixed(1),fill:"none",stroke:l===10?"#2a3447":"#cfc8bb","stroke-width":l===10?1.1:.7,"stroke-opacity":l===10?.7:.9}));
+ NEEDS.forEach((n,i)=>{const[x,y]=pt(R,-Math.PI/2+i*2*Math.PI/NN);rings.appendChild(el("line",{x1:0,y1:0,x2:x.toFixed(1),y2:y.toFixed(1),stroke:"#d8d1c4","stroke-width":.8}))});
+ const poly=el("polygon",{fill:"rgba(42,52,71,.22)",stroke:"#2a3447","stroke-width":1.2});
+ svg.appendChild(poly);
+ NEEDS.forEach((n,i)=>{
+  const ang=-Math.PI/2+(i)*2*Math.PI/NN,reach=R+28,[x,y]=pt(reach,ang);
+  const t=el("text",{x:x.toFixed(1),y:(y+3).toFixed(1),"text-anchor":Math.abs(x)<24?"middle":x>0?"start":"end",fill:"#1c1914","font-family":"Montserrat,sans-serif","font-size":8,"letter-spacing":.4});
+  t.textContent=n.n.toUpperCase();
+  svg.appendChild(t);
+ });
+ return{set(scores){
+  const pts=NEEDS.map((n,i)=>{const r=Math.max(R*(scores[n.k]||1)/10,R*.06),ang=-Math.PI/2+i*2*Math.PI/NN,[x,y]=pt(r,ang);return x.toFixed(1)+","+y.toFixed(1)}).join(" ");
+  poly.setAttribute("points",pts);
+ }};
+}
+function needScores(){
+ const out={};
+ NEEDS.forEach(n=>{
+  if(st.n[n.k]>=1&&st.n[n.k]<=5){out[n.k]=st.n[n.k]*2;return}
+  const src=AREAS.filter(a=>FEED[a.k].includes(n.k));
+  out[n.k]=src.reduce((s,a)=>s+st.s[a.k],0)/Math.max(src.length,1);
+ });
+ return out;
+}
+function starvedNeeds(){
+ const sc=needScores();
+ const r=NEEDS.map(n=>({...n,v:sc[n.k]})).sort((a,b)=>a.v-b.v||a.n.localeCompare(b.n));
+ const out=[r[0]];
+ if(r[1]&&r[1].v<=r[0].v+1.5)out.push(r[1]);
+ return out;
+}
+function starveRooms(starve){
+ const sk=new Set(starve.map(n=>n.k));
+ const fromFocus=focusAreas().filter(a=>FEED[a.k].some(n=>sk.has(n)));
+ if(fromFocus.length)return fromFocus;
+ return ranked().filter(a=>FEED[a.k].some(n=>sk.has(n))).slice(0,2);
+}
+function listAnd(arr){
+ if(arr.length<=1)return arr[0]||"";
+ if(arr.length===2)return arr[0]+" and "+arr[1];
+ return arr.slice(0,-1).join(", ")+", and "+arr[arr.length-1];
+}
+function starveCopy(){
+ const starve=starvedNeeds(),rooms=starveRooms(starve);
+ const needs=listAnd(starve.map(n=>n.n));
+ const room=listAnd(rooms.map(a=>SHORT[a.k]||a.n));
+ const thin=starve.length===1?needs+" looks a little thin":needs+" look a little thin";
+ const ask=rooms.length===1?room+" is the room most likely asking for it.":room+" are the rooms most likely asking for them.";
+ return "Right now, "+thin+". "+ask;
+}
+function beliefChoices(){
+ const focus=new Set(focusAreas().map(o=>o.k));
+ const starve=new Set(starvedNeeds().map(n=>n.k));
+ const scored=BELIEFS.map(b=>{
+  let score=0;
+  if(b.areas.some(a=>focus.has(a)))score+=3;
+  if(b.needs.some(n=>starve.has(n)))score+=2;
+  return {b,score};
+ }).sort((x,y)=>y.score-x.score||x.b.id.localeCompare(y.b.id));
+ const picks=[];
+ scored.forEach(({b,score})=>{if(picks.length<4&&(score>0||picks.length<3))picks.push(b)});
+ return picks.slice(0,4);
+}
+function currentBelief(){return BELIEFS.find(b=>b.id===st.b)||null}
 function catmull(pts){
  if(pts.length<2)return "";
  const p=[pts[0],...pts,pts[pts.length-1]];
@@ -585,7 +776,7 @@ function paintVibe(){
  $("vibe-glow").setAttribute("d",d);
 }
 
-const big=makeWheel($("bigwheel"),180,true,"b"),mini=makeWheel($("miniwheel"),180,false,"m"),prt=makeWheel($("printwheel"),150,true,"p");
+const big=makeWheel($("bigwheel"),180,true,"b"),mini=makeWheel($("miniwheel"),180,false,"m"),prt=makeWheel($("printwheel"),150,true,"p"),nc=makeNeedChart($("needchart"),140);
 let pt1,sel=AREAS[0].k;
 function ranked(){return AREAS.map((a,i)=>({...a,v:st.s[a.k],i})).sort((x,y)=>x.v-y.v||x.i-y.i)}
 function focusAreas(){
@@ -614,7 +805,21 @@ function paintPrint(){
  $("print-high-sub").textContent=hi[1]?`${hi[1].n} ${hi[1].v} · Keep what is already holding.`:"Keep what is already holding.";
  $("print-low-line").innerHTML=lo.map(o=>`<em>${o.n}</em> ${o.v}`).join(" · ");
  $("print-low-sub").textContent="A week, a month, and a season of small moves on page two.";
- $("print-plan-body").innerHTML=lo.map(o=>`<div class="mm-plan-row"><div class="who"><b>${esc(o.n)}</b><span>${o.v} of 10</span></div><p>${esc(o.w)}</p><p>${esc(o.m)}</p><p>${esc(o.qtr)}</p></div>`).join("");
+ const belief=currentBelief();
+ let hourPlaced=false;
+ $("print-plan-body").innerHTML=lo.map(o=>{
+  const need=NEEDS.find(n=>n.k===PRIMARY[o.k]);
+  const showHour=belief&&!hourPlaced&&belief.areas.includes(o.k);
+  if(showHour)hourPlaced=true;
+  const week=showHour?o.w+" First hour: "+belief.a:o.w;
+  return `<div class="mm-plan-row"><div class="who"><b>${esc(o.n)}</b><span>${o.v} of 10</span>${need?`<span class="feed">Feeds ${need.n}</span>`:""}</div><p>${esc(week)}</p><p>${esc(o.m)}</p><p>${esc(o.qtr)}</p></div>`;
+ }).join("");
+ const sc=needScores();
+ $("print-needs").innerHTML=NEEDS.map(n=>{
+  const p=Math.max(8,Math.min(100,sc[n.k]*10));
+  return `<div><span class="n">${esc(n.n)}</span><span class="bar"><i style="--p:${p}%"></i></span><span class="v">${sc[n.k].toFixed(1)}</span></div>`;
+ }).join("");
+ $("print-need-note").textContent=belief?"A line you can keep. "+belief.r:starveCopy();
 }
 function setScore(k,v,pulse){
  st.s[k]=v;save();paintDial(k);if(sel===k)paintDock();update(pulse);
@@ -641,14 +846,61 @@ function update(pulse){
  const names=lo.map(o=>`<em>${o.n}</em> at ${o.v}`).join(", then ");
  $("lede").innerHTML=`Lowest right now: ${names}. A week, a month, and a season of small moves can bring the wheel back toward round.`
  renderMoves(lo);
+ paintNeeds();
 }
 let lastKeys="";
 function renderMoves(lo){
- const keys=lo.map(o=>o.k+o.v).join();if(keys===lastKeys)return;lastKeys=keys;
+ const keys=lo.map(o=>o.k+o.v).join()+"|"+(st.b||"")+"|"+NEEDS.map(n=>st.n[n.k]).join();
+ if(keys===lastKeys)return;lastKeys=keys;
+ const belief=currentBelief();
+ let hourPlaced=false;
  const m=$("moves"),act=document.activeElement&&document.activeElement.id;
- m.innerHTML=lo.map(o=>`<div class="move"><div class="top"><h3 class="caps">${o.n}</h3><span class="sc">${o.v}<span class="vh"> out of 10</span></span></div><p>${o.h}</p><div class="timeline" aria-label="Suggested plan for ${o.n}"><div class="tl"><span class="when">This week</span><p>${o.w}</p></div><div class="tl"><span class="when">30 days</span><p>${o.m}</p></div><div class="tl"><span class="when">90 days</span><p>${o.qtr}</p></div></div><label for="m-${o.k}">Your note for this area</label><textarea id="m-${o.k}" placeholder="A move you would actually keep">${esc(st.m[o.k]||"")}</textarea></div>`).join("");
+ m.innerHTML=lo.map(o=>{
+  const need=NEEDS.find(n=>n.k===PRIMARY[o.k]);
+  const showHour=belief&&!hourPlaced&&belief.areas.includes(o.k);
+  if(showHour)hourPlaced=true;
+  const hour=showHour?`<div class="tl"><span class="when">First hour</span><p>${esc(belief.a)}</p></div>`:"";
+  return `<div class="move"><div class="top"><h3 class="caps">${o.n}</h3><span class="sc">${o.v}<span class="vh"> out of 10</span></span></div><p>${o.h}</p>${need?`<span class="need-tag">Feeds ${need.n}</span>`:""}<div class="timeline" aria-label="Suggested plan for ${o.n}">${hour}<div class="tl"><span class="when">This week</span><p>${o.w}</p></div><div class="tl"><span class="when">30 days</span><p>${o.m}</p></div><div class="tl"><span class="when">90 days</span><p>${o.qtr}</p></div></div><label for="m-${o.k}">Your note for this area</label><textarea id="m-${o.k}" placeholder="A move you would actually keep">${esc(st.m[o.k]||"")}</textarea></div>`;
+ }).join("");
  m.querySelectorAll("textarea").forEach(t=>t.addEventListener("input",()=>{st.m[t.id.slice(2)]=t.value;save();$("saved").textContent="Saved in this browser."}));
  if(act&&$(act)&&act.startsWith("m-"))$(act).focus();
+}
+let needStep="a",lookI=0;
+function setNeedStep(step){
+ needStep=step;
+ ["a","b","c","d"].forEach(s=>{const node=$("needs-"+s);if(node)node.hidden=s!==step});
+ if(step==="c")renderBeliefs();
+ if(step==="d")paintKeep();
+}
+function renderBeliefs(){
+ $("beliefs").innerHTML=beliefChoices().map(b=>`<button type="button" class="belief" data-belief="${b.id}" aria-pressed="${st.b===b.id}">${esc(b.s)}</button>`).join("");
+}
+function paintKeep(){
+ const b=currentBelief();
+ $("keep-line").textContent=b?b.r:"";
+ $("keep-act").textContent=b?b.a:"";
+}
+function paintLookQ(){
+ const qs=$("need-qs");
+ if(!qs.classList.contains("on"))return;
+ if(lookI>=NEEDS.length){
+  qs.innerHTML="<p class=\"need-cap\" style=\"margin:0\">That is enough. The figure now includes what you offered.</p>";
+  return;
+ }
+ const cur=NEEDS[lookI];
+ qs.innerHTML=`<div class="need-q"><span class="n">${cur.n}</span><label id="nq-${cur.k}">${cur.q}</label><div class="need-pips" role="group" aria-labelledby="nq-${cur.k}">${[1,2,3,4,5].map(i=>`<button type="button" data-need="${cur.k}" data-v="${i}" aria-pressed="${st.n[cur.k]===i}">${i}</button>`).join("")}</div><div class="need-nav"><button class="btn ghost" type="button" data-skip="1">Skip this one</button></div></div>`;
+}
+function paintNeeds(){
+ const sc=needScores();
+ nc.set(sc);
+ $("nc-d").textContent="Need scores: "+NEEDS.map(n=>n.n+" "+sc[n.k].toFixed(1)).join(", ")+".";
+ $("need-lede").textContent="Each area of the wheel feeds one or two of these needs. The figure at left is drawn from your scores.";
+ const starve=starvedNeeds();
+ const sk=new Set(starve.map(n=>n.k));
+ $("need-map").innerHTML=NEEDS.map(n=>`<li class="${sk.has(n.k)?"low":""}"><b>${esc(n.n)}</b><span>${sc[n.k].toFixed(1)}</span></li>`).join("");
+ $("need-starve").textContent=starveCopy();
+ if(needStep==="c")renderBeliefs();
+ if(needStep==="d")paintKeep();
 }
 
 const chips=$("chips");
@@ -686,7 +938,33 @@ $("share").onclick=async()=>{
   const inp=document.createElement("input");inp.value=url;document.body.appendChild(inp);inp.select();document.execCommand("copy");inp.remove();$("saved").textContent="Link copied.";
  }
 };
-$("reset").onclick=()=>{if(!confirm("Clear your scores and notes on this device?"))return;st={s:{...SAMPLE},m:{}};AREAS.forEach(a=>paintDial(a.k));sel=AREAS[0].k;paintDock();save();lastKeys="";$("saved").textContent="";update(true)};
+$("reset").onclick=()=>{if(!confirm("Clear your scores and notes on this device?"))return;st={s:{...SAMPLE},m:{},n:{},b:""};NEEDS.forEach(n=>{st.n[n.k]=0});AREAS.forEach(a=>paintDial(a.k));sel=AREAS[0].k;paintDock();save();lastKeys="";$("saved").textContent="";$("need-qs").classList.remove("on");$("need-qs").innerHTML="";$("need-look").textContent="A closer look";lookI=0;setNeedStep("a");update(true)};
+$("need-look").onclick=()=>{
+ const qs=$("need-qs");
+ const on=qs.classList.toggle("on");
+ $("need-look").textContent=on?"Use the scores alone":"A closer look";
+ if(on){
+  lookI=NEEDS.findIndex(n=>!st.n[n.k]);
+  if(lookI<0)lookI=NEEDS.length;
+  paintLookQ();
+  qs.scrollIntoView({behavior:reduce?"auto":"smooth",block:"center"});
+ }else qs.innerHTML="";
+};
+$("need-to-b").onclick=()=>setNeedStep("b");
+$("need-to-c").onclick=()=>setNeedStep("c");
+$("need-back-c").onclick=()=>setNeedStep("c");
+$("need-qs").addEventListener("click",e=>{
+ if(e.target.closest("[data-skip]")){lookI++;paintLookQ();$("need-qs").scrollIntoView({behavior:reduce?"auto":"smooth",block:"center"});return}
+ const b=e.target.closest("[data-need]");
+ if(!b)return;
+ st.n[b.dataset.need]=+b.dataset.v;save();lookI++;lastKeys="";paintLookQ();update(false);
+ $("need-qs").scrollIntoView({behavior:reduce?"auto":"smooth",block:"center"});
+});
+$("beliefs").addEventListener("click",e=>{
+ const b=e.target.closest("[data-belief]");
+ if(!b)return;
+ st.b=b.dataset.belief;save();lastKeys="";setNeedStep("d");update(false);
+});
 })();
 </script>
 </body>
