@@ -37,7 +37,7 @@ export const PROCESS_STEPS = [
   { n: 6, title: "Search in motion" },
 ] as const;
 
-export const PROCESS_PDF_TITLE = "Agent Kammer — How the process works";
+export const PROCESS_PDF_TITLE = "How the process works";
 export const PROCESS_PDF_PATH = "/process/agent-kammer-how-the-process-works.pdf";
 export const PROCESS_PDF_FOOTER =
   "You may already be mid-path. Get Qualified only unlocks the live session when that is the right next move.";

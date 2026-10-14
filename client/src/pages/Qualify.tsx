@@ -10,7 +10,6 @@ import {
   CALL_PURPOSE_LABELS,
   PROCESS_PDF_FOOTER,
   PROCESS_PDF_PATH,
-  PROCESS_PDF_TITLE,
   PROCESS_STEPS,
   parseQualifySource,
   type QualifyBudgetLane,
@@ -137,7 +136,7 @@ export default function Qualify() {
             </p>
             <p>
               A Strategy Session is for one real decision: buy, wait, stay, or search. It is a
-              conversation with a written next step — not a tour booking.
+              conversation with a written next step. Not a tour booking.
             </p>
             <p>
               If you are still forming the question, stay with Guidance. No calendar pressure.
@@ -262,8 +261,8 @@ export default function Qualify() {
         <PageSection>
           <SectionHeading
             eyebrow="How the process works"
-            title={PROCESS_PDF_TITLE}
-            description="Six public steps. Get Qualified is a sub-status on the path to the Strategy Session — not a seventh trophy."
+            title="Six public steps."
+            description="Get Qualified is a sub-status on the path to the Strategy Session. Not a seventh trophy."
           />
           <ol className="mt-10 grid gap-4 md:grid-cols-2">
             {PROCESS_STEPS.map((step) => (
