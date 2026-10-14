@@ -22,7 +22,7 @@ function buildPdf() {
   ops.push(textOp(48, 758, 9, "F2", "0.961 0.886 0.796", "AGENT KAMMER"));
   ops.push(textOp(48, 736, 20, "F1", "0.961 0.949 0.922", "How the process works"));
 
-  ops.push(textOp(48, 688, 11, "F1", "0.165 0.204 0.278", "A calm path. Not a sales funnel."));
+  ops.push(textOp(48, 688, 11, "F1", "0.165 0.204 0.278", "The same six steps we show on the site."));
   ops.push(
     textOp(
       48,
@@ -30,7 +30,7 @@ function buildPdf() {
       10,
       "F2",
       "0.184 0.192 0.220",
-      "Six public steps. Get Qualified is only a briefing on the way to a live session.",
+      "Get Qualified is how you arrive at a live session.",
     ),
   );
 
@@ -43,8 +43,8 @@ function buildPdf() {
   });
 
   ops.push("0.690 0.553 0.341 rg 48 86 516 0.8 re f");
-  ops.push(textOp(48, 64, 9, "F2", "0.184 0.192 0.220", "You may already be mid-path. Get Qualified only unlocks"));
-  ops.push(textOp(48, 50, 9, "F2", "0.184 0.192 0.220", "the live session when that is the right next move."));
+  ops.push(textOp(48, 64, 9, "F2", "0.184 0.192 0.220", "You may already be mid-path. We book a live session"));
+  ops.push(textOp(48, 50, 9, "F2", "0.184 0.192 0.220", "when the question is ready for an hour."));
   ops.push(textOp(48, 28, 8, "F2", "0.545 0.420 0.290", "agentkammer.com/qualify"));
 
   const stream = ops.join("\n") + "\n";

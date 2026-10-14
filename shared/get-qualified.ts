@@ -37,10 +37,10 @@ export const PROCESS_STEPS = [
   { n: 6, title: "Search in motion" },
 ] as const;
 
-export const PROCESS_PDF_TITLE = "Agent Kammer — How the process works";
+export const PROCESS_PDF_TITLE = "How the process works";
 export const PROCESS_PDF_PATH = "/process/agent-kammer-how-the-process-works.pdf";
 export const PROCESS_PDF_FOOTER =
-  "You may already be mid-path. Get Qualified only unlocks the live session when that is the right next move.";
+  "You may already be mid-path. We book a live session when the question is ready for an hour.";
 
 export const BUDGET_LANE_LABELS: Record<QualifyBudgetLane, string> = {
   under_5m: "Under $5 million",
@@ -126,7 +126,7 @@ export function initialQualifyStatus(route: QualifyRoute): QualifyStatus {
 
 export function nextStepForRoute(route: QualifyRoute): string {
   if (route === "raphi_calendar") {
-    return "Reserve a Strategy Session when you are ready. No pressure to book from this page.";
+    return "Reserve a Strategy Session when you are ready.";
   }
   if (route === "diego_handoff") {
     return "Local execution is the next lane when a transaction is actually the right step.";

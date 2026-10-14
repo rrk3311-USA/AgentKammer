@@ -10,7 +10,6 @@ import {
   CALL_PURPOSE_LABELS,
   PROCESS_PDF_FOOTER,
   PROCESS_PDF_PATH,
-  PROCESS_PDF_TITLE,
   PROCESS_STEPS,
   parseQualifySource,
   type QualifyBudgetLane,
@@ -62,8 +61,7 @@ export default function Qualify() {
 
   usePageMetadata({
     title: "Get Qualified",
-    description:
-      "A couple of details so we use the call well. Get Qualified is a briefing, not a test.",
+    description: "A couple of details so the next hour on the calendar has a point.",
     path: "/qualify",
   });
 
@@ -107,7 +105,7 @@ export default function Qualify() {
     } catch {
       toast({
         title: "Could not save those details",
-        description: "Please try again in a moment. Nothing was rushed.",
+        description: "Please try again in a moment.",
         variant: "destructive",
       });
     } finally {
@@ -120,28 +118,23 @@ export default function Qualify() {
       <PageHero
         eyebrow="Get Qualified"
         title="A couple of details so we use the call well."
-        description="A short briefing. Not a test, and not a listing pitch."
+        description="Name, email, budget lane, and what you want from the hour."
         art="decision-framework"
       />
 
       <PageSection className="grid gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
         <div>
           <SectionHeading
-            eyebrow="What this is"
-            title="Get Qualified is how we decide whether a live hour is useful."
+            eyebrow="Before the hour"
+            title="We read this before we put time on the calendar."
           />
           <div className="mt-8 max-w-xl space-y-5 text-base leading-8 text-brand-graphite">
+            <p>That is enough to know whether a Strategy Session is the right next hour.</p>
             <p>
-              Get Qualified is a short briefing so we use a live hour well. It is not an application,
-              and it is not a score.
+              A Strategy Session is one conversation about a real housing decision. You leave with a
+              written next step.
             </p>
-            <p>
-              A Strategy Session is for one real decision: buy, wait, stay, or search. It is a
-              conversation with a written next step — not a tour booking.
-            </p>
-            <p>
-              If you are still forming the question, stay with Guidance. No calendar pressure.
-            </p>
+            <p>If the question is still forming, stay with Guidance. The calendar can wait.</p>
             <p className="text-sm leading-7 text-brand-graphite/75">{PROCESS_PDF_FOOTER}</p>
           </div>
         </div>
@@ -153,9 +146,7 @@ export default function Qualify() {
           <p className="text-[11px] uppercase tracking-[0.2em] text-brand-cocoa">
             {source === "phone" ? "From the phone line" : "A few details"}
           </p>
-          <h2 className={`mt-3 ${grammar.section}`}>
-            So the next hour is useful.
-          </h2>
+          <h2 className={`mt-3 ${grammar.section}`}>Your details.</h2>
 
           <div className="mt-8 grid gap-5">
             <div>
@@ -252,7 +243,7 @@ export default function Qualify() {
               disabled={sending}
               className="ak-call-button w-full bg-brand-navy px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory disabled:opacity-60"
             >
-              {sending ? "Saving…" : "Continue to your plan"}
+              {sending ? "Saving…" : "Save these details"}
             </button>
           </div>
         </form>
@@ -262,8 +253,8 @@ export default function Qualify() {
         <PageSection>
           <SectionHeading
             eyebrow="How the process works"
-            title={PROCESS_PDF_TITLE}
-            description="Six public steps. Get Qualified is a sub-status on the path to the Strategy Session — not a seventh trophy."
+            title="Six steps we show."
+            description="Get Qualified is how you arrive at a Strategy Session."
           />
           <ol className="mt-10 grid gap-4 md:grid-cols-2">
             {PROCESS_STEPS.map((step) => (
@@ -284,7 +275,7 @@ export default function Qualify() {
             Download PDF
           </a>
           <p className="mt-8 text-sm text-brand-graphite/70">
-            Prefer to keep reading first?{" "}
+            Rather keep reading?{" "}
             <Link href="/situations" className="underline decoration-brand-brass/50 underline-offset-4">
               Stay in Guidance
             </Link>

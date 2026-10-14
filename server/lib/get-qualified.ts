@@ -9,6 +9,7 @@ import {
   initialQualifyStatus,
   nextStepForRoute,
   parseQualifySource,
+  PROCESS_PDF_TITLE,
   qualifySubmissionSchema,
   resolveQualifyRoute,
   type HubPathProgress,
@@ -189,19 +190,19 @@ async function sendProcessEmail(input: {
   route: QualifyRoute;
 }): Promise<boolean> {
   const pdfUrl = `${SITE_URL}${PROCESS_PDF_PUBLIC}`;
-  const subject = "How the process works — Agent Kammer";
+  const subject = `${PROCESS_PDF_TITLE}. Agent Kammer`;
   const next = nextStepForRoute(input.route);
   const html = `
     <div style="font-family: Georgia, serif; line-height: 1.65; color: #2A3447;">
       <p>${input.name.split(" ")[0] || "Hello"},</p>
-      <p>Thank you for the few details. Get Qualified is a briefing, not a test.</p>
+      <p>Thank you for the few details. We will use them so the next hour has a point.</p>
       <p>${next}</p>
-      <p>The one-pager is here: <a href="${pdfUrl}">Agent Kammer — How the process works</a>.</p>
+      <p>The one-pager is here: <a href="${pdfUrl}">${PROCESS_PDF_TITLE}</a>.</p>
       <p>Your plan is waiting in the Decision Hub whenever you return.</p>
       <p style="color: #5c6570; font-size: 13px;">Agent Kammer</p>
     </div>
   `;
-  const text = `${input.name.split(" ")[0] || "Hello"},\n\nThank you for the few details. Get Qualified is a briefing, not a test.\n\n${next}\n\nProcess one-pager: ${pdfUrl}\n`;
+  const text = `${input.name.split(" ")[0] || "Hello"},\n\nThank you for the few details. We will use them so the next hour has a point.\n\n${next}\n\nProcess one-pager: ${pdfUrl}\n`;
   const pdf = await readProcessPdf();
   const attachments = pdf
     ? [{ filename: "agent-kammer-how-the-process-works.pdf", content: pdf }]
@@ -252,7 +253,7 @@ async function sendProcessEmail(input: {
 }
 
 async function notifyOps(input: StoredSubmission) {
-  const subject = `Get Qualified — ${input.name} — ${input.route}`;
+  const subject = `Get Qualified. ${input.name}. ${input.route}`;
   const html = `
     <h2>Get Qualified submission</h2>
     <p><strong>Name:</strong> ${input.name}</p>
