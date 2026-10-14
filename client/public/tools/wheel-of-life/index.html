@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/doorway.jpg">
+<link rel="preload" as="image" href="assets/hero-chrysler.jpg">
 <style>
 :root{
  --stone-blue:#2A3447;--deep:#161C28;--midnight:#202735;--ivory:#F5F2EB;--limestone:#D8D1C7;
@@ -51,11 +51,11 @@ img,svg{display:block;max-width:100%}
 .mast em{font:italic 15px var(--serif);color:var(--mist);display:none}
 @media(min-width:700px){.mast em{display:block}}
 
-.hero{position:relative;min-height:clamp(640px,100svh,980px);display:flex;align-items:flex-end;padding:0 clamp(20px,6vw,80px) clamp(48px,9vh,96px)}
-.hero .scene::before{background:radial-gradient(55% 48% at 48% 38%,rgba(226,180,112,.14),transparent 62%)}
-.hero .scene::after{z-index:2;background:linear-gradient(180deg,rgba(14,17,25,.5) 0%,rgba(14,17,25,.08) 32%,rgba(14,17,25,.88) 78%,var(--deep) 100%)}
+.hero{position:relative;min-height:clamp(640px,100svh,980px);display:flex;align-items:flex-end;padding:0 clamp(20px,6vw,80px) clamp(36px,7vh,72px)}
+.hero .scene::before{background:radial-gradient(50% 42% at 38% 32%,rgba(226,180,112,.16),transparent 58%)}
+.hero .scene::after{z-index:2;background:linear-gradient(180deg,rgba(14,17,25,.28) 0%,rgba(14,17,25,.04) 26%,rgba(14,17,25,.35) 58%,rgba(14,17,25,.9) 82%,var(--deep) 100%)}
 .hero-in{position:relative;z-index:3;max-width:640px}
-.hero h1{font-size:clamp(2.3rem,9vw,5.6rem);letter-spacing:.16em}
+.hero h1{font-size:clamp(2.1rem,7.4vw,4.4rem);letter-spacing:.16em}
 .hero h1 small{display:block;font-size:.3em;letter-spacing:.5em;margin-bottom:.6em;color:var(--mist)}
 .hero .dek{font:italic 400 clamp(1.2rem,3.2vw,1.55rem)/1.38 var(--serif);color:#e7e1d4;max-width:22em;margin:0}
 .hero .meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:22px}
@@ -75,9 +75,9 @@ img,svg{display:block;max-width:100%}
 .ch .calm{position:relative;z-index:2;width:100%;padding:0 clamp(18px,6vw,80px) clamp(36px,8vh,80px);background:linear-gradient(180deg,transparent 0%,rgba(22,28,40,.55) 18%,rgba(22,28,40,.94) 48%,var(--deep) 100%)}
 @media(min-width:900px){
  .ch{align-items:stretch;justify-content:flex-end}
- .ch .calm{width:min(46vw,520px);min-height:100%;display:flex;align-items:center;padding:clamp(48px,8vh,96px) clamp(28px,4vw,56px);background:linear-gradient(90deg,transparent 0%,rgba(22,28,40,.72) 22%,rgba(22,28,40,.96) 48%,var(--deep) 100%)}
+ .ch .calm{width:min(46vw,520px);min-height:100%;display:flex;align-items:center;padding:clamp(48px,8vh,96px) clamp(28px,4vw,56px);background:linear-gradient(90deg,transparent 0%,rgba(22,28,40,.84) 16%,rgba(22,28,40,.97) 44%,var(--deep) 100%)}
  .ch.left{justify-content:flex-start}
- .ch.left .calm{background:linear-gradient(270deg,transparent 0%,rgba(22,28,40,.72) 22%,rgba(22,28,40,.96) 48%,var(--deep) 100%)}
+ .ch.left .calm{background:linear-gradient(270deg,transparent 0%,rgba(22,28,40,.84) 16%,rgba(22,28,40,.97) 44%,var(--deep) 100%)}
 }
 .card{width:100%;max-width:440px}
 .card .top{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:8px}
@@ -190,56 +190,48 @@ footer .in{max-width:1100px;margin:0 auto}
  .js .rv{opacity:1;transform:none}
 }
 @media print{
- @page{size:letter;margin:12mm 14mm}
- html,body{background:#f5f2eb!important;color:#1d2330}
- body{padding:0!important;margin:0}
+ @page{size:auto;margin:.5in}
+ html,body{background:#d8d2c6!important;color:#1c1914;width:100%;max-width:100%;margin:0;padding:0!important}
  body>*{display:none!important}
- .print-doc{display:block!important;background:#f5f2eb;color:#1d2330;font:400 11pt/1.45 var(--sans)}
+ .print-doc,.print-doc *{box-sizing:border-box}
+ .print-doc{display:block!important;width:100%;max-width:100%;overflow:hidden;color:#1c1914;font:400 10pt/1.4 var(--serif)}
  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
- .print-page{overflow:hidden}
+ .print-page{display:flex;flex-direction:column;width:100%;max-width:100%;min-height:9.9in;overflow:hidden;position:relative;padding:9mm 8mm 8mm;background-color:#ddd6ca;background-image:radial-gradient(120% 90% at 50% 0%,#e8e3d9,#d2cbbf);border:.55pt solid #2a241c;outline:.55pt solid #2a241c;outline-offset:-2.6mm}
  .print-hud{break-after:page;page-break-after:always}
  .print-plan{break-after:auto;page-break-after:auto}
- .print-mast{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin:0 0 10px}
- .print-mast .report{color:#161C28;letter-spacing:.4em;font-size:8.5pt;margin:0}
- .print-mast .intel{color:#6b6457;letter-spacing:.28em;font-size:7.5pt;margin:0;text-align:right}
- .print-doc h1{font-family:var(--serif);font-weight:500;text-transform:uppercase;letter-spacing:.22em;font-size:22pt;line-height:1;margin:0 0 6px;color:#161C28}
- .print-dek{font:italic 400 12pt/1.35 var(--serif);color:#3a4252;margin:0 0 8px}
- .print-doc .rule{width:36px;margin:10px 0 14px;background:#B08D57}
- .print-hud-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px 22px;align-items:center}
- .print-plate{margin:0;background:#161C28;padding:10px 8px 6px;box-shadow:none}
- .print-plate svg{width:100%;height:auto;max-height:86mm}
- .print-scores{list-style:none;margin:8px 0 0;padding:0}
- .print-scores li{display:grid;grid-template-columns:7.2em 1fr 1.4em;gap:8px;align-items:center;padding:5px 0;border-bottom:1px solid #ddd5c5;font-size:9pt}
- .print-scores li span:first-child{letter-spacing:.04em}
- .print-scores .track{height:3px;background:#ddd5c5;position:relative}
- .print-scores .track i{position:absolute;left:0;top:-1px;height:5px;background:#2A3447}
- .print-scores b{font:italic 500 13pt/1 var(--serif);color:#161C28;text-align:right}
- .print-scores li.low b{color:#7a7368}
- .print-hud-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0 12px;border-top:1px solid #d8cfbd;border-bottom:1px solid #d8cfbd;padding:12px 0}
- .print-stat .lbl{font:600 7.5pt var(--sans);letter-spacing:.28em;text-transform:uppercase;color:#6b6457;margin:0 0 4px}
- .print-stat .val{font:italic 400 13pt/1.25 var(--serif);color:#161C28;margin:0}
- .print-stat .val b{font-style:italic;font-weight:600}
- .print-lede{font:italic 400 11.5pt/1.4 var(--serif);color:#3a4252;margin:0 0 4px;max-width:46em}
- .print-lede em{color:#161C28;font-weight:600}
- .print-eight{display:grid;grid-template-columns:1fr 1fr;gap:7px 22px;margin:0}
- .pe{border-top:1px solid #ddd5c5;padding:9px 0 5px}
- .pe .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
- .pe h3{font:500 8pt var(--serif);letter-spacing:.2em;text-transform:uppercase;color:#161C28;margin:0}
- .pe b{font:italic 500 12pt/1 var(--serif);color:#2A3447}
- .pe p{margin:3px 0 0;font:italic 400 9.5pt/1.35 var(--serif);color:#4c5465}
- .print-kicker{font:600 8pt var(--sans);letter-spacing:.28em;text-transform:uppercase;color:#2A3447;margin:16px 0 8px}
- .pcard{border-top:1px solid #d8cfbd;padding:10px 0 12px;break-inside:avoid}
- .pcard .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
- .pcard h3{font:500 11pt var(--serif);letter-spacing:.22em;text-transform:uppercase;color:#161C28;margin:0}
- .pcard .sc{font:italic 500 16pt/1 var(--serif);color:#2A3447}
- .pcard .hint{margin:6px 0 8px;color:#4c5465;font-size:9.5pt}
- .pcard .note{margin:0;padding:8px 10px;background:#efe8d8;font:italic 400 11.5pt/1.4 var(--serif);color:#161C28}
- .pcard .add{margin:8px 0 0;border-bottom:1px solid #d8cfbd;min-height:1.15em;font:600 7pt var(--sans);letter-spacing:.18em;text-transform:uppercase;color:#9a9182}
- .print-protect{display:grid;grid-template-columns:1fr 1fr;gap:0 22px}
- .print-end{margin-top:14px;padding-top:12px;border-top:1px solid #d8cfbd;text-align:center}
- .print-end .quote{font:italic 400 13pt/1.3 var(--serif);color:#161C28;margin:0 auto;max-width:22em}
- .print-end .caps{font-size:8pt;letter-spacing:.4em;color:#2A3447;margin:8px 0 6px}
- .print-legal{font-size:8pt;color:#6b6457;margin:0}
+ .mm-head{text-align:center;padding:1mm 0 4mm;border-bottom:.4pt solid #2a241c;margin:0 0 1mm;width:100%;max-width:100%}
+ .mm-ak{display:block;width:16pt;height:auto;margin:0 auto 3pt;filter:brightness(0)}
+ .mm-title{margin:0;font:500 6.5pt/1.2 var(--sans);letter-spacing:.42em;text-transform:uppercase;color:#1c1914}
+ .mm-block{display:grid;grid-template-columns:16mm minmax(0,1fr);gap:2mm 5mm;padding:5mm 0;border-top:.35pt solid rgba(42,36,28,.45);width:100%;max-width:100%;align-items:start}
+ .print-hud>.mm-block:first-of-type,#print-plan-body>.mm-block:first-child{border-top:0}
+ .mm-num{font:400 26pt/.85 var(--serif);letter-spacing:.02em;color:#1c1914;margin:0}
+ .mm-body{min-width:0;max-width:100%}
+ .mm-label{margin:1.5pt 0 5pt;font:500 6.5pt/1.2 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:#1c1914}
+ .mm-figure{margin:0;font:400 26pt/1.02 var(--serif);color:#1c1914;max-width:100%;overflow-wrap:anywhere}
+ .mm-figure em{font-style:italic;font-weight:400}
+ .mm-figure-sm{font-size:16pt;margin-top:3mm}
+ .mm-sub{margin:2mm 0 0;font:italic 400 12pt/1.3 var(--serif);color:#1c1914;max-width:100%}
+ .mm-card{position:relative;background:#f8f4eb;padding:5mm 5.5mm 4.5mm;width:100%;max-width:100%;overflow:hidden;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%)}
+ .mm-card::after{content:"";position:absolute;top:0;right:0;border-style:solid;border-width:0 16px 16px 0;border-color:transparent #c8c0b2 #c8c0b2 transparent}
+ .mm-card-tag{position:absolute;top:3.5mm;right:7mm;font:500 6pt/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:#8a8478}
+ .mm-card-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:3mm 5mm;align-items:center;width:100%;max-width:100%}
+ .mm-card svg{display:block;width:100%;max-width:100%;height:auto;max-height:48mm}
+ #printwheel circle.ring{stroke:#2a241c}
+ #printwheel line{stroke:#c8c1b4}
+ #printwheel text{fill:#1c1914}
+ .mm-scores{list-style:none;margin:0;padding:0;width:100%;max-width:100%}
+ .mm-scores li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;padding:2.2pt 0;border-bottom:.35pt solid #e2dcd0;font:400 8.5pt/1.2 var(--serif);color:#1c1914}
+ .mm-scores li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .mm-scores b{font:italic 400 11pt/1 var(--serif);font-weight:400}
+ .mm-pair{margin:0 0 2mm;font:400 20pt/1.05 var(--serif);max-width:100%;overflow-wrap:anywhere}
+ .mm-pair em{font-style:italic}
+ .mm-note{margin:2mm 0 0;font:italic 400 12pt/1.35 var(--serif)}
+ .mm-hint{margin:1.5mm 0 0;font:italic 400 10pt/1.35 var(--serif);color:#3a352c}
+ footer.mm-foot,.mm-foot{background:transparent!important;color:#1c1914!important;text-align:center;margin-top:auto;padding:4.5mm 0 0!important;border:0;border-top:.4pt solid #2a241c;width:100%;max-width:100%;font-size:inherit}
+ .mm-date,.mm-url{margin:0 0 1.5mm;font:500 6.5pt/1.3 var(--sans);letter-spacing:.32em;text-transform:uppercase;color:#1c1914}
+ .mm-url{letter-spacing:.28em}
+ .mm-tagline{margin:2mm 0 2mm;font:italic 400 10pt/1.3 var(--serif);color:#1c1914}
+ .mm-disc{margin:0;font:400 6.5pt/1.35 var(--sans);letter-spacing:.02em;color:#6b6457}
 }
 </style>
 </head>
@@ -254,7 +246,7 @@ footer .in{max-width:1100px;margin:0 auto}
 
 <main id="main">
 <section class="hero" aria-labelledby="h-hero">
- <div class="scene" aria-hidden="true"><img src="assets/doorway.jpg" alt="" fetchpriority="high"></div>
+ <div class="scene" aria-hidden="true"><img src="assets/hero-chrysler.jpg" alt="" fetchpriority="high" style="object-position:46% 18%"></div>
  <div class="typeback" aria-hidden="true"><span>The Kammer Report</span><span>A personal check-in</span></div>
  <div class="hero-in">
   <p class="kicker rv">The Kammer Report &nbsp;/&nbsp; A personal check-in</p>
@@ -347,41 +339,56 @@ footer .in{max-width:1100px;margin:0 auto}
 
 <article class="print-doc" id="print-doc" aria-hidden="true">
  <section class="print-page print-hud">
-  <header class="print-mast">
-   <p class="report">The Kammer Report</p>
-   <p class="intel">Manhattan Residential Intelligence</p>
+  <header class="mm-head">
+   <img class="mm-ak" src="assets/ak-monogram.png" alt="" width="28" height="30">
+   <p class="mm-title">The Wheel of Life</p>
   </header>
-  <h1>The Wheel of Life</h1>
-  <p class="print-dek">A personal check-in &nbsp;/&nbsp; <span id="print-date"></span></p>
-  <hr class="rule">
-  <div class="print-hud-grid">
-   <figure class="plate print-plate">
-    <svg id="printwheel" class="wheel" viewBox="-270 -240 540 480" role="img" aria-label="Your wheel of life"></svg>
-   </figure>
-   <div>
-    <p class="print-kicker" style="margin-top:0">This week's scores</p>
-    <ul class="print-scores" id="print-scores"></ul>
+  <div class="mm-block">
+   <p class="mm-num">01</p>
+   <div class="mm-body">
+    <p class="mm-label">The check-in</p>
+    <div id="print-checkin"></div>
    </div>
   </div>
-  <div class="print-hud-stats" id="print-stats"></div>
-  <p class="print-lede" id="print-lede"></p>
-  <p class="print-kicker">How the week reads</p>
-  <div class="print-eight" id="print-eight"></div>
+  <div class="mm-block">
+   <p class="mm-num">02</p>
+   <div class="mm-body">
+    <p class="mm-label">Your wheel</p>
+    <div class="mm-card">
+     <span class="mm-card-tag">Scores</span>
+     <div class="mm-card-grid">
+      <svg id="printwheel" class="wheel" viewBox="-320 -280 640 560" role="img" aria-label="Your wheel of life"></svg>
+      <ul class="mm-scores" id="print-scores"></ul>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="mm-block">
+   <p class="mm-num">03</p>
+   <div class="mm-body">
+    <p class="mm-label">The shape</p>
+    <div id="print-shape"></div>
+   </div>
+  </div>
+  <footer class="mm-foot">
+   <p class="mm-date" id="print-date"></p>
+   <p class="mm-url">Agentkammer.com</p>
+   <p class="mm-tagline">Live where you belong.</p>
+   <p class="mm-disc">Educational only. For personal reflection.</p>
+  </footer>
  </section>
  <section class="print-page print-plan">
-  <header class="print-mast">
-   <p class="report">The Kammer Report</p>
-   <p class="intel">Action plan</p>
+  <header class="mm-head">
+   <img class="mm-ak" src="assets/ak-monogram.png" alt="" width="28" height="30">
+   <p class="mm-title">The Action Plan</p>
   </header>
-  <h1>Action plan</h1>
-  <p class="print-dek">Priority areas, next steps, and a little room to add a detail.</p>
-  <hr class="rule">
   <div id="print-plan-body"></div>
-  <div class="print-end">
-   <p class="quote">Home keeps asking the same question. Answer it when you are ready.</p>
-   <p class="caps">Live where you belong</p>
-   <p class="print-legal">Educational content only. For personal reflection.</p>
-  </div>
+  <footer class="mm-foot">
+   <p class="mm-date" id="print-date-2"></p>
+   <p class="mm-url">Agentkammer.com</p>
+   <p class="mm-tagline">Live where you belong.</p>
+   <p class="mm-disc">Educational only. For personal reflection.</p>
+  </footer>
  </section>
 </article>
 
@@ -390,14 +397,14 @@ footer .in{max-width:1100px;margin:0 auto}
 document.documentElement.classList.add("js");
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const PHOTOS=[
- {src:"assets/stoop.jpg",pos:"42% 40%"},
- {src:"assets/chrysler.jpg",pos:"68% 46%"},
- {src:"assets/limestone.jpg",pos:"22% 38%"},
- {src:"assets/lobby.jpg",pos:"18% 48%"},
- {src:"assets/doorway.jpg",pos:"36% 34%"},
- {src:"assets/terrace.jpg",pos:"78% 40%"},
- {src:"assets/stoop.jpg",pos:"48% 62%"},
- {src:"assets/chrysler.jpg",pos:"28% 52%"}
+ {src:"assets/health.jpg",pos:"36% 44%"},
+ {src:"assets/career.jpg",pos:"58% 40%"},
+ {src:"assets/money.jpg",pos:"30% 46%"},
+ {src:"assets/relationships.jpg",pos:"68% 46%"},
+ {src:"assets/family.jpg",pos:"34% 50%"},
+ {src:"assets/growth.jpg",pos:"72% 48%"},
+ {src:"assets/fun.jpg",pos:"32% 50%"},
+ {src:"assets/home.jpg",pos:"74% 46%"}
 ];
 const AREAS=[
  {k:"health",n:"Health",q:"How's your body holding up when you ask something of it?",p:"The body keeps quieter books than the bank. It still keeps them.",h:"An earlier night, a longer walk, or water before the first coffee. Pick one and repeat it."},
@@ -410,7 +417,7 @@ const AREAS=[
  {k:"home",n:"Home and environment",q:"Does walking through your front door feel like arriving?",p:"Home is the room where your shoulders finally drop.",h:"Clear one surface. Fix the lamp that flickers. Open a window on purpose."}];
 const WORDS=["","Neglected","Thin","Strained","Uneven","Holding","Steady","Good","Strong","Rich","Full"];
 const SAMPLE={health:6,career:8,money:5,relationships:7,family:3,growth:6,fun:4,home:9};
-const SHORT={growth:"Growth",fun:"Fun",home:"Home"};
+const SHORT={growth:"Growth",fun:"Fun",home:"Home",relationships:"Relate"};
 const KEY="ak-wheel-of-life-v3";
 let st={s:{},m:{}};
 try{const o=JSON.parse(localStorage.getItem(KEY));if(o&&o.s)st={s:o.s,m:o.m||{}}}catch(e){}
@@ -481,8 +488,8 @@ function makeWheel(svg,R,labels,uid){
  });
  svg.appendChild(el("circle",{r:R/40,fill:"#161C28",stroke:"#C9C2B3"}));
  const lt=[];
- if(labels)AREAS.forEach((a,i)=>{const ang=-Math.PI/2+(i+.5)*2*Math.PI/N,[x,y]=pt(R+26,ang);const t=el("text",{x:x.toFixed(1),y:(y+4).toFixed(1),"text-anchor":Math.abs(x)<12?"middle":x>0?"start":"end",fill:"#F5F2EB","font-family":"Montserrat,sans-serif","font-size":11.5,"letter-spacing":"2.2"});t.textContent=(SHORT[a.k]||a.n).toUpperCase();svg.appendChild(t);lt.push(t)});
- return{svg,set(lows){AREAS.forEach((a,i)=>{const r=Math.max(R*st.s[a.k]/10,R*.04);gs[i].setAttribute("d",arc(r,i));bs[i].setAttribute("d",arc(r,i));if(lt[i])lt[i].setAttribute("fill",lows.includes(a.k)?"#E8E4DC":"#F5F2EB")})}};
+ if(labels)AREAS.forEach((a,i)=>{const ang=-Math.PI/2+(i+.5)*2*Math.PI/N,[x,y]=pt(R+22,ang);const t=el("text",{x:x.toFixed(1),y:(y+4).toFixed(1),"text-anchor":Math.abs(x)<12?"middle":x>0?"start":"end",fill:uid==="p"?"#1c1914":"#F5F2EB","font-family":"Montserrat,sans-serif","font-size":uid==="p"?9:11.5,"letter-spacing":uid==="p"?.8:2.2});t.textContent=(SHORT[a.k]||a.n).toUpperCase();svg.appendChild(t);lt.push(t)});
+ return{svg,set(lows){AREAS.forEach((a,i)=>{const r=Math.max(R*st.s[a.k]/10,R*.04);gs[i].setAttribute("d",arc(r,i));bs[i].setAttribute("d",arc(r,i));if(lt[i])lt[i].setAttribute("fill",uid==="p"?"#1c1914":(lows.includes(a.k)?"#E8E4DC":"#F5F2EB"))})}};
 }
 function catmull(pts){
  if(pts.length<2)return "";
@@ -509,7 +516,7 @@ function paintVibe(){
  $("vibe-glow").setAttribute("d",d);
 }
 
-const big=makeWheel($("bigwheel"),180,true,"b"),mini=makeWheel($("miniwheel"),180,false,"m"),prt=makeWheel($("printwheel"),180,true,"p");
+const big=makeWheel($("bigwheel"),180,true,"b"),mini=makeWheel($("miniwheel"),180,false,"m"),prt=makeWheel($("printwheel"),150,true,"p");
 let pt1,sel=AREAS[0].k;
 function ranked(){return AREAS.map((a,i)=>({...a,v:st.s[a.k],i})).sort((x,y)=>x.v-y.v||x.i-y.i)}
 function lowest(){return ranked().slice(0,2)}
@@ -517,22 +524,19 @@ function highest(){return ranked().slice(-2).reverse()}
 function paintPrint(){
  const lo=lowest(),hi=highest(),lk=lo.map(o=>o.k);
  const vals=AREAS.map(a=>st.s[a.k]),avg=vals.reduce((x,y)=>x+y,0)/N,spread=Math.max(...vals)-Math.min(...vals);
- const d=new Date().toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"});
+ const d=new Date().toLocaleDateString(undefined,{weekday:"long",year:"numeric",month:"long",day:"numeric"});
  prt.set(lk);
  $("print-date").textContent=d;
- $("print-scores").innerHTML=AREAS.map(a=>`<li class="${lk.includes(a.k)?"low":""}"><span>${a.n}</span><span class="track"><i style="width:${st.s[a.k]*10}%"></i></span><b>${st.s[a.k]}</b></li>`).join("");
- $("print-stats").innerHTML=`<div class="print-stat"><p class="lbl">Balance</p><p class="val">Average <b>${avg.toFixed(1)}</b> of 10. Spread of <b>${spread}</b>.</p></div><div class="print-stat"><p class="lbl">Holding well</p><p class="val"><b>${hi[0].n} ${hi[0].v}</b> · ${hi[1].n} ${hi[1].v}</p></div><div class="print-stat"><p class="lbl">Needs attention</p><p class="val"><b>${lo[0].n} ${lo[0].v}</b> · ${lo[1].n} ${lo[1].v}</p></div>`;
- $("print-eight").innerHTML=AREAS.map(a=>`<div class="pe"><div class="top"><h3>${a.n}</h3><b>${st.s[a.k]}</b></div><p>${a.p}</p></div>`).join("");
+ $("print-date-2").textContent=d;
+ $("print-checkin").innerHTML=`<p class="mm-figure">Average <em>${avg.toFixed(1)}</em></p><p class="mm-sub">of 10, with a spread of <em>${spread}</em>. Eight parts of how the week actually feels.</p>`;
+ $("print-scores").innerHTML=AREAS.map(a=>`<li><span>${a.n}</span><b>${st.s[a.k]}</b></li>`).join("");
  const tie=lo[0].v===lo[1].v;
- $("print-lede").innerHTML=`Lowest right now: <em>${lo[0].n}</em> at ${lo[0].v}, and <em>${lo[1].n}</em> at ${lo[1].v}${tie?" (tied, so I took them in order)":""}. One small move on each by Sunday.`;
- const card=o=>{
+ $("print-shape").innerHTML=`<p class="mm-pair"><em>${lo[0].n}</em> ${lo[0].v} · <em>${lo[1].n}</em> ${lo[1].v}</p><p class="mm-sub">Lowest right now${tie?" (tied, so I took them in order)":""}. One small move on each by Sunday.</p><p class="mm-figure mm-figure-sm">Holding well: <em>${hi[0].n}</em> ${hi[0].v} · <em>${hi[1].n}</em> ${hi[1].v}</p>`;
+ const note=o=>{
   const written=(st.m[o.k]||"").trim();
-  const step=written||o.h;
-  return `<article class="pcard"><div class="top"><h3>${o.n}</h3><span class="sc">${o.v}<span class="vh"> out of 10</span></span></div><p class="hint">${o.h}</p><p class="note">${esc(step)}</p><p class="add">${written?"A further detail":"Add a detail if you want"}</p></article>`;
+  return written||o.h;
  };
- const hold=new Set([...lo,...hi].map(o=>o.k));
- const mid=AREAS.filter(a=>!hold.has(a.k)).map(a=>({...a,v:st.s[a.k]}));
- $("print-plan-body").innerHTML=`<p class="print-kicker" style="margin-top:0">Priority this week</p>${lo.map(card).join("")}<p class="print-kicker">Protect these</p><div class="print-protect">${hi.map(o=>`<article class="pcard"><div class="top"><h3>${o.n}</h3><span class="sc">${o.v}</span></div><p class="hint">${o.p}</p></article>`).join("")}</div><p class="print-kicker">The rest of the wheel</p><ul class="print-scores">${mid.map(a=>`<li><span>${a.n}</span><span class="track"><i style="width:${a.v*10}%"></i></span><b>${a.v}</b></li>`).join("")}</ul>`;
+ $("print-plan-body").innerHTML=`<div class="mm-block"><p class="mm-num">01</p><div class="mm-body"><p class="mm-label">Priority</p><p class="mm-figure"><em>${lo[0].n}</em> ${lo[0].v}</p><p class="mm-hint">${lo[0].h}</p><p class="mm-note">${esc(note(lo[0]))}</p></div></div><div class="mm-block"><p class="mm-num">02</p><div class="mm-body"><p class="mm-label">Your moves</p><div class="mm-card"><span class="mm-card-tag">Notes</span><p class="mm-pair"><em>${lo[1].n}</em> ${lo[1].v}</p><p class="mm-hint">${lo[1].h}</p><p class="mm-note">${esc(note(lo[1]))}</p><p class="mm-pair" style="margin-top:4mm;font-size:16pt"><em>${lo[0].n}</em> ${lo[0].v}</p><p class="mm-note">${esc(note(lo[0]))}</p></div></div></div><div class="mm-block"><p class="mm-num">03</p><div class="mm-body"><p class="mm-label">Protect these</p><p class="mm-figure"><em>${hi[0].n}</em> ${hi[0].v}</p><p class="mm-sub">${hi[0].p}</p><p class="mm-figure mm-figure-sm"><em>${hi[1].n}</em> ${hi[1].v}</p><p class="mm-sub">${hi[1].p}</p></div></div>`;
 }
 function setScore(k,v,pulse){
  st.s[k]=v;save();paintDial(k);if(sel===k)paintDock();update(pulse);
