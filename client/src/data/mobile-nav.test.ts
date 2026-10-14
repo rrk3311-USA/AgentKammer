@@ -25,7 +25,7 @@ describe("mobile field menu", () => {
     }
   });
 
-  it("puts Guides, Tools, and every public guide in the hamburger", () => {
+  it("puts Guides, Interactive Tools, and every public guide in the hamburger", () => {
     const ids = mobileFieldNav.map((item) => item.id);
     expect(ids).toEqual(["home", "start", "guides", "tools", "contact"]);
     const hrefs = collectMobileNavHrefs();
@@ -67,7 +67,7 @@ describe("mobile field menu", () => {
       createElement(Router, { ssrPath: "/guides" }, createElement(MobileFieldMenu, { location: "/guides", onClose: () => undefined })),
     );
     expect(html).toContain("Guides");
-    expect(html).toContain("Tools");
+    expect(html).toContain("Interactive Tools");
     expect(html).not.toMatch(/>Hub</);
     expect(html).not.toContain('href="/hub"');
     expect(html).toContain("aria-expanded");

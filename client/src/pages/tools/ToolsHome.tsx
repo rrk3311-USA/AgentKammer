@@ -44,7 +44,7 @@ function CardBody({ card }: { card: ToolCard }) {
 
 export default function ToolsHome() {
   usePageMetadata({
-    title: "Tools",
+    title: "Interactive Tools",
     description: "Monthly carry before a listing takes over, and a short check-in on how a week actually feels.",
     path: "/tools",
   });
@@ -52,8 +52,8 @@ export default function ToolsHome() {
   return (
     <main className="bg-brand-ivory">
       <PageHero
-        eyebrow="Tools"
-        title="Two desks you can open now."
+        eyebrow="Desk"
+        title="Interactive Tools"
         description="A quiet monthly-carry calculator, and a personal check-in on how the week actually feels."
         art="decision-framework"
       />
