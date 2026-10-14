@@ -105,22 +105,32 @@ img,svg{display:block;max-width:100%}
 .js .rv.d1{transition-delay:.12s}.js .rv.d2{transition-delay:.24s}.js .rv.d3{transition-delay:.36s}
 .js .rv.in{opacity:1;transform:none}
 
-/* mini wheel */
-.mini{position:fixed;right:max(14px,env(safe-area-inset-right));bottom:max(14px,env(safe-area-inset-bottom));z-index:30;width:76px;height:76px;border-radius:50%;padding:0;border:1px solid rgba(176,141,87,.6);background:rgba(14,17,25,.82);backdrop-filter:blur(6px);cursor:pointer;transition:opacity .4s,transform .4s;box-shadow:0 10px 30px rgba(0,0,0,.45)}
-.mini svg{width:100%;height:100%}
-.mini.hide{opacity:0;transform:scale(.8);pointer-events:none}
-@media(min-width:900px){.mini{width:112px;height:112px}}
+/* companion dock */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:auto 1fr;gap:10px 14px;align-items:center;padding:10px max(16px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));background:rgba(12,15,22,.94);border-top:1px solid rgba(201,194,179,.28);backdrop-filter:blur(14px);box-shadow:0 -18px 40px rgba(0,0,0,.35);transition:opacity .35s,transform .35s}
+.dock.hide{opacity:0;transform:translateY(18px);pointer-events:none}
+.dock svg.wheel{width:84px;height:84px;flex:none}
+.dock-main{min-width:0}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:2px 0 8px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;display:flex;flex-direction:column;align-items:flex-start;gap:1px;margin:0;padding:7px 10px 6px;border:1px solid transparent;background:transparent;color:var(--mist);cursor:pointer;font:600 9px/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase}
+.chip b{font:italic 500 1.15rem/1 var(--serif);color:var(--ivory);letter-spacing:0;text-transform:none}
+.chip.on{border-color:rgba(232,228,220,.45);background:rgba(245,242,235,.06);color:var(--ivory)}
+.chip.on b{color:#f4f1ea;text-shadow:0 0 12px rgba(245,242,235,.45)}
+.dock-dial{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.dock-dial output{font:italic 500 1.35rem/1 var(--serif);color:#f4f1ea;min-width:1.4em;text-align:right;text-shadow:0 0 14px rgba(245,242,235,.4)}
+.dock-dial .range{margin:0}
+@media(min-width:760px){
+ .dock{grid-template-columns:auto 1fr;padding:12px 28px max(14px,env(safe-area-inset-bottom))}
+ .dock svg.wheel{width:108px;height:108px}
+}
+body.dock-on{padding-bottom:132px}
+@media(min-width:760px){body.dock-on{padding-bottom:148px}}
 
 /* wheels */
-.wheel .slice{transition:d .7s cubic-bezier(.2,.8,.2,1)}
-.wheel .ring{stroke-dasharray:1200;stroke-dashoffset:0}
-.wheel.drawn .ring{animation:ring 1.8s ease both}
-.wheel.drawn .ring:nth-child(2n){animation-delay:.12s}
-@keyframes ring{from{stroke-dashoffset:1200}}
-.wheel .glow{transition:opacity .5s;opacity:.55}
-.wheel.pulse .glow{opacity:1}
-.wheel.drawn .slice{animation:bloom 1.2s .5s ease both}
-@keyframes bloom{from{opacity:0;transform:scale(.4)}}
+.wheel .slice{transition:d .45s cubic-bezier(.2,.8,.2,1)}
+.wheel .glow{opacity:.22;transition:opacity .35s}
+.wheel.pulse{filter:drop-shadow(0 0 16px rgba(245,242,235,.42)) drop-shadow(0 0 6px rgba(201,194,179,.7))}
+.wheel.pulse .glow{opacity:.95}
 
 /* perspective (cream) */
 .persp{position:relative;background:var(--ivory);color:var(--ink);padding:clamp(70px,11vw,130px) clamp(20px,6vw,80px) clamp(60px,9vw,110px);overflow:hidden}
@@ -171,7 +181,7 @@ footer .caps{color:var(--ivory);font-size:13px;margin-bottom:10px}
 @media print{
  @page{margin:14mm}
  body{background:#fff;color:#000}
- body>*:not(main),main>*:not(#perspective),.grain,.mini,.actions,.closer,.skip{display:none!important}
+ body>*:not(main),main>*:not(#perspective),.grain,.dock,.actions,.closer,.skip{display:none!important}
  .persp{padding:0;background:#fff}.persp::before{display:none}
  .pgrid{grid-template-columns:1fr 1.2fr;gap:24px;margin-top:20px}
  .plate{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -206,8 +216,8 @@ footer .caps{color:var(--ivory);font-size:13px;margin-bottom:10px}
 <section class="intro" id="intro" aria-label="How this works">
  <p class="quote rv">Most people can describe a building faster than they can describe their week.</p>
  <div class="rv d1">
-  <p>Scroll through the eight chapters and score each area from 1 to 10. One is neglected. Ten is about as good as you'd honestly want it. First instinct tends to beat a long debate.</p>
-  <p>The wheel in the corner fills in as you go. At the end I'll show you the two areas sitting lowest and ask for one small move on each. Nothing grand, just something you'd actually do by Sunday.</p>
+  <p>Score each area from 1 to 10. One is neglected. Ten is about as good as you'd honestly want it. First instinct tends to beat a long debate.</p>
+  <p>The wheel stays with you at the foot of the page. Adjust from there, or in each chapter. At the end I'll show you the two areas sitting lowest and ask for one small move on each.</p>
  </div>
 </section>
 
@@ -248,7 +258,19 @@ footer .caps{color:var(--ivory);font-size:13px;margin-bottom:10px}
 </section>
 </main>
 
-<button class="mini hide" id="mini" type="button" aria-label="Your wheel so far. Jump to your perspective"><svg id="miniwheel" class="wheel" viewBox="-200 -200 400 400" aria-hidden="true"></svg></button>
+<aside class="dock hide" id="dock" aria-label="Your wheel so far">
+ <svg id="miniwheel" class="wheel" viewBox="-200 -200 400 400" role="img" aria-labelledby="mw-t"><title id="mw-t">Your wheel of life</title></svg>
+ <div class="dock-main">
+  <div class="chips" id="chips" role="tablist" aria-label="Life areas"></div>
+  <div class="dock-dial">
+   <div class="range"><div class="track" aria-hidden="true"><div class="fill" id="dock-fill"></div></div>
+    <label class="vh" for="dock-r" id="dock-lab">Score</label>
+    <input type="range" id="dock-r" min="1" max="10" step="1">
+   </div>
+   <output id="dock-o" for="dock-r"></output>
+  </div>
+ </div>
+</aside>
 
 <footer>
  <div class="in">
@@ -272,10 +294,12 @@ const AREAS=[
  {k:"fun",n:"Fun and recreation",s:"river",q:"Is there room in your week for something with no purpose at all?",p:"An evening that accomplishes nothing can still be the best one of the month.",h:"Put something pointless on the calendar and guard it like a board meeting."},
  {k:"home",n:"Home and environment",s:"room",q:"Does walking through your front door feel like arriving?",p:"Home is the room where your shoulders finally drop.",h:"Clear one surface. Fix the lamp that flickers. Open a window on purpose."}];
 const WORDS=["","Neglected","Thin","Strained","Uneven","Holding","Steady","Good","Strong","Rich","Full"];
-const KEY="ak-wheel-of-life-v2";
+const SAMPLE={health:6,career:8,money:5,relationships:7,family:3,growth:6,fun:4,home:9};
+const SHORT={growth:"Growth",fun:"Fun",home:"Home"};
+const KEY="ak-wheel-of-life-v3";
 let st={s:{},m:{}};
 try{const o=JSON.parse(localStorage.getItem(KEY));if(o&&o.s)st={s:o.s,m:o.m||{}}}catch(e){}
-AREAS.forEach(a=>{const v=+st.s[a.k];st.s[a.k]=v>=1&&v<=10?v:5});
+AREAS.forEach(a=>{const v=+st.s[a.k];st.s[a.k]=v>=1&&v<=10?v:SAMPLE[a.k]});
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -346,7 +370,7 @@ AREAS.forEach((a,i)=>{
  </div>`;
  box.appendChild(sec);
  const inp=sec.querySelector("input");inp.value=st.s[a.k];
- inp.addEventListener("input",()=>{st.s[a.k]=+inp.value;save();paintDial(a.k);update(true)});
+ inp.addEventListener("input",()=>setScore(a.k,+inp.value,true));
 });
 const cont=document.createElement("div");cont.style.cssText="text-align:center;padding:70px 20px 90px";
 cont.innerHTML=`<p class="quote rv" style="margin:0 auto 26px">That's all eight. Let's see the shape.</p><a class="btn rv d1" href="#perspective" id="toPersp" style="display:inline-block;text-decoration:none;border-color:var(--brass);background:transparent">See your perspective</a>`;
@@ -355,9 +379,11 @@ box.appendChild(cont);
 function paintDial(k){
  const v=st.s[k],inp=$("r-"+k);
  $("o-"+k).textContent=v;$("w-"+k).textContent=WORDS[v];
+ inp.value=v;
  inp.setAttribute("aria-valuetext",v+" of 10, "+WORDS[v].toLowerCase());
  inp.parentNode.querySelector(".fill").style.setProperty("--p",((v-1)/9*100)+"%");
  inp.closest(".dial").querySelectorAll(".ticks span").forEach((s,j)=>s.classList.toggle("on",j+1===v));
+ const chip=$("c-"+k);if(chip)chip.querySelector("b").textContent=v;
 }
 
 /* ---------- wheels ---------- */
@@ -365,30 +391,49 @@ const NS="http://www.w3.org/2000/svg",N=AREAS.length;
 const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
 const pt=(r,a)=>[r*Math.cos(a),r*Math.sin(a)];
 const arc=(r,i)=>{const a0=-Math.PI/2+i*2*Math.PI/N,a1=a0+2*Math.PI/N,[x0,y0]=pt(r,a0),[x1,y1]=pt(r,a1);return `M0 0L${x0.toFixed(2)} ${y0.toFixed(2)}A${r.toFixed(2)} ${r.toFixed(2)} 0 0 1 ${x1.toFixed(2)} ${y1.toFixed(2)}Z`};
-const SHORT={growth:"Growth",fun:"Fun",home:"Home"};
 function makeWheel(svg,R,labels,uid){
- const d=el("defs",{});d.innerHTML=`<filter id="gl${uid}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${R/14}"/></filter><radialGradient id="sg${uid}"><stop offset="0" stop-color="#F5D9A4"/><stop offset=".55" stop-color="#D9A75E"/><stop offset="1" stop-color="#9C7440"/></radialGradient>`;
+ const d=el("defs",{});d.innerHTML=`<filter id="gl${uid}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${R/10}"/></filter><radialGradient id="sg${uid}"><stop offset="0" stop-color="#F7F4EE"/><stop offset=".5" stop-color="#D8D3C9"/><stop offset="1" stop-color="#9A958C"/></radialGradient>`;
  svg.appendChild(d);
  const rings=el("g",{});svg.appendChild(rings);
- for(let l=2;l<=10;l+=2)rings.appendChild(el("circle",{class:"ring",r:R*l/10,fill:"none",stroke:l===10?"#B08D57":"#3a4559","stroke-width":l===10?1.2:1,"stroke-opacity":l===10?.7:1}));
+ for(let l=2;l<=10;l+=2)rings.appendChild(el("circle",{class:"ring",r:R*l/10,fill:"none",stroke:l===10?"#C9C2B3":"#3a4559","stroke-width":l===10?1.2:1,"stroke-opacity":l===10?.85:1}));
  AREAS.forEach((a,i)=>{const[x,y]=pt(R,-Math.PI/2+i*2*Math.PI/N);rings.appendChild(el("line",{x1:0,y1:0,x2:x.toFixed(1),y2:y.toFixed(1),stroke:"#2f394b"}))});
  const glow=el("g",{class:"glow",filter:`url(#gl${uid})`}),body=el("g",{});
  svg.appendChild(glow);svg.appendChild(body);
  const gs=[],bs=[];
- AREAS.forEach((a,i)=>{gs.push(glow.appendChild(el("path",{class:"slice",fill:"#E2B470"})));bs.push(body.appendChild(el("path",{class:"slice",fill:`url(#sg${uid})`,"fill-opacity":i%2?.82:.95,stroke:"#161C28","stroke-width":R/90})))});
+ AREAS.forEach((a,i)=>{
+  gs.push(glow.appendChild(el("path",{class:"slice",fill:"#F2EFE8"})));
+  const p=body.appendChild(el("path",{class:"slice",fill:`url(#sg${uid})`,"fill-opacity":i%2?.82:.95,stroke:"#161C28","stroke-width":R/90,cursor:"pointer"}));
+  p.addEventListener("click",()=>select(a.k,false));
+  bs.push(p);
+ });
  [glow,body].forEach(g=>g.style.transformOrigin="0 0");
- svg.appendChild(el("circle",{r:R/40,fill:"#161C28",stroke:"#B08D57"}));
+ svg.appendChild(el("circle",{r:R/40,fill:"#161C28",stroke:"#C9C2B3"}));
  const lt=[];
  if(labels)AREAS.forEach((a,i)=>{const ang=-Math.PI/2+(i+.5)*2*Math.PI/N,[x,y]=pt(R+26,ang);const t=el("text",{x:x.toFixed(1),y:(y+4).toFixed(1),"text-anchor":Math.abs(x)<12?"middle":x>0?"start":"end",fill:"#F5F2EB","font-family":"Montserrat,sans-serif","font-size":11.5,"letter-spacing":"2.2"});t.textContent=(SHORT[a.k]||a.n).toUpperCase();svg.appendChild(t);lt.push(t)});
- return{svg,set(lows){AREAS.forEach((a,i)=>{const r=Math.max(R*st.s[a.k]/10,R*.04);gs[i].setAttribute("d",arc(r,i));bs[i].setAttribute("d",arc(r,i));if(lt[i])lt[i].setAttribute("fill",lows.includes(a.k)?"#E2B470":"#F5F2EB")})}};
+ return{svg,set(lows){AREAS.forEach((a,i)=>{const r=Math.max(R*st.s[a.k]/10,R*.04);gs[i].setAttribute("d",arc(r,i));bs[i].setAttribute("d",arc(r,i));if(lt[i])lt[i].setAttribute("fill",lows.includes(a.k)?"#E8E4DC":"#F5F2EB")})}};
 }
 const big=makeWheel($("bigwheel"),180,true,"b"),mini=makeWheel($("miniwheel"),180,false,"m");
-let pt1;
+let pt1,sel=AREAS[0].k;
 function lowest(){return AREAS.map((a,i)=>({...a,v:st.s[a.k],i})).sort((x,y)=>x.v-y.v||x.i-y.i).slice(0,2)}
+function setScore(k,v,pulse){
+ st.s[k]=v;save();paintDial(k);if(sel===k)paintDock();update(pulse);
+}
+function paintDock(){
+ const v=st.s[sel],inp=$("dock-r");
+ $("dock-lab").textContent=(AREAS.find(a=>a.k===sel)||AREAS[0]).n+", score from 1 to 10";
+ inp.value=v;inp.setAttribute("aria-valuetext",v+" of 10");
+ $("dock-o").textContent=v;
+ $("dock-fill").style.setProperty("--p",((v-1)/9*100)+"%");
+ AREAS.forEach(a=>$("c-"+a.k).classList.toggle("on",a.k===sel));
+}
+function select(k,scroll){
+ sel=k;paintDock();
+ if(scroll){const ch=$("ch-"+k);if(ch)ch.scrollIntoView({behavior:reduce?"auto":"smooth",block:"center"})}
+}
 function update(pulse){
  const lo=lowest(),lk=lo.map(o=>o.k);
  big.set(lk);mini.set(lk);
- if(pulse){[big,mini].forEach(w=>w.svg.classList.add("pulse"));clearTimeout(pt1);pt1=setTimeout(()=>[big,mini].forEach(w=>w.svg.classList.remove("pulse")),600)}
+ if(pulse){[big,mini].forEach(w=>w.svg.classList.add("pulse"));clearTimeout(pt1);pt1=setTimeout(()=>[big,mini].forEach(w=>w.svg.classList.remove("pulse")),900)}
  const v=AREAS.map(a=>st.s[a.k]),avg=v.reduce((x,y)=>x+y,0)/N;
  $("bw-d").textContent="Scores: "+AREAS.map(a=>a.n+" "+st.s[a.k]).join(", ")+".";
  $("scores").innerHTML=AREAS.map(a=>`<li class="${lk.includes(a.k)?"low":""}"><span>${a.n}</span><b>${st.s[a.k]}</b></li>`).join("")+`<li style="grid-column:1/-1;border:0"><span><i>Average ${avg.toFixed(1)}, spread of ${Math.max(...v)-Math.min(...v)}</i></span></li>`;
@@ -404,29 +449,35 @@ function renderMoves(lo){
  m.querySelectorAll("textarea").forEach(t=>t.addEventListener("input",()=>{st.m[t.id.slice(2)]=t.value;save();$("saved").textContent="Saved in this browser."}));
  if(act&&$(act)&&act.startsWith("m-"))$(act).focus();
 }
-AREAS.forEach(a=>paintDial(a.k));update(false);
 
-/* ---------- reveal + wheel draw-in ---------- */
+const chips=$("chips");
+AREAS.forEach(a=>{
+ const b=document.createElement("button");
+ b.type="button";b.className="chip";b.id="c-"+a.k;b.setAttribute("role","tab");
+ b.innerHTML=`<span>${SHORT[a.k]||a.n}</span><b>${st.s[a.k]}</b>`;
+ b.addEventListener("click",()=>select(a.k,false));
+ chips.appendChild(b);
+});
+$("dock-r").addEventListener("input",()=>setScore(sel,+$("dock-r").value,true));
+AREAS.forEach(a=>paintDial(a.k));paintDock();update(false);
+
+/* ---------- reveal ---------- */
 const rvs=document.querySelectorAll(".rv");
 if(reduce||!("IntersectionObserver" in window)){rvs.forEach(e=>e.classList.add("in"))}
 else{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{rootMargin:"0px 0px -8% 0px",threshold:.05});rvs.forEach(e=>io.observe(e))}
-const miniBtn=$("mini"),hero=document.querySelector(".hero"),persp=$("perspective");
-let heroOn=true,perspOn=false;
-const vis=()=>miniBtn.classList.toggle("hide",heroOn||perspOn);
+const dock=$("dock"),hero=document.querySelector(".hero");
+const vis=on=>{dock.classList.toggle("hide",on);document.body.classList.toggle("dock-on",!on)};
 if("IntersectionObserver" in window){
- new IntersectionObserver(([e])=>{heroOn=e.isIntersecting;vis()},{threshold:.35}).observe(hero);
- new IntersectionObserver(([e])=>{perspOn=e.isIntersecting;vis()},{threshold:.15}).observe(persp);
- const wo=new IntersectionObserver(([e])=>{if(e.isIntersecting){big.svg.classList.add("drawn");wo.disconnect()}},{threshold:.3});wo.observe(big.svg);
-}else{miniBtn.classList.remove("hide")}
-miniBtn.addEventListener("click",()=>{persp.scrollIntoView({behavior:reduce?"auto":"smooth"});persp.focus({preventScroll:true})});
-$("toPersp").addEventListener("click",e=>{e.preventDefault();miniBtn.click()});
+ new IntersectionObserver(([e])=>vis(e.isIntersecting),{threshold:.28}).observe(hero);
+}else vis(false)
+$("toPersp").addEventListener("click",e=>{e.preventDefault();$("perspective").scrollIntoView({behavior:reduce?"auto":"smooth"});$("perspective").focus({preventScroll:true})});
 
 /* ---------- actions ---------- */
 $("print").onclick=()=>window.print();
 $("dl").onclick=()=>{const lo=lowest(),d=new Date().toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"});
  const t=`THE WHEEL OF LIFE\nAgent Kammer, agentkammer.com\n${d}\n\n`+AREAS.map(a=>`${a.n}: ${st.s[a.k]} / 10`).join("\n")+`\n\nONE SMALL MOVE THIS WEEK\n`+lo.map(o=>`${o.n} (${o.v}/10): ${st.m[o.k]||"(not written yet)"}`).join("\n")+`\n\nEducational only. For personal reflection.\nLive where you belong.\n`;
  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/plain"}));a.download="wheel-of-life.txt";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),800)};
-$("reset").onclick=()=>{if(!confirm("Clear your scores and notes on this device?"))return;st={s:{},m:{}};AREAS.forEach(a=>{st.s[a.k]=5;$("r-"+a.k).value=5;paintDial(a.k)});save();lastKeys="";$("saved").textContent="";update(true)};
+$("reset").onclick=()=>{if(!confirm("Clear your scores and notes on this device?"))return;st={s:{...SAMPLE},m:{}};AREAS.forEach(a=>paintDial(a.k));sel=AREAS[0].k;paintDock();save();lastKeys="";$("saved").textContent="";update(true)};
 })();
 </script>
 </body>
