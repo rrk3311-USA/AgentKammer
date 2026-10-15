@@ -52,23 +52,31 @@ img,svg{display:block;max-width:100%}
 .mast em{font:italic 15px var(--serif);color:var(--mist);display:none}
 @media(min-width:700px){.mast em{display:block}}
 
-.hero{position:relative;min-height:clamp(640px,100svh,980px);display:flex;align-items:flex-end;padding:0 clamp(20px,6vw,80px) clamp(32px,6vh,72px)}
+.hero{position:relative;min-height:clamp(640px,100svh,980px);display:flex;align-items:flex-end;padding:0 clamp(20px,6vw,80px) clamp(32px,6vh,72px);background:#0D182B}
+.hero .scene{background:#0D182B}
 .hero .scene img{object-position:46% 18%}
 .hero .scene::before{background:radial-gradient(50% 42% at 38% 32%,rgba(226,180,112,.16),transparent 58%)}
-.hero .scene::after{z-index:2;background:linear-gradient(180deg,rgba(13,24,43,.1) 0%,transparent 22%,rgba(13,24,43,.18) 48%,rgba(13,24,43,.55) 72%,rgba(13,24,43,.88) 88%,#0D182B 100%)}
+.hero .scene::after{z-index:2;background:linear-gradient(180deg,rgba(13,24,43,.1) 0%,transparent 20%,rgba(13,24,43,.2) 48%,rgba(13,24,43,.58) 70%,rgba(13,24,43,.92) 86%,#0D182B 100%)}
 .hero .typeback{display:none}
-.hero-in{position:relative;z-index:3;max-width:min(640px,72%)}
+.hero-in{position:relative;z-index:3;max-width:min(640px,86%)}
 .hero .kicker{display:flex;flex-direction:column;align-items:flex-start;gap:.42em;font-size:9.5px;letter-spacing:.16em;line-height:1.3}
 .hero .kicker span{display:block}
 .hero .kicker span.kicker-sep{display:none}
-.hero .rule{margin:11px 0}
-.hero h1{font-size:clamp(1.85rem,6.6vw,4.4rem);letter-spacing:.1em}
-.hero h1 small{display:block;font-size:.3em;letter-spacing:.46em;margin-bottom:.35em;color:var(--mist)}
-.hero .dek{font:italic 400 clamp(1.12rem,3.2vw,1.55rem)/1.36 var(--serif);color:#e7e1d4;max-width:22em;margin:0}
-.hero .meta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:15px}
-.hero .meta .num{letter-spacing:.16em;font-size:11px}
-.hero .edu{margin-top:16px}
-.hero .cue{margin-top:20px}
+.hero .rule{margin:10px 0}
+.hero h1{font-size:clamp(1.7rem,6.8vw,4.4rem);letter-spacing:.1em}
+.hero h1 small{display:block;font-size:.3em;letter-spacing:.46em;margin-bottom:.32em;color:var(--mist)}
+.hero .dek{font:italic 400 clamp(1.02rem,3vw,1.55rem)/1.34 var(--serif);color:#e7e1d4;max-width:22em;margin:0}
+.hero .meta{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:14px}
+.hero .meta .num{letter-spacing:.14em;font-size:11px}
+.hero .cue{margin-top:18px}
+@media(max-width:699px){
+ .hero .scene img{
+  top:0;right:0;left:0;bottom:auto;height:70%;width:100%;
+  object-position:52% 14%;
+  -webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 62%,transparent 100%)
+ }
+}
 @media(min-width:700px){
  .hero-in{max-width:640px}
  .hero .kicker{flex-direction:row;flex-wrap:nowrap;align-items:center;gap:.7em;font-size:10.5px;letter-spacing:.32em;line-height:1.4;white-space:nowrap}
@@ -80,7 +88,6 @@ img,svg{display:block;max-width:100%}
  .hero .dek{font-size:clamp(1.2rem,3.2vw,1.55rem);line-height:1.38}
  .hero .meta{gap:8px 22px;margin-top:22px}
  .hero .meta .num{letter-spacing:.24em;font-size:12px}
- .hero .edu{margin-top:26px}
  .hero .cue{margin-top:30px}
 }
 .edu{position:relative;z-index:3;margin-top:26px;max-width:36em;border-left:1px solid rgba(216,209,199,.4);padding:4px 0 4px 16px;font-size:.84rem;color:var(--mist)}
@@ -373,7 +380,6 @@ footer .in{max-width:1100px;margin:0 auto}
   <hr class="rule rv d2">
   <p class="dek rv d2">Eight parts of how a week actually feels, scored from 1 to 10. The shape is usually more honest than any one number.</p>
   <div class="meta rv d3"><span class="num">01</span><span class="num">Eight areas</span><span class="num">About ten minutes</span></div>
-  <p class="edu rv d3"><strong>Educational only.</strong> Score how this week actually feels. Answers stay in this browser.</p>
   <a class="cue rv d3" href="#intro"><i aria-hidden="true"></i>Begin</a>
  </div>
 </section>
