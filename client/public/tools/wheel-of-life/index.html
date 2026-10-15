@@ -216,6 +216,17 @@ body.dock-on{padding-bottom:176px}
 .need-tag{display:inline-block;margin-top:6px;font:600 9px/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--stone-blue)}
 .need-step[hidden]{display:none!important}
 .look{margin-top:8px}
+.id-q{margin:0 0 16px;color:#4c5465}
+.id-side{margin-top:16px}
+.id-lab{font:600 10.5px/1.4 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--stone-blue);margin:0 0 10px}
+.id-chips{display:flex;flex-wrap:wrap;gap:8px}
+.id-chip{padding:8px 14px;border:1px solid #d8d1c4;background:rgba(255,255,255,.45);color:var(--ink);font:italic 400 1.05rem/1.2 var(--serif);cursor:pointer}
+.id-chip:hover{border-color:var(--stone-blue);background:#f3eee4}
+.id-chip[aria-pressed="true"]{background:var(--stone-blue);border-color:var(--stone-blue);color:var(--ivory)}
+.id-own{display:block;margin-top:10px;width:100%;max-width:18em;font:italic 1.05rem/1.3 var(--serif);color:var(--ink);background:rgba(255,255,255,.55);border:1px solid #d8d1c4;padding:8px 12px}
+.id-own::placeholder{color:#9a9182}
+.id-keep{margin-top:20px;padding-top:16px;border-top:1px solid #d8cfbd}
+.id-keep[hidden]{display:none!important}
 
 footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px) 120px;font-size:.8rem;text-align:center}
 footer .in{max-width:1100px;margin:0 auto}
@@ -298,6 +309,8 @@ footer .in{max-width:1100px;margin:0 auto}
  .mm-need-bars .bar i{display:block;height:100%;background:#2a3447;width:var(--p,40%)}
  .mm-need-bars .v{display:block;margin:1mm 0 0;font:italic 400 8.5pt/1 var(--serif);font-variant-numeric:tabular-nums}
  .mm-need-note{margin:2.2mm 0 0;font:italic 400 8pt/1.3 var(--serif);color:#3a352c}
+ .mm-id{position:relative;z-index:1;margin:2.4mm 0 0;font:italic 400 9pt/1.3 var(--serif);color:#1c1914}
+ .mm-id[hidden]{display:none!important}
  .mm-notes{position:relative;z-index:1;flex:1 1 auto;display:flex;flex-direction:column;min-height:18mm;margin:4mm 0 0;background:#f7f3ea;border:.4pt solid #B8BCC2;overflow:hidden}
  .mm-notes .lab{flex:0 0 auto;margin:0;padding:2.2mm 4mm 0;font:600 5.8pt/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:#2a3447}
  .mm-rules{flex:1 1 auto;display:flex;flex-direction:column;min-height:18mm;margin:1.6mm 4mm 3mm;overflow:hidden}
@@ -408,7 +421,30 @@ footer .in{max-width:1100px;margin:0 auto}
        <p class="kicker" style="color:var(--stone-blue);margin-top:18px">A first hour</p>
        <p class="act" id="keep-act"></p>
       </div>
-      <div class="need-nav"><button class="btn ghost" id="need-back-c" type="button">Choose another</button></div>
+      <div class="need-nav">
+       <button class="btn" id="need-to-e" type="button">Continue</button>
+       <button class="btn ghost" id="need-back-c" type="button">Choose another</button>
+      </div>
+     </div>
+     <div class="need-step" id="needs-e" hidden>
+      <p class="need-ask">A quieter question</p>
+      <p class="id-q">Who have you been lately, and who are you when nobody is scoring the week?</p>
+      <div class="id-side">
+       <p class="id-lab" id="id-late-lab">Lately</p>
+       <div class="id-chips" id="id-late" role="group" aria-labelledby="id-late-lab"></div>
+       <label class="vh" for="id-late-own">A word of your own for lately</label>
+       <input class="id-own" id="id-late-own" type="text" maxlength="24" autocomplete="off" placeholder="Or a word of your own">
+      </div>
+      <div class="id-side">
+       <p class="id-lab" id="id-real-lab">Really</p>
+       <div class="id-chips" id="id-real" role="group" aria-labelledby="id-real-lab"></div>
+       <label class="vh" for="id-real-own">A word of your own for who you really are</label>
+       <input class="id-own" id="id-real-own" type="text" maxlength="24" autocomplete="off" placeholder="Or a word of your own">
+      </div>
+      <div class="id-keep" id="id-keep" hidden>
+       <p class="line" id="id-line"></p>
+       <p class="act" id="id-act"></p>
+      </div>
      </div>
     </div>
    </div>
@@ -532,6 +568,7 @@ footer .in{max-width:1100px;margin:0 auto}
    <div class="mm-need-bars" id="print-needs"></div>
    <p class="mm-need-note" id="print-need-note"></p>
   </div>
+  <p class="mm-id" id="print-id" hidden></p>
   <div class="mm-notes">
    <p class="lab">Notes</p>
    <div class="mm-rules" aria-hidden="true"></div>
@@ -596,12 +633,21 @@ const BELIEFS=[
  {id:"conn-needless",areas:["relationships","family"],needs:["connection"],s:"I should not need anyone to pick up.",r:"Needing a door to stay open is ordinary.",a:"Send one unpolished note to someone you miss."},
  {id:"contrib-large",areas:["career"],needs:["contribution"],s:"What I give only counts if it is large.",r:"A room made easier for one person is already of use.",a:"Do one small thing this week that makes someone else's hour lighter, and stop there."}
 ];
+const LATE=["Tired","Scattered","Guarded","Busy","Stuck"];
+const REAL=["Builder","Steady","Generous","Curious","Leader"];
 const KEY="ak-wheel-of-life-v3";
-let st={s:{},m:{},n:{},b:""};
-try{const o=JSON.parse(localStorage.getItem(KEY));if(o&&o.s)st={s:o.s,m:o.m||{},n:o.n&&typeof o.n==="object"?o.n:{},b:typeof o.b==="string"?o.b:""}}catch(e){}
+const cleanWord=s=>String(s||"").replace(/[^\p{L}\p{M} '\-]/gu,"").replace(/\s+/g," ").trim().slice(0,24);
+const titleWord=s=>{const w=cleanWord(s);return w?w.charAt(0).toUpperCase()+w.slice(1):""};
+let st={s:{},m:{},n:{},b:"",late:"",real:""};
+try{const o=JSON.parse(localStorage.getItem(KEY));if(o&&o.s)st={s:o.s,m:o.m||{},n:o.n&&typeof o.n==="object"?o.n:{},b:typeof o.b==="string"?o.b:"",late:titleWord(o.late),real:titleWord(o.real)}}catch(e){}
 AREAS.forEach(a=>{const v=+st.s[a.k];st.s[a.k]=v>=1&&v<=10?v:SAMPLE[a.k]});
 NEEDS.forEach(n=>{const v=+st.n[n.k];st.n[n.k]=v>=1&&v<=5?v:0});
 if(!BELIEFS.some(b=>b.id===st.b))st.b="";
+function identityLine(){
+ if(!st.late||!st.real)return "";
+ const lo=focusAreas()[0];
+ return "This week, act like the "+st.real+"."+(lo?" Begin with "+lo.n+".":"");
+}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -820,6 +866,10 @@ function paintPrint(){
   return `<div><span class="n">${esc(n.n)}</span><span class="bar"><i style="--p:${p}%"></i></span><span class="v">${sc[n.k].toFixed(1)}</span></div>`;
  }).join("");
  $("print-need-note").textContent=belief?"A line you can keep. "+belief.r:starveCopy();
+ const id=identityLine();
+ const idEl=$("print-id");
+ if(id){idEl.hidden=false;idEl.textContent=id}
+ else{idEl.hidden=true;idEl.textContent=""}
 }
 function setScore(k,v,pulse){
  st.s[k]=v;save();paintDial(k);if(sel===k)paintDock();update(pulse);
@@ -850,17 +900,19 @@ function update(pulse){
 }
 let lastKeys="";
 function renderMoves(lo){
- const keys=lo.map(o=>o.k+o.v).join()+"|"+(st.b||"")+"|"+NEEDS.map(n=>st.n[n.k]).join();
+ const keys=lo.map(o=>o.k+o.v).join()+"|"+(st.b||"")+"|"+NEEDS.map(n=>st.n[n.k]).join()+"|"+(st.late||"")+"|"+(st.real||"");
  if(keys===lastKeys)return;lastKeys=keys;
  const belief=currentBelief();
+ const id=identityLine();
  let hourPlaced=false;
  const m=$("moves"),act=document.activeElement&&document.activeElement.id;
- m.innerHTML=lo.map(o=>{
+ m.innerHTML=lo.map((o,i)=>{
   const need=NEEDS.find(n=>n.k===PRIMARY[o.k]);
   const showHour=belief&&!hourPlaced&&belief.areas.includes(o.k);
   if(showHour)hourPlaced=true;
   const hour=showHour?`<div class="tl"><span class="when">First hour</span><p>${esc(belief.a)}</p></div>`:"";
-  return `<div class="move"><div class="top"><h3 class="caps">${o.n}</h3><span class="sc">${o.v}<span class="vh"> out of 10</span></span></div><p>${o.h}</p>${need?`<span class="need-tag">Feeds ${need.n}</span>`:""}<div class="timeline" aria-label="Suggested plan for ${o.n}">${hour}<div class="tl"><span class="when">This week</span><p>${o.w}</p></div><div class="tl"><span class="when">30 days</span><p>${o.m}</p></div><div class="tl"><span class="when">90 days</span><p>${o.qtr}</p></div></div><label for="m-${o.k}">Your note for this area</label><textarea id="m-${o.k}" placeholder="A move you would actually keep">${esc(st.m[o.k]||"")}</textarea></div>`;
+  const asYou=id&&i===0?`<div class="tl"><span class="when">As you</span><p>${esc(id)}</p></div>`:"";
+  return `<div class="move"><div class="top"><h3 class="caps">${o.n}</h3><span class="sc">${o.v}<span class="vh"> out of 10</span></span></div><p>${o.h}</p>${need?`<span class="need-tag">Feeds ${need.n}</span>`:""}<div class="timeline" aria-label="Suggested plan for ${o.n}">${hour}${asYou}<div class="tl"><span class="when">This week</span><p>${o.w}</p></div><div class="tl"><span class="when">30 days</span><p>${o.m}</p></div><div class="tl"><span class="when">90 days</span><p>${o.qtr}</p></div></div><label for="m-${o.k}">Your note for this area</label><textarea id="m-${o.k}" placeholder="A move you would actually keep">${esc(st.m[o.k]||"")}</textarea></div>`;
  }).join("");
  m.querySelectorAll("textarea").forEach(t=>t.addEventListener("input",()=>{st.m[t.id.slice(2)]=t.value;save();$("saved").textContent="Saved in this browser."}));
  if(act&&$(act)&&act.startsWith("m-"))$(act).focus();
@@ -868,9 +920,24 @@ function renderMoves(lo){
 let needStep="a",lookI=0;
 function setNeedStep(step){
  needStep=step;
- ["a","b","c","d"].forEach(s=>{const node=$("needs-"+s);if(node)node.hidden=s!==step});
+ ["a","b","c","d","e"].forEach(s=>{const node=$("needs-"+s);if(node)node.hidden=s!==step});
  if(step==="c")renderBeliefs();
  if(step==="d")paintKeep();
+ if(step==="e")paintIdentity();
+}
+function paintIdentity(){
+ const fill=(box,list,val)=>{
+  box.innerHTML=list.map(w=>`<button type="button" class="id-chip" data-id-side="${box.id==="id-late"?"late":"real"}" data-word="${esc(w)}" aria-pressed="${val===w}">${esc(w)}</button>`).join("");
+ };
+ fill($("id-late"),LATE,st.late);
+ fill($("id-real"),REAL,st.real);
+ $("id-late-own").value=st.late&&!LATE.includes(st.late)?st.late:"";
+ $("id-real-own").value=st.real&&!REAL.includes(st.real)?st.real:"";
+ const ready=!!(st.late&&st.real);
+ const lo=focusAreas()[0];
+ $("id-keep").hidden=!ready;
+ $("id-line").textContent=ready?"This week, act like the "+st.real+".":"";
+ $("id-act").textContent=ready&&lo?"Begin with "+lo.n+".":"";
 }
 function renderBeliefs(){
  $("beliefs").innerHTML=beliefChoices().map(b=>`<button type="button" class="belief" data-belief="${b.id}" aria-pressed="${st.b===b.id}">${esc(b.s)}</button>`).join("");
@@ -901,6 +968,7 @@ function paintNeeds(){
  $("need-starve").textContent=starveCopy();
  if(needStep==="c")renderBeliefs();
  if(needStep==="d")paintKeep();
+ if(needStep==="e")paintIdentity();
 }
 
 const chips=$("chips");
@@ -938,7 +1006,7 @@ $("share").onclick=async()=>{
   const inp=document.createElement("input");inp.value=url;document.body.appendChild(inp);inp.select();document.execCommand("copy");inp.remove();$("saved").textContent="Link copied.";
  }
 };
-$("reset").onclick=()=>{if(!confirm("Clear your scores and notes on this device?"))return;st={s:{...SAMPLE},m:{},n:{},b:""};NEEDS.forEach(n=>{st.n[n.k]=0});AREAS.forEach(a=>paintDial(a.k));sel=AREAS[0].k;paintDock();save();lastKeys="";$("saved").textContent="";$("need-qs").classList.remove("on");$("need-qs").innerHTML="";$("need-look").textContent="A closer look";lookI=0;setNeedStep("a");update(true)};
+$("reset").onclick=()=>{if(!confirm("Clear your scores and notes on this device?"))return;st={s:{...SAMPLE},m:{},n:{},b:"",late:"",real:""};NEEDS.forEach(n=>{st.n[n.k]=0});AREAS.forEach(a=>paintDial(a.k));sel=AREAS[0].k;paintDock();save();lastKeys="";$("saved").textContent="";$("need-qs").classList.remove("on");$("need-qs").innerHTML="";$("need-look").textContent="A closer look";lookI=0;setNeedStep("a");update(true)};
 $("need-look").onclick=()=>{
  const qs=$("need-qs");
  const on=qs.classList.toggle("on");
@@ -952,7 +1020,20 @@ $("need-look").onclick=()=>{
 };
 $("need-to-b").onclick=()=>setNeedStep("b");
 $("need-to-c").onclick=()=>setNeedStep("c");
+$("need-to-e").onclick=()=>setNeedStep("e");
 $("need-back-c").onclick=()=>setNeedStep("c");
+function setIdWord(side,word){
+ const v=titleWord(word);
+ if(side==="late")st.late=v;else st.real=v;
+ save();lastKeys="";paintIdentity();update(false);
+}
+$("needs-e").addEventListener("click",e=>{
+ const b=e.target.closest("[data-id-side]");
+ if(!b)return;
+ setIdWord(b.dataset.idSide,b.dataset.word);
+});
+$("id-late-own").addEventListener("input",()=>setIdWord("late",$("id-late-own").value));
+$("id-real-own").addEventListener("input",()=>setIdWord("real",$("id-real-own").value));
 $("need-qs").addEventListener("click",e=>{
  if(e.target.closest("[data-skip]")){lookI++;paintLookQ();$("need-qs").scrollIntoView({behavior:reduce?"auto":"smooth",block:"center"});return}
  const b=e.target.closest("[data-need]");
