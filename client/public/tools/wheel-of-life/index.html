@@ -27,7 +27,6 @@ img,svg{display:block;max-width:100%}
 .vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .caps{font-family:var(--serif);font-weight:500;text-transform:uppercase;letter-spacing:.22em;line-height:1.08;margin:0}
 .kicker{font:600 10.5px/1.4 var(--sans);letter-spacing:.32em;text-transform:uppercase;color:var(--limestone);margin:0}
-.kicker span{white-space:nowrap}
 .rule{width:44px;height:1px;background:var(--limestone);border:0;margin:18px 0;opacity:.7}
 .num{font:500 12px var(--sans);letter-spacing:.24em;color:var(--mist)}
 .quote{font:italic 400 clamp(1.45rem,4.6vw,2.05rem)/1.28 var(--serif);color:var(--ivory);max-width:13em;margin:0}
@@ -59,9 +58,7 @@ img,svg{display:block;max-width:100%}
 .hero .scene::after{z-index:2;background:linear-gradient(180deg,rgba(13,24,43,.1) 0%,transparent 20%,rgba(13,24,43,.2) 48%,rgba(13,24,43,.58) 70%,rgba(13,24,43,.92) 86%,#0D182B 100%)}
 .hero .typeback{display:none}
 .hero-in{position:relative;z-index:3;max-width:min(640px,86%)}
-.hero .kicker{display:flex;flex-direction:column;align-items:flex-start;gap:.42em;font-size:9.5px;letter-spacing:.16em;line-height:1.3}
-.hero .kicker span{display:block}
-.hero .kicker span.kicker-sep{display:none}
+.hero .kicker{font-size:9.5px;letter-spacing:.16em;line-height:1.3;white-space:nowrap}
 .hero .rule{margin:10px 0}
 .hero h1{font-size:clamp(1.7rem,6.8vw,4.4rem);letter-spacing:.1em}
 .hero h1 small{display:block;font-size:.3em;letter-spacing:.46em;margin-bottom:.32em;color:var(--mist)}
@@ -76,12 +73,13 @@ img,svg{display:block;max-width:100%}
   -webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);
   mask-image:linear-gradient(180deg,#000 62%,transparent 100%)
  }
+ .hero-in{position:static}
+ .hero .kicker{position:absolute;left:0;right:0;top:72px;z-index:4;margin:0;padding:0 20px;text-align:center;letter-spacing:.22em}
+ .hero-in>.rule:first-of-type{display:none}
 }
 @media(min-width:700px){
  .hero-in{max-width:640px}
- .hero .kicker{flex-direction:row;flex-wrap:nowrap;align-items:center;gap:.7em;font-size:10.5px;letter-spacing:.32em;line-height:1.4;white-space:nowrap}
- .hero .kicker span{display:inline}
- .hero .kicker span.kicker-sep{display:inline}
+ .hero .kicker{font-size:10.5px;letter-spacing:.32em;line-height:1.4}
  .hero .rule{margin:18px 0}
  .hero h1{font-size:clamp(2.1rem,7.4vw,4.4rem);letter-spacing:.16em}
  .hero h1 small{letter-spacing:.5em;margin-bottom:.6em}
@@ -374,7 +372,7 @@ footer .in{max-width:1100px;margin:0 auto}
 <section class="hero" aria-labelledby="h-hero">
  <div class="scene" aria-hidden="true"><img src="assets/hero-chrysler.jpg" alt="" fetchpriority="high"></div>
  <div class="hero-in">
-  <p class="kicker rv"><span>Interactive Tool</span><span class="kicker-sep" aria-hidden="true">/</span><span>A personal check-in</span></p>
+  <p class="kicker rv">Interactive Tool</p>
   <hr class="rule rv d1">
   <h1 id="h-hero" class="caps rv d1"><small>The</small>Wheel of Life</h1>
   <hr class="rule rv d2">
