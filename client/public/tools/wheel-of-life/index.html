@@ -44,10 +44,38 @@ img,svg{display:block;max-width:100%}
 .typeback span{display:block;white-space:nowrap}
 .typeback span+span{margin-top:.18em;font-size:.42em;letter-spacing:.46em;color:rgba(216,209,199,.07)}
 
-.mast{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;justify-content:flex-start;padding:18px clamp(18px,4vw,48px)}
-.mast a{display:flex;align-items:center;color:var(--ivory);text-decoration:none}
+.mast{position:absolute;top:0;left:0;right:0;z-index:36;display:flex;align-items:center;justify-content:flex-start;padding:18px clamp(18px,4vw,48px)}
+.mast-mark{display:flex;align-items:center;color:var(--ivory);text-decoration:none}
 .mast img{width:28px;height:auto}
-@media(max-width:699px){.mast{justify-content:center}}
+.menu-toggle{margin-left:auto;position:relative;z-index:37;width:44px;height:44px;border:0;padding:0;background:transparent;cursor:pointer;color:inherit;-webkit-tap-highlight-color:transparent}
+.menu-toggle:focus-visible{outline:2px solid var(--platinum);outline-offset:4px}
+.menu-mark{position:relative;display:block;width:44px;height:44px}
+.menu-mark i{position:absolute;left:8px;height:3px;border-radius:999px;background:linear-gradient(90deg,#F4F4F2 0%,#E5E4E2 52%,#C8CACD 100%);box-shadow:0 0 .5px rgba(232,232,230,.35);transform-origin:center;transition:transform .3s cubic-bezier(.2,.7,.2,1),width .3s cubic-bezier(.2,.7,.2,1),opacity .3s cubic-bezier(.2,.7,.2,1),top .3s cubic-bezier(.2,.7,.2,1)}
+.menu-mark i:nth-child(1){top:11px;width:24px}
+.menu-mark i:nth-child(2){top:20.5px;width:14px}
+.menu-mark i:nth-child(3){top:30px;width:20px}
+.menu-toggle[aria-expanded="true"] .menu-mark i:nth-child(1){top:20.5px;width:24px;transform:rotate(45deg)}
+.menu-toggle[aria-expanded="true"] .menu-mark i:nth-child(2){top:20.5px;width:14px;opacity:0}
+.menu-toggle[aria-expanded="true"] .menu-mark i:nth-child(3){top:20.5px;width:24px;transform:rotate(-45deg)}
+.field-menu{position:fixed;inset:0;z-index:32;background:rgba(22,28,40,.97);overflow:auto;padding:88px clamp(20px,5vw,48px) 56px;color:var(--ivory)}
+.field-menu[hidden]{display:none!important}
+.field-menu a,.field-menu button{color:inherit;font:inherit;text-align:left}
+.field-menu .doors{margin:0;padding:0;list-style:none;max-width:36em}
+.field-menu .door{border-bottom:1px solid rgba(245,242,235,.08)}
+.field-menu .door>a,.field-menu .fold{display:flex;width:100%;align-items:center;justify-content:space-between;padding:14px 0;background:transparent;border:0;cursor:pointer;text-decoration:none;font-size:1.2rem;letter-spacing:.01em}
+.field-menu .fold span[aria-hidden]{font-size:1.35rem;font-weight:300;line-height:1;color:rgba(245,242,235,.6)}
+.field-menu .kids{padding:0 0 12px}
+.field-menu .kids a{display:block;padding:10px 0;text-decoration:none;font-size:15px;color:rgba(245,242,235,.74)}
+.field-menu .branch{margin:0}
+.field-menu .branch>button{display:flex;width:100%;align-items:center;justify-content:space-between;padding:10px 0;background:transparent;border:0;cursor:pointer;font-size:15px;color:rgba(245,242,235,.78)}
+.field-menu .branch .deep{margin:0;padding:0 0 6px 16px;border-left:1px solid rgba(245,242,235,.12)}
+.field-menu .branch .deep a{font-size:14px;color:rgba(245,242,235,.62);padding:8px 0}
+.field-menu .guidance{display:inline-flex;margin-top:28px;padding:10px 20px;border:1px solid rgba(245,242,235,.18);color:var(--ivory);text-decoration:none;font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase}
+body.menu-on{overflow:hidden}
+@media(max-width:699px){
+ .mast{justify-content:center}
+ .menu-toggle{position:absolute;right:clamp(10px,4vw,18px);top:50%;margin:0;transform:translateY(-50%)}
+}
 
 .hero{position:relative;min-height:clamp(640px,100svh,980px);display:flex;align-items:flex-end;padding:0 clamp(20px,6vw,80px) clamp(32px,6vh,72px);background:#0D182B}
 .hero .scene{background:#0D182B}
@@ -261,6 +289,11 @@ body.dock-on{padding-bottom:176px}
 
 footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px) 120px;font-size:.8rem;text-align:center}
 footer .in{max-width:1100px;margin:0 auto}
+footer .site-exit{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:0 0 28px}
+footer .site-exit a{color:var(--limestone);text-decoration:none;font:600 10.5px var(--sans);letter-spacing:.22em;text-transform:uppercase}
+footer .site-exit a:hover{color:var(--ivory)}
+footer .wordmark{margin:22px 0 0}
+footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--sans);letter-spacing:.28em;text-transform:uppercase}
 .report{font:500 11px var(--sans);letter-spacing:.42em;text-transform:uppercase;color:var(--ivory);margin:0 0 8px}
 .intel{font:500 9.5px var(--sans);letter-spacing:.36em;text-transform:uppercase;color:var(--limestone);margin:0 0 22px}
 .credit{opacity:.62;font-size:.72rem;max-width:46em;margin:16px auto 0}
@@ -276,6 +309,7 @@ footer .in{max-width:1100px;margin:0 auto}
  @page{size:auto;margin:.5in}
  html,body{background:#d8d2c6!important;color:#1c1914;width:100%;height:100%;max-width:100%;margin:0;padding:0!important}
  body>*{display:none!important}
+ .menu-toggle,.field-menu,footer .site-exit,footer .wordmark{display:none!important}
  .print-doc,.print-doc *{box-sizing:border-box}
  .print-doc{display:block!important;width:100%;max-width:100%;height:auto;overflow:hidden;color:#1c1914;font:400 10pt/1.35 var(--serif)}
  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -362,8 +396,79 @@ footer .in{max-width:1100px;margin:0 auto}
 <div class="grain" aria-hidden="true"></div>
 
 <header class="mast">
- <a href="/" aria-label="Agent Kammer home"><img src="assets/ak-monogram.png" alt="" width="28" height="30"></a>
+ <a class="mast-mark" href="/" aria-label="Agent Kammer home"><img src="assets/ak-monogram.png" alt="" width="28" height="30"></a>
+ <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="field-menu">
+  <span class="menu-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+ </button>
 </header>
+<div class="field-menu" id="field-menu" hidden>
+ <nav class="doors" aria-label="Site">
+  <div class="door"><a href="/">Home</a></div>
+  <div class="door">
+   <button class="fold" type="button" data-fold="fold-start" aria-expanded="false">Start Here<span aria-hidden="true">+</span></button>
+   <div class="kids" id="fold-start" hidden>
+    <a href="/situations">All situations</a>
+    <a href="/situations/executive-relocation-nyc">Executive Relocation</a>
+    <a href="/situations/first-home-buyers-nyc">First Home</a>
+    <a href="/situations/new-baby-growing-family-nyc">Growing Family</a>
+    <a href="/situations/marriage-housing-nyc">Marriage</a>
+    <a href="/situations/retiree-senior-home-buyers-nyc">Retirement</a>
+    <a href="/situations/empty-nester-downsizing-nyc">Empty Nest</a>
+    <a href="/situations/aging-parents-housing-nyc">Aging Parents</a>
+    <a href="/situations/inheritance-housing-nyc">Inheritance</a>
+    <a href="/situations/divorce-property-sales-nyc">Divorce</a>
+    <a href="/situations/remote-work-housing-nyc">Remote Work</a>
+    <a href="/situations/job-loss-housing-nyc">Job Change</a>
+    <a href="/international">International Move</a>
+   </div>
+  </div>
+  <div class="door">
+   <button class="fold" type="button" data-fold="fold-guides" aria-expanded="false">Guides<span aria-hidden="true">+</span></button>
+   <div class="kids" id="fold-guides" hidden>
+    <a href="/guides">All Guides</a>
+    <a href="/resources">Resource Hub</a>
+    <a href="/resources#field-guides">Field Guides</a>
+    <a href="/resources#assessments">Property Assessments</a>
+    <div class="branch">
+     <button type="button" data-fold="fold-nbhds" aria-expanded="false">Neighborhoods<span aria-hidden="true">+</span></button>
+     <div class="deep" id="fold-nbhds" hidden>
+      <a href="/guides#neighborhoods">All Neighborhoods</a>
+      <a href="/situations/upper-west-side-buyers-nyc">Upper West Side</a>
+      <a href="/situations/upper-east-side-buyers-nyc">Upper East Side</a>
+      <a href="/situations/tribeca-buyers-nyc">Tribeca</a>
+      <a href="/situations/chelsea-buyers-nyc">Chelsea</a>
+      <a href="/situations/hudson-yards-buyers-nyc">Hudson Yards</a>
+      <a href="/situations/financial-district-buyers-nyc">Financial District</a>
+     </div>
+    </div>
+    <a href="/guides/real-estate-ownership">How Real Estate Ownership Works</a>
+    <a href="/situations/condo-vs-coop">Condo vs Co-op</a>
+    <a href="/situations/coop-condo-condop-terms">Co-op, Condo &amp; Condop Terms</a>
+    <a href="/guides/real-estate-deeds">How Real Estate Deeds Work</a>
+    <a href="/guides/how-mortgages-work">How Mortgages Work</a>
+    <a href="/guides/fixed-rate-mortgage">Fixed-Rate Mortgage</a>
+    <a href="/guides/adjustable-rate-mortgage">ARM &amp; Fixed vs ARM</a>
+    <a href="/guides/mortgage-clauses">Mortgage Clauses &amp; Key Terms</a>
+    <a href="/guides/manhattan-explained">Manhattan Explained</a>
+    <a href="/guides/liens-easements">Liens, Easements &amp; Related Concepts</a>
+    <a href="/guides/how-to-buy-in-nyc.html">How to buy in NYC</a>
+    <a href="/guides/how-wealth-is-held.html">How wealth is held</a>
+    <a href="/guides/international-buyer-hub.html">International Buyer Hub Guide</a>
+    <a href="/guides/building-terms">The Grammar of a Building</a>
+   </div>
+  </div>
+  <div class="door">
+   <button class="fold" type="button" data-fold="fold-tools" aria-expanded="true">Interactive Tools<span aria-hidden="true">−</span></button>
+   <div class="kids" id="fold-tools">
+    <a href="/tools">All tools</a>
+    <a href="/calculator">Calculator</a>
+    <a href="/tools/wheel-of-life/">Wheel of Life</a>
+   </div>
+  </div>
+  <div class="door"><a href="/contact">Contact</a></div>
+  <a class="guidance" href="/">Guidance</a>
+ </nav>
+</div>
 
 <main id="main">
 <section class="hero" aria-labelledby="h-hero">
@@ -518,9 +623,14 @@ footer .in{max-width:1100px;margin:0 auto}
 
 <footer>
  <div class="in">
+  <nav class="site-exit" aria-label="Leave this tool">
+   <a href="/">Home</a>
+   <a href="/tools">Interactive Tools</a>
+  </nav>
   <p class="report">Interactive Tool</p>
   <p class="intel">Manhattan Residential Intelligence</p>
   <p>Educational content only. For personal reflection. Answers stay in this browser.</p>
+  <p class="wordmark"><a href="/" aria-label="Agent Kammer home">agentkammer.com</a></p>
   <p class="credit">Cinematic stills created for this interactive tool. Manhattan prewar architecture at night.</p>
  </div>
 </footer>
@@ -1022,6 +1132,30 @@ AREAS.forEach(a=>{
 $("dock-r").addEventListener("input",()=>setScore(sel,+$("dock-r").value,true));
 document.querySelectorAll(".mm-rules").forEach(n=>{n.innerHTML="<i></i>".repeat(56)});
 AREAS.forEach(a=>paintDial(a.k));paintDock();update(false);
+
+(function(){
+ const tog=$("menu-toggle"), panel=$("field-menu");
+ if(!tog||!panel)return;
+ const setMenu=on=>{
+  tog.setAttribute("aria-expanded",on?"true":"false");
+  tog.setAttribute("aria-label",on?"Close menu":"Open menu");
+  panel.hidden=!on;
+  document.body.classList.toggle("menu-on",on);
+ };
+ tog.addEventListener("click",()=>setMenu(tog.getAttribute("aria-expanded")!=="true"));
+ document.addEventListener("keydown",e=>{if(e.key==="Escape")setMenu(false)});
+ panel.querySelectorAll("[data-fold]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+   const box=$(btn.getAttribute("data-fold"));
+   if(!box)return;
+   const open=box.hidden;
+   box.hidden=!open;
+   btn.setAttribute("aria-expanded",open?"true":"false");
+   const mark=btn.querySelector("[aria-hidden]");
+   if(mark)mark.textContent=open?"−":"+";
+  });
+ });
+})();
 
 const rvs=document.querySelectorAll(".rv");
 if(reduce||!("IntersectionObserver" in window)){rvs.forEach(e=>e.classList.add("in"))}
