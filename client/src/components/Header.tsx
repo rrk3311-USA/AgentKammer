@@ -1,11 +1,8 @@
 import { Link, useLocation } from "wouter";
-import {
-  Menu,
-  X,
-} from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { AgentKammerHorizontalLogo } from "@/components/AgentKammerHorizontalLogo";
 import { MobileFieldMenu } from "@/components/MobileFieldMenu";
+import { MobileMenuToggle } from "@/components/MobileMenuToggle";
 import { cn } from "@/lib/utils";
 import { primaryNav } from "@/components/site-shell";
 import { PUBLIC_PRODUCTS } from "@/data/public-menu";
@@ -116,14 +113,10 @@ export function Header() {
               {PUBLIC_PRODUCTS.guidance.label}
             </button>
           </div>
-          <button
-            onClick={() => setMobileMenuOpen((open) => !open)}
-            className={cn("text-brand-ivory lg:hidden", focusRing)}
-            aria-label="Toggle menu"
-            data-testid="button-mobile-menu"
-          >
-            {mobileMenuOpen ? <X className="h-5 w-5" strokeWidth={1.5} /> : <Menu className="h-5 w-5" strokeWidth={1.5} />}
-          </button>
+          <MobileMenuToggle
+            open={mobileMenuOpen}
+            onToggle={() => setMobileMenuOpen((open) => !open)}
+          />
         </div>
       </div>
 
