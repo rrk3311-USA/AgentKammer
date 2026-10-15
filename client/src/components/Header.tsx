@@ -1,6 +1,7 @@
 import { Link, useLocation } from "wouter";
 import React, { useEffect, useState } from "react";
 import { AgentKammerHorizontalLogo } from "@/components/AgentKammerHorizontalLogo";
+import { CompactSiteHeader } from "@/components/CompactSiteHeader";
 import { MobileFieldMenu } from "@/components/MobileFieldMenu";
 import { MobileMenuToggle } from "@/components/MobileMenuToggle";
 import { cn } from "@/lib/utils";
@@ -37,7 +38,7 @@ function isPrimaryNavActive(href: string, location: string) {
 const headerGuidanceClass =
   "ak-call-button ak-call-button--no-stripe inline-flex items-center px-5 py-2.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-brand-ivory";
 
-export function Header() {
+export function Header({ compact = false }: { compact?: boolean } = {}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [location] = useLocation();
@@ -61,6 +62,8 @@ export function Header() {
       document.body.style.overflow = previous;
     };
   }, [mobileMenuOpen]);
+
+  if (compact) return <CompactSiteHeader />;
 
   return (
     <header

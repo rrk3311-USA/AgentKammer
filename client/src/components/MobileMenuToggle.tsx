@@ -16,16 +16,19 @@ const bar = cn(
 export function MobileMenuToggle({
   open,
   onToggle,
+  alwaysShow = false,
 }: {
   open: boolean;
   onToggle: () => void;
+  alwaysShow?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onToggle}
       className={cn(
-        "relative flex h-11 w-11 shrink-0 items-center justify-center lg:hidden",
+        "relative flex h-11 w-11 shrink-0 items-center justify-center",
+        alwaysShow ? null : "lg:hidden",
         focusRing,
       )}
       aria-label={open ? "Close menu" : "Open menu"}
