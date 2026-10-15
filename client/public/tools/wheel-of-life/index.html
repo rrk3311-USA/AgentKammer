@@ -288,7 +288,8 @@ body.dock-on{padding-bottom:176px}
 .id-keep{margin-top:20px;padding-top:16px;border-top:1px solid #d8cfbd}
 .id-keep[hidden]{display:none!important}
 
-footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px) 120px;font-size:.8rem;text-align:center}
+footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px) calc(176px + 64px);font-size:.8rem;text-align:center}
+@media(min-width:760px){footer{padding-bottom:calc(196px + 72px)}}
 footer .in{max-width:1100px;margin:0 auto}
 footer .site-exit{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:0 0 28px}
 footer .site-exit a{color:var(--limestone);text-decoration:none;font:600 10.5px var(--sans);letter-spacing:.22em;text-transform:uppercase}
