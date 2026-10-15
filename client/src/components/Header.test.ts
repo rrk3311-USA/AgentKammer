@@ -29,7 +29,8 @@ describe("sticky public header", () => {
     expect(html).toContain("xl:px-10");
     expect(html).toContain("h-11 w-11");
     expect(html).toContain("data-testid=\"button-mobile-menu\"");
-    expect(html).toContain("border-[#D8D1C7]/80");
+    expect(html).toContain("#E5E4E2");
+    expect(html).not.toContain("border-[#D8D1C7]/80");
     expect(html).not.toContain("h-5 w-5");
     expect(html).toContain("justify-self-start");
   });
