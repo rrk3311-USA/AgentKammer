@@ -4,7 +4,7 @@
    Height is 52px. AK left, platinum hamburger right, field menu below the bar. */
 :root{
   --ak-compact-header-h:52px;
-  --ak-compact-midnight:rgba(13,24,43,.92);
+  --ak-compact-midnight:#0D182B;
   --ak-compact-ink:#161C28;
   --ak-compact-ivory:#F5F2EB;
   --ak-compact-platinum:#E5E4E2;
@@ -16,10 +16,8 @@
   width:100%;
   color:var(--ak-compact-ivory);
   isolation:isolate;
-  background:rgba(13,24,43,.96);
-  backdrop-filter:saturate(1.08) blur(14px);
-  -webkit-backdrop-filter:saturate(1.08) blur(14px);
-  border-bottom:1px solid rgba(245,242,235,.08);
+  background:var(--ak-compact-midnight);
+  border-bottom:1px solid rgba(245,242,235,.1);
   font-family:Montserrat,system-ui,sans-serif;
 }
 .ak-compact-header--overlay{
