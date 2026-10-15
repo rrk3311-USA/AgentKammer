@@ -44,12 +44,10 @@ img,svg{display:block;max-width:100%}
 .typeback span{display:block;white-space:nowrap}
 .typeback span+span{margin-top:.18em;font-size:.42em;letter-spacing:.46em;color:rgba(216,209,199,.07)}
 
-.mast{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(18px,4vw,48px)}
-.mast a{display:flex;align-items:center;gap:12px;color:var(--ivory);text-decoration:none}
+.mast{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;justify-content:flex-start;padding:18px clamp(18px,4vw,48px)}
+.mast a{display:flex;align-items:center;color:var(--ivory);text-decoration:none}
 .mast img{width:28px;height:auto}
-.mast span{font:600 10.5px var(--sans);letter-spacing:.3em;text-transform:uppercase}
-.mast em{font:italic 15px var(--serif);color:var(--mist);display:none}
-@media(min-width:700px){.mast em{display:block}}
+@media(max-width:699px){.mast{justify-content:center}}
 
 .hero{position:relative;min-height:clamp(640px,100svh,980px);display:flex;align-items:flex-end;padding:0 clamp(20px,6vw,80px) clamp(32px,6vh,72px);background:#0D182B}
 .hero .scene{background:#0D182B}
@@ -364,8 +362,7 @@ footer .in{max-width:1100px;margin:0 auto}
 <div class="grain" aria-hidden="true"></div>
 
 <header class="mast">
- <a href="https://agentkammer.com" aria-label="Agent Kammer home"><img src="assets/ak-monogram.png" alt="" width="28" height="30"><span>Agent Kammer</span></a>
- <em>Live where you belong.</em>
+ <a href="/" aria-label="Agent Kammer home"><img src="assets/ak-monogram.png" alt="" width="28" height="30"></a>
 </header>
 
 <main id="main">
