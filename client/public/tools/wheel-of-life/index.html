@@ -171,7 +171,11 @@ body.dock-on{padding-bottom:176px}
 .tl{display:grid;grid-template-columns:88px minmax(0,1fr);gap:12px;align-items:start}
 .tl .when{font:600 10px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--stone-blue);padding-top:4px}
 .tl p{margin:0;color:#4c5465;font-size:.95rem}
-.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.print-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px;margin:22px 0 0;max-width:28em}
+.print-meta label{display:block;font:600 10.5px/1.4 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--stone-blue)}
+.print-meta input{display:block;width:100%;margin-top:6px;font:italic 1.05rem/1.3 var(--serif);color:var(--deep);background:rgba(255,255,255,.55);border:1px solid #d8cfbd;padding:8px 12px}
+.print-meta input::placeholder{color:#9a9182}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
 .btn{font:600 11px var(--sans);letter-spacing:.24em;text-transform:uppercase;padding:15px 22px;min-height:46px;border:1px solid var(--deep);background:var(--deep);color:var(--ivory);cursor:pointer;transition:background .25s,color .25s}
 .btn:hover{background:var(--stone-blue)}
 .btn.ghost{background:transparent;color:var(--deep)}
@@ -259,10 +263,15 @@ footer .in{max-width:1100px;margin:0 auto}
  .print-page .mm-frame .c.br{bottom:1.15mm;right:1.15mm;border-bottom-width:.95pt;border-right-width:.95pt}
  .print-hud{break-after:page;page-break-after:always}
  .print-plan{break-after:auto;page-break-after:auto}
- .mm-head{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:4mm;padding:0 0 3mm;margin:0 0 4mm;border-bottom:.4pt solid #B8BCC2;width:100%}
- .mm-brand{display:flex;align-items:center;gap:3.4mm;min-width:0}
+ .mm-head{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:flex-end;column-gap:4mm;padding:0 0 3mm;margin:0 0 4mm;border-bottom:.4pt solid #B8BCC2;width:100%}
+ .mm-brand{display:flex;align-items:flex-end;gap:3.4mm;min-width:0}
  .mm-ak{display:block;width:22pt;height:auto;margin:0;flex:0 0 auto;filter:brightness(0) saturate(100%) invert(16%) sepia(14%) saturate(1042%) hue-rotate(182deg) brightness(94%) contrast(91%)}
- .mm-name{margin:0;font:600 7.4pt/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:#161c28}
+ .mm-doc{margin:0;padding:0;font:600 7.4pt/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#161c28}
+ .mm-right{text-align:right;min-width:0}
+ .mm-who{margin:0;font:italic 400 10pt/1.15 var(--serif);color:#161c28}
+ .mm-when{margin:.7mm 0 0;font:600 5.6pt/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#2a3447}
+ .mm-who[hidden],.mm-when[hidden]{display:none!important}
+ .mm-who+.mm-folio,.mm-when+.mm-folio{margin-top:1.2mm}
  .mm-folio{margin:0;text-align:right;font:600 5.6pt/1 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:#2a3447}
  .mm-strip{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;margin:0 0 4mm;background:#f7f3ea;border:.45pt solid #B8BCC2}
  .print-plan .mm-strip{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -375,6 +384,10 @@ footer .in{max-width:1100px;margin:0 auto}
    <div>
     <div class="moves" id="moves"></div>
     <p class="saved" id="saved" aria-live="polite"></p>
+    <div class="print-meta" id="print-meta">
+     <label for="meta-name">Name<input id="meta-name" type="text" maxlength="48" autocomplete="name" placeholder="Optional"></label>
+     <label for="meta-day">Date<input id="meta-day" type="text" maxlength="40" autocomplete="off"></label>
+    </div>
     <div class="actions">
      <button class="btn" id="print" type="button">Print or save as PDF</button>
      <button class="btn ghost" id="share" type="button">Share</button>
@@ -494,9 +507,13 @@ footer .in{max-width:1100px;margin:0 auto}
   <header class="mm-head">
    <div class="mm-brand">
     <img class="mm-ak" src="assets/ak-monogram.png" alt="" width="40" height="43">
-    <p class="mm-name">Agent Kammer</p>
+    <p class="mm-doc">Wheel of Life</p>
    </div>
-   <p class="mm-folio">01 / 02</p>
+   <div class="mm-right">
+    <p class="mm-who" id="print-who" hidden></p>
+    <p class="mm-when" id="print-when" hidden></p>
+    <p class="mm-folio">01 / 02</p>
+   </div>
   </header>
   <div class="mm-strip" aria-label="Check-in snapshot">
    <div><span class="k">Average</span><span class="v" id="print-avg"></span></div>
@@ -542,7 +559,7 @@ footer .in{max-width:1100px;margin:0 auto}
   <header class="mm-head">
    <div class="mm-brand">
     <img class="mm-ak" src="assets/ak-monogram.png" alt="" width="40" height="43">
-    <p class="mm-name">Agent Kammer</p>
+    <p class="mm-doc">Wheel of Life</p>
    </div>
    <p class="mm-folio">02 / 02</p>
   </header>
@@ -630,8 +647,11 @@ const REAL=["Builder","Steady","Generous","Curious","Leader"];
 const KEY="ak-wheel-of-life-v3";
 const cleanWord=s=>String(s||"").replace(/[^\p{L}\p{M} '\-]/gu,"").replace(/\s+/g," ").trim().slice(0,24);
 const titleWord=s=>{const w=cleanWord(s);return w?w.charAt(0).toUpperCase()+w.slice(1):""};
-let st={s:{},m:{},n:{},b:"",late:"",real:""};
-try{const o=JSON.parse(localStorage.getItem(KEY));if(o&&o.s)st={s:o.s,m:o.m||{},n:o.n&&typeof o.n==="object"?o.n:{},b:typeof o.b==="string"?o.b:"",late:titleWord(o.late),real:titleWord(o.real)}}catch(e){}
+const todayLong=()=>new Date().toLocaleDateString(undefined,{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+const cleanName=s=>String(s||"").replace(/[<>]/g,"").replace(/\s+/g," ").trim().slice(0,48);
+let st={s:{},m:{},n:{},b:"",late:"",real:"",nm:"",day:""};
+try{const o=JSON.parse(localStorage.getItem(KEY));if(o&&o.s)st={s:o.s,m:o.m||{},n:o.n&&typeof o.n==="object"?o.n:{},b:typeof o.b==="string"?o.b:"",late:titleWord(o.late),real:titleWord(o.real),nm:cleanName(o.nm),day:typeof o.day==="string"?o.day.trim().slice(0,40):""}}catch(e){}
+if(!st.day)st.day=todayLong();
 AREAS.forEach(a=>{const v=+st.s[a.k];st.s[a.k]=v>=1&&v<=10?v:SAMPLE[a.k]});
 NEEDS.forEach(n=>{const v=+st.n[n.k];st.n[n.k]=v>=1&&v<=5?v:0});
 if(!BELIEFS.some(b=>b.id===st.b))st.b="";
@@ -862,6 +882,10 @@ function paintPrint(){
  const idEl=$("print-id");
  if(id){idEl.hidden=false;idEl.textContent=id}
  else{idEl.hidden=true;idEl.textContent=""}
+ const who=cleanName(st.nm),when=String(st.day||"").trim();
+ const whoEl=$("print-who"),whenEl=$("print-when");
+ if(who){whoEl.hidden=false;whoEl.textContent=who}else{whoEl.hidden=true;whoEl.textContent=""}
+ if(when){whenEl.hidden=false;whenEl.textContent=when}else{whenEl.hidden=true;whenEl.textContent=""}
 }
 function setScore(k,v,pulse){
  st.s[k]=v;save();paintDial(k);if(sel===k)paintDock();update(pulse);
@@ -985,7 +1009,11 @@ if("IntersectionObserver" in window){
 }else vis(false)
 $("toPersp").addEventListener("click",e=>{e.preventDefault();$("perspective").scrollIntoView({behavior:reduce?"auto":"smooth"});$("perspective").focus({preventScroll:true})});
 
-$("print").onclick=()=>{document.querySelectorAll("textarea[id^='m-']").forEach(t=>{st.m[t.id.slice(2)]=t.value});save();paintPrint();window.print()};
+$("meta-name").value=st.nm||"";
+$("meta-day").value=st.day||"";
+$("meta-name").addEventListener("input",()=>{st.nm=cleanName($("meta-name").value);save();paintPrint()});
+$("meta-day").addEventListener("input",()=>{st.day=$("meta-day").value.trim().slice(0,40);save();paintPrint()});
+$("print").onclick=()=>{document.querySelectorAll("textarea[id^='m-']").forEach(t=>{st.m[t.id.slice(2)]=t.value});st.nm=cleanName($("meta-name").value);st.day=$("meta-day").value.trim().slice(0,40);save();paintPrint();window.print()};
 window.addEventListener("beforeprint",()=>{document.querySelectorAll("textarea[id^='m-']").forEach(t=>{st.m[t.id.slice(2)]=t.value});save();paintPrint()});
 $("share").onclick=async()=>{
  const url=location.href.split("#")[0],title="The Wheel of Life",text="A ten-minute check-in on how the week actually feels.";
@@ -998,7 +1026,7 @@ $("share").onclick=async()=>{
   const inp=document.createElement("input");inp.value=url;document.body.appendChild(inp);inp.select();document.execCommand("copy");inp.remove();$("saved").textContent="Link copied.";
  }
 };
-$("reset").onclick=()=>{if(!confirm("Clear your scores and notes on this device?"))return;st={s:{...SAMPLE},m:{},n:{},b:"",late:"",real:""};NEEDS.forEach(n=>{st.n[n.k]=0});AREAS.forEach(a=>paintDial(a.k));sel=AREAS[0].k;paintDock();save();lastKeys="";$("saved").textContent="";$("need-qs").classList.remove("on");$("need-qs").innerHTML="";$("need-look").textContent="A closer look";lookI=0;setNeedStep("a");update(true)};
+$("reset").onclick=()=>{if(!confirm("Clear your scores and notes on this device?"))return;st={s:{...SAMPLE},m:{},n:{},b:"",late:"",real:"",nm:"",day:todayLong()};NEEDS.forEach(n=>{st.n[n.k]=0});AREAS.forEach(a=>paintDial(a.k));sel=AREAS[0].k;paintDock();$("meta-name").value="";$("meta-day").value=st.day;save();lastKeys="";$("saved").textContent="";$("need-qs").classList.remove("on");$("need-qs").innerHTML="";$("need-look").textContent="A closer look";lookI=0;setNeedStep("a");update(true)};
 $("need-look").onclick=()=>{
  const qs=$("need-qs");
  const on=qs.classList.toggle("on");
