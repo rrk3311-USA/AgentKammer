@@ -1,3 +1,4 @@
+import React from "react";
 import { cn } from "@/lib/utils";
 import { AkMonogramMark } from "@/components/AkMonogramMark";
 
@@ -28,7 +29,7 @@ export function AgentKammerHorizontalLogo({
     <div
       className={cn(
         "flex shrink-0",
-        stacked ? "flex-col items-start gap-4" : "items-center gap-3",
+        stacked ? "flex-col items-start gap-4" : headerStyle ? "items-center gap-2.5 sm:gap-3" : "items-center gap-3",
         className,
       )}
       aria-label="Agent Kammer"
@@ -37,7 +38,7 @@ export function AgentKammerHorizontalLogo({
         <AkMonogramMark
           variant={markVariant}
           className={cn(
-            stacked ? "h-14 sm:h-16" : headerStyle ? "h-12 sm:h-[3.25rem] xl:h-[3.75rem]" : "h-9 sm:h-10 xl:h-11",
+            stacked ? "h-14 sm:h-16" : headerStyle ? "h-[2.55rem] sm:h-[3.25rem] xl:h-[3.75rem]" : "h-9 sm:h-10 xl:h-11",
           )}
         />
       ) : null}
@@ -50,7 +51,7 @@ export function AgentKammerHorizontalLogo({
               : wordmarkOnly
                 ? "text-[1rem] tracking-[0.28em] sm:text-[1.08rem] xl:text-[1.16rem]"
                 : headerStyle
-                  ? "text-[1.45rem] tracking-[0.12em] sm:text-[1.75rem] xl:text-[2.1rem]"
+                  ? "text-[1.23rem] tracking-[0.12em] sm:text-[1.75rem] xl:text-[2.1rem]"
                   : "text-[0.82rem] tracking-[0.24em] sm:text-[0.9rem] xl:text-[0.96rem]",
             textTone,
           )}
