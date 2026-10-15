@@ -93,9 +93,11 @@ function Branch({
 export function MobileFieldMenu({
   location,
   onClose,
+  allBreakpoints = false,
 }: {
   location: string;
   onClose: () => void;
+  allBreakpoints?: boolean;
 }) {
   const [openId, setOpenId] = useState<string | null>(() => defaultOpenSectionId(location));
 
@@ -103,11 +105,22 @@ export function MobileFieldMenu({
     setOpenId(defaultOpenSectionId(location));
   }, [location]);
 
+  const compact = allBreakpoints;
+  const shellMin = compact
+    ? "min-h-[calc(100dvh-3.25rem)] sm:min-h-[calc(100dvh-3.25rem)]"
+    : "min-h-[calc(100dvh-4rem)] sm:min-h-[calc(100dvh-4.75rem)] lg:hidden";
+  const navMax = compact
+    ? "max-h-[calc(100dvh-3.25rem)] sm:max-h-[calc(100dvh-3.25rem)]"
+    : "max-h-[calc(100dvh-4rem)] sm:max-h-[calc(100dvh-4.75rem)]";
+
   return (
-    <div className="ak-header-shell min-h-[calc(100dvh-4rem)] border-t border-brand-brass/30 sm:min-h-[calc(100dvh-4.75rem)] lg:hidden">
+    <div className={cn("ak-header-shell border-t border-brand-brass/30", shellMin)}>
       <nav
         aria-label="Field"
-        className="mx-auto flex max-h-[calc(100dvh-4rem)] w-full max-w-site flex-col overflow-y-auto px-4 pb-10 pt-2 sm:max-h-[calc(100dvh-4.75rem)] sm:px-6"
+        className={cn(
+          "mx-auto flex w-full max-w-site flex-col overflow-y-auto px-4 pb-10 pt-2 sm:px-6",
+          navMax,
+        )}
       >
         {mobileFieldNav.map((section) => {
           const expandable = Boolean(section.children?.length);

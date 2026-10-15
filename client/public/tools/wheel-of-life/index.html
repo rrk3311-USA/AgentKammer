@@ -11,6 +11,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/hero-chrysler.jpg">
+<link rel="stylesheet" href="/chrome/compact-header.css">
+<script src="/chrome/compact-header.js" defer></script>
 <style>
 :root{
  --stone-blue:#2A3447;--deep:#161C28;--midnight:#202735;--ivory:#F5F2EB;--limestone:#D8D1C7;
@@ -18,8 +20,8 @@
  --serif:"Cormorant Garamond","Playfair Display",Georgia,serif;--sans:Montserrat,system-ui,sans-serif;
  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/1999/xhtml' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{margin:0;background:var(--deep);color:var(--ivory);font:400 16px/1.65 var(--sans)}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--deep);color:var(--ivory);font:400 16px/1.65 var(--sans);max-width:100%;overflow-x:clip}
 img,svg{display:block;max-width:100%}
 :focus-visible{outline:2px solid var(--platinum);outline-offset:4px}
 .skip{position:absolute;left:-999px;top:10px;z-index:50;background:var(--ivory);color:var(--deep);padding:10px 14px}
@@ -31,7 +33,7 @@ img,svg{display:block;max-width:100%}
 .num{font:500 12px var(--sans);letter-spacing:.24em;color:var(--mist)}
 .quote{font:italic 400 clamp(1.45rem,4.6vw,2.05rem)/1.28 var(--serif);color:var(--ivory);max-width:13em;margin:0}
 
-.grain{position:fixed;inset:-50%;z-index:40;pointer-events:none;background-image:var(--grain);opacity:.11;mix-blend-mode:overlay}
+.grain{position:fixed;inset:0;z-index:40;pointer-events:none;background-image:var(--grain);opacity:.11;mix-blend-mode:overlay}
 
 /* cinematic film plate */
 .scene{position:absolute;inset:0;overflow:hidden;z-index:0;background:var(--deep)}
@@ -43,13 +45,6 @@ img,svg{display:block;max-width:100%}
 .typeback{position:absolute;inset:0;z-index:1;pointer-events:none;display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,7vw,90px);color:rgba(245,242,235,.055);font-family:var(--serif);font-weight:500;text-transform:uppercase;letter-spacing:.34em;line-height:.92;font-size:clamp(2.4rem,11vw,8.4rem)}
 .typeback span{display:block;white-space:nowrap}
 .typeback span+span{margin-top:.18em;font-size:.42em;letter-spacing:.46em;color:rgba(216,209,199,.07)}
-
-.mast{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(18px,4vw,48px)}
-.mast a{display:flex;align-items:center;gap:12px;color:var(--ivory);text-decoration:none}
-.mast img{width:28px;height:auto}
-.mast span{font:600 10.5px var(--sans);letter-spacing:.3em;text-transform:uppercase}
-.mast em{font:italic 15px var(--serif);color:var(--mist);display:none}
-@media(min-width:700px){.mast em{display:block}}
 
 .hero{position:relative;min-height:clamp(640px,100svh,980px);display:flex;align-items:flex-end;padding:0 clamp(20px,6vw,80px) clamp(32px,6vh,72px);background:#0D182B}
 .hero .scene{background:#0D182B}
@@ -100,7 +95,7 @@ img,svg{display:block;max-width:100%}
 .intro .quote{font-size:clamp(1.7rem,4vw,2.5rem);position:relative;z-index:1}
 
 /* chapters: photograph + calm column, never text on busy art */
-.ch{position:relative;min-height:clamp(640px,100svh,940px);display:flex;align-items:flex-end;isolation:isolate}
+.ch{position:relative;min-height:clamp(640px,100svh,940px);display:flex;align-items:flex-end;isolation:isolate;overflow-x:clip}
 .ch .calm{position:relative;z-index:2;width:100%;padding:0 clamp(18px,6vw,80px) clamp(36px,8vh,80px);background:linear-gradient(180deg,transparent 0%,rgba(22,28,40,.55) 18%,rgba(22,28,40,.94) 48%,var(--deep) 100%)}
 @media(min-width:900px){
  .ch{align-items:stretch;justify-content:flex-end}
@@ -139,7 +134,7 @@ img,svg{display:block;max-width:100%}
 .js .rv.d1{transition-delay:.12s}.js .rv.d2{transition-delay:.24s}.js .rv.d3{transition-delay:.36s}
 .js .rv.in{opacity:1;transform:none}
 
-.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:auto 1fr;grid-template-areas:"stage main" "vibe vibe";gap:8px 14px;align-items:center;padding:10px max(16px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));background:rgba(16,20,28,.96);border-top:1px solid rgba(216,209,199,.22);backdrop-filter:blur(16px);box-shadow:0 -18px 40px rgba(0,0,0,.4);transition:opacity .35s,transform .35s}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:auto 1fr;grid-template-areas:"stage main" "vibe vibe";gap:8px 14px;align-items:center;padding:10px max(16px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));background:rgba(16,20,28,.96);border-top:1px solid rgba(216,209,199,.22);backdrop-filter:blur(16px);box-shadow:0 -18px 40px rgba(0,0,0,.4);transition:opacity .35s,transform .35s;max-width:100%;overflow-x:clip}
 .dock.hide{opacity:0;transform:translateY(18px);pointer-events:none}
 .dock-stage{grid-area:stage}
 .spin{width:84px;height:84px;display:grid;place-items:center}
@@ -261,8 +256,14 @@ body.dock-on{padding-bottom:176px}
 .id-keep{margin-top:20px;padding-top:16px;border-top:1px solid #d8cfbd}
 .id-keep[hidden]{display:none!important}
 
-footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px) 120px;font-size:.8rem;text-align:center}
+footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px) calc(176px + 64px);font-size:.8rem;text-align:center}
+@media(min-width:760px){footer{padding-bottom:calc(196px + 72px)}}
 footer .in{max-width:1100px;margin:0 auto}
+footer .site-exit{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:0 0 28px}
+footer .site-exit a{color:var(--limestone);text-decoration:none;font:600 10.5px var(--sans);letter-spacing:.22em;text-transform:uppercase}
+footer .site-exit a:hover{color:var(--ivory)}
+footer .wordmark{margin:22px 0 0}
+footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--sans);letter-spacing:.28em;text-transform:uppercase}
 .report{font:500 11px var(--sans);letter-spacing:.42em;text-transform:uppercase;color:var(--ivory);margin:0 0 8px}
 .intel{font:500 9.5px var(--sans);letter-spacing:.36em;text-transform:uppercase;color:var(--limestone);margin:0 0 22px}
 .credit{opacity:.62;font-size:.72rem;max-width:46em;margin:16px auto 0}
@@ -278,6 +279,7 @@ footer .in{max-width:1100px;margin:0 auto}
  @page{size:auto;margin:.5in}
  html,body{background:#d8d2c6!important;color:#1c1914;width:100%;height:100%;max-width:100%;margin:0;padding:0!important}
  body>*{display:none!important}
+ .ak-compact-header,.ak-compact-header__menu,footer .site-exit,footer .wordmark{display:none!important}
  .print-doc,.print-doc *{box-sizing:border-box}
  .print-doc{display:block!important;width:100%;max-width:100%;height:auto;overflow:hidden;color:#1c1914;font:400 10pt/1.35 var(--serif)}
  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -363,10 +365,82 @@ footer .in{max-width:1100px;margin:0 auto}
 <a class="skip" href="#ch-health">Skip to the first area</a>
 <div class="grain" aria-hidden="true"></div>
 
-<header class="mast">
- <a href="https://agentkammer.com" aria-label="Agent Kammer home"><img src="assets/ak-monogram.png" alt="" width="28" height="30"><span>Agent Kammer</span></a>
- <em>Live where you belong.</em>
+<header class="ak-compact-header ak-compact-header--overlay" data-ak-compact-header>
+ <div class="ak-compact-header__bar">
+  <a class="ak-compact-header__mark" href="/" aria-label="Agent Kammer home"><img src="/brand/ak-monogram-ivory.png" alt="" width="28" height="30"></a>
+  <button class="ak-compact-header__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="ak-field-menu">
+   <span class="ak-compact-header__icon" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+ </div>
 </header>
+<div class="ak-compact-header__menu" id="ak-field-menu" hidden>
+ <nav class="doors" aria-label="Site">
+  <div class="door"><a href="/">Home</a></div>
+  <div class="door">
+   <button class="fold" type="button" data-fold="fold-start" aria-expanded="false">Start Here<span aria-hidden="true">+</span></button>
+   <div class="kids" id="fold-start" hidden>
+    <a href="/situations">All situations</a>
+    <a href="/situations/executive-relocation-nyc">Executive Relocation</a>
+    <a href="/situations/first-home-buyers-nyc">First Home</a>
+    <a href="/situations/new-baby-growing-family-nyc">Growing Family</a>
+    <a href="/situations/marriage-housing-nyc">Marriage</a>
+    <a href="/situations/retiree-senior-home-buyers-nyc">Retirement</a>
+    <a href="/situations/empty-nester-downsizing-nyc">Empty Nest</a>
+    <a href="/situations/aging-parents-housing-nyc">Aging Parents</a>
+    <a href="/situations/inheritance-housing-nyc">Inheritance</a>
+    <a href="/situations/divorce-property-sales-nyc">Divorce</a>
+    <a href="/situations/remote-work-housing-nyc">Remote Work</a>
+    <a href="/situations/job-loss-housing-nyc">Job Change</a>
+    <a href="/international">International Move</a>
+   </div>
+  </div>
+  <div class="door">
+   <button class="fold" type="button" data-fold="fold-guides" aria-expanded="false">Guides<span aria-hidden="true">+</span></button>
+   <div class="kids" id="fold-guides" hidden>
+    <a href="/guides">All Guides</a>
+    <a href="/resources">Resource Hub</a>
+    <a href="/resources#field-guides">Field Guides</a>
+    <a href="/resources#assessments">Property Assessments</a>
+    <div class="branch">
+     <button type="button" data-fold="fold-nbhds" aria-expanded="false">Neighborhoods<span aria-hidden="true">+</span></button>
+     <div class="deep" id="fold-nbhds" hidden>
+      <a href="/guides#neighborhoods">All Neighborhoods</a>
+      <a href="/situations/upper-west-side-buyers-nyc">Upper West Side</a>
+      <a href="/situations/upper-east-side-buyers-nyc">Upper East Side</a>
+      <a href="/situations/tribeca-buyers-nyc">Tribeca</a>
+      <a href="/situations/chelsea-buyers-nyc">Chelsea</a>
+      <a href="/situations/hudson-yards-buyers-nyc">Hudson Yards</a>
+      <a href="/situations/financial-district-buyers-nyc">Financial District</a>
+     </div>
+    </div>
+    <a href="/guides/real-estate-ownership">How Real Estate Ownership Works</a>
+    <a href="/situations/condo-vs-coop">Condo vs Co-op</a>
+    <a href="/situations/coop-condo-condop-terms">Co-op, Condo &amp; Condop Terms</a>
+    <a href="/guides/real-estate-deeds">How Real Estate Deeds Work</a>
+    <a href="/guides/how-mortgages-work">How Mortgages Work</a>
+    <a href="/guides/fixed-rate-mortgage">Fixed-Rate Mortgage</a>
+    <a href="/guides/adjustable-rate-mortgage">ARM &amp; Fixed vs ARM</a>
+    <a href="/guides/mortgage-clauses">Mortgage Clauses &amp; Key Terms</a>
+    <a href="/guides/manhattan-explained">Manhattan Explained</a>
+    <a href="/guides/liens-easements">Liens, Easements &amp; Related Concepts</a>
+    <a href="/guides/how-to-buy-in-nyc.html">How to buy in NYC</a>
+    <a href="/guides/how-wealth-is-held.html">How wealth is held</a>
+    <a href="/guides/international-buyer-hub.html">International Buyer Hub Guide</a>
+    <a href="/guides/building-terms">The Grammar of a Building</a>
+   </div>
+  </div>
+  <div class="door">
+   <button class="fold" type="button" data-fold="fold-tools" aria-expanded="true">Interactive Tools<span aria-hidden="true">−</span></button>
+   <div class="kids" id="fold-tools">
+    <a href="/tools">All tools</a>
+    <a href="/calculator">Calculator</a>
+    <a href="/tools/wheel-of-life/">Wheel of Life</a>
+   </div>
+  </div>
+  <div class="door"><a href="/contact">Contact</a></div>
+  <a class="guidance" href="/">Guidance</a>
+ </nav>
+</div>
 
 <main id="main">
 <section class="hero" aria-labelledby="h-hero">
@@ -521,9 +595,14 @@ footer .in{max-width:1100px;margin:0 auto}
 
 <footer>
  <div class="in">
+  <nav class="site-exit" aria-label="Leave this tool">
+   <a href="/">Home</a>
+   <a href="/tools">Interactive Tools</a>
+  </nav>
   <p class="report">Interactive Tool</p>
   <p class="intel">Manhattan Residential Intelligence</p>
   <p>Educational content only. For personal reflection. Answers stay in this browser.</p>
+  <p class="wordmark"><a href="/" aria-label="Agent Kammer home">agentkammer.com</a></p>
   <p class="credit">Cinematic stills created for this interactive tool. Manhattan prewar architecture at night.</p>
  </div>
 </footer>
