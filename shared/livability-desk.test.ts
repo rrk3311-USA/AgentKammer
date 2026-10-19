@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { cannotFetchPlan, emptyProfile, furnitureFor, heatMap, makeRiversidePlan, makeSuttonPlan, scoreLivability, typicalDay } from "../client/public/tools/livability/engine.js";
+import { SUGGESTIONS_ENABLED, suggestSimilarListings } from "../client/public/tools/livability/suggestions.js";
 
 describe("livability desk scoring", () => {
   it("scores the Sutton sample on layout only", () => {
@@ -64,5 +65,13 @@ describe("livability desk scoring", () => {
     expect(day.some((route) => route.id === "kids")).toBe(true);
     expect(JSON.stringify({ wfh, kids5, day })).not.toMatch(/school|neighborhood|broker/i);
     expect(JSON.stringify({ wfh, kids5 })).not.toContain("—");
+  });
+
+  it("keeps similar-home suggestions off and empty in v1", () => {
+    expect(SUGGESTIONS_ENABLED).toBe(false);
+    const out = suggestSimilarListings({ address: "200 East 66th Street", score: 68 });
+    expect(out.enabled).toBe(false);
+    expect(out.items).toEqual([]);
+    expect(JSON.stringify(out)).not.toMatch(/for sale|broker|buy this|neighborhood|school/i);
   });
 });

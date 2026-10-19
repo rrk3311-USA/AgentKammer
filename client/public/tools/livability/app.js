@@ -17,6 +17,7 @@ import {
 
 // Future billing (not shown in UI): five free runs on this browser, then $1 token packs.
 // function canStartRun(store) { return store.runs.length < 5 || (store.tokens || 0) > 0; }
+// Future licensed listing work only: ./suggestions.js (SUGGESTIONS_ENABLED). Do not show in v1.
 
 const KEY = "ak-livability-v2";
 const TRAITS = [
