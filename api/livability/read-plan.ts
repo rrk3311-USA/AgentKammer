@@ -1,4 +1,4 @@
-import { readFloorPlanImage } from "../../server/lib/livability-vision";
+import { readFloorPlanImage } from "../../server/lib/livability-vision.js";
 
 type ApiRequest = { method?: string; body?: { image?: string } };
 type ApiResponse = { status: (code: number) => { json: (body: unknown) => void } };
