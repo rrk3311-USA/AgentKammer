@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Livability">
+  <rect width="32" height="32" rx="8" fill="#E5E4E2"/>
+  <path fill="#0D182B" d="M5.2 8.2 14.2 13.2v5.6L5.2 23.8Z"/>
+  <path fill="#0D182B" d="M26.8 8.2 17.8 13.2v5.6l9 5Z"/>
+  <rect x="13.4" y="10.6" width="5.2" height="10.8" rx="1.4" fill="#0D182B"/>
+</svg>
