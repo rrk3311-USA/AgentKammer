@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { cannotFetchPlan, emptyProfile, furnitureFor, heatMap, makeRiversidePlan, makeSuttonPlan, scoreLivability, typicalDay } from "../client/public/tools/livability/engine.js";
+import { cannotFetchPlan, emptyProfile, furnitureFor, heatMap, makeRiversidePlan, makeStahlPlan, makeSuttonPlan, matchKnownSample, scoreLivability, typicalDay } from "../client/public/tools/livability/engine.js";
 import { SUGGESTIONS_ENABLED, suggestSimilarListings } from "../client/public/tools/livability/suggestions.js";
 
 describe("livability desk scoring", () => {
@@ -65,6 +65,30 @@ describe("livability desk scoring", () => {
     expect(day.some((route) => route.id === "kids")).toBe(true);
     expect(JSON.stringify({ wfh, kids5, day })).not.toMatch(/school|neighborhood|broker/i);
     expect(JSON.stringify({ wfh, kids5 })).not.toContain("—");
+  });
+
+  it("loads the Stahl House sample from a matching address and still misses unknown ones", () => {
+    const hit = matchKnownSample("1635 Woods Dr, Los Angeles, CA 90069");
+    expect(hit?.id).toBe("stahl");
+    expect(matchKnownSample("Stahl House").id).toBe("stahl");
+    expect(matchKnownSample("15 Central Park West")).toBe(null);
+    const miss = cannotFetchPlan("15 Central Park West");
+    expect(miss.ok).toBe(false);
+
+    const plan = makeStahlPlan();
+    expect(plan.name).toBe("Stahl House (1635 Woods Dr) · approx. from public plans");
+    expect(plan.rooms.filter((room) => room.type === "bedroom")).toHaveLength(2);
+    expect(plan.rooms.every((room) => /approx/i.test(room.name))).toBe(true);
+    expect(plan.doors.some((door) => (door.a === "living" && door.b === "dining") || (door.a === "dining" && door.b === "living"))).toBe(true);
+    expect(plan.doors.some((door) => (door.a === "kitchen" && door.b === "mbath") || (door.a === "mbath" && door.b === "kitchen"))).toBe(true);
+
+    const profile = { ...emptyProfile(), householdSize: 2, entertainer: true, wfh: true };
+    const result = scoreLivability(plan, profile, "10");
+    expect(result.score).toBeGreaterThan(40);
+    expect(result.score).toBeLessThan(100);
+    expect(result.notes.join(" ")).not.toMatch(/school|neighborhood|broker|buy this/i);
+    expect(result.notes.join(" ")).not.toContain("—");
+    expect(JSON.stringify(plan)).not.toContain("—");
   });
 
   it("keeps similar-home suggestions off and empty in v1", () => {

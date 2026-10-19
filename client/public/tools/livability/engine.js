@@ -112,10 +112,89 @@ export function makeRiversidePlan() {
   };
 }
 
+// Labeled sample from published public plans, not a survey.
+// Sources:
+// - NPS National Register nomination, Case Study House No. 22: L-plan, ~2,300 sf, 20-ft grid, public rooms in the short leg, bedrooms and carport in the long leg, dressing / master bath / service at the juncture, pool in the L, master bath behind the kitchen. https://npgallery.nps.gov/NRHP/GetAsset/21b55ed9-5129-4f45-aef5-3067e3e9f11d
+// - Stahl House site: 1635 Woods Drive, 2,300 sf, 2 bedrooms, 2 baths. https://stahlhouse.com/info/
+// - Wikipedia, "Stahl House": 2,200 sf, two bedrooms, glass on three sides. https://en.wikipedia.org/wiki/Stahl_House
+// - Current listing (MLS 25621475 / BHHS): 1635 Woods Dr, Los Angeles, CA 90069, 2,200 sf, 2 bed, 3 bath (2 full, 1 half), jack-and-jill, utility, $20M.
+// - Los Angeles Times, "Case Study House No. 22, by the numbers" (27 Jun 2009): 2,200 sf, two-bedroom.
+// - Arts & Architecture, June 1960 (USModernist): Koenig CSH No. 22; living and kitchen as free-standing units; master bedroom looks across the pool.
+// Room sizes below are approximate, scaled to that 2,200-2,300 sf envelope and the 20-foot bay.
+export function makeStahlPlan() {
+  const rooms = [
+    { id: "living", name: "Living (approx.)", type: "living", sf: 390, x: 220, y: 16, w: 320, h: 150 },
+    { id: "dining", name: "Dining (approx.)", type: "dining", sf: 230, x: 220, y: 166, w: 160, h: 128 },
+    { id: "kitchen", name: "Kitchen (approx.)", type: "kitchen", sf: 280, x: 380, y: 166, w: 160, h: 128 },
+    { id: "entry", name: "Entry (approx.)", type: "entry", sf: 70, x: 140, y: 166, w: 80, h: 128 },
+    { id: "terrace", name: "Pool deck (approx.)", type: "terrace", sf: 180, x: 16, y: 166, w: 124, h: 360 },
+    { id: "service", name: "Service (approx.)", type: "other", sf: 70, x: 380, y: 294, w: 80, h: 72 },
+    { id: "mbath", name: "Master bath (approx.)", type: "bath", sf: 90, x: 460, y: 294, w: 80, h: 72 },
+    { id: "bed2", name: "Bedroom 2 (approx.)", type: "bedroom", sf: 250, x: 220, y: 294, w: 160, h: 140 },
+    { id: "hall", name: "Sleeping hall (approx.)", type: "hallway", sf: 50, x: 220, y: 434, w: 160, h: 40 },
+    { id: "jjbath", name: "Hall bath (approx.)", type: "bath", sf: 50, x: 380, y: 366, w: 80, h: 68 },
+    { id: "dress", name: "Dressing (approx.)", type: "closet", sf: 40, x: 460, y: 366, w: 80, h: 68 },
+    { id: "mbed", name: "Master bedroom (approx.)", type: "bedroom", sf: 390, x: 220, y: 474, w: 240, h: 150 },
+  ];
+  const doors = [
+    ["entry", "dining"],
+    ["entry", "living"],
+    ["living", "dining"],
+    ["dining", "kitchen"],
+    ["entry", "kitchen"],
+    ["kitchen", "service"],
+    ["kitchen", "mbath"],
+    ["service", "mbath"],
+    ["entry", "bed2"],
+    ["bed2", "hall"],
+    ["hall", "mbed"],
+    ["bed2", "jjbath"],
+    ["mbed", "jjbath"],
+    ["mbed", "dress"],
+    ["dress", "mbath"],
+    ["living", "terrace"],
+    ["dining", "terrace"],
+    ["bed2", "terrace"],
+    ["mbed", "terrace"],
+    ["entry", "terrace"],
+  ].map(([a, b]) => ({ a, b }));
+  return {
+    id: "plan-stahl-sample",
+    name: "Stahl House (1635 Woods Dr) · approx. from public plans",
+    source: "sample",
+    address: "1635 Woods Dr, Los Angeles, CA 90069",
+    listingUrl: "",
+    imageName: "",
+    rooms,
+    doors,
+    note: "Labeled sample. L-shaped glass plan from published public drawings. Room sizes are approximate. Not a measured survey and not fetched from the listing.",
+  };
+}
+
 export const DEMO_PLANS = [
-  { id: "sutton", label: "Sutton line", make: makeSuttonPlan },
-  { id: "riverside", label: "Riverside line", make: makeRiversidePlan },
+  { id: "sutton", label: "Sutton line", make: makeSuttonPlan, needles: ["sutton sample", "sutton line"] },
+  { id: "riverside", label: "Riverside line", make: makeRiversidePlan, needles: ["riverside sample", "riverside line"] },
+  {
+    id: "stahl",
+    label: "Stahl House",
+    make: makeStahlPlan,
+    needles: ["1635 woods", "stahl house", "stahl", "case study house 22", "case study house #22", "csh 22", "csh #22"],
+  },
 ];
+
+export function normalizePlace(query) {
+  return String(query || "")
+    .toLowerCase()
+    .replace(/[.#,]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+export function matchKnownSample(query) {
+  const q = normalizePlace(query);
+  if (!q) return null;
+  return DEMO_PLANS.find((demo) => (demo.needles || []).some((needle) => q.includes(normalizePlace(needle)))) || null;
+}
 
 export function cannotFetchPlan(query) {
   const place = String(query || "").trim() || "that address";

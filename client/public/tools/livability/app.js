@@ -9,7 +9,9 @@ import {
   heatMap,
   horizonNeedLine,
   makeRiversidePlan,
+  makeStahlPlan,
   makeSuttonPlan,
+  matchKnownSample,
   scoreLivability,
   typicalDay,
   uid,
@@ -278,10 +280,14 @@ function attachPlace() {
 
 function useDemo(make) {
   const place = $("#address").value.trim();
-  plan = make();
+  const canned = make();
+  plan = canned;
   plan.id = uid("plan");
   attachPlace();
-  if (place) plan.name = `${place} · ${plan.name}`;
+  if (!plan.address) plan.address = place;
+  if (place && canned.name && !/stahl house/i.test(canned.name)) {
+    plan.name = `${place} · ${canned.name}`;
+  }
   lastRun = null;
   renderRooms();
   renderScore(null);
@@ -299,6 +305,14 @@ function lookup() {
   const query = address || listing;
   if (!query) {
     say("Start with an address. A listing link is a fallback. I will not invent a floor.");
+    return;
+  }
+  const known = matchKnownSample(query);
+  if (known) {
+    if (!address) $("#address").value = known.make().address || query;
+    useDemo(known.make);
+    $("#lookup-note").textContent = `Known sample: ${plan.name}. Sizes are approximate, from published plans.`;
+    say(`I have a labeled sample for that address. ${plan.name}. Check the rooms, then run.`);
     return;
   }
   const miss = cannotFetchPlan(query);
@@ -646,6 +660,10 @@ function bind() {
   $("#lookup").addEventListener("click", lookup);
   $("#use-sutton").addEventListener("click", () => useDemo(makeSuttonPlan));
   $("#use-riverside").addEventListener("click", () => useDemo(makeRiversidePlan));
+  $("#use-stahl").addEventListener("click", () => {
+    if (!$("#address").value.trim()) $("#address").value = "1635 Woods Dr, Los Angeles, CA 90069";
+    useDemo(makeStahlPlan);
+  });
   $("#plan-file").addEventListener("change", (event) => onUpload(event.target.files?.[0]));
   $("#run-sim").addEventListener("click", runSimulation);
   $("#bar-run").addEventListener("click", runSimulation);
