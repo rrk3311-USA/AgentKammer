@@ -1,8 +1,11 @@
 import {
   HORIZONS,
   ROOM_TYPES,
+  cannotFetchPlan,
   defaultGuideHello,
   emptyProfile,
+  heatMap,
+  makeRiversidePlan,
   makeSuttonPlan,
   scoreLivability,
   uid,
@@ -11,7 +14,7 @@ import {
 // Future billing (not shown in UI): five free runs on this browser, then $1 token packs.
 // function canStartRun(store) { return store.runs.length < 5 || (store.tokens || 0) > 0; }
 
-const KEY = "ak-livability-v1";
+const KEY = "ak-livability-v2";
 const TRAITS = [
   { id: "kids", label: "Kids at home" },
   { id: "homebody", label: "Homebody" },
@@ -30,32 +33,30 @@ function load() {
     const raw = JSON.parse(localStorage.getItem(KEY) || "null");
     if (raw && typeof raw === "object") return raw;
   } catch {
-    /* keep empty */
+    /* empty */
   }
-  return { plans: [], profiles: [], runs: [], active: { planId: "", profileId: "", horizon: "10" } };
+  return { runs: [], collection: [], compare: [], profile: emptyProfile(), horizon: "10" };
 }
 
-function save(store) {
+function save() {
   localStorage.setItem(KEY, JSON.stringify(store));
 }
 
 const store = load();
-let plan = store.plans.find((item) => item.id === store.active.planId) || {
+let plan = {
   id: "",
-  name: "Untitled plan",
+  name: "",
   source: "blank",
+  address: "",
   listingUrl: "",
-  imageName: "",
   rooms: [],
   doors: [],
   note: "",
 };
-let profile = store.profiles.find((item) => item.id === store.active.profileId) || emptyProfile();
-let horizon = store.active.horizon || "10";
-let lastResult = null;
-let vision = { available: false, note: "Checking whether image reading is configured…" };
-let zTop = 8;
-let libKind = "plans";
+let profile = store.profile || emptyProfile();
+let horizon = store.horizon || "10";
+let lastRun = store.runs[0] || null;
+let vision = { available: false, note: "" };
 
 function say(text, mode) {
   const el = $("#guide-speech");
@@ -63,43 +64,48 @@ function say(text, mode) {
   el.classList.toggle("doing", mode === "doing");
 }
 
-function focusWin(id) {
-  const win = $(`.win[data-win="${id}"]`);
-  if (!win) return;
-  win.hidden = false;
-  $$(".win").forEach((node) => node.classList.remove("is-focus"));
-  win.classList.add("is-focus");
-  win.style.zIndex = String(++zTop);
-  $$(".dock [data-show]").forEach((btn) => btn.classList.toggle("on", btn.getAttribute("data-show") === id));
+function escape(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
-function hideWin(id) {
-  const win = $(`.win[data-win="${id}"]`);
-  if (win) win.hidden = true;
+function clampNum(value, lo, hi) {
+  return Math.max(lo, Math.min(hi, Number(value) || lo));
+}
+
+function status() {
+  $("#st-state").textContent = lastRun ? "ran" : plan.rooms.length ? "plan" : "idle";
+  $("#st-horizon").textContent = `${horizon}y`;
+  $("#st-runs").textContent = String(store.runs.length);
+  $("#st-compare").textContent = String(store.compare.length);
+  $("#st-col").textContent = String(store.collection.length);
 }
 
 function layoutIfNeeded(rooms) {
   return rooms.map((room, index) => ({
     ...room,
     id: room.id || uid("rm"),
-    x: Number.isFinite(room.x) ? room.x : 24 + (index % 4) * 186,
-    y: Number.isFinite(room.y) ? room.y : 20 + Math.floor(index / 4) * 148,
-    w: Number.isFinite(room.w) ? room.w : 168,
-    h: Number.isFinite(room.h) ? room.h : 128,
+    x: Number.isFinite(room.x) ? room.x : 20 + (index % 4) * 170,
+    y: Number.isFinite(room.y) ? room.y : 16 + Math.floor(index / 4) * 140,
+    w: Number.isFinite(room.w) ? room.w : 154,
+    h: Number.isFinite(room.h) ? room.h : 120,
   }));
 }
 
 function drawPlan(target, result) {
   const host = $(target);
   if (!plan.rooms.length) {
-    host.innerHTML = `<p class="empty-lib" style="padding:24px">No rooms yet. Use the Sutton sample, upload a plan, or add rooms by hand.</p>`;
+    host.innerHTML = `<p class="empty" style="padding:20px">No plan yet. Look up an address, upload an image, or run a labeled demo.</p>`;
     return;
   }
-  const flags = result?.flags || { bottlenecks: [], quiet: [], strain: [], paths: [] };
-  const maxX = Math.max(...plan.rooms.map((room) => room.x + room.w), 520);
-  const maxY = Math.max(...plan.rooms.map((room) => room.y + room.h), 360);
+  const heat = result ? heatMap(plan, result) : {};
+  const maxX = Math.max(...plan.rooms.map((room) => room.x + room.w), 420);
+  const maxY = Math.max(...plan.rooms.map((room) => room.y + room.h), 280);
   const roomMap = new Map(plan.rooms.map((room) => [room.id, room]));
-  const paths = (flags.paths || [])
+  const paths = (result?.flags?.paths || [])
     .map((path) => {
       const pts = path.nodes
         .map((id) => roomMap.get(id))
@@ -110,30 +116,31 @@ function drawPlan(target, result) {
     .join("");
   const rects = plan.rooms
     .map((room) => {
-      const cls = [
-        "room-rect",
-        flags.bottlenecks.includes(room.id) ? "hot" : "",
-        flags.quiet.includes(room.id) ? "quiet" : "",
-        flags.strain.includes(room.id) ? "strain" : "",
-      ]
-        .filter(Boolean)
-        .join(" ");
+      const cell = heat[room.id];
+      const zone = cell?.zone || "calm";
       return `<g>
-        <rect class="${cls}" x="${room.x}" y="${room.y}" width="${room.w}" height="${room.h}"/>
-        <text class="room-lab" x="${room.x + 8}" y="${room.y + 18}">${escape(room.name)}</text>
-        <text class="room-lab" x="${room.x + 8}" y="${room.y + 32}" style="opacity:.6">${room.sf} sf</text>
+        <rect class="room-rect ${zone}" x="${room.x}" y="${room.y}" width="${room.w}" height="${room.h}"/>
+        <text class="room-lab" x="${room.x + 7}" y="${room.y + 16}">${escape(room.name)}</text>
+        <text class="room-lab" x="${room.x + 7}" y="${room.y + 28}" style="opacity:.55">${room.sf}sf${cell ? ` · ${cell.traffic}` : ""}</text>
       </g>`;
     })
     .join("");
-  host.innerHTML = `<svg class="plan-svg" viewBox="0 0 ${maxX + 24} ${maxY + 24}" role="img" aria-label="Floor plan">${rects}${paths}</svg>`;
+  host.innerHTML = `<svg class="plan-svg" viewBox="0 0 ${maxX + 20} ${maxY + 20}" role="img" aria-label="Floor plan heat map">${rects}${paths}</svg>`;
 }
 
-function escape(value) {
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+function thumbSvg(run) {
+  const rooms = run.plan?.rooms || [];
+  if (!rooms.length) return "";
+  const heat = heatMap(run.plan, run.result);
+  const maxX = Math.max(...rooms.map((room) => room.x + room.w), 200);
+  const maxY = Math.max(...rooms.map((room) => room.y + room.h), 160);
+  const rects = rooms
+    .map((room) => {
+      const zone = heat[room.id]?.zone || "calm";
+      return `<rect class="room-rect ${zone}" x="${room.x}" y="${room.y}" width="${room.w}" height="${room.h}"/>`;
+    })
+    .join("");
+  return `<svg class="plan-svg" viewBox="0 0 ${maxX + 16} ${maxY + 16}" aria-hidden="true">${rects}</svg>`;
 }
 
 function renderRooms() {
@@ -158,11 +165,10 @@ function renderRooms() {
     </div>`,
     )
     .join("");
-  drawPlan("#plan-canvas", lastResult);
+  drawPlan("#plan-canvas", lastRun?.result);
 }
 
 function renderProfile() {
-  $("#profile-name").value = profile.name || "My household";
   $("#household").value = String(profile.householdSize || 2);
   $("#traits").innerHTML = TRAITS.map(
     (trait) =>
@@ -173,123 +179,18 @@ function renderProfile() {
 function renderHorizon() {
   $("#horizons").innerHTML = HORIZONS.map(
     (item) => `<button class="chip" type="button" data-horizon="${item.id}" aria-pressed="${horizon === item.id}">
-      <strong style="display:block;font:500 1.2rem var(--serif);letter-spacing:0;text-transform:none">${item.label}</strong>
-      <span class="fine">${item.blurb}</span>
+      ${item.label}<br><span class="fine">${item.blurb}</span>
     </button>`,
   ).join("");
 }
 
-function folderLabel(kind) {
-  const n = store[kind].length;
-  if (!n) return "Empty";
-  return n === 1 ? "1 saved" : `${n} saved`;
-}
-
-function renderFolders() {
-  $("#count-plans").textContent = folderLabel("plans");
-  $("#count-profiles").textContent = folderLabel("profiles");
-  $("#count-runs").textContent = folderLabel("runs");
-}
-
-function openLibrary(kind) {
-  libKind = kind;
-  const titles = { plans: "Plans", profiles: "Profiles", runs: "Runs" };
-  $("#lib-title").textContent = titles[kind];
-  const items = store[kind];
-  if (!items.length) {
-    $("#lib-list").innerHTML = `<p class="empty-lib">This folder is still empty. Save as you go and it will fill.</p>`;
-  } else {
-    $("#lib-list").innerHTML = items
-      .map((item) => {
-        const extra =
-          kind === "runs"
-            ? `Livability ${item.result?.score ?? "-"} · ${item.horizon} years`
-            : item.note || item.source || "";
-        return `<button type="button" data-open-item="${item.id}"><strong>${escape(item.name || "Untitled")}</strong><span class="fine">${escape(extra)}</span></button>`;
-      })
-      .join("");
-  }
-  focusWin("library");
-}
-
-function persistPlan() {
-  if (!plan.rooms.length) {
-    say("Add a room first, or open the Sutton sample.");
+function renderScore(result) {
+  if (!result) {
+    $("#score-num").textContent = "-";
+    $("#dims").innerHTML = "";
+    $("#notes").innerHTML = "";
     return;
   }
-  if (!plan.id) plan.id = uid("plan");
-  if (!plan.name) plan.name = plan.source === "sample" ? "Sutton sample" : "Floor plan";
-  const copy = structuredClone(plan);
-  const idx = store.plans.findIndex((item) => item.id === copy.id);
-  if (idx >= 0) store.plans[idx] = copy;
-  else store.plans.unshift(copy);
-  store.active.planId = copy.id;
-  save(store);
-  renderFolders();
-  say("Plan saved in this browser. It will be waiting in the Plans folder.");
-}
-
-function persistProfile() {
-  profile.name = $("#profile-name").value.trim() || "My household";
-  profile.householdSize = clampNum($("#household").value, 1, 8);
-  if (!profile.id) profile.id = uid("pro");
-  const copy = structuredClone(profile);
-  const idx = store.profiles.findIndex((item) => item.id === copy.id);
-  if (idx >= 0) store.profiles[idx] = copy;
-  else store.profiles.unshift(copy);
-  store.active.profileId = copy.id;
-  save(store);
-  renderFolders();
-  say("Profile saved. It describes your household, not a market.");
-}
-
-function clampNum(value, lo, hi) {
-  return Math.max(lo, Math.min(hi, Number(value) || lo));
-}
-
-function readFormIntoPlan() {
-  $$("#room-list .room-row").forEach((row) => {
-    const room = plan.rooms.find((item) => item.id === row.dataset.id);
-    if (!room) return;
-    room.name = $("[data-k=name]", row).value.trim() || room.name;
-    room.type = $("[data-k=type]", row).value;
-    room.sf = clampNum($("[data-k=sf]", row).value, 10, 900);
-  });
-  $$("#door-list .door-row").forEach((row) => {
-    const index = Number($("[data-end=a]", row).dataset.door);
-    if (!plan.doors[index]) return;
-    plan.doors[index].a = $("[data-end=a]", row).value;
-    plan.doors[index].b = $("[data-end=b]", row).value;
-  });
-  plan.listingUrl = $("#listing-url").value.trim();
-}
-
-function runSimulation() {
-  readFormIntoPlan();
-  if (plan.rooms.length < 2) {
-    say("I need at least two rooms and a door before I can walk a day through the plan.");
-    focusWin("plan");
-    return;
-  }
-  profile.name = $("#profile-name").value.trim() || profile.name;
-  profile.householdSize = clampNum($("#household").value, 1, 8);
-  say("Tracing the morning path, then the evening return. Looking for pinch points, quiet rooms, and whether storage keeps up.", "doing");
-  const result = scoreLivability(plan, profile, horizon);
-  lastResult = result;
-  persistPlan();
-  persistProfile();
-  const run = {
-    id: uid("run"),
-    name: `${plan.name} · ${profile.name}`,
-    planId: plan.id,
-    profileId: profile.id,
-    horizon,
-    result,
-    at: new Date().toISOString(),
-  };
-  store.runs.unshift(run);
-  save(store);
-  renderFolders();
   $("#score-num").textContent = String(result.score);
   $("#dims").innerHTML = [
     ["Circulation", result.dimensions.circulation],
@@ -303,11 +204,172 @@ function runSimulation() {
     )
     .join("");
   $("#notes").innerHTML = result.notes.map((note) => `<li>${escape(note)}</li>`).join("");
-  drawPlan("#sim-canvas", result);
+}
+
+function renderCollection() {
+  const ranked = [...store.collection].sort((a, b) => (b.result?.score || 0) - (a.result?.score || 0));
+  if (!ranked.length) {
+    $("#collection").innerHTML = `<p class="empty">Empty. Keep a run and it ranks here.</p>`;
+    return;
+  }
+  $("#collection").innerHTML = ranked
+    .map(
+      (run, index) =>
+        `<button type="button" data-open-run="${run.id}"><span class="rank">0${index + 1}</span> <strong>${escape(run.address || run.plan?.name || "Run")}</strong> · ${run.result?.score ?? "-"}</button>`,
+    )
+    .join("");
+}
+
+function renderCompare() {
+  const runs = store.compare.map((id) => store.runs.find((run) => run.id === id)).filter(Boolean);
+  if (!runs.length) {
+    $("#compare").innerHTML = `<p class="empty">Run a few addresses, then pin them here. Score, heat map, and notes sit side by side.</p>`;
+    return;
+  }
+  $("#compare").innerHTML = runs
+    .map(
+      (run) => `<article class="card">
+      <p class="addr">${escape(run.address || run.plan?.name || "Untitled")}</p>
+      <strong class="sc">${run.result?.score ?? "-"}</strong>
+      <div class="plan-wrap">${thumbSvg(run)}</div>
+      <ul class="notes">${(run.result?.notes || []).slice(0, 2).map((note) => `<li>${escape(note)}</li>`).join("")}</ul>
+    </article>`,
+    )
+    .join("");
+}
+
+function readForm() {
+  $$("#room-list .room-row").forEach((row) => {
+    const room = plan.rooms.find((item) => item.id === row.dataset.id);
+    if (!room) return;
+    room.name = $("[data-k=name]", row).value.trim() || room.name;
+    room.type = $("[data-k=type]", row).value;
+    room.sf = clampNum($("[data-k=sf]", row).value, 10, 900);
+  });
+  $$("#door-list .door-row").forEach((row) => {
+    const index = Number($("[data-end=a]", row).dataset.door);
+    if (!plan.doors[index]) return;
+    plan.doors[index].a = $("[data-end=a]", row).value;
+    plan.doors[index].b = $("[data-end=b]", row).value;
+  });
+  plan.address = $("#address").value.trim();
+  plan.listingUrl = $("#listing-url").value.trim();
+  profile.householdSize = clampNum($("#household").value, 1, 8);
+}
+
+function attachPlace() {
+  plan.address = $("#address").value.trim();
+  plan.listingUrl = $("#listing-url").value.trim();
+}
+
+function useDemo(make) {
+  const place = $("#address").value.trim();
+  plan = make();
+  plan.id = uid("plan");
+  attachPlace();
+  if (place) plan.name = `${place} · ${plan.name}`;
+  lastRun = null;
+  renderRooms();
+  renderScore(null);
+  status();
+  say(
+    place
+      ? `Labeled demo on ${place}. Not fetched from a record. Check the rooms, then run.`
+      : "Labeled demo. Not a real listing. Add an address if you want it on the compare cards.",
+  );
+}
+
+function lookup() {
+  const address = $("#address").value.trim();
+  const listing = $("#listing-url").value.trim();
+  const query = address || listing;
+  if (!query) {
+    say("Start with an address. A listing link is a fallback. I will not invent a floor.");
+    return;
+  }
+  const miss = cannotFetchPlan(query);
+  $("#lookup-note").textContent = miss.reason;
+  say(miss.reason);
+}
+
+function runSimulation() {
+  readForm();
+  if (plan.rooms.length < 2) {
+    say("I still need a plan. I cannot fetch one from that address. Upload an image or use a labeled demo.");
+    return;
+  }
+  say("Tracing morning and return paths. Painting traffic, pinch points, and quiet rooms.", "doing");
+  const result = scoreLivability(plan, profile, horizon);
+  const run = {
+    id: uid("run"),
+    address: plan.address || plan.name || "Untitled",
+    plan: structuredClone(plan),
+    profile: structuredClone(profile),
+    horizon,
+    result,
+    at: new Date().toISOString(),
+  };
+  lastRun = run;
+  store.runs.unshift(run);
+  store.profile = profile;
+  store.horizon = horizon;
+  save();
   drawPlan("#plan-canvas", result);
-  focusWin("results");
-  const lead = result.notes[0] || "The rooms connect.";
-  say(`Livability ${result.score}. ${lead}`);
+  renderScore(result);
+  renderCollection();
+  renderCompare();
+  status();
+  say(`Livability ${result.score}. ${result.notes[0] || "The rooms connect."}`);
+}
+
+function keepCollection() {
+  if (!lastRun) {
+    say("Run a simulation first, then I can keep it in the collection.");
+    return;
+  }
+  if (store.collection.some((run) => run.id === lastRun.id)) {
+    say("Already in the collection.");
+    return;
+  }
+  store.collection.push(lastRun);
+  save();
+  renderCollection();
+  status();
+  say("Kept. Collection ranks by score. A personal shortlist of layouts, not of neighborhoods.");
+}
+
+function addCompare() {
+  if (!lastRun) {
+    say("Run a simulation first, then pin it to compare.");
+    return;
+  }
+  if (store.compare.includes(lastRun.id)) {
+    say("That run is already on the compare row.");
+    return;
+  }
+  store.compare = [...store.compare, lastRun.id].slice(-3);
+  save();
+  renderCompare();
+  status();
+  say("Pinned beside the others. Walk the heat maps, then decide which layout you prefer.");
+}
+
+function openRun(id) {
+  const run = store.runs.find((item) => item.id === id) || store.collection.find((item) => item.id === id);
+  if (!run) return;
+  lastRun = run;
+  plan = structuredClone(run.plan);
+  profile = structuredClone(run.profile || emptyProfile());
+  horizon = run.horizon || horizon;
+  $("#address").value = plan.address || "";
+  $("#listing-url").value = plan.listingUrl || "";
+  renderRooms();
+  renderProfile();
+  renderHorizon();
+  renderScore(run.result);
+  drawPlan("#plan-canvas", run.result);
+  status();
+  say(`Opened ${run.address}. Livability ${run.result?.score ?? "-"}.`);
 }
 
 async function checkVision() {
@@ -318,28 +380,32 @@ async function checkVision() {
   } catch {
     vision = {
       available: false,
-      note: "Vision reading is not configured on this deploy. Use the labeled sample or the room editor.",
+      note: "Image reading is not configured on this deploy. Upload still stores a name. Rooms come from a demo or the editor.",
     };
   }
-  const note = $("#vision-note");
-  if (vision.available) {
-    note.innerHTML = `<span class="badge">Vision ready</span> An uploaded floor-plan image can be read. A listing link is still only stored.`;
-  } else {
-    note.innerHTML = `<span class="badge">Sample and editor</span> ${escape(vision.note || "No vision key is configured.")}`;
-  }
+  $("#vision-note").innerHTML = vision.available
+    ? `<span class="badge">Vision ready</span> An uploaded floor-plan image can be read.`
+    : `<span class="badge">No vision key</span> ${escape(vision.note)}`;
 }
 
 async function onUpload(file) {
   if (!file) return;
+  attachPlace();
   plan.imageName = file.name;
   plan.source = "upload";
   plan.name = file.name.replace(/\.[^.]+$/, "") || "Uploaded plan";
+  if (!plan.id) plan.id = uid("plan");
   if (!vision.available) {
-    say("I have the image name, but this deploy has no vision key. Use the sample or draw the rooms yourself. I will not invent a read.");
+    say("I have the file name. This deploy has no vision key, so I will not invent rooms. Use a demo or the editor.");
     return;
   }
   say("Reading the uploaded plan. If I cannot see rooms, I will say so.", "doing");
-  const image = await fileToDataUrl(file);
+  const image = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result || ""));
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
   try {
     const res = await fetch("/api/livability/read-plan", {
       method: "POST",
@@ -348,92 +414,47 @@ async function onUpload(file) {
     });
     const body = await res.json();
     if (!body.ok || !body.rooms?.length) {
-      say(body.error || "I could not read rooms from that image. The editor is still here.");
+      say(body.error || "I could not read rooms from that image.");
       return;
     }
     plan.rooms = layoutIfNeeded(body.rooms);
     plan.doors = Array.isArray(body.doors) ? body.doors : [];
     plan.source = "vision";
     renderRooms();
-    say(`I found ${plan.rooms.length} rooms. Check the names and doors, then save.`);
+    say(`I found ${plan.rooms.length} rooms. Check the names and doors, then run.`);
   } catch {
-    say("The vision request failed. Nothing was invented. Use the sample or the editor.");
+    say("The vision request failed. Nothing was invented.");
   }
 }
 
-function fileToDataUrl(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(String(reader.result || ""));
-    reader.onerror = () => reject(reader.error);
-    reader.readAsDataURL(file);
+function bind() {
+  $("#lookup").addEventListener("click", lookup);
+  $("#use-sutton").addEventListener("click", () => useDemo(makeSuttonPlan));
+  $("#use-riverside").addEventListener("click", () => useDemo(makeRiversidePlan));
+  $("#plan-file").addEventListener("change", (event) => onUpload(event.target.files?.[0]));
+  $("#run-sim").addEventListener("click", runSimulation);
+  $("#bar-run").addEventListener("click", runSimulation);
+  $("#keep-col").addEventListener("click", keepCollection);
+  $("#add-compare").addEventListener("click", addCompare);
+  $("#traits").addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-trait]");
+    if (!btn) return;
+    profile[btn.dataset.trait] = !profile[btn.dataset.trait];
+    btn.setAttribute("aria-pressed", profile[btn.dataset.trait] ? "true" : "false");
   });
-}
-
-function useSample() {
-  plan = makeSuttonPlan();
-  $("#listing-url").value = "";
-  renderRooms();
-  persistPlan();
-  say("This is the Sutton sample, a labeled two-bedroom line. Not a real listing. Edit anything that is not yours.");
-  focusWin("plan");
-}
-
-function keepLink() {
-  const url = $("#listing-url").value.trim();
-  if (!url) {
-    say("Paste a listing link first. I will keep it with the plan. I will not pretend to have read the page.");
-    return;
-  }
-  plan.listingUrl = url;
-  plan.source = plan.rooms.length ? plan.source : "link";
-  if (!plan.rooms.length) {
-    const sample = makeSuttonPlan();
-    plan.rooms = sample.rooms;
-    plan.doors = sample.doors;
-    plan.name = "Listing sketch";
-    plan.note = "Rooms are the labeled sample. The listing page was not read.";
-    renderRooms();
-  }
-  persistPlan();
-  say("Link kept. The rooms are still a sketch unless you edit them or a vision read succeeds.");
-}
-
-function bindWindows() {
-  $$(".win .bar").forEach((bar) => {
-    const win = bar.closest(".win");
-    bar.addEventListener("pointerdown", (event) => {
-      if (event.target.closest("button")) return;
-      if (window.matchMedia("(max-width:899px)").matches) {
-        focusWin(win.dataset.win);
-        return;
-      }
-      focusWin(win.dataset.win);
-      const rect = win.getBoundingClientRect();
-      const desk = $("#desk").getBoundingClientRect();
-      const ox = event.clientX - rect.left;
-      const oy = event.clientY - rect.top;
-      const move = (ev) => {
-        win.style.left = `${Math.max(8, ev.clientX - desk.left - ox)}px`;
-        win.style.top = `${Math.max(8, ev.clientY - desk.top - oy)}px`;
-      };
-      const up = () => {
-        window.removeEventListener("pointermove", move);
-        window.removeEventListener("pointerup", up);
-      };
-      window.addEventListener("pointermove", move);
-      window.addEventListener("pointerup", up);
-    });
+  $("#horizons").addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-horizon]");
+    if (!btn) return;
+    horizon = btn.dataset.horizon;
+    store.horizon = horizon;
+    save();
+    renderHorizon();
+    status();
+    say(HORIZONS.find((item) => item.id === horizon).blurb);
   });
-  $$("[data-hide]").forEach((btn) => btn.addEventListener("click", () => hideWin(btn.dataset.hide)));
-  $$("[data-show]").forEach((btn) => btn.addEventListener("click", () => focusWin(btn.dataset.show)));
-  $$("[data-open-lib]").forEach((btn) => btn.addEventListener("click", () => openLibrary(btn.dataset.openLib)));
-}
-
-function bindEditor() {
   $("#room-list").addEventListener("input", () => {
-    readFormIntoPlan();
-    drawPlan("#plan-canvas", lastResult);
+    readForm();
+    drawPlan("#plan-canvas", lastRun?.result);
   });
   $("#room-list").addEventListener("click", (event) => {
     const id = event.target.dataset.delRoom;
@@ -442,7 +463,7 @@ function bindEditor() {
     plan.doors = plan.doors.filter((door) => door.a !== id && door.b !== id);
     renderRooms();
   });
-  $("#door-list").addEventListener("change", readFormIntoPlan);
+  $("#door-list").addEventListener("change", readForm);
   $("#door-list").addEventListener("click", (event) => {
     const index = event.target.dataset.delDoor;
     if (index == null) return;
@@ -456,10 +477,10 @@ function bindEditor() {
       name: `Room ${n + 1}`,
       type: "other",
       sf: 80,
-      x: 24 + (n % 4) * 186,
-      y: 20 + Math.floor(n / 4) * 148,
-      w: 168,
-      h: 128,
+      x: 20 + (n % 4) * 170,
+      y: 16 + Math.floor(n / 4) * 140,
+      w: 154,
+      h: 120,
     });
     renderRooms();
   });
@@ -468,139 +489,34 @@ function bindEditor() {
     plan.doors.push({ a: plan.rooms[0].id, b: plan.rooms[1].id });
     renderRooms();
   });
-  $("#save-plan").addEventListener("click", () => {
-    readFormIntoPlan();
-    persistPlan();
+  $("#collection").addEventListener("click", (event) => {
+    const btn = event.target.closest("[data-open-run]");
+    if (btn) openRun(btn.dataset.openRun);
   });
-  $("#use-sample").addEventListener("click", useSample);
-  $("#keep-link").addEventListener("click", keepLink);
-  $("#plan-file").addEventListener("change", (event) => onUpload(event.target.files?.[0]));
-}
-
-function bindProfile() {
-  $("#traits").addEventListener("click", (event) => {
-    const btn = event.target.closest("[data-trait]");
-    if (!btn) return;
-    const key = btn.dataset.trait;
-    profile[key] = !profile[key];
-    btn.setAttribute("aria-pressed", profile[key] ? "true" : "false");
-  });
-  $("#save-profile").addEventListener("click", persistProfile);
-  $("#horizons").addEventListener("click", (event) => {
-    const btn = event.target.closest("[data-horizon]");
-    if (!btn) return;
-    horizon = btn.dataset.horizon;
-    store.active.horizon = horizon;
-    save(store);
-    renderHorizon();
-    say(HORIZONS.find((item) => item.id === horizon).blurb);
-  });
-  $("#run-sim").addEventListener("click", runSimulation);
-  $("#lib-list").addEventListener("click", (event) => {
-    const btn = event.target.closest("[data-open-item]");
-    if (!btn) return;
-    const id = btn.dataset.openItem;
-    if (libKind === "plans") {
-      const found = store.plans.find((item) => item.id === id);
-      if (!found) return;
-      plan = structuredClone(found);
-      $("#listing-url").value = plan.listingUrl || "";
-      lastResult = null;
-      renderRooms();
-      focusWin("plan");
-      say(`Opened ${plan.name}.`);
-    } else if (libKind === "profiles") {
-      const found = store.profiles.find((item) => item.id === id);
-      if (!found) return;
-      profile = structuredClone(found);
-      renderProfile();
-      focusWin("profile");
-      say(`Opened ${profile.name}.`);
-    } else {
-      const found = store.runs.find((item) => item.id === id);
-      if (!found) return;
-      lastResult = found.result;
-      const foundPlan = store.plans.find((item) => item.id === found.planId);
-      const foundProfile = store.profiles.find((item) => item.id === found.profileId);
-      if (foundPlan) plan = structuredClone(foundPlan);
-      if (foundProfile) profile = structuredClone(foundProfile);
-      horizon = found.horizon;
-      $("#score-num").textContent = String(found.result.score);
-      $("#notes").innerHTML = found.result.notes.map((note) => `<li>${escape(note)}</li>`).join("");
-      $("#dims").innerHTML = [
-        ["Circulation", found.result.dimensions.circulation],
-        ["Quiet", found.result.dimensions.quiet],
-        ["Storage", found.result.dimensions.storage],
-        ["Household fit", found.result.dimensions.fit],
-      ]
-        .map(
-          ([label, value]) =>
-            `<div class="dim"><span>${label}</span><div class="barline"><i style="width:${value}%"></i></div><b>${value}</b></div>`,
-        )
-        .join("");
-      drawPlan("#sim-canvas", found.result);
-      renderRooms();
-      renderProfile();
-      renderHorizon();
-      focusWin("results");
-      say(`Livability ${found.result.score}. A saved run from this browser.`);
-    }
-  });
-}
-
-function placeDesktopWindows() {
-  if (window.matchMedia("(max-width:899px)").matches) {
-    $$(".win").forEach((win) => {
-      win.style.left = "";
-      win.style.top = "";
+  $$("[data-jump]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.jump;
+      const node = id === "collection" ? $("#collection") : $(`.pane[data-pane="${id}"]`) || $(`#${id}`);
+      node?.scrollIntoView({ block: "start", behavior: "smooth" });
+      $$(".pane").forEach((pane) => pane.classList.toggle("on", pane.dataset.pane === id || (id === "collection" && pane.dataset.pane === "side")));
     });
-    return;
-  }
-  const spots = {
-    guide: [118, 18],
-    plan: [560, 22],
-    profile: [130, 80],
-    horizon: [170, 110],
-    results: [400, 64],
-    library: [210, 86],
-  };
-  Object.entries(spots).forEach(([id, [x, y]]) => {
-    const win = $(`.win[data-win="${id}"]`);
-    if (!win) return;
-    win.style.left = `${x}px`;
-    win.style.top = `${y}px`;
+  });
+  $$(".pane").forEach((pane) => {
+    pane.addEventListener("pointerdown", () => {
+      $$(".pane").forEach((node) => node.classList.remove("on"));
+      pane.classList.add("on");
+    });
   });
 }
 
 say(defaultGuideHello());
-$("#listing-url").value = plan.listingUrl || "";
+$("#address").value = "";
 renderRooms();
 renderProfile();
 renderHorizon();
-renderFolders();
-bindWindows();
-bindEditor();
-bindProfile();
-placeDesktopWindows();
-window.addEventListener("resize", placeDesktopWindows);
-if (store.runs[0]?.result) {
-  lastResult = store.runs[0].result;
-  horizon = store.runs[0].horizon || horizon;
-  $("#score-num").textContent = String(lastResult.score);
-  $("#notes").innerHTML = lastResult.notes.map((note) => `<li>${escape(note)}</li>`).join("");
-  $("#dims").innerHTML = [
-    ["Circulation", lastResult.dimensions.circulation],
-    ["Quiet", lastResult.dimensions.quiet],
-    ["Storage", lastResult.dimensions.storage],
-    ["Household fit", lastResult.dimensions.fit],
-  ]
-    .map(
-      ([label, value]) =>
-        `<div class="dim"><span>${label}</span><div class="barline"><i style="width:${value}%"></i></div><b>${value}</b></div>`,
-    )
-    .join("");
-  drawPlan("#sim-canvas", lastResult);
-}
-focusWin("guide");
-focusWin("plan");
+renderScore(lastRun?.result);
+renderCollection();
+renderCompare();
+status();
+bind();
 checkVision();

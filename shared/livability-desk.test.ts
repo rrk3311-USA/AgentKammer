@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { emptyProfile, makeSuttonPlan, scoreLivability } from "../client/public/tools/livability/engine.js";
+import { cannotFetchPlan, emptyProfile, heatMap, makeRiversidePlan, makeSuttonPlan, scoreLivability } from "../client/public/tools/livability/engine.js";
 
 describe("livability desk scoring", () => {
   it("scores the Sutton sample on layout only", () => {
@@ -21,5 +21,21 @@ describe("livability desk scoring", () => {
     const intact = scoreLivability(makeSuttonPlan(), emptyProfile(), "5");
     const broken = scoreLivability(plan, emptyProfile(), "5");
     expect(broken.score).toBeLessThan(intact.score);
+  });
+
+  it("refuses to invent a plan from an address", () => {
+    const miss = cannotFetchPlan("15 Central Park West");
+    expect(miss.ok).toBe(false);
+    expect(miss.reason).toMatch(/cannot read/i);
+    expect(miss.reason).not.toContain("—");
+  });
+
+  it("paints heat from path traffic, not from a neighborhood", () => {
+    const plan = makeSuttonPlan();
+    const result = scoreLivability(plan, emptyProfile(), "10");
+    const heat = heatMap(plan, result);
+    expect(heat.gallery.zone === "pinch" || heat.gallery.traffic > 0).toBe(true);
+    const other = scoreLivability(makeRiversidePlan(), emptyProfile(), "10");
+    expect(other.score).not.toBe(result.score);
   });
 });

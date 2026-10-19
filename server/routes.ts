@@ -800,7 +800,7 @@ export async function registerRoutes(app: Express): Promise<void> {
     if (req.path === "/tools/livability/") {
       const built = join(process.cwd(), "dist/public/tools/livability/index.html");
       const src = join(process.cwd(), "client/public/tools/livability/index.html");
-      return res.sendFile(existsSync(built) ? built : src);
+      return res.sendFile(existsSync(src) ? src : built);
     }
     next();
   });

@@ -27,9 +27,9 @@ const PUBLIC_TOOLS: readonly ToolCard[] = [
     hard: true,
   },
   {
-    eyebrow: "Floor-plan day",
+    eyebrow: "Due diligence",
     title: "Livability",
-    description: "Walk a floor plan the way a day moves through it, then read a layout score.",
+    description: "Enter an address, walk the floor, and read a heat map with a layout score.",
     href: "/tools/livability/",
     hard: true,
   },
@@ -52,7 +52,7 @@ function CardBody({ card }: { card: ToolCard }) {
 export default function ToolsHome() {
   usePageMetadata({
     title: "Interactive Tools",
-    description: "Monthly carry, a personal check-in, and a floor-plan day you can walk.",
+    description: "Monthly carry, a personal check-in, and a due-diligence walk through a floor plan.",
     path: "/tools",
   });
 
@@ -61,7 +61,7 @@ export default function ToolsHome() {
       <PageHero
         eyebrow="Desk"
         title="Interactive Tools"
-        description="A quiet monthly-carry calculator, a personal check-in, and a floor plan walked as a day."
+        description="A quiet monthly-carry calculator, a personal check-in, and a floor-plan simulator."
         art="decision-framework"
       />
 

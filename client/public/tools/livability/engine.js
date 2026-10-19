@@ -70,12 +70,80 @@ export function makeSuttonPlan() {
     id: "plan-sutton-sample",
     name: "Sutton sample",
     source: "sample",
+    address: "",
     listingUrl: "",
     imageName: "",
     rooms,
     doors,
-    note: "Labeled sample. A classic two-bedroom line, drawn for this tool. Not a real listing.",
+    note: "Labeled demo. A classic two-bedroom line, drawn for this tool. Not a real listing.",
   };
+}
+
+export function makeRiversidePlan() {
+  const rooms = [
+    { id: "entry", name: "Entry", type: "entry", sf: 36, x: 20, y: 20, w: 88, h: 120 },
+    { id: "living", name: "Living", type: "living", sf: 210, x: 108, y: 20, w: 220, h: 160 },
+    { id: "kitchen", name: "Kitchen", type: "kitchen", sf: 68, x: 328, y: 20, w: 120, h: 160 },
+    { id: "hall", name: "Hall", type: "hallway", sf: 28, x: 108, y: 180, w: 220, h: 40 },
+    { id: "bed", name: "Bedroom", type: "bedroom", sf: 132, x: 108, y: 220, w: 160, h: 140 },
+    { id: "bath", name: "Bath", type: "bath", sf: 40, x: 268, y: 220, w: 60, h: 140 },
+    { id: "closet", name: "Closet", type: "closet", sf: 12, x: 20, y: 220, w: 88, h: 80 },
+  ];
+  const doors = [
+    ["entry", "living"],
+    ["living", "kitchen"],
+    ["living", "hall"],
+    ["kitchen", "hall"],
+    ["hall", "bed"],
+    ["kitchen", "bed"],
+    ["bed", "bath"],
+    ["hall", "closet"],
+  ].map(([a, b]) => ({ a, b }));
+  return {
+    id: "plan-riverside-sample",
+    name: "Riverside sample",
+    source: "sample",
+    address: "",
+    listingUrl: "",
+    imageName: "",
+    rooms,
+    doors,
+    note: "Labeled demo. A railroad one-bedroom line, drawn for this tool. Not a real listing.",
+  };
+}
+
+export const DEMO_PLANS = [
+  { id: "sutton", label: "Sutton line", make: makeSuttonPlan },
+  { id: "riverside", label: "Riverside line", make: makeRiversidePlan },
+];
+
+export function cannotFetchPlan(query) {
+  const place = String(query || "").trim() || "that address";
+  return {
+    ok: false,
+    reason: `No floor plan is on file for ${place}. This version cannot read a listing page or a tax record. Upload a plan, or run a labeled demo against this address.`,
+  };
+}
+
+export function heatMap(plan, result) {
+  const traffic = {};
+  for (const room of plan.rooms) traffic[room.id] = 0;
+  for (const path of result?.flags?.paths || []) {
+    for (const id of path.nodes) traffic[id] = (traffic[id] || 0) + 1;
+  }
+  const max = Math.max(1, ...Object.values(traffic));
+  const cells = {};
+  for (const room of plan.rooms) {
+    const count = traffic[room.id] || 0;
+    const intensity = count / max;
+    let zone = "calm";
+    if ((result?.flags?.bottlenecks || []).includes(room.id)) zone = "pinch";
+    else if ((result?.flags?.quiet || []).includes(room.id)) zone = "quiet";
+    else if (intensity >= 0.66) zone = "hot";
+    else if (intensity >= 0.33) zone = "flow";
+    cells[room.id] = { traffic: count, intensity, zone };
+  }
+  return cells;
 }
 
 function clamp(n, lo, hi) {
@@ -330,5 +398,5 @@ export function scoreLivability(plan, profile, horizonId) {
 }
 
 export function defaultGuideHello() {
-  return "Good to see you. I read floor plans the way a day moves through them. You describe your own household. I stay with the rooms.";
+  return "Due-diligence simulator. Enter an address. I try to walk the floor: circulation, daily paths, a heat map, a score. You describe your own household. I stay with the rooms.";
 }
