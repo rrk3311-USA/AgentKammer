@@ -154,15 +154,140 @@ button,input,select{font:inherit;color:inherit}
 .confirm-room{fill:rgba(176,141,87,.08);stroke:rgba(229,228,226,.35);stroke-width:1}
 .door-dot{fill:#B08D57;stroke:#F5F2EB;stroke-width:1.4;cursor:grab}
 .door-dot.is-on{fill:#E2B470;stroke:#fff}
+.window-dot{fill:#8aa0b8;stroke:#F5F2EB;stroke-width:1.3;cursor:grab}
+.window-dot.is-on{fill:#c5d4e2;stroke:#fff}
+.window-mark{fill:#8aa0b8;stroke:#F5F2EB;stroke-width:.5}
 .confirm-hint{margin:0 0 8px}
+.confirm-mode{display:flex;gap:6px;margin:0 0 10px}
+.confirm-mode button{flex:1}
 
+.artifact{
+  position:relative;margin-top:14px;
+  border:1px solid rgba(245,242,235,.14);
+  background:#0b1018;
+  overflow:hidden;
+}
 .plan-wrap{
   overflow:hidden;max-width:100%;
   display:flex;align-items:center;justify-content:center;
   min-height:220px;
-  background:#0b1018;border:1px solid rgba(245,242,235,.1)
+  background:#0b1018
 }
-.plan-wrap:has(.plan-svg){height:min(500px,54vh)}
+.plan-wrap:has(.plan-svg){height:min(460px,50vh)}
+.artifact .plan-wrap{border:0}
+.artifact-bar{
+  position:relative;z-index:9;
+  display:grid;grid-template-columns:auto minmax(0,1.4fr) minmax(0,.9fr);
+  gap:8px;align-items:stretch;
+  padding:8px;
+  min-height:52px;
+  background:linear-gradient(180deg,rgba(13,24,43,.72),rgba(13,24,43,.96));
+  border-top:1px solid rgba(229,228,226,.16);
+}
+.furnish-seg{display:flex;border:1px solid rgba(229,228,226,.2);align-self:stretch}
+.furnish-seg button{
+  border:0;background:transparent;color:var(--mist);
+  padding:0 10px;font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer
+}
+.furnish-seg button[aria-pressed=true]{background:rgba(229,228,226,.1);color:var(--ivory)}
+.run-glow{
+  border:1px solid var(--platinum);
+  background:linear-gradient(180deg,#f7f4ee,#d8d1c7);
+  color:var(--midnight);
+  font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;
+  box-shadow:0 0 16px rgba(226,180,112,.35),0 0 2px rgba(229,228,226,.8);
+}
+.run-glow:hover{box-shadow:0 0 22px rgba(226,180,112,.5)}
+.run-glow:disabled{opacity:.45;cursor:wait;box-shadow:none}
+.modify-btn{
+  border:1px solid rgba(138,160,184,.55);background:transparent;color:var(--ivory);
+  font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;
+  box-shadow:inset 0 0 12px rgba(74,110,138,.18)
+}
+.modify-btn[aria-expanded=true]{border-color:#8aa0b8;box-shadow:0 0 14px rgba(74,110,138,.35)}
+.artifact-quiet{display:flex;flex-wrap:wrap;gap:6px;grid-column:1 / -1}
+.artifact-quiet .quiet-btn{
+  border:0;background:transparent;color:rgba(245,242,235,.48);
+  padding:4px 6px;font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer
+}
+.artifact-quiet .quiet-btn:hover,.artifact-quiet .quiet-btn[aria-pressed=true]{color:var(--ivory)}
+.scan-ticker{
+  position:absolute;left:10px;right:10px;bottom:58px;z-index:7;
+  padding:6px 10px;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--platinum);background:rgba(13,24,43,.82);border:1px solid rgba(138,160,184,.35);
+  box-shadow:0 0 16px rgba(74,110,138,.25)
+}
+.modify-drawer{
+  position:absolute;left:0;right:0;bottom:92px;z-index:8;
+  max-height:min(52%,380px);overflow:auto;
+  background:rgba(16,22,34,.97);
+  border-top:1px solid rgba(138,160,184,.35);
+  box-shadow:0 -12px 40px rgba(10,16,28,.45),0 0 24px rgba(74,110,138,.18);
+  transform-origin:bottom;
+}
+.modify-drawer[hidden]{display:none}
+.diligence{padding:12px 14px 16px}
+.diligence-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin-bottom:10px}
+.diligence-count{margin-left:auto;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--brass)}
+.preset-row{display:flex;flex-wrap:wrap;gap:6px}
+.acc{border:1px solid rgba(229,228,226,.12);background:#0f1522;margin:0 0 8px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.acc.open{
+  border-color:rgba(138,160,184,.5);
+  box-shadow:0 0 18px rgba(74,110,138,.22),inset 0 0 0 1px rgba(229,228,226,.06)
+}
+.acc-head{
+  width:100%;display:flex;align-items:center;gap:8px;text-align:left;
+  border:0;background:transparent;color:var(--ivory);padding:11px 12px;cursor:pointer;
+  font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase
+}
+.acc-head em{flex:1;font-style:normal;color:rgba(229,228,226,.42);font-size:10px;letter-spacing:.06em}
+.acc-head .chev{transition:transform .2s ease}
+.acc.open .acc-head .chev{transform:rotate(90deg)}
+.acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease}
+.acc.open .acc-body{grid-template-rows:1fr}
+.acc-inner{overflow:hidden}
+.acc-inner > div{padding:0 12px 12px;display:grid;gap:8px}
+.check{
+  display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;
+  padding:8px;border:1px solid transparent;transition:background .2s,border-color .2s
+}
+.check.scanning{background:rgba(226,180,112,.1);border-color:rgba(226,180,112,.35)}
+.check label{font:500 13px/1.3 var(--sans);color:#e8e2d6}
+.check input{accent-color:#8aa0b8}
+.strict-chip{display:flex;gap:4px}
+.strict-chip button{
+  border:1px solid rgba(229,228,226,.16);background:transparent;color:var(--mist);
+  padding:3px 6px;font:500 9px var(--mono);letter-spacing:.06em;text-transform:uppercase;cursor:pointer
+}
+.strict-chip button[aria-pressed=true]{border-color:var(--platinum);color:var(--ivory)}
+.mat-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.mat-ticks{display:grid;gap:8px}
+.mat-ticks label{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:#d9d3c6;line-height:1.4}
+.tip{
+  display:inline-block;margin-left:6px;width:14px;height:14px;border-radius:50%;
+  border:1px solid rgba(229,228,226,.4);font:500 10px var(--mono);text-align:center;line-height:13px;color:var(--platinum);cursor:help
+}
+.tip[data-tip]:hover::after,.tip[data-tip]:focus::after{
+  content:attr(data-tip);display:block;position:absolute;z-index:9;max-width:260px;
+  margin-top:6px;padding:8px 10px;background:#101826;border:1px solid rgba(229,228,226,.2);
+  color:var(--ivory);font:400 12px/1.4 var(--sans);letter-spacing:0;text-transform:none;white-space:normal
+}
+.suggest{margin:8px 0;padding:8px;border:1px dashed rgba(138,160,184,.35);font-size:12px;color:var(--limestone)}
+.breakdown{display:grid;gap:6px;margin:12px 0 0}
+.break-row{display:grid;grid-template-columns:1fr auto;gap:8px;font-size:12px;color:#d9d3c6}
+.break-row b{font:500 12px var(--mono);color:var(--platinum)}
+.break-row.fail b{color:#E2B470}
+.break-row .why{grid-column:1 / -1;color:rgba(245,242,235,.55);font-size:12px}
+.furn-note{margin:8px 0 0;font-size:12px;color:rgba(245,242,235,.55)}
+.plan-wrap.is-adjust .furn{pointer-events:auto;cursor:grab}
+.plan-wrap.is-adjust .furn.is-on{outline:1px solid var(--platinum)}
+@media(max-width:720px){
+  .artifact-bar{grid-template-columns:1fr 1fr;position:sticky;bottom:0;z-index:9}
+  .furnish-seg{grid-column:1 / -1}
+  .run-glow{min-height:44px}
+  .modify-drawer{bottom:96px;max-height:min(48%,340px)}
+  .mat-fields{grid-template-columns:1fr}
+}
 .plan-svg{width:100%;height:100%;min-height:0;overflow:visible}
 .room-wall{fill:none}
 .door-gap{fill:#0b1018}
@@ -384,38 +509,62 @@ button,input,select{font:inherit;color:inherit}
         <button class="btn ghost" type="button" id="use-stahl">Stahl House</button>
       </div>
       <div class="helper-links" id="address-help">
-        <p class="fine" style="margin:0 0 10px">I do not fetch listing sites. Open a search, download the plan image, then upload it here.</p>
+        <p class="fine" style="margin:0 0 10px">Find the plan online, download it, and drop it here.</p>
         <div class="row">
-          <a class="btn ghost" id="help-google" target="_blank" rel="noopener noreferrer">Google: address + floor plan</a>
-          <a class="btn ghost" id="help-images" target="_blank" rel="noopener noreferrer">Google Images</a>
+          <a class="btn ghost" id="help-google" target="_blank" rel="noopener noreferrer">Search: address + floor plan</a>
+          <a class="btn ghost" id="help-images" target="_blank" rel="noopener noreferrer">Image search</a>
         </div>
-        <p class="hint">Check the listing page, or ask the listing agent or building management. Then download the plan and upload it here.</p>
+        <p class="hint">The listing page, the listing agent, or building staff can usually point you to it.</p>
       </div>
       <label class="dropzone" id="dropzone">
         <input id="plan-file" type="file" accept="application/pdf,image/jpeg,image/png,image/webp,.pdf,.jpg,.jpeg,.png">
         <p class="kicker">Upload a plan</p>
         <p class="caps">PDF, JPG, or PNG</p>
-        <p class="fine" style="margin:0">Drag it here, or click to choose. Walls and doors are read on this device. No key required.</p>
+        <p class="fine" style="margin:0">Find the plan online, download it, and drop it here.</p>
       </label>
       <div class="scale-row" style="margin-top:12px">
         <label class="field" style="margin:0"><span>Listing sqft, optional</span><input id="listing-sf" type="number" min="80" max="20000" placeholder="1200"></label>
         <label class="field" style="margin:0"><span>One room size, optional</span><input id="room-sf" type="number" min="20" max="4000" placeholder="Living 280"></label>
       </div>
       <label class="field" style="margin-top:12px"><span>Listing link, optional</span><input id="listing-url" type="url" placeholder="https://" autocomplete="off"></label>
-      <label class="boost-row" id="boost-row"><input id="boost-on" type="checkbox" checked> Optional vision boost for labels</label>
-      <p class="fine" id="vision-note" style="margin-top:12px">Plans are read on this device. No vision key is required.</p>
-      <p class="hint" id="lookup-note">An address is the start. If I cannot fetch a plan, I will show search links and ask you to upload the image.</p>
+      <label class="boost-row" id="boost-row"><input id="boost-on" type="checkbox" checked> Polish the room names from the drawing</label>
+      <p class="fine" id="vision-note" style="margin-top:12px">Find the plan online, download it, and drop it here.</p>
+      <p class="hint" id="lookup-note">Start with an address. If I do not have a plan on file, I will offer a search, then wait for you to drop the image.</p>
       <div class="door-confirm" id="door-confirm">
-        <p class="kicker">Confirm doors</p>
-        <p class="fine confirm-hint" id="confirm-copy">Tap a mark to remove it. Drag to move. Click a wall to add. Connections come from these doors, not from a model.</p>
+        <p class="kicker">Confirm doors and windows</p>
+        <div class="confirm-mode">
+          <button class="chip" type="button" id="mark-door" aria-pressed="true">Add door</button>
+          <button class="chip" type="button" id="mark-window" aria-pressed="false">Add window</button>
+        </div>
+        <p class="fine confirm-hint" id="confirm-copy">Tap a mark to remove it. Drag to move. Click a wall to add. Brass is a door. Blue-gray is a window.</p>
         <div class="confirm-stage" id="confirm-stage"></div>
         <div class="row">
           <button class="btn" type="button" id="confirm-run">Looks right, run it</button>
           <button class="btn ghost" type="button" id="confirm-edit">Edit rooms first</button>
         </div>
       </div>
-      <div class="plan-wrap" id="plan-canvas" style="margin-top:14px"></div>
+      <div class="artifact" id="artifact">
+        <div class="plan-wrap" id="plan-canvas"></div>
+        <div class="modify-drawer" id="modify-drawer" hidden>
+          <div class="diligence" id="diligence"></div>
+        </div>
+        <p class="scan-ticker" id="scan-ticker" hidden></p>
+        <div class="artifact-bar">
+          <div class="furnish-seg" role="group" aria-label="Furniture">
+            <button type="button" id="furnish-on" aria-pressed="true">Furnished</button>
+            <button type="button" id="furnish-off" aria-pressed="false">Empty</button>
+          </div>
+          <button class="run-glow" type="button" id="run-sim">Run</button>
+          <button class="modify-btn" type="button" id="open-modify" aria-expanded="false">Modify</button>
+          <div class="artifact-quiet">
+            <button class="quiet-btn" type="button" id="furn-adjust" aria-pressed="false">Adjust furniture</button>
+            <button class="quiet-btn" type="button" id="keep-col">Keep</button>
+            <button class="quiet-btn" type="button" id="add-compare">Compare</button>
+          </div>
+        </div>
+      </div>
       <p class="legend"><i class="lg-hot"></i>High traffic <i class="lg-pinch"></i>Bottleneck <i class="lg-flow"></i>Path <i class="lg-quiet"></i>Quiet</p>
+      <p class="furn-note" id="furn-note">The walk uses assumed furniture for this household. The score is the floor, not the pieces.</p>
       <details class="editor-draw" style="margin-top:12px">
         <summary>Edit rooms</summary>
         <div class="editor">
@@ -438,13 +587,9 @@ button,input,select{font:inherit;color:inherit}
       <div class="toggles" id="traits"></div>
       <p class="kicker" style="margin:14px 0 8px">Years living there</p>
       <div class="horizon" id="horizons"></div>
-      <div class="row" style="margin-top:12px">
-        <button class="btn" type="button" id="run-sim">Run simulation</button>
-        <button class="btn ghost" type="button" id="keep-col">Keep in collection</button>
-        <button class="btn ghost" type="button" id="add-compare">Compare</button>
-      </div>
       <div class="score-hero"><strong id="score-num">-</strong><span class="fine">Livability</span></div>
       <div class="dims" id="dims"></div>
+      <div class="breakdown" id="check-break"></div>
       <ul class="notes" id="notes"></ul>
       <p class="disc">Informational simulator. The score is the floor plan’s layout only. Not an appraisal, an inspection, or brokerage advice.</p>
     </div>
@@ -488,7 +633,7 @@ button,input,select{font:inherit;color:inherit}
   </picture>
   <button type="button" data-jump="entry"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><rect x="1.5" y="2" width="9" height="8"/></svg><span class="full">Address</span><span class="short">Addr</span></button>
   <button type="button" data-jump="side"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="4" r="2"/><path d="M2.5 10c.6-2 2-3 3.5-3s2.9 1 3.5 3"/></svg><span class="full">Household</span><span class="short">House</span></button>
-  <button type="button" id="bar-run"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2.5l6 3.5-6 3.5z"/></svg><span class="full">Run</span><span class="short">Run</span></button>
+  <button type="button" id="bar-run" class="quiet-run"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2.5l6 3.5-6 3.5z"/></svg><span class="full">Run</span><span class="short">Run</span></button>
   <button type="button" data-jump="compare"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9V4M6 9V2.5M9 9V6"/></svg><span class="full">Compare</span><span class="short">Cmp</span></button>
   <button type="button" data-jump="collection"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="2.5" width="8" height="7"/><path d="M4 2.5V2h4v.5"/></svg><span class="full">Collection</span><span class="short">Keep</span></button>
 </nav>

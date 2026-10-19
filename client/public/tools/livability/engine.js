@@ -1,4 +1,25 @@
 /** Livability v1 scoring. Deterministic room-graph rules. Layout only. */
+import {
+  DILIGENCE_CHECKS,
+  activeCheckCount,
+  defaultDiligence,
+  presetFromDiligence,
+  strictnessFactor,
+} from "./diligence.js";
+import { wallIsShared, windowDotsFromPlan, windowsForRoom } from "./plan-graph.js";
+
+export {
+  DILIGENCE_CHECKS,
+  DILIGENCE_GROUPS,
+  DILIGENCE_PRESETS,
+  STRICTNESS_CHIPS,
+  activeCheckCount,
+  applyDiligencePreset,
+  defaultDiligence,
+  emptyBuilding,
+  presetFromDiligence,
+} from "./diligence.js";
+
 export const HORIZONS = [
   { id: "5", years: 5, label: "5 years", blurb: "Near term. Kids still small if you have them. Routines are forming." },
   { id: "10", years: 10, label: "10 years", blurb: "A decade. Privacy and a work room start to matter more." },
@@ -66,7 +87,7 @@ export function makeSuttonPlan() {
     ["bedb", "bathb"],
     ["bedb", "clob"],
   ].map(([a, b]) => ({ a, b }));
-  return {
+  const plan = {
     id: "plan-sutton-sample",
     name: "Sutton sample",
     source: "sample",
@@ -76,7 +97,10 @@ export function makeSuttonPlan() {
     rooms,
     doors,
     note: "Labeled demo. A classic two-bedroom line, drawn for this tool. Not a real listing.",
+    pxPerFt: 8,
   };
+  plan.windowDots = windowDotsFromPlan(plan);
+  return plan;
 }
 
 export function makeRiversidePlan() {
@@ -99,7 +123,7 @@ export function makeRiversidePlan() {
     ["bed", "bath"],
     ["hall", "closet"],
   ].map(([a, b]) => ({ a, b }));
-  return {
+  const plan = {
     id: "plan-riverside-sample",
     name: "Riverside sample",
     source: "sample",
@@ -109,7 +133,10 @@ export function makeRiversidePlan() {
     rooms,
     doors,
     note: "Labeled demo. A railroad one-bedroom line, drawn for this tool. Not a real listing.",
+    pxPerFt: 8,
   };
+  plan.windowDots = windowDotsFromPlan(plan);
+  return plan;
 }
 
 // Labeled sample from published public plans, not a survey.
@@ -158,7 +185,7 @@ export function makeStahlPlan() {
     ["bed2", "terrace"],
     ["mbed", "terrace"],
   ].map(([a, b]) => ({ a, b }));
-  return {
+  const plan = {
     id: "plan-stahl-sample",
     name: "Stahl House (1635 Woods Dr) · approx. from public plans",
     source: "sample",
@@ -168,8 +195,10 @@ export function makeStahlPlan() {
     rooms,
     doors,
     pxPerFt: 8,
-    note: "Labeled sample. L-shaped glass plan from published public drawings. Room sizes are approximate. Not a measured survey and not fetched from the listing.",
+    note: "Labeled sample. L-shaped glass plan from published public drawings. Room sizes are approximate. Not a measured survey.",
   };
+  plan.windowDots = windowDotsFromPlan(plan);
+  return plan;
 }
 
 export const DEMO_PLANS = [
@@ -201,7 +230,7 @@ export function cannotFetchPlan(query) {
   const place = String(query || "").trim() || "that address";
   return {
     ok: false,
-    reason: `No floor plan is on file for ${place}. This version cannot read a listing page or a tax record. Open a search, download the plan image, and upload it here. Or run a labeled demo against this address.`,
+    reason: `No floor plan is on file for ${place}. This version cannot read a listing page or a tax record. Find the plan online, download it, and drop it here. Or run a labeled demo against this address.`,
   };
 }
 
@@ -282,7 +311,10 @@ function shortestExisting(adj, fromIds, toIds) {
   return best;
 }
 
-export function scoreLivability(plan, profile, horizonId) {
+export function scoreLivability(plan, profile, horizonId, diligence, extras = {}) {
+  const cfg = diligence?.checks ? diligence : defaultDiligence();
+  const building = extras.building || plan.building || {};
+  const ticks = building.ticks || {};
   const adj = graphOf(plan);
   const beds = roomsOf(plan, "bedroom");
   const baths = roomsOf(plan, "bath");
@@ -293,16 +325,19 @@ export function scoreLivability(plan, profile, horizonId) {
   const studies = roomsOf(plan, "study");
   const entries = roomsOf(plan, "entry");
   const halls = roomsOf(plan, "hallway");
+  const terraces = roomsOf(plan, "terrace");
   const size = clamp(Number(profile.householdSize) || 1, 1, 8);
   const horizon = HORIZONS.find((item) => item.id === horizonId) || HORIZONS[0];
   const totalSf = plan.rooms.reduce((sum, room) => sum + (Number(room.sf) || 0), 0);
   const closetSf = closets.reduce((sum, room) => sum + (Number(room.sf) || 0), 0);
   const kitchenSf = kitchens.reduce((sum, room) => sum + (Number(room.sf) || 0), 0);
   const livingSf = livings.reduce((sum, room) => sum + (Number(room.sf) || 0), 0);
+  const px = Number(plan.pxPerFt) || 8;
+  const windowDots = (plan.windowDots && plan.windowDots.length ? plan.windowDots : windowDotsFromPlan(plan)).filter(
+    (dot) => !dot.kind || dot.kind === "window",
+  );
 
-  const notes = [];
   const flags = { bottlenecks: [], quiet: [], strain: [], paths: [] };
-
   const morning = shortestExisting(
     adj,
     beds.map((room) => room.id),
@@ -323,161 +358,523 @@ export function scoreLivability(plan, profile, horizonId) {
     kitchens.map((room) => room.id),
     dinings.map((room) => room.id),
   );
-
+  const entryKitchen = shortestExisting(
+    adj,
+    entries.map((room) => room.id),
+    kitchens.map((room) => room.id),
+  );
   if (morning) flags.paths.push({ id: "morning", label: "Morning", nodes: morning });
   if (evening) flags.paths.push({ id: "return", label: "Return", nodes: evening });
   if (guest) flags.paths.push({ id: "guest", label: "Guests", nodes: guest });
   if (cook) flags.paths.push({ id: "cook", label: "Kitchen to dining", nodes: cook });
 
-  let circulation = 78;
-  if (!morning) {
-    circulation -= 16;
-    notes.push("I cannot walk from a bedroom to the kitchen on the doors you drew.");
-  } else if (morning.length > 5) {
-    circulation -= 8;
-    notes.push("The morning path is long. Breakfast will feel farther than the square footage suggests.");
-  }
-  if (!evening) {
-    circulation -= 10;
-    notes.push("There is no door path from the entry to a bedroom.");
-  }
-  for (const hall of halls) {
-    const degree = (adj.get(hall.id) || []).length;
-    if (degree >= 4 || hall.sf < 50) {
-      circulation -= 7;
-      flags.bottlenecks.push(hall.id);
-      notes.push(`${plainName(hall.name)} is only ${hall.sf} square feet, with ${degree} doors. People will stack there on a busy morning.`);
-    }
-  }
-  for (const kitchen of kitchens) {
-    const degree = (adj.get(kitchen.id) || []).length;
-    if (degree >= 3) {
-      circulation -= 6;
-      flags.bottlenecks.push(kitchen.id);
-      notes.push(`${plainName(kitchen.name)} has ${degree} openings. Anyone crossing the plan walks through the cook.`);
-    }
-  }
-  if (profile.homebody && livingSf < 180) {
-    circulation -= 5;
-    notes.push("A homebody household will feel the living room more than a larger common room would.");
-  }
-
-  let quiet = 80;
-  for (const bed of beds) {
-    const noisy = [...livings, ...kitchens, ...dinings].some((room) => adjacent(adj, bed.id, room.id));
-    if (noisy) {
-      quiet -= 12;
-      notes.push(`${plainName(bed.name)} opens onto a social room. Sleep and conversation share a door.`);
-    } else {
-      flags.quiet.push(bed.id);
-    }
-  }
-  if (profile.kids && horizon.years >= 10 && beds.length < 2) {
-    quiet -= 10;
-    notes.push("At a ten-year stay, a second bedroom gives growing children a door of their own.");
-  }
-  if (!beds.length) {
-    quiet -= 20;
-    notes.push("I do not see a bedroom. Quiet scoring stays low until one is on the plan.");
-  }
-
-  let storage = 74;
-  let need = 16 * size;
-  if (profile.cooks) need += 12;
-  if (profile.guestsOften || profile.entertainer) need += 10;
-  if (profile.kids) need += 12;
-  if (profile.pets) need += 8;
-  if (horizon.years >= 15) need += 10;
-  const gap = need - closetSf;
-  if (gap > 20) {
-    storage -= 18;
-    for (const closet of closets) flags.strain.push(closet.id);
-    if (!closets.length) flags.strain.push(...halls.map((room) => room.id));
-    notes.push("Closet space is thin for this household and horizon. Halls will start to hold what rooms cannot.");
-  } else if (gap > 0) {
-    storage -= 8;
-    notes.push("Storage is workable, not generous. A linen closet would take pressure off the halls.");
-  } else {
-    notes.push("Closets keep up with this household, which keeps the rooms themselves clearer.");
-  }
-
-  let fit = 76;
   const bedNeed = profile.kids && horizon.years >= 10 ? Math.max(2, Math.ceil(size / 2)) : Math.ceil(size / 2);
-  if (beds.length < bedNeed) {
-    fit -= 14;
-    notes.push("Bedroom count is tight for the household you described.");
+  const laundryRoom = plan.rooms.find((room) => /laund|washer|utility/i.test(room.name || ""));
+  const daylightRooms = [...livings, ...dinings, ...kitchens, ...beds, ...studies];
+
+  const evalCheck = (id) => {
+    if (id === "cutThrough") {
+      let delta = 4;
+      const notes = [];
+      for (const hall of halls) {
+        const degree = (adj.get(hall.id) || []).length;
+        if (degree >= 4 || hall.sf < 50) {
+          delta -= 9;
+          flags.bottlenecks.push(hall.id);
+          notes.push(`${plainName(hall.name)} is only ${hall.sf} square feet, with ${degree} doors. People will stack there on a busy morning.`);
+        }
+      }
+      if (!morning) {
+        delta -= 12;
+        notes.push("I cannot walk from a bedroom to the kitchen on the doors you drew.");
+      } else if (morning.length > 5) {
+        delta -= 6;
+        notes.push("The morning path is long. Breakfast will feel farther than the square footage suggests.");
+      }
+      return { delta, note: notes[0] || "Daily paths have somewhere to go.", passed: delta >= 0, detail: notes };
+    }
+    if (id === "kitchenTraffic") {
+      let delta = 4;
+      const notes = [];
+      for (const kitchen of kitchens) {
+        const degree = (adj.get(kitchen.id) || []).length;
+        if (degree >= 3) {
+          delta -= 8;
+          flags.bottlenecks.push(kitchen.id);
+          notes.push(`${plainName(kitchen.name)} has ${degree} openings. Anyone crossing the plan walks through the cook.`);
+        }
+      }
+      if (!kitchens.length) {
+        delta -= 6;
+        notes.push("I do not see a kitchen on this plan.");
+      }
+      return { delta, note: notes[0] || "The kitchen sits off the main cross traffic.", passed: delta >= 0, detail: notes };
+    }
+    if (id === "entryKitchen") {
+      if (!entries.length || !kitchens.length) {
+        return { delta: -4, note: "There is no clear entry-to-kitchen path yet.", passed: false, detail: [] };
+      }
+      if (!entryKitchen) {
+        return { delta: -8, note: "Bags from the door cannot reach the kitchen on these doors.", passed: false, detail: [] };
+      }
+      if (entryKitchen.length > 5) {
+        return { delta: -5, note: "The path from the door to the kitchen is long for a grocery drop.", passed: false, detail: [] };
+      }
+      return { delta: 4, note: "The door reaches the kitchen in a short walk.", passed: true, detail: [] };
+    }
+    if (id === "bedBath") {
+      if (!beds.length || !baths.length) {
+        return { delta: -8, note: "A bedroom-to-bath path needs both rooms on the plan.", passed: false, detail: [] };
+      }
+      let far = 0;
+      for (const bed of beds) {
+        const path = shortestExisting(adj, [bed.id], baths.map((room) => room.id));
+        if (!path) far += 1;
+        else if (path.length > 4) far += 1;
+      }
+      if (far) {
+        return { delta: -6 * far, note: "Some bedrooms sit far from a bath. Night walks will feel longer than the square footage.", passed: false, detail: [] };
+      }
+      return { delta: 4, note: "Each bedroom reaches a bath in a short walk.", passed: true, detail: [] };
+    }
+    if (id === "bedQuiet") {
+      if (!beds.length) {
+        return { delta: -16, note: "I do not see a bedroom. Quiet scoring stays low until one is on the plan.", passed: false, detail: [] };
+      }
+      const notes = [];
+      let delta = 6;
+      for (const bed of beds) {
+        const noisy = [...livings, ...kitchens, ...dinings].some((room) => adjacent(adj, bed.id, room.id));
+        if (noisy) {
+          delta -= 10;
+          notes.push(`${plainName(bed.name)} opens onto a social room. Sleep and conversation share a door.`);
+        } else {
+          flags.quiet.push(bed.id);
+        }
+      }
+      return { delta, note: notes[0] || "Bedrooms sit off the social rooms.", passed: delta >= 0, detail: notes };
+    }
+    if (id === "sharedWalls") {
+      const notes = [];
+      let delta = 4;
+      for (const bed of beds) {
+        const social = [...livings, ...kitchens, ...dinings];
+        const shared = social.find((room) => facingWall(bed, room));
+        if (shared && !adjacent(adj, bed.id, shared.id)) {
+          delta -= 6;
+          notes.push(`${plainName(bed.name)} shares a wall with ${plainName(shared.name)}. Sound will travel even without a door.`);
+        }
+      }
+      return { delta, note: notes[0] || "Sleeping rooms do not share a long wall with the loud rooms.", passed: delta >= 0, detail: notes };
+    }
+    if (id === "wfhZone") {
+      if (!profile.wfh) {
+        return { delta: 0, note: "No work-from-home room was asked for.", passed: true, detail: [], skip: true };
+      }
+      const extraBed = beds.length > bedNeed;
+      if (!studies.length && !extraBed) {
+        return { delta: -8, note: "Work from home wants a study, or a bedroom that is not already spoken for.", passed: false, detail: [] };
+      }
+      return { delta: 5, note: "There is a room that can stay a work room without stealing a bed.", passed: true, detail: [] };
+    }
+    if (id === "daylight") {
+      if (!daylightRooms.length) {
+        return { delta: 0, note: "No living or sleeping rooms to score for daylight.", passed: true, detail: [], skip: true };
+      }
+      const notes = [];
+      let delta = 6;
+      for (const room of daylightRooms) {
+        const wins = windowsForRoom(room, windowDots, Math.max(8, px));
+        const exterior = ["n", "s", "e", "w"].filter((wall) => !wallIsShared(room, wall, plan.rooms)).length;
+        const winFt = wins.reduce((sum, win) => sum + (Number(win.w) || px * 4) / px, 0);
+        const need = Math.max(3, (Number(room.sf) || 120) / 70);
+        if (!wins.length && exterior) {
+          delta -= 5;
+          notes.push(`${plainName(room.name)} has an exterior wall and no window mark yet.`);
+        } else if (winFt + exterior < need) {
+          delta -= 3;
+          notes.push(`${plainName(room.name)} looks short on glass for its size. Confirm the window marks.`);
+        }
+      }
+      return {
+        delta,
+        note: notes[0] || "Window marks look in scale with the rooms that want light.",
+        passed: delta >= 0,
+        detail: notes,
+      };
+    }
+    if (id === "windowOrient") {
+      const known = windowDots.filter((dot) => dot.wall || dot.orient);
+      if (!known.length) {
+        return { delta: 0, note: "Window facing is not on this drawing yet.", passed: true, detail: [], skip: true };
+      }
+      const southish = windowDots.filter((dot) => dot.wall === "s" || dot.wall === "n").length;
+      if (southish) {
+        return { delta: 3, note: "Some rooms take light on more than one side. Facing is still a guess from the drawing.", passed: true, detail: [] };
+      }
+      return { delta: 1, note: "Windows are marked. True compass facing is still unknown.", passed: true, detail: [] };
+    }
+    if (id === "crossVent") {
+      const breezy = daylightRooms.filter((room) => {
+        const wins = windowsForRoom(room, windowDots, Math.max(8, px));
+        const walls = new Set(wins.map((win) => win.wall || (win.orient === "h" ? "n" : "e")));
+        const opposite = (walls.has("n") && walls.has("s")) || (walls.has("e") && walls.has("w"));
+        const exterior = ["n", "s", "e", "w"].filter((wall) => !wallIsShared(room, wall, plan.rooms));
+        return opposite || exterior.length >= 2;
+      });
+      if (!breezy.length) {
+        return { delta: -5, note: "Few rooms take air on two sides. A cross breeze will be hard without a through-window.", passed: false, detail: [] };
+      }
+      return { delta: 4, note: `${breezy.length} room${breezy.length === 1 ? "" : "s"} can take air on more than one side.`, passed: true, detail: [] };
+    }
+    if (id === "closetsPerBed") {
+      let need = 16 * size;
+      if (profile.cooks) need += 12;
+      if (profile.guestsOften || profile.entertainer) need += 10;
+      if (profile.kids) need += 12;
+      if (profile.pets) need += 8;
+      if (horizon.years >= 15) need += 10;
+      const gap = need - closetSf;
+      const perBed = beds.length ? closets.length / beds.length : closets.length;
+      if (gap > 20) {
+        for (const closet of closets) flags.strain.push(closet.id);
+        if (!closets.length) flags.strain.push(...halls.map((room) => room.id));
+        return { delta: -14, note: "Closet space is thin for this household and horizon. Halls will start to hold what rooms cannot.", passed: false, detail: [] };
+      }
+      if (beds.length && perBed < 1) {
+        return { delta: -6, note: "Not every bedroom has a closet. Dressers will take floor you might have wanted for a path.", passed: false, detail: [] };
+      }
+      if (gap > 0) {
+        return { delta: -5, note: "Storage is workable, not generous. A linen closet would take pressure off the halls.", passed: false, detail: [] };
+      }
+      return { delta: 5, note: "Closets keep up with this household, which keeps the rooms themselves clearer.", passed: true, detail: [] };
+    }
+    if (id === "entryDrop") {
+      if (!entries.length) {
+        return { delta: -5, note: "There is no true entry. Coats and bags will land in the first social room.", passed: false, detail: [] };
+      }
+      const foyer = entries[0];
+      if ((foyer.sf || 0) < 30) {
+        return { delta: -2, note: "The entry is tight. A small drop zone still beats landing in the living room.", passed: false, detail: [] };
+      }
+      return { delta: 3, note: "The entry can take a drop zone before the rest of the plan.", passed: true, detail: [] };
+    }
+    if (id === "laundryAccess") {
+      if (ticks.laundryInUnit || laundryRoom) {
+        const fromBed = laundryRoom ? shortestExisting(adj, beds.map((room) => room.id), [laundryRoom.id]) : ["ok"];
+        if (fromBed && fromBed.length > 6) {
+          return { delta: -2, note: "Laundry is in the home, but the walk from a bedroom is long.", passed: false, detail: [] };
+        }
+        return { delta: 3, note: "Laundry sits in the home, within a fair walk of the bedrooms.", passed: true, detail: [] };
+      }
+      if (ticks.laundryUnknown) {
+        return { delta: 0, note: "Laundry is not marked yet. Ask where the machines live.", passed: true, detail: [] };
+      }
+      return { delta: -3, note: "I do not see laundry in the home. Confirm with the listing, then tick it if it is there.", passed: false, detail: [] };
+    }
+    if (id === "fitKids") {
+      if (!profile.kids) {
+        return { delta: 0, note: "No children in this household.", passed: true, detail: [], skip: true };
+      }
+      let delta = 2;
+      const notes = [];
+      if (horizon.years >= 10 && beds.length < 2) {
+        delta -= 10;
+        notes.push("At a ten-year stay, a second bedroom gives growing children a door of their own.");
+      }
+      if (horizon.years === 5 && livingSf < 200) {
+        delta -= 5;
+        notes.push("The first five years with children ask more of the common room than this living room offers.");
+      }
+      if (beds.length >= bedNeed) delta += 3;
+      return { delta, note: notes[0] || "The bedroom count can hold this household of children.", passed: delta >= 0, detail: notes };
+    }
+    if (id === "fitPets") {
+      if (!profile.pets) {
+        return { delta: 0, note: "No pets in this household.", passed: true, detail: [], skip: true };
+      }
+      if (!entries.length) {
+        return { delta: -5, note: "Pets do better with a true entry, so the rest of the plan stays cleaner.", passed: false, detail: [] };
+      }
+      return { delta: 3, note: "The entry gives pets a place to shake off the walk before the living room.", passed: true, detail: [] };
+    }
+    if (id === "fitGuests") {
+      if (!(profile.entertainer || profile.guestsOften)) {
+        return { delta: 0, note: "Guests are not a focus for this household.", passed: true, detail: [], skip: true };
+      }
+      if (!livings.length || !dinings.length || !cook) {
+        return { delta: -7, note: "Guests need a living room and a dining room that actually connect.", passed: false, detail: [] };
+      }
+      return { delta: 4, note: "Guests can sit, then eat, without walking through a bedroom.", passed: true, detail: [] };
+    }
+    if (id === "agingInPlace") {
+      const primary = beds[0];
+      const bathNear =
+        primary &&
+        baths.some((bath) => adjacent(adj, primary.id, bath.id) || (pathBetween(adj, primary.id, bath.id) || []).length <= 3);
+      const stepFree = ticks.elevator || Number(building.walkupFloor) === 0 || building.walkupFloor === "0";
+      let delta = 2;
+      const notes = [];
+      if (!bathNear) {
+        delta -= 8;
+        notes.push("A bath should sit next to the main bedroom if this is meant to age in place.");
+      } else {
+        notes.push("A bath near the main bedroom helps this plan age in place.");
+      }
+      if (morning && morning.length <= 4) delta += 2;
+      if (Number(building.walkupFloor) >= 2 && !ticks.elevator) {
+        delta -= 6;
+        notes.push("A walk-up floor asks more of knees over the years. Confirm a step-free path with the listing.");
+      } else if (stepFree) {
+        delta += 2;
+      }
+      return { delta, note: notes[0], passed: delta >= 0, detail: notes };
+    }
+    if (id === "flexibility") {
+      const spare = studies.length + Math.max(0, beds.length - bedNeed) + plan.rooms.filter((room) => room.type === "other").length;
+      if (profile.homebody && livingSf < 180) {
+        return { delta: -4, note: "A homebody household will feel the living room more than a larger common room would.", passed: false, detail: [] };
+      }
+      if (spare < 1 && horizon.years >= 10) {
+        return { delta: -5, note: "There is little spare room to change use over a long stay.", passed: false, detail: [] };
+      }
+      return { delta: spare ? 4 : 1, note: spare ? "A spare room can change job as the years stack." : "The rooms are spoken for, but they connect cleanly.", passed: true, detail: [] };
+    }
+    if (id === "growingHh") {
+      let delta = 2;
+      const notes = [];
+      if (beds.length < bedNeed) {
+        delta -= 12;
+        notes.push("Bedroom count is tight for the household you described.");
+      }
+      if (totalSf > 0 && totalSf / size < 220) {
+        delta -= 5;
+        notes.push("Square footage per person is tight. Circulation and storage will do more of the work.");
+      }
+      if (profile.kids && horizon.years >= 10 && beds.length < 3 && size >= 4) {
+        delta -= 4;
+        notes.push("A growing household will want another door in a decade.");
+      }
+      return { delta, note: notes[0] || "There is room for this household to stay a while.", passed: delta >= 0, detail: notes };
+    }
+    if (id === "floorSlip") {
+      if (!ticks.floorGlossWet && !ticks.tileBath) {
+        return { delta: 0, note: "No flooring caution ticked. Skip, or mark what you see in the photos.", passed: true, detail: [], skip: true };
+      }
+      const notes = [];
+      let delta = 0;
+      if (ticks.floorGlossWet) {
+        delta -= 6;
+        notes.push("High-gloss floors in a wet area, entry, or stair can be slippery when they are wet. Ask an inspector how they feel underfoot.");
+      }
+      if (ticks.tileBath) {
+        delta -= 4;
+        notes.push("Bath tile without much texture can be slick. A bath mat helps, and an inspector can speak to the finish.");
+      }
+      return { delta, note: notes[0], passed: false, detail: notes, caution: true };
+    }
+    if (id === "counters") {
+      if (!ticks.marbleKitchen && !ticks.laminateCooktop) {
+        return { delta: 0, note: "No countertop caution ticked.", passed: true, detail: [], skip: true };
+      }
+      const notes = [];
+      let delta = 0;
+      if (ticks.marbleKitchen) {
+        delta -= 5;
+        notes.push("Marble in a kitchen can etch and stain. Many households love it anyway. Ask how it has been cared for, and let an inspector weigh in.");
+      }
+      if (ticks.laminateCooktop) {
+        delta -= 4;
+        notes.push("Laminate next to a cooktop can scorch. Confirm the clearance, then have an inspector look at it.");
+      }
+      return { delta, note: notes[0], passed: false, detail: notes, caution: true };
+    }
+    if (id === "cooling") {
+      if (ticks.windowAc || ticks.noDucts) {
+        return {
+          delta: -5,
+          note: "Every room has its own AC unit. That usually means no central air. Confirm coverage on a hot day, and ask an inspector about the electrical load.",
+          passed: false,
+          detail: [],
+          caution: true,
+        };
+      }
+      return { delta: 0, note: "Cooling type is not marked yet.", passed: true, detail: [], skip: true };
+    }
+    if (id === "heating") {
+      if (building.heating === "radiators") {
+        return { delta: 0, note: "Radiators are marked. They heat slowly and take wall space. Ask how even the rooms feel in winter.", passed: true, detail: [], caution: true };
+      }
+      if (building.heating === "baseboard") {
+        return { delta: 0, note: "Baseboard heat is marked. It can leave cold corners. Ask which rooms get the most use in winter.", passed: true, detail: [], caution: true };
+      }
+      return { delta: 0, note: "Heating type is not marked yet.", passed: true, detail: [], skip: true };
+    }
+    if (id === "leadPaint") {
+      const year = Number(building.yearBuilt);
+      if (!year) {
+        return { delta: 0, note: "Year built is not entered. If it is before 1978, ask for the federal lead paint disclosure.", passed: true, detail: [], skip: true };
+      }
+      if (year < 1978) {
+        return {
+          delta: -4,
+          note: `Built ${year}. Homes from before 1978 fall under the federal lead paint disclosure (EPA/HUD). Ask for that paper, and let an inspector speak to paint, wiring, and plumbing.`,
+          passed: false,
+          detail: [],
+          caution: true,
+        };
+      }
+      if (year < 1990) {
+        return {
+          delta: -1,
+          note: `Built ${year}. Worth asking an inspector about wiring, plumbing, and any older materials.`,
+          passed: true,
+          detail: [],
+          caution: true,
+        };
+      }
+      return { delta: 1, note: `Built ${year}. Still have an inspector walk the systems.`, passed: true, detail: [] };
+    }
+    if (id === "bathVsBed") {
+      if (baths.length < Math.max(1, Math.round(size / 2))) {
+        return { delta: -7, note: "Bath count is lean for the morning crush this household would make.", passed: false, detail: [] };
+      }
+      if (beds.length && baths.length < Math.ceil(beds.length / 2)) {
+        return { delta: -4, note: "Fewer baths than bedrooms. Mornings will queue.", passed: false, detail: [] };
+      }
+      return { delta: 3, note: "Bath count can handle this household's morning.", passed: true, detail: [] };
+    }
+    if (id === "laundryInUnit") {
+      if (ticks.laundryInUnit || laundryRoom) {
+        return { delta: 3, note: "Laundry is in the home.", passed: true, detail: [] };
+      }
+      return { delta: -2, note: "Laundry in the home is not marked. Confirm it before you count on it.", passed: false, detail: [] };
+    }
+    if (id === "elevatorWalkup") {
+      const floor = Number(building.walkupFloor);
+      if (ticks.elevator) {
+        return { delta: 3, note: "An elevator is marked, which keeps the path step-free.", passed: true, detail: [] };
+      }
+      if (Number.isFinite(floor) && floor >= 2) {
+        return { delta: -6, note: `Walk-up, floor ${floor}. Confirm the stair and whether a step-free path exists.`, passed: false, detail: [], caution: true };
+      }
+      if (floor === 1 || floor === 0) {
+        return { delta: 2, note: "Ground or a low floor is marked.", passed: true, detail: [] };
+      }
+      return { delta: 0, note: "Elevator or walk-up is not marked yet.", passed: true, detail: [], skip: true };
+    }
+    if (id === "outdoor") {
+      if (ticks.outdoor || terraces.length) {
+        return { delta: 3, note: "There is outdoor space on the plan or in the notes.", passed: true, detail: [] };
+      }
+      return { delta: 0, note: "No outdoor space marked. Tick it if the listing shows a terrace or garden.", passed: true, detail: [], skip: true };
+    }
+    return { delta: 0, note: "", passed: true, detail: [], skip: true };
+  };
+
+  const dimensions = { circulation: 80, quiet: 80, storage: 76, fit: 78, light: 78, comfort: 82 };
+  const breakdown = [];
+  const notes = [];
+  const dimWeight = {
+    circulation: 0.26,
+    quiet: 0.18,
+    storage: 0.16,
+    fit: 0.22,
+    light: 0.1,
+    comfort: 0.08,
+  };
+  const used = { circulation: 0, quiet: 0, storage: 0, fit: 0, light: 0, comfort: 0 };
+
+  for (const meta of DILIGENCE_CHECKS) {
+    const row = cfg.checks?.[meta.id] || { on: false, strictness: "standard" };
+    if (!row.on) continue;
+    const result = evalCheck(meta.id);
+    if (result.skip && result.delta === 0) {
+      breakdown.push({
+        id: meta.id,
+        group: meta.group,
+        label: meta.label,
+        on: true,
+        strictness: row.strictness,
+        delta: 0,
+        note: result.note,
+        passed: true,
+        scanned: true,
+        caution: Boolean(result.caution),
+      });
+      continue;
+    }
+    const factor = strictnessFactor(row.strictness);
+    const delta = result.delta * (result.delta < 0 ? factor : 1);
+    dimensions[meta.dim] = (dimensions[meta.dim] || 80) + delta;
+    used[meta.dim] = (used[meta.dim] || 0) + 1;
+    breakdown.push({
+      id: meta.id,
+      group: meta.group,
+      label: meta.label,
+      on: true,
+      strictness: row.strictness,
+      delta: Math.round(delta),
+      note: result.note,
+      passed: result.passed,
+      scanned: true,
+      caution: Boolean(result.caution),
+    });
+    if (result.note) notes.push(result.note);
+    for (const extra of result.detail || []) {
+      if (extra !== result.note) notes.push(extra);
+    }
   }
-  if (baths.length < Math.max(1, Math.round(size / 2))) {
-    fit -= 8;
-    notes.push("Bath count is lean for the morning crush this household would make.");
+
+  if (profile.cooks && kitchenSf < 80 && cfg.checks?.fitGuests) {
+    /* kitchen size still colors household fit when cooks is on */
   }
   if (profile.cooks && kitchenSf < 80) {
-    fit -= 10;
+    dimensions.fit -= 6;
     notes.push("A household that cooks a lot will feel a kitchen under 80 square feet.");
   } else if (profile.cooks && kitchenSf >= 90) {
-    fit += 4;
-  }
-  if ((profile.entertainer || profile.guestsOften) && (!livings.length || !dinings.length || !cook)) {
-    fit -= 8;
-    notes.push("Guests need a living room and a dining room that actually connect.");
-  }
-  if (profile.wfh) {
-    const extraBed = beds.length > bedNeed;
-    if (!studies.length && !extraBed) {
-      fit -= 10;
-      notes.push("Work from home wants a study, or a bedroom that is not already spoken for.");
-    } else {
-      fit += 4;
-      notes.push("There is a room that can stay a work room without stealing a bed.");
-    }
-  }
-  if (profile.pets && !entries.length) {
-    fit -= 6;
-    notes.push("Pets do better with a true entry, so the rest of the plan stays cleaner.");
-  }
-  if (horizon.years >= 15) {
-    const primary = beds[0];
-    const bathNear = primary && baths.some((bath) => adjacent(adj, primary.id, bath.id) || pathBetween(adj, primary.id, bath.id)?.length <= 3);
-    if (!bathNear) {
-      fit -= 10;
-      notes.push("For a long stay, a bath should sit next to the main bedroom.");
-    } else {
-      fit += 3;
-      notes.push("A bath near the main bedroom helps this plan age in place.");
-    }
-    if (morning && morning.length <= 4) fit += 3;
-  }
-  if (horizon.years === 5 && profile.kids && livingSf < 200) {
-    fit -= 6;
-    notes.push("The first five years with children ask more of the common room than this living room offers.");
-  }
-  if (totalSf > 0 && totalSf / size < 220) {
-    fit -= 6;
-    notes.push("Square footage per person is tight. Circulation and storage will do more of the work.");
+    dimensions.fit += 3;
   }
 
-  circulation = clamp(Math.round(circulation), 0, 100);
-  quiet = clamp(Math.round(quiet), 0, 100);
-  storage = clamp(Math.round(storage), 0, 100);
-  fit = clamp(Math.round(fit), 0, 100);
-  const score = clamp(Math.round(circulation * 0.3 + quiet * 0.22 + storage * 0.2 + fit * 0.28), 0, 100);
-
-  if (!notes.length) {
-    notes.push("The rooms connect cleanly. Daily paths have somewhere to go.");
+  const dimNames = Object.keys(dimensions);
+  for (const name of dimNames) {
+    dimensions[name] = clamp(Math.round(dimensions[name]), 0, 100);
   }
+  let weightSum = 0;
+  let acc = 0;
+  for (const name of dimNames) {
+    if (!used[name] && name !== "circulation" && name !== "quiet" && name !== "storage" && name !== "fit") continue;
+    const w = dimWeight[name] || 0.1;
+    acc += dimensions[name] * w;
+    weightSum += w;
+  }
+  const score = clamp(Math.round(acc / (weightSum || 1)), 0, 100);
+
+  const uniqueNotes = [];
+  const cautionNotes = breakdown.filter((row) => row.caution || row.passed === false).map((row) => row.note);
+  for (const note of [...cautionNotes, ...notes]) {
+    if (note && !uniqueNotes.includes(note)) uniqueNotes.push(note);
+  }
+  if (!uniqueNotes.length) uniqueNotes.push("The rooms connect cleanly. Daily paths have somewhere to go.");
 
   return {
     score,
     dimensions: {
-      circulation,
-      quiet,
-      storage,
-      fit,
+      circulation: dimensions.circulation,
+      quiet: dimensions.quiet,
+      storage: dimensions.storage,
+      fit: dimensions.fit,
+      light: dimensions.light,
+      comfort: dimensions.comfort,
     },
-    notes: notes.slice(0, 7),
+    notes: uniqueNotes.slice(0, 8),
+    breakdown,
     flags,
     totals: { totalSf, closetSf, kitchenSf, livingSf, beds: beds.length, baths: baths.length },
     horizon: horizon.id,
+    diligencePreset: presetFromDiligence(cfg),
+    checksActive: activeCheckCount(cfg),
+    furnishedAssumed: extras.furnished !== false,
   };
 }
 
@@ -786,5 +1183,5 @@ export function horizonNeedLine(year) {
 }
 
 export function defaultGuideHello() {
-  return "Due-diligence simulator. Enter an address, or upload a plan. I read walls and doors on this device. You check the doors, then I walk the floor.";
+  return "Due-diligence simulator. Enter an address, or drop a plan. You check the doors and windows, then I walk the floor.";
 }

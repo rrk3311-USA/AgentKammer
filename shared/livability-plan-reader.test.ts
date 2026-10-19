@@ -78,7 +78,7 @@ describe("livability CV-first plan reader", () => {
     const miss = cannotFetchPlan("15 Central Park West");
     expect(miss.ok).toBe(false);
     expect(miss.reason).toMatch(/cannot read/i);
-    expect(miss.reason).toMatch(/upload/i);
+    expect(miss.reason).toMatch(/drop it here/i);
     expect(miss.reason).not.toContain("—");
   });
 });

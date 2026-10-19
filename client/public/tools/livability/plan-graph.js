@@ -84,9 +84,77 @@ export function doorDotsFromPlan(plan) {
       y: hit.wall === "e" || hit.wall === "w" ? hit.y + hit.len / 2 : hit.y,
       a: a.id,
       b: b.id,
+      kind: "door",
     });
   }
   return dots;
+}
+
+const WINDOW_ROOMS = new Set(["living", "dining", "kitchen", "bedroom", "bath", "study", "entry"]);
+
+export function wallIsShared(room, wall, rooms) {
+  return (rooms || []).some((other) => other.id !== room.id && facingWall(room, other)?.wall === wall);
+}
+
+export function windowDotsFromPlan(plan) {
+  if (Array.isArray(plan?.windowDots) && plan.windowDots.length) {
+    return plan.windowDots.map((dot) => ({ ...dot, kind: "window" }));
+  }
+  const rooms = plan.rooms || [];
+  const doors = plan.doors || [];
+  const px = Number(plan.pxPerFt) || 8;
+  const dots = [];
+  for (const room of rooms) {
+    if (!WINDOW_ROOMS.has(room.type)) continue;
+    const walls = [
+      { id: "n", orient: "h", x: room.x, y: room.y, len: room.w },
+      { id: "s", orient: "h", x: room.x, y: room.y + room.h, len: room.w },
+      { id: "w", orient: "v", x: room.x, y: room.y, len: room.h },
+      { id: "e", orient: "v", x: room.x + room.w, y: room.y, len: room.h },
+    ];
+    for (const wall of walls) {
+      if (wallIsShared(room, wall.id, rooms)) continue;
+      if (wall.len < px * 6) continue;
+      const doorOnWall = doors.some((door) => {
+        const otherId = door.a === room.id ? door.b : door.b === room.id ? door.a : null;
+        if (!otherId) return false;
+        const other = rooms.find((item) => item.id === otherId);
+        return other && facingWall(room, other)?.wall === wall.id;
+      });
+      if (doorOnWall && room.type === "entry") continue;
+      const winLen = Math.min(Math.max(px * 3.5, wall.len * 0.32), px * 7);
+      const t = room.type === "living" || room.type === "kitchen" ? 0.42 : 0.36;
+      const x = wall.orient === "h" ? wall.x + wall.len * t : wall.x;
+      const y = wall.orient === "v" ? wall.y + wall.len * t : wall.y;
+      if (dots.some((dot) => Math.hypot(dot.x - x, dot.y - y) < px * 2.2)) continue;
+      dots.push({
+        x,
+        y,
+        orient: wall.orient,
+        w: winLen,
+        kind: "window",
+        roomId: room.id,
+        wall: wall.id,
+      });
+    }
+  }
+  return dots;
+}
+
+export function windowsForRoom(room, dots, pad = 10) {
+  return (dots || []).filter((dot) => {
+    if (dot.kind && dot.kind !== "window") return false;
+    if (dot.roomId === room.id) return true;
+    const onH =
+      (Math.abs(dot.y - room.y) <= pad || Math.abs(dot.y - (room.y + room.h)) <= pad) &&
+      dot.x >= room.x - pad &&
+      dot.x <= room.x + room.w + pad;
+    const onV =
+      (Math.abs(dot.x - room.x) <= pad || Math.abs(dot.x - (room.x + room.w)) <= pad) &&
+      dot.y >= room.y - pad &&
+      dot.y <= room.y + room.h + pad;
+    return onH || onV;
+  });
 }
 
 function distToRect(px, py, room) {

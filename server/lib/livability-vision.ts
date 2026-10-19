@@ -60,8 +60,8 @@ export function livabilityVisionStatus() {
     cv: true,
     provider,
     note: provider
-      ? "Plans are read on this device. An optional vision boost can refine labels when you leave it on."
-      : "Plans are read on this device. No vision key is set, so labels stay with the on-device reading.",
+      ? "Room names can be polished from the drawing if you leave that on."
+      : "Find the plan online, download it, and drop it here.",
   };
 }
 
@@ -228,6 +228,141 @@ export async function boostFloorPlanLabels(input: {
       labels: [],
       error: error instanceof Error ? error.message : "Vision boost failed.",
       engine: status.provider,
+    };
+  }
+}
+
+const MATERIALS_PROMPT =
+  "You look at listing photos of a home, never of people. Return JSON only: {suggestions:[{id,label,note}]}. id must be one of floorSlip, tileBath, marbleKitchen, laminateCooktop, windowAc, noDucts, radiators, baseboard, laundryInUnit, outdoor. These are suggestions for the buyer to confirm, never facts. Use calm, friendly language. No guarantees. Suggest they verify with an inspector. Layout and materials only. No neighborhood, school, or who should live here.";
+
+function parseSuggestions(text: string) {
+  const jsonStart = text.indexOf("{");
+  const jsonEnd = text.lastIndexOf("}");
+  if (jsonStart < 0 || jsonEnd <= jsonStart) return [];
+  let parsed: { suggestions?: unknown };
+  try {
+    parsed = JSON.parse(text.slice(jsonStart, jsonEnd + 1));
+  } catch {
+    return [];
+  }
+  if (!Array.isArray(parsed.suggestions)) return [];
+  const allowed = new Set([
+    "floorSlip",
+    "tileBath",
+    "marbleKitchen",
+    "laminateCooktop",
+    "windowAc",
+    "noDucts",
+    "radiators",
+    "baseboard",
+    "laundryInUnit",
+    "outdoor",
+  ]);
+  const out: Array<{ id: string; label: string; note: string }> = [];
+  for (const raw of parsed.suggestions) {
+    if (!raw || typeof raw !== "object") continue;
+    const row = raw as { id?: unknown; label?: unknown; note?: unknown };
+    const id = typeof row.id === "string" ? row.id : "";
+    if (!allowed.has(id)) continue;
+    out.push({
+      id,
+      label: typeof row.label === "string" ? row.label.trim().slice(0, 80) : id,
+      note: typeof row.note === "string" ? row.note.trim().slice(0, 220) : "",
+    });
+  }
+  return out.slice(0, 8);
+}
+
+export async function suggestMaterialsFromPhotos(input: { photos?: Array<{ dataUrl?: string }> }) {
+  const status = livabilityVisionStatus();
+  if (!status.boost) {
+    return {
+      ok: false as const,
+      available: false,
+      boost: false,
+      suggestions: [],
+      error: "Tick what you see. Photos stay on this page until you confirm a check.",
+    };
+  }
+  const photos = (input.photos || [])
+    .map((item) => item?.dataUrl || "")
+    .filter((item) => item.startsWith("data:image/"))
+    .slice(0, 4);
+  if (!photos.length) {
+    return {
+      ok: false as const,
+      available: true,
+      boost: true,
+      suggestions: [],
+      error: "Add a listing photo first. Nothing is ticked until you confirm it.",
+    };
+  }
+  try {
+    let text = "";
+    if (status.provider === "gemini") {
+      const key = geminiKey();
+      const model = process.env.GEMINI_MODEL || "gemini-2.0-flash";
+      const parts: Array<{ text: string } | { inline_data: { mime_type: string; data: string } }> = [
+        { text: MATERIALS_PROMPT },
+      ];
+      for (const image of photos) {
+        const parsed = dataUrlParts(image);
+        if (!parsed) continue;
+        parts.push({ inline_data: { mime_type: parsed.mime, data: parsed.data } });
+      }
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ role: "user", parts }],
+            generationConfig: { temperature: 0, responseMimeType: "application/json" },
+          }),
+        },
+      );
+      const body = (await res.json()) as {
+        candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
+      };
+      text = body.candidates?.[0]?.content?.parts?.map((part) => part.text || "").join("\n") || "";
+    } else {
+      const openai = openaiClient(status.provider === "openai" ? "openai" : "xai");
+      const model =
+        status.provider === "xai"
+          ? process.env.DECISION_GUIDE_MODEL || "grok-4.3"
+          : process.env.OPENAI_MODEL || process.env.DECISION_GUIDE_MODEL || "gpt-4o-mini";
+      const completion = await openai.chat.completions.create({
+        model,
+        temperature: 0,
+        response_format: { type: "json_object" },
+        messages: [
+          { role: "system", content: MATERIALS_PROMPT },
+          {
+            role: "user",
+            content: [
+              { type: "text", text: "Listing photos only. Suggest checks for the buyer to confirm." },
+              ...photos.map((url) => ({ type: "image_url" as const, image_url: { url } })),
+            ],
+          },
+        ],
+      });
+      text = completion.choices[0]?.message?.content || "";
+    }
+    const suggestions = parseSuggestions(text);
+    return {
+      ok: suggestions.length > 0,
+      available: true,
+      boost: true,
+      suggestions,
+      error: suggestions.length ? null : "Nothing clear enough to suggest. Tick what you see.",
+    };
+  } catch (error) {
+    return {
+      ok: false as const,
+      available: true,
+      boost: true,
+      suggestions: [],
+      error: error instanceof Error ? error.message : "Photo reading failed.",
     };
   }
 }

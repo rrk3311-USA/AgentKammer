@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { cannotFetchPlan, emptyProfile, furnitureFor, heatMap, labelReserve, makeRiversidePlan, makeStahlPlan, makeSuttonPlan, matchKnownSample, scoreLivability, typicalDay } from "../client/public/tools/livability/engine.js";
+import { applyDiligencePreset, cannotFetchPlan, defaultDiligence, defaultGuideHello, emptyBuilding, emptyProfile, furnitureFor, heatMap, labelReserve, makeRiversidePlan, makeStahlPlan, makeSuttonPlan, matchKnownSample, scoreLivability, typicalDay } from "../client/public/tools/livability/engine.js";
+import { windowDotsFromPlan } from "../client/public/tools/livability/plan-graph.js";
 import { labelPlacement } from "../client/public/tools/livability/draw.js";
 import { SUGGESTIONS_ENABLED, suggestSimilarListings } from "../client/public/tools/livability/suggestions.js";
 
@@ -127,6 +128,49 @@ describe("livability desk scoring", () => {
       expect(label.x + label.w).toBeLessThanOrEqual(room.x + room.w - 2);
       expect(label.y + label.h).toBeLessThanOrEqual(room.y + room.h - 2);
     }
+  });
+
+  it("places window marks on exterior walls and scores daylight", () => {
+    const plan = makeSuttonPlan();
+    expect(plan.windowDots.length).toBeGreaterThan(3);
+    expect(plan.windowDots.every((dot) => dot.kind === "window")).toBe(true);
+    const inferred = windowDotsFromPlan({ ...plan, windowDots: [] });
+    expect(inferred.length).toBeGreaterThan(2);
+    const result = scoreLivability(plan, emptyProfile(), "10");
+    expect(result.breakdown.some((row) => row.id === "daylight")).toBe(true);
+    expect(JSON.stringify(result.breakdown)).not.toContain("—");
+  });
+
+  it("changes the score when diligence presets and checks change", () => {
+    const plan = makeSuttonPlan();
+    const profile = { ...emptyProfile(), householdSize: 2, cooks: true, wfh: true };
+    const standard = scoreLivability(plan, profile, "10", applyDiligencePreset("standard"));
+    const strict = scoreLivability(plan, profile, "10", applyDiligencePreset("strict"), {
+      building: { ...emptyBuilding(), yearBuilt: "1926", ticks: { ...emptyBuilding().ticks, windowAc: true, floorGlossWet: true } },
+    });
+    const relaxed = scoreLivability(plan, profile, "10", applyDiligencePreset("relaxed"));
+    const off = applyDiligencePreset("standard");
+    off.checks.kitchenTraffic.on = false;
+    off.checks.cutThrough.on = false;
+    const custom = scoreLivability(plan, profile, "10", off);
+    expect(standard.checksActive).toBe(18);
+    expect(strict.score).not.toBe(standard.score);
+    expect(relaxed.score).not.toBe(strict.score);
+    expect(custom.score).not.toBe(standard.score);
+    expect(standard.breakdown.length).toBeGreaterThan(5);
+    expect(`${strict.notes.join(" ")} ${strict.breakdown.map((row) => row.note).join(" ")}`).toMatch(/AC unit|lead paint|slippery/i);
+    expect(JSON.stringify({ standard, strict, relaxed })).not.toContain("—");
+    expect(JSON.stringify({ standard, strict, relaxed })).not.toMatch(/school|neighborhood|broker/i);
+  });
+
+  it("keeps customer copy short and free of internals", () => {
+    const hello = defaultGuideHello();
+    const miss = cannotFetchPlan("15 Central Park West");
+    const blob = `${hello} ${miss.reason}`;
+    expect(blob).toMatch(/cannot read/i);
+    expect(blob).toMatch(/Find the plan online, download it, and drop it here/);
+    expect(blob).not.toMatch(/scrape|vision key|Grok|Gemini|device|model/i);
+    expect(blob).not.toContain("—");
   });
 
   it("keeps similar-home suggestions off and empty in v1", () => {

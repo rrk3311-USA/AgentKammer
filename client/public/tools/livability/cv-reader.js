@@ -7,6 +7,8 @@ import {
   estimatePxPerFt,
   guessRoomType,
   roomsFromFills,
+  wallIsShared,
+  windowDotsFromPlan,
 } from "./plan-graph.js";
 
 const OPENCV_SRC = "https://docs.opencv.org/4.10.0/opencv.js";
@@ -259,6 +261,80 @@ function findDoorGaps(mask, w, h, minW, maxW) {
   return dots;
 }
 
+function bandTransitions(mask, w, h, x, y, alongH, band) {
+  let prev = -1;
+  let n = 0;
+  for (let d = -band; d <= band; d += 1) {
+    const px = alongH ? x : x + d;
+    const py = alongH ? y + d : y;
+    if (px < 0 || py < 0 || px >= w || py >= h) continue;
+    const v = mask[py * w + px] ? 1 : 0;
+    if (v !== prev) {
+      n += 1;
+      prev = v;
+    }
+  }
+  return n;
+}
+
+function findWindows(mask, w, h, rooms, doorDots, pxPerFt) {
+  const dots = [];
+  const px = Number(pxPerFt) || 8;
+  const minLen = Math.max(12, Math.round(px * 2.2));
+  const maxLen = Math.round(px * 9);
+  const band = Math.max(5, Math.round(px * 0.7));
+  const nearDoor = (x, y) => (doorDots || []).some((dot) => Math.hypot(dot.x - x, dot.y - y) < px * 2.4);
+  const push = (x, y, orient, len, wall, roomId) => {
+    if (nearDoor(x, y)) return;
+    if (dots.some((dot) => Math.hypot(dot.x - x, dot.y - y) < px * 1.6)) return;
+    dots.push({ x, y, orient, w: len, kind: "window", wall, roomId });
+  };
+
+  for (const room of rooms || []) {
+    const walls = [
+      { id: "n", orient: "h", x0: Math.round(room.x) + 3, x1: Math.round(room.x + room.w) - 3, y: Math.round(room.y), v: false },
+      { id: "s", orient: "h", x0: Math.round(room.x) + 3, x1: Math.round(room.x + room.w) - 3, y: Math.round(room.y + room.h), v: false },
+      { id: "w", orient: "v", y0: Math.round(room.y) + 3, y1: Math.round(room.y + room.h) - 3, x: Math.round(room.x), v: true },
+      { id: "e", orient: "v", y0: Math.round(room.y) + 3, y1: Math.round(room.y + room.h) - 3, x: Math.round(room.x + room.w), v: true },
+    ];
+    for (const wall of walls) {
+      if (wallIsShared(room, wall.id, rooms)) continue;
+      if (!wall.v) {
+        let x = wall.x0;
+        while (x < wall.x1) {
+          const double = bandTransitions(mask, w, h, x, wall.y, true, band) >= 4;
+          if (!double) {
+            x += 1;
+            continue;
+          }
+          const start = x;
+          while (x < wall.x1 && bandTransitions(mask, w, h, x, wall.y, true, band) >= 4) x += 1;
+          const len = x - start;
+          if (len >= minLen && len <= maxLen) push(start + len / 2, wall.y, "h", len, wall.id, room.id);
+        }
+      } else {
+        let y = wall.y0;
+        while (y < wall.y1) {
+          const double = bandTransitions(mask, w, h, wall.x, y, false, band) >= 4;
+          if (!double) {
+            y += 1;
+            continue;
+          }
+          const start = y;
+          while (y < wall.y1 && bandTransitions(mask, w, h, wall.x, y, false, band) >= 4) y += 1;
+          const len = y - start;
+          if (len >= minLen && len <= maxLen) push(wall.x, start + len / 2, "v", len, wall.id, room.id);
+        }
+      }
+    }
+  }
+
+  if (dots.length < 1 && rooms?.length) {
+    return windowDotsFromPlan({ rooms, doors: connectionsFromDoors(rooms, doorDots, px), pxPerFt: px, windowDots: [] });
+  }
+  return dots;
+}
+
 function sealDoorGaps(mask, w, h, dots, typical) {
   const out = mask.slice();
   const half = Math.max(2, Math.round((Number(typical) || 16) * 0.18));
@@ -430,7 +506,8 @@ export function readPlanFromMask(mask, w, h, opts = {}) {
   const fills = floodRooms(sealed, w, h, Math.max(400, (pxGuess * 4) ** 2));
   const rooms = roomsFromFills(fills, pxGuess);
   const doors = connectionsFromDoors(rooms, unique, pxGuess);
-  return { rooms, doorDots: unique, doors, pxPerFt: pxGuess };
+  const windowDots = findWindows(sealed, w, h, rooms, unique, pxGuess);
+  return { rooms, doorDots: unique, windowDots, doors, pxPerFt: pxGuess };
 }
 
 export function maskFromLabeledPlan(label, wall = 6) {
@@ -543,6 +620,8 @@ export async function readPlanFromImage(img, opts = {}) {
     }));
   }
   const doors = connectionsFromDoors(rooms, dots, pxPerFt);
+  const windowDots =
+    graph.windowDots?.length ? graph.windowDots : findWindows(mask, w, h, rooms, dots, pxPerFt);
   return {
     ok: rooms.length >= 1,
     width: w,
@@ -550,6 +629,7 @@ export async function readPlanFromImage(img, opts = {}) {
     pxPerFt,
     rooms,
     doorDots: dots,
+    windowDots,
     doors,
     preview: canvas.toDataURL("image/jpeg", 0.72),
     canvas,

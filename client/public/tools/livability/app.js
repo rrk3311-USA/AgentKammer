@@ -1,8 +1,16 @@
 import {
+  DILIGENCE_CHECKS,
+  DILIGENCE_GROUPS,
+  DILIGENCE_PRESETS,
   HORIZONS,
   ROOM_TYPES,
+  STRICTNESS_CHIPS,
+  activeCheckCount,
+  applyDiligencePreset,
   cannotFetchPlan,
+  defaultDiligence,
   defaultGuideHello,
+  emptyBuilding,
   emptyProfile,
   furnitureFor,
   heatMap,
@@ -11,12 +19,13 @@ import {
   makeStahlPlan,
   makeSuttonPlan,
   matchKnownSample,
+  presetFromDiligence,
   scoreLivability,
   typicalDay,
   uid,
 } from "./engine.js";
 import { furnitureMarkup, renderPlanSvg, setHeatOpacity } from "./draw.js";
-import { applyBoostToRooms, connectionsFromDoors, doorDotsFromPlan } from "./plan-graph.js";
+import { applyBoostToRooms, connectionsFromDoors, doorDotsFromPlan, windowDotsFromPlan } from "./plan-graph.js";
 import { fileToImage, overlappingTiles, readPlanFromImage } from "./cv-reader.js";
 
 // Future billing (not shown in UI): five free runs on this browser, then $1 token packs.
@@ -44,7 +53,16 @@ function load() {
   } catch {
     /* empty */
   }
-  return { runs: [], collection: [], compare: [], profile: emptyProfile(), horizon: "10" };
+  return {
+    runs: [],
+    collection: [],
+    compare: [],
+    profile: emptyProfile(),
+    horizon: "10",
+    diligence: defaultDiligence(),
+    building: emptyBuilding(),
+    furnished: true,
+  };
 }
 
 function save() {
@@ -71,6 +89,15 @@ let dragDot = null;
 let cinemaRaf = 0;
 let cinemaSkip = false;
 let cinemaPlaying = false;
+let diligence = store.diligence || defaultDiligence();
+let building = { ...emptyBuilding(), ...(store.building || {}) };
+building.ticks = { ...emptyBuilding().ticks, ...(building.ticks || {}) };
+let furnished = store.furnished !== false;
+let furnitureOverride = null;
+let adjustFurniture = false;
+let addMark = "door";
+let openAcc = "";
+let furnitureDrag = null;
 
 function setGuideLive(on) {
   $$(".guide-glyph").forEach((node) => node.classList.toggle("is-live", Boolean(on)));
@@ -115,7 +142,18 @@ function layoutIfNeeded(rooms) {
 }
 
 function currentFurniture() {
-  return plan.rooms.length ? furnitureFor(plan, profile, horizon) : [];
+  if (!furnished || !plan.rooms.length) return [];
+  if (furnitureOverride) return furnitureOverride;
+  return furnitureFor(plan, profile, horizon);
+}
+
+function persistDesk() {
+  store.profile = profile;
+  store.horizon = horizon;
+  store.diligence = diligence;
+  store.building = building;
+  store.furnished = furnished;
+  save();
 }
 
 function drawPlan(target, result, opts = {}) {
@@ -124,13 +162,21 @@ function drawPlan(target, result, opts = {}) {
     host.innerHTML = `<p class="empty" style="padding:28px 20px">No plan yet. Look up an address, upload an image, or run a labeled sample.</p>`;
     return;
   }
-  const furniture = opts.furniture || (result ? currentFurniture() : []);
+  const furniture = opts.furniture || (result ? currentFurniture() : furnished ? currentFurniture() : []);
   host.innerHTML = renderPlanSvg(plan, {
     heat: result ? heatMap(plan, result) : {},
     furniture,
-    furnish: opts.furnish !== false,
+    furnish: furnished && opts.furnish !== false,
     label: "Architectural floor plan",
   });
+  host.classList.toggle("is-adjust", adjustFurniture && furnished);
+  const note = $("#furn-note");
+  if (note) {
+    note.textContent = furnished
+      ? "The walk uses assumed furniture for this household. The score is the floor, not the pieces."
+      : "Empty rooms. The score is still the floor, not furniture.";
+  }
+  if (adjustFurniture && furnished) bindFurnitureAdjust(host);
 }
 
 function thumbSvg(run) {
@@ -182,26 +228,169 @@ function renderHorizon() {
   ).join("");
 }
 
+function renderFurnish() {
+  $("#furnish-on")?.setAttribute("aria-pressed", furnished ? "true" : "false");
+  $("#furnish-off")?.setAttribute("aria-pressed", furnished ? "false" : "true");
+  $("#furn-adjust")?.setAttribute("aria-pressed", adjustFurniture ? "true" : "false");
+  if ($("#furn-adjust")) $("#furn-adjust").style.display = furnished ? "" : "none";
+}
+
+function materialsFields() {
+  const ticks = building.ticks || {};
+  return `<div class="mat-fields">
+      <label class="field" style="margin:0"><span>Year built</span><input id="year-built" type="number" min="1800" max="2026" placeholder="1928" value="${escape(building.yearBuilt || "")}"></label>
+      <label class="field" style="margin:0"><span>Walk-up floor</span><input id="walkup-floor" type="number" min="0" max="40" placeholder="0 = ground" value="${escape(building.walkupFloor || "")}"></label>
+    </div>
+    <label class="field"><span>Heating</span>
+      <select id="heating">
+        <option value="">Not sure</option>
+        <option value="radiators"${building.heating === "radiators" ? " selected" : ""}>Radiators</option>
+        <option value="baseboard"${building.heating === "baseboard" ? " selected" : ""}>Baseboard</option>
+        <option value="forced"${building.heating === "forced" ? " selected" : ""}>Forced air</option>
+      </select>
+    </label>
+    <div class="mat-ticks">
+      <label><input type="checkbox" data-tick="floorGlossWet" ${ticks.floorGlossWet ? "checked" : ""}><span>High-gloss floors in a wet area, entry, or stair. They can be slippery when wet. Ask an inspector how they feel underfoot.</span></label>
+      <label><input type="checkbox" data-tick="tileBath" ${ticks.tileBath ? "checked" : ""}><span>Bath tile without much texture. A bath mat helps. Have an inspector speak to the finish.</span></label>
+      <label><input type="checkbox" data-tick="marbleKitchen" ${ticks.marbleKitchen ? "checked" : ""}><span>Marble in the kitchen. It can etch and stain. Ask how it has been cared for.</span></label>
+      <label><input type="checkbox" data-tick="laminateCooktop" ${ticks.laminateCooktop ? "checked" : ""}><span>Laminate near the cooktop. Confirm the clearance. An inspector can look at heat marks.</span></label>
+      <label><input type="checkbox" data-tick="windowAc" ${ticks.windowAc ? "checked" : ""}><span>Every room has its own AC unit. That usually means no central air.</span></label>
+      <label><input type="checkbox" data-tick="noDucts" ${ticks.noDucts ? "checked" : ""}><span>No ducts visible. Cooling may be room by room.</span></label>
+      <label><input type="checkbox" data-tick="laundryInUnit" ${ticks.laundryInUnit ? "checked" : ""}><span>Laundry in the home.</span></label>
+      <label><input type="checkbox" data-tick="elevator" ${ticks.elevator ? "checked" : ""}><span>Elevator, or a step-free path.</span></label>
+      <label><input type="checkbox" data-tick="outdoor" ${ticks.outdoor ? "checked" : ""}><span>Outdoor space on the listing.</span></label>
+    </div>
+    <p class="fine">Lead paint rule <span class="tip" tabindex="0" data-tip="Federal EPA/HUD rule: sellers and landlords of most housing built before 1978 must give buyers and renters a lead paint disclosure. This is a prompt to ask for that paper, not a finding about this home.">?</span></p>
+    <label class="dropzone" id="mat-drop" style="margin-top:10px">
+      <input id="mat-photos" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+      <p class="kicker">Listing photos, optional</p>
+      <p class="fine" style="margin:0">Drop a photo of a finish you want a second look at. Nothing is ticked until you confirm it.</p>
+    </label>
+    <div class="suggest" id="mat-suggest">${(building.suggestions || []).map((item) => escape(item.note || item.label)).join(" ") || ""}</div>`;
+}
+
+function renderDiligence() {
+  const host = $("#diligence");
+  if (!host) return;
+  const preset = presetFromDiligence(diligence);
+  const count = activeCheckCount(diligence);
+  const presets = Object.values(DILIGENCE_PRESETS)
+    .map(
+      (item) =>
+        `<button class="chip" type="button" data-preset="${item.id}" aria-pressed="${preset === item.id}">${item.label}</button>`,
+    )
+    .join("");
+  const custom = preset === "custom" ? `<button class="chip" type="button" aria-pressed="true">Custom</button>` : "";
+  const groups = DILIGENCE_GROUPS.map((group) => {
+    const checks = DILIGENCE_CHECKS.filter((item) => item.group === group.id)
+      .map((item) => {
+        const row = diligence.checks[item.id] || { on: false, strictness: "standard" };
+        const chips = item.hasStrict
+          ? `<span class="strict-chip">${STRICTNESS_CHIPS.map(
+              (chip) =>
+                `<button type="button" data-strict="${item.id}" data-level="${chip.id}" aria-pressed="${row.strictness === chip.id}">${chip.label}</button>`,
+            ).join("")}</span>`
+          : "";
+        return `<div class="check" data-check="${item.id}"><input type="checkbox" data-toggle="${item.id}" ${row.on ? "checked" : ""} aria-label="${item.label}"><label>${item.label}</label>${chips}</div>`;
+      })
+      .join("");
+    const extra = group.id === "materials" ? materialsFields() : "";
+    return `<div class="acc ${openAcc === group.id ? "open" : ""}" data-acc="${group.id}">
+      <button class="acc-head" type="button" data-acc-toggle="${group.id}">${group.label} <em>${group.hint}</em><span class="chev">›</span></button>
+      <div class="acc-body"><div class="acc-inner"><div>${checks}${extra}</div></div></div>
+    </div>`;
+  }).join("");
+  host.innerHTML = `<div class="diligence-head">
+      <p class="kicker" style="margin:0">Diligence</p>
+      <span class="diligence-count">${count} checks active</span>
+    </div>
+    <div class="preset-row">${presets}${custom}</div>
+    ${groups}`;
+}
+
+function setModifyOpen(on) {
+  const drawer = $("#modify-drawer");
+  const btn = $("#open-modify");
+  if (!drawer || !btn) return;
+  drawer.hidden = !on;
+  btn.setAttribute("aria-expanded", on ? "true" : "false");
+  if (on) renderDiligence();
+}
+
+function bindFurnitureAdjust(host) {
+  const svg = host.querySelector("svg");
+  if (!svg) return;
+  svg.addEventListener("pointerdown", (event) => {
+    const node = event.target.closest?.("[data-furn]");
+    if (!node || !adjustFurniture) return;
+    const id = node.getAttribute("data-furn");
+    const items = currentFurniture().map((item) => ({ ...item }));
+    const item = items.find((row) => row.id === id);
+    if (!item) return;
+    if (event.altKey) {
+      furnitureOverride = items.filter((row) => row.id !== id);
+      drawPlan("#plan-canvas", lastRun?.result);
+      return;
+    }
+    const pt = svgPoint(svg, event);
+    furnitureDrag = { id, dx: pt.x - item.x, dy: pt.y - item.y, items };
+    node.classList.add("is-on");
+    svg.setPointerCapture?.(event.pointerId);
+    event.stopPropagation();
+  });
+  svg.addEventListener("pointermove", (event) => {
+    if (!furnitureDrag) return;
+    const pt = svgPoint(svg, event);
+    const item = furnitureDrag.items.find((row) => row.id === furnitureDrag.id);
+    if (!item) return;
+    item.x = pt.x - furnitureDrag.dx;
+    item.y = pt.y - furnitureDrag.dy;
+    const node = svg.querySelector(`[data-furn="${item.id}"]`);
+    node?.setAttribute("transform", `translate(${item.x} ${item.y}) rotate(${item.rot || 0})`);
+  });
+  svg.addEventListener("pointerup", () => {
+    if (!furnitureDrag) return;
+    furnitureOverride = furnitureDrag.items;
+    furnitureDrag = null;
+  });
+}
+
 function renderScore(result) {
   if (!result) {
     $("#score-num").textContent = "-";
     $("#dims").innerHTML = "";
     $("#notes").innerHTML = "";
+    if ($("#check-break")) $("#check-break").innerHTML = "";
     return;
   }
   $("#score-num").textContent = String(result.score);
-  $("#dims").innerHTML = [
+  const dims = [
     ["Circulation", result.dimensions.circulation],
     ["Quiet", result.dimensions.quiet],
     ["Storage", result.dimensions.storage],
     ["Household fit", result.dimensions.fit],
-  ]
+  ];
+  if (result.dimensions.light != null) dims.push(["Light and air", result.dimensions.light]);
+  if (result.dimensions.comfort != null) dims.push(["Comfort", result.dimensions.comfort]);
+  $("#dims").innerHTML = dims
     .map(
       ([label, value]) =>
         `<div class="dim"><span>${label}</span><div class="barline"><i style="width:${value}%"></i></div><b>${value}</b></div>`,
     )
     .join("");
   $("#notes").innerHTML = result.notes.map((note) => `<li>${escape(note)}</li>`).join("");
+  const host = $("#check-break");
+  if (host) {
+    const rows = result.breakdown || [];
+    host.innerHTML = rows.length
+      ? `<p class="kicker" style="margin:4px 0 8px">Per check</p>${rows
+          .map(
+            (row) =>
+              `<div class="break-row ${row.passed ? "" : "fail"}"><span>${escape(row.label)}</span><b>${row.delta > 0 ? "+" : ""}${row.delta}</b><span class="why">${escape(row.note || "")}</span></div>`,
+          )
+          .join("")}`
+      : "";
+  }
 }
 
 function renderCollection() {
@@ -292,6 +481,12 @@ function applyDoorsFromDots() {
   plan.doors = connectionsFromDoors(plan.rooms, plan.doorDots || [], plan.pxPerFt || 8);
 }
 
+function setAddMark(kind) {
+  addMark = kind === "window" ? "window" : "door";
+  $("#mark-door")?.setAttribute("aria-pressed", addMark === "door" ? "true" : "false");
+  $("#mark-window")?.setAttribute("aria-pressed", addMark === "window" ? "true" : "false");
+}
+
 function svgPoint(svg, event) {
   const pt = svg.createSVGPoint();
   pt.x = event.clientX;
@@ -309,25 +504,29 @@ function renderDoorConfirm() {
   host.classList.add("show");
   confirmOpen = true;
   const dots = plan.doorDots || [];
-  $("#confirm-copy").textContent = `${dots.length} door mark${dots.length === 1 ? "" : "s"}. Tap a mark to remove it. Drag to move. Click a wall to add. Connections come from these doors, not from a model.`;
+  const windows = plan.windowDots || [];
+  $("#confirm-copy").textContent = `${dots.length} door${dots.length === 1 ? "" : "s"}, ${windows.length} window${windows.length === 1 ? "" : "s"}. Tap a mark to remove it. Drag to move. Click a wall to add. Brass is a door. Blue-gray is a window.`;
+  const doorMarks = dots
+    .map((dot, index) => `<circle class="door-dot" data-kind="door" data-i="${index}" cx="${dot.x}" cy="${dot.y}" r="8"></circle>`)
+    .join("");
+  const windowMarks = windows
+    .map((dot, index) => `<circle class="window-dot" data-kind="window" data-i="${index}" cx="${dot.x}" cy="${dot.y}" r="7"></circle>`)
+    .join("");
   if (plan.preview && plan.width && plan.height) {
     stage.innerHTML = `<div class="confirm-board">
       <img src="${plan.preview}" alt="Uploaded floor plan">
-      <svg class="confirm-svg" viewBox="0 0 ${plan.width} ${plan.height}" role="img" aria-label="Door marks on the uploaded plan">
+      <svg class="confirm-svg" viewBox="0 0 ${plan.width} ${plan.height}" role="img" aria-label="Door and window marks on the uploaded plan">
         ${(plan.rooms || []).map((room) => `<rect class="confirm-room" x="${room.x}" y="${room.y}" width="${room.w}" height="${room.h}"></rect>`).join("")}
-        ${dots.map((dot, index) => `<circle class="door-dot" data-i="${index}" cx="${dot.x}" cy="${dot.y}" r="8"></circle>`).join("")}
+        ${doorMarks}${windowMarks}
       </svg>
     </div>`;
   } else {
-    const extras = dots
-      .map((dot, index) => `<circle class="door-dot" data-i="${index}" cx="${dot.x}" cy="${dot.y}" r="7"></circle>`)
-      .join("");
     stage.innerHTML = renderPlanSvg(plan, {
       furniture: [],
       furnish: false,
       labels: true,
-      extras,
-      label: "Door confirm",
+      extras: doorMarks + windowMarks,
+      label: "Door and window confirm",
     });
   }
   const svg = stage.querySelector("svg");
@@ -345,23 +544,31 @@ function hideDoorConfirm() {
 
 function onConfirmPointerDown(event) {
   const svg = event.currentTarget;
-  const dot = event.target.closest?.(".door-dot");
+  const dot = event.target.closest?.(".door-dot, .window-dot");
   const pt = svgPoint(svg, event);
   if (dot) {
+    const kind = dot.dataset.kind || "door";
     const index = Number(dot.dataset.i);
-    if (event.shiftKey || event.altKey) {
-      plan.doorDots.splice(index, 1);
+    const list = kind === "window" ? plan.windowDots : plan.doorDots;
+    if (event.altKey) {
+      list.splice(index, 1);
       applyDoorsFromDots();
       renderDoorConfirm();
       return;
     }
-    dragDot = { index, moved: false, x: pt.x, y: pt.y };
+    dragDot = { kind, index, moved: false, x: pt.x, y: pt.y };
     svg.setPointerCapture?.(event.pointerId);
     return;
   }
-  plan.doorDots = plan.doorDots || [];
-  plan.doorDots.push({ x: pt.x, y: pt.y });
-  applyDoorsFromDots();
+  const kind = event.shiftKey ? "window" : addMark;
+  if (kind === "window") {
+    plan.windowDots = plan.windowDots || [];
+    plan.windowDots.push({ x: pt.x, y: pt.y, kind: "window", w: (plan.pxPerFt || 8) * 4 });
+  } else {
+    plan.doorDots = plan.doorDots || [];
+    plan.doorDots.push({ x: pt.x, y: pt.y, kind: "door" });
+    applyDoorsFromDots();
+  }
   renderDoorConfirm();
 }
 
@@ -372,11 +579,13 @@ function onConfirmPointerMove(event) {
   const dx = pt.x - dragDot.x;
   const dy = pt.y - dragDot.y;
   if (Math.hypot(dx, dy) > 3) dragDot.moved = true;
-  const item = plan.doorDots[dragDot.index];
+  const list = dragDot.kind === "window" ? plan.windowDots : plan.doorDots;
+  const item = list?.[dragDot.index];
   if (!item) return;
   item.x = pt.x;
   item.y = pt.y;
-  const node = svg.querySelector(`.door-dot[data-i="${dragDot.index}"]`);
+  const sel = dragDot.kind === "window" ? ".window-dot" : ".door-dot";
+  const node = svg.querySelector(`${sel}[data-i="${dragDot.index}"]`);
   node?.setAttribute("cx", String(pt.x));
   node?.setAttribute("cy", String(pt.y));
 }
@@ -384,10 +593,12 @@ function onConfirmPointerMove(event) {
 function onConfirmPointerUp(event) {
   if (!dragDot) return;
   const index = dragDot.index;
+  const kind = dragDot.kind || "door";
   const moved = dragDot.moved;
   dragDot = null;
   if (!moved) {
-    plan.doorDots.splice(index, 1);
+    const list = kind === "window" ? plan.windowDots : plan.doorDots;
+    list?.splice(index, 1);
   }
   applyDoorsFromDots();
   renderDoorConfirm();
@@ -400,7 +611,7 @@ function openConfirm(message) {
   renderScore(null);
   renderDoorConfirm();
   status();
-  say(message || "Check the doors. Tap to fix, then looks right, run it.");
+  say(message || "Check the doors and windows. Tap to fix, then looks right, run it.");
 }
 
 function acceptConfirm(andRun) {
@@ -422,7 +633,9 @@ function useDemo(make) {
   plan = canned;
   plan.id = uid("plan");
   plan.doorDots = doorDotsFromPlan(plan);
+  plan.windowDots = plan.windowDots?.length ? plan.windowDots : windowDotsFromPlan(plan);
   plan.pxPerFt = plan.pxPerFt || 8;
+  furnitureOverride = null;
   plan.preview = "";
   attachPlace();
   if (!plan.address) plan.address = place;
@@ -432,8 +645,8 @@ function useDemo(make) {
   hideHelpers();
   openConfirm(
     place
-      ? `Labeled demo on ${place}. Not fetched from a record. Check the door marks, then run.`
-      : "Labeled demo. Not a real listing. Check the door marks, then run.",
+      ? `Labeled demo on ${place}. Check the door and window marks, then run.`
+      : "Labeled demo. Not a real listing. Check the door and window marks, then run.",
   );
 }
 
@@ -456,7 +669,7 @@ function lookup() {
   const miss = cannotFetchPlan(query);
   $("#lookup-note").textContent = miss.reason;
   showHelpers(query);
-  say(`${miss.reason} I opened helper links. I will not scrape a listing site.`);
+  say(`${miss.reason} I opened helper links.`);
 }
 
 function prefersReduced() {
@@ -476,12 +689,20 @@ function hideCinema() {
   cinemaRaf = 0;
   cinemaSkip = false;
   $("#cinema").hidden = true;
+  const ticker = $("#scan-ticker");
+  if (ticker) ticker.hidden = true;
+  $$(".check").forEach((node) => node.classList.remove("scanning"));
   setPlaying(false);
 }
 
 function landRun(run) {
   hideCinema();
-  drawPlan("#plan-canvas", run.result, { furniture: furnitureFor(run.plan, run.profile, run.horizon) });
+  furnished = run.furnished !== false;
+  renderFurnish();
+  drawPlan("#plan-canvas", run.result, {
+    furniture: furnished ? furnitureFor(run.plan, run.profile, run.horizon) : [],
+    furnish: furnished,
+  });
   renderScore(run.result);
   renderCollection();
   renderCompare();
@@ -517,8 +738,32 @@ function along(pts, t) {
   return pts[pts.length - 1];
 }
 
+function scanChecks(run, u) {
+  const ticker = $("#scan-ticker");
+  const rows = run.result?.breakdown || [];
+  if (!rows.length) {
+    if (ticker) ticker.hidden = true;
+    return;
+  }
+  const groups = DILIGENCE_GROUPS.filter((group) => rows.some((row) => row.group === group.id));
+  const index = Math.min(groups.length - 1, Math.floor(u * groups.length));
+  const group = groups[index];
+  if (ticker) {
+    ticker.hidden = false;
+    ticker.textContent = group ? `Scanning ${group.label}` : "";
+  }
+  $$(".check").forEach((node) => {
+    const id = node.getAttribute("data-check");
+    const meta = DILIGENCE_CHECKS.find((item) => item.id === id);
+    node.classList.toggle("scanning", Boolean(group && meta?.group === group.id));
+  });
+  $$(".acc").forEach((node) => {
+    node.classList.toggle("open", node.getAttribute("data-acc") === group?.id);
+  });
+}
+
 function playCinema(run) {
-  const furniture = furnitureFor(run.plan, run.profile, run.horizon);
+  const furniture = run.furnished === false ? [] : furnitureFor(run.plan, run.profile, run.horizon);
   const cells = heatMap(run.plan, run.result);
   const roomMap = new Map(run.plan.rooms.map((room) => [room.id, room]));
   const routes = typicalDay(run.plan, run.profile, run.result)
@@ -560,9 +805,10 @@ function playCinema(run) {
   $("#cin-clock").textContent = "07:00";
   $("#cin-year").textContent = `horizon ${run.horizon}y`;
   $("#cin-score").textContent = "";
-  $("#cin-need").textContent = "The rooms take their furniture.";
+  $("#cin-need").textContent = run.furnished === false ? "Empty rooms. The walk is the floor." : "The rooms take their furniture.";
   setPlaying(true);
-  say("The rooms take their furniture.", "doing");
+  say(run.furnished === false ? "Empty rooms. Walking the floor." : "The rooms take their furniture.", "doing");
+  setModifyOpen(true);
 
   const roomsOrder = [];
   for (const item of furniture) {
@@ -603,6 +849,7 @@ function playCinema(run) {
       $("#cin-clock").textContent = "07:00";
       $("#cin-need").textContent = "Furniture finds the walls, room by room.";
       setHeatOpacity(svg, cells, 0);
+      scanChecks(run, u * 0.2);
     } else if (t < FURNISH + DAY) {
       if (spoken !== "day") {
         spoken = "day";
@@ -628,6 +875,7 @@ function playCinema(run) {
         trailNodes[i]?.setAttribute("points", walkers[i].history.map((pt) => `${pt.x},${pt.y}`).join(" "));
       });
       setHeatOpacity(svg, cells, u);
+      scanChecks(run, 0.2 + u * 0.4);
     } else if (t < FURNISH + DAY + YEARS) {
       if (spoken !== "years") {
         spoken = "years";
@@ -640,6 +888,7 @@ function playCinema(run) {
       $("#cin-need").textContent = horizonNeedLine(year);
       walkerNodes.forEach((node) => node?.setAttribute("opacity", String(1 - u * 0.65)));
       setHeatOpacity(svg, cells, 1);
+      scanChecks(run, 0.6 + u * 0.25);
     } else {
       if (spoken !== "score") {
         spoken = "score";
@@ -650,6 +899,7 @@ function playCinema(run) {
       $("#cin-score").textContent = String(shown);
       $("#cin-need").textContent = "The score lands on the layout, not the neighborhood.";
       setHeatOpacity(svg, cells, 1);
+      scanChecks(run, 0.85 + u * 0.15);
     }
     cinemaRaf = requestAnimationFrame(tick);
   };
@@ -663,20 +913,23 @@ function runSimulation() {
     say("I still need a plan. I cannot fetch one from that address. Upload an image or use a labeled demo.");
     return;
   }
-  const result = scoreLivability(plan, profile, horizon);
+  plan.building = building;
+  const result = scoreLivability(plan, profile, horizon, diligence, { building, furnished });
   const run = {
     id: uid("run"),
     address: plan.address || plan.name || "Untitled",
     plan: structuredClone(plan),
     profile: structuredClone(profile),
     horizon,
+    diligence: structuredClone(diligence),
+    building: structuredClone(building),
+    furnished,
     result,
     at: new Date().toISOString(),
   };
   lastRun = run;
   store.runs.unshift(run);
-  store.profile = profile;
-  store.horizon = horizon;
+  persistDesk();
   save();
   if (prefersReduced()) {
     landRun(run);
@@ -724,11 +977,17 @@ function openRun(id) {
   plan = structuredClone(run.plan);
   profile = structuredClone(run.profile || emptyProfile());
   horizon = run.horizon || horizon;
+  if (run.diligence) diligence = structuredClone(run.diligence);
+  if (run.building) building = { ...emptyBuilding(), ...structuredClone(run.building) };
+  furnished = run.furnished !== false;
+  furnitureOverride = null;
   $("#address").value = plan.address || "";
   $("#listing-url").value = plan.listingUrl || "";
   renderRooms();
   renderProfile();
   renderHorizon();
+  renderFurnish();
+  renderDiligence();
   renderScore(run.result);
   drawPlan("#plan-canvas", run.result);
   status();
@@ -745,7 +1004,7 @@ async function checkVision() {
       available: false,
       boost: false,
       cv: true,
-      note: "Plans are read on this device. No vision key is set, so labels stay with the on-device reading.",
+      note: "Find the plan online, download it, and drop it here.",
     };
   }
   vision.cv = true;
@@ -753,8 +1012,8 @@ async function checkVision() {
   const note = $("#vision-note");
   if (note) {
     note.textContent = vision.boost
-      ? "Plans are read on this device. An optional vision boost can refine labels."
-      : "Plans are read on this device. No vision key is required.";
+      ? "Room names can be polished from the drawing if you leave that on."
+      : "Find the plan online, download it, and drop it here.";
   }
   const row = $("#boost-row");
   if (row) row.classList.toggle("show", Boolean(vision.boost));
@@ -769,7 +1028,7 @@ async function checkVision() {
 
 async function maybeBoost(result) {
   if (!boostWanted() || !result?.preview) return result;
-  say("On-device reading is in. Asking the optional boost for labels only.", "doing");
+  say("Reading the plan. Polishing room names from the drawing.", "doing");
   try {
     const tiles = overlappingTiles(result.canvas, 4).map((tile) => ({
       x: tile.x,
@@ -802,14 +1061,16 @@ async function onUpload(file) {
   plan.source = "upload";
   plan.name = file.name.replace(/\.[^.]+$/, "") || "Uploaded plan";
   if (!plan.id) plan.id = uid("plan");
-  say("Reading walls and doors on this device. No key required.", "doing");
+  say("Reading the plan. Check the marks when I am done.", "doing");
   try {
     const img = await fileToImage(file);
     let result = await readPlanFromImage(img, { ...scaleOpts(), ocr: true });
     result = await maybeBoost(result);
     plan.rooms = layoutIfNeeded(result.rooms || []);
     plan.doorDots = result.doorDots || [];
+    plan.windowDots = result.windowDots || [];
     plan.pxPerFt = result.pxPerFt || 8;
+    furnitureOverride = null;
     plan.preview = result.preview || "";
     plan.width = result.width;
     plan.height = result.height;
@@ -820,11 +1081,56 @@ async function onUpload(file) {
       say("I could not find enclosed rooms in that image. Use the room editor, or try a labeled demo.");
       return;
     }
-    const engine = result.engine === "opencv" ? "OpenCV" : "the on-device reader";
-    const boost = result.boosted ? " Labels were refined with the optional boost." : "";
-    openConfirm(`I found ${plan.rooms.length} rooms with ${engine}.${boost} Check the door marks, then run.`);
+    const boost = result.boosted ? " Room names were polished from the drawing." : "";
+    openConfirm(`I found ${plan.rooms.length} rooms.${boost} Check the door and window marks, then run.`);
   } catch (error) {
     say(error instanceof Error ? error.message : "That file did not open as a plan.");
+  }
+}
+
+function readBuildingForm() {
+  const year = $("#year-built");
+  const floor = $("#walkup-floor");
+  const heat = $("#heating");
+  if (year) building.yearBuilt = year.value;
+  if (floor) building.walkupFloor = floor.value;
+  if (heat) building.heating = heat.value;
+  persistDesk();
+}
+
+async function onMaterialPhotos(files) {
+  const list = [...(files || [])].slice(0, 4);
+  if (!list.length) return;
+  building.photos = [];
+  for (const file of list) {
+    const img = await fileToImage(file);
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.min(1200, img.width);
+    canvas.height = Math.round((img.height / img.width) * canvas.width);
+    canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+    building.photos.push({ dataUrl: canvas.toDataURL("image/jpeg", 0.8) });
+  }
+  const box = $("#mat-suggest");
+  if (!vision.boost) {
+    if (box) box.textContent = "Tick what you see. I will not mark a caution until you do.";
+    return;
+  }
+  if (box) box.textContent = "Looking at the photos. Confirm anything I suggest.";
+  try {
+    const res = await fetch("/api/livability/read-plan", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ task: "materials", photos: building.photos }),
+    });
+    const body = await res.json();
+    building.suggestions = body.suggestions || [];
+    if (box) {
+      box.textContent = building.suggestions.length
+        ? `Suggestions to confirm: ${building.suggestions.map((item) => item.label).join(", ")}. Nothing is ticked yet.`
+        : body.error || "Nothing clear enough to suggest. Tick what you see.";
+    }
+  } catch {
+    if (box) box.textContent = "Tick what you see.";
   }
 }
 
@@ -861,8 +1167,102 @@ function bind() {
   });
   $("#confirm-run")?.addEventListener("click", () => acceptConfirm(true));
   $("#confirm-edit")?.addEventListener("click", () => acceptConfirm(false));
+  $("#mark-door")?.addEventListener("click", () => setAddMark("door"));
+  $("#mark-window")?.addEventListener("click", () => setAddMark("window"));
   $("#run-sim").addEventListener("click", runSimulation);
   $("#bar-run").addEventListener("click", runSimulation);
+  $("#open-modify")?.addEventListener("click", () => {
+    const open = $("#modify-drawer")?.hidden;
+    setModifyOpen(Boolean(open));
+  });
+  $("#furnish-on")?.addEventListener("click", () => {
+    furnished = true;
+    persistDesk();
+    renderFurnish();
+    drawPlan("#plan-canvas", lastRun?.result);
+  });
+  $("#furnish-off")?.addEventListener("click", () => {
+    furnished = false;
+    adjustFurniture = false;
+    persistDesk();
+    renderFurnish();
+    drawPlan("#plan-canvas", lastRun?.result);
+  });
+  $("#furn-adjust")?.addEventListener("click", () => {
+    if (!furnished) return;
+    adjustFurniture = !adjustFurniture;
+    if (adjustFurniture && !furnitureOverride) furnitureOverride = currentFurniture().map((item) => ({ ...item }));
+    renderFurnish();
+    drawPlan("#plan-canvas", lastRun?.result);
+    say(adjustFurniture ? "Drag a piece to move it. Alt-click to remove it. Scale stays true." : "Furniture lock is back on.");
+  });
+  $("#diligence")?.addEventListener("click", (event) => {
+    const preset = event.target.closest("[data-preset]");
+    if (preset) {
+      diligence = applyDiligencePreset(preset.dataset.preset);
+      persistDesk();
+      renderDiligence();
+      say(`${preset.textContent} diligence. ${activeCheckCount(diligence)} checks active.`);
+      return;
+    }
+    const acc = event.target.closest("[data-acc-toggle]");
+    if (acc) {
+      openAcc = openAcc === acc.dataset.accToggle ? "" : acc.dataset.accToggle;
+      renderDiligence();
+      return;
+    }
+    const strict = event.target.closest("[data-strict]");
+    if (strict) {
+      const id = strict.dataset.strict;
+      if (!diligence.checks[id]) return;
+      diligence.checks[id].strictness = strict.dataset.level;
+      diligence.preset = "custom";
+      persistDesk();
+      renderDiligence();
+    }
+  });
+  $("#diligence")?.addEventListener("change", (event) => {
+    const toggle = event.target.closest("[data-toggle]");
+    if (toggle) {
+      const id = toggle.dataset.toggle;
+      if (!diligence.checks[id]) diligence.checks[id] = { on: false, strictness: "standard" };
+      diligence.checks[id].on = toggle.checked;
+      diligence.preset = "custom";
+      persistDesk();
+      renderDiligence();
+      return;
+    }
+    const tick = event.target.closest("[data-tick]");
+    if (tick) {
+      building.ticks[tick.dataset.tick] = tick.checked;
+      const map = {
+        floorGlossWet: "floorSlip",
+        tileBath: "floorSlip",
+        marbleKitchen: "counters",
+        laminateCooktop: "counters",
+        windowAc: "cooling",
+        noDucts: "cooling",
+        laundryInUnit: "laundryInUnit",
+        elevator: "elevatorWalkup",
+        outdoor: "outdoor",
+      };
+      const checkId = map[tick.dataset.tick];
+      if (tick.checked && checkId && diligence.checks[checkId]) {
+        diligence.checks[checkId].on = true;
+        diligence.preset = "custom";
+      }
+      persistDesk();
+      renderDiligence();
+      return;
+    }
+    if (event.target.id === "year-built" || event.target.id === "walkup-floor" || event.target.id === "heating") {
+      readBuildingForm();
+    }
+    if (event.target.id === "mat-photos") onMaterialPhotos(event.target.files);
+  });
+  $("#diligence")?.addEventListener("input", (event) => {
+    if (event.target.id === "year-built" || event.target.id === "walkup-floor") readBuildingForm();
+  });
   $("#cin-skip").addEventListener("click", () => {
     cinemaSkip = true;
   });
@@ -949,6 +1349,8 @@ $("#address").value = "";
 renderRooms();
 renderProfile();
 renderHorizon();
+renderFurnish();
+renderDiligence();
 renderScore(lastRun?.result);
 renderCollection();
 renderCompare();

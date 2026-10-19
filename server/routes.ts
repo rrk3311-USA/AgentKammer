@@ -805,8 +805,7 @@ export async function registerRoutes(app: Express): Promise<void> {
     next();
   });
 
-  // Express-only. Not duplicated under /api on Vercel: Hobby is at the 12-function cap.
-  // The browser already fails open to on-device CV when these routes are missing.
+  // Local Express. On Vercel the same paths go through api/[...route].ts.
   app.get("/api/livability/vision-status", (_req, res) => {
     res.json(livabilityVisionStatus());
   });

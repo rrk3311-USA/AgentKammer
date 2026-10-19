@@ -114,7 +114,7 @@ export function furnitureMarkup(item, visible = true) {
   } else {
     body = `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="${fill}" stroke="${stroke}"/>`;
   }
-  return `<g class="furn furn-${item.kind}" data-furn="${item.id}" data-room="${item.roomId}" transform="translate(${item.x} ${item.y}) rotate(${rot})" opacity="${visible ? 1 : 0}">${body}</g>`;
+  return `<g class="furn furn-${item.kind}" data-furn="${item.id}" data-room="${item.roomId}" data-kind="${item.kind}" transform="translate(${item.x} ${item.y}) rotate(${rot})" opacity="${visible ? 1 : 0}">${body}</g>`;
 }
 
 function furnBox(item) {
@@ -261,6 +261,16 @@ export function renderPlanSvg(plan, opts = {}) {
       return `<rect class="door-gap" x="${edge.x - 3}" y="${y}" width="6" height="${gap}"/>${swing}`;
     })
     .join("");
+  const windows = (plan.windowDots || [])
+    .filter((dot) => !dot.kind || dot.kind === "window")
+    .map((dot) => {
+      const len = Number(dot.w) || scale * 4;
+      if (dot.orient === "v") {
+        return `<rect class="window-mark" x="${dot.x - 1.4}" y="${dot.y - len / 2}" width="2.8" height="${len}"/>`;
+      }
+      return `<rect class="window-mark" x="${dot.x - len / 2}" y="${dot.y - 1.4}" width="${len}" height="2.8"/>`;
+    })
+    .join("");
   const furniture = (opts.furniture || []).map((item) => furnitureMarkup(item, opts.furnish !== false)).join("");
   const labels = opts.labels === false
     ? ""
@@ -280,7 +290,7 @@ export function renderPlanSvg(plan, opts = {}) {
   return `<svg class="plan-svg" viewBox="${minX} ${minY} ${maxX - minX} ${maxY - minY}" role="img" aria-label="${opts.label || "Architectural floor plan"}">
     <defs>${defs.join("")}</defs>
     <rect x="${minX}" y="${minY}" width="${maxX - minX}" height="${maxY - minY}" fill="url(#plan-grid)"/>
-    ${floors}${glows}${walls}${openings}${furniture}${labels}${extras}
+    ${floors}${glows}${walls}${openings}${windows}${furniture}${labels}${extras}
   </svg>`;
 }
 
