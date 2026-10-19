@@ -1,6 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Livability">
+  <!--
+    Glyph: Lucide Lab "tie-bow" (outline).
+    https://github.com/lucide-icons/lucide-lab
+    ISC License. Copyright (c) for portions of Lucide are held by Cole Bemis
+    2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide
+    are held by Lucide Contributors 2022. See THIRD_PARTY_NOTICES.md.
+    Stroke is 2.4 (Lucide default is 2) so the mark still reads at 16px.
+  -->
   <rect width="32" height="32" rx="8" fill="#E5E4E2"/>
-  <path fill="#0D182B" d="M5.2 8.2 14.2 13.2v5.6L5.2 23.8Z"/>
-  <path fill="#0D182B" d="M26.8 8.2 17.8 13.2v5.6l9 5Z"/>
-  <rect x="13.4" y="10.6" width="5.2" height="10.8" rx="1.4" fill="#0D182B"/>
+  <g fill="none" stroke="#0D182B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" transform="translate(4 4)">
+    <path d="M10 10h4v4h-4zm-2 2h2"/>
+    <path d="M10 10C8.8 8.5 6.6 7 4 7c-1.1 0-2 2.2-2 5s.9 5 2 5c2.6 0 4.8-1.5 6-3m4-2h2m-2 2c1.2 1.5 3.4 3 6 3c1.1 0 2-2.2 2-5s-.9-5-2-5c-2.6 0-4.8 1.5-6 3"/>
+  </g>
 </svg>

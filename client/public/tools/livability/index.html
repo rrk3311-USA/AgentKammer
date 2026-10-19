@@ -23,9 +23,17 @@
   --header:52px;--status:36px;--bar:60px;
   --grid:linear-gradient(rgba(229,228,226,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(229,228,226,.04) 1px,transparent 1px);
 }
-.ak-compact-header__mark{gap:10px;padding:0}
-.ak-compact-header__mark img{height:32px!important;width:32px!important;border-radius:8px}
-.ak-compact-header__word{font:500 1.15rem/1 var(--serif);letter-spacing:.16em;text-transform:uppercase;color:var(--platinum)}
+.ak-compact-header__brand{display:flex;align-items:center;gap:0;min-width:0}
+.ak-compact-header__mark{padding:4px 0}
+.ak-compact-header__mark img{height:40px!important;width:auto!important;border-radius:0}
+.ak-compact-header__tool{
+  display:flex;align-items:center;gap:8px;min-width:0;
+  margin-left:10px;padding-left:12px;
+  border-left:1px solid rgba(229,228,226,.22);
+  color:inherit;text-decoration:none
+}
+.ak-compact-header__tile{width:28px!important;height:28px!important;border-radius:7px;flex:0 0 auto}
+.ak-compact-header__word{font:500 1.1rem/1 var(--serif);letter-spacing:.16em;text-transform:uppercase;color:var(--platinum);white-space:nowrap}
 *{box-sizing:border-box}
 html{overflow-x:clip;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--midnight);color:var(--ivory);font:400 14px/1.5 var(--sans);max-width:100%;overflow-x:clip}
@@ -94,7 +102,7 @@ button,input,select{font:inherit;color:inherit}
 @media(min-width:420px){.pane-guide .guide-row{grid-template-columns:56px 1fr}}
 .guide-lockup{display:flex;flex-direction:column;align-items:center;gap:8px;width:48px}
 .guide-glyph{width:48px;height:48px;border-radius:12px;overflow:hidden}
-.guide-glyph .bow{transform-origin:16px 16px;transition:opacity .3s ease}
+.guide-glyph .bow{transform-origin:16px 16px;transition:opacity .3s ease,filter .3s ease}
 .guide-glyph.is-live .bow{animation:guide-shimmer 2.2s ease-in-out infinite}
 .cinema-hud .guide-glyph{width:24px;height:24px;flex:0 0 auto;border-radius:6px}
 @keyframes guide-shimmer{
@@ -242,7 +250,13 @@ button,input,select{font:inherit;color:inherit}
 
 <header class="ak-compact-header" data-ak-compact-header>
  <div class="ak-compact-header__bar">
-  <a class="ak-compact-header__mark" href="/" aria-label="Agent Kammer home"><img src="/tools/livability/icon.svg" alt="" width="32" height="32"><span class="ak-compact-header__word">Livability</span></a>
+  <div class="ak-compact-header__brand">
+   <a class="ak-compact-header__mark" href="/" aria-label="Agent Kammer home"><img src="/brand/ak-monogram-ivory.png" alt="" width="28" height="30"></a>
+   <a class="ak-compact-header__tool" href="/tools/livability/" aria-label="Livability">
+    <img class="ak-compact-header__tile" src="/tools/livability/icon.svg" alt="" width="28" height="28">
+    <span class="ak-compact-header__word">Livability</span>
+   </a>
+  </div>
   <button class="ak-compact-header__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="ak-field-menu">
    <span class="ak-compact-header__icon" aria-hidden="true"><i></i><i></i><i></i></span>
   </button>
@@ -314,9 +328,10 @@ button,input,select{font:inherit;color:inherit}
             <title>Livability</title>
             <g class="bow">
               <rect width="32" height="32" rx="8" fill="#E5E4E2"/>
-              <path fill="#0D182B" d="M5.2 8.2 14.2 13.2v5.6L5.2 23.8Z"/>
-              <path fill="#0D182B" d="M26.8 8.2 17.8 13.2v5.6l9 5Z"/>
-              <rect x="13.4" y="10.6" width="5.2" height="10.8" rx="1.4" fill="#0D182B"/>
+              <g fill="none" stroke="#0D182B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" transform="translate(4 4)">
+                <path d="M10 10h4v4h-4zm-2 2h2"/>
+                <path d="M10 10C8.8 8.5 6.6 7 4 7c-1.1 0-2 2.2-2 5s.9 5 2 5c2.6 0 4.8-1.5 6-3m4-2h2m-2 2c1.2 1.5 3.4 3 6 3c1.1 0 2-2.2 2-5s-.9-5-2-5c-2.6 0-4.8 1.5-6 3"/>
+              </g>
             </g>
           </svg>
         </div>
@@ -406,9 +421,10 @@ button,input,select{font:inherit;color:inherit}
     <svg class="guide-glyph is-live" viewBox="0 0 32 32" role="img" aria-hidden="true">
       <g class="bow">
         <rect width="32" height="32" rx="8" fill="#E5E4E2"/>
-        <path fill="#0D182B" d="M5.2 8.2 14.2 13.2v5.6L5.2 23.8Z"/>
-        <path fill="#0D182B" d="M26.8 8.2 17.8 13.2v5.6l9 5Z"/>
-        <rect x="13.4" y="10.6" width="5.2" height="10.8" rx="1.4" fill="#0D182B"/>
+        <g fill="none" stroke="#0D182B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" transform="translate(4 4)">
+          <path d="M10 10h4v4h-4zm-2 2h2"/>
+          <path d="M10 10C8.8 8.5 6.6 7 4 7c-1.1 0-2 2.2-2 5s.9 5 2 5c2.6 0 4.8-1.5 6-3m4-2h2m-2 2c1.2 1.5 3.4 3 6 3c1.1 0 2-2.2 2-5s-.9-5-2-5c-2.6 0-4.8 1.5-6 3"/>
+        </g>
       </g>
     </svg>
     <span class="clock" id="cin-clock">07:00</span>
