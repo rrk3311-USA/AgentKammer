@@ -81,6 +81,13 @@ describe("livability desk scoring", () => {
     expect(plan.rooms.every((room) => /approx/i.test(room.name))).toBe(true);
     expect(plan.doors.some((door) => (door.a === "living" && door.b === "dining") || (door.a === "dining" && door.b === "living"))).toBe(true);
     expect(plan.doors.some((door) => (door.a === "kitchen" && door.b === "mbath") || (door.a === "mbath" && door.b === "kitchen"))).toBe(true);
+    const living = plan.rooms.find((room) => room.id === "living");
+    const kitchen = plan.rooms.find((room) => room.id === "kitchen");
+    const terrace = plan.rooms.find((room) => room.id === "terrace");
+    const mbed = plan.rooms.find((room) => room.id === "mbed");
+    expect(living.y + living.h).toBeLessThanOrEqual(mbed.y);
+    expect(living.x).toBeLessThan(kitchen.x);
+    expect(terrace.x).toBeLessThan(mbed.x);
 
     const profile = { ...emptyProfile(), householdSize: 2, entertainer: true, wfh: true };
     const result = scoreLivability(plan, profile, "10");
@@ -88,6 +95,7 @@ describe("livability desk scoring", () => {
     expect(result.score).toBeLessThan(100);
     expect(result.notes.join(" ")).not.toMatch(/school|neighborhood|broker|buy this/i);
     expect(result.notes.join(" ")).not.toContain("—");
+    expect(result.notes.join(" ")).not.toMatch(/Most days will meet there/);
     expect(JSON.stringify(plan)).not.toContain("—");
   });
 

@@ -122,26 +122,28 @@ export function makeRiversidePlan() {
 // - Arts & Architecture, June 1960 (USModernist): Koenig CSH No. 22; living and kitchen as free-standing units; master bedroom looks across the pool.
 // Room sizes below are approximate, scaled to that 2,200-2,300 sf envelope and the 20-foot bay.
 export function makeStahlPlan() {
+  // 8 px = 1 ft. Public glass wing on top (living cantilevered toward the view).
+  // Bedroom wing drops from the elbow. Pool fills the inside of the L.
   const rooms = [
-    { id: "living", name: "Living (approx.)", type: "living", sf: 390, x: 220, y: 16, w: 320, h: 150 },
-    { id: "dining", name: "Dining (approx.)", type: "dining", sf: 230, x: 220, y: 166, w: 160, h: 128 },
-    { id: "kitchen", name: "Kitchen (approx.)", type: "kitchen", sf: 280, x: 380, y: 166, w: 160, h: 128 },
-    { id: "entry", name: "Entry (approx.)", type: "entry", sf: 70, x: 140, y: 166, w: 80, h: 128 },
-    { id: "terrace", name: "Pool deck (approx.)", type: "terrace", sf: 180, x: 16, y: 166, w: 124, h: 360 },
-    { id: "service", name: "Service (approx.)", type: "other", sf: 70, x: 380, y: 294, w: 80, h: 72 },
-    { id: "mbath", name: "Master bath (approx.)", type: "bath", sf: 90, x: 460, y: 294, w: 80, h: 72 },
-    { id: "bed2", name: "Bedroom 2 (approx.)", type: "bedroom", sf: 250, x: 220, y: 294, w: 160, h: 140 },
-    { id: "hall", name: "Sleeping hall (approx.)", type: "hallway", sf: 50, x: 220, y: 434, w: 160, h: 40 },
-    { id: "jjbath", name: "Hall bath (approx.)", type: "bath", sf: 50, x: 380, y: 366, w: 80, h: 68 },
-    { id: "dress", name: "Dressing (approx.)", type: "closet", sf: 40, x: 460, y: 366, w: 80, h: 68 },
-    { id: "mbed", name: "Master bedroom (approx.)", type: "bedroom", sf: 390, x: 220, y: 474, w: 240, h: 150 },
+    { id: "view", name: "View deck (approx.)", type: "terrace", sf: 140, x: -72, y: 16, w: 92, h: 152 },
+    { id: "living", name: "Living (approx.)", type: "living", sf: 390, x: 20, y: 16, w: 184, h: 152 },
+    { id: "dining", name: "Dining (approx.)", type: "dining", sf: 230, x: 204, y: 16, w: 120, h: 152 },
+    { id: "kitchen", name: "Kitchen (approx.)", type: "kitchen", sf: 280, x: 324, y: 16, w: 144, h: 152 },
+    { id: "terrace", name: "Pool (approx.)", type: "terrace", sf: 180, x: 20, y: 168, w: 184, h: 416 },
+    { id: "entry", name: "Entry (approx.)", type: "entry", sf: 70, x: 204, y: 168, w: 80, h: 88 },
+    { id: "service", name: "Service (approx.)", type: "other", sf: 70, x: 324, y: 168, w: 72, h: 80 },
+    { id: "mbath", name: "Master bath (approx.)", type: "bath", sf: 90, x: 396, y: 168, w: 72, h: 80 },
+    { id: "bed2", name: "Bedroom 2 (approx.)", type: "bedroom", sf: 250, x: 204, y: 256, w: 160, h: 136 },
+    { id: "jjbath", name: "Hall bath (approx.)", type: "bath", sf: 50, x: 364, y: 256, w: 68, h: 72 },
+    { id: "dress", name: "Dressing (approx.)", type: "closet", sf: 40, x: 364, y: 328, w: 68, h: 64 },
+    { id: "hall", name: "Sleeping hall (approx.)", type: "hallway", sf: 50, x: 204, y: 392, w: 160, h: 40 },
+    { id: "mbed", name: "Master bedroom (approx.)", type: "bedroom", sf: 390, x: 204, y: 432, w: 228, h: 152 },
   ];
   const doors = [
-    ["entry", "dining"],
-    ["entry", "living"],
+    ["view", "living"],
     ["living", "dining"],
     ["dining", "kitchen"],
-    ["entry", "kitchen"],
+    ["dining", "entry"],
     ["kitchen", "service"],
     ["kitchen", "mbath"],
     ["service", "mbath"],
@@ -149,14 +151,12 @@ export function makeStahlPlan() {
     ["bed2", "hall"],
     ["hall", "mbed"],
     ["bed2", "jjbath"],
-    ["mbed", "jjbath"],
     ["mbed", "dress"],
     ["dress", "mbath"],
     ["living", "terrace"],
-    ["dining", "terrace"],
+    ["entry", "terrace"],
     ["bed2", "terrace"],
     ["mbed", "terrace"],
-    ["entry", "terrace"],
   ].map(([a, b]) => ({ a, b }));
   return {
     id: "plan-stahl-sample",
@@ -167,6 +167,7 @@ export function makeStahlPlan() {
     imageName: "",
     rooms,
     doors,
+    pxPerFt: 8,
     note: "Labeled sample. L-shaped glass plan from published public drawings. Room sizes are approximate. Not a measured survey and not fetched from the listing.",
   };
 }
@@ -223,6 +224,10 @@ export function heatMap(plan, result) {
     cells[room.id] = { traffic: count, intensity, zone };
   }
   return cells;
+}
+
+function plainName(name) {
+  return String(name || "This room").replace(/\s*\(approx\.\)\s*/gi, "").trim() || "This room";
 }
 
 function clamp(n, lo, hi) {
@@ -341,7 +346,7 @@ export function scoreLivability(plan, profile, horizonId) {
     if (degree >= 4 || hall.sf < 50) {
       circulation -= 7;
       flags.bottlenecks.push(hall.id);
-      notes.push(`${hall.name} is doing too much work for its size. Most days will meet there.`);
+      notes.push(`${plainName(hall.name)} is only ${hall.sf} square feet, with ${degree} doors. People will stack there on a busy morning.`);
     }
   }
   for (const kitchen of kitchens) {
@@ -349,7 +354,7 @@ export function scoreLivability(plan, profile, horizonId) {
     if (degree >= 3) {
       circulation -= 6;
       flags.bottlenecks.push(kitchen.id);
-      notes.push(`${kitchen.name} sits on a through path. Cooking and walking will share the same floor.`);
+      notes.push(`${plainName(kitchen.name)} has ${degree} openings. Anyone crossing the plan walks through the cook.`);
     }
   }
   if (profile.homebody && livingSf < 180) {
@@ -362,7 +367,7 @@ export function scoreLivability(plan, profile, horizonId) {
     const noisy = [...livings, ...kitchens, ...dinings].some((room) => adjacent(adj, bed.id, room.id));
     if (noisy) {
       quiet -= 12;
-      notes.push(`${bed.name} opens onto a social room. Sleep and talk will share a door.`);
+      notes.push(`${plainName(bed.name)} opens onto a social room. Sleep and conversation share a door.`);
     } else {
       flags.quiet.push(bed.id);
     }
@@ -476,34 +481,172 @@ export function scoreLivability(plan, profile, horizonId) {
   };
 }
 
-const FURN_ICONS = {
-  bed: `<rect x="-20" y="-13" width="40" height="26" rx="2" fill="rgba(245,242,235,.06)" stroke="#E5E4E2" stroke-width="1.2"/><rect x="-16" y="-11" width="12" height="7" rx="1.5" fill="none" stroke="#D8D1C7"/><rect x="4" y="-11" width="12" height="7" rx="1.5" fill="none" stroke="#D8D1C7"/>`,
-  crib: `<rect x="-13" y="-10" width="26" height="20" rx="1" fill="rgba(245,242,235,.05)" stroke="#E5E4E2"/><path d="M-11 -6h22M-11 0h22M-11 6h22" fill="none" stroke="#B08D57" stroke-width=".8"/>`,
-  kidbed: `<rect x="-15" y="-10" width="30" height="20" rx="2" fill="rgba(245,242,235,.05)" stroke="#D8D1C7"/><rect x="-12" y="-8" width="9" height="5" rx="1" fill="none" stroke="#E5E4E2"/>`,
-  sofa: `<rect x="-24" y="-8" width="48" height="16" rx="3" fill="rgba(176,141,87,.12)" stroke="#B08D57"/><path d="M-24 -8v-4h48v4" fill="none" stroke="#E5E4E2"/><path d="M-8 8v-10M8 8v-10" fill="none" stroke="#D8D1C7" stroke-width=".8"/>`,
-  table: `<ellipse cx="0" cy="0" rx="16" ry="10" fill="rgba(245,242,235,.05)" stroke="#E5E4E2"/><rect x="-6" y="-18" width="12" height="5" rx="1" fill="none" stroke="#D8D1C7"/><rect x="-6" y="13" width="12" height="5" rx="1" fill="none" stroke="#D8D1C7"/><rect x="-22" y="-4" width="5" height="8" rx="1" fill="none" stroke="#D8D1C7"/><rect x="17" y="-4" width="5" height="8" rx="1" fill="none" stroke="#D8D1C7"/>`,
-  desk: `<rect x="-16" y="-8" width="32" height="12" rx="1" fill="rgba(245,242,235,.05)" stroke="#E5E4E2"/><rect x="-7" y="6" width="14" height="7" rx="1" fill="none" stroke="#B08D57"/><rect x="6" y="-6" width="8" height="5" rx=".5" fill="none" stroke="#D8D1C7"/>`,
-  pet: `<ellipse cx="0" cy="0" rx="8" ry="5" fill="rgba(176,141,87,.14)" stroke="#B08D57"/><ellipse cx="0" cy="0" rx="4" ry="2.4" fill="none" stroke="#D8D1C7"/>`,
-  range: `<rect x="-10" y="-10" width="20" height="20" rx="1" fill="rgba(245,242,235,.04)" stroke="#E5E4E2"/><circle cx="-4" cy="-4" r="2.4" fill="none" stroke="#B08D57"/><circle cx="4" cy="-4" r="2.4" fill="none" stroke="#B08D57"/><circle cx="-4" cy="4" r="2.4" fill="none" stroke="#B08D57"/><circle cx="4" cy="4" r="2.4" fill="none" stroke="#B08D57"/>`,
-  tub: `<ellipse cx="0" cy="0" rx="14" ry="8" fill="rgba(74,110,138,.2)" stroke="#8aa0b8"/><path d="M-10 0h20" fill="none" stroke="#D8D1C7" stroke-width=".7"/>`,
-};
+function roomPxPerFt(room, plan) {
+  if (Number(plan?.pxPerFt)) return Number(plan.pxPerFt);
+  if (room?.sf > 10 && room.w > 8 && room.h > 8) return Math.sqrt((room.w * room.h) / room.sf);
+  return 8;
+}
 
-function placeIn(room, ox, oy, kind) {
-  const scale = Math.min(1, (Number(room.w) || 80) / 90, (Number(room.h) || 60) / 70);
+function doorWallsOf(room, plan) {
+  const walls = new Set();
+  for (const door of plan.doors || []) {
+    const otherId = door.a === room.id ? door.b : door.b === room.id ? door.a : null;
+    const other = plan.rooms.find((item) => item.id === otherId);
+    if (!other) continue;
+    const ax2 = room.x + room.w;
+    const ay2 = room.y + room.h;
+    const bx2 = other.x + other.w;
+    const by2 = other.y + other.h;
+    const ox = Math.min(ax2, bx2) - Math.max(room.x, other.x);
+    const oy = Math.min(ay2, by2) - Math.max(room.y, other.y);
+    if (ox > 10 && Math.abs(ay2 - other.y) < 8) walls.add("s");
+    else if (ox > 10 && Math.abs(by2 - room.y) < 8) walls.add("n");
+    else if (oy > 10 && Math.abs(ax2 - other.x) < 8) walls.add("e");
+    else if (oy > 10 && Math.abs(bx2 - room.x) < 8) walls.add("w");
+  }
+  return walls;
+}
+
+function piece(room, kind, x, y, w, h, rot = 0) {
   return {
-    id: `${kind}-${room.id}-${Math.round(ox * 100)}`,
+    id: `${kind}-${room.id}-${Math.round(x)}-${Math.round(y)}`,
     roomId: room.id,
     kind,
-    x: Math.round(room.x + room.w * ox),
-    y: Math.round(room.y + room.h * oy),
-    scale: Math.max(0.55, Number(scale.toFixed(2))),
+    x: Math.round(x),
+    y: Math.round(y),
+    w: Math.round(w),
+    h: Math.round(h),
+    rot,
   };
+}
+
+function doorSpansOn(room, plan) {
+  const spans = { n: [], s: [], e: [], w: [] };
+  const scale = roomPxPerFt(room, plan);
+  for (const door of plan.doors || []) {
+    const otherId = door.a === room.id ? door.b : door.b === room.id ? door.a : null;
+    const other = plan.rooms.find((item) => item.id === otherId);
+    if (!other) continue;
+    const hit = facingWall(room, other);
+    if (!hit) continue;
+    const open = room.type === "terrace" || other.type === "terrace" || room.type === "living" || other.type === "living";
+    const gap = Math.min(hit.len * 0.55, open ? scale * 7 : scale * 2.7);
+    const start = hit.len / 2 - gap / 2;
+    if (hit.wall === "n" || hit.wall === "s") spans[hit.wall].push([hit.x + start, hit.x + start + gap]);
+    else spans[hit.wall].push([hit.y + start, hit.y + start + gap]);
+  }
+  return spans;
+}
+
+function facingWall(a, b) {
+  const ax2 = a.x + a.w;
+  const ay2 = a.y + a.h;
+  const bx2 = b.x + b.w;
+  const by2 = b.y + b.h;
+  const ox = Math.min(ax2, bx2) - Math.max(a.x, b.x);
+  const oy = Math.min(ay2, by2) - Math.max(a.y, b.y);
+  if (ox > 10 && Math.abs(ay2 - b.y) < 8) return { wall: "s", x: Math.max(a.x, b.x), y: ay2, len: ox };
+  if (ox > 10 && Math.abs(by2 - a.y) < 8) return { wall: "n", x: Math.max(a.x, b.x), y: a.y, len: ox };
+  if (oy > 10 && Math.abs(ax2 - b.x) < 8) return { wall: "e", x: ax2, y: Math.max(a.y, b.y), len: oy };
+  if (oy > 10 && Math.abs(bx2 - a.x) < 8) return { wall: "w", x: a.x, y: Math.max(a.y, b.y), len: oy };
+  return null;
+}
+
+function longestFree(lo, hi, blocked, need) {
+  const cuts = blocked
+    .map(([a, b]) => [Math.max(lo, a), Math.min(hi, b)])
+    .filter(([a, b]) => b - a > 2)
+    .sort((a, b) => a[0] - b[0]);
+  let cursor = lo;
+  let best = [lo, hi];
+  let bestLen = -1;
+  const consider = (a, b) => {
+    const len = b - a;
+    if (len > bestLen && len >= need) {
+      best = [a, b];
+      bestLen = len;
+    }
+  };
+  for (const [a, b] of cuts) {
+    if (a > cursor) consider(cursor, a);
+    cursor = Math.max(cursor, b);
+  }
+  if (cursor < hi) consider(cursor, hi);
+  if (bestLen >= 0) return best;
+  cursor = lo;
+  for (const [a, b] of cuts) {
+    if (a > cursor && a - cursor > bestLen) {
+      best = [cursor, a];
+      bestLen = a - cursor;
+    }
+    cursor = Math.max(cursor, b);
+  }
+  if (hi - cursor > bestLen) best = [cursor, hi];
+  return best;
+}
+
+function againstWall(room, plan, kind, ftW, ftH, prefer, used) {
+  const s = roomPxPerFt(room, plan);
+  const blockedWalls = doorWallsOf(room, plan);
+  const spans = doorSpansOn(room, plan);
+  const inset = 1.2 * s;
+  const order = [prefer, "n", "s", "w", "e"].filter(Boolean);
+  const scoreWall = (wall) => {
+    const along = wall === "e" || wall === "w";
+    const need = (along ? ftH : ftW) * s;
+    const lo = along ? room.y + inset : room.x + inset;
+    const hi = along ? room.y + room.h - inset : room.x + room.w - inset;
+    const free = longestFree(lo, hi, spans[wall] || [], need);
+    const len = free[1] - free[0];
+    let rank = len;
+    if (used?.has(wall)) rank -= 400;
+    if (blockedWalls.has(wall) && len < need + 8) rank -= 200;
+    if (wall === prefer) rank += 40;
+    return { wall, along, need, free, len, rank };
+  };
+  const picked = order.map(scoreWall).sort((a, b) => b.rank - a.rank)[0] || scoreWall(prefer || "n");
+  const wall = picked.wall;
+  used?.add(wall);
+  const along = wall === "e" || wall === "w";
+  const w = (along ? ftH : ftW) * s;
+  const h = (along ? ftW : ftH) * s;
+  const maxW = room.w - inset * 2;
+  const maxH = room.h - inset * 2;
+  const pw = Math.min(w, maxW);
+  const ph = Math.min(h, maxH);
+  const mid = (picked.free[0] + picked.free[1]) / 2;
+  let x = room.x + room.w / 2;
+  let y = room.y + room.h / 2;
+  let rot = 0;
+  if (wall === "n") {
+    x = mid;
+    y = room.y + inset + ph / 2;
+    rot = 0;
+  } else if (wall === "s") {
+    x = mid;
+    y = room.y + room.h - inset - ph / 2;
+    rot = 180;
+  } else if (wall === "w") {
+    x = room.x + inset + pw / 2;
+    y = mid;
+    rot = -90;
+  } else {
+    x = room.x + room.w - inset - pw / 2;
+    y = mid;
+    rot = 90;
+  }
+  return piece(room, kind, x, y, along ? ph : pw, along ? pw : ph, rot);
 }
 
 export function furnitureFor(plan, profile, horizonId) {
   const horizon = HORIZONS.find((item) => item.id === horizonId) || HORIZONS[0];
   const items = [];
-  const beds = roomsOf(plan, "bedroom");
+  const used = new Map();
+  const wallSet = (room) => {
+    if (!used.has(room.id)) used.set(room.id, new Set());
+    return used.get(room.id);
+  };
+  const beds = roomsOf(plan, "bedroom").slice().sort((a, b) => (b.sf || 0) - (a.sf || 0) || b.w * b.h - a.w * a.h);
   const livings = roomsOf(plan, "living");
   const dinings = roomsOf(plan, "dining");
   const kitchens = roomsOf(plan, "kitchen");
@@ -512,43 +655,73 @@ export function furnitureFor(plan, profile, horizonId) {
   const entries = roomsOf(plan, "entry");
 
   for (const room of livings) {
-    items.push(placeIn(room, 0.5, 0.64, "sofa"));
-    if (!dinings.length && (profile.entertainer || profile.guestsOften || profile.homebody)) {
-      items.push(placeIn(room, 0.5, 0.3, "table"));
+    const s = roomPxPerFt(room, plan);
+    items.push(againstWall(room, plan, "sofa", 7, 3, "s", wallSet(room)));
+    items.push(piece(room, "rug", room.x + room.w / 2, room.y + room.h * 0.58, 9 * s, 6 * s, 0));
+  }
+  for (const room of dinings) {
+    const s = roomPxPerFt(room, plan);
+    items.push(piece(room, "rug", room.x + room.w / 2, room.y + room.h / 2, 8 * s, 6 * s, 0));
+    items.push(piece(room, "table", room.x + room.w / 2, room.y + room.h / 2, 6 * s, 3.3 * s, 0));
+  }
+  if (!dinings.length && livings[0] && (profile.entertainer || profile.guestsOften || profile.homebody)) {
+    const room = livings[0];
+    const s = roomPxPerFt(room, plan);
+    items.push(piece(room, "table", room.x + room.w * 0.32, room.y + room.h * 0.38, 6 * s, 3.3 * s, 0));
+  }
+  for (const room of kitchens) {
+    const s = roomPxPerFt(room, plan);
+    const blocked = doorWallsOf(room, plan);
+    const depth = 2 * s;
+    if (!blocked.has("n") && room.w > 8 * s) {
+      items.push(piece(room, "counter", room.x + room.w / 2, room.y + depth / 2 + 4, room.w - 16, depth, 0));
+      wallSet(room).add("n");
+    }
+    if (!blocked.has("s") && room.w > 8 * s) {
+      items.push(piece(room, "counter", room.x + room.w / 2, room.y + room.h - depth / 2 - 4, room.w - 16, depth, 0));
+      wallSet(room).add("s");
+    }
+    items.push(againstWall(room, plan, "range", 2.5, 2.5, blocked.has("e") ? "w" : "e", wallSet(room)));
+    const ftW = room.w / s;
+    const ftH = room.h / s;
+    if (ftW >= 12 && ftH >= 11) {
+      items.push(piece(room, "island", room.x + room.w / 2, room.y + room.h / 2, 6 * s, 3 * s, 0));
     }
   }
-  for (const room of dinings) items.push(placeIn(room, 0.5, 0.52, "table"));
-  for (const room of kitchens) items.push(placeIn(room, 0.5, 0.38, "range"));
-  for (const room of baths) items.push(placeIn(room, 0.5, 0.55, "tub"));
-
+  for (const room of baths) {
+    items.push(againstWall(room, plan, "tub", 5, 2.5, "n", wallSet(room)));
+    items.push(againstWall(room, plan, "vanity", 3, 1.6, "s", wallSet(room)));
+  }
   beds.forEach((room, index) => {
+    const s = roomPxPerFt(room, plan);
+    const king = room.w / s >= 11 && room.h / s >= 12;
     if (index === 0) {
-      items.push(placeIn(room, 0.5, 0.5, "bed"));
+      items.push(againstWall(room, plan, king ? "king" : "bed", king ? 6.3 : 5, 6.7, "n", wallSet(room)));
       if (profile.kids && beds.length === 1) {
-        items.push(placeIn(room, 0.78, 0.76, horizon.years <= 5 ? "crib" : "kidbed"));
+        items.push(againstWall(room, plan, horizon.years <= 5 ? "crib" : "kidbed", horizon.years <= 5 ? 2.5 : 3.2, horizon.years <= 5 ? 4.4 : 6.3, "e", wallSet(room)));
       }
       return;
     }
     if (profile.kids) {
-      items.push(placeIn(room, 0.42, 0.46, horizon.years <= 5 ? "crib" : "kidbed"));
+      items.push(againstWall(room, plan, horizon.years <= 5 ? "crib" : "kidbed", horizon.years <= 5 ? 2.5 : 3.2, horizon.years <= 5 ? 4.4 : 6.3, "n", wallSet(room)));
       if ((Number(profile.householdSize) || 1) >= 4 && horizon.years >= 10) {
-        items.push(placeIn(room, 0.68, 0.7, "kidbed"));
+        items.push(againstWall(room, plan, "kidbed", 3.2, 6.3, "s", wallSet(room)));
       }
       return;
     }
-    items.push(placeIn(room, 0.5, 0.5, "bed"));
+    items.push(againstWall(room, plan, "bed", 5, 6.7, "n", wallSet(room)));
   });
-
   if (profile.wfh) {
     const deskRoom = studies[0] || (beds.length > 1 && !profile.kids ? beds[1] : null) || livings[0] || beds[0];
-    if (deskRoom) items.push(placeIn(deskRoom, studies[0] ? 0.5 : 0.74, studies[0] ? 0.5 : 0.24, "desk"));
+    if (deskRoom) items.push(againstWall(deskRoom, plan, "desk", 5, 2.5, studies[0] ? "w" : "e", wallSet(deskRoom)));
   }
-
   if (profile.pets) {
     const host = livings[0] || entries[0] || plan.rooms[0];
-    if (host) items.push(placeIn(host, 0.18, 0.8, "pet"));
+    if (host) {
+      const s = roomPxPerFt(host, plan);
+      items.push(piece(host, "pet", host.x + 2.2 * s, host.y + host.h - 2.2 * s, 2.2 * s, 1.4 * s, 0));
+    }
   }
-
   const roomMap = new Map(plan.rooms.map((room) => [room.id, room]));
   items.sort((a, b) => {
     const ra = roomMap.get(a.roomId);
@@ -556,12 +729,6 @@ export function furnitureFor(plan, profile, horizonId) {
     return (ra?.y || 0) - (rb?.y || 0) || (ra?.x || 0) - (rb?.x || 0);
   });
   return items;
-}
-
-export function furnitureMarkup(item, visible = true) {
-  const icon = FURN_ICONS[item.kind] || "";
-  const scale = item.scale || 1;
-  return `<g class="furn furn-${item.kind}" data-furn="${item.id}" data-room="${item.roomId}" transform="translate(${item.x} ${item.y}) scale(${scale})" opacity="${visible ? 1 : 0}">${icon}</g>`;
 }
 
 export function typicalDay(plan, profile, result) {

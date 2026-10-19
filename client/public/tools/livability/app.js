@@ -5,7 +5,6 @@ import {
   defaultGuideHello,
   emptyProfile,
   furnitureFor,
-  furnitureMarkup,
   heatMap,
   horizonNeedLine,
   makeRiversidePlan,
@@ -16,6 +15,7 @@ import {
   typicalDay,
   uid,
 } from "./engine.js";
+import { furnitureMarkup, renderPlanSvg, setHeatOpacity } from "./draw.js";
 
 // Future billing (not shown in UI): five free runs on this browser, then $1 token packs.
 // function canStartRun(store) { return store.runs.length < 5 || (store.tokens || 0) > 0; }
@@ -112,51 +112,26 @@ function currentFurniture() {
 function drawPlan(target, result, opts = {}) {
   const host = $(target);
   if (!plan.rooms.length) {
-    host.innerHTML = `<p class="empty" style="padding:20px">No plan yet. Look up an address, upload an image, or run a labeled demo.</p>`;
+    host.innerHTML = `<p class="empty" style="padding:28px 20px">No plan yet. Look up an address, upload an image, or run a labeled sample.</p>`;
     return;
   }
-  const heat = result ? heatMap(plan, result) : {};
-  const maxX = Math.max(...plan.rooms.map((room) => room.x + room.w), 420);
-  const maxY = Math.max(...plan.rooms.map((room) => room.y + room.h), 280);
-  const roomMap = new Map(plan.rooms.map((room) => [room.id, room]));
-  const paths = (result?.flags?.paths || [])
-    .map((path) => {
-      const pts = path.nodes
-        .map((id) => roomMap.get(id))
-        .filter(Boolean)
-        .map((room) => `${room.x + room.w / 2},${room.y + room.h / 2}`);
-      return pts.length > 1 ? `<polyline class="path" points="${pts.join(" ")}"></polyline>` : "";
-    })
-    .join("");
-  const rects = plan.rooms
-    .map((room) => {
-      const cell = heat[room.id];
-      const zone = cell?.zone || "calm";
-      return `<g>
-        <rect class="room-rect ${zone}" data-room="${room.id}" x="${room.x}" y="${room.y}" width="${room.w}" height="${room.h}"/>
-        <text class="room-lab" x="${room.x + 7}" y="${room.y + 16}">${escape(room.name)}</text>
-        <text class="room-lab" x="${room.x + 7}" y="${room.y + 28}" style="opacity:.55">${room.sf}sf${cell ? ` · ${cell.traffic}` : ""}</text>
-      </g>`;
-    })
-    .join("");
   const furniture = opts.furniture || (result ? currentFurniture() : []);
-  const furn = furniture.map((item) => furnitureMarkup(item, opts.furnish !== false)).join("");
-  host.innerHTML = `<svg class="plan-svg" viewBox="0 0 ${maxX + 20} ${maxY + 20}" role="img" aria-label="Floor plan heat map">${rects}${paths}${furn}</svg>`;
+  host.innerHTML = renderPlanSvg(plan, {
+    heat: result ? heatMap(plan, result) : {},
+    furniture,
+    furnish: opts.furnish !== false,
+    label: "Architectural floor plan",
+  });
 }
 
 function thumbSvg(run) {
-  const rooms = run.plan?.rooms || [];
-  if (!rooms.length) return "";
-  const heat = heatMap(run.plan, run.result);
-  const maxX = Math.max(...rooms.map((room) => room.x + room.w), 200);
-  const maxY = Math.max(...rooms.map((room) => room.y + room.h), 160);
-  const rects = rooms
-    .map((room) => {
-      const zone = heat[room.id]?.zone || "calm";
-      return `<rect class="room-rect ${zone}" x="${room.x}" y="${room.y}" width="${room.w}" height="${room.h}"/>`;
-    })
-    .join("");
-  return `<svg class="plan-svg" viewBox="0 0 ${maxX + 16} ${maxY + 16}" aria-hidden="true">${rects}</svg>`;
+  if (!run.plan?.rooms?.length) return "";
+  return renderPlanSvg(run.plan, {
+    heat: heatMap(run.plan, run.result),
+    furniture: [],
+    labels: false,
+    label: "Heat thumbnail",
+  });
 }
 
 function renderRooms() {
@@ -194,9 +169,7 @@ function renderProfile() {
 
 function renderHorizon() {
   $("#horizons").innerHTML = HORIZONS.map(
-    (item) => `<button class="chip" type="button" data-horizon="${item.id}" aria-pressed="${horizon === item.id}">
-      ${item.label}<br><span class="fine">${item.blurb}</span>
-    </button>`,
+    (item) => `<button class="chip" type="button" data-horizon="${item.id}" aria-pressed="${horizon === item.id}">${item.label}</button>`,
   ).join("");
 }
 
@@ -377,21 +350,6 @@ function along(pts, t) {
   return pts[pts.length - 1];
 }
 
-function paintHeat(root, cells, u) {
-  for (const room of plan.rooms) {
-    const rect = root.querySelector(`rect[data-room="${room.id}"]`);
-    const cell = cells[room.id];
-    if (!rect || !cell) continue;
-    const intensity = cell.intensity * u;
-    let zone = "calm";
-    if (u > 0.15 && cell.zone === "quiet" && intensity < 0.33) zone = "quiet";
-    else if (cell.zone === "pinch" && intensity >= 0.4) zone = "pinch";
-    else if (intensity >= 0.66) zone = "hot";
-    else if (intensity >= 0.33) zone = "flow";
-    rect.setAttribute("class", `room-rect ${zone}`);
-  }
-}
-
 function playCinema(run) {
   const furniture = furnitureFor(run.plan, run.profile, run.horizon);
   const cells = heatMap(run.plan, run.result);
@@ -399,10 +357,10 @@ function playCinema(run) {
   const routes = typicalDay(run.plan, run.profile, run.result)
     .map((route) => ({
       ...route,
-      pts: route.nodes.map((id) => roomMap.get(id)).filter(Boolean).map((room) => ({
-        x: room.x + room.w / 2,
-        y: room.y + room.h / 2,
-      })),
+      pts: route.nodes
+        .map((id) => roomMap.get(id))
+        .filter(Boolean)
+        .map((room) => ({ x: room.x + room.w / 2, y: room.y + room.h / 2 })),
     }))
     .filter((route) => route.pts.length > 1);
   const walkers = [];
@@ -411,34 +369,30 @@ function playCinema(run) {
   for (let i = 0; i < count; i += 1) {
     const route = routes[i % Math.max(1, routes.length)];
     if (!route) continue;
-    walkers.push({ pts: route.pts, phase: i * 0.28, tone: tones[i], r: 5 - (i % 2) });
+    walkers.push({ pts: route.pts, phase: i * 0.28, tone: tones[i], history: [] });
   }
   if (run.profile.pets && routes.length) {
     const pet = routes.find((route) => route.id === "pets") || routes[0];
-    walkers.push({ pts: pet.pts, phase: 0.7, tone: "b", r: 3.4 });
+    walkers.push({ pts: pet.pts, phase: 0.7, tone: "b", history: [] });
   }
 
-  const maxX = Math.max(...run.plan.rooms.map((room) => room.x + room.w), 420);
-  const maxY = Math.max(...run.plan.rooms.map((room) => room.y + room.h), 280);
-  const rects = run.plan.rooms
-    .map(
-      (room) => `<g>
-        <rect class="room-rect calm" data-room="${room.id}" x="${room.x}" y="${room.y}" width="${room.w}" height="${room.h}"/>
-        <text class="room-lab" x="${room.x + 7}" y="${room.y + 16}">${escape(room.name)}</text>
-      </g>`,
-    )
-    .join("");
-  const trails = routes
-    .map((route) => `<polyline class="trail" points="${route.pts.map((pt) => `${pt.x},${pt.y}`).join(" ")}"></polyline>`)
-    .join("");
-  const furn = furniture.map((item) => furnitureMarkup(item, false)).join("");
-  const dots = walkers
-    .map((_, i) => `<circle class="walker ${walkers[i].tone}" data-w="${i}" cx="-20" cy="-20" r="${walkers[i].r}" opacity="0"></circle>`)
-    .join("");
-  $("#cinema-stage").innerHTML = `<svg class="plan-svg" viewBox="0 0 ${maxX + 20} ${maxY + 20}" aria-hidden="true">${rects}${trails}${furn}${dots}</svg>`;
+  const extras = `${walkers
+    .map((_, i) => `<polyline class="trail-soft" data-trail="${i}" points=""></polyline>`)
+    .join("")}${walkers
+    .map((_, i) => `<circle class="walker ${walkers[i].tone}" data-w="${i}" cx="-40" cy="-40" r="3.2" opacity="0"></circle>`)
+    .join("")}`;
+  $("#cinema-stage").innerHTML = renderPlanSvg(run.plan, {
+    heat: cells,
+    heatU: 0,
+    furniture,
+    furnish: false,
+    extras,
+    label: "Bird's-eye simulation",
+  });
   $("#cinema").hidden = false;
   $("#cin-clock").textContent = "07:00";
   $("#cin-year").textContent = `horizon ${run.horizon}y`;
+  $("#cin-score").textContent = "";
   $("#cin-need").textContent = "The rooms take their furniture.";
   setPlaying(true);
   say("The rooms take their furniture.", "doing");
@@ -447,14 +401,16 @@ function playCinema(run) {
   for (const item of furniture) {
     if (!roomsOrder.includes(item.roomId)) roomsOrder.push(item.roomId);
   }
-  const FURNISH = 2000;
-  const DAY = 2600;
+  const FURNISH = 2200;
+  const DAY = 2800;
   const YEARS = 900;
-  const TOTAL = FURNISH + DAY + YEARS;
+  const SCORE = 700;
+  const TOTAL = FURNISH + DAY + YEARS + SCORE;
   const yearsMax = HORIZONS.find((item) => item.id === run.horizon)?.years || 10;
   const svg = $("#cinema-stage svg");
   const furnNodes = furniture.map((item) => svg.querySelector(`[data-furn="${item.id}"]`));
   const walkerNodes = walkers.map((_, i) => svg.querySelector(`[data-w="${i}"]`));
+  const trailNodes = walkers.map((_, i) => svg.querySelector(`[data-trail="${i}"]`));
   let spoken = "furnish";
   const t0 = performance.now();
 
@@ -472,16 +428,14 @@ function playCinema(run) {
         const ease = 1 - (1 - local) ** 3;
         furniture.forEach((item, fi) => {
           if (item.roomId !== roomId || !furnNodes[fi]) return;
-          const y = item.y - 16 * (1 - ease);
+          const y = item.y + 14 * (1 - ease);
           furnNodes[fi].setAttribute("opacity", String(ease));
-          furnNodes[fi].setAttribute(
-            "transform",
-            `translate(${item.x} ${y}) scale(${(item.scale || 1) * (0.86 + 0.14 * ease)})`,
-          );
+          furnNodes[fi].setAttribute("transform", `translate(${item.x} ${y}) rotate(${item.rot || 0})`);
         });
       });
       $("#cin-clock").textContent = "07:00";
-      $("#cin-need").textContent = "Beds, a sofa, the table. Room by room.";
+      $("#cin-need").textContent = "Furniture finds the walls, room by room.";
+      setHeatOpacity(svg, cells, 0);
     } else if (t < FURNISH + DAY) {
       if (spoken !== "day") {
         spoken = "day";
@@ -490,11 +444,11 @@ function playCinema(run) {
       furniture.forEach((item, fi) => {
         if (!furnNodes[fi]) return;
         furnNodes[fi].setAttribute("opacity", "1");
-        furnNodes[fi].setAttribute("transform", `translate(${item.x} ${item.y}) scale(${item.scale || 1})`);
+        furnNodes[fi].setAttribute("transform", `translate(${item.x} ${item.y}) rotate(${item.rot || 0})`);
       });
       const u = (t - FURNISH) / DAY;
       $("#cin-clock").textContent = clockAt(u);
-      $("#cin-year").textContent = `year 1`;
+      $("#cin-year").textContent = "year 1";
       $("#cin-need").textContent = "Morning, return, the rooms that get used.";
       walkerNodes.forEach((node, i) => {
         if (!node) return;
@@ -502,9 +456,12 @@ function playCinema(run) {
         node.setAttribute("cx", String(pos.x));
         node.setAttribute("cy", String(pos.y));
         node.setAttribute("opacity", "1");
+        walkers[i].history.push(pos);
+        if (walkers[i].history.length > 28) walkers[i].history.shift();
+        trailNodes[i]?.setAttribute("points", walkers[i].history.map((pt) => `${pt.x},${pt.y}`).join(" "));
       });
-      paintHeat(svg, cells, u);
-    } else {
+      setHeatOpacity(svg, cells, u);
+    } else if (t < FURNISH + DAY + YEARS) {
       if (spoken !== "years") {
         spoken = "years";
         say("Needs shift as the years stack.", "doing");
@@ -514,8 +471,18 @@ function playCinema(run) {
       $("#cin-clock").textContent = "22:00";
       $("#cin-year").textContent = yearsMax >= 15 && year >= 15 ? "15+" : `year ${year}`;
       $("#cin-need").textContent = horizonNeedLine(year);
-      walkerNodes.forEach((node) => node?.setAttribute("opacity", String(1 - u * 0.7)));
-      paintHeat(svg, cells, 1);
+      walkerNodes.forEach((node) => node?.setAttribute("opacity", String(1 - u * 0.65)));
+      setHeatOpacity(svg, cells, 1);
+    } else {
+      if (spoken !== "score") {
+        spoken = "score";
+        say(`Livability ${run.result.score}. ${run.result.notes[0] || "The rooms connect."}`, "doing");
+      }
+      const u = (t - FURNISH - DAY - YEARS) / SCORE;
+      const shown = Math.round(run.result.score * (1 - (1 - u) ** 2));
+      $("#cin-score").textContent = String(shown);
+      $("#cin-need").textContent = "The score lands on the layout, not the neighborhood.";
+      setHeatOpacity(svg, cells, 1);
     }
     cinemaRaf = requestAnimationFrame(tick);
   };
@@ -612,9 +579,9 @@ async function checkVision() {
       note: "Image reading is not configured on this deploy. Upload still stores a name. Rooms come from a demo or the editor.",
     };
   }
-  $("#vision-note").innerHTML = vision.available
-    ? `<span class="badge">Vision ready</span> An uploaded floor-plan image can be read.`
-    : `<span class="badge">No vision key</span> ${escape(vision.note)}`;
+  $("#vision-note").textContent = vision.available
+    ? "An uploaded floor-plan image can be read."
+    : "Upload reading coming soon. Try a sample or build the rooms.";
 }
 
 async function onUpload(file) {
@@ -625,7 +592,7 @@ async function onUpload(file) {
   plan.name = file.name.replace(/\.[^.]+$/, "") || "Uploaded plan";
   if (!plan.id) plan.id = uid("plan");
   if (!vision.available) {
-    say("I have the file name. This deploy has no vision key, so I will not invent rooms. Use a demo or the editor.");
+    say("I have the file name. Upload reading is not ready on this deploy. Use a sample or the room editor.");
     return;
   }
   say("Reading the uploaded plan. If I cannot see rooms, I will say so.", "doing");
@@ -737,7 +704,7 @@ function bind() {
       const id = btn.dataset.jump;
       const node = id === "collection" ? $("#collection") : $(`.pane[data-pane="${id}"]`) || $(`#${id}`);
       node?.scrollIntoView({ block: "start", behavior: "smooth" });
-      $$(".pane").forEach((pane) => pane.classList.toggle("on", pane.dataset.pane === id || (id === "collection" && pane.dataset.pane === "side")));
+      $$(".pane").forEach((pane) => pane.classList.toggle("on", pane.dataset.pane === id || (id === "collection" && pane.dataset.pane === "compare")));
     });
   });
   $$(".pane").forEach((pane) => {
