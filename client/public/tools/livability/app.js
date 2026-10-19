@@ -68,10 +68,15 @@ let cinemaRaf = 0;
 let cinemaSkip = false;
 let cinemaPlaying = false;
 
+function setGuideLive(on) {
+  $$(".guide-glyph").forEach((node) => node.classList.toggle("is-live", Boolean(on)));
+}
+
 function say(text, mode) {
   const el = $("#guide-speech");
   el.textContent = text;
   el.classList.toggle("doing", mode === "doing");
+  setGuideLive(mode === "doing" || cinemaPlaying);
 }
 
 function escape(value) {
@@ -302,6 +307,7 @@ function setPlaying(on) {
   $("#run-sim").disabled = on;
   $("#bar-run").disabled = on;
   $("#st-state").textContent = on ? "run" : lastRun ? "ran" : plan.rooms.length ? "plan" : "idle";
+  setGuideLive(on);
 }
 
 function hideCinema() {

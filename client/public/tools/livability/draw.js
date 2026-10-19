@@ -117,6 +117,57 @@ export function furnitureMarkup(item, visible = true) {
   return `<g class="furn furn-${item.kind}" data-furn="${item.id}" data-room="${item.roomId}" transform="translate(${item.x} ${item.y}) rotate(${rot})" opacity="${visible ? 1 : 0}">${body}</g>`;
 }
 
+function furnBox(item) {
+  const rot = Math.abs(item.rot || 0) % 180;
+  const swapped = rot > 45 && rot < 135;
+  const w = swapped ? item.h || 0 : item.w || 0;
+  const h = swapped ? item.w || 0 : item.h || 0;
+  return { x: item.x - w / 2, y: item.y - h / 2, w, h };
+}
+
+function overlaps(a, b, pad = 4) {
+  return a.x < b.x + b.w + pad && a.x + a.w + pad > b.x && a.y < b.y + b.h + pad && a.y + a.h + pad > b.y;
+}
+
+export function labelPlacement(room, furniture = []) {
+  const name = String(room.name || "").replace(/\s*\(approx\.\)\s*/gi, "").trim() || "Room";
+  const approx = /approx/i.test(room.name) ? " approx." : "";
+  const compact = room.w < 108 || room.h < 92;
+  const parts = name.split(/\s+/);
+  const lines = compact && parts.length > 1 && name.length > 8 ? [parts[0], parts.slice(1).join(" ")] : [name];
+  const lineH = compact ? 11 : 15;
+  const charW = compact ? 5.4 : 7.1;
+  const textW = Math.max(...lines.map((line) => line.length * charW));
+  const w = Math.min(room.w - 14, Math.max(28, textW + 2));
+  const h = 6 + lines.length * lineH + (compact ? 10 : 13);
+  const inset = compact ? 6 : 8;
+  const items = furniture.filter((item) => item.roomId === room.id).map(furnBox);
+  const spots = [
+    { x: room.x + inset, y: room.y + inset },
+    { x: room.x + room.w - inset - w, y: room.y + inset },
+    { x: room.x + inset, y: room.y + room.h - inset - h },
+    { x: room.x + room.w - inset - w, y: room.y + room.h - inset - h },
+    { x: room.x + Math.max(inset, (room.w - w) / 2), y: room.y + inset },
+  ];
+  let best = spots[0];
+  let bestScore = -1e9;
+  for (const spot of spots) {
+    const rect = { x: spot.x, y: spot.y, w, h };
+    if (rect.x < room.x + 3 || rect.y < room.y + 3 || rect.x + rect.w > room.x + room.w - 3 || rect.y + rect.h > room.y + room.h - 3) {
+      continue;
+    }
+    let score = 40 - (spot.y - room.y) * 0.08;
+    for (const box of items) {
+      if (overlaps(rect, box, 5)) score -= 120;
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      best = spot;
+    }
+  }
+  return { ...best, w, h, compact, lines, lineH, approx: compact ? "" : approx };
+}
+
 function heatColor(zone) {
   if (zone === "quiet") return "#4a6e8a";
   if (zone === "pinch") return "#E5E4E2";
@@ -210,17 +261,21 @@ export function renderPlanSvg(plan, opts = {}) {
       return `<rect class="door-gap" x="${edge.x - 3}" y="${y}" width="6" height="${gap}"/>${swing}`;
     })
     .join("");
+  const furniture = (opts.furniture || []).map((item) => furnitureMarkup(item, opts.furnish !== false)).join("");
   const labels = opts.labels === false
     ? ""
     : rooms
         .map((room) => {
-          const name = String(room.name || "").replace(/\s*\(approx\.\)\s*/gi, "").trim();
-          const approx = /approx/i.test(room.name) ? " approx." : "";
-          return `<text class="room-name" x="${room.x + 10}" y="${room.y + 20}">${escapeXml(name)}</text>
-            <text class="room-sf" x="${room.x + 10}" y="${room.y + 34}">${room.sf} sf${approx}</text>`;
+          const place = labelPlacement(room, opts.furniture || []);
+          const sm = place.compact ? " sm" : "";
+          const lines = place.lines
+            .map((line, index) => `<text class="room-name${sm}" x="${place.x}" y="${place.y + 11 + index * place.lineH}">${escapeXml(line)}</text>`)
+            .join("");
+          return `<rect class="label-plate" x="${place.x - 3}" y="${place.y - 1}" width="${place.w + 6}" height="${place.h + 2}" rx="1"/>
+            ${lines}
+            <text class="room-sf${sm}" x="${place.x}" y="${place.y + 11 + place.lines.length * place.lineH}">${room.sf} sf${place.approx}</text>`;
         })
         .join("");
-  const furniture = (opts.furniture || []).map((item) => furnitureMarkup(item, opts.furnish !== false)).join("");
   const extras = opts.extras || "";
   return `<svg class="plan-svg" viewBox="${minX} ${minY} ${maxX - minX} ${maxY - minY}" role="img" aria-label="${opts.label || "Architectural floor plan"}">
     <defs>${defs.join("")}</defs>

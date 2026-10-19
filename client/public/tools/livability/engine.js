@@ -520,9 +520,19 @@ function piece(room, kind, x, y, w, h, rot = 0) {
   };
 }
 
+export function labelReserve(room) {
+  const compact = room.w < 100 || room.h < 88;
+  const h = Math.min(room.h * 0.42, compact ? 30 : 40);
+  const w = Math.min(room.w - 14, compact ? 68 : 120);
+  return { x: room.x + 7, y: room.y + 5, w, h };
+}
+
 function doorSpansOn(room, plan) {
   const spans = { n: [], s: [], e: [], w: [] };
   const scale = roomPxPerFt(room, plan);
+  const reserve = labelReserve(room);
+  spans.n.push([reserve.x - 6, reserve.x + reserve.w + 8]);
+  spans.w.push([reserve.y - 4, reserve.y + reserve.h + 6]);
   for (const door of plan.doors || []) {
     const otherId = door.a === room.id ? door.b : door.b === room.id ? door.a : null;
     const other = plan.rooms.find((item) => item.id === otherId);
@@ -599,6 +609,7 @@ function againstWall(room, plan, kind, ftW, ftH, prefer, used) {
     const free = longestFree(lo, hi, spans[wall] || [], need);
     const len = free[1] - free[0];
     let rank = len;
+    if (len < need) rank -= 360;
     if (used?.has(wall)) rank -= 400;
     if (blockedWalls.has(wall) && len < need + 8) rank -= 200;
     if (wall === prefer) rank += 40;
@@ -612,8 +623,9 @@ function againstWall(room, plan, kind, ftW, ftH, prefer, used) {
   const h = (along ? ftW : ftH) * s;
   const maxW = room.w - inset * 2;
   const maxH = room.h - inset * 2;
-  const pw = Math.min(w, maxW);
-  const ph = Math.min(h, maxH);
+  const span = Math.max(8, picked.free[1] - picked.free[0]);
+  const pw = Math.min(w, maxW, along ? w : span);
+  const ph = Math.min(h, maxH, along ? span : h);
   const mid = (picked.free[0] + picked.free[1]) / 2;
   let x = room.x + room.w / 2;
   let y = room.y + room.h / 2;
@@ -674,8 +686,14 @@ export function furnitureFor(plan, profile, horizonId) {
     const blocked = doorWallsOf(room, plan);
     const depth = 2 * s;
     if (!blocked.has("n") && room.w > 8 * s) {
-      items.push(piece(room, "counter", room.x + room.w / 2, room.y + depth / 2 + 4, room.w - 16, depth, 0));
-      wallSet(room).add("n");
+      const reserve = labelReserve(room);
+      const left = reserve.x + reserve.w + 6;
+      const right = room.x + room.w - 8;
+      const cw = right - left;
+      if (cw >= 3 * s) {
+        items.push(piece(room, "counter", left + cw / 2, room.y + depth / 2 + 4, cw, depth, 0));
+        wallSet(room).add("n");
+      }
     }
     if (!blocked.has("s") && room.w > 8 * s) {
       items.push(piece(room, "counter", room.x + room.w / 2, room.y + room.h - depth / 2 - 4, room.w - 16, depth, 0));
@@ -689,8 +707,10 @@ export function furnitureFor(plan, profile, horizonId) {
     }
   }
   for (const room of baths) {
-    items.push(againstWall(room, plan, "tub", 5, 2.5, "n", wallSet(room)));
-    items.push(againstWall(room, plan, "vanity", 3, 1.6, "s", wallSet(room)));
+    const s = roomPxPerFt(room, plan);
+    const tiny = room.w / s < 10 || room.h / s < 10;
+    items.push(againstWall(room, plan, "tub", tiny ? 4 : 5, tiny ? 2.2 : 2.5, tiny ? "s" : "n", wallSet(room)));
+    items.push(againstWall(room, plan, "vanity", tiny ? 2.4 : 3, 1.6, tiny ? "e" : "s", wallSet(room)));
   }
   beds.forEach((room, index) => {
     const s = roomPxPerFt(room, plan);

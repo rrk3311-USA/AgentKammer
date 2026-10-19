@@ -88,9 +88,19 @@ button,input,select{font:inherit;color:inherit}
 .ptitle em{flex:1;font-style:normal;color:rgba(229,228,226,.45)}
 .pbody{padding:18px;overflow:auto}
 .guide-row{display:grid;gap:16px;align-items:start}
-@media(min-width:420px){.pane-guide .guide-row{grid-template-columns:148px 1fr}}
-.guide-mark{width:42px;height:auto;margin-bottom:10px}
-.guide-fig{width:140px;height:auto;border-radius:2px;filter:drop-shadow(0 12px 20px rgba(0,0,0,.4))}
+@media(min-width:420px){.pane-guide .guide-row{grid-template-columns:96px 1fr}}
+.guide-mark{width:36px;height:auto;margin-bottom:12px}
+.guide-glyph{width:88px;height:88px;color:var(--platinum)}
+.guide-glyph .bow{transform-origin:36px 40px;transition:opacity .3s ease}
+.guide-glyph.is-live .bow{animation:guide-shimmer 1.8s ease-in-out infinite}
+.cinema-hud .guide-glyph{width:34px;height:34px;flex:0 0 auto;color:var(--platinum)}
+@keyframes guide-shimmer{
+  0%,100%{opacity:.7;filter:drop-shadow(0 0 0 transparent)}
+  50%{opacity:1;filter:drop-shadow(0 0 8px rgba(229,228,226,.4))}
+}
+@media (prefers-reduced-motion: reduce){
+  .guide-glyph.is-live .bow{animation:none;opacity:1}
+}
 
 .field{display:block;margin:0 0 14px}
 .field span{display:block;margin-bottom:6px;font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--limestone)}
@@ -117,7 +127,10 @@ button,input,select{font:inherit;color:inherit}
 .door-gap{fill:#0b1018}
 .door-swing{fill:none;stroke:rgba(229,228,226,.45);stroke-width:1}
 .room-name{fill:#F5F2EB;font:500 16px var(--serif)}
+.room-name.sm{font-size:11px}
 .room-sf{fill:rgba(245,242,235,.68);font:500 11px var(--sans)}
+.room-sf.sm{font-size:10px}
+.label-plate{fill:rgba(11,16,24,.55)}
 .legend{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0 0;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:rgba(245,242,235,.62)}
 .legend i{display:inline-block;width:9px;height:9px;margin-right:5px;vertical-align:middle;border-radius:50%}
 .lg-hot{background:#E2B470}.lg-pinch{background:#E5E4E2}.lg-quiet{background:#4a6e8a}.lg-flow{background:#B08D57}
@@ -157,15 +170,28 @@ button,input,select{font:inherit;color:inherit}
 
 .bar{
   position:fixed;left:0;right:0;bottom:0;z-index:30;
-  display:flex;align-items:center;gap:4px;
-  padding:8px max(12px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));
+  display:flex;align-items:center;gap:2px;
+  padding:8px max(10px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));
   background:rgba(13,24,43,.98);
   border-top:1px solid rgba(216,209,199,.18);
   max-width:100%;overflow-x:clip;
 }
-.bar img{width:26px;height:28px;margin-right:6px;opacity:.95}
-.bar button{flex:1 1 0;min-width:0;border:0;background:transparent;color:var(--mist);padding:8px 4px;font:500 12px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.bar img{width:22px;height:24px;margin-right:4px;opacity:.95;flex:0 0 auto}
+.bar button{
+  flex:1 1 0;min-width:0;border:0;background:transparent;color:var(--mist);
+  padding:6px 2px;font:500 11px/1.15 var(--mono);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:3px;white-space:nowrap
+}
 .bar button.on,.bar button:hover{color:var(--ivory)}
+.bar .short{display:none}
+.bar svg.bar-ico{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.4}
+@media(max-width:700px){
+  .bar{gap:0;padding-left:8px;padding-right:8px}
+  .bar img{width:18px;height:20px;margin-right:2px}
+  .bar button{font-size:10px;letter-spacing:.04em;padding:6px 1px}
+  .bar .full{display:none}
+  .bar .short{display:block}
+}
 
 .site-foot{position:relative;z-index:2;padding:28px 18px calc(var(--bar) + 28px);border-top:1px solid rgba(216,209,199,.14);background:#0D182B}
 .site-exit{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 14px}
@@ -281,8 +307,15 @@ button,input,select{font:inherit;color:inherit}
     <div class="pbody">
       <div class="guide-row">
         <div>
-          <img class="guide-mark" src="/brand/ak-monogram-ivory.png" alt="" width="42" height="46">
-          <img class="guide-fig" src="guide-portrait.jpg" alt="Bow-tie guide" width="140" height="187">
+          <img class="guide-mark" src="/brand/ak-monogram-ivory.png" alt="" width="36" height="40">
+          <svg class="guide-glyph" viewBox="0 0 72 72" role="img" aria-label="Guide mark">
+            <title>Guide</title>
+            <g class="bow" fill="currentColor">
+              <path d="M6 36 L29 20 L29 52 Z"/>
+              <path d="M66 36 L43 20 L43 52 Z"/>
+              <rect x="29" y="28" width="14" height="16" rx="1"/>
+            </g>
+          </svg>
         </div>
         <div>
           <p class="kicker">Narrator</p>
@@ -367,6 +400,13 @@ button,input,select{font:inherit;color:inherit}
 
 <div class="cinema" id="cinema" hidden>
   <div class="cinema-hud">
+    <svg class="guide-glyph is-live" viewBox="0 0 72 72" role="img" aria-hidden="true">
+      <g class="bow" fill="currentColor">
+        <path d="M6 36 L29 20 L29 52 Z"/>
+        <path d="M66 36 L43 20 L43 52 Z"/>
+        <rect x="29" y="28" width="14" height="16" rx="1"/>
+      </g>
+    </svg>
     <span class="clock" id="cin-clock">07:00</span>
     <span class="year" id="cin-year">year 0</span>
     <span class="score" id="cin-score"></span>
@@ -378,11 +418,11 @@ button,input,select{font:inherit;color:inherit}
 
 <nav class="bar" aria-label="Simulator">
   <img src="/brand/ak-monogram-ivory.png" alt="">
-  <button type="button" data-jump="entry">Address</button>
-  <button type="button" data-jump="side">Household</button>
-  <button type="button" id="bar-run">Run</button>
-  <button type="button" data-jump="compare">Compare</button>
-  <button type="button" data-jump="collection">Collection</button>
+  <button type="button" data-jump="entry"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><rect x="1.5" y="2" width="9" height="8"/></svg><span class="full">Address</span><span class="short">Addr</span></button>
+  <button type="button" data-jump="side"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="4" r="2"/><path d="M2.5 10c.6-2 2-3 3.5-3s2.9 1 3.5 3"/></svg><span class="full">Household</span><span class="short">House</span></button>
+  <button type="button" id="bar-run"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2.5l6 3.5-6 3.5z"/></svg><span class="full">Run</span><span class="short">Run</span></button>
+  <button type="button" data-jump="compare"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9V4M6 9V2.5M9 9V6"/></svg><span class="full">Compare</span><span class="short">Cmp</span></button>
+  <button type="button" data-jump="collection"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="2.5" width="8" height="7"/><path d="M4 2.5V2h4v.5"/></svg><span class="full">Collection</span><span class="short">Keep</span></button>
 </nav>
 
 <footer class="site-foot">

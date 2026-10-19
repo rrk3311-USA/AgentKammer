@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { cannotFetchPlan, emptyProfile, furnitureFor, heatMap, makeRiversidePlan, makeStahlPlan, makeSuttonPlan, matchKnownSample, scoreLivability, typicalDay } from "../client/public/tools/livability/engine.js";
+import { cannotFetchPlan, emptyProfile, furnitureFor, heatMap, labelReserve, makeRiversidePlan, makeStahlPlan, makeSuttonPlan, matchKnownSample, scoreLivability, typicalDay } from "../client/public/tools/livability/engine.js";
+import { labelPlacement } from "../client/public/tools/livability/draw.js";
 import { SUGGESTIONS_ENABLED, suggestSimilarListings } from "../client/public/tools/livability/suggestions.js";
 
 describe("livability desk scoring", () => {
@@ -97,6 +98,35 @@ describe("livability desk scoring", () => {
     expect(result.notes.join(" ")).not.toContain("—");
     expect(result.notes.join(" ")).not.toMatch(/Most days will meet there/);
     expect(JSON.stringify(plan)).not.toContain("—");
+  });
+
+  it("keeps room labels off furniture in the Stahl sample", () => {
+    const plan = makeStahlPlan();
+    const furniture = furnitureFor(plan, { ...emptyProfile(), householdSize: 2, entertainer: true, wfh: true }, "10");
+    const living = plan.rooms.find((room) => room.id === "living");
+    const sofa = furniture.find((item) => item.kind === "sofa" && item.roomId === "living");
+    const reserve = labelReserve(living);
+    const rot = Math.abs(sofa.rot || 0) % 180;
+    const sw = rot > 45 && rot < 135 ? sofa.h : sofa.w;
+    const sh = rot > 45 && rot < 135 ? sofa.w : sofa.h;
+    const sofaBox = { x: sofa.x - sw / 2, y: sofa.y - sh / 2, w: sw, h: sh };
+    expect(sofaBox.x + sofaBox.w < reserve.x || sofaBox.x > reserve.x + reserve.w || sofaBox.y + sofaBox.h < reserve.y || sofaBox.y > reserve.y + reserve.h).toBe(true);
+
+    for (const id of ["living", "mbath", "jjbath", "dress", "service"]) {
+      const room = plan.rooms.find((item) => item.id === id);
+      const place = labelPlacement(room, furniture);
+      const label = { x: place.x, y: place.y, w: place.w, h: place.h };
+      for (const item of furniture.filter((piece) => piece.roomId === id)) {
+        const rot = Math.abs(item.rot || 0) % 180;
+        const bw = rot > 45 && rot < 135 ? item.h : item.w;
+        const bh = rot > 45 && rot < 135 ? item.w : item.h;
+        const box = { x: item.x - bw / 2, y: item.y - bh / 2, w: bw, h: bh };
+        const hit = label.x < box.x + box.w && label.x + label.w > box.x && label.y < box.y + box.h && label.y + label.h > box.y;
+        expect(hit).toBe(false);
+      }
+      expect(label.x + label.w).toBeLessThanOrEqual(room.x + room.w - 2);
+      expect(label.y + label.h).toBeLessThanOrEqual(room.y + room.h - 2);
+    }
   });
 
   it("keeps similar-home suggestions off and empty in v1", () => {
