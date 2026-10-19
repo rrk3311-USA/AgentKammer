@@ -4,10 +4,14 @@ import {
   cannotFetchPlan,
   defaultGuideHello,
   emptyProfile,
+  furnitureFor,
+  furnitureMarkup,
   heatMap,
+  horizonNeedLine,
   makeRiversidePlan,
   makeSuttonPlan,
   scoreLivability,
+  typicalDay,
   uid,
 } from "./engine.js";
 
@@ -57,6 +61,9 @@ let profile = store.profile || emptyProfile();
 let horizon = store.horizon || "10";
 let lastRun = store.runs[0] || null;
 let vision = { available: false, note: "" };
+let cinemaRaf = 0;
+let cinemaSkip = false;
+let cinemaPlaying = false;
 
 function say(text, mode) {
   const el = $("#guide-speech");
@@ -95,7 +102,11 @@ function layoutIfNeeded(rooms) {
   }));
 }
 
-function drawPlan(target, result) {
+function currentFurniture() {
+  return plan.rooms.length ? furnitureFor(plan, profile, horizon) : [];
+}
+
+function drawPlan(target, result, opts = {}) {
   const host = $(target);
   if (!plan.rooms.length) {
     host.innerHTML = `<p class="empty" style="padding:20px">No plan yet. Look up an address, upload an image, or run a labeled demo.</p>`;
@@ -119,13 +130,15 @@ function drawPlan(target, result) {
       const cell = heat[room.id];
       const zone = cell?.zone || "calm";
       return `<g>
-        <rect class="room-rect ${zone}" x="${room.x}" y="${room.y}" width="${room.w}" height="${room.h}"/>
+        <rect class="room-rect ${zone}" data-room="${room.id}" x="${room.x}" y="${room.y}" width="${room.w}" height="${room.h}"/>
         <text class="room-lab" x="${room.x + 7}" y="${room.y + 16}">${escape(room.name)}</text>
         <text class="room-lab" x="${room.x + 7}" y="${room.y + 28}" style="opacity:.55">${room.sf}sf${cell ? ` · ${cell.traffic}` : ""}</text>
       </g>`;
     })
     .join("");
-  host.innerHTML = `<svg class="plan-svg" viewBox="0 0 ${maxX + 20} ${maxY + 20}" role="img" aria-label="Floor plan heat map">${rects}${paths}</svg>`;
+  const furniture = opts.furniture || (result ? currentFurniture() : []);
+  const furn = furniture.map((item) => furnitureMarkup(item, opts.furnish !== false)).join("");
+  host.innerHTML = `<svg class="plan-svg" viewBox="0 0 ${maxX + 20} ${maxY + 20}" role="img" aria-label="Floor plan heat map">${rects}${paths}${furn}</svg>`;
 }
 
 function thumbSvg(run) {
@@ -292,13 +305,215 @@ function lookup() {
   say(miss.reason);
 }
 
+function prefersReduced() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function setPlaying(on) {
+  cinemaPlaying = on;
+  $("#run-sim").disabled = on;
+  $("#bar-run").disabled = on;
+  $("#st-state").textContent = on ? "run" : lastRun ? "ran" : plan.rooms.length ? "plan" : "idle";
+}
+
+function hideCinema() {
+  if (cinemaRaf) cancelAnimationFrame(cinemaRaf);
+  cinemaRaf = 0;
+  cinemaSkip = false;
+  $("#cinema").hidden = true;
+  setPlaying(false);
+}
+
+function landRun(run) {
+  hideCinema();
+  drawPlan("#plan-canvas", run.result, { furniture: furnitureFor(run.plan, run.profile, run.horizon) });
+  renderScore(run.result);
+  renderCollection();
+  renderCompare();
+  status();
+  say(`Livability ${run.result.score}. ${run.result.notes[0] || "The rooms connect."}`);
+}
+
+function clockAt(u) {
+  const minutes = 7 * 60 + Math.round(Math.max(0, Math.min(1, u)) * (22 - 7) * 60);
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+}
+
+function along(pts, t) {
+  if (!pts.length) return { x: 0, y: 0 };
+  if (pts.length === 1) return pts[0];
+  let total = 0;
+  const segs = [];
+  for (let i = 0; i < pts.length - 1; i += 1) {
+    const len = Math.hypot(pts[i + 1].x - pts[i].x, pts[i + 1].y - pts[i].y) || 1;
+    segs.push({ a: pts[i], b: pts[i + 1], len });
+    total += len;
+  }
+  let d = ((t % 2) > 1 ? 2 - (t % 2) : t % 2) * total;
+  for (const seg of segs) {
+    if (d <= seg.len) {
+      const u = d / seg.len;
+      return { x: seg.a.x + (seg.b.x - seg.a.x) * u, y: seg.a.y + (seg.b.y - seg.a.y) * u };
+    }
+    d -= seg.len;
+  }
+  return pts[pts.length - 1];
+}
+
+function paintHeat(root, cells, u) {
+  for (const room of plan.rooms) {
+    const rect = root.querySelector(`rect[data-room="${room.id}"]`);
+    const cell = cells[room.id];
+    if (!rect || !cell) continue;
+    const intensity = cell.intensity * u;
+    let zone = "calm";
+    if (u > 0.15 && cell.zone === "quiet" && intensity < 0.33) zone = "quiet";
+    else if (cell.zone === "pinch" && intensity >= 0.4) zone = "pinch";
+    else if (intensity >= 0.66) zone = "hot";
+    else if (intensity >= 0.33) zone = "flow";
+    rect.setAttribute("class", `room-rect ${zone}`);
+  }
+}
+
+function playCinema(run) {
+  const furniture = furnitureFor(run.plan, run.profile, run.horizon);
+  const cells = heatMap(run.plan, run.result);
+  const roomMap = new Map(run.plan.rooms.map((room) => [room.id, room]));
+  const routes = typicalDay(run.plan, run.profile, run.result)
+    .map((route) => ({
+      ...route,
+      pts: route.nodes.map((id) => roomMap.get(id)).filter(Boolean).map((room) => ({
+        x: room.x + room.w / 2,
+        y: room.y + room.h / 2,
+      })),
+    }))
+    .filter((route) => route.pts.length > 1);
+  const walkers = [];
+  const count = clampNum(run.profile.householdSize, 1, 5);
+  const tones = ["", "b", "c", "d", "b"];
+  for (let i = 0; i < count; i += 1) {
+    const route = routes[i % Math.max(1, routes.length)];
+    if (!route) continue;
+    walkers.push({ pts: route.pts, phase: i * 0.28, tone: tones[i], r: 5 - (i % 2) });
+  }
+  if (run.profile.pets && routes.length) {
+    const pet = routes.find((route) => route.id === "pets") || routes[0];
+    walkers.push({ pts: pet.pts, phase: 0.7, tone: "b", r: 3.4 });
+  }
+
+  const maxX = Math.max(...run.plan.rooms.map((room) => room.x + room.w), 420);
+  const maxY = Math.max(...run.plan.rooms.map((room) => room.y + room.h), 280);
+  const rects = run.plan.rooms
+    .map(
+      (room) => `<g>
+        <rect class="room-rect calm" data-room="${room.id}" x="${room.x}" y="${room.y}" width="${room.w}" height="${room.h}"/>
+        <text class="room-lab" x="${room.x + 7}" y="${room.y + 16}">${escape(room.name)}</text>
+      </g>`,
+    )
+    .join("");
+  const trails = routes
+    .map((route) => `<polyline class="trail" points="${route.pts.map((pt) => `${pt.x},${pt.y}`).join(" ")}"></polyline>`)
+    .join("");
+  const furn = furniture.map((item) => furnitureMarkup(item, false)).join("");
+  const dots = walkers
+    .map((_, i) => `<circle class="walker ${walkers[i].tone}" data-w="${i}" cx="-20" cy="-20" r="${walkers[i].r}" opacity="0"></circle>`)
+    .join("");
+  $("#cinema-stage").innerHTML = `<svg class="plan-svg" viewBox="0 0 ${maxX + 20} ${maxY + 20}" aria-hidden="true">${rects}${trails}${furn}${dots}</svg>`;
+  $("#cinema").hidden = false;
+  $("#cin-clock").textContent = "07:00";
+  $("#cin-year").textContent = `horizon ${run.horizon}y`;
+  $("#cin-need").textContent = "The rooms take their furniture.";
+  setPlaying(true);
+  say("The rooms take their furniture.", "doing");
+
+  const roomsOrder = [];
+  for (const item of furniture) {
+    if (!roomsOrder.includes(item.roomId)) roomsOrder.push(item.roomId);
+  }
+  const FURNISH = 2000;
+  const DAY = 2600;
+  const YEARS = 900;
+  const TOTAL = FURNISH + DAY + YEARS;
+  const yearsMax = HORIZONS.find((item) => item.id === run.horizon)?.years || 10;
+  const svg = $("#cinema-stage svg");
+  const furnNodes = furniture.map((item) => svg.querySelector(`[data-furn="${item.id}"]`));
+  const walkerNodes = walkers.map((_, i) => svg.querySelector(`[data-w="${i}"]`));
+  let spoken = "furnish";
+  const t0 = performance.now();
+
+  const tick = (now) => {
+    const t = cinemaSkip ? TOTAL : now - t0;
+    if (t >= TOTAL) {
+      landRun(run);
+      return;
+    }
+    if (t < FURNISH) {
+      const u = t / FURNISH;
+      roomsOrder.forEach((roomId, index) => {
+        const start = index / Math.max(1, roomsOrder.length);
+        const local = Math.max(0, Math.min(1, (u - start) * roomsOrder.length));
+        const ease = 1 - (1 - local) ** 3;
+        furniture.forEach((item, fi) => {
+          if (item.roomId !== roomId || !furnNodes[fi]) return;
+          const y = item.y - 16 * (1 - ease);
+          furnNodes[fi].setAttribute("opacity", String(ease));
+          furnNodes[fi].setAttribute(
+            "transform",
+            `translate(${item.x} ${y}) scale(${(item.scale || 1) * (0.86 + 0.14 * ease)})`,
+          );
+        });
+      });
+      $("#cin-clock").textContent = "07:00";
+      $("#cin-need").textContent = "Beds, a sofa, the table. Room by room.";
+    } else if (t < FURNISH + DAY) {
+      if (spoken !== "day") {
+        spoken = "day";
+        say("A typical day, sped up. Watch the paths heat.", "doing");
+      }
+      furniture.forEach((item, fi) => {
+        if (!furnNodes[fi]) return;
+        furnNodes[fi].setAttribute("opacity", "1");
+        furnNodes[fi].setAttribute("transform", `translate(${item.x} ${item.y}) scale(${item.scale || 1})`);
+      });
+      const u = (t - FURNISH) / DAY;
+      $("#cin-clock").textContent = clockAt(u);
+      $("#cin-year").textContent = `year 1`;
+      $("#cin-need").textContent = "Morning, return, the rooms that get used.";
+      walkerNodes.forEach((node, i) => {
+        if (!node) return;
+        const pos = along(walkers[i].pts, u * 2.4 + walkers[i].phase);
+        node.setAttribute("cx", String(pos.x));
+        node.setAttribute("cy", String(pos.y));
+        node.setAttribute("opacity", "1");
+      });
+      paintHeat(svg, cells, u);
+    } else {
+      if (spoken !== "years") {
+        spoken = "years";
+        say("Needs shift as the years stack.", "doing");
+      }
+      const u = (t - FURNISH - DAY) / YEARS;
+      const year = Math.max(1, Math.round(u * yearsMax));
+      $("#cin-clock").textContent = "22:00";
+      $("#cin-year").textContent = yearsMax >= 15 && year >= 15 ? "15+" : `year ${year}`;
+      $("#cin-need").textContent = horizonNeedLine(year);
+      walkerNodes.forEach((node) => node?.setAttribute("opacity", String(1 - u * 0.7)));
+      paintHeat(svg, cells, 1);
+    }
+    cinemaRaf = requestAnimationFrame(tick);
+  };
+  cinemaRaf = requestAnimationFrame(tick);
+}
+
 function runSimulation() {
+  if (cinemaPlaying) return;
   readForm();
   if (plan.rooms.length < 2) {
     say("I still need a plan. I cannot fetch one from that address. Upload an image or use a labeled demo.");
     return;
   }
-  say("Tracing morning and return paths. Painting traffic, pinch points, and quiet rooms.", "doing");
   const result = scoreLivability(plan, profile, horizon);
   const run = {
     id: uid("run"),
@@ -314,12 +529,11 @@ function runSimulation() {
   store.profile = profile;
   store.horizon = horizon;
   save();
-  drawPlan("#plan-canvas", result);
-  renderScore(result);
-  renderCollection();
-  renderCompare();
-  status();
-  say(`Livability ${result.score}. ${result.notes[0] || "The rooms connect."}`);
+  if (prefersReduced()) {
+    landRun(run);
+    return;
+  }
+  playCinema(run);
 }
 
 function keepCollection() {
@@ -434,6 +648,12 @@ function bind() {
   $("#plan-file").addEventListener("change", (event) => onUpload(event.target.files?.[0]));
   $("#run-sim").addEventListener("click", runSimulation);
   $("#bar-run").addEventListener("click", runSimulation);
+  $("#cin-skip").addEventListener("click", () => {
+    cinemaSkip = true;
+  });
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && cinemaPlaying) cinemaSkip = true;
+  });
   $("#keep-col").addEventListener("click", keepCollection);
   $("#add-compare").addEventListener("click", addCompare);
   $("#traits").addEventListener("click", (event) => {

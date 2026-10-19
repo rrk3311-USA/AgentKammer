@@ -92,6 +92,7 @@ button,input,select{font:inherit;color:inherit}
 .field input,.field select{width:100%;border:1px solid rgba(216,209,199,.24);background:#0f1522;padding:9px 10px}
 .row{display:flex;flex-wrap:wrap;gap:6px}
 .btn{border:1px solid var(--platinum);background:var(--ivory);color:var(--deep);padding:9px 12px;font:600 10px var(--sans);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .15s,color .15s}
+.btn:disabled{opacity:.45;cursor:wait}
 .btn:hover{background:var(--platinum)}
 .btn.ghost{background:transparent;color:var(--ivory);border-color:rgba(229,228,226,.28)}
 .btn.ghost:hover{background:rgba(245,242,235,.06)}
@@ -161,7 +162,38 @@ button,input,select{font:inherit;color:inherit}
 .site-foot .wordmark a{color:var(--platinum);text-decoration:none;font:500 1.35rem var(--serif);letter-spacing:.1em}
 .site-foot p{margin:6px 0 0;color:rgba(245,242,235,.58);font-size:13px}
 
-@media print{.ak-compact-header,.ak-compact-header__menu,.status,.bar,.grain{display:none!important}}
+.cinema{
+  position:fixed;inset:var(--header) 0 0 0;z-index:48;
+  display:flex;flex-direction:column;
+  background:#0a1018;
+  background-image:var(--grid);
+  background-size:28px 28px;
+  max-width:100%;overflow:clip;
+}
+.cinema[hidden]{display:none!important}
+.cinema-hud{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;
+  min-height:44px;padding:8px 14px;
+  border-bottom:1px solid rgba(229,228,226,.14);
+  font:500 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(229,228,226,.7);
+}
+.cinema-hud .clock{font:italic 500 1.7rem/1 var(--serif);letter-spacing:.02em;text-transform:none;color:var(--ivory)}
+.cinema-hud .year{color:var(--brass)}
+.cinema-hud .need{flex:1 1 160px;min-width:0;font:italic 400 1.05rem/1.3 var(--serif);letter-spacing:0;text-transform:none;color:var(--limestone)}
+.cinema-stage{flex:1;min-height:0;display:grid;place-items:center;padding:10px 12px 20px;overflow:auto;max-width:100%}
+.cinema-stage .plan-svg{width:min(960px,100%);height:auto;max-height:calc(100svh - var(--header) - 96px)}
+.walker{fill:#F5F2EB;stroke:#0D182B;stroke-width:1.2}
+.walker.b{fill:#B08D57}
+.walker.c{fill:#8aa0b8}
+.walker.d{fill:#D8D1C7}
+.furn{pointer-events:none}
+.trail{fill:none;stroke:rgba(226,180,112,.35);stroke-width:2;stroke-linecap:round;stroke-dasharray:3 7}
+@media (prefers-reduced-motion: reduce){
+  .cinema{display:none!important}
+}
+
+@media print{.ak-compact-header,.ak-compact-header__menu,.status,.bar,.cinema,.grain{display:none!important}}
 </style>
 </head>
 <body>
@@ -312,6 +344,16 @@ button,input,select{font:inherit;color:inherit}
       <div class="compare" id="compare"></div>
     </div>
   </section>
+</div>
+
+<div class="cinema" id="cinema" hidden>
+  <div class="cinema-hud">
+    <span class="clock" id="cin-clock">07:00</span>
+    <span class="year" id="cin-year">year 0</span>
+    <span class="need" id="cin-need">The rooms take their furniture.</span>
+    <button class="btn ghost" type="button" id="cin-skip">Skip</button>
+  </div>
+  <div class="cinema-stage" id="cinema-stage" role="img" aria-label="Bird's-eye simulation of the floor plan"></div>
 </div>
 
 <nav class="bar" aria-label="Simulator">

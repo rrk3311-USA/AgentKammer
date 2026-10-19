@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { cannotFetchPlan, emptyProfile, heatMap, makeRiversidePlan, makeSuttonPlan, scoreLivability } from "../client/public/tools/livability/engine.js";
+import { cannotFetchPlan, emptyProfile, furnitureFor, heatMap, makeRiversidePlan, makeSuttonPlan, scoreLivability, typicalDay } from "../client/public/tools/livability/engine.js";
 
 describe("livability desk scoring", () => {
   it("scores the Sutton sample on layout only", () => {
@@ -37,5 +37,32 @@ describe("livability desk scoring", () => {
     expect(heat.gallery.zone === "pinch" || heat.gallery.traffic > 0).toBe(true);
     const other = scoreLivability(makeRiversidePlan(), emptyProfile(), "10");
     expect(other.score).not.toBe(result.score);
+  });
+
+  it("furnishes from the household and the rooms, not a neighborhood", () => {
+    const plan = makeSuttonPlan();
+    const base = furnitureFor(plan, emptyProfile(), "10");
+    expect(base.some((item) => item.kind === "sofa")).toBe(true);
+    expect(base.some((item) => item.kind === "bed")).toBe(true);
+    expect(base.some((item) => item.kind === "desk")).toBe(false);
+    expect(base.some((item) => item.kind === "crib" || item.kind === "pet")).toBe(false);
+
+    const wfh = furnitureFor(plan, { ...emptyProfile(), wfh: true }, "10");
+    expect(wfh.some((item) => item.kind === "desk")).toBe(true);
+
+    const kids5 = furnitureFor(plan, { ...emptyProfile(), kids: true }, "5");
+    expect(kids5.some((item) => item.kind === "crib")).toBe(true);
+
+    const kids10 = furnitureFor(plan, { ...emptyProfile(), kids: true }, "10");
+    expect(kids10.some((item) => item.kind === "kidbed")).toBe(true);
+
+    const pets = furnitureFor(plan, { ...emptyProfile(), pets: true }, "10");
+    expect(pets.some((item) => item.kind === "pet")).toBe(true);
+
+    const result = scoreLivability(plan, { ...emptyProfile(), wfh: true, kids: true }, "10");
+    const day = typicalDay(plan, { ...emptyProfile(), wfh: true, kids: true }, result);
+    expect(day.some((route) => route.id === "kids")).toBe(true);
+    expect(JSON.stringify({ wfh, kids5, day })).not.toMatch(/school|neighborhood|broker/i);
+    expect(JSON.stringify({ wfh, kids5 })).not.toContain("—");
   });
 });

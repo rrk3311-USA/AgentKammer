@@ -397,6 +397,128 @@ export function scoreLivability(plan, profile, horizonId) {
   };
 }
 
+const FURN_ICONS = {
+  bed: `<rect x="-20" y="-13" width="40" height="26" rx="2" fill="rgba(245,242,235,.06)" stroke="#E5E4E2" stroke-width="1.2"/><rect x="-16" y="-11" width="12" height="7" rx="1.5" fill="none" stroke="#D8D1C7"/><rect x="4" y="-11" width="12" height="7" rx="1.5" fill="none" stroke="#D8D1C7"/>`,
+  crib: `<rect x="-13" y="-10" width="26" height="20" rx="1" fill="rgba(245,242,235,.05)" stroke="#E5E4E2"/><path d="M-11 -6h22M-11 0h22M-11 6h22" fill="none" stroke="#B08D57" stroke-width=".8"/>`,
+  kidbed: `<rect x="-15" y="-10" width="30" height="20" rx="2" fill="rgba(245,242,235,.05)" stroke="#D8D1C7"/><rect x="-12" y="-8" width="9" height="5" rx="1" fill="none" stroke="#E5E4E2"/>`,
+  sofa: `<rect x="-24" y="-8" width="48" height="16" rx="3" fill="rgba(176,141,87,.12)" stroke="#B08D57"/><path d="M-24 -8v-4h48v4" fill="none" stroke="#E5E4E2"/><path d="M-8 8v-10M8 8v-10" fill="none" stroke="#D8D1C7" stroke-width=".8"/>`,
+  table: `<ellipse cx="0" cy="0" rx="16" ry="10" fill="rgba(245,242,235,.05)" stroke="#E5E4E2"/><rect x="-6" y="-18" width="12" height="5" rx="1" fill="none" stroke="#D8D1C7"/><rect x="-6" y="13" width="12" height="5" rx="1" fill="none" stroke="#D8D1C7"/><rect x="-22" y="-4" width="5" height="8" rx="1" fill="none" stroke="#D8D1C7"/><rect x="17" y="-4" width="5" height="8" rx="1" fill="none" stroke="#D8D1C7"/>`,
+  desk: `<rect x="-16" y="-8" width="32" height="12" rx="1" fill="rgba(245,242,235,.05)" stroke="#E5E4E2"/><rect x="-7" y="6" width="14" height="7" rx="1" fill="none" stroke="#B08D57"/><rect x="6" y="-6" width="8" height="5" rx=".5" fill="none" stroke="#D8D1C7"/>`,
+  pet: `<ellipse cx="0" cy="0" rx="8" ry="5" fill="rgba(176,141,87,.14)" stroke="#B08D57"/><ellipse cx="0" cy="0" rx="4" ry="2.4" fill="none" stroke="#D8D1C7"/>`,
+  range: `<rect x="-10" y="-10" width="20" height="20" rx="1" fill="rgba(245,242,235,.04)" stroke="#E5E4E2"/><circle cx="-4" cy="-4" r="2.4" fill="none" stroke="#B08D57"/><circle cx="4" cy="-4" r="2.4" fill="none" stroke="#B08D57"/><circle cx="-4" cy="4" r="2.4" fill="none" stroke="#B08D57"/><circle cx="4" cy="4" r="2.4" fill="none" stroke="#B08D57"/>`,
+  tub: `<ellipse cx="0" cy="0" rx="14" ry="8" fill="rgba(74,110,138,.2)" stroke="#8aa0b8"/><path d="M-10 0h20" fill="none" stroke="#D8D1C7" stroke-width=".7"/>`,
+};
+
+function placeIn(room, ox, oy, kind) {
+  const scale = Math.min(1, (Number(room.w) || 80) / 90, (Number(room.h) || 60) / 70);
+  return {
+    id: `${kind}-${room.id}-${Math.round(ox * 100)}`,
+    roomId: room.id,
+    kind,
+    x: Math.round(room.x + room.w * ox),
+    y: Math.round(room.y + room.h * oy),
+    scale: Math.max(0.55, Number(scale.toFixed(2))),
+  };
+}
+
+export function furnitureFor(plan, profile, horizonId) {
+  const horizon = HORIZONS.find((item) => item.id === horizonId) || HORIZONS[0];
+  const items = [];
+  const beds = roomsOf(plan, "bedroom");
+  const livings = roomsOf(plan, "living");
+  const dinings = roomsOf(plan, "dining");
+  const kitchens = roomsOf(plan, "kitchen");
+  const studies = roomsOf(plan, "study");
+  const baths = roomsOf(plan, "bath");
+  const entries = roomsOf(plan, "entry");
+
+  for (const room of livings) {
+    items.push(placeIn(room, 0.5, 0.64, "sofa"));
+    if (!dinings.length && (profile.entertainer || profile.guestsOften || profile.homebody)) {
+      items.push(placeIn(room, 0.5, 0.3, "table"));
+    }
+  }
+  for (const room of dinings) items.push(placeIn(room, 0.5, 0.52, "table"));
+  for (const room of kitchens) items.push(placeIn(room, 0.5, 0.38, "range"));
+  for (const room of baths) items.push(placeIn(room, 0.5, 0.55, "tub"));
+
+  beds.forEach((room, index) => {
+    if (index === 0) {
+      items.push(placeIn(room, 0.5, 0.5, "bed"));
+      if (profile.kids && beds.length === 1) {
+        items.push(placeIn(room, 0.78, 0.76, horizon.years <= 5 ? "crib" : "kidbed"));
+      }
+      return;
+    }
+    if (profile.kids) {
+      items.push(placeIn(room, 0.42, 0.46, horizon.years <= 5 ? "crib" : "kidbed"));
+      if ((Number(profile.householdSize) || 1) >= 4 && horizon.years >= 10) {
+        items.push(placeIn(room, 0.68, 0.7, "kidbed"));
+      }
+      return;
+    }
+    items.push(placeIn(room, 0.5, 0.5, "bed"));
+  });
+
+  if (profile.wfh) {
+    const deskRoom = studies[0] || (beds.length > 1 && !profile.kids ? beds[1] : null) || livings[0] || beds[0];
+    if (deskRoom) items.push(placeIn(deskRoom, studies[0] ? 0.5 : 0.74, studies[0] ? 0.5 : 0.24, "desk"));
+  }
+
+  if (profile.pets) {
+    const host = livings[0] || entries[0] || plan.rooms[0];
+    if (host) items.push(placeIn(host, 0.18, 0.8, "pet"));
+  }
+
+  const roomMap = new Map(plan.rooms.map((room) => [room.id, room]));
+  items.sort((a, b) => {
+    const ra = roomMap.get(a.roomId);
+    const rb = roomMap.get(b.roomId);
+    return (ra?.y || 0) - (rb?.y || 0) || (ra?.x || 0) - (rb?.x || 0);
+  });
+  return items;
+}
+
+export function furnitureMarkup(item, visible = true) {
+  const icon = FURN_ICONS[item.kind] || "";
+  const scale = item.scale || 1;
+  return `<g class="furn furn-${item.kind}" data-furn="${item.id}" data-room="${item.roomId}" transform="translate(${item.x} ${item.y}) scale(${scale})" opacity="${visible ? 1 : 0}">${icon}</g>`;
+}
+
+export function typicalDay(plan, profile, result) {
+  const adj = graphOf(plan);
+  const routes = [];
+  const seen = new Set();
+  const add = (id, label, nodes) => {
+    if (!nodes || nodes.length < 2 || seen.has(id)) return;
+    seen.add(id);
+    routes.push({ id, label, nodes });
+  };
+  for (const path of result?.flags?.paths || []) add(path.id, path.label, path.nodes);
+  const beds = roomsOf(plan, "bedroom").map((room) => room.id);
+  const baths = roomsOf(plan, "bath").map((room) => room.id);
+  const kitchens = roomsOf(plan, "kitchen").map((room) => room.id);
+  const livings = roomsOf(plan, "living").map((room) => room.id);
+  const entries = roomsOf(plan, "entry").map((room) => room.id);
+  const studies = roomsOf(plan, "study").map((room) => room.id);
+  add("wash", "Wash", shortestExisting(adj, beds, baths));
+  if (profile.wfh) {
+    const desk = studies[0] || beds[1];
+    if (desk && kitchens[0]) add("work", "Work", pathBetween(adj, kitchens[0], desk));
+  }
+  if (profile.kids && beds[1] && livings[0]) add("kids", "Children", pathBetween(adj, livings[0], beds[1]));
+  if (profile.pets && entries[0] && livings[0]) add("pets", "Pets", pathBetween(adj, livings[0], entries[0]));
+  add("lounge", "Evening", shortestExisting(adj, kitchens, livings));
+  return routes;
+}
+
+export function horizonNeedLine(year) {
+  const n = Number(year) || 0;
+  if (n < 6) return "Routines are forming.";
+  if (n < 11) return "Privacy and a work room start to matter more.";
+  return "Short, gentle paths help a long stay.";
+}
+
 export function defaultGuideHello() {
   return "Due-diligence simulator. Enter an address. I try to walk the floor: circulation, daily paths, a heat map, a score. You describe your own household. I stay with the rooms.";
 }
