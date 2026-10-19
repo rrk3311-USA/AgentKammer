@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Livability | Agent Kammer</title>
+<meta name="description" content="Walk a floor plan the way a day moves through it. A layout score from rooms, doors, and the household you describe.">
+<meta name="theme-color" content="#0D182B">
+<link rel="icon" href="/brand/ak-monogram-ivory.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/chrome/compact-header.css">
+<script src="/chrome/compact-header.js" defer></script>
+<style>
+:root{
+  --stone:#2A3447;--deep:#161C28;--midnight:#0D182B;--ivory:#F5F2EB;--limestone:#D8D1C7;
+  --platinum:#E5E4E2;--brass:#B08D57;--mist:#c9c2b3;--ink:#1d2330;
+  --serif:"Cormorant Garamond",Georgia,serif;--sans:Montserrat,system-ui,sans-serif;
+  --header:52px;--dock:72px;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}
+html{overflow-x:clip;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--midnight);color:var(--ivory);font:400 15px/1.55 var(--sans);max-width:100%;overflow-x:clip}
+img,svg{display:block;max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--platinum);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:10px;z-index:80;background:var(--ivory);color:var(--deep);padding:10px 14px}
+.skip:focus{left:12px}
+.grain{position:fixed;inset:0;z-index:40;pointer-events:none;background-image:var(--grain);opacity:.1;mix-blend-mode:overlay}
+.kicker{margin:0;font:600 10px/1.4 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--limestone)}
+.caps{margin:0;font:500 1.35rem/1.1 var(--serif);letter-spacing:.16em;text-transform:uppercase}
+.muted{color:rgba(245,242,235,.72)}
+.fine{font-size:12px;line-height:1.5;color:rgba(245,242,235,.62)}
+
+.desk{
+  position:relative;
+  min-height:calc(100svh - var(--header));
+  padding:18px 16px calc(var(--dock) + 28px);
+  overflow-x:clip;
+  max-width:100%;
+}
+.wallpaper{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(80% 70% at 70% 20%,rgba(176,141,87,.12),transparent 46%),linear-gradient(180deg,#12192a 0%,#0D182B 42%,#161C28 100%)}
+.wallpaper svg{position:absolute;right:-6%;bottom:8%;width:min(720px,88%);opacity:.18}
+
+.icons{position:relative;z-index:2;display:flex;flex-wrap:wrap;gap:18px 22px;padding:6px 4px 18px}
+.folder{width:86px;border:0;background:transparent;padding:0;cursor:pointer;color:var(--ivory);text-align:center}
+.folder .glyph{margin:0 auto 8px;width:54px;height:42px}
+.folder b{display:block;font:600 10px/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.folder small{display:block;margin-top:3px;font:400 11px var(--sans);color:rgba(245,242,235,.55)}
+
+.win{
+  position:relative;
+  z-index:3;
+  width:100%;
+  margin:0 0 12px;
+  background:#1a2232;
+  border:1px solid rgba(229,228,226,.16);
+  box-shadow:0 24px 50px -28px rgba(0,0,0,.7);
+  max-width:100%;
+}
+.win[hidden]{display:none!important}
+.win.is-focus{border-color:rgba(229,228,226,.34);z-index:6}
+.bar{display:flex;align-items:center;gap:8px;min-height:40px;padding:0 8px 0 12px;background:#121826;border-bottom:1px solid rgba(245,242,235,.08);cursor:default;touch-action:none}
+.bar h2{flex:1;margin:0;font:600 10px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--platinum)}
+.bar button{width:28px;height:28px;border:0;background:transparent;color:var(--mist);cursor:pointer}
+.body{padding:14px 16px 16px}
+.guide-row{display:grid;gap:14px;align-items:start}
+@media(min-width:520px){.guide-row{grid-template-columns:88px 1fr}}
+.speech{margin:0;font:italic 400 1.2rem/1.4 var(--serif);color:#f3eee4}
+.speech.doing{color:var(--limestone)}
+
+.field{display:block;margin:0 0 12px}
+.field span{display:block;margin-bottom:6px;font:600 10px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--limestone)}
+.field input[type=url],.field input[type=text],.field input[type=number],.field select{
+  width:100%;border:1px solid rgba(216,209,199,.28);background:#121826;padding:10px 12px;color:var(--ivory)
+}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:1px solid var(--platinum);background:var(--ivory);color:var(--deep);padding:11px 14px;font:600 10px var(--sans);letter-spacing:.18em;text-transform:uppercase;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ivory);border-color:rgba(229,228,226,.3)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.chip{border:1px solid rgba(229,228,226,.22);background:transparent;color:var(--ivory);padding:8px 10px;font:600 10px var(--sans);letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.chip[aria-pressed=true]{background:rgba(245,242,235,.1);border-color:var(--platinum)}
+.hint{margin:8px 0 0;font-size:12px;color:rgba(245,242,235,.6)}
+.badge{display:inline-block;margin:0 0 10px;padding:3px 7px;border:1px solid rgba(176,141,87,.5);color:var(--brass);font:600 9px var(--sans);letter-spacing:.16em;text-transform:uppercase}
+
+.plan-wrap{overflow:auto;max-width:100%;background:#0f1522;border:1px solid rgba(245,242,235,.08)}
+.plan-svg{width:100%;height:auto;min-height:220px}
+.room-rect{fill:rgba(245,242,235,.04);stroke:rgba(216,209,199,.45);stroke-width:1.2}
+.room-rect.hot{fill:rgba(176,141,87,.16);stroke:#B08D57}
+.room-rect.quiet{fill:rgba(90,122,150,.18);stroke:#8aa0b8}
+.room-rect.strain{stroke:#d4b27a;stroke-dasharray:4 3}
+.room-lab{fill:#E8E4DC;font:600 9px var(--sans);letter-spacing:.04em}
+.path{fill:none;stroke:#E2B470;stroke-width:2;stroke-linecap:round;opacity:.85}
+.editor{margin-top:12px;display:grid;gap:8px}
+.room-row{display:grid;grid-template-columns:1.2fr .9fr 70px 28px;gap:6px}
+.room-row input,.room-row select{min-width:0;border:1px solid rgba(216,209,199,.22);background:#121826;padding:8px}
+.door-row{display:grid;grid-template-columns:1fr 1fr 28px;gap:6px}
+
+.toggles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.toggle{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border:1px solid rgba(229,228,226,.16);background:#121826;cursor:pointer}
+.toggle[aria-pressed=true]{border-color:var(--platinum);background:rgba(245,242,235,.06)}
+.horizon{display:grid;gap:8px}
+.horizon button{text-align:left}
+
+.score-hero{display:flex;align-items:baseline;gap:12px;margin:4px 0 10px}
+.score-hero strong{font:italic 500 4.4rem/1 var(--serif);color:var(--ivory)}
+.dims{display:grid;gap:8px;margin:12px 0}
+.dim{display:grid;grid-template-columns:90px 1fr 32px;gap:8px;align-items:center;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mist)}
+.barline{height:1px;background:rgba(245,242,235,.12)}
+.barline i{display:block;height:2px;margin-top:-.5px;background:var(--platinum)}
+.notes{margin:12px 0 0;padding:0 0 0 16px;color:#d9d3c6}
+.notes li{margin:0 0 8px}
+.disc{margin:14px 0 0;padding-top:12px;border-top:1px solid rgba(245,242,235,.1);font-size:12px;color:rgba(245,242,235,.58)}
+.lib{display:grid;gap:8px}
+.lib button{text-align:left;padding:10px 12px;border:1px solid rgba(229,228,226,.16);background:#121826;cursor:pointer}
+.lib button strong{display:block;font:500 1.05rem var(--serif);letter-spacing:.04em}
+.empty-lib{margin:0;color:rgba(245,242,235,.55);font:italic 1.05rem var(--serif)}
+
+.dock{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  display:flex;align-items:center;gap:6px;
+  padding:8px max(12px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));
+  background:rgba(13,24,43,.97);
+  border-top:1px solid rgba(216,209,199,.2);
+  max-width:100%;overflow-x:clip;
+}
+.dock button{
+  flex:1 1 0;min-width:0;border:0;background:transparent;color:var(--mist);padding:6px 2px;
+  font:600 8px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase;cursor:pointer
+}
+.dock button.on{color:var(--ivory)}
+.dock .ak{flex:0 0 auto;width:28px;height:30px;margin-right:4px;opacity:.9}
+
+.site-foot{position:relative;z-index:2;padding:28px 18px 28px;border-top:1px solid rgba(216,209,199,.16);background:#0D182B}
+.site-foot .in{max-width:720px}
+.site-exit{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 16px}
+.site-exit a{color:var(--ivory);text-decoration:none;font:600 11px var(--sans);letter-spacing:.16em;text-transform:uppercase}
+.site-foot .wordmark a{color:var(--platinum);text-decoration:none;font:500 1.4rem var(--serif);letter-spacing:.12em}
+.site-foot p{margin:6px 0 0;color:rgba(245,242,235,.6);font-size:13px}
+
+@media(max-width:899px){
+  .win{left:auto!important;top:auto!important;width:100%!important;max-height:none}
+}
+@media(min-width:900px){
+  .desk{min-height:calc(100svh - var(--header));padding:20px 24px calc(var(--dock) + 18px)}
+  .win{position:absolute;width:min(360px,40vw);margin:0;max-height:calc(100svh - var(--header) - var(--dock) - 24px);display:flex;flex-direction:column}
+  .win .body{overflow:auto;flex:1}
+  .win[data-win=plan],.win[data-win=results]{width:min(520px,50vw)}
+  .icons{position:absolute;left:22px;top:18px;flex-direction:column}
+  .dock{gap:4px;padding:10px 24px max(10px,env(safe-area-inset-bottom))}
+  .dock button{flex:0 0 auto;padding:8px 14px;font-size:9px;letter-spacing:.16em}
+}
+@media print{
+  .ak-compact-header,.ak-compact-header__menu,.dock,.grain{display:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#guide-speech">Skip to the guide</a>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="ak-compact-header" data-ak-compact-header>
+ <div class="ak-compact-header__bar">
+  <a class="ak-compact-header__mark" href="/" aria-label="Agent Kammer home"><img src="/brand/ak-monogram-ivory.png" alt="" width="28" height="30"></a>
+  <button class="ak-compact-header__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="ak-field-menu">
+   <span class="ak-compact-header__icon" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+ </div>
+</header>
+<div class="ak-compact-header__menu" id="ak-field-menu" hidden>
+ <nav class="doors" aria-label="Site">
+  <div class="door"><a href="/">Home</a></div>
+  <div class="door">
+   <button class="fold" type="button" data-fold="fold-start" aria-expanded="false">Start Here<span aria-hidden="true">+</span></button>
+   <div class="kids" id="fold-start" hidden>
+    <a href="/situations">All situations</a>
+    <a href="/situations/executive-relocation-nyc">Executive Relocation</a>
+    <a href="/situations/first-home-buyers-nyc">First Home</a>
+    <a href="/situations/new-baby-growing-family-nyc">Growing Family</a>
+    <a href="/situations/marriage-housing-nyc">Marriage</a>
+    <a href="/situations/retiree-senior-home-buyers-nyc">Retirement</a>
+    <a href="/situations/empty-nester-downsizing-nyc">Empty Nest</a>
+    <a href="/situations/aging-parents-housing-nyc">Aging Parents</a>
+    <a href="/situations/inheritance-housing-nyc">Inheritance</a>
+    <a href="/situations/divorce-property-sales-nyc">Divorce</a>
+    <a href="/situations/remote-work-housing-nyc">Remote Work</a>
+    <a href="/situations/job-loss-housing-nyc">Job Change</a>
+    <a href="/international">International Move</a>
+   </div>
+  </div>
+  <div class="door">
+   <button class="fold" type="button" data-fold="fold-guides" aria-expanded="false">Guides<span aria-hidden="true">+</span></button>
+   <div class="kids" id="fold-guides" hidden>
+    <a href="/guides">All Guides</a>
+    <a href="/resources">Resource Hub</a>
+    <a href="/resources#field-guides">Field Guides</a>
+    <a href="/resources#assessments">Property Assessments</a>
+    <a href="/guides/how-to-buy-in-nyc.html">How to buy in NYC</a>
+    <a href="/guides/building-terms">The Grammar of a Building</a>
+   </div>
+  </div>
+  <div class="door">
+   <button class="fold" type="button" data-fold="fold-tools" aria-expanded="true">Interactive Tools<span aria-hidden="true">−</span></button>
+   <div class="kids" id="fold-tools">
+    <a href="/tools">All tools</a>
+    <a href="/calculator">Calculator</a>
+    <a href="/tools/wheel-of-life/">Wheel of Life</a>
+    <a href="/tools/livability/">Livability</a>
+   </div>
+  </div>
+  <div class="door"><a href="/contact">Contact</a></div>
+  <a class="guidance" href="/">Guidance</a>
+ </nav>
+</div>
+
+<div class="desk" id="desk">
+  <div class="wallpaper" aria-hidden="true">
+    <svg viewBox="0 0 800 520" fill="none">
+      <path d="M40 480 V80 H760 V480" stroke="#D8D1C7" stroke-width="1.2"/>
+      <path d="M40 220 H300 V80 M300 220 H520 V80 M520 220 H760" stroke="#D8D1C7" stroke-width="1"/>
+      <path d="M40 360 H220 V480 M220 360 H500 V480 M500 360 H760" stroke="#D8D1C7" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <div class="icons" role="toolbar" aria-label="Folders">
+    <button class="folder" type="button" data-open-lib="plans">
+      <svg class="glyph" viewBox="0 0 54 42" aria-hidden="true"><path d="M2 12h18l4 4h28v22H2z" fill="#2A3447" stroke="#E5E4E2"/><path d="M2 16h50" stroke="#B08D57"/></svg>
+      <b>Plans</b><small id="count-plans">Empty</small>
+    </button>
+    <button class="folder" type="button" data-open-lib="profiles">
+      <svg class="glyph" viewBox="0 0 54 42" aria-hidden="true"><path d="M2 12h18l4 4h28v22H2z" fill="#2A3447" stroke="#E5E4E2"/><path d="M2 16h50" stroke="#B08D57"/></svg>
+      <b>Profiles</b><small id="count-profiles">Empty</small>
+    </button>
+    <button class="folder" type="button" data-open-lib="runs">
+      <svg class="glyph" viewBox="0 0 54 42" aria-hidden="true"><path d="M2 12h18l4 4h28v22H2z" fill="#2A3447" stroke="#E5E4E2"/><path d="M2 16h50" stroke="#B08D57"/></svg>
+      <b>Runs</b><small id="count-runs">Empty</small>
+    </button>
+  </div>
+
+  <section class="win is-focus" data-win="guide" style="left:120px;top:24px">
+    <div class="bar" data-drag><h2>Guide</h2><button type="button" data-hide="guide" aria-label="Hide guide">×</button></div>
+    <div class="body">
+      <div class="guide-row">
+        <svg viewBox="0 0 88 110" role="img" aria-label="Bow-tie guide">
+          <title>Bow-tie guide</title>
+          <ellipse cx="44" cy="98" rx="28" ry="10" fill="#121826"/>
+          <path d="M20 78c6 16 46 16 52 0l-6-18H26z" fill="#2A3447"/>
+          <path d="M32 62h24v8H32z" fill="#F5F2EB"/>
+          <path d="M30 70l14 7 14-7-14-6z" fill="#E5E4E2"/>
+          <circle cx="44" cy="36" r="20" fill="#e6d7c4"/>
+          <path d="M26 30c8-14 28-14 36 0" fill="#1b2230"/>
+          <ellipse cx="37" cy="38" rx="3" ry="2.4" fill="#1b2230"/>
+          <ellipse cx="51" cy="38" rx="3" ry="2.4" fill="#1b2230"/>
+          <path d="M40 46c3 3 6 3 9 0" stroke="#2A3447" fill="none"/>
+        </svg>
+        <div>
+          <p class="kicker">Layout guide</p>
+          <p class="speech" id="guide-speech" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="win" data-win="plan" style="left:480px;top:28px">
+    <div class="bar" data-drag><h2>Floor plan</h2><button type="button" data-hide="plan" aria-label="Hide plan">×</button></div>
+    <div class="body">
+      <p class="kicker">Step 1</p>
+      <h3 class="caps" style="margin:8px 0 10px">The rooms</h3>
+      <p class="fine" id="vision-note">Checking whether image reading is configured…</p>
+      <label class="field"><span>Listing link</span><input id="listing-url" type="url" placeholder="https://" autocomplete="off"></label>
+      <label class="field"><span>Upload a floor-plan image</span><input id="plan-file" type="file" accept="image/jpeg,image/png,image/webp"></label>
+      <div class="row">
+        <button class="btn ghost" type="button" id="keep-link">Keep the link</button>
+        <button class="btn" type="button" id="use-sample">Use the Sutton sample</button>
+      </div>
+      <p class="hint" id="plan-hint">A listing link is saved with the plan. Rooms still come from a sample, an image read, or the editor.</p>
+      <div class="plan-wrap" id="plan-canvas"></div>
+      <div class="editor">
+        <p class="kicker">Room editor</p>
+        <div id="room-list"></div>
+        <div class="row">
+          <button class="btn ghost" type="button" id="add-room">Add a room</button>
+          <button class="btn ghost" type="button" id="add-door">Add a door</button>
+          <button class="btn" type="button" id="save-plan">Save plan</button>
+        </div>
+        <div id="door-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="win" data-win="profile" hidden style="left:140px;top:86px">
+    <div class="bar" data-drag><h2>Lifestyle profile</h2><button type="button" data-hide="profile" aria-label="Hide profile">×</button></div>
+    <div class="body">
+      <p class="kicker">Step 2</p>
+      <h3 class="caps" style="margin:8px 0 10px">Your household</h3>
+      <p class="fine">This describes you, not a type of buyer. I will not steer a neighborhood or a building from it.</p>
+      <label class="field"><span>Profile name</span><input id="profile-name" type="text" maxlength="40" value="My household"></label>
+      <label class="field"><span>Household size</span><input id="household" type="number" min="1" max="8" value="2"></label>
+      <div class="toggles" id="traits"></div>
+      <div class="row" style="margin-top:12px"><button class="btn" type="button" id="save-profile">Save profile</button></div>
+    </div>
+  </section>
+
+  <section class="win" data-win="horizon" hidden style="left:180px;top:120px">
+    <div class="bar" data-drag><h2>Time</h2><button type="button" data-hide="horizon" aria-label="Hide time">×</button></div>
+    <div class="body">
+      <p class="kicker">Step 3</p>
+      <h3 class="caps" style="margin:8px 0 10px">How long there</h3>
+      <div class="horizon" id="horizons"></div>
+    </div>
+  </section>
+
+  <section class="win" data-win="results" hidden style="left:420px;top:70px">
+    <div class="bar" data-drag><h2>Simulation</h2><button type="button" data-hide="results" aria-label="Hide results">×</button></div>
+    <div class="body">
+      <p class="kicker">Step 4</p>
+      <div class="score-hero"><strong id="score-num">-</strong><span class="muted">Livability</span></div>
+      <div class="plan-wrap" id="sim-canvas"></div>
+      <div class="dims" id="dims"></div>
+      <ul class="notes" id="notes"></ul>
+      <p class="disc">Informational only. This score is about the floor plan’s layout. It is not an appraisal, an inspection, or brokerage advice.</p>
+    </div>
+  </section>
+
+  <section class="win" data-win="library" hidden style="left:220px;top:90px">
+    <div class="bar" data-drag><h2 id="lib-title">Folder</h2><button type="button" data-hide="library" aria-label="Hide folder">×</button></div>
+    <div class="body">
+      <div class="lib" id="lib-list"></div>
+    </div>
+  </section>
+</div>
+
+<nav class="dock" aria-label="Desk">
+  <img class="ak" src="/brand/ak-monogram-ivory.png" alt="">
+  <button type="button" data-show="guide">Guide</button>
+  <button type="button" data-show="plan">Plan</button>
+  <button type="button" data-show="profile">Profile</button>
+  <button type="button" data-show="horizon">Time</button>
+  <button type="button" id="run-sim">Run</button>
+  <button type="button" data-open-lib="plans">Plans</button>
+  <button type="button" data-open-lib="profiles">Profiles</button>
+  <button type="button" data-open-lib="runs">Runs</button>
+</nav>
+
+<footer class="site-foot">
+  <div class="in">
+    <nav class="site-exit" aria-label="Leave this tool">
+      <a href="/">Home</a>
+      <a href="/tools">Interactive Tools</a>
+    </nav>
+    <p class="kicker">Interactive Tool</p>
+    <p class="wordmark"><a href="/" aria-label="Agent Kammer home">agentkammer.com</a></p>
+    <p>Plans, profiles, and runs stay in this browser. No account.</p>
+    <p>Informational layout tool. Not an appraisal, inspection, or brokerage advice. The score does not judge a neighborhood, a school, or who should live here.</p>
+  </div>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

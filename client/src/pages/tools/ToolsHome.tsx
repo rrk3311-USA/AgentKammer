@@ -26,6 +26,13 @@ const PUBLIC_TOOLS: readonly ToolCard[] = [
     href: "/tools/wheel-of-life/",
     hard: true,
   },
+  {
+    eyebrow: "Floor-plan day",
+    title: "Livability",
+    description: "Walk a floor plan the way a day moves through it, then read a layout score.",
+    href: "/tools/livability/",
+    hard: true,
+  },
 ];
 
 function CardBody({ card }: { card: ToolCard }) {
@@ -45,7 +52,7 @@ function CardBody({ card }: { card: ToolCard }) {
 export default function ToolsHome() {
   usePageMetadata({
     title: "Interactive Tools",
-    description: "Monthly carry before a listing takes over, and a short check-in on how a week actually feels.",
+    description: "Monthly carry, a personal check-in, and a floor-plan day you can walk.",
     path: "/tools",
   });
 
@@ -54,18 +61,18 @@ export default function ToolsHome() {
       <PageHero
         eyebrow="Desk"
         title="Interactive Tools"
-        description="A quiet monthly-carry calculator, and a personal check-in on how the week actually feels."
+        description="A quiet monthly-carry calculator, a personal check-in, and a floor plan walked as a day."
         art="decision-framework"
       />
 
       <PageSection>
         <SectionHeading
           eyebrow="Desk"
-          title="Start with the month, or the week."
-          description="The calculator is already on the site. The Wheel of Life sits beside it."
+          title="Start with the month, the week, or the rooms."
+          description="The calculator is already on the site. The Wheel of Life and Livability sit beside it."
         />
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {PUBLIC_TOOLS.map((card) => {
             const className =
               "group block border border-brand-border bg-white p-7 transition-colors hover:border-brand-navy/30";

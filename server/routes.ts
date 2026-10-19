@@ -43,6 +43,7 @@ import { registerAdvisoryAdminRoutes } from "./lib/advisory/admin-routes";
 import { registerBuyerIntelAdminRoutes, registerBuyerIntelPublicRoutes } from "./lib/buyer-intel/admin-routes";
 import { registerCurationAdminRoutes, registerCurationPublicRoutes } from "./lib/curation/admin-routes";
 import { registerToolsRoutes } from "./lib/tools/routes";
+import { livabilityVisionStatus, readFloorPlanImage } from "./lib/livability-vision";
 import {
   getClientProfileByEmail,
   getClientProfileByVisitorId,
@@ -782,8 +783,6 @@ export async function registerRoutes(app: Express): Promise<void> {
       req.path === "/admin" ||
       req.path.startsWith("/admin/") ||
       req.path.startsWith("/api/admin") ||
-      req.path === "/tools/livability" ||
-      req.path.startsWith("/tools/livability/") ||
       req.path === "/tools/curation" ||
       req.path.startsWith("/tools/curation/") ||
       req.path === "/hub" ||
@@ -795,6 +794,44 @@ export async function registerRoutes(app: Express): Promise<void> {
   });
 
   const sessionLeads = new Map<string, { leadId?: string; data: LeadData; notified?: boolean }>();
+
+  app.use((req, res, next) => {
+    if (req.path === "/tools/livability") return res.redirect(302, "/tools/livability/");
+    if (req.path === "/tools/livability/") {
+      const built = join(process.cwd(), "dist/public/tools/livability/index.html");
+      const src = join(process.cwd(), "client/public/tools/livability/index.html");
+      return res.sendFile(existsSync(built) ? built : src);
+    }
+    next();
+  });
+
+  app.get("/api/livability/vision-status", (_req, res) => {
+    res.json(livabilityVisionStatus());
+  });
+
+  app.post("/api/livability/read-plan", async (req, res) => {
+    const image = typeof req.body?.image === "string" ? req.body.image : "";
+    if (!image.startsWith("data:image/") || image.length > 6_000_000) {
+      return res.status(400).json({
+        ok: false,
+        available: true,
+        error: "Send one floor-plan image as a data URL, under about 4 MB.",
+        rooms: [],
+        doors: [],
+      });
+    }
+    try {
+      res.json(await readFloorPlanImage(image));
+    } catch (error) {
+      res.status(200).json({
+        ok: false,
+        available: true,
+        error: error instanceof Error ? error.message : "Vision reading failed.",
+        rooms: [],
+        doors: [],
+      });
+    }
+  });
 
   app.post("/api/decision-guide/chat", async (req, res) => {
     try {

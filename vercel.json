@@ -47,6 +47,8 @@
     { "source": "/guides/building-terms/", "destination": "/guides/building-terms/index.html" },
     { "source": "/tools/wheel-of-life", "destination": "/tools/wheel-of-life/index.html" },
     { "source": "/tools/wheel-of-life/", "destination": "/tools/wheel-of-life/index.html" },
+    { "source": "/tools/livability", "destination": "/tools/livability/index.html" },
+    { "source": "/tools/livability/", "destination": "/tools/livability/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
