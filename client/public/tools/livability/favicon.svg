@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Livability">
+  <!-- Simplified mark for 16px to 32px: arch plus one ribbon, no particles. -->
+  <defs>
+    <linearGradient id="fv-tile" x1="6" y1="0" x2="28" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#24344F"/>
+      <stop offset="1" stop-color="#070E18"/>
+    </linearGradient>
+    <linearGradient id="fv-arch" x1="10" y1="6" x2="22" y2="26" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F4F1EC"/>
+      <stop offset="1" stop-color="#9AA3B3"/>
+    </linearGradient>
+    <linearGradient id="fv-rib" x1="1" y1="20" x2="31" y2="16" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8FA3BB"/>
+      <stop offset=".48" stop-color="#E2B470"/>
+      <stop offset="1" stop-color="#F0D4A0"/>
+    </linearGradient>
+    <clipPath id="fv-clip">
+      <rect width="32" height="32" rx="7.2"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#fv-clip)">
+    <rect width="32" height="32" rx="7.2" fill="url(#fv-tile)"/>
+    <path fill="none" stroke="url(#fv-arch)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+      d="M12 24.8V13.5A4 4 0 0 1 20 13.5V24.8"/>
+    <path fill="none" stroke="url(#fv-rib)" stroke-width="2.4" stroke-linecap="round"
+      d="M1 22.4C6.8 25 8.6 13.4 16 14.4C22.8 15.4 25.2 22.6 31.2 17.6"/>
+    <rect x=".45" y=".45" width="31.1" height="31.1" rx="6.8" fill="none" stroke="rgba(229,228,226,.2)" stroke-width=".7"/>
+  </g>
+</svg>

@@ -6,7 +6,7 @@
 <title>Livability | Agent Kammer</title>
 <meta name="description" content="A due-diligence simulator. Enter an address, walk the floor, read a heat map and a Livability Score.">
 <meta name="theme-color" content="#0D182B">
-<link rel="icon" href="/tools/livability/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/tools/livability/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/tools/livability/icon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/tools/livability/icon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,16 +101,16 @@ button,input,select{font:inherit;color:inherit}
 .guide-row{display:grid;gap:16px;align-items:start}
 @media(min-width:420px){.pane-guide .guide-row{grid-template-columns:56px 1fr}}
 .guide-lockup{display:flex;flex-direction:column;align-items:center;gap:8px;width:48px}
-.guide-glyph{width:48px;height:48px;border-radius:12px;overflow:hidden}
-.guide-glyph .bow{transform-origin:16px 16px;transition:opacity .3s ease,filter .3s ease}
-.guide-glyph.is-live .bow{animation:guide-shimmer 2.2s ease-in-out infinite}
-.cinema-hud .guide-glyph{width:24px;height:24px;flex:0 0 auto;border-radius:6px}
+.guide-glyph{width:48px;height:48px;border-radius:12px;overflow:hidden;flex:0 0 auto}
+.guide-glyph img{width:100%;height:100%;display:block}
+.guide-glyph.is-live{animation:guide-shimmer 2.2s ease-in-out infinite}
+.cinema-hud .guide-glyph{width:24px;height:24px;border-radius:6px}
 @keyframes guide-shimmer{
-  0%,100%{opacity:.85;filter:drop-shadow(0 0 0 transparent)}
-  50%{opacity:1;filter:drop-shadow(0 0 10px rgba(229,228,226,.45))}
+  0%,100%{opacity:.9;filter:drop-shadow(0 0 0 transparent)}
+  50%{opacity:1;filter:drop-shadow(0 0 10px rgba(226,180,112,.45))}
 }
 @media (prefers-reduced-motion: reduce){
-  .guide-glyph.is-live .bow{animation:none;opacity:1}
+  .guide-glyph.is-live{animation:none;opacity:1;filter:none}
 }
 
 .field{display:block;margin:0 0 14px}
@@ -324,16 +324,7 @@ button,input,select{font:inherit;color:inherit}
     <div class="pbody">
       <div class="guide-row">
         <div class="guide-lockup">
-          <svg class="guide-glyph" viewBox="0 0 32 32" role="img" aria-label="Livability">
-            <title>Livability</title>
-            <g class="bow">
-              <rect width="32" height="32" rx="8" fill="#E5E4E2"/>
-              <g fill="none" stroke="#0D182B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" transform="translate(4 4)">
-                <path d="M10 10h4v4h-4zm-2 2h2"/>
-                <path d="M10 10C8.8 8.5 6.6 7 4 7c-1.1 0-2 2.2-2 5s.9 5 2 5c2.6 0 4.8-1.5 6-3m4-2h2m-2 2c1.2 1.5 3.4 3 6 3c1.1 0 2-2.2 2-5s-.9-5-2-5c-2.6 0-4.8 1.5-6 3"/>
-              </g>
-            </g>
-          </svg>
+          <img class="guide-glyph" src="/tools/livability/icon.svg" width="48" height="48" alt="Livability">
         </div>
         <div>
           <p class="kicker">Narrator</p>
@@ -418,15 +409,7 @@ button,input,select{font:inherit;color:inherit}
 
 <div class="cinema" id="cinema" hidden>
   <div class="cinema-hud">
-    <svg class="guide-glyph is-live" viewBox="0 0 32 32" role="img" aria-hidden="true">
-      <g class="bow">
-        <rect width="32" height="32" rx="8" fill="#E5E4E2"/>
-        <g fill="none" stroke="#0D182B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" transform="translate(4 4)">
-          <path d="M10 10h4v4h-4zm-2 2h2"/>
-          <path d="M10 10C8.8 8.5 6.6 7 4 7c-1.1 0-2 2.2-2 5s.9 5 2 5c2.6 0 4.8-1.5 6-3m4-2h2m-2 2c1.2 1.5 3.4 3 6 3c1.1 0 2-2.2 2-5s-.9-5-2-5c-2.6 0-4.8 1.5-6 3"/>
-        </g>
-      </g>
-    </svg>
+    <img class="guide-glyph is-live" src="/tools/livability/icon.svg" width="24" height="24" alt="">
     <span class="clock" id="cin-clock">07:00</span>
     <span class="year" id="cin-year">year 0</span>
     <span class="score" id="cin-score"></span>

@@ -1,15 +1,96 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Livability">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Livability">
   <!--
-    Glyph: Lucide Lab "tie-bow" (outline).
-    https://github.com/lucide-icons/lucide-lab
-    ISC License. Copyright (c) for portions of Lucide are held by Cole Bemis
-    2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide
-    are held by Lucide Contributors 2022. See THIRD_PARTY_NOTICES.md.
-    Stroke is 2.4 (Lucide default is 2) so the mark still reads at 16px.
+    Livability product mark. Original. Doorway arch + circulation ribbon.
+    Ribbon passes behind the left jamb and in front of the right.
   -->
-  <rect width="32" height="32" rx="8" fill="#E5E4E2"/>
-  <g fill="none" stroke="#0D182B" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" transform="translate(4 4)">
-    <path d="M10 10h4v4h-4zm-2 2h2"/>
-    <path d="M10 10C8.8 8.5 6.6 7 4 7c-1.1 0-2 2.2-2 5s.9 5 2 5c2.6 0 4.8-1.5 6-3m4-2h2m-2 2c1.2 1.5 3.4 3 6 3c1.1 0 2-2.2 2-5s-.9-5-2-5c-2.6 0-4.8 1.5-6 3"/>
+  <defs>
+    <linearGradient id="liv-tile" x1="12" y1="0" x2="56" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#24344F"/>
+      <stop offset=".45" stop-color="#152033"/>
+      <stop offset="1" stop-color="#070E18"/>
+    </linearGradient>
+    <radialGradient id="liv-spec" cx="28%" cy="12%" r="70%">
+      <stop offset="0" stop-color="#fff" stop-opacity=".22"/>
+      <stop offset=".42" stop-color="#9EB4D0" stop-opacity=".06"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="liv-shine" x1="10" y1="0" x2="40" y2="28" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity=".2"/>
+      <stop offset=".55" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="liv-arch" x1="22" y1="12" x2="44" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F4F1EC"/>
+      <stop offset=".38" stop-color="#E5E4E2"/>
+      <stop offset=".72" stop-color="#C5CBD6"/>
+      <stop offset="1" stop-color="#9AA3B3"/>
+    </linearGradient>
+    <linearGradient id="liv-arch-lit" x1="24" y1="16" x2="30" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F6E7C8" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#E2B470" stop-opacity=".15"/>
+    </linearGradient>
+    <linearGradient id="liv-rib" x1="2" y1="40" x2="62" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8FA3BB"/>
+      <stop offset=".28" stop-color="#C5D0DC"/>
+      <stop offset=".52" stop-color="#E2B470"/>
+      <stop offset=".78" stop-color="#F0D4A0"/>
+      <stop offset="1" stop-color="#E8C48A"/>
+    </linearGradient>
+    <filter id="liv-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="1.6" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="liv-tile-clip">
+      <rect width="64" height="64" rx="14.4"/>
+    </clipPath>
+    <clipPath id="liv-behind">
+      <rect width="25.2" height="64"/>
+    </clipPath>
+    <clipPath id="liv-front">
+      <rect x="25.2" width="38.8" height="64"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#liv-tile-clip)">
+    <rect width="64" height="64" rx="14.4" fill="url(#liv-tile)"/>
+    <rect width="64" height="64" rx="14.4" fill="url(#liv-spec)"/>
+
+    <!-- Ribbon glow, full path -->
+    <path fill="none" stroke="#E2B470" stroke-width="7.2" stroke-linecap="round" opacity=".28" filter="url(#liv-glow)"
+      d="M1.6 45.2C13.2 50.4 16.8 26.8 32 28.6C45.6 30.2 50.4 45.6 63.2 34.8"/>
+
+    <!-- Behind the left jamb -->
+    <g clip-path="url(#liv-behind)">
+      <path fill="none" stroke="url(#liv-rib)" stroke-width="3.7" stroke-linecap="round"
+        d="M1.6 45.2C13.2 50.4 16.8 26.8 32 28.6C45.6 30.2 50.4 45.6 63.2 34.8"/>
+    </g>
+
+    <!-- Frosted platinum doorway -->
+    <path fill="none" stroke="url(#liv-arch)" stroke-width="4.15" stroke-linecap="round" stroke-linejoin="round"
+      d="M24.2 49.2V27.4A7.8 7.8 0 0 1 39.8 27.4V49.2"/>
+    <path fill="none" stroke="url(#liv-arch-lit)" stroke-width="1.35" stroke-linecap="round" opacity=".85"
+      d="M22.55 48.4V27.6A9.45 9.45 0 0 1 32 18.2"/>
+
+    <!-- In front of the right jamb -->
+    <g clip-path="url(#liv-front)">
+      <path fill="none" stroke="url(#liv-rib)" stroke-width="3.7" stroke-linecap="round"
+        d="M1.6 45.2C13.2 50.4 16.8 26.8 32 28.6C45.6 30.2 50.4 45.6 63.2 34.8"/>
+    </g>
+
+    <!-- Particle trail -->
+    <g fill="#F0D4A0">
+      <circle cx="8.2" cy="47.6" r=".85" opacity=".55"/>
+      <circle cx="12.4" cy="44.8" r=".62" opacity=".7"/>
+      <circle cx="16.6" cy="38.4" r=".48" opacity=".85"/>
+      <circle cx="48.8" cy="41.2" r=".55" fill="#E2B470" opacity=".8"/>
+      <circle cx="53.4" cy="38.2" r=".78" fill="#E2B470"/>
+      <circle cx="57.8" cy="35.6" r=".5" fill="#F6E7C8" opacity=".9"/>
+      <circle cx="21.2" cy="33.6" r=".38" fill="#E5E4E2" opacity=".7"/>
+    </g>
+
+    <rect width="64" height="64" rx="14.4" fill="url(#liv-shine)" pointer-events="none"/>
+    <rect x=".7" y=".7" width="62.6" height="62.6" rx="13.8" fill="none" stroke="rgba(229,228,226,.16)" stroke-width="1.1"/>
   </g>
 </svg>
