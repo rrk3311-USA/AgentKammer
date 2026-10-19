@@ -43,7 +43,7 @@ import { registerAdvisoryAdminRoutes } from "./lib/advisory/admin-routes";
 import { registerBuyerIntelAdminRoutes, registerBuyerIntelPublicRoutes } from "./lib/buyer-intel/admin-routes";
 import { registerCurationAdminRoutes, registerCurationPublicRoutes } from "./lib/curation/admin-routes";
 import { registerToolsRoutes } from "./lib/tools/routes";
-import { livabilityVisionStatus, readFloorPlanImage } from "./lib/livability-vision";
+import { boostFloorPlanLabels, livabilityVisionStatus } from "./lib/livability-vision";
 import {
   getClientProfileByEmail,
   getClientProfileByVisitorId,
@@ -810,25 +810,18 @@ export async function registerRoutes(app: Express): Promise<void> {
   });
 
   app.post("/api/livability/read-plan", async (req, res) => {
-    const image = typeof req.body?.image === "string" ? req.body.image : "";
-    if (!image.startsWith("data:image/") || image.length > 6_000_000) {
-      return res.status(400).json({
-        ok: false,
-        available: true,
-        error: "Send one floor-plan image as a data URL, under about 4 MB.",
-        rooms: [],
-        doors: [],
-      });
-    }
     try {
-      res.json(await readFloorPlanImage(image));
+      const overview = typeof req.body?.overview === "string" ? req.body.overview : typeof req.body?.image === "string" ? req.body.image : "";
+      const tiles = Array.isArray(req.body?.tiles) ? req.body.tiles : [];
+      res.json(await boostFloorPlanLabels({ overview, image: overview, tiles }));
     } catch (error) {
       res.status(200).json({
         ok: false,
         available: true,
-        error: error instanceof Error ? error.message : "Vision reading failed.",
-        rooms: [],
+        boost: true,
+        labels: [],
         doors: [],
+        error: error instanceof Error ? error.message : "Vision boost failed.",
       });
     }
   });

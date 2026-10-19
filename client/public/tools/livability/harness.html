@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Livability plan-reader harness</title>
+<link rel="icon" href="/tools/livability/icon-16.png" type="image/png" sizes="16x16">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=IBM+Plex+Mono:wght@400;500&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--midnight:#0D182B;--ivory:#F5F2EB;--platinum:#E5E4E2;--brass:#B08D57}
+*{box-sizing:border-box}
+body{margin:0;background:var(--midnight);color:var(--ivory);font:400 14px/1.5 Montserrat,system-ui,sans-serif;padding:28px}
+h1{font:500 1.6rem/1.1 "Cormorant Garamond",Georgia,serif;letter-spacing:.12em;text-transform:uppercase}
+.kicker{font:500 12px/1.2 "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#D8D1C7}
+table{width:100%;border-collapse:collapse;margin:18px 0;font:500 12px "IBM Plex Mono",monospace}
+th,td{border:1px solid rgba(229,228,226,.16);padding:8px 10px;text-align:left}
+.fine{color:rgba(245,242,235,.62)}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+button{border:1px solid var(--platinum);background:var(--ivory);color:var(--midnight);padding:8px 12px;font:600 11px Montserrat,sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+pre{white-space:pre-wrap;background:#101826;padding:12px;border:1px solid rgba(229,228,226,.12)}
+img{max-width:220px;border:1px solid rgba(229,228,226,.16)}
+</style>
+</head>
+<body>
+<p class="kicker">Dev harness</p>
+<h1>Plan reader: CV only vs CV plus AI</h1>
+<p class="fine">Synthetic samples. Real accuracy testing needs about 20 listing plans and a vision key. Connections are never taken from a model.</p>
+<div class="row">
+  <button type="button" id="run-cv">Run CV only</button>
+  <button type="button" id="run-both">Run CV, then boost if a key is set</button>
+</div>
+<p id="status" class="fine">Idle.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Sample</th>
+      <th>Engine</th>
+      <th>CV door recall</th>
+      <th>CV door precision</th>
+      <th>CV connection recall</th>
+      <th>CV+AI door recall</th>
+      <th>CV+AI connection recall</th>
+      <th>Boost</th>
+    </tr>
+  </thead>
+  <tbody id="rows"></tbody>
+</table>
+<div id="previews" class="row"></div>
+<pre id="log"></pre>
+<script type="module">
+import { connectionsFromDoors, mapRoomIdsByOverlap, remapPairs, scoreConnections, scoreDoorRecall } from "./plan-graph.js";
+import { overlappingTiles, readPlanFromImage } from "./cv-reader.js";
+
+const log = (msg) => {
+  document.getElementById("log").textContent += msg + "\n";
+};
+
+async function loadIndex() {
+  const res = await fetch("./samples/index.json");
+  return res.json();
+}
+
+async function loadLabel(id) {
+  const res = await fetch(`./samples/${id}.json`);
+  return res.json();
+}
+
+function loadImage(id) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error(id));
+    img.src = `./samples/${id}.png`;
+  });
+}
+
+async function visionStatus() {
+  try {
+    const res = await fetch("/api/livability/vision-status");
+    if (!res.ok) return { boost: false };
+    return res.json();
+  } catch {
+    return { boost: false };
+  }
+}
+
+async function boostLabels(result) {
+  const res = await fetch("/api/livability/read-plan", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      overview: result.preview,
+      tiles: overlappingTiles(result.canvas, 4),
+    }),
+  });
+  return res.json();
+}
+
+function pct(n) {
+  return `${Math.round((Number(n) || 0) * 100)}%`;
+}
+
+async function run(withBoost) {
+  document.getElementById("log").textContent = "";
+  document.getElementById("rows").innerHTML = "";
+  document.getElementById("previews").innerHTML = "";
+  const status = document.getElementById("status");
+  status.textContent = "Running…";
+  const index = await loadIndex();
+  const vision = withBoost ? await visionStatus() : { boost: false };
+  log(index.note);
+  log(`Boost available: ${Boolean(vision.boost)}`);
+  for (const id of index.samples) {
+    const label = await loadLabel(id);
+    const img = await loadImage(id);
+    const cv = await readPlanFromImage(img, { ocr: true, printed: { feet: 1, px: label.pxPerFt } });
+    const doorCv = scoreDoorRecall(cv.doorDots, label.doorDots, label.pxPerFt);
+    const idMap = mapRoomIdsByOverlap(cv.rooms, label.rooms);
+    const connCv = scoreConnections(remapPairs(cv.doors, idMap), label.doors);
+    let doorAi = doorCv;
+    let connAi = connCv;
+    let boostNote = "off";
+    if (withBoost && vision.boost) {
+      try {
+        const boosted = await boostLabels(cv);
+        boostNote = boosted.ok ? boosted.engine || "on" : boosted.error || "failed";
+        const doors = connectionsFromDoors(cv.rooms, cv.doorDots, cv.pxPerFt);
+        doorAi = scoreDoorRecall(cv.doorDots, label.doorDots, label.pxPerFt);
+        connAi = scoreConnections(remapPairs(doors, idMap), label.doors);
+      } catch (error) {
+        boostNote = error instanceof Error ? error.message : "failed";
+      }
+    }
+    document.getElementById("rows").insertAdjacentHTML(
+      "beforeend",
+      `<tr>
+        <td>${label.title}</td>
+        <td>${cv.engine}</td>
+        <td>${pct(doorCv.recall)} (${doorCv.hits}/${doorCv.labeled})</td>
+        <td>${pct(doorCv.precision)}</td>
+        <td>${pct(connCv.recall)} (${connCv.hits}/${connCv.labeled})</td>
+        <td>${pct(doorAi.recall)}</td>
+        <td>${pct(connAi.recall)}</td>
+        <td>${boostNote}</td>
+      </tr>`,
+    );
+    const prev = document.createElement("img");
+    prev.src = cv.preview;
+    prev.alt = id;
+    document.getElementById("previews").appendChild(prev);
+    log(`${id}: CV doors ${doorCv.hits}/${doorCv.labeled} conn ${connCv.hits}/${connCv.labeled} engine ${cv.engine}`);
+  }
+  status.textContent = "Done. CV-only always runs. CV plus AI only fills the boost columns when a key is set.";
+}
+
+document.getElementById("run-cv").addEventListener("click", () => run(false));
+document.getElementById("run-both").addEventListener("click", () => run(true));
+run(false);
+</script>
+</body>
+</html>

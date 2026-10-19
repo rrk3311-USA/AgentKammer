@@ -1,0 +1,13 @@
+{
+  "note": "Synthetic or public-plan approximations for the CV harness. Real accuracy testing needs about 20 listing plans and a vision key.",
+  "samples": [
+    "line-two-bed",
+    "studio-bath",
+    "stahl-approx"
+  ],
+  "doorInches": [
+    30,
+    36
+  ],
+  "pxPerFt": 8
+}

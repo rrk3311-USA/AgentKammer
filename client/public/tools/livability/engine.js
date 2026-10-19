@@ -201,7 +201,7 @@ export function cannotFetchPlan(query) {
   const place = String(query || "").trim() || "that address";
   return {
     ok: false,
-    reason: `No floor plan is on file for ${place}. This version cannot read a listing page or a tax record. Upload a plan, or run a labeled demo against this address.`,
+    reason: `No floor plan is on file for ${place}. This version cannot read a listing page or a tax record. Open a search, download the plan image, and upload it here. Or run a labeled demo against this address.`,
   };
 }
 
@@ -786,5 +786,5 @@ export function horizonNeedLine(year) {
 }
 
 export function defaultGuideHello() {
-  return "Due-diligence simulator. Enter an address. I try to walk the floor: circulation, daily paths, a heat map, a score. You describe your own household. I stay with the rooms.";
+  return "Due-diligence simulator. Enter an address, or upload a plan. I read walls and doors on this device. You check the doors, then I walk the floor.";
 }

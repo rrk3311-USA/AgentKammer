@@ -16,6 +16,8 @@ import {
   uid,
 } from "./engine.js";
 import { furnitureMarkup, renderPlanSvg, setHeatOpacity } from "./draw.js";
+import { applyBoostToRooms, connectionsFromDoors, doorDotsFromPlan } from "./plan-graph.js";
+import { fileToImage, overlappingTiles, readPlanFromImage } from "./cv-reader.js";
 
 // Future billing (not shown in UI): five free runs on this browser, then $1 token packs.
 // function canStartRun(store) { return store.runs.length < 5 || (store.tokens || 0) > 0; }
@@ -63,7 +65,9 @@ let plan = {
 let profile = store.profile || emptyProfile();
 let horizon = store.horizon || "10";
 let lastRun = store.runs[0] || null;
-let vision = { available: false, note: "" };
+let vision = { available: false, boost: false, cv: true, note: "" };
+let confirmOpen = false;
+let dragDot = null;
 let cinemaRaf = 0;
 let cinemaSkip = false;
 let cinemaPlaying = false;
@@ -256,24 +260,180 @@ function attachPlace() {
   plan.listingUrl = $("#listing-url").value.trim();
 }
 
+function scaleOpts() {
+  return {
+    listingSf: Number($("#listing-sf")?.value) || 0,
+    roomSf: Number($("#room-sf")?.value) || 0,
+  };
+}
+
+function boostWanted() {
+  const box = $("#boost-on");
+  if (box) return vision.boost && box.checked;
+  return false;
+}
+
+function hideHelpers() {
+  $("#address-help")?.classList.remove("show");
+}
+
+function showHelpers(query) {
+  const q = `"${query}" floor plan`;
+  const google = `https://www.google.com/search?q=${encodeURIComponent(q)}`;
+  const images = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(q)}`;
+  const g = $("#help-google");
+  const i = $("#help-images");
+  if (g) g.href = google;
+  if (i) i.href = images;
+  $("#address-help")?.classList.add("show");
+}
+
+function applyDoorsFromDots() {
+  plan.doors = connectionsFromDoors(plan.rooms, plan.doorDots || [], plan.pxPerFt || 8);
+}
+
+function svgPoint(svg, event) {
+  const pt = svg.createSVGPoint();
+  pt.x = event.clientX;
+  pt.y = event.clientY;
+  const ctm = svg.getScreenCTM();
+  if (!ctm) return { x: 0, y: 0 };
+  const loc = pt.matrixTransform(ctm.inverse());
+  return { x: loc.x, y: loc.y };
+}
+
+function renderDoorConfirm() {
+  const host = $("#door-confirm");
+  const stage = $("#confirm-stage");
+  if (!host || !stage) return;
+  host.classList.add("show");
+  confirmOpen = true;
+  const dots = plan.doorDots || [];
+  $("#confirm-copy").textContent = `${dots.length} door mark${dots.length === 1 ? "" : "s"}. Tap a mark to remove it. Drag to move. Click a wall to add. Connections come from these doors, not from a model.`;
+  if (plan.preview && plan.width && plan.height) {
+    stage.innerHTML = `<div class="confirm-board">
+      <img src="${plan.preview}" alt="Uploaded floor plan">
+      <svg class="confirm-svg" viewBox="0 0 ${plan.width} ${plan.height}" role="img" aria-label="Door marks on the uploaded plan">
+        ${(plan.rooms || []).map((room) => `<rect class="confirm-room" x="${room.x}" y="${room.y}" width="${room.w}" height="${room.h}"></rect>`).join("")}
+        ${dots.map((dot, index) => `<circle class="door-dot" data-i="${index}" cx="${dot.x}" cy="${dot.y}" r="8"></circle>`).join("")}
+      </svg>
+    </div>`;
+  } else {
+    const extras = dots
+      .map((dot, index) => `<circle class="door-dot" data-i="${index}" cx="${dot.x}" cy="${dot.y}" r="7"></circle>`)
+      .join("");
+    stage.innerHTML = renderPlanSvg(plan, {
+      furniture: [],
+      furnish: false,
+      labels: true,
+      extras,
+      label: "Door confirm",
+    });
+  }
+  const svg = stage.querySelector("svg");
+  if (!svg) return;
+  svg.addEventListener("pointerdown", onConfirmPointerDown);
+  svg.addEventListener("pointermove", onConfirmPointerMove);
+  svg.addEventListener("pointerup", onConfirmPointerUp);
+  svg.addEventListener("pointerleave", onConfirmPointerUp);
+}
+
+function hideDoorConfirm() {
+  confirmOpen = false;
+  $("#door-confirm")?.classList.remove("show");
+}
+
+function onConfirmPointerDown(event) {
+  const svg = event.currentTarget;
+  const dot = event.target.closest?.(".door-dot");
+  const pt = svgPoint(svg, event);
+  if (dot) {
+    const index = Number(dot.dataset.i);
+    if (event.shiftKey || event.altKey) {
+      plan.doorDots.splice(index, 1);
+      applyDoorsFromDots();
+      renderDoorConfirm();
+      return;
+    }
+    dragDot = { index, moved: false, x: pt.x, y: pt.y };
+    svg.setPointerCapture?.(event.pointerId);
+    return;
+  }
+  plan.doorDots = plan.doorDots || [];
+  plan.doorDots.push({ x: pt.x, y: pt.y });
+  applyDoorsFromDots();
+  renderDoorConfirm();
+}
+
+function onConfirmPointerMove(event) {
+  if (!dragDot) return;
+  const svg = event.currentTarget;
+  const pt = svgPoint(svg, event);
+  const dx = pt.x - dragDot.x;
+  const dy = pt.y - dragDot.y;
+  if (Math.hypot(dx, dy) > 3) dragDot.moved = true;
+  const item = plan.doorDots[dragDot.index];
+  if (!item) return;
+  item.x = pt.x;
+  item.y = pt.y;
+  const node = svg.querySelector(`.door-dot[data-i="${dragDot.index}"]`);
+  node?.setAttribute("cx", String(pt.x));
+  node?.setAttribute("cy", String(pt.y));
+}
+
+function onConfirmPointerUp(event) {
+  if (!dragDot) return;
+  const index = dragDot.index;
+  const moved = dragDot.moved;
+  dragDot = null;
+  if (!moved) {
+    plan.doorDots.splice(index, 1);
+  }
+  applyDoorsFromDots();
+  renderDoorConfirm();
+}
+
+function openConfirm(message) {
+  applyDoorsFromDots();
+  lastRun = null;
+  renderRooms();
+  renderScore(null);
+  renderDoorConfirm();
+  status();
+  say(message || "Check the doors. Tap to fix, then looks right, run it.");
+}
+
+function acceptConfirm(andRun) {
+  applyDoorsFromDots();
+  hideDoorConfirm();
+  renderRooms();
+  status();
+  if (andRun) {
+    say("Doors accepted. Walking the floor.");
+    runSimulation();
+    return;
+  }
+  say("Doors accepted. Edit a room name if you need to, then run.");
+}
+
 function useDemo(make) {
   const place = $("#address").value.trim();
   const canned = make();
   plan = canned;
   plan.id = uid("plan");
+  plan.doorDots = doorDotsFromPlan(plan);
+  plan.pxPerFt = plan.pxPerFt || 8;
+  plan.preview = "";
   attachPlace();
   if (!plan.address) plan.address = place;
   if (place && canned.name && !/stahl house/i.test(canned.name)) {
     plan.name = `${place} · ${canned.name}`;
   }
-  lastRun = null;
-  renderRooms();
-  renderScore(null);
-  status();
-  say(
+  hideHelpers();
+  openConfirm(
     place
-      ? `Labeled demo on ${place}. Not fetched from a record. Check the rooms, then run.`
-      : "Labeled demo. Not a real listing. Add an address if you want it on the compare cards.",
+      ? `Labeled demo on ${place}. Not fetched from a record. Check the door marks, then run.`
+      : "Labeled demo. Not a real listing. Check the door marks, then run.",
   );
 }
 
@@ -288,14 +448,15 @@ function lookup() {
   const known = matchKnownSample(query);
   if (known) {
     if (!address) $("#address").value = known.make().address || query;
+    hideHelpers();
     useDemo(known.make);
     $("#lookup-note").textContent = `Known sample: ${plan.name}. Sizes are approximate, from published plans.`;
-    say(`I have a labeled sample for that address. ${plan.name}. Check the rooms, then run.`);
     return;
   }
   const miss = cannotFetchPlan(query);
   $("#lookup-note").textContent = miss.reason;
-  say(miss.reason);
+  showHelpers(query);
+  say(`${miss.reason} I opened helper links. I will not scrape a listing site.`);
 }
 
 function prefersReduced() {
@@ -582,50 +743,88 @@ async function checkVision() {
   } catch {
     vision = {
       available: false,
-      note: "Image reading is not configured on this deploy. Upload still stores a name. Rooms come from a demo or the editor.",
+      boost: false,
+      cv: true,
+      note: "Plans are read on this device. No vision key is set, so labels stay with the on-device reading.",
     };
   }
-  $("#vision-note").textContent = vision.available
-    ? "An uploaded floor-plan image can be read."
-    : "Upload reading coming soon. Try a sample or build the rooms.";
+  vision.cv = true;
+  vision.boost = Boolean(vision.boost || vision.available);
+  const note = $("#vision-note");
+  if (note) {
+    note.textContent = vision.boost
+      ? "Plans are read on this device. An optional vision boost can refine labels."
+      : "Plans are read on this device. No vision key is required.";
+  }
+  const row = $("#boost-row");
+  if (row) row.classList.toggle("show", Boolean(vision.boost));
+  const box = $("#boost-on");
+  if (box) {
+    const stored = localStorage.getItem("ak-livability-boost");
+    if (stored === "0") box.checked = false;
+    if (stored === "1") box.checked = true;
+    if (new URLSearchParams(location.search).get("boost") === "off") box.checked = false;
+  }
+}
+
+async function maybeBoost(result) {
+  if (!boostWanted() || !result?.preview) return result;
+  say("On-device reading is in. Asking the optional boost for labels only.", "doing");
+  try {
+    const tiles = overlappingTiles(result.canvas, 4).map((tile) => ({
+      x: tile.x,
+      y: tile.y,
+      w: tile.w,
+      h: tile.h,
+      dataUrl: tile.dataUrl,
+    }));
+    const res = await fetch("/api/livability/read-plan", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ overview: result.preview, tiles }),
+    });
+    const body = await res.json();
+    if (body?.labels?.length) {
+      result.rooms = applyBoostToRooms(result.rooms, body);
+      result.boosted = true;
+    }
+  } catch {
+    /* CV result still stands */
+  }
+  return result;
 }
 
 async function onUpload(file) {
   if (!file) return;
   attachPlace();
+  hideHelpers();
   plan.imageName = file.name;
   plan.source = "upload";
   plan.name = file.name.replace(/\.[^.]+$/, "") || "Uploaded plan";
   if (!plan.id) plan.id = uid("plan");
-  if (!vision.available) {
-    say("I have the file name. Upload reading is not ready on this deploy. Use a sample or the room editor.");
-    return;
-  }
-  say("Reading the uploaded plan. If I cannot see rooms, I will say so.", "doing");
-  const image = await new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(String(reader.result || ""));
-    reader.onerror = () => reject(reader.error);
-    reader.readAsDataURL(file);
-  });
+  say("Reading walls and doors on this device. No key required.", "doing");
   try {
-    const res = await fetch("/api/livability/read-plan", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ image }),
-    });
-    const body = await res.json();
-    if (!body.ok || !body.rooms?.length) {
-      say(body.error || "I could not read rooms from that image.");
+    const img = await fileToImage(file);
+    let result = await readPlanFromImage(img, { ...scaleOpts(), ocr: true });
+    result = await maybeBoost(result);
+    plan.rooms = layoutIfNeeded(result.rooms || []);
+    plan.doorDots = result.doorDots || [];
+    plan.pxPerFt = result.pxPerFt || 8;
+    plan.preview = result.preview || "";
+    plan.width = result.width;
+    plan.height = result.height;
+    plan.source = result.boosted ? "cv+boost" : "cv";
+    applyDoorsFromDots();
+    if (!plan.rooms.length) {
+      renderRooms();
+      say("I could not find enclosed rooms in that image. Use the room editor, or try a labeled demo.");
       return;
     }
-    plan.rooms = layoutIfNeeded(body.rooms);
-    plan.doors = Array.isArray(body.doors) ? body.doors : [];
-    plan.source = "vision";
-    renderRooms();
-    say(`I found ${plan.rooms.length} rooms. Check the names and doors, then run.`);
-  } catch {
-    say("The vision request failed. Nothing was invented.");
+    const engine = result.engine === "opencv" ? "OpenCV" : "the on-device reader";
+    const boost = result.boosted ? " Labels were refined with the optional boost." : "";
+    openConfirm(`I found ${plan.rooms.length} rooms with ${engine}.${boost} Check the door marks, then run.`);
+  } catch (error) {
+    say(error instanceof Error ? error.message : "That file did not open as a plan.");
   }
 }
 
@@ -638,6 +837,30 @@ function bind() {
     useDemo(makeStahlPlan);
   });
   $("#plan-file").addEventListener("change", (event) => onUpload(event.target.files?.[0]));
+  const drop = $("#dropzone");
+  if (drop) {
+    ["dragenter", "dragover"].forEach((name) => {
+      drop.addEventListener(name, (event) => {
+        event.preventDefault();
+        drop.classList.add("is-over");
+      });
+    });
+    ["dragleave", "drop"].forEach((name) => {
+      drop.addEventListener(name, (event) => {
+        event.preventDefault();
+        drop.classList.remove("is-over");
+      });
+    });
+    drop.addEventListener("drop", (event) => {
+      const file = event.dataTransfer?.files?.[0];
+      if (file) onUpload(file);
+    });
+  }
+  $("#boost-on")?.addEventListener("change", (event) => {
+    localStorage.setItem("ak-livability-boost", event.target.checked ? "1" : "0");
+  });
+  $("#confirm-run")?.addEventListener("click", () => acceptConfirm(true));
+  $("#confirm-edit")?.addEventListener("click", () => acceptConfirm(false));
   $("#run-sim").addEventListener("click", runSimulation);
   $("#bar-run").addEventListener("click", runSimulation);
   $("#cin-skip").addEventListener("click", () => {
