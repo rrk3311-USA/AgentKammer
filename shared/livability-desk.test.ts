@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { applyDiligencePreset, cannotFetchPlan, defaultDiligence, defaultGuideHello, emptyBuilding, emptyProfile, furnitureFor, heatMap, labelReserve, makeRiversidePlan, makeStahlPlan, makeSuttonPlan, matchKnownSample, scoreLivability, typicalDay } from "../client/public/tools/livability/engine.js";
+import { CONSIDERATIONS, DILIGENCE_CHECKS, LIVABILITY_AID_LINE, SEVERITY_LABELS, applyDiligencePreset, cannotFetchPlan, defaultDiligence, defaultGuideHello, emptyBuilding, emptyProfile, furnitureFor, heatMap, idsForPreset, labelReserve, makeRiversidePlan, makeStahlPlan, makeSuttonPlan, makeWillowHousePlan, matchKnownSample, scoreLivability, typicalDay } from "../client/public/tools/livability/engine.js";
 import { windowDotsFromPlan } from "../client/public/tools/livability/plan-graph.js";
 import { labelPlacement } from "../client/public/tools/livability/draw.js";
 import { SUGGESTIONS_ENABLED, suggestSimilarListings } from "../client/public/tools/livability/suggestions.js";
@@ -153,14 +153,94 @@ describe("livability desk scoring", () => {
     off.checks.kitchenTraffic.on = false;
     off.checks.cutThrough.on = false;
     const custom = scoreLivability(plan, profile, "10", off);
-    expect(standard.checksActive).toBe(18);
+    expect(standard.checksActive).toBe(idsForPreset("standard").length);
+    expect(standard.checksActive).toBe(DILIGENCE_CHECKS.filter((item) => item.severity === "dealbreaker" || item.severity === "tax").length);
+    expect(relaxed.checksActive).toBe(DILIGENCE_CHECKS.filter((item) => item.severity === "dealbreaker").length);
+    expect(strict.checksActive).toBe(DILIGENCE_CHECKS.length);
     expect(strict.score).not.toBe(standard.score);
     expect(relaxed.score).not.toBe(strict.score);
     expect(custom.score).not.toBe(standard.score);
     expect(standard.breakdown.length).toBeGreaterThan(5);
+    expect(standard.breakdown.some((row) => row.id === "pathThroughPrimary")).toBe(true);
+    expect(standard.breakdown.some((row) => row.id === "windowlessBedroom")).toBe(true);
+    expect(standard.breakdown.some((row) => row.severityLabel === "Big one")).toBe(true);
     expect(`${strict.notes.join(" ")} ${strict.breakdown.map((row) => row.note).join(" ")}`).toMatch(/AC unit|lead paint|slippery/i);
-    expect(JSON.stringify({ standard, strict, relaxed })).not.toContain("—");
-    expect(JSON.stringify({ standard, strict, relaxed })).not.toMatch(/school|neighborhood|broker/i);
+    expect(JSON.stringify({ standard, strict, relaxed, CONSIDERATIONS, DILIGENCE_CHECKS, LIVABILITY_AID_LINE, SEVERITY_LABELS })).not.toContain("—");
+    expect(JSON.stringify({ standard, strict, relaxed, CONSIDERATIONS, DILIGENCE_CHECKS })).not.toMatch(/school|neighborhood|broker|youtuber|hadad|scrape|family-friendly/i);
+  });
+
+  it("flags plan-only checks a good sample should pass and a broken one should fail", () => {
+    const good = scoreLivability(makeSuttonPlan(), { ...emptyProfile(), householdSize: 2 }, "10", applyDiligencePreset("standard"));
+    expect(good.breakdown.find((row) => row.id === "pathThroughPrimary")?.passed).toBe(true);
+    expect(good.breakdown.find((row) => row.id === "primaryCloset")?.passed).toBe(true);
+    expect(good.breakdown.find((row) => row.id === "terraceThroughPrimary")?.passed).not.toBe(false);
+
+    const plan = makeSuttonPlan();
+    plan.rooms.push({ id: "core", name: "Elevator", type: "other", sf: 30, x: 0, y: 368, w: 24, h: 168 });
+    plan.rooms.push(
+      { id: "dark", name: "Interior bedroom", type: "bedroom", sf: 64, x: 600, y: 200, w: 80, h: 80 },
+      { id: "nbox", name: "Box N", type: "other", sf: 20, x: 600, y: 120, w: 80, h: 80 },
+      { id: "sbox", name: "Box S", type: "other", sf: 20, x: 600, y: 280, w: 80, h: 80 },
+      { id: "wbox", name: "Box W", type: "other", sf: 20, x: 520, y: 200, w: 80, h: 80 },
+      { id: "ebox", name: "Box E", type: "other", sf: 20, x: 680, y: 200, w: 80, h: 80 },
+    );
+    plan.rooms = plan.rooms.filter((room) => room.id !== "cloa");
+    plan.doors = plan.doors.filter((door) => door.a !== "cloa" && door.b !== "cloa");
+    plan.doors.push({ a: "beda", b: "core" });
+    const broken = scoreLivability(plan, { ...emptyProfile(), householdSize: 2 }, "10", applyDiligencePreset("strict"));
+    expect(broken.breakdown.find((row) => row.id === "primaryCloset")?.passed).toBe(false);
+    expect(broken.breakdown.find((row) => row.id === "windowlessBedroom")?.passed).toBe(false);
+    expect(broken.breakdown.find((row) => row.id === "bedByCore")?.passed).toBe(false);
+    expect(JSON.stringify(broken.breakdown.map((row) => row.note))).not.toContain("—");
+  });
+
+  it("scores a fictional single-family house sample with flagged layout checks", () => {
+    const plan = makeWillowHousePlan();
+    expect(plan.sampleMark).toBe("Sample report, example data");
+    expect(plan.address).toMatch(/Willow Lane/);
+    expect(plan.rooms.some((room) => room.id === "garage")).toBe(true);
+    expect(plan.rooms.some((room) => room.id === "stair")).toBe(true);
+    expect(plan.rooms.filter((room) => room.type === "bedroom")).toHaveLength(3);
+    const result = scoreLivability(
+      plan,
+      { ...emptyProfile(), householdSize: 4, kids: true, cooks: true, wfh: true },
+      "10",
+      applyDiligencePreset("strict"),
+      {
+        building: {
+          ...emptyBuilding(),
+          yearBuilt: "1924",
+          ticks: {
+            ...emptyBuilding().ticks,
+            floorGlossWet: true,
+            windowAc: true,
+            waterStains: true,
+            noParking: true,
+            mechanicalNear: true,
+          },
+        },
+      },
+    );
+    expect(result.score).toBeGreaterThan(20);
+    expect(result.score).toBeLessThan(80);
+    const failed = result.breakdown.filter((row) => row.passed === false).map((row) => row.id);
+    expect(failed).toEqual(expect.arrayContaining(["pathThroughPrimary", "terraceThroughPrimary", "kitchenOrphaned", "primaryCloset"]));
+    expect(JSON.stringify({ plan, result })).not.toContain("—");
+    expect(JSON.stringify({ plan, result })).not.toMatch(/school|neighborhood|broker|youtuber|apartment line/i);
+  });
+
+  it("keeps considerations confirm-only and official", () => {
+    const blob = JSON.stringify(CONSIDERATIONS) + LIVABILITY_AID_LINE;
+    expect(blob).toMatch(/Worth confirming: flood zone status/);
+    expect(blob).toMatch(/msc\.fema\.gov/);
+    expect(blob).toMatch(/osfm\.fire\.ca\.gov/);
+    expect(blob).toMatch(/maps\.conservation\.ca\.gov\/cgs\/EQZApp/);
+    expect(blob).toMatch(/usgs\.gov/);
+    expect(blob).toMatch(/licensed home inspector or structural engineer/i);
+    expect(blob).toMatch(/planning aid, not an inspection/);
+    expect(blob).not.toMatch(/may have|bad foundation|family-friendly|school|youtuber|hadad|scrape/i);
+    expect(blob).not.toContain("—");
+    expect(CONSIDERATIONS.map((group) => group.id)).toEqual(["land", "building", "sound", "rules"]);
   });
 
   it("keeps customer copy short and free of internals", () => {

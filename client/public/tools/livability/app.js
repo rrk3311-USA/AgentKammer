@@ -1,10 +1,12 @@
 import {
+  CONSIDERATIONS,
   DILIGENCE_CHECKS,
   DILIGENCE_GROUPS,
   DILIGENCE_PRESETS,
   HORIZONS,
+  LIVABILITY_AID_LINE,
   ROOM_TYPES,
-  STRICTNESS_CHIPS,
+  SEVERITY_LABELS,
   activeCheckCount,
   applyDiligencePreset,
   cannotFetchPlan,
@@ -15,9 +17,11 @@ import {
   furnitureFor,
   heatMap,
   horizonNeedLine,
+  hydrateDiligence,
   makeRiversidePlan,
   makeStahlPlan,
   makeSuttonPlan,
+  makeWillowHousePlan,
   matchKnownSample,
   presetFromDiligence,
   scoreLivability,
@@ -89,9 +93,11 @@ let dragDot = null;
 let cinemaRaf = 0;
 let cinemaSkip = false;
 let cinemaPlaying = false;
-let diligence = store.diligence || defaultDiligence();
+let diligence = hydrateDiligence(store.diligence);
 let building = { ...emptyBuilding(), ...(store.building || {}) };
 building.ticks = { ...emptyBuilding().ticks, ...(building.ticks || {}) };
+let considerOpen = false;
+let considerGroups = new Set(CONSIDERATIONS.map((group) => group.id));
 let furnished = store.furnished !== false;
 let furnitureOverride = null;
 let adjustFurniture = false;
@@ -259,6 +265,13 @@ function materialsFields() {
       <label><input type="checkbox" data-tick="laundryInUnit" ${ticks.laundryInUnit ? "checked" : ""}><span>Laundry in the home.</span></label>
       <label><input type="checkbox" data-tick="elevator" ${ticks.elevator ? "checked" : ""}><span>Elevator, or a step-free path.</span></label>
       <label><input type="checkbox" data-tick="outdoor" ${ticks.outdoor ? "checked" : ""}><span>Outdoor space on the listing.</span></label>
+      <label><input type="checkbox" data-tick="lowFloorStreet" ${ticks.lowFloorStreet ? "checked" : ""}><span>Low floor on a busy street. Worth confirming noise at the hours you would be home.</span></label>
+      <label><input type="checkbox" data-tick="mechanicalNear" ${ticks.mechanicalNear ? "checked" : ""}><span>Bedroom near a boiler, garage door, or roof unit. Worth confirming sound with an inspector.</span></label>
+      <label><input type="checkbox" data-tick="noParking" ${ticks.noParking ? "checked" : ""}><span>Parking looks hard or costly. Worth confirming the actual arrangement.</span></label>
+      <label><input type="checkbox" data-tick="waterStains" ${ticks.waterStains ? "checked" : ""}><span>Stains or fresh paint patches. Worth confirming with a licensed home inspector.</span></label>
+      <label><input type="checkbox" data-tick="noPackage" ${ticks.noPackage ? "checked" : ""}><span>No marked place for packages. Worth confirming how deliveries are handled.</span></label>
+      <label><input type="checkbox" data-tick="trashAwkward" ${ticks.trashAwkward ? "checked" : ""}><span>Trash and recycling look awkward to reach. Worth confirming the path.</span></label>
+      <label><input type="checkbox" data-tick="noBulkStorage" ${ticks.noBulkStorage ? "checked" : ""}><span>No marked place for bikes, luggage, or seasonal items. Worth confirming building storage.</span></label>
     </div>
     <p class="fine">Lead paint rule <span class="tip" tabindex="0" data-tip="Federal EPA/HUD rule: sellers and landlords of most housing built before 1978 must give buyers and renters a lead paint disclosure. This is a prompt to ask for that paper, not a finding about this home.">?</span></p>
     <label class="dropzone" id="mat-drop" style="margin-top:10px">
@@ -284,14 +297,9 @@ function renderDiligence() {
   const groups = DILIGENCE_GROUPS.map((group) => {
     const checks = DILIGENCE_CHECKS.filter((item) => item.group === group.id)
       .map((item) => {
-        const row = diligence.checks[item.id] || { on: false, strictness: "standard" };
-        const chips = item.hasStrict
-          ? `<span class="strict-chip">${STRICTNESS_CHIPS.map(
-              (chip) =>
-                `<button type="button" data-strict="${item.id}" data-level="${chip.id}" aria-pressed="${row.strictness === chip.id}">${chip.label}</button>`,
-            ).join("")}</span>`
-          : "";
-        return `<div class="check" data-check="${item.id}"><input type="checkbox" data-toggle="${item.id}" ${row.on ? "checked" : ""} aria-label="${item.label}"><label>${item.label}</label>${chips}</div>`;
+        const row = diligence.checks[item.id] || { on: false };
+        const sev = SEVERITY_LABELS[item.severity] || SEVERITY_LABELS.tax;
+        return `<div class="check" data-check="${item.id}"><input type="checkbox" data-toggle="${item.id}" ${row.on ? "checked" : ""} aria-label="${item.label}"><label>${item.label}</label><span class="sev-chip sev-${item.severity}">${sev.label}</span></div>`;
       })
       .join("");
     const extra = group.id === "materials" ? materialsFields() : "";
@@ -355,12 +363,124 @@ function bindFurnitureAdjust(host) {
   });
 }
 
+function considerItemMarkup(item) {
+  const links = [];
+  if (item.href) {
+    links.push(
+      `<a href="${escape(item.href)}" target="_blank" rel="noopener noreferrer">${escape(item.linkLabel || "Official source")}</a>`,
+    );
+  }
+  if (item.ask) links.push(`<span>${escape(item.ask)}</span>`);
+  return `<label class="consider-item"><input type="checkbox"><span><strong>${escape(item.label)}</strong>${links.length ? `<span class="consider-links">${links.join(" · ")}</span>` : ""}</span></label>`;
+}
+
+function renderConsiderations() {
+  const host = $("#considerations");
+  if (!host) return;
+  const groups = CONSIDERATIONS.map((group) => {
+    const items = group.items.map(considerItemMarkup).join("");
+    return `<div class="acc nested ${considerOpen && considerGroups.has(group.id) ? "open" : ""}" data-consider-group="${group.id}">
+      <button class="acc-head" type="button" data-consider-toggle="${group.id}">${group.label}<span class="chev">›</span></button>
+      <div class="acc-body"><div class="acc-inner"><div>${items}</div></div></div>
+    </div>`;
+  }).join("");
+  host.innerHTML = `<div class="acc ${considerOpen ? "open" : ""}" data-consider-root>
+      <button class="acc-head" type="button" data-consider-root-toggle>Considerations to confirm <em>What a plan cannot show</em><span class="chev">›</span></button>
+      <div class="acc-body"><div class="acc-inner"><div>
+        ${groups}
+        <p class="aid-line">${escape(LIVABILITY_AID_LINE)}</p>
+      </div></div></div>
+    </div>`;
+}
+
+function renderPrintReport(result) {
+  const host = $("#print-report");
+  if (!host) return;
+  if (!result) {
+    host.innerHTML = "";
+    return;
+  }
+  const address = plan.address || plan.name || "Untitled plan";
+  const sampleMark = plan.sampleMark || (plan.sampleReport ? "Sample report, example data" : "");
+  const dims = [
+    ["Circulation", result.dimensions.circulation],
+    ["Quiet", result.dimensions.quiet],
+    ["Storage", result.dimensions.storage],
+    ["Household fit", result.dimensions.fit],
+    ["Light and air", result.dimensions.light],
+    ["Comfort", result.dimensions.comfort],
+  ].filter((row) => row[1] != null);
+  const flagged = (result.breakdown || []).filter((row) => row.passed === false || row.caution);
+  const consider = CONSIDERATIONS.map(
+    (group) =>
+      `<section class="print-group"><h3>${escape(group.label)}</h3>${group.items
+        .map((item) => {
+          const extra = [item.linkLabel, item.ask].filter(Boolean).join(" · ");
+          return `<label><input type="checkbox"> ${escape(item.label)}${extra ? ` <span>${escape(extra)}</span>` : ""}</label>`;
+        })
+        .join("")}</section>`,
+  ).join("");
+  const heat = renderPlanSvg(plan, {
+    heat: heatMap(plan, result),
+    furniture: [],
+    furnish: false,
+    labels: true,
+    label: "Static heat map",
+  });
+  host.innerHTML = `
+    <header class="print-head">
+      <picture>
+        <source type="image/webp" srcset="/tools/livability/icon-64.webp 1x, /tools/livability/icon-128.webp 2x">
+        <img src="/tools/livability/icon-64.png" srcset="/tools/livability/icon-64.png 1x, /tools/livability/icon-128.png 2x" width="40" height="40" alt="Livability">
+      </picture>
+      <div>
+        <p class="kicker">Livability report</p>
+        <h1>${escape(address)}</h1>
+        ${sampleMark ? `<p class="print-sample">${escape(sampleMark)}</p>` : ""}
+      </div>
+    </header>
+    <p class="print-score"><strong>${result.score}</strong> Livability</p>
+    <p class="print-meta">${escape(plan.name || "Floor plan")} · Household of ${Number(profile.householdSize) || 1} · ${escape(String(horizon))} years</p>
+    <div class="print-dims">${dims.map(([label, value]) => `<div><span>${label}</span><b>${value}</b></div>`).join("")}</div>
+    <section>
+      <h2>Breakdown</h2>
+      ${(result.breakdown || [])
+        .map(
+          (row) =>
+            `<div class="print-row"><span>${escape(row.label)}</span><b>${row.delta > 0 ? "+" : ""}${row.delta}</b><small>${escape(row.note || "")}</small></div>`,
+        )
+        .join("")}
+    </section>
+    <section>
+      <h2>Flagged checks</h2>
+      ${
+        flagged.length
+          ? flagged
+              .map(
+                (row) =>
+                  `<div class="print-row fail"><span>${escape(row.label)}</span><small>${escape(row.severityLabel || "")}. ${escape(row.note || "")}</small></div>`,
+              )
+              .join("")
+          : "<p>No flagged checks on this run.</p>"
+      }
+    </section>
+    <section>
+      <h2>Considerations to confirm</h2>
+      ${consider}
+    </section>
+    <p class="aid-line">${escape(LIVABILITY_AID_LINE)}</p>
+    <section class="print-heat"><h2>Heat map</h2>${heat}</section>
+  `;
+}
+
 function renderScore(result) {
   if (!result) {
     $("#score-num").textContent = "-";
     $("#dims").innerHTML = "";
     $("#notes").innerHTML = "";
     if ($("#check-break")) $("#check-break").innerHTML = "";
+    renderConsiderations();
+    renderPrintReport(null);
     return;
   }
   $("#score-num").textContent = String(result.score);
@@ -386,11 +506,13 @@ function renderScore(result) {
       ? `<p class="kicker" style="margin:4px 0 8px">Per check</p>${rows
           .map(
             (row) =>
-              `<div class="break-row ${row.passed ? "" : "fail"}"><span>${escape(row.label)}</span><b>${row.delta > 0 ? "+" : ""}${row.delta}</b><span class="why">${escape(row.note || "")}</span></div>`,
+              `<div class="break-row ${row.passed ? "" : "fail"}"><span>${escape(row.label)}</span><b>${row.delta > 0 ? "+" : ""}${row.delta}</b><span class="why">${escape(row.severityLabel || "")}${row.note ? `. ${escape(row.note)}` : ""}</span></div>`,
           )
           .join("")}`
       : "";
   }
+  renderConsiderations();
+  renderPrintReport(result);
 }
 
 function renderCollection() {
@@ -1142,6 +1264,10 @@ function bind() {
     if (!$("#address").value.trim()) $("#address").value = "1635 Woods Dr, Los Angeles, CA 90069";
     useDemo(makeStahlPlan);
   });
+  $("#use-willow")?.addEventListener("click", () => {
+    $("#address").value = "1842 Willow Lane, Sample City, CA";
+    useDemo(makeWillowHousePlan);
+  });
   $("#plan-file").addEventListener("change", (event) => onUpload(event.target.files?.[0]));
   const drop = $("#dropzone");
   if (drop) {
@@ -1211,15 +1337,6 @@ function bind() {
       renderDiligence();
       return;
     }
-    const strict = event.target.closest("[data-strict]");
-    if (strict) {
-      const id = strict.dataset.strict;
-      if (!diligence.checks[id]) return;
-      diligence.checks[id].strictness = strict.dataset.level;
-      diligence.preset = "custom";
-      persistDesk();
-      renderDiligence();
-    }
   });
   $("#diligence")?.addEventListener("change", (event) => {
     const toggle = event.target.closest("[data-toggle]");
@@ -1245,6 +1362,13 @@ function bind() {
         laundryInUnit: "laundryInUnit",
         elevator: "elevatorWalkup",
         outdoor: "outdoor",
+        lowFloorStreet: "lowFloorStreet",
+        mechanicalNear: "mechanicalNear",
+        noParking: "noParking",
+        waterStains: "waterStains",
+        noPackage: "noPackage",
+        trashAwkward: "trashAwkward",
+        noBulkStorage: "noBulkStorage",
       };
       const checkId = map[tick.dataset.tick];
       if (tick.checked && checkId && diligence.checks[checkId]) {
@@ -1268,6 +1392,29 @@ function bind() {
   });
   window.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && cinemaPlaying) cinemaSkip = true;
+  });
+  $("#print-report-btn")?.addEventListener("click", () => {
+    if (!lastRun?.result) {
+      say("Run the plan first, then print the report.");
+      return;
+    }
+    renderPrintReport(lastRun.result);
+    window.print();
+  });
+  $("#considerations")?.addEventListener("click", (event) => {
+    if (event.target.closest("[data-consider-root-toggle]")) {
+      considerOpen = !considerOpen;
+      renderConsiderations();
+      return;
+    }
+    const group = event.target.closest("[data-consider-toggle]");
+    if (group) {
+      considerOpen = true;
+      const id = group.dataset.considerToggle;
+      if (considerGroups.has(id)) considerGroups.delete(id);
+      else considerGroups.add(id);
+      renderConsiderations();
+    }
   });
   $("#keep-col").addEventListener("click", keepCollection);
   $("#add-compare").addEventListener("click", addCompare);
@@ -1352,6 +1499,7 @@ renderHorizon();
 renderFurnish();
 renderDiligence();
 renderScore(lastRun?.result);
+renderConsiderations();
 renderCollection();
 renderCompare();
 status();

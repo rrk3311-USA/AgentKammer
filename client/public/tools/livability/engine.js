@@ -4,20 +4,28 @@ import {
   activeCheckCount,
   defaultDiligence,
   presetFromDiligence,
-  strictnessFactor,
+  severityFactor,
+  severityLabel,
 } from "./diligence.js";
 import { wallIsShared, windowDotsFromPlan, windowsForRoom } from "./plan-graph.js";
 
 export {
+  CONSIDERATIONS,
   DILIGENCE_CHECKS,
   DILIGENCE_GROUPS,
   DILIGENCE_PRESETS,
+  LIVABILITY_AID_LINE,
+  SEVERITY_LABELS,
   STRICTNESS_CHIPS,
   activeCheckCount,
   applyDiligencePreset,
   defaultDiligence,
   emptyBuilding,
+  hydrateDiligence,
+  idsForPreset,
   presetFromDiligence,
+  severityFactor,
+  severityLabel,
 } from "./diligence.js";
 
 export const HORIZONS = [
@@ -201,6 +209,56 @@ export function makeStahlPlan() {
   return plan;
 }
 
+/** Fictional single-family house for sample reports. Not a real listing. */
+export function makeWillowHousePlan() {
+  const rooms = [
+    { id: "entry", name: "Entry", type: "entry", sf: 24, x: 20, y: 20, w: 80, h: 140 },
+    { id: "living", name: "Living", type: "living", sf: 176, x: 100, y: 20, w: 240, h: 120 },
+    { id: "dining", name: "Dining", type: "dining", sf: 108, x: 340, y: 20, w: 120, h: 120 },
+    { id: "pantry", name: "Pantry", type: "closet", sf: 16, x: 460, y: 20, w: 48, h: 80 },
+    { id: "kitchen", name: "Kitchen", type: "kitchen", sf: 62, x: 520, y: 20, w: 48, h: 120 },
+    { id: "hall", name: "Main hall", type: "hallway", sf: 96, x: 100, y: 140, w: 468, h: 40 },
+    { id: "stair", name: "Stair", type: "other", sf: 42, x: 20, y: 180, w: 80, h: 160 },
+    { id: "beda", name: "Main bedroom", type: "bedroom", sf: 188, x: 100, y: 180, w: 160, h: 160 },
+    { id: "bedb", name: "Bedroom 2", type: "bedroom", sf: 136, x: 260, y: 180, w: 140, h: 160 },
+    { id: "bedc", name: "Bedroom 3", type: "bedroom", sf: 128, x: 400, y: 180, w: 140, h: 160 },
+    { id: "garage", name: "Garage", type: "other", sf: 168, x: 540, y: 180, w: 120, h: 160 },
+    { id: "bath", name: "Bath", type: "bath", sf: 36, x: 100, y: 340, w: 80, h: 72 },
+    { id: "laundry", name: "Laundry", type: "other", sf: 28, x: 180, y: 340, w: 80, h: 72 },
+    { id: "terrace", name: "Terrace", type: "terrace", sf: 22, x: 260, y: 340, w: 140, h: 72 },
+  ];
+  const doors = [
+    ["entry", "living"],
+    ["living", "hall"],
+    ["hall", "beda"],
+    ["hall", "bedb"],
+    ["hall", "bedc"],
+    ["hall", "stair"],
+    ["hall", "pantry"],
+    ["beda", "bath"],
+    ["beda", "laundry"],
+    ["beda", "kitchen"],
+    ["beda", "terrace"],
+    ["bedc", "garage"],
+  ].map(([a, b]) => ({ a, b }));
+  const plan = {
+    id: "plan-willow-house-sample",
+    name: "Willow house demo",
+    source: "sample",
+    address: "1842 Willow Lane, Sample City, CA",
+    sampleReport: true,
+    sampleMark: "Sample report, example data",
+    listingUrl: "",
+    imageName: "",
+    rooms,
+    doors,
+    note: "Sample report, example data. Fictional single-family house drawn for this tool. Not a real listing.",
+    pxPerFt: 8,
+  };
+  plan.windowDots = windowDotsFromPlan(plan);
+  return plan;
+}
+
 export const DEMO_PLANS = [
   { id: "sutton", label: "Sutton line", make: makeSuttonPlan, needles: ["sutton sample", "sutton line"] },
   { id: "riverside", label: "Riverside line", make: makeRiversidePlan, needles: ["riverside sample", "riverside line"] },
@@ -209,6 +267,12 @@ export const DEMO_PLANS = [
     label: "Stahl House",
     make: makeStahlPlan,
     needles: ["1635 woods", "stahl house", "stahl", "case study house 22", "case study house #22", "csh 22", "csh #22"],
+  },
+  {
+    id: "willow",
+    label: "Willow house",
+    make: makeWillowHousePlan,
+    needles: ["1842 willow", "willow lane", "willow house", "sample report, example data"],
   },
 ];
 
@@ -371,6 +435,12 @@ export function scoreLivability(plan, profile, horizonId, diligence, extras = {}
   const bedNeed = profile.kids && horizon.years >= 10 ? Math.max(2, Math.ceil(size / 2)) : Math.ceil(size / 2);
   const laundryRoom = plan.rooms.find((room) => /laund|washer|utility/i.test(room.name || ""));
   const daylightRooms = [...livings, ...dinings, ...kitchens, ...beds, ...studies];
+  const cores = plan.rooms.filter((room) => /elevat|stair|chute|compactor|\bcore\b|trash/i.test(room.name || ""));
+  const pantries = plan.rooms.filter((room) => /pantr/i.test(room.name || ""));
+  const mechanicals = plan.rooms.filter((room) => /garage|boiler|mechanical|mech room|roof unit/i.test(room.name || ""));
+  const primary = [...beds].sort((a, b) => (Number(b.sf) || 0) - (Number(a.sf) || 0))[0] || beds[0];
+  const roomMinFt = (room) => Math.min(Number(room.w) || 0, Number(room.h) || 0) / px;
+  const hallSf = halls.reduce((sum, room) => sum + (Number(room.sf) || 0), 0);
 
   const evalCheck = (id) => {
     if (id === "cutThrough") {
@@ -769,6 +839,344 @@ export function scoreLivability(plan, profile, horizonId, diligence, extras = {}
       }
       return { delta: 0, note: "No outdoor space marked. Tick it if the listing shows a terrace or garden.", passed: true, detail: [], skip: true };
     }
+    if (id === "hallAsFoyer") {
+      if (!entries.length) {
+        return { delta: -6, note: "The plan opens on a hall. Coats and guests will land in the first long corridor.", passed: false, detail: [] };
+      }
+      const foyer = entries[0];
+      const aspect = Math.max(foyer.w, foyer.h) / Math.max(1, Math.min(foyer.w, foyer.h));
+      if ((foyer.sf || 0) < 28 || aspect >= 3) {
+        return { delta: -5, note: "The entry reads as a hall. There is little room to pause before the rest of the plan.", passed: false, detail: [] };
+      }
+      return { delta: 3, note: "The entry can hold a pause before the rooms begin.", passed: true, detail: [] };
+    }
+    if (id === "corridorShare") {
+      if (!totalSf || !halls.length) {
+        return { delta: 0, note: "Hall share is not a factor on this plan.", passed: true, detail: [], skip: true };
+      }
+      const share = hallSf / totalSf;
+      if (share > 0.18) {
+        return { delta: -6, note: "Halls take a large share of the floor. Daily life will spend more time in corridors than the listing square footage suggests.", passed: false, detail: [] };
+      }
+      return { delta: 2, note: "Halls stay in proportion to the rooms they serve.", passed: true, detail: [] };
+    }
+    if (id === "pathThroughPrimary") {
+      if (!primary) {
+        return { delta: 0, note: "No main bedroom to test a daily path against.", passed: true, detail: [], skip: true };
+      }
+      const daily = [morning, evening, entryKitchen, guest].filter(Boolean);
+      const crossed = daily.some((path) => {
+        const mid = path.slice(1, -1);
+        return mid.includes(primary.id);
+      });
+      if (crossed) {
+        return { delta: -14, note: "A daily path crosses the main bedroom. Privacy and sleep will share the walk.", passed: false, detail: [] };
+      }
+      return { delta: 4, note: "Daily walks stay out of the main bedroom.", passed: true, detail: [] };
+    }
+    if (id === "kitchenOrphaned") {
+      if (!kitchens.length || !(livings.length || dinings.length)) {
+        return { delta: 0, note: "Kitchen distance needs both a kitchen and a living room on the plan.", passed: true, detail: [], skip: true };
+      }
+      const social = [...livings, ...dinings];
+      const near = kitchens.some((kitchen) =>
+        social.some((room) => {
+          const path = pathBetween(adj, kitchen.id, room.id);
+          return adjacent(adj, kitchen.id, room.id) || (path && path.length <= 3);
+        }),
+      );
+      if (!near) {
+        return { delta: -12, note: "The kitchen sits far from the living rooms. Cooking and sitting will feel like two houses.", passed: false, detail: [] };
+      }
+      return { delta: 3, note: "The kitchen sits near the rooms people gather in.", passed: true, detail: [] };
+    }
+    if (id === "bedsInRow") {
+      if (beds.length < 3) {
+        return { delta: 0, note: "Not enough bedrooms to pack into a row.", passed: true, detail: [], skip: true };
+      }
+      const touching = beds.filter((bed) => beds.some((other) => other.id !== bed.id && facingWall(bed, other)));
+      if (touching.length >= 3) {
+        return { delta: -6, note: "Bedrooms sit packed in a row. Sound and privacy will travel along that wall.", passed: false, detail: [] };
+      }
+      return { delta: 2, note: "The bedrooms are not packed along one wall.", passed: true, detail: [] };
+    }
+    if (id === "bedByCore") {
+      if (!cores.length || !beds.length) {
+        return { delta: 0, note: "No elevator or stair core is marked next to a bedroom.", passed: true, detail: [], skip: true };
+      }
+      const hit = beds.find((bed) => cores.some((core) => facingWall(bed, core)));
+      if (hit) {
+        return { delta: -7, note: `${plainName(hit.name)} sits on the elevator or stair. Worth pricing in the sound.`, passed: false, detail: [] };
+      }
+      return { delta: 2, note: "Bedrooms sit off the elevator and stair.", passed: true, detail: [] };
+    }
+    if (id === "openPlanEcho") {
+      const open = kitchens.some((kitchen) =>
+        livings.some((living) => adjacent(adj, kitchen.id, living.id) && (Number(kitchen.sf) || 0) + (Number(living.sf) || 0) >= 350),
+      );
+      if (open) {
+        return { delta: -5, note: "The kitchen and living room share one open volume. Noise and cooking smells will travel.", passed: false, detail: [] };
+      }
+      return { delta: 2, note: "The kitchen is not an open echo into the main living room.", passed: true, detail: [] };
+    }
+    if (id === "windowlessBedroom") {
+      if (!beds.length) {
+        return { delta: 0, note: "No bedroom to test for a window.", passed: true, detail: [], skip: true };
+      }
+      const dark = beds.find((bed) => {
+        const wins = windowsForRoom(bed, windowDots, Math.max(8, px));
+        const exterior = ["n", "s", "e", "w"].some((wall) => !wallIsShared(bed, wall, plan.rooms));
+        return !wins.length && !exterior;
+      });
+      if (dark) {
+        return { delta: -16, note: `${plainName(dark.name)} has no window and no exterior wall. A bedroom needs daylight.`, passed: false, detail: [] };
+      }
+      return { delta: 4, note: "Each bedroom has a path to daylight, or an exterior wall to confirm.", passed: true, detail: [] };
+    }
+    if (id === "darkInterior") {
+      const dark = daylightRooms.filter((room) => {
+        const wins = windowsForRoom(room, windowDots, Math.max(8, px));
+        const exterior = ["n", "s", "e", "w"].some((wall) => !wallIsShared(room, wall, plan.rooms));
+        return !wins.length && !exterior;
+      });
+      if (dark.length) {
+        return { delta: -6, note: `${plainName(dark[0].name)} has no window. Confirm whether it borrows light from another room.`, passed: false, detail: [] };
+      }
+      return { delta: 2, note: "The main rooms have a window or an exterior wall.", passed: true, detail: [] };
+    }
+    if (id === "coatCloset") {
+      if (!entries.length) {
+        return { delta: -2, note: "There is no entry closet for coats.", passed: false, detail: [] };
+      }
+      const near = closets.some((closet) => entries.some((entry) => adjacent(adj, closet.id, entry.id) || facingWall(closet, entry)));
+      if (!near) {
+        return { delta: -2, note: "No coat closet sits at the entry. Bags will land on a chair.", passed: false, detail: [] };
+      }
+      return { delta: 2, note: "A closet at the entry can take coats and bags.", passed: true, detail: [] };
+    }
+    if (id === "pantryDoor") {
+      if (!pantries.length) {
+        return { delta: 0, note: "No pantry is marked.", passed: true, detail: [], skip: true };
+      }
+      const wrong = pantries.find((pantry) => !kitchens.some((kitchen) => adjacent(adj, pantry.id, kitchen.id)));
+      if (wrong) {
+        return { delta: -5, note: "The pantry does not open to the kitchen. That extra step adds up.", passed: false, detail: [] };
+      }
+      return { delta: 3, note: "The pantry opens to the kitchen.", passed: true, detail: [] };
+    }
+    if (id === "noPantry") {
+      if (pantries.length) {
+        return { delta: 2, note: "A pantry is on the plan.", passed: true, detail: [] };
+      }
+      if (profile.cooks && kitchenSf >= 100) {
+        return { delta: 2, note: "The kitchen is large enough to hold tall storage.", passed: true, detail: [] };
+      }
+      return { delta: -2, note: "No pantry is marked. Tall storage would take pressure off the counters.", passed: false, detail: [] };
+    }
+    if (id === "primaryCloset") {
+      if (!primary) {
+        return { delta: 0, note: "No main bedroom to test for a closet.", passed: true, detail: [], skip: true };
+      }
+      const own = closets.some((closet) => adjacent(adj, primary.id, closet.id) || facingWall(primary, closet));
+      if (!own) {
+        return { delta: -14, note: "The main bedroom has no closet of its own.", passed: false, detail: [] };
+      }
+      return { delta: 4, note: "The main bedroom has a closet.", passed: true, detail: [] };
+    }
+    if (id === "secondaryClosets") {
+      const secondary = beds.filter((bed) => !primary || bed.id !== primary.id);
+      if (!secondary.length) {
+        return { delta: 0, note: "No second bedroom to test for a closet.", passed: true, detail: [], skip: true };
+      }
+      const missing = secondary.filter((bed) => !closets.some((closet) => adjacent(adj, bed.id, closet.id) || facingWall(bed, closet)));
+      if (missing.length) {
+        return { delta: -6, note: `${plainName(missing[0].name)} has no closet. Dressers will take floor from the room.`, passed: false, detail: [] };
+      }
+      return { delta: 3, note: "The other bedrooms have closets.", passed: true, detail: [] };
+    }
+    if (id === "laundryByBed") {
+      if (!laundryRoom || !beds.length) {
+        return { delta: 0, note: "Laundry is not marked against a bedroom wall.", passed: true, detail: [], skip: true };
+      }
+      const hit = beds.find((bed) => facingWall(bed, laundryRoom) || adjacent(adj, bed.id, laundryRoom.id));
+      if (hit) {
+        return { delta: -2, note: `Laundry sits on a wall with ${plainName(hit.name)}. Machines will be part of the night.`, passed: false, detail: [] };
+      }
+      return { delta: 1, note: "Laundry is in the home and off the bedroom walls.", passed: true, detail: [] };
+    }
+    if (id === "tooManyBeds") {
+      const common = livings.length + dinings.length + studies.length;
+      if (beds.length >= 3 && beds.length > common + 1) {
+        return { delta: -6, note: "Bedroom count crowds out the rooms people share.", passed: false, detail: [] };
+      }
+      return { delta: 2, note: "The bedroom count leaves room for shared life.", passed: true, detail: [] };
+    }
+    if (id === "tooBig") {
+      if (totalSf / size > 900 && beds.length > bedNeed + 1) {
+        return { delta: -5, note: "This floor is large for the household you described. Empty rooms still need care.", passed: false, detail: [] };
+      }
+      return { delta: 1, note: "The size is in range for this household.", passed: true, detail: [] };
+    }
+    if (id === "bathThroughBed") {
+      if (!baths.length || !beds.length) {
+        return { delta: 0, note: "Bath access needs both rooms on the plan.", passed: true, detail: [], skip: true };
+      }
+      const hallBath = baths.some((bath) =>
+        (adj.get(bath.id) || []).some((id) => {
+          const room = plan.rooms.find((item) => item.id === id);
+          return room && room.type !== "bedroom" && room.type !== "closet";
+        }),
+      );
+      if (hallBath || baths.length >= beds.length) {
+        return { delta: 3, note: "A bath can be reached without crossing someone else's bedroom.", passed: true, detail: [] };
+      }
+      const trapped = beds.some((bed) => {
+        const path = shortestExisting(adj, [bed.id], baths.map((room) => room.id));
+        if (!path) return true;
+        return path.slice(1, -1).some((id) => beds.some((other) => other.id === id && other.id !== bed.id));
+      });
+      if (trapped) {
+        return { delta: -7, note: "The only bath is reached through a bedroom. Guests and housemates will cross a private room.", passed: false, detail: [] };
+      }
+      return { delta: 2, note: "Baths can be reached without a path through another bedroom.", passed: true, detail: [] };
+    }
+    if (id === "kitchenWidth") {
+      if (!kitchens.length) {
+        return { delta: 0, note: "No kitchen width to measure.", passed: true, detail: [], skip: true };
+      }
+      const tight = kitchens.find((kitchen) => roomMinFt(kitchen) < 7);
+      if (tight) {
+        return { delta: -6, note: `${plainName(tight.name)} is under seven feet wide. Two people will have trouble passing while someone cooks.`, passed: false, detail: [] };
+      }
+      return { delta: 3, note: "The kitchen is wide enough for two people to pass.", passed: true, detail: [] };
+    }
+    if (id === "greatRoomWidth") {
+      if (!livings.length) {
+        return { delta: 0, note: "No living room width to measure.", passed: true, detail: [], skip: true };
+      }
+      const tight = livings.find((room) => roomMinFt(room) < 16);
+      if (tight) {
+        return { delta: -6, note: `${plainName(tight.name)} is too narrow for two sofas and a path between them.`, passed: false, detail: [] };
+      }
+      return { delta: 3, note: "The living room can take two sofas with a path between.", passed: true, detail: [] };
+    }
+    if (id === "terraceThroughPrimary") {
+      if (!terraces.length) {
+        return { delta: 0, note: "No terrace is marked.", passed: true, detail: [], skip: true };
+      }
+      const socialIds = new Set([...livings, ...dinings, ...entries, ...halls].map((room) => room.id));
+      const blocked = terraces.filter((terrace) => {
+        const reach = adj.get(terrace.id) || [];
+        const viaSocial = reach.some((id) => socialIds.has(id));
+        const viaPrimary =
+          primary &&
+          (reach.includes(primary.id) ||
+            baths.some((bath) => reach.includes(bath.id) && adjacent(adj, primary.id, bath.id)));
+        return !viaSocial && viaPrimary;
+      });
+      if (blocked.length) {
+        return { delta: -12, note: "The terrace is only reached through the main bedroom. Outdoor space becomes private by force.", passed: false, detail: [] };
+      }
+      return { delta: 3, note: "Outdoor space can be reached without crossing the main bedroom.", passed: true, detail: [] };
+    }
+    if (id === "outdoorTiny") {
+      if (!terraces.length && !ticks.outdoor) {
+        return { delta: 0, note: "No outdoor space is marked.", passed: true, detail: [], skip: true };
+      }
+      const tiny = terraces.find((terrace) => (Number(terrace.sf) || 0) < 25 || roomMinFt(terrace) < 3);
+      if (tiny) {
+        return { delta: -5, note: `${plainName(tiny.name)} is too small to use as a room outdoors.`, passed: false, detail: [] };
+      }
+      if (terraces.length || ticks.outdoor) {
+        return { delta: 2, note: "The outdoor space is large enough to stand in.", passed: true, detail: [] };
+      }
+      return { delta: 0, note: "No outdoor space is marked.", passed: true, detail: [], skip: true };
+    }
+    if (id === "lowFloorStreet") {
+      if (!ticks.lowFloorStreet) {
+        return { delta: 0, note: "Low floor on a busy street is not marked.", passed: true, detail: [], skip: true };
+      }
+      return {
+        delta: -2,
+        note: "Low floor on a busy street is marked. Worth confirming noise at the hours you would be home.",
+        passed: false,
+        detail: [],
+        caution: true,
+      };
+    }
+    if (id === "mechanicalNear") {
+      const fromPlan = beds.find((bed) => mechanicals.some((room) => facingWall(bed, room)));
+      if (!ticks.mechanicalNear && !fromPlan) {
+        return { delta: 0, note: "No bedroom is marked near a boiler, garage, or roof unit.", passed: true, detail: [], skip: true };
+      }
+      return {
+        delta: -6,
+        note: "A bedroom sits near a boiler, garage, or roof unit. Worth confirming sound with an inspector.",
+        passed: false,
+        detail: [],
+        caution: true,
+      };
+    }
+    if (id === "noParking") {
+      if (!ticks.noParking) {
+        return { delta: 0, note: "Parking is not marked.", passed: true, detail: [], skip: true };
+      }
+      return {
+        delta: -4,
+        note: "Parking looks hard or costly. Worth confirming the actual arrangement.",
+        passed: false,
+        detail: [],
+        caution: true,
+      };
+    }
+    if (id === "waterStains") {
+      if (!ticks.waterStains) {
+        return { delta: 0, note: "Stains or fresh paint patches are not marked.", passed: true, detail: [], skip: true };
+      }
+      return {
+        delta: -8,
+        note: "Stains or fresh paint patches are marked. Worth confirming with a licensed home inspector.",
+        passed: false,
+        detail: [],
+        caution: true,
+      };
+    }
+    if (id === "noPackage") {
+      if (!ticks.noPackage) {
+        return { delta: 0, note: "Package handling is not marked.", passed: true, detail: [], skip: true };
+      }
+      return {
+        delta: -2,
+        note: "No marked place for packages. Worth confirming how deliveries are handled.",
+        passed: false,
+        detail: [],
+        caution: true,
+      };
+    }
+    if (id === "trashAwkward") {
+      if (!ticks.trashAwkward) {
+        return { delta: 0, note: "Trash access is not marked.", passed: true, detail: [], skip: true };
+      }
+      return {
+        delta: -2,
+        note: "Trash and recycling look awkward to reach. Worth confirming the path.",
+        passed: false,
+        detail: [],
+        caution: true,
+      };
+    }
+    if (id === "noBulkStorage") {
+      if (!ticks.noBulkStorage) {
+        return { delta: 0, note: "Bulk storage is not marked.", passed: true, detail: [], skip: true };
+      }
+      return {
+        delta: -4,
+        note: "No marked place for bikes, luggage, or seasonal items. Worth confirming building storage.",
+        passed: false,
+        detail: [],
+        caution: true,
+      };
+    }
     return { delta: 0, note: "", passed: true, detail: [], skip: true };
   };
 
@@ -789,13 +1197,16 @@ export function scoreLivability(plan, profile, horizonId, diligence, extras = {}
     const row = cfg.checks?.[meta.id] || { on: false, strictness: "standard" };
     if (!row.on) continue;
     const result = evalCheck(meta.id);
+    const severity = meta.severity || row.severity || "tax";
     if (result.skip && result.delta === 0) {
       breakdown.push({
         id: meta.id,
         group: meta.group,
         label: meta.label,
         on: true,
-        strictness: row.strictness,
+        severity,
+        severityLabel: severityLabel(severity),
+        strictness: row.strictness || severity,
         delta: 0,
         note: result.note,
         passed: true,
@@ -804,7 +1215,7 @@ export function scoreLivability(plan, profile, horizonId, diligence, extras = {}
       });
       continue;
     }
-    const factor = strictnessFactor(row.strictness);
+    const factor = severityFactor(severity);
     const delta = result.delta * (result.delta < 0 ? factor : 1);
     dimensions[meta.dim] = (dimensions[meta.dim] || 80) + delta;
     used[meta.dim] = (used[meta.dim] || 0) + 1;
@@ -813,7 +1224,9 @@ export function scoreLivability(plan, profile, horizonId, diligence, extras = {}
       group: meta.group,
       label: meta.label,
       on: true,
-      strictness: row.strictness,
+      severity,
+      severityLabel: severityLabel(severity),
+      strictness: row.strictness || severity,
       delta: Math.round(delta),
       note: result.note,
       passed: result.passed,
