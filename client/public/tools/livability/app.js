@@ -257,12 +257,12 @@ function materialsFields() {
       </select>
     </label>
     <div class="mat-ticks">
-      <label><input type="checkbox" data-tick="floorGlossWet" ${ticks.floorGlossWet ? "checked" : ""}><span>High-gloss floors in a wet area, entry, or stair. They can be slippery when wet. Ask an inspector how they feel underfoot.</span></label>
+      <label><input type="checkbox" data-tick="floorGlossWet" ${ticks.floorGlossWet ? "checked" : ""}><span>High-gloss floors in a wet area, entry, or stair. Ask an inspector how they feel underfoot when wet.</span></label>
       <label><input type="checkbox" data-tick="tileBath" ${ticks.tileBath ? "checked" : ""}><span>Bath tile without much texture. A bath mat helps. Have an inspector speak to the finish.</span></label>
-      <label><input type="checkbox" data-tick="marbleKitchen" ${ticks.marbleKitchen ? "checked" : ""}><span>Marble in the kitchen. It can etch and stain. Ask how it has been cared for.</span></label>
+      <label><input type="checkbox" data-tick="marbleKitchen" ${ticks.marbleKitchen ? "checked" : ""}><span>Marble in the kitchen. Ask how it has been cared for.</span></label>
       <label><input type="checkbox" data-tick="laminateCooktop" ${ticks.laminateCooktop ? "checked" : ""}><span>Laminate near the cooktop. Confirm the clearance. An inspector can look at heat marks.</span></label>
-      <label><input type="checkbox" data-tick="windowAc" ${ticks.windowAc ? "checked" : ""}><span>Every room has its own AC unit. That usually means no central air.</span></label>
-      <label><input type="checkbox" data-tick="noDucts" ${ticks.noDucts ? "checked" : ""}><span>No ducts visible. Cooling may be room by room.</span></label>
+      <label><input type="checkbox" data-tick="windowAc" ${ticks.windowAc ? "checked" : ""}><span>Every room has its own AC unit. Worth confirming whether there is central air.</span></label>
+      <label><input type="checkbox" data-tick="noDucts" ${ticks.noDucts ? "checked" : ""}><span>No ducts visible. Worth confirming how each room is cooled.</span></label>
       <label><input type="checkbox" data-tick="laundryInUnit" ${ticks.laundryInUnit ? "checked" : ""}><span>Laundry in the home.</span></label>
       <label><input type="checkbox" data-tick="elevator" ${ticks.elevator ? "checked" : ""}><span>Elevator, or a step-free path.</span></label>
       <label><input type="checkbox" data-tick="outdoor" ${ticks.outdoor ? "checked" : ""}><span>Outdoor space on the listing.</span></label>

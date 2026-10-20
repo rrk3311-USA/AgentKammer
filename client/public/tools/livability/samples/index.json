@@ -1,5 +1,5 @@
 {
-  "note": "Synthetic or public-plan approximations for the CV harness. Real accuracy testing needs about 20 listing plans and a vision key.",
+  "note": "Synthetic or public-plan approximations for the plan-reader harness. Connections come from door marks.",
   "samples": [
     "line-two-bed",
     "studio-bath",

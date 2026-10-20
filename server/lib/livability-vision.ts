@@ -162,7 +162,7 @@ async function boostWithGemini(overview: string, tiles: { dataUrl: string }[]) {
   );
   if (!res.ok) {
     const err = await res.text();
-    throw new Error(err.slice(0, 180) || "Gemini boost failed.");
+    throw new Error("Room names could not be polished from the drawing.");
   }
   const body = (await res.json()) as {
     candidates?: Array<{ content?: { parts?: Array<{ text?: string }> } }>;
@@ -202,7 +202,7 @@ export async function boostFloorPlanLabels(input: {
       available: true,
       boost: true,
       labels: [],
-      error: "Boost images are too large. The on-device reading still stands.",
+      error: "Those images are too large. The first reading of the plan still stands.",
       engine: status.provider,
     };
   }
@@ -217,7 +217,7 @@ export async function boostFloorPlanLabels(input: {
       available: true,
       boost: true,
       labels,
-      error: labels.length ? null : "The boost did not return labels. The on-device reading still stands.",
+      error: labels.length ? null : "Room names could not be polished. The first reading of the plan still stands.",
       engine: status.provider,
     };
   } catch (error) {
@@ -226,7 +226,7 @@ export async function boostFloorPlanLabels(input: {
       available: true,
       boost: true,
       labels: [],
-      error: error instanceof Error ? error.message : "Vision boost failed.",
+      error: "Room names could not be polished from the drawing.",
       engine: status.provider,
     };
   }
@@ -362,7 +362,7 @@ export async function suggestMaterialsFromPhotos(input: { photos?: Array<{ dataU
       available: true,
       boost: true,
       suggestions: [],
-      error: error instanceof Error ? error.message : "Photo reading failed.",
+      error: "Tick what you see. Nothing is marked until you confirm it.",
     };
   }
 }

@@ -36,7 +36,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       labels: [],
       suggestions: [],
       doors: [],
-      error: error instanceof Error ? error.message : "Vision boost failed.",
+      error: "Room names could not be polished from the drawing.",
     });
   }
 }

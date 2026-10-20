@@ -23,11 +23,11 @@ img{max-width:220px;border:1px solid rgba(229,228,226,.16)}
 </head>
 <body>
 <p class="kicker">Dev harness</p>
-<h1>Plan reader: CV only vs CV plus AI</h1>
-<p class="fine">Synthetic samples. Real accuracy testing needs about 20 listing plans and a vision key. Connections are never taken from a model.</p>
+<h1>Plan reader: first pass versus polished names</h1>
+<p class="fine">Synthetic samples for internal checks. Connections come from door marks, not from a guess.</p>
 <div class="row">
-  <button type="button" id="run-cv">Run CV only</button>
-  <button type="button" id="run-both">Run CV, then boost if a key is set</button>
+  <button type="button" id="run-cv">Run first pass</button>
+  <button type="button" id="run-both">Run first pass, then polish names if available</button>
 </div>
 <p id="status" class="fine">Idle.</p>
 <table>
@@ -150,7 +150,7 @@ async function run(withBoost) {
     document.getElementById("previews").appendChild(prev);
     log(`${id}: CV doors ${doorCv.hits}/${doorCv.labeled} conn ${connCv.hits}/${connCv.labeled} engine ${cv.engine}`);
   }
-  status.textContent = "Done. CV-only always runs. CV plus AI only fills the boost columns when a key is set.";
+  status.textContent = "Done. The first pass always runs. Name polish fills the extra columns only when that path is available.";
 }
 
 document.getElementById("run-cv").addEventListener("click", () => run(false));

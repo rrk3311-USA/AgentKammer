@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { CONSIDERATIONS, DILIGENCE_CHECKS, LIVABILITY_AID_LINE, SEVERITY_LABELS, applyDiligencePreset, cannotFetchPlan, defaultDiligence, defaultGuideHello, emptyBuilding, emptyProfile, furnitureFor, heatMap, idsForPreset, labelReserve, makeRiversidePlan, makeStahlPlan, makeSuttonPlan, makeWillowHousePlan, matchKnownSample, scoreLivability, typicalDay } from "../client/public/tools/livability/engine.js";
 import { buildPrintReport, flaggedBySeverity, shortNote } from "../client/public/tools/livability/print-report.js";
@@ -285,10 +286,43 @@ describe("livability desk scoring", () => {
   it("keeps customer copy short and free of internals", () => {
     const hello = defaultGuideHello();
     const miss = cannotFetchPlan("15 Central Park West");
-    const blob = `${hello} ${miss.reason}`;
+    const plan = makeWillowHousePlan();
+    const result = scoreLivability(
+      plan,
+      { ...emptyProfile(), householdSize: 4, kids: true, cooks: true, wfh: true },
+      "10",
+      applyDiligencePreset("strict"),
+      {
+        building: {
+          ...emptyBuilding(),
+          yearBuilt: "1924",
+          ticks: { ...emptyBuilding().ticks, floorGlossWet: true, windowAc: true, waterStains: true },
+        },
+      },
+    );
+    const page = readFileSync(new URL("../client/public/tools/livability/index.html", import.meta.url), "utf8");
+    const harness = readFileSync(new URL("../client/public/tools/livability/harness.html", import.meta.url), "utf8");
+    const samples = readFileSync(new URL("../client/public/tools/livability/samples/index.json", import.meta.url), "utf8");
+    const app = readFileSync(new URL("../client/public/tools/livability/app.js", import.meta.url), "utf8");
+    const blob = [
+      hello,
+      miss.reason,
+      LIVABILITY_AID_LINE,
+      JSON.stringify(CONSIDERATIONS),
+      JSON.stringify(DILIGENCE_CHECKS),
+      result.notes.join(" "),
+      result.breakdown.map((row) => `${row.label} ${row.note}`).join(" "),
+      page,
+      harness,
+      samples,
+      app,
+    ].join("\n");
     expect(blob).toMatch(/cannot read/i);
     expect(blob).toMatch(/Find the plan online, download it, and drop it here/);
-    expect(blob).not.toMatch(/scrape|vision key|Grok|Gemini|device|model/i);
+    expect(blob).toMatch(/planning aid, not an inspection/i);
+    expect(blob).toMatch(/Not an appraisal, an inspection, or brokerage advice/);
+    expect(blob).not.toMatch(/scrape|vision key|Grok|Gemini|on-device|etch and stain|age in place|family-friendly|youtuber/i);
+    expect(blob).not.toMatch(/\bmodels?\b/i);
     expect(blob).not.toContain("—");
   });
 

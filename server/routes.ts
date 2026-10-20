@@ -822,7 +822,7 @@ export async function registerRoutes(app: Express): Promise<void> {
         boost: true,
         labels: [],
         doors: [],
-        error: error instanceof Error ? error.message : "Vision boost failed.",
+        error: "Room names could not be polished from the drawing.",
       });
     }
   });

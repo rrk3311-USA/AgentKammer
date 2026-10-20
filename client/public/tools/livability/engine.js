@@ -687,9 +687,9 @@ export function scoreLivability(plan, profile, horizonId, diligence, extras = {}
       const notes = [];
       if (!bathNear) {
         delta -= 8;
-        notes.push("A bath should sit next to the main bedroom if this is meant to age in place.");
+        notes.push("A bath next to the main bedroom helps a long stay.");
       } else {
-        notes.push("A bath near the main bedroom helps this plan age in place.");
+        notes.push("A bath near the main bedroom helps a long stay.");
       }
       if (morning && morning.length <= 4) delta += 2;
       if (Number(building.walkupFloor) >= 2 && !ticks.elevator) {
@@ -735,11 +735,11 @@ export function scoreLivability(plan, profile, horizonId, diligence, extras = {}
       let delta = 0;
       if (ticks.floorGlossWet) {
         delta -= 6;
-        notes.push("High-gloss floors in a wet area, entry, or stair can be slippery when they are wet. Ask an inspector how they feel underfoot.");
+        notes.push("High-gloss floors in a wet area, entry, or stair are marked. Ask an inspector how they feel underfoot when wet.");
       }
       if (ticks.tileBath) {
         delta -= 4;
-        notes.push("Bath tile without much texture can be slick. A bath mat helps, and an inspector can speak to the finish.");
+        notes.push("Bath tile without much texture is marked. A bath mat helps, and an inspector can speak to the finish.");
       }
       return { delta, note: notes[0], passed: false, detail: notes, caution: true };
     }
@@ -751,11 +751,11 @@ export function scoreLivability(plan, profile, horizonId, diligence, extras = {}
       let delta = 0;
       if (ticks.marbleKitchen) {
         delta -= 5;
-        notes.push("Marble in a kitchen can etch and stain. Many households love it anyway. Ask how it has been cared for, and let an inspector weigh in.");
+        notes.push("Marble in the kitchen is marked. Ask how it has been cared for, and let an inspector weigh in.");
       }
       if (ticks.laminateCooktop) {
         delta -= 4;
-        notes.push("Laminate next to a cooktop can scorch. Confirm the clearance, then have an inspector look at it.");
+        notes.push("Laminate near the cooktop is marked. Confirm the clearance, then have an inspector look at it.");
       }
       return { delta, note: notes[0], passed: false, detail: notes, caution: true };
     }
@@ -763,7 +763,7 @@ export function scoreLivability(plan, profile, horizonId, diligence, extras = {}
       if (ticks.windowAc || ticks.noDucts) {
         return {
           delta: -5,
-          note: "Every room has its own AC unit. That usually means no central air. Confirm coverage on a hot day, and ask an inspector about the electrical load.",
+          note: "Every room has its own AC unit. Worth confirming whether there is central air, coverage on a hot day, and the electrical load with an inspector.",
           passed: false,
           detail: [],
           caution: true,
@@ -929,7 +929,7 @@ export function scoreLivability(plan, profile, horizonId, diligence, extras = {}
         return !wins.length && !exterior;
       });
       if (dark) {
-        return { delta: -16, note: `${plainName(dark.name)} has no window and no exterior wall. A bedroom needs daylight.`, passed: false, detail: [] };
+        return { delta: -16, note: `${plainName(dark.name)} has no window and no exterior wall. Worth confirming daylight.`, passed: false, detail: [] };
       }
       return { delta: 4, note: "Each bedroom has a path to daylight, or an exterior wall to confirm.", passed: true, detail: [] };
     }
@@ -1056,7 +1056,7 @@ export function scoreLivability(plan, profile, horizonId, diligence, extras = {}
       }
       const tight = livings.find((room) => roomMinFt(room) < 16);
       if (tight) {
-        return { delta: -6, note: `${plainName(tight.name)} is too narrow for two sofas and a path between them.`, passed: false, detail: [] };
+        return { delta: -6, note: `${plainName(tight.name)} is narrow for two sofas and a path between them.`, passed: false, detail: [] };
       }
       return { delta: 3, note: "The living room can take two sofas with a path between.", passed: true, detail: [] };
     }
@@ -1085,7 +1085,7 @@ export function scoreLivability(plan, profile, horizonId, diligence, extras = {}
       }
       const tiny = terraces.find((terrace) => (Number(terrace.sf) || 0) < 25 || roomMinFt(terrace) < 3);
       if (tiny) {
-        return { delta: -5, note: `${plainName(tiny.name)} is too small to use as a room outdoors.`, passed: false, detail: [] };
+        return { delta: -5, note: `${plainName(tiny.name)} is small for sitting as a room outdoors.`, passed: false, detail: [] };
       }
       if (terraces.length || ticks.outdoor) {
         return { delta: 2, note: "The outdoor space is large enough to stand in.", passed: true, detail: [] };
