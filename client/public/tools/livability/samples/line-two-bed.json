@@ -1,0 +1,121 @@
+{
+  "id": "line-two-bed",
+  "title": "Synthetic line two-bed",
+  "pxPerFt": 8,
+  "width": 520,
+  "height": 460,
+  "rooms": [
+    {
+      "id": "living",
+      "name": "Living",
+      "type": "living",
+      "sf": 300,
+      "x": 48,
+      "y": 40,
+      "w": 240,
+      "h": 160
+    },
+    {
+      "id": "kitchen",
+      "name": "Kitchen",
+      "type": "kitchen",
+      "sf": 200,
+      "x": 288,
+      "y": 40,
+      "w": 160,
+      "h": 160
+    },
+    {
+      "id": "hall",
+      "name": "Hall",
+      "type": "hallway",
+      "sf": 120,
+      "x": 48,
+      "y": 200,
+      "w": 400,
+      "h": 48
+    },
+    {
+      "id": "beda",
+      "name": "Bedroom A",
+      "type": "bedroom",
+      "sf": 200,
+      "x": 48,
+      "y": 248,
+      "w": 160,
+      "h": 160
+    },
+    {
+      "id": "bath",
+      "name": "Bath",
+      "type": "bath",
+      "sf": 80,
+      "x": 208,
+      "y": 248,
+      "w": 80,
+      "h": 160
+    },
+    {
+      "id": "bedb",
+      "name": "Bedroom B",
+      "type": "bedroom",
+      "sf": 200,
+      "x": 288,
+      "y": 248,
+      "w": 160,
+      "h": 160
+    }
+  ],
+  "doorDots": [
+    {
+      "x": 288,
+      "y": 120
+    },
+    {
+      "x": 168,
+      "y": 200
+    },
+    {
+      "x": 368,
+      "y": 200
+    },
+    {
+      "x": 128,
+      "y": 248
+    },
+    {
+      "x": 248,
+      "y": 248
+    },
+    {
+      "x": 368,
+      "y": 248
+    }
+  ],
+  "doors": [
+    {
+      "a": "living",
+      "b": "kitchen"
+    },
+    {
+      "a": "living",
+      "b": "hall"
+    },
+    {
+      "a": "kitchen",
+      "b": "hall"
+    },
+    {
+      "a": "hall",
+      "b": "beda"
+    },
+    {
+      "a": "hall",
+      "b": "bath"
+    },
+    {
+      "a": "hall",
+      "b": "bedb"
+    }
+  ]
+}

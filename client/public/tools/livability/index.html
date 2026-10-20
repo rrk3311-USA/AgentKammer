@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Livability | Agent Kammer</title>
+<meta name="description" content="A due-diligence simulator. Enter an address, walk the floor, read a heat map and a Livability Score.">
+<meta name="theme-color" content="#0D182B">
+<link rel="icon" href="/tools/livability/icon-16.png" type="image/png" sizes="16x16">
+<link rel="icon" href="/tools/livability/icon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/tools/livability/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;450;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/chrome/compact-header.css">
+<script src="/chrome/compact-header.js" defer></script>
+<style>
+:root{
+  --stone:#2A3447;--deep:#161C28;--midnight:#0D182B;--ivory:#F5F2EB;--limestone:#D8D1C7;
+  --platinum:#E5E4E2;--brass:#B08D57;--mist:#c9c2b3;
+  --serif:"Cormorant Garamond",Georgia,serif;--sans:Montserrat,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --header:52px;--status:36px;--bar:60px;
+  --grid:linear-gradient(rgba(229,228,226,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(229,228,226,.04) 1px,transparent 1px);
+}
+.ak-compact-header__brand{display:flex;align-items:center;gap:0;min-width:0}
+.ak-compact-header__mark{padding:4px 0}
+.ak-compact-header__mark img{height:40px!important;width:auto!important;border-radius:0}
+.ak-compact-header__tool{
+  display:flex;align-items:center;gap:8px;min-width:0;
+  margin-left:10px;padding-left:12px;
+  border-left:1px solid rgba(229,228,226,.22);
+  color:inherit;text-decoration:none
+}
+.ak-compact-header__tile{width:28px!important;height:28px!important;border-radius:7px;flex:0 0 auto;display:block;overflow:hidden;line-height:0}
+.ak-compact-header__tile img{width:100%!important;height:100%!important;border-radius:0}
+.ak-compact-header__word{font:500 1.1rem/1 var(--serif);letter-spacing:.16em;text-transform:uppercase;color:var(--platinum);white-space:nowrap}
+*{box-sizing:border-box}
+html{overflow-x:clip;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--midnight);color:var(--ivory);font:400 14px/1.5 var(--sans);max-width:100%;overflow-x:clip}
+img,svg{display:block;max-width:100%}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:1px solid var(--platinum);outline-offset:2px}
+.skip{position:absolute;left:-999px;top:10px;z-index:80;background:var(--ivory);color:var(--deep);padding:8px 12px}
+.skip:focus{left:12px}
+.mono{font-family:var(--mono);letter-spacing:.02em}
+.kicker{margin:0;font:500 12px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--limestone)}
+.caps{margin:0;font:500 1.45rem/1.1 var(--serif);letter-spacing:.12em;text-transform:uppercase}
+.fine{font-size:13px;line-height:1.5;color:rgba(245,242,235,.68)}
+.speech{margin:0;font:italic 400 1.2rem/1.45 var(--serif);color:#f3eee4}
+.speech.doing{color:var(--limestone)}
+
+.status{
+  position:sticky;top:var(--header);z-index:45;
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;
+  min-height:var(--status);
+  padding:6px 18px;
+  background:#101826;
+  border-bottom:1px solid rgba(229,228,226,.12);
+  font:500 12px/1.2 var(--mono);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:rgba(229,228,226,.78);
+  max-width:100%;overflow-x:clip;
+}
+.status-mark{width:auto;height:28px}
+.status b{color:var(--platinum);font-weight:500}
+.status i{color:rgba(229,228,226,.28);font-style:normal}
+
+.os{
+  display:grid;gap:12px;
+  padding:14px 14px calc(var(--bar) + 36px);
+  background-color:var(--midnight);
+  background-image:var(--grid);
+  background-size:32px 32px;
+  min-height:calc(100svh - var(--header) - var(--status));
+  max-width:100%;overflow-x:clip;
+}
+@media(min-width:980px){
+  .os{grid-template-columns:minmax(280px,320px) minmax(0,1.5fr) minmax(260px,320px);grid-template-rows:auto 1fr;align-items:start}
+  .pane-guide{grid-column:1;grid-row:1}
+  .pane-dock{grid-column:1;grid-row:2;align-self:stretch}
+  .pane-entry{grid-column:2;grid-row:1 / span 2}
+  .pane-side{grid-column:3;grid-row:1 / span 2}
+}
+
+.pane{
+  display:flex;flex-direction:column;min-width:0;max-width:100%;overflow:hidden;
+  background:rgba(22,28,40,.94);
+  border:1px solid rgba(229,228,226,.16);
+  transition:border-color .2s ease,box-shadow .2s ease;
+}
+.pane.on{border-color:rgba(229,228,226,.42);box-shadow:inset 0 0 0 1px rgba(229,228,226,.08)}
+.ptitle{
+  display:flex;align-items:center;gap:8px;
+  min-height:36px;padding:0 14px;
+  border-bottom:1px solid rgba(229,228,226,.1);
+  font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--platinum)
+}
+.ptitle em{flex:1;font-style:normal;color:rgba(229,228,226,.45)}
+.pbody{padding:18px;overflow:auto}
+.guide-row{display:grid;gap:16px;align-items:start}
+@media(min-width:420px){.pane-guide .guide-row{grid-template-columns:56px 1fr}}
+.guide-lockup{display:flex;flex-direction:column;align-items:center;gap:8px;width:48px}
+.guide-glyph{width:48px;height:48px;border-radius:12px;overflow:hidden;flex:0 0 auto;display:block;line-height:0}
+.guide-glyph img{width:100%;height:100%;display:block;max-width:none}
+.guide-glyph.is-live{animation:guide-shimmer 2.2s ease-in-out infinite}
+.cinema-hud .guide-glyph{width:24px;height:24px;border-radius:6px}
+@keyframes guide-shimmer{
+  0%,100%{opacity:.9;filter:drop-shadow(0 0 0 transparent)}
+  50%{opacity:1;filter:drop-shadow(0 0 10px rgba(226,180,112,.45))}
+}
+@media (prefers-reduced-motion: reduce){
+  .guide-glyph.is-live{animation:none;opacity:1;filter:none}
+}
+
+.field{display:block;margin:0 0 14px}
+.field span{display:block;margin-bottom:6px;font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--limestone)}
+.field input,.field select{width:100%;border:1px solid rgba(216,209,199,.24);background:#0f1522;padding:11px 12px}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:1px solid var(--platinum);background:var(--ivory);color:var(--deep);padding:10px 14px;font:600 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .15s,color .15s;white-space:nowrap}
+.btn:disabled{opacity:.45;cursor:wait}
+.btn:hover{background:var(--platinum)}
+.btn.ghost{background:transparent;color:var(--ivory);border-color:rgba(229,228,226,.28)}
+.btn.ghost:hover{background:rgba(245,242,235,.06)}
+.chip{border:1px solid rgba(229,228,226,.2);background:transparent;color:var(--ivory);padding:10px 12px;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;overflow:hidden}
+.chip[aria-pressed=true]{border-color:var(--platinum);background:rgba(245,242,235,.08)}
+.hint{margin:10px 0 0;font-size:13px;color:rgba(245,242,235,.62)}
+.dropzone{
+  position:relative;display:block;margin:14px 0 0;padding:18px 16px;cursor:pointer;
+  border:1px dashed rgba(229,228,226,.32);background:#0f1522;text-align:center
+}
+.dropzone.is-over{border-color:var(--platinum);background:rgba(245,242,235,.06)}
+.dropzone input{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.dropzone .caps{margin:8px 0 4px;font-size:1.05rem;letter-spacing:.1em}
+.helper-links{display:none;margin-top:12px;padding:12px;border:1px solid rgba(229,228,226,.14);background:#0f1522}
+.helper-links.show{display:block}
+.helper-links .row{display:grid;grid-template-columns:1fr;gap:8px}
+.helper-links a.btn{display:block;text-align:center;white-space:normal;line-height:1.35}
+.scale-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:640px){.scale-row{grid-template-columns:1fr}}
+.boost-row{display:none;align-items:center;gap:8px;margin:12px 0 0;font:500 12px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--limestone)}
+.boost-row.show{display:flex}
+.boost-row input{accent-color:var(--platinum)}
+.door-confirm{display:none;margin-top:16px;padding:14px;border:1px solid rgba(229,228,226,.18);background:#0c121c}
+.door-confirm.show{display:block}
+.door-confirm .row{display:grid;grid-template-columns:1fr;gap:8px}
+@media(min-width:1100px){.door-confirm .row{grid-template-columns:1fr 1fr}}
+.door-confirm .btn{width:100%;text-align:center}
+.confirm-stage{position:relative;margin:12px 0;background:#0b1018;border:1px solid rgba(245,242,235,.1);min-height:220px;overflow:auto}
+.confirm-board{position:relative;line-height:0}
+.confirm-board img{width:100%;height:auto;display:block}
+.confirm-svg{position:absolute;inset:0;width:100%;height:100%}
+.confirm-room{fill:rgba(176,141,87,.08);stroke:rgba(229,228,226,.35);stroke-width:1}
+.door-dot{fill:#B08D57;stroke:#F5F2EB;stroke-width:1.4;cursor:grab}
+.door-dot.is-on{fill:#E2B470;stroke:#fff}
+.window-dot{fill:#8aa0b8;stroke:#F5F2EB;stroke-width:1.3;cursor:grab}
+.window-dot.is-on{fill:#c5d4e2;stroke:#fff}
+.window-mark{fill:#8aa0b8;stroke:#F5F2EB;stroke-width:.5}
+.confirm-hint{margin:0 0 8px}
+.confirm-mode{display:flex;gap:6px;margin:0 0 10px}
+.confirm-mode button{flex:1}
+
+.artifact{
+  position:relative;margin-top:14px;
+  border:1px solid rgba(245,242,235,.14);
+  background:#0b1018;
+  overflow:hidden;
+}
+.plan-wrap{
+  overflow:hidden;max-width:100%;
+  display:flex;align-items:center;justify-content:center;
+  min-height:220px;
+  background:#0b1018
+}
+.plan-wrap:has(.plan-svg){height:min(460px,50vh)}
+.artifact .plan-wrap{border:0}
+.artifact-bar{
+  position:relative;z-index:9;
+  display:grid;grid-template-columns:auto minmax(0,1.4fr) minmax(0,.9fr);
+  gap:8px;align-items:stretch;
+  padding:8px;
+  min-height:52px;
+  background:linear-gradient(180deg,rgba(13,24,43,.72),rgba(13,24,43,.96));
+  border-top:1px solid rgba(229,228,226,.16);
+}
+.furnish-seg{display:flex;border:1px solid rgba(229,228,226,.2);align-self:stretch}
+.furnish-seg button{
+  border:0;background:transparent;color:var(--mist);
+  padding:0 10px;font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer
+}
+.furnish-seg button[aria-pressed=true]{background:rgba(229,228,226,.1);color:var(--ivory)}
+.run-glow{
+  border:1px solid var(--platinum);
+  background:linear-gradient(180deg,#f7f4ee,#d8d1c7);
+  color:var(--midnight);
+  font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;
+  box-shadow:0 0 16px rgba(226,180,112,.35),0 0 2px rgba(229,228,226,.8);
+}
+.run-glow:hover{box-shadow:0 0 22px rgba(226,180,112,.5)}
+.run-glow:disabled{opacity:.45;cursor:wait;box-shadow:none}
+.modify-btn{
+  border:1px solid rgba(138,160,184,.55);background:transparent;color:var(--ivory);
+  font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;
+  box-shadow:inset 0 0 12px rgba(74,110,138,.18)
+}
+.modify-btn[aria-expanded=true]{border-color:#8aa0b8;box-shadow:0 0 14px rgba(74,110,138,.35)}
+.artifact-quiet{display:flex;flex-wrap:wrap;gap:6px;grid-column:1 / -1}
+.artifact-quiet .quiet-btn{
+  border:0;background:transparent;color:rgba(245,242,235,.48);
+  padding:4px 6px;font:500 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer
+}
+.artifact-quiet .quiet-btn:hover,.artifact-quiet .quiet-btn[aria-pressed=true]{color:var(--ivory)}
+.scan-ticker{
+  position:absolute;left:10px;right:10px;bottom:58px;z-index:7;
+  padding:6px 10px;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  color:var(--platinum);background:rgba(13,24,43,.82);border:1px solid rgba(138,160,184,.35);
+  box-shadow:0 0 16px rgba(74,110,138,.25)
+}
+.modify-drawer{
+  position:absolute;left:0;right:0;bottom:92px;z-index:8;
+  max-height:min(52%,380px);overflow:auto;
+  background:rgba(16,22,34,.97);
+  border-top:1px solid rgba(138,160,184,.35);
+  box-shadow:0 -12px 40px rgba(10,16,28,.45),0 0 24px rgba(74,110,138,.18);
+  transform-origin:bottom;
+}
+.modify-drawer[hidden]{display:none}
+.diligence{padding:12px 14px 16px}
+.diligence-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin-bottom:10px}
+.diligence-count{margin-left:auto;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--brass)}
+.preset-row{display:flex;flex-wrap:wrap;gap:6px}
+.acc{border:1px solid rgba(229,228,226,.12);background:#0f1522;margin:0 0 8px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.acc.open{
+  border-color:rgba(138,160,184,.5);
+  box-shadow:0 0 18px rgba(74,110,138,.22),inset 0 0 0 1px rgba(229,228,226,.06)
+}
+.acc-head{
+  width:100%;display:flex;align-items:center;gap:8px;text-align:left;
+  border:0;background:transparent;color:var(--ivory);padding:11px 12px;cursor:pointer;
+  font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase
+}
+.acc-head em{flex:1;font-style:normal;color:rgba(229,228,226,.42);font-size:10px;letter-spacing:.06em}
+.acc-head .chev{transition:transform .2s ease}
+.acc.open .acc-head .chev{transform:rotate(90deg)}
+.acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease}
+.acc.open .acc-body{grid-template-rows:1fr}
+.acc-inner{overflow:hidden}
+.acc-inner > div{padding:0 12px 12px;display:grid;gap:8px}
+.check{
+  display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;
+  padding:8px;border:1px solid transparent;transition:background .2s,border-color .2s
+}
+.check.scanning{background:rgba(226,180,112,.1);border-color:rgba(226,180,112,.35)}
+.check label{font:500 13px/1.3 var(--sans);color:#e8e2d6}
+.check input{accent-color:#8aa0b8}
+.sev-chip{
+  justify-self:end;white-space:nowrap;
+  border:1px solid rgba(229,228,226,.16);color:var(--mist);
+  padding:3px 7px;font:500 9px var(--mono);letter-spacing:.06em;text-transform:uppercase
+}
+.sev-chip.sev-dealbreaker{border-color:rgba(226,180,112,.55);color:#E2B470}
+.sev-chip.sev-tax{border-color:rgba(229,228,226,.28);color:var(--platinum)}
+.sev-chip.sev-nit{border-color:rgba(229,228,226,.12);color:rgba(229,228,226,.55)}
+.acc.nested{margin:0 0 6px;background:#0c121c}
+.consider-item{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:#d9d3c6;line-height:1.4}
+.consider-item strong{display:block;font:500 13px var(--sans);color:var(--ivory)}
+.consider-links{display:block;margin-top:3px;font-size:12px;color:rgba(245,242,235,.62)}
+.consider-links a{color:var(--platinum)}
+.aid-line{margin:10px 0 0;font-size:12px;color:rgba(245,242,235,.58);line-height:1.45}
+.print-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+#print-report{display:none}
+.pr-page{
+  --pr-navy:#1C2E42;--pr-navy-ink:#14233A;--pr-ink:#1E2632;--pr-ink-2:#4A5262;--pr-ink-3:#6E7482;
+  --pr-brass:#B49B82;--pr-brass-ink:#8A6446;--pr-rule:#C9B8A6;--pr-page:#FDFCF9;--pr-cream:#F2EFE9;--pr-bar:#EDE9E2;
+  --pr-display:"Cormorant Garamond",Garamond,Georgia,serif;
+  --pr-letter:"EB Garamond",Garamond,Georgia,serif;
+  --pr-caps:Montserrat,Arial,sans-serif;
+  --pr-sans:Inter,Montserrat,system-ui,sans-serif;
+  position:relative;width:8.5in;height:11in;overflow:hidden;background:var(--pr-page);color:var(--pr-ink);
+  -webkit-print-color-adjust:exact;print-color-adjust:exact
+}
+.pr-page .room-name.paper{fill:#14233A}
+.pr-page .room-sf.paper{fill:#4A5262}
+.pr-page .label-plate.paper{fill:rgba(253,252,249,.78)}
+.pr-page .door-gap{fill:#FDFCF9}
+.pr-band{
+  position:absolute;left:0;right:0;display:flex;align-items:center;
+  background:linear-gradient(90deg,#22364C 0%,#1B2D41 55%,#172839 100%);color:#F4F1EA
+}
+.pr-band-top{top:0;height:64pt;padding:0 28pt}
+.pr-band-bot{bottom:0;height:46pt;padding:0 28pt}
+.pr-liv{width:36pt;height:36pt;border-radius:8pt;flex:0 0 auto;object-fit:cover}
+.pr-word{margin-left:14pt;font:500 13pt/1 var(--pr-display);letter-spacing:.22em;text-transform:uppercase;color:#F4F1EA}
+.pr-word.sm{margin-left:0;font-size:10pt;letter-spacing:.2em}
+.pr-tags{margin-left:auto;display:flex;gap:22pt;align-items:flex-end}
+.pr-tag{padding:0 0 4pt .28em;border-bottom:.75pt solid #C9B8A6;font:500 6.4pt/1 var(--pr-caps);letter-spacing:.28em;text-transform:uppercase;color:#F4F1EA}
+.pr-brass{position:absolute;left:0;right:0;height:4.4pt;background:linear-gradient(180deg,#A69482 0%,#CDBDAB 22%,#C7B6A4 78%,#A89684 100%)}
+.pr-brass-top{top:64pt}
+.pr-brass-bot{bottom:46pt}
+.pr-body{position:absolute;top:86pt;left:34pt;right:34pt;bottom:78pt}
+.pr-disclaimer{
+  position:absolute;left:34pt;right:34pt;bottom:54pt;
+  font:400 6.4pt/1.4 var(--pr-sans);color:#6E7482;margin:0
+}
+.pr-folio{margin-left:auto;font:500 7pt/1 var(--pr-caps);letter-spacing:.18em;color:#F4F1EA}
+.pr-eyebrow{margin:0;font:500 6.5pt/1 var(--pr-caps);letter-spacing:.34em;text-transform:uppercase;color:var(--pr-navy-ink)}
+.pr-title{margin:10pt 0 0;font:600 26pt/1.05 var(--pr-display);letter-spacing:-.01em;color:var(--pr-navy-ink)}
+.pr-sample{display:inline-block;margin:10pt 0 0;padding:0 0 4pt .2em;border-bottom:.75pt solid var(--pr-brass);font:500 6.4pt/1 var(--pr-caps);letter-spacing:.22em;text-transform:uppercase;color:var(--pr-brass-ink)}
+.pr-meta{margin:10pt 0 0;font:400 10.5pt/1.3 var(--pr-letter);color:var(--pr-ink-2)}
+.pr-score{display:flex;align-items:baseline;gap:12pt;margin:16pt 0 0}
+.pr-score strong{font:600 48pt/1 var(--pr-display);color:var(--pr-navy-ink)}
+.pr-score span{font:500 8pt/1 var(--pr-caps);letter-spacing:.28em;text-transform:uppercase;color:var(--pr-brass-ink)}
+.pr-glance{margin:16pt 0 0}
+.pr-glance-h{height:17.5pt;background:var(--pr-navy);display:flex;align-items:center;padding-left:14pt;font:600 6.2pt/1 var(--pr-caps);letter-spacing:.3em;text-transform:uppercase;color:#F4F1EA}
+.pr-glance-cols{background:var(--pr-cream);display:grid;grid-template-columns:repeat(6,minmax(0,1fr));padding:11pt 0 10pt}
+.pr-glance-cols > div{padding:0 8pt 0 12pt;position:relative}
+.pr-glance-cols > div + div::before{content:"";position:absolute;left:0;top:0;bottom:3pt;width:.6pt;background:#D6CBBE}
+.pr-glance-cols .k{font:600 5.4pt/1 var(--pr-caps);letter-spacing:.18em;text-transform:uppercase;color:var(--pr-brass-ink)}
+.pr-glance-cols .v{margin-top:8pt;font:400 14pt/1 var(--pr-letter);color:var(--pr-navy-ink)}
+.pr-sec{display:flex;align-items:center;gap:12pt;margin:14pt 0 7pt;font:600 6.6pt/1 var(--pr-caps);letter-spacing:.3em;text-transform:uppercase;color:var(--pr-brass-ink)}
+.pr-sec::after{content:"";flex:1;height:.7pt;background:var(--pr-rule)}
+.pr-heat{break-inside:avoid}
+.pr-heat .plan-svg{width:100%;height:auto;max-height:3.55in}
+.pr-block{break-inside:avoid}
+.pr-flag-group,.pr-consider-group{break-inside:avoid;margin:0 0 7pt}
+.pr-flag-group h3,.pr-consider-group h3{margin:0 0 4pt;font:600 6.6pt/1 var(--pr-caps);letter-spacing:.22em;text-transform:uppercase;color:var(--pr-brass-ink)}
+.pr-flag-group ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4pt 12pt}
+.pr-flag-group li{background:var(--pr-cream);padding:4.5pt 7pt}
+.pr-flag-group strong{display:block;font:600 7.5pt/1.2 var(--pr-sans);color:var(--pr-navy-ink)}
+.pr-flag-group span{display:block;margin-top:1.5pt;font:400 7pt/1.25 var(--pr-letter);color:var(--pr-ink-2)}
+.pr-consider{display:grid;grid-template-columns:1fr 1fr;gap:8pt 14pt}
+.pr-check{display:flex;gap:6pt;align-items:flex-start;margin:0 0 5pt}
+.pr-box{flex:0 0 auto;width:7pt;height:7pt;margin-top:2pt;border:.8pt solid #4F5B6D;background:#fff}
+.pr-check b{display:block;font:500 7.6pt/1.25 var(--pr-sans);color:var(--pr-navy-ink)}
+.pr-check i{display:block;margin-top:1pt;font:400 6.8pt/1.3 var(--pr-letter);color:var(--pr-ink-2);font-style:normal}
+.pr-empty{font:italic 400 11pt var(--pr-letter);color:var(--pr-ink-2)}
+.pr-page .walker,.pr-page .trail-soft{display:none!important}
+@media print{
+  *{animation:none!important;transition:none!important}
+  @page{size:Letter;margin:0}
+  html,body{background:#fff!important;color:#14233A!important}
+  body > *:not(#print-report){display:none!important}
+  #print-report{display:block!important;position:static!important;width:auto;height:auto;overflow:visible;left:auto;inset:auto}
+  .pr-page{break-after:page;page-break-after:always}
+  .pr-page:last-of-type{break-after:auto;page-break-after:auto}
+}
+.mat-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.mat-ticks{display:grid;gap:8px}
+.mat-ticks label{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:#d9d3c6;line-height:1.4}
+.tip{
+  display:inline-block;margin-left:6px;width:14px;height:14px;border-radius:50%;
+  border:1px solid rgba(229,228,226,.4);font:500 10px var(--mono);text-align:center;line-height:13px;color:var(--platinum);cursor:help
+}
+.tip[data-tip]:hover::after,.tip[data-tip]:focus::after{
+  content:attr(data-tip);display:block;position:absolute;z-index:9;max-width:260px;
+  margin-top:6px;padding:8px 10px;background:#101826;border:1px solid rgba(229,228,226,.2);
+  color:var(--ivory);font:400 12px/1.4 var(--sans);letter-spacing:0;text-transform:none;white-space:normal
+}
+.suggest{margin:8px 0;padding:8px;border:1px dashed rgba(138,160,184,.35);font-size:12px;color:var(--limestone)}
+.breakdown{display:grid;gap:6px;margin:12px 0 0}
+.break-row{display:grid;grid-template-columns:1fr auto;gap:8px;font-size:12px;color:#d9d3c6}
+.break-row b{font:500 12px var(--mono);color:var(--platinum)}
+.break-row.fail b{color:#E2B470}
+.break-row .why{grid-column:1 / -1;color:rgba(245,242,235,.55);font-size:12px}
+.furn-note{margin:8px 0 0;font-size:12px;color:rgba(245,242,235,.55)}
+.plan-wrap.is-adjust .furn{pointer-events:auto;cursor:grab}
+.plan-wrap.is-adjust .furn.is-on{outline:1px solid var(--platinum)}
+@media(max-width:720px){
+  .artifact-bar{grid-template-columns:1fr 1fr;position:sticky;bottom:0;z-index:9}
+  .furnish-seg{grid-column:1 / -1}
+  .run-glow{min-height:44px}
+  .modify-drawer{bottom:96px;max-height:min(48%,340px)}
+  .mat-fields{grid-template-columns:1fr}
+}
+.plan-svg{width:100%;height:100%;min-height:0;overflow:visible}
+.room-wall{fill:none}
+.door-gap{fill:#0b1018}
+.door-swing{fill:none;stroke:rgba(229,228,226,.45);stroke-width:1}
+.room-name{fill:#F5F2EB;font:500 16px var(--serif)}
+.room-name.sm{font-size:11px}
+.room-sf{fill:rgba(245,242,235,.68);font:500 11px var(--sans)}
+.room-sf.sm{font-size:10px}
+.label-plate{fill:rgba(11,16,24,.55)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0 0;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:rgba(245,242,235,.62)}
+.legend i{display:inline-block;width:9px;height:9px;margin-right:5px;vertical-align:middle;border-radius:50%}
+.lg-hot{background:#E2B470}.lg-pinch{background:#E5E4E2}.lg-quiet{background:#4a6e8a}.lg-flow{background:#B08D57}
+
+.editor-draw{margin-top:16px;border:1px solid rgba(229,228,226,.12);background:#0f1522}
+.editor-draw summary{cursor:pointer;padding:12px 14px;font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--platinum);list-style:none}
+.editor-draw summary::-webkit-details-marker{display:none}
+.editor-draw .editor{padding:0 14px 14px;display:grid;gap:8px}
+.room-row{display:grid;grid-template-columns:1.1fr .8fr 64px 26px;gap:6px}
+.room-row input,.room-row select,.door-row select{min-width:0;border:1px solid rgba(216,209,199,.2);background:#0c121c;padding:8px}
+.door-row{display:grid;grid-template-columns:1fr 1fr 26px;gap:6px}
+
+.toggles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.toggle{padding:10px 12px;border:1px solid rgba(229,228,226,.14);background:#0f1522;cursor:pointer;text-align:left;font:500 12px var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.toggle[aria-pressed=true]{border-color:var(--platinum);background:rgba(245,242,235,.06)}
+.horizon{display:grid;gap:8px;position:relative;z-index:1}
+.score-hero{display:flex;align-items:baseline;gap:10px;margin:8px 0 10px}
+.score-hero strong{font:italic 500 4.2rem/1 var(--serif)}
+.dims{display:grid;gap:8px;margin:12px 0}
+.dim{display:grid;grid-template-columns:92px 1fr 28px;gap:8px;align-items:center;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mist)}
+.barline{height:1px;background:rgba(245,242,235,.12)}
+.barline i{display:block;height:2px;margin-top:-.5px;background:var(--platinum);transition:width .25s ease}
+.notes{margin:12px 0 0;padding:0 0 0 18px;color:#d9d3c6}
+.notes li{margin:0 0 8px}
+.disc{margin:16px 0 0;padding-top:12px;border-top:1px solid rgba(245,242,235,.1);font-size:12px;color:rgba(245,242,235,.55)}
+
+.dock{display:grid;gap:18px}
+.compare{display:grid;gap:10px}
+@media(min-width:800px){.compare{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.card{border:1px solid rgba(229,228,226,.16);background:#0f1522;padding:10px;min-width:0}
+.card strong.sc{display:block;font:italic 500 2.2rem/1 var(--serif)}
+.card .addr{font:500 12px var(--mono);color:var(--platinum);margin:0 0 6px}
+.collect{display:grid;gap:6px}
+.collect button,.lib button{text-align:left;padding:8px 10px;border:1px solid rgba(229,228,226,.14);background:#0f1522;cursor:pointer;width:100%;font-size:13px}
+.rank{font:500 11px var(--mono);color:var(--brass)}
+.empty{margin:0;font:italic 1.05rem var(--serif);color:rgba(245,242,235,.5)}
+
+.bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:30;
+  display:flex;align-items:center;gap:2px;
+  padding:8px max(10px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));
+  background:rgba(13,24,43,.98);
+  border-top:1px solid rgba(216,209,199,.18);
+  max-width:100%;overflow-x:clip;
+}
+.bar-mark{width:22px;height:22px;margin-right:4px;opacity:.95;flex:0 0 auto;border-radius:6px;overflow:hidden;display:block;line-height:0}
+.bar-mark img{width:100%;height:100%;display:block;max-width:none}
+.bar button{
+  flex:1 1 0;min-width:0;border:0;background:transparent;color:var(--mist);
+  padding:6px 2px;font:500 11px/1.15 var(--mono);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:3px;white-space:nowrap
+}
+.bar button.on,.bar button:hover{color:var(--ivory)}
+.bar .short{display:none}
+.bar svg.bar-ico{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.4}
+@media(max-width:700px){
+  .bar{gap:0;padding-left:8px;padding-right:8px}
+  .bar-mark{width:18px;height:18px;margin-right:2px;border-radius:4px}
+  .bar button{font-size:10px;letter-spacing:.04em;padding:6px 1px}
+  .bar .full{display:none}
+  .bar .short{display:block}
+}
+
+.site-foot{position:relative;z-index:2;padding:28px 18px calc(var(--bar) + 28px);border-top:1px solid rgba(216,209,199,.14);background:#0D182B}
+.site-exit{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 14px}
+.site-exit a{color:var(--ivory);text-decoration:none;font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase}
+.site-foot .wordmark a{color:var(--platinum);text-decoration:none;font:500 1.35rem var(--serif);letter-spacing:.1em}
+.site-foot p{margin:6px 0 0;color:rgba(245,242,235,.58);font-size:13px}
+
+.cinema{
+  position:fixed;inset:var(--header) 0 0 0;z-index:48;
+  display:flex;flex-direction:column;
+  background:#0a1018;
+  background-image:var(--grid);
+  background-size:28px 28px;
+  max-width:100%;overflow:clip;
+}
+.cinema[hidden]{display:none!important}
+.cinema-hud{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;
+  min-height:52px;padding:10px 18px;
+  border-bottom:1px solid rgba(229,228,226,.14);
+  font:500 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(229,228,226,.76);
+}
+.cinema-hud .clock{font:italic 500 2.4rem/1 var(--serif);letter-spacing:.02em;text-transform:none;color:var(--ivory)}
+.cinema-hud .year{color:var(--brass)}
+.cinema-hud .score{font:italic 500 1.9rem/1 var(--serif);letter-spacing:.02em;text-transform:none;color:var(--ivory)}
+.cinema-hud .need{flex:1 1 160px;min-width:0;font:italic 400 1.15rem/1.3 var(--serif);letter-spacing:0;text-transform:none;color:var(--limestone)}
+.cinema-stage{flex:1;min-height:0;display:grid;place-items:center;padding:10px 12px 20px;overflow:auto;max-width:100%}
+.cinema-stage .plan-svg{width:min(960px,100%);height:auto;max-height:calc(100svh - var(--header) - 96px)}
+.walker{fill:#F5F2EB;stroke:rgba(13,24,43,.4);stroke-width:.6;filter:drop-shadow(0 0 3px rgba(245,242,235,.45))}
+.walker.b{fill:#B08D57}
+.walker.c{fill:#8aa0b8}
+.walker.d{fill:#D8D1C7}
+.furn{pointer-events:none}
+.trail-soft{fill:none;stroke:rgba(226,180,112,.4);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media (prefers-reduced-motion: reduce){
+  .cinema{display:none!important}
+}
+
+@media screen{
+  #print-report{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#guide-speech">Skip to the guide</a>
+
+<header class="ak-compact-header" data-ak-compact-header>
+ <div class="ak-compact-header__bar">
+  <div class="ak-compact-header__brand">
+   <a class="ak-compact-header__mark" href="/" aria-label="Agent Kammer home"><img src="/brand/ak-monogram-ivory.png" alt="" width="28" height="30"></a>
+   <a class="ak-compact-header__tool" href="/tools/livability/" aria-label="Livability">
+    <picture class="ak-compact-header__tile">
+     <source type="image/webp" srcset="/tools/livability/icon-64.webp 1x, /tools/livability/icon-128.webp 2x">
+     <img src="/tools/livability/icon-64.png" srcset="/tools/livability/icon-64.png 1x, /tools/livability/icon-128.png 2x" alt="" width="28" height="28">
+    </picture>
+    <span class="ak-compact-header__word">Livability</span>
+   </a>
+  </div>
+  <button class="ak-compact-header__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="ak-field-menu">
+   <span class="ak-compact-header__icon" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+ </div>
+</header>
+<div class="ak-compact-header__menu" id="ak-field-menu" hidden>
+ <nav class="doors" aria-label="Site">
+  <div class="door"><a href="/">Home</a></div>
+  <div class="door">
+   <button class="fold" type="button" data-fold="fold-start" aria-expanded="false">Start Here<span aria-hidden="true">+</span></button>
+   <div class="kids" id="fold-start" hidden>
+    <a href="/situations">All situations</a>
+    <a href="/situations/executive-relocation-nyc">Executive Relocation</a>
+    <a href="/situations/first-home-buyers-nyc">First Home</a>
+    <a href="/situations/new-baby-growing-family-nyc">Growing Family</a>
+    <a href="/situations/marriage-housing-nyc">Marriage</a>
+    <a href="/situations/retiree-senior-home-buyers-nyc">Retirement</a>
+    <a href="/situations/empty-nester-downsizing-nyc">Empty Nest</a>
+    <a href="/situations/aging-parents-housing-nyc">Aging Parents</a>
+    <a href="/situations/inheritance-housing-nyc">Inheritance</a>
+    <a href="/situations/divorce-property-sales-nyc">Divorce</a>
+    <a href="/situations/remote-work-housing-nyc">Remote Work</a>
+    <a href="/situations/job-loss-housing-nyc">Job Change</a>
+    <a href="/international">International Move</a>
+   </div>
+  </div>
+  <div class="door">
+   <button class="fold" type="button" data-fold="fold-guides" aria-expanded="false">Guides<span aria-hidden="true">+</span></button>
+   <div class="kids" id="fold-guides" hidden>
+    <a href="/guides">All Guides</a>
+    <a href="/resources">Resource Hub</a>
+    <a href="/resources#field-guides">Field Guides</a>
+    <a href="/resources#assessments">Property Assessments</a>
+    <a href="/guides/how-to-buy-in-nyc.html">How to buy in NYC</a>
+    <a href="/guides/building-terms">The Grammar of a Building</a>
+   </div>
+  </div>
+  <div class="door">
+   <button class="fold" type="button" data-fold="fold-tools" aria-expanded="true">Interactive Tools<span aria-hidden="true">−</span></button>
+   <div class="kids" id="fold-tools">
+    <a href="/tools">All tools</a>
+    <a href="/calculator">Calculator</a>
+    <a href="/tools/wheel-of-life/">Wheel of Life</a>
+    <a href="/tools/livability/">Livability</a>
+   </div>
+  </div>
+  <div class="door"><a href="/contact">Contact</a></div>
+  <a class="guidance" href="/">Guidance</a>
+ </nav>
+</div>
+
+<div class="status" aria-label="Simulator status">
+  <a href="/" aria-label="Agent Kammer home"><img class="status-mark" src="/brand/ak-monogram-ivory.png" alt="" width="26" height="28"></a>
+  <span>ak-liv <i>//</i> <b>sim</b></span>
+  <span id="st-state">idle</span>
+  <span>horizon <b id="st-horizon">10y</b></span>
+  <span>runs <b id="st-runs">0</b></span>
+  <span>compare <b id="st-compare">0</b></span>
+  <span>collection <b id="st-col">0</b></span>
+</div>
+
+<div class="os" id="os">
+  <section class="pane pane-guide on" data-pane="guide">
+    <div class="ptitle">guide <em>tty0</em></div>
+    <div class="pbody">
+      <div class="guide-row">
+        <div class="guide-lockup">
+          <picture class="guide-glyph">
+            <source type="image/webp" srcset="/tools/livability/icon-64.webp 1x, /tools/livability/icon-128.webp 2x">
+            <img src="/tools/livability/icon-64.png" srcset="/tools/livability/icon-64.png 1x, /tools/livability/icon-128.png 2x" width="48" height="48" alt="Livability">
+          </picture>
+        </div>
+        <div>
+          <p class="kicker">Narrator</p>
+          <p class="speech" id="guide-speech" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pane pane-entry" data-pane="entry">
+    <div class="ptitle">plan <em>primary</em></div>
+    <div class="pbody">
+      <p class="kicker">Due diligence</p>
+      <h1 class="caps" style="margin:6px 0 10px">Walk the floor</h1>
+      <label class="field"><span>Address</span><input id="address" type="text" autocomplete="street-address" placeholder="15 Central Park West, New York, NY"></label>
+      <div class="row">
+        <button class="btn" type="button" id="lookup">Look for a plan</button>
+        <button class="btn ghost" type="button" id="use-sutton">Sutton demo</button>
+        <button class="btn ghost" type="button" id="use-riverside">Riverside demo</button>
+        <button class="btn ghost" type="button" id="use-stahl">Stahl House</button>
+        <button class="btn ghost" type="button" id="use-willow">House demo</button>
+      </div>
+      <div class="helper-links" id="address-help">
+        <p class="fine" style="margin:0 0 10px">Find the plan online, download it, and drop it here.</p>
+        <div class="row">
+          <a class="btn ghost" id="help-google" target="_blank" rel="noopener noreferrer">Search: address + floor plan</a>
+          <a class="btn ghost" id="help-images" target="_blank" rel="noopener noreferrer">Image search</a>
+        </div>
+        <p class="hint">The listing page, the listing agent, or building staff can usually point you to it.</p>
+      </div>
+      <label class="dropzone" id="dropzone">
+        <input id="plan-file" type="file" accept="application/pdf,image/jpeg,image/png,image/webp,.pdf,.jpg,.jpeg,.png">
+        <p class="kicker">Upload a plan</p>
+        <p class="caps">PDF, JPG, or PNG</p>
+        <p class="fine" style="margin:0">Find the plan online, download it, and drop it here.</p>
+      </label>
+      <div class="scale-row" style="margin-top:12px">
+        <label class="field" style="margin:0"><span>Listing sqft, optional</span><input id="listing-sf" type="number" min="80" max="20000" placeholder="1200"></label>
+        <label class="field" style="margin:0"><span>One room size, optional</span><input id="room-sf" type="number" min="20" max="4000" placeholder="Living 280"></label>
+      </div>
+      <label class="field" style="margin-top:12px"><span>Listing link, optional</span><input id="listing-url" type="url" placeholder="https://" autocomplete="off"></label>
+      <label class="boost-row" id="boost-row"><input id="boost-on" type="checkbox" checked> Polish the room names from the drawing</label>
+      <p class="fine" id="vision-note" style="margin-top:12px">Find the plan online, download it, and drop it here.</p>
+      <p class="hint" id="lookup-note">Start with an address. If I do not have a plan on file, I will offer a search, then wait for you to drop the image.</p>
+      <div class="door-confirm" id="door-confirm">
+        <p class="kicker">Confirm doors and windows</p>
+        <div class="confirm-mode">
+          <button class="chip" type="button" id="mark-door" aria-pressed="true">Add door</button>
+          <button class="chip" type="button" id="mark-window" aria-pressed="false">Add window</button>
+        </div>
+        <p class="fine confirm-hint" id="confirm-copy">Tap a mark to remove it. Drag to move. Click a wall to add. Brass is a door. Blue-gray is a window.</p>
+        <div class="confirm-stage" id="confirm-stage"></div>
+        <div class="row">
+          <button class="btn" type="button" id="confirm-run">Looks right, run it</button>
+          <button class="btn ghost" type="button" id="confirm-edit">Edit rooms first</button>
+        </div>
+      </div>
+      <div class="artifact" id="artifact">
+        <div class="plan-wrap" id="plan-canvas"></div>
+        <div class="modify-drawer" id="modify-drawer" hidden>
+          <div class="diligence" id="diligence"></div>
+        </div>
+        <p class="scan-ticker" id="scan-ticker" hidden></p>
+        <div class="artifact-bar">
+          <div class="furnish-seg" role="group" aria-label="Furniture">
+            <button type="button" id="furnish-on" aria-pressed="true">Furnished</button>
+            <button type="button" id="furnish-off" aria-pressed="false">Empty</button>
+          </div>
+          <button class="run-glow" type="button" id="run-sim">Run</button>
+          <button class="modify-btn" type="button" id="open-modify" aria-expanded="false">Modify</button>
+          <div class="artifact-quiet">
+            <button class="quiet-btn" type="button" id="furn-adjust" aria-pressed="false">Adjust furniture</button>
+            <button class="quiet-btn" type="button" id="keep-col">Keep</button>
+            <button class="quiet-btn" type="button" id="add-compare">Compare</button>
+          </div>
+        </div>
+      </div>
+      <p class="legend"><i class="lg-hot"></i>High traffic <i class="lg-pinch"></i>Bottleneck <i class="lg-flow"></i>Path <i class="lg-quiet"></i>Quiet</p>
+      <p class="furn-note" id="furn-note">The walk uses assumed furniture for this household. The score is the floor, not the pieces.</p>
+      <details class="editor-draw" style="margin-top:12px">
+        <summary>Edit rooms</summary>
+        <div class="editor">
+          <div id="room-list"></div>
+          <div class="row">
+            <button class="btn ghost" type="button" id="add-room">Add room</button>
+            <button class="btn ghost" type="button" id="add-door">Add door</button>
+          </div>
+          <div id="door-list"></div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="pane pane-side" data-pane="side">
+    <div class="ptitle">household <em>// time</em></div>
+    <div class="pbody">
+      <p class="fine">This is your household, not a buyer type. I will not steer a neighborhood or a building from it.</p>
+      <label class="field"><span>Household size</span><input id="household" type="number" min="1" max="8" value="2"></label>
+      <div class="toggles" id="traits"></div>
+      <p class="kicker" style="margin:14px 0 8px">Years living there</p>
+      <div class="horizon" id="horizons"></div>
+      <div class="score-hero"><strong id="score-num">-</strong><span class="fine">Livability</span></div>
+      <div class="dims" id="dims"></div>
+      <div class="breakdown" id="check-break"></div>
+      <ul class="notes" id="notes"></ul>
+      <div class="print-actions">
+        <button class="btn ghost" type="button" id="print-report-btn">Print / Save PDF</button>
+      </div>
+      <div id="considerations"></div>
+      <p class="disc">Informational simulator. The score is the floor plan’s layout only. Not an appraisal, an inspection, or brokerage advice.</p>
+    </div>
+  </section>
+
+  <section class="pane pane-dock" data-pane="compare">
+    <div class="pbody">
+      <div class="dock">
+        <div>
+          <p class="kicker" style="margin:0 0 10px">Compare</p>
+          <div class="compare" id="compare"></div>
+        </div>
+        <div>
+          <p class="kicker" style="margin:0 0 10px">Collection</p>
+          <div class="collect" id="collection"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="cinema" id="cinema" hidden>
+  <div class="cinema-hud">
+    <picture class="guide-glyph is-live">
+      <source type="image/webp" srcset="/tools/livability/icon-64.webp 1x, /tools/livability/icon-128.webp 2x">
+      <img src="/tools/livability/icon-64.png" srcset="/tools/livability/icon-64.png 1x, /tools/livability/icon-128.png 2x" width="24" height="24" alt="">
+    </picture>
+    <span class="clock" id="cin-clock">07:00</span>
+    <span class="year" id="cin-year">year 0</span>
+    <span class="score" id="cin-score"></span>
+    <span class="need" id="cin-need">The rooms take their furniture.</span>
+    <button class="btn ghost" type="button" id="cin-skip">Skip</button>
+  </div>
+  <div class="cinema-stage" id="cinema-stage" role="img" aria-label="Bird's-eye simulation of the floor plan"></div>
+</div>
+
+<section id="print-report" aria-hidden="true"></section>
+
+<nav class="bar" aria-label="Simulator">
+  <picture class="bar-mark">
+    <source type="image/webp" srcset="/tools/livability/icon-64.webp 1x, /tools/livability/icon-128.webp 2x">
+    <img src="/tools/livability/icon-64.png" srcset="/tools/livability/icon-64.png 1x, /tools/livability/icon-128.png 2x" width="22" height="22" alt="">
+  </picture>
+  <button type="button" data-jump="entry"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><rect x="1.5" y="2" width="9" height="8"/></svg><span class="full">Address</span><span class="short">Addr</span></button>
+  <button type="button" data-jump="side"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="4" r="2"/><path d="M2.5 10c.6-2 2-3 3.5-3s2.9 1 3.5 3"/></svg><span class="full">Household</span><span class="short">House</span></button>
+  <button type="button" id="bar-run" class="quiet-run"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2.5l6 3.5-6 3.5z"/></svg><span class="full">Run</span><span class="short">Run</span></button>
+  <button type="button" data-jump="compare"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9V4M6 9V2.5M9 9V6"/></svg><span class="full">Compare</span><span class="short">Cmp</span></button>
+  <button type="button" data-jump="collection"><svg class="bar-ico" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="2.5" width="8" height="7"/><path d="M4 2.5V2h4v.5"/></svg><span class="full">Collection</span><span class="short">Keep</span></button>
+</nav>
+
+<footer class="site-foot">
+  <div>
+    <nav class="site-exit" aria-label="Leave this tool">
+      <a href="/">Home</a>
+      <a href="/tools">Interactive Tools</a>
+    </nav>
+    <p class="kicker">Interactive Tool</p>
+    <p class="wordmark"><a href="/" aria-label="Agent Kammer home">agentkammer.com</a></p>
+    <p>Runs, compare, and collection stay in this browser. No account.</p>
+    <p>Informational layout simulator. Not an appraisal, inspection, or brokerage advice. The score does not judge a neighborhood, a school, or who should live here.</p>
+  </div>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

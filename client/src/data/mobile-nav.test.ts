@@ -35,6 +35,7 @@ describe("mobile field menu", () => {
     expect(hrefs).toContain("/tools");
     expect(hrefs).toContain("/calculator");
     expect(hrefs).toContain("/tools/wheel-of-life/");
+    expect(hrefs).toContain("/tools/livability/");
     expect(hrefs).not.toContain("/tools/livability");
     expect(hrefs).not.toContain("/hub");
     for (const page of hubFieldNav) {
@@ -49,6 +50,7 @@ describe("mobile field menu", () => {
     expect(isHardMobileHref("/guides/building-terms")).toBe(true);
     expect(isHardMobileHref("/guides/how-to-buy-in-nyc.html")).toBe(true);
     expect(isHardMobileHref("/tools/wheel-of-life/")).toBe(true);
+    expect(isHardMobileHref("/tools/livability/")).toBe(true);
     expect(isHardMobileHref("/guides/how-mortgages-work")).toBe(false);
   });
 
@@ -83,5 +85,7 @@ describe("mobile field menu", () => {
     expect(html).toContain("Calculator");
     expect(html).toContain("Wheel of Life");
     expect(html).toContain('href="/tools/wheel-of-life/"');
+    expect(html).toContain("Livability");
+    expect(html).toContain('href="/tools/livability/"');
   });
 });

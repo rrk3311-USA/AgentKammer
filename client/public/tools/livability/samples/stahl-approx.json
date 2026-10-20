@@ -1,0 +1,147 @@
+{
+  "id": "stahl-approx",
+  "title": "Stahl House approximation (synthetic, public plan geometry)",
+  "pxPerFt": 8,
+  "width": 640,
+  "height": 620,
+  "rooms": [
+    {
+      "id": "living",
+      "name": "Living",
+      "type": "living",
+      "sf": 360,
+      "x": 40,
+      "y": 40,
+      "w": 200,
+      "h": 152
+    },
+    {
+      "id": "dining",
+      "name": "Dining",
+      "type": "dining",
+      "sf": 210,
+      "x": 240,
+      "y": 40,
+      "w": 120,
+      "h": 152
+    },
+    {
+      "id": "kitchen",
+      "name": "Kitchen",
+      "type": "kitchen",
+      "sf": 240,
+      "x": 360,
+      "y": 40,
+      "w": 144,
+      "h": 152
+    },
+    {
+      "id": "pool",
+      "name": "Pool",
+      "type": "terrace",
+      "sf": 420,
+      "x": 40,
+      "y": 192,
+      "w": 200,
+      "h": 360
+    },
+    {
+      "id": "entry",
+      "name": "Entry",
+      "type": "entry",
+      "sf": 70,
+      "x": 240,
+      "y": 192,
+      "w": 88,
+      "h": 80
+    },
+    {
+      "id": "bed2",
+      "name": "Bedroom 2",
+      "type": "bedroom",
+      "sf": 220,
+      "x": 240,
+      "y": 272,
+      "w": 160,
+      "h": 128
+    },
+    {
+      "id": "mbed",
+      "name": "Master bedroom",
+      "type": "bedroom",
+      "sf": 320,
+      "x": 240,
+      "y": 400,
+      "w": 200,
+      "h": 152
+    }
+  ],
+  "doorDots": [
+    {
+      "x": 240,
+      "y": 116
+    },
+    {
+      "x": 360,
+      "y": 116
+    },
+    {
+      "x": 284,
+      "y": 192
+    },
+    {
+      "x": 140,
+      "y": 192
+    },
+    {
+      "x": 240,
+      "y": 232
+    },
+    {
+      "x": 284,
+      "y": 272
+    },
+    {
+      "x": 320,
+      "y": 400
+    },
+    {
+      "x": 240,
+      "y": 476
+    }
+  ],
+  "doors": [
+    {
+      "a": "living",
+      "b": "dining"
+    },
+    {
+      "a": "dining",
+      "b": "kitchen"
+    },
+    {
+      "a": "dining",
+      "b": "entry"
+    },
+    {
+      "a": "living",
+      "b": "pool"
+    },
+    {
+      "a": "entry",
+      "b": "pool"
+    },
+    {
+      "a": "entry",
+      "b": "bed2"
+    },
+    {
+      "a": "bed2",
+      "b": "mbed"
+    },
+    {
+      "a": "mbed",
+      "b": "pool"
+    }
+  ]
+}

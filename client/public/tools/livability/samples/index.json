@@ -1,0 +1,13 @@
+{
+  "note": "Synthetic or public-plan approximations for the plan-reader harness. Connections come from door marks.",
+  "samples": [
+    "line-two-bed",
+    "studio-bath",
+    "stahl-approx"
+  ],
+  "doorInches": [
+    30,
+    36
+  ],
+  "pxPerFt": 8
+}

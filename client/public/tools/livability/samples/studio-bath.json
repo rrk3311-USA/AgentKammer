@@ -1,0 +1,41 @@
+{
+  "id": "studio-bath",
+  "title": "Synthetic studio with bath",
+  "pxPerFt": 8,
+  "width": 480,
+  "height": 300,
+  "rooms": [
+    {
+      "id": "studio",
+      "name": "Studio",
+      "type": "living",
+      "sf": 420,
+      "x": 40,
+      "y": 40,
+      "w": 280,
+      "h": 200
+    },
+    {
+      "id": "bath",
+      "name": "Bath",
+      "type": "bath",
+      "sf": 60,
+      "x": 320,
+      "y": 40,
+      "w": 96,
+      "h": 200
+    }
+  ],
+  "doorDots": [
+    {
+      "x": 320,
+      "y": 140
+    }
+  ],
+  "doors": [
+    {
+      "a": "studio",
+      "b": "bath"
+    }
+  ]
+}

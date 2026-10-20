@@ -22,20 +22,7 @@ function listVercelFunctions(apiRoot: string): string[] {
 
 test("agentkammer Hobby deploy stays at 12 serverless functions", () => {
   const fns = listVercelFunctions(join(process.cwd(), "api"));
-  expect(fns).toEqual([
-    "account/briefs.ts",
-    "account/claim.ts",
-    "account/hub.ts",
-    "account/verify.ts",
-    "contact.ts",
-    "decision-assistant/conversation.ts",
-    "decision-assistant/conversation/[sessionId].ts",
-    "decision-guide/chat.ts",
-    "hub/snapshot.ts",
-    "leads.ts",
-    "qualify/index.ts",
-    "qualify/session.ts",
-  ]);
+  expect(fns).toEqual(["[...route].ts"]);
   expect(fns.length).toBeLessThanOrEqual(12);
 });
 
