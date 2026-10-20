@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { CONSIDERATIONS, DILIGENCE_CHECKS, LIVABILITY_AID_LINE, SEVERITY_LABELS, applyDiligencePreset, cannotFetchPlan, defaultDiligence, defaultGuideHello, emptyBuilding, emptyProfile, furnitureFor, heatMap, idsForPreset, labelReserve, makeRiversidePlan, makeStahlPlan, makeSuttonPlan, makeWillowHousePlan, matchKnownSample, scoreLivability, typicalDay } from "../client/public/tools/livability/engine.js";
+import { buildPrintReport, flaggedBySeverity, shortNote } from "../client/public/tools/livability/print-report.js";
 import { windowDotsFromPlan } from "../client/public/tools/livability/plan-graph.js";
 import { labelPlacement } from "../client/public/tools/livability/draw.js";
 import { SUGGESTIONS_ENABLED, suggestSimilarListings } from "../client/public/tools/livability/suggestions.js";
@@ -227,6 +228,44 @@ describe("livability desk scoring", () => {
     expect(failed).toEqual(expect.arrayContaining(["pathThroughPrimary", "terraceThroughPrimary", "kitchenOrphaned", "primaryCloset"]));
     expect(JSON.stringify({ plan, result })).not.toContain("—");
     expect(JSON.stringify({ plan, result })).not.toMatch(/school|neighborhood|broker|youtuber|apartment line/i);
+  });
+
+  it("prints a Livability-only letter report with flagged checks and no AK brand", () => {
+    const plan = makeWillowHousePlan();
+    const result = scoreLivability(
+      plan,
+      { ...emptyProfile(), householdSize: 4, kids: true, cooks: true, wfh: true },
+      "10",
+      applyDiligencePreset("strict"),
+      {
+        building: {
+          ...emptyBuilding(),
+          yearBuilt: "1924",
+          ticks: { ...emptyBuilding().ticks, floorGlossWet: true, windowAc: true, waterStains: true, noParking: true, mechanicalNear: true },
+        },
+      },
+    );
+    const html = buildPrintReport({ plan, result, profile: { householdSize: 4 }, horizon: "10", heatSvg: "<svg class=\"plan-svg\"></svg>" });
+    expect(html).toMatch(/Sample report, example data/);
+    expect(html).toMatch(/1842 Willow Lane/);
+    expect(html).toMatch(/class="pr-word">Livability/);
+    expect(html).toMatch(/pr-glance-h">Breakdown/);
+    expect(html).toMatch(/Heat map/);
+    expect(html).toMatch(/Flagged checks/);
+    expect(html).toMatch(/Big one/);
+    expect(html).toMatch(/Worth pricing in/);
+    expect(html).toMatch(/Considerations to confirm/);
+    expect(html).toMatch(/01 \/ 0/);
+    expect(html.match(/pr-page/g)?.length).toBeGreaterThanOrEqual(2);
+    expect(html.match(/pr-page/g)?.length).toBeLessThanOrEqual(3);
+    expect(html).not.toMatch(/Agent Kammer|ak-monogram|Live where you belong|agentkammer/i);
+    expect(html).not.toContain("—");
+    const passed = result.breakdown.filter((row) => row.passed && !row.caution);
+    expect(passed.length).toBeGreaterThan(3);
+    expect(passed.some((row) => html.includes(row.label) && html.includes(shortNote(row.note)))).toBe(false);
+    const groups = flaggedBySeverity(result.breakdown);
+    expect(groups[0].items.length).toBeGreaterThan(0);
+    expect(shortNote("A long note. A second sentence stays off.")).toBe("A long note.");
   });
 
   it("keeps considerations confirm-only and official", () => {

@@ -186,12 +186,14 @@ export function renderPlanSvg(plan, opts = {}) {
   const maxY = Math.max(...rooms.map((room) => room.y + room.h)) + pad;
   const heat = opts.heat || {};
   const heatU = opts.heatU == null ? 1 : opts.heatU;
+  const paper = Boolean(opts.paper);
   const scale = planScale(plan);
   const grid = Math.max(8, scale);
   const edges = doorEdges(plan);
+  const gridStroke = paper ? "rgba(28,46,66,.08)" : "rgba(229,228,226,.06)";
   const defs = [
-    `<pattern id="plan-grid" width="${grid}" height="${grid}" patternUnits="userSpaceOnUse">
-      <path d="M ${grid} 0 L 0 0 0 ${grid}" fill="none" stroke="rgba(229,228,226,.06)" stroke-width="1"/>
+    `<pattern id="plan-grid${paper ? "-print" : ""}" width="${grid}" height="${grid}" patternUnits="userSpaceOnUse">
+      <path d="M ${grid} 0 L 0 0 0 ${grid}" fill="none" stroke="${gridStroke}" stroke-width="1"/>
     </pattern>`,
   ];
   const glows = rooms
@@ -228,7 +230,13 @@ export function renderPlanSvg(plan, opts = {}) {
     .map((room) => {
       const pool = /pool/i.test(room.name);
       const deck = room.type === "terrace" && !pool;
-      const fill = pool ? "rgba(74,110,138,.4)" : deck ? "rgba(74,110,138,.14)" : "rgba(15,21,34,.9)";
+      const fill = pool
+        ? "rgba(74,110,138,.4)"
+        : deck
+          ? "rgba(74,110,138,.14)"
+          : paper
+            ? "#EDE9E2"
+            : "rgba(15,21,34,.9)";
       const water = pool
         ? `<path d="M${room.x + 10} ${room.y + 18}h${room.w - 20}M${room.x + 10} ${room.y + room.h / 3}h${room.w - 20}M${room.x + 10} ${room.y + room.h * 0.62}h${room.w - 20}M${room.x + 10} ${room.y + room.h - 18}h${room.w - 20}" fill="none" stroke="rgba(245,242,235,.22)"/>`
         : "";
@@ -238,7 +246,7 @@ export function renderPlanSvg(plan, opts = {}) {
   const walls = rooms
     .map((room) => {
       const d = room.type === "terrace" ? 1.6 : 4;
-      const color = room.type === "terrace" ? "rgba(229,228,226,.42)" : "#E5E4E2";
+      const color = room.type === "terrace" ? (paper ? "rgba(28,46,66,.35)" : "rgba(229,228,226,.42)") : paper ? "#1C2E42" : "#E5E4E2";
       return `<rect class="room-wall" x="${room.x}" y="${room.y}" width="${room.w}" height="${room.h}" fill="none" stroke="${color}" stroke-width="${d}"/>`;
     })
     .join("");
@@ -279,17 +287,18 @@ export function renderPlanSvg(plan, opts = {}) {
           const place = labelPlacement(room, opts.furniture || []);
           const sm = place.compact ? " sm" : "";
           const lines = place.lines
-            .map((line, index) => `<text class="room-name${sm}" x="${place.x}" y="${place.y + 11 + index * place.lineH}">${escapeXml(line)}</text>`)
+            .map((line, index) => `<text class="room-name${sm}${paper ? " paper" : ""}" x="${place.x}" y="${place.y + 11 + index * place.lineH}">${escapeXml(line)}</text>`)
             .join("");
-          return `<rect class="label-plate" x="${place.x - 3}" y="${place.y - 1}" width="${place.w + 6}" height="${place.h + 2}" rx="1"/>
+          return `<rect class="label-plate${paper ? " paper" : ""}" x="${place.x - 3}" y="${place.y - 1}" width="${place.w + 6}" height="${place.h + 2}" rx="1"/>
             ${lines}
-            <text class="room-sf${sm}" x="${place.x}" y="${place.y + 11 + place.lines.length * place.lineH}">${room.sf} sf${place.approx}</text>`;
+            <text class="room-sf${sm}${paper ? " paper" : ""}" x="${place.x}" y="${place.y + 11 + place.lines.length * place.lineH}">${room.sf} sf${place.approx}</text>`;
         })
         .join("");
   const extras = opts.extras || "";
   return `<svg class="plan-svg" viewBox="${minX} ${minY} ${maxX - minX} ${maxY - minY}" role="img" aria-label="${opts.label || "Architectural floor plan"}">
     <defs>${defs.join("")}</defs>
-    <rect x="${minX}" y="${minY}" width="${maxX - minX}" height="${maxY - minY}" fill="url(#plan-grid)"/>
+    <rect x="${minX}" y="${minY}" width="${maxX - minX}" height="${maxY - minY}" fill="${paper ? "#FDFCF9" : `url(#plan-grid${paper ? "-print" : ""})`}"/>
+    ${paper ? `<rect x="${minX}" y="${minY}" width="${maxX - minX}" height="${maxY - minY}" fill="url(#plan-grid-print)"/>` : ""}
     ${floors}${glows}${walls}${openings}${windows}${furniture}${labels}${extras}
   </svg>`;
 }

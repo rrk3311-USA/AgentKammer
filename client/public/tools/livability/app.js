@@ -29,6 +29,7 @@ import {
   uid,
 } from "./engine.js";
 import { furnitureMarkup, renderPlanSvg, setHeatOpacity } from "./draw.js";
+import { buildPrintReport } from "./print-report.js";
 import { applyBoostToRooms, connectionsFromDoors, doorDotsFromPlan, windowDotsFromPlan } from "./plan-graph.js";
 import { fileToImage, overlappingTiles, readPlanFromImage } from "./cv-reader.js";
 
@@ -400,77 +401,21 @@ function renderPrintReport(result) {
     host.innerHTML = "";
     return;
   }
-  const address = plan.address || plan.name || "Untitled plan";
-  const sampleMark = plan.sampleMark || (plan.sampleReport ? "Sample report, example data" : "");
-  const dims = [
-    ["Circulation", result.dimensions.circulation],
-    ["Quiet", result.dimensions.quiet],
-    ["Storage", result.dimensions.storage],
-    ["Household fit", result.dimensions.fit],
-    ["Light and air", result.dimensions.light],
-    ["Comfort", result.dimensions.comfort],
-  ].filter((row) => row[1] != null);
-  const flagged = (result.breakdown || []).filter((row) => row.passed === false || row.caution);
-  const consider = CONSIDERATIONS.map(
-    (group) =>
-      `<section class="print-group"><h3>${escape(group.label)}</h3>${group.items
-        .map((item) => {
-          const extra = [item.linkLabel, item.ask].filter(Boolean).join(" · ");
-          return `<label><input type="checkbox"> ${escape(item.label)}${extra ? ` <span>${escape(extra)}</span>` : ""}</label>`;
-        })
-        .join("")}</section>`,
-  ).join("");
-  const heat = renderPlanSvg(plan, {
+  const heatSvg = renderPlanSvg(plan, {
     heat: heatMap(plan, result),
     furniture: [],
     furnish: false,
     labels: true,
+    paper: true,
     label: "Static heat map",
   });
-  host.innerHTML = `
-    <header class="print-head">
-      <picture>
-        <source type="image/webp" srcset="/tools/livability/icon-64.webp 1x, /tools/livability/icon-128.webp 2x">
-        <img src="/tools/livability/icon-64.png" srcset="/tools/livability/icon-64.png 1x, /tools/livability/icon-128.png 2x" width="40" height="40" alt="Livability">
-      </picture>
-      <div>
-        <p class="kicker">Livability report</p>
-        <h1>${escape(address)}</h1>
-        ${sampleMark ? `<p class="print-sample">${escape(sampleMark)}</p>` : ""}
-      </div>
-    </header>
-    <p class="print-score"><strong>${result.score}</strong> Livability</p>
-    <p class="print-meta">${escape(plan.name || "Floor plan")} · Household of ${Number(profile.householdSize) || 1} · ${escape(String(horizon))} years</p>
-    <div class="print-dims">${dims.map(([label, value]) => `<div><span>${label}</span><b>${value}</b></div>`).join("")}</div>
-    <section>
-      <h2>Breakdown</h2>
-      ${(result.breakdown || [])
-        .map(
-          (row) =>
-            `<div class="print-row"><span>${escape(row.label)}</span><b>${row.delta > 0 ? "+" : ""}${row.delta}</b><small>${escape(row.note || "")}</small></div>`,
-        )
-        .join("")}
-    </section>
-    <section>
-      <h2>Flagged checks</h2>
-      ${
-        flagged.length
-          ? flagged
-              .map(
-                (row) =>
-                  `<div class="print-row fail"><span>${escape(row.label)}</span><small>${escape(row.severityLabel || "")}. ${escape(row.note || "")}</small></div>`,
-              )
-              .join("")
-          : "<p>No flagged checks on this run.</p>"
-      }
-    </section>
-    <section>
-      <h2>Considerations to confirm</h2>
-      ${consider}
-    </section>
-    <p class="aid-line">${escape(LIVABILITY_AID_LINE)}</p>
-    <section class="print-heat"><h2>Heat map</h2>${heat}</section>
-  `;
+  host.innerHTML = buildPrintReport({
+    plan,
+    result,
+    profile,
+    horizon,
+    heatSvg,
+  });
 }
 
 function renderScore(result) {
