@@ -7,6 +7,7 @@ import CommunicationMap from "@/pages/tools/CommunicationMap";
 import ToolsHome from "@/pages/tools/ToolsHome";
 import {
   CENTER_LINE,
+  GUIDE_NAME,
   PURPOSE_LINE,
   COMMUNICATION_ROUTES,
   MINUS_LIMIT,
@@ -19,6 +20,7 @@ import {
   chooseRoute,
   communicationCopy,
   guideLine,
+  guidePhase,
   initialMindState,
   layoutRoute,
   moveTo,
@@ -81,13 +83,16 @@ describe("communication map", () => {
   });
 
   it("replaces the instruction after each step of the route", () => {
+    expect(guidePhase(initialMindState)).toBe("choose");
     expect(guideLine(initialMindState)).toBe(INSTRUCTION_CHOOSE);
     const opened = chooseRoute(initialMindState, "four-stations");
     expect(opened.step).toBe(1);
+    expect(guidePhase(opened)).toBe("orb");
     expect(guideLine(opened)).toBe(INSTRUCTION_ORB);
     const taken = takeOrb(opened, orbId("four-stations", "speaker", "plus"));
     expect(taken.routeId).toBe("four-stations");
     expect(taken.step).toBe(1);
+    expect(guidePhase(taken)).toBe("continue");
     expect(guideLine(taken)).toBe(INSTRUCTION_CONTINUE);
     const continued = moveTo(taken, 2);
     expect(continued.step).toBe(2);
@@ -121,18 +126,23 @@ describe("communication map", () => {
     expect(chooseRoute(state, "integration").routeId).toBeNull();
   });
 
-  it("renders one map under the anatomy, not a document", () => {
+  it("renders step 1 of the decision guide, and hides later controls", () => {
     const html = renderToStaticMarkup(
       createElement(Router, { ssrPath: "/tools/communication-map" }, createElement(CommunicationMap)),
     );
+    expect(html).toContain(GUIDE_NAME);
     expect(html).toContain("The mind");
     expect(html).toContain("Four stations");
     expect(html).toContain("One breath");
     expect(html).toContain("Integration");
-    expect(html).toContain(CENTER_LINE);
     expect(html).toContain(PURPOSE_LINE);
     expect(() => assertNoSaaSLanguage(PURPOSE_LINE)).not.toThrow();
     expect(html).toContain(INSTRUCTION_CHOOSE);
+    expect(html).toContain("Step 1");
+    expect(html).not.toContain(INSTRUCTION_ORB);
+    expect(html).not.toContain(INSTRUCTION_CONTINUE);
+    expect(html).not.toContain("To the mind");
+    expect(html).not.toContain("Turn the scope either way");
     expect(html).toContain("Calibration scope");
     expect(html).not.toContain('type="range"');
     expect(html).not.toContain("Speaker");
@@ -143,6 +153,7 @@ describe("communication map", () => {
     expect(html.toLowerCase()).not.toContain("dashboard");
     expect(html.toLowerCase()).not.toContain("software");
     expect(html).not.toMatch(/\bplan\b/i);
+    expect(html).not.toContain("Anatomy of Communication");
   });
 
   it("turns the scope clockwise to advance and counterclockwise to go back", () => {
@@ -164,7 +175,8 @@ describe("communication map", () => {
     ]);
     const html = renderToStaticMarkup(createElement(Router, { ssrPath: "/tools" }, createElement(ToolsHome)));
     expect(html).toContain('href="/tools/communication-map"');
-    expect(html).toContain("Anatomy of Communication");
+    expect(html).toContain("Decision Guide");
+    expect(html).not.toContain("Anatomy of Communication");
     expect(html).not.toContain("/insights");
   });
 });

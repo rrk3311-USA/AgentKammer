@@ -10,9 +10,12 @@ export const MINUS_LIMIT = 3;
 /** Degrees of scope turn that move one step. Either direction. */
 export const SCOPE_DETENT = 36;
 
+export const GUIDE_NAME = "Decision Guide";
+
 export const CENTER_LINE = "Someone wants something to change in another mind.";
 
-export const PURPOSE_LINE = "Use it to decide a response. Content is on the left, relationship is on the right.";
+export const PURPOSE_LINE =
+  "This is a decision guide for choosing a response: content on the left, relationship on the right.";
 
 export const BOUNCE_NOTICE = "Too many minus orbs. Back to the mind.";
 
@@ -385,21 +388,30 @@ export function takeOrb(state: MindState, id: string): MindState {
   };
 }
 
-export const INSTRUCTION_CHOOSE = "Choose a route: Four stations, One breath, or Integration.";
+export const INSTRUCTION_CHOOSE = "Step 1. Choose a route: Four stations, One breath, or Integration.";
 
-export const INSTRUCTION_ORB = "Take the plus or the minus on the trail.";
+export const INSTRUCTION_ORB = "Step 2. Take the plus or the minus on the trail.";
 
-export const INSTRUCTION_CONTINUE = "Turn the scope to continue, or return to the mind.";
+export const INSTRUCTION_CONTINUE = "Step 3. Turn the scope to continue, or return to the mind.";
 
-export const INSTRUCTION_BOUNCE = "Three minus orbs sent you back to the mind. Start a different route.";
+export const INSTRUCTION_BOUNCE = "Step 1. Three minus orbs sent you back to the mind. Start a different route.";
 
-export function guideLine(state: MindState): string {
-  if (!state.routeId) return state.notice ? INSTRUCTION_BOUNCE : INSTRUCTION_CHOOSE;
+export type GuidePhase = "choose" | "orb" | "continue";
+
+export function guidePhase(state: MindState): GuidePhase {
+  if (!state.routeId) return "choose";
   const node = focusedNode(state);
   const route = routeById(state.routeId);
-  if (!node || !route) return INSTRUCTION_CHOOSE;
+  if (!node || !route) return "choose";
   const takenHere = state.taken.some((id) => id.startsWith(`${route.id}:${node.id}:`));
-  return takenHere ? INSTRUCTION_CONTINUE : INSTRUCTION_ORB;
+  return takenHere ? "continue" : "orb";
+}
+
+export function guideLine(state: MindState): string {
+  const phase = guidePhase(state);
+  if (phase === "choose") return state.notice ? INSTRUCTION_BOUNCE : INSTRUCTION_CHOOSE;
+  if (phase === "orb") return INSTRUCTION_ORB;
+  return INSTRUCTION_CONTINUE;
 }
 
 /** Clockwise carry advances. Counterclockwise carry goes back. Ends resist. */
@@ -428,7 +440,7 @@ export function focusedNode(state: MindState): MapNode | null {
 }
 
 export function communicationCopy(): string {
-  const parts = [PURPOSE_LINE, CENTER_LINE, BOUNCE_NOTICE, ROUND_NOTICE];
+  const parts = [GUIDE_NAME, PURPOSE_LINE, CENTER_LINE, BOUNCE_NOTICE, ROUND_NOTICE];
   for (const route of COMMUNICATION_ROUTES) {
     parts.push(route.title, route.trail, ...(route.surround ?? []));
     for (const item of route.nodes) {

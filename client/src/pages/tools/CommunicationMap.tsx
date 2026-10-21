@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } f
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { cn } from "@/lib/utils";
 import {
-  CENTER_LINE,
+  GUIDE_NAME,
   PURPOSE_LINE,
   ROUND_NOTICE,
   COMMUNICATION_MAP_PATH,
@@ -12,6 +12,7 @@ import {
   chooseRoute,
   focusedNode,
   guideLine,
+  guidePhase,
   initialMindState,
   layoutRoute,
   moveTo,
@@ -27,8 +28,8 @@ const CENTER = { x: 50, y: 48 };
 
 export default function CommunicationMap() {
   usePageMetadata({
-    title: "The Anatomy of Communication",
-    description: "What we do with words, what words do to us, and how to hear what people actually mean.",
+    title: GUIDE_NAME,
+    description: PURPOSE_LINE,
     path: COMMUNICATION_MAP_PATH,
   });
 
@@ -42,7 +43,13 @@ export default function CommunicationMap() {
     if (!state.routeId && state.notice) firstOpenRoute.current?.focus();
   }, [state.notice, state.routeId]);
 
-  const plate = current?.line ?? (state.notice === ROUND_NOTICE ? ROUND_NOTICE : route?.trail ?? CENTER_LINE);
+  const phase = guidePhase(state);
+  const plate =
+    phase === "choose"
+      ? state.notice === ROUND_NOTICE
+        ? ROUND_NOTICE
+        : null
+      : (current?.line ?? route?.trail ?? null);
   const guide = guideLine(state);
   const focus = current && placed ? placed.nodes.find((item) => item.id === current.id) : null;
   const panX = focus ? (CENTER.x - focus.x) * 0.05 : 0;
@@ -53,9 +60,10 @@ export default function CommunicationMap() {
       data-testid="communication-map"
       className="flex h-full min-h-0 flex-col overflow-hidden bg-brand-ivory text-brand-ink"
     >
-      <p className="shrink-0 px-4 pt-2 font-display text-[1.45rem] leading-tight text-brand-navy sm:px-6 sm:pt-3 sm:text-[2rem]">
-        {PURPOSE_LINE}
-      </p>
+      <header className="shrink-0 px-4 pt-2 sm:px-6 sm:pt-3">
+        <h1 className="font-display text-[1.85rem] leading-none text-brand-navy sm:text-[2.35rem]">{GUIDE_NAME}</h1>
+        <p className="mt-1 max-w-5xl text-[1.15rem] leading-snug text-brand-navy sm:text-[1.4rem]">{PURPOSE_LINE}</p>
+      </header>
 
       <div className="relative min-h-0 flex-1">
         <svg
@@ -97,14 +105,14 @@ export default function CommunicationMap() {
                   item={item}
                   active={current?.id === item.id}
                   open={open}
-                  onChoose={open ? () => setState((prev) => moveTo(prev, item.index + 1)) : undefined}
                 />
               );
             })}
             {placed?.orbs.map((orb) => {
               const reached = state.step === orb.index + 1;
               const taken = state.taken.includes(orb.id);
-              if (!reached && !taken) return null;
+              const offer = phase === "orb" && reached;
+              if (!offer && !(phase === "continue" && taken)) return null;
               return (
                 <g key={orb.id} opacity={reached || taken ? 1 : 0.35}>
                   <circle
@@ -125,7 +133,7 @@ export default function CommunicationMap() {
                   >
                     {orb.pole === "plus" ? "+" : "−"}
                   </text>
-                  {reached ? (
+                  {offer ? (
                     <circle
                       cx={orb.x}
                       cy={orb.y}
@@ -152,20 +160,20 @@ export default function CommunicationMap() {
             step={route ? state.step : 0}
             steps={route?.nodes.length ?? 0}
             station={current?.title ?? null}
-            onTurn={route ? (step) => setState((prev) => moveTo(prev, step)) : undefined}
-            onReturn={route ? () => setState((prev) => returnToMind(prev)) : undefined}
+            onTurn={phase === "continue" ? (step) => setState((prev) => moveTo(prev, step)) : undefined}
+            onReturn={phase === "continue" ? () => setState((prev) => returnToMind(prev)) : undefined}
           />
           </g>
         </svg>
       </div>
 
       <div className="shrink-0 border-t border-brand-border bg-brand-ivory px-4 py-2 sm:px-6">
-        <p className="font-display text-[1.7rem] leading-tight text-brand-navy sm:text-[2.15rem]" aria-live="polite">
+        <p className="font-display text-[1.55rem] leading-tight text-brand-navy sm:text-[1.9rem]" aria-live="polite">
           {guide}
         </p>
-        <p className="mt-1 line-clamp-1 text-base leading-snug text-brand-ink sm:text-lg">{plate}</p>
+        {plate ? <p className="mt-1 line-clamp-1 text-base leading-snug text-brand-ink sm:text-lg">{plate}</p> : null}
 
-        {current ? (
+        {phase === "orb" && current ? (
           <div className="mt-2 grid grid-cols-2 gap-2">
             <OrbButton
               pole="plus"
@@ -182,39 +190,40 @@ export default function CommunicationMap() {
           </div>
         ) : null}
 
-        <div className="mt-2 flex flex-wrap items-center gap-2">
-          {COMMUNICATION_ROUTES.map((item, index) => {
-            const closed = state.closed.includes(item.id);
-            const selected = state.routeId === item.id;
-            return (
-              <button
-                key={item.id}
-                ref={index === 0 ? firstOpenRoute : undefined}
-                type="button"
-                disabled={closed}
-                aria-pressed={selected}
-                onClick={() => setState((prev) => chooseRoute(prev, item.id))}
-                className={cn(
-                  "border px-3.5 py-2.5 text-base uppercase tracking-wide sm:text-lg",
-                  selected && "border-brand-navy bg-brand-navy text-brand-ivory",
-                  !selected && !closed && "border-brand-border bg-white text-brand-navy",
-                  closed && "border-brand-border text-brand-graphite/40",
-                )}
-              >
-                {closed ? `${item.title} closed` : item.title}
-              </button>
-            );
-          })}
-          {route ? (
+        {phase === "choose" ? (
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            {COMMUNICATION_ROUTES.map((item, index) => {
+              const closed = state.closed.includes(item.id);
+              return (
+                <button
+                  key={item.id}
+                  ref={index === 0 ? firstOpenRoute : undefined}
+                  type="button"
+                  disabled={closed}
+                  onClick={() => setState((prev) => chooseRoute(prev, item.id))}
+                  className={cn(
+                    "border px-3.5 py-2.5 text-base uppercase tracking-wide sm:text-lg",
+                    !closed && "border-brand-border bg-white text-brand-navy",
+                    closed && "border-brand-border text-brand-graphite/40",
+                  )}
+                >
+                  {closed ? `${item.title} closed` : item.title}
+                </button>
+              );
+            })}
+          </div>
+        ) : null}
+        {phase === "continue" ? (
+          <div className="mt-2">
             <button
               type="button"
               onClick={() => setState((prev) => returnToMind(prev))}
-              className="px-2 py-2 text-base uppercase tracking-wide text-brand-navy sm:text-lg"
+              className="border border-brand-border bg-white px-3.5 py-2.5 text-base uppercase tracking-wide text-brand-navy sm:text-lg"
             >
               To the mind
             </button>
-          ) : null}
-        </div>
+          </div>
+        ) : null}
       </div>
     </main>
   );
@@ -350,8 +359,8 @@ function CenterScope({
         <polygon points="50,34.85 49.28,36.7 50.72,36.7" fill="#B08D57" />
       </g>
       <polygon points="50,33.15 49.42,34.55 50.58,34.55" fill="#2A3447" />
-      <ScopeChevron angle={-68} direction={1} lit={turning === 1} />
-      <ScopeChevron angle={-112} direction={-1} lit={turning === -1} />
+      {onTurn ? <ScopeChevron angle={-68} direction={1} lit={turning === 1} /> : null}
+      {onTurn ? <ScopeChevron angle={-112} direction={-1} lit={turning === -1} /> : null}
       <circle cx="50" cy="48" r="10.7" fill="url(#cm-scope-lens)" stroke="#2A3447" strokeWidth="0.28" />
       <ellipse cx="50" cy="48" rx="7.1" ry="5.5" fill="none" stroke="#2A3447" strokeWidth="0.22" />
       <ellipse cx="50" cy="48" rx="4.1" ry="3.15" fill="none" stroke="#B08D57" strokeWidth="0.24" />

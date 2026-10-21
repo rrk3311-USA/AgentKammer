@@ -35,8 +35,8 @@ const PUBLIC_TOOLS: readonly ToolCard[] = [
   },
   {
     eyebrow: "One message",
-    title: "Anatomy of Communication",
-    description: "A mind in the center. Content on the left, relationship on the right, and a toggle toward a response.",
+    title: "Decision Guide",
+    description: "Choose a response. Content on the left, relationship on the right.",
     href: "/tools/communication-map",
   },
 ];
@@ -58,7 +58,7 @@ function CardBody({ card }: { card: ToolCard }) {
 export default function ToolsHome() {
   usePageMetadata({
     title: "Interactive Tools",
-    description: "Monthly carry, a personal check-in, a floor-plan walk, and the anatomy of one message.",
+    description: "Monthly carry, a personal check-in, a floor-plan walk, and a decision guide.",
     path: "/tools",
   });
 
@@ -67,7 +67,7 @@ export default function ToolsHome() {
       <PageHero
         eyebrow="Desk"
         title="Interactive Tools"
-        description="A quiet monthly-carry calculator, a personal check-in, a floor-plan walk, and the anatomy of one message."
+        description="A quiet monthly-carry calculator, a personal check-in, a floor-plan walk, and a decision guide."
         art="decision-framework"
       />
 
@@ -75,7 +75,7 @@ export default function ToolsHome() {
         <SectionHeading
           eyebrow="Desk"
           title="Start with the month, the week, the rooms, or a message."
-          description="The calculator, the Wheel of Life, and Livability sit beside the anatomy of communication."
+          description="The calculator, the Wheel of Life, and Livability sit beside the Decision Guide."
         />
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2">

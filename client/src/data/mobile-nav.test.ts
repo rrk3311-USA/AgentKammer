@@ -88,7 +88,8 @@ describe("mobile field menu", () => {
     expect(html).toContain('href="/tools/wheel-of-life/"');
     expect(html).toContain("Livability");
     expect(html).toContain('href="/tools/livability/"');
-    expect(html).toContain("Anatomy of Communication");
+    expect(html).toContain("Decision Guide");
+    expect(html).not.toContain("Anatomy of Communication");
     expect(html).toContain('href="/tools/communication-map"');
   });
 });
