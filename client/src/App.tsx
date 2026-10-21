@@ -233,7 +233,6 @@ function AppShell() {
   const [location] = useLocation();
   const isAdmin = location.startsWith("/admin") || location.startsWith("/tools/curation");
   const isInternal = location.startsWith("/internal");
-  const isCommunicationMap = location === COMMUNICATION_MAP_PATH;
 
   if (isAdmin || isInternal) {
     return (
@@ -248,23 +247,17 @@ function AppShell() {
   }
 
   return (
-    <div
-      className={
-        isCommunicationMap
-          ? "ak-app-shell flex h-dvh flex-col overflow-hidden bg-brand-ivory text-brand-ink"
-          : "ak-app-shell flex min-h-screen flex-col bg-brand-ivory text-brand-ink"
-      }
-    >
+    <div className="ak-app-shell flex min-h-screen flex-col bg-brand-ivory text-brand-ink">
       <ScrollToTop />
       <VisitorSignals />
       <Header />
       <Suspense fallback={<div className="mx-auto w-full max-w-7xl flex-1 px-6 py-12 text-brand-graphite/70">Loading...</div>}>
-        <div className={isCommunicationMap ? "min-h-0 flex-1 overflow-hidden" : "flex-1"}>
+        <div className="flex-1">
           <Router />
         </div>
       </Suspense>
-      {isCommunicationMap ? null : <Footer />}
-      {isCommunicationMap ? null : <DecisionAssistantDock />}
+      <Footer />
+      <DecisionAssistantDock />
       <Toaster />
     </div>
   );
