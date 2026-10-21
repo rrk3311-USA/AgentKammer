@@ -27,7 +27,7 @@ describe("mobile field menu", () => {
 
   it("puts Guides, Interactive Tools, and every public guide in the hamburger", () => {
     const ids = mobileFieldNav.map((item) => item.id);
-    expect(ids).toEqual(["home", "start", "guides", "tools", "contact"]);
+    expect(ids).toEqual(["home", "start", "guides", "articles", "tools", "contact"]);
     const hrefs = collectMobileNavHrefs();
     expect(hrefs).toContain("/guides");
     expect(hrefs).toContain("/resources");
@@ -61,6 +61,7 @@ describe("mobile field menu", () => {
     expect(defaultOpenSectionId("/tools")).toBe("tools");
     expect(defaultOpenSectionId("/tools/livability")).toBe("tools");
     expect(defaultOpenSectionId("/guides/how-mortgages-work")).toBe("guides");
+    expect(defaultOpenSectionId("/articles")).toBe("articles");
     expect(defaultOpenSectionId("/situations/first-home-buyers-nyc")).toBe("start");
     expect(defaultOpenSectionId("/")).toBeNull();
   });

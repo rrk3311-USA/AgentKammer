@@ -173,6 +173,13 @@ export const pageGraph = [
     related: ["/situations", "/guides", "/building-reports"],
   },
   {
+    path: "/articles",
+    title: "Articles",
+    topics: ["writing"],
+    prerequisites: [],
+    related: ["/"],
+  },
+  {
     path: "/about",
     title: "About Agent Kammer",
     topics: ["practice", "advisory approach"],

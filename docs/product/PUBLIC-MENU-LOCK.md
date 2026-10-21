@@ -6,15 +6,17 @@
 
 ## Primary header
 
-Exactly four short labels: Home · Start Here · Guides · Contact.
+Header doors: Home · Start Here · Guides · Articles · Interactive Tools · Contact.
+
+Articles is its own door at `/articles`. It is not a chapter of Guides, Insights, or the Resource Hub.
 
 Start Here is the Situations diagnostic (`/situations`). There is no separate Situations nav item. Old `/buyer-advisory` redirects there.
 
 **Not in top nav:** About · Buildings · Situations · Intelligence · Decision Hub · Assessment · Get Qualified · International · Decision Briefs.
 
-**Header CTA:** filled **Guidance** control (`ak-call-button` without the stripe overlay) that opens the Advisor. Not a sixth nav item. Never “Request Intelligence.” The floating Guidance chip stays solid — no pinstripe.
+**Header CTA:** filled **Guidance** control (`ak-call-button` without the stripe overlay) that opens the Advisor. Guidance stays a utility, not a nav door. Never “Request Intelligence.” The floating Guidance chip stays solid — no pinstripe.
 
-**Field hamburger (mobile only):** Home · Start Here · Guides · **Calculator** · Contact. Calculator lands on `/calculator`. Do not merchandise Tools or Hub. `/hub` stays unlisted.
+**Field hamburger:** Home · Start Here · Guides · Articles · Interactive Tools · Contact. Articles is its own door. Calculator, Wheel of Life, and Livability nest under Interactive Tools. `/hub` stays unlisted.
 
 **Footer:** quiet end — identity, Start Here · Guides · About · Get Qualified, then Privacy · Terms · Contact, then languages. Envelope stays with Contact at the end. Get Qualified is an onboard utility, not a fifth product. Situations is not a separate footer item. No product strip, no Intelligence, no public Decision Hub, no Sitemap competing in charcoal.
 
