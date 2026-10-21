@@ -7,6 +7,7 @@ import CommunicationMap from "@/pages/tools/CommunicationMap";
 import ToolsHome from "@/pages/tools/ToolsHome";
 import {
   CENTER_LINE,
+  PURPOSE_LINE,
   COMMUNICATION_ROUTES,
   MINUS_LIMIT,
   assertNoSaaSLanguage,
@@ -129,6 +130,8 @@ describe("communication map", () => {
     expect(html).toContain("One breath");
     expect(html).toContain("Integration");
     expect(html).toContain(CENTER_LINE);
+    expect(html).toContain(PURPOSE_LINE);
+    expect(() => assertNoSaaSLanguage(PURPOSE_LINE)).not.toThrow();
     expect(html).toContain(INSTRUCTION_CHOOSE);
     expect(html).toContain("Calibration scope");
     expect(html).not.toContain('type="range"');

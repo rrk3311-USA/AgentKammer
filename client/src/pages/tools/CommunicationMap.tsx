@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
-import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { cn } from "@/lib/utils";
 import {
   CENTER_LINE,
+  PURPOSE_LINE,
   ROUND_NOTICE,
   COMMUNICATION_MAP_PATH,
   COMMUNICATION_ROUTES,
@@ -53,22 +53,18 @@ export default function CommunicationMap() {
       data-testid="communication-map"
       className="flex h-full min-h-0 flex-col overflow-hidden bg-brand-ivory text-brand-ink"
     >
-      <div className="flex shrink-0 items-baseline justify-between gap-4 px-4 pt-3 sm:px-6">
-        <p className={grammar.eyebrow}>The anatomy</p>
-        <p className="text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">
-          Content
-          <span className="mx-2 text-brand-border">/</span>
-          Relationship
-        </p>
-      </div>
+      <p className="shrink-0 px-4 pt-2 font-display text-[1.45rem] leading-tight text-brand-navy sm:px-6 sm:pt-3 sm:text-[2rem]">
+        {PURPOSE_LINE}
+      </p>
 
       <div className="relative min-h-0 flex-1">
         <svg
-          viewBox="0 0 100 100"
+          viewBox="0 2 100 96"
           className="h-full w-full"
           role="img"
           aria-label="A mind. Content on the left, relationship on the right."
         >
+          <g transform="translate(50 48) scale(1.4) translate(-50 -48)">
           <g className="cm-pan" transform={`translate(${panX} ${panY})`}>
             {placed ? (
               <Trails routeId={route!.id} nodes={placed.nodes} step={state.step} across={route!.across} />
@@ -81,38 +77,16 @@ export default function CommunicationMap() {
             {route?.surround ? (
               <text
                 x="50"
-                y="14.5"
+                y="18"
                 textAnchor="middle"
                 fill="#7A5A3A"
-                fontSize="1.7"
-                letterSpacing="0.12"
+                fontSize="2.6"
+                letterSpacing="0.08"
                 fontFamily="Inter, sans-serif"
               >
                 {route.surround.join("  ·  ")}
               </text>
             ) : null}
-            <text
-              x="30"
-              y="10"
-              textAnchor="middle"
-              fill="#7A5A3A"
-              fontSize="1.8"
-              letterSpacing="0.16"
-              fontFamily="Inter, sans-serif"
-            >
-              CONTENT
-            </text>
-            <text
-              x="70"
-              y="10"
-              textAnchor="middle"
-              fill="#7A5A3A"
-              fontSize="1.8"
-              letterSpacing="0.16"
-              fontFamily="Inter, sans-serif"
-            >
-              RELATIONSHIP
-            </text>
             {placed?.nodes.map((item) => {
               const open = item.index + 1 <= state.step;
               const upcoming = item.index === state.step;
@@ -136,16 +110,16 @@ export default function CommunicationMap() {
                   <circle
                     cx={orb.x}
                     cy={orb.y}
-                    r="1.7"
+                    r="3.1"
                     fill={taken ? (orb.pole === "plus" ? "#B08D57" : "#2C3138") : "#F5F2EB"}
                     stroke={orb.pole === "plus" ? "#B08D57" : "#2A3447"}
                     strokeWidth="0.28"
                   />
                   <text
                     x={orb.x}
-                    y={orb.y + 0.55}
+                    y={orb.y + 1.15}
                     textAnchor="middle"
-                    fontSize="1.7"
+                    fontSize="3.6"
                     fill={taken ? "#F5F2EB" : "#2A3447"}
                     fontFamily="Inter, sans-serif"
                   >
@@ -155,7 +129,7 @@ export default function CommunicationMap() {
                     <circle
                       cx={orb.x}
                       cy={orb.y}
-                      r="2.6"
+                      r="3.6"
                       fill="transparent"
                       className="cursor-pointer"
                       role="button"
@@ -181,14 +155,15 @@ export default function CommunicationMap() {
             onTurn={route ? (step) => setState((prev) => moveTo(prev, step)) : undefined}
             onReturn={route ? () => setState((prev) => returnToMind(prev)) : undefined}
           />
+          </g>
         </svg>
       </div>
 
-      <div className="shrink-0 border-t border-brand-border bg-brand-ivory px-4 py-2 sm:px-6 sm:py-3">
-        <p className="font-display text-[1.45rem] leading-tight text-brand-navy sm:text-[1.75rem]" aria-live="polite">
+      <div className="shrink-0 border-t border-brand-border bg-brand-ivory px-4 py-2 sm:px-6">
+        <p className="font-display text-[1.7rem] leading-tight text-brand-navy sm:text-[2.15rem]" aria-live="polite">
           {guide}
         </p>
-        <p className="mt-1 line-clamp-2 text-[13px] leading-snug text-brand-ink">{plate}</p>
+        <p className="mt-1 line-clamp-1 text-base leading-snug text-brand-ink sm:text-lg">{plate}</p>
 
         {current ? (
           <div className="mt-2 grid grid-cols-2 gap-2">
@@ -220,7 +195,7 @@ export default function CommunicationMap() {
                 aria-pressed={selected}
                 onClick={() => setState((prev) => chooseRoute(prev, item.id))}
                 className={cn(
-                  "border px-3 py-2 text-[11px] uppercase tracking-[0.14em]",
+                  "border px-3.5 py-2.5 text-base uppercase tracking-wide sm:text-lg",
                   selected && "border-brand-navy bg-brand-navy text-brand-ivory",
                   !selected && !closed && "border-brand-border bg-white text-brand-navy",
                   closed && "border-brand-border text-brand-graphite/40",
@@ -234,7 +209,7 @@ export default function CommunicationMap() {
             <button
               type="button"
               onClick={() => setState((prev) => returnToMind(prev))}
-              className="px-2 py-2 text-[11px] uppercase tracking-[0.14em] text-brand-navy"
+              className="px-2 py-2 text-base uppercase tracking-wide text-brand-navy sm:text-lg"
             >
               To the mind
             </button>
@@ -389,7 +364,7 @@ function CenterScope({
         y="46.7"
         textAnchor="middle"
         fill="#2A3447"
-        fontSize="2.15"
+        fontSize="3.4"
         fontFamily='"Cormorant Garamond", Georgia, serif'
       >
         The mind
@@ -477,9 +452,9 @@ function StartBranches({
   onStart: (id: string) => void;
 }) {
   const starts = [
-    { id: "four-stations", x: 24, y: 28, title: "Four stations" },
-    { id: "one-breath", x: 76, y: 28, title: "One breath" },
-    { id: "integration", x: 50, y: 78, title: "Integration" },
+    { id: "four-stations", x: 32, y: 26, title: "Four stations" },
+    { id: "one-breath", x: 68, y: 26, title: "One breath" },
+    { id: "integration", x: 50, y: 76, title: "Integration" },
   ];
   return (
     <g>
@@ -512,14 +487,14 @@ function StartBranches({
               }
             }}
           >
-            <circle cx={item.x} cy={item.y - 0.6} r="5" fill="transparent" />
+            <circle cx={item.x} cy={item.y - 0.6} r="8" fill="transparent" />
             <text
               x={item.x}
               y={item.y}
               textAnchor="middle"
               fill="#2A3447"
               opacity={shut ? 0.35 : 1}
-              fontSize="2.15"
+              fontSize="4.2"
               fontFamily='"Cormorant Garamond", Georgia, serif'
             >
               {item.title}
@@ -605,7 +580,7 @@ function NodeMark({
       <circle
         cx={item.x}
         cy={item.y}
-        r={active ? 2.15 : open ? 1.45 : 1.05}
+        r={active ? 2.8 : open ? 2 : 1.4}
         fill={active ? "#2A3447" : "#F5F2EB"}
         stroke="#2A3447"
         strokeWidth="0.28"
@@ -618,7 +593,7 @@ function NodeMark({
             y={item.y - 0.6}
             textAnchor={anchor}
             fill="#7A5A3A"
-            fontSize="1.45"
+            fontSize="2.4"
             fontFamily="Inter, sans-serif"
             letterSpacing="0.08"
           >
@@ -626,10 +601,10 @@ function NodeMark({
           </text>
           <text
             x={labelX}
-            y={item.y + 1.8}
+            y={item.y + 2.6}
             textAnchor={anchor}
             fill="#2A3447"
-            fontSize="2.15"
+            fontSize="3.8"
             fontFamily='"Cormorant Garamond", Georgia, serif'
           >
             {item.title}
@@ -657,7 +632,7 @@ function OrbButton({
       aria-pressed={pressed}
       onClick={onTake}
       className={cn(
-        "flex min-h-11 items-center gap-2 border px-2.5 py-1.5 text-left text-[12px] leading-4 text-brand-navy",
+        "flex min-h-12 items-center gap-2 border px-3 py-2 text-left text-base leading-snug text-brand-navy sm:text-lg",
         pole === "plus" ? "border-brand-brass/70 bg-white" : "border-brand-border bg-white",
         pressed && pole === "plus" && "bg-brand-navy text-brand-ivory",
         pressed && pole === "minus" && "bg-brand-charcoal text-brand-ivory",
@@ -665,7 +640,7 @@ function OrbButton({
     >
       <span
         className={cn(
-          "grid h-7 w-7 shrink-0 place-items-center rounded-full border text-sm",
+          "grid h-9 w-9 shrink-0 place-items-center rounded-full border text-lg",
           pole === "plus" ? "border-brand-brass" : "border-brand-navy/30",
           pressed && "border-brand-ivory/40",
         )}

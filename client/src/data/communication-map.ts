@@ -12,6 +12,8 @@ export const SCOPE_DETENT = 36;
 
 export const CENTER_LINE = "Someone wants something to change in another mind.";
 
+export const PURPOSE_LINE = "Use it to decide a response. Content is on the left, relationship is on the right.";
+
 export const BOUNCE_NOTICE = "Too many minus orbs. Back to the mind.";
 
 export const ROUND_NOTICE = "Every response becomes the next message.";
@@ -259,15 +261,15 @@ export function layoutRoute(route: MapRoute): { nodes: PlacedNode[]; orbs: Place
   const left = route.nodes.filter((item) => item.side === "content");
   const right = route.nodes.filter((item) => item.side === "relationship");
   const column = (items: readonly MapNode[], x: number) => {
-    const span = 62;
-    const top = 18;
+    const span = 46;
+    const top = 32;
     return items.map((item, index) => {
       const y = items.length === 1 ? 48 : top + (index * span) / (items.length - 1);
       return { x, y };
     });
   };
-  const leftPos = column(left, 30);
-  const rightPos = column(right, 70);
+  const leftPos = column(left, 40);
+  const rightPos = column(right, 60);
   const pos = new Map<string, { x: number; y: number }>();
   left.forEach((item, index) => pos.set(item.id, leftPos[index]!));
   right.forEach((item, index) => pos.set(item.id, rightPos[index]!));
@@ -281,9 +283,18 @@ export function layoutRoute(route: MapRoute): { nodes: PlacedNode[]; orbs: Place
   const center = { x: 50, y: 48 };
   nodes.forEach((item, index) => {
     const prev = index === 0 ? center : { x: nodes[index - 1]!.x, y: nodes[index - 1]!.y };
-    const control = bend(prev, item);
-    const plusAt = quad(prev, control, item, 0.42);
-    const minusAt = quad(prev, control, item, 0.72);
+    const dx = item.x - prev.x;
+    const dy = item.y - prev.y;
+    const len = Math.hypot(dx, dy) || 1;
+    const ux = dx / len;
+    const uy = dy / len;
+    const dist = Math.min(Math.max(len - 3.4, 15.4), 16.8);
+    const beside = (sign: 1 | -1) => ({
+      x: prev.x + ux * dist + -uy * 6.2 * sign,
+      y: prev.y + uy * dist + ux * 6.2 * sign,
+    });
+    const plusAt = beside(1);
+    const minusAt = beside(-1);
     orbs.push({
       id: orbId(route.id, item.id, "plus"),
       pole: "plus",
@@ -314,19 +325,6 @@ function bend(from: { x: number; y: number }, to: { x: number; y: number }) {
   return {
     x: (from.x + to.x) / 2 * 0.42 + 50 * 0.58,
     y: (from.y + to.y) / 2 * 0.42 + 48 * 0.58,
-  };
-}
-
-function quad(
-  from: { x: number; y: number },
-  control: { x: number; y: number },
-  to: { x: number; y: number },
-  t: number,
-) {
-  const u = 1 - t;
-  return {
-    x: u * u * from.x + 2 * u * t * control.x + t * t * to.x,
-    y: u * u * from.y + 2 * u * t * control.y + t * t * to.y,
   };
 }
 
@@ -430,7 +428,7 @@ export function focusedNode(state: MindState): MapNode | null {
 }
 
 export function communicationCopy(): string {
-  const parts = [CENTER_LINE, BOUNCE_NOTICE, ROUND_NOTICE];
+  const parts = [PURPOSE_LINE, CENTER_LINE, BOUNCE_NOTICE, ROUND_NOTICE];
   for (const route of COMMUNICATION_ROUTES) {
     parts.push(route.title, route.trail, ...(route.surround ?? []));
     for (const item of route.nodes) {
