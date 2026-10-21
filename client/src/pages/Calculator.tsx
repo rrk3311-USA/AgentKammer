@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { PageSection } from "@/components/site-shell";
-import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import {
   DEFAULT_CARRY,
@@ -27,19 +26,19 @@ function Field({
   wide?: boolean;
 }) {
   return (
-    <label className="ak-felt-rule grid items-baseline gap-3 border-b py-5 sm:grid-cols-[minmax(0,1fr)_auto]">
-      <span className={grammar.eyebrow}>{label}</span>
-      <span className="flex items-baseline justify-end gap-2 font-display text-[1.45rem] leading-none text-brand-navy md:text-[1.85rem]">
+    <label className="grid items-center gap-3 border-b border-brand-navy/15 px-5 py-4 last:border-b-0 sm:grid-cols-[minmax(0,1fr)_auto] sm:px-6">
+      <span className="text-lg text-brand-navy sm:text-xl">{label}</span>
+      <span className="flex items-baseline justify-end gap-3 font-mono text-[1.7rem] tabular-nums leading-none text-brand-navy sm:text-[2.05rem]">
         <input
           inputMode="decimal"
           value={value}
           onChange={(event) => onChange(event.target.value)}
           className={cn(
             "bg-transparent text-right outline-none placeholder:text-brand-graphite/35",
-            wide ? "w-40 sm:w-52" : "w-24 sm:w-28",
+            wide ? "w-44 sm:w-60" : "w-28 sm:w-36",
           )}
         />
-        {suffix ? <span className="text-[0.95rem] text-brand-graphite">{suffix}</span> : null}
+        {suffix ? <span className="font-sans text-lg text-brand-graphite sm:text-xl">{suffix}</span> : null}
       </span>
     </label>
   );
@@ -78,20 +77,20 @@ export default function Calculator() {
       <section className="border-b border-brand-border bg-brand-navy text-brand-ivory">
         <PageSection className="grid gap-10 py-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:py-16">
           <div>
-            <p className={grammar.eyebrowOnDark}>Calculator</p>
-            <p className="mt-5 font-display text-[clamp(3.5rem,11vw,6.25rem)] leading-[0.86] tracking-[-0.03em]">
+            <h1 className="text-lg uppercase tracking-[0.14em] text-brand-ivory sm:text-xl">Calculator</h1>
+            <p className="mt-4 font-mono text-[clamp(3.25rem,8vw,5.5rem)] tabular-nums leading-[0.9] tracking-[-0.03em]">
               {formatUsd(result.monthly)}
             </p>
-            <p className="mt-5 font-display text-[clamp(1.45rem,3.4vw,2.1rem)] leading-[1.15] tracking-[-0.02em] text-brand-ivory/88">
+            <p className="mt-4 font-display text-[clamp(1.55rem,3vw,2.15rem)] leading-[1.12] text-brand-ivory">
               What does this home cost each month?
             </p>
           </div>
-          <div className="max-w-md space-y-5 border-l border-brand-ivory/16 pl-5 lg:pl-8">
-            <p className={grammar.bodyOnDark}>
+          <div className="border border-brand-ivory/30 px-5 py-5 lg:px-6">
+            <p className="text-lg leading-snug text-brand-ivory sm:text-xl">
               On a {formatUsd(input.price)} purchase with {input.downPercent}% down. Cash to close begins near{" "}
               {formatUsd(result.down)}, before closing costs.
             </p>
-            <p className={grammar.bodyOnDark}>
+            <p className="mt-4 text-lg leading-snug text-brand-ivory sm:text-xl">
               Carry first. Listings later. Mortgage, tax, and common charges — educational, not a pre-approval.
             </p>
           </div>
@@ -101,9 +100,10 @@ export default function Calculator() {
       <PageSection>
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start">
           <div>
-            <p className={grammar.eyebrow}>Inputs</p>
-            <h2 className={`mt-3 ${grammar.section}`}>Change one number. The month moves.</h2>
-            <div className="ak-felt-rule mt-8 border-t">
+            <h2 className="font-display text-[clamp(1.85rem,4vw,2.6rem)] leading-[1.05] text-brand-navy">
+              Change one number. The month moves.
+            </h2>
+            <div className="mt-6 border border-brand-navy bg-white">
               <Field label="Purchase price" value={price} onChange={setPrice} wide />
               <Field label="Down payment" suffix="%" value={downPercent} onChange={setDownPercent} />
               <Field label="Rate" suffix="%" value={ratePercent} onChange={setRatePercent} />
@@ -114,8 +114,8 @@ export default function Calculator() {
           </div>
 
           <aside>
-            <p className={grammar.eyebrow}>The month</p>
-            <div className="ak-felt-rule mt-8 border-t">
+            <h2 className="font-display text-[clamp(1.85rem,4vw,2.6rem)] leading-[1.05] text-brand-navy">The month</h2>
+            <div className="mt-6 border border-brand-navy bg-white">
               {(
                 [
                   ["Mortgage", result.mortgage],
@@ -123,33 +123,35 @@ export default function Calculator() {
                   ["Common charges", result.common],
                 ] as const
               ).map(([label, amount]) => (
-                <div key={label} className="ak-felt-rule flex items-baseline justify-between gap-6 border-b py-5">
-                  <p className="text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">{label}</p>
-                  <p className={grammar.rowTitle}>{formatUsd(amount)}</p>
+                <div key={label} className="flex items-baseline justify-between gap-6 border-b border-brand-navy/15 px-5 py-4 sm:px-6">
+                  <p className="text-lg text-brand-navy sm:text-xl">{label}</p>
+                  <p className="font-mono text-[1.7rem] tabular-nums leading-none text-brand-navy sm:text-[2.05rem]">
+                    {formatUsd(amount)}
+                  </p>
                 </div>
               ))}
-              <div className="flex items-baseline justify-between gap-6 py-6">
-                <p className="text-[11px] uppercase tracking-[0.16em] text-brand-navy">Monthly carry</p>
-                <p className="font-display text-[clamp(1.85rem,4vw,2.4rem)] leading-none text-brand-navy">
+              <div className="flex items-baseline justify-between gap-6 px-5 py-5 sm:px-6">
+                <p className="text-lg text-brand-navy sm:text-xl">Monthly carry</p>
+                <p className="font-mono text-[clamp(1.9rem,3vw,2.5rem)] tabular-nums leading-none text-brand-navy">
                   {formatUsd(result.monthly)}
                 </p>
               </div>
             </div>
-            <p className="mt-6 max-w-sm text-sm leading-6 text-brand-graphite">
+            <p className="mt-5 text-lg leading-snug text-brand-navy">
               Educational only. Insurance, assessments, and closing costs sit outside this page. Judgment still
               comes after the number.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/situations"
-                className="ak-call-button group inline-flex w-full items-center justify-between gap-4 px-5 py-4 text-[14px] font-semibold uppercase tracking-[0.12em] text-brand-ivory sm:w-auto"
+                className="ak-call-button group inline-flex w-full items-center justify-between gap-4 px-5 py-4 text-base font-semibold uppercase tracking-[0.08em] text-brand-ivory sm:w-auto sm:text-lg"
               >
                 What's changing
-                <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+                <ArrowRight className="h-5 w-5" strokeWidth={1.5} />
               </Link>
-              <Link href="/contact" className={cn(grammar.textLink, "sm:px-2")}>
+              <Link href="/contact" className="inline-flex items-center gap-2 px-2 py-4 text-lg text-brand-navy">
                 Contact
-                <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+                <ArrowRight className="h-5 w-5" strokeWidth={1.5} />
               </Link>
             </div>
           </aside>

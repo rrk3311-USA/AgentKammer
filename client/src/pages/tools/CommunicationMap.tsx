@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { PageSection } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { cn } from "@/lib/utils";
 import {
@@ -25,6 +26,59 @@ import {
 } from "@/data/communication-map";
 
 const CENTER = { x: 50, y: 48 };
+
+function toBoard(x: number, y: number) {
+  return { x: 1.55 * (x - CENTER.x) + CENTER.x, y: 1.55 * (y - CENTER.y) + CENTER.y };
+}
+
+function stepFrame(phase: "choose" | "orb" | "continue", placed: ReturnType<typeof layoutRoute> | null, state: MindState) {
+  if (phase === "choose" || !placed) return "0 0 100 100";
+  const marks: { x: number; y: number }[] = [];
+  const add = (x: number, y: number) => marks.push(toBoard(x, y));
+  add(CENTER.x - 16, CENTER.y);
+  add(CENTER.x + 16, CENTER.y);
+  add(CENTER.x, CENTER.y - 16);
+  add(CENTER.x, CENTER.y + 16);
+  for (const item of placed.nodes) {
+    const open = item.index + 1 <= state.step;
+    const upcoming = item.index === state.step;
+    if (!open && !upcoming) continue;
+    if (!open) {
+      add(item.x - 2.5, item.y - 2.5);
+      add(item.x + 2.5, item.y + 2.5);
+      continue;
+    }
+    const labelW = Math.max(10, item.title.length * 2.5);
+    const labelX = item.side === "content" ? item.x - 3.4 : item.x + 3.4;
+    const left = item.side === "content" ? labelX - labelW : item.x - 3;
+    const right = item.side === "content" ? item.x + 3 : labelX + labelW;
+    add(left, item.y - 4.2);
+    add(right, item.y + 3.4);
+  }
+  for (const orb of placed.orbs) {
+    const reached = state.step === orb.index + 1;
+    const taken = state.taken.includes(orb.id);
+    if (!(phase === "orb" && reached) && !(phase === "continue" && taken)) continue;
+    add(orb.x - 5.2, orb.y - 5.2);
+    add(orb.x + 5.2, orb.y + 5.2);
+  }
+  let minX = Infinity;
+  let minY = Infinity;
+  let maxX = -Infinity;
+  let maxY = -Infinity;
+  for (const mark of marks) {
+    minX = Math.min(minX, mark.x);
+    minY = Math.min(minY, mark.y);
+    maxX = Math.max(maxX, mark.x);
+    maxY = Math.max(maxY, mark.y);
+  }
+  const pad = 4;
+  minX -= pad;
+  minY -= pad;
+  maxX += pad;
+  maxY += pad;
+  return `${minX.toFixed(1)} ${minY.toFixed(1)} ${(maxX - minX).toFixed(1)} ${(maxY - minY).toFixed(1)}`;
+}
 
 export default function CommunicationMap() {
   usePageMetadata({
@@ -54,25 +108,45 @@ export default function CommunicationMap() {
   const focus = current && placed ? placed.nodes.find((item) => item.id === current.id) : null;
   const panX = focus ? (CENTER.x - focus.x) * 0.05 : 0;
   const panY = focus ? (CENTER.y - focus.y) * 0.05 : 0;
+  const stepMark = phase === "orb" ? "Step 2" : phase === "continue" ? "Step 3" : "Step 1";
 
   return (
-    <main
-      data-testid="communication-map"
-      className="flex h-full min-h-0 flex-col overflow-hidden bg-brand-ivory text-brand-ink"
-    >
-      <header className="shrink-0 px-4 pt-2 sm:px-6 sm:pt-3">
-        <h1 className="font-display text-[1.85rem] leading-none text-brand-navy sm:text-[2.35rem]">{GUIDE_NAME}</h1>
-        <p className="mt-1 max-w-5xl text-[1.15rem] leading-snug text-brand-navy sm:text-[1.4rem]">{PURPOSE_LINE}</p>
-      </header>
+    <main data-testid="communication-map" className="bg-brand-ivory text-brand-ink">
+      <section className="border-b border-brand-border bg-brand-navy text-brand-ivory">
+        <PageSection className="grid gap-8 py-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:py-14">
+          <div>
+            <p className="text-base uppercase tracking-[0.18em] text-brand-stone sm:text-lg">{GUIDE_NAME}</p>
+            <h1 className="mt-4 font-display text-[clamp(3rem,7vw,4.75rem)] leading-[0.88] tracking-[-0.03em]">
+              {stepMark}
+            </h1>
+            <p className="mt-4 max-w-xl font-display text-[clamp(1.55rem,2.8vw,2.15rem)] leading-[1.12] text-brand-ivory/90">
+              {guide.replace(/^Step \d+\.\s*/, "")}
+            </p>
+          </div>
+          <div className="border-l border-brand-ivory/16 pl-5 lg:pl-8">
+            <p className="font-display text-[clamp(1.45rem,2.2vw,1.9rem)] leading-snug text-brand-ivory">{PURPOSE_LINE}</p>
+          </div>
+        </PageSection>
+      </section>
 
-      <div className="relative min-h-0 flex-1">
+      <PageSection className="py-10 lg:py-14">
+        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
+          <div>
+            <h2 className="font-display text-[clamp(1.85rem,4vw,2.6rem)] leading-[1.05] text-brand-navy">The mind</h2>
+            <p className="mt-2 text-lg leading-snug text-brand-navy sm:text-xl">
+              Content on the left. Relationship on the right.
+            </p>
+            {route?.surround ? (
+              <p className="mt-1 text-lg text-brand-cocoa sm:text-xl">{route.surround.join("  ·  ")}</p>
+            ) : null}
+            <div className="mt-6 border border-brand-navy bg-white">
         <svg
-          viewBox="0 2 100 96"
-          className="h-full w-full"
+          viewBox={stepFrame(phase, placed, state)}
+          className="block h-auto w-full"
           role="img"
           aria-label="A mind. Content on the left, relationship on the right."
         >
-          <g transform="translate(50 48) scale(1.4) translate(-50 -48)">
+          <g transform="translate(50 48) scale(1.55) translate(-50 -48)">
           <g className="cm-pan" transform={`translate(${panX} ${panY})`}>
             {placed ? (
               <Trails routeId={route!.id} nodes={placed.nodes} step={state.step} across={route!.across} />
@@ -82,19 +156,6 @@ export default function CommunicationMap() {
                 onStart={(id) => setState((prev) => chooseRoute(prev, id))}
               />
             )}
-            {route?.surround ? (
-              <text
-                x="50"
-                y="18"
-                textAnchor="middle"
-                fill="#7A5A3A"
-                fontSize="2.6"
-                letterSpacing="0.08"
-                fontFamily="Inter, sans-serif"
-              >
-                {route.surround.join("  ·  ")}
-              </text>
-            ) : null}
             {placed?.nodes.map((item) => {
               const open = item.index + 1 <= state.step;
               const upcoming = item.index === state.step;
@@ -118,16 +179,16 @@ export default function CommunicationMap() {
                   <circle
                     cx={orb.x}
                     cy={orb.y}
-                    r="3.1"
+                    r="3.8"
                     fill={taken ? (orb.pole === "plus" ? "#B08D57" : "#2C3138") : "#F5F2EB"}
                     stroke={orb.pole === "plus" ? "#B08D57" : "#2A3447"}
                     strokeWidth="0.28"
                   />
                   <text
                     x={orb.x}
-                    y={orb.y + 1.15}
+                    y={orb.y + 1.45}
                     textAnchor="middle"
-                    fontSize="3.6"
+                    fontSize="4.6"
                     fill={taken ? "#F5F2EB" : "#2A3447"}
                     fontFamily="Inter, sans-serif"
                   >
@@ -137,7 +198,7 @@ export default function CommunicationMap() {
                     <circle
                       cx={orb.x}
                       cy={orb.y}
-                      r="3.6"
+                      r="4.4"
                       fill="transparent"
                       className="cursor-pointer"
                       role="button"
@@ -165,66 +226,73 @@ export default function CommunicationMap() {
           />
           </g>
         </svg>
-      </div>
-
-      <div className="shrink-0 border-t border-brand-border bg-brand-ivory px-4 py-2 sm:px-6">
-        <p className="font-display text-[1.55rem] leading-tight text-brand-navy sm:text-[1.9rem]" aria-live="polite">
-          {guide}
-        </p>
-        {plate ? <p className="mt-1 line-clamp-1 text-base leading-snug text-brand-ink sm:text-lg">{plate}</p> : null}
-
-        {phase === "orb" && current ? (
-          <div className="mt-2 grid grid-cols-2 gap-2">
-            <OrbButton
-              pole="plus"
-              label={current.plus}
-              pressed={state.taken.includes(`${route!.id}:${current.id}:plus`)}
-              onTake={() => setState((prev) => takeOrb(prev, `${route!.id}:${current.id}:plus`))}
-            />
-            <OrbButton
-              pole="minus"
-              label={current.minus}
-              pressed={state.taken.includes(`${route!.id}:${current.id}:minus`)}
-              onTake={() => setState((prev) => takeOrb(prev, `${route!.id}:${current.id}:minus`))}
-            />
+            </div>
           </div>
-        ) : null}
 
-        {phase === "choose" ? (
-          <div className="mt-2 flex flex-wrap items-center gap-2">
-            {COMMUNICATION_ROUTES.map((item, index) => {
-              const closed = state.closed.includes(item.id);
-              return (
+          <div>
+            <h2 className="font-display text-[clamp(1.85rem,4vw,2.6rem)] leading-[1.05] text-brand-navy">This step</h2>
+            <div className="mt-6 border border-brand-navy bg-white">
+              <div className="border-b border-brand-border px-5 py-5 sm:px-6">
+                <p className="font-display text-[clamp(1.7rem,3vw,2.25rem)] leading-tight text-brand-navy" aria-live="polite">
+                  {guide}
+                </p>
+                {plate ? <p className="mt-3 text-lg leading-snug text-brand-ink sm:text-xl">{plate}</p> : null}
+              </div>
+
+              {phase === "orb" && current ? (
+                <div>
+                  <OrbButton
+                    pole="plus"
+                    label={current.plus}
+                    pressed={state.taken.includes(`${route!.id}:${current.id}:plus`)}
+                    onTake={() => setState((prev) => takeOrb(prev, `${route!.id}:${current.id}:plus`))}
+                  />
+                  <OrbButton
+                    pole="minus"
+                    label={current.minus}
+                    pressed={state.taken.includes(`${route!.id}:${current.id}:minus`)}
+                    onTake={() => setState((prev) => takeOrb(prev, `${route!.id}:${current.id}:minus`))}
+                  />
+                </div>
+              ) : null}
+
+              {phase === "choose" ? (
+                <div>
+                  {COMMUNICATION_ROUTES.map((item, index) => {
+                    const closed = state.closed.includes(item.id);
+                    return (
+                      <button
+                        key={item.id}
+                        ref={index === 0 ? firstOpenRoute : undefined}
+                        type="button"
+                        disabled={closed}
+                        onClick={() => setState((prev) => chooseRoute(prev, item.id))}
+                        className={cn(
+                          "flex w-full items-center border-b border-brand-navy/15 px-5 py-5 text-left font-display text-[clamp(1.7rem,2.6vw,2.15rem)] leading-none last:border-b-0 sm:px-6",
+                          !closed && "text-brand-navy hover:bg-brand-ivory",
+                          closed && "text-brand-graphite/40",
+                        )}
+                      >
+                        {closed ? `${item.title} closed` : item.title}
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : null}
+
+              {phase === "continue" ? (
                 <button
-                  key={item.id}
-                  ref={index === 0 ? firstOpenRoute : undefined}
                   type="button"
-                  disabled={closed}
-                  onClick={() => setState((prev) => chooseRoute(prev, item.id))}
-                  className={cn(
-                    "border px-3.5 py-2.5 text-base uppercase tracking-wide sm:text-lg",
-                    !closed && "border-brand-border bg-white text-brand-navy",
-                    closed && "border-brand-border text-brand-graphite/40",
-                  )}
+                  onClick={() => setState((prev) => returnToMind(prev))}
+                  className="flex w-full items-center px-5 py-5 text-left font-display text-[clamp(1.7rem,2.6vw,2.15rem)] leading-none text-brand-navy hover:bg-brand-ivory sm:px-6"
                 >
-                  {closed ? `${item.title} closed` : item.title}
+                  To the mind
                 </button>
-              );
-            })}
+              ) : null}
+            </div>
           </div>
-        ) : null}
-        {phase === "continue" ? (
-          <div className="mt-2">
-            <button
-              type="button"
-              onClick={() => setState((prev) => returnToMind(prev))}
-              className="border border-brand-border bg-white px-3.5 py-2.5 text-base uppercase tracking-wide text-brand-navy sm:text-lg"
-            >
-              To the mind
-            </button>
-          </div>
-        ) : null}
-      </div>
+        </div>
+      </PageSection>
     </main>
   );
 }
@@ -373,7 +441,7 @@ function CenterScope({
         y="46.7"
         textAnchor="middle"
         fill="#2A3447"
-        fontSize="3.4"
+        fontSize="4.6"
         fontFamily='"Cormorant Garamond", Georgia, serif'
       >
         The mind
@@ -496,14 +564,14 @@ function StartBranches({
               }
             }}
           >
-            <circle cx={item.x} cy={item.y - 0.6} r="8" fill="transparent" />
+            <circle cx={item.x} cy={item.y - 0.6} r="10" fill="transparent" />
             <text
               x={item.x}
               y={item.y}
               textAnchor="middle"
               fill="#2A3447"
               opacity={shut ? 0.35 : 1}
-              fontSize="4.2"
+              fontSize="5.6"
               fontFamily='"Cormorant Garamond", Georgia, serif'
             >
               {item.title}
@@ -641,7 +709,7 @@ function OrbButton({
       aria-pressed={pressed}
       onClick={onTake}
       className={cn(
-        "flex min-h-12 items-center gap-2 border px-3 py-2 text-left text-base leading-snug text-brand-navy sm:text-lg",
+        "flex w-full items-center gap-4 border-b border-brand-border px-5 py-5 text-left font-display text-[clamp(1.35rem,2vw,1.7rem)] leading-snug text-brand-navy last:border-b-0 sm:px-6",
         pole === "plus" ? "border-brand-brass/70 bg-white" : "border-brand-border bg-white",
         pressed && pole === "plus" && "bg-brand-navy text-brand-ivory",
         pressed && pole === "minus" && "bg-brand-charcoal text-brand-ivory",
@@ -649,7 +717,7 @@ function OrbButton({
     >
       <span
         className={cn(
-          "grid h-9 w-9 shrink-0 place-items-center rounded-full border text-lg",
+          "grid h-12 w-12 shrink-0 place-items-center rounded-full border font-sans text-2xl",
           pole === "plus" ? "border-brand-brass" : "border-brand-navy/30",
           pressed && "border-brand-ivory/40",
         )}
