@@ -7,6 +7,9 @@ export const COMMUNICATION_MAP_PATH = "/tools/communication-map";
 
 export const MINUS_LIMIT = 3;
 
+/** Degrees of scope turn that move one step. Either direction. */
+export const SCOPE_DETENT = 36;
+
 export const CENTER_LINE = "Someone wants something to change in another mind.";
 
 export const BOUNCE_NOTICE = "Too many minus orbs. Back to the mind.";
@@ -388,6 +391,40 @@ function stepForward(state: MindState): MindState {
   const route = routeById(state.routeId);
   if (!route || state.step >= route.nodes.length) return state;
   return moveTo(state, state.step + 1);
+}
+
+export function guideLine(state: MindState): string {
+  if (!state.routeId) return state.notice ? "Open another route." : "Open a route.";
+  const node = focusedNode(state);
+  const route = routeById(state.routeId);
+  if (!node || !route) return "Open a route.";
+  const takenHere = state.taken.some((id) => id.startsWith(`${route.id}:${node.id}:`));
+  if (!takenHere && minusCount(state, state.routeId) >= MINUS_LIMIT - 1) {
+    return "One more minus returns you to the mind.";
+  }
+  const next = route.nodes[state.step];
+  if (!next) return takenHere ? "Open another route." : "Take plus or minus.";
+  if (takenHere) return `Turn the scope. ${next.title} opens.`;
+  return `Take plus or minus. ${next.title} opens.`;
+}
+
+/** Clockwise carry advances. Counterclockwise carry goes back. Ends resist. */
+export function applyScopeTurn(step: number, steps: number, carry: number, detent = SCOPE_DETENT) {
+  let next = step;
+  let rest = carry;
+  if (steps < 1) return { step: next, carry: 0 };
+  while (rest >= detent && next < steps) {
+    rest -= detent;
+    next += 1;
+  }
+  while (rest <= -detent && next > 1) {
+    rest += detent;
+    next -= 1;
+  }
+  const slack = 14;
+  if (next >= steps && rest > slack) rest = slack;
+  if (next <= 1 && rest < -slack) rest = -slack;
+  return { step: next, carry: rest };
 }
 
 export function focusedNode(state: MindState): MapNode | null {

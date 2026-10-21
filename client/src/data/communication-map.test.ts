@@ -10,8 +10,10 @@ import {
   COMMUNICATION_ROUTES,
   MINUS_LIMIT,
   assertNoSaaSLanguage,
+  applyScopeTurn,
   chooseRoute,
   communicationCopy,
+  guideLine,
   initialMindState,
   layoutRoute,
   moveTo,
@@ -79,6 +81,24 @@ describe("communication map", () => {
     const moved = takeOrb(opened, orbId("four-stations", "speaker", "plus"));
     expect(moved.routeId).toBe("four-stations");
     expect(moved.step).toBe(2);
+    expect(guideLine(initialMindState)).toBe("Open a route.");
+    expect(guideLine(opened)).toBe("Take plus or minus. Message opens.");
+    expect(() => assertNoSaaSLanguage(guideLine(opened))).not.toThrow();
+    let warned = opened;
+    warned = takeOrb(warned, orbId("four-stations", "speaker", "minus"));
+    warned = takeOrb(warned, orbId("four-stations", "message", "minus"));
+    expect(warned.step).toBe(3);
+    expect(guideLine(warned)).toBe("One more minus returns you to the mind.");
+    const stepped = moveTo(takeOrb(opened, orbId("four-stations", "speaker", "plus")), 1);
+    expect(guideLine(stepped)).toBe("Turn the scope. Message opens.");
+    const end = moveTo(chooseRoute(initialMindState, "four-stations"), 4);
+    expect(guideLine(end)).toBe("Take plus or minus.");
+    const done = takeOrb(end, orbId("four-stations", "outcome", "plus"));
+    expect(done.step).toBe(4);
+    expect(guideLine(done)).toBe("Open another route.");
+    expect(guideLine({ ...initialMindState, notice: "Too many minus orbs. Back to the mind." })).toBe(
+      "Open another route.",
+    );
   });
 
   it("opens the other routes again when every route has closed", () => {
@@ -105,6 +125,10 @@ describe("communication map", () => {
     expect(html).toContain("One breath");
     expect(html).toContain("Integration");
     expect(html).toContain(CENTER_LINE);
+    expect(html).toContain("Open a route.");
+    expect(html).toContain("Calibration scope");
+    expect(html).not.toContain('type="range"');
+    expect(html).not.toContain("Speaker");
     expect(html).not.toContain("<article");
     expect(html.toLowerCase()).not.toContain("platform");
     expect(html.toLowerCase()).not.toContain("subscription");
@@ -112,6 +136,14 @@ describe("communication map", () => {
     expect(html.toLowerCase()).not.toContain("dashboard");
     expect(html.toLowerCase()).not.toContain("software");
     expect(html).not.toMatch(/\bplan\b/i);
+  });
+
+  it("turns the scope clockwise to advance and counterclockwise to go back", () => {
+    expect(applyScopeTurn(1, 4, 36)).toEqual({ step: 2, carry: 0 });
+    expect(applyScopeTurn(1, 4, 80)).toEqual({ step: 3, carry: 8 });
+    expect(applyScopeTurn(3, 4, -36)).toEqual({ step: 2, carry: 0 });
+    expect(applyScopeTurn(1, 4, -40)).toEqual({ step: 1, carry: -14 });
+    expect(applyScopeTurn(4, 4, 50)).toEqual({ step: 4, carry: 14 });
   });
 
   it("lists the map on Interactive Tools without a sixth header door", () => {
