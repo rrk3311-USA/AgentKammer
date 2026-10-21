@@ -33,12 +33,6 @@ const PUBLIC_TOOLS: readonly ToolCard[] = [
     href: "/tools/livability/",
     hard: true,
   },
-  {
-    eyebrow: "One message",
-    title: "Decision Guide",
-    description: "Choose a response. Content on the left, relationship on the right.",
-    href: "/tools/communication-map",
-  },
 ];
 
 function CardBody({ card }: { card: ToolCard }) {
@@ -58,7 +52,7 @@ function CardBody({ card }: { card: ToolCard }) {
 export default function ToolsHome() {
   usePageMetadata({
     title: "Interactive Tools",
-    description: "Monthly carry, a personal check-in, a floor-plan walk, and a decision guide.",
+    description: "Monthly carry, a personal check-in, and a floor-plan walk.",
     path: "/tools",
   });
 
@@ -67,15 +61,15 @@ export default function ToolsHome() {
       <PageHero
         eyebrow="Desk"
         title="Interactive Tools"
-        description="A quiet monthly-carry calculator, a personal check-in, a floor-plan walk, and a decision guide."
+        description="A quiet monthly-carry calculator, a personal check-in, and a floor-plan walk."
         art="decision-framework"
       />
 
       <PageSection>
         <SectionHeading
           eyebrow="Desk"
-          title="Start with the month, the week, the rooms, or a message."
-          description="The calculator, the Wheel of Life, and Livability sit beside the Decision Guide."
+          title="Start with the month, the week, or the rooms."
+          description="The calculator, the Wheel of Life, and Livability."
         />
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2">

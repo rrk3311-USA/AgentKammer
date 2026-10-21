@@ -164,7 +164,7 @@ describe("communication map", () => {
     expect(applyScopeTurn(4, 4, 50)).toEqual({ step: 4, carry: 14 });
   });
 
-  it("lists the map on Interactive Tools without a sixth header door", () => {
+  it("keeps five header doors and leaves the map off Interactive Tools", () => {
     expect(primaryNav).toHaveLength(5);
     expect(primaryNav.map((item) => item.label)).toEqual([
       "Home",
@@ -174,9 +174,9 @@ describe("communication map", () => {
       "Contact",
     ]);
     const html = renderToStaticMarkup(createElement(Router, { ssrPath: "/tools" }, createElement(ToolsHome)));
-    expect(html).toContain('href="/tools/communication-map"');
-    expect(html).toContain("Decision Guide");
-    expect(html).not.toContain("Anatomy of Communication");
+    expect(html).not.toContain('href="/tools/communication-map"');
+    expect(html).not.toContain("Decision Guide");
+    expect(html).toContain('href="/calculator"');
     expect(html).not.toContain("/insights");
   });
 });

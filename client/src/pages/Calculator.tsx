@@ -10,6 +10,7 @@ import {
   parseMoney,
   type CarryInput,
 } from "@/lib/monthly-carry";
+import { downloadCalculatorPdf } from "@/lib/calculator-pdf";
 import { cn } from "@/lib/utils";
 
 function Field({
@@ -141,7 +142,27 @@ export default function Calculator() {
               Educational only. Insurance, assessments, and closing costs sit outside this page. Judgment still
               comes after the number.
             </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <button
+                type="button"
+                onClick={() =>
+                  downloadCalculatorPdf(
+                    {
+                      price,
+                      downPercent,
+                      ratePercent,
+                      years,
+                      taxMonthly,
+                      commonMonthly,
+                    },
+                    input,
+                    result,
+                  )
+                }
+                className="inline-flex items-center justify-center border border-brand-navy bg-white px-5 py-4 text-lg font-semibold text-brand-navy"
+              >
+                Save as PDF
+              </button>
               <Link
                 href="/situations"
                 className="ak-call-button group inline-flex w-full items-center justify-between gap-4 px-5 py-4 text-base font-semibold uppercase tracking-[0.08em] text-brand-ivory sm:w-auto sm:text-lg"
