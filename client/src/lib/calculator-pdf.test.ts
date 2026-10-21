@@ -12,7 +12,7 @@ describe("calculator pdf", () => {
     commonMonthly: "3,200",
   };
 
-  it("fits the month, every input, and the breakdown on one white page", () => {
+  it("fits the month, every input, and the breakdown on one paper page", () => {
     const result = computeCarry(DEFAULT_CARRY);
     const { commands, bottom } = calculatorPdfLayout(fields, DEFAULT_CARRY, result);
     expect(bottom).toBeLessThanOrEqual(792 - 54);
@@ -35,5 +35,8 @@ describe("calculator pdf", () => {
     expect(pdf).toContain("/MediaBox [0 0 612 792]");
     expect(pdf).toContain(formatUsd(result.monthly));
     expect(formatUsd(result.monthly)).toBe("$19,273");
+    expect(pdf).not.toContain("Manhattan");
+    expect(pdf).not.toContain("Jane Street");
+    expect(pdf).not.toContain("trophy");
   });
 });
