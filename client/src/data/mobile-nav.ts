@@ -40,9 +40,10 @@ function isBranch(item: MobileNavLink | MobileNavBranch): item is MobileNavBranc
 }
 
 /**
- * Mobile field menu. Not the locked desktop header.
- * Home · Start Here · Guides · Interactive Tools · Contact stay the five doors.
- * Calculator, Wheel of Life, and Livability nest under Interactive Tools. Hub stays off this list for now.
+ * Mobile field menu. Matches the desktop header doors.
+ * Home · Start Here · Guides · Articles · Interactive Tools · Contact.
+ * Articles is its own door. Calculator, Wheel of Life, and Livability nest under Interactive Tools.
+ * Hub stays off this list for now.
  */
 export const mobileFieldNav: readonly MobileNavSection[] = [
   { id: "home", label: "Home", href: "/" },
@@ -71,6 +72,7 @@ export const mobileFieldNav: readonly MobileNavSection[] = [
       ...publicGuides.map((guide) => ({ label: guide.title, href: guide.href })),
     ],
   },
+  { id: "articles", label: "Articles", href: "/articles" },
   {
     id: "tools",
     label: "Interactive Tools",
@@ -127,6 +129,7 @@ export function defaultOpenSectionId(location: string): string | null {
   if (path === "/situations" || path.startsWith("/situations/") || path === "/belonging" || path === "/international") {
     return "start";
   }
+  if (path === "/articles" || path.startsWith("/articles/")) return "articles";
   return null;
 }
 

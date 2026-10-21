@@ -63,11 +63,12 @@ describe("public menu lock", () => {
     expect([...KAMMER_VERDICTS]).toEqual(["Pick", "Consider", "Wait", "Pass"]);
   });
 
-  it("locks primary header nav to Home · Start Here · Guides · Interactive Tools · Contact", () => {
+  it("locks primary header nav to Home · Start Here · Guides · Articles · Interactive Tools · Contact", () => {
     expect(primaryNav.map((item) => [item.label, item.href])).toEqual([
       ["Home", "/"],
       ["Start Here", "/situations"],
       ["Guides", "/guides"],
+      ["Articles", "/articles"],
       ["Interactive Tools", "/tools"],
       ["Contact", "/contact"],
     ]);

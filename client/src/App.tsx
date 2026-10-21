@@ -51,6 +51,7 @@ const MortgageClauses = lazy(() => import("@/pages/MortgageClauses"));
 const ManhattanExplained = lazy(() => import("@/pages/ManhattanExplained"));
 const LiensEasements = lazy(() => import("@/pages/LiensEasements"));
 const Guides = lazy(() => import("@/pages/Guides"));
+const Articles = lazy(() => import("@/pages/Articles"));
 const Sitemap = lazy(() => import("@/pages/Sitemap"));
 const Qualify = lazy(() => import("@/pages/Qualify"));
 const ToolsHome = lazy(() => import("@/pages/tools/ToolsHome"));
@@ -188,6 +189,7 @@ function Router() {
       <Route path="/guides/manhattan-explained" component={ManhattanExplained} />
       <Route path="/guides/liens-easements" component={LiensEasements} />
       <Route path="/guides" component={Guides} />
+      <Route path="/articles" component={Articles} />
       <Route path="/resources" component={ResourcesHubEscape} />
       <Route path="/sitemap" component={Sitemap} />
       <Route path="/account" component={Account} />
