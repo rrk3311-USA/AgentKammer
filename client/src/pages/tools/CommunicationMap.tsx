@@ -7,12 +7,10 @@ import {
   CENTER_LINE,
   COMMUNICATION_MAP_PATH,
   COMMUNICATION_ROUTES,
-  MINUS_LIMIT,
   chooseRoute,
   focusedNode,
   initialMindState,
   layoutRoute,
-  minusCount,
   moveTo,
   returnToMind,
   routeById,
@@ -36,7 +34,6 @@ export default function CommunicationMap() {
   const route = routeById(state.routeId);
   const placed = route ? layoutRoute(route) : null;
   const current = focusedNode(state);
-  const minuses = route ? minusCount(state, route.id) : 0;
 
   useEffect(() => {
     if (!state.routeId && state.notice) firstOpenRoute.current?.focus();
@@ -69,8 +66,18 @@ export default function CommunicationMap() {
           aria-label="A mind. Content on the left, relationship on the right."
         >
           <g className="cm-pan" transform={`translate(${panX} ${panY})`}>
-            {placed ? <Trails routeId={route!.id} nodes={placed.nodes} step={state.step} across={route!.across} /> : <StartBranches />}
-            <Hologram dim={Boolean(current)} />
+            {placed ? (
+              <Trails routeId={route!.id} nodes={placed.nodes} step={state.step} across={route!.across} />
+            ) : (
+              <StartBranches
+                closed={state.closed}
+                onStart={(id) => setState((prev) => chooseRoute(prev, id))}
+              />
+            )}
+            <Hologram
+              dim={Boolean(current)}
+              onReturn={route ? () => setState((prev) => returnToMind(prev)) : undefined}
+            />
             {route?.surround ? (
               <text
                 x="50"
@@ -167,11 +174,6 @@ export default function CommunicationMap() {
         <p className="line-clamp-2 font-display text-[1.35rem] leading-tight text-brand-navy" aria-live="polite">
           {plate}
         </p>
-        <p className="mt-1 text-[11px] uppercase tracking-[0.16em] text-brand-cocoa">
-          {route
-            ? `${route.title} · ${minuses} of ${MINUS_LIMIT} minus orbs`
-            : "Three minus orbs return you to the mind."}
-        </p>
 
         {current ? (
           <div className="mt-2 grid grid-cols-2 gap-2">
@@ -190,23 +192,24 @@ export default function CommunicationMap() {
           </div>
         ) : null}
 
-        <div className="mt-3 flex items-center gap-3">
-          <label className="sr-only" htmlFor="communication-toggle">
-            Move along the route toward a response
-          </label>
-          <input
-            id="communication-toggle"
-            className="cm-toggle w-full flex-1"
-            type="range"
-            min={0}
-            max={route ? route.nodes.length : 0}
-            step={1}
-            value={route ? state.step : 0}
-            disabled={!route}
-            aria-valuetext={current ? current.title : route ? route.trail : "The mind"}
-            onChange={(event) => setState((prev) => moveTo(prev, Number(event.target.value)))}
-          />
-        </div>
+        {route ? (
+          <div className="mt-3 flex items-center gap-3">
+            <label className="sr-only" htmlFor="communication-toggle">
+              Move along the route toward a response
+            </label>
+            <input
+              id="communication-toggle"
+              className="cm-toggle w-full flex-1"
+              type="range"
+              min={1}
+              max={route.nodes.length}
+              step={1}
+              value={Math.max(1, state.step)}
+              aria-valuetext={current ? current.title : route.trail}
+              onChange={(event) => setState((prev) => moveTo(prev, Number(event.target.value)))}
+            />
+          </div>
+        ) : null}
 
         <div className="mt-2 flex flex-wrap items-center gap-2">
           {COMMUNICATION_ROUTES.map((item, index) => {
@@ -246,9 +249,26 @@ export default function CommunicationMap() {
   );
 }
 
-function Hologram({ dim }: { dim: boolean }) {
+function Hologram({ dim, onReturn }: { dim: boolean; onReturn?: () => void }) {
   return (
-    <g opacity={dim ? 0.55 : 1} aria-hidden>
+    <g
+      opacity={dim ? 0.55 : 1}
+      className={onReturn ? "cursor-pointer" : undefined}
+      role={onReturn ? "button" : undefined}
+      tabIndex={onReturn ? 0 : undefined}
+      aria-label={onReturn ? "Back to the mind" : undefined}
+      onClick={onReturn}
+      onKeyDown={
+        onReturn
+          ? (event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                onReturn();
+              }
+            }
+          : undefined
+      }
+    >
       <ellipse cx="50" cy="48" rx="15.5" ry="12.4" fill="none" stroke="#2A3447" strokeWidth="0.35" />
       <ellipse cx="50" cy="48" rx="11" ry="8.6" fill="none" stroke="#2A3447" strokeWidth="0.22" opacity="0.65" />
       <ellipse cx="50" cy="48" rx="6.4" ry="4.8" fill="none" stroke="#B08D57" strokeWidth="0.28" />
@@ -270,14 +290,20 @@ function Hologram({ dim }: { dim: boolean }) {
   );
 }
 
-function StartBranches() {
+function StartBranches({
+  closed,
+  onStart,
+}: {
+  closed: readonly string[];
+  onStart: (id: string) => void;
+}) {
   const starts = [
     { id: "four-stations", x: 24, y: 28, title: "Four stations" },
     { id: "one-breath", x: 76, y: 28, title: "One breath" },
     { id: "integration", x: 50, y: 78, title: "Integration" },
   ];
   return (
-    <g aria-hidden>
+    <g>
       {starts.map((item) => (
         <path
           key={item.id}
@@ -287,19 +313,41 @@ function StartBranches() {
           strokeWidth="0.28"
         />
       ))}
-      {starts.map((item) => (
-        <text
-          key={`${item.id}-label`}
-          x={item.x}
-          y={item.y}
-          textAnchor="middle"
-          fill="#2A3447"
-          fontSize="2.15"
-          fontFamily='"Cormorant Garamond", Georgia, serif'
-        >
-          {item.title}
-        </text>
-      ))}
+      {starts.map((item) => {
+        const shut = closed.includes(item.id);
+        return (
+          <g
+            key={`${item.id}-label`}
+            className={shut ? undefined : "cursor-pointer"}
+            role="button"
+            tabIndex={shut ? undefined : 0}
+            aria-disabled={shut || undefined}
+            onClick={() => {
+              if (!shut) onStart(item.id);
+            }}
+            onKeyDown={(event) => {
+              if (shut) return;
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                onStart(item.id);
+              }
+            }}
+          >
+            <circle cx={item.x} cy={item.y - 0.6} r="5" fill="transparent" />
+            <text
+              x={item.x}
+              y={item.y}
+              textAnchor="middle"
+              fill="#2A3447"
+              opacity={shut ? 0.35 : 1}
+              fontSize="2.15"
+              fontFamily='"Cormorant Garamond", Georgia, serif'
+            >
+              {item.title}
+            </text>
+          </g>
+        );
+      })}
     </g>
   );
 }

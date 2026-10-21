@@ -70,6 +70,15 @@ describe("communication map", () => {
     expect(chooseRoute(state, "four-stations")).toEqual(state);
     const next = chooseRoute(state, "one-breath");
     expect(next.routeId).toBe("one-breath");
+    expect(next.step).toBe(1);
+  });
+
+  it("opens on the first step and moves on when an orb is taken", () => {
+    const opened = chooseRoute(initialMindState, "four-stations");
+    expect(opened.step).toBe(1);
+    const moved = takeOrb(opened, orbId("four-stations", "speaker", "plus"));
+    expect(moved.routeId).toBe("four-stations");
+    expect(moved.step).toBe(2);
   });
 
   it("opens the other routes again when every route has closed", () => {

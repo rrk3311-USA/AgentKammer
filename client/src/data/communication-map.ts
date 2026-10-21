@@ -334,7 +334,7 @@ export function minusCount(state: MindState, routeId: string) {
 export function chooseRoute(state: MindState, routeId: string): MindState {
   if (state.closed.includes(routeId)) return state;
   if (!routeById(routeId)) return state;
-  return { ...state, routeId, step: 0, notice: null };
+  return { ...state, routeId, step: 1, notice: null };
 }
 
 export function returnToMind(state: MindState): MindState {
@@ -366,14 +366,11 @@ export function takeOrb(state: MindState, id: string): MindState {
   if (state.taken.some((taken) => taken.startsWith(`${route.id}:${focused.id}:`))) return state;
 
   const taken = [...state.taken, id];
-  if (pole === "plus") {
-    return { ...state, taken, notice: null };
-  }
+  const next = { ...state, taken, notice: null };
+  if (pole === "plus") return stepForward(next);
 
   const minuses = taken.filter((item) => item.startsWith(`${route.id}:`) && item.endsWith(":minus")).length;
-  if (minuses < MINUS_LIMIT) {
-    return { ...state, taken, notice: null };
-  }
+  if (minuses < MINUS_LIMIT) return stepForward(next);
 
   const closed = state.closed.includes(route.id) ? [...state.closed] : [...state.closed, route.id];
   const everyRouteClosed = COMMUNICATION_ROUTES.every((item) => closed.includes(item.id));
@@ -385,6 +382,12 @@ export function takeOrb(state: MindState, id: string): MindState {
     closed: nextClosed,
     notice: everyRouteClosed ? ROUND_NOTICE : BOUNCE_NOTICE,
   };
+}
+
+function stepForward(state: MindState): MindState {
+  const route = routeById(state.routeId);
+  if (!route || state.step >= route.nodes.length) return state;
+  return moveTo(state, state.step + 1);
 }
 
 export function focusedNode(state: MindState): MapNode | null {
