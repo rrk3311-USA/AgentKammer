@@ -1328,3 +1328,45 @@
     opacity: 1;
   }
 }
+
+.cm-scope-dial {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.cm-scope-dial.is-turning {
+  transition: none;
+}
+
+.cm-scope-ring {
+  cursor: grab;
+  touch-action: none;
+  pointer-events: stroke;
+  outline: none;
+}
+
+.cm-scope-ring:active {
+  cursor: grabbing;
+}
+
+.cm-scope-focus {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cm-scope-ring:focus-visible + .cm-scope-focus {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cm-scope-dial {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cm-pan {
+    transition: transform 280ms cubic-bezier(0, 0, 0.2, 1);
+  }
+}
