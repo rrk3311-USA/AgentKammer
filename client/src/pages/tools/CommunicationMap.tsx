@@ -26,6 +26,8 @@ import {
 } from "@/data/communication-map";
 
 const CENTER = { x: 50, y: 48 };
+const readType =
+  "font-display text-[clamp(3rem,6.5vw,4.75rem)] leading-[0.92] tracking-[-0.03em]";
 
 function toBoard(x: number, y: number) {
   return { x: 1.55 * (x - CENTER.x) + CENTER.x, y: 1.55 * (y - CENTER.y) + CENTER.y };
@@ -48,7 +50,7 @@ function stepFrame(phase: "choose" | "orb" | "continue", placed: ReturnType<type
       add(item.x + 2.5, item.y + 2.5);
       continue;
     }
-    const labelW = Math.max(10, item.title.length * 2.5);
+    const labelW = Math.max(12, item.title.length * 3.4);
     const labelX = item.side === "content" ? item.x - 3.4 : item.x + 3.4;
     const left = item.side === "content" ? labelX - labelW : item.x - 3;
     const right = item.side === "content" ? item.x + 3 : labelX + labelW;
@@ -119,12 +121,12 @@ export default function CommunicationMap() {
             <h1 className="mt-4 font-display text-[clamp(3rem,7vw,4.75rem)] leading-[0.88] tracking-[-0.03em]">
               {stepMark}
             </h1>
-            <p className="mt-4 max-w-xl font-display text-[clamp(1.55rem,2.8vw,2.15rem)] leading-[1.12] text-brand-ivory/90">
+            <p className={cn(readType, "mt-4 max-w-[12em] text-brand-ivory")}>
               {guide.replace(/^Step \d+\.\s*/, "")}
             </p>
           </div>
-          <div className="border-l border-brand-ivory/16 pl-5 lg:pl-8">
-            <p className="font-display text-[clamp(1.45rem,2.2vw,1.9rem)] leading-snug text-brand-ivory">{PURPOSE_LINE}</p>
+          <div className="border-l border-brand-ivory/40 pl-5 lg:pl-8">
+            <p className={cn(readType, "max-w-[12em] text-brand-ivory")}>{PURPOSE_LINE}</p>
           </div>
         </PageSection>
       </section>
@@ -132,7 +134,7 @@ export default function CommunicationMap() {
       <PageSection className="py-10 lg:py-14">
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
           <div>
-            <h2 className="font-display text-[clamp(1.85rem,4vw,2.6rem)] leading-[1.05] text-brand-navy">The mind</h2>
+            <h2 className={cn(readType, "text-brand-navy")}>The mind</h2>
             <p className="mt-2 text-lg leading-snug text-brand-navy sm:text-xl">
               Content on the left. Relationship on the right.
             </p>
@@ -230,13 +232,13 @@ export default function CommunicationMap() {
           </div>
 
           <div>
-            <h2 className="font-display text-[clamp(1.85rem,4vw,2.6rem)] leading-[1.05] text-brand-navy">This step</h2>
+            <h2 className={cn(readType, "text-brand-navy")}>This step</h2>
             <div className="mt-6 border border-brand-navy bg-white">
-              <div className="border-b border-brand-border px-5 py-5 sm:px-6">
-                <p className="font-display text-[clamp(1.7rem,3vw,2.25rem)] leading-tight text-brand-navy" aria-live="polite">
+              <div className="border-b border-brand-navy/20 px-6 py-6 sm:px-7">
+                <p className={cn(readType, "max-w-[12em] text-brand-navy")} aria-live="polite">
                   {guide}
                 </p>
-                {plate ? <p className="mt-3 text-lg leading-snug text-brand-ink sm:text-xl">{plate}</p> : null}
+                {plate ? <p className={cn(readType, "mt-6 max-w-[12em] text-brand-navy")}>{plate}</p> : null}
               </div>
 
               {phase === "orb" && current ? (
@@ -268,7 +270,8 @@ export default function CommunicationMap() {
                         disabled={closed}
                         onClick={() => setState((prev) => chooseRoute(prev, item.id))}
                         className={cn(
-                          "flex w-full items-center border-b border-brand-navy/15 px-5 py-5 text-left font-display text-[clamp(1.7rem,2.6vw,2.15rem)] leading-none last:border-b-0 sm:px-6",
+                          "flex w-full items-center border-b border-brand-navy/20 px-6 py-6 text-left last:border-b-0 sm:px-7",
+                          readType,
                           !closed && "text-brand-navy hover:bg-brand-ivory",
                           closed && "text-brand-graphite/40",
                         )}
@@ -284,7 +287,10 @@ export default function CommunicationMap() {
                 <button
                   type="button"
                   onClick={() => setState((prev) => returnToMind(prev))}
-                  className="flex w-full items-center px-5 py-5 text-left font-display text-[clamp(1.7rem,2.6vw,2.15rem)] leading-none text-brand-navy hover:bg-brand-ivory sm:px-6"
+                  className={cn(
+                    readType,
+                    "flex w-full items-center px-6 py-6 text-left text-brand-navy hover:bg-brand-ivory sm:px-7",
+                  )}
                 >
                   To the mind
                 </button>
@@ -436,12 +442,13 @@ function CenterScope({
       <path d="M50 42.6 Q52.4 48 50 53.4" fill="none" stroke="#B08D57" strokeWidth="0.22" />
       <path d="M43.2 48 H56.8" stroke="#D8D1C7" strokeWidth="0.2" />
       <circle cx="50" cy="49.15" r="0.62" fill="#B08D57" />
+      <rect x="33.2" y="43.6" width="33.6" height="9.4" fill="#F6F1E8" />
       <text
         x="50"
-        y="46.7"
+        y="51.1"
         textAnchor="middle"
         fill="#2A3447"
-        fontSize="4.6"
+        fontSize="8.2"
         fontFamily='"Cormorant Garamond", Georgia, serif'
       >
         The mind
@@ -681,7 +688,7 @@ function NodeMark({
             y={item.y + 2.6}
             textAnchor={anchor}
             fill="#2A3447"
-            fontSize="3.8"
+            fontSize="5.4"
             fontFamily='"Cormorant Garamond", Georgia, serif'
           >
             {item.title}
@@ -709,7 +716,8 @@ function OrbButton({
       aria-pressed={pressed}
       onClick={onTake}
       className={cn(
-        "flex w-full items-center gap-4 border-b border-brand-border px-5 py-5 text-left font-display text-[clamp(1.35rem,2vw,1.7rem)] leading-snug text-brand-navy last:border-b-0 sm:px-6",
+        "flex w-full items-start gap-5 border-b border-brand-navy/20 px-6 py-6 text-left text-brand-navy last:border-b-0 sm:px-7",
+        readType,
         pole === "plus" ? "border-brand-brass/70 bg-white" : "border-brand-border bg-white",
         pressed && pole === "plus" && "bg-brand-navy text-brand-ivory",
         pressed && pole === "minus" && "bg-brand-charcoal text-brand-ivory",
@@ -717,7 +725,7 @@ function OrbButton({
     >
       <span
         className={cn(
-          "grid h-12 w-12 shrink-0 place-items-center rounded-full border font-sans text-2xl",
+          "mt-1 grid h-16 w-16 shrink-0 place-items-center rounded-full border font-sans text-4xl",
           pole === "plus" ? "border-brand-brass" : "border-brand-navy/30",
           pressed && "border-brand-ivory/40",
         )}
@@ -725,7 +733,7 @@ function OrbButton({
       >
         {pole === "plus" ? "+" : "−"}
       </span>
-      <span className="line-clamp-2">{label}</span>
+      <span className="max-w-[12em]">{label}</span>
     </button>
   );
 }
