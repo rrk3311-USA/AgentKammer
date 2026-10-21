@@ -370,10 +370,10 @@ export function takeOrb(state: MindState, id: string): MindState {
 
   const taken = [...state.taken, id];
   const next = { ...state, taken, notice: null };
-  if (pole === "plus") return stepForward(next);
+  if (pole === "plus") return next;
 
   const minuses = taken.filter((item) => item.startsWith(`${route.id}:`) && item.endsWith(":minus")).length;
-  if (minuses < MINUS_LIMIT) return stepForward(next);
+  if (minuses < MINUS_LIMIT) return next;
 
   const closed = state.closed.includes(route.id) ? [...state.closed] : [...state.closed, route.id];
   const everyRouteClosed = COMMUNICATION_ROUTES.every((item) => closed.includes(item.id));
@@ -387,25 +387,21 @@ export function takeOrb(state: MindState, id: string): MindState {
   };
 }
 
-function stepForward(state: MindState): MindState {
-  const route = routeById(state.routeId);
-  if (!route || state.step >= route.nodes.length) return state;
-  return moveTo(state, state.step + 1);
-}
+export const INSTRUCTION_CHOOSE = "Choose a route: Four stations, One breath, or Integration.";
+
+export const INSTRUCTION_ORB = "Take the plus or the minus on the trail.";
+
+export const INSTRUCTION_CONTINUE = "Turn the scope to continue, or return to the mind.";
+
+export const INSTRUCTION_BOUNCE = "Three minus orbs sent you back to the mind. Start a different route.";
 
 export function guideLine(state: MindState): string {
-  if (!state.routeId) return state.notice ? "Open another route." : "Open a route.";
+  if (!state.routeId) return state.notice ? INSTRUCTION_BOUNCE : INSTRUCTION_CHOOSE;
   const node = focusedNode(state);
   const route = routeById(state.routeId);
-  if (!node || !route) return "Open a route.";
+  if (!node || !route) return INSTRUCTION_CHOOSE;
   const takenHere = state.taken.some((id) => id.startsWith(`${route.id}:${node.id}:`));
-  if (!takenHere && minusCount(state, state.routeId) >= MINUS_LIMIT - 1) {
-    return "One more minus returns you to the mind.";
-  }
-  const next = route.nodes[state.step];
-  if (!next) return takenHere ? "Open another route." : "Take plus or minus.";
-  if (takenHere) return `Turn the scope. ${next.title} opens.`;
-  return `Take plus or minus. ${next.title} opens.`;
+  return takenHere ? INSTRUCTION_CONTINUE : INSTRUCTION_ORB;
 }
 
 /** Clockwise carry advances. Counterclockwise carry goes back. Ends resist. */

@@ -11,6 +11,10 @@ import {
   MINUS_LIMIT,
   assertNoSaaSLanguage,
   applyScopeTurn,
+  INSTRUCTION_BOUNCE,
+  INSTRUCTION_CHOOSE,
+  INSTRUCTION_CONTINUE,
+  INSTRUCTION_ORB,
   chooseRoute,
   communicationCopy,
   guideLine,
@@ -75,30 +79,30 @@ describe("communication map", () => {
     expect(next.step).toBe(1);
   });
 
-  it("opens on the first step and moves on when an orb is taken", () => {
+  it("replaces the instruction after each step of the route", () => {
+    expect(guideLine(initialMindState)).toBe(INSTRUCTION_CHOOSE);
     const opened = chooseRoute(initialMindState, "four-stations");
     expect(opened.step).toBe(1);
-    const moved = takeOrb(opened, orbId("four-stations", "speaker", "plus"));
-    expect(moved.routeId).toBe("four-stations");
-    expect(moved.step).toBe(2);
-    expect(guideLine(initialMindState)).toBe("Open a route.");
-    expect(guideLine(opened)).toBe("Take plus or minus. Message opens.");
-    expect(() => assertNoSaaSLanguage(guideLine(opened))).not.toThrow();
+    expect(guideLine(opened)).toBe(INSTRUCTION_ORB);
+    const taken = takeOrb(opened, orbId("four-stations", "speaker", "plus"));
+    expect(taken.routeId).toBe("four-stations");
+    expect(taken.step).toBe(1);
+    expect(guideLine(taken)).toBe(INSTRUCTION_CONTINUE);
+    const continued = moveTo(taken, 2);
+    expect(continued.step).toBe(2);
+    expect(guideLine(continued)).toBe(INSTRUCTION_ORB);
+    expect(() => assertNoSaaSLanguage([INSTRUCTION_CHOOSE, INSTRUCTION_ORB, INSTRUCTION_CONTINUE, INSTRUCTION_BOUNCE].join(" "))).not.toThrow();
+
     let warned = opened;
     warned = takeOrb(warned, orbId("four-stations", "speaker", "minus"));
+    warned = moveTo(warned, 2);
     warned = takeOrb(warned, orbId("four-stations", "message", "minus"));
-    expect(warned.step).toBe(3);
-    expect(guideLine(warned)).toBe("One more minus returns you to the mind.");
-    const stepped = moveTo(takeOrb(opened, orbId("four-stations", "speaker", "plus")), 1);
-    expect(guideLine(stepped)).toBe("Turn the scope. Message opens.");
-    const end = moveTo(chooseRoute(initialMindState, "four-stations"), 4);
-    expect(guideLine(end)).toBe("Take plus or minus.");
-    const done = takeOrb(end, orbId("four-stations", "outcome", "plus"));
-    expect(done.step).toBe(4);
-    expect(guideLine(done)).toBe("Open another route.");
-    expect(guideLine({ ...initialMindState, notice: "Too many minus orbs. Back to the mind." })).toBe(
-      "Open another route.",
-    );
+    warned = moveTo(warned, 3);
+    expect(guideLine(warned)).toBe(INSTRUCTION_ORB);
+    warned = takeOrb(warned, orbId("four-stations", "receiver", "minus"));
+    expect(warned.routeId).toBeNull();
+    expect(warned.closed).toEqual(["four-stations"]);
+    expect(guideLine(warned)).toBe(INSTRUCTION_BOUNCE);
   });
 
   it("opens the other routes again when every route has closed", () => {
@@ -125,7 +129,7 @@ describe("communication map", () => {
     expect(html).toContain("One breath");
     expect(html).toContain("Integration");
     expect(html).toContain(CENTER_LINE);
-    expect(html).toContain("Open a route.");
+    expect(html).toContain(INSTRUCTION_CHOOSE);
     expect(html).toContain("Calibration scope");
     expect(html).not.toContain('type="range"');
     expect(html).not.toContain("Speaker");

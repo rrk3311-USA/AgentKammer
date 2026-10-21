@@ -4,6 +4,7 @@ import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { cn } from "@/lib/utils";
 import {
   CENTER_LINE,
+  ROUND_NOTICE,
   COMMUNICATION_MAP_PATH,
   COMMUNICATION_ROUTES,
   SCOPE_DETENT,
@@ -41,7 +42,7 @@ export default function CommunicationMap() {
     if (!state.routeId && state.notice) firstOpenRoute.current?.focus();
   }, [state.notice, state.routeId]);
 
-  const plate = state.notice && !state.routeId ? state.notice : current?.line ?? route?.trail ?? CENTER_LINE;
+  const plate = current?.line ?? (state.notice === ROUND_NOTICE ? ROUND_NOTICE : route?.trail ?? CENTER_LINE);
   const guide = guideLine(state);
   const focus = current && placed ? placed.nodes.find((item) => item.id === current.id) : null;
   const panX = focus ? (CENTER.x - focus.x) * 0.05 : 0;
@@ -184,7 +185,7 @@ export default function CommunicationMap() {
       </div>
 
       <div className="shrink-0 border-t border-brand-border bg-brand-ivory px-4 py-2 sm:px-6 sm:py-3">
-        <p className="font-display text-[1.2rem] leading-tight text-brand-navy sm:text-[1.35rem]" aria-live="polite">
+        <p className="font-display text-[1.45rem] leading-tight text-brand-navy sm:text-[1.75rem]" aria-live="polite">
           {guide}
         </p>
         <p className="mt-1 line-clamp-2 text-[13px] leading-snug text-brand-ink">{plate}</p>
