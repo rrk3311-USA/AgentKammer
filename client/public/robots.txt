@@ -8,6 +8,8 @@ Disallow: /hub
 Disallow: /hub/
 Disallow: /internal
 Disallow: /internal/
+Disallow: /network
+Disallow: /network/
 
 # Explicit allow for major AI / answer-engine crawlers
 User-agent: GPTBot
