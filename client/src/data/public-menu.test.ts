@@ -188,6 +188,10 @@ describe("public menu lock", () => {
     expect(doors.some((item) => item.href === "/hub" || item.href.startsWith("/hub/"))).toBe(false);
     expect(doors.some((item) => item.label === "Hub" || item.label === "Decision Hub")).toBe(false);
     expect(doors.some((item) => item.href === "/contact?intent=strategy")).toBe(false);
+    expect(doors.some((item) => item.href === "/network")).toBe(false);
+    expect(primaryNav.some((item) => item.href === "/network")).toBe(false);
+    expect(FOOTER_DARK_LINKS.some((item) => item.href === "/network")).toBe(false);
+    expect(FOOTER_SITEMAP_QUIET.some((item) => item.href === "/network")).toBe(false);
     const guides = groups.find((group) => group.title === "Guides");
     expect(guides?.items.map((item) => item.label).slice(0, 3)).toEqual([
       "Resource Hub",
