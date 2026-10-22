@@ -1029,7 +1029,7 @@ export function DecisionAssistantDock(_props?: { variant?: "embedded" | "dock" }
   );
 
   return (
-    <div className={expanded ? "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center" : "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-3"}>
+    <div className={expanded ? "ak-guidance-dock pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center" : "ak-guidance-dock pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-3"}>
       {expanded ? (
         <aside
           id="decision-assistant"

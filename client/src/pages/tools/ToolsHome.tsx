@@ -1,96 +1,50 @@
 import { Link } from "wouter";
-import { ArrowRight } from "lucide-react";
-import { PageHero, PageSection, SectionHeading } from "@/components/site-shell";
-import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
-type ToolCard = {
-  eyebrow: string;
+type ToolTap = {
   title: string;
-  description: string;
   href: string;
   hard?: boolean;
 };
 
-const PUBLIC_TOOLS: readonly ToolCard[] = [
-  {
-    eyebrow: "Monthly carry",
-    title: "Calculator",
-    description: "Price, down payment, rate, tax, and common charges before the listing takes over.",
-    href: "/calculator",
-  },
-  {
-    eyebrow: "Personal check-in",
-    title: "Wheel of Life",
-    description: "Score eight parts of how a week actually feels, then pick one small move.",
-    href: "/tools/wheel-of-life/",
-    hard: true,
-  },
-  {
-    eyebrow: "Due diligence",
-    title: "Livability",
-    description: "Enter an address, walk the floor, and read a heat map with a layout score.",
-    href: "/tools/livability/",
-    hard: true,
-  },
+const PUBLIC_TOOLS: readonly ToolTap[] = [
+  { title: "Calculator", href: "/calculator" },
+  { title: "Wheel of Life", href: "/tools/wheel-of-life/", hard: true },
+  { title: "Livability", href: "/tools/livability/", hard: true },
+  { title: "Decision Guide", href: "/tools/communication-map" },
 ];
 
-function CardBody({ card }: { card: ToolCard }) {
-  return (
-    <>
-      <p className={grammar.eyebrow}>{card.eyebrow}</p>
-      <h2 className={`mt-4 ${grammar.rowTitle}`}>{card.title}</h2>
-      <p className="mt-4 text-base leading-7 text-brand-graphite">{card.description}</p>
-      <span className="mt-8 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-brand-navy">
-        Open tool
-        <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-      </span>
-    </>
-  );
-}
+const tapClass =
+  "flex min-h-[5.75rem] items-center border border-brand-navy bg-white px-5 font-display text-[clamp(1.85rem,6vw,2.75rem)] leading-none text-brand-navy sm:min-h-[8.5rem] lg:min-h-[11rem] lg:px-8";
 
 export default function ToolsHome() {
   usePageMetadata({
     title: "Interactive Tools",
-    description: "Monthly carry, a personal check-in, and a floor-plan walk.",
+    description: "Calculator, Wheel of Life, Livability, and Decision Guide.",
     path: "/tools",
   });
 
   return (
-    <main className="bg-brand-ivory">
-      <PageHero
-        eyebrow="Desk"
-        title="Interactive Tools"
-        description="A quiet monthly-carry calculator, a personal check-in, and a floor-plan walk."
-        art="decision-framework"
-      />
-
-      <PageSection>
-        <SectionHeading
-          eyebrow="Desk"
-          title="Start with the month, the week, or the rooms."
-          description="The calculator, the Wheel of Life, and Livability."
-        />
-
-        <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {PUBLIC_TOOLS.map((card) => {
-            const className =
-              "group block border border-brand-border bg-white p-7 transition-colors hover:border-brand-navy/30";
-            if (card.hard) {
-              return (
-                <a key={card.href} href={card.href} className={className}>
-                  <CardBody card={card} />
-                </a>
-              );
-            }
-            return (
-              <Link key={card.href} href={card.href} className={className}>
-                <CardBody card={card} />
-              </Link>
-            );
-          })}
+    <main className="bg-brand-ivory" data-testid="tools-index">
+      <header className="border-b border-brand-border bg-brand-navy text-brand-ivory">
+        <div className="mx-auto max-w-site px-5 py-3 sm:px-6 lg:px-10 lg:py-5">
+          <h1 className="font-display text-[clamp(1.65rem,4vw,2.25rem)] leading-none">Interactive Tools</h1>
         </div>
-      </PageSection>
+      </header>
+
+      <div className="mx-auto grid max-w-site grid-cols-1 gap-3 px-4 py-4 sm:px-6 lg:grid-cols-2 lg:gap-4 lg:px-10 lg:py-6">
+        {PUBLIC_TOOLS.map((tool) =>
+          tool.hard ? (
+            <a key={tool.href} href={tool.href} className={tapClass}>
+              {tool.title}
+            </a>
+          ) : (
+            <Link key={tool.href} href={tool.href} className={tapClass}>
+              {tool.title}
+            </Link>
+          ),
+        )}
+      </div>
     </main>
   );
 }

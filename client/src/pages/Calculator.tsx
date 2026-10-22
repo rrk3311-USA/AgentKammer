@@ -5,8 +5,10 @@ import { PageSection } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import {
   DEFAULT_CARRY,
+  boundDownPercent,
   computeCarry,
   formatUsd,
+  holdDownPercent,
   parseMoney,
   type CarryInput,
 } from "@/lib/monthly-carry";
@@ -54,6 +56,7 @@ export default function Calculator() {
 
   const [price, setPrice] = useState("3,500,000");
   const [downPercent, setDownPercent] = useState(String(DEFAULT_CARRY.downPercent));
+  const [downHeld, setDownHeld] = useState(false);
   const [ratePercent, setRatePercent] = useState(String(DEFAULT_CARRY.ratePercent));
   const [years, setYears] = useState(String(DEFAULT_CARRY.years));
   const [taxMonthly, setTaxMonthly] = useState("2,800");
@@ -62,7 +65,7 @@ export default function Calculator() {
   const input: CarryInput = useMemo(
     () => ({
       price: parseMoney(price),
-      downPercent: parseMoney(downPercent),
+      downPercent: boundDownPercent(parseMoney(downPercent)),
       ratePercent: parseMoney(ratePercent),
       years: parseMoney(years) || 30,
       taxMonthly: parseMoney(taxMonthly),
@@ -74,9 +77,9 @@ export default function Calculator() {
   const result = useMemo(() => computeCarry(input), [input]);
 
   return (
-    <main className="bg-brand-ivory text-brand-ink">
-      <section className="border-b border-brand-border bg-brand-navy text-brand-ivory">
-        <PageSection className="grid gap-10 py-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:py-16">
+    <main className="calculator-sheet bg-brand-ivory text-brand-ink">
+      <section className="calculator-month border-b border-brand-border bg-brand-navy text-brand-ivory">
+        <PageSection className="calculator-month-inner grid gap-10 py-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:py-16">
           <div>
             <h1 className="text-lg uppercase tracking-[0.14em] text-brand-ivory sm:text-xl">Calculator</h1>
             <p className="mt-4 font-mono text-[clamp(3.25rem,8vw,5.5rem)] tabular-nums leading-[0.9] tracking-[-0.03em]">
@@ -98,15 +101,29 @@ export default function Calculator() {
         </PageSection>
       </section>
 
-      <PageSection>
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start">
+      <PageSection className="calculator-body">
+        <div className="calculator-work grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start">
           <div>
             <h2 className="font-display text-[clamp(1.85rem,4vw,2.6rem)] leading-[1.05] text-brand-navy">
               Change one number. The month moves.
             </h2>
             <div className="mt-6 border border-brand-navy bg-white">
               <Field label="Purchase price" value={price} onChange={setPrice} wide />
-              <Field label="Down payment" suffix="%" value={downPercent} onChange={setDownPercent} />
+              <Field
+                label="Down payment"
+                suffix="%"
+                value={downPercent}
+                onChange={(raw) => {
+                  const next = holdDownPercent(raw);
+                  setDownPercent(next.value);
+                  setDownHeld(next.held);
+                }}
+              />
+              {downHeld ? (
+                <p className="border-b border-brand-navy/15 px-5 py-3 text-base leading-snug text-brand-navy sm:px-6">
+                  It stays between 0 and 100.
+                </p>
+              ) : null}
               <Field label="Rate" suffix="%" value={ratePercent} onChange={setRatePercent} />
               <Field label="Term" suffix="years" value={years} onChange={setYears} />
               <Field label="Property tax" suffix="/ mo" value={taxMonthly} onChange={setTaxMonthly} />
@@ -131,18 +148,18 @@ export default function Calculator() {
                   </p>
                 </div>
               ))}
-              <div className="flex items-baseline justify-between gap-6 px-5 py-5 sm:px-6">
-                <p className="text-lg text-brand-navy sm:text-xl">Monthly carry</p>
-                <p className="font-mono text-[clamp(1.9rem,3vw,2.5rem)] tabular-nums leading-none text-brand-navy">
+              <div className="calculator-total flex items-baseline justify-between gap-6 bg-brand-navy px-5 py-5 text-brand-ivory sm:px-6">
+                <p className="text-lg text-brand-ivory sm:text-xl">Monthly carry</p>
+                <p className="font-mono text-[clamp(1.9rem,3vw,2.5rem)] tabular-nums leading-none text-brand-ivory">
                   {formatUsd(result.monthly)}
                 </p>
               </div>
             </div>
-            <p className="mt-5 text-lg leading-snug text-brand-navy">
+            <p className="calculator-omit mt-5 text-lg leading-snug text-brand-navy">
               Educational only. Insurance, assessments, and closing costs sit outside this page. Judgment still
               comes after the number.
             </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="calculator-omit mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
               <button
                 type="button"
                 onClick={() =>

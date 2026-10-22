@@ -1370,3 +1370,105 @@
     transition: transform 280ms cubic-bezier(0, 0, 0.2, 1);
   }
 }
+
+/* /calculator only. Screen layout stays. Print is the month, the inputs, and the breakdown. */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.4in;
+  }
+
+  body:has(.calculator-sheet) {
+    height: auto !important;
+    background: #fff !important;
+  }
+
+  body:has(.calculator-sheet) .ak-app-shell {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    background: #fff !important;
+  }
+
+  body:has(.calculator-sheet) header,
+  body:has(.calculator-sheet) footer,
+  body:has(.calculator-sheet) nav,
+  body:has(.calculator-sheet) .ak-guidance-dock,
+  body:has(.calculator-sheet) .calculator-omit {
+    display: none !important;
+  }
+
+  .calculator-sheet,
+  .calculator-sheet * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .calculator-sheet {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .calculator-month-inner {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr) !important;
+    align-items: end !important;
+    gap: 1rem !important;
+    padding-top: 0.65rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  .calculator-body {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0 !important;
+  }
+
+  .calculator-work {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr) !important;
+    align-items: start !important;
+    gap: 1rem !important;
+  }
+
+  .calculator-sheet h2 {
+    font-size: 1.35rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .calculator-sheet label {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: baseline !important;
+    justify-content: space-between !important;
+    gap: 0.75rem !important;
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.4rem !important;
+    white-space: nowrap;
+  }
+
+  .calculator-sheet label > span {
+    white-space: nowrap;
+  }
+
+  .calculator-sheet label input {
+    width: 7.25rem !important;
+  }
+
+  .calculator-work .border > div {
+    padding-top: 0.4rem !important;
+    padding-bottom: 0.4rem !important;
+  }
+
+  .calculator-work .font-mono {
+    font-size: 1.35rem !important;
+  }
+
+  .calculator-total {
+    padding-top: 0.55rem !important;
+    padding-bottom: 0.55rem !important;
+  }
+
+  .calculator-total .font-mono {
+    font-size: 1.65rem !important;
+  }
+}

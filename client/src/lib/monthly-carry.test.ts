@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { computeCarry, formatUsd, mortgagePayment, parseMoney } from "./monthly-carry";
+import { boundDownPercent, computeCarry, formatUsd, holdDownPercent, mortgagePayment, parseMoney } from "./monthly-carry";
 
 describe("monthly carry", () => {
   it("computes a standard 30-year payment", () => {
@@ -24,6 +24,31 @@ describe("monthly carry", () => {
     expect(result.down).toBe(1_400_000);
     expect(result.principal).toBe(2_100_000);
     expect(result.monthly).toBeCloseTo(result.mortgage + 2_800 + 3_200, 5);
+  });
+
+  it("holds a down payment outside 0–100 at the nearest bound", () => {
+    expect(holdDownPercent("101")).toEqual({ value: "100", held: true });
+    expect(holdDownPercent("100.5")).toEqual({ value: "100", held: true });
+    expect(holdDownPercent("-4")).toEqual({ value: "0", held: true });
+    expect(holdDownPercent("40")).toEqual({ value: "40", held: false });
+    expect(holdDownPercent("0")).toEqual({ value: "0", held: false });
+    expect(holdDownPercent("100")).toEqual({ value: "100", held: false });
+    expect(holdDownPercent("")).toEqual({ value: "", held: false });
+    expect(boundDownPercent(101)).toBe(100);
+    expect(boundDownPercent(-3)).toBe(0);
+
+    const over = computeCarry({
+      price: 3_500_000,
+      downPercent: 101,
+      ratePercent: 6.5,
+      years: 30,
+      taxMonthly: 2_800,
+      commonMonthly: 3_200,
+    });
+    expect(over.down).toBe(3_500_000);
+    expect(over.principal).toBe(0);
+    expect(over.mortgage).toBe(0);
+    expect(over.monthly).toBe(6_000);
   });
 
   it("formats and parses money without cents", () => {

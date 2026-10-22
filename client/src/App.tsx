@@ -9,6 +9,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { DecisionAssistantDock } from "@/components/DecisionAssistantDock";
 import { initVisitorSignalTracking, trackPageViewSignal } from "@/lib/visitor-signals";
+import { COMMUNICATION_MAP_PATH } from "@/data/communication-map";
 const Home = lazy(() => import("@/pages/Home"));
 const About = lazy(() => import("@/pages/About"));
 const BuildingReport = lazy(() => import("@/pages/BuildingReport"));
@@ -53,6 +54,7 @@ const Guides = lazy(() => import("@/pages/Guides"));
 const Sitemap = lazy(() => import("@/pages/Sitemap"));
 const Qualify = lazy(() => import("@/pages/Qualify"));
 const ToolsHome = lazy(() => import("@/pages/tools/ToolsHome"));
+const CommunicationMap = lazy(() => import("@/pages/tools/CommunicationMap"));
 const Calculator = lazy(() => import("@/pages/Calculator"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 const Tank007 = lazy(() => import("@/pages/internal/Tank007"));
@@ -146,6 +148,7 @@ function Router() {
       <Route path="/admin/*">{() => <Redirect to="/admin" />}</Route>
       <Route path="/tools/curation" component={AdminCuration} />
       <Route path="/tools/livability">{() => <HardRedirect to="/tools/livability/" />}</Route>
+      <Route path={COMMUNICATION_MAP_PATH} component={CommunicationMap} />
       <Route path="/tools" component={ToolsHome} />
       <Route path="/calculator" component={Calculator} />
       <Route path="/internal/007" component={Tank007} />

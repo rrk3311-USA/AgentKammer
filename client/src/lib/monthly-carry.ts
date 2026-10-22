@@ -34,9 +34,31 @@ export function mortgagePayment(principal: number, annualRate: number, years: nu
   return (principal * (r * factor)) / (factor - 1);
 }
 
+/** Nearest percent inside 0–100. The amortization formula is unchanged. */
+export function boundDownPercent(percent: number): number {
+  if (!Number.isFinite(percent)) return 0;
+  return Math.min(100, Math.max(0, percent));
+}
+
+/**
+ * Keeps a typed down payment inside 0–100.
+ * An empty field stays empty so a new number can be entered.
+ */
+export function holdDownPercent(raw: string): { value: string; held: boolean } {
+  const trimmed = raw.trim();
+  if (trimmed === "" || trimmed === "." || trimmed === "-") return { value: raw, held: false };
+  const negative = trimmed.startsWith("-");
+  const magnitude = parseMoney(raw);
+  const signed = negative ? -magnitude : magnitude;
+  if (signed < 0 || signed > 100) {
+    return { value: String(signed > 100 ? 100 : 0), held: true };
+  }
+  return { value: raw, held: false };
+}
+
 export function computeCarry(input: CarryInput): CarryResult {
   const price = Math.max(0, input.price);
-  const downPercent = Math.min(100, Math.max(0, input.downPercent));
+  const downPercent = boundDownPercent(input.downPercent);
   const down = price * (downPercent / 100);
   const principal = Math.max(0, price - down);
   const mortgage = mortgagePayment(principal, Math.max(0, input.ratePercent), Math.max(1, input.years));
