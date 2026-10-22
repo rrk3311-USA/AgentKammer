@@ -1,739 +1,283 @@
-import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
-import { PageSection } from "@/components/site-shell";
+import { useState } from "react";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
-import { cn } from "@/lib/utils";
+import { GUIDE_NAME, PURPOSE_LINE } from "@/data/communication-map";
 import {
-  GUIDE_NAME,
-  PURPOSE_LINE,
-  ROUND_NOTICE,
-  COMMUNICATION_MAP_PATH,
-  COMMUNICATION_ROUTES,
-  SCOPE_DETENT,
-  applyScopeTurn,
-  chooseRoute,
-  focusedNode,
-  guideLine,
-  guidePhase,
-  initialMindState,
-  layoutRoute,
-  moveTo,
-  returnToMind,
-  routeById,
-  segmentPath,
-  takeOrb,
-  type MindState,
-  type PlacedNode,
-} from "@/data/communication-map";
+  CONTENT_LINES,
+  MATTERS,
+  OPENING_EYEBROW,
+  OPENING_HEADLINE,
+  OPENING_SUPPORT,
+  RELATIONSHIP_LINES,
+  matterById,
+  progressLabel,
+  recommend,
+  type Recommendation,
+} from "@/data/decision-guide";
 
-const CENTER = { x: 50, y: 48 };
-const readType =
-  "font-display text-[clamp(3rem,6.5vw,4.75rem)] leading-[0.92] tracking-[-0.03em]";
+const ink = "text-[#1A1814]";
+const muted = "text-[#5C564E]";
+const line = "border-[#D9D3C9]";
+const paper = "bg-[#F7F4EE]";
+const accent = "text-[#6E2E38]";
 
-function toBoard(x: number, y: number) {
-  return { x: 1.55 * (x - CENTER.x) + CENTER.x, y: 1.55 * (y - CENTER.y) + CENTER.y };
+function Arrow() {
+  return (
+    <svg viewBox="0 0 36 12" className={`h-3 w-9 ${accent}`} aria-hidden="true">
+      <path d="M0.5 6h30M24.5 1.5 31 6l-6.5 4.5" fill="none" stroke="currentColor" strokeWidth="1" />
+    </svg>
+  );
 }
 
-function stepFrame(phase: "choose" | "orb" | "continue", placed: ReturnType<typeof layoutRoute> | null, state: MindState) {
-  if (phase === "choose" || !placed) return "0 0 100 100";
-  const marks: { x: number; y: number }[] = [];
-  const add = (x: number, y: number) => marks.push(toBoard(x, y));
-  add(CENTER.x - 16, CENTER.y);
-  add(CENTER.x + 16, CENTER.y);
-  add(CENTER.x, CENTER.y - 16);
-  add(CENTER.x, CENTER.y + 16);
-  for (const item of placed.nodes) {
-    const open = item.index + 1 <= state.step;
-    const upcoming = item.index === state.step;
-    if (!open && !upcoming) continue;
-    if (!open) {
-      add(item.x - 2.5, item.y - 2.5);
-      add(item.x + 2.5, item.y + 2.5);
-      continue;
-    }
-    const labelW = Math.max(12, item.title.length * 3.4);
-    const labelX = item.side === "content" ? item.x - 3.4 : item.x + 3.4;
-    const left = item.side === "content" ? labelX - labelW : item.x - 3;
-    const right = item.side === "content" ? item.x + 3 : labelX + labelW;
-    add(left, item.y - 4.2);
-    add(right, item.y + 3.4);
-  }
-  for (const orb of placed.orbs) {
-    const reached = state.step === orb.index + 1;
-    const taken = state.taken.includes(orb.id);
-    if (!(phase === "orb" && reached) && !(phase === "continue" && taken)) continue;
-    add(orb.x - 5.2, orb.y - 5.2);
-    add(orb.x + 5.2, orb.y + 5.2);
-  }
-  let minX = Infinity;
-  let minY = Infinity;
-  let maxX = -Infinity;
-  let maxY = -Infinity;
-  for (const mark of marks) {
-    minX = Math.min(minX, mark.x);
-    minY = Math.min(minY, mark.y);
-    maxX = Math.max(maxX, mark.x);
-    maxY = Math.max(maxY, mark.y);
-  }
-  const pad = 4;
-  minX -= pad;
-  minY -= pad;
-  maxX += pad;
-  maxY += pad;
-  return `${minX.toFixed(1)} ${minY.toFixed(1)} ${(maxX - minX).toFixed(1)} ${(maxY - minY).toFixed(1)}`;
+function BackControl({ onClick }: { onClick: () => void }) {
+  return (
+    <button type="button" onClick={onClick} className={`text-base ${ink} underline-offset-4 hover:underline`}>
+      Back
+    </button>
+  );
 }
 
 export default function CommunicationMap() {
   usePageMetadata({
     title: GUIDE_NAME,
-    description: PURPOSE_LINE,
-    path: COMMUNICATION_MAP_PATH,
+    description: OPENING_SUPPORT,
+    path: "/tools/communication-map",
   });
 
-  const [state, setState] = useState<MindState>(initialMindState);
-  const firstOpenRoute = useRef<HTMLButtonElement>(null);
-  const route = routeById(state.routeId);
-  const placed = route ? layoutRoute(route) : null;
-  const current = focusedNode(state);
+  const [matterId, setMatterId] = useState<string | null>(null);
+  const [step, setStep] = useState(0);
+  const [picks, setPicks] = useState<string[]>([]);
+  const [whyOpen, setWhyOpen] = useState(false);
+  const [draft, setDraft] = useState("");
 
-  useEffect(() => {
-    if (!state.routeId && state.notice) firstOpenRoute.current?.focus();
-  }, [state.notice, state.routeId]);
+  const matter = matterById(matterId);
+  const question = matter && step < 3 ? matter.questions[step] : null;
+  const result: Recommendation | null = matter && step === 3 ? recommend(matter.id, picks) : null;
 
-  const phase = guidePhase(state);
-  const plate =
-    phase === "choose"
-      ? state.notice === ROUND_NOTICE
-        ? ROUND_NOTICE
-        : null
-      : (current?.line ?? route?.trail ?? null);
-  const guide = guideLine(state);
-  const focus = current && placed ? placed.nodes.find((item) => item.id === current.id) : null;
-  const panX = focus ? (CENTER.x - focus.x) * 0.05 : 0;
-  const panY = focus ? (CENTER.y - focus.y) * 0.05 : 0;
-  const stepMark = phase === "orb" ? "Step 2" : phase === "continue" ? "Step 3" : "Step 1";
+  function openMatter(id: string) {
+    setMatterId(id);
+    setStep(0);
+    setPicks([]);
+    setWhyOpen(false);
+    setDraft("");
+  }
+
+  function chooseAnswer(id: string) {
+    if (!matter) return;
+    const next = [...picks.slice(0, step), id];
+    setPicks(next);
+    setWhyOpen(false);
+    if (step < 2) {
+      setStep(step + 1);
+      return;
+    }
+    const advice = recommend(matter.id, next);
+    setDraft(advice?.say ?? "");
+    setStep(3);
+  }
+
+  function goBack() {
+    setWhyOpen(false);
+    if (step === 0) {
+      setMatterId(null);
+      setPicks([]);
+      return;
+    }
+    setStep(step - 1);
+  }
 
   return (
-    <main data-testid="communication-map" className="bg-brand-ivory text-brand-ink">
-      <section className="border-b border-brand-border bg-brand-navy text-brand-ivory">
-        <PageSection className="grid gap-8 py-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:py-14">
-          <div>
-            <p className="text-base uppercase tracking-[0.18em] text-brand-stone sm:text-lg">{GUIDE_NAME}</p>
-            <h1 className="mt-4 font-display text-[clamp(3rem,7vw,4.75rem)] leading-[0.88] tracking-[-0.03em]">
-              {stepMark}
-            </h1>
-            <p className={cn(readType, "mt-4 max-w-[12em] text-brand-ivory")}>
-              {guide.replace(/^Step \d+\.\s*/, "")}
-            </p>
-          </div>
-          <div className="border-l border-brand-ivory/40 pl-5 lg:pl-8">
-            <p className={cn(readType, "max-w-[12em] text-brand-ivory")}>{PURPOSE_LINE}</p>
-          </div>
-        </PageSection>
-      </section>
-
-      <PageSection className="py-10 lg:py-14">
-        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
-          <div>
-            <h2 className={cn(readType, "text-brand-navy")}>The mind</h2>
-            <p className="mt-2 text-lg leading-snug text-brand-navy sm:text-xl">
-              Content on the left. Relationship on the right.
-            </p>
-            {route?.surround ? (
-              <p className="mt-1 text-lg text-brand-cocoa sm:text-xl">{route.surround.join("  ·  ")}</p>
-            ) : null}
-            <div className="mt-6 border border-brand-navy bg-white">
-        <svg
-          viewBox={stepFrame(phase, placed, state)}
-          className="block h-auto w-full"
-          role="img"
-          aria-label="A mind. Content on the left, relationship on the right."
-        >
-          <g transform="translate(50 48) scale(1.55) translate(-50 -48)">
-          <g className="cm-pan" transform={`translate(${panX} ${panY})`}>
-            {placed ? (
-              <Trails routeId={route!.id} nodes={placed.nodes} step={state.step} across={route!.across} />
-            ) : (
-              <StartBranches
-                closed={state.closed}
-                onStart={(id) => setState((prev) => chooseRoute(prev, id))}
-              />
-            )}
-            {placed?.nodes.map((item) => {
-              const open = item.index + 1 <= state.step;
-              const upcoming = item.index === state.step;
-              if (!open && !upcoming) return null;
-              return (
-                <NodeMark
-                  key={item.id}
-                  item={item}
-                  active={current?.id === item.id}
-                  open={open}
-                />
-              );
-            })}
-            {placed?.orbs.map((orb) => {
-              const reached = state.step === orb.index + 1;
-              const taken = state.taken.includes(orb.id);
-              const offer = phase === "orb" && reached;
-              if (!offer && !(phase === "continue" && taken)) return null;
-              return (
-                <g key={orb.id} opacity={reached || taken ? 1 : 0.35}>
-                  <circle
-                    cx={orb.x}
-                    cy={orb.y}
-                    r="3.8"
-                    fill={taken ? (orb.pole === "plus" ? "#B08D57" : "#2C3138") : "#F5F2EB"}
-                    stroke={orb.pole === "plus" ? "#B08D57" : "#2A3447"}
-                    strokeWidth="0.28"
-                  />
-                  <text
-                    x={orb.x}
-                    y={orb.y + 1.45}
-                    textAnchor="middle"
-                    fontSize="4.6"
-                    fill={taken ? "#F5F2EB" : "#2A3447"}
-                    fontFamily="Inter, sans-serif"
-                  >
-                    {orb.pole === "plus" ? "+" : "−"}
-                  </text>
-                  {offer ? (
-                    <circle
-                      cx={orb.x}
-                      cy={orb.y}
-                      r="4.4"
-                      fill="transparent"
-                      className="cursor-pointer"
-                      role="button"
-                      tabIndex={0}
-                      aria-label={`${orb.pole === "plus" ? "Plus" : "Minus"} orb. ${orb.label}`}
-                      onClick={() => setState((prev) => takeOrb(prev, orb.id))}
-                      onKeyDown={(event) => {
-                        if (event.key === "Enter" || event.key === " ") {
-                          event.preventDefault();
-                          setState((prev) => takeOrb(prev, orb.id));
-                        }
-                      }}
-                    />
-                  ) : null}
-                </g>
-              );
-            })}
-          </g>
-          <CenterScope
-            step={route ? state.step : 0}
-            steps={route?.nodes.length ?? 0}
-            station={current?.title ?? null}
-            onTurn={phase === "continue" ? (step) => setState((prev) => moveTo(prev, step)) : undefined}
-            onReturn={phase === "continue" ? () => setState((prev) => returnToMind(prev)) : undefined}
+    <main data-testid="communication-map" className={`min-h-[70vh] bg-[#F3EFE6] ${ink}`}>
+      <div className="mx-auto w-full max-w-[46rem] px-5 pb-16 pt-6 sm:px-8 sm:pt-8">
+        {matter && question ? (
+          <GuideQuestion
+            title={matter.title}
+            prompt={question.prompt}
+            answers={question.answers}
+            progress={progressLabel(step)}
+            onBack={goBack}
+            onChoose={chooseAnswer}
           />
-          </g>
-        </svg>
-            </div>
-          </div>
+        ) : null}
 
-          <div>
-            <h2 className={cn(readType, "text-brand-navy")}>This step</h2>
-            <div className="mt-6 border border-brand-navy bg-white">
-              <div className="border-b border-brand-navy/20 px-6 py-6 sm:px-7">
-                <p className={cn(readType, "max-w-[12em] text-brand-navy")} aria-live="polite">
-                  {guide}
-                </p>
-                {plate ? <p className={cn(readType, "mt-6 max-w-[12em] text-brand-navy")}>{plate}</p> : null}
-              </div>
+        {matter && result ? (
+          <GuideRecommendation
+            advice={result}
+            draft={draft}
+            whyOpen={whyOpen}
+            onDraft={setDraft}
+            onToggleWhy={() => setWhyOpen((open) => !open)}
+            onBack={goBack}
+          />
+        ) : null}
 
-              {phase === "orb" && current ? (
-                <div>
-                  <OrbButton
-                    pole="plus"
-                    label={current.plus}
-                    pressed={state.taken.includes(`${route!.id}:${current.id}:plus`)}
-                    onTake={() => setState((prev) => takeOrb(prev, `${route!.id}:${current.id}:plus`))}
-                  />
-                  <OrbButton
-                    pole="minus"
-                    label={current.minus}
-                    pressed={state.taken.includes(`${route!.id}:${current.id}:minus`)}
-                    onTake={() => setState((prev) => takeOrb(prev, `${route!.id}:${current.id}:minus`))}
-                  />
-                </div>
-              ) : null}
-
-              {phase === "choose" ? (
-                <div>
-                  {COMMUNICATION_ROUTES.map((item, index) => {
-                    const closed = state.closed.includes(item.id);
-                    return (
-                      <button
-                        key={item.id}
-                        ref={index === 0 ? firstOpenRoute : undefined}
-                        type="button"
-                        disabled={closed}
-                        onClick={() => setState((prev) => chooseRoute(prev, item.id))}
-                        className={cn(
-                          "flex w-full items-center border-b border-brand-navy/20 px-6 py-6 text-left last:border-b-0 sm:px-7",
-                          readType,
-                          !closed && "text-brand-navy hover:bg-brand-ivory",
-                          closed && "text-brand-graphite/40",
-                        )}
-                      >
-                        {closed ? `${item.title} closed` : item.title}
-                      </button>
-                    );
-                  })}
-                </div>
-              ) : null}
-
-              {phase === "continue" ? (
-                <button
-                  type="button"
-                  onClick={() => setState((prev) => returnToMind(prev))}
-                  className={cn(
-                    readType,
-                    "flex w-full items-center px-6 py-6 text-left text-brand-navy hover:bg-brand-ivory sm:px-7",
-                  )}
-                >
-                  To the mind
-                </button>
-              ) : null}
-            </div>
-          </div>
-        </div>
-      </PageSection>
+        {!matter ? <GuideOpening onOpen={openMatter} /> : null}
+      </div>
     </main>
   );
 }
 
-function CenterScope({
-  step,
-  steps,
-  station,
-  onTurn,
-  onReturn,
-}: {
-  step: number;
-  steps: number;
-  station: string | null;
-  onTurn?: (step: number) => void;
-  onReturn?: () => void;
-}) {
-  const [rotation, setRotation] = useState(0);
-  const [turning, setTurning] = useState<-1 | 0 | 1>(0);
-  const [dragging, setDragging] = useState(false);
-  const drag = useRef<{
-    pointer: number;
-    last: number;
-    spun: number;
-    origin: number;
-    direction: -1 | 0 | 1;
-  } | null>(null);
-  const stepRef = useRef(step);
-  const face = useRef<SVGCircleElement>(null);
-
-  useEffect(() => {
-    stepRef.current = step;
-    if (!drag.current) setRotation((Math.max(step, 1) - 1) * SCOPE_DETENT);
-  }, [step]);
-
-  function pointerAngle(event: ReactPointerEvent) {
-    const node = face.current;
-    if (!node) return 0;
-    const rect = node.getBoundingClientRect();
-    return Math.atan2(event.clientY - (rect.top + rect.height / 2), event.clientX - (rect.left + rect.width / 2));
-  }
-
-  function onPointerDown(event: ReactPointerEvent<SVGCircleElement>) {
-    if (!onTurn || steps < 1) return;
-    event.currentTarget.setPointerCapture(event.pointerId);
-    drag.current = {
-      pointer: event.pointerId,
-      last: pointerAngle(event),
-      spun: 0,
-      origin: stepRef.current,
-      direction: 0,
-    };
-    setDragging(true);
-  }
-
-  function onPointerMove(event: ReactPointerEvent<SVGCircleElement>) {
-    const session = drag.current;
-    if (!session || session.pointer !== event.pointerId || !onTurn) return;
-    const ang = pointerAngle(event);
-    let delta = ang - session.last;
-    if (delta > Math.PI) delta -= Math.PI * 2;
-    if (delta < -Math.PI) delta += Math.PI * 2;
-    session.last = ang;
-    const deg = (delta * 180) / Math.PI;
-    session.spun += deg;
-    if (deg > 0.4) session.direction = 1;
-    else if (deg < -0.4) session.direction = -1;
-    const turned = applyScopeTurn(session.origin, steps, session.spun);
-    setRotation((turned.step - 1) * SCOPE_DETENT + turned.carry);
-    setTurning(session.direction);
-    if (turned.step !== stepRef.current) {
-      stepRef.current = turned.step;
-      onTurn(turned.step);
-    }
-  }
-
-  function endDrag(event: ReactPointerEvent<SVGCircleElement>) {
-    const session = drag.current;
-    if (!session || session.pointer !== event.pointerId) return;
-    drag.current = null;
-    setDragging(false);
-    setTurning(0);
-    setRotation((Math.max(stepRef.current, 1) - 1) * SCOPE_DETENT);
-  }
-
-  const ticks = Array.from({ length: 48 }, (_, index) => {
-    const theta = (index / 48) * Math.PI * 2 - Math.PI / 2;
-    const major = index % 4 === 0;
-    const inner = major ? 11.15 : 11.7;
-    const outer = 12.85;
-    return {
-      major,
-      x1: 50 + Math.cos(theta) * inner,
-      y1: 48 + Math.sin(theta) * inner,
-      x2: 50 + Math.cos(theta) * outer,
-      y2: 48 + Math.sin(theta) * outer,
-    };
-  });
-
+function GuideOpening({ onOpen }: { onOpen: (id: string) => void }) {
   return (
-    <g aria-label="Calibration scope">
-      <defs>
-        <linearGradient id="cm-scope-metal" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#E6D5B0" />
-          <stop offset="0.42" stopColor="#B08D57" />
-          <stop offset="1" stopColor="#7A5A3A" />
-        </linearGradient>
-        <radialGradient id="cm-scope-lens" cx="50%" cy="40%" r="65%">
-          <stop offset="0" stopColor="#F8F5EF" />
-          <stop offset="1" stopColor="#E4DCCF" />
-        </radialGradient>
-      </defs>
-      <circle cx="50" cy="48" r="13.55" fill="#F5F2EB" stroke="url(#cm-scope-metal)" strokeWidth="1.45" />
-      <circle cx="50" cy="48" r="12.15" fill="none" stroke="#2A3447" strokeWidth="0.22" opacity="0.45" />
-      <g
-        className={dragging ? "cm-scope-dial is-turning" : "cm-scope-dial"}
-        style={{ transform: `rotate(${rotation}deg)` }}
-      >
-        <circle cx="50" cy="48" r="12.5" fill="none" />
-        {ticks.map((tick) => (
-          <line
-            key={`${tick.x1}-${tick.y1}`}
-            x1={tick.x1}
-            y1={tick.y1}
-            x2={tick.x2}
-            y2={tick.y2}
-            stroke={tick.major ? "#B08D57" : "#2A3447"}
-            strokeWidth={tick.major ? 0.28 : 0.16}
-            opacity={tick.major ? 1 : 0.55}
-          />
-        ))}
-        <polygon points="50,34.85 49.28,36.7 50.72,36.7" fill="#B08D57" />
-      </g>
-      <polygon points="50,33.15 49.42,34.55 50.58,34.55" fill="#2A3447" />
-      {onTurn ? <ScopeChevron angle={-68} direction={1} lit={turning === 1} /> : null}
-      {onTurn ? <ScopeChevron angle={-112} direction={-1} lit={turning === -1} /> : null}
-      <circle cx="50" cy="48" r="10.7" fill="url(#cm-scope-lens)" stroke="#2A3447" strokeWidth="0.28" />
-      <ellipse cx="50" cy="48" rx="7.1" ry="5.5" fill="none" stroke="#2A3447" strokeWidth="0.22" />
-      <ellipse cx="50" cy="48" rx="4.1" ry="3.15" fill="none" stroke="#B08D57" strokeWidth="0.24" />
-      <path d="M50 42.6 Q47.6 48 50 53.4" fill="none" stroke="#2A3447" strokeWidth="0.22" />
-      <path d="M50 42.6 Q52.4 48 50 53.4" fill="none" stroke="#B08D57" strokeWidth="0.22" />
-      <path d="M43.2 48 H56.8" stroke="#D8D1C7" strokeWidth="0.2" />
-      <circle cx="50" cy="49.15" r="0.62" fill="#B08D57" />
-      <rect x="33.2" y="43.6" width="33.6" height="9.4" fill="#F6F1E8" />
-      <text
-        x="50"
-        y="51.1"
-        textAnchor="middle"
-        fill="#2A3447"
-        fontSize="8.2"
-        fontFamily='"Cormorant Garamond", Georgia, serif'
-      >
-        The mind
-      </text>
-      {onReturn ? (
-        <circle
-          cx="50"
-          cy="48"
-          r="6.2"
-          fill="transparent"
-          className="cursor-pointer"
-          role="button"
-          tabIndex={0}
-          aria-label="Back to the mind"
-          onClick={onReturn}
-          onKeyDown={(event) => {
-            if (event.key === "Enter" || event.key === " ") {
-              event.preventDefault();
-              onReturn();
-            }
-          }}
-        />
-      ) : null}
-      <circle
-        ref={face}
-        cx="50"
-        cy="48"
-        r="12.4"
-        fill="none"
-        stroke="transparent"
-        strokeWidth="3.4"
-        data-testid="scope-ring"
-        className={onTurn ? "cm-scope-ring" : undefined}
-        role={onTurn ? "slider" : undefined}
-        tabIndex={onTurn ? 0 : undefined}
-        aria-label={onTurn ? "Turn the scope either way" : undefined}
-        aria-valuemin={onTurn ? 1 : undefined}
-        aria-valuemax={onTurn ? steps : undefined}
-        aria-valuenow={onTurn ? Math.max(1, step) : undefined}
-        aria-valuetext={onTurn ? (station ?? "The mind") : undefined}
-        aria-orientation="horizontal"
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
-        onKeyDown={
-          onTurn
-            ? (event) => {
-                if (event.key === "ArrowRight" || event.key === "ArrowUp") {
-                  event.preventDefault();
-                  onTurn(Math.min(steps, step + 1));
-                } else if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
-                  event.preventDefault();
-                  onTurn(Math.max(1, step - 1));
-                }
-              }
-            : undefined
-        }
-      />
-      <circle className="cm-scope-focus" cx="50" cy="48" r="14.85" fill="none" stroke="#B08D57" strokeWidth="0.28" />
-    </g>
-  );
-}
-
-function ScopeChevron({ angle, direction, lit }: { angle: number; direction: 1 | -1; lit: boolean }) {
-  const theta = (angle * Math.PI) / 180;
-  const radius = 14.55;
-  const x = 50 + Math.cos(theta) * radius;
-  const y = 48 + Math.sin(theta) * radius;
-  const tx = -Math.sin(theta) * direction;
-  const ty = Math.cos(theta) * direction;
-  const px = -ty;
-  const py = tx;
-  const tip = `${x + tx * 1.05},${y + ty * 1.05}`;
-  const left = `${x - tx * 0.62 + px * 0.48},${y - ty * 0.62 + py * 0.48}`;
-  const right = `${x - tx * 0.62 - px * 0.48},${y - ty * 0.62 - py * 0.48}`;
-  return <polygon points={`${tip} ${left} ${right}`} fill={lit ? "#B08D57" : "#2A3447"} opacity={lit ? 1 : 0.38} />;
-}
-
-function StartBranches({
-  closed,
-  onStart,
-}: {
-  closed: readonly string[];
-  onStart: (id: string) => void;
-}) {
-  const starts = [
-    { id: "four-stations", x: 32, y: 26, title: "Four stations" },
-    { id: "one-breath", x: 68, y: 26, title: "One breath" },
-    { id: "integration", x: 50, y: 76, title: "Integration" },
-  ];
-  return (
-    <g>
-      {starts.map((item) => (
-        <path
-          key={item.id}
-          d={segmentPath(CENTER, item)}
-          fill="none"
-          stroke="#D8D1C7"
-          strokeWidth="0.28"
-        />
-      ))}
-      {starts.map((item) => {
-        const shut = closed.includes(item.id);
-        return (
-          <g
-            key={`${item.id}-label`}
-            className={shut ? undefined : "cursor-pointer"}
-            role="button"
-            tabIndex={shut ? undefined : 0}
-            aria-disabled={shut || undefined}
-            onClick={() => {
-              if (!shut) onStart(item.id);
-            }}
-            onKeyDown={(event) => {
-              if (shut) return;
-              if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                onStart(item.id);
-              }
-            }}
+    <div data-testid="decision-cards">
+      <p className={`text-[0.72rem] tracking-[0.22em] ${accent}`}>{OPENING_EYEBROW}</p>
+      <h1 className="mt-3 max-w-[12ch] font-display text-[clamp(2.8rem,5.4vw,3.9rem)] leading-[0.92] tracking-[-0.03em]">
+        {OPENING_HEADLINE}
+      </h1>
+      <p className={`mt-4 max-w-[36rem] text-lg leading-relaxed ${muted}`}>{OPENING_SUPPORT}</p>
+      <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3">
+        {MATTERS.map((matter) => (
+          <button
+            key={matter.id}
+            type="button"
+            onClick={() => onOpen(matter.id)}
+            className={`flex min-h-[8.25rem] flex-col border ${line} ${paper} px-5 py-4 text-left sm:px-5 sm:py-4`}
           >
-            <circle cx={item.x} cy={item.y - 0.6} r="10" fill="transparent" />
-            <text
-              x={item.x}
-              y={item.y}
-              textAnchor="middle"
-              fill="#2A3447"
-              opacity={shut ? 0.35 : 1}
-              fontSize="5.6"
-              fontFamily='"Cormorant Garamond", Georgia, serif'
-            >
-              {item.title}
-            </text>
-          </g>
-        );
-      })}
-    </g>
+            <span className="font-display text-[1.7rem] leading-none sm:text-[1.85rem]">{matter.title}</span>
+            <span className={`mt-2 flex-1 text-base leading-snug ${muted}`}>{matter.description}</span>
+            <span className="mt-3 flex justify-end">
+              <Arrow />
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 
-function Trails({
-  routeId,
-  nodes,
-  step,
-  across,
-}: {
-  routeId: string;
-  nodes: PlacedNode[];
-  step: number;
-  across: readonly (readonly [string, string])[];
-}) {
-  const byId = new Map(nodes.map((item) => [item.id, item]));
-  return (
-    <g aria-hidden>
-      {across.map(([a, b]) => {
-        const from = byId.get(a);
-        const to = byId.get(b);
-        if (!from || !to) return null;
-        if (from.index + 1 > step || to.index + 1 > step) return null;
-        return (
-          <path
-            key={`${routeId}-${a}-${b}`}
-            d={segmentPath(from, to)}
-            fill="none"
-            stroke="#D8D1C7"
-            strokeWidth="0.22"
-            strokeDasharray="0.7 0.8"
-          />
-        );
-      })}
-      {nodes.map((item, index) => {
-        const opened = step >= index + 1;
-        const upcoming = index === step;
-        if (!opened && !upcoming) return null;
-        const from = index === 0 ? CENTER : nodes[index - 1]!;
-        return (
-          <path
-            key={`${routeId}-trail-${item.id}`}
-            d={segmentPath(from, item)}
-            fill="none"
-            stroke={opened ? "#B08D57" : "#2A3447"}
-            strokeWidth={opened ? 0.42 : 0.28}
-            opacity={opened ? 0.95 : 0.35}
-          />
-        );
-      })}
-    </g>
-  );
-}
-
-function NodeMark({
-  item,
-  active,
-  open,
+function GuideQuestion({
+  title,
+  prompt,
+  answers,
+  progress,
+  onBack,
   onChoose,
 }: {
-  item: PlacedNode;
-  active: boolean;
-  open: boolean;
-  onChoose?: () => void;
+  title: string;
+  prompt: string;
+  answers: readonly { id: string; label: string }[];
+  progress: string;
+  onBack: () => void;
+  onChoose: (id: string) => void;
 }) {
-  const anchor = item.side === "content" ? "end" : "start";
-  const labelX = item.side === "content" ? item.x - 3.4 : item.x + 3.4;
   return (
-    <g
-      className={onChoose ? "cursor-pointer" : undefined}
-      role={onChoose ? "button" : undefined}
-      aria-label={onChoose ? item.title : undefined}
-      aria-hidden={onChoose ? undefined : true}
-      onClick={onChoose}
-    >
-      <circle
-        cx={item.x}
-        cy={item.y}
-        r={active ? 2.8 : open ? 2 : 1.4}
-        fill={active ? "#2A3447" : "#F5F2EB"}
-        stroke="#2A3447"
-        strokeWidth="0.28"
-        opacity={open ? 1 : 0.4}
-      />
-      {open ? (
-        <>
-          <text
-            x={labelX}
-            y={item.y - 0.6}
-            textAnchor={anchor}
-            fill="#7A5A3A"
-            fontSize="2.4"
-            fontFamily="Inter, sans-serif"
-            letterSpacing="0.08"
+    <div data-testid="decision-question" className="pb-24 md:pb-0">
+      <div className="hidden items-center justify-between md:flex">
+        <BackControl onClick={onBack} />
+        <p className={`text-sm tracking-[0.08em] ${muted}`}>{progress}</p>
+      </div>
+      <p className={`mt-0 text-[0.72rem] tracking-[0.18em] md:mt-12 ${accent}`}>{title}</p>
+      <h1 className="mt-4 max-w-[16ch] font-display text-[clamp(2.5rem,6vw,3.7rem)] leading-[1.02] tracking-[-0.03em]">
+        {prompt}
+      </h1>
+      <div className="mt-10 grid gap-3">
+        {answers.map((answer) => (
+          <button
+            key={answer.id}
+            type="button"
+            onClick={() => onChoose(answer.id)}
+            className={`min-h-[5.25rem] border ${line} ${paper} px-5 py-4 text-left font-display text-[1.65rem] leading-snug sm:min-h-[6rem] sm:px-6 sm:text-[1.85rem]`}
           >
-            {String(item.index + 1).padStart(2, "0")}
-          </text>
-          <text
-            x={labelX}
-            y={item.y + 2.6}
-            textAnchor={anchor}
-            fill="#2A3447"
-            fontSize="5.4"
-            fontFamily='"Cormorant Garamond", Georgia, serif'
-          >
-            {item.title}
-          </text>
-        </>
-      ) : null}
-    </g>
+            {answer.label}
+          </button>
+        ))}
+      </div>
+      <div className={`sticky bottom-0 z-30 -mx-5 mt-8 flex items-center justify-between border-t ${line} bg-[#F3EFE6] px-5 py-4 md:hidden`}>
+        <BackControl onClick={onBack} />
+        <p className={`text-sm tracking-[0.08em] ${muted}`}>{progress}</p>
+      </div>
+    </div>
   );
 }
 
-function OrbButton({
-  pole,
-  label,
-  pressed,
-  onTake,
+function GuideRecommendation({
+  advice,
+  draft,
+  whyOpen,
+  onDraft,
+  onToggleWhy,
+  onBack,
 }: {
-  pole: "plus" | "minus";
-  label: string;
-  pressed: boolean;
-  onTake: () => void;
+  advice: Recommendation;
+  draft: string;
+  whyOpen: boolean;
+  onDraft: (value: string) => void;
+  onToggleWhy: () => void;
+  onBack: () => void;
 }) {
   return (
-    <button
-      type="button"
-      aria-pressed={pressed}
-      onClick={onTake}
-      className={cn(
-        "flex w-full items-start gap-5 border-b border-brand-navy/20 px-6 py-6 text-left text-brand-navy last:border-b-0 sm:px-7",
-        readType,
-        pole === "plus" ? "border-brand-brass/70 bg-white" : "border-brand-border bg-white",
-        pressed && pole === "plus" && "bg-brand-navy text-brand-ivory",
-        pressed && pole === "minus" && "bg-brand-charcoal text-brand-ivory",
-      )}
-    >
-      <span
-        className={cn(
-          "mt-1 grid h-16 w-16 shrink-0 place-items-center rounded-full border font-sans text-4xl",
-          pole === "plus" ? "border-brand-brass" : "border-brand-navy/30",
-          pressed && "border-brand-ivory/40",
-        )}
-        aria-hidden
-      >
-        {pole === "plus" ? "+" : "−"}
-      </span>
-      <span className="max-w-[12em]">{label}</span>
-    </button>
+    <div data-testid="decision-recommendation" className="pb-20 md:pb-0">
+      <div className="hidden md:block">
+        <BackControl onClick={onBack} />
+      </div>
+      <div className={`mt-0 h-px w-10 bg-[#6E2E38] md:mt-12`} />
+      <p className={`mt-5 text-[0.72rem] tracking-[0.18em] ${accent}`}>Recommended next move</p>
+      <h1 className="mt-4 max-w-[16ch] font-display text-[clamp(2.6rem,6vw,3.8rem)] leading-[1.02] tracking-[-0.03em]">
+        {advice.move}
+      </h1>
+
+      <section className={`mt-12 border-t ${line} pt-6`}>
+        <h2 className="text-base">Say this</h2>
+        <label className="mt-4 block">
+          <span className="sr-only">Opening sentence</span>
+          <textarea
+            value={draft}
+            onChange={(event) => onDraft(event.target.value)}
+            rows={3}
+            className={`w-full resize-none bg-transparent font-display text-[1.7rem] leading-snug outline-none ${ink}`}
+          />
+        </label>
+      </section>
+
+      <section className={`mt-8 border-t ${line} pt-6`}>
+        <h2 className="text-base">Use this channel</h2>
+        <p className="mt-3 font-display text-[1.85rem] leading-none">{advice.channel}</p>
+        <p className={`mt-3 max-w-[36rem] text-lg leading-relaxed ${muted}`}>{advice.channelReason}</p>
+      </section>
+
+      <section className={`mt-8 border-t ${line} pt-6`}>
+        <h2 className="text-base">Watch for this</h2>
+        <p className="mt-3 max-w-[36rem] font-display text-[1.7rem] leading-snug">{advice.watch}</p>
+      </section>
+
+      <section className={`mt-8 border-t ${line} pt-6`}>
+        <h2 className="text-base">If it goes badly</h2>
+        <p className="mt-3 max-w-[36rem] font-display text-[1.7rem] leading-snug">{advice.recover}</p>
+      </section>
+
+      <div className="mt-12">
+        <button type="button" onClick={onToggleWhy} className={`text-base ${accent} underline-offset-4 hover:underline`} aria-expanded={whyOpen}>
+          See why this works
+        </button>
+        {whyOpen ? (
+          <div className={`mt-6 border-t ${line} pt-6`}>
+            <p className={`max-w-[36rem] text-base leading-relaxed ${muted}`}>{PURPOSE_LINE}</p>
+            <div className="mt-8 grid gap-8 sm:grid-cols-2">
+              <FrameColumn heading="Content" lines={CONTENT_LINES} />
+              <FrameColumn heading="Relationship" lines={RELATIONSHIP_LINES} />
+            </div>
+          </div>
+        ) : null}
+      </div>
+
+      <div className={`sticky bottom-0 z-30 -mx-5 mt-10 border-t ${line} bg-[#F3EFE6] px-5 py-4 md:hidden`}>
+        <BackControl onClick={onBack} />
+      </div>
+    </div>
+  );
+}
+
+function FrameColumn({ heading, lines }: { heading: string; lines: readonly { title: string; line: string }[] }) {
+  return (
+    <div>
+      <h3 className={`text-[0.72rem] tracking-[0.16em] ${muted}`}>{heading}</h3>
+      <ul className="mt-4 space-y-5">
+        {lines.map((item) => (
+          <li key={item.title}>
+            <p className="font-display text-[1.45rem] leading-none">{item.title}</p>
+            <p className={`mt-1.5 text-base leading-snug ${muted}`}>{item.line}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

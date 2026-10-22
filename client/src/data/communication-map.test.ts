@@ -7,8 +7,6 @@ import CommunicationMap from "@/pages/tools/CommunicationMap";
 import ToolsHome from "@/pages/tools/ToolsHome";
 import {
   CENTER_LINE,
-  GUIDE_NAME,
-  PURPOSE_LINE,
   COMMUNICATION_ROUTES,
   MINUS_LIMIT,
   assertNoSaaSLanguage,
@@ -126,34 +124,30 @@ describe("communication map", () => {
     expect(chooseRoute(state, "integration").routeId).toBeNull();
   });
 
-  it("renders step 1 of the decision guide, and hides later controls", () => {
+  it("opens on six matters, and keeps the scope off the first screen", () => {
     const html = renderToStaticMarkup(
       createElement(Router, { ssrPath: "/tools/communication-map" }, createElement(CommunicationMap)),
     );
-    expect(html).toContain(GUIDE_NAME);
-    expect(html).toContain("The mind");
-    expect(html).toContain("Four stations");
-    expect(html).toContain("One breath");
-    expect(html).toContain("Integration");
-    expect(html).toContain(PURPOSE_LINE);
-    expect(() => assertNoSaaSLanguage(PURPOSE_LINE)).not.toThrow();
-    expect(html).toContain(INSTRUCTION_CHOOSE);
-    expect(html).toContain("Step 1");
+    expect(html).toContain("DECISION GUIDE");
+    expect(html).toContain("Before you respond.");
+    expect(html).toContain("Make a request");
+    expect(html).toContain("Clarify what they mean");
+    expect(html).toContain("Give feedback");
+    expect(html).toContain("Repair tension");
+    expect(html).toContain("Set a boundary");
+    expect(html).toContain("Decide whether to respond");
+    expect(html).not.toContain("The mind");
+    expect(html).not.toContain("Four stations");
+    expect(html).not.toContain("One breath");
+    expect(html).not.toContain("Integration");
+    expect(html).not.toContain(INSTRUCTION_CHOOSE);
     expect(html).not.toContain(INSTRUCTION_ORB);
     expect(html).not.toContain(INSTRUCTION_CONTINUE);
-    expect(html).not.toContain("To the mind");
-    expect(html).not.toContain("Turn the scope either way");
-    expect(html).toContain("Calibration scope");
+    expect(html).not.toContain("Calibration scope");
     expect(html).not.toContain('type="range"');
     expect(html).not.toContain("Speaker");
-    expect(html).not.toContain("<article");
-    expect(html.toLowerCase()).not.toContain("platform");
-    expect(html.toLowerCase()).not.toContain("subscription");
-    expect(html.toLowerCase()).not.toContain("signup");
-    expect(html.toLowerCase()).not.toContain("dashboard");
-    expect(html.toLowerCase()).not.toContain("software");
-    expect(html).not.toMatch(/\bplan\b/i);
     expect(html).not.toContain("Anatomy of Communication");
+    expect(() => assertNoSaaSLanguage(html)).not.toThrow();
   });
 
   it("turns the scope clockwise to advance and counterclockwise to go back", () => {
