@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Daily cover (editorial) · Stone + Platinum story kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@300..700&display=block" rel="stylesheet"/>
+<link rel="stylesheet" href="kit.css"/>
+<link rel="stylesheet" href="editorial.css"/>
+<style>
+/* Editorial front page for the daily Manhattan Minute. No panel, no QR (no QR anywhere in the kit). */
+.cv .top{top:250px}
+/* Engraved clock dial (tools/make_clock.py), top left (Raphi, Sep 29 late): no hands, and the word "Manhattan"
+   is nested across its middle. place() sizes and centres the dial on that word, so it bleeds a little off the top
+   left corner. The mask fades it out toward the lower right, so it reads as anchored in the corner.
+   A second mask layer fades the dial out under the masthead (AK mark + kicker), so the header stays clean.
+   Opacity: --clock-op (config coverClockOpacity, default .18). Decorative; contrast_check.py measures text against it. */
+.cv .clock{position:absolute;left:0;top:0;width:900px;height:900px;z-index:0;pointer-events:none;opacity:var(--clock-op,.18);
+  -webkit-mask-image:radial-gradient(ellipse var(--pw,0px) var(--ph,0px) at var(--px,50%) var(--py,50%),rgba(0,0,0,var(--pk,.2)) 0,rgba(0,0,0,var(--pk,.2)) 62%,#000 100%),radial-gradient(ellipse 250px 118px at var(--hx,50%) var(--hy,-50%),transparent 0,transparent 45%,rgba(0,0,0,.6) 80%,#000 100%),radial-gradient(circle farthest-corner at 34% 34%,#000 0,#000 50%,rgba(0,0,0,.55) 72%,rgba(0,0,0,.16) 88%,transparent 100%);
+  -webkit-mask-composite:source-in,source-in;
+          mask-image:radial-gradient(ellipse var(--pw,0px) var(--ph,0px) at var(--px,50%) var(--py,50%),rgba(0,0,0,var(--pk,.2)) 0,rgba(0,0,0,var(--pk,.2)) 62%,#000 100%),radial-gradient(ellipse 250px 118px at var(--hx,50%) var(--hy,-50%),transparent 0,transparent 45%,rgba(0,0,0,.6) 80%,#000 100%),radial-gradient(circle farthest-corner at 34% 34%,#000 0,#000 50%,rgba(0,0,0,.55) 72%,rgba(0,0,0,.16) 88%,transparent 100%);mask-composite:intersect,intersect}
+.cv .clock svg{width:100%;height:100%;display:block}
+/* titleAlign: center (DEFAULT, approved Sep 29 evening) | left | nested.
+   center and left use the CORNER clock: a large dial fixed to the page's top left corner (not tied to the
+   words), a soft fade behind the nameplate (third mask layer, --pw/--ph) so no ring or tick competes with the
+   letters, and any numeral that would land on the nameplate is hidden. "nested" = the earlier layout above. */
+.cv.t-center .plate{left:0;right:0;width:auto;text-align:center}
+.cv.t-left .plate{left:var(--L);width:max-content;text-align:left}
+.cv.t-left .plate .the{margin-left:.06em}
+/* stone-coloured knockout halo hugging the letterforms (engraver's clearing), so rings and ticks never touch the words */
+.cv.corner .plate .the,.cv.corner .plate .w1,.cv.corner .plate .w2{
+  text-shadow:0 0 6px rgba(209,206,200,.95),0 0 14px rgba(209,206,200,.9),0 0 26px rgba(209,206,200,.75),0 0 44px rgba(209,206,200,.45)}
+.cv .plate,.cv .facts,.cv .contents{z-index:1}
+.cv .plate{position:absolute;top:320px;left:var(--L);width:max-content;text-align:center;font-family:var(--display);color:var(--deep)}   /* left-anchored block, centred inside: "The" over, "Minute" under "Manhattan" */
+.cv .plate .the{display:block;font-style:italic;font-weight:500;font-size:64px;line-height:1;color:var(--slate)}
+.cv .plate .w1,.cv .plate .w2{display:block;font-weight:400;font-size:156px;line-height:.9;letter-spacing:-.02em}
+.cv .plate .w1{margin-top:6px}
+.cv .plate .w2{font-style:italic}
+.cv .contents{position:absolute;left:var(--L);right:var(--R)}
+.cv .chead{display:flex;align-items:center;gap:22px}
+.cv .chead .prule{flex:1}
+.cv .chead .prule.l{background:linear-gradient(90deg,rgba(126,133,140,0),#8E959C 40%,#6F767D)}
+.cv .chead .prule.r{background:linear-gradient(90deg,#6F767D,#8E959C 60%,rgba(126,133,140,0))}
+.cv .chead .caps{color:var(--deep);font-size:18px}
+.cv .list{margin-top:22px}
+/* Contents, enlarged Sep 29 evening (was 64 / 32 / 32, rows 24px): numerals 84, titles 40, sublines 38 */
+.cv .c{display:grid;grid-template-columns:150px 1fr;padding:30px 16px 30px 0;position:relative}
+.cv .c + .c::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,#6F767D 0%,#8E959C 40%,#9AA1A8 75%,rgba(154,161,168,0) 100%)}
+.cv .c .n{font-family:var(--display);font-weight:400;font-size:84px;line-height:.74;color:var(--navy);font-variant-numeric:lining-nums tabular-nums;padding-top:2px}
+.cv .c .h{font-family:var(--ui);font-size:40px;font-weight:600;line-height:1.1;letter-spacing:-.015em;color:var(--deep)}
+.cv .c .d{margin-top:10px;font-family:var(--display);font-style:italic;font-weight:500;font-size:38px;line-height:1.16;color:var(--navy)}
+/* Info strip: today's facts at a glance, on an ivory card (tools/cover_facts.py fills the slots) */
+.cv .facts{position:absolute;left:var(--L);right:120px;display:flex;padding:26px 30px 26px 30px}
+.cv .fx{flex:1 1 0;padding:0 0 0 24px;position:relative;min-width:0}
+.cv .fx:first-child{padding-left:0}
+.cv .fx.wx{flex-grow:1.55}.cv .fx.t10{flex-grow:1.15}.cv .fx.sun{flex-grow:.8}
+.cv .fx + .fx::before{content:"";position:absolute;left:0;top:2px;bottom:2px;width:1px;background:linear-gradient(180deg,rgba(126,133,140,.15),#9AA1A8 30%,#9AA1A8 70%,rgba(126,133,140,.15))}
+.cv .fx .caps{display:block;font-size:14px;letter-spacing:.24em;color:var(--label)}
+.cv .fx .v{margin-top:14px;display:flex;align-items:center;column-gap:12px}
+.cv .fx .v b{font-family:var(--display);font-weight:500;font-size:44px;line-height:1;color:var(--deep);white-space:nowrap;
+  font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"lnum" 1,"tnum" 1;letter-spacing:-.005em}
+.cv .fx .v .wxi{margin:-4px 0 -4px -2px}
+.cv .fx .v i{font-family:var(--display);font-style:italic;font-weight:500;font-size:27px;line-height:1.02;color:var(--navy)}
+.cv .fx .chg{display:flex;flex-direction:column;gap:5px;font-family:var(--ui);white-space:nowrap}
+.cv .fx .chg .d{display:flex;align-items:center;gap:6px;font-size:17px;font-weight:600;line-height:1;color:var(--deep);font-variant-numeric:tabular-nums lining-nums}
+.cv .fx .chg .d svg{width:10px;height:9px;fill:var(--navy)}
+.cv .fx .chg .a{font-size:14px;font-weight:500;line-height:1;color:var(--meta-stone);letter-spacing:.01em}
+/* Footer: the shared order in editorial.css (website, disclaimer, date); the cover has no tagline. */
+</style>
+</head>
+<body>
+<div id="capture" class="ed cv">
+  <div class="clock" aria-hidden="true"></div>
+
+
+  <h1 class="plate"><span class="the" data-slot="plateThe"></span><span class="w1" data-slot="plate1"></span><span class="w2" data-slot="plate2"></span></h1>
+
+  <section class="facts card" id="facts">
+    <div class="fx wx" data-show-if="wxHigh"><span class="caps" data-slot="wxLabel"></span>
+      <div class="v"><svg class="wxi" id="wxIcon" viewBox="0 0 44 44" aria-hidden="true"></svg><b id="wxTemps"></b><i data-slot="wxCond" data-optional></i></div></div>
+    <div class="fx t10" data-show-if="t10Yield"><span class="caps" data-slot="t10Label"></span>
+      <div class="v"><b data-slot="t10Yield"></b><div class="chg"><span class="d" id="t10Chg"></span><span class="a" id="t10AsOf"></span></div></div></div>
+    <div class="fx sun" data-show-if="sunset"><span class="caps" data-slot="sunsetLabel"></span><div class="v"><b data-slot="sunset"></b></div></div>
+  </section>
+
+  <section class="contents" id="contents">
+    <div class="chead"><span class="prule l"></span><span class="caps" data-slot="colB"></span><span class="prule r"></span></div>
+    <div class="list">
+      <div class="c"><div class="n">01</div><div><div class="h" data-slot="seg1"></div><div class="d" data-slot="seg1Line" data-optional></div></div></div>
+      <div class="c"><div class="n">02</div><div><div class="h" data-slot="seg2"></div><div class="d" data-slot="seg2Line" data-optional></div></div></div>
+      <div class="c"><div class="n">03</div><div><div class="h" data-slot="seg3"></div><div class="d" data-slot="seg3Line" data-optional></div></div></div>
+    </div>
+  </section>
+
+  <footer class="efoot">   <!-- footer (Raphi, Sep 29 night): AK monogram, website rule, disclaimer, date; no header, no tagline -->
+    <img class="mono" src="assets/ak-deep.png" alt="AK"/>
+    <div class="divider" role="presentation"><span class="stripe"></span><span class="site">agentkammer.com</span><span class="stripe"></span></div>
+    <p class="fine" data-slot="fine"></p>
+    <span class="caps date" data-slot="dateLong"></span>
+  </footer>
+</div>
+<script src="kit.js"></script>
+<script src="wx-icons.js"></script>
+<script src="assets/cover-clock.js"></script>
+<script src="assets/cover-clock-corner.js"></script>
+<script>
+const cfg = applyKitConfig({
+  plateThe: "The", plate1: "Manhattan", plate2: "Minute",
+  colB: "In this minute",
+  wxLabel: "NYC weather", wxHigh: "", wxLow: "", wxCond: "",
+  wxIcon: "",
+  t10Label: "10 yr Treasury", t10Yield: "", t10ChangeBp: null, t10AsOfLabel: "",
+  sunsetLabel: "Sunset", sunset: "",
+  seg1: "The discount check",  seg1Line: "How far asks are bending before contracts.",
+  seg2: "One deal",            seg2Line: "One listing, and how I would think about it.",
+  seg3: "One thing to watch",  seg3Line: "What could move the market next.",
+  tagline: "Live where you belong.",
+  fine: "Educational commentary. Not advice. Opinions of Raphael Kammer."
+});
+// High / low as one figure: 71° / 59° (NWS, Central Park; filled by tools/cover_facts.py)
+if (cfg.wxHigh && cfg.wxLow) document.getElementById('wxTemps').textContent = cfg.wxHigh + '\u00B0 / ' + cfg.wxLow + '\u00B0';
+else document.querySelector('.fx.wx').hidden = true;
+// Weather icon: thin line drawings keyed by cover_facts.py (sun, partly, cloud, rain, storm, snow, fog, wind)
+const ICONS = window.WX_ICONS || {};
+if (ICONS[cfg.wxIcon]) document.getElementById('wxIcon').innerHTML = ICONS[cfg.wxIcon];
+else document.getElementById('wxIcon').remove();
+// 10 yr Treasury: change vs the prior close as a small triangle + "7 bp" (no signs, no dashes), and the close date
+(function(){
+  const bp = cfg.t10ChangeBp, el = document.getElementById('t10Chg');
+  if (bp === null || bp === undefined || bp === '') el.remove();
+  else if (+bp === 0) el.textContent = 'Unchanged';
+  else el.innerHTML = (+bp > 0 ? '<svg viewBox="0 0 10 9"><path d="M5 0l5 9H0z"/></svg>' : '<svg viewBox="0 0 10 9"><path d="M0 0h10L5 9z"/></svg>')
+                     + '<span>' + Math.abs(+bp) + ' bp</span>';
+  const as = document.getElementById('t10AsOf');
+  if (cfg.t10AsOfLabel) as.textContent = cfg.t10AsOfLabel + ' close'; else as.remove();
+})();
+const factsShown = [...document.querySelectorAll('.fx')].some(e => !e.hidden);
+if (!factsShown) document.getElementById('facts').hidden = true;
+// Stack (Sep 29 update: date moved to the footer, teaser removed): nameplate, info strip and contents share the space
+// between the top double rule and the footer. The slack is spread over four gaps (top .7, plate to strip .54,
+// strip to contents 1.30, bottom .86; Sep 29 evening spacing notes) so the page breathes evenly. Fit: if the slack runs out, the contents rows tighten
+// (30 -> 12px), then the nameplate steps down 24px (156 nested / 172 with titleAlign). window.COVER_FIT reports the result.
+// Nameplate size and clock knobs (config: coverPlateSize, coverClockScale, coverClockDx, coverClockDy, coverClockOpacity, coverClock "off")
+// titleAlign: "center" is the approved default (Raphi, Sep 29 evening). "left" is the approved alternate;
+// "nested" brings back the earlier layout with "Manhattan" nested in a word-centred dial.
+const TA = String(cfg.titleAlign || 'center').trim().toLowerCase();
+const ALIGN = TA === 'nested' ? '' : (['center', 'left'].includes(TA) ? TA : 'center');
+if (ALIGN) { document.getElementById('capture').classList.add('t-' + ALIGN, 'corner'); if (!cfg.coverClockOpacity) document.getElementById('capture').style.setProperty("--clock-op", .2); }
+// corner clock geometry (page px): centre and radius, overridable with coverClockCx / coverClockCy / coverClockR
+const CORNER = { cx: +(cfg.coverClockCx ?? 300), cy: +(cfg.coverClockCy ?? 350), r: +(cfg.coverClockR ?? 560), k: +(cfg.coverClockBehindWords ?? .8) };   // k: dial strength left behind the nameplate block
+// Gap weights (Raphi, Sep 29 evening spacing notes): headline to weather card tighter, weather card to contents a
+// little more, footer higher. At the sample slack (g 87) that is 71 -> 31px and 71 -> 97px.
+const GW = { plate: +(cfg.coverGapPlate ?? .54), strip: +(cfg.coverGapStrip ?? 1.30), bottom: +(cfg.coverGapBottom ?? .86) };
+// Contents nudge (Raphi, Sep 29 final): the IN THIS MINUTE label and the 01 to 03 list sit 24px lower as one group;
+// the nameplate and info strip keep their places (the nudge is not part of the slack, so g is unchanged).
+const NUDGE = +(cfg.coverContentsNudge ?? 24);
+const SIZE0 = +(cfg.coverPlateSize || (ALIGN ? 172 : 156)), CLOCK_SCALE = +(cfg.coverClockScale || 1.12), TOPW = +(cfg.coverTopWeight ?? .7);
+const CLOCK_DX = +(cfg.coverClockDx || 0), CLOCK_DY = +(cfg.coverClockDy || 0);   // optional centre offset, in dial radii (negative = up / left)
+if (cfg.coverClockOpacity) document.querySelector('#capture').style.setProperty('--clock-op', cfg.coverClockOpacity);
+function place(){
+  const plate = document.querySelector('.plate'), f = document.getElementById('facts'), c = document.getElementById('contents');
+  const rows = document.querySelectorAll('.cv .c'), words = document.querySelectorAll('.plate .w1,.plate .w2');
+  const foot = document.querySelector('.efoot');
+  // No-header layout (Sep 29 night): the stack starts at 194 so the nameplate lands near y 255 (IG top safe area) and the
+  // bottom limit is 1488 (before the .86g bottom share), keeping Raphi's approved gaps at g 87. Since the footer moved down
+  // to 1725 (Sep 30) the limit is a fixed value, so the footer position no longer moves the content; it still never
+  // comes closer than 60px to the footer.
+  const TOP = +(cfg.coverTop ?? 194), BOTTOM = Math.min(+(cfg.coverBottom ?? 1488), foot.getBoundingClientRect().top - 60);
+  let pad = 30, size = SIZE0, g = 0;   // contents rows start at 30px (enlarged Sep 29 evening)
+  for (;;) {
+    rows.forEach(r => { r.style.paddingTop = r.style.paddingBottom = pad + 'px'; });
+    words.forEach(w => { w.style.fontSize = size + 'px'; });
+    const hp = plate.getBoundingClientRect().height, hf = f.hidden ? 0 : f.getBoundingClientRect().height - 32, hc = c.getBoundingClientRect().height;
+    g = (BOTTOM - TOP - hp - hf - hc) / (f.hidden ? GW.strip + GW.bottom + TOPW : GW.plate + GW.strip + GW.bottom + TOPW);
+    if (g >= 40 || (pad <= 12 && size <= SIZE0 - 24)) break;
+    if (pad > 12) pad -= 2; else size -= 6;
+  }
+  g = Math.min(g, 130);
+  let y = TOP + TOPW * g; plate.style.top = Math.round(y) + 'px'; y = plate.getBoundingClientRect().bottom + (f.hidden ? GW.strip : GW.plate) * g;
+  if (!f.hidden) { f.style.top = Math.round(y - 16) + 'px'; y = f.getBoundingClientRect().bottom - 16 + GW.strip * g; }
+  c.style.top = Math.round(y) + 'px';
+  const room = BOTTOM - c.getBoundingClientRect().bottom;   // never push the list past the bottom limit
+  if (NUDGE > 0 && room > 0) c.style.top = Math.round(y + Math.min(NUDGE, room)) + 'px';
+  const bottom = c.getBoundingClientRect().bottom;
+  // clock: centred on the word "Manhattan", sized so the word sits inside the minute track (inner radius .84 of the dial)
+  const ck = document.querySelector('.clock'); let clock = null;
+  if (ck) {
+    const rg = document.createRange(); rg.selectNodeContents(document.querySelector('.plate .w1')); const wr = rg.getBoundingClientRect();
+    let R = (wr.width / 2 + 16) / .84 * CLOCK_SCALE, cx = wr.left + wr.width / 2 + CLOCK_DX * R, cy = wr.top + wr.height * .54 + CLOCK_DY * R;
+    if (ALIGN) ({ cx, cy, r: R } = CORNER);
+    Object.assign(ck.style, { left: Math.round(cx - R) + 'px', top: Math.round(cy - R) + 'px', width: Math.round(2 * R) + 'px', height: Math.round(2 * R) + 'px' });
+    const mEl = document.querySelector('.mast');   // no masthead since Sep 29 night: keep the fade where the masthead sat
+    const m = mEl ? mEl.getBoundingClientRect() : { left: 540, width: 0, top: 100, bottom: 175 };   // so the dial looks exactly as approved
+    ck.style.setProperty('--hx', Math.round(m.left + m.width / 2 - (cx - R)) + 'px');
+    ck.style.setProperty('--hy', Math.round((m.top + m.bottom) / 2 - (cy - R)) + 'px');
+    if (ALIGN) {   // fade behind the nameplate words + hide numerals that would touch them
+      const words = [...document.querySelectorAll('.plate .the,.plate .w1,.plate .w2')].map(e => { const r = document.createRange(); r.selectNodeContents(e); return r.getBoundingClientRect(); });
+      const bx = { l: Math.min(...words.map(r => r.left)), r: Math.max(...words.map(r => r.right)), t: Math.min(...words.map(r => r.top)), b: Math.max(...words.map(r => r.bottom)) };
+      ck.style.setProperty('--px', Math.round((bx.l + bx.r) / 2 - (cx - R)) + 'px');
+      ck.style.setProperty('--py', Math.round((bx.t + bx.b) / 2 - (cy - R)) + 'px');
+      ck.style.setProperty('--pw', Math.round((bx.r - bx.l) / 2 + 40) + 'px');
+      ck.style.setProperty('--ph', Math.round((bx.b - bx.t) / 2 + 30) + 'px');
+      ck.style.setProperty('--pk', CORNER.k);
+      ck.querySelectorAll('text').forEach(t => { t.style.visibility = ''; const r = t.getBoundingClientRect();
+        if (r.right > bx.l - 28 && r.left < bx.r + 28 && r.bottom > bx.t - 20 && r.top < bx.b + 20) t.style.visibility = 'hidden'; });
+    }
+    clock = { mode: ALIGN ? 'corner' : 'nested', cx: Math.round(cx), cy: Math.round(cy), r: Math.round(R), opacity: +getComputedStyle(ck).opacity };
+  }
+  return window.COVER_FIT = { titleAlign: ALIGN || 'nested', clock, rowPadding: pad, plateSize: size, gap: Math.round(g), keyBottom: Math.round(bottom), footTop: Math.round(foot.getBoundingClientRect().top), ok: bottom <= 1560 && bottom <= foot.getBoundingClientRect().top - 24 };
+}
+const ckEl = document.querySelector('.clock');
+const CK_SVG = ALIGN ? window.COVER_CLOCK_SVG_CORNER : window.COVER_CLOCK_SVG;
+if (CK_SVG && String(cfg.coverClock ?? 'on') !== 'off') ckEl.innerHTML = CK_SVG; else ckEl.remove();
+place(); document.fonts.ready.then(place);
+</script>
+</body>
+</html>

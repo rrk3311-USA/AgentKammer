@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>End page (editorial, charcoal art, brief download) · Stone + Platinum story kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@300..700&display=block" rel="stylesheet"/>
+<link rel="stylesheet" href="kit.css"/>
+<link rel="stylesheet" href="editorial.css"/>
+<style>
+/* End page, same editorial grid as the cover and board. No QR anywhere (Raphi, Sep 29).
+   Zones (no-header layout, Sep 29 night: everything moved up 60px):  sign-off 258 to ~553 | charcoal art 530 to 1061,
+           x 68 to 1012 (snowy owls, decorative; edges fade to nothing) | swipe up + download line 1000 to about 1130 |
+           STICKER ZONE 1190 to 1440 kept empty for the Instagram link sticker | footer from 1590
+           footer (date, divider, tagline, small print) anchored to the bottom, same as the cover and board */
+.en .signoff{position:absolute;top:258px;left:var(--L);right:var(--R);z-index:2}
+.en .signoff h2{font-family:var(--display);font-weight:400;font-size:164px;line-height:.9;letter-spacing:-.018em;color:var(--deep)}
+.en .signoff h2 span,.en .signoff h2 em{display:block}
+.en .signoff h2 em{font-style:italic;margin-left:.34em}
+.en .art{position:absolute;left:68px;top:530px;width:944px;height:531px;margin:0;z-index:1;opacity:1;pointer-events:none}   /* strength is baked into the layer (tools/make_owl_layers.py) */
+.en .art img{width:100%;height:100%;display:block}
+.en .cta{position:absolute;top:1000px;left:var(--L);right:var(--R);text-align:center;z-index:2}
+/* Swipe up: a platinum chevron over SWIPE UP in bold small caps, then the download line. Sits right above the sticker zone. */
+.en .cta .chev{display:block;width:56px;height:26px;margin:0 auto 12px;overflow:visible}
+.en .cta .caps{display:block;font-size:20px;font-weight:700;letter-spacing:.34em;text-indent:.34em;color:var(--deep)}
+.en .cta .dl{margin-top:14px;font-family:var(--display);font-style:italic;font-weight:500;font-size:58px;line-height:1;color:var(--deep)}
+.en .sticker{position:absolute;top:1190px;height:250px;left:240px;right:240px}   /* layout marker only, renders nothing */
+</style>
+</head>
+<body>
+<div id="capture" class="ed en">
+  <section class="signoff">
+    <h2><span data-slot="signoff"></span><em data-slot="signoffAccent" data-optional></em></h2>
+  </section>
+
+  <figure class="art" aria-hidden="true"><img id="art" alt=""/></figure>
+
+  <section class="cta" data-show-if="cta">
+    <svg class="chev" viewBox="0 0 56 26" aria-hidden="true">
+      <defs><linearGradient id="plat" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#5F666D"/><stop offset=".42" stop-color="#9AA1A8"/><stop offset=".5" stop-color="#C4C9CE"/><stop offset=".58" stop-color="#9AA1A8"/><stop offset="1" stop-color="#5F666D"/></linearGradient></defs>
+      <path d="M5 23 L28 5 L51 23" fill="none" stroke="#2A3447" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity=".14"/>
+      <path d="M5 21.5 L28 3.5 L51 21.5" fill="none" stroke="url(#plat)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="caps" data-slot="ctaLead" data-optional></span>
+    <div class="dl" data-slot="cta"></div>
+  </section>
+  <div class="sticker" aria-hidden="true"></div>
+
+  <footer class="efoot">   <!-- footer (Raphi, Sep 29 night): AK monogram, website rule, disclaimer, date; no header, no tagline -->
+    <img class="mono" src="assets/ak-deep.png" alt="AK"/>
+    <div class="divider" role="presentation"><span class="stripe"></span><span class="site">agentkammer.com</span><span class="stripe"></span></div>
+    <p class="fine" data-slot="fine"></p>
+    <span class="caps date" data-slot="dateLong"></span>
+  </footer>
+</div>
+<script src="kit.js"></script>
+<script>
+const cfg = applyKitConfig({
+  show: "The Manhattan Minute",
+  signoff: "Until",
+  signoffAccent: "tomorrow.",
+  ctaLead: "Swipe up",
+  cta: "Download today’s brief",
+  tagline: "Live where you belong.",
+  fine: "Educational commentary. Not advice. Opinions of Raphael Kammer.",
+  endArt: ""            // owl scene name (e.g. owls-terrace-snow), a legacy scene (water-tower / stoop / cornice), a PNG path, or none; empty = rotate by date
+});
+/* Charcoal art: endArt wins; otherwise rotate the scene set by day number so consecutive weekdays differ. */
+const SCENES = ["owls-cornice-dawn", "owls-water-tower-dusk", "owls-in-flight", "owls-terrace-snow", "owls-gargoyle-park", "owls-brownstone-moon"];   // generated charcoal snowy owls, one per day
+(function(){
+  let a = String(cfg.endArt || "").trim();
+  if (!a) { const [y,m,d] = (cfg.date || "2026-01-01").split("-").map(Number); a = SCENES[Math.floor(Date.UTC(y,m-1,d)/864e5) % SCENES.length]; }
+  if (a.toLowerCase() === "none") { document.querySelector(".art").hidden = true; return; }
+  document.getElementById("art").src = /\.(png|webp|jpg)$/i.test(a) ? a
+    : SCENES.includes(a) ? `assets/charcoal/owls/stone/${a}.png` : `assets/charcoal/${a}.png`;
+  window.__END_ART = a;
+})();
+</script>
+</body>
+</html>

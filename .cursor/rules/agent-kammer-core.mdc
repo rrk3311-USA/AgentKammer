@@ -1,0 +1,37 @@
+---
+description: Agent Kammer core house rules (voice, copy, sourcing, compliance, naming, approval gate). Applies to every task in this repo.
+alwaysApply: true
+---
+# Agent Kammer core rules
+
+Agent Kammer is Raphael Kammer's Manhattan luxury real estate publication. Judgment is the product.
+
+## Voice
+- Suave, quietly affluent Manhattan advisor talking to one smart client over coffee. Calm, specific, never theatrical.
+- Judgment over inventory. Advisory register ("I'd be inclined to..."), never commands ("You need to...").
+- Light philosophical touch at most once per section, earned. About 5% dry humor, aimed at the object, price or decision, never a person.
+
+## Copy
+- No em dashes, no en dashes, anywhere visible. Ranges use "to" ("$10M to $20M").
+- No cliches or AI tells: "it's not X, it's Y", neat triads, delve, navigate, journey, landscape, seamless, unlock, crucial, robust, "in today's market", "whether you're", slogan closers.
+- Vary sentence length; contractions are fine.
+
+## Sourcing
+- Primary first: ACRIS, DOF Rolling Sales and DOF tax bills, DOB (BIS / DOB NOW), NY AG condo offering plan filings, Freddie Mac.
+- Trade press, Olshan, Corcoran and X are leads only; verify before use. Never name Olshan in published copy.
+- Never invent stats, prices, listings, quotes or calls. Keep source and date for every number and every negative.
+
+## Compliance
+- Raphi is not licensed: educational commentary only. No implied brokerage services, no guarantees, no promised discounts, no appraisal, inspection, legal or tax claims.
+- Fair housing: describe the property, never the people; WHO = lifestyle fit, never demographics; no steering.
+- Criticism aims at the property, price or market, never a person.
+- Disclaimer, exactly: `Educational commentary. Not advice. Opinions of Raphael Kammer.`
+
+## Gate
+- Run `compliance-review.mdc` and get Raphi's explicit approval before anything publishes, posts, sends or merges. Agents open PRs and drafts only; never merge, publish or post.
+
+## Files and design
+- Name deliverables `Agent-Kammer-<Product>-YYYY-MM-DD` plus a suffix (`-cover.png`, `-board.png`, `.pdf`).
+- End cards read like a publication sign-off: no thank you, contact, follow, phone, email or big logo.
+- Low-compute HTML: live text over reused backgrounds and art layers, rendered with Playwright. No text baked into art. No QR codes.
+- Shared property row signature (band, address, area and price, italic read, FOR/WHO line, Pick / Consider / Wait / Pass chip); each product keeps its own palette.
