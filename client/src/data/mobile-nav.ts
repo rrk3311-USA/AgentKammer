@@ -2,6 +2,7 @@ import { decisionNavigationGroups } from "@/data/decision-navigation";
 import { publicGuides } from "@/data/guides";
 import { manhattanNeighborhoodGuides } from "@/data/manhattan-neighborhoods";
 import { guidesLibraryNav } from "@/components/site-shell";
+import { publicSideToolsEnabled } from "@shared/public-side-tools";
 
 export type MobileNavLink = {
   label: string;
@@ -42,8 +43,23 @@ function isBranch(item: MobileNavLink | MobileNavBranch): item is MobileNavBranc
 /**
  * Mobile field menu. Not the locked desktop header.
  * Home · Start Here · Guides · Interactive Tools · Contact stay the five doors.
- * Calculator, Wheel of Life, Livability, and the Decision Guide nest under Interactive Tools. Hub stays off this list for now.
+ * Calculator and Wheel of Life nest under Interactive Tools. Livability and the
+ * Decision Guide join only when AK_PUBLIC_SIDE_TOOLS is on. Hub stays off this list.
  */
+export const PUBLIC_SIDE_TOOL_LINKS: readonly MobileNavLink[] = [
+  { label: "Livability", href: "/tools/livability/" },
+  { label: "Decision Guide", href: "/tools/communication-map" },
+];
+
+export function interactiveToolsNav(enabled = publicSideToolsEnabled()): readonly MobileNavLink[] {
+  return [
+    { label: "All tools", href: "/tools" },
+    { label: "Calculator", href: "/calculator" },
+    { label: "Wheel of Life", href: "/tools/wheel-of-life/" },
+    ...(enabled ? PUBLIC_SIDE_TOOL_LINKS : []),
+  ];
+}
+
 export const mobileFieldNav: readonly MobileNavSection[] = [
   { id: "home", label: "Home", href: "/" },
   {
@@ -75,13 +91,7 @@ export const mobileFieldNav: readonly MobileNavSection[] = [
     id: "tools",
     label: "Interactive Tools",
     href: "/tools",
-    children: [
-      { label: "All tools", href: "/tools" },
-      { label: "Calculator", href: "/calculator" },
-      { label: "Wheel of Life", href: "/tools/wheel-of-life/" },
-      { label: "Livability", href: "/tools/livability/" },
-      { label: "Decision Guide", href: "/tools/communication-map" },
-    ],
+    children: interactiveToolsNav(),
   },
   { id: "contact", label: "Contact", href: "/contact" },
 ];

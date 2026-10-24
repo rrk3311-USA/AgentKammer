@@ -10,6 +10,7 @@ import {
   collectMobileNavHrefs,
   defaultOpenSectionId,
   hubFieldNav,
+  interactiveToolsNav,
   isHardMobileHref,
   mobileFieldNav,
 } from "./mobile-nav";
@@ -35,8 +36,8 @@ describe("mobile field menu", () => {
     expect(hrefs).toContain("/tools");
     expect(hrefs).toContain("/calculator");
     expect(hrefs).toContain("/tools/wheel-of-life/");
-    expect(hrefs).toContain("/tools/livability/");
-    expect(hrefs).toContain("/tools/communication-map");
+    expect(hrefs).not.toContain("/tools/livability/");
+    expect(hrefs).not.toContain("/tools/communication-map");
     expect(hrefs).not.toContain("/tools/livability");
     expect(hrefs).not.toContain("/hub");
     for (const page of hubFieldNav) {
@@ -86,9 +87,16 @@ describe("mobile field menu", () => {
     expect(html).toContain("Calculator");
     expect(html).toContain("Wheel of Life");
     expect(html).toContain('href="/tools/wheel-of-life/"');
-    expect(html).toContain("Livability");
-    expect(html).toContain('href="/tools/livability/"');
-    expect(html).toContain("Decision Guide");
-    expect(html).toContain('href="/tools/communication-map"');
+    expect(html).not.toContain("Livability");
+    expect(html).not.toContain('href="/tools/livability/"');
+    expect(html).not.toContain("Decision Guide");
+    expect(html).not.toContain('href="/tools/communication-map"');
+  });
+
+  it("puts Livability and the Decision Guide back when the side-tools flag is on", () => {
+    const hrefs = interactiveToolsNav(true).map((item) => item.href);
+    expect(hrefs).toContain("/tools/livability/");
+    expect(hrefs).toContain("/tools/communication-map");
+    expect(interactiveToolsNav(false).map((item) => item.href)).not.toContain("/tools/livability/");
   });
 });

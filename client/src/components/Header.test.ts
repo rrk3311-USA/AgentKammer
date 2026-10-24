@@ -33,5 +33,9 @@ describe("sticky public header", () => {
     expect(html).not.toContain("border-[#D8D1C7]/80");
     expect(html).not.toContain("h-5 w-5");
     expect(html).toContain("justify-self-start");
+    expect(html).toContain("data-testid=\"button-header-guidance\"");
+    expect(html).toContain("href=\"/\"");
+    expect(html).not.toContain("/tools/livability");
+    expect(html).not.toContain("/tools/communication-map");
   });
 });
