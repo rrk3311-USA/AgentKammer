@@ -32,8 +32,7 @@ export default function LivabilityTool() {
   usePageMetadata({
     title: "Livability Score",
     description: "A calm diagnostic of how a home lives — address, listing link, or photos.",
-    path: "/tools/livability",
-    robots: "noindex, nofollow",
+    robots: "noindex, nofollow, noarchive",
   });
 
   const search = useSearch();

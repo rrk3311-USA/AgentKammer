@@ -40,7 +40,7 @@ export default function CommunicationMap() {
   usePageMetadata({
     title: GUIDE_NAME,
     description: OPENING_SUPPORT,
-    path: "/tools/communication-map",
+    robots: "noindex, nofollow, noarchive",
   });
 
   const [matterId, setMatterId] = useState<string | null>(null);
