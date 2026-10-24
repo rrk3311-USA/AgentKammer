@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import handler from "../api/[...route].js";
 
 type Out = { statusCode: number; body: unknown; headers: Record<string, string | string[]> };
@@ -81,33 +81,58 @@ describe("Vercel catch-all keeps existing endpoint shapes", () => {
     expect([400, 401]).toContain(briefs.statusCode);
 
     const chatGet = await hit("GET", "/api/decision-guide/chat");
-    expect(chatGet.statusCode).toBe(405);
+    expect(chatGet.statusCode).toBe(404);
 
     const chatPost = await hit("POST", "/api/decision-guide/chat", {});
-    expect([400, 503]).toContain(chatPost.statusCode);
+    expect(chatPost.statusCode).toBe(404);
 
     const convo = await hit("POST", "/api/decision-assistant/conversation", { sessionId: "test" });
-    expect(convo.statusCode).toBe(200);
-    expect((convo.body as { ok?: boolean }).ok).toBe(true);
+    expect(convo.statusCode).toBe(404);
 
     const session = await hit("GET", "/api/decision-assistant/conversation/test");
-    expect(session.statusCode).toBe(200);
-    expect(session.body).toBeNull();
+    expect(session.statusCode).toBe(404);
   });
 
-  it("restores Livability boost routes on the same function", async () => {
+  it("returns 404 for Livability boost routes while side tools are off", async () => {
     const status = await hit("GET", "/api/livability/vision-status");
-    expect(status.statusCode).toBe(200);
-    expect(status.body).toMatchObject({ cv: true });
+    expect(status.statusCode).toBe(404);
 
     const statusPost = await hit("POST", "/api/livability/vision-status");
-    expect(statusPost.statusCode).toBe(405);
+    expect(statusPost.statusCode).toBe(404);
 
     const read = await hit("POST", "/api/livability/read-plan", {});
-    expect(read.statusCode).toBe(200);
-    expect((read.body as { boost?: boolean }).boost).toBe(false);
+    expect(read.statusCode).toBe(404);
 
     const missing = await hit("GET", "/api/nope");
     expect(missing.statusCode).toBe(404);
+  });
+
+  it("restores Decision and Livability routes when the side-tools flag is on", async () => {
+    vi.stubEnv("AK_PUBLIC_SIDE_TOOLS", "1");
+    try {
+      const chatGet = await hit("GET", "/api/decision-guide/chat");
+      expect(chatGet.statusCode).toBe(405);
+
+      const chatPost = await hit("POST", "/api/decision-guide/chat", {});
+      expect([400, 503]).toContain(chatPost.statusCode);
+
+      const convo = await hit("POST", "/api/decision-assistant/conversation", { sessionId: "test" });
+      expect(convo.statusCode).toBe(200);
+      expect((convo.body as { ok?: boolean }).ok).toBe(true);
+
+      const session = await hit("GET", "/api/decision-assistant/conversation/test");
+      expect(session.statusCode).toBe(200);
+      expect(session.body).toBeNull();
+
+      const status = await hit("GET", "/api/livability/vision-status");
+      expect(status.statusCode).toBe(200);
+      expect(status.body).toMatchObject({ cv: true });
+
+      const read = await hit("POST", "/api/livability/read-plan", {});
+      expect(read.statusCode).toBe(200);
+      expect((read.body as { boost?: boolean }).boost).toBe(false);
+    } finally {
+      vi.unstubAllEnvs();
+    }
   });
 });

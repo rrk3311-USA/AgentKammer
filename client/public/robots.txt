@@ -3,6 +3,7 @@ Allow: /
 Disallow: /admin
 Disallow: /admin/
 Disallow: /tools/livability
+Disallow: /tools/communication-map
 Disallow: /tools/curation
 Disallow: /hub
 Disallow: /hub/

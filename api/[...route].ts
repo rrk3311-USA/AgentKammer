@@ -13,6 +13,7 @@ import conversation from "./decision-assistant/_conversation.js";
 import conversationSession from "./decision-assistant/_session.js";
 import livabilityVisionStatus from "./livability/_vision-status.js";
 import livabilityReadPlan from "./livability/_read-plan.js";
+import { isPublicSideApiPath, publicSideToolsEnabled } from "../shared/public-side-tools.js";
 
 type ApiRequest = {
   method?: string;
@@ -40,6 +41,9 @@ function routePath(req: ApiRequest): string {
 
 export default async function handler(req: ApiRequest, res: ApiResponse) {
   const path = routePath(req);
+  if (isPublicSideApiPath(path) && !publicSideToolsEnabled()) {
+    return res.status(404).json({ error: "Not found" });
+  }
   let target: Handler | null = null;
 
   if (path === "contact") target = contact;

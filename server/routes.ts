@@ -1,4 +1,4 @@
-import type { Express } from "express";
+import type { Express, RequestHandler } from "express";
 import { storage } from "./storage";
 import { 
   insertLeadSchema, 
@@ -44,6 +44,7 @@ import { registerBuyerIntelAdminRoutes, registerBuyerIntelPublicRoutes } from ".
 import { registerCurationAdminRoutes, registerCurationPublicRoutes } from "./lib/curation/admin-routes";
 import { registerToolsRoutes } from "./lib/tools/routes";
 import { boostFloorPlanLabels, livabilityVisionStatus } from "./lib/livability-vision";
+import { isPublicSideToolPage, publicSideToolsEnabled } from "@shared/public-side-tools";
 import {
   getClientProfileByEmail,
   getClientProfileByVisitorId,
@@ -795,7 +796,16 @@ export async function registerRoutes(app: Express): Promise<void> {
 
   const sessionLeads = new Map<string, { leadId?: string; data: LeadData; notified?: boolean }>();
 
+  const hidePublicSideTools: RequestHandler = (_req, res, next) => {
+    if (publicSideToolsEnabled()) return next();
+    return res.status(404).json({ error: "Not found" });
+  };
+
   app.use((req, res, next) => {
+    if (!publicSideToolsEnabled() && isPublicSideToolPage(req.path)) {
+      res.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
+      return res.redirect(302, "/");
+    }
     if (req.path === "/tools/livability") return res.redirect(302, "/tools/livability/");
     if (req.path === "/tools/livability/") {
       const built = join(process.cwd(), "dist/public/tools/livability/index.html");
@@ -806,11 +816,11 @@ export async function registerRoutes(app: Express): Promise<void> {
   });
 
   // Local Express. On Vercel the same paths go through api/[...route].ts.
-  app.get("/api/livability/vision-status", (_req, res) => {
+  app.get("/api/livability/vision-status", hidePublicSideTools, (_req, res) => {
     res.json(livabilityVisionStatus());
   });
 
-  app.post("/api/livability/read-plan", async (req, res) => {
+  app.post("/api/livability/read-plan", hidePublicSideTools, async (req, res) => {
     try {
       const overview = typeof req.body?.overview === "string" ? req.body.overview : typeof req.body?.image === "string" ? req.body.image : "";
       const tiles = Array.isArray(req.body?.tiles) ? req.body.tiles : [];
@@ -827,7 +837,7 @@ export async function registerRoutes(app: Express): Promise<void> {
     }
   });
 
-  app.post("/api/decision-guide/chat", async (req, res) => {
+  app.post("/api/decision-guide/chat", hidePublicSideTools, async (req, res) => {
     try {
       const visitorId = getOrCreateVisitorId(req, res);
       const limited = rateLimit(`decision-guide:${visitorId}`, { limit: 40, windowMs: 60_000 });
@@ -1249,7 +1259,7 @@ export async function registerRoutes(app: Express): Promise<void> {
     }
   });
 
-  app.get("/api/decision-assistant/conversation/:sessionId", async (req, res) => {
+  app.get("/api/decision-assistant/conversation/:sessionId", hidePublicSideTools, async (req, res) => {
     try {
       const conversation = await storage.getChatConversationBySessionId(req.params.sessionId);
       res.json(conversation ?? null);
@@ -1259,7 +1269,7 @@ export async function registerRoutes(app: Express): Promise<void> {
     }
   });
 
-  app.post("/api/decision-assistant/conversation", async (req, res) => {
+  app.post("/api/decision-assistant/conversation", hidePublicSideTools, async (req, res) => {
     try {
       const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
       const parsed = insertChatConversationSchema.parse({

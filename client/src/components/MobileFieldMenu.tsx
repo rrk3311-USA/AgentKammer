@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { cn } from "@/lib/utils";
 import { PUBLIC_PRODUCTS } from "@/data/public-menu";
 import { openDecisionAssistant } from "@/lib/decision-assistant";
+import { publicSideToolsEnabled } from "@shared/public-side-tools";
 import {
   defaultOpenSectionId,
   isHardMobileHref,
@@ -173,17 +174,28 @@ export function MobileFieldMenu({
           );
         })}
 
-        <button
-          type="button"
-          onClick={() => {
-            onClose();
-            openDecisionAssistant();
-          }}
-          className={cn("mt-6 w-fit", headerGuidanceClass, focusRing)}
-          data-testid="button-header-guidance-mobile"
-        >
-          {PUBLIC_PRODUCTS.guidance.label}
-        </button>
+        {publicSideToolsEnabled() ? (
+          <button
+            type="button"
+            onClick={() => {
+              onClose();
+              openDecisionAssistant();
+            }}
+            className={cn("mt-6 w-fit", headerGuidanceClass, focusRing)}
+            data-testid="button-header-guidance-mobile"
+          >
+            {PUBLIC_PRODUCTS.guidance.label}
+          </button>
+        ) : (
+          <Link
+            href={PUBLIC_PRODUCTS.guidance.href}
+            onClick={onClose}
+            className={cn("mt-6 w-fit", headerGuidanceClass, focusRing)}
+            data-testid="button-header-guidance-mobile"
+          >
+            {PUBLIC_PRODUCTS.guidance.label}
+          </Link>
+        )}
       </nav>
     </div>
   );

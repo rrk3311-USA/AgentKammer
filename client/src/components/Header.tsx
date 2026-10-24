@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { primaryNav } from "@/components/site-shell";
 import { PUBLIC_PRODUCTS } from "@/data/public-menu";
 import { openDecisionAssistant } from "@/lib/decision-assistant";
+import { publicSideToolsEnabled } from "@shared/public-side-tools";
 
 const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-stone focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy";
 
@@ -107,14 +108,24 @@ export function Header({ compact = false }: { compact?: boolean } = {}) {
 
         <div className="flex items-center justify-end gap-2">
           <div className="hidden lg:block">
-            <button
-              type="button"
-              onClick={openDecisionAssistant}
-              className={cn(headerGuidanceClass, focusRing)}
-              data-testid="button-header-guidance"
-            >
-              {PUBLIC_PRODUCTS.guidance.label}
-            </button>
+            {publicSideToolsEnabled() ? (
+              <button
+                type="button"
+                onClick={() => openDecisionAssistant()}
+                className={cn(headerGuidanceClass, focusRing)}
+                data-testid="button-header-guidance"
+              >
+                {PUBLIC_PRODUCTS.guidance.label}
+              </button>
+            ) : (
+              <Link
+                href={PUBLIC_PRODUCTS.guidance.href}
+                className={cn(headerGuidanceClass, focusRing)}
+                data-testid="button-header-guidance"
+              >
+                {PUBLIC_PRODUCTS.guidance.label}
+              </Link>
+            )}
           </div>
           <MobileMenuToggle
             open={mobileMenuOpen}

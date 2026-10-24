@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
+import { publicSideToolsEnabled } from "@shared/public-side-tools";
 
 type ToolTap = {
   title: string;
@@ -7,12 +8,19 @@ type ToolTap = {
   hard?: boolean;
 };
 
-const PUBLIC_TOOLS: readonly ToolTap[] = [
+const ALWAYS_PUBLIC_TOOLS: readonly ToolTap[] = [
   { title: "Calculator", href: "/calculator" },
   { title: "Wheel of Life", href: "/tools/wheel-of-life/", hard: true },
+];
+
+const SIDE_TOOLS: readonly ToolTap[] = [
   { title: "Livability", href: "/tools/livability/", hard: true },
   { title: "Decision Guide", href: "/tools/communication-map" },
 ];
+
+export function publicTools(enabled = publicSideToolsEnabled()): readonly ToolTap[] {
+  return enabled ? [...ALWAYS_PUBLIC_TOOLS, ...SIDE_TOOLS] : ALWAYS_PUBLIC_TOOLS;
+}
 
 const tapClass =
   "flex min-h-[5.75rem] items-center border border-brand-navy bg-white px-5 font-display text-[clamp(1.85rem,6vw,2.75rem)] leading-none text-brand-navy sm:min-h-[8.5rem] lg:min-h-[11rem] lg:px-8";
@@ -20,7 +28,9 @@ const tapClass =
 export default function ToolsHome() {
   usePageMetadata({
     title: "Interactive Tools",
-    description: "Calculator, Wheel of Life, Livability, and Decision Guide.",
+    description: publicSideToolsEnabled()
+      ? "Calculator, Wheel of Life, Livability, and Decision Guide."
+      : "Calculator and Wheel of Life.",
     path: "/tools",
   });
 
@@ -33,7 +43,7 @@ export default function ToolsHome() {
       </header>
 
       <div className="mx-auto grid max-w-site grid-cols-1 gap-3 px-4 py-4 sm:px-6 lg:grid-cols-2 lg:gap-4 lg:px-10 lg:py-6">
-        {PUBLIC_TOOLS.map((tool) =>
+        {publicTools().map((tool) =>
           tool.hard ? (
             <a key={tool.href} href={tool.href} className={tapClass}>
               {tool.title}
