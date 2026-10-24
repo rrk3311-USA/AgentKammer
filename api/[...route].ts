@@ -13,6 +13,7 @@ import conversation from "./decision-assistant/_conversation.js";
 import conversationSession from "./decision-assistant/_session.js";
 import livabilityVisionStatus from "./livability/_vision-status.js";
 import livabilityReadPlan from "./livability/_read-plan.js";
+import { livabilityApiIsPublic } from "../shared/preview-draft";
 
 type ApiRequest = {
   method?: string;
@@ -57,8 +58,19 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     const sessionId = path.slice("decision-assistant/conversation/".length);
     req.query = { ...req.query, sessionId };
     target = conversationSession;
-  } else if (path === "livability/vision-status") target = livabilityVisionStatus;
-  else if (path === "livability/read-plan") target = livabilityReadPlan;
+  } else if (path === "livability/vision-status" || path === "livability/read-plan") {
+    const headers = req.headers as { host?: string | string[]; Host?: string | string[] };
+    const host = headers.host ?? headers.Host;
+    if (
+      !livabilityApiIsPublic({
+        host: Array.isArray(host) ? host[0] : host,
+        vercelEnv: process.env.VERCEL_ENV,
+      })
+    ) {
+      return res.status(404).json({ error: "Not found" });
+    }
+    target = path === "livability/vision-status" ? livabilityVisionStatus : livabilityReadPlan;
+  }
 
   if (!target) {
     return res.status(404).json({ error: "Not found" });

@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useRef } from "react";
+import { Suspense, lazy, useEffect, useRef, type ReactNode } from "react";
 import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -10,6 +10,7 @@ import { Footer } from "@/components/Footer";
 import { DecisionAssistantDock } from "@/components/DecisionAssistantDock";
 import { initVisitorSignalTracking, trackPageViewSignal } from "@/lib/visitor-signals";
 import { COMMUNICATION_MAP_PATH } from "@/data/communication-map";
+import { isPreviewDraftVisible } from "@shared/preview-draft";
 const Home = lazy(() => import("@/pages/Home"));
 const About = lazy(() => import("@/pages/About"));
 const BuildingReport = lazy(() => import("@/pages/BuildingReport"));
@@ -85,6 +86,13 @@ function HardRedirect({ to }: { to: string }) {
   return null;
 }
 
+function PreviewDraft({ children }: { children: ReactNode }) {
+  if (typeof window !== "undefined" && !isPreviewDraftVisible(window.location.hostname)) {
+    return <NotFound />;
+  }
+  return <>{children}</>;
+}
+
 function ResourcesHubEscape() {
   useEffect(() => {
     const path = window.location.pathname.replace(/\/+$/, "") || "/";
@@ -147,8 +155,20 @@ function Router() {
       <Route path="/admin" component={AdminOverview} />
       <Route path="/admin/*">{() => <Redirect to="/admin" />}</Route>
       <Route path="/tools/curation" component={AdminCuration} />
-      <Route path="/tools/livability">{() => <HardRedirect to="/tools/livability/" />}</Route>
-      <Route path={COMMUNICATION_MAP_PATH} component={CommunicationMap} />
+      <Route path="/tools/livability">
+        {() => (
+          <PreviewDraft>
+            <HardRedirect to="/tools/livability/" />
+          </PreviewDraft>
+        )}
+      </Route>
+      <Route path={COMMUNICATION_MAP_PATH}>
+        {() => (
+          <PreviewDraft>
+            <CommunicationMap />
+          </PreviewDraft>
+        )}
+      </Route>
       <Route path="/tools" component={ToolsHome} />
       <Route path="/calculator" component={Calculator} />
       <Route path="/internal/007" component={Tank007} />

@@ -10,8 +10,6 @@ type ToolTap = {
 const PUBLIC_TOOLS: readonly ToolTap[] = [
   { title: "Calculator", href: "/calculator" },
   { title: "Wheel of Life", href: "/tools/wheel-of-life/", hard: true },
-  { title: "Livability", href: "/tools/livability/", hard: true },
-  { title: "Decision Guide", href: "/tools/communication-map" },
 ];
 
 const tapClass =
@@ -20,7 +18,7 @@ const tapClass =
 export default function ToolsHome() {
   usePageMetadata({
     title: "Interactive Tools",
-    description: "Calculator, Wheel of Life, Livability, and Decision Guide.",
+    description: "Calculator and Wheel of Life.",
     path: "/tools",
   });
 

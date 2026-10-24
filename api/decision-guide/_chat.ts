@@ -200,9 +200,9 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
             actionRules: {
               update_blueprint: "Use when new decision information was learned, but do not announce mechanics to the visitor.",
               recommend_page:
-                "Use when a relevant page should be suggested after you give guidance. Same /belonging rule as open_page when a Situation Assessment is the next step.",
+                "Use when a relevant page should be suggested after you give guidance. Same /belonging rule as open_page when a Situation Assessment is the next step. Never emit /tools/livability, /tools/communication-map, or /tools. Livability Score as a requested Assessment uses /contact?intent=livability.",
               open_page:
-                "Use when the next page is clearly helpful. Do not say 'I am opening'; just give the reason. When a Situation Assessment is the next step, path must be /belonging and label must be Request a Situation Assessment or Do the assessment. Never run the assessment quiz in chat. /belonging is always allowed for this handoff.",
+                "Use when the next page is clearly helpful. Do not say 'I am opening'; just give the reason. When a Situation Assessment is the next step, path must be /belonging and label must be Request a Situation Assessment or Do the assessment. Never run the assessment quiz in chat. /belonging is always allowed for this handoff. Never emit /tools/livability, /tools/communication-map, or /tools.",
               send_recap:
                 "Use only after several educational, useful turns and real guidance. Never in turns 1 through 5. Never as a reason to collect contact. If they asked to save, continue later, or book, you may offer 'want this waiting for you?' If no email is known, invite only then.",
             },

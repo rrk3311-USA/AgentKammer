@@ -110,4 +110,12 @@ describe("Vercel catch-all keeps existing endpoint shapes", () => {
     const missing = await hit("GET", "/api/nope");
     expect(missing.statusCode).toBe(404);
   });
+
+  it("404s livability APIs on the public Production host", async () => {
+    const status = await hit("GET", "/api/livability/vision-status", undefined, { host: "www.agentkammer.com" });
+    expect(status.statusCode).toBe(404);
+
+    const read = await hit("POST", "/api/livability/read-plan", {}, { host: "agentkammer.com" });
+    expect(read.statusCode).toBe(404);
+  });
 });

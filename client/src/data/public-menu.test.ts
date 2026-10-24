@@ -188,6 +188,8 @@ describe("public menu lock", () => {
     expect(doors.some((item) => item.href === "/hub" || item.href.startsWith("/hub/"))).toBe(false);
     expect(doors.some((item) => item.label === "Hub" || item.label === "Decision Hub")).toBe(false);
     expect(doors.some((item) => item.href === "/contact?intent=strategy")).toBe(false);
+    expect(doors.some((item) => item.href === "/tools/livability" || item.href.startsWith("/tools/livability/"))).toBe(false);
+    expect(doors.some((item) => item.href === "/tools/communication-map")).toBe(false);
     const guides = groups.find((group) => group.title === "Guides");
     expect(guides?.items.map((item) => item.label).slice(0, 3)).toEqual([
       "Resource Hub",

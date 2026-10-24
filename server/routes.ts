@@ -44,6 +44,7 @@ import { registerBuyerIntelAdminRoutes, registerBuyerIntelPublicRoutes } from ".
 import { registerCurationAdminRoutes, registerCurationPublicRoutes } from "./lib/curation/admin-routes";
 import { registerToolsRoutes } from "./lib/tools/routes";
 import { boostFloorPlanLabels, livabilityVisionStatus } from "./lib/livability-vision";
+import { isPublicProductionHost, isUnpublishedDraftPath, livabilityApiIsPublic } from "@shared/preview-draft";
 import {
   getClientProfileByEmail,
   getClientProfileByVisitorId,
@@ -786,7 +787,8 @@ export async function registerRoutes(app: Express): Promise<void> {
       req.path === "/tools/curation" ||
       req.path.startsWith("/tools/curation/") ||
       req.path === "/hub" ||
-      req.path.startsWith("/hub/")
+      req.path.startsWith("/hub/") ||
+      isUnpublishedDraftPath(req.path)
     ) {
       res.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
     }
@@ -796,6 +798,12 @@ export async function registerRoutes(app: Express): Promise<void> {
   const sessionLeads = new Map<string, { leadId?: string; data: LeadData; notified?: boolean }>();
 
   app.use((req, res, next) => {
+    if (isPublicProductionHost(req.headers.host) && isUnpublishedDraftPath(req.path)) {
+      if (req.path.startsWith("/api/")) {
+        return res.status(404).json({ error: "Not found" });
+      }
+      return res.status(404).type("html").send("Not found");
+    }
     if (req.path === "/tools/livability") return res.redirect(302, "/tools/livability/");
     if (req.path === "/tools/livability/") {
       const built = join(process.cwd(), "dist/public/tools/livability/index.html");
@@ -806,11 +814,17 @@ export async function registerRoutes(app: Express): Promise<void> {
   });
 
   // Local Express. On Vercel the same paths go through api/[...route].ts.
-  app.get("/api/livability/vision-status", (_req, res) => {
+  app.get("/api/livability/vision-status", (req, res) => {
+    if (!livabilityApiIsPublic({ host: req.headers.host, vercelEnv: process.env.VERCEL_ENV })) {
+      return res.status(404).json({ error: "Not found" });
+    }
     res.json(livabilityVisionStatus());
   });
 
   app.post("/api/livability/read-plan", async (req, res) => {
+    if (!livabilityApiIsPublic({ host: req.headers.host, vercelEnv: process.env.VERCEL_ENV })) {
+      return res.status(404).json({ error: "Not found" });
+    }
     try {
       const overview = typeof req.body?.overview === "string" ? req.body.overview : typeof req.body?.image === "string" ? req.body.image : "";
       const tiles = Array.isArray(req.body?.tiles) ? req.body.tiles : [];
@@ -895,7 +909,7 @@ export async function registerRoutes(app: Express): Promise<void> {
               ],
               actionRules: {
                 open_page:
-                  "Recommend a page in the reply. Do not treat this as a forced redirect. Include a path from currentPage.related when possible. When a Situation Assessment is the next step, path must be /belonging and label must be Request a Situation Assessment or Do the assessment. Never run the assessment quiz in chat. /belonging is always allowed for this handoff.",
+                  "Recommend a page in the reply. Do not treat this as a forced redirect. Include a path from currentPage.related when possible. When a Situation Assessment is the next step, path must be /belonging and label must be Request a Situation Assessment or Do the assessment. Never run the assessment quiz in chat. /belonging is always allowed for this handoff. Never emit /tools/livability, /tools/communication-map, or /tools. Livability Score as a requested Assessment uses /contact?intent=livability.",
                 send_recap:
                   "Use only after several educational, useful turns and real guidance. Never in turns 1 through 5. Never as a reason to collect contact. If they asked to save, continue later, or book, you may offer 'want this waiting for you?' If no email or phone is known, invite only then.",
                 update_blueprint: "Use when new trigger, desire, constraint, trade-off, email, or phone was learned.",
