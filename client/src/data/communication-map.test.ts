@@ -159,11 +159,12 @@ describe("communication map", () => {
   });
 
   it("keeps the restored header doors and hides the Decision Guide while side tools are off", () => {
-    expect(primaryNav).toHaveLength(4);
+    expect(primaryNav).toHaveLength(5);
     expect(primaryNav.map((item) => item.label)).toEqual([
+      "Home",
       "Start Here",
       "Guides",
-      "Building Reports",
+      "Interactive Tools",
       "Contact",
     ]);
     const html = renderToStaticMarkup(createElement(Router, { ssrPath: "/tools" }, createElement(ToolsHome)));

@@ -44,7 +44,7 @@ export function getSiteMapGroups(): SiteMapGroup[] {
   return [
     {
       title: "Primary",
-      description: "The locked header doors. Tools is a dropdown off this list. Guidance is the floating utility.",
+      description: "The locked header doors, matching the mobile field menu. Guidance is the floating utility.",
       items: primaryNav,
     },
     {

@@ -4,11 +4,12 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { grammar } from "@/components/visual-grammar";
 
-/** Locked primary header doors. The mark is Home. Tools is a dropdown, not a sixth door. Guidance stays a utility. */
+/** Desktop header doors. Same labels, order, and destinations as the mobile field menu. Guidance stays a utility. */
 export const primaryNav = [
+  { label: "Home", href: "/" },
   { label: "Start Here", href: "/situations" },
   { label: "Guides", href: "/guides" },
-  { label: "Building Reports", href: "/building-reports" },
+  { label: "Interactive Tools", href: "/tools" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
