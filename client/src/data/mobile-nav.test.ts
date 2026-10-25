@@ -19,7 +19,7 @@ describe("mobile field menu", () => {
   it("keeps Calculator and Hub out of the locked desktop header", () => {
     const headerHrefs = new Set(primaryNav.map((item) => item.href));
     expect(headerHrefs.has("/calculator")).toBe(false);
-    expect(headerHrefs.has("/tools")).toBe(true);
+    expect(headerHrefs.has("/tools")).toBe(false);
     expect(headerHrefs.has("/hub")).toBe(false);
     for (const item of FOOTER_SITEMAP_QUIET) {
       expect(headerHrefs.has(item.href)).toBe(false);

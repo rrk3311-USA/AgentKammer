@@ -38,8 +38,8 @@ describe("sticky public header", () => {
     expect(html).toContain("Home");
     expect(html).toContain("Start Here");
     expect(html).toContain("Guides");
-    expect(html).toContain("Interactive Tools");
     expect(html).toContain("Contact");
+    expect(html).not.toContain("Interactive Tools");
     expect(html).not.toContain("Building Reports");
     expect(html).not.toContain("data-testid=\"button-header-tools\"");
     expect(html).not.toContain("/tools/livability");
