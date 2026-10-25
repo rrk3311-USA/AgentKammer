@@ -61,9 +61,34 @@ export const whatsChangingCards: WhatsChangingCard[] = whatsChangingItems.map((i
   line: whatsChangingLines[item.label] ?? item.label,
 }));
 
+const decisionFacingLines: Record<string, string> = {
+  Buy: "Own the next address.",
+  Sell: "Leave the building on your terms.",
+  Rent: "A lease, without a long commitment.",
+  "Renew Lease": "Stay another year, or not.",
+  "Stay Put": "The rooms may already be right.",
+  Wait: "Hold until the week is clearer.",
+  Renovate: "Change the rooms. Keep the address.",
+  Refinance: "The rate moved. The plan should follow.",
+  "Sell or Keep": "One property. Two futures.",
+};
+
+export const decisionFacingCards: WhatsChangingCard[] = decisionFacingItems.map((item) => ({
+  ...item,
+  line: decisionFacingLines[item.label] ?? item.label,
+}));
+
 export function wrapRolodexIndex(index: number, length: number) {
   if (length <= 0) return 0;
   return ((index % length) + length) % length;
+}
+
+/** Preview switch: default and `rolo=life` keep decision pills. `rolo=both` adds a second rolodex. */
+export type RoloPreviewVariant = "life" | "both";
+
+export function readRoloPreviewVariant(search: string | undefined | null): RoloPreviewVariant {
+  const raw = (search ?? "").replace(/^\?/, "");
+  return new URLSearchParams(raw).get("rolo") === "both" ? "both" : "life";
 }
 
 const understandItems: DecisionNavItem[] = [

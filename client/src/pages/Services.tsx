@@ -1,8 +1,14 @@
-import { Link } from "wouter";
+import { Link, useSearch } from "wouter";
 import { CTA } from "@/components/site-shell";
 import { quietChipClass } from "@/components/Footer";
 import { WhatsChangingRolodex } from "@/components/WhatsChangingRolodex";
-import { decisionFacingItems, decisionNavigationGroups } from "@/data/decision-navigation";
+import {
+  decisionFacingCards,
+  decisionFacingItems,
+  decisionNavigationGroups,
+  readRoloPreviewVariant,
+  type RoloPreviewVariant,
+} from "@/data/decision-navigation";
 import { openDecisionAssistant } from "@/lib/decision-assistant";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { grammar } from "@/components/visual-grammar";
@@ -12,14 +18,17 @@ const understand = decisionNavigationGroups.find((group) => group.title === "Wha
 
 const tapChipClass = cn(quietChipClass, "min-h-11 px-3.5 py-2.5 text-[11px] tracking-[0.1em]");
 
-export default function Services() {
+export default function Services({ variant }: { variant?: RoloPreviewVariant } = {}) {
   usePageMetadata({
     title: "Situations",
     description: "Start from what changed. Twelve life changes, then a private read if you want one.",
     path: "/situations",
   });
 
+  const search = useSearch();
+  const mode = variant ?? readRoloPreviewVariant(search);
   const understandItems = understand?.items ?? [];
+  const decisionAsRolodex = mode === "both";
 
   return (
     <main className="bg-brand-ivory">
@@ -39,23 +48,36 @@ export default function Services() {
           <h2 className="mt-10 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-ivory/56">
             What decision are you facing?
           </h2>
-          <div
-            className="mt-4 flex flex-wrap items-center justify-start gap-2"
-            role="group"
-            aria-label="What decision are you facing? Opens Guidance"
-          >
-            {decisionFacingItems.map((item) => (
-              <button
-                key={item.label}
-                type="button"
-                className={tapChipClass}
-                aria-label={`Open Guidance: ${item.starter}`}
-                onClick={() => openDecisionAssistant(item.starter)}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
+          {decisionAsRolodex ? (
+            <WhatsChangingRolodex
+              className="mt-4 w-full"
+              cards={decisionFacingCards}
+              size="compact"
+              marker="decision"
+              goLabel="Open Guidance"
+              regionLabel="What decision are you facing?"
+              previousLabel="Previous decision"
+              nextLabel="Next decision"
+            />
+          ) : (
+            <div
+              className="mt-4 flex flex-wrap items-center justify-start gap-2"
+              role="group"
+              aria-label="What decision are you facing? Opens Guidance"
+            >
+              {decisionFacingItems.map((item) => (
+                <button
+                  key={item.label}
+                  type="button"
+                  className={tapChipClass}
+                  aria-label={`Open Guidance: ${item.starter}`}
+                  onClick={() => openDecisionAssistant(item.starter)}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          )}
 
           <h2 className="mt-10 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-ivory/56">
             What are you trying to understand?

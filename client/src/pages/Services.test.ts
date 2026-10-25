@@ -9,8 +9,10 @@ import Services from "./Services";
 const changeItems =
   decisionNavigationGroups.find((group) => group.title === "What's Changing?")?.items ?? [];
 
-function renderSituations() {
-  return renderToStaticMarkup(createElement(Router, { ssrPath: "/situations" }, createElement(Services)));
+function renderSituations(variant?: "life" | "both") {
+  return renderToStaticMarkup(
+    createElement(Router, { ssrPath: "/situations" }, createElement(Services, variant ? { variant } : undefined)),
+  );
 }
 
 describe("What's Changing page", () => {
@@ -53,6 +55,20 @@ describe("What's Changing page", () => {
     expect(html).not.toContain("tour");
     expect(html).toContain("Request a Situation Assessment");
     expect(html.match(/ak-felt-item/g)).toBeNull();
+  });
+
+  it("renders the decision group as a smaller rolodex when rolo=both", () => {
+    const html = renderSituations("both");
+    expect(html).toContain("data-ak-whats-changing-rolodex");
+    expect(html).toContain("data-ak-decision-rolodex");
+    expect(html).toContain("ak-rolo--compact");
+    expect(html).toContain("Open Guidance");
+    expect(html).toContain("Previous decision");
+    expect(html).toContain("Buy");
+    expect(html).toContain("Own the next address.");
+    expect(html).not.toContain("Open Guidance: I'm considering buying.");
+    expect(html.match(/flex-wrap items-center justify-start/g)).toHaveLength(1);
+    expect(html).not.toContain("\u2014");
   });
 
   it("keeps the homepage platinum hover on the pills", () => {

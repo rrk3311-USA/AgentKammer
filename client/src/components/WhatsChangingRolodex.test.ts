@@ -3,7 +3,12 @@ import React, { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { Router } from "wouter";
-import { whatsChangingCards, wrapRolodexIndex } from "@/data/decision-navigation";
+import {
+  decisionFacingCards,
+  readRoloPreviewVariant,
+  whatsChangingCards,
+  wrapRolodexIndex,
+} from "@/data/decision-navigation";
 import { WhatsChangingRolodex } from "./WhatsChangingRolodex";
 
 function renderRolodex() {
@@ -45,6 +50,38 @@ describe("WhatsChangingRolodex", () => {
     expect(html).toContain('data-pos="-1"');
     expect(html).toContain('data-pos="1"');
     expect(html).toContain('data-pos="far"');
+  });
+
+  it("can render a compact decision rolodex without landing hrefs", () => {
+    const html = renderToStaticMarkup(
+      createElement(
+        Router,
+        { ssrPath: "/situations" },
+        createElement(WhatsChangingRolodex, {
+          cards: decisionFacingCards,
+          size: "compact",
+          marker: "decision",
+          goLabel: "Open Guidance",
+          regionLabel: "What decision are you facing?",
+          previousLabel: "Previous decision",
+          nextLabel: "Next decision",
+        }),
+      ),
+    );
+    expect(html).toContain("data-ak-decision-rolodex");
+    expect(html).toContain("ak-rolo--compact");
+    expect(html).toContain("Open Guidance");
+    expect(html).toContain("Own the next address.");
+    expect(html).not.toContain("data-ak-whats-changing-rolodex");
+    expect(html).not.toContain("\u2014");
+    expect(decisionFacingCards).toHaveLength(9);
+  });
+
+  it("reads the preview variant from the query string", () => {
+    expect(readRoloPreviewVariant("")).toBe("life");
+    expect(readRoloPreviewVariant("rolo=life")).toBe("life");
+    expect(readRoloPreviewVariant("?rolo=both")).toBe("both");
+    expect(readRoloPreviewVariant("rolo=both&_vercel_share=x")).toBe("both");
   });
 
   it("uses subtle motion and honors reduced motion", () => {

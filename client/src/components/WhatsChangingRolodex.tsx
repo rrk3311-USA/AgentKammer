@@ -1,7 +1,8 @@
 import React, { useCallback, useId, useRef, useState } from "react";
 import { Link } from "wouter";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { whatsChangingCards, wrapRolodexIndex } from "@/data/decision-navigation";
+import { whatsChangingCards, wrapRolodexIndex, type WhatsChangingCard } from "@/data/decision-navigation";
+import { openDecisionAssistant } from "@/lib/decision-assistant";
 import { cn } from "@/lib/utils";
 
 const SWIPE_PX = 42;
@@ -18,18 +19,32 @@ export function WhatsChangingRolodex({
   className,
   showKicker = false,
   kicker = "What's Changing?",
+  cards = whatsChangingCards,
+  size = "default",
+  goLabel = "Open the brief",
+  regionLabel = "What's Changing",
+  previousLabel = "Previous life change",
+  nextLabel = "Next life change",
+  marker = "life",
 }: {
   className?: string;
   showKicker?: boolean;
   kicker?: string;
+  cards?: WhatsChangingCard[];
+  size?: "default" | "compact";
+  goLabel?: string;
+  regionLabel?: string;
+  previousLabel?: string;
+  nextLabel?: string;
+  marker?: "life" | "decision";
 } = {}) {
-  const length = whatsChangingCards.length;
+  const length = cards.length;
   const [active, setActive] = useState(0);
   const pointer = useRef<{ id: number; x: number; dragged: boolean } | null>(null);
   const ignoreClick = useRef(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
   const labelId = useId();
-  const current = whatsChangingCards[active];
+  const current = cards[active];
 
   const go = useCallback(
     (next: number) => {
@@ -77,7 +92,10 @@ export function WhatsChangingRolodex({
   };
 
   return (
-    <div data-ak-whats-changing className={cn("w-full text-left", className)}>
+    <div
+      data-ak-whats-changing={marker === "life" ? "" : undefined}
+      className={cn("w-full text-left", className)}
+    >
       {showKicker ? (
         <p id={labelId} className="text-[10px] uppercase tracking-[0.2em] text-brand-ivory/48">
           {kicker}
@@ -85,13 +103,14 @@ export function WhatsChangingRolodex({
       ) : null}
       <div
         ref={rootRef}
-        data-ak-whats-changing-rolodex
-        data-ak-situations-pills
-        className={cn("ak-rolo", showKicker ? "mt-3" : "mt-0")}
+        data-ak-whats-changing-rolodex={marker === "life" ? "" : undefined}
+        data-ak-decision-rolodex={marker === "decision" ? "" : undefined}
+        data-ak-situations-pills={marker === "life" ? "" : undefined}
+        className={cn("ak-rolo", size === "compact" && "ak-rolo--compact", showKicker ? "mt-3" : "mt-0")}
         role="region"
         aria-roledescription="carousel"
         aria-labelledby={showKicker ? labelId : undefined}
-        aria-label={showKicker ? undefined : "What's Changing"}
+        aria-label={showKicker ? undefined : regionLabel}
         tabIndex={0}
         onKeyDown={onKeyDown}
       >
@@ -103,22 +122,41 @@ export function WhatsChangingRolodex({
           onPointerCancel={onPointerUp}
           onClickCapture={onClickCapture}
         >
-          {whatsChangingCards.map((item, index) => {
+          {cards.map((item, index) => {
             const pos = cardPos(index, active, length);
             const n = String(index + 1).padStart(2, "0");
-            return (
-              <Link
-                key={item.href + item.label}
-                href={item.href}
-                className="ak-rolo-card"
-                data-pos={pos}
-                aria-hidden={pos === "far" ? true : undefined}
-                tabIndex={pos === "0" ? 0 : -1}
-              >
+            const body = (
+              <>
                 <p className="ak-rolo-num">{n}</p>
                 <p className="ak-rolo-title">{item.label}</p>
                 <p className="ak-rolo-line">{item.line}</p>
-                <p className="ak-rolo-go">Open the brief</p>
+                <p className="ak-rolo-go">{goLabel}</p>
+              </>
+            );
+            const cardProps = {
+              className: "ak-rolo-card",
+              "data-pos": pos,
+              "aria-hidden": pos === "far" ? true : undefined,
+              tabIndex: pos === "0" ? 0 : -1,
+            } as const;
+
+            if (item.starter) {
+              return (
+                <button
+                  key={item.label + item.starter}
+                  type="button"
+                  {...cardProps}
+                  aria-label={`${goLabel}: ${item.label}`}
+                  onClick={() => openDecisionAssistant(item.starter)}
+                >
+                  {body}
+                </button>
+              );
+            }
+
+            return (
+              <Link key={item.href + item.label} href={item.href} {...cardProps}>
+                {body}
               </Link>
             );
           })}
@@ -137,7 +175,7 @@ export function WhatsChangingRolodex({
             <button
               type="button"
               className="ak-rolo-arrow"
-              aria-label="Previous life change"
+              aria-label={previousLabel}
               onClick={() => go(active - 1)}
             >
               <ChevronLeft className="h-4 w-4" strokeWidth={1.5} />
@@ -145,7 +183,7 @@ export function WhatsChangingRolodex({
             <button
               type="button"
               className="ak-rolo-arrow"
-              aria-label="Next life change"
+              aria-label={nextLabel}
               onClick={() => go(active + 1)}
             >
               <ChevronRight className="h-4 w-4" strokeWidth={1.5} />
