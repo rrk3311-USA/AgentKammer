@@ -215,10 +215,8 @@ body.dock-on{padding-bottom:176px}
 .needs .lede{margin-top:16px}
 .need-grid{display:grid;gap:36px;margin-top:32px}
 @media(min-width:900px){.need-grid{grid-template-columns:.9fr 1.1fr;align-items:start}}
-.need-plate{margin:0;background:#f7f3ea;border:1px solid #d8d1c4;padding:clamp(28px,4vw,40px) clamp(28px,5vw,48px)}
-.need-plate svg{width:100%;height:auto;max-height:none;overflow:visible}
-#needchart{overflow:visible}
-#needchart text{fill:#1c1914;letter-spacing:0;font-weight:600}
+.need-plate{margin:0;background:#f7f3ea;border:1px solid #d8d1c4;padding:clamp(16px,3vw,24px)}
+.need-plate svg{width:100%;height:auto;max-height:280px}
 .need-cap{font:italic 1rem var(--serif);color:#6b6457;margin:12px 0 0}
 .need-ask{font:600 10.5px/1.4 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--stone-blue);margin:0 0 12px}
 .need-read p{margin:0 0 14px;color:#4c5465}
@@ -259,30 +257,35 @@ body.dock-on{padding-bottom:176px}
 .id-keep{margin-top:20px;padding-top:16px;border-top:1px solid #d8cfbd}
 .id-keep[hidden]{display:none!important}
 
-footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px) calc(176px + 64px);font-size:.8rem;text-align:center}
-@media(min-width:760px){footer{padding-bottom:calc(196px + 72px)}}
-.dock-clear{height:0}
+.chart-toggle{display:flex;width:min(100%,28rem);margin:18px auto 0;padding:4px;border:1px solid var(--deep);background:rgba(255,255,255,.5)}
+.chart-toggle button{flex:1;min-height:52px;border:0;background:transparent;color:var(--stone-blue);font:600 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+.chart-toggle button[aria-selected="true"]{background:var(--deep);color:var(--ivory)}
+.chart-panel[hidden]{display:none!important}
+.chart-panel.needs{margin-top:0;padding-top:0;border:0}
+.to-persp{text-align:center;padding:48px 20px 56px;position:relative}
+footer{background:var(--deep);color:var(--mist);padding:36px clamp(20px,6vw,80px) 36px;font-size:.8rem;text-align:center}
+@media(min-width:760px){footer{padding-bottom:40px}}
 @media(max-width:480px){
  .intro{padding:36px 20px;gap:16px}
- .persp{padding:28px 0 32px;overflow:visible}
+ .persp{padding:20px 0 12px;overflow:visible}
  .persp .in{padding:0 16px}
- .persp h2{margin-top:8px}
- .persp .rule{margin:10px 0}
+ .persp h2,.needs h3{margin-top:8px}
+ .persp .rule,.needs .rule{margin:10px 0}
+ .persp .lede{margin-top:8px}
+ .chart-toggle{width:100%;margin:12px 0 8px}
+ .chart-toggle button{min-height:56px;font-size:11px;letter-spacing:.14em}
+ .to-persp{padding:28px 20px 24px}
  .pgrid,.need-grid{margin-left:-16px;margin-right:-16px}
- .pgrid{gap:16px;margin-top:18px}
+ .pgrid{gap:12px;margin-top:14px}
  .pgrid>:first-child,.need-grid>:first-child{padding:0}
  .pgrid>:last-child{padding:0 16px}
- .needs{margin-top:18px;padding-top:14px}
+ .needs{margin-top:0;padding-top:0;border-top:0}
  .needs h3{margin:8px 0 0}
- .needs .lede{margin-top:12px}
- .needs .rule{margin:10px 0}
- .need-grid{margin-top:12px;gap:14px}
- .plate,.need-plate{width:100vw;max-width:none;position:relative;left:50%;transform:translateX(-50%);border-left:0;border-right:0;scroll-margin-top:calc(var(--ak-compact-header-h,52px) + 12px)}
- .plate{padding:8px 16px}
- .need-plate{padding:36px 12px 28px}
- .need-plate svg{max-height:none;width:100%;height:auto;overflow:visible}
- .plate svg,.need-plate svg{overflow:visible}
- #needchart text{fill:#0D182B;letter-spacing:0;font-weight:600}
+ .needs .lede{margin-top:8px}
+ .need-grid{margin-top:12px;gap:12px}
+ .plate,.need-plate{width:100vw;max-width:none;position:relative;left:50%;transform:translateX(-50%);padding:8px 16px;border-left:0;border-right:0;scroll-margin-top:calc(var(--ak-compact-header-h,52px) + 12px)}
+ .plate svg,.need-plate svg{max-height:min(48svh,340px);width:100%;height:auto;overflow:visible}
+ #needchart text{font-size:20px;fill:#0D182B;letter-spacing:0;font-weight:600}
  #bigwheel text{font-size:20px;fill:#F5F2EB;letter-spacing:0;font-weight:600}
  .cap,.need-cap,.look{margin-left:16px;margin-right:16px}
  .cap{margin-top:8px}
@@ -291,10 +294,12 @@ footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px
  .scores li{padding:8px 0;gap:12px;min-width:0}
  .scores li span{min-width:0;overflow-wrap:anywhere}
  .scores b{flex:none;font-size:1.1em}
- .need-map li{padding:10px 0;font-size:1.8rem}
+ .need-map li{padding:8px 0;font-size:1.8rem}
  .need-map b{font-size:1.15em}
  .need-read{padding:0 16px}
- .closer{margin-top:32px;padding-top:22px}
+ .move{padding-top:14px}
+ .move textarea{min-height:80px}
+ .closer{margin-top:18px;padding-top:16px}
  .dock{grid-template-columns:52px minmax(0,1fr) auto;grid-template-areas:"stage main fold";gap:4px 8px;padding:6px max(10px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}
  .dock-fold{display:inline-flex;align-items:center;justify-content:center;grid-area:fold;margin:0;padding:0 6px;min-height:44px;min-width:44px;border:0;background:transparent;color:var(--limestone);font:600 9px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;cursor:pointer}
  .dock.slim{grid-template-columns:52px auto;grid-template-areas:"stage fold"}
@@ -306,10 +311,9 @@ footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px
  .chip b{font-size:1.05rem}
  .dock-dial .range{min-height:44px}
  .dock-dial .range input{height:44px}
- body.dock-on{padding-bottom:calc(var(--dock-h,140px) + 28px)}
- body.dock-on .dock-clear{height:calc(var(--dock-h,140px) + 8px)}
- footer{padding-bottom:calc(var(--dock-h,140px) + 48px)}
- .need-cap,.look,.need-read,.cap,.scores,.moves,.closer{scroll-margin-bottom:calc(var(--dock-h,140px) + 28px)}
+ body.dock-on{padding-bottom:calc(var(--dock-h,140px) + 12px)}
+ footer{padding-bottom:20px}
+ .need-cap,.look,.need-read,.cap,.scores,.moves,.closer{scroll-margin-bottom:calc(var(--dock-h,140px) + 12px)}
 }
 footer .in{max-width:1100px;margin:0 auto}
 footer .site-exit{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:0 0 28px}
@@ -525,98 +529,101 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
   <span class="num">10</span>
   <hr class="rule">
   <p class="kicker">Our perspective</p>
-  <h2 id="h-persp" class="caps" style="margin-top:12px">Your perspective</h2>
-  <hr class="rule">
-  <p class="lede" id="lede" aria-live="polite"></p>
-  <div class="pgrid">
-   <div>
-    <figure class="plate" style="margin:0">
-     <svg id="bigwheel" class="wheel" viewBox="-320 -280 640 560" role="img" aria-labelledby="bw-t bw-d"><title id="bw-t">Your wheel of life</title><desc id="bw-d"></desc></svg>
-    </figure>
-    <p class="cap">A rounder wheel tends to roll more smoothly than a bigger one.</p>
-    <ul class="scores" id="scores" aria-label="All scores"></ul>
-    <div class="dock-clear" aria-hidden="true"></div>
-   </div>
-   <div>
-    <div class="moves" id="moves"></div>
-    <p class="saved" id="saved" aria-live="polite"></p>
-    <div class="print-meta" id="print-meta">
-     <label for="meta-name">Name<input id="meta-name" type="text" maxlength="48" autocomplete="name" placeholder="Optional"></label>
-     <label for="meta-day">Date<input id="meta-day" type="text" maxlength="40" autocomplete="off"></label>
+  <div class="chart-toggle" role="tablist" aria-label="Choose a chart">
+   <button type="button" role="tab" id="tab-wheel" aria-selected="true" aria-controls="panel-wheel" tabindex="0">Life wheel</button>
+   <button type="button" role="tab" id="tab-needs" aria-selected="false" aria-controls="panel-needs" tabindex="-1">Needs</button>
+  </div>
+  <div class="chart-panel" id="panel-wheel" role="tabpanel" aria-labelledby="tab-wheel">
+   <h2 id="h-persp" class="caps" style="margin-top:12px">Your perspective</h2>
+   <hr class="rule">
+   <p class="lede" id="lede" aria-live="polite"></p>
+   <div class="pgrid">
+    <div>
+     <figure class="plate" style="margin:0">
+      <svg id="bigwheel" class="wheel" viewBox="-320 -280 640 560" role="img" aria-labelledby="bw-t bw-d"><title id="bw-t">Your wheel of life</title><desc id="bw-d"></desc></svg>
+     </figure>
+     <p class="cap">A rounder wheel tends to roll more smoothly than a bigger one.</p>
+     <ul class="scores" id="scores" aria-label="All scores"></ul>
     </div>
-    <div class="actions">
-     <button class="btn" id="print" type="button">Print or save as PDF</button>
-     <button class="btn ghost" id="share" type="button">Share</button>
-     <button class="btn ghost" id="reset" type="button">Start over</button>
+    <div>
+     <div class="moves" id="moves"></div>
+     <p class="saved" id="saved" aria-live="polite"></p>
+     <div class="print-meta" id="print-meta">
+      <label for="meta-name">Name<input id="meta-name" type="text" maxlength="48" autocomplete="name" placeholder="Optional"></label>
+      <label for="meta-day">Date<input id="meta-day" type="text" maxlength="40" autocomplete="off"></label>
+     </div>
+     <div class="actions">
+      <button class="btn" id="print" type="button">Print or save as PDF</button>
+      <button class="btn ghost" id="share" type="button">Share</button>
+      <button class="btn ghost" id="reset" type="button">Start over</button>
+     </div>
     </div>
    </div>
   </div>
-  <section class="needs" id="needs" aria-labelledby="h-needs">
-   <span class="num">11</span>
-   <hr class="rule">
-   <p class="kicker">A second reading</p>
-   <h3 id="h-needs" class="caps">Six quiet needs</h3>
-   <hr class="rule">
-   <p class="lede">Eight rooms describe the week. These six describe what the week is quietly asking for. Certainty, variety, significance, connection, growth, contribution. A lens for reflection. Educational only.</p>
-   <div class="need-grid">
-    <div>
-     <figure class="need-plate">
-      <svg id="needchart" viewBox="-230 -200 460 400" role="img" aria-labelledby="nc-t nc-d"><title id="nc-t">Six quiet needs</title><desc id="nc-d"></desc></svg>
-     </figure>
-     <p class="need-cap">Drawn first from the wheel. You may refine it, one question at a time.</p>
-     <button class="btn ghost look" id="need-look" type="button">A closer look</button>
-     <div class="dock-clear" aria-hidden="true"></div>
-     <div class="need-qs" id="need-qs"></div>
-    </div>
-    <div class="need-read">
-     <div class="need-step" id="needs-a">
-      <p id="need-lede" aria-live="polite"></p>
-      <ul class="need-map" id="need-map"></ul>
-      <div class="need-nav"><button class="btn" id="need-to-b" type="button">Continue</button></div>
+  <div class="chart-panel needs" id="panel-needs" role="tabpanel" aria-labelledby="tab-needs" hidden>
+   <section id="needs" aria-labelledby="h-needs">
+    <h3 id="h-needs" class="caps">Six quiet needs</h3>
+    <hr class="rule">
+    <p class="lede">Eight rooms describe the week. These six describe what it is quietly asking for. A lens for reflection. Educational only.</p>
+    <div class="need-grid">
+     <div>
+      <figure class="need-plate">
+       <svg id="needchart" viewBox="-210 -198 420 396" role="img" aria-labelledby="nc-t nc-d"><title id="nc-t">Six quiet needs</title><desc id="nc-d"></desc></svg>
+      </figure>
+      <p class="need-cap">Drawn first from the wheel. You may refine it, one question at a time.</p>
+      <button class="btn ghost look" id="need-look" type="button">A closer look</button>
+      <div class="need-qs" id="need-qs"></div>
      </div>
-     <div class="need-step" id="needs-b" hidden>
-      <p id="need-starve" aria-live="polite"></p>
-      <div class="need-nav"><button class="btn" id="need-to-c" type="button">Continue</button></div>
-     </div>
-     <div class="need-step" id="needs-c" hidden>
-      <p class="need-ask">Which of these sounds familiar?</p>
-      <div class="beliefs" id="beliefs" role="group" aria-label="Familiar sentences"></div>
-     </div>
-     <div class="need-step" id="needs-d" hidden>
-      <div class="keep">
-       <p class="kicker" style="color:var(--stone-blue)">A line you can keep</p>
-       <p class="line" id="keep-line"></p>
-       <p class="kicker" style="color:var(--stone-blue);margin-top:18px">A first hour</p>
-       <p class="act" id="keep-act"></p>
+     <div class="need-read">
+      <div class="need-step" id="needs-a">
+       <p id="need-lede" aria-live="polite"></p>
+       <ul class="need-map" id="need-map"></ul>
+       <div class="need-nav"><button class="btn" id="need-to-b" type="button">Continue</button></div>
       </div>
-      <div class="need-nav">
-       <button class="btn" id="need-to-e" type="button">Continue</button>
-       <button class="btn ghost" id="need-back-c" type="button">Choose another</button>
+      <div class="need-step" id="needs-b" hidden>
+       <p id="need-starve" aria-live="polite"></p>
+       <div class="need-nav"><button class="btn" id="need-to-c" type="button">Continue</button></div>
       </div>
-     </div>
-     <div class="need-step" id="needs-e" hidden>
-      <p class="need-ask">A quieter question</p>
-      <p class="id-q">Who have you been lately, and who are you when nobody is scoring the week?</p>
-      <div class="id-side">
-       <p class="id-lab" id="id-late-lab">Lately</p>
-       <div class="id-chips" id="id-late" role="group" aria-labelledby="id-late-lab"></div>
-       <label class="vh" for="id-late-own">A word of your own for lately</label>
-       <input class="id-own" id="id-late-own" type="text" maxlength="24" autocomplete="off" placeholder="Or a word of your own">
+      <div class="need-step" id="needs-c" hidden>
+       <p class="need-ask">Which of these sounds familiar?</p>
+       <div class="beliefs" id="beliefs" role="group" aria-label="Familiar sentences"></div>
       </div>
-      <div class="id-side">
-       <p class="id-lab" id="id-real-lab">Really</p>
-       <div class="id-chips" id="id-real" role="group" aria-labelledby="id-real-lab"></div>
-       <label class="vh" for="id-real-own">A word of your own for who you really are</label>
-       <input class="id-own" id="id-real-own" type="text" maxlength="24" autocomplete="off" placeholder="Or a word of your own">
+      <div class="need-step" id="needs-d" hidden>
+       <div class="keep">
+        <p class="kicker" style="color:var(--stone-blue)">A line you can keep</p>
+        <p class="line" id="keep-line"></p>
+        <p class="kicker" style="color:var(--stone-blue);margin-top:18px">A first hour</p>
+        <p class="act" id="keep-act"></p>
+       </div>
+       <div class="need-nav">
+        <button class="btn" id="need-to-e" type="button">Continue</button>
+        <button class="btn ghost" id="need-back-c" type="button">Choose another</button>
+       </div>
       </div>
-      <div class="id-keep" id="id-keep" hidden>
-       <p class="line" id="id-line"></p>
-       <p class="act" id="id-act"></p>
+      <div class="need-step" id="needs-e" hidden>
+       <p class="need-ask">A quieter question</p>
+       <p class="id-q">Who have you been lately, and who are you when nobody is scoring the week?</p>
+       <div class="id-side">
+        <p class="id-lab" id="id-late-lab">Lately</p>
+        <div class="id-chips" id="id-late" role="group" aria-labelledby="id-late-lab"></div>
+        <label class="vh" for="id-late-own">A word of your own for lately</label>
+        <input class="id-own" id="id-late-own" type="text" maxlength="24" autocomplete="off" placeholder="Or a word of your own">
+       </div>
+       <div class="id-side">
+        <p class="id-lab" id="id-real-lab">Really</p>
+        <div class="id-chips" id="id-real" role="group" aria-labelledby="id-real-lab"></div>
+        <label class="vh" for="id-real-own">A word of your own for who you really are</label>
+        <input class="id-own" id="id-real-own" type="text" maxlength="24" autocomplete="off" placeholder="Or a word of your own">
+       </div>
+       <div class="id-keep" id="id-keep" hidden>
+        <p class="line" id="id-line"></p>
+        <p class="act" id="id-act"></p>
+       </div>
       </div>
      </div>
     </div>
-   </div>
-  </section>
+   </section>
+  </div>
   <div class="closer">
    <p class="quote">The rooms you keep shape the week you get. Answer them when you are ready.</p>
    <p class="caps">Live where you belong</p>
@@ -854,8 +861,8 @@ AREAS.forEach((a,i)=>{
  const inp=sec.querySelector("input");inp.value=st.s[a.k];
  inp.addEventListener("input",()=>setScore(a.k,+inp.value,true));
 });
-const cont=document.createElement("div");cont.style.cssText="text-align:center;padding:70px 20px 90px;position:relative";
-cont.innerHTML=`<p class="quote rv" style="margin:0 auto 26px">That's all eight. Let's see the shape.</p><a class="btn rv d1" href="#perspective" id="toPersp" style="display:inline-block;text-decoration:none;border-color:var(--limestone);background:transparent">See your perspective</a>`;
+const cont=document.createElement("div");cont.className="to-persp";
+cont.innerHTML=`<p class="quote rv" style="margin:0 auto 18px">That's all eight. Let's see the shape.</p><a class="btn rv d1" href="#perspective" id="toPersp" style="display:inline-block;text-decoration:none;border-color:var(--limestone);background:transparent">See your perspective</a>`;
 box.appendChild(cont);
 
 function paintDial(k){
@@ -962,37 +969,27 @@ function makeWheel(svg,R,labels,uid){
   AREAS.forEach((a,i)=>{const r=Math.max(R*st.s[a.k]/10,R*.04);gs[i].setAttribute("d",arc(r,i));bs[i].setAttribute("d",arc(r,i));paintLabel(i,lows)});
  }};
 }
-function makeNeedChart(svg){
+function makeNeedChart(svg,R){
  const NN=NEEDS.length;
  const keep=[...svg.querySelectorAll("title,desc")];
  svg.replaceChildren();
  keep.forEach(n=>svg.appendChild(n));
  const rings=el("g",{});svg.appendChild(rings);
+ for(let l=2;l<=10;l+=2)rings.appendChild(el("circle",{r:(R*l/10).toFixed(1),fill:"none",stroke:l===10?"#2a3447":"#cfc8bb","stroke-width":l===10?1.1:.7,"stroke-opacity":l===10?.7:.9}));
+ NEEDS.forEach((n,i)=>{const[x,y]=pt(R,-Math.PI/2+i*2*Math.PI/NN);rings.appendChild(el("line",{x1:0,y1:0,x2:x.toFixed(1),y2:y.toFixed(1),stroke:"#d8d1c4","stroke-width":.8}))});
  const poly=el("polygon",{fill:"rgba(42,52,71,.22)",stroke:"#2a3447","stroke-width":1.2,"stroke-linejoin":"round"});
  svg.appendChild(poly);
  const labels=[];
  NEEDS.forEach((n,i)=>{
-  const t=el("text",{fill:"#1c1914","font-family":"Montserrat,sans-serif","font-size":16,"letter-spacing":0,"font-weight":600,class:"need-axis"});
+  const ang=-Math.PI/2+(i)*2*Math.PI/NN,reach=R+28,[x,y]=pt(reach,ang);
+  const t=el("text",{x:x.toFixed(1),y:(y+3).toFixed(1),"text-anchor":Math.abs(x)<24?"middle":x>0?"start":"end",fill:"#1c1914","font-family":"Montserrat,sans-serif","font-size":8,"letter-spacing":.4});
   t.textContent=n.n.toUpperCase();
   svg.appendChild(t);
   labels.push(t);
  });
- function drawRings(R){
-  rings.replaceChildren();
-  for(let l=2;l<=10;l+=2)rings.appendChild(el("circle",{r:(R*l/10).toFixed(1),fill:"none",stroke:l===10?"#2a3447":"#cfc8bb","stroke-width":l===10?1.1:.7,"stroke-opacity":l===10?.7:.9}));
-  NEEDS.forEach((n,i)=>{const[x,y]=pt(R,-Math.PI/2+i*2*Math.PI/NN);rings.appendChild(el("line",{x1:0,y1:0,x2:x.toFixed(1),y2:y.toFixed(1),stroke:"#d8d1c4","stroke-width":.8}))});
- }
  return{set(scores){
   const phone=isPhone();
-  const vb=phone?[-250,-230,500,460]:[-230,-200,460,400];
-  svg.setAttribute("viewBox",vb.join(" "));
-  const cssW=svg.getBoundingClientRect().width||(phone?360:420);
-  const scale=cssW/vb[2];
-  const font=16/scale;
-  const longest=Math.max(...NEEDS.map(n=>n.n.length))*font*0.62;
-  const half=vb[2]/2;
-  const R=Math.max(42,Math.min(phone?58:88,half-longest-18));
-  drawRings(R);
+  svg.setAttribute("viewBox",phone?"-180 -180 360 360":"-210 -198 420 396");
   poly.setAttribute("fill",phone?"rgba(13,24,43,.38)":"rgba(42,52,71,.22)");
   poly.setAttribute("stroke",phone?"#0D182B":"#2a3447");
   poly.setAttribute("stroke-width",phone?"2.6":"1.2");
@@ -1000,15 +997,29 @@ function makeNeedChart(svg){
   poly.setAttribute("points",pts);
   NEEDS.forEach((n,i)=>{
    const t=labels[i],ang=-Math.PI/2+i*2*Math.PI/NN;
-   const reach=R+font*0.7;
-   const[x,y]=pt(reach,ang);
+   if(phone){
+    const reach=R+16,[x,y]=pt(reach,ang);
+    t.setAttribute("x",x.toFixed(1));
+    t.setAttribute("y",(y+6).toFixed(1));
+    t.setAttribute("text-anchor","middle");
+    t.setAttribute("fill","#0D182B");
+    t.setAttribute("font-size","20");
+    t.setAttribute("letter-spacing","0");
+    t.setAttribute("font-weight","600");
+    t.setAttribute("stroke","#f7f3ea");
+    t.setAttribute("stroke-width","4");
+    t.setAttribute("paint-order","stroke");
+    writeLabel(t,x,[scoreMark(scores[n.k])]);
+    return;
+   }
+   const reach=R+28,[x,y]=pt(reach,ang);
    t.setAttribute("x",x.toFixed(1));
-   t.setAttribute("y",(y+(Math.abs(x)<24?font*0.35:font*0.3)).toFixed(1));
+   t.setAttribute("y",(y+3).toFixed(1));
    t.setAttribute("text-anchor",Math.abs(x)<24?"middle":x>0?"start":"end");
    t.setAttribute("fill","#1c1914");
-   t.setAttribute("font-size",font.toFixed(2));
-   t.setAttribute("letter-spacing","0");
-   t.setAttribute("font-weight","600");
+   t.setAttribute("font-size","8");
+   t.setAttribute("letter-spacing",".4");
+   t.removeAttribute("font-weight");
    t.removeAttribute("stroke");
    t.removeAttribute("stroke-width");
    t.removeAttribute("paint-order");
@@ -1090,7 +1101,7 @@ function paintVibe(){
  $("vibe-glow").setAttribute("d",d);
 }
 
-const big=makeWheel($("bigwheel"),180,true,"b"),mini=makeWheel($("miniwheel"),180,false,"m"),prt=makeWheel($("printwheel"),150,true,"p"),nc=makeNeedChart($("needchart"));
+const big=makeWheel($("bigwheel"),180,true,"b"),mini=makeWheel($("miniwheel"),180,false,"m"),prt=makeWheel($("printwheel"),150,true,"p"),nc=makeNeedChart($("needchart"),140);
 let pt1,sel=AREAS[0].k;
 function ranked(){return AREAS.map((a,i)=>({...a,v:st.s[a.k],i})).sort((x,y)=>x.v-y.v||x.i-y.i)}
 function focusAreas(){
@@ -1277,7 +1288,31 @@ if("IntersectionObserver" in window){
 }else vis(false)
 if("ResizeObserver" in window)new ResizeObserver(syncDockPad).observe(dock);
 matchMedia("(max-width: 480px)").addEventListener("change",()=>{if(!isPhone())setDockSlim(false);update(false);syncDockPad()});
-$("toPersp").addEventListener("click",e=>{e.preventDefault();$("perspective").scrollIntoView({behavior:reduce?"auto":"smooth"});$("perspective").focus({preventScroll:true})});
+function setChartView(view){
+ const wheel=view!=="needs";
+ $("tab-wheel").setAttribute("aria-selected",wheel?"true":"false");
+ $("tab-needs").setAttribute("aria-selected",wheel?"false":"true");
+ $("tab-wheel").tabIndex=wheel?0:-1;
+ $("tab-needs").tabIndex=wheel?-1:0;
+ $("panel-wheel").hidden=!wheel;
+ $("panel-needs").hidden=wheel;
+ try{sessionStorage.setItem("ak-wheel-chart",wheel?"wheel":"needs")}catch(e){}
+ if(!wheel)nc.set(needScores());
+}
+$("tab-wheel").addEventListener("click",()=>setChartView("wheel"));
+$("tab-needs").addEventListener("click",()=>setChartView("needs"));
+document.querySelector(".chart-toggle").addEventListener("keydown",e=>{
+ if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft"&&e.key!=="Home"&&e.key!=="End")return;
+ e.preventDefault();
+ const next=e.key==="Home"||e.key==="ArrowLeft"?"wheel":"needs";
+ setChartView(next);
+ $(next==="wheel"?"tab-wheel":"tab-needs").focus();
+});
+try{
+ const stored=sessionStorage.getItem("ak-wheel-chart");
+ setChartView(location.hash==="#needs"?"needs":stored==="needs"?"needs":"wheel");
+}catch(e){setChartView(location.hash==="#needs"?"needs":"wheel")}
+$("toPersp").addEventListener("click",e=>{e.preventDefault();setChartView("wheel");$("perspective").scrollIntoView({behavior:reduce?"auto":"smooth"});$("perspective").focus({preventScroll:true})});
 
 $("meta-name").value=st.nm||"";
 $("meta-day").value=st.day||"";

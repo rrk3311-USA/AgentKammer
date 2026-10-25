@@ -12,20 +12,20 @@ describe("Wheel of Life phone readability", () => {
     expect(html).toContain('id="printwheel"');
     expect(html).toContain('viewBox="-205 -198 410 396"');
     expect(html).toContain("body.dock-on{padding-bottom:176px}");
-    expect(html).toContain(".need-plate svg{width:100%;height:auto;max-height:none");
+    expect(html).toContain(".need-plate svg{width:100%;height:auto;max-height:280px");
   });
 
   it("keeps names off the phone life wheel and lets the one-column list carry them", () => {
-    expect(phoneCss).toContain("#needchart text{fill:#0D182B");
+    expect(phoneCss).toContain("#needchart text{font-size:20px;fill:#0D182B");
     expect(phoneCss).toContain("#bigwheel text{font-size:20px;fill:#F5F2EB");
-    expect(phoneCss).toContain(".need-plate svg{max-height:none;width:100%");
+    expect(phoneCss).toContain(".plate svg,.need-plate svg{max-height:min(48svh,340px);width:100%");
     expect(phoneCss).toContain("padding:8px 16px");
     expect(phoneCss).toContain("scroll-margin-top:calc(var(--ak-compact-header-h,52px) + 12px)");
     expect(phoneCss).toContain(".scores{margin:12px 16px 0;font-size:1.68rem;grid-template-columns:1fr");
     expect(phoneCss).toContain(".scores li{padding:8px 0");
-    expect(phoneCss).toContain(".persp{padding:28px 0 32px");
+    expect(phoneCss).toContain(".persp{padding:20px 0 12px");
     expect(html).toContain('viewBox",phone()?"-220 -220 440 440"');
-    expect(html).toContain("phone?[-250,-230,500,460]");
+    expect(html).toContain('phone?"-180 -180 360 360"');
     expect(html).toContain("const reach=R+16");
     expect(html).toContain("writeLabel(t,x,[scoreMark(st.s[a.k])])");
     expect(html).toContain('writeLabel(t,x,[n.n.toUpperCase()])');
@@ -33,12 +33,23 @@ describe("Wheel of Life phone readability", () => {
     expect(html).toContain("scoreMark");
   });
 
-  it("gives every area note label 18px of air and doubles the needs-radar names", () => {
+  it("gives every area note label 18px of air and keeps radar names at the prior size", () => {
     expect(html).toContain(".move label{display:block;font:600 10.5px/1.4 var(--sans)");
     expect(html).toContain("margin:18px 0 8px");
-    expect(html).toContain("const font=16/scale");
-    expect(html).toContain("class:\"need-axis\"");
+    expect(html).toContain('"font-size":8');
     expect(html).toContain("Your note for this area");
+    expect(html).not.toContain("const font=16/scale");
+  });
+
+  it("puts the life wheel and needs radar behind one two-option toggle", () => {
+    expect(html).toContain('role="tablist"');
+    expect(html).toContain('id="tab-wheel"');
+    expect(html).toContain('id="tab-needs"');
+    expect(html).toContain('id="panel-wheel"');
+    expect(html).toContain('id="panel-needs"');
+    expect(html).toContain("function setChartView");
+    expect(html).toContain("Life wheel");
+    expect(phoneCss).toContain("min-height:56px");
   });
 
   it("compacts the dock, keeps 44px tabs, and pads the page from measured height", () => {
@@ -47,9 +58,9 @@ describe("Wheel of Life phone readability", () => {
     expect(phoneCss).toContain(".chip{min-height:44px;min-width:44px");
     expect(html).toContain(".chips{display:flex;gap:6px;overflow-x:auto");
     expect(html).toContain("function syncDockPad");
-    expect(phoneCss).toContain("padding-bottom:calc(var(--dock-h,140px) + 28px)");
-    expect(phoneCss).toContain("body.dock-on .dock-clear{height:calc(var(--dock-h,140px) + 8px)}");
-    expect(html).toContain('class="dock-clear"');
+    expect(phoneCss).toContain("padding-bottom:calc(var(--dock-h,140px) + 12px)");
+    expect(phoneCss).toContain("footer{padding-bottom:20px}");
+    expect(html).not.toContain('class="dock-clear"');
     expect(html).toContain('id="dock-fold"');
     expect(html).toContain("setDockSlim");
   });
