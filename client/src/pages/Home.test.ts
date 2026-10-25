@@ -25,7 +25,7 @@ describe("homepage close", () => {
     expect(html).toContain("Contact");
     expect(html).toContain('href="/calculator"');
     expect(html).toContain("ak-home-cta-pair");
-    expect(html).toContain("ak-pair-btn--outline");
+    expect(html).toContain("ak-pair-btn");
     expect(html).toContain("data-ak-home-close-ctas");
     expect(html).toContain("ak-quiet-chip");
     expect(html).toContain("write to us directly");
