@@ -60,6 +60,7 @@ describe("CTA button copy", () => {
           eyebrow: "Contact",
           showEyebrow: false,
           compact: true,
+          tone: "ivory",
         }),
       ),
     );
@@ -67,6 +68,7 @@ describe("CTA button copy", () => {
     expect(html).toContain("px-3.5 py-2");
     expect(html).toContain("text-[11px]");
     expect(html).toContain("py-6 lg:py-8");
+    expect(html).toContain("bg-brand-ivory text-brand-ink");
     expect(html).not.toContain("px-5 py-4");
     expect(html).not.toContain("sm:min-w-[16rem]");
   });

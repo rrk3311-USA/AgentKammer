@@ -611,6 +611,7 @@ export function CTA({
   showEyebrow,
   lead,
   compact = false,
+  tone = "navy",
 }: {
   title?: string;
   description?: string;
@@ -623,10 +624,12 @@ export function CTA({
   showEyebrow?: boolean;
   lead?: ReactNode;
   compact?: boolean;
+  tone?: "navy" | "ivory";
 }) {
   const hideSectionEyebrow = showEyebrow === false || sameCtaPhrase(eyebrow, title);
   const hideButtonEyebrow = sameCtaPhrase(eyebrow, label);
   const centered = align === "center";
+  const ivory = tone === "ivory";
   const actionClass = hideButtonEyebrow
     ? compact
       ? "ak-call-button group inline-flex w-auto items-center justify-between gap-2.5 px-3.5 py-2 text-left text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors sm:min-w-0 sm:gap-3"
@@ -649,7 +652,13 @@ export function CTA({
   );
 
   return (
-    <section className="border-t border-brand-brass/30 bg-brand-navy text-brand-ivory">
+    <section
+      className={
+        ivory
+          ? "border-t border-brand-border bg-brand-ivory text-brand-ink"
+          : "border-t border-brand-brass/30 bg-brand-navy text-brand-ivory"
+      }
+    >
       <PageSection className={compact ? "py-6 lg:py-8" : "py-12 lg:py-20"}>
         {lead}
         <div
@@ -660,10 +669,16 @@ export function CTA({
           }
         >
           <div className={centered ? "max-w-xl" : undefined}>
-            {hideSectionEyebrow ? null : <p className={grammar.eyebrowOnDark}>{eyebrow}</p>}
-            <h2 className={cn(hideSectionEyebrow ? "" : "mt-4", grammar.sectionOnDark)}>{title}</h2>
+            {hideSectionEyebrow ? null : (
+              <p className={ivory ? grammar.eyebrow : grammar.eyebrowOnDark}>{eyebrow}</p>
+            )}
+            <h2 className={cn(hideSectionEyebrow ? "" : "mt-4", ivory ? grammar.section : grammar.sectionOnDark)}>
+              {title}
+            </h2>
             {description ? (
-              <p className={cn(compact ? "mt-2.5" : "mt-5", grammar.bodyOnDark, centered && "mx-auto")}>{description}</p>
+              <p className={cn(compact ? "mt-2.5" : "mt-5", ivory ? grammar.body : grammar.bodyOnDark, centered && "mx-auto")}>
+                {description}
+              </p>
             ) : null}
           </div>
           <div className={cn("grid gap-3", !compact && "sm:min-w-[16rem]", centered && (compact ? "mt-4" : "mt-8"))}>

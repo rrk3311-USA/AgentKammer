@@ -5,19 +5,12 @@ import { CTA } from "@/components/site-shell";
 import { DecisionFramework } from "@/components/DecisionFramework";
 import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
-import { serviceLandingMap } from "@/data/service-landings";
 
 const howWeDecide = [
   { step: "01", title: "What's changing?", text: "Name the life event, pressure, or uncertainty. Neighborhoods and inventory come later." },
   { step: "02", title: "Should anything change?", text: "Sometimes the highest-value recommendation is to do nothing." },
   { step: "03", title: "Where do you belong?", text: "Even if you stay, is the environment still serving the life you want?" },
 ];
-
-const featuredBriefSlugs = [
-  "executive-relocation-nyc",
-  "foreign-buyers-new-york",
-  "new-baby-growing-family-nyc",
-] as const;
 
 export default function Home() {
   usePageMetadata({
@@ -26,10 +19,6 @@ export default function Home() {
       "Private housing guidance before the market gets loud. Local execution when needed. Stay, renovate, rent, buy, sell, or wait.",
     path: "/",
   });
-
-  const featuredBriefs = featuredBriefSlugs
-    .map((slug) => serviceLandingMap[slug])
-    .filter(Boolean);
 
   return (
     <main className="bg-brand-ivory text-brand-ink">
@@ -86,38 +75,17 @@ export default function Home() {
         items={howWeDecide}
       />
 
-      <section className="border-b border-brand-border bg-brand-navy/[0.05]">
-        <div className={grammar.pad}>
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-            <div className="max-w-2xl">
-              <p className={grammar.eyebrow}>Situations</p>
-              <h2 className={`mt-3 lg:mt-4 ${grammar.section}`}>
-                Start from what changed.
-              </h2>
-            </div>
-            <Link
-              href="/situations"
-              className={grammar.textLink}
-            >
-              Start Here
-              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-            </Link>
-          </div>
-          <div className="ak-felt-grid mt-8 grid sm:mt-12 sm:grid-cols-3">
-            {featuredBriefs.map((brief) => (
-              <Link
-                key={brief.slug}
-                href={`/situations/${brief.slug}`}
-                className="ak-felt-item group p-5 sm:p-7"
-              >
-                <p className="text-[11px] uppercase tracking-[0.18em] text-brand-cocoa">{brief.eyebrow}</p>
-                <p className={`mt-3 ${grammar.rowTitle} transition-colors group-hover:text-brand-navy-secondary`}>
-                  {brief.navLabel}
-                </p>
-                <p className="mt-3 text-base leading-7 text-brand-graphite line-clamp-2">{brief.summary}</p>
-              </Link>
-            ))}
-          </div>
+      <section className="bg-brand-navy text-brand-ivory">
+        <div className="mx-auto flex w-full max-w-site flex-col items-center px-5 py-6 text-center sm:px-6 lg:px-10 lg:py-8">
+          <h2 className={grammar.sectionOnDark}>Start from what changed.</h2>
+          <WhatsChangingPills className="mt-4 w-full" showKicker={false} />
+          <Link
+            href="/situations"
+            className="mt-4 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory/78 transition-colors hover:text-brand-ivory"
+          >
+            Start Here
+            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
+          </Link>
         </div>
       </section>
 
@@ -130,7 +98,7 @@ export default function Home() {
         showEyebrow={false}
         align="center"
         compact
-        lead={<WhatsChangingPills className="mb-4 w-full sm:mb-5" />}
+        tone="ivory"
       />
     </main>
   );

@@ -40,13 +40,21 @@ export function footerTopRuleClass(exploreOtherSituations: boolean, home = false
   );
 }
 
-export function WhatsChangingPills({ className }: { className?: string } = {}) {
+export function WhatsChangingPills({
+  className,
+  showKicker = true,
+}: { className?: string; showKicker?: boolean } = {}) {
   return (
     <div data-ak-whats-changing className={cn("text-center", className)}>
-      <p className="text-[10px] uppercase tracking-[0.2em] text-brand-ivory/48">What's Changing?</p>
+      {showKicker ? (
+        <p className="text-[10px] uppercase tracking-[0.2em] text-brand-ivory/48">What's Changing?</p>
+      ) : null}
       <nav
         aria-label="What's Changing"
-        className="mt-1.5 flex flex-wrap items-center justify-center gap-x-1 gap-y-1"
+        className={cn(
+          "flex flex-wrap items-center justify-center gap-x-1 gap-y-1",
+          showKicker ? "mt-1.5" : "mt-0",
+        )}
       >
         {whatsChangingItems.map((item) => (
           <Link key={item.href + item.label} href={item.href} className={quietChipClass}>

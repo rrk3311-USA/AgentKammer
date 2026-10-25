@@ -9,36 +9,32 @@ function renderHome() {
 }
 
 describe("homepage close", () => {
-  it("keeps pills and Get in touch in one navy band, with no Livability note", () => {
+  it("puts dark pills under Start from what changed, then a light Get in touch", () => {
     const html = renderHome();
+    const start = html.indexOf("Start from what changed.");
     const chips = html.indexOf("data-ak-whats-changing");
     const heading = html.indexOf("Get in touch");
     const line = html.indexOf("Work through the steps, starting with your Situation, for a clear recommendation, or write to us directly.");
-    expect(chips).toBeGreaterThan(-1);
+    expect(start).toBeGreaterThan(-1);
+    expect(chips).toBeGreaterThan(start);
     expect(heading).toBeGreaterThan(chips);
     expect(line).toBeGreaterThan(heading);
-    expect(html).not.toContain("bg-[#161C28]");
-    expect(html).not.toContain("When you want a human reply");
-    expect(html).not.toContain("If you already know what you need");
-    expect(html).not.toContain("Livability");
+    expect(html).toContain("bg-brand-navy text-brand-ivory");
+    expect(html).toContain("bg-brand-ivory text-brand-ink");
     expect(html).toContain("<span>Contact</span>");
     expect(html).toContain("ak-call-button");
     expect(html).toContain("ak-quiet-chip");
     expect(html).toContain("write to us directly");
     expect(html).not.toContain("write to me");
+    expect(html).not.toContain("ak-felt-grid");
+    expect(html).not.toContain("High-Value Relocation");
+    expect(html).not.toContain("Livability");
     expect(html).toContain("flex-wrap items-center justify-center");
-    expect(html).not.toContain("overflow-x-auto");
-    expect(html).not.toContain("flex-nowrap");
-    expect(html).toContain("flex flex-col items-center text-center");
-    expect(html).toContain("mb-4 w-full sm:mb-5");
-    expect(html).toContain("py-6 lg:py-8");
     expect(html).toContain("px-3.5 py-2");
-    expect(html).toContain("text-[11px]");
-    expect(html).toContain("mt-2.5");
-    expect(html).toContain("mt-4");
+    expect(html).toContain("py-6 lg:py-8");
   });
 
-  it("keeps Start Here once in the Situations header, not in the close", () => {
+  it("keeps Start Here once in the dark pills section", () => {
     const html = renderHome();
     expect(html).toContain("Start Here");
     expect(html.match(/Start Here/g)?.length).toBe(1);
