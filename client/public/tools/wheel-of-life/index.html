@@ -110,6 +110,34 @@ img,svg{display:block;max-width:100%}
 .card .quote{font-size:clamp(1.35rem,3.2vw,1.85rem);max-width:14em;margin:0}
 .card .prompt{color:#d9d3c6;margin:22px 0 0;font-size:.95rem;max-width:30em}
 
+.sets{background:var(--deep)}
+.set{display:grid;isolation:isolate;overflow:hidden}
+.set-art{position:relative;min-height:200px;max-height:260px;overflow:hidden;background:var(--deep)}
+.set-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.92) contrast(1.08) saturate(.92) sepia(.06)}
+.set-art::before{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(70% 55% at 28% 72%,rgba(226,180,112,.12),transparent 58%)}
+.set-art::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,transparent 58%,rgba(22,28,40,.94) 100%)}
+.set-panel{position:relative;z-index:2;padding:22px 20px 26px;background:var(--deep)}
+.set-panel .kicker{margin:0}
+.set-panel h2{font-size:clamp(1.2rem,4vw,1.55rem);letter-spacing:.22em;color:var(--ivory);margin:10px 0 0}
+.set-dek{font:italic 400 1.15rem/1.4 var(--serif);color:#d9d3c6;max-width:32em;margin:10px 0 4px}
+.set-row{border-top:1px solid rgba(216,209,199,.16);padding:12px 0 6px;scroll-margin-top:calc(var(--ak-compact-header-h,52px) + 12px)}
+.set-row.on{border-top-color:rgba(232,228,220,.42)}
+.set-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.set-head h3{font-size:11px;letter-spacing:.2em;color:var(--mist);margin:0}
+.set-head .readout{display:flex;align-items:baseline;gap:8px}
+.set-head output{font:italic 500 1.7rem/1 var(--serif);color:var(--platinum);text-shadow:0 0 16px rgba(232,228,220,.28)}
+.set-head .word{font:italic 1rem var(--serif);color:var(--mist)}
+.set-row .prompt{color:#d9d3c6;margin:6px 0 0;font-size:.88rem;max-width:36em}
+.set-row .dial{margin-top:6px}
+#perspective{scroll-margin-top:calc(var(--ak-compact-header-h,52px) + 8px)}
+@media(min-width:860px){
+ .set{grid-template-columns:minmax(280px,.86fr) minmax(0,1.14fr)}
+ .set-alt{grid-template-columns:minmax(0,1.14fr) minmax(280px,.86fr)}
+ .set-alt .set-art{order:2}
+ .set-art{min-height:100%;max-height:none}
+ .set-panel{padding:44px 52px 48px;display:flex;flex-direction:column;justify-content:center}
+}
+
 .dial{margin-top:26px}
 .dial .readout{display:flex;align-items:baseline;gap:10px}
 .dial output{font:italic 500 3.4rem/1 var(--serif);color:var(--platinum);font-variant-numeric:lining-nums;text-shadow:0 0 22px rgba(232,228,220,.28)}
@@ -137,7 +165,7 @@ img,svg{display:block;max-width:100%}
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:auto 1fr;grid-template-areas:"stage main" "vibe vibe";gap:8px 14px;align-items:center;padding:10px max(16px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));background:rgba(16,20,28,.96);border-top:1px solid rgba(216,209,199,.22);backdrop-filter:blur(16px);box-shadow:0 -18px 40px rgba(0,0,0,.4);transition:opacity .35s,transform .35s;max-width:100%;overflow-x:clip}
 .dock.hide{opacity:0;transform:translateY(18px);pointer-events:none}
 .dock-stage{grid-area:stage}
-.spin{width:84px;height:84px;display:grid;place-items:center}
+.spin{width:84px;height:84px;display:grid;place-items:center;margin:0;padding:0;border:0;background:transparent;color:inherit;cursor:pointer;border-radius:50%}
 .spin svg.wheel{width:100%;height:100%;transform-origin:50% 50%;animation:turn 96s linear infinite}
 @keyframes turn{to{transform:rotate(360deg)}}
 .dock-main{grid-area:main;min-width:0}
@@ -267,6 +295,13 @@ footer{background:var(--deep);color:var(--mist);padding:36px clamp(20px,6vw,80px
 @media(min-width:760px){footer{padding-bottom:40px}}
 @media(max-width:480px){
  .intro{padding:36px 20px;gap:16px}
+ .set-art{min-height:176px;max-height:196px}
+ .set-panel{padding:16px 16px 18px}
+ .set-panel h2{margin-top:8px}
+ .set-dek{margin:8px 0 2px;font-size:1.05rem}
+ .set-row{padding:10px 0 4px}
+ .set-head output{font-size:1.45rem}
+ .set-row .prompt{font-size:.84rem}
  .persp{padding:20px 0 12px;overflow:visible}
  .persp .in{padding:0 16px}
  .persp h2,.needs h3{margin-top:8px}
@@ -419,7 +454,7 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
 </style>
 </head>
 <body>
-<a class="skip" href="#ch-health">Skip to the first area</a>
+<a class="skip" href="#set-body">Skip to the first set</a>
 <div class="grain" aria-hidden="true"></div>
 
 <header class="ak-compact-header ak-compact-header--overlay" data-ak-compact-header>
@@ -518,7 +553,7 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
  <p class="quote rv">Most people can describe a building faster than they can describe their week.</p>
  <div class="rv d1">
   <p>Score each area from 1 to 10. One is neglected. Ten is about as good as you'd honestly want it. First instinct tends to beat a long debate.</p>
-  <p>The wheel stays with you at the foot of the page. Adjust from there, or in each chapter. At the end I'll name the lowest areas, read six quieter needs, and offer a week, a month, and a season of small moves to bring the shape back toward round.</p>
+  <p>The wheel stays with you at the foot of the page. Adjust from there, or in each set. At the end I'll name the lowest areas, read six quieter needs, and offer a week, a month, and a season of small moves to bring the shape back toward round.</p>
  </div>
 </section>
 
@@ -634,9 +669,9 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
 
 <aside class="dock hide" id="dock" aria-label="Your wheel so far">
  <div class="dock-stage">
-  <div class="spin">
-   <svg id="miniwheel" class="wheel" viewBox="-200 -200 400 400" role="img" aria-labelledby="mw-t"><title id="mw-t">Your wheel of life</title></svg>
-  </div>
+  <button type="button" class="spin" id="dock-chart" aria-label="See the chart">
+   <svg id="miniwheel" class="wheel" viewBox="-200 -200 400 400" role="img" aria-hidden="true"></svg>
+  </button>
  </div>
  <div class="dock-main" id="dock-main">
   <div class="chips" id="chips" role="tablist" aria-label="Life areas"></div>
@@ -765,15 +800,10 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
 (()=>{
 document.documentElement.classList.add("js");
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
-const PHOTOS=[
- {src:"assets/health.jpg",pos:"36% 44%"},
- {src:"assets/career.jpg",pos:"58% 40%"},
- {src:"assets/money.jpg",pos:"30% 46%"},
- {src:"assets/relationships.jpg",pos:"68% 46%"},
- {src:"assets/family.jpg",pos:"34% 50%"},
- {src:"assets/growth.jpg",pos:"72% 48%"},
- {src:"assets/fun.jpg",pos:"32% 50%"},
- {src:"assets/home.jpg",pos:"74% 46%"}
+const SETS=[
+ {id:"body",n:"Body and mind",folio:"02",dek:"Energy, a little pleasure, and whatever you learned that nobody assigned.",src:"assets/health.jpg",pos:"36% 44%",keys:["health","fun","growth"]},
+ {id:"work",n:"Work and rooms",folio:"03",dek:"The hours with your name on them, the numbers you can stand to look at, and the address that holds the rest.",src:"assets/career.jpg",pos:"58% 40%",keys:["career","money","home"]},
+ {id:"people",n:"People",folio:"04",dek:"Who still knows the door is open, and who you sit with when you go home.",src:"assets/family.jpg",pos:"34% 50%",keys:["family","relationships"]}
 ];
 const AREAS=[
  {k:"health",n:"Health",q:"When you ask your body for a long walk or an early morning, what does it offer back?",p:"Energy is the quiet ledger of the week. You feel it before you name it.",h:"Protect one earlier night, or take the longer way home on foot.",w:"Walk twenty minutes on three mornings. Same route if it helps you start.",m:"Put a standing hour on the calendar for movement, and treat it like a meeting you already accepted.",qtr:"Notice which rooms and hours make rest easier. Keep those, and drop one habit that steals the morning."},
@@ -835,31 +865,39 @@ const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 const box=$("chapters");
-AREAS.forEach((a,i)=>{
- const n=String(i+2).padStart(2,"0");
- const photo=PHOTOS[i];
+box.className="sets";
+SETS.forEach((set,si)=>{
  const sec=document.createElement("section");
- sec.className="ch"+(i%2?" left":"");sec.id="ch-"+a.k;sec.setAttribute("aria-labelledby","h-"+a.k);
- sec.innerHTML=`<div class="scene" aria-hidden="true"><img src="${photo.src}" alt="" loading="lazy" decoding="async" style="object-position:${photo.pos}"></div>
- <div class="typeback" aria-hidden="true"><span>Interactive Tool</span><span>A personal check-in</span></div>
- <div class="calm">
-  <div class="card">
-   <div class="top rv"><span class="folio">${n}</span><hr class="rule" style="margin:0"></div>
-   <h2 id="h-${a.k}" class="caps rv">${a.n}</h2>
-   <blockquote class="quote rv d1"><p style="margin:0">${a.p}</p></blockquote>
-   <p class="prompt rv d2" id="q-${a.k}">${a.q}</p>
-   <div class="dial rv d3">
-    <div class="readout"><output id="o-${a.k}" for="r-${a.k}" aria-hidden="true"></output><span class="word" id="w-${a.k}" aria-hidden="true"></span></div>
-    <div class="range"><div class="track" aria-hidden="true"><div class="fill"></div></div>
-     <label class="vh" for="r-${a.k}">${a.n}, score from 1 to 10</label>
-     <input type="range" id="r-${a.k}" min="1" max="10" step="1" aria-describedby="q-${a.k}"></div>
-    <div class="ticks" aria-hidden="true">${[...Array(10)].map((_,j)=>`<span>${j+1}</span>`).join("")}</div>
-   </div>
-  </div>
+ sec.className="set"+(si%2?" set-alt":"");
+ sec.id="set-"+set.id;
+ sec.setAttribute("aria-labelledby","h-set-"+set.id);
+ sec.innerHTML=`<div class="set-art" aria-hidden="true"><img src="${set.src}" alt="" loading="lazy" decoding="async" style="object-position:${set.pos}"></div>
+ <div class="set-panel">
+  <p class="kicker rv">${set.folio}</p>
+  <h2 id="h-set-${set.id}" class="caps rv">${set.n}</h2>
+  <p class="set-dek rv d1">${set.dek}</p>
+  ${set.keys.map(k=>{
+   const a=AREAS.find(x=>x.k===k);
+   return `<div class="set-row" id="row-${a.k}">
+    <div class="set-head">
+     <h3 class="caps" id="h-${a.k}">${a.n}</h3>
+     <div class="readout"><output id="o-${a.k}" for="r-${a.k}" aria-hidden="true"></output><span class="word" id="w-${a.k}" aria-hidden="true"></span></div>
+    </div>
+    <p class="prompt" id="q-${a.k}">${a.q}</p>
+    <div class="dial">
+     <div class="range"><div class="track" aria-hidden="true"><div class="fill"></div></div>
+      <label class="vh" for="r-${a.k}">${a.n}, score from 1 to 10</label>
+      <input type="range" id="r-${a.k}" min="1" max="10" step="1" aria-describedby="q-${a.k}"></div>
+     <div class="ticks" aria-hidden="true">${[...Array(10)].map((_,j)=>`<span>${j+1}</span>`).join("")}</div>
+    </div>
+   </div>`;
+  }).join("")}
  </div>`;
  box.appendChild(sec);
- const inp=sec.querySelector("input");inp.value=st.s[a.k];
- inp.addEventListener("input",()=>setScore(a.k,+inp.value,true));
+ set.keys.forEach(k=>{
+  const inp=$("r-"+k);inp.value=st.s[k];
+  inp.addEventListener("input",()=>setScore(k,+inp.value,true));
+ });
 });
 const cont=document.createElement("div");cont.className="to-persp";
 cont.innerHTML=`<p class="quote rv" style="margin:0 auto 18px">That's all eight. Let's see the shape.</p><a class="btn rv d1" href="#perspective" id="toPersp" style="display:inline-block;text-decoration:none;border-color:var(--limestone);background:transparent">See your perspective</a>`;
@@ -1163,11 +1201,14 @@ function paintDock(){
  inp.value=v;inp.setAttribute("aria-valuetext",v+" of 10");
  $("dock-o").textContent=v;
  $("dock-fill").style.setProperty("--p",((v-1)/9*100)+"%");
- AREAS.forEach(a=>$("c-"+a.k).classList.toggle("on",a.k===sel));
+ AREAS.forEach(a=>{
+  $("c-"+a.k).classList.toggle("on",a.k===sel);
+  const row=$("row-"+a.k);if(row)row.classList.toggle("on",a.k===sel);
+ });
 }
 function select(k,scroll){
  sel=k;paintDock();
- if(scroll){const ch=$("ch-"+k);if(ch)ch.scrollIntoView({behavior:reduce?"auto":"smooth",block:"center"})}
+ if(scroll){const row=$("row-"+k);if(row)row.scrollIntoView({behavior:reduce?"auto":"smooth",block:"center"})}
 }
 function update(pulse){
  const lo=focusAreas(),lk=lo.map(o=>o.k);
@@ -1281,7 +1322,11 @@ function setDockSlim(slim){
  syncDockPad();
 }
 fold.addEventListener("click",()=>setDockSlim(!dock.classList.contains("slim")));
-$("miniwheel").addEventListener("click",()=>{if(dock.classList.contains("slim"))setDockSlim(false)});
+function goToChart(){
+ $("perspective").scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"});
+ $("perspective").focus({preventScroll:true});
+}
+$("dock-chart").addEventListener("click",goToChart);
 const vis=on=>{dock.classList.toggle("hide",on);document.body.classList.toggle("dock-on",!on);syncDockPad()};
 if("IntersectionObserver" in window){
  new IntersectionObserver(([e])=>vis(e.isIntersecting),{threshold:.28}).observe(hero);

@@ -52,6 +52,28 @@ describe("Wheel of Life phone readability", () => {
     expect(phoneCss).toContain("min-height:56px");
   });
 
+  it("groups the eight areas into three compact sets and keeps eight wheel wedges", () => {
+    expect(html).toContain('id:"body"');
+    expect(html).toContain('id:"work"');
+    expect(html).toContain('id:"people"');
+    expect(html).toContain('n:"Body and mind"');
+    expect(html).toContain('n:"Work and rooms"');
+    expect(html).toContain('n:"People"');
+    expect(html).toContain('keys:["health","fun","growth"]');
+    expect(html).toContain('keys:["career","money","home"]');
+    expect(html).toContain('keys:["family","relationships"]');
+    expect(html).toContain("AREAS.forEach((a,i)");
+    expect(html).toContain("N=AREAS.length");
+    expect(html).not.toContain('id="ch-health"');
+  });
+
+  it("lets the dock wheel jump to the chart without changing the toggle", () => {
+    expect(html).toContain('id="dock-chart"');
+    expect(html).toContain("function goToChart");
+    expect(html).toContain('scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})');
+    expect(html).toContain("function setChartView");
+  });
+
   it("compacts the dock, keeps 44px tabs, and pads the page from measured height", () => {
     expect(phoneCss).toContain(".vibe{display:none}");
     expect(phoneCss).toContain(".spin{width:52px;height:52px}");
