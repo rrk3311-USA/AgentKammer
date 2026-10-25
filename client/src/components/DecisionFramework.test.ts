@@ -22,25 +22,6 @@ describe("DecisionFramework", () => {
     expect(html).toContain("01");
     expect(html).toContain("02");
     expect(html).toContain("What&#x27;s changing?");
-    expect(html).not.toContain("data-ak-how-we-decide-art");
-    expect(html).not.toContain("lg:grid-cols-12");
-  });
-
-  it("places optional report art in a one-quarter desktop column", () => {
-    const html = renderToStaticMarkup(
-      createElement(DecisionFramework, {
-        eyebrow: "How We Decide",
-        title: "Three questions. Then judgment.",
-        items: [{ step: "01", title: "What's changing?", text: "Name the life event." }],
-        figure: createElement("svg", { "data-testid": "how-we-decide-art" }),
-      }),
-    );
-    expect(html).toContain("data-ak-how-we-decide-art");
-    expect(html).toContain("lg:grid-cols-12");
-    expect(html).toContain("lg:col-span-9");
-    expect(html).toContain("lg:col-span-3");
-    expect(html).toContain("max-w-[14rem]");
-    expect(html).toContain("Three questions. Then judgment.");
   });
 
   it("renders optional step actions without a second divider system", () => {

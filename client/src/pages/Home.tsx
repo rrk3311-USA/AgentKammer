@@ -3,16 +3,9 @@ import { MoveRight } from "lucide-react";
 import { HomeCloseCtas } from "@/components/HomeCloseCtas";
 import { WhatsChangingPills } from "@/components/Footer";
 import { CTA } from "@/components/site-shell";
-import { DecisionFramework } from "@/components/DecisionFramework";
-import { HowWeDecideArt } from "@/components/HowWeDecideArt";
+import { HowWeDecide } from "@/components/HowWeDecide";
 import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
-
-const howWeDecide = [
-  { step: "01", title: "What's changing?", text: "Name the life event, pressure, or uncertainty. Neighborhoods and inventory come later." },
-  { step: "02", title: "Should anything change?", text: "Sometimes the highest-value recommendation is to do nothing." },
-  { step: "03", title: "Where do you belong?", text: "Even if you stay, is the environment still serving the life you want?" },
-];
 
 export default function Home() {
   usePageMetadata({
@@ -71,12 +64,7 @@ export default function Home() {
         </div>
       </section>
 
-      <DecisionFramework
-        eyebrow="How We Decide"
-        title="Three questions. Then judgment."
-        items={howWeDecide}
-        figure={<HowWeDecideArt />}
-      />
+      <HowWeDecide />
 
       <section className="bg-brand-navy text-brand-ivory">
         <div className="mx-auto flex w-full max-w-site flex-col items-start px-5 py-6 text-left sm:px-6 lg:px-10 lg:py-8">

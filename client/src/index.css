@@ -1448,6 +1448,85 @@
   }
 }
 
+/* Homepage How We Decide: Platinum Paper on screen. Reuses ak-pp tokens. */
+.ak-hwd{
+  position:relative;
+  overflow:hidden;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+.ak-hwd .ak-pp-frame{
+  inset:12px;
+}
+.ak-hwd-inner{
+  position:relative;
+  z-index:1;
+  margin:0 auto;
+  max-width:90rem;
+  padding:2.25rem 1.5rem 2rem;
+}
+.ak-hwd .ak-pp-kicker{
+  margin:0;
+  font:600 11px/1 var(--ak-pp-sans);
+  letter-spacing:.26em;
+  color:var(--ak-pp-navy);
+}
+.ak-hwd-title{
+  margin:.7rem 0 0;
+  max-width:16ch;
+  font:300 clamp(1.85rem,6vw,2.75rem)/1.06 var(--ak-pp-serif);
+  color:var(--ak-pp-deep);
+  letter-spacing:-.01em;
+}
+.ak-hwd-steps{
+  margin-top:1.75rem;
+  max-width:42rem;
+}
+.ak-hwd-step .ak-pp-hairline{
+  margin:0 0 1.15rem;
+  border-top-color:rgba(126,133,140,.38);
+}
+.ak-hwd-row{
+  display:grid;
+  gap:.35rem 1.25rem;
+}
+.ak-hwd .ak-pp-num{
+  font:300 clamp(2rem,5vw,2.75rem)/1 var(--ak-pp-serif);
+  color:var(--ak-pp-navy);
+  letter-spacing:.02em;
+}
+.ak-hwd .ak-pp-sec-label{
+  margin:0;
+  font:600 11px/1.2 var(--ak-pp-sans);
+  letter-spacing:.28em;
+  color:var(--ak-pp-label);
+}
+.ak-hwd .ak-pp-copy{
+  margin:.55rem 0 0;
+  max-width:38em;
+  font:400 15px/1.6 var(--ak-pp-sans);
+  color:var(--ak-pp-deep);
+}
+.ak-hwd-step + .ak-hwd-step{
+  margin-top:1.15rem;
+}
+@media (min-width:640px){
+  .ak-hwd .ak-pp-frame{inset:18px}
+  .ak-hwd-inner{padding:3rem 2.25rem 2.75rem}
+  .ak-hwd .ak-pp-kicker{letter-spacing:.32em}
+  .ak-hwd-steps{margin-top:2.25rem}
+}
+@media (min-width:1024px){
+  .ak-hwd .ak-pp-frame{inset:26px}
+  .ak-hwd-inner{padding:4.25rem 4.5rem 3.75rem}
+  .ak-hwd-row{
+    grid-template-columns:4.75rem minmax(0,1fr);
+    align-items:baseline;
+    gap:.15rem 2rem;
+  }
+  .ak-hwd-steps{margin-top:2.75rem}
+}
+
 /* Platinum Paper sheet is hidden on screen. Screen chrome stays ivory / navy. */
 .calculator-print-doc{display:none}
 
