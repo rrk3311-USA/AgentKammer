@@ -15,6 +15,28 @@ import {
 import { downloadCalculatorPdf } from "@/lib/calculator-pdf";
 import { cn } from "@/lib/utils";
 
+const PRINT_SLUG = "interactive-tools/calculator";
+const NOTES_RULES = Array.from({ length: 18 }, (_, index) => index);
+
+function sheetDate(date = new Date()) {
+  const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  return `${weekdays[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+}
+
 function Field({
   label,
   suffix,
@@ -76,13 +98,103 @@ export default function Calculator() {
 
   const result = useMemo(() => computeCarry(input), [input]);
 
+  const inputRows = [
+    ["Purchase price", price],
+    ["Down payment", `${downPercent}%`],
+    ["Rate", `${ratePercent}%`],
+    ["Term", `${years} years`],
+    ["Property tax", `${taxMonthly} / mo`],
+    ["Common charges", `${commonMonthly} / mo`],
+  ] as const;
+
+  const resultRows = [
+    ["Mortgage", formatUsd(result.mortgage)],
+    ["Property tax", formatUsd(result.tax)],
+    ["Common charges", formatUsd(result.common)],
+    ["Monthly carry", formatUsd(result.monthly)],
+  ] as const;
+
   return (
     <main className="calculator-sheet bg-brand-ivory text-brand-ink">
-      <div className="ak-platinum-frame calculator-print-frame hidden print:block" aria-hidden="true">
-        <i className="rule-out" /><i className="rule-in" />
-        <i className="c tl" /><i className="c tr" /><i className="c bl" /><i className="c br" />
-      </div>
-      <div className="calculator-print-inner">
+      <article className="calculator-print-doc ak-pp-page" aria-hidden="true">
+        <div className="ak-pp-frame" aria-hidden="true">
+          <i className="rule-out" />
+          <i className="rule-in" />
+        </div>
+        <header className="ak-pp-mast">
+          <img className="ak-pp-mark" src="/brand/ak-monogram-midnight.png" alt="" />
+          <i className="ak-pp-rule" />
+          <p className="ak-pp-kicker">Calculator</p>
+        </header>
+        <div className="ak-pp-body">
+          <p className="ak-pp-date">{sheetDate()}</p>
+          <section className="ak-pp-sec">
+            <p className="ak-pp-sec-head">
+              <span className="ak-pp-num">01</span>
+              <span className="ak-pp-sec-label">The month</span>
+            </p>
+            <p className="ak-pp-figure">{formatUsd(result.monthly)}</p>
+            <p className="ak-pp-lead">What does this home cost each month?</p>
+            <p className="ak-pp-copy">
+              On a {formatUsd(input.price)} purchase with {input.downPercent}% down. Cash to close begins
+              near {formatUsd(result.down)}, before closing costs.
+            </p>
+          </section>
+          <div className="ak-pp-inlay calculator-print-inlay">
+            <section className="ak-pp-sec">
+              <p className="ak-pp-sec-head">
+                <span className="ak-pp-num">02</span>
+                <span className="ak-pp-sec-label">The inputs</span>
+              </p>
+              <dl className="ak-pp-rows">
+                {inputRows.map(([label, value]) => (
+                  <div className="ak-pp-row" key={label}>
+                    <dt>{label}</dt>
+                    <dd>{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+            <hr className="ak-pp-hairline" />
+            <section className="ak-pp-sec">
+              <p className="ak-pp-sec-head">
+                <span className="ak-pp-num">03</span>
+                <span className="ak-pp-sec-label">The breakdown</span>
+              </p>
+              <dl className="ak-pp-rows">
+                {resultRows.map(([label, value]) => (
+                  <div className="ak-pp-row" key={label}>
+                    <dt>{label}</dt>
+                    <dd>{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          </div>
+          <p className="ak-pp-note calculator-note">
+            Educational only. Insurance, assessments, and closing costs sit outside this page. Judgment
+            still comes after the number.
+          </p>
+          <div className="ak-pp-notes">
+            <p className="ak-pp-notes-label">Notes</p>
+            <div className="ak-pp-notes-rules" aria-hidden="true">
+              {NOTES_RULES.map((index) => (
+                <i key={index} />
+              ))}
+            </div>
+          </div>
+        </div>
+        <footer className="ak-pp-foot">
+          <p className="ak-pp-slug">{PRINT_SLUG}</p>
+          <p className="ak-pp-word">
+            <i className="ak-pp-ticks" />
+            AGENTKAMMER.COM
+            <i className="ak-pp-ticks" />
+          </p>
+          <span className="ak-pp-foot-end" aria-hidden="true" />
+        </footer>
+      </article>
+      <div className="calculator-screen">
       <section className="calculator-month border-b border-brand-border bg-brand-navy text-brand-ivory">
         <PageSection className="calculator-month-inner grid gap-10 py-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:py-16">
           <div>

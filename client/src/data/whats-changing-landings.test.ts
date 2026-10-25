@@ -33,13 +33,19 @@ describe("What's Changing destinations", () => {
   });
 });
 
-describe("platinum print theme", () => {
-  it("keeps the shared paper and trim tokens", () => {
-    const css = readFileSync(new URL("../../public/chrome/platinum-print.css", import.meta.url), "utf8");
-    expect(css).toContain("--ak-platinum-paper:#d8d2c6");
-    expect(css).toContain("--ak-platinum-trim:#B8BCC2");
-    expect(css).toContain("--ak-platinum-trim-in:#D6D9DE");
-    expect(css).toContain(".ak-platinum-frame");
-    expect(css).toContain(".mm-frame");
+describe("Platinum Paper theme", () => {
+  it("keeps the shared limestone paper, silver frame, slug, and notes block", () => {
+    const css = readFileSync(new URL("../../public/chrome/platinum-paper.css", import.meta.url), "utf8");
+    expect(css).toContain("--ak-pp-paper:#CFCCC6");
+    expect(css).toContain("--ak-pp-deep:#161C28");
+    expect(css).toContain("--ak-pp-label:#4A5058");
+    expect(css).toContain("stone-bg.png");
+    expect(css).toContain(".ak-pp-frame");
+    expect(css).toContain(".ak-pp-notes");
+    expect(css).toContain(".ak-pp-slug");
+    expect(css).toContain(".ak-pp-inlay");
+    expect(css).toContain("repeating-linear-gradient(90deg,rgba(42,52,71,.22) 0 1px,transparent 1px 7px)");
+    expect(css).not.toContain("#d8d2c6");
+    expect(css).not.toContain("#f7f3ea");
   });
 });

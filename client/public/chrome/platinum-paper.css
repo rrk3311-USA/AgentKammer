@@ -1,0 +1,333 @@
+/**
+ * Platinum Paper
+ * Canonical print sheet for Agent Kammer.
+ *
+ * Core: honed limestone grey (#CFCCC6 + stone-bg.png) + silver inlay frame
+ * + small AK monogram top center with a short platinum rule
+ * + AGENTKAMMER.COM between pinstripe bars, low in the frame
+ * + path slug, bottom left
+ * + Notes block that flex-fills leftover space
+ *
+ * Numbered 01 / 02 / 03 sections and hairline dividers are opt-in.
+ * Inlay cards are opt-in (Calculator, Property Assessment).
+ *
+ * Reference: docs/brand/PLATINUM-PAPER.md
+ */
+
+:root{
+  --ak-pp-paper:#CFCCC6;
+  --ak-pp-deep:#161C28;
+  --ak-pp-navy:#2A3447;
+  --ak-pp-plat:#9AA1A8;
+  --ak-pp-plat-ink:#7E858C;
+  --ak-pp-label:#4A5058;
+  --ak-pp-meta:#5F6672;
+  --ak-pp-sep:rgba(22,28,40,.26);
+  --ak-pp-hair:rgba(126,133,140,.30);
+  --ak-pp-hair-soft:rgba(126,133,140,.18);
+  --ak-pp-card-from:#FCFCFB;
+  --ak-pp-card-to:#F0F1F1;
+  --ak-pp-notes:rgba(255,255,255,.35);
+  --ak-pp-rule:rgba(22,28,40,.08);
+  --ak-pp-gradient:linear-gradient(135deg,#7E858C 0%,#C9CED3 26%,#EEF0F2 46%,#9AA1A8 68%,#7E858C 84%,#C9CED3 100%);
+  --ak-pp-pinstripe:repeating-linear-gradient(90deg,rgba(42,52,71,.22) 0 1px,transparent 1px 7px);
+  --ak-pp-serif:"Cormorant Garamond","Iowan Old Style",Georgia,"Times New Roman",serif;
+  --ak-pp-sans:Inter,"Neue Haas Grotesk",system-ui,sans-serif;
+  --ak-pp-stone:url("/chrome/stone-bg.png");
+
+  /* Backward-compatible aliases so older print markup still resolves. */
+  --ak-platinum-paper:var(--ak-pp-paper);
+  --ak-platinum-ink:var(--ak-pp-deep);
+  --ak-platinum-navy:var(--ak-pp-deep);
+  --ak-platinum-slate:var(--ak-pp-navy);
+  --ak-platinum-trim:var(--ak-pp-plat);
+  --ak-platinum-trim-in:var(--ak-pp-plat-ink);
+  --ak-platinum-panel:var(--ak-pp-card-from);
+  --ak-platinum-bar:#E4E6E8;
+  --ak-platinum-rule:var(--ak-pp-sep);
+  --ak-platinum-rule-soft:var(--ak-pp-hair);
+  --ak-platinum-muted:var(--ak-pp-meta);
+}
+
+*{box-sizing:border-box}
+
+.ak-pp-page,
+.ak-platinum-page{
+  position:relative;
+  background-color:var(--ak-pp-paper);
+  background-image:var(--ak-pp-stone);
+  background-size:cover;
+  background-position:center;
+  color:var(--ak-pp-deep);
+  font-family:var(--ak-pp-serif);
+}
+
+/* Silver inlay frame: double hairline, inset from the page edge. */
+.ak-pp-frame,
+.ak-platinum-frame,
+.mm-frame{
+  position:absolute;
+  inset:7mm;
+  pointer-events:none;
+  z-index:3;
+}
+.ak-pp-frame .rule-out,
+.ak-platinum-frame .rule-out,
+.mm-frame .rule-out{
+  position:absolute;
+  inset:0;
+  border:.55pt solid var(--ak-pp-hair);
+}
+.ak-pp-frame .rule-in,
+.ak-platinum-frame .rule-in,
+.mm-frame .rule-in{
+  position:absolute;
+  inset:1.55mm;
+  border:.35pt solid var(--ak-pp-hair-soft);
+}
+.ak-pp-frame::after,
+.ak-platinum-frame::after,
+.mm-frame::after{
+  content:"";
+  position:absolute;
+  inset:-.15mm;
+  padding:.55pt;
+  background:var(--ak-pp-gradient);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+}
+.ak-pp-frame i.c,
+.ak-platinum-frame i.c,
+.mm-frame i.c{display:none}
+
+/* Masthead: monogram + short platinum rule. Nothing else by default. */
+.ak-pp-mast{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2.6mm;
+  flex:0 0 auto;
+  padding:0 0 1mm;
+}
+.ak-pp-mark{
+  display:block;
+  width:16pt;
+  height:auto;
+}
+.ak-pp-rule{
+  display:block;
+  width:18mm;
+  height:1.05pt;
+  border:0;
+  background:var(--ak-pp-gradient);
+}
+.ak-pp-kicker{
+  margin:1.4mm 0 0;
+  font:600 6.2pt/1 var(--ak-pp-sans);
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--ak-pp-label);
+}
+
+/* Body column. LOI-like measure and air. */
+.ak-pp-body{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  flex:1 1 auto;
+  min-height:0;
+}
+
+.ak-pp-date{
+  margin:0 0 5mm;
+  font:600 6pt/1 var(--ak-pp-sans);
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--ak-pp-meta);
+}
+
+/* Numbered outline. Use only when the sheet needs sections. */
+.ak-pp-sec{margin:0 0 4.5mm}
+.ak-pp-sec:last-child{margin-bottom:0}
+.ak-pp-sec-head{
+  display:flex;
+  align-items:baseline;
+  gap:3mm;
+  margin:0 0 2.4mm;
+}
+.ak-pp-num{
+  font:300 18pt/1 var(--ak-pp-serif);
+  color:var(--ak-pp-deep);
+  letter-spacing:.02em;
+}
+.ak-pp-sec-label{
+  font:600 6.2pt/1 var(--ak-pp-sans);
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--ak-pp-label);
+}
+.ak-pp-hairline{
+  height:0;
+  margin:3.2mm 0;
+  border:0;
+  border-top:.35pt solid var(--ak-pp-sep);
+}
+
+.ak-pp-figure{
+  margin:0;
+  font:300 56pt/.88 var(--ak-pp-serif);
+  color:var(--ak-pp-deep);
+  letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;
+}
+.ak-pp-lead{
+  margin:3mm 0 0;
+  font:italic 400 13.5pt/1.2 var(--ak-pp-serif);
+  color:var(--ak-pp-deep);
+}
+.ak-pp-copy{
+  margin:2.4mm 0 0;
+  max-width:46em;
+  font:400 9.5pt/1.4 var(--ak-pp-sans);
+  color:var(--ak-pp-deep);
+}
+
+/* Property Assessment / Calculator inlay. */
+.ak-pp-inlay{
+  position:relative;
+  z-index:1;
+  flex:0 0 auto;
+  padding:5mm 5.5mm 4.8mm;
+  border:2px solid transparent;
+  background:
+    linear-gradient(180deg,var(--ak-pp-card-from) 0%,var(--ak-pp-card-to) 100%) padding-box,
+    var(--ak-pp-gradient) border-box;
+  box-shadow:0 1.8mm 6mm rgba(22,28,40,.10);
+}
+
+.ak-pp-rows{margin:0;padding:0}
+.ak-pp-row{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:6mm;
+  margin:0;
+  padding:2.1mm 0;
+  border-bottom:.35pt solid var(--ak-pp-sep);
+  font:400 10pt/1.2 var(--ak-pp-sans);
+  color:var(--ak-pp-deep);
+}
+.ak-pp-row:last-child{border-bottom:0}
+.ak-pp-row dt{font-weight:400}
+.ak-pp-row dd{
+  margin:0;
+  font:400 13pt/1 var(--ak-pp-serif);
+  font-variant-numeric:tabular-nums;
+}
+
+.ak-pp-note{
+  margin:3.5mm 0 0;
+  font:400 7.5pt/1.35 var(--ak-pp-sans);
+  color:var(--ak-pp-meta);
+}
+
+/* Notes: flex-fills leftover paper. Never forces a second page. */
+.ak-pp-notes{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  flex:1 1 auto;
+  min-height:16mm;
+  margin:4mm 0 0;
+  padding:3mm 4mm 2.5mm;
+  overflow:hidden;
+  background:var(--ak-pp-notes);
+  border:.4pt solid var(--ak-pp-hair);
+}
+.ak-pp-notes .lab,
+.ak-pp-notes-label{
+  flex:0 0 auto;
+  margin:0 0 2mm;
+  font:600 6pt/1 var(--ak-pp-sans);
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--ak-pp-label);
+}
+.ak-pp-notes-rules{
+  flex:1 1 auto;
+  display:flex;
+  flex-direction:column;
+  min-height:10mm;
+  overflow:hidden;
+}
+.ak-pp-notes-rules i{
+  display:block;
+  flex:0 0 5.6mm;
+  height:5.6mm;
+  width:100%;
+  margin:0;
+  padding:0;
+  border:0;
+  border-bottom:.3pt solid var(--ak-pp-rule);
+}
+
+/* Footer sits on the frame floor. Slug is a slot each page fills. */
+.ak-pp-foot{
+  position:relative;
+  z-index:4;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  align-items:end;
+  flex:0 0 auto;
+  margin-top:3.5mm;
+  min-height:7mm;
+}
+.ak-pp-slug{
+  justify-self:start;
+  align-self:end;
+  margin:0;
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font:600 5.2pt/1 var(--ak-pp-sans);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--ak-pp-label);
+}
+.ak-pp-word{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:3.2mm;
+  margin:0;
+  font:600 6.4pt/1 var(--ak-pp-sans);
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--ak-pp-label);
+}
+.ak-pp-ticks{
+  display:block;
+  width:18mm;
+  height:7px;
+  background:var(--ak-pp-pinstripe);
+}
+.ak-pp-foot-end{
+  justify-self:end;
+  align-self:end;
+  margin:0;
+  font:600 5.2pt/1 var(--ak-pp-sans);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--ak-pp-meta);
+}
+
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}

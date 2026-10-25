@@ -1,4 +1,7 @@
 @import "../public/chrome/compact-header.css";
+@import "@fontsource/cormorant-garamond/300.css";
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/400-italic.css";
 @import "@fontsource/cormorant-garamond/500.css";
 @import "@fontsource/cormorant-garamond/600.css";
 @import "@fontsource/cormorant-garamond/700.css";
@@ -1371,14 +1374,14 @@
   }
 }
 
-/* Screen: wrapper is a no-op so the live calculator layout stays. */
-.calculator-print-inner{display:contents}
+/* Platinum Paper sheet is hidden on screen. Screen chrome stays ivory / navy. */
+.calculator-print-doc{display:none}
 
-/* /calculator only. One letter page: month, every input, results, disclaimer, platinum frame. */
+/* /calculator only. One letter page: Platinum Paper + LOI structure + inlay. */
 @media print {
   @page {
     size: letter;
-    margin: 0.42in;
+    margin: 0;
   }
 
   html:has(.calculator-sheet),
@@ -1387,8 +1390,8 @@
     height: 100vh !important;
     margin: 0 !important;
     padding: 0 !important;
-    background: var(--ak-platinum-paper, #d8d2c6) !important;
-    color: var(--ak-platinum-ink, #1c1914);
+    background: var(--ak-pp-paper, #CFCCC6) !important;
+    color: var(--ak-pp-deep, #161C28);
   }
 
   body:has(.calculator-sheet) .ak-app-shell,
@@ -1400,11 +1403,11 @@
     background: transparent !important;
   }
 
-  body:has(.calculator-sheet) header,
-  body:has(.calculator-sheet) footer,
+  body:has(.calculator-sheet) .ak-app-shell > header,
+  body:has(.calculator-sheet) .ak-app-shell > footer,
   body:has(.calculator-sheet) nav,
   body:has(.calculator-sheet) .ak-guidance-dock,
-  body:has(.calculator-sheet) .calculator-omit {
+  body:has(.calculator-sheet) .calculator-screen {
     display: none !important;
   }
 
@@ -1415,8 +1418,17 @@
   }
 
   .calculator-sheet {
-    position: relative;
-    display: flex;
+    display: block;
+    width: 100%;
+    height: 100%;
+    height: 100vh;
+    min-height: 10in;
+    overflow: hidden;
+    background: transparent !important;
+  }
+
+  .calculator-print-doc {
+    display: flex !important;
     flex-direction: column;
     box-sizing: border-box;
     width: 100%;
@@ -1424,131 +1436,29 @@
     height: 100vh;
     min-height: 10in;
     overflow: hidden;
-    padding: 8mm 7.5mm 7mm;
-    background: var(--ak-platinum-paper, #d8d2c6) !important;
-    color: var(--ak-platinum-ink, #1c1914);
+    padding: 12mm 13mm 8mm;
   }
 
-  .calculator-print-frame {
-    display: block !important;
+  .calculator-print-inlay {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 8mm;
+    align-items: start;
   }
 
-  .calculator-print-inner {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    min-height: 0;
-    overflow: hidden;
-    background: var(--ak-platinum-panel, #f7f3ea);
-    border: 0.4pt solid var(--ak-platinum-trim, #B8BCC2);
+  .calculator-print-inlay .ak-pp-hairline {
+    display: none;
   }
 
-  .calculator-month {
-    flex: 0 0 auto;
+  .calculator-print-inlay .ak-pp-sec {
+    margin: 0;
   }
 
-  .calculator-month-inner {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr) !important;
-    align-items: end !important;
-    gap: 8mm !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 6mm 7mm !important;
+  .calculator-print-doc .ak-pp-figure {
+    font-size: 54pt;
   }
 
-  .calculator-month .font-mono {
-    font-size: 42pt !important;
-    line-height: 0.92 !important;
-  }
-
-  .calculator-month .font-display,
-  .calculator-month .text-lg,
-  .calculator-month .sm\:text-xl {
-    font-size: 12pt !important;
-    line-height: 1.28 !important;
-  }
-
-  .calculator-body {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 6mm 7mm 6mm !important;
-  }
-
-  .calculator-work {
-    flex: 1 1 auto;
-    display: grid !important;
-    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr) !important;
-    align-items: stretch !important;
-    gap: 7mm !important;
-    min-height: 0;
-  }
-
-  .calculator-work > div,
-  .calculator-work > aside {
-    display: flex;
-    flex-direction: column;
-    min-height: 0;
-  }
-
-  .calculator-sheet h2 {
-    font-size: 15pt !important;
-    line-height: 1.15 !important;
-    margin: 0 0 3mm !important;
-  }
-
-  .calculator-work .border {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    margin-top: 0 !important;
-    min-height: 0;
-  }
-
-  .calculator-sheet label,
-  .calculator-work .border > div {
-    display: flex !important;
-    flex: 1 1 0;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 4mm !important;
-    min-height: 0;
-    padding: 2.4mm 4mm !important;
-    white-space: nowrap;
-  }
-
-  .calculator-sheet label > span {
-    white-space: nowrap;
-    font-size: 11pt !important;
-  }
-
-  .calculator-sheet label input {
-    width: 28mm !important;
-    font-size: 13pt !important;
-  }
-
-  .calculator-work .font-mono {
-    font-size: 13pt !important;
-  }
-
-  .calculator-total {
-    flex: 1.15 1 0;
-    padding: 3mm 4mm !important;
-  }
-
-  .calculator-total .font-mono {
-    font-size: 16pt !important;
-  }
-
-  .calculator-note {
-    display: block !important;
-    margin: 4mm 0 0 !important;
-    font-size: 9.5pt !important;
-    line-height: 1.35 !important;
+  .calculator-print-doc .ak-pp-notes {
+    min-height: 18mm;
   }
 }

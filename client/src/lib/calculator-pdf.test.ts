@@ -33,9 +33,11 @@ describe("calculator pdf", () => {
     const pdf = new TextDecoder().decode(buildCalculatorPdf(fields, DEFAULT_CARRY, result));
     expect(pdf).toContain("/Count 1");
     expect(pdf).toContain("/MediaBox [0 0 612 792]");
-    expect(pdf).toContain("0.847 0.824 0.776");
-    expect(pdf).toContain("0.722 0.737 0.761");
-    expect(pdf).toContain("0.839 0.851 0.871");
+    expect(pdf).toContain("0.812 0.800 0.776");
+    expect(pdf).toContain("0.086 0.110 0.157");
+    expect(pdf).toContain("interactive-tools/calculator");
+    expect(pdf).toContain("AGENTKAMMER.COM");
+    expect(pdf).toContain("NOTES");
     expect(pdf).toContain(formatUsd(result.monthly));
     expect(formatUsd(result.monthly)).toBe("$19,273");
     expect(pdf).not.toContain("Manhattan");
