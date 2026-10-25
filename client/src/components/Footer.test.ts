@@ -111,7 +111,8 @@ describe("Footer situation index", () => {
   it("keeps International Move in the unfiltered set", () => {
     const html = renderIndex(true);
     expect(html).toContain('href="/situations/executive-relocation-nyc"');
-    expect(html).toContain('href="/international"');
+    expect(html).toContain('href="/situations/international-move-nyc"');
+    expect(html).not.toContain('href="/international"');
     expect(html).not.toContain("What&#x27;s Changing?");
   });
 

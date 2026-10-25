@@ -1069,6 +1069,36 @@ export const serviceLandings: ServiceLanding[] = [
     ],
     cta: "Start an inheritance Situation.",
   },
+  {
+    slug: "international-move-nyc",
+    art: "relocation",
+    title: "International Move to New York",
+    navLabel: "International Move",
+    eyebrow: "Life Change",
+    summary:
+      "An international move to New York starts with the life change: visa timing, school year, a first address, and whether to rent first or buy. This brief is about arriving, not a country desk or a buyer-only path.",
+    searchTerms: [
+      "international move nyc",
+      "relocating to new york from abroad",
+      "moving to manhattan from another country",
+    ],
+    audience: [
+      "Households relocating to New York from another country and deciding how to live in the first year.",
+      "Families timing a move around visas, school calendars, and a temporary first address.",
+      "People who need a relocation brief before they treat New York as a purchase.",
+    ],
+    considerations: [
+      "Separate the arrival calendar from any purchase calendar.",
+      "Decide whether a short lease, a furnished stay, or a purchase-ready condominium fits the first year.",
+      "Name school, commute, and visa constraints before neighborhood taste takes over.",
+    ],
+    depthNotes: [
+      "If residency length is unclear, rent first. Buying under a visa cliff is a weak brief.",
+      "Treat the first address as an operating base: service, lock-and-leave, and a commute you can live with.",
+      "Country-specific buying rules can wait until the life change is named.",
+    ],
+    cta: "Start an international move Situation.",
+  },
 ];
 
 export const serviceLandingMap = Object.fromEntries(serviceLandings.map((item) => [item.slug, item])) as Record<string, ServiceLanding>;

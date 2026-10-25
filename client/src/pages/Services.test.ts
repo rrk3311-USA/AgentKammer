@@ -3,7 +3,7 @@ import React, { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { Router } from "wouter";
-import { decisionNavigationGroups } from "@/data/decision-navigation";
+import { decisionFacingItems, decisionNavigationGroups } from "@/data/decision-navigation";
 import Services from "./Services";
 
 const changeItems =
@@ -14,16 +14,18 @@ function renderSituations() {
 }
 
 describe("What's Changing page", () => {
-  it("shows all twelve life changes as tappable pills and drops the numbered split", () => {
+  it("shows the twelve life changes as in-place journey pills, not landing hops", () => {
     const html = renderSituations();
+    const source = readFileSync(new URL("./Services.tsx", import.meta.url), "utf8");
     expect(changeItems).toHaveLength(12);
+    expect(html).toContain("data-ak-situation-journey");
     expect(html).toContain("data-ak-situations-pills");
     expect(html).toContain("ak-quiet-chip");
     expect(html).toContain("min-h-11");
     for (const item of changeItems) {
       expect(html).toContain(item.label);
-      expect(html).toContain(`href="${item.href}"`);
     }
+    expect(html).not.toContain('href="/international"');
     expect(html).not.toContain("01 ·");
     expect(html).not.toContain("02 ·");
     expect(html).not.toContain("03 ·");
@@ -34,11 +36,15 @@ describe("What's Changing page", () => {
     expect(html).toContain("items-start");
     expect(html).toContain("text-left");
     expect(html).toContain("flex-wrap items-center justify-start");
-    expect(html.match(/flex-wrap items-center justify-start/g)).toHaveLength(3);
     expect(html).not.toContain("justify-center");
+    expect(source).not.toContain("openDecisionAssistant");
+    expect(html).not.toContain("Open Guidance:");
+    for (const item of decisionFacingItems) {
+      expect(html).not.toContain(`href="${item.href}"`);
+    }
   });
 
-  it("uses two styles only: navy pills and a light assessment band", () => {
+  it("uses two styles only: navy journey and a light assessment band", () => {
     const html = renderSituations();
     expect(html).toContain("bg-brand-navy text-brand-ivory");
     expect(html).toContain("bg-brand-ivory text-brand-ink");
@@ -58,5 +64,6 @@ describe("What's Changing page", () => {
     expect(css).toContain(".ak-quiet-chip:hover");
     expect(css).toContain("rgba(229, 228, 226");
     expect(css).toContain("200ms ease");
+    expect(css).toContain(".ak-quiet-chip--on");
   });
 });

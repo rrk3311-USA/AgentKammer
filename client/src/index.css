@@ -944,6 +944,14 @@
     outline: none;
   }
 
+  .ak-quiet-chip--on,
+  .ak-quiet-chip[aria-pressed="true"] {
+    border-color: #c9ced3;
+    color: #f5f2eb;
+    background: rgba(201, 206, 211, 0.08);
+    box-shadow: 0 0 0 1px rgba(201, 206, 211, 0.28);
+  }
+
   .ak-call-button {
     position: relative;
     isolation: isolate;
