@@ -1,8 +1,10 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
+  BLANK_COST_AMOUNT,
   COST_CATALOG,
   COST_GROUPS,
+  COST_WRITE_IN_ROWS,
   addCustomCostRow,
   DEPOSIT_EXPLAINER,
   DEPOSIT_HINT,
@@ -13,6 +15,7 @@ import {
   emptyCostDraft,
   mansionTaxEstimate,
   monthlyWithCosts,
+  paddedCostWriteIns,
   setCatalogAmount,
   setCatalogPercent,
   toggleCatalogItem,
@@ -132,5 +135,24 @@ describe("calculator costs catalog", () => {
     const draft = setCatalogAmount(emptyCostDraft(), "inspection", "1,200");
     expect(catalogLineAmount(item, 3_500_000, draft)).toBe(0);
     expect(catalogLineAmount(item, 3_500_000, { ...draft, on: { inspection: true } })).toBe(1_200);
+  });
+
+  it("pads the print ledger to five write-in rows and pre-fills switched-on costs", () => {
+    expect(COST_WRITE_IN_ROWS).toBe(5);
+    expect(BLANK_COST_AMOUNT).toBe("$ ______");
+    const empty = paddedCostWriteIns(3_500_000, emptyCostDraft());
+    expect(empty).toHaveLength(5);
+    expect(empty.every((row) => row.label === "" && row.amount == null)).toBe(true);
+
+    const item = COST_CATALOG.find((row) => row.id === "inspection");
+    if (!item) throw new Error("missing inspection");
+    let draft = toggleCatalogItem(emptyCostDraft(), item, true, 3_500_000);
+    draft = setCatalogAmount(draft, "inspection", "1,200");
+    draft = addCustomCostRow(draft, "closing", { id: "cost-custom", name: "Staging", amount: "800" });
+    const filled = paddedCostWriteIns(3_500_000, draft);
+    expect(filled).toHaveLength(5);
+    expect(filled[0]).toMatchObject({ label: "Inspection", amount: 1_200 });
+    expect(filled[1]).toMatchObject({ label: "Staging", amount: 800 });
+    expect(filled.slice(2).every((row) => row.label === "" && row.amount == null)).toBe(true);
   });
 });

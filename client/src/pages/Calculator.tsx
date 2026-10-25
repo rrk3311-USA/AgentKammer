@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { CalculatorCosts } from "@/components/CalculatorCosts";
 import { PageSection } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import {
+  BLANK_COST_AMOUNT,
   DEPOSIT_EXPLAINER,
   DEPOSIT_HINT,
   cashToClose,
@@ -13,6 +14,7 @@ import {
   emptyCostDraft,
   hasEnteredCosts,
   monthlyWithCosts,
+  paddedCostWriteIns,
   totalCostGroups,
   type DepositMode,
 } from "@/lib/calculator-costs";
@@ -28,7 +30,26 @@ import {
 import { cn } from "@/lib/utils";
 
 const PRINT_SLUG = "interactive-tools/calculator";
-const NOTES_RULES = Array.from({ length: 17 }, (_, index) => index);
+const NOTES_RULES = Array.from({ length: 8 }, (_, index) => index);
+const PRINTING_CLASS = "ak-printing";
+
+function beginCalculatorPrint() {
+  document.documentElement.classList.add(PRINTING_CLASS);
+}
+
+function endCalculatorPrint() {
+  document.documentElement.classList.remove(PRINTING_CLASS);
+}
+
+/** Show the Platinum Paper sheet in the layout tree, then print. */
+export function printCalculatorSheet() {
+  beginCalculatorPrint();
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      window.print();
+    });
+  });
+}
 
 function sheetDate(date = new Date()) {
   const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -150,6 +171,36 @@ export default function Calculator() {
       : []),
   ] as const;
   const showPrintCosts = showCosts || showDeposit;
+  const extraCostRows = useMemo(() => paddedCostWriteIns(input.price, costDraft), [input.price, costDraft]);
+
+  useEffect(() => {
+    const onBeforePrint = () => beginCalculatorPrint();
+    const onAfterPrint = () => endCalculatorPrint();
+    const printQuery = window.matchMedia("print");
+    const onPrintQuery = (event: MediaQueryListEvent) => {
+      if (event.matches) beginCalculatorPrint();
+      else endCalculatorPrint();
+    };
+
+    window.addEventListener("beforeprint", onBeforePrint);
+    window.addEventListener("afterprint", onAfterPrint);
+    if (typeof printQuery.addEventListener === "function") {
+      printQuery.addEventListener("change", onPrintQuery);
+    } else {
+      printQuery.addListener(onPrintQuery);
+    }
+
+    return () => {
+      window.removeEventListener("beforeprint", onBeforePrint);
+      window.removeEventListener("afterprint", onAfterPrint);
+      if (typeof printQuery.removeEventListener === "function") {
+        printQuery.removeEventListener("change", onPrintQuery);
+      } else {
+        printQuery.removeListener(onPrintQuery);
+      }
+      endCalculatorPrint();
+    };
+  }, []);
   const cashCopy = showDeposit
     ? `On a ${formatUsd(input.price)} purchase with ${input.downPercent}% down. Cash to close is ${formatUsd(cashTotal)}. A ${formatUsd(deposit)} deposit at contract leaves ${formatUsd(dueClosing)} due at closing.`
     : showCosts
@@ -230,13 +281,28 @@ export default function Calculator() {
             </section>
           ) : null}
           <p className="ak-pp-note calculator-note">{sheetNote}</p>
-          <div className="ak-pp-notes">
-            <p className="ak-pp-notes-label">Notes</p>
-            <div className="ak-pp-notes-rules" aria-hidden="true">
-              {NOTES_RULES.map((index) => (
-                <i key={index} />
-              ))}
-            </div>
+          <div className="calculator-print-writeins">
+            <section className="ak-pp-notes calculator-print-extra-costs">
+              <p className="ak-pp-notes-label">Additional costs</p>
+              <div className="calculator-print-extra-rows">
+                {extraCostRows.map((row) => (
+                  <div className="calculator-print-extra-row" key={row.id}>
+                    <span className="calculator-print-extra-item">{row.label}</span>
+                    <span className="calculator-print-extra-amount">
+                      {row.amount != null ? formatUsd(row.amount) : BLANK_COST_AMOUNT}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </section>
+            <section className="ak-pp-notes calculator-print-notes">
+              <p className="ak-pp-notes-label">Notes</p>
+              <div className="ak-pp-notes-rules" aria-hidden="true">
+                {NOTES_RULES.map((index) => (
+                  <i key={index} />
+                ))}
+              </div>
+            </section>
           </div>
         </div>
         <footer className="ak-pp-foot">
@@ -410,7 +476,8 @@ export default function Calculator() {
             <div className="calculator-omit mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
               <button
                 type="button"
-                onClick={() => window.print()}
+                onClick={printCalculatorSheet}
+                data-testid="button-save-pdf"
                 className="inline-flex items-center justify-center border border-brand-navy bg-white px-5 py-4 text-lg font-semibold text-brand-navy"
               >
                 Save as PDF

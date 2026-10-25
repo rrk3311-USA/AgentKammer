@@ -250,6 +250,48 @@ export function hasEnteredCosts(totals: CostTotals): boolean {
   return totals.closing > 0 || totals.monthly > 0 || totals.selling > 0;
 }
 
+export type CostWriteIn = {
+  id: string;
+  label: string;
+  amount: number | null;
+};
+
+export const COST_WRITE_IN_ROWS = 5;
+export const BLANK_COST_AMOUNT = "$ ______";
+
+/** Catalog and custom rows the visitor switched on. Used to pre-fill the print ledger. */
+export function enteredCostWriteIns(price: number, draft: CostDraft): CostWriteIn[] {
+  const rows: CostWriteIn[] = [];
+  for (const item of COST_CATALOG) {
+    if (!draft.on[item.id]) continue;
+    const amount = catalogLineAmount(item, price, draft);
+    rows.push({ id: item.id, label: item.label, amount: amount > 0 ? amount : null });
+  }
+  for (const group of COST_GROUPS) {
+    for (const row of draft.custom[group.id] ?? []) {
+      const name = row.name.trim();
+      const raw = String(row.amount ?? "").trim();
+      if (!name && !raw) continue;
+      const amount = Math.max(0, parseMoney(raw));
+      rows.push({
+        id: row.id,
+        label: name || "Additional cost",
+        amount: amount > 0 ? amount : null,
+      });
+    }
+  }
+  return rows;
+}
+
+export function paddedCostWriteIns(price: number, draft: CostDraft): CostWriteIn[] {
+  const rows = enteredCostWriteIns(price, draft);
+  const padded = [...rows];
+  while (padded.length < COST_WRITE_IN_ROWS) {
+    padded.push({ id: `blank-${padded.length}`, label: "", amount: null });
+  }
+  return padded;
+}
+
 export function cashToClose(down: number, closing: number): number {
   return Math.max(0, down) + Math.max(0, closing);
 }
