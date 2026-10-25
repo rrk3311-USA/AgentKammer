@@ -53,7 +53,6 @@ export const PUBLIC_SIDE_TOOL_LINKS: readonly MobileNavLink[] = [
 
 export function interactiveToolsNav(enabled = publicSideToolsEnabled()): readonly MobileNavLink[] {
   return [
-    { label: "All tools", href: "/tools" },
     { label: "Calculator", href: "/calculator" },
     { label: "Wheel of Life", href: "/tools/wheel-of-life/" },
     ...(enabled ? PUBLIC_SIDE_TOOL_LINKS : []),

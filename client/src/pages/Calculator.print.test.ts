@@ -2,12 +2,16 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 const calc = readFileSync(new URL("./Calculator.tsx", import.meta.url), "utf8");
+const costs = readFileSync(new URL("../components/CalculatorCosts.tsx", import.meta.url), "utf8");
+const catalog = readFileSync(new URL("../lib/calculator-costs.ts", import.meta.url), "utf8");
 const css = readFileSync(new URL("../index.css", import.meta.url), "utf8");
 const paper = readFileSync(new URL("../../public/chrome/platinum-paper.css", import.meta.url), "utf8");
 
 describe("Calculator print sheet", () => {
   it("keeps calculator copy free of em dashes", () => {
     expect(calc).not.toContain("\u2014");
+    expect(costs).not.toContain("\u2014");
+    expect(catalog).not.toContain("\u2014");
   });
 
   it("prints a Platinum Paper letter, not the live navy header", () => {
@@ -18,7 +22,34 @@ describe("Calculator print sheet", () => {
     expect(calc).toContain("interactive-tools/calculator");
     expect(calc).toContain("AGENTKAMMER.COM");
     expect(calc).toContain("Educational only.");
+    expect(calc).toContain("length: 17");
+    expect(calc).toContain("ak-pp-foot-end");
+    expect(calc).not.toContain("ak-pp-date");
+    expect(calc).toContain("window.print()");
+    expect(calc).not.toContain("downloadCalculatorPdf");
+    expect(calc).toContain("CalculatorCosts");
+    expect(calc).toContain("Purchase closing");
+    expect(calc).toContain("Ongoing monthly");
+    expect(calc).toContain("Other monthly");
+    expect(calc).toContain("Selling costs");
+    expect(calc).toContain("Costs entered");
+    expect(calc).toContain("Earnest money deposit");
+    expect(calc).toContain("Deposit paid at contract");
+    expect(calc).toContain("Due at closing");
+    expect(calc).toContain("DEPOSIT_EXPLAINER");
+    expect(calc).toContain("DEPOSIT_HINT");
+    expect(catalog).toContain("Your deposit counts toward cash to close.");
+    expect(catalog).toContain("Often around 10% at contract in NYC, varies.");
+    expect(costs).toContain("Costs people often miss");
+    expect(costs).toContain("Add another cost");
+    expect(catalog).toContain("Purchase closing costs");
+    expect(catalog).toContain("Buyer agent commission");
+    expect(catalog).toContain("Seller agent commission");
+    expect(catalog).toContain("Varies and is negotiable");
+    expect(`${costs}\n${catalog}`).not.toMatch(/our commission|we charge|Agent Kammer commission|brokerage/i);
     expect(calc).not.toContain("calculator-print-inner");
+    expect(css).toContain(".calculator-print-doc .ak-pp-lead");
+    expect(css).toContain("line-height: 1.6");
     expect(css).toContain(".calculator-print-doc");
     expect(css).toContain("min-height: 10in");
     expect(css).toContain("body:has(.calculator-sheet) .calculator-screen");

@@ -186,14 +186,14 @@
   font-variant-numeric:tabular-nums;
 }
 .ak-pp-lead{
-  margin:3mm 0 0;
-  font:italic 400 13.5pt/1.2 var(--ak-pp-serif);
+  margin:5.5mm 0 0;
+  font:italic 400 13.5pt/1.38 var(--ak-pp-serif);
   color:var(--ak-pp-deep);
 }
 .ak-pp-copy{
-  margin:2.4mm 0 0;
-  max-width:46em;
-  font:400 9.5pt/1.4 var(--ak-pp-sans);
+  margin:4mm 0 0;
+  max-width:38em;
+  font:400 9.5pt/1.58 var(--ak-pp-sans);
   color:var(--ak-pp-deep);
 }
 

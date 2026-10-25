@@ -83,7 +83,9 @@ describe("mobile field menu", () => {
     const html = renderToStaticMarkup(
       createElement(Router, { ssrPath: "/tools" }, createElement(MobileFieldMenu, { location: "/tools", onClose: () => undefined })),
     );
-    expect(html).toContain("All tools");
+    expect(html).not.toContain("All tools");
+    expect(html).toContain("Home");
+    expect(html).toContain('href="/"');
     expect(html).toContain("Calculator");
     expect(html).toContain("Wheel of Life");
     expect(html).toContain('href="/tools/wheel-of-life/"');
