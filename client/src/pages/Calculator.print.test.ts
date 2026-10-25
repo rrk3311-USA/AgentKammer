@@ -18,7 +18,12 @@ describe("Calculator print sheet", () => {
     expect(calc).toContain("interactive-tools/calculator");
     expect(calc).toContain("AGENTKAMMER.COM");
     expect(calc).toContain("Educational only.");
+    expect(calc).toContain("length: 17");
+    expect(calc).toContain("ak-pp-foot-end");
+    expect(calc).not.toContain("ak-pp-date");
     expect(calc).not.toContain("calculator-print-inner");
+    expect(css).toContain(".calculator-print-doc .ak-pp-lead");
+    expect(css).toContain("line-height: 1.6");
     expect(css).toContain(".calculator-print-doc");
     expect(css).toContain("min-height: 10in");
     expect(css).toContain("body:has(.calculator-sheet) .calculator-screen");

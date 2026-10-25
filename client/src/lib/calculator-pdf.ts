@@ -181,25 +181,23 @@ export function calculatorPdfLayout(fields: CalculatorPdfFields, input: CarryInp
   hairline(commands, top, CARD_EDGE, 0.8, 306 - 26, 306 + 26);
   top += 14;
   drawTrackedCenter(commands, "CALCULATOR", 306, PAGE_H - (top + 7), 7, 1.8);
-  top += 16;
-  drawTrackedCenter(commands, paperDate(), 306, PAGE_H - (top + 7), 6.5, 1.1);
-  top += 22;
+  top += 20;
 
   top = drawSectionHead(commands, "01", "THE MONTH", top);
   drawText(commands, formatUsd(result.monthly), LEFT, PAGE_H - (top + 46), 46, "F3", DEEP);
-  top += 54;
+  top += 62;
   top = drawLines(
     commands,
     wrap("What does this home cost each month?", 13, RIGHT - LEFT),
     LEFT,
     top,
     13,
-    16,
+    19,
     "F5",
   );
-  top += 4;
-  const cash = `On a ${formatUsd(input.price)} purchase with ${input.downPercent}% down. Cash to close begins near ${formatUsd(result.down)}, before closing costs.`;
-  top = drawLines(commands, wrap(cash, 10, RIGHT - LEFT), LEFT, top, 10, 13, "F1");
+  top += 8;
+  const cash = `On a ${formatUsd(input.price)} purchase with ${input.downPercent}% down. Cash to close begins near ${formatUsd(result.down)}.`;
+  top = drawLines(commands, wrap(cash, 10, RIGHT - LEFT), LEFT, top, 10, 16, "F1");
   top += 12;
 
   const inlayTop = top;
@@ -278,6 +276,8 @@ export function calculatorPdfLayout(fields: CalculatorPdfFields, input: CarryInp
   hairline(commands, PAGE_H - 42, LABEL, 0.4, 214, 248);
   drawText(commands, "AGENTKAMMER.COM", 306 - textWidth("AGENTKAMMER.COM", 7) / 2, 40, 7, "F1", LABEL);
   hairline(commands, PAGE_H - 42, LABEL, 0.4, 364, 398);
+  const dated = paperDate();
+  drawText(commands, dated, RIGHT - textWidth(dated, 6), 40, 6, "F1", LABEL);
 
   return { commands: commands.join("\n"), bottom: notesBottom };
 }
