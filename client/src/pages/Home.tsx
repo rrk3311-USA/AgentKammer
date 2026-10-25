@@ -129,7 +129,8 @@ export default function Home() {
         eyebrow="Contact"
         showEyebrow={false}
         align="center"
-        lead={<WhatsChangingPills className="mb-10 w-full sm:mb-12" />}
+        compact
+        lead={<WhatsChangingPills className="mb-4 w-full sm:mb-5" />}
       />
     </main>
   );

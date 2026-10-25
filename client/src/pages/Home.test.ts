@@ -23,12 +23,19 @@ describe("homepage close", () => {
     expect(html).not.toContain("Livability");
     expect(html).toContain("<span>Contact</span>");
     expect(html).toContain("ak-call-button");
+    expect(html).toContain("ak-quiet-chip");
     expect(html).toContain("write to us directly");
     expect(html).not.toContain("write to me");
     expect(html).toContain("flex-wrap items-center justify-center");
     expect(html).not.toContain("overflow-x-auto");
     expect(html).not.toContain("flex-nowrap");
     expect(html).toContain("flex flex-col items-center text-center");
+    expect(html).toContain("mb-4 w-full sm:mb-5");
+    expect(html).toContain("py-6 lg:py-8");
+    expect(html).toContain("px-3.5 py-2");
+    expect(html).toContain("text-[11px]");
+    expect(html).toContain("mt-2.5");
+    expect(html).toContain("mt-4");
   });
 
   it("keeps Start Here once in the Situations header, not in the close", () => {

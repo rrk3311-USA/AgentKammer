@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import React, { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
@@ -102,7 +103,9 @@ describe("WhatsChangingPills", () => {
     expect(html).toContain("data-ak-whats-changing");
     expect(html).toContain("flex-wrap items-center justify-center");
     expect(html).not.toContain("overflow-x-auto");
+    expect(html).toContain("ak-quiet-chip");
     expect(html).toContain("Executive Relocation");
+    expect(html).toContain("First Home");
     expect(html).toContain('href="/situations/executive-relocation-nyc"');
     expect(html).not.toContain("bg-[#161C28]");
   });
@@ -113,5 +116,14 @@ describe("WhatsChangingPills", () => {
     );
     expect(html).toContain("data-ak-whats-changing");
     expect(html).toContain("bg-[#161C28]");
+  });
+
+  it("gives every quiet chip a 200ms platinum hover and focus glow", () => {
+    const css = readFileSync(new URL("../index.css", import.meta.url), "utf8");
+    expect(css).toContain(".ak-quiet-chip");
+    expect(css).toContain("200ms ease");
+    expect(css).toContain("rgba(229, 228, 226");
+    expect(css).toContain(".ak-quiet-chip:hover");
+    expect(css).toContain(".ak-quiet-chip:focus-visible");
   });
 });

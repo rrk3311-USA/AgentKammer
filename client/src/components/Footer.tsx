@@ -23,7 +23,7 @@ export function isHomePath(location: string) {
 }
 
 const quietChipClass =
-  "shrink-0 rounded-full border border-brand-ivory/12 bg-brand-ivory/[0.05] px-2.5 py-1 text-[9.5px] font-medium uppercase tracking-[0.08em] text-brand-ivory/62 transition-colors hover:border-brand-ivory/28 hover:text-brand-ivory/88";
+  "ak-quiet-chip shrink-0 rounded-full border border-brand-ivory/12 bg-brand-ivory/[0.05] px-2.5 py-1 text-[9.5px] font-medium uppercase tracking-[0.08em] text-brand-ivory/62";
 
 const situationIndexLink =
   "text-[12px] leading-5 text-brand-graphite/72 transition-colors hover:text-brand-navy";
@@ -46,7 +46,7 @@ export function WhatsChangingPills({ className }: { className?: string } = {}) {
       <p className="text-[10px] uppercase tracking-[0.2em] text-brand-ivory/48">What's Changing?</p>
       <nav
         aria-label="What's Changing"
-        className="mt-2.5 flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1.5"
+        className="mt-1.5 flex flex-wrap items-center justify-center gap-x-1 gap-y-1"
       >
         {whatsChangingItems.map((item) => (
           <Link key={item.href + item.label} href={item.href} className={quietChipClass}>

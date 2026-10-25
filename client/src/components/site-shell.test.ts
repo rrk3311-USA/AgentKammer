@@ -47,6 +47,30 @@ describe("CTA button copy", () => {
     expect(html).toContain("text-[14px]");
   });
 
+  it("shrinks the compact homepage Contact button without dropping the stripe class", () => {
+    const html = renderToStaticMarkup(
+      createElement(
+        Router,
+        { ssrPath: "/" },
+        createElement(CTA, {
+          title: "Get in touch",
+          description: "Write to us directly.",
+          href: "/contact",
+          label: "Contact",
+          eyebrow: "Contact",
+          showEyebrow: false,
+          compact: true,
+        }),
+      ),
+    );
+    expect(html).toContain("ak-call-button");
+    expect(html).toContain("px-3.5 py-2");
+    expect(html).toContain("text-[11px]");
+    expect(html).toContain("py-6 lg:py-8");
+    expect(html).not.toContain("px-5 py-4");
+    expect(html).not.toContain("sm:min-w-[16rem]");
+  });
+
   it("keeps the deep-navy closer and a quieter Guidance text link", () => {
     const html = renderToStaticMarkup(
       createElement(

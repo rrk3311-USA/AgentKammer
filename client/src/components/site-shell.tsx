@@ -610,6 +610,7 @@ export function CTA({
   align = "start",
   showEyebrow,
   lead,
+  compact = false,
 }: {
   title?: string;
   description?: string;
@@ -621,17 +622,20 @@ export function CTA({
   align?: "start" | "center";
   showEyebrow?: boolean;
   lead?: ReactNode;
+  compact?: boolean;
 }) {
   const hideSectionEyebrow = showEyebrow === false || sameCtaPhrase(eyebrow, title);
   const hideButtonEyebrow = sameCtaPhrase(eyebrow, label);
   const centered = align === "center";
   const actionClass = hideButtonEyebrow
-    ? "ak-call-button group inline-flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-[14px] font-semibold uppercase tracking-[0.12em] transition-colors sm:w-auto sm:min-w-[16rem] sm:gap-6"
+    ? compact
+      ? "ak-call-button group inline-flex w-auto items-center justify-between gap-2.5 px-3.5 py-2 text-left text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors sm:min-w-0 sm:gap-3"
+      : "ak-call-button group inline-flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-[14px] font-semibold uppercase tracking-[0.12em] transition-colors sm:w-auto sm:min-w-[16rem] sm:gap-6"
     : "ak-call-button group grid w-full px-5 py-4 text-left transition-colors sm:min-w-[16rem]";
   const actionInner = hideButtonEyebrow ? (
     <>
       <span>{label}</span>
-      <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+      <ArrowRight className={cn("shrink-0 transition-transform group-hover:translate-x-0.5", compact ? "h-3.5 w-3.5" : "h-4 w-4")} strokeWidth={1.5} />
     </>
   ) : (
     <>
@@ -646,7 +650,7 @@ export function CTA({
 
   return (
     <section className="border-t border-brand-brass/30 bg-brand-navy text-brand-ivory">
-      <PageSection className="py-12 lg:py-20">
+      <PageSection className={compact ? "py-6 lg:py-8" : "py-12 lg:py-20"}>
         {lead}
         <div
           className={
@@ -659,10 +663,10 @@ export function CTA({
             {hideSectionEyebrow ? null : <p className={grammar.eyebrowOnDark}>{eyebrow}</p>}
             <h2 className={cn(hideSectionEyebrow ? "" : "mt-4", grammar.sectionOnDark)}>{title}</h2>
             {description ? (
-              <p className={cn("mt-5", grammar.bodyOnDark, centered && "mx-auto")}>{description}</p>
+              <p className={cn(compact ? "mt-2.5" : "mt-5", grammar.bodyOnDark, centered && "mx-auto")}>{description}</p>
             ) : null}
           </div>
-          <div className={cn("grid gap-3 sm:min-w-[16rem]", centered && "mt-8")}>
+          <div className={cn("grid gap-3", !compact && "sm:min-w-[16rem]", centered && (compact ? "mt-4" : "mt-8"))}>
             {href.startsWith("#") ? (
               <a
                 href={href}
