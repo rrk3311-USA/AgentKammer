@@ -999,7 +999,7 @@
     flex-direction: row;
     align-items: stretch;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
   }
 
   .ak-pair-btn {
@@ -1007,27 +1007,35 @@
     flex: 1 1 0;
     align-items: center;
     justify-content: center;
-    min-height: 48px;
+    min-height: 44px;
     min-width: 0;
-    padding: 0.85rem 0.9rem;
-    border: 1.5px solid #737b83;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid #b8bbc0;
     border-radius: 4px;
     background: transparent;
     color: #c9ced3;
-    font-size: 15px;
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     text-decoration: none;
     box-sizing: border-box;
+    transition: background-color 160ms ease, border-color 160ms ease;
+  }
+
+  .ak-pair-btn:hover,
+  .ak-pair-btn:focus-visible {
+    background: rgba(201, 206, 211, 0.08);
+    border-color: #c9ced3;
+    outline: none;
   }
 
   @media (min-width: 640px) {
     .ak-pair-btn {
       flex: 0 0 auto;
-      min-width: 12.5rem;
-      padding: 0.85rem 1.35rem;
-      font-size: 18px;
+      min-width: 9.5rem;
+      padding: 0.6rem 1.15rem;
+      font-size: 12px;
     }
   }
 

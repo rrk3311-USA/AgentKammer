@@ -37,18 +37,23 @@ describe("homepage close CTAs", () => {
     expect(source).not.toContain("cta=silver");
   });
 
-  it("uses matching titanium outlines on Stone Blue", () => {
-    expect(css).toContain("1.5px solid #737b83");
+  it("uses smaller platinum outlines on Stone Blue", () => {
+    expect(css).toContain("1px solid #b8bbc0");
     expect(css).toContain("color: #c9ced3");
     expect(css).toContain("background: transparent");
+    expect(css).toContain("rgba(201, 206, 211, 0.08)");
     expect(css).toContain("flex-direction: row");
-    expect(css).toContain("letter-spacing: 0.16em");
+    expect(css).toContain("letter-spacing: 0.2em");
+    expect(css).toContain("min-height: 44px");
+    expect(css).toContain("font-size: 11px");
     expect(css).toContain("border-radius: 4px");
+    expect(css).not.toContain("1.5px solid #737b83");
     expect(css).not.toContain("ak-pair-btn--brass");
     expect(css).not.toContain("ak-pair-btn--silver");
     const pairCss = css.slice(css.indexOf(".ak-pair-btn {"), css.indexOf(".ak-metal-divider"));
     expect(pairCss).not.toContain("linear-gradient");
     expect(pairCss).not.toContain("repeating-linear-gradient");
     expect(contrast("#C9CED3", "#2A3447")).toBeGreaterThanOrEqual(4.5);
+    expect(contrast("#B8BBC0", "#2A3447")).toBeGreaterThanOrEqual(4.5);
   });
 });
