@@ -4,6 +4,7 @@ import { HomeCloseCtas } from "@/components/HomeCloseCtas";
 import { WhatsChangingPills } from "@/components/Footer";
 import { CTA } from "@/components/site-shell";
 import { DecisionFramework } from "@/components/DecisionFramework";
+import { HowWeDecideArt } from "@/components/HowWeDecideArt";
 import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
@@ -74,6 +75,7 @@ export default function Home() {
         eyebrow="How We Decide"
         title="Three questions. Then judgment."
         items={howWeDecide}
+        figure={<HowWeDecideArt />}
       />
 
       <section className="bg-brand-navy text-brand-ivory">
