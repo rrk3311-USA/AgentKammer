@@ -7,8 +7,15 @@ import { primaryNav } from "@/components/site-shell";
 import { FOOTER_DARK_LINKS, getSiteMapGroups } from "@/data/site-map";
 import HomeV3 from "./HomeV3";
 
-function renderHomeV3() {
-  return renderToStaticMarkup(createElement(Router, { ssrPath: "/home-v3" }, createElement(HomeV3)));
+function renderHomeV3(search = "") {
+  const path = search ? `/home-v3?${search}` : "/home-v3";
+  return renderToStaticMarkup(createElement(Router, { ssrPath: path }, createElement(HomeV3)));
+}
+
+function headerHtml(html: string) {
+  const start = html.indexOf("<header");
+  const end = html.indexOf("</header>");
+  return html.slice(start, end);
 }
 
 describe("home v3", () => {
@@ -48,6 +55,29 @@ describe("home v3", () => {
     expect(html).not.toMatch(/instagram\.com|youtube\.com/i);
     expect(html).not.toContain("gradient");
     expect(html).not.toMatch(/shadow-(?!none)/);
+  });
+
+  it("keeps the default header as the monogram only", () => {
+    const header = headerHtml(renderHomeV3());
+    expect(header).not.toContain("sticky");
+    expect(header).not.toContain("data-lockup-name");
+    expect(header).not.toContain("data-header-divider");
+    expect(header).not.toContain(">Agent Kammer<");
+  });
+
+  it("offers a sticky wordmark and a sticky divided lockup", () => {
+    const wordmark = headerHtml(renderHomeV3("header=wordmark"));
+    expect(wordmark).toContain("sticky");
+    expect(wordmark).toContain("data-lockup-name");
+    expect(wordmark).toContain(">Agent Kammer<");
+    expect(wordmark).not.toContain("data-header-divider");
+    expect(wordmark).toContain('href="/home-v3?header=wordmark"');
+
+    const divider = headerHtml(renderHomeV3("header=divider"));
+    expect(divider).toContain("sticky");
+    expect(divider).toContain("data-header-divider");
+    expect(divider).toContain(">Agent Kammer<");
+    expect(divider).toContain('href="/home-v3?header=divider"');
   });
 
   it("is not linked from the live header, footer, or sitemap", () => {

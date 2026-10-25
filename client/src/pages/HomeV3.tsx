@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "wouter";
+import { Link, useSearch } from "wouter";
 import NotFound from "@/pages/not-found";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -75,6 +75,41 @@ function ChangingButton() {
   );
 }
 
+type HeaderPreview = "wordmark" | "divider";
+
+function headerPreview(search: string): HeaderPreview | null {
+  const value = new URLSearchParams(search).get("header");
+  return value === "wordmark" || value === "divider" ? value : null;
+}
+
+function BrandLockup({ preview }: { preview: HeaderPreview | null }) {
+  const href = preview ? `/home-v3?header=${preview}` : "/home-v3";
+  if (!preview) {
+    return (
+      <Link href={href} aria-label="Agent Kammer" className={`${focus} inline-flex shrink-0`}>
+        <BrandMonogram tone="stone" className="block h-11 w-11" />
+      </Link>
+    );
+  }
+
+  return (
+    <Link href={href} aria-label="Agent Kammer" className={`${focus} inline-flex min-w-0 items-center`}>
+      <BrandMonogram tone="stone" className="block h-11 w-11 shrink-0" />
+      {preview === "divider" ? (
+        <span aria-hidden data-header-divider className="mx-2.5 h-6 w-px shrink-0 bg-[#2A3447] sm:mx-3" />
+      ) : (
+        <span aria-hidden className="w-2.5 shrink-0 sm:w-3" />
+      )}
+      <span
+        data-lockup-name
+        className="truncate font-serif text-[1.7rem] font-medium leading-none tracking-[-0.02em] text-[#2A3447] sm:text-[1.85rem]"
+      >
+        Agent Kammer
+      </span>
+    </Link>
+  );
+}
+
 function NavLinks({ onNavigate, className }: { onNavigate?: () => void; className: string }) {
   return (
     <nav aria-label="Primary" className={className}>
@@ -102,6 +137,7 @@ export function HomeV3Gate() {
 
 export default function HomeV3() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const preview = headerPreview(useSearch());
 
   usePageMetadata({
     title: "Agent Kammer | Private Housing Advisory",
@@ -121,12 +157,13 @@ export default function HomeV3() {
   }, [menuOpen]);
 
   return (
-    <div id="top" data-testid="page-home-v3" className="min-h-screen overflow-x-hidden bg-[#F5F2EB] text-[#2F3136]">
-      <header className="border-b border-[#D8D1C7] bg-[#F5F2EB]">
+    <div id="top" data-testid="page-home-v3" className="min-h-screen overflow-x-clip bg-[#F5F2EB] text-[#2F3136]">
+      <header
+        data-header-preview={preview ?? undefined}
+        className={`border-b border-[#D8D1C7] bg-[#F5F2EB]${preview ? " sticky top-0 z-40" : ""}`}
+      >
         <div className="mx-auto flex max-w-[90rem] items-center justify-between gap-4 px-5 py-4 sm:px-8 lg:px-12">
-          <Link href="/home-v3" aria-label="Agent Kammer" className={`${focus} inline-flex shrink-0`}>
-            <BrandMonogram tone="stone" className="block h-11 w-11" />
-          </Link>
+          <BrandLockup preview={preview} />
           <div className="hidden items-center gap-8 lg:flex xl:gap-10">
             <NavLinks className="flex items-center gap-7 xl:gap-9" />
             <ChangingButton />
