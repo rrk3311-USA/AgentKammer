@@ -9,23 +9,24 @@ function renderHome() {
 }
 
 describe("homepage close", () => {
-  it("puts the quiet chip band before a centered Contact line, with no internal note", () => {
+  it("keeps pills and Get in touch in one navy band, with no Livability note", () => {
     const html = renderHome();
     const chips = html.indexOf("data-ak-whats-changing");
-    const contact = html.indexOf("If you already know what you need, write to me directly.");
-    const heading = html.indexOf(">Contact<");
+    const heading = html.indexOf("Get in touch");
+    const line = html.indexOf("Work through the steps, starting with your Situation, for a clear recommendation, or write to me directly.");
     expect(chips).toBeGreaterThan(-1);
-    expect(contact).toBeGreaterThan(chips);
     expect(heading).toBeGreaterThan(chips);
+    expect(line).toBeGreaterThan(heading);
+    expect(html).not.toContain("bg-[#161C28]");
     expect(html).not.toContain("When you want a human reply");
-    expect(html).not.toContain("The homepage starts with Guidance");
-    expect(html).not.toContain("Write only if");
-    expect(html).not.toContain("Situation Assessment, Property Assessment, or Livability Score");
-    expect(html).toContain("flex flex-col items-center text-center");
+    expect(html).not.toContain("If you already know what you need");
+    expect(html).not.toContain("Livability");
+    expect(html).toContain("<span>Contact</span>");
     expect(html).toContain("ak-call-button");
+    expect(html).toContain("flex flex-col items-center text-center");
   });
 
-  it("keeps Start Here once in the Situations header, not in the Contact close", () => {
+  it("keeps Start Here once in the Situations header, not in the close", () => {
     const html = renderHome();
     expect(html).toContain("Start Here");
     expect(html.match(/Start Here/g)?.length).toBe(1);

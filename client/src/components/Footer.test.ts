@@ -6,6 +6,7 @@ import {
   Footer,
   FooterIvoryIndex,
   WhatsChangingBand,
+  WhatsChangingPills,
   footerTopRuleClass,
   isHomePath,
   isSituationPagePath,
@@ -93,13 +94,23 @@ describe("Footer situation index", () => {
   });
 });
 
-describe("WhatsChangingBand", () => {
-  it("renders a quiet dark chip row", () => {
+describe("WhatsChangingPills", () => {
+  it("renders tappable quiet chips without their own section plate", () => {
+    const html = renderToStaticMarkup(
+      createElement(Router, { ssrPath: "/" }, createElement(WhatsChangingPills)),
+    );
+    expect(html).toContain("data-ak-whats-changing");
+    expect(html).toContain("ak-chip-scroll");
+    expect(html).toContain("Executive Relocation");
+    expect(html).toContain('href="/situations/executive-relocation-nyc"');
+    expect(html).not.toContain("bg-[#161C28]");
+  });
+
+  it("keeps the Start Here footer plate as a separate band", () => {
     const html = renderToStaticMarkup(
       createElement(Router, { ssrPath: "/" }, createElement(WhatsChangingBand)),
     );
-    expect(html).toContain('data-ak-whats-changing');
-    expect(html).toContain("ak-chip-scroll");
-    expect(html).toContain("Executive Relocation");
+    expect(html).toContain("data-ak-whats-changing");
+    expect(html).toContain("bg-[#161C28]");
   });
 });

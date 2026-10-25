@@ -608,6 +608,8 @@ export function CTA({
   guidanceLabel,
   onGuidanceClick,
   align = "start",
+  showEyebrow,
+  lead,
 }: {
   title?: string;
   description?: string;
@@ -617,8 +619,10 @@ export function CTA({
   guidanceLabel?: string;
   onGuidanceClick?: () => void;
   align?: "start" | "center";
+  showEyebrow?: boolean;
+  lead?: ReactNode;
 }) {
-  const hideSectionEyebrow = sameCtaPhrase(eyebrow, title);
+  const hideSectionEyebrow = showEyebrow === false || sameCtaPhrase(eyebrow, title);
   const hideButtonEyebrow = sameCtaPhrase(eyebrow, label);
   const centered = align === "center";
   const actionClass = hideButtonEyebrow
@@ -643,6 +647,7 @@ export function CTA({
   return (
     <section className="border-t border-brand-brass/30 bg-brand-navy text-brand-ivory">
       <PageSection className="py-12 lg:py-20">
+        {lead}
         <div
           className={
             centered

@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { ArrowRight, MoveRight } from "lucide-react";
-import { WhatsChangingBand } from "@/components/Footer";
+import { WhatsChangingPills } from "@/components/Footer";
 import { CTA } from "@/components/site-shell";
 import { DecisionFramework } from "@/components/DecisionFramework";
 import { grammar } from "@/components/visual-grammar";
@@ -121,14 +121,15 @@ export default function Home() {
         </div>
       </section>
 
-      <WhatsChangingBand />
       <CTA
-        title="Contact"
-        description="If you already know what you need, write to me directly."
+        title="Get in touch"
+        description="Work through the steps, starting with your Situation, for a clear recommendation, or write to me directly."
         href="/contact"
         label="Contact"
         eyebrow="Contact"
+        showEyebrow={false}
         align="center"
+        lead={<WhatsChangingPills className="mb-10 w-full sm:mb-12" />}
       />
     </main>
   );

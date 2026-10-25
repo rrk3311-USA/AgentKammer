@@ -40,23 +40,29 @@ export function footerTopRuleClass(exploreOtherSituations: boolean, home = false
   );
 }
 
+export function WhatsChangingPills({ className }: { className?: string } = {}) {
+  return (
+    <div data-ak-whats-changing className={className}>
+      <p className="text-[10px] uppercase tracking-[0.2em] text-brand-ivory/48">What's Changing?</p>
+      <nav
+        aria-label="What's Changing"
+        className="ak-chip-scroll mt-2.5 flex flex-nowrap items-center gap-1.5 overflow-x-auto sm:flex-wrap sm:overflow-visible"
+      >
+        {whatsChangingItems.map((item) => (
+          <Link key={item.href + item.label} href={item.href} className={quietChipClass}>
+            {item.label}
+          </Link>
+        ))}
+      </nav>
+    </div>
+  );
+}
+
 export function WhatsChangingBand() {
   return (
-    <section className="bg-[#161C28] text-brand-ivory" data-ak-whats-changing>
+    <section className="bg-[#161C28] text-brand-ivory">
       <div className="mx-auto w-full max-w-site px-5 py-5 sm:px-6 lg:px-10 lg:py-6">
-        <h3 className="text-[10px] uppercase tracking-[0.2em] text-brand-ivory/48">
-          What's Changing?
-        </h3>
-        <nav
-          aria-label="What's Changing"
-          className="ak-chip-scroll mt-2.5 flex flex-nowrap items-center gap-1.5 overflow-x-auto sm:flex-wrap sm:overflow-visible"
-        >
-          {whatsChangingItems.map((item) => (
-            <Link key={item.href + item.label} href={item.href} className={quietChipClass}>
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <WhatsChangingPills />
       </div>
     </section>
   );
