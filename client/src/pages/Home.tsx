@@ -76,7 +76,7 @@ export default function Home() {
       />
 
       <section className="bg-brand-navy text-brand-ivory">
-        <div className="mx-auto flex w-full max-w-site flex-col items-center px-5 py-6 text-center sm:px-6 lg:px-10 lg:py-8">
+        <div className="mx-auto flex w-full max-w-site flex-col items-start px-5 py-6 text-left sm:px-6 lg:px-10 lg:py-8">
           <h2 className={grammar.sectionOnDark}>Start from what changed.</h2>
           <WhatsChangingPills className="mt-4 w-full" showKicker={false} />
         </div>

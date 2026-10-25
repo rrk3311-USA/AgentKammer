@@ -29,7 +29,9 @@ describe("homepage close", () => {
     expect(html).not.toContain("ak-felt-grid");
     expect(html).not.toContain("High-Value Relocation");
     expect(html).not.toContain("Livability");
-    expect(html).toContain("flex-wrap items-center justify-center");
+    expect(html).toContain("flex-wrap items-center justify-start");
+    expect(html).toContain("items-start");
+    expect(html).toContain("text-left");
     expect(html).toContain("px-3.5 py-2");
     expect(html).toContain("py-6 lg:py-8");
   });

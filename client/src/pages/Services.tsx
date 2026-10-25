@@ -25,7 +25,7 @@ export default function Services() {
   return (
     <main className="bg-brand-ivory">
       <section className="bg-brand-navy text-brand-ivory">
-        <div className="mx-auto flex w-full max-w-site flex-col items-center px-5 py-10 text-center sm:px-6 lg:px-10 lg:py-14">
+        <div className="mx-auto flex w-full max-w-site flex-col items-start px-5 py-10 text-left sm:px-6 lg:px-10 lg:py-14">
           <p className={grammar.eyebrowOnDark}>Situations</p>
           <h1 className={`mt-3 max-w-[16ch] ${grammar.displayOnDark}`}>Start from what changed.</h1>
           <p className={`mt-4 max-w-xl ${grammar.bodyOnDark}`}>
@@ -38,7 +38,7 @@ export default function Services() {
           <nav
             aria-label="What's Changing"
             data-ak-situations-pills
-            className="mt-4 flex flex-wrap items-center justify-center gap-2"
+            className="mt-4 flex flex-wrap items-center justify-start gap-2"
           >
             {changeItems.map((item) => (
               <Link key={item.href + item.label} href={item.href} className={tapChipClass}>
@@ -51,7 +51,7 @@ export default function Services() {
             What decision are you facing?
           </h2>
           <div
-            className="mt-4 flex flex-wrap items-center justify-center gap-2"
+            className="mt-4 flex flex-wrap items-center justify-start gap-2"
             role="group"
             aria-label="What decision are you facing? Opens Guidance"
           >
@@ -73,7 +73,7 @@ export default function Services() {
           </h2>
           <nav
             aria-label="What are you trying to understand?"
-            className="mt-4 flex flex-wrap items-center justify-center gap-2"
+            className="mt-4 flex flex-wrap items-center justify-start gap-2"
           >
             {understandItems.map((item) => (
               <Link key={item.href + item.label} href={item.href} className={tapChipClass}>

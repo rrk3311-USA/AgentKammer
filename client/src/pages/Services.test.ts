@@ -31,6 +31,11 @@ describe("What's Changing page", () => {
     expect(html).not.toContain("ModuleCards");
     expect(html).not.toContain("ak-felt-grid");
     expect(html).not.toContain("CompactLinkRow");
+    expect(html).toContain("items-start");
+    expect(html).toContain("text-left");
+    expect(html).toContain("flex-wrap items-center justify-start");
+    expect(html.match(/flex-wrap items-center justify-start/g)).toHaveLength(3);
+    expect(html).not.toContain("justify-center");
   });
 
   it("uses two styles only: navy pills and a light assessment band", () => {

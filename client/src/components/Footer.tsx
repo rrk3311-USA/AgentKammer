@@ -50,14 +50,14 @@ export function WhatsChangingPills({
   showKicker = true,
 }: { className?: string; showKicker?: boolean } = {}) {
   return (
-    <div data-ak-whats-changing className={cn("text-center", className)}>
+    <div data-ak-whats-changing className={cn("text-left", className)}>
       {showKicker ? (
         <p className="text-[10px] uppercase tracking-[0.2em] text-brand-ivory/48">What's Changing?</p>
       ) : null}
       <nav
         aria-label="What's Changing"
         className={cn(
-          "flex flex-wrap items-center justify-center gap-x-1 gap-y-1",
+          "flex flex-wrap items-center justify-start gap-x-1 gap-y-1",
           showKicker ? "mt-1.5" : "mt-0",
         )}
       >

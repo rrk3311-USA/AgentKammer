@@ -59,7 +59,7 @@ describe("Footer situation index", () => {
     expect(html).toContain("What&#x27;s Changing?");
     expect(html).toContain('aria-label="What&#x27;s Changing"');
     expect(html).not.toContain("Explore other situations");
-    expect(html).toContain("flex-wrap items-center justify-center");
+    expect(html).toContain("flex-wrap items-center justify-start");
     expect(html).toContain("bg-[#161C28]");
     expect(html).toContain("text-[9.5px]");
     expect(html).not.toContain("rounded-full border border-brand-border bg-white");
@@ -120,7 +120,7 @@ describe("WhatsChangingPills", () => {
       createElement(Router, { ssrPath: "/" }, createElement(WhatsChangingPills)),
     );
     expect(html).toContain("data-ak-whats-changing");
-    expect(html).toContain("flex-wrap items-center justify-center");
+    expect(html).toContain("flex-wrap items-center justify-start");
     expect(html).not.toContain("overflow-x-auto");
     expect(html).toContain("ak-quiet-chip");
     expect(html).toContain("Executive Relocation");
