@@ -41,8 +41,8 @@ describe("homepage close", () => {
     expect(html).toContain("How We Decide");
     expect(html).toContain("Three questions. Then judgment.");
     expect(html).toContain("data-ak-how-we-decide-art");
-    expect(html).toContain("#2A3447");
-    expect(html).toContain("#C9CED3");
+    expect(html).toContain("/images/situations/inheritance-housing-nyc.png");
+    expect(html).toContain("#FDF3DF");
     expect(html).not.toContain("owl");
   });
 

@@ -73,7 +73,7 @@ export function DecisionFramework({
         {figure ? (
           <figure
             data-ak-how-we-decide-art
-            className="mx-0 mt-8 max-w-[11.5rem] lg:col-span-3 lg:mt-3 lg:max-w-none"
+            className="mx-0 mt-8 max-w-[14rem] lg:col-span-3 lg:mt-3 lg:max-w-none"
           >
             {figure}
           </figure>

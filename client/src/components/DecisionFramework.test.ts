@@ -39,7 +39,7 @@ describe("DecisionFramework", () => {
     expect(html).toContain("lg:grid-cols-12");
     expect(html).toContain("lg:col-span-9");
     expect(html).toContain("lg:col-span-3");
-    expect(html).toContain("max-w-[11.5rem]");
+    expect(html).toContain("max-w-[14rem]");
     expect(html).toContain("Three questions. Then judgment.");
   });
 
