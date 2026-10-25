@@ -1448,6 +1448,297 @@
   }
 }
 
+/* Homepage preview: split hero, approach band, platinum-paper rows, lighter close. */
+.ak-home-hero{
+  display:grid;
+  background:#F5F2EB;
+}
+.ak-home-hero-copy{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:2.25rem 1.25rem 2rem;
+}
+.ak-home-hero-title{
+  margin:0;
+  max-width:10ch;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-weight:400;
+  font-size:clamp(2.75rem,10.5vw,4.5rem);
+  line-height:.92;
+  color:#2A3447;
+}
+.ak-home-hero-aside{
+  display:flex;
+  align-items:stretch;
+  gap:1rem;
+  margin-top:1.5rem;
+  max-width:28rem;
+}
+.ak-home-hero-rule{
+  flex:0 0 1px;
+  width:1px;
+  background:#B8BBC0;
+}
+.ak-home-hero-sub{
+  margin:0;
+  font-family:Inter,system-ui,sans-serif;
+  font-size:15px;
+  line-height:1.55;
+  color:#2F3136;
+}
+.ak-home-hero-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:max-content;
+  margin-top:1.75rem;
+  padding:.85rem 1.5rem;
+  background:#2A3447;
+  color:#F5F2EB;
+  font-family:Inter,system-ui,sans-serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+}
+.ak-home-hero-photo{
+  position:relative;
+  min-height:17.5rem;
+  overflow:hidden;
+  background:#D8D1C7;
+}
+.ak-home-hero-img{
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:17.5rem;
+  object-fit:cover;
+  object-position:center 35%;
+  filter:saturate(.62) contrast(.96) brightness(.94);
+}
+.ak-home-approach{
+  background:#0F1B2D;
+  color:#F5F2EB;
+}
+.ak-home-approach-inner{
+  margin:0 auto;
+  max-width:90rem;
+  padding:2.25rem 1.25rem 2rem;
+}
+.ak-home-approach-kicker{
+  margin:0;
+  font-family:Inter,system-ui,sans-serif;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:#B8BBC0;
+}
+.ak-home-approach-title{
+  margin:.7rem 0 0;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-weight:400;
+  font-size:clamp(1.85rem,5vw,2.55rem);
+  line-height:1.08;
+  color:#F5F2EB;
+}
+.ak-home-approach-rule{
+  display:block;
+  width:3.25rem;
+  height:1px;
+  margin:1rem 0 0;
+  background:#B8BBC0;
+}
+.ak-home-approach-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  margin-top:1.75rem;
+  overflow-x:hidden;
+}
+.ak-home-approach-col{
+  padding:1.1rem 1rem 0 0;
+}
+.ak-home-approach-col:nth-child(odd){
+  padding-right:1rem;
+  border-right:1px solid rgba(184,187,192,.28);
+}
+.ak-home-approach-col:nth-child(n+3){
+  margin-top:.35rem;
+  padding-top:1.15rem;
+  border-top:1px solid rgba(184,187,192,.22);
+}
+.ak-home-approach-icon{
+  display:block;
+  width:1.15rem;
+  height:1.15rem;
+  color:#B8BBC0;
+}
+.ak-home-approach-label{
+  margin:.7rem 0 0;
+  font-family:Inter,system-ui,sans-serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:#B8BBC0;
+}
+.ak-home-approach-copy{
+  margin:.45rem 0 0;
+  max-width:22em;
+  font-family:Inter,system-ui,sans-serif;
+  font-size:14px;
+  line-height:1.5;
+  color:#F5F2EB;
+}
+.ak-home-rows{
+  position:relative;
+  overflow:hidden;
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+.ak-home-rows .ak-pp-frame{
+  inset:12px;
+}
+.ak-home-rows .ak-pp-frame .rule-out{
+  border:.8px solid #B8BBC0;
+}
+.ak-home-rows .ak-pp-frame .rule-in{
+  inset:2mm;
+  border:.55px solid #737B83;
+}
+.ak-home-rows-inner{
+  position:relative;
+  z-index:1;
+  margin:0 auto;
+  max-width:90rem;
+  padding:2.6rem 1.85rem 2.15rem;
+}
+.ak-home-rows-kicker{
+  margin:0;
+  font-family:Inter,system-ui,sans-serif;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:#737B83;
+}
+.ak-home-rows-title{
+  margin:.7rem 0 1.25rem;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-weight:400;
+  font-size:clamp(1.85rem,5vw,2.55rem);
+  line-height:1.08;
+  color:#2A3447;
+}
+.ak-home-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  width:100%;
+  padding:.95rem 0;
+  border-top:.55px solid rgba(184,187,192,.62);
+  text-decoration:none;
+}
+.ak-home-row:last-child{
+  border-bottom:.55px solid rgba(184,187,192,.62);
+}
+.ak-home-row:hover .ak-home-row-label,
+.ak-home-row:focus-visible .ak-home-row-label{
+  color:#161C28;
+}
+.ak-home-row:hover .ak-home-row-arrow,
+.ak-home-row:focus-visible .ak-home-row-arrow{
+  color:#2A3447;
+}
+.ak-home-row-label{
+  font-family:Inter,system-ui,sans-serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#2A3447;
+  text-align:left;
+}
+.ak-home-row-arrow{
+  flex:0 0 auto;
+  width:1rem;
+  height:1rem;
+  color:#737B83;
+}
+.ak-home-close{
+  background-color:#414B64;
+  background-image:url("/chrome/stone-bg.png");
+  background-size:cover;
+  background-blend-mode:soft-light;
+  color:#F5F2EB;
+}
+.ak-home-close-inner{
+  margin:0 auto;
+  max-width:20rem;
+  padding:1.75rem 1.25rem 2rem;
+  text-align:center;
+}
+.ak-home-close-copy{
+  margin:0 0 1rem;
+  font-family:Inter,system-ui,sans-serif;
+  font-size:15px;
+  line-height:1.6;
+  color:#F5F2EB;
+}
+@media (min-width:640px){
+  .ak-home-hero-copy{padding:3rem 2.25rem}
+  .ak-home-hero-photo,
+  .ak-home-hero-img{min-height:22rem}
+  .ak-home-approach-inner{padding:2.75rem 1.5rem 2.5rem}
+  .ak-home-rows .ak-pp-frame{inset:18px}
+  .ak-home-rows-inner{padding:3.25rem 2.75rem 2.85rem}
+}
+@media (min-width:1024px){
+  .ak-home-hero{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    min-height:36rem;
+  }
+  .ak-home-hero-copy{
+    padding:5rem 4.5rem 5rem 2.5rem;
+  }
+  .ak-home-hero-photo,
+  .ak-home-hero-img{min-height:100%}
+  .ak-home-approach-inner{padding:3.5rem 2.5rem 3.25rem}
+  .ak-home-approach-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+  .ak-home-approach-col,
+  .ak-home-approach-col:nth-child(odd),
+  .ak-home-approach-col:nth-child(n+3){
+    margin-top:0;
+    padding:0 1.5rem 0 0;
+    border-top:0;
+    border-right:1px solid rgba(184,187,192,.28);
+  }
+  .ak-home-approach-col:last-child{
+    padding-right:0;
+    border-right:0;
+  }
+  .ak-home-rows .ak-pp-frame{inset:24px}
+  .ak-home-rows-inner{padding:4rem 4.5rem 3.6rem}
+}
+@media (max-width:379px){
+  .ak-home-approach-grid{grid-template-columns:1fr}
+  .ak-home-approach-col,
+  .ak-home-approach-col:nth-child(odd){
+    padding-right:0;
+    border-right:0;
+  }
+  .ak-home-approach-col + .ak-home-approach-col{
+    margin-top:.35rem;
+    padding-top:1.15rem;
+    border-top:1px solid rgba(184,187,192,.22);
+  }
+}
+
 /* Platinum Paper sheet is hidden on screen. Screen chrome stays ivory / navy. */
 .calculator-print-doc{display:none}
 
