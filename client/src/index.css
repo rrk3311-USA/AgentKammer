@@ -1558,15 +1558,68 @@ html.ak-printing .calculator-print-doc .ak-pp-copy {
 }
 
 html.ak-printing .calculator-print-doc .ak-pp-notes {
-  min-height: 18mm;
+  min-height: 0;
 }
 
 html.ak-printing .calculator-print-costs {
-  margin-top: 3mm;
+  margin-top: 2.5mm;
 }
 
 html.ak-printing .calculator-print-costs .ak-pp-row {
-  padding: 1.4mm 0;
+  padding: 1.2mm 0;
+}
+
+html.ak-printing .calculator-print-writeins {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  gap: 2.8mm;
+  margin-top: 2.5mm;
+}
+
+html.ak-printing .calculator-print-extra-costs {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 2.6mm 4mm 3mm;
+  overflow: visible !important;
+  min-height: 38mm;
+}
+
+html.ak-printing .calculator-print-notes {
+  flex: 1 1 auto;
+  min-height: 14mm;
+  margin: 0;
+}
+
+html.ak-printing .calculator-print-extra-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+html.ak-printing .calculator-print-extra-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 28mm;
+  align-items: end;
+  column-gap: 3.5mm;
+  min-height: 5.6mm;
+  padding: 0 0 0.5mm;
+  border-bottom: 0.3pt solid var(--ak-pp-rule, rgba(22, 28, 40, 0.08));
+  color: var(--ak-pp-deep, #161C28);
+}
+
+html.ak-printing .calculator-print-extra-item {
+  min-width: 0;
+  overflow: hidden;
+  font: 400 9pt/1.15 var(--ak-pp-sans, Inter, sans-serif);
+}
+
+html.ak-printing .calculator-print-extra-amount {
+  text-align: right;
+  white-space: nowrap;
+  font: 400 9.5pt/1 var(--ak-pp-serif, "Cormorant Garamond", serif);
+  font-variant-numeric: tabular-nums;
+  color: var(--ak-pp-label, #4A5058);
 }
 
 @media print {

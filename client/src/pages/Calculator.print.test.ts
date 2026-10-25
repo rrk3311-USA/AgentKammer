@@ -19,10 +19,14 @@ describe("Calculator print sheet", () => {
     expect(calc).toContain("ak-pp-page");
     expect(calc).toContain("ak-pp-inlay");
     expect(calc).toContain("ak-pp-notes");
+    expect(calc).toContain("calculator-print-writeins");
+    expect(calc).toContain("Additional costs");
+    expect(calc).toContain("BLANK_COST_AMOUNT");
+    expect(calc).toContain("paddedCostWriteIns");
     expect(calc).toContain("interactive-tools/calculator");
     expect(calc).toContain("AGENTKAMMER.COM");
     expect(calc).toContain("Educational only.");
-    expect(calc).toContain("length: 17");
+    expect(calc).toContain("length: 8");
     expect(calc).toContain("ak-pp-foot-end");
     expect(calc).not.toContain("ak-pp-date");
     expect(calc).toContain("window.print()");
@@ -70,5 +74,11 @@ describe("Calculator print sheet", () => {
     expect(paper).toContain(".ak-pp-frame::after");
     expect(paper).toMatch(/@media print\{[\s\S]*\.ak-pp-frame::after/);
     expect(css).toContain("html.ak-printing .calculator-print-doc .ak-pp-frame::after");
+    expect(css).toContain("calculator-print-writeins");
+    expect(css).toContain("calculator-print-extra-costs");
+    expect(css).toContain("min-height: 38mm");
+    expect(catalog).toContain("COST_WRITE_IN_ROWS = 5");
+    expect(catalog).toContain("BLANK_COST_AMOUNT = \"$ ______\"");
+    expect(catalog).toContain("enteredCostWriteIns");
   });
 });
