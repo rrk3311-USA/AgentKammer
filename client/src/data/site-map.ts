@@ -14,19 +14,17 @@ export type SiteMapGroup = {
   items: readonly SiteMapItem[];
 };
 
-/** Charcoal primary row. Home stays in the header; Guidance stays a floating utility. */
+/** Charcoal quiet row. Start Here and Contact live in the header, not here. */
 export const FOOTER_DARK_NAV = [
-  { label: "Start Here", href: "/situations" },
   { label: "Guides", href: "/guides" },
   { label: "About", href: "/about" },
   GET_QUALIFIED,
 ] as const;
 
-/** Charcoal quiet row. Envelope sits with Contact. Sitemap is not a competing item. */
+/** Charcoal legal row. Sitemap is not a competing item. */
 export const FOOTER_DARK_META = [
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
-  { label: "Contact", href: "/contact" },
 ] as const;
 
 /** Combined charcoal links for lock tests. No products, Intelligence, Decision Hub, Sitemap, or duplicate Guides. */

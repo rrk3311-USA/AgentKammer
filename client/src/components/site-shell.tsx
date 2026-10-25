@@ -4,12 +4,9 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { grammar } from "@/components/visual-grammar";
 
-/** Locked primary header: Home · Start Here · Guides · Interactive Tools · Contact. Guidance is the filled utility, not a sixth door. */
+/** Locked primary header: Start Here · Contact. The mark is Home. Guidance stays a utility. */
 export const primaryNav = [
-  { label: "Home", href: "/" },
   { label: "Start Here", href: "/situations" },
-  { label: "Guides", href: "/guides" },
-  { label: "Interactive Tools", href: "/tools" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
@@ -610,6 +607,11 @@ export function CTA({
   eyebrow = "Start Here",
   guidanceLabel,
   onGuidanceClick,
+  align = "start",
+  showEyebrow,
+  lead,
+  compact = false,
+  tone = "navy",
 }: {
   title?: string;
   description?: string;
@@ -618,16 +620,25 @@ export function CTA({
   eyebrow?: string;
   guidanceLabel?: string;
   onGuidanceClick?: () => void;
+  align?: "start" | "center";
+  showEyebrow?: boolean;
+  lead?: ReactNode;
+  compact?: boolean;
+  tone?: "navy" | "ivory";
 }) {
-  const hideSectionEyebrow = sameCtaPhrase(eyebrow, title);
+  const hideSectionEyebrow = showEyebrow === false || sameCtaPhrase(eyebrow, title);
   const hideButtonEyebrow = sameCtaPhrase(eyebrow, label);
+  const centered = align === "center";
+  const ivory = tone === "ivory";
   const actionClass = hideButtonEyebrow
-    ? "ak-call-button group inline-flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-[14px] font-semibold uppercase tracking-[0.12em] transition-colors sm:w-auto sm:min-w-[16rem] sm:gap-6"
+    ? compact
+      ? "ak-call-button group inline-flex w-auto items-center justify-between gap-2.5 px-3.5 py-2 text-left text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors sm:min-w-0 sm:gap-3"
+      : "ak-call-button group inline-flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-[14px] font-semibold uppercase tracking-[0.12em] transition-colors sm:w-auto sm:min-w-[16rem] sm:gap-6"
     : "ak-call-button group grid w-full px-5 py-4 text-left transition-colors sm:min-w-[16rem]";
   const actionInner = hideButtonEyebrow ? (
     <>
       <span>{label}</span>
-      <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} />
+      <ArrowRight className={cn("shrink-0 transition-transform group-hover:translate-x-0.5", compact ? "h-3.5 w-3.5" : "h-4 w-4")} strokeWidth={1.5} />
     </>
   ) : (
     <>
@@ -641,15 +652,38 @@ export function CTA({
   );
 
   return (
-    <section className="border-t border-brand-brass/30 bg-brand-navy text-brand-ivory">
-      <PageSection className="py-12 lg:py-20">
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-8">
-          <div>
-            {hideSectionEyebrow ? null : <p className={grammar.eyebrowOnDark}>{eyebrow}</p>}
-            <h2 className={cn(hideSectionEyebrow ? "" : "mt-4", grammar.sectionOnDark)}>{title}</h2>
-            <p className={cn("mt-5", grammar.bodyOnDark)}>{description}</p>
+    <section
+      className={
+        ivory
+          ? "border-t border-brand-border bg-brand-ivory text-brand-ink"
+          : "border-t border-brand-brass/30 bg-brand-navy text-brand-ivory"
+      }
+    >
+      <PageSection className={compact ? "py-6 lg:py-8" : "py-12 lg:py-20"}>
+        {lead}
+        <div
+          className={
+            centered
+              ? "flex flex-col items-center text-center"
+              : "grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-8"
+          }
+        >
+          <div className={centered ? "max-w-xl" : undefined}>
+            {hideSectionEyebrow ? null : (
+              <p className={ivory ? grammar.eyebrow : grammar.eyebrowOnDark}>{eyebrow}</p>
+            )}
+            {title ? (
+              <h2 className={cn(hideSectionEyebrow ? "" : "mt-4", ivory ? grammar.section : grammar.sectionOnDark)}>
+                {title}
+              </h2>
+            ) : null}
+            {description ? (
+              <p className={cn(compact ? "mt-2.5" : "mt-5", ivory ? grammar.body : grammar.bodyOnDark, centered && "mx-auto")}>
+                {description}
+              </p>
+            ) : null}
           </div>
-          <div className="grid gap-3 sm:min-w-[16rem]">
+          <div className={cn("grid gap-3", !compact && "sm:min-w-[16rem]", centered && (compact ? "mt-4" : "mt-8"))}>
             {href.startsWith("#") ? (
               <a
                 href={href}

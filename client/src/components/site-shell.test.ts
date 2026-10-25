@@ -30,18 +30,47 @@ describe("CTA button copy", () => {
   it("uses a single Contact label without a gold eyebrow or Email button", () => {
     const html = renderToStaticMarkup(
       createElement(CTA, {
-        title: "When you want a human reply.",
-        description: "Write only if a session is already the next step.",
+        title: "Get in touch",
+        description: "Work through the steps, starting with your Situation, for a clear recommendation, or write to us directly.",
         href: "#contact",
         label: "Contact",
         eyebrow: "Contact",
+        showEyebrow: false,
       }),
     );
+    expect(html).toContain("Get in touch");
+    expect(html).not.toContain("Livability");
     expect(html).toContain("<span>Contact</span>");
     expect(html).not.toContain("<span>Write</span>");
     expect(html).not.toContain("Email Agent Kammer");
     expect(html).not.toContain("tracking-[0.24em] text-brand-brass");
     expect(html).toContain("text-[14px]");
+  });
+
+  it("shrinks the compact homepage Contact button without dropping the stripe class", () => {
+    const html = renderToStaticMarkup(
+      createElement(
+        Router,
+        { ssrPath: "/" },
+        createElement(CTA, {
+          title: "Get in touch",
+          description: "Write to us directly.",
+          href: "/contact",
+          label: "Contact",
+          eyebrow: "Contact",
+          showEyebrow: false,
+          compact: true,
+          tone: "ivory",
+        }),
+      ),
+    );
+    expect(html).toContain("ak-call-button");
+    expect(html).toContain("px-3.5 py-2");
+    expect(html).toContain("text-[11px]");
+    expect(html).toContain("py-6 lg:py-8");
+    expect(html).toContain("bg-brand-ivory text-brand-ink");
+    expect(html).not.toContain("px-5 py-4");
+    expect(html).not.toContain("sm:min-w-[16rem]");
   });
 
   it("keeps the deep-navy closer and a quieter Guidance text link", () => {
