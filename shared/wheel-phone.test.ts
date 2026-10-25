@@ -19,6 +19,8 @@ describe("Wheel of Life phone readability", () => {
     expect(phoneCss).toContain("#needchart text{font-size:20px;fill:#0D182B");
     expect(phoneCss).toContain("#bigwheel text{font-size:20px;fill:#F5F2EB");
     expect(phoneCss).toContain(".need-plate svg{max-height:none;width:100%");
+    expect(phoneCss).toContain("padding:36px 0 28px");
+    expect(phoneCss).toContain("scroll-margin-top:calc(var(--ak-compact-header-h,52px) + 12px)");
     expect(phoneCss).toContain(".scores{margin-left:16px;margin-right:16px;font-size:1.68rem;grid-template-columns:1fr");
     expect(html).toContain('viewBox",phone()?"-214 -214 428 428"');
     expect(html).toContain("const reach=R+20");
