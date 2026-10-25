@@ -1,10 +1,8 @@
 import { Link } from "wouter";
-import { MoveRight } from "lucide-react";
+import { HomeApproach } from "@/components/HomeApproach";
 import { HomeCloseCtas } from "@/components/HomeCloseCtas";
-import { WhatsChangingPills } from "@/components/Footer";
-import { CTA } from "@/components/site-shell";
+import { HomeSituationRows } from "@/components/HomeSituationRows";
 import { DecisionFramework } from "@/components/DecisionFramework";
-import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 
 const howWeDecide = [
@@ -22,53 +20,38 @@ export default function Home() {
   });
 
   return (
-    <main className="bg-brand-ivory text-brand-ink">
-      <section className="border-b border-brand-border bg-brand-ivory">
-        <div className="mx-auto grid w-full max-w-site gap-8 px-5 py-6 sm:px-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(340px,0.72fr)] lg:gap-0 lg:px-10">
-          <div className="flex flex-col justify-start pt-2 lg:min-h-[560px] lg:pb-24 lg:pr-16 lg:pt-16">
-            <p className={grammar.eyebrow}>
-              <span className="block sm:inline">Agent Kammer</span>
-              <span className="hidden sm:inline"> · </span>
-              <span className="mt-1 block sm:mt-0 sm:inline">Private Housing Advisory</span>
-            </p>
-            <h1 className={`mt-3 max-w-[12ch] lg:mt-4 ${grammar.display}`}>
-              Live where
-              <br />
-              you belong
-            </h1>
-            <p className={`mt-4 lg:mt-6 ${grammar.body}`}>
+    <main className="bg-[#F5F2EB] text-[#2F3136]">
+      <section data-ak-home-hero className="ak-home-hero">
+        <div className="ak-home-hero-copy">
+          <h1 className="ak-home-hero-title">
+            Live where
+            <br />
+            you belong
+          </h1>
+          <div className="ak-home-hero-aside">
+            <i className="ak-home-hero-rule" aria-hidden="true" />
+            <p className="ak-home-hero-sub">
               Private housing guidance before the market gets loud.
+              <br />
+              People do not wake up wanting to tour apartments.
+              <br />
+              They wake up because life changed.
             </p>
-            <blockquote className="mt-5 max-w-xl border-l border-brand-stone pl-4 lg:mt-8 lg:pl-5">
-              <p className={grammar.quote}>
-                People do not wake up wanting to tour apartments. They wake up because life changed.
-              </p>
-            </blockquote>
-            <div className="mt-6 lg:mt-8">
-              <Link
-                href="/situations"
-                className="ak-call-button group inline-flex w-full items-center justify-between gap-4 rounded-button px-5 py-4 text-[14px] font-semibold uppercase tracking-[0.12em] text-brand-ivory transition-colors sm:w-auto sm:min-w-[19rem] sm:gap-6"
-              >
-                What's changing
-                <MoveRight className="h-4 w-4 text-brand-stone transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
-              </Link>
-            </div>
           </div>
-          <div className="relative -mx-5 min-h-[17.5rem] overflow-hidden bg-brand-surface sm:-mx-6 sm:min-h-[22rem] lg:mx-0 lg:min-h-[640px]">
-            <img
-              src="/images/how-we-think-terrace.jpg"
-              alt="Manhattan skyline viewed from a high terrace at dusk"
-              className="absolute inset-0 h-full w-full object-cover object-center saturate-[0.68] contrast-[0.98] brightness-[0.74]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/92 via-brand-navy/28 to-brand-navy/10" />
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/28 via-transparent to-brand-navy/12" />
-            <div className="absolute inset-x-0 bottom-0 border-t border-brand-ivory/18 bg-brand-navy/50 px-5 py-4 text-brand-ivory backdrop-blur-[2px] sm:p-6">
-              <p className="text-[11px] uppercase tracking-[0.24em] text-brand-stone">How We Think</p>
-              <p className="mt-1.5 font-display text-[1.45rem] leading-none sm:mt-2 sm:text-[1.85rem]">Buildings, context, strategy.</p>
-            </div>
-          </div>
+          <Link href="/situations" className="ak-home-hero-btn">
+            What's changing
+          </Link>
+        </div>
+        <div className="ak-home-hero-photo">
+          <img
+            src="/images/manhattan-limestone-skyline.jpg"
+            alt="Warm Manhattan skyline with the Empire State Building and limestone midtown facades. Photo by Pedro Lastra on Unsplash."
+            className="ak-home-hero-img"
+          />
         </div>
       </section>
+
+      <HomeApproach />
 
       <DecisionFramework
         eyebrow="How We Decide"
@@ -76,25 +59,16 @@ export default function Home() {
         items={howWeDecide}
       />
 
-      <section className="bg-brand-navy text-brand-ivory">
-        <div className="mx-auto flex w-full max-w-site flex-col items-start px-5 py-6 text-left sm:px-6 lg:px-10 lg:py-8">
-          <h2 className={grammar.sectionOnDark}>Start from what changed.</h2>
-          <WhatsChangingPills className="mt-4 w-full" showKicker={false} />
+      <HomeSituationRows />
+
+      <section data-ak-home-close className="ak-home-close">
+        <div className="ak-home-close-inner">
+          <p className="ak-home-close-copy">
+            Work through the steps, starting with your Situation, for a clear recommendation, or write to us directly.
+          </p>
+          <HomeCloseCtas />
         </div>
       </section>
-
-      <CTA
-        title=""
-        description="Work through the steps, starting with your Situation, for a clear recommendation, or write to us directly."
-        href="/contact"
-        label="Contact"
-        eyebrow="Contact"
-        showEyebrow={false}
-        align="center"
-        compact
-        tone="navy"
-        actions={<HomeCloseCtas />}
-      />
     </main>
   );
 }
