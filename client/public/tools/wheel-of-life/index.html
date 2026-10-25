@@ -153,6 +153,7 @@ img,svg{display:block;max-width:100%}
 .vibe{grid-area:vibe;height:34px;overflow:hidden;pointer-events:none;mask-image:linear-gradient(90deg,transparent,black 8%,black 92%,transparent)}
 .vibe svg{display:block;width:200%;height:100%;animation:drift 32s linear infinite;overflow:visible}
 @keyframes drift{to{transform:translateX(-50%)}}
+.dock-fold{display:none}
 @media(min-width:760px){
  .dock{padding:12px 28px max(12px,env(safe-area-inset-bottom));gap:10px 18px}
  .spin{width:108px;height:108px}
@@ -258,6 +259,44 @@ body.dock-on{padding-bottom:176px}
 
 footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px) calc(176px + 64px);font-size:.8rem;text-align:center}
 @media(min-width:760px){footer{padding-bottom:calc(196px + 72px)}}
+.dock-clear{height:0}
+@media(max-width:480px){
+ .persp{padding-left:0;padding-right:0;overflow:visible}
+ .persp .in{padding:0 16px}
+ .pgrid,.need-grid{margin-left:-16px;margin-right:-16px}
+ .pgrid>:first-child,.need-grid>:first-child{padding:0}
+ .pgrid>:last-child{padding:0 16px}
+ .needs{margin-top:28px;padding-top:20px}
+ .need-grid{margin-top:16px;gap:20px}
+ .plate,.need-plate{width:100vw;max-width:none;position:relative;left:50%;transform:translateX(-50%);padding:36px 0 28px;border-left:0;border-right:0;scroll-margin-top:calc(var(--ak-compact-header-h,52px) + 12px)}
+ .need-plate svg{max-height:none;width:100%;height:auto;overflow:visible}
+ .plate svg,.need-plate svg{overflow:visible}
+ #needchart text{font-size:20px;fill:#0D182B;letter-spacing:0;font-weight:600}
+ #bigwheel text{font-size:20px;fill:#F5F2EB;letter-spacing:0;font-weight:600}
+ .cap,.need-cap,.look{margin-left:16px;margin-right:16px}
+ .scores{margin-left:16px;margin-right:16px;font-size:1.68rem;grid-template-columns:1fr;gap:0}
+ .scores li{padding:10px 0;gap:16px;min-width:0}
+ .scores li span{min-width:0;overflow-wrap:anywhere}
+ .scores b{flex:none;font-size:1.1em}
+ .need-map li{padding:12px 0;font-size:1.8rem}
+ .need-map b{font-size:1.15em}
+ .need-read{padding:0 16px}
+ .dock{grid-template-columns:52px minmax(0,1fr) auto;grid-template-areas:"stage main fold";gap:4px 8px;padding:6px max(10px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}
+ .dock-fold{display:inline-flex;align-items:center;justify-content:center;grid-area:fold;margin:0;padding:0 6px;min-height:44px;min-width:44px;border:0;background:transparent;color:var(--limestone);font:600 9px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;cursor:pointer}
+ .dock.slim{grid-template-columns:52px auto;grid-template-areas:"stage fold"}
+ .dock.slim .dock-main{display:none}
+ .vibe{display:none}
+ .spin{width:52px;height:52px}
+ .chips{padding:0 0 2px;gap:4px}
+ .chip{min-height:44px;min-width:44px;padding:4px 10px;font-size:10px;letter-spacing:.12em;justify-content:center}
+ .chip b{font-size:1.05rem}
+ .dock-dial .range{min-height:44px}
+ .dock-dial .range input{height:44px}
+ body.dock-on{padding-bottom:calc(var(--dock-h,140px) + 48px)}
+ body.dock-on .dock-clear{height:calc(var(--dock-h,140px) + 24px)}
+ footer{padding-bottom:calc(var(--dock-h,140px) + 80px)}
+ .need-cap,.look,.need-read,.cap,.scores,.moves,.closer{scroll-margin-bottom:calc(var(--dock-h,140px) + 28px)}
+}
 footer .in{max-width:1100px;margin:0 auto}
 footer .site-exit{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:0 0 28px}
 footer .site-exit a{color:var(--limestone);text-decoration:none;font:600 10.5px var(--sans);letter-spacing:.22em;text-transform:uppercase}
@@ -482,6 +521,7 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
     </figure>
     <p class="cap">A rounder wheel tends to roll more smoothly than a bigger one.</p>
     <ul class="scores" id="scores" aria-label="All scores"></ul>
+    <div class="dock-clear" aria-hidden="true"></div>
    </div>
    <div>
     <div class="moves" id="moves"></div>
@@ -511,6 +551,7 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
      </figure>
      <p class="need-cap">Drawn first from the wheel. You may refine it, one question at a time.</p>
      <button class="btn ghost look" id="need-look" type="button">A closer look</button>
+     <div class="dock-clear" aria-hidden="true"></div>
      <div class="need-qs" id="need-qs"></div>
     </div>
     <div class="need-read">
@@ -576,7 +617,7 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
    <svg id="miniwheel" class="wheel" viewBox="-200 -200 400 400" role="img" aria-labelledby="mw-t"><title id="mw-t">Your wheel of life</title></svg>
   </div>
  </div>
- <div class="dock-main">
+ <div class="dock-main" id="dock-main">
   <div class="chips" id="chips" role="tablist" aria-label="Life areas"></div>
   <div class="dock-dial">
    <div class="range"><div class="track" aria-hidden="true"><div class="fill" id="dock-fill"></div></div>
@@ -586,6 +627,7 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
    <output id="dock-o" for="dock-r"></output>
   </div>
  </div>
+ <button type="button" class="dock-fold" id="dock-fold" aria-expanded="true" aria-controls="dock-main">Hide</button>
  <div class="vibe" aria-hidden="true">
   <svg viewBox="0 0 2400 72" preserveAspectRatio="none">
    <path id="vibe-glow" fill="none" stroke="rgba(232,228,220,.22)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -816,7 +858,24 @@ const NS="http://www.w3.org/2000/svg",N=AREAS.length;
 const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
 const pt=(r,a)=>[r*Math.cos(a),r*Math.sin(a)];
 const arc=(r,i)=>{const a0=-Math.PI/2+i*2*Math.PI/N,a1=a0+2*Math.PI/N,[x0,y0]=pt(r,a0),[x1,y1]=pt(r,a1);return `M0 0L${x0.toFixed(2)} ${y0.toFixed(2)}A${r.toFixed(2)} ${r.toFixed(2)} 0 0 1 ${x1.toFixed(2)} ${y1.toFixed(2)}Z`};
+const isPhone=()=>matchMedia("(max-width: 480px)").matches;
+const NEED_SHORT={certainty:"Cert",variety:"Vary",significance:"Sign",connection:"Conn",growth:"Grow",contribution:"Give"};
+function scoreMark(v){
+ const n=Number(v);
+ if(!Number.isFinite(n))return "";
+ return n%1?n.toFixed(1):String(Math.round(n));
+}
+function writeLabel(t,x,lines){
+ t.replaceChildren();
+ if(lines.length<2){t.textContent=lines[0]||"";return}
+ lines.forEach((line,i)=>{
+  const s=el("tspan",{x:Number(x).toFixed(1),dy:i===0?"-0.4em":"1.25em"});
+  s.textContent=line;
+  t.appendChild(s);
+ });
+}
 function makeWheel(svg,R,labels,uid){
+ const phone=()=>isPhone()&&uid!=="p";
  const d=el("defs",{});d.innerHTML=`<filter id="gl${uid}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${R/10}"/></filter><radialGradient id="sg${uid}"><stop offset="0" stop-color="#F7F4EE"/><stop offset=".5" stop-color="#D8D3C9"/><stop offset="1" stop-color="#9A958C"/></radialGradient>`;
  svg.appendChild(d);
  const rings=el("g",{});svg.appendChild(rings);
@@ -844,7 +903,50 @@ function makeWheel(svg,R,labels,uid){
   }else t.textContent=label;
   svg.appendChild(t);lt.push(t);
  });
- return{svg,set(lows){AREAS.forEach((a,i)=>{const r=Math.max(R*st.s[a.k]/10,R*.04);gs[i].setAttribute("d",arc(r,i));bs[i].setAttribute("d",arc(r,i));if(lt[i])lt[i].setAttribute("fill",uid==="p"?"#1c1914":(lows.includes(a.k)?"#E8E4DC":"#F5F2EB"))})}};
+ function paintLabel(i,lows){
+  const t=lt[i];if(!t)return;
+  const a=AREAS[i],onPhone=phone();
+  const ang=-Math.PI/2+(i+.5)*2*Math.PI/N;
+  if(onPhone&&uid==="b"){
+   const reach=R+20;
+   const[x,y]=pt(reach,ang);
+   t.setAttribute("x",x.toFixed(1));
+   t.setAttribute("y",(y+6).toFixed(1));
+   t.setAttribute("text-anchor","middle");
+   t.setAttribute("fill","#F5F2EB");
+   t.setAttribute("font-size","20");
+   t.setAttribute("letter-spacing","0");
+   t.setAttribute("font-weight","600");
+   t.setAttribute("stroke","#161C28");
+   t.setAttribute("stroke-width","3");
+   t.setAttribute("paint-order","stroke");
+   writeLabel(t,x,[scoreMark(st.s[a.k])]);
+   return;
+  }
+  const reach=uid==="b"?R+38:uid==="p"?R+28:R+22;
+  const[x,y]=pt(reach,ang);
+  t.setAttribute("x",x.toFixed(1));
+  t.setAttribute("y",(y+3).toFixed(1));
+  t.setAttribute("text-anchor",Math.abs(x)<20?"middle":x>0?"start":"end");
+  t.setAttribute("fill",uid==="p"?"#1c1914":(lows&&lows.includes(a.k)?"#E8E4DC":"#F5F2EB"));
+  if(uid==="p")return;
+  t.setAttribute("font-size",uid==="b"?"8.4":"11.5");
+  t.setAttribute("letter-spacing",uid==="b"?"0.35":"2.2");
+  t.removeAttribute("font-weight");
+  t.removeAttribute("stroke");
+  t.removeAttribute("stroke-width");
+  t.removeAttribute("paint-order");
+  const label=(uid==="b"?a.n:(SHORT[a.k]||a.n)).toUpperCase();
+  if(uid==="b"&&label.length>14){
+   const cut=label.lastIndexOf(" ",14),head=cut>0?label.slice(0,cut):label,tail=cut>0?label.slice(cut+1):"";
+   writeLabel(t,x,tail?[head,tail]:[head]);
+  }else writeLabel(t,x,[label]);
+ }
+ return{svg,set(lows){
+  if(uid==="b")svg.setAttribute("viewBox",phone()?"-214 -214 428 428":"-320 -280 640 560");
+  if(uid==="b")body.querySelectorAll("path").forEach(p=>p.setAttribute("stroke-width",phone()?R/55:R/90));
+  AREAS.forEach((a,i)=>{const r=Math.max(R*st.s[a.k]/10,R*.04);gs[i].setAttribute("d",arc(r,i));bs[i].setAttribute("d",arc(r,i));paintLabel(i,lows)});
+ }};
 }
 function makeNeedChart(svg,R){
  const NN=NEEDS.length;
@@ -854,17 +956,54 @@ function makeNeedChart(svg,R){
  const rings=el("g",{});svg.appendChild(rings);
  for(let l=2;l<=10;l+=2)rings.appendChild(el("circle",{r:(R*l/10).toFixed(1),fill:"none",stroke:l===10?"#2a3447":"#cfc8bb","stroke-width":l===10?1.1:.7,"stroke-opacity":l===10?.7:.9}));
  NEEDS.forEach((n,i)=>{const[x,y]=pt(R,-Math.PI/2+i*2*Math.PI/NN);rings.appendChild(el("line",{x1:0,y1:0,x2:x.toFixed(1),y2:y.toFixed(1),stroke:"#d8d1c4","stroke-width":.8}))});
- const poly=el("polygon",{fill:"rgba(42,52,71,.22)",stroke:"#2a3447","stroke-width":1.2});
+ const poly=el("polygon",{fill:"rgba(42,52,71,.22)",stroke:"#2a3447","stroke-width":1.2,"stroke-linejoin":"round"});
  svg.appendChild(poly);
+ const labels=[];
  NEEDS.forEach((n,i)=>{
   const ang=-Math.PI/2+(i)*2*Math.PI/NN,reach=R+28,[x,y]=pt(reach,ang);
   const t=el("text",{x:x.toFixed(1),y:(y+3).toFixed(1),"text-anchor":Math.abs(x)<24?"middle":x>0?"start":"end",fill:"#1c1914","font-family":"Montserrat,sans-serif","font-size":8,"letter-spacing":.4});
   t.textContent=n.n.toUpperCase();
   svg.appendChild(t);
+  labels.push(t);
  });
  return{set(scores){
+  const phone=isPhone();
+  svg.setAttribute("viewBox",phone?"-176 -176 352 352":"-210 -198 420 396");
+  poly.setAttribute("fill",phone?"rgba(13,24,43,.38)":"rgba(42,52,71,.22)");
+  poly.setAttribute("stroke",phone?"#0D182B":"#2a3447");
+  poly.setAttribute("stroke-width",phone?"2.6":"1.2");
   const pts=NEEDS.map((n,i)=>{const r=Math.max(R*(scores[n.k]||1)/10,R*.06),ang=-Math.PI/2+i*2*Math.PI/NN,[x,y]=pt(r,ang);return x.toFixed(1)+","+y.toFixed(1)}).join(" ");
   poly.setAttribute("points",pts);
+  NEEDS.forEach((n,i)=>{
+   const t=labels[i],ang=-Math.PI/2+i*2*Math.PI/NN;
+   if(phone){
+    const reach=R+22,[x,y]=pt(reach,ang);
+    t.setAttribute("x",x.toFixed(1));
+    t.setAttribute("y",(y+6).toFixed(1));
+    t.setAttribute("text-anchor","middle");
+    t.setAttribute("fill","#0D182B");
+    t.setAttribute("font-size","20");
+    t.setAttribute("letter-spacing","0");
+    t.setAttribute("font-weight","600");
+    t.setAttribute("stroke","#f7f3ea");
+    t.setAttribute("stroke-width","4");
+    t.setAttribute("paint-order","stroke");
+    writeLabel(t,x,[scoreMark(scores[n.k])]);
+    return;
+   }
+   const reach=R+28,[x,y]=pt(reach,ang);
+   t.setAttribute("x",x.toFixed(1));
+   t.setAttribute("y",(y+3).toFixed(1));
+   t.setAttribute("text-anchor",Math.abs(x)<24?"middle":x>0?"start":"end");
+   t.setAttribute("fill","#1c1914");
+   t.setAttribute("font-size","8");
+   t.setAttribute("letter-spacing",".4");
+   t.removeAttribute("font-weight");
+   t.removeAttribute("stroke");
+   t.removeAttribute("stroke-width");
+   t.removeAttribute("paint-order");
+   writeLabel(t,x,[n.n.toUpperCase()]);
+  });
  }};
 }
 function needScores(){
@@ -1109,11 +1248,25 @@ AREAS.forEach(a=>paintDial(a.k));paintDock();update(false);
 const rvs=document.querySelectorAll(".rv");
 if(reduce||!("IntersectionObserver" in window)){rvs.forEach(e=>e.classList.add("in"))}
 else{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{rootMargin:"0px 0px -8% 0px",threshold:.05});rvs.forEach(e=>io.observe(e))}
-const dock=$("dock"),hero=document.querySelector(".hero");
-const vis=on=>{dock.classList.toggle("hide",on);document.body.classList.toggle("dock-on",!on)};
+const dock=$("dock"),hero=document.querySelector(".hero"),fold=$("dock-fold");
+function syncDockPad(){
+ const h=(!isPhone()||dock.classList.contains("hide"))?0:Math.ceil(dock.getBoundingClientRect().height);
+ document.documentElement.style.setProperty("--dock-h",h+"px");
+}
+function setDockSlim(slim){
+ dock.classList.toggle("slim",slim);
+ fold.setAttribute("aria-expanded",slim?"false":"true");
+ fold.textContent=slim?"Show":"Hide";
+ syncDockPad();
+}
+fold.addEventListener("click",()=>setDockSlim(!dock.classList.contains("slim")));
+$("miniwheel").addEventListener("click",()=>{if(dock.classList.contains("slim"))setDockSlim(false)});
+const vis=on=>{dock.classList.toggle("hide",on);document.body.classList.toggle("dock-on",!on);syncDockPad()};
 if("IntersectionObserver" in window){
  new IntersectionObserver(([e])=>vis(e.isIntersecting),{threshold:.28}).observe(hero);
 }else vis(false)
+if("ResizeObserver" in window)new ResizeObserver(syncDockPad).observe(dock);
+matchMedia("(max-width: 480px)").addEventListener("change",()=>{if(!isPhone())setDockSlim(false);update(false);syncDockPad()});
 $("toPersp").addEventListener("click",e=>{e.preventDefault();$("perspective").scrollIntoView({behavior:reduce?"auto":"smooth"});$("perspective").focus({preventScroll:true})});
 
 $("meta-name").value=st.nm||"";
