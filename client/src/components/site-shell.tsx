@@ -672,9 +672,11 @@ export function CTA({
             {hideSectionEyebrow ? null : (
               <p className={ivory ? grammar.eyebrow : grammar.eyebrowOnDark}>{eyebrow}</p>
             )}
-            <h2 className={cn(hideSectionEyebrow ? "" : "mt-4", ivory ? grammar.section : grammar.sectionOnDark)}>
-              {title}
-            </h2>
+            {title ? (
+              <h2 className={cn(hideSectionEyebrow ? "" : "mt-4", ivory ? grammar.section : grammar.sectionOnDark)}>
+                {title}
+              </h2>
+            ) : null}
             {description ? (
               <p className={cn(compact ? "mt-2.5" : "mt-5", ivory ? grammar.body : grammar.bodyOnDark, centered && "mx-auto")}>
                 {description}

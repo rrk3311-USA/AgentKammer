@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowRight, MoveRight } from "lucide-react";
+import { MoveRight } from "lucide-react";
 import { WhatsChangingPills } from "@/components/Footer";
 import { CTA } from "@/components/site-shell";
 import { DecisionFramework } from "@/components/DecisionFramework";
@@ -79,18 +79,11 @@ export default function Home() {
         <div className="mx-auto flex w-full max-w-site flex-col items-center px-5 py-6 text-center sm:px-6 lg:px-10 lg:py-8">
           <h2 className={grammar.sectionOnDark}>Start from what changed.</h2>
           <WhatsChangingPills className="mt-4 w-full" showKicker={false} />
-          <Link
-            href="/situations"
-            className="mt-4 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-ivory/78 transition-colors hover:text-brand-ivory"
-          >
-            Start Here
-            <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
-          </Link>
         </div>
       </section>
 
       <CTA
-        title="Get in touch"
+        title=""
         description="Work through the steps, starting with your Situation, for a clear recommendation, or write to us directly."
         href="/contact"
         label="Contact"

@@ -11,6 +11,7 @@ import {
   footerTopRuleClass,
   isHomePath,
   isSituationPagePath,
+  isStartHerePath,
 } from "./Footer";
 import { decisionNavigationGroups } from "@/data/decision-navigation";
 
@@ -40,6 +41,15 @@ describe("isHomePath", () => {
     expect(isHomePath("/")).toBe(true);
     expect(isHomePath("/?ref=nav")).toBe(true);
     expect(isHomePath("/situations")).toBe(false);
+  });
+});
+
+describe("isStartHerePath", () => {
+  it("matches /situations and not a Situation slug", () => {
+    expect(isStartHerePath("/situations")).toBe(true);
+    expect(isStartHerePath("/situations?ref=nav")).toBe(true);
+    expect(isStartHerePath("/situations/executive-relocation-nyc")).toBe(false);
+    expect(isStartHerePath("/")).toBe(false);
   });
 });
 
@@ -92,6 +102,15 @@ describe("Footer situation index", () => {
     expect(html).toContain("Languages");
     expect(html).toContain("aria-expanded");
     expect(html).toContain("whitespace-nowrap");
+  });
+
+  it("does not repeat the What's Changing pills under /situations", () => {
+    const html = renderToStaticMarkup(
+      createElement(Router, { ssrPath: "/situations" }, createElement(Footer)),
+    );
+    expect(html).not.toContain("data-ak-whats-changing");
+    expect(html).not.toContain("Explore other situations");
+    expect(html).toContain("Languages");
   });
 });
 

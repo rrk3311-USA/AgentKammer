@@ -22,7 +22,12 @@ export function isHomePath(location: string) {
   return path === "/";
 }
 
-const quietChipClass =
+export function isStartHerePath(location: string) {
+  const path = location.split(/[?#]/)[0] ?? location;
+  return path === "/situations";
+}
+
+export const quietChipClass =
   "ak-quiet-chip shrink-0 rounded-full border border-brand-ivory/12 bg-brand-ivory/[0.05] px-2.5 py-1 text-[9.5px] font-medium uppercase tracking-[0.08em] text-brand-ivory/62";
 
 const situationIndexLink =
@@ -134,11 +139,12 @@ export function Footer() {
   const [langsOpen, setLangsOpen] = useState(false);
   const [location] = useLocation();
   const home = isHomePath(location);
+  const startHere = isStartHerePath(location);
   const exploreOtherSituations = isSituationPagePath(location);
 
   return (
-    <footer className={footerTopRuleClass(exploreOtherSituations, home)}>
-      {home ? null : <FooterIvoryIndex exploreOtherSituations={exploreOtherSituations} />}
+    <footer className={footerTopRuleClass(exploreOtherSituations, home || startHere)}>
+      {home || startHere ? null : <FooterIvoryIndex exploreOtherSituations={exploreOtherSituations} />}
 
       <div data-ak-charcoal-footer className="border-t border-brand-brass/28 bg-brand-charcoal text-brand-ivory">
         <div className="mx-auto flex w-full max-w-site flex-col gap-2.5 px-5 pb-3 pt-5 sm:px-6 lg:px-10">
