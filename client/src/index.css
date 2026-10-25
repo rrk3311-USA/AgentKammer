@@ -1499,4 +1499,12 @@
   .calculator-print-doc .ak-pp-notes {
     min-height: 18mm;
   }
+
+  .calculator-print-costs {
+    margin-top: 3mm;
+  }
+
+  .calculator-print-costs .ak-pp-row {
+    padding: 1.4mm 0;
+  }
 }

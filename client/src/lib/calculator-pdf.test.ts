@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { cashToClose, monthlyWithCosts } from "./calculator-costs";
 import { DEFAULT_CARRY, computeCarry, formatUsd } from "./monthly-carry";
 import { buildCalculatorPdf, calculatorPdfLayout } from "./calculator-pdf";
 
@@ -40,8 +41,27 @@ describe("calculator pdf", () => {
     expect(pdf).toContain("NOTES");
     expect(pdf).toContain(formatUsd(result.monthly));
     expect(formatUsd(result.monthly)).toBe("$19,273");
+    expect(commands).toMatch(/1 0 0 1 \d+\.\d+ 40\.00 Tm/);
+    expect(commands).not.toContain("before closing costs");
     expect(pdf).not.toContain("Manhattan");
     expect(pdf).not.toContain("Jane Street");
     expect(pdf).not.toContain("trophy");
+  });
+
+  it("prints group totals when optional costs are entered", () => {
+    const result = computeCarry(DEFAULT_CARRY);
+    const costs = { closing: 74_550, monthly: 380, selling: 90_500 };
+    const { commands, bottom } = calculatorPdfLayout(fields, DEFAULT_CARRY, result, costs);
+    expect(bottom).toBeLessThanOrEqual(792 - 54);
+    expect(commands).toContain("Purchase closing");
+    expect(commands).toContain("Ongoing monthly");
+    expect(commands).toContain("Selling costs");
+    expect(commands).toContain("Cash to close");
+    expect(commands).toContain(formatUsd(monthlyWithCosts(result.monthly, costs.monthly)));
+    expect(commands).toContain(formatUsd(cashToClose(result.down, costs.closing)));
+    expect(commands).toContain("Commission rates vary and are negotiable");
+    expect(commands).not.toContain("\u2014");
+    const pdf = new TextDecoder().decode(buildCalculatorPdf(fields, DEFAULT_CARRY, result, costs));
+    expect(pdf).toContain("/Count 1");
   });
 });

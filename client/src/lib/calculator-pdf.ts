@@ -1,3 +1,4 @@
+import { cashToClose, hasEnteredCosts, monthlyWithCosts, type CostTotals } from "@/lib/calculator-costs";
 import { formatUsd, type CarryInput, type CarryResult } from "@/lib/monthly-carry";
 
 export type CalculatorPdfFields = {
@@ -160,7 +161,12 @@ function drawSectionHead(commands: string[], num: string, label: string, top: nu
   return top + 22;
 }
 
-export function calculatorPdfLayout(fields: CalculatorPdfFields, input: CarryInput, result: CarryResult) {
+export function calculatorPdfLayout(
+  fields: CalculatorPdfFields,
+  input: CarryInput,
+  result: CarryResult,
+  costs?: CostTotals,
+) {
   const commands: string[] = [];
   commands.push(`${PAPER} rg`);
   commands.push(`0 0 ${PAGE_W} ${PAGE_H} re`);
@@ -183,8 +189,13 @@ export function calculatorPdfLayout(fields: CalculatorPdfFields, input: CarryInp
   drawTrackedCenter(commands, "CALCULATOR", 306, PAGE_H - (top + 7), 7, 1.8);
   top += 20;
 
+  const extras = costs ?? { closing: 0, monthly: 0, selling: 0 };
+  const showCosts = costs ? hasEnteredCosts(extras) : false;
+  const monthTotal = monthlyWithCosts(result.monthly, extras.monthly);
+  const cashTotal = cashToClose(result.down, extras.closing);
+
   top = drawSectionHead(commands, "01", "THE MONTH", top);
-  drawText(commands, formatUsd(result.monthly), LEFT, PAGE_H - (top + 46), 46, "F3", DEEP);
+  drawText(commands, formatUsd(monthTotal), LEFT, PAGE_H - (top + 46), 46, "F3", DEEP);
   top += 62;
   top = drawLines(
     commands,
@@ -196,7 +207,9 @@ export function calculatorPdfLayout(fields: CalculatorPdfFields, input: CarryInp
     "F5",
   );
   top += 8;
-  const cash = `On a ${formatUsd(input.price)} purchase with ${input.downPercent}% down. Cash to close begins near ${formatUsd(result.down)}.`;
+  const cash = showCosts
+    ? `On a ${formatUsd(input.price)} purchase with ${input.downPercent}% down. Cash to close begins near ${formatUsd(cashTotal)}, including the closing costs you entered.`
+    : `On a ${formatUsd(input.price)} purchase with ${input.downPercent}% down. Cash to close begins near ${formatUsd(result.down)}.`;
   top = drawLines(commands, wrap(cash, 10, RIGHT - LEFT), LEFT, top, 10, 16, "F1");
   top += 12;
 
@@ -238,7 +251,7 @@ export function calculatorPdfLayout(fields: CalculatorPdfFields, input: CarryInp
     ["Mortgage", formatUsd(result.mortgage)],
     ["Property tax", formatUsd(result.tax)],
     ["Common charges", formatUsd(result.common)],
-    ["Monthly carry", formatUsd(result.monthly)],
+    ["Monthly carry", formatUsd(monthTotal)],
   ];
   for (const [label, value] of resultRows) {
     const baseline = PAGE_H - (rightTop + 12);
@@ -249,8 +262,26 @@ export function calculatorPdfLayout(fields: CalculatorPdfFields, input: CarryInp
   }
 
   top = inlayTop + inlayHeight + 12;
-  const note =
-    "Educational only. Insurance, assessments, and closing costs sit outside this page. Judgment still comes after the number.";
+  if (showCosts) {
+    top = drawSectionHead(commands, "04", "COSTS ENTERED", top);
+    const costRows: [string, string][] = [
+      ["Purchase closing", formatUsd(extras.closing)],
+      ["Ongoing monthly", formatUsd(extras.monthly)],
+      ["Selling costs", formatUsd(extras.selling)],
+      ["Cash to close", formatUsd(cashTotal)],
+    ];
+    for (const [label, value] of costRows) {
+      const baseline = PAGE_H - (top + 12);
+      drawText(commands, label, LEFT, baseline, 9, "F1", DEEP);
+      drawText(commands, value, RIGHT - textWidth(value, 11), baseline, 11, "F3", DEEP);
+      hairline(commands, top + 16, SEP, 0.3, LEFT, RIGHT);
+      top += 20;
+    }
+    top += 6;
+  }
+  const note = showCosts
+    ? "Educational only. Optional costs are estimates you entered. Commission rates vary and are negotiable. Confirm taxes, fees, and insurance for the property."
+    : "Educational only. Insurance, assessments, and closing costs sit outside this page. Judgment still comes after the number.";
   top = drawLines(commands, wrap(note, 8, RIGHT - LEFT), LEFT, top, 8, 11, "F1");
   top += 10;
 
@@ -286,8 +317,13 @@ function pdfBytes(source: string): Uint8Array {
   return new TextEncoder().encode(source);
 }
 
-export function buildCalculatorPdf(fields: CalculatorPdfFields, input: CarryInput, result: CarryResult): Uint8Array {
-  const { commands, bottom } = calculatorPdfLayout(fields, input, result);
+export function buildCalculatorPdf(
+  fields: CalculatorPdfFields,
+  input: CarryInput,
+  result: CarryResult,
+  costs?: CostTotals,
+): Uint8Array {
+  const { commands, bottom } = calculatorPdfLayout(fields, input, result, costs);
   if (bottom > PAGE_H - MARGIN) {
     throw new Error("Calculator PDF ran past the page margin.");
   }
@@ -320,8 +356,13 @@ export function buildCalculatorPdf(fields: CalculatorPdfFields, input: CarryInpu
   return pdfBytes(file);
 }
 
-export function downloadCalculatorPdf(fields: CalculatorPdfFields, input: CarryInput, result: CarryResult) {
-  const bytes = buildCalculatorPdf(fields, input, result);
+export function downloadCalculatorPdf(
+  fields: CalculatorPdfFields,
+  input: CarryInput,
+  result: CarryResult,
+  costs?: CostTotals,
+) {
+  const bytes = buildCalculatorPdf(fields, input, result, costs);
   const blob = new Blob([bytes], { type: "application/pdf" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
