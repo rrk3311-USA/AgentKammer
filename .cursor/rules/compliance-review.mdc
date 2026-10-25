@@ -1,0 +1,42 @@
+---
+description: Mandatory pre-publish and pre-merge compliance review for any Agent Kammer copy, graphic, video, PDF or report. Use before proposing anything as ready, and before any PR that changes public-facing content.
+globs: "**/*.html, **/*.md, **/*.mdx, **/*.json, **/*.txt, **/*.ts, **/*.tsx"
+alwaysApply: false
+---
+# Compliance review (required before anything ships)
+
+Nothing publishes, posts, sends or merges without (1) this review passing and (2) Raphi's explicit approval. Agents prepare drafts and PRs, list the review results in the PR description, and stop.
+
+## 1. Scope and licensing
+- [ ] Reads as educational commentary. Raphi is not licensed: no offer to represent, list, show, negotiate or refer; no "work with me", "DM me to buy", "I can get you".
+- [ ] No guarantees, predictions presented as fact, or promised discounts or outcomes.
+- [ ] No appraisal, engineering, inspection, legal, tax or investment claims. Layout or building concerns point to a licensed inspector or an attorney.
+- [ ] Opinion language for judgments ("I'd be inclined to pass"), never claimed fact.
+
+## 2. Facts and sources
+- [ ] Every number traces to a source and date. Primary records first (ACRIS, DOF Rolling Sales and tax bills, DOB, NY AG offering plan filings, Freddie Mac).
+- [ ] Leads (trade press, Olshan, Corcoran, X) were verified against a primary source. Olshan is not named anywhere in published copy.
+- [ ] Every negative claim about a property has a public-record anchor (source plus date). Otherwise say "unknown from public records".
+- [ ] Nothing invented: no made-up stats, prices, listings, quotes, credentials or verdicts. Unverified material is marked SAMPLE and stays unpublished.
+
+## 3. Fair housing
+- [ ] Describes the property and its function, never the people who should or should not live there.
+- [ ] No reference to any protected class, directly or by proxy ("perfect for young professionals", "ideal for a certain kind of family" and similar are out).
+- [ ] WHO lines are lifestyle fits (pied-a-terre, entertaining, a family layout need), never demographics. Schools only via objective third-party sources, never in WHO.
+
+## 4. Tone
+- [ ] Criticism targets the property, the price or the market, never a person (buyer, seller, broker, developer, reader).
+- [ ] Humor is dry, about 5%, aimed at the object or decision. Passes the dead-room test.
+
+## 5. Copy mechanics
+- [ ] No em or en dashes; ranges use "to". No AI cliches or slogan closers.
+- [ ] Disclaimer present where the product requires it, exactly: `Educational commentary. Not advice. Opinions of Raphael Kammer.`
+- [ ] Verdicts use only Pick, Consider, Wait or Pass, and a production deliverable never ships with a placeholder verdict or WHO.
+- [ ] End cards carry no thank you, contact, follow, phone, email or big logo.
+
+## 6. Design checks
+- [ ] Text contrast passes (4.5:1 under 24px, 3:1 at or above) against the rendered background (story kit: `tools/contrast_check.py`).
+- [ ] File names follow `Agent-Kammer-<Product>-YYYY-MM-DD` plus suffix.
+- [ ] No QR codes. No private information, secrets or tokens in files, commits or PR text.
+
+Report the checklist result in the PR, flag anything uncertain for Raphi, and wait for approval.
