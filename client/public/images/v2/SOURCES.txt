@@ -1,0 +1,21 @@
+Homepage V2 licensed photographs (no AI). Cropped and toned.
+
+Hero — /images/v2/hero-esb-limestone.jpg
+Source: Wikimedia Commons
+File: 32nd St 5th Av 03 - 320 Fifth Avenue.jpg
+https://commons.wikimedia.org/wiki/File:32nd_St_5th_Av_03_-_320_Fifth_Avenue.jpg
+Photographer: Tdorante10
+Date: 15 March 2018
+License: Creative Commons Attribution-Share Alike 4.0 International (CC BY-SA 4.0)
+https://creativecommons.org/licenses/by-sa/4.0/
+Description: Looking at the Empire State Building over 320 Fifth Avenue, northwest corner of Fifth Avenue and 32nd Street, Midtown Manhattan.
+Edits: cropped to drop street clutter; desaturated and warmed to a soft limestone grey.
+
+Interior — /images/v2/interior-manhattan.jpg
+Source: Pexels
+https://www.pexels.com/photo/10812975/
+Photographer: Andrea Davis
+Location: New York, NY, United States
+License: Pexels License (free to use, no attribution required; credited here)
+Description: New York City skyline from a modern apartment window.
+Edits: slight crop; desaturated and warmed to a neutral grey.
