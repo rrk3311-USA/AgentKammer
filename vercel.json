@@ -50,5 +50,15 @@
     { "source": "/tools/livability", "destination": "/tools/livability/index.html" },
     { "source": "/tools/livability/", "destination": "/tools/livability/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/network",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }]
+    },
+    {
+      "source": "/network/",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }]
+    }
   ]
 }

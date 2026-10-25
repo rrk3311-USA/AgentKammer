@@ -59,6 +59,7 @@ const CommunicationMap = lazy(() => import("@/pages/tools/CommunicationMap"));
 const Calculator = lazy(() => import("@/pages/Calculator"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 const Tank007 = lazy(() => import("@/pages/internal/Tank007"));
+const Network = lazy(() => import("@/pages/Network"));
 
 function Redirect({ to }: { to: string }) {
   const [, setLocation] = useLocation();
@@ -204,6 +205,7 @@ function Router() {
       <Route path="/sitemap" component={Sitemap} />
       <Route path="/account" component={Account} />
       <Route path="/qualify" component={Qualify} />
+      <Route path="/network" component={Network} />
       <Route path="/hub/roadmap" component={HubRoadmap} />
       <Route path="/hub/conversations" component={HubConversations} />
       <Route path="/hub/saved" component={HubSaved} />
