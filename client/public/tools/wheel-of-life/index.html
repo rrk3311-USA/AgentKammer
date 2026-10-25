@@ -268,11 +268,11 @@ footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px
  .pgrid>:last-child{padding:0 16px}
  .needs{margin-top:28px;padding-top:20px}
  .need-grid{margin-top:16px;gap:20px}
- .plate,.need-plate{width:100vw;max-width:none;position:relative;left:50%;transform:translateX(-50%);padding:8px 0 10px;border-left:0;border-right:0}
+ .plate,.need-plate{width:100vw;max-width:none;position:relative;left:50%;transform:translateX(-50%);padding:4px 0 6px;border-left:0;border-right:0}
  .need-plate svg{max-height:none;width:100%;height:auto;overflow:visible}
  .plate svg,.need-plate svg{overflow:visible}
- #needchart text{font-size:27px;fill:#0D182B;letter-spacing:.01em;font-weight:600}
- #bigwheel text{font-size:27px;fill:#F5F2EB;letter-spacing:.01em;font-weight:600}
+ #needchart text{font-size:22px;fill:#0D182B;letter-spacing:0;font-weight:600}
+ #bigwheel text{font-size:22px;fill:#161C28;letter-spacing:0;font-weight:600}
  .cap,.need-cap,.look{margin-left:16px;margin-right:16px}
  .scores{margin-left:16px;margin-right:16px;font-size:1.68rem;grid-template-columns:1fr;gap:0}
  .scores li{padding:10px 0;gap:16px;min-width:0}
@@ -907,23 +907,30 @@ function makeWheel(svg,R,labels,uid){
   const t=lt[i];if(!t)return;
   const a=AREAS[i],onPhone=phone();
   const ang=-Math.PI/2+(i+.5)*2*Math.PI/N;
-  const reach=onPhone&&uid==="b"?R*0.52:uid==="b"?R+38:uid==="p"?R+28:R+22;
-  const[x,y]=pt(reach,ang);
-  t.setAttribute("x",x.toFixed(1));
-  t.setAttribute("y",(y+(onPhone&&uid==="b"?0:3)).toFixed(1));
-  t.setAttribute("text-anchor",onPhone&&uid==="b"?"middle":Math.abs(x)<20?"middle":x>0?"start":"end");
-  t.setAttribute("fill",uid==="p"?"#1c1914":(lows&&lows.includes(a.k)?"#E8E4DC":"#F5F2EB"));
-  if(uid==="p")return;
   if(onPhone&&uid==="b"){
-   t.setAttribute("font-size","27");
-   t.setAttribute("letter-spacing","0.08");
+   const filled=Math.max(R*st.s[a.k]/10,R*.08);
+   const reach=filled*0.56;
+   const[x,y]=pt(reach,ang);
+   t.setAttribute("x",x.toFixed(1));
+   t.setAttribute("y",(y+7).toFixed(1));
+   t.setAttribute("text-anchor","middle");
+   t.setAttribute("fill","#161C28");
+   t.setAttribute("font-size","22");
+   t.setAttribute("letter-spacing","0");
    t.setAttribute("font-weight","600");
-   t.setAttribute("stroke","#161C28");
-   t.setAttribute("stroke-width","4");
+   t.setAttribute("stroke","#F5F2EB");
+   t.setAttribute("stroke-width","3");
    t.setAttribute("paint-order","stroke");
-   writeLabel(t,x,[(SHORT[a.k]||a.n).toUpperCase(),scoreMark(st.s[a.k])]);
+   writeLabel(t,x,[scoreMark(st.s[a.k])]);
    return;
   }
+  const reach=uid==="b"?R+38:uid==="p"?R+28:R+22;
+  const[x,y]=pt(reach,ang);
+  t.setAttribute("x",x.toFixed(1));
+  t.setAttribute("y",(y+3).toFixed(1));
+  t.setAttribute("text-anchor",Math.abs(x)<20?"middle":x>0?"start":"end");
+  t.setAttribute("fill",uid==="p"?"#1c1914":(lows&&lows.includes(a.k)?"#E8E4DC":"#F5F2EB"));
+  if(uid==="p")return;
   t.setAttribute("font-size",uid==="b"?"8.4":"11.5");
   t.setAttribute("letter-spacing",uid==="b"?"0.35":"2.2");
   t.removeAttribute("font-weight");
@@ -937,7 +944,7 @@ function makeWheel(svg,R,labels,uid){
   }else writeLabel(t,x,[label]);
  }
  return{svg,set(lows){
-  if(uid==="b")svg.setAttribute("viewBox",phone()?"-250 -250 500 500":"-320 -280 640 560");
+  if(uid==="b")svg.setAttribute("viewBox",phone()?"-186 -186 372 372":"-320 -280 640 560");
   if(uid==="b")body.querySelectorAll("path").forEach(p=>p.setAttribute("stroke-width",phone()?R/55:R/90));
   AREAS.forEach((a,i)=>{const r=Math.max(R*st.s[a.k]/10,R*.04);gs[i].setAttribute("d",arc(r,i));bs[i].setAttribute("d",arc(r,i));paintLabel(i,lows)});
  }};
@@ -962,34 +969,41 @@ function makeNeedChart(svg,R){
  });
  return{set(scores){
   const phone=isPhone();
-  svg.setAttribute("viewBox",phone?"-200 -200 400 400":"-210 -198 420 396");
+  svg.setAttribute("viewBox",phone?"-146 -146 292 292":"-210 -198 420 396");
   poly.setAttribute("fill",phone?"rgba(13,24,43,.38)":"rgba(42,52,71,.22)");
   poly.setAttribute("stroke",phone?"#0D182B":"#2a3447");
   poly.setAttribute("stroke-width",phone?"2.6":"1.2");
   const pts=NEEDS.map((n,i)=>{const r=Math.max(R*(scores[n.k]||1)/10,R*.06),ang=-Math.PI/2+i*2*Math.PI/NN,[x,y]=pt(r,ang);return x.toFixed(1)+","+y.toFixed(1)}).join(" ");
   poly.setAttribute("points",pts);
   NEEDS.forEach((n,i)=>{
-   const t=labels[i],reach=phone?R*0.58:R+28,ang=-Math.PI/2+i*2*Math.PI/NN,[x,y]=pt(reach,ang);
-   t.setAttribute("x",x.toFixed(1));
-   t.setAttribute("y",(y+(phone?0:3)).toFixed(1));
-   t.setAttribute("text-anchor",phone?"middle":Math.abs(x)<24?"middle":x>0?"start":"end");
-   t.setAttribute("fill",phone?"#0D182B":"#1c1914");
-   t.setAttribute("font-size",phone?"27":"8");
-   t.setAttribute("letter-spacing",phone?".08":".4");
+   const t=labels[i],ang=-Math.PI/2+i*2*Math.PI/NN;
    if(phone){
+    const filled=Math.max(R*(scores[n.k]||1)/10,R*.08),reach=filled*0.52,[x,y]=pt(reach,ang);
+    t.setAttribute("x",x.toFixed(1));
+    t.setAttribute("y",(y+7).toFixed(1));
+    t.setAttribute("text-anchor","middle");
+    t.setAttribute("fill","#0D182B");
+    t.setAttribute("font-size","22");
+    t.setAttribute("letter-spacing","0");
     t.setAttribute("font-weight","600");
     t.setAttribute("stroke","#f7f3ea");
-    t.setAttribute("stroke-width","5");
+    t.setAttribute("stroke-width","4");
     t.setAttribute("paint-order","stroke");
-   }else{
-    t.removeAttribute("font-weight");
-    t.removeAttribute("stroke");
-    t.removeAttribute("stroke-width");
-    t.removeAttribute("paint-order");
+    writeLabel(t,x,[scoreMark(scores[n.k])]);
+    return;
    }
-   const name=(phone?(NEED_SHORT[n.k]||n.n):n.n).toUpperCase();
-   if(phone)writeLabel(t,x,[name,scoreMark(scores[n.k])]);
-   else writeLabel(t,x,[name]);
+   const reach=R+28,[x,y]=pt(reach,ang);
+   t.setAttribute("x",x.toFixed(1));
+   t.setAttribute("y",(y+3).toFixed(1));
+   t.setAttribute("text-anchor",Math.abs(x)<24?"middle":x>0?"start":"end");
+   t.setAttribute("fill","#1c1914");
+   t.setAttribute("font-size","8");
+   t.setAttribute("letter-spacing",".4");
+   t.removeAttribute("font-weight");
+   t.removeAttribute("stroke");
+   t.removeAttribute("stroke-width");
+   t.removeAttribute("paint-order");
+   writeLabel(t,x,[n.n.toUpperCase()]);
   });
  }};
 }
