@@ -1486,6 +1486,16 @@
     font-size: 54pt;
   }
 
+  .calculator-print-doc .ak-pp-lead {
+    margin-top: 6mm;
+    line-height: 1.4;
+  }
+
+  .calculator-print-doc .ak-pp-copy {
+    margin-top: 4.5mm;
+    line-height: 1.6;
+  }
+
   .calculator-print-doc .ak-pp-notes {
     min-height: 18mm;
   }

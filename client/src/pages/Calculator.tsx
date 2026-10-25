@@ -16,7 +16,7 @@ import { downloadCalculatorPdf } from "@/lib/calculator-pdf";
 import { cn } from "@/lib/utils";
 
 const PRINT_SLUG = "interactive-tools/calculator";
-const NOTES_RULES = Array.from({ length: 18 }, (_, index) => index);
+const NOTES_RULES = Array.from({ length: 17 }, (_, index) => index);
 
 function sheetDate(date = new Date()) {
   const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -127,7 +127,6 @@ export default function Calculator() {
           <p className="ak-pp-kicker">Calculator</p>
         </header>
         <div className="ak-pp-body">
-          <p className="ak-pp-date">{sheetDate()}</p>
           <section className="ak-pp-sec">
             <p className="ak-pp-sec-head">
               <span className="ak-pp-num">01</span>
@@ -137,7 +136,7 @@ export default function Calculator() {
             <p className="ak-pp-lead">What does this home cost each month?</p>
             <p className="ak-pp-copy">
               On a {formatUsd(input.price)} purchase with {input.downPercent}% down. Cash to close begins
-              near {formatUsd(result.down)}, before closing costs.
+              near {formatUsd(result.down)}.
             </p>
           </section>
           <div className="ak-pp-inlay calculator-print-inlay">
@@ -191,7 +190,7 @@ export default function Calculator() {
             AGENTKAMMER.COM
             <i className="ak-pp-ticks" />
           </p>
-          <span className="ak-pp-foot-end" aria-hidden="true" />
+          <p className="ak-pp-foot-end">{sheetDate()}</p>
         </footer>
       </article>
       <div className="calculator-screen">
