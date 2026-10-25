@@ -685,7 +685,7 @@ export function CTA({
               </p>
             ) : null}
           </div>
-          <div className={cn("grid gap-3", !compact && "sm:min-w-[16rem]", centered && (compact ? "mt-4" : "mt-8"))}>
+          <div className={cn("grid gap-3", !compact && "sm:min-w-[16rem]", centered && (compact ? "mt-4" : "mt-8"), actions && "mx-auto w-full max-w-[20rem]")}>
             {actions ? actions : href.startsWith("#") ? (
               <a
                 href={href}
