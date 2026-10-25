@@ -76,13 +76,6 @@ export default function Home() {
         items={howWeDecide}
       />
 
-      <section className="bg-brand-navy text-brand-ivory">
-        <div className="mx-auto flex w-full max-w-site flex-col items-start px-5 py-6 text-left sm:px-6 lg:px-10 lg:py-8">
-          <h2 className={grammar.sectionOnDark}>Start from what changed.</h2>
-          <WhatsChangingPills className="mt-4 w-full" showKicker={false} />
-        </div>
-      </section>
-
       <CTA
         title=""
         description="Work through the steps, starting with your Situation, for a clear recommendation, or write to us directly."
@@ -95,6 +88,15 @@ export default function Home() {
         tone="navy"
         actions={<HomeCloseCtas />}
       />
+
+      <section className="ak-home-changed bg-brand-ivory text-brand-ink">
+        <i className="ak-home-plat-rule" aria-hidden="true" />
+        <div className="mx-auto flex w-full max-w-site flex-col items-start px-5 py-6 text-left sm:px-6 lg:px-10 lg:py-8">
+          <h2 className={grammar.section}>Start from what changed.</h2>
+          <WhatsChangingPills className="mt-4 w-full" showKicker={false} />
+        </div>
+        <i className="ak-home-plat-rule" aria-hidden="true" />
+      </section>
     </main>
   );
 }

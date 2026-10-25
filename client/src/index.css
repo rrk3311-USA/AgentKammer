@@ -944,6 +944,36 @@
     outline: none;
   }
 
+  .ak-home-changed .ak-quiet-chip {
+    border-color: #b8bbc0;
+    background: transparent;
+    color: #2a3447;
+  }
+
+  .ak-home-changed .ak-quiet-chip:hover,
+  .ak-home-changed .ak-quiet-chip:focus-visible {
+    border-color: #2a3447;
+    color: #2a3447;
+    box-shadow: 0 0 0 1px rgba(42, 52, 71, 0.12);
+    outline: none;
+  }
+
+  .ak-home-plat-rule {
+    display: block;
+    height: 1px;
+    width: 100%;
+    border: 0;
+    background:
+      linear-gradient(
+        90deg,
+        #b8bbc0 0%,
+        #d5d8dc 36%,
+        #eef0f2 50%,
+        #d5d8dc 64%,
+        #b8bbc0 100%
+      );
+  }
+
   .ak-call-button {
     position: relative;
     isolation: isolate;
