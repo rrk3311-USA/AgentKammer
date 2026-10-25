@@ -13,7 +13,7 @@ describe("homepage close", () => {
     const html = renderHome();
     const chips = html.indexOf("data-ak-whats-changing");
     const heading = html.indexOf("Get in touch");
-    const line = html.indexOf("Work through the steps, starting with your Situation, for a clear recommendation, or write to me directly.");
+    const line = html.indexOf("Work through the steps, starting with your Situation, for a clear recommendation, or write to us directly.");
     expect(chips).toBeGreaterThan(-1);
     expect(heading).toBeGreaterThan(chips);
     expect(line).toBeGreaterThan(heading);
@@ -23,6 +23,11 @@ describe("homepage close", () => {
     expect(html).not.toContain("Livability");
     expect(html).toContain("<span>Contact</span>");
     expect(html).toContain("ak-call-button");
+    expect(html).toContain("write to us directly");
+    expect(html).not.toContain("write to me");
+    expect(html).toContain("flex-wrap items-center justify-center");
+    expect(html).not.toContain("overflow-x-auto");
+    expect(html).not.toContain("flex-nowrap");
     expect(html).toContain("flex flex-col items-center text-center");
   });
 

@@ -31,7 +31,7 @@ describe("CTA button copy", () => {
     const html = renderToStaticMarkup(
       createElement(CTA, {
         title: "Get in touch",
-        description: "Work through the steps, starting with your Situation, for a clear recommendation, or write to me directly.",
+        description: "Work through the steps, starting with your Situation, for a clear recommendation, or write to us directly.",
         href: "#contact",
         label: "Contact",
         eyebrow: "Contact",
