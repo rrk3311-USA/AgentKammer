@@ -33,6 +33,13 @@ describe("Calculator print sheet", () => {
     expect(calc).toContain("Other monthly");
     expect(calc).toContain("Selling costs");
     expect(calc).toContain("Costs entered");
+    expect(calc).toContain("Earnest money deposit");
+    expect(calc).toContain("Deposit paid at contract");
+    expect(calc).toContain("Due at closing");
+    expect(calc).toContain("DEPOSIT_EXPLAINER");
+    expect(calc).toContain("DEPOSIT_HINT");
+    expect(catalog).toContain("Your deposit counts toward cash to close.");
+    expect(catalog).toContain("Often around 10% at contract in NYC, varies.");
     expect(costs).toContain("Costs people often miss");
     expect(costs).toContain("Add another cost");
     expect(catalog).toContain("Purchase closing costs");

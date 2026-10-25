@@ -5,11 +5,16 @@ import { CalculatorCosts } from "@/components/CalculatorCosts";
 import { PageSection } from "@/components/site-shell";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import {
+  DEPOSIT_EXPLAINER,
+  DEPOSIT_HINT,
   cashToClose,
+  depositAmount,
+  dueAtClosing,
   emptyCostDraft,
   hasEnteredCosts,
   monthlyWithCosts,
   totalCostGroups,
+  type DepositMode,
 } from "@/lib/calculator-costs";
 import {
   DEFAULT_CARRY,
@@ -92,6 +97,8 @@ export default function Calculator() {
   const [commonMonthly, setCommonMonthly] = useState("3,200");
   const [costDraft, setCostDraft] = useState(emptyCostDraft);
   const [costsOpen, setCostsOpen] = useState(false);
+  const [depositMode, setDepositMode] = useState<DepositMode>("percent");
+  const [depositRaw, setDepositRaw] = useState("");
 
   const input: CarryInput = useMemo(
     () => ({
@@ -109,7 +116,10 @@ export default function Calculator() {
   const costTotals = useMemo(() => totalCostGroups(input.price, costDraft), [input.price, costDraft]);
   const monthTotal = monthlyWithCosts(result.monthly, costTotals.monthly);
   const cashTotal = cashToClose(result.down, costTotals.closing);
+  const deposit = depositAmount(input.price, depositMode, depositRaw);
+  const dueClosing = dueAtClosing(cashTotal, deposit);
   const showCosts = hasEnteredCosts(costTotals);
+  const showDeposit = deposit > 0;
 
   const inputRows = [
     ["Purchase price", price],
@@ -128,14 +138,23 @@ export default function Calculator() {
     ["Monthly carry", formatUsd(monthTotal)],
   ] as const;
   const costPrintRows = [
-    ["Purchase closing", formatUsd(costTotals.closing)],
-    ["Ongoing monthly", formatUsd(costTotals.monthly)],
-    ["Selling costs", formatUsd(costTotals.selling)],
+    ...(costTotals.closing > 0 ? [["Purchase closing", formatUsd(costTotals.closing)] as const] : []),
+    ...(costTotals.monthly > 0 ? [["Ongoing monthly", formatUsd(costTotals.monthly)] as const] : []),
+    ...(costTotals.selling > 0 ? [["Selling costs", formatUsd(costTotals.selling)] as const] : []),
     ["Cash to close", formatUsd(cashTotal)],
+    ...(showDeposit
+      ? ([
+          ["Deposit paid at contract", formatUsd(deposit)],
+          ["Due at closing", formatUsd(dueClosing)],
+        ] as const)
+      : []),
   ] as const;
-  const cashCopy = showCosts
-    ? `On a ${formatUsd(input.price)} purchase with ${input.downPercent}% down. Cash to close begins near ${formatUsd(cashTotal)}, including the closing costs you entered.`
-    : `On a ${formatUsd(input.price)} purchase with ${input.downPercent}% down. Cash to close begins near ${formatUsd(result.down)}.`;
+  const showPrintCosts = showCosts || showDeposit;
+  const cashCopy = showDeposit
+    ? `On a ${formatUsd(input.price)} purchase with ${input.downPercent}% down. Cash to close is ${formatUsd(cashTotal)}. A ${formatUsd(deposit)} deposit at contract leaves ${formatUsd(dueClosing)} due at closing.`
+    : showCosts
+      ? `On a ${formatUsd(input.price)} purchase with ${input.downPercent}% down. Cash to close begins near ${formatUsd(cashTotal)}, including the closing costs you entered.`
+      : `On a ${formatUsd(input.price)} purchase with ${input.downPercent}% down. Cash to close begins near ${formatUsd(result.down)}.`;
   const sheetNote = showCosts
     ? "Educational only. Optional costs are estimates you entered. Commission rates vary and are negotiable. Confirm taxes, fees, and insurance for the property."
     : "Educational only. Insurance, assessments, and closing costs sit outside this page. Judgment still comes after the number.";
@@ -193,7 +212,7 @@ export default function Calculator() {
               </dl>
             </section>
           </div>
-          {showCosts ? (
+          {showPrintCosts ? (
             <section className="ak-pp-sec calculator-print-costs">
               <p className="ak-pp-sec-head">
                 <span className="ak-pp-num">04</span>
@@ -207,6 +226,7 @@ export default function Calculator() {
                   </div>
                 ))}
               </dl>
+              {showDeposit ? <p className="ak-pp-copy">{DEPOSIT_EXPLAINER}</p> : null}
             </section>
           ) : null}
           <p className="ak-pp-note calculator-note">{sheetNote}</p>
@@ -279,6 +299,59 @@ export default function Calculator() {
               <Field label="Term" suffix="years" value={years} onChange={setYears} />
               <Field label="Property tax" suffix="/ mo" value={taxMonthly} onChange={setTaxMonthly} />
               <Field label="Common charges" suffix="/ mo" value={commonMonthly} onChange={setCommonMonthly} />
+              <div className="border-b border-brand-navy/15 px-5 py-4 last:border-b-0 sm:px-6">
+                <div className="grid items-start gap-3 sm:grid-cols-[minmax(0,1fr)_auto]">
+                  <div>
+                    <p className="text-lg text-brand-navy sm:text-xl">Earnest money deposit</p>
+                    <p className="mt-1 text-base leading-snug text-brand-graphite">{DEPOSIT_HINT}</p>
+                  </div>
+                  <div className="flex flex-col items-end gap-2">
+                    <div className="flex gap-1" role="group" aria-label="Deposit unit">
+                      <button
+                        type="button"
+                        aria-pressed={depositMode === "percent"}
+                        onClick={() => setDepositMode("percent")}
+                        className={cn(
+                          "border px-2.5 py-1 text-sm",
+                          depositMode === "percent"
+                            ? "border-brand-navy bg-brand-navy text-brand-ivory"
+                            : "border-brand-navy/30 text-brand-navy",
+                        )}
+                      >
+                        %
+                      </button>
+                      <button
+                        type="button"
+                        aria-pressed={depositMode === "amount"}
+                        onClick={() => setDepositMode("amount")}
+                        className={cn(
+                          "border px-2.5 py-1 text-sm",
+                          depositMode === "amount"
+                            ? "border-brand-navy bg-brand-navy text-brand-ivory"
+                            : "border-brand-navy/30 text-brand-navy",
+                        )}
+                      >
+                        $
+                      </button>
+                    </div>
+                    <span className="flex items-baseline justify-end gap-3 font-mono text-[1.7rem] tabular-nums leading-none text-brand-navy sm:text-[2.05rem]">
+                      <input
+                        inputMode="decimal"
+                        value={depositRaw}
+                        onChange={(event) => setDepositRaw(event.target.value)}
+                        aria-label="Earnest money deposit"
+                        className="w-28 bg-transparent text-right outline-none placeholder:text-brand-graphite/35 sm:w-36"
+                      />
+                      {depositMode === "percent" ? (
+                        <span className="font-sans text-lg text-brand-graphite sm:text-xl">%</span>
+                      ) : null}
+                    </span>
+                    {showDeposit && depositMode === "percent" ? (
+                      <p className="font-mono text-base tabular-nums text-brand-navy">{formatUsd(deposit)}</p>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
             </div>
             <CalculatorCosts
               price={input.price}
@@ -318,6 +391,7 @@ export default function Calculator() {
               {(
                 [
                   ["Cash to close", cashTotal],
+                  ...(showDeposit ? ([["Deposit paid at contract", deposit], ["Due at closing", dueClosing]] as const) : []),
                   ...(costTotals.closing > 0 ? [["Purchase closing", costTotals.closing] as const] : []),
                   ...(costTotals.selling > 0 ? [["Selling costs", costTotals.selling] as const] : []),
                 ] as Array<readonly [string, number]>
@@ -329,6 +403,9 @@ export default function Calculator() {
                   </p>
                 </div>
               ))}
+              {showDeposit ? (
+                <p className="px-5 py-3 text-base leading-snug text-brand-navy sm:px-6">{DEPOSIT_EXPLAINER}</p>
+              ) : null}
             </div>
             <div className="calculator-omit mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
               <button

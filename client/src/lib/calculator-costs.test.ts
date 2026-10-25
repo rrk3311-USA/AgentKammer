@@ -4,8 +4,12 @@ import {
   COST_CATALOG,
   COST_GROUPS,
   addCustomCostRow,
+  DEPOSIT_EXPLAINER,
+  DEPOSIT_HINT,
   cashToClose,
   catalogLineAmount,
+  depositAmount,
+  dueAtClosing,
   emptyCostDraft,
   mansionTaxEstimate,
   monthlyWithCosts,
@@ -107,6 +111,19 @@ describe("calculator costs catalog", () => {
     expect(totals.selling).toBe(87_500 + 3_000);
     expect(cashToClose(1_400_000, totals.closing)).toBe(1_474_550);
     expect(monthlyWithCosts(19_273, totals.monthly)).toBe(19_653);
+  });
+
+  it("leaves earnest money empty and splits cash to close minus the deposit", () => {
+    expect(depositAmount(3_500_000, "percent", "")).toBe(0);
+    expect(depositAmount(3_500_000, "percent", "10")).toBe(350_000);
+    expect(depositAmount(3_500_000, "amount", "100,000")).toBe(100_000);
+    expect(dueAtClosing(1_505_050, 350_000)).toBe(1_155_050);
+    expect(dueAtClosing(1_400_000, 0)).toBe(1_400_000);
+    expect(dueAtClosing(100_000, 250_000)).toBe(0);
+    expect(DEPOSIT_HINT).toBe("Often around 10% at contract in NYC, varies.");
+    expect(DEPOSIT_EXPLAINER).toBe("Your deposit counts toward cash to close.");
+    expect(source).toContain('depositAmount');
+    expect(source).not.toMatch(/defaultDeposit|depositDefault|10,\s*10/);
   });
 
   it("ignores catalog amounts until the line is on", () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { cashToClose, monthlyWithCosts } from "./calculator-costs";
+import { cashToClose, dueAtClosing, monthlyWithCosts } from "./calculator-costs";
 import { DEFAULT_CARRY, computeCarry, formatUsd } from "./monthly-carry";
 import { buildCalculatorPdf, calculatorPdfLayout } from "./calculator-pdf";
 
@@ -66,5 +66,20 @@ describe("calculator pdf", () => {
     expect(commands).not.toContain("\u2014");
     const pdf = new TextDecoder().decode(buildCalculatorPdf(fields, DEFAULT_CARRY, result, costs));
     expect(pdf).toContain("/Count 1");
+  });
+
+  it("prints the deposit and the amount still due at closing", () => {
+    const result = computeCarry(DEFAULT_CARRY);
+    const costs = { closing: 105_050, monthly: 180, selling: 87_500 };
+    const deposit = 350_000;
+    const cash = cashToClose(result.down, costs.closing);
+    const { commands, bottom } = calculatorPdfLayout(fields, DEFAULT_CARRY, result, costs, deposit);
+    expect(bottom).toBeLessThanOrEqual(792 - 54);
+    expect(commands).toContain("Deposit paid at contract");
+    expect(commands).toContain("Due at closing");
+    expect(commands).toContain(formatUsd(deposit));
+    expect(commands).toContain(formatUsd(dueAtClosing(cash, deposit)));
+    expect(commands).toContain("Your deposit counts toward cash to close.");
+    expect(commands).not.toContain("\u2014");
   });
 });

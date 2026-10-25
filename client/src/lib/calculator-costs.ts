@@ -258,6 +258,22 @@ export function monthlyWithCosts(baseMonthly: number, monthlyExtras: number): nu
   return Math.max(0, baseMonthly) + Math.max(0, monthlyExtras);
 }
 
+export type DepositMode = "percent" | "amount";
+
+export const DEPOSIT_HINT = "Often around 10% at contract in NYC, varies.";
+export const DEPOSIT_EXPLAINER = "Your deposit counts toward cash to close.";
+
+export function depositAmount(price: number, mode: DepositMode, raw: string): number {
+  if (String(raw).trim() === "") return 0;
+  const entered = Math.max(0, parseMoney(raw));
+  if (mode === "percent") return Math.max(0, price) * (entered / 100);
+  return entered;
+}
+
+export function dueAtClosing(cash: number, deposit: number): number {
+  return Math.max(0, cash - Math.max(0, deposit));
+}
+
 export function toggleCatalogItem(draft: CostDraft, item: CostCatalogItem, on: boolean, price: number): CostDraft {
   const next: CostDraft = {
     ...draft,
