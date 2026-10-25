@@ -1,8 +1,9 @@
 /**
- * Side homepage at /home-brand.
- * Render on localhost and Vercel Preview. 404 on the public production hosts.
+ * Side homepages. Render on localhost and Vercel Preview.
+ * 404 on the public production hosts.
  */
 export const BRAND_HOME_PATH = "/home-brand";
+export const HOME_V3_PATH = "/home-v3";
 
 const PRODUCTION_HOSTS = new Set(["agentkammer.com", "www.agentkammer.com"]);
 
@@ -12,7 +13,15 @@ export function isBrandHomeProductionHost(host: string | null | undefined): bool
   return PRODUCTION_HOSTS.has(hostname);
 }
 
+function cleanPath(location: string): string {
+  return (location.split(/[?#]/)[0] ?? location).replace(/\/+$/, "") || "/";
+}
+
 export function isBrandHomePath(location: string): boolean {
-  const path = (location.split(/[?#]/)[0] ?? location).replace(/\/+$/, "") || "/";
-  return path === BRAND_HOME_PATH;
+  return cleanPath(location) === BRAND_HOME_PATH;
+}
+
+export function isSideHomePath(location: string): boolean {
+  const path = cleanPath(location);
+  return path === BRAND_HOME_PATH || path === HOME_V3_PATH;
 }

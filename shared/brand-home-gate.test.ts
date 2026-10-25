@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { isBrandHomePath, isBrandHomeProductionHost } from "./brand-home-gate";
+import { isBrandHomePath, isBrandHomeProductionHost, isSideHomePath } from "./brand-home-gate";
 
 describe("brand homepage gate", () => {
   it("404s only the public production hosts", () => {
@@ -31,7 +31,19 @@ describe("brand homepage gate", () => {
   it("stays out of the public sitemap", () => {
     const sitemap = readFileSync("client/public/sitemap.xml", "utf8");
     expect(sitemap).not.toContain("home-brand");
+    expect(sitemap).not.toContain("home-v3");
     const robots = readFileSync("client/public/robots.txt", "utf8");
     expect(robots).toContain("Disallow: /home-brand");
+    expect(robots).toContain("Disallow: /home-v3");
+  });
+
+  it("treats both side homepages as gated routes", () => {
+    expect(isSideHomePath("/home-brand")).toBe(true);
+    expect(isSideHomePath("/home-v3")).toBe(true);
+    expect(isSideHomePath("/home-v3/")).toBe(true);
+    expect(isSideHomePath("/home-v3?preview=1")).toBe(true);
+    expect(isSideHomePath("/")).toBe(false);
+    expect(isSideHomePath("/home")).toBe(false);
+    expect(isBrandHomePath("/home-v3")).toBe(false);
   });
 });

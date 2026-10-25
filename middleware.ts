@@ -1,7 +1,7 @@
 import { isBrandHomeProductionHost } from "./shared/brand-home-gate";
 
 export const config = {
-  matcher: ["/home-brand", "/home-brand/"],
+  matcher: ["/home-brand", "/home-brand/", "/home-v3", "/home-v3/"],
 };
 
 export default function middleware(request: Request): Response | undefined {
