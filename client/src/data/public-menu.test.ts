@@ -63,15 +63,15 @@ describe("public menu lock", () => {
     expect([...KAMMER_VERDICTS]).toEqual(["Pick", "Consider", "Wait", "Pass"]);
   });
 
-  it("locks primary header nav to Home · Start Here · Guides · Interactive Tools · Contact", () => {
+  it("locks primary header nav to Start Here · Contact", () => {
     expect(primaryNav.map((item) => [item.label, item.href])).toEqual([
-      ["Home", "/"],
       ["Start Here", "/situations"],
-      ["Guides", "/guides"],
-      ["Interactive Tools", "/tools"],
       ["Contact", "/contact"],
     ]);
+    expect(primaryNav.some((item) => item.label === "Home")).toBe(false);
     expect(primaryNav.some((item) => item.label === "Situations")).toBe(false);
+    expect(primaryNav.some((item) => item.label === "Guides")).toBe(false);
+    expect(primaryNav.some((item) => item.label === "Interactive Tools")).toBe(false);
     expect(primaryNav.some((item) => item.label === "Buildings")).toBe(false);
     expect(primaryNav.some((item) => item.label === "About")).toBe(false);
     expect(primaryNav.some((item) => item.href === "/buyer-advisory")).toBe(false);
@@ -101,9 +101,8 @@ describe("public menu lock", () => {
     }
   });
 
-  it("keeps the charcoal footer quiet: doors, then Contact · Privacy · Terms", () => {
+  it("keeps the charcoal footer quiet: Guides · About · Get Qualified, then Privacy · Terms", () => {
     expect(FOOTER_DARK_NAV.map((item) => [item.label, item.href])).toEqual([
-      ["Start Here", "/situations"],
       ["Guides", "/guides"],
       ["About", "/about"],
       ["Get Qualified", "/qualify"],
@@ -111,8 +110,9 @@ describe("public menu lock", () => {
     expect(FOOTER_DARK_META.map((item) => [item.label, item.href])).toEqual([
       ["Privacy", "/privacy"],
       ["Terms", "/terms"],
-      ["Contact", "/contact"],
     ]);
+    expect(FOOTER_DARK_LINKS.some((item) => item.label === "Start Here")).toBe(false);
+    expect(FOOTER_DARK_LINKS.some((item) => item.label === "Contact")).toBe(false);
     expect(FOOTER_DARK_LINKS).toEqual([...FOOTER_DARK_NAV, ...FOOTER_DARK_META]);
     expect(FOOTER_DARK_LINKS.filter((item) => item.label === "Guides")).toHaveLength(1);
     expect(FOOTER_DARK_LINKS.some((item) => item.label === "Situations")).toBe(false);

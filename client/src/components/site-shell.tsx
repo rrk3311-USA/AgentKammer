@@ -4,12 +4,9 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { grammar } from "@/components/visual-grammar";
 
-/** Locked primary header: Home · Start Here · Guides · Interactive Tools · Contact. Guidance is the filled utility, not a sixth door. */
+/** Locked primary header: Start Here · Contact. The mark is Home. Guidance stays a utility. */
 export const primaryNav = [
-  { label: "Home", href: "/" },
   { label: "Start Here", href: "/situations" },
-  { label: "Guides", href: "/guides" },
-  { label: "Interactive Tools", href: "/tools" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
@@ -610,6 +607,7 @@ export function CTA({
   eyebrow = "Start Here",
   guidanceLabel,
   onGuidanceClick,
+  align = "start",
 }: {
   title?: string;
   description?: string;
@@ -618,9 +616,11 @@ export function CTA({
   eyebrow?: string;
   guidanceLabel?: string;
   onGuidanceClick?: () => void;
+  align?: "start" | "center";
 }) {
   const hideSectionEyebrow = sameCtaPhrase(eyebrow, title);
   const hideButtonEyebrow = sameCtaPhrase(eyebrow, label);
+  const centered = align === "center";
   const actionClass = hideButtonEyebrow
     ? "ak-call-button group inline-flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-[14px] font-semibold uppercase tracking-[0.12em] transition-colors sm:w-auto sm:min-w-[16rem] sm:gap-6"
     : "ak-call-button group grid w-full px-5 py-4 text-left transition-colors sm:min-w-[16rem]";
@@ -643,13 +643,21 @@ export function CTA({
   return (
     <section className="border-t border-brand-brass/30 bg-brand-navy text-brand-ivory">
       <PageSection className="py-12 lg:py-20">
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-8">
-          <div>
+        <div
+          className={
+            centered
+              ? "flex flex-col items-center text-center"
+              : "grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-8"
+          }
+        >
+          <div className={centered ? "max-w-xl" : undefined}>
             {hideSectionEyebrow ? null : <p className={grammar.eyebrowOnDark}>{eyebrow}</p>}
             <h2 className={cn(hideSectionEyebrow ? "" : "mt-4", grammar.sectionOnDark)}>{title}</h2>
-            <p className={cn("mt-5", grammar.bodyOnDark)}>{description}</p>
+            {description ? (
+              <p className={cn("mt-5", grammar.bodyOnDark, centered && "mx-auto")}>{description}</p>
+            ) : null}
           </div>
-          <div className="grid gap-3 sm:min-w-[16rem]">
+          <div className={cn("grid gap-3 sm:min-w-[16rem]", centered && "mt-8")}>
             {href.startsWith("#") ? (
               <a
                 href={href}

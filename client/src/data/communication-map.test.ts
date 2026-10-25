@@ -158,13 +158,10 @@ describe("communication map", () => {
     expect(applyScopeTurn(4, 4, 50)).toEqual({ step: 4, carry: 14 });
   });
 
-  it("keeps five header doors and hides the Decision Guide while side tools are off", () => {
-    expect(primaryNav).toHaveLength(5);
+  it("keeps two header doors and hides the Decision Guide while side tools are off", () => {
+    expect(primaryNav).toHaveLength(2);
     expect(primaryNav.map((item) => item.label)).toEqual([
-      "Home",
       "Start Here",
-      "Guides",
-      "Interactive Tools",
       "Contact",
     ]);
     const html = renderToStaticMarkup(createElement(Router, { ssrPath: "/tools" }, createElement(ToolsHome)));

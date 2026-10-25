@@ -752,6 +752,16 @@
     background: transparent;
   }
 
+  /* Quiet What's Changing chips: one swipe row on phones */
+  .ak-chip-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .ak-chip-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Footer What's Changing - hide native bar; custom pill drawn in React */
   .ak-footer-scroll {
     overflow-y: auto;

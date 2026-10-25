@@ -30,8 +30,8 @@ describe("CTA button copy", () => {
   it("uses a single Contact label without a gold eyebrow or Email button", () => {
     const html = renderToStaticMarkup(
       createElement(CTA, {
-        title: "When you want a human reply.",
-        description: "Write only if a session is already the next step.",
+        title: "Contact",
+        description: "If you already know what you need, write to me directly.",
         href: "#contact",
         label: "Contact",
         eyebrow: "Contact",
