@@ -81,6 +81,7 @@ describe("Wheel of Life phone readability", () => {
     expect(html).toContain(".chips{display:flex;gap:6px;overflow-x:auto");
     expect(html).toContain("function syncDockPad");
     expect(phoneCss).toContain("padding-bottom:calc(var(--dock-h,140px) + 12px)");
+    expect(phoneCss).toContain(".set-panel{padding:16px 16px max(168px,calc(var(--dock-h,140px) + 28px))}");
     expect(phoneCss).toContain("footer{padding-bottom:20px}");
     expect(html).not.toContain('class="dock-clear"');
     expect(html).toContain('id="dock-fold"');
