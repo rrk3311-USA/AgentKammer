@@ -188,7 +188,7 @@ body.dock-on{padding-bottom:176px}
 .move h3{font-size:1.35rem;color:var(--deep);letter-spacing:.18em}
 .move .sc{font:italic 1.6rem var(--serif);color:var(--stone-blue)}
 .move p{margin:8px 0 14px;color:#4c5465;font-size:.95rem}
-.move label{display:block;font:600 10.5px var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--stone-blue);margin-bottom:8px}
+.move label{display:block;font:600 10.5px/1.4 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--stone-blue);margin:18px 0 8px}
 .move textarea{width:100%;min-height:104px;resize:vertical;font:italic 1.2rem/1.45 var(--serif);color:var(--deep);background:rgba(255,255,255,.55);border:1px solid #d8cfbd;padding:12px 14px}
 .move textarea::placeholder{color:#9a9182}
 .saved{font-size:.8rem;color:#7a7365;min-height:1.3em;margin:10px 0 0}
@@ -215,8 +215,10 @@ body.dock-on{padding-bottom:176px}
 .needs .lede{margin-top:16px}
 .need-grid{display:grid;gap:36px;margin-top:32px}
 @media(min-width:900px){.need-grid{grid-template-columns:.9fr 1.1fr;align-items:start}}
-.need-plate{margin:0;background:#f7f3ea;border:1px solid #d8d1c4;padding:clamp(16px,3vw,24px)}
-.need-plate svg{width:100%;height:auto;max-height:280px}
+.need-plate{margin:0;background:#f7f3ea;border:1px solid #d8d1c4;padding:clamp(28px,4vw,40px) clamp(28px,5vw,48px)}
+.need-plate svg{width:100%;height:auto;max-height:none;overflow:visible}
+#needchart{overflow:visible}
+#needchart text{fill:#1c1914;letter-spacing:0;font-weight:600}
 .need-cap{font:italic 1rem var(--serif);color:#6b6457;margin:12px 0 0}
 .need-ask{font:600 10.5px/1.4 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--stone-blue);margin:0 0 12px}
 .need-read p{margin:0 0 14px;color:#4c5465}
@@ -242,7 +244,7 @@ body.dock-on{padding-bottom:176px}
 .keep .line{font:italic 400 clamp(1.2rem,2.8vw,1.45rem)/1.35 var(--serif);color:var(--deep);margin:0 0 12px}
 .keep .act{margin:0;color:#4c5465}
 .need-nav{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-.need-tag{display:inline-block;margin-top:6px;font:600 9px/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--stone-blue)}
+.need-tag{display:inline-block;margin:8px 0 2px;font:600 9px/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--stone-blue)}
 .need-step[hidden]{display:none!important}
 .look{margin-top:8px}
 .id-q{margin:0 0 16px;color:#4c5465}
@@ -272,22 +274,24 @@ footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px
  .pgrid>:last-child{padding:0 16px}
  .needs{margin-top:18px;padding-top:14px}
  .needs h3{margin:8px 0 0}
- .needs .lede{margin-top:8px}
+ .needs .lede{margin-top:12px}
  .needs .rule{margin:10px 0}
  .need-grid{margin-top:12px;gap:14px}
- .plate,.need-plate{width:100vw;max-width:none;position:relative;left:50%;transform:translateX(-50%);padding:8px 16px;border-left:0;border-right:0;scroll-margin-top:calc(var(--ak-compact-header-h,52px) + 12px)}
+ .plate,.need-plate{width:100vw;max-width:none;position:relative;left:50%;transform:translateX(-50%);border-left:0;border-right:0;scroll-margin-top:calc(var(--ak-compact-header-h,52px) + 12px)}
+ .plate{padding:8px 16px}
+ .need-plate{padding:36px 12px 28px}
  .need-plate svg{max-height:none;width:100%;height:auto;overflow:visible}
  .plate svg,.need-plate svg{overflow:visible}
- #needchart text{font-size:20px;fill:#0D182B;letter-spacing:0;font-weight:600}
+ #needchart text{fill:#0D182B;letter-spacing:0;font-weight:600}
  #bigwheel text{font-size:20px;fill:#F5F2EB;letter-spacing:0;font-weight:600}
  .cap,.need-cap,.look{margin-left:16px;margin-right:16px}
  .cap{margin-top:8px}
  .need-cap{margin:8px 0 0}
  .scores{margin:12px 16px 0;font-size:1.68rem;grid-template-columns:1fr;gap:0}
- .scores li{padding:6px 0;gap:12px;min-width:0}
+ .scores li{padding:8px 0;gap:12px;min-width:0}
  .scores li span{min-width:0;overflow-wrap:anywhere}
  .scores b{flex:none;font-size:1.1em}
- .need-map li{padding:7px 0;font-size:1.8rem}
+ .need-map li{padding:10px 0;font-size:1.8rem}
  .need-map b{font-size:1.15em}
  .need-read{padding:0 16px}
  .closer{margin-top:32px;padding-top:22px}
@@ -557,7 +561,7 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
    <div class="need-grid">
     <div>
      <figure class="need-plate">
-      <svg id="needchart" viewBox="-210 -198 420 396" role="img" aria-labelledby="nc-t nc-d"><title id="nc-t">Six quiet needs</title><desc id="nc-d"></desc></svg>
+      <svg id="needchart" viewBox="-230 -200 460 400" role="img" aria-labelledby="nc-t nc-d"><title id="nc-t">Six quiet needs</title><desc id="nc-d"></desc></svg>
      </figure>
      <p class="need-cap">Drawn first from the wheel. You may refine it, one question at a time.</p>
      <button class="btn ghost look" id="need-look" type="button">A closer look</button>
@@ -958,27 +962,37 @@ function makeWheel(svg,R,labels,uid){
   AREAS.forEach((a,i)=>{const r=Math.max(R*st.s[a.k]/10,R*.04);gs[i].setAttribute("d",arc(r,i));bs[i].setAttribute("d",arc(r,i));paintLabel(i,lows)});
  }};
 }
-function makeNeedChart(svg,R){
+function makeNeedChart(svg){
  const NN=NEEDS.length;
  const keep=[...svg.querySelectorAll("title,desc")];
  svg.replaceChildren();
  keep.forEach(n=>svg.appendChild(n));
  const rings=el("g",{});svg.appendChild(rings);
- for(let l=2;l<=10;l+=2)rings.appendChild(el("circle",{r:(R*l/10).toFixed(1),fill:"none",stroke:l===10?"#2a3447":"#cfc8bb","stroke-width":l===10?1.1:.7,"stroke-opacity":l===10?.7:.9}));
- NEEDS.forEach((n,i)=>{const[x,y]=pt(R,-Math.PI/2+i*2*Math.PI/NN);rings.appendChild(el("line",{x1:0,y1:0,x2:x.toFixed(1),y2:y.toFixed(1),stroke:"#d8d1c4","stroke-width":.8}))});
  const poly=el("polygon",{fill:"rgba(42,52,71,.22)",stroke:"#2a3447","stroke-width":1.2,"stroke-linejoin":"round"});
  svg.appendChild(poly);
  const labels=[];
  NEEDS.forEach((n,i)=>{
-  const ang=-Math.PI/2+(i)*2*Math.PI/NN,reach=R+28,[x,y]=pt(reach,ang);
-  const t=el("text",{x:x.toFixed(1),y:(y+3).toFixed(1),"text-anchor":Math.abs(x)<24?"middle":x>0?"start":"end",fill:"#1c1914","font-family":"Montserrat,sans-serif","font-size":8,"letter-spacing":.4});
+  const t=el("text",{fill:"#1c1914","font-family":"Montserrat,sans-serif","font-size":16,"letter-spacing":0,"font-weight":600,class:"need-axis"});
   t.textContent=n.n.toUpperCase();
   svg.appendChild(t);
   labels.push(t);
  });
+ function drawRings(R){
+  rings.replaceChildren();
+  for(let l=2;l<=10;l+=2)rings.appendChild(el("circle",{r:(R*l/10).toFixed(1),fill:"none",stroke:l===10?"#2a3447":"#cfc8bb","stroke-width":l===10?1.1:.7,"stroke-opacity":l===10?.7:.9}));
+  NEEDS.forEach((n,i)=>{const[x,y]=pt(R,-Math.PI/2+i*2*Math.PI/NN);rings.appendChild(el("line",{x1:0,y1:0,x2:x.toFixed(1),y2:y.toFixed(1),stroke:"#d8d1c4","stroke-width":.8}))});
+ }
  return{set(scores){
   const phone=isPhone();
-  svg.setAttribute("viewBox",phone?"-180 -180 360 360":"-210 -198 420 396");
+  const vb=phone?[-250,-230,500,460]:[-230,-200,460,400];
+  svg.setAttribute("viewBox",vb.join(" "));
+  const cssW=svg.getBoundingClientRect().width||(phone?360:420);
+  const scale=cssW/vb[2];
+  const font=16/scale;
+  const longest=Math.max(...NEEDS.map(n=>n.n.length))*font*0.62;
+  const half=vb[2]/2;
+  const R=Math.max(42,Math.min(phone?58:88,half-longest-18));
+  drawRings(R);
   poly.setAttribute("fill",phone?"rgba(13,24,43,.38)":"rgba(42,52,71,.22)");
   poly.setAttribute("stroke",phone?"#0D182B":"#2a3447");
   poly.setAttribute("stroke-width",phone?"2.6":"1.2");
@@ -986,29 +1000,15 @@ function makeNeedChart(svg,R){
   poly.setAttribute("points",pts);
   NEEDS.forEach((n,i)=>{
    const t=labels[i],ang=-Math.PI/2+i*2*Math.PI/NN;
-   if(phone){
-    const reach=R+16,[x,y]=pt(reach,ang);
-    t.setAttribute("x",x.toFixed(1));
-    t.setAttribute("y",(y+6).toFixed(1));
-    t.setAttribute("text-anchor","middle");
-    t.setAttribute("fill","#0D182B");
-    t.setAttribute("font-size","20");
-    t.setAttribute("letter-spacing","0");
-    t.setAttribute("font-weight","600");
-    t.setAttribute("stroke","#f7f3ea");
-    t.setAttribute("stroke-width","4");
-    t.setAttribute("paint-order","stroke");
-    writeLabel(t,x,[scoreMark(scores[n.k])]);
-    return;
-   }
-   const reach=R+28,[x,y]=pt(reach,ang);
+   const reach=R+font*0.7;
+   const[x,y]=pt(reach,ang);
    t.setAttribute("x",x.toFixed(1));
-   t.setAttribute("y",(y+3).toFixed(1));
+   t.setAttribute("y",(y+(Math.abs(x)<24?font*0.35:font*0.3)).toFixed(1));
    t.setAttribute("text-anchor",Math.abs(x)<24?"middle":x>0?"start":"end");
    t.setAttribute("fill","#1c1914");
-   t.setAttribute("font-size","8");
-   t.setAttribute("letter-spacing",".4");
-   t.removeAttribute("font-weight");
+   t.setAttribute("font-size",font.toFixed(2));
+   t.setAttribute("letter-spacing","0");
+   t.setAttribute("font-weight","600");
    t.removeAttribute("stroke");
    t.removeAttribute("stroke-width");
    t.removeAttribute("paint-order");
@@ -1090,7 +1090,7 @@ function paintVibe(){
  $("vibe-glow").setAttribute("d",d);
 }
 
-const big=makeWheel($("bigwheel"),180,true,"b"),mini=makeWheel($("miniwheel"),180,false,"m"),prt=makeWheel($("printwheel"),150,true,"p"),nc=makeNeedChart($("needchart"),140);
+const big=makeWheel($("bigwheel"),180,true,"b"),mini=makeWheel($("miniwheel"),180,false,"m"),prt=makeWheel($("printwheel"),150,true,"p"),nc=makeNeedChart($("needchart"));
 let pt1,sel=AREAS[0].k;
 function ranked(){return AREAS.map((a,i)=>({...a,v:st.s[a.k],i})).sort((x,y)=>x.v-y.v||x.i-y.i)}
 function focusAreas(){
