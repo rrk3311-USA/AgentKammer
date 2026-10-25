@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import React, { useEffect, useId, useRef, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { AgentKammerHorizontalLogo } from "@/components/AgentKammerHorizontalLogo";
 import { CompactSiteHeader } from "@/components/CompactSiteHeader";
@@ -77,31 +77,13 @@ function HeaderNavLink({
 
 function ToolsDropdown({ location }: { location: string }) {
   const [open, setOpen] = useState(false);
-  const wrapRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
   const tools = interactiveToolsNav();
   const active = isPrimaryNavActive("/tools", location);
 
-  useEffect(() => {
-    if (!open) return;
-    const onPointer = (event: PointerEvent) => {
-      if (!wrapRef.current?.contains(event.target as Node)) setOpen(false);
-    };
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
-    };
-    document.addEventListener("pointerdown", onPointer);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("pointerdown", onPointer);
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [open]);
-
   return (
     <div
-      ref={wrapRef}
-      className="relative"
+      className="group/tools relative"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
@@ -112,14 +94,22 @@ function ToolsDropdown({ location }: { location: string }) {
         aria-controls={menuId}
         aria-haspopup="menu"
         data-testid="button-header-tools"
-        onClick={() => setOpen((value) => !value)}
+        onFocus={() => setOpen(true)}
+        onBlur={(event) => {
+          if (!event.currentTarget.parentElement?.contains(event.relatedTarget as Node)) {
+            setOpen(false);
+          }
+        }}
       >
         <span className={navLabelClass(active)}>
           Tools
           <span className={navUnderlineClass(active)} aria-hidden />
         </span>
         <ChevronDown
-          className={cn("h-3.5 w-3.5 transition-transform", active ? "text-[#F2E7CB]" : "text-[#AEB8BE]", open && "rotate-180")}
+          className={cn(
+            "h-3.5 w-3.5 transition-transform group-hover/tools:rotate-180 group-focus-within/tools:rotate-180",
+            active ? "text-[#F2E7CB]" : "text-[#AEB8BE]",
+          )}
           strokeWidth={1.5}
           aria-hidden
         />
@@ -127,8 +117,7 @@ function ToolsDropdown({ location }: { location: string }) {
       <div
         id={menuId}
         role="menu"
-        hidden={!open}
-        className="absolute left-1/2 top-full z-50 min-w-[13.5rem] -translate-x-1/2 border border-brand-ivory/12 bg-brand-navy py-2 shadow-[0_16px_32px_rgba(13,24,43,0.28)]"
+        className="invisible absolute left-1/2 top-full z-50 min-w-[13.5rem] -translate-x-1/2 border border-brand-ivory/12 bg-brand-navy py-2 opacity-0 shadow-[0_16px_32px_rgba(13,24,43,0.28)] group-hover/tools:visible group-hover/tools:opacity-100 group-focus-within/tools:visible group-focus-within/tools:opacity-100"
       >
         {tools.map((tool) => {
           const itemClass = cn(
@@ -137,11 +126,11 @@ function ToolsDropdown({ location }: { location: string }) {
             focusRing,
           );
           return isHardMobileHref(tool.href) ? (
-            <a key={tool.href} href={tool.href} role="menuitem" className={itemClass} onClick={() => setOpen(false)}>
+            <a key={tool.href} href={tool.href} role="menuitem" className={itemClass}>
               {tool.label}
             </a>
           ) : (
-            <Link key={tool.href} href={tool.href} role="menuitem" className={itemClass} onClick={() => setOpen(false)}>
+            <Link key={tool.href} href={tool.href} role="menuitem" className={itemClass}>
               {tool.label}
             </Link>
           );
