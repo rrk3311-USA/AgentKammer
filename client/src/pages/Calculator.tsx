@@ -50,7 +50,7 @@ function Field({
 export default function Calculator() {
   usePageMetadata({
     title: "Calculator",
-    description: "A quiet monthly-carry calculator. Price, down payment, rate, tax, and common charges — before the listing takes over.",
+    description: "A quiet monthly-carry calculator. Price, down payment, rate, tax, and common charges, before the listing takes over.",
     path: "/calculator",
   });
 
@@ -82,6 +82,7 @@ export default function Calculator() {
         <i className="rule-out" /><i className="rule-in" />
         <i className="c tl" /><i className="c tr" /><i className="c bl" /><i className="c br" />
       </div>
+      <div className="calculator-print-inner">
       <section className="calculator-month border-b border-brand-border bg-brand-navy text-brand-ivory">
         <PageSection className="calculator-month-inner grid gap-10 py-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:py-16">
           <div>
@@ -99,7 +100,7 @@ export default function Calculator() {
               {formatUsd(result.down)}, before closing costs.
             </p>
             <p className="mt-4 text-lg leading-snug text-brand-ivory sm:text-xl">
-              Carry first. Listings later. Mortgage, tax, and common charges — educational, not a pre-approval.
+              Carry first. Listings later. Mortgage, tax, and common charges. Educational, not a pre-approval.
             </p>
           </div>
         </PageSection>
@@ -159,10 +160,6 @@ export default function Calculator() {
                 </p>
               </div>
             </div>
-            <p className="calculator-omit mt-5 text-lg leading-snug text-brand-navy">
-              Educational only. Insurance, assessments, and closing costs sit outside this page. Judgment still
-              comes after the number.
-            </p>
             <div className="calculator-omit mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
               <button
                 type="button"
@@ -198,7 +195,12 @@ export default function Calculator() {
             </div>
           </aside>
         </div>
+        <p className="calculator-note mt-5 text-lg leading-snug text-brand-navy">
+          Educational only. Insurance, assessments, and closing costs sit outside this page. Judgment still
+          comes after the number.
+        </p>
       </PageSection>
+      </div>
     </main>
   );
 }

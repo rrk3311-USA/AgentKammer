@@ -1371,24 +1371,33 @@
   }
 }
 
-/* /calculator only. Screen layout stays. Print is the month, the inputs, and the breakdown. */
+/* Screen: wrapper is a no-op so the live calculator layout stays. */
+.calculator-print-inner{display:contents}
+
+/* /calculator only. One letter page: month, every input, results, disclaimer, platinum frame. */
 @media print {
   @page {
     size: letter;
-    margin: 0.4in;
+    margin: 0.42in;
   }
 
+  html:has(.calculator-sheet),
   body:has(.calculator-sheet) {
-    height: auto !important;
+    height: 100% !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
     background: var(--ak-platinum-paper, #d8d2c6) !important;
     color: var(--ak-platinum-ink, #1c1914);
   }
 
-  body:has(.calculator-sheet) .ak-app-shell {
-    display: block !important;
-    height: auto !important;
+  body:has(.calculator-sheet) .ak-app-shell,
+  body:has(.calculator-sheet) .ak-app-shell > .flex-1 {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
     min-height: 0 !important;
-    background: var(--ak-platinum-paper, #d8d2c6) !important;
+    background: transparent !important;
   }
 
   body:has(.calculator-sheet) header,
@@ -1407,79 +1416,139 @@
 
   .calculator-sheet {
     position: relative;
-    break-inside: avoid;
-    page-break-inside: avoid;
-    background: var(--ak-platinum-panel, #f7f3ea) !important;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    height: 100vh;
+    min-height: 10in;
+    overflow: hidden;
+    padding: 8mm 7.5mm 7mm;
+    background: var(--ak-platinum-paper, #d8d2c6) !important;
     color: var(--ak-platinum-ink, #1c1914);
-    outline: 1.15pt solid var(--ak-platinum-trim, #B8BCC2);
-    outline-offset: -4px;
-    box-shadow: inset 0 0 0 1.7mm var(--ak-platinum-paper, #d8d2c6), inset 0 0 0 calc(1.7mm + 0.4pt) var(--ak-platinum-trim-in, #D6D9DE);
   }
 
   .calculator-print-frame {
     display: block !important;
   }
 
+  .calculator-print-inner {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    background: var(--ak-platinum-panel, #f7f3ea);
+    border: 0.4pt solid var(--ak-platinum-trim, #B8BCC2);
+  }
+
+  .calculator-month {
+    flex: 0 0 auto;
+  }
+
   .calculator-month-inner {
     display: grid !important;
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr) !important;
     align-items: end !important;
-    gap: 1rem !important;
-    padding-top: 0.65rem !important;
-    padding-bottom: 0.75rem !important;
+    gap: 8mm !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 6mm 7mm !important;
+  }
+
+  .calculator-month .font-mono {
+    font-size: 42pt !important;
+    line-height: 0.92 !important;
+  }
+
+  .calculator-month .font-display,
+  .calculator-month .text-lg,
+  .calculator-month .sm\:text-xl {
+    font-size: 12pt !important;
+    line-height: 1.28 !important;
   }
 
   .calculator-body {
-    padding-top: 0.75rem !important;
-    padding-bottom: 0 !important;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 6mm 7mm 6mm !important;
   }
 
   .calculator-work {
+    flex: 1 1 auto;
     display: grid !important;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr) !important;
-    align-items: start !important;
-    gap: 1rem !important;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr) !important;
+    align-items: stretch !important;
+    gap: 7mm !important;
+    min-height: 0;
+  }
+
+  .calculator-work > div,
+  .calculator-work > aside {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
 
   .calculator-sheet h2 {
-    font-size: 1.35rem !important;
+    font-size: 15pt !important;
     line-height: 1.15 !important;
+    margin: 0 0 3mm !important;
   }
 
-  .calculator-sheet label {
+  .calculator-work .border {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0 !important;
+    min-height: 0;
+  }
+
+  .calculator-sheet label,
+  .calculator-work .border > div {
     display: flex !important;
+    flex: 1 1 0;
     flex-direction: row !important;
-    align-items: baseline !important;
+    align-items: center !important;
     justify-content: space-between !important;
-    gap: 0.75rem !important;
-    padding-top: 0.4rem !important;
-    padding-bottom: 0.4rem !important;
+    gap: 4mm !important;
+    min-height: 0;
+    padding: 2.4mm 4mm !important;
     white-space: nowrap;
   }
 
   .calculator-sheet label > span {
     white-space: nowrap;
+    font-size: 11pt !important;
   }
 
   .calculator-sheet label input {
-    width: 7.25rem !important;
-  }
-
-  .calculator-work .border > div {
-    padding-top: 0.4rem !important;
-    padding-bottom: 0.4rem !important;
+    width: 28mm !important;
+    font-size: 13pt !important;
   }
 
   .calculator-work .font-mono {
-    font-size: 1.35rem !important;
+    font-size: 13pt !important;
   }
 
   .calculator-total {
-    padding-top: 0.55rem !important;
-    padding-bottom: 0.55rem !important;
+    flex: 1.15 1 0;
+    padding: 3mm 4mm !important;
   }
 
   .calculator-total .font-mono {
-    font-size: 1.65rem !important;
+    font-size: 16pt !important;
+  }
+
+  .calculator-note {
+    display: block !important;
+    margin: 4mm 0 0 !important;
+    font-size: 9.5pt !important;
+    line-height: 1.35 !important;
   }
 }
