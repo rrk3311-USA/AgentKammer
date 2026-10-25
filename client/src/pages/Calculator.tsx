@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { CalculatorCosts } from "@/components/CalculatorCosts";
@@ -29,6 +29,25 @@ import { cn } from "@/lib/utils";
 
 const PRINT_SLUG = "interactive-tools/calculator";
 const NOTES_RULES = Array.from({ length: 17 }, (_, index) => index);
+const PRINTING_CLASS = "ak-printing";
+
+function beginCalculatorPrint() {
+  document.documentElement.classList.add(PRINTING_CLASS);
+}
+
+function endCalculatorPrint() {
+  document.documentElement.classList.remove(PRINTING_CLASS);
+}
+
+/** Show the Platinum Paper sheet in the layout tree, then print. */
+export function printCalculatorSheet() {
+  beginCalculatorPrint();
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      window.print();
+    });
+  });
+}
 
 function sheetDate(date = new Date()) {
   const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -150,6 +169,35 @@ export default function Calculator() {
       : []),
   ] as const;
   const showPrintCosts = showCosts || showDeposit;
+
+  useEffect(() => {
+    const onBeforePrint = () => beginCalculatorPrint();
+    const onAfterPrint = () => endCalculatorPrint();
+    const printQuery = window.matchMedia("print");
+    const onPrintQuery = (event: MediaQueryListEvent) => {
+      if (event.matches) beginCalculatorPrint();
+      else endCalculatorPrint();
+    };
+
+    window.addEventListener("beforeprint", onBeforePrint);
+    window.addEventListener("afterprint", onAfterPrint);
+    if (typeof printQuery.addEventListener === "function") {
+      printQuery.addEventListener("change", onPrintQuery);
+    } else {
+      printQuery.addListener(onPrintQuery);
+    }
+
+    return () => {
+      window.removeEventListener("beforeprint", onBeforePrint);
+      window.removeEventListener("afterprint", onAfterPrint);
+      if (typeof printQuery.removeEventListener === "function") {
+        printQuery.removeEventListener("change", onPrintQuery);
+      } else {
+        printQuery.removeListener(onPrintQuery);
+      }
+      endCalculatorPrint();
+    };
+  }, []);
   const cashCopy = showDeposit
     ? `On a ${formatUsd(input.price)} purchase with ${input.downPercent}% down. Cash to close is ${formatUsd(cashTotal)}. A ${formatUsd(deposit)} deposit at contract leaves ${formatUsd(dueClosing)} due at closing.`
     : showCosts
@@ -410,7 +458,8 @@ export default function Calculator() {
             <div className="calculator-omit mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
               <button
                 type="button"
-                onClick={() => window.print()}
+                onClick={printCalculatorSheet}
+                data-testid="button-save-pdf"
                 className="inline-flex items-center justify-center border border-brand-navy bg-white px-5 py-4 text-lg font-semibold text-brand-navy"
               >
                 Save as PDF

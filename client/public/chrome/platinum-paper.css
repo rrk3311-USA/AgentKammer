@@ -330,4 +330,11 @@
 
 @media print{
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  /* WebKit/Chromium print drop mask-composite:exclude and fill the frame
+     with the platinum gradient, covering the letter. Hairline rules stay. */
+  .ak-pp-frame::after,
+  .ak-platinum-frame::after,
+  .mm-frame::after{
+    display:none !important;
+  }
 }

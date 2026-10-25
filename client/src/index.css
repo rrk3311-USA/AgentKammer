@@ -1448,18 +1448,135 @@
   }
 }
 
-/* Platinum Paper sheet is hidden on screen. Screen chrome stays ivory / navy. */
-.calculator-print-doc{display:none}
+/* Platinum Paper stays in the box tree on screen, parked off-canvas.
+   WebKit drops display:none subtrees from the print snapshot. */
+.calculator-print-doc {
+  position: fixed;
+  left: -200vw;
+  top: 0;
+  width: 8.5in;
+  min-height: 11in;
+  pointer-events: none;
+}
 
-/* /calculator only. One letter page: Platinum Paper + LOI structure + inlay. */
+/* /calculator only. Class is set before window.print so the letter is already painted. */
+html.ak-printing,
+html.ak-printing body {
+  height: 100% !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: var(--ak-pp-paper, #CFCCC6) !important;
+  color: var(--ak-pp-deep, #161C28);
+}
+
+html.ak-printing .ak-app-shell,
+html.ak-printing .ak-app-shell > .flex-1 {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  background: transparent !important;
+}
+
+html.ak-printing .ak-app-shell > header,
+html.ak-printing .ak-app-shell > footer,
+html.ak-printing nav,
+html.ak-printing .ak-guidance-dock,
+html.ak-printing .calculator-screen {
+  display: none !important;
+}
+
+html.ak-printing .calculator-sheet,
+html.ak-printing .calculator-sheet * {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+html.ak-printing .calculator-sheet {
+  display: block;
+  width: 100%;
+  height: 100%;
+  height: 100vh;
+  min-height: 10in;
+  overflow: hidden;
+  background: transparent !important;
+}
+
+html.ak-printing .calculator-print-doc {
+  position: relative;
+  left: auto;
+  top: auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  height: 100vh;
+  min-height: 10in;
+  overflow: hidden;
+  padding: 12mm 13mm 8mm;
+  pointer-events: none;
+}
+
+html.ak-printing .calculator-print-doc .ak-pp-frame::after {
+  display: none !important;
+}
+
+html.ak-printing .calculator-print-doc .ak-pp-mast,
+html.ak-printing .calculator-print-doc .ak-pp-body {
+  z-index: 5;
+}
+
+html.ak-printing .calculator-print-inlay {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 8mm;
+  align-items: start;
+}
+
+html.ak-printing .calculator-print-inlay .ak-pp-hairline {
+  display: none;
+}
+
+html.ak-printing .calculator-print-inlay .ak-pp-sec {
+  margin: 0;
+}
+
+html.ak-printing .calculator-print-doc .ak-pp-figure {
+  font-size: 54pt;
+}
+
+html.ak-printing .calculator-print-doc .ak-pp-lead {
+  margin-top: 6mm;
+  line-height: 1.4;
+}
+
+html.ak-printing .calculator-print-doc .ak-pp-copy {
+  margin-top: 4.5mm;
+  line-height: 1.6;
+}
+
+html.ak-printing .calculator-print-doc .ak-pp-notes {
+  min-height: 18mm;
+}
+
+html.ak-printing .calculator-print-costs {
+  margin-top: 3mm;
+}
+
+html.ak-printing .calculator-print-costs .ak-pp-row {
+  padding: 1.4mm 0;
+}
+
 @media print {
   @page {
     size: letter;
     margin: 0;
   }
 
-  html:has(.calculator-sheet),
-  body:has(.calculator-sheet) {
+  html.ak-printing,
+  html.ak-printing body {
     height: 100% !important;
     height: 100vh !important;
     margin: 0 !important;
@@ -1468,89 +1585,10 @@
     color: var(--ak-pp-deep, #161C28);
   }
 
-  body:has(.calculator-sheet) .ak-app-shell,
-  body:has(.calculator-sheet) .ak-app-shell > .flex-1 {
+  html.ak-printing .calculator-print-doc {
     display: flex !important;
-    flex-direction: column !important;
-    height: 100% !important;
-    min-height: 0 !important;
-    background: transparent !important;
-  }
-
-  body:has(.calculator-sheet) .ak-app-shell > header,
-  body:has(.calculator-sheet) .ak-app-shell > footer,
-  body:has(.calculator-sheet) nav,
-  body:has(.calculator-sheet) .ak-guidance-dock,
-  body:has(.calculator-sheet) .calculator-screen {
-    display: none !important;
-  }
-
-  .calculator-sheet,
-  .calculator-sheet * {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  .calculator-sheet {
-    display: block;
-    width: 100%;
-    height: 100%;
-    height: 100vh;
-    min-height: 10in;
-    overflow: hidden;
-    background: transparent !important;
-  }
-
-  .calculator-print-doc {
-    display: flex !important;
-    flex-direction: column;
-    box-sizing: border-box;
-    width: 100%;
-    height: 100%;
-    height: 100vh;
-    min-height: 10in;
-    overflow: hidden;
-    padding: 12mm 13mm 8mm;
-  }
-
-  .calculator-print-inlay {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    column-gap: 8mm;
-    align-items: start;
-  }
-
-  .calculator-print-inlay .ak-pp-hairline {
-    display: none;
-  }
-
-  .calculator-print-inlay .ak-pp-sec {
-    margin: 0;
-  }
-
-  .calculator-print-doc .ak-pp-figure {
-    font-size: 54pt;
-  }
-
-  .calculator-print-doc .ak-pp-lead {
-    margin-top: 6mm;
-    line-height: 1.4;
-  }
-
-  .calculator-print-doc .ak-pp-copy {
-    margin-top: 4.5mm;
-    line-height: 1.6;
-  }
-
-  .calculator-print-doc .ak-pp-notes {
-    min-height: 18mm;
-  }
-
-  .calculator-print-costs {
-    margin-top: 3mm;
-  }
-
-  .calculator-print-costs .ak-pp-row {
-    padding: 1.4mm 0;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
   }
 }
