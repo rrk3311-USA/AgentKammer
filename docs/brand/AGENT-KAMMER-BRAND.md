@@ -6,6 +6,7 @@
 |-------|----------------|
 | **This document** | Mission, philosophy, Brand DNA, visual inspiration, voice, vocabulary, visual system, UI principles, writing, platform vision |
 | **Code tokens (implementation)** | `client/src/index.css` · `tailwind.config.ts` · `client/src/lib/design-system.ts` |
+| **Print: Platinum Paper** | `docs/brand/PLATINUM-PAPER.md` · `client/public/chrome/platinum-paper.css` |
 | **Public IA / URLs** | https://www.agentkammer.com/llms.txt · sitemap.xml |
 | **Product architecture** | `docs/architecture/SYSTEM-DESIGN.md` · `docs/product/DECISION-BLUEPRINT.md` · `docs/product/BELONGING-ASSESSMENT.md` · `docs/product/RESIDENTIAL-ADVISORY.md` · `docs/product/DECISION-CASES.md` |
 

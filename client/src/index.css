@@ -1,4 +1,7 @@
 @import "../public/chrome/compact-header.css";
+@import "@fontsource/cormorant-garamond/300.css";
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/400-italic.css";
 @import "@fontsource/cormorant-garamond/500.css";
 @import "@fontsource/cormorant-garamond/600.css";
 @import "@fontsource/cormorant-garamond/700.css";
@@ -1371,30 +1374,40 @@
   }
 }
 
-/* /calculator only. Screen layout stays. Print is the month, the inputs, and the breakdown. */
+/* Platinum Paper sheet is hidden on screen. Screen chrome stays ivory / navy. */
+.calculator-print-doc{display:none}
+
+/* /calculator only. One letter page: Platinum Paper + LOI structure + inlay. */
 @media print {
   @page {
     size: letter;
-    margin: 0.4in;
+    margin: 0;
   }
 
+  html:has(.calculator-sheet),
   body:has(.calculator-sheet) {
-    height: auto !important;
-    background: #fff !important;
+    height: 100% !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: var(--ak-pp-paper, #CFCCC6) !important;
+    color: var(--ak-pp-deep, #161C28);
   }
 
-  body:has(.calculator-sheet) .ak-app-shell {
-    display: block !important;
-    height: auto !important;
+  body:has(.calculator-sheet) .ak-app-shell,
+  body:has(.calculator-sheet) .ak-app-shell > .flex-1 {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
     min-height: 0 !important;
-    background: #fff !important;
+    background: transparent !important;
   }
 
-  body:has(.calculator-sheet) header,
-  body:has(.calculator-sheet) footer,
+  body:has(.calculator-sheet) .ak-app-shell > header,
+  body:has(.calculator-sheet) .ak-app-shell > footer,
   body:has(.calculator-sheet) nav,
   body:has(.calculator-sheet) .ak-guidance-dock,
-  body:has(.calculator-sheet) .calculator-omit {
+  body:has(.calculator-sheet) .calculator-screen {
     display: none !important;
   }
 
@@ -1405,70 +1418,47 @@
   }
 
   .calculator-sheet {
-    break-inside: avoid;
-    page-break-inside: avoid;
+    display: block;
+    width: 100%;
+    height: 100%;
+    height: 100vh;
+    min-height: 10in;
+    overflow: hidden;
+    background: transparent !important;
   }
 
-  .calculator-month-inner {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr) !important;
-    align-items: end !important;
-    gap: 1rem !important;
-    padding-top: 0.65rem !important;
-    padding-bottom: 0.75rem !important;
-  }
-
-  .calculator-body {
-    padding-top: 0.75rem !important;
-    padding-bottom: 0 !important;
-  }
-
-  .calculator-work {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr) !important;
-    align-items: start !important;
-    gap: 1rem !important;
-  }
-
-  .calculator-sheet h2 {
-    font-size: 1.35rem !important;
-    line-height: 1.15 !important;
-  }
-
-  .calculator-sheet label {
+  .calculator-print-doc {
     display: flex !important;
-    flex-direction: row !important;
-    align-items: baseline !important;
-    justify-content: space-between !important;
-    gap: 0.75rem !important;
-    padding-top: 0.4rem !important;
-    padding-bottom: 0.4rem !important;
-    white-space: nowrap;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    height: 100vh;
+    min-height: 10in;
+    overflow: hidden;
+    padding: 12mm 13mm 8mm;
   }
 
-  .calculator-sheet label > span {
-    white-space: nowrap;
+  .calculator-print-inlay {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 8mm;
+    align-items: start;
   }
 
-  .calculator-sheet label input {
-    width: 7.25rem !important;
+  .calculator-print-inlay .ak-pp-hairline {
+    display: none;
   }
 
-  .calculator-work .border > div {
-    padding-top: 0.4rem !important;
-    padding-bottom: 0.4rem !important;
+  .calculator-print-inlay .ak-pp-sec {
+    margin: 0;
   }
 
-  .calculator-work .font-mono {
-    font-size: 1.35rem !important;
+  .calculator-print-doc .ak-pp-figure {
+    font-size: 54pt;
   }
 
-  .calculator-total {
-    padding-top: 0.55rem !important;
-    padding-bottom: 0.55rem !important;
-  }
-
-  .calculator-total .font-mono {
-    font-size: 1.65rem !important;
+  .calculator-print-doc .ak-pp-notes {
+    min-height: 18mm;
   }
 }

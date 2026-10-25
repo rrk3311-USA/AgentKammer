@@ -10,6 +10,7 @@ describe("Wheel of Life phone readability", () => {
     expect(html).toContain('uid==="p"?7.2');
     expect(html).toContain('uid!=="p"');
     expect(html).toContain('id="printwheel"');
+    expect(html).toContain('href="/chrome/platinum-paper.css"');
     expect(html).toContain('viewBox="-205 -198 410 396"');
     expect(html).toContain("body.dock-on{padding-bottom:176px}");
     expect(html).toContain(".need-plate svg{width:100%;height:auto;max-height:280px");

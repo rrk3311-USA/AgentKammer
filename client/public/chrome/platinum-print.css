@@ -1,0 +1,6 @@
+/**
+ * Compatibility shim. The print theme is Platinum Paper.
+ * @see ./platinum-paper.css
+ * @see docs/brand/PLATINUM-PAPER.md
+ */
+@import url("./platinum-paper.css");

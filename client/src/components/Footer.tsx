@@ -19,6 +19,12 @@ export function isSituationPagePath(location: string) {
   return /^\/situations\/[^/]+\/?$/.test(path);
 }
 
+/** Calculator keeps the charcoal site footer and drops the What's Changing ivory band. */
+export function isCalculatorPath(location: string) {
+  const path = location.split(/[?#]/)[0] ?? location;
+  return /^\/calculator\/?$/.test(path);
+}
+
 const pillClass =
   "rounded-full border border-brand-border bg-white px-5 py-2 text-[11px] uppercase tracking-[0.1em] text-brand-navy transition-colors hover:border-brand-brass hover:text-brand-brass";
 
@@ -81,10 +87,11 @@ export function Footer() {
   const [langsOpen, setLangsOpen] = useState(false);
   const [location] = useLocation();
   const exploreOtherSituations = isSituationPagePath(location);
+  const hideIvoryIndex = isCalculatorPath(location);
 
   return (
-    <footer className={footerTopRuleClass(exploreOtherSituations)}>
-      <FooterIvoryIndex exploreOtherSituations={exploreOtherSituations} />
+    <footer className={hideIvoryIndex ? "bg-brand-charcoal text-brand-ivory" : footerTopRuleClass(exploreOtherSituations)}>
+      {hideIvoryIndex ? null : <FooterIvoryIndex exploreOtherSituations={exploreOtherSituations} />}
 
       <div data-ak-charcoal-footer className="border-t border-brand-brass/28 bg-brand-charcoal text-brand-ivory">
         <div className="mx-auto flex w-full max-w-site flex-col gap-2.5 px-5 pb-2 pt-5 sm:px-6 lg:px-10">

@@ -11,13 +11,18 @@ export type CalculatorPdfFields = {
 
 const PAGE_W = 612;
 const PAGE_H = 792;
-const MARGIN = 48;
-const LEFT = 68;
-const RIGHT = 544;
-const PAPER = "0.910 0.888 0.843";
-const INK = "0.145 0.145 0.137";
-const RULE = "0.38 0.36 0.33";
-const SILVER = "0.68 0.70 0.73";
+const MARGIN = 40;
+const LEFT = 72;
+const RIGHT = 540;
+const PAPER = "0.812 0.800 0.776";
+const DEEP = "0.086 0.110 0.157";
+const LABEL = "0.290 0.314 0.345";
+const SEP = "0.086 0.110 0.157";
+const CARD = "0.988 0.988 0.984";
+const CARD_EDGE = "0.604 0.631 0.659";
+const HAIR = "0.494 0.522 0.549";
+const SILVER_IN = "0.604 0.631 0.659";
+const SLUG = "interactive-tools/calculator";
 
 function textWidth(text: string, size: number): number {
   let units = 0;
@@ -60,7 +65,7 @@ function drawText(
   baseline: number,
   size: number,
   font = "F3",
-  color = INK,
+  color = DEEP,
 ) {
   commands.push("BT");
   commands.push(`/${font} ${size} Tf`);
@@ -101,7 +106,7 @@ function drawTrackedCenter(
   drawTracked(commands, text, centerX - total / 2, baseline, size, tracking, font);
 }
 
-function hairline(commands: string[], top: number, color = RULE, width = 0.45, from = LEFT, to = RIGHT) {
+function hairline(commands: string[], top: number, color = SEP, width = 0.45, from = LEFT, to = RIGHT) {
   const y = PAGE_H - top;
   commands.push(`${color} RG`);
   commands.push(`${width} w`);
@@ -149,83 +154,132 @@ function hiddenKey(commands: string[]) {
   commands.push("529 62 m 529 54 l S");
 }
 
+function drawSectionHead(commands: string[], num: string, label: string, top: number, x = LEFT) {
+  drawText(commands, num, x, PAGE_H - (top + 16), 16, "F3", DEEP);
+  drawTracked(commands, label, x + 28, PAGE_H - (top + 12), 7, 1.4, "F1");
+  return top + 22;
+}
+
 export function calculatorPdfLayout(fields: CalculatorPdfFields, input: CarryInput, result: CarryResult) {
   const commands: string[] = [];
   commands.push(`${PAPER} rg`);
   commands.push(`0 0 ${PAGE_W} ${PAGE_H} re`);
   commands.push("f");
-  commands.push(`${SILVER} RG`);
-  commands.push("0.7 w");
-  commands.push("32 32 548 728 re");
+  commands.push(`${HAIR} RG`);
+  commands.push("0.6 w");
+  commands.push("28 28 556 736 re");
+  commands.push("S");
+  commands.push(`${SILVER_IN} RG`);
+  commands.push("0.35 w");
+  commands.push("34 34 544 724 re");
   commands.push("S");
   hiddenKey(commands);
 
-  let top = 58;
-  drawText(commands, "AK", 306 - textWidth("AK", 18) / 2, PAGE_H - (top + 18), 18, "F4");
-  top += 28;
-  hairline(commands, top, SILVER, 0.6, 306 - 36, 306 + 36);
-  top += 16;
-  drawTrackedCenter(commands, "CALCULATOR", 306, PAGE_H - (top + 8), 8, 1.6);
-  top += 36;
-
-  drawText(commands, "THE MONTH", LEFT, PAGE_H - (top + 8), 8, "F1");
-  top += 18;
-  drawText(commands, formatUsd(result.monthly), LEFT, PAGE_H - (top + 40), 40, "F4");
-  top += 52;
-  top = drawLines(
-    commands,
-    wrap("What does this home cost each month?", 14, RIGHT - LEFT),
-    LEFT,
-    top,
-    14,
-    18,
-    "F5",
-  );
-  top += 8;
-  const cash = `On a ${formatUsd(input.price)} purchase with ${input.downPercent}% down. Cash to close begins near ${formatUsd(result.down)}, before closing costs.`;
-  top = drawLines(commands, wrap(cash, 11, RIGHT - LEFT), LEFT, top, 11, 15);
+  let top = 48;
+  drawText(commands, "AK", 306 - textWidth("AK", 14) / 2, PAGE_H - (top + 14), 14, "F3", DEEP);
+  top += 22;
+  hairline(commands, top, CARD_EDGE, 0.8, 306 - 26, 306 + 26);
   top += 14;
-  hairline(commands, top);
+  drawTrackedCenter(commands, "CALCULATOR", 306, PAGE_H - (top + 7), 7, 1.8);
+  top += 16;
+  drawTrackedCenter(commands, paperDate(), 306, PAGE_H - (top + 7), 6.5, 1.1);
   top += 22;
 
-  drawText(commands, "THE INPUTS", LEFT, PAGE_H - (top + 8), 8, "F1");
-  top += 18;
-  top = drawRow(commands, "Purchase price", fields.price, top);
-  top = drawRow(commands, "Down payment", `${fields.downPercent}%`, top);
-  top = drawRow(commands, "Rate", `${fields.ratePercent}%`, top);
-  top = drawRow(commands, "Term", `${fields.years} years`, top);
-  top = drawRow(commands, "Property tax", `${fields.taxMonthly} / mo`, top);
-  top = drawRow(commands, "Common charges", `${fields.commonMonthly} / mo`, top);
-  top += 16;
+  top = drawSectionHead(commands, "01", "THE MONTH", top);
+  drawText(commands, formatUsd(result.monthly), LEFT, PAGE_H - (top + 46), 46, "F3", DEEP);
+  top += 54;
+  top = drawLines(
+    commands,
+    wrap("What does this home cost each month?", 13, RIGHT - LEFT),
+    LEFT,
+    top,
+    13,
+    16,
+    "F5",
+  );
+  top += 4;
+  const cash = `On a ${formatUsd(input.price)} purchase with ${input.downPercent}% down. Cash to close begins near ${formatUsd(result.down)}, before closing costs.`;
+  top = drawLines(commands, wrap(cash, 10, RIGHT - LEFT), LEFT, top, 10, 13, "F1");
+  top += 12;
 
-  drawText(commands, "THE BREAKDOWN", LEFT, PAGE_H - (top + 8), 8, "F1");
-  top += 18;
-  top = drawRow(commands, "Mortgage", formatUsd(result.mortgage), top);
-  top = drawRow(commands, "Property tax", formatUsd(result.tax), top);
-  top = drawRow(commands, "Common charges", formatUsd(result.common), top);
-  top = drawRow(commands, "Monthly carry", formatUsd(result.monthly), top, 16, "F4");
-  top += 28;
+  const inlayTop = top;
+  const inlayHeight = 196;
+  commands.push(`${CARD} rg`);
+  commands.push(`${LEFT - 10} ${PAGE_H - (inlayTop + inlayHeight)} 476 ${inlayHeight} re`);
+  commands.push("f");
+  commands.push(`${CARD_EDGE} RG`);
+  commands.push("1.4 w");
+  commands.push(`${LEFT - 10} ${PAGE_H - (inlayTop + inlayHeight)} 476 ${inlayHeight} re`);
+  commands.push("S");
 
-  drawTrackedCenter(commands, paperDate(), 306, PAGE_H - (top + 8), 7, 0.9);
-  top += 16;
-  drawTrackedCenter(commands, "AGENTKAMMER.COM", 306, PAGE_H - (top + 8), 8, 1.2);
-  top += 18;
+  const colGap = 28;
+  const colW = (RIGHT - LEFT - colGap) / 2;
+  const leftCol = LEFT;
+  const rightCol = LEFT + colW + colGap;
+  let leftTop = inlayTop + 14;
+  let rightTop = inlayTop + 14;
+  leftTop = drawSectionHead(commands, "02", "THE INPUTS", leftTop, leftCol);
+  const inputRows: [string, string][] = [
+    ["Purchase price", fields.price],
+    ["Down payment", `${fields.downPercent}%`],
+    ["Rate", `${fields.ratePercent}%`],
+    ["Term", `${fields.years} years`],
+    ["Property tax", `${fields.taxMonthly} / mo`],
+    ["Common charges", `${fields.commonMonthly} / mo`],
+  ];
+  for (const [label, value] of inputRows) {
+    const baseline = PAGE_H - (leftTop + 12);
+    drawText(commands, label, leftCol, baseline, 9, "F1", DEEP);
+    drawText(commands, value, leftCol + colW - textWidth(value, 11), baseline, 11, "F3", DEEP);
+    hairline(commands, leftTop + 16, SEP, 0.3, leftCol, leftCol + colW);
+    leftTop += 22;
+  }
+
+  rightTop = drawSectionHead(commands, "03", "THE BREAKDOWN", rightTop, rightCol);
+  const resultRows: [string, string][] = [
+    ["Mortgage", formatUsd(result.mortgage)],
+    ["Property tax", formatUsd(result.tax)],
+    ["Common charges", formatUsd(result.common)],
+    ["Monthly carry", formatUsd(result.monthly)],
+  ];
+  for (const [label, value] of resultRows) {
+    const baseline = PAGE_H - (rightTop + 12);
+    drawText(commands, label, rightCol, baseline, 9, "F1", DEEP);
+    drawText(commands, value, rightCol + colW - textWidth(value, 11), baseline, 11, "F3", DEEP);
+    hairline(commands, rightTop + 16, SEP, 0.3, rightCol, rightCol + colW);
+    rightTop += 22;
+  }
+
+  top = inlayTop + inlayHeight + 12;
   const note =
     "Educational only. Insurance, assessments, and closing costs sit outside this page. Judgment still comes after the number.";
-  const noteLines = wrap(note, 9, 360);
-  noteLines.forEach((line, index) => {
-    drawText(
-      commands,
-      line,
-      306 - textWidth(line, 9) / 2,
-      PAGE_H - (top + index * 12 + 9),
-      9,
-      "F5",
-    );
-  });
-  top += noteLines.length * 12;
+  top = drawLines(commands, wrap(note, 8, RIGHT - LEFT), LEFT, top, 8, 11, "F1");
+  top += 10;
 
-  return { commands: commands.join("\n"), bottom: top };
+  const footTop = PAGE_H - 46;
+  const notesBottom = footTop - 10;
+  const notesHeight = Math.max(48, notesBottom - top);
+  commands.push("0.894 0.886 0.875 rg");
+  commands.push(`${LEFT - 6} ${PAGE_H - notesBottom} ${RIGHT - LEFT + 12} ${notesHeight} re`);
+  commands.push("f");
+  commands.push(`${HAIR} RG`);
+  commands.push("0.4 w");
+  commands.push(`${LEFT - 6} ${PAGE_H - notesBottom} ${RIGHT - LEFT + 12} ${notesHeight} re`);
+  commands.push("S");
+  drawText(commands, "NOTES", LEFT, PAGE_H - (top + 10), 6.5, "F1", LABEL);
+  let ruleY = top + 18;
+  while (ruleY < notesBottom - 4) {
+    hairline(commands, ruleY, "0.78 0.78 0.79", 0.25, LEFT, RIGHT);
+    ruleY += 14;
+  }
+  top = notesBottom;
+
+  drawText(commands, SLUG, LEFT, 40, 6, "F1", LABEL);
+  hairline(commands, PAGE_H - 42, LABEL, 0.4, 214, 248);
+  drawText(commands, "AGENTKAMMER.COM", 306 - textWidth("AGENTKAMMER.COM", 7) / 2, 40, 7, "F1", LABEL);
+  hairline(commands, PAGE_H - 42, LABEL, 0.4, 364, 398);
+
+  return { commands: commands.join("\n"), bottom: notesBottom };
 }
 
 function pdfBytes(source: string): Uint8Array {

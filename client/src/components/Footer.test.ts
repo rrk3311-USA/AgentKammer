@@ -3,8 +3,10 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { Router } from "wouter";
 import {
+  Footer,
   FooterIvoryIndex,
   footerTopRuleClass,
+  isCalculatorPath,
   isSituationPagePath,
 } from "./Footer";
 import { decisionNavigationGroups } from "@/data/decision-navigation";
@@ -27,6 +29,28 @@ describe("isSituationPagePath", () => {
     expect(isSituationPagePath("/situations")).toBe(false);
     expect(isSituationPagePath("/")).toBe(false);
     expect(isSituationPagePath("/international")).toBe(false);
+  });
+});
+
+describe("isCalculatorPath", () => {
+  it("matches the calculator route only", () => {
+    expect(isCalculatorPath("/calculator")).toBe(true);
+    expect(isCalculatorPath("/calculator/")).toBe(true);
+    expect(isCalculatorPath("/calculator?from=nav")).toBe(true);
+    expect(isCalculatorPath("/")).toBe(false);
+    expect(isCalculatorPath("/situations")).toBe(false);
+  });
+});
+
+describe("Calculator footer", () => {
+  it("drops the What's Changing ivory band and keeps the charcoal site footer", () => {
+    const html = renderToStaticMarkup(
+      createElement(Router, { ssrPath: "/calculator" }, createElement(Footer)),
+    );
+    expect(html).not.toContain("What&#x27;s Changing?");
+    expect(html).not.toContain("/situations/executive-relocation-nyc");
+    expect(html).toContain("Agent Kammer");
+    expect(html).toContain("data-ak-charcoal-footer");
   });
 });
 
