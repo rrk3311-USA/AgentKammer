@@ -16,9 +16,6 @@ import { publicSideToolsEnabled } from "@shared/public-side-tools";
 
 export function openDecisionAssistant(starter?: string) {
   if (!publicSideToolsEnabled()) {
-    if (window.location.pathname !== "/") {
-      window.location.assign("/");
-    }
     return;
   }
   window.dispatchEvent(

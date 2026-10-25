@@ -1,17 +1,7 @@
-import { Link } from "wouter";
 import { MoveRight } from "lucide-react";
-import { HomeCloseCtas } from "@/components/HomeCloseCtas";
-import { WhatsChangingPills } from "@/components/Footer";
-import { CTA } from "@/components/site-shell";
-import { DecisionFramework } from "@/components/DecisionFramework";
+import { SituationJourney } from "@/components/SituationJourney";
 import { grammar } from "@/components/visual-grammar";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
-
-const howWeDecide = [
-  { step: "01", title: "What's changing?", text: "Name the life event, pressure, or uncertainty. Neighborhoods and inventory come later." },
-  { step: "02", title: "Should anything change?", text: "Sometimes the highest-value recommendation is to do nothing." },
-  { step: "03", title: "Where do you belong?", text: "Even if you stay, is the environment still serving the life you want?" },
-];
 
 export default function Home() {
   usePageMetadata({
@@ -45,13 +35,13 @@ export default function Home() {
               </p>
             </blockquote>
             <div className="mt-6 lg:mt-8">
-              <Link
-                href="/situations"
+              <a
+                href="#whats-changing"
                 className="ak-call-button group inline-flex w-full items-center justify-between gap-4 rounded-button px-5 py-4 text-[14px] font-semibold uppercase tracking-[0.12em] text-brand-ivory transition-colors sm:w-auto sm:min-w-[19rem] sm:gap-6"
               >
                 What's changing
                 <MoveRight className="h-4 w-4 text-brand-stone transition-transform group-hover:translate-x-1" strokeWidth={1.5} />
-              </Link>
+              </a>
             </div>
           </div>
           <div className="relative -mx-5 min-h-[17.5rem] overflow-hidden bg-brand-surface sm:-mx-6 sm:min-h-[22rem] lg:mx-0 lg:min-h-[640px]">
@@ -70,30 +60,9 @@ export default function Home() {
         </div>
       </section>
 
-      <DecisionFramework
-        eyebrow="How We Decide"
-        title="Three questions. Then judgment."
-        items={howWeDecide}
-      />
-
-      <section className="bg-brand-navy text-brand-ivory">
-        <div className="mx-auto flex w-full max-w-site flex-col items-start px-5 py-6 text-left sm:px-6 lg:px-10 lg:py-8">
-          <h2 className={grammar.sectionOnDark}>Start from what changed.</h2>
-          <WhatsChangingPills className="mt-4 w-full" showKicker={false} />
-        </div>
-      </section>
-
-      <CTA
-        title=""
-        description="Work through the steps, starting with your Situation, for a clear recommendation, or write to us directly."
-        href="/contact"
-        label="Contact"
-        eyebrow="Contact"
-        showEyebrow={false}
-        align="center"
-        compact
-        tone="navy"
-        actions={<HomeCloseCtas />}
+      <SituationJourney
+        title="Start from what changed."
+        description="Name the life change. Then the decision. Then what you need to understand. Landings are optional."
       />
     </main>
   );

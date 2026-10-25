@@ -36,7 +36,7 @@ const whatsChangingItems: DecisionNavItem[] = [
   { label: "Divorce", href: "/situations/divorce-property-sales-nyc" },
   { label: "Remote Work", href: "/situations/remote-work-housing-nyc" },
   { label: "Job Change", href: "/situations/job-loss-housing-nyc" },
-  { label: "International Move", href: "/international" },
+  { label: "International Move", href: "/situations/international-move-nyc" },
 ];
 
 const understandItems: DecisionNavItem[] = [
