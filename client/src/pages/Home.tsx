@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { MoveRight } from "lucide-react";
+import { HomeCloseCtas } from "@/components/HomeCloseCtas";
 import { WhatsChangingPills } from "@/components/Footer";
 import { CTA } from "@/components/site-shell";
 import { DecisionFramework } from "@/components/DecisionFramework";
@@ -91,7 +92,8 @@ export default function Home() {
         showEyebrow={false}
         align="center"
         compact
-        tone="ivory"
+        tone="navy"
+        actions={<HomeCloseCtas />}
       />
     </main>
   );

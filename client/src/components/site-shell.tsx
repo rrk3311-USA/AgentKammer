@@ -612,6 +612,7 @@ export function CTA({
   lead,
   compact = false,
   tone = "navy",
+  actions,
 }: {
   title?: string;
   description?: string;
@@ -625,6 +626,7 @@ export function CTA({
   lead?: ReactNode;
   compact?: boolean;
   tone?: "navy" | "ivory";
+  actions?: ReactNode;
 }) {
   const hideSectionEyebrow = showEyebrow === false || sameCtaPhrase(eyebrow, title);
   const hideButtonEyebrow = sameCtaPhrase(eyebrow, label);
@@ -684,7 +686,7 @@ export function CTA({
             ) : null}
           </div>
           <div className={cn("grid gap-3", !compact && "sm:min-w-[16rem]", centered && (compact ? "mt-4" : "mt-8"))}>
-            {href.startsWith("#") ? (
+            {actions ? actions : href.startsWith("#") ? (
               <a
                 href={href}
                 className={actionClass}
