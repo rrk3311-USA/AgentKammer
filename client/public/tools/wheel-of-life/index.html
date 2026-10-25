@@ -259,13 +259,27 @@ body.dock-on{padding-bottom:176px}
 
 footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px) calc(176px + 64px);font-size:.8rem;text-align:center}
 @media(min-width:760px){footer{padding-bottom:calc(196px + 72px)}}
+.dock-clear{height:0}
 @media(max-width:480px){
- .need-plate{padding:10px 2px 8px}
+ .persp{padding-left:0;padding-right:0;overflow:visible}
+ .persp .in{padding:0 16px}
+ .pgrid,.need-grid{margin-left:-16px;margin-right:-16px}
+ .pgrid>:first-child,.need-grid>:first-child{padding:0}
+ .pgrid>:last-child{padding:0 16px}
+ .needs{margin-top:28px;padding-top:20px}
+ .need-grid{margin-top:16px;gap:20px}
+ .plate,.need-plate{width:100vw;max-width:none;position:relative;left:50%;transform:translateX(-50%);padding:8px 0 10px;border-left:0;border-right:0}
  .need-plate svg{max-height:none;width:100%;height:auto;overflow:visible}
- .plate{padding:8px 2px 6px}
  .plate svg,.need-plate svg{overflow:visible}
- #needchart text{font-size:13.5px;fill:#0D182B;letter-spacing:.02em;font-weight:600}
- #bigwheel text{font-size:13.5px;fill:#F5F2EB;letter-spacing:.02em;font-weight:600}
+ #needchart text{font-size:27px;fill:#0D182B;letter-spacing:.01em;font-weight:600}
+ #bigwheel text{font-size:27px;fill:#F5F2EB;letter-spacing:.01em;font-weight:600}
+ .cap,.need-cap,.look{margin-left:16px;margin-right:16px}
+ .scores{margin-left:16px;margin-right:16px;font-size:1.68rem;gap:10px 18px}
+ .scores li{padding:10px 0}
+ .scores b{font-size:1.1em}
+ .need-map li{padding:12px 0;font-size:1.8rem}
+ .need-map b{font-size:1.15em}
+ .need-read{padding:0 16px}
  .dock{grid-template-columns:52px minmax(0,1fr) auto;grid-template-areas:"stage main fold";gap:4px 8px;padding:6px max(10px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}
  .dock-fold{display:inline-flex;align-items:center;justify-content:center;grid-area:fold;margin:0;padding:0 6px;min-height:44px;min-width:44px;border:0;background:transparent;color:var(--limestone);font:600 9px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;cursor:pointer}
  .dock.slim{grid-template-columns:52px auto;grid-template-areas:"stage fold"}
@@ -277,9 +291,10 @@ footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px
  .chip b{font-size:1.05rem}
  .dock-dial .range{min-height:44px}
  .dock-dial .range input{height:44px}
- body.dock-on{padding-bottom:calc(var(--dock-h,140px) + 36px)}
- footer{padding-bottom:calc(var(--dock-h,140px) + 72px)}
- .need-cap,.look,.need-read,.cap,.moves,.closer{scroll-margin-bottom:calc(var(--dock-h,140px) + 24px)}
+ body.dock-on{padding-bottom:calc(var(--dock-h,140px) + 48px)}
+ body.dock-on .dock-clear{height:calc(var(--dock-h,140px) + 24px)}
+ footer{padding-bottom:calc(var(--dock-h,140px) + 80px)}
+ .need-cap,.look,.need-read,.cap,.scores,.moves,.closer{scroll-margin-bottom:calc(var(--dock-h,140px) + 28px)}
 }
 footer .in{max-width:1100px;margin:0 auto}
 footer .site-exit{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;margin:0 0 28px}
@@ -505,6 +520,7 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
     </figure>
     <p class="cap">A rounder wheel tends to roll more smoothly than a bigger one.</p>
     <ul class="scores" id="scores" aria-label="All scores"></ul>
+    <div class="dock-clear" aria-hidden="true"></div>
    </div>
    <div>
     <div class="moves" id="moves"></div>
@@ -534,6 +550,7 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
      </figure>
      <p class="need-cap">Drawn first from the wheel. You may refine it, one question at a time.</p>
      <button class="btn ghost look" id="need-look" type="button">A closer look</button>
+     <div class="dock-clear" aria-hidden="true"></div>
      <div class="need-qs" id="need-qs"></div>
     </div>
     <div class="need-read">
@@ -841,7 +858,7 @@ const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAt
 const pt=(r,a)=>[r*Math.cos(a),r*Math.sin(a)];
 const arc=(r,i)=>{const a0=-Math.PI/2+i*2*Math.PI/N,a1=a0+2*Math.PI/N,[x0,y0]=pt(r,a0),[x1,y1]=pt(r,a1);return `M0 0L${x0.toFixed(2)} ${y0.toFixed(2)}A${r.toFixed(2)} ${r.toFixed(2)} 0 0 1 ${x1.toFixed(2)} ${y1.toFixed(2)}Z`};
 const isPhone=()=>matchMedia("(max-width: 480px)").matches;
-const NEED_SHORT={significance:"Signif.",connection:"Connect.",contribution:"Contrib."};
+const NEED_SHORT={certainty:"Cert",variety:"Vary",significance:"Sign",connection:"Conn",growth:"Grow",contribution:"Give"};
 function scoreMark(v){
  const n=Number(v);
  if(!Number.isFinite(n))return "";
@@ -889,23 +906,29 @@ function makeWheel(svg,R,labels,uid){
   const t=lt[i];if(!t)return;
   const a=AREAS[i],onPhone=phone();
   const ang=-Math.PI/2+(i+.5)*2*Math.PI/N;
-  const reach=onPhone&&uid==="b"?R+52:uid==="b"?R+38:uid==="p"?R+28:R+22;
+  const reach=onPhone&&uid==="b"?R*0.86:uid==="b"?R+38:uid==="p"?R+28:R+22;
   const[x,y]=pt(reach,ang);
   t.setAttribute("x",x.toFixed(1));
   t.setAttribute("y",(y+(onPhone&&uid==="b"?0:3)).toFixed(1));
-  t.setAttribute("text-anchor",Math.abs(x)<20?"middle":x>0?"start":"end");
+  t.setAttribute("text-anchor",onPhone&&uid==="b"?"middle":Math.abs(x)<20?"middle":x>0?"start":"end");
   t.setAttribute("fill",uid==="p"?"#1c1914":(lows&&lows.includes(a.k)?"#E8E4DC":"#F5F2EB"));
   if(uid==="p")return;
   if(onPhone&&uid==="b"){
-   t.setAttribute("font-size","13.5");
-   t.setAttribute("letter-spacing","0.15");
+   t.setAttribute("font-size","27");
+   t.setAttribute("letter-spacing","0.08");
    t.setAttribute("font-weight","600");
+   t.setAttribute("stroke","#161C28");
+   t.setAttribute("stroke-width","4");
+   t.setAttribute("paint-order","stroke");
    writeLabel(t,x,[(SHORT[a.k]||a.n).toUpperCase(),scoreMark(st.s[a.k])]);
    return;
   }
   t.setAttribute("font-size",uid==="b"?"8.4":"11.5");
   t.setAttribute("letter-spacing",uid==="b"?"0.35":"2.2");
   t.removeAttribute("font-weight");
+  t.removeAttribute("stroke");
+  t.removeAttribute("stroke-width");
+  t.removeAttribute("paint-order");
   const label=(uid==="b"?a.n:(SHORT[a.k]||a.n)).toUpperCase();
   if(uid==="b"&&label.length>14){
    const cut=label.lastIndexOf(" ",14),head=cut>0?label.slice(0,cut):label,tail=cut>0?label.slice(cut+1):"";
@@ -913,7 +936,7 @@ function makeWheel(svg,R,labels,uid){
   }else writeLabel(t,x,[label]);
  }
  return{svg,set(lows){
-  if(uid==="b")svg.setAttribute("viewBox",phone()?"-360 -330 720 660":"-320 -280 640 560");
+  if(uid==="b")svg.setAttribute("viewBox",phone()?"-200 -215 400 430":"-320 -280 640 560");
   if(uid==="b")body.querySelectorAll("path").forEach(p=>p.setAttribute("stroke-width",phone()?R/55:R/90));
   AREAS.forEach((a,i)=>{const r=Math.max(R*st.s[a.k]/10,R*.04);gs[i].setAttribute("d",arc(r,i));bs[i].setAttribute("d",arc(r,i));paintLabel(i,lows)});
  }};
@@ -938,21 +961,31 @@ function makeNeedChart(svg,R){
  });
  return{set(scores){
   const phone=isPhone();
-  svg.setAttribute("viewBox",phone?"-270 -236 540 472":"-210 -198 420 396");
+  svg.setAttribute("viewBox",phone?"-158 -190 316 380":"-210 -198 420 396");
   poly.setAttribute("fill",phone?"rgba(13,24,43,.38)":"rgba(42,52,71,.22)");
   poly.setAttribute("stroke",phone?"#0D182B":"#2a3447");
   poly.setAttribute("stroke-width",phone?"2.6":"1.2");
   const pts=NEEDS.map((n,i)=>{const r=Math.max(R*(scores[n.k]||1)/10,R*.06),ang=-Math.PI/2+i*2*Math.PI/NN,[x,y]=pt(r,ang);return x.toFixed(1)+","+y.toFixed(1)}).join(" ");
   poly.setAttribute("points",pts);
   NEEDS.forEach((n,i)=>{
-   const t=labels[i],reach=phone?R+48:R+28,ang=-Math.PI/2+i*2*Math.PI/NN,[x,y]=pt(reach,ang);
+   const t=labels[i],reach=phone?R*0.88:R+28,ang=-Math.PI/2+i*2*Math.PI/NN,[x,y]=pt(reach,ang);
    t.setAttribute("x",x.toFixed(1));
    t.setAttribute("y",(y+(phone?0:3)).toFixed(1));
-   t.setAttribute("text-anchor",Math.abs(x)<24?"middle":x>0?"start":"end");
+   t.setAttribute("text-anchor",phone?"middle":Math.abs(x)<24?"middle":x>0?"start":"end");
    t.setAttribute("fill",phone?"#0D182B":"#1c1914");
-   t.setAttribute("font-size",phone?"13.5":"8");
-   t.setAttribute("letter-spacing",phone?".2":".4");
-   if(phone)t.setAttribute("font-weight","600");else t.removeAttribute("font-weight");
+   t.setAttribute("font-size",phone?"27":"8");
+   t.setAttribute("letter-spacing",phone?".08":".4");
+   if(phone){
+    t.setAttribute("font-weight","600");
+    t.setAttribute("stroke","#f7f3ea");
+    t.setAttribute("stroke-width","5");
+    t.setAttribute("paint-order","stroke");
+   }else{
+    t.removeAttribute("font-weight");
+    t.removeAttribute("stroke");
+    t.removeAttribute("stroke-width");
+    t.removeAttribute("paint-order");
+   }
    const name=(phone?(NEED_SHORT[n.k]||n.n):n.n).toUpperCase();
    if(phone)writeLabel(t,x,[name,scoreMark(scores[n.k])]);
    else writeLabel(t,x,[name]);

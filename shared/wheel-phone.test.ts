@@ -16,11 +16,12 @@ describe("Wheel of Life phone readability", () => {
   });
 
   it("makes radar and life-wheel labels readable and keeps the chart full width", () => {
-    expect(phoneCss).toContain("#needchart text{font-size:13.5px;fill:#0D182B");
-    expect(phoneCss).toContain("#bigwheel text{font-size:13.5px;fill:#F5F2EB");
+    expect(phoneCss).toContain("#needchart text{font-size:27px;fill:#0D182B");
+    expect(phoneCss).toContain("#bigwheel text{font-size:27px;fill:#F5F2EB");
     expect(phoneCss).toContain(".need-plate svg{max-height:none;width:100%");
+    expect(phoneCss).toContain(".scores{margin-left:16px;margin-right:16px;font-size:1.68rem");
     expect(html).toContain("NEED_SHORT");
-    expect(html).toContain('significance:"Signif."');
+    expect(html).toContain('significance:"Sign"');
     expect(html).toContain('stroke-width",phone?"2.6"');
     expect(html).toContain('fill",phone?"rgba(13,24,43,.38)"');
     expect(html).toContain("scoreMark");
@@ -33,7 +34,9 @@ describe("Wheel of Life phone readability", () => {
     expect(phoneCss).toContain(".chip{min-height:44px;min-width:44px");
     expect(html).toContain(".chips{display:flex;gap:6px;overflow-x:auto");
     expect(html).toContain("function syncDockPad");
-    expect(phoneCss).toContain("padding-bottom:calc(var(--dock-h,140px) + 36px)");
+    expect(phoneCss).toContain("padding-bottom:calc(var(--dock-h,140px) + 48px)");
+    expect(phoneCss).toContain("body.dock-on .dock-clear{height:calc(var(--dock-h,140px) + 24px)}");
+    expect(html).toContain('class="dock-clear"');
     expect(html).toContain('id="dock-fold"');
     expect(html).toContain("setDockSlim");
   });
