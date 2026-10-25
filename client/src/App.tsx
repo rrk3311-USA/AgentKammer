@@ -12,6 +12,7 @@ import { initVisitorSignalTracking, trackPageViewSignal } from "@/lib/visitor-si
 import { COMMUNICATION_MAP_PATH } from "@/data/communication-map";
 import { publicSideToolsEnabled } from "@shared/public-side-tools";
 const Home = lazy(() => import("@/pages/Home"));
+const HomeV2 = lazy(() => import("@/pages/HomeV2"));
 const About = lazy(() => import("@/pages/About"));
 const BuildingReport = lazy(() => import("@/pages/BuildingReport"));
 const NewYorkMarket = lazy(() => import("@/pages/NewYorkMarket"));
@@ -163,6 +164,7 @@ function Router() {
       <Route path="/calculator" component={Calculator} />
       <Route path="/internal/007" component={Tank007} />
       <Route path="/internal/007-tank">{() => <Redirect to="/internal/007" />}</Route>
+      <Route path="/v2" component={HomeV2} />
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/situations" component={Services} />
@@ -242,6 +244,7 @@ function AppShell() {
   const [location] = useLocation();
   const isAdmin = location.startsWith("/admin") || location.startsWith("/tools/curation");
   const isInternal = location.startsWith("/internal");
+  const isHomeV2 = location.split(/[?#]/)[0] === "/v2";
 
   if (isAdmin || isInternal) {
     return (
@@ -259,13 +262,13 @@ function AppShell() {
     <div className="ak-app-shell flex min-h-screen flex-col bg-brand-ivory text-brand-ink">
       <ScrollToTop />
       <VisitorSignals />
-      <Header />
+      {isHomeV2 ? null : <Header />}
       <Suspense fallback={<div className="mx-auto w-full max-w-7xl flex-1 px-6 py-12 text-brand-graphite/70">Loading...</div>}>
         <div className="flex-1">
           <Router />
         </div>
       </Suspense>
-      <Footer />
+      {isHomeV2 ? null : <Footer />}
       {publicSideToolsEnabled() ? <DecisionAssistantDock /> : null}
       <Toaster />
     </div>
