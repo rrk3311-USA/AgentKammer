@@ -14,10 +14,11 @@ function renderSituations() {
 }
 
 describe("What's Changing page", () => {
-  it("shows all twelve life changes as tappable pills and drops the numbered split", () => {
+  it("shows all twelve life changes in a rolodex and keeps decision pills left-aligned", () => {
     const html = renderSituations();
     expect(changeItems).toHaveLength(12);
-    expect(html).toContain("data-ak-situations-pills");
+    expect(html).toContain("data-ak-whats-changing-rolodex");
+    expect(html).toContain("ak-rolo-card");
     expect(html).toContain("ak-quiet-chip");
     expect(html).toContain("min-h-11");
     for (const item of changeItems) {
@@ -34,11 +35,12 @@ describe("What's Changing page", () => {
     expect(html).toContain("items-start");
     expect(html).toContain("text-left");
     expect(html).toContain("flex-wrap items-center justify-start");
-    expect(html.match(/flex-wrap items-center justify-start/g)).toHaveLength(3);
+    expect(html.match(/flex-wrap items-center justify-start/g)).toHaveLength(2);
     expect(html).not.toContain("justify-center");
+    expect(html).not.toContain("\u2014");
   });
 
-  it("uses two styles only: navy pills and a light assessment band", () => {
+  it("keeps decision pills and a light assessment band under the rolodex", () => {
     const html = renderSituations();
     expect(html).toContain("bg-brand-navy text-brand-ivory");
     expect(html).toContain("bg-brand-ivory text-brand-ink");

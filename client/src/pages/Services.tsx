@@ -1,13 +1,13 @@
 import { Link } from "wouter";
 import { CTA } from "@/components/site-shell";
 import { quietChipClass } from "@/components/Footer";
+import { WhatsChangingRolodex } from "@/components/WhatsChangingRolodex";
 import { decisionFacingItems, decisionNavigationGroups } from "@/data/decision-navigation";
 import { openDecisionAssistant } from "@/lib/decision-assistant";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
 import { grammar } from "@/components/visual-grammar";
 import { cn } from "@/lib/utils";
 
-const whatsChanging = decisionNavigationGroups.find((group) => group.title === "What's Changing?");
 const understand = decisionNavigationGroups.find((group) => group.title === "What Are You Trying to Understand?");
 
 const tapChipClass = cn(quietChipClass, "min-h-11 px-3.5 py-2.5 text-[11px] tracking-[0.1em]");
@@ -19,7 +19,6 @@ export default function Services() {
     path: "/situations",
   });
 
-  const changeItems = whatsChanging?.items ?? [];
   const understandItems = understand?.items ?? [];
 
   return (
@@ -35,17 +34,7 @@ export default function Services() {
           <h2 className="mt-10 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-ivory/56">
             What's Changing?
           </h2>
-          <nav
-            aria-label="What's Changing"
-            data-ak-situations-pills
-            className="mt-4 flex flex-wrap items-center justify-start gap-2"
-          >
-            {changeItems.map((item) => (
-              <Link key={item.href + item.label} href={item.href} className={tapChipClass}>
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          <WhatsChangingRolodex className="mt-4 w-full" />
 
           <h2 className="mt-10 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-ivory/56">
             What decision are you facing?
