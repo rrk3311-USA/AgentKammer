@@ -38,6 +38,13 @@ describe("homepage close", () => {
     expect(html).toContain("items-start");
     expect(html).toContain("text-left");
     expect(html).toContain("py-6 lg:py-8");
+    expect(html).toContain("How We Decide");
+    expect(html).toContain("Three questions. Then judgment.");
+    expect(html).toContain("bg-brand-soft-stone");
+    expect(html).toContain("ak-felt-rule");
+    expect(html).not.toContain("data-ak-how-we-decide");
+    expect(html).not.toContain("ak-pp-page");
+    expect(html).not.toContain("owl");
   });
 
   it("does not add a Start Here link in the dark pills section", () => {
