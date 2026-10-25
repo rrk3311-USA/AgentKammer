@@ -9,18 +9,19 @@ function renderHome() {
 }
 
 describe("homepage close", () => {
-  it("puts dark pills under Start from what changed, then the Calculate and Contact pair", () => {
+  it("keeps the navy close dark, then a light Start from what changed with left pills", () => {
     const html = renderHome();
+    const line = html.indexOf("Work through the steps, starting with your Situation, for a clear recommendation, or write to us directly.");
     const start = html.indexOf("Start from what changed.");
     const chips = html.indexOf("data-ak-whats-changing");
     const heading = html.indexOf("Get in touch");
-    const line = html.indexOf("Work through the steps, starting with your Situation, for a clear recommendation, or write to us directly.");
-    expect(start).toBeGreaterThan(-1);
+    expect(line).toBeGreaterThan(-1);
+    expect(start).toBeGreaterThan(line);
     expect(chips).toBeGreaterThan(start);
     expect(heading).toBe(-1);
-    expect(line).toBeGreaterThan(chips);
     expect(html).toContain("bg-brand-navy text-brand-ivory");
-    expect(html).toContain("bg-brand-ivory text-brand-ink");
+    expect(html).toContain("ak-home-changed bg-brand-ivory text-brand-ink");
+    expect(html).toContain("ak-home-plat-rule");
     expect(html).toContain("Calculate");
     expect(html).toContain("Contact");
     expect(html).toContain('href="/calculator"');
