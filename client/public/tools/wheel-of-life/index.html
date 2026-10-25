@@ -261,26 +261,36 @@ footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px
 @media(min-width:760px){footer{padding-bottom:calc(196px + 72px)}}
 .dock-clear{height:0}
 @media(max-width:480px){
- .persp{padding-left:0;padding-right:0;overflow:visible}
+ .intro{padding:36px 20px;gap:16px}
+ .persp{padding:28px 0 32px;overflow:visible}
  .persp .in{padding:0 16px}
+ .persp h2{margin-top:8px}
+ .persp .rule{margin:10px 0}
  .pgrid,.need-grid{margin-left:-16px;margin-right:-16px}
+ .pgrid{gap:16px;margin-top:18px}
  .pgrid>:first-child,.need-grid>:first-child{padding:0}
  .pgrid>:last-child{padding:0 16px}
- .needs{margin-top:28px;padding-top:20px}
- .need-grid{margin-top:16px;gap:20px}
- .plate,.need-plate{width:100vw;max-width:none;position:relative;left:50%;transform:translateX(-50%);padding:36px 0 28px;border-left:0;border-right:0;scroll-margin-top:calc(var(--ak-compact-header-h,52px) + 12px)}
+ .needs{margin-top:18px;padding-top:14px}
+ .needs h3{margin:8px 0 0}
+ .needs .lede{margin-top:8px}
+ .needs .rule{margin:10px 0}
+ .need-grid{margin-top:12px;gap:14px}
+ .plate,.need-plate{width:100vw;max-width:none;position:relative;left:50%;transform:translateX(-50%);padding:8px 16px;border-left:0;border-right:0;scroll-margin-top:calc(var(--ak-compact-header-h,52px) + 12px)}
  .need-plate svg{max-height:none;width:100%;height:auto;overflow:visible}
  .plate svg,.need-plate svg{overflow:visible}
  #needchart text{font-size:20px;fill:#0D182B;letter-spacing:0;font-weight:600}
  #bigwheel text{font-size:20px;fill:#F5F2EB;letter-spacing:0;font-weight:600}
  .cap,.need-cap,.look{margin-left:16px;margin-right:16px}
- .scores{margin-left:16px;margin-right:16px;font-size:1.68rem;grid-template-columns:1fr;gap:0}
- .scores li{padding:10px 0;gap:16px;min-width:0}
+ .cap{margin-top:8px}
+ .need-cap{margin:8px 0 0}
+ .scores{margin:12px 16px 0;font-size:1.68rem;grid-template-columns:1fr;gap:0}
+ .scores li{padding:6px 0;gap:12px;min-width:0}
  .scores li span{min-width:0;overflow-wrap:anywhere}
  .scores b{flex:none;font-size:1.1em}
- .need-map li{padding:12px 0;font-size:1.8rem}
+ .need-map li{padding:7px 0;font-size:1.8rem}
  .need-map b{font-size:1.15em}
  .need-read{padding:0 16px}
+ .closer{margin-top:32px;padding-top:22px}
  .dock{grid-template-columns:52px minmax(0,1fr) auto;grid-template-areas:"stage main fold";gap:4px 8px;padding:6px max(10px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}
  .dock-fold{display:inline-flex;align-items:center;justify-content:center;grid-area:fold;margin:0;padding:0 6px;min-height:44px;min-width:44px;border:0;background:transparent;color:var(--limestone);font:600 9px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;cursor:pointer}
  .dock.slim{grid-template-columns:52px auto;grid-template-areas:"stage fold"}
@@ -292,9 +302,9 @@ footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px
  .chip b{font-size:1.05rem}
  .dock-dial .range{min-height:44px}
  .dock-dial .range input{height:44px}
- body.dock-on{padding-bottom:calc(var(--dock-h,140px) + 48px)}
- body.dock-on .dock-clear{height:calc(var(--dock-h,140px) + 24px)}
- footer{padding-bottom:calc(var(--dock-h,140px) + 80px)}
+ body.dock-on{padding-bottom:calc(var(--dock-h,140px) + 28px)}
+ body.dock-on .dock-clear{height:calc(var(--dock-h,140px) + 8px)}
+ footer{padding-bottom:calc(var(--dock-h,140px) + 48px)}
  .need-cap,.look,.need-read,.cap,.scores,.moves,.closer{scroll-margin-bottom:calc(var(--dock-h,140px) + 28px)}
 }
 footer .in{max-width:1100px;margin:0 auto}
@@ -908,7 +918,7 @@ function makeWheel(svg,R,labels,uid){
   const a=AREAS[i],onPhone=phone();
   const ang=-Math.PI/2+(i+.5)*2*Math.PI/N;
   if(onPhone&&uid==="b"){
-   const reach=R+20;
+   const reach=R+16;
    const[x,y]=pt(reach,ang);
    t.setAttribute("x",x.toFixed(1));
    t.setAttribute("y",(y+6).toFixed(1));
@@ -943,7 +953,7 @@ function makeWheel(svg,R,labels,uid){
   }else writeLabel(t,x,[label]);
  }
  return{svg,set(lows){
-  if(uid==="b")svg.setAttribute("viewBox",phone()?"-214 -214 428 428":"-320 -280 640 560");
+  if(uid==="b")svg.setAttribute("viewBox",phone()?"-220 -220 440 440":"-320 -280 640 560");
   if(uid==="b")body.querySelectorAll("path").forEach(p=>p.setAttribute("stroke-width",phone()?R/55:R/90));
   AREAS.forEach((a,i)=>{const r=Math.max(R*st.s[a.k]/10,R*.04);gs[i].setAttribute("d",arc(r,i));bs[i].setAttribute("d",arc(r,i));paintLabel(i,lows)});
  }};
@@ -968,7 +978,7 @@ function makeNeedChart(svg,R){
  });
  return{set(scores){
   const phone=isPhone();
-  svg.setAttribute("viewBox",phone?"-176 -176 352 352":"-210 -198 420 396");
+  svg.setAttribute("viewBox",phone?"-180 -180 360 360":"-210 -198 420 396");
   poly.setAttribute("fill",phone?"rgba(13,24,43,.38)":"rgba(42,52,71,.22)");
   poly.setAttribute("stroke",phone?"#0D182B":"#2a3447");
   poly.setAttribute("stroke-width",phone?"2.6":"1.2");
@@ -977,7 +987,7 @@ function makeNeedChart(svg,R){
   NEEDS.forEach((n,i)=>{
    const t=labels[i],ang=-Math.PI/2+i*2*Math.PI/NN;
    if(phone){
-    const reach=R+22,[x,y]=pt(reach,ang);
+    const reach=R+16,[x,y]=pt(reach,ang);
     t.setAttribute("x",x.toFixed(1));
     t.setAttribute("y",(y+6).toFixed(1));
     t.setAttribute("text-anchor","middle");
