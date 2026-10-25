@@ -268,11 +268,11 @@ footer{background:var(--deep);color:var(--mist);padding:48px clamp(20px,6vw,80px
  .pgrid>:last-child{padding:0 16px}
  .needs{margin-top:28px;padding-top:20px}
  .need-grid{margin-top:16px;gap:20px}
- .plate,.need-plate{width:100vw;max-width:none;position:relative;left:50%;transform:translateX(-50%);padding:4px 0 6px;border-left:0;border-right:0}
+ .plate,.need-plate{width:100vw;max-width:none;position:relative;left:50%;transform:translateX(-50%);padding:8px 0 10px;border-left:0;border-right:0}
  .need-plate svg{max-height:none;width:100%;height:auto;overflow:visible}
  .plate svg,.need-plate svg{overflow:visible}
- #needchart text{font-size:22px;fill:#0D182B;letter-spacing:0;font-weight:600}
- #bigwheel text{font-size:22px;fill:#161C28;letter-spacing:0;font-weight:600}
+ #needchart text{font-size:20px;fill:#0D182B;letter-spacing:0;font-weight:600}
+ #bigwheel text{font-size:20px;fill:#F5F2EB;letter-spacing:0;font-weight:600}
  .cap,.need-cap,.look{margin-left:16px;margin-right:16px}
  .scores{margin-left:16px;margin-right:16px;font-size:1.68rem;grid-template-columns:1fr;gap:0}
  .scores li{padding:10px 0;gap:16px;min-width:0}
@@ -908,17 +908,16 @@ function makeWheel(svg,R,labels,uid){
   const a=AREAS[i],onPhone=phone();
   const ang=-Math.PI/2+(i+.5)*2*Math.PI/N;
   if(onPhone&&uid==="b"){
-   const filled=Math.max(R*st.s[a.k]/10,R*.08);
-   const reach=filled*0.56;
+   const reach=R+20;
    const[x,y]=pt(reach,ang);
    t.setAttribute("x",x.toFixed(1));
-   t.setAttribute("y",(y+7).toFixed(1));
+   t.setAttribute("y",(y+6).toFixed(1));
    t.setAttribute("text-anchor","middle");
-   t.setAttribute("fill","#161C28");
-   t.setAttribute("font-size","22");
+   t.setAttribute("fill","#F5F2EB");
+   t.setAttribute("font-size","20");
    t.setAttribute("letter-spacing","0");
    t.setAttribute("font-weight","600");
-   t.setAttribute("stroke","#F5F2EB");
+   t.setAttribute("stroke","#161C28");
    t.setAttribute("stroke-width","3");
    t.setAttribute("paint-order","stroke");
    writeLabel(t,x,[scoreMark(st.s[a.k])]);
@@ -944,7 +943,7 @@ function makeWheel(svg,R,labels,uid){
   }else writeLabel(t,x,[label]);
  }
  return{svg,set(lows){
-  if(uid==="b")svg.setAttribute("viewBox",phone()?"-186 -186 372 372":"-320 -280 640 560");
+  if(uid==="b")svg.setAttribute("viewBox",phone()?"-214 -214 428 428":"-320 -280 640 560");
   if(uid==="b")body.querySelectorAll("path").forEach(p=>p.setAttribute("stroke-width",phone()?R/55:R/90));
   AREAS.forEach((a,i)=>{const r=Math.max(R*st.s[a.k]/10,R*.04);gs[i].setAttribute("d",arc(r,i));bs[i].setAttribute("d",arc(r,i));paintLabel(i,lows)});
  }};
@@ -969,7 +968,7 @@ function makeNeedChart(svg,R){
  });
  return{set(scores){
   const phone=isPhone();
-  svg.setAttribute("viewBox",phone?"-146 -146 292 292":"-210 -198 420 396");
+  svg.setAttribute("viewBox",phone?"-176 -176 352 352":"-210 -198 420 396");
   poly.setAttribute("fill",phone?"rgba(13,24,43,.38)":"rgba(42,52,71,.22)");
   poly.setAttribute("stroke",phone?"#0D182B":"#2a3447");
   poly.setAttribute("stroke-width",phone?"2.6":"1.2");
@@ -978,12 +977,12 @@ function makeNeedChart(svg,R){
   NEEDS.forEach((n,i)=>{
    const t=labels[i],ang=-Math.PI/2+i*2*Math.PI/NN;
    if(phone){
-    const filled=Math.max(R*(scores[n.k]||1)/10,R*.08),reach=filled*0.52,[x,y]=pt(reach,ang);
+    const reach=R+22,[x,y]=pt(reach,ang);
     t.setAttribute("x",x.toFixed(1));
-    t.setAttribute("y",(y+7).toFixed(1));
+    t.setAttribute("y",(y+6).toFixed(1));
     t.setAttribute("text-anchor","middle");
     t.setAttribute("fill","#0D182B");
-    t.setAttribute("font-size","22");
+    t.setAttribute("font-size","20");
     t.setAttribute("letter-spacing","0");
     t.setAttribute("font-weight","600");
     t.setAttribute("stroke","#f7f3ea");

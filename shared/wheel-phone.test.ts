@@ -16,11 +16,13 @@ describe("Wheel of Life phone readability", () => {
   });
 
   it("keeps names off the phone wheels and lets the one-column list carry them", () => {
-    expect(phoneCss).toContain("#needchart text{font-size:22px;fill:#0D182B");
-    expect(phoneCss).toContain("#bigwheel text{font-size:22px;fill:#161C28");
+    expect(phoneCss).toContain("#needchart text{font-size:20px;fill:#0D182B");
+    expect(phoneCss).toContain("#bigwheel text{font-size:20px;fill:#F5F2EB");
     expect(phoneCss).toContain(".need-plate svg{max-height:none;width:100%");
     expect(phoneCss).toContain(".scores{margin-left:16px;margin-right:16px;font-size:1.68rem;grid-template-columns:1fr");
-    expect(html).toContain('viewBox",phone()?"-186 -186 372 372"');
+    expect(html).toContain('viewBox",phone()?"-214 -214 428 428"');
+    expect(html).toContain("const reach=R+20");
+    expect(html).toContain("const reach=R+22");
     expect(html).toContain("writeLabel(t,x,[scoreMark(st.s[a.k])])");
     expect(html).toContain("writeLabel(t,x,[scoreMark(scores[n.k])])");
     expect(html).toContain('stroke-width",phone?"2.6"');
