@@ -63,15 +63,17 @@ describe("public menu lock", () => {
     expect([...KAMMER_VERDICTS]).toEqual(["Pick", "Consider", "Wait", "Pass"]);
   });
 
-  it("locks primary header nav to Start Here · Contact", () => {
+  it("locks primary header nav to Home · Start Here · Guides · Contact", () => {
     expect(primaryNav.map((item) => [item.label, item.href])).toEqual([
+      ["Home", "/"],
       ["Start Here", "/situations"],
+      ["Guides", "/guides"],
       ["Contact", "/contact"],
     ]);
-    expect(primaryNav.some((item) => item.label === "Home")).toBe(false);
     expect(primaryNav.some((item) => item.label === "Situations")).toBe(false);
-    expect(primaryNav.some((item) => item.label === "Guides")).toBe(false);
+    expect(primaryNav.some((item) => item.label === "Tools")).toBe(false);
     expect(primaryNav.some((item) => item.label === "Interactive Tools")).toBe(false);
+    expect(primaryNav.some((item) => item.label === "Building Reports")).toBe(false);
     expect(primaryNav.some((item) => item.label === "Buildings")).toBe(false);
     expect(primaryNav.some((item) => item.label === "About")).toBe(false);
     expect(primaryNav.some((item) => item.href === "/buyer-advisory")).toBe(false);
