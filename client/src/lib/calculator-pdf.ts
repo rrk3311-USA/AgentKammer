@@ -14,10 +14,12 @@ const PAGE_H = 792;
 const MARGIN = 48;
 const LEFT = 68;
 const RIGHT = 544;
-const PAPER = "0.910 0.888 0.843";
-const INK = "0.145 0.145 0.137";
-const RULE = "0.38 0.36 0.33";
-const SILVER = "0.68 0.70 0.73";
+const PAPER = "0.847 0.824 0.776";
+const PANEL = "0.969 0.953 0.918";
+const INK = "0.110 0.098 0.078";
+const RULE = "0.812 0.784 0.733";
+const SILVER = "0.722 0.737 0.761";
+const SILVER_IN = "0.839 0.851 0.871";
 
 function textWidth(text: string, size: number): number {
   let units = 0;
@@ -154,9 +156,16 @@ export function calculatorPdfLayout(fields: CalculatorPdfFields, input: CarryInp
   commands.push(`${PAPER} rg`);
   commands.push(`0 0 ${PAGE_W} ${PAGE_H} re`);
   commands.push("f");
+  commands.push(`${PANEL} rg`);
+  commands.push("40 40 532 712 re");
+  commands.push("f");
   commands.push(`${SILVER} RG`);
-  commands.push("0.7 w");
+  commands.push("0.85 w");
   commands.push("32 32 548 728 re");
+  commands.push("S");
+  commands.push(`${SILVER_IN} RG`);
+  commands.push("0.4 w");
+  commands.push("40 40 532 712 re");
   commands.push("S");
   hiddenKey(commands);
 

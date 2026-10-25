@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/hero-chrysler.jpg">
 <link rel="stylesheet" href="/chrome/compact-header.css">
+<link rel="stylesheet" href="/chrome/platinum-print.css">
 <script src="/chrome/compact-header.js" defer></script>
 <style>
 :root{
@@ -369,17 +370,17 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
 }
 @media print{
  @page{size:auto;margin:.5in}
- html,body{background:#d8d2c6!important;color:#1c1914;width:100%;height:100%;max-width:100%;margin:0;padding:0!important}
+ html,body{background:var(--ak-platinum-paper,#d8d2c6)!important;color:var(--ak-platinum-ink,#1c1914);width:100%;height:100%;max-width:100%;margin:0;padding:0!important}
  body>*{display:none!important}
  .ak-compact-header,.ak-compact-header__menu,footer .site-exit,footer .wordmark{display:none!important}
  .print-doc,.print-doc *{box-sizing:border-box}
  .print-doc{display:block!important;width:100%;max-width:100%;height:auto;overflow:hidden;color:#1c1914;font:400 10pt/1.35 var(--serif)}
  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
- .print-page{display:flex;flex-direction:column;width:100%;max-width:100%;min-height:10in;height:100vh;overflow:hidden;position:relative;padding:8mm 7.5mm 7mm;background:#d8d2c6}
+ .print-page{display:flex;flex-direction:column;width:100%;max-width:100%;min-height:10in;height:100vh;overflow:hidden;position:relative;padding:8mm 7.5mm 7mm;background:var(--ak-platinum-paper,#d8d2c6)}
  .print-page .mm-frame{position:absolute;inset:0;pointer-events:none;z-index:2}
- .print-page .mm-frame .rule-out{position:absolute;inset:0;border:1.15pt solid #B8BCC2}
- .print-page .mm-frame .rule-in{position:absolute;inset:1.7mm;border:.4pt solid #D6D9DE}
- .print-page .mm-frame i.c{position:absolute;width:5.6mm;height:5.6mm;border-color:#B8BCC2;border-style:solid;border-width:0}
+ .print-page .mm-frame .rule-out{position:absolute;inset:0;border:1.15pt solid var(--ak-platinum-trim,#B8BCC2)}
+ .print-page .mm-frame .rule-in{position:absolute;inset:1.7mm;border:.4pt solid var(--ak-platinum-trim-in,#D6D9DE)}
+ .print-page .mm-frame i.c{position:absolute;width:5.6mm;height:5.6mm;border-color:var(--ak-platinum-trim,#B8BCC2);border-style:solid;border-width:0}
  .print-page .mm-frame .c.tl{top:1.15mm;left:1.15mm;border-top-width:.95pt;border-left-width:.95pt}
  .print-page .mm-frame .c.tr{top:1.15mm;right:1.15mm;border-top-width:.95pt;border-right-width:.95pt}
  .print-page .mm-frame .c.bl{bottom:1.15mm;left:1.15mm;border-bottom-width:.95pt;border-left-width:.95pt}
@@ -396,7 +397,7 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
  .mm-who[hidden],.mm-when[hidden]{display:none!important}
  .mm-who+.mm-folio,.mm-when+.mm-folio{margin-top:1.2mm}
  .mm-folio{margin:0;text-align:right;font:600 5.6pt/1 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:#2a3447}
- .mm-strip{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;margin:0 0 4mm;background:#f7f3ea;border:.45pt solid #B8BCC2}
+ .mm-strip{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%;margin:0 0 4mm;background:var(--ak-platinum-panel,#f7f3ea);border:.45pt solid var(--ak-platinum-trim,#B8BCC2)}
  .print-plan .mm-strip{grid-template-columns:repeat(3,minmax(0,1fr))}
  .mm-strip>div{padding:2.4mm 2.5mm 2.2mm;text-align:left;border-left:.35pt solid #cfc8bb}
  .mm-strip>div:first-child{border-left:0}
@@ -404,7 +405,7 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
  .mm-strip .v{display:block;margin:0;font:400 12.5pt/1 var(--serif);color:#161c28;font-variant-numeric:tabular-nums}
  .mm-strip .v em{font-style:italic}
  .mm-board{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);grid-template-rows:minmax(72mm,1fr) auto;gap:4mm;align-items:stretch;width:100%;flex:0 0 auto}
- .mm-cell{display:flex;flex-direction:column;background:#f7f3ea;border:.4pt solid #B8BCC2;padding:3.2mm 4mm 3mm;min-width:0;min-height:0}
+ .mm-cell{display:flex;flex-direction:column;background:var(--ak-platinum-panel,#f7f3ea);border:.4pt solid var(--ak-platinum-trim,#B8BCC2);padding:3.2mm 4mm 3mm;min-width:0;min-height:0}
  .mm-label{margin:0 0 2.4mm;font:600 5.8pt/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:#2a3447}
  .mm-cell svg{display:block;width:100%;max-width:88mm;height:auto;max-height:78mm;margin:auto}
  #printwheel circle.ring{stroke:#2a3447}
@@ -430,7 +431,7 @@ footer .wordmark a{color:var(--ivory);text-decoration:none;font:600 11px var(--s
  .mm-plan-row .who span{display:block;margin-top:.9mm;font:600 5.6pt/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#2a3447;font-variant-numeric:tabular-nums}
  .mm-plan-row p{margin:0;font:400 8.2pt/1.32 var(--serif);color:#1c1914}
  .mm-plan-row .feed{display:block;margin-top:.8mm;font:600 5.2pt/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#2a3447}
- .mm-needs{position:relative;z-index:1;margin:3.5mm 0 0;padding:3mm 4mm 2.8mm;background:#f7f3ea;border:.4pt solid #B8BCC2}
+ .mm-needs{position:relative;z-index:1;margin:3.5mm 0 0;padding:3mm 4mm 2.8mm;background:var(--ak-platinum-panel,#f7f3ea);border:.4pt solid var(--ak-platinum-trim,#B8BCC2)}
  .mm-needs .mm-label{margin:0 0 2.2mm}
  .mm-need-bars{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:2.5mm;width:100%}
  .mm-need-bars>div{min-width:0}

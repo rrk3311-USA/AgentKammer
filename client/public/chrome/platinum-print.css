@@ -1,0 +1,83 @@
+/**
+ * Platinum paper + platinum trim
+ * Canonical print theme for Agent Kammer tools and reports.
+ *
+ * Source of the look: Wheel of Life print pages
+ *   client/public/tools/wheel-of-life/index.html  (.print-page, .mm-frame)
+ * Closest named cousins on screen:
+ *   --platinum #E8E4DC (wheel chrome), --brand-border #D8D1C7 (site limestone)
+ *
+ * Reference: docs/brand/PLATINUM-PRINT.md
+ *
+ * Markup for the double-rule frame:
+ *   <div class="ak-platinum-frame" aria-hidden="true">
+ *     <i class="rule-out"></i><i class="rule-in"></i>
+ *     <i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i>
+ *   </div>
+ */
+
+:root{
+  --ak-platinum-paper:#d8d2c6;
+  --ak-platinum-panel:#f7f3ea;
+  --ak-platinum-bar:#e8e2d6;
+  --ak-platinum-trim:#B8BCC2;
+  --ak-platinum-trim-in:#D6D9DE;
+  --ak-platinum-ink:#1c1914;
+  --ak-platinum-navy:#161c28;
+  --ak-platinum-slate:#2a3447;
+  --ak-platinum-rule:#cfc8bb;
+  --ak-platinum-rule-soft:#d8d1c4;
+  --ak-platinum-muted:#3a352c;
+}
+
+.ak-platinum-page{
+  position:relative;
+  background:var(--ak-platinum-paper);
+  color:var(--ak-platinum-ink);
+}
+
+.ak-platinum-panel{
+  background:var(--ak-platinum-panel);
+  border:.4pt solid var(--ak-platinum-trim);
+}
+
+.ak-platinum-frame,
+.mm-frame{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:2;
+}
+.ak-platinum-frame .rule-out,
+.mm-frame .rule-out{
+  position:absolute;
+  inset:0;
+  border:1.15pt solid var(--ak-platinum-trim);
+}
+.ak-platinum-frame .rule-in,
+.mm-frame .rule-in{
+  position:absolute;
+  inset:1.7mm;
+  border:.4pt solid var(--ak-platinum-trim-in);
+}
+.ak-platinum-frame i.c,
+.mm-frame i.c{
+  position:absolute;
+  width:5.6mm;
+  height:5.6mm;
+  border-color:var(--ak-platinum-trim);
+  border-style:solid;
+  border-width:0;
+}
+.ak-platinum-frame .c.tl,
+.mm-frame .c.tl{top:1.15mm;left:1.15mm;border-top-width:.95pt;border-left-width:.95pt}
+.ak-platinum-frame .c.tr,
+.mm-frame .c.tr{top:1.15mm;right:1.15mm;border-top-width:.95pt;border-right-width:.95pt}
+.ak-platinum-frame .c.bl,
+.mm-frame .c.bl{bottom:1.15mm;left:1.15mm;border-bottom-width:.95pt;border-left-width:.95pt}
+.ak-platinum-frame .c.br,
+.mm-frame .c.br{bottom:1.15mm;right:1.15mm;border-bottom-width:.95pt;border-right-width:.95pt}
+
+@media print{
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}

@@ -78,6 +78,10 @@ export default function Calculator() {
 
   return (
     <main className="calculator-sheet bg-brand-ivory text-brand-ink">
+      <div className="ak-platinum-frame calculator-print-frame hidden print:block" aria-hidden="true">
+        <i className="rule-out" /><i className="rule-in" />
+        <i className="c tl" /><i className="c tr" /><i className="c bl" /><i className="c br" />
+      </div>
       <section className="calculator-month border-b border-brand-border bg-brand-navy text-brand-ivory">
         <PageSection className="calculator-month-inner grid gap-10 py-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end lg:py-16">
           <div>
