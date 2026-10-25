@@ -35,6 +35,15 @@ describe("sticky public header", () => {
     expect(html).toContain("justify-self-start");
     expect(html).toContain("data-testid=\"button-header-guidance\"");
     expect(html).toContain("href=\"/\"");
+    expect(html).toContain("Start Here");
+    expect(html).toContain("Guides");
+    expect(html).toContain("Building Reports");
+    expect(html).toContain("Contact");
+    expect(html).toContain("data-testid=\"button-header-tools\"");
+    expect(html).toContain("Calculator");
+    expect(html).toContain("Wheel of Life");
+    expect(html).not.toContain("All tools");
+    expect(html).not.toMatch(/data-testid="button-header-guidance"[^>]*href=/);
     expect(html).not.toContain("/tools/livability");
     expect(html).not.toContain("/tools/communication-map");
   });

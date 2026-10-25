@@ -63,18 +63,21 @@ describe("public menu lock", () => {
     expect([...KAMMER_VERDICTS]).toEqual(["Pick", "Consider", "Wait", "Pass"]);
   });
 
-  it("locks primary header nav to Start Here · Contact", () => {
+  it("locks primary header nav to Start Here · Guides · Building Reports · Contact", () => {
     expect(primaryNav.map((item) => [item.label, item.href])).toEqual([
       ["Start Here", "/situations"],
+      ["Guides", "/guides"],
+      ["Building Reports", "/building-reports"],
       ["Contact", "/contact"],
     ]);
     expect(primaryNav.some((item) => item.label === "Home")).toBe(false);
     expect(primaryNav.some((item) => item.label === "Situations")).toBe(false);
-    expect(primaryNav.some((item) => item.label === "Guides")).toBe(false);
     expect(primaryNav.some((item) => item.label === "Interactive Tools")).toBe(false);
+    expect(primaryNav.some((item) => item.label === "Tools")).toBe(false);
     expect(primaryNav.some((item) => item.label === "Buildings")).toBe(false);
     expect(primaryNav.some((item) => item.label === "About")).toBe(false);
     expect(primaryNav.some((item) => item.href === "/buyer-advisory")).toBe(false);
+    expect(primaryNav.some((item) => item.href === "/tools")).toBe(false);
   });
 
   it("keeps Guides selector as Neighborhoods · Field Guides · Property Assessments", () => {

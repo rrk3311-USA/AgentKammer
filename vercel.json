@@ -28,7 +28,6 @@
     { "source": "/profile", "destination": "/account", "permanent": true },
     { "source": "/reverse-seller-architecture", "destination": "/contact", "permanent": true },
     { "source": "/real-estate", "destination": "/resources#assessments", "permanent": true },
-    { "source": "/building-reports", "destination": "/resources#assessments", "permanent": true },
     { "source": "/building-reports/market-briefs", "destination": "/resources#assessments", "permanent": true }
   ],
   "rewrites": [

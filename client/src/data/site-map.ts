@@ -44,7 +44,7 @@ export function getSiteMapGroups(): SiteMapGroup[] {
   return [
     {
       title: "Primary",
-      description: "The locked header doors. Start Here is the Situations diagnostic. Guidance is the floating utility.",
+      description: "The locked header doors. Tools is a dropdown off this list. Guidance is the floating utility.",
       items: primaryNav,
     },
     {

@@ -12,15 +12,7 @@ export function scrollPageToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-import { publicSideToolsEnabled } from "@shared/public-side-tools";
-
 export function openDecisionAssistant(starter?: string) {
-  if (!publicSideToolsEnabled()) {
-    if (window.location.pathname !== "/") {
-      window.location.assign("/");
-    }
-    return;
-  }
   window.dispatchEvent(
     new CustomEvent(DECISION_ASSISTANT_OPEN_EVENT, {
       detail: starter?.trim() ? { starter: starter.trim() } : undefined,
