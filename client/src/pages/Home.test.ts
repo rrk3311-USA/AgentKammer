@@ -9,7 +9,7 @@ function renderHome() {
 }
 
 describe("homepage close", () => {
-  it("puts dark pills under Start from what changed, then a light contact line", () => {
+  it("puts dark pills under Start from what changed, then the Calculate and Contact pair", () => {
     const html = renderHome();
     const start = html.indexOf("Start from what changed.");
     const chips = html.indexOf("data-ak-whats-changing");
@@ -21,8 +21,13 @@ describe("homepage close", () => {
     expect(line).toBeGreaterThan(chips);
     expect(html).toContain("bg-brand-navy text-brand-ivory");
     expect(html).toContain("bg-brand-ivory text-brand-ink");
-    expect(html).toContain("<span>Contact</span>");
-    expect(html).toContain("ak-call-button");
+    expect(html).toContain("Calculate");
+    expect(html).toContain("Contact");
+    expect(html).toContain('href="/calculator"');
+    expect(html).toContain("ak-home-cta-pair");
+    expect(html).toContain("max-w-[20rem]");
+    expect(html).toContain("ak-pair-btn");
+    expect(html).toContain("data-ak-home-close-ctas");
     expect(html).toContain("ak-quiet-chip");
     expect(html).toContain("write to us directly");
     expect(html).not.toContain("write to me");
@@ -32,7 +37,6 @@ describe("homepage close", () => {
     expect(html).toContain("flex-wrap items-center justify-start");
     expect(html).toContain("items-start");
     expect(html).toContain("text-left");
-    expect(html).toContain("px-3.5 py-2");
     expect(html).toContain("py-6 lg:py-8");
   });
 
