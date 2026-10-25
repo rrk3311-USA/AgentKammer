@@ -39,6 +39,58 @@ const whatsChangingItems: DecisionNavItem[] = [
   { label: "International Move", href: "/international" },
 ];
 
+const whatsChangingLines: Record<string, string> = {
+  "Executive Relocation": "A new city. A tighter week.",
+  "First Home": "The first purchase, without the noise.",
+  "Growing Family": "More room for the life that arrived.",
+  "Marriage": "Two households becoming one address.",
+  "Retirement": "Space that fits the next chapter.",
+  "Empty Nest": "The house is quieter. The question is not.",
+  "Aging Parents": "Care, proximity, and a calmer plan.",
+  "Inheritance": "A property that arrived before a plan.",
+  "Divorce": "Separate the home from the next start.",
+  "Remote Work": "The commute is gone. The rooms still have to work.",
+  "Job Change": "Income moved. Housing should follow last.",
+  "International Move": "Cross a border. Then choose a building.",
+};
+
+export type WhatsChangingCard = DecisionNavItem & { line: string };
+
+export const whatsChangingCards: WhatsChangingCard[] = whatsChangingItems.map((item) => ({
+  ...item,
+  line: whatsChangingLines[item.label] ?? item.label,
+}));
+
+const decisionFacingLines: Record<string, string> = {
+  Buy: "Own the next address.",
+  Sell: "Leave the building on your terms.",
+  Rent: "A lease, without a long commitment.",
+  "Renew Lease": "Stay another year, or not.",
+  "Stay Put": "The rooms may already be right.",
+  Wait: "Hold until the week is clearer.",
+  Renovate: "Change the rooms. Keep the address.",
+  Refinance: "The rate moved. The plan should follow.",
+  "Sell or Keep": "One property. Two futures.",
+};
+
+export const decisionFacingCards: WhatsChangingCard[] = decisionFacingItems.map((item) => ({
+  ...item,
+  line: decisionFacingLines[item.label] ?? item.label,
+}));
+
+export function wrapRolodexIndex(index: number, length: number) {
+  if (length <= 0) return 0;
+  return ((index % length) + length) % length;
+}
+
+/** Preview switch: default and `rolo=life` keep decision pills. `rolo=both` adds a second rolodex. */
+export type RoloPreviewVariant = "life" | "both";
+
+export function readRoloPreviewVariant(search: string | undefined | null): RoloPreviewVariant {
+  const raw = (search ?? "").replace(/^\?/, "");
+  return new URLSearchParams(raw).get("rolo") === "both" ? "both" : "life";
+}
+
 const understandItems: DecisionNavItem[] = [
   { label: "Rent vs Buy", href: "/situations/rent-vs-buy-manhattan-relocation" },
   { label: "School Districts", href: "/situations/school-district-planning-nyc" },

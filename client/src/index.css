@@ -934,6 +934,267 @@
       background-color 200ms ease;
   }
 
+.ak-rolo {
+  width: 100%;
+  max-width: 36rem;
+  text-align: left;
+  outline: none;
+}
+
+.ak-rolo:focus-visible {
+  box-shadow: 0 0 0 1px rgba(229, 228, 226, 0.28);
+}
+
+.ak-rolo-stage {
+  position: relative;
+  height: 11.75rem;
+  max-width: 100%;
+  perspective: 1200px;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.ak-rolo-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  display: flex;
+  width: min(17.75rem, 76%);
+  height: 11.25rem;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.1rem 1.15rem 1rem;
+  border: 1px solid rgba(229, 228, 226, 0.28);
+  background: #202735;
+  color: rgba(245, 242, 235, 0.92);
+  text-align: left;
+  text-decoration: none;
+  font: inherit;
+  cursor: pointer;
+  appearance: none;
+  transform-origin: left center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ak-rolo-card[data-pos="0"] {
+  z-index: 3;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0) rotateY(0deg) scale(1);
+}
+
+.ak-rolo-card[data-pos="-1"] {
+  z-index: 2;
+  opacity: 0.55;
+  pointer-events: auto;
+  transform: translateX(-0.85rem) rotateY(38deg) scale(0.9);
+}
+
+.ak-rolo-card[data-pos="1"] {
+  z-index: 2;
+  opacity: 0.62;
+  pointer-events: auto;
+  transform: translateX(58%) rotateY(-32deg) scale(0.9);
+}
+
+.ak-rolo-card[data-pos="far"] {
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(18%) rotateY(-12deg) scale(0.86);
+}
+
+.ak-rolo--compact {
+  max-width: 28rem;
+}
+
+.ak-rolo--compact .ak-rolo-stage {
+  height: 8.35rem;
+}
+
+.ak-rolo--compact .ak-rolo-card {
+  width: min(14.75rem, 72%);
+  height: 7.9rem;
+  padding: 0.85rem 0.95rem 0.8rem;
+}
+
+.ak-rolo--compact .ak-rolo-title {
+  margin-top: 0.28rem;
+  font-size: clamp(1.2rem, 5.6vw, 1.45rem);
+}
+
+.ak-rolo--compact .ak-rolo-line {
+  margin-top: 0.32rem;
+  max-width: 20ch;
+  font-size: 12px;
+}
+
+.ak-rolo--compact .ak-rolo-go {
+  padding-top: 0.4rem;
+}
+
+.ak-rolo--compact .ak-rolo-bar {
+  max-width: min(14.75rem, 72%);
+  margin-top: 0.6rem;
+}
+
+.ak-rolo--compact .ak-rolo-card[data-pos="1"] {
+  transform: translateX(52%) rotateY(-28deg) scale(0.9);
+}
+
+.ak-rolo-num {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(154, 161, 168, 0.88);
+}
+
+.ak-rolo-title {
+  margin-top: 0.55rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 7vw, 1.95rem);
+  font-weight: 500;
+  line-height: 0.98;
+  color: rgba(245, 242, 235, 0.96);
+}
+
+.ak-rolo-line {
+  margin-top: 0.55rem;
+  max-width: 22ch;
+  font-size: 13px;
+  line-height: 1.35;
+  color: rgba(229, 228, 226, 0.68);
+}
+
+.ak-rolo-go {
+  margin-top: auto;
+  padding-top: 0.7rem;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(229, 228, 226, 0.72);
+}
+
+.ak-rolo-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: min(17.75rem, 76%);
+  margin-top: 0.85rem;
+}
+
+.ak-rolo-count {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(154, 161, 168, 0.78);
+}
+
+.ak-rolo-arrows {
+  display: none;
+  gap: 0.35rem;
+}
+
+.ak-rolo-arrow {
+  display: inline-flex;
+  width: 2.25rem;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(229, 228, 226, 0.22);
+  background: transparent;
+  color: rgba(229, 228, 226, 0.78);
+}
+
+.ak-rolo-arrow:hover,
+.ak-rolo-arrow:focus-visible,
+.ak-rolo-card[data-pos="0"]:hover,
+.ak-rolo-card[data-pos="0"]:focus-visible {
+  border-color: rgba(229, 228, 226, 0.78);
+  color: rgba(245, 242, 235, 0.94);
+  box-shadow:
+    0 0 0 1px rgba(229, 228, 226, 0.22),
+    0 0 12px rgba(229, 228, 226, 0.18);
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .ak-rolo-arrows {
+    display: flex;
+  }
+
+  .ak-rolo-stage {
+    height: 12.5rem;
+  }
+
+  .ak-rolo-card {
+    width: 20.5rem;
+    height: 12rem;
+    padding: 1.25rem 1.3rem 1.1rem;
+  }
+
+  .ak-rolo-bar {
+    max-width: 20.5rem;
+  }
+
+  .ak-rolo-card[data-pos="1"] {
+    transform: translateX(13.6rem) rotateY(-28deg) scale(0.92);
+  }
+
+  .ak-rolo--compact .ak-rolo-stage {
+    height: 8.75rem;
+  }
+
+  .ak-rolo--compact .ak-rolo-card {
+    width: 16.25rem;
+    height: 8.25rem;
+    padding: 0.95rem 1.05rem 0.85rem;
+  }
+
+  .ak-rolo--compact .ak-rolo-bar {
+    max-width: 16.25rem;
+  }
+
+  .ak-rolo--compact .ak-rolo-card[data-pos="1"] {
+    transform: translateX(10.6rem) rotateY(-26deg) scale(0.92);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ak-rolo-card {
+    transition:
+      transform 320ms ease,
+      opacity 280ms ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ak-rolo-card {
+    transition: none;
+  }
+
+  .ak-rolo-card[data-pos="-1"] {
+    transform: translateX(-0.7rem) scale(0.96);
+  }
+
+  .ak-rolo-card[data-pos="1"] {
+    transform: translateX(62%) scale(0.96);
+  }
+
+  .ak-rolo--compact .ak-rolo-card[data-pos="1"] {
+    transform: translateX(54%) scale(0.96);
+  }
+
+  .ak-rolo-card[data-pos="far"] {
+    transform: translateX(12%) scale(0.96);
+  }
+}
+
   .ak-quiet-chip:hover,
   .ak-quiet-chip:focus-visible {
     border-color: rgba(229, 228, 226, 0.78);
