@@ -40,12 +40,10 @@ describe("homepage close", () => {
     expect(html).toContain("py-6 lg:py-8");
     expect(html).toContain("How We Decide");
     expect(html).toContain("Three questions. Then judgment.");
-    expect(html).toContain("data-ak-how-we-decide");
-    expect(html).toContain("ak-pp-page");
-    expect(html).toContain("ak-pp-frame");
-    expect(html).not.toContain("data-ak-how-we-decide-art");
-    expect(html).not.toContain("/images/situations/inheritance-housing-nyc.png");
-    expect(html).not.toContain("#FDF3DF");
+    expect(html).toContain("bg-brand-soft-stone");
+    expect(html).toContain("ak-felt-rule");
+    expect(html).not.toContain("data-ak-how-we-decide");
+    expect(html).not.toContain("ak-pp-page");
     expect(html).not.toContain("owl");
   });
 

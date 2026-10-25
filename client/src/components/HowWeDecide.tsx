@@ -16,7 +16,7 @@ const howWeDecide = [
   },
 ] as const;
 
-/** Homepage How We Decide on Platinum Paper. Copy is locked. */
+/** Start Here How We Decide on Platinum Paper. Copy is locked. */
 export function HowWeDecide() {
   return (
     <section data-ak-how-we-decide className="ak-pp-page ak-hwd">
@@ -27,6 +27,7 @@ export function HowWeDecide() {
       <div className="ak-hwd-inner">
         <p className="ak-pp-kicker">How We Decide</p>
         <h2 className="ak-hwd-title">Three questions. Then judgment.</h2>
+        <i className="ak-hwd-sheen" aria-hidden="true" />
         <div className="ak-hwd-steps">
           {howWeDecide.map((item, index) => (
             <article key={item.step} className="ak-hwd-step">

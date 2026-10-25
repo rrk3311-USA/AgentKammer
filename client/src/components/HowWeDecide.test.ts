@@ -27,6 +27,7 @@ describe("HowWeDecide", () => {
     expect(html).toContain("ak-pp-num");
     expect(html).toContain("ak-pp-sec-label");
     expect(html).toContain("ak-pp-hairline");
+    expect(html).toContain("ak-hwd-sheen");
     expect(html).not.toContain("data-ak-how-we-decide-art");
     expect(html).not.toContain("inheritance-housing-nyc");
     expect(html).not.toContain("<svg");

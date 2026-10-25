@@ -38,10 +38,23 @@ describe("What's Changing page", () => {
     expect(html).not.toContain("justify-center");
   });
 
-  it("uses two styles only: navy pills and a light assessment band", () => {
+  it("sets How We Decide on Platinum Paper after the pills", () => {
+    const html = renderSituations();
+    const pills = html.indexOf("data-ak-situations-pills");
+    const paper = html.indexOf("data-ak-how-we-decide");
+    const ask = html.indexOf("When you want us to look with you.");
+    expect(pills).toBeGreaterThan(-1);
+    expect(paper).toBeGreaterThan(pills);
+    expect(ask).toBeGreaterThan(paper);
+    expect(html).toContain("ak-pp-page");
+    expect(html).toContain("ak-pp-frame");
+    expect(html).toContain("Three questions. Then judgment.");
+    expect(html).toContain("ak-hwd-sheen");
+  });
+
+  it("uses navy pills, Platinum Paper How We Decide, and a light assessment band", () => {
     const html = renderSituations();
     expect(html).toContain("bg-brand-navy text-brand-ivory");
-    expect(html).toContain("bg-brand-ivory text-brand-ink");
     expect(html).toContain("When you want us to look with you.");
     expect(html).toContain("write to us");
     expect(html).not.toContain("write to me");

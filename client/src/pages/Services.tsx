@@ -4,6 +4,7 @@ import { quietChipClass } from "@/components/Footer";
 import { decisionFacingItems, decisionNavigationGroups } from "@/data/decision-navigation";
 import { openDecisionAssistant } from "@/lib/decision-assistant";
 import { usePageMetadata } from "@/hooks/usePageMetadata";
+import { HowWeDecide } from "@/components/HowWeDecide";
 import { grammar } from "@/components/visual-grammar";
 import { cn } from "@/lib/utils";
 
@@ -83,6 +84,8 @@ export default function Services() {
           </nav>
         </div>
       </section>
+
+      <HowWeDecide />
 
       <CTA
         title="When you want us to look with you."
