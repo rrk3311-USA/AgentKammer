@@ -55,10 +55,13 @@ describe("calculator pdf", () => {
     expect(bottom).toBeLessThanOrEqual(792 - 54);
     expect(commands).toContain("Purchase closing");
     expect(commands).toContain("Ongoing monthly");
+    expect(commands).toContain("Other monthly");
     expect(commands).toContain("Selling costs");
     expect(commands).toContain("Cash to close");
     expect(commands).toContain(formatUsd(monthlyWithCosts(result.monthly, costs.monthly)));
     expect(commands).toContain(formatUsd(cashToClose(result.down, costs.closing)));
+    expect(commands).toContain(formatUsd(costs.closing));
+    expect(commands).toContain(formatUsd(74_550));
     expect(commands).toContain("Commission rates vary and are negotiable");
     expect(commands).not.toContain("\u2014");
     const pdf = new TextDecoder().decode(buildCalculatorPdf(fields, DEFAULT_CARRY, result, costs));

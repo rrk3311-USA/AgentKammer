@@ -30,6 +30,7 @@ describe("Calculator print sheet", () => {
     expect(calc).toContain("CalculatorCosts");
     expect(calc).toContain("Purchase closing");
     expect(calc).toContain("Ongoing monthly");
+    expect(calc).toContain("Other monthly");
     expect(calc).toContain("Selling costs");
     expect(calc).toContain("Costs entered");
     expect(costs).toContain("Costs people often miss");

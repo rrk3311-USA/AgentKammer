@@ -214,7 +214,7 @@ export function calculatorPdfLayout(
   top += 12;
 
   const inlayTop = top;
-  const inlayHeight = 196;
+  const inlayHeight = extras.monthly > 0 ? 218 : 196;
   commands.push(`${CARD} rg`);
   commands.push(`${LEFT - 10} ${PAGE_H - (inlayTop + inlayHeight)} 476 ${inlayHeight} re`);
   commands.push("f");
@@ -251,6 +251,7 @@ export function calculatorPdfLayout(
     ["Mortgage", formatUsd(result.mortgage)],
     ["Property tax", formatUsd(result.tax)],
     ["Common charges", formatUsd(result.common)],
+    ...(extras.monthly > 0 ? ([["Other monthly", formatUsd(extras.monthly)]] as [string, string][]) : []),
     ["Monthly carry", formatUsd(monthTotal)],
   ];
   for (const [label, value] of resultRows) {

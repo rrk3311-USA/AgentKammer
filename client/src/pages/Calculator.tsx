@@ -124,6 +124,7 @@ export default function Calculator() {
     ["Mortgage", formatUsd(result.mortgage)],
     ["Property tax", formatUsd(result.tax)],
     ["Common charges", formatUsd(result.common)],
+    ...(costTotals.monthly > 0 ? [["Other monthly", formatUsd(costTotals.monthly)] as const] : []),
     ["Monthly carry", formatUsd(monthTotal)],
   ] as const;
   const costPrintRows = [
