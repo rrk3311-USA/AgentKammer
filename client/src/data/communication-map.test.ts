@@ -158,7 +158,7 @@ describe("communication map", () => {
     expect(applyScopeTurn(4, 4, 50)).toEqual({ step: 4, carry: 14 });
   });
 
-  it("keeps the restored header doors and hides the Decision Guide while side tools are off", () => {
+  it("keeps five header doors and hides the Decision Guide while side tools are off", () => {
     expect(primaryNav).toHaveLength(5);
     expect(primaryNav.map((item) => item.label)).toEqual([
       "Home",

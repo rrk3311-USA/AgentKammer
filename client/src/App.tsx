@@ -13,7 +13,6 @@ import { COMMUNICATION_MAP_PATH } from "@/data/communication-map";
 import { publicSideToolsEnabled } from "@shared/public-side-tools";
 const Home = lazy(() => import("@/pages/Home"));
 const About = lazy(() => import("@/pages/About"));
-const Buildings = lazy(() => import("@/pages/Buildings"));
 const BuildingReport = lazy(() => import("@/pages/BuildingReport"));
 const NewYorkMarket = lazy(() => import("@/pages/NewYorkMarket"));
 const IntelligenceHome = lazy(() => import("@/pages/IntelligenceHome"));
@@ -174,7 +173,7 @@ function Router() {
       <Route path="/building-reports/neighborhood-guides" component={NewYorkMarket} />
       <Route path="/building-reports/market-briefs">{() => <HardRedirect to="/resources#assessments" />}</Route>
       <Route path="/building-reports/:slug" component={BuildingReportDetail} />
-      <Route path="/building-reports" component={Buildings} />
+      <Route path="/building-reports">{() => <HardRedirect to="/resources#assessments" />}</Route>
       <Route path="/buyer-advisory">{() => <Redirect to="/situations" />}</Route>
       <Route path="/insights" component={Perspectives} />
       <Route path="/insights/reports/:slug" component={ExecutiveHousingReport} />
@@ -267,7 +266,7 @@ function AppShell() {
         </div>
       </Suspense>
       <Footer />
-      <DecisionAssistantDock />
+      {publicSideToolsEnabled() ? <DecisionAssistantDock /> : null}
       <Toaster />
     </div>
   );

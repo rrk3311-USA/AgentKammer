@@ -89,7 +89,7 @@ export function contactHref(id: PublicProductId): string {
   return `/contact?intent=${id}`;
 }
 
-/** Quiet sitemap entries only. Do not add these as flat header doors. */
+/** Quiet sitemap entries only. Do not add these to the two-item header. */
 export const FOOTER_SITEMAP_QUIET = [
   GET_QUALIFIED,
   { label: "Calculator", href: "/calculator" },

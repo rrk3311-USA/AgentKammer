@@ -42,7 +42,7 @@ function isBranch(item: MobileNavLink | MobileNavBranch): item is MobileNavBranc
 
 /**
  * Mobile field menu. Not the locked desktop header.
- * Desktop header uses these same top-level doors. Guidance stays a utility.
+ * Desktop header is Start Here · Contact. This menu keeps the field doors.
  * Calculator and Wheel of Life nest under Interactive Tools. Livability and the
  * Decision Guide join only when AK_PUBLIC_SIDE_TOOLS is on. Hub stays off this list.
  */

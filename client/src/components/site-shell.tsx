@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { grammar } from "@/components/visual-grammar";
 
-/** Desktop header doors. Same labels, order, and destinations as the mobile field menu. Guidance stays a utility. */
+/** Locked primary header: Home · Start Here · Guides · Interactive Tools · Contact. Guidance is the filled utility, not a sixth door. */
 export const primaryNav = [
   { label: "Home", href: "/" },
   { label: "Start Here", href: "/situations" },

@@ -16,13 +16,10 @@ import {
 } from "./mobile-nav";
 
 describe("mobile field menu", () => {
-  it("keeps desktop header doors identical to the mobile field-menu categories", () => {
-    expect(primaryNav.map((item) => [item.label, item.href])).toEqual(
-      mobileFieldNav.map((item) => [item.label, item.href]),
-    );
+  it("keeps Calculator and Hub out of the locked desktop header", () => {
     const headerHrefs = new Set(primaryNav.map((item) => item.href));
     expect(headerHrefs.has("/calculator")).toBe(false);
-    expect(headerHrefs.has("/building-reports")).toBe(false);
+    expect(headerHrefs.has("/tools")).toBe(true);
     expect(headerHrefs.has("/hub")).toBe(false);
     for (const item of FOOTER_SITEMAP_QUIET) {
       expect(headerHrefs.has(item.href)).toBe(false);

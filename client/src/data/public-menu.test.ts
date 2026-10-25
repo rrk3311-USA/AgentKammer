@@ -63,7 +63,7 @@ describe("public menu lock", () => {
     expect([...KAMMER_VERDICTS]).toEqual(["Pick", "Consider", "Wait", "Pass"]);
   });
 
-  it("locks primary header nav to the mobile field-menu doors", () => {
+  it("locks primary header nav to Home · Start Here · Guides · Interactive Tools · Contact", () => {
     expect(primaryNav.map((item) => [item.label, item.href])).toEqual([
       ["Home", "/"],
       ["Start Here", "/situations"],
@@ -77,7 +77,6 @@ describe("public menu lock", () => {
     expect(primaryNav.some((item) => item.label === "Buildings")).toBe(false);
     expect(primaryNav.some((item) => item.label === "About")).toBe(false);
     expect(primaryNav.some((item) => item.href === "/buyer-advisory")).toBe(false);
-    expect(primaryNav.some((item) => item.href === "/building-reports")).toBe(false);
   });
 
   it("keeps Guides selector as Neighborhoods · Field Guides · Property Assessments", () => {

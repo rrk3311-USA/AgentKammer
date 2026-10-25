@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { primaryNav } from "@/components/site-shell";
 import { PUBLIC_PRODUCTS } from "@/data/public-menu";
 import { openDecisionAssistant } from "@/lib/decision-assistant";
+import { publicSideToolsEnabled } from "@shared/public-side-tools";
 
 const focusRing = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-stone focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy";
 
@@ -17,8 +18,6 @@ function isPrimaryNavActive(href: string, location: string) {
     return (
       location === "/guides" ||
       location.startsWith("/guides/") ||
-      location === "/resources" ||
-      location.startsWith("/resources/") ||
       location === "/building-reports" ||
       location.startsWith("/building-reports/")
     );
@@ -80,13 +79,13 @@ export function Header({ compact = false }: { compact?: boolean } = {}) {
         </Link>
 
         <nav
-          className="hidden justify-self-center border border-brand-ivory/10 bg-brand-ivory/[0.035] px-5 py-1.5 shadow-[inset_0_1px_0_rgba(245,242,235,0.06)] lg:flex lg:items-center lg:justify-center lg:gap-1.5 xl:gap-2.5"
+          className="hidden justify-self-center border border-brand-ivory/10 bg-brand-ivory/[0.035] px-5 py-1.5 shadow-[inset_0_1px_0_rgba(245,242,235,0.06)] lg:flex lg:items-center lg:justify-center lg:gap-2 xl:gap-3.5"
           aria-label="Primary"
         >
           {primaryNav.map((link) => {
             const active = isPrimaryNavActive(link.href, location);
             return (
-              <Link key={link.label} href={link.href} className={cn("group relative shrink-0 px-2.5 py-1.5 xl:px-3", focusRing)}>
+              <Link key={link.label} href={link.href} className={cn("group relative shrink-0 px-2.5 py-1.5 xl:px-4", focusRing)}>
                 <span
                   className={cn(
                     "relative whitespace-nowrap text-[0.9rem] capitalize tracking-[0.06em] transition-colors",
@@ -109,14 +108,24 @@ export function Header({ compact = false }: { compact?: boolean } = {}) {
 
         <div className="flex items-center justify-end gap-2">
           <div className="hidden lg:block">
-            <button
-              type="button"
-              onClick={() => openDecisionAssistant()}
-              className={cn(headerGuidanceClass, focusRing)}
-              data-testid="button-header-guidance"
-            >
-              {PUBLIC_PRODUCTS.guidance.label}
-            </button>
+            {publicSideToolsEnabled() ? (
+              <button
+                type="button"
+                onClick={() => openDecisionAssistant()}
+                className={cn(headerGuidanceClass, focusRing)}
+                data-testid="button-header-guidance"
+              >
+                {PUBLIC_PRODUCTS.guidance.label}
+              </button>
+            ) : (
+              <Link
+                href={PUBLIC_PRODUCTS.guidance.href}
+                className={cn(headerGuidanceClass, focusRing)}
+                data-testid="button-header-guidance"
+              >
+                {PUBLIC_PRODUCTS.guidance.label}
+              </Link>
+            )}
           </div>
           <MobileMenuToggle
             open={mobileMenuOpen}
