@@ -3,42 +3,38 @@ import React, { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { Router } from "wouter";
-import { decisionNavigationGroups } from "@/data/decision-navigation";
+import { SITUATION_GUIDE } from "@/data/situation-guide";
 import Services from "./Services";
-
-const changeItems =
-  decisionNavigationGroups.find((group) => group.title === "What's Changing?")?.items ?? [];
 
 function renderSituations() {
   return renderToStaticMarkup(createElement(Router, { ssrPath: "/situations" }, createElement(Services)));
 }
 
 describe("What's Changing page", () => {
-  it("shows all twelve life changes as tappable pills and drops the numbered split", () => {
+  it("shows the three numbered steps as platinum rows, not pills", () => {
     const html = renderSituations();
-    expect(changeItems).toHaveLength(12);
-    expect(html).toContain("data-ak-situations-pills");
-    expect(html).toContain("ak-quiet-chip");
-    expect(html).toContain("min-h-11");
-    for (const item of changeItems) {
+    expect(SITUATION_GUIDE[0].items).toHaveLength(12);
+    expect(html).toContain("data-ak-situation-guide");
+    expect(html).toContain("ak-guide-row");
+    expect(html).not.toContain("ak-quiet-chip");
+    expect(html).not.toContain("data-ak-situations-pills");
+    for (const item of SITUATION_GUIDE[0].items) {
       expect(html).toContain(item.label);
       expect(html).toContain(`href="${item.href}"`);
     }
-    expect(html).not.toContain("01 ·");
-    expect(html).not.toContain("02 ·");
-    expect(html).not.toContain("03 ·");
+    expect(html).toContain("01");
+    expect(html).toContain("02");
+    expect(html).toContain("03");
     expect(html).not.toContain("Life Changes");
     expect(html).not.toContain("ModuleCards");
     expect(html).not.toContain("ak-felt-grid");
     expect(html).not.toContain("CompactLinkRow");
     expect(html).toContain("items-start");
     expect(html).toContain("text-left");
-    expect(html).toContain("flex-wrap items-center justify-start");
-    expect(html.match(/flex-wrap items-center justify-start/g)).toHaveLength(3);
     expect(html).not.toContain("justify-center");
   });
 
-  it("uses two styles only: navy pills and a light assessment band", () => {
+  it("keeps navy guide and a light assessment band", () => {
     const html = renderSituations();
     expect(html).toContain("bg-brand-navy text-brand-ivory");
     expect(html).toContain("bg-brand-ivory text-brand-ink");
@@ -53,10 +49,12 @@ describe("What's Changing page", () => {
     expect(html.match(/ak-felt-item/g)).toBeNull();
   });
 
-  it("keeps the homepage platinum hover on the pills", () => {
+  it("uses thin platinum outlines and a short ring brighten", () => {
     const css = readFileSync(new URL("../index.css", import.meta.url), "utf8");
-    expect(css).toContain(".ak-quiet-chip:hover");
-    expect(css).toContain("rgba(229, 228, 226");
-    expect(css).toContain("200ms ease");
+    expect(css).toContain(".ak-guide-row");
+    expect(css).toContain("#c9ced3");
+    expect(css).toContain("#9aa1a8");
+    expect(css).toContain("160ms ease");
+    expect(css).not.toContain("ak-guide-carousel");
   });
 });

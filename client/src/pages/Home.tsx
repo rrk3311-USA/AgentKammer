@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { MoveRight } from "lucide-react";
-import { WhatsChangingPills } from "@/components/Footer";
+import { SituationGuide } from "@/components/SituationGuide";
 import { CTA } from "@/components/site-shell";
 import { DecisionFramework } from "@/components/DecisionFramework";
 import { grammar } from "@/components/visual-grammar";
@@ -78,7 +78,9 @@ export default function Home() {
       <section className="bg-brand-navy text-brand-ivory">
         <div className="mx-auto flex w-full max-w-site flex-col items-start px-5 py-6 text-left sm:px-6 lg:px-10 lg:py-8">
           <h2 className={grammar.sectionOnDark}>Start from what changed.</h2>
-          <WhatsChangingPills className="mt-4 w-full" showKicker={false} />
+          <div className="mt-6 w-full">
+            <SituationGuide />
+          </div>
         </div>
       </section>
 
