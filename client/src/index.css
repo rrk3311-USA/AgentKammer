@@ -993,6 +993,112 @@
       linear-gradient(90deg, rgba(245, 242, 235, 0.045), transparent 22%, rgba(93, 102, 116, 0.055) 74%, transparent);
   }
 
+  .ak-situation-guide {
+    display: grid;
+    gap: 2.25rem;
+    width: 100%;
+    text-align: left;
+  }
+
+  .ak-guide-step {
+    opacity: 0.55;
+  }
+
+  .ak-guide-step.is-live {
+    opacity: 1;
+  }
+
+  .ak-guide-step.is-next .ak-guide-row {
+    border-color: #9aa1a8;
+  }
+
+  .ak-guide-step-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    margin: 0;
+  }
+
+  .ak-guide-num {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.12em;
+    color: #c9ced3;
+  }
+
+  .ak-guide-title {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(1.45rem, 3vw, 1.85rem);
+    line-height: 1.1;
+    color: #f5f2eb;
+  }
+
+  .ak-guide-lead {
+    margin: 0.55rem 0 0;
+    max-width: 36rem;
+    font-size: 0.98rem;
+    line-height: 1.45;
+    color: rgba(245, 242, 235, 0.68);
+  }
+
+  .ak-guide-rows {
+    display: grid;
+    gap: 0.55rem;
+    margin-top: 1rem;
+  }
+
+  .ak-guide-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 44px;
+    padding: 0.85rem 1rem;
+    border: 1px solid #c9ced3;
+    background: transparent;
+    color: #f5f2eb;
+    text-decoration: none;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+  }
+
+  .ak-guide-row:hover,
+  .ak-guide-row:focus-visible {
+    border-color: #9aa1a8;
+    box-shadow: 0 0 0 1px #9aa1a8;
+    outline: none;
+  }
+
+  .ak-guide-row-copy {
+    display: grid;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+
+  .ak-guide-row-label {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.2rem;
+    line-height: 1.15;
+  }
+
+  .ak-guide-row-line {
+    font-size: 0.92rem;
+    line-height: 1.35;
+    color: rgba(245, 242, 235, 0.64);
+  }
+
+  .ak-guide-row-arrow {
+    width: 1.1rem;
+    height: 1.1rem;
+    flex-shrink: 0;
+    color: #c9ced3;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ak-guide-row {
+      transition: none;
+    }
+  }
+
   .ak-metal-divider {
     height: 2px;
     background: linear-gradient(90deg, transparent 0%, rgba(176, 141, 87, 0.45) 14%, rgba(245, 242, 235, 0.4) 36%, rgba(93, 102, 116, 0.5) 52%, rgba(245, 242, 235, 0.36) 70%, rgba(176, 141, 87, 0.45) 88%, transparent 100%);

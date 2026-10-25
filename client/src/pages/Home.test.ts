@@ -9,31 +9,34 @@ function renderHome() {
 }
 
 describe("homepage close", () => {
-  it("puts dark pills under Start from what changed, then a light contact line", () => {
+  it("puts the numbered guide under Start from what changed, then a light contact line", () => {
     const html = renderHome();
     const start = html.indexOf("Start from what changed.");
-    const chips = html.indexOf("data-ak-whats-changing");
+    const guide = html.indexOf("data-ak-situation-guide");
     const heading = html.indexOf("Get in touch");
     const line = html.indexOf("Work through the steps, starting with your Situation, for a clear recommendation, or write to us directly.");
     expect(start).toBeGreaterThan(-1);
-    expect(chips).toBeGreaterThan(start);
+    expect(guide).toBeGreaterThan(start);
     expect(heading).toBe(-1);
-    expect(line).toBeGreaterThan(chips);
+    expect(line).toBeGreaterThan(guide);
     expect(html).toContain("bg-brand-navy text-brand-ivory");
     expect(html).toContain("bg-brand-ivory text-brand-ink");
     expect(html).toContain("<span>Contact</span>");
     expect(html).toContain("ak-call-button");
-    expect(html).toContain("ak-quiet-chip");
+    expect(html).toContain("ak-guide-row");
+    expect(html).not.toContain("ak-quiet-chip");
     expect(html).toContain("write to us directly");
     expect(html).not.toContain("write to me");
     expect(html).not.toContain("ak-felt-grid");
     expect(html).not.toContain("High-Value Relocation");
     expect(html).not.toContain("Livability");
-    expect(html).toContain("flex-wrap items-center justify-start");
     expect(html).toContain("items-start");
     expect(html).toContain("text-left");
     expect(html).toContain("px-3.5 py-2");
     expect(html).toContain("py-6 lg:py-8");
+    expect(html).toContain("01");
+    expect(html).toContain("02");
+    expect(html).toContain("03");
   });
 
   it("does not add a Start Here link in the dark pills section", () => {
