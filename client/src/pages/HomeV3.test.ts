@@ -70,6 +70,13 @@ describe("home v3", () => {
     expect(wordmark).toContain("sticky");
     expect(wordmark).toContain("data-lockup-name");
     expect(wordmark).toContain(">Agent Kammer<");
+    expect(wordmark).toContain("font-display");
+    expect(wordmark).toContain("uppercase");
+    expect(wordmark).toContain("font-normal");
+    expect(wordmark).toContain("tracking-[0.12em]");
+    expect(wordmark).toContain("leading-[1.65]");
+    expect(wordmark).not.toContain("truncate");
+    expect(wordmark).not.toContain("leading-none");
     expect(wordmark).not.toContain("data-header-divider");
     expect(wordmark).toContain('href="/home-v3?header=wordmark"');
 
@@ -77,7 +84,21 @@ describe("home v3", () => {
     expect(divider).toContain("sticky");
     expect(divider).toContain("data-header-divider");
     expect(divider).toContain(">Agent Kammer<");
+    expect(divider).toContain("font-display");
+    expect(divider).toContain("uppercase");
+    expect(divider).not.toContain("truncate");
     expect(divider).toContain('href="/home-v3?header=divider"');
+
+    const limestone = headerHtml(renderHomeV3("header=limestone"));
+    expect(limestone).toContain("sticky");
+    expect(limestone).toContain("bg-[#0D182B]");
+    expect(limestone).toContain("text-[#D8D1C7]");
+    expect(limestone).toContain(">Agent Kammer<");
+    expect(limestone).toContain("font-display");
+    expect(limestone).toContain("uppercase");
+    expect(limestone).not.toContain("data-header-divider");
+    expect(limestone).not.toContain("truncate");
+    expect(limestone).toContain('href="/home-v3?header=limestone"');
   });
 
   it("is not linked from the live header, footer, or sitemap", () => {

@@ -46,8 +46,8 @@ const focus =
 const stoneButton =
   "h-auto w-full whitespace-normal rounded-none border-0 bg-[#2A3447] px-5 py-3 text-center font-sans text-[13px] font-medium normal-case tracking-normal text-[#F5F2EB] hover:bg-[#0D182B] sm:w-auto";
 
-function BrandMonogram({ tone, className }: { tone: "stone" | "ivory"; className: string }) {
-  const color = tone === "stone" ? "#2A3447" : "#F5F2EB";
+function BrandMonogram({ tone, className }: { tone: "stone" | "ivory" | "limestone"; className: string }) {
+  const color = tone === "stone" ? "#2A3447" : tone === "limestone" ? "#D8D1C7" : "#F5F2EB";
   return (
     <span
       aria-hidden
@@ -75,12 +75,15 @@ function ChangingButton() {
   );
 }
 
-type HeaderPreview = "wordmark" | "divider";
+type HeaderPreview = "wordmark" | "divider" | "limestone";
 
 function headerPreview(search: string): HeaderPreview | null {
   const value = new URLSearchParams(search).get("header");
-  return value === "wordmark" || value === "divider" ? value : null;
+  return value === "wordmark" || value === "divider" || value === "limestone" ? value : null;
 }
+
+const liveWordmark =
+  "overflow-visible whitespace-nowrap py-1 font-display text-[1.23rem] font-normal uppercase leading-[1.65] tracking-[0.12em] sm:text-[1.75rem] xl:text-[2.1rem]";
 
 function BrandLockup({ preview }: { preview: HeaderPreview | null }) {
   const href = preview ? `/home-v3?header=${preview}` : "/home-v3";
@@ -92,34 +95,41 @@ function BrandLockup({ preview }: { preview: HeaderPreview | null }) {
     );
   }
 
+  const dark = preview === "limestone";
   return (
-    <Link href={href} aria-label="Agent Kammer" className={`${focus} inline-flex min-w-0 items-center`}>
-      <BrandMonogram tone="stone" className="block h-11 w-11 shrink-0" />
+    <Link href={href} aria-label="Agent Kammer" className={`${focus} inline-flex items-center overflow-visible`}>
+      <BrandMonogram tone={dark ? "limestone" : "stone"} className="block h-11 w-11 shrink-0" />
       {preview === "divider" ? (
-        <span aria-hidden data-header-divider className="mx-2.5 h-6 w-px shrink-0 bg-[#2A3447] sm:mx-3" />
+        <span aria-hidden data-header-divider className="mx-2.5 h-6 w-px shrink-0 self-center bg-[#2A3447] sm:mx-3" />
       ) : (
         <span aria-hidden className="w-2.5 shrink-0 sm:w-3" />
       )}
-      <span
-        data-lockup-name
-        className="truncate font-serif text-[1.7rem] font-medium leading-none tracking-[-0.02em] text-[#2A3447] sm:text-[1.85rem]"
-      >
+      <span data-lockup-name className={`${liveWordmark} ${dark ? "text-[#D8D1C7]" : "text-[#2A3447]"}`}>
         Agent Kammer
       </span>
     </Link>
   );
 }
 
-function NavLinks({ onNavigate, className }: { onNavigate?: () => void; className: string }) {
+function NavLinks({
+  onNavigate,
+  className,
+  dark = false,
+}: {
+  onNavigate?: () => void;
+  className: string;
+  dark?: boolean;
+}) {
+  const tone = dark ? "text-[#D8D1C7] hover:text-[#F5F2EB]" : "text-[#2A3447] hover:text-[#0D182B]";
   return (
     <nav aria-label="Primary" className={className}>
       {NAV.map((item) =>
         item.href.startsWith("#") ? (
-          <a key={item.href} href={item.href} onClick={onNavigate} className={`${label} ${focus} text-[#2A3447] hover:text-[#0D182B]`}>
+          <a key={item.href} href={item.href} onClick={onNavigate} className={`${label} ${focus} ${tone}`}>
             {item.label}
           </a>
         ) : (
-          <Link key={item.href} href={item.href} onClick={onNavigate} className={`${label} ${focus} text-[#2A3447] hover:text-[#0D182B]`}>
+          <Link key={item.href} href={item.href} onClick={onNavigate} className={`${label} ${focus} ${tone}`}>
             {item.label}
           </Link>
         ),
@@ -160,17 +170,27 @@ export default function HomeV3() {
     <div id="top" data-testid="page-home-v3" className="min-h-screen overflow-x-clip bg-[#F5F2EB] text-[#2F3136]">
       <header
         data-header-preview={preview ?? undefined}
-        className={`border-b border-[#D8D1C7] bg-[#F5F2EB]${preview ? " sticky top-0 z-40" : ""}`}
+        className={
+          preview === "limestone"
+            ? "sticky top-0 z-40 overflow-visible border-b border-[#D8D1C7]/35 bg-[#0D182B]"
+            : preview
+              ? "sticky top-0 z-40 overflow-visible border-b border-[#D8D1C7] bg-[#F5F2EB]"
+              : "border-b border-[#D8D1C7] bg-[#F5F2EB]"
+        }
       >
-        <div className="mx-auto flex max-w-[90rem] items-center justify-between gap-4 px-5 py-4 sm:px-8 lg:px-12">
+        <div
+          className={`mx-auto flex max-w-[90rem] items-center justify-between px-5 sm:px-8 lg:px-12 ${
+            preview ? "gap-3 overflow-visible py-3 sm:gap-4 sm:py-4" : "gap-4 py-4"
+          }`}
+        >
           <BrandLockup preview={preview} />
           <div className="hidden items-center gap-8 lg:flex xl:gap-10">
-            <NavLinks className="flex items-center gap-7 xl:gap-9" />
+            <NavLinks dark={preview === "limestone"} className="flex items-center gap-7 xl:gap-9" />
             <ChangingButton />
           </div>
           <button
             type="button"
-            className={`${label} ${focus} text-[#2A3447] lg:hidden`}
+            className={`${label} ${focus} shrink-0 ${preview === "limestone" ? "text-[#D8D1C7]" : "text-[#2A3447]"} lg:hidden`}
             aria-expanded={menuOpen}
             aria-controls="home-v3-menu"
             onClick={() => setMenuOpen((open) => !open)}
@@ -179,8 +199,11 @@ export default function HomeV3() {
           </button>
         </div>
         {menuOpen ? (
-          <div id="home-v3-menu" className="border-t border-[#D8D1C7] px-5 py-6 sm:px-8 lg:hidden">
-            <NavLinks onNavigate={() => setMenuOpen(false)} className="flex flex-col items-start gap-5" />
+          <div
+            id="home-v3-menu"
+            className={`border-t px-5 py-6 sm:px-8 lg:hidden ${preview === "limestone" ? "border-[#D8D1C7]/35 bg-[#0D182B]" : "border-[#D8D1C7]"}`}
+          >
+            <NavLinks dark={preview === "limestone"} onNavigate={() => setMenuOpen(false)} className="flex flex-col items-start gap-5" />
             <div className="mt-6">
               <ChangingButton />
             </div>
