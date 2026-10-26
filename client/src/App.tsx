@@ -11,6 +11,7 @@ import { DecisionAssistantDock } from "@/components/DecisionAssistantDock";
 import { initVisitorSignalTracking, trackPageViewSignal } from "@/lib/visitor-signals";
 import { COMMUNICATION_MAP_PATH } from "@/data/communication-map";
 import { publicSideToolsEnabled } from "@shared/public-side-tools";
+import { isBrandHomeProductionHost, isSideHomePath } from "@shared/brand-home-gate";
 const Home = lazy(() => import("@/pages/Home"));
 const About = lazy(() => import("@/pages/About"));
 const BuildingReport = lazy(() => import("@/pages/BuildingReport"));
@@ -58,6 +59,8 @@ const ToolsHome = lazy(() => import("@/pages/tools/ToolsHome"));
 const CommunicationMap = lazy(() => import("@/pages/tools/CommunicationMap"));
 const Calculator = lazy(() => import("@/pages/Calculator"));
 const NotFound = lazy(() => import("@/pages/not-found"));
+const BrandHomeGate = lazy(() => import("@/pages/BrandHome").then((mod) => ({ default: mod.BrandHomeGate })));
+const HomeV3Gate = lazy(() => import("@/pages/HomeV3").then((mod) => ({ default: mod.HomeV3Gate })));
 const Tank007 = lazy(() => import("@/pages/internal/Tank007"));
 
 function Redirect({ to }: { to: string }) {
@@ -164,6 +167,10 @@ function Router() {
       <Route path="/internal/007" component={Tank007} />
       <Route path="/internal/007-tank">{() => <Redirect to="/internal/007" />}</Route>
       <Route path="/" component={Home} />
+      <Route path="/home-brand" component={BrandHomeGate} />
+      <Route path="/home-brand/" component={BrandHomeGate} />
+      <Route path="/home-v3" component={HomeV3Gate} />
+      <Route path="/home-v3/" component={HomeV3Gate} />
       <Route path="/about" component={About} />
       <Route path="/situations" component={Services} />
       <Route path="/situations/:slug">{({ slug }) => <ServiceLanding slug={slug} />}</Route>
@@ -242,12 +249,23 @@ function AppShell() {
   const [location] = useLocation();
   const isAdmin = location.startsWith("/admin") || location.startsWith("/tools/curation");
   const isInternal = location.startsWith("/internal");
+  const standaloneSideHome =
+    isSideHomePath(location) &&
+    !isBrandHomeProductionHost(typeof window === "undefined" ? null : window.location.hostname);
 
-  if (isAdmin || isInternal) {
+  if (isAdmin || isInternal || standaloneSideHome) {
     return (
       <>
         <ScrollToTop />
-        <Suspense fallback={<div className="min-h-screen bg-[#0D182B] px-6 py-12 font-[Inter,sans-serif] text-[#8A94A3]">Opening advisory…</div>}>
+        <Suspense
+          fallback={
+            standaloneSideHome ? (
+              <div className="min-h-screen bg-[#F5F2EB]" />
+            ) : (
+              <div className="min-h-screen bg-[#0D182B] px-6 py-12 font-[Inter,sans-serif] text-[#8A94A3]">Opening advisory…</div>
+            )
+          }
+        >
           <Router />
         </Suspense>
         <Toaster />

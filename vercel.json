@@ -31,6 +31,24 @@
     { "source": "/building-reports", "destination": "/resources#assessments", "permanent": true },
     { "source": "/building-reports/market-briefs", "destination": "/resources#assessments", "permanent": true }
   ],
+  "headers": [
+    {
+      "source": "/home-brand",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/home-brand/",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/home-v3",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/home-v3/",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/international-strategy",
